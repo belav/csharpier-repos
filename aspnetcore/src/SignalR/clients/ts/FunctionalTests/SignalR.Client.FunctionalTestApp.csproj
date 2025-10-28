@@ -3,11 +3,9 @@
     <TargetFramework>$(DefaultNetCoreTargetFramework)</TargetFramework>
     <TypeScriptCompileBlocked>True</TypeScriptCompileBlocked>
     <TypeScriptToolsVersion>2.8</TypeScriptToolsVersion>
-
     <!-- The naming of this file doesn't match repo conventions. This overrides the conventions. -->
     <IsTestAssetProject>true</IsTestAssetProject>
   </PropertyGroup>
-
   <ItemGroup>
     <None Remove="ts\Common.ts" />
     <None Remove="ts\ConnectionTests.ts" />
@@ -19,7 +17,6 @@
     <None Remove="ts\WebSocketTests.ts" />
     <None Remove="ts\WebWorkerTests.ts" />
   </ItemGroup>
-
   <ItemGroup>
     <Reference Include="Microsoft.AspNetCore.Authentication.JwtBearer" />
     <Reference Include="Microsoft.AspNetCore.Cors" />
@@ -34,7 +31,6 @@
     <Reference Include="Newtonsoft.Json" />
     <Reference Include="System.Reactive.Linq" />
   </ItemGroup>
-
   <ItemGroup>
     <Compile Include="$(SignalRSharedSourceRoot)EphemeralDataProtectionProvider.cs" />
     <Compile Include="$(SignalRSharedSourceRoot)TestCertificates.cs" Link="TestCertificates.cs" />
@@ -44,11 +40,9 @@
       CopyToOutputDirectory="PreserveNewest"
     />
   </ItemGroup>
-
   <ItemGroup>
     <Folder Include="wwwroot\js\" />
   </ItemGroup>
-
   <ItemGroup>
     <TypeScriptCompile Include="ts\Common.ts" />
     <TypeScriptCompile Include="ts\ConnectionTests.ts" />

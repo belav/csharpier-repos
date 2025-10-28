@@ -4,7 +4,6 @@
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     <UseCompilerGeneratedDocXmlFile>false</UseCompilerGeneratedDocXmlFile>
   </PropertyGroup>
-
   <ItemGroup>
     <Compile Include="System\Reflection\DispatchProxy.cs" />
     <Compile Include="System\Reflection\DispatchProxyGenerator.cs" />
@@ -13,7 +12,6 @@
       Link="Common\System\Reflection\Emit\IgnoreAccessChecksToAttributeBuilder.cs"
     />
   </ItemGroup>
-
   <ItemGroup>
     <Reference Include="System.Collections" />
     <Reference Include="System.Linq" />

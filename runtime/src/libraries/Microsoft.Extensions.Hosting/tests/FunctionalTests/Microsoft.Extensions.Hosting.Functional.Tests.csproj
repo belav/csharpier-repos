@@ -5,7 +5,6 @@
     <!-- ActiveIssue in AssemblyInfo.cs -->
     <IgnoreForCI>true</IgnoreForCI>
   </PropertyGroup>
-
   <ItemGroup>
     <Content Include="testroot\**\*" />
     <Compile Include="$(LibrariesProjectRoot)Microsoft.Extensions.Logging\tests\Common\TestLoggerBuilder.cs" />
@@ -26,18 +25,15 @@
       Link="tests\DI.Common\Common\src\XunitLoggerProvider.cs"
     />
   </ItemGroup>
-
   <ItemGroup>
     <Compile
       Include="$(CommonTestPath)System\Threading\Tasks\TaskTimeoutExtensions.cs"
       Link="Common\System\Threading\Tasks\TaskTimeoutExtensions.cs"
     />
   </ItemGroup>
-
   <ItemGroup>
     <ProjectReference Include="..\TestApp\Microsoft.Extensions.Hosting.TestApp.csproj" />
   </ItemGroup>
-
   <ItemGroup Condition="'$(TargetFrameworkIdentifier)' == '.NETFramework'">
     <Reference Include="System.Net.Http" />
   </ItemGroup>

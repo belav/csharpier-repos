@@ -13,7 +13,6 @@
     <StringResourcesName Condition="'$(StringResourcesName)' == ''"
       >FxResources.$(AssemblyName).$(StringResourcesClassName)</StringResourcesName
     >
-
     <!-- We define our own implementation of GetResourceString -->
     <GenerateResxSourceOmitGetResourceString>true</GenerateResxSourceOmitGetResourceString>
     <!-- For debug builds we include the full value string so that we get actual resources, even in the case the toolchain strips the resources file -->
@@ -21,7 +20,6 @@
       >true</GenerateResxSourceIncludeDefaultValues
     >
   </PropertyGroup>
-
   <!-- Include files under StringResourcesPath by convention unless OmitResources is set. -->
   <ItemGroup Condition="'$(StringResourcesPath)' != '' and '$(OmitResources)' != 'true'">
     <!-- Delete the embedded resource item pointing to StringResourcesPath in case the

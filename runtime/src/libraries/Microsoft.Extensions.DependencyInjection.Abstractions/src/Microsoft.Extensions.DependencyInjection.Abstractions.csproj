@@ -8,7 +8,6 @@
 Commonly Used Types:
 Microsoft.Extensions.DependencyInjection.IServiceCollection</PackageDescription>
   </PropertyGroup>
-
   <ItemGroup>
     <Compile
       Include="$(CommonPath)Extensions\ParameterDefaultValue\ParameterDefaultValue.cs"
@@ -16,26 +15,22 @@ Microsoft.Extensions.DependencyInjection.IServiceCollection</PackageDescription>
     />
     <Compile Include="$(CommonPath)System\ThrowHelper.cs" Link="Common\System\ThrowHelper.cs" />
   </ItemGroup>
-
   <ItemGroup Condition="'$(TargetFrameworkIdentifier)' == '.NETCoreApp'">
     <Compile
       Include="$(CommonPath)Extensions\ParameterDefaultValue\ParameterDefaultValue.netcoreapp.cs"
       Link="Common\src\Extensions\ParameterDefaultValue\ParameterDefaultValue.netcoreapp.cs"
     />
   </ItemGroup>
-
   <ItemGroup Condition="'$(TargetFrameworkIdentifier)' != '.NETCoreApp'">
     <Compile
       Include="$(CommonPath)Extensions\ParameterDefaultValue\ParameterDefaultValue.netstandard.cs"
       Link="Common\src\Extensions\ParameterDefaultValue\ParameterDefaultValue.netstandard.cs"
     />
-
     <Compile Include="$(CoreLibSharedDir)System\Diagnostics\CodeAnalysis\DynamicallyAccessedMembersAttribute.cs" />
     <Compile Include="$(CoreLibSharedDir)System\Diagnostics\CodeAnalysis\DynamicallyAccessedMemberTypes.cs" />
     <Compile Include="$(CoreLibSharedDir)System\Diagnostics\CodeAnalysis\RequiresDynamicCodeAttribute.cs" />
     <Compile Include="$(CoreLibSharedDir)System\Diagnostics\CodeAnalysis\UnconditionalSuppressMessageAttribute.cs" />
   </ItemGroup>
-
   <ItemGroup Condition="!$([MSBuild]::IsTargetFrameworkCompatible('$(TargetFramework)', 'netstandard2.1'))">
     <PackageReference
       Include="System.Threading.Tasks.Extensions"

@@ -3,7 +3,6 @@
     <TargetFramework>$(NetCoreAppCurrent)</TargetFramework>
     <UseCompilerGeneratedDocXmlFile>false</UseCompilerGeneratedDocXmlFile>
   </PropertyGroup>
-
   <ItemGroup>
     <Compile Include="System\Security\Claims\Claim.cs" />
     <Compile Include="System\Security\Claims\ClaimsIdentity.cs" />
@@ -14,7 +13,6 @@
     <Compile Include="System\Security\Claims\GenericPrincipal.cs" />
     <Compile Include="$(CommonPath)System\Obsoletions.cs" Link="Common\System\Obsoletions.cs" />
   </ItemGroup>
-
   <ItemGroup>
     <Reference Include="System.Collections" />
     <Reference Include="System.Runtime" />

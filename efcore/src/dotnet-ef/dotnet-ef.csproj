@@ -24,7 +24,6 @@ dotnet ef database update
     <CodeAnalysisRuleSet>$(MSBuildThisFileDirectory)..\..\rulesets\EFCore.noxmldocs.ruleset</CodeAnalysisRuleSet>
     <ImplicitUsings>true</ImplicitUsings>
   </PropertyGroup>
-
   <ItemGroup>
     <Compile Include="..\ef\CommandLineUtils\*.cs" Link="CommandLineUtils\%(Filename).cs" />
     <Compile Include="..\ef\Commands\CommandBase.cs" Link="Commands\CommandBase.cs" />
@@ -47,26 +46,21 @@ dotnet ef database update
     />
     <Compile Include="..\Shared\CodeAnnotations.cs" />
   </ItemGroup>
-
   <ItemGroup>
     <ProjectReference Include="..\ef\ef.csproj" ReferenceOutputAssembly="false" />
   </ItemGroup>
-
   <ItemGroup>
     <EmbeddedResource Include="Resources\EntityFrameworkCore.targets" />
   </ItemGroup>
-
   <ItemGroup>
     <None Update="Properties\Resources.Designer.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </None>
   </ItemGroup>
-
   <ItemGroup>
     <Service Include="{508349b6-6b84-4df5-91f0-309beebad82d}" />
   </ItemGroup>
-
   <ItemGroup>
     <Compile Update="Properties\Resources.Designer.cs">
       <DesignTime>True</DesignTime>
@@ -74,7 +68,6 @@ dotnet ef database update
       <DependentUpon>Resources.Designer.tt</DependentUpon>
     </Compile>
   </ItemGroup>
-
   <Target
     Name="SetPackageProperties"
     BeforeTargets="InitializeStandardNuspecProperties"
@@ -84,11 +77,9 @@ dotnet ef database update
       <!-- Make sure we create a symbols.nupkg. -->
       <IncludeSymbols>true</IncludeSymbols>
     </PropertyGroup>
-
     <ItemGroup>
       <NuspecProperty Include="packageType=$(PackageType)" />
       <NuspecProperty Include="targetFramework=$(TargetFramework)" />
-
       <NuspecProperty Include="SettingsFile=$(_ToolsSettingsFilePath)" />
       <NuspecProperty Include="Output=$(PublishDir)**\*" />
       <NuspecProperty Include="OutputBinary=..\..\artifacts\bin\ef\$(Configuration)\netcoreapp2.0\ef.dll" />

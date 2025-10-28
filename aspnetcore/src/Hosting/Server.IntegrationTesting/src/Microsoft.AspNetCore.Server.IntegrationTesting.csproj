@@ -9,7 +9,6 @@
     <IsPackable>true</IsPackable>
     <IsShippingPackage>false</IsShippingPackage>
   </PropertyGroup>
-
   <ItemGroup>
     <Compile Include="$(SharedSourceRoot)Process\*.cs" />
     <EmbeddedResource Include="Http.config" />
@@ -18,7 +17,6 @@
       Exclude="bin\**;obj\**;**\*.xproj;packages\**;@(EmbeddedResource)"
     />
   </ItemGroup>
-
   <ItemGroup>
     <Reference Include="Microsoft.AspNetCore.InternalTesting" />
     <Reference Include="Microsoft.Extensions.FileProviders.Embedded" />

@@ -17,10 +17,8 @@
         signature="System.Collections.Generic.List`1&lt;System.Int32&gt; TestMethod_13()"
         body="stub"
       ></method>
-
       <method signature="System.Void .ctor()" body="stub"></method>
     </type>
-
     <type fullname="Mono.Linker.Tests.Cases.Substitutions.StubBody/NestedType">
       <method signature="System.Void .ctor(System.Int32)" body="stub"></method>
     </type>

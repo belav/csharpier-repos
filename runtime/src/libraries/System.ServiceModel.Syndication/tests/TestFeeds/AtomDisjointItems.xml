@@ -45,11 +45,9 @@
       </div>
     </content>
   </entry>
-
   <author>
     <name>Jerry</name>
   </author>
-
   <entry>
     <title>Atom draft-07 snapshot</title>
     <link rel="alternate" type="text/html" href="http://example.org/2005/04/02/atom" />

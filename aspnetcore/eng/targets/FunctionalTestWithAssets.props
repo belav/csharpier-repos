@@ -1,11 +1,9 @@
 <Project>
   <!-- Defaults used in FunctionalTestWithAssets.targets. -->
-
   <PropertyGroup>
     <!-- Whether FunctionalTestWithAssets.targets should be loaded. -->
     <ContainsFunctionalTestAssets>false</ContainsFunctionalTestAssets>
   </PropertyGroup>
-
   <ItemDefinitionGroup>
     <TestAssetProjectReference>
       <!-- Optional properties to add when restoring, building, and publishing the test asset project. -->

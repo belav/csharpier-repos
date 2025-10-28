@@ -6,7 +6,6 @@
     <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
     <AssemblyName>nev</AssemblyName>
   </PropertyGroup>
-
   <ItemGroup>
     <PackageReference Include="DotNetZip" Version="1.11.0" />
   </ItemGroup>

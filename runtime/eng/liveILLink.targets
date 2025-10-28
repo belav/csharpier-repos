@@ -1,6 +1,5 @@
 <Project>
   <!-- NOTE: these targets should be a no-op, unless _RequiresLiveILLink, computed below, is true. -->
-
   <PropertyGroup>
     <!-- Keep these conditions in sync with _RequiresILLinkPack in
          https://github.com/dotnet/sdk/blob/main/src/Tasks/Microsoft.NET.Build.Tasks/targets/Microsoft.NET.Publish.targets -->
@@ -14,17 +13,14 @@
       >true</_RequiresLiveILLink
     >
   </PropertyGroup>
-
   <PropertyGroup Condition="'$(_RequiresLiveILLink)' == 'true'">
     <_ILLinkTasksSourceDir>$(ToolsProjectRoot)illink\src\ILLink.Tasks\</_ILLinkTasksSourceDir>
     <ILLinkAnalyzersPropsPath>$(ToolsProjectRoot)illink\src\ILLink.RoslynAnalyzer\build\Microsoft.NET.ILLink.Analyzers.props</ILLinkAnalyzersPropsPath>
   </PropertyGroup>
-
   <Import
     Project="$(_ILLinkTasksSourceDir)build\Microsoft.NET.ILLink.Tasks.props"
     Condition="'$(_RequiresLiveILLink)' == 'true'"
   />
-
   <PropertyGroup Condition="'$(_RequiresLiveILLink)' == 'true'">
     <!-- Don't use SDK's trimming functionality. -->
     <_RequiresILLinkPack>false</_RequiresILLinkPack>
@@ -36,7 +32,6 @@
       >$(ToolsILLinkDir)$(NetFrameworkToolCurrent)\ILLink.Tasks.dll</ILLinkTasksAssembly
     >
   </PropertyGroup>
-
   <ItemGroup Condition="'$(_RequiresLiveILLink)' == 'true'">
     <!-- The assembly shouldn't be referenced, nor promoted to a package dependency, nor copied to the output directory. -->
     <ProjectReference
@@ -54,7 +49,6 @@
         >TargetFramework=$(NetFrameworkToolCurrent)</SetTargetFramework
       >
     </ProjectReference>
-
     <!-- Need to reference the analyzer project separately, because there's no easy way to get it as a transitive reference of ILLink.Tasks.csproj -->
     <ProjectReference
       Include="$(_ILLinkTasksSourceDir)..\ILLink.RoslynAnalyzer\ILLink.RoslynAnalyzer.csproj"

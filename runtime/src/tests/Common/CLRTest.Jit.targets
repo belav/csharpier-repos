@@ -1,6 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-
 <!--
 ***********************************************************************************************
 CLRTest.Jit.targets
@@ -24,7 +22,6 @@ WARNING:   When setting properties based on their current state (for example:
     <BashScriptSnippetGen>$(BashScriptSnippetGen);GetIlasmRoundTripBashScript;GetDisasmCheckBashScript</BashScriptSnippetGen>
     <BatchScriptSnippetGen>$(BatchScriptSnippetGen);GetIlasmRoundTripBatchScript;GetDisasmCheckBatchScript</BatchScriptSnippetGen>
   </PropertyGroup>
-
   <!--
   ***********************************************************************************************
   ildasm / ilasm round trip testing
@@ -33,7 +30,6 @@ WARNING:   When setting properties based on their current state (for example:
   us to use the "/raweh" argument.
   ***********************************************************************************************
   -->
-
   <PropertyGroup>
     <_IlasmSwitches Condition="'$(DebugType)' == 'Full' and '$(Optimize)' != 'True'"
       >$(_IlasmSwitches) -DEBUG</_IlasmSwitches
@@ -45,7 +41,6 @@ WARNING:   When setting properties based on their current state (for example:
       >$(_IlasmSwitches) -DEBUG</_IlasmSwitches
     >
   </PropertyGroup>
-
   <Target
     Name="GetIlasmRoundTripBashScript"
     Returns="$(IlasmRoundTripBashScript);$(BashIlrtTestLaunchCmds)"
@@ -53,7 +48,6 @@ WARNING:   When setting properties based on their current state (for example:
     <PropertyGroup>
       <DisassemblyName>IL-RT/$(AssemblyName).il</DisassemblyName>
       <TargetAssemblyName>IL-RT/$(AssemblyName).dll</TargetAssemblyName>
-
       <IlasmRoundTripBashScript Condition="'$(CLRTestKind)' == 'RunOnly'">
         <![CDATA[
 # IlasmRoundTrip Script
@@ -63,7 +57,6 @@ WARNING:   When setting properties based on their current state (for example:
 export RunningIlasmRoundTrip=
 ]]>
       </IlasmRoundTripBashScript>
-
       <IlasmRoundTripBashScript Condition="'$(CLRTestKind)' == 'BuildAndRun'">
         <![CDATA[
 # IlasmRoundTrip Script
@@ -84,7 +77,6 @@ fi
       </IlasmRoundTripBashScript>
     </PropertyGroup>
   </Target>
-
   <Target
     Name="GetIlasmRoundTripBatchScript"
     Returns="$(IlasmRoundTripBatchScript);$(BatchIlrtTestLaunchCmds)"
@@ -92,7 +84,6 @@ fi
     <PropertyGroup>
       <DisassemblyName>IL-RT\$(AssemblyName).il</DisassemblyName>
       <TargetAssemblyName>IL-RT\$(AssemblyName).dll</TargetAssemblyName>
-
       <IlasmRoundTripBatchScript Condition="'$(CLRTestKind)' == 'RunOnly'">
         <![CDATA[
 REM IlasmRoundTrip Script
@@ -102,7 +93,6 @@ REM concurrently invoking the same project, which can lead to race conditions on
 set RunningIlasmRoundTrip=
 ]]>
       </IlasmRoundTripBatchScript>
-
       <IlasmRoundTripBatchScript Condition="'$(CLRTestKind)' == 'BuildAndRun'">
         <![CDATA[
 REM IlasmRoundTrip Script
@@ -122,7 +112,6 @@ IF NOT DEFINED DoLink (
       </IlasmRoundTripBatchScript>
     </PropertyGroup>
   </Target>
-
   <Target Name="GetDisasmCheckData">
     <ItemGroup>
       <DisasmCheckFiles
@@ -136,14 +125,12 @@ IF NOT DEFINED DoLink (
         Condition="@(DisasmCheckFiles->Count()) &gt; 0 And '$(CLRTestKind)' == 'BuildAndRun'"
         >true</HasDisasmCheck
       >
-
       <GCStressIncompatible Condition="'$(HasDisasmCheck)' == 'true'">true</GCStressIncompatible>
       <HeapVerifyIncompatible Condition="'$(HasDisasmCheck)' == 'true'"
         >true</HeapVerifyIncompatible
       >
     </PropertyGroup>
   </Target>
-
   <!--
   The source code file(s) (specified by HasDisasmCheck in the test's project file) contain
   the patterns used by FileCheck.  They need to be copied to the output directory for the
@@ -158,7 +145,6 @@ IF NOT DEFINED DoLink (
       />
     </ItemGroup>
   </Target>
-
   <Target Name="GetDisasmCheckBashScript" DependsOnTargets="GetDisasmCheckData">
     <PropertyGroup>
       <HasBashDisasmCheck>false</HasBashDisasmCheck>
@@ -166,14 +152,12 @@ IF NOT DEFINED DoLink (
         Condition="'$(HasDisasmCheck)' == 'true' and '$(RuntimeFlavor)' == 'coreclr' and ('$(TargetOS)' == 'linux' or '$(TargetOS)' == 'osx') and ('$(TargetArchitecture)' == 'x64' or '$(TargetArchitecture)' == 'arm64')"
         >true</HasBashDisasmCheck
       >
-
       <BashDisasmOutputFile Condition="'$(HasBashDisasmCheck)' == 'true'"
         >$(scriptPath)__jit_disasm.out</BashDisasmOutputFile
       >
       <BashDisasmListOutputFile Condition="'$(HasBashDisasmCheck)' == 'true'"
         >$(scriptPath)__jit_disasm_list.out</BashDisasmListOutputFile
       >
-
       <CLRTestBashPreCommands Condition="'$(HasBashDisasmCheck)' == 'true'">
         <![CDATA[
 $(CLRTestBashPreCommands)
@@ -193,7 +177,6 @@ if [[ ( -z "$DOTNET_JitStress" ) && ( -z "$DOTNET_JitStressRegs" ) && ( -z "$DOT
 fi
 ]]>
       </CLRTestBashPreCommands>
-
       <CLRTestBashPostCommands Condition="'$(HasBashDisasmCheck)' == 'true'">
         <![CDATA[
 $(CLRTestBashPostCommands)
@@ -210,7 +193,6 @@ fi
       </CLRTestBashPostCommands>
     </PropertyGroup>
   </Target>
-
   <Target Name="GetDisasmCheckBatchScript" DependsOnTargets="GetDisasmCheckData">
     <PropertyGroup>
       <HasBatchDisasmCheck>false</HasBatchDisasmCheck>
@@ -218,14 +200,12 @@ fi
         Condition="'$(HasDisasmCheck)' == 'true' and '$(RuntimeFlavor)' == 'coreclr'"
         >true</HasBatchDisasmCheck
       >
-
       <BatchDisasmOutputFile Condition="'$(HasBatchDisasmCheck)' == 'true'"
         >$(scriptPath)__jit_disasm.out</BatchDisasmOutputFile
       >
       <BatchDisasmListOutputFile Condition="'$(HasBatchDisasmCheck)' == 'true'"
         >$(scriptPath)__jit_disasm_list.out</BatchDisasmListOutputFile
       >
-
       <CLRTestBatchPreCommands Condition="'$(HasBatchDisasmCheck)' == 'true'">
         <![CDATA[
 $(CLRTestBatchPreCommands)
@@ -243,7 +223,6 @@ IF "%DOTNET_JitStress%"=="" IF "%DOTNET_JitStressRegs%"=="" IF "%DOTNET_Tailcall
 )
 ]]>
       </CLRTestBatchPreCommands>
-
       <CLRTestBatchPostCommands Condition="'$(HasBatchDisasmCheck)' == 'true'">
         <![CDATA[
 $(CLRTestBatchPostCommands)
@@ -258,7 +237,6 @@ IF NOT "%DOTNET_JitDisasm%" == "" (
       </CLRTestBatchPostCommands>
     </PropertyGroup>
   </Target>
-
   <!--
   ***********************************************************************************************
   SuperPMI collection of CoreCLR tests
@@ -267,7 +245,6 @@ IF NOT "%DOTNET_JitDisasm%" == "" (
   You shouldn't have to escape characters in a CDATA block, but it appears that you do actually need
   to escape semicolons with %3B here.
   -->
-
   <Target Name="GetSuperPMICollectionBashScript" Returns="$(SuperPMICollectionBashScript)">
     <PropertyGroup>
       <SuperPMICollectionBashScript>
@@ -296,7 +273,6 @@ fi
       </SuperPMICollectionBashScript>
     </PropertyGroup>
   </Target>
-
   <Target Name="GetSuperPMICollectionBatchScript" Returns="$(SuperPMICollectionBatchScript)">
     <PropertyGroup>
       <SuperPMICollectionBatchScript>
@@ -316,13 +292,11 @@ set DOTNET_JitPath=%CORE_ROOT%\superpmi-shim-collector.dll
       </SuperPMICollectionBatchScript>
     </PropertyGroup>
   </Target>
-
   <!--
   ***********************************************************************************************
   IlasmRoundTrip for merged tests
   ***********************************************************************************************
   -->
-
   <Target
     Name="IlasmRoundTripCommand"
     AfterTargets="AfterBuild"
@@ -426,13 +400,11 @@ print("")
       Overwrite="true"
     />
   </Target>
-
   <!--
   ***********************************************************************************************
   GCStress settings
   ***********************************************************************************************
   -->
-
   <ItemGroup>
     <CLRTestEnvironmentVariable
       Condition="'$(RunWithGcStress)' != ''"

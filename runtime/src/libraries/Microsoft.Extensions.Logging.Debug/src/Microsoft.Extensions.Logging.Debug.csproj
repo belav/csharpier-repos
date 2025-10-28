@@ -5,7 +5,6 @@
     <IsPackable>true</IsPackable>
     <PackageDescription>Debug output logger provider implementation for Microsoft.Extensions.Logging. This logger logs messages to a debugger monitor by writing messages with System.Diagnostics.Debug.WriteLine().</PackageDescription>
   </PropertyGroup>
-
   <ItemGroup>
     <Compile
       Include="$(CommonPath)Extensions\Logging\NullExternalScopeProvider.cs"
@@ -17,7 +16,6 @@
     />
     <Compile Include="$(CommonPath)System\ThrowHelper.cs" Link="Common\System\ThrowHelper.cs" />
   </ItemGroup>
-
   <ItemGroup>
     <ProjectReference Include="$(LibrariesProjectRoot)Microsoft.Extensions.DependencyInjection.Abstractions\src\Microsoft.Extensions.DependencyInjection.Abstractions.csproj" />
     <ProjectReference Include="$(LibrariesProjectRoot)Microsoft.Extensions.Logging\src\Microsoft.Extensions.Logging.csproj" />

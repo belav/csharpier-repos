@@ -57,13 +57,11 @@
     >
     <InnerRunScriptInputName>BionicRunOnDevice.sh</InnerRunScriptInputName>
   </PropertyGroup>
-
   <PropertyGroup>
     <RunScriptInputPath Condition="'$(RunScriptInputPath)' == ''"
       >$(MSBuildThisFileDirectory)$(RunScriptInputName)</RunScriptInputPath
     >
     <InnerRunScriptInputPath>$(MSBuildThisFileDirectory)$(InnerRunScriptInputName)</InnerRunScriptInputPath>
-
     <RunScriptOutputName Condition="'$(RunScriptWindowsCmd)' != 'true'"
       >RunTests.sh</RunScriptOutputName
     >
@@ -79,14 +77,12 @@
     <RunScriptOutputPath>$([MSBuild]::NormalizePath('$(OutDir)', '$(RunScriptOutputName)'))</RunScriptOutputPath>
     <InnerRunScriptOutputPath>$([MSBuild]::NormalizePath('$(OutDir)', '$(InnerRunScriptOutputName)'))</InnerRunScriptOutputPath>
     <InnerRunEnvOutputPath>$([MSBuild]::NormalizePath('$(OutDir)', 'TestEnv.txt'))</InnerRunEnvOutputPath>
-
     <RunScriptHostDir Condition="'$(RunScriptWindowsCmd)' == 'true'"
       >%RUNTIME_PATH%\</RunScriptHostDir
     >
     <RunScriptHostDir Condition="'$(RunScriptWindowsCmd)' != 'true'"
       >$RUNTIME_PATH/</RunScriptHostDir
     >
-
     <RunScriptHost Condition="'$(RunScriptWindowsCmd)' == 'true'"
       >$(RunScriptHostDir)dotnet.exe</RunScriptHost
     >
@@ -94,7 +90,6 @@
       >$(RunScriptHostDir)dotnet</RunScriptHost
     >
   </PropertyGroup>
-
   <PropertyGroup>
     <!-- Default and user defined categories -->
     <_withCategories Condition="'$(WithCategories)' != ''"
@@ -103,7 +98,6 @@
     <_withoutCategories Condition="'$(WithoutCategories)' != ''"
       >;$(WithoutCategories.Trim(';'))</_withoutCategories
     >
-
     <TestScope Condition="'$(TestScope)' == '' and '$(Outerloop)' == 'true'">all</TestScope>
     <_withCategories Condition="'$(TestScope)' == 'outerloop'"
       >$(_withCategories);OuterLoop</_withCategories
@@ -118,7 +112,6 @@
       >$(_withoutCategories);failing</_withoutCategories
     >
   </PropertyGroup>
-
   <!-- For both tests.mobile.targets and tests.wasm.targets -->
   <PropertyGroup>
     <_MonoAotCrossCompilerPath>$([MSBuild]::NormalizePath($(MonoAotCrossDir), 'mono-aot-cross'))</_MonoAotCrossCompilerPath>
@@ -132,16 +125,13 @@
       RuntimeIdentifier="$(TargetOS)-$(TargetArchitecture.ToLowerInvariant())"
     />
   </ItemGroup>
-
   <PropertyGroup>
     <ArchiveTestsAfterTargets>PrepareForRun</ArchiveTestsAfterTargets>
-
     <!-- For browser we need to hook up the target with DependsOnTargets in PublishTestAsSelfContained
     because we do a Publish which runs after Build, if we run after PrepareForRun we would generated
     an empty zip because we haven't published the selfcontained app.  -->
     <ArchiveTestsAfterTargets Condition="'$(TargetOS)' == 'browser' or '$(TargetOS)' == 'wasi' or '$(TestSingleFile)' == 'true'" />
   </PropertyGroup>
-
   <ItemGroup Condition="'$(IsXUnitLogCheckerSupported)' == 'true' and '$(BuildTargetFramework)' == '$(NetCoreAppCurrent)'">
     <SetScriptCommands
       Condition="'$(TargetOS)' == 'windows'"
@@ -152,7 +142,6 @@
       Include="export __TestArchitecture=$(TargetArchitecture);export __IsXUnitLogCheckerSupported=1"
     />
   </ItemGroup>
-
   <!-- Archive test binaries. -->
   <Target
     Name="ArchiveTests"
@@ -160,13 +149,11 @@
     AfterTargets="$(ArchiveTestsAfterTargets)"
     DependsOnTargets="GenerateRunScript;ZipTestArchive"
   />
-
   <Target Name="ZipTestArchive" Condition="'$(TargetsAppleMobile)' != 'true'">
     <Error
       Condition="'$(TestArchiveTestsDir)' == ''"
       Text="TestArchiveTestsDir property to archive the test folder must be set."
     />
-
     <PropertyGroup>
       <_ZipSourceDirectory>$(OutDir)</_ZipSourceDirectory>
       <_ZipSourceDirectory
@@ -174,7 +161,6 @@
         >$(BundleDir)</_ZipSourceDirectory
       >
     </PropertyGroup>
-
     <MakeDir Directories="$(TestArchiveTestsDir)" />
     <ZipDirectory
       SourceDirectory="$(_ZipSourceDirectory)"
@@ -193,7 +179,6 @@
       ContinueOnError="WarnAndContinue"
     />
   </Target>
-
   <UsingTask TaskName="GenerateRunScript" AssemblyFile="$(InstallerTasksAssemblyPath)" />
   <Target Name="GenerateRunScript">
     <PropertyGroup>
@@ -206,11 +191,9 @@
         Condition="'$(RunScriptWindowsCmd)' == 'true' or (('$(TargetOS)' == 'browser' or '$(TargetOS)' == 'wasi') and '$(OS)' == 'Windows_NT')"
         >$(RunScriptCommand) %RSP_FILE%</RunScriptCommand
       >
-
       <!-- Escape potential user input. -->
       <RunScriptCommand>$([MSBuild]::Escape('$(RunScriptCommand)'))</RunScriptCommand>
     </PropertyGroup>
-
     <!-- Set $(TestDebugger) to eg c:\debuggers\windbg.exe to run tests under a debugger. -->
     <PropertyGroup Condition="'$(TestDebugger)' != ''">
       <RunScriptCommand Condition="!$(TestDebugger.Contains('devenv'))"
@@ -220,7 +203,6 @@
         >$(TestDebugger) /debugexe $(RunScriptCommand)</RunScriptCommand
       >
     </PropertyGroup>
-
     <ItemGroup>
       <!--
         If the PreExecutionTestScript property is set, then it should be set to the full path to a script that will be directly incorporated
@@ -234,24 +216,19 @@
         Condition="'$(PreExecutionTestScript)' != ''"
         Include="$([System.IO.File]::ReadAllText('$(PreExecutionTestScript)'))"
       />
-
       <RunScriptCommands Include="$(RunScriptCommand)" />
-
       <!-- Do not put anything between this and the GenerateRunScript invocation. -->
       <RunScriptCommands Include="@(PostRunScriptCommands)" />
     </ItemGroup>
-
     <PropertyGroup Condition="'$(RunScriptOutputDirectory)' != ''">
       <RunScriptOutputPath>$([MSBuild]::NormalizePath('$(RunScriptOutputDirectory)', '$(RunScriptOutputName)'))</RunScriptOutputPath>
     </PropertyGroup>
-
     <GenerateRunScript
       RunCommands="@(RunScriptCommands)"
       SetCommands="@(SetScriptCommands)"
       TemplatePath="$(RunScriptInputPath)"
       OutputPath="$(RunScriptOutputPath)"
     />
-
     <Exec
       Condition="'$(TargetOS)' != 'windows' and '$(OS)' != 'Windows_NT'"
       Command="chmod +x $(RunScriptOutputPath)"
@@ -265,7 +242,6 @@
       Condition="'$(TargetsLinuxBionic)' == 'true' and '$(OS)' != 'Windows_NT'"
       Command="chmod +x $(InnerRunScriptOutputPath)"
     />
-
     <PropertyGroup Condition="'$(TargetsLinuxBionic)' == 'true'">
       <_AndroidArchitecture Condition="'$(TargetArchitecture)' == 'x64'"
         >x86_64</_AndroidArchitecture
@@ -282,7 +258,6 @@ ASSEMBLY_NAME=$(AssemblyName).dll
 TEST_ARCH=$(_AndroidArchitecture)
       </_BionicTestEnv>
     </PropertyGroup>
-
     <WriteLinesToFile
       Condition="'$(TargetsLinuxBionic)' == 'true'"
       File="$(InnerRunEnvOutputPath)"
@@ -291,7 +266,6 @@ TEST_ARCH=$(_AndroidArchitecture)
       Encoding="ascii"
     ></WriteLinesToFile>
   </Target>
-
   <Target Name="RunTests">
     <PropertyGroup Condition="'$(TargetsMobile)' != 'true'">
       <RunTestsCommand>"$(RunScriptOutputPath)"</RunTestsCommand>
@@ -305,7 +279,6 @@ TEST_ARCH=$(_AndroidArchitecture)
         >$(RunTestsCommand) --rsp-file "$(TestRspFile)"</RunTestsCommand
       >
     </PropertyGroup>
-
     <PropertyGroup Condition="'$(TargetsMobile)' == 'true'">
       <RunTestsCommand>"$(RunScriptOutputPath)" $(AssemblyName) $(TargetArchitecture) $(TargetOS) $(TestProjectName)</RunTestsCommand>
       <RunTestsCommand Condition="'$(TargetsAppleMobile)' == 'true'"
@@ -318,7 +291,6 @@ TEST_ARCH=$(_AndroidArchitecture)
         >"$(RunScriptOutputPath)" $(JSEngine) $(AssemblyName).dll $(Scenario)</RunTestsCommand
       >
     </PropertyGroup>
-
     <!-- Invoke the run script with the test host as the runtime path. -->
     <Exec
       Command="$(RunTestsCommand)"
@@ -328,7 +300,6 @@ TEST_ARCH=$(_AndroidArchitecture)
     >
       <Output PropertyName="TestRunExitCode" TaskParameter="ExitCode" />
     </Exec>
-
     <PropertyGroup Condition="'$(TestRunExitCode)' != '0'">
       <TestResultsPath>$(OutputPath)$(TestResultsName)</TestResultsPath>
       <TestRunErrorMessage>One or more tests failed while running tests from '$(TestProjectName)'.</TestRunErrorMessage>
@@ -336,10 +307,8 @@ TEST_ARCH=$(_AndroidArchitecture)
         >$(TestRunErrorMessage) Please check $(TestResultsPath) for details!</TestRunErrorMessage
       >
     </PropertyGroup>
-
     <Error Condition="'$(TestRunExitCode)' != '0'" Text="$(TestRunErrorMessage)" />
   </Target>
-
   <Import
     Project="$(MSBuildThisFileDirectory)tests.mobile.targets"
     Condition="'$(TargetsMobile)' == 'true'"
@@ -352,10 +321,8 @@ TEST_ARCH=$(_AndroidArchitecture)
     Project="$(MSBuildThisFileDirectory)xunit\xunit.targets"
     Condition="'$(TestFramework)' == 'xunit'"
   />
-
   <!-- Main test targets -->
   <Target Name="Test" DependsOnTargets="$(TestDependsOn)" />
-
   <Import
     Project="$(MSBuildThisFileDirectory)outerBuild.targets"
     Condition="'$(IsCrossTargetingBuild)' == 'true'"

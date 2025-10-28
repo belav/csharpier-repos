@@ -10,7 +10,6 @@
     <IsPackable>true</IsPackable>
     <IsTrimmable>true</IsTrimmable>
   </PropertyGroup>
-
   <ItemGroup>
     <Compile Include="$(SharedSourceRoot)QueryStringEnumerable.cs" />
     <Compile Include="$(SharedSourceRoot)WebEncoders\**\*.cs" />
@@ -28,16 +27,13 @@
       LinkBase="Shared"
     />
   </ItemGroup>
-
   <ItemGroup>
     <Reference Include="Microsoft.Net.Http.Headers" />
     <Reference Include="System.IO.Pipelines" />
   </ItemGroup>
-
   <ItemGroup>
     <SupportedPlatform Include="browser" />
   </ItemGroup>
-
   <ItemGroup>
     <InternalsVisibleTo Include="Microsoft.AspNetCore.WebUtilities.Tests" />
     <InternalsVisibleTo Include="Microsoft.AspNetCore.WebUtilities.Microbenchmarks" />

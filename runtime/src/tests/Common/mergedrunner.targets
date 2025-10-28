@@ -10,7 +10,6 @@
     >
       <Output TaskParameter="TargetOutputs" ItemName="_ReferenceWithDisabledBuild" />
     </MSBuild>
-
     <ItemGroup>
       <_ProjectReferencesUsedByReferencePaths Include="@(ReferencePath->Metadata('ProjectReferenceOriginalItemSpec'))" />
       <_ProjectAssemblyReferences
@@ -32,7 +31,6 @@
       Condition="'@(_ProjectReferencesRemovedDueToConflictResolution)' != ''"
     />
   </Target>
-
   <Import
     Project="$(RepoRoot)/src/tests/Common/mergedrunnermobile.targets"
     Condition="'$(TargetsMobile)' == 'true'"

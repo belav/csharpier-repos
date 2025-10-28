@@ -6,7 +6,6 @@
       >
     </PropertyGroup>
   </Target>
-
   <Target
     Name="GenerateReferenceAssemblySource"
     DependsOnTargets="SetBuildTargetFramework;GetProjectWithBestTargetFrameworks"

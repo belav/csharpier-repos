@@ -14,7 +14,6 @@
     <EnablePreviewFeatures>true</EnablePreviewFeatures>
     <GenerateRequiresPreviewFeaturesAttribute>false</GenerateRequiresPreviewFeaturesAttribute>
   </PropertyGroup>
-
   <ItemGroup>
     <Compile
       Include="$(KestrelSharedSourceRoot)\PooledStreamStack.cs"
@@ -59,7 +58,6 @@
     <Compile Include="$(SharedSourceRoot)CancellationTokenSourcePool.cs" />
     <Compile Include="$(RepoRoot)src\Shared\TaskToApm.cs" Link="Internal\TaskToApm.cs" />
   </ItemGroup>
-
   <ItemGroup>
     <Reference Include="Microsoft.AspNetCore.Hosting.Abstractions" />
     <Reference Include="Microsoft.AspNetCore.Http" />
@@ -71,7 +69,6 @@
     <Reference Include="Microsoft.Extensions.Options" />
     <Reference Include="Microsoft.Net.Http.Headers" />
   </ItemGroup>
-
   <ItemGroup>
     <EmbeddedResource Update="CoreStrings.resx">
       <Generator></Generator>
@@ -88,7 +85,6 @@
       <Generator></Generator>
     </EmbeddedResource>
   </ItemGroup>
-
   <ItemGroup>
     <InternalsVisibleTo Include="Microsoft.AspNetCore.Server.Kestrel.Tests" />
     <InternalsVisibleTo Include="Sockets.FunctionalTests" />

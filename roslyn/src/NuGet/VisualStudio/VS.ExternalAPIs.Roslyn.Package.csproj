@@ -2,24 +2,20 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <TargetFramework>net472</TargetFramework>
-
     <!-- The package is inserted to Visual Studio CoreXT package store -->
     <IsShipping>false</IsShipping>
     <IsVisualStudioBuildPackage>true</IsVisualStudioBuildPackage>
-
     <IsPackable>true</IsPackable>
     <PackageId>VS.ExternalAPIs.Roslyn</PackageId>
     <IncludeBuildOutput>false</IncludeBuildOutput>
     <PackageDescription>CoreXT package for the VS build</PackageDescription>
     <TargetsForTfmSpecificContentInPackage>$(TargetsForTfmSpecificContentInPackage);_GetFilesToPackage</TargetsForTfmSpecificContentInPackage>
-
     <!--
       Suppress NuGet warning: 
       "The assembly '...' is not inside the 'lib' folder and hence it won't be added as a reference when the package is installed into a project."
     -->
     <NoWarn>$(NoWarn);NU5100</NoWarn>
   </PropertyGroup>
-
   <ItemGroup>
     <ProjectReference
       Include="..\..\Compilers\Core\Portable\Microsoft.CodeAnalysis.csproj"
@@ -198,7 +194,6 @@
       PrivateAssets="all"
     />
   </ItemGroup>
-
   <Target Name="_GetFilesToPackage">
     <ItemGroup>
       <_File
@@ -345,7 +340,6 @@
         Include="$(ArtifactsBinDir)Microsoft.VisualStudio.LanguageServices\$(Configuration)\net472\Microsoft.VisualStudio.LanguageServices.dll"
         TargetDir=""
       />
-
       <_File
         Include="$(ArtifactsBinDir)Microsoft.CodeAnalysis.ResultProvider\$(Configuration)\netstandard2.0\Microsoft.CodeAnalysis.ExpressionEvaluator.ResultProvider.dll"
         TargetDir=""
@@ -374,7 +368,6 @@
         Include="$(ArtifactsBinDir)Microsoft.CodeAnalysis.ExpressionCompiler\$(Configuration)\netstandard2.0\Microsoft.CodeAnalysis.ExpressionEvaluator.ExpressionCompiler.dll"
         TargetDir=""
       />
-
       <_File
         Include="$(ArtifactsBinDir)Microsoft.CodeAnalysis.CSharp.ResultProvider\$(Configuration)\netstandard2.0\Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator.ResultProvider.vsdconfig"
         TargetDir="LanguageServiceRegistration\ExpressionEvaluatorPackage"
@@ -395,7 +388,6 @@
         Include="$(ArtifactsBinDir)Microsoft.CodeAnalysis.VisualBasic.ExpressionCompiler\$(Configuration)\netstandard2.0\Microsoft.CodeAnalysis.VisualBasic.ExpressionEvaluator.ExpressionCompiler.vsdconfig"
         TargetDir="LanguageServiceRegistration\ExpressionEvaluatorPackage"
       />
-
       <!-- Include a few dependencies of Roslyn. These right now are consumed out of the ExternalAPIs NuGet package to do assembly consistency checking in the main VS
            repo. We should remove these and insert the packages directly, but for now we'll include these to limit the work needed to consume this package. -->
       <_File
@@ -419,7 +411,6 @@
         TargetDir=""
       />
     </ItemGroup>
-
     <!-- Add xml doc comment files -->
     <ItemGroup>
       <_File
@@ -428,7 +419,6 @@
         Condition="Exists('%(_File.RootDir)%(_File.Directory)%(_File.FileName).xml')"
       />
     </ItemGroup>
-
     <ItemGroup>
       <TfmSpecificPackageFile
         Include="@(_File)"

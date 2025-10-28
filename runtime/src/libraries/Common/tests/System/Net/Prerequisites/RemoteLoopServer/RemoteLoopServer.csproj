@@ -9,7 +9,6 @@
     <EnableDefaultCompileItems>false</EnableDefaultCompileItems>
     <EnableDefaultContentItems>false</EnableDefaultContentItems>
   </PropertyGroup>
-
   <ItemGroup>
     <Compile Include="Handlers\RemoteLoopHandler.cs" />
     <Compile Include="GenericHandler.cs" />

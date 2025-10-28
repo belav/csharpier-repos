@@ -4,7 +4,6 @@
     <IsPartialFacadeAssembly>true</IsPartialFacadeAssembly>
     <UseCompilerGeneratedDocXmlFile>false</UseCompilerGeneratedDocXmlFile>
   </PropertyGroup>
-
   <ItemGroup>
     <Compile Include="System\Collections\CaseInsensitiveComparer.cs" />
     <Compile Include="System\Collections\CaseInsensitiveHashCodeProvider.cs" />
@@ -20,7 +19,6 @@
       Link="Common\System\Collections\Generic\DebugViewDictionaryItem.cs"
     />
   </ItemGroup>
-
   <ItemGroup>
     <Reference Include="System.Runtime" />
     <Reference Include="System.Threading" />

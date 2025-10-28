@@ -39,7 +39,6 @@ then
 fi
         ]]>
     </GCLongGCTestBashScript>
-
     <GCSimulatorTestBashScript Condition="'$(IsGCSimulatorTest)' != 'true'">
       <![CDATA[
 # GCSimulator script
@@ -60,7 +59,6 @@ then
 fi
         ]]>
     </GCSimulatorTestBashScript>
-
     <CLRTestBashPreCommands>$(CLRTestBashPreCommands);$(GCLongGCTestBashScript);$(GCSimulatorTestBashScript)</CLRTestBashPreCommands>
     <GCLongGCTestBatchScript Condition="'$(IsLongRunningGCTest)' != 'true'">
       <![CDATA[
@@ -80,7 +78,6 @@ if not defined RunningLongGCTests (
 )
         ]]>
     </GCLongGCTestBatchScript>
-
     <GCSimulatorTestBatchScript Condition="'$(IsGCSimulatorTest)' != 'true'">
       <![CDATA[
 REM GCSimulator script
@@ -99,7 +96,6 @@ if not defined RunningGCSimulatorTests (
 )
         ]]>
     </GCSimulatorTestBatchScript>
-
     <CLRTestBatchPreCommands>$(CLRTestBatchPreCommands);$(GCLongGCTestBatchScript);$(GCSimulatorTestBatchScript)</CLRTestBatchPreCommands>
   </PropertyGroup>
 </Project>

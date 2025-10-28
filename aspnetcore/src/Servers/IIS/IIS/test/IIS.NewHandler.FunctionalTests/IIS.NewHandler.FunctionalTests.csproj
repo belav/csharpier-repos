@@ -7,9 +7,7 @@
     <SkipTests Condition=" '$(SkipIISNewHandlerTests)' == 'true' ">true</SkipTests>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
-
   <Import Project="../FunctionalTest.props" />
-
   <ItemGroup>
     <Compile Include="..\Common.LongTests\**\*.cs" />
     <Compile Include="..\Common.FunctionalTests\Infrastructure\*.cs" />
@@ -31,7 +29,6 @@
     <Compile Include="$(SharedSourceRoot)TaskToApm.cs" Link="Shared\TaskToApm.cs" />
     <Compile Include="$(SharedSourceRoot)InternalHeaderNames.cs" Link="Shared\" />
   </ItemGroup>
-
   <ItemGroup>
     <ProjectReference Include="..\testassets\IIS.Common.TestLib\IIS.Common.TestLib.csproj" />
     <ProjectReference
@@ -41,14 +38,12 @@
       SkipGetTargetFrameworkProperties="true"
     />
   </ItemGroup>
-
   <ItemGroup>
     <!-- The versions on these references are hard-coded because we want to ensure we maintain backwards compatibility with ANCM 2.2.0 -->
     <PackageReference Include="Microsoft.AspNetCore.AspNetCoreModuleV2" Version="2.2.0">
       <AllowExplicitReference>true</AllowExplicitReference>
     </PackageReference>
   </ItemGroup>
-
   <ItemGroup>
     <Reference Include="Microsoft.AspNetCore.Hosting" />
     <Reference Include="Microsoft.AspNetCore.Server.Kestrel.Transport.Sockets" />
@@ -56,7 +51,6 @@
     <Reference Include="System.Diagnostics.EventLog" />
     <Reference Include="System.Net.Http.WinHttpHandler" />
   </ItemGroup>
-
   <ItemGroup>
     <EmbeddedResource
       Include="$(SharedSourceRoot)ServerInfrastructure\SharedStrings.resx"

@@ -10,14 +10,11 @@ WARNING:  DO NOT MODIFY this file unless you are knowledgeable about MSBuild and
 
 ***********************************************************************************************
 -->
-
-
 <Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import
     Project="VisualStudio\v$(VisualStudioVersion)\Microsoft.Portable.CurrentVersion.targets"
     Condition="Exists('VisualStudio\v$(VisualStudioVersion)\Microsoft.Portable.CurrentVersion.targets')"
   />
-
   <Target
     Name="_CheckForInvalidTargetFrameworkProfile"
     AfterTargets="_CheckForInvalidConfigurationAndPlatform"
@@ -27,7 +24,6 @@ WARNING:  DO NOT MODIFY this file unless you are knowledgeable about MSBuild and
       Text="The TargetFrameworkProfile property is not set for project '$(MSBuildProjectFile)'. Portable projects must specify a profile."
     />
   </Target>
-
   <!-- 
         To prevent framework assembly references from being unified to the ones in the full 
         framework (for example, System.Net.Primitives, v3.9.0.0 -> System.Net.Primitives, v4.0.0.0), 
@@ -40,26 +36,22 @@ WARNING:  DO NOT MODIFY this file unless you are knowledgeable about MSBuild and
       <_FullFrameworkReferenceAssemblyPaths>$(TargetFrameworkDirectory)</_FullFrameworkReferenceAssemblyPaths>
     </PropertyGroup>
   </Target>
-
   <PropertyGroup>
     <ResolveReferencesDependsOn>
             $(ResolveReferencesDependsOn);
             ImplicitlyExpandTargetFramework;
         </ResolveReferencesDependsOn>
-
     <ImplicitlyExpandTargetFrameworkDependsOn>
             $(ImplicitlyExpandTargetFrameworkDependsOn);
             GetReferenceAssemblyPaths
         </ImplicitlyExpandTargetFrameworkDependsOn>
   </PropertyGroup>
-
   <!--
         The ImplicitlyExpandTargetFramework target will expand all 
         of the dll reference assemblies in the TargetFrameworkDirectory 
         for the project and place the items into the ReferencePath itemgroup 
         which contains resolved items.
     -->
-
   <Target
     Name="ImplicitlyExpandTargetFramework"
     Condition="'$(ImplicitlyExpandTargetFramework)' == 'true'"
@@ -76,18 +68,15 @@ WARNING:  DO NOT MODIFY this file unless you are knowledgeable about MSBuild and
         <IsSystemReference>True</IsSystemReference>
       </ReferencePath>
     </ItemGroup>
-
     <Message
       Importance="Low"
       Text="TargetMonikerDisplayName: $(TargetFrameworkMonikerDisplayName) ReferenceAssemblyPaths: @(ReferenceAssemblyPaths)"
     />
-
     <Message
       Importance="Low"
       Text="Including @(ReferencePath)"
       Condition="'%(ReferencePath.ResolvedFrom)' == 'ImplicitlyExpandTargetFramework'"
     />
-
     <ItemGroup>
       <_ResolveAssemblyReferenceResolvedFiles
         Include="@(ReferencePath)"

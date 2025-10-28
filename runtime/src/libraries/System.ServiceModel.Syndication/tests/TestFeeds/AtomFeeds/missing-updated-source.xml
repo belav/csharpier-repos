@@ -2,8 +2,6 @@
 Description:  source with zero atom:updated elements produces a warning
 Expect:       MissingSourceElement{element:updated,parent:source}
 -->
-
-
 <feed xmlns="http://www.w3.org/2005/Atom">
   <title>Example Feed</title>
   <link href="http://contoso.com/" />
@@ -12,7 +10,6 @@ Expect:       MissingSourceElement{element:updated,parent:source}
     <name>Author Name</name>
   </author>
   <id>urn:uuid:60a76c80-d399-11d9-b93C-0003939e0af6</id>
-
   <entry>
     <source>
       <title>Source of all knowledge</title>

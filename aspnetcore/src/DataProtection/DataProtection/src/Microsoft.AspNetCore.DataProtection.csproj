@@ -16,7 +16,6 @@
     >
     <IsTrimmable>true</IsTrimmable>
   </PropertyGroup>
-
   <ItemGroup>
     <Compile Include="..\..\shared\src\*.cs" LinkBase="Shared" />
     <Compile
@@ -38,7 +37,6 @@
       LinkBase="Shared"
     />
   </ItemGroup>
-
   <ItemGroup>
     <Reference Include="Microsoft.AspNetCore.Cryptography.Internal" />
     <Reference Include="Microsoft.AspNetCore.DataProtection.Abstractions" />
@@ -48,7 +46,6 @@
     <Reference Include="Microsoft.Extensions.Options" />
     <Reference Include="System.Security.Cryptography.Xml" />
   </ItemGroup>
-
   <ItemGroup
     Condition=" '$(TargetFramework)' == 'netstandard2.0' OR
       '$(TargetFramework)' == '$(DefaultNetFxTargetFramework)' OR
@@ -56,15 +53,12 @@
   >
     <Reference Include="Microsoft.Win32.Registry" />
   </ItemGroup>
-
   <ItemGroup Condition="'$(TargetFramework)' == 'netstandard2.0' OR '$(MSBuildRestoreSessionId)' == ''">
     <Reference Include="System.Security.Principal.Windows" />
   </ItemGroup>
-
   <ItemGroup Condition="'$(TargetFramework)' == '$(DefaultNetFxTargetFramework)' OR '$(MSBuildRestoreSessionId)' == ''">
     <Reference Include="System.Runtime.InteropServices.RuntimeInformation" />
   </ItemGroup>
-
   <ItemGroup>
     <InternalsVisibleTo Include="Microsoft.AspNetCore.DataProtection.Extensions.Tests" />
     <InternalsVisibleTo Include="Microsoft.AspNetCore.DataProtection.Tests" />

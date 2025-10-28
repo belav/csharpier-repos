@@ -9,7 +9,6 @@
       >full</ApplyNgenOptimization
     >
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
-
     <!-- NuGet -->
     <IsPackable>true</IsPackable>
     <PackageDescription>
@@ -53,7 +52,6 @@
     <InternalsVisibleTo Include="Microsoft.CodeAnalysis.LanguageServerIndexFormat.Generator.UnitTests" />
     <InternalsVisibleTo Include="Microsoft.CodeAnalysis.Remote.ServiceHub" />
     <InternalsVisibleTo Include="Microsoft.CodeAnalysis.Remote.Workspaces" />
-
     <!--
       Only allow C# DevKit to use types from Contracts namespace. The contracts should not introduce breaking changes between versions,
       because the versions of C# DevKit and C# Extension might not be aligned.
@@ -62,7 +60,6 @@
       Include="Microsoft.VisualStudio.LanguageServices.DevKit"
       Namespace="Microsoft.CodeAnalysis.Contracts"
     />
-
     <RestrictedInternalsVisibleTo
       Include="Microsoft.CodeAnalysis.LiveUnitTesting.Orchestrator"
       Partner="UnitTesting"
@@ -262,7 +259,6 @@
   />
   <Import Project="..\..\..\Analyzers\Core\Analyzers\Analyzers.projitems" Label="Shared" />
   <Import Project="..\..\..\Analyzers\Core\CodeFixes\CodeFixes.projitems" Label="Shared" />
-
   <Target Name="GenerateRulesMissingDocumentation">
     <PropertyGroup>
       <AnalyzerDocumentationFileDir>$(RepoRoot)src\Features</AnalyzerDocumentationFileDir>
@@ -274,7 +270,6 @@
         >$(DotNetRoot)dotnet</DotNetExecutable
       >
     </PropertyGroup>
-
     <MSBuild
       Projects="$(RepoRoot)src\Tools\GenerateRulesMissingDocumentation\GenerateRulesMissingDocumentation.csproj"
       Targets="Build"
@@ -284,7 +279,6 @@
         PropertyName="_GenerateRulesMissingDocumentationFilesPath"
       />
     </MSBuild>
-
     <MSBuild
       Projects="$(RepoRoot)src\Features\Core\Portable\Microsoft.CodeAnalysis.Features.csproj"
       Targets="Build"
@@ -300,7 +294,6 @@
       Targets="Build"
       Properties="TargetFramework=netstandard2.0"
     />
-
     <!-- Only run validation in CI builds. Running them in local builds will prevent refreshing auto-generated files. -->
     <Exec Command="&quot;$(DotNetExecutable)&quot; --roll-forward major &quot;$(_GenerateRulesMissingDocumentationFilesPath)&quot; &quot;-validateOnly:$(ContinuousIntegrationBuild)&quot; &quot;$(AnalyzerDocumentationFileDir)&quot; &quot;$(ArtifactsBinDir)$(EscapeDirectorySuffix)&quot; &quot;$(Configuration)&quot;" />
   </Target>

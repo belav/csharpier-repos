@@ -8,7 +8,6 @@
         </RestoreSources
     >
   </PropertyGroup>
-
   <ItemGroup>
     <!-- Add explicit Newtonsoft.Json dependency to override the implicit 10.0.1 version brought in by Microsoft.DevDiv.Optimization.Data.PowerShell -->
     <PackageReference

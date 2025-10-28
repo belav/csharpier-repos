@@ -13,7 +13,6 @@
                  See $(RepoRoot)eng\tools\BaselineGenerator\README.md for instructions on updating this baseline."
     />
   </Target>
-
   <!-- This target is used to get the package versions of projects. A variant also exists in Npm.Common.targets. -->
   <Target
     Name="_GetPackageVersionInfo"
@@ -29,11 +28,9 @@
       </_ProjectPathWithVersion>
     </ItemGroup>
   </Target>
-
   <PropertyGroup>
     <GenerateNuspecDependsOn>$(GenerateNuspecDependsOn);_AppendRepositoryUrlToPackageDescription</GenerateNuspecDependsOn>
   </PropertyGroup>
-
   <Target
     Name="_AppendRepositoryUrlToPackageDescription"
     DependsOnTargets="InitializeSourceControlInformation"

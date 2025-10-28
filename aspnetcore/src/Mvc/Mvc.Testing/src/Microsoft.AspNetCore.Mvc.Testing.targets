@@ -5,7 +5,6 @@
     >
   </PropertyGroup>
   <UsingTask TaskName="GenerateMvcTestManifestTask" AssemblyFile="$(_MvcTestingTasksAssembly)" />
-
   <!--
     Work around https://github.com/NuGet/Home/issues/4412. MVC uses DependencyContext.Load() which looks next to a .dll
     for a .deps.json. Information isn't available elsewhere. Need the .deps.json file for all web site applications.
@@ -17,10 +16,8 @@
       reference assemblies for this project so there's a corresponding refs folder in our output. Without it
       our websites deps files will fail to find their assembly references.
     -->
-
     <PreserveCompilationContext>true</PreserveCompilationContext>
   </PropertyGroup>
-
   <Target Name="_ResolveMvcTestProjectReferences" DependsOnTargets="ResolveReferences">
     <ItemGroup>
       <_ContentRootProjectReferences
@@ -29,7 +26,6 @@
       />
     </ItemGroup>
   </Target>
-
   <Target
     Name="_AddContentRootForProjectReferences"
     BeforeTargets="PrepareResources"
@@ -40,12 +36,10 @@
         <ContentRoot>$([System.IO.Path]::GetDirectoryName('%(_ContentRootProjectReferences.MSBuildSourceProjectFile)'))</ContentRoot>
       </_ManifestProjects>
     </ItemGroup>
-
     <GenerateMvcTestManifestTask
       ManifestPath="$(IntermediateOutputPath)MvcTestingAppManifest.json"
       Projects="@(_ManifestProjects)"
     />
-
     <ItemGroup>
       <ContentWithTargetPath
         Include="$(IntermediateOutputPath)MvcTestingAppManifest.json"
@@ -56,7 +50,6 @@
       <FileWrites Include="$(IntermediateOutputPath)MvcTestingAppManifest.json" />
     </ItemGroup>
   </Target>
-
   <Target
     Name="_GeneratePublishTestManifest"
     Condition="$(IsPublishable) == 'true'"
@@ -69,7 +62,6 @@
       </_PublishManifestProjects>
       <_DepsFileToPublish Include="$([System.IO.Path]::ChangeExtension('%(_ContentRootProjectReferences.Identity)', 'deps.json'))" />
     </ItemGroup>
-
     <GenerateMvcTestManifestTask
       ManifestPath="$(PublishDir)MvcTestingAppManifest.json"
       Projects="@(_PublishManifestProjects)"
@@ -80,7 +72,6 @@
       Condition="Exists('%(_DepsFileToPublish.FullPath)')"
     />
   </Target>
-
   <Target
     Name="_MvcCopyDependencyFiles"
     AfterTargets="Build;_ResolveMvcTestProjectReferences"
@@ -92,7 +83,6 @@
         Include="$([System.IO.Path]::ChangeExtension('%(_ContentRootProjectReferences.ResolvedFrom)', '.deps.json'))"
       />
     </ItemGroup>
-
     <PropertyGroup>
       <_CreateHardLinksForMvcCopyDependencyFilesIfPossible
         Condition="'$(_CreateHardLinksForMvcCopyDependencyFilesIfPossible)' == ''"
@@ -103,7 +93,6 @@
         >$(CreateSymbolicLinksForCopyFilesToOutputDirectoryIfPossible)</_CreateSymbolicLinksForMvcCopyDependencyFilesIfPossible
       >
     </PropertyGroup>
-
     <Copy
       SourceFiles="%(DepsFilePaths.FullPath)"
       DestinationFolder="$(OutDir)"

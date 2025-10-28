@@ -4,11 +4,9 @@
     <!-- Turn on preview features so we can use Http3 -->
     <EnablePreviewFeatures>True</EnablePreviewFeatures>
   </PropertyGroup>
-
   <ItemGroup>
     <Compile Include="$(SharedSourceRoot)HttpClient\HttpEventSourceListener.cs" LinkBase="shared" />
   </ItemGroup>
-
   <ItemGroup>
     <Reference Include="Microsoft.AspNetCore.Server.Kestrel" />
     <Reference Include="Microsoft.Extensions.Logging.Console" />

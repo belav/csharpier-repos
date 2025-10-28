@@ -5,14 +5,12 @@
     <!-- ActiveIssue in AssemblyInfo.cs for Mono -->
     <IgnoreForCI Condition="'$(RuntimeFlavor)' == 'Mono'">true</IgnoreForCI>
   </PropertyGroup>
-
   <ItemGroup>
     <Compile
       Include="$(CommonTestPath)TestUtilities\System\DisableParallelization.cs"
       Link="Common\TestUtilities\System\DisableParallelization.cs"
     />
   </ItemGroup>
-
   <ItemGroup>
     <ProjectReference Include="$(LibrariesProjectRoot)Microsoft.Extensions.Caching.Abstractions\src\Microsoft.Extensions.Caching.Abstractions.csproj" />
     <ProjectReference

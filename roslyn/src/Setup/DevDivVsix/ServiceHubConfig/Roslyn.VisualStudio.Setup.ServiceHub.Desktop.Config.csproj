@@ -3,23 +3,19 @@
   <Import Project="$(RepositoryEngineeringDir)targets\Services.props" />
   <PropertyGroup>
     <TargetFramework>net472</TargetFramework>
-
     <!-- VS Insertion -->
     <TargetVsixContainerName>Roslyn.VisualStudio.Setup.ServiceHub.Desktop.Config.vsix</TargetVsixContainerName>
     <VisualStudioInsertionComponent>Microsoft.CodeAnalysis.LanguageServices</VisualStudioInsertionComponent>
-
     <!-- ServiceHub AssemblyPath --><!-- Path to our servicehub entry point dll in Common7\IDE\CommonExtensions\Microsoft\VBCSharp\LanguageServices (our vsix directory)
          relative to Common7\ServiceHub\Services\RoslynCodeAnalysisService where our in-box servicehub.service.json files are -->
     <ServiceHubAssemblyBasePath>..\..\..\IDE\$(CommonExtensionInstallationRoot)\$(LanguageServicesExtensionInstallationFolder)\</ServiceHubAssemblyBasePath>
     <ServiceHubHostRuntime>desktop</ServiceHubHostRuntime>
   </PropertyGroup>
-
   <Target Name="_SetSwrFilePath">
     <PropertyGroup>
       <_SwrFilePath>$(IntermediateOutputPath)Roslyn.VisualStudio.Setup.ServiceHub.Desktop.Config.swr</_SwrFilePath>
     </PropertyGroup>
   </Target>
-
   <Target
     Name="_GenerateSwrFile"
     AfterTargets="Build"
@@ -35,7 +31,6 @@
       <_ServiceHubConfigFiles Include="@(ServiceHubService)" FileSuffix="64S" />
       <_FileEntries Include="file source=&quot;$(IntermediateOutputPath)%(_ServiceHubConfigFiles.Identity)%(_ServiceHubConfigFiles.FileSuffix).servicehub.service.json&quot;" />
     </ItemGroup>
-
     <PropertyGroup>
       <_Lines>
         <![CDATA[use vs
@@ -49,14 +44,11 @@ folder InstallDir:\Common7\ServiceHub\Services\RoslynCodeAnalysisService
 ]]>
       </_Lines>
     </PropertyGroup>
-
     <WriteLinesToFile File="$(_SwrFilePath)" Lines="$(_Lines)" Overwrite="true" />
-
     <ItemGroup>
       <FileWrites Include="$(_SwrFilePath)" />
       <SwrFile Include="$(_SwrFilePath)" />
     </ItemGroup>
   </Target>
-
   <Import Project="$(RepositoryEngineeringDir)targets\GenerateServiceHubConfigurationFiles.targets" />
 </Project>

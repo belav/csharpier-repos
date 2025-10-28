@@ -11,7 +11,6 @@
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     <RunAnalyzers>false</RunAnalyzers>
   </PropertyGroup>
-
   <Target
     Name="GenerateReproProjectResponseFile"
     AfterTargets="Build"
@@ -43,7 +42,6 @@
       <ReproResponseLines Include="--feature:System.Globalization.Invariant=true" />
       <ReproResponseLines Include="--feature:System.Diagnostics.Debugger.IsSupported=false" />
     </ItemGroup>
-
     <WriteLinesToFile
       File="$(OutputPath)\compile-with-$(LibrariesConfiguration)-libs.rsp"
       Lines="@(ReproResponseLines)"

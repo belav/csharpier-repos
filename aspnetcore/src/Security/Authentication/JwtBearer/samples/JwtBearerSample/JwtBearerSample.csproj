@@ -4,7 +4,6 @@
     <UserSecretsId>aspnet5-JwtBearerSample-20151210102827</UserSecretsId>
     <AspNetCoreHostingModel>OutOfProcess</AspNetCoreHostingModel>
   </PropertyGroup>
-
   <ItemGroup>
     <Reference Include="Microsoft.AspNetCore" />
     <Reference Include="Microsoft.AspNetCore.Authentication.JwtBearer" />

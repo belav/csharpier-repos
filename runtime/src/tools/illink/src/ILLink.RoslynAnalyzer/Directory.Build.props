@@ -3,6 +3,5 @@
   <PropertyGroup>
     <IsGeneratorProject>true</IsGeneratorProject>
   </PropertyGroup>
-
   <Import Project="..\Directory.Build.props" />
 </Project>

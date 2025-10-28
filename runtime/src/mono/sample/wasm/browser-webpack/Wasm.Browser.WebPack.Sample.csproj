@@ -3,12 +3,10 @@
     <WasmCopyAppZipToHelixTestDir>false</WasmCopyAppZipToHelixTestDir>
     <WasmRuntimeAssetsLocation>./</WasmRuntimeAssetsLocation>
   </PropertyGroup>
-
   <ItemGroup>
     <WasmExtraFilesToDeploy Include="index.html" />
     <WasmExtraFilesToDeploy Include="main.js" />
   </ItemGroup>
-
   <Target
     Name="CopyRelinkedPackage"
     AfterTargets="WasmBuildApp"
@@ -34,7 +32,6 @@
     <Copy SourceFiles="@(NpmPackageFiles)" DestinationFolder="bin/dotnet-runtime" />
     <Touch Files="bin/dotnet-runtime/.npm-stamp" AlwaysCreate="true" />
   </Target>
-
   <Target Name="WebPack" AfterTargets="WasmBuildApp" DependsOnTargets="CopyRelinkedPackage">
     <Exec Command="npm install" WorkingDirectory="$(MSBuildProjectDirectory)" />
     <Exec
@@ -42,7 +39,6 @@
       WorkingDirectory="$(MSBuildProjectDirectory)"
     />
   </Target>
-
   <Target Name="RunSample" DependsOnTargets="WebPack">
     <Exec
       Command="dotnet serve -S --directory $(WasmAppDir)"

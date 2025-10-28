@@ -2,7 +2,6 @@
   <PropertyGroup>
     <StrongNameKeyId>Microsoft</StrongNameKeyId>
   </PropertyGroup>
-
   <ItemGroup>
     <ForwardedType Include="System.IO.FileFormatException" />
     <ForwardedType Include="System.IO.Packaging.CompressionOption" />

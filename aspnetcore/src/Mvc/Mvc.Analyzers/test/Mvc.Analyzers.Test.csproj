@@ -4,7 +4,6 @@
     <PreserveCompilationContext>true</PreserveCompilationContext>
     <RootNamespace>Microsoft.AspNetCore.Mvc.Analyzers</RootNamespace>
   </PropertyGroup>
-
   <ItemGroup>
     <Compile
       Include="$(SharedSourceRoot)AnalyzerTesting\TestReferences.cs"
@@ -15,7 +14,6 @@
       LinkBase="AnalyzerTesting"
     />
   </ItemGroup>
-
   <ItemGroup>
     <ProjectReference Include="..\..\Mvc.Analyzers\src\Microsoft.AspNetCore.Mvc.Analyzers.csproj" />
     <Reference Include="Microsoft.Extensions.DependencyModel" />

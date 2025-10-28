@@ -10,20 +10,17 @@
     <type fullname="System.Runtime.InteropServices.ComTypes.IEnumerable" />
     <type fullname="System.Runtime.InteropServices.ComTypes.IEnumerator" />
     <type fullname="System.Runtime.InteropServices.CustomMarshalers.*" />
-
     <!-- GetActualImplementationForArrayGenericIListOrIReadOnlyListMethod depends on slots of these interfaces not changing -->
     <type fullname="System.Collections.Generic.IEnumerable`1" />
     <type fullname="System.Collections.Generic.ICollection`1" />
     <type fullname="System.Collections.Generic.IReadOnlyCollection`1" />
     <type fullname="System.Collections.Generic.IList`1" />
     <type fullname="System.Collections.Generic.IReadOnlyList`1" />
-
     <!-- Indicator for illink that all instance methods are instantiated -->
     <type fullname="System.SZArrayHelper">
       <method name=".ctor" />
     </type>
   </assembly>
-
   <!-- The private Event methods are accessed by private reflection in the base EventSource class. -->
   <assembly
     fullname="System.Private.CoreLib"

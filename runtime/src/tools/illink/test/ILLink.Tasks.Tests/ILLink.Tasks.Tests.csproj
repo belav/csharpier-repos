@@ -14,7 +14,6 @@
       PrivateAssets="All"
       Publish="True"
     />
-
     <ProjectReference Include="..\..\src\ILLink.Tasks\ILLink.Tasks.csproj" />
     <ProjectReference
       Include="..\..\src\linker\Mono.Linker.csproj"

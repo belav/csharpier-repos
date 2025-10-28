@@ -11,7 +11,6 @@
     <TargetFramework>net7.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
-
     <ServerGarbageCollection>true</ServerGarbageCollection>
     <!--
         Build a nuget package for this project.  This is not consumed as a standard NuGet package; it just contains
@@ -33,10 +32,8 @@
         before the actual "Pack" target runs.
     -->
     <BeforePack>PackPublishContent;$(BeforePack)</BeforePack>
-
     <!-- Since this is not a standard nuget package and is only consumed by the extension build, we don't care if the folder structure doesn't match what nuget expects. -->
     <NoWarn>NU5100</NoWarn>
-
     <!-- Publishing settings -->
     <SelfContained>false</SelfContained>
     <PublishDir Condition="'$(RuntimeIdentifier)' != ''"
@@ -45,13 +42,11 @@
     <PublishDir Condition="'$(RuntimeIdentifier)' == ''"
       >$(ArtifactsDir)/LanguageServer/$(Configuration)/$(TargetFramework)/neutral</PublishDir
     >
-
     <!-- List of runtime identifiers that we want to publish an executable for -->
     <RuntimeIdentifiers>win-x64;win-x86;win-arm64;linux-x64;linux-arm64;alpine-x64;alpine-arm64;osx-x64;osx-arm64</RuntimeIdentifiers>
     <!-- Publish ready to run executables when we're publishing platform specific executables. -->
     <PublishReadyToRun Condition="'$(RuntimeIdentifier)' != ''">true</PublishReadyToRun>
   </PropertyGroup>
-
   <!-- When we are packing each RID, we set PackRuntimeIdentifier; by default this will also get passed to the builds of all ResolveProjectReferences
        which causes a lot of duplicate building. This removes it. -->
   <ItemDefinitionGroup>
@@ -59,23 +54,18 @@
       <GlobalPropertiesToRemove>PackRuntimeIdentifier</GlobalPropertiesToRemove>
     </ProjectReference>
   </ItemDefinitionGroup>
-
   <ItemGroup Label="Project References">
     <ProjectReference Include="..\..\..\Workspaces\Core\MSBuild\Microsoft.CodeAnalysis.Workspaces.MSBuild.csproj" />
     <ProjectReference Include="..\..\..\Workspaces\Core\MSBuild.BuildHost\Microsoft.CodeAnalysis.Workspaces.MSBuild.BuildHost.csproj" />
     <ProjectReference Include="..\..\..\Workspaces\Remote\Core\Microsoft.CodeAnalysis.Remote.Workspaces.csproj" />
     <ProjectReference Include="..\Protocol\Microsoft.CodeAnalysis.LanguageServer.Protocol.csproj" />
-
     <!-- Dlls we don't directly reference but need to include to build the MEF composition -->
     <ProjectReference Include="..\..\CSharp\Portable\Microsoft.CodeAnalysis.CSharp.Features.csproj" />
-
     <!-- Not directly referenced but needed for Razor source generators -->
     <ProjectReference Include="..\..\..\Tools\ExternalAccess\RazorCompiler\Microsoft.CodeAnalysis.ExternalAccess.RazorCompiler.csproj" />
-
     <!-- Not directly referenced but needed for Route embedded language features -->
     <ProjectReference Include="..\..\..\Tools\ExternalAccess\AspNetCore\Microsoft.CodeAnalysis.ExternalAccess.AspNetCore.csproj" />
   </ItemGroup>
-
   <ItemGroup>
     <PackageReference
       Include="Microsoft.Extensions.Logging"
@@ -116,10 +106,8 @@
     <PackageReference Include="StreamJsonRpc" Version="$(StreamJsonRpcVersion)" />
     <PackageReference Include="System.CommandLine" Version="$(SystemCommandLineVersion)" />
   </ItemGroup>
-
   <ItemGroup>
     <InternalsVisibleTo Include="Microsoft.CodeAnalysis.LanguageServer.UnitTests" />
-
     <!--
       Only allow C# DevKit to use types from Microsoft.CodeAnalysis.Contracts namespace. The contracts should not introduce breaking changes between versions,
       because the versions of C# DevKit and C# Extension might not be aligned.
@@ -129,16 +117,13 @@
       Namespace="Microsoft.CodeAnalysis.Contracts"
     />
   </ItemGroup>
-
   <ItemGroup>
     <RoslynVersionFile Include="$(OutDir)\RoslynVersion.txt" />
     <FileWrites Include="@(RoslynVersionFile)" />
   </ItemGroup>
-
   <ItemGroup>
     <EmbeddedResource Update="LanguageServerResources.resx" GenerateSource="true" />
   </ItemGroup>
-
   <Target Name="WriteRoslynVersion" AfterTargets="Build">
     <WriteLinesToFile
       File="@(RoslynVersionFile)"
@@ -146,11 +131,9 @@
       Overwrite="true"
     />
   </Target>
-
   <Target Name="PublishRoslynVersion" AfterTargets="Publish">
     <Copy SourceFiles="@(RoslynVersionFile)" DestinationFolder="$(PublishDir)" />
   </Target>
-
   <Target Name="PackPublishContent" DependsOnTargets="Publish">
     <!-- We have to add the content files in a target (and not just defined in a normal item group) since they are produced by the prior step and won't exist at evaluation time. -->
     <ItemGroup>
@@ -162,7 +145,6 @@
       </Content>
     </ItemGroup>
   </Target>
-
   <!-- If we don't have a PackRuntimeIdentifier set, that means pack has been invoked on the project directly, with say dotnet pack. In this case
        we'll replace the Pack target with one that instead recursively invokes pack for each runtime identifier. We define those targets
        in a separate .targets file, since we can't say to MSBuild "only consider our Pack target as a definition based on this condition" any other way. -->

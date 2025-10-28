@@ -159,7 +159,6 @@
       Include="System.Threading.RateLimiting"
       Version="$(SystemThreadingRateLimitingVersion)"
     />
-
     <!--
       Transitive dependencies of other assemblies in the shared framework. These are listed separately and should not be included directly
       when setting `<Reference>`. These are listed for the purpose of tests and servicing builds only.
@@ -182,7 +181,6 @@
       Version="$(SystemDiagnosticsEventLogVersion)"
     />
   </ItemGroup>
-
   <ItemGroup Condition=" '$(IsServicingBuild)' == 'true' ">
     <!--
       Once we start to build a servicing release, hoist transitive dependencies to be direct dependencies.
@@ -191,7 +189,6 @@
     -->
     <ExternalAspNetCoreAppReference Include="@(_TransitiveExternalAspNetCoreAppReference)" />
   </ItemGroup>
-
   <!--
     This compilation reference is necessary to compile netstandard2.0 assemblies that need IAsyncEnumerable and IAsyncDisposable and the assembly is also in the shared framework.
     This reference is part of Microsoft.NETCore.App, so is listed here as a reference to be used during compilation only.
@@ -199,7 +196,6 @@
   <ItemGroup Condition="'$(TargetFramework)' == 'netstandard2.0'">
     <_CompilationOnlyReference Include="Microsoft.Bcl.AsyncInterfaces" />
   </ItemGroup>
-
   <!--
     These compilation references are necessary to compile netstandard2.0 assemblies which are in the shared framework.
     This references are part of Microsoft.NETCore.App, so are listed here as references to be used during compilation only.

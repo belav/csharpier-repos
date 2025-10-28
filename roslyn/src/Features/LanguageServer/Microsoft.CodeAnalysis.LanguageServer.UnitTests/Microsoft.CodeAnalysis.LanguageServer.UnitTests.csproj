@@ -4,25 +4,20 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
     <RoslynProjectType>UnitTest</RoslynProjectType>
-
     <IsPackable>false</IsPackable>
   </PropertyGroup>
-
   <ItemGroup>
     <PackageReference Include="Nerdbank.Streams" Version="$(NerdbankStreamsVersion)" />
   </ItemGroup>
-
   <ItemGroup>
     <ProjectReference Include="..\..\..\Compilers\Test\Core\Microsoft.CodeAnalysis.Test.Utilities.csproj" />
     <ProjectReference Include="..\Microsoft.CodeAnalysis.LanguageServer\Microsoft.CodeAnalysis.LanguageServer.csproj" />
-
     <ProjectReference
       Include="..\..\..\VisualStudio\DevKit\Impl\Microsoft.VisualStudio.LanguageServices.DevKit.csproj"
       ReferenceOutputAssembly="false"
       Private="false"
     />
   </ItemGroup>
-
   <!--
     Copy files contained in the NPM package to a DevKit subdirectory to emulate deployment of the DevKit extension in VS Code.
   -->
@@ -33,7 +28,6 @@
     >
       <Output TaskParameter="TargetOutputs" ItemName="_DevKitExtensionFile" />
     </MSBuild>
-
     <ItemGroup>
       <Content
         Include="@(_DevKitExtensionFile)"

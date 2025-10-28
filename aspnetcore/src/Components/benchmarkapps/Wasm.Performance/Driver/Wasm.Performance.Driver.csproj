@@ -2,7 +2,6 @@
   <PropertyGroup>
     <TargetFramework>$(DefaultNetCoreTargetFramework)</TargetFramework>
     <OutputType>exe</OutputType>
-
     <IsShippingPackage>false</IsShippingPackage>
     <!-- WebDriver is not strong-named, so this test project cannot be strong named either. -->
     <SignAssembly>false</SignAssembly>
@@ -13,7 +12,6 @@
     <SelfContained Condition=" '$(DotNetBuildFromSource)' != 'true' ">true</SelfContained>
     <Nullable>annotations</Nullable>
   </PropertyGroup>
-
   <ItemGroup>
     <Reference Include="Microsoft.AspNetCore" />
     <Reference Include="Microsoft.AspNetCore.Cors" />
@@ -22,11 +20,9 @@
     <Reference Include="Selenium.WebDriver" />
     <ProjectReference Include="..\TestApp\Wasm.Performance.TestApp.csproj" />
   </ItemGroup>
-
   <ItemGroup>
     <Compile Include="..\..\..\WebAssembly\DevServer\src\Server\*.cs" />
   </ItemGroup>
-
   <Target Name="_AddTestProjectMetadataAttributes" BeforeTargets="BeforeCompile">
     <ItemGroup>
       <AssemblyAttribute Include="System.Reflection.AssemblyMetadataAttribute">

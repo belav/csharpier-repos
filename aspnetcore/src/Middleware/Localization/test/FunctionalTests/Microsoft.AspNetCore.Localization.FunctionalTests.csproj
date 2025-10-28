@@ -2,12 +2,10 @@
   <PropertyGroup>
     <TargetFramework>$(DefaultNetCoreTargetFramework)</TargetFramework>
   </PropertyGroup>
-
   <ItemGroup>
     <ProjectReference Include="..\..\sample\LocalizationSample.csproj" />
     <ProjectReference Include="..\..\testassets\LocalizationWebsite\LocalizationWebsite.csproj" />
   </ItemGroup>
-
   <ItemGroup>
     <Reference Include="Microsoft.AspNetCore.Localization" />
     <Reference Include="Microsoft.AspNetCore.TestHost" />

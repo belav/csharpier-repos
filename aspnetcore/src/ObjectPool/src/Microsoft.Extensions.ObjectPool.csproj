@@ -7,11 +7,9 @@
     <IsAspNetCoreApp>true</IsAspNetCoreApp>
     <IsTrimmable>true</IsTrimmable>
   </PropertyGroup>
-
   <ItemGroup>
     <InternalsVisibleTo Include="Microsoft.Extensions.ObjectPool.Tests" />
   </ItemGroup>
-
   <ItemGroup>
     <Compile
       Include="$(SharedSourceRoot)ThrowHelpers\ArgumentNullThrowHelper.cs"

@@ -158,7 +158,6 @@
     <Compile Include="Design\DesignerTransactionTests.cs" />
     <Compile Include="Security\Authentication\ExtendedProtection\ExtendedProtectionPolicyTypeConverterTests.cs" />
     <Compile Include="XTypeDescriptionProviderTests.cs" />
-
     <Compile
       Include="$(CommonTestPath)TestUtilities\System\DisableParallelization.cs"
       Link="Common\TestUtilities\System\DisableParallelization.cs"

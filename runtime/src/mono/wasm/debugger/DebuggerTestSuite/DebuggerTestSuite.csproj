@@ -28,7 +28,6 @@
       Condition="'$(InstallFirefoxForTests)' == '' and '$(DebuggerHost)' == 'firefox' and '$(_ProvisionBrowser)' == 'true'"
       >true</InstallFirefoxForTests
     >
-
     <!-- Set RunSettingsFilePath property which is read by VSTest. -->
     <RunSettingsFilePath Condition="'$(ContinuousIntegrationBuild)' == 'true'"
       >$(OutputPath).runsettings</RunSettingsFilePath
@@ -37,26 +36,19 @@
       >$(ArtifactsObjDir)vscode\.runsettings</RunSettingsFilePath
     >
   </PropertyGroup>
-
   <Import Project="$(RepositoryEngineeringDir)testing\wasm-provisioning.targets" />
-
   <ItemGroup>
     <Content Include="appsettings.json" CopyToOutputDirectory="PreserveNewest" />
-
     <Compile Include="..\BrowserDebugProxy\Common\*.cs" />
-
     <!-- TODO [ActiveIssue("https://github.com/dotnet/runtime/issues/85168")] 
     <Compile Remove="EvaluateOnCallFrameTests.cs" />
     -->
-
     <Compile Include="$(LibrariesProjectRoot)Microsoft.Extensions.Logging\tests\DI.Common\Common\src\XunitLoggerFactoryExtensions.cs" />
     <Compile Include="$(LibrariesProjectRoot)Microsoft.Extensions.Logging\tests\DI.Common\Common\src\XunitLoggerProvider.cs" />
   </ItemGroup>
-
   <ItemGroup>
     <ProjectReference Include="..\BrowserDebugHost\BrowserDebugHost.csproj" />
     <ProjectReference Include="..\BrowserDebugProxy\BrowserDebugProxy.csproj" />
-
     <!--
         - This project needs to use `$(AspNetCoreAppCurrent)` as it uses aspnetcore, and that
           version can lag behind `$(NetCoreAppCurrent)`.
@@ -76,12 +68,10 @@
       Private="false"
       SkipGetTargetFrameworkProperties="true"
     />
-
     <PackageReference Include="Serilog.Extensions.Logging.File" Version="2.0.0" />
     <!-- needed for ConditionalFact etc -->
     <ProjectReference Include="$(RepoRoot)src\libraries\Common\tests\TestUtilities\TestUtilities.csproj" />
   </ItemGroup>
-
   <Target Name="CopyTestZipForHelix" Condition="'$(ArchiveDirForHelix)' != ''" AfterTargets="Build">
     <ItemGroup>
       <_FilesToCopy Include="$(OutputPath)\**\*" TargetPath="DebuggerTestSuite" />
@@ -90,13 +80,11 @@
         TargetPath="debugger-test"
       />
     </ItemGroup>
-
     <Copy
       SourceFiles="@(_FilesToCopy)"
       DestinationFiles="$(ArchiveDirForHelix)\%(TargetPath)\%(RecursiveDir)%(FileName)%(Extension)"
     />
   </Target>
-
   <Target
     Name="_ExtractTestClassNames"
     Condition="'$(ExtractTestClassNamesForHelix)' == 'true'"
@@ -109,7 +97,6 @@
     >
       <Output TaskParameter="ConsoleOutput" ItemName="_ListOfTestsLines" />
     </Exec>
-
     <PropertyGroup>
       <_Regex>^ *(DebuggerTests[^\($]+)</_Regex>
     </PropertyGroup>
@@ -117,13 +104,11 @@
       <_TestLines0 Include="$([System.Text.RegularExpressions.Regex]::Match('%(_ListOfTestsLines.Identity)', $(_Regex)))" />
       <TestClassName Include="$([System.IO.Path]::GetFileNameWithoutExtension(%(_TestLines0.Identity)))" />
     </ItemGroup>
-
     <WriteLinesToFile
       File="$(TestArchiveTestsDir)$(MSBuildProjectName).tests.list"
       Lines="@(TestClassName->Distinct())"
     />
   </Target>
-
   <!-- Copy of `GenerateRunSettingsFile` from eng/testing/runsettings.targets -->
   <Target Name="_GenerateRunSettingsFile" AfterTargets="Build" BeforeTargets="Test">
     <Message Text="*** Generating .runsettings file in $(RunSettingsFilePath)" Importance="High" />
@@ -135,7 +120,6 @@
       <DotNetForTests Condition="'$(DotNetForTests)' == ''"
         >$([System.IO.Path]::Combine($(DotNetRoot), $(DotNetTool)))</DotNetForTests
       >
-
       <_RunSettingsInputFilePath>$(RepositoryEngineeringDir)testing\.runsettings</_RunSettingsInputFilePath>
       <RunSettingsFileContent>$([System.IO.File]::ReadAllText('$(_RunSettingsInputFilePath)'))</RunSettingsFileContent>
       <RunSettingsFileContent Condition="'$(TestDisableParallelization)' == 'true'"
@@ -154,7 +138,6 @@
                                                       .Replace('$$TESTCASEFILTER$$', '$(_testFilter)')
                                                       .Replace('$$DOTNETHOSTPATH$$', '$(DotNetForTests)'))</RunSettingsFileContent>
     </PropertyGroup>
-
     <WriteLinesToFile
       File="$(RunSettingsFilePath)"
       Lines="$(RunSettingsFileContent)"
@@ -162,7 +145,6 @@
       Overwrite="true"
     />
   </Target>
-
   <Target
     Name="CreateProjectWithColonInSourceName"
     Condition="!$([MSBuild]::IsOSPlatform('windows'))"

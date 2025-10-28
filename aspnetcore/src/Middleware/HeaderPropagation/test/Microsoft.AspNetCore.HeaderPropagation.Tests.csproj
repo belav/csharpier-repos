@@ -2,7 +2,6 @@
   <PropertyGroup>
     <TargetFramework>$(DefaultNetCoreTargetFramework)</TargetFramework>
   </PropertyGroup>
-
   <ItemGroup>
     <Reference Include="Microsoft.Extensions.DependencyInjection" />
     <Reference Include="Microsoft.AspNetCore.TestHost" />

@@ -12,22 +12,18 @@
     <Nullable>enable</Nullable>
     <DefineConstants>$(DefineConstants);COMPONENTS</DefineConstants>
   </PropertyGroup>
-
   <!-- This workaround is required when referencing FileProviders.Embedded as a project -->
   <PropertyGroup>
     <_FileProviderTaskAssembly>$(ArtifactsDir)bin\Microsoft.Extensions.FileProviders.Embedded.Manifest.Task\$(Configuration)\netstandard2.0\Microsoft.Extensions.FileProviders.Embedded.Manifest.Task.dll</_FileProviderTaskAssembly>
   </PropertyGroup>
-
   <UsingTask
     AssemblyFile="$(_FileProviderTaskAssembly)"
     TaskName="Microsoft.Extensions.FileProviders.Embedded.Manifest.Task.GenerateEmbeddedResourcesManifest"
   />
-
   <ItemGroup>
     <EmbeddedResource Update="FormMapping\FormDataResources.resx" ExcludeFromManifest="true" />
     <EmbeddedResource Update="Resources.resx" ExcludeFromManifest="true" />
   </ItemGroup>
-
   <ItemGroup>
     <Compile
       Include="$(SharedSourceRoot)Components\ComponentMarker.cs"
@@ -70,9 +66,7 @@
       LinkBase="Forms"
     />
     <Compile Include="$(SharedSourceRoot)LinkerFlags.cs" LinkBase="Shared" />
-
     <Compile Include="$(SharedSourceRoot)PropertyHelper\**\*.cs" />
-
     <!-- Add a project dependency without reference output assemblies to enforce build order --><!-- Applying workaround for https://github.com/microsoft/msbuild/issues/2661 and https://github.com/dotnet/sdk/issues/952 -->
     <ProjectReference
       Include="..\..\Web.JS\Microsoft.AspNetCore.Components.Web.JS.npmproj"
@@ -83,7 +77,6 @@
       UndefineProperties="TargetFramework"
     />
   </ItemGroup>
-
   <ItemGroup>
     <Reference Include="Microsoft.AspNetCore.Antiforgery" />
     <Reference Include="Microsoft.AspNetCore.Components.Authorization" />
@@ -98,7 +91,6 @@
     <Reference Include="Microsoft.AspNetCore.StaticFiles" />
     <Reference Include="Microsoft.Extensions.FileProviders.Embedded" />
   </ItemGroup>
-
   <PropertyGroup>
     <BlazorWebJSFilename>blazor.web.js</BlazorWebJSFilename>
     <!-- Microsoft.AspNetCore.Components.Web.JS.npmproj always capitalizes the directory name. -->
@@ -109,7 +101,6 @@
       >..\..\Web.JS\dist\Release\$(BlazorWebJSFilename)</BlazorWebJSFile
     >
   </PropertyGroup>
-
   <!-- blazor.web.js should exist after Microsoft.AspNetCore.Components.Web.JS.npmproj builds. Fall back if not. -->
   <Target
     Name="_CheckBlazorWebJSPath"
@@ -121,7 +112,6 @@
       <BlazorWebJSFile>..\..\Web.JS\dist\Release\$(BlazorWebJSFilename)</BlazorWebJSFile>
     </PropertyGroup>
   </Target>
-
   <Target Name="_AddEmbeddedBlazorWebJS" AfterTargets="_CheckBlazorWebJSPath">
     <ItemGroup>
       <EmbeddedResource
@@ -135,7 +125,6 @@
       />
     </ItemGroup>
   </Target>
-
   <ItemGroup>
     <InternalsVisibleTo Include="Microsoft.AspNetCore.Components.Endpoints.Microbenchmarks" />
     <InternalsVisibleTo Include="Microsoft.AspNetCore.Components.Endpoints.Tests" />

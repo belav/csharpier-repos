@@ -2,12 +2,10 @@
   <PropertyGroup>
     <TargetFramework>$(DefaultNetCoreTargetFramework)</TargetFramework>
   </PropertyGroup>
-
   <ItemGroup>
     <ProjectReference Include="..\ResourcesClassLibraryNoAttribute\ResourcesClassLibraryNoAttribute.csproj" />
     <ProjectReference Include="..\ResourcesClassLibraryWithAttribute\ResourcesClassLibraryWithAttribute.csproj" />
   </ItemGroup>
-
   <ItemGroup>
     <Reference Include="Microsoft.AspNetCore.Localization" />
     <Reference Include="Microsoft.AspNetCore.Server.Kestrel" />

@@ -9,13 +9,10 @@
     <SuppressTrimAnalysisWarnings>true</SuppressTrimAnalysisWarnings>
     <WasmNativeStrip>false</WasmNativeStrip>
   </PropertyGroup>
-
   <PropertyGroup>
     <SignAssembly>False</SignAssembly>
   </PropertyGroup>
-
   <Target Name="RunSample" DependsOnTargets="RunSampleWithV8" />
-
   <ItemGroup>
     <Compile Include="../*.cs" />
     <Compile Remove="../Browser.cs" />

@@ -1,7 +1,6 @@
 <Project>
   <Import Project="../Directory.Build.targets" />
   <Import Project="$(MonoProjectRoot)\wasm\build\WasmApp.InTree.targets" />
-
   <PropertyGroup>
     <RunScriptInputName Condition="'$(TargetOS)' == 'browser' and '$(OS)' != 'Windows_NT'"
       >WasmRunnerTemplate.sh</RunScriptInputName
@@ -9,14 +8,11 @@
     <RunScriptInputName Condition="'$(TargetOS)' == 'browser' and '$(OS)' == 'Windows_NT'"
       >WasmRunnerTemplate.cmd</RunScriptInputName
     >
-
     <RunScriptOutputPath>$([MSBuild]::NormalizePath('$(WasmAppDir)', '$(RunScriptOutputName)'))</RunScriptOutputPath>
-
     <!-- so that SharedArrayBuffer is enabled -->
     <_ServeHeaders Condition="'$(WasmEnableThreads)' == 'true'"
       >$(_ServeHeaders) -h Cross-Origin-Embedder-Policy:require-corp -h Cross-Origin-Opener-Policy:same-origin</_ServeHeaders
     >
-
     <!-- For streaming instantiation of WASM module and browser cache -->
     <_ServeMimeTypes>$(_ServeMimeTypes) --mime .wasm=application/wasm</_ServeMimeTypes>
     <_ServeMimeTypes>$(_ServeMimeTypes) --mime .json=application/json</_ServeMimeTypes>
@@ -25,7 +21,6 @@
     <_ServeMimeTypes>$(_ServeMimeTypes) --mime .js=text/javascript</_ServeMimeTypes>
     <_ServeMimeTypes>$(_ServeMimeTypes) --mime .webcil=application/octet-stream</_ServeMimeTypes>
   </PropertyGroup>
-
   <Target
     Name="BuildSampleInTree"
     Inputs="
@@ -106,7 +101,6 @@
       Command="$(_Dotnet) run --configuration $(Configuration) --project ..\..\..\..\simple-server\HttpServer.csproj -s &quot;$(SimpleServerURLSuffix)&quot;"
     />
   </Target>
-
   <Target
     Name="TriggerGenerateRunScript"
     Condition="'$(GenerateRunScriptForSample)' == 'true'"

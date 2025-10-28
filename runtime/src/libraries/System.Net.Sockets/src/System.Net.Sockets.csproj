@@ -7,7 +7,6 @@
     <DefineConstants>$(DefineConstants);SYSTEM_NET_SOCKETS_DLL</DefineConstants>
     <UseCompilerGeneratedDocXmlFile>false</UseCompilerGeneratedDocXmlFile>
   </PropertyGroup>
-
   <!-- DesignTimeBuild requires all the TargetFramework Derived Properties to not be present in the first property group. -->
   <PropertyGroup>
     <TargetPlatformIdentifier>$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)'))</TargetPlatformIdentifier>
@@ -15,7 +14,6 @@
       >SR.SystemNetSockets_PlatformNotSupported</GeneratePlatformNotSupportedAssemblyMessage
     >
   </PropertyGroup>
-
   <ItemGroup Condition="'$(TargetPlatformIdentifier)' != ''">
     <!-- All configurations -->
     <Compile Include="System\Net\Sockets\SocketReceiveFromResult.cs" />
@@ -121,7 +119,6 @@
       Link="Common\System\Net\Sockets\SocketType.cs"
     />
   </ItemGroup>
-
   <ItemGroup Condition="'$(TargetPlatformIdentifier)' == 'windows'">
     <!-- Windows: CoreCLR -->
     <Compile Include="System\Net\Sockets\DynamicWinsockMethods.cs" />
@@ -297,7 +294,6 @@
       Link="Common\System\Net\CompletionPortHelper.Windows.cs"
     />
   </ItemGroup>
-
   <ItemGroup Condition="'$(TargetPlatformIdentifier)' == 'unix'">
     <Compile Include="System\Net\Sockets\SafeSocketHandle.Unix.cs" />
     <Compile Include="System\Net\Sockets\Socket.Unix.cs" />
@@ -495,7 +491,6 @@
       Link="Common\System\Net\Sockets\SocketExceptionFactory.Unix.cs"
     />
   </ItemGroup>
-
   <ItemGroup>
     <Reference Include="Microsoft.Win32.Primitives" />
     <Reference Include="System.Collections" />
@@ -511,7 +506,6 @@
     <Reference Include="System.Threading.Overlapped" />
     <Reference Include="System.Threading.ThreadPool" />
   </ItemGroup>
-
   <ItemGroup Condition="'$(TargetPlatformIdentifier)' == 'unix'">
     <Reference Include="System.Threading.Thread" />
   </ItemGroup>

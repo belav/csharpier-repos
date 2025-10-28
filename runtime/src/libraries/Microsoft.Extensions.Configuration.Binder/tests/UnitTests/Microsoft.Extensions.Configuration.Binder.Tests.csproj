@@ -3,7 +3,6 @@
     <TargetFrameworks>$(NetCoreAppCurrent);$(NetFrameworkMinimum)</TargetFrameworks>
     <EnableDefaultItems>true</EnableDefaultItems>
   </PropertyGroup>
-
   <ItemGroup>
     <Compile
       Include="$(CoreLibSharedDir)System\Runtime\CompilerServices\IsExternalInit.cs"
@@ -37,10 +36,8 @@
       Include="..\Common\ConfigurationBinderTests.TestClasses.Collections.cs"
       Link="Common\ConfigurationBinderTests.TestClasses.Collections.cs"
     />
-
     <TrimmerRootDescriptor Include="$(MSBuildThisFileDirectory)ILLink.Descriptors.xml" />
   </ItemGroup>
-
   <ItemGroup>
     <ProjectReference
       Include="$(LibrariesProjectRoot)Microsoft.Extensions.Configuration\src\Microsoft.Extensions.Configuration.csproj"

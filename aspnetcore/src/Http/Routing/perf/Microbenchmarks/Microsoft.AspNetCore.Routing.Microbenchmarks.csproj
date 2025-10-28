@@ -6,7 +6,6 @@
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     <RootNamespace>Microsoft.AspNetCore.Routing</RootNamespace>
   </PropertyGroup>
-
   <!--
     Some sources are shared with the unit test so we can benchmark some 'test only' implementations
     for perf comparisons.
@@ -36,7 +35,6 @@
       Link="Matching\TestServiceProvider.cs"
     />
   </ItemGroup>
-
   <ItemGroup>
     <Reference Include="BenchmarkDotNet" />
     <Reference Include="Microsoft.AspNetCore.Http" />
@@ -44,7 +42,6 @@
     <Reference Include="Microsoft.Extensions.DependencyInjection" />
     <Reference Include="Microsoft.Extensions.Diagnostics" />
     <Reference Include="Microsoft.Extensions.Logging" />
-
     <Compile Include="$(SharedSourceRoot)BenchmarkRunner\*.cs" />
   </ItemGroup>
 </Project>

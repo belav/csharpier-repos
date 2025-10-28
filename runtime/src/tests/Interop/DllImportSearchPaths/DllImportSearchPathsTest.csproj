@@ -9,11 +9,9 @@
     <Compile Include="../NativeLibrary/NativeLibraryToLoad/NativeLibraryToLoad.cs" />
     <CMakeProjectReference Include="../NativeLibrary/NativeLibraryToLoad/CMakeLists.txt" />
   </ItemGroup>
-
   <PropertyGroup>
     <LibrarySubdirectory>$(OutputPath)/subdirectory</LibrarySubdirectory>
   </PropertyGroup>
-
   <Target Name="SetUpSubdirectoryNative" AfterTargets="CopyNativeProjectBinaries">
     <ItemGroup>
       <NativeLibrariesToMove Include="$(OutDir)/libNativeLibrary.*" />
@@ -24,7 +22,6 @@
       DestinationFiles="@(NativeLibrariesToMove -> '$(LibrarySubdirectory)/%(Filename)%(Extension)')"
     />
   </Target>
-
   <Target Name="SetUpSubdirectoryManaged" AfterTargets="Build">
     <ItemGroup>
       <AssembliesToCopy Include="$(OutDir)/$(TargetName).dll" />
@@ -34,7 +31,6 @@
       DestinationFiles="@(AssembliesToCopy -> '$(LibrarySubdirectory)/%(Filename)%(Extension)')"
     />
   </Target>
-
   <Target
     Name="SetUpAOTDirectory"
     Condition="'$(TestBuildMode)' == 'nativeaot'"

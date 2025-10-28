@@ -2,8 +2,6 @@
   Description:  No errors should be produced by the extensive feed
   Expect:       !Warning
 -->
-
-
 <feed xmlns="http://www.w3.org/2005/Atom">
   <title type="text">dive into mark</title>
   <subtitle type="html">

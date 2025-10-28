@@ -4,7 +4,6 @@
     <OutputType>library</OutputType>
     <StaticWebAssetBasePath>_content/NotReferencedInWasmCodePackage</StaticWebAssetBasePath>
   </PropertyGroup>
-
   <ItemGroup>
     <Reference Include="Microsoft.AspNetCore.Components" />
     <Reference Include="Microsoft.AspNetCore.Components.Web" />

@@ -15,7 +15,6 @@
       >$([MSBuild]::NormalizeDirectory('$(PublishDir)', 'AppBundle'))</BundleDir
     >
     <RunScriptOutputPath>$([MSBuild]::NormalizePath('$(BundleDir)', '$(RunScriptOutputName)'))</RunScriptOutputPath>
-
     <PublishingTestsRun>true</PublishingTestsRun>
     <PublishTestAsSelfContainedDependsOn Condition="'$(PublishTestAsSelfContainedDependsOn)' == ''"
       >Publish</PublishTestAsSelfContainedDependsOn
@@ -24,22 +23,18 @@
       Condition="'$(PublishTestAsSelfContainedAfterTargets)' == ''"
       >Build</PublishTestAsSelfContainedAfterTargets
     >
-
     <SkipWorkloadsTestingTargetsImport Condition="'$(SkipWorkloadsTestingTargetsImport)' == ''"
       >true</SkipWorkloadsTestingTargetsImport
     >
   </PropertyGroup>
-
   <PropertyGroup Condition="'$(TargetOS)' == 'ios' or '$(TargetOS)' == 'tvos'">
     <RunAOTCompilation Condition="'$(RuntimeFlavor)' == 'Mono' ">true</RunAOTCompilation>
     <UseNativeAOTRuntime Condition="'$(RuntimeFlavor)' == 'CoreCLR'">true</UseNativeAOTRuntime>
   </PropertyGroup>
-
   <PropertyGroup>
     <DotnetPgoToolDir>$([MSBuild]::NormalizeDirectory('$(CoreCLRToolPath)', 'dotnet-pgo'))</DotnetPgoToolDir>
     <DotnetPgoToolPath>$([MSBuild]::NormalizePath('$(DotnetPgoToolDir)', 'dotnet-pgo'))</DotnetPgoToolPath>
   </PropertyGroup>
-
   <PropertyGroup Condition="'$(EnableAggressiveTrimming)' == 'true' or '$(EnableSoftTrimming)' == 'true'">
     <PublishTrimmed>true</PublishTrimmed>
     <!-- Suppress trimming warnings as these are tests -->
@@ -49,7 +44,6 @@
     <NoWarn Condition="'$(EnableSoftTrimming)' == 'true'">$(NoWarn);IL2035</NoWarn>
     <!-- https://github.com/dotnet/sdk/issues/18581 tracks needing to set 2 properties to disable warnings. -->
     <EnableTrimAnalyzer>false</EnableTrimAnalyzer>
-
     <!-- Reduce library test app size by trimming framework library features  -->
     <DebuggerSupport Condition="'$(DebuggerSupport)' == '' and '$(Configuration)' != 'Debug'"
       >false</DebuggerSupport
@@ -66,7 +60,6 @@
     >
     <UseNativeHttpHandler Condition="'$(UseNativeHttpHandler)' == ''">false</UseNativeHttpHandler>
   </PropertyGroup>
-
   <!-- When trimming non-exe projects, root the whole intermediate assembly.
        The SDK settings root only the entry point by default. These targets are used not only for standard
        console apps, but also for test projects without an entry point. -->
@@ -81,19 +74,16 @@
       </TrimmerRootAssembly>
     </ItemGroup>
   </Target>
-
   <PropertyGroup>
     <AdditionalXHarnessArguments Condition="'$(ExpectedExitCode)' != ''"
       >$(AdditionalXHarnessArguments) --expected-exit-code $(ExpectedExitCode)</AdditionalXHarnessArguments
     >
   </PropertyGroup>
-
   <PropertyGroup>
     <DiagnosticPorts Condition="'$(DiagnosticStartupMode)' != ''"
       >$(DiagnosticPorts),$(DiagnosticStartupMode)</DiagnosticPorts
     >
   </PropertyGroup>
-
   <PropertyGroup Condition="'$(TargetOS)' == 'android'">
     <!-- The -arg flag for xharness passes the arguments along to the instrumentation app -->
     <AdditionalXHarnessArguments Condition="'$(XUnitMethodName)' != ''"
@@ -103,7 +93,6 @@
       >$(AdditionalXHarnessArguments) --arg=-c=$(XUnitClassName)</AdditionalXHarnessArguments
     >
   </PropertyGroup>
-
   <PropertyGroup Condition="'$(TargetOS)' == 'maccatalyst' or '$(TargetOS)' == 'ios' or '$(TargetOS)' == 'iossimulator' or '$(TargetOS)' == 'tvos' or '$(TargetOS)' == 'tvossimulator'">
     <!-- Pass the -m or -c flag along to the app bundle, note that due to the double hyphen this needs to be the last argument -->
     <AdditionalXHarnessArguments Condition="'$(XUnitMethodName)' != ''"
@@ -113,11 +102,9 @@
       >$(AdditionalXHarnessArguments) -- -c=$(XUnitClassName)</AdditionalXHarnessArguments
     >
   </PropertyGroup>
-
   <ItemGroup Condition="'$(XUnitUseRandomizedTestOrderer)' == 'true'">
     <Compile Include="$(RepoRoot)src\libraries\Common\tests\Tests\RandomizedTestOrderAssemblyInfo.cs" />
   </ItemGroup>
-
   <Import
     Project="$(MSBuildThisFileDirectory)tests.android.targets"
     Condition="'$(TargetOS)' == 'android'"
@@ -134,11 +121,9 @@
     Project="$(MSBuildThisFileDirectory)tests.wasi.targets"
     Condition="'$(TargetOS)' == 'wasi'"
   />
-
   <PropertyGroup Condition="'$(RunAOTCompilation)' == 'true'">
     <_MobileIntermediateOutputPath>$(IntermediateOutputPath)mobile</_MobileIntermediateOutputPath>
   </PropertyGroup>
-
   <!-- This .targets file is also imported by the runtime Trimming tests, and we want to be able to manually configure trimming in them so this
   should be considered if we ever want to change the Condition of the ConfigureTrimming target -->
   <Target
@@ -150,15 +135,12 @@
       <TrimMode Condition="'$(EnableAggressiveTrimming)' == 'true'">link</TrimMode>
       <TrimMode Condition="'$(EnableSoftTrimming)' == 'true'">copyused</TrimMode>
     </PropertyGroup>
-
     <ItemGroup>
       <!-- Mark all the assemblies for link. We will explicitly mark the non-trimmable ones -->
       <ResolvedFileToPublish TrimMode="$(TrimMode)" />
-
       <!-- Don't trim the main assembly.
            TrimMode="" is needed so the root assemblies are correctly identified -->
       <ResolvedFileToPublish TrimMode="" Condition="'%(FileName)' == '$(AssemblyName)'" />
-
       <!-- TODO: find out why these assemblies aren't copied by copyused even though they're referenced -->
       <ResolvedFileToPublish
         TrimMode="Copy"
@@ -204,7 +186,6 @@
         TrimMode="Copy"
         Condition="'$(EnableSoftTrimming)' == 'true' and '%(FileName)' == 'System.Transactions.Local'"
       />
-
       <!-- Even though we are trimming the test runner assembly, we want it to be treated
            as a root -->
       <TrimmerRootAssembly
@@ -212,7 +193,6 @@
         Include="%(ResolvedFileToPublish.FullPath)"
       />
     </ItemGroup>
-
     <ItemGroup>
       <TrimmerRootDescriptor
         Include="$(MSBuildThisFileDirectory)ILLink.Descriptor.xunit.xml"
@@ -224,7 +204,6 @@
       />
     </ItemGroup>
   </Target>
-
   <Target
     Name="AddTestRunnersToPublishedFiles"
     AfterTargets="ComputeResolvedFilesToPublishList"
@@ -243,15 +222,12 @@
         Include="$(WasmTestRunnerDir)*"
         Condition="'$(TargetOS)' == 'Browser' or '$(TargetOS)' == 'wasi'"
       />
-
       <!-- Remove runner files that already exist in ResolvedFileToPublish to avoid double publishing -->
       <_resolvedFilesToPublishToFileName Include="@(ResolvedFileToPublish -> '%(FileName)%(Extension)')" />
-
       <_runnerFilesToPublishToFileName Include="@(_runnerFilesToPublish -> '%(FileName)%(Extension)')">
         <OriginalIdentity>%(Identity)</OriginalIdentity>
       </_runnerFilesToPublishToFileName>
       <_runnerFilesToPublishToFileName Remove="@(_resolvedFilesToPublishToFileName)" />
-
       <ResolvedFileToPublish
         Include="@(_runnerFilesToPublishToFileName -> '%(OriginalIdentity)')"
         RelativePath="%(FileName)%(Extension)"
@@ -260,19 +236,16 @@
       />
     </ItemGroup>
   </Target>
-
   <Import
     Project="$(MSBuildThisFileDirectory)workloads-testing.targets"
     Condition="'$(SkipWorkloadsTestingTargetsImport)' == 'true'"
   />
-
   <Target
     Name="PublishTestAsSelfContained"
     Condition="'$(IsCrossTargetingBuild)' != 'true'"
     AfterTargets="$(PublishTestAsSelfContainedAfterTargets)"
     DependsOnTargets="$(PublishTestAsSelfContainedDependsOn);$(BundleTestAppTargets);ArchiveTests"
   />
-
   <Target
     Name="PrepareForTestUsingWorkloads"
     BeforeTargets="Test"

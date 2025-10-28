@@ -1,6 +1,5 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <Import Project="System.Text.Json.TestLibrary.targets" />
-
   <ItemGroup>
     <!-- The Roslyn4.4 project uses multi-targeting to enable nullability annotations,
          so we need to explicitly reference the ns2.0 TFM used by the production source generator -->

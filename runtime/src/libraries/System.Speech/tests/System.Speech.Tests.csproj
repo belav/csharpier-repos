@@ -8,7 +8,6 @@
     <Compile Include="GrammarTests.cs" />
     <Compile Include="OtherTests.cs" />
   </ItemGroup>
-
   <ItemGroup>
     <ProjectReference Include="..\src\System.Speech.csproj" />
   </ItemGroup>

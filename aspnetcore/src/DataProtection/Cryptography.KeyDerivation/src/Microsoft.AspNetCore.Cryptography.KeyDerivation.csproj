@@ -13,15 +13,12 @@
       >annotations</Nullable
     >
   </PropertyGroup>
-
   <ItemGroup>
     <Reference Include="Microsoft.AspNetCore.Cryptography.Internal" />
   </ItemGroup>
-
   <ItemGroup>
     <InternalsVisibleTo Include="Microsoft.AspNetCore.Cryptography.KeyDerivation.Tests" />
   </ItemGroup>
-
   <ItemGroup>
     <Compile
       Include="$(SharedSourceRoot)ThrowHelpers\ArgumentNullThrowHelper.cs"

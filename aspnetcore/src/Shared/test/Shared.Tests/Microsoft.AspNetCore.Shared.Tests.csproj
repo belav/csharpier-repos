@@ -7,7 +7,6 @@
     <!-- Not all APIs are called in the shared test project --><!-- Conflicts between internal and public Quic APIs -->
     <Nullable>annotations</Nullable>
   </PropertyGroup>
-
   <ItemGroup>
     <Compile
       Include="$(SharedSourceRoot)ActivatorUtilities\**\*.cs"
@@ -111,7 +110,6 @@
     <Compile Include="$(SharedSourceRoot)TaskToApm.cs" />
     <Compile Include="$(SharedSourceRoot)SegmentWriteStream.cs" />
   </ItemGroup>
-
   <ItemGroup>
     <Reference Include="FSharp.Core" />
     <Reference Include="System.IO.Pipelines" />
@@ -126,7 +124,6 @@
       <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
     </Reference>
   </ItemGroup>
-
   <ItemGroup>
     <ProjectReference Include="..\testassets\BuildWebHostInvalidSignature\BuildWebHostInvalidSignature.csproj" />
     <ProjectReference Include="..\testassets\BuildWebHostPatternTestSite\BuildWebHostPatternTestSite.csproj" />

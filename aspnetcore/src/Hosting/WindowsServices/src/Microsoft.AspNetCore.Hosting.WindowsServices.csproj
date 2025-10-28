@@ -6,7 +6,6 @@
     <PackageTags>aspnetcore;hosting</PackageTags>
     <Nullable>enable</Nullable>
   </PropertyGroup>
-
   <ItemGroup>
     <Reference Include="Microsoft.AspNetCore.Hosting" />
   </ItemGroup>
@@ -16,7 +15,6 @@
   <ItemGroup>
     <Compile Update="WebHostService.cs" />
   </ItemGroup>
-
   <ItemGroup>
     <InternalsVisibleTo Include="Microsoft.AspNetCore.Hosting.WindowsServices.Tests" />
   </ItemGroup>

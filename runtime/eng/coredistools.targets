@@ -9,7 +9,6 @@
       <GeneratePathProperty>true</GeneratePathProperty>
     </PackageReference>
   </ItemGroup>
-
   <PropertyGroup>
     <CoreDisToolsLibrary Condition="'$(TargetOS)' == 'windows'"
       >$(PkgMicrosoft_NETCore_CoreDisTools)\runtimes\win-$(TargetArchitecture)\native\coredistools.dll</CoreDisToolsLibrary

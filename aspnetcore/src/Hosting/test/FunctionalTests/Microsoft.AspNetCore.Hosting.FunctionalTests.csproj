@@ -1,13 +1,11 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <TargetFramework>$(DefaultNetCoreTargetFramework)</TargetFramework>
-
     <!-- Tests do not work on Helix or when bin/ directory is not in project directory due to undeclared dependency on test content. --><!-- https://github.com/dotnet/aspnetcore/issues/8247 -->
     <BuildHelixPayload>false</BuildHelixPayload>
     <BaseOutputPath />
     <OutputPath />
   </PropertyGroup>
-
   <ItemGroup>
     <Content
       Include="testroot\**\*"
@@ -15,7 +13,6 @@
       CopyToPublishDirectory="PreserveNewest"
     />
   </ItemGroup>
-
   <ItemGroup>
     <ProjectReference Include="$(RepoRoot)src\Hosting\Server.IntegrationTesting\src\Microsoft.AspNetCore.Server.IntegrationTesting.csproj" />
     <ProjectReference
@@ -36,7 +33,6 @@
       ReferenceOutputAssembly="false"
       SkipGetTargetFrameworkProperties="true"
     />
-
     <Reference Include="Microsoft.AspNetCore.Hosting" />
     <Reference Include="Microsoft.Extensions.Logging.Console" />
   </ItemGroup>

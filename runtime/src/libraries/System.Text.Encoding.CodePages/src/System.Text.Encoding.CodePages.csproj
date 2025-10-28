@@ -14,7 +14,6 @@
 Commonly Used Types:
 System.Text.CodePagesEncodingProvider</PackageDescription>
   </PropertyGroup>
-
   <!-- Generator for code mapping table, target to invoke is GenerateEncodingSource -->
   <PropertyGroup>
     <!-- This Task can be re-run with /t:GenerateEncodingSource
@@ -26,7 +25,6 @@ System.Text.CodePagesEncodingProvider</PackageDescription>
     <PreferredIANANamesPath>Data\PreferredCodePageNames.csv</PreferredIANANamesPath>
     <OutputDataTablePath>System\Text\EncodingTable.Data.cs</OutputDataTablePath>
   </PropertyGroup>
-
   <ItemGroup>
     <Compile Include="Microsoft\Win32\SafeHandles\SafeAllocHHandle.cs" />
     <Compile Include="System\Text\BaseCodePageEncoding.cs" />
@@ -49,7 +47,6 @@ System.Text.CodePagesEncodingProvider</PackageDescription>
     <Compile Include="System\Text\ISCIIEncoding.cs" />
     <Compile Include="System\Text\SBCSCodePageEncoding.cs" />
   </ItemGroup>
-
   <ItemGroup Condition="'$(TargetPlatformIdentifier)' == 'windows' or '$(TargetFrameworkIdentifier)' == '.NETFramework'">
     <Compile Include="System\Text\CodePagesEncodingProvider.Windows.cs" />
     <Compile
@@ -73,16 +70,13 @@ System.Text.CodePagesEncodingProvider</PackageDescription>
       Link="Common\Interop\Windows\Kernel32\Interop.WideCharToMultiByte.cs"
     />
   </ItemGroup>
-
   <ItemGroup Condition="'$(TargetFrameworkIdentifier)' != '.NETFramework' and '$(TargetPlatformIdentifier)' != 'windows'">
     <Compile Include="System\Text\CodePagesEncodingProvider.Default.cs" />
   </ItemGroup>
-
   <ItemGroup Condition="'$(TargetFrameworkIdentifier)' == '.NETCoreApp'">
     <Compile Include="System\Text\CodePagesEncodingProvider.netcoreapp.cs" />
     <Compile Include="System\Text\BaseCodePageEncoding.netcoreapp.cs" />
   </ItemGroup>
-
   <ItemGroup>
     <EmbeddedResource Include="Data\codepages.nlp">
       <LogicalName>codepages.nlp</LogicalName>
@@ -90,7 +84,6 @@ System.Text.CodePagesEncodingProvider</PackageDescription>
     <None Include="Data\CodePageNameMappings.csv" />
     <None Include="Data\PreferredCodePageNames.csv" />
   </ItemGroup>
-
   <ItemGroup Condition="$([MSBuild]::IsTargetFrameworkCompatible('$(TargetFramework)', '$(NetCoreAppCurrent)'))">
     <Reference Include="System.Collections" />
     <Reference Include="System.Memory" />
@@ -98,7 +91,6 @@ System.Text.CodePagesEncodingProvider</PackageDescription>
     <Reference Include="System.Runtime.InteropServices" />
     <Reference Include="System.Threading" />
   </ItemGroup>
-
   <ItemGroup Condition="'$(TargetFrameworkIdentifier)' != '.NETCoreApp'">
     <PackageReference Include="System.Memory" Version="$(SystemMemoryVersion)" />
     <PackageReference

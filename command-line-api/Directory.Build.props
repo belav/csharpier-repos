@@ -5,7 +5,6 @@
     Sdk="Microsoft.DotNet.Arcade.Sdk"
     Condition="'$(DisableArcade)' != '1'"
   />
-
   <PropertyGroup>
     <NoWarn>$(NoWarn);NU5125;CS0618</NoWarn>
     <NoWarn Condition=" '$(DotnetBuildFromSource)' == 'true' "
@@ -14,11 +13,9 @@
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <LangVersion>10.0</LangVersion>
   </PropertyGroup>
-
   <PropertyGroup Condition="'$(DotNetBuildFromSource)' == 'true'">
     <TargetFrameworkForNETSDK>$(NetCurrent)</TargetFrameworkForNETSDK>
   </PropertyGroup>
-
   <PropertyGroup Condition="'$(DotNetBuildFromSource)' != 'true'">
     <TargetFrameworkForNETSDK>net7.0</TargetFrameworkForNETSDK>
   </PropertyGroup>

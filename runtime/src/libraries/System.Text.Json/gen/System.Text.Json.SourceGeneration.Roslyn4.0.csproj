@@ -5,13 +5,10 @@
     <RoslynApiVersion>$(MicrosoftCodeAnalysisVersion_4_0)</RoslynApiVersion>
     <DefineConstants>$(DefineConstants);ROSLYN4_0_OR_GREATER</DefineConstants>
   </PropertyGroup>
-
   <Import Project="System.Text.Json.SourceGeneration.targets" />
-
   <ItemGroup>
     <Compile Include="JsonSourceGenerator.Roslyn4.0.cs" />
   </ItemGroup>
-
   <ItemGroup>
     <Compile Include="$(CommonPath)Roslyn\Hash.cs" Link="Common\Roslyn\Hash.cs" />
     <Compile Include="$(CommonPath)Roslyn\ISyntaxHelper.cs" Link="Common\Roslyn\ISyntaxHelper.cs" />
@@ -36,7 +33,6 @@
       Include="$(CommonPath)Roslyn\SyntaxValueProvider_ForAttributeWithSimpleName.cs"
       Link="Common\Roslyn\SyntaxValueProvider_ForAttributeWithSimpleName.cs"
     />
-
     <Compile
       Include="$(CoreLibSharedDir)System\Collections\Generic\ValueListBuilder.cs"
       Link="Production\ValueListBuilder.cs"

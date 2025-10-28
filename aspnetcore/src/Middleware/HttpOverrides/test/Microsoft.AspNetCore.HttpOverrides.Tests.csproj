@@ -2,7 +2,6 @@
   <PropertyGroup>
     <TargetFramework>$(DefaultNetCoreTargetFramework)</TargetFramework>
   </PropertyGroup>
-
   <ItemGroup>
     <Compile Include="$(SharedSourceRoot)test\Certificates\Certificates.cs" />
     <Reference Include="Microsoft.AspNetCore.HttpOverrides" />

@@ -3,7 +3,6 @@
     <RepoRoot Condition=" '$(RepoRoot)' == '' OR !HasTrailingSlash('$(RepoRoot)') "
       >$([MSBuild]::NormalizeDirectory('$(MSBuildThisFileDirectory)', '..', '..', '..', '..'))</RepoRoot
     >
-
     <!-- Priority: LoggingTestingDisableFileLogging > LoggingTestingFileLoggingDirectory > ASPNETCORE_TEST_LOG_DIR > Default location -->
     <LoggingTestingFileLoggingDirectory
       Condition=" '$(LoggingTestingFileLoggingDirectory)' == '' AND '$(ASPNETCORE_TEST_LOG_DIR)' != '' "
@@ -13,7 +12,6 @@
       >$(RepoRoot)artifacts\log\</LoggingTestingFileLoggingDirectory
     >
   </PropertyGroup>
-
   <Target
     Name="SetLoggingTestingAssemblyAttributes"
     BeforeTargets="GetAssemblyAttributes"
@@ -28,13 +26,11 @@
         >false</PreserveExistingLogsInOutput
       >
     </PropertyGroup>
-
     <ItemGroup>
       <AssemblyAttribute Include="Xunit.TestFramework">
         <_Parameter1>Microsoft.AspNetCore.InternalTesting.AspNetTestFramework</_Parameter1>
         <_Parameter2>Microsoft.AspNetCore.InternalTesting</_Parameter2>
       </AssemblyAttribute>
-
       <AssemblyAttribute Include="Microsoft.AspNetCore.InternalTesting.AssemblyTestLogFixtureAttribute" />
       <AssemblyAttribute Include="Microsoft.AspNetCore.InternalTesting.TestFrameworkFileLoggerAttribute">
         <_Parameter1>$(PreserveExistingLogsInOutput)</_Parameter1>

@@ -7967,26 +7967,24 @@ namespace System.Runtime.Intrinsics.Tests.Vectors
             Assert.True(
                 array
                     .AsSpan()
-                    .SequenceEqual(
-                        [
-                            2.0f,
-                            2.0f,
-                            2.0f,
-                            2.0f,
-                            2.0f,
-                            2.0f,
-                            2.0f,
-                            2.0f,
-                            2.0f,
-                            2.0f,
-                            2.0f,
-                            2.0f,
-                            2.0f,
-                            2.0f,
-                            2.0f,
-                            2.0f,
-                        ]
-                    )
+                    .SequenceEqual([
+                        2.0f,
+                        2.0f,
+                        2.0f,
+                        2.0f,
+                        2.0f,
+                        2.0f,
+                        2.0f,
+                        2.0f,
+                        2.0f,
+                        2.0f,
+                        2.0f,
+                        2.0f,
+                        2.0f,
+                        2.0f,
+                        2.0f,
+                        2.0f,
+                    ])
             );
         }
 
@@ -7998,27 +7996,25 @@ namespace System.Runtime.Intrinsics.Tests.Vectors
             Assert.True(
                 array
                     .AsSpan()
-                    .SequenceEqual(
-                        [
-                            0.0f,
-                            2.0f,
-                            2.0f,
-                            2.0f,
-                            2.0f,
-                            2.0f,
-                            2.0f,
-                            2.0f,
-                            2.0f,
-                            2.0f,
-                            2.0f,
-                            2.0f,
-                            2.0f,
-                            2.0f,
-                            2.0f,
-                            2.0f,
-                            2.0f,
-                        ]
-                    )
+                    .SequenceEqual([
+                        0.0f,
+                        2.0f,
+                        2.0f,
+                        2.0f,
+                        2.0f,
+                        2.0f,
+                        2.0f,
+                        2.0f,
+                        2.0f,
+                        2.0f,
+                        2.0f,
+                        2.0f,
+                        2.0f,
+                        2.0f,
+                        2.0f,
+                        2.0f,
+                        2.0f,
+                    ])
             );
         }
 

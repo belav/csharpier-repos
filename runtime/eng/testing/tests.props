@@ -12,17 +12,14 @@
     <TestSingleFile Condition="'$(TestNativeAot)' == 'true'">true</TestSingleFile>
     <TestSingleFile Condition="'$(TestReadyToRun)' == 'true'">true</TestSingleFile>
   </PropertyGroup>
-
   <PropertyGroup Condition="'$(TargetsMobile)' == 'true'">
     <!-- Test runners are built as part of libs.pretest so we need to use libraries configuration -->
     <AppleTestRunnerDir>$([MSBuild]::NormalizeDirectory('$(ArtifactsBinDir)', 'AppleTestRunner', '$(Configuration)', '$(NetCoreAppCurrent)'))</AppleTestRunnerDir>
     <AndroidTestRunnerDir>$([MSBuild]::NormalizeDirectory('$(ArtifactsBinDir)', 'AndroidTestRunner', '$(Configuration)', '$(NetCoreAppCurrent)'))</AndroidTestRunnerDir>
     <WasmTestRunnerDir>$([MSBuild]::NormalizeDirectory('$(ArtifactsBinDir)', 'WasmTestRunner', '$(Configuration)', '$(NetCoreAppCurrent)'))</WasmTestRunnerDir>
-
     <RuntimeIdentifier>$(OutputRID)</RuntimeIdentifier>
     <SelfContained>true</SelfContained>
   </PropertyGroup>
-
   <!-- Provide runtime options to Mono (interpreter, aot, debugging, etc) -->
   <ItemGroup Condition="'$(MonoEnvOptions)' != '' and '$(TargetsMobile)' != 'true'">
     <RunScriptCommands
@@ -34,7 +31,6 @@
       Include="export MONO_ENV_OPTIONS='$(MonoEnvOptions)'"
     />
   </ItemGroup>
-
   <ItemGroup Condition="'$(TestRunRequiresLiveRefPack)' == 'true'">
     <None
       Include="$(MicrosoftNetCoreAppRefPackRefDir)**/*.dll"
@@ -44,7 +40,6 @@
       Visible="false"
     />
   </ItemGroup>
-
   <!--
     Unit/Functional/Integration test support.
     Supported runners: xunit.

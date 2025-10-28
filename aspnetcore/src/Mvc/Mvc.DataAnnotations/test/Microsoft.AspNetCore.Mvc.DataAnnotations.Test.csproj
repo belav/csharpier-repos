@@ -5,7 +5,6 @@
     <!-- This project has tests that rely on nullability on non-public types. Undo nullablePublicOnly configured by default -->
     <Features>$(Features.Replace('nullablePublicOnly', ''))</Features>
   </PropertyGroup>
-
   <ItemGroup>
     <ProjectReference Include="..\..\shared\Mvc.Core.TestCommon\Microsoft.AspNetCore.Mvc.Core.TestCommon.csproj" />
   </ItemGroup>

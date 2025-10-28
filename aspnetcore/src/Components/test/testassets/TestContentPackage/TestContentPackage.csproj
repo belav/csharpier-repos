@@ -4,11 +4,9 @@
     <OutputType>library</OutputType>
     <StaticWebAssetBasePath>_content/TestContentPackage</StaticWebAssetBasePath>
   </PropertyGroup>
-
   <PropertyGroup>
     <EnableTypeScriptNuGetTarget>true</EnableTypeScriptNuGetTarget>
   </PropertyGroup>
-
   <ItemGroup>
     <Reference Include="Microsoft.AspNetCore.Components" />
     <Reference Include="Microsoft.AspNetCore.Components.Web" />

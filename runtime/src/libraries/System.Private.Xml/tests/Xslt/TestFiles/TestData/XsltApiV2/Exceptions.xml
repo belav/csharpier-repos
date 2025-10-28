@@ -74,7 +74,6 @@
     message="Namespace Manager or XsltContext needed. This query has prefix or variable or userdefined function."
   />
   <exception res="XPath_ScientificNotation" message="Scientific notation is not allowed." />
-
   <!-- XSLT Exceptions -->
   <exception res="Xslt_CompileError" message="{0}({1},{2}) :\n" />
   <exception
@@ -95,7 +94,6 @@
   <exception res="Xslt_InvalidStylesheet" message="This is an invalid style sheet." />
   <exception res="Xslt_InvalidNamespace" message="This is an invalid namespace." />
   <exception res="Xslt_UnsuppKeyword" message="'{0}' is an unsupported keyword." />
-
   <exception res="Xslt_InvalidKeyword" message="'{0}' is an invalid keyword." />
   <exception
     res="Xslt_InvalidAttribute"
@@ -238,7 +236,6 @@
     res="Xslt_CannotLoadStylesheet"
     message="Cannot load the stylesheet object referenced by URI '{0}', because the provided XmlResolver returned an object of type '{1}'. One of Stream, XmlReader, and IXPathNavigable types was expected."
   />
-
   <!-- XML Exceptions -->
   <exception
     res="Xml_BadStartNameChar"

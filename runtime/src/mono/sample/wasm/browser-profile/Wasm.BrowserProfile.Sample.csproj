@@ -7,11 +7,9 @@
     <WasmBuildNative>true</WasmBuildNative>
     <WasmNativeStrip>false</WasmNativeStrip>
   </PropertyGroup>
-
   <ItemGroup>
     <WasmExtraFilesToDeploy Include="index.html" />
     <WasmExtraFilesToDeploy Include="main.js" />
   </ItemGroup>
-
   <Target Name="RunSample" DependsOnTargets="RunSampleWithBrowser" />
 </Project>

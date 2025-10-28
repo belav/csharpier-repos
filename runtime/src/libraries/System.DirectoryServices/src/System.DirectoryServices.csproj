@@ -24,7 +24,6 @@ System.DirectoryServices.ActiveDirectory.DirectoryServer
 System.DirectoryServices.ActiveDirectory.Domain
 System.DirectoryServices.ActiveDirectory.DomainController</PackageDescription>
   </PropertyGroup>
-
   <!-- DesignTimeBuild requires all the TargetFramework Derived Properties to not be present in the first property group. -->
   <PropertyGroup>
     <TargetPlatformIdentifier>$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)'))</TargetPlatformIdentifier>
@@ -33,7 +32,6 @@ System.DirectoryServices.ActiveDirectory.DomainController</PackageDescription>
       >SR.DirectoryServices_PlatformNotSupported</GeneratePlatformNotSupportedAssemblyMessage
     >
   </PropertyGroup>
-
   <ItemGroup Condition="'$(TargetPlatformIdentifier)' == 'windows'">
     <Compile Include="System.DirectoryServices.Forwards.cs" />
     <Compile Include="System\DirectoryServices\ActiveDirectorySecurity.cs" />
@@ -156,7 +154,6 @@ System.DirectoryServices.ActiveDirectory.DomainController</PackageDescription>
     <Compile Include="Interop\NativeMethods.cs" />
     <Compile Include="Interop\SafeNativeMethods.cs" />
     <Compile Include="Interop\UnsafeNativeMethods.cs" />
-
     <Compile
       Include="$(CommonPath)DisableRuntimeMarshalling.cs"
       Link="Common\DisableRuntimeMarshalling.cs"
@@ -323,7 +320,6 @@ System.DirectoryServices.ActiveDirectory.DomainController</PackageDescription>
     />
     <Compile Include="$(CommonPath)System\Obsoletions.cs" Link="System\Obsoletions.cs" />
   </ItemGroup>
-
   <ItemGroup>
     <!-- Use of 'PrivateAssets=all' removes the package reference to S.S.P since S.S.P has references to other packages that are not desired.
     S.S.P only contains DirectoryServices obsolete types including DirectoryServicesPermission.-->
@@ -332,7 +328,6 @@ System.DirectoryServices.ActiveDirectory.DomainController</PackageDescription>
       PrivateAssets="all"
     />
   </ItemGroup>
-
   <ItemGroup Condition="'$(TargetFrameworkIdentifier)' == '.NETStandard'">
     <PackageReference
       Include="System.IO.FileSystem.AccessControl"

@@ -4,7 +4,6 @@
     <TargetFramework>net$(TargetFrameworkVersion.TrimStart('vV').Replace('.',''))</TargetFramework>
     <TargetFrameworkIdentifier>.NETFramework</TargetFrameworkIdentifier>
   </PropertyGroup>
-
   <PropertyGroup>
     <!-- Ensure API changes show up clearly in PRs. -->
     <AddPublicApiAnalyzers
@@ -16,22 +15,17 @@
     <AddPublicApiAnalyzers Condition=" '$(AddPublicApiAnalyzers)' == '' "
       >false</AddPublicApiAnalyzers
     >
-
     <!-- Public members should not use oblivious types. Not done with all nullable annotations. -->
     <NoWarn>$(NoWarn);RS0041</NoWarn>
-
     <_IsSrcProject
       Condition="'$(IsImplementationProject)' == 'true' OR
         '$(IsAnalyzersProject)' == true OR
         '$(IsSpecificationTestProject)' == 'true'"
       >true</_IsSrcProject
     >
-
     <Nullable Condition=" '$(Nullable)' == '' AND '$(_IsSrcProject)' == 'true'">enable</Nullable>
-
     <!-- Strip out non-public nullable annotations for src projects. This should help with size reduction -->
     <Features Condition="'$(_IsSrcProject)' == 'true'">$(Features);nullablePublicOnly</Features>
-
     <!-- Turn off platform compatibility analyzer warnings in test, test assets, and samples. -->
     <NoWarn
       Condition=" $(IsTestProject) OR
@@ -41,10 +35,8 @@
         '$(IsMicrobenchmarksProject)' == 'true'"
       >$(NoWarn);CA1416</NoWarn
     >
-
     <!-- Turn off unused usings warning for multi-targeted projects. Fixing them using ifdefs looks worse than ignoring the warnings. -->
     <NoWarn Condition="'$(TargetFrameworks)' != ''">$(NoWarn);IDE0005</NoWarn>
-
     <!--
       Turn off ConfigureAwait analyzer rule in the projects that are exclusively meant to run in ASP.NET Core or Blazor contexts.
       Since we don't have a good way to detect this, we'll use the presence of ns2.0 as a proxy.
@@ -52,23 +44,19 @@
     <NoWarn Condition="'$(_IsSrcProject)' != 'true' OR !$(TargetFrameworks.Contains('netstandard'))"
       >$(NoWarn);CA2007</NoWarn
     >
-
     <!-- Enable .NET code style analysis during build for src projects. -->
     <EnforceCodeStyleInBuild Condition="'$(EnforceCodeStyleInBuild)' == ''"
       >true</EnforceCodeStyleInBuild
     >
-
     <!-- Enable trimming annotation validation in DI. See https://github.com/dotnet/runtime/blob/main/docs/workflow/trimming/feature-switches.md -->
     <VerifyDependencyInjectionOpenGenericServiceTrimmability Condition=" $(IsTestProject) "
       >true</VerifyDependencyInjectionOpenGenericServiceTrimmability
     >
   </PropertyGroup>
-
   <!-- Enable implicit usings for projects that target the default TFM -->
   <PropertyGroup Condition="'$(ImplicitUsings)' == '' AND '$(TargetFrameworks)' == '' AND '$(TargetFramework)' == '$(DefaultNetCoreTargetFramework)'">
     <ImplicitUsings>enable</ImplicitUsings>
   </PropertyGroup>
-
   <ItemGroup Condition="'$(ImplicitUsings)' == 'enable'">
     <!-- We should make it obvious when Linq is being used in shipping code -->
     <Using Remove="System.Linq" Condition="'$(_IsSrcProject)' == 'true'" />
@@ -76,7 +64,6 @@
     <Using Remove="System.Net.Http" />
     <Using Include="Xunit" Condition=" $(IsTestProject) " />
   </ItemGroup>
-
   <ItemGroup Condition=" '$(DotNetBuildFromSource)' != 'true' AND $(AddPublicApiAnalyzers) ">
     <Reference
       Include="Microsoft.CodeAnalysis.PublicApiAnalyzers"
@@ -102,7 +89,6 @@
       <Analyzer Include="@(_PublicAPIAnalyzers)" />
     </ItemGroup>
   </Target>
-
   <Target
     Name="GetCustomAssemblyAttributes"
     BeforeTargets="GetAssemblyAttributes"
@@ -116,7 +102,6 @@
         <_Parameter1>CommitHash</_Parameter1>
         <_Parameter2>$(SourceRevisionId)</_Parameter2>
       </AssemblyAttribute>
-
       <AssemblyAttribute
         Include="System.Reflection.AssemblyMetadataAttribute"
         Condition="$(RepositoryUrl.StartsWith('https://github.com'))"
@@ -124,7 +109,6 @@
         <_Parameter1>SourceCommitUrl</_Parameter1>
         <_Parameter2>$(RepositoryUrl)/tree/$(SourceRevisionId)</_Parameter2>
       </AssemblyAttribute>
-
       <AssemblyAttribute
         Include="System.Reflection.AssemblyMetadataAttribute"
         Condition="'$(Serviceable)' == 'true'"
@@ -134,7 +118,6 @@
       </AssemblyAttribute>
     </ItemGroup>
   </Target>
-
   <!-- Reference assemblies are shipped only in targeting packs. -->
   <Target
     Name="_RemoveReferenceAssembly"
@@ -145,7 +128,6 @@
       <_PackageFilesToExclude Include="@(IntermediateRefAssembly);$(TargetRefPath)" />
     </ItemGroup>
   </Target>
-
   <Choose>
     <!--
         C# 8.0's nullable annotations only work for .NET Core 3.0+ by default. However it can be made to work for other target frameworks
@@ -170,7 +152,6 @@
       </ItemGroup>
     </When>
   </Choose>
-
   <Target
     Name="ValidateBenchmarks"
     BeforeTargets="Test"
@@ -180,18 +161,15 @@
       Text="%0ARunning benchmark validation for:%0A$(MSBuildProjectName)%0A"
       Importance="High"
     />
-
     <MSBuild Projects="$(MSBuildProjectFullPath)" Targets="GetTargetPath">
       <Output TaskParameter="TargetOutputs" PropertyName="ExecPath" />
     </MSBuild>
-
     <Exec
       Command="dotnet $(ExecPath) -f * --validate-fast"
       IgnoreStandardErrorWarningFormat="true"
       StandardOutputImportance="low"
     />
   </Target>
-
   <Import Project="Packaging.targets" />
   <Import Project="ResolveReferences.targets" />
 </Project>

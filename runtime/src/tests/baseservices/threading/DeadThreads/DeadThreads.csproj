@@ -5,7 +5,6 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="$(MSBuildProjectName).cs" />
-
     <CLRTestEnvironmentVariable
       Include="DOTNET_Thread_DeadThreadCountThresholdForGCTrigger"
       Value="8"

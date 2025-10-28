@@ -6,7 +6,6 @@
     <Nullable>enable</Nullable>
     <IsMergedTestRunnerAssembly>true</IsMergedTestRunnerAssembly>
   </PropertyGroup>
-
   <ItemGroup>
     <ProjectReference
       Include="$(RepoRoot)/src/tests/Common/XUnitWrapperGenerator/XUnitWrapperGenerator.csproj"
@@ -15,9 +14,7 @@
     />
     <ProjectReference Include="$(RepoRoot)/src/tests/Common/XUnitWrapperLibrary/XUnitWrapperLibrary.csproj" />
   </ItemGroup>
-
   <Import Project="$(RepoRoot)/src/tests/Common/XUnitWrapperGenerator/XUnitWrapperGenerator.props" />
-
   <ItemGroup>
     <ProjectReference Include="$(RepoRoot)\src\tests\JIT\IL_Conformance\Old\directed\AutoInit.ilproj" />
   </ItemGroup>

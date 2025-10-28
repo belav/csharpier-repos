@@ -8,7 +8,6 @@
   <PropertyGroup Condition="'$(TargetFrameworkIdentifier)' == '.NETFramework'">
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
   </PropertyGroup>
-
   <Target
     Name="_SuggestBindingRedirectsForNonFrameworkDependencies"
     BeforeTargets="GenerateBindingRedirects"

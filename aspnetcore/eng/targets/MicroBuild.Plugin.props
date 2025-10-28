@@ -5,7 +5,6 @@
     <MicroBuildPluginDirectory Condition="'$(MicroBuildPluginDirectory)' == ''"
       >$(MicroBuildOverridePluginDirectory)</MicroBuildPluginDirectory
     >
-
     <!-- Some people might want to put the plugin packages directly in their Nuget v3 global cache. This doesn't happen by default, but we will allow for it here.  -->
     <MicroBuildPluginDirectory
       Condition="'$(MicroBuildPluginDirectory)' == '' and '$(NuGetPackageRoot)' != '' "

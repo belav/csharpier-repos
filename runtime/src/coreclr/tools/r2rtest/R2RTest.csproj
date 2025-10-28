@@ -9,15 +9,12 @@
     <OutputPath>$(RuntimeBinDir)\R2RTest</OutputPath>
     <RunAnalyzers>false</RunAnalyzers>
   </PropertyGroup>
-
   <ItemGroup>
     <Compile Include="..\Common\CommandLineHelpers.cs" Link="CommandLineHelpers.cs" />
   </ItemGroup>
-
   <ItemGroup>
     <ProjectReference Include="..\aot\ILCompiler.TypeSystem\ILCompiler.TypeSystem.csproj" />
   </ItemGroup>
-
   <ItemGroup>
     <PackageReference Include="Microsoft.Build" Version="$(MicrosoftBuildVersion)" />
     <PackageReference

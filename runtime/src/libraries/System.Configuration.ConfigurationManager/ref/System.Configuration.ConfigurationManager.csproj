@@ -3,12 +3,10 @@
     <TargetFrameworks>$(NetCoreAppCurrent);$(NetCoreAppPrevious);$(NetCoreAppMinimum);netstandard2.0;$(NetFrameworkMinimum)</TargetFrameworks>
     <NoWarn>$(NoWarn);CS0618</NoWarn>
     <IncludeInternalObsoleteAttribute>true</IncludeInternalObsoleteAttribute>
-
     <!-- TODO https://github.com/dotnet/runtime/issues/90400: Annotate for nullable reference types -->
     <Nullable>disable</Nullable>
     <NoWarn>$(NoWarn);nullable</NoWarn>
   </PropertyGroup>
-
   <ItemGroup>
     <Compile
       Include="System.Configuration.ConfigurationManager.cs"
@@ -23,13 +21,11 @@
       Link="Common\System\Obsoletions.cs"
       Condition="'$(TargetFrameworkIdentifier)' != '.NETFramework'"
     />
-
     <Compile
       Include="System.Configuration.ConfigurationManager.netframework.cs"
       Condition="'$(TargetFrameworkIdentifier)' == '.NETFramework'"
     />
   </ItemGroup>
-
   <!-- This reference is for the System.Security.PermissionSet class, which is implemented in corelib, so the reference is only necessary for netstandard. -->
   <ItemGroup Condition="'$(TargetFramework)' == 'netstandard2.0'">
     <ProjectReference
@@ -37,7 +33,6 @@
       PrivateAssets="all"
     />
   </ItemGroup>
-
   <ItemGroup Condition="'$(TargetFrameworkIdentifier)' == '.NETFramework'">
     <Reference Include="System.Configuration" />
   </ItemGroup>

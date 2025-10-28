@@ -2,8 +2,6 @@
 Description:  No errors should be produced by a minimal entry
 Expect:       !Error
 -->
-
-
 <entry xmlns="http://www.w3.org/2005/Atom">
   <title type="text">Atom-Powered Robots Run Amok</title>
   <link href="http://contoso.com/2003/12/13/atom03" />

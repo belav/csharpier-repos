@@ -8,13 +8,11 @@
     <!-- Revert after issue in https://github.com/dotnet/aspnetcore/pull/33187 is resolved. -->
     <BuiltInComInteropSupport>true</BuiltInComInteropSupport>
   </PropertyGroup>
-
   <ItemGroup>
     <Reference Include="Microsoft.AspNetCore.Hosting" />
     <Reference Include="Microsoft.Extensions.Hosting" />
     <Reference Include="Microsoft.AspNetCore.Server.Kestrel" />
   </ItemGroup>
-
   <!-- Link all assemblies -->
   <Target Name="EnsureAllAssembliesAreLinked" BeforeTargets="PrepareForILLink">
     <ItemGroup>

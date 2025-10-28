@@ -7,7 +7,6 @@
       >true</UseXunitExcludesTxtFile
     >
   </PropertyGroup>
-
   <PropertyGroup Condition="'$(TargetsMobile)' != 'true' and '$(TestSingleFile)' != 'true'">
     <_depsFileArgument Condition="'$(GenerateDependencyFile)' == 'true'"
       >--depsfile $(AssemblyName).deps.json</_depsFileArgument
@@ -18,7 +17,6 @@
     <RunScriptCommand Condition="'$(TargetFrameworkIdentifier)' == '.NETFramework'"
       >xunit.console.exe</RunScriptCommand
     >
-
     <RunScriptCommand>$(RunScriptCommand) $(TargetFileName)</RunScriptCommand>
     <RunScriptCommand>$(RunScriptCommand) -xml $(TestResultsName)</RunScriptCommand>
     <RunScriptCommand>$(RunScriptCommand) -nologo</RunScriptCommand>
@@ -36,7 +34,6 @@
       >$(RunScriptCommand) -verbose</RunScriptCommand
     >
   </PropertyGroup>
-
   <PropertyGroup Condition="'$(UseXunitExcludesTxtFile)' != 'true'">
     <!-- Add local and global options to the argument stack. -->
     <RunScriptCommand Condition="'$(XUnitMethodName)' != ''"
@@ -45,26 +42,21 @@
     <RunScriptCommand Condition="'$(XUnitClassName)' != ''"
       >$(RunScriptCommand) -class $(XUnitClassName)</RunScriptCommand
     >
-
     <!-- Add to run argument string -->
     <RunScriptCommand>$(RunScriptCommand)$(_withCategories.Replace(';', ' -trait category='))</RunScriptCommand>
     <RunScriptCommand>$(RunScriptCommand)$(_withoutCategories.Replace(';', ' -notrait category='))</RunScriptCommand>
-
     <!-- User passed in options. -->
     <RunScriptCommand Condition="'$(XUnitOptions)' != ''"
       >$(RunScriptCommand) $(XUnitOptions)</RunScriptCommand
     >
   </PropertyGroup>
-
   <PropertyGroup Condition="'$(UseXunitExcludesTxtFile)' == 'true'">
     <XunitExcludesTxtFileContent>$(_withoutCategories.Replace(';', '%0dcategory='))</XunitExcludesTxtFileContent>
   </PropertyGroup>
-
   <PropertyGroup Condition="'$(TestSingleFile)' == 'true'">
     <!-- Pass the results file -->
     <RunScriptCommand>$(RunScriptCommand) -xml $(TestResultsName)</RunScriptCommand>
   </PropertyGroup>
-
   <ItemGroup Condition="'$(TestSingleFile)' != 'true'">
     <PackageReference
       Include="Microsoft.DotNet.XUnitConsoleRunner"
@@ -78,7 +70,6 @@
       Condition="'$(TargetFrameworkIdentifier)' == '.NETFramework'"
     />
   </ItemGroup>
-
   <!-- Overwrite the runner config file with the app local one. -->
   <Target
     Name="OverwriteDesktopTestRunnerConfigs"
@@ -90,14 +81,12 @@
     <ItemGroup>
       <_testRunnerConfigDestFile Include="$(TargetDir)xunit.console.exe.config" />
     </ItemGroup>
-
     <Copy
       SourceFiles="@(AppConfigWithTargetPath)"
       DestinationFiles="@(_testRunnerConfigDestFile)"
       SkipUnchangedFiles="true"
     />
   </Target>
-
   <!-- ResolveAssemblyReferences is the target that populates ReferenceCopyLocalPaths which is what is copied to output directory. -->
   <Target
     Name="CopyRunnerToOutputDirectory"
@@ -115,7 +104,6 @@
         CopyToOutputDirectory="PreserveNewest"
         Visible="false"
       />
-
       <_xunitConsoleNetCoreExclude
         Condition="'$(GenerateDependencyFile)' != 'true' and '$(XunitConsoleNetCore21AppPath)' != ''"
         Include="$([System.IO.Path]::GetDirectoryName('$(XunitConsoleNetCore21AppPath)'))\xunit.console.deps.json"
@@ -128,7 +116,6 @@
         Visible="false"
       />
     </ItemGroup>
-
     <!-- Workaround for https://github.com/xunit/xunit/issues/1651 -->
     <ItemGroup Condition="'$(ArchiveTests)' != 'true'">
       <None Remove="$(Pkgxunit_runner_visualstudio)\build\net452\xunit.runner.utility.net452.dll" />

@@ -34,7 +34,6 @@ WARNING:   When setting properties based on their current state (for example:
       <ExecuteCmdFullPath>$(OutputPath)$(AssemblyName).$(OutputType.ToLower())</ExecuteCmdFullPath>
     </PropertyGroup>
   </Target>
-
   <!--
   *******************************************************************************************
   TARGET: GenerateExecutionScriptInternal
@@ -56,7 +55,6 @@ WARNING:   When setting properties based on their current state (for example:
       Text="Project depends on $(_CLRTestToRunFileFullPath)."
       Condition="'$(_CLRTestNeedsProjectToRun)' == 'True'"
     />
-
     <PropertyGroup>
       <CoreRunArgs>@(RuntimeHostConfigurationOption -> '-p &quot;%(Identity)=%(Value)&quot;', ' ')</CoreRunArgs>
       <BatchCLRTestEnvironmentCompatibilityCheck Condition="'$(GCStressIncompatible)' == 'true'">
@@ -142,7 +140,6 @@ IF NOT "%RunningIlasmRoundTrip%"=="" (
 )
       ]]>
       </BatchCLRTestEnvironmentCompatibilityCheck>
-
       <BatchCLRTestEnvironmentCompatibilityCheck
         Condition="'$(SynthesizedPgoIncompatible)' == 'true'"
       >
@@ -155,20 +152,17 @@ IF NOT "%CrossGen2SynthesizePgo"=="" (
 )
       ]]>
       </BatchCLRTestEnvironmentCompatibilityCheck>
-
       <BatchCLRTestExitCodePrep Condition="$(_CLRTestNeedsToRun)">
         <![CDATA[
 set CLRTestExpectedExitCode=$(CLRTestExitCode)
 ECHO BEGIN EXECUTION
       ]]>
       </BatchCLRTestExitCodePrep>
-
       <BatchCLRTestArgPrep Condition=" '$(CLRTestExecutionArguments)'!='' ">
         <![CDATA[
 if not defined CLRTestExecutionArguments (set CLRTestExecutionArguments=$(CLRTestExecutionArguments) )
       ]]>
       </BatchCLRTestArgPrep>
-
       <!-- By default, be prepared to do a full check -->
       <BatchCLRTestExitCodeCheck>
         <![CDATA[
@@ -201,10 +195,8 @@ Exit /b 0
       ]]>
       </BatchCLRTestExitCodeCheck>
     </PropertyGroup>
-
     <ItemGroup Condition="$(_CLRTestNeedsToRun)">
       <Clean Include="$(OutputPath)\$(AssemblyName).cmd" />
-
       <BatchCLRTestExecutionScriptArgument Include="debug">
         <HasParam>true</HasParam>
         <ParamName>debuggerFullPath</ParamName>
@@ -221,7 +213,6 @@ Exit /b 0
         </Command>
         <Description>Run testcases under debugger.</Description>
       </BatchCLRTestExecutionScriptArgument>
-
       <BatchCLRTestExecutionScriptArgument Include="e;env">
         <HasParam>true</HasParam>
         <ParamName>dotenvFileFullPath</ParamName>
@@ -237,7 +228,6 @@ Exit /b 0
         </Command>
         <Description>A dotenv file to pass to corerun to set environment variables for the test run.</Description>
       </BatchCLRTestExecutionScriptArgument>
-
       <BatchCLRTestExecutionScriptArgument Include="coreroot">
         <HasParam>true</HasParam>
         <ParamName>CoreRootFullPath</ParamName>
@@ -248,7 +238,6 @@ Exit /b 0
         </Command>
         <Description>Set CORE_ROOT to the specified value before running the test.</Description>
       </BatchCLRTestExecutionScriptArgument>
-
       <BatchCLRTestExecutionScriptArgument Include="usewatcher">
         <HasParam>false</HasParam>
         <Command>
@@ -259,7 +248,6 @@ Exit /b 0
         <Description>Run the tests using the test watcher.</Description>
       </BatchCLRTestExecutionScriptArgument>
     </ItemGroup>
-
     <PropertyGroup>
       <ReflectionRootsXml>$(AssemblyName).reflect.xml</ReflectionRootsXml>
       <BatchLinkerTestLaunchCmds>
@@ -336,7 +324,6 @@ if defined DoLink (
         >"%CORE_ROOT%\corerun.exe" $(CoreRunArgs) %__DotEnvArg%</CLRTestRunFile
       >
       <WatcherRunFile>"%CORE_ROOT%\watchdog.exe" %_WatcherTimeoutMins%</WatcherRunFile>
-
       <BatchCopyCoreShimLocalCmds Condition="'$(CLRTestScriptLocalCoreShim)' == 'true'">
         <![CDATA[
 REM Local CoreShim requested - see MSBuild property 'CLRTestScriptLocalCoreShim'
@@ -396,7 +383,6 @@ set CLRTestExitCode=!ERRORLEVEL!
 set CLRTestExpectedExitCode=0
     ]]>
       </BatchCLRTestLaunchCmds>
-
       <BatchCLRTestLaunchCmds Condition="'$(CLRTestKind)' == 'RunOnly'">
         <![CDATA[
 $(BatchCopyCoreShimLocalCmds)
@@ -407,24 +393,20 @@ set CLRTestExpectedExitCode=0
       ]]>
       </BatchCLRTestLaunchCmds>
     </PropertyGroup>
-
     <PropertyGroup>
       <BatchEnvironmentVariables>
 @(CLRTestBatchEnvironmentVariable -> 'set %(Identity)=%(Value)', '%0d%0a')
 @(CLRTestEnvironmentVariable -> 'set %(Identity)=%(Value)', '%0d%0a')
       </BatchEnvironmentVariables>
     </PropertyGroup>
-
     <Message Text="MSBuildProjectDirectory:$(MSBuildProjectDirectory)" />
     <Message Text="_CLRTestToRunFileFullPath:$(_CLRTestToRunFileFullPath)" />
     <Message Text="CLRTestRunFile:$(CLRTestRunFile)" />
-
     <ItemGroup>
       <_RequiredProperties Include="CLRTestRunFile">
         <Value>$(CLRTestRunFile)</Value>
       </_RequiredProperties>
     </ItemGroup>
-
     <!-- Raise an error if any value in _RequiredProperties is missing  -->
     <Error
       Condition=" '%(_RequiredProperties.Value)'=='' "

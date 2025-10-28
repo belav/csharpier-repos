@@ -1,6 +1,5 @@
 <Project>
   <Import Project="$(MSBuildThisFileDirectory)..\TestUtils\TestProjects.targets" />
-
   <!--
     Some known framework references are downstream of dotnet/runtime and don't exist with the build's
     versions. Remove them before the SDK tries to download them.

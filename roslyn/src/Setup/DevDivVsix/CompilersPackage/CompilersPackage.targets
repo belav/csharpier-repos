@@ -32,7 +32,6 @@
       PrivateAssets="All"
     />
   </ItemGroup>
-
   <!--
     Calculates which external dependencies included in the target VSIX need to be updated with optimization data.
   -->
@@ -44,14 +43,12 @@
       <DesktopCompilerArtifact Condition="'%(DesktopCompilerArtifact.OverwriteNgenOptimizationData)' == 'true' and '$(EnableNgenOptimization)' == 'true' and '$(ApplyNgenOptimization)' != ''">
         <_OptimizeAssembly>$(IntermediateOutputPath)optimized\$([System.IO.Path]::GetFileName(%(DesktopCompilerArtifact.Identity)))</_OptimizeAssembly>
       </DesktopCompilerArtifact>
-
       <OptimizeAssembly
         Include="@(DesktopCompilerArtifact->'%(_OptimizeAssembly)')"
         Condition="'%(DesktopCompilerArtifact._OptimizeAssembly)' != ''"
       />
     </ItemGroup>
   </Target>
-
   <!--
     Copies the artifacts that need optimization data to an intermediate output dir.
   -->
@@ -70,7 +67,6 @@
       <Output TaskParameter="CopiedFiles" ItemName="FileWrites" />
     </Copy>
   </Target>
-
   <Target
     Name="_GenerateSwrFile"
     AfterTargets="Build"
@@ -97,9 +93,7 @@
           > vs.file.ngenApplication="[installDir]\MSBuild\Current\Bin\Roslyn\%(DesktopCompilerArtifact.NGenApplication)"</NGenApplicationString
         >
       </_File>
-
       <_FileEntries Include="file source=&quot;%(_File.Path)&quot;%(_File.NGenArchitectureString)%(_File.NGenPriorityString)%(_File.NGenApplicationString)" />
-
       <!-- Satellite assemblies -->
       <_SatelliteAssembly Include="$(ArtifactsBinDir)Microsoft.CodeAnalysis\$(Configuration)\netstandard2.0\**\*.resources.dll" />
       <_SatelliteAssembly Include="$(ArtifactsBinDir)Microsoft.CodeAnalysis.CSharp\$(Configuration)\netstandard2.0\**\*.resources.dll" />
@@ -107,91 +101,78 @@
       <_SatelliteAssembly Include="$(ArtifactsBinDir)Microsoft.CodeAnalysis.CSharp.Scripting\$(Configuration)\netstandard2.0\**\*.resources.dll" />
       <_SatelliteAssembly Include="$(ArtifactsBinDir)Microsoft.CodeAnalysis.VisualBasic\$(Configuration)\netstandard2.0\**\*.resources.dll" />
       <_SatelliteAssembly Include="$(ArtifactsBinDir)Microsoft.Build.Tasks.CodeAnalysis\$(Configuration)\net472\**\*.resources.dll" />
-
       <_CsSatellite
         Include="@(_SatelliteAssembly)"
         Condition="'%(_SatelliteAssembly.RecursiveDir)' == 'cs\'"
       >
         <_FileEntries>file source=%(Identity)</_FileEntries>
       </_CsSatellite>
-
       <_DeSatellite
         Include="@(_SatelliteAssembly)"
         Condition="'%(_SatelliteAssembly.RecursiveDir)' == 'de\'"
       >
         <_FileEntries>file source=%(Identity)</_FileEntries>
       </_DeSatellite>
-
       <_EsSatellite
         Include="@(_SatelliteAssembly)"
         Condition="'%(_SatelliteAssembly.RecursiveDir)' == 'es\'"
       >
         <_FileEntries>file source=%(Identity)</_FileEntries>
       </_EsSatellite>
-
       <_FrSatellite
         Include="@(_SatelliteAssembly)"
         Condition="'%(_SatelliteAssembly.RecursiveDir)' == 'fr\'"
       >
         <_FileEntries>file source=%(Identity)</_FileEntries>
       </_FrSatellite>
-
       <_ItSatellite
         Include="@(_SatelliteAssembly)"
         Condition="'%(_SatelliteAssembly.RecursiveDir)' == 'it\'"
       >
         <_FileEntries>file source=%(Identity)</_FileEntries>
       </_ItSatellite>
-
       <_JaSatellite
         Include="@(_SatelliteAssembly)"
         Condition="'%(_SatelliteAssembly.RecursiveDir)' == 'ja\'"
       >
         <_FileEntries>file source=%(Identity)</_FileEntries>
       </_JaSatellite>
-
       <_KoSatellite
         Include="@(_SatelliteAssembly)"
         Condition="'%(_SatelliteAssembly.RecursiveDir)' == 'ko\'"
       >
         <_FileEntries>file source=%(Identity)</_FileEntries>
       </_KoSatellite>
-
       <_PlSatellite
         Include="@(_SatelliteAssembly)"
         Condition="'%(_SatelliteAssembly.RecursiveDir)' == 'pl\'"
       >
         <_FileEntries>file source=%(Identity)</_FileEntries>
       </_PlSatellite>
-
       <_PtBrSatellite
         Include="@(_SatelliteAssembly)"
         Condition="'%(_SatelliteAssembly.RecursiveDir)' == 'pt-BR\'"
       >
         <_FileEntries>file source=%(Identity)</_FileEntries>
       </_PtBrSatellite>
-
       <_RuSatellite
         Include="@(_SatelliteAssembly)"
         Condition="'%(_SatelliteAssembly.RecursiveDir)' == 'ru\'"
       >
         <_FileEntries>file source=%(Identity)</_FileEntries>
       </_RuSatellite>
-
       <_TrSatellite
         Include="@(_SatelliteAssembly)"
         Condition="'%(_SatelliteAssembly.RecursiveDir)' == 'tr\'"
       >
         <_FileEntries>file source=%(Identity)</_FileEntries>
       </_TrSatellite>
-
       <_Zh-HansSatellite
         Include="@(_SatelliteAssembly)"
         Condition="'%(_SatelliteAssembly.RecursiveDir)' == 'zh-Hans\'"
       >
         <_FileEntries>file source=%(Identity)</_FileEntries>
       </_Zh-HansSatellite>
-
       <_Zh-HantSatellite
         Include="@(_SatelliteAssembly)"
         Condition="'%(_SatelliteAssembly.RecursiveDir)' == 'zh-Hant\'"
@@ -199,7 +180,6 @@
         <_FileEntries>file source=%(Identity)</_FileEntries>
       </_Zh-HantSatellite>
     </ItemGroup>
-
     <PropertyGroup>
       <_Lines>
         <![CDATA[use vs
@@ -258,14 +238,11 @@ folder InstallDir:\MSBuild\Current\Bin\Roslyn\zh-Hant
 ]]>
       </_Lines>
     </PropertyGroup>
-
     <WriteLinesToFile File="$(_SwrFilePath)" Lines="$(_Lines)" Overwrite="true" />
-
     <ItemGroup>
       <FileWrites Include="$(_SwrFilePath)" />
       <SwrFile Include="$(_SwrFilePath)" />
     </ItemGroup>
   </Target>
-
   <Import Project="..\..\..\NuGet\Microsoft.Net.Compilers.Toolset\DesktopCompilerArtifacts.targets" />
 </Project>

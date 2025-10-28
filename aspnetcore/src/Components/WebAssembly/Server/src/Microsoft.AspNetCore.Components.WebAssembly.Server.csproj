@@ -3,13 +3,11 @@
     <TargetFramework>$(DefaultNetCoreTargetFramework)</TargetFramework>
     <Description>Runtime server features for ASP.NET Core Blazor applications.</Description>
     <IsShippingPackage>true</IsShippingPackage>
-
     <!-- We're deliberately bundling assemblies as content files. Suppress the warning. -->
     <NoWarn>$(NoWarn);NU5100</NoWarn>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
     <Nullable>enable</Nullable>
   </PropertyGroup>
-
   <ItemGroup>
     <Reference Include="Microsoft.AspNetCore.Components.Endpoints" />
     <Reference Include="Microsoft.AspNetCore.StaticFiles" />
@@ -19,11 +17,9 @@
       PrivateAssets="All"
     />
   </ItemGroup>
-
   <ItemGroup>
     <InternalsVisibleTo Include="Microsoft.AspNetCore.Components.WebAssembly.Server.Tests" />
   </ItemGroup>
-
   <ItemGroup>
     <Compile
       Include="$(ComponentsSharedSourceRoot)\src\CacheHeaderSettings.cs"
@@ -33,14 +29,12 @@
       Include="$(SharedSourceRoot)\CommandLineUtils\Utilities\DotNetMuxer.cs"
       Link="Shared\DotNetMuxer.cs"
     />
-
     <Content
       Include="build\**"
       Pack="true"
       PackagePath="build\%(RecursiveDir)%(FileName)%(Extension)"
     />
   </ItemGroup>
-
   <!-- Emit debug proxy binaries to output directory. This lets us launch it as a separate process while keeping the build output self-contained.  -->
   <Target Name="IncludeDebugProxyBinariesAsContent" BeforeTargets="AssignTargetPaths">
     <ItemGroup>

@@ -13,16 +13,11 @@ Copyright (c) .NET Foundation. All rights reserved.
   <PropertyGroup>
     <!-- Avoid having the rid show up in output paths -->
     <AppendRuntimeIdentifierToOutputPath>false</AppendRuntimeIdentifierToOutputPath>
-
     <OutputType>exe</OutputType>
-
     <IsPackable>false</IsPackable>
-
     <WarnOnPackingNonPackableProject>false</WarnOnPackingNonPackableProject>
-
     <!-- Turn off symbol publishing by default -->
     <CopyOutputSymbolsToPublishDirectory>false</CopyOutputSymbolsToPublishDirectory>
-
     <!-- Trimmer defaults -->
     <PublishTrimmed Condition="'$(PublishTrimmed)' == ''">true</PublishTrimmed>
     <TrimMode
@@ -34,7 +29,6 @@ Copyright (c) .NET Foundation. All rights reserved.
       >full</TrimMode
     >
     <TrimmerRemoveSymbols Condition="'$(TrimmerRemoveSymbols)' == ''">false</TrimmerRemoveSymbols>
-
     <!-- Static web assets defaults -->
     <StaticWebAssetBasePath Condition="'$(StaticWebAssetBasePath)' == ''">/</StaticWebAssetBasePath>
     <StaticWebAssetProjectMode Condition="'$(StaticWebAssetProjectMode)' == ''"
@@ -46,7 +40,6 @@ Copyright (c) .NET Foundation. All rights reserved.
     <StaticWebAssetsAdditionalPublishProperties>$(StaticWebAssetsAdditionalPublishProperties);BuildProjectReferences=false;ResolveAssemblyReferencesFindRelatedSatellites=true</StaticWebAssetsAdditionalPublishProperties>
     <StaticWebAssetsAdditionalPublishPropertiesToRemove>$(StaticWebAssetsAdditionalPublishPropertiesToRemove);NoBuild;RuntimeIdentifier</StaticWebAssetsAdditionalPublishPropertiesToRemove>
   </PropertyGroup>
-
   <ItemGroup>
     <ProjectCapability Include="WebAssembly" />
   </ItemGroup>

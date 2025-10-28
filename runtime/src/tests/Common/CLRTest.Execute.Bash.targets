@@ -34,7 +34,6 @@ WARNING:   When setting properties based on their current state (for example:
       <ExecuteShFullPath>$(OutputPath)$(AssemblyName).$(OutputType.ToLower())</ExecuteShFullPath>
     </PropertyGroup>
   </Target>
-
   <!--
   *******************************************************************************************
   TARGET: GenerateExecutionScriptInternal
@@ -56,7 +55,6 @@ WARNING:   When setting properties based on their current state (for example:
       Text="Project depends on $(_CLRTestToRunFileFullPath)."
       Condition="'$(_CLRTestNeedsProjectToRun)' == 'True'"
     />
-
     <PropertyGroup>
       <IncompatibleTestBashScriptExitCode>0</IncompatibleTestBashScriptExitCode>
       <CoreRunArgs>@(RuntimeHostConfigurationOption -> '-p &quot;%(Identity)=%(Value)&quot;', ' ')</CoreRunArgs>
@@ -64,7 +62,6 @@ WARNING:   When setting properties based on their current state (for example:
       <IosTestTarget Condition="'$(TargetOS)' == 'ios'">ios-device</IosTestTarget>
       <IosTestTarget Condition="'$(TargetOS)' == 'tvossimulator'">tvos-simulator</IosTestTarget>
       <IosTestTarget Condition="'$(TargetOS)' == 'tvos'">tvos-device</IosTestTarget>
-
       <BashCLRTestEnvironmentCompatibilityCheck Condition="'$(GCStressIncompatible)' == 'true'">
         <![CDATA[
 $(BashCLRTestEnvironmentCompatibilityCheck)
@@ -148,17 +145,14 @@ then
 fi
       ]]>
       </BashCLRTestEnvironmentCompatibilityCheck>
-
       <BashCLRTestExitCodePrep Condition="$(_CLRTestNeedsToRun)">
         <![CDATA[
 export CLRTestExpectedExitCode=$(CLRTestExitCode)
 echo BEGIN EXECUTION]]>
       </BashCLRTestExitCodePrep>
-
       <BashCLRTestArgPrep Condition=" '$(CLRTestExecutionArguments)'!='' ">
         <![CDATA[if [ -z ${CLRTestExecutionArguments+x} ]%3B then CLRTestExecutionArguments=($(CLRTestExecutionArguments))%3B fi]]>
       </BashCLRTestArgPrep>
-
       <!-- By default, be prepared to do a full check -->
       <BashCLRTestExitCodeCheck>
         <![CDATA[
@@ -182,10 +176,8 @@ fi
       ]]>
       </BashCLRTestExitCodeCheck>
     </PropertyGroup>
-
     <ItemGroup Condition="$(_CLRTestNeedsToRun)">
       <Clean Include="$(OutputPath)\$(AssemblyName).sh" />
-
       <BashCLRTestExecutionScriptArgument Include="debug">
         <HasParam>true</HasParam>
         <ParamText>=*</ParamText>
@@ -202,7 +194,6 @@ fi
         </Command>
         <Description>Run testcases under debugger.</Description>
       </BashCLRTestExecutionScriptArgument>
-
       <BashCLRTestExecutionScriptArgument Include="debug">
         <HasParam>true</HasParam>
         <ParamText></ParamText>
@@ -220,7 +211,6 @@ fi
         </Command>
         <Description>Run testcases under debugger.</Description>
       </BashCLRTestExecutionScriptArgument>
-
       <BashCLRTestExecutionScriptArgument Include="coreroot">
         <HasParam>true</HasParam>
         <ParamText>=*</ParamText>
@@ -232,7 +222,6 @@ fi
         </Command>
         <Description>Set CORE_ROOT to the specified value before running the test.</Description>
       </BashCLRTestExecutionScriptArgument>
-
       <BashCLRTestExecutionScriptArgument Include="coreroot">
         <HasParam>true</HasParam>
         <ParamText></ParamText>
@@ -245,7 +234,6 @@ fi
         </Command>
         <Description>Set CORE_ROOT to the specified value before running the test.</Description>
       </BashCLRTestExecutionScriptArgument>
-
       <BashCLRTestExecutionScriptArgument Include="e;env">
         <HasParam>true</HasParam>
         <ParamText>=*</ParamText>
@@ -263,7 +251,6 @@ fi
         </Command>
         <Description>A dotenv file to pass to corerun to set environment variables for the test run.</Description>
       </BashCLRTestExecutionScriptArgument>
-
       <BashCLRTestExecutionScriptArgument Include="e;env">
         <HasParam>true</HasParam>
         <ParamText></ParamText>
@@ -282,7 +269,6 @@ fi
         </Command>
         <Description>A dotenv file to pass to corerun to set environment variables for the test run.</Description>
       </BashCLRTestExecutionScriptArgument>
-
       <BashCLRTestExecutionScriptArgument Include="usewatcher">
         <HasParam>false</HasParam>
         <Command>
@@ -291,7 +277,6 @@ fi
         <Description>Run the tests using the test watcher.</Description>
       </BashCLRTestExecutionScriptArgument>
     </ItemGroup>
-
     <PropertyGroup>
       <ReflectionRootsXml>$(AssemblyName).reflect.xml</ReflectionRootsXml>
       <BashLinkerTestLaunchCmds>
@@ -384,7 +369,6 @@ fi
         >"$CORE_ROOT/corerun" $(CoreRunArgs)  ${__DotEnvArg}</CLRTestRunFile
       >
       <WatcherRunFile>"$CORE_ROOT/watchdog" $_WatcherTimeoutMins</WatcherRunFile>
-
       <!-- Note that this overwrites CLRTestBashPreCommands rather than adding to it. -->
       <CLRTestBashPreCommands
         Condition="'$(CLRTestKind)' == 'BuildAndRun' and '$(TargetArchitecture)' == 'wasm'"
@@ -405,7 +389,6 @@ $__Command msbuild $CORE_ROOT/wasm-test-runner/WasmTestRunner.proj /p:NetCoreApp
 
    ]]>
       </CLRTestBashPreCommands>
-
       <BashCLRTestLaunchCmds
         Condition="'$(CLRTestKind)' == 'BuildAndRun' And '$(TargetOS)' != 'browser' And '$(TargetOS)' != 'android' And '$(TargetArchitecture)' != 'arm64'"
       >
@@ -559,24 +542,20 @@ CLRTestExpectedExitCode=0
       ]]>
       </BashCLRTestLaunchCmds>
     </PropertyGroup>
-
     <PropertyGroup>
       <BashEnvironmentVariables>
 @(CLRTestBashEnvironmentVariable -> 'export %(Identity)=%(Value)', '%0a')
 @(CLRTestEnvironmentVariable -> 'export %(Identity)=%(Value)', '%0a')
       </BashEnvironmentVariables>
     </PropertyGroup>
-
     <Message Text="MSBuildProjectDirectory:$(MSBuildProjectDirectory)" />
     <Message Text="_CLRTestToRunFileFullPath:$(_CLRTestToRunFileFullPath)" />
     <Message Text="CLRTestRunFile:$(CLRTestRunFile)" />
-
     <ItemGroup>
       <_RequiredProperties Include="CLRTestRunFile">
         <Value>$(CLRTestRunFile)</Value>
       </_RequiredProperties>
     </ItemGroup>
-
     <!-- Raise an error if any value in _RequiredProperties is missing  -->
     <Error
       Condition=" '%(_RequiredProperties.Value)'=='' "
@@ -622,7 +601,6 @@ done
 $(BashCLRTestArgPrep)
       ]]>
       </BashCLRTestArgPrep>
-
       <CLRTestExecutionScriptHeader Condition="'$(TargetOS)' == 'android'">
         <![CDATA[
 %23%21/usr/bin/env bash
@@ -634,7 +612,6 @@ set -e
 %23%21/usr/bin/env bash
       ]]>
       </CLRTestExecutionScriptHeader>
-
       <!-- NOTE! semicolons must be escaped with %3B boooo -->
       <_CLRTestExecutionScriptText>
         <![CDATA[
@@ -700,11 +677,9 @@ $(BashCLRTestExitCodeCheck)
       ]]>
       </_CLRTestExecutionScriptText>
     </PropertyGroup>
-
     <PropertyGroup>
       <ExecutionBashScriptPath>$(OutputPath)/$(AssemblyName).sh</ExecutionBashScriptPath>
     </PropertyGroup>
-
     <!-- Write the file.
          Note: under the hood, this will rely on Environment.NewLine for line
          endings. This means that if the scripts are being generated on Windows,

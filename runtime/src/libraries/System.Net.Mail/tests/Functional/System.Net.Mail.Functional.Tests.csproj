@@ -35,14 +35,12 @@
       Link="Common\System\Threading\Tasks\TaskTimeoutExtensions.cs"
     />
   </ItemGroup>
-
   <ItemGroup Condition="'$(TargetPlatformIdentifier)' != 'browser'">
     <Compile Include="SmtpClientTest.cs" />
     <Compile Include="SmtpClientCredentialsTest.cs" />
     <Compile Include="LoggingTest.cs" />
     <Compile Include="LoopbackSmtpServer.cs" />
   </ItemGroup>
-
   <!-- NTLM/Negotiate authentication fakes -->
   <ItemGroup>
     <Compile
@@ -62,7 +60,6 @@
       Link="Common\System\Net\Security\FakeNegotiateServer.cs"
     />
   </ItemGroup>
-
   <!-- Unix specific files (NT Authentication) -->
   <ItemGroup Condition="'$(TargetPlatformIdentifier)' != 'windows' and '$(TargetPlatformIdentifier)' != 'browser'">
     <Compile
@@ -78,7 +75,6 @@
       Link="Common\System\Net\Capability.Security.Unix.cs"
     />
   </ItemGroup>
-
   <!-- Windows specific files (NT Authentication) -->
   <ItemGroup Condition="'$(TargetPlatformIdentifier)' == 'windows'">
     <Compile

@@ -130,7 +130,6 @@
       Include="$(MSBuildThisFileDirectory)..\AspNetCoreModuleV2\OutOfProcessRequestHandler\OutOfProcessRequestHandler.vcxproj"
       PdbLocation="$(ArtifactsBinDir)OutOfProcessRequestHandler\Win32\$(Configuration)\aspnetcorev2_outofprocess.pdb"
     />
-
     <ShimComponents
       VCPlatform="x64"
       Platform="x64"
@@ -212,7 +211,6 @@
       Include="$(MSBuildThisFileDirectory)..\AspNetCoreModuleV2\OutOfProcessRequestHandler\OutOfProcessRequestHandler.vcxproj"
       PdbLocation="$(ArtifactsBinDir)OutOfProcessRequestHandler\Win32\$(Configuration)\aspnetcorev2_outofprocess.pdb"
     />
-
     <InProcessComponents
       VCPlatform="x64"
       Platform="x64"
@@ -252,7 +250,6 @@
       Include="$(MSBuildThisFileDirectory)..\AspNetCoreModuleV2\InProcessRequestHandler\InProcessRequestHandler.vcxproj"
       PdbLocation="$(ArtifactsBinDir)InProcessRequestHandler\Win32\$(Configuration)\aspnetcorev2_inprocess.pdb"
     />
-
     <RunShimComponents
       VCPlatform="$(NativeVCPlatform)"
       Platform="$(NativePlatform)"
@@ -280,7 +277,6 @@
       Include="$(MSBuildThisFileDirectory)..\AspNetCoreModuleV2\OutOfProcessRequestHandler\OutOfProcessRequestHandler.vcxproj"
       PdbLocation="$(ArtifactsBinDir)OutOfProcessRequestHandler\$(NativeVCPlatform)\$(Configuration)\aspnetcorev2_outofprocess.pdb"
     />
-
     <RunInProcessComponents
       VCPlatform="$(NativeVCPlatform)"
       Platform="$(NativePlatform)"

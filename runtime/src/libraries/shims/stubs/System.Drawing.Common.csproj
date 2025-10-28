@@ -7,7 +7,6 @@
       >false</DisableImplicitFrameworkReferences
     >
   </PropertyGroup>
-
   <ItemGroup>
     <ForwardedType Include="System.Drawing.Bitmap" />
     <ForwardedType Include="System.Drawing.BitmapSuffixInSameAssemblyAttribute" />

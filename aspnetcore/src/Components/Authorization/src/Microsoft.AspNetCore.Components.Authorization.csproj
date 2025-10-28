@@ -7,7 +7,6 @@
     <IsTrimmable>true</IsTrimmable>
     <Nullable>enable</Nullable>
   </PropertyGroup>
-
   <ItemGroup>
     <Reference Include="Microsoft.AspNetCore.Authorization" />
     <Reference Include="Microsoft.AspNetCore.Components" />

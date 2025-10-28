@@ -9,7 +9,6 @@
 Commonly Used Types:
 System.BinaryData</PackageDescription>
   </PropertyGroup>
-
   <ItemGroup>
     <Compile Include="System\BinaryData.cs" />
     <Compile
@@ -22,7 +21,6 @@ System.BinaryData</PackageDescription>
     />
     <Compile Include="System\BinaryDataConverter.cs" />
   </ItemGroup>
-
   <ItemGroup Condition="'$(TargetFrameworkIdentifier)' != '.NETCoreApp'">
     <Compile
       Include="$(CommonPath)System\Threading\Tasks\TaskToAsyncResult.cs"
@@ -30,11 +28,9 @@ System.BinaryData</PackageDescription>
     />
     <Compile Include="$(CoreLibSharedDir)System\Diagnostics\CodeAnalysis\RequiresDynamicCodeAttribute.cs" />
   </ItemGroup>
-
   <ItemGroup>
     <ProjectReference Include="$(LibrariesProjectRoot)System.Text.Json\src\System.Text.Json.csproj" />
   </ItemGroup>
-
   <ItemGroup Condition="'$(TargetFrameworkIdentifier)' != '.NETCoreApp'">
     <PackageReference Include="System.Memory" Version="$(SystemMemoryVersion)" />
   </ItemGroup>

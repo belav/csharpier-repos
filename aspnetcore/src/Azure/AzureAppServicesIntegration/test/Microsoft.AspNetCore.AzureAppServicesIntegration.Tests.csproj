@@ -2,7 +2,6 @@
   <PropertyGroup>
     <TargetFramework>$(DefaultNetCoreTargetFramework)</TargetFramework>
   </PropertyGroup>
-
   <ItemGroup>
     <Reference Include="Microsoft.AspNetCore.AzureAppServicesIntegration" />
     <Reference Include="Microsoft.AspNetCore.AzureAppServices.HostingStartup" />

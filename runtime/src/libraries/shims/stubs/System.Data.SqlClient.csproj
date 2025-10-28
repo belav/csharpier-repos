@@ -2,7 +2,6 @@
   <PropertyGroup>
     <StrongNameKeyId>Microsoft</StrongNameKeyId>
   </PropertyGroup>
-
   <ItemGroup>
     <ForwardedType Include="Microsoft.SqlServer.Server.DataAccessKind" />
     <ForwardedType Include="Microsoft.SqlServer.Server.Format" />

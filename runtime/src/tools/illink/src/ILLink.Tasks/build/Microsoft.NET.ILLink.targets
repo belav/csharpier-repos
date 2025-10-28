@@ -22,7 +22,6 @@ Copyright (c) .NET Foundation. All rights reserved.
     <!-- Used to enable incremental build for the ILLink target. -->
     <_LinkSemaphore>$(IntermediateLinkDir)Link.semaphore</_LinkSemaphore>
   </PropertyGroup>
-
   <ItemGroup>
     <AssemblyAttribute
       Condition="'$(IsTrimmable)' == 'true'"
@@ -32,7 +31,6 @@ Copyright (c) .NET Foundation. All rights reserved.
       <_Parameter2>True</_Parameter2>
     </AssemblyAttribute>
   </ItemGroup>
-
   <!-- We disable features for trimmed apps here so that the feature
       switches can flow to the runtimeconfig.json. Features are disabled
       by default since they may require assemblies, types or members that
@@ -99,7 +97,6 @@ Copyright (c) .NET Foundation. All rights reserved.
       >false</_UseManagedNtlm
     >
   </PropertyGroup>
-
   <PropertyGroup Condition="'$(SuppressTrimAnalysisWarnings)' == '' And '$(PublishTrimmed)' == 'true' And '$(EnableTrimAnalyzer)' != 'true'">
     <!-- Suppress for WPF/WinForms -->
     <SuppressTrimAnalysisWarnings
@@ -111,18 +108,15 @@ Copyright (c) .NET Foundation. All rights reserved.
       >false</SuppressTrimAnalysisWarnings
     >
   </PropertyGroup>
-
   <!-- Suppress warnings produced by the trimming or by the ILLink Roslyn analyzer. -->
   <PropertyGroup Condition="'$(SuppressTrimAnalysisWarnings)' == 'true'">
     <_ExtraTrimmerArgs>$(_ExtraTrimmerArgs) --notrimwarn</_ExtraTrimmerArgs>
     <EnableTrimAnalyzer Condition="'$(EnableTrimAnalyzer)' == ''">false</EnableTrimAnalyzer>
   </PropertyGroup>
-
   <!-- Disable Redundant Warning Suppressions by default-->
   <PropertyGroup Condition="'$(_TrimmerShowRedundantSuppressions)' != 'true' And '$(PublishTrimmed)' == 'true'">
     <NoWarn>$(NoWarn);IL2121</NoWarn>
   </PropertyGroup>
-
   <!--
     ============================================================
                      ILLink
@@ -143,7 +137,6 @@ Copyright (c) .NET Foundation. All rights reserved.
       Condition="'$(_ILLinkExitCode)' != '' And '$(_ILLinkExitCode)' != '0'"
       ResourceName="ILLinkFailed"
     />
-
     <ItemGroup>
       <_LinkedResolvedFileToPublish
         Include="@(_LinkedResolvedFileToPublishCandidate)"
@@ -153,7 +146,6 @@ Copyright (c) .NET Foundation. All rights reserved.
       <ResolvedFileToPublish Remove="@(_PDBToLink)" />
       <ResolvedFileToPublish Include="@(_LinkedResolvedFileToPublish)" />
     </ItemGroup>
-
     <!-- Remove assemblies from inputs to GenerateDepsFile. See
          https://github.com/dotnet/sdk/pull/3086 -->
     <ItemGroup>
@@ -161,7 +153,6 @@ Copyright (c) .NET Foundation. All rights reserved.
         Include="@(ManagedAssemblyToLink)"
         Condition="!Exists('$(IntermediateLinkDir)%(Filename)%(Extension)')"
       />
-
       <ResolvedCompileFileDefinitions Remove="@(_RemovedManagedAssembly)" />
       <RuntimeCopyLocalItems Remove="@(_RemovedManagedAssembly)" />
       <RuntimeTargetsCopyLocalItems Remove="@(_RemovedManagedAssembly)" />
@@ -169,7 +160,6 @@ Copyright (c) .NET Foundation. All rights reserved.
       <RuntimePackAsset Remove="@(_RemovedManagedAssembly)" />
     </ItemGroup>
   </Target>
-
   <!--
     ============================================================
                      _RunILLink
@@ -199,7 +189,6 @@ Copyright (c) .NET Foundation. All rights reserved.
         >dotnet.exe</_DotNetHostFileName
       >
     </PropertyGroup>
-
     <Delete Files="@(_LinkedResolvedFileToPublishCandidate)" />
     <ILLink
       AssemblyPaths="@(ManagedAssemblyToLink)"
@@ -234,14 +223,12 @@ Copyright (c) .NET Foundation. All rights reserved.
     >
       <Output TaskParameter="ExitCode" PropertyName="_ILLinkExitCode" />
     </ILLink>
-
     <Touch
       Files="$(_LinkSemaphore)"
       AlwaysCreate="true"
       Condition=" '$(_ILLinkExitCode)' == '0' "
     />
   </Target>
-
   <!--
     ============================================================
                      PrepareForILLink
@@ -261,7 +248,6 @@ Copyright (c) .NET Foundation. All rights reserved.
       Condition="'$(PublishTrimmed)' == 'true' And '$(SuppressTrimAnalysisWarnings)' == 'true'"
       ResourceName="ILLinkOptimizedAssemblies"
     />
-
     <!-- The defaults currently root non-framework assemblies, which
          is a no-op for portable apps. If we later support more ways
          to customize the behavior we can allow linking portable apps
@@ -271,13 +257,11 @@ Copyright (c) .NET Foundation. All rights reserved.
       Condition="'$(RunILLink)' != 'false' And '$(SelfContained)' != 'true'"
       ResourceName="ILLinkNotSupportedError"
     />
-
     <Warning
       Condition="'$(SuppressILLinkExplicitPackageReferenceWarning)' != 'true' And
                         '%(PackageReference.Identity)' == 'Microsoft.NET.ILLink.Tasks' And '%(PackageReference.IsImplicitlyDefined)' != 'true'"
       Text="Delete explicit 'Microsoft.NET.ILLink.Tasks' package reference in your project file to avoid versioning problems."
     />
-
     <PropertyGroup Condition=" '$(ILLinkWarningLevel)' == '' ">
       <ILLinkWarningLevel
         Condition=" '$(EffectiveAnalysisLevel)' != '' And
@@ -286,29 +270,24 @@ Copyright (c) .NET Foundation. All rights reserved.
       >
       <ILLinkWarningLevel Condition=" '$(ILLinkWarningLevel)' == '' ">0</ILLinkWarningLevel>
     </PropertyGroup>
-
     <!-- In .NET 7, TrimmerDefaultAction is deprecated. TrimMode can be used for the supported configurations. -->
     <Warning
       Condition="'$(TrimmerDefaultAction)' != ''"
       Text="Property 'TrimmerDefaultAction' is deprecated in .NET 7 and higher and will be ignored. Use TrimMode instead."
     />
-
     <PropertyGroup Condition="'@(_ILLinkSuppressions->Count())' != '0'">
       <_ExtraTrimmerArgs>$(_ExtraTrimmerArgs) --link-attributes "@(_ILLinkSuppressions->'%(Identity)', '" --link-attributes "')"</_ExtraTrimmerArgs>
     </PropertyGroup>
-
     <!-- Set up TrimMode. -->
     <PropertyGroup>
       <TrimMode Condition="'$(TrimMode)' == ''">full</TrimMode>
     </PropertyGroup>
-
     <PropertyGroup>
       <ILLinkTreatWarningsAsErrors Condition=" '$(ILLinkTreatWarningsAsErrors)' == '' "
         >$(TreatWarningsAsErrors)</ILLinkTreatWarningsAsErrors
       >
       <TrimmerSingleWarn Condition=" '$(TrimmerSingleWarn)' == '' ">true</TrimmerSingleWarn>
     </PropertyGroup>
-
     <!-- Set a default value for TrimmerRemoveSymbols unless set explicitly. -->
     <PropertyGroup Condition=" '$(TrimmerRemoveSymbols)' == '' ">
       <!-- The default is to remove symbols when debugger support is disabled, and keep them otherwise. -->
@@ -319,14 +298,12 @@ Copyright (c) .NET Foundation. All rights reserved.
         >false</TrimmerRemoveSymbols
       >
     </PropertyGroup>
-
     <!-- Set IsTrimmable for any assemblies that already have customized TrimMode. -->
     <ItemGroup>
       <ManagedAssemblyToLink Condition=" '%(ManagedAssemblyToLink.TrimMode)' != '' ">
         <IsTrimmable>true</IsTrimmable>
       </ManagedAssemblyToLink>
     </ItemGroup>
-
     <!-- SetIsTrimmable for any assemblies listed in TrimmableAssembly. -->
     <JoinItems
       Left="@(ManagedAssemblyToLink)"
@@ -341,12 +318,10 @@ Copyright (c) .NET Foundation. All rights reserved.
       <ManagedAssemblyToLink Remove="@(_TrimmableManagedAssemblyToLink)" />
       <ManagedAssemblyToLink Include="@(_TrimmableManagedAssemblyToLink)" IsTrimmable="true" />
     </ItemGroup>
-
     <!-- Root the main assembly entry point. -->
     <ItemGroup>
       <TrimmerRootAssembly Include="@(IntermediateAssembly)" RootMode="EntryPoint" />
     </ItemGroup>
-
     <ItemGroup>
       <!-- Don't collapse to a single warning for the intermediate assembly.
            This just sets metadata on the items in ManagedAssemblyToLink that came from IntermediateAssembly. --><!-- Find ManagedAssemblyToLink _except_ IntermediateAssembly -->
@@ -365,7 +340,6 @@ Copyright (c) .NET Foundation. All rights reserved.
       <!-- Replace these items in ManagedAssemblyToLink. -->
       <ManagedAssemblyToLink Remove="@(_SingleWarnIntermediateAssembly)" />
       <ManagedAssemblyToLink Include="@(_SingleWarnIntermediateAssembly)" />
-
       <!-- Don't collapse to a single warning for project references -->
       <ManagedAssemblyToLink Condition=" '%(ManagedAssemblyToLink.ProjectReferenceOriginalItemSpec)' != '' ">
         <TrimmerSingleWarn Condition=" '%(ManagedAssemblyToLink.TrimmerSingleWarn)' == '' "
@@ -373,7 +347,6 @@ Copyright (c) .NET Foundation. All rights reserved.
         >
       </ManagedAssemblyToLink>
     </ItemGroup>
-
     <ItemGroup>
       <_TrimmerFeatureSettings
         Include="@(RuntimeHostConfigurationOption)"
@@ -381,7 +354,6 @@ Copyright (c) .NET Foundation. All rights reserved.
       />
     </ItemGroup>
   </Target>
-
   <!--
     ============================================================
                      _ComputeManagedAssemblyToLink
@@ -403,7 +375,6 @@ Copyright (c) .NET Foundation. All rights reserved.
     <ComputeManagedAssemblies Assemblies="@(ResolvedFileToPublish->WithMetadataValue('PostprocessAssembly', 'true'))">
       <Output TaskParameter="ManagedAssemblies" ItemName="ManagedAssemblyToLink" />
     </ComputeManagedAssemblies>
-
     <ItemGroup>
       <!-- ILLink implicitly picks up PDBs next to input assemblies. We will filter these out of the publish set. -->
       <__PDBToLink
@@ -412,7 +383,6 @@ Copyright (c) .NET Foundation. All rights reserved.
       />
       <_PDBToLink Include="@(ResolvedFileToPublish)" Exclude="@(__PDBToLink)" />
     </ItemGroup>
-
     <ItemGroup>
       <_LinkedResolvedFileToPublishCandidate Include="@(ManagedAssemblyToLink->'$(IntermediateLinkDir)%(Filename)%(Extension)')" />
       <_LinkedResolvedFileToPublishCandidate Include="@(_PDBToLink->'$(IntermediateLinkDir)%(Filename)%(Extension)')" />

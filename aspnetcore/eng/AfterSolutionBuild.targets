@@ -2,7 +2,6 @@
   <Import Project="tools\RepoTasks\RepoTasks.tasks" />
   <Import Project="SharedFramework.External.props" />
   <Import Project="SharedFramework.Local.props" />
-
   <!-- This is temporary until we can use FrameworkReference to build our own packages. -->
   <Target
     Name="RemoveSharedFrameworkOnlyRefsFromNuspec"
@@ -15,7 +14,6 @@
         Exclude="$(ArtifactsShippingPackagesDir)*.symbols.nupkg"
       />
     </ItemGroup>
-
     <RepoTasks.RemoveSharedFrameworkDependencies
       Condition="'@(_BuildOutput->Count())' != '0'"
       Files="@(_BuildOutput)"

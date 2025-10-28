@@ -3,11 +3,9 @@
     <RootNamespace>System.Xml.Tests</RootNamespace>
     <TargetFramework>$(NetCoreAppCurrent)</TargetFramework>
   </PropertyGroup>
-
   <ItemGroup>
     <RdXmlFile Include="default.rd.xml" />
   </ItemGroup>
-
   <PropertyGroup Condition="'$(TargetOS)' == 'browser'">
     <!-- This doesn't run on V8 shell because https://bugs.chromium.org/p/v8/issues/detail?id=12541 -->
     <Scenario>WasmTestOnBrowser</Scenario>
@@ -16,7 +14,6 @@
     <DefineConstants>$(DefineConstants);TARGET_BROWSER</DefineConstants>
     <WasmXHarnessMonoArgs>--setenv=XHARNESS_LOG_TEST_START=true --no-memory-snapshot</WasmXHarnessMonoArgs>
   </PropertyGroup>
-
   <ItemGroup>
     <Compile Include="AllowDefaultResolverContext.cs" />
     <Compile Include="ExceptionVerifier.cs" />
@@ -25,13 +22,11 @@
       Link="Common\TestUtilities\System\DisableParallelizationPerAssembly.cs"
     />
   </ItemGroup>
-
   <ItemGroup>
     <Compile Include="Misc\XmlThrowingResolverTests.cs" />
     <Compile Include="Misc\XmlSecureResolverTests.cs" />
     <Compile Include="Misc\XmlUrlResolverTests.cs" />
   </ItemGroup>
-
   <ItemGroup>
     <Compile Include="Readers\CharCheckingReader\CharReaderTests.cs" />
     <Compile Include="Readers\CharCheckingReader\InheritedCases.cs" />
@@ -83,7 +78,6 @@
     <Compile Include="Readers\WrappedReader\InheritedCases.cs" />
     <Compile Include="Readers\WrappedReader\WrappedReaderTests.cs" />
   </ItemGroup>
-
   <ItemGroup>
     <Compile Include="Writers\RwFactory\CFactoryModule.cs" />
     <Compile Include="Writers\RwFactory\CModCmdLine.cs" />
@@ -131,7 +125,6 @@
     <Compile Include="Writers\XmlWriterApi\WriteEndDocumentOnCloseTest.cs" />
     <Compile Include="Writers\XmlWriterApi\XmlWriterTestCaseBase.cs" />
   </ItemGroup>
-
   <ItemGroup>
     <Compile Include="XmlConvert\EncodeDecodeTests.cs" />
     <Compile Include="XmlConvert\MiscellaneousTests.cs" />
@@ -168,7 +161,6 @@
     <Compile Include="XmlConvert\XmlIdeographicCharConvertTests2.cs" />
     <Compile Include="XmlConvert\XmlIdeographicCharConvertTests3.cs" />
   </ItemGroup>
-
   <ItemGroup>
     <Compile Include="XmlDocument\XmlDocumentTests\LoadTests.cs" />
     <Compile Include="XmlDocument\XmlAttributeCollectionTests\AppendTests.cs" />
@@ -259,7 +251,6 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
-
   <ItemGroup>
     <Compile Include="XmlNodeReader\System.Xml.XmlNodeReader.Tests\NodeReaderTestHelper.cs" />
     <Compile Include="XmlNodeReader\System.Xml.XmlNodeReader.Tests\XmlNodeReaderConstructionTests.cs" />
@@ -268,7 +259,6 @@
     <Compile Include="XmlNodeReader\System.Xml.XmlNodeReader.Tests\XmlNodeReaderMoveToAttributeTests.cs" />
     <Compile Include="XmlNodeReader\System.Xml.XmlNodeReader.Tests\XmlNodeReaderReadTests.cs" />
   </ItemGroup>
-
   <ItemGroup>
     <Compile Include="XmlReader\ReadContentAs\ReadAsArrayTests.cs" />
     <Compile Include="XmlReader\ReadContentAs\ReadAsBooleanAttributeTests.cs" />
@@ -338,7 +328,6 @@
       Visible="false"
     />
   </ItemGroup>
-
   <ItemGroup>
     <Compile Include="XmlResolver\System.Xml.XmlResolver.Tests\DummyStream.cs" />
     <Compile Include="XmlResolver\System.Xml.XmlResolver.Tests\XmlPreloadedResolverAddRemoveTests.cs" />
@@ -375,7 +364,6 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
-
   <ItemGroup>
     <Compile Include="XmlSchema\XmlSchemaSet\CError.cs" />
     <Compile Include="XmlSchema\XmlSchemaSet\TC_SchemaSet.cs" />
@@ -434,7 +422,6 @@
       Visible="false"
     />
   </ItemGroup>
-
   <ItemGroup>
     <Compile Include="XmlSerializer\XmlSerializerTests.cs" />
     <Compile Include="XmlSerializer\XmlSerializerTests.Internal.cs" />
@@ -442,7 +429,6 @@
     <Compile Include="..\..\System.Runtime.Serialization.Xml\tests\SerializationTypes.RuntimeOnly.cs" />
     <None Include="..\..\System.Runtime.Serialization.Xml\tests\SerializationTypes.cs" />
   </ItemGroup>
-
   <ItemGroup>
     <Compile Include="XmlWriter\DisposeTests.cs" />
     <Compile Include="XmlWriter\WriteWithEncoding.cs" />
@@ -451,7 +437,6 @@
     <Compile Include="XmlWriter\WriteWithXmlnsNewLine.cs" />
     <Compile Include="XmlWriter\XmlTextWriterTests.cs" />
   </ItemGroup>
-
   <ItemGroup>
     <Compile Include="XPath\XPathDocument\CreateNavigatorFromXmlReader.cs" />
     <Compile
@@ -787,7 +772,6 @@
       <Link>TestData\xpC001.xml</Link>
     </EmbeddedResource>
   </ItemGroup>
-
   <ItemGroup>
     <Compile Include="Xslt\XslCompiledTransformApi\Errata4.cs" />
     <Compile Include="Xslt\XslCompiledTransformApi\OutputSettings.cs" />
@@ -818,7 +802,6 @@
       Visible="false"
     />
   </ItemGroup>
-
   <ItemGroup>
     <Compile
       Include="$(CommonTestPath)\System\ShouldNotBeInvokedException.cs"
@@ -837,7 +820,6 @@
       Link="Common\System\Threading\TrackingSynchronizationContext.cs"
     />
   </ItemGroup>
-
   <ItemGroup>
     <ProjectReference Include="..\..\Microsoft.XmlSerializer.Generator\tests\SerializableAssembly.csproj" />
     <PackageReference Include="xunit.extensibility.execution" Version="$(XUnitVersion)" />
@@ -847,7 +829,6 @@
     <ProjectReference Include="$(CommonTestPath)System\Xml\XmlDiff\XmlDiff.csproj" />
     <ProjectReference Include="XmlReaderLib\System.Xml.RW.XmlReaderLib.csproj" />
   </ItemGroup>
-
   <ItemGroup>
     <TrimmerRootAssembly Include="SerializableAssembly" />
     <TrimmerRootDescriptor Include="$(ILLinkDescriptorsPath)ILLink.Descriptors.Serialization.xml" />

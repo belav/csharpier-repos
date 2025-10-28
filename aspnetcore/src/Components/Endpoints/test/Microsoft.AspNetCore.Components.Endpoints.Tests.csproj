@@ -3,7 +3,6 @@
     <TargetFramework>$(DefaultNetCoreTargetFramework)</TargetFramework>
     <RazorLangVersion>8.0</RazorLangVersion>
   </PropertyGroup>
-
   <ItemGroup>
     <Compile
       Include="..\..\Shared\test\AutoRenderComponent.cs"
@@ -14,7 +13,6 @@
       Link="Shared\WebRootComponentParameters.cs"
     />
   </ItemGroup>
-
   <ItemGroup>
     <Reference Include="Microsoft.AspNetCore.Components.Endpoints" />
     <Reference Include="Microsoft.AspNetCore.Http" />

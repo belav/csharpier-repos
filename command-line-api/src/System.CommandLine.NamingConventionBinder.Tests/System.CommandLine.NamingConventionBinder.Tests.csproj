@@ -14,7 +14,6 @@
     <EmbeddedResource Remove="TestResults\**" />
     <None Remove="TestResults\**" />
   </ItemGroup>
-
   <ItemGroup>
     <Compile Include="..\Common\ArgumentBuilder.cs" Link="Utility\ArgumentBuilder.cs" />
     <Compile Include="..\Common\OptionBuilder.cs" Link="Utility\OptionBuilder.cs" />
@@ -24,12 +23,10 @@
       Link="Utility\AssertionExtensions.cs"
     />
   </ItemGroup>
-
   <ItemGroup>
     <ProjectReference Include="..\System.CommandLine.NamingConventionBinder\System.CommandLine.NamingConventionBinder.csproj" />
     <ProjectReference Include="..\System.CommandLine\System.CommandLine.csproj" />
   </ItemGroup>
-
   <ItemGroup>
     <PackageReference Include="ApprovalTests" Version="5.4.7" />
     <PackageReference Include="Microsoft.CSharp" Version="4.7.0" />
@@ -38,7 +35,6 @@
     <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
     <PackageReference Include="Microsoft.DotNet.PlatformAbstractions" Version="3.1.6" />
   </ItemGroup>
-
   <ItemGroup Condition="'$(DisableArcade)' == '1'">
     <PackageReference Include="xunit" Version="2.4.1" />
     <PackageReference Include="xunit.runner.visualstudio" Version="2.4.1">

@@ -3,7 +3,6 @@
     <WasmCopyAppZipToHelixTestDir>false</WasmCopyAppZipToHelixTestDir>
     <WasmRuntimeAssetsLocation>./</WasmRuntimeAssetsLocation>
   </PropertyGroup>
-
   <!-- 
     We need to install typescript definition (so tsc knows runtime types) and package.json (tsc knows about runtime files) from artifacts directory.
   -->
@@ -29,7 +28,6 @@
     />
     <Touch Files="bin/$(Configuration)/AppBundle/.npm-stamp" AlwaysCreate="true" />
   </Target>
-
   <Target
     Name="TypeScript"
     AfterTargets="WasmBuildApp"
@@ -46,7 +44,6 @@
       WorkingDirectory="$(MSBuildProjectDirectory)"
     />
   </Target>
-
   <Target Name="RunSample" DependsOnTargets="TypeScript">
     <Exec
       Command="node main.js"

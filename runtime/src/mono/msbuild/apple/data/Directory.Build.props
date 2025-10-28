@@ -6,7 +6,6 @@
     <_AppleTargetsDir>$(AppleBuildSupportDir)\apple\</_AppleTargetsDir>
     <_CommonTargetsDir>$(AppleBuildSupportDir)\common\</_CommonTargetsDir>
   </PropertyGroup>
-
   <PropertyGroup>
     <_AppleTargetsDir Condition="'$(_AppleTargetsDir)' == '' and '$(RuntimeSrcDir)' != ''"
       >$(RuntimeSrcDir)\src\mono\msbuild\apple\build\</_AppleTargetsDir
@@ -21,7 +20,6 @@
       >$([MSBuild]::EnsureTrailingSlash($(_CommonTargetsDir)))</_CommonTargetsDir
     >
   </PropertyGroup>
-
   <Import
     Project="$(_CommonTargetsDir)LibraryBuilder.props"
     Condition="Exists('$(_CommonTargetsDir)LibraryBuilder.props')"

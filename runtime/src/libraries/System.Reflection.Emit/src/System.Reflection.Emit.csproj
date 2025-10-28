@@ -5,7 +5,6 @@
     <ContractTypesPartiallyMoved>true</ContractTypesPartiallyMoved>
     <UseCompilerGeneratedDocXmlFile>false</UseCompilerGeneratedDocXmlFile>
   </PropertyGroup>
-
   <ItemGroup>
     <Compile
       Include="$(CoreLibSharedDir)System\Reflection\Emit\MethodBuilderInstantiation.cs"
@@ -31,7 +30,6 @@
     <Compile Include="System\Reflection\Emit\SignatureHelper.cs" />
     <Compile Include="System\Reflection\Emit\TypeBuilderImpl.cs" />
   </ItemGroup>
-
   <ItemGroup>
     <ProjectReference Include="$(CoreLibProject)" />
     <ProjectReference Include="$(LibrariesProjectRoot)\System.Collections.Immutable\src\System.Collections.Immutable.csproj" />

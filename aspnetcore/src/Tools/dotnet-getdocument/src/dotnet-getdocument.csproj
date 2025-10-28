@@ -9,7 +9,6 @@
     <UseAppHost>false</UseAppHost>
     <IsShippingPackage>false</IsShippingPackage>
   </PropertyGroup>
-
   <ItemGroup>
     <Compile Include="$(SharedSourceRoot)CommandLineUtils\**\*.cs" />
     <Compile Include="$(ToolSharedSourceRoot)CommandLine/**/*.cs" />
@@ -24,7 +23,6 @@
     />
     <Compile Include="../../GetDocumentInsider/src/ProgramBase.cs" />
     <Compile Include="../../GetDocumentInsider/src/ReporterExtensions.cs" />
-
     <Reference Include="Newtonsoft.Json" />
   </ItemGroup>
 </Project>

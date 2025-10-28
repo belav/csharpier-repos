@@ -2,7 +2,6 @@
   <PropertyGroup>
     <TargetFrameworks>$(NetCoreAppCurrent);$(NetCoreAppPrevious);$(NetCoreAppMinimum);netstandard2.0;$(NetFrameworkMinimum)</TargetFrameworks>
   </PropertyGroup>
-
   <ItemGroup>
     <Compile Include="System.Threading.AccessControl.Extensions.cs" />
     <Compile
@@ -14,7 +13,6 @@
       Condition="'$(TargetFrameworkIdentifier)' == '.NETFramework'"
     />
   </ItemGroup>
-
   <ItemGroup Condition="'$(TargetFramework)' == 'netstandard2.0'">
     <PackageReference
       Include="System.Security.AccessControl"

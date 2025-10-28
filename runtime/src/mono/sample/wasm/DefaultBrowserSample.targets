@@ -16,10 +16,8 @@
     <RunScriptCommand>$(ExecXHarnessCmd) wasm test-browser  --app=. --browser=Chrome $(XHarnessBrowserPathArg) $(WasmXHarnessArgs) --html-file=index.html --output-directory=$(XHarnessOutput) -- $(MSBuildProjectName).dll</RunScriptCommand>
     <EmitCompilerGeneratedFiles>true</EmitCompilerGeneratedFiles>
   </PropertyGroup>
-
   <ItemGroup>
     <WasmExtraFilesToDeploy Include="index.html" />
   </ItemGroup>
-
   <Target Name="RunSample" DependsOnTargets="RunSampleWithBrowser" />
 </Project>

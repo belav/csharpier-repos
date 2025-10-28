@@ -7,7 +7,6 @@
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     <EmitCompilerGeneratedFiles>true</EmitCompilerGeneratedFiles>
   </PropertyGroup>
-
   <ItemGroup>
     <PackageReference
       Include="Microsoft.AspNetCore.Components.WebAssembly"

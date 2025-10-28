@@ -7,7 +7,6 @@
     <RestoreAdditionalProjectSources>$(RestoreAdditionalProjectSources);$(ArtifactsShippingPackagesDir)</RestoreAdditionalProjectSources>
     <UseAspNetCoreSharedRuntime>true</UseAspNetCoreSharedRuntime>
   </PropertyGroup>
-
   <ItemGroup>
     <Protobuf
       Include="..\Proto\grpc\testing\test.proto"
@@ -24,7 +23,6 @@
       GrpcServices="None"
       Link="Protos\messages.proto"
     />
-
     <Reference Include="Grpc.AspNetCore" />
   </ItemGroup>
 </Project>

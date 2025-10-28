@@ -4,7 +4,6 @@
     <TargetFramework>$(DefaultNetCoreTargetFramework)</TargetFramework>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
-
   <ItemGroup>
     <Compile Include="$(SharedSourceRoot)runtime\Http2\**\*.cs" LinkBase="Shared\Http2" />
     <Compile
@@ -20,7 +19,6 @@
     <Compile Include="$(SharedSourceRoot)InternalHeaderNames.cs" Link="InternalHeaderNames.cs" />
     <Compile Include="$(SharedSourceRoot)ValueTaskExtensions\**\*.cs" />
   </ItemGroup>
-
   <ItemGroup>
     <Reference Include="Microsoft.AspNetCore.Server.Kestrel.Transport.Sockets" />
     <Reference Include="Microsoft.AspNetCore.Server.Kestrel.Core" />
@@ -28,7 +26,6 @@
     <Reference Include="Microsoft.Extensions.Logging.Console" />
     <Reference Include="Microsoft.AspNetCore.InternalTesting" />
   </ItemGroup>
-
   <ItemGroup>
     <EmbeddedResource
       Include="$(SharedSourceRoot)ServerInfrastructure\SharedStrings.resx"

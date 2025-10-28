@@ -13,7 +13,6 @@
     >
     <Scenario>WasmTestOnBrowser</Scenario>
   </PropertyGroup>
-
   <ItemGroup Condition="'$(WasmEnableLegacyJsInterop)' != 'false'">
     <Compile Include="System\Runtime\InteropServices\JavaScript\JavaScriptTests.cs" />
     <Compile Include="System\Runtime\InteropServices\JavaScript\DataViewTests.cs" />
@@ -29,12 +28,10 @@
       Link="System\Runtime\InteropServices\JavaScript\Utils.cs"
     />
   </ItemGroup>
-
   <ItemGroup>
     <Compile Include="System\Runtime\InteropServices\JavaScript\ParallelTests.cs" />
     <Compile Include="System\Runtime\InteropServices\JavaScript\TimerTests.cs" />
   </ItemGroup>
-
   <ItemGroup>
     <WasmExtraFilesToDeploy Include="timers.mjs" />
     <None Include="timers.mjs" />

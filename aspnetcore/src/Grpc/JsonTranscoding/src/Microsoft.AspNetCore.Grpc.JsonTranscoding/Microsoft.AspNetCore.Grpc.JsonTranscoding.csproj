@@ -4,12 +4,10 @@
     <PackageTags>gRPC RPC HTTP/2 REST</PackageTags>
     <TargetFramework>$(DefaultNetCoreTargetFramework)</TargetFramework>
   </PropertyGroup>
-
   <ItemGroup>
     <InternalsVisibleTo Include="Microsoft.AspNetCore.Grpc.JsonTranscoding.IntegrationTests" />
     <InternalsVisibleTo Include="Microsoft.AspNetCore.Grpc.JsonTranscoding.Tests" />
     <InternalsVisibleTo Include="Microsoft.AspNetCore.Grpc.Microbenchmarks" />
-
     <Compile
       Include="..\Shared\Server\BindMethodFinder.cs"
       Link="Internal\Shared\Server\BindMethodFinder.cs"
@@ -65,11 +63,9 @@
     />
     <Compile Include="..\Shared\Legacy.cs" Link="Internal\Shared\Legacy.cs" />
     <Compile Include="$(SharedSourceRoot)ValueTaskExtensions\**\*.cs" LinkBase="Internal\Shared" />
-
     <Reference Include="Google.Api.CommonProtos" />
     <Reference Include="Google.Protobuf" />
     <Reference Include="Grpc.AspNetCore.Server" />
-
     <None Update="protos\google\api\*.proto">
       <Pack>true</Pack>
       <PackagePath>content</PackagePath>

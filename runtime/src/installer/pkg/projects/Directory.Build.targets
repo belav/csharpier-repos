@@ -8,7 +8,6 @@
     <StableVersion Condition="'$(IncludePreReleaseLabelInPackageVersion)' != 'true'"
       >$(Version)</StableVersion
     >
-
     <!--
       Explicitly re-set the symbol package output path. The pkgproj files here end up importing the targets from
       Microsoft.DotNet.Build.Tasks.Packaging (based on a PackageReference) before importing the Arcade targets hat
@@ -17,7 +16,6 @@
     -->
     <SymbolPackageOutputPath>$(PackageOutputPath)</SymbolPackageOutputPath>
   </PropertyGroup>
-
   <Target
     Name="SetTargetBasedPackageVersion"
     BeforeTargets="GenerateNuSpec"
@@ -33,7 +31,6 @@
       <PackageVersion>$(ProductVersion)</PackageVersion>
     </PropertyGroup>
   </Target>
-
   <!--
     Remove duplicate files returned by restore. The resolve task performs extra detection to pick up
     a PDB file for any file listed in the assets file. This causes duplicates if the assets file
@@ -51,13 +48,11 @@
     <RemoveDuplicates Inputs="@(ReferenceCopyLocalPaths)">
       <Output TaskParameter="Filtered" ItemName="FilteredReferenceCopyLocalPaths" />
     </RemoveDuplicates>
-
     <ItemGroup>
       <ReferenceCopyLocalPaths Remove="@(ReferenceCopyLocalPaths)" />
       <ReferenceCopyLocalPaths Include="@(FilteredReferenceCopyLocalPaths)" />
     </ItemGroup>
   </Target>
-
   <!--
     Ensures package reports dir exists, to work around the issue in VerifyClosure task:
     https://github.com/dotnet/arcade/issues/6090
@@ -66,7 +61,6 @@
   <Target Name="EnsureDepenedencyGraphDir" BeforeTargets="VerifyClosure">
     <MakeDir Directories="$(PackageReportDir)" />
   </Target>
-
   <!--
     Finds symbol files and injects them into the package build.
   -->
@@ -74,7 +68,6 @@
     <ItemGroup Condition="'$(SymbolsSuffix)' != ''">
       <AdditionalLibPackageExcludes Include="%2A%2A\%2A$(SymbolsSuffix)" />
     </ItemGroup>
-
     <ItemGroup>
       <NativeWithSymbolFile Include="@(NativeBinary)" Condition="'$(PackageTargetRuntime)'!=''">
         <TargetPath>runtimes/$(PackageTargetRuntime)/native</TargetPath>
@@ -83,7 +76,6 @@
         <TargetPath>tools</TargetPath>
       </NativeWithSymbolFile>
     </ItemGroup>
-
     <ItemGroup>
       <!-- On Windows, trim ".dll" before adding ".pdb". -->
       <WindowsNativeFile
@@ -93,35 +85,29 @@
       <WindowsSymbolFile Include="@(WindowsNativeFile -> '%(RootDir)%(Directory)PDB\%(Filename).pdb')" />
       <!-- Crossgened files (on windows) have both a *.pdb and a *.ni.pdb symbol file.  Include the *.ni.pdb file as well if it exists. -->
       <WindowsSymbolFile Include="@(WindowsNativeFile -> '%(RootDir)%(Directory)PDB\%(Filename).ni.pdb')" />
-
       <!--
         Search for all xplat symbol file extensions on every xplat native binary. Some binaries have
         no ".so" or ".dylib" extension, so we can't tell which convention its symbol files would
         use. On xplat, the symbol extension is simply appended.
       -->
       <NonWindowsNativeFile Include="@(NativeWithSymbolFile)" Exclude="@(WindowsNativeFile)" />
-
       <NonWindowsSymbolFile Include="@(NonWindowsNativeFile -> '%(Identity)$(SymbolsSuffix)')" />
-
       <ExistingWindowsSymbolFile Include="@(WindowsSymbolFile)" Condition="Exists('%(Identity)')" />
       <ExistingNonWindowsSymbolFile
         Include="@(NonWindowsSymbolFile)"
         Condition="Exists('%(Identity)') AND '$(SkipPackagingXplatSymbols)'!='true'"
       />
-
       <!-- Include all found symbols. -->
       <File Include="@(ExistingWindowsSymbolFile);@(ExistingNonWindowsSymbolFile)">
         <IsSymbolFile>true</IsSymbolFile>
       </File>
     </ItemGroup>
-
     <PropertyGroup>
       <NeedsPlaceholderPdb
         Condition="'@(ExistingNonWindowsSymbolFile)'!='' AND '@(ExistingWindowsSymbolFile)'==''"
         >true</NeedsPlaceholderPdb
       >
     </PropertyGroup>
-
     <ItemGroup>
       <File
         Include="$(InstallerProjectRoot)\pkg\_.pdb"
@@ -132,7 +118,6 @@
       </File>
     </ItemGroup>
   </Target>
-
   <!-- override GetPackageIdentity so that it doesn't attempt to gather
        files from runtime dependencies,  this prevents folks from needing
        packages that don't apply to their local OS.
@@ -151,7 +136,6 @@
       </_PackageIdentity>
     </ItemGroup>
   </Target>
-
   <!--
     Create RuntimeDependencies just before they're needed. Use MSBuild to get their identities, like
     GetPkgProjPackageDependencies: this finds package id and version without any guesswork.
@@ -168,7 +152,6 @@
     >
       <Output TaskParameter="TargetOutputs" ItemName="_runtimeDependencyIdentity" />
     </MSBuild>
-
     <ItemGroup>
       <RuntimeDependency Include="@(_runtimeDependencyIdentity)" />
     </ItemGroup>

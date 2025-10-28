@@ -13,14 +13,12 @@
     <!-- TODO: Address Native AOT analyzer warnings https://github.com/dotnet/aspnetcore/issues/45473 -->
     <EnableAOTAnalyzer>false</EnableAOTAnalyzer>
   </PropertyGroup>
-
   <ItemGroup>
     <Reference Include="Microsoft.AspNetCore.Components.Web" />
     <Reference Include="Microsoft.Extensions.Configuration.Json" />
     <Reference Include="Microsoft.Extensions.Configuration.Binder" />
     <Reference Include="Microsoft.Extensions.Logging" />
     <Reference Include="Microsoft.JSInterop.WebAssembly" />
-
     <ProjectReference
       Include="..\..\..\Web.JS\Microsoft.AspNetCore.Components.Web.JS.npmproj"
       Condition="'$(BuildNodeJS)' != 'false' and '$(BuildingInsideVisualStudio)' != 'true'"
@@ -30,7 +28,6 @@
       UndefineProperties="TargetFramework"
     />
   </ItemGroup>
-
   <ItemGroup>
     <Compile Include="$(ComponentsSharedSourceRoot)src\BrowserNavigationManagerInterop.cs" />
     <Compile Include="$(ComponentsSharedSourceRoot)src\PullFromJSDataStream.cs" />
@@ -64,13 +61,11 @@
       LinkBase="Forms"
     />
   </ItemGroup>
-
   <ItemGroup>
     <InternalsVisibleTo Include="Microsoft.AspNetCore.Components.WebAssembly.Tests" />
     <InternalsVisibleTo Include="Microsoft.AspNetCore.Components.WebAssembly.Authentication.Tests" />
     <InternalsVisibleTo Include="BasicTestApp" />
   </ItemGroup>
-
   <PropertyGroup>
     <!-- Microsoft.AspNetCore.Components.Web.JS.npmproj always capitalizes the directory name. -->
     <BlazorWebAssemblyJSFile Condition=" '$(Configuration)' == 'Debug' "
@@ -80,7 +75,6 @@
       >..\..\..\Web.JS\dist\Release\blazor.webassembly.js</BlazorWebAssemblyJSFile
     >
   </PropertyGroup>
-
   <ItemGroup>
     <Content
       Include="$(BlazorWebAssemblyJSFile)"
@@ -94,7 +88,6 @@
       PackagePath="build\$(DefaultNetCoreTargetFramework)\"
     />
   </ItemGroup>
-
   <!-- blazor.webassembly.js should exist after Microsoft.AspNetCore.Components.Web.JS.npmproj builds. -->
   <Target
     Name="_CheckBlazorServerJSPath"
@@ -107,7 +100,6 @@
       Condition=" !EXISTS('$(BlazorWebAssemblyJSFile)') "
     />
   </Target>
-
   <ItemGroup>
     <InternalsVisibleTo Include="DynamicProxyGenAssembly2" Key="$(MoqPublicKey)" />
   </ItemGroup>

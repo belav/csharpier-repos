@@ -4,11 +4,9 @@
     <UserSecretsId>aspnet5-OpenIdConnectSample-20151210110318</UserSecretsId>
     <AspNetCoreHostingModel>OutOfProcess</AspNetCoreHostingModel>
   </PropertyGroup>
-
   <ItemGroup>
     <None Remove="compiler\resources\cert.pfx" />
   </ItemGroup>
-
   <ItemGroup>
     <Reference Include="Microsoft.AspNetCore" />
     <Reference Include="Microsoft.AspNetCore.Authentication.Cookies" />
@@ -17,7 +15,6 @@
     <Reference Include="Microsoft.Extensions.FileProviders.Embedded" />
     <Reference Include="Microsoft.Net.Http.Headers" />
   </ItemGroup>
-
   <ItemGroup>
     <EmbeddedResource Include="compiler\resources\cert.pfx" />
   </ItemGroup>

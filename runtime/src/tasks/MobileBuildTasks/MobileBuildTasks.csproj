@@ -8,11 +8,9 @@
     <Compile Include="..\Common\IsExternalInit.cs" />
     <Compile Include="$(RepoRoot)src\libraries\System.Private.CoreLib\src\System\Diagnostics\CodeAnalysis\NullableAttributes.cs" />
   </ItemGroup>
-
   <ItemGroup>
     <Compile Include="..\Common\Utils.cs" />
   </ItemGroup>
-
   <ItemGroup>
     <PackageReference Include="Microsoft.Build" Version="$(MicrosoftBuildVersion)" />
     <PackageReference
@@ -20,7 +18,6 @@
       Version="$(MicrosoftBuildTasksCoreVersion)"
     />
   </ItemGroup>
-
   <Target Name="GetFilesToPackage" Returns="@(FilesToPackage)">
     <ItemGroup>
       <!-- non-net4* -->
@@ -28,7 +25,6 @@
         Include="$(OutputPath)$(TargetFrameworkForNETCoreTasks)\$(MSBuildProjectName)*"
         TargetPath="tasks\$(TargetFrameworkForNETCoreTasks)"
       />
-
       <!-- for net472 we need all the dependent assemblies too, so copy from the publish folder -->
       <FilesToPackage
         Include="$(OutputPath)$(TargetFrameworkForNETFrameworkTasks)\*"

@@ -4,9 +4,7 @@
     <RoslynApiVersion>$(MicrosoftCodeAnalysisVersion_4_0)</RoslynApiVersion>
     <DefineConstants>$(DefineConstants);ROSLYN4_0_OR_GREATER</DefineConstants>
   </PropertyGroup>
-
   <Import Project="Microsoft.Extensions.Logging.Generators.targets" />
-
   <ItemGroup>
     <Compile Include="$(CommonPath)Roslyn\Hash.cs" Link="Common\Roslyn\Hash.cs" />
     <Compile Include="$(CommonPath)Roslyn\ISyntaxHelper.cs" Link="Common\Roslyn\ISyntaxHelper.cs" />
@@ -31,7 +29,6 @@
       Include="$(CommonPath)Roslyn\SyntaxValueProvider_ForAttributeWithSimpleName.cs"
       Link="Common\Roslyn\SyntaxValueProvider_ForAttributeWithSimpleName.cs"
     />
-
     <Compile
       Include="$(CoreLibSharedDir)System\Collections\Generic\ValueListBuilder.cs"
       Link="Production\ValueListBuilder.cs"
@@ -41,7 +38,6 @@
       Link="Production\ValueListBuilder.Pop.cs"
     />
   </ItemGroup>
-
   <ItemGroup>
     <Compile Remove="LoggerMessageGenerator.Roslyn3.11.cs" />
   </ItemGroup>

@@ -8,7 +8,6 @@
     <!-- EXTEXP0003: MetricCollector is experimental -->
     <NoWarn>$(NoWarn);EXTEXP0003</NoWarn>
   </PropertyGroup>
-
   <ItemGroup>
     <Compile Include="$(SharedSourceRoot)NullScope.cs" />
     <Compile Include="$(SharedSourceRoot)SyncPoint\SyncPoint.cs" Link="SyncPoint.cs" />
@@ -58,7 +57,6 @@
     />
     <Compile Include="$(SharedSourceRoot)TypeNameHelper\*.cs" />
     <Compile Include="$(SharedSourceRoot)TestResources.cs" LinkBase="Shared" />
-
     <Content
       Include="$(SharedSourceRoot)TestCertificates\*.pfx"
       LinkBase="shared\TestCertificates"
@@ -79,7 +77,6 @@
       LinkBase="shared\TestCertificates"
       CopyToOutputDirectory="PreserveNewest"
     />
-
     <Reference Include="System.Threading.Channels" />
     <Reference Include="Microsoft.AspNetCore.Http.Abstractions" />
     <Reference Include="Microsoft.AspNetCore.Server.Kestrel" />
@@ -87,7 +84,6 @@
     <Reference Include="Microsoft.Extensions.TimeProvider.Testing" />
     <Reference Include="Newtonsoft.Json" />
   </ItemGroup>
-
   <ItemGroup>
     <InternalsVisibleTo Include="DynamicProxyGenAssembly2" Key="$(MoqPublicKey)" />
   </ItemGroup>

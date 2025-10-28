@@ -7,7 +7,6 @@
       >true</InstallWasmtimeForTests
     >
   </PropertyGroup>
-
   <!-- FIXMEWASI: prevent multiple downloads -->
   <Target
     Name="ProvisionWasmtime"
@@ -19,7 +18,6 @@
     <ReadLinesFromFile File="$(_WasmtimeVersionFile)">
       <Output TaskParameter="Lines" ItemName="_VersionLines" />
     </ReadLinesFromFile>
-
     <PropertyGroup>
       <WasmtimeVersion>%(_VersionLines.Identity)</WasmtimeVersion>
       <WasmtimeURL>https://github.com/bytecodealliance/wasmtime/releases/download/v$(WasmtimeVersion)/wasmtime-v$(WasmtimeVersion)-x86_64-linux.tar.xz</WasmtimeURL>
@@ -30,7 +28,6 @@
         >https://github.com/bytecodealliance/wasmtime/releases/download/v$(WasmtimeVersion)/wasmtime-v$(WasmtimeVersion)-x86_64-windows.zip</WasmtimeURL
       >
     </PropertyGroup>
-
     <DownloadFile
       SourceUrl="$(WasmtimeURL)"
       DestinationFolder="$(ArtifactsObjDir)"
@@ -38,7 +35,6 @@
     >
       <Output TaskParameter="DownloadedFile" PropertyName="_DownloadedFile" />
     </DownloadFile>
-
     <MakeDir Directories="$(WasmtimeDir)" />
     <Exec
       Command="powershell -command &quot;Expand-Archive $(_DownloadedFile) . ; Move-Item wasmtime-v$(WasmtimeVersion)-x86_64-windows/*.* . &quot;"

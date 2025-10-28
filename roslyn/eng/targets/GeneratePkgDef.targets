@@ -70,7 +70,6 @@
          Note: We use None items since we do not want them to be included in VSIX and we want them to be displayed in Solution Explorer
          (if we used Content items they would get included in the VSIX by VSSDK by default).
   -->
-
   <UsingTask
     TaskName="Microsoft.DotNet.Build.Tasks.VisualStudio.GetPkgDefAssemblyDependencyGuid"
     AssemblyFile="$(ArcadeVisualStudioBuildTasksAssembly)"
@@ -79,22 +78,18 @@
     TaskName="Microsoft.DotNet.Arcade.Sdk.GetAssemblyFullName"
     AssemblyFile="$(ArcadeSdkBuildTasksAssembly)"
   />
-
   <Target Name="_SetGeneratePkgDefInputsOutputs">
     <PropertyGroup>
       <!-- The path must match the value that VSSDK uses. -->
       <_GeneratePkgDefOutputFile>$(IntermediateOutputPath)$(TargetName).pkgdef</_GeneratePkgDefOutputFile>
     </PropertyGroup>
-
     <ItemGroup>
       <_FileContentEntries Include="@(None)" Condition="'%(None.PkgDefEntry)' == 'FileContent'">
         <FullFilePath>$([System.IO.Path]::Combine('$(MSBuildProjectDirectory)', '%(None.Identity)'))</FullFilePath>
       </_FileContentEntries>
-
       <PkgDefFileContent Include="@(_FileContentEntries->'%(FullFilePath)')" />
     </ItemGroup>
   </Target>
-
   <!--
     Initializes metadata of PkgDefBrokeredService items.
   -->
@@ -127,7 +122,6 @@
       </PkgDefBrokeredService>
     </ItemGroup>
   </Target>
-
   <!--
     Initializes metadata of PkgDefPackageRegistration items.
   -->
@@ -156,7 +150,6 @@
       </PkgDefPackageRegistration>
     </ItemGroup>
   </Target>
-
   <!--
     Initializes metadata of PkgDefInstalledProduct items.
   -->
@@ -171,7 +164,6 @@
       </PkgDefInstalledProduct>
     </ItemGroup>
   </Target>
-
   <!--
     Populates PkgDefBindingRedirect and PkgDefCodeBase items from references.
   -->
@@ -191,7 +183,6 @@
       />
     </ItemGroup>
   </Target>
-
   <!--
     Generates a .pkgdef file based on items in PkgDef* groups.
   -->
@@ -204,14 +195,12 @@
     <ItemGroup>
       <_AssemblyDependencyEntry Include="@(PkgDefBindingRedirect)" Kind="BindingRedirect" />
       <_AssemblyDependencyEntry Include="@(PkgDefCodeBase)" Kind="CodeBase" />
-
       <_AssemblyDependencyEntryWithoutAssemblyName
         Include="@(_AssemblyDependencyEntry)"
         Condition="'%(_AssemblyDependencyEntry.FusionName)' == ''"
       />
       <_AssemblyDependencyEntry Remove="@(_AssemblyDependencyEntryWithoutAssemblyName)" />
     </ItemGroup>
-
     <Microsoft.DotNet.Arcade.Sdk.GetAssemblyFullName
       Items="@(_AssemblyDependencyEntryWithoutAssemblyName)"
       FullNameMetadata="FusionName"
@@ -221,28 +210,23 @@
         ItemName="_AssemblyDependencyEntryWithCalculatedAssemblyName"
       />
     </Microsoft.DotNet.Arcade.Sdk.GetAssemblyFullName>
-
     <ItemGroup>
       <_AssemblyDependencyEntry Include="@(_AssemblyDependencyEntryWithCalculatedAssemblyName)" />
-
       <_AssemblyDependencyEntry Update="@(_AssemblyDependencyEntry)">
         <AssemblyFileName>%(_AssemblyDependencyEntry.FileName)%(_AssemblyDependencyEntry.Extension)</AssemblyFileName>
         <OldAssemblyVersion>0.0.0.0</OldAssemblyVersion>
-
         <!-- Split FusionName: "{0}, Version={1}, Culture={2}, PublicKeyToken={3}" -->
         <AssemblyName>$([MSBuild]::ValueOrDefault('%(_AssemblyDependencyEntry.FusionName)', '').Split(',')[0])</AssemblyName>
         <AssemblyVersion>$([MSBuild]::ValueOrDefault('%(_AssemblyDependencyEntry.FusionName)', '').Split(',')[1].Split('=')[1])</AssemblyVersion>
         <Culture>$([MSBuild]::ValueOrDefault('%(_AssemblyDependencyEntry.FusionName)', '').Split(',')[2].Split('=')[1])</Culture>
         <PublicKeyToken>$([MSBuild]::ValueOrDefault('%(_AssemblyDependencyEntry.FusionName)', '').Split(',')[3].Split('=')[1])</PublicKeyToken>
       </_AssemblyDependencyEntry>
-
       <_AssemblyDependencyEntry
         Update="@(_AssemblyDependencyEntry)"
         Condition="'%(Kind)' == 'BindingRedirect'"
       >
         <HashBase>%(AssemblyName),%(PublicKeyToken),%(Culture),%(OldAssemblyVersion)-%(AssemblyVersion),%(AssemblyVersion)</HashBase>
       </_AssemblyDependencyEntry>
-
       <_AssemblyDependencyEntry
         Update="@(_AssemblyDependencyEntry)"
         Condition="'%(Kind)' == 'CodeBase'"
@@ -250,7 +234,6 @@
         <HashBase>%(AssemblyName),%(PublicKeyToken),%(Culture),%(AssemblyVersion)</HashBase>
       </_AssemblyDependencyEntry>
     </ItemGroup>
-
     <Microsoft.DotNet.Build.Tasks.VisualStudio.GetPkgDefAssemblyDependencyGuid
       Items="@(_AssemblyDependencyEntry)"
       InputMetadata="HashBase"
@@ -258,11 +241,9 @@
     >
       <Output TaskParameter="OutputItems" ItemName="_AssemblyDependencyEntryWithGuid" />
     </Microsoft.DotNet.Build.Tasks.VisualStudio.GetPkgDefAssemblyDependencyGuid>
-
     <ItemGroup>
       <_AssemblyDependencyEntry Remove="@(_AssemblyDependencyEntry)" />
       <_AssemblyDependencyEntry Include="@(_AssemblyDependencyEntryWithGuid)" />
-
       <_PkgDefEntry Include="@(PkgDefPackageRegistration)">
         <RawValue>
           <![CDATA[[$RootKey$\Packages\%(PkgDefPackageRegistration.Identity)]
@@ -274,7 +255,6 @@
 ]]>
         </RawValue>
       </_PkgDefEntry>
-
       <_PkgDefEntry Include="@(PkgDefInstalledProduct)">
         <RawValue>
           <![CDATA[[$RootKey$\InstalledProducts\%(PkgDefInstalledProduct.Name)]
@@ -287,7 +267,6 @@
 ]]>
         </RawValue>
       </_PkgDefEntry>
-
       <_PkgDefEntry
         Include="@(PkgDefBrokeredService)"
         Condition="'%(PkgDefBrokeredService.ProfferingPackageId)' == ''"
@@ -302,7 +281,6 @@
 ]]>
         </RawValue>
       </_PkgDefEntry>
-
       <_PkgDefEntry
         Include="@(PkgDefBrokeredService)"
         Condition="'%(PkgDefBrokeredService.ProfferingPackageId)' != ''"
@@ -314,7 +292,6 @@
 ]]>
         </RawValue>
       </_PkgDefEntry>
-
       <_PkgDefEntry
         Include="@(_AssemblyDependencyEntry)"
         Condition="'%(_AssemblyDependencyEntry.Kind)' == 'BindingRedirect'"
@@ -330,7 +307,6 @@
 ]]>
         </RawValue>
       </_PkgDefEntry>
-
       <_PkgDefEntry
         Include="@(_AssemblyDependencyEntry)"
         Condition="'%(_AssemblyDependencyEntry.Kind)' == 'CodeBase'"
@@ -346,26 +322,21 @@
         </RawValue>
       </_PkgDefEntry>
     </ItemGroup>
-
     <!-- Include content generated above -->
     <ItemGroup>
       <_PkgDefLines Include="@(_PkgDefEntry->'%(RawValue)')" />
     </ItemGroup>
-
     <!-- Include content of files listed in PkgDefFileContent items -->
     <ItemGroup>
       <_FilesToMerge Include="@(PkgDefFileContent)" />
     </ItemGroup>
-
     <ReadLinesFromFile File="%(_FilesToMerge.Identity)" Condition="'@(_FilesToMerge)' != ''">
       <Output TaskParameter="Lines" ItemName="_PkgDefLines" />
     </ReadLinesFromFile>
-
     <Error
       Text="GeneratePkgDefFile is true but the project did not produce any entries (PkgDef* items) to be written to pkgdef file"
       Condition="'@(_PkgDefLines)' == ''"
     />
-
     <!-- Write final pkgdef content. If the CTO file was changed, touch the pkgdef file to cause a re-merge (see VSSDK targets). -->
     <WriteLinesToFile
       File="$(_GeneratePkgDefOutputFile)"

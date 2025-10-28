@@ -3,23 +3,18 @@
     <DefaultLanguageSourceExtension>.cs</DefaultLanguageSourceExtension>
     <Language>C#</Language>
   </PropertyGroup>
-
   <PropertyGroup>
     <DebugSymbols Condition=" '$(DebugType)' == 'none' ">false</DebugSymbols>
     <DebugType Condition=" '$(DebugType)' == 'none' "></DebugType>
   </PropertyGroup>
-
   <PropertyGroup>
     <CreateManifestResourceNamesDependsOn></CreateManifestResourceNamesDependsOn>
     <CoreCompileDependsOn></CoreCompileDependsOn>
-
     <MSBuildAllProjects>$(MSBuildAllProjects);$(MSBuildToolsPath)\Microsoft.CSharp.targets</MSBuildAllProjects>
   </PropertyGroup>
-
   <ItemGroup>
     <DocFileItem Include="$(DocumentationFile)" Condition="'$(DocumentationFile)' != ''" />
   </ItemGroup>
-
   <Target
     Name="CoreCompile"
     Inputs="$(MSBuildAllProjects);@(Compile);@(ManifestResourceWithNoCulture);@(ManifestNonResxWithNoCultureOnDisk);@(CompiledLicenseFile);
@@ -72,7 +67,6 @@
       ToolPath="$(CscToolPath)"
     />
   </Target>
-
   <Target Name="CreateManifestResourceNames">
     <CreateCSharpManifestResourceName
       Condition="'@(ResxWithNoCulture)' != ''"
@@ -81,7 +75,6 @@
     >
       <Output TaskParameter="ManifestResourceNames" ItemName="ManifestResourceWithNoCultureName" />
     </CreateCSharpManifestResourceName>
-
     <CreateCSharpManifestResourceName
       Condition="'@(NonResxWithNoCulture)' != ''"
       ResourceFiles="@(NonResxWithNoCulture)"
@@ -89,7 +82,6 @@
     >
       <Output TaskParameter="ManifestResourceNames" ItemName="ManifestNonResxWithNoCulture" />
     </CreateCSharpManifestResourceName>
-
     <CreateCSharpManifestResourceName
       Condition="'@(ResxWithCulture)' != ''"
       ResourceFiles="@(ResxWithCulture)"
@@ -97,7 +89,6 @@
     >
       <Output TaskParameter="ManifestResourceNames" ItemName="ManifestResourceWithCultureName" />
     </CreateCSharpManifestResourceName>
-
     <CreateCSharpManifestResourceName
       Condition="'@(NonResxWithCulture)' != ''"
       ResourceFiles="@(NonResxWithCulture)"
@@ -106,6 +97,5 @@
       <Output TaskParameter="ManifestResourceNames" ItemName="ManifestNonResxWithCulture" />
     </CreateCSharpManifestResourceName>
   </Target>
-
   <Import Project="Microsoft.Common.targets" />
 </Project>

@@ -7,11 +7,9 @@
     <!-- See code comment in Program.cs/Main in this project regarding this -->
     <StartupObject>Microsoft.AspNetCore.Components.WebViewE2E.Test.Program</StartupObject>
   </PropertyGroup>
-
   <ItemGroup>
     <ProjectReference Include="..\..\Samples\PhotinoPlatform\src\Microsoft.AspNetCore.Components.WebView.Photino.csproj" />
   </ItemGroup>
-
   <ItemGroup>
     <Content Update="wwwroot\**">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>

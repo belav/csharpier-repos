@@ -1,14 +1,11 @@
 <Project>
   <Import Project="$([MSBuild]::GetDirectoryNameOfFileAbove($(MSBuildThisFileDirectory)..\, Directory.Build.targets))\Directory.Build.targets" />
-
   <PropertyGroup>
     <!-- Work around until we get a new WebSdk -->
     <AspNetCoreHostingModel>OutOfProcess</AspNetCoreHostingModel>
-
     <HasTestAssetProfile Condition="'$(TestAssetProfile)' != ''">true</HasTestAssetProfile>
     <TestAssetOutputName>$(MSBuildProjectName)</TestAssetOutputName>
   </PropertyGroup>
-
   <Target
     Name="PreventProjectReferencesFromBuilding"
     BeforeTargets="BeforeResolveReferences"
@@ -20,7 +17,6 @@
       >
     </PropertyGroup>
   </Target>
-
   <Target
     Name="PrepareForTestAssetPublish"
     BeforeTargets="PrepareForPublish"
@@ -29,18 +25,15 @@
     <PropertyGroup Condition="'$(HasTestAssetProfile)' == 'true'">
       <PublishDir>$(PublishDir)\$(TestAssetOutputName)-$(TestAssetProfile)\</PublishDir>
     </PropertyGroup>
-
     <PropertyGroup Condition="'$(HasTestAssetProfile)' != 'true'">
       <IsPublishable>false</IsPublishable>
       <IsTransformWebConfigDisabled>true</IsTransformWebConfigDisabled>
     </PropertyGroup>
   </Target>
-
   <Target Name="PublishTestsAsset" DependsOnTargets="Publish" Returns="@(PublishedTestAsset)">
     <ConvertToAbsolutePath Paths="$(PublishDir)">
       <Output TaskParameter="AbsolutePaths" PropertyName="PublishAbsoluteDir" />
     </ConvertToAbsolutePath>
-
     <ItemGroup>
       <PublishedTestAsset
         Include="$(TestAssetOutputName)-$(TestAssetProfile)"
@@ -48,7 +41,6 @@
       />
     </ItemGroup>
   </Target>
-
   <Target
     Name="PublishTestsAssets"
     Condition="'$(TestAssetProfile)' == '' AND '@(TestAssetPublishProfile->Count())' != '0'"

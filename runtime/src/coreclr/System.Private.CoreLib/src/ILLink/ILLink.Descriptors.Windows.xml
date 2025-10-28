@@ -10,7 +10,6 @@
       <method name="RegisterClassForTypeInternal" />
       <method name="UnregisterClassForTypeInternal" />
     </type>
-
     <!-- Enables the .NET IJW host (before .NET 7.0) to load an in-memory module as a .NET assembly.
         These are always rooted to ensure native calls get trimmer related errors
         but their bodies will be mostly trimmed away by the related feature switch -->
@@ -18,7 +17,6 @@
       <method name="LoadInMemoryAssembly" />
     </type>
   </assembly>
-
   <assembly
     fullname="System.Private.CoreLib"
     feature="System.Runtime.InteropServices.BuiltInComInterop.IsSupported"
@@ -31,7 +29,6 @@
       <method name="UnregisterClassForTypeInContext" />
     </type>
   </assembly>
-
   <assembly
     fullname="System.Private.CoreLib"
     feature="System.Runtime.InteropServices.EnableCppCLIHostActivation"

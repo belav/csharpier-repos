@@ -6,7 +6,6 @@
     <IsPackable>true</IsPackable>
     <PackageDescription>Provides support for CBOR Object Signing and Encryption (COSE).</PackageDescription>
   </PropertyGroup>
-
   <ItemGroup>
     <Compile
       Include="$(CommonPath)System\HashCodeRandomization.cs"
@@ -25,7 +24,6 @@
       Include="$(LibrariesProjectRoot)System.Formats.Cbor\src\System\Formats\Cbor\CborInitialByte.cs"
       Link="System\Formats\Cbor\CborInitialByte.cs"
     />
-
     <Compile Include="System\Security\Cryptography\Cose\CoseHeaderLabel.cs" />
     <Compile Include="System\Security\Cryptography\Cose\CoseHeaderMap.cs" />
     <Compile Include="System\Security\Cryptography\Cose\CoseHeaderValue.cs" />
@@ -40,11 +38,9 @@
     <Compile Include="System\Security\Cryptography\Cose\KnownHeaders.cs" />
     <Compile Include="System\Security\Cryptography\Cose\SigStructureContext.cs" />
   </ItemGroup>
-
   <ItemGroup>
     <ProjectReference Include="$(LibrariesProjectRoot)System.Formats.Cbor\src\System.Formats.Cbor.csproj" />
   </ItemGroup>
-
   <!-- For System.HashCode -->
   <ItemGroup Condition="'$(TargetFrameworkIdentifier)' != '.NETCoreApp'">
     <PackageReference Include="Microsoft.Bcl.HashCode" Version="$(MicrosoftBclHashCodeVersion)" />

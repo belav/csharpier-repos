@@ -2,8 +2,6 @@
   Description:  valid item link (http)
   Expect:       ValidURI{parent:item,element:link}
 -->
-
-
 <rss version="2.0">
   <channel>
     <title>Valid link</title>

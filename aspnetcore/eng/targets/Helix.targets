@@ -9,11 +9,9 @@
       Include="./installjdk.sh 10.0.2 x64 &amp;&amp; if [ &quot;%24JAVA_HOME&quot; = &quot;&quot; ]%3B then export JAVA_HOME=%24PWD/java%3B fi"
     />
   </ItemGroup>
-
   <ItemGroup Condition="'$(TestDependsOnMssql)' == 'true' AND '$(IsWindowsHelixQueue)' == 'true' AND '$(IsArm64HelixQueue)' != 'true'">
     <HelixPreCommand Include="call RunPowershell.cmd mssql\InstallSqlServerLocalDB.ps1 || exit /b 1" />
   </ItemGroup>
-
   <PropertyGroup>
     <_TestingArchitecture>x64</_TestingArchitecture>
     <_TestingArchitecture Condition=" '$(IsArm64HelixQueue)' == 'true' "
@@ -23,7 +21,6 @@
       >false</TestDependsOnPlaywright
     >
   </PropertyGroup>
-
   <PropertyGroup Condition="'$(TestDependsOnPlaywright)' == 'true'">
     <SkipHelixQueues>
       $(HelixQueueAlmaLinux8);
@@ -35,34 +32,27 @@
     </SkipHelixQueues>
     <SkipHelixArm>true</SkipHelixArm>
   </PropertyGroup>
-
   <ItemGroup Condition="'$(TestDependsOnPlaywright)' == 'true' AND '$(IsWindowsHelixQueue)' == 'true'">
     <HelixPreCommand Include="call RunPowershell.cmd installPlaywrightReqs.ps1 || exit /b 1" />
   </ItemGroup>
-
   <ItemGroup Condition="'$(TestDependsOnIIS)' == 'true' AND '$(IsWindowsOnlyTest)' == 'true'">
     <HelixContent Include="$(RepoRoot)src\Servers\IIS\tools\update_schema.ps1" />
     <HelixContent Include="$(RepoRoot)src\Servers\IIS\tools\UpdateIISExpressCertificate.ps1" />
     <HelixContent Include="$(RepoRoot)src\Servers\IIS\tools\TestCert.pfx" />
     <HelixContent Include="$(RepoRoot)src\Servers\IIS\AspNetCoreModuleV2\AspNetCore\aspnetcore_schema_v2.xml" />
-
     <HelixPreCommand Include="call RunPowershell.cmd update_schema.ps1 || exit /b 1" />
     <HelixPreCommand Include="call RunPowershell.cmd UpdateIISExpressCertificate.ps1 || exit /b 1" />
   </ItemGroup>
-
   <ItemGroup Condition="'$(TestDependsOnNode)' == 'true' AND '$(IsWindowsHelixQueue)' == 'false'">
     <HelixPreCommand Include="./installnode.sh $(NodeVersion) $(_TestingArchitecture)" />
   </ItemGroup>
-
   <ItemGroup Condition="'$(TestDependsOnNode)' == 'true' AND '$(IsWindowsHelixQueue)' == 'true'">
     <HelixPreCommand Include="call RunPowershell.cmd InstallNode.ps1 $(NodeVersion) || exit /b 1" />
   </ItemGroup>
-
   <!-- $(TestDependsOnAspNetPackages) implies $(TestDependsOnAspNetRuntime). -->
   <PropertyGroup Condition=" $(TestDependsOnAspNetPackages) AND !$(TestDependsOnAspNetRuntime) ">
     <TestDependsOnAspNetRuntime>true</TestDependsOnAspNetRuntime>
   </PropertyGroup>
-
   <!--
     Note wildcards mean work items may be submitted without necessary packages when using RunHelix.ps1. Without
     the packages, the RunHelix.ps1 build won't fail fast and tests will fail on the Helix agents.
@@ -81,7 +71,6 @@
       Condition=" $(TestDependsOnAspNetAppPackages) "
     />
   </ItemGroup>
-
   <ItemGroup>
     <!-- Java test projects do not use xUnit. -->
     <HelixContent
@@ -93,7 +82,6 @@
       Condition=" EXISTS('$(OutputPath)Microsoft.VisualStudio.TestPlatform.Extension.Xunit.Xml.TestLogger.dll') "
     />
   </ItemGroup>
-
   <!-- Item group has to be defined here because Helix.props is evaluated before xunit.runner.console.props  -->
   <ItemGroup Condition="$(BuildHelixPayload)">
     <Content Include="@(HelixContent)" Visible="false" />
@@ -110,7 +98,6 @@
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
     </ContentWithTargetPath>
   </ItemGroup>
-
   <!--
     This target is meant to be used when invoking helix tests on one project at a time.
     Usage: dotnet msbuild /t:Helix src/MyTestProject.csproj
@@ -123,14 +110,12 @@
                          RepoRoot=$(RepoRoot)"
     />
   </Target>
-
   <!-- Build the actual helix work items to send to helix queues -->
   <Target Name="CreateHelixPayload" Returns="@(HelixWorkItem)">
     <ItemGroup>
       <_TargetFrameworks Remove="@(_TargetFrameworks)" />
       <_TargetFrameworks Include="$(TargetFrameworks);$(TargetFramework)" />
     </ItemGroup>
-
     <MSBuild
       Projects="$(MSBuildProjectFullPath)"
       Targets="_CreateHelixPayloadInner"
@@ -139,11 +124,9 @@
       <Output TaskParameter="TargetOutputs" ItemName="HelixWorkItem" />
     </MSBuild>
   </Target>
-
   <ItemGroup>
     <PackageReference Include="XunitXml.TestLogger" Version="2.1.26" />
   </ItemGroup>
-
   <Choose>
     <When Condition=" '$(TargetFrameworkIdentifier)' == '.NETFramework' OR '$(IsWindowsOnlyTest)' == 'true' ">
       <ItemGroup>
@@ -156,38 +139,32 @@
       </ItemGroup>
     </Otherwise>
   </Choose>
-
   <Target Name="_SetCreateHelixPayload">
     <PropertyGroup>
       <_SelectedPlatforms>@(HelixProjectPlatform)</_SelectedPlatforms>
     </PropertyGroup>
-
     <ItemGroup Condition="'$(_UseHelixOpenQueues)' != 'true'">
       <_Temp Include="@(HelixAvailableTargetQueue)" />
       <HelixAvailableTargetQueue Remove="@(HelixAvailableTargetQueue)" />
       <HelixAvailableTargetQueue Include="@(_Temp->'%(Identity)'->Replace('.Open',''))" />
     </ItemGroup>
-
     <ItemGroup>
       <!-- Include default queues based on platform -->
       <_HelixProjectTargetQueue
         Include="%(HelixAvailableTargetQueue.Identity)"
         Condition="'%(HelixAvailableTargetQueue.Identity)' != '' AND '$(_SelectedPlatforms.Contains(%(Platform)))' == 'true'"
       />
-
       <_HelixApplicableTargetQueue
         Include="%(_HelixProjectTargetQueue.Identity)"
         Condition="'%(Identity)' == '$(HelixTargetQueue)'"
       />
     </ItemGroup>
-
     <PropertyGroup>
       <!-- Check HelixTargetQueues to allow RunHelix.ps1 to submit jobs anywhere. -->
       <BuildHelixPayload
         Condition=" '$(HelixTargetQueues)' == '' AND @(_HelixApplicableTargetQueue->Count()) == 0 "
         >false</BuildHelixPayload
       >
-
       <BuildHelixPayload
         Condition="'$(IsArm64HelixQueue)' == 'true' AND '$(SkipHelixArm)' == 'true'"
         >false</BuildHelixPayload
@@ -201,7 +178,6 @@
       >
     </PropertyGroup>
   </Target>
-
   <Target Name="_CreateHelixWorkItem" Condition="$(BuildHelixPayload)">
     <PropertyGroup>
       <!-- Extract the effective queue name from this format "(name)host@dockerimage". This is sometimes used in test code to skip tests.  -->
@@ -210,14 +186,12 @@
         >$(HelixTargetQueue.Substring(1, $([MSBuild]::Subtract($(HelixTargetQueue.LastIndexOf(')')), 1))))</_HelixFriendlyNameTargetQueue
       >
     </PropertyGroup>
-
     <!-- Important: If HelixTargetQueue is not removed here, then Publish will occur for every single queue type. And since Publish shouldn't depend on the queue we can just publish once -->
     <MSBuild
       Projects="$(MSBuildProjectFullPath)"
       Targets="Publish"
       RemoveProperties="HelixTargetQueue;TestRunId"
     />
-
     <!-- Isolate Helix tests from whatever happens to be in a parent directory. -->
     <Copy
       SourceFiles="$(RepoRoot)eng\helix\content\Directory.Build.empty.in"
@@ -237,7 +211,6 @@
       RetryDelayMilliseconds="$(CopyRetryDelayMilliseconds)"
       SkipUnchangedFiles="$(SkipCopyUnchangedFiles)"
     />
-
     <!--
       Use the shared framework and ref/ assemblies copied to the Helix agents and expanded by HelixTestRunner.
       Unfortunately, tests of Microsoft.NET.Sdk.Web templates will not reference the just-built
@@ -261,7 +234,6 @@
       RetryDelayMilliseconds="$(CopyRetryDelayMilliseconds)"
       SkipUnchangedFiles="$(SkipCopyUnchangedFiles)"
     />
-
     <ConvertToAbsolutePath Paths="$(PublishDir)">
       <Output TaskParameter="AbsolutePaths" PropertyName="PublishAbsoluteDir" />
     </ConvertToAbsolutePath>
@@ -286,7 +258,6 @@
       </HelixWorkItem>
     </ItemGroup>
   </Target>
-
   <Target
     Name="_CreateHelixPayloadInner"
     Returns="@(HelixWorkItem)"

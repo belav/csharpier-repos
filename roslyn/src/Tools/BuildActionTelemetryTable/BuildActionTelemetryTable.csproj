@@ -4,7 +4,6 @@
     <TargetFramework>net6.0-windows</TargetFramework>
     <IsShipping>false</IsShipping>
   </PropertyGroup>
-
   <ItemGroup>
     <ProjectReference Include="..\..\Compilers\Core\Portable\Microsoft.CodeAnalysis.csproj" />
     <ProjectReference Include="..\..\Compilers\CSharp\Portable\Microsoft.CodeAnalysis.CSharp.csproj" />
@@ -17,7 +16,6 @@
     <ProjectReference Include="..\..\Workspaces\CSharp\Portable\Microsoft.CodeAnalysis.CSharp.Workspaces.csproj" />
     <ProjectReference Include="..\..\Workspaces\VisualBasic\Portable\Microsoft.CodeAnalysis.VisualBasic.Workspaces.vbproj" />
   </ItemGroup>
-
   <!-- These are dependencies that are never deployed but that we need to reflect over the Microsoft.CodeAnalysis.EditorFeatures assemblies -->
   <ItemGroup>
     <PackageReference
@@ -55,7 +53,6 @@
       NoWarn="NU1701"
     />
   </ItemGroup>
-
   <ItemGroup>
     <Compile
       Include="..\..\Compilers\Core\Portable\InternalUtilities\Hash.cs"

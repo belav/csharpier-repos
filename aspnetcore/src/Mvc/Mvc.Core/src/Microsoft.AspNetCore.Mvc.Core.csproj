@@ -16,7 +16,6 @@ Microsoft.AspNetCore.Mvc.RouteAttribute</Description>
     <IsPackable>false</IsPackable>
     <Nullable>enable</Nullable>
   </PropertyGroup>
-
   <ItemGroup>
     <Compile Include="$(SharedSourceRoot)ChunkingCookieManager\**\*.cs" />
     <Compile Include="$(SharedSourceRoot)CopyOnWriteDictionary\**\*.cs" />
@@ -37,14 +36,12 @@ Microsoft.AspNetCore.Mvc.RouteAttribute</Description>
     <Compile Include="$(SharedSourceRoot)HttpRuleParser.cs" LinkBase="Shared" />
     <Compile Include="$(SharedSourceRoot)Json\JsonSerializerExtensions.cs" LinkBase="Shared" />
   </ItemGroup>
-
   <ItemGroup>
     <Compile
       Include="..\..\..\Http\Routing\src\DataSourceDependentCache.cs"
       Link="Routing\DataSourceDependentCache.cs"
     />
   </ItemGroup>
-
   <ItemGroup>
     <Reference Include="Microsoft.AspNetCore.Mvc.Abstractions" />
     <Reference Include="Microsoft.AspNetCore.Authentication.Core" />
@@ -60,12 +57,10 @@ Microsoft.AspNetCore.Mvc.RouteAttribute</Description>
     <Reference Include="Microsoft.Extensions.FileProviders.Abstractions" />
     <Reference Include="Microsoft.Extensions.Logging.Abstractions" />
   </ItemGroup>
-
   <ItemGroup Label="Sources packages">
     <Compile Include="$(SharedSourceRoot)ValueStopwatch\*.cs" />
     <Compile Include="$(SharedSourceRoot)ParameterDefaultValue\*.cs" />
   </ItemGroup>
-
   <ItemGroup>
     <InternalsVisibleTo Include="Microsoft.AspNetCore.Mvc" />
     <InternalsVisibleTo Include="Microsoft.AspNetCore.Mvc.ApiExplorer" />

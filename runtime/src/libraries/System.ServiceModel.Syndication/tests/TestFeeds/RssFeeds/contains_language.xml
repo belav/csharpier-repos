@@ -2,8 +2,6 @@
   Description:  channel should include dc:language
   Expect:       !MissingDCLanguage
 -->
-
-
 <rss version="2.0">
   <channel>
     <title>Missing dc:language</title>

@@ -3,7 +3,6 @@
     <TargetFramework>$(NetCoreAppCurrent)</TargetFramework>
     <EnableDefaultItems>true</EnableDefaultItems>
   </PropertyGroup>
-
   <ItemGroup>
     <ProjectReference Include="..\src\Microsoft.Extensions.Hosting.Systemd.csproj " />
   </ItemGroup>

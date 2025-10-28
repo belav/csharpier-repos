@@ -14,7 +14,6 @@
       Properties="OutputPath=$(TestsOutputDir)sharedFrameworkPublish/"
     />
   </Target>
-
   <Target
     Name="RefreshProjectTestAssets"
     Condition="'$(UsesTestAssets)' == 'true' and '$(SkipTests)' != 'true'"
@@ -26,7 +25,6 @@
       Projects="$(TestDir)PrepareTestAssets\PrepareTestAssets.proj"
       Targets="PrepareTestAssets"
     />
-
     <!-- Create files with a name that describes what a test dir is. Useful if path abbreviated. -->
     <WriteLinesToFile
       File="$(TestArtifactsOutputRoot)$(TestsOutputName)-is-$(MSBuildProjectName).txt"
@@ -41,7 +39,6 @@
       Condition="'$(TestsOutputName)' != '$(MSBuildProjectName)'"
     />
   </Target>
-
   <Target
     Name="SetupTestContextVariables"
     Condition="'$(IsTestProject)' == 'true'"
@@ -60,11 +57,9 @@
       <DirectorySeparatorChar>$([System.IO.Path]::DirectorySeparatorChar)</DirectorySeparatorChar>
       <SystemPathTestsOutputDir>$(TestsOutputDir.Replace('/', '$(DirectorySeparatorChar)'))</SystemPathTestsOutputDir>
       <SystemPathTestsOutputDir>$(SystemPathTestsOutputDir.Replace('\', '$(DirectorySeparatorChar)'))</SystemPathTestsOutputDir>
-
       <!-- This is defined when building in Visual Studio, not DotNetRoot. -->
       <DotNetRoot Condition="'$(DotNetRoot)' == ''">$(NetCoreRoot)</DotNetRoot>
     </PropertyGroup>
-
     <!--
       Fetch the package version of Microsoft.NETCore.App. Use the runtime nupkg project because it
       always ships.
@@ -79,7 +74,6 @@
     >
       <Output TaskParameter="TargetOutputs" PropertyName="NETCoreAppRuntimePackageVersion" />
     </MSBuild>
-
     <!--
       Set up properties used inside tests. Write them to a text file so that they can be found
       inside the VS Test Explorer context the same way as the XUnit runner will find them.
@@ -98,14 +92,12 @@
       <TestContextVariable Include="TEST_ASSETS=$(TestAssetsDir)" />
       <TestContextVariable Include="TEST_ASSETS_OUTPUT=$(TestArtifactsOutputRoot)" />
     </ItemGroup>
-
     <WriteLinesToFile
       File="$(OutDir)TestContextVariables.txt"
       Overwrite="true"
       Lines="@(TestContextVariable)"
     />
   </Target>
-
   <!--
     Fetch the package version of 'Microsoft.NETCore.App.Runtime.<rid>'. The runtime nupkg project
     always ships, so it may or may not have a stable version depending on product lifecycle.
@@ -122,7 +114,6 @@
       <Output TaskParameter="TargetOutputs" PropertyName="NETCoreAppRuntimePackVersion" />
     </MSBuild>
   </Target>
-
   <Target Name="DetermineTestOutputDirectory">
     <PropertyGroup>
       <TestTargetRid Condition="'$(TestTargetRid)' == ''">$(PackageRID)</TestTargetRid>
@@ -134,7 +125,6 @@
       >
     </PropertyGroup>
   </Target>
-
   <Target Name="RemoveOOBPackageReference" AfterTargets="ResolvePackageAssets">
     <!-- Tests have some dependencies that use the System.Text.Json package (HostModel, DependencyModel),
          but the tests should just use the framework on which they are run if possible Explicitly remove
@@ -146,17 +136,14 @@
       />
     </ItemGroup>
   </Target>
-
   <!-- Properties used by runsettings.targets -->
   <PropertyGroup>
     <RunSettingsDotNetHostPath>$(DotNetTool)</RunSettingsDotNetHostPath>
     <RunSettingsTestCaseFilter>$(TestCaseFilter)</RunSettingsTestCaseFilter>
   </PropertyGroup>
-
   <Import
     Project="$(RepositoryEngineeringDir)testing\runsettings.targets"
     Condition="'$(IsTestProject)' == 'true'"
   />
-
   <Import Project="$([MSBuild]::GetPathOfFileAbove(Directory.Build.targets, $(MSBuildThisFileDirectory)..))" />
 </Project>

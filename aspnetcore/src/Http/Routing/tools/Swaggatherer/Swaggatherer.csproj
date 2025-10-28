@@ -4,11 +4,9 @@
     <TargetFramework>$(DefaultNetCoreTargetFramework)</TargetFramework>
     <IsTestAssetProject>true</IsTestAssetProject>
   </PropertyGroup>
-
   <ItemGroup>
     <Reference Include="Newtonsoft.Json" />
     <Reference Include="Microsoft.AspNetCore.Routing" />
-
     <Compile Include="$(SharedSourceRoot)CommandLineUtils\**\*.cs" />
   </ItemGroup>
 </Project>

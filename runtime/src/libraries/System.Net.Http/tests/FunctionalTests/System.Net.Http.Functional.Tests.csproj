@@ -3,7 +3,6 @@
     Condition="'$(TargetOS)' == 'browser'"
     Project="$(CommonTestPath)System/Net/Prerequisites/LocalEchoServer.props"
   />
-
   <PropertyGroup>
     <StringResourcesPath>../../src/Resources/Strings.resx</StringResourcesPath>
     <DefineConstants>$(DefineConstants);SYSNETHTTP_NO_OPENSSL;HTTP3</DefineConstants>
@@ -13,7 +12,6 @@
     <EnablePreviewFeatures>true</EnablePreviewFeatures>
     <EventSourceSupport Condition="'$(TestNativeAot)' == 'true'">true</EventSourceSupport>
   </PropertyGroup>
-
   <!-- DesignTimeBuild requires all the TargetFramework Derived Properties to not be present in the first property group. -->
   <PropertyGroup>
     <TargetPlatformIdentifier>$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)'))</TargetPlatformIdentifier>
@@ -24,7 +22,6 @@
       >$(DefineConstants);TARGETS_BROWSER</DefineConstants
     >
   </PropertyGroup>
-
   <PropertyGroup Condition="'$(TargetOS)' == 'browser'">
     <!-- This doesn't run on V8 because it lacks websocket support -->
     <Scenario>WasmTestOnBrowser</Scenario>
@@ -35,21 +32,17 @@
     <!-- This WASM test is problematic and slow right now. This sets the xharness timeout but there is also override in sendtohelix-wasm.targets -->
     <WasmXHarnessTestsTimeout>01:15:00</WasmXHarnessTestsTimeout>
   </PropertyGroup>
-
   <ItemGroup>
     <WasmExtraFilesToDeploy Include="package.json" />
     <WasmExtraFilesToDeploy Include="package-lock.json" />
-
     <NodeNpmModule Include="ws" Alias="WebSocket" />
     <NodeNpmModule Include="node-fetch" />
     <NodeNpmModule Include="node-abort-controller" />
-
     <TrimmerRootDescriptor
       Include="$(MSBuildThisFileDirectory)ILLink.Descriptor.xml"
       Condition="'$(TargetOS)' == 'browser'"
     />
   </ItemGroup>
-
   <ItemGroup>
     <Compile
       Include="$(CommonPath)DisableRuntimeMarshalling.cs"

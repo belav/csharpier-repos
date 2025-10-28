@@ -3,7 +3,6 @@
     <OutputType>exe</OutputType>
     <TargetFramework>$(DefaultNetCoreTargetFramework)</TargetFramework>
   </PropertyGroup>
-
   <ItemGroup>
     <Reference Include="Microsoft.AspNetCore.DataProtection.EntityFrameworkCore" />
     <Reference Include="Microsoft.EntityFrameworkCore.InMemory" />

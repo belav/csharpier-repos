@@ -9,7 +9,6 @@
     <ApplyNgenOptimization Condition="'$(TargetFramework)' == 'netstandard2.0'"
       >full</ApplyNgenOptimization
     >
-
     <!-- NuGet -->
     <IsPackable>true</IsPackable>
     <PackageDescription>

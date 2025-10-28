@@ -9,8 +9,6 @@
     picked up automatically on startup.
 
 -->
-
-
 <configSchema>
   <sectionSchema name="system.webServer/aspNetCore">
     <attribute name="processPath" type="string" expanded="true" />

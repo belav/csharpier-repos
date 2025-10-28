@@ -4,7 +4,6 @@
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     <UseCompilerGeneratedDocXmlFile>false</UseCompilerGeneratedDocXmlFile>
   </PropertyGroup>
-
   <!-- DesignTimeBuild requires all the TargetFramework Derived Properties to not be present in the first property group. -->
   <PropertyGroup>
     <TargetPlatformIdentifier>$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)'))</TargetPlatformIdentifier>
@@ -12,7 +11,6 @@
       >SR.DiagnosticsFileVersionInfo_PlatformNotSupported</GeneratePlatformNotSupportedAssemblyMessage
     >
   </PropertyGroup>
-
   <ItemGroup Condition="'$(TargetPlatformIdentifier)' != ''">
     <Compile Include="System\Diagnostics\FileVersionInfo.cs" />
     <Compile
@@ -55,7 +53,6 @@
       Link="Common\Interop\Windows\Interop.VSFixedFileInfo.cs"
     />
   </ItemGroup>
-
   <ItemGroup Condition="'$(TargetPlatformIdentifier)' == 'unix'">
     <Compile Include="System\Diagnostics\FileVersionInfo.Unix.cs" />
     <Compile
@@ -71,13 +68,11 @@
       Link="Common\Interop\Unix\Interop.Stat.cs"
     />
   </ItemGroup>
-
   <ItemGroup>
     <Reference Include="System.Memory" />
     <Reference Include="System.Runtime" />
     <Reference Include="System.Runtime.InteropServices" />
   </ItemGroup>
-
   <ItemGroup Condition="'$(TargetPlatformIdentifier)' == 'unix'">
     <Reference Include="System.Collections.Immutable" />
     <Reference Include="System.Reflection.Metadata" />

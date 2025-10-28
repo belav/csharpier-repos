@@ -8,11 +8,9 @@
     <!-- The tests are unhappy with where we lay out the executable -->
     <NativeAotIncompatible>true</NativeAotIncompatible>
   </PropertyGroup>
-
   <PropertyGroup Condition="'$(UseManagedCOMServer)' == 'true'">
     <CLRTestScriptLocalCoreShim>true</CLRTestScriptLocalCoreShim>
     <RequiresMockHostPolicy>true</RequiresMockHostPolicy>
   </PropertyGroup>
-
   <Import Project="$([MSBuild]::GetPathOfFileAbove(Directory.Build.targets, $(MSBuildThisFileDirectory)..))" />
 </Project>

@@ -44,15 +44,12 @@
       Version="$(SystemCollectionsImmutableVersion)"
     />
   </ItemGroup>
-
   <ItemGroup>
     <ProjectReference Include="ILStrip\AssemblyStripper\AssemblyStripper.csproj" />
   </ItemGroup>
-
   <ItemGroup>
     <EmbeddedResource Include="Templates\*.*" />
   </ItemGroup>
-
   <ItemGroup>
     <Compile Include="EmitBundleTask\*.cs" />
     <Compile Include="ILStrip\ILStrip.cs" />
@@ -68,13 +65,11 @@
       Condition="'$(TargetFrameworkIdentifier)' == '.NETFramework'"
     />
   </ItemGroup>
-
   <!-- GetFilesToPackage assists to place `MonoTargetsTasks.dll` in a NuGet package in Microsoft.NET.Runtime.MonoTargets.Sdk.pkgproj for external use -->
   <Target Name="GetFilesToPackage" Returns="@(FilesToPackage)">
     <ItemGroup>
       <_PublishFramework Remove="@(_PublishFramework)" />
       <_PublishFramework Include="$(TargetFrameworks)" />
-
       <!-- Copies every assembly that is in the artifacts/bin/MonoTargetsTasks/ subfolders.  Be careful not to include too much. -->
       <FilesToPackage
         Include="$(OutputPath)%(_PublishFramework.Identity)\*.dll"

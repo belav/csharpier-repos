@@ -2,7 +2,6 @@
   <PropertyGroup>
     <TargetFramework>$(DefaultNetCoreTargetFramework)</TargetFramework>
   </PropertyGroup>
-
   <ItemGroup>
     <Compile Include="$(SharedSourceRoot)NullScope.cs" />
     <Compile Include="$(SharedSourceRoot)TestResources.cs" Link="shared\TestResources.cs" />
@@ -57,7 +56,6 @@
       LinkBase="shared\GeneratedContent"
       CopyToOutputDirectory="PreserveNewest"
     />
-
     <ProjectReference Include="..\..\tools\CodeGenerator\CodeGenerator.csproj" />
     <Reference Include="Microsoft.AspNetCore.Server.Kestrel" />
   </ItemGroup>

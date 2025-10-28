@@ -8,7 +8,6 @@
       >$(RepoRoot)src\Components\Web.JS\dist\Release\blazor.webassembly.js</BlazorWebAssemblyJSPath
     >
     <BlazorWebAssemblyJSMapPath>$(BlazorWebAssemblyJSPath).map</BlazorWebAssemblyJSMapPath>
-
     <_BlazorDevServerPath>$(ArtifactsDir)bin/Microsoft.AspNetCore.Components.WebAssembly.DevServer/$(Configuration)/$(DefaultNetCoreTargetFramework)/blazor-devserver.dll</_BlazorDevServerPath>
     <RunCommand>dotnet</RunCommand>
     <_RunExtraArguments Condition="'$(WasmEnableThreads)' == 'true'"
@@ -16,7 +15,6 @@
     >
     <RunArguments>exec &quot;$(_BlazorDevServerPath)&quot; --applicationpath &quot;$(TargetPath)&quot; $(_RunExtraArguments) $(AdditionalRunArguments)</RunArguments>
   </PropertyGroup>
-
   <ItemGroup>
     <!-- Add a project dependency without reference output assemblies to enforce build order --><!-- Applying workaround for https://github.com/microsoft/msbuild/issues/2661 and https://github.com/dotnet/sdk/issues/952 -->
     <ProjectReference
@@ -28,7 +26,6 @@
       UndefineProperties="TargetFramework"
     />
   </ItemGroup>
-
   <!-- blazor.webassembly.js should exist after Microsoft.AspNetCore.Components.Web.JS.npmproj builds. -->
   <Target
     Name="_CheckBlazorWebAssemblyJSPath"
@@ -37,6 +34,5 @@
   >
     <Error Text="'$(BlazorWebAssemblyJSPath)' does not exist. Enable NodeJS to build this project." />
   </Target>
-
   <Import Project="$([MSBuild]::GetDirectoryNameOfFileAbove($(MSBuildThisFileDirectory)..\, Directory.Build.targets))\Directory.Build.targets" />
 </Project>

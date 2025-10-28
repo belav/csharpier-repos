@@ -73,7 +73,6 @@
     res="Xp_NoContext"
     message="Namespace Manager or XsltContext needed. This query has prefix or variable or userdefined function."
   />
-
   <!-- XSLT Exceptions -->
   <exception res="Xslt_CompileError" message="{0}({1},{2}) :\n" />
   <exception
@@ -94,7 +93,6 @@
   <exception res="Xslt_InvalidStylesheet" message="This is an invalid style sheet." />
   <exception res="Xslt_InvalidNamespace" message="This is an invalid namespace." />
   <exception res="Xslt_UnsuppKeyword" message="'{0}' is an unsupported keyword." />
-
   <exception res="Xslt_InvalidKeyword" message="'{0}' is an invalid keyword." />
   <exception
     res="Xslt_InvalidAttribute"
@@ -229,7 +227,6 @@
     res="Xslt_MultipleRoots"
     message="There are multiple root elements in the output xml."
   />
-
   <!-- XML Exceptions -->
   <exception
     res="Xml_BadStartNameChar"

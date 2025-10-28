@@ -2,10 +2,8 @@
   <PropertyGroup>
     <OutputRID>linux-x64</OutputRID>
     <OutputRID Condition="$([MSBuild]::IsOSPlatform('WINDOWS'))">win-x64</OutputRID>
-
     <!-- Stress projects have their own global.json, the directory above that also has it is the repository root. -->
     <RepositoryRoot>$([MSBuild]::GetDirectoryNameOfFileAbove($(MSBuildThisFileDirectory)../, global.json))/</RepositoryRoot>
-
     <MsQuicInteropIncludes Condition="'$(MsQuicInteropIncludes)' == ''"
       >$(RepositoryRoot)src/libraries/System.Net.Quic/src/System/Net/Quic/Interop/*.cs</MsQuicInteropIncludes
     >

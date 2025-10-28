@@ -2,8 +2,6 @@
   Description:  textInput contains description
   Expect:       !MissingDescription{parent:textInput,element:description}
 -->
-
-
 <rss version="2.0">
   <channel>
     <title>RSS 2.0 test case</title>

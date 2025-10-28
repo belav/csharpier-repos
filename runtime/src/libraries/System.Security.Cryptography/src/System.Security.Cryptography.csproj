@@ -8,7 +8,6 @@
     <NoWarn>$(NoWarn);CS0809</NoWarn>
     <UseCompilerGeneratedDocXmlFile>false</UseCompilerGeneratedDocXmlFile>
   </PropertyGroup>
-
   <!-- DesignTimeBuild requires all the TargetFramework Derived Properties to not be present in the first property group. -->
   <PropertyGroup>
     <TargetPlatformIdentifier>$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)'))</TargetPlatformIdentifier>
@@ -26,7 +25,6 @@
     >
     <NeedOpenSslInitializer Condition="'$(UseOpenSslAead)' == 'true'">true</NeedOpenSslInitializer>
   </PropertyGroup>
-
   <Import
     Project="$(CommonPath)System\Security\Cryptography\Asn1\AsnXml.targets"
     Condition="'$(GeneratePlatformNotSupportedAssemblyMessage)' == ''"
@@ -35,7 +33,6 @@
     Project="$(CommonPath)System\Security\Cryptography\Asn1Reader\System.Security.Cryptography.Asn1Reader.Shared.projitems"
     Condition="'$(GeneratePlatformNotSupportedAssemblyMessage)' == ''"
   />
-
   <ItemGroup Condition="'$(GeneratePlatformNotSupportedAssemblyMessage)' == ''">
     <Compile
       Include="$(CommonPath)DisableRuntimeMarshalling.cs"
@@ -693,7 +690,6 @@
       <DependentUpon>System\Security\Cryptography\X509Certificates\Asn1\PolicyInformationAsn.xml</DependentUpon>
     </Compile>
   </ItemGroup>
-
   <ItemGroup Condition="'$(TargetPlatformIdentifier)' == 'browser'">
     <!-- GetRandomBytes is identical on Unix and Browser -->
     <Compile
@@ -751,7 +747,6 @@
     <Compile Include="System\Security\Cryptography\X509Certificates\StorePal.NotSupported.cs" />
     <Compile Include="System\Security\Cryptography\X509Certificates\X509Pal.NotSupported.cs" />
   </ItemGroup>
-
   <ItemGroup Condition="'$(NeedOpenSslInitializer)' == 'true'">
     <Compile
       Include="$(CommonPath)Interop\Unix\Interop.Libraries.cs"
@@ -766,7 +761,6 @@
       Link="Common\Interop\Unix\System.Security.Cryptography.Native\Interop.Initialization.cs"
     />
   </ItemGroup>
-
   <ItemGroup Condition="'$(UseOpenSsl)' == 'true'">
     <Compile
       Include="$(CommonPath)Interop\Unix\Interop.Errors.cs"
@@ -1101,7 +1095,6 @@
     <Compile Include="System\Security\Cryptography\X509Certificates\X509Pal.OpenSsl.cs" />
     <Compile Include="System\Security\Cryptography\X509Certificates\X509Persistence.cs" />
   </ItemGroup>
-
   <ItemGroup Condition="'$(UseOpenSslAead)' == 'true'">
     <Compile
       Include="$(CommonPath)Interop\Unix\System.Security.Cryptography.Native\Interop.OpenSslAvailable.cs"
@@ -1117,7 +1110,6 @@
     />
     <Compile Include="System\Security\Cryptography\AesCcm.OpenSsl.cs" />
   </ItemGroup>
-
   <ItemGroup Condition="'$(UseAndroidCrypto)' == 'true'">
     <Compile
       Include="$(CommonPath)Interop\Android\Interop.JObjectLifetime.cs"
@@ -1309,7 +1301,6 @@
     <Compile Include="System\Security\Cryptography\X509Certificates\X500NameEncoder.ManagedDecode.cs" />
     <Compile Include="System\Security\Cryptography\X509Certificates\X509Pal.Android.cs" />
   </ItemGroup>
-
   <ItemGroup Condition="'$(UseAppleCrypto)' == 'true'">
     <Compile
       Include="$(CommonPath)Interop\OSX\Interop.CoreFoundation.cs"
@@ -1488,7 +1479,6 @@
     <Compile Include="System\Security\Cryptography\X509Certificates\X509Pal.Apple.ECKey.cs" />
     <Compile Include="System\Security\Cryptography\X509Certificates\X509Pal.Apple.X500Name.cs" />
   </ItemGroup>
-
   <ItemGroup Condition="'$(TargetPlatformIdentifier)' == 'osx'">
     <Compile
       Include="$(CommonPath)Microsoft\Win32\SafeHandles\Asn1SafeHandles.Unix.cs"
@@ -1655,7 +1645,6 @@
     <Compile Include="System\Security\Cryptography\X509Certificates\StorePal.macOS.LoaderPal.cs" />
     <Compile Include="System\Security\Cryptography\X509Certificates\X509Pal.macOS.cs" />
   </ItemGroup>
-
   <ItemGroup Condition="'$(UseAppleCrypto)' == 'true' and '$(TargetPlatformIdentifier)' != 'osx'">
     <Compile
       Include="$(CommonPath)Interop\OSX\System.Security.Cryptography.Native.Apple\Interop.Keychain.iOS.cs"
@@ -1692,7 +1681,6 @@
     <Compile Include="System\Security\Cryptography\X509Certificates\UnsupportedDisallowedStore.cs" />
     <Compile Include="System\Security\Cryptography\X509Certificates\X509Pal.iOS.cs" />
   </ItemGroup>
-
   <ItemGroup Condition="'$(TargetPlatformIdentifier)' == 'windows'">
     <Compile
       Include="$(CommonPath)Interop\Windows\Advapi32\Interop.CryptAcquireContext.cs"
@@ -2566,7 +2554,6 @@
     <Compile Include="System\Security\Cryptography\X509Certificates\X509Pal.Windows.PublicKey.cs" />
     <Compile Include="System\Security\Cryptography\X509Certificates\X509Pal.Windows.X500DistinguishedName.cs" />
   </ItemGroup>
-
   <ItemGroup>
     <Reference Include="System.Collections" />
     <Reference Include="System.Collections.Concurrent" />
@@ -2583,11 +2570,9 @@
     <Reference Include="System.Threading" />
     <Reference Include="System.Threading.Thread" />
   </ItemGroup>
-
   <ItemGroup Condition="'$(TargetPlatformIdentifier)' != '' and '$(TargetPlatformIdentifier)' != 'windows' and '$(TargetPlatformIdentifier' != 'browser'">
     <Reference Include="System.Console" Condition="'$(Configuration)' == 'Debug'" />
   </ItemGroup>
-
   <ItemGroup>
     <None Include="@(AsnXml)" />
   </ItemGroup>

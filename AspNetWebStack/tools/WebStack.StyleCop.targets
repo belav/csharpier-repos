@@ -4,17 +4,14 @@
     <StyleCopAdditionalAddins Include="$(WebStackRootPath)packages\Microsoft.Web.SkipStrongNames.1.0.0\**\Microsoft.Web.StyleCop.dll" />
     <StyleCopAdditionalAddinPaths Include="@(StyleCopAdditionalAddins -> '%(RootDir)%(Directory)')" />
   </ItemGroup>
-
   <UsingTask
     AssemblyFile="@(StyleCopMsBuildRunner)"
     TaskName="StyleCopTask"
     Condition=" '@(StyleCopMsBuildRunner)' != '' "
   />
-
   <PropertyGroup>
     <PrepareForRunDependsOn>$(PrepareForRunDependsOn);StyleCop</PrepareForRunDependsOn>
   </PropertyGroup>
-
   <PropertyGroup>
     <IsStyleCopEnabled Condition="'$(IsStyleCopEnabled)' == ''"
       >$(StyleCopEnabled)</IsStyleCopEnabled
@@ -42,7 +39,6 @@
       >0</StyleCopMaxViolationCount
     >
   </PropertyGroup>
-
   <!-- Define target: StyleCop -->
   <Target
     Name="StyleCop"
@@ -57,19 +53,16 @@
       Text="Multiple StyleCop copies detected. Please clean out your packages folder and try again."
       Condition=" $(StyleCopMsBuildRunner.Contains(';')) "
     />
-
     <Delete
       Files="$(StyleCopSuccessMarkerFile)"
       Condition="Exists('$(StyleCopSuccessMarkerFile)')"
     />
-
     <Message Text="Running Style Analysis..." Importance="high" />
     <Message
       Text="Forcing full StyleCop reanalysis."
       Condition="'$(StyleCopForceFullAnalysis)' == 'true'"
       Importance="Low"
     />
-
     <!-- Determine what files should be checked. Take all Compile items, but exclude those that have
         set ExcludeFromStyleCop=true or ExcludeFromSourceAnalysis=true. -->
     <ItemGroup>
@@ -82,9 +75,7 @@
         Condition=" '%(Compile.ExcludeFromStyleCop)' == 'true' or '%(Compile.ExcludeFromSourceAnalysis)' == 'true'"
       />
     </ItemGroup>
-
     <Message Text="Analyzing @(StyleCopFiles)" Importance="Low" />
-
     <!-- Show list of what files should be excluded. checked. Take all Compile items, but exclude those that have
         set ExcludeFromStyleCop=true or ExcludeFromSourceAnalysis=true. -->
     <Message
@@ -92,7 +83,6 @@
       Importance="Normal"
       Condition=" '@(StyleCopExcludedFiles)' != '' "
     />
-
     <!-- Run the StyleCop MSBuild task. -->
     <StyleCopTask
       ProjectFullPath="$(MSBuildProjectDirectory)"
@@ -106,15 +96,12 @@
       OutputFile="$(StyleCopOutputFile)"
       MaxViolationCount="$(StyleCopMaxViolationCount)"
     />
-
     <!-- Make output files cleanable -->
     <ItemGroup>
       <FileWrites Include="$(StyleCopOutputFile)" />
       <FileWrites Include="$(StyleCopSuccessMarkerFile)" />
     </ItemGroup>
-
     <Touch Files="$(StyleCopSuccessMarkerFile)" AlwaysCreate="true" />
-
     <!-- Add the StyleCop.cache file to the list of files we've written - so they can be cleaned up on a Build Clean. -->
     <CreateItem Include="StyleCop.Cache" Condition="'$(StyleCopCacheResults)' == 'true'">
       <Output TaskParameter="Include" ItemName="FileWrites" />

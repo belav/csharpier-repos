@@ -1,10 +1,8 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <Import Project="..\..\buildscripts\common.props"></Import>
-
   <PropertyGroup>
     <TargetFrameworks>net462;netcoreapp2.1;netcoreapp3.1;net6.0</TargetFrameworks>
   </PropertyGroup>
-
   <PropertyGroup>
     <OutputType>Exe</OutputType>
     <Authors>Castle Contributors</Authors>
@@ -17,17 +15,14 @@
     <PublicSign Condition="'$(OS)'=='Unix'">true</PublicSign>
     <StartupObject>Program</StartupObject>
   </PropertyGroup>
-
   <ItemGroup Condition="'$([MSBuild]::GetTargetFrameworkIdentifier(&quot;$(TargetFramework)&quot;))' == '.NETFramework'">
     <None Include="config\netfx\App.config" />
     <None Remove="config\netcoreapp\App.config" />
   </ItemGroup>
-
   <ItemGroup Condition="'$([MSBuild]::GetTargetFrameworkIdentifier(&quot;$(TargetFramework)&quot;))' == '.NETCoreApp'">
     <None Remove="config\netfx\App.config" />
     <None Include="config\netcoreapp\App.config" />
   </ItemGroup>
-
   <ItemGroup>
     <None Update="Services.Logging.Tests\log4netIntegration\log4net.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
@@ -39,7 +34,6 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </EmbeddedResource>
   </ItemGroup>
-
   <ItemGroup>
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.1.0" />
     <PackageReference Include="NUnit.Console" Version="3.11.1" />
@@ -64,7 +58,6 @@
     <PackageReference Include="System.Net.NameResolution" Version="4.3.0" />
     <PackageReference Include="System.Net.Primitives" Version="4.3.0" />
   </ItemGroup>
-
   <ItemGroup Condition="'$(TargetFramework)'=='net6.0'">
     <PackageReference Include="PublicApiGenerator" Version="10.1.2" />
   </ItemGroup>

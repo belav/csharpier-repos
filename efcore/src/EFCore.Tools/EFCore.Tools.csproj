@@ -1,6 +1,5 @@
 <Project>
   <Import Project="Sdk.props" Sdk="Microsoft.NET.Sdk" />
-
   <PropertyGroup>
     <TargetFramework>netcoreapp2.0</TargetFramework>
     <PackageId>Microsoft.EntityFrameworkCore.Tools</PackageId>
@@ -26,7 +25,6 @@ Update-Database
     <CheckEolTargetFramework>False</CheckEolTargetFramework>
     <ImplicitUsings>true</ImplicitUsings>
   </PropertyGroup>
-
   <ItemGroup>
     <Using Include="System.Diagnostics" />
     <Using Include="System.Linq.Expressions" />
@@ -53,11 +51,9 @@ Update-Database
     <Using Include="Microsoft.Extensions.Logging" />
     <Using Include="Microsoft.Extensions.DependencyInjection" />
   </ItemGroup>
-
   <ItemGroup>
     <ProjectReference Include="..\ef\ef.csproj" />
   </ItemGroup>
-
   <ItemGroup>
     <PackageReference
       Include="Microsoft.DotNet.Build.Tasks.Templating"
@@ -67,11 +63,9 @@ Update-Database
       IsImplicitlyDefined="true"
     />
   </ItemGroup>
-
   <ItemGroup>
     <GeneratedContent Include="*.psd1.in" />
   </ItemGroup>
-
   <Target
     Name="SetPackageProperties"
     BeforeTargets="InitializeStandardNuspecProperties"
@@ -79,20 +73,16 @@ Update-Database
   >
     <PropertyGroup>
       <DevelopmentDependency>true</DevelopmentDependency>
-
       <!-- Make sure we create a symbols.nupkg -->
       <IncludeSymbols>true</IncludeSymbols>
     </PropertyGroup>
-
     <ItemGroup>
       <NuspecProperty Include="version=$(PackageVersion)" />
       <NuspecProperty Include="configuration=$(Configuration)" />
       <NuspecProperty Include="intermediateOutputPath=$(IntermediateOutputPath)" />
     </ItemGroup>
   </Target>
-
   <Import Project="Sdk.targets" Sdk="Microsoft.NET.Sdk" />
-
   <Target
     Name="GenerateContent"
     BeforeTargets="GenerateNuspec"
@@ -105,7 +95,6 @@ Update-Database
       OutputPath="$(IntermediateOutputPath)%(FileName)"
     />
   </Target>
-
   <Target Name="Compile" />
   <Target Name="CopyFilesToOutputDirectory" />
 </Project>

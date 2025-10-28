@@ -8,10 +8,8 @@
     <DebugType>none</DebugType>
     <GenerateDependencyFile>false</GenerateDependencyFile>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
-
     <!-- System.Collections.Immutable 7.0.0 does not support netcoreapp3.1 -->
     <SuppressTfmSupportBuildWarnings>true</SuppressTfmSupportBuildWarnings>
-
     <!-- NuGet -->
     <IsPackable>true</IsPackable>
     <IsSourcePackage>true</IsSourcePackage>
@@ -45,21 +43,17 @@
       ClassName="Microsoft.CodeAnalysis.Collections.Internal.SR"
     />
   </ItemGroup>
-
   <!--
     Source packaging helpers.
   -->
-
   <PropertyGroup>
     <TargetsForTfmSpecificContentInPackage>$(TargetsForTfmSpecificContentInPackage);_AddResourceFilesToSourcePackage</TargetsForTfmSpecificContentInPackage>
   </PropertyGroup>
-
   <Target Name="_AddResourceFilesToSourcePackage">
     <PropertyGroup>
       <!-- TODO: language to dir name mapping (https://github.com/Microsoft/msbuild/issues/2101) -->
       <_LanguageDirName>$(DefaultLanguageSourceExtension.TrimStart('.'))</_LanguageDirName>
     </PropertyGroup>
-
     <ItemGroup>
       <_File Remove="@(_File)" />
       <_File
@@ -72,7 +66,6 @@
         TargetDir="contentFiles/$(_LanguageDirName)/$(TargetFramework)"
         BuildAction="None"
       />
-
       <TfmSpecificPackageFile
         Include="@(_File)"
         PackagePath="%(_File.TargetDir)/%(_File.RecursiveDir)%(_File.FileName)%(_File.Extension)"

@@ -14,7 +14,6 @@
     >
     <EnableDefaultItems>true</EnableDefaultItems>
   </PropertyGroup>
-
   <ItemGroup>
     <EnabledGenerators Include="ComInterfaceGenerator" />
     <Compile
@@ -26,7 +25,6 @@
       Link="ComInterfaces\%(RecursiveDir)\%(FileName).cs"
     />
   </ItemGroup>
-
   <ItemGroup>
     <ProjectReference
       Include="..\..\gen\ComInterfaceGenerator\ComInterfaceGenerator.csproj"

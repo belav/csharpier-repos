@@ -5,7 +5,6 @@
       <Context>File;BrowseObject</Context>
     </PropertyPageSchema>
   </ItemGroup>
-
   <Target Name="GenerateOpenApiCode">
     <MSBuild
       Projects="$(MSBuildProjectFile)"
@@ -14,7 +13,6 @@
       RemoveProperties="RuntimeIdentifier"
     />
   </Target>
-
   <Target
     Name="_GenerateOpenApiCode"
     BeforeTargets="BeforeCompile"

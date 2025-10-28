@@ -4,7 +4,6 @@
     <EnableDefaultItems>true</EnableDefaultItems>
     <NoWarn>$(NoWarn);CS8002</NoWarn>
   </PropertyGroup>
-
   <!-- DesignTimeBuild requires all the TargetFramework Derived Properties to not be present in the first property group. -->
   <PropertyGroup>
     <SignAssembly
@@ -12,7 +11,6 @@
       >false</SignAssembly
     >
   </PropertyGroup>
-
   <ItemGroup>
     <ProjectReference
       Include="$(LibrariesProjectRoot)Microsoft.Extensions.DependencyInjection\src\Microsoft.Extensions.DependencyInjection.csproj"
@@ -29,7 +27,6 @@
     <PackageReference Include="Grace.DependencyInjection.Extensions" Version="7.1.0" />
     <PackageReference Include="Stashbox.Extensions.Dependencyinjection" Version="4.2.3" />
   </ItemGroup>
-
   <!-- These packages don't support .NETFramework -->
   <ItemGroup Condition="'$(TargetFrameworkIdentifier)' == '.NETCoreApp'">
     <PackageReference Include="Lamar.Microsoft.DependencyInjection" Version="8.0.1" />

@@ -7,7 +7,6 @@
     <TestRunRequiresLiveRefPack>true</TestRunRequiresLiveRefPack>
     <StringResourcesPath>../../gen/Common/Resources/Strings.resx</StringResourcesPath>
   </PropertyGroup>
-
   <ItemGroup>
     <Compile
       Include="$(CommonTestPath)SourceGenerators\LiveReferencePack.cs"
@@ -51,7 +50,6 @@
       Link="Verifiers\CSharpVerifierHelper.cs"
     />
   </ItemGroup>
-
   <ItemGroup>
     <PackageReference
       Include="Microsoft.CodeAnalysis.CSharp.Workspaces"
@@ -70,13 +68,11 @@
       Version="$(CompilerPlatformTestingVersion)"
     />
   </ItemGroup>
-
   <ItemGroup>
     <ProjectReference Include="..\Ancillary.Interop\Ancillary.Interop.csproj" />
     <ProjectReference Include="..\..\gen\ComInterfaceGenerator\ComInterfaceGenerator.csproj" />
     <EnabledGenerators Include="ComInterfaceGenerator" />
   </ItemGroup>
-
   <ItemGroup>
     <None
       Include="$(RepoRoot)/NuGet.config"

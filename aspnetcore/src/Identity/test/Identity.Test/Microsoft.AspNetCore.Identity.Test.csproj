@@ -2,11 +2,9 @@
   <PropertyGroup>
     <TargetFramework>$(DefaultNetCoreTargetFramework)</TargetFramework>
   </PropertyGroup>
-
   <ItemGroup>
     <Compile Include="$(IdentityTestSharedSourceRoot)**\*.cs" LinkBase="Shared" />
   </ItemGroup>
-
   <ItemGroup>
     <Reference Include="AngleSharp" />
     <Reference Include="System.Net.Http" />
@@ -19,7 +17,6 @@
     <Reference Include="Microsoft.Extensions.Options.ConfigurationExtensions" />
     <Reference Include="Microsoft.Extensions.TimeProvider.Testing" />
   </ItemGroup>
-
   <Target
     Name="AddProjectReferenceAssemblyInfo"
     BeforeTargets="GetAssemblyAttributes"
@@ -38,7 +35,6 @@
       </AssemblyAttribute>
     </ItemGroup>
   </Target>
-
   <Target Name="PublishAssets" AfterTargets="Publish">
     <ItemGroup>
       <_IdentityUIContent Include="$(MSBuildThisFileDirectory)..\..\UI\src\assets\**\*" />

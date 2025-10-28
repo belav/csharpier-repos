@@ -7,7 +7,6 @@
     <IsPackable>false</IsPackable>
     <Nullable>enable</Nullable>
   </PropertyGroup>
-
   <ItemGroup>
     <Compile Include="$(SignalRSharedSourceRoot)ReflectionHelper.cs" Link="ReflectionHelper.cs" />
     <Compile Include="$(SharedSourceRoot)ClosedGenericMatcher\*.cs" />
@@ -35,7 +34,6 @@
       LinkBase="Shared"
     />
   </ItemGroup>
-
   <ItemGroup>
     <Reference Include="Microsoft.AspNetCore.Authorization.Policy" />
     <Reference Include="Microsoft.AspNetCore.SignalR.Common" />
@@ -43,7 +41,6 @@
     <Reference Include="Microsoft.Extensions.DependencyInjection.Abstractions" />
     <Reference Include="Microsoft.Extensions.Logging.Abstractions" />
   </ItemGroup>
-
   <ItemGroup>
     <InternalsVisibleTo Include="Microsoft.AspNetCore.SignalR.Tests.Utils" />
     <InternalsVisibleTo Include="Microsoft.AspNetCore.SignalR.Microbenchmarks" />

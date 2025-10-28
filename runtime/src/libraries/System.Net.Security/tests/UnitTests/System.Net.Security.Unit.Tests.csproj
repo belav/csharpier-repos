@@ -155,7 +155,6 @@
       Link="Common\System\Net\ArrayBuffer.cs"
     />
   </ItemGroup>
-
   <!-- NT Authentication -->
   <ItemGroup Condition="'$(TargetPlatformIdentifier)' != 'browser'">
     <Compile
@@ -183,7 +182,6 @@
       Link="Common\System\Net\Security\SSPIHandleCache.cs"
     />
   </ItemGroup>
-
   <!-- Unix specific files (NT Authentication) -->
   <ItemGroup Condition="'$(TargetPlatformIdentifier)' != 'windows' and '$(TargetPlatformIdentifier)' != 'browser'">
     <Compile
@@ -203,7 +201,6 @@
       Link="Common\System\Net\Capability.Security.Unix.cs"
     />
   </ItemGroup>
-
   <!-- Windows specific files (NT Authentication) -->
   <ItemGroup Condition="'$(TargetPlatformIdentifier)' == 'windows'">
     <Compile

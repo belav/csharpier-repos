@@ -8,7 +8,6 @@
     <Nullable>enable</Nullable>
     <CopyLocalLockFileAssemblies>true</CopyLocalLockFileAssemblies>
   </PropertyGroup>
-
   <ItemGroup>
     <ProjectReference Include="../XUnitWrapperLibrary/XUnitWrapperLibrary.csproj" />
     <PackageReference

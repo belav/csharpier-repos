@@ -7,7 +7,6 @@
     >
       <method signature="System.Void PreservedMethod()" />
     </type>
-
     <type
       fullname="Mono.Linker.Tests.Cases.LinkXml.UsedNonRequiredTypeIsKeptWithSingleMethod/ReallyUnused"
       preserve="fields"

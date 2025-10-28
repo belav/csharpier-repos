@@ -4,16 +4,13 @@
   <PropertyGroup>
     <PrepareForBuildDependsOn>$(PrepareForBuildDependsOn);AddDefaultTestAppConfig</PrepareForBuildDependsOn>
   </PropertyGroup>
-
   <ItemGroup>
     <PackageReference Include="XunitXml.TestLogger" Version="$(XunitXmlTestLoggerVersion)" />
   </ItemGroup>
-
   <ItemGroup>
     <!-- Include BannedSymbols covering all test projects -->
     <AdditionalFiles Include="$(MSBuildThisFileDirectory)..\config\test\BannedSymbols.txt" />
   </ItemGroup>
-
   <ItemGroup Condition="'$(TargetFrameworkIdentifier)' != '.NETFramework'">
     <!--
       For .NET Core, app.config is not available. Languages which support module initializers may provide an
@@ -28,7 +25,6 @@
       Condition="Exists('$(RepositoryEngineeringDir)config\test\Core\InstallTraceListener$(DefaultLanguageSourceExtension)')"
     />
   </ItemGroup>
-
   <!--
     Include settings file (xunit.runner.json) if specified.
     Workaround for https://github.com/dotnet/arcade/issues/7080
@@ -40,7 +36,6 @@
       Visible="false"
       Condition="'$(XUnitDesktopSettingsFile)' != '' and '$(TargetFrameworkIdentifier)' == '.NETFramework'"
     />
-
     <None
       Include="$(XUnitCoreSettingsFile)"
       CopyToOutputDirectory="PreserveNewest"
@@ -48,7 +43,6 @@
       Condition="'$(XUnitCoreSettingsFile)' != '' and '$(TargetFrameworkIdentifier)' == '.NETCoreApp'"
     />
   </ItemGroup>
-
   <!-- Add a default test app.config, if the project doesn't already have one-->
   <Target Name="AddDefaultTestAppConfig">
     <PropertyGroup>
@@ -59,7 +53,6 @@
         >$(RepositoryEngineeringDir)config\test\Desktop\app.config</_DefaultAppConfigFile
       >
     </PropertyGroup>
-
     <ItemGroup Condition="'$(_AlreadyHasAppConfig)' != 'true'">
       <None Include="$(_DefaultAppConfigFile)" Condition="'$(_DefaultAppConfigFile)' != ''">
         <Link>app.config</Link>

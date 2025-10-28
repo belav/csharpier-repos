@@ -7,7 +7,6 @@
       Condition="'@(TestDirectories)' != ''"
     />
   </Target>
-
   <Target Name="CreateXunitWrapper" DependsOnTargets="CreateXunitFacts">
     <PropertyGroup>
       <_XunitWrapperGen>
@@ -66,24 +65,20 @@ $(_XunitEpilog)
 ]]>
       </XunitRunnerConfig>
     </PropertyGroup>
-
     <!-- <Exec Command="md" -->
     <MakeDir Directories="$(XunitWrapperGeneratedCSDirBase)$(Category)" />
-
     <!-- Write the file -->
     <WriteLinesToFile
       File="$(XunitWrapperSrcDir)\$(XunitWrapper).cs"
       Lines="$(_XunitWrapperGen)"
       Overwrite="true"
     />
-
     <!-- Write the file -->
     <WriteLinesToFile
       File="$(XunitWrapperSrcDir)\$(XunitWrapper).csproj"
       Lines="$(XunitWrapperGenCsProj)"
       Overwrite="true"
     />
-
     <!-- Write the file -->
     <WriteLinesToFile
       File="$(XunitWrapperSrcDir)\xunit.runner.json"
@@ -91,16 +86,12 @@ $(_XunitEpilog)
       Overwrite="true"
     />
   </Target>
-
   <Target Name="BuildXunitWrapper">
     <MSBuild Projects="$(XunitWrapperSrcDir)\$(XunitWrapper).csproj" Targets="Restore;Build" />
   </Target>
-
   <Import Project="$(MSBuildThisFileDirectory)Common/testgrouping.proj" />
-
   <Target Name="CreateXunitFacts" DependsOnTargets="GetListOfTestCmds">
     <!-- NOTE! semicolons must be escaped with %3B boooo -->
-
     <PropertyGroup>
       <CategoryWithSlash>$([System.IO.Path]::GetRelativePath('$(XunitTestBinBase)', '$(_CMDDIR)'))</CategoryWithSlash>
       <Category Condition="'$(RunningOnUnix)' != 'true'"
@@ -122,7 +113,6 @@ $(_XunitEpilog)
         >true</IsMobile
       >
     </PropertyGroup>
-
     <PropertyGroup>
       <_XunitProlog Condition=" '$(_XunitProlog)'=='' and '$(IsMobile)'=='false' ">
         <![CDATA[
@@ -260,13 +250,11 @@ namespace $([System.String]::Copy($(Category)).Replace(".","_").Replace("\","").
 ]]>
       </_XunitEpilog>
     </PropertyGroup>
-
     <PropertyGroup>
       <TestExecutableReplacement Condition="'$(TestWrapperTargetsWindows)' != 'true' "
         >testExecutable = testExecutable.Replace("\\", "/")%3B</TestExecutableReplacement
       >
     </PropertyGroup>
-
     <ItemGroup>
       <AllCMDsPresent
         Include="$(_CMDDIR)\**\*.$(TestScriptExtension)"
@@ -279,7 +267,6 @@ namespace $([System.String]::Copy($(Category)).Replace(".","_").Replace("\","").
       <AllCMDsPresent Remove="@(MergedRunnableTestPaths)" />
       <AllCMDsPresent Remove="@(OutOfProcessTestPaths)" />
     </ItemGroup>
-
     <ItemGroup Condition="'@(AllCMDsPresent)' != ''">
       <TestGroupingDistinctWithCase Include="@(TestGrouping->Metadata('FullPath')->DistinctWithCase())" />
       <TestGroupingNotRelevant

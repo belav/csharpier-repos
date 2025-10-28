@@ -7,13 +7,11 @@
       >true</SkipTestsOnPlatform
     >
   </PropertyGroup>
-
   <ItemGroup Condition="'$(SkipTestsOnPlatform)' != 'true'">
     <Compile Include="SGenTests.cs" />
     <Compile Include="$(CommonTestPath)System\Runtime\Serialization\Utils.cs" />
     <Compile Include="$(TestSourceFolder)..\..\System.Private.Xml\tests\XmlSerializer\XmlSerializerTests.cs" />
   </ItemGroup>
-
   <ItemGroup>
     <Compile Include="AlwaysPassTest.cs" />
     <None Include="Expected.SerializableAssembly.XmlSerializers.cs">
@@ -25,12 +23,10 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
-
   <ItemGroup Condition=" '$(SkipTestsOnPlatform)' != 'true'">
     <ProjectReference Include="..\src\Microsoft.XmlSerializer.Generator.csproj" />
     <ProjectReference Include="SerializableAssembly.csproj" />
   </ItemGroup>
-
   <!-- This target runs before binplacing as it needs to provide a test assembly to binplace, and depends on CopyFilesToOutputDirectory
        so that the Generator app dll and runtimeconfig will be copied to the OutputPath -->
   <Target
@@ -73,7 +69,6 @@
       <ReferenceCopyLocalPaths Include="$(OutputPath)$(SerializerName).dll" />
     </ItemGroup>
   </Target>
-
   <UsingTask
     TaskName="SetParentAssemblyId"
     TaskFactory="RoslynCodeTaskFactory"

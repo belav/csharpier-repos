@@ -12,12 +12,10 @@
 Commonly Used Types:
 System.Composition.CompositionContextExtensions
 System.Composition.Hosting.ContainerConfiguration</PackageDescription>
-
     <!-- TODO https://github.com/dotnet/runtime/issues/90400: Annotate for nullable reference types -->
     <Nullable>disable</Nullable>
     <NoWarn>$(NoWarn);nullable</NoWarn>
   </PropertyGroup>
-
   <ItemGroup>
     <Compile Include="System\Composition\CompositionContextExtensions.cs" />
     <Compile Include="System\Composition\Convention\AttributedModelProviderExtensions.cs" />
@@ -47,7 +45,6 @@ System.Composition.Hosting.ContainerConfiguration</PackageDescription>
       Link="Common\System\Numerics\Hashing\HashHelpers.cs"
     />
   </ItemGroup>
-
   <ItemGroup>
     <ProjectReference Include="$(LibrariesProjectRoot)System.Composition.AttributedModel\src\System.Composition.AttributedModel.csproj" />
     <ProjectReference Include="$(LibrariesProjectRoot)System.Composition.Hosting\src\System.Composition.Hosting.csproj" />

@@ -14,7 +14,6 @@
     <BuildVersionNoSuffix>$(BuildVersion.Split('-')[0])</BuildVersionNoSuffix>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
   </PropertyGroup>
-
   <PropertyGroup>
     <Product>Castle Core</Product>
     <Authors>Castle Project Contributors</Authors>
@@ -33,14 +32,12 @@
     <Copyright>Copyright (c) 2004-$(CurrentYear) Castle Project - http://www.castleproject.org/ </Copyright>
     <ContentTargetFolders>.</ContentTargetFolders>
   </PropertyGroup>
-
   <ItemGroup>
     <Content Include="..\..\CHANGELOG.md" />
     <Content Include="..\..\LICENSE" Pack="True" PackagePath="" />
     <Content Include="..\..\buildscripts\ASL - Apache Software Foundation License.txt" />
     <Content Include="..\..\buildscripts\readme.txt" />
   </ItemGroup>
-
   <ItemGroup>
     <PackageReference
       Include="Microsoft.NETFramework.ReferenceAssemblies"
@@ -48,54 +45,42 @@
       PrivateAssets="All"
     />
   </ItemGroup>
-
   <PropertyGroup>
     <DiagnosticsConstants>DEBUG</DiagnosticsConstants>
     <NetStandard20Constants>TRACE</NetStandard20Constants>
     <NetStandard21Constants>TRACE</NetStandard21Constants>
     <DesktopClrConstants>TRACE;FEATURE_APPDOMAIN;FEATURE_ASSEMBLYBUILDER_SAVE;FEATURE_SERIALIZATION;FEATURE_SYSTEM_CONFIGURATION</DesktopClrConstants>
   </PropertyGroup>
-
   <PropertyGroup Condition="'$(TargetFramework)|$(Configuration)'=='net462|Debug'">
     <DefineConstants>$(DiagnosticsConstants);$(DesktopClrConstants)</DefineConstants>
   </PropertyGroup>
-
   <PropertyGroup Condition="'$(TargetFramework)|$(Configuration)'=='net462|Release'">
     <DefineConstants>$(DesktopClrConstants)</DefineConstants>
   </PropertyGroup>
-
   <PropertyGroup Condition="'$(TargetFramework)|$(Configuration)'=='netstandard2.0|Debug'">
     <DefineConstants>$(DiagnosticsConstants);$(NetStandard20Constants)</DefineConstants>
   </PropertyGroup>
-
   <PropertyGroup Condition="'$(TargetFramework)|$(Configuration)'=='netstandard2.0|Release'">
     <DefineConstants>$(NetStandard20Constants)</DefineConstants>
   </PropertyGroup>
-
   <PropertyGroup Condition="'$(TargetFramework)|$(Configuration)'=='netstandard2.1|Debug'">
     <DefineConstants>$(DiagnosticsConstants);$(NetStandard21Constants)</DefineConstants>
   </PropertyGroup>
-
   <PropertyGroup Condition="'$(TargetFramework)|$(Configuration)'=='netstandard2.1|Release'">
     <DefineConstants>$(NetStandard21Constants)</DefineConstants>
   </PropertyGroup>
-
   <PropertyGroup Condition="'$(TargetFramework)|$(Configuration)'=='netcoreapp2.1|Debug'">
     <DefineConstants>$(DiagnosticsConstants);$(NetStandard20Constants)</DefineConstants>
   </PropertyGroup>
-
   <PropertyGroup Condition="'$(TargetFramework)|$(Configuration)'=='netcoreapp2.1|Release'">
     <DefineConstants>$(NetStandard20Constants)</DefineConstants>
   </PropertyGroup>
-
   <PropertyGroup Condition="'$(TargetFramework)|$(Configuration)'=='netcoreapp3.1|Debug'">
     <DefineConstants>$(DiagnosticsConstants);$(NetStandard21Constants)</DefineConstants>
   </PropertyGroup>
-
   <PropertyGroup Condition="'$(TargetFramework)|$(Configuration)'=='netcoreapp3.1|Release'">
     <DefineConstants>$(NetStandard21Constants)</DefineConstants>
   </PropertyGroup>
-
   <ItemGroup>
     <None Include="$(SolutionDir)docs\images\castle-logo.png" Pack="true" PackagePath="" />
   </ItemGroup>

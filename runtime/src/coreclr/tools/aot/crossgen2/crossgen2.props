@@ -16,31 +16,25 @@
     <Configurations>Debug;Release;Checked</Configurations>
     <RunAnalyzers>false</RunAnalyzers>
   </PropertyGroup>
-
   <Import Project="../AotCompilerCommon.props" />
-
   <ItemGroup Label="Embedded Resources">
     <EmbeddedResource Include="Properties\Resources.resx">
       <GenerateSource>true</GenerateSource>
       <ClassName>System.SR</ClassName>
     </EmbeddedResource>
   </ItemGroup>
-
   <ItemGroup>
     <PackageReference Include="System.CommandLine" Version="$(SystemCommandLineVersion)" />
   </ItemGroup>
-
   <ItemGroup>
     <ProjectReference Include="..\ILCompiler.DependencyAnalysisFramework\ILCompiler.DependencyAnalysisFramework.csproj" />
     <ProjectReference Include="..\ILCompiler.TypeSystem\ILCompiler.TypeSystem.csproj" />
     <ProjectReference Include="..\ILCompiler.ReadyToRun\ILCompiler.ReadyToRun.csproj" />
   </ItemGroup>
-
   <ItemGroup>
     <Compile Include="..\..\Common\CommandLineHelpers.cs" Link="CommandLineHelpers.cs" />
     <Compile Include="..\..\Common\InstructionSetHelpers.cs" Link="InstructionSetHelpers.cs" />
   </ItemGroup>
-
   <PropertyGroup>
     <TargetArchitectureForSharedLibraries Condition="'$(CrossHostArch)' == ''"
       >$(TargetArchitecture)</TargetArchitectureForSharedLibraries
@@ -52,10 +46,8 @@
       Condition="'$(TargetArchitectureForSharedLibraries)'=='armel'"
       >arm</TargetArchitectureForSharedLibraries
     >
-
     <JitInterfaceLibraryName>$(LibPrefix)jitinterface_$(TargetArchitectureForSharedLibraries)$(LibSuffix)</JitInterfaceLibraryName>
   </PropertyGroup>
-
   <ItemGroup>
     <Content
       Include="$(CoreCLRArtifactsPath)/$(CrossHostArch)/$(JitInterfaceLibraryName)"
@@ -63,7 +55,6 @@
       CopyToPublishDirectory="PreserveNewest"
       Link="%(FileName)%(Extension)"
     />
-
     <Content
       Include="$(CoreCLRArtifactsPath)/$(CrossHostArch)/$(LibPrefix)clrjit_*_$(TargetArchitectureForSharedLibraries)$(LibSuffix)"
       CopyToOutputDirectory="PreserveNewest"
@@ -71,7 +62,6 @@
       Link="%(FileName)%(Extension)"
     />
   </ItemGroup>
-
   <ItemGroup Condition="'$(TargetOS)' == 'windows'">
     <Content
       Include="$(RuntimeBinDir)/pgort*.dll"
@@ -80,7 +70,6 @@
       Link="%(FileName)%(Extension)"
       Condition="'$(PgoInstrument)' != ''"
     />
-
     <PackageReference
       Include="Microsoft.DiaSymReader.Native"
       Version="$(MicrosoftDiaSymReaderNativeVersion)"
@@ -89,7 +78,6 @@
       GeneratePathProperty="true"
     />
   </ItemGroup>
-
   <PropertyGroup Condition="'$(TargetOS)' == 'windows'">
     <DiaSymReaderTargetArch>$(TargetArchitectureForSharedLibraries)</DiaSymReaderTargetArch>
     <DiaSymReaderTargetArch Condition="'$(DiaSymReaderTargetArch)' == 'x64'"
@@ -104,7 +92,6 @@
       >$(CoreCLRArtifactsPath)crossgen2/$(DiaSymReaderTargetArchFileName)</DiaSymReaderTargetArchPath
     >
   </PropertyGroup>
-
   <ItemGroup Condition="'$(TargetOS)' == 'windows'">
     <Content
       Include="$(DiaSymReaderTargetArchPath)"

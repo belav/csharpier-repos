@@ -3,7 +3,6 @@
     <TargetFrameworks>$(NetCoreAppCurrent);$(NetCoreAppCurrent)-browser;$(NetCoreAppCurrent)-ios;$(NetCoreAppCurrent)-tvos;$(NetCoreAppCurrent)-android</TargetFrameworks>
     <UseCompilerGeneratedDocXmlFile>false</UseCompilerGeneratedDocXmlFile>
   </PropertyGroup>
-
   <!-- DesignTimeBuild requires all the TargetFramework Derived Properties to not be present in the first property group. -->
   <PropertyGroup>
     <TargetPlatformIdentifier Condition="$(TargetFramework.Contains('-'))"
@@ -13,14 +12,12 @@
     <NoWarn Condition="'$(TargetPlatformIdentifier)' != ''">$(NoWarn);CS0649</NoWarn>
     <NoWarn>$(NoWarn);CA1822;IDE0060</NoWarn>
   </PropertyGroup>
-
   <ItemGroup>
     <ILLinkSubstitutionsXmls
       Condition="'$(TargetPlatformIdentifier)' == ''"
       Include="$(ILLinkDirectory)ILLink.Substitutions.NonMobile.xml"
     />
   </ItemGroup>
-
   <ItemGroup>
     <Compile Include="System.Runtime.Serialization.Formatters.TypeForwards.cs" />
     <Compile Include="System\Runtime\Serialization\DeserializationEventHandler.cs" />
@@ -77,7 +74,6 @@
       Link="Common\System\Collections\HashHelpers.cs"
     />
   </ItemGroup>
-
   <ItemGroup Condition="'$(TargetPlatformIdentifier)' == ''">
     <Compile Include="System\Runtime\Serialization\Formatters\Binary\BinaryFormatter.Core.cs" />
     <Compile Include="System\Runtime\Serialization\LocalAppContextSwitches.cs" />
@@ -85,11 +81,9 @@
       <Link>Common\System\LocalAppContextSwitches.Common.cs</Link>
     </Compile>
   </ItemGroup>
-
   <ItemGroup Condition="'$(TargetPlatformIdentifier)' != ''">
     <Compile Include="System\Runtime\Serialization\Formatters\Binary\BinaryFormatter.PlatformNotSupported.cs" />
   </ItemGroup>
-
   <ItemGroup>
     <ProjectReference Include="$(CoreLibProject)" />
     <ProjectReference Include="$(LibrariesProjectRoot)System.Runtime\src\System.Runtime.csproj" />

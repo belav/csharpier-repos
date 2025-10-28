@@ -23,7 +23,6 @@
     <RollForward>Major</RollForward>
     <RunAnalyzers>false</RunAnalyzers>
   </PropertyGroup>
-
   <ItemGroup>
     <Compile
       Include="..\aot\ILCompiler.ReadyToRun\IBC\MIbcProfileParser.cs"
@@ -46,12 +45,10 @@
       Link="TypeSystemMetadataEmitter"
     />
   </ItemGroup>
-
   <ItemGroup>
     <ProjectReference Include="..\aot\ILCompiler.TypeSystem\ILCompiler.TypeSystem.csproj" />
     <ProjectReference Include="..\aot\ILCompiler.Reflection.ReadyToRun\ILCompiler.Reflection.ReadyToRun.csproj" />
   </ItemGroup>
-
   <ItemGroup>
     <PackageReference
       Include="Microsoft.Diagnostics.Tracing.TraceEvent"

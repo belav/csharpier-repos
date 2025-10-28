@@ -5,11 +5,9 @@
     <GenerateRuntimeConfigurationFiles>true</GenerateRuntimeConfigurationFiles>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
-
   <ItemGroup>
     <Compile Include="XUnitLogChecker.cs" />
   </ItemGroup>
-
   <ItemGroup>
     <Compile
       Include="../Coreclr.TestWrapper/CoreclrTestWrapperLib.cs"

@@ -10,7 +10,6 @@
     >
     <StripSymbols>false</StripSymbols>
   </PropertyGroup>
-
   <ItemGroup>
     <Compile Include="Program.cs" />
   </ItemGroup>

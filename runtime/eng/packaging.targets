@@ -18,7 +18,6 @@
     <PackageValidationBaselineVersion Condition="'$(PackageValidationBaselineVersion)' == ''"
       >$(ApiCompatNetCoreAppBaselineVersion)</PackageValidationBaselineVersion
     >
-
     <BeforePack>$(BeforePack);IncludeAnalyzersInPackage;AddNETStandardCompatErrorFileForPackaging</BeforePack>
     <TargetsForTfmSpecificContentInPackage>$(TargetsForTfmSpecificContentInPackage);AddRuntimeSpecificFilesToPackage;IncludeProjectReferencesWithPackAttributeInPackage</TargetsForTfmSpecificContentInPackage>
     <!-- Don't include target platform specific dependencies, since we use the target platform to represent RIDs instead -->
@@ -67,18 +66,15 @@
                                        '$(DotNetBuildFromSource)' == 'true'"
       >true</GeneratePackageOnBuild
     >
-
     <!-- During NoBuild pack invocations, skip project reference build. Necessary for the IncludeProjectReferencesWithPackAttributeInPackage target. -->
     <BuildProjectReferences Condition="'$(NoBuild)' == 'true'">false</BuildProjectReferences>
   </PropertyGroup>
-
   <PropertyGroup Condition="'$(PreReleaseVersionLabel)' == 'servicing'">
     <!-- In servicing, the live package is compared against the GA version in strict mode. -->
     <EnableStrictModeForBaselineValidation>true</EnableStrictModeForBaselineValidation>
     <!-- In servicing, disable the APICompat rule that validates that the assembly versions must match. -->
     <NoWarn>$(NoWarn);CP0003</NoWarn>
   </PropertyGroup>
-
   <PropertyGroup
     Condition="'$(PreReleaseVersionLabel)' == 'servicing' and
                             '$(PackageUseIncrementalServicingVersion)' == 'true'"
@@ -87,12 +83,10 @@
     be calculated properly, if we don't set it to 0, we would get the dependency version using the
     product Patch Version -->
     <ServicingVersion Condition="'$(ServicingVersion)' == ''">0</ServicingVersion>
-
     <!-- Always update the package version in servicing. -->
     <Version>$(MajorVersion).$(MinorVersion).$(ServicingVersion)</Version>
     <Version Condition="'$(VersionSuffix)' != ''">$(Version)-$(VersionSuffix)</Version>
   </PropertyGroup>
-
   <ItemGroup>
     <!-- Add a marker to help the designer optimize & share .NET Core packages -->
     <None
@@ -102,19 +96,16 @@
       Condition="'$(IncludeDesignerMarker)' != 'false'"
     />
   </ItemGroup>
-
   <ItemGroup Condition="'$(AddNETFrameworkAssemblyReferenceToPackage)' == 'true' and '$(NetFrameworkMinimum)' != ''">
     <_FrameworkAssemblyReferences
       Include="$(MSBuildProjectName)"
       TargetFramework="$(NetFrameworkMinimum)"
     />
   </ItemGroup>
-
   <!-- Add a package README file from. -->
   <ItemGroup Condition="'$(PackageReadmeFile)' != ''">
     <None Include="$(PackageReadmeFile)" Pack="true" PackagePath="\" />
   </ItemGroup>
-
   <Choose>
     <When Condition="'$(AddXamarinPlaceholderFilesToPackage)' == 'true' or '$(AddNETFrameworkPlaceholderFileToPackage)' == 'true'">
       <PropertyGroup>
@@ -142,7 +133,6 @@
       </ItemGroup>
     </When>
   </Choose>
-
   <!-- Include a netstandard compat error if the project targets both .NETStandard and
        .NETCoreApp. This prohibits users to consume packages on an older .NETCoreApp version
        than the minimum supported one. -->
@@ -160,7 +150,6 @@
                                        ($(TargetFrameworks.Contains('$(NetFrameworkMinimum)')) or $(TargetFrameworks.Contains('net47')) or $(TargetFrameworks.Contains('net48')))"
     />
   </ItemGroup>
-
   <!-- Add runtime specific file into the package if the tfm is RID specific. -->
   <Target
     Name="AddRuntimeSpecificFilesToPackage"
@@ -180,7 +169,6 @@
         >$(TargetFramework.SubString(0, $(TargetFramework.IndexOf('-'))))</_targetFrameworkWithoutSuffix
       >
     </PropertyGroup>
-
     <ItemGroup>
       <TfmRuntimeSpecificPackageFile
         Include="@(SatelliteDllsProjectOutputGroupOutput);
@@ -201,7 +189,6 @@
       />
     </ItemGroup>
   </Target>
-
   <!-- Call a target in the analyzer project to get all the files it would normally place in a package.
        These will be returned as items with identity pointing to the built file, and PackagePath metadata
        set to their location in the package. IsSymbol metadata will be set to distinguish symbols. -->
@@ -216,7 +203,6 @@
     >
       <Output TaskParameter="TargetOutputs" ItemName="_AnalyzerFile" />
     </MSBuild>
-
     <ItemGroup>
       <Content Include="@(_AnalyzerFile)" Pack="True" Condition="!%(_AnalyzerFile.IsSymbol)" />
       <!-- Symbols don't honor PackagePath.  By default they are placed in lib/%(TargetFramework).
@@ -230,7 +216,6 @@
       />
     </ItemGroup>
   </Target>
-
   <PropertyGroup>
     <_MultiTargetRoslynComponentTargetsTemplate>$(MSBuildThisFileDirectory)MultiTargetRoslynComponent.targets.template</_MultiTargetRoslynComponentTargetsTemplate>
     <MultiTargetRoslynComponentTargetsFileIntermediatePath>$(IntermediateOutputPath)MultiTargetRoslynComponent.targets</MultiTargetRoslynComponentTargetsFileIntermediatePath>
@@ -239,7 +224,6 @@
       >true</IncludeMultiTargetRoslynComponentTargets
     >
   </PropertyGroup>
-
   <!-- In packages that contain multi-target Analyzers, include a .targets file that will select the correct analyzer. -->
   <Target
     Name="IncludeMultiTargetRoslynComponentTargetsInPackage"
@@ -261,7 +245,6 @@
       />
     </ItemGroup>
   </Target>
-
   <Target
     Name="GenerateMultiTargetRoslynComponentTargetsFile"
     Inputs="$(MSBuildProjectFullPath);$(_MultiTargetRoslynComponentTargetsTemplate)"
@@ -273,7 +256,6 @@
         >Disable$(PackageId.Replace('.', ''))SourceGenerator</DisableSourceGeneratorPropertyName
       >
     </PropertyGroup>
-
     <WriteLinesToFile
       File="$(MultiTargetRoslynComponentTargetsFileIntermediatePath)"
       Lines="$([System.IO.File]::ReadAllText('$(_MultiTargetRoslynComponentTargetsTemplate)')
@@ -283,7 +265,6 @@
       Overwrite="true"
     />
   </Target>
-
   <!-- Add targets file that marks a .NETStandard applicable tfm as unsupported. -->
   <Target
     Name="AddNETStandardCompatErrorFileForPackaging"
@@ -304,21 +285,18 @@
       </_NETStandardCompatErrorFileContent>
       <_NETStandardCompatErrorPlaceholderFilePackagePath>buildTransitive$([System.IO.Path]::DirectorySeparatorChar)%(NETStandardCompatError.Supported)</_NETStandardCompatErrorPlaceholderFilePackagePath>
     </PropertyGroup>
-
     <WriteLinesToFile
       File="$(_NETStandardCompatErrorFilePath)"
       Lines="$(_NETStandardCompatErrorFileContent)"
       Overwrite="true"
       WriteOnlyWhenDifferent="true"
     />
-
     <ItemGroup>
       <_PackageBuildFile
         Include="@(None->Metadata('PackagePath'));
                                   @(Content->Metadata('PackagePath'))"
       />
       <_PackageBuildFile PackagePathWithoutFilename="$([System.IO.Path]::GetDirectoryName('%(Identity)'))" />
-
       <None
         Include="$(_NETStandardCompatErrorFilePath)"
         PackagePath="buildTransitive\%(NETStandardCompatError.Identity)\$(PackageId).targets"
@@ -334,7 +312,6 @@
       />
     </ItemGroup>
   </Target>
-
   <Target
     Name="IncludeProjectReferencesWithPackAttributeInPackage"
     Condition="'@(ProjectReference)' != '' and @(ProjectReference->AnyHaveMetadataValue('Pack', 'true'))"
@@ -347,7 +324,6 @@
         >$(TargetFramework.SubString(0, $(TargetFramework.IndexOf('-'))))</_referringTargetFramework
       >
     </PropertyGroup>
-
     <ItemGroup>
       <!-- Add ReferenceCopyLocalPaths for ProjectReferences which are flagged as Pack="true" into the package. -->
       <_projectReferenceCopyLocalPaths Include="@(ReferenceCopyLocalPaths->WithMetadataValue('ReferenceSourceTarget', 'ProjectReference')->WithMetadataValue('Pack', 'true'))" />
@@ -366,7 +342,6 @@
       <!-- If the reference assembly is included, don't put the documentation file next to the lib assembly. -->
       <TfmSpecificPackageFile Remove="@(_projectReferenceCopyLocalPaths->WithMetadataValue('Extension', '.xml')->WithMetadataValue('IncludeReferenceAssemblyInPackage', 'true'))" />
     </ItemGroup>
-
     <ItemGroup>
       <!-- Include the reference assembly and put the documentation file next to it. -->
       <_referenceAssemblyPaths Include="@(_projectReferenceCopyLocalPaths->WithMetadataValue('Extension', '.dll')->WithMetadataValue('IncludeReferenceAssemblyInPackage', 'true')->Metadata('ReferenceAssembly'))" />
@@ -377,7 +352,6 @@
       />
     </ItemGroup>
   </Target>
-
   <!-- Manual invoked target that can be used by toolset packages by adding it to the `TargetsForTfmSpecificContentInPackage` property. -->
   <Target Name="AddBuildOutputToToolsPackage">
     <ItemGroup>
@@ -401,7 +375,6 @@
       <TfmSpecificPackageFile Remove="@(TfmSpecificPackageFile->WithMetadataValue('Extension', '.pdb'))" />
     </ItemGroup>
   </Target>
-
   <Target
     Name="ValidateServicingVersionIsProperlySet"
     Condition="'$(PreReleaseVersionLabel)' == 'servicing' and

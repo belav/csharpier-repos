@@ -11,7 +11,6 @@
     <NoWarn>$(NoWarn);RS1036</NoWarn>
     <StringResourcesPath>../../gen/Common/Resources/Strings.resx</StringResourcesPath>
   </PropertyGroup>
-
   <ItemGroup>
     <Compile
       Include="$(CommonTestPath)SourceGenerators\LiveReferencePack.cs"
@@ -55,7 +54,6 @@
       Link="Verifiers\CSharpVerifierHelper.cs"
     />
   </ItemGroup>
-
   <ItemGroup>
     <PackageReference
       Include="Microsoft.CodeAnalysis.CSharp.Workspaces"
@@ -74,12 +72,10 @@
       Version="$(CompilerPlatformTestingVersion)"
     />
   </ItemGroup>
-
   <ItemGroup>
     <ProjectReference Include="..\Ancillary.Interop\Ancillary.Interop.csproj" />
     <ProjectReference Include="..\..\gen\LibraryImportGenerator\LibraryImportGenerator.csproj" />
   </ItemGroup>
-
   <ItemGroup>
     <None
       Include="$(RepoRoot)/NuGet.config"
@@ -87,7 +83,6 @@
       CopyToOutputDirectory="PreserveNewest"
     />
   </ItemGroup>
-
   <!-- Reference the actual NetAnalyzers project to ensure we're testing our diagnostic suppressors against the actual analyzers they'll run with, not fake shims we have to maintain -->
   <ItemGroup Condition="'$(RunAnalyzers)' != 'false'">
     <PackageReference
@@ -104,7 +99,6 @@
       GeneratePathProperty="true"
     />
   </ItemGroup>
-
   <Target
     Name="AddNetAnalyzersAssemblyAsReference"
     BeforeTargets="ResolveAssemblyReferences"

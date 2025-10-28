@@ -3,7 +3,6 @@
     <StaticLibPrefix>lib</StaticLibPrefix>
     <ExeSuffix Condition="'$(HostOS)' == 'windows'">.exe</ExeSuffix>
   </PropertyGroup>
-
   <!-- Add path globs specific to native binaries to exclude unnecessary files from packages. -->
   <Choose>
     <When Condition="$(PackageRID.StartsWith('win'))">
@@ -30,7 +29,6 @@
       </PropertyGroup>
     </Otherwise>
   </Choose>
-
   <ItemGroup>
     <AdditionalLibPackageExcludes
       Condition="'$(SymbolsSuffix)' != ''"

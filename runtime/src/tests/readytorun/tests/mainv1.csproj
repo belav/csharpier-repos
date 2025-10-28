@@ -159,14 +159,12 @@ export DOTNET_GCName DOTNET_GCStress DOTNET_HeapVerify DOTNET_ReadyToRun
 ]]>
     </CLRTestBashPreCommands>
   </PropertyGroup>
-
   <Target Name="CopyTestAssemblyToOutputs" AfterTargets="Build">
     <PropertyGroup>
       <TestAssemblyName>test.dll</TestAssemblyName>
       <TestAssemblySourcePath>$(OutputPath)/../testv1/test/</TestAssemblySourcePath>
       <TestAssemblyTargetPath>$(OutputPath)/testv1</TestAssemblyTargetPath>
     </PropertyGroup>
-
     <MakeDir Directories="$(TestAssemblyTargetPath)" />
     <Copy
       SourceFiles="$(TestAssemblySourcePath)$(TestAssemblyName)"

@@ -11,12 +11,10 @@
     >
       <AdditionalSourceFiles>@(_additionalSourceFiles)</AdditionalSourceFiles>
     </TestConsoleAppSourceFiles>
-
     <TestSupportFiles Include="$(MSBuildThisFileDirectory)SupportFiles\*.*">
       <DestinationFolder>$([MSBuild]::NormalizeDirectory('$(TrimmingTestProjectsDir)', '$(MSBuildProjectName)'))</DestinationFolder>
     </TestSupportFiles>
   </ItemGroup>
-
   <Target
     Name="CreateTestDir"
     Inputs="@(TestSupportFiles)"
@@ -29,7 +27,6 @@
       SkipUnchangedFiles="true"
     />
   </Target>
-
   <Target Name="GetTestConsoleApps">
     <ItemGroup>
       <TestConsoleAppSourceFiles>
@@ -47,7 +44,6 @@
         <TestExecutionDirectory>$([MSBuild]::NormalizeDirectory('%(ProjectDir)', 'bin', '$(Configuration)', '%(TargetFramework)', '%(TestRuntimeIdentifier)', 'publish'))</TestExecutionDirectory>
       </TestConsoleAppSourceFiles>
     </ItemGroup>
-
     <ItemGroup>
       <TestConsoleApps Include="@(TestConsoleAppSourceFiles->'%(ProjectFile)')">
         <ProjectCompileItems>%(FullPath)</ProjectCompileItems>
@@ -63,7 +59,6 @@
       <GenerateProjectsInputs Include="@(TestSupportFiles)" />
     </ItemGroup>
   </Target>
-
   <Target
     Name="GenerateProjects"
     DependsOnTargets="GetTestConsoleApps;CreateTestDir"
@@ -75,58 +70,46 @@
       <_projectFile>%(TestConsoleApps.ProjectFile)</_projectFile>
       <_projectSourceFile>%(TestConsoleApps.ProjectCompileItems)</_projectSourceFile>
     </PropertyGroup>
-
     <ItemGroup Condition="'$(AdditionalProjectReferences)' == '' AND '@(ProjectReference)' != ''">
       <_additionalProjectReference Include="&lt;ProjectReference Include=&quot;%(ProjectReference.FullPath)&quot; SkipUseReferenceAssembly=&quot;true&quot; /&gt;" />
     </ItemGroup>
-
     <ItemGroup Condition="'$(AdditionalProjectReferences)' != ''">
       <_additionalProjectReferenceTemp Include="$(AdditionalProjectReferences)" />
       <_additionalProjectReference Include="&lt;ProjectReference Include=&quot;$(LibrariesProjectRoot)%(_additionalProjectReferenceTemp.Identity)\src\%(_additionalProjectReferenceTemp.Identity).csproj&quot; SkipUseReferenceAssembly=&quot;true&quot; /&gt;" />
     </ItemGroup>
-
     <PropertyGroup>
       <_additionalProjectReferencesString>@(_additionalProjectReference, '%0a    ')</_additionalProjectReferencesString>
     </PropertyGroup>
-
     <ItemGroup Condition="'@(PackageReference)' != ''">
       <PackageReference Condition="'%(PackageReference.PrivateAssets)' == ''">
         <PrivateAssets>contentfiles;analyzers;build</PrivateAssets>
       </PackageReference>
     </ItemGroup>
-
     <ItemGroup Condition="'@(PackageReference)' != ''">
       <_packageReferences
         Include="@(PackageReference)"
         Exclude="Microsoft.DotNet.ILCompiler;Microsoft.NET.ILLink.Tasks"
       />
     </ItemGroup>
-
     <ItemGroup Condition="'@(_packageReferences)' != ''">
       <_additionalPackageReference Include="&lt;PackageReference Include=&quot;%(_packageReferences.Identity)&quot; Version=&quot;%(_packageReferences.Version)&quot; &gt; &#xA;        &lt;PrivateAssets&gt;%(_packageReferences.PrivateAssets)&lt;/PrivateAssets&gt;&#xA;    &lt;/PackageReference&gt;" />
     </ItemGroup>
-
     <PropertyGroup>
       <_additionalPackageReferencesString>@(_additionalPackageReference, '%0a    ')</_additionalPackageReferencesString>
     </PropertyGroup>
-
     <ItemGroup>
       <_additionalProjectSourceFiles Include="%(TestConsoleApps.AdditionalSourceFiles)" />
     </ItemGroup>
-
     <ItemGroup>
       <_switchesAsItems Include="%(TestConsoleApps.DisabledFeatureSwitches)" Value="false" />
       <_switchesAsItems Include="%(TestConsoleApps.EnabledFeatureSwitches)" Value="true" />
-
       <_propertiesAsItems Include="%(TestConsoleApps.DisabledProperties)" Value="false" />
       <_propertiesAsItems Include="%(TestConsoleApps.EnabledProperties)" Value="true" />
     </ItemGroup>
-
     <PropertyGroup>
       <_runtimeHostConfigurationOptionsString>@(_switchesAsItems->'&lt;RuntimeHostConfigurationOption Include=&quot;%(Identity)&quot; Value=&quot;%(Value)&quot; Trim=&quot;true&quot; /&gt;', '%0a    ')</_runtimeHostConfigurationOptionsString>
       <_additionalPropertiesString>@(_propertiesAsItems->'&lt;%(Identity)&gt;%(Value)&lt;/%(Identity)&gt;', '%0a    ')</_additionalPropertiesString>
     </PropertyGroup>
-
     <MakeDir Directories="$(_projectDir)" />
     <WriteLinesToFile
       File="$(_projectFile)"
@@ -149,12 +132,10 @@
     />
     <Message Text="Generated $(_projectFile)" />
   </Target>
-
   <Target Name="PublishTrimmedProjects" DependsOnTargets="GenerateProjects">
     <PropertyGroup>
       <_RemoveProps>TreatWarningsAsErrors;BuildingSolutionFile;SolutionPath;SolutionFileName;SolutionExt;SolutionDir;CurrentSolutionConfigurationContents;Platform</_RemoveProps>
     </PropertyGroup>
-
     <MSBuild
       Projects="@(TestConsoleApps)"
       Targets="Restore"
@@ -162,7 +143,6 @@
       Properties="MSBuildRestoreSessionId=$([System.Guid]::NewGuid());Configuration=$(Configuration)"
       RemoveProperties="$(_RemoveProps)"
     />
-
     <MSBuild
       Projects="@(TestConsoleApps)"
       Targets="Publish"
@@ -170,7 +150,6 @@
       RemoveProperties="$(_RemoveProps)"
     />
   </Target>
-
   <Target
     Name="ExecuteApplications"
     DependsOnTargets="PublishTrimmedProjects"
@@ -187,21 +166,17 @@
     >
       <Output TaskParameter="ExitCode" PropertyName="ExecutionExitCode" />
     </Exec>
-
     <Error
       Condition="'$(ExecutionExitCode)' != '100'"
       Text="Error: [Failed Test]: %(TestConsoleApps.ProjectCompileItems). The Command %(TestConsoleApps.TestCommand) returned a non-success exit code: $(ExecutionExitCode)."
       ContinueOnError="ErrorAndContinue"
     />
   </Target>
-
   <Target Name="CleanProjects" AfterTargets="Clean">
     <RemoveDir Directories="$([MSBuild]::NormalizeDirectory('$(TrimmingTestProjectsDir)', '$(MSBuildProjectName)'))" />
   </Target>
-
   <!-- define build to do nothing -->
   <Target Name="Build" />
-
   <Target Name="Test" DependsOnTargets="ExecuteApplications" />
   <Target Name="VSTest" DependsOnTargets="ExecuteApplications" />
 </Project>

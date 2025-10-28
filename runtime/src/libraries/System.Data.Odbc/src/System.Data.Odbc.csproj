@@ -20,7 +20,6 @@ System.Data.Odbc.OdbcParameter
 System.Data.Odbc.OdbcParameterCollection
 System.Data.Odbc.OdbcTransaction</PackageDescription>
   </PropertyGroup>
-
   <!-- DesignTimeBuild requires all the TargetFramework Derived Properties to not be present in the first property group. -->
   <PropertyGroup>
     <TargetPlatformIdentifier>$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)'))</TargetPlatformIdentifier>
@@ -38,7 +37,6 @@ System.Data.Odbc.OdbcTransaction</PackageDescription>
       >SR.Odbc_PlatformNotSupported</GeneratePlatformNotSupportedAssemblyMessage
     >
   </PropertyGroup>
-
   <ItemGroup Condition="'$(TargetPlatformIdentifier)' != ''">
     <Compile
       Include="$(CommonPath)System\Data\Common\AdapterUtil.cs"
@@ -168,10 +166,8 @@ System.Data.Odbc.OdbcTransaction</PackageDescription>
     />
     <Compile Include="$(CommonPath)Interop\Interop.Odbc.cs" Link="Common\Interop\Interop.Odbc.cs" />
   </ItemGroup>
-
   <ItemGroup Condition="'$(TargetFrameworkIdentifier)' == '.NETCoreApp'">
     <Compile Include="System\Data\Odbc\ODBC32.Common.cs" />
-
     <Compile
       Include="$(CommonPath)DisableRuntimeMarshalling.cs"
       Link="Common\DisableRuntimeMarshalling.cs"
@@ -181,32 +177,27 @@ System.Data.Odbc.OdbcTransaction</PackageDescription>
       Link="Common\System\Runtime\InteropServices\HandleRefMarshaller.cs"
     />
   </ItemGroup>
-
   <ItemGroup Condition="'$(TargetPlatformIdentifier)' == 'unix'">
     <Compile
       Include="$(CommonPath)Interop\Unix\Interop.Odbc.cs"
       Link="Common\Interop\Unix\Interop.Odbc.cs"
     />
   </ItemGroup>
-
   <ItemGroup Condition="'$(TargetPlatformIdentifier)' == 'windows'">
     <Compile
       Include="$(CommonPath)Interop\Windows\Interop.Libraries.cs"
       Link="Common\Interop\Windows\Interop.Libraries.cs"
     />
   </ItemGroup>
-
   <ItemGroup>
     <EmbeddedResource
       Include="Resources\System.Data.Odbc.OdbcMetaData.xml"
       LogicalName="System.Data.Odbc.OdbcMetaData.xml"
     />
   </ItemGroup>
-
   <ItemGroup>
     <None Include="DatabaseSetupInstructions.md" />
   </ItemGroup>
-
   <ItemGroup Condition="'$(TargetFrameworkIdentifier)' == '.NETCoreApp'">
     <ProjectReference Include="$(LibrariesProjectRoot)System.Text.Encoding.CodePages\src\System.Text.Encoding.CodePages.csproj" />
   </ItemGroup>

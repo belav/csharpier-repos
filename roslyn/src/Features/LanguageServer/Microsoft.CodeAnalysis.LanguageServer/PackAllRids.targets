@@ -3,7 +3,6 @@
   <PropertyGroup>
     <ImportNuGetBuildTasksPackTargetsFromSdk>false</ImportNuGetBuildTasksPackTargetsFromSdk>
   </PropertyGroup>
-
   <Target Name="Pack">
     <!--
         We have to run restore first with the PublishReadyToRun flag set to true to ensure that the correct crossgen packages get restored.
@@ -17,18 +16,15 @@
       Targets="Restore"
       Properties="PublishReadyToRun=true;RestoreUseStaticGraphEvaluation=false"
     />
-
     <ItemGroup>
       <!-- Transform RuntimeIdentifiers property to item -->
       <RuntimeIdentifierForPack Include="$(RuntimeIdentifiers)" />
       <RuntimeIdentifierForPack Include="neutral" />
-
       <!-- Transform RuntimeIdentifierForPublish items to project items to pass to MSBuild task -->
       <ProjectToPublish Include="@(RuntimeIdentifierForPack->'$(MSBuildProjectFullPath)')">
         <AdditionalProperties>PackRuntimeIdentifier=%(RuntimeIdentifierForPack.Identity)</AdditionalProperties>
       </ProjectToPublish>
     </ItemGroup>
-
     <MSBuild Projects="@(ProjectToPublish)" Targets="Pack" BuildInParallel="true" />
   </Target>
 </Project>

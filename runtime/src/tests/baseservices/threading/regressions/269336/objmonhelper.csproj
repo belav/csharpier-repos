@@ -7,7 +7,6 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="objmonhelper.cs" />
-
     <CLRTestEnvironmentVariable Include="DOTNET_FastGCStress" Value="1" />
   </ItemGroup>
 </Project>

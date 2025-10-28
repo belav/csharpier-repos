@@ -12,23 +12,18 @@
     >
     <!-- This project should not build against the live built .NETCoreApp targeting pack as it contributes to the build itself. -->
     <UseLocalTargetingRuntimePack>false</UseLocalTargetingRuntimePack>
-
     <TestUsingWorkloads Condition="'$(TestUsingWorkloads)' == ''">true</TestUsingWorkloads>
     <!-- these are imported in this project instead -->
     <SkipWorkloadsTestingTargetsImport>false</SkipWorkloadsTestingTargetsImport>
     <InstallWorkloadForTesting>true</InstallWorkloadForTesting>
-
     <!-- don't run any wasm build steps -->
     <IsWasiProject>false</IsWasiProject>
     <UseDefaultTestHost>true</UseDefaultTestHost>
-
     <EnableRunSettingsSupport>false</EnableRunSettingsSupport>
     <DefineConstants>TARGET_WASI</DefineConstants>
     <_MonoSrcWasmDir>$([MSBuild]::NormalizeDirectory($(MonoProjectRoot), 'wasm'))</_MonoSrcWasmDir>
   </PropertyGroup>
-
   <Import Project="$(RepositoryEngineeringDir)testing\workloads-testing.targets" />
-
   <PropertyGroup>
     <RunScriptInputName Condition="'$(OS)' == 'Windows_NT'"
       >RunScriptTemplate.cmd</RunScriptInputName
@@ -36,13 +31,10 @@
     <RunScriptInputName Condition="'$(OS)' != 'Windows_NT'"
       >RunScriptTemplate.sh</RunScriptInputName
     >
-
     <RunScriptInputPath>$(_MonoSrcWasmDir)Wasm.Build.Tests\data\$(RunScriptInputName)</RunScriptInputPath>
   </PropertyGroup>
-
   <ItemGroup>
     <Compile Include="$(_MonoSrcWasmDir)Wasm.Build.Tests\Common\*.cs" />
-
     <None
       Include="..\testassets\**\*"
       Link="testassets\%(RecursiveDir)%(FileName)%(Extension)"
@@ -64,7 +56,6 @@
       CopyToOutputDirectory="PreserveNewest"
     />
   </ItemGroup>
-
   <Target
     Name="UpdateRunScriptCommands"
     BeforeTargets="GenerateRunScript"
@@ -74,17 +65,14 @@
       Condition="'$(TestUsingWorkloads)' == 'true' and '$(PackageVersionForWorkloadManifests)' == ''"
       Text="%24(PackageVersionForWorkloadManifests) is not set. PackageVersion=$(PackageVersion)."
     />
-
     <Error
       Condition="'$(SdkWithWorkloadForTestingPath)' == ''"
       Text="%24(SdkWithWorkloadForTestingPath) is not set"
     />
-
     <PropertyGroup>
       <_SdkWithWorkloadForTestingDirName>$([System.IO.Path]::GetDirectoryName($(SdkWithWorkloadForTestingPath)))</_SdkWithWorkloadForTestingDirName>
       <_SdkWithWorkloadForTestingDirName>$([System.IO.Path]::GetFilename($(_SdkWithWorkloadForTestingDirName)))</_SdkWithWorkloadForTestingDirName>
     </PropertyGroup>
-
     <ItemGroup Condition="'$(TestUsingWorkloads)' == 'true'">
       <RunScriptCommands
         Condition="'$(OS)' != 'Windows_NT'"
@@ -95,7 +83,6 @@
         Include="set WORKLOAD_PACKS_VER=$(PackageVersionForWorkloadManifests)"
       />
     </ItemGroup>
-
     <ItemGroup Condition="'$(ContinuousIntegrationBuild)' == 'true'">
       <!-- TEST_USING_WORKLOADS - this is set per helix job, in sendtohelixhelp.proj -->
       <RunScriptCommands
@@ -107,7 +94,6 @@
         Include="set BASE_DIR=%HELIX_CORRELATION_PAYLOAD%"
       />
     </ItemGroup>
-
     <PropertyGroup>
       <_XUnitTraitArg Condition="'$(TestUsingWorkloads)' == 'true'"
         >-notrait category=no-workload</_XUnitTraitArg
@@ -116,7 +102,6 @@
         >-trait category=no-workload</_XUnitTraitArg
       >
     </PropertyGroup>
-
     <ItemGroup Condition="'$(ContinuousIntegrationBuild)' != 'true'">
       <RunScriptCommands
         Condition="'$(OS)' != 'Windows_NT'"
@@ -126,7 +111,6 @@
         Condition="'$(OS)' == 'Windows_NT'"
         Include="set TEST_USING_WORKLOADS=$(TestUsingWorkloads)"
       />
-
       <RunScriptCommands
         Condition="'$(OS)' != 'Windows_NT'"
         Include="export SDK_DIR_NAME=$(_SdkWithWorkloadForTestingDirName)"
@@ -135,7 +119,6 @@
         Condition="'$(OS)' == 'Windows_NT'"
         Include="set SDK_DIR_NAME=$(_SdkWithWorkloadForTestingDirName)"
       />
-
       <RunScriptCommands
         Condition="'$(OS)' != 'Windows_NT'"
         Include="export &quot;XUnitTraitArg=$(_XUnitTraitArg)&quot;"
@@ -144,7 +127,6 @@
         Condition="'$(OS)' == 'Windows_NT'"
         Include="set &quot;XUnitTraitArg=$(_XUnitTraitArg)&quot;"
       />
-
       <RunScriptCommands
         Condition="'$(OS)' != 'Windows_NT'"
         Include="export BASE_DIR=$(ArtifactsBinDir)"
@@ -153,7 +135,6 @@
         Condition="'$(OS)' == 'Windows_NT'"
         Include="set BASE_DIR=$(ArtifactsBinDir)"
       />
-
       <RunScriptCommands
         Condition="'$(OS)' != 'Windows_NT'"
         Include="export BUILT_NUGETS_PATH=$(LibrariesShippingPackagesDir)/"
@@ -162,7 +143,6 @@
         Condition="'$(OS)' == 'Windows_NT'"
         Include="set BUILT_NUGETS_PATH=$(LibrariesShippingPackagesDir)"
       />
-
       <RunScriptCommands
         Condition="'$(OS)' != 'Windows_NT'"
         Include="export PATH=$(WasmtimeDir):%24PATH"
@@ -172,7 +152,6 @@
         Include="set PATH=$(WasmtimeDir);%PATH%"
       />
     </ItemGroup>
-
     <ItemGroup>
       <_RuntimePackVersions Include="$(PackageVersion)" EnvVarName="RUNTIME_PACK_VER9" />
       <_RuntimePackVersions
@@ -185,7 +164,6 @@
         EnvVarName="RUNTIME_PACK_VER8"
         Condition="'$(PackageVersionNet8)' == ''"
       />
-
       <RunScriptCommands
         Condition="'$(OS)' != 'Windows_NT'"
         Include="export %(_RuntimePackVersions.EnvVarName)=&quot;%(_RuntimePackVersions.Identity)&quot;"
@@ -194,11 +172,9 @@
         Condition="'$(OS)' == 'Windows_NT'"
         Include="set &quot;%(_RuntimePackVersions.EnvVarName)=%(_RuntimePackVersions.Identity)&quot;"
       />
-
       <RunScriptCommands Condition="'$(OS)' != 'Windows_NT'" Include="set_env_vars" />
       <RunScriptCommands Condition="'$(OS)' == 'Windows_NT'" Include="CALL :SetEnvVars" />
     </ItemGroup>
-
     <PropertyGroup>
       <RunScriptCommand Condition="'$(OS)' != 'Windows_NT'"
         >dotnet exec xunit.console.dll $(AssemblyName).dll -xml %24XHARNESS_OUT/testResults.xml</RunScriptCommand
@@ -206,7 +182,6 @@
       <RunScriptCommand Condition="'$(OS)' == 'Windows_NT'"
         >dotnet.exe exec xunit.console.dll $(AssemblyName).dll -xml %XHARNESS_OUT%\testResults.xml</RunScriptCommand
       >
-
       <RunScriptCommand
         Condition="'$(ContinuousIntegrationBuild)' == 'true' and '$(OS)' != 'Windows_NT'"
         >$(RunScriptCommand) %24HELIX_XUNIT_ARGS</RunScriptCommand
@@ -215,7 +190,6 @@
         Condition="'$(ContinuousIntegrationBuild)' == 'true' and '$(OS)' == 'Windows_NT'"
         >$(RunScriptCommand) %HELIX_XUNIT_ARGS%</RunScriptCommand
       >
-
       <RunScriptCommand Condition="'$(ContinuousIntegrationBuild)' == 'true'"
         >$(RunScriptCommand) -nocolor</RunScriptCommand
       >
@@ -224,17 +198,14 @@
         >$(RunScriptCommand) -parallel none</RunScriptCommand
       >
       <RunScriptCommand>$(RunScriptCommand) -verbose</RunScriptCommand>
-
       <RunScriptCommand Condition="'$(XUnitMethodName)' != ''"
         >$(RunScriptCommand) -method $(XUnitMethodName)</RunScriptCommand
       >
       <RunScriptCommand Condition="'$(XUnitClassName)' != ''"
         >$(RunScriptCommand) -class $(XUnitClassName)</RunScriptCommand
       >
-
       <!-- this allows use of test attributes from dotnet.xunitextensions -->
       <RunScriptCommand>$(RunScriptCommand) -notrait category=IgnoreForCI -notrait category=failing</RunScriptCommand>
-
       <RunScriptCommand Condition="'$(OS)' == 'Windows_NT'"
         >$(RunScriptCommand) %XUnitTraitArg%</RunScriptCommand
       >

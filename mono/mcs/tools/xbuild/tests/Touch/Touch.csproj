@@ -8,7 +8,6 @@
     </Touch>
     <Message Text="Touched files: @(TouchedFiles)" />
   </Target>
-
   <Target Name="Clean">
     <Delete Files="@(Files)" />
   </Target>

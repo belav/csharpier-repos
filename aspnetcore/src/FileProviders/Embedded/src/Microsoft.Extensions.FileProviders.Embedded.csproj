@@ -17,11 +17,9 @@
     <Nullable>enable</Nullable>
     <IsTrimmable>true</IsTrimmable>
   </PropertyGroup>
-
   <ItemGroup>
     <InternalsVisibleTo Include="Microsoft.Extensions.FileProviders.Embedded.Tests" />
   </ItemGroup>
-
   <ItemGroup>
     <Reference Include="Microsoft.Extensions.FileProviders.Abstractions" />
     <ProjectReference
@@ -30,7 +28,6 @@
       ReferenceOutputAssembly="false"
     />
   </ItemGroup>
-
   <ItemGroup>
     <SignedPackageFile Include="$(TargetPath)" Certificate="$(AssemblySigningCertName)" />
     <SignedPackageFile
@@ -38,7 +35,6 @@
       Certificate="$(AssemblySigningCertName)"
     />
   </ItemGroup>
-
   <ItemGroup>
     <NuspecProperty Include="AssemblyName=$(AssemblyName)" />
     <NuspecProperty Include="OutputPath=$(OutputPath)" />
@@ -49,7 +45,6 @@
       Condition="'$(DebugType)'!='embedded'"
     />
   </ItemGroup>
-
   <ItemGroup>
     <Compile
       Include="$(SharedSourceRoot)ThrowHelpers\ArgumentNullThrowHelper.cs"

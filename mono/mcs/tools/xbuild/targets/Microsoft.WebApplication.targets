@@ -3,13 +3,11 @@
     <WebApplicationOutputDir Condition="'$(OutDir)' != '$(OutputPath)'"
       >$(OutDir)_PublishedWebsites\$(MSBuildProjectName)</WebApplicationOutputDir
     >
-
     <PrepareForRunDependsOn>
 			$(PrepareForRunDependsOn);
 			_CopyWebApplication
 		</PrepareForRunDependsOn>
   </PropertyGroup>
-
   <!-- OutDir has been overridden, so copy all the relevant files to that -->
   <Target Name="_CopyWebApplication" Condition="'$(OutDir)' != '$(OutputPath)'">
     <MakeDir Directories="$(WebApplicationOutputDir)\bin" />
@@ -24,14 +22,12 @@
       DestinationFolder="$(WebApplicationOutputDir)\bin"
       SkipUnchangedFiles="true"
     />
-
     <Copy
       SourceFiles="@(IntermediateSatelliteAssemblies)"
       DestinationFiles="@(IntermediateSatelliteAssemblies->'$(WebApplicationOutputDir)\bin\%(Culture)\$(AssemblyName).resources.dll')"
       Condition="'@(IntermediateSatelliteAssemblies)' != ''"
       SkipUnchangedFiles="true"
     />
-
     <!-- Copy the referenced assemblies -->
     <Copy
       SourceFiles="@(ReferenceCopyLocalPaths)"

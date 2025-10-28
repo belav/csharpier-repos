@@ -2,8 +2,6 @@
   Description:  cloud must include path attribute
   Expect:       ValidCloud{element:cloud,attr:path}
 -->
-
-
 <rss version="2.0">
   <channel>
     <title>Invalid cloud</title>

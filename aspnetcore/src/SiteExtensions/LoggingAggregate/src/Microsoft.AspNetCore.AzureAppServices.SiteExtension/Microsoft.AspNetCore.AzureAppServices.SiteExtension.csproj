@@ -17,11 +17,9 @@
     <IsPackable>true</IsPackable>
     <IsShipping>true</IsShipping>
     <IsShipping Condition=" '$(PreReleaseVersionLabel)' == 'preview' ">false</IsShipping>
-
     <!-- Grab packages LB.csproj should have just built. -->
     <RestoreAdditionalProjectSources>$(RestoreAdditionalProjectSources);$(ArtifactsNonShippingPackagesDir)</RestoreAdditionalProjectSources>
   </PropertyGroup>
-
   <ItemGroup>
     <!--
       Bundle in most down-level versions of the runtime-specific site extension packages. When updating
@@ -89,7 +87,6 @@
       Version="$(PackageVersion)"
     />
   </ItemGroup>
-
   <ItemGroup>
     <Content Include="applicationHost.xdt" />
     <Content Include="scmApplicationHost.xdt" />
@@ -99,7 +96,6 @@
       PackagePath="content"
     />
   </ItemGroup>
-
   <ItemGroup>
     <Reference
       Include="Microsoft.Web.Xdt.Extensions"
@@ -108,7 +104,6 @@
       SkipGetTargetFrameworkProperties="true"
     />
   </ItemGroup>
-
   <!--
     Cannot assume this project and LB.csproj have the same package version because this creates a shipping
     package in non-preview builds and LB.csproj never creates a shipping package.
@@ -125,7 +120,6 @@
     >
       <Output TaskParameter="TargetOutputs" ItemName="_ResolvedPackageVersionInfo" />
     </MSBuild>
-
     <ItemGroup>
       <PackageReference
         Include="Microsoft.AspNetCore.AzureAppServices.SiteExtension.$(AspNetCoreMajorMinorVersion).x64"
@@ -139,7 +133,6 @@
       />
     </ItemGroup>
   </Target>
-
   <Target Name="AddContent" BeforeTargets="_GetPackageFiles">
     <ItemGroup>
       <!--
@@ -150,7 +143,6 @@
         Include="$(NugetPackageRoot)\%(PackageReference.Identity)\%(PackageReference.Version)\content\**\*.*"
         Exclude="$(NugetPackageRoot)\Microsoft.AspNetCore.AzureAppServices.SiteExtension.*.x86\**\Microsoft.AspNetCore.AzureAppServices.HostingStartup.deps.json"
       />
-
       <!-- Temporarily skip the common files -->
       <FilteredContentFilesToPack
         Include="@(ContentFilesToPack)"

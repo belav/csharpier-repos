@@ -3,7 +3,6 @@
     <TargetFramework>$(DefaultNetCoreTargetFramework)</TargetFramework>
     <GenerateRazorAssemblyInfo>false</GenerateRazorAssemblyInfo>
   </PropertyGroup>
-
   <ItemGroup>
     <Reference Include="Google.Protobuf" />
     <Reference Include="Microsoft.AspNetCore.Diagnostics" />

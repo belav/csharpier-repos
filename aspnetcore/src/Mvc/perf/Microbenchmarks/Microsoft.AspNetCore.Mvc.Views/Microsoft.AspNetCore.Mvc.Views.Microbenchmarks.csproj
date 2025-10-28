@@ -6,7 +6,6 @@
     <IsBenchmarkProject>true</IsBenchmarkProject>
     <AddRazorSupportForMvc>true</AddRazorSupportForMvc>
   </PropertyGroup>
-
   <ItemGroup>
     <Reference Include="Microsoft.AspNetCore.Mvc" />
   </ItemGroup>

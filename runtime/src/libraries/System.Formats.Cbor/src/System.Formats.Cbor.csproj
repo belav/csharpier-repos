@@ -9,7 +9,6 @@ Commonly Used Types:
 System.Formats.Cbor.CborReader
 System.Formats.Cbor.CborWriter</PackageDescription>
   </PropertyGroup>
-
   <ItemGroup>
     <Compile
       Include="$(CommonPath)System\Memory\PointerMemoryManager.cs"
@@ -38,20 +37,17 @@ System.Formats.Cbor.CborWriter</PackageDescription>
     <Compile Include="System\Formats\Cbor\CborTag.cs" />
     <Compile Include="System\Formats\Cbor\CborContentException.cs" />
   </ItemGroup>
-
   <ItemGroup Condition="'$(TargetFrameworkIdentifier)' == '.NETCoreApp'">
     <Compile Include="System\Formats\Cbor\CborHelpers.netcoreapp.cs" />
     <Compile Include="System\Formats\Cbor\HalfHelpers.netcoreapp.cs" />
     <Compile Include="System\Formats\Cbor\Reader\CborReader.Simple.netcoreapp.cs" />
     <Compile Include="System\Formats\Cbor\Writer\CborWriter.Simple.netcoreapp.cs" />
   </ItemGroup>
-
   <ItemGroup Condition="'$(TargetFrameworkIdentifier)' != '.NETCoreApp'">
     <Compile Include="System\Formats\Cbor\CborHelpers.netstandard.cs" />
     <Compile Include="System\Formats\Cbor\HalfHelpers.netstandard.cs" />
     <Compile Include="System\Formats\Cbor\Writer\CborWriter.Simple.netstandard.cs" />
   </ItemGroup>
-
   <ItemGroup Condition="'$(TargetFrameworkIdentifier)' != '.NETCoreApp'">
     <PackageReference Include="System.Buffers" Version="$(SystemBuffersVersion)" />
     <PackageReference Include="System.Memory" Version="$(SystemMemoryVersion)" />
@@ -61,7 +57,6 @@ System.Formats.Cbor.CborWriter</PackageDescription>
       Version="$(SystemRuntimeCompilerServicesUnsafeVersion)"
     />
   </ItemGroup>
-
   <ItemGroup Condition="'$(TargetFrameworkIdentifier)' == '.NETFramework'">
     <PackageReference Include="System.ValueTuple" Version="$(SystemValueTupleVersion)" />
   </ItemGroup>

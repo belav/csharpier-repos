@@ -6,7 +6,6 @@
     -->
     <ImportDirectoryBuildTargets>false</ImportDirectoryBuildTargets>
   </PropertyGroup>
-
   <Import Project="$(RepositoryEngineeringDir)Analyzers.targets" />
   <Import Project="Sdk.targets" Sdk="Microsoft.DotNet.Arcade.Sdk" />
   <Import Project="$(RepositoryEngineeringDir)liveBuilds.targets" />
@@ -25,7 +24,6 @@
     Condition="'$(IsPackable)' == 'true' and '$(MSBuildProjectExtension)' != '.pkgproj'"
   />
   <Import Project="$(RepositoryEngineeringDir)slngen.targets" Condition="'$(IsSlnGen)' == 'true'" />
-
   <!--
   When .NET gets built from source, make the SDK aware there are bootstrap packages
   for Microsoft.NETCore.App.Runtime.<rid> and Microsoft.NETCore.App.Crossgen2.<rid>.
@@ -40,7 +38,6 @@
     <!-- Avoid references to Microsoft.AspNetCore.App.Runtime.<rid> -->
     <KnownFrameworkReference Remove="Microsoft.AspNetCore.App" />
   </ItemGroup>
-
   <PropertyGroup>
     <!--
       Define this here (not just in Versions.props) because the SDK resets it
@@ -61,7 +58,6 @@
       >$(ProductVersion)-$(VersionSuffix)</InformationalVersion
     >
   </PropertyGroup>
-
   <ItemGroup>
     <SupportedNETCoreAppTargetFramework
       Include=".NETCoreApp,Version=v$(NETCoreAppMaximumVersion)"
@@ -69,7 +65,6 @@
       Alias="net$(NETCoreAppMaximumVersion)"
     />
   </ItemGroup>
-
   <!-- The Default behavior in VS is to show files for the first target framework in TargetFrameworks property.
        This is required to show all the files corresponding to all target frameworks in VS. -->
   <ItemGroup
@@ -81,7 +76,6 @@
       Exclude="$(DefaultItemExcludes);$(DefaultExcludesInProjectFolder);@(Compile)"
     />
   </ItemGroup>
-
   <!-- Packaging -->
   <ItemGroup Condition="'$(IsPackable)' == 'true'">
     <!-- The sfxproj files add the license themselves. -->
@@ -97,7 +91,6 @@
       Pack="true"
     />
   </ItemGroup>
-
   <PropertyGroup>
     <PackageDescription Condition="'$(PackageDescription)' == '' and '$(Description)' != ''"
       >$(Description)</PackageDescription
@@ -124,20 +117,17 @@
       >true</GenerateRequiresPreviewFeaturesAttribute
     >
   </PropertyGroup>
-
   <Target
     Name="ValidateTargetOSLowercase"
     Condition="!$(TargetOS.Equals($(TargetOS.ToLower()), StringComparison.InvariantCulture))"
   >
     <Error Text="The passed-in TargetOS property value '$(TargetOS)' must be lowercase." />
   </Target>
-
   <ItemDefinitionGroup>
     <TargetPathWithTargetPlatformMoniker>
       <IsReferenceAssemblyProject>$(IsReferenceAssemblyProject)</IsReferenceAssemblyProject>
     </TargetPathWithTargetPlatformMoniker>
   </ItemDefinitionGroup>
-
   <Target
     Name="ValidateReferenceAssemblyProjectReferencesAndTargetFramework"
     AfterTargets="ResolveReferences"
@@ -153,7 +143,6 @@
       Condition="'$(TargetPlatformIdentifier)' != ''"
     />
   </Target>
-
   <!-- For experimental ref assemblies (which typically have the same name as a regular ref
        assembly), bump their minor file version by 100 to make it distinguishable from the regular
        ref assembly. -->
@@ -170,7 +159,6 @@
       <FileVersion>$(_FileVersionMaj).$([MSBuild]::Add($(_FileVersionMin), 100)).$(_FileVersionBld).$(_FileVersionRev)</FileVersion>
     </PropertyGroup>
   </Target>
-
   <!-- Allows building against source assemblies when the 'SkipUseReferenceAssembly' attribute is present on ProjectReference items. -->
   <Target
     Name="HandleReferenceAssemblyAttributeForProjectReferences"
@@ -186,7 +174,6 @@
       >
       <ResolveAssemblyWarnOrErrorOnTargetArchitectureMismatch>None</ResolveAssemblyWarnOrErrorOnTargetArchitectureMismatch>
     </PropertyGroup>
-
     <!-- Clear the ReferenceAssembly attribute on resolved P2Ps that set SkipUseReferenceAssembly to true. -->
     <ItemGroup>
       <_ResolvedProjectReferencePaths
@@ -195,7 +182,6 @@
       />
     </ItemGroup>
   </Target>
-
   <!-- Filter out transitive P2Ps which should be excluded. -->
   <Target
     Name="FilterTransitiveProjectReferences"
@@ -219,7 +205,6 @@
       <ProjectReference Remove="@(_transitiveExcludedProjectReferenceWithProjectName->Metadata('OriginalIdentity'))" />
     </ItemGroup>
   </Target>
-
   <!-- Filter out conflicting implicit assembly references. -->
   <Target
     Name="FilterImplicitAssemblyReferences"
@@ -232,7 +217,6 @@
       <_targetingPackReferenceExclusion Include="@(_ResolvedProjectReferencePaths->Metadata('Filename'))" />
       <_targetingPackReferenceExclusion Include="@(DefaultReferenceExclusion)" />
     </ItemGroup>
-
     <!-- Filter out shims from the targeting pack references as an opt-in. -->
     <ItemGroup
       Condition="'$(TargetFrameworkIdentifier)' == '.NETCoreApp' and
@@ -241,7 +225,6 @@
       <_targetingPackReferenceExclusion Include="@(NetFxReference)" />
       <_targetingPackReferenceExclusion Include="netstandard" />
     </ItemGroup>
-
     <ItemGroup>
       <_targetingPackReferenceWithProjectName
         Include="@(Reference->WithMetadataValue('ExternallyResolved', 'true')->Metadata('Filename'))"
@@ -257,7 +240,6 @@
       />
       <Reference Remove="@(_targetingPackExcludedReferenceWithProjectName->Metadata('OriginalIdentity'))" />
     </ItemGroup>
-
     <ItemGroup>
       <_targetingPackAnalyzerReferenceWithProjectName
         Include="@(Analyzer->WithMetadataValue('ExternallyResolved', 'true')->Metadata('Filename'))"
@@ -274,7 +256,6 @@
       <Analyzer Remove="@(_targetingPackExcludedAnalyzerReferenceWithProjectName->Metadata('OriginalIdentity'))" />
     </ItemGroup>
   </Target>
-
   <!--
     Arcade SDK versioning is defined by static properties in a targets file: work around this by
     moving properties based on versioning into a target.
@@ -290,7 +271,6 @@
       <IncludePreReleaseLabelInPackageVersion Condition="'$(IsShipping)' != 'true'"
         >true</IncludePreReleaseLabelInPackageVersion
       >
-
       <IncludeBuildNumberInPackageVersion Condition="'$(StabilizePackageVersion)' != 'true'"
         >true</IncludeBuildNumberInPackageVersion
       >
@@ -300,7 +280,6 @@
       <IncludeBuildNumberInPackageVersion Condition="'$(IsShipping)' != 'true'"
         >true</IncludeBuildNumberInPackageVersion
       >
-
       <ProductVersionSuffix Condition="'$(IncludePreReleaseLabelInPackageVersion)' == 'true'"
         >-$(VersionSuffix)</ProductVersionSuffix
       >
@@ -311,7 +290,6 @@
         >$(ProductBandVersion).$(PatchVersion)</ProductionVersion
       >
       <ProductVersion>$(ProductionVersion)$(ProductVersionSuffix)</ProductVersion>
-
       <SharedFrameworkNugetVersion>$(ProductVersion)</SharedFrameworkNugetVersion>
       <NuGetVersion>$(SharedFrameworkNugetVersion)</NuGetVersion>
       <InstallersRelativePath>Runtime/$(SharedFrameworkNugetVersion)/</InstallersRelativePath>

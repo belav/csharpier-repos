@@ -7,7 +7,6 @@
         Dynamic="Required All"
       />
     </Assembly>
-
     <Assembly Name="System.Memory.Tests">
       <Type Name="System.SpanTests.SpanTests">
         <Method Name="Sort" Dynamic="Required All">

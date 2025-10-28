@@ -5,7 +5,6 @@
       <method signature="T TestMethod_2`1()" body="remove"></method>
       <method signature="System.Void .ctor()" body="remove"></method>
     </type>
-
     <type fullname="Mono.Linker.Tests.Cases.Substitutions.RemoveBody/NestedType">
       <method signature="System.Void .ctor(System.Int32)" body="remove"></method>
     </type>

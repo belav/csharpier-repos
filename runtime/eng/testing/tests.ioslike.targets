@@ -2,7 +2,6 @@
   <PropertyGroup>
     <BundleTestAppTargets>$(BundleTestAppTargets);BundleTestAppleApp</BundleTestAppTargets>
   </PropertyGroup>
-
   <PropertyGroup>
     <BuildTestsOn
       Condition="'$(ContinuousIntegrationBuild)' == 'true' and '$(Scenario)' == 'BuildAppleApps'"
@@ -11,11 +10,9 @@
     <BuildTestsOn Condition="'$(BuildTestsOnHelix)' == 'true'">helix</BuildTestsOn>
     <BuildTestsOn Condition="'$(BuildTestsOn)' == ''">local</BuildTestsOn>
   </PropertyGroup>
-
   <PropertyGroup Condition="'$(BuildTestsOnHelix)' == 'true'">
     <_AOTBuildCommand>export PATH=$HELIX_CORRELATION_PAYLOAD/build/cmake/cmake-3.16.4-Darwin-x86_64/CMake.app/Contents/bin:$PATH &amp;&amp; </_AOTBuildCommand>
     <_AOTBuildCommand>$(_AOTBuildCommand) dotnet msbuild publish/ProxyProjectForAOTOnHelix.proj /bl:$XHARNESS_OUT/AOTBuild.binlog</_AOTBuildCommand>
-
     <!-- running aot-helix tests locally, so we can test with the same project file as CI -->
     <_AOTBuildCommand Condition="'$(ContinuousIntegrationBuild)' != 'true'"
       >$(_AOTBuildCommand) /p:RuntimeSrcDir=$(RepoRoot) /p:RuntimeConfig=$(Configuration)</_AOTBuildCommand
@@ -23,7 +20,6 @@
     <!-- The command below sets default properties for runtime and library tests -->
     <_AOTBuildCommand>$(_AOTBuildCommand) /p:XHARNESS_EXECUTION_DIR=&quot;$XHARNESS_EXECUTION_DIR&quot; /p:RunAOTCompilation=$(RunAOTCompilation) /p:UseNativeAOTRuntime=$(UseNativeAOTRuntime) /p:TargetOS=$(TargetOS) /p:TargetArchitecture=$(TargetArchitecture) /p:MonoForceInterpreter=$(MonoForceInterpreter) /p:MonoEnableLLVM=true /p:DevTeamProvisioning=$(DevTeamProvisioning) /p:UsePortableRuntimePack=true /p:Configuration=$(Configuration)</_AOTBuildCommand>
     <_AOTBuildCommand>$(_AOTBuildCommand) </_AOTBuildCommand>
-
     <_ResetSimulatorSwitch
       Condition="('$(TargetOS)' == 'iossimulator' or '$(TargetOS)' == 'tvossimulator') and '$(IncludesTestRunner)' == 'true'"
       >--reset-simulator</_ResetSimulatorSwitch
@@ -32,9 +28,7 @@
     <_AppleSignCommand Condition="'$(TargetOS)' == 'ios' or '$(TargetOS)' == 'tvos'"
       >sign &quot;$app&quot;</_AppleSignCommand
     >
-
     <IncludesTestRunner Condition="'$(IncludesTestRunner)' == ''">true</IncludesTestRunner>
-
     <_AppleBuildCommand Condition="'$(IncludesTestRunner)' == 'true'"
       >apple test</_AppleBuildCommand
     >
@@ -46,10 +40,8 @@
       mv $XHARNESS_OUT/AOTBuild.binlog &quot;$HELIX_WORKITEM_UPLOAD_ROOT&quot;
       $(_AppleSignCommand)
       xharness $(_AppleBuildCommand) --app &quot;$app&quot; --output-directory &quot;$output_directory&quot; --target &quot;$target&quot; --timeout &quot;$timeout&quot; --xcode &quot;$xcode_path&quot; -v --launch-timeout &quot;$launch_timeout&quot; $(_ResetSimulatorSwitch) $(_SignalAppEndSwitch) $(_AppleExpectedExitCode) -- </_AfterBuildCommands>
-
     <RunScriptCommand>$(_AOTBuildCommand) $(_AfterBuildCommands)</RunScriptCommand>
   </PropertyGroup>
-
   <Import
     Project="$(MonoProjectRoot)\msbuild\common\LibraryBuilder.props"
     Condition="'$(BuildTestsOn)' == 'local'"
@@ -62,10 +54,8 @@
     Project="$(MonoProjectRoot)\msbuild\apple\build\AppleBuild.InTree.targets"
     Condition="'$(BuildTestsOn)' == 'local'"
   />
-
   <PropertyGroup>
     <AppleBuildDependsOn>PrepareForAppleBuildApp;$(AppleBuildDependsOn);_CopyTestArchive</AppleBuildDependsOn>
-
     <BundleTestAppleAppDependsOn Condition="'$(BuildTestsOn)' == 'local'"
       >AppleBuild</BundleTestAppleAppDependsOn
     >
@@ -73,20 +63,16 @@
       >$(BundleTestAppleAppDependsOn);_BundleAOTTestAppleAppForHelix;_CopyTestArchive</BundleTestAppleAppDependsOn
     >
   </PropertyGroup>
-
   <Target Name="BundleTestAppleApp" DependsOnTargets="$(BundleTestAppleAppDependsOn)" />
-
   <UsingTask
     Condition="'$(BuildTestsOnHelix)' == 'true'"
     TaskName="Microsoft.WebAssembly.Build.Tasks.GenerateAOTProps"
     AssemblyFile="$(WasmBuildTasksAssemblyPath)"
   />
-
   <Target Name="_BundleAOTTestAppleAppForHelix" DependsOnTargets="PrepareForAppleBuildApp">
     <PropertyGroup>
       <AppBundlePath>$(BundleDir)publish</AppBundlePath>
     </PropertyGroup>
-
     <PropertyGroup>
       <_MainAssemblyPath
         Condition="'%(AppleAssembliesToBundle.FileName)' == $(AssemblyName) and '%(AppleAssembliesToBundle.Extension)' == '.dll'"
@@ -94,7 +80,6 @@
       >
       <RuntimeConfigFilePath>$([System.IO.Path]::ChangeExtension($(_MainAssemblyPath), '.runtimeconfig.json'))</RuntimeConfigFilePath>
     </PropertyGroup>
-
     <ItemGroup>
       <BundleFiles
         Condition="'%(AppleAssembliesToBundle._IsNative)' != 'true'"
@@ -106,7 +91,6 @@
         TargetDir="publish\%(AppleNativeFilesToBundle.RecursiveDir)"
       />
       <BundleFiles Include="$(RuntimeConfigFilePath)" TargetDir="publish" />
-
       <BundleFiles Include="$(MonoProjectRoot)\msbuild\apple\data\*" TargetDir="publish" />
       <ExtraFiles
         Condition="'%(AppleAssembliesToBundle._IsNative)' == 'true'"
@@ -114,7 +98,6 @@
         TargetDir="extraFiles\%(AppleAssembliesToBundle.RecursiveDir)"
       />
     </ItemGroup>
-
     <ItemGroup Condition="'$(UseNativeAOTRuntime)' == 'true'">
       <BundleFiles
         Include="$(MicrosoftNetCoreAppRuntimePackDir)/runtimes/$(TargetOS)-$(TargetArchitecture)/native/icudt.dat"
@@ -133,7 +116,6 @@
         TargetDir="publish"
       />
     </ItemGroup>
-
     <ItemGroup Condition="'$(DebuggerSupport)' == 'true'">
       <!-- Add any pdb files, if available -->
       <_BundlePdbFiles Include="$([System.IO.Path]::ChangeExtension('%(AppleAssembliesToBundle.Identity)', '.pdb'))" />
@@ -143,17 +125,13 @@
         Condition="Exists(%(_BundlePdbFiles.Identity))"
       />
     </ItemGroup>
-
     <Copy SourceFiles="@(BundleFiles)" DestinationFolder="$(BundleDir)%(TargetDir)" />
     <Copy SourceFiles="@(ExtraFiles)" DestinationFolder="$(BundleDir)\%(TargetDir)" />
-
     <!-- Only publish artifacts minus runtime pack assets (move to dotnet build later as opposed to publish)-->
     <ItemGroup Condition="'$(UsePortableRuntimePack)' == 'true'">
       <_PublishBundleFiles Include="@(BundleFiles->'$(AppBundlePath)/%(FileName)%(Extension)')" />
-
       <_RuntimePackFiles Include="$(MicrosoftNetCoreAppRuntimePackRidLibTfmDir)**\*.*" />
       <_RuntimePackFiles Include="$(MicrosoftNetCoreAppRuntimePackNativeDir)*.*" />
-
       <_UnusedRuntimePackFiles
         Include="@(_PublishBundleFiles)"
         Exclude="@(_RuntimePackFiles->'$(AppBundlePath)/%(FileName)%(Extension)')"
@@ -162,16 +140,13 @@
         Include="@(_PublishBundleFiles)"
         Exclude="@(_UnusedRuntimePackFiles)"
       />
-
       <_RuntimePackFilesToDelete Include="@(_RuntimePackFiles->'$(AppBundlePath)/%(FileName)%(Extension)')" />
     </ItemGroup>
-
     <!-- Remove the runtime pack parts from the self contained app.  We'll restore on helix -->
     <Delete
       Condition="'$(UsePortableRuntimePack)' == 'true'"
       Files="@(_RuntimePackFilesToDelete)"
     />
-
     <!-- To recreate the original project on helix, we need to set the apple properties also, same as the
          library test project. Eg. $(InvariantGlobalization) -->
     <ItemGroup>
@@ -183,30 +158,25 @@
       <_ApplePropertyNames Include="UseConsoleUITemplate" />
       <_ApplePropertyNames Include="UseRuntimeComponents" />
       <_ApplePropertyNames Include="IncludesTestRunner" />
-
       <_ApplePropertiesToPass
         Include="$(%(_ApplePropertyNames.Identity))"
         Name="%(_ApplePropertyNames.Identity)"
         ConditionToUse__="%(_ApplePropertyNames.ConditionToUse__)"
       />
-
       <_AppleUsedRuntimePackFiles
         Include="@(_UsedRuntimePackFiles->'%(FileName)%(Extension)')"
         RemoveMetadata="_IsNative;TargetDir"
       />
-
       <_AppleItemsToPass
         Include="@(_AppleUsedRuntimePackFiles)"
         OriginalItemName__="_AppleUsedRuntimePackFiles"
       />
-
       <!-- Example of passing items to the project
 
           <_AppleItemsToPass Include="@(BundleFiles)" OriginalItemName__="BundleFiles" ConditionToUse__="'$(Foo)' != 'true'" />
 
       -->
     </ItemGroup>
-
     <!-- This file gets imported by the project file on helix -->
     <GenerateAOTProps
       Properties="@(_ApplePropertiesToPass)"
@@ -214,19 +184,16 @@
       OutputFile="$(BundleDir)publish\ProxyProjectForAOTOnHelix.props"
     />
   </Target>
-
   <Target Name="PrepareForAppleBuildApp">
     <Error
       Condition="!Exists('$(MicrosoftNetCoreAppRuntimePackRidDir)')"
       Text="MicrosoftNetCoreAppRuntimePackRidDir=$(MicrosoftNetCoreAppRuntimePackRidDir) doesn't exist"
     />
-
     <WriteLinesToFile
       File="$(PublishDir)xunit-excludes.txt"
       Lines="$(XunitExcludesTxtFileContent)"
       Overwrite="true"
     />
-
     <PropertyGroup>
       <IncludesTestRunner Condition="'$(IncludesTestRunner)' == ''">true</IncludesTestRunner>
       <Optimized Condition="'$(Configuration)' == 'Release'">true</Optimized>
@@ -234,11 +201,9 @@
         Condition="'$(MainLibraryFileName)' == '' and '$(IsRuntimeTests)' != 'true' and '$(IncludesTestRunner)' == 'true'"
         >AppleTestRunner.dll</MainLibraryFileName
       >
-
       <AppleBuildDir>$(PublishDir)</AppleBuildDir>
       <AppleBundleDir>$(BundleDir)</AppleBundleDir>
     </PropertyGroup>
-
     <PropertyGroup>
       <GenerateXcodeProject>true</GenerateXcodeProject>
       <GenerateCMakeProject>false</GenerateCMakeProject>
@@ -250,19 +215,16 @@
         >true</GenerateCMakeProject
       >
     </PropertyGroup>
-
     <ItemGroup>
       <AppleAssembliesToBundle Include="@(NativeLibraries->'$(PublishDir)%(Identity)')">
         <_InternalForceInterpret>true</_InternalForceInterpret>
         <_IsNative>true</_IsNative>
       </AppleAssembliesToBundle>
-
       <_PublishAssemblies
         Include="$(PublishDir)\**\*.dll"
         Exclude="$(PublishDir)\**\*.resources.dll"
       />
       <_SatelliteAssemblies Include="$(PublishDir)\**\*.resources.dll" />
-
       <AppleAssembliesToBundle Include="@(_PublishAssemblies)">
         <_InternalForceInterpret
           Condition="'$(UseMonoJustInterp)' == 'true' and '%(FileName)%(Extension)' != 'System.Private.CoreLib.dll'"
@@ -270,11 +232,9 @@
         >
         <_IsNative>false</_IsNative>
       </AppleAssembliesToBundle>
-
       <AppleNativeFilesToBundle Include="$(PublishDir)\**\*.*" Exclude="$(PublishDir)\*.dll" />
     </ItemGroup>
   </Target>
-
   <Target
     Name="_CopyTestArchive"
     Condition="'$(ArchiveTests)' == 'true' and '$(IgnoreForCI)' != 'true'"
@@ -283,12 +243,10 @@
       Condition="'$(TestArchiveTestsDir)' == ''"
       Text="TestArchiveTestsDir property to archive the test folder must be set."
     />
-
     <!-- Adjust the variable names -->
     <PropertyGroup Condition="'$(GenerateXcodeProject)' == 'true'">
       <_AppBundleDir>$(AppBundlePath)/../</_AppBundleDir>
     </PropertyGroup>
-
     <MakeDir Condition="'$(GenerateXcodeProject)' == 'true'" Directories="$(TestArchiveTestsDir)" />
     <ZipDirectory
       Condition="'$(GenerateXcodeProject)' == 'true'"
@@ -296,7 +254,6 @@
       DestinationFile="$([MSBuild]::NormalizePath('$(TestArchiveTestsDir)', '$(TestProjectName).zip'))"
       Overwrite="true"
     />
-
     <RemoveDir Condition="'$(NeedsToBuildAppsOnHelixLocal)' != 'true'" Directories="$(OutDir)" />
   </Target>
 </Project>

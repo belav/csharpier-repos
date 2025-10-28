@@ -1,6 +1,5 @@
 <Project>
   <Import Project="..\Directory.Build.props" />
-
   <PropertyGroup>
     <TargetFramework>$(NetCoreAppCurrent)-$(TargetOS)</TargetFramework>
     <EnableDefaultItems>true</EnableDefaultItems>
@@ -27,14 +26,12 @@
       >true</SkipValidateReferenceAssemblyProjectReferences
     >
   </PropertyGroup>
-
   <PropertyGroup Condition="'$(IsSourceProject)' == 'true'">
     <ContractProject>$(MSBuildProjectDirectory)\..\ref\$(MSBuildProjectName).csproj</ContractProject>
     <IsRuntimeAndReferenceAssembly Condition="!Exists('$(ContractProject)')"
       >true</IsRuntimeAndReferenceAssembly
     >
   </PropertyGroup>
-
   <ItemGroup Condition="'$(IsSourceProject)' == 'true'">
     <!-- If an extra reference source project exists, use its source. -->
     <Compile
@@ -42,7 +39,6 @@
       Condition="'$(IsRuntimeAndReferenceAssembly)' != 'true'"
     />
   </ItemGroup>
-
   <ItemGroup Condition="'$(GenFacadesForceZeroVersionSeeds)' == 'true'">
     <PackageReference
       Include="Microsoft.DotNet.GenFacades"

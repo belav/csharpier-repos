@@ -1,34 +1,23 @@
 <config>
   <!-- assembly inputs -->
-
   <assemblypath path="..\..\class\lib" />
-
   <assembly file="corlib_cmp.dll" />
   <assembly file="System.dll" />
-
   <!-- output files -->
-
   <outputpath path="." />
-
   <outputfile name="types" file="icall_types.h">
     <include>
       <![CDATA[#include "icall.h"]]>
     </include>
   </outputfile>
-
   <outputfile name="methods" file="icall_methods.h" />
   <outputfile name="map" file="icall_map.c" />
-
   <!-- typemap -->
-
   <typemap>
     <!-- base types -->
-
     <namespace name="System">
       <!-- default types are taken from the running assembly -->
-
       <type name="Object" peer="MonoObject" opaque="true" default="true" />
-
       <type name="Void" peer="void" opaque="true" default="true" />
       <type name="Boolean" peer="MonoBoolean" opaque="true" default="true" />
       <type name="Int64" peer="gint64" opaque="true" default="true" />
@@ -45,25 +34,19 @@
       <type name="Double" peer="gdouble" opaque="true" default="true" />
       <type name="Char" peer="gunichar2" opaque="true" default="true" />
       <type name="Array" peer="MonoArray" opaque="true" default="true" />
-
       <!-- non-defaulting system types -->
-
       <type name="Decimal" peer="decimal_repr" opaque="true" />
       <type name="String" peer="MonoString" opaque="true" />
     </namespace>
-
     <!-- reflection types -->
-
     <namespace name="System">
       <type name="RuntimeTypeHandle" peer="MonoType *" opaque="true" />
       <type name="RuntimeMethodHandle" peer="MonoMethod *" opaque="true" />
       <type name="RuntimeFieldHandle" peer="MonoClassField *" opaque="true" />
-
       <type name="Type" peer="MonoReflectionType" />
       <type name="MonoTypeInfo" peer="MonoTypeInfo" />
       <type name="MonoEnumInfo" peer="MonoEnumInfo" />
     </namespace>
-
     <namespace name="System.Reflection">
       <type name="MonoMethod" peer="MonoReflectionMethod" />
       <type name="MonoField" peer="MonoReflectionField" />
@@ -76,7 +59,6 @@
       <type name="Module" peer="MonoReflectionModule" />
       <type name="AssemblyName" peer="MonoReflectionAssemblyName" />
     </namespace>
-
     <namespace name="System.Reflection.Emit">
       <type name="ILGenerator" peer="MonoReflectionILGen" />
       <type name="ILExceptionInfo" peer="MonoILExceptionInfo" />
@@ -91,9 +73,7 @@
       <type name="TypeBuilder" peer="MonoReflectionTypeBuilder" />
       <type name="Label" peer="MonoReflectionLabel" />
     </namespace>
-
     <!-- enumerations -->
-
     <namespace name="System.Net.Sockets">
       <type name="SocketType" peer="MonoSocketType" />
       <type name="AddressFamily" peer="MonoAddressFamily" />

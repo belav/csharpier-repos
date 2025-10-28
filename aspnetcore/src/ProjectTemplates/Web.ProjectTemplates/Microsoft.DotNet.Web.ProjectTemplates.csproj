@@ -6,7 +6,6 @@
     <ComponentsWebAssemblyProjectsRoot>$(RepoRoot)src\Components\WebAssembly\</ComponentsWebAssemblyProjectsRoot>
     <UsingToolTemplateLocalizer>true</UsingToolTemplateLocalizer>
   </PropertyGroup>
-
   <PropertyGroup>
     <!-- Lists the versions of dependencies not built in this repo. Packages produced from this repo should be listed as a PackageVersionVariableReference.  -->
     <GeneratedContentProperties>
@@ -28,7 +27,6 @@
       SwashbuckleAspNetCoreVersion=$(SwashbuckleAspNetCoreVersion);
     </GeneratedContentProperties>
   </PropertyGroup>
-
   <ItemGroup>
     <!-- These projects produce packages that the templates depend on. See GenerateContent.targets -->
     <PackageVersionVariableReference Include="$(RepoRoot)src\Components\Components\src\Microsoft.AspNetCore.Components.csproj" />
@@ -47,7 +45,6 @@
     <PackageVersionVariableReference Include="$(ComponentsWebAssemblyProjectsRoot)WebAssembly.Authentication\src\Microsoft.AspNetCore.Components.WebAssembly.Authentication.csproj" />
     <PackageVersionVariableReference Include="$(ComponentsWebAssemblyProjectsRoot)Authentication.Msal\src\Microsoft.Authentication.WebAssembly.Msal.csproj" />
   </ItemGroup>
-
   <ItemGroup>
     <GeneratedContent
       Include="EmptyWeb-CSharp.csproj.in"

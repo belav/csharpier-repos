@@ -13,7 +13,6 @@ Copyright (c) .NET Foundation. All rights reserved.
   <PropertyGroup>
     <Crossgen2TasksOverriden>true</Crossgen2TasksOverriden>
   </PropertyGroup>
-
   <UsingTask
     TaskName="PrepareForReadyToRunCompilation"
     AssemblyFile="$(MSBuildThisFileDirectory)Crossgen2Tasks.dll"

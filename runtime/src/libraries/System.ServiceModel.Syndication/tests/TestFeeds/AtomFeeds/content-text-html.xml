@@ -2,8 +2,6 @@
 Description:  usage of text/html to describe an html fragment
 Expect:       HtmlFragment{element:content}
 -->
-
-
 <feed xmlns="http://www.w3.org/2005/Atom">
   <title>Example Feed</title>
   <link href="http://contoso.com/" />
@@ -12,7 +10,6 @@ Expect:       HtmlFragment{element:content}
     <name>Author Name</name>
   </author>
   <id>urn:uuid:60a76c80-d399-11d9-b93C-0003939e0af6</id>
-
   <entry>
     <title>Atom-Powered Robots Run Amok</title>
     <link href="http://contoso.com/2003/12/13/atom03" />

@@ -8,7 +8,6 @@
       <_ProjectDirectoryUnderSourceDir>$(MSBuildProjectDirectory.SubString($(LibrariesProjectRoot.Length)))</_ProjectDirectoryUnderSourceDir>
       <AssemblyBeingTested>$(_ProjectDirectoryUnderSourceDir.SubString(0, $(_ProjectDirectoryUnderSourceDir.IndexOfAny("\\/"))))</AssemblyBeingTested>
     </PropertyGroup>
-
     <!--
       By default, code coverage data is only gathered for the assembly being tested.
       CoverageAssemblies can be passed in to the build to gather coverage on additional assemblies.
@@ -22,20 +21,16 @@
       <!-- Include analyzer assemblies which are referenced via the P2P protocol. -->
       <CoverageInclude Include="@(ReferencePath->WithMetadataValue('OutputItemType', 'Analyzer')->WithMetadataValue('ReferenceSourceTarget', 'ProjectReference')->Metadata('Filename'))" />
     </ItemGroup>
-
     <PropertyGroup>
       <CoverageIncludeFilter>@(CoverageInclude -> '[%(Identity)]*', ',')</CoverageIncludeFilter>
     </PropertyGroup>
-
     <PropertyGroup Condition="'@(CoverageExcludeByFile)' != ''">
       <CoverageExcludeByFileFilter>@(CoverageExcludeByFile -> '%(Identity)', ',')</CoverageExcludeByFileFilter>
     </PropertyGroup>
-
     <PropertyGroup Condition="'@(CoverageIncludeDirectory)' != ''">
       <CoverageIncludeDirectoryFilter>@(CoverageIncludeDirectory -> '$(NetCoreAppCurrentTestHostPath)%(Identity)', ',')</CoverageIncludeDirectoryFilter>
     </PropertyGroup>
   </Target>
-
   <!-- TODO remove when https://github.com/coverlet-coverage/coverlet/issues/834 is fixed. -->
   <Target
     Name="AddCoverageCommand"
@@ -53,7 +48,6 @@
       <CoverageReportDir Condition="'$(CoverageReportDir)' == ''"
         >$([MSBuild]::NormalizeDirectory('$(OutDir)', 'report'))</CoverageReportDir
       >
-
       <RunScriptCommand>"$(DotNetTool)" coverlet "$(TargetFileName)" --target "$(RunScriptHost)" --targetargs "$(RunScriptCommand.Replace('&quot;$(RunScriptHost)&quot;', ''))" --format "opencover" --output "$(CoverageOutputPath)" --verbosity "normal" --use-source-link --does-not-return-attribute DoesNotReturn</RunScriptCommand>
       <RunScriptCommand Condition="'@(CoverageExcludeByFile)' != ''"
         >$(RunScriptCommand) --exclude-by-file @(CoverageExcludeByFile -> '"%(Identity)"', ' --exclude-by-file ')</RunScriptCommand
@@ -67,13 +61,11 @@
       <RunScriptCommand>$(RunScriptCommand) --include @(CoverageInclude -> '"[%(Identity)]*"', ' --include ')</RunScriptCommand>
       <CoverageReportCommandLine>"$(DotNetTool)" reportgenerator "-reports:$(CoverageReportInputPath)" "-targetdir:$(CoverageReportDir.TrimEnd('\/'))" "-reporttypes:Html" "-verbosity:Info"</CoverageReportCommandLine>
     </PropertyGroup>
-
     <!-- Skip generating individual reports if a full report is generated. -->
     <ItemGroup Condition="'$(BuildAllProjects)' != 'true' and '$(SkipCoverageReport)' != 'true'">
       <PostRunScriptCommands Include="$(CoverageReportCommandLine)" />
     </ItemGroup>
   </Target>
-
   <!-- Build a coverage report if building an individual library with Coverage true. -->
   <Target
     Name="GenerateCoverageReport"
@@ -83,7 +75,6 @@
     <ItemGroup Condition="'$(CoverageReportInputPath)' == ''">
       <CoverageOutputFile Include="$(OutDir)TestResults\*\coverage.opencover.xml" />
     </ItemGroup>
-
     <PropertyGroup>
       <CoverageReportInputPath Condition="'$(CoverageReportInputPath)' == ''"
         >%(CoverageOutputFile.Identity)</CoverageReportInputPath
@@ -97,10 +88,8 @@
       >
       <CoverageReportCommand>"$(DotNetTool)" reportgenerator "-reports:$(CoverageReportInputPath)" "-targetdir:$(CoverageReportDir.TrimEnd('\/'))" "-reporttypes:$(CoverageReportTypes)" "-verbosity:$(CoverageReportVerbosity)"</CoverageReportCommand>
     </PropertyGroup>
-
     <Exec Command="$(CoverageReportCommand)" />
   </Target>
-
   <!--
     Clean the test results directory to guarantee that a report is generated from the
     newest coverage results file.

@@ -9,7 +9,6 @@
       >$(NuGetPackageRoot)microsoft.dotnet.nugetrepack.tasks\$(MicrosoftDotnetNuGetRepackTasksVersion)\tools\netcoreapp2.1\Microsoft.DotNet.NuGetRepack.Tasks.dll</_NuGetRepackAssembly
     >
   </PropertyGroup>
-
   <UsingTask
     TaskName="Microsoft.DotNet.Arcade.Sdk.GetAssemblyFullName"
     AssemblyFile="$(ArcadeSdkBuildTasksAssembly)"
@@ -30,25 +29,21 @@
     TaskName="Microsoft.DotNet.Tools.ReplacePackageParts"
     AssemblyFile="$(_NuGetRepackAssembly)"
   />
-
   <PropertyGroup>
     <TargetFramework>net472</TargetFramework>
     <OutputType>Library</OutputType>
     <ApplyNgenOptimization>full</ApplyNgenOptimization>
   </PropertyGroup>
-
   <ItemGroup>
     <ProjectReference Include="..\..\VisualStudio\CSharp\Impl\Microsoft.VisualStudio.LanguageServices.CSharp.csproj" />
     <ProjectReference Include="..\..\VisualStudio\VisualBasic\Impl\Microsoft.VisualStudio.LanguageServices.VisualBasic.vbproj" />
     <ProjectReference Include="..\..\ExpressionEvaluator\CSharp\Source\ExpressionCompiler\Microsoft.CodeAnalysis.CSharp.ExpressionCompiler.csproj" />
     <ProjectReference Include="..\..\ExpressionEvaluator\VisualBasic\Source\ExpressionCompiler\Microsoft.CodeAnalysis.VisualBasic.ExpressionCompiler.vbproj" />
   </ItemGroup>
-
   <PropertyGroup>
     <_DependentAssemblyVersionsFile>$(VisualStudioBuildPackagesDir)DependentAssemblyVersions.csv</_DependentAssemblyVersionsFile>
     <_OptimizedDependenciesDir>$(ArtifactsTmpDir)OptimizedDependencies\</_OptimizedDependenciesDir>
   </PropertyGroup>
-
   <!--
     List of dependencies that are expected to be inserted into VS by Roslyn Insertion Tool.
 
@@ -69,7 +64,6 @@
     <ExpectedDependency Include="Microsoft.DiaSymReader" />
     <ExpectedDependency Include="Microsoft.CodeAnalysis.Elfie" />
   </ItemGroup>
-
   <Target
     Name="_CalculateDependenciesToInsert"
     DependsOnTargets="ResolveAssemblyReferences;GetAssemblyVersion"
@@ -82,7 +76,6 @@
                               '%(ReferencePath.NuGetPackageId)' != '' and
                               '%(ReferencePath.ReferenceSourceTarget)' != 'ProjectReference'"
       />
-
       <!-- Take all additional files that get copied to the output directory and are not satellite assemblies -->
       <_CopyLocalDependency
         Include="@(ReferenceCopyLocalPaths->'%(NuGetPackageId)')"
@@ -92,7 +85,6 @@
         <_AssemblyPath>%(ReferenceCopyLocalPaths.Identity)</_AssemblyPath>
       </_CopyLocalDependency>
     </ItemGroup>
-
     <Microsoft.DotNet.Arcade.Sdk.GetAssemblyFullName
       Items="@(_CopyLocalDependency)"
       PathMetadata="_AssemblyPath"
@@ -100,7 +92,6 @@
     >
       <Output TaskParameter="ItemsWithFullName" ItemName="_Dependency" />
     </Microsoft.DotNet.Arcade.Sdk.GetAssemblyFullName>
-
     <!-- Calculate metadata we need -->
     <ItemGroup>
       <_Dependency>
@@ -110,7 +101,6 @@
         <_NuGetPackageDir>$(NuGetPackageRoot)$([MSBuild]::ValueOrDefault('%(_Dependency.NuGetPackageId)', '').ToLower())\%(_Dependency.NuGetPackageVersion)\</_NuGetPackageDir>
       </_Dependency>
     </ItemGroup>
-
     <!--
       AssemblyVersionVariables include the dependency name and version that needs to be updated in the VS repo's
       AssemblyVersions.tt file.  The roslyn insertion tool will read the output of this and update the file during the insertion.
@@ -120,7 +110,6 @@
     <ItemGroup>
       <_AssemblyVersionVariable Include="Roslyn" Version="$(AssemblyVersion)" />
     </ItemGroup>
-
     <!--
       Exclude dependencies that are not inserted from Roslyn repo and are installed by other VS components.
 
@@ -190,7 +179,6 @@
       <_Dependency Remove="Microsoft.NET.StringTools" />
       <_Dependency Remove="Microsoft.IO.Redist" />
     </ItemGroup>
-
     <!-- Write out the filtered dependency versions we need to also update in VS. -->
     <ItemGroup>
       <_AssemblyVersionVariable
@@ -198,7 +186,6 @@
         Version="%(_Dependency._AssemblyVersion)"
       />
     </ItemGroup>
-
     <!--
       Sanity check that prevents us from accidentally inserting a new dependency without knowing.
     -->
@@ -206,7 +193,6 @@
       <_RemainingDependency Include="@(_Dependency)" Exclude="@(ExpectedDependency)" />
       <_UninsertedExpectedDependency Include="@(ExpectedDependency)" Exclude="@(_Dependency)" />
     </ItemGroup>
-
     <Error
       Text="Unexpected dependencies found -- update ExpectedDependency list: @(_RemainingDependency)"
       Condition="'@(_RemainingDependency)' != ''"
@@ -215,7 +201,6 @@
       Text="Missing dependencies expected to be inserted -- update ExpectedDependency list: @(_UninsertedExpectedDependency)"
       Condition="'@(_UninsertedExpectedDependency)' != ''"
     />
-
     <!--
       For each relative path listed in OptimizeAssemblies and UnsignAssemblies metadata
       we need to calculate a full path of the corresponding optimized/unsigned assembly.
@@ -229,7 +214,6 @@
           >%(ExpectedDependency.OptimizeAssemblies)</_EffectiveOptimizeAssemblies
         >
       </ExpectedDependency>
-
       <_OptimizeAssembliesSplit
         Include="%(ExpectedDependency._EffectiveOptimizeAssemblies)"
         DependencyName="%(ExpectedDependency.Identity)"
@@ -238,7 +222,6 @@
         Include="%(ExpectedDependency.UnsignAssemblies)"
         DependencyName="%(ExpectedDependency.Identity)"
       />
-
       <_DependenciesWithFullPaths
         Include="@(_Dependency->'%(Identity)')"
         Exclude="@(_OptimizeAssembliesSplit->'%(DependencyName)');@(_UnsignAssembliesSplit->'%(DependencyName)')"
@@ -252,14 +235,12 @@
         UnsignAssembliesFullPaths="$(_OptimizedDependenciesDir)%(_UnsignAssembliesSplit.DependencyName)\%(_UnsignAssembliesSplit.Identity)"
       />
     </ItemGroup>
-
     <Microsoft.DotNet.Arcade.Sdk.GroupItemsBy
       Items="@(_DependenciesWithFullPaths)"
       GroupMetadata="OptimizeAssembliesFullPaths;UnsignAssembliesFullPaths"
     >
       <Output TaskParameter="GroupedItems" ItemName="_DependenciesWithFullPathsGrouped" />
     </Microsoft.DotNet.Arcade.Sdk.GroupItemsBy>
-
     <JoinItems
       Left="@(ExpectedDependency)"
       LeftMetadata="*"
@@ -268,7 +249,6 @@
     >
       <Output TaskParameter="JoinResult" ItemName="_ExpectedDependencyWithFullPaths" />
     </JoinItems>
-
     <!--
       Join metadata specified in _Dependency and ExpectedMetadata groups.
     -->
@@ -280,14 +260,11 @@
     >
       <Output TaskParameter="JoinResult" ItemName="_DependencyWithExpectedMetadata" />
     </JoinItems>
-
     <ItemGroup>
       <!-- Input to ApplyOptimizations target: assembly paths to apply optimization data to. -->
       <OptimizeAssembly Include="%(_DependencyWithExpectedMetadata.OptimizeAssembliesFullPaths)" />
-
       <!-- Assemblies in the unpacked packages that we want to unsign, but are not geting optimization data -->
       <_UnsignAssembly Include="%(_DependencyWithExpectedMetadata.UnsignAssembliesFullPaths)" />
-
       <!-- Packages that contain optimized assembly or assembly we want to re-sign. -->
       <_PackageToRepack
         Include="%(_DependencyWithExpectedMetadata._NuGetPackageDir)%(_DependencyWithExpectedMetadata._NuGetPackageFileName)"
@@ -296,7 +273,6 @@
         ReplacementFiles="%(_DependencyWithExpectedMetadata.OptimizeAssembliesFullPaths);%(_DependencyWithExpectedMetadata.UnsignAssembliesFullPaths)"
         Condition="'%(_DependencyWithExpectedMetadata.OptimizeAssembliesFullPaths)' != '' or '%(_DependencyWithExpectedMetadata.UnsignAssembliesFullPaths)' != ''"
       />
-
       <!-- Packages that we insert without modifications -->
       <_PackageToCopy
         Include="%(_DependencyWithExpectedMetadata._NuGetPackageDir)%(_DependencyWithExpectedMetadata._NuGetPackageFileName)"
@@ -304,7 +280,6 @@
       />
     </ItemGroup>
   </Target>
-
   <!--
     Write a list of assembly names and versions that the insertion tool uses to update assembly versions in DevDiv.
   -->
@@ -325,7 +300,6 @@
       <FileWrites Include="$(_DependentAssemblyVersionsFile)" />
     </ItemGroup>
   </Target>
-
   <!--
     Unpack dependent packages to a temp folder.
   -->
@@ -335,7 +309,6 @@
       DestinationFolder="%(_PackageToRepack.UnpackDir)"
     />
   </Target>
-
   <!--
     Copy NuGet packages to be inserted into VS by the insertion tool.
   -->
@@ -357,15 +330,12 @@
         >pr-validation-$(VersionSuffixDateStamp)-$(VersionSuffixBuildOfTheDayPadded)</_OptimizedNuGetPackageVersionSuffix
       >
     </PropertyGroup>
-
     <MakeDir Directories="$(VisualStudioBuildPackagesDir)" />
-
     <!-- Unsign assemblies that need to be unsigned but not optimized. -->
     <Microsoft.DotNet.Arcade.Sdk.Unsign
       FilePath="%(_UnsignAssembly.Identity)"
       Condition="'@(_UnsignAssembly)' != ''"
     />
-
     <!-- Repack optimized dependencies -->
     <Microsoft.DotNet.Tools.ReplacePackageParts
       SourcePackage="%(_PackageToRepack.Identity)"
@@ -377,7 +347,6 @@
     >
       <Output TaskParameter="NewPackage" ItemName="FileWrites" />
     </Microsoft.DotNet.Tools.ReplacePackageParts>
-
     <!-- Copy unoptimized dependencies -->
     <Copy SourceFiles="@(_PackageToCopy)" DestinationFolder="$(VisualStudioBuildPackagesDir)">
       <Output TaskParameter="CopiedFiles" ItemName="FileWrites" />

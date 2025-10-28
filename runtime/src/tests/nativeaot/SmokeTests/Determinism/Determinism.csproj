@@ -15,7 +15,6 @@
     <Compile Include="../UnitTests/Generics.cs" />
     <Compile Include="../UnitTests/Interfaces.cs" />
   </ItemGroup>
-
   <Target
     Name="IlcCompileSingleThreaded"
     Inputs="$(NativeIntermediateOutputPath)%(ManagedBinary.Filename)$(IlcOutputFileExt)"
@@ -26,27 +25,22 @@
       <OldObjectFileName>$(NativeIntermediateOutputPath)%(ManagedBinary.Filename)$(IlcOutputFileExt)</OldObjectFileName>
       <NewObjectFileName>$(NativeIntermediateOutputPath)%(ManagedBinary.Filename)$(IlcOutputFileExt)-singlethreaded</NewObjectFileName>
     </PropertyGroup>
-
     <ItemGroup>
       <IlcArg Remove="-o:$(OldObjectFileName)" />
       <IlcArg Include="-o:$(NewObjectFileName)" />
       <IlcArg Include="--parallelism:1" />
     </ItemGroup>
-
     <WriteLinesToFile
       File="%(ManagedBinary.IlcRspFile)-singlethreaded"
       Lines="@(IlcArg)"
       Overwrite="true"
       WriteOnlyWhenDifferent="true"
     />
-
     <Message Text="Compiling single-threaded baseline" Importance="High" />
-
     <Exec
       Command="&quot;$(IlcToolsPath)\ilc&quot; @&quot;%(ManagedBinary.IlcRspFile)-singlethreaded&quot;"
       EnvironmentVariables="$(_IlcEnvironmentVariables)"
     />
-
     <Copy SourceFiles="$(OldObjectFileName)" DestinationFiles="$(OutDir)\baseline.object" />
     <Copy SourceFiles="$(NewObjectFileName)" DestinationFiles="$(OutDir)\compare.object" />
   </Target>

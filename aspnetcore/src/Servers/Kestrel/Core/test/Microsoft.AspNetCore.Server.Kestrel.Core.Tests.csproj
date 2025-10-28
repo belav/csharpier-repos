@@ -5,7 +5,6 @@
     <TestGroupName>Kestrel.Core.Tests</TestGroupName>
     <DefineConstants>$(DefineConstants);KESTREL;IS_TESTS</DefineConstants>
   </PropertyGroup>
-
   <ItemGroup>
     <Compile Include="$(SharedSourceRoot)NullScope.cs" />
     <Compile Include="$(SharedSourceRoot)Buffers.Testing\*.cs" />
@@ -34,7 +33,6 @@
       LinkBase="Shared\runtime\Http3"
     />
     <Compile Include="$(SharedSourceRoot)TestResources.cs" LinkBase="Shared" />
-
     <Content
       Include="$(SharedSourceRoot)TestCertificates\*.pfx"
       LinkBase="shared\TestCertificates"
@@ -50,7 +48,6 @@
       LinkBase="shared\TestCertificates"
       CopyToOutputDirectory="PreserveNewest"
     />
-
     <Reference Include="Microsoft.AspNetCore.Http" />
     <Reference Include="Microsoft.AspNetCore.Server.Kestrel.Core" />
     <Reference Include="Microsoft.Extensions.DependencyInjection" />

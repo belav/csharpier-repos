@@ -5,7 +5,6 @@
       >true</UseP2PReferences
     >
   </PropertyGroup>
-
   <!--These references are used when running locally-->
   <ItemGroup Condition="'$(UseP2PReferences)'=='true'">
     <Reference Include="Microsoft.AspNetCore.TestHost" />

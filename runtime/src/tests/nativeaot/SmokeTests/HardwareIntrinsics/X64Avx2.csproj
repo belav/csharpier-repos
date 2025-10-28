@@ -16,11 +16,9 @@
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     <DefineConstants>$(DefineConstants);AVX2_INTRINSICS;VECTORT256_INTRINSICS</DefineConstants>
   </PropertyGroup>
-
   <ItemGroup>
     <IlcArg Include="--instruction-set:avx2" />
   </ItemGroup>
-
   <PropertyGroup>
     <CLRTestBashPreCommands>
       <![CDATA[
@@ -43,7 +41,6 @@ $(CLRTestBashPreCommands)
 ]]>
     </CLRTestBashPreCommands>
   </PropertyGroup>
-
   <ItemGroup>
     <Compile Include="Program.cs" />
   </ItemGroup>

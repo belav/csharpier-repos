@@ -52,14 +52,12 @@
     <Folder Include="BCLFeatures\" />
     <Folder Include="BCLFeatures\ETW\" />
   </ItemGroup>
-
   <ItemGroup>
     <PackageReference
       Include="System.Security.Permissions"
       Version="$(SystemSecurityPermissionsVersion)"
     />
   </ItemGroup>
-
   <ItemGroup>
     <Compile Remove="TopLevelStatements/**/*" />
   </ItemGroup>

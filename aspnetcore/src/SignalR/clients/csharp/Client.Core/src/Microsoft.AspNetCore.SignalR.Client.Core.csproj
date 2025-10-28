@@ -5,7 +5,6 @@
     <RootNamespace>Microsoft.AspNetCore.SignalR.Client</RootNamespace>
     <Nullable>enable</Nullable>
   </PropertyGroup>
-
   <ItemGroup>
     <Compile
       Include="$(SignalRSharedSourceRoot)AwaitableThreadPool.cs"
@@ -43,12 +42,10 @@
       LinkBase="Shared"
     />
   </ItemGroup>
-
   <ItemGroup>
     <Compile Include="$(SharedSourceRoot)ValueTaskExtensions\**\*.cs" />
     <Compile Include="$(SharedSourceRoot)NonCapturingTimer\*.cs" />
   </ItemGroup>
-
   <ItemGroup>
     <Reference Include="Microsoft.AspNetCore.SignalR.Common" />
     <Reference Include="Microsoft.AspNetCore.SignalR.Protocols.Json" />
@@ -56,16 +53,13 @@
     <Reference Include="Microsoft.Extensions.Logging" />
     <Reference Include="System.Threading.Channels" />
   </ItemGroup>
-
   <ItemGroup Condition="'$(TargetFramework)' != '$(DefaultNetCoreTargetFramework)'">
     <Reference Include="Microsoft.Bcl.TimeProvider" />
   </ItemGroup>
-
   <ItemGroup>
     <InternalsVisibleTo Include="Microsoft.AspNetCore.SignalR.Client.FunctionalTests" />
     <InternalsVisibleTo Include="Microsoft.AspNetCore.SignalR.Client.Tests" />
   </ItemGroup>
-
   <ItemGroup>
     <SupportedPlatform Include="browser" />
   </ItemGroup>

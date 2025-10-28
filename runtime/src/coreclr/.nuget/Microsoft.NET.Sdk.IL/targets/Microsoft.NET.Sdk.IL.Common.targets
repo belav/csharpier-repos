@@ -10,7 +10,6 @@ Copyright (c) .NET Foundation. All rights reserved.
     Condition="Exists('$(MSBuildToolsPath)\Microsoft.Managed.Before.targets')"
     Project="$(MSBuildToolsPath)\Microsoft.Managed.Before.targets"
   />
-
   <Import
     Condition="'$(IsCrossTargetingBuild)' != 'true'"
     Project="$(MSBuildThisFileDirectory)Microsoft.NET.Sdk.IL.targets"
@@ -19,7 +18,6 @@ Copyright (c) .NET Foundation. All rights reserved.
     Condition="'$(IsCrossTargetingBuild)' == 'true'"
     Project="$(MSBuildToolsPath)\Microsoft.Common.CrossTargeting.targets"
   />
-
   <Import
     Condition="Exists('$(MSBuildToolsPath)\Microsoft.Managed.After.targets')"
     Project="$(MSBuildToolsPath)\Microsoft.Managed.After.targets"

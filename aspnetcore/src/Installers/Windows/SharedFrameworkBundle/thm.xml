@@ -8,7 +8,6 @@
   <Font Id="4" Height="-12" Weight="500" Foreground="ff0000" Background="FFFFFF" Underline="yes"
     >Segoe UI</Font
   >
-
   <Image X="11" Y="11" Width="64" Height="64" ImageFile="logo.png" Visible="yes" />
   <Text X="80" Y="11" Width="-11" Height="40" FontId="1" Visible="yes" DisablePrefix="yes"
     >#(loc.Title)</Text
@@ -16,7 +15,6 @@
   <Text X="80" Y="40" Width="-11" Height="40" FontId="1" Visible="yes" DisablePrefix="yes"
     >#(loc.SubTitle)</Text
   >
-
   <Page Name="Help">
     <Text X="11" Y="80" Width="-11" Height="30" FontId="2" DisablePrefix="yes"
       >#(loc.HelpHeader)</Text
@@ -83,7 +81,6 @@
       DisablePrefix="yes"
       HexStyle="0x0000C000"
     ></Text>
-
     <Button
       Name="FilesInUseCloseRadioButton"
       X="11"
@@ -108,7 +105,6 @@
       HexStyle="0x000009"
       >#(loc.FilesInUseDontCloseRadioButton)</Button
     >
-
     <Button
       Name="FilesInUseOkButton"
       X="-91"

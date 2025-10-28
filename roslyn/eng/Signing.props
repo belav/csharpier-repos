@@ -4,15 +4,12 @@
   <PropertyGroup>
     <UseDotNetCertificate>true</UseDotNetCertificate>
   </PropertyGroup>
-
   <!--
     Non-default certificates.
   -->
   <ItemGroup>
     <ItemsToSign Include="$(ArtifactsPackagesDir)**\*.tgz" />
-
     <!-- Expression Compiler dependencies that run in remote debugger must be signed with Microsoft101240624 certificate in order to work on Windows 10S -->
-
     <FileSignInfo
       Include="Microsoft.CodeAnalysis.ExpressionEvaluator.ExpressionCompiler.dll"
       CertificateName="Microsoft101240624"
@@ -25,7 +22,6 @@
       Include="Microsoft.CodeAnalysis.VisualBasic.ExpressionEvaluator.ExpressionCompiler.dll"
       CertificateName="Microsoft101240624"
     />
-
     <FileSignInfo
       Include="Microsoft.CodeAnalysis.ExpressionEvaluator.ResultProvider.dll"
       PublicKeyToken="31bf3856ad364e35"
@@ -50,7 +46,6 @@
       TargetFramework=".NETStandard,Version=v1.3"
       CertificateName="Microsoft101240624"
     />
-
     <FileSignInfo
       Include="Microsoft.CodeAnalysis.ExpressionEvaluator.ResultProvider.dll"
       PublicKeyToken="31bf3856ad364e35"
@@ -75,7 +70,6 @@
       TargetFramework=".NETFramework,Version=v4.5"
       CertificateName="MicrosoftWin8WinBlue"
     />
-
     <!-- Sign 3rd party dlls with 3rd party cert -->
     <FileSignInfo Include="ICSharpCode.Decompiler.dll" CertificateName="3PartySHA2" />
     <FileSignInfo Include="e_sqlite3.dll" CertificateName="3PartySHA2" />
@@ -93,7 +87,6 @@
     <FileSignInfo Include="Newtonsoft.Json.dll" CertificateName="3PartySHA2" />
     <FileSignInfo Include="Validation.dll" CertificateName="3PartySHA2" />
     <FileSignInfo Include="Humanizer.dll" CertificateName="3PartySHA2" />
-
     <!-- Sign VS/Microsoft dlls we crossgen'd and included in the vsix for our .NET remote host with Microsoft cert -->
     <FileSignInfo Include="Microsoft.CodeAnalysis.Elfie.dll" CertificateName="MicrosoftSHA2" />
     <FileSignInfo Include="Microsoft.ServiceHub.Framework.dll" CertificateName="MicrosoftSHA2" />

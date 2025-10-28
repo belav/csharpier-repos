@@ -3,10 +3,8 @@
     <Input Include="../Csc/test.cs" />
     <Output Include="test.exe" />
   </ItemGroup>
-
   <Target Name="Compile">
     <Csc Sources="@(Input)" OutputAssembly="@(Output)" />
   </Target>
-
   <Target Name="Assemble" DependsOnTargets="Compile"></Target>
 </Project>

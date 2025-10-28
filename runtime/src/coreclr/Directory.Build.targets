@@ -1,6 +1,5 @@
 <Project>
   <Import Project="..\..\Directory.Build.targets" />
-
   <ItemGroup Condition="'$(UsingMicrosoftNoTargetsSdk)' != 'true'">
     <_DebugSymbolToMove
       Include="@(DebugSymbolsProjectOutputGroupOutput->Metadata('FinalOutputPath'))"
@@ -18,7 +17,6 @@
       Destination="$(RuntimeBinDir)PDB\%(FolderName)\%(Filename)%(Extension)"
     />
   </ItemGroup>
-
   <!-- Consolidate all PDBs into a single location, except the aotsdk PDBs, as S.P.C will overwrite the coreclr PDBs. -->
   <Target
     Name="MoveSymbolFiles"
@@ -34,7 +32,6 @@
       UseHardlinksIfPossible="false"
     />
   </Target>
-
   <!-- Import targets here to have TargetPath and other macros defined. Limit to CoreLib. -->
   <Import
     Condition="'$(MSBuildProjectName)' == 'System.Private.CoreLib' or '$(IsNativeAotProject)' == 'true'"

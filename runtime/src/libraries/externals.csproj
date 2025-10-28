@@ -11,7 +11,6 @@
     <BinPlaceRuntime>false</BinPlaceRuntime>
     <CopyLocalLockFileAssemblies>true</CopyLocalLockFileAssemblies>
   </PropertyGroup>
-
   <PropertyGroup>
     <GCStressDependsOnCoreDisTools>false</GCStressDependsOnCoreDisTools>
     <GCStressDependsOnCoreDisTools
@@ -28,25 +27,21 @@
       >true</CopyCoreDisToolsToCoreRoot
     >
   </PropertyGroup>
-
   <Import
     Project="$(RepositoryEngineeringDir)coredistools.targets"
     Condition="$(CopyCoreDisToolsToCoreRoot)"
   />
-
   <ItemGroup Condition="'$(DotNetBuildFromSource)' != 'true'">
     <PackageReference
       Include="Microsoft.DiaSymReader.Native"
       Version="$(MicrosoftDiaSymReaderNativeVersion)"
     />
   </ItemGroup>
-
   <ItemGroup>
     <HostFxrFile Include="$(DotNetHostBinDir)$(LibPrefix)hostfxr$(LibSuffix)" />
     <HostPolicyFile Include="$(DotNetHostBinDir)$(LibPrefix)hostpolicy$(LibSuffix)" />
     <DotnetExe Include="$(DotNetHostBinDir)dotnet$(ExeSuffix)" />
   </ItemGroup>
-
   <!-- Setup the testing shared framework host -->
   <Target
     Name="SetupTestingHost"
@@ -56,7 +51,6 @@
     <PropertyGroup>
       <UseHardlink>true</UseHardlink>
     </PropertyGroup>
-
     <!-- We do not need apphost.exe.
          Exclude here so that when building with the 2.x SDK we don't place it in the test shared framework. -->
     <ItemGroup>
@@ -65,28 +59,24 @@
         Condition="'%(Filename)' == 'apphost'"
       />
     </ItemGroup>
-
     <Copy
       SourceFiles="@(HostFxrFile)"
       DestinationFolder="$(NetCoreAppCurrentTestHostPath)host\fxr\$(ProductVersion)"
       SkipUnchangedFiles="true"
       UseHardlinksIfPossible="$(UseHardlink)"
     />
-
     <Copy
       SourceFiles="@(HostPolicyFile)"
       DestinationFolder="$(NetCoreAppCurrentTestHostPath)shared\Microsoft.NETCore.App\$(ProductVersion)"
       SkipUnchangedFiles="true"
       UseHardlinksIfPossible="$(UseHardlink)"
     />
-
     <Copy
       SourceFiles="@(DotnetExe)"
       DestinationFolder="$(NetCoreAppCurrentTestHostPath)"
       SkipUnchangedFiles="true"
       UseHardlinksIfPossible="$(UseHardlink)"
     />
-
     <!-- Include any native sanitizer runtimes so we can run our tests on machines without the exact same development environment. -->
     <Copy
       SourceFiles="@(SanitizerRuntimeToCopy->'$(DotNetHostBinDir)%(Identity)')"
@@ -94,7 +84,6 @@
       SkipUnchangedFiles="true"
       UseHardlinksIfPossible="$(UseHardlink)"
     />
-
     <Copy
       Condition="$(CopyCoreDisToolsToCoreRoot)"
       SourceFiles="$(CoreDisToolsLibrary)"
@@ -102,13 +91,11 @@
       SkipUnchangedFiles="true"
       UseHardlinksIfPossible="$(UseHardlink)"
     />
-
     <Exec
       Command="chmod +x $(NetCoreAppCurrentTestHostPath)%(DotnetExe.Filename)%(DotnetExe.Extension)"
       Condition="'$(TargetOS)' != 'windows' and '$(OS)' != 'Windows_NT'"
     />
   </Target>
-
   <Target
     Name="OverrideRuntimeCoreCLR"
     DependsOnTargets="ResolveRuntimeFilesFromLocalBuild"
@@ -158,7 +145,6 @@
       Text="Could not locate CoreCLR IL files."
     />
   </Target>
-
   <Target
     Name="OverrideRuntimeMono"
     DependsOnTargets="ResolveRuntimeFilesFromLocalBuild"

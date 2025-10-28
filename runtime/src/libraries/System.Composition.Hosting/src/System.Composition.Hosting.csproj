@@ -10,12 +10,10 @@
 
 Commonly Used Types:
 System.Composition.Hosting.CompositionHost</PackageDescription>
-
     <!-- TODO https://github.com/dotnet/runtime/issues/90400: Annotate for nullable reference types -->
     <Nullable>disable</Nullable>
     <NoWarn>$(NoWarn);nullable</NoWarn>
   </PropertyGroup>
-
   <ItemGroup>
     <Compile Include="System\Composition\Hosting\CompositionHost.cs" />
     <Compile Include="System\Composition\Hosting\Core\CompositeActivator.cs" />
@@ -44,11 +42,9 @@ System.Composition.Hosting.CompositionHost</PackageDescription>
     <Compile Include="System\Composition\Hosting\Util\MethodInfoExtensions.cs" />
     <Compile Include="System\Composition\Hosting\Util\SmallSparseInitonlyArray.cs" />
   </ItemGroup>
-
   <ItemGroup>
     <ProjectReference Include="$(LibrariesProjectRoot)System.Composition.Runtime\src\System.Composition.Runtime.csproj" />
   </ItemGroup>
-
   <ItemGroup Condition="'$(TargetFrameworkIdentifier)' == '.NETFramework'">
     <Reference Include="System.ComponentModel.Composition" />
   </ItemGroup>

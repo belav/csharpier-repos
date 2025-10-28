@@ -5,14 +5,12 @@
     <CLRTestTargetUnsupported Condition="'$(TargetsWindows)' != 'true'"
       >true</CLRTestTargetUnsupported
     >
-
     <!-- Shouldn't need this: https://github.com/dotnet/linker/issues/2618 -->
     <NoWarn>$(NoWarn);IL2050</NoWarn>
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="ComWrappers.cs" />
   </ItemGroup>
-
   <ItemGroup>
     <CMakeProjectReference Include="CMakeLists.txt" />
   </ItemGroup>

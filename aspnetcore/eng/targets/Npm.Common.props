@@ -8,7 +8,6 @@
     <Configuration Condition="'$(Configuration)' == ''">Debug</Configuration>
     <PackOnBuild>false</PackOnBuild>
   </PropertyGroup>
-
   <!-- Properties to control how we handle warnings when using the tasks provided by the Yarn MSBuild SDK -->
   <PropertyGroup>
     <IgnoreYarnWarnings>false</IgnoreYarnWarnings>

@@ -1,6 +1,5 @@
 <Project>
   <Import Project="..\Directory.Build.targets" />
-
   <!--
     Add hook for depproj build to respect OrderProjectReferences like pkgproj does. "BeforeTargets"
     runs after "DependsOnTargets", so hook each crossgen target individually to ensure this happens

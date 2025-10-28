@@ -7,7 +7,6 @@
     <TargetFramework>net472</TargetFramework>
     <DisableImplicitFrameworkReferences>true</DisableImplicitFrameworkReferences>
     <IsShipping>false</IsShipping>
-
     <!-- VSIX -->
     <GeneratePkgDefFile>true</GeneratePkgDefFile>
     <IncludeAssemblyInVSIXContainer>false</IncludeAssemblyInVSIXContainer>
@@ -85,7 +84,6 @@
       Include="Microsoft.VisualStudio.Threading"
       PkgDefEntry="BindingRedirect"
     />
-
     <NuGetPackageToIncludeInVsix
       Include="Microsoft.VisualStudio.LanguageServer.Protocol"
       PkgDefEntry="CodeBase"
@@ -190,7 +188,6 @@
     <PackageReference Include="Newtonsoft.Json" Version="$(NewtonsoftJsonVersion)" />
     <PackageReference Include="Nerdbank.Streams" Version="$(NerdbankStreamsVersion)" />
     <PackageReference Include="StreamJsonRpc" Version="$(StreamJsonRpcVersion)" />
-
     <PackageReference
       Include="Microsoft.VisualStudio.LanguageServer.Protocol"
       Version="$(MicrosoftVisualStudioLanguageServerProtocolVersion)"

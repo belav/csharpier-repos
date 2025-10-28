@@ -7,7 +7,6 @@
     <RootNamespace>Microsoft.AspNetCore.Http</RootNamespace>
     <PreserveCompilationContext>true</PreserveCompilationContext>
   </PropertyGroup>
-
   <ItemGroup>
     <Reference Include="BenchmarkDotNet" />
     <Reference Include="Microsoft.AspNetCore" />
@@ -19,7 +18,6 @@
     <Reference Include="Microsoft.Extensions.DependencyInjection" />
     <Reference Include="Microsoft.Extensions.DependencyModel" />
   </ItemGroup>
-
   <ItemGroup>
     <PackageReference
       Include="Microsoft.CodeAnalysis.CSharp"
@@ -32,7 +30,6 @@
       Version="$(MicrosoftCodeAnalysisVersion_LatestVS)"
     />
   </ItemGroup>
-
   <ItemGroup>
     <Compile
       Include="$(RepoRoot)src\Http\Http.Extensions\test\RequestDelegateGenerator\RequestDelegateCreationTestBase.cs"
@@ -44,7 +41,6 @@
     />
     <Compile Include="$(SharedSourceRoot)BenchmarkRunner\*.cs" LinkBase="Shared" />
   </ItemGroup>
-
   <ItemGroup>
     <ProjectReference Include="$(RepoRoot)src\Http\Http.Extensions\gen\Microsoft.AspNetCore.Http.RequestDelegateGenerator.csproj" />
   </ItemGroup>

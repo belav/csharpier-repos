@@ -12,14 +12,12 @@
          https://github.com/ericsink/SQLitePCL.raw/issues/543 -->
     <NoWarn>$(NoWarn);NETSDK1206</NoWarn>
   </PropertyGroup>
-
   <ItemGroup>
     <Compile
       Include="$(CommonPath)..\tests\SourceGenerators\RoslynTestUtils.cs"
       Link="SourceGenerators\RoslynTestUtils.cs"
     />
   </ItemGroup>
-
   <ItemGroup>
     <ProjectReference Include="$(LibrariesProjectRoot)Microsoft.Extensions.Logging.Abstractions\src\Microsoft.Extensions.Logging.Abstractions.csproj" />
     <PackageReference Include="Microsoft.CodeAnalysis" Version="$(RoslynApiVersion)" />
@@ -28,7 +26,6 @@
       Version="$(SQLitePCLRawbundle_greenVersion)"
     />
   </ItemGroup>
-
   <ItemGroup>
     <Content Include="TestClasses\*.cs">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>

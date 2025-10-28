@@ -7,9 +7,7 @@
     <SkipTests Condition=" '$(SkipIISTests)' == 'true' ">true</SkipTests>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
-
   <Import Project="../FunctionalTest.props" />
-
   <ItemGroup>
     <ProjectReference Include="..\testassets\IIS.Common.TestLib\IIS.Common.TestLib.csproj" />
     <ProjectReference
@@ -19,7 +17,6 @@
       SkipGetTargetFrameworkProperties="true"
     />
   </ItemGroup>
-
   <ItemGroup>
     <Compile Include="..\Common.FunctionalTests\Infrastructure\**\*.cs" />
     <Compile Include="..\Common.LongTests\**\*.cs" />
@@ -40,7 +37,6 @@
     <Compile Include="$(SharedSourceRoot)TaskToApm.cs" Link="Shared\TaskToApm.cs" />
     <Compile Include="$(SharedSourceRoot)InternalHeaderNames.cs" Link="Shared\" />
   </ItemGroup>
-
   <ItemGroup>
     <Reference Include="Microsoft.AspNetCore.Hosting" />
     <Reference Include="Microsoft.AspNetCore.Server.Kestrel.Transport.Sockets" />
@@ -48,7 +44,6 @@
     <Reference Include="System.Diagnostics.EventLog" />
     <Reference Include="System.Net.Http.WinHttpHandler" />
   </ItemGroup>
-
   <ItemGroup>
     <EmbeddedResource
       Include="$(SharedSourceRoot)ServerInfrastructure\SharedStrings.resx"

@@ -15,15 +15,12 @@ Microsoft.Extensions.Diagnostics.HealthChecks.IHealthChecksBuilder
     <IsAspNetCoreApp>true</IsAspNetCoreApp>
     <IsTrimmable>true</IsTrimmable>
   </PropertyGroup>
-
   <ItemGroup>
     <InternalsVisibleTo Include="Microsoft.Extensions.Diagnostics.HealthChecks.Tests" />
   </ItemGroup>
-
   <ItemGroup>
     <Compile Include="$(SharedSourceRoot)NonCapturingTimer\*.cs" />
     <Compile Include="$(SharedSourceRoot)ValueStopwatch\*.cs" />
-
     <Compile
       Include="$(SharedSourceRoot)TrimmingAttributes.cs"
       LinkBase="Shared"
@@ -38,13 +35,11 @@ Microsoft.Extensions.Diagnostics.HealthChecks.IHealthChecksBuilder
       LinkBase="Shared"
     />
   </ItemGroup>
-
   <ItemGroup>
     <Reference Include="Microsoft.Extensions.Diagnostics.HealthChecks.Abstractions" />
     <Reference Include="Microsoft.Extensions.Hosting.Abstractions" />
     <Reference Include="Microsoft.Extensions.Options" />
     <Reference Include="Microsoft.Extensions.Logging.Abstractions" />
-
     <!-- See: https://github.com/dotnet/aspnetcore/issues/46683 -->
     <Reference
       Include="Microsoft.Bcl.AsyncInterfaces"

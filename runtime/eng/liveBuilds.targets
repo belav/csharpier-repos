@@ -14,7 +14,6 @@
       Condition="'$(LibrariesAllConfigurationsOverridePath)' != ''"
       >$([MSBuild]::NormalizeDirectory('$(LibrariesAllConfigurationsOverridePath)'))</LibrariesAllConfigurationsArtifactsPath
     >
-
     <!-- Honor the RuntimeArtifactsPath property. -->
     <CoreCLRArtifactsPath
       Condition="'$(CoreCLRArtifactsPath)' == '' and '$(RuntimeArtifactsPath)' != ''"
@@ -28,7 +27,6 @@
       >$(TargetOS)-$(LibrariesConfiguration)-$(TargetArchitecture)</LibrariesTargetOSConfigurationArchitecture
     >
   </PropertyGroup>
-
   <!-- Set up default live asset paths if no overrides provided. -->
   <PropertyGroup>
     <CoreCLRArtifactsPath Condition="'$(CoreCLRArtifactsPath)' == ''"
@@ -45,7 +43,6 @@
       >$([MSBuild]::NormalizeDirectory('$(RepoRoot)', 'artifacts'))</LibrariesAllConfigurationsArtifactsPath
     >
   </PropertyGroup>
-
   <!-- Set up artifact subpaths. -->
   <PropertyGroup>
     <CoreCLRSharedFrameworkDir>$([MSBuild]::NormalizeDirectory('$(CoreCLRArtifactsPath)', 'sharedFramework'))</CoreCLRSharedFrameworkDir>
@@ -56,22 +53,16 @@
     >
     <CoreCLRAotSdkDir>$([MSBuild]::NormalizeDirectory('$(CoreCLRArtifactsPath)', 'aotsdk'))</CoreCLRAotSdkDir>
     <CoreCLRBuildIntegrationDir>$([MSBuild]::NormalizeDirectory('$(CoreCLRArtifactsPath)', 'build'))</CoreCLRBuildIntegrationDir>
-
     <Crossgen2Dir>$([MSBuild]::NormalizeDirectory('$(CoreCLRArtifactsPath)', '$(BuildArchitecture)', 'crossgen2'))</Crossgen2Dir>
-
     <ToolsILLinkDir>$([MSBuild]::NormalizeDirectory('$(ArtifactsBinDir)', 'ILLink.Tasks', '$(ToolsConfiguration)'))</ToolsILLinkDir>
-
     <MonoAotCrossDir>$([MSBuild]::NormalizeDirectory('$(MonoArtifactsPath)', 'cross', $(TargetOS)-$(TargetArchitecture.ToLowerInvariant())))</MonoAotCrossDir>
     <GrpcServerDockerImageDir>$([MSBuild]::NormalizeDirectory('$(LibrariesArtifactsPath)', 'obj', 'grpcserver', 'docker'))</GrpcServerDockerImageDir>
-
     <LibrariesPackagesDir>$([MSBuild]::NormalizeDirectory('$(LibrariesArtifactsPath)', 'packages', '$(LibrariesConfiguration)'))</LibrariesPackagesDir>
     <LibrariesShippingPackagesDir>$([MSBuild]::NormalizeDirectory('$(LibrariesPackagesDir)', 'Shipping'))</LibrariesShippingPackagesDir>
     <LibrariesNonShippingPackagesDir>$([MSBuild]::NormalizeDirectory('$(LibrariesPackagesDir)', 'NonShipping'))</LibrariesNonShippingPackagesDir>
-
     <LibrariesAllConfigPackagesDir>$([MSBuild]::NormalizeDirectory('$(LibrariesAllConfigurationsArtifactsPath)', 'packages', '$(LibrariesConfiguration)'))</LibrariesAllConfigPackagesDir>
     <LibrariesAllConfigShippingPackagesDir>$([MSBuild]::NormalizeDirectory('$(LibrariesAllConfigPackagesDir)', 'Shipping'))</LibrariesAllConfigShippingPackagesDir>
     <LibrariesAllConfigNonShippingPackagesDir>$([MSBuild]::NormalizeDirectory('$(LibrariesAllConfigPackagesDir)', 'NonShipping'))</LibrariesAllConfigNonShippingPackagesDir>
-
     <LibrariesSharedFrameworkRefArtifactsPath
       Condition="'$(LibrariesSharedFrameworkRefArtifactsPath)' == ''"
       >$(MicrosoftNetCoreAppRefPackRefDir)</LibrariesSharedFrameworkRefArtifactsPath
@@ -89,7 +80,6 @@
     <LibrariesNativeArtifactsPath Condition="'$(LibrariesNativeArtifactsPath)' == ''"
       >$([MSBuild]::NormalizeDirectory('$(LibrariesArtifactsPath)', 'bin', 'native', '$(NetCoreAppCurrent)-$(LibrariesTargetOSConfigurationArchitecture)'))</LibrariesNativeArtifactsPath
     >
-
     <CoreCLRCrossTargetComponentDirName
       Condition="'$(TargetArchitecture)' == 'arm64' and '$(BuildArchitecture)' != 'arm64'"
       >x64</CoreCLRCrossTargetComponentDirName
@@ -106,13 +96,11 @@
       Condition="'$(TargetArchitecture)' == 'armel' and '$(BuildArchitecture)' != 'armel' and '$(TargetsLinux)' == 'true'"
       >x64</CoreCLRCrossTargetComponentDirName
     >
-
     <AppHostSourcePath Condition="'$(UseLocalAppHostPack)' == 'true'"
       >$([MSBuild]::NormalizePath('$(DotNetHostBinDir)', 'apphost$(ExeSuffix)'))</AppHostSourcePath
     >
     <SingleFileHostSourcePath>$([MSBuild]::NormalizePath('$(CoreCLRArtifactsPath)', 'corehost', 'singlefilehost$(ExeSuffix)'))</SingleFileHostSourcePath>
   </PropertyGroup>
-
   <Target Name="ResolveRuntimeFilesFromLocalBuild">
     <Error
       Condition="!Exists('$(CoreCLRArtifactsPath)') and '$(RuntimeFlavor)' == 'CoreCLR'"
@@ -122,7 +110,6 @@
       Condition="!Exists('$(MonoArtifactsPath)') and '$(RuntimeFlavor)' == 'Mono'"
       Text="The Mono artifacts path does not exist '$(MonoArtifactsPath)'. The 'mono' subset must be built before building this project. Configuration: '$(MonoConfiguration)'. To use a different configuration, specify the 'RuntimeConfiguration' property."
     />
-
     <PropertyGroup Condition="'$(RuntimeFlavor)' == 'CoreCLR'">
       <CoreCLRArtifactsPath>$([MSBuild]::NormalizeDirectory('$(CoreCLRArtifactsPath)'))</CoreCLRArtifactsPath>
       <CoreCLRArtifactsPdbDir>$([MSBuild]::NormalizeDirectory('$(CoreCLRArtifactsPath)','PDB'))</CoreCLRArtifactsPdbDir>
@@ -139,14 +126,12 @@
     <PropertyGroup Condition="'$(RuntimeFlavor)' == 'Mono'">
       <MonoArtifactsPath>$([MSBuild]::NormalizeDirectory('$(MonoArtifactsPath)'))</MonoArtifactsPath>
     </PropertyGroup>
-
     <ItemGroup Condition="'$(BuildNativeAOTRuntimePack)' == 'true'">
       <_nativeAotRuntimeFiles Include="$(CoreCLRAotSdkDir)*" />
       <RuntimeFiles Include="@(_nativeAotRuntimeFiles)" Condition="'%(Extension)' != '.xml'">
         <IsNative>true</IsNative>
       </RuntimeFiles>
     </ItemGroup>
-
     <ItemGroup Condition="'$(RuntimeFlavor)' == 'CoreCLR' and '$(BuildNativeAOTRuntimePack)' != 'true'">
       <RuntimeFiles Include="$(CoreCLRSharedFrameworkDir)*.*" />
       <RuntimeFiles
@@ -185,7 +170,6 @@
         Condition="Exists('$(CoreCLRArtifactsPdbDir)System.Private.CoreLib.ni.pdb')"
         Include="$(CoreCLRArtifactsPdbDir)System.Private.CoreLib.ni.pdb"
       />
-
       <CoreCLRCrossTargetFiles
         Condition="'$(CoreCLRCrossTargetComponentDir)' != ''"
         Include="
@@ -193,7 +177,6 @@
           $(CoreCLRSharedFrameworkPdbDir)*.dbg;
           $(CoreCLRSharedFrameworkPdbDir)*.dwarf"
       />
-
       <CoreCLRCrossTargetFiles>
         <TargetPath>runtime/$(CoreCLRCrossTargetComponentDirName)_$(TargetArchitecture)/native</TargetPath>
         <IsNative>true</IsNative>
@@ -204,7 +187,6 @@
       <RuntimeFiles>
         <IsNative>true</IsNative>
       </RuntimeFiles>
-
       <MonoFrameworkReleaseFiles
         Condition="'$(TargetsMacCatalyst)' == 'true' or '$(TargetsiOS)' == 'true' or '$(TargetstvOS)' == 'true'"
         Include="$(MonoArtifactsPath)\Mono.release.framework\*.*"
@@ -216,13 +198,11 @@
       <MonoIncludeFiles Include="$(MonoArtifactsPath)\include\**\*.*" />
       <MonoBuildFiles Include="$(MonoArtifactsPath)\build\**\*.*" />
     </ItemGroup>
-
     <Error
       Condition="'@(RuntimeFiles)' == ''"
       Text="The '$(RuntimeFlavor)' subset must be built before building this project."
     />
   </Target>
-
   <Target Name="EnsureLocalArtifactsExist">
     <Error
       Condition="!Exists('$(LibrariesSharedFrameworkRefArtifactsPath)')"
@@ -233,7 +213,6 @@
       Text="The 'libs' subset must be built before building this project. Missing artifacts: $(LibrariesAllRefArtifactsPath). Configuration: '$(LibrariesConfiguration)'. To use a different configuration, specify the 'LibrariesConfiguration' property."
     />
   </Target>
-
   <!--
     Ensure artifacts exist for the more advanced paths. If the configuration is '*', don't emit
     these errors: it isn't a local dev scenario.
@@ -255,7 +234,6 @@
       Text="The 'libs' subset must be built before building this project. Missing artifacts: $(LibrariesNativeArtifactsPath). Configuration: '$(LibrariesConfiguration)'. To use a different configuration, specify the 'LibrariesConfiguration' property."
     />
   </Target>
-
   <Target
     Name="ResolveLibrariesRefAssembliesFromLocalBuild"
     DependsOnTargets="EnsureLocalArtifactsExist"
@@ -275,7 +253,6 @@
       Text="The 'libs' subset must be built before building this project."
     />
   </Target>
-
   <Target
     Name="ResolveLibrariesRuntimeFilesFromLocalBuild"
     DependsOnTargets="
@@ -361,7 +338,6 @@
         NativeSubDirectory="src\es6"
         IsNative="true"
       />
-
       <LibrariesRuntimeFiles
         Condition="'$(TargetOS)' == 'browser'"
         Include="
@@ -370,7 +346,6 @@
         IsNative="true"
       />
     </ItemGroup>
-
     <ItemGroup Label="Wasi" Condition="'$(TargetOS)' == 'wasi'">
       <LibrariesRuntimeFiles
         Include="
@@ -378,7 +353,6 @@
         $(LibrariesNativeArtifactsPath)*.dat;"
         IsNative="true"
       />
-
       <LibrariesRuntimeFiles
         Include="
         $(LibrariesNativeArtifactsPath)src\wasi-default.rsp;
@@ -387,7 +361,6 @@
         NativeSubDirectory="src"
         IsNative="true"
       />
-
       <LibrariesRuntimeFiles
         Include="
         $(LibrariesNativeArtifactsPath)include\wasm\*.h;"
@@ -395,13 +368,11 @@
         IsNative="true"
       />
     </ItemGroup>
-
     <Error
       Condition="'@(LibrariesRuntimeFiles)' == ''"
       Text="The 'libs' subset must be built before building this project."
     />
   </Target>
-
   <Target
     Name="ResolveLibrariesFromLocalBuild"
     DependsOnTargets="

@@ -8,7 +8,6 @@
     <Nullable>enable</Nullable>
     <WarnOnNullable>true</WarnOnNullable>
   </PropertyGroup>
-
   <ItemGroup>
     <PackageReference
       Include="Microsoft.CodeAnalysis.CSharp"
@@ -23,12 +22,10 @@
       Version="$(MicrosoftCodeAnalysisVersion_LatestVS)"
     />
   </ItemGroup>
-
   <ItemGroup>
     <InternalsVisibleTo Include="Microsoft.AspNetCore.Http.Extensions.Tests" />
     <InternalsVisibleTo Include="Microsoft.AspNetCore.Http.Microbenchmarks" />
   </ItemGroup>
-
   <ItemGroup>
     <Compile Include="$(SharedSourceRoot)IsExternalInit.cs" LinkBase="Shared" />
     <Compile Include="$(SharedSourceRoot)HashCode.cs" LinkBase="Shared" />

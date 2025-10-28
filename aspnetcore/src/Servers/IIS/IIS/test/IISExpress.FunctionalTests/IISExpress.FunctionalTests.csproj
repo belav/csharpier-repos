@@ -1,6 +1,5 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <Import Project="../FunctionalTest.props" />
-
   <PropertyGroup>
     <TargetFramework>$(DefaultNetCoreTargetFramework)</TargetFramework>
     <DefineConstants>IISEXPRESS_FUNCTIONALS</DefineConstants>
@@ -9,13 +8,11 @@
     <DisableFastUpToDateCheck>True</DisableFastUpToDateCheck>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
-
   <ItemGroup>
     <Reference Include="Microsoft.AspNetCore.Server.IIS" />
     <ProjectReference Include="..\testassets\IIS.Common.TestLib\IIS.Common.TestLib.csproj" />
     <ProjectReference Include="$(RepoRoot)src\Hosting\Server.IntegrationTesting\src\Microsoft.AspNetCore.Server.IntegrationTesting.csproj" />
     <ProjectReference Include="$(RepoRoot)src\Servers\IIS\IntegrationTesting.IIS\src\Microsoft.AspNetCore.Server.IntegrationTesting.IIS.csproj" />
-
     <ProjectReference
       Include="..\testassets\InProcessWebSite\InProcessWebSite.csproj"
       Private="false"
@@ -23,7 +20,6 @@
       SkipGetTargetFrameworkProperties="true"
     />
   </ItemGroup>
-
   <ItemGroup>
     <Compile Include="..\Common.LongTests\**\*.cs" />
     <Compile
@@ -47,7 +43,6 @@
     <Compile Include="$(SharedSourceRoot)TaskToApm.cs" Link="Shared\TaskToApm.cs" />
     <Compile Include="$(SharedSourceRoot)InternalHeaderNames.cs" Link="Shared\" />
   </ItemGroup>
-
   <ItemGroup>
     <Reference Include="Microsoft.AspNetCore.Hosting" />
     <Reference Include="Microsoft.AspNetCore.Server.Kestrel.Transport.Sockets" />
@@ -55,7 +50,6 @@
     <Reference Include="System.Diagnostics.EventLog" />
     <Reference Include="System.Net.Http.WinHttpHandler" />
   </ItemGroup>
-
   <ItemGroup>
     <EmbeddedResource
       Include="$(SharedSourceRoot)ServerInfrastructure\SharedStrings.resx"

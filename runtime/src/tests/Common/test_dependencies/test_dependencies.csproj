@@ -15,9 +15,7 @@
     />
     <PackageReference Include="xunit.analyzers" Version="$(XUnitAnalyzersVersion)" />
   </ItemGroup>
-
   <Target Name="Build" DependsOnTargets="$(TraversalBuildDependsOn)" />
-
   <Target
     Name="AddLibrariesToCoreRoot"
     BeforeTargets="CopyDependencyToCoreRoot"

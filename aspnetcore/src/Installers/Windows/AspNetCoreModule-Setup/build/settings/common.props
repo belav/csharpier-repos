@@ -1,9 +1,7 @@
 <Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <!--
     Use a common version of the Windows SDK
-  -->
-
-  <!-- Define platform shortnames for use in paths without having to rely on cpp props -->
+  --><!-- Define platform shortnames for use in paths without having to rely on cpp props -->
   <PropertyGroup>
     <PlatformShortname Condition="'$(PlatformShortname)' == '' AND '$(Platform)' == 'x64'"
       >x64</PlatformShortname
@@ -16,17 +14,13 @@
       >x86</PlatformShortname
     >
   </PropertyGroup>
-
   <!-- General properties -->
-
   <PropertyGroup>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
-
   <!--
     Use common compilation settings
   -->
-
   <ItemDefinitionGroup>
     <ClCompile>
       <!-- Microsoft.Security.SystemsADM.10086 - SDL required warnings --><!-- See https://github.com/dotnet/aspnetcore/issues/40525 -->
@@ -34,11 +28,9 @@
       <TreatSpecificWarningsAsErrors>$(TreatSpecificWarningsAsErrors);4018;4055;4146;4242;4244;4267;4302;4308;4509;4510;4532;4533;4610;4611;4700;4701;4703;4789;4995;4996</TreatSpecificWarningsAsErrors>
     </ClCompile>
   </ItemDefinitionGroup>
-
   <!--
     Use common preprocessor definitions
   -->
-
   <ItemDefinitionGroup Condition="'$(Configuration)'=='Debug'">
     <ClCompile>
       <PreprocessorDefinitions>_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>

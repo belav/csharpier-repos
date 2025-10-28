@@ -2,6 +2,5 @@
   <xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" targetNamespace="x">
     <xsd:import namespace="a" schemaLocation="bug356711_a.xsd" />
   </xsd:schema>
-
   <a:doc />
 </root>

@@ -6,7 +6,6 @@
     <PackageTags>aspnetcore;identity;membership</PackageTags>
     <Nullable>disable</Nullable>
   </PropertyGroup>
-
   <ItemGroup>
     <Reference Include="Microsoft.AspNetCore.Identity" />
     <Reference Include="Microsoft.Extensions.Configuration" />

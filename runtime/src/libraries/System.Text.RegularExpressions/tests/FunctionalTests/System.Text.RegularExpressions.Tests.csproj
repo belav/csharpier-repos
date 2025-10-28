@@ -9,9 +9,7 @@
     >
     <EmitCompilerGeneratedFiles>true</EmitCompilerGeneratedFiles>
     <IsHighAotMemoryUsageTest>true</IsHighAotMemoryUsageTest>
-    <!-- to avoid OOMs with source generation in wasm: https://github.com/dotnet/runtime/pull/60701 -->
-
-    <!-- some tests require full ICU data, force it -->
+    <!-- to avoid OOMs with source generation in wasm: https://github.com/dotnet/runtime/pull/60701 --><!-- some tests require full ICU data, force it -->
     <WasmIncludeFullIcuData>true</WasmIncludeFullIcuData>
   </PropertyGroup>
   <ItemGroup>
@@ -77,7 +75,6 @@
       Include="$(CommonTestPath)System\Diagnostics\DebuggerAttributes.cs"
       Link="Common\System\Diagnostics\DebuggerAttributes.cs"
     />
-
     <PackageReference
       Include="Microsoft.CodeAnalysis.CSharp.Workspaces"
       Version="$(MicrosoftCodeAnalysisVersion)"

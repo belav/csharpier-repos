@@ -9,12 +9,10 @@
     <DefineConstants>$(DefineConstants);Testing_NetStandard1_3</DefineConstants>
     <CopyLocalLockFileAssemblies>true</CopyLocalLockFileAssemblies>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
-
     <!-- Version 2.4.5 does not support netstandard2.1. -->
     <_VSRunnerVersion Condition=" '$(TargetFramework)' == 'netcoreapp2.1' ">2.4.3</_VSRunnerVersion>
     <_VSRunnerVersion Condition=" '$(TargetFramework)' != 'netcoreapp2.1' ">2.4.5</_VSRunnerVersion>
   </PropertyGroup>
-
   <ItemGroup>
     <PackageReference Include="System.IO.Pipelines" Version="4.7.5" />
     <PackageReference
@@ -22,7 +20,6 @@
       Version="4.3.4"
       Condition=" '$(TargetFrameworkIdentifier)' == '.NETFramework' "
     />
-
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.11.0" />
     <PackageReference Include="Moq" Version="4.18.4" />
     <PackageReference Include="xunit" Version="2.4.2" />
@@ -32,7 +29,6 @@
       <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
     </PackageReference>
     <PackageReference Include="XunitXml.TestLogger" Version="3.0.70" />
-
     <Compile
       Include="..\System.Net.Http.Formatting.Test\**\*.cs"
       Exclude="..\System.Net.Http.Formatting.Test\obj\**\*.cs;
@@ -41,13 +37,11 @@
     >
       <Link>%(RecursiveDir)\%(Filename).cs</Link>
     </Compile>
-
     <ProjectReference Include="..\..\src\System.Net.Http.Formatting.ns1_3\System.Net.Http.Formatting.ns1_3.csproj" />
     <ProjectReference
       Include="..\Microsoft.TestCommon\Microsoft.TestCommon.csproj"
       Properties="Testing_NetStandard1_3=true"
     />
-
     <Service Include="{82A7F48D-3B50-4B1E-B82E-3ADA8210C358}" />
   </ItemGroup>
 </Project>

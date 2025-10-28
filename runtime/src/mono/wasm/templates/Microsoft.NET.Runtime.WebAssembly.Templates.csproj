@@ -6,9 +6,7 @@
     <Authors>Microsoft</Authors>
     <Description>Templates to create WebAssembly projects.</Description>
     <PackageTags>dotnet-new;templates</PackageTags>
-
     <TargetFramework>$(NetCoreAppToolCurrent)</TargetFramework>
-
     <IncludeContentInPack>true</IncludeContentInPack>
     <IncludeBuildOutput>false</IncludeBuildOutput>
     <ContentTargetFolders>content</ContentTargetFolders>
@@ -16,11 +14,9 @@
     <IsPackable>true</IsPackable>
     <EnableDefaultCompileItems>false</EnableDefaultCompileItems>
   </PropertyGroup>
-
   <ItemGroup>
     <Content Include="templates\**\*" Exclude="templates\**\bin\**;templates\**\obj\**" />
   </ItemGroup>
-
   <Target Name="CreateManifestResourceNames" />
   <Target Name="CoreCompile" />
   <Target Name="_SetProductVersion" DependsOnTargets="GetProductVersions" BeforeTargets="Pack">

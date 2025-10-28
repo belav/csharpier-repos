@@ -40,7 +40,6 @@
   <ItemGroup Condition="'$(TargetFrameworkIdentifier)' == '.NETFramework'">
     <PackageReference Include="System.ValueTuple" Version="$(SystemValueTupleVersion)" />
   </ItemGroup>
-
   <!-- Use the following target to regenerate the test resources file.
        This is done from a test application and checked in so that we don't run
        product code during the build.

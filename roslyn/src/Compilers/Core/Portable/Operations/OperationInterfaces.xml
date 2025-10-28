@@ -17,13 +17,11 @@
       You can test with `Build.cmd -testIOperation`.
       Or to repro in VS, you can do `set ROSLYN_TEST_IOPERATION=true` then `devenv`.
         -->
-
   <UnusedOperationKinds>
     <Entry Value="0x1D" />
     <Entry Value="0x62" />
     <Entry Value="0x64" />
   </UnusedOperationKinds>
-
   <Node Name="IInvalidOperation" Base="IOperation" SkipClassGeneration="true">
     <Comments>
       <summary>

@@ -3,7 +3,6 @@
     <Description>Identity sample application on ASP.NET Core using endpoint routing</Description>
     <TargetFramework>$(DefaultNetCoreTargetFramework)</TargetFramework>
   </PropertyGroup>
-
   <ItemGroup>
     <Reference Include="Microsoft.AspNetCore" />
     <Reference Include="Microsoft.AspNetCore.Identity" />

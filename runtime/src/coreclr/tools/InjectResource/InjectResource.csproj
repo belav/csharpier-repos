@@ -9,7 +9,6 @@
     <OutputPath>$(RuntimeBinDir)\InjectResource</OutputPath>
     <RunAnalyzers>false</RunAnalyzers>
   </PropertyGroup>
-
   <ItemGroup>
     <PackageReference Include="System.CommandLine" Version="$(SystemCommandLineVersion)" />
   </ItemGroup>

@@ -6,7 +6,6 @@
     <SignAssembly>false</SignAssembly>
     <Nullable>enable</Nullable>
   </PropertyGroup>
-
   <ItemGroup>
     <Reference Include="Microsoft.AspNetCore.Components.WebView" />
     <Reference Include="Photino.NET" />

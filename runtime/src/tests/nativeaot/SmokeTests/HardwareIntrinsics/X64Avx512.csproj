@@ -17,11 +17,9 @@
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     <DefineConstants>$(DefineConstants);AVX512_INTRINSICS;VECTORT256_INTRINSICS</DefineConstants>
   </PropertyGroup>
-
   <ItemGroup>
     <IlcArg Include="--instruction-set:avx512f,avx512f_vl,avx512bw,avx512bw_vl,avx512cd,avx512cd_vl,avx512dq,avx512dq_vl" />
   </ItemGroup>
-
   <PropertyGroup>
     <CLRTestBashPreCommands>
       <![CDATA[
@@ -35,7 +33,6 @@ $(CLRTestBashPreCommands)
 ]]>
     </CLRTestBashPreCommands>
   </PropertyGroup>
-
   <ItemGroup>
     <Compile Include="Program.cs" />
   </ItemGroup>

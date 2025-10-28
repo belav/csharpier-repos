@@ -73,7 +73,6 @@
     <Reference Include="System.Transactions" />
     <Reference Include="WindowsBase" />
   </ItemGroup>
-
   <!--
       We're testing the BinaryFormatter enablement / disablement switch, so we need to suppress any inherited behavior.
       See https://github.com/dotnet/runtime/issues/87811 for more details.

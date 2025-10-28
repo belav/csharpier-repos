@@ -16,12 +16,10 @@
     <NoDefaultExcludes>true</NoDefaultExcludes>
     <IncludeSymbols>false</IncludeSymbols>
   </PropertyGroup>
-
   <ItemGroup>
     <Content Include="templates\**\*" Exclude="templates\**\bin\**;templates\**\obj\**" />
     <Compile Remove="**\*" />
   </ItemGroup>
-
   <ItemGroup>
     <GeneratedContent Include="..\EFCore.Design\Scaffolding\Internal\CSharpDbContextGenerator.tt">
       <PackagePath>content\templates\ef-templates\CodeTemplates\EFCore\DbContext.t4</PackagePath>
@@ -31,11 +29,9 @@
       <PackagePath>content\templates\ef-templates\CodeTemplates\EFCore\EntityType.t4</PackagePath>
     </GeneratedContent>
   </ItemGroup>
-
   <ItemGroup>
     <Service Include="{508349b6-6b84-4df5-91f0-309beebad82d}" />
   </ItemGroup>
-
   <UsingTask
     TaskName="PatchTemplate"
     TaskFactory="RoslynCodeTaskFactory"
@@ -116,11 +112,9 @@ if (!linePragmasRemoved
       </Code>
     </Task>
   </UsingTask>
-
   <PropertyGroup>
     <BeforePack>$(BeforePack);GenerateContent</BeforePack>
   </PropertyGroup>
-
   <Target Name="GenerateContent">
     <PatchTemplate
       TemplateFile="%(GeneratedContent.Identity)"

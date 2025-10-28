@@ -6,11 +6,9 @@
       >$(DefineConstants);FEATURE_WASM_THREADS</DefineConstants
     >
   </PropertyGroup>
-
   <ItemGroup>
     <Compile Include="System.Threading.ThreadPool.cs" />
   </ItemGroup>
-
   <ItemGroup>
     <ProjectReference Include="..\..\System.Runtime\ref\System.Runtime.csproj" />
     <ProjectReference Include="..\..\System.Threading.Overlapped\ref\System.Threading.Overlapped.csproj" />

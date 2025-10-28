@@ -3,7 +3,6 @@
     <TargetFramework>$(NetCoreAppCurrent)</TargetFramework>
     <OutputType>Exe</OutputType>
   </PropertyGroup>
-
   <ItemGroup>
     <None Include="empty" CopyToOutputDirectory="PreserveNewest" />
     <None Include="Sentence\**\*.*" CopyToOutputDirectory="PreserveNewest" />

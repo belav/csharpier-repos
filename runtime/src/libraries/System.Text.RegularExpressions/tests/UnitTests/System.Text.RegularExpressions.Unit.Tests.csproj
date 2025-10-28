@@ -14,14 +14,12 @@
   </PropertyGroup>
   <ItemGroup>
     <DefaultReferenceExclusion Include="System.Text.RegularExpressions" />
-
     <Compile Include="RegexCharClassTests.cs" />
     <Compile Include="RegexFindOptimizationsTests.cs" />
     <Compile Include="RegexPrefixAnalyzerTests.cs" />
     <Compile Include="RegexReductionTests.cs" />
     <Compile Include="RegexTreeAnalyzerTests.cs" />
     <Compile Include="SymbolicRegexTests.cs" />
-
     <!-- Code included from System.Text.RegularExpressions -->
     <Compile Include="$(CommonPath)System\HexConverter.cs" Link="Production\HexConverter.cs" />
     <Compile Include="$(CommonPath)System\Obsoletions.cs" Link="Common\System\Obsoletions.cs" />
@@ -110,7 +108,6 @@
       Include="..\..\src\System\Collections\HashtableExtensions.cs"
       Link="Production\HashtableExtensions.cs"
     />
-
     <!-- Code included from System.Text.RegularExpressions.Symbolic -->
     <Compile
       Include="..\..\src\System\Text\RegularExpressions\Symbolic\BDD.cs"
@@ -184,7 +181,6 @@
       Include="..\..\src\System\Text\RegularExpressions\Symbolic\UnicodeCategoryRanges.cs"
       Link="Production\UnicodeCategoryRanges.cs"
     />
-
     <!-- Code used as stubs to avoid pulling in further code from System.Text.RegularExpressions -->
     <Compile Include="Stubs.cs" />
   </ItemGroup>

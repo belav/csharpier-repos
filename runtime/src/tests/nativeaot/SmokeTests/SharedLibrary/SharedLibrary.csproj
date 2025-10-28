@@ -10,7 +10,6 @@
       >true</CLRTestTargetUnsupported
     >
   </PropertyGroup>
-
   <PropertyGroup>
     <CLRTestBatchPreCommands>
       <![CDATA[
@@ -20,7 +19,6 @@ copy /y clang_rt.* native\
 copy /y SharedLibraryDriver.exe native\SharedLibrary.exe
 ]]>
     </CLRTestBatchPreCommands>
-
     <CLRTestBashPreCommands>
       <![CDATA[
 $(CLRTestBashPreCommands)
@@ -30,7 +28,6 @@ cp SharedLibraryDriver native/SharedLibrary
 ]]>
     </CLRTestBashPreCommands>
   </PropertyGroup>
-
   <ItemGroup>
     <Compile Include="SharedLibrary.cs" />
   </ItemGroup>

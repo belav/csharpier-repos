@@ -18,7 +18,6 @@
       Include="$(CommonTestPath)System\Diagnostics\Tracing\TestEventListener.cs"
       Link="Common\System\Diagnostics\Tracing\TestEventListener.cs"
     />
-
     <TrimmerRootDescriptor Include="$(MSBuildThisFileDirectory)ILLink.Descriptors.xml" />
   </ItemGroup>
   <ItemGroup Condition="'$(TargetFrameworkIdentifier)' == '.NETCoreApp'">

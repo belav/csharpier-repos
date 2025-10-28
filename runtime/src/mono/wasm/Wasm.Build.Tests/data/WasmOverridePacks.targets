@@ -12,7 +12,6 @@
       />
     </ItemGroup>
   </Target>
-
   <!-- Use local targeting pack for NetCoreAppCurrent. -->
   <Target Name="UpdateTargetingAndRuntimePack" AfterTargets="ResolveFrameworkReferences">
     <ItemGroup>
@@ -23,7 +22,6 @@
         PackageDirectory="$(NetCoreTargetingPackRoot)\%(Identity)\$(_RuntimePackInWorkloadVersionCurrent)"
         RuntimeIdentifier="$(RuntimeIdentifier)"
       />
-
       <ResolvedFrameworkReference
         Condition="'%(Identity)' == 'Microsoft.NETCore.App'"
         RuntimePackName="Microsoft.NETCore.App.Runtime.Mono.$(RuntimeIdentifier)"
@@ -33,7 +31,6 @@
       />
     </ItemGroup>
   </Target>
-
   <!-- Update the local targeting pack's version as it's written into the runtimeconfig.json file to select the right framework. -->
   <Target Name="UpdateRuntimeFrameworkVersion" AfterTargets="ResolveTargetingPackAssets">
     <ItemGroup>
@@ -43,7 +40,6 @@
       />
     </ItemGroup>
   </Target>
-
   <!-- Filter out conflicting implicit assembly references. -->
   <Target
     Name="FilterImplicitAssemblyReferences"
@@ -55,7 +51,6 @@
       <_targetingPackReferenceExclusion Include="@(_ResolvedProjectReferencePaths->'%(Filename)')" />
       <_targetingPackReferenceExclusion Include="@(DefaultReferenceExclusion)" />
     </ItemGroup>
-
     <ItemGroup>
       <_targetingPackReferenceWithExclusion Include="@(Reference)">
         <Exclusion>%(_targetingPackReferenceExclusion.Identity)</Exclusion>
@@ -66,7 +61,6 @@
       />
     </ItemGroup>
   </Target>
-
   <ItemGroup>
     <KnownWebAssemblySdkPack
       Update="Microsoft.NET.Sdk.WebAssembly.Pack"

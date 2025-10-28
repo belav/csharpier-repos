@@ -9,10 +9,8 @@
     <FeatureBasicFreeze>true</FeatureBasicFreeze>
     <ProfilingSupportedBuild>true</ProfilingSupportedBuild>
   </PropertyGroup>
-
   <PropertyGroup Condition="'$(TargetsUnix)' == 'true'">
     <FeatureXplatEventSource Condition="'$(TargetOS)' == 'linux'">true</FeatureXplatEventSource>
-
     <FeatureArrayStubAsIL>true</FeatureArrayStubAsIL>
     <FeatureMulticastStubAsIL>true</FeatureMulticastStubAsIL>
     <FeaturePortableShuffleThunks Condition="'$(Platform)' != 'x86'"
@@ -22,7 +20,6 @@
     <FeatureStubsAsIL>true</FeatureStubsAsIL>
     <FeatureComWrappers>true</FeatureComWrappers>
   </PropertyGroup>
-
   <PropertyGroup Condition="'$(TargetsWindows)' == 'true'">
     <FeatureArrayStubAsIL Condition="'$(Platform)' != 'x86'">true</FeatureArrayStubAsIL>
     <FeatureMulticastStubAsIL Condition="'$(Platform)' != 'x86'">true</FeatureMulticastStubAsIL>
@@ -39,15 +36,12 @@
       >true</FeatureInstantiatingStubAsIL
     >
   </PropertyGroup>
-
   <PropertyGroup Condition="'$(TargetsOSX)' == 'true' OR '$(TargetsMacCatalyst)' == 'true' OR '$(TargetsiOS)' == 'true' OR '$(TargetstvOS)' == 'true'">
     <FeatureObjCMarshal>true</FeatureObjCMarshal>
   </PropertyGroup>
-
   <PropertyGroup Condition="!('$(TargetsWindows)' == 'true' AND '$(Platform)' == 'x86')">
     <FeatureEHFunclets>true</FeatureEHFunclets>
   </PropertyGroup>
-
   <PropertyGroup>
     <DefineConstants Condition="'$(FeatureArrayStubAsIL)' == 'true'"
       >$(DefineConstants);FEATURE_ARRAYSTUB_AS_IL</DefineConstants
@@ -100,7 +94,6 @@
     <DefineConstants Condition="'$(FeatureEHFunclets)' == 'true'"
       >$(DefineConstants);FEATURE_EH_FUNCLETS</DefineConstants
     >
-
     <DefineConstants Condition="'$(ProfilingSupportedBuild)' == 'true'"
       >$(DefineConstants);PROFILING_SUPPORTED</DefineConstants
     >

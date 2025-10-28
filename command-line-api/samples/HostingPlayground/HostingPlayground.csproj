@@ -5,7 +5,6 @@
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
     <NoWarn>$(NoWarn);CS1591</NoWarn>
   </PropertyGroup>
-
   <ItemGroup>
     <ProjectReference Include="..\..\src\System.CommandLine.Hosting\System.CommandLine.Hosting.csproj" />
     <ProjectReference Include="..\..\src\System.CommandLine.NamingConventionBinder\System.CommandLine.NamingConventionBinder.csproj" />

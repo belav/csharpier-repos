@@ -11,7 +11,6 @@
     <FixCategories>Breaking</FixCategories>
     <Owner></Owner>
   </Rule>
-
   <!-- MW11xx: Finalizer rules -->
   <Rule TypeName="DoNotUseFinalizers" Category="Microsoft.Web.FxCop" CheckId="MW1100">
     <Name>Do not use finalizers</Name>
@@ -23,7 +22,6 @@
     <FixCategories>Breaking</FixCategories>
     <Owner></Owner>
   </Rule>
-
   <!-- MW12xx: Task rules -->
   <Rule TypeName="DoNotConstructTaskInstances" Category="Microsoft.Web.FxCop" CheckId="MW1200">
     <Name>Do not construct instances of the Task-related types</Name>

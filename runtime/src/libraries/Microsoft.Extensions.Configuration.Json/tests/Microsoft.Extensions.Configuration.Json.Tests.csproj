@@ -3,7 +3,6 @@
     <TargetFrameworks>$(NetCoreAppCurrent);$(NetFrameworkMinimum)</TargetFrameworks>
     <EnableDefaultItems>true</EnableDefaultItems>
   </PropertyGroup>
-
   <ItemGroup>
     <Compile
       Include="$(LibrariesProjectRoot)Microsoft.Extensions.Configuration\tests\ConfigurationProviderTestBase.cs"
@@ -18,7 +17,6 @@
       Link="Microsoft.Extensions.Configuration\tests\Common\TestStreamHelpers.cs"
     />
   </ItemGroup>
-
   <ItemGroup>
     <ProjectReference
       Include="..\src\Microsoft.Extensions.Configuration.Json.csproj"

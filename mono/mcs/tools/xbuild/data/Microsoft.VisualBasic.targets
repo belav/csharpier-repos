@@ -3,11 +3,9 @@
     <DefaultLanguageSourceExtension>.vb</DefaultLanguageSourceExtension>
     <Language>VB</Language>
   </PropertyGroup>
-
   <PropertyGroup>
     <CreateManifestResourceNamesDependsOn></CreateManifestResourceNamesDependsOn>
   </PropertyGroup>
-
   <PropertyGroup>
     <FinalDefineConstants>CONFIG=&quot;$(Configuration)&quot;</FinalDefineConstants>
     <FinalDefineConstants Condition=" '$(DefineDebug)' == 'true' "
@@ -28,20 +26,15 @@
     <FinalDefineConstants Condition=" '$(DefineConstants)' != '' "
       >$(FinalDefineConstants),$(DefineConstants)</FinalDefineConstants
     >
-
     <_NoWarnings Condition=" '$(WarningLevel)' == '0' ">true</_NoWarnings>
     <_NoWarnings Condition=" '$(WarningLevel)' == '1' ">false</_NoWarnings>
-
     <DebugSymbols Condition=" '$(DebugType)' == 'none' ">false</DebugSymbols>
     <DebugType Condition=" '$(DebugType)' == 'none' "></DebugType>
-
     <CoreCompileDependsOn></CoreCompileDependsOn>
   </PropertyGroup>
-
   <ItemGroup>
     <DocFileItem Include="$(DocumentationFile)" Condition="'$(DocumentationFile)'!=''" />
   </ItemGroup>
-
   <Target
     Name="CoreCompile"
     Inputs="$(MSBuildAllProjects);@(Compile);@(ManifestResourceWithNoCulture);@(ManifestNonResxWithNoCultureOnDisk);@(CompiledLicenseFile);@(DocFileItem);
@@ -99,7 +92,6 @@
       ToolPath="$(VbcToolPath)"
     />
   </Target>
-
   <Target Name="CreateManifestResourceNames">
     <CreateVisualBasicManifestResourceName
       Condition="'@(ResxWithNoCulture)' != ''"
@@ -108,7 +100,6 @@
     >
       <Output TaskParameter="ManifestResourceNames" ItemName="ManifestResourceWithNoCultureName" />
     </CreateVisualBasicManifestResourceName>
-
     <CreateVisualBasicManifestResourceName
       Condition="'@(NonResxWithNoCulture)' != ''"
       ResourceFiles="@(NonResxWithNoCulture)"
@@ -116,7 +107,6 @@
     >
       <Output TaskParameter="ManifestResourceNames" ItemName="ManifestNonResxWithNoCulture" />
     </CreateVisualBasicManifestResourceName>
-
     <CreateVisualBasicManifestResourceName
       Condition="'@(ResxWithCulture)' != ''"
       ResourceFiles="@(ResxWithCulture)"
@@ -124,7 +114,6 @@
     >
       <Output TaskParameter="ManifestResourceNames" ItemName="ManifestResourceWithCultureName" />
     </CreateVisualBasicManifestResourceName>
-
     <CreateVisualBasicManifestResourceName
       Condition="'@(NonResxWithCulture)' != ''"
       ResourceFiles="@(NonResxWithCulture)"
@@ -133,9 +122,7 @@
       <Output TaskParameter="ManifestResourceNames" ItemName="ManifestNonResxWithCulture" />
     </CreateVisualBasicManifestResourceName>
   </Target>
-
   <Import Project="Microsoft.Common.targets" />
-
   <PropertyGroup>
     <VbcToolExe Condition="'$(VbcToolExe)' == ''">vbnc.exe</VbcToolExe>
   </PropertyGroup>

@@ -2,7 +2,6 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <TargetFrameworks>net472;$(SourceBuildToolsetTargetFramework)</TargetFrameworks>
-
     <IsPackable>true</IsPackable>
     <NuspecPackageId>Microsoft.Net.Compilers.Toolset</NuspecPackageId>
     <IncludeBuildOutput>false</IncludeBuildOutput>
@@ -22,7 +21,6 @@
     <TargetsForTfmSpecificContentInPackage>$(TargetsForTfmSpecificContentInPackage);_GetFilesToPackage</TargetsForTfmSpecificContentInPackage>
     <!-- Remove NU5128 once https://github.com/NuGet/Home/issues/8583 is fixed -->
     <NoWarn>$(NoWarn);NU5100;NU5128</NoWarn>
-
     <_DependsOn Condition="'$(TargetFramework)' == 'net472'"
       >InitializeDesktopCompilerArtifacts</_DependsOn
     >
@@ -30,7 +28,6 @@
       >InitializeCoreClrCompilerArtifacts</_DependsOn
     >
   </PropertyGroup>
-
   <ItemGroup>
     <ProjectReference
       Include="..\..\..\Compilers\CSharp\csc\AnyCpu\csc.csproj"
@@ -49,7 +46,6 @@
       Include="..\..\..\Compilers\Server\VBCSCompiler\AnyCpu\VBCSCompiler.csproj"
       PrivateAssets="All"
     />
-
     <ProjectReference
       Update="@(ProjectReference)"
       Targets="Publish"
@@ -59,12 +55,10 @@
       SetTargetFramework="TargetFramework=$(TargetFramework)"
     />
   </ItemGroup>
-
   <ItemGroup>
     <Content Include="build\**\*.*" PackagePath="build\" />
     <Content Include="buildMultiTargeting\**\*.*" PackagePath="buildMultiTargeting\" />
   </ItemGroup>
-
   <Target Name="_GetFilesToPackage" DependsOnTargets="$(_DependsOn)">
     <ItemGroup>
       <_File Include="@(DesktopCompilerArtifact)" TargetDir="tasks/net472" />
@@ -76,14 +70,12 @@
         Include="@(CoreClrCompilerBinRuntimesArtifact)"
         TargetDir="tasks/netcore/bincore/runtimes"
       />
-
       <TfmSpecificPackageFile
         Include="@(_File)"
         PackagePath="%(_File.TargetDir)/%(_File.RecursiveDir)%(_File.FileName)%(_File.Extension)"
       />
     </ItemGroup>
   </Target>
-
   <Import
     Project="..\DesktopCompilerArtifacts.targets"
     Condition="'$(TargetFramework)' == 'net472'"

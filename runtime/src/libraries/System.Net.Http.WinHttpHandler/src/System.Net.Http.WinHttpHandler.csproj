@@ -13,7 +13,6 @@
 Commonly Used Types:
 System.Net.Http.WinHttpHandler</PackageDescription>
   </PropertyGroup>
-
   <!-- DesignTimeBuild requires all the TargetFramework Derived Properties to not be present in the first property group. -->
   <PropertyGroup>
     <TargetPlatformIdentifier>$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)'))</TargetPlatformIdentifier>
@@ -22,7 +21,6 @@ System.Net.Http.WinHttpHandler</PackageDescription>
       >SR.PlatformNotSupported_WinHttpHandler</GeneratePlatformNotSupportedAssemblyMessage
     >
   </PropertyGroup>
-
   <ItemGroup Condition="'$(TargetFrameworkIdentifier)' == '.NETFramework' or '$(TargetPlatformIdentifier)' == 'windows'">
     <Compile
       Include="$(CommonPath)\Interop\Windows\Interop.Libraries.cs"
@@ -181,7 +179,6 @@ System.Net.Http.WinHttpHandler</PackageDescription>
       Condition="'$(TargetFrameworkIdentifier)' == '.NETCoreApp'"
     />
   </ItemGroup>
-
   <ItemGroup Condition="'$(TargetFrameworkIdentifier)' != '.NETCoreApp'">
     <Compile
       Include="$(CommonPath)System\Threading\Tasks\TaskToAsyncResult.cs"
@@ -189,7 +186,6 @@ System.Net.Http.WinHttpHandler</PackageDescription>
     />
     <Compile Include="$(CoreLibSharedDir)System\Diagnostics\CodeAnalysis\UnconditionalSuppressMessageAttribute.cs" />
   </ItemGroup>
-
   <ItemGroup Condition="'$(TargetFrameworkIdentifier)' == '.NETFramework'">
     <PackageReference Include="System.Buffers" Version="$(SystemBuffersVersion)" />
     <PackageReference Include="System.Memory" Version="$(SystemMemoryVersion)" />

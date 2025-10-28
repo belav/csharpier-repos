@@ -6,12 +6,10 @@
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     <RootNamespace>Microsoft.AspNetCore.WebUtilities</RootNamespace>
   </PropertyGroup>
-
   <ItemGroup>
     <Reference Include="BenchmarkDotNet" />
     <Reference Include="Microsoft.AspNetCore.WebUtilities" />
   </ItemGroup>
-
   <ItemGroup>
     <Compile Include="$(SharedSourceRoot)Buffers.Testing\**\*.cs" />
     <Compile Include="$(SharedSourceRoot)BenchmarkRunner\*.cs" />

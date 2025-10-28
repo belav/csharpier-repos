@@ -4,7 +4,6 @@
     <InstallersOutputPath>$(ArtifactsDir)installers\</InstallersOutputPath>
     <_SuppressSdkImports>false</_SuppressSdkImports>
   </PropertyGroup>
-
   <Target
     Name="PopulateGenerateChecksumItems"
     Condition="'$(GenerateChecksums)' == 'true'"
@@ -27,7 +26,6 @@
       </GenerateChecksumItems>
     </ItemGroup>
   </Target>
-
   <Import
     Project="Sdk.targets"
     Sdk="Microsoft.DotNet.Arcade.Sdk"

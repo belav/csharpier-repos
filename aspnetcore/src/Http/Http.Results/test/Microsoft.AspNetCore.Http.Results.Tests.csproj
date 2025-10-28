@@ -2,15 +2,12 @@
   <PropertyGroup>
     <TargetFramework>$(DefaultNetCoreTargetFramework)</TargetFramework>
   </PropertyGroup>
-
   <ItemGroup>
     <Reference Include="Microsoft.AspNetCore.Http" />
     <Reference Include="Microsoft.AspNetCore.Http.Results" />
     <Reference Include="Microsoft.Extensions.DependencyInjection" />
     <Reference Include="Mono.TextTemplating" />
-
     <ProjectReference Include="..\tools\ResultsOfTGenerator\ResultsOfTGenerator.csproj" />
-
     <Compile Include="$(SharedSourceRoot)ResultsTests\*.cs" LinkBase="Shared" />
     <Content
       Include="$(HttpResultsSourceRoot)\ResultsCache.StatusCodes.tt"

@@ -5,7 +5,6 @@
     <AssemblyName>BundleHelper</AssemblyName>
     <GenerateRuntimeConfigurationFiles>true</GenerateRuntimeConfigurationFiles>
   </PropertyGroup>
-
   <ItemGroup>
     <ProjectReference Include="..\..\TestUtils\TestUtils.csproj" />
     <ProjectReference Include="..\..\..\managed\Microsoft.NET.HostModel\Microsoft.NET.HostModel.csproj" />

@@ -23,7 +23,6 @@
       <Visible>false</Visible>
       <Pack>false</Pack>
     </Content>
-
     <PackageReference
       Include="runtime.win-x64.Microsoft.NETCore.ILDAsm"
       Version="$(runtimeWinX64MicrosoftNETCoreILDAsmPackageVersion)"

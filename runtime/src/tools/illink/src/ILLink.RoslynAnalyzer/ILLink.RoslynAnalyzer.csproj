@@ -9,11 +9,9 @@
     <NoWarn Condition="'$(DotNetBuildFromSource)' == 'true'">$(NoWarn);CS8524</NoWarn>
     <AnalyzerLanguage>cs</AnalyzerLanguage>
   </PropertyGroup>
-
   <ItemGroup>
     <Compile Include="$(CoreLibSharedDir)System/Index.cs" />
   </ItemGroup>
-
   <ItemGroup>
     <PackageReference
       Condition="'$(DotNetBuildFromSource)' != 'true'"
@@ -37,6 +35,5 @@
       <!-- We include our own copy of the ClosedAttribute to work in source build -->
     </PackageReference>
   </ItemGroup>
-
   <Import Project="..\ILLink.Shared\ILLink.Shared.projitems" Label="Shared" />
 </Project>

@@ -11,9 +11,7 @@
     <!-- Required because 8.0.0 SDK no longer considers net7.0 the current TFM. -->
     <GenerateRequiresPreviewFeaturesAttribute>true</GenerateRequiresPreviewFeaturesAttribute>
   </PropertyGroup>
-
   <Import Project="../FunctionalTest.props" />
-
   <ItemGroup>
     <Reference Include="Microsoft.AspNetCore.Server.HttpSys" />
     <ProjectReference Include="..\testassets\IIS.Common.TestLib\IIS.Common.TestLib.csproj" />
@@ -24,7 +22,6 @@
       SkipGetTargetFrameworkProperties="true"
     />
   </ItemGroup>
-
   <ItemGroup>
     <Compile Include="..\Common.FunctionalTests\**\*.cs" />
     <Compile Include="..\IIS.Shared.FunctionalTests\**\*.cs" />
@@ -53,7 +50,6 @@
       LinkBase="shared\"
     />
   </ItemGroup>
-
   <ItemGroup>
     <Reference Include="Microsoft.AspNetCore.Hosting" />
     <Reference Include="Microsoft.AspNetCore.Server.Kestrel.Transport.Sockets" />
@@ -61,7 +57,6 @@
     <Reference Include="System.Diagnostics.EventLog" />
     <Reference Include="System.Net.Http.WinHttpHandler" />
   </ItemGroup>
-
   <ItemGroup>
     <EmbeddedResource
       Include="$(SharedSourceRoot)ServerInfrastructure\SharedStrings.resx"

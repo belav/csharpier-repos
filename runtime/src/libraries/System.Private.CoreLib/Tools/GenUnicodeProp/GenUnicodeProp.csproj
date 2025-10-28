@@ -8,11 +8,9 @@
     <EnableDefaultItems>true</EnableDefaultItems>
     <GenerateDocumentationFile>false</GenerateDocumentationFile>
   </PropertyGroup>
-
   <ItemGroup>
     <Compile Include="$(LibrariesProjectRoot)Common\tests\TestUtilities.Unicode\**\*.cs" />
   </ItemGroup>
-
   <ItemGroup>
     <PackageReference
       Include="System.Private.Runtime.UnicodeData"
@@ -49,7 +47,6 @@
       <LogicalName>emoji-data.txt</LogicalName>
     </EmbeddedResource>
   </ItemGroup>
-
   <ItemGroup>
     <PackageReference
       Include="Microsoft.DotNet.XUnitExtensions"

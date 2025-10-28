@@ -3,13 +3,10 @@
   <library name="zlib" dlversion="1.2.13" dlname="z">
     <property name="description"> zip compression library </property>
     <property name="include-target-dir" value="$(@PACKAGE/install-includedir)" />
-
     <!-- fixme: not implemented yet -->
     <property name="compiler/c/inline" value="yes" />
-
     <include-file name="zlib.h" scope="public" mode="644" />
     <include-file name="zconf.h" scope="public" mode="644" />
-
     <source name="adler32.c">
       <depend name="zlib.h" />
       <depend name="zconf.h" />
@@ -97,8 +94,6 @@
     </source>
   </library>
 </package>
-
-
 <!--
 CFLAGS=-O
 #CFLAGS=-O -DMAX_WBITS=14 -DMAX_MEM_LEVEL=7

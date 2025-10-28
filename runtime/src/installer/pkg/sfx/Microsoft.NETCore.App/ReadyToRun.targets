@@ -7,7 +7,6 @@
         >1</PublishReadyToRunPerfmapFormatVersion
       >
     </PropertyGroup>
-
     <ItemGroup>
       <Crossgen2Tool
         Include="$(Crossgen2Dll)"

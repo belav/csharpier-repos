@@ -4,14 +4,11 @@
     <AspNetCoreHostingModel>InProcess</AspNetCoreHostingModel>
     <GenerateUserSecretsAttribute>false</GenerateUserSecretsAttribute>
     <ImplicitUsings>enable</ImplicitUsings>
-
     <!-- Disable CS8981 because the generated code from the protobuf files contains classes with lowercase names --><!-- Disable SYSLIB0039 because the tests intentionally use TLS 1.0 and 1.1 -->
     <NoWarn>CS8981;SYSLIB0039</NoWarn>
   </PropertyGroup>
-
   <ItemGroup>
     <Compile Include="..\Shared\AsyncStreamExtensions.cs" Link="AsyncStreamExtensions.cs" />
-
     <Protobuf
       Include="..\Proto\grpc\testing\test.proto"
       GrpcServices="Server"
@@ -27,14 +24,11 @@
       GrpcServices="None"
       Link="Protos\messages.proto"
     />
-
     <None Include="..\Certs\InteropTests\*.*" LinkBase="Certs">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
   </ItemGroup>
-
   <Import Project="Versions.props" />
-
   <ItemGroup>
     <PackageReference Include="Grpc.AspNetCore" Version="$(GrpcAspNetCoreVersion)" />
     <PackageReference Include="Grpc.AspNetCore.Web" Version="$(GrpcAspNetCoreWebVersion)" />

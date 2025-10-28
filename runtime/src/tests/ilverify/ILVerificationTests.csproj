@@ -8,19 +8,15 @@
     <IlasmRoundTripIncompatible>true</IlasmRoundTripIncompatible>
     <RequiresProcessIsolation>true</RequiresProcessIsolation>
   </PropertyGroup>
-
   <ItemGroup>
     <Compile Include="ILMethodTester.cs" />
     <Compile Include="ILTypeVerificationTester.cs" />
     <Compile Include="TestDataLoader.cs" />
   </ItemGroup>
-
   <Import Project="..\..\coreclr\tools\ILVerification\ILVerification.projitems" />
-
   <ItemGroup>
     <PackageReference Include="Newtonsoft.Json" Version="$(NewtonsoftJsonVersion)" />
   </ItemGroup>
-
   <ItemGroup>
     <ProjectReference Include="ILTests\*.ilproj">
       <ReferenceOutputAssembly>false</ReferenceOutputAssembly>

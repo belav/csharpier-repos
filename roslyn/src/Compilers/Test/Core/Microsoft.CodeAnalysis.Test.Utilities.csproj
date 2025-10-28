@@ -125,7 +125,6 @@
       Include="Microsoft.CodeAnalysis.AnalyzerUtilities"
       Version="$(MicrosoftCodeAnalysisAnalyzerUtilitiesVersion)"
     />
-
     <!-- Needed to find the Unsafe.dll binary to lay out at runtime for the compiler when testing analyzers. -->
     <PackageReference
       Include="System.Runtime.CompilerServices.Unsafe"
@@ -185,7 +184,6 @@
       PrivateAssets="all"
       GeneratePathProperty="true"
     />
-
     <PackageReference
       Include="Basic.Reference.Assemblies.NetStandard20"
       Version="$(BasicReferenceAssembliesNetStandard20Version)"
@@ -203,6 +201,5 @@
       Version="$(MicrosoftILVerificationVersion)"
     />
   </ItemGroup>
-
   <Import Project="Generated.targets" />
 </Project>

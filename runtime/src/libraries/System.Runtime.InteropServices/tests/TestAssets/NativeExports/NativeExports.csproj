@@ -19,7 +19,6 @@
       >true</_TargetsAppleOS
     >
   </PropertyGroup>
-
   <ItemGroup>
     <Compile
       Include="..\..\TestAssets\SharedTypes\ComInterfaces\**\*.cs"
@@ -30,7 +29,6 @@
       Link="Common\DisableRuntimeMarshalling.cs"
     />
   </ItemGroup>
-
   <!-- Until we use the live app host, use a prebuilt from the SDK.
        Issue: https://github.com/dotnet/runtime/issues/58109. -->
   <ItemGroup Condition="'$(UseLocalAppHostPack)' != 'true' and '$(NetCoreAppToolCurrent)' != '$(NetCoreAppCurrent)'">
@@ -39,22 +37,18 @@
       TargetFramework="$(NetCoreAppCurrent)"
     />
   </ItemGroup>
-
   <ItemGroup>
     <PackageReference Include="DNNE" Version="$(DNNEVersion)" />
   </ItemGroup>
-
   <ItemGroup>
     <ProjectReference Include="..\SharedTypes\SharedTypes.csproj" />
     <ProjectReference Include="..\..\Ancillary.Interop\Ancillary.Interop.csproj" />
   </ItemGroup>
-
   <Target Name="GetUnixBuildArgumentsForDNNE" Condition="'$(OS)' == 'Unix'">
     <PropertyGroup>
       <NativeCompiler>$(Compiler)</NativeCompiler>
       <NativeCompiler Condition="'$(NativeCompiler)' == ''">clang</NativeCompiler>
     </PropertyGroup>
-
     <Exec
       Command="sh -c 'build_arch=&quot;$(TargetArchitecture)&quot; compiler=&quot;$(NativeCompiler)&quot; . &quot;$(RepositoryEngineeringDir)/common/native/init-compiler.sh&quot; &amp;&amp; echo $CC' 2>/dev/null"
       EchoOff="true"
@@ -63,7 +57,6 @@
     >
       <Output TaskParameter="ConsoleOutput" PropertyName="DnneCompilerCommand" />
     </Exec>
-
     <Exec
       Command="sh -c 'build_arch=&quot;$(TargetArchitecture)&quot; compiler=&quot;$(NativeCompiler)&quot; . &quot;$(RepositoryEngineeringDir)/common/native/init-compiler.sh&quot; &amp;&amp; echo $LDFLAGS' 2>/dev/null"
       EchoOff="true"
@@ -73,7 +66,6 @@
       <Output TaskParameter="ConsoleOutput" PropertyName="DnneLinkerCommand" />
     </Exec>
   </Target>
-
   <Target
     Name="GetUnixCrossBuildArgumentsForDNNE"
     Condition="'$(CrossBuild)' == 'true' and
@@ -88,7 +80,6 @@
     >
       <Output TaskParameter="ConsoleOutput" PropertyName="CrossTargetXml" />
     </Exec>
-
     <XmlPeek XmlContent="$(CrossTargetXml)" Query="toolchain-info/target-triple/text()">
       <Output TaskParameter="Result" PropertyName="TargetTriple" />
     </XmlPeek>
@@ -98,14 +89,12 @@
     <XmlPeek XmlContent="$(CrossTargetXml)" Query="toolchain-info/compiler-args/text()">
       <Output TaskParameter="Result" PropertyName="DnneCompilerUserFlags" />
     </XmlPeek>
-
     <PropertyGroup>
       <CommonToolchainArgs>--target=$(TargetTriple) --gcc-toolchain=$(ROOTFS_DIR)/usr --sysroot=$(ROOTFS_DIR)</CommonToolchainArgs>
       <DnneLinkerUserFlags>$(CommonToolchainArgs) $(DnneLinkerCommand) $(DnneLinkerUserFlags.Replace(';',' '))</DnneLinkerUserFlags>
       <DnneCompilerUserFlags>$(CommonToolchainArgs) $(DnneCompilerUserFlags.Replace(';',' '))</DnneCompilerUserFlags>
     </PropertyGroup>
   </Target>
-
   <Target Name="GetAppleBuildArgumentsForDNNE" Condition="'$(_TargetsAppleOS)' == 'true'">
     <PropertyGroup Condition=" '$(TargetOS)' == 'maccatalyst'">
       <TargetTriple Condition="'$(TargetArchitecture)' == 'arm64'"
@@ -124,7 +113,6 @@
       >
       <XCodeSdkName>macosx</XCodeSdkName>
     </PropertyGroup>
-
     <Error
       Condition="'$(TargetTriple)' == ''"
       Text="A target triple was not specified for the native components build. Update the 'GetAppleBuildArgumentsForDNNE' target to specify a triple."
@@ -133,7 +121,6 @@
       Condition="'$(XCodeSdkName)' == ''"
       Text="The name of the XCode SDK for the target platform, as passed to xcrun to locate the sdk, must be specified."
     />
-
     <!-- xcrun is used to locate the XCode SDKs and tools within them. See the xcrun manpage for usage information. -->
     <Exec
       Command="xcrun --sdk $(XCodeSdkName) --show-sdk-path"
@@ -143,13 +130,11 @@
     >
       <Output TaskParameter="ConsoleOutput" PropertyName="SysRootIncludePath" />
     </Exec>
-
     <PropertyGroup>
       <DnneLinkerUserFlags>-target $(TargetTriple)</DnneLinkerUserFlags>
       <DnneCompilerUserFlags>-isysroot &quot;$(SysRootIncludePath)&quot; -target $(TargetTriple)</DnneCompilerUserFlags>
     </PropertyGroup>
   </Target>
-
   <Target
     Name="GetBuildArgumentsForDNNE"
     DependsOnTargets="ResolveFrameworkReferences;

@@ -2,7 +2,6 @@
   <PropertyGroup>
     <StrongNameKeyId>Microsoft</StrongNameKeyId>
   </PropertyGroup>
-
   <ItemGroup>
     <ForwardedType Include="System.Security.Cryptography.DataProtectionScope" />
     <ForwardedType Include="System.Security.Cryptography.ProtectedData" />

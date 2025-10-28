@@ -7,7 +7,6 @@
     <TieredCompilation>false</TieredCompilation>
     <DefineConstants>$(DefineConstants);IS_BENCHMARKS</DefineConstants>
   </PropertyGroup>
-
   <ItemGroup>
     <Reference Include="Microsoft.Extensions.ObjectPool" />
     <Reference Include="BenchmarkDotNet" />

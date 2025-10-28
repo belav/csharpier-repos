@@ -1,7 +1,6 @@
 <Project>
   <Import Project="../Directory.Build.targets" />
   <Import Project="$(MonoProjectRoot)\wasi\build\WasiApp.InTree.targets" />
-
   <PropertyGroup>
     <_SampleProject Condition="'$(_SampleProject)' == ''">$(MSBuildProjectFile)</_SampleProject>
     <_SampleAssembly Condition="'$(_SampleAssembly)' == ''">$(TargetFileName)</_SampleAssembly>
@@ -11,7 +10,6 @@
     >
     <_ExeExt Condition="$([MSBuild]::IsOSPlatform('WINDOWS'))">.exe</_ExeExt>
   </PropertyGroup>
-
   <Target Name="RunSampleWithWasmtime" DependsOnTargets="Build">
     <!--
       TODOWASI - - tcplisten localhost:64000 - - env DEBUGGER_FD=4
@@ -35,6 +33,5 @@
       IgnoreExitCode="true"
     />
   </Target>
-
   <Import Project="$(RepositoryEngineeringDir)testing\wasi-provisioning.targets" />
 </Project>

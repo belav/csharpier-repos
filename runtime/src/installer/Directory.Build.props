@@ -1,6 +1,5 @@
 <Project>
   <Import Project="..\..\Directory.Build.props" />
-
   <PropertyGroup>
     <!-- Clear AssemblyVersion as we need to align with the NuGet conventions, when empty arcade will do that for us. -->
     <AssemblyVersion />
@@ -22,7 +21,6 @@
       want to ensure we use the correct packages. -->
     <DisableImplicitNuGetFallbackFolder>true</DisableImplicitNuGetFallbackFolder>
   </PropertyGroup>
-
   <!-- Construct the path to the sign project, so that signing can be called during prepare-artifacts -->
   <PropertyGroup>
     <ArcadeSdkMSBuildProjectDir>$([System.IO.Path]::GetDirectoryName('$(ArcadeSdkBuildTasksAssembly)'))\..\</ArcadeSdkMSBuildProjectDir>

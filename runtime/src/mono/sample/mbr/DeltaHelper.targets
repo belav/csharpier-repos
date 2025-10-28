@@ -31,7 +31,6 @@
     </PropertyGroup>
     <Exec Command="$(HotreloadDeltaGenFullPath) $(HotreloadDeltaGenArgs)" />
   </Target>
-
   <!-- Computes the names of the files that hotreload-delta-gen will produce, given the name of the base assembly and the
        number of deltas -->
   <UsingTask
@@ -75,7 +74,6 @@ DeltaOutputs = result;
       </Code>
     </Task>
   </UsingTask>
-
   <Target Name="ComputeDeltaFileOutputNames">
     <Error
       Condition="'$(DeltaCount)' == ''"
@@ -90,7 +88,6 @@ DeltaOutputs = result;
     </ComputeDeltaFileOutputNames>
     <Message Importance="High" Text="Task gave me @(_DeltaFileForPublish)" />
   </Target>
-
   <Target
     Name="AddDiffsToPublishList"
     AfterTargets="ComputeResolvedFilesToPublishList"

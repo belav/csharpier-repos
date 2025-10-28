@@ -1,6 +1,5 @@
 <Project Sdk="Microsoft.Build.NoTargets">
   <!-- This is a wrapper project for wasm debugger tests, to enable use of the library test infrastructure -->
-
   <PropertyGroup>
     <TargetFramework>$(NetCoreAppToolCurrent)</TargetFramework>
     <IsPublishable>false</IsPublishable>
@@ -11,7 +10,6 @@
     <BundleXunitRunner>true</BundleXunitRunner>
     <TestFramework>xunit</TestFramework>
     <DebuggerHost Condition="'$(DebuggerHost)' == ''">chrome</DebuggerHost>
-
     <CoreBuildDependsOn />
     <BundleTestWasmAppDependsOn>BundleDebuggerTestsForHelix</BundleTestWasmAppDependsOn>
     <ExtractTestClassNamesForHelix
@@ -23,7 +21,6 @@
     >
     <HelixTargetsFile>wasm.helix.targets</HelixTargetsFile>
   </PropertyGroup>
-
   <PropertyGroup>
     <RunScriptInputName Condition="'$(OS)' != 'Windows_NT'"
       >RunScriptTemplate.sh</RunScriptInputName
@@ -31,10 +28,8 @@
     <RunScriptInputName Condition="'$(OS)' == 'Windows_NT'"
       >RunScriptTemplate.cmd</RunScriptInputName
     >
-
     <RunScriptInputPath>$(MSBuildThisFileDirectory)data\$(RunScriptInputName)</RunScriptInputPath>
   </PropertyGroup>
-
   <ItemGroup>
     <ProjectReference
       Include="../DebuggerTestSuite/DebuggerTestSuite.csproj"
@@ -51,7 +46,6 @@
                           DotNetForTests=$([MSBuild]::NormalizePath($(DotNetRoot), $(DotNetTool)))"
     />
   </ItemGroup>
-
   <Target Name="UpdateRunScriptCommands" BeforeTargets="GenerateRunScript">
     <ItemGroup>
       <RunScriptCommands
@@ -62,7 +56,6 @@
         Condition="'$(OS)' == 'Windows_NT'"
         Include="set DEBUGGER_TEST_PATH=%25cd%25/debugger-test"
       />
-
       <!-- See https://github.com/dotnet/runtime/issues/89409 and https://github.com/microsoft/vstest/issues/2952 -->
       <RunScriptCommands
         Condition="'$(OS)' != 'Windows_NT'"
@@ -73,7 +66,6 @@
         Include="set VSTEST_TESTHOST_SHUTDOWN_TIMEOUT=2000"
       />
     </ItemGroup>
-
     <ItemGroup Condition="'$(ContinuousIntegrationBuild)' == 'true' and '$(DebuggerHost)' == 'chrome'">
       <RunScriptCommands
         Condition="'$(OS)' != 'Windows_NT'"
@@ -84,14 +76,12 @@
         Include="set BROWSER_PATH_FOR_TESTS=%HELIX_CORRELATION_PAYLOAD%\chrome-win\chrome.exe"
       />
     </ItemGroup>
-
     <ItemGroup Condition="'$(ContinuousIntegrationBuild)' == 'true' and '$(DebuggerHost)' == 'firefox'">
       <RunScriptCommands
         Condition="'$(OS)' != 'Windows_NT'"
         Include="export BROWSER_PATH_FOR_TESTS=$HELIX_CORRELATION_PAYLOAD/firefox/firefox"
       />
     </ItemGroup>
-
     <ItemGroup
       Label="Don't log to console on CI"
       Condition="'$(ContinuousIntegrationBuild)' == 'true'"
@@ -102,11 +92,9 @@
       />
       <RunScriptCommands Condition="'$(OS)' == 'Windows_NT'" Include="set SKIP_LOG_TO_CONSOLE=1" />
     </ItemGroup>
-
     <PropertyGroup>
       <_DotnetCommand Condition="'$(OS)' != 'Windows_NT'">dotnet</_DotnetCommand>
       <_DotnetCommand Condition="'$(OS)' == 'Windows_NT'">dotnet.exe</_DotnetCommand>
-
       <RunScriptCommand>$(_DotnetCommand) test DebuggerTestSuite/DebuggerTestSuite.dll</RunScriptCommand>
       <RunScriptCommand Condition="'$(MonoWasmBuildVariant)' == 'multithread'"
         >$(RunScriptCommand) /e:WASM_TESTS_USING_VARIANT=multithreaded</RunScriptCommand
@@ -115,25 +103,21 @@
       <RunScriptCommand Condition="'$(ContinuousIntegrationBuild)' == 'true'"
         >$(RunScriptCommand) &quot;-l:console%3BVerbosity=normal&quot;</RunScriptCommand
       >
-
       <RunScriptCommand Condition="'$(OS)' != 'Windows_NT'"
         >$(RunScriptCommand) --results-directory &quot;$TEST_LOG_PATH&quot;</RunScriptCommand
       >
       <RunScriptCommand Condition="'$(OS)' == 'Windows_NT'"
         >$(RunScriptCommand) --results-directory &quot;%TEST_LOG_PATH%&quot;</RunScriptCommand
       >
-
       <RunScriptCommand Condition="'$(OS)' != 'Windows_NT'"
         >$(RunScriptCommand) %24TEST_ARGS</RunScriptCommand
       >
       <RunScriptCommand Condition="'$(OS)' == 'Windows_NT'"
         >$(RunScriptCommand) %TEST_ARGS%</RunScriptCommand
       >
-
       <!--<RunScriptCommand Condition="'$(ContinuousIntegrationBuild)' == 'true' or '$(XUnitShowProgress)' == 'true'">$(RunScriptCommand) -v normal</RunScriptCommand>-->
       <RunScriptCommand>$(RunScriptCommand) -v diag</RunScriptCommand>
     </PropertyGroup>
   </Target>
-
   <Target Name="BundleDebuggerTestsForHelix" />
 </Project>

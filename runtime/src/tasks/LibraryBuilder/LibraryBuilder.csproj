@@ -27,12 +27,10 @@
     <Compile Include="..\Common\LogAsErrorException.cs" />
     <Compile Include="..\AppleAppBuilder\TargetOS.cs" />
   </ItemGroup>
-
   <Target Name="GetFilesToPackage" Returns="@(FilesToPackage)">
     <ItemGroup>
       <_PublishFramework Remove="@(_PublishFramework)" />
       <_PublishFramework Include="$(TargetFrameworks)" />
-
       <!-- Copies every assembly that is in the artifacts/bin/MonoTargetsTasks/ subfolders.  Be careful not to include too much. -->
       <FilesToPackage
         Include="$(OutputPath)%(_PublishFramework.Identity)\*.dll"

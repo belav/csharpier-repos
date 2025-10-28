@@ -73,7 +73,6 @@
       <Project>{23F291D9-78DF-4133-8CF2-78CE104DDE63}</Project>
       <Name>Lib4</Name>
     </ProjectReference>
-
     <ProjectReference Include="..\Lib5\Lib5.csproj">
       <Project>{23F291D9-78DF-4133-8CF2-78CE104DABCD}</Project>
       <Name>Lib4</Name>

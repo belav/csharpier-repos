@@ -2,6 +2,5 @@
   <PropertyGroup>
     <UseAlphaVersion>true</UseAlphaVersion>
   </PropertyGroup>
-
   <Import Project="$([MSBuild]::GetPathOfFileAbove('Directory.Build.props', '$(MSBuildThisFileDirectory)../'))" />
 </Project>

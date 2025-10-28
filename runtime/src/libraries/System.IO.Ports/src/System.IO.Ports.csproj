@@ -13,12 +13,10 @@
 
 Commonly Used Types:
 System.IO.Ports.SerialPort</PackageDescription>
-
     <!-- TODO https://github.com/dotnet/runtime/issues/90400: Annotate for nullable reference types -->
     <Nullable>disable</Nullable>
     <NoWarn>$(NoWarn);nullable</NoWarn>
   </PropertyGroup>
-
   <!-- DesignTimeBuild requires all the TargetFramework Derived Properties to not be present in the first property group. -->
   <PropertyGroup>
     <TargetPlatformIdentifier>$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)'))</TargetPlatformIdentifier>
@@ -31,7 +29,6 @@ System.IO.Ports.SerialPort</PackageDescription>
       >SR.PlatformNotSupported_IOPorts</GeneratePlatformNotSupportedAssemblyMessage
     >
   </PropertyGroup>
-
   <ItemGroup Condition="'$(TargetPlatformIdentifier)' != ''">
     <Compile Include="System\IO\Ports\Handshake.cs" />
     <Compile Include="System\IO\Ports\InternalResources.cs" />
@@ -53,7 +50,6 @@ System.IO.Ports.SerialPort</PackageDescription>
       Link="Common\DisableRuntimeMarshalling.cs"
     />
   </ItemGroup>
-
   <ItemGroup Condition="'$(TargetPlatformIdentifier)' == 'windows'">
     <Compile Include="System\IO\Ports\SerialStream.Windows.cs" />
     <Compile
@@ -207,7 +203,6 @@ System.IO.Ports.SerialPort</PackageDescription>
       Link="Common\Interop\Windows\Kernel32\Interop.FileOperations.cs"
     />
   </ItemGroup>
-
   <ItemGroup Condition="'$(TargetPlatformIdentifier)' == 'unix'">
     <Compile Include="System\IO\Ports\SafeSerialDeviceHandle.Unix.cs" />
     <Compile Include="System\IO\Ports\SerialPort.Unix.cs" />
@@ -237,14 +232,12 @@ System.IO.Ports.SerialPort</PackageDescription>
       Link="Common\Interop\Unix\Interop.Poll.Structs.cs"
     />
   </ItemGroup>
-
   <ItemGroup Condition="'$(TargetFrameworkIdentifier)' != '.NETCoreApp'">
     <Compile
       Include="$(CommonPath)System\Threading\Tasks\TaskToAsyncResult.cs"
       Link="Common\System\Threading\Tasks\TaskToAsyncResult.cs"
     />
   </ItemGroup>
-
   <ItemGroup Condition="'$(IsPartialFacadeAssembly)' != 'true'">
     <!-- Just reference the runtime packages but don't build them in order to avoid unintentional Build/Pack invocations. -->
     <ProjectReference

@@ -21,14 +21,11 @@
     <NoWarn>$(NoWarn);CA1416</NoWarn>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
-
   <Import Project="..\..\build\assets.props" />
-
   <ItemGroup>
     <EmbeddedResource Include="Http.SubApp.config" />
     <EmbeddedResource Include="Http.config" />
   </ItemGroup>
-
   <Target
     Name="ValidateNativeComponentsBuilt"
     AfterTargets="Build"
@@ -39,7 +36,6 @@
       Condition="!Exists('$(AspNetCoreModuleV2ShimDll)') OR !Exists('$(AspNetCoreModuleV2OutOfProcessHandlerDll)')"
     />
   </Target>
-
   <ItemGroup Condition="'$(UseIisNativeAssets)' == 'true' AND '$(TestGroupName)' != 'IISNewHandler.FunctionalTests'">
     <NativeProjectReference
       Include="$(MSBuildThisFileDirectory)..\..\AspNetCoreModuleV2\AspNetCore\AspNetCore.vcxproj"
@@ -49,7 +45,6 @@
       Include="$(MSBuildThisFileDirectory)..\..\AspNetCoreModuleV2\OutOfProcessRequestHandler\OutOfProcessRequestHandler.vcxproj"
       Platform="x64"
     />
-
     <NativeProjectReference
       Include="$(MSBuildThisFileDirectory)..\..\AspNetCoreModuleV2\AspNetCore\AspNetCore.vcxproj"
       Platform="Win32"
@@ -58,7 +53,6 @@
       Include="$(MSBuildThisFileDirectory)..\..\AspNetCoreModuleV2\OutOfProcessRequestHandler\OutOfProcessRequestHandler.vcxproj"
       Platform="Win32"
     />
-
     <NativeProjectReference
       Include="$(MSBuildThisFileDirectory)..\..\AspNetCoreModuleV2\AspNetCore\AspNetCore.vcxproj"
       Platform="ARM64"
@@ -67,11 +61,9 @@
       Include="$(MSBuildThisFileDirectory)..\..\AspNetCoreModuleV2\OutOfProcessRequestHandler\OutOfProcessRequestHandler.vcxproj"
       Platform="ARM64"
     />
-
     <UpToDateCheckInput Include="$(AspNetCoreModuleV2ShimDll)" />
     <UpToDateCheckInput Include="$(AspNetCoreModuleV2OutOfProcessHandlerDll)" />
   </ItemGroup>
-
   <Target
     Name="AddRunNativeComponents"
     BeforeTargets="AssignTargetPaths"
@@ -87,7 +79,6 @@
       />
     </ItemGroup>
   </Target>
-
   <Target
     Name="AddPackNativeComponents"
     BeforeTargets="_GetPackageFiles"
@@ -101,7 +92,6 @@
       />
     </ItemGroup>
   </Target>
-
   <ItemGroup>
     <ProjectReference
       Include="$(RepoRoot)src\Servers\IIS\IIS\test\testassets\TestTasks\TestTasks.csproj"
@@ -110,7 +100,6 @@
       SkipGetTargetFrameworkProperties="true"
     />
     <ProjectReference Include="$(RepoRoot)src\Hosting\Server.IntegrationTesting\src\Microsoft.AspNetCore.Server.IntegrationTesting.csproj" />
-
     <Reference Include="Microsoft.NETCore.Windows.ApiSets" />
     <Reference Include="Microsoft.Web.Administration" />
     <Reference Include="System.Net.Http" />

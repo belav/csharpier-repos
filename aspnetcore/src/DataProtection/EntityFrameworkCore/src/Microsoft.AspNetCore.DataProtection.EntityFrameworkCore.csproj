@@ -7,7 +7,6 @@
     <PackageTags>aspnetcore;dataprotection;entityframeworkcore</PackageTags>
     <IsTrimmable>true</IsTrimmable>
   </PropertyGroup>
-
   <ItemGroup>
     <Reference Include="Microsoft.AspNetCore.DataProtection" />
     <Reference Include="Microsoft.EntityFrameworkCore" />

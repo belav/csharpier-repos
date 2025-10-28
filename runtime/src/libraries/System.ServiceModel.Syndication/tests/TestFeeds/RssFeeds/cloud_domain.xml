@@ -2,8 +2,6 @@
   Description:  cloud includes domain attribute
   Expect:       ValidCloud{element:cloud,attr:domain}
 -->
-
-
 <rss version="2.0">
   <channel>
     <title>Invalid cloud</title>

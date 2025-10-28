@@ -3,7 +3,6 @@
     <TargetFramework>$(NetCoreAppCurrent)</TargetFramework>
     <TestRunRequiresLiveRefPack>true</TestRunRequiresLiveRefPack>
   </PropertyGroup>
-
   <ItemGroup>
     <PackageReference
       Include="Microsoft.CodeAnalysis.CSharp.Workspaces"
@@ -22,7 +21,6 @@
       Version="$(CompilerPlatformTestingVersion)"
     />
   </ItemGroup>
-
   <ItemGroup>
     <ProjectReference Include="..\..\gen\System.Private.CoreLib.Generators.csproj" />
     <Compile

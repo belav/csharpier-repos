@@ -6,7 +6,6 @@
     <!-- Required because 8.0.0 SDK no longer considers net7.0 the current TFM. -->
     <GenerateRequiresPreviewFeaturesAttribute>true</GenerateRequiresPreviewFeaturesAttribute>
   </PropertyGroup>
-
   <ItemGroup>
     <Reference Include="Microsoft.AspNetCore" />
     <Reference Include="Microsoft.AspNetCore.Server.Kestrel" />
@@ -14,7 +13,6 @@
     <Reference Include="Microsoft.Extensions.Hosting" />
     <Reference Include="Microsoft.AspNetCore.Server.Kestrel.Transport.Quic" />
   </ItemGroup>
-
   <ItemGroup>
     <!-- Turn on the WebTransport AppContext switch -->
     <RuntimeHostConfigurationOption

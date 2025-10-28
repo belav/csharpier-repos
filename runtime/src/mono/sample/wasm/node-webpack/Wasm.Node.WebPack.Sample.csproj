@@ -3,7 +3,6 @@
     <WasmCopyAppZipToHelixTestDir>false</WasmCopyAppZipToHelixTestDir>
     <WasmMainJSPath>main.mjs</WasmMainJSPath>
   </PropertyGroup>
-
   <Target
     Name="CopyRelinkedPackage"
     AfterTargets="WasmBuildApp"
@@ -29,7 +28,6 @@
     <Copy SourceFiles="@(NpmPackageFiles)" DestinationFolder="bin/dotnet-runtime" />
     <Touch Files="bin/dotnet-runtime/.npm-stamp" AlwaysCreate="true" />
   </Target>
-
   <Target Name="WebPack" AfterTargets="BuildSampleInTree" DependsOnTargets="CopyRelinkedPackage">
     <Exec Command="npm install" WorkingDirectory="$(MSBuildProjectDirectory)" />
     <Exec
@@ -37,6 +35,5 @@
       WorkingDirectory="$(MSBuildProjectDirectory)"
     />
   </Target>
-
   <Target Name="RunSample" DependsOnTargets="RunSampleWithNode" />
 </Project>

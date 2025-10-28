@@ -11,7 +11,6 @@
     <!-- Ignore platform compatibility warnings for this project. We know this only works on windows.-->
     <NoWarn>$(NoWarn);CA1416</NoWarn>
   </PropertyGroup>
-
   <ItemGroup>
     <None
       Include="$(SharedSourceRoot)HttpSys\RequestProcessing\RequestHeaders.Generated.tt"
@@ -22,7 +21,6 @@
     </None>
     <Service Include="{508349b6-6b84-4df5-91f0-309beebad82d}" />
   </ItemGroup>
-
   <ItemGroup Condition="'$(DotNetBuildFromSource)' != 'true'">
     <Compile Include="$(SharedSourceRoot)HttpSys\**\*.cs" />
     <Compile Include="$(SharedSourceRoot)Buffers.MemoryPool\*.cs" LinkBase="MemoryPool" />
@@ -36,11 +34,9 @@
     />
     <Compile Include="$(SharedSourceRoot)TaskToApm.cs" />
   </ItemGroup>
-
   <ItemGroup Condition="'$(DotNetBuildFromSource)' == 'true'">
     <Compile Remove="**\*.cs" />
   </ItemGroup>
-
   <ItemGroup>
     <Reference Include="Microsoft.AspNetCore.Authentication.Core" />
     <Reference Include="Microsoft.AspNetCore.Connections.Abstractions" />
@@ -51,14 +47,12 @@
       <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
     </Reference>
   </ItemGroup>
-
   <ItemGroup>
     <InternalsVisibleTo Include="Microsoft.AspNetCore.Server.HttpSys.Tests" />
     <InternalsVisibleTo Include="Microsoft.AspNetCore.Server.HttpSys.FunctionalTests" />
     <InternalsVisibleTo Include="Microsoft.AspNetCore.Server.HttpSys.NonHelixTests" />
     <InternalsVisibleTo Include="Microsoft.AspNetCore.Server.HttpSys.Microbenchmarks" />
   </ItemGroup>
-
   <ItemGroup>
     <Compile Update="$(SharedSourceRoot)HttpSys\RequestProcessing\RequestHeaders.Generated.cs">
       <DesignTime>True</DesignTime>

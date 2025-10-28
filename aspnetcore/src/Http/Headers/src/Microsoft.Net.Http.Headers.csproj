@@ -9,7 +9,6 @@
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     <IsTrimmable>true</IsTrimmable>
   </PropertyGroup>
-
   <ItemGroup>
     <Reference Include="Microsoft.Extensions.Primitives" />
     <Compile
@@ -19,11 +18,9 @@
     <Compile Include="$(SharedSourceRoot)HttpRuleParser.cs" />
     <Compile Include="$(SharedSourceRoot)HttpParseResult.cs" />
   </ItemGroup>
-
   <ItemGroup>
     <SupportedPlatform Include="browser" />
   </ItemGroup>
-
   <ItemGroup>
     <InternalsVisibleTo Include="Microsoft.Net.Http.Headers.Tests" />
   </ItemGroup>

@@ -3,21 +3,16 @@
     <TargetFramework>$(DefaultNetCoreTargetFramework)</TargetFramework>
     <TestGroupName>ProjectTemplates.Blazor.E2ETests</TestGroupName>
     <DefineConstants>$(DefineConstants);XPLAT</DefineConstants>
-
     <RequiresDelayedBuild>true</RequiresDelayedBuild>
-
     <RunTemplateTests Condition="'$(RunTemplateTests)' == ''">true</RunTemplateTests>
     <RunBlazorPlaywrightTemplateTests Condition="'$(RunBlazorPlaywrightTemplateTests)' == ''"
       >$(RunTemplateTests)</RunBlazorPlaywrightTemplateTests
     >
     <SkipTests Condition="'$(RunBlazorPlaywrightTemplateTests)' != 'true'">true</SkipTests>
-
     <BaseOutputPath />
     <OutputPath />
-
     <!-- https://github.com/dotnet/aspnetcore/issues/38818 -->
     <BuildHelixPayload>false</BuildHelixPayload>
-
     <!-- Properties that affect test runs --><!-- TestTemplateCreationFolder is the folder where the templates will be created. Will point out to $(OutputDir)$(TestTemplateCreationFolder) -->
     <TestTemplateCreationFolder>TestTemplates\</TestTemplateCreationFolder>
     <RestoreFolderName>Blazor</RestoreFolderName>
@@ -25,7 +20,6 @@
     <TestDependsOnMssql>true</TestDependsOnMssql>
     <TestDependsOnPlaywright>true</TestDependsOnPlaywright>
   </PropertyGroup>
-
   <ItemGroup>
     <Compile Include="$(SharedSourceRoot)CommandLineUtils\**\*.cs" />
     <Compile
@@ -33,12 +27,10 @@
       LinkBase="shared\CertificateGeneration"
     />
   </ItemGroup>
-
   <ItemGroup>
     <Compile Include="$(SharedSourceRoot)Process\*.cs" LinkBase="shared\Process" />
     <Compile Include="..\..\Shared\**" LinkBase="Helpers" />
   </ItemGroup>
-
   <ItemGroup>
     <Content Include="playwrightSettings.*.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
@@ -48,7 +40,6 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
-
   <ItemGroup>
     <Reference Include="Microsoft.Extensions.Configuration" />
     <Reference Include="Microsoft.Extensions.Configuration.Json" />
@@ -67,7 +58,6 @@
       ReferenceOutputAssembly="false"
       SkipGetTargetFrameworkProperties="true"
     />
-
     <ProjectReference Include="$(RepoRoot)src\Hosting\Server.IntegrationTesting\src\Microsoft.AspNetCore.Server.IntegrationTesting.csproj" />
     <ProjectReference Include="$(RepoRoot)src\Shared\BrowserTesting\src\Microsoft.AspNetCore.BrowserTesting.csproj" />
     <ProjectReference
@@ -77,10 +67,8 @@
       SkipGetTargetFrameworkProperties="true"
     />
   </ItemGroup>
-
   <!-- Shared testing infrastructure for running E2E template tests -->
   <Import Project="..\..\TestInfrastructure\PrepareForTest.targets" />
-
   <Target Name="PublishAssets" AfterTargets="Publish">
     <ItemGroup>
       <_PublishFiles Include="$(OutputPath).playwright\**\*.*" />

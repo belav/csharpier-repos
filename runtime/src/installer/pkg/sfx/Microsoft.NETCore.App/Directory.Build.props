@@ -1,16 +1,13 @@
 <Project>
   <Import Project="$([MSBuild]::GetPathOfFileAbove(Directory.Build.props, $(MSBuildThisFileDirectory)..))" />
-
   <PropertyGroup>
     <SharedFrameworkName>$(MicrosoftNetCoreAppFrameworkName)</SharedFrameworkName>
     <IsShipping Condition="'$(PgoInstrument)' != ''">false</IsShipping>
     <SharedFrameworkFriendlyName>.NET Runtime</SharedFrameworkFriendlyName>
   </PropertyGroup>
-
   <ItemGroup>
     <PackageOverridesFile Include="$(MSBuildThisFileDirectory)PackageOverrides.txt" />
   </ItemGroup>
-
   <!--
   Native files that are always included in the singlefile bundle can be listed here.
 
@@ -20,14 +17,8 @@
   <ItemGroup>
     <!-- include at least one item. Otherwise there will be no opt-in list and everything will be included -->
     <SingleFileHostIncludeFilename Include="NONE" />
-
-    <!-- LINUX -->
-
-    <!-- OSX -->
-
-    <!-- Windows -->
+    <!-- LINUX --><!-- OSX --><!-- Windows -->
   </ItemGroup>
-
   <!--
     Platform manifest needs to include all native shims from previous releases.
     This itemgroup adds them explicitly.
@@ -55,16 +46,13 @@
     <_pastShimFiles Include="clrcompression.dll" />
     <PlatformManifestFileEntry Include="@(_pastShimFiles)" IsNative="true" />
   </ItemGroup>
-
   <PropertyGroup>
     <UseDefaultPlatformManifestFallbackVersions>true</UseDefaultPlatformManifestFallbackVersions>
     <WindowsForwarderFileVersion>10.0.19041.1</WindowsForwarderFileVersion>
     <MicrosoftDiaSymReaderNativeFileVersion>14.28.29715.1</MicrosoftDiaSymReaderNativeFileVersion>
     <MsQuicFileVersion>1.8.0.0</MsQuicFileVersion>
   </PropertyGroup>
-
   <Import Project="$(LibrariesProjectRoot)NetCoreAppLibrary.props" />
-
   <ItemGroup>
     <!-- Public libraries and shims -->
     <PlatformManifestFileEntry Include="@(NetCoreAppLibrary->'%(Identity).dll')" />
@@ -349,12 +337,10 @@
     <PlatformManifestFileEntry Include="libicui18n.a" IsNative="true" />
     <PlatformManifestFileEntry Include="libicuuc.a" IsNative="true" />
   </ItemGroup>
-
   <ItemGroup>
     <!-- Exclude shims from the closure verification -->
     <ExcludeFromClosure Include="@(NetFxReference)" />
   </ItemGroup>
-
   <ItemGroup Condition="'$(DotNetBuildFromSource)' != 'true'">
     <!-- Add a reference to Microsoft.DiaSymReader.Native if one does not already exist. -->
     <PackageReference
@@ -367,7 +353,6 @@
     <!-- Generate the PkgMicrosoft_DiaSymReader_Native property no matter who added the reference. -->
     <PackageReference Update="Microsoft.DiaSymReader.Native" GeneratePathProperty="true" />
   </ItemGroup>
-
   <PropertyGroup>
     <_hostArch>$(TargetArchitecture)</_hostArch>
     <_longNameTargetArch>$(TargetArchitecture)</_longNameTargetArch>

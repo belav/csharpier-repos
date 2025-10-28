@@ -1,6 +1,5 @@
 <Project>
   <Import Project="..\Directory.Build.props" />
-
   <PropertyGroup>
     <AnalysisLevel>latest</AnalysisLevel>
     <IsPackable>True</IsPackable>
@@ -9,7 +8,6 @@
     <Features>nullablePublicOnly;strict</Features>
     <CodeAnalysisRuleSet>$(MSBuildThisFileDirectory)..\rulesets\EFCore.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
-
   <ItemGroup>
     <PackageReference
       Include="DotNetAnalyzers.DocumentationAnalyzers"

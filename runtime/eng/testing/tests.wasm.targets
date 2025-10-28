@@ -27,19 +27,16 @@
       Condition="'$(DebuggerSupport)' == 'true' and '$(ContinuousIntegrationBuild)' == 'true' and '$(WasmDebugLevel)' == ''"
       >reset-to-zero</WasmDebugLevel
     >
-
     <TrimMode Condition="'$(TrimMode)' == ''">full</TrimMode>
     <JsonSerializerIsReflectionEnabledByDefault
       Condition="'$(JsonSerializerIsReflectionEnabledByDefault)' == ''"
       >true</JsonSerializerIsReflectionEnabledByDefault
     >
-
     <!-- Some tests expect to load satellite assemblies by path, eg. System.Runtime.Loader.Tests,
          so, just setting it true by default -->
     <IncludeSatelliteAssembliesInVFS Condition="'$(IncludeSatelliteAssembliesInVFS)' == ''"
       >true</IncludeSatelliteAssembliesInVFS
     >
-
     <!-- Run only if previous command succeeded -->
     <_ShellCommandSeparator Condition="'$(OS)' == 'Windows_NT'">&amp;&amp;</_ShellCommandSeparator>
     <_ShellCommandSeparator Condition="'$(OS)' != 'Windows_NT'">&amp;&amp;</_ShellCommandSeparator>
@@ -52,7 +49,6 @@
     >
     <RunWorkingDirectory>$(BundleDir)</RunWorkingDirectory>
   </PropertyGroup>
-
   <PropertyGroup Condition="'$(EnableAggressiveTrimming)' == 'true'">
     <!-- suppress warnings as these are tests, and not expected to be trim-safe -->
     <SuppressTrimAnalysisWarnings>true</SuppressTrimAnalysisWarnings>
@@ -61,7 +57,6 @@
     <!-- IL2121: Unnecessary UnconditionalSuppressMessage attribute -->
     <NoWarn>$(NoWarn);IL2121</NoWarn>
   </PropertyGroup>
-
   <PropertyGroup>
     <BuildAOTTestsOn
       Condition="'$(ContinuousIntegrationBuild)' == 'true' and '$(Scenario)' == 'BuildWasmApps'"
@@ -70,7 +65,6 @@
     <BuildAOTTestsOn Condition="'$(BuildAOTTestsOnHelix)' == 'true'">helix</BuildAOTTestsOn>
     <BuildAOTTestsOn Condition="'$(BuildAOTTestsOn)' == ''">local</BuildAOTTestsOn>
   </PropertyGroup>
-
   <PropertyGroup Condition="'$(BuildAOTTestsOn)' == 'local'">
     <!--
       When building for BuildAOTTestsOnHelix=true, the WasmApp*targets are *not* imported, because
@@ -90,11 +84,9 @@
       >$(_ExtraTrimmerArgs) --substitutions &quot;$(MonoProjectRoot)\wasm\build\ILLink.Substitutions.NoWasmIntrinsics.xml&quot;</_ExtraTrimmerArgs
     >
   </PropertyGroup>
-
   <ItemGroup>
     <_AOT_InternalForceInterpretAssemblies Include="@(HighAotMemoryUsageAssembly)" />
   </ItemGroup>
-
   <PropertyGroup>
     <!-- non-library tests have IsWasmProject==false -->
     <BundleTestWasmAppDependsOn Condition="'$(BuildAOTTestsOn)' == 'local'"
@@ -103,17 +95,14 @@
     <BundleTestWasmAppDependsOn Condition="'$(BuildAOTTestsOnHelix)' == 'true'"
       >$(BundleTestWasmAppDependsOn);_BundleAOTTestWasmAppForHelix</BundleTestWasmAppDependsOn
     >
-
     <!-- Use BundleDir here, since WasmAppDir is set in a target, and `dotnet run` reads
          $(Run*) without running any targets -->
     <_RuntimeConfigJsonPath>$([MSBuild]::NormalizePath($(BundleDir), 'WasmTestRunner.runtimeconfig.json'))</_RuntimeConfigJsonPath>
     <RunArguments>exec &quot;$([MSBuild]::NormalizePath($(WasmAppHostDir), 'WasmAppHost.dll'))&quot; --runtime-config &quot;$(_RuntimeConfigJsonPath)&quot; $(WasmHostArguments) $(StartArguments) $(WasmXHarnessMonoArgs) $(_AppArgs)</RunArguments>
   </PropertyGroup>
-
   <PropertyGroup Condition="'$(BuildAOTTestsOnHelix)' == 'true'">
     <!-- wasm targets are not imported at all, in this case, because we run the wasm build on helix -->
   </PropertyGroup>
-
   <ItemGroup>
     <WasmExtraFilesToDeploy
       Condition="'$(_UseWasmSymbolicator)' == 'true'"
@@ -124,15 +113,12 @@
       Include="$(ArtifactsBinDir)WasmSymbolicator\$(Configuration)\$(NetCoreAppToolCurrent)\WasmSymbolicator.dll"
     />
   </ItemGroup>
-
   <Target Name="BundleTestWasmApp" DependsOnTargets="$(BundleTestWasmAppDependsOn)" />
-
   <UsingTask
     Condition="'$(BuildAOTTestsOnHelix)' == 'true'"
     TaskName="Microsoft.WebAssembly.Build.Tasks.GenerateAOTProps"
     AssemblyFile="$(WasmBuildTasksAssemblyPath)"
   />
-
   <Target
     Name="_BundleAOTTestWasmAppForHelix"
     DependsOnTargets="$(_BundleAOTTestWasmAppForHelixDependsOn)"
@@ -144,22 +130,18 @@
       >
       <RuntimeConfigFilePath>$([System.IO.Path]::ChangeExtension($(_MainAssemblyPath), '.runtimeconfig.json'))</RuntimeConfigFilePath>
     </PropertyGroup>
-
     <Error
       Text="Item WasmAssembliesToBundle is empty. This is likely an authoring error."
       Condition="@(WasmAssembliesToBundle->Count()) == 0"
     />
-
     <ItemGroup>
       <BundleFiles
         Include="@(WasmAssembliesToBundle)"
         TargetDir="publish\%(WasmAssembliesToBundle.RecursiveDir)"
       />
       <BundleFiles Include="$(RuntimeConfigFilePath)" TargetDir="publish" />
-
       <BundleFiles Include="$(WasmSharedPath)data\aot-tests\*" TargetDir="publish" />
     </ItemGroup>
-
     <ItemGroup Condition="'$(DebuggerSupport)' == 'true'">
       <!-- Add any pdb files, if available -->
       <_BundlePdbFiles Include="$([System.IO.Path]::ChangeExtension('%(WasmAssembliesToBundle.Identity)', '.pdb'))" />
@@ -169,7 +151,6 @@
         Condition="Exists(%(_BundlePdbFiles.Identity))"
       />
     </ItemGroup>
-
     <!-- To recreate the original project on helix, we need to set the wasm properties also, same as the
          library test project. Eg. $(InvariantGlobalization) -->
     <ItemGroup>
@@ -186,44 +167,37 @@
       <_WasmPropertyNames Include="_WasmDevel" />
       <_WasmPropertyNames Include="_WasmStrictVersionMatch" />
       <_WasmPropertyNames Include="WasmEmitSymbolMap" />
-
       <_WasmPropertiesToPass
         Include="$(%(_WasmPropertyNames.Identity))"
         Name="%(_WasmPropertyNames.Identity)"
         ConditionToUse__="%(_WasmPropertyNames.ConditionToUse__)"
       />
-
       <_WasmVFSFilesToCopy Include="@(WasmFilesToIncludeInFileSystem)" />
       <_WasmVFSFilesToCopy
         TargetPath="%(FileName)%(Extension)"
         Condition="'%(_WasmVFSFilesToCopy.TargetPath)' == ''"
       />
-
       <_WasmExtraFilesToCopy Include="@(WasmExtraFilesToDeploy)" />
       <_WasmExtraFilesToCopy
         TargetPath="%(FileName)%(Extension)"
         Condition="'%(_WasmExtraFilesToCopy.TargetPath)' == ''"
       />
-
       <!-- Example of passing items to the project
 
           <_WasmItemsToPass Include="@(BundleFiles)" OriginalItemName__="BundleFiles" ConditionToUse__="'$(Foo)' != 'true'" />
 
       -->
-
       <_WasmItemsToPass
         Include="@(_AOT_InternalForceInterpretAssemblies)"
         OriginalItemName__="_AOT_InternalForceInterpretAssemblies"
       />
     </ItemGroup>
-
     <!-- This file gets imported by the project file on helix -->
     <GenerateAOTProps
       Properties="@(_WasmPropertiesToPass)"
       Items="@(_WasmItemsToPass)"
       OutputFile="$(BundleDir)publish\ProxyProjectForAOTOnHelix.props"
     />
-
     <Copy SourceFiles="@(BundleFiles)" DestinationFolder="$(BundleDir)%(TargetDir)" />
     <Copy
       SourceFiles="@(_WasmVFSFilesToCopy)"
@@ -234,7 +208,6 @@
       DestinationFiles="$(BundleDir)\extraFiles\%(_WasmExtraFilesToCopy.TargetPath)"
     />
   </Target>
-
   <!-- linker automatically picks up the .pdb files, but they are not added to the publish list.
        Add them explicitly here, so they can be used with WasmAppBuilder -->
   <Target
@@ -247,7 +220,6 @@
         Include="$([System.IO.Path]::ChangeExtension('%(ResolvedFileToPublish.Identity)', '.pdb'))"
         Condition="'%(ResolvedFileToPublish.Extension)' == '.dll'"
       />
-
       <ResolvedFileToPublish
         Include="@(_PdbFilesToCheck)"
         Condition="Exists(%(_PdbFilesToCheck.Identity))"
@@ -255,7 +227,6 @@
       />
     </ItemGroup>
   </Target>
-
   <Target
     Name="DeployHelixTargetsFile"
     AfterTargets="ArchiveTests"
@@ -267,13 +238,11 @@
       SkipUnchangedFiles="true"
     />
   </Target>
-
   <Target Name="_GetNugetsForAOT" Returns="@(_NuGetsToBuild)">
     <PropertyGroup>
       <!-- Eg. Microsoft.NETCore.App.Runtime.AOT.osx-x64.Cross.browser-wasm.6.0.0-dev.nupkg -->
       <_AOTCrossNuGetPath>$(LibrariesShippingPackagesDir)Microsoft.NETCore.App.Runtime.AOT.$(NETCoreSdkRuntimeIdentifier).Cross.$(RuntimeIdentifier).$(PackageVersionForWorkloadManifests).nupkg</_AOTCrossNuGetPath>
     </PropertyGroup>
-
     <ItemGroup>
       <_NuGetsToBuild
         Include="$(LibrariesShippingPackagesDir)Microsoft.NETCore.App.Ref.$(PackageVersionForWorkloadManifests).nupkg"
@@ -281,14 +250,12 @@
         Properties="@(_DefaultPropsForNuGetBuild, ';')"
         Descriptor="Ref pack"
       />
-
       <!-- AOT Cross compiler -->
       <_PropsForAOTCrossBuild Include="@(_DefaultPropsForNuGetBuild)" />
       <_PropsForAOTCrossBuild Include="TestingWorkloads=true" />
       <_PropsForAOTCrossBuild Include="RuntimeIdentifier=$(NETCoreSdkRuntimeIdentifier)" />
       <_PropsForAOTCrossBuild Include="TargetCrossRid=$(RuntimeIdentifier)" />
       <_PropsForAOTCrossBuild Include="DisableSourceLink=true" />
-
       <_NuGetsToBuild
         Include="$(_AOTCrossNuGetPath)"
         Project="$(InstallerProjectRoot)pkg/sfx/Microsoft.NETCore.App\Microsoft.NETCore.App.MonoCrossAOT.sfxproj"

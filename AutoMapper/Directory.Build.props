@@ -7,7 +7,6 @@
     <Features>strict</Features>
     <ImplicitUsings>enable</ImplicitUsings>
   </PropertyGroup>
-
   <ItemGroup>
     <Using Include="System.Reflection" />
     <Using Include="System.Diagnostics" />

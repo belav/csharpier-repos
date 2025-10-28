@@ -19,7 +19,6 @@ System.Security.AccessControl.SemaphoreAccessRule
 System.Security.AccessControl.SemaphoreAuditRule
 System.Security.AccessControl.SemaphoreSecurity</PackageDescription>
   </PropertyGroup>
-
   <!-- DesignTimeBuild requires all the TargetFramework Derived Properties to not be present in the first property group. -->
   <PropertyGroup>
     <TargetPlatformIdentifier>$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)'))</TargetPlatformIdentifier>
@@ -32,7 +31,6 @@ System.Security.AccessControl.SemaphoreSecurity</PackageDescription>
       >SR.PlatformNotSupported_AccessControl</GeneratePlatformNotSupportedAssemblyMessage
     >
   </PropertyGroup>
-
   <ItemGroup Condition="'$(TargetPlatformIdentifier)' == 'windows'">
     <Compile
       Include="$(CommonPath)Interop\Windows\Interop.Errors.cs"
@@ -90,14 +88,12 @@ System.Security.AccessControl.SemaphoreSecurity</PackageDescription>
     <Compile Include="System\Threading\SemaphoreAcl.cs" />
     <Compile Include="System\Threading\ThreadingAclExtensions.cs" />
   </ItemGroup>
-
   <ItemGroup Condition="'$(TargetFrameworkIdentifier)' == '.NETFramework'">
     <Compile Include="System\Threading\EventWaitHandleAcl.net46.cs" />
     <Compile Include="System\Threading\MutexAcl.net46.cs" />
     <Compile Include="System\Threading\SemaphoreAcl.net46.cs" />
     <Compile Include="System\Threading\ThreadingAclExtensions.net46.cs" />
   </ItemGroup>
-
   <ItemGroup Condition="'$(TargetFrameworkIdentifier)' != '.NETCoreApp'">
     <PackageReference
       Include="System.Security.AccessControl"
@@ -108,7 +104,6 @@ System.Security.AccessControl.SemaphoreSecurity</PackageDescription>
       Version="$(SystemSecurityPrincipalWindowsVersion)"
     />
   </ItemGroup>
-
   <ItemGroup Condition="'$(TargetFrameworkIdentifier)' == '.NETStandard'">
     <PackageReference Include="System.Memory" Version="$(SystemMemoryVersion)" />
   </ItemGroup>

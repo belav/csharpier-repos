@@ -5,7 +5,6 @@
     <OutputType>Exe</OutputType>
     <TargetFramework>net6.0</TargetFramework>
     <TargetArch>x64</TargetArch>
-
     <MicrosoftNETCoreAppRuntimewinx64Version>$(MicrosoftNetCoreAppRuntimePackagesVersion)</MicrosoftNETCoreAppRuntimewinx64Version>
     <MicrosoftWindowsDesktopAppRuntimewinx64Version>$(MicrosoftWindowsDesktopAppRuntimePackagesVersion)</MicrosoftWindowsDesktopAppRuntimewinx64Version>
   </PropertyGroup>
@@ -29,6 +28,5 @@
     <_RuntimeLibrariesPath>$(PkgMicrosoft_NETCore_App_Runtime_win-x64)\runtimes\win-x64\</_RuntimeLibrariesPath>
     <_WinRuntimeLibrariesPath>$(PkgMicrosoft_WindowsDesktop_App_Runtime_win-x64)\runtimes\win-x64\</_WinRuntimeLibrariesPath>
   </PropertyGroup>
-
   <Import Project="..\CoreComponents.Shared.targets" />
 </Project>

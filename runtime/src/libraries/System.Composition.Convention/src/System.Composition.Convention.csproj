@@ -13,12 +13,10 @@ System.Composition.Convention.ExportConventionBuilder
 System.Composition.Convention.ImportConventionBuilder
 System.Composition.Convention.PartConventionBuilder
 System.Composition.Convention.ParameterImportConventionBuilder</PackageDescription>
-
     <!-- TODO https://github.com/dotnet/runtime/issues/90400: Annotate for nullable reference types -->
     <Nullable>disable</Nullable>
     <NoWarn>$(NoWarn);nullable</NoWarn>
   </PropertyGroup>
-
   <ItemGroup>
     <Compile Include="System\Composition\Convention\ConventionBuilder.cs" />
     <Compile Include="System\Composition\Convention\ExportConventionBuilder.cs" />
@@ -47,7 +45,6 @@ System.Composition.Convention.ParameterImportConventionBuilder</PackageDescripti
       Link="Common\System\Composition\Diagnostics\TraceWriter.cs"
     />
   </ItemGroup>
-
   <ItemGroup>
     <ProjectReference Include="$(LibrariesProjectRoot)System.Composition.AttributedModel\src\System.Composition.AttributedModel.csproj" />
   </ItemGroup>

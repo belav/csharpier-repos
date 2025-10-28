@@ -4,7 +4,6 @@
     - Allows referencing contract projects for passing matching reference assemblies to tooling like ApiCompat.
     - Allows building against contract assemblies when referencing source projects.
   -->
-
   <PropertyGroup>
     <ContractProject Condition="'$(ContractProject)' == ''"
       >$(LibrariesProjectRoot)$(MSBuildProjectName)\ref\$(MSBuildProjectName).csproj</ContractProject
@@ -27,7 +26,6 @@
       >true</AnnotateTargetPathWithContract
     >
   </PropertyGroup>
-
   <ItemGroup Condition="'$(HasMatchingContract)' == 'true' and '$(ContractProject)' != ''">
     <ProjectReference
       Include="$(ContractProject)"
@@ -35,7 +33,6 @@
       OutputItemType="ResolvedMatchingContract"
     />
   </ItemGroup>
-
   <!-- We aren't referencing the contract, but make sure it's considered as an input to Compile so that if it changes we rebuild and rerun API compat -->
   <Target
     Name="AddResolvedMatchingContractToCompileInput"
@@ -47,7 +44,6 @@
       <CustomAdditionalCompileInputs Include="@(ResolvedMatchingContract)" />
     </ItemGroup>
   </Target>
-
   <!-- Allow P2Ps that target a source project to build against the corresponding ref project. -->
   <Target
     Name="AnnotateTargetPathWithTargetPlatformMonikerWithReferenceAssembly"
@@ -59,17 +55,13 @@
       <TargetPathWithTargetPlatformMoniker ReferenceAssembly="@(ResolvedMatchingContract)" />
     </ItemGroup>
   </Target>
-
   <!-- ##### APICompat settings ##### -->
-
   <PropertyGroup>
     <ApiCompatContractItemName>ResolvedMatchingContract</ApiCompatContractItemName>
     <ApiCompatStrictMode Condition="'$(ApiCompatStrictMode)' == ''">true</ApiCompatStrictMode>
-
     <!-- Optional rules -->
     <ApiCompatEnableRuleAttributesMustMatch>true</ApiCompatEnableRuleAttributesMustMatch>
     <ApiCompatEnableRuleCannotChangeParameterName>true</ApiCompatEnableRuleCannotChangeParameterName>
-
     <_ApiCompatCaptureGroupPattern>.+%5C$([System.IO.Path]::DirectorySeparatorChar)(.+)%5C$([System.IO.Path]::DirectorySeparatorChar)(.+)</_ApiCompatCaptureGroupPattern>
     <_ApiCompatRuntimePrefixPattern>(.+)/(net%5Cd.%5Cd)-(.+)/(.+)</_ApiCompatRuntimePrefixPattern>
     <_ApiCompatLibReplacementString>lib/$1/$2</_ApiCompatLibReplacementString>
@@ -78,7 +70,6 @@
       >lib/$(NetCoreAppCurrent)/$2</_ApiCompatLibReplacementString
     >
   </PropertyGroup>
-
   <PropertyGroup>
     <IsRuntimeAndReferenceAssembly
       Condition="'$(IsRuntimeAndReferenceAssembly)' == '' and
@@ -87,7 +78,6 @@
       >true</IsRuntimeAndReferenceAssembly
     >
   </PropertyGroup>
-
   <!-- Disable suppression validation for packable projects that have a corresponding reference source project.
        That is necessary as APICompat is invoked twice, once for the ref <-> src comparision and then again
        for the package validation (which doesn't include reference assemblies). As both operations don't have
@@ -98,7 +88,6 @@
     <ApiCompatPreserveUnnecessarySuppressions>true</ApiCompatPreserveUnnecessarySuppressions>
     <ApiCompatPermitUnnecessarySuppressions>true</ApiCompatPermitUnnecessarySuppressions>
   </PropertyGroup>
-
   <PropertyGroup Condition="'$(IsCrossTargetingBuild)' != 'true'">
     <!-- Disable API compat if the project doesn't have a reference assembly. -->
     <ApiCompatValidateAssemblies Condition="'$(HasMatchingContract)' != 'true'"
@@ -109,12 +98,10 @@
       >false</ApiCompatValidateAssemblies
     >
   </PropertyGroup>
-
   <ItemGroup>
     <ApiCompatExcludeAttributesFile Include="$(RepositoryEngineeringDir)DefaultGenApiDocIds.txt" />
     <ApiCompatExcludeAttributesFile Include="$(RepositoryEngineeringDir)ApiCompatExcludeAttributes.txt" />
   </ItemGroup>
-
   <ItemGroup>
     <!-- Transform the API Compat assemblies passed in to log-able strings. -->
     <ApiCompatLeftAssembliesTransformationPattern
@@ -129,7 +116,6 @@
       Include="runtimes/windows/"
       ReplacementString="runtimes/win/"
     />
-
     <ApiCompatRightAssembliesTransformationPattern
       Include="$(_ApiCompatCaptureGroupPattern)"
       ReplacementString="$(_ApiCompatLibReplacementString)"
@@ -142,14 +128,12 @@
       Include="runtimes/windows/"
       ReplacementString="runtimes/win/"
     />
-
     <!-- Fall back to the targeting pack dir for NetCoreAppCurrent to avoid passing through dependencies from ref to src. -->
     <ApiCompatContractAssemblyReferences
       Include="$(MicrosoftNetCoreAppRefPackRefDir)"
       Condition="$([MSBuild]::IsTargetFrameworkCompatible('$(TargetFramework)', '$(NetCoreAppCurrent)'))"
     />
   </ItemGroup>
-
   <!-- Use the apicompat task package instead of the in-built SDK functionality to consume newer features. -->
   <ItemGroup
     Condition="'$(EnablePackageValidation)' == 'true' or
@@ -162,9 +146,7 @@
       IsImplicitlyDefined="true"
     />
   </ItemGroup>
-
   <!-- ##### GenAPI settings ##### -->
-
   <PropertyGroup>
     <GenAPIExcludeAttributesList>$(RepositoryEngineeringDir)DefaultGenApiDocIds.txt</GenAPIExcludeAttributesList>
     <GenAPIHeaderFile>$(RepositoryEngineeringDir)LicenseHeader.txt</GenAPIHeaderFile>
@@ -174,7 +156,6 @@
       >$(CoreLibProject)</ProjectForGenAPIDocIdGeneration
     >
   </PropertyGroup>
-
   <ItemGroup>
     <!-- GenAPI is currently only invoked on demand and not used as part of the build as it isn't source build compatible. -->
     <PackageReference
@@ -185,7 +166,6 @@
       Condition="'$(DotNetBuildFromSource)' != 'true'"
     />
   </ItemGroup>
-
   <!-- Generate a .txt file with all public types of the project referenced by ProjectForGenAPIDocIdGeneration (e.g. System.Private.CoreLib or System.Private.Uri implementation assembly).
        This file is then later on passed to GenAPI as the list of types which should be "split out" with the conditional compilation logic. -->
   <Target
@@ -199,18 +179,15 @@
         >!BUILDING_CORELIB_REFERENCE</GenAPIDefaultCondition
       >
     </PropertyGroup>
-
     <ItemGroup>
       <_genAPILibPathForGenAPIDocIdGeneration Include="@(ReferencePath->'%(RootDir)%(Directory)'->Distinct())" />
       <_genAPIResolvedProjectForGenAPIDocIdGeneration Include="@(_ResolvedProjectReferencePaths->WithMetadataValue('MSBuildSourceProjectFile','$(ProjectForGenAPIDocIdGeneration)'))" />
-
       <GenAPIConditionalTypeLists Include="$(IntermediateOutputPath)GenAPIConditionalTypeList.txt">
         <Symbol Condition="'$(SymbolForGenAPIConditionalTypeLists)' != ''"
           >$(SymbolForGenAPIConditionalTypeLists)</Symbol
         >
       </GenAPIConditionalTypeLists>
     </ItemGroup>
-
     <!-- Generate conditional compilation symbols to hide types implemented in contracts so we can include the .cs in the System.Private.CoreLib ref -->
     <Microsoft.DotNet.GenAPI.GenAPITask
       Assembly="@(_genAPIResolvedProjectForGenAPIDocIdGeneration)"
@@ -220,7 +197,6 @@
       OutputPath="@(GenAPIConditionalTypeLists)"
     />
   </Target>
-
   <Target
     Name="SetGenAPIProperties"
     DependsOnTargets="GenerateConditionalTypeLists"
@@ -233,7 +209,6 @@
       >
     </PropertyGroup>
   </Target>
-
   <Import
     Project="$(RepositoryEngineeringDir)outerBuild.targets"
     Condition="'$(IsCrossTargetingBuild)' == 'true'"

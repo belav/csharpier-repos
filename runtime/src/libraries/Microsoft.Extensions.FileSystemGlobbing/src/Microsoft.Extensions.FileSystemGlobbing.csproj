@@ -6,7 +6,6 @@
     <IsPackable>true</IsPackable>
     <PackageDescription>File system globbing to find files matching a specified pattern.</PackageDescription>
   </PropertyGroup>
-
   <ItemGroup>
     <Compile
       Include="$(CoreLibSharedDir)\System\Numerics\Hashing\HashHelpers.cs"

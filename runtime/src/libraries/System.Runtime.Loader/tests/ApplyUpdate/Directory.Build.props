@@ -1,6 +1,5 @@
 <Project>
   <Import Project="..\..\Directory.Build.props" />
-
   <ItemGroup>
     <!-- This package from https://github.com/dotnet/hotreload-utils provides
 	 targets that read the json delta script and generates deltas based on the baseline assembly and the modified sources.
@@ -14,7 +13,6 @@
       Version="$(MicrosoftDotNetHotReloadUtilsGeneratorBuildToolVersion)"
     />
   </ItemGroup>
-
   <PropertyGroup>
     <!-- to call AsssemblyExtensions.ApplyUpdate we need Optimize=false, EmitDebugInformation=true in all configurations -->
     <Optimize>false</Optimize>

@@ -1,12 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- Licensed to the .NET Foundation under one or more agreements. The .NET Foundation licenses this file to you under the MIT license. See the LICENSE file in the project root for more information. -->
-
-
 <!-- 
  To re-generate source from this file, run eng/generate-compiler-code.cmd
 -->
-
-
 <Tree Root="SyntaxNode">
   <PredefinedNode Name="CSharpSyntaxNode" Base="SyntaxNode" />
   <PredefinedNode Name="SyntaxToken" Base="CSharpSyntaxNode" />
@@ -2145,7 +2141,6 @@
       </PropertyComment>
     </Field>
   </Node>
-
   <!-- Pattern forms added for C# 9.0 -->
   <Node Name="ParenthesizedPatternSyntax" Base="PatternSyntax">
     <Kind Name="ParenthesizedPattern" />
@@ -2222,7 +2217,6 @@
     </Field>
     <Field Name="Pattern" Type="PatternSyntax" Optional="true" />
   </Node>
-
   <AbstractNode Name="InterpolatedStringContentSyntax" Base="CSharpSyntaxNode" />
   <Node Name="InterpolatedStringTextSyntax" Base="InterpolatedStringContentSyntax">
     <Kind Name="InterpolatedStringText" />
@@ -2326,7 +2320,6 @@
       </Sequence>
     </Choice>
   </Node>
-
   <Node Name="LocalDeclarationStatementSyntax" Base="StatementSyntax">
     <Kind Name="LocalDeclarationStatement" />
     <Field Name="AttributeLists" Type="SyntaxList&lt;AttributeListSyntax&gt;" Override="true" />
@@ -2346,7 +2339,6 @@
       <Kind Name="SemicolonToken" />
     </Field>
   </Node>
-
   <Node Name="VariableDeclarationSyntax" Base="CSharpSyntaxNode">
     <Kind Name="VariableDeclaration" />
     <Field Name="Type" Type="TypeSyntax" />
@@ -2356,7 +2348,6 @@
       MinCount="1"
     />
   </Node>
-
   <Node Name="VariableDeclaratorSyntax" Base="CSharpSyntaxNode">
     <Kind Name="VariableDeclarator" />
     <Field Name="Identifier" Type="SyntaxToken">
@@ -2398,7 +2389,6 @@
       <Kind Name="CloseParenToken" />
     </Field>
   </Node>
-
   <Node Name="ExpressionStatementSyntax" Base="StatementSyntax">
     <Kind Name="ExpressionStatement" />
     <Field Name="AttributeLists" Type="SyntaxList&lt;AttributeListSyntax&gt;" Override="true" />
@@ -2407,7 +2397,6 @@
       <Kind Name="SemicolonToken" />
     </Field>
   </Node>
-
   <Node Name="EmptyStatementSyntax" Base="StatementSyntax">
     <Kind Name="EmptyStatement" />
     <Field Name="AttributeLists" Type="SyntaxList&lt;AttributeListSyntax&gt;" Override="true" />
@@ -2607,7 +2596,6 @@
     </Field>
     <Field Name="Statement" Type="StatementSyntax" />
   </Node>
-
   <!-- Because there are two forms of the foreach loop, we make an abstract base. -->
   <AbstractNode Name="CommonForEachStatementSyntax" Base="StatementSyntax">
     <Field Name="AwaitKeyword" Type="SyntaxToken" Optional="true">
@@ -2692,7 +2680,6 @@
     </Field>
     <Field Name="Statement" Type="StatementSyntax" Override="true" />
   </Node>
-
   <!--
   - using (...) { ... }
   - await using (...) { ... }
@@ -2718,7 +2705,6 @@
     </Field>
     <Field Name="Statement" Type="StatementSyntax" />
   </Node>
-
   <Node Name="FixedStatementSyntax" Base="StatementSyntax">
     <Kind Name="FixedStatement" />
     <Field Name="AttributeLists" Type="SyntaxList&lt;AttributeListSyntax&gt;" Override="true" />
@@ -2842,7 +2828,6 @@
       <summary>Creates a ElseClauseSyntax node</summary>
     </FactoryComment>
   </Node>
-
   <Node Name="SwitchStatementSyntax" Base="StatementSyntax" SkipConvenienceFactories="true">
     <Kind Name="SwitchStatement" />
     <Field Name="AttributeLists" Type="SyntaxList&lt;AttributeListSyntax&gt;" Override="true" />
@@ -3013,7 +2998,6 @@
       <summary>Creates a DefaultSwitchLabelSyntax node.</summary>
     </FactoryComment>
   </Node>
-
   <Node Name="SwitchExpressionSyntax" Base="ExpressionSyntax">
     <Kind Name="SwitchExpression" />
     <Field Name="GoverningExpression" Type="ExpressionSyntax" />
@@ -3041,7 +3025,6 @@
     </Field>
     <Field Name="Expression" Type="ExpressionSyntax" />
   </Node>
-
   <Node Name="TryStatementSyntax" Base="StatementSyntax">
     <Kind Name="TryStatement" />
     <Field Name="AttributeLists" Type="SyntaxList&lt;AttributeListSyntax&gt;" Override="true" />
@@ -3094,7 +3077,6 @@
     </Field>
     <Field Name="Block" Type="BlockSyntax" />
   </Node>
-
   <!-- Declarations -->
   <Node Name="CompilationUnitSyntax" Base="CSharpSyntaxNode">
     <Kind Name="CompilationUnit" />
@@ -3719,25 +3701,21 @@
       </PropertyComment>
     </Field>
   </Node>
-
   <AbstractNode Name="BaseTypeSyntax" Base="CSharpSyntaxNode">
     <TypeComment>
       <summary>Provides the base class from which the classes that represent base type syntax nodes are derived. This is an abstract class.</summary>
     </TypeComment>
     <Field Name="Type" Type="TypeSyntax"></Field>
   </AbstractNode>
-
   <Node Name="SimpleBaseTypeSyntax" Base="BaseTypeSyntax">
     <Kind Name="SimpleBaseType" />
     <Field Name="Type" Type="TypeSyntax" Override="true"></Field>
   </Node>
-
   <Node Name="PrimaryConstructorBaseTypeSyntax" Base="BaseTypeSyntax">
     <Kind Name="PrimaryConstructorBaseType" />
     <Field Name="Type" Type="TypeSyntax" Override="true" />
     <Field Name="ArgumentList" Type="ArgumentListSyntax" />
   </Node>
-
   <Node Name="TypeParameterConstraintClauseSyntax" Base="CSharpSyntaxNode">
     <TypeComment>
       <summary>Type parameter constraint clause.</summary>

@@ -10,7 +10,6 @@
     <PackageTags>aspnetcore;dataprotection</PackageTags>
     <IsTrimmable>true</IsTrimmable>
   </PropertyGroup>
-
   <ItemGroup>
     <Compile Include="..\..\shared\src\*.cs" LinkBase="Shared" />
     <Compile
@@ -28,12 +27,10 @@
       LinkBase="Shared"
     />
   </ItemGroup>
-
   <ItemGroup>
     <Reference Include="Microsoft.AspNetCore.DataProtection" />
     <Reference Include="Microsoft.Extensions.DependencyInjection" />
   </ItemGroup>
-
   <ItemGroup>
     <InternalsVisibleTo Include="Microsoft.AspNetCore.DataProtection.Extensions.Tests" />
   </ItemGroup>

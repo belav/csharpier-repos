@@ -2,7 +2,6 @@
   <PropertyGroup>
     <DisableVersionCheckImported>true</DisableVersionCheckImported>
   </PropertyGroup>
-
   <Target Name="DisableNETCoreVersionCheck" BeforeTargets="_CheckForUnsupportedNETCoreVersion">
     <!-- Force the CLI to allow us to target higher netcoreapp than it may know about -->
     <PropertyGroup>

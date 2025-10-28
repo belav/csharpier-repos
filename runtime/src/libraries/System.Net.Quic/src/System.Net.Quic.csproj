@@ -6,7 +6,6 @@
     <NoWarn>$(NoWarn);SYSLIB1054</NoWarn>
     <UseCompilerGeneratedDocXmlFile>false</UseCompilerGeneratedDocXmlFile>
   </PropertyGroup>
-
   <!-- DesignTimeBuild requires all the TargetFramework Derived Properties to not be present in the first property group. -->
   <PropertyGroup>
     <TargetPlatformIdentifier>$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)'))</TargetPlatformIdentifier>
@@ -29,11 +28,9 @@
       >false</UseQuicTransportPackage
     >
   </PropertyGroup>
-
   <ItemGroup>
     <AssemblyAttribute Include="System.Runtime.Versioning.RequiresPreviewFeaturesAttribute" />
   </ItemGroup>
-
   <!-- Source files -->
   <ItemGroup Condition="'$(TargetPlatformIdentifier)' != ''">
     <Compile Include="System\Net\Quic\**\*.cs" Exclude="System\Net\Quic\*.Unsupported.cs" />
@@ -85,7 +82,6 @@
       Link="System\Net\IPv6AddressHelper.Common.cs"
     />
   </ItemGroup>
-
   <!-- Unsupported platforms -->
   <ItemGroup Condition="'$(TargetPlatformIdentifier)' == ''">
     <Compile Include="System\Net\Quic\*.Unsupported.cs" />
@@ -94,7 +90,6 @@
     <Compile Include="System\Net\Quic\QuicConnectionOptions.cs" />
     <Compile Include="System\Net\Quic\QuicDefaults.cs" />
   </ItemGroup>
-
   <!-- Windows specific files -->
   <ItemGroup Condition="'$(TargetPlatformIdentifier)' == 'windows'">
     <Compile
@@ -154,7 +149,6 @@
       Link="Common\System\Net\SocketAddressPal.Windows.cs"
     />
   </ItemGroup>
-
   <!-- Unix (OSX + Linux) specific files -->
   <ItemGroup Condition="'$(TargetPlatformIdentifier)' == 'linux' or '$(TargetPlatformIdentifier)' == 'osx' or '$(TargetPlatformIdentifier)' == 'freebsd'">
     <Compile
@@ -242,7 +236,6 @@
       Link="Common\System\Net\SocketAddressPal.Unix.cs"
     />
   </ItemGroup>
-
   <!-- Linux specific files -->
   <ItemGroup Condition="'$(TargetPlatformIdentifier)' == 'linux'">
     <Compile
@@ -254,7 +247,6 @@
       Link="Common\Interop\Linux\Interop.Libraries.cs"
     />
   </ItemGroup>
-
   <!-- FreeBSD specific files -->
   <ItemGroup Condition="'$(TargetPlatformIdentifier)' == 'freebsd' ">
     <Compile
@@ -266,7 +258,6 @@
       Link="Common\Interop\FreeBSD\Interop.Libraries.cs"
     />
   </ItemGroup>
-
   <!-- OSX specific files -->
   <ItemGroup Condition="'$(TargetPlatformIdentifier)' == 'osx'">
     <Compile
@@ -278,7 +269,6 @@
       Link="Common\Interop\OSX\Interop.Libraries.cs"
     />
   </ItemGroup>
-
   <ItemGroup>
     <Reference Include="Microsoft.Win32.Primitives" />
     <Reference Include="System.Collections" />
@@ -297,20 +287,16 @@
     <Reference Include="System.Threading" />
     <Reference Include="System.Threading.Channels" />
   </ItemGroup>
-
   <ItemGroup Condition="'$(TargetPlatformIdentifier)' == 'windows'">
     <Reference Include="Microsoft.Win32.Registry" />
   </ItemGroup>
-
   <ItemGroup Condition="'$(TargetPlatformIdentifier)' == 'linux' or '$(TargetPlatformIdentifier)' == 'osx' or '$(TargetPlatformIdentifier)' == 'freebsd'">
     <Reference Include="System.Diagnostics.StackTrace" Condition="'$(Configuration)' == 'Debug'" />
   </ItemGroup>
-
   <!-- Workaround for https://github.com/dotnet/sdk/issues/34003 -->
   <ItemGroup>
     <_KnownRuntimeIdentiferPlatforms Include="osx;win" />
   </ItemGroup>
-
   <!-- Support for deploying msquic on Windows. We make msquic.dll part of runtime binaries: either from official releases or our transport feed. -->
   <ItemGroup
     Condition="'$(TargetPlatformIdentifier)' == 'windows' and
@@ -326,7 +312,6 @@
       Condition="'$(UseQuicTransportPackage)' == 'true'"
       GeneratePathProperty="true"
     />
-
     <PackageReference
       Include="Microsoft.Native.Quic.MsQuic.Schannel"
       Version="$(MicrosoftNativeQuicMsQuicVersion)"
@@ -334,7 +319,6 @@
       Condition="'$(UseQuicTransportPackage)' != 'true'"
       GeneratePathProperty="true"
     />
-
     <NativeBinPlaceItem
       Include="$(PkgMicrosoft_Native_Quic_MsQuic_Schannel)\build\native\bin\$(TargetArchitecture)\*"
       Condition="'$(UseQuicTransportPackage)' != 'true'"
@@ -352,7 +336,6 @@
       Condition="'$(UseQuicTransportPackage)' == 'true'"
     />
   </ItemGroup>
-
   <!-- Include msquic in debug version for macOS so we can test it without packages. -->
   <ItemGroup
     Condition="'$(TargetPlatformIdentifier)' == 'osx' and
@@ -382,7 +365,6 @@
     <BinPlaceDir Include="$(LibrariesAllBinArtifactsPath)" ItemName="NativeBinPlaceItem" />
     <BinPlaceDir Include="$(LibrariesNativeArtifactsPath)" ItemName="NativeBinPlaceItem" />
   </ItemGroup>
-
   <!-- Local builds - developers only -->
   <ItemGroup>
     <Content Include="libmsquic.dylib" Condition="Exists('libmsquic.dylib')">

@@ -2,8 +2,6 @@
   Description:  valid channel link (http)
   Expect:       ValidURI{parent:channel,element:link}
 -->
-
-
 <rss version="2.0">
   <channel>
     <title>Valid link</title>

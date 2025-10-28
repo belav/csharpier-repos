@@ -3,7 +3,6 @@
     <ContainsFunctionalTestAssets>true</ContainsFunctionalTestAssets>
     <TargetFramework>$(DefaultNetCoreTargetFramework)</TargetFramework>
   </PropertyGroup>
-
   <ItemGroup>
     <Compile Include="..\..\Extensions.Core\src\Base32.cs" Link="Infrastructure\Base32.cs" />
     <Compile
@@ -19,10 +18,8 @@
       Include="$(SharedSourceRoot)CallerArgument\CallerArgumentExpressionAttribute.cs"
       LinkBase="Shared"
     />
-
     <None Include="xunit.runner.json" CopyToOutputDirectory="PreserveNewest" />
   </ItemGroup>
-
   <ItemGroup>
     <TestAssetProjectReference
       Include="..\..\testassets\Identity.DefaultUI.WebSite\Identity.DefaultUI.WebSite.csproj"
@@ -30,13 +27,11 @@
       SkipBuild="true"
     />
     <ProjectReference Include="@(TestAssetProjectReference)" />
-
     <Reference Include="Microsoft.AspNetCore.Mvc.Testing" />
     <Reference Include="Microsoft.EntityFrameworkCore.Sqlite" />
     <Reference Include="Microsoft.Extensions.TimeProvider.Testing" />
     <Reference Include="AngleSharp" />
     <Reference Include="System.Net.Http" />
-
     <None
       Update="Testing.DefaultWebSite.StaticWebAssets.V4.xml"
       CopyToOutputDirectory="PreserveNewest"
@@ -46,6 +41,5 @@
       CopyToOutputDirectory="PreserveNewest"
     />
   </ItemGroup>
-
   <Import Project="$(MvcTestingTargets)" Condition="'$(MvcTestingTargets)' != ''" />
 </Project>

@@ -145,7 +145,6 @@
       ClassName="Microsoft.CodeAnalysis.Remote.RemoteSourceGenerationService+Factory"
     />
   </ItemGroup>
-
   <!--
     Roslyn in-proc brokered services.
   -->

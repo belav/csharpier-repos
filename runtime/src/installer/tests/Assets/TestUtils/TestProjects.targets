@@ -2,13 +2,10 @@
   <!--
     This file is imported by the test projects from the artifacts dir or the src/installer/tests dir. It
     provides basic info needed for restore and build with the vanilla SDK.
-  -->
-
-  <!-- TODO: Remove when the SDK understands the net8.0 tfm. -->
+  --><!-- TODO: Remove when the SDK understands the net8.0 tfm. -->
   <PropertyGroup>
     <NETCoreAppMaximumVersion>9.0</NETCoreAppMaximumVersion>
   </PropertyGroup>
-
   <ItemGroup>
     <KnownFrameworkReference
       Include="Microsoft.NETCore.App"
@@ -22,7 +19,6 @@
       TargetingPackVersion="8.0.0-rc.1.23415.6"
       Condition="'@(KnownFrameworkReference)' == '' or !@(KnownFrameworkReference->AnyHaveMetadataValue('TargetFramework', '$(NetCoreAppCurrent)'))"
     />
-
     <KnownAppHostPack
       Include="Microsoft.NETCore.App"
       ExcludedRuntimeIdentifiers="android"

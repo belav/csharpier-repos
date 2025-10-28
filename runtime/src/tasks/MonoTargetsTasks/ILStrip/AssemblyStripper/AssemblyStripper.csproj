@@ -17,7 +17,6 @@
       Version="$(MicrosoftDotNetCilStripSourcesVersion)"
     />
   </ItemGroup>
-
   <ItemGroup>
     <Compile Include="AssemblyStripper.cs" />
   </ItemGroup>

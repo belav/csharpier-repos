@@ -5,18 +5,15 @@
     <EmitCompilerGeneratedFiles>true</EmitCompilerGeneratedFiles>
     <CompilerGeneratedFilesOutputPath>generated</CompilerGeneratedFilesOutputPath>
   </PropertyGroup>
-
   <PropertyGroup>
     <TestCaseBuildOutputRoot>$(ArtifactsBinDir)/Mono.Linker.Tests.Cases/$(Configuration)/$(TargetFramework)</TestCaseBuildOutputRoot>
   </PropertyGroup>
   <ItemGroup>
     <CompilerVisibleProperty Include="TestCaseBuildOutputRoot" />
   </ItemGroup>
-
   <ItemGroup>
     <Compile Remove="$(CompilerGeneratedFilesOutputPath)/**/*" />
   </ItemGroup>
-
   <ItemGroup>
     <PackageReference
       Include="Microsoft.CodeAnalysis.CSharp.Analyzer.Testing.XUnit"
@@ -38,7 +35,6 @@
       OutputItemType="Analyzer"
       ReferenceOutputAssembly="false"
     />
-
     <RuntimeHostConfigurationOption Include="ILLink.RoslynAnalyzer.Tests.RepoRoot">
       <Value>$(RepoRoot)</Value>
     </RuntimeHostConfigurationOption>

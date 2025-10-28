@@ -3,18 +3,15 @@
     <TargetFrameworks>$(NetCoreAppCurrent);$(NetFrameworkCurrent)</TargetFrameworks>
     <JsonSerializerIsReflectionEnabledByDefault>true</JsonSerializerIsReflectionEnabledByDefault>
   </PropertyGroup>
-
   <ItemGroup>
     <Compile Include="HttpClientJsonExtensionsTests.cs" />
     <Compile Include="HttpContentJsonExtensionsTests.cs" />
     <Compile Include="JsonContentTests.cs" />
     <Compile Include="TestClasses.cs" />
   </ItemGroup>
-
   <ItemGroup Condition="'$(TargetFramework)' == '$(NetCoreAppCurrent)'">
     <Compile Include="JsonContentTests.netcoreapp.cs" />
   </ItemGroup>
-
   <ItemGroup>
     <Compile
       Include="$(CommonTestPath)System\Net\Capability.Security.cs"
@@ -61,12 +58,10 @@
       Link="Common\System\Threading\Tasks\TaskTimeoutExtensions.cs"
     />
   </ItemGroup>
-
   <ItemGroup Condition="'$(TargetFrameworkIdentifier)' == '.NETFramework'">
     <Reference Include="System.Net.Http" />
     <ProjectReference Include="..\..\src\System.Net.Http.Json.csproj" />
   </ItemGroup>
-
   <ItemGroup Condition="'$(TargetFrameworkIdentifier)' == '.NETFramework'">
     <ProjectReference
       Include="$(LibrariesProjectRoot)System.Text.Json\gen\System.Text.Json.SourceGeneration.Roslyn4.0.csproj"

@@ -9,7 +9,6 @@
     <ApplyNgenOptimization Condition="'$(TargetFramework)' == 'netstandard2.0'"
       >full</ApplyNgenOptimization
     >
-
     <!-- NuGet -->
     <IsPackable>true</IsPackable>
     <PackageDescription>
@@ -116,7 +115,6 @@
       Partner="Pythia"
       Key="$(IntelliCodeCSharpKey)"
     />
-
     <!-- BEGIN PROJECT SYSTEM FOR VS CODE -->
     <InternalsVisibleTo
       Include="Microsoft.VisualStudio.ProjectSystem.Managed"

@@ -15,7 +15,6 @@ Microsoft.AspNetCore.Http.Features.FeatureCollection
     <PackageTags>aspnetcore</PackageTags>
     <IsTrimmable>true</IsTrimmable>
   </PropertyGroup>
-
   <ItemGroup>
     <Compile
       Include="$(SharedSourceRoot)ThrowHelpers\ArgumentNullThrowHelper.cs"

@@ -2,8 +2,6 @@
   Description:  can have multiple enclosures per entry 
   Expect:       !Error
 -->
-
-
 <feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en-us">
   <title>Enclosure Test</title>
   <link href="http://www.contoso.com/workbench/" />

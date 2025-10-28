@@ -1,6 +1,5 @@
 <Project>
   <Import Project="$([MSBuild]::GetDirectoryNameOfFileAbove($(MSBuildThisFileDirectory)..\, Directory.Build.targets))\Directory.Build.targets" />
-
   <!-- Work around https://github.com/dotnet/sdk/issues/23777. Reset ContentWithTargetPath items if not building. -->
   <Target
     Name="RemoveCshtmlFiles"

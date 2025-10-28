@@ -8,7 +8,6 @@
   <textElement
     >This is a &amp; text element <!-- this is a comment --> with numbers &#x30;&#x31;&#x32;&#x33;&#x34;&#x35;&#x36;&#x37;</textElement
   >
-
   <emptyElement myAttr="wee" yourAttr="woo" />
   <elementWithDefaultNamespace xmlns="">
     <foo xmlns="http://this.is.my.new.namespace">

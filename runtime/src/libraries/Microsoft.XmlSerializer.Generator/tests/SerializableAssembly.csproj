@@ -6,7 +6,6 @@
     VNext.0.0 then SGen fails when it tries to load the types to serialize. -->
     <TargetFramework>netstandard2.1</TargetFramework>
   </PropertyGroup>
-
   <ItemGroup>
     <PackageReference
       Include="Microsoft.Build.Tasks.Core"
@@ -15,7 +14,6 @@
       <PrivateAssets>all</PrivateAssets>
     </PackageReference>
   </ItemGroup>
-
   <ItemGroup>
     <Compile Include="$(TestSourceFolder)..\..\System.Runtime.Serialization.Xml\tests\SerializationTypes.cs" />
   </ItemGroup>

@@ -4,7 +4,6 @@
     <EnableDefaultItems>true</EnableDefaultItems>
     <OutputType>Exe</OutputType>
   </PropertyGroup>
-
   <ItemGroup>
     <ProjectReference Include="..\MockHostTypes\MockHostTypes.csproj" />
   </ItemGroup>

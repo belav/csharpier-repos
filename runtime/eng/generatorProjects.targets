@@ -5,13 +5,11 @@
       >$(GeneratorProjectBaseTargetPath)/$(AnalyzerLanguage)</GeneratorProjectBaseTargetPath
     >
   </PropertyGroup>
-
   <ItemDefinitionGroup>
     <TargetPathWithTargetPlatformMoniker>
       <GeneratorProjectBaseTargetPath>$(GeneratorProjectBaseTargetPath)</GeneratorProjectBaseTargetPath>
     </TargetPathWithTargetPlatformMoniker>
   </ItemDefinitionGroup>
-
   <Target
     Name="GetAnalyzerPackFiles"
     DependsOnTargets="$(GenerateNuspecDependsOn)"
@@ -26,7 +24,6 @@
         >$(_analyzerPath)/$(AnalyzerLanguage)</_analyzerPath
       >
     </PropertyGroup>
-
     <!-- Filter on netstandard2.0 so that generator projects can multi-target for the purpose of enabling nullable reference type compiler checks. -->
     <ItemGroup>
       <_AnalyzerPackFile
@@ -39,7 +36,6 @@
       />
       <_AnalyzerPackFile PackagePath="$(_analyzerPath)/%(TargetPath)" />
     </ItemGroup>
-
     <Error
       Text="Analyzers must target netstandard2.0 since they run in the compiler which targets netstandard2.0. $(MSBuildProjectFullPath) targets '$([MSBuild]::ValueOrDefault('$(TargetFrameworks)', '$(TargetFramework)'))' instead."
       Condition="'@(_AnalyzerPackFile)' == ''"

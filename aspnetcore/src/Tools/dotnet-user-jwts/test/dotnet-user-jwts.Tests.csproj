@@ -3,7 +3,6 @@
     <TargetFramework>$(DefaultNetCoreTargetFramework)</TargetFramework>
     <AssemblyName>Microsoft.AspNetCore.Authentication.JwtBearer.Tools.Tests</AssemblyName>
   </PropertyGroup>
-
   <ItemGroup>
     <Compile Include="$(ToolSharedSourceRoot)TestHelpers\**\*.cs" />
     <Content
@@ -12,7 +11,6 @@
       CopyToOutputDirectory="PreserveNewest"
     />
   </ItemGroup>
-
   <ItemGroup>
     <ProjectReference Include="..\src\dotnet-user-jwts.csproj" />
   </ItemGroup>

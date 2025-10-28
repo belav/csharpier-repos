@@ -6,7 +6,6 @@
     <Optimize>true</Optimize>
     <JitOptimizationSensitive>true</JitOptimizationSensitive>
   </PropertyGroup>
-
   <ItemGroup>
     <Compile Include="JittedMethodsCountingTest.cs" />
   </ItemGroup>

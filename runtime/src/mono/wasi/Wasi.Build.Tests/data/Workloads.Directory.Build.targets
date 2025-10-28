@@ -6,6 +6,5 @@
       Condition="@(ResolvedRuntimePack->Count()) > 0"
     />
   </Target>
-
   <Import Project="WasmOverridePacks.targets" Condition="'$(WBTOverrideRuntimePack)' == 'true'" />
 </Project>

@@ -9,7 +9,6 @@
     <DefineConstants>$(DefineConstants);ROSLYN4_0_OR_GREATER;ROSLYN4_4_OR_GREATER;ROSLYN_4_0_OR_GREATER</DefineConstants>
     <IncludeRemoteExecutor>true</IncludeRemoteExecutor>
   </PropertyGroup>
-
   <ItemGroup>
     <Compile
       Include="$(CommonPath)..\tests\SourceGenerators\RoslynTestUtils.cs"
@@ -25,22 +24,18 @@
     />
     <Compile Remove="Baselines\**\*.cs" />
   </ItemGroup>
-
   <ItemGroup Condition="'$(TargetFrameworkIdentifier)' != '.NETFramework'">
     <ProjectReference
       Include="$(LibrariesProjectRoot)System.ComponentModel.Annotations\src\System.ComponentModel.Annotations.csproj"
       SkipUseReferenceAssembly="true"
     />
   </ItemGroup>
-
   <ItemGroup>
     <ProjectReference Include="$(LibrariesProjectRoot)Microsoft.Extensions.Options.DataAnnotations\src\Microsoft.Extensions.Options.DataAnnotations.csproj" />
   </ItemGroup>
-
   <ItemGroup Condition="'$(TargetFrameworkIdentifier)' == '.NETFramework'">
     <Reference Include="System.ComponentModel.DataAnnotations" />
   </ItemGroup>
-
   <ItemGroup>
     <PackageReference Include="Microsoft.CodeAnalysis" Version="$(MicrosoftCodeAnalysisVersion)" />
     <ProjectReference
@@ -54,13 +49,11 @@
       SetTargetFramework="TargetFramework=netstandard2.0"
     />
   </ItemGroup>
-
   <ItemGroup>
     <Content Include="Baselines\**\*">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
-
   <Target Name="FixIncrementalCoreCompileWithAnalyzers" BeforeTargets="CoreCompile">
     <ItemGroup>
       <CustomAdditionalCompileInputs Include="@(Analyzer)" />

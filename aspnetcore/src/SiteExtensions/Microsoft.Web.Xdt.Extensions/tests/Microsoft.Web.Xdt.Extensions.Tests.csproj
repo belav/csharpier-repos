@@ -2,11 +2,9 @@
   <PropertyGroup>
     <TargetFramework>$(DefaultNetFxTargetFramework)</TargetFramework>
   </PropertyGroup>
-
   <ItemGroup>
     <None Remove="transform.xdt" />
   </ItemGroup>
-
   <ItemGroup>
     <Content Include="config_existingemptyvalue.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
@@ -24,7 +22,6 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
-
   <ItemGroup>
     <Reference Include="Microsoft.Web.Xdt.Extensions" />
   </ItemGroup>

@@ -7,13 +7,10 @@
       >true</IgnoreForCI
     >
   </PropertyGroup>
-
   <ItemGroup>
     <PackageReference Include="Microsoft.CodeAnalysis" Version="$(RoslynApiVersion)" />
-
     <ProjectReference Include="..\..\src\System.Text.Json.csproj" />
   </ItemGroup>
-
   <ItemGroup>
     <Compile
       Include="$(CommonPath)..\tests\SourceGenerators\GeneratorTestHelpers.cs"
@@ -24,11 +21,9 @@
     <Compile Include="JsonSourceGeneratorIncrementalTests.cs" />
     <Compile Include="JsonSourceGeneratorTests.cs" />
   </ItemGroup>
-
   <ItemGroup Condition="'$(TargetFrameworkIdentifier)' == '.NETFramework'">
     <Reference Include="System" />
   </ItemGroup>
-
   <Target Name="FixIncrementalCoreCompileWithAnalyzers" BeforeTargets="CoreCompile">
     <ItemGroup>
       <CustomAdditionalCompileInputs Include="@(Analyzer)" />

@@ -2,7 +2,6 @@
 <!-- Licensed to the .NET Foundation under one or more agreements. The .NET Foundation licenses this file to you under the MIT license. See the LICENSE file in the project root for more information. -->
 <Project ToolsVersion="14.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="Microsoft.Managed.Core.targets" />
-
   <Target
     Name="CoreCompile"
     Inputs="$(MSBuildAllProjects);
@@ -35,7 +34,6 @@
       <_NoWarnings Condition="'$(WarningLevel)' == '0'">true</_NoWarnings>
       <_NoWarnings Condition="'$(WarningLevel)' == '1'">false</_NoWarnings>
     </PropertyGroup>
-
     <PropertyGroup>
       <!-- If we are targeting winmdobj we want to specifically the pdbFile property since we do not want it to collide with the output of winmdexp-->
       <PdbFile
@@ -43,7 +41,6 @@
         >$(IntermediateOutputPath)$(TargetName).compile.pdb</PdbFile
       >
     </PropertyGroup>
-
     <!-- Condition is to filter out the _CoreCompileResourceInputs so that it doesn't pass in culture resources to the compiler -->
     <Vbc
       Condition="'%(_CoreCompileResourceInputs.WithCulture)' != 'true'"
@@ -141,13 +138,11 @@
     <ItemGroup>
       <_CoreCompileResourceInputs Remove="@(_CoreCompileResourceInputs)" />
     </ItemGroup>
-
     <CallTarget
       Targets="$(TargetsTriggeredByCompilation)"
       Condition="'$(TargetsTriggeredByCompilation)' != ''"
     />
   </Target>
-
   <!-- When we load a project in Visual Studio, the project system first does an evaluation pass of the
        project, and hands the resulting list of <Compile> items to the language service. It then does an
        execution pass executing CoreCompile passing SkipCompilerExecution=true and ProvideCommandLineArgs=true,

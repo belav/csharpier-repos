@@ -15,7 +15,6 @@ Microsoft.Extensions.Localization.IStringLocalizer&lt;T&gt;</Description>
     <Nullable>enable</Nullable>
     <IsTrimmable>true</IsTrimmable>
   </PropertyGroup>
-
   <ItemGroup>
     <Compile
       Include="$(SharedSourceRoot)ThrowHelpers\ArgumentNullThrowHelper.cs"

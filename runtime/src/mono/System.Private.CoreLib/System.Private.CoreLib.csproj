@@ -6,15 +6,12 @@
     <GenerateNeutralResourcesLanguageAttribute>false</GenerateNeutralResourcesLanguageAttribute>
     <EnsureRuntimePackageDependencies>false</EnsureRuntimePackageDependencies>
     <TargetFramework>$(NetCoreAppCurrent)</TargetFramework>
-
     <!-- Force System.Private.CoreLib.dll into a special IL output directory -->
     <OutputPath>$(RuntimeBinDir)IL/</OutputPath>
     <Configurations>Debug;Release;Checked</Configurations>
     <Platforms>x64;x86;arm;armv6;arm64;riscv64;s390x;wasm;ppc64le</Platforms>
-
     <EmitCompilerGeneratedFiles>true</EmitCompilerGeneratedFiles>
   </PropertyGroup>
-
   <!-- Note that various places in SPCL depend on this resource name i.e. TplEventSource -->
   <ItemGroup Label="Embedded Resources">
     <EmbeddedResource Include="$(LibrariesProjectRoot)\System.Private.CoreLib\src\Resources\Strings.resx">
@@ -22,7 +19,6 @@
       <ClassName>System.SR</ClassName>
     </EmbeddedResource>
   </ItemGroup>
-
   <PropertyGroup>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     <!-- This prevents the default MsBuild targets from referencing System.Core.dll -->
@@ -40,14 +36,11 @@
     <!-- AD0001 : https://github.com/dotnet/runtime/issues/90356 -->
     <NoWarn>$(NoWarn),0419,0649,AD0001</NoWarn>
     <Nullable>enable</Nullable>
-
     <!-- Ignore all previous constants since SPCL is sensitive to what is defined and the Sdk adds some by default -->
     <DefineConstants>MONO;NETCOREAPP;SYSTEM_PRIVATE_CORELIB</DefineConstants>
     <DisableImplicitConfigurationDefines>true</DisableImplicitConfigurationDefines>
-
     <DocumentationFile>$(OutputPath)$(MSBuildProjectName).xml</DocumentationFile>
   </PropertyGroup>
-
   <!-- Platform specific properties -->
   <PropertyGroup Condition="'$(Platform)' == 'x64'">
     <PlatformTarget>x64</PlatformTarget>
@@ -86,7 +79,6 @@
     <PlatformTarget>AnyCPU</PlatformTarget>
     <DefineConstants>$(DefineConstants);TARGET_POWERPC64</DefineConstants>
   </PropertyGroup>
-
   <!-- Configuration specific properties -->
   <PropertyGroup Condition="'$(Configuration)' == 'Debug' or '$(Configuration)' == 'Checked'">
     <Optimize Condition="'$(Optimize)' == '' and '$(Configuration)' == 'Debug'">false</Optimize>
@@ -96,17 +88,14 @@
   <PropertyGroup Condition="'$(Configuration)' == 'Release'">
     <Optimize Condition="'$(Optimize)' == ''">true</Optimize>
   </PropertyGroup>
-
   <!-- Assembly attributes -->
   <PropertyGroup>
     <Description>$(AssemblyName)</Description>
   </PropertyGroup>
-
   <!-- Signing -->
   <PropertyGroup>
     <StrongNameKeyId>SilverlightPlatform</StrongNameKeyId>
   </PropertyGroup>
-
   <!--
     Helper Paths
   -->
@@ -114,15 +103,10 @@
     <CommonPath>$([MSBuild]::NormalizeDirectory('$(LibrariesProjectRoot)', 'Common', 'src'))</CommonPath>
     <BclSourcesRoot>$(MSBuildThisFileDirectory)src</BclSourcesRoot>
   </PropertyGroup>
-
-  <!-- Compilation options -->
-
-  <!-- Mono specific build changes -->
+  <!-- Compilation options --><!-- Mono specific build changes -->
   <PropertyGroup>
     <NoWarn>$(NoWarn),618,67</NoWarn>
-
     <DefineConstants>$(DefineConstants);MONO_FEATURE_SRE</DefineConstants>
-
     <FeatureMono>true</FeatureMono>
     <FeatureWasmThreads
       Condition="('$(TargetsBrowser)' == 'true' or '$(TargetsWasi)' == 'true') and '$(MonoWasmBuildVariant)' == 'multithread'"
@@ -149,7 +133,6 @@
       >true</FeatureObjCMarshal
     >
   </PropertyGroup>
-
   <PropertyGroup>
     <DefineConstants Condition="'$(FeaturePerfTracing)' == 'true'"
       >$(DefineConstants);FEATURE_PERFTRACING</DefineConstants
@@ -164,13 +147,11 @@
       >$(DefineConstants);FEATURE_WASM_PERFTRACING</DefineConstants
     >
   </PropertyGroup>
-
   <!-- ILLinker settings -->
   <PropertyGroup>
     <ILLinkTrimAssembly>true</ILLinkTrimAssembly>
     <ILLinkDirectory>$(MSBuildThisFileDirectory)src\ILLink\</ILLinkDirectory>
   </PropertyGroup>
-
   <ItemGroup>
     <ILLinkDescriptorsXmls Include="$(ILLinkDirectory)ILLink.Descriptors.xml" />
     <ILLinkDescriptorsXmls
@@ -182,7 +163,6 @@
       Condition="'$(FeaturePerfTracing)' == 'true'"
       Include="$(CoreLibSharedDir)ILLink\ILLink.Descriptors.EventSource.xml"
     />
-
     <ILLinkSubstitutionsXmls
       Include="$(ILLinkDirectory)ILLink.Substitutions.$(Platform).xml"
       Condition="Exists('$(ILLinkDirectory)ILLink.Substitutions.$(Platform).xml')"
@@ -191,14 +171,12 @@
       Include="$(ILLinkDirectory)ILLink.Substitutions.iOS.xml"
       Condition="'$(TargetsiOS)' == 'true' or '$(TargetstvOS)' == 'true'"
     />
-
     <ILLinkLinkAttributesXmls Include="$(ILLinkDirectory)ILLink.LinkAttributes.xml" />
     <ILLinkLinkAttributesXmls
       Include="$(ILLinkDirectory)ILLink.LinkAttributes.$(Platform).xml"
       Condition="Exists('$(ILLinkDirectory)ILLink.LinkAttributes.$(Platform).xml')"
     />
   </ItemGroup>
-
   <!-- Sources -->
   <ItemGroup>
     <Compile Include="$(BclSourcesRoot)\Mono\RuntimeHandles.cs" />
@@ -349,7 +327,6 @@
     <Compile Include="$(BclSourcesRoot)\Mono\SafeGPtrArrayHandle.cs" />
     <Compile Include="$(BclSourcesRoot)\System\TypeSpec.cs" />
   </ItemGroup>
-
   <!-- Enable unsupported browser warnings -->
   <ItemGroup Condition="'$(TargetsBrowser)' == 'true' or '$(TargetsAnyOS)' == 'true'">
     <SupportedPlatform Include="browser" />
@@ -357,12 +334,10 @@
   <ItemGroup Condition="'$(TargetsWasi)' == 'true' or '$(TargetsAnyOS)' == 'true'">
     <SupportedPlatform Include="wasi" />
   </ItemGroup>
-
   <Import
     Project="$(LibrariesProjectRoot)\System.Private.CoreLib\src\System.Private.CoreLib.Shared.projitems"
     Label="Shared"
   />
-
   <ItemGroup>
     <ProjectReference
       Include="$(LibrariesProjectRoot)\System.Private.CoreLib\gen\System.Private.CoreLib.Generators.csproj"
@@ -370,7 +345,6 @@
       ReferenceOutputAssembly="false"
     />
   </ItemGroup>
-
   <Target Name="CopyCoreLibToBinDir" AfterTargets="Build">
     <Copy
       SourceFiles="$(RuntimeBinDir)/IL/System.Private.CoreLib.dll;$(RuntimeBinDir)/IL/System.Private.CoreLib.pdb"
@@ -378,7 +352,6 @@
       SkipUnchangedFiles="true"
     />
   </Target>
-
   <!-- Setup eventing file generation -->
   <ItemGroup>
     <EventingGenerationScript Include="$(CoreClrProjectRoot)scripts/genRuntimeEventSources.py" />
@@ -391,7 +364,6 @@
     </EventingSourceFile>
     <Compile Include="@(EventingSourceFile)" />
   </ItemGroup>
-
   <Target
     Name="GenerateEventingFiles"
     Inputs="@(EventingGenerationScript);@(EventManifestFile)"
@@ -413,9 +385,7 @@
         >$(_EventingSourceFileDirectory.TrimEnd('\'))</_EventingSourceFileDirectory
       >
     </PropertyGroup>
-
     <Exec Command="&quot;$(PYTHON)&quot; -B $(_PythonWarningParameter) &quot;@(EventingGenerationScript)&quot; --man &quot;@(EventManifestFile)&quot; --intermediate &quot;$(_EventingSourceFileDirectory)&quot; --runtimeflavor mono" />
-
     <ItemGroup>
       <FileWrites Include="@(EventingSourceFile)" />
     </ItemGroup>

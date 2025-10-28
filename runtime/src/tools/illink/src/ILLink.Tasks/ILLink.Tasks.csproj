@@ -18,7 +18,6 @@
     <IncludeMultiTargetRoslynComponentTargets>false</IncludeMultiTargetRoslynComponentTargets>
     <TargetsForTfmSpecificContentInPackage>$(TargetsForTfmSpecificContentInPackage);AddBuildOutputToToolsPackage</TargetsForTfmSpecificContentInPackage>
   </PropertyGroup>
-
   <!-- Include the illink.runtimeconfig.pack.json file (which depends on the runtimeversion being built)
        as illink.runtimeconfig.json in the package, instead of the original illink.runtimeconfig.json. -->
   <Target
@@ -37,7 +36,6 @@
       />
     </ItemGroup>
   </Target>
-
   <ItemGroup>
     <!-- Note: 'build/Microsoft.NET.ILLink.targets' should not match the package name, because we don't want the targets
          to be imported by nuget. The SDK will import them in the right order. -->
@@ -56,7 +54,6 @@
       TargetPath="build/%(RecursiveDir)%(Filename)%(Extension)"
     />
   </ItemGroup>
-
   <ItemGroup>
     <ProjectReference
       Include="..\ILLink.CodeFix\ILLink.CodeFixProvider.csproj"
@@ -72,7 +69,6 @@
       Include="..\linker\Mono.Linker.csproj"
       Condition="'$(TargetFrameworkIdentifier)' == '.NETCoreApp'"
     />
-
     <PackageReference Include="Microsoft.DotNet.Cecil" Version="$(MicrosoftDotNetCecilVersion)" />
     <PackageReference
       Include="Microsoft.Build.Framework"
@@ -90,7 +86,6 @@
       Condition="'$(TargetFrameworkIdentifier)' == '.NETFramework'"
     />
   </ItemGroup>
-
   <ItemGroup>
     <!--
       Update all PackageReference and ProjectReference Items to have

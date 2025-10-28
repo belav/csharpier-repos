@@ -6,11 +6,9 @@
     <IsShipping>false</IsShipping>
     <EnforceExtendedAnalyzerRules>true</EnforceExtendedAnalyzerRules>
   </PropertyGroup>
-
   <ItemGroup>
     <Reference Include="Microsoft.CodeAnalysis.CSharp" PrivateAssets="all" />
   </ItemGroup>
-
   <ItemGroup>
     <None
       Include="$(OutputPath)\$(AssemblyName).dll"

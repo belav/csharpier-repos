@@ -8,7 +8,6 @@
     <ServerGarbageCollection>true</ServerGarbageCollection>
     <TestGroupName>Sockets.FunctionalTests</TestGroupName>
   </PropertyGroup>
-
   <ItemGroup>
     <Compile Include="..\FunctionalTests\**\*.cs" />
     <Compile Include="$(SharedSourceRoot)NullScope.cs" />
@@ -65,7 +64,6 @@
       CopyToOutputDirectory="PreserveNewest"
     />
   </ItemGroup>
-
   <ItemGroup>
     <Reference Include="Microsoft.AspNetCore.Http.Abstractions" />
     <Reference Include="Microsoft.AspNetCore.Server.Kestrel.Transport.Sockets" />

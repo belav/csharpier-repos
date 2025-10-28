@@ -24,7 +24,6 @@
     />
     <Compile Include="..\Coreclr.TestWrapper\MobileAppHandler.cs" Link="MobileAppHandler.cs" />
   </ItemGroup>
-
   <ItemGroup>
     <PackageReference Include="xunit" Version="$(XUnitVersion)" ExcludeAssets="runtime" />
   </ItemGroup>

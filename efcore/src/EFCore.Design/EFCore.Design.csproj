@@ -8,7 +8,6 @@
     <DevelopmentDependency>True</DevelopmentDependency>
     <ImplicitUsings>true</ImplicitUsings>
   </PropertyGroup>
-
   <ItemGroup>
     <Using Include="System.Diagnostics" />
     <Using Include="System.Linq.Expressions" />
@@ -35,7 +34,6 @@
     <Using Include="Microsoft.Extensions.Logging" />
     <Using Include="Microsoft.Extensions.DependencyInjection" />
   </ItemGroup>
-
   <ItemGroup>
     <Compile Include="..\ef\CommandLineUtils\*.cs" Link="CommandLineUtils\%(Filename).cs" />
     <Compile Include="..\ef\Reporter.cs" />
@@ -44,21 +42,18 @@
     <Compile Include="..\ef\AnsiTextWriter.cs" />
     <Compile Include="..\Shared\*.cs" />
   </ItemGroup>
-
   <ItemGroup>
     <None Include="build\**\*">
       <Pack>True</Pack>
       <PackagePath>build</PackagePath>
     </None>
   </ItemGroup>
-
   <ItemGroup>
     <ProjectReference
       Include="..\EFCore.Relational\EFCore.Relational.csproj"
       PrivateAssets="contentfiles;build"
     />
   </ItemGroup>
-
   <ItemGroup>
     <PackageReference Include="Humanizer.Core" Version="2.14.1" />
     <PackageReference
@@ -76,7 +71,6 @@
     />
     <PackageReference Include="Mono.TextTemplating" Version="2.2.1" />
   </ItemGroup>
-
   <ItemGroup>
     <None Update="Properties\DesignStrings.Designer.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
@@ -92,11 +86,9 @@
       <LastGenOutput>CSharpEntityTypeGenerator.cs</LastGenOutput>
     </None>
   </ItemGroup>
-
   <ItemGroup>
     <Service Include="{508349b6-6b84-4df5-91f0-309beebad82d}" />
   </ItemGroup>
-
   <ItemGroup>
     <Compile Update="Properties\DesignStrings.Designer.cs">
       <DesignTime>True</DesignTime>

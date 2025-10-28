@@ -36,14 +36,12 @@
     <tr onmouseover="" onmouseout="" onkeyup="" id="" />
     <td onmouseover="" onmouseout="" onkeyup="" id="" />
   </IgnoreList>
-
   <!--delete Java Script attribute value-->
   <CleanJavaScriptValueList>
     <a href="" />
     <a onclick="" />
     <area href="" />
   </CleanJavaScriptValueList>
-
   <!--remove tags by attribute Id or name-->
   <RemoveById>
     <input id="__VIEWSTATE" name="__VIEWSTATE" />

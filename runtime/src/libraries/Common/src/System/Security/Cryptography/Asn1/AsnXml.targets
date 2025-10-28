@@ -12,7 +12,6 @@
       <Link>Common\System\Security\Cryptography\Asn1\asn.xsd</Link>
     </None>
   </ItemGroup>
-
   <Target
     Name="CompileAsn"
     BeforeTargets="CoreCompile"
@@ -23,15 +22,12 @@
     <PropertyGroup>
       <_AsnIntermediatePath>$([MSBuild]::NormalizeDirectory('$(IntermediateOutputPath)', 'asnxml'))</_AsnIntermediatePath>
     </PropertyGroup>
-
     <MakeDir Directories="$(_AsnIntermediatePath)" />
-
     <XslTransformation
       XslInputPath="$(MSBuildThisFileDirectory)asn.xslt"
       XmlInputPaths="@(AsnXml)"
       OutputPaths="@(AsnXml -> '$(_AsnIntermediatePath)%(filename).cs')"
     />
-
     <Exec
       IgnoreExitCode="true"
       StandardOutputImportance="Low"
@@ -39,13 +35,11 @@
     >
       <Output TaskParameter="ExitCode" ItemName="_AsnXmlDiffCode" />
     </Exec>
-
     <Copy
       Condition="'@(_AsnXmlDiffCode)' != '0'"
       SourceFiles="@(AsnXml -> '$(_AsnIntermediatePath)%(filename).cs')"
       DestinationFiles="@(AsnXml -> '%(Identity).cs')"
     />
-
     <Warning
       Condition="'@(_AsnXmlDiffCode)' != '0'"
       Text="AsnXml regenerated files, be sure to check them in: @(AsnXml -> '%(Identity).cs')"

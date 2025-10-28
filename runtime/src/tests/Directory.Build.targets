@@ -14,26 +14,21 @@
     Project="$(MSBuildThisFileDirectory)/Common/disableversioncheck.targets"
     Condition="'$(DisableVersionCheckImported)' != 'true'"
   />
-
   <PropertyGroup Condition="'$(TargetsAppleMobile)' == 'true' and '$(RuntimeFlavor)' == 'mono'">
     <OSPlatformConfig>$(TargetOS).AnyCPU.$(Configuration)</OSPlatformConfig>
     <TestArchiveRoot>$(ArtifactsDir)helix/</TestArchiveRoot>
     <TestArchiveTestsRoot>$(TestArchiveRoot)tests/</TestArchiveTestsRoot>
     <TestArchiveTestsDir>$(TestArchiveTestsRoot)$(OSPlatformConfig)/</TestArchiveTestsDir>
     <TestArchiveRuntimeRoot>$(TestArchiveRoot)runtime/</TestArchiveRuntimeRoot>
-
     <PublishTestAsSelfContainedDependsOn>BuildMonoiOSApp</PublishTestAsSelfContainedDependsOn>
     <PublishTestAsSelfContainedAfterTargets>BuildMonoiOSApp</PublishTestAsSelfContainedAfterTargets>
     <BundleTestAppleAppDependsOn>GenerateRunScript</BundleTestAppleAppDependsOn>
-
     <IsRuntimeTests>true</IsRuntimeTests>
   </PropertyGroup>
-
   <Import
     Project="$(RepositoryEngineeringDir)testing\tests.targets"
     Condition="'$(TargetsAppleMobile)' == 'true' and '$(RuntimeFlavor)' == 'mono'"
   />
-
   <Target
     Name="_SetRunScriptOutputDirectory"
     Condition="'$(TargetsAppleMobile)' == 'true' and '$(RuntimeFlavor)' == 'mono' and '$(IsRuntimeTests)' == 'true'"
@@ -43,7 +38,6 @@
       <RunScriptOutputDirectory>$(ArtifactsDir)/tests/coreclr/obj/$(TargetOS).$(Platform).$(Configuration)/Managed/build/iOSApps/$(TestProjectName)/AppBundle</RunScriptOutputDirectory>
     </PropertyGroup>
   </Target>
-
   <!-- Default priority building values. -->
   <PropertyGroup>
     <DisableProjectBuild
@@ -54,17 +48,14 @@
       Condition="('$(IsMergedTestRunnerAssembly)' == 'true' and !$(BuildAsStandalone)) or ('$(RequiresProcessIsolation)' == 'true' and '$(CLRTestKind)' != 'SharedLibrary')"
       >Exe</OutputType
     >
-
     <CLRTestKind Condition="'$(CLRTestKind)' == '' and '$(OutputType)' == 'Exe'"
       >BuildAndRun</CLRTestKind
     >
     <CLRTestKind Condition="'$(CLRTestKind)' == ''">SharedLibrary</CLRTestKind>
     <CLRTestPriority Condition="'$(CLRTestPriority)' == ''">0</CLRTestPriority>
-
     <!-- Merged test runner assemblies might not have any non-generated sources, and that's okay -->
     <NoWarn Condition="'$(IsMergedTestRunnerAssembly)' == 'true'">$(NoWarn);CS2008</NoWarn>
   </PropertyGroup>
-
   <!-- All CLRTests need to be of a certain "kind". These kinds are enumerated below.
   By default all tests are BuildAndRun. This means that the build system will Build them
   and construct a run-batch-script for them. -->
@@ -103,7 +94,6 @@
       </PropertyGroup>
     </When>
   </Choose>
-
   <PropertyGroup>
     <_CLRTestNeedsProjectToRun>false</_CLRTestNeedsProjectToRun>
     <_CLRTestNeedsProjectToRun
@@ -111,20 +101,17 @@
       >true</_CLRTestNeedsProjectToRun
     >
   </PropertyGroup>
-
   <PropertyGroup>
     <!-- Since bug in Roslyn for Linux empty DebugType property leads to build failure. See issue Roslyn@20343 -->
     <DebugType Condition=" '$(DebugType)' == '' and '$(RunningOnUnix)' == 'true' ">None</DebugType>
     <TestLibraryProjectPath>$(RepoRoot)\src\tests\Common\CoreCLRTestLibrary\CoreCLRTestLibrary.csproj</TestLibraryProjectPath>
   </PropertyGroup>
-
   <ItemGroup>
     <ProjectReference
       Include="$(TestLibraryProjectPath)"
       Condition="'$(IsMergedTestRunnerAssembly)' == 'true'"
     />
   </ItemGroup>
-
   <!--
   If it needs ProjectToRun, turn the project into a ProjectReference so it gets built
   -->
@@ -133,13 +120,11 @@
       <Private>false</Private>
     </ProjectReference>
   </ItemGroup>
-
   <PropertyGroup Condition="'$(RequiresCodeFlowEnforcement)' == 'true'">
     <CLRTestTargetUnsupported Condition="'$(UseCodeFlowEnforcement)' != 'true'"
       >true</CLRTestTargetUnsupported
     >
   </PropertyGroup>
-
   <!-- Determine if this project should be built or not -->
   <PropertyGroup>
     <BuildAllProjects Condition="'$(BuildAllProjects)' == ''">false</BuildAllProjects>
@@ -184,13 +169,11 @@
       >true</_CopyNativeProjectBinaries
     >
   </PropertyGroup>
-
   <!-- We enable auto-unification of assembly references after importing the common targets.  Binding redirects are not needed
        for coreclr since it auto-unifies, so the warnings we get without this setting are just noise -->
   <PropertyGroup>
     <AutoUnifyAssemblyReferences>true</AutoUnifyAssemblyReferences>
   </PropertyGroup>
-
   <!-- Project language --><!-- TODO: This might just be the Language property -->
   <PropertyGroup Condition="'$(ProjectLanguage)' == ''">
     <ProjectLanguage Condition="'$(MSBuildProjectExtension)' == '.ilproj' OR '$(Language)' == 'IL'"
@@ -200,7 +183,6 @@
       Condition="'$(MSBuildProjectExtension)' == '.csproj' OR '$(Language)' == 'C#' OR '$(ProjectLanguage)'==''"
       >CSharp</ProjectLanguage
     >
-
     <SkipImportILTargets Condition="'$(CLRTestPriority)' &gt; '$(CLRTestPriorityToBuild)'"
       >true</SkipImportILTargets
     >
@@ -209,7 +191,6 @@
       >true</SkipImportILTargets
     >
   </PropertyGroup>
-
   <!-- If a test in a merged test directory (e.g., under JIT\Directed where Directed_1.csproj and siblings --><!-- represent the groups) has OutputType==Exe set, then it will end up being skipped because the merged --><!-- groups are supposed to cover all of the tests. The merged groups themselves should be Exes, as      --><!-- should any test marked RequiresProcessIsolation or BuildAsStandalone. -->
   <Target Name="CheckForTestOutsideOfGroup" BeforeTargets="Build">
     <Error
@@ -222,29 +203,23 @@
       Text="Tests in merged test directories should not set OutputType to Exe unless they are RequiresProcessIsolation, BuildAsStandalone, or IsMergedTestRunnerAssembly."
     />
   </Target>
-
   <Target Name="CopyNativeProjectBinaries" Condition="'$(_CopyNativeProjectBinaries)' == 'true'">
     <ItemGroup Condition="'$(UseVisualStudioNativeBinariesLayout)' == 'true'">
       <NativeProjectBinaries Include="$(NativeProjectOutputFolder)\*.*" />
     </ItemGroup>
     <ItemGroup Condition="'$(UseVisualStudioNativeBinariesLayout)' != 'true'">
-      <!-- ############################################################### --><!-- The following is required because the single configuration      --><!-- generators, unlike multi-configuration generators,              --><!-- do not place the binaries built into a separate                 --><!-- Debug/Checked/Release directory. Therefore we must filter       --><!-- the folder to only include dynamic libraries, static libraries  --><!--  and executables.                                               --><!--                                                                 --><!-- Please take care when modifying the following lines of code.    --><!-- ############################################################### -->
-
-      <!-- Include everything and then filter. -->
+      <!-- ############################################################### --><!-- The following is required because the single configuration      --><!-- generators, unlike multi-configuration generators,              --><!-- do not place the binaries built into a separate                 --><!-- Debug/Checked/Release directory. Therefore we must filter       --><!-- the folder to only include dynamic libraries, static libraries  --><!--  and executables.                                               --><!--                                                                 --><!-- Please take care when modifying the following lines of code.    --><!-- ############################################################### --><!-- Include everything and then filter. -->
       <NativeProjectBinariesMatched Include="$(NativeProjectOutputFolder)\**\*.*" />
-
       <!-- Filter executables on unix -->
       <NativeProjectBinariesExeFilter
         Condition="'%(Extension)' == ''"
         Include="@(NativeProjectBinariesMatched)"
       />
-
       <!-- Filter executables on Windows -->
       <NativeProjectBinariesExeFilter
         Condition="'%(Extension)' == '.exe'"
         Include="@(NativeProjectBinariesMatched)"
       />
-
       <!-- Filter manifest/data files on Windows -->
       <NativeProjectBinariesManifestFilter
         Condition="'%(Extension)' == '.manifest'"
@@ -254,49 +229,41 @@
         Condition="'%(Extension)' == '.tlb'"
         Include="@(NativeProjectBinariesMatched)"
       />
-
       <!-- Filter out the *Make* files -->
       <NativeProjectBinariesExeFilterRemovedMakeFile
         Condition="'%(FileName)' != 'Makefile'"
         Include="@(NativeProjectBinariesExeFilter)"
       />
-
       <!-- Filter .dylib files for OSX -->
       <NativeProjectBinariesDyLibFilter
         Condition="'%(Extension)' == '.dylib'"
         Include="@(NativeProjectBinariesMatched)"
       />
-
       <!-- Filter .so files for Linux -->
       <NativeProjectBinariesDyLibFilter
         Condition="'%(Extension)' == '.so'"
         Include="@(NativeProjectBinariesMatched)"
       />
-
       <!-- Filter static lib files for Unix -->
       <NativeProjectBinariesStaticLibFilter
         Condition="'%(Extension)' == '.a'"
         Include="@(NativeProjectBinariesMatched)"
       />
-
       <!-- Filter dynamic lib files for Windows -->
       <NativeProjectBinariesDyLibFilter
         Condition="'%(Extension)' == '.dll'"
         Include="@(NativeProjectBinariesMatched)"
       />
-
       <!-- Filter symbol files for Windows -->
       <NativeProjectsBinariesSymbolsFilter
         Condition="'%(Extension)' == '.pdb'"
         Include="@(NativeProjectBinariesMatched)"
       />
-
       <!-- Filter static lib files for Windows -->
       <NativeProjectBinariesStaticLibFilter
         Condition="'%(Extension)' == '.lib'"
         Include="@(NativeProjectBinariesMatched)"
       />
-
       <!-- Filter .dex and .jar files for Android -->
       <NativeProjectBinariesJavaLibFilter
         Condition="'%(Extension)' == '.dex'"
@@ -306,7 +273,6 @@
         Condition="'%(Extension)' == '.jar'"
         Include="@(NativeProjectBinariesMatched)"
       />
-
       <!-- Merge the filtered lists -->
       <NativeProjectBinaries Include="@(NativeProjectBinariesExeFilterRemovedMakeFile)" />
       <NativeProjectBinaries Include="@(NativeProjectBinariesDyLibFilter)" />
@@ -315,13 +281,11 @@
       <NativeProjectBinaries Include="@(NativeProjectBinariesManifestFilter)" />
       <NativeProjectBinaries Include="@(NativeProjectBinariesJavaLibFilter)" />
     </ItemGroup>
-
     <!-- There are currently no native project binaries on wasm or Android -->
     <Error
       Text="The native project files are missing in $(NativeProjectOutputFolder) please run build from the root of the repo at least once"
       Condition="'@(NativeProjectBinaries)' == '' And '$(TargetOS)' != 'browser' And '$(TargetsMobile)' != 'true'"
     />
-
     <Copy
       SourceFiles="@(NativeProjectBinaries)"
       DestinationFiles="@(NativeProjectBinaries -> '$(OutDir)%(Filename)%(Extension)')"
@@ -334,7 +298,6 @@
       <Output TaskParameter="DestinationFiles" ItemName="FileWrites" />
     </Copy>
   </Target>
-
   <Target
     Name="ResolveCMakeNativeProjectReference"
     Condition="'@(CMakeProjectReference)' != ''"
@@ -348,7 +311,6 @@
       <NativeProjectReferenceNormalized Include="@(NativeProjectReference -> '%(FullPath)')" />
     </ItemGroup>
   </Target>
-
   <Target
     Name="ConsolidateNativeProjectReference"
     Condition="'$(_CopyNativeProjectBinaries)' == 'true'"
@@ -364,17 +326,14 @@
         Condition="'$(UseVisualStudioNativeBinariesLayout)' == 'true'"
       />
     </ItemGroup>
-
     <Message Text="Full native project references are :%(NativeProjectReferenceNormalized.Identity)" />
     <Message Text="Native binaries will be copied from :%(NativeProjectOutputFoldersToCopy.Identity)" />
-
     <MSBuild
       Projects="$(MSBuildProjectFile)"
       Targets="CopyNativeProjectBinaries"
       Properties="NativeProjectOutputFolder=%(NativeProjectOutputFoldersToCopy.Identity)"
       Condition="'@(NativeProjectReference)' != ''"
     />
-
     <MSBuild
       Projects="@(ProjectReference)"
       Targets="CopyAllNativeProjectReferenceBinaries"
@@ -383,7 +342,6 @@
       BuildInParallel="true"
     />
   </Target>
-
   <Target
     Name="CopyAllNativeProjectReferenceBinaries"
     DependsOnTargets="ResolveCMakeNativeProjectReference;ConsolidateNativeProjectReference"
@@ -411,7 +369,6 @@
       Condition="'@(MergedWrapperReferenceFiles)' != ''"
     />
   </Target>
-
   <!-- Build shell or command scripts whenever we copy native binaries -->
   <Import Project="$(MSBuildThisFileDirectory)Common\CLRTest.Execute.targets" />
   <Target
@@ -420,19 +377,16 @@
     Condition="'$(CLRTestBuildAllTargets)' != 'allTargets' And '$(GenerateRunScript)' != 'false' And ('$(_WillCLRTestProjectBuild)' == 'true')"
     DependsOnTargets="GenerateExecutionScriptsInternal"
   />
-
   <Target Name="UpdateReferenceItems" BeforeTargets="BeforeResolveReferences">
     <MSBuild Projects="$(MSBuildProjectFullPath)" Targets="GetLiveRefAssemblies">
       <Output TaskParameter="TargetOutputs" ItemName="Reference" />
     </MSBuild>
-
     <ItemGroup>
       <Reference Include="$(TargetingPackPath)/*.dll">
         <Private>false</Private>
       </Reference>
     </ItemGroup>
   </Target>
-
   <Target
     Name="GetLiveRefAssemblies"
     Returns="@(LibrariesRefAssembliesDlls)"
@@ -446,7 +400,6 @@
       />
     </ItemGroup>
   </Target>
-
   <Target
     Name="ConvertCountOfStressMarkersToListPhase1"
     BeforeTargets="ConvertCountOfStressMarkersToListPhase1"
@@ -455,13 +408,11 @@
       <SequenceOfSemicolons>$([System.String]::new(';',10))</SequenceOfSemicolons>
     </PropertyGroup>
   </Target>
-
   <Target Name="GenerateMarkerFiles" BeforeTargets="AssignTargetPaths">
     <PropertyGroup Condition="'$(NumberOfStripesToUseInStress)' == '' and '$(IsMergedTestRunnerAssembly)' == 'true'">
       <NumberOfStripesToUseInStress>1</NumberOfStripesToUseInStress>
       <!-- Set a custom number of stripes in stress to allow very large merged groups to function in the presence of GCStress -->
     </PropertyGroup>
-
     <!-- Generate a set of stress marker files to be used in stress scenarios in CI runs -->
     <ItemGroup Condition="'$(NumberOfStripesToUseInStress)' != '' and '$(IsMergedTestRunnerAssembly)' == 'true'">
       <SequenceOfIntegers Include="0" />
@@ -564,7 +515,6 @@
       <SequenceOfIntegers Include="97" />
       <SequenceOfIntegers Include="98" />
       <SequenceOfIntegers Include="99" />
-
       <MarkerFileIntegerSequence
         Include="@(SequenceOfIntegers)"
         Condition="%(Identity)&lt;$(NumberOfStripesToUseInStress)"
@@ -577,7 +527,6 @@
       Condition="'$(NumberOfStripesToUseInStress)' != '' and $(NumberOfStripesToUseInStress)&gt;99"
       Text="Attempt to split into too many stripes. Either reduce stripe count, or add more entries to SequenceOfIntegers"
     />
-
     <ItemGroup>
       <Content
         Include="$(AssemblyName).reflect.xml"
@@ -598,13 +547,11 @@
       </MarkerFile>
       <Content Include="@(MarkerFile)" CopyToOutputDirectory="PreserveNewest" />
     </ItemGroup>
-
     <Copy
       SourceFiles="$(AssemblyName).reflect.xml"
       DestinationFolder="$(OutputPath)"
       Condition="Exists('$(AssemblyName).reflect.xml')"
     />
-
     <WriteLinesToFile
       Condition="'@(MarkerFile)' != ''"
       File="%(Identity)"
@@ -612,7 +559,6 @@
       Overwrite="true"
       WriteOnlyWhenDifferent="true"
     />
-
     <!-- We don't want the out-of-process test marker file to be included in referencing projects, so we don't include it as content. -->
     <WriteLinesToFile
       Condition="'$(RequiresProcessIsolation)' == 'true' and '$(BuildAsStandalone)' != 'true'"
@@ -622,37 +568,30 @@
       WriteOnlyWhenDifferent="true"
     />
   </Target>
-
   <PropertyGroup>
     <ProjectAssetsFile>$(BaseOutputPath)\packages\Common\test_dependencies\test_dependencies\project.assets.json</ProjectAssetsFile>
   </PropertyGroup>
   <Import Project="$(BaseOutputPath)\packages\Common\test_dependencies\test_dependencies\test_dependencies.*.targets" />
-
   <PropertyGroup>
     <DisableImplicitFrameworkReferences>true</DisableImplicitFrameworkReferences>
   </PropertyGroup>
-
   <PropertyGroup>
     <IncludeOOBLibraries>true</IncludeOOBLibraries>
   </PropertyGroup>
-
   <ItemGroup>
     <KnownFrameworkReference Remove="Microsoft.AspNetCore.App" />
     <KnownFrameworkReference Remove="Microsoft.WindowsDesktop.App" />
   </ItemGroup>
-
   <Target Name="GetProjectsWithDisabledBuild" Returns="@(ProjectWithDisabledBuild)">
     <ItemGroup Condition="'$(_WillCLRTestProjectBuild)' != 'true'">
       <ProjectWithDisabledBuild Include="$(MSBuildProjectFullPath)" />
     </ItemGroup>
   </Target>
-
   <Target Name="GetRequiresProcessIsolation" Returns="@(ProjectRequiringProcessIsolation)">
     <ItemGroup Condition="'$(RequiresProcessIsolation)' == 'true'">
       <ProjectRequiringProcessIsolation Include="$(MSBuildProjectFullPath)" />
     </ItemGroup>
   </Target>
-
   <Target
     Name="DiscoverProcessIsolatedTestProjectReferences"
     BeforeTargets="AssignProjectConfiguration"
@@ -665,7 +604,6 @@
     >
       <Output TaskParameter="TargetOutputs" ItemName="ReferencedProjectRequiringProcessIsolation" />
     </MSBuild>
-
     <ItemGroup>
       <ProjectReference Remove="@(ReferencedProjectRequiringProcessIsolation->'%(OriginalItemSpec)')" />
       <ProjectReference
@@ -677,13 +615,11 @@
       />
     </ItemGroup>
   </Target>
-
   <PropertyGroup Condition="'$(Language)' == 'C#' and '$(_CLRTestNeedsToRun)' == 'true' and ('$(BuildAsStandalone)' == 'true' or '$(RequiresProcessIsolation)' == 'true' or '$(InMergedTestDirectory)' == 'true' or '$(IsMergedTestRunnerAssembly)' == 'true')">
     <ReferenceXUnitWrapperGenerator Condition="'$(ReferenceXUnitWrapperGenerator)' == ''"
       >true</ReferenceXUnitWrapperGenerator
     >
   </PropertyGroup>
-
   <ItemGroup Condition="'$(ReferenceXUnitWrapperGenerator)' == 'true'">
     <ProjectReference
       Include="$(RepoRoot)/src/tests/Common/XUnitWrapperGenerator/XUnitWrapperGenerator.csproj"
@@ -691,11 +627,9 @@
       ReferenceOutputAssembly="false"
     />
   </ItemGroup>
-
   <ItemGroup Condition="'$(IsMergedTestRunnerAssembly)' == 'true'">
     <ProjectReference Include="$(RepoRoot)/src/tests/Common/XUnitWrapperLibrary/XUnitWrapperLibrary.csproj" />
   </ItemGroup>
-
   <Import Project="$(RepoRoot)/src/tests/Common/XUnitWrapperGenerator/XUnitWrapperGenerator.props" />
   <Import Project="$(RepoRoot)eng/liveBuilds.targets" />
   <Import
@@ -706,23 +640,18 @@
     Project="$(RepoRoot)/src/tests/Common/mergedrunner.targets"
     Condition="'$(IsMergedTestRunnerAssembly)' == 'true'"
   />
-
   <Target Name="GetBinPlaceTargetFramework" />
-
   <Import Project="$(RepoRoot)src\coreclr\clr.featuredefines.props" />
-
   <!-- if we have determined that there is nothing to build, overwrite the build targets so that nothing happens -->
   <Import
     Project="$(MSBuildThisFileDirectory)Common\nobuild.targets"
     Condition="'$(_WillCLRTestProjectBuild)' == 'false'"
   />
-
   <!-- RunOnly projects have a special build for dependent projects -->
   <Import
     Project="$(MSBuildThisFileDirectory)Common\runonly.targets"
     Condition="'$(CLRTestKind)' == 'RunOnly'"
   />
-
   <PropertyGroup Condition="'$(TestBuildMode)' == 'nativeaot'">
     <!-- NativeAOT compiled output is placed into a 'native' subdirectory: we need to tweak
          rpath so that the test can load its native library dependencies if there's any -->
@@ -730,17 +659,13 @@
       >@executable_path/..</IlcRPath
     >
     <IlcRPath Condition="'$(IlcRPath)' == ''">$ORIGIN/..</IlcRPath>
-
     <!-- Works around "Error: Native compilation can run on x64 and arm64 hosts only" -->
     <DisableUnsupportedError>true</DisableUnsupportedError>
-
     <!-- IL projects often have mismatches assembly names vs file names and that breaks Win32 resource generation option -->
     <IlcGenerateWin32Resources Condition="'$(Language)' == 'IL'">false</IlcGenerateWin32Resources>
-
     <!-- The default TrimMode in the SDK is full. But trimming most of the tests would just make them fail,
          so the default for the test tree is partial. -->
     <TrimMode Condition="'$(EnableAggressiveTrimming)' != 'true'">partial</TrimMode>
-
     <IlcToolsPath>$(CoreCLRILCompilerDir)</IlcToolsPath>
     <IlcToolsPath
       Condition="'$(TargetArchitecture)' != '$(BuildArchitecture)' or '$(TargetOS)' != '$(HostOS)' or '$(EnableNativeSanitizers)' != ''"
@@ -751,7 +676,6 @@
     <IlcFrameworkPath>$(MicrosoftNetCoreAppRuntimePackRidLibTfmDir)</IlcFrameworkPath>
     <IlcFrameworkNativePath>$(MicrosoftNetCoreAppRuntimePackNativeDir)</IlcFrameworkNativePath>
     <RuntimeIdentifier>$(OutputRID)</RuntimeIdentifier>
-
     <SysRoot Condition="'$(CrossBuild)' == 'true' and '$(HostOS)' != 'windows'"
       >$(ROOTFS_DIR)</SysRoot
     >
@@ -765,23 +689,19 @@
       >$(IlcSdkPath)</FrameworkLibPath
     >
   </PropertyGroup>
-
   <ItemGroup Condition="'$(TestBuildMode)' == 'nativeaot'">
     <CustomLinkerArg
       Condition="'$(CrossBuild)' == 'true' and '$(_hostArchitecture)' == '$(_targetArchitecture)' and '$(_hostOS)' != 'windows'"
       Include="--gcc-toolchain=$(ROOTFS_DIR)/usr"
     />
     <IlcReference Include="$(TargetingPackPath)/*.dll" />
-
     <!-- xunit calls MakeGenericType to check if something is IEquatable -->
     <IlcArg
       Condition="'$(EagerlyValidateTypeConstruction)' != 'false'"
       Include="--feature:System.Reflection.IsTypeConstructionEagerlyValidated=false"
     />
-
     <!-- Bump the generic cycle tolerance. There's at least one test with a cycle that is reachable at runtime to depth 6 -->
     <IlcArg Include="--maxgenericcycle:7" />
-
     <!-- We set TrimMode to partial so that we don't trim parts of the tests,
          but don't make this apply to xunit cruft -->
     <IlcArg Include="--trim:Microsoft.DotNet.XUnitExtensions" />
@@ -792,33 +712,27 @@
     <IlcArg Include="--trim:xunit.execution.dotnet" />
     <IlcArg Include="--trim:xunit.abstractions" />
   </ItemGroup>
-
   <Import
     Project="$(RepositoryEngineeringDir)nativeSanitizers.targets"
     Condition="'$(TestBuildMode)' == 'nativeaot'"
   />
-
   <Import
     Project="$(CoreCLRBuildIntegrationDir)Microsoft.DotNet.ILCompiler.SingleEntry.targets"
     Condition="'$(TestBuildMode)' == 'nativeaot'"
   />
   <Import Project="$(RepoRoot)eng/liveILLink.targets" />
-
   <ItemGroup Condition="'$(TestBuildMode)' == 'nativeaot'">
     <Content
       Include="@(SanitizerRuntimeToCopy->'$(CoreCLRArtifactsPath)/%(Identity)')"
       CopyToOutputDirectory="PreserveNewest"
     />
   </ItemGroup>
-
   <Target Name="BuildNativeAot" DependsOnTargets="Build;LinkNativeIfBuildAndRun" />
-
   <Target
     Name="LinkNativeIfBuildAndRun"
     Condition="'$(_WillCLRTestProjectBuild)' == 'true' and '$(CLRTestKind)' == 'BuildAndRun'"
     DependsOnTargets="ComputeResolvedFilesToPublishList;LinkNative"
   />
-
   <Target
     Name="LocateNativeCompiler"
     Condition="'$(TestBuildMode)' == 'nativeaot' and '$(HostOS)' != 'windows'"
@@ -827,7 +741,6 @@
     <PropertyGroup>
       <CppCompilerAndLinker Condition="'$(CppCompilerAndLinker)' == ''">clang</CppCompilerAndLinker>
     </PropertyGroup>
-
     <Exec
       Command="sh -c 'build_arch=&quot;$(TargetArchitecture)&quot; compiler=&quot;$(CppCompilerAndLinker)&quot; . &quot;$(RepositoryEngineeringDir)/common/native/init-compiler.sh&quot; &amp;&amp; echo &quot;$CC;$LDFLAGS&quot;' 2>/dev/null"
       EchoOff="true"
@@ -836,7 +749,6 @@
     >
       <Output TaskParameter="ConsoleOutput" PropertyName="_CC_LDFLAGS" />
     </Exec>
-
     <PropertyGroup>
       <CppLinker>$(_CC_LDFLAGS.SubString(0, $(_CC_LDFLAGS.IndexOf(';'))))</CppLinker>
       <_LDFLAGS>$(_CC_LDFLAGS.SubString($([MSBuild]::Add($(_CC_LDFLAGS.IndexOf(';')), 1))))</_LDFLAGS>

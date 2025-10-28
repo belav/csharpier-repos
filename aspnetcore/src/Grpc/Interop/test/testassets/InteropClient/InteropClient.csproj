@@ -4,7 +4,6 @@
     <TargetFramework>$(DefaultNetCoreTargetFramework)</TargetFramework>
     <Nullable>enable</Nullable>
   </PropertyGroup>
-
   <ItemGroup>
     <Protobuf
       Include="..\Proto\grpc\testing\test.proto"
@@ -21,9 +20,7 @@
       GrpcServices="None"
       Link="Protos\messages.proto"
     />
-
     <Compile Include="$(SharedSourceRoot)HttpClient\HttpEventSourceListener.cs" />
-
     <Reference Include="CommandLineParser" />
     <Reference Include="Google.Protobuf" />
     <Reference Include="Grpc.Auth" />

@@ -10,31 +10,25 @@
     <MonoForceInterpreter>true</MonoForceInterpreter>
     <EnableDefaultCompileItems>false</EnableDefaultCompileItems>
   </PropertyGroup>
-
   <ItemGroup>
     <Compile Include="Program.cs" />
     <Compile Include="ChangeablePart.cs" />
   </ItemGroup>
-
   <ItemGroup>
     <ProjectReference Include="..\DeltaHelper\DeltaHelper.csproj" />
   </ItemGroup>
-
   <PropertyGroup>
     <DeltaScript>deltascript.json</DeltaScript>
     <DeltaCount>1</DeltaCount>
   </PropertyGroup>
-
   <PropertyGroup Condition="'$(TargetOS)' == 'maccatalyst'">
     <DevTeamProvisioning
       Condition="'$(TargetOS)' == 'maccatalyst' and '$(DevTeamProvisioning)' == ''"
       >-</DevTeamProvisioning
     >
   </PropertyGroup>
-
   <Import Project="$(RepoTasksDir)AotCompilerTask\MonoAOTCompiler.props" />
   <UsingTask TaskName="AppleAppBuilderTask" AssemblyFile="$(AppleAppBuilderTasksAssemblyPath)" />
-
   <Target Name="BuildAppBundle" AfterTargets="CopyFilesToPublishDirectory">
     <PropertyGroup>
       <AppDir>$(MSBuildThisFileDirectory)$(PublishDir)\app</AppDir>
@@ -45,21 +39,17 @@
         >true</RunAOTCompilation
       >
     </PropertyGroup>
-
     <Error
       Condition="'$(TargetOS)' == ''"
       Text="The TargetOS property must be set outside the project file"
     />
-
     <RemoveDir Directories="$(AppDir)" />
-
     <ItemGroup>
       <BundleAssemblies
         Condition="'$(RunAOTCompilation)' != 'true'"
         Include="$(MSBuildThisFileDirectory)$(PublishDir)\*.dll"
       />
     </ItemGroup>
-
     <AppleAppBuilderTask
       TargetOS="$(TargetOS)"
       Arch="$(TargetArchitecture)"
@@ -80,22 +70,18 @@
       <Output TaskParameter="AppBundlePath" PropertyName="AppBundlePath" />
       <Output TaskParameter="XcodeProjectPath" PropertyName="XcodeProjectPath" />
     </AppleAppBuilderTask>
-
     <Message Importance="High" Text="Xcode: $(XcodeProjectPath)" />
     <Message Importance="High" Text="App:   $(AppBundlePath)" />
-
     <Exec
       Condition="'$(TargetOS)' == 'iossimulator'"
       Command="dotnet xharness apple run --app=$(AppBundlePath) --targets=ios-simulator-64 --output-directory=/tmp/out"
     />
-
     <!-- run on MacCatalyst -->
     <Exec
       Condition="'$(TargetOS)' == 'maccatalyst'"
       Command="dotnet xharness apple run --app=$(AppBundlePath) --targets=maccatalyst --output-directory=/tmp/out"
     />
   </Target>
-
   <!-- Set RoslynILDiffFullPath property to the path of roslynildiff -->
   <Import Project="..\DeltaHelper.targets" />
 </Project>

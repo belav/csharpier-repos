@@ -5,7 +5,6 @@
     <NuGetTargetMonikerShort>$(NetCoreAppToolCurrent)</NuGetTargetMonikerShort>
     <RunAnalyzers>false</RunAnalyzers>
   </PropertyGroup>
-
   <ItemGroup>
     <Compile Include="CoreclrTestWrapperLib.cs" />
     <Compile Include="MobileAppHandler.cs" />

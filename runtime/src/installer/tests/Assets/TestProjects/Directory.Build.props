@@ -1,6 +1,5 @@
 <Project>
   <Import Project="$(MSBuildThisFileDirectory)..\TestUtils\TestProjects.props" />
-
   <PropertyGroup>
     <RestorePackagesPath>$(TestRestorePackagesPath)</RestorePackagesPath>
     <RestoreNoCache>true</RestoreNoCache>

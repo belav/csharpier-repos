@@ -8,13 +8,11 @@
       >true</CLRTestTargetUnsupported
     >
   </PropertyGroup>
-
   <PropertyGroup>
     <AlwaysUseCrossGen2>true</AlwaysUseCrossGen2>
     <IlasmRoundTripIncompatible>true</IlasmRoundTripIncompatible>
     <NativeAotIncompatible>true</NativeAotIncompatible>
   </PropertyGroup>
-
   <ItemGroup>
     <Compile Include="CpuId.cs" />
   </ItemGroup>

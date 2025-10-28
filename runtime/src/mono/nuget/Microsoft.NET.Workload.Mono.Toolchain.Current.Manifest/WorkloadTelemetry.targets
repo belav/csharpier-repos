@@ -34,13 +34,11 @@
         Value="$(_WorkloadUsesStripILAfterAOT)"
       />
     </ItemGroup>
-
     <AllowEmptyTelemetry
       EventName="WorkloadPublishProperties"
       EventData="@(WorkloadPublishProperties)"
     />
   </Target>
-
   <Target Name="_WorkloadGatherTelemetryData">
     <PropertyGroup>
       <_WorkloadUsesBlazorWasm>$(UsingMicrosoftNETSdkBlazorWebAssembly)</_WorkloadUsesBlazorWasm>
@@ -70,7 +68,6 @@
         >true</_WorkloadUsesStripILAfterAOT
       >
     </PropertyGroup>
-
     <PropertyGroup>
       <_WorkloadUsesOther
         Condition="'$([System.IO.Path]::GetFileName(&quot;%(ReferencePath.Identity)&quot;).ToLowerInvariant())' == 'avalonia.dll'"

@@ -5,11 +5,9 @@
     <IsPartialFacadeAssembly>true</IsPartialFacadeAssembly>
     <UseCompilerGeneratedDocXmlFile>false</UseCompilerGeneratedDocXmlFile>
   </PropertyGroup>
-
   <ItemGroup>
     <Compile Include="System\Xml\XPath\XDocumentExtensions.cs" />
   </ItemGroup>
-
   <ItemGroup>
     <ProjectReference
       Include="$(LibrariesProjectRoot)System.Private.Xml\src\System.Private.Xml.csproj"

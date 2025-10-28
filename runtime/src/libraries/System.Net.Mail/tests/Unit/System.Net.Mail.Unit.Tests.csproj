@@ -266,7 +266,6 @@
       Link="Common\System\Net\ContextAwareResult.Windows.cs"
     />
   </ItemGroup>
-
   <!-- Non Browser specific files - internal and security -->
   <ItemGroup Condition="'$(TargetPlatformIdentifier)' != 'browser'">
     <Compile
@@ -290,7 +289,6 @@
       Link="ProductionCode\SmtpConnection.Auth.cs"
     />
   </ItemGroup>
-
   <ItemGroup>
     <!-- Do not reference these assemblies from the TargetingPack since we are building part of the source code for tests. -->
     <DefaultReferenceExclusion Include="System.Net.Mail" />

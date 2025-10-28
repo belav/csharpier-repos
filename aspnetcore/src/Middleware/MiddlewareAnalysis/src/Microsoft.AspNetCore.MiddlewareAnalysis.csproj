@@ -6,7 +6,6 @@
     <PackageTags>aspnetcore;diagnostics</PackageTags>
     <Nullable>enable</Nullable>
   </PropertyGroup>
-
   <ItemGroup>
     <Reference Include="Microsoft.AspNetCore.Hosting.Abstractions" />
     <Reference Include="Microsoft.Extensions.DependencyInjection.Abstractions" />

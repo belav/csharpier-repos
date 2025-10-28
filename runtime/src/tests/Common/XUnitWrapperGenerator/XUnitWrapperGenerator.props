@@ -20,7 +20,6 @@
     <CompilerVisibleItemMetadata Include="AdditionalFiles" MetadataName="TestDisplayName" />
     <CompilerVisibleItemMetadata Include="AdditionalFiles" MetadataName="SingleTestDisplayName" />
   </ItemGroup>
-
   <Target Name="AddOutOfProcessTestAssembliesToCompilation" AfterTargets="ResolveReferences">
     <ItemGroup>
       <OutOfProcessTests

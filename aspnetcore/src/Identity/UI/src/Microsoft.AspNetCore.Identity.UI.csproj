@@ -7,9 +7,7 @@
     <PackageTags>aspnetcore;identity;membership;razorpages</PackageTags>
     <EnableDefaultRazorGenerateItems>false</EnableDefaultRazorGenerateItems>
     <AddRazorSupportForMvc>true</AddRazorSupportForMvc>
-
     <PackageThirdPartyNoticesFile>$(MSBuildThisFileDirectory)THIRD-PARTY-NOTICES.TXT</PackageThirdPartyNoticesFile>
-
     <StaticWebAssetBasePath>Identity</StaticWebAssetBasePath>
     <ProvideApplicationPartFactoryAttributeTypeName>Microsoft.AspNetCore.Mvc.ApplicationParts.NullApplicationPartFactory, Microsoft.AspNetCore.Mvc.Core</ProvideApplicationPartFactoryAttributeTypeName>
     <DisableStaticWebAssetsBuildPropsFileGeneration>true</DisableStaticWebAssetsBuildPropsFileGeneration>
@@ -18,11 +16,9 @@
     <StaticWebAssetsDisableProjectBuildTransitivePropsFileGeneration>true</StaticWebAssetsDisableProjectBuildTransitivePropsFileGeneration>
     <StaticWebAssetsGetBuildAssetsTargets>GetIdentityUIAssets</StaticWebAssetsGetBuildAssetsTargets>
   </PropertyGroup>
-
   <ItemGroup>
     <Compile Include="$(SharedSourceRoot)DefaultMessageEmailSender.cs" />
   </ItemGroup>
-
   <ItemGroup>
     <None Include="@(Content)" />
     <Content Remove="@(Content)" />
@@ -30,7 +26,6 @@
     <None Include="buildMultiTargeting\*" Pack="true" PackagePath="buildMultiTargeting\" />
     <None Include="buildTransitive\*" Pack="true" PackagePath="buildTransitive\" />
   </ItemGroup>
-
   <ItemGroup>
     <Reference Include="Microsoft.AspNetCore.Identity" />
     <Reference Include="Microsoft.AspNetCore.Mvc" />
@@ -38,18 +33,15 @@
     <Reference Include="Microsoft.Extensions.FileProviders.Embedded" />
     <Reference Include="Microsoft.Extensions.Identity.Stores" />
   </ItemGroup>
-
   <Target Name="SetupRazorInputs" BeforeTargets="ResolveRazorGenerateInputs">
     <ItemGroup>
       <_RazorGenerate Include="Areas\Identity\Pages\**\*.cshtml" />
-
       <RazorGenerate
         Include="@(_RazorGenerate)"
         Link="Areas\Identity\Pages\%(RecursiveDir)%(Filename)%(Extension)"
       />
     </ItemGroup>
   </Target>
-
   <Target Name="GetIdentityUIAssets" Returns="@(ReferenceAsset)">
     <PropertyGroup>
       <_ReferenceAssetContentRoot Condition="'$(IdentityDefaultUIFramework)' == 'Bootstrap5'"
@@ -89,7 +81,6 @@
       </ReferenceAsset>
     </ItemGroup>
   </Target>
-
   <Target Name="_GenerateIdentityUIPackItems" BeforeTargets="GenerateStaticWebAssetsPackFiles">
     <ItemGroup>
       <V4AssetsCandidates Include="assets\V4\**" />
@@ -123,7 +114,6 @@
     >
       <Output TaskParameter="Assets" ItemName="V5Assets" />
     </DefineStaticWebAssets>
-
     <GenerateStaticWebAsssetsPropsFile
       StaticWebAssets="@(V4Assets)"
       PackagePathPrefix="staticwebassets/V4"
@@ -134,7 +124,6 @@
       PackagePathPrefix="staticwebassets/V5"
       TargetPropsFilePath="$(IntermediateOutputPath)IdentityUI.V5.targets"
     />
-
     <ComputeStaticWebAssetsTargetPaths
       Assets="@(V4Assets)"
       PathPrefix="staticwebassets/V4"
@@ -149,7 +138,6 @@
     >
       <Output TaskParameter="AssetsWithTargetPath" ItemName="_PackStaticWebAssetWithTargetPath" />
     </ComputeStaticWebAssetsTargetPaths>
-
     <ItemGroup>
       <StaticWebAssetPackageFile Include="$(IntermediateOutputPath)IdentityUI.V4.targets">
         <PackagePath>build\Microsoft.AspNetCore.StaticWebAssets.V4.targets</PackagePath>

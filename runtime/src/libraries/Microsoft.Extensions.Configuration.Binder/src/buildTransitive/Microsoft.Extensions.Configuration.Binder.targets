@@ -3,7 +3,6 @@
     <!-- The configuration binding source generator uses a preview version of the compiler interceptors feature. Enable it implicitly when the generator is enabled. -->
     <InterceptorsPreviewNamespaces>$(InterceptorsPreviewNamespaces);Microsoft.Extensions.Configuration.Binder.SourceGeneration</InterceptorsPreviewNamespaces>
   </PropertyGroup>
-
   <Target
     Name="_Microsoft_Extensions_Configuration_Binder_RemoveAnalyzer"
     Condition="'$(EnableConfigurationBindingGenerator)' != 'true'"
@@ -13,7 +12,6 @@
       <Analyzer Remove="@(Analyzer->WithMetadataValue('NuGetPackageId', 'Microsoft.Extensions.Configuration.Binder'))" />
     </ItemGroup>
   </Target>
-
   <Target
     Name="NETStandardCompatError_Microsoft_Extensions_Configuration_Binder"
     Condition="'$(SuppressTfmSupportBuildWarnings)' == ''"

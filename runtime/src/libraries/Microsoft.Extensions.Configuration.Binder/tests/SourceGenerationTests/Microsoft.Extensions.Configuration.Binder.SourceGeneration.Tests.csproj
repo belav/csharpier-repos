@@ -9,7 +9,6 @@
     <InterceptorsPreviewNamespaces>$(InterceptorsPreviewNamespaces);Microsoft.Extensions.Configuration.Binder.SourceGeneration</InterceptorsPreviewNamespaces>
     <EnableConfigurationBindingGenerator>true</EnableConfigurationBindingGenerator>
   </PropertyGroup>
-
   <PropertyGroup>
     <DefineConstants>$(DefineConstants);BUILDING_SOURCE_GENERATOR_TESTS;ROSLYN4_0_OR_GREATER;ROSLYN4_4_OR_GREATER</DefineConstants>
     <DefineConstants Condition="'$(LaunchTestDebugger)' == 'true'"
@@ -19,14 +18,12 @@
       >$(DefineConstants);UPDATE_BASELINES</DefineConstants
     >
   </PropertyGroup>
-
   <ItemGroup Condition="'$(TargetFrameworkIdentifier)' != '.NETCoreApp'">
     <Compile
       Include="$(CoreLibSharedDir)System\Runtime\Versioning\RequiresPreviewFeaturesAttribute.cs"
       Link="System\Runtime\Versioning\RequiresPreviewFeaturesAttribute.cs"
     />
   </ItemGroup>
-
   <ItemGroup>
     <Compile
       Include="$(CommonPath)..\tests\SourceGenerators\RoslynTestUtils.cs"
@@ -70,7 +67,6 @@
     />
     <Compile Include="ConfigurationBinderTests.Generator.cs" />
   </ItemGroup>
-
   <ItemGroup>
     <PackageReference Include="Microsoft.CodeAnalysis" Version="$(MicrosoftCodeAnalysisVersion)" />
     <ProjectReference
@@ -107,12 +103,10 @@
       ReferenceOutputAssembly="true"
     />
   </ItemGroup>
-
   <ItemGroup>
     <Content Include="Baselines\**\*;">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-
     <Compile Include="ConfigBindingGenTestDriver.cs" />
     <Compile Include="GeneratorTests.cs" />
     <Compile Include="GeneratorTests.Baselines.cs" />
@@ -120,7 +114,6 @@
     <Compile Include="GeneratorTests.Helpers.cs" />
     <Compile Include="GeneratorTests.Incremental.cs" />
   </ItemGroup>
-
   <Target Name="FixIncrementalCoreCompileWithAnalyzers" BeforeTargets="CoreCompile">
     <ItemGroup>
       <CustomAdditionalCompileInputs Include="@(Analyzer)" />

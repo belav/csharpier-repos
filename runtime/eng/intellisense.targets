@@ -11,11 +11,9 @@
       Condition="'$(IntellisensePackageXmlFilePath)' == '' and Exists($(IntellisensePackageXmlFilePathFromDotNetPlatExtFolder))"
       >$(IntellisensePackageXmlFilePathFromDotNetPlatExtFolder)</IntellisensePackageXmlFilePath
     >
-
     <!-- Suppress "CS1591 - Missing XML comment for publicly visible type or member" compiler errors when the intellisense package xml file is used. -->
     <NoWarn Condition="'$(SkipIntellisenseNoWarnCS1591)' != 'true'">$(NoWarn);1591</NoWarn>
   </PropertyGroup>
-
   <!-- Flow these properties to consuming projects for Microsoft.Internal.Runtime.DotNetApiDocs.Transport.proj to only
        include the source of truth compiler generated documentation files. -->
   <ItemDefinitionGroup>
@@ -28,14 +26,12 @@
       >
     </TargetPathWithTargetPlatformMoniker>
   </ItemDefinitionGroup>
-
   <ItemGroup>
     <PackageDownload
       Include="Microsoft.Private.Intellisense"
       Version="[$(MicrosoftPrivateIntellisenseVersion)]"
     />
   </ItemGroup>
-
   <!-- Replace the compiler generated xml file in the obj folder with the one that comes from the intellisense package. -->
   <Target
     Name="ChangeDocumentationFileForPackaging"
@@ -47,7 +43,6 @@
       <DocFileItem Include="$(IntellisensePackageXmlFilePath)" />
     </ItemGroup>
   </Target>
-
   <!-- Allow P2Ps to retrieve the DocFileItem path. -->
   <Target
     Name="AnnotateTargetPathWithTargetPlatformMonikerWithDocFileItem"

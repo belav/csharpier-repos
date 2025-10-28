@@ -2,8 +2,6 @@
 Description:  Whitespace is not permitted in uris
 Expect:       UnexpectedWhitespace{parent:feed,element:logo}
 -->
-
-
 <feed xmlns="http://www.w3.org/2005/Atom">
   <title>Example Feed</title>
   <link href="http://contoso.com/" />
@@ -15,7 +13,6 @@ Expect:       UnexpectedWhitespace{parent:feed,element:logo}
   <logo>
     http://www.contoso.com/logo.gif
   </logo>
-
   <entry>
     <title>Atom-Powered Robots Run Amok</title>
     <link href="http://contoso.com/2003/12/13/atom03" />

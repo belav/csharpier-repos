@@ -5,9 +5,7 @@
     <!-- always set SelfContained when running to use Mono on desktop -->
     <SelfContained>true</SelfContained>
   </PropertyGroup>
-
   <UsingTask TaskName="MonoAOTCompiler" AssemblyFile="$(MonoAOTCompilerTasksAssemblyPath)" />
-
   <Target
     Name="AOTCompileApp"
     Condition="'$(RunAOTCompilation)' == 'true'"
@@ -18,11 +16,9 @@
       <_AotLibraryFormat>Dylib</_AotLibraryFormat>
       <UseAotDataFile>false</UseAotDataFile>
     </PropertyGroup>
-
     <ItemGroup>
       <AotInputAssemblies Include="$(PublishDir)\*.dll" />
     </ItemGroup>
-
     <MonoAOTCompiler
       CompilerBinaryPath="@(MonoAotCrossCompiler->WithMetadataValue('RuntimeIdentifier','$(TargetOS)-$(TargetArchitecture.ToLowerInvariant())'))"
       OutputType="$(_AotOutputType)"
@@ -40,18 +36,14 @@
       <Output TaskParameter="CompiledAssemblies" ItemName="BundleAssemblies" />
     </MonoAOTCompiler>
   </Target>
-
   <UsingTask TaskName="ILStrip" AssemblyFile="$(MonoTargetsTasksAssemblyPath)" />
-
   <Target Name="StripILCode" Condition="'$(StripILCode)' == 'true'" AfterTargets="AOTCompileApp">
     <PropertyGroup>
       <TrimIndividualMethods>true</TrimIndividualMethods>
     </PropertyGroup>
-
     <ILStrip TrimIndividualMethods="$(TrimIndividualMethods)" Assemblies="@(BundleAssemblies)">
       <Output TaskParameter="TrimmedAssemblies" ItemName="TrimmedAssemblies" />
     </ILStrip>
-
     <Copy
       SourceFiles="@(TrimmedAssemblies->Metadata('TrimmedAssemblyFileName'))"
       DestinationFiles="@(TrimmedAssemblies)"

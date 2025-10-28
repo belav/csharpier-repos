@@ -5,7 +5,6 @@
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     <IsTestAssetProject>true</IsTestAssetProject>
   </PropertyGroup>
-
   <ItemGroup>
     <Compile Include="$(KestrelSharedSourceRoot)KnownHeaders.cs" />
     <Compile
@@ -37,12 +36,10 @@
       Link="Shared\runtime\Http3\%(Filename)%(Extension)"
     />
   </ItemGroup>
-
   <ItemGroup>
     <Reference Include="Microsoft.AspNetCore.Hosting" />
     <Reference Include="Microsoft.AspNetCore.Http.Features" />
   </ItemGroup>
-
   <PropertyGroup>
     <StartWorkingDirectory>$(MSBuildThisFileDirectory)..\..\</StartWorkingDirectory>
     <StartArguments>Core/src/Internal/Http/HttpHeaders.Generated.cs Core/src/Internal/Http/HttpProtocol.Generated.cs Core/src/Internal/Infrastructure/HttpUtilities.Generated.cs shared/TransportMultiplexedConnection.Generated.cs shared/TransportConnection.Generated.cs</StartArguments>

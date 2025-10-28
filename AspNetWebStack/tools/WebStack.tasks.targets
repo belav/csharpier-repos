@@ -24,7 +24,6 @@
       >$(MSBuildToolsPath)\$(BuildTaskAssemblyReference).dll</CodeTaskFactoryAssemblyFile
     >
   </PropertyGroup>
-
   <!-- This task does not support concurrent execution from multiple project files. Its use is only appropriate when
         NuGet.exe is not in use. -->
   <UsingTask
@@ -117,7 +116,6 @@
       </Code>
     </Task>
   </UsingTask>
-
   <UsingTask
     TaskName="PrintTestRunSummary"
     TaskFactory="CodeTaskFactory"

@@ -9,7 +9,6 @@
   <ItemGroup>
     <ProjectReference Include="ApplyUpdateReferencedAssembly\ApplyUpdateReferencedAssembly.csproj" />
   </ItemGroup>
-
   <Target
     Name="PreserveEnCAssembliesFromLinking"
     Condition="'$(TargetOS)' == 'browser' and '$(EnableAggressiveTrimming)' == 'true'"
@@ -23,7 +22,6 @@
       />
     </ItemGroup>
   </Target>
-
   <Target
     Name="IncludeDeltasInWasmBundle"
     BeforeTargets="PrepareForWasmBuildApp"

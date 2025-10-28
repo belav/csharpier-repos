@@ -3,7 +3,6 @@
     <TargetFramework>$(DefaultNetCoreTargetFramework)</TargetFramework>
     <RootNamespace>Microsoft.AspNetCore.Diagnostics.HealthChecks</RootNamespace>
   </PropertyGroup>
-
   <ItemGroup>
     <Reference Include="Microsoft.EntityFrameworkCore.InMemory" />
     <Reference Include="Microsoft.Extensions.DependencyInjection" />

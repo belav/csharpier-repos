@@ -48,7 +48,6 @@ The .NET Foundation licenses this file to you under the MIT license.
     <EventPipeName>eventpipe-disabled</EventPipeName>
     <EventPipeName Condition="'$(EventSourceSupport)' == 'true'">eventpipe-enabled</EventPipeName>
   </PropertyGroup>
-
   <!-- Ensure that runtime-specific paths have already been set -->
   <Target Name="SetupOSSpecificProps" DependsOnTargets="$(IlcDynamicBuildPropertyDependencies)">
     <ItemGroup>
@@ -62,12 +61,10 @@ The .NET Foundation licenses this file to you under the MIT license.
       <NativeLibrary Condition="'$(IlcMultiModule)' == 'true'" Include="$(SharedLibrary)" />
       <NativeLibrary Include="$(IlcSdkPath)$(StandaloneGCSupportName)$(LibrarySuffix)" />
     </ItemGroup>
-
     <ItemGroup>
       <NetCoreAppNativeLibrary Include="System.Globalization.Native" />
       <NetCoreAppNativeLibrary Include="System.IO.Compression.Native" />
     </ItemGroup>
-
     <ItemGroup>
       <DirectPInvoke Include="@(NetCoreAppNativeLibrary->'%(Identity)')" />
       <NetCoreAppNativeLibrary Include="@(NetCoreAppNativeLibrary->'%(Identity)')">
@@ -75,7 +72,6 @@ The .NET Foundation licenses this file to you under the MIT license.
       </NetCoreAppNativeLibrary>
       <NativeLibrary Include="@(NetCoreAppNativeLibrary->'%(EscapedPath)')" />
     </ItemGroup>
-
     <ItemGroup>
       <SdkNativeLibrary Include="advapi32.lib" />
       <SdkNativeLibrary Include="bcrypt.lib" />
@@ -93,11 +89,9 @@ The .NET Foundation licenses this file to you under the MIT license.
       <SdkNativeLibrary Include="version.lib" />
       <SdkNativeLibrary Include="ws2_32.lib" />
     </ItemGroup>
-
     <ItemGroup>
       <DirectPInvokeList Include="$(MSBuildThisFileDirectory)WindowsAPIs.txt" />
     </ItemGroup>
-
     <ItemGroup>
       <LinkerArg Condition="'$(NativeLib)' == 'Shared'" Include="/DLL" />
       <LinkerArg Include="@(NativeLibrary->'&quot;%(Identity)&quot;')" />
@@ -114,18 +108,15 @@ The .NET Foundation licenses this file to you under the MIT license.
       <LinkerArg Include="/NATVIS:&quot;$(MSBuildThisFileDirectory)NativeAOT.natvis&quot;" />
       <LinkerArg Condition="'$(ControlFlowGuard)' == 'Guard'" Include="/guard:cf" />
     </ItemGroup>
-
     <ItemGroup Condition="!Exists('$(IlcSdkPath)debugucrt.txt')">
       <!-- Force ucrt to be dynamically linked for release runtime -->
       <LinkerArg Include="/NODEFAULTLIB:libucrt.lib" />
       <LinkerArg Include="/DEFAULTLIB:ucrt.lib" />
     </ItemGroup>
-
     <ItemGroup Condition="'$(Configuration)' != 'Debug'">
       <LinkerArg Include="/OPT:REF" />
       <LinkerArg Include="/OPT:ICF" />
     </ItemGroup>
-
     <Exec
       Condition="'$(IlcUseEnvironmentalTools)' != 'true'"
       Command="&quot;$(MSBuildThisFileDirectory)findvcvarsall.bat&quot; $(_targetArchitecture)"
@@ -136,17 +127,14 @@ The .NET Foundation licenses this file to you under the MIT license.
       <Output TaskParameter="ConsoleOutput" PropertyName="_FindVCVarsallOutput" />
       <Output TaskParameter="ExitCode" PropertyName="_VCVarsAllFound" />
     </Exec>
-
     <ItemGroup Condition="'$(_VCVarsAllFound)' == '0'">
       <AdditionalNativeLibraryDirectories Include="$(_FindVCVarsallOutput.Split(`#`)[1].Split(';'))" />
     </ItemGroup>
-
     <PropertyGroup Condition="'$(_VCVarsAllFound)' == '0'">
       <_CppToolsDirectory>$(_FindVCVarsallOutput.Split(`#`)[0])</_CppToolsDirectory>
       <CppLinker>$(_CppToolsDirectory)link.exe</CppLinker>
       <CppLibCreator>$(_CppToolsDirectory)lib.exe</CppLibCreator>
     </PropertyGroup>
-
     <Error
       Condition="'$(_VCVarsAllFound)' == '1'"
       Text="Platform linker not found. Ensure you have all the required prerequisites documented at https://aka.ms/nativeaot-prerequisites, in particular the Desktop Development for C++ workload in Visual Studio. For ARM64 development also install C++ ARM64 build tools."

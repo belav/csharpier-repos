@@ -7,16 +7,13 @@
     <PackageTags>$(PackageTags);taghelper;taghelpers</PackageTags>
     <IsPackable>false</IsPackable>
   </PropertyGroup>
-
   <ItemGroup>
     <Compile Include="$(SharedSourceRoot)CopyOnWriteDictionary\**\*.cs" />
   </ItemGroup>
-
   <ItemGroup>
     <Reference Include="Microsoft.AspNetCore.Razor" />
     <Reference Include="Microsoft.AspNetCore.Html.Abstractions" />
   </ItemGroup>
-
   <ItemGroup>
     <InternalsVisibleTo Include="Microsoft.AspNetCore.Razor.Runtime.Test" />
   </ItemGroup>

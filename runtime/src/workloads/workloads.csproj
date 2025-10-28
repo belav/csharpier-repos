@@ -1,11 +1,9 @@
 ﻿<Project DefaultTargets="Restore;Build">
   <Import Sdk="Microsoft.NET.Sdk" Project="Sdk.props" />
-
   <PropertyGroup>
     <TargetFramework>$(NetCoreAppCurrent)</TargetFramework>
     <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
     <IncludeBuildOutput>false</IncludeBuildOutput>
-
     <WorkloadIntermediateOutputPath>$(ArtifactsObjDir)workloads/</WorkloadIntermediateOutputPath>
     <VSTemp>$(WorkloadIntermediateOutputPath)VS/</VSTemp>
     <WorkloadOutputPath>$(ArtifactsBinDir)workloads/</WorkloadOutputPath>
@@ -18,7 +16,6 @@
     >
     <RunAnalyzers>false</RunAnalyzers>
   </PropertyGroup>
-
   <!-- Arcade -->
   <PropertyGroup>
     <!-- Temp directory for light command layouts -->
@@ -26,13 +23,11 @@
     <!-- Directory for the zipped up light command package -->
     <LightCommandPackagesDir>$(ArtifactsNonShippingPackagesDir)</LightCommandPackagesDir>
   </PropertyGroup>
-
   <PropertyGroup>
     <WixToolsetPath>$(PkgMicrosoft_Signed_Wix)\tools</WixToolsetPath>
     <SwixPluginPath>$(PkgMicroBuild_Plugins_SwixBuild_Dotnet)</SwixPluginPath>
     <SwixBuildTargets>$(SwixPluginPath)\build\MicroBuild.Plugins.SwixBuild.targets</SwixBuildTargets>
   </PropertyGroup>
-
   <ItemGroup>
     <PackageReference
       Include="Microsoft.DotNet.Build.Tasks.Workloads"
@@ -55,9 +50,7 @@
       GeneratePathProperty="true"
     />
   </ItemGroup>
-
   <Import Sdk="Microsoft.NET.Sdk" Project="Sdk.targets" />
-
   <Target
     Name="Build"
     DependsOnTargets="GetAssemblyVersion;_GetVersionProps;_GenerateMsiVersionString"
@@ -130,7 +123,6 @@
         Title=".NET Windows Runtimes"
         Description=".NET runtime components for Windows execution."
       />
-
       <_ComponentResources
         Include="microsoft-net-runtime-mono-tooling-net7"
         Title=".NET 7.0 Shared Mobile Build Tools"
@@ -186,7 +178,6 @@
         Title=".NET 7.0 Windows Runtimes"
         Description=".NET 7.0 runtime components for Windows execution."
       />
-
       <_ComponentResources
         Include="microsoft-net-runtime-mono-tooling-net6"
         Title=".NET 6.0 Shared Mobile Build Tools"
@@ -242,15 +233,12 @@
         Title=".NET 6.0 Windows Runtimes"
         Description=".NET 6.0 runtime components for Windows execution."
       />
-
       <ComponentResources Include="@(_ComponentResources)" Version="$(FileVersion)" />
     </ItemGroup>
-
     <!-- BAR requires having version information in blobs -->
     <PropertyGroup>
       <VersionedVisualStudioSetupInsertionPath>$(VisualStudioSetupInsertionPath)$(SDKBundleVersion)\</VersionedVisualStudioSetupInsertionPath>
     </PropertyGroup>
-
     <!-- Shorten package names to avoid long path issues in Visual Studio -->
     <ItemGroup>
       <!-- These need to be in order - matching rules will try in order. -->
@@ -267,7 +255,6 @@
         <Replacement>Microsoft</Replacement>
       </ShortNames>
     </ItemGroup>
-
     <ItemGroup>
       <ManifestPackages
         Include="$(PackageSource)Microsoft.NET.Workload.Mono.ToolChain.*Manifest-%(WorkloadSdkBandVersions.Identity)*.*.nupkg"
@@ -275,7 +262,6 @@
         SupportsMachineArch="%(SupportsMachineArch)"
       />
     </ItemGroup>
-
     <CreateVisualStudioWorkload
       BaseIntermediateOutputPath="$(WorkloadIntermediateOutputPath)"
       AllowMissingPacks="True"
@@ -291,7 +277,6 @@
       <Output TaskParameter="SwixProjects" ItemName="SwixProjects" />
       <Output TaskParameter="Msis" ItemName="Msis" />
     </CreateVisualStudioWorkload>
-
     <!-- Split SWIX projects for packs and components/manifests and build them into separate folders. This allows us to consume pack-only drops
          across multiple VS builds to support multi-targeting. -->
     <ItemGroup>
@@ -315,25 +300,21 @@
       />
       <PartitionedSwixProjects Include="@(SwixWorkloadPackProjects);@(SwixComponentsAndManifests);@(SwixPreviewComponentsAndManifests)" />
     </ItemGroup>
-
     <!-- Can't build in parallel to the same output folder because of a shared file from the SWIX compiler. -->
     <MSBuild
       Projects="@(PartitionedSwixProjects)"
       Properties="SwixBuildTargets=$(SwixBuildTargets);ManifestOutputPath=%(ManifestOutputPath)"
     />
-
     <!-- Create the zip files used for VSDROP creation. -->
     <ItemGroup>
       <SdkFeatureBand Include="%(SwixProjects.SdkFeatureBand)" />
     </ItemGroup>
-
     <ItemGroup>
       <VSDrop
         Include="%(PartitionedSwixProjects.ZipFile)"
         SourceDirectory="%(ManifestOutputPath)"
       />
     </ItemGroup>
-
     <MakeDir Directories="$(ArtifactsNonShippingPackagesDir)" />
     <MakeDir Directories="$(VisualStudioSetupInsertionPath)" />
     <ZipDirectory
@@ -341,19 +322,16 @@
       SourceDirectory="%(SourceDirectory)"
       DestinationFile="$(VisualStudioSetupInsertionPath)%(VSDrop.Identity)"
     />
-
     <!-- Gather .wixobj files for post-build signing. We'll have to batch since we generated multiple MSIs in the previous step. -->
     <MSBuild
       Projects="$(MSBuildProjectFile)"
       Properties="_WixObjDir=%(Msis.WixObj);_Msi=%(Msis.Identity)"
       Targets="CreateWixPack"
     />
-
     <!-- Build all the MSI payload packages for NuGet. -->
     <ItemGroup>
       <MsiPackageProjects Include="%(Msis.PackageProject)" />
     </ItemGroup>
-
     <!-- We disable PackageValidation which runs because these projects import the repo's Directory.Build.props and Directory.Build.targets file. -->
     <MSBuild
       Projects="@(MsiPackageProjects)"
@@ -361,13 +339,11 @@
       Targets="restore;pack"
     />
   </Target>
-
   <!-- Target to create a single wixpack for signing -->
   <Target Name="CreateWixPack">
     <ItemGroup>
       <_WixObj Include="$(_WixObjDir)\**\*.wixobj" />
     </ItemGroup>
-
     <CreateLightCommandPackageDrop
       LightCommandWorkingDir="$(LightCommandObjDir)"
       OutputFolder="$(LightCommandPackagesDir)"
@@ -380,20 +356,17 @@
       <Output TaskParameter="OutputFile" PropertyName="_LightCommandPackageNameOutput" />
     </CreateLightCommandPackageDrop>
   </Target>
-
   <!-- These are just individual targets for testing local builds. -->
   <Target Name="BuildSwixProjects">
     <ItemGroup>
       <SwixProjects Include="$(WorkloadIntermediateOutputPath)**\*.swixproj" />
     </ItemGroup>
-
     <MSBuild
       Projects="@(SwixProjects)"
       BuildInParallel="true"
       Properties="SwixBuildTargets=$(SwixBuildTargets);ManifestOutputPath=$(VisualStudioSetupInsertionPath)"
     />
   </Target>
-
   <Target Name="_GetVersionProps">
     <PropertyGroup>
       <_MajorVersion>$([System.Version]::Parse('$(AssemblyVersion)').Major)</_MajorVersion>
@@ -402,7 +375,6 @@
       <_BuildNumber>$([System.Version]::Parse('$(AssemblyVersion)').Revision)</_BuildNumber>
     </PropertyGroup>
   </Target>
-
   <Target Name="_GenerateMsiVersionString">
     <PropertyGroup>
       <VersionPadding Condition="'$(VersionPadding)'==''">5</VersionPadding>
@@ -411,7 +383,6 @@
         >1996-04-01</VersionComparisonDate
       >
     </PropertyGroup>
-
     <GenerateCurrentVersion
       SeedDate="$([System.DateTime]::Now.ToString(yyyy-MM-dd))"
       OfficialBuildId="$(OfficialBuildId)"
@@ -421,7 +392,6 @@
       <Output PropertyName="BuildNumberMajor" TaskParameter="GeneratedVersion" />
       <Output PropertyName="BuildNumberMinor" TaskParameter="GeneratedRevision" />
     </GenerateCurrentVersion>
-
     <GenerateMsiVersion
       Major="$(_MajorVersion)"
       Minor="$(_MinorVersion)"

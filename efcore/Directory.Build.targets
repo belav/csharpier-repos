@@ -5,13 +5,11 @@
       Condition="'$(TargetFramework)' != '$(DefaultNetCoreTargetFramework)'"
     ></IsAotCompatible>
   </PropertyGroup>
-
   <Import Project="Sdk.targets" Sdk="Microsoft.DotNet.Arcade.Sdk" />
   <Import
     Project="eng\testing\linker\trimmingTests.targets"
     Condition="'$(IsPublishedAppTestProject)' == 'true'"
   />
-
   <Target
     Name="GetCustomAssemblyAttributes"
     BeforeTargets="GetAssemblyAttributes"
@@ -26,7 +24,6 @@
         <_Parameter1>CommitHash</_Parameter1>
         <_Parameter2>$(SourceRevisionId)</_Parameter2>
       </AssemblyAttribute>
-
       <AssemblyAttribute
         Include="System.Reflection.AssemblyMetadataAttribute"
         Condition="'$(Serviceable)' == 'true'"

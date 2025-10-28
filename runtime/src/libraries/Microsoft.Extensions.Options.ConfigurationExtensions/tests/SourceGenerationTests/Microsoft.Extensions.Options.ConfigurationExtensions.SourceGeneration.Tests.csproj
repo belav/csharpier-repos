@@ -7,20 +7,17 @@
     <EmitCompilerGeneratedFiles>true</EmitCompilerGeneratedFiles>
     <EnableConfigurationBindingGenerator>true</EnableConfigurationBindingGenerator>
   </PropertyGroup>
-
   <ItemGroup>
     <ProjectReference Include="$(LibrariesProjectRoot)Microsoft.Extensions.Configuration\src\Microsoft.Extensions.Configuration.csproj" />
     <ProjectReference Include="$(LibrariesProjectRoot)Microsoft.Extensions.DependencyInjection\src\Microsoft.Extensions.DependencyInjection.csproj" />
     <ProjectReference Include="$(LibrariesProjectRoot)Microsoft.Extensions.Options\src\Microsoft.Extensions.Options.csproj" />
   </ItemGroup>
-
   <ItemGroup>
     <ProjectReference
       Include="..\..\src\Microsoft.Extensions.Options.ConfigurationExtensions.csproj"
       SkipUseReferenceAssembly="true"
     />
   </ItemGroup>
-
   <ItemGroup>
     <Compile
       Include="$(CommonPath)..\tests\SourceGenerators\RoslynTestUtils.cs"
@@ -45,7 +42,6 @@
     />
     <Compile Include="ConfigurationExtensionsTest.Generator.cs" />
   </ItemGroup>
-
   <ItemGroup>
     <PackageReference Include="Microsoft.CodeAnalysis" Version="$(MicrosoftCodeAnalysisVersion)" />
     <ProjectReference
@@ -54,7 +50,6 @@
       ReferenceOutputAssembly="true"
     />
   </ItemGroup>
-
   <Target Name="FixIncrementalCoreCompileWithAnalyzers" BeforeTargets="CoreCompile">
     <ItemGroup>
       <CustomAdditionalCompileInputs Include="@(Analyzer)" />

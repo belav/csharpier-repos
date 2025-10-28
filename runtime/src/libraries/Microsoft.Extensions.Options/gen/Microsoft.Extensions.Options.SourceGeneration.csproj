@@ -14,7 +14,6 @@
       >$(DefineConstants);ROSLYN4_4_OR_GREATER</DefineConstants
     >
   </PropertyGroup>
-
   <ItemGroup>
     <PackageReference
       Include="Microsoft.CodeAnalysis.CSharp.Workspaces"
@@ -22,7 +21,6 @@
       PrivateAssets="all"
     />
   </ItemGroup>
-
   <ItemGroup>
     <Compile
       Include="$(CoreLibSharedDir)System\Runtime\CompilerServices\IsExternalInit.cs"

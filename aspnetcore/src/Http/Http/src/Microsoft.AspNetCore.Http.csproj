@@ -9,7 +9,6 @@
     <IsPackable>false</IsPackable>
     <IsTrimmable>true</IsTrimmable>
   </PropertyGroup>
-
   <ItemGroup>
     <Compile Include="$(SharedSourceRoot)CancellationTokenSourcePool.cs" />
     <Compile Include="$(SharedSourceRoot)CopyOnWriteDictionary\*.cs" LinkBase="Shared" />
@@ -31,7 +30,6 @@
       LinkBase="Internal"
     />
   </ItemGroup>
-
   <ItemGroup>
     <Reference Include="Microsoft.AspNetCore.Connections.Abstractions" />
     <Reference Include="Microsoft.AspNetCore.Http.Abstractions" />
@@ -41,7 +39,6 @@
     <Reference Include="Microsoft.Extensions.Options" />
     <Reference Include="Microsoft.Net.Http.Headers" />
   </ItemGroup>
-
   <ItemGroup>
     <InternalsVisibleTo Include="Microsoft.AspNetCore.Tests" />
     <InternalsVisibleTo Include="Microsoft.AspNetCore.Http.Tests" />

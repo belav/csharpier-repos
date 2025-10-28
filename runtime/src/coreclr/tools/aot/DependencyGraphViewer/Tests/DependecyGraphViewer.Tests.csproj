@@ -3,10 +3,8 @@
     <TargetFramework>$(NetCoreAppToolCurrent)-windows</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
-
     <IsPackable>false</IsPackable>
   </PropertyGroup>
-
   <ItemGroup>
     <ProjectReference Include="..\DependencyGraphViewer.csproj" />
   </ItemGroup>

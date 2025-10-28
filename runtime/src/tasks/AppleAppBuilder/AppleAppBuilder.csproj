@@ -22,7 +22,6 @@
     <Compile Include="TargetOS.cs" />
     <Compile Include="Xcode.cs" />
   </ItemGroup>
-
   <Target Name="GetFilesToPackage" Returns="@(FilesToPackage)">
     <ItemGroup>
       <FilesToPackage

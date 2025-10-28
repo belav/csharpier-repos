@@ -3,7 +3,6 @@
     <GenerateRuntimeConfigurationFiles>true</GenerateRuntimeConfigurationFiles>
     <OutputType>Exe</OutputType>
   </PropertyGroup>
-
   <ItemGroup>
     <Compile Include="GenerateHWIntrinsicTests_X86.cs" />
   </ItemGroup>

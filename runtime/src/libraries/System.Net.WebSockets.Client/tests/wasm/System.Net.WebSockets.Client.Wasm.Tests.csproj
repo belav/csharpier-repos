@@ -3,13 +3,11 @@
     Condition="'$(TargetOS)' == 'browser'"
     Project="$(CommonTestPath)System/Net/Prerequisites/LocalEchoServer.props"
   />
-
   <PropertyGroup>
     <StringResourcesPath>../../src/Resources/Strings.resx</StringResourcesPath>
     <TargetFramework>$(NetCoreAppCurrent)-browser</TargetFramework>
     <DefineConstants>$(DefineConstants);NETSTANDARD</DefineConstants>
   </PropertyGroup>
-
   <PropertyGroup Condition="'$(TargetOS)' == 'browser'">
     <WasmXHarnessArgs>--background-throttling</WasmXHarnessArgs>
     <Scenario>WasmTestOnBrowser</Scenario>
@@ -17,7 +15,6 @@
     <TestArchiveTestsDir>$(TestArchiveTestsRoot)$(OSPlatformConfig)/</TestArchiveTestsDir>
     <DefineConstants>$(DefineConstants);TARGET_BROWSER</DefineConstants>
   </PropertyGroup>
-
   <!-- Do not reference these assemblies from the TargetingPack since we are building part of the source code for tests. -->
   <ItemGroup>
     <DefaultReferenceExclusion Include="System.Configuration" />

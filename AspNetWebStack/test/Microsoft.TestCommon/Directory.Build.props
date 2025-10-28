@@ -1,6 +1,5 @@
 <Project>
   <Import Project="..\Directory.Build.props" />
-
   <PropertyGroup>
     <!-- Set base intermediate output path early for ns1_3 but still exclude everything under the obj\ folder. -->
     <BaseIntermediateOutputPath Condition=" '$(Testing_NetStandard1_3)' == 'true' "

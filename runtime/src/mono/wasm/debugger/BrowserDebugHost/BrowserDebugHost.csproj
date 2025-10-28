@@ -6,10 +6,8 @@
     <UseAppHost>false</UseAppHost>
     <RollForward>Major</RollForward>
   </PropertyGroup>
-
   <ItemGroup>
     <ProjectReference Include="..\BrowserDebugProxy\BrowserDebugProxy.csproj" />
   </ItemGroup>
-
   <Target Name="GetFilesToPackage" />
 </Project>

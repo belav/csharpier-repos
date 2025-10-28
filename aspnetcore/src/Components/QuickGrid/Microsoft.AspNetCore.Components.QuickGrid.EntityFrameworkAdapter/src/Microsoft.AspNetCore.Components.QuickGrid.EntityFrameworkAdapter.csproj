@@ -10,7 +10,6 @@
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
     <IsTrimmable>true</IsTrimmable>
   </PropertyGroup>
-
   <ItemGroup>
     <Reference Include="Microsoft.EntityFrameworkCore" />
     <Reference Include="Microsoft.AspNetCore.Components.QuickGrid" />

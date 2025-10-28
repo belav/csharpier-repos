@@ -14,7 +14,6 @@ Commonly Used Types:
 System.Security.Cryptography.X509Certificates.X509Certificate2UI
 System.Security.Cryptography.X509Certificates.X509SelectionFlag</PackageDescription>
   </PropertyGroup>
-
   <!-- DesignTimeBuild requires all the TargetFramework Derived Properties to not be present in the first property group. -->
   <PropertyGroup>
     <TargetPlatformIdentifier>$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)'))</TargetPlatformIdentifier>
@@ -23,7 +22,6 @@ System.Security.Cryptography.X509Certificates.X509SelectionFlag</PackageDescript
       >SR.PlatformNotSupported_System_Windows_Extensions</GeneratePlatformNotSupportedAssemblyMessage
     >
   </PropertyGroup>
-
   <ItemGroup Condition="'$(TargetPlatformIdentifier)' == 'windows'">
     <Compile Include="TypeForwards.cs" />
     <Compile
@@ -155,7 +153,6 @@ System.Security.Cryptography.X509Certificates.X509SelectionFlag</PackageDescript
       Condition="'$(TargetFrameworkIdentifier)' == '.NETCoreApp'"
     />
   </ItemGroup>
-
   <ItemGroup>
     <!-- Avoid a product dependency to System.Drawing.Common, this reference is only needed for TypeForwards -->
     <ProjectReference

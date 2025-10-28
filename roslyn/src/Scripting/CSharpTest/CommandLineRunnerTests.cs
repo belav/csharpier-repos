@@ -628,13 +628,11 @@ C<string>.div<bool>(10, 0)
         {
             var script = Temp.CreateFile(extension: ".csx").WriteAllText("WriteLine(42);");
 
-            var runner = CreateRunner(
-                [
-                    GacFileResolver.IsAvailable ? null : "/r:System.Console",
-                    "/u:System.Console;Alpha.Beta",
-                    script.Path,
-                ]
-            );
+            var runner = CreateRunner([
+                GacFileResolver.IsAvailable ? null : "/r:System.Console",
+                "/u:System.Console;Alpha.Beta",
+                script.Path,
+            ]);
 
             Assert.Equal(1, runner.RunInteractive());
 
@@ -744,9 +742,11 @@ Print(4);
             var dir3 = Temp.CreateDirectory();
             dir3.CreateFile("3.csx").WriteAllText(@"Print(3);");
 
-            var runner = CreateRunner(
-                [$"/loadpath:{dir1.Path}", $"/loadpaths:{dir2.Path};{dir3.Path}", main.Path]
-            );
+            var runner = CreateRunner([
+                $"/loadpath:{dir1.Path}",
+                $"/loadpaths:{dir2.Path};{dir3.Path}",
+                main.Path,
+            ]);
 
             Assert.Equal(0, runner.RunInteractive());
 
@@ -801,15 +801,13 @@ Print(new C4());
                     CreateCSharpCompilationWithCorlib("public class C4 {}", "4").EmitToArray()
                 );
 
-            var runner = CreateRunner(
-                [
-                    "/r:4.dll",
-                    $"/lib:{dir1.Path}",
-                    $"/libpath:{dir2.Path}",
-                    $"/libpaths:{dir3.Path};{dir4.Path}",
-                    main.Path,
-                ]
-            );
+            var runner = CreateRunner([
+                "/r:4.dll",
+                $"/lib:{dir1.Path}",
+                $"/libpath:{dir2.Path}",
+                $"/libpaths:{dir3.Path};{dir4.Path}",
+                main.Path,
+            ]);
 
             runner.RunInteractive();
 

@@ -3,7 +3,6 @@
 <Project>
   <Import Project="VisualStudio.targets" Condition="'$(UsingToolVSSDK)' == 'true'" />
   <Import Project="XUnit.targets" Condition="'$(IsTestProject)' == 'true'" />
-
   <!--
     Work around .editorconfig evaluation bugs in command line builds.
     https://github.com/dotnet/roslyn/issues/43371
@@ -19,10 +18,8 @@
       <Compile Include="@(_AbsoluteCompile)" />
     </ItemGroup>
   </Target>
-
   <PropertyGroup>
     <FileAlignment>512</FileAlignment>
-
     <!-- 
       Only generate our runtimeconfig.json files for net core apps. It's unnecessary in desktop projects
       but gets included in lots of output items like VSIX.
@@ -30,7 +27,6 @@
     <GenerateRuntimeConfigurationFiles Condition="'$(TargetFrameworkIdentifier)' != '.NETCoreApp'"
       >false</GenerateRuntimeConfigurationFiles
     >
-
     <!--
       When building a .NET Core exe make sure to include the template runtimeconfig.json file 
       which has all of our global settings 
@@ -39,7 +35,6 @@
       Condition="'$(TargetFrameworkIdentifier)' == '.NETCoreApp' AND '$(OutputType)' == 'Exe'"
       >$(RepositoryEngineeringDir)config\runtimeconfig.template.json</UserRuntimeConfig
     >
-
     <!--
       Disable nullable warnings when targeting anything other than our supported .NET core version(s). 
       This condition will be evaluated multiple times in multi-targeted projects hence need to be careful
@@ -51,7 +46,6 @@
       Condition="'$(DisableNullableWarnings)' == '' AND  '$(TargetFrameworks)' != '' AND '$(TargetFramework)' != '' AND '$(TargetFrameworkIdentifier)' != '.NETCoreApp'"
       >true</DisableNullableWarnings
     >
-
     <!--
       Disable code style analyzers in "older" targets for a multi-targeted project. These analyzers don't
       impact the correctness of the output, so we avoid the performance overhead where it's easy to do so.
@@ -65,7 +59,6 @@
       >true</RoslynCheckCodeStyle
     >
   </PropertyGroup>
-
   <!--
     PERF: Set default value for 'RunAnalyzersDuringBuild' to determine if analyzers should be executed.
           Default to 'false' in all non-CI builds to improve local build time (i.e. csc/vbc invocations both inside Visual Studio and from command line prompt), except if:
@@ -82,11 +75,9 @@
       >true</RunAnalyzersDuringBuild
     >
   </PropertyGroup>
-
   <PropertyGroup Condition="'$(DisableNullableWarnings)' == 'true'">
     <NoWarn>$(NoWarn);Nullable</NoWarn>
   </PropertyGroup>
-
   <!-- 
     Do not copy dependencies to the output directory of a library project, unless it's a unit test project.
   -->
@@ -94,16 +85,13 @@
     <Reference>
       <Private>False</Private>
     </Reference>
-
     <ProjectReference>
       <Private>False</Private>
     </ProjectReference>
   </ItemDefinitionGroup>
-
   <PropertyGroup Condition="'$(ProduceReferenceAssembly)' == '' and (('$(OutputType)' == 'Library' and '$(IsVsixProject)' != 'true' and '$(IsTestProject)' != 'true') or '$(OutputType)' == 'Exe' or '$(OutputType)' == 'WinExe')">
     <ProduceReferenceAssembly>true</ProduceReferenceAssembly>
   </PropertyGroup>
-
   <!-- Global Analyzer Config -->
   <ItemGroup>
     <!-- Always include Common.globalconfig -->
@@ -119,7 +107,6 @@
       Include="$(RepositoryEngineeringDir)config\globalconfigs\NonShipping.globalconfig"
     />
   </ItemGroup>
-
   <!-- Check that all shipping assemblies are packaged -->
   <Target
     Name="_CheckTestProjectTargetFileName"
@@ -128,7 +115,6 @@
   >
     <Error Text="Project output assembly is shipping (IsShipping == $(IsShipping), IsShippingAssembly == '$(IsShippingAssembly)', IsShippingPackage == '$(IsShippingPackage)') but is not packaged (IsPackable == '$(IsPackable)')" />
   </Target>
-
   <!--
     Some dependencies bring in references to UIAutomationClient and UIAutomationTypes. These conflict with the faster
     UIAComWrapper implementation used by the Roslyn integration tests. This target sets the alias for the slower
@@ -147,7 +133,6 @@
       </ReferencePath>
     </ItemGroup>
   </Target>
-
   <!--
     Chain before the .NET Core SDK GetAssemblyAttributes target to add the additional attribute.
   -->
@@ -164,13 +149,10 @@
       </AssemblyAttribute>
     </ItemGroup>
   </Target>
-
   <PropertyGroup>
     <TargetFrameworkMonikerAssemblyAttributesPath>$(IntermediateOutputPath)$(TargetFrameworkMoniker).AssemblyAttributes$(DefaultLanguageSourceExtension)</TargetFrameworkMonikerAssemblyAttributesPath>
   </PropertyGroup>
-
   <Import Project="Bootstrap.targets" Condition="'$(BootstrapBuildPath)' != ''" />
-
   <!--
     When running our determinism tests we need to copy the diagnostic file from the intermediate directory
     to the location of the binary.  This ensures .dll and .dll.key are next to each other to be picked up
@@ -187,7 +169,6 @@
       DestinationFolder="$(OutDir)"
     />
   </Target>
-
   <UsingTask
     TaskName="Microsoft.DotNet.Arcade.Sdk.CompareVersions"
     AssemblyFile="$(ArcadeSdkBuildTasksAssembly)"
@@ -196,7 +177,6 @@
     TaskName="Microsoft.DotNet.Arcade.Sdk.SingleError"
     AssemblyFile="$(ArcadeSdkBuildTasksAssembly)"
   />
-
   <Target
     Name="_CheckRequiredMSBuildVersion"
     BeforeTargets="BeforeBuild"
@@ -205,13 +185,11 @@
     <CompareVersions Left="$(MSBuildVersion)" Right="$(MinimumMSBuildVersion)">
       <Output TaskParameter="Result" PropertyName="_VersionComparisonResult" />
     </CompareVersions>
-
     <SingleError
       Text="The msbuild version $(MSBuildVersion) is below the minimum required version $(MinimumMSBuildVersion)"
       Condition="$(_VersionComparisonResult) &lt; 0"
     />
   </Target>
-
   <Target
     Name="_CheckLongPathSupport"
     BeforeTargets="BeforeBuild"
@@ -220,13 +198,11 @@
     <PropertyGroup>
       <_RoslynLongPathsEnabled>$([MSBuild]::GetRegistryValueFromView('HKEY_LOCAL_MACHINE\System\CurrentControlSet\Control\FileSystem', 'LongPathsEnabled', null, RegistryView.Registry64, RegistryView.Registry32))</_RoslynLongPathsEnabled>
     </PropertyGroup>
-
     <Warning
       Condition="'$(_RoslynLongPathsEnabled)' != '1'"
       Text="Long paths are required for this project. Please run eng\enable-long-paths.reg"
     />
   </Target>
-
   <!-- 
     This target is used to copy referenced projects to a sub-directory vs. the direct output 
     directory of the build. Useful when the referenced project is an EXE and the referencing 
@@ -249,7 +225,6 @@
       />
     </ItemGroup>
   </Target>
-
   <!-- 
     Count PublicAPIs as AdditionalFiles to get them to analyzers. This is working around
     https://github.com/dotnet/project-system/issues/2160 where AdditionalFileItemNames
@@ -259,7 +234,6 @@
   <ItemGroup>
     <AdditionalFiles Include="@(PublicAPI)" />
   </ItemGroup>
-
   <ItemGroup>
     <!-- Include BannedSymbols covering all product projects -->
     <AdditionalFiles
@@ -267,7 +241,6 @@
       Condition="'$(IsTestProject)' == 'false'"
     />
   </ItemGroup>
-
   <ItemGroup>
     <!-- Show launchSettings.json in the project if it exists. -->
     <None
@@ -275,7 +248,6 @@
       Condition="Exists('$(AppDesignerFolder)\launchSettings.json')"
     />
   </ItemGroup>
-
   <!-- 
     Add ThirdPartyNotices.rtf to all shipping NuGet packages.
   -->
@@ -287,7 +259,6 @@
       Pack="true"
     />
   </ItemGroup>
-
   <!--
     Append common text to package specific PackageDescription.
   -->
@@ -305,7 +276,6 @@
       </PackageDescription>
     </PropertyGroup>
   </Target>
-
   <!-- Make sure additional files show up in Solution Explorer -->
   <ItemGroup>
     <!--
@@ -314,7 +284,6 @@
     -->
     <AvailableItemName Include="AdditionalFiles" />
   </ItemGroup>
-
   <!--
     Default settings for analyzer packages.    
   -->
@@ -322,12 +291,10 @@
     <DevelopmentDependency>true</DevelopmentDependency>
     <IncludeBuildOutput>false</IncludeBuildOutput>
   </PropertyGroup>
-
   <ItemGroup Condition="'$(IsPackable)' == 'true' and '$(IsAnalyzer)' == 'true'">
     <!-- Analyzer packages should not have any dependencies. -->
     <PackageReference Update="@(PackageReference)" PrivateAssets="all" />
     <ProjectReference Update="@(ProjectReference)" PrivateAssets="all" />
-
     <!-- Analyzer packages should contain install scripts. -->
     <None
       Include="$(MSBuildThisFileDirectory)\..\..\src\Setup\PowerShell\install.ps1"
@@ -342,18 +309,15 @@
       Pack="true"
     />
   </ItemGroup>
-
   <!-- RestrictedInternalsVisibleTo -->
   <ItemDefinitionGroup>
     <RestrictedInternalsVisibleTo>
       <Visible>false</Visible>
     </RestrictedInternalsVisibleTo>
   </ItemDefinitionGroup>
-
   <ItemGroup>
     <InternalsVisibleTo Include="@(RestrictedInternalsVisibleTo)" Key="%(Key)" />
   </ItemGroup>
-
   <Target
     Name="PrepareGenerateRestrictedInternalsVisibleTo"
     BeforeTargets="PrepareGenerateInternalsVisibleToFile"
@@ -370,25 +334,21 @@
         >
       </_InternalsVisibleToAttribute>
     </ItemGroup>
-
     <Warning
       Condition="'%(RestrictedInternalsVisibleTo.Partner)' == '' and '%(RestrictedInternalsVisibleTo.Namespace)' == ''"
       Text="RestrictedInternalsVisibleTo items must specify the 'Partner' or 'Namespace' attribute. Target assembly: %(Identity)"
     />
   </Target>
-
   <!-- Make sure expected compile items are included -->
   <ItemGroup>
     <UnexpectedCompileExcludes Include="@(ExpectedCompile)" Exclude="@(Compile)" />
   </ItemGroup>
-
   <Target Name="_CheckUnexpectedCompileExcludes" BeforeTargets="Build">
     <Warning
       Text="Expected source file to be included as a Compile item: %(Identity)"
       Condition="'@(UnexpectedCompileExcludes)' != ''"
     />
   </Target>
-
   <!--
     Ensure TargetFrameworkMonikerAssemblyAttributeText is treated as auto-generated
   -->
@@ -404,14 +364,12 @@
       </TargetFrameworkMonikerAssemblyAttributeText>
     </PropertyGroup>
   </Target>
-
   <Target Name="_CalculateSubstituteVariablesInApplicationManifestInputsOutputs">
     <PropertyGroup>
       <_OriginalApplicationManifestPath>$(RepositoryEngineeringDir)config\app.manifest</_OriginalApplicationManifestPath>
       <_UpdatedApplicationManifestPath>$(IntermediateOutputPath)$(AssemblyName).exe.manifest</_UpdatedApplicationManifestPath>
     </PropertyGroup>
   </Target>
-
   <!--
     Sets the values of "version" and "name" attributes in assemblyIdentity element in the application manifest file
     with values $(AssemblyVersion) and $(AssemblyName) to avoid hardcoding those in the manifest file.
@@ -428,13 +386,11 @@
       SourceFiles="$(_OriginalApplicationManifestPath)"
       DestinationFiles="$(_UpdatedApplicationManifestPath)"
     />
-
     <PropertyGroup>
       <_Namespace>
         <Namespace Prefix="asm" Uri="urn:schemas-microsoft-com:asm.v1" />
       </_Namespace>
     </PropertyGroup>
-
     <!-- Update version attribute -->
     <XmlPoke
       XmlInputPath="$(_UpdatedApplicationManifestPath)"
@@ -442,7 +398,6 @@
       Query="/asm:assembly/asm:assemblyIdentity/@version"
       Namespaces="$(_Namespace)"
     />
-
     <!-- Update name attribute -->
     <XmlPoke
       XmlInputPath="$(_UpdatedApplicationManifestPath)"
@@ -450,16 +405,13 @@
       Query="/asm:assembly/asm:assemblyIdentity/@name"
       Namespaces="$(_Namespace)"
     />
-
     <PropertyGroup>
       <ApplicationManifest>$(_UpdatedApplicationManifestPath)</ApplicationManifest>
     </PropertyGroup>
-
     <ItemGroup>
       <FileWrites Include="$(_UpdatedApplicationManifestPath)" />
     </ItemGroup>
   </Target>
-
   <!-- 
     Checks assumptions made by TestUsingOptimizedRunner function in build.ps1.
   -->
@@ -472,13 +424,11 @@
       Text="Unit test project TargetFileName must end with '.UnitTests.dll': '$(TargetFileName)'"
       Condition="$(IsUnitTestProject) != $(TargetFileName.EndsWith('.UnitTests.dll'))"
     />
-
     <Error
       Text="Unit test project TargetFileName must end with '.IntegrationTests.dll': '$(TargetFileName)'"
       Condition="$(IsIntegrationTestProject) != $(TargetFileName.EndsWith('.IntegrationTests.dll'))"
     />
   </Target>
-
   <!-- Work around for https://github.com/dotnet/sdk/issues/10591 -->
   <Target
     Name="WorkAroundDotnetSdk10591"
@@ -492,7 +442,6 @@
       />
     </ItemGroup>
   </Target>
-
   <!-- Workaround for https://github.com/dotnet/msbuild/issues/7161 -->
   <Target
     Name="WorkaroundDotnetMsbuild7161"
@@ -505,7 +454,6 @@
       Condition="'@(ReferencesCopiedInThisBuild)' != ''"
     />
   </Target>
-
   <!-- Workaround for https://github.com/dotnet/runtime/pull/84936 -->
   <Target Name="ExcludeSlowJSImportGenerator" AfterTargets="ResolveTargetingPackAssets">
     <ItemGroup>
@@ -515,7 +463,6 @@
       />
     </ItemGroup>
   </Target>
-
   <Import
     Project="DoNotGenerateSatelliteAssemblies_Workaround.targets"
     Condition="'$(GenerateSatelliteAssemblies)' == 'false'"

@@ -44,7 +44,6 @@
     </RestoreSources
     >
   </PropertyGroup>
-
   <!-- Repository extensibility point -->
   <Import
     Project="$(RepositoryEngineeringDir)InternalTools.props"

@@ -6,7 +6,6 @@
          SYSLIB0037: AssemblyName members HashAlgorithm, ProcessorArchitecture, and VersionCompatibility are obsolete. -->
     <NoWarn>$(NoWarn);SYSLIB0005;SYSLIB0037</NoWarn>
   </PropertyGroup>
-
   <ItemGroup>
     <Compile
       Include="$(CommonTestPath)System\IO\TempDirectory.cs"
@@ -74,11 +73,9 @@
     <Compile Include="src\TestUtils\TestUtils.JittedRuntimes.cs" />
     <Compile Include="src\TestUtils\TypeWrapper.cs" />
   </ItemGroup>
-
   <ItemGroup>
     <ProjectReference Include="..\src\System.Reflection.MetadataLoadContext.csproj" />
   </ItemGroup>
-
   <ItemGroup Condition="'$(TargetFrameworkIdentifier)' == '.NETCoreApp'">
     <ProjectReference Include="$(CommonPath)..\tests\System\TestILAssembly\TestILAssembly.ilproj" />
     <Compile Include="src\TestUtils\FunctionPointerTestsExtensions.cs" />
@@ -99,12 +96,10 @@
       Link="Common\System\ModifiedTypeTests.cs"
     />
   </ItemGroup>
-
   <ItemGroup Condition="'$(TargetOS)' == 'browser'">
     <WasmFilesToIncludeFromPublishDir Include="System.Private.CoreLib.dll" />
     <WasmFilesToIncludeFromPublishDir Include="System.Reflection.MetadataLoadContext.Tests.dll" />
     <WasmFilesToIncludeFromPublishDir Include="mscorlib.dll" />
-
     <TrimmerRootDescriptor Include="$(MSBuildThisFileDirectory)ILLink.Descriptors.xml" />
   </ItemGroup>
 </Project>

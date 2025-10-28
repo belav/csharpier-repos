@@ -2,12 +2,10 @@
   <PropertyGroup>
     <TargetFramework>$(NetCoreAppCurrent)</TargetFramework>
   </PropertyGroup>
-
   <ItemGroup>
     <Compile Include="DispatchProxyTests.cs" />
     <Compile Include="TestTypes.cs" />
   </ItemGroup>
-
   <ItemGroup>
     <ProjectReference Include="TestDependency\System.Reflection.DispatchProxy.TestDependency.csproj" />
   </ItemGroup>

@@ -10,12 +10,10 @@
     <UseWpf>true</UseWpf>
     <ResolveAssemblyWarnOrErrorOnTargetArchitectureMismatch>None</ResolveAssemblyWarnOrErrorOnTargetArchitectureMismatch>
     <ApplyNgenOptimization>full</ApplyNgenOptimization>
-
     <!-- Vsix -->
     <CreateVsixContainer>false</CreateVsixContainer>
     <GeneratePkgDefFile>true</GeneratePkgDefFile>
     <DeployExtension>false</DeployExtension>
-
     <!-- NuGet -->
     <IsPackable>true</IsPackable>
     <NuspecFile>$(MSBuildProjectName).nuspec</NuspecFile>
@@ -393,13 +391,11 @@
     </VSCTCompile>
   </ItemGroup>
   <Import Project="$(RepositoryEngineeringDir)targets\Vsdconfig.targets" />
-
   <Target Name="GeneratePkgDefServiceRegistrations" BeforeTargets="GeneratePkgDef">
     <ItemGroup>
       <!-- Add registrations 64-bit, and 64-bit Server GC on desktop host -->
       <PkgDefBrokeredService Include="@(ServiceHubService->'%(Identity)64')" />
       <PkgDefBrokeredService Include="@(ServiceHubService->'%(Identity)64S')" />
-
       <PkgDefBrokeredService
         Include="@(InProcService)"
         ProfferingPackageId="$(RoslynPackageGuid)"

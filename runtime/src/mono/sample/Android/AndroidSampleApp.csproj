@@ -9,11 +9,9 @@
     <TrimMode>Link</TrimMode>
     <ForceAOT Condition="'$(ForceAOT)' == ''">false</ForceAOT>
   </PropertyGroup>
-
   <ItemGroup>
     <RuntimeComponents Condition="'$(DiagnosticPorts)' != ''" Include="diagnostics_tracing" />
   </ItemGroup>
-
   <Import Project="$(RepoTasksDir)AotCompilerTask\MonoAOTCompiler.props" />
   <UsingTask
     TaskName="AndroidAppBuilderTask"
@@ -25,54 +23,44 @@
     TaskName="NdkToolFinderTask"
     AssemblyFile="$(MobileBuildTasksAssemblyPath)"
   />
-
   <PropertyGroup Condition="'$(RunAOTCompilation)' == 'true'">
     <_MobileIntermediateOutputPath>$(IntermediateOutputPath)mobile</_MobileIntermediateOutputPath>
   </PropertyGroup>
-
   <Target Name="BuildApp" AfterTargets="CopyFilesToPublishDirectory">
     <PropertyGroup>
       <StripDebugSymbols>False</StripDebugSymbols>
       <StripDebugSymbols Condition="'$(Configuration)' == 'Release'">True</StripDebugSymbols>
       <ApkDir>$(PublishDir)apk\</ApkDir>
     </PropertyGroup>
-
     <ItemGroup>
       <AotInputAssemblies Include="$(PublishDir)\*.dll">
         <AotArguments>@(MonoAOTCompilerDefaultAotArguments, ';')</AotArguments>
         <ProcessArguments>@(MonoAOTCompilerDefaultProcessArguments, ';')</ProcessArguments>
       </AotInputAssemblies>
     </ItemGroup>
-
     <MakeDir Directories="$(_MobileIntermediateOutputPath)" Condition="'$(ForceAOT)' == 'true'" />
     <RemoveDir Directories="$(ApkDir)" />
-
     <Message Importance="High" Text="Path: $(PublishDir)" />
     <Message Importance="High" Text="SourceDir: $(OutputPath)" />
-
     <!-- Make sure marshal-ilgen is included in the components list. -->
     <ItemGroup>
       <RuntimeComponents Include="marshal-ilgen" KeepDuplicates="false" />
     </ItemGroup>
-
     <PropertyGroup Condition="'$(ForceAOT)' == 'true' and '$(AOTWithLibraryFiles)' == 'true'">
       <_AotOutputType>Library</_AotOutputType>
       <_AotLibraryFormat>So</_AotLibraryFormat>
       <_AotMode Condition="'$(AotMode)' == ''">Normal</_AotMode>
     </PropertyGroup>
-
     <PropertyGroup Condition="'$(ForceAOT)' == 'true' and '$(AOTWithLibraryFiles)' != 'true'">
       <_AotOutputType>AsmOnly</_AotOutputType>
       <_AotModulesTablePath>$(ApkDir)\modules.c</_AotModulesTablePath>
       <_AotMode Condition="'$(AotMode)' == ''">Full</_AotMode>
     </PropertyGroup>
-
     <PropertyGroup>
       <AndroidLibraryMinApiLevel Condition="'$(AndroidLibraryMinApiLevel)' == ''"
         >21</AndroidLibraryMinApiLevel
       >
     </PropertyGroup>
-
     <NdkToolFinderTask
       Condition="'$(AOTWithLibraryFiles)' == 'true'"
       Architecture="$(TargetArchitecture)"
@@ -86,12 +74,10 @@
       <Output TaskParameter="LdPath" PropertyName="_LdPath" />
       <Output TaskParameter="ClangPath" PropertyName="_ClangPath" />
     </NdkToolFinderTask>
-
     <PropertyGroup Condition="'$(AOTWithLibraryFiles)' == 'true'">
       <_AsPrefixPath>$([MSBuild]::EnsureTrailingSlash('$(_AsPrefixPath)'))</_AsPrefixPath>
       <_ToolPrefixPath>$([MSBuild]::EnsureTrailingSlash('$(_ToolPrefixPath)'))</_ToolPrefixPath>
     </PropertyGroup>
-
     <MonoAOTCompiler
       Condition="'$(ForceAOT)' == 'true'"
       AotModulesTablePath="$(_AotModulesTablePath)"
@@ -110,7 +96,6 @@
     >
       <Output TaskParameter="CompiledAssemblies" ItemName="BundleAssemblies" />
     </MonoAOTCompiler>
-
     <AndroidAppBuilderTask
       AppDir="$(PublishDir)"
       Assemblies="@(BundleAssemblies)"
@@ -129,20 +114,16 @@
       <Output TaskParameter="ApkBundlePath" PropertyName="ApkBundlePath" />
       <Output TaskParameter="ApkPackageId" PropertyName="ApkPackageId" />
     </AndroidAppBuilderTask>
-
     <Message Importance="High" Text="Apk:       $(ApkBundlePath)" />
     <Message Importance="High" Text="PackageId: $(ApkPackageId)" />
-
     <Exec
       Condition="'$(DeployAndRun)' == 'true' and '$(ArchiveTests)' != 'true'"
       Command="dotnet xharness android test --package-name=net.dot.HelloAndroid --instrumentation=net.dot.MonoRunner --app=$(ApkDir)/bin/HelloAndroid.apk --expected-exit-code=42 --output-directory=$(ApkDir)/log"
     />
   </Target>
-
   <ItemGroup>
     <Compile Include="Program.cs" />
   </ItemGroup>
-
   <Target
     Name="CopySampleAppToHelixTestDir"
     Condition="'$(ArchiveTests)' == 'true'"
@@ -164,7 +145,6 @@
       SourceFiles="@(_apkFiles)"
       DestinationFolder="$(HelixArchiveRunOnlyAppsDir)/%(RecursiveDir)"
     />
-
     <Message Importance="High" Text="ApkBundlePath: $(ApkBundlePath)" />
     <Message Importance="High" Text="TestArchiveTestsDir: $(TestArchiveTestsDir)" />
   </Target>

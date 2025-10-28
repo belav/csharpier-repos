@@ -19,21 +19,18 @@
     <IlcGenerateMstatFile Condition="'$(GenerateStats)' == 'true'">true</IlcGenerateMstatFile>
     <IlcGenerateDgmlFile Condition="'$(GenerateStats)' == 'true'">true</IlcGenerateDgmlFile>
   </PropertyGroup>
-
   <Import Project="$(MonoProjectRoot)\msbuild\apple\build\AppleBuild.props" />
   <Import Project="$(MonoProjectRoot)\msbuild\apple\build\AppleBuild.InTree.targets" />
   <Import
     Condition="'$(PublishAotUsingRuntimePack)' != 'true'"
     Project="$(CoreClrProjectRoot)nativeaot\BuildIntegration\Microsoft.DotNet.ILCompiler.SingleEntry.targets"
   />
-
   <PropertyGroup Condition="'$(PublishAotUsingRuntimePack)' == 'true'">
     <PublishAot>true</PublishAot>
     <MSBuildWarningsAsErrors>$(MSBuildWarningsAsErrors);NU1603</MSBuildWarningsAsErrors>
     <UseLocalTargetingRuntimePack>false</UseLocalTargetingRuntimePack>
     <RestoreAdditionalProjectSources>$([MSBuild]::NormalizeDirectory('$(RepoRoot)', 'artifacts', 'packages', '$(CoreCLRConfiguration)', 'Shipping'))</RestoreAdditionalProjectSources>
   </PropertyGroup>
-
   <ItemGroup>
     <Compile Include="..\iOS\Program.cs" Link="Program.cs" />
     <DirectPInvoke Include="__Internal" />
@@ -46,7 +43,6 @@
       Include="libbootstrapper.o"
     />
   </ItemGroup>
-
   <!-- Use locally built runtime and ilcompiler packages -->
   <Target
     Name="UpdateRuntimePackVersion"
@@ -63,7 +59,6 @@
       </KnownILCompilerPack>
     </ItemGroup>
   </Target>
-
   <!-- Run before ILC setup  -->
   <Target
     Name="ConfigureIlcPathsForiOSCrossCompilation"
@@ -77,7 +72,6 @@
       <IlcFrameworkNativePath>$(LibrariesAllBinArtifactsPath)</IlcFrameworkNativePath>
     </PropertyGroup>
   </Target>
-
   <Target
     Name="RunAppBundle"
     AfterTargets="_AppleGenerateAppBundle"

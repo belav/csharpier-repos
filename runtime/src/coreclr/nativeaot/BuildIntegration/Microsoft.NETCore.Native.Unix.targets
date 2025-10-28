@@ -34,20 +34,17 @@ The .NET Foundation licenses this file to you under the MIT license.
     >
     <IlcDefaultStackSize Condition="'$(_linuxLibcFlavor)' == 'musl'">1572864</IlcDefaultStackSize>
   </PropertyGroup>
-
   <Target Name="SetupOSSpecificProps" DependsOnTargets="$(IlcDynamicBuildPropertyDependencies)">
     <PropertyGroup>
       <FullRuntimeName>libRuntime.WorkstationGC</FullRuntimeName>
       <FullRuntimeName Condition="'$(ServerGarbageCollection)' == 'true'"
         >libRuntime.ServerGC</FullRuntimeName
       >
-
       <CrossCompileRid />
       <CrossCompileRid
         Condition="$(_hostOS) != $(_originalTargetOS) or !$(RuntimeIdentifier.EndsWith('-$(_hostArchitecture)'))"
         >$(RuntimeIdentifier)</CrossCompileRid
       >
-
       <CrossCompileArch />
       <CrossCompileArch Condition="$(CrossCompileRid.EndsWith('-x64'))">x86_64</CrossCompileArch>
       <CrossCompileArch
@@ -58,7 +55,6 @@ The .NET Foundation licenses this file to you under the MIT license.
         Condition="$(CrossCompileRid.EndsWith('-arm64')) and '$(_IsApplePlatform)' == 'true'"
         >arm64</CrossCompileArch
       >
-
       <TargetTriple />
       <TargetTriple Condition="'$(CrossCompileArch)' != ''"
         >$(CrossCompileArch)-linux-gnu</TargetTriple
@@ -75,19 +71,16 @@ The .NET Foundation licenses this file to you under the MIT license.
         Condition="'$(CrossCompileArch)' != '' and ($(CrossCompileRid.StartsWith('freebsd')))"
         >$(CrossCompileArch)-unknown-freebsd12</TargetTriple
       >
-
       <IlcRPath Condition="'$(IlcRPath)' == '' and '$(_IsApplePlatform)' != 'true'"
         >$ORIGIN</IlcRPath
       >
       <IlcRPath Condition="'$(IlcRPath)' == '' and '$(_IsApplePlatform)' == 'true'"
         >@executable_path</IlcRPath
       >
-
       <EventPipeName>libeventpipe-disabled</EventPipeName>
       <EventPipeName Condition="'$(EventSourceSupport)' == 'true'"
         >libeventpipe-enabled</EventPipeName
       >
-
       <LinkStandardCPlusPlusLibrary
         Condition="'$(LinkStandardCPlusPlusLibrary)' == '' and '$(_IsiOSLikePlatform)' == 'true' and '$(InvariantGlobalization)' != 'true'"
         >true</LinkStandardCPlusPlusLibrary
@@ -97,7 +90,6 @@ The .NET Foundation licenses this file to you under the MIT license.
         >libstandalonegc-enabled</StandaloneGCSupportName
       >
     </PropertyGroup>
-
     <ItemGroup>
       <NativeLibrary Condition="'$(IlcMultiModule)' == 'true'" Include="$(SharedLibrary)" />
       <NativeLibrary
@@ -116,7 +108,6 @@ The .NET Foundation licenses this file to you under the MIT license.
         Include="$(IlcSdkPath)libstdc++compat.a"
       />
     </ItemGroup>
-
     <ItemGroup>
       <NetCoreAppNativeLibrary Include="System.Native" />
       <NetCoreAppNativeLibrary
@@ -150,7 +141,6 @@ The .NET Foundation licenses this file to you under the MIT license.
         Condition="'$(_IsiOSLikePlatform)' == 'true' and '$(InvariantGlobalization)' != 'true'"
       />
     </ItemGroup>
-
     <ItemGroup>
       <DirectPInvoke Include="@(NetCoreAppNativeLibrary->'lib%(Identity)')" />
       <NetCoreAppNativeLibrary Include="@(NetCoreAppNativeLibrary->'%(Identity)')">
@@ -158,7 +148,6 @@ The .NET Foundation licenses this file to you under the MIT license.
       </NetCoreAppNativeLibrary>
       <NativeLibrary Include="@(NetCoreAppNativeLibrary->'%(EscapedPath)')" />
     </ItemGroup>
-
     <ItemGroup Condition="'$(StaticICULinking)' == 'true' and '$(NativeLib)' != 'Static' and '$(InvariantGlobalization)' != 'true'">
       <NativeLibrary Include="$(IntermediateOutputPath)libs/System.Globalization.Native/build/libSystem.Globalization.Native.a" />
       <DirectPInvoke Include="libSystem.Globalization.Native" />
@@ -166,7 +155,6 @@ The .NET Foundation licenses this file to you under the MIT license.
       <StaticICULibs Include="-licuio -licutu -licui18n -licuuc -licudata -lstdc++" />
       <StaticICULibs Include="-Wl,-Bdynamic" Condition="'$(StaticExecutable)' != 'true'" />
     </ItemGroup>
-
     <ItemGroup Condition="'$(StaticOpenSslLinking)' == 'true' and '$(NativeLib)' != 'Static'">
       <NativeLibrary Include="$(IntermediateOutputPath)libs/System.Security.Cryptography.Native/build/libSystem.Security.Cryptography.Native.OpenSsl.a" />
       <DirectPInvoke Include="libSystem.Security.Cryptography.Native.OpenSsl" />
@@ -174,7 +162,6 @@ The .NET Foundation licenses this file to you under the MIT license.
       <StaticSslLibs Include="-lssl -lcrypto" />
       <StaticSslLibs Include="-Wl,-Bdynamic" Condition="'$(StaticExecutable)' != 'true'" />
     </ItemGroup>
-
     <ItemGroup Condition="'$(_IsApplePlatform)' == 'true'">
       <NativeFramework Include="CoreFoundation" />
       <NativeFramework Condition="'$(_targetOS)' == 'osx'" Include="CryptoKit" />
@@ -183,7 +170,6 @@ The .NET Foundation licenses this file to you under the MIT license.
       <!-- The library builds don't reference the GSS API on tvOS builds. -->
       <NativeFramework Condition="!$(_targetOS.StartsWith('tvos'))" Include="GSS" />
     </ItemGroup>
-
     <ItemGroup>
       <NativeSystemLibrary
         Include="stdc++"
@@ -202,14 +188,12 @@ The .NET Foundation licenses this file to you under the MIT license.
       <NativeSystemLibrary Include="icucore" Condition="'$(_IsApplePlatform)' == 'true'" />
       <NativeSystemLibrary Include="m" />
     </ItemGroup>
-
     <ItemGroup>
       <ExtraLinkerArg
         Include="-segprot,__THUNKS,rx,rx"
         Condition="'$(_IsApplePlatform)' == 'true'"
       />
     </ItemGroup>
-
     <ItemGroup>
       <LinkerArg Include="-gz=zlib" Condition="'$(CompressSymbols)' != 'false'" />
       <LinkerArg Include="-fuse-ld=$(LinkerFlavor)" Condition="'$(LinkerFlavor)' != ''" />
@@ -298,12 +282,10 @@ The .NET Foundation licenses this file to you under the MIT license.
       />
       <LinkerArg Include="-Wl,--eh-frame-hdr" Condition="'$(_IsApplePlatform)' != 'true'" />
     </ItemGroup>
-
     <PropertyGroup>
       <_CommandProbe>command -v</_CommandProbe>
       <_CommandProbe Condition="$([MSBuild]::IsOSPlatform('Windows'))">where /Q</_CommandProbe>
     </PropertyGroup>
-
     <Exec
       Command="$(_CommandProbe) &quot;$(CppLinker)&quot;"
       IgnoreExitCode="true"
@@ -311,7 +293,6 @@ The .NET Foundation licenses this file to you under the MIT license.
     >
       <Output TaskParameter="ExitCode" PropertyName="_WhereLinker" />
     </Exec>
-
     <Exec
       Command="$(_CommandProbe) &quot;$(CppCompilerAndLinkerAlternative)&quot;"
       Condition="'$(CppCompilerAndLinkerAlternative)' != '' and '$(_WhereLinker)' != '0'"
@@ -320,13 +301,11 @@ The .NET Foundation licenses this file to you under the MIT license.
     >
       <Output TaskParameter="ExitCode" PropertyName="_WhereLinkerAlt" />
     </Exec>
-
     <PropertyGroup Condition="'$(CppCompilerAndLinkerAlternative)' != '' and '$(_WhereLinker)' != '0' and '$(_WhereLinkerAlt)' == '0'">
       <CppCompilerAndLinker>$(CppCompilerAndLinkerAlternative)</CppCompilerAndLinker>
       <CppLinker>$(CppCompilerAndLinker)</CppLinker>
       <_WhereLinker>0</_WhereLinker>
     </PropertyGroup>
-
     <PropertyGroup Condition="'$(ObjCopyName)' == '' and '$(_IsApplePlatform)' != 'true'">
       <ObjCopyName Condition="!$(CppCompilerAndLinker.Contains('clang'))">objcopy</ObjCopyName>
       <ObjCopyName Condition="$(CppCompilerAndLinker.Contains('clang'))">llvm-objcopy</ObjCopyName>
@@ -335,7 +314,6 @@ The .NET Foundation licenses this file to you under the MIT license.
         >objcopy</ObjCopyNameAlternative
       >
     </PropertyGroup>
-
     <Error
       Condition="'$(_WhereLinker)' != '0' and '$(_IsApplePlatform)' == 'true'"
       Text="Platform linker ('$(CppLinker)') not found in PATH. Ensure you have all the required prerequisites documented at https://aka.ms/nativeaot-prerequisites."
@@ -348,7 +326,6 @@ The .NET Foundation licenses this file to you under the MIT license.
       Condition="'$(_WhereLinker)' != '0' and '$(CppCompilerAndLinkerAlternative)' == '' and '$(_IsApplePlatform)' != 'true'"
       Text="Requested linker ('$(CppLinker)') not found in PATH."
     />
-
     <Exec
       Command="&quot;$(CppLinker)&quot; -fuse-ld=lld -Wl,--version"
       Condition="'$(LinkerFlavor)' == 'lld'"
@@ -359,11 +336,9 @@ The .NET Foundation licenses this file to you under the MIT license.
       <Output TaskParameter="ExitCode" PropertyName="_LinkerVersionStringExitCode" />
       <Output TaskParameter="ConsoleOutput" PropertyName="_LinkerVersionString" />
     </Exec>
-
     <PropertyGroup Condition="'$(_LinkerVersionStringExitCode)' == '0' and '$(_LinkerVersionString)' != ''">
       <_LinkerVersion>$([System.Text.RegularExpressions.Regex]::Match($(_LinkerVersionString), '[1-9]\d*'))</_LinkerVersion>
     </PropertyGroup>
-
     <Exec
       Command="$(_CommandProbe) &quot;$(ObjCopyName)&quot;"
       IgnoreExitCode="true"
@@ -372,7 +347,6 @@ The .NET Foundation licenses this file to you under the MIT license.
     >
       <Output TaskParameter="ExitCode" PropertyName="_WhereSymbolStripper" />
     </Exec>
-
     <Exec
       Command="$(_CommandProbe) &quot;$(ObjCopyNameAlternative)&quot;"
       IgnoreExitCode="true"
@@ -381,12 +355,10 @@ The .NET Foundation licenses this file to you under the MIT license.
     >
       <Output TaskParameter="ExitCode" PropertyName="_WhereSymbolStripperAlt" />
     </Exec>
-
     <PropertyGroup Condition="'$(ObjCopyNameAlternative)' != '' and '$(_WhereSymbolStripper)' != '0' and '$(_WhereSymbolStripperAlt)' == '0'">
       <ObjCopyName>$(ObjCopyNameAlternative)</ObjCopyName>
       <_WhereSymbolStripper>0</_WhereSymbolStripper>
     </PropertyGroup>
-
     <Error
       Condition="'$(_WhereSymbolStripper)' != '0' and '$(StripSymbols)' == 'true' and '$(ObjCopyNameAlternative)' != ''"
       Text="Symbol stripping tool ('$(ObjCopyName)' or '$(ObjCopyNameAlternative)') not found in PATH. Try installing appropriate package for $(ObjCopyName) or $(ObjCopyNameAlternative) to resolve the problem or set the StripSymbols property to false to disable symbol stripping."
@@ -395,7 +367,6 @@ The .NET Foundation licenses this file to you under the MIT license.
       Condition="'$(_WhereSymbolStripper)' != '0' and '$(StripSymbols)' == 'true' and '$(_IsApplePlatform)' != 'true'"
       Text="Symbol stripping tool ('$(ObjCopyName)') not found in PATH. Make sure '$(ObjCopyName)' is available in PATH or set the StripSymbols property to false to disable symbol stripping."
     />
-
     <Exec
       Command="command -v dsymutil &amp;&amp; command -v strip"
       IgnoreExitCode="true"
@@ -408,7 +379,6 @@ The .NET Foundation licenses this file to you under the MIT license.
       Condition="'$(_WhereSymbolStripper)' != '0' and '$(StripSymbols)' == 'true' and '$(_IsApplePlatform)' != 'true'"
       Text="Symbol stripping tools ('dsymutil' and 'strip') not found in PATH. Make sure 'dsymutil' and 'strip' are available in PATH or set the StripSymbols property to false to disable symbol stripping."
     />
-
     <Exec
       Command="dsymutil --help"
       IgnoreExitCode="true"
@@ -417,17 +387,14 @@ The .NET Foundation licenses this file to you under the MIT license.
     >
       <Output TaskParameter="ExitCode" PropertyName="_DsymUtilOutput" />
     </Exec>
-
     <Exec
       Command="CC=&quot;$(CppLinker)&quot; &quot;$(IlcHostPackagePath)/native/src/libs/build-local.sh&quot; &quot;$(IlcHostPackagePath)/&quot; &quot;$(IntermediateOutputPath)&quot; System.Globalization.Native"
       Condition="'$(StaticICULinking)' == 'true' and '$(InvariantGlobalization)' != 'true'"
     />
-
     <Exec
       Command="CC=&quot;$(CppLinker)&quot; &quot;$(IlcHostPackagePath)/native/src/libs/build-local.sh&quot; &quot;$(IlcHostPackagePath)/&quot; &quot;$(IntermediateOutputPath)&quot; System.Security.Cryptography.Native"
       Condition="'$(StaticOpenSslLinking)' == 'true'"
     />
-
     <PropertyGroup Condition="'$(_IsApplePlatform)' == 'true' and '$(StripSymbols)' == 'true' and $(_DsymUtilOutput.Contains('--minimize'))">
       <DsymUtilOptions>$(DsymUtilOptions) --minimize</DsymUtilOptions>
     </PropertyGroup>

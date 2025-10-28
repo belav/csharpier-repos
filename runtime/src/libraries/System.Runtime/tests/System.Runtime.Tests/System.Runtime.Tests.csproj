@@ -10,14 +10,11 @@
     <IncludeRemoteExecutor>true</IncludeRemoteExecutor>
     <!-- Disable nullability public only feature for NullabilityInfoContextTests -->
     <Features>$(Features.Replace('nullablePublicOnly', '')</Features>
-
     <!-- some tests require full ICU data, force it -->
     <WasmIncludeFullIcuData>true</WasmIncludeFullIcuData>
-
     <!-- The test is looking for debugger attributes we would have stripped with NativeAOT -->
     <IlcKeepManagedDebuggerSupport>true</IlcKeepManagedDebuggerSupport>
   </PropertyGroup>
-
   <!--
     Add special trait for running local timezone validation tests on certain devices e.g. in CI to make sure the local timezone is correct and not UTC. Disable these tests otherwise.
   -->
@@ -26,11 +23,9 @@
       >$(WithoutCategories);AdditionalTimezoneChecks</WithoutCategories
     >
   </PropertyGroup>
-
   <ItemGroup>
     <RdXmlFile Include="default.rd.xml" />
   </ItemGroup>
-
   <ItemGroup>
     <Compile Include="$(CommonTestPath)System\EnumTypes.cs" Link="Common\System\EnumTypes.cs" />
     <Compile
@@ -342,11 +337,9 @@
       Link="Common\System\RandomDataGenerator.cs"
     />
   </ItemGroup>
-
   <ItemGroup Condition="'$(TargetPlatformIdentifier)' == 'unix' or '$(TargetPlatformIdentifier)' == 'browser'">
     <Compile Include="System\ExitCodeTests.Unix.cs" />
   </ItemGroup>
-
   <ItemGroup>
     <Compile
       Include="$(CommonTestPath)System\GenericMathHelpers.cs"
@@ -372,7 +365,6 @@
     <Compile Include="System\UInt128Tests.GenericMath.cs" />
     <Compile Include="System\UIntPtrTests.GenericMath.cs" />
   </ItemGroup>
-
   <ItemGroup>
     <Compile Include="System\Reflection\SignatureTypes.cs" />
     <Compile Include="System\Runtime\CompilerServices\CallerArgumentExpressionAttributeTests.cs" />
@@ -398,11 +390,9 @@
       Link="System\RealParserTestsBase.cs"
     />
     <Compile Include="System\RealParserTests.cs" />
-
     <TrimmerRootDescriptor Include="$(ILLinkDescriptorsPath)ILLink.Descriptors.Castle.xml" />
     <TrimmerRootDescriptor Include="$(MSBuildThisFileDirectory)ILLink.Descriptors.xml" />
   </ItemGroup>
-
   <ItemGroup>
     <Compile
       Include="$(CommonTestPath)System\Collections\IEnumerable.Generic.Serialization.Tests.cs"
@@ -419,7 +409,6 @@
       Link="Common\System\Runtime\Serialization\Formatters\BinaryFormatterHelpers.cs"
     />
   </ItemGroup>
-
   <ItemGroup>
     <PackageReference Include="Moq" Version="$(MoqVersion)" />
     <PackageReference
@@ -427,7 +416,6 @@
       Version="$(SystemRuntimeNumericsTestDataVersion)"
       GeneratePathProperty="true"
     />
-
     <ProjectReference
       Include="$(CommonPath)..\tests\System\TestILAssembly\TestILAssembly.ilproj"
       Link="Common\System\TestILAssembly\TestILAssembly.ilproj"

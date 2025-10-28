@@ -6,11 +6,9 @@
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     <IncludeRemoteExecutor>true</IncludeRemoteExecutor>
   </PropertyGroup>
-
   <ItemGroup>
     <ProjectReference Include="..\src\Microsoft.Extensions.Hosting.WindowsServices.csproj" />
   </ItemGroup>
-
   <ItemGroup>
     <Compile
       Include="$(LibrariesProjectRoot)System.ServiceProcess.ServiceController\src\Microsoft\Win32\SafeHandles\SafeServiceHandle.cs"
@@ -66,7 +64,6 @@
       Link="Common\Interop\Windows\Interop.SERVICE_STATUS.cs"
     />
   </ItemGroup>
-
   <ItemGroup Condition="'$(TargetFrameworkIdentifier)' == '.NETFramework'">
     <Reference Include="System.ServiceProcess" />
   </ItemGroup>

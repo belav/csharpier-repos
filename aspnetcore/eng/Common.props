@@ -21,19 +21,16 @@
       >$(TargetRuntimeIdentifier)</DefaultAppHostRuntimeIdentifier
     >
   </PropertyGroup>
-
   <PropertyGroup Condition=" '$(BuildAllProjects)' == 'true' ">
     <!-- Ignore $(BuildNative) when using MSBuild Core, on non-Windows platforms, or when C++ bits are missing. -->
     <BuildNative Condition=" '$(MSBuildRuntimeType)' == 'Core' ">false</BuildNative>
     <BuildNative Condition=" '$(TargetOsName)' != 'win' ">false</BuildNative>
     <BuildNative Condition=" '$(VCTargetsPath)' == '' ">false</BuildNative>
     <BuildNative Condition=" '$(BuildNative)' == '' ">true</BuildNative>
-
     <BuildManaged Condition="'$(BuildManaged)' == ''">true</BuildManaged>
     <BuildNodeJS Condition="'$(BuildNodeJS)' == ''">true</BuildNodeJS>
     <BuildJava Condition="'$(BuildJava)' == ''">true</BuildJava>
   </PropertyGroup>
-
   <PropertyGroup>
     <BuildNative Condition=" '$(BuildNative)' == '' ">false</BuildNative>
   </PropertyGroup>

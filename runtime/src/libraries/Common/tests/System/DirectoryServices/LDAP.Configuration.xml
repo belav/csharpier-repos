@@ -80,13 +80,11 @@ Note:
     `Password` is read from the environment if it is surrounded by %, eg %TESTPASSWORD%
 
     </CommentThatAllowsDoubleHyphens>
-
   <!-- To choose a connection, set an environment variable LDAP_TEST_SERVER_INDEX
          to the zero-based index, eg., 0, 1, or 2
          If you don't set LDAP_TEST_SERVER_INDEX then tests that require a server
          will skip.
     -->
-
   <Connection Name="OPENDJ SERVER">
     <ServerName>localhost</ServerName>
     <SearchDN>DC=example,DC=com</SearchDN>

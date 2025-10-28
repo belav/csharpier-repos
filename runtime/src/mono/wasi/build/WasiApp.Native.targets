@@ -1,6 +1,5 @@
 <Project>
   <!-- not really meant to be used w/o WasmApp.targets -->
-
   <UsingTask
     TaskName="Microsoft.WebAssembly.Build.Tasks.EmccCompile"
     AssemblyFile="$(WasmAppBuilderTasksAssemblyPath)"
@@ -18,7 +17,6 @@
     TaskName="Microsoft.WebAssembly.Build.Tasks.EmitWasmBundleObjectFiles"
     AssemblyFile="$(WasmAppBuilderTasksAssemblyPath)"
   />
-
   <PropertyGroup>
     <_WasiBuildNativeCoreDependsOn>
         _WasmAotCompileApp;
@@ -30,30 +28,24 @@
         _GenerateObjectFilesForSingleFileBundle;
         _WasiLinkDotNet;
     </_WasiBuildNativeCoreDependsOn>
-
     <_BeforeWasmBuildAppDependsOn>
       $(_BeforeWasmBuildAppDependsOn);
       _SetupWasiSdk;
       _SetWasmBuildNativeDefaults;
     </_BeforeWasmBuildAppDependsOn>
-
     <_ExeExt Condition="$([MSBuild]::IsOSPlatform('WINDOWS'))">.exe</_ExeExt>
     <!--<WasmUseEMSDK_PATH Condition="'$(WasmUseEMSDK_PATH)' == '' and '$(EMSDK_PATH)' != '' and Exists('$(MSBuildThisFileDirectory)WasmApp.InTree.targets')">true</WasmUseEMSDK_PATH>-->
   </PropertyGroup>
-
   <ItemGroup>
     <UpToDateCheckInput Include="@(NativeFileReference)" />
   </ItemGroup>
-
   <ItemGroup Condition="'$(Configuration)' == 'Debug' and '@(_MonoComponent->Count())' == 0">
     <_MonoComponent Include="hot_reload;debugger" />
   </ItemGroup>
   <ItemGroup Condition="'$(UsingWasiRuntimeWorkload)' != 'true'">
     <_MonoComponent Include="marshal-ilgen" />
   </ItemGroup>
-
   <Import Project="$(MSBuildThisFileDirectory)WasiSdk.Defaults.props" />
-
   <Target Name="_SetupWasiSdk">
     <PropertyGroup>
       <_ToolchainMissingPaths
@@ -61,7 +53,6 @@
         >%24(WasiClang)=$(WasiClang) </_ToolchainMissingPaths
       >
     </PropertyGroup>
-
     <PropertyGroup>
       <_ToolchainMissingErrorMessage Condition="'$(WASI_SDK_PATH)' == '' and '$(WasiSdkRoot)' == ''"
         >Could not find wasi-sdk. Install wasi-sdk and set %24(WASI_SDK_PATH) . It can be obtained from https://github.com/WebAssembly/wasi-sdk/releases</_ToolchainMissingErrorMessage
@@ -74,26 +65,22 @@
         >true</_IsToolchainMissing
       >
     </PropertyGroup>
-
     <PropertyGroup>
       <WasiSdkBinPath Condition="'$(WasiSdkBinPath)' != ''"
         >$([MSBuild]::NormalizeDirectory($(WasiSdkBinPath)))</WasiSdkBinPath
       >
     </PropertyGroup>
   </Target>
-
   <Target Name="_SetWasmBuildNativeDefaults">
     <!-- if already set, maybe by a user projects, then a missing emsdk is an error -->
     <Error
       Condition="'$(WasmBuildNative)' == 'true' and '$(_IsToolchainMissing)' == 'true'"
       Text="$(_ToolchainMissingErrorMessage) SDK is required for building native files."
     />
-
     <Error
       Condition="'$(RunAOTCompilation)' == 'true' and '$(_IsToolchainMissing)' == 'true'"
       Text="$(_ToolchainMissingErrorMessage) SDK is required for AOT'ing assemblies."
     />
-
     <!-- When Building -->
     <PropertyGroup Condition="'$(WasmBuildingForNestedPublish)' != 'true'">
       <!-- build AOT, only if explicitly requested -->
@@ -101,7 +88,6 @@
         Condition="'$(RunAOTCompilation)' == 'true' and '$(RunAOTCompilationAfterBuild)' == 'true'"
         >true</WasmBuildNative
       >
-
       <WasmBuildNative Condition="'$(WasmBuildNative)' == '' and '$(WasmEnableSIMD)' == 'true'"
         >true</WasmBuildNative
       >
@@ -112,15 +98,12 @@
         Condition="'$(WasmBuildNative)' == '' and '$(InvariantGlobalization)' == 'true'"
         >true</WasmBuildNative
       >
-
       <WasmBuildNative
         Condition="'$(WasmBuildNative)' == '' and @(NativeFileReference->Count()) > 0"
         >true</WasmBuildNative
       >
-
       <WasmBuildNative Condition="'$(WasmBuildNative)' == ''">false</WasmBuildNative>
     </PropertyGroup>
-
     <!-- When Publishing -->
     <PropertyGroup Condition="'$(WasmBuildingForNestedPublish)' == 'true'">
       <!-- AOT==true overrides WasmBuildNative -->
@@ -139,26 +122,21 @@
         Condition="'$(WasmBuildNative)' == '' and '$(InvariantGlobalization)' == 'true'"
         >true</WasmBuildNative
       >
-
       <!-- not aot, not trimmed app, no reason to relink -->
       <WasmBuildNative Condition="'$(WasmBuildNative)' == '' and '$(PublishTrimmed)' != 'true'"
         >false</WasmBuildNative
       >
-
       <!-- default to relinking in Release config -->
       <WasmBuildNative Condition="'$(WasmBuildNative)' == '' and '$(Configuration)' == 'Release'"
         >true</WasmBuildNative
       >
-
       <WasmBuildNative Condition="'$(WasmBuildNative)' == ''">false</WasmBuildNative>
     </PropertyGroup>
-
     <!-- If we want to default to true, and sdk is missing, then just warn, and set it to false -->
     <Warning
       Condition="'$(WasmBuildNative)' == 'true' and '$(_IsToolchainMissing)' == 'true'"
       Text="$(_ToolchainMissingErrorMessage) SDK is required for building native files."
     />
-
     <PropertyGroup>
       <WasmBuildNative
         Condition="'$(WasmBuildNative)' == 'true' and '$(_IsToolchainMissing)' == 'true'"
@@ -166,20 +144,17 @@
       >
     </PropertyGroup>
   </Target>
-
   <Target
     Name="_WasiBuildNativeCore"
     BeforeTargets="_WasiGenerateAppBundle"
     DependsOnTargets="$(_WasiBuildNativeCoreDependsOn)"
     Condition="'$(WasmBuildNative)' == 'true'"
   />
-
   <Target Name="_PrepareForWasiBuildNative">
     <Error
       Condition="'$(_IsToolchainMissing)' == 'true'"
       Text="$(_ToolchainMissingErrorMessage) Emscripten SDK is required for building native files."
     />
-
     <PropertyGroup>
       <_MonoAotCrossCompilerPath>@(MonoAotCrossCompiler->WithMetadataValue('RuntimeIdentifier','wasi-wasm'))</_MonoAotCrossCompilerPath>
       <_WasiClangDefaultFlagsRsp>$([MSBuild]::NormalizePath($(_WasmRuntimePackSrcDir), 'wasi-default.rsp'))</_WasiClangDefaultFlagsRsp>
@@ -193,7 +168,6 @@
         >true</WasmNativeDebugSymbols
       >
       <WasmLinkIcalls Condition="'$(WasmLinkIcalls)' == ''">$(WasmBuildNative)</WasmLinkIcalls>
-
       <_WasmICallTablePath>$(_WasmIntermediateOutputPath)icall-table.h</_WasmICallTablePath>
       <_WasmRuntimeICallTablePath>$(_WasmIntermediateOutputPath)runtime-icall-table.h</_WasmRuntimeICallTablePath>
       <_WasmPInvokeTablePath>$(_WasmIntermediateOutputPath)pinvoke-table.h</_WasmPInvokeTablePath>
@@ -204,16 +178,13 @@
       <DisableParallelEmccCompile Condition="'$(DisableParallelEmccCompile)' == ''"
         >$(DisableParallelAot)</DisableParallelEmccCompile
       >
-
       <_DriverGenCNeeded Condition="'$(_DriverGenCNeeded)' == '' and '$(_WasmShouldAOT)' == 'true'"
         >true</_DriverGenCNeeded
       >
-
       <_WasmDevel
         Condition="'$(_WasmDevel)' == '' and '$(WasmBuildNative)' == 'true' and '$(Configuration)' == 'Debug'"
         >true</_WasmDevel
       >
-
       <!--<_EmccAssertionLevelDefault Condition="'$(_EmccAssertionLevelDefault)' == ''">0</_EmccAssertionLevelDefault>-->
       <_WasiClangOptimizationFlagDefault Condition="'$(_WasmDevel)' == 'true'"
         >-O0</_WasiClangOptimizationFlagDefault
@@ -225,7 +196,6 @@
       <_WasiClangOptimizationFlagDefault Condition="'$(_WasiClangOptimizationFlagDefault)' == ''"
         >-Oz</_WasiClangOptimizationFlagDefault
       >
-
       <WasiClangCompileOptimizationFlag Condition="'$(WasiClangCompileOptimizationFlag)' == ''"
         >$(_WasiClangOptimizationFlagDefault)</WasiClangCompileOptimizationFlag
       >
@@ -236,7 +206,6 @@
       <WasiClangLinkOptimizationFlag Condition="'$(WasiClangLinkOptimizationFlag)' == ''"
         >$(WasiClangCompileOptimizationFlag)</WasiClangLinkOptimizationFlag
       >
-
       <_WasiClangCompileRsp>$(_WasmIntermediateOutputPath)wasi-compile.rsp</_WasiClangCompileRsp>
       <_WasiClangCompileOutputMessageImportance Condition="'$(WasiClangVerbose)' == 'true'"
         >Normal</_WasiClangCompileOutputMessageImportance
@@ -244,33 +213,26 @@
       <_WasiClangCompileOutputMessageImportance Condition="'$(WasiClangVerbose)' != 'true'"
         >Low</_WasiClangCompileOutputMessageImportance
       >
-
       <_WasiClangCompileBitcodeRsp>$(_WasmIntermediateOutputPath)wasi-compile-bc.rsp</_WasiClangCompileBitcodeRsp>
       <_WasiClangLinkRsp>$(_WasmIntermediateOutputPath)clang-link.rsp</_WasiClangLinkRsp>
-
       <!--TODOWASI this needs similar AOT logic as EMCC in https://github.com/dotnet/runtime/pull/80507-->
       <WasmInitialHeapSize Condition="'$(WasmInitialHeapSize)' == ''">52428800</WasmInitialHeapSize>
     </PropertyGroup>
-
     <ItemGroup>
       <WasiAfterRuntimeLoadedDeclarations Include="@(WasiAfterRuntimeLoaded->'void %(Identity)();')" />
       <WasiAfterRuntimeLoadedCalls Include="@(WasiAfterRuntimeLoaded->'%(Identity)();')" />
-
       <_WasmCommonIncludePaths Include="$(_WasmIntermediateOutputPath.TrimEnd('\/'))" />
       <_WasmCommonIncludePaths Include="$(_WasmRuntimePackIncludeDir)mono-2.0" />
       <_WasmCommonIncludePaths Include="$(_WasmRuntimePackIncludeDir)wasm" />
     </ItemGroup>
-
     <ItemGroup Condition="'$(OS)' == 'Windows_NT'">
       <!-- Fixup on windows -->
       <_WasmCommonIncludePathsFixedUp Include="$([System.String]::new(%(_WasmCommonIncludePaths.Identity)).Replace('\', '/'))" />
       <_WasmCommonIncludePaths Remove="@(_WasmCommonIncludePaths)" />
       <_WasmCommonIncludePaths Include="@(_WasmCommonIncludePathsFixedUp)" />
     </ItemGroup>
-
     <ItemGroup>
       <_WasmLinkDependencies Remove="@(_WasmLinkDependencies)" />
-
       <_WasiClangCommonFlags Include="$(_DefaultWasiClangFlags)" />
       <_WasiClangCommonFlags Include="$(WasiClangFlags)" />
       <_WasiClangCommonFlags Include="--sysroot=&quot;$(WasiSdkRoot.Replace('\', '/'))/share/wasi-sysroot&quot;" />
@@ -278,7 +240,6 @@
       <_WasiClangCommonFlags Include="-v" Condition="'$(WasiClangVerbose)' != 'false'" />
       <!--<_WasiClangCommonFlags Include="-s DISABLE_EXCEPTION_CATCHING=0"   Condition="'$(WasmEnableExceptionHandling)' == 'false'" />--><!--<_WasiClangCommonFlags Include="-fwasm-exceptions"                 Condition="'$(WasmEnableExceptionHandling)' == 'true'" />-->
       <_WasiClangCommonFlags Include="-msimd128" Condition="'$(WasmEnableSIMD)' == 'true'" />
-
       <_WasmCommonCFlags Include="-DGEN_PINVOKE=1" />
       <_WasmCommonCFlags Condition="'$(_WasmShouldAOT)' == 'true'" Include="-DENABLE_AOT=1" />
       <_WasmCommonCFlags Condition="'$(_DriverGenCNeeded)' == 'true'" Include="-DDRIVER_GEN=1" />
@@ -296,10 +257,8 @@
       />
       <_WasmCommonCFlags Condition="'$(WasmLinkIcalls)' == 'true'" Include="-DLINK_ICALLS=1" />
       <_WasiClangCFlags Include="@(_WasmCommonCFlags)" />
-
       <_WasiClangCFlags Include="&quot;-I%(_WasmCommonIncludePaths.Identity)&quot;" />
       <_WasiClangCFlags Include="-I&quot;$(MicrosoftNetCoreAppRuntimePackRidNativeDir.Replace('\', '/'))include&quot;" />
-
       <_WasiClangCFlags
         Condition="'@(WasiAfterRuntimeLoadedDeclarations)' != ''"
         Include="-D WASI_AFTER_RUNTIME_LOADED_DECLARATIONS=&quot;@(WasiAfterRuntimeLoadedDeclarations, ' ')&quot;"
@@ -308,18 +267,15 @@
         Condition="'@(WasiAfterRuntimeLoadedCalls)' != ''"
         Include="-D WASI_AFTER_RUNTIME_LOADED_CALLS=&quot;@(WasiAfterRuntimeLoadedCalls, ' ')&quot;"
       />
-
       <_WasiClangLDFlags Include="$(WasiClangLinkOptimizationFlag)" />
       <_WasiClangLDFlags Include="@(_WasiClangCommonFlags)" />
     </ItemGroup>
-
     <ItemGroup>
       <_DriverCDependencies Include="$(_WasmPInvokeHPath);$(_WasmICallTablePath)" />
       <_DriverCDependencies
         Include="$(_DriverGenCPath)"
         Condition="'$(_DriverGenCNeeded)' == 'true'"
       />
-
       <_WasmRuntimePackSrcFile
         Include="$(_WasmRuntimePackSrcDir)pinvoke.c"
         Dependencies="$(_WasmPInvokeHPath);$(_WasmPInvokeTablePath)"
@@ -331,28 +287,23 @@
       <_WasmRuntimePackSrcFile Include="$(_WasmRuntimePackSrcDir)main.c" />
       <_WasmRuntimePackSrcFile Include="$(_WasmRuntimePackSrcDir)stubs.c" />
       <_WasmRuntimePackSrcFile Include="$(_WasmRuntimePackSrcDir)synthetic-pthread.c" />
-
       <_WasmRuntimePackSrcFile ObjectFile="$(_WasmIntermediateOutputPath)%(FileName).o" />
     </ItemGroup>
-
     <Error
       Text="Could not find NativeFileReference %(NativeFileReference.Identity)"
       Condition="'%(NativeFileReference.Identity)' != '' and !Exists(%(NativeFileReference.Identity))"
     />
   </Target>
-
   <Target Name="_GenerateManagedToNative">
     <ItemGroup>
       <_WasmPInvokeModules
         Include="%(_WasmNativeFileForLinking.FileName)"
         Condition="'%(_WasmNativeFileForLinking.ScanForPInvokes)' != 'false'"
       />
-
       <_WasmPInvokeModules Include="libSystem.Native" />
       <_WasmPInvokeModules Include="libSystem.Globalization.Native" />
       <!-- FIXME: wasi --><!--<_WasmPInvokeModules Include="libSystem.IO.Compression.Native" />-->
     </ItemGroup>
-
     <PropertyGroup>
       <_HasMscorlib
         Condition="'%(_WasmAssembliesInternal.FileName)%(_WasmAssembliesInternal.Extension)' == 'mscorlib.dll'"
@@ -362,7 +313,6 @@
         >$([System.IO.Path]::Combine($(MicrosoftNetCoreAppRuntimePackRidLibTfmDir), 'mscorlib.dll'))</_MscorlibPath
       >
     </PropertyGroup>
-
     <Error
       Condition="'$(_HasMscorlib)' != 'true' and !Exists($(_MscorlibPath))"
       Text="Could not find 'mscorlib.dll' in the runtime pack at $(_MscorlibPath)"
@@ -371,7 +321,6 @@
       Condition="'$(_MonoAotCrossCompilerPath)' == '' or !Exists('$(_MonoAotCrossCompilerPath)')"
       Text="Could not find AOT cross compiler at %24(_MonoAotCrossCompilerPath)=$(_MonoAotCrossCompilerPath)"
     />
-
     <Exec
       Command="&quot;$(_MonoAotCrossCompilerPath)&quot; --print-icall-table > &quot;$(_WasmRuntimeICallTablePath)&quot;"
       Condition="!Exists($(_WasmRuntimeICallTablePath))"
@@ -379,12 +328,10 @@
     <ItemGroup>
       <FileWrites Include="$(_WasmRuntimeICallTablePath)" />
     </ItemGroup>
-
     <MakeDir
       Directories="$(_WasmIntermediateOutputPath)"
       Condition="!Exists('$(_WasmIntermediateOutputPath)')"
     />
-
     <ManagedToNativeGenerator
       Assemblies="@(_WasmAssembliesInternal);$(_MscorlibPath)"
       RuntimeIcallTableFile="$(_WasmRuntimeICallTablePath)"
@@ -396,12 +343,10 @@
       <Output TaskParameter="FileWrites" ItemName="FileWrites" />
     </ManagedToNativeGenerator>
   </Target>
-
   <Target Name="_WasmCompileNativeFiles" DependsOnTargets="_CheckWasiClangIsExpectedVersion">
     <ItemGroup>
       <_WasiClangCFlags Include="$(WasiClangExtraCFlags)" />
     </ItemGroup>
-
     <WriteLinesToFile
       Lines="@(_WasiClangCFlags)"
       File="$(_WasiClangCompileRsp)"
@@ -411,7 +356,6 @@
     <ItemGroup>
       <FileWrites Include="$(_WasiClangCompileRsp)" />
     </ItemGroup>
-
     <ItemGroup>
       <_WasmSourceFileToCompile Remove="@(_WasmSourceFileToCompile)" />
       <_WasmSourceFileToCompile
@@ -430,12 +374,10 @@
     >
       <Output TaskParameter="OutputFiles" ItemName="FileWrites" />
     </EmccCompile>
-
     <ItemGroup>
       <_WasmNativeFileForLinking Include="%(_WasmSourceFileToCompile.ObjectFile)" />
     </ItemGroup>
   </Target>
-
   <Target
     Name="_WasmCompileAssemblyBitCodeFilesForAOT"
     Inputs="@(_BitcodeFile);$(_WasiClangCompileBitcodeRsp)"
@@ -447,7 +389,6 @@
     <ItemGroup>
       <_BitCodeFile Dependencies="%(_BitCodeFile.Dependencies);$(_WasiClangDefaultFlagsRsp);$(_WasiClangCompileBitcodeRsp)" />
     </ItemGroup>
-
     <EmccCompile
       SourceFiles="@(_BitCodeFile)"
       Arguments="&quot;@$(_WasiClangDefaultFlagsRsp)&quot; $(_WasiClangDefaultFlags) &quot;@$(_WasiClangCompileBitcodeRsp)&quot;"
@@ -460,7 +401,6 @@
       <Output TaskParameter="OutputFiles" ItemName="FileWrites" />
     </EmccCompile>
   </Target>
-
   <Target Name="_WasmWriteRspForCompilingBitcode">
     <ItemGroup>
       <_BitcodeLDFlags Include="@(_WasiClangLDFlags)" />
@@ -476,13 +416,11 @@
       <FileWrites Include="$(_WasiClangCompileBitcodeRsp)" />
     </ItemGroup>
   </Target>
-
   <Target
     Name="_WasmSelectRuntimeComponentsForLinking"
     Condition="'$(UsingWasiRuntimeWorkload)' == 'true'"
     DependsOnTargets="_MonoSelectRuntimeComponents"
   />
-
   <Target
     Name="_GetNativeFilesForLinking"
     DependsOnTargets="_WasmSelectRuntimeComponentsForLinking"
@@ -506,7 +444,6 @@
         >libmono-wasm-nosimd.a</_WasmSIMDLibToExclude
       >
     </PropertyGroup>
-
     <ItemGroup>
       <!-- order matters -->
       <_WasmNativeFileForLinking Include="%(_BitcodeFile.ObjectFile)" />
@@ -516,7 +453,6 @@
         Include="wasm-bundled-timezones.a"
         Condition="'$(InvariantTimezone)' == 'true'"
       />
-
       <_WasmNativeFileForLinking
         Include="$(MicrosoftNetCoreAppRuntimePackRidNativeDir)*.a"
         Exclude="@(_MonoRuntimeComponentDontLink->'$(MicrosoftNetCoreAppRuntimePackRidNativeDir)%(Identity)')"
@@ -531,12 +467,10 @@
       />
       <_WasmNativeFileForLinking Remove="$(MicrosoftNetCoreAppRuntimePackRidNativeDir)$(_WasmEHLibToExclude)" />
       <_WasmNativeFileForLinking Remove="$(MicrosoftNetCoreAppRuntimePackRidNativeDir)$(_WasmSIMDLibToExclude)" />
-
       <_WasmNativeFileForLinking Include="$(WasiSysRoot)\lib\wasm32-wasi\libc++.a" />
       <_WasmNativeFileForLinking Include="$(WasiSysRoot)\lib\wasm32-wasi\libc++abi.a" />
     </ItemGroup>
   </Target>
-
   <Target
     Name="_GenerateObjectFilesForSingleFileBundle"
     Returns="@(_WasiObjectFilesForBundle)"
@@ -548,20 +482,17 @@
         BundleRegistrationFunctionName="mono_register_assemblies_bundle"
         BundleFile="wasi_bundled_assemblies.o"
       />
-
       <_EmitBundleItemName
         Include="$(MicrosoftNetCoreAppRuntimePackRidNativeDir)icudt.dat"
         BundleRegistrationFunctionName="mono_register_icu_bundle"
         BundleFile="wasi_bundled_icu.o"
       />
-
       <_EmitBundleItemName
         Include="$(_ParsedRuntimeConfigFilePath)"
         BundleRegistrationFunctionName="mono_register_runtimeconfig_bin"
         BundleFile="wasi_bundled_runtimeconfig_bin.o"
       />
     </ItemGroup>
-
     <!-- batched on .BundleRegistrationFunctionName+.BundleFile -->
     <EmitBundleObjectFiles
       FilesToBundle="@(_EmitBundleItemName)"
@@ -573,17 +504,14 @@
       <Output TaskParameter="BundledResources" ItemName="_EmitBundleOutputItem" />
       <Output TaskParameter="BundleRegistrationFile" ItemName="_EmitBundleRegistrationFile" />
     </EmitBundleObjectFiles>
-
     <ItemGroup>
       <_EmitBundleOutputFile Remove="@(_EmitBundleOutputFile)" />
       <_EmitBundleOutputFile Include="%(_EmitBundleOutputItem.DestinationFile)" />
       <_EmitBundleOutputFile Include="@(_EmitBundleRegistrationFile)" />
-
       <_WasiObjectFilesForBundle Include="@(_EmitBundleOutputFile)" />
       <FileWrites Include="@(_EmitBundleOutputFile)" />
     </ItemGroup>
   </Target>
-
   <Target
     Name="_WasmWriteRspFilesForLinking"
     DependsOnTargets="_CheckWasiClangIsExpectedVersion;_WasmCalculateInitialHeapSize"
@@ -610,18 +538,13 @@
     <ItemGroup>
       <FileWrites Include="$(_WasiGetEntrypointCFile)" />
     </ItemGroup>
-
     <ItemGroup>
       <_WasiClangXLinkerFlags Include="--initial-memory=$(WasmInitialHeapSize)" />
-
       <_WasmNativeFileForLinking Include="@(NativeFileReference)" />
-
       <_WasiFilePathForFixup Include="$(_WasiGetEntrypointCFile)" />
       <_WasiFilePathForFixup Include="@(_WasiObjectFilesForBundle)" />
       <_WasiFilePathForFixup Include="@(_WasmNativeFileForLinking)" />
-
       <_WasmLinkDependencies Include="@(_WasiFilePathForFixup)" />
-
       <_WasiSdkClangArgs
         Condition="'$(OS)' == 'Windows_NT'"
         Include="&quot;$([System.String]::new(%(_WasiFilePathForFixup.Identity)).Replace('\', '/'))&quot;"
@@ -630,19 +553,15 @@
         Condition="'$(OS)' != 'Windows_NT'"
         Include="@(_WasiFilePathForFixup -> '&quot;%(Identity)&quot;')"
       />
-
       <_WasiSdkClangArgs Include="-Wl,--export=malloc,--export=free,--export=__heap_base,--export=__data_end" />
       <!-- keep in sync with src\mono\wasi\wasi.proj -->
       <_WasiSdkClangArgs Include="-Wl,-z,stack-size=8388608,-lwasi-emulated-process-clocks,-lwasi-emulated-signal,-lwasi-emulated-mman" />
       <_WasiSdkClangArgs Include="-Wl,-s" Condition="'$(WasmNativeStrip)' == 'true'" />
-
       <_WasiSdkClangArgs Include="&quot;@$(_WasiClangDefaultLinkFlagsRsp.Replace('\', '/'))&quot;" />
       <_WasiSdkClangArgs Include="@(_WasiClangXLinkerFlags -> '-Xlinker %(Identity)', ' ')" />
       <_WasiSdkClangArgs Include="@(_WasiClangLDFlags)" />
-
       <_WasiSdkClangArgs Include="-o &quot;$(_WasmOutputFileName.Replace('\', '/'))&quot;" />
     </ItemGroup>
-
     <WriteLinesToFile
       Lines="@(_WasiSdkClangArgs)"
       File="$(_WasiClangLinkRsp)"
@@ -653,7 +572,6 @@
       <_WasmLinkDependencies Include="$(_WasiClangLinkRsp)" />
     </ItemGroup>
   </Target>
-
   <!-- replace with wasmlinkdotnet -->
   <Target
     Name="_WasiLinkDotNet"
@@ -669,32 +587,27 @@
     />
     <!--<Exec Command="&quot;$(WasiClang)&quot; @(_WasiSdkClangArgs, ' ')" />-->
     <Exec Command="&quot;$(WasiClang)&quot; &quot;@$(_WasiClangLinkRsp)&quot;" />
-
     <!-- FIXME: this will be done by the bundler -->
     <Copy SourceFiles="$(_WasmOutputFileName)" DestinationFolder="$(WasmAppDir)" />
     <ItemGroup>
       <FileWrites Include="$(_WasmOutputFileName)" />
     </ItemGroup>
   </Target>
-
   <Target Name="_CompleteWasmBuildNative">
     <ItemGroup>
       <WasmNativeAsset Include="$(_WasmIntermediateOutputPath)dotnet.wasm" />
     </ItemGroup>
   </Target>
-
   <!--
       *******************************
       ************ AOT **************
       *******************************
   -->
-
   <Target Name="_WasmAotCompileApp" Condition="'$(_WasmShouldAOT)' == 'true'">
     <PropertyGroup>
       <!-- FIXME: do it once -->
       <_MonoAotCrossCompilerPath>@(MonoAotCrossCompiler->WithMetadataValue('RuntimeIdentifier', 'wasi-wasm'))</_MonoAotCrossCompilerPath>
     </PropertyGroup>
-
     <Error
       Condition="'@(_WasmAssembliesInternal)' == ''"
       Text="Item _WasmAssembliesInternal is empty"
@@ -707,7 +620,6 @@
       Condition="'$(_MonoAotCrossCompilerPath)' == '' or !Exists('$(_MonoAotCrossCompilerPath)')"
       Text="Could not find AOT cross compiler at %24(_MonoAotCrossCompilerPath)=$(_MonoAotCrossCompilerPath)"
     />
-
     <ItemGroup>
       <MonoAOTCompilerDefaultAotArguments Include="no-opt" />
       <MonoAOTCompilerDefaultAotArguments Include="static" />
@@ -732,28 +644,22 @@
         <AotArguments>@(MonoAOTCompilerDefaultAotArguments, ';')</AotArguments>
         <ProcessArguments>@(MonoAOTCompilerDefaultProcessArguments, ';')</ProcessArguments>
       </_AotInputAssemblies>
-
       <_WasmAssembliesInternal Remove="@(_WasmAssembliesInternal)" />
-
       <_WasmAOTSearchPaths Include="$(MicrosoftNetCoreAppRuntimePackRidNativeDir)" />
       <_WasmAOTSearchPaths Include="$(MicrosoftNetCoreAppRuntimePackRidLibTfmDir)" />
     </ItemGroup>
-
     <ItemGroup>
       <!-- Skip known-huge assemblies specified in csproj -->
       <_AotInputAssemblies Condition="'%(Filename)' != '' and '@(_AotInputAssemblies->Metadata(`Filename`))' != '' and '@(_AOT_InternalForceInterpretAssemblies->Metadata(`Filename`))' != ''">
         <AOT_InternalForceToInterpret>true</AOT_InternalForceToInterpret>
       </_AotInputAssemblies>
     </ItemGroup>
-
     <PropertyGroup>
       <!--<AOTMode Condition="'$(AOTMode)' == '' and '$(AOTProfilePath)' != ''">LLVMOnlyInterp</AOTMode>-->
       <AOTMode Condition="'$(AOTMode)' == ''">LLVMOnlyInterp</AOTMode>
       <_AOTCompilerCacheFile>$(_WasmIntermediateOutputPath)aot_compiler_cache.json</_AOTCompilerCacheFile>
     </PropertyGroup>
-
     <Message Text="AOT'ing @(_AotInputAssemblies->Count()) assemblies" Importance="High" />
-
     <!-- Dedup -->
     <PropertyGroup Condition="'$(WasmDedup)' == 'true'">
       <_WasmDedupAssembly>$(_WasmIntermediateOutputPath)\aot-instances.dll</_WasmDedupAssembly>
@@ -781,7 +687,6 @@
         <ProcessArguments>@(MonoAOTCompilerDefaultProcessArguments, ';')</ProcessArguments>
       </_AotInputAssemblies>
     </ItemGroup>
-
     <MonoAOTCompiler
       CompilerBinaryPath="$(_MonoAotCrossCompilerPath)"
       OutputDir="$(_WasmIntermediateOutputPath)"
@@ -805,16 +710,13 @@
       <Output TaskParameter="CompiledAssemblies" ItemName="_WasmAssembliesInternal" />
       <Output TaskParameter="FileWrites" ItemName="FileWrites" />
     </MonoAOTCompiler>
-
     <ItemGroup>
       <_BitcodeFile Include="%(_WasmAssembliesInternal.LlvmBitcodeFile)" />
       <_BitcodeFile ObjectFile="$(_WasmIntermediateOutputPath)%(FileName).o" />
-
       <!-- Add the skipped assemblies -->
       <_WasmAssembliesInternal Include="@(_AotInputAssemblies->WithMetadataValue('AOT_InternalForceToInterpret', 'true'))" />
     </ItemGroup>
   </Target>
-
   <!-- '$(ArchiveTests)' != 'true' is to skip on CI for now -->
   <Target
     Name="_WasmStripAOTAssemblies"
@@ -823,7 +725,6 @@
     <PropertyGroup>
       <_WasmStrippedAssembliesPath>$([MSBuild]::NormalizeDirectory($(_WasmIntermediateOutputPath), 'stripped-assemblies'))</_WasmStrippedAssembliesPath>
     </PropertyGroup>
-
     <ItemGroup>
       <_AOTedAssemblies Include="@(_WasmAssembliesInternal)" />
       <_WasmStrippedAssemblies
@@ -831,17 +732,14 @@
         OriginalPath="%(_WasmAssembliesInternal.Identity)"
       />
     </ItemGroup>
-
     <!-- Run mono-cil-strip on the assemblies --><!-- TODO: replace this with a linker task -->
     <MakeDir Directories="$(_WasmStrippedAssembliesPath)" />
     <Exec Command="mono-cil-strip -q &quot;%(_WasmStrippedAssemblies.OriginalPath)&quot; &quot;%(_WasmStrippedAssemblies.Identity)&quot;" />
-
     <ItemGroup>
       <_WasmAssembliesInternal Remove="@(_WasmAssembliesInternal)" />
       <_WasmAssembliesInternal Include="@(_WasmStrippedAssemblies)" />
     </ItemGroup>
   </Target>
-
   <Target Name="_CheckWasiClangIsExpectedVersion" />
   <Target Name="_WasmCalculateInitialHeapSize" />
 </Project>

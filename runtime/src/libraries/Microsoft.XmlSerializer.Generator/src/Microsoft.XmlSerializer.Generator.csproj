@@ -17,11 +17,9 @@
     <EnableBinPlacing>false</EnableBinPlacing>
     <IsTrimmable>false</IsTrimmable>
   </PropertyGroup>
-
   <ItemGroup>
     <Compile Include="Sgen.cs" />
   </ItemGroup>
-
   <ItemGroup>
     <!-- Set an empty PackagePath to place this file in the root of the package -->
     <None Include="build\prefercliruntime" PackagePath="" Pack="true" />
@@ -36,7 +34,6 @@
       Pack="true"
     />
   </ItemGroup>
-
   <Import Project="GenerateThisAssemblyCs.targets" />
   <Import Project="GenerateNupkgProps.targets" />
 </Project>

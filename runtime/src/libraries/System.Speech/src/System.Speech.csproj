@@ -17,12 +17,10 @@
 Commonly Used Types
 System.Speech.Synthesis.SpeechSynthesizer
 System.Speech.Recognition.SpeechRecognizer</PackageDescription>
-
     <!-- TODO https://github.com/dotnet/runtime/issues/90400: Annotate for nullable reference types -->
     <Nullable>disable</Nullable>
     <NoWarn>$(NoWarn);nullable</NoWarn>
   </PropertyGroup>
-
   <!-- DesignTimeBuild requires all the TargetFramework Derived Properties to not be present in the first property group. -->
   <PropertyGroup>
     <TargetPlatformIdentifier>$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)'))</TargetPlatformIdentifier>
@@ -35,7 +33,6 @@ System.Speech.Recognition.SpeechRecognizer</PackageDescription>
       >true</OmitResources
     >
   </PropertyGroup>
-
   <ItemGroup Condition="'$(TargetPlatformIdentifier)' == 'windows'">
     <Compile Include="SR.cs" />
     <Compile Include="SRID.cs" />
@@ -263,7 +260,6 @@ System.Speech.Recognition.SpeechRecognizer</PackageDescription>
       Condition="'$(TargetFrameworkIdentifier)' == '.NETCoreApp'"
     />
   </ItemGroup>
-
   <ItemGroup Condition="'$(TargetPlatformIdentifier)' == 'windows'">
     <EmbeddedResource
       Include="Resources\Strings.resx"
@@ -271,7 +267,6 @@ System.Speech.Recognition.SpeechRecognizer</PackageDescription>
       ManifestResourceName="ExceptionStringTable"
     />
   </ItemGroup>
-
   <ItemGroup>
     <EmbeddedResource Include="upstable_chs.upsmap" LogicalName="upstable_chs.upsmap" />
     <EmbeddedResource Include="upstable_cht.upsmap" LogicalName="upstable_cht.upsmap" />

@@ -5,7 +5,6 @@
     <IsPackable>false</IsPackable>
     <IsShipping>false</IsShipping>
   </PropertyGroup>
-
   <ItemGroup>
     <ProjectReference Include="..\TestApp\Wasm.Performance.TestApp.csproj" />
     <Compile Include="$(SharedSourceRoot)CommandLineUtils\**\*.cs" />

@@ -8,11 +8,9 @@
     >
     <ImplicitUsings>true</ImplicitUsings>
   </PropertyGroup>
-
   <ItemGroup>
     <ProjectReference Include="..\..\src\EFCore.SqlServer.HierarchyId\EFCore.SqlServer.HierarchyId.csproj" />
     <ProjectReference Include="..\EFCore.SqlServer.FunctionalTests\EFCore.SqlServer.FunctionalTests.csproj" />
   </ItemGroup>
-
   <Import Project="..\..\src\EFCore.SqlServer.HierarchyId\build\net8.0\Microsoft.EntityFrameworkCore.SqlServer.HierarchyId.targets" />
 </Project>

@@ -31,7 +31,6 @@
   <assembly name="WebApiHelpPageVB" />
   <assembly name="WebMatrix.Data" />
   <assembly name="WebMatrix.WebData" />
-
   <!-- Unit test assemblies and helpers -->
   <assembly name="Microsoft.AspNet.Facebook.Test" />
   <assembly name="Microsoft.TestCommon" />

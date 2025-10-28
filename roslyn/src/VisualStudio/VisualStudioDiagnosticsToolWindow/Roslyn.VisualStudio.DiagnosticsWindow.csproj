@@ -10,7 +10,6 @@
       >true</GenerateResourceUsePreserializedResources
     >
     <IsShipping>false</IsShipping>
-
     <!-- VSIX -->
     <GeneratePkgDefFile>true</GeneratePkgDefFile>
     <IncludeAssemblyInVSIXContainer>true</IncludeAssemblyInVSIXContainer>

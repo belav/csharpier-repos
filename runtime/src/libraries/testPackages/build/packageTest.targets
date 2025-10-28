@@ -9,7 +9,6 @@
     <!-- Suppress any SYSLIB9000 errors, as in these cases restore/build would succeed, the failure would be at run-time -->
     <SuppressTfmSupportBuildWarnings>true</SuppressTfmSupportBuildWarnings>
   </PropertyGroup>
-
   <ItemGroup>
     <!-- Required for VerifyClosure and VerifyTypes tasks. -->
     <PackageReference
@@ -17,7 +16,6 @@
       Version="$(MicrosoftDotNetPackageTestingVersion)"
     />
   </ItemGroup>
-
   <!-- Import framework settings. -->
   <Import
     Project="frameworkSettings\$(_targetFrameworkIdentifier)\*.targets"
@@ -34,18 +32,15 @@
     Project="packageSettings\$(TestPackageId)\$(TargetFramework)\*.targets"
     Condition="'$(TargetFramework)' != ''"
   />
-
   <ItemGroup>
     <!-- Type duplicated: https://github.com/dotnet/runtime/issues/33998 -->
     <IgnoredTypes Include="Microsoft.Extensions.Logging.LoggingBuilderExtensions" />
     <!-- Type duplicated: https://github.com/dotnet/runtime/issues/34420 -->
     <IgnoredTypes Include="System.Collections.Generic.CollectionExtensions" />
   </ItemGroup>
-
   <Target Name="LogBeginTest" Condition="'$(TargetFramework)' != ''">
     <Message Importance="High" Text="Testing $(TestPackageID) TFM=$(TargetFramework)" />
   </Target>
-
   <Target
     Name="VerifyReferenceClosure"
     DependsOnTargets="ResolveReferences"
@@ -61,14 +56,12 @@
       />
       <_refClosureFileFiltered Include="@(_refClosureFileNamesFiltered->'%(Original)')" />
     </ItemGroup>
-
     <VerifyClosure
       Condition="'@(_refClosureFileFiltered)' != ''"
       Sources="@(_refClosureFileFiltered)"
       IgnoredReferences="@(IgnoredReference)"
     />
   </Target>
-
   <Target
     Name="VerifyReferenceTypes"
     DependsOnTargets="ResolveReferences"
@@ -84,14 +77,12 @@
       />
       <_refTypesFileFiltered Include="@(_refTypesFileNamesFiltered->'%(Original)')" />
     </ItemGroup>
-
     <VerifyTypes
       Condition="'@(_refTypesFileFiltered)' != ''"
       Sources="@(_refTypesFileFiltered)"
       IgnoredTypes="@(IgnoredTypes)"
     />
   </Target>
-
   <Target Name="PrepareForRuntimeTesting" DependsOnTargets="ResolveReferences">
     <ItemGroup>
       <ReferenceLibToTest
@@ -115,13 +106,11 @@
         RuntimeIdentifier="none"
       />
     </ItemGroup>
-
     <ItemGroup>
       <RuntimeLibToTestDependency
         Include="@(ReferencePath)"
         Condition="'%(ReferencePath.NuGetPackageId)' != '$(TestPackageId)'"
       />
-
       <!-- Some dependent packages may be excluded from compile, consider these as candidates as well.-->
       <ReferenceCopyLocalPaths Original="%(Identity)" />
       <_referenceCopyLocalPathsPackages
@@ -131,19 +120,16 @@
       />
       <RuntimeLibToTestDependency Include="@(_referenceCopyLocalPathsPackages->'%(Original)')" />
     </ItemGroup>
-
     <Error
       Condition="'@(RuntimeLibToTest)' == '' AND '@(ReferenceLibToTest)' != ''"
       Text="Could not locate any runtime items from Package $(TestPackageID)"
     />
-
     <Message
       Condition="'@(RuntimeLibToTest)' != ''"
       Importance="High"
       Text="Testing $(TestPackageID) runtime on TFM=$(TargetFramework) RIDs=@(RuntimeLibToTest->'%(RuntimeIdentifier)'->Distinct())"
     />
   </Target>
-
   <Target
     Name="VerifyRuntimeClosure"
     Inputs="%(RuntimeLibToTest.RuntimeIdentifier)"
@@ -165,14 +151,12 @@
       />
       <_runClosureFileFiltered Include="@(_runClosureFileNamesFiltered->'%(Original)')" />
     </ItemGroup>
-
     <VerifyClosure
       Condition="'@(_runClosureFileFiltered)' != ''"
       Sources="@(_runClosureFileFiltered)"
       IgnoredReferences="@(IgnoredReference)"
     />
   </Target>
-
   <Target
     Name="VerifyRuntimeTypes"
     Inputs="%(RuntimeLibToTest.RuntimeIdentifier)"
@@ -194,14 +178,12 @@
       />
       <_runTypesFileFiltered Include="@(_runTypesFileNamesFiltered->'%(Original)')" />
     </ItemGroup>
-
     <VerifyTypes
       Condition="'@(_runTypesFileFiltered)' != ''"
       Sources="@(_runTypesFileFiltered)"
       IgnoredTypes="@(IgnoredTypes)"
     />
   </Target>
-
   <Target
     Name="VerifyNotDependsOnNetStandard"
     DependsOnTargets="ResolveReferences"
@@ -213,7 +195,6 @@
       Text="Package $(TestPackageId) requires netstandard shims when targeting $(TargetFramework)"
     />
   </Target>
-
   <PropertyGroup>
     <TestDependsOn>
       LogBeginTest;
@@ -225,7 +206,6 @@
     </TestDependsOn>
     <InnerTargets>Test</InnerTargets>
   </PropertyGroup>
-
   <!-- Runs all tests scenarios for this project -->
   <Target Name="Test" DependsOnTargets="$(TestDependsOn)" />
 </Project>

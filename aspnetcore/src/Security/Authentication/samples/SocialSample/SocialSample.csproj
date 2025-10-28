@@ -4,15 +4,12 @@
     <UserSecretsId>aspnet5-SocialSample-20151210111056</UserSecretsId>
     <AspNetCoreHostingModel>OutOfProcess</AspNetCoreHostingModel>
   </PropertyGroup>
-
   <ItemGroup>
     <None Remove="compiler\resources\cert.pfx" />
   </ItemGroup>
-
   <ItemGroup>
     <EmbeddedResource Include="compiler\resources\cert.pfx" />
   </ItemGroup>
-
   <ItemGroup>
     <Reference Include="Microsoft.AspNetCore" />
     <Reference Include="Microsoft.AspNetCore.Authentication.Cookies" />

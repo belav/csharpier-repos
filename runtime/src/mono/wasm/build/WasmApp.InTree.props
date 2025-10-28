@@ -1,6 +1,5 @@
 <Project>
   <!-- This depends on the root Directory.Build.props imported this file -->
-
   <Import Project="$(MSBuildThisFileDirectory)WasmApp.props" />
   <PropertyGroup>
     <SelfContained>true</SelfContained>
@@ -13,7 +12,6 @@
     <RunAOTCompilation Condition="'$(RunAOTCompilation)' == ''">false</RunAOTCompilation>
     <PublishTrimmed>true</PublishTrimmed>
     <RunAnalyzers>false</RunAnalyzers>
-
     <DisableImplicitFrameworkReferences>false</DisableImplicitFrameworkReferences>
     <UseLocalTargetingRuntimePack Condition="'$(UseLocalTargetingRuntimePack)' == ''"
       >true</UseLocalTargetingRuntimePack
@@ -24,7 +22,6 @@
     <GenerateErrorForMissingTargetingPacks>false</GenerateErrorForMissingTargetingPacks>
     <ImportTargetingPacksTargetsInWasmAppTargets>true</ImportTargetingPacksTargetsInWasmAppTargets>
   </PropertyGroup>
-
   <!-- This is temporary hack for https://github.com/dotnet/runtime/issues/61294 -->
   <ItemGroup>
     <_MonoRuntimeComponentDontLink Include="libmono-component-debugger-stub-static.a" />

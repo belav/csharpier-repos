@@ -46,14 +46,12 @@
         Include="%(_ILLinkSuppressionFile.Identity)"
       />
     </ItemGroup>
-
     <PropertyGroup>
       <ILLinkArgs
         Condition="'$(GenerateLinkerWarningSuppressions)' != 'true' AND '@(ILLinkSuppressionFile->Count())' != '0'"
         >$(ILLinkArgs) --link-attributes @(ILLinkSuppressionFile->'%(FullPath)', ' --link-attributes ')</ILLinkArgs
       >
     </PropertyGroup>
-
     <!--
         When running from Desktop MSBuild, DOTNET_HOST_PATH is not set.
         In this case, explicitly specify the path to the dotnet host.
@@ -74,12 +72,10 @@
       ToolExe="$(_DotNetHostFileName)"
       ToolPath="$(_DotNetHostDirectory)"
     />
-
     <ItemGroup Condition="'$(GenerateLinkerWarningSuppressions)' == 'true'">
       <_UpdatedILLinkSuppressionFile Include="$(LibrariesTrimmedArtifactsPath)\*.WarningSuppressions.xml" />
       <_UpdatedILLinkSuppressionFile SourcePath="%(FullPath)" />
     </ItemGroup>
-
     <JoinItems
       Left="@(_ILLinkSuppressionFile)"
       Right="@(_UpdatedILLinkSuppressionFile)"
@@ -91,7 +87,6 @@
     >
       <Output TaskParameter="JoinResult" ItemName="_ILLinkFileToUpdate" />
     </JoinItems>
-
     <Copy
       SourceFiles="%(_ILLinkFileToUpdate.SourcePath)"
       DestinationFiles="%(_ILLinkFileToUpdate.FullPath)"

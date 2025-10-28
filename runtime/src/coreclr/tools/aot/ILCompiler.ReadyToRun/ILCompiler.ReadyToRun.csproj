@@ -9,7 +9,6 @@
     <Platforms>x64;x86;arm;arm64</Platforms>
     <PlatformTarget>AnyCPU</PlatformTarget>
     <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
-
     <!-- We're binplacing these into an existing publish layout so that F5 build in VS updates
          the same bits tests expect to see in artifacts/crossgen2. That way we never need to wonder which
          binaries are up to date and which are stale. -->
@@ -18,12 +17,10 @@
     <RunAnalyzers>false</RunAnalyzers>
     <NoWarn Condition="'$(DotNetBuildFromSource)' == 'true'">$(NoWarn);CS8524</NoWarn>
   </PropertyGroup>
-
   <ItemGroup>
     <ProjectReference Include="..\ILCompiler.DependencyAnalysisFramework\ILCompiler.DependencyAnalysisFramework.csproj" />
     <ProjectReference Include="..\ILCompiler.Diagnostics\ILCompiler.Diagnostics.csproj" />
     <ProjectReference Include="..\ILCompiler.TypeSystem\ILCompiler.TypeSystem.csproj" />
-
     <PackageReference
       Condition="'$(DotNetBuildFromSource)' != 'true'"
       Include="StaticCs"
@@ -34,9 +31,7 @@
       <!-- We include our own copy of the ClosedAttribute to work in source build -->
     </PackageReference>
   </ItemGroup>
-
   <Import Project="..\..\Common\Compiler\GenericCycleDetection\GenericCycleDetection.projitems" />
-
   <ItemGroup>
     <Compile
       Include="..\..\Common\Compiler\ImpliedRepeatedFieldDesc.cs"
@@ -617,7 +612,6 @@
     <Compile Include="TypeSystem\Mutable\MutableModule.Sorting.cs" />
     <Compile Include="TypeSystem\Mutable\MutableModule.Symbols.cs" />
   </ItemGroup>
-
   <ItemGroup>
     <Compile Include="..\..\Common\Internal\Runtime\ModuleHeaders.cs">
       <Link>Common\ModuleHeaders.cs</Link>

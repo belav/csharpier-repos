@@ -4,7 +4,6 @@
     <IsTestAssetProject>true</IsTestAssetProject>
     <NoWarn>$(NoWarn);IDE0161;IDE0073</NoWarn>
   </PropertyGroup>
-
   <ItemGroup>
     <Reference Include="Microsoft.AspNetCore" />
     <Reference Include="Microsoft.AspNetCore.Components.Server" />

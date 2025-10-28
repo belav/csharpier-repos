@@ -4,7 +4,6 @@
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     <UseCompilerGeneratedDocXmlFile>false</UseCompilerGeneratedDocXmlFile>
   </PropertyGroup>
-
   <!-- DesignTimeBuild requires all the TargetFramework Derived Properties to not be present in the first property group. -->
   <PropertyGroup>
     <TargetPlatformIdentifier>$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)'))</TargetPlatformIdentifier>
@@ -12,7 +11,6 @@
       >SR.PlatformNotSupported_WebSockets</GeneratePlatformNotSupportedAssemblyMessage
     >
   </PropertyGroup>
-
   <ItemGroup Condition="'$(TargetPlatformIdentifier)' != ''">
     <Compile Include="System\Net\WebSockets\AsyncMutex.cs" />
     <Compile Include="System\Net\WebSockets\Compression\WebSocketDeflater.cs" />
@@ -45,7 +43,6 @@
     <Compile Include="$(CommonPath)Interop\Interop.zlib.cs" Link="Common\Interop\Interop.zlib.cs" />
     <Compile Include="$(CommonPath)System\Obsoletions.cs" Link="Common\System\Obsoletions.cs" />
   </ItemGroup>
-
   <!-- Windows specific files -->
   <ItemGroup Condition="'$(TargetPlatformIdentifier)' == 'windows'">
     <Compile
@@ -53,7 +50,6 @@
       Link="Common\Interop\Windows\Interop.Libraries.cs"
     />
   </ItemGroup>
-
   <!-- Unix specific files -->
   <ItemGroup Condition="'$(TargetPlatformIdentifier)' == 'unix' or '$(TargetPlatformIdentifier)' == 'browser' ">
     <Compile
@@ -61,7 +57,6 @@
       Link="Common\Interop\Unix\Interop.Libraries.cs"
     />
   </ItemGroup>
-
   <ItemGroup>
     <Reference Include="Microsoft.Win32.Primitives" />
     <Reference Include="System.Collections.Specialized" />

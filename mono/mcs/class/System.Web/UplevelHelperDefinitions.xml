@@ -101,36 +101,28 @@ definition correctly.
     <group scanfrom="12" skip="4" match=") Gecko/" javascript="true">
       <!-- All the Gecko-based browsers -->
     </group>
-
     <group scanfrom="12" skip="4" match=") Opera" javascript="true">
       <!-- Opera -->
     </group>
-
     <group positions="12-15" match="(Mac" javascript="true">
       <!-- Safari -->
     </group>
-
     <group scanfrom="12" skip="2" match="(KHTML" javascript="true">
       <!-- Safari -->
     </group>
-
     <group positions="12-15" match="Gale" javascript="true">
       <!-- Galeon < 2.0 -->
     </group>
-
     <group positions="25-28" match="Konq" javascript="true">
       <!-- Konqueror -->
     </group>
-
     <group positions="9-11,12" match="/4.,[" javascript="true">
       <!-- Netscape 4.x -->
     </group>
   </group>
-
   <group positions="0-3" match="Konq" javascript="true">
     <!-- Konqueror -->
   </group>
-
   <group positions="0-3" match="Oper" javascript="true">
     <!-- Opera -->
   </group>

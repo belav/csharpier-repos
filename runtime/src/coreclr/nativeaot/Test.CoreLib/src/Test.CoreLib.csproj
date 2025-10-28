@@ -28,7 +28,6 @@
     <DefineConstants Condition="'$(Platform)' == 'armel'"
       >FEATURE_64BIT_ALIGNMENT;$(DefineConstants)</DefineConstants
     >
-
     <IntermediatesDir>$(ArtifactsObjDir)\coreclr\$(TargetOS).$(TargetArchitecture).$(CoreCLRConfiguration)</IntermediatesDir>
     <IntermediatesDir Condition="'$(Ninja)' == 'false' and $([MSBuild]::IsOsPlatform('Windows'))"
       >$(IntermediatesDir)\ide</IntermediatesDir

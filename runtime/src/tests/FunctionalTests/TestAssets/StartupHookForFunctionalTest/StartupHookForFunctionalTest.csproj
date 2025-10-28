@@ -6,7 +6,6 @@
     <IsFunctionalTest>false</IsFunctionalTest>
     <AndroidGenerateAppBundle>false</AndroidGenerateAppBundle>
   </PropertyGroup>
-
   <ItemGroup>
     <Compile Include="StartupHookForFunctionalTest.cs" />
   </ItemGroup>

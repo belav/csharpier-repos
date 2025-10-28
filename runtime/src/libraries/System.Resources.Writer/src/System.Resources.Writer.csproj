@@ -6,7 +6,6 @@
     <NoWarn>$(NoWarn);CA1510</NoWarn>
     <UseCompilerGeneratedDocXmlFile>false</UseCompilerGeneratedDocXmlFile>
   </PropertyGroup>
-
   <ItemGroup>
     <Compile Include="System\Resources\__FastResourceComparer.cs" />
     <Compile Include="System\Resources\IResourceWriter.cs" />
@@ -20,7 +19,6 @@
       Link="System\Resources\ResourceTypeCode.cs"
     />
   </ItemGroup>
-
   <ItemGroup>
     <Reference Include="System.Collections" />
     <Reference Include="System.Runtime" />

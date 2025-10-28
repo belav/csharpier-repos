@@ -5,7 +5,6 @@
   <Target Name="Main">
     <GenerateResource Sources="@(Files)" OutputResources="@(Files->'%(Filename).resources')" />
   </Target>
-
   <Target Name="Clean">
     <Delete Files="@(Files->'%(Filename).resources')" />
   </Target>

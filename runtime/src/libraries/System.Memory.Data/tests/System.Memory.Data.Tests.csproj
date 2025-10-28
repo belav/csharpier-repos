@@ -2,15 +2,12 @@
   <PropertyGroup>
     <TargetFrameworks>$(NetCoreAppCurrent);$(NetFrameworkMinimum)</TargetFrameworks>
   </PropertyGroup>
-
   <ItemGroup>
     <Compile Include="BinaryDataTests.cs" />
   </ItemGroup>
-
   <ItemGroup>
     <ProjectReference Include="..\src\System.Memory.Data.csproj" />
   </ItemGroup>
-
   <ItemGroup Condition="'$(TargetFrameworkIdentifier)' == '.NETFramework'">
     <ProjectReference
       Include="..\..\System.Text.Json\gen\System.Text.Json.SourceGeneration.Roslyn4.0.csproj"

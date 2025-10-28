@@ -5,10 +5,8 @@
     <TargetFramework>$(DefaultNetCoreTargetFramework)</TargetFramework>
     <VersionPrefix>$(ExperimentalVersionPrefix)</VersionPrefix>
   </PropertyGroup>
-
   <ItemGroup>
     <InternalsVisibleTo Include="Microsoft.AspNetCore.Grpc.Swagger.Tests" />
-
     <Compile
       Include="..\Shared\DescriptorRegistry.cs"
       Link="Internal\Shared\DescriptorRegistry.cs"
@@ -23,7 +21,6 @@
       Link="Internal\Shared\HttpRoutePatternParser.cs"
     />
     <Compile Include="..\Shared\Legacy.cs" Link="Internal\Shared\Legacy.cs" />
-
     <Reference Include="Microsoft.AspNetCore.Grpc.JsonTranscoding" />
     <Reference Include="Swashbuckle.AspNetCore" />
   </ItemGroup>

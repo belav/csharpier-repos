@@ -8,7 +8,6 @@
       >100</_WasmPThreadPoolSize
     >
   </PropertyGroup>
-
   <ItemGroup>
     <ProjectReference
       Include="$(LibrariesProjectRoot)Microsoft.Extensions.Logging.Console\src\Microsoft.Extensions.Logging.Console.csproj"

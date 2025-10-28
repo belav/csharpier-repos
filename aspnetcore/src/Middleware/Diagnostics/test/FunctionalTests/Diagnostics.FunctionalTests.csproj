@@ -5,7 +5,6 @@
     <AssemblyName>Diagnostics.FunctionalTests</AssemblyName>
     <TestDependsOnMssql>true</TestDependsOnMssql>
   </PropertyGroup>
-
   <ItemGroup>
     <ProjectReference Include="..\testassets\DatabaseErrorPageSample\DatabaseErrorPageSample.csproj" />
     <ProjectReference Include="..\testassets\DeveloperExceptionPageSample\DeveloperExceptionPageSample.csproj" />
@@ -14,7 +13,6 @@
     <ProjectReference Include="..\testassets\WelcomePageSample\WelcomePageSample.csproj" />
     <ProjectReference Include="..\..\..\MiddlewareAnalysis\samples\MiddlewareAnalysisSample\MiddlewareAnalysisSample.csproj" />
   </ItemGroup>
-
   <ItemGroup>
     <Reference Include="Microsoft.AspNetCore.Server.Kestrel" />
     <Reference Include="Microsoft.AspNetCore.TestHost" />

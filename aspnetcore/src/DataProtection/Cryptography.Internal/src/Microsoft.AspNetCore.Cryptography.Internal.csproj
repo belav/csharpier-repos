@@ -8,7 +8,6 @@
     <PackageTags>aspnetcore;dataprotection</PackageTags>
     <IsTrimmable>true</IsTrimmable>
   </PropertyGroup>
-
   <ItemGroup>
     <InternalsVisibleTo Include="Microsoft.AspNetCore.Cryptography.Internal.Tests" />
     <InternalsVisibleTo Include="Microsoft.AspNetCore.Cryptography.KeyDerivation" />

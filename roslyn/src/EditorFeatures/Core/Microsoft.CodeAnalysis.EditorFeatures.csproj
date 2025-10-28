@@ -10,7 +10,6 @@
     <ApplyNgenOptimization Condition="'$(TargetFramework)' == 'netstandard2.0'"
       >full</ApplyNgenOptimization
     >
-
     <!-- NuGet -->
     <PackageId>Microsoft.CodeAnalysis.EditorFeatures.Common</PackageId>
     <IsPackable>true</IsPackable>

@@ -9,7 +9,6 @@
     -->
     <PackageReference Include="Yarn.MSBuild" Version="1.22.10" />
   </ItemGroup>
-
   <!-- Update the generated files when we restore projects. Skip in desktop msbuild due to VS 16.8 requirements. -->
   <Target
     Name="GenerateDirectoryBuildFiles"

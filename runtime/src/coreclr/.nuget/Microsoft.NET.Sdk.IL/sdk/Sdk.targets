@@ -16,6 +16,5 @@ Copyright (c) .NET Foundation. All rights reserved.
       >$(MSBuildThisFileDirectory)..\targets\Microsoft.NET.Sdk.IL.Common.targets</LanguageTargets
     >
   </PropertyGroup>
-
   <Import Project="Sdk.targets" Sdk="Microsoft.NET.Sdk" />
 </Project>

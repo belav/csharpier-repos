@@ -18,14 +18,12 @@
     <!-- keep this version to make sure it will pause in the expected line -->
     <PackageReference Include="Newtonsoft.Json" Version="13.0.2" />
   </ItemGroup>
-
   <ItemGroup>
     <WasmExtraFilesToDeploy Include="debugger-driver.html" />
     <WasmExtraFilesToDeploy Include="non-wasm-page.html" />
     <WasmExtraFilesToDeploy Include="wasm-page-without-assets.html" />
     <WasmExtraFilesToDeploy Include="other.js" />
     <WasmExtraFilesToDeploy Include="weather.json" />
-
     <!-- We want to bundle these assemblies, so build them first -->
     <ProjectReference Include="..\ApplyUpdateReferencedAssembly\ApplyUpdateReferencedAssembly.csproj" />
     <ProjectReference Include="..\ApplyUpdateReferencedAssembly2\ApplyUpdateReferencedAssembly2.csproj" />
@@ -64,7 +62,6 @@
       ReferenceOutputAssembly="false"
       Private="true"
     />
-
     <!-- These are only loaded dynamically -->
     <_AssemblyForDynamicLoading Include="lazy-debugger-test" />
     <_AssemblyForDynamicLoading Include="lazy-debugger-test-chinese-char-in-path-ㄨ" />
@@ -79,7 +76,6 @@
       Private="true"
     />
   </ItemGroup>
-
   <Target Name="PrepareForWasmBuildApp" DependsOnTargets="Build">
     <Error
       Condition="!Exists('$(MicrosoftNetCoreAppRuntimePackRidDir)native')"
@@ -103,7 +99,6 @@
       <WasmDebugLevel Condition="'$(WasmDebugLevel)'==''">-1</WasmDebugLevel>
       <WasmResolveAssembliesBeforeBuild>true</WasmResolveAssembliesBeforeBuild>
     </PropertyGroup>
-
     <ItemGroup>
       <WasmAssembliesToBundle Include="$(OutDir)\$(TargetFileName)" />
       <WasmAssembliesToBundle Include="$(OutDir)\debugger-test-special-char-in-path.dll" />
@@ -118,15 +113,12 @@
       <WasmAssembliesToBundle Include="$(OutDir)\debugger-test-vb.dll" />
       <WasmAssembliesToBundle Include="$(OutDir)\Newtonsoft.Json.dll" />
       <WasmAssembliesToBundle Include="$(MicrosoftNetCoreAppRuntimePackRidDir)\lib\$(NetCoreappCurrent)\System.Runtime.InteropServices.JavaScript.dll" />
-
       <!-- Assemblies only dynamically loaded -->
       <WasmFilesToIncludeInFileSystem Include="$(OutDir)\%(_AssemblyForDynamicLoading.Identity).dll" />
-
       <WasmExtraFilesToDeploy Include="debugger-main.js" />
       <WasmExtraFilesToDeploy Include="$(OutDir)\%(_AssemblyForDynamicLoading.Identity).*" />
       <WasmExtraFilesToDeploy Include="$(OutDir)\lazy-debugger-test-embedded.*" />
       <WasmExtraFilesToDeploy Include="@(ReferenceCopyLocalPaths)" />
-
       <WasmAssemblySearchPaths Include="$(MicrosoftNetCoreAppRuntimePackRidDir)native" />
       <WasmAssemblySearchPaths Include="$(MicrosoftNetCoreAppRuntimePackRidDir)lib\$(NetCoreAppCurrent)" />
       <WasmAssemblySearchPaths Include="$(OutDir)" />
@@ -170,13 +162,11 @@
       />
     </ItemGroup>
   </Target>
-
   <ItemGroup>
     <ProjectReference
       Include="$(LibrariesProjectRoot)System.Runtime.InteropServices.JavaScript\src\System.Runtime.InteropServices.JavaScript.csproj"
       SkipUseReferenceAssembly="true"
     />
   </ItemGroup>
-
   <Import Project="$(MonoProjectRoot)\wasm\build\WasmApp.InTree.targets" />
 </Project>

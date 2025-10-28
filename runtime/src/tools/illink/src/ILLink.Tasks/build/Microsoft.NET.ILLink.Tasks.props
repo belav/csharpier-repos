@@ -25,11 +25,9 @@ Copyright (c) .NET Foundation. All rights reserved.
     <ILLinkTasksAssembly Condition="'$(MSBuildRuntimeType)' != 'Core'"
       >$(MSBuildThisFileDirectory)..\tools\net472\ILLink.Tasks.dll</ILLinkTasksAssembly
     >
-
     <ILLinkAnalyzersPropsPath Condition="'$(ILLinkAnalyzersPropsPath)' == ''"
       >$(MSBuildThisFileDirectory)Microsoft.NET.ILLink.Analyzers.props</ILLinkAnalyzersPropsPath
     >
   </PropertyGroup>
-
   <Import Project="$(ILLinkAnalyzersPropsPath)" />
 </Project>

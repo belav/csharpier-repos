@@ -9,7 +9,6 @@
       >$(DefineConstants);DISABLE_PLAYWRIGHT</DefineConstants
     >
   </PropertyGroup>
-
   <ItemGroup>
     <Reference Include="Microsoft.Playwright" Condition="'$(IsPlaywrightAvailable)' == 'true'" />
     <Reference

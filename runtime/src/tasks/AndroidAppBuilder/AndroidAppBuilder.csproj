@@ -30,9 +30,7 @@
     <Compile Include="..\Common\JavaCompiler.cs" />
     <Compile Include="..\Common\Utils.cs" />
   </ItemGroup>
-
   <Target Name="PublishBuilder" AfterTargets="Build" DependsOnTargets="Publish" />
-
   <Target Name="GetFilesToPackage" Returns="@(FilesToPackage)">
     <ItemGroup>
       <!-- non-net4* -->

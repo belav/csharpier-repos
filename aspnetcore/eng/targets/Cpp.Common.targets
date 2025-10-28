@@ -4,7 +4,6 @@
     Project="$(MicroBuildPluginDirectory)\MicroBuild.Plugins.*\**\build\MicroBuild.Plugins.*.targets"
     Condition="'$(DisableMicroBuild)' != 'true' AND '$(MicroBuildPluginDirectory)' != ''"
   />
-
   <Target Name="GetVcxprojFilesToSign" BeforeTargets="SignFiles">
     <ItemGroup>
       <FilesToSign
@@ -14,7 +13,6 @@
       />
     </ItemGroup>
   </Target>
-
   <Target Name="Pack" />
   <Target Name="Restore" />
   <Target Name="ResolveNuGetPackageAssets" />

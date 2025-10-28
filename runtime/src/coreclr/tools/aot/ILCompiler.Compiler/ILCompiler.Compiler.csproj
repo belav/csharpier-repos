@@ -8,21 +8,17 @@
     <Platforms>x64;x86</Platforms>
     <PlatformTarget>AnyCPU</PlatformTarget>
     <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
-
     <!-- We're binplacing these into an existing publish layout so that F5 build in VS updates
          the same bits tests expect to see in artifacts/ilc. That way we never need to wonder which
          binaries are up to date and which are stale. -->
     <GenerateDependencyFile>false</GenerateDependencyFile>
     <Configurations>Debug;Release;Checked</Configurations>
-
     <NoWarn Condition="'$(DotNetBuildFromSource)' == 'true'">$(NoWarn);CS8524</NoWarn>
   </PropertyGroup>
-
   <ItemGroup>
     <ProjectReference Include="..\ILCompiler.DependencyAnalysisFramework\ILCompiler.DependencyAnalysisFramework.csproj" />
     <ProjectReference Include="..\ILCompiler.MetadataTransform\ILCompiler.MetadataTransform.csproj" />
     <ProjectReference Include="..\ILCompiler.TypeSystem\ILCompiler.TypeSystem.csproj" />
-
     <PackageReference
       Condition="'$(DotNetBuildFromSource)' != 'true'"
       Include="StaticCs"
@@ -33,7 +29,6 @@
       <!-- We include our own copy of the ClosedAttribute to work in source build -->
     </PackageReference>
   </ItemGroup>
-
   <ItemGroup>
     <Compile
       Include="..\..\Common\Compiler\ImpliedRepeatedFieldDesc.cs"
@@ -569,7 +564,6 @@
       Include="..\..\Common\Compiler\VectorFieldLayoutAlgorithm.cs"
       Link="Compiler\VectorFieldLayoutAlgorithm.cs"
     />
-
     <Compile Include="Compiler\AnalysisBasedInteropStubManager.cs" />
     <Compile Include="Compiler\AnalysisBasedMetadataManager.cs" />
     <Compile Include="Compiler\BodySubstitution.cs" />
@@ -932,7 +926,6 @@
       <Link>Pgo\PgoFormat.cs</Link>
     </Compile>
   </ItemGroup>
-
   <ItemGroup>
     <Compile Update="Resources\Strings.Designer.cs">
       <DesignTime>True</DesignTime>
@@ -940,14 +933,12 @@
       <DependentUpon>Strings.resx</DependentUpon>
     </Compile>
   </ItemGroup>
-
   <ItemGroup>
     <EmbeddedResource Update="Resources\Strings.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Strings.Designer.cs</LastGenOutput>
     </EmbeddedResource>
   </ItemGroup>
-
   <Import
     Project="..\..\..\..\tools\illink\src\ILLink.Shared\ILLink.Shared.projitems"
     Label="Shared"

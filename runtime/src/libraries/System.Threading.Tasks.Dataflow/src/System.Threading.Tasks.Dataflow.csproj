@@ -19,7 +19,6 @@ System.Threading.Tasks.Dataflow.TransformBlock&lt;TInput, TOutput&gt;
 System.Threading.Tasks.Dataflow.TransformManyBlock&lt;TInput, TOutput&gt;
 System.Threading.Tasks.Dataflow.WriteOnceBlock&lt;T&gt;</PackageDescription>
   </PropertyGroup>
-
   <ItemGroup>
     <Compile Include="Base\DataflowBlock.cs" />
     <Compile Include="Base\DataflowBlockOptions.cs" />
@@ -79,12 +78,10 @@ System.Threading.Tasks.Dataflow.WriteOnceBlock&lt;T&gt;</PackageDescription>
       Condition="'$(TargetFrameworkIdentifier)' != '.NETCoreApp'"
     />
   </ItemGroup>
-
   <ItemGroup>
     <None Include="XmlDocs\CommonXmlDocComments.xml" />
     <Content Include="XmlDocs\System.Threading.Tasks.Dataflow.xml" Pack="false" />
   </ItemGroup>
-
   <ItemGroup Condition="'$(TargetFramework)' == '$(NetCoreAppCurrent)'">
     <Reference Include="System.Collections" />
     <Reference Include="System.Collections.Concurrent" />

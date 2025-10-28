@@ -16,7 +16,6 @@
     <BundlesResources Condition="'$(BundlesResources)' == ''">false</BundlesResources>
     <iOSLikeDedup Condition="'$(iOSLikeDedup)' == ''">false</iOSLikeDedup>
   </PropertyGroup>
-
   <ItemGroup>
     <!-- Preserves the UnmanagedCallersOnly method -->
     <TrimmerRootDescriptor Include="$(MSBuildThisFileDirectory)ILLink.Descriptors.xml" />

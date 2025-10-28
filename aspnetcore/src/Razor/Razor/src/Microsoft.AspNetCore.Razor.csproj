@@ -12,15 +12,12 @@ Microsoft.AspNetCore.Razor.TagHelpers.ITagHelper</Description>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
     <PackageTags>$(PackageTags);taghelper;taghelpers</PackageTags>
     <IsPackable>false</IsPackable>
-
     <!-- Required to implement an HtmlEncoder -->
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
-
   <ItemGroup>
     <Reference Include="Microsoft.AspNetCore.Html.Abstractions" />
   </ItemGroup>
-
   <ItemGroup>
     <InternalsVisibleTo Include="Microsoft.AspNetCore.Razor.Test" />
     <InternalsVisibleTo Include="Microsoft.AspNetCore.Razor.Runtime.Test" />

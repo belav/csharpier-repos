@@ -2,8 +2,6 @@
 Description:  XHTML extensions to Atom
 Expect:       MisplacedXHTMLContent
 -->
-
-
 <feed xmlns="http://www.w3.org/2005/Atom" xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <title>Example Feed</title>
   <link href="http://contoso.com/" />

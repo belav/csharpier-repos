@@ -1,7 +1,6 @@
 <Project>
   <!-- Version of this SDK is set in global.json -->
   <Sdk Name="Yarn.MSBuild" />
-
   <!-- Make sure the settings files get copied to the test output folder. -->
   <ItemGroup>
     <None Update="e2eTestSettings*.json">
@@ -11,7 +10,6 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
-
   <Target
     Name="WarnSeleniumNotSupported"
     BeforeTargets="Build"
@@ -22,9 +20,7 @@
       Text="Selenium tests are not supported for OS '$(OS)' and architecture '$(TargetArchitecture)'."
     />
   </Target>
-
   <!-- Running prerequisites -->
-
   <Target
     Name="EnsurePrerequisites"
     Condition="'$(EnforceE2ETestPrerequisites)' == 'true'"
@@ -35,9 +31,7 @@
     <Exec Command="java -version" />
     <Message Importance="High" Text="JAVA is available on the PATH" />
   </Target>
-
   <!-- Resolve content roots at build time -->
-
   <Target Name="_ResolveTestProjectReferences" DependsOnTargets="ResolveReferences">
     <PropertyGroup>
       <_DefaultProjectRoot>$([System.IO.Path]::GetFullPath($(_DefaultProjectFilter)))</_DefaultProjectRoot>
@@ -49,7 +43,6 @@
       />
     </ItemGroup>
   </Target>
-
   <Target
     Name="_AddTestProjectMetadataAttributes"
     BeforeTargets="GetAssemblyAttributes"
@@ -65,7 +58,6 @@
         Priority="0"
       />
     </ItemGroup>
-
     <ItemGroup>
       <AssemblyAttribute
         Condition=" '%(_ContentRootMetadata.Identity)' != '' "
@@ -76,7 +68,6 @@
       </AssemblyAttribute>
     </ItemGroup>
   </Target>
-
   <Target Name="_AddSeleniumSupportedMetadataAttribute" BeforeTargets="GetAssemblyAttributes">
     <PropertyGroup>
       <_SeleniumE2ETestsSupportedAttributeValue>false</_SeleniumE2ETestsSupportedAttributeValue>
@@ -91,7 +82,6 @@
       </AssemblyAttribute>
     </ItemGroup>
   </Target>
-
   <Target Name="_AddProcessTrackingMetadataAttribute" BeforeTargets="GetAssemblyAttributes">
     <MakeDir Directories="$(SeleniumProcessTrackingFolder)" />
     <ItemGroup>
@@ -108,7 +98,6 @@
       </AssemblyAttribute>
     </ItemGroup>
   </Target>
-
   <Target Name="_EnsureSeleniumScreenShotsFolder" BeforeTargets="Build">
     <MakeDir Directories="$(SeleniumScreenShotsFolderPath)" />
   </Target>

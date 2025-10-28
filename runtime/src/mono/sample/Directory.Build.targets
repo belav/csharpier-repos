@@ -1,6 +1,5 @@
 <Project>
   <UsingTask TaskName="GenerateRunScript" AssemblyFile="$(InstallerTasksAssemblyPath)" />
-
   <PropertyGroup>
     <RunScriptOutputName Condition="'$(TargetOS)' != 'windows'">RunTests.sh</RunScriptOutputName>
     <RunScriptOutputName
@@ -8,7 +7,6 @@
       >RunTests.cmd</RunScriptOutputName
     >
   </PropertyGroup>
-
   <!--
      This needs to be triggered manually, like:
 
@@ -26,29 +24,23 @@
         >$([MSBuild]::NormalizePath('$(OutDir)', '$(RunScriptOutputName)'))</RunScriptOutputPath
       >
     </PropertyGroup>
-
     <ItemGroup>
       <RunScriptCommands Include="$(RunScriptCommand)" />
-
       <RunScriptCommands Include="@(PostRunScriptCommands)" />
     </ItemGroup>
-
     <GenerateRunScript
       RunCommands="@(RunScriptCommands)"
       SetCommands="@(SetScriptCommands)"
       TemplatePath="$(RunScriptInputPath)"
       OutputPath="$(RunScriptOutputPath)"
     />
-
     <Exec
       Condition="'$(TargetOS)' != 'windows' and '$(OS)' != 'Windows_NT'"
       Command="chmod +x $(RunScriptOutputPath)"
     />
   </Target>
-
   <Import Project="$(RepositoryEngineeringDir)targetingpacks.targets" />
   <Import Project="..\Directory.Build.targets" />
-
   <Target Name="PrintRuntimePackLocation" AfterTargets="UpdateTargetingAndRuntimePack">
     <Message Text="Used runtime pack: %(ResolvedRuntimePack.PackageDirectory)" Importance="high" />
   </Target>

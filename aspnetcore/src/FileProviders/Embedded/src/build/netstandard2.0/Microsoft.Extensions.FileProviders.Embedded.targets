@@ -2,7 +2,6 @@
   <PropertyGroup>
     <PrepareResourceNamesDependsOn>_CalculateEmbeddedFilesManifestInputs;$(PrepareResourceNamesDependsOn)</PrepareResourceNamesDependsOn>
   </PropertyGroup>
-
   <Target
     Name="_CalculateEmbeddedFilesManifestInputs"
     Condition="'$(GenerateEmbeddedFilesManifest)' == 'true'"
@@ -10,17 +9,14 @@
     <PropertyGroup>
       <_GeneratedManifestFile>$(IntermediateOutputPath)$(EmbeddedFilesManifestFileName)</_GeneratedManifestFile>
     </PropertyGroup>
-
     <ItemGroup>
       <_FilesForManifest Include="@(EmbeddedResource)" />
       <_FilesForManifest Remove="@(EmbeddedResource->WithMetadataValue('ExcludeFromManifest','true'))" />
     </ItemGroup>
-
     <Warning
       Text="GenerateEmbeddedFilesManifest was set, but no EmbeddedResource items were found that could be added to the manifest."
       Condition="'@(_FilesForManifest->Count())' == '0'"
     />
-
     <ItemGroup Condition="'@(_FilesForManifest->Count())' != '0'">
       <EmbeddedResource
         Include="$(_GeneratedManifestFile)"
@@ -28,7 +24,6 @@
       />
     </ItemGroup>
   </Target>
-
   <Target
     Name="_CreateGeneratedManifestInfoInputsCacheFile"
     DependsOnTargets="_CalculateEmbeddedFilesManifestInputs"
@@ -36,23 +31,19 @@
     <PropertyGroup>
       <_GeneratedManifestInfoInputsCacheFile>$(IntermediateOutputPath)$(MSBuildProjectName).EmbeddedFilesManifest.cache</_GeneratedManifestInfoInputsCacheFile>
     </PropertyGroup>
-
     <Hash ItemsToHash="@(_FilesForManifest)">
       <Output TaskParameter="HashResult" PropertyName="_EmbeddedGeneratedManifestHash" />
     </Hash>
-
     <WriteLinesToFile
       Lines="$(_EmbeddedGeneratedManifestHash)"
       File="$(_GeneratedManifestInfoInputsCacheFile)"
       Overwrite="True"
       WriteOnlyWhenDifferent="True"
     />
-
     <ItemGroup>
       <FileWrites Include="$(_GeneratedManifestInfoInputsCacheFile)" />
     </ItemGroup>
   </Target>
-
   <Target
     Name="_GenerateEmbeddedFilesManifest"
     DependsOnTargets="_CreateGeneratedManifestInfoInputsCacheFile"
@@ -67,7 +58,6 @@
       <_FilesForManifest Include="@(EmbeddedResource)" />
       <_FilesForManifest Remove="@(EmbeddedResource->WithMetadataValue('ExcludeFromManifest','true'))" />
     </ItemGroup>
-
     <GenerateEmbeddedResourcesManifest
       EmbeddedFiles="@(_FilesForManifest)"
       ManifestFile="$(_GeneratedManifestFile)"

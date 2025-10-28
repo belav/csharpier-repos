@@ -11,7 +11,6 @@
     -->
     <PlatformTarget Condition="'$(PlatformTarget)' == ''">AnyCPU</PlatformTarget>
   </PropertyGroup>
-
   <!-- 
     This is adding the diasymreader native assets to the output directory of our binaries. The 
     package can't be referenced directly but rather has to have it's assets manually copied 
@@ -28,7 +27,6 @@
       <Visible>false</Visible>
       <Pack>false</Pack>
     </Content>
-
     <PackageReference
       Include="Microsoft.DiaSymReader.Native"
       Version="$(MicrosoftDiaSymReaderNativeVersion)"

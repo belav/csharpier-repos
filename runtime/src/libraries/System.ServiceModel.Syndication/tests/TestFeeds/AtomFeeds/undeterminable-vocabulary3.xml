@@ -2,8 +2,6 @@
 Description:  Extension elements without a namespace in unknown namespace produce no warning
 Expect:       !UndeterminableVocabulary
 -->
-
-
 <feed xmlns="http://www.w3.org/2005/Atom">
   <title>Example Feed</title>
   <link href="http://contoso.com/" />
@@ -13,7 +11,6 @@ Expect:       !UndeterminableVocabulary
   </author>
   <id>urn:uuid:60a76c80-d399-11d9-b93C-0003939e0af6</id>
   <value xmlns="http://www.contoso.com/value">Test <data xmlns=""></data></value>
-
   <entry>
     <title>Atom-Powered Robots Run Amok</title>
     <link href="http://contoso.com/2003/12/13/atom03" />

@@ -6,7 +6,6 @@
     <!-- SYSLIB0013: Uri.EscapeUriString is obsolete
          SYSLIB0037: AssemblyName members HashAlgorithm, ProcessorArchitecture, and VersionCompatibility are obsolete. -->
     <NoWarn>$(NoWarn);SYSLIB0013;SYSLIB0037</NoWarn>
-
     <!-- these tests depend on the pdb files -->
     <DebuggerSupport Condition="'$(DebuggerSupport)' == '' and '$(TargetOS)' == 'browser'"
       >true</DebuggerSupport
@@ -88,7 +87,6 @@
   </ItemGroup>
   <ItemGroup>
     <TrimmerRootDescriptor Include="$(MSBuildThisFileDirectory)ILLink.Descriptors.xml" />
-
     <!-- Assemblies that should be excluded from the bundle -->
     <__ExcludeFromBundle Include="TestAssembly.dll" />
   </ItemGroup>

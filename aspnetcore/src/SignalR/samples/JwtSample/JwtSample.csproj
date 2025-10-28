@@ -3,11 +3,9 @@
     <TargetFramework>$(DefaultNetCoreTargetFramework)</TargetFramework>
     <GenerateRazorAssemblyInfo>false</GenerateRazorAssemblyInfo>
   </PropertyGroup>
-
   <ItemGroup>
     <Folder Include="wwwroot\" />
   </ItemGroup>
-
   <ItemGroup>
     <Reference Include="Microsoft.AspNetCore.SignalR" />
     <Reference Include="Microsoft.AspNetCore.Authentication.JwtBearer" />
@@ -19,7 +17,6 @@
     <Reference Include="Microsoft.Extensions.Logging.Console" />
     <Reference Include="Microsoft.Extensions.Logging.Debug" />
   </ItemGroup>
-
   <Target Name="CopyTSClient" BeforeTargets="AfterBuild">
     <ItemGroup>
       <SignalRJSClientFiles Include="$(MSBuildThisFileDirectory)..\..\clients\ts\signalr\dist\browser\*" />

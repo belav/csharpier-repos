@@ -3,7 +3,6 @@
     <TargetFramework>$(DefaultNetCoreTargetFramework)</TargetFramework>
     <IsTestAssetProject>true</IsTestAssetProject>
   </PropertyGroup>
-
   <ItemGroup>
     <Reference Include="Microsoft.Extensions.DiagnosticAdapter" />
   </ItemGroup>

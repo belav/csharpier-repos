@@ -5,7 +5,6 @@
     Targets included after project file and before Arcade SDK targets.
     Use to set Arcade SDK properties that depend on properties set in the project file.
   -->
-
   <PropertyGroup Condition="'$(IsSymbolPublishingPackage)' == 'true'">
     <IsPackable>true</IsPackable>
     <IsShippingPackage>false</IsShippingPackage>
@@ -14,7 +13,6 @@
       >$(AssemblyName).$(PlatformTarget).Symbols</PackageId
     >
   </PropertyGroup>
-
   <!-- use the source-built version of the reference packs if building in source-build -->
   <ItemGroup Condition="'$(DotNetBuildFromSource)' == 'true'">
     <KnownFrameworkReference Update="Microsoft.NETCore.App">
@@ -28,7 +26,6 @@
       >
     </KnownFrameworkReference>
   </ItemGroup>
-
   <!-- do not restore or use the 6.0 app host in source-build -->
   <PropertyGroup Condition="'$(DotNetBuildFromSource)' == 'true'">
     <UseAppHost>false</UseAppHost>

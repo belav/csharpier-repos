@@ -66,7 +66,6 @@
       </Code>
     </Task>
   </UsingTask>
-
   <UsingTask
     TaskName="WinConfigSetup"
     TaskFactory="CodeTaskFactory"
@@ -357,13 +356,11 @@
       </Code>
     </Task>
   </UsingTask>
-
   <Target Name="RunWinConfigSetup">
     <GetVersionsFromConfigureAC ConfigFileRoot="$(MSBuildThisFileDirectory)..\">
       <Output TaskParameter="MonoVersion" PropertyName="_MonoVersion" />
       <Output TaskParameter="MonoCorlibVersion" PropertyName="_MonoCorlibVersion" />
     </GetVersionsFromConfigureAC>
-
     <WinConfigSetup
       ConfigFileRoot="$(MSBuildThisFileDirectory)..\"
       MonoVersion="$(_MonoVersion)"

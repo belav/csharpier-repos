@@ -11,7 +11,6 @@
     <CLSCompliant>false</CLSCompliant>
     <AnalyzerLanguage>cs</AnalyzerLanguage>
   </PropertyGroup>
-
   <ItemGroup>
     <PackageReference
       Include="Microsoft.CodeAnalysis.CSharp.Workspaces"
@@ -19,7 +18,6 @@
       PrivateAssets="all"
     />
   </ItemGroup>
-
   <ItemGroup>
     <Compile
       Include="$(CommonPath)\Roslyn\DiagnosticDescriptorHelper.cs"

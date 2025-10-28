@@ -7,7 +7,6 @@
     <TargetFramework>netstandard2.0</TargetFramework>
     <DefineConstants>$(DefineConstants),CODE_STYLE</DefineConstants>
     <CopyLocalLockFileAssemblies>true</CopyLocalLockFileAssemblies>
-
     <!-- NuGet -->
     <IsPackable>true</IsPackable>
     <IsAnalyzer>true</IsAnalyzer>
@@ -19,7 +18,6 @@
     <!-- Remove once https://github.com/NuGet/Home/issues/8583 is fixed -->
     <NoWarn>$(NoWarn);NU5128</NoWarn>
   </PropertyGroup>
-
   <Target Name="_GetFilesToPackage">
     <PropertyGroup>
       <CodeStyleAnalyzerArtifactsBinDir>$(ArtifactsBinDir)Microsoft.CodeAnalysis.CodeStyle\$(Configuration)\$(TargetFramework)</CodeStyleAnalyzerArtifactsBinDir>
@@ -34,9 +32,7 @@
         >$(DotNetRoot)dotnet</DotNetExecutable
       >
     </PropertyGroup>
-
     <Exec Command="&quot;$(DotNetExecutable)&quot; &quot;$(ArtifactsBinDir)CodeStyleConfigFileGenerator\$(Configuration)\net8.0\CodeStyleConfigFileGenerator.dll&quot; &quot;CSharp&quot; &quot;$(CSharpCodeStyleFixesArtifactsBinDir)&quot; &quot;$(CSharpCodeStyleTargetsFileName)&quot; &quot;$(CodeStyleAnalyzerArtifactsBinDir)\Microsoft.CodeAnalysis.CodeStyle.dll;$(CSharpCodeStyleAnalyzerArtifactsBinDir)\Microsoft.CodeAnalysis.CSharp.CodeStyle.dll&quot;" />
-
     <ItemGroup>
       <_File
         Include="$(CSharpCodeStyleAnalyzerArtifactsBinDir)\Microsoft.CodeAnalysis.CSharp.CodeStyle.dll"
@@ -79,7 +75,6 @@
         TargetDir="build/config"
       />
       <_File Include="$(MSBuildProjectDirectory)\build\**\*.*" TargetDir="build" />
-
       <TfmSpecificPackageFile
         Include="@(_File)"
         PackagePath="%(_File.TargetDir)/%(_File.RecursiveDir)%(_File.FileName)%(_File.Extension)"

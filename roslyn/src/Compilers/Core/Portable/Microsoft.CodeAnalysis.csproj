@@ -12,7 +12,6 @@
       >full</ApplyNgenOptimization
     >
     <GeneratePerformanceSensitiveAttribute>true</GeneratePerformanceSensitiveAttribute>
-
     <!-- NuGet -->
     <IsPackable>true</IsPackable>
     <PackageId>Microsoft.CodeAnalysis.Common</PackageId>
@@ -130,10 +129,8 @@
       LoadsWithinVisualStudio="false"
     />
     <InternalsVisibleTo Include="CompilerBenchmarks" />
-
     <EmbeddedResource Update="CodeAnalysisResources.resx" GenerateSource="true" />
     <EmbeddedResource Include="Resources\default.win32manifest" />
-
     <None Include="RuleSet\RuleSetSchema.xsd">
       <SubType>Designer</SubType>
     </None>

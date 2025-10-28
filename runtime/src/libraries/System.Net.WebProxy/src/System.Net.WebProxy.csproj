@@ -4,7 +4,6 @@
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     <UseCompilerGeneratedDocXmlFile>false</UseCompilerGeneratedDocXmlFile>
   </PropertyGroup>
-
   <ItemGroup>
     <Compile Include="System\Net\IWebProxyScript.cs" />
     <Compile Include="System\Net\WebProxy.cs" />
@@ -18,7 +17,6 @@
       Include="System\Net\WebProxy.NonBrowser.cs"
     />
   </ItemGroup>
-
   <ItemGroup>
     <Reference Include="System.Memory" />
     <Reference Include="System.Net.NameResolution" />

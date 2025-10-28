@@ -13,17 +13,14 @@
       >true</ImportByWildcardAfterMicrosoftCommonTargets
     >
   </PropertyGroup>
-
   <Import
     Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\$(MSBuildThisFile)\ImportBefore\*"
     Condition="'$(ImportByWildcardBeforeMicrosoftCommonTargets)' == 'true' and Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\$(MSBuildThisFile)\ImportBefore')"
   />
-
   <Import
     Project="$(MSBuildProjectFullPath).user"
     Condition="Exists('$(MSBuildProjectFullPath).user')"
   />
-
   <PropertyGroup>
     <OutputType Condition="'$(OutputType)' == ''">Exe</OutputType>
     <TargetExt Condition="'$(OutputType)' == 'Winexe'">.exe</TargetExt>
@@ -31,16 +28,13 @@
     <TargetExt Condition="'$(OutputType)' == 'Library'">.dll</TargetExt>
     <TargetExt Condition="'$(OutputType)' == 'Netmodule'">.netmodule</TargetExt>
   </PropertyGroup>
-
   <PropertyGroup>
     <ProjectDir Condition="'$(ProjectDir)' == ''">$(MSBuildProjectDirectory)\</ProjectDir>
   </PropertyGroup>
-
   <!-- MSBuild defines this even outside of VS, and F# projects depend on it -->
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">11.0</VisualStudioVersion>
   </PropertyGroup>
-
   <PropertyGroup>
     <AssemblyName Condition="'$(AssemblyName)' == ''">$(MSBuildProjectName)</AssemblyName>
     <OutputPath Condition="'$(OutputPath)' != '' and !HasTrailingSlash('$(OutputPath)')"
@@ -49,14 +43,12 @@
     <OutputPath Condition=" '$(Platform)'=='' and '$(Configuration)'=='' and '$(OutputPath)'=='' "
       >bin\Debug\</OutputPath
     >
-
     <TargetFrameworkIdentifier Condition="'$(TargetFrameworkIdentifier)' == ''"
       >.NETFramework</TargetFrameworkIdentifier
     >
     <TargetFrameworkVersion Condition="'$(TargetFrameworkVersion)' == ''"
       >v4.0</TargetFrameworkVersion
     >
-
     <TargetFrameworkMoniker
       Condition="'$(TargetFrameworkMoniker)' == '' and '$(TargetFrameworkProfile)' != ''"
       >$(TargetFrameworkIdentifier),Version=$(TargetFrameworkVersion),Profile=$(TargetFrameworkProfile)</TargetFrameworkMoniker
@@ -65,20 +57,16 @@
       >$(TargetFrameworkIdentifier),Version=$(TargetFrameworkVersion)</TargetFrameworkMoniker
     >
   </PropertyGroup>
-
   <PropertyGroup>
     <OutDir Condition="'$(OutDir)' == ''">$(OutputPath)</OutDir>
     <OutDir Condition="'$(OutDir)' != '' and !HasTrailingSlash('$(OutDir)')">$(OutDir)\</OutDir>
-
     <_OriginalConfiguration>$(Configuration)</_OriginalConfiguration>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <ConfigurationName Condition="'$(ConfigurationName)' == ''">$(Configuration)</ConfigurationName>
-
     <_OriginalPlatform>$(Platform)</_OriginalPlatform>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <PlatformName Condition="'$(PlatformName)' == ''">$(Platform)</PlatformName>
   </PropertyGroup>
-
   <!-- in MSBuild, these properties are set in a separate file that is only imported for .NETFramework -->
   <PropertyGroup Condition="'$(TargetFrameworkIdentifier)' == '.NETFramework'">
     <AddAdditionalExplicitAssemblyReferences
@@ -90,13 +78,11 @@
       >System.Core;$(AdditionalExplicitAssemblyReferences)</AdditionalExplicitAssemblyReferences
     >
   </PropertyGroup>
-
   <PropertyGroup>
     <SkipCopyUnchangedFiles Condition="'$(SkipCopyUnchangedFiles)' == ''"
       >true</SkipCopyUnchangedFiles
     >
   </PropertyGroup>
-
   <PropertyGroup>
     <BaseIntermediateOutputPath Condition="'$(BaseIntermediateOutputPath)' == ''"
       >obj\</BaseIntermediateOutputPath
@@ -109,7 +95,6 @@
       >$(MSBuildProjectFile).FilesWrittenAbsolute.txt</CleanFile
     >
   </PropertyGroup>
-
   <PropertyGroup Condition="'$(IntermediateOutputPath)' == ''">
     <IntermediateOutputPath Condition=" '$(PlatformName)' == 'AnyCPU'"
       >$(BaseIntermediateOutputPath)$(Configuration)\</IntermediateOutputPath
@@ -118,21 +103,17 @@
       >$(BaseIntermediateOutputPath)$(PlatformName)\$(Configuration)\</IntermediateOutputPath
     >
   </PropertyGroup>
-
   <PropertyGroup>
     <IntermediateOutputPath
       Condition="'$(IntermediateOutputPath)' != '' and !HasTrailingSlash('$(IntermediateOutputPath)')"
       >$(IntermediateOutputPath)\</IntermediateOutputPath
     >
   </PropertyGroup>
-
   <ItemGroup>
     <IntermediateAssembly Include="$(IntermediateOutputPath)$(AssemblyName)$(TargetExt)" />
-
     <!-- creating this as a item to use FullPath on it, to build TargetPath -->
     <_OutDirItem Include="$(OutDir)" />
   </ItemGroup>
-
   <PropertyGroup>
     <TargetName Condition="'$(TargetName)' == '' ">$(AssemblyName)</TargetName>
     <TargetFileName Condition="'$(TargetFileName)' == '' "
@@ -151,18 +132,15 @@
       >true</TargetingClr2Framework
     >
   </PropertyGroup>
-
   <Target Name="_CheckForInvalidConfigurationAndPlatform">
     <Error
       Condition=" '$(OutputPath)' == '' and '$(SkipInvalidConfigurations)' != 'true'"
       Text="'OutputPath' property is not set for this project. Usually this is caused by invalid Configuration/Platform combination. Original values: Configuration: $(_OriginalConfiguration) Platform: $(_OriginalPlatform)."
     />
-
     <Warning
       Condition=" '$(OutputPath)' == '' and '$(SkipInvalidConfigurations)' == 'true'"
       Text="'OutputPath' property is not set for this project. Usually this is caused by invalid Configuration/Platform combination. Original values: Configuration: $(_OriginalConfiguration) Platform: $(_OriginalPlatform)."
     />
-
     <!-- If OutDir is specified via the command line, then the earlier check
 		     to add a trailing slash won't have any affect, so error here. -->
     <Error
@@ -170,13 +148,11 @@
       Text="OutDir property must end with a slash."
     />
   </Target>
-
   <PropertyGroup>
     <PrepareForBuildDependsOn>AssignLinkMetadata</PrepareForBuildDependsOn>
   </PropertyGroup>
   <Target Name="PrepareForBuild" DependsOnTargets="$(PrepareForBuildDependsOn)">
     <Message Importance="High" Text="Configuration: $(Configuration) Platform: $(Platform)" />
-
     <!-- Look for app.config, if $(AppConfig) is specified, then use that. Else look in
 		     @(None) and @(Content) -->
     <CreateItem
@@ -186,7 +162,6 @@
     >
       <Output TaskParameter="Include" ItemName="AppConfigWithTargetPath" />
     </CreateItem>
-
     <FindAppConfigFile
       PrimaryList="@(None)"
       SecondaryList="@(Content)"
@@ -195,10 +170,8 @@
     >
       <Output TaskParameter="AppConfigFile" ItemName="AppConfigWithTargetPath" />
     </FindAppConfigFile>
-
     <MakeDir Directories="$(OutDir);$(IntermediateOutputPath);@(DocFileItem->'%(RelativeDir)')" />
   </Target>
-
   <Target Name="AssignLinkMetadata">
     <AssignLinkMetadata
       Items="@(EmbeddedResource)"
@@ -206,14 +179,12 @@
     >
       <Output TaskParameter="OutputItems" ItemName="_EmbeddedResourceWithLinkAssigned" />
     </AssignLinkMetadata>
-
     <ItemGroup>
       <EmbeddedResource Remove="@(_EmbeddedResourceWithLinkAssigned)" />
       <EmbeddedResource Include="@(_EmbeddedResourceWithLinkAssigned)" />
       <_EmbeddedResourceWithLinkAssigned Remove="@(_EmbeddedResourceWithLinkAssigned)" />
     </ItemGroup>
   </Target>
-
   <PropertyGroup>
     <GetFrameworkPathsDependsOn />
   </PropertyGroup>
@@ -252,13 +223,11 @@
     <CreateProperty Value="@(_CombinedTargetFrameworkDirectoriesItem)">
       <Output TaskParameter="Value" PropertyName="TargetFrameworkDirectory" />
     </CreateProperty>
-
     <Warning
       Text="TargetFrameworkVersion '$(TargetFrameworkVersion)' not supported by this toolset (ToolsVersion: $(MSBuildToolsVersion))."
       Condition="'$(TargetFrameworkVersion)' != 'v4.5' and '$(TargetFrameworkVersion)' != 'v4.0' and '$(TargetFrameworkVersion)' != 'v3.5' and '$(TargetFrameworkVersion)' != 'v3.0' and '$(TargetFrameworkVersion)' != 'v2.0'"
     />
   </Target>
-
   <PropertyGroup>
     <GetReferenceAssemblyPathsDependsOn />
   </PropertyGroup>
@@ -271,7 +240,6 @@
     >
       <Output TaskParameter="Value" PropertyName="TargetFrameworkDirectory" />
     </CreateProperty>
-
     <GetReferenceAssemblyPaths
       Condition="'$(TargetFrameworkMoniker)' != '' and '$(_TargetFrameworkDirectories)' == ''"
       TargetFrameworkMoniker="$(TargetFrameworkMoniker)"
@@ -287,7 +255,6 @@
         PropertyName="TargetFrameworkMonikerDisplayName"
       />
     </GetReferenceAssemblyPaths>
-
     <!-- Remove duplicates. -->
     <ItemGroup>
       <_TargetFrameworkDirectories
@@ -298,7 +265,6 @@
     <PropertyGroup>
       <TargetFrameworkDirectory>@(_TargetFrameworkDirectories)</TargetFrameworkDirectory>
     </PropertyGroup>
-
     <ItemGroup Condition="'$(ImplicitlyExpandDesignTimeFacades)' == 'true'">
       <DesignTimeFacadeDirectoryRoots Include="$(TargetFrameworkDirectory)" />
       <DesignTimeFacadeDirectories
@@ -307,12 +273,10 @@
       />
       <_DesignTimeFacadeAssemblies Include="%(DesignTimeFacadeDirectories.Identity)\*.dll" />
     </ItemGroup>
-
     <PropertyGroup Condition="'@(DesignTimeFacadeDirectories)' != ''">
       <TargetFrameworkDirectory>$(TargetFrameworkDirectory);@(DesignTimeFacadeDirectories)</TargetFrameworkDirectory>
     </PropertyGroup>
   </Target>
-
   <PropertyGroup>
     <AllowedReferenceAssemblyFileExtensions
       Condition=" '$(AllowedReferenceAssemblyFileExtensions)' == '' "
@@ -321,7 +285,6 @@
 			.dll
 		</AllowedReferenceAssemblyFileExtensions
     >
-
     <AllowedReferenceRelatedFileExtensions
       Condition=" '$(AllowedReferenceRelatedFileExtensions)' == '' "
     >
@@ -331,7 +294,6 @@
 			.xml
 		</AllowedReferenceRelatedFileExtensions
     >
-
     <AssemblySearchPaths Condition="'$(AssemblySearchPaths)' == ''">
 			{CandidateAssemblyFiles};
 			$(ReferencePath);
@@ -344,21 +306,18 @@
 			$(OutDir)
 		</AssemblySearchPaths
     >
-
     <ResolveReferencesDependsOn>
 			BeforeResolveReferences;
 			ResolveProjectReferences;
 			ResolveAssemblyReferences;
 			AfterResolveReferences
 		</ResolveReferencesDependsOn>
-
     <ResolveAssemblyReferencesDependsOn>
 			GetFrameworkPaths;
 			GetReferenceAssemblyPaths;
 			PrepareForBuild
 		</ResolveAssemblyReferencesDependsOn>
   </PropertyGroup>
-
   <PropertyGroup Condition="'$(TargetFrameworkMoniker)' != ''">
     <TargetFrameworkMonikerAssemblyAttributesPath
       Condition="'$(TargetFrameworkMonikerAssemblyAttributesPath)' == ''"
@@ -370,11 +329,9 @@
       >true</GenerateTargetFrameworkAttribute
     >
   </PropertyGroup>
-
   <ItemGroup Condition="'$(GenerateTargetFrameworkAttribute)' == 'true'">
     <FileWrites Include="$(TargetFrameworkMonikerAssemblyAttributesPath)" />
   </ItemGroup>
-
   <Target
     Name="_GenerateTargetFrameworkMonikerAttribute"
     DependsOnTargets="PrepareForBuild;GetReferenceAssemblyPaths"
@@ -389,7 +346,6 @@
       Condition="'@(Compile)' != '' and '$(TargetFrameworkMonikerAssemblyAttributeText)' != ''"
     />
   </Target>
-
   <Target
     Name="GenerateTargetFrameworkMonikerAttribute"
     DependsOnTargets="_GenerateTargetFrameworkMonikerAttribute"
@@ -399,21 +355,16 @@
       <Compile Include="$(TargetFrameworkMonikerAssemblyAttributesPath)" />
     </ItemGroup>
   </Target>
-
   <Target Name="ResolveReferences" DependsOnTargets="$(ResolveReferencesDependsOn)" />
-
   <Target Name="BeforeResolveReferences" />
   <Target Name="AfterResolveReferences" />
-
   <Target Name="ResolveAssemblyReferences" DependsOnTargets="$(ResolveAssemblyReferencesDependsOn)">
     <CreateItem Include="@(Reference)" Exclude="$(AdditionalExplicitAssemblyReferences)">
       <Output TaskParameter="Include" ItemName="_Reference" />
     </CreateItem>
-
     <CreateItem Include="$(AdditionalExplicitAssemblyReferences)">
       <Output TaskParameter="Include" ItemName="_Reference" />
     </CreateItem>
-
     <ResolveAssemblyReference
       Assemblies="@(_Reference)"
       AssemblyFiles="@(ChildProjectReferences);@(_ExplicitReference)"
@@ -435,12 +386,10 @@
       <Output TaskParameter="RelatedFiles" ItemName="_ReferenceRelatedPaths" />
       <Output TaskParameter="SatelliteFiles" ItemName="ReferenceSatellitePaths" />
       <Output TaskParameter="CopyLocalFiles" ItemName="ReferenceCopyLocalPaths" />
-
       <!-- FIXME: backwards compatibility -->
       <Output TaskParameter="ResolvedDependencyFiles" ItemName="_ResolvedDependencyFiles" />
     </ResolveAssemblyReference>
   </Target>
-
   <Target Name="AssignProjectConfiguration" Condition="'@(ProjectReference)' != ''">
     <!-- assign configs if building a solution file -->
     <AssignProjectConfiguration
@@ -450,7 +399,6 @@
     >
       <Output TaskParameter="AssignedProjects" ItemName="ProjectReferenceWithConfiguration" />
     </AssignProjectConfiguration>
-
     <!-- Else, just -->
     <CreateItem
       Include="@(ProjectReference)"
@@ -459,11 +407,9 @@
       <Output TaskParameter="Include" ItemName="ProjectReferenceWithConfiguration" />
     </CreateItem>
   </Target>
-
   <!-- Split projects into 2 lists
 		ProjectReferenceWithConfigurationExistent: Projects existent on disk
 		ProjectReferenceWithConfigurationNonExistent: Projects non-existent on disk -->
-
   <Target Name="SplitProjectReferencesByExistent" DependsOnTargets="AssignProjectConfiguration">
     <CreateItem
       Include="@(ProjectReferenceWithConfiguration)"
@@ -474,7 +420,6 @@
         ItemName="ProjectReferenceWithConfigurationExistent"
         Condition="Exists ('%(ProjectReferenceWithConfiguration.Identity)')"
       />
-
       <Output
         TaskParameter="Include"
         ItemName="ProjectReferenceWithConfigurationNonExistent"
@@ -482,7 +427,6 @@
       />
     </CreateItem>
   </Target>
-
   <Target Name="ResolveProjectReferences" DependsOnTargets="SplitProjectReferencesByExistent">
     <!-- If building from a .sln.proj or from IDE, then referenced projects have already
 		     been built, so just get the target paths -->
@@ -498,7 +442,6 @@
         Condition="'%(ProjectReferenceWithConfigurationExistent.ReferenceOutputAssembly)' != 'false'"
       />
     </MSBuild>
-
     <!-- Building a project directly, build the referenced the projects also -->
     <MSBuild
       Projects="@(ProjectReferenceWithConfigurationExistent)"
@@ -511,13 +454,11 @@
         Condition="'%(ProjectReferenceWithConfigurationExistent.ReferenceOutputAssembly)' != 'false'"
       />
     </MSBuild>
-
     <Warning
       Text="Referenced Project %(ProjectReferenceWithConfigurationNonExistent.Identity) not found, ignoring."
       Condition="'@(ProjectReferenceWithConfigurationNonExistent)' != ''"
     />
   </Target>
-
   <Target Name="CopyFilesMarkedCopyLocal">
     <Copy
       SourceFiles="@(ReferenceCopyLocalPaths)"
@@ -527,13 +468,11 @@
       <Output TaskParameter="DestinationFiles" ItemName="FileWritesShareable" />
     </Copy>
   </Target>
-
   <Target Name="_ComputeNonExistentFileProperty" Condition="false">
     <CreateProperty Value="__NonExistentSubDir__\__NonExistentFile__">
       <Output TaskParameter="Value" PropertyName="NonExistentFile" />
     </CreateProperty>
   </Target>
-
   <PropertyGroup>
     <BuildDependsOn>
 			BuildOnlySettings;
@@ -542,13 +481,10 @@
 			AfterBuild
 		</BuildDependsOn>
   </PropertyGroup>
-
   <Target Name="BuildOnlySettings" />
   <Target Name="BeforeBuild" />
   <Target Name="AfterBuild" />
-
   <Target Name="Build" DependsOnTargets="$(BuildDependsOn)" Outputs="$(TargetPath)" />
-
   <PropertyGroup>
     <CoreBuildDependsOn>
 			PrepareForBuild;
@@ -565,7 +501,6 @@
 			PostBuildEvent
 		</CoreBuildDependsOn>
   </PropertyGroup>
-
   <Target
     Name="CoreBuild"
     DependsOnTargets="$(CoreBuildDependsOn)"
@@ -575,10 +510,8 @@
       ExecuteTargets="_TimestampAfterCompile;PostBuildEvent"
       Condition=" '$(RunPostBuildEvent)' == 'Always' or '$(RunPostBuildEvent)' == 'OnOutputUpdated'"
     />
-
     <OnError ExecuteTargets="_RecordCleanFile" />
   </Target>
-
   <PropertyGroup>
     <CompileDependsOn>
 			ResolveReferences;
@@ -590,19 +523,15 @@
 			AfterCompile
 		</CompileDependsOn>
   </PropertyGroup>
-
   <Target Name="BeforeCompile" />
   <Target Name="AfterCompile" />
-
   <Target Name="Compile" DependsOnTargets="$(CompileDependsOn)" />
-
   <PropertyGroup>
     <PrepareForRunDependsOn>
 			DeployOutputFiles
 		</PrepareForRunDependsOn>
   </PropertyGroup>
   <Target Name="PrepareForRun" DependsOnTargets="$(PrepareForRunDependsOn)" />
-
   <PropertyGroup>
     <PrepareResourcesDependsOn>
 			AssignTargetPaths;
@@ -615,36 +544,29 @@
 		</PrepareResourcesDependsOn>
   </PropertyGroup>
   <Target Name="PrepareResources" DependsOnTargets="$(PrepareResourcesDependsOn)" />
-
   <Target Name="SplitResourcesByCulture" DependsOnTargets="AssignTargetPaths">
     <!-- Extract .licx files into @(LicxFiles) -->
     <CreateItem Include="@(EmbeddedResourceWithTargetPath)" Condition="'%(Extension)' == '.licx'">
       <Output TaskParameter="Include" ItemName="LicxFiles" />
     </CreateItem>
-
     <!-- Split *remaining* resource files into various groups.. -->
     <AssignCulture Files="@(EmbeddedResourceWithTargetPath)" Condition="'%(Extension)' != '.licx'">
       <Output TaskParameter="AssignedFilesWithNoCulture" ItemName="ResourcesWithNoCulture" />
       <Output TaskParameter="AssignedFilesWithCulture" ItemName="ResourcesWithCulture" />
     </AssignCulture>
-
     <CreateItem Include="@(ResourcesWithNoCulture)" Condition="'%(Extension)' == '.resx'">
       <Output TaskParameter="Include" ItemName="ResxWithNoCulture" />
     </CreateItem>
-
     <CreateItem Include="@(ResourcesWithNoCulture)" Condition="'%(Extension)' != '.resx'">
       <Output TaskParameter="Include" ItemName="NonResxWithNoCulture" />
     </CreateItem>
-
     <CreateItem Include="@(ResourcesWithCulture)" Condition="'%(Extension)' == '.resx'">
       <Output TaskParameter="Include" ItemName="ResxWithCulture" />
     </CreateItem>
-
     <CreateItem Include="@(ResourcesWithCulture)" Condition="'%(Extension)' != '.resx'">
       <Output TaskParameter="Include" ItemName="NonResxWithCulture" />
     </CreateItem>
   </Target>
-
   <!-- Copy non-resx resources to their manifest resource names, this is what the compiler expects -->
   <Target
     Name="CopyNonResxEmbeddedResources"
@@ -659,7 +581,6 @@
       <Output TaskParameter="DestinationFiles" ItemName="ManifestNonResxWithCultureOnDisk" />
       <Output TaskParameter="DestinationFiles" ItemName="FileWrites" />
     </Copy>
-
     <Copy
       SourceFiles="@(NonResxWithNoCulture)"
       DestinationFiles="@(ManifestNonResxWithNoCulture->'$(IntermediateOutputPath)%(Identity)')"
@@ -669,7 +590,6 @@
       <Output TaskParameter="DestinationFiles" ItemName="FileWrites" />
     </Copy>
   </Target>
-
   <Target Name="GenerateResources">
     <GenerateResource
       Sources="@(ResxWithNoCulture)"
@@ -680,7 +600,6 @@
       <Output TaskParameter="OutputResources" ItemName="ManifestResourceWithNoCulture" />
       <Output TaskParameter="FilesWritten" ItemName="FileWrites" />
     </GenerateResource>
-
     <GenerateResource
       Sources="@(ResxWithCulture)"
       UseSourcePath="true"
@@ -691,7 +610,6 @@
       <Output TaskParameter="FilesWritten" ItemName="FileWrites" />
     </GenerateResource>
   </Target>
-
   <Target
     Name="GenerateSatelliteAssemblies"
     Inputs="@(ManifestResourceWithCulture);@(ManifestNonResxWithCultureOnDisk)"
@@ -706,7 +624,6 @@
       Directories="$(IntermediateOutputPath)%(ManifestNonResxWithCultureOnDisk.Culture)"
       Condition="'@(ManifestNonResxWithCultureOnDisk)' != ''"
     />
-
     <AL
       Culture="%(Culture)"
       DelaySign="$(DelaySign)"
@@ -718,7 +635,6 @@
     >
       <Output TaskParameter="OutputAssembly" ItemName="FileWrites" />
     </AL>
-
     <CreateItem
       Include="$(IntermediateOutputPath)%(Culture)\$(AssemblyName).resources.dll"
       AdditionalMetadata="Culture=%(Culture)"
@@ -727,11 +643,9 @@
       <Output TaskParameter="Include" ItemName="IntermediateSatelliteAssemblies" />
     </CreateItem>
   </Target>
-
   <PropertyGroup>
     <CompileLicxFilesDependsOn></CompileLicxFilesDependsOn>
   </PropertyGroup>
-
   <Target
     Name="CompileLicxFiles"
     Condition="'@(LicxFiles)' != ''"
@@ -751,22 +665,18 @@
       <Output TaskParameter="OutputLicense" ItemName="FileWrites" />
     </LC>
   </Target>
-
   <!-- Assign target paths to files that will need to be copied along with the project -->
   <Target Name="AssignTargetPaths">
     <AssignTargetPath Files="@(None)" RootFolder="$(MSBuildProjectDirectory)">
       <Output TaskParameter="AssignedFiles" ItemName="NoneWithTargetPath" />
     </AssignTargetPath>
-
     <AssignTargetPath Files="@(Content)" RootFolder="$(MSBuildProjectDirectory)">
       <Output TaskParameter="AssignedFiles" ItemName="ContentWithTargetPath" />
     </AssignTargetPath>
-
     <AssignTargetPath Files="@(EmbeddedResource)" RootFolder="$(MSBuildProjectDirectory)">
       <Output TaskParameter="AssignedFiles" ItemName="EmbeddedResourceWithTargetPath" />
     </AssignTargetPath>
   </Target>
-
   <Target
     Name="DeployOutputFiles"
     DependsOnTargets="PrepareResources;CoreCompile;_CopyDeployFilesToOutputDirectory;_CopyAppConfigFile"
@@ -779,7 +689,6 @@
     >
       <Output TaskParameter="DestinationFiles" ItemName="FileWrites" />
     </Copy>
-
     <Copy
       SourceFiles="$(IntermediateOutputPath)$(AssemblyName).pdb"
       Condition="'$(OutDir)' != '' and Exists('$(IntermediateOutputPath)$(AssemblyName).pdb')"
@@ -788,7 +697,6 @@
     >
       <Output TaskParameter="DestinationFiles" ItemName="FileWrites" />
     </Copy>
-
     <Copy
       SourceFiles="@(IntermediateAssembly)"
       Condition="'$(OutDir)' != '' and Exists ('@(IntermediateAssembly)')"
@@ -797,7 +705,6 @@
     >
       <Output TaskParameter="DestinationFiles" ItemName="FileWrites" />
     </Copy>
-
     <Copy
       SourceFiles="@(IntermediateSatelliteAssemblies)"
       DestinationFiles="@(IntermediateSatelliteAssemblies->'$(OutDir)\%(Culture)\$(AssemblyName).resources.dll')"
@@ -807,14 +714,12 @@
       <Output TaskParameter="DestinationFiles" ItemName="FileWrites" />
     </Copy>
   </Target>
-
   <Target
     Name="_CopyDeployFilesToOutputDirectory"
     DependsOnTargets="GetCopyToOutputDirectoryItems;
 			_CopyDeployFilesToOutputDirectoryAlways;
 			_CopyDeployFilesToOutputDirectoryPreserveNewest"
   />
-
   <Target
     Name="_CopyDeployFilesToOutputDirectoryPreserveNewest"
     Condition="'@(ItemsToCopyToOutputDirectoryPreserveNewest)' != ''"
@@ -829,7 +734,6 @@
       <Output TaskParameter="DestinationFiles" ItemName="FileWrites" />
     </Copy>
   </Target>
-
   <!-- Copy if newer -->
   <Target
     Name="_CopyDeployFilesToOutputDirectoryAlways"
@@ -842,7 +746,6 @@
       <Output TaskParameter="DestinationFiles" ItemName="FileWrites" />
     </Copy>
   </Target>
-
   <Target
     Name="_CopyAppConfigFile"
     Condition="'@(AppConfigWithTargetPath)' != ''"
@@ -856,9 +759,7 @@
       <Output TaskParameter="DestinationFiles" ItemName="FileWrites" />
     </Copy>
   </Target>
-
   <Target Name="GetTargetPath" Outputs="$(TargetPath)" />
-
   <Target
     Name="GetCopyToOutputDirectoryItems"
     Outputs="@(AllItemsFullPathWithTargetPath)"
@@ -874,10 +775,8 @@
     >
       <Output TaskParameter="TargetOutputs" ItemName="AllChildProjectItemsWithTargetPath" />
     </MSBuild>
-
     <!-- Process items from child project. The outputs need to have full path
 		     as they'll be used from other projects -->
-
     <CreateItem
       Include="@(AllChildProjectItemsWithTargetPath->'%(FullPath)')"
       Condition="'%(AllChildProjectItemsWithTargetPath.CopyToOutputDirectory)' == 'Always' or '%(AllChildProjectItemsWithTargetPath.CopyToOutputDirectory)' == 'PreserveNewest'"
@@ -894,9 +793,7 @@
         Condition="'%(AllChildProjectItemsWithTargetPath.CopyToOutputDirectory)'=='PreserveNewest'"
       />
     </CreateItem>
-
     <!-- Process _this_ project's items -->
-
     <CreateItem
       Include="@(NoneWithTargetPath->'%(FullPath)')"
       Condition="'%(NoneWithTargetPath.CopyToOutputDirectory)' == 'Always' or '%(NoneWithTargetPath.CopyToOutputDirectory)' == 'PreserveNewest'"
@@ -913,7 +810,6 @@
         Condition="'%(NoneWithTargetPath.CopyToOutputDirectory)'=='PreserveNewest'"
       />
     </CreateItem>
-
     <CreateItem
       Include="@(ContentWithTargetPath->'%(FullPath)')"
       Condition="'%(ContentWithTargetPath.CopyToOutputDirectory)' == 'Always' or '%(ContentWithTargetPath.CopyToOutputDirectory)' == 'PreserveNewest'"
@@ -930,7 +826,6 @@
         Condition="'%(ContentWithTargetPath.CopyToOutputDirectory)'=='PreserveNewest'"
       />
     </CreateItem>
-
     <CreateItem
       Include="@(EmbeddedResourceWithTargetPath->'%(FullPath)')"
       Condition="'%(EmbeddedResourceWithTargetPath.CopyToOutputDirectory)' == 'Always' or '%(EmbeddedResourceWithTargetPath.CopyToOutputDirectory)' == 'PreserveNewest'"
@@ -948,12 +843,10 @@
       />
     </CreateItem>
   </Target>
-
   <!-- Pre/Post BuildEvents -->
   <PropertyGroup>
     <PreBuildEventDependsOn />
   </PropertyGroup>
-
   <Target
     Name="PreBuildEvent"
     Condition="'$(PreBuildEvent)' != ''"
@@ -961,7 +854,6 @@
   >
     <Exec WorkingDirectory="$(OutDir)" Command="$(PreBuildEvent)" />
   </Target>
-
   <!-- PostBuildEvent depends on $(RunPostBuildEvent)
 
 		Default: OnBuildSuccess
@@ -972,7 +864,6 @@
   <PropertyGroup>
     <PostBuildEventDependsOn />
   </PropertyGroup>
-
   <!-- this gets invoked in two cases, from CoreBuildDependsOn, if the build completes
 	     successfully, OR from OnError in CoreBuild, if the build failed and $(RunPostBuildEvent)
 	     is 'Always' or 'OnOutputUpdated'. Invoke $(PostBuildEvent) if its either Empty (== OnBuildSuccess)
@@ -986,7 +877,6 @@
   >
     <Exec WorkingDirectory="$(OutDir)" Command="$(PostBuildEvent)" />
   </Target>
-
   <!-- Timestamp the output assemblies, required for PostBuildEvent -->
   <Target Name="_TimestampBeforeCompile" Condition="'$(RunPostBuildEvent)' == 'OnOutputUpdated'">
     <CreateItem Include="%(IntermediateAssembly.ModifiedTime)">
@@ -998,7 +888,6 @@
       <Output TaskParameter="Include" PropertyName="_AssemblyModifiedTimeAfterCompile" />
     </CreateItem>
   </Target>
-
   <!-- Rebuild -->
   <PropertyGroup>
     <RebuildDependsOn>
@@ -1007,7 +896,6 @@
 			$(MSBuildProjectDefaultTargets);
 			AfterRebuild;
 		</RebuildDependsOn>
-
     <RebuildDependsOn Condition="'$(MSBuildProjectDefaultTargets)' == 'Rebuild'">
 			BeforeRebuild;
 			Clean;
@@ -1016,20 +904,15 @@
 		</RebuildDependsOn
     >
   </PropertyGroup>
-
   <Target Name="BeforeRebuild" />
   <Target Name="AfterRebuild" />
-
   <Target Name="Rebuild" DependsOnTargets="$(RebuildDependsOn)" Outputs="$(TargetPath)" />
-
   <!-- Clean -->
   <Target Name="_RecordCleanFile" DependsOnTargets="_GetCompileOutputsForClean">
     <!-- add to list of previous writes for this platform/config -->
-
     <ReadLinesFromFile File="$(IntermediateOutputPath)$(CleanFile)">
       <Output TaskParameter="Lines" ItemName="PreviousFileWrites" />
     </ReadLinesFromFile>
-
     <!-- CopyLocal files: In case all the projects build to common output
 		     directory, then other projects might depend on some of these
 		     CopyLocal files, so delete only the ones under *this* project
@@ -1037,18 +920,15 @@
     <FindUnderPath Path="$(MSBuildProjectDirectory)" Files="@(FileWritesShareable)">
       <Output TaskParameter="InPath" ItemName="FileWrites" />
     </FindUnderPath>
-
     <RemoveDuplicates Inputs="@(PreviousFileWrites);@(FileWrites->'%(FullPath)')">
       <Output TaskParameter="Filtered" ItemName="CombinedFileWrites" />
     </RemoveDuplicates>
-
     <WriteLinesToFile
       File="$(IntermediateOutputPath)$(CleanFile)"
       Lines="@(CombinedFileWrites)"
       Overwrite="true"
     />
   </Target>
-
   <PropertyGroup>
     <CleanDependsOn>
 			BeforeClean;
@@ -1057,20 +937,17 @@
 			AfterClean
 		</CleanDependsOn>
   </PropertyGroup>
-
   <Target Name="_GetCompileOutputsForClean">
     <!-- assembly and debug file in the *intermediate output path* -->
     <CreateItem Include="@(IntermediateAssembly)" Condition="Exists('@(IntermediateAssembly)')">
       <Output TaskParameter="Include" ItemName="FileWrites" />
     </CreateItem>
-
     <CreateItem
       Include="$(IntermediateOutputPath)$(AssemblyName)$(TargetExt).mdb"
       Condition="Exists('$(IntermediateOutputPath)$(AssemblyName)$(TargetExt).mdb')"
     >
       <Output TaskParameter="Include" ItemName="FileWrites" />
     </CreateItem>
-
     <CreateItem
       Include="$(IntermediateOutputPath)$(AssemblyName).pdb"
       Condition="Exists('$(IntermediateOutputPath)$(AssemblyName).pdb')"
@@ -1078,14 +955,12 @@
       <Output TaskParameter="Include" ItemName="FileWrites" />
     </CreateItem>
   </Target>
-
   <!-- Get the list of files written, for clean -->
   <Target Name="_GetCleanFileWrites" DependsOnTargets="_GetCompileOutputsForClean">
     <ReadLinesFromFile File="$(IntermediateOutputPath)$(CleanFile)">
       <Output TaskParameter="Lines" ItemName="PreviousFileWrites" />
     </ReadLinesFromFile>
   </Target>
-
   <Target Name="CleanReferencedProjects" DependsOnTargets="AssignProjectConfiguration">
     <!-- If building from .sln.proj or from IDE, clean will get handled by them,
 		     else we are building a project directly, from the command line, so
@@ -1096,35 +971,27 @@
       Condition=" '$(BuildingSolutionFile)' != 'true' and '$(BuildingInsideVisualStudio)' != 'true' and '@(ProjectReferenceWithConfigurationExistent)' != ''"
     />
   </Target>
-
   <Target Name="Clean" DependsOnTargets="$(CleanDependsOn)" />
-
   <!-- Override in project to run before/after clean tasks -->
   <Target Name="BeforeClean" />
   <Target Name="AfterClean" />
-
   <Target Name="CoreClean" DependsOnTargets="_GetCleanFileWrites">
     <Delete Files="@(PreviousFileWrites);@(FileWrites)" TreatErrorsAsWarnings="true" />
-
     <!-- all previous files written for this platform/config have been deleted,
 		     we can safely remove the file list now -->
     <Delete Files="$(IntermediateOutputPath)$(CleanFile)" TreatErrorsAsWarnings="true" />
   </Target>
-
   <PropertyGroup>
     <ImplicitlyExpandDesignTimeFacades>true</ImplicitlyExpandDesignTimeFacades>
-
     <ResolveReferencesDependsOn>
 			$(ResolveReferencesDependsOn);
 			ImplicitlyExpandDesignTimeFacades
 		</ResolveReferencesDependsOn>
-
     <ImplicitlyExpandDesignTimeFacadesDependsOn>
 			$(ImplicitlyExpandDesignTimeFacadesDependsOn);
 			GetReferenceAssemblyPaths
 		</ImplicitlyExpandDesignTimeFacadesDependsOn>
   </PropertyGroup>
-
   <Target
     Name="ImplicitlyExpandDesignTimeFacades"
     Condition="'$(ImplicitlyExpandDesignTimeFacades)' == 'true'"
@@ -1136,7 +1003,6 @@
         >true</_HasReferenceToSystemRuntime
       >
     </PropertyGroup>
-
     <ItemGroup Condition="'$(_HasReferenceToSystemRuntime)' == 'true'">
       <!-- If the user has manually referenced these assemblies, remove them so we don't end up with duplicates -->
       <ReferencePath Remove="@(_DesignTimeFacadeAssemblies)" />
@@ -1150,14 +1016,12 @@
         Condition="'%(ReferencePath.ResolvedFrom)' == 'ImplicitlyExpandDesignTimeFacades'"
       />
     </ItemGroup>
-
     <Message
       Importance="Low"
       Text="Including @(ReferencePath)"
       Condition="'%(ReferencePath.ResolvedFrom)' == 'ImplicitlyExpandDesignTimeFacades'"
     />
   </Target>
-
   <Import
     Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\$(MSBuildThisFile)\ImportAfter\*"
     Condition="'$(ImportByWildcardAfterMicrosoftCommonTargets)' == 'true' and Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\$(MSBuildThisFile)\ImportAfter')"

@@ -7,7 +7,6 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="DllImportPathTest.cs" />
-
     <CLRTestBashEnvironmentVariable
       Include="LD_LIBRARY_PATH"
       Value="$LD_LIBRARY_PATH:$%28pwd)/Subdirectory"

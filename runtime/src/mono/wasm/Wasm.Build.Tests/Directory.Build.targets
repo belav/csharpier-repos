@@ -1,6 +1,5 @@
 <Project>
   <Import Project="..\..\..\libraries\Directory.Build.targets" />
-
   <PropertyGroup>
     <BundleDir>$(OutDir)</BundleDir>
     <RunScriptOutputPath Condition="'$(OS)' != 'Windows_NT'"

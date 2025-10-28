@@ -7,14 +7,12 @@
     <ILLinkTrimAssembly>false</ILLinkTrimAssembly>
     <UseCompilerGeneratedDocXmlFile>false</UseCompilerGeneratedDocXmlFile>
   </PropertyGroup>
-
   <PropertyGroup>
     <RuntimeSerializationSources>System\Runtime\Serialization</RuntimeSerializationSources>
     <JsonSources>System\Runtime\Serialization\Json</JsonSources>
     <XmlSources>System\Xml</XmlSources>
     <TextSources>System\Text</TextSources>
   </PropertyGroup>
-
   <ItemGroup>
     <Compile
       Include="$(CommonPath)System\NotImplemented.cs"
@@ -151,7 +149,6 @@
     <Compile Include="$(CommonPath)System\CodeDom\CodeObject.cs" />
     <Compile Include="System\Runtime\Serialization\ContextAware.cs" />
   </ItemGroup>
-
   <ItemGroup>
     <ProjectReference
       Include="$(LibrariesProjectRoot)System.Text.RegularExpressions\gen\System.Text.RegularExpressions.Generator.csproj"

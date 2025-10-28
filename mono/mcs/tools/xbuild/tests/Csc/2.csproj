@@ -3,7 +3,6 @@
     <Input Include="test.cs" />
     <Output Include="test.exe" />
   </ItemGroup>
-
   <Target Name="Build">
     <Csc Sources="@(Input)" />
   </Target>

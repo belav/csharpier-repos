@@ -52,7 +52,6 @@ The .NET Foundation licenses this file to you under the MIT license.
       >true</_IsApplePlatform
     >
   </PropertyGroup>
-
   <!-- Set up default feature switches -->
   <PropertyGroup>
     <UseSystemResourceKeys Condition="$(IlcDisableReflection) == 'true'"
@@ -65,7 +64,6 @@ The .NET Foundation licenses this file to you under the MIT license.
     >
     <DynamicCodeSupport Condition="'$(DynamicCodeSupport)' == ''">false</DynamicCodeSupport>
   </PropertyGroup>
-
   <!-- Configure LINQ expressions -->
   <ItemGroup>
     <RuntimeHostConfigurationOption
@@ -74,24 +72,18 @@ The .NET Foundation licenses this file to you under the MIT license.
       Trim="true"
     />
   </ItemGroup>
-
   <PropertyGroup Condition="'$(SuppressAotAnalysisWarnings)' == 'true'">
     <EnableAotAnalyzer Condition="'$(EnableAotAnalyzer)' == ''">false</EnableAotAnalyzer>
   </PropertyGroup>
-
   <PropertyGroup>
     <NativeObjectExt Condition="'$(_targetOS)' == 'win'">.obj</NativeObjectExt>
     <NativeObjectExt Condition="'$(_targetOS)' != 'win'">.o</NativeObjectExt>
-
     <LibFileExt Condition="'$(_targetOS)' == 'win'">.lib</LibFileExt>
     <LibFileExt Condition="'$(_targetOS)' != 'win'">.a</LibFileExt>
-
     <IlcOutputFileExt Condition="$(IlcOutputFileExt) == ''">$(NativeObjectExt)</IlcOutputFileExt>
-
     <IsNativeExecutable Condition="'$(OutputType)' == 'Exe' or '$(OutputType)' == 'WinExe'"
       >true</IsNativeExecutable
     >
-
     <NativeBinaryExt Condition="'$(IsNativeExecutable)' == 'true' and '$(_targetOS)' == 'win'"
       >.exe</NativeBinaryExt
     >
@@ -118,7 +110,6 @@ The .NET Foundation licenses this file to you under the MIT license.
       Condition="'$(IsNativeExecutable)' != 'true' and '$(_targetOS)' != 'win' and '$(NativeLib)' == 'Static'"
       >.a</NativeBinaryExt
     >
-
     <NativeSymbolExt Condition="'$(NativeSymbolExt)' == '' and '$(_IsApplePlatform)' == 'true'"
       >.dsym</NativeSymbolExt
     >
@@ -126,10 +117,8 @@ The .NET Foundation licenses this file to you under the MIT license.
       >.pdb</NativeSymbolExt
     >
     <NativeSymbolExt Condition="'$(NativeSymbolExt)' == ''">.dbg</NativeSymbolExt>
-
     <ExportsFileExt Condition="'$(_targetOS)' == 'win'">.def</ExportsFileExt>
     <ExportsFileExt Condition="'$(_targetOS)' != 'win'">.exports</ExportsFileExt>
-
     <NativeObject>$(NativeIntermediateOutputPath)$(TargetName)$(NativeObjectExt)</NativeObject>
     <NativeBinary>$(NativeOutputPath)$(TargetName)$(NativeBinaryExt)</NativeBinary>
     <IlcExportUnmanagedEntrypoints
@@ -139,16 +128,12 @@ The .NET Foundation licenses this file to you under the MIT license.
     <ExportsFile Condition="$(IlcExportUnmanagedEntrypoints) == 'true' and $(ExportsFile) == ''"
       >$(NativeIntermediateOutputPath)$(TargetName)$(ExportsFileExt)</ExportsFile
     >
-
     <IlcCompileOutput>$(NativeObject)</IlcCompileOutput>
-
     <LinkNativeDependsOn>IlcCompile</LinkNativeDependsOn>
-
     <FrameworkLibPath Condition="'$(FrameworkLibPath)' == ''">$(NativeOutputPath)</FrameworkLibPath>
     <FrameworkObjPath Condition="'$(FrameworkObjPath)' == ''"
       >$(NativeIntermediateOutputPath)</FrameworkObjPath
     >
-
     <SharedLibrary Condition="'$(_targetOS)' == 'win'"
       >$(FrameworkLibPath)\Framework$(LibFileExt)</SharedLibrary
     >
@@ -157,7 +142,6 @@ The .NET Foundation licenses this file to you under the MIT license.
     >
     <IlcDynamicBuildPropertyDependencies>SetupProperties</IlcDynamicBuildPropertyDependencies>
   </PropertyGroup>
-
   <PropertyGroup Condition="'$(IlcCompileDependsOn)'=='' and '$(NativeCompilationDuringPublish)' != 'false'">
     <IlcCompileDependsOn Condition="'$(BuildingFrameworkLibrary)' != 'true'"
       >Compile;ComputeIlcCompileInputs</IlcCompileDependsOn
@@ -169,7 +153,6 @@ The .NET Foundation licenses this file to you under the MIT license.
     <IlcCompileDependsOn>$(IlcCompileDependsOn);SetupOSSpecificProps</IlcCompileDependsOn>
     <IlcCompileDependsOn>$(IlcCompileDependsOn);PrepareForILLink</IlcCompileDependsOn>
   </PropertyGroup>
-
   <ItemGroup Condition="$(IlcSystemModule) == ''">
     <UnmanagedEntryPointsAssembly Include="System.Private.CoreLib" />
     <AutoInitializedAssemblies Include="System.Private.CoreLib" />
@@ -187,14 +170,12 @@ The .NET Foundation licenses this file to you under the MIT license.
       Condition="$(IlcDisableReflection) == 'true'"
     />
   </ItemGroup>
-
   <ItemDefinitionGroup>
     <ManagedBinary>
       <IlcRspFile>$(NativeIntermediateOutputPath)\%(Filename).ilc.rsp</IlcRspFile>
       <IlcOutputFile>$(NativeIntermediateOutputPath)\%(Filename)$(IlcOutputFileExt)</IlcOutputFile>
     </ManagedBinary>
   </ItemDefinitionGroup>
-
   <Target
     Name="_ComputeManagedAssemblyForILLink"
     AfterTargets="_ComputeManagedAssemblyToLink"
@@ -205,7 +186,6 @@ The .NET Foundation licenses this file to you under the MIT license.
       <ManagedAssemblyToLink Include="@(DefaultFrameworkAssemblies);@(_ManagedResolvedAssembliesToPublish);@(ManagedBinary)" />
     </ItemGroup>
   </Target>
-
   <!-- The properties below need to be defined only after we've found the correct runtime package reference -->
   <Target
     Name="SetupProperties"
@@ -218,7 +198,6 @@ The .NET Foundation licenses this file to you under the MIT license.
         Condition="'%(ResolvedFrameworkReference.RuntimePackName)' == 'Microsoft.NETCore.App.Runtime.NativeAOT.$(RuntimeIdentifier)'"
       />
     </ItemGroup>
-
     <PropertyGroup>
       <!-- Define paths used in build targets to point to the runtime-specific ILCompiler implementation -->
       <IlcToolsPath Condition="'$(IlcToolsPath)' == ''">$(IlcHostPackagePath)\tools\</IlcToolsPath>
@@ -243,13 +222,11 @@ The .NET Foundation licenses this file to you under the MIT license.
       >
       <IlcMibcPath Condition="'$(IlcMibcPath)' == ''">$(RuntimePackagePath)\mibc\</IlcMibcPath>
     </PropertyGroup>
-
     <ItemGroup Condition="'$(PublishAotUsingRuntimePack)' == 'true'">
       <PrivateSdkAssemblies Include="$(IlcSdkPath)*.dll" />
       <FrameworkAssemblies Include="@(RuntimePackAsset)" Condition="'%(Extension)' == '.dll'" />
       <DefaultFrameworkAssemblies Include="@(FrameworkAssemblies)" />
     </ItemGroup>
-
     <ItemGroup Condition="'$(PublishAotUsingRuntimePack)' != 'true'">
       <PrivateSdkAssemblies Include="$(IlcSdkPath)*.dll" />
       <!-- Exclude unmanaged dlls -->
@@ -257,16 +234,13 @@ The .NET Foundation licenses this file to you under the MIT license.
         Include="$(IlcFrameworkPath)*.dll"
         Exclude="$(IlcFrameworkPath)*.Native.dll;$(IlcFrameworkPath)msquic.dll"
       />
-
       <DefaultFrameworkAssemblies Include="@(PrivateSdkAssemblies)" />
       <DefaultFrameworkAssemblies Include="@(FrameworkAssemblies)" />
     </ItemGroup>
-
     <ItemGroup>
       <MibcFile Include="$(IlcMibcPath)*.mibc" Condition="'$(IlcPgoOptimize)' == 'true'" />
     </ItemGroup>
   </Target>
-
   <Target
     Name="ComputeIlcCompileInputs"
     DependsOnTargets="$(IlcDynamicBuildPropertyDependencies)"
@@ -281,7 +255,6 @@ The .NET Foundation licenses this file to you under the MIT license.
       <IlcReference Include="@(DefaultFrameworkAssemblies)" />
     </ItemGroup>
   </Target>
-
   <!--
     BuildFrameworkLib is invoked before IlcCompile in multi-module builds to
     produce the shared framework library on demand
@@ -306,7 +279,6 @@ The .NET Foundation licenses this file to you under the MIT license.
     </ItemGroup>
     <MSBuild Projects="@(ProjectToBuild)" BuildInParallel="true" />
   </Target>
-
   <Target
     Name="WriteIlcRspFileForCompilation"
     Outputs="%(ManagedBinary.IlcRspFile)"
@@ -334,7 +306,6 @@ The .NET Foundation licenses this file to you under the MIT license.
         Include="@(ManagedAssemblyToLink)"
         Condition="%(ManagedAssemblyToLink.TrimmerSingleWarn) == 'false'"
       />
-
       <!-- Now process the raw ItemGroup into the form that ILC accepts: assembly names only --><!-- Use the logic that ILLinker uses: if the file exists, this is a file name. Otherwise it's an assembly name -->
       <_IlcRootedAssemblies
         Include="@(_IlcRootedAssembliesRaw->'%(Filename)')"
@@ -369,7 +340,6 @@ The .NET Foundation licenses this file to you under the MIT license.
         Condition="!Exists('%(Identity)')"
       />
     </ItemGroup>
-
     <ItemGroup>
       <IlcArg Include="@(IlcCompileInput)" />
       <IlcArg Include="-o:$(NativeIntermediateOutputPath)%(ManagedBinary.Filename)$(IlcOutputFileExt)" />
@@ -490,12 +460,10 @@ The .NET Foundation licenses this file to you under the MIT license.
       />
       <IlcArg Include="--resilient" />
       <IlcArg Include="@(UnmanagedEntryPointsAssembly->'--generateunmanagedentrypoints:%(Identity)')" />
-
       <IlcArg
         Condition="$(IlcDisableReflection) == 'true'"
         Include="--feature:System.Reflection.IsReflectionExecutionAvailable=false"
       />
-
       <!-- The managed debugging support in libraries is unused - trim it -->
       <IlcArg
         Condition="'$(IlcKeepManagedDebuggerSupport)' != 'true'"
@@ -506,7 +474,6 @@ The .NET Foundation licenses this file to you under the MIT license.
         Include="--feature:System.Threading.ThreadPool.UseWindowsThreadPool=$(UseWindowsThreadPool)"
       />
     </ItemGroup>
-
     <MakeDir Directories="$(NativeIntermediateOutputPath)" />
     <WriteLinesToFile
       File="%(ManagedBinary.IlcRspFile)"
@@ -515,7 +482,6 @@ The .NET Foundation licenses this file to you under the MIT license.
       WriteOnlyWhenDifferent="true"
     />
   </Target>
-
   <Target
     Name="IlcCompile"
     Inputs="@(IlcCompileInput);@(IlcReference);@(IlcSatelliteAssembly);@(RdXmlFile);%(ManagedBinary.IlcRspFile)"
@@ -523,18 +489,15 @@ The .NET Foundation licenses this file to you under the MIT license.
     DependsOnTargets="WriteIlcRspFileForCompilation;$(IlcCompileDependsOn)"
   >
     <Message Text="Generating native code" Importance="high" />
-
     <PropertyGroup>
       <_IlcEnvironmentVariables Condition="'$(IlcUseServerGc)' == 'false'"
         >DOTNET_gcServer=0;$(_IlcEnvironmentVariables)</_IlcEnvironmentVariables
       >
     </PropertyGroup>
-
     <Exec
       Command="&quot;$(IlcToolsPath)\ilc&quot; @&quot;$(NativeIntermediateOutputPath)%(ManagedBinary.Filename).ilc.rsp&quot;"
       EnvironmentVariables="$(_IlcEnvironmentVariables)"
     />
-
     <!-- Trick ILLinker into not actually running -->
     <MakeDir
       Condition="$([MSBuild]::VersionLessThan('$(NETCoreSdkVersion)', '7.0.0'))"
@@ -546,7 +509,6 @@ The .NET Foundation licenses this file to you under the MIT license.
       AlwaysCreate="true"
     />
   </Target>
-
   <Import
     Project="$(MSBuildThisFileDirectory)Microsoft.NETCore.Native.Windows.targets"
     Condition="'$(_targetOS)' == 'win'"
@@ -555,7 +517,6 @@ The .NET Foundation licenses this file to you under the MIT license.
     Project="$(MSBuildThisFileDirectory)Microsoft.NETCore.Native.Unix.targets"
     Condition="'$(_targetOS)' != 'win'"
   />
-
   <Target
     Name="MultiFileCopyNative"
     Inputs="@(NativeObjects)"
@@ -564,7 +525,6 @@ The .NET Foundation licenses this file to you under the MIT license.
   >
     <Copy SourceFiles="@(NativeObjects)" DestinationFolder="$(NativeOutputPath)" />
   </Target>
-
   <Target
     Name="LinkNative"
     Inputs="$(NativeObject);@(NativeLibrary)"
@@ -633,9 +593,7 @@ The .NET Foundation licenses this file to you under the MIT license.
       />
       <CustomLibArg Include="&quot;$(NativeObject)&quot;" />
     </ItemGroup>
-
     <MakeDir Directories="$([System.IO.Path]::GetDirectoryName($(NativeBinary)))" />
-
     <!-- https://github.com/dotnet/runtimelab/issues/956 - we IgnoreStandardErrorWarningFormat on macOS because there's a lot of warnings -->
     <PropertyGroup>
       <_IgnoreLinkerWarnings>false</_IgnoreLinkerWarnings>
@@ -648,7 +606,6 @@ The .NET Foundation licenses this file to you under the MIT license.
       >
       <!-- keep only global symbols -->
     </PropertyGroup>
-
     <!-- write linker script for lld (13+) to retain the __modules section -->
     <WriteLinesToFile
       File="$(NativeIntermediateOutputPath)sections.ld"
@@ -656,7 +613,6 @@ The .NET Foundation licenses this file to you under the MIT license.
       Overwrite="true"
       Condition="'$(LinkerFlavor)' == 'lld' and '$(_LinkerVersion)' &gt; '12'"
     />
-
     <Exec
       Command="&quot;$(CppLinker)&quot; @(CustomLinkerArg, ' ')"
       Condition="'$(_targetOS)' != 'win' and '$(NativeLib)' != 'Static'"
@@ -666,7 +622,6 @@ The .NET Foundation licenses this file to you under the MIT license.
       Command="&quot;$(CppLibCreator)&quot; @(CustomLibArg, ' ')"
       Condition="'$(_targetOS)' != 'win' and '$(NativeLib)' == 'Static'"
     />
-
     <WriteLinesToFile
       File="$(NativeIntermediateOutputPath)link.rsp"
       Lines="@(CustomLinkerArg)"
@@ -689,13 +644,11 @@ The .NET Foundation licenses this file to you under the MIT license.
       Command="&quot;$(CppLibCreator)&quot; @&quot;$(NativeIntermediateOutputPath)lib.rsp&quot;"
       Condition="'$(_targetOS)' == 'win' and '$(NativeLib)' == 'Static'"
     />
-
     <!-- remove executable flag -->
     <Exec
       Command="chmod 644 &quot;$(NativeBinary)&quot;"
       Condition="'$(NativeLib)' == 'Shared' and !$([MSBuild]::IsOSPlatform('Windows'))"
     />
-
     <!-- strip symbols, see https://github.com/dotnet/runtime/blob/5d3288d/eng/native/functions.cmake#L374 -->
     <Exec
       Condition="'$(StripSymbols)' == 'true' and '$(NativeDebugSymbols)' == 'true' and '$(_targetOS)' != 'win' and '$(_IsApplePlatform)' != 'true'"
@@ -709,7 +662,6 @@ The .NET Foundation licenses this file to you under the MIT license.
       Condition="'$(StripSymbols)' == 'true' and '$(NativeDebugSymbols)' == 'true' and '$(_targetOS)' != 'win' and '$(_IsApplePlatform)' != 'true'"
       Command="&quot;$(ObjCopyName)&quot; --add-gnu-debuglink=&quot;$(NativeBinary)$(NativeSymbolExt)&quot; &quot;$(NativeBinary)&quot;"
     />
-
     <Exec
       Condition="'$(StripSymbols)' == 'true' and '$(_IsApplePlatform)' == 'true' and '$(NativeLib)' != 'Static'"
       Command="
@@ -717,7 +669,6 @@ The .NET Foundation licenses this file to you under the MIT license.
         strip -no_code_signature_warning $(_StripFlag) &quot;$(NativeBinary)&quot;"
     />
   </Target>
-
   <Target
     Name="CreateLib"
     DependsOnTargets="$(CreateLibDependsOn);$(IlcDynamicBuildPropertyDependencies);SetupOSSpecificProps"
@@ -747,7 +698,6 @@ The .NET Foundation licenses this file to you under the MIT license.
       Condition="'$(_targetOS)' != 'win'"
     />
   </Target>
-
   <Import
     Project="$(MSBuildThisFileDirectory)Microsoft.NETCore.Native.Publish.targets"
     Condition="'$(NativeCompilationDuringPublish)' != 'false'"

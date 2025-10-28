@@ -4,7 +4,6 @@
       >Bootstrap5</IdentityUIFrameworkVersion
     >
   </PropertyGroup>
-
   <ItemGroup>
     <AssemblyAttribute Include="Microsoft.AspNetCore.Identity.UI.UIFrameworkAttribute">
       <_Parameter1>$(IdentityUIFrameworkVersion)</_Parameter1>

@@ -17,9 +17,7 @@
     <!-- Tool projects publish before packing. Packages should contain the latest bits. -->
     <UseLatestPackageReferences>true</UseLatestPackageReferences>
   </PropertyGroup>
-
   <Import Project="$([MSBuild]::GetDirectoryNameOfFileAbove($(MSBuildThisFileDirectory)..\, Directory.Build.targets))\Directory.Build.targets" />
-
   <Target Name="CleanPublishDir" AfterTargets="CoreClean">
     <RemoveDir Directories="$(PublishDir)" />
   </Target>

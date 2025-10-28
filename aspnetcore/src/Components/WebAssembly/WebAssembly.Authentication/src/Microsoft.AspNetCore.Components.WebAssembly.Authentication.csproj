@@ -4,7 +4,6 @@
     Sdk="Yarn.MSBuild"
     Condition=" '$(DotNetBuildFromSource)' != 'true'"
   />
-
   <PropertyGroup>
     <TargetFramework>$(DefaultNetCoreTargetFramework)</TargetFramework>
     <Description>Build client-side authentication for single-page applications (SPAs).</Description>
@@ -14,20 +13,16 @@
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     <EnableAOTAnalyzer>false</EnableAOTAnalyzer>
   </PropertyGroup>
-
   <ItemGroup>
     <Reference Include="Microsoft.AspNetCore.Components.Authorization" />
     <Reference Include="Microsoft.AspNetCore.Components.Web" />
   </ItemGroup>
-
   <ItemGroup>
     <InternalsVisibleTo Include="Microsoft.AspNetCore.Components.WebAssembly.Authentication.Tests" />
   </ItemGroup>
-
   <ItemGroup>
     <Compile Include="$(SharedSourceRoot)LinkerFlags.cs" LinkBase="Shared" />
   </ItemGroup>
-
   <PropertyGroup>
     <YarnWorkingDir>$(MSBuildThisFileDirectory)Interop\</YarnWorkingDir>
     <ResolveStaticWebAssetsInputsDependsOn>
@@ -36,17 +31,14 @@
       $(ResolveStaticWebAssetsInputsDependsOn)
     </ResolveStaticWebAssetsInputsDependsOn>
   </PropertyGroup>
-
   <ItemGroup>
     <YarnInputs
       Include="$(YarnWorkingDir)**"
       Exclude="$(YarnWorkingDir)node_modules\**;$(YarnWorkingDir)*.d.ts;$(YarnWorkingDir)dist\**"
     />
     <YarnOutputs Include="$(YarnWorkingDir)dist\$(Configuration)\AuthenticationService.js" />
-
     <Content Remove="$(YarnWorkingDir)**" />
     <None Include="$(YarnWorkingDir)*" Exclude="$(YarnWorkingDir)node_modules\**" />
-
     <UpToDateCheckInput
       Include="@(YarnInputs)"
       Exclude="$(YarnWorkingDir)package.json"
@@ -54,7 +46,6 @@
     />
     <UpToDateCheckOutput Include="@(YarnOutputs)" Set="StaticWebassets" />
   </ItemGroup>
-
   <Target
     Name="_CreateInteropHash"
     BeforeTargets="CompileInterop"
@@ -63,23 +54,19 @@
     <PropertyGroup>
       <InteropCompilationCacheFile>$(IntermediateOutputPath)interop.cache</InteropCompilationCacheFile>
     </PropertyGroup>
-
     <Hash ItemsToHash="@(YarnInputs)">
       <Output TaskParameter="HashResult" PropertyName="_YarnInputsHash" />
     </Hash>
-
     <WriteLinesToFile
       Lines="$(_YarnInputsHash)"
       File="$(InteropCompilationCacheFile)"
       Overwrite="True"
       WriteOnlyWhenDifferent="True"
     />
-
     <ItemGroup>
       <FileWrites Include="$(InteropCompilationCacheFile)" />
     </ItemGroup>
   </Target>
-
   <Target
     Name="CompileInterop"
     Condition="'$(BuildNodeJS)' != 'false' AND '$(DesignTimeBuild)' != 'true'"
@@ -113,10 +100,8 @@
       Condition="'$(Configuration)' == 'Debug'"
       IgnoreStandardErrorWarningFormat="$(IgnoreYarnWarnings)"
     />
-
     <Message Importance="high" Text="@(_InteropBuildOutput->'Emitted %(FullPath)')" />
   </Target>
-
   <Target Name="IncludeCompileInteropOutput">
     <ItemGroup>
       <_InteropBuildOutput
@@ -124,7 +109,6 @@
         Exclude="$(YarnWorkingDir)dist\.gitignore"
       />
     </ItemGroup>
-
     <DefineStaticWebAssets
       Condition="'@(_InteropBuildOutput)' != ''"
       SourceType="Computed"
@@ -136,7 +120,6 @@
     >
       <Output TaskParameter="Assets" ItemName="StaticWebAsset" />
     </DefineStaticWebAssets>
-
     <ItemGroup>
       <_InteropBuildOutput
         Include="$(YarnWorkingDir)dist\$(Configuration)\**"
@@ -145,13 +128,11 @@
       <FileWrites Include="$(_InteropBuildOutput)" />
     </ItemGroup>
   </Target>
-
   <Import
     Project="Sdk.targets"
     Sdk="Yarn.MSBuild"
     Condition=" '$(DotNetBuildFromSource)' != 'true'"
   />
-
   <ItemGroup>
     <InternalsVisibleTo Include="Microsoft.AspNetCore.Blazor.Tests" />
   </ItemGroup>

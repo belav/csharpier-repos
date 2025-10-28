@@ -7,7 +7,6 @@
     <!-- Nullable disabled because package is not a commonly used. -->
     <Nullable>disable</Nullable>
   </PropertyGroup>
-
   <ItemGroup>
     <Reference Include="Microsoft.AspNetCore.Http" />
   </ItemGroup>

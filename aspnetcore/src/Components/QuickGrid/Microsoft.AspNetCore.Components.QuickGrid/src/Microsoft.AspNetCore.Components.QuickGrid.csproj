@@ -12,10 +12,8 @@
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
     <IsTrimmable>true</IsTrimmable>
   </PropertyGroup>
-
   <ItemGroup>
     <SupportedPlatform Include="browser" />
-
     <!-- Bundle the theme CSS files as if they were scoped, even though they aren't -->
     <ThemeCssFiles Include="Themes\*.css" />
     <_CurrentProjectDiscoveredScopedCssFiles
@@ -23,13 +21,11 @@
       RelativePath="%(Identity)"
       BasePath="_content/$(AssemblyName)"
     />
-
     <Compile
       Include="$(ComponentsSharedSourceRoot)src\AttributeUtilities.cs"
       LinkBase="Infrastructure"
     />
   </ItemGroup>
-
   <ItemGroup>
     <Reference Include="Microsoft.AspNetCore.Components.Web" />
   </ItemGroup>

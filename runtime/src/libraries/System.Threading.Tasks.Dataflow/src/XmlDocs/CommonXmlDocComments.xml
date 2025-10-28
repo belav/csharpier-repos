@@ -35,7 +35,6 @@
       </remarks
       >
     </Member>
-
     <Member name="Complete">
       <summary>
         Signals to the <see cref="T:System.Threading.Tasks.Dataflow.IDataflowBlock" /> that it should not accept
@@ -50,7 +49,6 @@
       </remarks
       >
     </Member>
-
     <Member name="Fault">
       <summary>
         Causes the <see cref="T:System.Threading.Tasks.Dataflow.IDataflowBlock" /> to complete in a 
@@ -72,7 +70,6 @@
       </remarks
       >
     </Member>
-
     <Member name="ToString">
       <summary>
         Returns a string that represents the formatted name of this <see cref="T:System.Threading.Tasks.Dataflow.IDataflowBlock" /> instance.
@@ -84,7 +81,6 @@
       >
     </Member>
   </Blocks>
-
   <Targets>
     <Member name="InputCount">
       <summary>
@@ -95,7 +91,6 @@
         have already been processed by the block.
       </remarks>
     </Member>
-
     <Member name="OfferMessage">
       <summary>
         Offers a message to the <see cref="T:System.Threading.Tasks.Dataflow.ITargetBlock`1" />, giving the target the opportunity to consume or postpone the message.
@@ -140,7 +135,6 @@
       >
     </Member>
   </Targets>
-
   <Sources>
     <Member name="LinkTo">
       <summary>
@@ -161,13 +155,11 @@
       </exception
       >
     </Member>
-
     <Member name="OutputCount">
       <summary>
         Gets the number of output items available to be received from this block.
       </summary>
     </Member>
-
     <Member name="TryReceive">
       <summary>
         Attempts to synchronously receive an available output item from the <see cref="T:System.Threading.Tasks.Dataflow.IReceivableSourceBlock`1" />.
@@ -185,7 +177,6 @@
         It will return after checking for an element, whether or not an element was available.
       </remarks>
     </Member>
-
     <Member name="TryReceiveAll">
       <summary>
         Attempts to synchronously receive all available items from the <see cref="T:System.Threading.Tasks.Dataflow.IReceivableSourceBlock`1" />.
@@ -198,7 +189,6 @@
         It will return after checking for elements, whether or not an element was available.
       </remarks>
     </Member>
-
     <Member name="ConsumeMessage">
       <summary>
         Passes the ownership of the message identified by the <see cref="T:System.Threading.Tasks.Dataflow.DataflowMessageHeader" /> from this 
@@ -244,7 +234,6 @@
         >
       </remarks>
     </Member>
-
     <Member name="ReserveMessage">
       <summary>
         Reserves the right to pass the ownership of the message identified by the <see cref="T:System.Threading.Tasks.Dataflow.DataflowMessageHeader" /> 
@@ -288,7 +277,6 @@
         >
       </remarks>
     </Member>
-
     <Member name="ReleaseReservation">
       <summary>
         Releases the right to pass the ownership of the message identified by the <see cref="T:System.Threading.Tasks.Dataflow.DataflowMessageHeader" /> 

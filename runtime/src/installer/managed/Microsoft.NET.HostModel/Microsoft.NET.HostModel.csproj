@@ -16,13 +16,11 @@
     <PublicSign Condition=" '$(OS)' != 'Windows_NT' ">true</PublicSign>
     <DefineConstants>$(DefineConstants);HOST_MODEL</DefineConstants>
   </PropertyGroup>
-
   <ItemGroup>
     <!-- we need to keep the version of System.Reflection.Metadata in sync with dotnet/msbuild and dotnet/sdk -->
     <PackageReference Include="System.Reflection.Metadata" Version="6.0.0" />
     <PackageReference Include="System.Text.Json" Version="$(SystemTextJsonVersion)" />
   </ItemGroup>
-
   <ItemGroup>
     <Compile
       Include="$(CoreClrProjectRoot)tools\Common\Compiler\Win32Resources\ResourceData.cs"
@@ -44,7 +42,6 @@
       Include="$(CoreClrProjectRoot)tools\Common\Compiler\Win32Resources\ResourceData.Win32Structs.cs"
       Link="Win32Resources\ResourceData.Win32Structs.cs"
     />
-
     <Compile
       Include="$(CoreClrProjectRoot)tools\Common\System\Collections\Generic\ArrayBuilder.cs"
       Link="Common\ArrayBuilder.cs"

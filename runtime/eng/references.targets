@@ -6,14 +6,12 @@
     -->
     <_FindDependencies>false</_FindDependencies>
   </PropertyGroup>
-
   <!-- Project references shouldn't be copied to the output for reference, source, or generator projects. -->
   <ItemDefinitionGroup Condition="'$(IsSourceProject)' == 'true' or '$(IsReferenceAssemblyProject)' == 'true' or '$(IsGeneratorProject)' == 'true'">
     <ProjectReference>
       <Private>false</Private>
     </ProjectReference>
   </ItemDefinitionGroup>
-
   <ItemGroup Condition="'@(ProjectReference)' != ''">
     <_coreLibProjectReference Include="@(ProjectReference->WithMetadataValue('Identity', '$(CoreLibProject)'))" />
     <ProjectReference Update="@(_coreLibProjectReference)" Private="false">
@@ -35,7 +33,6 @@
       Condition="'$(IsSourceProject)' == 'true' and '@(_coreLibProjectReference)' != ''"
     />
   </ItemGroup>
-
   <!-- Make shared framework assemblies not app-local (non private). -->
   <Target
     Name="UpdateProjectReferencesWithPrivateAttribute"
@@ -53,7 +50,6 @@
       />
     </ItemGroup>
   </Target>
-
   <Target
     Name="ReplaceCoreLibSrcWithRefAssemblyForCompilation"
     AfterTargets="FindReferenceAssembliesForReferences"

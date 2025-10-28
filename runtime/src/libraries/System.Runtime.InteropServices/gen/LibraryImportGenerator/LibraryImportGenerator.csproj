@@ -11,7 +11,6 @@
     <AnalyzerLanguage>cs</AnalyzerLanguage>
     <StringResourcesPath>../Common/Resources/Strings.resx</StringResourcesPath>
   </PropertyGroup>
-
   <ItemGroup>
     <PackageReference
       Include="Microsoft.CodeAnalysis.CSharp.Workspaces"
@@ -19,11 +18,9 @@
       PrivateAssets="all"
     />
   </ItemGroup>
-
   <ItemGroup>
     <ProjectReference Include="..\Microsoft.Interop.SourceGeneration\Microsoft.Interop.SourceGeneration.csproj" />
   </ItemGroup>
-
   <ItemGroup>
     <Compile
       Include="$(CommonPath)Roslyn\DiagnosticDescriptorHelper.cs"

@@ -14,7 +14,6 @@
     <IsPackable>false</IsPackable>
     <IsTrimmable>true</IsTrimmable>
   </PropertyGroup>
-
   <PropertyGroup>
     <!--
       The ability to save compiled assemblies is for testing and debugging, not shipped in the product.
@@ -24,7 +23,6 @@
       >IL_EMIT_SAVE_ASSEMBLIES;$(DefineConstants)</DefineConstants
     >
   </PropertyGroup>
-
   <ItemGroup>
     <Compile Include="$(SharedSourceRoot)PropertyHelper\*.cs" />
     <Compile Include="$(SharedSourceRoot)RoslynUtils\TypeHelper.cs" />
@@ -42,7 +40,6 @@
     <Compile Include="$(SharedSourceRoot)AntiforgeryMetadata.cs" LinkBase="Shared" />
     <Compile Include="$(SharedSourceRoot)HttpExtensions.cs" LinkBase="Shared" />
   </ItemGroup>
-
   <ItemGroup>
     <Reference Include="Microsoft.AspNetCore.Authorization" />
     <Reference Include="Microsoft.AspNetCore.Http" />
@@ -55,7 +52,6 @@
     <Reference Include="Microsoft.Extensions.ObjectPool" />
     <Reference Include="Microsoft.Extensions.Options" />
   </ItemGroup>
-
   <ItemGroup>
     <InternalsVisibleTo Include="Microsoft.AspNetCore.OpenApi.Tests" />
     <InternalsVisibleTo Include="Microsoft.AspNetCore.Routing.Microbenchmarks" />

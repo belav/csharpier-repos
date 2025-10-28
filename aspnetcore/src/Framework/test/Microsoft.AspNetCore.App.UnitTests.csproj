@@ -14,17 +14,14 @@
     <SkipHelixArm>true</SkipHelixArm>
     <PackagesLayoutRoot>$([MSBuild]::NormalizeDirectory('$(ArtifactsObjDir)', 'Packages.Layout', '$(Configuration)'))</PackagesLayoutRoot>
   </PropertyGroup>
-
   <ItemGroup>
     <!-- Grab RuntimeList.xml because it's not placed in the .dotnet/ folder. -->
     <None
       Include="$(ArtifactsObjDir)Microsoft.AspNetCore.App.Runtime\RuntimeList.xml"
       CopyToOutputDirectory="PreserveNewest"
     />
-
     <!-- Ignore aspnetcorev2_inprocess because tests expect only managed assemblies in this item group. -->
     <_SharedFrameworkBinariesFromRepo Include="@(AspNetCoreAppReference);@(AspNetCoreAppReferenceAndPackage)" />
-
     <_ExpectedSharedFrameworkBinaries
       Include="@(_SharedFrameworkBinariesFromRepo);
         @(ExternalAspNetCoreAppReference);
@@ -43,7 +40,6 @@
       Condition="'$(TargetOsName)' == 'win' AND '$(TargetArchitecture)' != 'arm'"
       Include="aspnetcorev2_inprocess"
     />
-
     <AssemblyAttribute Include="Microsoft.AspNetCore.TestData">
       <_Parameter1>SharedFxVersion</_Parameter1>
       <_Parameter2>$(SharedFxVersion)</_Parameter2>
@@ -85,12 +81,10 @@
       <_Parameter2>$(ArtifactsShippingPackagesDir)</_Parameter2>
     </AssemblyAttribute>
   </ItemGroup>
-
   <ItemGroup>
     <Reference Include="Newtonsoft.Json" />
     <Reference Include="NuGet.Versioning" />
   </ItemGroup>
-
   <ItemGroup>
     <ProjectReference
       Include="$(RepoRoot)\src\Framework\App.Ref\src\Microsoft.AspNetCore.App.Ref.csproj"
@@ -99,7 +93,6 @@
       SkipGetTargetFrameworkProperties="true"
     />
   </ItemGroup>
-
   <Target
     Name="GenerateTestData"
     BeforeTargets="GetAssemblyAttributes"
@@ -112,13 +105,11 @@
     >
       <Output TaskParameter="TargetOutputs" ItemName="_TargetingPackDependencies" />
     </MSBuild>
-
     <ItemGroup>
       <AssemblyAttribute Include="Microsoft.AspNetCore.TestData">
         <_Parameter1>TargetingPackDependencies</_Parameter1>
         <_Parameter2>@(_TargetingPackDependencies->'%(FileName)')</_Parameter2>
       </AssemblyAttribute>
-
       <AspNetCoreTargetingPackDependencies
         Include="@(_TargetingPackDependencies)"
         Condition="'%(_TargetingPackDependencies.ReferenceSourceTarget)' == 'ProjectReference'"
@@ -127,22 +118,18 @@
         Include="@(_TargetingPackDependencies)"
         Exclude="@(AspNetCoreTargetingPackDependencies)"
       />
-
       <AssemblyAttribute Include="Microsoft.AspNetCore.TestData">
         <_Parameter1>AspNetCoreTargetingPackDependencies</_Parameter1>
         <_Parameter2>@(AspNetCoreTargetingPackDependencies->'%(FileName)')</_Parameter2>
       </AssemblyAttribute>
-
       <AssemblyAttribute Include="Microsoft.AspNetCore.TestData">
         <_Parameter1>RuntimeTargetingPackDependencies</_Parameter1>
         <_Parameter2>@(RuntimeTargetingPackDependencies->'%(FileName)')</_Parameter2>
       </AssemblyAttribute>
-
       <AssemblyAttribute Include="Microsoft.AspNetCore.TestData">
         <_Parameter1>ReferencePackSharedFxVersion</_Parameter1>
         <_Parameter2>$(ReferencePackSharedFxVersion)</_Parameter2>
       </AssemblyAttribute>
-
       <AssemblyAttribute Include="Microsoft.AspNetCore.TestData">
         <_Parameter1>RepositoryCommit</_Parameter1>
         <_Parameter2>$(SourceRevisionId)</_Parameter2>

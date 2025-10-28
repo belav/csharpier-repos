@@ -1,6 +1,4 @@
 <!-- Whenever altering this or other Source Build files, please include @dotnet/source-build-internal as a reviewer. -->
-
-
 <Project>
   <PropertyGroup>
     <GitHubRepositoryName>roslyn</GitHubRepositoryName>
@@ -9,7 +7,6 @@
          Only the non-stable artifacts should flow downstream in source build -->
     <EnableDefaultSourceBuildIntermediateItems>false</EnableDefaultSourceBuildIntermediateItems>
   </PropertyGroup>
-
   <Target
     Name="GetCustomIntermediateNupkgContents"
     BeforeTargets="GetCategorizedIntermediateNupkgContents"
@@ -22,7 +19,6 @@
       <IntermediateNupkgArtifactFile Remove="$(CurrentRepoSourceBuildArtifactsPackagesDir)**\*.Symbols.*.nupkg" />
     </ItemGroup>
   </Target>
-
   <!--
     The build script passes in the full path of the sln to build.  This must be overridden in order to build
     the cloned source in the inner build.

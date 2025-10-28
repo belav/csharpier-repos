@@ -4,7 +4,6 @@
     <ServerGarbageCollection>true</ServerGarbageCollection>
     <TestGroupName>Sockets.BindTests</TestGroupName>
   </PropertyGroup>
-
   <ItemGroup>
     <Compile Include="..\BindTests\**\*.cs" />
     <Compile Include="..\Sockets.FunctionalTests\TransportSelector.cs" />
@@ -53,7 +52,6 @@
       CopyToOutputDirectory="PreserveNewest"
     />
   </ItemGroup>
-
   <ItemGroup>
     <Reference Include="Microsoft.AspNetCore.Server.Kestrel" />
     <Reference Include="Microsoft.AspNetCore.Server.Kestrel.Transport.Sockets" />

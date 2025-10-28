@@ -13,11 +13,9 @@
     <DeterministicSourcePaths>false</DeterministicSourcePaths>
     <IsWasmTestProject>false</IsWasmTestProject>
   </PropertyGroup>
-
   <ItemGroup>
     <Compile Include="MethodBody1.cs" />
   </ItemGroup>
-
   <ItemGroup>
     <!-- This package from https://github.com/dotnet/hotreload-utils provides
          targets that read the json delta script and generates deltas based on the baseline assembly and the modified sources.
