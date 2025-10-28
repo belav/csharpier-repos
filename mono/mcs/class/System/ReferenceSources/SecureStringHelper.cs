@@ -1,11 +1,11 @@
-using System.Security;
 using System.Runtime.InteropServices;
+using System.Security;
 
 namespace System.Net
 {
-	static partial class UnsafeNclNativeMethods
-	{
-        internal unsafe static class SecureStringHelper
+    static partial class UnsafeNclNativeMethods
+    {
+        internal static unsafe class SecureStringHelper
         {
             internal static string CreateString(SecureString secureString)
             {

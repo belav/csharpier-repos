@@ -116,7 +116,9 @@ namespace System.Formats.Cbor
                     throw new OverflowException();
 
                 default:
-                    throw new InvalidOperationException(SR.Format(SR.Cbor_Reader_MajorTypeMismatch, (int)header.MajorType));
+                    throw new InvalidOperationException(
+                        SR.Format(SR.Cbor_Reader_MajorTypeMismatch, (int)header.MajorType)
+                    );
             }
         }
 
@@ -128,20 +130,30 @@ namespace System.Formats.Cbor
             switch (header.MajorType)
             {
                 case CborMajorType.UnsignedInteger:
-                    value = checked((long)DecodeUnsignedInteger(header, GetRemainingBytes(), out bytesRead));
+                    value = checked(
+                        (long)DecodeUnsignedInteger(header, GetRemainingBytes(), out bytesRead)
+                    );
                     return value;
 
                 case CborMajorType.NegativeInteger:
-                    value = checked(-1 - (long)DecodeUnsignedInteger(header, GetRemainingBytes(), out bytesRead));
+                    value = checked(
+                        -1 - (long)DecodeUnsignedInteger(header, GetRemainingBytes(), out bytesRead)
+                    );
                     return value;
 
                 default:
-                    throw new InvalidOperationException(SR.Format(SR.Cbor_Reader_MajorTypeMismatch, (int)header.MajorType));
+                    throw new InvalidOperationException(
+                        SR.Format(SR.Cbor_Reader_MajorTypeMismatch, (int)header.MajorType)
+                    );
             }
         }
 
         // Peek definite length for given data item
-        private int DecodeDefiniteLength(CborInitialByte header, ReadOnlySpan<byte> data, out int bytesRead)
+        private int DecodeDefiniteLength(
+            CborInitialByte header,
+            ReadOnlySpan<byte> data,
+            out int bytesRead
+        )
         {
             ulong length = DecodeUnsignedInteger(header, data, out bytesRead);
 
@@ -155,7 +167,11 @@ namespace System.Formats.Cbor
         }
 
         // Unsigned integer decoding https://tools.ietf.org/html/rfc7049#section-2.1
-        private ulong DecodeUnsignedInteger(CborInitialByte header, ReadOnlySpan<byte> data, out int bytesRead)
+        private ulong DecodeUnsignedInteger(
+            CborInitialByte header,
+            ReadOnlySpan<byte> data,
+            out int bytesRead
+        )
         {
             ulong result;
 
@@ -214,14 +230,26 @@ namespace System.Formats.Cbor
                     return result;
 
                 default:
-                    throw new CborContentException(SR.Cbor_Reader_InvalidCbor_InvalidIntegerEncoding);
+                    throw new CborContentException(
+                        SR.Cbor_Reader_InvalidCbor_InvalidIntegerEncoding
+                    );
             }
 
             void ValidateIsNonStandardIntegerRepresentationSupported()
             {
-                if (_isConformanceModeCheckEnabled && CborConformanceModeHelpers.RequiresCanonicalIntegerRepresentation(ConformanceMode))
+                if (
+                    _isConformanceModeCheckEnabled
+                    && CborConformanceModeHelpers.RequiresCanonicalIntegerRepresentation(
+                        ConformanceMode
+                    )
+                )
                 {
-                    throw new CborContentException(SR.Format(SR.Cbor_ConformanceMode_NonCanonicalIntegerRepresentation, ConformanceMode));
+                    throw new CborContentException(
+                        SR.Format(
+                            SR.Cbor_ConformanceMode_NonCanonicalIntegerRepresentation,
+                            ConformanceMode
+                        )
+                    );
                 }
             }
         }

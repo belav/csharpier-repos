@@ -94,7 +94,11 @@ namespace System.Net.WebSockets.Tests
 
         public override long Length => -1;
 
-        public override long Position { get => -1; set => throw new NotSupportedException(); }
+        public override long Position
+        {
+            get => -1;
+            set => throw new NotSupportedException();
+        }
 
         protected override void Dispose(bool disposing)
         {
@@ -110,7 +114,10 @@ namespace System.Net.WebSockets.Tests
             }
         }
 
-        public override async ValueTask<int> ReadAsync(Memory<byte> buffer, CancellationToken cancellationToken)
+        public override async ValueTask<int> ReadAsync(
+            Memory<byte> buffer,
+            CancellationToken cancellationToken
+        )
         {
             if (DelayForNextRead > TimeSpan.Zero)
             {
@@ -118,10 +125,13 @@ namespace System.Net.WebSockets.Tests
                 DelayForNextRead = TimeSpan.Zero;
             }
 
-            using CancellationTokenSource cancellation = CancellationTokenSource.CreateLinkedTokenSource(cancellationToken, _disposed.Token);
+            using CancellationTokenSource cancellation =
+                CancellationTokenSource.CreateLinkedTokenSource(cancellationToken, _disposed.Token);
             try
             {
-                await _inputLock.WaitAsync(IgnoreCancellationToken ? default : cancellation.Token).ConfigureAwait(false);
+                await _inputLock
+                    .WaitAsync(IgnoreCancellationToken ? default : cancellation.Token)
+                    .ConfigureAwait(false);
             }
             catch (TaskCanceledException) when (cancellationToken.IsCancellationRequested)
             {
@@ -213,11 +223,17 @@ namespace System.Net.WebSockets.Tests
             }
         }
 
-        public override async ValueTask WriteAsync(ReadOnlyMemory<byte> buffer, CancellationToken cancellationToken)
+        public override async ValueTask WriteAsync(
+            ReadOnlyMemory<byte> buffer,
+            CancellationToken cancellationToken
+        )
         {
             if (DelayForNextSend > TimeSpan.Zero)
             {
-                await Task.Delay(DelayForNextSend, IgnoreCancellationToken ? default : cancellationToken);
+                await Task.Delay(
+                    DelayForNextSend,
+                    IgnoreCancellationToken ? default : cancellationToken
+                );
                 DelayForNextSend = TimeSpan.Zero;
             }
 
@@ -226,13 +242,16 @@ namespace System.Net.WebSockets.Tests
 
         public override void Flush() { }
 
-        public override int Read(byte[] buffer, int offset, int count) => throw new NotSupportedException();
+        public override int Read(byte[] buffer, int offset, int count) =>
+            throw new NotSupportedException();
 
-        public override long Seek(long offset, SeekOrigin origin) => throw new NotSupportedException();
+        public override long Seek(long offset, SeekOrigin origin) =>
+            throw new NotSupportedException();
 
         public override void SetLength(long value) => throw new NotSupportedException();
 
-        public override void Write(byte[] buffer, int offset, int count) => throw new NotSupportedException();
+        public override void Write(byte[] buffer, int offset, int count) =>
+            throw new NotSupportedException();
 
         private sealed class Block
         {

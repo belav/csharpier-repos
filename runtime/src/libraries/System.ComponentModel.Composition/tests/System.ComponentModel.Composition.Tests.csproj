@@ -6,10 +6,11 @@
     <IgnoreForCI Condition="'$(RuntimeFlavor)' == 'Mono'">true</IgnoreForCI>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="$(CommonTestPath)System\IO\TempDirectory.cs"
-             Link="Common\System\IO\TempDirectory.cs" />
-    <Compile Include="$(CommonTestPath)System\IO\TempFile.cs"
-             Link="Common\System\IO\TempFile.cs" />
+    <Compile
+      Include="$(CommonTestPath)System\IO\TempDirectory.cs"
+      Link="Common\System\IO\TempDirectory.cs"
+    />
+    <Compile Include="$(CommonTestPath)System\IO\TempFile.cs" Link="Common\System\IO\TempFile.cs" />
     <Compile Include="AssemblyInfo.cs" />
     <Compile Include="IMetadataView.cs" />
     <Compile Include="MetadataTests_IMetadataView.cs" />
@@ -167,11 +168,16 @@
     <Compile Include="System\UnitTesting\TestServices.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="System.ComponentModel.Composition.Noop.Assembly/System.ComponentModel.Composition.Noop.Assembly.csproj"
-                      ReferenceOutputAssembly="false"
-                      OutputItemType="content"
-                      CopyToOutputDirectory="PreserveNewest" />
+    <ProjectReference
+      Include="System.ComponentModel.Composition.Noop.Assembly/System.ComponentModel.Composition.Noop.Assembly.csproj"
+      ReferenceOutputAssembly="false"
+      OutputItemType="content"
+      CopyToOutputDirectory="PreserveNewest"
+    />
     <!-- Some internal types are needed, so we reference the implementation assembly, rather than the reference assembly. -->
-    <ProjectReference Include="..\src\System.ComponentModel.Composition.csproj" SkipUseReferenceAssembly="true" />
+    <ProjectReference
+      Include="..\src\System.ComponentModel.Composition.csproj"
+      SkipUseReferenceAssembly="true"
+    />
   </ItemGroup>
 </Project>

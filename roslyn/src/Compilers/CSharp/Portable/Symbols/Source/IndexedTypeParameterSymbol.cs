@@ -18,11 +18,11 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 {
     /// <summary>
     /// Indexed type parameters are used in place of type parameters for method signatures.  There is
-    /// a unique mapping from index to a single IndexedTypeParameterSymbol.  
-    /// 
+    /// a unique mapping from index to a single IndexedTypeParameterSymbol.
+    ///
     /// They don't have a containing symbol or locations.
-    /// 
-    /// They do not have constraints, variance, or attributes. 
+    ///
+    /// They do not have constraints, variance, or attributes.
     /// </summary>
     internal sealed class IndexedTypeParameterSymbol : TypeParameterSymbol
     {
@@ -37,10 +37,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
         public override TypeParameterKind TypeParameterKind
         {
-            get
-            {
-                return TypeParameterKind.Method;
-            }
+            get { return TypeParameterKind.Method; }
         }
 
         internal static TypeParameterSymbol GetTypeParameter(int index)
@@ -89,7 +86,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 GrowPool(count);
             }
 
-            ArrayBuilder<TypeParameterSymbol> builder = ArrayBuilder<TypeParameterSymbol>.GetInstance();
+            ArrayBuilder<TypeParameterSymbol> builder =
+                ArrayBuilder<TypeParameterSymbol>.GetInstance();
 
             for (int i = 0; i < count; i++)
             {
@@ -110,7 +108,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
             for (int i = 0; i < count; i++)
             {
-                builder.Add(TypeWithAnnotations.Create(GetTypeParameter(i), NullableAnnotation.Ignored));
+                builder.Add(
+                    TypeWithAnnotations.Create(GetTypeParameter(i), NullableAnnotation.Ignored)
+                );
             }
 
             return builder.ToImmutableAndFree();
@@ -178,43 +178,38 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
         public override Symbol ContainingSymbol
         {
-            get
-            {
-                return null;
-            }
+            get { return null; }
         }
 
         public override ImmutableArray<Location> Locations
         {
-            get
-            {
-                return ImmutableArray<Location>.Empty;
-            }
+            get { return ImmutableArray<Location>.Empty; }
         }
 
         public override ImmutableArray<SyntaxReference> DeclaringSyntaxReferences
         {
-            get
-            {
-                return ImmutableArray<SyntaxReference>.Empty;
-            }
+            get { return ImmutableArray<SyntaxReference>.Empty; }
         }
 
-        internal override void EnsureAllConstraintsAreResolved()
-        {
-        }
+        internal override void EnsureAllConstraintsAreResolved() { }
 
-        internal override ImmutableArray<TypeWithAnnotations> GetConstraintTypes(ConsList<TypeParameterSymbol> inProgress)
+        internal override ImmutableArray<TypeWithAnnotations> GetConstraintTypes(
+            ConsList<TypeParameterSymbol> inProgress
+        )
         {
             return ImmutableArray<TypeWithAnnotations>.Empty;
         }
 
-        internal override ImmutableArray<NamedTypeSymbol> GetInterfaces(ConsList<TypeParameterSymbol> inProgress)
+        internal override ImmutableArray<NamedTypeSymbol> GetInterfaces(
+            ConsList<TypeParameterSymbol> inProgress
+        )
         {
             return ImmutableArray<NamedTypeSymbol>.Empty;
         }
 
-        internal override NamedTypeSymbol GetEffectiveBaseClass(ConsList<TypeParameterSymbol> inProgress)
+        internal override NamedTypeSymbol GetEffectiveBaseClass(
+            ConsList<TypeParameterSymbol> inProgress
+        )
         {
             return null;
         }

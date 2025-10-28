@@ -21,7 +21,6 @@ public class MappingExpressionFeatureWithoutReverseTest
                 .ReverseMap();
         });
 
-
         var typeMap = config.FindTypeMapFor<Source, Dest>();
         typeMap.Features.Count.ShouldBe(2);
 
@@ -44,9 +43,7 @@ public class MappingExpressionFeatureWithoutReverseTest
         var featureA = new MappingExpressionFeatureA(1);
         var config = new MapperConfiguration(cfg =>
         {
-            cfg.CreateMap<Source, Dest>()
-                .SetFeature(featureA)
-                .ReverseMap();
+            cfg.CreateMap<Source, Dest>().SetFeature(featureA).ReverseMap();
         });
 
         var typeMap = config.FindTypeMapFor<Source, Dest>();
@@ -76,9 +73,7 @@ public class MappingExpressionFeatureWithoutReverseTest
         var featureA = new MappingExpressionFeatureA(1);
         var config = new MapperConfiguration(cfg =>
         {
-            cfg.CreateMap<Source, Dest>()
-                .SetFeature(featureA)
-                .ReverseMap();
+            cfg.CreateMap<Source, Dest>().SetFeature(featureA).ReverseMap();
         });
 
         var typeMap = config.FindTypeMapFor<Source, Dest>();
@@ -88,7 +83,7 @@ public class MappingExpressionFeatureWithoutReverseTest
         typeMapReverse.Features.Count.ShouldBe(0);
 
         Validate<TypeMapFeatureA>(featureA);
-        
+
         void Validate<TFeature>(MappingExpressionFeatureBase feature)
             where TFeature : TypeMapFeatureBase
         {
@@ -109,12 +104,8 @@ public class MappingExpressionFeatureWithoutReverseTest
         var featureB = new MappingExpressionFeatureB(2);
         var config = new MapperConfiguration(cfg =>
         {
-            cfg.CreateMap<Source, Dest>()
-                .SetFeature(featureA)
-                .SetFeature(featureB)
-                .ReverseMap();
+            cfg.CreateMap<Source, Dest>().SetFeature(featureA).SetFeature(featureB).ReverseMap();
         });
-
 
         var typeMap = config.FindTypeMapFor<Source, Dest>();
         typeMap.Features.Count.ShouldBe(2);
@@ -145,10 +136,7 @@ public class MappingExpressionFeatureWithoutReverseTest
         var featureB = new MappingExpressionFeatureB(2);
         var config = new MapperConfiguration(cfg =>
         {
-            cfg.CreateMap<Source, Dest>()
-                .SetFeature(featureA)
-                .SetFeature(featureB)
-                .ReverseMap();
+            cfg.CreateMap<Source, Dest>().SetFeature(featureA).SetFeature(featureB).ReverseMap();
         });
 
         var typeMap = config.FindTypeMapFor<Source, Dest>();
@@ -198,7 +186,11 @@ public class MappingExpressionFeatureWithoutReverseTest
         Validate<TypeMapFeatureB>(featureB, typeMap);
         Validate<TypeMapFeatureB>(overridenFeatureB, typeMapReverse, 0);
 
-        void Validate<TFeature>(MappingExpressionFeatureBase feature, TypeMap map, int reverseExecutedCount = 1)
+        void Validate<TFeature>(
+            MappingExpressionFeatureBase feature,
+            TypeMap map,
+            int reverseExecutedCount = 1
+        )
             where TFeature : TypeMapFeatureBase
         {
             feature.ConfigureTypeMaps.ShouldBeOfLength(1);
@@ -210,22 +202,21 @@ public class MappingExpressionFeatureWithoutReverseTest
             typeMapFeature.SealedCount.ShouldBe(1);
         }
     }
+
     public class MappingExpressionFeatureA : MappingExpressionFeatureBase<TypeMapFeatureA>
     {
-        public MappingExpressionFeatureA(int value) : base(value, new TypeMapFeatureA(value))
-        {
-        }
+        public MappingExpressionFeatureA(int value)
+            : base(value, new TypeMapFeatureA(value)) { }
     }
 
     public class MappingExpressionFeatureB : MappingExpressionFeatureBase<TypeMapFeatureB>
     {
-        public MappingExpressionFeatureB(int value) : base(value, new TypeMapFeatureB(value))
-        {
-        }
+        public MappingExpressionFeatureB(int value)
+            : base(value, new TypeMapFeatureB(value)) { }
     }
 
     public abstract class MappingExpressionFeatureBase<TFeature> : MappingExpressionFeatureBase
-       where TFeature : IRuntimeFeature
+        where TFeature : IRuntimeFeature
     {
         private readonly TFeature _feature;
 
@@ -264,16 +255,14 @@ public class MappingExpressionFeatureWithoutReverseTest
 
     public class TypeMapFeatureA : TypeMapFeatureBase
     {
-        public TypeMapFeatureA(int value) : base(value)
-        {
-        }
+        public TypeMapFeatureA(int value)
+            : base(value) { }
     }
 
     public class TypeMapFeatureB : TypeMapFeatureBase
     {
-        public TypeMapFeatureB(int value) : base(value)
-        {
-        }
+        public TypeMapFeatureB(int value)
+            : base(value) { }
     }
 
     public abstract class TypeMapFeatureBase : IRuntimeFeature

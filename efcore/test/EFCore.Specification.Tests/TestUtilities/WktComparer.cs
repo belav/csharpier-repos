@@ -11,19 +11,12 @@ public class WktComparer : IEqualityComparer<string>
 
     public static WktComparer Instance { get; } = new();
 
-    private WktComparer()
-    {
-    }
+    private WktComparer() { }
 
-    public bool Equals(string x, string y)
-        => x == y
-            || Normalize(x) == Normalize(y);
+    public bool Equals(string x, string y) => x == y || Normalize(x) == Normalize(y);
 
-    public static string Normalize(string text)
-        => text != null
-            ? _reader.Read(text).AsText()
-            : null;
+    public static string Normalize(string text) =>
+        text != null ? _reader.Read(text).AsText() : null;
 
-    public int GetHashCode(string obj)
-        => throw new NotImplementedException();
+    public int GetHashCode(string obj) => throw new NotImplementedException();
 }

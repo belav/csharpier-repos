@@ -79,11 +79,17 @@ namespace System.CommandLine
         public override string ToString() => $"{GetType().Name}: {Name}";
 
         [DebuggerStepThrough]
-        internal static string ThrowIfEmptyOrWithWhitespaces(string value, string paramName, bool canContainWhitespaces = false)
+        internal static string ThrowIfEmptyOrWithWhitespaces(
+            string value,
+            string paramName,
+            bool canContainWhitespaces = false
+        )
         {
             if (string.IsNullOrWhiteSpace(value))
             {
-                throw new ArgumentException("Names and aliases cannot be null, empty, or consist entirely of whitespace.");
+                throw new ArgumentException(
+                    "Names and aliases cannot be null, empty, or consist entirely of whitespace."
+                );
             }
 
             if (!canContainWhitespaces)
@@ -92,7 +98,10 @@ namespace System.CommandLine
                 {
                     if (char.IsWhiteSpace(value[i]))
                     {
-                        throw new ArgumentException($"Names and aliases cannot contain whitespace: \"{value}\"", paramName);
+                        throw new ArgumentException(
+                            $"Names and aliases cannot contain whitespace: \"{value}\"",
+                            paramName
+                        );
                     }
                 }
             }

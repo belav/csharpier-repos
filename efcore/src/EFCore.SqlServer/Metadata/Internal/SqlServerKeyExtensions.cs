@@ -23,10 +23,10 @@ public static class SqlServerKeyExtensions
         this IReadOnlyKey key,
         IReadOnlyKey duplicateKey,
         in StoreObjectIdentifier storeObject,
-        bool shouldThrow)
+        bool shouldThrow
+    )
     {
-        if (key.IsClustered(storeObject)
-            != duplicateKey.IsClustered(storeObject))
+        if (key.IsClustered(storeObject) != duplicateKey.IsClustered(storeObject))
         {
             if (shouldThrow)
             {
@@ -37,7 +37,9 @@ public static class SqlServerKeyExtensions
                         duplicateKey.Properties.Format(),
                         duplicateKey.DeclaringEntityType.DisplayName(),
                         storeObject.DisplayName(),
-                        key.GetName(storeObject)));
+                        key.GetName(storeObject)
+                    )
+                );
             }
 
             return false;

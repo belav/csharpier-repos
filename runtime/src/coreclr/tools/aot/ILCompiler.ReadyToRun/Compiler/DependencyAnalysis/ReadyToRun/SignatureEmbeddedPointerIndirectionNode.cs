@@ -10,29 +10,31 @@ namespace ILCompiler.DependencyAnalysis
     class SignatureEmbeddedPointerIndirectionNode : EmbeddedPointerIndirectionNode<Signature>
     {
         private readonly Import _import;
-        
+
         public SignatureEmbeddedPointerIndirectionNode(Import import, Signature signature)
             : base(signature)
         {
             _import = import;
         }
 
-        protected override string GetName(NodeFactory factory) => $"Embedded pointer to {Target.GetMangledName(factory.NameMangler)}";
+        protected override string GetName(NodeFactory factory) =>
+            $"Embedded pointer to {Target.GetMangledName(factory.NameMangler)}";
 
         public override IEnumerable<DependencyListEntry> GetStaticDependencies(NodeFactory factory)
         {
-            return new[]
-            {
-                new DependencyListEntry(Target, "reloc"),
-            };
+            return new[] { new DependencyListEntry(Target, "reloc") };
         }
 
-        public override void EncodeData(ref ObjectDataBuilder dataBuilder, NodeFactory factory, bool relocsOnly)
+        public override void EncodeData(
+            ref ObjectDataBuilder dataBuilder,
+            NodeFactory factory,
+            bool relocsOnly
+        )
         {
             dataBuilder.RequireInitialPointerAlignment();
             dataBuilder.EmitReloc(Target, RelocType.IMAGE_REL_BASED_ADDR32NB);
         }
-    
+
         public override void AppendMangledName(NameMangler nameMangler, Utf8StringBuilder sb)
         {
             sb.Append("SignaturePointer_");
@@ -48,7 +50,10 @@ namespace ILCompiler.DependencyAnalysis
 
         public override int CompareToImpl(ISortableNode other, CompilerComparer comparer)
         {
-            return comparer.Compare(_import, ((SignatureEmbeddedPointerIndirectionNode)other)._import);
+            return comparer.Compare(
+                _import,
+                ((SignatureEmbeddedPointerIndirectionNode)other)._import
+            );
         }
     }
 }

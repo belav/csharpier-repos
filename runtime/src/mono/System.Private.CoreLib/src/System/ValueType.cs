@@ -7,16 +7,20 @@ using System.Runtime.CompilerServices;
 namespace System
 {
     [Serializable]
-    [System.Runtime.CompilerServices.TypeForwardedFrom("mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089")]
+    [System.Runtime.CompilerServices.TypeForwardedFrom(
+        "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+    )]
     public abstract class ValueType
     {
 #if TARGET_BROWSER
         // Tracking issue https://github.com/dotnet/runtime/issues/47909
-        [DynamicDependency(DynamicallyAccessedMemberTypes.PublicMethods, "System.Runtime.InteropServices.JavaScript.JSFunctionBinding", "System.Runtime.InteropServices.JavaScript")]
+        [DynamicDependency(
+            DynamicallyAccessedMemberTypes.PublicMethods,
+            "System.Runtime.InteropServices.JavaScript.JSFunctionBinding",
+            "System.Runtime.InteropServices.JavaScript"
+        )]
 #endif
-        protected ValueType()
-        {
-        }
+        protected ValueType() { }
 
         // This is also used by RuntimeHelpers
         internal static bool DefaultEquals(object o1, object o2)
@@ -75,7 +79,6 @@ namespace System
         {
             return GetType().ToString();
         }
-
 
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
         private static extern int InternalGetHashCode(object o, out object[]? fields);

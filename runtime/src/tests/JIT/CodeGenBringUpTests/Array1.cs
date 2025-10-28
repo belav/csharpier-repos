@@ -20,10 +20,11 @@ public class BringUpTest_Array1
     [Fact]
     public static int TestEntryPoint()
     {
-        int[] a = {1, 2, 3, 4};
+        int[] a = { 1, 2, 3, 4 };
         Array1(a);
 
-        if (a[1] != 5) return Fail;
+        if (a[1] != 5)
+            return Fail;
         return Pass;
     }
 }

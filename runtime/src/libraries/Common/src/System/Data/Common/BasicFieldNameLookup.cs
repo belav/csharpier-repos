@@ -1,7 +1,6 @@
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
-
 using System.Collections.Generic;
 using System.Data.Common;
 using System.Globalization;
@@ -28,7 +27,9 @@ namespace System.Data.ProviderBase
             _fieldNames = fieldNames;
         }
 
-        public BasicFieldNameLookup(System.Collections.ObjectModel.ReadOnlyCollection<string> columnNames)
+        public BasicFieldNameLookup(
+            System.Collections.ObjectModel.ReadOnlyCollection<string> columnNames
+        )
         {
             int length = columnNames.Count;
             string[] fieldNames = new string[length];

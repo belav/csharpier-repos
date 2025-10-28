@@ -12,16 +12,20 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.KeywordRecommenders
     internal class AssemblyKeywordRecommender : AbstractSyntacticSingleKeywordRecommender
     {
         public AssemblyKeywordRecommender()
-            : base(SyntaxKind.AssemblyKeyword)
-        {
-        }
+            : base(SyntaxKind.AssemblyKeyword) { }
 
-        protected override bool IsValidContext(int position, CSharpSyntaxContext context, CancellationToken cancellationToken)
+        protected override bool IsValidContext(
+            int position,
+            CSharpSyntaxContext context,
+            CancellationToken cancellationToken
+        )
         {
             var token = context.TargetToken;
 
-            if (token.Kind() == SyntaxKind.OpenBracketToken &&
-                token.GetRequiredParent().Kind() == SyntaxKind.AttributeList)
+            if (
+                token.Kind() == SyntaxKind.OpenBracketToken
+                && token.GetRequiredParent().Kind() == SyntaxKind.AttributeList
+            )
             {
                 var attributeList = token.GetRequiredParent();
                 var parentSyntax = attributeList.Parent;
@@ -33,11 +37,13 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.KeywordRecommenders
                     // [$$
                     // class Goo {
                     // for these cases is necessary check if they Parent is CompilationUnitSyntax
-                    case BaseTypeDeclarationSyntax baseType when baseType.Parent is CompilationUnitSyntax:
+                    case BaseTypeDeclarationSyntax baseType
+                        when baseType.Parent is CompilationUnitSyntax:
                     // The case where the parent of attributeList is IncompleteMemberSyntax(See test: ), like:
                     // [$$
                     // for that case is necessary check if they Parent is CompilationUnitSyntax
-                    case IncompleteMemberSyntax incompleteMember when incompleteMember.Parent is CompilationUnitSyntax:
+                    case IncompleteMemberSyntax incompleteMember
+                        when incompleteMember.Parent is CompilationUnitSyntax:
                         return true;
                 }
             }

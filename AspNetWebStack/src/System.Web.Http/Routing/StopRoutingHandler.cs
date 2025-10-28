@@ -20,7 +20,9 @@ namespace System.Web.Http.Routing
         /// <param name="cancellationToken">The notification that operations should be canceled.</param>
         /// <returns>Throws NotSupportedException.</returns>
         protected override Task<HttpResponseMessage> SendAsync(
-            HttpRequestMessage request, CancellationToken cancellationToken)
+            HttpRequestMessage request,
+            CancellationToken cancellationToken
+        )
         {
             throw new NotSupportedException();
         }

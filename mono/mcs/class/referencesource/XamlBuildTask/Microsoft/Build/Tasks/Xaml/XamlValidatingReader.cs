@@ -8,15 +8,15 @@ namespace Microsoft.Build.Tasks.Xaml
     using System.Collections.Generic;
     using System.ComponentModel;
     using System.Diagnostics;
+    using System.Diagnostics.CodeAnalysis;
+    using System.Globalization;
+    using System.IO;
     using System.Linq;
+    using System.Reflection;
+    using System.Runtime;
     using System.Text;
     using System.Xaml;
     using System.Xaml.Schema;
-    using System.Reflection;
-    using System.Runtime;
-    using System.Globalization;
-    using System.Diagnostics.CodeAnalysis;
-    using System.IO;
 
     internal class XamlValidatingReader : XamlWrappingReader
     {
@@ -33,7 +33,12 @@ namespace Microsoft.Build.Tasks.Xaml
 
         public event EventHandler<ValidationEventArgs> OnValidationError;
 
-        public XamlValidatingReader(XamlReader underlyingReader, Assembly assembly, string rootNamespace, string realAssemblyName)
+        public XamlValidatingReader(
+            XamlReader underlyingReader,
+            Assembly assembly,
+            string rootNamespace,
+            string realAssemblyName
+        )
             : base(underlyingReader)
         {
             this.assembly = assembly;
@@ -41,11 +46,16 @@ namespace Microsoft.Build.Tasks.Xaml
             this.rootNamespace = rootNamespace;
             this.localAssemblyName = assembly != null ? assembly.GetName().Name : null;
             this.realAssemblyName = realAssemblyName;
-            this.xNull = underlyingReader.SchemaContext.GetXamlType(new XamlTypeName(XamlLanguage.Null));
+            this.xNull = underlyingReader.SchemaContext.GetXamlType(
+                new XamlTypeName(XamlLanguage.Null)
+            );
         }
 
-        [SuppressMessage(FxCop.Category.Design, FxCop.Rule.DoNotCatchGeneralExceptionTypes,
-            Justification = "Need to catch and log the exception here so that all the errors, including the exception thrown, are surfaced.")]
+        [SuppressMessage(
+            FxCop.Category.Design,
+            FxCop.Rule.DoNotCatchGeneralExceptionTypes,
+            Justification = "Need to catch and log the exception here so that all the errors, including the exception thrown, are surfaced."
+        )]
         public override bool Read()
         {
             if (!base.Read())
@@ -72,7 +82,10 @@ namespace Microsoft.Build.Tasks.Xaml
                 }
                 else
                 {
-                    if (_stack.TopFrame.FrameType != XamlStackFrameType.Object && _stack.TopFrame.FrameType != XamlStackFrameType.GetObject)
+                    if (
+                        _stack.TopFrame.FrameType != XamlStackFrameType.Object
+                        && _stack.TopFrame.FrameType != XamlStackFrameType.GetObject
+                    )
                     {
                         ValidationError(SR.UnexpectedXaml);
                     }
@@ -104,8 +117,9 @@ namespace Microsoft.Build.Tasks.Xaml
             if (handler != null)
             {
                 string formattedMessage =
-                    (args == null || args.Length == 0) ?
-                    message : string.Format(CultureInfo.InvariantCulture, message, args);
+                    (args == null || args.Length == 0)
+                        ? message
+                        : string.Format(CultureInfo.InvariantCulture, message, args);
                 handler(this, new ValidationEventArgs(formattedMessage, LineNumber, LinePosition));
             }
         }
@@ -161,7 +175,7 @@ namespace Microsoft.Build.Tasks.Xaml
             switch (NodeType)
             {
                 case XamlNodeType.NamespaceDeclaration:
-                    
+
                     return;
                 case XamlNodeType.StartObject:
                     ValidateUnknown(Type);
@@ -197,8 +211,12 @@ namespace Microsoft.Build.Tasks.Xaml
             {
                 ValidationError(SR.UnexpectedXaml);
             }
-            else if (!member.IsUnknown && member != XamlLanguage.UnknownContent &&
-                !member.Type.IsCollection && !member.Type.IsDictionary)
+            else if (
+                !member.IsUnknown
+                && member != XamlLanguage.UnknownContent
+                && !member.Type.IsCollection
+                && !member.Type.IsDictionary
+            )
             {
                 ValidationError(SR.UnexpectedXaml);
             }
@@ -224,7 +242,12 @@ namespace Microsoft.Build.Tasks.Xaml
                 {
                     if (!type.IsCollection && !type.IsDictionary)
                     {
-                        ValidationError(SR.UnexpectedXamlDictionary(member.Name, GetXamlTypeName(_stack.TopFrame.Type)));
+                        ValidationError(
+                            SR.UnexpectedXamlDictionary(
+                                member.Name,
+                                GetXamlTypeName(_stack.TopFrame.Type)
+                            )
+                        );
                     }
                 }
                 if (member == XamlLanguage.Class && _stack.Depth > 1)
@@ -236,12 +259,19 @@ namespace Microsoft.Build.Tasks.Xaml
             {
                 if (!type.CanAssignTo(member.TargetType))
                 {
-                    ValidationError(SR.UnexpectedXamlAttachableMember(member.Name, GetXamlTypeName(member.TargetType)));
+                    ValidationError(
+                        SR.UnexpectedXamlAttachableMember(
+                            member.Name,
+                            GetXamlTypeName(member.TargetType)
+                        )
+                    );
                 }
             }
             else if (!member.IsDirective && !type.CanAssignTo(member.DeclaringType))
             {
-                ValidationError(SR.UnexpectedXamlMemberNotAssignable(member.Name, GetXamlTypeName(type)));
+                ValidationError(
+                    SR.UnexpectedXamlMemberNotAssignable(member.Name, GetXamlTypeName(type))
+                );
             }
         }
 
@@ -256,32 +286,64 @@ namespace Microsoft.Build.Tasks.Xaml
                 ValidateValueToMemberOnStack(null);
             }
             XamlMember member = _stack.TopFrame.Member;
-            if (member == XamlLanguage.PositionalParameters || type.IsMarkupExtension || member.IsUnknown)
+            if (
+                member == XamlLanguage.PositionalParameters
+                || type.IsMarkupExtension
+                || member.IsUnknown
+            )
             {
                 return;
             }
             if (member == XamlLanguage.Items)
             {
                 XamlType collectionType = GetCollectionTypeOnStack();
-                if (collectionType == null || collectionType.IsUnknown || collectionType.AllowedContentTypes == null)
+                if (
+                    collectionType == null
+                    || collectionType.IsUnknown
+                    || collectionType.AllowedContentTypes == null
+                )
                 {
                     return;
                 }
-                if (!collectionType.AllowedContentTypes.Any(contentType => type.CanAssignTo(contentType)))
+                if (
+                    !collectionType.AllowedContentTypes.Any(contentType =>
+                        type.CanAssignTo(contentType)
+                    )
+                )
                 {
-                    ValidationError(SR.UnassignableCollection(GetXamlTypeName(type), GetXamlTypeName(collectionType.ItemType), GetXamlTypeName(collectionType)));
+                    ValidationError(
+                        SR.UnassignableCollection(
+                            GetXamlTypeName(type),
+                            GetXamlTypeName(collectionType.ItemType),
+                            GetXamlTypeName(collectionType)
+                        )
+                    );
                 }
             }
             else if (member.IsDirective && (member.Type.IsCollection || member.Type.IsDictionary))
             {
                 XamlType collectionType = member.Type;
-                if (collectionType == null || collectionType.IsUnknown || collectionType.AllowedContentTypes == null)
+                if (
+                    collectionType == null
+                    || collectionType.IsUnknown
+                    || collectionType.AllowedContentTypes == null
+                )
                 {
                     return;
                 }
-                if (!collectionType.AllowedContentTypes.Any(contentType => type.CanAssignTo(contentType)))
+                if (
+                    !collectionType.AllowedContentTypes.Any(contentType =>
+                        type.CanAssignTo(contentType)
+                    )
+                )
                 {
-                    ValidationError(SR.UnassignableCollection(GetXamlTypeName(type), GetXamlTypeName(collectionType.ItemType), GetXamlTypeName(collectionType)));
+                    ValidationError(
+                        SR.UnassignableCollection(
+                            GetXamlTypeName(type),
+                            GetXamlTypeName(collectionType.ItemType),
+                            GetXamlTypeName(collectionType)
+                        )
+                    );
                 }
             }
             else if (!type.CanAssignTo(member.Type))
@@ -292,11 +354,23 @@ namespace Microsoft.Build.Tasks.Xaml
                 }
                 if (NodeType == XamlNodeType.Value)
                 {
-                    ValidationError(SR.UnassignableTypes(GetXamlTypeName(type), GetXamlTypeName(member.Type), member.Name));
+                    ValidationError(
+                        SR.UnassignableTypes(
+                            GetXamlTypeName(type),
+                            GetXamlTypeName(member.Type),
+                            member.Name
+                        )
+                    );
                 }
                 else
                 {
-                    ValidationError(SR.UnassignableTypesObject(GetXamlTypeName(type), GetXamlTypeName(member.Type), member.Name));
+                    ValidationError(
+                        SR.UnassignableTypesObject(
+                            GetXamlTypeName(type),
+                            GetXamlTypeName(member.Type),
+                            member.Name
+                        )
+                    );
                 }
             }
         }
@@ -312,10 +386,20 @@ namespace Microsoft.Build.Tasks.Xaml
             {
                 if (member.IsEvent)
                 {
-                    if (this.definedType != null && this.definedType.GetMethod(value as string, 
-                        BindingFlags.Static | BindingFlags.Instance | BindingFlags.NonPublic | BindingFlags.Public) == null)
+                    if (
+                        this.definedType != null
+                        && this.definedType.GetMethod(
+                            value as string,
+                            BindingFlags.Static
+                                | BindingFlags.Instance
+                                | BindingFlags.NonPublic
+                                | BindingFlags.Public
+                        ) == null
+                    )
                     {
-                        ValidationError(SR.UnexpectedXamlEventHandlerNotFound(value, definedType.FullName));
+                        ValidationError(
+                            SR.UnexpectedXamlEventHandlerNotFound(value, definedType.FullName)
+                        );
                     }
                     return;
                 }
@@ -331,7 +415,7 @@ namespace Microsoft.Build.Tasks.Xaml
                     {
                         this.definedType = this.assembly.GetType(className);
                     }
-                    return; 
+                    return;
                 }
                 else if (member.TypeConverter != null)
                 {
@@ -349,20 +433,40 @@ namespace Microsoft.Build.Tasks.Xaml
                 if (member == XamlLanguage.Items)
                 {
                     XamlType collectionType = GetCollectionTypeOnStack();
-                    if (collectionType == null || collectionType.IsUnknown || collectionType.AllowedContentTypes == null)
+                    if (
+                        collectionType == null
+                        || collectionType.IsUnknown
+                        || collectionType.AllowedContentTypes == null
+                    )
                     {
                         return;
                     }
-                    if (!collectionType.AllowedContentTypes.Any(contentType => contentType.IsNullable))
+                    if (
+                        !collectionType.AllowedContentTypes.Any(contentType =>
+                            contentType.IsNullable
+                        )
+                    )
                     {
-                        ValidationError(SR.UnassignableCollection("(null)", GetXamlTypeName(collectionType.ItemType), GetXamlTypeName(collectionType)));
+                        ValidationError(
+                            SR.UnassignableCollection(
+                                "(null)",
+                                GetXamlTypeName(collectionType.ItemType),
+                                GetXamlTypeName(collectionType)
+                            )
+                        );
                     }
                 }
                 else
                 {
                     if (!member.Type.IsNullable)
                     {
-                        ValidationError(SR.UnassignableTypes("(null)", GetXamlTypeName(member.Type), member.Name));
+                        ValidationError(
+                            SR.UnassignableTypes(
+                                "(null)",
+                                GetXamlTypeName(member.Type),
+                                member.Name
+                            )
+                        );
                     }
                 }
             }
@@ -370,15 +474,17 @@ namespace Microsoft.Build.Tasks.Xaml
 
         private bool AllowsMultiple(XamlMember member)
         {
-            return
-                member == XamlLanguage.Items ||
-                member == XamlLanguage.PositionalParameters ||
-                member == XamlLanguage.UnknownContent;
+            return member == XamlLanguage.Items
+                || member == XamlLanguage.PositionalParameters
+                || member == XamlLanguage.UnknownContent;
         }
 
         private XamlType GetCollectionTypeOnStack()
         {
-            Fx.Assert(_stack.TopFrame.Member == XamlLanguage.Items, "CollectionType should have _Items member");
+            Fx.Assert(
+                _stack.TopFrame.Member == XamlLanguage.Items,
+                "CollectionType should have _Items member"
+            );
             XamlType result;
             if (_stack.FrameAtDepth(_stack.Depth - 1).FrameType == XamlStackFrameType.GetObject)
             {
@@ -393,8 +499,10 @@ namespace Microsoft.Build.Tasks.Xaml
             {
                 result = _stack.FrameAtDepth(_stack.Depth - 1).Type;
             }
-            Fx.Assert(result.IsUnknown || result.IsCollection || result.IsDictionary, 
-                "Incorrect Collection Type Encountered");
+            Fx.Assert(
+                result.IsUnknown || result.IsCollection || result.IsDictionary,
+                "Incorrect Collection Type Encountered"
+            );
             return result;
         }
 
@@ -403,21 +511,32 @@ namespace Microsoft.Build.Tasks.Xaml
             if (member == XamlLanguage.UnknownContent)
             {
                 ValidationError(SR.MemberUnknownContect(GetXamlTypeName(_stack.TopFrame.Type)));
-            }            
+            }
             else if (member.IsUnknown)
             {
                 bool retryAttachable = false;
                 XamlType declaringType = member.DeclaringType;
-                if (_stack.Depth == 1 && declaringType.IsUnknown &&
-                    !string.IsNullOrEmpty(this.rootNamespace) &&
-                    this.definedType != null && declaringType.Name == this.definedType.Name)
+                if (
+                    _stack.Depth == 1
+                    && declaringType.IsUnknown
+                    && !string.IsNullOrEmpty(this.rootNamespace)
+                    && this.definedType != null
+                    && declaringType.Name == this.definedType.Name
+                )
                 {
                     // Need to handle the case where the namespace of a member on the document root
                     // is missing the project root namespace
                     string clrNs;
-                    if (XamlBuildTaskServices.TryExtractClrNs(declaringType.PreferredXamlNamespace, out clrNs))
+                    if (
+                        XamlBuildTaskServices.TryExtractClrNs(
+                            declaringType.PreferredXamlNamespace,
+                            out clrNs
+                        )
+                    )
                     {
-                        clrNs = string.IsNullOrEmpty(clrNs) ? this.rootNamespace : this.rootNamespace + "." + clrNs;
+                        clrNs = string.IsNullOrEmpty(clrNs)
+                            ? this.rootNamespace
+                            : this.rootNamespace + "." + clrNs;
                         if (clrNs == this.definedType.Namespace)
                         {
                             declaringType = SchemaContext.GetXamlType(this.definedType);
@@ -434,18 +553,28 @@ namespace Microsoft.Build.Tasks.Xaml
                 {
                     if (member.IsAttachable)
                     {
-                        ValidationError(SR.UnresolvedAttachableMember(GetXamlTypeName(member.DeclaringType) + "." + member.Name));
+                        ValidationError(
+                            SR.UnresolvedAttachableMember(
+                                GetXamlTypeName(member.DeclaringType) + "." + member.Name
+                            )
+                        );
                     }
                     else if (member.IsDirective)
                     {
-                        ValidationError(SR.UnresolvedDirective(member.PreferredXamlNamespace + ":" + member.Name));
+                        ValidationError(
+                            SR.UnresolvedDirective(
+                                member.PreferredXamlNamespace + ":" + member.Name
+                            )
+                        );
                     }
                     else
                     {
                         // Skip if declaring type is unknown as the member unknown error messages become redundant.
                         if (declaringType != null && !declaringType.IsUnknown)
                         {
-                            ValidationError(SR.UnresolvedMember(member.Name, GetXamlTypeName(declaringType)));
+                            ValidationError(
+                                SR.UnresolvedMember(member.Name, GetXamlTypeName(declaringType))
+                            );
                         }
                     }
                 }
@@ -488,10 +617,23 @@ namespace Microsoft.Build.Tasks.Xaml
 
         private void ThrowTypeValidationError(XamlType type)
         {
-            string typeName, assemblyName, ns;
-            if (XamlBuildTaskServices.GetTypeNameInAssemblyOrNamespace(type, this.localAssemblyName, this.realAssemblyName, out typeName, out assemblyName, out ns))
+            string typeName,
+                assemblyName,
+                ns;
+            if (
+                XamlBuildTaskServices.GetTypeNameInAssemblyOrNamespace(
+                    type,
+                    this.localAssemblyName,
+                    this.realAssemblyName,
+                    out typeName,
+                    out assemblyName,
+                    out ns
+                )
+            )
             {
-                ValidationError(SR.UnresolvedTypeWithAssemblyName(ns + "." + typeName, assemblyName));
+                ValidationError(
+                    SR.UnresolvedTypeWithAssemblyName(ns + "." + typeName, assemblyName)
+                );
             }
             else
             {
@@ -501,7 +643,11 @@ namespace Microsoft.Build.Tasks.Xaml
 
         private string GetXamlTypeName(XamlType type)
         {
-            return XamlBuildTaskServices.GetTypeName(type, this.localAssemblyName, this.realAssemblyName);
+            return XamlBuildTaskServices.GetTypeName(
+                type,
+                this.localAssemblyName,
+                this.realAssemblyName
+            );
         }
     }
 }

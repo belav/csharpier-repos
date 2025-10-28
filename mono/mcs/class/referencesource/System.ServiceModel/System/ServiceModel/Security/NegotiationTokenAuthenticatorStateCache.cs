@@ -18,7 +18,14 @@ namespace System.ServiceModel.Security
         TimeSpan cachingSpan;
 
         public NegotiationTokenAuthenticatorStateCache(TimeSpan cachingSpan, int maximumCachedState)
-            : base(lowWaterMark, maximumCachedState, null, PurgingMode.TimerBasedPurge, TimeSpan.FromTicks(cachingSpan.Ticks >> 2), true)
+            : base(
+                lowWaterMark,
+                maximumCachedState,
+                null,
+                PurgingMode.TimerBasedPurge,
+                TimeSpan.FromTicks(cachingSpan.Ticks >> 2),
+                true
+            )
         {
             this.cachingSpan = cachingSpan;
         }
@@ -29,7 +36,11 @@ namespace System.ServiceModel.Security
             bool wasStateAdded = base.TryAddItem(context, state, expirationTime, false);
             if (!wasStateAdded)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperWarning(new SecurityNegotiationException(SR.GetString(SR.NegotiationStateAlreadyPresent, context)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperWarning(
+                    new SecurityNegotiationException(
+                        SR.GetString(SR.NegotiationStateAlreadyPresent, context)
+                    )
+                );
             }
             if (TD.NegotiateTokenAuthenticatorStateCacheRatioIsEnabled())
             {
@@ -51,14 +62,19 @@ namespace System.ServiceModel.Security
             }
         }
 
-
         protected override ArrayList OnQuotaReached(Hashtable cacheTable)
         {
             if (TD.NegotiateTokenAuthenticatorStateCacheExceededIsEnabled())
             {
-                TD.NegotiateTokenAuthenticatorStateCacheExceeded(SR.GetString(SR.CachedNegotiationStateQuotaReached, this.Capacity));
+                TD.NegotiateTokenAuthenticatorStateCacheExceeded(
+                    SR.GetString(SR.CachedNegotiationStateQuotaReached, this.Capacity)
+                );
             }
-            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new QuotaExceededException(SR.GetString(SR.CachedNegotiationStateQuotaReached, this.Capacity)));
+            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                new QuotaExceededException(
+                    SR.GetString(SR.CachedNegotiationStateQuotaReached, this.Capacity)
+                )
+            );
         }
 
         protected override void OnRemove(object item)

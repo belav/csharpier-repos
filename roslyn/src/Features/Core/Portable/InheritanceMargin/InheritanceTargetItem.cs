@@ -58,7 +58,8 @@ namespace Microsoft.CodeAnalysis.InheritanceMargin
             Glyph glyph,
             Glyph languageGlyph,
             string displayName,
-            string? projectName)
+            string? projectName
+        )
         {
             RelationToMember = relationToMember;
             DefinitionItem = definitionItem;

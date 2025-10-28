@@ -13,10 +13,18 @@ namespace System.ComponentModel.Composition.ReflectionModel
 {
     internal sealed partial class ExportFactoryCreator
     {
-        private static readonly MethodInfo _createStronglyTypedExportFactoryOfT = typeof(ExportFactoryCreator).GetMethod("CreateStronglyTypedExportFactoryOfT", BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance);
-        private static readonly MethodInfo _createStronglyTypedExportFactoryOfTM = typeof(ExportFactoryCreator).GetMethod("CreateStronglyTypedExportFactoryOfTM", BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance);
+        private static readonly MethodInfo _createStronglyTypedExportFactoryOfT =
+            typeof(ExportFactoryCreator).GetMethod(
+                "CreateStronglyTypedExportFactoryOfT",
+                BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance
+            );
+        private static readonly MethodInfo _createStronglyTypedExportFactoryOfTM =
+            typeof(ExportFactoryCreator).GetMethod(
+                "CreateStronglyTypedExportFactoryOfTM",
+                BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance
+            );
 
-        private Type    _exportFactoryType;
+        private Type _exportFactoryType;
 
         public ExportFactoryCreator(Type exportFactoryType)
         {
@@ -25,20 +33,28 @@ namespace System.ComponentModel.Composition.ReflectionModel
             this._exportFactoryType = exportFactoryType;
         }
 
-        public Func<Export, object> CreateStronglyTypedExportFactoryFactory(Type exportType, Type metadataViewType)
+        public Func<Export, object> CreateStronglyTypedExportFactoryFactory(
+            Type exportType,
+            Type metadataViewType
+        )
         {
             MethodInfo genericMethod = null;
             if (metadataViewType == null)
             {
-                 genericMethod = _createStronglyTypedExportFactoryOfT.MakeGenericMethod(exportType);
+                genericMethod = _createStronglyTypedExportFactoryOfT.MakeGenericMethod(exportType);
             }
             else
             {
-                genericMethod = _createStronglyTypedExportFactoryOfTM.MakeGenericMethod(exportType, metadataViewType);
+                genericMethod = _createStronglyTypedExportFactoryOfTM.MakeGenericMethod(
+                    exportType,
+                    metadataViewType
+                );
             }
 
             Assumes.NotNull(genericMethod);
-            Func<Export, object> exportFactoryFactory = (Func<Export, object>)Delegate.CreateDelegate(typeof(Func<Export, object>), this, genericMethod);
+            Func<Export, object> exportFactoryFactory =
+                (Func<Export, object>)
+                    Delegate.CreateDelegate(typeof(Func<Export, object>), this, genericMethod);
             return (e) => exportFactoryFactory.Invoke(e);
         }
 
@@ -49,7 +65,8 @@ namespace System.ComponentModel.Composition.ReflectionModel
 
             var lifetimeContext = new LifetimeContext();
 
-            Func<Tuple<T, Action>> exportLifetimeContextCreator = () => lifetimeContext.GetExportLifetimeContextFromExport<T>(export);
+            Func<Tuple<T, Action>> exportLifetimeContextCreator = () =>
+                lifetimeContext.GetExportLifetimeContextFromExport<T>(export);
             object[] args = { exportLifetimeContextCreator };
 
             var instance = Activator.CreateInstance(constructed, args);
@@ -65,15 +82,15 @@ namespace System.ComponentModel.Composition.ReflectionModel
 
             var lifetimeContext = new LifetimeContext();
 
-            Func<Tuple<T, Action>> exportLifetimeContextCreator = () => lifetimeContext.GetExportLifetimeContextFromExport<T>(export);
+            Func<Tuple<T, Action>> exportLifetimeContextCreator = () =>
+                lifetimeContext.GetExportLifetimeContextFromExport<T>(export);
             var metadataView = AttributedModelServices.GetMetadataView<M>(export.Metadata);
             object[] args = { exportLifetimeContextCreator, metadataView };
 
-            var instance =  Activator.CreateInstance(constructed, args);
+            var instance = Activator.CreateInstance(constructed, args);
             lifetimeContext.SetInstance(instance);
 
             return instance;
         }
-
     }
 }

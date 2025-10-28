@@ -12,11 +12,15 @@ namespace System.ServiceModel
     // Due to friend relationships with other assemblies, naming this class as AppSettings causes ambiguity when building those assemblies
     internal static class ServiceModelAppSettings
     {
-        internal const string HttpTransportPerFactoryConnectionPoolString = "wcf:httpTransportBinding:useUniqueConnectionPoolPerFactory";
-        internal const string EnsureUniquePerformanceCounterInstanceNamesString = "wcf:ensureUniquePerformanceCounterInstanceNames";
-        internal const string UseConfiguredTransportSecurityHeaderLayoutString = "wcf:useConfiguredTransportSecurityHeaderLayout";
+        internal const string HttpTransportPerFactoryConnectionPoolString =
+            "wcf:httpTransportBinding:useUniqueConnectionPoolPerFactory";
+        internal const string EnsureUniquePerformanceCounterInstanceNamesString =
+            "wcf:ensureUniquePerformanceCounterInstanceNames";
+        internal const string UseConfiguredTransportSecurityHeaderLayoutString =
+            "wcf:useConfiguredTransportSecurityHeaderLayout";
         internal const string UseBestMatchNamedPipeUriString = "wcf:useBestMatchNamedPipeUri";
-        internal const string DisableOperationContextAsyncFlowString = "wcf:disableOperationContextAsyncFlow";
+        internal const string DisableOperationContextAsyncFlowString =
+            "wcf:disableOperationContextAsyncFlow";
         const bool DefaultHttpTransportPerFactoryConnectionPool = false;
         const bool DefaultEnsureUniquePerformanceCounterInstanceNames = false;
         const bool DefaultUseConfiguredTransportSecurityHeaderLayout = false;
@@ -79,8 +83,11 @@ namespace System.ServiceModel
             }
         }
 
-        [SuppressMessage(FxCop.Category.ReliabilityBasic, "Reliability104:CaughtAndHandledExceptionsRule",
-            Justification = "Handle the configuration exceptions here to avoid regressions on customer's existing scenarios")]
+        [SuppressMessage(
+            FxCop.Category.ReliabilityBasic,
+            "Reliability104:CaughtAndHandledExceptionsRule",
+            Justification = "Handle the configuration exceptions here to avoid regressions on customer's existing scenarios"
+        )]
         static void EnsureSettingsLoaded()
         {
             if (!settingsInitalized)
@@ -94,32 +101,68 @@ namespace System.ServiceModel
                         {
                             appSettingsSection = ConfigurationManager.AppSettings;
                         }
-                        catch (ConfigurationErrorsException)
-                        {
-                        }
+                        catch (ConfigurationErrorsException) { }
                         finally
                         {
-                            if ((appSettingsSection == null) || !bool.TryParse(appSettingsSection[HttpTransportPerFactoryConnectionPoolString], out httpTransportPerFactoryConnectionPool))
+                            if (
+                                (appSettingsSection == null)
+                                || !bool.TryParse(
+                                    appSettingsSection[HttpTransportPerFactoryConnectionPoolString],
+                                    out httpTransportPerFactoryConnectionPool
+                                )
+                            )
                             {
-                                httpTransportPerFactoryConnectionPool = DefaultHttpTransportPerFactoryConnectionPool;
+                                httpTransportPerFactoryConnectionPool =
+                                    DefaultHttpTransportPerFactoryConnectionPool;
                             }
 
-                            if ((appSettingsSection == null) || !bool.TryParse(appSettingsSection[EnsureUniquePerformanceCounterInstanceNamesString], out ensureUniquePerformanceCounterInstanceNames))
+                            if (
+                                (appSettingsSection == null)
+                                || !bool.TryParse(
+                                    appSettingsSection[
+                                        EnsureUniquePerformanceCounterInstanceNamesString
+                                    ],
+                                    out ensureUniquePerformanceCounterInstanceNames
+                                )
+                            )
                             {
-                                ensureUniquePerformanceCounterInstanceNames = DefaultEnsureUniquePerformanceCounterInstanceNames;
+                                ensureUniquePerformanceCounterInstanceNames =
+                                    DefaultEnsureUniquePerformanceCounterInstanceNames;
                             }
 
-                            if ((appSettingsSection == null) || !bool.TryParse(appSettingsSection[DisableOperationContextAsyncFlowString], out disableOperationContextAsyncFlow))
+                            if (
+                                (appSettingsSection == null)
+                                || !bool.TryParse(
+                                    appSettingsSection[DisableOperationContextAsyncFlowString],
+                                    out disableOperationContextAsyncFlow
+                                )
+                            )
                             {
-                                disableOperationContextAsyncFlow = DefaultDisableOperationContextAsyncFlow;
-                            }
-                            
-                            if ((appSettingsSection == null) || !bool.TryParse(appSettingsSection[UseConfiguredTransportSecurityHeaderLayoutString], out useConfiguredTransportSecurityHeaderLayout))
-                            {
-                                useConfiguredTransportSecurityHeaderLayout = DefaultUseConfiguredTransportSecurityHeaderLayout;
+                                disableOperationContextAsyncFlow =
+                                    DefaultDisableOperationContextAsyncFlow;
                             }
 
-                            if ((appSettingsSection == null) || !bool.TryParse(appSettingsSection[UseBestMatchNamedPipeUriString], out useBestMatchNamedPipeUri))
+                            if (
+                                (appSettingsSection == null)
+                                || !bool.TryParse(
+                                    appSettingsSection[
+                                        UseConfiguredTransportSecurityHeaderLayoutString
+                                    ],
+                                    out useConfiguredTransportSecurityHeaderLayout
+                                )
+                            )
+                            {
+                                useConfiguredTransportSecurityHeaderLayout =
+                                    DefaultUseConfiguredTransportSecurityHeaderLayout;
+                            }
+
+                            if (
+                                (appSettingsSection == null)
+                                || !bool.TryParse(
+                                    appSettingsSection[UseBestMatchNamedPipeUriString],
+                                    out useBestMatchNamedPipeUri
+                                )
+                            )
                             {
                                 useBestMatchNamedPipeUri = DefaultUseBestMatchNamedPipeUri;
                             }

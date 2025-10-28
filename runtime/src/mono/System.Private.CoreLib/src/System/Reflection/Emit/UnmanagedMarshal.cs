@@ -59,6 +59,7 @@ namespace System.Reflection.Emit
             t = maint;
             tbase = maint;
         }
+
         private UnmanagedMarshal(UnmanagedType maint, UnmanagedType elemt)
         {
             count = 0;
@@ -80,30 +81,48 @@ namespace System.Reflection.Emit
         {
             return new UnmanagedMarshal(UnmanagedType.LPArray, elemType);
         }
+
 #if FEATURE_COMINTEROP
-		public static UnmanagedMarshal DefineSafeArray( UnmanagedType elemType) {
-			return new UnmanagedMarshal (UnmanagedType.SafeArray, elemType);
-		}
+        public static UnmanagedMarshal DefineSafeArray(UnmanagedType elemType)
+        {
+            return new UnmanagedMarshal(UnmanagedType.SafeArray, elemType);
+        }
 #endif
+
         public static UnmanagedMarshal DefineUnmanagedMarshal(UnmanagedType unmanagedType)
         {
             return new UnmanagedMarshal(unmanagedType, unmanagedType);
         }
+
 #if FEATURE_COMINTEROP
-		internal static UnmanagedMarshal DefineCustom (Type typeref, string cookie, string mtype, Guid id) {
-			UnmanagedMarshal res = new UnmanagedMarshal (UnmanagedType.CustomMarshaler, UnmanagedType.CustomMarshaler);
-			res.mcookie = cookie;
-			res.marshaltype = mtype;
-			res.marshaltyperef = typeref;
-			if (id == Guid.Empty)
-				res.guid = String.Empty;
-			else
-				res.guid = id.ToString ();
-			return res;
-		}
+        internal static UnmanagedMarshal DefineCustom(
+            Type typeref,
+            string cookie,
+            string mtype,
+            Guid id
+        )
+        {
+            UnmanagedMarshal res = new UnmanagedMarshal(
+                UnmanagedType.CustomMarshaler,
+                UnmanagedType.CustomMarshaler
+            );
+            res.mcookie = cookie;
+            res.marshaltype = mtype;
+            res.marshaltyperef = typeref;
+            if (id == Guid.Empty)
+                res.guid = String.Empty;
+            else
+                res.guid = id.ToString();
+            return res;
+        }
 #endif
+
         // sizeConst and sizeParamIndex can be -1 meaning they are not specified
-        internal static UnmanagedMarshal DefineLPArrayInternal(UnmanagedType elemType, int sizeConst, int sizeParamIndex)
+        internal static UnmanagedMarshal DefineLPArrayInternal(
+            UnmanagedType elemType,
+            int sizeConst,
+            int sizeParamIndex
+        )
         {
             UnmanagedMarshal res = new UnmanagedMarshal(UnmanagedType.LPArray, elemType);
             res.count = sizeConst;

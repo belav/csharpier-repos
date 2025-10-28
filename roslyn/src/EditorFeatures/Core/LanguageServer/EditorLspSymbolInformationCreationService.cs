@@ -12,16 +12,24 @@ using LSP = Microsoft.VisualStudio.LanguageServer.Protocol;
 
 namespace Microsoft.CodeAnalysis.LanguageServer
 {
-    [ExportWorkspaceService(typeof(ILspSymbolInformationCreationService), ServiceLayer.Editor), Shared]
-    internal sealed class EditorLspSymbolInformationCreationService : ILspSymbolInformationCreationService
+    [
+        ExportWorkspaceService(typeof(ILspSymbolInformationCreationService), ServiceLayer.Editor),
+        Shared
+    ]
+    internal sealed class EditorLspSymbolInformationCreationService
+        : ILspSymbolInformationCreationService
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public EditorLspSymbolInformationCreationService()
-        {
-        }
+        public EditorLspSymbolInformationCreationService() { }
 
-        public SymbolInformation Create(string name, string? containerName, LSP.SymbolKind kind, LSP.Location location, Glyph glyph)
+        public SymbolInformation Create(
+            string name,
+            string? containerName,
+            LSP.SymbolKind kind,
+            LSP.Location location,
+            Glyph glyph
+        )
         {
             var imageId = glyph.GetImageId();
             return new VSSymbolInformation

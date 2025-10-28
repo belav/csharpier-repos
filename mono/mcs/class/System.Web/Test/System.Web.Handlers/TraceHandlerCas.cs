@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -26,47 +26,50 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
-using NUnit.Framework;
-
 using System;
 using System.Reflection;
 using System.Security;
 using System.Security.Permissions;
 using System.Web;
 using System.Web.Handlers;
+using NUnit.Framework;
 
-namespace MonoCasTests.System.Web.Handlers {
+namespace MonoCasTests.System.Web.Handlers
+{
+    [TestFixture]
+    [Category("CAS")]
+    public class TraceHandlerCas : AspNetHostingMinimal
+    {
+        [Test]
+        [SecurityPermission(SecurityAction.Deny, UnmanagedCode = true)]
+        [ExpectedException(typeof(SecurityException))]
+        public void Constructor_Deny_UnmanagedCode()
+        {
+            new TraceHandler();
+        }
 
-	[TestFixture]
-	[Category ("CAS")]
-	public class TraceHandlerCas : AspNetHostingMinimal {
+        [Test]
+        [SecurityPermission(SecurityAction.PermitOnly, UnmanagedCode = true)]
+        public void Constructor_PermitOnly_UnmanagedCode()
+        {
+            new TraceHandler();
+        }
 
-		[Test]
-		[SecurityPermission (SecurityAction.Deny, UnmanagedCode = true)]
-		[ExpectedException (typeof (SecurityException))]
-		public void Constructor_Deny_UnmanagedCode ()
-		{
-			new TraceHandler ();
-		}
+        [SecurityPermission(SecurityAction.Assert, UnmanagedCode = true)]
+        public override object CreateControl(
+            SecurityAction action,
+            AspNetHostingPermissionLevel level
+        )
+        {
+            // don't let UnmanagedCode mess up the results
+            return base.CreateControl(action, level);
+        }
 
-		[Test]
-		[SecurityPermission (SecurityAction.PermitOnly, UnmanagedCode = true)]
-		public void Constructor_PermitOnly_UnmanagedCode ()
-		{
-			new TraceHandler ();
-		}
+        // base class AspNetHostingMinimal and Type property will test LinkDemands
 
-		[SecurityPermission (SecurityAction.Assert, UnmanagedCode = true)]
-		public override object CreateControl (SecurityAction action, AspNetHostingPermissionLevel level)
-		{
-			// don't let UnmanagedCode mess up the results
-			return base.CreateControl (action, level);
-		}
-
-		// base class AspNetHostingMinimal and Type property will test LinkDemands
-
-		public override Type Type {
-			get { return typeof (TraceHandler); }
-		}
-	}
+        public override Type Type
+        {
+            get { return typeof(TraceHandler); }
+        }
+    }
 }

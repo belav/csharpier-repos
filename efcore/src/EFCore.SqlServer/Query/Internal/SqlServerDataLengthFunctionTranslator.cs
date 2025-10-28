@@ -17,31 +17,48 @@ public class SqlServerDataLengthFunctionTranslator : IMethodCallTranslator
     {
         "nvarchar(max)",
         "varchar(max)",
-        "varbinary(max)"
+        "varbinary(max)",
     };
 
-    private static readonly HashSet<MethodInfo> MethodInfoDataLengthMapping
-        = new()
-        {
-            typeof(SqlServerDbFunctionsExtensions).GetRuntimeMethod(
-                nameof(SqlServerDbFunctionsExtensions.DataLength), new[] { typeof(DbFunctions), typeof(string) })!,
-            typeof(SqlServerDbFunctionsExtensions).GetRuntimeMethod(
-                nameof(SqlServerDbFunctionsExtensions.DataLength), new[] { typeof(DbFunctions), typeof(bool?) })!,
-            typeof(SqlServerDbFunctionsExtensions).GetRuntimeMethod(
-                nameof(SqlServerDbFunctionsExtensions.DataLength), new[] { typeof(DbFunctions), typeof(double?) })!,
-            typeof(SqlServerDbFunctionsExtensions).GetRuntimeMethod(
-                nameof(SqlServerDbFunctionsExtensions.DataLength), new[] { typeof(DbFunctions), typeof(decimal?) })!,
-            typeof(SqlServerDbFunctionsExtensions).GetRuntimeMethod(
-                nameof(SqlServerDbFunctionsExtensions.DataLength), new[] { typeof(DbFunctions), typeof(DateTime?) })!,
-            typeof(SqlServerDbFunctionsExtensions).GetRuntimeMethod(
-                nameof(SqlServerDbFunctionsExtensions.DataLength), new[] { typeof(DbFunctions), typeof(TimeSpan?) })!,
-            typeof(SqlServerDbFunctionsExtensions).GetRuntimeMethod(
-                nameof(SqlServerDbFunctionsExtensions.DataLength), new[] { typeof(DbFunctions), typeof(DateTimeOffset?) })!,
-            typeof(SqlServerDbFunctionsExtensions).GetRuntimeMethod(
-                nameof(SqlServerDbFunctionsExtensions.DataLength), new[] { typeof(DbFunctions), typeof(byte[]) })!,
-            typeof(SqlServerDbFunctionsExtensions).GetRuntimeMethod(
-                nameof(SqlServerDbFunctionsExtensions.DataLength), new[] { typeof(DbFunctions), typeof(Guid?) })!
-        };
+    private static readonly HashSet<MethodInfo> MethodInfoDataLengthMapping = new()
+    {
+        typeof(SqlServerDbFunctionsExtensions).GetRuntimeMethod(
+            nameof(SqlServerDbFunctionsExtensions.DataLength),
+            new[] { typeof(DbFunctions), typeof(string) }
+        )!,
+        typeof(SqlServerDbFunctionsExtensions).GetRuntimeMethod(
+            nameof(SqlServerDbFunctionsExtensions.DataLength),
+            new[] { typeof(DbFunctions), typeof(bool?) }
+        )!,
+        typeof(SqlServerDbFunctionsExtensions).GetRuntimeMethod(
+            nameof(SqlServerDbFunctionsExtensions.DataLength),
+            new[] { typeof(DbFunctions), typeof(double?) }
+        )!,
+        typeof(SqlServerDbFunctionsExtensions).GetRuntimeMethod(
+            nameof(SqlServerDbFunctionsExtensions.DataLength),
+            new[] { typeof(DbFunctions), typeof(decimal?) }
+        )!,
+        typeof(SqlServerDbFunctionsExtensions).GetRuntimeMethod(
+            nameof(SqlServerDbFunctionsExtensions.DataLength),
+            new[] { typeof(DbFunctions), typeof(DateTime?) }
+        )!,
+        typeof(SqlServerDbFunctionsExtensions).GetRuntimeMethod(
+            nameof(SqlServerDbFunctionsExtensions.DataLength),
+            new[] { typeof(DbFunctions), typeof(TimeSpan?) }
+        )!,
+        typeof(SqlServerDbFunctionsExtensions).GetRuntimeMethod(
+            nameof(SqlServerDbFunctionsExtensions.DataLength),
+            new[] { typeof(DbFunctions), typeof(DateTimeOffset?) }
+        )!,
+        typeof(SqlServerDbFunctionsExtensions).GetRuntimeMethod(
+            nameof(SqlServerDbFunctionsExtensions.DataLength),
+            new[] { typeof(DbFunctions), typeof(byte[]) }
+        )!,
+        typeof(SqlServerDbFunctionsExtensions).GetRuntimeMethod(
+            nameof(SqlServerDbFunctionsExtensions.DataLength),
+            new[] { typeof(DbFunctions), typeof(Guid?) }
+        )!,
+    };
 
     private readonly ISqlExpressionFactory _sqlExpressionFactory;
 
@@ -66,7 +83,8 @@ public class SqlServerDataLengthFunctionTranslator : IMethodCallTranslator
         SqlExpression? instance,
         MethodInfo method,
         IReadOnlyList<SqlExpression> arguments,
-        IDiagnosticsLogger<DbLoggerCategory.Query> logger)
+        IDiagnosticsLogger<DbLoggerCategory.Query> logger
+    )
     {
         if (MethodInfoDataLengthMapping.Contains(method))
         {
@@ -83,9 +101,13 @@ public class SqlServerDataLengthFunctionTranslator : IMethodCallTranslator
                     arguments.Skip(1),
                     nullable: true,
                     argumentsPropagateNullability: new[] { true },
-                    typeof(long));
+                    typeof(long)
+                );
 
-                return _sqlExpressionFactory.Convert(result, method.ReturnType.UnwrapNullableType());
+                return _sqlExpressionFactory.Convert(
+                    result,
+                    method.ReturnType.UnwrapNullableType()
+                );
             }
 
             return _sqlExpressionFactory.Function(
@@ -93,7 +115,8 @@ public class SqlServerDataLengthFunctionTranslator : IMethodCallTranslator
                 arguments.Skip(1),
                 nullable: true,
                 argumentsPropagateNullability: new[] { true },
-                method.ReturnType.UnwrapNullableType());
+                method.ReturnType.UnwrapNullableType()
+            );
         }
 
         return null;

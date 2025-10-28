@@ -15,58 +15,94 @@ namespace System.ServiceModel.Dispatcher
     using System.ServiceModel.Description;
 
     delegate object InvokeDelegate(object target, object[] inputs, object[] outputs);
-    delegate IAsyncResult InvokeBeginDelegate(object target, object[] inputs, AsyncCallback asyncCallback, object state);
+    delegate IAsyncResult InvokeBeginDelegate(
+        object target,
+        object[] inputs,
+        AsyncCallback asyncCallback,
+        object state
+    );
     delegate object InvokeEndDelegate(object target, object[] outputs, IAsyncResult result);
     delegate object CreateInstanceDelegate();
 
     sealed class InvokerUtil
     {
-        [Fx.Tag.SecurityNote(Critical = "Holds instance of CriticalHelper which keeps state that was produced within an assert.")]
+        [Fx.Tag.SecurityNote(
+            Critical = "Holds instance of CriticalHelper which keeps state that was produced within an assert."
+        )]
         [SecurityCritical]
         CriticalHelper helper;
 
-        [Fx.Tag.SecurityNote(Critical = "Initializes SecurityCritical field 'helper'.",
-            Safe = "Doesn't leak anything.")]
+        [Fx.Tag.SecurityNote(
+            Critical = "Initializes SecurityCritical field 'helper'.",
+            Safe = "Doesn't leak anything."
+        )]
         [SecuritySafeCritical]
         public InvokerUtil()
         {
             helper = new CriticalHelper();
         }
 
-        [Fx.Tag.SecurityNote(Critical = "Accesses SecurityCritical helper class 'CriticalHelper'.",
-            Safe = "Resultant delegate is self-contained and safe for general consumption, nothing else leaks.")]
+        [Fx.Tag.SecurityNote(
+            Critical = "Accesses SecurityCritical helper class 'CriticalHelper'.",
+            Safe = "Resultant delegate is self-contained and safe for general consumption, nothing else leaks."
+        )]
         [SecuritySafeCritical]
-        internal CreateInstanceDelegate GenerateCreateInstanceDelegate(Type type, ConstructorInfo constructor)
+        internal CreateInstanceDelegate GenerateCreateInstanceDelegate(
+            Type type,
+            ConstructorInfo constructor
+        )
         {
             return helper.GenerateCreateInstanceDelegate(type, constructor);
         }
 
-        [Fx.Tag.SecurityNote(Critical = "Accesses SecurityCritical helper class 'CriticalHelper'.",
-            Safe = "Resultant delegate is self-contained and safe for general consumption, parameter counts are safe, nothing else leaks.")]
+        [Fx.Tag.SecurityNote(
+            Critical = "Accesses SecurityCritical helper class 'CriticalHelper'.",
+            Safe = "Resultant delegate is self-contained and safe for general consumption, parameter counts are safe, nothing else leaks."
+        )]
         [SecuritySafeCritical]
-        internal InvokeDelegate GenerateInvokeDelegate(MethodInfo method, out int inputParameterCount, out int outputParameterCount)
+        internal InvokeDelegate GenerateInvokeDelegate(
+            MethodInfo method,
+            out int inputParameterCount,
+            out int outputParameterCount
+        )
         {
-            return helper.GenerateInvokeDelegate(method, out inputParameterCount, out outputParameterCount);
+            return helper.GenerateInvokeDelegate(
+                method,
+                out inputParameterCount,
+                out outputParameterCount
+            );
         }
 
-        [Fx.Tag.SecurityNote(Critical = "Accesses SecurityCritical helper class 'CriticalHelper'.",
-            Safe = "Resultant delegate is self-contained and safe for general consumption, parameter counts are safe, nothing else leaks.")]
+        [Fx.Tag.SecurityNote(
+            Critical = "Accesses SecurityCritical helper class 'CriticalHelper'.",
+            Safe = "Resultant delegate is self-contained and safe for general consumption, parameter counts are safe, nothing else leaks."
+        )]
         [SecuritySafeCritical]
-        internal InvokeBeginDelegate GenerateInvokeBeginDelegate(MethodInfo method, out int inputParameterCount)
+        internal InvokeBeginDelegate GenerateInvokeBeginDelegate(
+            MethodInfo method,
+            out int inputParameterCount
+        )
         {
             return helper.GenerateInvokeBeginDelegate(method, out inputParameterCount);
         }
 
-        [Fx.Tag.SecurityNote(Critical = "Accesses SecurityCritical helper class 'CriticalHelper'.",
-            Safe = "Resultant delegate is self-contained and safe for general consumption, parameter counts are safe, nothing else leaks.")]
+        [Fx.Tag.SecurityNote(
+            Critical = "Accesses SecurityCritical helper class 'CriticalHelper'.",
+            Safe = "Resultant delegate is self-contained and safe for general consumption, parameter counts are safe, nothing else leaks."
+        )]
         [SecuritySafeCritical]
-        internal InvokeEndDelegate GenerateInvokeEndDelegate(MethodInfo method, out int outputParameterCount)
+        internal InvokeEndDelegate GenerateInvokeEndDelegate(
+            MethodInfo method,
+            out int outputParameterCount
+        )
         {
             return helper.GenerateInvokeEndDelegate(method, out outputParameterCount);
         }
-        
-        [Fx.Tag.SecurityNote(Critical = "Handles all aspects of IL generation including initializing the DynamicMethod, which requires an elevation."
-            + "Since the ILGenerator is created under an elevation, we lock down access to every aspect of the generation.")]
+
+        [Fx.Tag.SecurityNote(
+            Critical = "Handles all aspects of IL generation including initializing the DynamicMethod, which requires an elevation."
+                + "Since the ILGenerator is created under an elevation, we lock down access to every aspect of the generation."
+        )]
 #pragma warning disable 618 // have not moved to the v4 security model yet
         [SecurityCritical(SecurityCriticalScope.Everything)]
 #pragma warning restore 618
@@ -76,24 +112,39 @@ namespace System.ServiceModel.Dispatcher
 
             CodeGenerator ilg;
 
-            internal CreateInstanceDelegate GenerateCreateInstanceDelegate(Type type, ConstructorInfo constructor)
+            internal CreateInstanceDelegate GenerateCreateInstanceDelegate(
+                Type type,
+                ConstructorInfo constructor
+            )
             {
-                bool requiresMemberAccess = !IsTypeVisible(type) || ConstructorRequiresMemberAccess(constructor);
+                bool requiresMemberAccess =
+                    !IsTypeVisible(type) || ConstructorRequiresMemberAccess(constructor);
 
                 this.ilg = new CodeGenerator();
                 try
                 {
-                    ilg.BeginMethod("Create" + type.FullName, typeof(CreateInstanceDelegate), requiresMemberAccess);
+                    ilg.BeginMethod(
+                        "Create" + type.FullName,
+                        typeof(CreateInstanceDelegate),
+                        requiresMemberAccess
+                    );
                 }
                 catch (SecurityException securityException)
                 {
-                    if (requiresMemberAccess && securityException.PermissionType.Equals(typeof(ReflectionPermission)))
+                    if (
+                        requiresMemberAccess
+                        && securityException.PermissionType.Equals(typeof(ReflectionPermission))
+                    )
                     {
-                        DiagnosticUtility.TraceHandledException(securityException, TraceEventType.Warning);
+                        DiagnosticUtility.TraceHandledException(
+                            securityException,
+                            TraceEventType.Warning
+                        );
                         throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                            new SecurityException(SR.GetString(
-                                    SR.PartialTrustServiceCtorNotVisible,
-                                    type.FullName)));
+                            new SecurityException(
+                                SR.GetString(SR.PartialTrustServiceCtorNotVisible, type.FullName)
+                            )
+                        );
                     }
                     else
                     {
@@ -115,25 +166,43 @@ namespace System.ServiceModel.Dispatcher
                 return (CreateInstanceDelegate)ilg.EndMethod();
             }
 
-            internal InvokeDelegate GenerateInvokeDelegate(MethodInfo method, out int inputParameterCount, out int outputParameterCount)
+            internal InvokeDelegate GenerateInvokeDelegate(
+                MethodInfo method,
+                out int inputParameterCount,
+                out int outputParameterCount
+            )
             {
                 bool requiresMemberAccess = MethodRequiresMemberAccess(method);
 
                 this.ilg = new CodeGenerator();
                 try
                 {
-                    this.ilg.BeginMethod("SyncInvoke" + method.Name, typeof(InvokeDelegate), requiresMemberAccess);
+                    this.ilg.BeginMethod(
+                        "SyncInvoke" + method.Name,
+                        typeof(InvokeDelegate),
+                        requiresMemberAccess
+                    );
                 }
                 catch (SecurityException securityException)
                 {
-                    if (requiresMemberAccess && securityException.PermissionType.Equals(typeof(ReflectionPermission)))
+                    if (
+                        requiresMemberAccess
+                        && securityException.PermissionType.Equals(typeof(ReflectionPermission))
+                    )
                     {
-                        DiagnosticUtility.TraceHandledException(securityException, TraceEventType.Warning);
+                        DiagnosticUtility.TraceHandledException(
+                            securityException,
+                            TraceEventType.Warning
+                        );
                         throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                            new SecurityException(SR.GetString(
+                            new SecurityException(
+                                SR.GetString(
                                     SR.PartialTrustServiceMethodNotVisible,
                                     method.DeclaringType.FullName,
-                                    method.Name)));
+                                    method.Name
+                                )
+                            )
+                        );
                     }
                     else
                     {
@@ -146,39 +215,69 @@ namespace System.ServiceModel.Dispatcher
                 ArgBuilder outputParametersArg = ilg.GetArg(2);
 
                 ParameterInfo[] parameters = method.GetParameters();
-                LocalBuilder returnLocal = ilg.DeclareLocal(ilg.CurrentMethod.ReturnType, "returnParam");
+                LocalBuilder returnLocal = ilg.DeclareLocal(
+                    ilg.CurrentMethod.ReturnType,
+                    "returnParam"
+                );
                 LocalBuilder[] parameterLocals = new LocalBuilder[parameters.Length];
                 DeclareParameterLocals(parameters, parameterLocals);
 
-                LoadInputParametersIntoLocals(parameters, parameterLocals, inputParametersArg, out inputParameterCount);
+                LoadInputParametersIntoLocals(
+                    parameters,
+                    parameterLocals,
+                    inputParametersArg,
+                    out inputParameterCount
+                );
                 LoadTarget(targetArg, method.ReflectedType);
                 LoadParameters(parameters, parameterLocals);
                 InvokeMethod(method, returnLocal);
-                LoadOutputParametersIntoArray(parameters, parameterLocals, outputParametersArg, out outputParameterCount);
+                LoadOutputParametersIntoArray(
+                    parameters,
+                    parameterLocals,
+                    outputParametersArg,
+                    out outputParameterCount
+                );
 
                 ilg.Load(returnLocal);
                 return (InvokeDelegate)this.ilg.EndMethod();
             }
 
-            internal InvokeBeginDelegate GenerateInvokeBeginDelegate(MethodInfo method, out int inputParameterCount)
+            internal InvokeBeginDelegate GenerateInvokeBeginDelegate(
+                MethodInfo method,
+                out int inputParameterCount
+            )
             {
                 bool requiresMemberAccess = MethodRequiresMemberAccess(method);
 
                 this.ilg = new CodeGenerator();
                 try
                 {
-                    this.ilg.BeginMethod("AsyncInvokeBegin" + method.Name, typeof(InvokeBeginDelegate), requiresMemberAccess);
+                    this.ilg.BeginMethod(
+                        "AsyncInvokeBegin" + method.Name,
+                        typeof(InvokeBeginDelegate),
+                        requiresMemberAccess
+                    );
                 }
                 catch (SecurityException securityException)
                 {
-                    if (requiresMemberAccess && securityException.PermissionType.Equals(typeof(ReflectionPermission)))
+                    if (
+                        requiresMemberAccess
+                        && securityException.PermissionType.Equals(typeof(ReflectionPermission))
+                    )
                     {
-                        DiagnosticUtility.TraceHandledException(securityException, TraceEventType.Warning);
+                        DiagnosticUtility.TraceHandledException(
+                            securityException,
+                            TraceEventType.Warning
+                        );
                         throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                            new SecurityException(SR.GetString(
+                            new SecurityException(
+                                SR.GetString(
                                     SR.PartialTrustServiceMethodNotVisible,
                                     method.DeclaringType.FullName,
-                                    method.Name)));
+                                    method.Name
+                                )
+                            )
+                        );
                     }
                     else
                     {
@@ -192,11 +291,19 @@ namespace System.ServiceModel.Dispatcher
                 ArgBuilder stateArg = ilg.GetArg(3);
 
                 ParameterInfo[] parameters = method.GetParameters();
-                LocalBuilder returnLocal = ilg.DeclareLocal(ilg.CurrentMethod.ReturnType, "returnParam");
+                LocalBuilder returnLocal = ilg.DeclareLocal(
+                    ilg.CurrentMethod.ReturnType,
+                    "returnParam"
+                );
                 LocalBuilder[] parameterLocals = new LocalBuilder[parameters.Length - 2];
                 DeclareParameterLocals(parameters, parameterLocals);
 
-                LoadInputParametersIntoLocals(parameters, parameterLocals, inputParametersArg, out inputParameterCount);
+                LoadInputParametersIntoLocals(
+                    parameters,
+                    parameterLocals,
+                    inputParametersArg,
+                    out inputParameterCount
+                );
                 LoadTarget(targetArg, method.ReflectedType);
                 LoadParameters(parameters, parameterLocals);
                 ilg.Load(callbackArg);
@@ -207,25 +314,42 @@ namespace System.ServiceModel.Dispatcher
                 return (InvokeBeginDelegate)this.ilg.EndMethod();
             }
 
-            internal InvokeEndDelegate GenerateInvokeEndDelegate(MethodInfo method, out int outputParameterCount)
+            internal InvokeEndDelegate GenerateInvokeEndDelegate(
+                MethodInfo method,
+                out int outputParameterCount
+            )
             {
                 bool requiresMemberAccess = MethodRequiresMemberAccess(method);
 
                 this.ilg = new CodeGenerator();
                 try
                 {
-                    this.ilg.BeginMethod("AsyncInvokeEnd" + method.Name, typeof(InvokeEndDelegate), requiresMemberAccess);
+                    this.ilg.BeginMethod(
+                        "AsyncInvokeEnd" + method.Name,
+                        typeof(InvokeEndDelegate),
+                        requiresMemberAccess
+                    );
                 }
                 catch (SecurityException securityException)
                 {
-                    if (requiresMemberAccess && securityException.PermissionType.Equals(typeof(ReflectionPermission)))
+                    if (
+                        requiresMemberAccess
+                        && securityException.PermissionType.Equals(typeof(ReflectionPermission))
+                    )
                     {
-                        DiagnosticUtility.TraceHandledException(securityException, TraceEventType.Warning);
+                        DiagnosticUtility.TraceHandledException(
+                            securityException,
+                            TraceEventType.Warning
+                        );
                         throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                            new SecurityException(SR.GetString(
+                            new SecurityException(
+                                SR.GetString(
                                     SR.PartialTrustServiceMethodNotVisible,
                                     method.DeclaringType.FullName,
-                                    method.Name)));
+                                    method.Name
+                                )
+                            )
+                        );
                     }
                     else
                     {
@@ -238,7 +362,10 @@ namespace System.ServiceModel.Dispatcher
                 ArgBuilder resultArg = ilg.GetArg(2);
 
                 ParameterInfo[] parameters = method.GetParameters();
-                LocalBuilder returnLocal = ilg.DeclareLocal(ilg.CurrentMethod.ReturnType, "returnParam");
+                LocalBuilder returnLocal = ilg.DeclareLocal(
+                    ilg.CurrentMethod.ReturnType,
+                    "returnParam"
+                );
                 LocalBuilder[] parameterLocals = new LocalBuilder[parameters.Length - 1];
                 DeclareParameterLocals(parameters, parameterLocals);
 
@@ -247,7 +374,12 @@ namespace System.ServiceModel.Dispatcher
                 LoadParameters(parameters, parameterLocals);
                 ilg.Load(resultArg);
                 InvokeMethod(method, returnLocal);
-                LoadOutputParametersIntoArray(parameters, parameterLocals, outputParametersArg, out outputParameterCount);
+                LoadOutputParametersIntoArray(
+                    parameters,
+                    parameterLocals,
+                    outputParametersArg,
+                    out outputParameterCount
+                );
 
                 ilg.Load(returnLocal);
                 return (InvokeEndDelegate)this.ilg.EndMethod();
@@ -257,11 +389,19 @@ namespace System.ServiceModel.Dispatcher
             {
                 for (int i = 0; i < parameterLocals.Length; i++)
                 {
-                    parameterLocals[i] = ilg.DeclareLocal(TypeLoader.GetParameterType(parameters[i]), "param" + i.ToString(CultureInfo.InvariantCulture));
+                    parameterLocals[i] = ilg.DeclareLocal(
+                        TypeLoader.GetParameterType(parameters[i]),
+                        "param" + i.ToString(CultureInfo.InvariantCulture)
+                    );
                 }
             }
 
-            void LoadInputParametersIntoLocals(ParameterInfo[] parameters, LocalBuilder[] parameterLocals, ArgBuilder inputParametersArg, out int inputParameterCount)
+            void LoadInputParametersIntoLocals(
+                ParameterInfo[] parameters,
+                LocalBuilder[] parameterLocals,
+                ArgBuilder inputParametersArg,
+                out int inputParameterCount
+            )
             {
                 inputParameterCount = 0;
                 for (int i = 0; i < parameterLocals.Length; i++)
@@ -291,13 +431,19 @@ namespace System.ServiceModel.Dispatcher
                 }
             }
 
-            void LoadZeroValueInputParametersIntoLocals(ParameterInfo[] parameters, LocalBuilder[] parameterLocals)
+            void LoadZeroValueInputParametersIntoLocals(
+                ParameterInfo[] parameters,
+                LocalBuilder[] parameterLocals
+            )
             {
                 for (int i = 0; i < parameterLocals.Length; i++)
                 {
                     if (ServiceReflector.FlowsIn(parameters[i]))
                     {
-                        ilg.LoadZeroValueIntoLocal(parameterLocals[i].LocalType, parameterLocals[i]);
+                        ilg.LoadZeroValueIntoLocal(
+                            parameterLocals[i].LocalType,
+                            parameterLocals[i]
+                        );
                     }
                 }
             }
@@ -335,7 +481,12 @@ namespace System.ServiceModel.Dispatcher
                 ilg.Store(returnLocal);
             }
 
-            void LoadOutputParametersIntoArray(ParameterInfo[] parameters, LocalBuilder[] parameterLocals, ArgBuilder outputParametersArg, out int outputParameterCount)
+            void LoadOutputParametersIntoArray(
+                ParameterInfo[] parameters,
+                LocalBuilder[] parameterLocals,
+                ArgBuilder outputParametersArg,
+                out int outputParameterCount
+            )
             {
                 outputParameterCount = 0;
                 for (int i = 0; i < parameterLocals.Length; i++)
@@ -371,12 +522,16 @@ namespace System.ServiceModel.Dispatcher
 
             static bool ConstructorRequiresMemberAccess(ConstructorInfo ctor)
             {
-                return ctor != null && (!ctor.IsPublic || !IsTypeVisible(ctor.DeclaringType)) && ctor.Module != typeof(InvokerUtil).Module;
+                return ctor != null
+                    && (!ctor.IsPublic || !IsTypeVisible(ctor.DeclaringType))
+                    && ctor.Module != typeof(InvokerUtil).Module;
             }
 
             static bool MethodRequiresMemberAccess(MethodInfo method)
             {
-                return method != null && (!method.IsPublic || !IsTypeVisible(method.DeclaringType)) && method.Module != typeof(InvokerUtil).Module;
+                return method != null
+                    && (!method.IsPublic || !IsTypeVisible(method.DeclaringType))
+                    && method.Module != typeof(InvokerUtil).Module;
             }
         }
     }

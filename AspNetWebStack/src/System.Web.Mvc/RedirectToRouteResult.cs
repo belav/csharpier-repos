@@ -12,17 +12,16 @@ namespace System.Web.Mvc
         private RouteCollection _routes;
 
         public RedirectToRouteResult(RouteValueDictionary routeValues)
-            :
-                this(null, routeValues)
-        {
-        }
+            : this(null, routeValues) { }
 
         public RedirectToRouteResult(string routeName, RouteValueDictionary routeValues)
-            : this(routeName, routeValues, permanent: false)
-        {
-        }
+            : this(routeName, routeValues, permanent: false) { }
 
-        public RedirectToRouteResult(string routeName, RouteValueDictionary routeValues, bool permanent)
+        public RedirectToRouteResult(
+            string routeName,
+            RouteValueDictionary routeValues,
+            bool permanent
+        )
         {
             Permanent = permanent;
             RouteName = routeName ?? String.Empty;
@@ -56,10 +55,22 @@ namespace System.Web.Mvc
             }
             if (context.IsChildAction)
             {
-                throw new InvalidOperationException(MvcResources.RedirectAction_CannotRedirectInChildAction);
+                throw new InvalidOperationException(
+                    MvcResources.RedirectAction_CannotRedirectInChildAction
+                );
             }
 
-            string destinationUrl = UrlHelper.GenerateUrl(RouteName, null /* actionName */, null /* controllerName */, RouteValues, Routes, context.RequestContext, false /* includeImplicitMvcValues */);
+            string destinationUrl = UrlHelper.GenerateUrl(
+                RouteName,
+                null /* actionName */
+                ,
+                null /* controllerName */
+                ,
+                RouteValues,
+                Routes,
+                context.RequestContext,
+                false /* includeImplicitMvcValues */
+            );
             if (String.IsNullOrEmpty(destinationUrl))
             {
                 throw new InvalidOperationException(MvcResources.Common_NoRouteMatched);

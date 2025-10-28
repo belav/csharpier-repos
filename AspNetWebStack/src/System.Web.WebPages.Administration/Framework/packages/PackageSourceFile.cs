@@ -47,18 +47,26 @@ namespace System.Web.WebPages.Administration.PackageManager
                 var document = XDocument.Load(stream);
                 var root = document.Root;
 
-                return (from element in root.Elements()
-                        select ParsePackageSource(element)).ToList();
+                return (
+                    from element in root.Elements()
+                    select ParsePackageSource(element)
+                ).ToList();
             }
         }
 
-        internal static void WriteFeeds(IEnumerable<WebPackageSource> sources, Func<Stream> getStream)
+        internal static void WriteFeeds(
+            IEnumerable<WebPackageSource> sources,
+            Func<Stream> getStream
+        )
         {
-            var xmlTree = from item in sources
-                          select new XElement("source",
-                                              new XAttribute(UrlAttribute, item.Source),
-                                              new XAttribute(NameAttribute, item.Name),
-                                              new XAttribute(FilterPreferredAttribute, item.FilterPreferredPackages));
+            var xmlTree =
+                from item in sources
+                select new XElement(
+                    "source",
+                    new XAttribute(UrlAttribute, item.Source),
+                    new XAttribute(NameAttribute, item.Name),
+                    new XAttribute(FilterPreferredAttribute, item.FilterPreferredPackages)
+                );
 
             using (Stream stream = getStream())
             {
@@ -83,7 +91,12 @@ namespace System.Web.WebPages.Administration.PackageManager
                 throw new FormatException();
             }
 
-            return new WebPackageSource(feedUrl.OriginalString, nameAttribute.Value) { FilterPreferredPackages = filterPreferredAttribute != null && filterPreferredAttribute.Value.AsBool(false) };
+            return new WebPackageSource(feedUrl.OriginalString, nameAttribute.Value)
+            {
+                FilterPreferredPackages =
+                    filterPreferredAttribute != null
+                    && filterPreferredAttribute.Value.AsBool(false),
+            };
         }
 
         private Stream GetStreamForRead()

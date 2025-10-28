@@ -19,5 +19,4 @@
     <UseVSTestRunner>true</UseVSTestRunner>
     <RunAnalyzers>false</RunAnalyzers>
   </PropertyGroup>
-
 </Project>

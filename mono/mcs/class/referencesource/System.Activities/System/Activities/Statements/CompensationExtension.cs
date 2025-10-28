@@ -14,11 +14,13 @@ namespace System.Activities.Statements
 
     public class CompensationExtension : PersistenceParticipant, IWorkflowInstanceExtension
     {
-        static readonly XNamespace compensationNamespace = XNamespace.Get("urn:schemas-microsoft-com:System.Activities/4.0/compensation");
+        static readonly XNamespace compensationNamespace = XNamespace.Get(
+            "urn:schemas-microsoft-com:System.Activities/4.0/compensation"
+        );
         static readonly XName compensationExtensionData = compensationNamespace.GetName("Data");
 
         [Fx.Tag.SynchronizationObject(Blocking = false)]
-        Dictionary<long, CompensationTokenData> compensationTokenTable;            
+        Dictionary<long, CompensationTokenData> compensationTokenTable;
 
         public CompensationExtension()
         {
@@ -27,51 +29,21 @@ namespace System.Activities.Statements
 
         internal Dictionary<long, CompensationTokenData> CompensationTokenTable
         {
-            get
-            {
-                return this.compensationTokenTable;
-            }
-            private set
-            {
-                this.compensationTokenTable = value;
-            }
+            get { return this.compensationTokenTable; }
+            private set { this.compensationTokenTable = value; }
         }
 
-        internal long Id
-        {
-            get;
-            set;
-        }
-        
-        internal Bookmark WorkflowCompensation
-        {
-            get;
-            set;
-        }
+        internal long Id { get; set; }
 
-        internal Bookmark WorkflowConfirmation
-        {
-            get;
-            set;
-        }
+        internal Bookmark WorkflowCompensation { get; set; }
 
-        internal Bookmark WorkflowCompensationScheduled
-        {
-            get;
-            private set;
-        }
+        internal Bookmark WorkflowConfirmation { get; set; }
 
-        internal bool IsWorkflowCompensationBehaviorScheduled
-        {
-            get;
-            private set;
-        }
+        internal Bookmark WorkflowCompensationScheduled { get; private set; }
 
-        internal WorkflowInstanceProxy Instance
-        {
-            get;
-            private set;
-        }
+        internal bool IsWorkflowCompensationBehaviorScheduled { get; private set; }
+
+        internal WorkflowInstanceProxy Instance { get; private set; }
 
         internal void Add(long compensationId, CompensationTokenData compensationToken)
         {
@@ -89,7 +61,7 @@ namespace System.Activities.Statements
         {
             CompensationTokenData compensationToken = null;
             this.CompensationTokenTable.TryGetValue(compensationId, out compensationToken);
-            return compensationToken;   
+            return compensationToken;
         }
 
         internal Bookmark FindBookmark(long compensationId, CompensationBookmarkName bookmarkName)
@@ -105,15 +77,28 @@ namespace System.Activities.Statements
             return bookmark;
         }
 
-        internal void SetupWorkflowCompensationBehavior(NativeActivityContext context, BookmarkCallback callback, Activity workflowCompensationBehavior)
+        internal void SetupWorkflowCompensationBehavior(
+            NativeActivityContext context,
+            BookmarkCallback callback,
+            Activity workflowCompensationBehavior
+        )
         {
             this.WorkflowCompensationScheduled = context.CreateBookmark(callback);
 
-            Fx.Assert(workflowCompensationBehavior != null, "WorkflowCompensationBehavior must be valid");
+            Fx.Assert(
+                workflowCompensationBehavior != null,
+                "WorkflowCompensationBehavior must be valid"
+            );
             context.ScheduleSecondaryRoot(workflowCompensationBehavior, null);
 
             // Add the root compensationToken to track all root CA execution order.
-            this.Add(CompensationToken.RootCompensationId, new CompensationTokenData(CompensationToken.RootCompensationId, CompensationToken.RootCompensationId));
+            this.Add(
+                CompensationToken.RootCompensationId,
+                new CompensationTokenData(
+                    CompensationToken.RootCompensationId,
+                    CompensationToken.RootCompensationId
+                )
+            );
             this.IsWorkflowCompensationBehaviorScheduled = true;
         }
 
@@ -122,7 +107,11 @@ namespace System.Activities.Statements
             return ++this.Id;
         }
 
-        internal void NotifyMessage(NativeActivityContext context, long compensationId, CompensationBookmarkName compensationBookmark)
+        internal void NotifyMessage(
+            NativeActivityContext context,
+            long compensationId,
+            CompensationBookmarkName compensationBookmark
+        )
         {
             Bookmark bookmark = FindBookmark(compensationId, compensationBookmark);
 
@@ -132,32 +121,43 @@ namespace System.Activities.Statements
             }
             else
             {
-                throw FxTrace.Exception.AsError(new InvalidOperationException(SR.BookmarkNotRegistered(compensationBookmark)));
-            }         
+                throw FxTrace.Exception.AsError(
+                    new InvalidOperationException(SR.BookmarkNotRegistered(compensationBookmark))
+                );
+            }
         }
 
-        [SuppressMessage(FxCop.Category.Design, FxCop.Rule.InterfaceMethodsShouldBeCallableByChildTypes,
-            Justification = "The inherit class don't need to call this method or access this method")]
+        [SuppressMessage(
+            FxCop.Category.Design,
+            FxCop.Rule.InterfaceMethodsShouldBeCallableByChildTypes,
+            Justification = "The inherit class don't need to call this method or access this method"
+        )]
         IEnumerable<object> IWorkflowInstanceExtension.GetAdditionalExtensions()
         {
             return null;
         }
 
-        [SuppressMessage(FxCop.Category.Design, FxCop.Rule.InterfaceMethodsShouldBeCallableByChildTypes,
-            Justification = "The inherit class don't need to call this method or access this method")]
+        [SuppressMessage(
+            FxCop.Category.Design,
+            FxCop.Rule.InterfaceMethodsShouldBeCallableByChildTypes,
+            Justification = "The inherit class don't need to call this method or access this method"
+        )]
         void IWorkflowInstanceExtension.SetInstance(WorkflowInstanceProxy instance)
         {
             this.Instance = instance;
         }
 
         // PersistenceParticipant
-        protected override void CollectValues(out IDictionary<XName, object> readWriteValues, out IDictionary<XName, object> writeOnlyValues)
+        protected override void CollectValues(
+            out IDictionary<XName, object> readWriteValues,
+            out IDictionary<XName, object> writeOnlyValues
+        )
         {
             writeOnlyValues = null;
             readWriteValues = new Dictionary<XName, object>(1)
             {
                 {
-                    compensationExtensionData, 
+                    compensationExtensionData,
                     new List<object>(6)
                     {
                         this.CompensationTokenTable,
@@ -165,9 +165,9 @@ namespace System.Activities.Statements
                         this.WorkflowConfirmation,
                         this.WorkflowCompensationScheduled,
                         this.IsWorkflowCompensationBehaviorScheduled,
-                        this.Id
+                        this.Id,
                     }
-                }
+                },
             };
         }
 
@@ -185,6 +185,6 @@ namespace System.Activities.Statements
                 this.IsWorkflowCompensationBehaviorScheduled = (bool)list[4];
                 this.Id = (long)list[5];
             }
-        }      
+        }
     }
 }

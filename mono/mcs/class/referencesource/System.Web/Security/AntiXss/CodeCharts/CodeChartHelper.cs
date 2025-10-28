@@ -4,24 +4,29 @@
 // </copyright>
 //------------------------------------------------------------------------------
 
-namespace System.Web.Security.AntiXss.CodeCharts {
+namespace System.Web.Security.AntiXss.CodeCharts
+{
     using System;
     using System.Collections.Generic;
     using System.Diagnostics;
     using System.Linq;
 
-    internal static class CodeChartHelper {
-        internal static IEnumerable<int> GetRange(int min, int max, Func<int, bool> exclusionFilter) {
+    internal static class CodeChartHelper
+    {
+        internal static IEnumerable<int> GetRange(int min, int max, Func<int, bool> exclusionFilter)
+        {
             Debug.Assert(min <= max);
 
             var range = Enumerable.Range(min, (max - min + 1));
-            if (exclusionFilter != null) {
+            if (exclusionFilter != null)
+            {
                 range = range.Where(i => !exclusionFilter(i));
             }
             return range;
         }
 
-        internal static IEnumerable<int> GetRange(int min, int max) {
+        internal static IEnumerable<int> GetRange(int min, int max)
+        {
             return GetRange(min, max, null);
         }
     }

@@ -14,7 +14,10 @@ namespace System.IO.Tests
             return Directory.CreateDirectory(path, AllAccess);
         }
 
-        [ConditionalTheory(typeof(PlatformDetection), nameof(PlatformDetection.IsStartingProcessesSupported))]
+        [ConditionalTheory(
+            typeof(PlatformDetection),
+            nameof(PlatformDetection.IsStartingProcessesSupported)
+        )]
         [MemberData(nameof(TestUnixFileModes))]
         public void CreateWithUnixFileMode(UnixFileMode mode)
         {
@@ -23,7 +26,10 @@ namespace System.IO.Tests
 
             // under Linux the created directory gets mode (mode & ~umask & 01777).
             // under OSX, it gets (mode & ~umask & 0777).
-            UnixFileMode platformFilter = UnixFileMode.SetGroup | UnixFileMode.SetUser | (PlatformDetection.IsBsdLike ? UnixFileMode.StickyBit : UnixFileMode.None);
+            UnixFileMode platformFilter =
+                UnixFileMode.SetGroup
+                | UnixFileMode.SetUser
+                | (PlatformDetection.IsBsdLike ? UnixFileMode.StickyBit : UnixFileMode.None);
             UnixFileMode expectedMode = mode & ~GetUmask() & ~platformFilter;
             Assert.Equal(expectedMode, dir.UnixFileMode);
         }
@@ -50,7 +56,9 @@ namespace System.IO.Tests
 
             Assert.Equal(childMode, childDir.UnixFileMode);
 
-            UnixFileMode defaultPermissions = Directory.CreateDirectory(GetRandomDirPath()).UnixFileMode;
+            UnixFileMode defaultPermissions = Directory
+                .CreateDirectory(GetRandomDirPath())
+                .UnixFileMode;
             Assert.Equal(defaultPermissions, File.GetUnixFileMode(parent));
         }
 

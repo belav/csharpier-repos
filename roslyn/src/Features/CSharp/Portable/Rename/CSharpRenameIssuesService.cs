@@ -17,15 +17,16 @@ namespace Microsoft.CodeAnalysis.CSharp.Rename
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public CSharpRenameIssuesService()
-        {
-        }
+        public CSharpRenameIssuesService() { }
 
         public bool CheckLanguageSpecificIssues(
-            SemanticModel semanticModel, ISymbol symbol, SyntaxToken triggerToken, [NotNullWhen(true)] out string? langError)
+            SemanticModel semanticModel,
+            ISymbol symbol,
+            SyntaxToken triggerToken,
+            [NotNullWhen(true)] out string? langError
+        )
         {
-            if (triggerToken.IsTypeNamedDynamic() &&
-                symbol.Kind == SymbolKind.DynamicType)
+            if (triggerToken.IsTypeNamedDynamic() && symbol.Kind == SymbolKind.DynamicType)
             {
                 langError = FeaturesResources.You_cannot_rename_this_element;
                 return true;
@@ -33,14 +34,17 @@ namespace Microsoft.CodeAnalysis.CSharp.Rename
 
             if (IsTypeNamedVarInVariableOrFieldDeclaration(triggerToken))
             {
-                // To check if var in this context is a real type, or the keyword, we need to 
+                // To check if var in this context is a real type, or the keyword, we need to
                 // speculatively bind the identifier "var". If it returns a symbol, it's a real type,
                 // if not, it's the keyword.
                 // see bugs 659683 (compiler API) and 659705 (rename/workspace api) for examples
-                var symbolForVar = semanticModel.GetSpeculativeSymbolInfo(
-                    triggerToken.SpanStart,
-                    triggerToken.Parent!,
-                    SpeculativeBindingOption.BindAsTypeOrNamespace).Symbol;
+                var symbolForVar = semanticModel
+                    .GetSpeculativeSymbolInfo(
+                        triggerToken.SpanStart,
+                        triggerToken.Parent!,
+                        SpeculativeBindingOption.BindAsTypeOrNamespace
+                    )
+                    .Symbol;
 
                 if (symbolForVar == null)
                 {

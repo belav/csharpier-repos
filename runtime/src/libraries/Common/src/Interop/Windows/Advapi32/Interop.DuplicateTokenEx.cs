@@ -14,9 +14,10 @@ internal static partial class Interop
         internal static partial bool DuplicateTokenEx(
             SafeAccessTokenHandle hExistingToken,
             uint dwDesiredAccess,
-            IntPtr lpTokenAttributes,   // LPSECURITY_ATTRIBUTES
+            IntPtr lpTokenAttributes, // LPSECURITY_ATTRIBUTES
             uint ImpersonationLevel,
             uint TokenType,
-            ref SafeAccessTokenHandle phNewToken);
+            ref SafeAccessTokenHandle phNewToken
+        );
     }
 }

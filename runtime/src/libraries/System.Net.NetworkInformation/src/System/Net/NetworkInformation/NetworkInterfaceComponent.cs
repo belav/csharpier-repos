@@ -16,6 +16,6 @@ namespace System.Net.NetworkInformation
         /// <summary>
         /// Internet Protocol version 6 is supported.
         /// </summary>
-        IPv6
+        IPv6,
     }
 }

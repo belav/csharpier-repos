@@ -4,33 +4,35 @@
 // </copyright>
 //------------------------------------------------------------------------------
 
-namespace System.Web.Configuration {
+namespace System.Web.Configuration
+{
     using System.Collections;
+    using System.Collections.Specialized;
     using System.Configuration;
     using System.Configuration.Internal;
-    using System.Web;
-    using System.Web.Util;
-    using System.Security;
+    using System.Globalization;
     using System.IO;
-    using System.Web.Hosting;
-    using System.Runtime.InteropServices;
     using System.Reflection;
-    using System.Collections.Specialized;
-    using System.Xml;
+    using System.Runtime.InteropServices;
+    using System.Security;
     using System.Security.Principal;
     using System.Threading;
-    using System.Globalization;
+    using System.Web;
+    using System.Web.Hosting;
+    using System.Web.Util;
+    using System.Xml;
 
     [StructLayout(LayoutKind.Sequential, Pack = 4, CharSet = CharSet.Unicode)]
     internal class COAUTHIDENTITY
     {
-        internal COAUTHIDENTITY(string usr, string dom, string pwd) {
+        internal COAUTHIDENTITY(string usr, string dom, string pwd)
+        {
             user = usr;
-            userlen = (user==null) ? 0 : user.Length;
+            userlen = (user == null) ? 0 : user.Length;
             domain = dom;
-            domainlen = (domain==null) ? 0 : domain.Length;
+            domainlen = (domain == null) ? 0 : domain.Length;
             password = pwd;
-            passwordlen = (password==null) ? 0 : password.Length;
+            passwordlen = (password == null) ? 0 : password.Length;
         }
 
         [MarshalAs(UnmanagedType.LPWStr)]
@@ -44,7 +46,7 @@ namespace System.Web.Configuration {
         [MarshalAs(UnmanagedType.LPWStr)]
         internal string password = null;
         internal int passwordlen = 0;
-        internal int flags = 2;        // SEC_WINNT_AUTH_IDENTITY_UNICODE
+        internal int flags = 2; // SEC_WINNT_AUTH_IDENTITY_UNICODE
     }
 
     [StructLayout(LayoutKind.Sequential, Pack = 4, CharSet = CharSet.Unicode)]
@@ -77,6 +79,6 @@ namespace System.Web.Configuration {
         [MarshalAs(UnmanagedType.LPWStr)]
         internal string password = null;
         internal int passwordlen = 0;
-        internal int flags = 2;        // SEC_WINNT_AUTH_IDENTITY_UNICODE
+        internal int flags = 2; // SEC_WINNT_AUTH_IDENTITY_UNICODE
     }
 }

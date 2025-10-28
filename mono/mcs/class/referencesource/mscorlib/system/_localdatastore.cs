@@ -1,7 +1,7 @@
 // ==++==
-// 
+//
 //   Copyright (c) Microsoft Corporation.  All rights reserved.
-// 
+//
 // ==--==
 /*=============================================================================
 **
@@ -14,12 +14,12 @@
 **
 =============================================================================*/
 
-namespace System {
-    
+namespace System
+{
     using System;
-    using System.Threading;
-    using System.Runtime.CompilerServices;
     using System.Diagnostics.Contracts;
+    using System.Runtime.CompilerServices;
+    using System.Threading;
 
     // Helper class to aid removal of LocalDataStore from the LocalDataStoreMgr
     // LocalDataStoreMgr does not holds references to LocalDataStoreHolder. It holds
@@ -45,19 +45,17 @@ namespace System {
 
         public LocalDataStore Store
         {
-            get
-            {
-                return m_Store;
-            }
+            get { return m_Store; }
         }
     }
 
-    sealed internal class LocalDataStoreElement
+    internal sealed class LocalDataStoreElement
     {
         private Object m_value;
-        private long m_cookie;  // This is immutable cookie of the slot used to verify that 
-                                // the value is indeed indeed owned by the slot. Necessary 
-                                // to avoid resurection holes.
+        private long m_cookie; // This is immutable cookie of the slot used to verify that
+
+        // the value is indeed indeed owned by the slot. Necessary
+        // to avoid resurection holes.
 
         public LocalDataStoreElement(long cookie)
         {
@@ -66,22 +64,13 @@ namespace System {
 
         public Object Value
         {
-            get
-            {
-                return m_value;
-            }
-            set
-            {
-                m_value = value;
-            }
+            get { return m_value; }
+            set { m_value = value; }
         }
 
         public long Cookie
         {
-            get
-            {
-                return m_cookie;
-            }
+            get { return m_cookie; }
         }
     }
 
@@ -96,7 +85,7 @@ namespace System {
         =========================================================================*/
         public LocalDataStore(LocalDataStoreMgr mgr, int InitialCapacity)
         {
-            // Store the manager of the local data store.       
+            // Store the manager of the local data store.
             m_Manager = mgr;
 
             // Allocate the array that will contain the data.
@@ -126,14 +115,14 @@ namespace System {
             {
                 // Delay expansion of m_DataTable if we can
                 if (slotIdx >= m_DataTable.Length)
-                    return null;         
-                
+                    return null;
+
                 // Retrieve the data from the given slot.
                 LocalDataStoreElement element = m_DataTable[slotIdx];
 
-          //Initially we prepopulate the elements to be null.     
-          if (element == null)
-              return null;
+                //Initially we prepopulate the elements to be null.
+                if (element == null)
+                    return null;
 
                 // Check that the element is owned by this slot by comparing cookies.
                 // This is necesary to avoid resurection ----s.
@@ -142,10 +131,12 @@ namespace System {
 
                 // Fall thru and throw exception
             }
-                
-            throw new InvalidOperationException(Environment.GetResourceString("InvalidOperation_SlotHasBeenFreed"));
+
+            throw new InvalidOperationException(
+                Environment.GetResourceString("InvalidOperation_SlotHasBeenFreed")
+            );
         }
-    
+
         /*=========================================================================
         ** Sets the data in the specified slot.
         =========================================================================*/
@@ -159,7 +150,8 @@ namespace System {
 
             if (slotIdx >= 0)
             {
-                LocalDataStoreElement element = (slotIdx < m_DataTable.Length) ? m_DataTable[slotIdx] : null;
+                LocalDataStoreElement element =
+                    (slotIdx < m_DataTable.Length) ? m_DataTable[slotIdx] : null;
                 if (element == null)
                 {
                     element = PopulateElement(slot);
@@ -177,7 +169,9 @@ namespace System {
                 // Fall thru and throw exception
             }
 
-            throw new InvalidOperationException(Environment.GetResourceString("InvalidOperation_SlotHasBeenFreed"));
+            throw new InvalidOperationException(
+                Environment.GetResourceString("InvalidOperation_SlotHasBeenFreed")
+            );
         }
 
         /*=========================================================================
@@ -199,25 +193,31 @@ namespace System {
         /*=========================================================================
         ** Method used to expand the capacity of the local data store.
         =========================================================================*/
-        [System.Security.SecuritySafeCritical]  // auto-generated
+        [System.Security.SecuritySafeCritical] // auto-generated
         private LocalDataStoreElement PopulateElement(LocalDataStoreSlot slot)
         {
             bool tookLock = false;
             RuntimeHelpers.PrepareConstrainedRegions();
-            try {
+            try
+            {
                 Monitor.Enter(m_Manager, ref tookLock);
 
                 // Make sure that the slot was not freed in the meantime
                 int slotIdx = slot.Slot;
                 if (slotIdx < 0)
-                    throw new InvalidOperationException(Environment.GetResourceString("InvalidOperation_SlotHasBeenFreed"));
+                    throw new InvalidOperationException(
+                        Environment.GetResourceString("InvalidOperation_SlotHasBeenFreed")
+                    );
 
                 if (slotIdx >= m_DataTable.Length)
                 {
                     int capacity = m_Manager.GetSlotTableLength();
 
                     // Validate that the specified capacity is larger than the current one.
-                    Contract.Assert(capacity >= m_DataTable.Length, "LocalDataStore corrupted: capacity >= m_DataTable.Length");
+                    Contract.Assert(
+                        capacity >= m_DataTable.Length,
+                        "LocalDataStore corrupted: capacity >= m_DataTable.Length"
+                    );
 
                     // Allocate the new data table.
                     LocalDataStoreElement[] NewDataTable = new LocalDataStoreElement[capacity];
@@ -230,14 +230,18 @@ namespace System {
                 }
 
                 // Validate that there is enough space in the local data store now
-                Contract.Assert(slotIdx < m_DataTable.Length, "LocalDataStore corrupted: slotIdx < m_DataTable.Length");
+                Contract.Assert(
+                    slotIdx < m_DataTable.Length,
+                    "LocalDataStore corrupted: slotIdx < m_DataTable.Length"
+                );
 
                 if (m_DataTable[slotIdx] == null)
                     m_DataTable[slotIdx] = new LocalDataStoreElement(slot.Cookie);
 
                 return m_DataTable[slotIdx];
             }
-            finally {
+            finally
+            {
                 if (tookLock)
                     Monitor.Exit(m_Manager);
             }

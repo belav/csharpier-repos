@@ -22,7 +22,11 @@ namespace Microsoft.CodeAnalysis.CodeCleanup
         /// </summary>
         public bool IsAnyDiagnosticIdExplicitlyEnabled { get; }
 
-        private DiagnosticSet(string description, ImmutableArray<string> diagnosticIds, bool isAnyDiagnosticIdExplicitlyEnabled)
+        private DiagnosticSet(
+            string description,
+            ImmutableArray<string> diagnosticIds,
+            bool isAnyDiagnosticIdExplicitlyEnabled
+        )
         {
             Description = description;
             DiagnosticIds = diagnosticIds;
@@ -30,9 +34,11 @@ namespace Microsoft.CodeAnalysis.CodeCleanup
         }
 
         public DiagnosticSet(string description, params string[] diagnosticIds)
-            : this(description, ImmutableArray.Create(diagnosticIds), isAnyDiagnosticIdExplicitlyEnabled: true)
-        {
-        }
+            : this(
+                description,
+                ImmutableArray.Create(diagnosticIds),
+                isAnyDiagnosticIdExplicitlyEnabled: true
+            ) { }
 
         public DiagnosticSet With(bool isAnyDiagnosticIdExplicitlyEnabled)
         {

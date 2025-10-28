@@ -30,187 +30,195 @@
 using System;
 using System.Web;
 using System.Web.UI;
-using System.Web.UI.WebControls;
 using System.Web.UI.HtmlControls;
+using System.Web.UI.WebControls;
 
 namespace GHTTests.System_Web_dll.System_Web_UI_WebControls
 {
-	public class DataList_RepeatLayout
-		: GHTBaseWeb 
-	{
-		#region Web Form Designer generated code
-		override protected void OnInit(EventArgs e) 
-		{
-			//
-			// CODEGEN: This call is required by the ASP.NET Web Form Designer.
-			//
-			InitializeComponent();
-			base.OnInit(e);
-		}
-		
-		/// <summary>
-		/// Required method for Designer support - do not modify
-		/// the contents of this method with the code editor.
-		/// </summary>
-		private void InitializeComponent() 
-		{    
-			this.Load += new System.EventHandler(this.Page_Load);
+    public class DataList_RepeatLayout : GHTBaseWeb
+    {
+        #region Web Form Designer generated code
+        override protected void OnInit(EventArgs e)
+        {
+            //
+            // CODEGEN: This call is required by the ASP.NET Web Form Designer.
+            //
+            InitializeComponent();
+            base.OnInit(e);
+        }
 
-		}
-		#endregion
+        /// <summary>
+        /// Required method for Designer support - do not modify
+        /// the contents of this method with the code editor.
+        /// </summary>
+        private void InitializeComponent()
+        {
+            this.Load += new System.EventHandler(this.Page_Load);
+        }
+        #endregion
 
-		protected System.Web.UI.WebControls.DataList DataList1;
-		protected GHTWebControls.GHTSubTest GHTSubTest1;
-		protected System.Web.UI.WebControls.DataList DataList2;
-		protected GHTWebControls.GHTSubTest GHTSubTest2;
-		protected System.Web.UI.WebControls.DataList DataList3;
-		protected GHTWebControls.GHTSubTest GHTSubTest3;
-		protected System.Web.UI.WebControls.DataList DataList4;
-		protected GHTWebControls.GHTSubTest GHTSubTest4;
-		protected System.Web.UI.WebControls.DataList DataList5;
-		protected GHTWebControls.GHTSubTest GHTSubTest5;
-		protected System.Web.UI.WebControls.DataList DataList6;
-		protected GHTWebControls.GHTSubTest GHTSubTest6;
-		protected System.Web.UI.WebControls.DataList Datalist7;
-		protected GHTWebControls.GHTSubTest Ghtsubtest7;
-		protected System.Web.UI.WebControls.DataList Datalist8;
-		protected GHTWebControls.GHTSubTest Ghtsubtest8;
-		protected System.Web.UI.WebControls.DataList Datalist9;
-		protected GHTWebControls.GHTSubTest Ghtsubtest9;
-		protected System.Web.UI.WebControls.DataList Datalist10;
-		protected GHTWebControls.GHTSubTest Ghtsubtest10;
-		protected System.Web.UI.WebControls.DataList Datalist11;
-		protected GHTWebControls.GHTSubTest Ghtsubtest11;
-		protected System.Web.UI.WebControls.DataList Datalist12;
-		protected GHTWebControls.GHTSubTest Ghtsubtest12;
-		protected static string [] m_data = new String[] {"aaa", "bbb", "ccc", "ddd", "eee", "fff", "ggg"};
+        protected System.Web.UI.WebControls.DataList DataList1;
+        protected GHTWebControls.GHTSubTest GHTSubTest1;
+        protected System.Web.UI.WebControls.DataList DataList2;
+        protected GHTWebControls.GHTSubTest GHTSubTest2;
+        protected System.Web.UI.WebControls.DataList DataList3;
+        protected GHTWebControls.GHTSubTest GHTSubTest3;
+        protected System.Web.UI.WebControls.DataList DataList4;
+        protected GHTWebControls.GHTSubTest GHTSubTest4;
+        protected System.Web.UI.WebControls.DataList DataList5;
+        protected GHTWebControls.GHTSubTest GHTSubTest5;
+        protected System.Web.UI.WebControls.DataList DataList6;
+        protected GHTWebControls.GHTSubTest GHTSubTest6;
+        protected System.Web.UI.WebControls.DataList Datalist7;
+        protected GHTWebControls.GHTSubTest Ghtsubtest7;
+        protected System.Web.UI.WebControls.DataList Datalist8;
+        protected GHTWebControls.GHTSubTest Ghtsubtest8;
+        protected System.Web.UI.WebControls.DataList Datalist9;
+        protected GHTWebControls.GHTSubTest Ghtsubtest9;
+        protected System.Web.UI.WebControls.DataList Datalist10;
+        protected GHTWebControls.GHTSubTest Ghtsubtest10;
+        protected System.Web.UI.WebControls.DataList Datalist11;
+        protected GHTWebControls.GHTSubTest Ghtsubtest11;
+        protected System.Web.UI.WebControls.DataList Datalist12;
+        protected GHTWebControls.GHTSubTest Ghtsubtest12;
+        protected static string[] m_data = new String[]
+        {
+            "aaa",
+            "bbb",
+            "ccc",
+            "ddd",
+            "eee",
+            "fff",
+            "ggg",
+        };
 
-		private void Page_Load(object sender, System.EventArgs e) 
-		{
-			HtmlForm frm  = (HtmlForm)FindControl("Form1");
-			GHTTestBegin(frm);
+        private void Page_Load(object sender, System.EventArgs e)
+        {
+            HtmlForm frm = (HtmlForm)FindControl("Form1");
+            GHTTestBegin(frm);
 
-			GHTActiveSubTest = GHTSubTest1;
-			try 
-			{
-				DataList1.DataBind();;
-			}
-			catch (Exception ex) 
-			{
-				GHTSubTestUnexpectedExceptionCaught(ex);
-			}
+            GHTActiveSubTest = GHTSubTest1;
+            try
+            {
+                DataList1.DataBind();
+                ;
+            }
+            catch (Exception ex)
+            {
+                GHTSubTestUnexpectedExceptionCaught(ex);
+            }
 
-			GHTActiveSubTest = GHTSubTest2;
-			try 
-			{
-				DataList2.DataBind();
-			}
-			catch (Exception ex) 
-			{
-				GHTSubTestUnexpectedExceptionCaught(ex);
-			}
+            GHTActiveSubTest = GHTSubTest2;
+            try
+            {
+                DataList2.DataBind();
+            }
+            catch (Exception ex)
+            {
+                GHTSubTestUnexpectedExceptionCaught(ex);
+            }
 
-			GHTActiveSubTest = GHTSubTest3;
-			try 
-			{
-				DataList3.DataBind();
-			}
-			catch (Exception ex) 
-			{
-				GHTSubTestUnexpectedExceptionCaught(ex);
-			}
+            GHTActiveSubTest = GHTSubTest3;
+            try
+            {
+                DataList3.DataBind();
+            }
+            catch (Exception ex)
+            {
+                GHTSubTestUnexpectedExceptionCaught(ex);
+            }
 
-			GHTActiveSubTest = GHTSubTest4;
-			try 
-			{
-				DataList4.DataBind();
-			}
-			catch (Exception ex) 
-			{
-				GHTSubTestUnexpectedExceptionCaught(ex);
-			}
+            GHTActiveSubTest = GHTSubTest4;
+            try
+            {
+                DataList4.DataBind();
+            }
+            catch (Exception ex)
+            {
+                GHTSubTestUnexpectedExceptionCaught(ex);
+            }
 
-			GHTActiveSubTest = GHTSubTest5;
-			try 
-			{
-				DataList5.DataBind();
-			}
-			catch (Exception ex) 
-			{
-				GHTSubTestUnexpectedExceptionCaught(ex);
-			}
+            GHTActiveSubTest = GHTSubTest5;
+            try
+            {
+                DataList5.DataBind();
+            }
+            catch (Exception ex)
+            {
+                GHTSubTestUnexpectedExceptionCaught(ex);
+            }
 
-			GHTActiveSubTest = GHTSubTest6;
-			try 
-			{
-				DataList6.DataBind();
-			}
-			catch (Exception ex) 
-			{
-				GHTSubTestUnexpectedExceptionCaught(ex);
-			}
+            GHTActiveSubTest = GHTSubTest6;
+            try
+            {
+                DataList6.DataBind();
+            }
+            catch (Exception ex)
+            {
+                GHTSubTestUnexpectedExceptionCaught(ex);
+            }
 
-			GHTActiveSubTest = Ghtsubtest7;
-			try 
-			{
-				Datalist7.DataBind();
-			}
-			catch (Exception ex) 
-			{
-				GHTSubTestUnexpectedExceptionCaught(ex);
-			}
+            GHTActiveSubTest = Ghtsubtest7;
+            try
+            {
+                Datalist7.DataBind();
+            }
+            catch (Exception ex)
+            {
+                GHTSubTestUnexpectedExceptionCaught(ex);
+            }
 
-			GHTActiveSubTest = Ghtsubtest8;
-			try 
-			{
-				Datalist8.DataBind();
-			}
-			catch (Exception ex) 
-			{
-				GHTSubTestUnexpectedExceptionCaught(ex);
-			}
+            GHTActiveSubTest = Ghtsubtest8;
+            try
+            {
+                Datalist8.DataBind();
+            }
+            catch (Exception ex)
+            {
+                GHTSubTestUnexpectedExceptionCaught(ex);
+            }
 
-			GHTActiveSubTest = Ghtsubtest9;
-			try 
-			{
-				Datalist9.DataBind();
-			}
-			catch (Exception ex) 
-			{
-				GHTSubTestUnexpectedExceptionCaught(ex);
-			}
+            GHTActiveSubTest = Ghtsubtest9;
+            try
+            {
+                Datalist9.DataBind();
+            }
+            catch (Exception ex)
+            {
+                GHTSubTestUnexpectedExceptionCaught(ex);
+            }
 
-			GHTActiveSubTest = Ghtsubtest10;
-			try 
-			{
-				Datalist10.DataBind();
-			}
-			catch (Exception ex) 
-			{
-				GHTSubTestUnexpectedExceptionCaught(ex);
-			}
+            GHTActiveSubTest = Ghtsubtest10;
+            try
+            {
+                Datalist10.DataBind();
+            }
+            catch (Exception ex)
+            {
+                GHTSubTestUnexpectedExceptionCaught(ex);
+            }
 
-			GHTActiveSubTest = Ghtsubtest11;
-			try 
-			{
-				Datalist11.DataBind();
-			}
-			catch (Exception ex) 
-			{
-				GHTSubTestUnexpectedExceptionCaught(ex);
-			}
+            GHTActiveSubTest = Ghtsubtest11;
+            try
+            {
+                Datalist11.DataBind();
+            }
+            catch (Exception ex)
+            {
+                GHTSubTestUnexpectedExceptionCaught(ex);
+            }
 
-			GHTActiveSubTest = Ghtsubtest12;
-			try 
-			{
-				Datalist12.DataBind();
-			}
-			catch (Exception ex) 
-			{
-				GHTSubTestUnexpectedExceptionCaught(ex);
-			}
+            GHTActiveSubTest = Ghtsubtest12;
+            try
+            {
+                Datalist12.DataBind();
+            }
+            catch (Exception ex)
+            {
+                GHTSubTestUnexpectedExceptionCaught(ex);
+            }
 
-			GHTTestEnd();
-		}
-	}
+            GHTTestEnd();
+        }
+    }
 }

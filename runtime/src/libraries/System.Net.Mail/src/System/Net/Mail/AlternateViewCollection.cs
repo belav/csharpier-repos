@@ -9,8 +9,7 @@ namespace System.Net.Mail
     {
         private bool _disposed;
 
-        internal AlternateViewCollection()
-        { }
+        internal AlternateViewCollection() { }
 
         public void Dispose()
         {
@@ -40,7 +39,6 @@ namespace System.Net.Mail
 
             base.ClearItems();
         }
-
 
         protected override void SetItem(int index, AlternateView item)
         {

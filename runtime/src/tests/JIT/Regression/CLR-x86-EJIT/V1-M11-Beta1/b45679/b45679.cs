@@ -3,6 +3,7 @@
 //
 
 using Xunit;
+
 namespace JitTest
 {
     using System;

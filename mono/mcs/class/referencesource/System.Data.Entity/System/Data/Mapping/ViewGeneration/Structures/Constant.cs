@@ -24,10 +24,14 @@ namespace System.Data.Mapping.ViewGeneration.Structures
     internal abstract class Constant : InternalBase
     {
         #region Fields
-        internal static readonly IEqualityComparer<Constant> EqualityComparer = new CellConstantComparer();
+        internal static readonly IEqualityComparer<Constant> EqualityComparer =
+            new CellConstantComparer();
         internal static readonly Constant Null = NullConstant.Instance;
-        internal static readonly Constant NotNull = new NegatedConstant( new Constant[] { NullConstant.Instance });
+        internal static readonly Constant NotNull = new NegatedConstant(
+            new Constant[] { NullConstant.Instance }
+        );
         internal static readonly Constant Undefined = UndefinedConstant.Instance;
+
         /// <summary>
         /// Represents scalar constants within a finite set that are not specified explicitly in the domain.
         /// Currently only used as a Sentinel node to prevent expression optimization
@@ -43,7 +47,7 @@ namespace System.Data.Mapping.ViewGeneration.Structures
         internal abstract bool IsUndefined();
 
         /// <summary>
-        /// Returns true if this constant contains not null. 
+        /// Returns true if this constant contains not null.
         /// Implemented in <see cref="NegatedConstant"/> class, all other implementations return false.
         /// </summary>
         internal abstract bool HasNotNull();
@@ -52,7 +56,11 @@ namespace System.Data.Mapping.ViewGeneration.Structures
         /// Generates eSQL for the constant expression.
         /// </summary>
         /// <param name="outputMember">The member to which this constant is directed</param>
-        internal abstract StringBuilder AsEsql(StringBuilder builder, MemberPath outputMember, string blockAlias);
+        internal abstract StringBuilder AsEsql(
+            StringBuilder builder,
+            MemberPath outputMember,
+            string blockAlias
+        );
 
         /// <summary>
         /// Generates CQT for the constant expression.
@@ -83,7 +91,10 @@ namespace System.Data.Mapping.ViewGeneration.Structures
 
         internal abstract string ToUserString();
 
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
+        [System.Diagnostics.CodeAnalysis.SuppressMessage(
+            "Microsoft.Performance",
+            "CA1811:AvoidUncalledPrivateCode"
+        )]
         internal static void ConstantsToUserString(StringBuilder builder, Set<Constant> constants)
         {
             bool isFirst = true;
@@ -157,9 +168,16 @@ namespace System.Data.Mapping.ViewGeneration.Structures
                 return false;
             }
 
-            internal override StringBuilder AsEsql(StringBuilder builder, MemberPath outputMember, string blockAlias)
+            internal override StringBuilder AsEsql(
+                StringBuilder builder,
+                MemberPath outputMember,
+                string blockAlias
+            )
             {
-                Debug.Assert(outputMember.LeafEdmMember != null, "Constant can't correspond to an empty member path.");
+                Debug.Assert(
+                    outputMember.LeafEdmMember != null,
+                    "Constant can't correspond to an empty member path."
+                );
                 EdmType constType = Helper.GetModelTypeUsage(outputMember.LeafEdmMember).EdmType;
 
                 builder.Append("CAST(NULL AS ");
@@ -170,7 +188,10 @@ namespace System.Data.Mapping.ViewGeneration.Structures
 
             internal override DbExpression AsCqt(DbExpression row, MemberPath outputMember)
             {
-                Debug.Assert(outputMember.LeafEdmMember != null, "Constant can't correspond to an empty path.");
+                Debug.Assert(
+                    outputMember.LeafEdmMember != null,
+                    "Constant can't correspond to an empty path."
+                );
                 EdmType constType = Helper.GetModelTypeUsage(outputMember.LeafEdmMember).EdmType;
 
                 return TypeUsage.Create(constType).Null();
@@ -183,7 +204,10 @@ namespace System.Data.Mapping.ViewGeneration.Structures
 
             protected override bool IsEqualTo(Constant right)
             {
-                Debug.Assert(Object.ReferenceEquals(this, Instance), "this must be == Instance for NullConstant");
+                Debug.Assert(
+                    Object.ReferenceEquals(this, Instance),
+                    "this must be == Instance for NullConstant"
+                );
                 return Object.ReferenceEquals(this, right);
             }
 
@@ -198,6 +222,7 @@ namespace System.Data.Mapping.ViewGeneration.Structures
             }
             #endregion
         }
+
         private sealed class UndefinedConstant : Constant
         {
             internal static readonly Constant Instance = new UndefinedConstant();
@@ -228,7 +253,11 @@ namespace System.Data.Mapping.ViewGeneration.Structures
             /// <summary>
             /// Not supported in this class.
             /// </summary>
-            internal override StringBuilder AsEsql(StringBuilder builder, MemberPath outputMember, string blockAlias)
+            internal override StringBuilder AsEsql(
+                StringBuilder builder,
+                MemberPath outputMember,
+                string blockAlias
+            )
             {
                 Debug.Fail("Should not be called.");
                 return null; // To keep the compiler happy
@@ -250,7 +279,10 @@ namespace System.Data.Mapping.ViewGeneration.Structures
 
             protected override bool IsEqualTo(Constant right)
             {
-                Debug.Assert(Object.ReferenceEquals(this, Instance), "this must be == Instance for NullConstant");
+                Debug.Assert(
+                    Object.ReferenceEquals(this, Instance),
+                    "this must be == Instance for NullConstant"
+                );
                 return Object.ReferenceEquals(this, right);
             }
 
@@ -269,6 +301,7 @@ namespace System.Data.Mapping.ViewGeneration.Structures
             }
             #endregion
         }
+
         private sealed class AllOtherConstantsConstant : Constant
         {
             internal static readonly Constant Instance = new AllOtherConstantsConstant();
@@ -299,7 +332,11 @@ namespace System.Data.Mapping.ViewGeneration.Structures
             /// <summary>
             /// Not supported in this class.
             /// </summary>
-            internal override StringBuilder AsEsql(StringBuilder builder, MemberPath outputMember, string blockAlias)
+            internal override StringBuilder AsEsql(
+                StringBuilder builder,
+                MemberPath outputMember,
+                string blockAlias
+            )
             {
                 Debug.Fail("Should not be called.");
                 return null; // To keep the compiler happy
@@ -321,7 +358,10 @@ namespace System.Data.Mapping.ViewGeneration.Structures
 
             protected override bool IsEqualTo(Constant right)
             {
-                Debug.Assert(Object.ReferenceEquals(this, Instance), "this must be == Instance for NullConstant");
+                Debug.Assert(
+                    Object.ReferenceEquals(this, Instance),
+                    "this must be == Instance for NullConstant"
+                );
                 return Object.ReferenceEquals(this, right);
             }
 

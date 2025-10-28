@@ -11,16 +11,15 @@ using Microsoft.CodeAnalysis.Notification;
 namespace Microsoft.CodeAnalysis.Remote.Services
 {
     [Export(typeof(IGlobalOperationNotificationService)), Shared]
-    internal sealed class RemoteGlobalOperationNotificationService : IGlobalOperationNotificationService
+    internal sealed class RemoteGlobalOperationNotificationService
+        : IGlobalOperationNotificationService
     {
         public event EventHandler? Started;
         public event EventHandler? Stopped;
 
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public RemoteGlobalOperationNotificationService()
-        {
-        }
+        public RemoteGlobalOperationNotificationService() { }
 
         public IDisposable Start(string operation)
         {
@@ -29,10 +28,8 @@ namespace Microsoft.CodeAnalysis.Remote.Services
             throw new NotSupportedException();
         }
 
-        public void OnStarted()
-            => Started?.Invoke(this, EventArgs.Empty);
+        public void OnStarted() => Started?.Invoke(this, EventArgs.Empty);
 
-        public void OnStopped()
-            => Stopped?.Invoke(this, EventArgs.Empty);
+        public void OnStopped() => Stopped?.Invoke(this, EventArgs.Empty);
     }
 }

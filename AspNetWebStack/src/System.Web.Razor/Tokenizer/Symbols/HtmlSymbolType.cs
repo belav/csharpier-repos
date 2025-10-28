@@ -24,6 +24,6 @@ namespace System.Web.Razor.Tokenizer.Symbols
         Colon,
         RazorComment,
         RazorCommentStar,
-        RazorCommentTransition
+        RazorCommentTransition,
     }
 }

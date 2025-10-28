@@ -2,7 +2,6 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System.Diagnostics;
-
 #if !NETCOREAPP
 using System.Buffers;
 #endif
@@ -14,7 +13,12 @@ namespace System.IO
         /// <summary>
         /// Writes a partial string (given offset and count) to the underlying TextWriter.
         /// </summary>
-        public static void WritePartialString(this TextWriter writer, string value, int offset, int count)
+        public static void WritePartialString(
+            this TextWriter writer,
+            string value,
+            int offset,
+            int count
+        )
         {
             Debug.Assert(writer != null);
             Debug.Assert(value != null);

@@ -14,6 +14,7 @@ namespace Microsoft.CodeAnalysis.Features.EmbeddedLanguages.Json
         Object,
         Array,
         Literal,
+
         // Used to represent `-Infinity` which is supported by Json.Net
         NegativeLiteral,
         Property,

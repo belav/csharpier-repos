@@ -13,7 +13,10 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
 {
     public static class ParentChecker
     {
-        public static void CheckParents(SyntaxNodeOrToken nodeOrToken, SyntaxTree expectedSyntaxTree)
+        public static void CheckParents(
+            SyntaxNodeOrToken nodeOrToken,
+            SyntaxTree expectedSyntaxTree
+        )
         {
             Assert.Equal(expectedSyntaxTree, nodeOrToken.SyntaxTree);
 
@@ -61,4 +64,3 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         }
     }
 }
-

@@ -22,7 +22,8 @@ namespace Microsoft.Extensions.FileSystemGlobbing.Internal
         private readonly List<FilePatternMatch> _files;
 
         private readonly HashSet<string> _declaredLiteralFolderSegmentInString;
-        private readonly HashSet<LiteralPathSegment> _declaredLiteralFileSegments = new HashSet<LiteralPathSegment>();
+        private readonly HashSet<LiteralPathSegment> _declaredLiteralFileSegments =
+            new HashSet<LiteralPathSegment>();
 
         private bool _declaredParentPathSegment;
         private bool _declaredWildcardPathSegment;
@@ -33,16 +34,23 @@ namespace Microsoft.Extensions.FileSystemGlobbing.Internal
             IEnumerable<IPattern> includePatterns,
             IEnumerable<IPattern> excludePatterns,
             DirectoryInfoBase directoryInfo,
-            StringComparison comparison)
+            StringComparison comparison
+        )
         {
             _root = directoryInfo;
             _files = new List<FilePatternMatch>();
             _comparisonType = comparison;
 
-            _includePatternContexts = includePatterns.Select(pattern => pattern.CreatePatternContextForInclude()).ToList();
-            _excludePatternContexts = excludePatterns.Select(pattern => pattern.CreatePatternContextForExclude()).ToList();
+            _includePatternContexts = includePatterns
+                .Select(pattern => pattern.CreatePatternContextForInclude())
+                .ToList();
+            _excludePatternContexts = excludePatterns
+                .Select(pattern => pattern.CreatePatternContextForExclude())
+                .ToList();
 
-            _declaredLiteralFolderSegmentInString = new HashSet<string>(StringComparisonHelper.GetStringComparer(comparison));
+            _declaredLiteralFolderSegmentInString = new HashSet<string>(
+                StringComparisonHelper.GetStringComparer(comparison)
+            );
         }
 
         public PatternMatchingResult Execute()
@@ -67,7 +75,9 @@ namespace Microsoft.Extensions.FileSystemGlobbing.Internal
             }
             else
             {
-                IEnumerable<DirectoryInfoBase> candidates = directory.EnumerateFileSystemInfos().OfType<DirectoryInfoBase>();
+                IEnumerable<DirectoryInfoBase> candidates = directory
+                    .EnumerateFileSystemInfos()
+                    .OfType<DirectoryInfoBase>();
                 foreach (DirectoryInfoBase candidate in candidates)
                 {
                     if (_declaredLiteralFolderSegmentInString.Contains(candidate.Name))
@@ -88,12 +98,18 @@ namespace Microsoft.Extensions.FileSystemGlobbing.Internal
             {
                 if (entity is FileInfoBase fileInfo)
                 {
-                    PatternTestResult result = MatchPatternContexts(fileInfo, (pattern, file) => pattern.Test(file));
+                    PatternTestResult result = MatchPatternContexts(
+                        fileInfo,
+                        (pattern, file) => pattern.Test(file)
+                    );
                     if (result.IsSuccessful)
                     {
-                        _files.Add(new FilePatternMatch(
-                            path: CombinePath(parentRelativePath, fileInfo.Name),
-                            stem: result.Stem));
+                        _files.Add(
+                            new FilePatternMatch(
+                                path: CombinePath(parentRelativePath, fileInfo.Name),
+                                stem: result.Stem
+                            )
+                        );
                     }
 
                     continue;
@@ -170,7 +186,10 @@ namespace Microsoft.Extensions.FileSystemGlobbing.Internal
         }
 
         // Used to adapt Test(DirectoryInfoBase) for the below overload
-        private bool MatchPatternContexts<TFileInfoBase>(TFileInfoBase fileinfo, Func<IPatternContext, TFileInfoBase, bool> test)
+        private bool MatchPatternContexts<TFileInfoBase>(
+            TFileInfoBase fileinfo,
+            Func<IPatternContext, TFileInfoBase, bool> test
+        )
         {
             return MatchPatternContexts(
                 fileinfo,
@@ -184,10 +203,14 @@ namespace Microsoft.Extensions.FileSystemGlobbing.Internal
                     {
                         return PatternTestResult.Failed;
                     }
-                }).IsSuccessful;
+                }
+            ).IsSuccessful;
         }
 
-        private PatternTestResult MatchPatternContexts<TFileInfoBase>(TFileInfoBase fileinfo, Func<IPatternContext, TFileInfoBase, PatternTestResult> test)
+        private PatternTestResult MatchPatternContexts<TFileInfoBase>(
+            TFileInfoBase fileinfo,
+            Func<IPatternContext, TFileInfoBase, PatternTestResult> test
+        )
         {
             PatternTestResult result = PatternTestResult.Failed;
 

@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -32,14 +32,15 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Configuration;
-using System.Net;
-using System.Net.Security;
-using System.Reflection;
-using System.Security.Cryptography.X509Certificates;
-using System.Security.Principal;
 using System.IdentityModel.Claims;
 using System.IdentityModel.Policy;
 using System.IdentityModel.Tokens;
+using System.Net;
+using System.Net.Security;
+using System.Reflection;
+using System.Runtime.Serialization;
+using System.Security.Cryptography.X509Certificates;
+using System.Security.Principal;
 using System.ServiceModel;
 using System.ServiceModel.Channels;
 using System.ServiceModel.Description;
@@ -48,60 +49,60 @@ using System.ServiceModel.Dispatcher;
 using System.ServiceModel.MsmqIntegration;
 using System.ServiceModel.PeerResolvers;
 using System.ServiceModel.Security;
-using System.Runtime.Serialization;
 using System.Text;
 using System.Xml;
 
 namespace System.ServiceModel.Configuration
 {
-	public sealed class AuthorizationPolicyTypeElement
-		 : ConfigurationElement
-	{
-		// Static Fields
-		static ConfigurationPropertyCollection properties;
-		static ConfigurationProperty policy_type;
+    public sealed class AuthorizationPolicyTypeElement : ConfigurationElement
+    {
+        // Static Fields
+        static ConfigurationPropertyCollection properties;
+        static ConfigurationProperty policy_type;
 
-		static AuthorizationPolicyTypeElement ()
-		{
-			properties = new ConfigurationPropertyCollection ();
-			policy_type = new ConfigurationProperty ("policyType",
-				typeof (string), null, null, new StringValidator (1, int.MaxValue), 
-				ConfigurationPropertyOptions.IsRequired| ConfigurationPropertyOptions.IsKey);
+        static AuthorizationPolicyTypeElement()
+        {
+            properties = new ConfigurationPropertyCollection();
+            policy_type = new ConfigurationProperty(
+                "policyType",
+                typeof(string),
+                null,
+                null,
+                new StringValidator(1, int.MaxValue),
+                ConfigurationPropertyOptions.IsRequired | ConfigurationPropertyOptions.IsKey
+            );
 
-			properties.Add (policy_type);
-		}
+            properties.Add(policy_type);
+        }
 
-		public AuthorizationPolicyTypeElement ()
-		{
-		}
-		
-		public AuthorizationPolicyTypeElement (string policyType) {
-			if (policyType == null)
-				throw new ArgumentNullException ("policyType");
+        public AuthorizationPolicyTypeElement() { }
 
-			PolicyType = policyType;
-		}
+        public AuthorizationPolicyTypeElement(string policyType)
+        {
+            if (policyType == null)
+                throw new ArgumentNullException("policyType");
 
+            PolicyType = policyType;
+        }
 
-		// Properties
+        // Properties
 
-		[StringValidator ( MinLength = 1,
-			MaxLength = int.MaxValue,
-			 InvalidCharacters = null)]
-		[ConfigurationProperty ("policyType",
-			 Options = ConfigurationPropertyOptions.IsRequired | ConfigurationPropertyOptions.IsKey,
-			IsRequired = true,
-			IsKey = true)]
-		public string PolicyType {
-			get { return (string) base [policy_type]; }
-			set { base [policy_type] = value; }
-		}
+        [StringValidator(MinLength = 1, MaxLength = int.MaxValue, InvalidCharacters = null)]
+        [ConfigurationProperty(
+            "policyType",
+            Options = ConfigurationPropertyOptions.IsRequired | ConfigurationPropertyOptions.IsKey,
+            IsRequired = true,
+            IsKey = true
+        )]
+        public string PolicyType
+        {
+            get { return (string)base[policy_type]; }
+            set { base[policy_type] = value; }
+        }
 
-		protected override ConfigurationPropertyCollection Properties {
-			get { return properties; }
-		}
-
-
-	}
-
+        protected override ConfigurationPropertyCollection Properties
+        {
+            get { return properties; }
+        }
+    }
 }

@@ -46,8 +46,11 @@
     <MakeDir Directories="$(DepsPath)" />
   </Target>
 
-  <Target Name="FetchDependencies" BeforeTargets="Restore;CollectPackageReferences"
-      Outputs="$(DepsPath)%(RemoteAsset.TargetFilename)">
+  <Target
+    Name="FetchDependencies"
+    BeforeTargets="Restore;CollectPackageReferences"
+    Outputs="$(DepsPath)%(RemoteAsset.TargetFilename)"
+  >
     <!--
       Try various places to find the runtime. It's either released (use official version), public but
       unreleased (use dotnetbuilds/public), or internal and unreleased (use dotnetbuilds/internal).
@@ -56,22 +59,30 @@
       <UrisToDownload Remove="@(UrisToDownload)" />
       <UrisToDownload Include="https://dotnetcli.azureedge.net/dotnet/Runtime/%(RemoteAsset.Identity)" />
       <UrisToDownload Include="https://dotnetbuilds.azureedge.net/public/Runtime/%(RemoteAsset.Identity)" />
-      <UrisToDownload Include="https://dotnetbuilds.azureedge.net/internal/Runtime/%(RemoteAsset.Identity)"
-          Condition=" '$(DotnetRuntimeSourceFeedKey)' != '' ">
+      <UrisToDownload
+        Include="https://dotnetbuilds.azureedge.net/internal/Runtime/%(RemoteAsset.Identity)"
+        Condition=" '$(DotnetRuntimeSourceFeedKey)' != '' "
+      >
         <token>$(DotnetRuntimeSourceFeedKey)</token>
       </UrisToDownload>
     </ItemGroup>
 
-    <DownloadFile Condition=" ! Exists('$(DepsPath)%(RemoteAsset.TargetFilename)') "
-                  Uris="@(UrisToDownload)"
-                  DestinationPath="$(DepsPath)%(RemoteAsset.TargetFilename)" />
+    <DownloadFile
+      Condition=" ! Exists('$(DepsPath)%(RemoteAsset.TargetFilename)') "
+      Uris="@(UrisToDownload)"
+      DestinationPath="$(DepsPath)%(RemoteAsset.TargetFilename)"
+    />
   </Target>
 
-  <Target Name="ExtractPropertiesFromDotNetMsi" DependsOnTargets="CollectDependencies;FetchDependencies" BeforeTargets="BeforeBuild">
+  <Target
+    Name="ExtractPropertiesFromDotNetMsi"
+    DependsOnTargets="CollectDependencies;FetchDependencies"
+    BeforeTargets="BeforeBuild"
+  >
     <!-- Create properties that holds the executable name. These are passed to the bundles so we can reference them as variables
              from inside the ExePackage authoring. -->
     <CreateProperty Value="%(RuntimeInstallers.Filename)%(Extension)">
-      <Output TaskParameter="Value" PropertyName="%(RuntimeInstallers.BundleNameProperty)"/>
+      <Output TaskParameter="Value" PropertyName="%(RuntimeInstallers.BundleNameProperty)" />
     </CreateProperty>
 
     <!-- Decompile the bundles so that we can extract the MSI and read their version information. We need this to author ExePackage@DetectCondition

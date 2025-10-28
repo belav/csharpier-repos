@@ -15,59 +15,61 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
         [Fact]
         public async Task TestNotAtRoot_Interactive()
         {
-            await VerifyAbsenceAsync(SourceCodeKind.Script,
-@"$$");
+            await VerifyAbsenceAsync(SourceCodeKind.Script, @"$$");
         }
 
         [Fact]
         public async Task TestNotAfterClass_Interactive()
         {
-            await VerifyAbsenceAsync(SourceCodeKind.Script,
+            await VerifyAbsenceAsync(
+                SourceCodeKind.Script,
                 """
                 class C { }
                 $$
-                """);
+                """
+            );
         }
 
         [Fact]
         public async Task TestNotAfterGlobalStatement_Interactive()
         {
-            await VerifyAbsenceAsync(SourceCodeKind.Script,
+            await VerifyAbsenceAsync(
+                SourceCodeKind.Script,
                 """
                 System.Console.WriteLine();
                 $$
-                """);
+                """
+            );
         }
 
         [Fact]
         public async Task TestNotAfterGlobalVariableDeclaration_Interactive()
         {
-            await VerifyAbsenceAsync(SourceCodeKind.Script,
+            await VerifyAbsenceAsync(
+                SourceCodeKind.Script,
                 """
                 int i = 0;
                 $$
-                """);
+                """
+            );
         }
 
         [Fact]
         public async Task TestNotInUsingAlias()
         {
-            await VerifyAbsenceAsync(
-@"using Goo = $$");
+            await VerifyAbsenceAsync(@"using Goo = $$");
         }
 
         [Fact]
         public async Task TestNotInGlobalUsingAlias()
         {
-            await VerifyAbsenceAsync(
-@"global using Goo = $$");
+            await VerifyAbsenceAsync(@"global using Goo = $$");
         }
 
         [Fact]
         public async Task TestNotInEmptyStatement()
         {
-            await VerifyAbsenceAsync(AddInsideMethod(
-@"$$"));
+            await VerifyAbsenceAsync(AddInsideMethod(@"$$"));
         }
 
         [Fact]
@@ -77,7 +79,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
                 """
                 class C {
                     [$$
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -88,7 +91,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
                 class C {
                     [Goo]
                     [$$
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -100,7 +104,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
                     void Goo() {
                     }
                     [$$
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -113,7 +118,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
                         get;
                     }
                     [$$
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -124,7 +130,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
                 class C {
                     int Goo;
                     [$$
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -135,14 +142,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
                 class C {
                     event Action<int> Goo;
                     [$$
-                """);
+                """
+            );
         }
 
         [Fact]
         public async Task TestInOuterAttribute()
         {
-            await VerifyKeywordAsync(
-@"[$$");
+            await VerifyKeywordAsync(@"[$$");
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/362")]
@@ -157,7 +164,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
                     {
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/362")]
@@ -167,7 +175,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
                 """
                 [$$
                 namespace Goo {
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/362")]
@@ -177,7 +186,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
                 """
                 [$$
                 namespace Goo;
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/362")]
@@ -187,7 +197,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
                 """
                 $$
                 namespace Goo {}
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/362")]
@@ -199,7 +210,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
 
                 $$
                 namespace Goo {}
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -211,7 +223,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
 
                 $$
                 namespace Goo {}
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/362")]
@@ -223,7 +236,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
 
                 [$$
                 namespace Goo {}
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -235,7 +249,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
 
                 [$$
                 namespace Goo {}
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/362")]
@@ -246,7 +261,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
                 [$$
                 [assembly: Whatever]
                 namespace Goo {}
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/362")]
@@ -256,7 +272,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
                 """
                 [$$
                 class Goo {}
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/362")]
@@ -266,7 +283,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
                 """
                 [$$
                 interface IGoo {}
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/362")]
@@ -276,7 +294,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
                 """
                 [$$
                 struct Goo {}
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/362")]
@@ -286,7 +305,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
                 """
                 [$$
                 enum Goo {}
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/362")]
@@ -297,7 +317,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
                 $$
                 [assembly: Whatever]
                 namespace Goo {}
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/362")]
@@ -310,7 +331,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
                 $$
                 [assembly: Whatever]
                 namespace Goo {}
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -323,7 +345,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
                 $$
                 [assembly: Whatever]
                 namespace Goo {}
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/362")]
@@ -336,7 +359,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
                 [$$
                 [assembly: Whatever]
                 namespace Goo {}
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -349,7 +373,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
                 [$$
                 [assembly: Whatever]
                 namespace Goo {}
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -359,7 +384,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
                 """
                 namespace Goo {
                      [$$
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -369,7 +395,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
                 """
                 class C {
                     void Goo([$$
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/362")]
@@ -380,7 +407,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
                 class C {
                     void Goo(string[] array) {
                         array[$$
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/362")]
@@ -390,7 +418,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
                 """
                 class C {
                     public int this[$$
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -400,7 +429,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
                 """
                 class C {
                     int Goo { [$$
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -410,21 +440,20 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
                 """
                 class C {
                     event Action<int> Goo { [$$
-                """);
+                """
+            );
         }
 
         [Fact]
         public async Task TestNotInClassAssemblyParameters()
         {
-            await VerifyAbsenceAsync(
-@"class C<[$$");
+            await VerifyAbsenceAsync(@"class C<[$$");
         }
 
         [Fact]
         public async Task TestNotInDelegateAssemblyParameters()
         {
-            await VerifyAbsenceAsync(
-@"delegate void D<[$$");
+            await VerifyAbsenceAsync(@"delegate void D<[$$");
         }
 
         [Fact]
@@ -434,7 +463,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
                 """
                 class C {
                     void M<[$$
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -444,7 +474,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
                 """
                 interface I {
                     [$$
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -454,7 +485,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
                 """
                 struct S {
                     [$$
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -464,7 +496,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
                 """
                 enum E {
                     [$$
-                """);
+                """
+            );
         }
     }
 }

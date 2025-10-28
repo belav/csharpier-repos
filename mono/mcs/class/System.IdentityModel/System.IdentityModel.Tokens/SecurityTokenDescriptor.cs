@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -28,45 +28,51 @@
 
 using System;
 using System.Collections.Generic;
-using System.Text;
-using System.Threading.Tasks;
 using System.IdentityModel.Protocols.WSTrust;
 using System.Security.Claims;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace System.IdentityModel.Tokens
 {
-	public class SecurityTokenDescriptor
-	{
-		private Dictionary<string, Object> properties = new Dictionary<string, object> ();
+    public class SecurityTokenDescriptor
+    {
+        private Dictionary<string, Object> properties = new Dictionary<string, object>();
 
-		public string AppliesToAddress { get; set; }
-		public SecurityKeyIdentifierClause AttachedReference { get; set; }
-		public AuthenticationInformation AuthenticationInfo { get; set; }
-		public EncryptingCredentials EncryptingCredentials { get; set; }
-		public Lifetime Lifetime { get; set; }
-		public ProofDescriptor Proof { get; set; }
-		public Dictionary<string, Object> Properties { get { return properties; } }
-		public string ReplyToAddress { get; set; }
-		public SigningCredentials SigningCredentials { get; set; }
-		public ClaimsIdentity Subject { get; set; }
-		public SecurityToken Token { get; set; }
-		public string TokenIssuerName { get; set; }
-		public string TokenType { get; set; }
-		public SecurityKeyIdentifierClause UnattachedReference { get; set; }
+        public string AppliesToAddress { get; set; }
+        public SecurityKeyIdentifierClause AttachedReference { get; set; }
+        public AuthenticationInformation AuthenticationInfo { get; set; }
+        public EncryptingCredentials EncryptingCredentials { get; set; }
+        public Lifetime Lifetime { get; set; }
+        public ProofDescriptor Proof { get; set; }
+        public Dictionary<string, Object> Properties
+        {
+            get { return properties; }
+        }
+        public string ReplyToAddress { get; set; }
+        public SigningCredentials SigningCredentials { get; set; }
+        public ClaimsIdentity Subject { get; set; }
+        public SecurityToken Token { get; set; }
+        public string TokenIssuerName { get; set; }
+        public string TokenType { get; set; }
+        public SecurityKeyIdentifierClause UnattachedReference { get; set; }
 
-		[MonoTODO]
-		public void AddAuthenticationClaims (string authType) {
-			throw new NotImplementedException ();
-		}
+        [MonoTODO]
+        public void AddAuthenticationClaims(string authType)
+        {
+            throw new NotImplementedException();
+        }
 
-		[MonoTODO]
-		public void AddAuthenticationClaims (string authType, DateTime time) {
-			throw new NotImplementedException ();
-		}
+        [MonoTODO]
+        public void AddAuthenticationClaims(string authType, DateTime time)
+        {
+            throw new NotImplementedException();
+        }
 
-		[MonoTODO]
-		public virtual void ApplyTo (RequestSecurityTokenResponse response) {
-			throw new NotImplementedException ();
-		}
-	}
+        [MonoTODO]
+        public virtual void ApplyTo(RequestSecurityTokenResponse response)
+        {
+            throw new NotImplementedException();
+        }
+    }
 }

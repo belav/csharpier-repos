@@ -36,12 +36,15 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Preview
         private readonly Encoding _encoding;
         private readonly IVsImageService2 _imageService;
 
-        public FileChange(TextDocument left,
+        public FileChange(
+            TextDocument left,
             TextDocument right,
             IComponentModel componentModel,
             AbstractChange parent,
             PreviewEngine engine,
-            IVsImageService2 imageService) : base(engine)
+            IVsImageService2 imageService
+        )
+            : base(engine)
         {
             Contract.ThrowIfFalse(left != null || right != null);
 
@@ -52,17 +55,25 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Preview
 
             _componentModel = componentModel;
             var bufferFactory = componentModel.GetService<ITextBufferFactoryService>();
-            var bufferText = left != null
-                ? left.GetTextSynchronously(CancellationToken.None)
-                : right.GetTextSynchronously(CancellationToken.None);
-            _buffer = bufferFactory.CreateTextBuffer(bufferText.ToString(), bufferFactory.InertContentType);
+            var bufferText =
+                left != null
+                    ? left.GetTextSynchronously(CancellationToken.None)
+                    : right.GetTextSynchronously(CancellationToken.None);
+            _buffer = bufferFactory.CreateTextBuffer(
+                bufferText.ToString(),
+                bufferFactory.InertContentType
+            );
             _encoding = bufferText.Encoding;
 
             this.Children = ComputeChildren(left, right, CancellationToken.None);
             this.parent = parent;
         }
 
-        private ChangeList ComputeChildren(TextDocument left, TextDocument right, CancellationToken cancellationToken)
+        private ChangeList ComputeChildren(
+            TextDocument left,
+            TextDocument right,
+            CancellationToken cancellationToken
+        )
         {
             if (left == null)
             {
@@ -80,7 +91,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Preview
 
             var diffSelector = _componentModel.GetService<ITextDifferencingSelectorService>();
             var diffService = diffSelector.GetTextDifferencingService(
-                left.Project.Services.GetService<IContentTypeLanguageService>().GetDefaultContentType());
+                left.Project.Services.GetService<IContentTypeLanguageService>()
+                    .GetDefaultContentType()
+            );
 
             diffService ??= diffSelector.DefaultTextDifferencingService;
 
@@ -94,7 +107,12 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Preview
             return GetChangeList(diff, right.Id, oldText, newText);
         }
 
-        private ChangeList GetChangeList(IHierarchicalDifferenceCollection diff, DocumentId id, SourceText oldText, SourceText newText)
+        private ChangeList GetChangeList(
+            IHierarchicalDifferenceCollection diff,
+            DocumentId id,
+            SourceText oldText,
+            SourceText newText
+        )
         {
             var spanChanges = new List<SpanChange>();
             foreach (var difference in diff)
@@ -105,12 +123,25 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Preview
                 var leftText = oldText.GetSubText(leftSpan.ToTextSpan()).ToString();
                 var rightText = newText.GetSubText(rightSpan.ToTextSpan()).ToString();
 
-                var trackingSpan = _buffer.CurrentSnapshot.CreateTrackingSpan(leftSpan, SpanTrackingMode.EdgeInclusive);
+                var trackingSpan = _buffer.CurrentSnapshot.CreateTrackingSpan(
+                    leftSpan,
+                    SpanTrackingMode.EdgeInclusive
+                );
 
                 var isDeletion = difference.DifferenceType == DifferenceType.Remove;
                 var displayText = isDeletion ? GetDisplayText(leftText) : GetDisplayText(rightText);
 
-                var spanChange = new SpanChange(trackingSpan, _buffer, id, displayText, leftText, rightText, isDeletion, this, engine);
+                var spanChange = new SpanChange(
+                    trackingSpan,
+                    _buffer,
+                    id,
+                    displayText,
+                    leftText,
+                    rightText,
+                    isDeletion,
+                    this,
+                    engine
+                );
 
                 spanChanges.Add(spanChange);
             }
@@ -121,10 +152,24 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Preview
         private ChangeList GetEntireDocumentAsSpanChange(TextDocument document)
         {
             // Show the whole document.
-            var entireSpan = _buffer.CurrentSnapshot.CreateTrackingSpan(0, _buffer.CurrentSnapshot.Length, SpanTrackingMode.EdgeInclusive);
+            var entireSpan = _buffer.CurrentSnapshot.CreateTrackingSpan(
+                0,
+                _buffer.CurrentSnapshot.Length,
+                SpanTrackingMode.EdgeInclusive
+            );
             var text = document.GetTextSynchronously(CancellationToken.None).ToString();
             var displayText = GetDisplayText(text);
-            var entireSpanChild = new SpanChange(entireSpan, _buffer, document.Id, displayText, text, text, isDeletion: false, parent: this, engine: engine);
+            var entireSpanChild = new SpanChange(
+                entireSpan,
+                _buffer,
+                document.Id,
+                displayText,
+                text,
+                text,
+                isDeletion: false,
+                parent: this,
+                engine: engine
+            );
             return new ChangeList(new[] { entireSpanChild });
         }
 
@@ -135,7 +180,11 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Preview
                 var split = excerpt.Split(new[] { "\r\n" }, StringSplitOptions.RemoveEmptyEntries);
                 if (split.Length > 1)
                 {
-                    return string.Format("{0} ... {1}", split[0].Trim(), split[split.Length - 1].Trim());
+                    return string.Format(
+                        "{0} ... {1}",
+                        split[0].Trim(),
+                        split[split.Length - 1].Trim()
+                    );
                 }
             }
 
@@ -170,7 +219,11 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Preview
 
         public override int OnRequestSource(object pIUnknownTextView)
         {
-            if (pIUnknownTextView != null && Children.Changes != null && Children.Changes.Length > 0)
+            if (
+                pIUnknownTextView != null
+                && Children.Changes != null
+                && Children.Changes.Length > 0
+            )
             {
                 engine.SetTextView(pIUnknownTextView);
                 UpdatePreview();
@@ -179,8 +232,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Preview
             return VSConstants.S_OK;
         }
 
-        public override void UpdatePreview()
-            => engine.UpdatePreview(this.Id, (SpanChange)Children.Changes[0]);
+        public override void UpdatePreview() =>
+            engine.UpdatePreview(this.Id, (SpanChange)Children.Changes[0]);
 
         private SourceText UpdateBufferText()
         {
@@ -194,8 +247,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Preview
             return SourceText.From(_buffer.CurrentSnapshot.GetText(), _encoding);
         }
 
-        public TextDocument GetOldDocument()
-            => _left;
+        public TextDocument GetOldDocument() => _left;
 
         public TextDocument GetUpdatedDocument()
         {
@@ -220,21 +272,34 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Preview
             var workspace = document.Project.Solution.Workspace;
             if (workspace is VisualStudioWorkspaceImpl vsWorkspace)
             {
-                if (vsWorkspace.TryGetImageListAndIndex(_imageService, document.Id, out pData[0].hImageList, out pData[0].Image))
+                if (
+                    vsWorkspace.TryGetImageListAndIndex(
+                        _imageService,
+                        document.Id,
+                        out pData[0].hImageList,
+                        out pData[0].Image
+                    )
+                )
                 {
                     pData[0].SelectedImage = pData[0].Image;
                     return;
                 }
             }
 
-            pData[0].Image = pData[0].SelectedImage
-                = document.Project.Language == LanguageNames.CSharp ? (ushort)StandardGlyphGroup.GlyphCSharpFile :
-                                                                      (ushort)StandardGlyphGroup.GlyphGroupClass;
+            pData[0].Image = pData[0].SelectedImage =
+                document.Project.Language == LanguageNames.CSharp
+                    ? (ushort)StandardGlyphGroup.GlyphCSharpFile
+                    : (ushort)StandardGlyphGroup.GlyphGroupClass;
         }
 
-        private static IHierarchicalDifferenceCollection ComputeDiffSpans(ITextDifferencingService diffService, TextDocument left, TextDocument right, CancellationToken cancellationToken)
+        private static IHierarchicalDifferenceCollection ComputeDiffSpans(
+            ITextDifferencingService diffService,
+            TextDocument left,
+            TextDocument right,
+            CancellationToken cancellationToken
+        )
         {
-            // TODO: it would be nice to have a syntax based differ for presentation here, 
+            // TODO: it would be nice to have a syntax based differ for presentation here,
             //       current way of just using text differ has its own issue, and using syntax differ in compiler that are for incremental parser
             //       has its own drawbacks.
 
@@ -244,10 +309,11 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Preview
             var oldString = oldText.ToString();
             var newString = newText.ToString();
 
-            return diffService.DiffStrings(oldString, newString, new StringDifferenceOptions()
-            {
-                DifferenceType = StringDifferenceTypes.Line,
-            });
+            return diffService.DiffStrings(
+                oldString,
+                newString,
+                new StringDifferenceOptions() { DifferenceType = StringDifferenceTypes.Line }
+            );
         }
     }
 }

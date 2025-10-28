@@ -21,7 +21,11 @@ namespace System.Web.Mvc
 
         public string Name { get; private set; }
 
-        public override bool IsValidName(ControllerContext controllerContext, string actionName, MethodInfo methodInfo)
+        public override bool IsValidName(
+            ControllerContext controllerContext,
+            string actionName,
+            MethodInfo methodInfo
+        )
         {
             return String.Equals(actionName, Name, StringComparison.OrdinalIgnoreCase);
         }

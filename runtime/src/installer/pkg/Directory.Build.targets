@@ -8,12 +8,13 @@
 
     TODO: (Consolidation) Add this target properly to the sharedfx tooling. https://github.com/dotnet/runtime/issues/749
   -->
-  <Target Name="EnsureOrderProjectReferencesBuilt"
-          BeforeTargets="
+  <Target
+    Name="EnsureOrderProjectReferencesBuilt"
+    BeforeTargets="
             CrossGen;
             CreateCrossGenImages;
-            CreateCrossGenSymbols">
+            CreateCrossGenSymbols"
+  >
     <MSBuild Projects="@(OrderProjectReference)" Targets="Build" />
   </Target>
-
 </Project>

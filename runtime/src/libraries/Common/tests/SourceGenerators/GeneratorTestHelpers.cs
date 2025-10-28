@@ -50,8 +50,10 @@ namespace SourceGenerators.Tests
 
                     for (int i = 0; i < Math.Max(expectedValues.Length, actualValues.Length); i++)
                     {
-                        object? expectedElement = i < expectedValues.Length ? expectedValues[i] : "<end of collection>";
-                        object? actualElement = i < actualValues.Length ? actualValues[i] : "<end of collection>";
+                        object? expectedElement =
+                            i < expectedValues.Length ? expectedValues[i] : "<end of collection>";
+                        object? actualElement =
+                            i < actualValues.Length ? actualValues[i] : "<end of collection>";
 
                         path.Push($"[{i}]");
                         CheckAreEqualCore(expectedElement, actualElement, path);
@@ -59,13 +61,30 @@ namespace SourceGenerators.Tests
                     }
                 }
 
-                if (type.GetProperty("EqualityContract", BindingFlags.Instance | BindingFlags.NonPublic, null, returnType: typeof(Type), types: Array.Empty<Type>(), null) != null)
+                if (
+                    type.GetProperty(
+                        "EqualityContract",
+                        BindingFlags.Instance | BindingFlags.NonPublic,
+                        null,
+                        returnType: typeof(Type),
+                        types: Array.Empty<Type>(),
+                        null
+                    ) != null
+                )
                 {
                     // Type is a C# record, run pointwise equality comparison.
-                    foreach (PropertyInfo property in type.GetProperties(BindingFlags.Public | BindingFlags.Instance))
+                    foreach (
+                        PropertyInfo property in type.GetProperties(
+                            BindingFlags.Public | BindingFlags.Instance
+                        )
+                    )
                     {
                         path.Push("." + property.Name);
-                        CheckAreEqualCore(property.GetValue(expected), property.GetValue(actual), path);
+                        CheckAreEqualCore(
+                            property.GetValue(expected),
+                            property.GetValue(actual),
+                            path
+                        );
                         path.Pop();
                     }
 
@@ -77,7 +96,10 @@ namespace SourceGenerators.Tests
                     FailNotEqual();
                 }
 
-                void FailNotEqual() => Assert.Fail($"Value not equal in ${string.Join("", path.Reverse())}: expected {expected}, but was {actual}.");
+                void FailNotEqual() =>
+                    Assert.Fail(
+                        $"Value not equal in ${string.Join("", path.Reverse())}: expected {expected}, but was {actual}."
+                    );
             }
         }
     }

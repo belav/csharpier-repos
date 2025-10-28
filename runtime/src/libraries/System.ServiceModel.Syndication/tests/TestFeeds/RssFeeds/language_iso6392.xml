@@ -3,11 +3,12 @@
   Expect:       ValidLanguage{parent:channel,element:language}
 -->
 
+
 <rss version="2.0">
-<channel>
-<title>Validity test</title>
-<link>http://contoso.com/rss/2.0/</link>
-<description>valid language</description>
-<language>UND</language>
-</channel>
+  <channel>
+    <title>Validity test</title>
+    <link>http://contoso.com/rss/2.0/</link>
+    <description>valid language</description>
+    <language>UND</language>
+  </channel>
 </rss>

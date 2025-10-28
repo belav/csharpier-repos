@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -33,29 +33,35 @@ using System.IdentityModel.Tokens;
 using System.Security.Cryptography.X509Certificates;
 using System.Xml;
 using NUnit.Framework;
-
 using MonoTests.Helpers;
 
 namespace MonoTests.System.IdentityModel.Selectors
 {
-	[TestFixture]
-	public class X509ThumbprintKeyIdentifierClauseTest
-	{
-		static readonly X509Certificate2 cert = new X509Certificate2 (TestResourceHelper.GetFullPathOfResource ("Test/Resources/test.pfx"), "mono");
-		static readonly X509Certificate2 cert2 = new X509Certificate2 (TestResourceHelper.GetFullPathOfResource ("Test/Resources/test2.pfx"), "mono");
+    [TestFixture]
+    public class X509ThumbprintKeyIdentifierClauseTest
+    {
+        static readonly X509Certificate2 cert = new X509Certificate2(
+            TestResourceHelper.GetFullPathOfResource("Test/Resources/test.pfx"),
+            "mono"
+        );
+        static readonly X509Certificate2 cert2 = new X509Certificate2(
+            TestResourceHelper.GetFullPathOfResource("Test/Resources/test2.pfx"),
+            "mono"
+        );
 
-		[Test]
-		public void Properties ()
-		{
-			X509ThumbprintKeyIdentifierClause ic =
-				new X509ThumbprintKeyIdentifierClause (cert);
-			Assert.AreEqual (cert.GetCertHash (), ic.GetX509Thumbprint (), "#1-1");
-			Assert.AreEqual (null, ic.ClauseType, "#1-2");
+        [Test]
+        public void Properties()
+        {
+            X509ThumbprintKeyIdentifierClause ic = new X509ThumbprintKeyIdentifierClause(cert);
+            Assert.AreEqual(cert.GetCertHash(), ic.GetX509Thumbprint(), "#1-1");
+            Assert.AreEqual(null, ic.ClauseType, "#1-2");
 
-			ic = new X509SecurityToken (cert).CreateKeyIdentifierClause<X509ThumbprintKeyIdentifierClause> ();
-			Assert.AreEqual (cert.GetCertHash (), ic.GetX509Thumbprint (), "#2-1");
-			Assert.AreEqual (null, ic.ClauseType, "#2-2");
-		}
-	}
+            ic = new X509SecurityToken(
+                cert
+            ).CreateKeyIdentifierClause<X509ThumbprintKeyIdentifierClause>();
+            Assert.AreEqual(cert.GetCertHash(), ic.GetX509Thumbprint(), "#2-1");
+            Assert.AreEqual(null, ic.ClauseType, "#2-2");
+        }
+    }
 }
 #endif

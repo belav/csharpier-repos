@@ -1,5 +1,4 @@
 <Project Sdk="Microsoft.NET.Sdk">
-
   <PropertyGroup>
     <TargetFrameworks>$(NetCoreAppCurrent);$(NetCoreAppPrevious);$(NetCoreAppMinimum);netstandard2.1</TargetFrameworks>
     <EnableDefaultItems>true</EnableDefaultItems>
@@ -17,8 +16,14 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Include="$(CommonPath)Interop\Unix\libc\Interop.GetParentPid.cs" Link="Common\Interop\Unix\libc\Interop.GetParentPid.cs" />
-    <Compile Include="$(CommonPath)Interop\Unix\Interop.Libraries.cs" Link="Common\Interop\Unix\Interop.Libraries.cs" />
+    <Compile
+      Include="$(CommonPath)Interop\Unix\libc\Interop.GetParentPid.cs"
+      Link="Common\Interop\Unix\libc\Interop.GetParentPid.cs"
+    />
+    <Compile
+      Include="$(CommonPath)Interop\Unix\Interop.Libraries.cs"
+      Link="Common\Interop\Unix\Interop.Libraries.cs"
+    />
     <Compile Include="$(CommonPath)System\ThrowHelper.cs" Link="Common\System\ThrowHelper.cs" />
   </ItemGroup>
 

@@ -152,9 +152,8 @@ namespace System.ComponentModel
         /// Initializes a new instance of the <see cref='System.ComponentModel.CategoryAttribute'/>
         /// class with the default category.
         /// </summary>
-        public CategoryAttribute() : this(nameof(Default))
-        {
-        }
+        public CategoryAttribute()
+            : this(nameof(Default)) { }
 
         /// <summary>
         /// Initializes a new instance of the <see cref='System.ComponentModel.CategoryAttribute'/>
@@ -199,31 +198,32 @@ namespace System.ComponentModel
         /// <summary>
         /// Looks up the localized name of a given category.
         /// </summary>
-        protected virtual string? GetLocalizedString(string value) => value switch
-        {
-            "Action" => SR.PropertyCategoryAction,
-            "Appearance" => SR.PropertyCategoryAppearance,
-            "Asynchronous" => SR.PropertyCategoryAsynchronous,
-            "Behavior" => SR.PropertyCategoryBehavior,
-            "Config" => SR.PropertyCategoryConfig,
-            "Data" => SR.PropertyCategoryData,
-            "DDE" => SR.PropertyCategoryDDE,
-            "Default" => SR.PropertyCategoryDefault,
-            "Design" => SR.PropertyCategoryDesign,
-            "DragDrop" => SR.PropertyCategoryDragDrop,
-            "Focus" => SR.PropertyCategoryFocus,
-            "Font" => SR.PropertyCategoryFont,
-            "Format" => SR.PropertyCategoryFormat,
-            "Key" => SR.PropertyCategoryKey,
-            "Layout" => SR.PropertyCategoryLayout,
-            "List" => SR.PropertyCategoryList,
-            "Mouse" => SR.PropertyCategoryMouse,
-            "Position" => SR.PropertyCategoryPosition,
-            "Scale" => SR.PropertyCategoryScale,
-            "Text" => SR.PropertyCategoryText,
-            "WindowStyle" => SR.PropertyCategoryWindowStyle,
-            _ => null
-        };
+        protected virtual string? GetLocalizedString(string value) =>
+            value switch
+            {
+                "Action" => SR.PropertyCategoryAction,
+                "Appearance" => SR.PropertyCategoryAppearance,
+                "Asynchronous" => SR.PropertyCategoryAsynchronous,
+                "Behavior" => SR.PropertyCategoryBehavior,
+                "Config" => SR.PropertyCategoryConfig,
+                "Data" => SR.PropertyCategoryData,
+                "DDE" => SR.PropertyCategoryDDE,
+                "Default" => SR.PropertyCategoryDefault,
+                "Design" => SR.PropertyCategoryDesign,
+                "DragDrop" => SR.PropertyCategoryDragDrop,
+                "Focus" => SR.PropertyCategoryFocus,
+                "Font" => SR.PropertyCategoryFont,
+                "Format" => SR.PropertyCategoryFormat,
+                "Key" => SR.PropertyCategoryKey,
+                "Layout" => SR.PropertyCategoryLayout,
+                "List" => SR.PropertyCategoryList,
+                "Mouse" => SR.PropertyCategoryMouse,
+                "Position" => SR.PropertyCategoryPosition,
+                "Scale" => SR.PropertyCategoryScale,
+                "Text" => SR.PropertyCategoryText,
+                "WindowStyle" => SR.PropertyCategoryWindowStyle,
+                _ => null,
+            };
 
         public override bool IsDefaultAttribute() => Category == Default.Category;
     }

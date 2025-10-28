@@ -1,5 +1,4 @@
 <Project Sdk="Microsoft.NET.Sdk">
-
   <PropertyGroup>
     <TargetFramework>$(DefaultNetCoreTargetFramework)</TargetFramework>
     <IsAspNetCoreApp>true</IsAspNetCoreApp>
@@ -14,8 +13,14 @@
 
   <ItemGroup>
     <Compile Include="$(ComponentsSharedSourceRoot)src\AttributeUtilities.cs" LinkBase="Forms" />
-    <Compile Include="$(ComponentsSharedSourceRoot)src\ExpressionFormatting\**\*.cs" LinkBase="Forms\ExpressionFommatting" />
-    <Compile Include="$(ComponentsSharedSourceRoot)src\DefaultAntiforgeryStateProvider.cs" LinkBase="Forms" />
+    <Compile
+      Include="$(ComponentsSharedSourceRoot)src\ExpressionFormatting\**\*.cs"
+      LinkBase="Forms\ExpressionFommatting"
+    />
+    <Compile
+      Include="$(ComponentsSharedSourceRoot)src\DefaultAntiforgeryStateProvider.cs"
+      LinkBase="Forms"
+    />
   </ItemGroup>
 
   <ItemGroup>

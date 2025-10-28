@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -31,48 +31,62 @@ using System.Security.Cryptography.X509Certificates;
 using System.ServiceModel.Channels;
 using System.ServiceModel.Configuration;
 using System.ServiceModel.Description;
-using System.ServiceModel.Security.Tokens; 
+using System.ServiceModel.Security.Tokens;
 
 namespace System.ServiceModel.Security
 {
-	public sealed class X509CertificateInitiatorClientCredential
-	{
-		internal X509CertificateInitiatorClientCredential ()
-		{
-		}
+    public sealed class X509CertificateInitiatorClientCredential
+    {
+        internal X509CertificateInitiatorClientCredential() { }
 
-		X509Certificate2 certificate;
+        X509Certificate2 certificate;
 
-		internal X509CertificateInitiatorClientCredential Clone ()
-		{
-			return (X509CertificateInitiatorClientCredential) MemberwiseClone ();
-		}
+        internal X509CertificateInitiatorClientCredential Clone()
+        {
+            return (X509CertificateInitiatorClientCredential)MemberwiseClone();
+        }
 
-		public X509Certificate2 Certificate {
-			get { return certificate; }
-			set { certificate = value; }
-		}
+        public X509Certificate2 Certificate
+        {
+            get { return certificate; }
+            set { certificate = value; }
+        }
 
-		public void SetCertificate (StoreLocation storeLocation,
-			StoreName storeName, X509FindType findType,
-			object findValue)
-		{
+        public void SetCertificate(
+            StoreLocation storeLocation,
+            StoreName storeName,
+            X509FindType findType,
+            object findValue
+        )
+        {
 #if !MOBILE
-			certificate = ConfigUtil.CreateCertificateFrom (storeLocation, storeName, findType, findValue);
+            certificate = ConfigUtil.CreateCertificateFrom(
+                storeLocation,
+                storeName,
+                findType,
+                findValue
+            );
 #else
-			throw new NotImplementedException ();
+            throw new NotImplementedException();
 #endif
-		}
+        }
 
-		public void SetCertificate (
-			string subjectName, StoreLocation storeLocation,
-			StoreName storeName)
-		{
+        public void SetCertificate(
+            string subjectName,
+            StoreLocation storeLocation,
+            StoreName storeName
+        )
+        {
 #if !MOBILE
-			certificate = ConfigUtil.CreateCertificateFrom (storeLocation, storeName, X509FindType.FindBySubjectName, subjectName);
+            certificate = ConfigUtil.CreateCertificateFrom(
+                storeLocation,
+                storeName,
+                X509FindType.FindBySubjectName,
+                subjectName
+            );
 #else
-			throw new NotImplementedException ();
+            throw new NotImplementedException();
 #endif
-		}
-	}
+        }
+    }
 }

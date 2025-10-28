@@ -15,9 +15,11 @@ namespace System.Data.Metadata.Edm
     internal partial class ImmutableAssemblyCacheEntry : AssemblyCacheEntry
     {
         // types in "this" assembly
-        private readonly System.Collections.ObjectModel.ReadOnlyCollection<EdmType> _typesInAssembly;       
+        private readonly System.Collections.ObjectModel.ReadOnlyCollection<EdmType> _typesInAssembly;
+
         // other assemblies referenced by types we care about in "this" assembly
         private readonly System.Collections.ObjectModel.ReadOnlyCollection<Assembly> _closureAssemblies;
+
         internal ImmutableAssemblyCacheEntry(MutableAssemblyCacheEntry mutableEntry)
         {
             _typesInAssembly = new List<EdmType>(mutableEntry.TypesInAssembly).AsReadOnly();

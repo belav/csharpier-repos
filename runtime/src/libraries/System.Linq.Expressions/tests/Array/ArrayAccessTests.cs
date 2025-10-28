@@ -9,20 +9,28 @@ namespace System.Linq.Expressions.Tests
 {
     public static class ArrayAccessTests
     {
-        public static IEnumerable<object[]> Ranks() => Enumerable.Range(1, 5).Select(i => new object[] {i});
+        public static IEnumerable<object[]> Ranks() =>
+            Enumerable.Range(1, 5).Select(i => new object[] { i });
 
-        [ConditionalTheory(typeof(PlatformDetection), nameof(PlatformDetection.IsNonZeroLowerBoundArraySupported))]
+        [ConditionalTheory(
+            typeof(PlatformDetection),
+            nameof(PlatformDetection.IsNonZeroLowerBoundArraySupported)
+        )]
         [ActiveIssue("https://github.com/mono/mono/issues/14920", TestRuntimes.Mono)]
         [ClassData(typeof(CompilationTypes))]
         public static void ArrayAccess_MultiDimensionalOf1(bool useInterpreter)
         {
             Type arrayType = typeof(int).MakeArrayType(1);
-            ConstructorInfo arrayCtor = arrayType.GetTypeInfo().DeclaredConstructors.Single(ctor => ctor.GetParameters().Length == 2);
+            ConstructorInfo arrayCtor = arrayType
+                .GetTypeInfo()
+                .DeclaredConstructors.Single(ctor => ctor.GetParameters().Length == 2);
             var arr = (System.Array)arrayCtor.Invoke(new object[] { 1, 1 });
             ConstantExpression c = Expression.Constant(arr);
             IndexExpression e = Expression.ArrayAccess(c, Expression.Constant(1));
 
-            Action set = Expression.Lambda<Action>(Expression.Assign(e, Expression.Constant(42))).Compile(useInterpreter);
+            Action set = Expression
+                .Lambda<Action>(Expression.Assign(e, Expression.Constant(42)))
+                .Compile(useInterpreter);
             set();
             Assert.Equal(42, arr.GetValue(1));
 
@@ -30,13 +38,18 @@ namespace System.Linq.Expressions.Tests
             Assert.Equal(42, get());
         }
 
-        [ConditionalTheory(typeof(PlatformDetection), nameof(PlatformDetection.IsNonZeroLowerBoundArraySupported))]
+        [ConditionalTheory(
+            typeof(PlatformDetection),
+            nameof(PlatformDetection.IsNonZeroLowerBoundArraySupported)
+        )]
         [ActiveIssue("https://github.com/mono/mono/issues/14920", TestRuntimes.Mono)]
         [ClassData(typeof(CompilationTypes))]
         public static void ArrayIndex_MultiDimensionalOf1(bool useInterpreter)
         {
             Type arrayType = typeof(int).MakeArrayType(1);
-            ConstructorInfo arrayCtor = arrayType.GetTypeInfo().DeclaredConstructors.Single(ctor => ctor.GetParameters().Length == 2);
+            ConstructorInfo arrayCtor = arrayType
+                .GetTypeInfo()
+                .DeclaredConstructors.Single(ctor => ctor.GetParameters().Length == 2);
             var arr = (System.Array)arrayCtor.Invoke(new object[] { 1, 1 });
             arr.SetValue(42, 1);
             ConstantExpression c = Expression.Constant(arr);
@@ -51,15 +64,21 @@ namespace System.Linq.Expressions.Tests
         {
             ConstantExpression instance = Expression.Constant(46);
             ConstantExpression index = Expression.Constant(2);
-            AssertExtensions.Throws<ArgumentException>("array", () => Expression.ArrayAccess(instance, index));
+            AssertExtensions.Throws<ArgumentException>(
+                "array",
+                () => Expression.ArrayAccess(instance, index)
+            );
         }
 
         [Fact]
         public static void WrongNumberIndices()
         {
-            ConstantExpression instance = Expression.Constant(new int[2,3]);
+            ConstantExpression instance = Expression.Constant(new int[2, 3]);
             ConstantExpression index = Expression.Constant(2);
-            AssertExtensions.Throws<ArgumentException>(null, () => Expression.ArrayAccess(instance, index));
+            AssertExtensions.Throws<ArgumentException>(
+                null,
+                () => Expression.ArrayAccess(instance, index)
+            );
         }
 
         [Fact]
@@ -67,18 +86,30 @@ namespace System.Linq.Expressions.Tests
         {
             ConstantExpression instance = Expression.Constant(new int[4]);
             ConstantExpression index = Expression.Constant("2");
-            AssertExtensions.Throws<ArgumentException>("indexes", () => Expression.ArrayAccess(instance, index));
+            AssertExtensions.Throws<ArgumentException>(
+                "indexes",
+                () => Expression.ArrayAccess(instance, index)
+            );
         }
 
         [Fact]
         public static void UnreadableIndex()
         {
             ConstantExpression instance = Expression.Constant(new int[4]);
-            MemberExpression index = Expression.Property(null, typeof(Unreadable<int>).GetProperty(nameof(Unreadable<int>.WriteOnly)));
-            AssertExtensions.Throws<ArgumentException>("indexes", () => Expression.ArrayAccess(instance, index));
+            MemberExpression index = Expression.Property(
+                null,
+                typeof(Unreadable<int>).GetProperty(nameof(Unreadable<int>.WriteOnly))
+            );
+            AssertExtensions.Throws<ArgumentException>(
+                "indexes",
+                () => Expression.ArrayAccess(instance, index)
+            );
         }
 
-        [ConditionalTheory(typeof(PlatformDetection), nameof(PlatformDetection.IsNonZeroLowerBoundArraySupported))]
+        [ConditionalTheory(
+            typeof(PlatformDetection),
+            nameof(PlatformDetection.IsNonZeroLowerBoundArraySupported)
+        )]
         [ActiveIssue("https://github.com/mono/mono/issues/14921", TestRuntimes.Mono)]
         [ClassData(typeof(CompilationTypes))]
         public static void NonZeroBasedOneDimensionalArrayAccess(bool useInterpreter)
@@ -91,33 +122,49 @@ namespace System.Linq.Expressions.Tests
             IndexExpression indexM1 = Expression.ArrayAccess(array, Expression.Constant(-1));
             IndexExpression index0 = Expression.ArrayAccess(array, Expression.Constant(0));
             IndexExpression index1 = Expression.ArrayAccess(array, Expression.Constant(1));
-            Action setValues = Expression.Lambda<Action>(
-                Expression.Block(
-                    Expression.Assign(indexM1, Expression.Constant(5)),
-                    Expression.Assign(index0, Expression.Constant(6)),
-                    Expression.Assign(index1, Expression.Constant(7)))).Compile(useInterpreter);
+            Action setValues = Expression
+                .Lambda<Action>(
+                    Expression.Block(
+                        Expression.Assign(indexM1, Expression.Constant(5)),
+                        Expression.Assign(index0, Expression.Constant(6)),
+                        Expression.Assign(index1, Expression.Constant(7))
+                    )
+                )
+                .Compile(useInterpreter);
             setValues();
             Assert.Equal(5, arrayObj.GetValue(-1));
             Assert.Equal(6, arrayObj.GetValue(0));
             Assert.Equal(7, arrayObj.GetValue(1));
-            Func<bool> testValues = Expression.Lambda<Func<bool>>(
-                Expression.And(
-                    Expression.Equal(indexM1, Expression.Constant(5)),
+            Func<bool> testValues = Expression
+                .Lambda<Func<bool>>(
                     Expression.And(
-                        Expression.Equal(index0, Expression.Constant(6)),
-                        Expression.Equal(index1, Expression.Constant(7))))).Compile(useInterpreter);
+                        Expression.Equal(indexM1, Expression.Constant(5)),
+                        Expression.And(
+                            Expression.Equal(index0, Expression.Constant(6)),
+                            Expression.Equal(index1, Expression.Constant(7))
+                        )
+                    )
+                )
+                .Compile(useInterpreter);
             Assert.True(testValues());
         }
 
         [Theory, PerCompilationType(nameof(Ranks))]
         public static void DifferentRanks(int rank, bool useInterpreter)
         {
-            Array arrayObj = Array.CreateInstance(typeof(string), Enumerable.Repeat(1, rank).ToArray());
+            Array arrayObj = Array.CreateInstance(
+                typeof(string),
+                Enumerable.Repeat(1, rank).ToArray()
+            );
             arrayObj.SetValue("solitary value", Enumerable.Repeat(0, rank).ToArray());
             ConstantExpression array = Expression.Constant(arrayObj);
-            IEnumerable<DefaultExpression> indices = Enumerable.Repeat(Expression.Default(typeof(int)), rank);
-            Func<string> func = Expression.Lambda<Func<string>>(
-                Expression.ArrayAccess(array, indices)).Compile(useInterpreter);
+            IEnumerable<DefaultExpression> indices = Enumerable.Repeat(
+                Expression.Default(typeof(int)),
+                rank
+            );
+            Func<string> func = Expression
+                .Lambda<Func<string>>(Expression.ArrayAccess(array, indices))
+                .Compile(useInterpreter);
             Assert.Equal("solitary value", func());
         }
     }

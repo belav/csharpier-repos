@@ -35,8 +35,14 @@ namespace System.Xml.Xsl.Runtime
         /// <summary>
         /// Constructor.
         /// </summary>
-        [RequiresUnreferencedCode("This method will create a copy that uses earlybound types which cannot be statically analyzed.")]
-        public XmlQueryStaticData(XmlWriterSettings defaultWriterSettings, IList<WhitespaceRule> whitespaceRules, StaticDataManager staticData)
+        [RequiresUnreferencedCode(
+            "This method will create a copy that uses earlybound types which cannot be statically analyzed."
+        )]
+        public XmlQueryStaticData(
+            XmlWriterSettings defaultWriterSettings,
+            IList<WhitespaceRule> whitespaceRules,
+            StaticDataManager staticData
+        )
         {
             Debug.Assert(defaultWriterSettings != null && staticData != null);
             _defaultWriterSettings = defaultWriterSettings;
@@ -71,7 +77,9 @@ namespace System.Xml.Xsl.Runtime
         /// <summary>
         /// Deserialize XmlQueryStaticData object from a byte array.
         /// </summary>
-        [RequiresUnreferencedCode("This method will create EarlyBoundInfo from passed in ebTypes array which cannot be statically analyzed.")]
+        [RequiresUnreferencedCode(
+            "This method will create EarlyBoundInfo from passed in ebTypes array which cannot be statically analyzed."
+        )]
         public XmlQueryStaticData(byte[] data, Type[]? ebTypes)
         {
             MemoryStream dataStream = new MemoryStream(data, writable: false);
@@ -121,7 +129,10 @@ namespace System.Xml.Xsl.Runtime
                     _prefixMappingsList[idx] = new StringPair[length2];
                     for (int idx2 = 0; idx2 < length2; idx2++)
                     {
-                        _prefixMappingsList[idx][idx2] = new StringPair(dataReader.ReadString(), dataReader.ReadString());
+                        _prefixMappingsList[idx][idx2] = new StringPair(
+                            dataReader.ReadString(),
+                            dataReader.ReadString()
+                        );
                     }
                 }
             }
@@ -133,7 +144,10 @@ namespace System.Xml.Xsl.Runtime
                 _filters = new Int32Pair[length];
                 for (int idx = 0; idx < length; idx++)
                 {
-                    _filters[idx] = new Int32Pair(dataReader.Read7BitEncodedInt(), dataReader.Read7BitEncodedInt());
+                    _filters[idx] = new Int32Pair(
+                        dataReader.Read7BitEncodedInt(),
+                        dataReader.Read7BitEncodedInt()
+                    );
                 }
             }
 
@@ -181,7 +195,10 @@ namespace System.Xml.Xsl.Runtime
                 }
             }
 
-            Debug.Assert(formatVersion != CurrentFormatVersion || dataReader.Read() == -1, "Extra data at the end of the stream");
+            Debug.Assert(
+                formatVersion != CurrentFormatVersion || dataReader.Read() == -1,
+                "Extra data at the end of the stream"
+            );
             dataReader.Dispose();
         }
 
@@ -403,7 +420,8 @@ namespace System.Xml.Xsl.Runtime
     /// </summary>
     internal sealed class XmlQueryDataReader : BinaryReader
     {
-        public XmlQueryDataReader(Stream input) : base(input) { }
+        public XmlQueryDataReader(Stream input)
+            : base(input) { }
 
         /// <summary>
         /// Read a string value from the stream. Value can be null.
@@ -432,7 +450,8 @@ namespace System.Xml.Xsl.Runtime
     /// </summary>
     internal sealed class XmlQueryDataWriter : BinaryWriter
     {
-        public XmlQueryDataWriter(Stream output) : base(output) { }
+        public XmlQueryDataWriter(Stream output)
+            : base(output) { }
 
         /// <summary>
         /// Write a string value to the stream. Value can be null.

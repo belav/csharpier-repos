@@ -10,9 +10,7 @@ namespace System.ServiceModel.Configuration
     class TimeSpanOrInfiniteValidator : TimeSpanValidator
     {
         public TimeSpanOrInfiniteValidator(TimeSpan minValue, TimeSpan maxValue)
-            : base(minValue, maxValue)
-        {
-        }
+            : base(minValue, maxValue) { }
 
         public override void Validate(object value)
         {

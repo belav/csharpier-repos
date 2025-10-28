@@ -3,40 +3,47 @@
 // initialized from an instance constructor
 //
 using System;
+
 public interface Interface
 {
-	int X{ get; }
+    int X { get; }
 }
 
 public struct Struct : Interface
 {
-	public Struct( int x ) { }
-	public int X { get { return 0; } }
+    public Struct(int x) { }
+
+    public int X
+    {
+        get { return 0; }
+    }
 }
 
 public class User
 {
-	public User( Interface iface ) { }
+    public User(Interface iface) { }
 }
+
 public class Test
 {
-	User t;
-	Test() { t=new User (new Struct(5)); }
+    User t;
 
-	//
-	// This one was not handled before by the compiler
-	// constrast that to the use on the constructor above, that
-	// worked just fine
-	//
-	User t2=new User(new Struct(251));
+    Test()
+    {
+        t = new User(new Struct(5));
+    }
 
-	public static int Main ()
-	{
-		Test tt = new Test ();
+    //
+    // This one was not handled before by the compiler
+    // constrast that to the use on the constructor above, that
+    // worked just fine
+    //
+    User t2 = new User(new Struct(251));
 
-		return 0;
-	}
+    public static int Main()
+    {
+        Test tt = new Test();
+
+        return 0;
+    }
 }
-
-
-

@@ -17,8 +17,8 @@ public static class InternalScaffoldingModelExtensions
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public static string? GetDatabaseName(this IReadOnlyModel model)
-        => (string?)model[ScaffoldingAnnotationNames.DatabaseName];
+    public static string? GetDatabaseName(this IReadOnlyModel model) =>
+        (string?)model[ScaffoldingAnnotationNames.DatabaseName];
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -26,10 +26,8 @@ public static class InternalScaffoldingModelExtensions
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public static void SetDatabaseName(this IMutableModel model, string? value)
-        => model.SetAnnotation(
-            ScaffoldingAnnotationNames.DatabaseName,
-            value);
+    public static void SetDatabaseName(this IMutableModel model, string? value) =>
+        model.SetAnnotation(ScaffoldingAnnotationNames.DatabaseName, value);
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -37,8 +35,6 @@ public static class InternalScaffoldingModelExtensions
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public static void SetDbSetName(this IMutableEntityType entityType, string? value)
-        => entityType.SetAnnotation(
-            ScaffoldingAnnotationNames.DbSetName,
-            value);
+    public static void SetDbSetName(this IMutableEntityType entityType, string? value) =>
+        entityType.SetAnnotation(ScaffoldingAnnotationNames.DbSetName, value);
 }

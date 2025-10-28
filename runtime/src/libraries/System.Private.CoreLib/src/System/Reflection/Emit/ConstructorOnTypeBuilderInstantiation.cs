@@ -8,7 +8,10 @@ namespace System.Reflection.Emit
     internal sealed partial class ConstructorOnTypeBuilderInstantiation : ConstructorInfo
     {
         #region Private Static Members
-        internal static ConstructorInfo GetConstructor(ConstructorInfo constructor, TypeBuilderInstantiation type)
+        internal static ConstructorInfo GetConstructor(
+            ConstructorInfo constructor,
+            TypeBuilderInstantiation type
+        )
         {
             return new ConstructorOnTypeBuilderInstantiation(constructor, type);
         }
@@ -20,7 +23,10 @@ namespace System.Reflection.Emit
         #endregion
 
         #region Constructor
-        internal ConstructorOnTypeBuilderInstantiation(ConstructorInfo constructor, TypeBuilderInstantiation type)
+        internal ConstructorOnTypeBuilderInstantiation(
+            ConstructorInfo constructor,
+            TypeBuilderInstantiation type
+        )
         {
             _ctor = constructor;
             _type = type;
@@ -39,24 +45,58 @@ namespace System.Reflection.Emit
         public override string Name => _ctor.Name;
         public override Type? DeclaringType => _type;
         public override Type? ReflectedType => _type;
-        public override object[] GetCustomAttributes(bool inherit) { return _ctor.GetCustomAttributes(inherit); }
-        public override object[] GetCustomAttributes(Type attributeType, bool inherit) { return _ctor.GetCustomAttributes(attributeType, inherit); }
-        public override bool IsDefined(Type attributeType, bool inherit) { return _ctor.IsDefined(attributeType, inherit); }
+
+        public override object[] GetCustomAttributes(bool inherit)
+        {
+            return _ctor.GetCustomAttributes(inherit);
+        }
+
+        public override object[] GetCustomAttributes(Type attributeType, bool inherit)
+        {
+            return _ctor.GetCustomAttributes(attributeType, inherit);
+        }
+
+        public override bool IsDefined(Type attributeType, bool inherit)
+        {
+            return _ctor.IsDefined(attributeType, inherit);
+        }
+
         public override int MetadataToken => _ctor.MetadataToken;
         public override Module Module => _ctor.Module;
         #endregion
 
         #region MethodBase Members
-        public override ParameterInfo[] GetParameters() { return _ctor.GetParameters(); }
-        public override MethodImplAttributes GetMethodImplementationFlags() { return _ctor.GetMethodImplementationFlags(); }
+        public override ParameterInfo[] GetParameters()
+        {
+            return _ctor.GetParameters();
+        }
+
+        public override MethodImplAttributes GetMethodImplementationFlags()
+        {
+            return _ctor.GetMethodImplementationFlags();
+        }
+
         public override RuntimeMethodHandle MethodHandle => _ctor.MethodHandle;
         public override MethodAttributes Attributes => _ctor.Attributes;
-        public override object Invoke(object? obj, BindingFlags invokeAttr, Binder? binder, object?[]? parameters, CultureInfo? culture)
+
+        public override object Invoke(
+            object? obj,
+            BindingFlags invokeAttr,
+            Binder? binder,
+            object?[]? parameters,
+            CultureInfo? culture
+        )
         {
             throw new NotSupportedException();
         }
+
         public override CallingConventions CallingConvention => _ctor.CallingConvention;
-        public override Type[] GetGenericArguments() { return _ctor.GetGenericArguments(); }
+
+        public override Type[] GetGenericArguments()
+        {
+            return _ctor.GetGenericArguments();
+        }
+
         public override bool IsGenericMethodDefinition => false;
         public override bool ContainsGenericParameters => false;
 
@@ -64,7 +104,12 @@ namespace System.Reflection.Emit
         #endregion
 
         #region ConstructorInfo Members
-        public override object Invoke(BindingFlags invokeAttr, Binder? binder, object?[]? parameters, CultureInfo? culture)
+        public override object Invoke(
+            BindingFlags invokeAttr,
+            Binder? binder,
+            object?[]? parameters,
+            CultureInfo? culture
+        )
         {
             throw new InvalidOperationException();
         }

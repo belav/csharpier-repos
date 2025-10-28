@@ -1,5 +1,5 @@
 //
-// StaticPartialCachingControlCas.cs 
+// StaticPartialCachingControlCas.cs
 //	- CAS unit tests for System.Web.UI.StaticPartialCachingControl
 //
 // Author:
@@ -14,10 +14,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -27,48 +27,70 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
-using NUnit.Framework;
-
 using System;
 using System.Reflection;
 using System.Security.Permissions;
 using System.Web;
 using System.Web.UI;
+using NUnit.Framework;
 
-namespace MonoCasTests.System.Web.UI {
+namespace MonoCasTests.System.Web.UI
+{
+    [TestFixture]
+    [Category("CAS")]
+    public class StaticPartialCachingControlCas : AspNetHostingMinimal
+    {
+        [Test]
+        [PermissionSet(SecurityAction.Deny, Unrestricted = true)]
+        public void Constructor_Deny_Unrestricted()
+        {
+            new StaticPartialCachingControl(null, null, 0, null, null, null, null);
+        }
 
-	[TestFixture]
-	[Category ("CAS")]
-	public class StaticPartialCachingControlCas : AspNetHostingMinimal {
+        [Test]
+        [PermissionSet(SecurityAction.Deny, Unrestricted = true)]
+        public void BuildCachedControl_Deny_Unrestricted()
+        {
+            Control parent = new Control();
+            StaticPartialCachingControl.BuildCachedControl(
+                parent,
+                null,
+                null,
+                0,
+                null,
+                null,
+                null,
+                null
+            );
+            Assert.AreEqual(1, parent.Controls.Count, "Count");
+        }
 
-		[Test]
-		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-		public void Constructor_Deny_Unrestricted ()
-		{
-			new StaticPartialCachingControl (null, null, 0, null, null, null, null);
-		}
+        // LinkDemand
 
-		[Test]
-		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-		public void BuildCachedControl_Deny_Unrestricted ()
-		{
-			Control parent = new Control ();
-			StaticPartialCachingControl.BuildCachedControl (parent, null, null, 0, null, null, null, null);
-			Assert.AreEqual (1, parent.Controls.Count, "Count");
-		}
+        public override object CreateControl(
+            SecurityAction action,
+            AspNetHostingPermissionLevel level
+        )
+        {
+            ConstructorInfo ci = this.Type.GetConstructor(
+                new Type[7]
+                {
+                    typeof(string),
+                    typeof(string),
+                    typeof(int),
+                    typeof(string),
+                    typeof(string),
+                    typeof(string),
+                    typeof(BuildMethod),
+                }
+            );
+            Assert.IsNotNull(ci, ".ctor(2xstring,int,3xstring,BuildMethod)");
+            return ci.Invoke(new object[7] { null, null, null, null, null, null, null });
+        }
 
-		// LinkDemand
-
-		public override object CreateControl (SecurityAction action, AspNetHostingPermissionLevel level)
-		{
-			ConstructorInfo ci = this.Type.GetConstructor (new Type[7] { typeof (string), typeof (string),
-				typeof (int), typeof (string), typeof (string), typeof (string), typeof (BuildMethod) });
-			Assert.IsNotNull (ci, ".ctor(2xstring,int,3xstring,BuildMethod)");
-			return ci.Invoke (new object[7] { null, null, null, null, null, null, null });
-		}
-
-		public override Type Type {
-			get { return typeof (StaticPartialCachingControl); }
-		}
-	}
+        public override Type Type
+        {
+            get { return typeof(StaticPartialCachingControl); }
+        }
+    }
 }

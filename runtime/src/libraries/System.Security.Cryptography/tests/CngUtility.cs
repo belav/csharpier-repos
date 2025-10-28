@@ -11,11 +11,22 @@ namespace System.Security.Cryptography.Tests
         private const string BCRYPT_LIB = "bcrypt.dll";
         private const string MS_PRIMITIVE_PROVIDER = "Microsoft Primitive Provider";
 
-        public static bool IsAlgorithmSupported(string algId, string implementation = MS_PRIMITIVE_PROVIDER)
+        public static bool IsAlgorithmSupported(
+            string algId,
+            string implementation = MS_PRIMITIVE_PROVIDER
+        )
         {
-            Assert.True(PlatformDetection.IsWindows, "Caller should not invoke this method for non-Windows platforms.");
+            Assert.True(
+                PlatformDetection.IsWindows,
+                "Caller should not invoke this method for non-Windows platforms."
+            );
 
-            int ntStatus = BCryptOpenAlgorithmProvider(out SafeBCryptAlgorithmHandle handle, algId, implementation, 0);
+            int ntStatus = BCryptOpenAlgorithmProvider(
+                out SafeBCryptAlgorithmHandle handle,
+                algId,
+                implementation,
+                0
+            );
             bool isSupported = ntStatus == 0 && handle != null && !handle.IsInvalid;
             handle?.Dispose();
             return isSupported;
@@ -26,7 +37,8 @@ namespace System.Security.Cryptography.Tests
         [DefaultDllImportSearchPaths(DllImportSearchPath.System32)]
         private static extern int BCryptCloseAlgorithmProvider(
             [In] IntPtr hAlgorithm,
-            [In] uint dwFlags);
+            [In] uint dwFlags
+        );
 
         // https://docs.microsoft.com/windows/win32/api/bcrypt/nf-bcrypt-bcryptopenalgorithmprovider
         [DllImport(BCRYPT_LIB, CallingConvention = CallingConvention.Winapi)]
@@ -35,14 +47,13 @@ namespace System.Security.Cryptography.Tests
             [Out] out SafeBCryptAlgorithmHandle phAlgorithm,
             [In, MarshalAs(UnmanagedType.LPWStr)] string pszAlgId,
             [In, MarshalAs(UnmanagedType.LPWStr)] string pszImplementation,
-            [In] uint dwFlags);
+            [In] uint dwFlags
+        );
 
         internal sealed class SafeBCryptAlgorithmHandle : SafeHandle
         {
             public SafeBCryptAlgorithmHandle()
-                : base(IntPtr.Zero, ownsHandle: true)
-            {
-            }
+                : base(IntPtr.Zero, ownsHandle: true) { }
 
             public override bool IsInvalid => handle == IntPtr.Zero;
 

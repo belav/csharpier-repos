@@ -4,10 +4,10 @@
 
 namespace System.IdentityModel
 {
-    using System.IO;
-    using System.Security.Cryptography;
     using System.IdentityModel.Selectors;
     using System.IdentityModel.Tokens;
+    using System.IO;
+    using System.Security.Cryptography;
     using System.Text;
     using System.Xml;
 
@@ -27,26 +27,17 @@ namespace System.IdentityModel
 
         public override string Algorithm
         {
-            get
-            {
-                return SecurityAlgorithms.StrTransform;
-            }
+            get { return SecurityAlgorithms.StrTransform; }
         }
 
         public bool IncludeComments
         {
-            get
-            {
-                return this.includeComments;
-            }
+            get { return this.includeComments; }
         }
 
         public string InclusiveNamespacesPrefixList
         {
-            get
-            {
-                return this.inclusiveNamespacesPrefixList;
-            }
+            get { return this.inclusiveNamespacesPrefixList; }
             set
             {
                 this.inclusiveNamespacesPrefixList = value;
@@ -72,7 +63,11 @@ namespace System.IdentityModel
             return driver;
         }
 
-        public override object Process(object input, SignatureResourcePool resourcePool, DictionaryManager dictionaryManager)
+        public override object Process(
+            object input,
+            SignatureResourcePool resourcePool,
+            DictionaryManager dictionaryManager
+        )
         {
             if (input is XmlReader)
             {
@@ -92,18 +87,32 @@ namespace System.IdentityModel
             }
             else
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new NotSupportedException(SR.GetString(SR.UnsupportedInputTypeForTransform, input.GetType())));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new NotSupportedException(
+                        SR.GetString(SR.UnsupportedInputTypeForTransform, input.GetType())
+                    )
+                );
             }
         }
 
-        public override byte[] ProcessAndDigest(object input, SignatureResourcePool resourcePool, string digestAlgorithm, DictionaryManager dictionaryManager)
+        public override byte[] ProcessAndDigest(
+            object input,
+            SignatureResourcePool resourcePool,
+            string digestAlgorithm,
+            DictionaryManager dictionaryManager
+        )
         {
             HashAlgorithm hash = resourcePool.TakeHashAlgorithm(digestAlgorithm);
             ProcessAndDigest(input, resourcePool, hash, dictionaryManager);
             return hash.Hash;
         }
 
-        public void ProcessAndDigest(object input, SignatureResourcePool resourcePool, HashAlgorithm hash, DictionaryManager dictionaryManger)
+        public void ProcessAndDigest(
+            object input,
+            SignatureResourcePool resourcePool,
+            HashAlgorithm hash,
+            DictionaryManager dictionaryManger
+        )
         {
             HashStream hashStream = resourcePool.TakeHashStream(hash);
 
@@ -115,25 +124,41 @@ namespace System.IdentityModel
             else if (input is ISecurityElement)
             {
                 XmlDictionaryWriter utf8Writer = resourcePool.TakeUtf8Writer();
-                utf8Writer.StartCanonicalization(hashStream, this.IncludeComments, GetInclusivePrefixes());
+                utf8Writer.StartCanonicalization(
+                    hashStream,
+                    this.IncludeComments,
+                    GetInclusivePrefixes()
+                );
                 (input as ISecurityElement).WriteTo(utf8Writer, dictionaryManger);
                 utf8Writer.EndCanonicalization();
             }
             else
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new NotSupportedException(SR.GetString(SR.UnsupportedInputTypeForTransform, input.GetType())));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new NotSupportedException(
+                        SR.GetString(SR.UnsupportedInputTypeForTransform, input.GetType())
+                    )
+                );
             }
 
             hashStream.FlushHash();
         }
 
-        void ProcessReaderInput(XmlReader reader, SignatureResourcePool resourcePool, HashStream hashStream)
+        void ProcessReaderInput(
+            XmlReader reader,
+            SignatureResourcePool resourcePool,
+            HashStream hashStream
+        )
         {
             reader.MoveToContent();
             XmlDictionaryReader dictionaryReader = reader as XmlDictionaryReader;
             if (dictionaryReader != null && dictionaryReader.CanCanonicalize)
             {
-                dictionaryReader.StartCanonicalization(hashStream, this.IncludeComments, GetInclusivePrefixes());
+                dictionaryReader.StartCanonicalization(
+                    hashStream,
+                    this.IncludeComments,
+                    GetInclusivePrefixes()
+                );
                 dictionaryReader.Skip();
                 dictionaryReader.EndCanonicalization();
             }
@@ -145,15 +170,27 @@ namespace System.IdentityModel
             }
         }
 
-        public override void ReadFrom(XmlDictionaryReader reader, DictionaryManager dictionaryManager, bool preserveComments)
+        public override void ReadFrom(
+            XmlDictionaryReader reader,
+            DictionaryManager dictionaryManager,
+            bool preserveComments
+        )
         {
-            reader.MoveToStartElement(dictionaryManager.XmlSignatureDictionary.Transform, dictionaryManager.XmlSignatureDictionary.Namespace);
+            reader.MoveToStartElement(
+                dictionaryManager.XmlSignatureDictionary.Transform,
+                dictionaryManager.XmlSignatureDictionary.Namespace
+            );
             this.prefix = reader.Prefix;
             bool isEmptyElement = reader.IsEmptyElement;
-            string algorithm = reader.GetAttribute(dictionaryManager.XmlSignatureDictionary.Algorithm, null);
+            string algorithm = reader.GetAttribute(
+                dictionaryManager.XmlSignatureDictionary.Algorithm,
+                null
+            );
             if (algorithm != this.Algorithm)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new CryptographicException(SR.GetString(SR.AlgorithmMismatchForTransform)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new CryptographicException(SR.GetString(SR.AlgorithmMismatchForTransform))
+                );
             }
 
             reader.MoveToContent();
@@ -161,7 +198,12 @@ namespace System.IdentityModel
 
             if (!isEmptyElement)
             {
-                if (reader.IsStartElement(XmlSignatureStrings.TransformationParameters, XmlSignatureStrings.SecurityJan2004Namespace))
+                if (
+                    reader.IsStartElement(
+                        XmlSignatureStrings.TransformationParameters,
+                        XmlSignatureStrings.SecurityJan2004Namespace
+                    )
+                )
                 {
                     this.transformationParameters.ReadFrom(reader, dictionaryManager);
                 }
@@ -171,9 +213,16 @@ namespace System.IdentityModel
             }
         }
 
-        public override void WriteTo(XmlDictionaryWriter writer, DictionaryManager dictionaryManager)
+        public override void WriteTo(
+            XmlDictionaryWriter writer,
+            DictionaryManager dictionaryManager
+        )
         {
-            writer.WriteStartElement(prefix, dictionaryManager.XmlSignatureDictionary.Transform, dictionaryManager.XmlSignatureDictionary.Namespace);
+            writer.WriteStartElement(
+                prefix,
+                dictionaryManager.XmlSignatureDictionary.Transform,
+                dictionaryManager.XmlSignatureDictionary.Namespace
+            );
             writer.WriteStartAttribute(dictionaryManager.XmlSignatureDictionary.Algorithm, null);
             writer.WriteString(this.Algorithm);
             writer.WriteEndAttribute();
@@ -220,9 +269,7 @@ namespace System.IdentityModel
 
     class TranformationParameters
     {
-        public TranformationParameters()
-        {
-        }
+        public TranformationParameters() { }
 
         public string CanonicalizationAlgorithm
         {
@@ -232,16 +279,26 @@ namespace System.IdentityModel
         public void ReadFrom(XmlDictionaryReader reader, DictionaryManager dictionaryManager)
         {
             reader.MoveToContent();
-            reader.MoveToStartElement(XmlSignatureStrings.TransformationParameters, XmlSignatureStrings.SecurityJan2004Namespace);
+            reader.MoveToStartElement(
+                XmlSignatureStrings.TransformationParameters,
+                XmlSignatureStrings.SecurityJan2004Namespace
+            );
             string prefix = reader.Prefix;
 
             bool skipReadingTransformEnd = reader.IsEmptyElement;
             reader.ReadStartElement();
 
-            if (reader.IsStartElement(dictionaryManager.XmlSignatureDictionary.CanonicalizationMethod, dictionaryManager.XmlSignatureDictionary.Namespace))
+            if (
+                reader.IsStartElement(
+                    dictionaryManager.XmlSignatureDictionary.CanonicalizationMethod,
+                    dictionaryManager.XmlSignatureDictionary.Namespace
+                )
+            )
             {
-
-                string algorithm = reader.GetAttribute(dictionaryManager.XmlSignatureDictionary.Algorithm, null);
+                string algorithm = reader.GetAttribute(
+                    dictionaryManager.XmlSignatureDictionary.Algorithm,
+                    null
+                );
                 // Canonicalization Method can be empty.
                 // <elementNOTempty></elementNOTempty>
                 // <elementEmpty/>
@@ -251,15 +308,23 @@ namespace System.IdentityModel
 
                 if (algorithm == null)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new CryptographicException(
-                        SR.GetString(SR.RequiredAttributeMissing, dictionaryManager.XmlSignatureDictionary.Algorithm, dictionaryManager.XmlSignatureDictionary.CanonicalizationMethod)));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new CryptographicException(
+                            SR.GetString(
+                                SR.RequiredAttributeMissing,
+                                dictionaryManager.XmlSignatureDictionary.Algorithm,
+                                dictionaryManager.XmlSignatureDictionary.CanonicalizationMethod
+                            )
+                        )
+                    );
                 }
 
                 if (algorithm != this.CanonicalizationAlgorithm)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new CryptographicException(SR.GetString(SR.AlgorithmMismatchForTransform)));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new CryptographicException(SR.GetString(SR.AlgorithmMismatchForTransform))
+                    );
                 }
-
 
                 // ReadEndElement() called only if element was not empty
                 if (!skipReadingC14End)
@@ -279,14 +344,21 @@ namespace System.IdentityModel
 
         public void WriteTo(XmlDictionaryWriter writer, DictionaryManager dictionaryManager)
         {
-            writer.WriteStartElement(XmlSignatureStrings.SecurityJan2004Prefix, XmlSignatureStrings.TransformationParameters, XmlSignatureStrings.SecurityJan2004Namespace);  //<wsse:TransformationParameters>
-            writer.WriteStartElement(dictionaryManager.XmlSignatureDictionary.Prefix.Value, dictionaryManager.XmlSignatureDictionary.CanonicalizationMethod, dictionaryManager.XmlSignatureDictionary.Namespace);
+            writer.WriteStartElement(
+                XmlSignatureStrings.SecurityJan2004Prefix,
+                XmlSignatureStrings.TransformationParameters,
+                XmlSignatureStrings.SecurityJan2004Namespace
+            ); //<wsse:TransformationParameters>
+            writer.WriteStartElement(
+                dictionaryManager.XmlSignatureDictionary.Prefix.Value,
+                dictionaryManager.XmlSignatureDictionary.CanonicalizationMethod,
+                dictionaryManager.XmlSignatureDictionary.Namespace
+            );
             writer.WriteStartAttribute(dictionaryManager.XmlSignatureDictionary.Algorithm, null);
             writer.WriteString(dictionaryManager.SecurityAlgorithmDictionary.ExclusiveC14n);
             writer.WriteEndAttribute();
-            writer.WriteEndElement(); // CanonicalizationMethod 
+            writer.WriteEndElement(); // CanonicalizationMethod
             writer.WriteEndElement(); // TransformationParameters
         }
     }
-
 }

@@ -29,7 +29,6 @@ namespace System.Xml.Xsl.IlGen
         Any,
     };
 
-
     /// <summary>
     /// 1. Some expressions are lazily materialized by creating an iterator over the results (ex. LiteralString, Content).
     /// 2. Some expressions are incrementally constructed by a Writer (ex. ElementCtor, XsltCopy).
@@ -37,12 +36,11 @@ namespace System.Xml.Xsl.IlGen
     /// </summary>
     internal enum XmlILConstructMethod
     {
-        Iterator,               // Construct iterator over expression's results
-        Writer,                 // Construct expression through calls to Writer
-        WriterThenIterator,     // Construct expression through calls to caching Writer; then construct iterator over cached results
-        IteratorThenWriter,     // Iterate over expression's results and send each item to Writer
+        Iterator, // Construct iterator over expression's results
+        Writer, // Construct expression through calls to Writer
+        WriterThenIterator, // Construct expression through calls to caching Writer; then construct iterator over cached results
+        IteratorThenWriter, // Iterate over expression's results and send each item to Writer
     };
-
 
     /// <summary>
     /// Every node is annotated with information about how it will be constructed by ILGen.
@@ -50,8 +48,15 @@ namespace System.Xml.Xsl.IlGen
     internal sealed class XmlILConstructInfo : IQilAnnotation
     {
         private readonly QilNodeType _nodeType;
-        private PossibleXmlStates _xstatesInitial, _xstatesFinal, _xstatesBeginLoop, _xstatesEndLoop;
-        private bool _isNmspInScope, _mightHaveNmsp, _mightHaveAttrs, _mightHaveDupAttrs, _mightHaveNmspAfterAttrs;
+        private PossibleXmlStates _xstatesInitial,
+            _xstatesFinal,
+            _xstatesBeginLoop,
+            _xstatesEndLoop;
+        private bool _isNmspInScope,
+            _mightHaveNmsp,
+            _mightHaveAttrs,
+            _mightHaveDupAttrs,
+            _mightHaveNmspAfterAttrs;
         private XmlILConstructMethod _constrMeth;
         private XmlILConstructInfo? _parentInfo;
         private ArrayList? _callersInfo;
@@ -189,7 +194,11 @@ namespace System.Xml.Xsl.IlGen
         /// </summary>
         public bool PushToWriterFirst
         {
-            get { return _constrMeth == XmlILConstructMethod.Writer || _constrMeth == XmlILConstructMethod.WriterThenIterator; }
+            get
+            {
+                return _constrMeth == XmlILConstructMethod.Writer
+                    || _constrMeth == XmlILConstructMethod.WriterThenIterator;
+            }
             set
             {
                 Debug.Assert(!_isReadOnly, "This XmlILConstructInfo instance is read-only.");
@@ -213,7 +222,11 @@ namespace System.Xml.Xsl.IlGen
         /// </summary>
         public bool PushToWriterLast
         {
-            get { return _constrMeth == XmlILConstructMethod.Writer || _constrMeth == XmlILConstructMethod.IteratorThenWriter; }
+            get
+            {
+                return _constrMeth == XmlILConstructMethod.Writer
+                    || _constrMeth == XmlILConstructMethod.IteratorThenWriter;
+            }
             set
             {
                 Debug.Assert(!_isReadOnly, "This XmlILConstructInfo instance is read-only.");
@@ -237,7 +250,11 @@ namespace System.Xml.Xsl.IlGen
         /// </summary>
         public bool PullFromIteratorFirst
         {
-            get { return _constrMeth == XmlILConstructMethod.IteratorThenWriter || _constrMeth == XmlILConstructMethod.Iterator; }
+            get
+            {
+                return _constrMeth == XmlILConstructMethod.IteratorThenWriter
+                    || _constrMeth == XmlILConstructMethod.Iterator;
+            }
             set
             {
                 Debug.Assert(!_isReadOnly, "This XmlILConstructInfo instance is read-only.");
@@ -406,7 +423,6 @@ namespace System.Xml.Xsl.IlGen
         }
     }
 
-
     /// <summary>
     /// Scans the content of an constructor and tries to minimize the number of well-formed checks that will have
     /// to be made at runtime when constructing content.
@@ -473,7 +489,8 @@ namespace System.Xml.Xsl.IlGen
                 {
                     // Build a standalone tree, with this constructor as its root
                     if (ndConstr.NodeType != QilNodeType.Choice)
-                        this.parentInfo.InitialStates = this.parentInfo.FinalStates = PossibleXmlStates.WithinSequence;
+                        this.parentInfo.InitialStates = this.parentInfo.FinalStates =
+                            PossibleXmlStates.WithinSequence;
 
                     // Don't stream Rtf; fully cache the Rtf and copy it into any containing tree in order to simplify XmlILVisitor.VisitRtfCtor
                     if (ndConstr.NodeType != QilNodeType.RtfCtor)
@@ -485,20 +502,48 @@ namespace System.Xml.Xsl.IlGen
 
                 switch (ndConstr.NodeType)
                 {
-                    case QilNodeType.DocumentCtor: this.xstates = PossibleXmlStates.WithinContent; break;
-                    case QilNodeType.ElementCtor: this.xstates = PossibleXmlStates.EnumAttrs; break;
-                    case QilNodeType.AttributeCtor: this.xstates = PossibleXmlStates.WithinAttr; break;
-                    case QilNodeType.NamespaceDecl: Debug.Assert(ndContent == null); break;
-                    case QilNodeType.TextCtor: Debug.Assert(ndContent == null); break;
-                    case QilNodeType.RawTextCtor: Debug.Assert(ndContent == null); break;
-                    case QilNodeType.CommentCtor: this.xstates = PossibleXmlStates.WithinComment; break;
-                    case QilNodeType.PICtor: this.xstates = PossibleXmlStates.WithinPI; break;
-                    case QilNodeType.XsltCopy: this.xstates = PossibleXmlStates.Any; break;
-                    case QilNodeType.XsltCopyOf: Debug.Assert(ndContent == null); break;
-                    case QilNodeType.Function: this.xstates = this.parentInfo.InitialStates; break;
-                    case QilNodeType.RtfCtor: this.xstates = PossibleXmlStates.WithinContent; break;
-                    case QilNodeType.Choice: this.xstates = PossibleXmlStates.Any; break;
-                    default: Debug.Fail($"{ndConstr.NodeType} is not handled by XmlILStateAnalyzer."); break;
+                    case QilNodeType.DocumentCtor:
+                        this.xstates = PossibleXmlStates.WithinContent;
+                        break;
+                    case QilNodeType.ElementCtor:
+                        this.xstates = PossibleXmlStates.EnumAttrs;
+                        break;
+                    case QilNodeType.AttributeCtor:
+                        this.xstates = PossibleXmlStates.WithinAttr;
+                        break;
+                    case QilNodeType.NamespaceDecl:
+                        Debug.Assert(ndContent == null);
+                        break;
+                    case QilNodeType.TextCtor:
+                        Debug.Assert(ndContent == null);
+                        break;
+                    case QilNodeType.RawTextCtor:
+                        Debug.Assert(ndContent == null);
+                        break;
+                    case QilNodeType.CommentCtor:
+                        this.xstates = PossibleXmlStates.WithinComment;
+                        break;
+                    case QilNodeType.PICtor:
+                        this.xstates = PossibleXmlStates.WithinPI;
+                        break;
+                    case QilNodeType.XsltCopy:
+                        this.xstates = PossibleXmlStates.Any;
+                        break;
+                    case QilNodeType.XsltCopyOf:
+                        Debug.Assert(ndContent == null);
+                        break;
+                    case QilNodeType.Function:
+                        this.xstates = this.parentInfo.InitialStates;
+                        break;
+                    case QilNodeType.RtfCtor:
+                        this.xstates = PossibleXmlStates.WithinContent;
+                        break;
+                    case QilNodeType.Choice:
+                        this.xstates = PossibleXmlStates.Any;
+                        break;
+                    default:
+                        Debug.Fail($"{ndConstr.NodeType} is not handled by XmlILStateAnalyzer.");
+                        break;
                 }
 
                 if (ndContent != null)
@@ -549,10 +594,18 @@ namespace System.Xml.Xsl.IlGen
 
             switch (nd.NodeType)
             {
-                case QilNodeType.Loop: AnalyzeLoop((nd as QilLoop)!, info); break;
-                case QilNodeType.Sequence: AnalyzeSequence((nd as QilList)!, info); break;
-                case QilNodeType.Conditional: AnalyzeConditional((nd as QilTernary)!, info); break;
-                case QilNodeType.Choice: AnalyzeChoice((nd as QilChoice)!, info); break;
+                case QilNodeType.Loop:
+                    AnalyzeLoop((nd as QilLoop)!, info);
+                    break;
+                case QilNodeType.Sequence:
+                    AnalyzeSequence((nd as QilList)!, info);
+                    break;
+                case QilNodeType.Conditional:
+                    AnalyzeConditional((nd as QilTernary)!, info);
+                    break;
+                case QilNodeType.Choice:
+                    AnalyzeChoice((nd as QilChoice)!, info);
+                    break;
 
                 case QilNodeType.Error:
                 case QilNodeType.Warning:
@@ -763,7 +816,8 @@ namespace System.Xml.Xsl.IlGen
         /// </summary>
         private static bool MaybeAttrNmsp(XmlQueryType typ)
         {
-            return (typ.NodeKinds & (XmlNodeKindFlags.Attribute | XmlNodeKindFlags.Namespace)) != XmlNodeKindFlags.None;
+            return (typ.NodeKinds & (XmlNodeKindFlags.Attribute | XmlNodeKindFlags.Namespace))
+                != XmlNodeKindFlags.None;
         }
 
         /// <summary>
@@ -771,10 +825,11 @@ namespace System.Xml.Xsl.IlGen
         /// </summary>
         private static bool MaybeContent(XmlQueryType typ)
         {
-            return !typ.IsNode || (typ.NodeKinds & ~(XmlNodeKindFlags.Attribute | XmlNodeKindFlags.Namespace)) != XmlNodeKindFlags.None;
+            return !typ.IsNode
+                || (typ.NodeKinds & ~(XmlNodeKindFlags.Attribute | XmlNodeKindFlags.Namespace))
+                    != XmlNodeKindFlags.None;
         }
     }
-
 
     /// <summary>
     /// Scans the content of an ElementCtor and tries to minimize the number of well-formed checks that will have
@@ -788,9 +843,8 @@ namespace System.Xml.Xsl.IlGen
         /// <summary>
         /// Constructor.
         /// </summary>
-        public XmlILElementAnalyzer(QilFactory fac) : base(fac)
-        {
-        }
+        public XmlILElementAnalyzer(QilFactory fac)
+            : base(fac) { }
 
         /// <summary>
         /// Analyze the content argument of the ElementCtor.  Try to eliminate as many runtime checks as possible,
@@ -865,13 +919,19 @@ namespace System.Xml.Xsl.IlGen
                 // Check to see whether this attribute is a duplicate of a previous attribute
                 if (!this.parentInfo.MightHaveDuplicateAttributes)
                 {
-                    qname = new XmlQualifiedName(_attrNames.Add(ndName.LocalName), _attrNames.Add(ndName.NamespaceUri));
+                    qname = new XmlQualifiedName(
+                        _attrNames.Add(ndName.LocalName),
+                        _attrNames.Add(ndName.NamespaceUri)
+                    );
 
                     for (idx = 0; idx < _dupAttrs.Count; idx++)
                     {
                         XmlQualifiedName qnameDup = (XmlQualifiedName)_dupAttrs[idx]!;
 
-                        if ((object)qnameDup.Name == (object)qname.Name && (object)qnameDup.Namespace == (object)qname.Namespace)
+                        if (
+                            (object)qnameDup.Name == (object)qname.Name
+                            && (object)qnameDup.Namespace == (object)qname.Namespace
+                        )
                         {
                             // A duplicate attribute has been encountered
                             this.parentInfo.MightHaveDuplicateAttributes = true;
@@ -927,7 +987,6 @@ namespace System.Xml.Xsl.IlGen
             }
         }
     }
-
 
     /// <summary>
     /// Scans constructed content, looking for redundant namespace declarations.  If any are found, then they are marked
@@ -1035,8 +1094,10 @@ namespace System.Xml.Xsl.IlGen
         private bool CheckNamespaceInScope(QilBinary nd)
         {
             QilName? ndName;
-            string prefix, ns;
-            string? prefixExisting, nsExisting;
+            string prefix,
+                ns;
+            string? prefixExisting,
+                nsExisting;
             XPathNodeType nodeType;
 
             switch (nd.NodeType)
@@ -1048,7 +1109,10 @@ namespace System.Xml.Xsl.IlGen
                     {
                         prefix = ndName.Prefix;
                         ns = ndName.NamespaceUri;
-                        nodeType = (nd.NodeType == QilNodeType.ElementCtor) ? XPathNodeType.Element : XPathNodeType.Attribute;
+                        nodeType =
+                            (nd.NodeType == QilNodeType.ElementCtor)
+                                ? XPathNodeType.Element
+                                : XPathNodeType.Attribute;
                         break;
                     }
 
@@ -1064,15 +1128,25 @@ namespace System.Xml.Xsl.IlGen
             }
 
             // Attribute with null namespace and xmlns:xml are always in-scope
-            if (nd.NodeType == QilNodeType.AttributeCtor && ns.Length == 0 ||
-                prefix == "xml" && ns == XmlReservedNs.NsXml)
+            if (
+                nd.NodeType == QilNodeType.AttributeCtor && ns.Length == 0
+                || prefix == "xml" && ns == XmlReservedNs.NsXml
+            )
             {
                 XmlILConstructInfo.Write(nd).IsNamespaceInScope = true;
                 return true;
             }
 
             // Don't process names that are invalid
-            if (!ValidateNames.ValidateName(prefix, string.Empty, ns, nodeType, ValidateNames.Flags.CheckPrefixMapping))
+            if (
+                !ValidateNames.ValidateName(
+                    prefix,
+                    string.Empty,
+                    ns,
+                    nodeType,
+                    ValidateNames.Flags.CheckPrefixMapping
+                )
+            )
                 return false;
 
             // Atomize names
@@ -1092,8 +1166,12 @@ namespace System.Xml.Xsl.IlGen
                         XmlILConstructInfo.Write(nd).IsNamespaceInScope = true;
 
                     // Else quit searching, because any further matching prefixes will be hidden (not in-scope)
-                    Debug.Assert(nd.NodeType != QilNodeType.NamespaceDecl || !_nsmgr.HasNamespace(prefix) || _nsmgr.LookupNamespace(prefix) == ns,
-                        "Compilers must ensure that namespace declarations do not conflict with the namespace used by the element constructor.");
+                    Debug.Assert(
+                        nd.NodeType != QilNodeType.NamespaceDecl
+                            || !_nsmgr.HasNamespace(prefix)
+                            || _nsmgr.LookupNamespace(prefix) == ns,
+                        "Compilers must ensure that namespace declarations do not conflict with the namespace used by the element constructor."
+                    );
                     break;
                 }
             }

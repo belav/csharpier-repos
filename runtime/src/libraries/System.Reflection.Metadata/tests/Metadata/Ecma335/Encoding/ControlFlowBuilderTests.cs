@@ -50,37 +50,56 @@ namespace System.Reflection.Metadata.Ecma335.Tests
             builder.WriteByte(0xff);
             flow.SerializeExceptionTable(builder);
 
-            AssertEx.Equal(new byte[]
-            {
-                0xFF, 0x00, 0x00, 0x00,    // padding
-                0x01,                      // flag
-                (byte)(builder.Count - 4), // size
-                0x00, 0x00,                // reserved
-
-                0x04, 0x00,                // kind
-                0x00, 0x00,                // try offset
-                0x01,                      // try length
-                0x03, 0x00,                // handler offset
-                0x03,                      // handler length
-
-                0x00, 0x00, 0x00, 0x00,    // catch type or filter offset
-
-                0x02, 0x00,                // kind
-                0x00, 0x00,                // try offset
-                0x01,                      // try length
-                0x03, 0x00,                // handler offset
-                0x03,                      // handler length
-
-                0x00, 0x00, 0x00, 0x00,    // catch type or filter offset
-
-                0x01, 0x00,                // kind
-                0x00, 0x00,                // try offset
-                0x01,                      // try length
-                0x03, 0x00,                // handler offset
-                0x03,                      // handler length
-
-                0x0A, 0x00, 0x00, 0x00     // catch type or filter offset
-            }, builder.ToArray());
+            AssertEx.Equal(
+                new byte[]
+                {
+                    0xFF,
+                    0x00,
+                    0x00,
+                    0x00, // padding
+                    0x01, // flag
+                    (byte)(builder.Count - 4), // size
+                    0x00,
+                    0x00, // reserved
+                    0x04,
+                    0x00, // kind
+                    0x00,
+                    0x00, // try offset
+                    0x01, // try length
+                    0x03,
+                    0x00, // handler offset
+                    0x03, // handler length
+                    0x00,
+                    0x00,
+                    0x00,
+                    0x00, // catch type or filter offset
+                    0x02,
+                    0x00, // kind
+                    0x00,
+                    0x00, // try offset
+                    0x01, // try length
+                    0x03,
+                    0x00, // handler offset
+                    0x03, // handler length
+                    0x00,
+                    0x00,
+                    0x00,
+                    0x00, // catch type or filter offset
+                    0x01,
+                    0x00, // kind
+                    0x00,
+                    0x00, // try offset
+                    0x01, // try length
+                    0x03,
+                    0x00, // handler offset
+                    0x03, // handler length
+                    0x0A,
+                    0x00,
+                    0x00,
+                    0x00, // catch type or filter offset
+                },
+                builder.ToArray()
+            );
         }
 
         [Fact]
@@ -124,36 +143,52 @@ namespace System.Reflection.Metadata.Ecma335.Tests
             var builder = new BlobBuilder();
             flow.SerializeExceptionTable(builder);
 
-            AssertEx.Equal(new byte[]
-            {
-                0x01,                      // flag
-                (byte)builder.Count,       // size
-                0x00, 0x00,                // reserved
-
-                0x00, 0x00,                // kind
-                0x00, 0x00,                // try offset
-                0x01,                      // try length
-                0x03, 0x00,                // handler offset
-                0x03,                      // handler length
-
-                0x01, 0x00, 0x00, 0x02,    // catch type or filter offset
-
-                0x00, 0x00,                // kind
-                0x00, 0x00,                // try offset
-                0x01,                      // try length
-                0x03, 0x00,                // handler offset
-                0x03,                      // handler length
-
-                0x02, 0x00, 0x00, 0x1B,    // catch type or filter offset
-
-                0x00, 0x00,                // kind
-                0x00, 0x00,                // try offset
-                0x01,                      // try length
-                0x03, 0x00,                // handler offset
-                0x03,                      // handler length
-
-                0x03, 0x00, 0x00, 0x01,    // catch type or filter offset
-            }, builder.ToArray());
+            AssertEx.Equal(
+                new byte[]
+                {
+                    0x01, // flag
+                    (byte)builder.Count, // size
+                    0x00,
+                    0x00, // reserved
+                    0x00,
+                    0x00, // kind
+                    0x00,
+                    0x00, // try offset
+                    0x01, // try length
+                    0x03,
+                    0x00, // handler offset
+                    0x03, // handler length
+                    0x01,
+                    0x00,
+                    0x00,
+                    0x02, // catch type or filter offset
+                    0x00,
+                    0x00, // kind
+                    0x00,
+                    0x00, // try offset
+                    0x01, // try length
+                    0x03,
+                    0x00, // handler offset
+                    0x03, // handler length
+                    0x02,
+                    0x00,
+                    0x00,
+                    0x1B, // catch type or filter offset
+                    0x00,
+                    0x00, // kind
+                    0x00,
+                    0x00, // try offset
+                    0x01, // try length
+                    0x03,
+                    0x00, // handler offset
+                    0x03, // handler length
+                    0x03,
+                    0x00,
+                    0x00,
+                    0x01, // catch type or filter offset
+                },
+                builder.ToArray()
+            );
         }
 
         [Fact]
@@ -188,18 +223,68 @@ namespace System.Reflection.Metadata.Ecma335.Tests
             il.OpCode(ILOpCode.Nop);
             il.MarkLabel(l5);
 
-            AssertExtensions.Throws<ArgumentException>("catchType", () => flow.AddCatchRegion(l1, l2, l3, l4, default(TypeDefinitionHandle)));
-            AssertExtensions.Throws<ArgumentException>("catchType", () => flow.AddCatchRegion(l1, l2, l3, l4, MetadataTokens.MethodDefinitionHandle(1)));
+            AssertExtensions.Throws<ArgumentException>(
+                "catchType",
+                () => flow.AddCatchRegion(l1, l2, l3, l4, default(TypeDefinitionHandle))
+            );
+            AssertExtensions.Throws<ArgumentException>(
+                "catchType",
+                () => flow.AddCatchRegion(l1, l2, l3, l4, MetadataTokens.MethodDefinitionHandle(1))
+            );
 
-            Assert.Throws<ArgumentNullException>(() => flow.AddCatchRegion(default(LabelHandle), l2, l3, l4, MetadataTokens.TypeReferenceHandle(1)));
-            Assert.Throws<ArgumentNullException>(() => flow.AddCatchRegion(l1, default(LabelHandle), l3, l4, MetadataTokens.TypeReferenceHandle(1)));
-            Assert.Throws<ArgumentNullException>(() => flow.AddCatchRegion(l1, l2, default(LabelHandle), l4, MetadataTokens.TypeReferenceHandle(1)));
-            Assert.Throws<ArgumentNullException>(() => flow.AddCatchRegion(l1, l2, l3, default(LabelHandle), MetadataTokens.TypeReferenceHandle(1)));
+            Assert.Throws<ArgumentNullException>(() =>
+                flow.AddCatchRegion(
+                    default(LabelHandle),
+                    l2,
+                    l3,
+                    l4,
+                    MetadataTokens.TypeReferenceHandle(1)
+                )
+            );
+            Assert.Throws<ArgumentNullException>(() =>
+                flow.AddCatchRegion(
+                    l1,
+                    default(LabelHandle),
+                    l3,
+                    l4,
+                    MetadataTokens.TypeReferenceHandle(1)
+                )
+            );
+            Assert.Throws<ArgumentNullException>(() =>
+                flow.AddCatchRegion(
+                    l1,
+                    l2,
+                    default(LabelHandle),
+                    l4,
+                    MetadataTokens.TypeReferenceHandle(1)
+                )
+            );
+            Assert.Throws<ArgumentNullException>(() =>
+                flow.AddCatchRegion(
+                    l1,
+                    l2,
+                    l3,
+                    default(LabelHandle),
+                    MetadataTokens.TypeReferenceHandle(1)
+                )
+            );
 
-            AssertExtensions.Throws<ArgumentException>("tryStart", () => flow.AddCatchRegion(lx, l2, l3, l4, MetadataTokens.TypeReferenceHandle(1)));
-            AssertExtensions.Throws<ArgumentException>("tryEnd", () => flow.AddCatchRegion(l1, lx, l3, l4, MetadataTokens.TypeReferenceHandle(1)));
-            AssertExtensions.Throws<ArgumentException>("handlerStart", () => flow.AddCatchRegion(l1, l2, lx, l4, MetadataTokens.TypeReferenceHandle(1)));
-            AssertExtensions.Throws<ArgumentException>("handlerEnd", () => flow.AddCatchRegion(l1, l2, l3, lx, MetadataTokens.TypeReferenceHandle(1)));
+            AssertExtensions.Throws<ArgumentException>(
+                "tryStart",
+                () => flow.AddCatchRegion(lx, l2, l3, l4, MetadataTokens.TypeReferenceHandle(1))
+            );
+            AssertExtensions.Throws<ArgumentException>(
+                "tryEnd",
+                () => flow.AddCatchRegion(l1, lx, l3, l4, MetadataTokens.TypeReferenceHandle(1))
+            );
+            AssertExtensions.Throws<ArgumentException>(
+                "handlerStart",
+                () => flow.AddCatchRegion(l1, l2, lx, l4, MetadataTokens.TypeReferenceHandle(1))
+            );
+            AssertExtensions.Throws<ArgumentException>(
+                "handlerEnd",
+                () => flow.AddCatchRegion(l1, l2, l3, lx, MetadataTokens.TypeReferenceHandle(1))
+            );
         }
 
         [Fact]
@@ -301,13 +386,21 @@ namespace System.Reflection.Metadata.Ecma335.Tests
             var builder = new BlobBuilder();
             var encoder = new MethodBodyStreamEncoder(builder).AddMethodBody(il);
 
-            AssertEx.Equal(new byte[]
-            {
-                0x22, // header
-                (byte)ILOpCode.Br_s, 0x05,
-                (byte)ILOpCode.Call, 0x01, 0x00, 0x00, 0x06,
-                (byte)ILOpCode.Ret
-            }, builder.ToArray());
+            AssertEx.Equal(
+                new byte[]
+                {
+                    0x22, // header
+                    (byte)ILOpCode.Br_s,
+                    0x05,
+                    (byte)ILOpCode.Call,
+                    0x01,
+                    0x00,
+                    0x00,
+                    0x06,
+                    (byte)ILOpCode.Ret,
+                },
+                builder.ToArray()
+            );
         }
 
         [Fact]
@@ -328,13 +421,24 @@ namespace System.Reflection.Metadata.Ecma335.Tests
             var builder = new BlobBuilder();
             new MethodBodyStreamEncoder(builder).AddMethodBody(il);
 
-            AssertEx.Equal(new byte[]
-            {
-                0x2E, // header
-                (byte)ILOpCode.Br, 0x05, 0x00, 0x00, 0x00,
-                (byte)ILOpCode.Call, 0x01, 0x00, 0x00, 0x06,
-                (byte)ILOpCode.Ret
-            }, builder.ToArray());
+            AssertEx.Equal(
+                new byte[]
+                {
+                    0x2E, // header
+                    (byte)ILOpCode.Br,
+                    0x05,
+                    0x00,
+                    0x00,
+                    0x00,
+                    (byte)ILOpCode.Call,
+                    0x01,
+                    0x00,
+                    0x00,
+                    0x06,
+                    (byte)ILOpCode.Ret,
+                },
+                builder.ToArray()
+            );
         }
 
         [Fact]
@@ -348,7 +452,7 @@ namespace System.Reflection.Metadata.Ecma335.Tests
 
             il.Branch(ILOpCode.Br, l1);
 
-            for (int i = 0; i < 256/5 + 1; i++)
+            for (int i = 0; i < 256 / 5 + 1; i++)
             {
                 il.Call(MetadataTokens.MethodDefinitionHandle(1));
             }
@@ -359,64 +463,290 @@ namespace System.Reflection.Metadata.Ecma335.Tests
             var builder = new BlobBuilder();
             var encoder = new MethodBodyStreamEncoder(builder).AddMethodBody(il);
 
-            AssertEx.Equal(new byte[]
-            {
-                0x13, 0x30, 0x08, 0x00, 0x0A, 0x01, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, // header
-                (byte)ILOpCode.Br, 0x04, 0x01, 0x00, 0x00,
-                (byte)ILOpCode.Call, 0x01, 0x00, 0x00, 0x06,
-                (byte)ILOpCode.Call, 0x01, 0x00, 0x00, 0x06,
-                (byte)ILOpCode.Call, 0x01, 0x00, 0x00, 0x06,
-                (byte)ILOpCode.Call, 0x01, 0x00, 0x00, 0x06,
-                (byte)ILOpCode.Call, 0x01, 0x00, 0x00, 0x06,
-                (byte)ILOpCode.Call, 0x01, 0x00, 0x00, 0x06,
-                (byte)ILOpCode.Call, 0x01, 0x00, 0x00, 0x06,
-                (byte)ILOpCode.Call, 0x01, 0x00, 0x00, 0x06,
-                (byte)ILOpCode.Call, 0x01, 0x00, 0x00, 0x06,
-                (byte)ILOpCode.Call, 0x01, 0x00, 0x00, 0x06,
-                (byte)ILOpCode.Call, 0x01, 0x00, 0x00, 0x06,
-                (byte)ILOpCode.Call, 0x01, 0x00, 0x00, 0x06,
-                (byte)ILOpCode.Call, 0x01, 0x00, 0x00, 0x06,
-                (byte)ILOpCode.Call, 0x01, 0x00, 0x00, 0x06,
-                (byte)ILOpCode.Call, 0x01, 0x00, 0x00, 0x06,
-                (byte)ILOpCode.Call, 0x01, 0x00, 0x00, 0x06,
-                (byte)ILOpCode.Call, 0x01, 0x00, 0x00, 0x06,
-                (byte)ILOpCode.Call, 0x01, 0x00, 0x00, 0x06,
-                (byte)ILOpCode.Call, 0x01, 0x00, 0x00, 0x06,
-                (byte)ILOpCode.Call, 0x01, 0x00, 0x00, 0x06,
-                (byte)ILOpCode.Call, 0x01, 0x00, 0x00, 0x06,
-                (byte)ILOpCode.Call, 0x01, 0x00, 0x00, 0x06,
-                (byte)ILOpCode.Call, 0x01, 0x00, 0x00, 0x06,
-                (byte)ILOpCode.Call, 0x01, 0x00, 0x00, 0x06,
-                (byte)ILOpCode.Call, 0x01, 0x00, 0x00, 0x06,
-                (byte)ILOpCode.Call, 0x01, 0x00, 0x00, 0x06,
-                (byte)ILOpCode.Call, 0x01, 0x00, 0x00, 0x06,
-                (byte)ILOpCode.Call, 0x01, 0x00, 0x00, 0x06,
-                (byte)ILOpCode.Call, 0x01, 0x00, 0x00, 0x06,
-                (byte)ILOpCode.Call, 0x01, 0x00, 0x00, 0x06,
-                (byte)ILOpCode.Call, 0x01, 0x00, 0x00, 0x06,
-                (byte)ILOpCode.Call, 0x01, 0x00, 0x00, 0x06,
-                (byte)ILOpCode.Call, 0x01, 0x00, 0x00, 0x06,
-                (byte)ILOpCode.Call, 0x01, 0x00, 0x00, 0x06,
-                (byte)ILOpCode.Call, 0x01, 0x00, 0x00, 0x06,
-                (byte)ILOpCode.Call, 0x01, 0x00, 0x00, 0x06,
-                (byte)ILOpCode.Call, 0x01, 0x00, 0x00, 0x06,
-                (byte)ILOpCode.Call, 0x01, 0x00, 0x00, 0x06,
-                (byte)ILOpCode.Call, 0x01, 0x00, 0x00, 0x06,
-                (byte)ILOpCode.Call, 0x01, 0x00, 0x00, 0x06,
-                (byte)ILOpCode.Call, 0x01, 0x00, 0x00, 0x06,
-                (byte)ILOpCode.Call, 0x01, 0x00, 0x00, 0x06,
-                (byte)ILOpCode.Call, 0x01, 0x00, 0x00, 0x06,
-                (byte)ILOpCode.Call, 0x01, 0x00, 0x00, 0x06,
-                (byte)ILOpCode.Call, 0x01, 0x00, 0x00, 0x06,
-                (byte)ILOpCode.Call, 0x01, 0x00, 0x00, 0x06,
-                (byte)ILOpCode.Call, 0x01, 0x00, 0x00, 0x06,
-                (byte)ILOpCode.Call, 0x01, 0x00, 0x00, 0x06,
-                (byte)ILOpCode.Call, 0x01, 0x00, 0x00, 0x06,
-                (byte)ILOpCode.Call, 0x01, 0x00, 0x00, 0x06,
-                (byte)ILOpCode.Call, 0x01, 0x00, 0x00, 0x06,
-                (byte)ILOpCode.Call, 0x01, 0x00, 0x00, 0x06,
-                (byte)ILOpCode.Ret
-            }, builder.ToArray());
+            AssertEx.Equal(
+                new byte[]
+                {
+                    0x13,
+                    0x30,
+                    0x08,
+                    0x00,
+                    0x0A,
+                    0x01,
+                    0x00,
+                    0x00,
+                    0x00,
+                    0x00,
+                    0x00,
+                    0x00, // header
+                    (byte)ILOpCode.Br,
+                    0x04,
+                    0x01,
+                    0x00,
+                    0x00,
+                    (byte)ILOpCode.Call,
+                    0x01,
+                    0x00,
+                    0x00,
+                    0x06,
+                    (byte)ILOpCode.Call,
+                    0x01,
+                    0x00,
+                    0x00,
+                    0x06,
+                    (byte)ILOpCode.Call,
+                    0x01,
+                    0x00,
+                    0x00,
+                    0x06,
+                    (byte)ILOpCode.Call,
+                    0x01,
+                    0x00,
+                    0x00,
+                    0x06,
+                    (byte)ILOpCode.Call,
+                    0x01,
+                    0x00,
+                    0x00,
+                    0x06,
+                    (byte)ILOpCode.Call,
+                    0x01,
+                    0x00,
+                    0x00,
+                    0x06,
+                    (byte)ILOpCode.Call,
+                    0x01,
+                    0x00,
+                    0x00,
+                    0x06,
+                    (byte)ILOpCode.Call,
+                    0x01,
+                    0x00,
+                    0x00,
+                    0x06,
+                    (byte)ILOpCode.Call,
+                    0x01,
+                    0x00,
+                    0x00,
+                    0x06,
+                    (byte)ILOpCode.Call,
+                    0x01,
+                    0x00,
+                    0x00,
+                    0x06,
+                    (byte)ILOpCode.Call,
+                    0x01,
+                    0x00,
+                    0x00,
+                    0x06,
+                    (byte)ILOpCode.Call,
+                    0x01,
+                    0x00,
+                    0x00,
+                    0x06,
+                    (byte)ILOpCode.Call,
+                    0x01,
+                    0x00,
+                    0x00,
+                    0x06,
+                    (byte)ILOpCode.Call,
+                    0x01,
+                    0x00,
+                    0x00,
+                    0x06,
+                    (byte)ILOpCode.Call,
+                    0x01,
+                    0x00,
+                    0x00,
+                    0x06,
+                    (byte)ILOpCode.Call,
+                    0x01,
+                    0x00,
+                    0x00,
+                    0x06,
+                    (byte)ILOpCode.Call,
+                    0x01,
+                    0x00,
+                    0x00,
+                    0x06,
+                    (byte)ILOpCode.Call,
+                    0x01,
+                    0x00,
+                    0x00,
+                    0x06,
+                    (byte)ILOpCode.Call,
+                    0x01,
+                    0x00,
+                    0x00,
+                    0x06,
+                    (byte)ILOpCode.Call,
+                    0x01,
+                    0x00,
+                    0x00,
+                    0x06,
+                    (byte)ILOpCode.Call,
+                    0x01,
+                    0x00,
+                    0x00,
+                    0x06,
+                    (byte)ILOpCode.Call,
+                    0x01,
+                    0x00,
+                    0x00,
+                    0x06,
+                    (byte)ILOpCode.Call,
+                    0x01,
+                    0x00,
+                    0x00,
+                    0x06,
+                    (byte)ILOpCode.Call,
+                    0x01,
+                    0x00,
+                    0x00,
+                    0x06,
+                    (byte)ILOpCode.Call,
+                    0x01,
+                    0x00,
+                    0x00,
+                    0x06,
+                    (byte)ILOpCode.Call,
+                    0x01,
+                    0x00,
+                    0x00,
+                    0x06,
+                    (byte)ILOpCode.Call,
+                    0x01,
+                    0x00,
+                    0x00,
+                    0x06,
+                    (byte)ILOpCode.Call,
+                    0x01,
+                    0x00,
+                    0x00,
+                    0x06,
+                    (byte)ILOpCode.Call,
+                    0x01,
+                    0x00,
+                    0x00,
+                    0x06,
+                    (byte)ILOpCode.Call,
+                    0x01,
+                    0x00,
+                    0x00,
+                    0x06,
+                    (byte)ILOpCode.Call,
+                    0x01,
+                    0x00,
+                    0x00,
+                    0x06,
+                    (byte)ILOpCode.Call,
+                    0x01,
+                    0x00,
+                    0x00,
+                    0x06,
+                    (byte)ILOpCode.Call,
+                    0x01,
+                    0x00,
+                    0x00,
+                    0x06,
+                    (byte)ILOpCode.Call,
+                    0x01,
+                    0x00,
+                    0x00,
+                    0x06,
+                    (byte)ILOpCode.Call,
+                    0x01,
+                    0x00,
+                    0x00,
+                    0x06,
+                    (byte)ILOpCode.Call,
+                    0x01,
+                    0x00,
+                    0x00,
+                    0x06,
+                    (byte)ILOpCode.Call,
+                    0x01,
+                    0x00,
+                    0x00,
+                    0x06,
+                    (byte)ILOpCode.Call,
+                    0x01,
+                    0x00,
+                    0x00,
+                    0x06,
+                    (byte)ILOpCode.Call,
+                    0x01,
+                    0x00,
+                    0x00,
+                    0x06,
+                    (byte)ILOpCode.Call,
+                    0x01,
+                    0x00,
+                    0x00,
+                    0x06,
+                    (byte)ILOpCode.Call,
+                    0x01,
+                    0x00,
+                    0x00,
+                    0x06,
+                    (byte)ILOpCode.Call,
+                    0x01,
+                    0x00,
+                    0x00,
+                    0x06,
+                    (byte)ILOpCode.Call,
+                    0x01,
+                    0x00,
+                    0x00,
+                    0x06,
+                    (byte)ILOpCode.Call,
+                    0x01,
+                    0x00,
+                    0x00,
+                    0x06,
+                    (byte)ILOpCode.Call,
+                    0x01,
+                    0x00,
+                    0x00,
+                    0x06,
+                    (byte)ILOpCode.Call,
+                    0x01,
+                    0x00,
+                    0x00,
+                    0x06,
+                    (byte)ILOpCode.Call,
+                    0x01,
+                    0x00,
+                    0x00,
+                    0x06,
+                    (byte)ILOpCode.Call,
+                    0x01,
+                    0x00,
+                    0x00,
+                    0x06,
+                    (byte)ILOpCode.Call,
+                    0x01,
+                    0x00,
+                    0x00,
+                    0x06,
+                    (byte)ILOpCode.Call,
+                    0x01,
+                    0x00,
+                    0x00,
+                    0x06,
+                    (byte)ILOpCode.Call,
+                    0x01,
+                    0x00,
+                    0x00,
+                    0x06,
+                    (byte)ILOpCode.Call,
+                    0x01,
+                    0x00,
+                    0x00,
+                    0x06,
+                    (byte)ILOpCode.Ret,
+                },
+                builder.ToArray()
+            );
         }
 
         [Fact]
@@ -448,19 +778,38 @@ namespace System.Reflection.Metadata.Ecma335.Tests
             var builder = new BlobBuilder();
             new MethodBodyStreamEncoder(builder).AddMethodBody(il);
 
-            AssertEx.Equal(new byte[]
-            {
-                0x66, // header
-                (byte)ILOpCode.Nop,
-                (byte)ILOpCode.Switch, 0x04, 0x00, 0x00, 0x00,
-                0x00, 0x00, 0x00, 0x00,
-                0x01, 0x00, 0x00, 0x00,
-                0x02, 0x00, 0x00, 0x00,
-                0xeb, 0xff, 0xff, 0xff,
-                (byte)ILOpCode.Nop,
-                (byte)ILOpCode.Nop,
-                (byte)ILOpCode.Nop
-            }, builder.ToArray());
+            AssertEx.Equal(
+                new byte[]
+                {
+                    0x66, // header
+                    (byte)ILOpCode.Nop,
+                    (byte)ILOpCode.Switch,
+                    0x04,
+                    0x00,
+                    0x00,
+                    0x00,
+                    0x00,
+                    0x00,
+                    0x00,
+                    0x00,
+                    0x01,
+                    0x00,
+                    0x00,
+                    0x00,
+                    0x02,
+                    0x00,
+                    0x00,
+                    0x00,
+                    0xeb,
+                    0xff,
+                    0xff,
+                    0xff,
+                    (byte)ILOpCode.Nop,
+                    (byte)ILOpCode.Nop,
+                    (byte)ILOpCode.Nop,
+                },
+                builder.ToArray()
+            );
         }
 
         [Fact]

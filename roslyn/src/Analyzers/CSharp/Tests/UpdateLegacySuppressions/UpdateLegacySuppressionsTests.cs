@@ -10,7 +10,8 @@ using Roslyn.Test.Utilities;
 using Xunit;
 using VerifyCS = Microsoft.CodeAnalysis.Editor.UnitTests.CodeActions.CSharpCodeFixVerifier<
     Microsoft.CodeAnalysis.CSharp.RemoveUnnecessarySuppressions.CSharpRemoveUnnecessaryAttributeSuppressionsDiagnosticAnalyzer,
-    Microsoft.CodeAnalysis.UpdateLegacySuppressions.UpdateLegacySuppressionsCodeFixProvider>;
+    Microsoft.CodeAnalysis.UpdateLegacySuppressions.UpdateLegacySuppressionsCodeFixProvider
+>;
 
 namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UpdateLegacySuppressions
 {
@@ -19,8 +20,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UpdateLegacySuppression
     public class UpdateLegacySuppressionsTests
     {
         [Theory, CombinatorialData]
-        public void TestStandardProperty(AnalyzerProperty property)
-            => VerifyCS.VerifyStandardProperty(property);
+        public void TestStandardProperty(AnalyzerProperty property) =>
+            VerifyCS.VerifyStandardProperty(property);
 
         // Namespace
         [InlineData("namespace", "N", "~N:N")]
@@ -39,7 +40,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UpdateLegacySuppression
         [Theory]
         public async Task LegacySuppressions(string scope, string target, string fixedTarget)
         {
-            var input = $@"
+            var input =
+                $@"
 [assembly: System.Diagnostics.CodeAnalysis.SuppressMessage(""Category"", ""Id: Title"", Scope = ""{scope}"", Target = {{|#0:""{target}""|}})]
 
 namespace N
@@ -58,11 +60,15 @@ namespace N
     }}
 }}";
 
-            var expectedDiagnostic = VerifyCS.Diagnostic(AbstractRemoveUnnecessaryAttributeSuppressionsDiagnosticAnalyzer.LegacyFormatTargetDescriptor)
-                                        .WithLocation(0)
-                                        .WithArguments(target);
+            var expectedDiagnostic = VerifyCS
+                .Diagnostic(
+                    AbstractRemoveUnnecessaryAttributeSuppressionsDiagnosticAnalyzer.LegacyFormatTargetDescriptor
+                )
+                .WithLocation(0)
+                .WithArguments(target);
 
-            var fixedCode = $@"
+            var fixedCode =
+                $@"
 [assembly: System.Diagnostics.CodeAnalysis.SuppressMessage(""Category"", ""Id: Title"", Scope = ""{scope}"", Target = ""{fixedTarget}"")]
 
 namespace N

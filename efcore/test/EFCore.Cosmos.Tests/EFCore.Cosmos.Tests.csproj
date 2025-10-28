@@ -1,5 +1,4 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
-
   <PropertyGroup>
     <TargetFramework>$(DefaultNetCoreTargetFramework)</TargetFramework>
     <AssemblyName>Microsoft.EntityFrameworkCore.Cosmos.Tests</AssemblyName>
@@ -47,5 +46,4 @@
     <ProjectReference Include="..\EFCore.Tests\EFCore.Tests.csproj" />
     <ProjectReference Include="..\EFCore.Cosmos.FunctionalTests\EFCore.Cosmos.FunctionalTests.csproj" />
   </ItemGroup>
-
 </Project>

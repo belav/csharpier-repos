@@ -12,9 +12,7 @@ namespace System.ComponentModel.Composition.Factories
         // uses this to verify default behavior of the base class.
         private class NoOverridesComposablePartCatalog : ComposablePartCatalog
         {
-            public NoOverridesComposablePartCatalog()
-            {
-            }
+            public NoOverridesComposablePartCatalog() { }
 
             public override IQueryable<ComposablePartDefinition> Parts
             {

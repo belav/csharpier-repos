@@ -2,5 +2,8 @@
 
 public class Foo
 {
-	public string this[params string[] types] { get { return ""; }}
+    public string this[params string[] types]
+    {
+        get { return ""; }
+    }
 }

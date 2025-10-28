@@ -1,7 +1,7 @@
 //------------------------------------------------------------------------------
 // <copyright file="SelectionListComponentEditor.cs" company="Microsoft">
 //     Copyright (c) Microsoft Corporation.  All rights reserved.
-// </copyright>                                                                
+// </copyright>
 //------------------------------------------------------------------------------
 
 namespace System.Web.UI.Design.MobileControls
@@ -14,35 +14,37 @@ namespace System.Web.UI.Design.MobileControls
 
     /// <summary>
     ///    <para>
-    ///       Provides a component editor for a Mobile SelectionList 
+    ///       Provides a component editor for a Mobile SelectionList
     ///       <see cref='System.Web.UI.MobileControls.SelectionList'/>
     ///       control.
     ///    </para>
     /// </summary>
     /// <seealso cref='System.Web.UI.MobileControls.List'/>
     /// <seealso cref='System.Web.UI.Design.MobileControls.ListDesigner'/>
-    [
-        System.Security.Permissions.SecurityPermission(System.Security.Permissions.SecurityAction.Demand,
-        Flags=System.Security.Permissions.SecurityPermissionFlag.UnmanagedCode)
-    ]
-    [Obsolete("The System.Web.Mobile.dll assembly has been deprecated and should no longer be used. For information about how to develop ASP.NET mobile applications, see http://go.microsoft.com/fwlink/?LinkId=157231.")]
+    [System.Security.Permissions.SecurityPermission(
+        System.Security.Permissions.SecurityAction.Demand,
+        Flags = System.Security.Permissions.SecurityPermissionFlag.UnmanagedCode
+    )]
+    [Obsolete(
+        "The System.Web.Mobile.dll assembly has been deprecated and should no longer be used. For information about how to develop ASP.NET mobile applications, see http://go.microsoft.com/fwlink/?LinkId=157231."
+    )]
     internal class SelectionListComponentEditor : WindowsFormsComponentEditor
     {
         private int _initialPage;
 
         // The set of pages used within the List ComponentEditor
         private static Type[] _editorPages = new Type[]
-                                             {
-                                                 typeof(ListGeneralPage),
-                                                 typeof(ListItemsPage)
-                                             };
+        {
+            typeof(ListGeneralPage),
+            typeof(ListItemsPage),
+        };
 
         internal const int IDX_GENERAL = 0;
         internal const int IDX_ITEMS = 1;
 
         /// <summary>
         ///    <para>
-        ///       Initializes a new instance of 
+        ///       Initializes a new instance of
         ///       <see cref='System.Web.UI.Design.MobileControls.SelectionListComponentEditor'/>.
         ///    </para>
         /// </summary>
@@ -53,7 +55,7 @@ namespace System.Web.UI.Design.MobileControls
 
         /// <summary>
         ///    <para>
-        ///       Initializes a new instance of 
+        ///       Initializes a new instance of
         ///       <see cref='System.Web.UI.Design.MobileControls.SelectionListComponentEditor'/>.
         ///    </para>
         /// </summary>

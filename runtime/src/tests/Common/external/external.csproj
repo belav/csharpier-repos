@@ -1,5 +1,4 @@
 <Project>
-
   <Import Project="Sdk.props" Sdk="Microsoft.NET.Sdk" />
 
   <!-- This project places dlls from packagereferences into the
@@ -27,10 +26,11 @@
        conflict with the versions in other test dependencies files. We
        don't want to overwrite these versions when creating the
        CORE_ROOT. This logic prevents filters out such conflicts. -->
-  <Target Name="FilterNugetPackages"
-          AfterTargets="ResolveAssemblyReferences"
-          Condition="'@(PackageToInclude)' != ''">
-
+  <Target
+    Name="FilterNugetPackages"
+    AfterTargets="ResolveAssemblyReferences"
+    Condition="'@(PackageToInclude)' != ''"
+  >
     <ItemGroup>
       <_nuGetDeploy Include="@(ReferenceCopyLocalPaths)">
         <OriginalItemSpec>%(Identity)</OriginalItemSpec>
@@ -38,48 +38,70 @@
 
       <_nuGetDeployByPackageId Include="@(_nuGetDeploy->'%(NuGetPackageId)')" />
 
-      <_nuGetDeployByPackageIdToRemove Include="@(_nuGetDeployByPackageId)" Exclude="@(PackageToInclude)" Condition="'@(PackageToInclude)' != ''" />
-      <_filteredNuGetDeployByPackageId Include="@(_nuGetDeployByPackageId)" Exclude="@(_nuGetDeployByPackageIdToRemove)" />
+      <_nuGetDeployByPackageIdToRemove
+        Include="@(_nuGetDeployByPackageId)"
+        Exclude="@(PackageToInclude)"
+        Condition="'@(PackageToInclude)' != ''"
+      />
+      <_filteredNuGetDeployByPackageId
+        Include="@(_nuGetDeployByPackageId)"
+        Exclude="@(_nuGetDeployByPackageIdToRemove)"
+      />
 
       <ReferenceCopyLocalPaths Remove="@(ReferenceCopyLocalPaths)" />
       <ReferenceCopyLocalPaths Include="@(_filteredNuGetDeployByPackageId->'%(OriginalItemSpec)')" />
     </ItemGroup>
-
   </Target>
 
   <ItemGroup>
-    <PackageToInclude Include="xunit.abstractions"/>
-    <PackageToInclude Include="xunit.assert"/>
-    <PackageToInclude Include="xunit.extensibility.core"/>
-    <PackageToInclude Include="xunit.extensibility.execution"/>
-    <PackageToInclude Include="xunit.runner.utility"/>
-    <PackageToInclude Include="Microsoft.Diagnostics.Tracing.TraceEvent"/>
-    <PackageToInclude Include="Newtonsoft.Json"/>
-    <PackageToInclude Include="Newtonsoft.Json.Bson"/>
-    <PackageToInclude Include="Microsoft.CodeAnalysis.Analyzers"/>
-    <PackageToInclude Include="Microsoft.CodeAnalysis.Common"/>
-    <PackageToInclude Include="Microsoft.CodeAnalysis.Compilers"/>
-    <PackageToInclude Include="Microsoft.CodeAnalysis.CSharp"/>
-    <PackageToInclude Include="Microsoft.CodeAnalysis.VisualBasic"/>
-    <PackageToInclude Include="CommandLineParser"/>
+    <PackageToInclude Include="xunit.abstractions" />
+    <PackageToInclude Include="xunit.assert" />
+    <PackageToInclude Include="xunit.extensibility.core" />
+    <PackageToInclude Include="xunit.extensibility.execution" />
+    <PackageToInclude Include="xunit.runner.utility" />
+    <PackageToInclude Include="Microsoft.Diagnostics.Tracing.TraceEvent" />
+    <PackageToInclude Include="Newtonsoft.Json" />
+    <PackageToInclude Include="Newtonsoft.Json.Bson" />
+    <PackageToInclude Include="Microsoft.CodeAnalysis.Analyzers" />
+    <PackageToInclude Include="Microsoft.CodeAnalysis.Common" />
+    <PackageToInclude Include="Microsoft.CodeAnalysis.Compilers" />
+    <PackageToInclude Include="Microsoft.CodeAnalysis.CSharp" />
+    <PackageToInclude Include="Microsoft.CodeAnalysis.VisualBasic" />
+    <PackageToInclude Include="CommandLineParser" />
     <PackageToInclude Include="Microsoft.DotNet.XUnitExtensions" />
     <PackageToInclude Include="Microsoft.DotNet.XUnitAssert" />
 
-    <PackageReference Include="Microsoft.CodeAnalysis.Compilers" Version="$(MicrosoftCodeAnalysisVersion_LatestVS)" />
+    <PackageReference
+      Include="Microsoft.CodeAnalysis.Compilers"
+      Version="$(MicrosoftCodeAnalysisVersion_LatestVS)"
+    />
     <PackageReference Include="CommandLineParser" Version="2.1.1-beta" />
-    <PackageReference Include="Microsoft.Diagnostics.Tracing.TraceEvent" Version="$(TraceEventVersion)" />
+    <PackageReference
+      Include="Microsoft.Diagnostics.Tracing.TraceEvent"
+      Version="$(TraceEventVersion)"
+    />
     <PackageReference Include="Newtonsoft.Json" Version="$(NewtonsoftJsonVersion)" />
     <PackageReference Include="Newtonsoft.Json.Bson" Version="$(NewtonsoftJsonBsonVersion)" />
     <PackageReference Include="xunit" Version="$(XUnitVersion)" />
-    <PackageReference Include="Microsoft.DotNet.XUnitConsoleRunner" Version="$(MicrosoftDotNetXUnitConsoleRunnerVersion)" />
-    <PackageReference Include="Microsoft.DotNet.XUnitExtensions" Version="$(MicrosoftDotNetXUnitExtensionsVersion)" />
+    <PackageReference
+      Include="Microsoft.DotNet.XUnitConsoleRunner"
+      Version="$(MicrosoftDotNetXUnitConsoleRunnerVersion)"
+    />
+    <PackageReference
+      Include="Microsoft.DotNet.XUnitExtensions"
+      Version="$(MicrosoftDotNetXUnitExtensionsVersion)"
+    />
     <PackageReference Include="xunit.runner.utility" Version="$(XUnitVersion)" />
-    <PackageReference Include="Microsoft.DotNet.XUnitAssert" Version="$(MicrosoftDotNetXUnitAssertVersion)" />
+    <PackageReference
+      Include="Microsoft.DotNet.XUnitAssert"
+      Version="$(MicrosoftDotNetXUnitAssertVersion)"
+    />
   </ItemGroup>
 
   <Target Name="AddXunitConsoleRunner" BeforeTargets="ResolveReferences">
-    <Error Condition="!Exists('$(XunitConsoleNetCore21AppPath)')"
-            Text="Error: looks the package Microsoft.DotNet.XUnitConsoleRunner is not restored or missing xunit.console.dll."
+    <Error
+      Condition="!Exists('$(XunitConsoleNetCore21AppPath)')"
+      Text="Error: looks the package Microsoft.DotNet.XUnitConsoleRunner is not restored or missing xunit.console.dll."
     />
     <ItemGroup>
       <ReferenceCopyLocalPaths Include="$([System.IO.Path]::GetDirectoryName('$(XunitConsoleNetCore21AppPath)'))\*.*">
@@ -97,5 +119,4 @@
       <IntermediateAssembly Remove="@(IntermediateAssembly)" />
     </ItemGroup>
   </Target>
-
 </Project>

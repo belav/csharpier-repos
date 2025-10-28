@@ -6,6 +6,6 @@ namespace Microsoft.Extensions.Hosting.IntegrationTesting
     public enum RuntimeArchitecture
     {
         x64,
-        x86
+        x86,
     }
 }

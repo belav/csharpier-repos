@@ -1,5 +1,4 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk.Web">
-
   <PropertyGroup>
     <Description>Identity sample MVC application on ASP.NET Core</Description>
     <TargetFramework>$(DefaultNetCoreTargetFramework)</TargetFramework>

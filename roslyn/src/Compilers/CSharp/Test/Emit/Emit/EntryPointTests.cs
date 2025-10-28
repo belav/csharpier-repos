@@ -13,15 +13,24 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Emit
 {
     public class EntryPointTests : EmitMetadataTestBase
     {
-        private CSharpCompilation CompileConsoleApp(string source, CSharpParseOptions parseOptions = null, string mainTypeName = null)
+        private CSharpCompilation CompileConsoleApp(
+            string source,
+            CSharpParseOptions parseOptions = null,
+            string mainTypeName = null
+        )
         {
-            return CreateCompilation(source, options: TestOptions.ReleaseExe.WithWarningLevel(5).WithMainTypeName(mainTypeName), parseOptions: parseOptions);
+            return CreateCompilation(
+                source,
+                options: TestOptions.ReleaseExe.WithWarningLevel(5).WithMainTypeName(mainTypeName),
+                parseOptions: parseOptions
+            );
         }
 
         [Fact]
         public void MainOverloads()
         {
-            string source = @"
+            string source =
+                @"
 public class C
 {
   public static void Main(int goo) { System.Console.WriteLine(1); }
@@ -33,13 +42,15 @@ public class C
 
             verifier.VerifyDiagnostics(
                 // (4,22): warning CS0028: 'C.Main(int)' has the wrong signature to be an entry point
-                Diagnostic(ErrorCode.WRN_InvalidMainSig, "Main").WithArguments("C.Main(int)"));
+                Diagnostic(ErrorCode.WRN_InvalidMainSig, "Main").WithArguments("C.Main(int)")
+            );
         }
 
         [Fact]
         public void MainOverloads_Dll()
         {
-            string source = @"
+            string source =
+                @"
 public class C
 {
   public static void Main(int goo) { System.Console.WriteLine(1); }
@@ -50,7 +61,7 @@ public class C
 
             var verifier = CompileAndVerify(compilation);
 
-            // Dev10 reports warning CS0028: 'C.Main(int)' has the wrong signature to be an entry point, 
+            // Dev10 reports warning CS0028: 'C.Main(int)' has the wrong signature to be an entry point,
             // but that seems like a bug since we are not compiling an exe.
             verifier.VerifyDiagnostics();
         }
@@ -61,7 +72,8 @@ public class C
         [Fact]
         public void ERR_NoEntryPoint_Overloads()
         {
-            string source = @"
+            string source =
+                @"
 public class C
 {
   public static void Main(int goo) { System.Console.WriteLine(1); }
@@ -77,9 +89,11 @@ public class C
                 // (5,22): warning CS0028: 'C.Main(double)' has the wrong signature to be an entry point
                 Diagnostic(ErrorCode.WRN_InvalidMainSig, "Main").WithArguments("C.Main(double)"),
                 // (6,22): warning CS0028: 'C.Main(string[*,*])' has the wrong signature to be an entry point
-                Diagnostic(ErrorCode.WRN_InvalidMainSig, "Main").WithArguments("C.Main(string[*,*])"),
+                Diagnostic(ErrorCode.WRN_InvalidMainSig, "Main")
+                    .WithArguments("C.Main(string[*,*])"),
                 // error CS5001: Program does not contain a static 'Main' method suitable for an entry point
-                Diagnostic(ErrorCode.ERR_NoEntryPoint));
+                Diagnostic(ErrorCode.ERR_NoEntryPoint)
+            );
         }
 
         /// <summary>
@@ -88,7 +102,8 @@ public class C
         [Fact]
         public void ERR_MultipleEntryPoints()
         {
-            string source = @"
+            string source =
+                @"
 public class C
 {
   public static void Main() { System.Console.WriteLine(1); }
@@ -106,14 +121,16 @@ public class D
                 // (10,24): warning CS0028: 'D.Main()' has the wrong signature to be an entry point
                 Diagnostic(ErrorCode.WRN_InvalidMainSig, "Main").WithArguments("D.Main()"),
                 // (4,22): error CS0017: Program has more than one entry point defined. Compile with /main to specify the type that contains the entry point.
-                Diagnostic(ErrorCode.ERR_MultipleEntryPoints, "Main"));
+                Diagnostic(ErrorCode.ERR_MultipleEntryPoints, "Main")
+            );
         }
 
         [Fact]
         [WorkItem(46831, "https://github.com/dotnet/roslyn/issues/46831")]
         public void WRN_SyncAndAsyncEntryPoints_CSharp71()
         {
-            string source = @"
+            string source =
+                @"
 using System.Threading.Tasks;
 
 public class C
@@ -126,13 +143,17 @@ public class C
 
             compilation.VerifyDiagnostics(
                 // (6,28): warning CS8892: Method 'C.Main()' will not be used as an entry point because a synchronous entry point 'C.Main(string[])' was found.
-                Diagnostic(ErrorCode.WRN_SyncAndAsyncEntryPoints, "Main").WithArguments("C.Main()", "C.Main(string[])").WithLocation(6, 28));
+                Diagnostic(ErrorCode.WRN_SyncAndAsyncEntryPoints, "Main")
+                    .WithArguments("C.Main()", "C.Main(string[])")
+                    .WithLocation(6, 28)
+            );
         }
 
         [Fact]
         public void SyncAndAsyncEntryPointsBeforeAsyncMainFeature_NoDiagnostics()
         {
-            string source = @"
+            string source =
+                @"
 using System.Threading.Tasks;
 
 public class C
@@ -150,7 +171,8 @@ public class C
         [WorkItem(46831, "https://github.com/dotnet/roslyn/issues/46831")]
         public void WRN_SyncAndAsyncEntryPointsCSharpLatest_SyncAndAsync()
         {
-            string source = @"
+            string source =
+                @"
 using System.Threading.Tasks;
 
 public class C
@@ -163,14 +185,18 @@ public class C
 
             compilation.VerifyDiagnostics(
                 // (6,28): warning CS8892: Method 'C.Main()' will not be used as an entry point because a synchronous entry point 'C.Main(string[])' was found.
-                Diagnostic(ErrorCode.WRN_SyncAndAsyncEntryPoints, "Main").WithArguments("C.Main()", "C.Main(string[])").WithLocation(6, 28));
+                Diagnostic(ErrorCode.WRN_SyncAndAsyncEntryPoints, "Main")
+                    .WithArguments("C.Main()", "C.Main(string[])")
+                    .WithLocation(6, 28)
+            );
         }
 
         [Fact]
         [WorkItem(46831, "https://github.com/dotnet/roslyn/issues/46831")]
         public void ERR_And_WRN_MultipleEntryPointsCSharpLatest_TwoSyncAndOneAsync()
         {
-            string source = @"
+            string source =
+                @"
 using System.Threading.Tasks;
 
 public class C
@@ -190,14 +216,18 @@ public class D
                 // (7,22): error CS0017: Program has more than one entry point defined. Compile with /main to specify the type that contains the entry point.
                 Diagnostic(ErrorCode.ERR_MultipleEntryPoints, "Main"),
                 // (6,28): warning CS8892: Method 'C.Main()' will not be used as an entry point because a synchronous entry point 'C.Main(string[])' was found.
-                Diagnostic(ErrorCode.WRN_SyncAndAsyncEntryPoints, "Main").WithArguments("C.Main()", "C.Main(string[])").WithLocation(6, 28));
+                Diagnostic(ErrorCode.WRN_SyncAndAsyncEntryPoints, "Main")
+                    .WithArguments("C.Main()", "C.Main(string[])")
+                    .WithLocation(6, 28)
+            );
         }
 
         [Fact]
         [WorkItem(46831, "https://github.com/dotnet/roslyn/issues/46831")]
         public void WRN_SyncAndAsyncEntryPointsCSharpLatest_TwoAsyncAndOneSync()
         {
-            string source = @"
+            string source =
+                @"
 using System.Threading.Tasks;
 
 public class C
@@ -215,15 +245,21 @@ public class D
 
             compilation.VerifyDiagnostics(
                 // (6,28): warning CS8892: Method 'C.Main()' will not be used as an entry point because a synchronous entry point 'C.Main(string[])' was found.
-                Diagnostic(ErrorCode.WRN_SyncAndAsyncEntryPoints, "Main").WithArguments("C.Main()", "C.Main(string[])").WithLocation(6, 28),
+                Diagnostic(ErrorCode.WRN_SyncAndAsyncEntryPoints, "Main")
+                    .WithArguments("C.Main()", "C.Main(string[])")
+                    .WithLocation(6, 28),
                 // (12,28): warning CS8892: Method 'D.Main()' will not be used as an entry point because a synchronous entry point 'C.Main(string[])' was found.
-                Diagnostic(ErrorCode.WRN_SyncAndAsyncEntryPoints, "Main").WithArguments("D.Main()", "C.Main(string[])").WithLocation(12, 28));
+                Diagnostic(ErrorCode.WRN_SyncAndAsyncEntryPoints, "Main")
+                    .WithArguments("D.Main()", "C.Main(string[])")
+                    .WithLocation(12, 28)
+            );
         }
 
         [Fact]
         public void MultipleEntryPointsWithTypeDefined_NoDiagnostic()
         {
-            string source = @"
+            string source =
+                @"
 using System.Threading.Tasks;
 
 public class C
@@ -247,7 +283,8 @@ public class D
         [WorkItem(46831, "https://github.com/dotnet/roslyn/issues/46831")]
         public void WRN_SyncAndAsyncEntryPoints_WithTypeDefined()
         {
-            string source = @"
+            string source =
+                @"
 using System.Threading.Tasks;
 
 public class C
@@ -260,17 +297,22 @@ public class C
             var compilation = CompileConsoleApp(source, mainTypeName: "C");
             compilation.VerifyDiagnostics(
                 // (8,28): warning CS8892: Method 'C.Main()' will not be used as an entry point because a synchronous entry point 'C.Main(string[])' was found.
-                Diagnostic(ErrorCode.WRN_SyncAndAsyncEntryPoints, "Main").WithArguments("C.Main()", "C.Main(string[])").WithLocation(8, 28));
+                Diagnostic(ErrorCode.WRN_SyncAndAsyncEntryPoints, "Main")
+                    .WithArguments("C.Main()", "C.Main(string[])")
+                    .WithLocation(8, 28)
+            );
         }
 
         [Fact]
         public void ERR_MultipleEntryPoints_Script()
         {
-            string csx = @"
+            string csx =
+                @"
 public static void Main() { System.Console.WriteLine(1); }
 ";
 
-            string cs = @"
+            string cs =
+                @"
 public class C 
 {
    public static void Main() { System.Console.WriteLine(2); }
@@ -281,22 +323,25 @@ public class C
                 new[]
                 {
                     Parse(csx, options: TestOptions.Script),
-                    Parse(cs, options: TestOptions.Regular)
+                    Parse(cs, options: TestOptions.Regular),
                 },
-                options: TestOptions.ReleaseExe);
+                options: TestOptions.ReleaseExe
+            );
 
             compilation.VerifyDiagnostics(
                 // (2,20): warning CS7022: The entry point of the program is global script code; ignoring 'Main()' entry point.
                 Diagnostic(ErrorCode.WRN_MainIgnored, "Main").WithArguments("Main()"),
                 // (4,23): warning CS7022: The entry point of the program is global script code; ignoring 'C.Main()' entry point.
-                Diagnostic(ErrorCode.WRN_MainIgnored, "Main").WithArguments("C.Main()"));
+                Diagnostic(ErrorCode.WRN_MainIgnored, "Main").WithArguments("C.Main()")
+            );
         }
 
         [WorkItem(528677, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/528677")]
         [Fact]
         public void ERR_OneEntryPointAndOverload()
         {
-            string source = @"public class MyClass
+            string source =
+                @"public class MyClass
 {
     static int Main()
     {
@@ -312,8 +357,9 @@ public class C
 
             compilation.VerifyDiagnostics(
                 // (7,16): warning CS0028: 'MyClass.Main(string[], int)' has the wrong signature to be an entry point
-                Diagnostic(ErrorCode.WRN_InvalidMainSig, "Main").WithArguments("MyClass.Main(string[], int)")
-                );
+                Diagnostic(ErrorCode.WRN_InvalidMainSig, "Main")
+                    .WithArguments("MyClass.Main(string[], int)")
+            );
         }
 
         /// <summary>
@@ -322,7 +368,8 @@ public class C
         [Fact]
         public void ERR_NoEntryPoint_PartialClass()
         {
-            string source = @"
+            string source =
+                @"
 public partial class A
 {
   static partial void Main(double d);
@@ -339,13 +386,15 @@ public partial class A
                 // (9,23): warning CS0028: 'A.Main(double)' has the wrong signature to be an entry point
                 Diagnostic(ErrorCode.WRN_InvalidMainSig, "Main").WithArguments("A.Main(double)"),
                 // error CS5001: Program does not contain a static 'Main' method suitable for an entry point
-                Diagnostic(ErrorCode.ERR_NoEntryPoint));
+                Diagnostic(ErrorCode.ERR_NoEntryPoint)
+            );
         }
 
         [Fact]
         public void ERR_NoEntryPoint_PartialClass_1()
         {
-            string source = @"
+            string source =
+                @"
 public partial class A
 {
   static partial void Main(double d);
@@ -355,25 +404,26 @@ public partial class A
 {
 }
 ";
-            CompileConsoleApp(source).VerifyDiagnostics(
-                // error CS5001: Program does not contain a static 'Main' method suitable for an entry point
-                Diagnostic(ErrorCode.ERR_NoEntryPoint));
+            CompileConsoleApp(source)
+                .VerifyDiagnostics(
+                    // error CS5001: Program does not contain a static 'Main' method suitable for an entry point
+                    Diagnostic(ErrorCode.ERR_NoEntryPoint)
+                );
         }
 
         [Fact]
         public void ScriptNonMethodMain()
         {
-            string csx = @"
+            string csx =
+                @"
 public static int Main = 1;
 System.Console.WriteLine(Main);
 ";
 
             var compilation = CreateCompilationWithMscorlib45(
-                new[]
-                {
-                    SyntaxFactory.ParseSyntaxTree(csx, options: TestOptions.Script),
-                },
-                options: TestOptions.ReleaseExe);
+                new[] { SyntaxFactory.ParseSyntaxTree(csx, options: TestOptions.Script) },
+                options: TestOptions.ReleaseExe
+            );
 
             compilation.VerifyDiagnostics();
 
@@ -383,18 +433,17 @@ System.Console.WriteLine(Main);
         [Fact]
         public void ScriptInstanceMethodMain()
         {
-            string csx = @"
+            string csx =
+                @"
 int Main() { return 1; }
 int Main(string[] x) { return 2; }
 System.Console.WriteLine(Main());
 ";
 
             var compilation = CreateCompilationWithMscorlib45(
-                new[]
-                {
-                    SyntaxFactory.ParseSyntaxTree(csx, options: TestOptions.Script),
-                },
-                options: TestOptions.ReleaseExe);
+                new[] { SyntaxFactory.ParseSyntaxTree(csx, options: TestOptions.Script) },
+                options: TestOptions.ReleaseExe
+            );
 
             compilation.VerifyDiagnostics();
 
@@ -404,19 +453,25 @@ System.Console.WriteLine(Main());
         [Fact]
         public void Namespace()
         {
-            string source = @"
+            string source =
+                @"
 namespace N { namespace M { } }
 ";
-            var compilation = CreateCompilation(source, options: TestOptions.ReleaseExe.WithMainTypeName("N.M"));
+            var compilation = CreateCompilation(
+                source,
+                options: TestOptions.ReleaseExe.WithMainTypeName("N.M")
+            );
             compilation.VerifyDiagnostics(
                 // (2,25): error CS1556: 'N.M' specified for Main method must be a non-generic class, record, struct, or interface
-                Diagnostic(ErrorCode.ERR_MainClassNotClass, "M").WithArguments("N.M"));
+                Diagnostic(ErrorCode.ERR_MainClassNotClass, "M").WithArguments("N.M")
+            );
         }
 
         [Fact]
         public void NestedGenericMainType()
         {
-            string source = @"
+            string source =
+                @"
 class C<T> 
 { 
     struct D 
@@ -425,16 +480,21 @@ class C<T>
     }
 }
 ";
-            var compilation = CreateCompilation(source, options: TestOptions.ReleaseExe.WithMainTypeName("C.D"));
+            var compilation = CreateCompilation(
+                source,
+                options: TestOptions.ReleaseExe.WithMainTypeName("C.D")
+            );
             compilation.VerifyDiagnostics(
                 // (4,12): error CS1556: 'C<T>.D' specified for Main method must be a non-generic class, record, struct, or interface
-                Diagnostic(ErrorCode.ERR_MainClassNotClass, "D").WithArguments("C<T>.D"));
+                Diagnostic(ErrorCode.ERR_MainClassNotClass, "D").WithArguments("C<T>.D")
+            );
         }
 
         [Fact]
         public void Struct()
         {
-            string source = @"
+            string source =
+                @"
 struct C
 { 
     struct D 
@@ -443,14 +503,18 @@ struct C
     }
 }
 ";
-            var compilation = CreateCompilation(source, options: TestOptions.ReleaseExe.WithMainTypeName("C.D"));
+            var compilation = CreateCompilation(
+                source,
+                options: TestOptions.ReleaseExe.WithMainTypeName("C.D")
+            );
             compilation.VerifyDiagnostics();
         }
 
         [Fact]
         public void GenericMainMethods()
         {
-            string cs = @"
+            string cs =
+                @"
 using System;
 
 public static class C 
@@ -483,32 +547,43 @@ public static class E
                 // (4,16): warning CS0402: 'C.Main<T>()': an entry point cannot be generic or in a generic type
                 Diagnostic(ErrorCode.WRN_MainCantBeGeneric, "Main").WithArguments("C.Main<T>()"),
                 // (8,20): warning CS0402: 'C.CC<T>.Main()': an entry point cannot be generic or in a generic type
-                Diagnostic(ErrorCode.WRN_MainCantBeGeneric, "Main").WithArguments("C.CC<T>.Main()"),
+                Diagnostic(ErrorCode.WRN_MainCantBeGeneric, "Main")
+                    .WithArguments("C.CC<T>.Main()"),
                 // (14,16): warning CS0402: 'D<T>.Main()': an entry point cannot be generic or in a generic type
                 Diagnostic(ErrorCode.WRN_MainCantBeGeneric, "Main").WithArguments("D<T>.Main()"),
                 // (18,20): warning CS0402: 'D<T>.DD.Main()': an entry point cannot be generic or in a generic type
-                Diagnostic(ErrorCode.WRN_MainCantBeGeneric, "Main").WithArguments("D<T>.DD.Main()"));
+                Diagnostic(ErrorCode.WRN_MainCantBeGeneric, "Main").WithArguments("D<T>.DD.Main()")
+            );
 
             CompileAndVerify(compilation, expectedOutput: "5");
 
-            compilation = CreateCompilation(cs, options: TestOptions.ReleaseExe.WithMainTypeName("C"));
+            compilation = CreateCompilation(
+                cs,
+                options: TestOptions.ReleaseExe.WithMainTypeName("C")
+            );
             compilation.VerifyDiagnostics(
                 // (6,17): warning CS0402: 'C.Main<T>()': an entry point cannot be generic or in a generic type
                 Diagnostic(ErrorCode.WRN_MainCantBeGeneric, "Main").WithArguments("C.Main<T>()"),
                 // (4,21): error CS1558: 'C' does not have a suitable static Main method
-                Diagnostic(ErrorCode.ERR_NoMainInClass, "C").WithArguments("C"));
+                Diagnostic(ErrorCode.ERR_NoMainInClass, "C").WithArguments("C")
+            );
 
             // Dev10 reports: CS1555: Could not find 'D.DD' specified for Main method
-            compilation = CreateCompilation(cs, options: TestOptions.ReleaseExe.WithMainTypeName("D.DD"));
+            compilation = CreateCompilation(
+                cs,
+                options: TestOptions.ReleaseExe.WithMainTypeName("D.DD")
+            );
             compilation.VerifyDiagnostics(
                 // (18,25): error CS1556: 'D<T>.DD' specified for Main method must be a non-generic class, record, struct, or interface
-                Diagnostic(ErrorCode.ERR_MainClassNotClass, "DD").WithArguments("D<T>.DD"));
+                Diagnostic(ErrorCode.ERR_MainClassNotClass, "DD").WithArguments("D<T>.DD")
+            );
         }
 
         [Fact]
         public void MultipleArities1()
         {
-            string source = @"
+            string source =
+                @"
 public class A
 {
   public class B
@@ -527,13 +602,18 @@ public class A
 	}
   }
 }";
-            CompileAndVerify(source, options: TestOptions.ReleaseExe.WithMainTypeName("A.B.C"), expectedOutput: "1");
+            CompileAndVerify(
+                source,
+                options: TestOptions.ReleaseExe.WithMainTypeName("A.B.C"),
+                expectedOutput: "1"
+            );
         }
 
         [Fact]
         public void MultipleArities2()
         {
-            string source = @"
+            string source =
+                @"
 public class A
 {
   public class B<T>
@@ -551,13 +631,18 @@ public class A
     }
   }
 }";
-            CompileAndVerify(source, options: TestOptions.ReleaseExe.WithMainTypeName("A.B.C"), expectedOutput: "1");
+            CompileAndVerify(
+                source,
+                options: TestOptions.ReleaseExe.WithMainTypeName("A.B.C"),
+                expectedOutput: "1"
+            );
         }
 
         [Fact]
         public void MultipleArities3()
         {
-            string source = @"
+            string source =
+                @"
 public class A
 {
   public class B<S,T>
@@ -577,9 +662,11 @@ public class A
   }
 }";
             // Dev10 reports CS1555: Could not find 'A.B.C' specified for Main method
-            CreateCompilation(source, options: TestOptions.ReleaseExe.WithMainTypeName("A.B.C")).VerifyDiagnostics(
-                // (14,11): error CS1556: 'A.B<T>.C' specified for Main method must be a non-generic class, record, struct, or interface
-                Diagnostic(ErrorCode.ERR_MainClassNotClass, "C").WithArguments("A.B<T>.C"));
+            CreateCompilation(source, options: TestOptions.ReleaseExe.WithMainTypeName("A.B.C"))
+                .VerifyDiagnostics(
+                    // (14,11): error CS1556: 'A.B<T>.C' specified for Main method must be a non-generic class, record, struct, or interface
+                    Diagnostic(ErrorCode.ERR_MainClassNotClass, "C").WithArguments("A.B<T>.C")
+                );
         }
 
         /// <summary>
@@ -588,7 +675,8 @@ public class A
         [Fact]
         public void ExplicitMainTypeName_GenericAndNonGeneric()
         {
-            string source = @"
+            string source =
+                @"
 class C<T> 
 {
     static void Main() { }
@@ -599,7 +687,10 @@ class C
     static void Main() { }
 }
 ";
-            var compilation = CreateCompilation(source, options: TestOptions.ReleaseExe.WithMainTypeName("C"));
+            var compilation = CreateCompilation(
+                source,
+                options: TestOptions.ReleaseExe.WithMainTypeName("C")
+            );
             compilation.VerifyDiagnostics();
         }
 
@@ -610,7 +701,8 @@ class C
         [Fact]
         public void ExplicitMainTypeName_GenericMultipleArities()
         {
-            string source = @"
+            string source =
+                @"
 class C<S, T>
 {
     static void Main() { }
@@ -621,21 +713,26 @@ class C<T>
     static void Main() { }
 }
 ";
-            var compilation = CreateCompilation(source, options: TestOptions.ReleaseExe.WithMainTypeName("C"));
+            var compilation = CreateCompilation(
+                source,
+                options: TestOptions.ReleaseExe.WithMainTypeName("C")
+            );
             compilation.VerifyDiagnostics(
                 // (7,7): error CS1556: 'C<T>' specified for Main method must be a non-generic class, record, struct, or interface
-                Diagnostic(ErrorCode.ERR_MainClassNotClass, "C").WithArguments("C<T>"));
+                Diagnostic(ErrorCode.ERR_MainClassNotClass, "C").WithArguments("C<T>")
+            );
         }
 
         /// <summary>
         /// Warnings reported for all nonviable, "missing main" error reported.
-        /// Dev10: reports a warning for instance Main(bool) but that's seems to be a bug 
+        /// Dev10: reports a warning for instance Main(bool) but that's seems to be a bug
         /// since the warning is not reported when main type name is not specified.
         /// </summary>
         [Fact]
         public void ExplicitMainTypeHasMultipleMains_NoViable()
         {
-            string source = @"
+            string source =
+                @"
 public class C 
 {
     int Main(bool b) { return 1; }
@@ -644,7 +741,10 @@ public class C
     static int Main<T>() { return 1; }      
 }
 ";
-            var compilation = CreateCompilation(source, options: TestOptions.ReleaseExe.WithMainTypeName("C"));
+            var compilation = CreateCompilation(
+                source,
+                options: TestOptions.ReleaseExe.WithMainTypeName("C")
+            );
             compilation.VerifyDiagnostics(
                 // (5,16): warning CS0028: 'C.Main(string)' has the wrong signature to be an entry point
                 Diagnostic(ErrorCode.WRN_InvalidMainSig, "Main").WithArguments("C.Main(string)"),
@@ -653,7 +753,8 @@ public class C
                 // (7,16): warning CS0402: 'C.Main<T>()': an entry point cannot be generic or in a generic type
                 Diagnostic(ErrorCode.WRN_MainCantBeGeneric, "Main").WithArguments("C.Main<T>()"),
                 // (2,14): error CS1558: 'C' does not have a suitable static Main method
-                Diagnostic(ErrorCode.ERR_NoMainInClass, "C").WithArguments("C"));
+                Diagnostic(ErrorCode.ERR_NoMainInClass, "C").WithArguments("C")
+            );
         }
 
         /// <summary>
@@ -662,7 +763,8 @@ public class C
         [Fact]
         public void ExplicitMainTypeHasMultipleMains_SingleViable()
         {
-            string source = @"
+            string source =
+                @"
 public class C 
 {
     int Main(bool b) { return 1; }
@@ -672,7 +774,10 @@ public class C
     static int Main<T>() { return 1; }      
 }
 ";
-            var compilation = CreateCompilation(source, options: TestOptions.ReleaseExe.WithMainTypeName("C"));
+            var compilation = CreateCompilation(
+                source,
+                options: TestOptions.ReleaseExe.WithMainTypeName("C")
+            );
             compilation.VerifyDiagnostics();
         }
 
@@ -682,7 +787,8 @@ public class C
         [Fact]
         public void ExplicitMainTypeHasMultipleMains_MultipleViable()
         {
-            string source = @"
+            string source =
+                @"
 public class C 
 {
     int Main(bool b) { return 1; }
@@ -693,16 +799,21 @@ public class C
     static int Main<T>() { return 1; }
 }
 ";
-            var compilation = CreateCompilation(source, options: TestOptions.ReleaseExe.WithMainTypeName("C"));
+            var compilation = CreateCompilation(
+                source,
+                options: TestOptions.ReleaseExe.WithMainTypeName("C")
+            );
             compilation.VerifyDiagnostics(
                 // (5,16): error CS0017: Program has more than one entry point defined. Compile with /main to specify the type that contains the entry point.
-                Diagnostic(ErrorCode.ERR_MultipleEntryPoints, "Main"));
+                Diagnostic(ErrorCode.ERR_MultipleEntryPoints, "Main")
+            );
         }
 
         [Fact]
         public void ERR_NoEntryPoint_NonMethod()
         {
-            string source = @"
+            string source =
+                @"
 public class G 
 {
    public static int Main = 1;
@@ -712,19 +823,22 @@ public class G
 
             compilation.VerifyDiagnostics(
                 // error CS5001: Program does not contain a static 'Main' method suitable for an entry point
-                Diagnostic(ErrorCode.ERR_NoEntryPoint));
+                Diagnostic(ErrorCode.ERR_NoEntryPoint)
+            );
         }
 
         [Fact]
         public void Script()
         {
-            string source = @"
+            string source =
+                @"
 System.Console.WriteLine(1);
 ";
 
             var compilation = CreateCompilationWithMscorlib45(
                 new[] { SyntaxFactory.ParseSyntaxTree(source, options: TestOptions.Script) },
-                options: TestOptions.ReleaseExe);
+                options: TestOptions.ReleaseExe
+            );
 
             CompileAndVerify(compilation, expectedOutput: "1");
         }
@@ -732,11 +846,13 @@ System.Console.WriteLine(1);
         [Fact]
         public void ScriptAndRegularFile_ExplicitMain()
         {
-            string csx = @"
+            string csx =
+                @"
 System.Console.WriteLine(1);
 ";
 
-            string cs = @"
+            string cs =
+                @"
 public class C 
 {
    public static void Main() { System.Console.WriteLine(2); }
@@ -747,13 +863,15 @@ public class C
                 new[]
                 {
                     SyntaxFactory.ParseSyntaxTree(csx, options: TestOptions.Script),
-                    SyntaxFactory.ParseSyntaxTree(cs, options: TestOptions.Regular)
+                    SyntaxFactory.ParseSyntaxTree(cs, options: TestOptions.Regular),
                 },
-                options: TestOptions.ReleaseExe);
+                options: TestOptions.ReleaseExe
+            );
 
             compilation.VerifyDiagnostics(
                 // (4,23): warning CS7022: The entry point of the program is global script code; ignoring 'C.Main()' entry point.
-                Diagnostic(ErrorCode.WRN_MainIgnored, "Main").WithArguments("C.Main()"));
+                Diagnostic(ErrorCode.WRN_MainIgnored, "Main").WithArguments("C.Main()")
+            );
 
             CompileAndVerify(compilation, expectedOutput: "1");
         }
@@ -761,11 +879,13 @@ public class C
         [Fact]
         public void ScriptAndRegularFile_ExplicitMains()
         {
-            string csx = @"
+            string csx =
+                @"
 System.Console.WriteLine(1);
 ";
 
-            string cs = @"
+            string cs =
+                @"
 public class C 
 {
    public static void Main() { System.Console.WriteLine(2); }
@@ -781,15 +901,17 @@ public class D
                 new[]
                 {
                     SyntaxFactory.ParseSyntaxTree(csx, options: TestOptions.Script),
-                    SyntaxFactory.ParseSyntaxTree(cs, options: TestOptions.Regular)
+                    SyntaxFactory.ParseSyntaxTree(cs, options: TestOptions.Regular),
                 },
-                options: TestOptions.ReleaseExe);
+                options: TestOptions.ReleaseExe
+            );
 
             compilation.VerifyDiagnostics(
                 // (4,23): warning CS7022: The entry point of the program is global script code; ignoring 'C.Main()' entry point.
                 Diagnostic(ErrorCode.WRN_MainIgnored, "Main").WithArguments("C.Main()"),
                 // (9,23): warning CS7022: The entry point of the program is global script code; ignoring 'C.Main()' entry point.
-                Diagnostic(ErrorCode.WRN_MainIgnored, "Main").WithArguments("D.Main()"));
+                Diagnostic(ErrorCode.WRN_MainIgnored, "Main").WithArguments("D.Main()")
+            );
 
             CompileAndVerify(compilation, expectedOutput: "1");
         }
@@ -797,7 +919,8 @@ public class D
         [Fact]
         public void ExplicitMain()
         {
-            string source = @"
+            string source =
+                @"
 class C 
 {
    static void Main() { System.Console.WriteLine(1); }
@@ -809,17 +932,24 @@ class D
 }
 ";
 
-            var compilation = CreateCompilation(source, options: TestOptions.ReleaseExe.WithMainTypeName("C"));
+            var compilation = CreateCompilation(
+                source,
+                options: TestOptions.ReleaseExe.WithMainTypeName("C")
+            );
             CompileAndVerify(compilation, expectedOutput: "1");
 
-            compilation = CreateCompilation(source, options: TestOptions.ReleaseExe.WithMainTypeName("D"));
+            compilation = CreateCompilation(
+                source,
+                options: TestOptions.ReleaseExe.WithMainTypeName("D")
+            );
             CompileAndVerify(compilation, expectedOutput: "2");
         }
 
         [Fact]
         public void ERR_MainClassNotFound()
         {
-            string source = @"
+            string source =
+                @"
 class C 
 {
    static void Main() { System.Console.WriteLine(1); }
@@ -828,17 +958,20 @@ class C
 
             var compilation = CreateCompilation(
                 source,
-                options: TestOptions.ReleaseExe.WithMainTypeName("D"));
+                options: TestOptions.ReleaseExe.WithMainTypeName("D")
+            );
 
             compilation.VerifyDiagnostics(
                 // error CS1555: Could not find 'D' specified for Main method
-                Diagnostic(ErrorCode.ERR_MainClassNotFound).WithArguments("D"));
+                Diagnostic(ErrorCode.ERR_MainClassNotFound).WithArguments("D")
+            );
         }
 
         [Fact]
         public void ERR_MainClassNotClass()
         {
-            string source = @"
+            string source =
+                @"
 enum C { }
 delegate void D();
 interface I { }
@@ -846,35 +979,43 @@ interface I { }
 
             var compilation = CreateCompilation(
                 source,
-                options: TestOptions.ReleaseExe.WithMainTypeName("C"));
+                options: TestOptions.ReleaseExe.WithMainTypeName("C")
+            );
 
             compilation.VerifyDiagnostics(
                 // (2,6): error CS1556: 'C' specified for Main method must be a valid class or struct
-                Diagnostic(ErrorCode.ERR_MainClassNotClass, "C").WithArguments("C"));
+                Diagnostic(ErrorCode.ERR_MainClassNotClass, "C").WithArguments("C")
+            );
 
             compilation = CreateCompilation(
                 source,
-                options: TestOptions.ReleaseExe.WithMainTypeName("D"));
+                options: TestOptions.ReleaseExe.WithMainTypeName("D")
+            );
 
             compilation.VerifyDiagnostics(
                 // (3,15): error CS1556: 'D' specified for Main method must be a valid class or struct
-                Diagnostic(ErrorCode.ERR_MainClassNotClass, "D").WithArguments("D"));
+                Diagnostic(ErrorCode.ERR_MainClassNotClass, "D").WithArguments("D")
+            );
 
             compilation = CreateCompilation(
                 source,
-                options: TestOptions.ReleaseExe.WithMainTypeName("I"));
+                options: TestOptions.ReleaseExe.WithMainTypeName("I")
+            );
 
             compilation.VerifyDiagnostics(
                 // (4,11): error CS1558: 'I' does not have a suitable static Main method
                 // interface I { }
-                Diagnostic(ErrorCode.ERR_NoMainInClass, "I").WithArguments("I").WithLocation(4, 11)
-                );
+                Diagnostic(ErrorCode.ERR_NoMainInClass, "I")
+                    .WithArguments("I")
+                    .WithLocation(4, 11)
+            );
         }
 
         [Fact]
         public void ERR_NoMainInClass()
         {
-            string source = @"
+            string source =
+                @"
 class C 
 {
    void Main() { System.Console.WriteLine(1); }
@@ -892,32 +1033,46 @@ class E
 ";
 
             // Dev10: reports a warning for instance Main, we don't since the signature is correct:
-            var compilation = CreateCompilation(source, options: TestOptions.ReleaseExe.WithMainTypeName("C"));
+            var compilation = CreateCompilation(
+                source,
+                options: TestOptions.ReleaseExe.WithMainTypeName("C")
+            );
             compilation.VerifyDiagnostics(
                 // (2,7): error CS1558: 'C' does not have a suitable static Main method
-                Diagnostic(ErrorCode.ERR_NoMainInClass, "C").WithArguments("C"));
+                Diagnostic(ErrorCode.ERR_NoMainInClass, "C").WithArguments("C")
+            );
 
-            compilation = CreateCompilation(source, options: TestOptions.ReleaseExe.WithMainTypeName("D"));
+            compilation = CreateCompilation(
+                source,
+                options: TestOptions.ReleaseExe.WithMainTypeName("D")
+            );
             compilation.VerifyDiagnostics(
                 // (9,16): warning CS0028: 'D.Main(double)' has the wrong signature to be an entry point
                 Diagnostic(ErrorCode.WRN_InvalidMainSig, "Main").WithArguments("D.Main(double)"),
                 // (7,7): error CS1558: 'D' does not have a suitable static Main method
-                Diagnostic(ErrorCode.ERR_NoMainInClass, "D").WithArguments("D"));
+                Diagnostic(ErrorCode.ERR_NoMainInClass, "D").WithArguments("D")
+            );
 
-            compilation = CreateCompilation(source, options: TestOptions.ReleaseExe.WithMainTypeName("E"));
+            compilation = CreateCompilation(
+                source,
+                options: TestOptions.ReleaseExe.WithMainTypeName("E")
+            );
             compilation.VerifyDiagnostics(
                 // (2,7): error CS1558: 'E' does not have a suitable static Main method
-                Diagnostic(ErrorCode.ERR_NoMainInClass, "E").WithArguments("E"));
+                Diagnostic(ErrorCode.ERR_NoMainInClass, "E").WithArguments("E")
+            );
         }
 
         [Fact]
         public void ERR_NoMainInClass_Script()
         {
-            string csx = @"
+            string csx =
+                @"
 System.Console.WriteLine(2);
 ";
 
-            string cs = @"
+            string cs =
+                @"
 class C 
 {
    void Main() { System.Console.WriteLine(1); }
@@ -930,17 +1085,20 @@ class C
                     SyntaxFactory.ParseSyntaxTree(csx, options: TestOptions.Script),
                     SyntaxFactory.ParseSyntaxTree(cs, options: TestOptions.Regular),
                 },
-                options: TestOptions.ReleaseExe.WithMainTypeName("C"));
+                options: TestOptions.ReleaseExe.WithMainTypeName("C")
+            );
 
             compilation.VerifyDiagnostics(
                 // (2,7): warning CS7022: The entry point of the program is global script code; ignoring 'C' entry point.
-                Diagnostic(ErrorCode.WRN_MainIgnored).WithArguments("C"));
+                Diagnostic(ErrorCode.WRN_MainIgnored).WithArguments("C")
+            );
         }
 
         [Fact]
         public void WRN_InvalidMainSig_MultiDimensionalArray()
         {
-            string source = @"
+            string source =
+                @"
 class B
 {
     public static void Main(string[,] args)
@@ -948,17 +1106,21 @@ class B
     }
 } 
 ";
-            CompileConsoleApp(source).VerifyDiagnostics(// (4,24): warning CS0028: 'B.Main(string[*,*])' has the wrong signature to be an entry point
-                                                        //     public static void Main(string[,] args)
-                Diagnostic(ErrorCode.WRN_InvalidMainSig, "Main").WithArguments("B.Main(string[*,*])"),
-                // error CS5001: Program does not contain a static 'Main' method suitable for an entry point
-                Diagnostic(ErrorCode.ERR_NoEntryPoint));
+            CompileConsoleApp(source)
+                .VerifyDiagnostics( // (4,24): warning CS0028: 'B.Main(string[*,*])' has the wrong signature to be an entry point
+                    //     public static void Main(string[,] args)
+                    Diagnostic(ErrorCode.WRN_InvalidMainSig, "Main")
+                        .WithArguments("B.Main(string[*,*])"),
+                    // error CS5001: Program does not contain a static 'Main' method suitable for an entry point
+                    Diagnostic(ErrorCode.ERR_NoEntryPoint)
+                );
         }
 
         [Fact]
         public void WRN_InvalidMainSig_JaggedArray()
         {
-            string source = @"
+            string source =
+                @"
 class B
 {
     public static void Main(string[][] args)
@@ -966,17 +1128,21 @@ class B
     }
 } 
 ";
-            CompileConsoleApp(source).VerifyDiagnostics(// (4,24): warning CS0028: 'B.Main(string[][])' has the wrong signature to be an entry point
-                                                        //     public static void Main(string[][] args)
-                Diagnostic(ErrorCode.WRN_InvalidMainSig, "Main").WithArguments("B.Main(string[][])"),
-                // error CS5001: Program does not contain a static 'Main' method suitable for an entry point
-                Diagnostic(ErrorCode.ERR_NoEntryPoint));
+            CompileConsoleApp(source)
+                .VerifyDiagnostics( // (4,24): warning CS0028: 'B.Main(string[][])' has the wrong signature to be an entry point
+                    //     public static void Main(string[][] args)
+                    Diagnostic(ErrorCode.WRN_InvalidMainSig, "Main")
+                        .WithArguments("B.Main(string[][])"),
+                    // error CS5001: Program does not contain a static 'Main' method suitable for an entry point
+                    Diagnostic(ErrorCode.ERR_NoEntryPoint)
+                );
         }
 
         [Fact]
         public void WRN_InvalidMainSig_Array()
         {
-            string source = @"
+            string source =
+                @"
 using System;
 class B
 {
@@ -985,31 +1151,38 @@ class B
     }
 } 
 ";
-            CompileConsoleApp(source).VerifyDiagnostics(// (5,24): warning CS0028: 'B.Main(System.Array)' has the wrong signature to be an entry point
-                                                        //     public static void Main(Array args)
-                Diagnostic(ErrorCode.WRN_InvalidMainSig, "Main").WithArguments("B.Main(System.Array)"),
-                // error CS5001: Program does not contain a static 'Main' method suitable for an entry point
-                Diagnostic(ErrorCode.ERR_NoEntryPoint));
+            CompileConsoleApp(source)
+                .VerifyDiagnostics( // (5,24): warning CS0028: 'B.Main(System.Array)' has the wrong signature to be an entry point
+                    //     public static void Main(Array args)
+                    Diagnostic(ErrorCode.WRN_InvalidMainSig, "Main")
+                        .WithArguments("B.Main(System.Array)"),
+                    // error CS5001: Program does not contain a static 'Main' method suitable for an entry point
+                    Diagnostic(ErrorCode.ERR_NoEntryPoint)
+                );
         }
 
         [Fact]
         public void ERR_NoEntryPoint_MainIsProperty()
         {
-            string source = @"
+            string source =
+                @"
 class Program
 {
     int Main { get; set; }
 }
 ";
-            CompileConsoleApp(source).VerifyDiagnostics(
-                // error CS5001: Program does not contain a static 'Main' method suitable for an entry point
-                Diagnostic(ErrorCode.ERR_NoEntryPoint));
+            CompileConsoleApp(source)
+                .VerifyDiagnostics(
+                    // error CS5001: Program does not contain a static 'Main' method suitable for an entry point
+                    Diagnostic(ErrorCode.ERR_NoEntryPoint)
+                );
         }
 
         [Fact]
         public void WRN_InvalidMainSig_ReturnTypeOtherThanIntVoid()
         {
-            string source = @"
+            string source =
+                @"
 class B
 {
     public static int[] Main(string[] args)
@@ -1018,18 +1191,22 @@ class B
     }
 }
 ";
-            CompileConsoleApp(source).VerifyDiagnostics(
-                // (4,25): warning CS0028: 'B.Main(string[])' has the wrong signature to be an entry point
-                //     public static int[] Main(string[] args)
-                Diagnostic(ErrorCode.WRN_InvalidMainSig, "Main").WithArguments("B.Main(string[])"),
-                // error CS5001: Program does not contain a static 'Main' method suitable for an entry point
-                Diagnostic(ErrorCode.ERR_NoEntryPoint));
+            CompileConsoleApp(source)
+                .VerifyDiagnostics(
+                    // (4,25): warning CS0028: 'B.Main(string[])' has the wrong signature to be an entry point
+                    //     public static int[] Main(string[] args)
+                    Diagnostic(ErrorCode.WRN_InvalidMainSig, "Main")
+                        .WithArguments("B.Main(string[])"),
+                    // error CS5001: Program does not contain a static 'Main' method suitable for an entry point
+                    Diagnostic(ErrorCode.ERR_NoEntryPoint)
+                );
         }
 
         [Fact]
         public void ParamParameterForMain()
         {
-            string source = @"
+            string source =
+                @"
 class B
 {
     public static void Main(params string[] x)
@@ -1043,7 +1220,8 @@ class B
         [Fact]
         public void ParamParameterForMain_1()
         {
-            string source = @"
+            string source =
+                @"
 class B
 {
     public static void Main(int x=1,params string[] str)
@@ -1051,17 +1229,21 @@ class B
     }
 }
 ";
-            CompileConsoleApp(source).VerifyDiagnostics(// (4,24): warning CS0028: 'B.Main(int, params string[])' has the wrong signature to be an entry point
-                                                        //     public static void Main(int x=1,params string[] str)
-                Diagnostic(ErrorCode.WRN_InvalidMainSig, "Main").WithArguments("B.Main(int, params string[])"),
-                // error CS5001: Program does not contain a static 'Main' method suitable for an entry point
-                Diagnostic(ErrorCode.ERR_NoEntryPoint));
+            CompileConsoleApp(source)
+                .VerifyDiagnostics( // (4,24): warning CS0028: 'B.Main(int, params string[])' has the wrong signature to be an entry point
+                    //     public static void Main(int x=1,params string[] str)
+                    Diagnostic(ErrorCode.WRN_InvalidMainSig, "Main")
+                        .WithArguments("B.Main(int, params string[])"),
+                    // error CS5001: Program does not contain a static 'Main' method suitable for an entry point
+                    Diagnostic(ErrorCode.ERR_NoEntryPoint)
+                );
         }
 
         [Fact]
         public void ParamParameterForMain_2()
         {
-            string source = @"
+            string source =
+                @"
 class B
 {
     public static void Main(string[] str,params string[] str1)
@@ -1069,17 +1251,21 @@ class B
     }
 }
 ";
-            CompileConsoleApp(source).VerifyDiagnostics(// (4,24): warning CS0028: 'B.Main(string[], params string[])' has the wrong signature to be an entry point
-                                                        //     public static void Main(string[] str,params string[] str1)
-                Diagnostic(ErrorCode.WRN_InvalidMainSig, "Main").WithArguments("B.Main(string[], params string[])"),
-                // error CS5001: Program does not contain a static 'Main' method suitable for an entry point
-                Diagnostic(ErrorCode.ERR_NoEntryPoint));
+            CompileConsoleApp(source)
+                .VerifyDiagnostics( // (4,24): warning CS0028: 'B.Main(string[], params string[])' has the wrong signature to be an entry point
+                    //     public static void Main(string[] str,params string[] str1)
+                    Diagnostic(ErrorCode.WRN_InvalidMainSig, "Main")
+                        .WithArguments("B.Main(string[], params string[])"),
+                    // error CS5001: Program does not contain a static 'Main' method suitable for an entry point
+                    Diagnostic(ErrorCode.ERR_NoEntryPoint)
+                );
         }
 
         [Fact]
         public void ParamParameterForMain_3()
         {
-            string source = @"
+            string source =
+                @"
 class B
 {
     public static void Main(params int[] x)
@@ -1087,17 +1273,21 @@ class B
     }
 }
 ";
-            CompileConsoleApp(source).VerifyDiagnostics(// (4,24): warning CS0028: 'B.Main(params int[])' has the wrong signature to be an entry point
-                                                        //     public static void Main(params int[] x)
-                Diagnostic(ErrorCode.WRN_InvalidMainSig, "Main").WithArguments("B.Main(params int[])"),
-                // error CS5001: Program does not contain a static 'Main' method suitable for an entry point
-                Diagnostic(ErrorCode.ERR_NoEntryPoint));
+            CompileConsoleApp(source)
+                .VerifyDiagnostics( // (4,24): warning CS0028: 'B.Main(params int[])' has the wrong signature to be an entry point
+                    //     public static void Main(params int[] x)
+                    Diagnostic(ErrorCode.WRN_InvalidMainSig, "Main")
+                        .WithArguments("B.Main(params int[])"),
+                    // error CS5001: Program does not contain a static 'Main' method suitable for an entry point
+                    Diagnostic(ErrorCode.ERR_NoEntryPoint)
+                );
         }
 
         [Fact]
         public void OptionalParameterForMain()
         {
-            string source = @"
+            string source =
+                @"
 class B
 {
     public static void Main(string[] arg = null)
@@ -1111,7 +1301,8 @@ class B
         [Fact]
         public void OptionalParameterForMain_1()
         {
-            string source = @"
+            string source =
+                @"
 class B
 {
     public static void Main(int x = 1)
@@ -1119,17 +1310,20 @@ class B
     }
 }
 ";
-            CompileConsoleApp(source).VerifyDiagnostics(// (4,24): warning CS0028: 'B.Main(int)' has the wrong signature to be an entry point
-                                                        //     public static void Main(int x = 1)
-                Diagnostic(ErrorCode.WRN_InvalidMainSig, "Main").WithArguments("B.Main(int)"),
-                // error CS5001: Program does not contain a static 'Main' method suitable for an entry point
-                Diagnostic(ErrorCode.ERR_NoEntryPoint));
+            CompileConsoleApp(source)
+                .VerifyDiagnostics( // (4,24): warning CS0028: 'B.Main(int)' has the wrong signature to be an entry point
+                    //     public static void Main(int x = 1)
+                    Diagnostic(ErrorCode.WRN_InvalidMainSig, "Main").WithArguments("B.Main(int)"),
+                    // error CS5001: Program does not contain a static 'Main' method suitable for an entry point
+                    Diagnostic(ErrorCode.ERR_NoEntryPoint)
+                );
         }
 
         [Fact]
         public void OptionalParameterForMain_2()
         {
-            string source = @"
+            string source =
+                @"
 class B
 {
     public static void Main(string[,] arg = null)
@@ -1137,17 +1331,21 @@ class B
     }
 }
 ";
-            CompileConsoleApp(source).VerifyDiagnostics(// (4,24): warning CS0028: 'B.Main(string[*,*])' has the wrong signature to be an entry point
-                                                        //     public static void Main(string[,] arg = null)
-                Diagnostic(ErrorCode.WRN_InvalidMainSig, "Main").WithArguments("B.Main(string[*,*])"),
-                // error CS5001: Program does not contain a static 'Main' method suitable for an entry point
-                Diagnostic(ErrorCode.ERR_NoEntryPoint));
+            CompileConsoleApp(source)
+                .VerifyDiagnostics( // (4,24): warning CS0028: 'B.Main(string[*,*])' has the wrong signature to be an entry point
+                    //     public static void Main(string[,] arg = null)
+                    Diagnostic(ErrorCode.WRN_InvalidMainSig, "Main")
+                        .WithArguments("B.Main(string[*,*])"),
+                    // error CS5001: Program does not contain a static 'Main' method suitable for an entry point
+                    Diagnostic(ErrorCode.ERR_NoEntryPoint)
+                );
         }
 
         [Fact]
         public void MainAsExtensionMethod()
         {
-            string source = @"
+            string source =
+                @"
 class B
 {
 }
@@ -1157,17 +1355,21 @@ static class Extension
     { }
 }
 ";
-            CreateCompilationWithMscorlib40AndSystemCore(source, options: TestOptions.ReleaseExe).VerifyDiagnostics(// (8,24): warning CS0028: 'Extension.Main(B, string[])' has the wrong signature to be an entry point
-                                                                                                                    //     public static void Main(this B x, string[] args)
-                Diagnostic(ErrorCode.WRN_InvalidMainSig, "Main").WithArguments("Extension.Main(B, string[])"),
-                // error CS5001: Program does not contain a static 'Main' method suitable for an entry point
-                Diagnostic(ErrorCode.ERR_NoEntryPoint));
+            CreateCompilationWithMscorlib40AndSystemCore(source, options: TestOptions.ReleaseExe)
+                .VerifyDiagnostics( // (8,24): warning CS0028: 'Extension.Main(B, string[])' has the wrong signature to be an entry point
+                    //     public static void Main(this B x, string[] args)
+                    Diagnostic(ErrorCode.WRN_InvalidMainSig, "Main")
+                        .WithArguments("Extension.Main(B, string[])"),
+                    // error CS5001: Program does not contain a static 'Main' method suitable for an entry point
+                    Diagnostic(ErrorCode.ERR_NoEntryPoint)
+                );
         }
 
         [Fact]
         public void MainAsExtensionMethod_1()
         {
-            string source = @"
+            string source =
+                @"
 class B
 {
 }
@@ -1177,34 +1379,42 @@ static class Extension
     { return 1; }
 }
 ";
-            CreateCompilationWithMscorlib40AndSystemCore(source, options: TestOptions.ReleaseExe).VerifyDiagnostics(// (8,23): warning CS0028: 'Extension.Main(B)' has the wrong signature to be an entry point
-                                                                                                                    //     public static int Main(this B x)
-                Diagnostic(ErrorCode.WRN_InvalidMainSig, "Main").WithArguments("Extension.Main(B)"),
-                // error CS5001: Program does not contain a static 'Main' method suitable for an entry point
-                Diagnostic(ErrorCode.ERR_NoEntryPoint));
+            CreateCompilationWithMscorlib40AndSystemCore(source, options: TestOptions.ReleaseExe)
+                .VerifyDiagnostics( // (8,23): warning CS0028: 'Extension.Main(B)' has the wrong signature to be an entry point
+                    //     public static int Main(this B x)
+                    Diagnostic(ErrorCode.WRN_InvalidMainSig, "Main")
+                        .WithArguments("Extension.Main(B)"),
+                    // error CS5001: Program does not contain a static 'Main' method suitable for an entry point
+                    Diagnostic(ErrorCode.ERR_NoEntryPoint)
+                );
         }
 
         [Fact]
         public void MainAsExtensionMethod_2()
         {
-            string source = @"
+            string source =
+                @"
 static class Extension
 {
     public static int Main(this string str)
     { return 1; }
 }
 ";
-            CreateCompilationWithMscorlib40AndSystemCore(source, options: TestOptions.ReleaseExe).VerifyDiagnostics(// (5,23): warning CS0028: 'Extension.Main(string)' has the wrong signature to be an entry point
-                                                                                                                    //     public static int Main(this string str)
-                Diagnostic(ErrorCode.WRN_InvalidMainSig, "Main").WithArguments("Extension.Main(string)"),
-                // error CS5001: Program does not contain a static 'Main' method suitable for an entry point
-                Diagnostic(ErrorCode.ERR_NoEntryPoint));
+            CreateCompilationWithMscorlib40AndSystemCore(source, options: TestOptions.ReleaseExe)
+                .VerifyDiagnostics( // (5,23): warning CS0028: 'Extension.Main(string)' has the wrong signature to be an entry point
+                    //     public static int Main(this string str)
+                    Diagnostic(ErrorCode.WRN_InvalidMainSig, "Main")
+                        .WithArguments("Extension.Main(string)"),
+                    // error CS5001: Program does not contain a static 'Main' method suitable for an entry point
+                    Diagnostic(ErrorCode.ERR_NoEntryPoint)
+                );
         }
 
         [Fact]
         public void MainIsCaseSensitive()
         {
-            string source = @"
+            string source =
+                @"
 class B
 {
     static void main() { }
@@ -1224,33 +1434,40 @@ class C
     static int maiN(string[] args) { return 1; }
 }
 ";
-            CompileConsoleApp(source).VerifyDiagnostics(
-                // error CS5001: Program does not contain a static 'Main' method suitable for an entry point
-                Diagnostic(ErrorCode.ERR_NoEntryPoint));
+            CompileConsoleApp(source)
+                .VerifyDiagnostics(
+                    // error CS5001: Program does not contain a static 'Main' method suitable for an entry point
+                    Diagnostic(ErrorCode.ERR_NoEntryPoint)
+                );
         }
 
         [WorkItem(543468, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/543468")]
         [Fact()]
         public void RefParameterForMain()
         {
-            string source = @"
+            string source =
+                @"
 class C
 {
     static void Main(ref string[] args) { }
 }
 ";
-            CompileConsoleApp(source).VerifyDiagnostics(
-                // (4,17): warning CS0028: 'C.Main(ref string[])' has the wrong signature to be an entry point
-                Diagnostic(ErrorCode.WRN_InvalidMainSig, "Main").WithArguments("C.Main(ref string[])"),
-                // error CS5001: Program does not contain a static 'Main' method suitable for an entry point
-                Diagnostic(ErrorCode.ERR_NoEntryPoint));
+            CompileConsoleApp(source)
+                .VerifyDiagnostics(
+                    // (4,17): warning CS0028: 'C.Main(ref string[])' has the wrong signature to be an entry point
+                    Diagnostic(ErrorCode.WRN_InvalidMainSig, "Main")
+                        .WithArguments("C.Main(ref string[])"),
+                    // error CS5001: Program does not contain a static 'Main' method suitable for an entry point
+                    Diagnostic(ErrorCode.ERR_NoEntryPoint)
+                );
         }
 
         [WorkItem(544478, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/544478")]
         [Fact()]
         public void ArglistParameterForMain()
         {
-            string source = @"
+            string source =
+                @"
 class C
 {
     static void Main(__arglist) { }
@@ -1261,37 +1478,46 @@ class D
     static void Main(string[] array, __arglist) { }
 }
 ";
-            CompileConsoleApp(source).VerifyDiagnostics(
-                // (4,17): warning CS0028: 'C.Main(__arglist)' has the wrong signature to be an entry point
-                Diagnostic(ErrorCode.WRN_InvalidMainSig, "Main").WithArguments("C.Main(__arglist)"),
-                // (9,17): warning CS0028: 'D.Main(string[], __arglist)' has the wrong signature to be an entry point
-                Diagnostic(ErrorCode.WRN_InvalidMainSig, "Main").WithArguments("D.Main(string[], __arglist)"),
-                // error CS5001: Program does not contain a static 'Main' method suitable for an entry point
-                Diagnostic(ErrorCode.ERR_NoEntryPoint));
+            CompileConsoleApp(source)
+                .VerifyDiagnostics(
+                    // (4,17): warning CS0028: 'C.Main(__arglist)' has the wrong signature to be an entry point
+                    Diagnostic(ErrorCode.WRN_InvalidMainSig, "Main")
+                        .WithArguments("C.Main(__arglist)"),
+                    // (9,17): warning CS0028: 'D.Main(string[], __arglist)' has the wrong signature to be an entry point
+                    Diagnostic(ErrorCode.WRN_InvalidMainSig, "Main")
+                        .WithArguments("D.Main(string[], __arglist)"),
+                    // error CS5001: Program does not contain a static 'Main' method suitable for an entry point
+                    Diagnostic(ErrorCode.ERR_NoEntryPoint)
+                );
         }
 
         [WorkItem(543467, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/543467")]
         [Fact()]
         public void OutParameterForMain()
         {
-            string source = @"
+            string source =
+                @"
 class Program
 {
     static void Main(out string[] args) {args = null; }
 }
 ";
-            CompileConsoleApp(source).VerifyDiagnostics(
-                // (4,17): warning CS0028: 'Program.Main(out string[])' has the wrong signature to be an entry point
-                //     static void Main(out string[] args) {args = null; }
-                Diagnostic(ErrorCode.WRN_InvalidMainSig, "Main").WithArguments("Program.Main(out string[])"),
-                // error CS5001: Program does not contain a static 'Main' method suitable for an entry point
-                Diagnostic(ErrorCode.ERR_NoEntryPoint));
+            CompileConsoleApp(source)
+                .VerifyDiagnostics(
+                    // (4,17): warning CS0028: 'Program.Main(out string[])' has the wrong signature to be an entry point
+                    //     static void Main(out string[] args) {args = null; }
+                    Diagnostic(ErrorCode.WRN_InvalidMainSig, "Main")
+                        .WithArguments("Program.Main(out string[])"),
+                    // error CS5001: Program does not contain a static 'Main' method suitable for an entry point
+                    Diagnostic(ErrorCode.ERR_NoEntryPoint)
+                );
         }
 
         [Fact()]
         public void MainInPrivateClass()
         {
-            string source = @"
+            string source =
+                @"
 class C1
 {
     private struct C2
@@ -1308,7 +1534,8 @@ class C1
         [Fact()]
         public void PrivateMain()
         {
-            string source = @"
+            string source =
+                @"
 class C
 {
     private static void Main(string[] args)
@@ -1322,7 +1549,8 @@ class C
         [Fact()]
         public void MultipleEntryPoint_Inherit()
         {
-            string source = @"
+            string source =
+                @"
 class BaseClass
 {
     public static void Main()
@@ -1334,19 +1562,23 @@ class Derived : BaseClass
     { }
 }
 ";
-            CompileConsoleApp(source).VerifyDiagnostics(
-                // (9,24): warning CS0108: 'Derived.Main()' hides inherited member 'BaseClass.Main()'. Use the new keyword if hiding was intended.
-                //     public static void Main()
-                Diagnostic(ErrorCode.WRN_NewRequired, "Main").WithArguments("Derived.Main()", "BaseClass.Main()"),
-                // (4,24): error CS0017: Program has more than one entry point defined. Compile with /main to specify the type that contains the entry point.
-                //     public static void Main()
-                Diagnostic(ErrorCode.ERR_MultipleEntryPoints, "Main"));
+            CompileConsoleApp(source)
+                .VerifyDiagnostics(
+                    // (9,24): warning CS0108: 'Derived.Main()' hides inherited member 'BaseClass.Main()'. Use the new keyword if hiding was intended.
+                    //     public static void Main()
+                    Diagnostic(ErrorCode.WRN_NewRequired, "Main")
+                        .WithArguments("Derived.Main()", "BaseClass.Main()"),
+                    // (4,24): error CS0017: Program has more than one entry point defined. Compile with /main to specify the type that contains the entry point.
+                    //     public static void Main()
+                    Diagnostic(ErrorCode.ERR_MultipleEntryPoints, "Main")
+                );
         }
 
         [Fact()]
         public void ERR_NoEntryPoint_MainMustStatic()
         {
-            string source = @"
+            string source =
+                @"
 class C
 {
     private void Main(string[] args)
@@ -1358,38 +1590,46 @@ class C
     }
 }
 ";
-            CompileConsoleApp(source).VerifyDiagnostics(
-                // error CS5001: Program does not contain a static 'Main' method suitable for an entry point
-                Diagnostic(ErrorCode.ERR_NoEntryPoint));
+            CompileConsoleApp(source)
+                .VerifyDiagnostics(
+                    // error CS5001: Program does not contain a static 'Main' method suitable for an entry point
+                    Diagnostic(ErrorCode.ERR_NoEntryPoint)
+                );
         }
 
         [Fact()]
         public void ERR_NoEntryPoint_MainAsConstructor()
         {
-            string source = @"
+            string source =
+                @"
 static class Main
 {
     static Main() { }
 }
 ";
-            CompileConsoleApp(source).VerifyDiagnostics(
-                // error CS5001: Program does not contain a static 'Main' method suitable for an entry point
-                Diagnostic(ErrorCode.ERR_NoEntryPoint));
+            CompileConsoleApp(source)
+                .VerifyDiagnostics(
+                    // error CS5001: Program does not contain a static 'Main' method suitable for an entry point
+                    Diagnostic(ErrorCode.ERR_NoEntryPoint)
+                );
         }
 
         [Fact()]
         public void ExplicitMainType_MainIsNotStatic()
         {
-            string source = @"
+            string source =
+                @"
 class D
 {
     void Main() { }
 }
 ";
-            CreateCompilation(source, options: TestOptions.ReleaseExe.WithMainTypeName("D")).VerifyDiagnostics(
-                // (2,7): error CS1558: 'D' does not have a suitable static Main method
-                // class D
-                Diagnostic(ErrorCode.ERR_NoMainInClass, "D").WithArguments("D"));
+            CreateCompilation(source, options: TestOptions.ReleaseExe.WithMainTypeName("D"))
+                .VerifyDiagnostics(
+                    // (2,7): error CS1558: 'D' does not have a suitable static Main method
+                    // class D
+                    Diagnostic(ErrorCode.ERR_NoMainInClass, "D").WithArguments("D")
+                );
         }
 
         [WorkItem(753028, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/753028")]
@@ -1399,83 +1639,108 @@ class D
             string source;
 
             source = @"namespace Script { }";
-            CreateCompilation(source, options: TestOptions.ReleaseExe).VerifyDiagnostics(
-                // error CS5001: Program does not contain a static 'Main' method suitable for an entry point
-                Diagnostic(ErrorCode.ERR_NoEntryPoint));
+            CreateCompilation(source, options: TestOptions.ReleaseExe)
+                .VerifyDiagnostics(
+                    // error CS5001: Program does not contain a static 'Main' method suitable for an entry point
+                    Diagnostic(ErrorCode.ERR_NoEntryPoint)
+                );
 
             source = @"class Script { }";
-            CreateCompilation(source, options: TestOptions.ReleaseExe).VerifyDiagnostics(
-                // error CS5001: Program does not contain a static 'Main' method suitable for an entry point
-                Diagnostic(ErrorCode.ERR_NoEntryPoint));
+            CreateCompilation(source, options: TestOptions.ReleaseExe)
+                .VerifyDiagnostics(
+                    // error CS5001: Program does not contain a static 'Main' method suitable for an entry point
+                    Diagnostic(ErrorCode.ERR_NoEntryPoint)
+                );
 
             source = @"struct Script { }";
-            CreateCompilation(source, options: TestOptions.ReleaseExe).VerifyDiagnostics(
-                // error CS5001: Program does not contain a static 'Main' method suitable for an entry point
-                Diagnostic(ErrorCode.ERR_NoEntryPoint));
+            CreateCompilation(source, options: TestOptions.ReleaseExe)
+                .VerifyDiagnostics(
+                    // error CS5001: Program does not contain a static 'Main' method suitable for an entry point
+                    Diagnostic(ErrorCode.ERR_NoEntryPoint)
+                );
 
             source = @"interface Script<T> { }";
-            CreateCompilation(source, options: TestOptions.ReleaseExe).VerifyDiagnostics(
-                // error CS5001: Program does not contain a static 'Main' method suitable for an entry point
-                Diagnostic(ErrorCode.ERR_NoEntryPoint));
+            CreateCompilation(source, options: TestOptions.ReleaseExe)
+                .VerifyDiagnostics(
+                    // error CS5001: Program does not contain a static 'Main' method suitable for an entry point
+                    Diagnostic(ErrorCode.ERR_NoEntryPoint)
+                );
 
             source = @"enum Script { }";
-            CreateCompilation(source, options: TestOptions.ReleaseExe).VerifyDiagnostics(
-                // error CS5001: Program does not contain a static 'Main' method suitable for an entry point
-                Diagnostic(ErrorCode.ERR_NoEntryPoint));
+            CreateCompilation(source, options: TestOptions.ReleaseExe)
+                .VerifyDiagnostics(
+                    // error CS5001: Program does not contain a static 'Main' method suitable for an entry point
+                    Diagnostic(ErrorCode.ERR_NoEntryPoint)
+                );
 
             source = @"delegate void Script();";
-            CreateCompilation(source, options: TestOptions.ReleaseExe).VerifyDiagnostics(
-                // error CS5001: Program does not contain a static 'Main' method suitable for an entry point
-                Diagnostic(ErrorCode.ERR_NoEntryPoint));
+            CreateCompilation(source, options: TestOptions.ReleaseExe)
+                .VerifyDiagnostics(
+                    // error CS5001: Program does not contain a static 'Main' method suitable for an entry point
+                    Diagnostic(ErrorCode.ERR_NoEntryPoint)
+                );
         }
 
         [Fact()]
         public void ExplicitMainType_ClassNameIsEmpty()
         {
-            string source = @"
+            string source =
+                @"
 class D
 {
     static void Main() { }
 }
 ";
-            CreateCompilation(source, options: TestOptions.ReleaseExe.WithMainTypeName(string.Empty)).VerifyDiagnostics(
-    // error CS7088: Invalid 'MainTypeName' value: ''.
-    Diagnostic(ErrorCode.ERR_BadCompilationOptionValue).WithArguments("MainTypeName", "")
+            CreateCompilation(
+                    source,
+                    options: TestOptions.ReleaseExe.WithMainTypeName(string.Empty)
+                )
+                .VerifyDiagnostics(
+                    // error CS7088: Invalid 'MainTypeName' value: ''.
+                    Diagnostic(ErrorCode.ERR_BadCompilationOptionValue)
+                        .WithArguments("MainTypeName", "")
                 );
         }
 
         [Fact()]
         public void ExplicitMainType_NoMainInClass()
         {
-            string source = @"
+            string source =
+                @"
 class D
 {
 }
 ";
-            CreateCompilation(source, options: TestOptions.ReleaseExe.WithMainTypeName("D")).VerifyDiagnostics(
-                // (2,7): error CS1558: 'D' does not have a suitable static Main method
-                // class D
-                Diagnostic(ErrorCode.ERR_NoMainInClass, "D").WithArguments("D"));
+            CreateCompilation(source, options: TestOptions.ReleaseExe.WithMainTypeName("D"))
+                .VerifyDiagnostics(
+                    // (2,7): error CS1558: 'D' does not have a suitable static Main method
+                    // class D
+                    Diagnostic(ErrorCode.ERR_NoMainInClass, "D").WithArguments("D")
+                );
         }
 
         [Fact()]
         public void ExplicitMainType_CaseSensitive()
         {
-            string source = @"
+            string source =
+                @"
 class D
 {
     static void Main(){}
 }
 ";
-            CreateCompilation(source, options: TestOptions.ReleaseExe.WithMainTypeName("d")).VerifyDiagnostics(
-                // error CS1555: Could not find 'd' specified for Main method
-                Diagnostic(ErrorCode.ERR_MainClassNotFound).WithArguments("d"));
+            CreateCompilation(source, options: TestOptions.ReleaseExe.WithMainTypeName("d"))
+                .VerifyDiagnostics(
+                    // error CS1555: Could not find 'd' specified for Main method
+                    Diagnostic(ErrorCode.ERR_MainClassNotFound).WithArguments("d")
+                );
         }
 
         [Fact()]
         public void ExplicitMainType_Extension()
         {
-            string source = @"
+            string source =
+                @"
 class B
 {
 }
@@ -1485,40 +1750,58 @@ static class @extension
     { }
 }
 ";
-            CreateCompilationWithMscorlib40AndSystemCore(source, options: TestOptions.ReleaseExe.WithMainTypeName("B")).VerifyDiagnostics(
-                // (2,7): error CS1558: 'B' does not have a suitable static Main method
-                // class B
-                Diagnostic(ErrorCode.ERR_NoMainInClass, "B").WithArguments("B"));
+            CreateCompilationWithMscorlib40AndSystemCore(
+                    source,
+                    options: TestOptions.ReleaseExe.WithMainTypeName("B")
+                )
+                .VerifyDiagnostics(
+                    // (2,7): error CS1558: 'B' does not have a suitable static Main method
+                    // class B
+                    Diagnostic(ErrorCode.ERR_NoMainInClass, "B").WithArguments("B")
+                );
 
-            CreateCompilationWithMscorlib40AndSystemCore(source, options: TestOptions.ReleaseExe.WithMainTypeName("extension")).VerifyDiagnostics(
-                // (7,24): warning CS0028: 'extension.Main(B, string[])' has the wrong signature to be an entry point
-                //     public static void Main(this B x, string[] args)
-                Diagnostic(ErrorCode.WRN_InvalidMainSig, "Main").WithArguments("extension.Main(B, string[])").WithLocation(7, 24),
-                // (5,14): error CS1558: 'extension' does not have a suitable static 'Main' method
-                // static class @extension
-                Diagnostic(ErrorCode.ERR_NoMainInClass, "@extension").WithArguments("extension").WithLocation(5, 14));
+            CreateCompilationWithMscorlib40AndSystemCore(
+                    source,
+                    options: TestOptions.ReleaseExe.WithMainTypeName("extension")
+                )
+                .VerifyDiagnostics(
+                    // (7,24): warning CS0028: 'extension.Main(B, string[])' has the wrong signature to be an entry point
+                    //     public static void Main(this B x, string[] args)
+                    Diagnostic(ErrorCode.WRN_InvalidMainSig, "Main")
+                        .WithArguments("extension.Main(B, string[])")
+                        .WithLocation(7, 24),
+                    // (5,14): error CS1558: 'extension' does not have a suitable static 'Main' method
+                    // static class @extension
+                    Diagnostic(ErrorCode.ERR_NoMainInClass, "@extension")
+                        .WithArguments("extension")
+                        .WithLocation(5, 14)
+                );
         }
 
         [Fact()]
         public void ExplicitMainType_MainAsConstructor()
         {
-            string source = @"
+            string source =
+                @"
 static class Main
 {
     static Main() { }
 }
 ";
-            CreateCompilation(source, options: TestOptions.ReleaseExe.WithMainTypeName("Main")).VerifyDiagnostics(
-                // (2,14): error CS1558: 'Main' does not have a suitable static Main method
-                // static class Main
-                Diagnostic(ErrorCode.ERR_NoMainInClass, "Main").WithArguments("Main"));
+            CreateCompilation(source, options: TestOptions.ReleaseExe.WithMainTypeName("Main"))
+                .VerifyDiagnostics(
+                    // (2,14): error CS1558: 'Main' does not have a suitable static Main method
+                    // static class Main
+                    Diagnostic(ErrorCode.ERR_NoMainInClass, "Main").WithArguments("Main")
+                );
         }
 
         [WorkItem(543511, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/543511")]
         [Fact()]
         public void ExplicitMainType_OneDefineTwoDeclareValidMainForPartial()
         {
-            string source = @"
+            string source =
+                @"
 partial class Program
 {
 }
@@ -1530,7 +1813,8 @@ partial class Program
     { }
 }
 ";
-            CreateCompilation(source, options: TestOptions.ReleaseExe.WithMainTypeName("Program")).VerifyDiagnostics();
+            CreateCompilation(source, options: TestOptions.ReleaseExe.WithMainTypeName("Program"))
+                .VerifyDiagnostics();
         }
 
         [Fact, WorkItem(543512, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/543512")]
@@ -1538,7 +1822,8 @@ partial class Program
         {
             // TODO: This should produce:
             // TODO: warning CS0028: 'Mybase.Main(dynamic)' has the wrong signature to be an entry point
-            string source = @"
+            string source =
+                @"
 class Mybase
 {
 static void Main(dynamic x=null) { }
@@ -1548,17 +1833,19 @@ class Myderive : Mybase
     static void Main() { }
 }
 ";
-            CreateCompilation(source,
-                options: TestOptions.ReleaseExe).
-                VerifyDiagnostics(
-                    Diagnostic(ErrorCode.WRN_InvalidMainSig, "Main").WithArguments("Mybase.Main(dynamic)"));
+            CreateCompilation(source, options: TestOptions.ReleaseExe)
+                .VerifyDiagnostics(
+                    Diagnostic(ErrorCode.WRN_InvalidMainSig, "Main")
+                        .WithArguments("Mybase.Main(dynamic)")
+                );
         }
 
         [WorkItem(630763, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/630763")]
         [Fact()]
         public void Bug630763()
         {
-            var source = @"
+            var source =
+                @"
 public class C
 {
     public static int Main()
@@ -1572,21 +1859,24 @@ public class C
 
             var netModule = CreateCompilation(source, options: TestOptions.ReleaseModule);
 
-            compilation = CreateCompilation("",
-                                                        new MetadataReference[] { netModule.EmitToImageReference() },
-                                                        options: TestOptions.ReleaseExe,
-                                                        assemblyName: "Bug630763");
+            compilation = CreateCompilation(
+                "",
+                new MetadataReference[] { netModule.EmitToImageReference() },
+                options: TestOptions.ReleaseExe,
+                assemblyName: "Bug630763"
+            );
 
             compilation.VerifyDiagnostics(
-    // error CS5001: Program does not contain a static 'Main' method suitable for an entry point
-    Diagnostic(ErrorCode.ERR_NoEntryPoint)
-                );
+                // error CS5001: Program does not contain a static 'Main' method suitable for an entry point
+                Diagnostic(ErrorCode.ERR_NoEntryPoint)
+            );
         }
 
         [Fact, WorkItem(12113, "https://github.com/dotnet/roslyn/issues/12113")]
         public void LazyEntryPoint()
         {
-            string source = @"
+            string source =
+                @"
 class Program
 {
     public static void Main() {}
@@ -1600,7 +1890,7 @@ class Program
                 // (4,24): error CS0017: Program has more than one entry point defined. Compile with /main to specify the type that contains the entry point.
                 //     public static void Main() {}
                 Diagnostic(ErrorCode.ERR_MultipleEntryPoints, "Main").WithLocation(4, 24)
-                );
+            );
         }
 
         [WorkItem(17923, "https://github.com/dotnet/roslyn/issues/17923")]
@@ -1608,7 +1898,8 @@ class Program
         [CompilerTrait(CompilerFeature.RefLocalsReturns)]
         public void RefIntReturnMainEmpty()
         {
-            var source = @"
+            var source =
+                @"
 class Program
 {
     public static ref int Main() { throw new System.Exception(); }
@@ -1618,9 +1909,12 @@ class Program
             compilation.VerifyDiagnostics(
                 // (4,27): warning CS0028: 'Program.Main()' has the wrong signature to be an entry point
                 //     public static ref int Main() {}
-                Diagnostic(ErrorCode.WRN_InvalidMainSig, "Main").WithArguments("Program.Main()").WithLocation(4, 27),
+                Diagnostic(ErrorCode.WRN_InvalidMainSig, "Main")
+                    .WithArguments("Program.Main()")
+                    .WithLocation(4, 27),
                 // error CS5001: Program does not contain a static 'Main' method suitable for an entry point
-                Diagnostic(ErrorCode.ERR_NoEntryPoint).WithLocation(1, 1));
+                Diagnostic(ErrorCode.ERR_NoEntryPoint).WithLocation(1, 1)
+            );
         }
 
         [WorkItem(17923, "https://github.com/dotnet/roslyn/issues/17923")]
@@ -1628,7 +1922,8 @@ class Program
         [CompilerTrait(CompilerFeature.RefLocalsReturns)]
         public void RefIntReturnMainWithParams()
         {
-            var source = @"
+            var source =
+                @"
 class Program
 {
     public static ref int Main(string[] args) { throw new System.Exception(); }
@@ -1638,9 +1933,11 @@ class Program
             compilation.VerifyDiagnostics(
                 // (4,27): warning CS0028: 'Program.Main(string[])' has the wrong signature to be an entry point
                 //     public static ref int Main(string[] args) { throw new System.Exception(); }
-                Diagnostic(ErrorCode.WRN_InvalidMainSig, "Main").WithArguments("Program.Main(string[])"),
+                Diagnostic(ErrorCode.WRN_InvalidMainSig, "Main")
+                    .WithArguments("Program.Main(string[])"),
                 // error CS5001: Program does not contain a static 'Main' method suitable for an entry point
-                Diagnostic(ErrorCode.ERR_NoEntryPoint));
+                Diagnostic(ErrorCode.ERR_NoEntryPoint)
+            );
         }
     }
 }

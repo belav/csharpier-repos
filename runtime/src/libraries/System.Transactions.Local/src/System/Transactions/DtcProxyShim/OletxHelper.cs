@@ -8,18 +8,18 @@ namespace System.Transactions.DtcProxyShim;
 
 internal static class OletxHelper
 {
-    private const int RetryInterval = 50;  // in milliseconds
+    private const int RetryInterval = 50; // in milliseconds
     private const int MaxRetryCount = 100;
 
     internal static int S_OK = 0;
-    internal static int E_FAIL = -2147467259;  // 0x80004005, -2147467259
-    internal static int XACT_S_READONLY = 315394;  // 0x0004D002, 315394
-    internal static int XACT_S_SINGLEPHASE = 315401;  // 0x0004D009, 315401
-    internal static int XACT_E_ABORTED = -2147168231;  // 0x8004D019, -2147168231
-    internal static int XACT_E_NOTRANSACTION = -2147168242;  // 0x8004D00E, -2147168242
-    internal static int XACT_E_CONNECTION_DOWN = -2147168228;  // 0x8004D01C, -2147168228
-    internal static int XACT_E_REENLISTTIMEOUT = -2147168226;  // 0x8004D01E, -2147168226
-    internal static int XACT_E_RECOVERYALREADYDONE = -2147167996;  // 0x8004D104, -2147167996
+    internal static int E_FAIL = -2147467259; // 0x80004005, -2147467259
+    internal static int XACT_S_READONLY = 315394; // 0x0004D002, 315394
+    internal static int XACT_S_SINGLEPHASE = 315401; // 0x0004D009, 315401
+    internal static int XACT_E_ABORTED = -2147168231; // 0x8004D019, -2147168231
+    internal static int XACT_E_NOTRANSACTION = -2147168242; // 0x8004D00E, -2147168242
+    internal static int XACT_E_CONNECTION_DOWN = -2147168228; // 0x8004D01C, -2147168228
+    internal static int XACT_E_REENLISTTIMEOUT = -2147168226; // 0x8004D01E, -2147168226
+    internal static int XACT_E_RECOVERYALREADYDONE = -2147167996; // 0x8004D104, -2147167996
     internal static int XACT_E_TMNOTAVAILABLE = -2147168229; // 0x8004d01b, -2147168229
     internal static int XACT_E_INDOUBT = -2147168234; // 0x8004d016,
     internal static int XACT_E_ALREADYINPROGRESS = -2147168232; // x08004d018,

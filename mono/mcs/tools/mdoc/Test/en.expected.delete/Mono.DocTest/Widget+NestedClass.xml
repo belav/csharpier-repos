@@ -1,6 +1,9 @@
 <Type Name="Widget+NestedClass" FullName="Mono.DocTest.Widget+NestedClass">
   <TypeSignature Language="C#" Value="public class Widget.NestedClass" />
-  <TypeSignature Language="ILAsm" Value=".class nested public auto ansi beforefieldinit Widget/NestedClass extends System.Object" />
+  <TypeSignature
+    Language="ILAsm"
+    Value=".class nested public auto ansi beforefieldinit Widget/NestedClass extends System.Object"
+  />
   <AssemblyInfo>
     <AssemblyName>DocTest</AssemblyName>
   </AssemblyInfo>
@@ -15,7 +18,10 @@
   <Members>
     <Member MemberName=".ctor">
       <MemberSignature Language="C#" Value="public NestedClass ();" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor() cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig specialname rtspecialname instance void .ctor() cil managed"
+      />
       <MemberType>Constructor</MemberType>
       <Parameters />
       <Docs>
@@ -25,7 +31,10 @@
     </Member>
     <Member MemberName="M">
       <MemberSignature Language="C#" Value="public void M (int i);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance void M(int32 i) cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig instance void M(int32 i) cil managed"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Void</ReturnType>

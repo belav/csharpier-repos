@@ -22,6 +22,7 @@ namespace Microsoft.CodeAnalysis.InheritanceMargin
             TextSpan spanToSearch,
             bool includeGlobalImports,
             bool frozenPartialSemantics,
-            CancellationToken cancellationToken);
+            CancellationToken cancellationToken
+        );
     }
 }

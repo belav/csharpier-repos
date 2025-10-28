@@ -236,25 +236,65 @@
     <Namespace Name="System.Collections.Generic">
       <Type Name="ISet`1" DisplayName="ISet&lt;T&gt;" Kind="Interface" />
       <Type Name="LinkedList`1" DisplayName="LinkedList&lt;T&gt;" Kind="Class" />
-      <Type Name="LinkedList`1+Enumerator" DisplayName="LinkedList&lt;T&gt;+Enumerator" Kind="Structure" />
+      <Type
+        Name="LinkedList`1+Enumerator"
+        DisplayName="LinkedList&lt;T&gt;+Enumerator"
+        Kind="Structure"
+      />
       <Type Name="LinkedListNode`1" DisplayName="LinkedListNode&lt;T&gt;" Kind="Class" />
       <Type Name="Queue`1" DisplayName="Queue&lt;T&gt;" Kind="Class" />
       <Type Name="Queue`1+Enumerator" DisplayName="Queue&lt;T&gt;+Enumerator" Kind="Structure" />
-      <Type Name="SortedDictionary`2" DisplayName="SortedDictionary&lt;TKey,TValue&gt;" Kind="Class" />
-      <Type Name="SortedDictionary`2+Enumerator" DisplayName="SortedDictionary&lt;TKey,TValue&gt;+Enumerator" Kind="Structure" />
-      <Type Name="SortedDictionary`2+KeyCollection" DisplayName="SortedDictionary&lt;TKey,TValue&gt;+KeyCollection" Kind="Class" />
-      <Type Name="SortedDictionary`2+KeyCollection+Enumerator" DisplayName="SortedDictionary&lt;TKey,TValue&gt;+KeyCollection+Enumerator" Kind="Structure" />
-      <Type Name="SortedDictionary`2+ValueCollection" DisplayName="SortedDictionary&lt;TKey,TValue&gt;+ValueCollection" Kind="Class" />
-      <Type Name="SortedDictionary`2+ValueCollection+Enumerator" DisplayName="SortedDictionary&lt;TKey,TValue&gt;+ValueCollection+Enumerator" Kind="Structure" />
+      <Type
+        Name="SortedDictionary`2"
+        DisplayName="SortedDictionary&lt;TKey,TValue&gt;"
+        Kind="Class"
+      />
+      <Type
+        Name="SortedDictionary`2+Enumerator"
+        DisplayName="SortedDictionary&lt;TKey,TValue&gt;+Enumerator"
+        Kind="Structure"
+      />
+      <Type
+        Name="SortedDictionary`2+KeyCollection"
+        DisplayName="SortedDictionary&lt;TKey,TValue&gt;+KeyCollection"
+        Kind="Class"
+      />
+      <Type
+        Name="SortedDictionary`2+KeyCollection+Enumerator"
+        DisplayName="SortedDictionary&lt;TKey,TValue&gt;+KeyCollection+Enumerator"
+        Kind="Structure"
+      />
+      <Type
+        Name="SortedDictionary`2+ValueCollection"
+        DisplayName="SortedDictionary&lt;TKey,TValue&gt;+ValueCollection"
+        Kind="Class"
+      />
+      <Type
+        Name="SortedDictionary`2+ValueCollection+Enumerator"
+        DisplayName="SortedDictionary&lt;TKey,TValue&gt;+ValueCollection+Enumerator"
+        Kind="Structure"
+      />
       <Type Name="SortedList`2" DisplayName="SortedList&lt;TKey,TValue&gt;" Kind="Class" />
       <Type Name="SortedSet`1" DisplayName="SortedSet&lt;T&gt;" Kind="Class" />
-      <Type Name="SortedSet`1+Enumerator" DisplayName="SortedSet&lt;T&gt;+Enumerator" Kind="Structure" />
+      <Type
+        Name="SortedSet`1+Enumerator"
+        DisplayName="SortedSet&lt;T&gt;+Enumerator"
+        Kind="Structure"
+      />
       <Type Name="Stack`1" DisplayName="Stack&lt;T&gt;" Kind="Class" />
       <Type Name="Stack`1+Enumerator" DisplayName="Stack&lt;T&gt;+Enumerator" Kind="Structure" />
     </Namespace>
     <Namespace Name="System.Collections.ObjectModel">
-      <Type Name="ObservableCollection`1" DisplayName="ObservableCollection&lt;T&gt;" Kind="Class" />
-      <Type Name="ReadOnlyObservableCollection`1" DisplayName="ReadOnlyObservableCollection&lt;T&gt;" Kind="Class" />
+      <Type
+        Name="ObservableCollection`1"
+        DisplayName="ObservableCollection&lt;T&gt;"
+        Kind="Class"
+      />
+      <Type
+        Name="ReadOnlyObservableCollection`1"
+        DisplayName="ReadOnlyObservableCollection&lt;T&gt;"
+        Kind="Class"
+      />
     </Namespace>
     <Namespace Name="System.Collections.Specialized">
       <Type Name="BitVector32" Kind="Structure" />
@@ -476,7 +516,10 @@
       <Type Name="DesignerOptionCollection+WrappedPropertyDescriptor" Kind="Class" />
       <Type Name="DesignerOptionService" Kind="Class" />
       <Type Name="DesignerOptionService+DesignerOptionCollection" Kind="Class" />
-      <Type Name="DesignerOptionService+DesignerOptionCollection+WrappedPropertyDescriptor" Kind="Class" />
+      <Type
+        Name="DesignerOptionService+DesignerOptionCollection+WrappedPropertyDescriptor"
+        Kind="Class"
+      />
       <Type Name="DesignerTransaction" Kind="Class" />
       <Type Name="DesignerTransactionCloseEventArgs" Kind="Class" />
       <Type Name="DesignerTransactionCloseEventHandler" Kind="Delegate" />

@@ -12,9 +12,7 @@ namespace CoreXml.Test.XLinq
         private static string s_rootPath = null;
         private static string s_standardPath = null;
 
-        public virtual void AddChild()
-        {
-        }
+        public virtual void AddChild() { }
 
         public override int CompareTo(object obj)
         {

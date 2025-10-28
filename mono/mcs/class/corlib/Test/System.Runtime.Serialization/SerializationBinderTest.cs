@@ -12,10 +12,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -31,28 +31,27 @@ using NUnit.Framework;
 
 namespace MonoTests.System.Runtime.Serialization
 {
-	[TestFixture]
-	public class SerializationBinderTest
-	{
-		[Test]
-		public void BindToName ()
-		{
-			TestSerializationBinder binder = new TestSerializationBinder ();
-			string assembly_name;
-			string type_name;
+    [TestFixture]
+    public class SerializationBinderTest
+    {
+        [Test]
+        public void BindToName()
+        {
+            TestSerializationBinder binder = new TestSerializationBinder();
+            string assembly_name;
+            string type_name;
 
-			binder.BindToName (typeof (SerializationBinder), out assembly_name, out type_name);
-			Assert.AreEqual (null, assembly_name, "#A0");
-			Assert.AreEqual (null, type_name, "#A1");
-		}
-	}
+            binder.BindToName(typeof(SerializationBinder), out assembly_name, out type_name);
+            Assert.AreEqual(null, assembly_name, "#A0");
+            Assert.AreEqual(null, type_name, "#A1");
+        }
+    }
 
-	class TestSerializationBinder : SerializationBinder
-	{
-		public override Type BindToType (string assemblyName, string typeName)
-		{
-			return null;
-		}
-	}
+    class TestSerializationBinder : SerializationBinder
+    {
+        public override Type BindToType(string assemblyName, string typeName)
+        {
+            return null;
+        }
+    }
 }
-

@@ -13,7 +13,12 @@ namespace System.Security.Cryptography.Tests
     {
         private static readonly byte[] HelloBytes = new ASCIIEncoding().GetBytes("Hello");
 
-        protected static void VerifySignature(AsymmetricSignatureFormatter formatter, AsymmetricSignatureDeformatter deformatter, HashAlgorithm hashAlgorithm, string hashAlgorithmName)
+        protected static void VerifySignature(
+            AsymmetricSignatureFormatter formatter,
+            AsymmetricSignatureDeformatter deformatter,
+            HashAlgorithm hashAlgorithm,
+            string hashAlgorithmName
+        )
         {
             formatter.SetHashAlgorithm(hashAlgorithmName);
             deformatter.SetHashAlgorithm(hashAlgorithmName);
@@ -24,7 +29,11 @@ namespace System.Security.Cryptography.Tests
             VerifySignatureWithHashAlgorithm(formatter, deformatter, hashAlgorithm);
         }
 
-        private static void VerifySignatureWithHashBytes(AsymmetricSignatureFormatter formatter, AsymmetricSignatureDeformatter deformatter, byte[] hash)
+        private static void VerifySignatureWithHashBytes(
+            AsymmetricSignatureFormatter formatter,
+            AsymmetricSignatureDeformatter deformatter,
+            byte[] hash
+        )
         {
             byte[] signature = formatter.CreateSignature(hash);
             Assert.True(deformatter.VerifySignature(hash, signature));
@@ -33,7 +42,11 @@ namespace System.Security.Cryptography.Tests
             Assert.False(deformatter.VerifySignature(hash, signature));
         }
 
-        private static void VerifySignatureWithHashAlgorithm(AsymmetricSignatureFormatter formatter, AsymmetricSignatureDeformatter deformatter, HashAlgorithm hashAlgorithm)
+        private static void VerifySignatureWithHashAlgorithm(
+            AsymmetricSignatureFormatter formatter,
+            AsymmetricSignatureDeformatter deformatter,
+            HashAlgorithm hashAlgorithm
+        )
         {
             byte[] signature = formatter.CreateSignature(hashAlgorithm);
             Assert.True(deformatter.VerifySignature(hashAlgorithm, signature));

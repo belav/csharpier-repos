@@ -4,10 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 
-
 namespace MonoTests.Common
 {
-	public class FooEmpty
-	{
-	}
+    public class FooEmpty { }
 }

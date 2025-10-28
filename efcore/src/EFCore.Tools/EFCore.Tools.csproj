@@ -1,5 +1,4 @@
 <Project>
-
   <Import Project="Sdk.props" Sdk="Microsoft.NET.Sdk" />
 
   <PropertyGroup>
@@ -60,14 +59,24 @@ Update-Database
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.DotNet.Build.Tasks.Templating" Version="$(MicrosoftDotNetBuildTasksTemplatingVersion)" AllowExplicitReference="true" PrivateAssets="All" IsImplicitlyDefined="true" />
+    <PackageReference
+      Include="Microsoft.DotNet.Build.Tasks.Templating"
+      Version="$(MicrosoftDotNetBuildTasksTemplatingVersion)"
+      AllowExplicitReference="true"
+      PrivateAssets="All"
+      IsImplicitlyDefined="true"
+    />
   </ItemGroup>
 
   <ItemGroup>
     <GeneratedContent Include="*.psd1.in" />
   </ItemGroup>
 
-  <Target Name="SetPackageProperties" BeforeTargets="InitializeStandardNuspecProperties" DependsOnTargets="Build">
+  <Target
+    Name="SetPackageProperties"
+    BeforeTargets="InitializeStandardNuspecProperties"
+    DependsOnTargets="Build"
+  >
     <PropertyGroup>
       <DevelopmentDependency>true</DevelopmentDependency>
 
@@ -84,14 +93,19 @@ Update-Database
 
   <Import Project="Sdk.targets" Sdk="Microsoft.NET.Sdk" />
 
-  <Target Name="GenerateContent"
+  <Target
+    Name="GenerateContent"
     BeforeTargets="GenerateNuspec"
     Inputs="$(MSBuildAllProjects);@(GeneratedContent)"
-    Outputs="@(GeneratedContent->'$(IntermediateOutputPath)%(FileName)'">
-    <GenerateFileFromTemplate TemplateFile="%(GeneratedContent.Identity)" Properties="VersionPrefix=$(VersionPrefix)" OutputPath="$(IntermediateOutputPath)%(FileName)" />
+    Outputs="@(GeneratedContent->'$(IntermediateOutputPath)%(FileName)'"
+  >
+    <GenerateFileFromTemplate
+      TemplateFile="%(GeneratedContent.Identity)"
+      Properties="VersionPrefix=$(VersionPrefix)"
+      OutputPath="$(IntermediateOutputPath)%(FileName)"
+    />
   </Target>
 
   <Target Name="Compile" />
   <Target Name="CopyFilesToOutputDirectory" />
-
 </Project>

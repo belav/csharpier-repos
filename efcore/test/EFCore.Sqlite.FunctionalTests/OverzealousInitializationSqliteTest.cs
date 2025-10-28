@@ -7,13 +7,10 @@ public class OverzealousInitializationSqliteTest
     : OverzealousInitializationTestBase<OverzealousInitializationSqliteTest.OverzealousInitializationSqliteFixture>
 {
     public OverzealousInitializationSqliteTest(OverzealousInitializationSqliteFixture fixture)
-        : base(fixture)
-    {
-    }
+        : base(fixture) { }
 
     public class OverzealousInitializationSqliteFixture : OverzealousInitializationFixtureBase
     {
-        protected override ITestStoreFactory TestStoreFactory
-            => SqliteTestStoreFactory.Instance;
+        protected override ITestStoreFactory TestStoreFactory => SqliteTestStoreFactory.Instance;
     }
 }

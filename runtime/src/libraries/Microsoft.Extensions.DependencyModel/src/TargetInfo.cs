@@ -6,10 +6,12 @@ namespace Microsoft.Extensions.DependencyModel
 {
     public class TargetInfo
     {
-        public TargetInfo(string framework,
+        public TargetInfo(
+            string framework,
             string? runtime,
             string? runtimeSignature,
-            bool isPortable)
+            bool isPortable
+        )
         {
             if (string.IsNullOrEmpty(framework))
             {
@@ -29,6 +31,5 @@ namespace Microsoft.Extensions.DependencyModel
         public string? RuntimeSignature { get; }
 
         public bool IsPortable { get; }
-
     }
 }

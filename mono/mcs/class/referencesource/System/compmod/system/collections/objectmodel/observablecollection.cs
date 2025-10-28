@@ -32,10 +32,15 @@ namespace System.Collections.ObjectModel
 #if !FEATURE_NETCORE
     [Serializable()]
 #if !MOBILE
-    [TypeForwardedFrom("WindowsBase, Version=3.0.0.0, Culture=Neutral, PublicKeyToken=31bf3856ad364e35")]
+    [TypeForwardedFrom(
+        "WindowsBase, Version=3.0.0.0, Culture=Neutral, PublicKeyToken=31bf3856ad364e35"
+    )]
 #endif
 #endif
-    public class ObservableCollection<T> : Collection<T>, INotifyCollectionChanged, INotifyPropertyChanged
+    public class ObservableCollection<T>
+        : Collection<T>,
+            INotifyCollectionChanged,
+            INotifyPropertyChanged
     {
         //------------------------------------------------------
         //
@@ -47,7 +52,8 @@ namespace System.Collections.ObjectModel
         /// <summary>
         /// Initializes a new instance of ObservableCollection that is empty and has default initial capacity.
         /// </summary>
-        public ObservableCollection() : base() { }
+        public ObservableCollection()
+            : base() { }
 
         /// <summary>
         /// Initializes a new instance of the ObservableCollection class
@@ -66,7 +72,7 @@ namespace System.Collections.ObjectModel
             // We should be able to simply call the base(list) ctor.  But Collection<T>
             // doesn't copy the list (contrary to the documentation) - it uses the
             // list directly as its storage.  So we do the copying here.
-            // 
+            //
             CopyFrom(list);
         }
 
@@ -141,14 +147,8 @@ namespace System.Collections.ObjectModel
         /// </summary>
         event PropertyChangedEventHandler INotifyPropertyChanged.PropertyChanged
         {
-            add
-            {
-                PropertyChanged += value;
-            }
-            remove
-            {
-                PropertyChanged -= value;
-            }
+            add { PropertyChanged += value; }
+            remove { PropertyChanged -= value; }
         }
         #endregion INotifyPropertyChanged implementation
 
@@ -161,7 +161,7 @@ namespace System.Collections.ObjectModel
         /// see <seealso cref="INotifyCollectionChanged"/>
         /// </remarks>
 #if !FEATURE_NETCORE
-        [field:NonSerializedAttribute()]
+        [field: NonSerializedAttribute()]
 #endif
         public virtual event NotifyCollectionChangedEventHandler CollectionChanged;
 
@@ -196,7 +196,7 @@ namespace System.Collections.ObjectModel
         protected override void RemoveItem(int index)
         {
             CheckReentrancy();
-            T removedItem  = this[index];
+            T removedItem = this[index];
 
             base.RemoveItem(index);
 
@@ -247,9 +247,13 @@ namespace System.Collections.ObjectModel
             base.InsertItem(newIndex, removedItem);
 
             OnPropertyChanged(IndexerName);
-            OnCollectionChanged(NotifyCollectionChangedAction.Move, removedItem, newIndex, oldIndex);
+            OnCollectionChanged(
+                NotifyCollectionChangedAction.Move,
+                removedItem,
+                newIndex,
+                oldIndex
+            );
         }
-
 
         /// <summary>
         /// Raises a PropertyChanged event (per <see cref="INotifyPropertyChanged" />).
@@ -266,7 +270,7 @@ namespace System.Collections.ObjectModel
         /// PropertyChanged event (per <see cref="INotifyPropertyChanged" />).
         /// </summary>
 #if !FEATURE_NETCORE
-        [field:NonSerializedAttribute()]
+        [field: NonSerializedAttribute()]
 #endif
         protected virtual event PropertyChangedEventHandler PropertyChanged;
 
@@ -320,8 +324,13 @@ namespace System.Collections.ObjectModel
                 // only arises if reentrant changes make the original event args
                 // invalid for later listeners.  This keeps existing code working
                 // (e.g. Selector.SelectedItems).
-                if ((CollectionChanged != null) && (CollectionChanged.GetInvocationList().Length > 1))
-                    throw new InvalidOperationException(SR.GetString(SR.ObservableCollectionReentrancyNotAllowed));
+                if (
+                    (CollectionChanged != null)
+                    && (CollectionChanged.GetInvocationList().Length > 1)
+                )
+                    throw new InvalidOperationException(
+                        SR.GetString(SR.ObservableCollectionReentrancyNotAllowed)
+                    );
             }
         }
 
@@ -346,7 +355,11 @@ namespace System.Collections.ObjectModel
         /// <summary>
         /// Helper to raise CollectionChanged event to any listeners
         /// </summary>
-        private void OnCollectionChanged(NotifyCollectionChangedAction action, object item, int index)
+        private void OnCollectionChanged(
+            NotifyCollectionChangedAction action,
+            object item,
+            int index
+        )
         {
             OnCollectionChanged(new NotifyCollectionChangedEventArgs(action, item, index));
         }
@@ -354,17 +367,31 @@ namespace System.Collections.ObjectModel
         /// <summary>
         /// Helper to raise CollectionChanged event to any listeners
         /// </summary>
-        private void OnCollectionChanged(NotifyCollectionChangedAction action, object item, int index, int oldIndex)
+        private void OnCollectionChanged(
+            NotifyCollectionChangedAction action,
+            object item,
+            int index,
+            int oldIndex
+        )
         {
-            OnCollectionChanged(new NotifyCollectionChangedEventArgs(action, item, index, oldIndex));
+            OnCollectionChanged(
+                new NotifyCollectionChangedEventArgs(action, item, index, oldIndex)
+            );
         }
 
         /// <summary>
         /// Helper to raise CollectionChanged event to any listeners
         /// </summary>
-        private void OnCollectionChanged(NotifyCollectionChangedAction action, object oldItem, object newItem, int index)
+        private void OnCollectionChanged(
+            NotifyCollectionChangedAction action,
+            object oldItem,
+            object newItem,
+            int index
+        )
         {
-            OnCollectionChanged(new NotifyCollectionChangedEventArgs(action, newItem, oldItem, index));
+            OnCollectionChanged(
+                new NotifyCollectionChangedEventArgs(action, newItem, oldItem, index)
+            );
         }
 
         /// <summary>
@@ -372,7 +399,9 @@ namespace System.Collections.ObjectModel
         /// </summary>
         private void OnCollectionReset()
         {
-            OnCollectionChanged(new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Reset));
+            OnCollectionChanged(
+                new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Reset)
+            );
         }
         #endregion Private Methods
 
@@ -388,22 +417,27 @@ namespace System.Collections.ObjectModel
 #if !FEATURE_NETCORE
         [Serializable()]
 #if !MOBILE
-        [TypeForwardedFrom("WindowsBase, Version=3.0.0.0, Culture=Neutral, PublicKeyToken=31bf3856ad364e35")]
+        [TypeForwardedFrom(
+            "WindowsBase, Version=3.0.0.0, Culture=Neutral, PublicKeyToken=31bf3856ad364e35"
+        )]
 #endif
 #endif
         private class SimpleMonitor : IDisposable
         {
             public void Enter()
             {
-                ++ _busyCount;
+                ++_busyCount;
             }
 
             public void Dispose()
             {
-                -- _busyCount;
+                --_busyCount;
             }
 
-            public bool Busy { get { return _busyCount > 0; } }
+            public bool Busy
+            {
+                get { return _busyCount > 0; }
+            }
 
             int _busyCount;
         }

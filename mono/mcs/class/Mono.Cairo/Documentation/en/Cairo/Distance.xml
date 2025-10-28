@@ -41,8 +41,7 @@
       <Docs>
         <summary>X value.</summary>
         <value>the X component of the distance</value>
-        <remarks>
-        </remarks>
+        <remarks></remarks>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -58,8 +57,7 @@
       <Docs>
         <summary>Y value.</summary>
         <value>the Y component of the distance</value>
-        <remarks>
-        </remarks>
+        <remarks></remarks>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>

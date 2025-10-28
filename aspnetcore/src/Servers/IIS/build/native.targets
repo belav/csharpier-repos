@@ -1,5 +1,4 @@
 <Project>
-
   <PropertyGroup>
     <IncludePath>$(IncludePath);$(IntDir)</IncludePath>
   </PropertyGroup>
@@ -19,7 +18,11 @@
     <MessageFile Remove="@(MessageFile)" />
   </ItemGroup>
 
-  <Target Name="CreateVersionHeader" DependsOnTargets="InitializeSourceControlInformation" BeforeTargets="PrepareForBuild">
+  <Target
+    Name="CreateVersionHeader"
+    DependsOnTargets="InitializeSourceControlInformation"
+    BeforeTargets="PrepareForBuild"
+  >
     <ItemGroup>
       <VersionHeaderContents Include="// Copyright (c) .NET Foundation. All rights reserved." />
       <VersionHeaderContents Include="// Licensed under the MIT License. See LICENSE.txt in the project root for license information." />
@@ -38,7 +41,11 @@
       <FileWrites Include="$(IntDir)version.h" />
     </ItemGroup>
 
-    <WriteLinesToFile File="$(IntDir)version.h" Lines="@(VersionHeaderContents)" OverWrite="true" WriteOnlyWhenDifferent="True" />
+    <WriteLinesToFile
+      File="$(IntDir)version.h"
+      Lines="@(VersionHeaderContents)"
+      OverWrite="true"
+      WriteOnlyWhenDifferent="True"
+    />
   </Target>
-
 </Project>

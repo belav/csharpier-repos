@@ -2,7 +2,6 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System.Collections.Generic;
-
 using ILCompiler.DependencyAnalysisFramework;
 using Internal.Text;
 using Internal.TypeSystem;
@@ -28,8 +27,15 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
 
         public override bool StaticDependenciesAreComputed => true;
 
-        public override IEnumerable<CombinedDependencyListEntry> GetConditionalStaticDependencies(NodeFactory context) => null;
-        public override IEnumerable<CombinedDependencyListEntry> SearchDynamicDependencies(List<DependencyNodeCore<NodeFactory>> markedNodes, int firstNode, NodeFactory context) => null;
+        public override IEnumerable<CombinedDependencyListEntry> GetConditionalStaticDependencies(
+            NodeFactory context
+        ) => null;
+
+        public override IEnumerable<CombinedDependencyListEntry> SearchDynamicDependencies(
+            List<DependencyNodeCore<NodeFactory>> markedNodes,
+            int firstNode,
+            NodeFactory context
+        ) => null;
 
         public override IEnumerable<DependencyListEntry> GetStaticDependencies(NodeFactory context)
         {
@@ -37,23 +43,27 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
 
             foreach (MethodDesc method in Type.GetAllMethods())
             {
-                if (!method.IsGenericMethodDefinition &&
-                    context.CompilationModuleGroup.ContainsMethodBody(method, false))
+                if (
+                    !method.IsGenericMethodDefinition
+                    && context.CompilationModuleGroup.ContainsMethodBody(method, false)
+                )
                 {
                     try
                     {
                         context.DetectGenericCycles(Type, method);
-                        dependencies.Add(context.CompiledMethodNode(method), $"Method on type {Type.ToString()}");
+                        dependencies.Add(
+                            context.CompiledMethodNode(method),
+                            $"Method on type {Type.ToString()}"
+                        );
                     }
-                    catch (TypeSystemException)
-                    {
-                    }
+                    catch (TypeSystemException) { }
                 }
             }
 
             return dependencies;
         }
 
-        protected override string GetName(NodeFactory factory) => $"All methods on type {Type.ToString()}";
+        protected override string GetName(NodeFactory factory) =>
+            $"All methods on type {Type.ToString()}";
     }
 }

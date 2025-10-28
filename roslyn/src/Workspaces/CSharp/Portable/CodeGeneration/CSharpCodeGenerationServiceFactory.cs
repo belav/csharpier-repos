@@ -15,11 +15,9 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGeneration
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public CSharpCodeGenerationServiceFactory()
-        {
-        }
+        public CSharpCodeGenerationServiceFactory() { }
 
-        public ILanguageService CreateLanguageService(HostLanguageServices provider)
-            => new CSharpCodeGenerationService(provider.LanguageServices);
+        public ILanguageService CreateLanguageService(HostLanguageServices provider) =>
+            new CSharpCodeGenerationService(provider.LanguageServices);
     }
 }

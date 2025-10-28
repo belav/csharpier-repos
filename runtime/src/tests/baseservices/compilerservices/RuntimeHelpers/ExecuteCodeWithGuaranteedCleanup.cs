@@ -8,20 +8,28 @@ class GCD
 {
     private int _val = -2;
     private int _exitcode = -1;
-    public GCD() {}
-    public int GetExitCode(){ return _exitcode;}
-    public void g ()
+
+    public GCD() { }
+
+    public int GetExitCode()
+    {
+        return _exitcode;
+    }
+
+    public void g()
     {
         throw new System.Exception("TryCode test");
     }
-    public void TryCode0 (object obj)
+
+    public void TryCode0(object obj)
     {
         _val = (int)obj;
         g();
     }
-    public void CleanupCode0 (object obj, bool excpThrown)
+
+    public void CleanupCode0(object obj, bool excpThrown)
     {
-        if(excpThrown && ((int)obj == _val))
+        if (excpThrown && ((int)obj == _val))
         {
             _exitcode = 100;
         }
@@ -42,13 +50,12 @@ class ExecuteCodeWithGuaranteedCleanupTest
             RuntimeHelpers.ExecuteCodeWithGuaranteedCleanup(t, c, val);
 #pragma warning restore SYSLIB0004
         }
-        catch (Exception Ex)
-        {
-
-        }
+        catch (Exception Ex) { }
 
         int res = gcd.GetExitCode();
         if (res != 100)
-            throw new Exception($"{nameof(ExecuteCodeWithGuaranteedCleanupTest)} failed. Result: {res}");
+            throw new Exception(
+                $"{nameof(ExecuteCodeWithGuaranteedCleanupTest)} failed. Result: {res}"
+            );
     }
 }

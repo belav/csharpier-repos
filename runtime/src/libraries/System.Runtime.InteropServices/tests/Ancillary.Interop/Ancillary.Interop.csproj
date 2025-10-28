@@ -1,5 +1,4 @@
 <Project Sdk="Microsoft.NET.Sdk">
-
   <PropertyGroup>
     <AssemblyName>Microsoft.Interop.Ancillary</AssemblyName>
     <TargetFramework>$(NetCoreAppCurrent)</TargetFramework>

@@ -17,8 +17,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         [Fact]
         public void CoalesceAssignment_SimpleCase()
         {
-
-            string source = @"
+            string source =
+                @"
 class C
 {
     static void M(object o1, object o2)
@@ -27,7 +27,8 @@ class C
     }
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 ICoalesceAssignmentOperation (OperationKind.CoalesceAssignment, Type: System.Object) (Syntax: 'o1 ??= o2')
   Target: 
     IParameterReferenceOperation: o1 (OperationKind.ParameterReference, Type: System.Object) (Syntax: 'o1')
@@ -36,13 +37,18 @@ ICoalesceAssignmentOperation (OperationKind.CoalesceAssignment, Type: System.Obj
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            VerifyOperationTreeAndDiagnosticsForTest<AssignmentExpressionSyntax>(source, expectedOperationTree, expectedDiagnostics);
+            VerifyOperationTreeAndDiagnosticsForTest<AssignmentExpressionSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics
+            );
         }
 
         [Fact]
         public void CoalesceAssignment_WithConversion()
         {
-            string source = @"
+            string source =
+                @"
 class C
 {
     static void M(object o1, string s1)
@@ -51,7 +57,8 @@ class C
     }
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 ICoalesceAssignmentOperation (OperationKind.CoalesceAssignment, Type: System.Object) (Syntax: 'o1 ??= s1')
   Target: 
     IParameterReferenceOperation: o1 (OperationKind.ParameterReference, Type: System.Object) (Syntax: 'o1')
@@ -63,13 +70,18 @@ ICoalesceAssignmentOperation (OperationKind.CoalesceAssignment, Type: System.Obj
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            VerifyOperationTreeAndDiagnosticsForTest<AssignmentExpressionSyntax>(source, expectedOperationTree, expectedDiagnostics);
+            VerifyOperationTreeAndDiagnosticsForTest<AssignmentExpressionSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics
+            );
         }
 
         [Fact]
         public void CoalesceAssignment_NoConversion()
         {
-            string source = @"
+            string source =
+                @"
 class C
 {
     static void M(C c1, string s1)
@@ -78,26 +90,35 @@ class C
     }
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 ICoalesceAssignmentOperation (OperationKind.CoalesceAssignment, Type: ?, IsInvalid) (Syntax: 'c1 ??= s1')
   Target: 
     IParameterReferenceOperation: c1 (OperationKind.ParameterReference, Type: C, IsInvalid) (Syntax: 'c1')
   Value: 
     IParameterReferenceOperation: s1 (OperationKind.ParameterReference, Type: System.String, IsInvalid) (Syntax: 's1')
 ";
-            var expectedDiagnostics = new DiagnosticDescription[] {
+            var expectedDiagnostics = new DiagnosticDescription[]
+            {
                 // file.cs(6,19): error CS0019: Operator '??=' cannot be applied to operands of type 'C' and 'string'
                 //         /*<bind>*/c1 ??= s1/*</bind>*/;
-                Diagnostic(ErrorCode.ERR_BadBinaryOps, "c1 ??= s1").WithArguments("??=", "C", "string").WithLocation(6, 19)
+                Diagnostic(ErrorCode.ERR_BadBinaryOps, "c1 ??= s1")
+                    .WithArguments("??=", "C", "string")
+                    .WithLocation(6, 19),
             };
 
-            VerifyOperationTreeAndDiagnosticsForTest<AssignmentExpressionSyntax>(source, expectedOperationTree, expectedDiagnostics);
+            VerifyOperationTreeAndDiagnosticsForTest<AssignmentExpressionSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics
+            );
         }
 
         [Fact]
         public void CoalesceAssignment_ValueTypeLeft()
         {
-            string source = @"
+            string source =
+                @"
 class C
 {
     static void M(int i1, string s1)
@@ -106,27 +127,35 @@ class C
     }
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 ICoalesceAssignmentOperation (OperationKind.CoalesceAssignment, Type: ?, IsInvalid) (Syntax: 'i1 ??= s1')
   Target: 
     IParameterReferenceOperation: i1 (OperationKind.ParameterReference, Type: System.Int32, IsInvalid) (Syntax: 'i1')
   Value: 
     IParameterReferenceOperation: s1 (OperationKind.ParameterReference, Type: System.String, IsInvalid) (Syntax: 's1')
 ";
-            var expectedDiagnostics = new DiagnosticDescription[] {
+            var expectedDiagnostics = new DiagnosticDescription[]
+            {
                 // file.cs(6,19): error CS0019: Operator '??=' cannot be applied to operands of type 'int' and 'string'
                 //         /*<bind>*/i1 ??= s1/*</bind>*/;
-                Diagnostic(ErrorCode.ERR_BadBinaryOps, "i1 ??= s1").WithArguments("??=", "int", "string").WithLocation(6, 19)
+                Diagnostic(ErrorCode.ERR_BadBinaryOps, "i1 ??= s1")
+                    .WithArguments("??=", "int", "string")
+                    .WithLocation(6, 19),
             };
 
-            VerifyOperationTreeAndDiagnosticsForTest<AssignmentExpressionSyntax>(source, expectedOperationTree, expectedDiagnostics);
+            VerifyOperationTreeAndDiagnosticsForTest<AssignmentExpressionSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics
+            );
         }
 
         [Fact]
         public void CoalesceAssignment_MissingLeftAndRight()
         {
-
-            string source = @"
+            string source =
+                @"
 class C
 {
     static void M()
@@ -135,7 +164,8 @@ class C
     }
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 ICoalesceAssignmentOperation (OperationKind.CoalesceAssignment, Type: ?, IsInvalid) (Syntax: 'o1 ??= o2')
   Target: 
     IInvalidOperation (OperationKind.Invalid, Type: ?, IsInvalid) (Syntax: 'o1')
@@ -144,23 +174,32 @@ ICoalesceAssignmentOperation (OperationKind.CoalesceAssignment, Type: ?, IsInval
     IInvalidOperation (OperationKind.Invalid, Type: ?, IsInvalid) (Syntax: 'o2')
       Children(0)
 ";
-            var expectedDiagnostics = new DiagnosticDescription[] {
+            var expectedDiagnostics = new DiagnosticDescription[]
+            {
                 // file.cs(6,19): error CS0103: The name 'o1' does not exist in the current context
                 //         /*<bind>*/o1 ??= o2/*</bind>*/;
-                Diagnostic(ErrorCode.ERR_NameNotInContext, "o1").WithArguments("o1").WithLocation(6, 19),
+                Diagnostic(ErrorCode.ERR_NameNotInContext, "o1")
+                    .WithArguments("o1")
+                    .WithLocation(6, 19),
                 // file.cs(6,26): error CS0103: The name 'o2' does not exist in the current context
                 //         /*<bind>*/o1 ??= o2/*</bind>*/;
-                Diagnostic(ErrorCode.ERR_NameNotInContext, "o2").WithArguments("o2").WithLocation(6, 26)
+                Diagnostic(ErrorCode.ERR_NameNotInContext, "o2")
+                    .WithArguments("o2")
+                    .WithLocation(6, 26),
             };
 
-            VerifyOperationTreeAndDiagnosticsForTest<AssignmentExpressionSyntax>(source, expectedOperationTree, expectedDiagnostics);
+            VerifyOperationTreeAndDiagnosticsForTest<AssignmentExpressionSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics
+            );
         }
 
         [Fact]
         public void CoalesceAssignment_AsExpression()
         {
-
-            string source = @"
+            string source =
+                @"
 class C
 {
     static void M(object o1, object o2)
@@ -170,7 +209,8 @@ class C
     static void M2(object o) {}
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IInvocationOperation (void C.M2(System.Object o)) (OperationKind.Invocation, Type: System.Void) (Syntax: 'M2(o1 ??= o2)')
   Instance Receiver: 
     null
@@ -186,14 +226,18 @@ IInvocationOperation (void C.M2(System.Object o)) (OperationKind.Invocation, Typ
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            VerifyOperationTreeAndDiagnosticsForTest<InvocationExpressionSyntax>(source, expectedOperationTree, expectedDiagnostics);
+            VerifyOperationTreeAndDiagnosticsForTest<InvocationExpressionSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics
+            );
         }
 
         [Fact]
         public void CoalesceAssignment_CheckedDynamic()
         {
-
-            string source = @"
+            string source =
+                @"
 class C
 {
     static void M(dynamic d1, dynamic d2)
@@ -205,7 +249,8 @@ class C
     }
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 ICoalesceAssignmentOperation (OperationKind.CoalesceAssignment, Type: dynamic) (Syntax: 'd1 ??= d2')
   Target: 
     IParameterReferenceOperation: d1 (OperationKind.ParameterReference, Type: dynamic) (Syntax: 'd1')
@@ -214,13 +259,18 @@ ICoalesceAssignmentOperation (OperationKind.CoalesceAssignment, Type: dynamic) (
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            VerifyOperationTreeAndDiagnosticsForTest<AssignmentExpressionSyntax>(source, expectedOperationTree, expectedDiagnostics);
+            VerifyOperationTreeAndDiagnosticsForTest<AssignmentExpressionSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics
+            );
         }
 
         [Fact]
         public void CoalesceAssignment_NullValueAndTarget()
         {
-            var comp = CreateCompilation(@"
+            var comp = CreateCompilation(
+                @"
 class C
 {
     static void M()
@@ -228,8 +278,10 @@ class C
         /*<bind>*/??=/*</bind>*/;
     }
 }
-");
-            string expectedOperationTree = @"
+"
+            );
+            string expectedOperationTree =
+                @"
 ICoalesceAssignmentOperation (OperationKind.CoalesceAssignment, Type: ?, IsInvalid) (Syntax: '/*<bind>*/? ... /*</bind>*/')
   Target: 
     IInvalidOperation (OperationKind.Invalid, Type: null) (Syntax: '')
@@ -238,20 +290,32 @@ ICoalesceAssignmentOperation (OperationKind.CoalesceAssignment, Type: ?, IsInval
     IInvalidOperation (OperationKind.Invalid, Type: null, IsInvalid) (Syntax: '')
       Children(0)
 ";
-            var expectedDiagnostics = new DiagnosticDescription[] {
+            var expectedDiagnostics = new DiagnosticDescription[]
+            {
                 // file.cs(5,6): error CS1525: Invalid expression term '??='
                 //     {
-                Diagnostic(ErrorCode.ERR_InvalidExprTerm, "").WithArguments("??=").WithLocation(5, 6),
+                Diagnostic(ErrorCode.ERR_InvalidExprTerm, "")
+                    .WithArguments("??=")
+                    .WithLocation(5, 6),
                 // file.cs(6,33): error CS1525: Invalid expression term ';'
                 //         /*<bind>*/??=/*</bind>*/;
-                Diagnostic(ErrorCode.ERR_InvalidExprTerm, ";").WithArguments(";").WithLocation(6, 33)
+                Diagnostic(ErrorCode.ERR_InvalidExprTerm, ";")
+                    .WithArguments(";")
+                    .WithLocation(6, 33),
             };
 
-            VerifyOperationTreeAndDiagnosticsForTest<AssignmentExpressionSyntax>(comp, expectedOperationTree, expectedDiagnostics);
+            VerifyOperationTreeAndDiagnosticsForTest<AssignmentExpressionSyntax>(
+                comp,
+                expectedOperationTree,
+                expectedDiagnostics
+            );
 
             var tree = comp.SyntaxTrees[0];
             var m = tree.GetRoot().DescendantNodes().OfType<MethodDeclarationSyntax>().Single();
-            VerifyFlowGraph(comp, m, @"
+            VerifyFlowGraph(
+                comp,
+                m,
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -300,13 +364,15 @@ Block[B0] - Entry
 Block[B4] - Exit
     Predecessors: [B2] [B3]
     Statements (0)
-");
+"
+            );
         }
 
         [Fact, CompilerTrait(CompilerFeature.Dataflow)]
         public void CoalesceAssignmentFlow_NullableValueTypeTarget()
         {
-            var comp = CreateCompilation(@"
+            var comp = CreateCompilation(
+                @"
 class C
 {
     static void M(int? i1, int i2)
@@ -314,9 +380,12 @@ class C
         i1 ??= i2;
     }/*</bind>*/
 }
-");
+"
+            );
 
-            VerifyOperationTreeAndDiagnosticsForTest<BlockSyntax>(comp, @"
+            VerifyOperationTreeAndDiagnosticsForTest<BlockSyntax>(
+                comp,
+                @"
 IBlockOperation (1 statements) (OperationKind.Block, Type: null) (Syntax: '{ ... }')
   IExpressionStatementOperation (OperationKind.ExpressionStatement, Type: null) (Syntax: 'i1 ??= i2;')
     Expression: 
@@ -325,9 +394,12 @@ IBlockOperation (1 statements) (OperationKind.Block, Type: null) (Syntax: '{ ...
           IParameterReferenceOperation: i1 (OperationKind.ParameterReference, Type: System.Int32?) (Syntax: 'i1')
         Value: 
           IParameterReferenceOperation: i2 (OperationKind.ParameterReference, Type: System.Int32) (Syntax: 'i2')
-", expectedDiagnostics: DiagnosticDescription.None);
+",
+                expectedDiagnostics: DiagnosticDescription.None
+            );
 
-            string expectedFlowGraph = @"
+            string expectedFlowGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -376,7 +448,8 @@ Block[B3] - Exit
         [Fact, CompilerTrait(CompilerFeature.Dataflow)]
         public void CoalesceAssignmentFlow_WhenNullConversion()
         {
-            string source = @"
+            string source =
+                @"
 class C
 {
     static void M(object o1, string s1)
@@ -385,7 +458,8 @@ class C
     }/*</bind>*/
 }
 ";
-            string expectedFlowGraph = @"
+            string expectedFlowGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -447,13 +521,18 @@ Block[B4] - Exit
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(source, expectedFlowGraph, expectedDiagnostics);
+            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(
+                source,
+                expectedFlowGraph,
+                expectedDiagnostics
+            );
         }
 
         [Fact, CompilerTrait(CompilerFeature.Dataflow)]
         public void CoalesceAssignmentFlow_WhenNullHasFlow()
         {
-            string source = @"
+            string source =
+                @"
 class C
 {
     static void M(object o1, string s1, string s2)
@@ -462,7 +541,8 @@ class C
     }/*</bind>*/
 }
 ";
-            string expectedFlowGraph = @"
+            string expectedFlowGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -564,13 +644,18 @@ Block[B7] - Exit
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(source, expectedFlowGraph, expectedDiagnostics);
+            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(
+                source,
+                expectedFlowGraph,
+                expectedDiagnostics
+            );
         }
 
         [Fact, CompilerTrait(CompilerFeature.Dataflow)]
         public void CoalesceAssignmentFlow_BothSidesHaveFlow()
         {
-            string source = @"
+            string source =
+                @"
 class C
 {
     static void M(object o1, object o2, string s1, string s2)
@@ -579,7 +664,8 @@ class C
     }/*</bind>*/
 }
 ";
-            string expectedFlowGraph = @"
+            string expectedFlowGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -717,19 +803,25 @@ Block[B10] - Exit
     Predecessors: [B5] [B9]
     Statements (0)
 ";
-            var expectedDiagnostics = new DiagnosticDescription[] {
+            var expectedDiagnostics = new DiagnosticDescription[]
+            {
                 // file.cs(6,10): error CS0131: The left-hand side of an assignment must be a variable, property or indexer
                 //         (o1 ?? o2) ??= (s1 ?? s2);
-                Diagnostic(ErrorCode.ERR_AssgLvalueExpected, "o1 ?? o2").WithLocation(6, 10)
+                Diagnostic(ErrorCode.ERR_AssgLvalueExpected, "o1 ?? o2").WithLocation(6, 10),
             };
 
-            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(source, expectedFlowGraph, expectedDiagnostics);
+            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(
+                source,
+                expectedFlowGraph,
+                expectedDiagnostics
+            );
         }
 
         [Fact, CompilerTrait(CompilerFeature.Dataflow)]
         public void CoalesceAssignmentFlow_NestedUse()
         {
-            string source = @"
+            string source =
+                @"
 class C
 {
     static void M(object o1, object o2, object o3)
@@ -738,7 +830,8 @@ class C
     }/*</bind>*/
 }
 ";
-            string expectedFlowGraph = @"
+            string expectedFlowGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -856,13 +949,18 @@ Block[B8] - Exit
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(source, expectedFlowGraph, expectedDiagnostics);
+            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(
+                source,
+                expectedFlowGraph,
+                expectedDiagnostics
+            );
         }
 
         [Fact]
         public void CoalesceAssignmentOperation_PropertyAssignment_ReferenceTypes()
         {
-            var source = @"
+            var source =
+                @"
 class C
 {
     object Prop { get; set; }
@@ -872,7 +970,8 @@ class C
     }/*</bind>*/
 }";
 
-            var expectedFlowGraph = @"
+            var expectedFlowGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -929,13 +1028,18 @@ Block[B4] - Exit
 
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(source, expectedFlowGraph, expectedDiagnostics);
+            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(
+                source,
+                expectedFlowGraph,
+                expectedDiagnostics
+            );
         }
 
         [Fact]
         public void CoalesceAssignmentOperation_PropertyAssignment_NullableValueTypes()
         {
-            var source = @"
+            var source =
+                @"
 using System;
 class C
 {
@@ -946,7 +1050,8 @@ class C
     }/*</bind>*/
 }";
 
-            var expectedFlowGraph = @"
+            var expectedFlowGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -1037,7 +1142,11 @@ Block[B5] - Exit
 
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(source, expectedFlowGraph, expectedDiagnostics);
+            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(
+                source,
+                expectedFlowGraph,
+                expectedDiagnostics
+            );
         }
     }
 }

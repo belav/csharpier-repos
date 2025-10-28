@@ -42,8 +42,7 @@ namespace System.Threading
 
         internal static void DrainAutoreleasePool()
         {
-            if (EnableAutoreleasePool
-                && s_AutoreleasePoolInstance != IntPtr.Zero)
+            if (EnableAutoreleasePool && s_AutoreleasePoolInstance != IntPtr.Zero)
             {
                 Interop.Sys.DrainAutoreleasePool(s_AutoreleasePoolInstance);
                 s_AutoreleasePoolInstance = IntPtr.Zero;

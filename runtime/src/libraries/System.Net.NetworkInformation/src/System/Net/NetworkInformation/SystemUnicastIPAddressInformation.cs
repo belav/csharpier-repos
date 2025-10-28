@@ -20,7 +20,9 @@ namespace System.Net.NetworkInformation
         private readonly uint _preferredLifetime;
         private readonly byte _prefixLength;
 
-        internal SystemUnicastIPAddressInformation(in Interop.IpHlpApi.IpAdapterUnicastAddress adapterAddress)
+        internal SystemUnicastIPAddressInformation(
+            in Interop.IpHlpApi.IpAdapterUnicastAddress adapterAddress
+        )
         {
             IPAddress ipAddress = adapterAddress.address.MarshalIPAddress();
             _innerInfo = new SystemIPAddressInformation(ipAddress, adapterAddress.flags);
@@ -40,7 +42,10 @@ namespace System.Net.NetworkInformation
             }
         }
 
-        public override IPAddress Address { get { return _innerInfo.Address; } }
+        public override IPAddress Address
+        {
+            get { return _innerInfo.Address; }
+        }
 
         public override IPAddress IPv4Mask
         {
@@ -59,90 +64,69 @@ namespace System.Net.NetworkInformation
 
         public override int PrefixLength
         {
-            get
-            {
-                return _prefixLength;
-            }
+            get { return _prefixLength; }
         }
 
         // The address is a cluster address and shouldn't be used by most applications.
         public override bool IsTransient
         {
-            get
-            {
-                return _innerInfo.IsTransient;
-            }
+            get { return _innerInfo.IsTransient; }
         }
 
         // This address can be used for DNS.
         public override bool IsDnsEligible
         {
-            get
-            {
-                return _innerInfo.IsDnsEligible;
-            }
+            get { return _innerInfo.IsDnsEligible; }
         }
 
         public override PrefixOrigin PrefixOrigin
         {
-            get
-            {
-                return _prefixOrigin;
-            }
+            get { return _prefixOrigin; }
         }
 
         public override SuffixOrigin SuffixOrigin
         {
-            get
-            {
-                return _suffixOrigin;
-            }
+            get { return _suffixOrigin; }
         }
 
         public override DuplicateAddressDetectionState DuplicateAddressDetectionState
         {
-            get
-            {
-                return _dadState;
-            }
+            get { return _dadState; }
         }
 
         // Specifies the valid lifetime of the address in seconds.
         public override long AddressValidLifetime
         {
-            get
-            {
-                return _validLifetime;
-            }
+            get { return _validLifetime; }
         }
 
         // Specifies the preferred lifetime of the address in seconds.
         public override long AddressPreferredLifetime
         {
-            get
-            {
-                return _preferredLifetime;
-            }
+            get { return _preferredLifetime; }
         }
 
         // Specifies the preferred lifetime of the address in seconds.
         public override long DhcpLeaseLifetime
         {
-            get
-            {
-                return _dhcpLeaseLifetime;
-            }
+            get { return _dhcpLeaseLifetime; }
         }
 
         // Helper method that marshals the address information into the classes.
-        internal static unsafe UnicastIPAddressInformationCollection MarshalUnicastIpAddressInformationCollection(IntPtr ptr)
+        internal static unsafe UnicastIPAddressInformationCollection MarshalUnicastIpAddressInformationCollection(
+            IntPtr ptr
+        )
         {
-            UnicastIPAddressInformationCollection addressList = new UnicastIPAddressInformationCollection();
+            UnicastIPAddressInformationCollection addressList =
+                new UnicastIPAddressInformationCollection();
 
-            Interop.IpHlpApi.IpAdapterUnicastAddress* pIpAdapterAddress = (Interop.IpHlpApi.IpAdapterUnicastAddress*)ptr;
+            Interop.IpHlpApi.IpAdapterUnicastAddress* pIpAdapterAddress =
+                (Interop.IpHlpApi.IpAdapterUnicastAddress*)ptr;
             while (pIpAdapterAddress != null)
             {
-                addressList.InternalAdd(new SystemUnicastIPAddressInformation(in *pIpAdapterAddress));
+                addressList.InternalAdd(
+                    new SystemUnicastIPAddressInformation(in *pIpAdapterAddress)
+                );
                 pIpAdapterAddress = pIpAdapterAddress->next;
             }
 

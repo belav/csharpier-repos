@@ -16,6 +16,7 @@ namespace System.Diagnostics.CodeAnalysis
         /// Indicates the minimum bound of the expected constant, inclusive.
         /// </summary>
         public object? Min { get; set; }
+
         /// <summary>
         /// Indicates the maximum bound of the expected constant, inclusive.
         /// </summary>

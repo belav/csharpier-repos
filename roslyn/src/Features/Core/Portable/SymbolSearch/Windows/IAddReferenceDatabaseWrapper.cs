@@ -19,7 +19,8 @@ namespace Microsoft.CodeAnalysis.SymbolSearch
         AddReferenceDatabase Database { get; }
     }
 
-    internal class AddReferenceDatabaseWrapper(AddReferenceDatabase database) : IAddReferenceDatabaseWrapper
+    internal class AddReferenceDatabaseWrapper(AddReferenceDatabase database)
+        : IAddReferenceDatabaseWrapper
     {
         public AddReferenceDatabase Database { get; } = database;
     }

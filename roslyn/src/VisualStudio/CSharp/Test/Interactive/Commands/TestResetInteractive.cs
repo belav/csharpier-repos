@@ -5,19 +5,19 @@
 #nullable disable
 
 extern alias InteractiveHost;
-
-using Microsoft.CodeAnalysis.Editor.Host;
-using Microsoft.VisualStudio.Text.Editor;
 using System;
+using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Threading.Tasks;
-using Microsoft.VisualStudio.InteractiveWindow;
-using System.Collections.Generic;
 using InteractiveHost::Microsoft.CodeAnalysis.Interactive;
-using Microsoft.VisualStudio.Utilities;
-using Microsoft.VisualStudio.Language.Intellisense.Utilities;
+
+using Microsoft.CodeAnalysis.Editor.Host;
 using Microsoft.CodeAnalysis.Interactive;
 using Microsoft.CodeAnalysis.Options;
+using Microsoft.VisualStudio.InteractiveWindow;
+using Microsoft.VisualStudio.Language.Intellisense.Utilities;
+using Microsoft.VisualStudio.Text.Editor;
+using Microsoft.VisualStudio.Utilities;
 
 namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Interactive.Commands
 {
@@ -50,7 +50,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Interactive.Commands
             EditorOptionsService editorOptionsService,
             Func<string, string> createReference,
             Func<string, string> createImport,
-            bool buildSucceeds)
+            bool buildSucceeds
+        )
             : base(editorOptionsService, createReference, createImport)
         {
             _uiThreadOperationExecutor = uiThreadOperationExecutor;
@@ -74,7 +75,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Interactive.Commands
             out ImmutableArray<string> sourceSearchPaths,
             out ImmutableArray<string> projectNamespaces,
             out string projectDirectory,
-            out InteractiveHostPlatform? platform)
+            out InteractiveHostPlatform? platform
+        )
         {
             references = References;
             referenceSearchPaths = ReferenceSearchPaths;
@@ -90,7 +92,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Interactive.Commands
             return _uiThreadOperationExecutor;
         }
 
-        protected override Task<IEnumerable<string>> GetNamespacesToImportAsync(IEnumerable<string> namespacesToImport, IInteractiveWindow interactiveWindow)
+        protected override Task<IEnumerable<string>> GetNamespacesToImportAsync(
+            IEnumerable<string> namespacesToImport,
+            IInteractiveWindow interactiveWindow
+        )
         {
             return Task.FromResult((IEnumerable<string>)NamespacesToImport);
         }

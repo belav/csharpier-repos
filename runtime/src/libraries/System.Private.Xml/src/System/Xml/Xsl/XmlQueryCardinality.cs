@@ -143,7 +143,10 @@ namespace System.Xml.Xsl
         /// <summary>
         /// Return union with other
         /// </summary>
-        public static XmlQueryCardinality operator |(XmlQueryCardinality left, XmlQueryCardinality right)
+        public static XmlQueryCardinality operator |(
+            XmlQueryCardinality left,
+            XmlQueryCardinality right
+        )
         {
             return new XmlQueryCardinality(left._value | right._value);
         }
@@ -151,7 +154,10 @@ namespace System.Xml.Xsl
         /// <summary>
         /// Return this product other
         /// </summary>
-        public static XmlQueryCardinality operator *(XmlQueryCardinality left, XmlQueryCardinality right)
+        public static XmlQueryCardinality operator *(
+            XmlQueryCardinality left,
+            XmlQueryCardinality right
+        )
         {
             return s_cardinalityProduct[left._value, right._value];
         }
@@ -159,7 +165,10 @@ namespace System.Xml.Xsl
         /// <summary>
         /// Return sum with other
         /// </summary>
-        public static XmlQueryCardinality operator +(XmlQueryCardinality left, XmlQueryCardinality right)
+        public static XmlQueryCardinality operator +(
+            XmlQueryCardinality left,
+            XmlQueryCardinality right
+        )
         {
             return s_cardinalitySum[left._value, right._value];
         }
@@ -168,7 +177,8 @@ namespace System.Xml.Xsl
         /// <summary>
         /// Returns true if this cardinality is guaranteed to be a subset of "other".
         /// </summary>
-        private bool IsSubset(XmlQueryCardinality other) {
+        private bool IsSubset(XmlQueryCardinality other)
+        {
             return (this.value & ~other.value) == 0;
         }
 #endif
@@ -214,31 +224,69 @@ namespace System.Xml.Xsl
         /// <summary>
         /// Table of cardinality products.
         /// </summary>
-        private static readonly XmlQueryCardinality[,] s_cardinalityProduct = {
-                          //   None  Zero  One         ZeroOrOne   More    NotOne  OneOrMore   ZeroOrMore
-            /* None       */ { None, Zero, None,       Zero,       None,   Zero,   None,       Zero       },
-            /* Zero       */ { Zero, Zero, Zero,       Zero,       Zero,   Zero,   Zero,       Zero       },
-            /* One        */ { None, Zero, One,        ZeroOrOne,  More,   NotOne, OneOrMore,  ZeroOrMore },
-            /* ZeroOrOne  */ { Zero, Zero, ZeroOrOne,  ZeroOrOne,  NotOne, NotOne, ZeroOrMore, ZeroOrMore },
-            /* More       */ { None, Zero, More,       NotOne,     More,   NotOne, More,       NotOne     },
-            /* NotOne     */ { Zero, Zero, NotOne,     NotOne,     NotOne, NotOne, NotOne,     NotOne     },
-            /* OneOrMore  */ { None, Zero, OneOrMore,  ZeroOrMore, More,   NotOne, OneOrMore,  ZeroOrMore },
-            /* ZeroOrMore */ { Zero, Zero, ZeroOrMore, ZeroOrMore, NotOne, NotOne, ZeroOrMore, ZeroOrMore }
+        private static readonly XmlQueryCardinality[,] s_cardinalityProduct =
+        {
+            //   None  Zero  One         ZeroOrOne   More    NotOne  OneOrMore   ZeroOrMore
+            /* None       */{
+                None,
+                Zero,
+                None,
+                Zero,
+                None,
+                Zero,
+                None,
+                Zero,
+            },
+            /* Zero       */{ Zero, Zero, Zero, Zero, Zero, Zero, Zero, Zero },
+            /* One        */{ None, Zero, One, ZeroOrOne, More, NotOne, OneOrMore, ZeroOrMore },
+            /* ZeroOrOne  */{ Zero, Zero, ZeroOrOne, ZeroOrOne, NotOne, NotOne, ZeroOrMore, ZeroOrMore },
+            /* More       */{ None, Zero, More, NotOne, More, NotOne, More, NotOne },
+            /* NotOne     */{ Zero, Zero, NotOne, NotOne, NotOne, NotOne, NotOne, NotOne },
+            /* OneOrMore  */{ None, Zero, OneOrMore, ZeroOrMore, More, NotOne, OneOrMore, ZeroOrMore },
+            /* ZeroOrMore */{ Zero, Zero, ZeroOrMore, ZeroOrMore, NotOne, NotOne, ZeroOrMore, ZeroOrMore },
         };
 
         /// <summary>
         /// Table of cardinality sums.
         /// </summary>
-        private static readonly XmlQueryCardinality[,] s_cardinalitySum = {
-                          //   None        Zero        One        ZeroOrOne   More  NotOne      OneOrMore  ZeroOrMore
-            /* None       */ { None,       Zero,       One,       ZeroOrOne,  More, NotOne,     OneOrMore, ZeroOrMore},
-            /* Zero       */ { Zero,       Zero,       One,       ZeroOrOne,  More, NotOne,     OneOrMore, ZeroOrMore},
-            /* One        */ { One,        One,        More,      OneOrMore,  More, OneOrMore,  More,      OneOrMore },
-            /* ZeroOrOne  */ { ZeroOrOne,  ZeroOrOne,  OneOrMore, ZeroOrMore, More, ZeroOrMore, OneOrMore, ZeroOrMore},
-            /* More       */ { More,       More,       More,      More,       More, More,       More,      More      },
-            /* NotOne     */ { NotOne,     NotOne,     OneOrMore, ZeroOrMore, More, NotOne,     OneOrMore, ZeroOrMore},
-            /* OneOrMore  */ { OneOrMore,  OneOrMore,  More,      OneOrMore,  More, OneOrMore,  More,      OneOrMore },
-            /* ZeroOrMore */ { ZeroOrMore, ZeroOrMore, OneOrMore, ZeroOrMore, More, ZeroOrMore, OneOrMore, ZeroOrMore}
+        private static readonly XmlQueryCardinality[,] s_cardinalitySum =
+        {
+            //   None        Zero        One        ZeroOrOne   More  NotOne      OneOrMore  ZeroOrMore
+            /* None       */{
+                None,
+                Zero,
+                One,
+                ZeroOrOne,
+                More,
+                NotOne,
+                OneOrMore,
+                ZeroOrMore,
+            },
+            /* Zero       */{ Zero, Zero, One, ZeroOrOne, More, NotOne, OneOrMore, ZeroOrMore },
+            /* One        */{ One, One, More, OneOrMore, More, OneOrMore, More, OneOrMore },
+            /* ZeroOrOne  */{
+                ZeroOrOne,
+                ZeroOrOne,
+                OneOrMore,
+                ZeroOrMore,
+                More,
+                ZeroOrMore,
+                OneOrMore,
+                ZeroOrMore,
+            },
+            /* More       */{ More, More, More, More, More, More, More, More },
+            /* NotOne     */{ NotOne, NotOne, OneOrMore, ZeroOrMore, More, NotOne, OneOrMore, ZeroOrMore },
+            /* OneOrMore  */{ OneOrMore, OneOrMore, More, OneOrMore, More, OneOrMore, More, OneOrMore },
+            /* ZeroOrMore */{
+                ZeroOrMore,
+                ZeroOrMore,
+                OneOrMore,
+                ZeroOrMore,
+                More,
+                ZeroOrMore,
+                OneOrMore,
+                ZeroOrMore,
+            },
         };
         #endregion
 
@@ -246,29 +294,31 @@ namespace System.Xml.Xsl
         /// <summary>
         /// String representation.
         /// </summary>
-        private static readonly string[] s_toString = {
-            /* None       */ "",
-            /* Zero       */ "?",
-            /* One        */ "",
-            /* ZeroOrOne  */ "?",
-            /* More       */ "+",
-            /* NotOne     */ "*",
-            /* OneOrMore  */ "+",
-            /* ZeroOrMore */ "*"
+        private static readonly string[] s_toString =
+        {
+            /* None       */"",
+            /* Zero       */"?",
+            /* One        */"",
+            /* ZeroOrOne  */"?",
+            /* More       */"+",
+            /* NotOne     */"*",
+            /* OneOrMore  */"+",
+            /* ZeroOrMore */"*",
         };
 
         /// <summary>
         /// Serialization
         /// </summary>
-        private static readonly string[] s_serialized = {
-            /* None       */ "None",
-            /* Zero       */ "Zero",
-            /* One        */ "One",
-            /* ZeroOrOne  */ "ZeroOrOne",
-            /* More       */ "More",
-            /* NotOne     */ "NotOne",
-            /* OneOrMore  */ "OneOrMore",
-            /* ZeroOrMore */ "ZeroOrMore"
+        private static readonly string[] s_serialized =
+        {
+            /* None       */"None",
+            /* Zero       */"Zero",
+            /* One        */"One",
+            /* ZeroOrOne  */"ZeroOrOne",
+            /* More       */"More",
+            /* NotOne     */"NotOne",
+            /* OneOrMore  */"OneOrMore",
+            /* ZeroOrMore */"ZeroOrMore",
         };
 
         /// <summary>
@@ -305,9 +355,8 @@ namespace System.Xml.Xsl
         /// <summary>
         /// Deserialize the object from BinaryReader.
         /// </summary>
-        public XmlQueryCardinality(BinaryReader reader) : this(reader.ReadByte())
-        {
-        }
+        public XmlQueryCardinality(BinaryReader reader)
+            : this(reader.ReadByte()) { }
         #endregion
     }
 }

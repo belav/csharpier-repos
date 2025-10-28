@@ -14,10 +14,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -31,28 +31,32 @@ using System;
 
 namespace System.Web.UI
 {
-	public sealed class RegisteredArrayDeclaration
-	{
-		readonly Control _control;
-		readonly string _name;
-		readonly string _value;
+    public sealed class RegisteredArrayDeclaration
+    {
+        readonly Control _control;
+        readonly string _name;
+        readonly string _value;
 
-		internal RegisteredArrayDeclaration (Control control, string name, string value) {
-			_control = control;
-			_name = name;
-			_value = value;
-		}
+        internal RegisteredArrayDeclaration(Control control, string name, string value)
+        {
+            _control = control;
+            _name = name;
+            _value = value;
+        }
 
-		public Control Control {
-			get { return _control; }
-		}
+        public Control Control
+        {
+            get { return _control; }
+        }
 
-		public string Name {
-			get { return _name; }
-		}
+        public string Name
+        {
+            get { return _name; }
+        }
 
-		public string Value {
-			get { return _value; }
-		}
-	}
+        public string Value
+        {
+            get { return _value; }
+        }
+    }
 }

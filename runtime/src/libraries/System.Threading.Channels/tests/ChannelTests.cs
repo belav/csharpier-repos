@@ -57,8 +57,14 @@ namespace System.Threading.Channels.Tests
         [Fact]
         public void Create_NullOptions_ThrowsArgumentException()
         {
-            AssertExtensions.Throws<ArgumentNullException>("options", () => Channel.CreateUnbounded<int>(null));
-            AssertExtensions.Throws<ArgumentNullException>("options", () => Channel.CreateBounded<int>(null));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "options",
+                () => Channel.CreateUnbounded<int>(null)
+            );
+            AssertExtensions.Throws<ArgumentNullException>(
+                "options",
+                () => Channel.CreateBounded<int>(null)
+            );
         }
 
         [Theory]
@@ -66,21 +72,35 @@ namespace System.Threading.Channels.Tests
         [InlineData(-2)]
         public void CreateBounded_InvalidBufferSizes_ThrowArgumentExceptions(int capacity)
         {
-            AssertExtensions.Throws<ArgumentOutOfRangeException>("capacity", () => Channel.CreateBounded<int>(capacity));
-            AssertExtensions.Throws<ArgumentOutOfRangeException>("capacity", () => new BoundedChannelOptions(capacity));
+            AssertExtensions.Throws<ArgumentOutOfRangeException>(
+                "capacity",
+                () => Channel.CreateBounded<int>(capacity)
+            );
+            AssertExtensions.Throws<ArgumentOutOfRangeException>(
+                "capacity",
+                () => new BoundedChannelOptions(capacity)
+            );
         }
 
         [Theory]
         [InlineData((BoundedChannelFullMode)(-1))]
         [InlineData((BoundedChannelFullMode)(4))]
-        public void BoundedChannelOptions_InvalidModes_ThrowArgumentExceptions(BoundedChannelFullMode mode) =>
-            AssertExtensions.Throws<ArgumentOutOfRangeException>("value", () => new BoundedChannelOptions(1) { FullMode = mode });
+        public void BoundedChannelOptions_InvalidModes_ThrowArgumentExceptions(
+            BoundedChannelFullMode mode
+        ) =>
+            AssertExtensions.Throws<ArgumentOutOfRangeException>(
+                "value",
+                () => new BoundedChannelOptions(1) { FullMode = mode }
+            );
 
         [Theory]
         [InlineData(0)]
         [InlineData(-2)]
         public void BoundedChannelOptions_InvalidCapacity_ThrowArgumentExceptions(int capacity) =>
-            AssertExtensions.Throws<ArgumentOutOfRangeException>("value", () => new BoundedChannelOptions(1) { Capacity = capacity });
+            AssertExtensions.Throws<ArgumentOutOfRangeException>(
+                "value",
+                () => new BoundedChannelOptions(1) { Capacity = capacity }
+            );
 
         [Theory]
         [InlineData(1)]
@@ -92,7 +112,10 @@ namespace System.Threading.Channels.Tests
         {
             var c = new TestChannelWriter<int>(10);
             Assert.False(c.TryComplete());
-            Assert.Equal(TaskStatus.Canceled, c.WriteAsync(42, new CancellationToken(true)).AsTask().Status);
+            Assert.Equal(
+                TaskStatus.Canceled,
+                c.WriteAsync(42, new CancellationToken(true)).AsTask().Status
+            );
 
             int count = 0;
             try
@@ -180,7 +203,10 @@ namespace System.Threading.Channels.Tests
             private ChannelReader<T> _reader;
             internal bool ForceThrowing { get; set; }
 
-            public WrapperChannelReader(Channel<T> channel) {_reader = channel.Reader; }
+            public WrapperChannelReader(Channel<T> channel)
+            {
+                _reader = channel.Reader;
+            }
 
             public override bool TryRead(out T item)
             {
@@ -217,8 +243,9 @@ namespace System.Threading.Channels.Tests
             public override bool TryWrite(T item) => _rand.Next(0, 2) == 0 && _count++ < _max; // succeed if we're under our limit, and add random failures
 
             public override ValueTask<bool> WaitToWriteAsync(CancellationToken cancellationToken) =>
-                _count >= _max ? new ValueTask<bool>(Task.FromResult(false)) :
-                _rand.Next(0, 2) == 0 ? new ValueTask<bool>(Task.Delay(1).ContinueWith(_ => true)) : // randomly introduce delays
+                _count >= _max ? new ValueTask<bool>(Task.FromResult(false))
+                : _rand.Next(0, 2) == 0 ? new ValueTask<bool>(Task.Delay(1).ContinueWith(_ => true))
+                : // randomly introduce delays
                 new ValueTask<bool>(Task.FromResult(true));
         }
 
@@ -228,7 +255,8 @@ namespace System.Threading.Channels.Tests
             private IEnumerator<T> _enumerator;
             private bool _closed;
 
-            public TestChannelReader(IEnumerable<T> enumerable) => _enumerator = enumerable.GetEnumerator();
+            public TestChannelReader(IEnumerable<T> enumerable) =>
+                _enumerator = enumerable.GetEnumerator();
 
             public override bool TryRead(out T item)
             {
@@ -253,22 +281,31 @@ namespace System.Threading.Channels.Tests
                 return true;
             }
 
-            public override ValueTask<bool> WaitToReadAsync(CancellationToken cancellationToken) => new ValueTask<bool>(
-                _closed ? Task.FromResult(false) :
-                _rand.Next(0, 2) == 0 ? Task.Delay(1).ContinueWith(_ => true) : // randomly introduce delays
-                Task.FromResult(true));
+            public override ValueTask<bool> WaitToReadAsync(CancellationToken cancellationToken) =>
+                new ValueTask<bool>(
+                    _closed ? Task.FromResult(false)
+                    : _rand.Next(0, 2) == 0 ? Task.Delay(1).ContinueWith(_ => true)
+                    : // randomly introduce delays
+                    Task.FromResult(true)
+                );
         }
 
         private sealed class TryWriteThrowingWriter<T> : ChannelWriter<T>
         {
             public override bool TryWrite(T item) => throw new FormatException();
-            public override ValueTask<bool> WaitToWriteAsync(CancellationToken cancellationToken = default) => throw new InvalidDataException();
+
+            public override ValueTask<bool> WaitToWriteAsync(
+                CancellationToken cancellationToken = default
+            ) => throw new InvalidDataException();
         }
 
         private sealed class TryReadThrowingReader<T> : ChannelReader<T>
         {
             public override bool TryRead(out T item) => throw new FieldAccessException();
-            public override ValueTask<bool> WaitToReadAsync(CancellationToken cancellationToken = default) => throw new DriveNotFoundException();
+
+            public override ValueTask<bool> WaitToReadAsync(
+                CancellationToken cancellationToken = default
+            ) => throw new DriveNotFoundException();
         }
 
         private sealed class TryPeekNoOverrideReader<T> : ChannelReader<T>
@@ -279,7 +316,8 @@ namespace System.Threading.Channels.Tests
                 return false;
             }
 
-            public override ValueTask<bool> WaitToReadAsync(CancellationToken cancellationToken) => default;
+            public override ValueTask<bool> WaitToReadAsync(CancellationToken cancellationToken) =>
+                default;
         }
 
         private sealed class CanReadFalseStream : MemoryStream

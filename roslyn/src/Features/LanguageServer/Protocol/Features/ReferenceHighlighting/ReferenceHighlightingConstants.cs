@@ -8,6 +8,7 @@ namespace Microsoft.CodeAnalysis.ReferenceHighlighting
     {
         public const string DefinitionTagId = "MarkerFormatDefinition/HighlightedDefinition";
         public const string ReferenceTagId = "MarkerFormatDefinition/HighlightedReference";
-        public const string WrittenReferenceTagId = "MarkerFormatDefinition/HighlightedWrittenReference";
+        public const string WrittenReferenceTagId =
+            "MarkerFormatDefinition/HighlightedWrittenReference";
     }
 }

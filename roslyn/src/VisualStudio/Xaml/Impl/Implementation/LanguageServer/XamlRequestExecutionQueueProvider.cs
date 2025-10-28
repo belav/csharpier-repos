@@ -21,22 +21,36 @@ using StreamJsonRpc;
 namespace Microsoft.VisualStudio.LanguageServices.Xaml.Implementation.LanguageServer;
 
 [ExportStatelessXamlLspService(typeof(IRequestExecutionQueueProvider<RequestContext>)), Shared]
-internal sealed class XamlRequestExecutionQueueProvider : IRequestExecutionQueueProvider<RequestContext>
+internal sealed class XamlRequestExecutionQueueProvider
+    : IRequestExecutionQueueProvider<RequestContext>
 {
     private readonly XamlProjectService _projectService;
     private readonly IXamlLanguageServerFeedbackService? _feedbackService;
 
     [ImportingConstructor]
     [Obsolete(MefConstruction.ImportingConstructorMessage, true)]
-    public XamlRequestExecutionQueueProvider(XamlProjectService projectService, IXamlLanguageServerFeedbackService? feedbackService)
+    public XamlRequestExecutionQueueProvider(
+        XamlProjectService projectService,
+        IXamlLanguageServerFeedbackService? feedbackService
+    )
     {
         _projectService = projectService;
         _feedbackService = feedbackService;
     }
 
-    public IRequestExecutionQueue<RequestContext> CreateRequestExecutionQueue(AbstractLanguageServer<RequestContext> languageServer, ILspLogger logger, IHandlerProvider handlerProvider)
+    public IRequestExecutionQueue<RequestContext> CreateRequestExecutionQueue(
+        AbstractLanguageServer<RequestContext> languageServer,
+        ILspLogger logger,
+        IHandlerProvider handlerProvider
+    )
     {
-        var queue = new XamlRequestExecutionQueue(_projectService, _feedbackService, languageServer, logger, handlerProvider);
+        var queue = new XamlRequestExecutionQueue(
+            _projectService,
+            _feedbackService,
+            languageServer,
+            logger,
+            handlerProvider
+        );
         queue.Start();
         return queue;
     }

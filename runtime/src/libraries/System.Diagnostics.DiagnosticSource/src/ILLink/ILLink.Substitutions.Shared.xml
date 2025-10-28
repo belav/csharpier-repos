@@ -1,5 +1,9 @@
 <linker>
-  <assembly fullname="System.Diagnostics.DiagnosticSource" feature="System.Diagnostics.Metrics.Meter.IsSupported" featurevalue="false">
+  <assembly
+    fullname="System.Diagnostics.DiagnosticSource"
+    feature="System.Diagnostics.Metrics.Meter.IsSupported"
+    featurevalue="false"
+  >
     <type fullname="System.Diagnostics.Metrics.Meter">
       <method signature="System.Boolean get_IsSupported()" body="stub" value="false" />
     </type>

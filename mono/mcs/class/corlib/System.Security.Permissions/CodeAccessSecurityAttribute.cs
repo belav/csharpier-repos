@@ -1,8 +1,8 @@
-// 
-// System.Security.Permissions.SecurityPermissionAttribute.cs 
+//
+// System.Security.Permissions.SecurityPermissionAttribute.cs
 //
 // Author:         Nick Drochak, ndrochak@gol.com
-// Created:        2002-01-06 
+// Created:        2002-01-06
 //
 // Copyright (C) 2001 Nick Drochak, All Rights Reserved
 // Copyright (C) 2004-2006 Novell, Inc (http://www.novell.com)
@@ -14,10 +14,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -29,28 +29,25 @@
 
 using System.Runtime.InteropServices;
 
-namespace System.Security.Permissions {
-
+namespace System.Security.Permissions
+{
 #if MOBILE && !MONOTOUCH
-	[Obsolete ("CAS support is not available with Silverlight applications.")]
+    [Obsolete("CAS support is not available with Silverlight applications.")]
 #endif
-	[ComVisible (true)]
-	[AttributeUsage(
-		AttributeTargets.Assembly 
-		| AttributeTargets.Class 
-		| AttributeTargets.Struct 
-		| AttributeTargets.Constructor 
-		| AttributeTargets.Method, 
-		AllowMultiple=true, 
-		Inherited=false)
-	]
-	[Serializable]
-	public abstract class CodeAccessSecurityAttribute : SecurityAttribute {
-
-		protected CodeAccessSecurityAttribute (SecurityAction action) 
-			: base (action)
-		{
-		}
-	}
+    [ComVisible(true)]
+    [AttributeUsage(
+        AttributeTargets.Assembly
+            | AttributeTargets.Class
+            | AttributeTargets.Struct
+            | AttributeTargets.Constructor
+            | AttributeTargets.Method,
+        AllowMultiple = true,
+        Inherited = false
+    )]
+    [Serializable]
+    public abstract class CodeAccessSecurityAttribute : SecurityAttribute
+    {
+        protected CodeAccessSecurityAttribute(SecurityAction action)
+            : base(action) { }
+    }
 }
-

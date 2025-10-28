@@ -20,7 +20,7 @@ namespace System.ServiceModel.Routing
         static AsyncCompletion completeReceiveContextCallback = CompleteReceiveContextCallback;
         static AsyncCompletion commitTransactionCallback = CommitTransactionCallback;
         static AsyncCompletion channelCloseCallback = ChannelCloseCallback;
-        
+
         bool abortedRetry;
         bool allCompletedSync = true;
         RoutingChannelExtension channelExtension;
@@ -32,7 +32,13 @@ namespace System.ServiceModel.Routing
         ProcessingState state = ProcessingState.Initial;
         TimeoutHelper timeoutHelper;
 
-        public ProcessMessagesAsyncResult(Message message, RoutingService service, TimeSpan timeout, AsyncCallback callback, object state)
+        public ProcessMessagesAsyncResult(
+            Message message,
+            RoutingService service,
+            TimeSpan timeout,
+            AsyncCallback callback,
+            object state
+        )
             : base(callback, state)
         {
             this.service = service;
@@ -49,13 +55,26 @@ namespace System.ServiceModel.Routing
             else
             {
                 this.closeOutboundChannels = false;
-                MessageRpc messageRpc = new MessageRpc(message, OperationContext.Current, this.channelExtension.ImpersonationRequired);
+                MessageRpc messageRpc = new MessageRpc(
+                    message,
+                    OperationContext.Current,
+                    this.channelExtension.ImpersonationRequired
+                );
                 if (TD.RoutingServiceProcessingMessageIsEnabled())
                 {
-                    TD.RoutingServiceProcessingMessage(messageRpc.EventTraceActivity, messageRpc.UniqueID, messageRpc.Message.Headers.Action, messageRpc.OperationContext.EndpointDispatcher.EndpointAddress.Uri.ToString(), (messageRpc.Transaction != null).ToString());
+                    TD.RoutingServiceProcessingMessage(
+                        messageRpc.EventTraceActivity,
+                        messageRpc.UniqueID,
+                        messageRpc.Message.Headers.Action,
+                        messageRpc.OperationContext.EndpointDispatcher.EndpointAddress.Uri.ToString(),
+                        (messageRpc.Transaction != null).ToString()
+                    );
                 }
 
-                EndpointNameMessageFilter.Set(messageRpc.Message.Properties, this.channelExtension.EndpointName);
+                EndpointNameMessageFilter.Set(
+                    messageRpc.Message.Properties,
+                    this.channelExtension.EndpointName
+                );
                 messageRpc.RouteToEndpoints<TContract>(this.service.RoutingConfig);
                 this.service.SessionMessages.Add(messageRpc);
 
@@ -112,36 +131,36 @@ namespace System.ServiceModel.Routing
             switch (this.state)
             {
                 case ProcessingState.Initial:
-                    {
-                        this.service.CreateNewTransactionIfNeeded(this.service.SessionMessages[0]);
-                        return this.DoneInitializing();
-                    }
+                {
+                    this.service.CreateNewTransactionIfNeeded(this.service.SessionMessages[0]);
+                    return this.DoneInitializing();
+                }
 
                 case ProcessingState.SendingSessionMessages:
-                    {
-                        return this.SendToCurrentClient();
-                    }
+                {
+                    return this.SendToCurrentClient();
+                }
 
                 case ProcessingState.ClosingChannels:
-                    {
-                        return this.CloseCurrentChannel();
-                    }
+                {
+                    return this.CloseCurrentChannel();
+                }
 
                 case ProcessingState.CompletingReceiveContexts:
-                    {
-                        return this.CompleteCurrentReceiveContext();
-                    }
+                {
+                    return this.CompleteCurrentReceiveContext();
+                }
 
                 case ProcessingState.CommittingTransaction:
-                    {
-                        return this.CommitTransaction();
-                    }
+                {
+                    return this.CommitTransaction();
+                }
 
                 case ProcessingState.Completing:
-                    {
-                        this.CompleteSelf(null);
-                        return false;
-                    }
+                {
+                    this.CompleteSelf(null);
+                    return false;
+                }
 
                 default:
                     Fx.Assert("ProcessNext shouldn't be called in this state: " + this.state);
@@ -158,16 +177,27 @@ namespace System.ServiceModel.Routing
                 this.MoveToNextClientOperation(messageRpc.Operations.Count);
                 return true;
             }
-            else if (!this.channelExtension.ReceiveContextEnabled &&
-                this.channelExtension.TransactedReceiveEnabled &&
-                sendOperation.HasAlternate)
+            else if (
+                !this.channelExtension.ReceiveContextEnabled
+                && this.channelExtension.TransactedReceiveEnabled
+                && sendOperation.HasAlternate
+            )
             {
                 // We can't do error handling for oneway Transactional unless there's RC.
-                throw FxTrace.Exception.AsError(new ConfigurationErrorsException(SR.ErrorHandlingNotSupportedTxNoRC(messageRpc.OperationContext.Channel.LocalAddress)));
+                throw FxTrace.Exception.AsError(
+                    new ConfigurationErrorsException(
+                        SR.ErrorHandlingNotSupportedTxNoRC(
+                            messageRpc.OperationContext.Channel.LocalAddress
+                        )
+                    )
+                );
             }
 
             RoutingEndpointTrait endpointTrait = sendOperation.CurrentEndpoint;
-            this.client = this.service.GetOrCreateClient<TContract>(endpointTrait, messageRpc.Impersonating);
+            this.client = this.service.GetOrCreateClient<TContract>(
+                endpointTrait,
+                messageRpc.Impersonating
+            );
             try
             {
                 // We always work on cloned message when there are backup endpoints to handle exception cases
@@ -186,7 +216,12 @@ namespace System.ServiceModel.Routing
 
                 if (TD.RoutingServiceTransmittingMessageIsEnabled())
                 {
-                    TD.RoutingServiceTransmittingMessage(messageRpc.EventTraceActivity, messageRpc.UniqueID, this.destinationIndex.ToString(TD.Culture), this.client.Key.ToString());
+                    TD.RoutingServiceTransmittingMessage(
+                        messageRpc.EventTraceActivity,
+                        messageRpc.UniqueID,
+                        this.destinationIndex.ToString(TD.Culture),
+                        this.client.Key.ToString()
+                    );
                 }
 
                 Transaction transaction = this.service.GetTransactionForSending(messageRpc);
@@ -196,13 +231,18 @@ namespace System.ServiceModel.Routing
                     try
                     {
                         //Perform the assignment in a finally block so it won't be interrupted asynchronously
-                        try { } 
+                        try { }
                         finally
                         {
                             impersonationContext = messageRpc.PrepareCall();
                         }
-                        
-                        result = this.client.BeginOperation(message, transaction, this.PrepareAsyncCompletion(clientOperationCallback), this);
+
+                        result = this.client.BeginOperation(
+                            message,
+                            transaction,
+                            this.PrepareAsyncCompletion(clientOperationCallback),
+                            this
+                        );
                     }
                     finally
                     {
@@ -241,7 +281,8 @@ namespace System.ServiceModel.Routing
 
         static bool ClientOperationCallback(IAsyncResult result)
         {
-            ProcessMessagesAsyncResult<TContract> thisPtr = (ProcessMessagesAsyncResult<TContract>)result.AsyncState;
+            ProcessMessagesAsyncResult<TContract> thisPtr =
+                (ProcessMessagesAsyncResult<TContract>)result.AsyncState;
             FxTrace.Trace.SetAndTraceTransfer(thisPtr.channelExtension.ActivityID, true);
             try
             {
@@ -289,7 +330,12 @@ namespace System.ServiceModel.Routing
 
             if (TD.RoutingServiceTransmitSucceededIsEnabled())
             {
-                TD.RoutingServiceTransmitSucceeded(messageRpc.EventTraceActivity, messageRpc.UniqueID, this.destinationIndex.ToString(TD.Culture), currentDest.CurrentEndpoint.ToString());
+                TD.RoutingServiceTransmitSucceeded(
+                    messageRpc.EventTraceActivity,
+                    messageRpc.UniqueID,
+                    this.destinationIndex.ToString(TD.Culture),
+                    currentDest.CurrentEndpoint.ToString()
+                );
             }
             MoveToNextClientOperation(messageRpc.Operations.Count);
         }
@@ -303,7 +349,10 @@ namespace System.ServiceModel.Routing
 
                 // If we're one-way non-transactional and non-ReceiveContext then
                 // we don't need to store messages for session replay or RC.Complete
-                if (!this.channelExtension.ReceiveContextEnabled && !this.channelExtension.TransactedReceiveEnabled)
+                if (
+                    !this.channelExtension.ReceiveContextEnabled
+                    && !this.channelExtension.TransactedReceiveEnabled
+                )
                 {
                     this.service.SessionMessages.RemoveAt(this.sessionMessageIndex);
                     --this.sessionMessageIndex;
@@ -326,7 +375,10 @@ namespace System.ServiceModel.Routing
                     {
                         if (TD.RoutingServiceAbandoningReceiveContextIsEnabled())
                         {
-                            TD.RoutingServiceAbandoningReceiveContext(messageRpc.EventTraceActivity, messageRpc.UniqueID);
+                            TD.RoutingServiceAbandoningReceiveContext(
+                                messageRpc.EventTraceActivity,
+                                messageRpc.UniqueID
+                            );
                         }
                         messageRpc.ReceiveContext.Abandon(this.timeoutHelper.RemainingTime());
                     }
@@ -352,7 +404,10 @@ namespace System.ServiceModel.Routing
             {
                 this.ChangeState(ProcessingState.CompletingReceiveContexts);
             }
-            else if (this.service.RetryTransaction != null || this.channelExtension.TransactedReceiveEnabled)
+            else if (
+                this.service.RetryTransaction != null
+                || this.channelExtension.TransactedReceiveEnabled
+            )
             {
                 this.ChangeState(ProcessingState.CommittingTransaction);
             }
@@ -371,7 +426,10 @@ namespace System.ServiceModel.Routing
 
         bool DoneCompletingReceiveContexts()
         {
-            if (this.service.RetryTransaction != null || this.channelExtension.TransactedReceiveEnabled)
+            if (
+                this.service.RetryTransaction != null
+                || this.channelExtension.TransactedReceiveEnabled
+            )
             {
                 this.ChangeState(ProcessingState.CommittingTransaction);
             }
@@ -402,7 +460,10 @@ namespace System.ServiceModel.Routing
             {
                 this.ChangeState(ProcessingState.CompletingReceiveContexts);
             }
-            else if (this.service.RetryTransaction != null || this.channelExtension.TransactedReceiveEnabled)
+            else if (
+                this.service.RetryTransaction != null
+                || this.channelExtension.TransactedReceiveEnabled
+            )
             {
                 this.ChangeState(ProcessingState.CommittingTransaction);
             }
@@ -416,7 +477,7 @@ namespace System.ServiceModel.Routing
         bool CloseCurrentChannel()
         {
             this.client = this.channelExtension.SessionChannels.ReleaseChannel();
-            
+
             if (this.client == null)
             {
                 return this.DoneClosingChannels();
@@ -431,8 +492,11 @@ namespace System.ServiceModel.Routing
                 IAsyncResult result;
                 using (this.PrepareTransactionalCall(this.service.GetTransactionForSending(null)))
                 {
-                    result = ((ICommunicationObject)this.client).BeginClose(this.timeoutHelper.RemainingTime(),
-                        this.PrepareAsyncCompletion(channelCloseCallback), this);
+                    result = ((ICommunicationObject)this.client).BeginClose(
+                        this.timeoutHelper.RemainingTime(),
+                        this.PrepareAsyncCompletion(channelCloseCallback),
+                        this
+                    );
                 }
 
                 if (this.CheckSyncContinue(result))
@@ -454,7 +518,8 @@ namespace System.ServiceModel.Routing
 
         static bool ChannelCloseCallback(IAsyncResult result)
         {
-            ProcessMessagesAsyncResult<TContract> thisPtr = (ProcessMessagesAsyncResult<TContract>)result.AsyncState;
+            ProcessMessagesAsyncResult<TContract> thisPtr =
+                (ProcessMessagesAsyncResult<TContract>)result.AsyncState;
             FxTrace.Trace.SetAndTraceTransfer(thisPtr.channelExtension.ActivityID, true);
             try
             {
@@ -507,12 +572,19 @@ namespace System.ServiceModel.Routing
             MessageRpc messageRpc = this.service.SessionMessages[this.sessionMessageIndex];
             SendOperation sendOperation = messageRpc.Operations[this.destinationIndex];
 
-            if ((e is CommunicationObjectAbortedException || e is CommunicationObjectFaultedException) && 
-                !this.channelExtension.HasSession)
+            if (
+                (
+                    e is CommunicationObjectAbortedException
+                    || e is CommunicationObjectFaultedException
+                ) && !this.channelExtension.HasSession
+            )
             {
-                // Messages on a non sessionful channel share outbound connections and can 
+                // Messages on a non sessionful channel share outbound connections and can
                 // fail due to other messages failing on the same channel
-                bool canRetry = (this.channelExtension.ReceiveContextEnabled || !this.channelExtension.TransactedReceiveEnabled);
+                bool canRetry = (
+                    this.channelExtension.ReceiveContextEnabled
+                    || !this.channelExtension.TransactedReceiveEnabled
+                );
                 if (canRetry && !this.abortedRetry)
                 {
                     //No session and ReceiveContext or non transactional, retry the message 1 time (before moving to backup)
@@ -525,7 +597,9 @@ namespace System.ServiceModel.Routing
             {
                 // The channel may not fault for this exception for bindings other than netTcpBinding
                 // We abort the channel in that case. We proactively clean up so that we don't have to cleanup later
-                SessionChannels sessionChannels = this.service.GetSessionChannels(messageRpc.Impersonating);
+                SessionChannels sessionChannels = this.service.GetSessionChannels(
+                    messageRpc.Impersonating
+                );
                 if (sessionChannels != null)
                 {
                     sessionChannels.AbortChannel(sendOperation.CurrentEndpoint);
@@ -549,17 +623,22 @@ namespace System.ServiceModel.Routing
             {
                 if (TD.RoutingServiceMovedToBackupIsEnabled())
                 {
-                    TD.RoutingServiceMovedToBackup(messageRpc.EventTraceActivity, messageRpc.UniqueID, this.destinationIndex.ToString(TD.Culture), sendOperation.CurrentEndpoint.ToString());
+                    TD.RoutingServiceMovedToBackup(
+                        messageRpc.EventTraceActivity,
+                        messageRpc.UniqueID,
+                        this.destinationIndex.ToString(TD.Culture),
+                        sendOperation.CurrentEndpoint.ToString()
+                    );
                 }
                 this.ResetState();
-                canHandle = true; 
+                canHandle = true;
             }
             else if (this.service.GetTransactionForSending(messageRpc) == null)
             {
                 // This is OneWay with no Transaction...
                 // store this exception for when we complete, but continue any multicasting
                 this.service.SessionException = e;
-                
+
                 // Mark the SendOperation as 'Sent' because there's no more work we can do (non-tx and no more backups)
                 sendOperation.TransmitSucceeded(null);
 
@@ -579,7 +658,7 @@ namespace System.ServiceModel.Routing
             return canHandle;
         }
 
-        // A Sessionful channel failed when closing, find all messages that went on that 
+        // A Sessionful channel failed when closing, find all messages that went on that
         // session/channel and move them to their backup endpoints
         bool HandleCloseFailure(Exception e)
         {
@@ -597,13 +676,20 @@ namespace System.ServiceModel.Routing
             if (this.service.SessionMessages.Count == 0)
             {
                 //All messages have been sent and we're non-transactional
-                Fx.Assert(!this.service.ChannelExtension.TransactedReceiveEnabled, "Should only happen for non-transactional cases");
+                Fx.Assert(
+                    !this.service.ChannelExtension.TransactedReceiveEnabled,
+                    "Should only happen for non-transactional cases"
+                );
                 return true;
             }
 
             foreach (MessageRpc messageRpc in this.service.SessionMessages)
             {
-                for (this.destinationIndex = 0; this.destinationIndex < messageRpc.Operations.Count; this.destinationIndex++)
+                for (
+                    this.destinationIndex = 0;
+                    this.destinationIndex < messageRpc.Operations.Count;
+                    this.destinationIndex++
+                )
                 {
                     SendOperation sendOperation = messageRpc.Operations[this.destinationIndex];
                     if (client.Key.Equals(sendOperation.CurrentEndpoint))
@@ -614,7 +700,12 @@ namespace System.ServiceModel.Routing
                         }
                         if (TD.RoutingServiceMovedToBackupIsEnabled())
                         {
-                            TD.RoutingServiceMovedToBackup(messageRpc.EventTraceActivity, messageRpc.UniqueID, this.destinationIndex.ToString(TD.Culture), sendOperation.CurrentEndpoint.ToString());
+                            TD.RoutingServiceMovedToBackup(
+                                messageRpc.EventTraceActivity,
+                                messageRpc.UniqueID,
+                                this.destinationIndex.ToString(TD.Culture),
+                                sendOperation.CurrentEndpoint.ToString()
+                            );
                         }
                     }
                 }
@@ -639,14 +730,22 @@ namespace System.ServiceModel.Routing
             {
                 if (TD.RoutingServiceCompletingReceiveContextIsEnabled())
                 {
-                    TD.RoutingServiceCompletingReceiveContext(messageRpc.EventTraceActivity, messageRpc.UniqueID);
+                    TD.RoutingServiceCompletingReceiveContext(
+                        messageRpc.EventTraceActivity,
+                        messageRpc.UniqueID
+                    );
                 }
 
                 IAsyncResult result;
-                using (this.PrepareTransactionalCall(this.service.GetTransactionForSending(messageRpc)))
+                using (
+                    this.PrepareTransactionalCall(this.service.GetTransactionForSending(messageRpc))
+                )
                 {
-                    result = messageRpc.ReceiveContext.BeginComplete(this.timeoutHelper.RemainingTime(),
-                        this.PrepareAsyncCompletion(completeReceiveContextCallback), this);
+                    result = messageRpc.ReceiveContext.BeginComplete(
+                        this.timeoutHelper.RemainingTime(),
+                        this.PrepareAsyncCompletion(completeReceiveContextCallback),
+                        this
+                    );
                 }
                 if (this.CheckSyncContinue(result))
                 {
@@ -661,7 +760,9 @@ namespace System.ServiceModel.Routing
             {
                 // Either all messages have RC or all messages don't have RC.  Since we don't have one
                 // we know that none of these messages will, so we don't have to look at the other messages
-                Fx.Assert("We shouldn't enter CompletingReceiveContexts state if the binding is not ReceiveContext capable");
+                Fx.Assert(
+                    "We shouldn't enter CompletingReceiveContexts state if the binding is not ReceiveContext capable"
+                );
                 keepGoing = this.DoneCompletingReceiveContexts();
             }
 
@@ -670,7 +771,8 @@ namespace System.ServiceModel.Routing
 
         static bool CompleteReceiveContextCallback(IAsyncResult result)
         {
-            ProcessMessagesAsyncResult<TContract> thisPtr = (ProcessMessagesAsyncResult<TContract>)result.AsyncState;
+            ProcessMessagesAsyncResult<TContract> thisPtr =
+                (ProcessMessagesAsyncResult<TContract>)result.AsyncState;
             FxTrace.Trace.SetAndTraceTransfer(thisPtr.channelExtension.ActivityID, true);
             try
             {
@@ -709,11 +811,15 @@ namespace System.ServiceModel.Routing
             {
                 if (TD.RoutingServiceCommittingTransactionIsEnabled())
                 {
-                    TD.RoutingServiceCommittingTransaction(this.service.RetryTransaction.TransactionInformation.LocalIdentifier);
+                    TD.RoutingServiceCommittingTransaction(
+                        this.service.RetryTransaction.TransactionInformation.LocalIdentifier
+                    );
                 }
 
                 IAsyncResult result = this.service.RetryTransaction.BeginCommit(
-                    this.PrepareAsyncCompletion(commitTransactionCallback), this);
+                    this.PrepareAsyncCompletion(commitTransactionCallback),
+                    this
+                );
                 if (this.CheckSyncContinue(result))
                 {
                     return this.CommitTransactionCompleted(result);
@@ -725,7 +831,11 @@ namespace System.ServiceModel.Routing
                 if (TD.RoutingServiceCommittingTransactionIsEnabled())
                 {
                     Transaction transaction = this.service.GetTransactionForSending(null);
-                    TD.RoutingServiceCommittingTransaction(transaction != null ? transaction.TransactionInformation.LocalIdentifier : string.Empty);
+                    TD.RoutingServiceCommittingTransaction(
+                        transaction != null
+                            ? transaction.TransactionInformation.LocalIdentifier
+                            : string.Empty
+                    );
                 }
             }
 
@@ -734,7 +844,8 @@ namespace System.ServiceModel.Routing
 
         static bool CommitTransactionCallback(IAsyncResult result)
         {
-            ProcessMessagesAsyncResult<TContract> thisPtr = (ProcessMessagesAsyncResult<TContract>)result.AsyncState;
+            ProcessMessagesAsyncResult<TContract> thisPtr =
+                (ProcessMessagesAsyncResult<TContract>)result.AsyncState;
             FxTrace.Trace.SetAndTraceTransfer(thisPtr.channelExtension.ActivityID, true);
             try
             {
@@ -764,7 +875,10 @@ namespace System.ServiceModel.Routing
         void CompleteSelf(Exception operationException)
         {
             Exception exception = operationException;
-            if (exception == null && (this.closeOutboundChannels || !this.channelExtension.HasSession))
+            if (
+                exception == null
+                && (this.closeOutboundChannels || !this.channelExtension.HasSession)
+            )
             {
                 // It's possible that this last operation in a session didn't result in an exception
                 // but we still have an exception to report when closing the session...
@@ -774,7 +888,10 @@ namespace System.ServiceModel.Routing
             if (!this.closeOutboundChannels)
             {
                 //When we're closing the channels that means end of session, there's no message per se.
-                if (TD.RoutingServiceCompletingOneWayIsEnabled()) { TD.RoutingServiceCompletingOneWay(exception); }
+                if (TD.RoutingServiceCompletingOneWayIsEnabled())
+                {
+                    TD.RoutingServiceCompletingOneWay(exception);
+                }
             }
             this.Complete(this.allCompletedSync, exception);
         }
@@ -800,7 +917,7 @@ namespace System.ServiceModel.Routing
             CompletingReceiveContexts,
             CommittingTransaction,
             Completing,
-            Completed
+            Completed,
         }
     }
 }

@@ -35,8 +35,7 @@ public interface IReadOnlyKey : IReadOnlyAnnotatable
     ///     Returns a value indicating whether the key is the primary key.
     /// </summary>
     /// <returns><see langword="true" /> if the key is the primary key.</returns>
-    bool IsPrimaryKey()
-        => this == DeclaringEntityType.FindPrimaryKey();
+    bool IsPrimaryKey() => this == DeclaringEntityType.FindPrimaryKey();
 
     /// <summary>
     ///     <para>
@@ -50,7 +49,10 @@ public interface IReadOnlyKey : IReadOnlyAnnotatable
     /// <param name="options">Options for generating the string.</param>
     /// <param name="indent">The number of indent spaces to use before each new line.</param>
     /// <returns>A human-readable representation.</returns>
-    string ToDebugString(MetadataDebugStringOptions options = MetadataDebugStringOptions.ShortDefault, int indent = 0)
+    string ToDebugString(
+        MetadataDebugStringOptions options = MetadataDebugStringOptions.ShortDefault,
+        int indent = 0
+    )
     {
         var builder = new StringBuilder();
         var indentString = new string(' ', indent);
@@ -64,10 +66,13 @@ public interface IReadOnlyKey : IReadOnlyAnnotatable
         }
 
         builder.AppendJoin(
-            ", ", Properties.Select(
-                p => singleLine
+            ", ",
+            Properties.Select(p =>
+                singleLine
                     ? p.DeclaringType.DisplayName(omitSharedType: true) + "." + p.Name
-                    : p.Name));
+                    : p.Name
+            )
+        );
 
         if (IsPrimaryKey())
         {

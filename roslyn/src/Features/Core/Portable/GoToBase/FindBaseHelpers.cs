@@ -15,22 +15,33 @@ namespace Microsoft.CodeAnalysis.GoToBase
     internal static class FindBaseHelpers
     {
         public static ValueTask<ImmutableArray<ISymbol>> FindBasesAsync(
-            ISymbol symbol, Solution solution, CancellationToken cancellationToken)
+            ISymbol symbol,
+            Solution solution,
+            CancellationToken cancellationToken
+        )
         {
-            if (symbol is INamedTypeSymbol namedTypeSymbol &&
-                (namedTypeSymbol.TypeKind == TypeKind.Class ||
-                namedTypeSymbol.TypeKind == TypeKind.Interface ||
-                namedTypeSymbol.TypeKind == TypeKind.Struct))
+            if (
+                symbol is INamedTypeSymbol namedTypeSymbol
+                && (
+                    namedTypeSymbol.TypeKind == TypeKind.Class
+                    || namedTypeSymbol.TypeKind == TypeKind.Interface
+                    || namedTypeSymbol.TypeKind == TypeKind.Struct
+                )
+            )
             {
-                var result = BaseTypeFinder.FindBaseTypesAndInterfaces(namedTypeSymbol).CastArray<ISymbol>();
+                var result = BaseTypeFinder
+                    .FindBaseTypesAndInterfaces(namedTypeSymbol)
+                    .CastArray<ISymbol>();
                 return ValueTaskFactory.FromResult(result);
             }
 
-            if (symbol.Kind is SymbolKind.Property or
-                SymbolKind.Method or
-                SymbolKind.Event)
+            if (symbol.Kind is SymbolKind.Property or SymbolKind.Method or SymbolKind.Event)
             {
-                return BaseTypeFinder.FindOverriddenAndImplementedMembersAsync(symbol, solution, cancellationToken);
+                return BaseTypeFinder.FindOverriddenAndImplementedMembersAsync(
+                    symbol,
+                    solution,
+                    cancellationToken
+                );
             }
 
             return ValueTaskFactory.FromResult(ImmutableArray<ISymbol>.Empty);

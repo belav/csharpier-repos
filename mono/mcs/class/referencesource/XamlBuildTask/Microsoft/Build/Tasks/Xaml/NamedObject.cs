@@ -6,27 +6,22 @@ namespace Microsoft.Build.Tasks.Xaml
 {
     using System;
     using System.Collections.Generic;
-    using System.Xml.Linq;
     using System.Xaml;
     using System.Xaml.Schema;
+    using System.Xml.Linq;
     using XamlBuildTask;
 
     public class NamedObject
     {
         MemberVisibility visibility;
 
-        public String Name
-        { get; set; }
+        public String Name { get; set; }
 
-        public XamlType Type
-        { get; set; }
+        public XamlType Type { get; set; }
 
         public MemberVisibility Visibility
         {
-            get
-            {
-                return this.visibility;
-            }
+            get { return this.visibility; }
             set
             {
                 if (!Enum.IsDefined(typeof(MemberVisibility), value))

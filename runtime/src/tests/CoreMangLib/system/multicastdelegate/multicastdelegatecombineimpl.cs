@@ -19,7 +19,7 @@ public class MulticastDelegateCombineImpl
         retVal = PosTest6() && retVal;
         retVal = PosTest7() && retVal;
         retVal = PosTest8() && retVal;
-        
+
         TestLibrary.TestFramework.LogInformation("[Negative]");
         retVal = NegTest1() && retVal;
         retVal = NegTest2() && retVal;
@@ -34,25 +34,32 @@ public class MulticastDelegateCombineImpl
             VerificationAgent.ThrowVerificationException(
                 "Input value parameter is not expected",
                 val,
-                DelegateDefinitions.c_DELEGATE_TEST_DEFAULT_VALUE_PARAMETER);
+                DelegateDefinitions.c_DELEGATE_TEST_DEFAULT_VALUE_PARAMETER
+            );
     }
 
     #region Positive Test Cases
     public bool PosTest1()
     {
         bool retVal = true;
-        
-        TestLibrary.TestFramework.BeginScenario("PosTest1: Combine two function from different type to a delegate");
+
+        TestLibrary.TestFramework.BeginScenario(
+            "PosTest1: Combine two function from different type to a delegate"
+        );
 
         try
         {
             DelegateDefinitions dd = new DelegateDefinitions();
-            dd.ValueParameterVoidDelegate =
-                new ValueParameterVoidDelegate(dd.TestValueParameterVoidCallback);
-            dd.ValueParameterVoidDelegate +=
-                new ValueParameterVoidDelegate(TestValueParameterVoidCallback);
+            dd.ValueParameterVoidDelegate = new ValueParameterVoidDelegate(
+                dd.TestValueParameterVoidCallback
+            );
+            dd.ValueParameterVoidDelegate += new ValueParameterVoidDelegate(
+                TestValueParameterVoidCallback
+            );
 
-            dd.ValueParameterVoidDelegate(DelegateDefinitions.c_DELEGATE_TEST_DEFAULT_VALUE_PARAMETER);
+            dd.ValueParameterVoidDelegate(
+                DelegateDefinitions.c_DELEGATE_TEST_DEFAULT_VALUE_PARAMETER
+            );
         }
         catch (Exception e)
         {
@@ -68,17 +75,23 @@ public class MulticastDelegateCombineImpl
     {
         bool retVal = true;
 
-        TestLibrary.TestFramework.BeginScenario("PosTest2: Combine two function from same type to a delegate");
+        TestLibrary.TestFramework.BeginScenario(
+            "PosTest2: Combine two function from same type to a delegate"
+        );
 
         try
         {
             DelegateDefinitions dd = new DelegateDefinitions();
-            dd.ValueParameterVoidDelegate =
-                new ValueParameterVoidDelegate(TestValueParameterVoidCallback1);
-            dd.ValueParameterVoidDelegate +=
-                new ValueParameterVoidDelegate(TestValueParameterVoidCallback);
+            dd.ValueParameterVoidDelegate = new ValueParameterVoidDelegate(
+                TestValueParameterVoidCallback1
+            );
+            dd.ValueParameterVoidDelegate += new ValueParameterVoidDelegate(
+                TestValueParameterVoidCallback
+            );
 
-            dd.ValueParameterVoidDelegate(DelegateDefinitions.c_DELEGATE_TEST_DEFAULT_VALUE_PARAMETER);
+            dd.ValueParameterVoidDelegate(
+                DelegateDefinitions.c_DELEGATE_TEST_DEFAULT_VALUE_PARAMETER
+            );
         }
         catch (Exception e)
         {
@@ -94,17 +107,23 @@ public class MulticastDelegateCombineImpl
     {
         bool retVal = true;
 
-        TestLibrary.TestFramework.BeginScenario("PosTest3: Combine a instance method and a class method from same type to a delegate");
+        TestLibrary.TestFramework.BeginScenario(
+            "PosTest3: Combine a instance method and a class method from same type to a delegate"
+        );
 
         try
         {
             DelegateDefinitions dd = new DelegateDefinitions();
-            dd.ValueParameterVoidDelegate =
-                new ValueParameterVoidDelegate(DelegateDefinitions.TestValueParameterVoidStaticCallback);
-            dd.ValueParameterVoidDelegate +=
-                new ValueParameterVoidDelegate(dd.TestValueParameterVoidCallback);
+            dd.ValueParameterVoidDelegate = new ValueParameterVoidDelegate(
+                DelegateDefinitions.TestValueParameterVoidStaticCallback
+            );
+            dd.ValueParameterVoidDelegate += new ValueParameterVoidDelegate(
+                dd.TestValueParameterVoidCallback
+            );
 
-            dd.ValueParameterVoidDelegate(DelegateDefinitions.c_DELEGATE_TEST_DEFAULT_VALUE_PARAMETER);
+            dd.ValueParameterVoidDelegate(
+                DelegateDefinitions.c_DELEGATE_TEST_DEFAULT_VALUE_PARAMETER
+            );
         }
         catch (Exception e)
         {
@@ -120,17 +139,23 @@ public class MulticastDelegateCombineImpl
     {
         bool retVal = true;
 
-        TestLibrary.TestFramework.BeginScenario("PosTest4: Combine a public instance method and a public class method from different type to a delegate");
+        TestLibrary.TestFramework.BeginScenario(
+            "PosTest4: Combine a public instance method and a public class method from different type to a delegate"
+        );
 
         try
         {
             DelegateDefinitions dd = new DelegateDefinitions();
-            dd.ValueParameterVoidDelegate =
-                new ValueParameterVoidDelegate(DelegateDefinitions.TestValueParameterVoidStaticCallback);
-            dd.ValueParameterVoidDelegate +=
-                new ValueParameterVoidDelegate(TestValueParameterVoidCallback);
+            dd.ValueParameterVoidDelegate = new ValueParameterVoidDelegate(
+                DelegateDefinitions.TestValueParameterVoidStaticCallback
+            );
+            dd.ValueParameterVoidDelegate += new ValueParameterVoidDelegate(
+                TestValueParameterVoidCallback
+            );
 
-            dd.ValueParameterVoidDelegate(DelegateDefinitions.c_DELEGATE_TEST_DEFAULT_VALUE_PARAMETER);
+            dd.ValueParameterVoidDelegate(
+                DelegateDefinitions.c_DELEGATE_TEST_DEFAULT_VALUE_PARAMETER
+            );
         }
         catch (Exception e)
         {
@@ -146,17 +171,23 @@ public class MulticastDelegateCombineImpl
     {
         bool retVal = true;
 
-        TestLibrary.TestFramework.BeginScenario("PosTest5: Combine a private instance method and a private class method from the same type to a delegate");
+        TestLibrary.TestFramework.BeginScenario(
+            "PosTest5: Combine a private instance method and a private class method from the same type to a delegate"
+        );
 
         try
         {
             DelegateDefinitions dd = new DelegateDefinitions();
-            dd.ValueParameterVoidDelegate =
-                new ValueParameterVoidDelegate(MulticastDelegateCombineImpl.TestValueParameterVoidStaticCallback);
-            dd.ValueParameterVoidDelegate +=
-                new ValueParameterVoidDelegate(TestValueParameterVoidCallback1);
+            dd.ValueParameterVoidDelegate = new ValueParameterVoidDelegate(
+                MulticastDelegateCombineImpl.TestValueParameterVoidStaticCallback
+            );
+            dd.ValueParameterVoidDelegate += new ValueParameterVoidDelegate(
+                TestValueParameterVoidCallback1
+            );
 
-            dd.ValueParameterVoidDelegate(DelegateDefinitions.c_DELEGATE_TEST_DEFAULT_VALUE_PARAMETER);
+            dd.ValueParameterVoidDelegate(
+                DelegateDefinitions.c_DELEGATE_TEST_DEFAULT_VALUE_PARAMETER
+            );
         }
         catch (Exception e)
         {
@@ -172,17 +203,23 @@ public class MulticastDelegateCombineImpl
     {
         bool retVal = true;
 
-        TestLibrary.TestFramework.BeginScenario("PosTest6: Combine two static methods from different class");
+        TestLibrary.TestFramework.BeginScenario(
+            "PosTest6: Combine two static methods from different class"
+        );
 
         try
         {
             DelegateDefinitions dd = new DelegateDefinitions();
-            dd.ValueParameterVoidDelegate =
-                new ValueParameterVoidDelegate(MulticastDelegateCombineImpl.TestValueParameterVoidStaticCallback);
-            dd.ValueParameterVoidDelegate +=
-                new ValueParameterVoidDelegate(DelegateDefinitions.TestValueParameterVoidStaticCallback);
+            dd.ValueParameterVoidDelegate = new ValueParameterVoidDelegate(
+                MulticastDelegateCombineImpl.TestValueParameterVoidStaticCallback
+            );
+            dd.ValueParameterVoidDelegate += new ValueParameterVoidDelegate(
+                DelegateDefinitions.TestValueParameterVoidStaticCallback
+            );
 
-            dd.ValueParameterVoidDelegate(DelegateDefinitions.c_DELEGATE_TEST_DEFAULT_VALUE_PARAMETER);
+            dd.ValueParameterVoidDelegate(
+                DelegateDefinitions.c_DELEGATE_TEST_DEFAULT_VALUE_PARAMETER
+            );
         }
         catch (Exception e)
         {
@@ -203,7 +240,7 @@ public class MulticastDelegateCombineImpl
         try
         {
             DelegateDefinitions dd = new DelegateDefinitions();
-            int i = DelegateDefinitions.c_DELEGATE_TEST_DEFAULT_VALUE_PARAMETER;    
+            int i = DelegateDefinitions.c_DELEGATE_TEST_DEFAULT_VALUE_PARAMETER;
 
             dd.ValueParameterValueDelegate = delegate(int val)
             {
@@ -211,7 +248,8 @@ public class MulticastDelegateCombineImpl
                     VerificationAgent.ThrowVerificationException(
                         "Input value parameter is not expected",
                         val,
-                        DelegateDefinitions.c_DELEGATE_TEST_DEFAULT_VALUE_PARAMETER);
+                        DelegateDefinitions.c_DELEGATE_TEST_DEFAULT_VALUE_PARAMETER
+                    );
 
                 // Test the call order of multicast delegate
                 i++;
@@ -224,21 +262,28 @@ public class MulticastDelegateCombineImpl
                     VerificationAgent.ThrowVerificationException(
                         "Input value parameter is not expected",
                         val,
-                        DelegateDefinitions.c_DELEGATE_TEST_DEFAULT_VALUE_PARAMETER);
+                        DelegateDefinitions.c_DELEGATE_TEST_DEFAULT_VALUE_PARAMETER
+                    );
 
                 if (i != DelegateDefinitions.c_DELEGATE_TEST_DEFAULT_VALUE_PARAMETER + 1)
                     VerificationAgent.ThrowVerificationException(
                         "Value of out variable of anonymous method is not expected",
                         DelegateDefinitions.c_DELEGATE_TEST_DEFAULT_VALUE_PARAMETER + 1,
-                        i);
+                        i
+                    );
 
                 return DelegateDefinitions.c_DELEGATE_TEST_DEFAULT_VALUE_PARAMETER;
             };
 
-            int returnObject = dd.ValueParameterValueDelegate(DelegateDefinitions.c_DELEGATE_TEST_DEFAULT_VALUE_PARAMETER);
+            int returnObject = dd.ValueParameterValueDelegate(
+                DelegateDefinitions.c_DELEGATE_TEST_DEFAULT_VALUE_PARAMETER
+            );
             if (returnObject != DelegateDefinitions.c_DELEGATE_TEST_DEFAULT_VALUE_PARAMETER)
             {
-                TestLibrary.TestFramework.LogError("007", "Incorrect delegate return value: " + returnObject);
+                TestLibrary.TestFramework.LogError(
+                    "007",
+                    "Incorrect delegate return value: " + returnObject
+                );
                 retVal = false;
             }
         }
@@ -261,36 +306,63 @@ public class MulticastDelegateCombineImpl
         try
         {
             DelegateDefinitions dd = new DelegateDefinitions();
-            dd.VoidParameterVoidDelegate =
-                new VoidParameterVoidDelegate(DelegateDefinitions.TestVoidParameterVoidStaticCallback);
-            dd.VoidParameterVoidDelegate +=
-                new VoidParameterVoidDelegate(dd.TestVoidParameterVoidCallback);
+            dd.VoidParameterVoidDelegate = new VoidParameterVoidDelegate(
+                DelegateDefinitions.TestVoidParameterVoidStaticCallback
+            );
+            dd.VoidParameterVoidDelegate += new VoidParameterVoidDelegate(
+                dd.TestVoidParameterVoidCallback
+            );
 
             DelegateDefinitions dd1 = new DelegateDefinitions();
-            dd1.VoidParameterVoidDelegate =
-                new VoidParameterVoidDelegate(DelegateDefinitions.TestVoidParameterVoidStaticCallback);
-            dd1.VoidParameterVoidDelegate +=
-                new VoidParameterVoidDelegate(dd1.TestVoidParameterVoidCallback);
+            dd1.VoidParameterVoidDelegate = new VoidParameterVoidDelegate(
+                DelegateDefinitions.TestVoidParameterVoidStaticCallback
+            );
+            dd1.VoidParameterVoidDelegate += new VoidParameterVoidDelegate(
+                dd1.TestVoidParameterVoidCallback
+            );
 
-            dd.VoidParameterVoidDelegate = (VoidParameterVoidDelegate)MulticastDelegate.Combine(dd.VoidParameterVoidDelegate, dd1.VoidParameterVoidDelegate);
+            dd.VoidParameterVoidDelegate = (VoidParameterVoidDelegate)
+                MulticastDelegate.Combine(
+                    dd.VoidParameterVoidDelegate,
+                    dd1.VoidParameterVoidDelegate
+                );
 
             dd.VoidParameterVoidDelegate();
 
-            if (dd.VoidParameterVoidDelegateTestValue != DelegateDefinitions.c_DELEGATE_TEST_DEFAULT_VALUE_PARAMETER + 1)
+            if (
+                dd.VoidParameterVoidDelegateTestValue
+                != DelegateDefinitions.c_DELEGATE_TEST_DEFAULT_VALUE_PARAMETER + 1
+            )
             {
-                TestLibrary.TestFramework.LogError("009", "Combined delegate does not work: " + dd.VoidParameterVoidDelegateTestValue);
+                TestLibrary.TestFramework.LogError(
+                    "009",
+                    "Combined delegate does not work: " + dd.VoidParameterVoidDelegateTestValue
+                );
                 retVal = false;
             }
 
-            if (dd1.VoidParameterVoidDelegateTestValue != DelegateDefinitions.c_DELEGATE_TEST_DEFAULT_VALUE_PARAMETER + 1)
+            if (
+                dd1.VoidParameterVoidDelegateTestValue
+                != DelegateDefinitions.c_DELEGATE_TEST_DEFAULT_VALUE_PARAMETER + 1
+            )
             {
-                TestLibrary.TestFramework.LogError("010", "Combined delegate does not work: " + dd1.VoidParameterVoidDelegateTestValue);
+                TestLibrary.TestFramework.LogError(
+                    "010",
+                    "Combined delegate does not work: " + dd1.VoidParameterVoidDelegateTestValue
+                );
                 retVal = false;
             }
 
-            if (DelegateDefinitions.VoidParameterVoidDelegateStaticTestValue != DelegateDefinitions.c_DELEGATE_TEST_DEFAULT_VALUE_PARAMETER + 2)
+            if (
+                DelegateDefinitions.VoidParameterVoidDelegateStaticTestValue
+                != DelegateDefinitions.c_DELEGATE_TEST_DEFAULT_VALUE_PARAMETER + 2
+            )
             {
-                TestLibrary.TestFramework.LogError("011", "Combined delegate does not work: " + DelegateDefinitions.VoidParameterVoidDelegateStaticTestValue);
+                TestLibrary.TestFramework.LogError(
+                    "011",
+                    "Combined delegate does not work: "
+                        + DelegateDefinitions.VoidParameterVoidDelegateStaticTestValue
+                );
                 retVal = false;
             }
         }
@@ -320,12 +392,16 @@ public class MulticastDelegateCombineImpl
         try
         {
             DelegateDefinitions dd = new DelegateDefinitions();
-            dd.ValueParameterVoidDelegate =
-                new ValueParameterVoidDelegate(dd.TestValueParameterVoidCallback);
-            dd.ValueParameterVoidDelegate +=
-                new ValueParameterVoidDelegate(dd.TestValueParameterVoidCallback);
+            dd.ValueParameterVoidDelegate = new ValueParameterVoidDelegate(
+                dd.TestValueParameterVoidCallback
+            );
+            dd.ValueParameterVoidDelegate += new ValueParameterVoidDelegate(
+                dd.TestValueParameterVoidCallback
+            );
 
-            dd.ValueParameterVoidDelegate(DelegateDefinitions.c_DELEGATE_TEST_DEFAULT_VALUE_PARAMETER);
+            dd.ValueParameterVoidDelegate(
+                DelegateDefinitions.c_DELEGATE_TEST_DEFAULT_VALUE_PARAMETER
+            );
         }
         catch (Exception e)
         {
@@ -346,13 +422,17 @@ public class MulticastDelegateCombineImpl
         try
         {
             DelegateDefinitions dd = new DelegateDefinitions();
-            dd.ValueParameterVoidDelegate =
-                new ValueParameterVoidDelegate(dd.TestValueParameterVoidCallback);
+            dd.ValueParameterVoidDelegate = new ValueParameterVoidDelegate(
+                dd.TestValueParameterVoidCallback
+            );
             dd.ValueParameterVoidDelegate += null;
-            dd.ValueParameterVoidDelegate +=
-                new ValueParameterVoidDelegate(TestValueParameterVoidCallback);
+            dd.ValueParameterVoidDelegate += new ValueParameterVoidDelegate(
+                TestValueParameterVoidCallback
+            );
 
-            dd.ValueParameterVoidDelegate(DelegateDefinitions.c_DELEGATE_TEST_DEFAULT_VALUE_PARAMETER);
+            dd.ValueParameterVoidDelegate(
+                DelegateDefinitions.c_DELEGATE_TEST_DEFAULT_VALUE_PARAMETER
+            );
         }
         catch (Exception e)
         {
@@ -368,7 +448,9 @@ public class MulticastDelegateCombineImpl
     {
         bool retVal = true;
 
-        TestLibrary.TestFramework.BeginScenario("NegTest3: Return value of second method is different with first method");
+        TestLibrary.TestFramework.BeginScenario(
+            "NegTest3: Return value of second method is different with first method"
+        );
 
         try
         {
@@ -385,7 +467,10 @@ public class MulticastDelegateCombineImpl
             int returnObject = dd.VoidParameterValueDelegate();
             if (returnObject != DelegateDefinitions.c_DELEGATE_TEST_DEFAULT_VALUE_PARAMETER + 1)
             {
-                TestLibrary.TestFramework.LogError("103", "Incorrect delegate return value: " + returnObject);
+                TestLibrary.TestFramework.LogError(
+                    "103",
+                    "Incorrect delegate return value: " + returnObject
+                );
                 retVal = false;
             }
         }
@@ -408,7 +493,8 @@ public class MulticastDelegateCombineImpl
             VerificationAgent.ThrowVerificationException(
                 "Input value parameter is not expected",
                 val,
-                DelegateDefinitions.c_DELEGATE_TEST_DEFAULT_VALUE_PARAMETER);
+                DelegateDefinitions.c_DELEGATE_TEST_DEFAULT_VALUE_PARAMETER
+            );
     }
     #endregion
 
@@ -419,7 +505,8 @@ public class MulticastDelegateCombineImpl
             VerificationAgent.ThrowVerificationException(
                 "Input value parameter is not expected",
                 val,
-                DelegateDefinitions.c_DELEGATE_TEST_DEFAULT_VALUE_PARAMETER);
+                DelegateDefinitions.c_DELEGATE_TEST_DEFAULT_VALUE_PARAMETER
+            );
     }
     #endregion
 

@@ -1,10 +1,11 @@
 //------------------------------------------------------------------------------
 // <copyright file="IComponent.cs" company="Microsoft">
 //     Copyright (c) Microsoft Corporation.  All rights reserved.
-// </copyright>                                                                
+// </copyright>
 //------------------------------------------------------------------------------
 
-namespace System.ComponentModel {
+namespace System.ComponentModel
+{
     using System;
     using System.ComponentModel.Design;
     using System.ComponentModel.Design.Serialization;
@@ -29,25 +30,34 @@ namespace System.ComponentModel {
     /// </devdoc>
     [
 #pragma warning disable 0618
-        RootDesignerSerializer("System.ComponentModel.Design.Serialization.RootCodeDomSerializer, " + AssemblyRef.SystemDesign, "System.ComponentModel.Design.Serialization.CodeDomSerializer, " + AssemblyRef.SystemDesign, true),
+        RootDesignerSerializer(
+            "System.ComponentModel.Design.Serialization.RootCodeDomSerializer, "
+                + AssemblyRef.SystemDesign,
+            "System.ComponentModel.Design.Serialization.CodeDomSerializer, "
+                + AssemblyRef.SystemDesign,
+            true
+        ),
 #pragma warning restore 0618
-        Designer("System.ComponentModel.Design.ComponentDesigner, " + AssemblyRef.SystemDesign, typeof(IDesigner)),
-        Designer("System.Windows.Forms.Design.ComponentDocumentDesigner, " + AssemblyRef.SystemDesign, typeof(IRootDesigner)),
+        Designer(
+            "System.ComponentModel.Design.ComponentDesigner, " + AssemblyRef.SystemDesign,
+            typeof(IDesigner)
+        ),
+        Designer(
+            "System.Windows.Forms.Design.ComponentDocumentDesigner, " + AssemblyRef.SystemDesign,
+            typeof(IRootDesigner)
+        ),
         TypeConverter(typeof(ComponentConverter)),
         System.Runtime.InteropServices.ComVisible(true)
     ]
-    public interface IComponent : IDisposable {
-
+    public interface IComponent : IDisposable
+    {
         // The site of the component.
         /// <devdoc>
         ///    <para>When implemented by a class, gets or sets
         ///       the <see cref='System.ComponentModel.ISite'/> associated
         ///       with the <see cref='System.ComponentModel.IComponent'/>.</para>
         /// </devdoc>
-        ISite Site {
-            get;
-            set;
-        }
+        ISite Site { get; set; }
 
         /// <devdoc>
         ///    <para>Adds a event handler to listen to the Disposed event on the component.</para>

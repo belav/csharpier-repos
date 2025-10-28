@@ -1,12 +1,12 @@
 // ==++==
-// 
+//
 //   Copyright (c) Microsoft Corporation.  All rights reserved.
-// 
+//
 // ==--==g
 /*============================================================
 **
 ** Class:  File
-** 
+**
 ** <OWNER>Microsoft</OWNER>
 **
 **
@@ -15,30 +15,30 @@
 ===========================================================*/
 
 using System;
+using System.Collections.Generic;
+using System.Diagnostics.Contracts;
+using System.Globalization;
+using System.Runtime.InteropServices;
+using System.Runtime.Versioning;
+using System.Security;
 using System.Security.Permissions;
+using System.Text;
+using Microsoft.Win32.SafeHandles;
 using PermissionSet = System.Security.PermissionSet;
 using Win32Native = Microsoft.Win32.Win32Native;
-using System.Runtime.InteropServices;
-using System.Security;
 #if FEATURE_MACL
 using System.Security.AccessControl;
 #endif
-using System.Text;
-using Microsoft.Win32.SafeHandles;
-using System.Collections.Generic;
-using System.Globalization;
-using System.Runtime.Versioning;
-using System.Diagnostics.Contracts;
-    
-namespace System.IO {
- 
-    [ComVisible(false)] 
+
+namespace System.IO
+{
+    [ComVisible(false)]
     static class LongPath
     {
         [System.Security.SecurityCritical]
         [ResourceExposure(ResourceScope.Machine)]
         [ResourceConsumption(ResourceScope.Machine)]
-        internal unsafe static String NormalizePath(String path)
+        internal static unsafe String NormalizePath(String path)
         {
             Contract.Requires(path != null);
             return NormalizePath(path, true);
@@ -47,7 +47,7 @@ namespace System.IO {
         [System.Security.SecurityCritical]
         [ResourceExposure(ResourceScope.Machine)]
         [ResourceConsumption(ResourceScope.Machine)]
-        internal unsafe static String NormalizePath(String path, bool fullCheck)
+        internal static unsafe String NormalizePath(String path, bool fullCheck)
         {
             Contract.Requires(path != null);
             return Path.NormalizePath(path, fullCheck, Path.MaxLongPath);
@@ -110,7 +110,8 @@ namespace System.IO {
         [ResourceConsumption(ResourceScope.Machine)]
         internal static String GetPathRoot(String path)
         {
-            if (path == null) return null;
+            if (path == null)
+                return null;
 
             bool removedPrefix;
             String tempPath = TryRemoveLongPathPrefix(path, out removedPrefix);
@@ -131,7 +132,7 @@ namespace System.IO {
         // backslash ("\") in the file path. The returned value is null if the file
         // path is null or if the file path denotes a root (such as "\", "C:", or
         // "\\server\share").
-        [System.Security.SecurityCritical]  // auto-generated
+        [System.Security.SecurityCritical] // auto-generated
         [ResourceExposure(ResourceScope.None)]
         [ResourceConsumption(ResourceScope.Machine, ResourceScope.Machine)]
         internal static String GetDirectoryName(String path)
@@ -148,8 +149,14 @@ namespace System.IO {
                 if (i > root)
                 {
                     i = tempPath.Length;
-                    if (i == root) return null;
-                    while (i > root && tempPath[--i] != Path.DirectorySeparatorChar && tempPath[i] != Path.AltDirectorySeparatorChar);
+                    if (i == root)
+                        return null;
+                    while (
+                        i > root
+                        && tempPath[--i] != Path.DirectorySeparatorChar
+                        && tempPath[i] != Path.AltDirectorySeparatorChar
+                    )
+                        ;
                     String result = tempPath.Substring(0, i);
                     if (removedPrefix)
                     {
@@ -172,40 +179,63 @@ namespace System.IO {
         }
     }
 
-    [ComVisible(false)] 
+    [ComVisible(false)]
     static class LongPathFile
     {
-
-        // Copies an existing file to a new file. If overwrite is 
-        // false, then an IOException is thrown if the destination file 
-        // already exists.  If overwrite is true, the file is 
+        // Copies an existing file to a new file. If overwrite is
+        // false, then an IOException is thrown if the destination file
+        // already exists.  If overwrite is true, the file is
         // overwritten.
         //
         // The caller must have certain FileIOPermissions.  The caller must have
-        // Read permission to sourceFileName 
+        // Read permission to sourceFileName
         // and Write permissions to destFileName.
-        // 
+        //
         [System.Security.SecurityCritical]
         [ResourceExposure(ResourceScope.Machine)]
         [ResourceConsumption(ResourceScope.Machine)]
-        internal static void Copy(String sourceFileName, String destFileName, bool overwrite) {
+        internal static void Copy(String sourceFileName, String destFileName, bool overwrite)
+        {
             Contract.Requires(sourceFileName != null);
             Contract.Requires(destFileName != null);
             Contract.Requires(sourceFileName.Length > 0);
             Contract.Requires(destFileName.Length > 0);
 
             String fullSourceFileName = LongPath.NormalizePath(sourceFileName);
-            FileIOPermission.QuickDemand(FileIOPermissionAccess.Read, fullSourceFileName, false, false);
+            FileIOPermission.QuickDemand(
+                FileIOPermissionAccess.Read,
+                fullSourceFileName,
+                false,
+                false
+            );
             String fullDestFileName = LongPath.NormalizePath(destFileName);
-            FileIOPermission.QuickDemand(FileIOPermissionAccess.Write, fullDestFileName, false, false);
+            FileIOPermission.QuickDemand(
+                FileIOPermissionAccess.Write,
+                fullDestFileName,
+                false,
+                false
+            );
 
-            InternalCopy(fullSourceFileName, fullDestFileName, sourceFileName, destFileName, overwrite);
+            InternalCopy(
+                fullSourceFileName,
+                fullDestFileName,
+                sourceFileName,
+                destFileName,
+                overwrite
+            );
         }
 
         [System.Security.SecurityCritical]
         [ResourceExposure(ResourceScope.Machine)]
         [ResourceConsumption(ResourceScope.Machine)]
-        private static String InternalCopy(String fullSourceFileName, String fullDestFileName, String sourceFileName, String destFileName, bool overwrite) {
+        private static String InternalCopy(
+            String fullSourceFileName,
+            String fullDestFileName,
+            String sourceFileName,
+            String destFileName,
+            bool overwrite
+        )
+        {
             Contract.Requires(fullSourceFileName != null);
             Contract.Requires(fullDestFileName != null);
             Contract.Requires(fullSourceFileName.Length > 0);
@@ -214,45 +244,67 @@ namespace System.IO {
             fullSourceFileName = Path.AddLongPathPrefix(fullSourceFileName);
             fullDestFileName = Path.AddLongPathPrefix(fullDestFileName);
             bool r = Win32Native.CopyFile(fullSourceFileName, fullDestFileName, !overwrite);
-            if (!r) {
+            if (!r)
+            {
                 // Save Win32 error because subsequent checks will overwrite this HRESULT.
                 int errorCode = Marshal.GetLastWin32Error();
                 String fileName = destFileName;
 
-                if (errorCode != Win32Native.ERROR_FILE_EXISTS) {
-                    // For a number of error codes (sharing violation, path 
+                if (errorCode != Win32Native.ERROR_FILE_EXISTS)
+                {
+                    // For a number of error codes (sharing violation, path
                     // not found, etc) we don't know if the problem was with
                     // the source or dest file.  Try reading the source file.
-                    using(SafeFileHandle handle = Win32Native.UnsafeCreateFile(fullSourceFileName, FileStream.GENERIC_READ, FileShare.Read, null, FileMode.Open, 0, IntPtr.Zero)) {
+                    using (
+                        SafeFileHandle handle = Win32Native.UnsafeCreateFile(
+                            fullSourceFileName,
+                            FileStream.GENERIC_READ,
+                            FileShare.Read,
+                            null,
+                            FileMode.Open,
+                            0,
+                            IntPtr.Zero
+                        )
+                    )
+                    {
                         if (handle.IsInvalid)
                             fileName = sourceFileName;
                     }
 
-                    if (errorCode == Win32Native.ERROR_ACCESS_DENIED) {
+                    if (errorCode == Win32Native.ERROR_ACCESS_DENIED)
+                    {
                         if (LongPathDirectory.InternalExists(fullDestFileName))
-                            throw new IOException(Environment.GetResourceString("Arg_FileIsDirectory_Name", destFileName), Win32Native.ERROR_ACCESS_DENIED, fullDestFileName);
+                            throw new IOException(
+                                Environment.GetResourceString(
+                                    "Arg_FileIsDirectory_Name",
+                                    destFileName
+                                ),
+                                Win32Native.ERROR_ACCESS_DENIED,
+                                fullDestFileName
+                            );
                     }
                 }
 
                 __Error.WinIOError(errorCode, fileName);
             }
-                
+
             return fullDestFileName;
         }
 
         // Deletes a file. The file specified by the designated path is deleted.
         // If the file does not exist, Delete succeeds without throwing
         // an exception.
-        // 
+        //
         // On NT, Delete will fail for a file that is open for normal I/O
-        // or a file that is memory mapped.  
-        // 
+        // or a file that is memory mapped.
+        //
         // Your application must have Delete permission to the target file.
-        // 
-        [System.Security.SecurityCritical] 
+        //
+        [System.Security.SecurityCritical]
         [ResourceExposure(ResourceScope.Machine)]
         [ResourceConsumption(ResourceScope.Machine)]
-        internal static void Delete(String path) {
+        internal static void Delete(String path)
+        {
             Contract.Requires(path != null);
 
             String fullPath = LongPath.NormalizePath(path);
@@ -262,57 +314,61 @@ namespace System.IO {
 
             String tempPath = Path.AddLongPathPrefix(fullPath);
             bool r = Win32Native.DeleteFile(tempPath);
-            if (!r) {
+            if (!r)
+            {
                 int hr = Marshal.GetLastWin32Error();
-                if (hr==Win32Native.ERROR_FILE_NOT_FOUND)
+                if (hr == Win32Native.ERROR_FILE_NOT_FOUND)
                     return;
                 else
                     __Error.WinIOError(hr, fullPath);
             }
         }
-        
+
         // Tests if a file exists. The result is true if the file
         // given by the specified path exists; otherwise, the result is
         // false.  Note that if path describes a directory,
         // Exists will return true.
         //
         // Your application must have Read permission for the target directory.
-        // 
-        [System.Security.SecurityCritical] 
+        //
+        [System.Security.SecurityCritical]
         [ResourceExposure(ResourceScope.Machine)]
         [ResourceConsumption(ResourceScope.Machine)]
-        internal static bool Exists(String path) {
+        internal static bool Exists(String path)
+        {
             try
             {
-                if (path==null)
+                if (path == null)
                     return false;
-                if (path.Length==0)
+                if (path.Length == 0)
                     return false;
-            
+
                 path = LongPath.NormalizePath(path);
                 // After normalizing, check whether path ends in directory separator.
                 // Otherwise, FillAttributeInfo removes it and we may return a false positive.
                 // GetFullPathInternal should never return null
                 Contract.Assert(path != null, "File.Exists: GetFullPathInternal returned null");
-                if (path.Length > 0 && Path.IsDirectorySeparator(path[path.Length - 1])) {
+                if (path.Length > 0 && Path.IsDirectorySeparator(path[path.Length - 1]))
+                {
                     return false;
                 }
 
-                FileIOPermission.QuickDemand(FileIOPermissionAccess.Read, path, false, false );
+                FileIOPermission.QuickDemand(FileIOPermissionAccess.Read, path, false, false);
 
                 return InternalExists(path);
             }
-            catch(ArgumentException) {} 
-            catch(NotSupportedException) {} // Security can throw this on ":"
-            catch(SecurityException) {}
-            catch(IOException) {}
-            catch(UnauthorizedAccessException) {}
+            catch (ArgumentException) { }
+            catch (NotSupportedException) { } // Security can throw this on ":"
+            catch (SecurityException) { }
+            catch (IOException) { }
+            catch (UnauthorizedAccessException) { }
 
             return false;
         }
 
         [System.Security.SecurityCritical]
-        internal static bool InternalExists(String path) {
+        internal static bool InternalExists(String path)
+        {
             Contract.Requires(path != null);
             String tempPath = Path.AddLongPathPrefix(path);
             return File.InternalExists(tempPath);
@@ -330,7 +386,8 @@ namespace System.IO {
 
             String tempPath = Path.AddLongPathPrefix(fullPath);
 
-            Win32Native.WIN32_FILE_ATTRIBUTE_DATA data = new Win32Native.WIN32_FILE_ATTRIBUTE_DATA();
+            Win32Native.WIN32_FILE_ATTRIBUTE_DATA data =
+                new Win32Native.WIN32_FILE_ATTRIBUTE_DATA();
             int dataInitialised = File.FillAttributeInfo(tempPath, ref data, false, false);
             if (dataInitialised != 0)
                 __Error.WinIOError(dataInitialised, fullPath);
@@ -351,7 +408,8 @@ namespace System.IO {
             FileIOPermission.QuickDemand(FileIOPermissionAccess.Read, fullPath, false, false);
 
             String tempPath = Path.AddLongPathPrefix(fullPath);
-            Win32Native.WIN32_FILE_ATTRIBUTE_DATA data = new Win32Native.WIN32_FILE_ATTRIBUTE_DATA();
+            Win32Native.WIN32_FILE_ATTRIBUTE_DATA data =
+                new Win32Native.WIN32_FILE_ATTRIBUTE_DATA();
             int dataInitialised = File.FillAttributeInfo(tempPath, ref data, false, false);
             if (dataInitialised != 0)
                 __Error.WinIOError(dataInitialised, fullPath);
@@ -361,7 +419,7 @@ namespace System.IO {
             return new DateTimeOffset(dtLocal).ToLocalTime();
         }
 
-        [System.Security.SecurityCritical] 
+        [System.Security.SecurityCritical]
         [ResourceExposure(ResourceScope.Machine)]
         [ResourceConsumption(ResourceScope.Machine)]
         internal static DateTimeOffset GetLastWriteTime(String path)
@@ -372,7 +430,8 @@ namespace System.IO {
             FileIOPermission.QuickDemand(FileIOPermissionAccess.Read, fullPath, false, false);
 
             String tempPath = Path.AddLongPathPrefix(fullPath);
-            Win32Native.WIN32_FILE_ATTRIBUTE_DATA data = new Win32Native.WIN32_FILE_ATTRIBUTE_DATA();
+            Win32Native.WIN32_FILE_ATTRIBUTE_DATA data =
+                new Win32Native.WIN32_FILE_ATTRIBUTE_DATA();
             int dataInitialised = File.FillAttributeInfo(tempPath, ref data, false, false);
             if (dataInitialised != 0)
                 __Error.WinIOError(dataInitialised, fullPath);
@@ -386,23 +445,34 @@ namespace System.IO {
         // This method does work across volumes.
         //
         // The caller must have certain FileIOPermissions.  The caller must
-        // have Read and Write permission to 
-        // sourceFileName and Write 
+        // have Read and Write permission to
+        // sourceFileName and Write
         // permissions to destFileName.
-        // 
+        //
         [System.Security.SecurityCritical]
         [ResourceExposure(ResourceScope.Machine)]
         [ResourceConsumption(ResourceScope.Machine)]
-        internal static void Move(String sourceFileName, String destFileName) {
+        internal static void Move(String sourceFileName, String destFileName)
+        {
             Contract.Requires(sourceFileName != null);
             Contract.Requires(destFileName != null);
             Contract.Requires(sourceFileName.Length > 0);
             Contract.Requires(destFileName.Length > 0);
 
             String fullSourceFileName = LongPath.NormalizePath(sourceFileName);
-            FileIOPermission.QuickDemand(FileIOPermissionAccess.Write | FileIOPermissionAccess.Read, fullSourceFileName, false, false);
+            FileIOPermission.QuickDemand(
+                FileIOPermissionAccess.Write | FileIOPermissionAccess.Read,
+                fullSourceFileName,
+                false,
+                false
+            );
             String fullDestFileName = LongPath.NormalizePath(destFileName);
-            FileIOPermission.QuickDemand(FileIOPermissionAccess.Write, fullDestFileName, false, false);
+            FileIOPermission.QuickDemand(
+                FileIOPermissionAccess.Write,
+                fullDestFileName,
+                false,
+                false
+            );
 
             if (!LongPathFile.InternalExists(fullSourceFileName))
                 __Error.WinIOError(Win32Native.ERROR_FILE_NOT_FOUND, fullSourceFileName);
@@ -426,7 +496,8 @@ namespace System.IO {
             FileIOPermission.QuickDemand(FileIOPermissionAccess.Read, fullPath, false, false);
 
             String tempPath = Path.AddLongPathPrefix(fullPath);
-            Win32Native.WIN32_FILE_ATTRIBUTE_DATA data = new Win32Native.WIN32_FILE_ATTRIBUTE_DATA();
+            Win32Native.WIN32_FILE_ATTRIBUTE_DATA data =
+                new Win32Native.WIN32_FILE_ATTRIBUTE_DATA();
             int dataInitialised = File.FillAttributeInfo(tempPath, ref data, false, true); // return error
             if (dataInitialised != 0)
                 __Error.WinIOError(dataInitialised, path); // from FileInfo.
@@ -437,14 +508,14 @@ namespace System.IO {
             return ((long)data.fileSizeHigh) << 32 | ((long)data.fileSizeLow & 0xFFFFFFFFL);
         }
 
-         // Defined in WinError.h
-        private const int ERROR_ACCESS_DENIED = 0x5;     
+        // Defined in WinError.h
+        private const int ERROR_ACCESS_DENIED = 0x5;
     }
 
-    [ComVisible(false)] 
+    [ComVisible(false)]
     static class LongPathDirectory
     {
-        [System.Security.SecurityCritical]  // auto-generated
+        [System.Security.SecurityCritical] // auto-generated
         [ResourceExposure(ResourceScope.Machine)]
         [ResourceConsumption(ResourceScope.Machine)]
         internal static void CreateDirectory(String path)
@@ -454,7 +525,7 @@ namespace System.IO {
 
             String fullPath = LongPath.NormalizePath(path);
 
-            // You need read access to the directory to be returned back and write access to all the directories 
+            // You need read access to the directory to be returned back and write access to all the directories
             // that you need to create. If we fail any security checks we will not create any directories at all.
             // We attempt to create directories only after all the security checks have passed. This is avoid doing
             // a demand at every level.
@@ -464,10 +535,14 @@ namespace System.IO {
             InternalCreateDirectory(fullPath, path, null);
         }
 
-        [System.Security.SecurityCritical]  // auto-generated
+        [System.Security.SecurityCritical] // auto-generated
         [ResourceExposure(ResourceScope.Machine)]
         [ResourceConsumption(ResourceScope.Machine)]
-        private unsafe static void InternalCreateDirectory(String fullPath, String path, Object dirSecurityObj)
+        private static unsafe void InternalCreateDirectory(
+            String fullPath,
+            String path,
+            Object dirSecurityObj
+        )
         {
 #if FEATURE_MACL
             DirectorySecurity dirSecurity = (DirectorySecurity)dirSecurityObj;
@@ -479,11 +554,13 @@ namespace System.IO {
             if (length >= 2 && Path.IsDirectorySeparator(fullPath[length - 1]))
                 length--;
 
-            int lengthRoot = LongPath.GetRootLength(fullPath); 
+            int lengthRoot = LongPath.GetRootLength(fullPath);
 
-            // For UNC paths that are only // or /// 
+            // For UNC paths that are only // or ///
             if (length == 2 && Path.IsDirectorySeparator(fullPath[1]))
-                throw new IOException(Environment.GetResourceString("IO.IO_CannotCreateDirectory", path));
+                throw new IOException(
+                    Environment.GetResourceString("IO.IO_CannotCreateDirectory", path)
+                );
 
             List<string> stackDir = new List<string>();
 
@@ -506,7 +583,12 @@ namespace System.IO {
                     else
                         somepathexists = true;
 
-                    while (i > lengthRoot && fullPath[i] != Path.DirectorySeparatorChar && fullPath[i] != Path.AltDirectorySeparatorChar) i--;
+                    while (
+                        i > lengthRoot
+                        && fullPath[i] != Path.DirectorySeparatorChar
+                        && fullPath[i] != Path.AltDirectorySeparatorChar
+                    )
+                        i--;
                     i--;
                 }
             }
@@ -530,10 +612,22 @@ namespace System.IO {
 
                 // Security check for all directories not present only.
 #if !FEATURE_PAL  && FEATURE_MACL
-                AccessControlActions control = (dirSecurity == null) ? AccessControlActions.None : AccessControlActions.Change;
-                FileIOPermission.QuickDemand(FileIOPermissionAccess.Write, control, securityList, false, false);
+                AccessControlActions control =
+                    (dirSecurity == null) ? AccessControlActions.None : AccessControlActions.Change;
+                FileIOPermission.QuickDemand(
+                    FileIOPermissionAccess.Write,
+                    control,
+                    securityList,
+                    false,
+                    false
+                );
 #else
-                FileIOPermission.QuickDemand(FileIOPermissionAccess.Write, securityList, false, false);
+                FileIOPermission.QuickDemand(
+                    FileIOPermissionAccess.Write,
+                    securityList,
+                    false,
+                    false
+                );
 #endif
             }
 
@@ -541,13 +635,14 @@ namespace System.IO {
             // descriptor and set it in he call to CreateDirectory.
             Win32Native.SECURITY_ATTRIBUTES secAttrs = null;
 #if FEATURE_MACL
-            if (dirSecurity != null) {
+            if (dirSecurity != null)
+            {
                 secAttrs = new Win32Native.SECURITY_ATTRIBUTES();
                 secAttrs.nLength = (int)Marshal.SizeOf(secAttrs);
 
                 // For ACL's, get the security descriptor from the FileSecurity.
                 byte[] sd = dirSecurity.GetSecurityDescriptorBinaryForm();
-                byte * bytesOnStack = stackalloc byte[sd.Length];
+                byte* bytesOnStack = stackalloc byte[sd.Length];
                 Buffer.Memcpy(bytesOnStack, 0, sd, 0, sd.Length);
                 secAttrs.pSecurityDescriptor = bytesOnStack;
             }
@@ -570,9 +665,9 @@ namespace System.IO {
                 {
                     int currentError = Marshal.GetLastWin32Error();
                     // While we tried to avoid creating directories that don't
-                    // exist above, there are at least two cases that will 
-                    // cause us to see ERROR_ALREADY_EXISTS here.  InternalExists 
-                    // can fail because we didn't have permission to the 
+                    // exist above, there are at least two cases that will
+                    // cause us to see ERROR_ALREADY_EXISTS here.  InternalExists
+                    // can fail because we didn't have permission to the
                     // directory.  Secondly, another thread or process could
                     // create the directory between the time we check and the
                     // time we try using the directory.  Thirdly, it could
@@ -582,13 +677,24 @@ namespace System.IO {
                     else
                     {
                         // If there's a file in this directory's place, or if we have ERROR_ACCESS_DENIED when checking if the directory already exists throw.
-                        if (LongPathFile.InternalExists(name) || (!InternalExists(name, out currentError) && currentError == Win32Native.ERROR_ACCESS_DENIED))
+                        if (
+                            LongPathFile.InternalExists(name)
+                            || (
+                                !InternalExists(name, out currentError)
+                                && currentError == Win32Native.ERROR_ACCESS_DENIED
+                            )
+                        )
                         {
                             firstError = currentError;
                             // Give the user a nice error message, but don't leak path information.
                             try
                             {
-                                FileIOPermission.QuickDemand(FileIOPermissionAccess.PathDiscovery, GetDemandDir(name, true), false, false);
+                                FileIOPermission.QuickDemand(
+                                    FileIOPermissionAccess.PathDiscovery,
+                                    GetDemandDir(name, true),
+                                    false,
+                                    false
+                                );
                                 errorString = name;
                             }
                             catch (SecurityException) { }
@@ -605,20 +711,23 @@ namespace System.IO {
                 if (!InternalExists(root))
                 {
                     // Extract the root from the passed in path again for security.
-                    __Error.WinIOError(Win32Native.ERROR_PATH_NOT_FOUND, InternalGetDirectoryRoot(path));
+                    __Error.WinIOError(
+                        Win32Native.ERROR_PATH_NOT_FOUND,
+                        InternalGetDirectoryRoot(path)
+                    );
                 }
                 return;
             }
 
-            // Only throw an exception if creating the exact directory we 
+            // Only throw an exception if creating the exact directory we
             // wanted failed to work correctly.
             if (!r && (firstError != 0))
             {
                 __Error.WinIOError(firstError, errorString);
             }
         }
-      
-        [System.Security.SecurityCritical] 
+
+        [System.Security.SecurityCritical]
         [ResourceExposure(ResourceScope.Machine)]
         [ResourceConsumption(ResourceScope.Machine)]
         internal static void Move(String sourceDirName, String destDirName)
@@ -640,17 +749,27 @@ namespace System.IO {
             if (destPath.Length >= Path.MaxLongPath)
                 throw new PathTooLongException(Environment.GetResourceString("IO.PathTooLong"));
 
-            FileIOPermission.QuickDemand(FileIOPermissionAccess.Write | FileIOPermissionAccess.Read, sourcePath, false, false);
+            FileIOPermission.QuickDemand(
+                FileIOPermissionAccess.Write | FileIOPermissionAccess.Read,
+                sourcePath,
+                false,
+                false
+            );
             FileIOPermission.QuickDemand(FileIOPermissionAccess.Write, destPath, false, false);
 
             if (String.Compare(sourcePath, destPath, StringComparison.OrdinalIgnoreCase) == 0)
-                throw new IOException(Environment.GetResourceString("IO.IO_SourceDestMustBeDifferent"));
+                throw new IOException(
+                    Environment.GetResourceString("IO.IO_SourceDestMustBeDifferent")
+                );
 
             String sourceRoot = LongPath.GetPathRoot(sourcePath);
             String destinationRoot = LongPath.GetPathRoot(destPath);
-            if (String.Compare(sourceRoot, destinationRoot, StringComparison.OrdinalIgnoreCase) != 0)
-                throw new IOException(Environment.GetResourceString("IO.IO_SourceDestMustHaveSameRoot"));
-
+            if (
+                String.Compare(sourceRoot, destinationRoot, StringComparison.OrdinalIgnoreCase) != 0
+            )
+                throw new IOException(
+                    Environment.GetResourceString("IO.IO_SourceDestMustHaveSameRoot")
+                );
 
             String tempSourceDirName = PathInternal.EnsureExtendedPrefix(sourceDirName);
             String tempDestDirName = PathInternal.EnsureExtendedPrefix(destDirName);
@@ -665,7 +784,13 @@ namespace System.IO {
                 }
                 // This check was originally put in for Win9x (unfortunately without special casing it to be for Win9x only). We can't change the NT codepath now for backcomp reasons.
                 if (hr == Win32Native.ERROR_ACCESS_DENIED) // WinNT throws IOException. This check is for Win9x. We can't change it for backcomp.
-                    throw new IOException(Environment.GetResourceString("UnauthorizedAccess_IODenied_Path", sourceDirName), Win32Native.MakeHRFromErrorCode(hr));
+                    throw new IOException(
+                        Environment.GetResourceString(
+                            "UnauthorizedAccess_IODenied_Path",
+                            sourceDirName
+                        ),
+                        Win32Native.MakeHRFromErrorCode(hr)
+                    );
                 __Error.WinIOError(hr, String.Empty);
             }
         }
@@ -676,7 +801,7 @@ namespace System.IO {
         internal static void Delete(String path, bool recursive)
         {
             String fullPath = LongPath.NormalizePath(path);
-           InternalDelete(fullPath, path, recursive);
+            InternalDelete(fullPath, path, recursive);
         }
 
         // FullPath is fully qualified, while the user path is used for feedback in exceptions
@@ -688,18 +813,19 @@ namespace System.IO {
             String demandPath;
 
             // If not recursive, do permission check only on this directory
-            // else check for the whole directory structure rooted below 
+            // else check for the whole directory structure rooted below
             demandPath = GetDemandDir(fullPath, !recursive);
 
             // Make sure we have write permission to this directory
             FileIOPermission.QuickDemand(FileIOPermissionAccess.Write, demandPath, false, false);
 
             String longPath = Path.AddLongPathPrefix(fullPath);
-            // Do not recursively delete through reparse points.  Perhaps in a 
-            // future version we will add a new flag to control this behavior, 
+            // Do not recursively delete through reparse points.  Perhaps in a
+            // future version we will add a new flag to control this behavior,
             // but for now we're much safer if we err on the conservative side.
             // This applies to symbolic links and mount points.
-            Win32Native.WIN32_FILE_ATTRIBUTE_DATA data = new Win32Native.WIN32_FILE_ATTRIBUTE_DATA();
+            Win32Native.WIN32_FILE_ATTRIBUTE_DATA data =
+                new Win32Native.WIN32_FILE_ATTRIBUTE_DATA();
             int dataInitialised = File.FillAttributeInfo(longPath, ref data, false, true);
             if (dataInitialised != 0)
             {
@@ -715,20 +841,25 @@ namespace System.IO {
             DeleteHelper(longPath, userPath, recursive, true);
         }
 
-        // Note that fullPath is fully qualified, while userPath may be 
+        // Note that fullPath is fully qualified, while userPath may be
         // relative.  Use userPath for all exception messages to avoid leaking
         // fully qualified path information.
         [System.Security.SecurityCritical]
         [ResourceExposure(ResourceScope.Machine)]
         [ResourceConsumption(ResourceScope.Machine)]
-        private static void DeleteHelper(String fullPath, String userPath, bool recursive, bool throwOnTopLevelDirectoryNotFound)
+        private static void DeleteHelper(
+            String fullPath,
+            String userPath,
+            bool recursive,
+            bool throwOnTopLevelDirectoryNotFound
+        )
         {
             bool r;
             int hr;
             Exception ex = null;
 
-            // Do not recursively delete through reparse points.  Perhaps in a 
-            // future version we will add a new flag to control this behavior, 
+            // Do not recursively delete through reparse points.  Perhaps in a
+            // future version we will add a new flag to control this behavior,
             // but for now we're much safer if we err on the conservative side.
             // This applies to symbolic links and mount points.
             // Note the logic to check whether fullPath is a reparse point is
@@ -741,7 +872,12 @@ namespace System.IO {
                 Win32Native.WIN32_FIND_DATA data = new Win32Native.WIN32_FIND_DATA();
 
                 String searchPath = null;
-                if (fullPath.EndsWith(Path.DirectorySeparatorChar.ToString(), StringComparison.Ordinal))
+                if (
+                    fullPath.EndsWith(
+                        Path.DirectorySeparatorChar.ToString(),
+                        StringComparison.Ordinal
+                    )
+                )
                 {
                     searchPath = fullPath + "*";
                 }
@@ -761,22 +897,32 @@ namespace System.IO {
 
                     do
                     {
-                        bool isDir = (0 != (data.dwFileAttributes & Win32Native.FILE_ATTRIBUTE_DIRECTORY));
+                        bool isDir = (
+                            0 != (data.dwFileAttributes & Win32Native.FILE_ATTRIBUTE_DIRECTORY)
+                        );
                         if (isDir)
                         {
                             // Skip ".", "..".
                             if (data.cFileName.Equals(".") || data.cFileName.Equals(".."))
                                 continue;
 
-                            // Recurse for all directories, unless they are 
+                            // Recurse for all directories, unless they are
                             // reparse points.  Do not follow mount points nor
-                            // symbolic links, but do delete the reparse point 
+                            // symbolic links, but do delete the reparse point
                             // itself.
-                            bool shouldRecurse = (0 == (data.dwFileAttributes & (int)FileAttributes.ReparsePoint));
+                            bool shouldRecurse = (
+                                0 == (data.dwFileAttributes & (int)FileAttributes.ReparsePoint)
+                            );
                             if (shouldRecurse)
                             {
-                                String newFullPath = LongPath.InternalCombine(fullPath, data.cFileName);
-                                String newUserPath = LongPath.InternalCombine(userPath, data.cFileName);
+                                String newFullPath = LongPath.InternalCombine(
+                                    fullPath,
+                                    data.cFileName
+                                );
+                                String newUserPath = LongPath.InternalCombine(
+                                    userPath,
+                                    data.cFileName
+                                );
                                 try
                                 {
                                     DeleteHelper(newFullPath, newUserPath, recursive, false);
@@ -796,7 +942,10 @@ namespace System.IO {
                                 if (data.dwReserved0 == Win32Native.IO_REPARSE_TAG_MOUNT_POINT)
                                 {
                                     // Use full path plus a trailing '\'
-                                    String mountPoint = LongPath.InternalCombine(fullPath, data.cFileName + Path.DirectorySeparatorChar);
+                                    String mountPoint = LongPath.InternalCombine(
+                                        fullPath,
+                                        data.cFileName + Path.DirectorySeparatorChar
+                                    );
                                     r = Win32Native.DeleteVolumeMountPoint(mountPoint);
                                     if (!r)
                                     {
@@ -820,7 +969,10 @@ namespace System.IO {
 
                                 // RemoveDirectory on a symbolic link will
                                 // remove the link itself.
-                                String reparsePoint = LongPath.InternalCombine(fullPath, data.cFileName);
+                                String reparsePoint = LongPath.InternalCombine(
+                                    fullPath,
+                                    data.cFileName
+                                );
                                 r = Win32Native.RemoveDirectory(reparsePoint);
                                 if (!r)
                                 {
@@ -885,18 +1037,20 @@ namespace System.IO {
                     hr = Win32Native.ERROR_PATH_NOT_FOUND;
                 // This check was originally put in for Win9x (unfortunately without special casing it to be for Win9x only). We can't change the NT codepath now for backcomp reasons.
                 if (hr == Win32Native.ERROR_ACCESS_DENIED)
-                    throw new IOException(Environment.GetResourceString("UnauthorizedAccess_IODenied_Path", userPath));
+                    throw new IOException(
+                        Environment.GetResourceString("UnauthorizedAccess_IODenied_Path", userPath)
+                    );
 
                 // don't throw the DirectoryNotFoundException since this is a subdir and there could be a ----
                 // between two Directory.Delete callers
                 if (hr == Win32Native.ERROR_PATH_NOT_FOUND && !throwOnTopLevelDirectoryNotFound)
-                    return;  
+                    return;
 
                 __Error.WinIOError(hr, userPath);
             }
         }
 
-        [System.Security.SecurityCritical] 
+        [System.Security.SecurityCritical]
         [ResourceExposure(ResourceScope.Machine)]
         [ResourceConsumption(ResourceScope.Machine)]
         internal static bool Exists(String path)
@@ -918,19 +1072,22 @@ namespace System.IO {
                 return InternalExists(fullPath);
             }
             catch (ArgumentException) { }
-            catch (NotSupportedException) { }  // Security can throw this on ":"
+            catch (NotSupportedException) { } // Security can throw this on ":"
             catch (SecurityException) { }
             catch (IOException) { }
             catch (UnauthorizedAccessException)
             {
 #if !FEATURE_PAL
-                Contract.Assert(false, "Ignore this assert and file a bug to the BCL team. This assert was tracking purposes only.");
+                Contract.Assert(
+                    false,
+                    "Ignore this assert and file a bug to the BCL team. This assert was tracking purposes only."
+                );
 #endif //!FEATURE_PAL
             }
             return false;
         }
 
-        [System.Security.SecurityCritical]  // auto-generated
+        [System.Security.SecurityCritical] // auto-generated
         [ResourceExposure(ResourceScope.Machine)]
         [ResourceConsumption(ResourceScope.Machine)]
         internal static bool InternalExists(String path)
@@ -940,18 +1097,19 @@ namespace System.IO {
             return InternalExists(path, out lastError);
         }
 
-        [System.Security.SecurityCritical]  // auto-generated
+        [System.Security.SecurityCritical] // auto-generated
         [ResourceExposure(ResourceScope.Machine)]
         [ResourceConsumption(ResourceScope.Machine)]
-        internal static bool InternalExists(String path, out int lastError) {
-            Contract.Requires(path != null);            
+        internal static bool InternalExists(String path, out int lastError)
+        {
+            Contract.Requires(path != null);
             String tempPath = Path.AddLongPathPrefix(path);
             return Directory.InternalExists(tempPath, out lastError);
         }
 
-        // Input to this method should already be fullpath. This method will ensure that we append 
-        // the trailing slash only when appropriate and when thisDirOnly is specified append a "." 
-        // at the end of the path to indicate that the demand is only for the fullpath and not 
+        // Input to this method should already be fullpath. This method will ensure that we append
+        // the trailing slash only when appropriate and when thisDirOnly is specified append a "."
+        // at the end of the path to indicate that the demand is only for the fullpath and not
         // everything underneath it.
         [ResourceExposure(ResourceScope.None)]
         [ResourceConsumption(ResourceScope.None, ResourceScope.None)]
@@ -961,16 +1119,34 @@ namespace System.IO {
             fullPath = Path.RemoveLongPathPrefix(fullPath);
             if (thisDirOnly)
             {
-                if (fullPath.EndsWith(Path.DirectorySeparatorChar.ToString(), StringComparison.Ordinal)
-                    || fullPath.EndsWith(Path.AltDirectorySeparatorChar.ToString(), StringComparison.Ordinal))
+                if (
+                    fullPath.EndsWith(
+                        Path.DirectorySeparatorChar.ToString(),
+                        StringComparison.Ordinal
+                    )
+                    || fullPath.EndsWith(
+                        Path.AltDirectorySeparatorChar.ToString(),
+                        StringComparison.Ordinal
+                    )
+                )
                     demandPath = fullPath + '.';
                 else
                     demandPath = fullPath + Path.DirectorySeparatorChar + '.';
             }
             else
             {
-                if (!(fullPath.EndsWith(Path.DirectorySeparatorChar.ToString(), StringComparison.Ordinal)
-                    || fullPath.EndsWith(Path.AltDirectorySeparatorChar.ToString(), StringComparison.Ordinal)))
+                if (
+                    !(
+                        fullPath.EndsWith(
+                            Path.DirectorySeparatorChar.ToString(),
+                            StringComparison.Ordinal
+                        )
+                        || fullPath.EndsWith(
+                            Path.AltDirectorySeparatorChar.ToString(),
+                            StringComparison.Ordinal
+                        )
+                    )
+                )
                     demandPath = fullPath + Path.DirectorySeparatorChar;
                 else
                     demandPath = fullPath;
@@ -980,7 +1156,8 @@ namespace System.IO {
 
         private static String InternalGetDirectoryRoot(String path)
         {
-            if (path == null) return null;
+            if (path == null)
+                return null;
             return path.Substring(0, LongPath.GetRootLength(path));
         }
     }

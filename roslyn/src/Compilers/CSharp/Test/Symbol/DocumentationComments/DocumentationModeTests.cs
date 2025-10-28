@@ -37,16 +37,22 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
 </doc>
 ".Trim();
 
-            TestInline(xml, expectedText,
+            TestInline(
+                xml,
+                expectedText,
                 // Diagnose.cs(4,1): warning CS1570: XML comment has badly formed XML -- 'Expected an end tag for element 'unclosed'.'
                 //  */
                 Diagnostic(ErrorCode.WRN_XMLParseError, "").WithArguments("unclosed"),
                 // Diagnose.cs(9,1): warning CS1570: XML comment has badly formed XML -- 'Expected an end tag for element 'unclosed'.'
                 //  */
-                Diagnostic(ErrorCode.WRN_XMLParseError, "").WithArguments("unclosed"));
+                Diagnostic(ErrorCode.WRN_XMLParseError, "").WithArguments("unclosed")
+            );
         }
 
-        [ClrOnlyFact(ClrOnlyReason.DocumentationComment, Skip = "https://github.com/dotnet/roslyn/issues/8807")]
+        [ClrOnlyFact(
+            ClrOnlyReason.DocumentationComment,
+            Skip = "https://github.com/dotnet/roslyn/issues/8807"
+        )]
         public void XmlSyntaxError_Included()
         {
             var xml = @"<unclosed>";
@@ -74,11 +80,22 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
 ".Trim();
 
             // Diagnostics are from types Diagnose and Partial.
-            TestIncluded(xml, xpath, expectedTextTemplate, /*fallbackToErrorCodeOnlyForNonEnglish*/ true,
+            TestIncluded(
+                xml,
+                xpath,
+                expectedTextTemplate, /*fallbackToErrorCodeOnlyForNonEnglish*/
+                true,
                 // ff1abe1df1d7.xml(1,11): warning CS1592: Badly formed XML in included comments file -- 'Unexpected end of file has occurred. The following elements are not closed: unclosed.'
-                Diagnostic(ErrorCode.WRN_XMLParseIncludeError).WithArguments("Unexpected end of file has occurred. The following elements are not closed: unclosed."),
+                Diagnostic(ErrorCode.WRN_XMLParseIncludeError)
+                    .WithArguments(
+                        "Unexpected end of file has occurred. The following elements are not closed: unclosed."
+                    ),
                 // ff1abe1df1d7.xml(1,11): warning CS1592: Badly formed XML in included comments file -- 'Unexpected end of file has occurred. The following elements are not closed: unclosed.'
-                Diagnostic(ErrorCode.WRN_XMLParseIncludeError).WithArguments("Unexpected end of file has occurred. The following elements are not closed: unclosed."));
+                Diagnostic(ErrorCode.WRN_XMLParseIncludeError)
+                    .WithArguments(
+                        "Unexpected end of file has occurred. The following elements are not closed: unclosed."
+                    )
+            );
         }
 
         [Fact]
@@ -109,26 +126,32 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
 </doc>
 ".Trim();
 
-            TestInline(xml, expectedText,
+            TestInline(
+                xml,
+                expectedText,
                 // Diagnose.cs(3,12): warning CS1584: XML comment has syntactically incorrect cref attribute '#'
                 // <see cref='#' />
                 Diagnostic(ErrorCode.WRN_BadXMLRefSyntax, "#").WithArguments("#"),
                 // Diagnose.cs(3,12): warning CS1658: Identifier expected. See also error CS1001.
                 // <see cref='#' />
-                Diagnostic(ErrorCode.WRN_ErrorOverride, "#").WithArguments("Identifier expected", "1001"),
+                Diagnostic(ErrorCode.WRN_ErrorOverride, "#")
+                    .WithArguments("Identifier expected", "1001"),
                 // Diagnose.cs(3,12): warning CS1658: Unexpected character '#'. See also error CS1056.
                 // <see cref='#' />
-                Diagnostic(ErrorCode.WRN_ErrorOverride, "").WithArguments("Unexpected character '#'", "1056"),
-
+                Diagnostic(ErrorCode.WRN_ErrorOverride, "")
+                    .WithArguments("Unexpected character '#'", "1056"),
                 // Diagnose.cs(9,12): warning CS1584: XML comment has syntactically incorrect cref attribute '#'
                 // <see cref='#' />
                 Diagnostic(ErrorCode.WRN_BadXMLRefSyntax, "#").WithArguments("#"),
                 // Diagnose.cs(9,12): warning CS1658: Identifier expected. See also error CS1001.
                 // <see cref='#' />
-                Diagnostic(ErrorCode.WRN_ErrorOverride, "#").WithArguments("Identifier expected", "1001"),
+                Diagnostic(ErrorCode.WRN_ErrorOverride, "#")
+                    .WithArguments("Identifier expected", "1001"),
                 // Diagnose.cs(9,12): warning CS1658: Unexpected character '#'. See also error CS1056.
                 // <see cref='#' />
-                Diagnostic(ErrorCode.WRN_ErrorOverride, "").WithArguments("Unexpected character '#'", "1056"));
+                Diagnostic(ErrorCode.WRN_ErrorOverride, "")
+                    .WithArguments("Unexpected character '#'", "1056")
+            );
         }
 
         [Fact]
@@ -158,28 +181,39 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
 </doc>
 ".Trim();
 
-            TestIncluded(xml, xpath, expectedTextTemplate, includeElement => new[]
-            {
-                // ExpandIncludes.cs(2,5): warning CS1584: XML comment has syntactically incorrect cref attribute '#'
-                // /// <include file='d6f61c210f5e.xml' path='see' />
-                Diagnostic(ErrorCode.WRN_BadXMLRefSyntax, includeElement).WithArguments("#"),
-                // ExpandIncludes.cs(2,5): warning CS1658: Identifier expected. See also error CS1001.
-                // /// <include file='d6f61c210f5e.xml' path='see' />
-                Diagnostic(ErrorCode.WRN_ErrorOverride, includeElement).WithArguments("Identifier expected", "1001"),
-                // ExpandIncludes.cs(2,5): warning CS1658: Unexpected character '#'. See also error CS1056.
-                // /// <include file='d6f61c210f5e.xml' path='see' />
-                Diagnostic(ErrorCode.WRN_ErrorOverride, includeElement).WithArguments("Unexpected character '#'", "1056"),
-
-                // ExpandIncludes.cs(5,21): warning CS1584: XML comment has syntactically incorrect cref attribute '#'
-                // /// ExpandIncludes: <include file='d6f61c210f5e.xml' path='see' />
-                Diagnostic(ErrorCode.WRN_BadXMLRefSyntax, includeElement).WithArguments("#"),
-                // ExpandIncludes.cs(5,21): warning CS1658: Identifier expected. See also error CS1001.
-                // /// ExpandIncludes: <include file='d6f61c210f5e.xml' path='see' />
-                Diagnostic(ErrorCode.WRN_ErrorOverride, includeElement).WithArguments("Identifier expected", "1001"),
-                // ExpandIncludes.cs(5,21): warning CS1658: Unexpected character '#'. See also error CS1056.
-                // /// ExpandIncludes: <include file='d6f61c210f5e.xml' path='see' />
-                Diagnostic(ErrorCode.WRN_ErrorOverride, includeElement).WithArguments("Unexpected character '#'", "1056")
-            });
+            TestIncluded(
+                xml,
+                xpath,
+                expectedTextTemplate,
+                includeElement =>
+                    new[]
+                    {
+                        // ExpandIncludes.cs(2,5): warning CS1584: XML comment has syntactically incorrect cref attribute '#'
+                        // /// <include file='d6f61c210f5e.xml' path='see' />
+                        Diagnostic(ErrorCode.WRN_BadXMLRefSyntax, includeElement)
+                            .WithArguments("#"),
+                        // ExpandIncludes.cs(2,5): warning CS1658: Identifier expected. See also error CS1001.
+                        // /// <include file='d6f61c210f5e.xml' path='see' />
+                        Diagnostic(ErrorCode.WRN_ErrorOverride, includeElement)
+                            .WithArguments("Identifier expected", "1001"),
+                        // ExpandIncludes.cs(2,5): warning CS1658: Unexpected character '#'. See also error CS1056.
+                        // /// <include file='d6f61c210f5e.xml' path='see' />
+                        Diagnostic(ErrorCode.WRN_ErrorOverride, includeElement)
+                            .WithArguments("Unexpected character '#'", "1056"),
+                        // ExpandIncludes.cs(5,21): warning CS1584: XML comment has syntactically incorrect cref attribute '#'
+                        // /// ExpandIncludes: <include file='d6f61c210f5e.xml' path='see' />
+                        Diagnostic(ErrorCode.WRN_BadXMLRefSyntax, includeElement)
+                            .WithArguments("#"),
+                        // ExpandIncludes.cs(5,21): warning CS1658: Identifier expected. See also error CS1001.
+                        // /// ExpandIncludes: <include file='d6f61c210f5e.xml' path='see' />
+                        Diagnostic(ErrorCode.WRN_ErrorOverride, includeElement)
+                            .WithArguments("Identifier expected", "1001"),
+                        // ExpandIncludes.cs(5,21): warning CS1658: Unexpected character '#'. See also error CS1056.
+                        // /// ExpandIncludes: <include file='d6f61c210f5e.xml' path='see' />
+                        Diagnostic(ErrorCode.WRN_ErrorOverride, includeElement)
+                            .WithArguments("Unexpected character '#'", "1056"),
+                    }
+            );
         }
 
         [Fact]
@@ -210,13 +244,16 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
 </doc>
 ".Trim();
 
-            TestInline(xml, expectedText,
+            TestInline(
+                xml,
+                expectedText,
                 // Diagnose.cs(9,12): warning CS1574: XML comment has cref attribute 'NotFound' that could not be resolved
                 // <see cref='NotFound' />
                 Diagnostic(ErrorCode.WRN_BadXMLRef, "NotFound").WithArguments("NotFound"),
                 // ExpandIncludes.cs(9,12): warning CS1574: XML comment has cref attribute 'NotFound' that could not be resolved
                 // <see cref='NotFound' />
-                Diagnostic(ErrorCode.WRN_BadXMLRef, "NotFound").WithArguments("NotFound"));
+                Diagnostic(ErrorCode.WRN_BadXMLRef, "NotFound").WithArguments("NotFound")
+            );
         }
 
         [Fact]
@@ -246,16 +283,23 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
 </doc>
 ".Trim();
 
-            TestIncluded(xml, xpath, expectedTextTemplate, includeElement => new[]
-            {
-                // ExpandIncludes.cs(2,5): warning CS1574: XML comment has cref attribute 'NotFound' that could not be resolved
-                // /// <include file='5127bff2acf3.xml' path='see' />
-                Diagnostic(ErrorCode.WRN_BadXMLRef, includeElement).WithArguments("NotFound"),
-
-                // ExpandIncludes.cs(5,21): warning CS1574: XML comment has cref attribute 'NotFound' that could not be resolved
-                // /// ExpandIncludes: <include file='5127bff2acf3.xml' path='see' />
-                Diagnostic(ErrorCode.WRN_BadXMLRef, includeElement).WithArguments("NotFound")
-            });
+            TestIncluded(
+                xml,
+                xpath,
+                expectedTextTemplate,
+                includeElement =>
+                    new[]
+                    {
+                        // ExpandIncludes.cs(2,5): warning CS1574: XML comment has cref attribute 'NotFound' that could not be resolved
+                        // /// <include file='5127bff2acf3.xml' path='see' />
+                        Diagnostic(ErrorCode.WRN_BadXMLRef, includeElement)
+                            .WithArguments("NotFound"),
+                        // ExpandIncludes.cs(5,21): warning CS1574: XML comment has cref attribute 'NotFound' that could not be resolved
+                        // /// ExpandIncludes: <include file='5127bff2acf3.xml' path='see' />
+                        Diagnostic(ErrorCode.WRN_BadXMLRef, includeElement)
+                            .WithArguments("NotFound"),
+                    }
+            );
         }
 
         [Fact]
@@ -286,13 +330,18 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
 </doc>
 ".Trim();
 
-            TestInline(xml, expectedText,
+            TestInline(
+                xml,
+                expectedText,
                 // Diagnose.cs(3,18): warning CS1711: XML comment has a typeparam tag for 'NotFound', but there is no type parameter by that name
                 // <typeparam name='NotFound' />
-                Diagnostic(ErrorCode.WRN_UnmatchedTypeParamTag, "NotFound").WithArguments("NotFound"),
+                Diagnostic(ErrorCode.WRN_UnmatchedTypeParamTag, "NotFound")
+                    .WithArguments("NotFound"),
                 // Diagnose.cs(9,18): warning CS1711: XML comment has a typeparam tag for 'NotFound', but there is no type parameter by that name
                 // <typeparam name='NotFound' />
-                Diagnostic(ErrorCode.WRN_UnmatchedTypeParamTag, "NotFound").WithArguments("NotFound"));
+                Diagnostic(ErrorCode.WRN_UnmatchedTypeParamTag, "NotFound")
+                    .WithArguments("NotFound")
+            );
         }
 
         [Fact]
@@ -322,20 +371,33 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
 </doc>
 ".Trim();
 
-            TestIncluded(xml, xpath, expectedTextTemplate, includeElement => new[]
-            {
-                // ExpandIncludes.cs(5,21): warning CS1711: XML comment has a typeparam tag for 'NotFound', but there is no type parameter by that name
-                // /// ExpandIncludes: <include file='3590e97bd224.xml' path='typeparam' />
-                Diagnostic(ErrorCode.WRN_UnmatchedTypeParamTag, includeElement).WithArguments("NotFound"),
-                // ExpandIncludes.cs(2,5): warning CS1711: XML comment has a typeparam tag for 'NotFound', but there is no type parameter by that name
-                // /// <include file='3590e97bd224.xml' path='typeparam' />
-                Diagnostic(ErrorCode.WRN_UnmatchedTypeParamTag, includeElement).WithArguments("NotFound")
-            });
+            TestIncluded(
+                xml,
+                xpath,
+                expectedTextTemplate,
+                includeElement =>
+                    new[]
+                    {
+                        // ExpandIncludes.cs(5,21): warning CS1711: XML comment has a typeparam tag for 'NotFound', but there is no type parameter by that name
+                        // /// ExpandIncludes: <include file='3590e97bd224.xml' path='typeparam' />
+                        Diagnostic(ErrorCode.WRN_UnmatchedTypeParamTag, includeElement)
+                            .WithArguments("NotFound"),
+                        // ExpandIncludes.cs(2,5): warning CS1711: XML comment has a typeparam tag for 'NotFound', but there is no type parameter by that name
+                        // /// <include file='3590e97bd224.xml' path='typeparam' />
+                        Diagnostic(ErrorCode.WRN_UnmatchedTypeParamTag, includeElement)
+                            .WithArguments("NotFound"),
+                    }
+            );
         }
 
-        private static void TestInline(string xml, string expectedText, params DiagnosticDescription[] expectedDiagnostics)
+        private static void TestInline(
+            string xml,
+            string expectedText,
+            params DiagnosticDescription[] expectedDiagnostics
+        )
         {
-            var sourceTemplate = @"
+            var sourceTemplate =
+                @"
 /**
 {0}
  */
@@ -349,7 +411,12 @@ partial class Partial {{ }}
 ";
 
             var trees = AllModes.Select(mode =>
-                Parse(string.Format(sourceTemplate, xml, mode), string.Format("{0}.cs", mode), GetOptions(mode)));
+                Parse(
+                    string.Format(sourceTemplate, xml, mode),
+                    string.Format("{0}.cs", mode),
+                    GetOptions(mode)
+                )
+            );
 
             var comp = CreateCompilation(trees.ToArray(), assemblyName: "Test");
             comp.VerifyDiagnostics(expectedDiagnostics);
@@ -358,18 +425,41 @@ partial class Partial {{ }}
             Assert.Equal(expectedText, actualText);
         }
 
-        private void TestIncluded(string xml, string xpath, string expectedTextTemplate, bool fallbackToErrorCodeOnlyForNonEnglish, params DiagnosticDescription[] expectedDiagnostics)
+        private void TestIncluded(
+            string xml,
+            string xpath,
+            string expectedTextTemplate,
+            bool fallbackToErrorCodeOnlyForNonEnglish,
+            params DiagnosticDescription[] expectedDiagnostics
+        )
         {
-            TestIncluded(xml, xpath, expectedTextTemplate, unused => expectedDiagnostics, fallbackToErrorCodeOnlyForNonEnglish);
+            TestIncluded(
+                xml,
+                xpath,
+                expectedTextTemplate,
+                unused => expectedDiagnostics,
+                fallbackToErrorCodeOnlyForNonEnglish
+            );
         }
 
-        private void TestIncluded(string xml, string xpath, string expectedTextTemplate, Func<string, DiagnosticDescription[]> makeExpectedDiagnostics, bool fallbackToErrorCodeOnlyForNonEnglish = false)
+        private void TestIncluded(
+            string xml,
+            string xpath,
+            string expectedTextTemplate,
+            Func<string, DiagnosticDescription[]> makeExpectedDiagnostics,
+            bool fallbackToErrorCodeOnlyForNonEnglish = false
+        )
         {
             var xmlFile = Temp.CreateFile(extension: ".xml").WriteAllText(xml);
             var xmlFilePath = xmlFile.Path;
 
-            string includeElement = string.Format(@"<include file='{0}' path='{1}' />", xmlFilePath, xpath);
-            var sourceTemplate = @"
+            string includeElement = string.Format(
+                @"<include file='{0}' path='{1}' />",
+                xmlFilePath,
+                xpath
+            );
+            var sourceTemplate =
+                @"
 /// {0}
 class {1} {{ }}
 
@@ -378,17 +468,30 @@ partial class Partial {{ }}
 ";
 
             var trees = AllModes.Select(mode =>
-                Parse(string.Format(sourceTemplate, includeElement, mode), string.Format("{0}.cs", mode), GetOptions(mode)));
+                Parse(
+                    string.Format(sourceTemplate, includeElement, mode),
+                    string.Format("{0}.cs", mode),
+                    GetOptions(mode)
+                )
+            );
 
             var comp = CreateCompilation(
                 trees.ToArray(),
                 options: TestOptions.ReleaseDll.WithXmlReferenceResolver(XmlFileResolver.Default),
-                assemblyName: "Test");
+                assemblyName: "Test"
+            );
 
-            comp.GetDiagnostics().Verify(fallbackToErrorCodeOnlyForNonEnglish: fallbackToErrorCodeOnlyForNonEnglish, expected: makeExpectedDiagnostics(includeElement));
+            comp.GetDiagnostics()
+                .Verify(
+                    fallbackToErrorCodeOnlyForNonEnglish: fallbackToErrorCodeOnlyForNonEnglish,
+                    expected: makeExpectedDiagnostics(includeElement)
+                );
 
             var actualText = GetDocumentationCommentText(comp, expectedDiagnostics: null);
-            var expectedText = string.Format(expectedTextTemplate, TestHelpers.AsXmlCommentText(xmlFilePath));
+            var expectedText = string.Format(
+                expectedTextTemplate,
+                TestHelpers.AsXmlCommentText(xmlFilePath)
+            );
             Assert.Equal(expectedText, actualText);
         }
 
@@ -401,7 +504,12 @@ partial class Partial {{ }}
         {
             get
             {
-                var modes = Enumerable.Range((int)DocumentationMode.None, DocumentationMode.Diagnose - DocumentationMode.None + 1).Select(i => (DocumentationMode)i);
+                var modes = Enumerable
+                    .Range(
+                        (int)DocumentationMode.None,
+                        DocumentationMode.Diagnose - DocumentationMode.None + 1
+                    )
+                    .Select(i => (DocumentationMode)i);
                 AssertEx.All(modes, mode => mode.IsValid());
                 return modes;
             }

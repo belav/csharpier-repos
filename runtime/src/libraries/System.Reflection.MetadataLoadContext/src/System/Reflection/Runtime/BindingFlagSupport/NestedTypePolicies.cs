@@ -23,15 +23,25 @@ namespace System.Reflection.Runtime.BindingFlagSupport
             return typeInfo.DeclaredNestedTypes;
         }
 
-        public sealed override IEnumerable<Type> CoreGetDeclaredMembers(RuntimeTypeInfo type, NameFilter? filter, RuntimeTypeInfo reflectedType)
+        public sealed override IEnumerable<Type> CoreGetDeclaredMembers(
+            RuntimeTypeInfo type,
+            NameFilter? filter,
+            RuntimeTypeInfo reflectedType
+        )
         {
-            Debug.Assert(reflectedType.Equals(type));  // NestedType queries are always performed as if BindingFlags.DeclaredOnly are set so the reflectedType should always be the declaring type.
+            Debug.Assert(reflectedType.Equals(type)); // NestedType queries are always performed as if BindingFlags.DeclaredOnly are set so the reflectedType should always be the declaring type.
             return type.GetNestedTypesCore(filter);
         }
 
         public sealed override bool AlwaysTreatAsDeclaredOnly => true;
 
-        public sealed override void GetMemberAttributes(Type member, out MethodAttributes visibility, out bool isStatic, out bool isVirtual, out bool isNewSlot)
+        public sealed override void GetMemberAttributes(
+            Type member,
+            out MethodAttributes visibility,
+            out bool isStatic,
+            out bool isVirtual,
+            out bool isNewSlot
+        )
         {
             isStatic = true;
             isVirtual = false;
@@ -42,9 +52,15 @@ namespace System.Reflection.Runtime.BindingFlagSupport
             visibility = member.IsNestedPublic ? MethodAttributes.Public : MethodAttributes.Private;
         }
 
-        public sealed override bool ImplicitlyOverrides(Type? baseMember, Type? derivedMember) => false;
+        public sealed override bool ImplicitlyOverrides(Type? baseMember, Type? derivedMember) =>
+            false;
 
-        public sealed override bool IsSuppressedByMoreDerivedMember(Type member, Type[] priorMembers, int startIndex, int endIndex)
+        public sealed override bool IsSuppressedByMoreDerivedMember(
+            Type member,
+            Type[] priorMembers,
+            int startIndex,
+            int endIndex
+        )
         {
             return false;
         }

@@ -34,7 +34,9 @@ namespace System.Text.Json.SourceGeneration
             // (the one in GeneratorInitializationContext is not safe to capture).
             // In practice this should still be ok as the generator driver itself will
             // cancel after every file it processes.
-            context.RegisterForSyntaxNotifications(static () => new SyntaxContextReceiver(CancellationToken.None));
+            context.RegisterForSyntaxNotifications(static () =>
+                new SyntaxContextReceiver(CancellationToken.None)
+            );
         }
 
         /// <summary>
@@ -43,7 +45,10 @@ namespace System.Text.Json.SourceGeneration
         /// <param name="executionContext"></param>
         public void Execute(GeneratorExecutionContext executionContext)
         {
-            if (executionContext.SyntaxContextReceiver is not SyntaxContextReceiver receiver || receiver.ContextClassDeclarations == null)
+            if (
+                executionContext.SyntaxContextReceiver is not SyntaxContextReceiver receiver
+                || receiver.ContextClassDeclarations == null
+            )
             {
                 // nothing to do yet
                 return;
@@ -54,9 +59,18 @@ namespace System.Text.Json.SourceGeneration
             Parser parser = new(knownSymbols);
 
             List<ContextGenerationSpec>? contextGenerationSpecs = null;
-            foreach ((ClassDeclarationSyntax? contextClassDeclaration, SemanticModel semanticModel) in receiver.ContextClassDeclarations)
+            foreach (
+                (
+                    ClassDeclarationSyntax? contextClassDeclaration,
+                    SemanticModel semanticModel
+                ) in receiver.ContextClassDeclarations
+            )
             {
-                ContextGenerationSpec? contextGenerationSpec = parser.ParseContextGenerationSpec(contextClassDeclaration, semanticModel, executionContext.CancellationToken);
+                ContextGenerationSpec? contextGenerationSpec = parser.ParseContextGenerationSpec(
+                    contextClassDeclaration,
+                    semanticModel,
+                    executionContext.CancellationToken
+                );
                 if (contextGenerationSpec is null)
                 {
                     continue;
@@ -94,39 +108,63 @@ namespace System.Text.Json.SourceGeneration
                 _cancellationToken = cancellationToken;
             }
 
-            public List<(ClassDeclarationSyntax, SemanticModel)>? ContextClassDeclarations { get; private set; }
+            public List<(ClassDeclarationSyntax, SemanticModel)>? ContextClassDeclarations
+            {
+                get;
+                private set;
+            }
 
             public void OnVisitSyntaxNode(GeneratorSyntaxContext context)
             {
                 if (IsSyntaxTargetForGeneration(context.Node))
                 {
-                    ClassDeclarationSyntax? classSyntax = GetSemanticTargetForGeneration(context, _cancellationToken);
+                    ClassDeclarationSyntax? classSyntax = GetSemanticTargetForGeneration(
+                        context,
+                        _cancellationToken
+                    );
                     if (classSyntax != null)
                     {
-                        (ContextClassDeclarations ??= new()).Add((classSyntax, context.SemanticModel));
+                        (ContextClassDeclarations ??= new()).Add(
+                            (classSyntax, context.SemanticModel)
+                        );
                     }
                 }
             }
 
-            private static bool IsSyntaxTargetForGeneration(SyntaxNode node) => node is ClassDeclarationSyntax { AttributeLists.Count: > 0, BaseList.Types.Count: > 0 };
+            private static bool IsSyntaxTargetForGeneration(SyntaxNode node) =>
+                node
+                    is ClassDeclarationSyntax
+                    {
+                        AttributeLists.Count: > 0,
+                        BaseList.Types.Count: > 0
+                    };
 
-            private static ClassDeclarationSyntax? GetSemanticTargetForGeneration(GeneratorSyntaxContext context, CancellationToken cancellationToken)
+            private static ClassDeclarationSyntax? GetSemanticTargetForGeneration(
+                GeneratorSyntaxContext context,
+                CancellationToken cancellationToken
+            )
             {
                 var classDeclarationSyntax = (ClassDeclarationSyntax)context.Node;
 
-                foreach (AttributeListSyntax attributeListSyntax in classDeclarationSyntax.AttributeLists)
+                foreach (
+                    AttributeListSyntax attributeListSyntax in classDeclarationSyntax.AttributeLists
+                )
                 {
                     foreach (AttributeSyntax attributeSyntax in attributeListSyntax.Attributes)
                     {
                         cancellationToken.ThrowIfCancellationRequested();
 
-                        IMethodSymbol? attributeSymbol = context.SemanticModel.GetSymbolInfo(attributeSyntax, cancellationToken).Symbol as IMethodSymbol;
+                        IMethodSymbol? attributeSymbol =
+                            context
+                                .SemanticModel.GetSymbolInfo(attributeSyntax, cancellationToken)
+                                .Symbol as IMethodSymbol;
                         if (attributeSymbol == null)
                         {
                             continue;
                         }
 
-                        INamedTypeSymbol attributeContainingTypeSymbol = attributeSymbol.ContainingType;
+                        INamedTypeSymbol attributeContainingTypeSymbol =
+                            attributeSymbol.ContainingType;
                         string fullName = attributeContainingTypeSymbol.ToDisplayString();
 
                         if (fullName == Parser.JsonSerializableAttributeFullName)
@@ -149,11 +187,10 @@ namespace System.Text.Json.SourceGeneration
         {
             private readonly GeneratorExecutionContext _context;
 
-            public Emitter(GeneratorExecutionContext context)
-                => _context = context;
+            public Emitter(GeneratorExecutionContext context) => _context = context;
 
-            private partial void AddSource(string hintName, SourceText sourceText)
-                => _context.AddSource(hintName, sourceText);
+            private partial void AddSource(string hintName, SourceText sourceText) =>
+                _context.AddSource(hintName, sourceText);
         }
     }
 }

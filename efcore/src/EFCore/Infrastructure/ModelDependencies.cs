@@ -45,8 +45,7 @@ public sealed record ModelDependencies
     ///     the constructor at any point in this process.
     /// </remarks>
     [EntityFrameworkInternal]
-    public ModelDependencies(
-        IDiagnosticsLogger<DbLoggerCategory.Model> logger)
+    public ModelDependencies(IDiagnosticsLogger<DbLoggerCategory.Model> logger)
     {
         Logger = logger;
     }

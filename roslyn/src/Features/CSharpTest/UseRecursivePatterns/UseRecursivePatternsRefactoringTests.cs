@@ -21,7 +21,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.UseRec
             string initialMarkup,
             string expectedMarkup,
             bool skipCodeActionValidation = false,
-            LanguageVersion languageVersion = LanguageVersion.CSharp9)
+            LanguageVersion languageVersion = LanguageVersion.CSharp9
+        )
         {
             return new VerifyCS.Test
             {
@@ -48,7 +49,6 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.UseRec
         [InlineData("a?.b.c?.d && a.b.c.a", "a?.b.c is { d: n, a: n }")]
         [InlineData("a?.b?.c.d && a.b.c.a", "a?.b?.c is { d: n, a: n }")]
         [InlineData("a?.b?.c?.d && a.b.c.a", "a?.b?.c is { d: n, a: n }")]
-
         [InlineData("a.b.c.d && a.b.a", "a.b is { c: { d: n }, a: n }")]
         [InlineData("a?.b.c.d && a.b.a", "a?.b is { c: { d: n }, a: n }")]
         [InlineData("a.b?.c.d && a.b.a", "a.b is { c: { d: n }, a: n }")]
@@ -57,7 +57,6 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.UseRec
         [InlineData("a?.b.c?.d && a.b.a", "a?.b is { c: { d: n }, a: n }")]
         [InlineData("a?.b?.c.d && a.b.a", "a?.b is { c: { d: n }, a: n }")]
         [InlineData("a?.b?.c?.d && a.b.a", "a?.b is { c: { d: n }, a: n }")]
-
         [InlineData("a.b.c.d && a.a", "a is { b: { c: { d: n } }, a: n }")]
         [InlineData("a?.b.c.d && a.a", "a is { b: { c: { d: n } }, a: n }")]
         [InlineData("a.b?.c.d && a.a", "a is { b: { c: { d: n } }, a: n }")]
@@ -66,7 +65,6 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.UseRec
         [InlineData("a?.b.c?.d && a.a", "a is { b: { c: { d: n } }, a: n }")]
         [InlineData("a?.b?.c.d && a.a", "a is { b: { c: { d: n } }, a: n }")]
         [InlineData("a?.b?.c?.d && a.a", "a is { b: { c: { d: n } }, a: n }")]
-
         [InlineData("a.b.c.d && b", "this is { a: { b: { c: { d: n } } }, b: n }")]
         [InlineData("a?.b.c.d && b", "this is { a: { b: { c: { d: n } } }, b: n }")]
         [InlineData("a.b?.c.d && b", "this is { a: { b: { c: { d: n } } }, b: n }")]
@@ -75,7 +73,6 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.UseRec
         [InlineData("a?.b.c?.d && b", "this is { a: { b: { c: { d: n } } }, b: n }")]
         [InlineData("a?.b?.c.d && b", "this is { a: { b: { c: { d: n } } }, b: n }")]
         [InlineData("a?.b?.c?.d && b", "this is { a: { b: { c: { d: n } } }, b: n }")]
-
         [InlineData("a.b.c.d && b", "this is { a.b.c.d: n, b: n }", LanguageVersion.CSharp10)]
         [InlineData("a?.b.c.d && b", "this is { a.b.c.d: n, b: n }", LanguageVersion.CSharp10)]
         [InlineData("a.b?.c.d && b", "this is { a.b.c.d: n, b: n }", LanguageVersion.CSharp10)]
@@ -84,7 +81,6 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.UseRec
         [InlineData("a?.b.c?.d && b", "this is { a.b.c.d: n, b: n }", LanguageVersion.CSharp10)]
         [InlineData("a?.b?.c.d && b", "this is { a.b.c.d: n, b: n }", LanguageVersion.CSharp10)]
         [InlineData("a?.b?.c?.d && b", "this is { a.b.c.d: n, b: n }", LanguageVersion.CSharp10)]
-
         [InlineData("a.b.m().d && a.b.m().a", "a.b.m() is { d: n, a: n }")]
         [InlineData("a.m().c.d && a.m().a", "a.m() is { c: { d: n }, a: n }")]
         [InlineData("a?.m().c.d && a?.m().a", "a?.m() is { c: { d: n }, a: n }")]
@@ -94,9 +90,17 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.UseRec
         [InlineData("a?.m().c?.d && a?.m().a", "a?.m() is { c: { d: n }, a: n }")]
         [InlineData("a?.m()?.c.d && a?.m().a", "a?.m() is { c: { d: n }, a: n }")]
         [InlineData("a?.m()?.c?.d && a?.m().a", "a?.m() is { c: { d: n }, a: n }")]
-        public async Task TestLogicalAndExpression_Receiver(string actual, string expected, LanguageVersion languageVersion = LanguageVersion.CSharp9)
+        public async Task TestLogicalAndExpression_Receiver(
+            string actual,
+            string expected,
+            LanguageVersion languageVersion = LanguageVersion.CSharp9
+        )
         {
-            await VerifyAsync(WrapInIfStatement("n == " + actual + " == n", "&&"), WrapInIfStatement(expected), languageVersion: languageVersion);
+            await VerifyAsync(
+                WrapInIfStatement("n == " + actual + " == n", "&&"),
+                WrapInIfStatement(expected),
+                languageVersion: languageVersion
+            );
         }
 
         [Theory]
@@ -105,10 +109,22 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.UseRec
         [InlineData("this.P1 <= 1 && 2 > this.P2", "this is { P1: <= 1, P2: < 2 }")]
         [InlineData("this.P1 >= 1 && 2 < this.P2", "this is { P1: >= 1, P2: > 2 }")]
         // Nested
-        [InlineData("this.CP1?.P1 < 1 && 2 >= this.CP2.P2", "this is { CP1: { P1: < 1 }, CP2: { P2: <= 2 } }")]
-        [InlineData("this.CP1?.P1 > 1 && 2 <= this.CP2.P2", "this is { CP1: { P1: > 1 }, CP2: { P2: >= 2 } }")]
-        [InlineData("this.CP1.P1 <= 1 && 2 > this.CP2?.P2", "this is { CP1: { P1: <= 1 }, CP2: { P2: < 2 } }")]
-        [InlineData("this.CP1.P1 >= 1 && 2 < this.CP2?.P2", "this is { CP1: { P1: >= 1 }, CP2: { P2: > 2 } }")]
+        [InlineData(
+            "this.CP1?.P1 < 1 && 2 >= this.CP2.P2",
+            "this is { CP1: { P1: < 1 }, CP2: { P2: <= 2 } }"
+        )]
+        [InlineData(
+            "this.CP1?.P1 > 1 && 2 <= this.CP2.P2",
+            "this is { CP1: { P1: > 1 }, CP2: { P2: >= 2 } }"
+        )]
+        [InlineData(
+            "this.CP1.P1 <= 1 && 2 > this.CP2?.P2",
+            "this is { CP1: { P1: <= 1 }, CP2: { P2: < 2 } }"
+        )]
+        [InlineData(
+            "this.CP1.P1 >= 1 && 2 < this.CP2?.P2",
+            "this is { CP1: { P1: >= 1 }, CP2: { P2: > 2 } }"
+        )]
         public async Task TestLogicalAndExpression_Relational(string actual, string expected)
         {
             await VerifyAsync(WrapInIfStatement(actual, "&&"), WrapInIfStatement(expected));
@@ -125,8 +141,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.UseRec
         [Theory]
         [InlineData("this.P1 == 1 && 2 == this.P2", "this is { P1: 1, P2: 2 }")]
         [InlineData("this.P1 != 1 && 2 != this.P2", "this is { P1: not 1, P2: not 2 }")]
-        [InlineData("this.CP1.P1 == 1 && 2 == this.CP2.P2", "this is { CP1: { P1: 1 }, CP2: { P2: 2 } }")]
-        [InlineData("this.CP1.P1 != 1 && 2 != this.CP2.P2", "this is { CP1: { P1: not 1 }, CP2: { P2: not 2 } }")]
+        [InlineData(
+            "this.CP1.P1 == 1 && 2 == this.CP2.P2",
+            "this is { CP1: { P1: 1 }, CP2: { P2: 2 } }"
+        )]
+        [InlineData(
+            "this.CP1.P1 != 1 && 2 != this.CP2.P2",
+            "this is { CP1: { P1: not 1 }, CP2: { P2: not 2 } }"
+        )]
         public async Task TestLogicalAndExpression_Equality(string actual, string expected)
         {
             await VerifyAsync(WrapInIfStatement(actual, "&&"), WrapInIfStatement(expected, "&&"));
@@ -134,18 +156,30 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.UseRec
 
         [Theory]
         [InlineData("NS.C.SCP1.P1 == 1 && NS.C.SCP1.P2 == 2", "NS.C.SCP1 is { P1: 1, P2: 2 }")]
-        [InlineData("NS.C.SCP1.CP1.P1 == 1 && NS.C.SCP1.CP2.P2 == 2", "NS.C.SCP1 is { CP1: { P1: 1 }, CP2: { P2: 2 } }")]
+        [InlineData(
+            "NS.C.SCP1.CP1.P1 == 1 && NS.C.SCP1.CP2.P2 == 2",
+            "NS.C.SCP1 is { CP1: { P1: 1 }, CP2: { P2: 2 } }"
+        )]
         public async Task TestLogicalAndExpression_StaticMembers(string actual, string expected)
         {
             await VerifyAsync(WrapInIfStatement(actual, "&&"), WrapInIfStatement(expected, "&&"));
         }
 
         [Theory]
-        [InlineData("this.B1 && this.CP1.P1 == 1 [||]&& this.CP1.CP2.P3 == 3 && B2", "this.B1 && this.CP1 is { P1: 1, CP2: { P3: 3 } } && B2")]
-        [InlineData("this.B1 || this.CP1.P1 == 1 [||]&& this.CP1.CP2.P3 == 3 || B2", "this.B1 || this.CP1 is { P1: 1, CP2: { P3: 3 } } || B2")]
+        [InlineData(
+            "this.B1 && this.CP1.P1 == 1 [||]&& this.CP1.CP2.P3 == 3 && B2",
+            "this.B1 && this.CP1 is { P1: 1, CP2: { P3: 3 } } && B2"
+        )]
+        [InlineData(
+            "this.B1 || this.CP1.P1 == 1 [||]&& this.CP1.CP2.P3 == 3 || B2",
+            "this.B1 || this.CP1 is { P1: 1, CP2: { P3: 3 } } || B2"
+        )]
         public async Task TestLogicalAndExpression_Chain(string actual, string expected)
         {
-            await VerifyAsync(WrapInIfStatement(actual, entry: null), WrapInIfStatement(expected, entry: null));
+            await VerifyAsync(
+                WrapInIfStatement(actual, entry: null),
+                WrapInIfStatement(expected, entry: null)
+            );
         }
 
         [Theory]
@@ -168,29 +202,66 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.UseRec
         [InlineData("{ a: { b: n } x }", "x.c is C", "{ a: { b: n, c: C } x }", true)]
         [InlineData("{ a: { b: n } x }", "x.c is { a: n }", "{ a: { b: n, c: { a: n } } x }")]
         [InlineData("{ a: var x }", "x == null", "{ a: var x and null }")]
-        public async Task TestVariableDesignation(string pattern, string expression, string expected, bool skipCodeActionValidation = false)
+        public async Task TestVariableDesignation(
+            string pattern,
+            string expression,
+            string expected,
+            bool skipCodeActionValidation = false
+        )
         {
-            await ValidateAsync(WrapInSwitchArm($"{pattern} when {expression}", "when"), WrapInSwitchArm($"{expected}"));
-            await ValidateAsync(WrapInSwitchArm($"{pattern} when {expression}", "=>"), WrapInSwitchArm($"{expected}"));
-            await ValidateAsync(WrapInSwitchLabel($"{pattern} when {expression}", "when"), WrapInSwitchLabel($"{expected}"));
-            await ValidateAsync(WrapInSwitchLabel($"{pattern} when {expression}", "case"), WrapInSwitchLabel($"{expected}"));
-            await ValidateAsync(WrapInIfStatement($"this is {pattern} && {expression}", "&&"), WrapInIfStatement($"this is {expected}"));
+            await ValidateAsync(
+                WrapInSwitchArm($"{pattern} when {expression}", "when"),
+                WrapInSwitchArm($"{expected}")
+            );
+            await ValidateAsync(
+                WrapInSwitchArm($"{pattern} when {expression}", "=>"),
+                WrapInSwitchArm($"{expected}")
+            );
+            await ValidateAsync(
+                WrapInSwitchLabel($"{pattern} when {expression}", "when"),
+                WrapInSwitchLabel($"{expected}")
+            );
+            await ValidateAsync(
+                WrapInSwitchLabel($"{pattern} when {expression}", "case"),
+                WrapInSwitchLabel($"{expected}")
+            );
+            await ValidateAsync(
+                WrapInIfStatement($"this is {pattern} && {expression}", "&&"),
+                WrapInIfStatement($"this is {expected}")
+            );
 
-            await ValidateAsync(WrapInSwitchArm($"{pattern} when {expression} && B1 && B2", "when"), WrapInSwitchArm($"{expected} when B1 && B2"));
-            await ValidateAsync(WrapInSwitchArm($"{pattern} when {expression} && B1 && B2", "=>"), WrapInSwitchArm($"{expected} when B1 && B2"));
-            await ValidateAsync(WrapInSwitchLabel($"{pattern} when {expression} && B1 && B2", "when"), WrapInSwitchLabel($"{expected} when B1 && B2"));
-            await ValidateAsync(WrapInSwitchLabel($"{pattern} when {expression} && B1 && B2", "case"), WrapInSwitchLabel($"{expected} when B1 && B2"));
-            await ValidateAsync(WrapInIfStatement($"B1 && this is {pattern} [||]&& {expression} && B2"), WrapInIfStatement($"B1 && this is {expected} && B2"));
+            await ValidateAsync(
+                WrapInSwitchArm($"{pattern} when {expression} && B1 && B2", "when"),
+                WrapInSwitchArm($"{expected} when B1 && B2")
+            );
+            await ValidateAsync(
+                WrapInSwitchArm($"{pattern} when {expression} && B1 && B2", "=>"),
+                WrapInSwitchArm($"{expected} when B1 && B2")
+            );
+            await ValidateAsync(
+                WrapInSwitchLabel($"{pattern} when {expression} && B1 && B2", "when"),
+                WrapInSwitchLabel($"{expected} when B1 && B2")
+            );
+            await ValidateAsync(
+                WrapInSwitchLabel($"{pattern} when {expression} && B1 && B2", "case"),
+                WrapInSwitchLabel($"{expected} when B1 && B2")
+            );
+            await ValidateAsync(
+                WrapInIfStatement($"B1 && this is {pattern} [||]&& {expression} && B2"),
+                WrapInIfStatement($"B1 && this is {expected} && B2")
+            );
 
-            Task ValidateAsync(string initialMarkup, string expectedMarkup)
-                => VerifyAsync(initialMarkup, expectedMarkup, skipCodeActionValidation);
+            Task ValidateAsync(string initialMarkup, string expectedMarkup) =>
+                VerifyAsync(initialMarkup, expectedMarkup, skipCodeActionValidation);
         }
 
         private static string WrapInIfStatement(string actual, string? entry = null)
         {
             var markup =
-@"
-            if (" + actual + @") {}
+                @"
+            if ("
+                + actual
+                + @") {}
 ";
             return CreateMarkup(markup, entry);
         }
@@ -198,10 +269,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.UseRec
         private static string WrapInSwitchArm(string actual, string? entry = null)
         {
             var markup =
-@"
+                @"
             _ = this switch
             {
-                " + actual + @" => 0
+                "
+                + actual
+                + @" => 0
             };
 ";
             return CreateMarkup(markup, entry);
@@ -210,10 +283,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.UseRec
         private static string WrapInSwitchLabel(string actual, string? entry = null)
         {
             var markup =
-@"
+                @"
             switch (this)
             {
-                case " + actual + @":
+                case "
+                + actual
+                + @":
                     break;
             };
 ";
@@ -222,14 +297,17 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.UseRec
 
         private static string CreateMarkup(string actual, string? entry = null)
         {
-            var markup = @"
+            var markup =
+                @"
 namespace NS
 {
     class C : B
     {
         void Test()
         {
-            " + actual + @"
+            "
+                + actual
+                + @"
         }
     }
     class B

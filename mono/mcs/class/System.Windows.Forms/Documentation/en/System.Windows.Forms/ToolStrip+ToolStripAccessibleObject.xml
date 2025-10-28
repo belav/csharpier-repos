@@ -1,5 +1,11 @@
-<Type Name="ToolStrip+ToolStripAccessibleObject" FullName="System.Windows.Forms.ToolStrip+ToolStripAccessibleObject">
-  <TypeSignature Language="C#" Value="public class ToolStrip.ToolStripAccessibleObject : System.Windows.Forms.Control.ControlAccessibleObject" />
+<Type
+  Name="ToolStrip+ToolStripAccessibleObject"
+  FullName="System.Windows.Forms.ToolStrip+ToolStripAccessibleObject"
+>
+  <TypeSignature
+    Language="C#"
+    Value="public class ToolStrip.ToolStripAccessibleObject : System.Windows.Forms.Control.ControlAccessibleObject"
+  />
   <AssemblyInfo>
     <AssemblyName>System.Windows.Forms</AssemblyName>
     <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -19,7 +25,10 @@
   </Docs>
   <Members>
     <Member MemberName=".ctor">
-      <MemberSignature Language="C#" Value="public ToolStripAccessibleObject (System.Windows.Forms.ToolStrip owner);" />
+      <MemberSignature
+        Language="C#"
+        Value="public ToolStripAccessibleObject (System.Windows.Forms.ToolStrip owner);"
+      />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -34,7 +43,10 @@
       </Docs>
     </Member>
     <Member MemberName="GetChild">
-      <MemberSignature Language="C#" Value="public override System.Windows.Forms.AccessibleObject GetChild (int index);" />
+      <MemberSignature
+        Language="C#"
+        Value="public override System.Windows.Forms.AccessibleObject GetChild (int index);"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -69,7 +81,10 @@
       </Docs>
     </Member>
     <Member MemberName="HitTest">
-      <MemberSignature Language="C#" Value="public override System.Windows.Forms.AccessibleObject HitTest (int x, int y);" />
+      <MemberSignature
+        Language="C#"
+        Value="public override System.Windows.Forms.AccessibleObject HitTest (int x, int y);"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -90,7 +105,10 @@
       </Docs>
     </Member>
     <Member MemberName="Role">
-      <MemberSignature Language="C#" Value="public override System.Windows.Forms.AccessibleRole Role { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public override System.Windows.Forms.AccessibleRole Role { get; }"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>

@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-
+<Project
+  ToolsVersion="14.0"
+  DefaultTargets="Build"
+  xmlns="http://schemas.microsoft.com/developer/msbuild/2003"
+>
   <ItemGroup>
     <OfficialBuildRID Include="linux-x64" />
     <OfficialBuildRID Include="linux-musl-x64" />
@@ -9,15 +12,11 @@
     <OfficialBuildRID Include="osx-arm64">
       <Platform>arm64</Platform>
     </OfficialBuildRID>
-    <!-- Not currently built by CoreFX. -->
-    <!-- <OfficialBuildRID Include="netbsd-x64" /> -->
-    <!-- <OfficialBuildRID Include="illumos-x64" /> -->
-    <!-- <OfficialBuildRID Include="solaris-x64" /> -->
-    <!-- <OfficialBuildRID Include="haiku-x64" /> -->
+    <!-- Not currently built by CoreFX. --><!-- <OfficialBuildRID Include="netbsd-x64" /> --><!-- <OfficialBuildRID Include="illumos-x64" /> --><!-- <OfficialBuildRID Include="solaris-x64" /> --><!-- <OfficialBuildRID Include="haiku-x64" /> -->
     <OfficialBuildRID Include="win-x86">
       <Platform>x86</Platform>
     </OfficialBuildRID>
-    <OfficialBuildRID Include="win-x64"/>
+    <OfficialBuildRID Include="win-x64" />
     <OfficialBuildRID Include="win-arm64">
       <Platform>arm64</Platform>
     </OfficialBuildRID>

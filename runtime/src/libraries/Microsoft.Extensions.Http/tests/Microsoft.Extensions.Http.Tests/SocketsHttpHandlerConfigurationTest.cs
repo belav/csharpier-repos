@@ -24,7 +24,7 @@ namespace Microsoft.Extensions.Http
             { $"{ParentSectionName}:{SectionName}:UseCookies", "false" },
             { $"{ParentSectionName}:{SectionName}:ConnectTimeout", "00:00:05" },
             { $"{ParentSectionName}:{SectionName}:PooledConnectionLifetime", "00:01:00" },
-            { $"{ParentSectionName}:{SectionName}:SomeUnrelatedProperty", "WillBeIgnored" }
+            { $"{ParentSectionName}:{SectionName}:SomeUnrelatedProperty", "WillBeIgnored" },
         };
 
         [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsNotBrowser))]
@@ -33,13 +33,14 @@ namespace Microsoft.Extensions.Http
             var serviceCollection = new ServiceCollection();
             serviceCollection.AddHttpClient("DefaultPrimaryHandler");
 
-            serviceCollection.AddHttpClient("SocketsHttpHandler")
-                .UseSocketsHttpHandler();
+            serviceCollection.AddHttpClient("SocketsHttpHandler").UseSocketsHttpHandler();
 
             var services = serviceCollection.BuildServiceProvider();
             var messageHandlerFactory = services.GetRequiredService<IHttpMessageHandlerFactory>();
 
-            var defaultPrimaryHandlerChain = messageHandlerFactory.CreateHandler("DefaultPrimaryHandler");
+            var defaultPrimaryHandlerChain = messageHandlerFactory.CreateHandler(
+                "DefaultPrimaryHandler"
+            );
             var socketsHttpHandlerChain = messageHandlerFactory.CreateHandler("SocketsHttpHandler");
 
             Assert.IsType<HttpClientHandler>(GetPrimaryHandler(defaultPrimaryHandlerChain));
@@ -51,11 +52,13 @@ namespace Microsoft.Extensions.Http
         {
             var serviceCollection = new ServiceCollection();
 
-            serviceCollection.AddHttpClient("Unconfigured")
-                .UseSocketsHttpHandler();
+            serviceCollection.AddHttpClient("Unconfigured").UseSocketsHttpHandler();
 
-            serviceCollection.AddHttpClient("ConfiguredByAction")
-                .UseSocketsHttpHandler((handler, _) => handler.PooledConnectionLifetime = TimeSpan.FromMinutes(1));
+            serviceCollection
+                .AddHttpClient("ConfiguredByAction")
+                .UseSocketsHttpHandler(
+                    (handler, _) => handler.PooledConnectionLifetime = TimeSpan.FromMinutes(1)
+                );
 
             var services = serviceCollection.BuildServiceProvider();
             var messageHandlerFactory = services.GetRequiredService<IHttpMessageHandlerFactory>();
@@ -63,7 +66,9 @@ namespace Microsoft.Extensions.Http
             var unconfiguredHandlerChain = messageHandlerFactory.CreateHandler("Unconfigured");
             var configuredHandlerChain = messageHandlerFactory.CreateHandler("ConfiguredByAction");
 
-            var unconfiguredHandler = (SocketsHttpHandler)GetPrimaryHandler(unconfiguredHandlerChain);
+            var unconfiguredHandler = (SocketsHttpHandler)GetPrimaryHandler(
+                unconfiguredHandlerChain
+            );
             var configuredHandler = (SocketsHttpHandler)GetPrimaryHandler(configuredHandlerChain);
 
             Assert.Equal(Timeout.InfiniteTimeSpan, unconfiguredHandler.PooledConnectionLifetime);
@@ -75,12 +80,15 @@ namespace Microsoft.Extensions.Http
         {
             var serviceCollection = new ServiceCollection();
 
-            serviceCollection.AddHttpClient("Unconfigured")
-                .UseSocketsHttpHandler();
+            serviceCollection.AddHttpClient("Unconfigured").UseSocketsHttpHandler();
 
-            serviceCollection.AddHttpClient("ConfiguredByBuilder")
+            serviceCollection
+                .AddHttpClient("ConfiguredByBuilder")
                 .UseSocketsHttpHandler(builder =>
-                    builder.Configure((handler, _) => handler.ConnectTimeout = TimeSpan.FromSeconds(10)));
+                    builder.Configure(
+                        (handler, _) => handler.ConnectTimeout = TimeSpan.FromSeconds(10)
+                    )
+                );
 
             var services = serviceCollection.BuildServiceProvider();
             var messageHandlerFactory = services.GetRequiredService<IHttpMessageHandlerFactory>();
@@ -88,7 +96,9 @@ namespace Microsoft.Extensions.Http
             var unconfiguredHandlerChain = messageHandlerFactory.CreateHandler("Unconfigured");
             var configuredHandlerChain = messageHandlerFactory.CreateHandler("ConfiguredByBuilder");
 
-            var unconfiguredHandler = (SocketsHttpHandler)GetPrimaryHandler(unconfiguredHandlerChain);
+            var unconfiguredHandler = (SocketsHttpHandler)GetPrimaryHandler(
+                unconfiguredHandlerChain
+            );
             var configuredHandler = (SocketsHttpHandler)GetPrimaryHandler(configuredHandlerChain);
 
             Assert.Equal(Timeout.InfiniteTimeSpan, unconfiguredHandler.ConnectTimeout);
@@ -104,9 +114,11 @@ namespace Microsoft.Extensions.Http
 
             var serviceCollection = new ServiceCollection();
 
-            serviceCollection.AddHttpClient(SectionName)
+            serviceCollection
+                .AddHttpClient(SectionName)
                 .UseSocketsHttpHandler(builder =>
-                    builder.Configure(config.GetSection($"{ParentSectionName}:{SectionName}")));
+                    builder.Configure(config.GetSection($"{ParentSectionName}:{SectionName}"))
+                );
 
             var services = serviceCollection.BuildServiceProvider();
             var messageHandlerFactory = services.GetRequiredService<IHttpMessageHandlerFactory>();
@@ -126,7 +138,11 @@ namespace Microsoft.Extensions.Http
         [InlineData(nameof(SocketsHttpHandler.MaxConnectionsPerServer), 1, "1")] // default value: int.MaxValue
         [InlineData(nameof(SocketsHttpHandler.MaxResponseDrainSize), 10240, "10240")] // default value: 1024 * 1024
         [InlineData(nameof(SocketsHttpHandler.MaxResponseHeadersLength), 32, "32")] // default value: 64 (K)
-        public void UseSocketsHttpHandler_ConfiguredByIConfiguration_AllIntProperties(string propertyName, int expectedValue, string configValue)
+        public void UseSocketsHttpHandler_ConfiguredByIConfiguration_AllIntProperties(
+            string propertyName,
+            int expectedValue,
+            string configValue
+        )
         {
             TestPropertyIsConfigured(propertyName, expectedValue, configValue);
         }
@@ -137,7 +153,11 @@ namespace Microsoft.Extensions.Http
         [InlineData(nameof(SocketsHttpHandler.PreAuthenticate), true, "true")] // default value: false
         [InlineData(nameof(SocketsHttpHandler.UseCookies), false, "false")] // default value: true
         [InlineData(nameof(SocketsHttpHandler.UseProxy), false, "false")] // default value: true
-        public void UseSocketsHttpHandler_ConfiguredByIConfiguration_AllBoolProperties(string propertyName, bool expectedValue, string configValue)
+        public void UseSocketsHttpHandler_ConfiguredByIConfiguration_AllBoolProperties(
+            string propertyName,
+            bool expectedValue,
+            string configValue
+        )
         {
             TestPropertyIsConfigured(propertyName, expectedValue, configValue);
         }
@@ -150,7 +170,9 @@ namespace Microsoft.Extensions.Http
         [InlineData(nameof(SocketsHttpHandler.Expect100ContinueTimeout))] // default value: 1s
         [InlineData(nameof(SocketsHttpHandler.KeepAlivePingDelay))] // default value: -1
         [InlineData(nameof(SocketsHttpHandler.KeepAlivePingTimeout))] // default value: 20s
-        public void UseSocketsHttpHandler_ConfiguredByIConfiguration_AllTimeSpanProperties(string propertyName)
+        public void UseSocketsHttpHandler_ConfiguredByIConfiguration_AllTimeSpanProperties(
+            string propertyName
+        )
         {
             TestPropertyIsConfigured(propertyName, TimeSpan.FromSeconds(30), "00:00:30");
         }
@@ -158,35 +180,51 @@ namespace Microsoft.Extensions.Http
         [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsNotBrowser))]
         public void UseSocketsHttpHandler_ConfiguredByIConfiguration_AutomaticDecompression() // default value: None
         {
-            TestPropertyIsConfigured(nameof(SocketsHttpHandler.AutomaticDecompression), DecompressionMethods.GZip, "gzip"); // should be case-insensitive
+            TestPropertyIsConfigured(
+                nameof(SocketsHttpHandler.AutomaticDecompression),
+                DecompressionMethods.GZip,
+                "gzip"
+            ); // should be case-insensitive
         }
 
         [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsNotBrowser))]
         public void UseSocketsHttpHandler_ConfiguredByIConfiguration_KeepAlivePingPolicy() // default value: Always
         {
-            TestPropertyIsConfigured(nameof(SocketsHttpHandler.KeepAlivePingPolicy), HttpKeepAlivePingPolicy.WithActiveRequests, "WithActiveRequests");
+            TestPropertyIsConfigured(
+                nameof(SocketsHttpHandler.KeepAlivePingPolicy),
+                HttpKeepAlivePingPolicy.WithActiveRequests,
+                "WithActiveRequests"
+            );
         }
 
-        private static void TestPropertyIsConfigured<T>(string propertyName, T expectedValue, string configValue)
+        private static void TestPropertyIsConfigured<T>(
+            string propertyName,
+            T expectedValue,
+            string configValue
+        )
         {
             var property = typeof(SocketsHttpHandler).GetProperty(propertyName);
             Assert.NotNull(property);
             Func<SocketsHttpHandler, T> propertyGetter = h => (T)property.GetValue(h);
 
             IConfiguration config = new ConfigurationBuilder()
-                .AddInMemoryCollection(new Dictionary<string, string>{{ $"test:{propertyName}", configValue }})
+                .AddInMemoryCollection(
+                    new Dictionary<string, string> { { $"test:{propertyName}", configValue } }
+                )
                 .Build();
 
             var serviceCollection = new ServiceCollection();
 
-            serviceCollection.AddHttpClient("TestPropertyIsConfigured")
-                .UseSocketsHttpHandler(builder =>
-                    builder.Configure(config.GetSection("test")));
+            serviceCollection
+                .AddHttpClient("TestPropertyIsConfigured")
+                .UseSocketsHttpHandler(builder => builder.Configure(config.GetSection("test")));
 
             var services = serviceCollection.BuildServiceProvider();
             var messageHandlerFactory = services.GetRequiredService<IHttpMessageHandlerFactory>();
 
-            var configuredHandlerChain = messageHandlerFactory.CreateHandler("TestPropertyIsConfigured");
+            var configuredHandlerChain = messageHandlerFactory.CreateHandler(
+                "TestPropertyIsConfigured"
+            );
             var configuredHandler = (SocketsHttpHandler)GetPrimaryHandler(configuredHandlerChain);
 
             Assert.Equal(expectedValue, propertyGetter(configuredHandler));
@@ -203,22 +241,32 @@ namespace Microsoft.Extensions.Http
 
             var allowAllCertsSslOptions = new SslClientAuthenticationOptions
             {
-                RemoteCertificateValidationCallback = delegate { return true; }
+                RemoteCertificateValidationCallback = delegate
+                {
+                    return true;
+                },
             };
 
-            serviceCollection.AddHttpClient("ActionAfterIConfiguration")
+            serviceCollection
+                .AddHttpClient("ActionAfterIConfiguration")
                 .UseSocketsHttpHandler(builder =>
-                    builder.Configure(config.GetSection($"{ParentSectionName}:{SectionName}"))
-                        .Configure((handler, _) =>
-                        {
-                            handler.ConnectTimeout = TimeSpan.FromSeconds(10); // will overwrite value from IConfiguration
-                            handler.SslOptions = allowAllCertsSslOptions;
-                        }));
+                    builder
+                        .Configure(config.GetSection($"{ParentSectionName}:{SectionName}"))
+                        .Configure(
+                            (handler, _) =>
+                            {
+                                handler.ConnectTimeout = TimeSpan.FromSeconds(10); // will overwrite value from IConfiguration
+                                handler.SslOptions = allowAllCertsSslOptions;
+                            }
+                        )
+                );
 
             var services = serviceCollection.BuildServiceProvider();
             var messageHandlerFactory = services.GetRequiredService<IHttpMessageHandlerFactory>();
 
-            var configuredHandlerChain = messageHandlerFactory.CreateHandler("ActionAfterIConfiguration");
+            var configuredHandlerChain = messageHandlerFactory.CreateHandler(
+                "ActionAfterIConfiguration"
+            );
             var configuredHandler = (SocketsHttpHandler)GetPrimaryHandler(configuredHandlerChain);
 
             Assert.True(configuredHandler.AllowAutoRedirect); // from IConfiguration
@@ -239,22 +287,32 @@ namespace Microsoft.Extensions.Http
 
             var allowAllCertsSslOptions = new SslClientAuthenticationOptions
             {
-                RemoteCertificateValidationCallback = delegate { return true; }
+                RemoteCertificateValidationCallback = delegate
+                {
+                    return true;
+                },
             };
 
-            serviceCollection.AddHttpClient("IConfigurationAfterAction")
+            serviceCollection
+                .AddHttpClient("IConfigurationAfterAction")
                 .UseSocketsHttpHandler(builder =>
-                    builder.Configure((handler, _) =>
-                        {
-                            handler.ConnectTimeout = TimeSpan.FromSeconds(10); // will be overwrittten by IConfiguration
-                            handler.SslOptions = allowAllCertsSslOptions;
-                        })
-                        .Configure(config.GetSection($"{ParentSectionName}:{SectionName}")));
+                    builder
+                        .Configure(
+                            (handler, _) =>
+                            {
+                                handler.ConnectTimeout = TimeSpan.FromSeconds(10); // will be overwrittten by IConfiguration
+                                handler.SslOptions = allowAllCertsSslOptions;
+                            }
+                        )
+                        .Configure(config.GetSection($"{ParentSectionName}:{SectionName}"))
+                );
 
             var services = serviceCollection.BuildServiceProvider();
             var messageHandlerFactory = services.GetRequiredService<IHttpMessageHandlerFactory>();
 
-            var configuredHandlerChain = messageHandlerFactory.CreateHandler("IConfigurationAfterAction");
+            var configuredHandlerChain = messageHandlerFactory.CreateHandler(
+                "IConfigurationAfterAction"
+            );
             var configuredHandler = (SocketsHttpHandler)GetPrimaryHandler(configuredHandlerChain);
 
             Assert.True(configuredHandler.AllowAutoRedirect); // from IConfiguration
@@ -267,7 +325,9 @@ namespace Microsoft.Extensions.Http
         [ConditionalTheory(typeof(PlatformDetection), nameof(PlatformDetection.IsNotBrowser))]
         [InlineData(false)]
         [InlineData(true)]
-        public void UseSocketsHttpHandler_PresetSocketsHttpHandler_Updates(bool handlerSetByUseSocketsHttpHandler)
+        public void UseSocketsHttpHandler_PresetSocketsHttpHandler_Updates(
+            bool handlerSetByUseSocketsHttpHandler
+        )
         {
             var serviceCollection = new ServiceCollection();
 
@@ -275,7 +335,9 @@ namespace Microsoft.Extensions.Http
 
             if (handlerSetByUseSocketsHttpHandler)
             {
-                builder.UseSocketsHttpHandler((handler, _) => handler.PooledConnectionLifetime = TimeSpan.FromMinutes(10));
+                builder.UseSocketsHttpHandler(
+                    (handler, _) => handler.PooledConnectionLifetime = TimeSpan.FromMinutes(10)
+                );
             }
             else
             {
@@ -289,13 +351,18 @@ namespace Microsoft.Extensions.Http
 
             var allowAllCertsSslOptions = new SslClientAuthenticationOptions
             {
-                RemoteCertificateValidationCallback = delegate { return true; }
+                RemoteCertificateValidationCallback = delegate
+                {
+                    return true;
+                },
             };
 
-            builder.UseSocketsHttpHandler((handler, _) =>
-            {
-                handler.SslOptions = allowAllCertsSslOptions; // this will update existing SocketsHttpHandler
-            });
+            builder.UseSocketsHttpHandler(
+                (handler, _) =>
+                {
+                    handler.SslOptions = allowAllCertsSslOptions; // this will update existing SocketsHttpHandler
+                }
+            );
 
             var services = serviceCollection.BuildServiceProvider();
             var messageHandlerFactory = services.GetRequiredService<IHttpMessageHandlerFactory>();

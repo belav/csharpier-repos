@@ -6,6 +6,7 @@ namespace System.Diagnostics.Tracing
 {
     public partial class PollingCounter : DiagnosticCounter
     {
-        public PollingCounter (string name, EventSource eventSource, Func<double> metricProvider) : base (name, eventSource) {}
+        public PollingCounter(string name, EventSource eventSource, Func<double> metricProvider)
+            : base(name, eventSource) { }
     }
 }

@@ -4,11 +4,8 @@
 using System;
 using Xunit;
 
-
 public interface ITestInterfaceEx1<TSelf>
-    where TSelf : ITestInterfaceEx1<TSelf>
-{
-}
+    where TSelf : ITestInterfaceEx1<TSelf> { }
 
 public interface ITestInterfaceEx2<TSelf>
     where TSelf : ITestInterfaceEx2<TSelf>
@@ -19,16 +16,12 @@ public interface ITestInterfaceEx2<TSelf>
 public interface ITestInterface<TSelf> : ITestInterfaceEx2<TSelf>, ITestInterfaceEx1<TSelf>
     where TSelf : ITestInterface<TSelf>
 {
-    static void ITestInterfaceEx2<TSelf>.Invoke()
-    {
-    }
+    static void ITestInterfaceEx2<TSelf>.Invoke() { }
 }
 
 public struct Test : ITestInterface<Test>
 {
-    public Test(object? test)
-    {
-    }
+    public Test(object? test) { }
 }
 
 public class Program

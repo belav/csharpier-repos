@@ -6,14 +6,14 @@ using Xunit;
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.unsfe.basic.anonytype01.anonytype01
 {
     unsafe // <Area> dynamic in unsafe code </Area>
-           // <Title> unsafe type </Title>
-           // <Description>
-           // anonymous type
-           // </Description>
-           //<Expects Status=success></Expects>
-           // <Code>
-           //<Expects Status=warning>\(12,17\).*CS0649</Expects>
-public class UC
+    // <Title> unsafe type </Title>
+    // <Description>
+    // anonymous type
+    // </Description>
+    //<Expects Status=success></Expects>
+    // <Code>
+    //<Expects Status=warning>\(12,17\).*CS0649</Expects>
+    public class UC
     {
         public int* p;
     }
@@ -28,31 +28,24 @@ public class UC
 
         public static int MainMethod(string[] args)
         {
-            dynamic x = new
-            {
-                P = new UC()
-            }
-
-            ;
+            dynamic x = new { P = new UC() };
             return 0;
         }
     }
     // </Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.unsfe.basic.array01.array01
 {
     unsafe // <Area> dynamic in unsafe code </Area>
-           // <Title> unsafe type </Title>
-           // <Description>
-           // array initializer : unsafe array initializer with dynamic
-           // </Description>
-           //<Expects Status=success></Expects>
-           // <Code>
-           //<Expects Status=warning>\(12,17\).*CS0649</Expects>
-public class US
+    // <Title> unsafe type </Title>
+    // <Description>
+    // array initializer : unsafe array initializer with dynamic
+    // </Description>
+    //<Expects Status=success></Expects>
+    // <Code>
+    //<Expects Status=warning>\(12,17\).*CS0649</Expects>
+    public class US
     {
         public int* p;
     }
@@ -69,30 +62,24 @@ public class US
         {
             dynamic d1 = new US();
             dynamic d2 = new US();
-            US[] array =
-            {
-            d1, d2, new US()}
-
-            ;
+            US[] array = { d1, d2, new US() };
             return 0;
         }
     }
     // </Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.unsfe.basic.array02.array02
 {
     unsafe // <Area> dynamic in unsafe code </Area>
-           // <Title> unsafe type </Title>
-           // <Description>
-           // array initializer : dynamic array initializer with unsafe
-           // </Description>
-           //<Expects Status=success></Expects>
-           // <Code>
-           //<Expects Status=warning>\(12,17\).*CS0649</Expects>
-public class US
+    // <Title> unsafe type </Title>
+    // <Description>
+    // array initializer : dynamic array initializer with unsafe
+    // </Description>
+    //<Expects Status=success></Expects>
+    // <Code>
+    //<Expects Status=warning>\(12,17\).*CS0649</Expects>
+    public class US
     {
         public int* p;
     }
@@ -107,18 +94,12 @@ public class US
 
         public static int MainMethod(string[] args)
         {
-            dynamic[] array =
-            {
-            new US(), new US()}
-
-            ;
+            dynamic[] array = { new US(), new US() };
             return 0;
         }
     }
     // </Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.unsfe.basic.attribute01.attribute01
 {
@@ -133,9 +114,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.unsfe.basic.attribute01
     using System;
 
     [AttributeUsage(AttributeTargets.Class)]
-    public class MyAttr : System.Attribute
-    {
-    }
+    public class MyAttr : System.Attribute { }
 
     [MyAttr]
     public unsafe class US
@@ -160,8 +139,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.unsfe.basic.attribute01
     }
     // </Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.unsfe.basic.collection01.collection01
 {
@@ -190,18 +167,12 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.unsfe.basic.collection0
 
         public static int MainMethod(string[] args)
         {
-            List<dynamic> col = new List<dynamic>
-            {
-            new US(), new US()}
-
-            ;
+            List<dynamic> col = new List<dynamic> { new US(), new US() };
             return 0;
         }
     }
     // </Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.unsfe.basic.collection02.collection02
 {
@@ -231,19 +202,12 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.unsfe.basic.collection0
         public static int MainMethod(string[] args)
         {
             dynamic d = new US();
-            List<US> col = new List<US>
-            {
-            d, d
-            }
-
-            ;
+            List<US> col = new List<US> { d, d };
             return 0;
         }
     }
     // </Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.unsfe.basic.collection03.collection03
 {
@@ -278,16 +242,15 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.unsfe.basic.collection0
             dynamic d2 = "hi";
             try
             {
-                List<US> col = new List<US>
-                {
-                d1, d2
-                }
-
-                ;
+                List<US> col = new List<US> { d1, d2 };
             }
             catch (RuntimeBinderException ex)
             {
-                bool ret = ErrorVerifier.Verify(ErrorMessageId.BadArgTypes, ex.Message, "System.Collections.Generic.List<US>.Add(US)");
+                bool ret = ErrorVerifier.Verify(
+                    ErrorMessageId.BadArgTypes,
+                    ex.Message,
+                    "System.Collections.Generic.List<US>.Add(US)"
+                );
                 if (ret)
                     return 0;
             }
@@ -297,8 +260,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.unsfe.basic.collection0
     }
     // </Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.unsfe.basic.ctor01.ctor01
 {
@@ -312,6 +273,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.unsfe.basic.ctor01.ctor
     public unsafe class C
     {
         public int* p;
+
         public C(int* q)
         {
             p = q;
@@ -336,8 +298,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.unsfe.basic.ctor01.ctor
     }
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.unsfe.basic.ctor02.ctor02
 {
     // <Area> dynamic in unsafe code </Area>
@@ -350,6 +310,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.unsfe.basic.ctor02.ctor
     public unsafe class C
     {
         public dynamic p;
+
         public C(dynamic q)
         {
             p = q;
@@ -373,8 +334,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.unsfe.basic.ctor02.ctor
     }
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.unsfe.basic.ctor03.ctor03
 {
     // <Area> dynamic in unsafe code </Area>
@@ -388,6 +347,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.unsfe.basic.ctor03.ctor
     {
         public dynamic d;
         public int* p;
+
         public C(dynamic x, int* y)
         {
             d = x;
@@ -413,8 +373,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.unsfe.basic.ctor03.ctor
     }
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.unsfe.basic.dlgate01.dlgate01
 {
     // <Area> dynamic in unsafe code </Area>
@@ -425,6 +383,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.unsfe.basic.dlgate01.dl
     //<Expects Status=success></Expects>
     // <Code>
     internal unsafe delegate void Foo(int* p);
+
     public unsafe class Test
     {
         [Fact]
@@ -439,14 +398,10 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.unsfe.basic.dlgate01.dl
             return 0;
         }
 
-        public static void Bar(int* q)
-        {
-        }
+        public static void Bar(int* q) { }
     }
     // </Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.unsfe.basic.dtor01.dtor01
 {
@@ -482,8 +437,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.unsfe.basic.dtor01.dtor
     }
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.unsfe.basic.evnt01.evnt01
 {
     // <Area> dynamic in unsafe code </Area>
@@ -494,6 +447,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.unsfe.basic.evnt01.evnt
     //<Expects Status=success></Expects>
     // <Code>
     internal unsafe delegate void Foo(int* p);
+
     public unsafe class Test
     {
         [Fact]
@@ -508,29 +462,26 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.unsfe.basic.evnt01.evnt
             return 0;
         }
 
-        public static void Bar(int* q)
-        {
-        }
+        public static void Bar(int* q) { }
     }
     // </Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.unsfe.basic.explicit01.explicit01
 {
     unsafe // <Area> dynamic in unsafe code </Area>
-           // <Title> unsafe type </Title>
-           // <Description>
-           // explicit conversion
-           // </Description>
-           //<Expects Status=success></Expects>
-           // <Code>
-           //<Expects Status=warning>\(12,17\).*CS0649</Expects>
-public class US
+    // <Title> unsafe type </Title>
+    // <Description>
+    // explicit conversion
+    // </Description>
+    //<Expects Status=success></Expects>
+    // <Code>
+    //<Expects Status=warning>\(12,17\).*CS0649</Expects>
+    public class US
     {
         public int* p;
-        public static explicit operator int (US u)
+
+        public static explicit operator int(US u)
         {
             return 1;
         }
@@ -562,8 +513,6 @@ public class US
     }
     // </Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.unsfe.basic.expressiontree01.expressiontree01
 {
@@ -602,8 +551,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.unsfe.basic.expressiont
     // </Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.unsfe.basic.field01.field01
 {
     // <Area> dynamic in unsafe code </Area>
@@ -635,19 +582,17 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.unsfe.basic.field01.fie
     }
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.unsfe.basic.fieldinit01.fieldinit01
 {
     unsafe // <Area> dynamic in unsafe code </Area>
-           // <Title>unsafe context</Title>
-           // <Description>
-           // dynamic in field initializer
-           // </Description>
-           // <RelatedBug></RelatedBug>
-           //<Expects Status=success></Expects>
-           // <Code>
-public class C
+    // <Title>unsafe context</Title>
+    // <Description>
+    // dynamic in field initializer
+    // </Description>
+    // <RelatedBug></RelatedBug>
+    //<Expects Status=success></Expects>
+    // <Code>
+    public class C
     {
         public dynamic field = 10;
     }
@@ -669,22 +614,21 @@ public class C
     // </Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.unsfe.basic.implicit01.implicit01
 {
     unsafe // <Area> dynamic in unsafe code </Area>
-           // <Title> unsafe type </Title>
-           // <Description>
-           // implicit conversion
-           // </Description>
-           //<Expects Status=success></Expects>
-           // <Code>
-           //<Expects Status=warning>\(12,17\).*CS0649</Expects>
-public class US
+    // <Title> unsafe type </Title>
+    // <Description>
+    // implicit conversion
+    // </Description>
+    //<Expects Status=success></Expects>
+    // <Code>
+    //<Expects Status=warning>\(12,17\).*CS0649</Expects>
+    public class US
     {
         public int* p;
-        public static implicit operator int (US u)
+
+        public static implicit operator int(US u)
         {
             return 1;
         }
@@ -715,8 +659,6 @@ public class US
     }
     // </Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.unsfe.basic.indexer02.indexer02
 {
@@ -758,20 +700,13 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.unsfe.basic.indexer02.i
         public static int MainMethod(string[] args)
         {
             C d = new C();
-            int[] array = new[]
-            {
-            1, 2, 3
-            }
-
-            ;
+            int[] array = new[] { 1, 2, 3 };
             int* x = ((C)d)[array];
             return 0;
         }
     }
     // </Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.unsfe.basic.indexer04.indexer04
 {
@@ -791,10 +726,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.unsfe.basic.indexer04.i
                 int temp = 10;
                 return &temp;
             }
-
-            set
-            {
-            }
+            set { }
         }
     }
 
@@ -827,8 +759,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.unsfe.basic.indexer04.i
     // </Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.unsfe.basic.integeregererface02.integeregererface02
 {
     // <Area> dynamic in unsafe code </Area>
@@ -845,9 +775,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.unsfe.basic.integereger
 
     public unsafe class C : IF
     {
-        public void Foo(dynamic p)
-        {
-        }
+        public void Foo(dynamic p) { }
     }
 
     public unsafe class Test
@@ -868,8 +796,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.unsfe.basic.integereger
     }
     // </Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.unsfe.basic.lambda01.lambda01
 {
@@ -908,8 +834,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.unsfe.basic.lambda01.la
     // </Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.unsfe.basic.lambda02.lambda02
 {
     // <Area> dynamic in unsafe code </Area>
@@ -941,9 +865,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.unsfe.basic.lambda02.la
             {
                 int* p = &x;
                 return *p;
-            }
-
-            ;
+            };
             dynamic dyn = 10;
             int result = f(dyn);
             if (result == 10)
@@ -953,8 +875,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.unsfe.basic.lambda02.la
     }
     // </Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.unsfe.basic.method02.method02
 {
@@ -998,8 +918,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.unsfe.basic.method02.me
     }
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.unsfe.basic.method05.method05
 {
     // <Area> dynamic in unsafe code </Area>
@@ -1012,6 +930,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.unsfe.basic.method05.me
     public class C
     {
         public static int field = 10;
+
         public unsafe dynamic Foo()
         {
             return 1;
@@ -1041,28 +960,24 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.unsfe.basic.method05.me
     }
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.unsfe.basic.method07.method07
 {
     unsafe // <Area> dynamic in unsafe code </Area>
-           // <Title> unsafe type </Title>
-           // <Description>
-           // method  - unsafe type as arg : extension method
-           // </Description>
-           //<Expects Status=success></Expects>
-           // <Code>
-           //<Expects Status=warning>\(12,17\).*CS0649</Expects>
-public class US
+    // <Title> unsafe type </Title>
+    // <Description>
+    // method  - unsafe type as arg : extension method
+    // </Description>
+    //<Expects Status=success></Expects>
+    // <Code>
+    //<Expects Status=warning>\(12,17\).*CS0649</Expects>
+    public class US
     {
         public int* ptr;
     }
 
     public static class Ext
     {
-        public static void Foo(this US u, dynamic d)
-        {
-        }
+        public static void Foo(this US u, dynamic d) { }
     }
 
     public class Test
@@ -1083,8 +998,6 @@ public class US
     // </Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.unsfe.basic.method08.method08
 {
     // <Area> dynamic in unsafe code </Area>
@@ -1099,9 +1012,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.unsfe.basic.method08.me
 
     public unsafe class Test
     {
-        public void Foo(void* ptr = null)
-        {
-        }
+        public void Foo(void* ptr = null) { }
 
         [Fact]
         public static void DynamicCSharpRunTest()
@@ -1130,8 +1041,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.unsfe.basic.method08.me
     // </Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.unsfe.basic.objinit01.objinit01
 {
     // <Area> dynamic in unsafe code </Area>
@@ -1158,12 +1067,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.unsfe.basic.objinit01.o
         public static int MainMethod(string[] args)
         {
             int num = 10;
-            dynamic u = new US
-            {
-                p = &num
-            }
-
-            ;
+            dynamic u = new US { p = &num };
             return 0;
         }
     }

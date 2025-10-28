@@ -12,45 +12,60 @@ namespace System.ConfigurationTests
         [Fact]
         public void ConfigurationSectionThrows()
         {
-            Assert.Throws<ConfigurationErrorsException>(() => new ConfigurationProperty("foo", typeof(ConfigurationSection)));
+            Assert.Throws<ConfigurationErrorsException>(() =>
+                new ConfigurationProperty("foo", typeof(ConfigurationSection))
+            );
         }
 
         [Fact]
         public void AppSettingsSectionThrows()
         {
-            Assert.Throws<ConfigurationErrorsException>(() => new ConfigurationProperty("foo", typeof(AppSettingsSection)));
+            Assert.Throws<ConfigurationErrorsException>(() =>
+                new ConfigurationProperty("foo", typeof(AppSettingsSection))
+            );
         }
 
         [Fact]
         public void NullNameThrows()
         {
-            AssertExtensions.Throws<ArgumentException>("name", () => new ConfigurationProperty(null, typeof(string)));
+            AssertExtensions.Throws<ArgumentException>(
+                "name",
+                () => new ConfigurationProperty(null, typeof(string))
+            );
         }
 
         [Fact]
         public void EmptyNameThrows()
         {
-            AssertExtensions.Throws<ArgumentException>("name", () => new ConfigurationProperty("", typeof(string)));
+            AssertExtensions.Throws<ArgumentException>(
+                "name",
+                () => new ConfigurationProperty("", typeof(string))
+            );
         }
 
-        [Theory,
+        [
+            Theory,
             InlineData("lock"),
             InlineData("locks"),
             InlineData("config"),
             InlineData("configuration")
-            ]
+        ]
         public void ReservedNameThrows(string name)
         {
-            AssertExtensions.Throws<ArgumentException>(null, () => new ConfigurationProperty(name, typeof(string)));
+            AssertExtensions.Throws<ArgumentException>(
+                null,
+                () => new ConfigurationProperty(name, typeof(string))
+            );
         }
 
-        [Theory,
+        [
+            Theory,
             InlineData("Lock"),
             InlineData("ilock"),
             InlineData("LOCKS"),
             InlineData("CoNfig"),
             InlineData("conFIGuration")
-            ]
+        ]
         public void ReservedNameOrdinallyCompared(string name)
         {
             // Want to make sure the comparison is ordinal and starts with if people have depended on this
@@ -70,7 +85,16 @@ namespace System.ConfigurationTests
         public void NonMatchingValidatorThrows()
         {
             CantValidateValidator validator = new CantValidateValidator();
-            Assert.Throws<ConfigurationErrorsException>(() => new ConfigurationProperty("foo", typeof(string), null, null, validator, ConfigurationPropertyOptions.None));
+            Assert.Throws<ConfigurationErrorsException>(() =>
+                new ConfigurationProperty(
+                    "foo",
+                    typeof(string),
+                    null,
+                    null,
+                    validator,
+                    ConfigurationPropertyOptions.None
+                )
+            );
         }
 
         public class FooFailsValidator : ConfigurationValidatorBase
@@ -91,19 +115,25 @@ namespace System.ConfigurationTests
         public void BadDefaultValueThrows()
         {
             FooFailsValidator validator = new FooFailsValidator();
-            Action action = () => new ConfigurationProperty("bar", typeof(string), "foo", null, validator, ConfigurationPropertyOptions.None);
-            Assert.IsType<InvalidOperationException>(Assert.Throws<ConfigurationErrorsException>(action).InnerException);
+            Action action = () =>
+                new ConfigurationProperty(
+                    "bar",
+                    typeof(string),
+                    "foo",
+                    null,
+                    validator,
+                    ConfigurationPropertyOptions.None
+                );
+            Assert.IsType<InvalidOperationException>(
+                Assert.Throws<ConfigurationErrorsException>(action).InnerException
+            );
         }
 
         [TypeConverter(typeof(DummyCantConverter))]
-        public class SimpleConfigurationElement : ConfigurationElement
-        {
-        }
+        public class SimpleConfigurationElement : ConfigurationElement { }
 
         // By default can't convert from or to
-        public class DummyCantConverter : TypeConverter
-        {
-        }
+        public class DummyCantConverter : TypeConverter { }
 
         public class DummyCanConverter : TypeConverter
         {
@@ -121,41 +151,57 @@ namespace System.ConfigurationTests
         [Fact]
         public void ConfigurationElementConverterIgnored()
         {
-            ConfigurationProperty property = new ConfigurationProperty("foo", typeof(SimpleConfigurationElement));
+            ConfigurationProperty property = new ConfigurationProperty(
+                "foo",
+                typeof(SimpleConfigurationElement)
+            );
             Assert.Null(property.Converter);
         }
 
         [TypeConverter(typeof(DummyCanConverter))]
-        public class MyConvertibleClass
-        {
-        }
+        public class MyConvertibleClass { }
 
         [Fact]
         public void TypeConverterRecognized()
         {
-            ConfigurationProperty property = new ConfigurationProperty("foo", typeof(MyConvertibleClass));
+            ConfigurationProperty property = new ConfigurationProperty(
+                "foo",
+                typeof(MyConvertibleClass)
+            );
             Assert.IsType<DummyCanConverter>(property.Converter);
         }
 
         [Fact]
-        [SkipOnTargetFramework(TargetFrameworkMonikers.NetFramework, ".NET Framework does not have the fix https://github.com/dotnet/corefx/pull/41873")]
+        [SkipOnTargetFramework(
+            TargetFrameworkMonikers.NetFramework,
+            ".NET Framework does not have the fix https://github.com/dotnet/corefx/pull/41873"
+        )]
         public void DescriptionValueIsExposed()
         {
             FooFailsValidator validator = new FooFailsValidator();
             DummyCanConverter converter = new DummyCanConverter();
-            ConfigurationProperty property = new ConfigurationProperty("foo", typeof(MyConvertibleClass), null, converter, validator, ConfigurationPropertyOptions.None, "bar");
+            ConfigurationProperty property = new ConfigurationProperty(
+                "foo",
+                typeof(MyConvertibleClass),
+                null,
+                converter,
+                validator,
+                ConfigurationPropertyOptions.None,
+                "bar"
+            );
             Assert.Equal("bar", property.Description);
         }
 
         [TypeConverter(typeof(DummyCantConverter))]
-        public class MyUnconvertibleClass
-        {
-        }
+        public class MyUnconvertibleClass { }
 
         [Fact]
         public void UnconvertibleFailsOnConverterAccess()
         {
-            ConfigurationProperty property = new ConfigurationProperty("foo", typeof(MyUnconvertibleClass));
+            ConfigurationProperty property = new ConfigurationProperty(
+                "foo",
+                typeof(MyUnconvertibleClass)
+            );
             Assert.Throws<ConfigurationErrorsException>(() => property.Converter);
         }
 
@@ -163,7 +209,7 @@ namespace System.ConfigurationTests
         public enum AllSay
         {
             Yea,
-            Nay
+            Nay,
         }
 
         [Fact]
@@ -173,10 +219,11 @@ namespace System.ConfigurationTests
             Assert.IsType<GenericEnumConverter>(property.Converter);
         }
 
-        [Theory,
+        [
+            Theory,
             InlineData(typeof(string), typeof(StringConverter)),
             InlineData(typeof(int), typeof(Int32Converter))
-            ]
+        ]
         public void FindConverterForBuiltInTypes(Type type, Type converterType)
         {
             ConfigurationProperty property = new ConfigurationProperty("foo", type);
@@ -187,42 +234,91 @@ namespace System.ConfigurationTests
         public void IsRequiredExposed()
         {
             Assert.False(new ConfigurationProperty("foo", typeof(string)).IsRequired);
-            Assert.True(new ConfigurationProperty("foo", typeof(string), null, ConfigurationPropertyOptions.IsRequired).IsRequired);
+            Assert.True(
+                new ConfigurationProperty(
+                    "foo",
+                    typeof(string),
+                    null,
+                    ConfigurationPropertyOptions.IsRequired
+                ).IsRequired
+            );
         }
 
         [Fact]
         public void IsKeyExposed()
         {
             Assert.False(new ConfigurationProperty("foo", typeof(string)).IsRequired);
-            Assert.True(new ConfigurationProperty("foo", typeof(string), null, ConfigurationPropertyOptions.IsKey).IsKey);
+            Assert.True(
+                new ConfigurationProperty(
+                    "foo",
+                    typeof(string),
+                    null,
+                    ConfigurationPropertyOptions.IsKey
+                ).IsKey
+            );
         }
 
         [Fact]
         public void IsDefaultCollectionExposed()
         {
             Assert.False(new ConfigurationProperty("foo", typeof(string)).IsDefaultCollection);
-            Assert.True(new ConfigurationProperty("foo", typeof(string), null, ConfigurationPropertyOptions.IsDefaultCollection).IsDefaultCollection);
+            Assert.True(
+                new ConfigurationProperty(
+                    "foo",
+                    typeof(string),
+                    null,
+                    ConfigurationPropertyOptions.IsDefaultCollection
+                ).IsDefaultCollection
+            );
         }
 
         [Fact]
         public void IsTypeStringTransformationRequiredExposed()
         {
-            Assert.False(new ConfigurationProperty("foo", typeof(string)).IsTypeStringTransformationRequired);
-            Assert.True(new ConfigurationProperty("foo", typeof(string), null, ConfigurationPropertyOptions.IsTypeStringTransformationRequired).IsTypeStringTransformationRequired);
+            Assert.False(
+                new ConfigurationProperty("foo", typeof(string)).IsTypeStringTransformationRequired
+            );
+            Assert.True(
+                new ConfigurationProperty(
+                    "foo",
+                    typeof(string),
+                    null,
+                    ConfigurationPropertyOptions.IsTypeStringTransformationRequired
+                ).IsTypeStringTransformationRequired
+            );
         }
 
         [Fact]
         public void IsAssemblyStringTransformationRequiredExposed()
         {
-            Assert.False(new ConfigurationProperty("foo", typeof(string)).IsAssemblyStringTransformationRequired);
-            Assert.True(new ConfigurationProperty("foo", typeof(string), null, ConfigurationPropertyOptions.IsAssemblyStringTransformationRequired).IsAssemblyStringTransformationRequired);
+            Assert.False(
+                new ConfigurationProperty(
+                    "foo",
+                    typeof(string)
+                ).IsAssemblyStringTransformationRequired
+            );
+            Assert.True(
+                new ConfigurationProperty(
+                    "foo",
+                    typeof(string),
+                    null,
+                    ConfigurationPropertyOptions.IsAssemblyStringTransformationRequired
+                ).IsAssemblyStringTransformationRequired
+            );
         }
 
         [Fact]
         public void IsVersionCheckRequiredExposed()
         {
             Assert.False(new ConfigurationProperty("foo", typeof(string)).IsVersionCheckRequired);
-            Assert.True(new ConfigurationProperty("foo", typeof(string), null, ConfigurationPropertyOptions.IsVersionCheckRequired).IsVersionCheckRequired);
+            Assert.True(
+                new ConfigurationProperty(
+                    "foo",
+                    typeof(string),
+                    null,
+                    ConfigurationPropertyOptions.IsVersionCheckRequired
+                ).IsVersionCheckRequired
+            );
         }
 
         [Fact]
@@ -234,7 +330,10 @@ namespace System.ConfigurationTests
         [Fact]
         public void DefaultValueIsExposed()
         {
-            Assert.Equal("bar", new ConfigurationProperty("foo", typeof(string), "bar").DefaultValue);
+            Assert.Equal(
+                "bar",
+                new ConfigurationProperty("foo", typeof(string), "bar").DefaultValue
+            );
         }
     }
 }

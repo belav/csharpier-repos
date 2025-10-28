@@ -8,6 +8,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Threading;
 using Microsoft.CodeAnalysis.Text;
+
 namespace Microsoft.CodeAnalysis
 {
     /// <summary>
@@ -19,7 +20,10 @@ namespace Microsoft.CodeAnalysis
 
         private ImmutableArray<SyntaxTree> _lazyGeneratedTrees;
 
-        internal GeneratorDriverRunResult(ImmutableArray<GeneratorRunResult> results, TimeSpan elapsedTime)
+        internal GeneratorDriverRunResult(
+            ImmutableArray<GeneratorRunResult> results,
+            TimeSpan elapsedTime
+        )
         {
             this.Results = results;
             ElapsedTime = elapsedTime;
@@ -47,7 +51,10 @@ namespace Microsoft.CodeAnalysis
             {
                 if (_lazyDiagnostics.IsDefault)
                 {
-                    ImmutableInterlocked.InterlockedInitialize(ref _lazyDiagnostics, Results.SelectMany(r => r.Diagnostics).ToImmutableArray());
+                    ImmutableInterlocked.InterlockedInitialize(
+                        ref _lazyDiagnostics,
+                        Results.SelectMany(r => r.Diagnostics).ToImmutableArray()
+                    );
                 }
                 return _lazyDiagnostics;
             }
@@ -65,7 +72,12 @@ namespace Microsoft.CodeAnalysis
             {
                 if (_lazyGeneratedTrees.IsDefault)
                 {
-                    ImmutableInterlocked.InterlockedInitialize(ref _lazyGeneratedTrees, Results.SelectMany(r => r.GeneratedSources.Select(g => g.SyntaxTree)).ToImmutableArray());
+                    ImmutableInterlocked.InterlockedInitialize(
+                        ref _lazyGeneratedTrees,
+                        Results
+                            .SelectMany(r => r.GeneratedSources.Select(g => g.SyntaxTree))
+                            .ToImmutableArray()
+                    );
                 }
                 return _lazyGeneratedTrees;
             }
@@ -85,9 +97,12 @@ namespace Microsoft.CodeAnalysis
             ImmutableDictionary<string, ImmutableArray<IncrementalGeneratorRunStep>> outputSteps,
             ImmutableArray<(string Key, string Value)> hostOutputs,
             Exception? exception,
-            TimeSpan elapsedTime)
+            TimeSpan elapsedTime
+        )
         {
-            Debug.Assert(exception is null || (generatedSources.IsEmpty && diagnostics.Length == 1));
+            Debug.Assert(
+                exception is null || (generatedSources.IsEmpty && diagnostics.Length == 1)
+            );
 
             this.Generator = generator;
             this.GeneratedSources = generatedSources;
@@ -110,7 +125,7 @@ namespace Microsoft.CodeAnalysis
         public ImmutableArray<GeneratedSourceResult> GeneratedSources { get; }
 
         /// <summary>
-        /// A collection of <see cref="Diagnostic"/>s reported by <see cref="Generator"/> 
+        /// A collection of <see cref="Diagnostic"/>s reported by <see cref="Generator"/>
         /// </summary>
         /// <remarks>
         /// When generation fails due to an <see cref="Exception"/> being thrown, a single diagnostic is added
@@ -141,7 +156,10 @@ namespace Microsoft.CodeAnalysis
         /// <remarks>
         /// Steps can be named by extension method WithTrackingName.
         /// </remarks>
-        public ImmutableDictionary<string, ImmutableArray<IncrementalGeneratorRunStep>> TrackedSteps { get; }
+        public ImmutableDictionary<
+            string,
+            ImmutableArray<IncrementalGeneratorRunStep>
+        > TrackedSteps { get; }
 
         /// <summary>
         /// A collection of the named output steps executed during the generator pass this result represents.
@@ -149,7 +167,10 @@ namespace Microsoft.CodeAnalysis
         /// <remarks>
         /// Steps can be named by extension method WithTrackingName.
         /// </remarks>
-        public ImmutableDictionary<string, ImmutableArray<IncrementalGeneratorRunStep>> TrackedOutputSteps { get; }
+        public ImmutableDictionary<
+            string,
+            ImmutableArray<IncrementalGeneratorRunStep>
+        > TrackedOutputSteps { get; }
     }
 
     /// <summary>
@@ -188,7 +209,10 @@ namespace Microsoft.CodeAnalysis
     /// </summary>
     public readonly struct GeneratorDriverTimingInfo
     {
-        internal GeneratorDriverTimingInfo(TimeSpan elapsedTime, ImmutableArray<GeneratorTimingInfo> generatorTimes)
+        internal GeneratorDriverTimingInfo(
+            TimeSpan elapsedTime,
+            ImmutableArray<GeneratorTimingInfo> generatorTimes
+        )
         {
             ElapsedTime = elapsedTime;
             GeneratorTimes = generatorTimes;

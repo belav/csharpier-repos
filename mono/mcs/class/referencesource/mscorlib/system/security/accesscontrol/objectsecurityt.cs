@@ -1,14 +1,14 @@
 // ==++==
-// 
+//
 //   Copyright (c) Microsoft Corporation.  All rights reserved.
-// 
+//
 // ==--==
 /*============================================================
 **
 ** Class:  ObjectSecurity
 **
 ** Purpose: Generic Managed ACL wrapper
-** 
+**
 ** Date:  February 7, 2007
 **
 ===========================================================*/
@@ -20,37 +20,35 @@ using System.Security.Permissions;
 using System.Security.Principal;
 using Microsoft.Win32.SafeHandles;
 
-namespace System.Security.AccessControl {
-    public class AccessRule<T> : AccessRule where T : struct {
-
+namespace System.Security.AccessControl
+{
+    public class AccessRule<T> : AccessRule
+        where T : struct
+    {
         #region Constructors
         //
         // Constructors for creating access rules for file objects
         //
 
-        public AccessRule(
-            IdentityReference identity,
-            T rights,
-            AccessControlType type)
+        public AccessRule(IdentityReference identity, T rights, AccessControlType type)
             : this(
                 identity,
                 (int)(object)rights,
                 false,
                 InheritanceFlags.None,
                 PropagationFlags.None,
-                type) { }
+                type
+            ) { }
 
-        public AccessRule(
-            String identity,
-            T rights,
-            AccessControlType type)
+        public AccessRule(String identity, T rights, AccessControlType type)
             : this(
                 new NTAccount(identity),
                 (int)(object)rights,
                 false,
                 InheritanceFlags.None,
                 PropagationFlags.None,
-                type) { }
+                type
+            ) { }
 
         //
         // Constructor for creating access rules for folder objects
@@ -61,28 +59,26 @@ namespace System.Security.AccessControl {
             T rights,
             InheritanceFlags inheritanceFlags,
             PropagationFlags propagationFlags,
-            AccessControlType type)
-            : this(
-                identity,
-                (int)(object)rights,
-                false,
-                inheritanceFlags,
-                propagationFlags,
-                type) { }
+            AccessControlType type
+        )
+            : this(identity, (int)(object)rights, false, inheritanceFlags, propagationFlags, type)
+        { }
 
         public AccessRule(
             String identity,
             T rights,
             InheritanceFlags inheritanceFlags,
             PropagationFlags propagationFlags,
-            AccessControlType type)
+            AccessControlType type
+        )
             : this(
                 new NTAccount(identity),
                 (int)(object)rights,
                 false,
                 inheritanceFlags,
                 propagationFlags,
-                type) { }
+                type
+            ) { }
 
         //
         // Internal constructor to be called by public constructors
@@ -95,83 +91,64 @@ namespace System.Security.AccessControl {
             bool isInherited,
             InheritanceFlags inheritanceFlags,
             PropagationFlags propagationFlags,
-            AccessControlType type)
-            : base(
-                identity,
-                accessMask,
-                isInherited,
-                inheritanceFlags,
-                propagationFlags,
-                type) { }
+            AccessControlType type
+        )
+            : base(identity, accessMask, isInherited, inheritanceFlags, propagationFlags, type) { }
 
         #endregion
 
         #region Public properties
 
-        public T Rights {
+        public T Rights
+        {
             get { return (T)(object)base.AccessMask; }
         }
 
         #endregion
     }
 
-
-    public class AuditRule<T> : AuditRule where T : struct {
+    public class AuditRule<T> : AuditRule
+        where T : struct
+    {
         #region Constructors
 
-        public AuditRule(
-            IdentityReference identity,
-            T rights,
-            AuditFlags flags)
-            : this(
-                identity,
-                rights,
-                InheritanceFlags.None,
-                PropagationFlags.None,
-                flags) {
-        }
+        public AuditRule(IdentityReference identity, T rights, AuditFlags flags)
+            : this(identity, rights, InheritanceFlags.None, PropagationFlags.None, flags) { }
 
         public AuditRule(
             IdentityReference identity,
             T rights,
             InheritanceFlags inheritanceFlags,
             PropagationFlags propagationFlags,
-            AuditFlags flags)
-            : this(
-                identity,
-                (int)(object)rights,
-                false,
-                inheritanceFlags,
-                propagationFlags,
-                flags) {
-        }
+            AuditFlags flags
+        )
+            : this(identity, (int)(object)rights, false, inheritanceFlags, propagationFlags, flags)
+        { }
 
-        public AuditRule(
-            String identity,
-            T rights,
-            AuditFlags flags)
+        public AuditRule(String identity, T rights, AuditFlags flags)
             : this(
                 new NTAccount(identity),
                 rights,
                 InheritanceFlags.None,
                 PropagationFlags.None,
-                flags) {
-        }
+                flags
+            ) { }
 
         public AuditRule(
             String identity,
             T rights,
             InheritanceFlags inheritanceFlags,
             PropagationFlags propagationFlags,
-            AuditFlags flags)
+            AuditFlags flags
+        )
             : this(
                 new NTAccount(identity),
                 (int)(object)rights,
                 false,
                 inheritanceFlags,
                 propagationFlags,
-                flags) {
-        }
+                flags
+            ) { }
 
         internal AuditRule(
             IdentityReference identity,
@@ -179,47 +156,81 @@ namespace System.Security.AccessControl {
             bool isInherited,
             InheritanceFlags inheritanceFlags,
             PropagationFlags propagationFlags,
-            AuditFlags flags)
-            : base(
-                identity,
-                accessMask,
-                isInherited,
-                inheritanceFlags,
-                propagationFlags,
-                flags) {
-        }
+            AuditFlags flags
+        )
+            : base(identity, accessMask, isInherited, inheritanceFlags, propagationFlags, flags) { }
 
         #endregion
 
         #region Public properties
 
-        public T Rights {
+        public T Rights
+        {
             get { return (T)(object)base.AccessMask; }
         }
 
         #endregion
     }
 
-
-    public abstract class ObjectSecurity<T> : NativeObjectSecurity where T : struct {
+    public abstract class ObjectSecurity<T> : NativeObjectSecurity
+        where T : struct
+    {
         #region Constructors
 
         protected ObjectSecurity(bool isContainer, ResourceType resourceType)
             : base(isContainer, resourceType, null, null) { }
 
-        protected ObjectSecurity(bool isContainer, ResourceType resourceType, string name, AccessControlSections includeSections)
+        protected ObjectSecurity(
+            bool isContainer,
+            ResourceType resourceType,
+            string name,
+            AccessControlSections includeSections
+        )
             : base(isContainer, resourceType, name, includeSections, null, null) { }
 
-        protected ObjectSecurity(bool isContainer, ResourceType resourceType, string name, AccessControlSections includeSections, ExceptionFromErrorCode exceptionFromErrorCode, object exceptionContext)
-            : base(isContainer, resourceType, name, includeSections, exceptionFromErrorCode, exceptionContext) { }
+        protected ObjectSecurity(
+            bool isContainer,
+            ResourceType resourceType,
+            string name,
+            AccessControlSections includeSections,
+            ExceptionFromErrorCode exceptionFromErrorCode,
+            object exceptionContext
+        )
+            : base(
+                isContainer,
+                resourceType,
+                name,
+                includeSections,
+                exceptionFromErrorCode,
+                exceptionContext
+            ) { }
 
-        [System.Security.SecuritySafeCritical]  // auto-generated
-        protected ObjectSecurity(bool isContainer, ResourceType resourceType, SafeHandle safeHandle, AccessControlSections includeSections)
+        [System.Security.SecuritySafeCritical] // auto-generated
+        protected ObjectSecurity(
+            bool isContainer,
+            ResourceType resourceType,
+            SafeHandle safeHandle,
+            AccessControlSections includeSections
+        )
             : base(isContainer, resourceType, safeHandle, includeSections, null, null) { }
 
-        [System.Security.SecuritySafeCritical]  // auto-generated
-        protected ObjectSecurity(bool isContainer, ResourceType resourceType, SafeHandle safeHandle, AccessControlSections includeSections, ExceptionFromErrorCode exceptionFromErrorCode, object exceptionContext)
-            : base(isContainer, resourceType, safeHandle, includeSections, exceptionFromErrorCode, exceptionContext) { }
+        [System.Security.SecuritySafeCritical] // auto-generated
+        protected ObjectSecurity(
+            bool isContainer,
+            ResourceType resourceType,
+            SafeHandle safeHandle,
+            AccessControlSections includeSections,
+            ExceptionFromErrorCode exceptionFromErrorCode,
+            object exceptionContext
+        )
+            : base(
+                isContainer,
+                resourceType,
+                safeHandle,
+                includeSections,
+                exceptionFromErrorCode,
+                exceptionContext
+            ) { }
 
         #endregion
         #region Factories
@@ -230,14 +241,17 @@ namespace System.Security.AccessControl {
             bool isInherited,
             InheritanceFlags inheritanceFlags,
             PropagationFlags propagationFlags,
-            AccessControlType type) {
+            AccessControlType type
+        )
+        {
             return new AccessRule<T>(
                 identityReference,
                 accessMask,
                 isInherited,
                 inheritanceFlags,
                 propagationFlags,
-                type);
+                type
+            );
         }
 
         public override AuditRule AuditRuleFactory(
@@ -246,31 +260,39 @@ namespace System.Security.AccessControl {
             bool isInherited,
             InheritanceFlags inheritanceFlags,
             PropagationFlags propagationFlags,
-            AuditFlags flags) {
+            AuditFlags flags
+        )
+        {
             return new AuditRule<T>(
                 identityReference,
                 accessMask,
                 isInherited,
                 inheritanceFlags,
                 propagationFlags,
-                flags);
+                flags
+            );
         }
 
         #endregion
         #region Private Methods
 
-        private AccessControlSections GetAccessControlSectionsFromChanges() {
+        private AccessControlSections GetAccessControlSectionsFromChanges()
+        {
             AccessControlSections persistRules = AccessControlSections.None;
-            if (AccessRulesModified) {
+            if (AccessRulesModified)
+            {
                 persistRules = AccessControlSections.Access;
             }
-            if (AuditRulesModified) {
+            if (AuditRulesModified)
+            {
                 persistRules |= AccessControlSections.Audit;
             }
-            if (OwnerModified) {
+            if (OwnerModified)
+            {
                 persistRules |= AccessControlSections.Owner;
             }
-            if (GroupModified) {
+            if (GroupModified)
+            {
                 persistRules |= AccessControlSections.Group;
             }
             return persistRules;
@@ -280,38 +302,44 @@ namespace System.Security.AccessControl {
         #region Protected Methods
 
         // Use this in your own Persist after you have demanded any appropriate CAS permissions.
-        // Note that you will want your version to be internal and use a specialized Safe Handle. 
+        // Note that you will want your version to be internal and use a specialized Safe Handle.
         // <SecurityKernel Critical="True" Ring="0">
         // <Asserts Name="Declarative: [SecurityPermission(SecurityAction.Assert, UnmanagedCode = true)]" />
         // </SecurityKernel>
-        [System.Security.SecuritySafeCritical]  // auto-generated
+        [System.Security.SecuritySafeCritical] // auto-generated
         [SecurityPermission(SecurityAction.Assert, UnmanagedCode = true)]
-        protected internal void Persist(SafeHandle handle) {
+        protected internal void Persist(SafeHandle handle)
+        {
             WriteLock();
 
-            try {
+            try
+            {
                 AccessControlSections persistRules = GetAccessControlSectionsFromChanges();
                 base.Persist(handle, persistRules);
                 OwnerModified = GroupModified = AuditRulesModified = AccessRulesModified = false;
             }
-            finally {
+            finally
+            {
                 WriteUnlock();
             }
         }
 
         // Use this in your own Persist after you have demanded any appropriate CAS permissions.
-        // Note that you will want your version to be internal. 
-        [System.Security.SecuritySafeCritical]  // auto-generated
+        // Note that you will want your version to be internal.
+        [System.Security.SecuritySafeCritical] // auto-generated
         [SecurityPermission(SecurityAction.Assert, UnmanagedCode = true)]
-        protected internal void Persist(String name) {
+        protected internal void Persist(String name)
+        {
             WriteLock();
 
-            try {
+            try
+            {
                 AccessControlSections persistRules = GetAccessControlSectionsFromChanges();
                 base.Persist(name, persistRules);
                 OwnerModified = GroupModified = AuditRulesModified = AccessRulesModified = false;
             }
-            finally {
+            finally
+            {
                 WriteUnlock();
             }
         }
@@ -319,64 +347,78 @@ namespace System.Security.AccessControl {
         #endregion
         #region Public Methods
 
-        // Override these if you need to do some custom bit remapping to hide any 
-        // complexity from the user. 
-        public virtual void AddAccessRule(AccessRule<T> rule) {
+        // Override these if you need to do some custom bit remapping to hide any
+        // complexity from the user.
+        public virtual void AddAccessRule(AccessRule<T> rule)
+        {
             base.AddAccessRule(rule);
         }
 
-        public virtual void SetAccessRule(AccessRule<T> rule) {
+        public virtual void SetAccessRule(AccessRule<T> rule)
+        {
             base.SetAccessRule(rule);
         }
 
-        public virtual void ResetAccessRule(AccessRule<T> rule) {
+        public virtual void ResetAccessRule(AccessRule<T> rule)
+        {
             base.ResetAccessRule(rule);
         }
 
-        public virtual bool RemoveAccessRule(AccessRule<T> rule) {
+        public virtual bool RemoveAccessRule(AccessRule<T> rule)
+        {
             return base.RemoveAccessRule(rule);
         }
 
-        public virtual void RemoveAccessRuleAll(AccessRule<T> rule) {
+        public virtual void RemoveAccessRuleAll(AccessRule<T> rule)
+        {
             base.RemoveAccessRuleAll(rule);
         }
 
-        public virtual void RemoveAccessRuleSpecific(AccessRule<T> rule) {
+        public virtual void RemoveAccessRuleSpecific(AccessRule<T> rule)
+        {
             base.RemoveAccessRuleSpecific(rule);
         }
 
-        public virtual void AddAuditRule(AuditRule<T> rule) {
+        public virtual void AddAuditRule(AuditRule<T> rule)
+        {
             base.AddAuditRule(rule);
         }
 
-        public virtual void SetAuditRule(AuditRule<T> rule) {
+        public virtual void SetAuditRule(AuditRule<T> rule)
+        {
             base.SetAuditRule(rule);
         }
 
-        public virtual bool RemoveAuditRule(AuditRule<T> rule) {
+        public virtual bool RemoveAuditRule(AuditRule<T> rule)
+        {
             return base.RemoveAuditRule(rule);
         }
 
-        public virtual void RemoveAuditRuleAll(AuditRule<T> rule) {
+        public virtual void RemoveAuditRuleAll(AuditRule<T> rule)
+        {
             base.RemoveAuditRuleAll(rule);
         }
 
-        public virtual void RemoveAuditRuleSpecific(AuditRule<T> rule) {
+        public virtual void RemoveAuditRuleSpecific(AuditRule<T> rule)
+        {
             base.RemoveAuditRuleSpecific(rule);
         }
 
         #endregion
         #region some overrides
 
-        public override Type AccessRightType {
+        public override Type AccessRightType
+        {
             get { return typeof(T); }
         }
 
-        public override Type AccessRuleType {
+        public override Type AccessRuleType
+        {
             get { return typeof(AccessRule<T>); }
         }
 
-        public override Type AuditRuleType {
+        public override Type AuditRuleType
+        {
             get { return typeof(AuditRule<T>); }
         }
         #endregion

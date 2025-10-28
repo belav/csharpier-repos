@@ -1,5 +1,4 @@
 <Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-
   <!-- Common debug configuration for IIS OOB binaries -->
 
   <PropertyGroup Condition="'$(Configuration)'=='Debug'">
@@ -23,5 +22,4 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
   </ItemDefinitionGroup>
-
 </Project>

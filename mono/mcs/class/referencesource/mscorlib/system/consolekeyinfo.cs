@@ -1,8 +1,9 @@
 using System.Diagnostics.Contracts;
+
 // ==++==
-// 
+//
 //   Copyright (c) Microsoft Corporation.  All rights reserved.
-// 
+//
 // ==--==
 /*=============================================================================
 **
@@ -15,20 +16,26 @@ using System.Diagnostics.Contracts;
 **
 =============================================================================*/
 
-namespace System {
+namespace System
+{
     [Serializable]
-    public struct ConsoleKeyInfo {
+    public struct ConsoleKeyInfo
+    {
         private char _keyChar;
         private ConsoleKey _key;
-        private ConsoleModifiers _mods;    
+        private ConsoleModifiers _mods;
 
-        public ConsoleKeyInfo(char keyChar, ConsoleKey key, bool shift, bool alt, bool control) {
+        public ConsoleKeyInfo(char keyChar, ConsoleKey key, bool shift, bool alt, bool control)
+        {
             // Limit ConsoleKey values to 0 to 255, but don't check whether the
-            // key is a valid value in our ConsoleKey enum.  There are a few 
-            // values in that enum that we didn't define, and reserved keys 
+            // key is a valid value in our ConsoleKey enum.  There are a few
+            // values in that enum that we didn't define, and reserved keys
             // that might start showing up on keyboards in a few years.
             if (((int)key) < 0 || ((int)key) > 255)
-                throw new ArgumentOutOfRangeException("key", Environment.GetResourceString("ArgumentOutOfRange_ConsoleKey"));
+                throw new ArgumentOutOfRangeException(
+                    "key",
+                    Environment.GetResourceString("ArgumentOutOfRange_ConsoleKey")
+                );
             Contract.EndContractBlock();
 
             _keyChar = keyChar;
@@ -42,15 +49,18 @@ namespace System {
                 _mods |= ConsoleModifiers.Control;
         }
 
-        public char KeyChar {
+        public char KeyChar
+        {
             get { return _keyChar; }
         }
 
-        public ConsoleKey Key {
+        public ConsoleKey Key
+        {
             get { return _key; }
         }
 
-        public ConsoleModifiers Modifiers {
+        public ConsoleModifiers Modifiers
+        {
             get { return _mods; }
         }
 
@@ -66,20 +76,20 @@ namespace System {
         {
             return obj._keyChar == _keyChar && obj._key == _key && obj._mods == _mods;
         }
-    
+
         public static bool operator ==(ConsoleKeyInfo a, ConsoleKeyInfo b)
         {
             return a.Equals(b);
         }
-        
+
         public static bool operator !=(ConsoleKeyInfo a, ConsoleKeyInfo b)
         {
             return !(a == b);
         }
-        
+
         public override int GetHashCode()
         {
-            return (int)_keyChar | (int) _mods;
+            return (int)_keyChar | (int)_mods;
         }
     }
 }

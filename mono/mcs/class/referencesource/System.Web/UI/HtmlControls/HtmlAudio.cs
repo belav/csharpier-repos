@@ -4,7 +4,8 @@
 // </copyright>
 //------------------------------------------------------------------------------
 
-namespace System.Web.UI.HtmlControls {
+namespace System.Web.UI.HtmlControls
+{
     using System.ComponentModel;
     using System.Web;
     using System.Web.UI;
@@ -18,14 +19,13 @@ namespace System.Web.UI.HtmlControls {
     ///       the HTML 5 &lt;audio&gt; element.
     ///    </para>
     /// </devdoc>
-    public class HtmlAudio : HtmlContainerControl {
-
+    public class HtmlAudio : HtmlContainerControl
+    {
         /// <devdoc>
         /// <para>Initializes a new instance of the <see cref='System.Web.UI.HtmlControls.HtmlAudio'/> class.</para>
         /// </devdoc>
         public HtmlAudio()
-            : base("audio") {
-        }
+            : base("audio") { }
 
         /// <devdoc>
         ///    <para>
@@ -33,28 +33,28 @@ namespace System.Web.UI.HtmlControls {
         ///    </para>
         /// </devdoc>
         [
-        WebCategory("Behavior"),
-        DefaultValue(""),
-        DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden),
-        UrlProperty()
+            WebCategory("Behavior"),
+            DefaultValue(""),
+            DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden),
+            UrlProperty()
         ]
-        public string Src {
-            get {
+        public string Src
+        {
+            get
+            {
                 string s = Attributes["src"];
                 return s ?? String.Empty;
             }
-            set {
-                Attributes["src"] = MapStringAttributeToString(value);
-            }
+            set { Attributes["src"] = MapStringAttributeToString(value); }
         }
 
         /*
          * Override to process src attribute
          */
-        protected override void RenderAttributes(HtmlTextWriter writer) {
+        protected override void RenderAttributes(HtmlTextWriter writer)
+        {
             PreProcessRelativeReferenceAttribute(writer, "src");
             base.RenderAttributes(writer);
         }
-
     }
 }

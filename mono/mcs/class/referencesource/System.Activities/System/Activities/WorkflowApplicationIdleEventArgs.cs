@@ -14,9 +14,7 @@ namespace System.Activities
         ReadOnlyCollection<BookmarkInfo> bookmarks;
 
         internal WorkflowApplicationIdleEventArgs(WorkflowApplication application)
-            : base(application)
-        {
-        }
+            : base(application) { }
 
         public ReadOnlyCollection<BookmarkInfo> Bookmarks
         {

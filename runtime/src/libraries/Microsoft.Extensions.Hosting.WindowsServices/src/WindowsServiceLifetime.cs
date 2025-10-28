@@ -17,8 +17,10 @@ namespace Microsoft.Extensions.Hosting.WindowsServices
     [SupportedOSPlatform("windows")]
     public class WindowsServiceLifetime : ServiceBase, IHostLifetime
     {
-        private readonly TaskCompletionSource<object?> _delayStart = new TaskCompletionSource<object?>(TaskCreationOptions.RunContinuationsAsynchronously);
-        private readonly TaskCompletionSource<object?> _serviceDispatcherStopped = new TaskCompletionSource<object?>(TaskCreationOptions.RunContinuationsAsynchronously);
+        private readonly TaskCompletionSource<object?> _delayStart =
+            new TaskCompletionSource<object?>(TaskCreationOptions.RunContinuationsAsynchronously);
+        private readonly TaskCompletionSource<object?> _serviceDispatcherStopped =
+            new TaskCompletionSource<object?>(TaskCreationOptions.RunContinuationsAsynchronously);
         private readonly ManualResetEventSlim _delayStop = new ManualResetEventSlim();
         private readonly HostOptions _hostOptions;
         private bool _serviceStopRequested;
@@ -30,10 +32,19 @@ namespace Microsoft.Extensions.Hosting.WindowsServices
         /// <param name="applicationLifetime">The <see cref="IHostApplicationLifetime"/> that tracks the service lifetime.</param>
         /// <param name="loggerFactory">The <see cref="ILoggerFactory"/> used to instantiate the lifetime logger.</param>
         /// <param name="optionsAccessor">The <see cref="IOptions{HostOptions}"/> containing options for the service.</param>
-        public WindowsServiceLifetime(IHostEnvironment environment, IHostApplicationLifetime applicationLifetime, ILoggerFactory loggerFactory, IOptions<HostOptions> optionsAccessor)
-            : this(environment, applicationLifetime, loggerFactory, optionsAccessor, Options.Options.Create(new WindowsServiceLifetimeOptions()))
-        {
-        }
+        public WindowsServiceLifetime(
+            IHostEnvironment environment,
+            IHostApplicationLifetime applicationLifetime,
+            ILoggerFactory loggerFactory,
+            IOptions<HostOptions> optionsAccessor
+        )
+            : this(
+                environment,
+                applicationLifetime,
+                loggerFactory,
+                optionsAccessor,
+                Options.Options.Create(new WindowsServiceLifetimeOptions())
+            ) { }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="WindowsServiceLifetime"/> class.
@@ -43,7 +54,13 @@ namespace Microsoft.Extensions.Hosting.WindowsServices
         /// <param name="loggerFactory">The <see cref="ILoggerFactory"/> used to instantiate the lifetime logger.</param>
         /// <param name="optionsAccessor">The <see cref="IOptions{HostOptions}"/> containing options for the service.</param>
         /// <param name="windowsServiceOptionsAccessor">The Windows service options used to find the service name.</param>
-        public WindowsServiceLifetime(IHostEnvironment environment, IHostApplicationLifetime applicationLifetime, ILoggerFactory loggerFactory, IOptions<HostOptions> optionsAccessor, IOptions<WindowsServiceLifetimeOptions> windowsServiceOptionsAccessor)
+        public WindowsServiceLifetime(
+            IHostEnvironment environment,
+            IHostApplicationLifetime applicationLifetime,
+            ILoggerFactory loggerFactory,
+            IOptions<HostOptions> optionsAccessor,
+            IOptions<WindowsServiceLifetimeOptions> windowsServiceOptionsAccessor
+        )
         {
             ThrowHelper.ThrowIfNull(environment);
             ThrowHelper.ThrowIfNull(applicationLifetime);
@@ -77,8 +94,11 @@ namespace Microsoft.Extensions.Hosting.WindowsServices
             cancellationToken.Register(() => _delayStart.TrySetCanceled());
             ApplicationLifetime.ApplicationStarted.Register(() =>
             {
-                Logger.LogInformation("Application started. Hosting environment: {EnvName}; Content root path: {ContentRoot}",
-                    Environment.EnvironmentName, Environment.ContentRootPath);
+                Logger.LogInformation(
+                    "Application started. Hosting environment: {EnvName}; Content root path: {ContentRoot}",
+                    Environment.EnvironmentName,
+                    Environment.ContentRootPath
+                );
             });
             ApplicationLifetime.ApplicationStopping.Register(() =>
             {
@@ -98,7 +118,9 @@ namespace Microsoft.Extensions.Hosting.WindowsServices
             try
             {
                 Run(this); // This blocks until the service is stopped.
-                _delayStart.TrySetException(new InvalidOperationException("Stopped without starting"));
+                _delayStart.TrySetException(
+                    new InvalidOperationException("Stopped without starting")
+                );
                 _serviceDispatcherStopped.TrySetResult(null);
             }
             catch (Exception ex)

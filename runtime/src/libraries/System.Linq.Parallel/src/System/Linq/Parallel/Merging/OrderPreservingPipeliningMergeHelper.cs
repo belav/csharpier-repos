@@ -37,7 +37,8 @@ namespace System.Linq.Parallel
     /// go to sleep and wait until the consumer takes the entire buffer.
     /// </summary>
     [System.Runtime.Versioning.UnsupportedOSPlatform("browser")]
-    internal sealed class OrderPreservingPipeliningMergeHelper<TOutput, TKey> : IMergeHelper<TOutput>
+    internal sealed class OrderPreservingPipeliningMergeHelper<TOutput, TKey>
+        : IMergeHelper<TOutput>
     {
         private readonly QueryTaskGroupState _taskGroupState; // State shared among tasks.
         private readonly PartitionedStream<TOutput, TKey> _partitions; // Source partitions.
@@ -115,11 +116,14 @@ namespace System.Linq.Parallel
             CancellationState cancellationState,
             bool autoBuffered,
             int queryId,
-            IComparer<TKey> keyComparer)
+            IComparer<TKey> keyComparer
+        )
         {
             Debug.Assert(partitions != null);
 
-            TraceHelpers.TraceInfo("KeyOrderPreservingMergeHelper::.ctor(..): creating an order preserving merge helper");
+            TraceHelpers.TraceInfo(
+                "KeyOrderPreservingMergeHelper::.ctor(..): creating an order preserving merge helper"
+            );
 
             _taskGroupState = new QueryTaskGroupState(cancellationState, queryId);
             _partitions = partitions;
@@ -150,8 +154,16 @@ namespace System.Linq.Parallel
         void IMergeHelper<TOutput>.Execute()
         {
             OrderPreservingPipeliningSpoolingTask<TOutput, TKey>.Spool(
-                _taskGroupState, _partitions, _consumerWaiting, _producerWaiting, _producerDone,
-                _buffers, _bufferLocks, _taskScheduler, _autoBuffered);
+                _taskGroupState,
+                _partitions,
+                _consumerWaiting,
+                _producerWaiting,
+                _producerDone,
+                _buffers,
+                _bufferLocks,
+                _taskScheduler,
+                _autoBuffered
+            );
         }
 
         //-----------------------------------------------------------------------------------
@@ -167,7 +179,9 @@ namespace System.Linq.Parallel
         // Returns the results as an array.
         //
 
-        [ExcludeFromCodeCoverage(Justification = "An ordered pipelining merge is not intended to be used this way")]
+        [ExcludeFromCodeCoverage(
+            Justification = "An ordered pipelining merge is not intended to be used this way"
+        )]
         public TOutput[] GetResultsAsArray()
         {
             Debug.Fail("An ordered pipelining merge is not intended to be used this way.");
@@ -203,7 +217,6 @@ namespace System.Linq.Parallel
         /// Enumerator over the results of an order-preserving pipelining merge.
         /// </summary>
         private sealed class OrderedPipeliningMergeEnumerator : MergeEnumerator<TOutput>
-
         {
             /// <summary>
             /// Merge helper associated with this enumerator
@@ -244,7 +257,10 @@ namespace System.Linq.Parallel
             /// <summary>
             /// Constructor
             /// </summary>
-            internal OrderedPipeliningMergeEnumerator(OrderPreservingPipeliningMergeHelper<TOutput, TKey> mergeHelper, IComparer<Producer<TKey>> producerComparer)
+            internal OrderedPipeliningMergeEnumerator(
+                OrderPreservingPipeliningMergeHelper<TOutput, TKey> mergeHelper,
+                IComparer<Producer<TKey>> producerComparer
+            )
                 : base(mergeHelper._taskGroupState)
             {
                 int partitionCount = mergeHelper._partitions.PartitionCount;
@@ -281,7 +297,11 @@ namespace System.Linq.Parallel
 
                     _initialized = true;
 
-                    for (int producer = 0; producer < _mergeHelper._partitions.PartitionCount; producer++)
+                    for (
+                        int producer = 0;
+                        producer < _mergeHelper._partitions.PartitionCount;
+                        producer++
+                    )
                     {
                         Pair<TKey, TOutput> element = default(Pair<TKey, TOutput>);
 
@@ -320,8 +340,10 @@ namespace System.Linq.Parallel
 
                     // Get the next element from the same producer
                     Pair<TKey, TOutput> element = default(Pair<TKey, TOutput>);
-                    if (TryGetPrivateElement(lastProducer, ref element)
-                        || TryWaitForElement(lastProducer, ref element))
+                    if (
+                        TryGetPrivateElement(lastProducer, ref element)
+                        || TryWaitForElement(lastProducer, ref element)
+                    )
                     {
                         // Update the producer heap and its helper array with the received element
                         _producerHeap.ReplaceMax(new Producer<TKey>(element.First, lastProducer));
@@ -349,13 +371,20 @@ namespace System.Linq.Parallel
             /// </summary>
             private void ThrowIfInTearDown()
             {
-                if (_mergeHelper._taskGroupState.CancellationState.MergedCancellationToken.IsCancellationRequested)
+                if (
+                    _mergeHelper
+                        ._taskGroupState
+                        .CancellationState
+                        .MergedCancellationToken
+                        .IsCancellationRequested
+                )
                 {
                     try
                     {
                         // Wake up all producers. Since the cancellation token has already been
                         // set, the producers will eventually stop after waking up.
-                        if (!ParallelEnumerable.SinglePartitionMode) {
+                        if (!ParallelEnumerable.SinglePartitionMode)
+                        {
                             object[] locks = _mergeHelper._bufferLocks;
                             for (int i = 0; i < locks.Length; i++)
                             {
@@ -379,7 +408,6 @@ namespace System.Linq.Parallel
                     }
                 }
             }
-
 
             /// <summary>
             /// Wait until a producer's buffer is non-empty, or until that producer is done.
@@ -418,7 +446,6 @@ namespace System.Linq.Parallel
 
                     Debug.Assert(buffer.Count > 0, "Producer's buffer should not be empty here.");
 
-
                     // If the producer is waiting, wake it up
                     if (_mergeHelper._producerWaiting[producer])
                     {
@@ -439,7 +466,9 @@ namespace System.Linq.Parallel
                         _privateBuffer[producer] = _mergeHelper._buffers[producer];
 
                         // Give an empty buffer to the producer
-                        _mergeHelper._buffers[producer] = new Queue<Pair<TKey, TOutput>>(INITIAL_BUFFER_SIZE);
+                        _mergeHelper._buffers[producer] = new Queue<Pair<TKey, TOutput>>(
+                            INITIAL_BUFFER_SIZE
+                        );
                         // No return statement.
                         // This is the only branch that continues below of the lock region.
                     }
@@ -476,7 +505,8 @@ namespace System.Linq.Parallel
             public override void Dispose()
             {
                 // Wake up any waiting producers
-                if (!ParallelEnumerable.SinglePartitionMode) {
+                if (!ParallelEnumerable.SinglePartitionMode)
+                {
                     int partitionCount = _mergeHelper._buffers.Length;
                     for (int producer = 0; producer < partitionCount; producer++)
                     {
@@ -510,7 +540,6 @@ namespace System.Linq.Parallel
             ProducerIndex = producerIndex;
         }
     }
-
 
     /// <summary>
     /// A comparer used by FixedMaxHeap(Of Producer)

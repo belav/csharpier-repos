@@ -7,7 +7,5 @@ namespace System.Runtime.CompilerServices
     /// Indicates a type should be replaced rather than updated when applying metadata updates.
     /// </summary>
     [AttributeUsage(AttributeTargets.Class | AttributeTargets.Struct, AllowMultiple = false)]
-    public sealed class CreateNewOnMetadataUpdateAttribute : Attribute
-    {
-    }
+    public sealed class CreateNewOnMetadataUpdateAttribute : Attribute { }
 }

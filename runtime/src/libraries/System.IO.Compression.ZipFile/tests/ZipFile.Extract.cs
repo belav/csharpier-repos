@@ -30,11 +30,17 @@ namespace System.IO.Compression.Tests
         [Fact]
         public void ExtractToDirectoryNull()
         {
-            AssertExtensions.Throws<ArgumentNullException>("sourceArchiveFileName", () => ZipFile.ExtractToDirectory(sourceArchiveFileName: null, GetTestFilePath()));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "sourceArchiveFileName",
+                () => ZipFile.ExtractToDirectory(sourceArchiveFileName: null, GetTestFilePath())
+            );
         }
 
         [Fact]
-        [ActiveIssue("https://github.com/dotnet/runtime/issues/72951", TestPlatforms.iOS | TestPlatforms.tvOS)]
+        [ActiveIssue(
+            "https://github.com/dotnet/runtime/issues/72951",
+            TestPlatforms.iOS | TestPlatforms.tvOS
+        )]
         public void ExtractToDirectoryUnicode()
         {
             string zipFileName = zfile("unicode.zip");
@@ -53,13 +59,19 @@ namespace System.IO.Compression.Tests
         {
             string archivePath = GetTestFilePath();
             using (FileStream stream = new FileStream(archivePath, FileMode.Create))
-            using (ZipArchive archive = new ZipArchive(stream, ZipArchiveMode.Create, leaveOpen: true))
+            using (
+                ZipArchive archive = new ZipArchive(stream, ZipArchiveMode.Create, leaveOpen: true)
+            )
             {
                 ZipArchiveEntry entry = archive.CreateEntry(entryName);
             }
 
-            DirectoryInfo destination = Directory.CreateDirectory(Path.Combine(GetTestFilePath(), "Bar"));
-            Assert.Throws<IOException>(() => ZipFile.ExtractToDirectory(archivePath, destination.FullName));
+            DirectoryInfo destination = Directory.CreateDirectory(
+                Path.Combine(GetTestFilePath(), "Bar")
+            );
+            Assert.Throws<IOException>(() =>
+                ZipFile.ExtractToDirectory(archivePath, destination.FullName)
+            );
         }
 
         /// <summary>
@@ -69,7 +81,7 @@ namespace System.IO.Compression.Tests
         [Theory]
         [InlineData("NullCharFileName_FromWindows")]
         [InlineData("NullCharFileName_FromUnix")]
-        [PlatformSpecific(TestPlatforms.AnyUnix)]  // Checks Unix-specific invalid file path
+        [PlatformSpecific(TestPlatforms.AnyUnix)] // Checks Unix-specific invalid file path
         public void Unix_ZipWithInvalidFileNames(string zipName)
         {
             var testDirectory = GetTestFilePath();
@@ -83,7 +95,7 @@ namespace System.IO.Compression.Tests
         [InlineData("backslashes_FromWindows", "aa\\bb\\cc\\dd")]
         [InlineData("WindowsInvalid_FromUnix", "aa<b>d")]
         [InlineData("WindowsInvalid_FromWindows", "aa<b>d")]
-        [PlatformSpecific(TestPlatforms.AnyUnix)]  // Checks Unix-specific invalid file path
+        [PlatformSpecific(TestPlatforms.AnyUnix)] // Checks Unix-specific invalid file path
         public void Unix_ZipWithOSSpecificFileNames(string zipName, string fileName)
         {
             string tempDir = GetTestFilePath();
@@ -93,10 +105,9 @@ namespace System.IO.Compression.Tests
             Assert.Equal(fileName, Path.GetFileName(results[0]));
         }
 
-
         /// <summary>
         /// This test checks whether or not ZipFile.ExtractToDirectory() is capable of handling filenames
-		/// which contain invalid path characters in Windows.
+        /// which contain invalid path characters in Windows.
         ///  Archive:  InvalidWindowsFileNameChars.zip
         ///  Test/
         ///  Test/normalText.txt
@@ -109,11 +120,13 @@ namespace System.IO.Compression.Tests
         [PlatformSpecific(TestPlatforms.Windows)]
         public void Windows_ZipWithInvalidFileNames()
         {
-            
             var testDirectory = GetTestFilePath();
             ZipFile.ExtractToDirectory(compat("InvalidWindowsFileNameChars.zip"), testDirectory);
             CheckExists(testDirectory, "TestText______________________________________.txt");
-            CheckExists(testDirectory, "Test______________________________________/TestText1______________________________________.txt");
+            CheckExists(
+                testDirectory,
+                "Test______________________________________/TestText1______________________________________.txt"
+            );
             CheckExists(testDirectory, "Test/normalText.txt");
 
             ZipFile.ExtractToDirectory(compat("NullCharFileName_FromWindows.zip"), testDirectory);
@@ -139,7 +152,7 @@ namespace System.IO.Compression.Tests
         [Theory]
         [InlineData("backslashes_FromUnix", "dd")]
         [InlineData("backslashes_FromWindows", "dd")]
-        [PlatformSpecific(TestPlatforms.Windows)]  // Checks Windows-specific invalid file path
+        [PlatformSpecific(TestPlatforms.Windows)] // Checks Windows-specific invalid file path
         public void Windows_ZipWithOSSpecificFileNames(string zipName, string fileName)
         {
             string tempDir = GetTestFilePath();
@@ -158,8 +171,15 @@ namespace System.IO.Compression.Tests
             using (var tempFolder = new TempDirectory(GetTestFilePath()))
             {
                 ZipFile.ExtractToDirectory(zipFileName, tempFolder.Path, overwriteFiles: false);
-                Assert.Throws<IOException>(() => ZipFile.ExtractToDirectory(zipFileName, tempFolder.Path /* default false */));
-                Assert.Throws<IOException>(() => ZipFile.ExtractToDirectory(zipFileName, tempFolder.Path, overwriteFiles: false));
+                Assert.Throws<IOException>(() =>
+                    ZipFile.ExtractToDirectory(
+                        zipFileName,
+                        tempFolder.Path /* default false */
+                    )
+                );
+                Assert.Throws<IOException>(() =>
+                    ZipFile.ExtractToDirectory(zipFileName, tempFolder.Path, overwriteFiles: false)
+                );
                 ZipFile.ExtractToDirectory(zipFileName, tempFolder.Path, overwriteFiles: true);
 
                 DirsEqual(tempFolder.Path, folderName);
@@ -174,10 +194,33 @@ namespace System.IO.Compression.Tests
 
             using (var tempFolder = new TempDirectory(GetTestFilePath()))
             {
-                ZipFile.ExtractToDirectory(zipFileName, tempFolder.Path, Encoding.UTF8, overwriteFiles: false);
-                Assert.Throws<IOException>(() => ZipFile.ExtractToDirectory(zipFileName, tempFolder.Path, Encoding.UTF8 /* default false */));
-                Assert.Throws<IOException>(() => ZipFile.ExtractToDirectory(zipFileName, tempFolder.Path, Encoding.UTF8, overwriteFiles: false));
-                ZipFile.ExtractToDirectory(zipFileName, tempFolder.Path, Encoding.UTF8, overwriteFiles: true);
+                ZipFile.ExtractToDirectory(
+                    zipFileName,
+                    tempFolder.Path,
+                    Encoding.UTF8,
+                    overwriteFiles: false
+                );
+                Assert.Throws<IOException>(() =>
+                    ZipFile.ExtractToDirectory(
+                        zipFileName,
+                        tempFolder.Path,
+                        Encoding.UTF8 /* default false */
+                    )
+                );
+                Assert.Throws<IOException>(() =>
+                    ZipFile.ExtractToDirectory(
+                        zipFileName,
+                        tempFolder.Path,
+                        Encoding.UTF8,
+                        overwriteFiles: false
+                    )
+                );
+                ZipFile.ExtractToDirectory(
+                    zipFileName,
+                    tempFolder.Path,
+                    Encoding.UTF8,
+                    overwriteFiles: true
+                );
 
                 DirsEqual(tempFolder.Path, folderName);
             }
@@ -188,11 +231,19 @@ namespace System.IO.Compression.Tests
         {
             string archivePath = GetTestFilePath();
             using (ZipArchive archive = ZipFile.Open(archivePath, ZipArchiveMode.Create))
-            using (StreamWriter writer = new StreamWriter(archive.CreateEntry(Path.Combine("..", "entry1"), CompressionLevel.Optimal).Open()))
+            using (
+                StreamWriter writer = new StreamWriter(
+                    archive
+                        .CreateEntry(Path.Combine("..", "entry1"), CompressionLevel.Optimal)
+                        .Open()
+                )
+            )
             {
                 writer.Write("This is a test.");
             }
-            Assert.Throws<IOException>(() => ZipFile.ExtractToDirectory(archivePath, GetTestFilePath()));
+            Assert.Throws<IOException>(() =>
+                ZipFile.ExtractToDirectory(archivePath, GetTestFilePath())
+            );
         }
 
         [Fact]
@@ -200,11 +251,22 @@ namespace System.IO.Compression.Tests
         {
             string archivePath = GetTestFilePath();
             using (ZipArchive archive = ZipFile.Open(archivePath, ZipArchiveMode.Create))
-            using (StreamWriter writer = new StreamWriter(archive.CreateEntry("testdir" + Path.DirectorySeparatorChar, CompressionLevel.Optimal).Open()))
+            using (
+                StreamWriter writer = new StreamWriter(
+                    archive
+                        .CreateEntry(
+                            "testdir" + Path.DirectorySeparatorChar,
+                            CompressionLevel.Optimal
+                        )
+                        .Open()
+                )
+            )
             {
                 writer.Write("This is a test.");
             }
-            Assert.Throws<IOException>(() => ZipFile.ExtractToDirectory(archivePath, GetTestFilePath()));
+            Assert.Throws<IOException>(() =>
+                ZipFile.ExtractToDirectory(archivePath, GetTestFilePath())
+            );
         }
     }
 }

@@ -47,16 +47,20 @@ namespace System.IO.Pipelines
         /// > [!IMPORTANT]
         /// > `OnReaderCompleted` may not be invoked on all implementations of <xref:System.IO.Pipelines.PipeWriter>. This method will be removed in a future release.
         /// ]]></format></remarks>
-        [Obsolete("OnReaderCompleted has been deprecated and may not be invoked on all implementations of PipeWriter.")]
-        public virtual void OnReaderCompleted(Action<Exception?, object?> callback, object? state)
-        {
-
-        }
+        [Obsolete(
+            "OnReaderCompleted has been deprecated and may not be invoked on all implementations of PipeWriter."
+        )]
+        public virtual void OnReaderCompleted(
+            Action<Exception?, object?> callback,
+            object? state
+        ) { }
 
         /// <summary>Makes bytes written available to <see cref="System.IO.Pipelines.PipeReader" /> and runs <see cref="System.IO.Pipelines.PipeReader.ReadAsync(System.Threading.CancellationToken)" /> continuation.</summary>
         /// <param name="cancellationToken">The token to monitor for cancellation requests. The default value is <see cref="System.Threading.CancellationToken.None" />.</param>
         /// <returns>A task that represents and wraps the asynchronous flush operation.</returns>
-        public abstract ValueTask<FlushResult> FlushAsync(CancellationToken cancellationToken = default);
+        public abstract ValueTask<FlushResult> FlushAsync(
+            CancellationToken cancellationToken = default
+        );
 
         /// <summary>Notifies the <see cref="System.IO.Pipelines.PipeWriter" /> that <paramref name="bytes" /> bytes were written to the output <see cref="System.Span{T}" /> or <see cref="System.Memory{T}" />. You must request a new buffer after calling <see cref="System.IO.Pipelines.PipeWriter.Advance(int)" /> to continue writing more data; you cannot write to a previously acquired buffer.</summary>
         /// <param name="bytes">The number of bytes written to the <see cref="System.Span{T}" /> or <see cref="System.Memory{T}" />.</param>
@@ -101,7 +105,10 @@ namespace System.IO.Pipelines
         /// <param name="stream">The stream that the pipe writer will wrap.</param>
         /// <param name="writerOptions">The options to configure the pipe writer.</param>
         /// <returns>A <see cref="System.IO.Pipelines.PipeWriter" /> that wraps the <see cref="System.IO.Stream" />.</returns>
-        public static PipeWriter Create(Stream stream, StreamPipeWriterOptions? writerOptions = null)
+        public static PipeWriter Create(
+            Stream stream,
+            StreamPipeWriterOptions? writerOptions = null
+        )
         {
             return new StreamPipeWriter(stream, writerOptions ?? StreamPipeWriterOptions.s_default);
         }
@@ -110,7 +117,10 @@ namespace System.IO.Pipelines
         /// <param name="source">The read-only byte memory region to write.</param>
         /// <param name="cancellationToken">The token to monitor for cancellation requests. The default value is <see cref="System.Threading.CancellationToken.None" />.</param>
         /// <returns>A task that represents the asynchronous write operation, and wraps the flush asynchronous operation.</returns>
-        public virtual ValueTask<FlushResult> WriteAsync(ReadOnlyMemory<byte> source, CancellationToken cancellationToken = default)
+        public virtual ValueTask<FlushResult> WriteAsync(
+            ReadOnlyMemory<byte> source,
+            CancellationToken cancellationToken = default
+        )
         {
             this.Write(source.Span);
             return FlushAsync(cancellationToken);
@@ -120,7 +130,10 @@ namespace System.IO.Pipelines
         /// <param name="source">The stream from which the contents will be copied.</param>
         /// <param name="cancellationToken">The token to monitor for cancellation requests. The default value is <see cref="System.Threading.CancellationToken.None" />.</param>
         /// <returns>A task that represents the asynchronous copy operation.</returns>
-        protected internal virtual async Task CopyFromAsync(Stream source, CancellationToken cancellationToken = default)
+        protected internal virtual async Task CopyFromAsync(
+            Stream source,
+            CancellationToken cancellationToken = default
+        )
         {
             while (true)
             {
@@ -152,6 +165,7 @@ namespace System.IO.Pipelines
         /// When overridden in a derived class, gets the count of unflushed bytes within the current writer.
         /// </summary>
         /// <exception cref="System.NotImplementedException">The <see cref="System.IO.Pipelines.PipeWriter"/> does not support getting the unflushed byte count.</exception>
-        public virtual long UnflushedBytes => throw ThrowHelper.CreateNotSupportedException_UnflushedBytes();
+        public virtual long UnflushedBytes =>
+            throw ThrowHelper.CreateNotSupportedException_UnflushedBytes();
     }
 }

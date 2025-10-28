@@ -13,11 +13,11 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler.SpellCheck
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public DocumentSpellCheckHandlerFactory()
-        {
-        }
+        public DocumentSpellCheckHandlerFactory() { }
 
-        public ILspService CreateILspService(LspServices lspServices, WellKnownLspServerKinds serverKind)
-            => new DocumentSpellCheckHandler();
+        public ILspService CreateILspService(
+            LspServices lspServices,
+            WellKnownLspServerKinds serverKind
+        ) => new DocumentSpellCheckHandler();
     }
 }

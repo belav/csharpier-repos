@@ -15,10 +15,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -35,63 +35,65 @@ using System.Xml.XPath;
 namespace Mono.Xml.XPath
 {
 #if OUTSIDE_SYSTEM_XML
-	public
+    public
 #else
-	internal
+    internal
 #endif
-		class DTMXPathDocument : IXPathNavigable
-	{
+    class DTMXPathDocument : IXPathNavigable
+    {
+        #region ctor.
 
-#region ctor.
+        public DTMXPathDocument(
+            XmlNameTable nameTable,
+            DTMXPathLinkedNode[] nodes,
+            DTMXPathAttributeNode[] attributes,
+            DTMXPathNamespaceNode[] namespaces,
+            Hashtable idTable
+        )
+        {
+            this.nameTable = nameTable;
+            this.nodes = nodes;
+            this.attributes = attributes;
+            this.namespaces = namespaces;
+            this.idTable = idTable;
+        }
 
-		public DTMXPathDocument (XmlNameTable nameTable,
-			DTMXPathLinkedNode [] nodes,
-			DTMXPathAttributeNode [] attributes,
-			DTMXPathNamespaceNode [] namespaces,
-			Hashtable idTable)
-		{
-			this.nameTable = nameTable;
-			this.nodes = nodes;
-			this.attributes = attributes;
-			this.namespaces = namespaces;
-			this.idTable = idTable;
-		}
-
-#endregion
+        #endregion
 
 
-#region Methods
-		public XPathNavigator CreateNavigator ()
-		{
-			if (root == null) {
-				root = new DTMXPathNavigator (this,
-					nameTable,
-					nodes,
-					attributes,
-					namespaces,
-					idTable);
-			}
-			return root.Clone ();
-		}
+        #region Methods
+        public XPathNavigator CreateNavigator()
+        {
+            if (root == null)
+            {
+                root = new DTMXPathNavigator(
+                    this,
+                    nameTable,
+                    nodes,
+                    attributes,
+                    namespaces,
+                    idTable
+                );
+            }
+            return root.Clone();
+        }
 
-#endregion
+        #endregion
 
-		XmlNameTable nameTable;
+        XmlNameTable nameTable;
 
-		// Root XPathNavigator.
-		DTMXPathNavigator root;
+        // Root XPathNavigator.
+        DTMXPathNavigator root;
 
-#region Immutable tree fields
+        #region Immutable tree fields
 
-		DTMXPathLinkedNode [] nodes = new DTMXPathLinkedNode [0];
-		DTMXPathAttributeNode [] attributes = new DTMXPathAttributeNode [0];
-		DTMXPathNamespaceNode [] namespaces = new DTMXPathNamespaceNode [0];
+        DTMXPathLinkedNode[] nodes = new DTMXPathLinkedNode[0];
+        DTMXPathAttributeNode[] attributes = new DTMXPathAttributeNode[0];
+        DTMXPathNamespaceNode[] namespaces = new DTMXPathNamespaceNode[0];
 
-		// idTable [string value] -> int nodeId
-		readonly Hashtable idTable;
+        // idTable [string value] -> int nodeId
+        readonly Hashtable idTable;
 
-#endregion
-
-	}
+        #endregion
+    }
 }
-

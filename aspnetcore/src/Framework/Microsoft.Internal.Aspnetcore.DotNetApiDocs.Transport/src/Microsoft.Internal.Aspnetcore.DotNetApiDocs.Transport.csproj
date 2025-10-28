@@ -26,7 +26,7 @@
 
   <Import Project="Sdk.targets" Sdk="Microsoft.NET.Sdk" />
 
-  <Target Name="_RemoveUnwantedAspNetFrameworkReference" BeforeTargets="ResolveFrameworkReferences" >
+  <Target Name="_RemoveUnwantedAspNetFrameworkReference" BeforeTargets="ResolveFrameworkReferences">
     <ItemGroup>
       <FrameworkReference Remove="Microsoft.AspNetCore.App" />
     </ItemGroup>
@@ -53,22 +53,32 @@
   <Target Name="Publish" />
 
   <!-- This target finds the reference assemblies & .xml files. -->
-  <Target Name="_ResolveApiDocsTransportContent"
-          Returns="@(_ApiDocsContent)"
-          DependsOnTargets="ResolveReferences;FindReferenceAssembliesForReferences">
+  <Target
+    Name="_ResolveApiDocsTransportContent"
+    Returns="@(_ApiDocsContent)"
+    DependsOnTargets="ResolveReferences;FindReferenceAssembliesForReferences"
+  >
     <ItemGroup>
       <FullAspNetCoreReferenceAssemblyPath
         Include="@(ReferencePathWithRefAssemblies)"
         Exclude="
-          @(ReferencePathWithRefAssemblies->WithMetadataValue('ExternallyResolved', 'true'))"/>
+          @(ReferencePathWithRefAssemblies->WithMetadataValue('ExternallyResolved', 'true'))"
+      />
 
-      <FullAspNetCoreReferenceDocXml Include="@(_ResolvedProjectReferencePaths->'%(RootDir)%(Directory)%(FileName).xml')"
-          Condition="Exists('%(RootDir)%(Directory)%(FileName).xml')" />
+      <FullAspNetCoreReferenceDocXml
+        Include="@(_ResolvedProjectReferencePaths->'%(RootDir)%(Directory)%(FileName).xml')"
+        Condition="Exists('%(RootDir)%(Directory)%(FileName).xml')"
+      />
 
-      <_ApiDocsContent Include="@(FullAspNetCoreReferenceAssemblyPath)" PackagePath="$(RefAssemblyPackagePath)" />
-      <_ApiDocsContent Include="@(FullAspNetCoreReferenceDocXml)" PackagePath="$(RefAssemblyPackagePath)" />
+      <_ApiDocsContent
+        Include="@(FullAspNetCoreReferenceAssemblyPath)"
+        PackagePath="$(RefAssemblyPackagePath)"
+      />
+      <_ApiDocsContent
+        Include="@(FullAspNetCoreReferenceDocXml)"
+        PackagePath="$(RefAssemblyPackagePath)"
+      />
       <_PackageFiles Include="@(_ApiDocsContent)" />
     </ItemGroup>
   </Target>
-
 </Project>

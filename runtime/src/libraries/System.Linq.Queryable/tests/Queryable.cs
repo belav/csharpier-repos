@@ -28,16 +28,23 @@ namespace System.Linq.Tests
         [Fact]
         public void NullAsQueryableT()
         {
-            AssertExtensions.Throws<ArgumentNullException>("source", () => ((IEnumerable<int>)null).AsQueryable());
+            AssertExtensions.Throws<ArgumentNullException>(
+                "source",
+                () => ((IEnumerable<int>)null).AsQueryable()
+            );
         }
 
         [Fact]
         public void NullAsQueryable()
         {
-            AssertExtensions.Throws<ArgumentNullException>("source", () => ((IEnumerable)null).AsQueryable());
+            AssertExtensions.Throws<ArgumentNullException>(
+                "source",
+                () => ((IEnumerable)null).AsQueryable()
+            );
         }
 
-        private class NonGenericEnumerableSoWeDontNeedADependencyOnTheAssemblyWithNonGeneric : IEnumerable
+        private class NonGenericEnumerableSoWeDontNeedADependencyOnTheAssemblyWithNonGeneric
+            : IEnumerable
         {
             public IEnumerator GetEnumerator()
             {
@@ -48,7 +55,11 @@ namespace System.Linq.Tests
         [Fact]
         public void NonGenericToQueryable()
         {
-            AssertExtensions.Throws<ArgumentException>(null, () => new NonGenericEnumerableSoWeDontNeedADependencyOnTheAssemblyWithNonGeneric().AsQueryable());
+            AssertExtensions.Throws<ArgumentException>(
+                null,
+                () =>
+                    new NonGenericEnumerableSoWeDontNeedADependencyOnTheAssemblyWithNonGeneric().AsQueryable()
+            );
         }
 
         [Fact]
@@ -68,12 +79,17 @@ namespace System.Linq.Tests
         [Fact]
         public static void QueryableOfQueryable()
         {
-            IQueryable<int> queryable1 = new [] { 1, 2, 3 }.AsQueryable();
+            IQueryable<int> queryable1 = new[] { 1, 2, 3 }.AsQueryable();
             IQueryable<int>[] queryableArray1 = { queryable1, queryable1 };
             IQueryable<IQueryable<int>> queryable2 = queryableArray1.AsQueryable();
             ParameterExpression expression1 = Expression.Parameter(typeof(IQueryable<int>), "i");
             ParameterExpression[] expressionArray1 = { expression1 };
-            IQueryable<IQueryable<int>> queryable3 = queryable2.Select(Expression.Lambda<Func<IQueryable<int>, IQueryable<int>>>(expression1, expressionArray1));
+            IQueryable<IQueryable<int>> queryable3 = queryable2.Select(
+                Expression.Lambda<Func<IQueryable<int>, IQueryable<int>>>(
+                    expression1,
+                    expressionArray1
+                )
+            );
             int i = queryable3.Count();
             Assert.Equal(2, i);
         }
@@ -86,46 +102,64 @@ namespace System.Linq.Tests
             MethodInfo enumerableNotInQueryable = GetMissingExtensionMethod(
                 typeof(Enumerable),
                 typeof(Queryable),
-                 new [] {
-                     nameof(Enumerable.ToLookup),
-                     nameof(Enumerable.ToDictionary),
-                     nameof(Enumerable.ToArray),
-                     nameof(Enumerable.AsEnumerable),
-                     nameof(Enumerable.ToList),
-                     nameof(Enumerable.Append),
-                     nameof(Enumerable.Prepend),
-                     nameof(Enumerable.ToHashSet),
-                     nameof(Enumerable.TryGetNonEnumeratedCount),
-                     "Fold",
-                     "LeftJoin",
-                 }
-                );
+                new[]
+                {
+                    nameof(Enumerable.ToLookup),
+                    nameof(Enumerable.ToDictionary),
+                    nameof(Enumerable.ToArray),
+                    nameof(Enumerable.AsEnumerable),
+                    nameof(Enumerable.ToList),
+                    nameof(Enumerable.Append),
+                    nameof(Enumerable.Prepend),
+                    nameof(Enumerable.ToHashSet),
+                    nameof(Enumerable.TryGetNonEnumeratedCount),
+                    "Fold",
+                    "LeftJoin",
+                }
+            );
 
-            Assert.True(enumerableNotInQueryable == null, string.Format("Enumerable method {0} not defined by Queryable", enumerableNotInQueryable));
+            Assert.True(
+                enumerableNotInQueryable == null,
+                string.Format(
+                    "Enumerable method {0} not defined by Queryable",
+                    enumerableNotInQueryable
+                )
+            );
 
             MethodInfo queryableNotInEnumerable = GetMissingExtensionMethod(
                 typeof(Queryable),
                 typeof(Enumerable),
-                 new [] {
-                     nameof(Queryable.AsQueryable)
-                 }
-                );
+                new[] { nameof(Queryable.AsQueryable) }
+            );
 
-            Assert.True(queryableNotInEnumerable == null, string.Format("Queryable method {0} not defined by Enumerable", queryableNotInEnumerable));
+            Assert.True(
+                queryableNotInEnumerable == null,
+                string.Format(
+                    "Queryable method {0} not defined by Enumerable",
+                    queryableNotInEnumerable
+                )
+            );
         }
 
-        private static MethodInfo GetMissingExtensionMethod(Type a, Type b, IEnumerable<string> excludedMethods)
+        private static MethodInfo GetMissingExtensionMethod(
+            Type a,
+            Type b,
+            IEnumerable<string> excludedMethods
+        )
         {
             var dex = new HashSet<string>(excludedMethods);
 
-            var aMethods =
-                a.GetMethods(BindingFlags.Static | BindingFlags.Public)
-                .Where(m => m.CustomAttributes.Any(c => c.AttributeType == typeof(ExtensionAttribute)))
+            var aMethods = a.GetMethods(BindingFlags.Static | BindingFlags.Public)
+                .Where(m =>
+                    m.CustomAttributes.Any(c => c.AttributeType == typeof(ExtensionAttribute))
+                )
                 .ToLookup(m => m.Name);
 
             MethodComparer mc = new MethodComparer();
             var bMethods = b.GetMethods(BindingFlags.Static | BindingFlags.Public)
-                .Where(m => m.CustomAttributes.Any(c => c.AttributeType == typeof(ExtensionAttribute)))
+                .Where(m =>
+                    m.CustomAttributes.Any(c => c.AttributeType == typeof(ExtensionAttribute))
+                )
                 .ToLookup(m => m, mc);
 
             foreach (var group in aMethods.Where(g => !dex.Contains(g.Key)))

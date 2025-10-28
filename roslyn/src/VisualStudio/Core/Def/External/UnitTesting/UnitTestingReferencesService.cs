@@ -18,31 +18,51 @@ namespace Microsoft.CodeAnalysis.UnitTesting.ExternalAccess
 {
     internal class UnitTestingReferencesService
     {
-        private static readonly IEnumerable<(string MethodFullyQualifedName, string MethodFilePath, string MethodOutputFilePath)> Empty =
-            Enumerable.Empty<(string MethodFullyQualifedName, string MethodFilePath, string MethodOutputFilePath)>();
+        private static readonly IEnumerable<(
+            string MethodFullyQualifedName,
+            string MethodFilePath,
+            string MethodOutputFilePath
+        )> Empty = Enumerable.Empty<(
+            string MethodFullyQualifedName,
+            string MethodFilePath,
+            string MethodOutputFilePath
+        )>();
 
-        internal static async Task<IEnumerable<(string MethodFullyQualifedName, string MethodFilePath, string MethodOutputFilePath)>> GetCallerMethodsAsync(
+        internal static async Task<
+            IEnumerable<(
+                string MethodFullyQualifedName,
+                string MethodFilePath,
+                string MethodOutputFilePath
+            )>
+        > GetCallerMethodsAsync(
             IAsyncCodeLensDataPointProvider provider,
             ICodeLensCallbackService callbackService,
             CodeLensDescriptor descriptor,
             CodeLensDescriptorContext descriptorContext,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
-            var callerMethods = await callbackService.InvokeAsync<ImmutableArray<ReferenceMethodDescriptor>?>(
-                provider,
-                nameof(ICodeLensContext.FindReferenceMethodsAsync),
-                new object[] { descriptor, descriptorContext },
-                cancellationToken).ConfigureAwait(false);
+            var callerMethods = await callbackService
+                .InvokeAsync<ImmutableArray<ReferenceMethodDescriptor>?>(
+                    provider,
+                    nameof(ICodeLensContext.FindReferenceMethodsAsync),
+                    new object[] { descriptor, descriptorContext },
+                    cancellationToken
+                )
+                .ConfigureAwait(false);
 
             if (!callerMethods.HasValue || callerMethods.Value.IsEmpty)
             {
                 return Empty;
             }
 
-            return callerMethods.Value.SelectAsArray(m => (
-                MethodFullyQualifiedName: m.FullName,
-                MethodFilePath: m.FilePath,
-                MethodOutputFilePath: m.OutputFilePath));
+            return callerMethods.Value.SelectAsArray(m =>
+                (
+                    MethodFullyQualifiedName: m.FullName,
+                    MethodFilePath: m.FilePath,
+                    MethodOutputFilePath: m.OutputFilePath
+                )
+            );
         }
     }
 }

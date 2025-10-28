@@ -48,7 +48,9 @@ namespace System.ServiceModel.Description
             {
                 if (!WebMessageBodyStyleHelper.IsDefined(value))
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentOutOfRangeException("value"));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new ArgumentOutOfRangeException("value")
+                    );
                 }
                 this.defaultBodyStyle = value;
             }
@@ -56,15 +58,14 @@ namespace System.ServiceModel.Description
 
         public virtual WebMessageFormat DefaultOutgoingRequestFormat
         {
-            get
-            {
-                return this.defaultOutgoingRequestFormat;
-            }
+            get { return this.defaultOutgoingRequestFormat; }
             set
             {
                 if (!WebMessageFormatHelper.IsDefined(value))
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentOutOfRangeException("value"));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new ArgumentOutOfRangeException("value")
+                    );
                 }
                 this.defaultOutgoingRequestFormat = value;
             }
@@ -72,15 +73,14 @@ namespace System.ServiceModel.Description
 
         public virtual WebMessageFormat DefaultOutgoingResponseFormat
         {
-            get
-            {
-                return this.defaultOutgoingReplyFormat;
-            }
+            get { return this.defaultOutgoingReplyFormat; }
             set
             {
                 if (!WebMessageFormatHelper.IsDefined(value))
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentOutOfRangeException("value"));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new ArgumentOutOfRangeException("value")
+                    );
                 }
                 this.defaultOutgoingReplyFormat = value;
             }
@@ -96,12 +96,18 @@ namespace System.ServiceModel.Description
 
         protected internal string JavascriptCallbackParameterName { get; set; }
 
-        public virtual void AddBindingParameters(ServiceEndpoint endpoint, BindingParameterCollection bindingParameters)
+        public virtual void AddBindingParameters(
+            ServiceEndpoint endpoint,
+            BindingParameterCollection bindingParameters
+        )
         {
             // do nothing
         }
 
-        public virtual void ApplyClientBehavior(ServiceEndpoint endpoint, ClientRuntime clientRuntime)
+        public virtual void ApplyClientBehavior(
+            ServiceEndpoint endpoint,
+            ClientRuntime clientRuntime
+        )
         {
             if (endpoint == null)
             {
@@ -111,13 +117,23 @@ namespace System.ServiceModel.Description
             {
                 throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("clientRuntime");
             }
-            WebMessageEncodingBindingElement webEncodingBindingElement = endpoint.Binding.CreateBindingElements().Find<WebMessageEncodingBindingElement>();
-            if (webEncodingBindingElement != null && webEncodingBindingElement.CrossDomainScriptAccessEnabled)
+            WebMessageEncodingBindingElement webEncodingBindingElement = endpoint
+                .Binding.CreateBindingElements()
+                .Find<WebMessageEncodingBindingElement>();
+            if (
+                webEncodingBindingElement != null
+                && webEncodingBindingElement.CrossDomainScriptAccessEnabled
+            )
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new NotSupportedException(SR2.CrossDomainJavascriptNotsupported));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new NotSupportedException(SR2.CrossDomainJavascriptNotsupported)
+                );
             }
 #pragma warning disable 56506 // Microsoft, endpoint.Contract is never null
-            this.reflector = new XmlSerializerOperationBehavior.Reflector(endpoint.Contract.Namespace, null);
+            this.reflector = new XmlSerializerOperationBehavior.Reflector(
+                endpoint.Contract.Namespace,
+                null
+            );
             foreach (OperationDescription od in endpoint.Contract.Operations)
 #pragma warning restore 56506
             {
@@ -130,13 +146,17 @@ namespace System.ServiceModel.Description
                     IClientMessageFormatter replyClient = GetReplyClientFormatter(od, endpoint);
                     cop.Formatter = new CompositeClientFormatter(requestClient, replyClient);
                     cop.SerializeRequest = true;
-                    cop.DeserializeReply = od.Messages.Count > 1 && !IsUntypedMessage(od.Messages[1]);
+                    cop.DeserializeReply =
+                        od.Messages.Count > 1 && !IsUntypedMessage(od.Messages[1]);
                 }
             }
             AddClientErrorInspector(endpoint, clientRuntime);
         }
 
-        public virtual void ApplyDispatchBehavior(ServiceEndpoint endpoint, EndpointDispatcher endpointDispatcher)
+        public virtual void ApplyDispatchBehavior(
+            ServiceEndpoint endpoint,
+            EndpointDispatcher endpointDispatcher
+        )
         {
             if (endpoint == null)
             {
@@ -144,41 +164,70 @@ namespace System.ServiceModel.Description
             }
             if (endpointDispatcher == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("endpointDispatcher");
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
+                    "endpointDispatcher"
+                );
             }
-            WebMessageEncodingBindingElement webEncodingBindingElement = endpoint.Binding.CreateBindingElements().Find<WebMessageEncodingBindingElement>();
-            if (webEncodingBindingElement != null && webEncodingBindingElement.CrossDomainScriptAccessEnabled)
+            WebMessageEncodingBindingElement webEncodingBindingElement = endpoint
+                .Binding.CreateBindingElements()
+                .Find<WebMessageEncodingBindingElement>();
+            if (
+                webEncodingBindingElement != null
+                && webEncodingBindingElement.CrossDomainScriptAccessEnabled
+            )
             {
-                ISecurityCapabilities securityCapabilities = endpoint.Binding.GetProperty<ISecurityCapabilities>(new BindingParameterCollection());
+                ISecurityCapabilities securityCapabilities =
+                    endpoint.Binding.GetProperty<ISecurityCapabilities>(
+                        new BindingParameterCollection()
+                    );
                 if (securityCapabilities.SupportsClientAuthentication)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new NotSupportedException(SR2.CrossDomainJavascriptAuthNotSupported));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new NotSupportedException(SR2.CrossDomainJavascriptAuthNotSupported)
+                    );
                 }
-                if (endpoint.Contract.Behaviors.Contains(typeof(JavascriptCallbackBehaviorAttribute)))
+                if (
+                    endpoint.Contract.Behaviors.Contains(
+                        typeof(JavascriptCallbackBehaviorAttribute)
+                    )
+                )
                 {
-                    JavascriptCallbackBehaviorAttribute behavior = endpoint.Contract.Behaviors[typeof(JavascriptCallbackBehaviorAttribute)] as JavascriptCallbackBehaviorAttribute;
+                    JavascriptCallbackBehaviorAttribute behavior =
+                        endpoint.Contract.Behaviors[typeof(JavascriptCallbackBehaviorAttribute)]
+                        as JavascriptCallbackBehaviorAttribute;
                     this.JavascriptCallbackParameterName = behavior.UrlParameterName;
                 }
                 else
                 {
                     this.JavascriptCallbackParameterName = defaultCallbackParameterName;
                 }
-                endpointDispatcher.DispatchRuntime.MessageInspectors.Add(new JavascriptCallbackMessageInspector(this.JavascriptCallbackParameterName));
+                endpointDispatcher.DispatchRuntime.MessageInspectors.Add(
+                    new JavascriptCallbackMessageInspector(this.JavascriptCallbackParameterName)
+                );
             }
             if (this.HelpEnabled)
             {
-                this.HelpUri = new UriTemplate(HelpPage.OperationListHelpPageUriTemplate).BindByPosition(endpoint.ListenUri);
+                this.HelpUri = new UriTemplate(
+                    HelpPage.OperationListHelpPageUriTemplate
+                ).BindByPosition(endpoint.ListenUri);
             }
 #pragma warning disable 56506 // Microsoft, endpoint.Contract is never null
-            this.reflector = new XmlSerializerOperationBehavior.Reflector(endpoint.Contract.Namespace, null);
+            this.reflector = new XmlSerializerOperationBehavior.Reflector(
+                endpoint.Contract.Namespace,
+                null
+            );
 #pragma warning restore 56506
 
             // endpoint filter
-            endpointDispatcher.AddressFilter = new PrefixEndpointAddressMessageFilter(endpoint.Address);
+            endpointDispatcher.AddressFilter = new PrefixEndpointAddressMessageFilter(
+                endpoint.Address
+            );
             endpointDispatcher.ContractFilter = new MatchAllMessageFilter();
             // operation selector
 #pragma warning disable 56506 // Microsoft, endpointDispatcher.DispatchRuntime is never null
-            endpointDispatcher.DispatchRuntime.OperationSelector = this.GetOperationSelector(endpoint);
+            endpointDispatcher.DispatchRuntime.OperationSelector = this.GetOperationSelector(
+                endpoint
+            );
 #pragma warning restore 56506
             // unhandled operation
             string actionStarOperationName = null;
@@ -186,8 +235,10 @@ namespace System.ServiceModel.Description
             foreach (OperationDescription od in endpoint.Contract.Operations)
 #pragma warning restore 56506
             {
-                if (od.Messages[0].Direction == MessageDirection.Input
-                    && od.Messages[0].Action == WildcardAction)
+                if (
+                    od.Messages[0].Direction == MessageDirection.Input
+                    && od.Messages[0].Action == WildcardAction
+                )
                 {
                     actionStarOperationName = od.Name;
                     break;
@@ -199,7 +250,8 @@ namespace System.ServiceModel.Description
                 // doesn't want this, so we 'move' that operation back into normal set of operations
 #pragma warning disable 56506 // Microsoft, endpointDispatcher.DispatchRuntime.{Operations,UnhandledDispatchOperation} is never null
                 endpointDispatcher.DispatchRuntime.Operations.Add(
-                    endpointDispatcher.DispatchRuntime.UnhandledDispatchOperation);
+                    endpointDispatcher.DispatchRuntime.UnhandledDispatchOperation
+                );
 #pragma warning restore 56506
             }
 
@@ -207,33 +259,53 @@ namespace System.ServiceModel.Description
             string xmlContentType = null;
             string jsonContentType = null;
 
- 
             if (webEncodingBindingElement != null)
             {
-                XmlFormatMapping xmlFormatMapping = new XmlFormatMapping(webEncodingBindingElement.WriteEncoding, webEncodingBindingElement.ContentTypeMapper);
-                JsonFormatMapping jsonFormatMapping = new JsonFormatMapping(webEncodingBindingElement.WriteEncoding, webEncodingBindingElement.ContentTypeMapper);
- 
+                XmlFormatMapping xmlFormatMapping = new XmlFormatMapping(
+                    webEncodingBindingElement.WriteEncoding,
+                    webEncodingBindingElement.ContentTypeMapper
+                );
+                JsonFormatMapping jsonFormatMapping = new JsonFormatMapping(
+                    webEncodingBindingElement.WriteEncoding,
+                    webEncodingBindingElement.ContentTypeMapper
+                );
+
                 xmlContentType = xmlFormatMapping.DefaultContentType.ToString();
                 jsonContentType = jsonFormatMapping.DefaultContentType.ToString();
- 
+
                 if (AutomaticFormatSelectionEnabled)
                 {
-                    formatSelectingMessageInspector = new FormatSelectingMessageInspector(this, new List<MultiplexingFormatMapping> { xmlFormatMapping, jsonFormatMapping });
-                    endpointDispatcher.DispatchRuntime.MessageInspectors.Add(formatSelectingMessageInspector);
+                    formatSelectingMessageInspector = new FormatSelectingMessageInspector(
+                        this,
+                        new List<MultiplexingFormatMapping> { xmlFormatMapping, jsonFormatMapping }
+                    );
+                    endpointDispatcher.DispatchRuntime.MessageInspectors.Add(
+                        formatSelectingMessageInspector
+                    );
                 }
             }
             else
             {
-                xmlContentType = TextMessageEncoderFactory.GetContentType(XmlFormatMapping.defaultMediaType, TextEncoderDefaults.Encoding);
+                xmlContentType = TextMessageEncoderFactory.GetContentType(
+                    XmlFormatMapping.defaultMediaType,
+                    TextEncoderDefaults.Encoding
+                );
                 jsonContentType = JsonMessageEncoderFactory.GetContentType(null);
             }
 
 #pragma warning disable 56506 // Microsoft, endpointDispatcher.DispatchRuntime.UnhandledDispatchOperation is never null
             // always install UnhandledDispatchOperation (WebHttpDispatchOperationSelector may choose not to use it)
-            endpointDispatcher.DispatchRuntime.UnhandledDispatchOperation = new DispatchOperation(endpointDispatcher.DispatchRuntime, "*", WildcardAction, WildcardAction);
-            endpointDispatcher.DispatchRuntime.UnhandledDispatchOperation.DeserializeRequest = false;
+            endpointDispatcher.DispatchRuntime.UnhandledDispatchOperation = new DispatchOperation(
+                endpointDispatcher.DispatchRuntime,
+                "*",
+                WildcardAction,
+                WildcardAction
+            );
+            endpointDispatcher.DispatchRuntime.UnhandledDispatchOperation.DeserializeRequest =
+                false;
             endpointDispatcher.DispatchRuntime.UnhandledDispatchOperation.SerializeReply = false;
-            endpointDispatcher.DispatchRuntime.UnhandledDispatchOperation.Invoker = new HttpUnhandledOperationInvoker { HelpUri = this.HelpUri };
+            endpointDispatcher.DispatchRuntime.UnhandledDispatchOperation.Invoker =
+                new HttpUnhandledOperationInvoker { HelpUri = this.HelpUri };
 #pragma warning restore 56506
             // install formatters and parameter inspectors
             foreach (OperationDescription od in endpoint.Contract.Operations)
@@ -246,17 +318,26 @@ namespace System.ServiceModel.Description
                     dop = endpointDispatcher.DispatchRuntime.Operations[od.Name];
                 }
 #pragma warning disable 56506 // Microsoft, endpointDispatcher.DispatchRuntime.UnhandledDispatchOperation is never null
-                else if (endpointDispatcher.DispatchRuntime.UnhandledDispatchOperation.Name == od.Name)
+                else if (
+                    endpointDispatcher.DispatchRuntime.UnhandledDispatchOperation.Name == od.Name
+                )
                 {
                     dop = endpointDispatcher.DispatchRuntime.UnhandledDispatchOperation;
                 }
 #pragma warning restore 56506
                 if (dop != null)
                 {
-                    IDispatchMessageFormatter requestDispatch = GetRequestDispatchFormatter(od, endpoint);
-                    IDispatchMessageFormatter replyDispatch = GetReplyDispatchFormatter(od, endpoint);
+                    IDispatchMessageFormatter requestDispatch = GetRequestDispatchFormatter(
+                        od,
+                        endpoint
+                    );
+                    IDispatchMessageFormatter replyDispatch = GetReplyDispatchFormatter(
+                        od,
+                        endpoint
+                    );
 
-                    MultiplexingDispatchMessageFormatter replyDispatchAsMultiplexing = replyDispatch as MultiplexingDispatchMessageFormatter;
+                    MultiplexingDispatchMessageFormatter replyDispatchAsMultiplexing =
+                        replyDispatch as MultiplexingDispatchMessageFormatter;
 
                     if (replyDispatchAsMultiplexing != null)
                     {
@@ -264,12 +345,21 @@ namespace System.ServiceModel.Description
                         // some of the formatters in MultiplexingDispatchMessageFormatter might not be present
                         // i.e. the JSON formatter
 
-                        replyDispatchAsMultiplexing.DefaultContentTypes.Add(WebMessageFormat.Xml, xmlContentType);
-                        replyDispatchAsMultiplexing.DefaultContentTypes.Add(WebMessageFormat.Json, jsonContentType);
+                        replyDispatchAsMultiplexing.DefaultContentTypes.Add(
+                            WebMessageFormat.Xml,
+                            xmlContentType
+                        );
+                        replyDispatchAsMultiplexing.DefaultContentTypes.Add(
+                            WebMessageFormat.Json,
+                            jsonContentType
+                        );
 
                         if (formatSelectingMessageInspector != null)
                         {
-                            formatSelectingMessageInspector.RegisterOperation(od.Name, replyDispatchAsMultiplexing);
+                            formatSelectingMessageInspector.RegisterOperation(
+                                od.Name,
+                                replyDispatchAsMultiplexing
+                            );
                         }
                     }
 
@@ -279,15 +369,23 @@ namespace System.ServiceModel.Description
                     dop.SerializeReply = od.Messages.Count > 1 && (replyDispatch != null);
                 }
             }
-            
+
             if (this.HelpEnabled)
             {
                 HelpPage helpPage = new HelpPage(this, endpoint.Contract);
-                DispatchOperation dispatchOperation = new DispatchOperation(endpointDispatcher.DispatchRuntime, HelpOperationInvoker.OperationName, null, null)
+                DispatchOperation dispatchOperation = new DispatchOperation(
+                    endpointDispatcher.DispatchRuntime,
+                    HelpOperationInvoker.OperationName,
+                    null,
+                    null
+                )
                 {
                     DeserializeRequest = false,
                     SerializeReply = false,
-                    Invoker = new HelpOperationInvoker(helpPage, endpointDispatcher.DispatchRuntime.UnhandledDispatchOperation.Invoker),
+                    Invoker = new HelpOperationInvoker(
+                        helpPage,
+                        endpointDispatcher.DispatchRuntime.UnhandledDispatchOperation.Invoker
+                    ),
                 };
                 endpointDispatcher.DispatchRuntime.Operations.Add(dispatchOperation);
             }
@@ -298,8 +396,14 @@ namespace System.ServiceModel.Description
         {
             Dictionary<string, string> result = new Dictionary<string, string>();
             result.Add("DefaultBodyStyle", this.DefaultBodyStyle.ToString());
-            result.Add("DefaultOutgoingRequestFormat", this.DefaultOutgoingRequestFormat.ToString());
-            result.Add("DefaultOutgoingResponseFormat", this.DefaultOutgoingResponseFormat.ToString());
+            result.Add(
+                "DefaultOutgoingRequestFormat",
+                this.DefaultOutgoingRequestFormat.ToString()
+            );
+            result.Add(
+                "DefaultOutgoingResponseFormat",
+                this.DefaultOutgoingResponseFormat.ToString()
+            );
             return result;
         }
 
@@ -346,7 +450,11 @@ namespace System.ServiceModel.Description
             EndpointAddress address = endpoint.Address;
             if (address.Headers.Count > 0)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(SR2.GetString(SR2.WebHttpServiceEndpointCannotHaveMessageHeaders, address)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new InvalidOperationException(
+                        SR2.GetString(SR2.WebHttpServiceEndpointCannotHaveMessageHeaders, address)
+                    )
+                );
             }
         }
 
@@ -431,44 +539,80 @@ namespace System.ServiceModel.Description
             {
                 return false;
             }
-            return (message.Body.ReturnValue != null && message.Body.Parts.Count == 0 && message.Body.ReturnValue.Type == typeof(Message)) ||
-                (message.Body.ReturnValue == null && message.Body.Parts.Count == 1 && message.Body.Parts[0].Type == typeof(Message));
+            return (
+                    message.Body.ReturnValue != null
+                    && message.Body.Parts.Count == 0
+                    && message.Body.ReturnValue.Type == typeof(Message)
+                )
+                || (
+                    message.Body.ReturnValue == null
+                    && message.Body.Parts.Count == 1
+                    && message.Body.Parts[0].Type == typeof(Message)
+                );
         }
 
         internal static MessageDescription MakeDummyMessageDescription(MessageDirection direction)
         {
-            MessageDescription messageDescription = new MessageDescription("urn:dummyAction", direction);
+            MessageDescription messageDescription = new MessageDescription(
+                "urn:dummyAction",
+                direction
+            );
             return messageDescription;
         }
 
         internal static bool SupportsJsonFormat(OperationDescription od)
         {
             // if the type is XmlSerializable, then we cannot create a json serializer for it
-            DataContractSerializerOperationBehavior dcsob = od.Behaviors.Find<DataContractSerializerOperationBehavior>();
+            DataContractSerializerOperationBehavior dcsob =
+                od.Behaviors.Find<DataContractSerializerOperationBehavior>();
             return (dcsob != null);
         }
 
-        internal static void ValidateIsWebHttpBinding(ServiceEndpoint serviceEndpoint, string behaviorName)
+        internal static void ValidateIsWebHttpBinding(
+            ServiceEndpoint serviceEndpoint,
+            string behaviorName
+        )
         {
             Binding binding = serviceEndpoint.Binding;
             if (binding.Scheme != "http" && binding.Scheme != "https")
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(
-                    SR2.GetString(SR2.WCFBindingCannotBeUsedWithUriOperationSelectorBehaviorBadScheme,
-                    serviceEndpoint.Contract.Name, behaviorName)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new InvalidOperationException(
+                        SR2.GetString(
+                            SR2.WCFBindingCannotBeUsedWithUriOperationSelectorBehaviorBadScheme,
+                            serviceEndpoint.Contract.Name,
+                            behaviorName
+                        )
+                    )
+                );
             }
             if (binding.MessageVersion != MessageVersion.None)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(
-                    SR2.GetString(SR2.WCFBindingCannotBeUsedWithUriOperationSelectorBehaviorBadMessageVersion,
-                    serviceEndpoint.Address.Uri.AbsoluteUri, behaviorName)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new InvalidOperationException(
+                        SR2.GetString(
+                            SR2.WCFBindingCannotBeUsedWithUriOperationSelectorBehaviorBadMessageVersion,
+                            serviceEndpoint.Address.Uri.AbsoluteUri,
+                            behaviorName
+                        )
+                    )
+                );
             }
-            TransportBindingElement transportBindingElement = binding.CreateBindingElements().Find<TransportBindingElement>();
+            TransportBindingElement transportBindingElement = binding
+                .CreateBindingElements()
+                .Find<TransportBindingElement>();
             if (transportBindingElement != null && !transportBindingElement.ManualAddressing)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(
-                    SR2.GetString(SR2.ManualAddressingCannotBeFalseWithTransportBindingElement,
-                    serviceEndpoint.Address.Uri.AbsoluteUri, behaviorName, transportBindingElement.GetType().Name)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new InvalidOperationException(
+                        SR2.GetString(
+                            SR2.ManualAddressingCannotBeFalseWithTransportBindingElement,
+                            serviceEndpoint.Address.Uri.AbsoluteUri,
+                            behaviorName,
+                            transportBindingElement.GetType().Name
+                        )
+                    )
+                );
             }
         }
 
@@ -491,21 +635,39 @@ namespace System.ServiceModel.Description
             }
         }
 
-        internal IClientMessageFormatter GetDefaultClientFormatter(OperationDescription od, bool useJson, bool isWrapped)
+        internal IClientMessageFormatter GetDefaultClientFormatter(
+            OperationDescription od,
+            bool useJson,
+            bool isWrapped
+        )
         {
-            DataContractSerializerOperationBehavior dcsob = od.Behaviors.Find<DataContractSerializerOperationBehavior>();
+            DataContractSerializerOperationBehavior dcsob =
+                od.Behaviors.Find<DataContractSerializerOperationBehavior>();
             if (useJson)
             {
                 if (dcsob == null)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(SR2.GetString(SR2.JsonFormatRequiresDataContract, od.Name, od.DeclaringContract.Name, od.DeclaringContract.Namespace)));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new InvalidOperationException(
+                            SR2.GetString(
+                                SR2.JsonFormatRequiresDataContract,
+                                od.Name,
+                                od.DeclaringContract.Name,
+                                od.DeclaringContract.Namespace
+                            )
+                        )
+                    );
                 }
                 return CreateDataContractJsonSerializerOperationFormatter(od, dcsob, isWrapped);
             }
             else
             {
                 ClientRuntime clientRuntime = new ClientRuntime("name", "");
-                ClientOperation cop = new ClientOperation(clientRuntime, "dummyClient", "urn:dummy");
+                ClientOperation cop = new ClientOperation(
+                    clientRuntime,
+                    "dummyClient",
+                    "urn:dummy"
+                );
                 cop.Formatter = null;
 
                 if (dcsob != null)
@@ -513,10 +675,15 @@ namespace System.ServiceModel.Description
                     (dcsob as IOperationBehavior).ApplyClientBehavior(od, cop);
                     return cop.Formatter;
                 }
-                XmlSerializerOperationBehavior xsob = od.Behaviors.Find<XmlSerializerOperationBehavior>();
+                XmlSerializerOperationBehavior xsob =
+                    od.Behaviors.Find<XmlSerializerOperationBehavior>();
                 if (xsob != null)
                 {
-                    xsob = new XmlSerializerOperationBehavior(od, xsob.XmlSerializerFormatAttribute, this.reflector);
+                    xsob = new XmlSerializerOperationBehavior(
+                        od,
+                        xsob.XmlSerializerFormatAttribute,
+                        this.reflector
+                    );
                     (xsob as IOperationBehavior).ApplyClientBehavior(od, cop);
                     return cop.Formatter;
                 }
@@ -524,7 +691,10 @@ namespace System.ServiceModel.Description
             return null;
         }
 
-        protected virtual void AddClientErrorInspector(ServiceEndpoint endpoint, ClientRuntime clientRuntime)
+        protected virtual void AddClientErrorInspector(
+            ServiceEndpoint endpoint,
+            ClientRuntime clientRuntime
+        )
         {
             if (!this.FaultExceptionEnabled)
             {
@@ -536,26 +706,45 @@ namespace System.ServiceModel.Description
             }
         }
 
-        protected virtual void AddServerErrorHandlers(ServiceEndpoint endpoint, EndpointDispatcher endpointDispatcher)
+        protected virtual void AddServerErrorHandlers(
+            ServiceEndpoint endpoint,
+            EndpointDispatcher endpointDispatcher
+        )
         {
             if (!this.FaultExceptionEnabled)
             {
-                WebErrorHandler errorHandler = new WebErrorHandler(this, endpoint.Contract, endpointDispatcher.DispatchRuntime.ChannelDispatcher.IncludeExceptionDetailInFaults);
-                endpointDispatcher.DispatchRuntime.ChannelDispatcher.ErrorHandlers.Add(errorHandler);
+                WebErrorHandler errorHandler = new WebErrorHandler(
+                    this,
+                    endpoint.Contract,
+                    endpointDispatcher
+                        .DispatchRuntime
+                        .ChannelDispatcher
+                        .IncludeExceptionDetailInFaults
+                );
+                endpointDispatcher.DispatchRuntime.ChannelDispatcher.ErrorHandlers.Add(
+                    errorHandler
+                );
             }
         }
 
-        protected virtual WebHttpDispatchOperationSelector GetOperationSelector(ServiceEndpoint endpoint)
+        protected virtual WebHttpDispatchOperationSelector GetOperationSelector(
+            ServiceEndpoint endpoint
+        )
         {
             return new WebHttpDispatchOperationSelector(endpoint);
         }
 
-        protected virtual QueryStringConverter GetQueryStringConverter(OperationDescription operationDescription)
+        protected virtual QueryStringConverter GetQueryStringConverter(
+            OperationDescription operationDescription
+        )
         {
             return new QueryStringConverter();
         }
 
-        protected virtual IClientMessageFormatter GetReplyClientFormatter(OperationDescription operationDescription, ServiceEndpoint endpoint)
+        protected virtual IClientMessageFormatter GetReplyClientFormatter(
+            OperationDescription operationDescription,
+            ServiceEndpoint endpoint
+        )
         {
             if (operationDescription.Messages.Count < 2)
             {
@@ -563,7 +752,14 @@ namespace System.ServiceModel.Description
             }
             ValidateBodyParameters(operationDescription, false);
             Type type;
-            if (TryGetStreamParameterType(operationDescription.Messages[1], operationDescription, false, out type))
+            if (
+                TryGetStreamParameterType(
+                    operationDescription.Messages[1],
+                    operationDescription,
+                    false,
+                    out type
+                )
+            )
             {
                 return new HttpStreamFormatter(operationDescription);
             }
@@ -573,28 +769,59 @@ namespace System.ServiceModel.Description
             }
             WebMessageBodyStyle style = GetBodyStyle(operationDescription);
             Type parameterType;
-            if (UseBareReplyFormatter(style, operationDescription, GetResponseFormat(operationDescription), out parameterType))
+            if (
+                UseBareReplyFormatter(
+                    style,
+                    operationDescription,
+                    GetResponseFormat(operationDescription),
+                    out parameterType
+                )
+            )
             {
-                return SingleBodyParameterMessageFormatter.CreateXmlAndJsonClientFormatter(operationDescription, parameterType, false, this.xmlSerializerManager);
+                return SingleBodyParameterMessageFormatter.CreateXmlAndJsonClientFormatter(
+                    operationDescription,
+                    parameterType,
+                    false,
+                    this.xmlSerializerManager
+                );
             }
             else
             {
                 MessageDescription temp = operationDescription.Messages[0];
-                operationDescription.Messages[0] = MakeDummyMessageDescription(MessageDirection.Input);
+                operationDescription.Messages[0] = MakeDummyMessageDescription(
+                    MessageDirection.Input
+                );
                 IClientMessageFormatter result;
-                result = GetDefaultXmlAndJsonClientFormatter(operationDescription, !IsBareResponse(style));
+                result = GetDefaultXmlAndJsonClientFormatter(
+                    operationDescription,
+                    !IsBareResponse(style)
+                );
                 operationDescription.Messages[0] = temp;
                 return result;
             }
         }
 
-        internal virtual bool UseBareReplyFormatter(WebMessageBodyStyle style, OperationDescription operationDescription, WebMessageFormat responseFormat, out Type parameterType)
+        internal virtual bool UseBareReplyFormatter(
+            WebMessageBodyStyle style,
+            OperationDescription operationDescription,
+            WebMessageFormat responseFormat,
+            out Type parameterType
+        )
         {
             parameterType = null;
-            return IsBareResponse(style) && TryGetNonMessageParameterType(operationDescription.Messages[1], operationDescription, false, out parameterType);
+            return IsBareResponse(style)
+                && TryGetNonMessageParameterType(
+                    operationDescription.Messages[1],
+                    operationDescription,
+                    false,
+                    out parameterType
+                );
         }
 
-        protected virtual IDispatchMessageFormatter GetReplyDispatchFormatter(OperationDescription operationDescription, ServiceEndpoint endpoint)
+        protected virtual IDispatchMessageFormatter GetReplyDispatchFormatter(
+            OperationDescription operationDescription,
+            ServiceEndpoint endpoint
+        )
         {
             if (operationDescription.Messages.Count < 2)
             {
@@ -605,14 +832,26 @@ namespace System.ServiceModel.Description
 
             //  Determine if we should add a json formatter; If the ResponseFormat is json, we always add the json formatter even if the
             //  operation is XmlSerializerFormat because the formatter constructor throws the exception: "json not valid with XmlSerializerFormat" [Microsoft]
-            bool useJson = (responseFormat == WebMessageFormat.Json || SupportsJsonFormat(operationDescription));
+            bool useJson = (
+                responseFormat == WebMessageFormat.Json || SupportsJsonFormat(operationDescription)
+            );
 
             IDispatchMessageFormatter innerFormatter;
             Type type;
 
-            if (TryGetStreamParameterType(operationDescription.Messages[1], operationDescription, false, out type))
+            if (
+                TryGetStreamParameterType(
+                    operationDescription.Messages[1],
+                    operationDescription,
+                    false,
+                    out type
+                )
+            )
             {
-                innerFormatter = new ContentTypeSettingDispatchMessageFormatter(defaultStreamContentType, new HttpStreamFormatter(operationDescription));
+                innerFormatter = new ContentTypeSettingDispatchMessageFormatter(
+                    defaultStreamContentType,
+                    new HttpStreamFormatter(operationDescription)
+                );
             }
             else if (IsUntypedMessage(operationDescription.Messages[1]))
             {
@@ -622,38 +861,93 @@ namespace System.ServiceModel.Description
             {
                 Type parameterType;
                 WebMessageBodyStyle style = GetBodyStyle(operationDescription);
-                Dictionary<WebMessageFormat, IDispatchMessageFormatter> formatters = new Dictionary<WebMessageFormat, IDispatchMessageFormatter>();
+                Dictionary<WebMessageFormat, IDispatchMessageFormatter> formatters =
+                    new Dictionary<WebMessageFormat, IDispatchMessageFormatter>();
 
-                if (UseBareReplyFormatter(style, operationDescription, responseFormat, out parameterType))
+                if (
+                    UseBareReplyFormatter(
+                        style,
+                        operationDescription,
+                        responseFormat,
+                        out parameterType
+                    )
+                )
                 {
-                    formatters.Add(WebMessageFormat.Xml, SingleBodyParameterMessageFormatter.CreateDispatchFormatter(operationDescription, parameterType, false, false, this.xmlSerializerManager, null));
+                    formatters.Add(
+                        WebMessageFormat.Xml,
+                        SingleBodyParameterMessageFormatter.CreateDispatchFormatter(
+                            operationDescription,
+                            parameterType,
+                            false,
+                            false,
+                            this.xmlSerializerManager,
+                            null
+                        )
+                    );
                     if (useJson)
                     {
-                        formatters.Add(WebMessageFormat.Json, SingleBodyParameterMessageFormatter.CreateDispatchFormatter(operationDescription, parameterType, false, true, this.xmlSerializerManager, this.JavascriptCallbackParameterName));
+                        formatters.Add(
+                            WebMessageFormat.Json,
+                            SingleBodyParameterMessageFormatter.CreateDispatchFormatter(
+                                operationDescription,
+                                parameterType,
+                                false,
+                                true,
+                                this.xmlSerializerManager,
+                                this.JavascriptCallbackParameterName
+                            )
+                        );
                     }
                 }
                 else
                 {
                     MessageDescription temp = operationDescription.Messages[0];
-                    operationDescription.Messages[0] = MakeDummyMessageDescription(MessageDirection.Input);
-                    formatters.Add(WebMessageFormat.Xml, GetDefaultDispatchFormatter(operationDescription, false, !IsBareResponse(style)));
+                    operationDescription.Messages[0] = MakeDummyMessageDescription(
+                        MessageDirection.Input
+                    );
+                    formatters.Add(
+                        WebMessageFormat.Xml,
+                        GetDefaultDispatchFormatter(
+                            operationDescription,
+                            false,
+                            !IsBareResponse(style)
+                        )
+                    );
                     if (useJson)
                     {
-                        formatters.Add(WebMessageFormat.Json, GetDefaultDispatchFormatter(operationDescription, true, !IsBareResponse(style)));
+                        formatters.Add(
+                            WebMessageFormat.Json,
+                            GetDefaultDispatchFormatter(
+                                operationDescription,
+                                true,
+                                !IsBareResponse(style)
+                            )
+                        );
                     }
                     operationDescription.Messages[0] = temp;
                 }
-                innerFormatter = new MultiplexingDispatchMessageFormatter(formatters, responseFormat);
+                innerFormatter = new MultiplexingDispatchMessageFormatter(
+                    formatters,
+                    responseFormat
+                );
             }
 
             return innerFormatter;
         }
 
-        protected virtual IClientMessageFormatter GetRequestClientFormatter(OperationDescription operationDescription, ServiceEndpoint endpoint)
+        protected virtual IClientMessageFormatter GetRequestClientFormatter(
+            OperationDescription operationDescription,
+            ServiceEndpoint endpoint
+        )
         {
             WebMessageFormat requestFormat = GetRequestFormat(operationDescription);
             bool useJson = (requestFormat == WebMessageFormat.Json);
-            WebMessageEncodingBindingElement webEncoding = (useJson) ? endpoint.Binding.CreateBindingElements().Find<WebMessageEncodingBindingElement>() : null;
+            WebMessageEncodingBindingElement webEncoding =
+                (useJson)
+                    ? endpoint
+                        .Binding.CreateBindingElements()
+                        .Find<WebMessageEncodingBindingElement>()
+                    : null;
             IClientMessageFormatter innerFormatter = null;
 
             // get some validation errors by creating "throwAway" formatter
@@ -661,153 +955,272 @@ namespace System.ServiceModel.Description
             // validate that endpoint.Address is not null before accessing the endpoint.Address.Uri. This is to avoid throwing a NullRefException while constructing a UriTemplateClientFormatter
             if (endpoint.Address == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(
-                            SR2.GetString(SR2.ServiceEndpointMustHaveNonNullAddress, typeof(ServiceEndpoint), typeof(ChannelFactory), typeof(WebHttpEndpoint), AddressPropertyName, typeof(ServiceEndpoint))));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new InvalidOperationException(
+                        SR2.GetString(
+                            SR2.ServiceEndpointMustHaveNonNullAddress,
+                            typeof(ServiceEndpoint),
+                            typeof(ChannelFactory),
+                            typeof(WebHttpEndpoint),
+                            AddressPropertyName,
+                            typeof(ServiceEndpoint)
+                        )
+                    )
+                );
             }
 
-            UriTemplateClientFormatter throwAway = new UriTemplateClientFormatter(operationDescription, null, GetQueryStringConverter(operationDescription), endpoint.Address.Uri, false, endpoint.Contract.Name);
+            UriTemplateClientFormatter throwAway = new UriTemplateClientFormatter(
+                operationDescription,
+                null,
+                GetQueryStringConverter(operationDescription),
+                endpoint.Address.Uri,
+                false,
+                endpoint.Contract.Name
+            );
             int numUriVariables = throwAway.pathMapping.Count + throwAway.queryMapping.Count;
             bool isStream = false;
-            HideReplyMessage(operationDescription, delegate()
-            {
-                WebMessageBodyStyle style = GetBodyStyle(operationDescription);
-                bool isUntypedWhenUriParamsNotConsidered = false;
-                Effect doBodyFormatter = delegate()
+            HideReplyMessage(
+                operationDescription,
+                delegate()
                 {
-                    if (numUriVariables != 0)
+                    WebMessageBodyStyle style = GetBodyStyle(operationDescription);
+                    bool isUntypedWhenUriParamsNotConsidered = false;
+                    Effect doBodyFormatter = delegate()
                     {
-                        EnsureNotUntypedMessageNorMessageContract(operationDescription);
-                    }
-                    // get body formatter
-                    ValidateBodyParameters(operationDescription, true);
-                    IClientMessageFormatter baseFormatter;
-                    Type parameterType;
-                    if (TryGetStreamParameterType(operationDescription.Messages[0], operationDescription, true, out parameterType))
-                    {
-                        isStream = true;
-                        baseFormatter = new HttpStreamFormatter(operationDescription);
-                    }
-                    else if (UseBareRequestFormatter(style, operationDescription, out parameterType))
-                    {
-                        baseFormatter = SingleBodyParameterMessageFormatter.CreateClientFormatter(operationDescription, parameterType, true, useJson, this.xmlSerializerManager);
-                    }
-                    else
-                    {
-                        baseFormatter = GetDefaultClientFormatter(operationDescription, useJson, !IsBareRequest(style));
-                    }
-                    innerFormatter = baseFormatter;
-                    isUntypedWhenUriParamsNotConsidered = IsUntypedMessage(operationDescription.Messages[0]);
-                };
-                if (numUriVariables == 0)
-                {
-                    if (IsUntypedMessage(operationDescription.Messages[0]))
-                    {
+                        if (numUriVariables != 0)
+                        {
+                            EnsureNotUntypedMessageNorMessageContract(operationDescription);
+                        }
+                        // get body formatter
                         ValidateBodyParameters(operationDescription, true);
-                        innerFormatter = new MessagePassthroughFormatter();
-                        isUntypedWhenUriParamsNotConsidered = true;
-                    }
-                    else if (IsTypedMessage(operationDescription.Messages[0]))
+                        IClientMessageFormatter baseFormatter;
+                        Type parameterType;
+                        if (
+                            TryGetStreamParameterType(
+                                operationDescription.Messages[0],
+                                operationDescription,
+                                true,
+                                out parameterType
+                            )
+                        )
+                        {
+                            isStream = true;
+                            baseFormatter = new HttpStreamFormatter(operationDescription);
+                        }
+                        else if (
+                            UseBareRequestFormatter(style, operationDescription, out parameterType)
+                        )
+                        {
+                            baseFormatter =
+                                SingleBodyParameterMessageFormatter.CreateClientFormatter(
+                                    operationDescription,
+                                    parameterType,
+                                    true,
+                                    useJson,
+                                    this.xmlSerializerManager
+                                );
+                        }
+                        else
+                        {
+                            baseFormatter = GetDefaultClientFormatter(
+                                operationDescription,
+                                useJson,
+                                !IsBareRequest(style)
+                            );
+                        }
+                        innerFormatter = baseFormatter;
+                        isUntypedWhenUriParamsNotConsidered = IsUntypedMessage(
+                            operationDescription.Messages[0]
+                        );
+                    };
+                    if (numUriVariables == 0)
                     {
-                        ValidateBodyParameters(operationDescription, true);
-                        innerFormatter = GetDefaultClientFormatter(operationDescription, useJson, !IsBareRequest(style));
-                    }
-                    else
-                    {
-                        doBodyFormatter();
-                    }
-                }
-                else
-                {
-                    HideRequestUriTemplateParameters(operationDescription, throwAway, delegate()
-                    {
-                        CloneMessageDescriptionsBeforeActing(operationDescription, delegate()
+                        if (IsUntypedMessage(operationDescription.Messages[0]))
+                        {
+                            ValidateBodyParameters(operationDescription, true);
+                            innerFormatter = new MessagePassthroughFormatter();
+                            isUntypedWhenUriParamsNotConsidered = true;
+                        }
+                        else if (IsTypedMessage(operationDescription.Messages[0]))
+                        {
+                            ValidateBodyParameters(operationDescription, true);
+                            innerFormatter = GetDefaultClientFormatter(
+                                operationDescription,
+                                useJson,
+                                !IsBareRequest(style)
+                            );
+                        }
+                        else
                         {
                             doBodyFormatter();
-                        });
-                    });
+                        }
+                    }
+                    else
+                    {
+                        HideRequestUriTemplateParameters(
+                            operationDescription,
+                            throwAway,
+                            delegate()
+                            {
+                                CloneMessageDescriptionsBeforeActing(
+                                    operationDescription,
+                                    delegate()
+                                    {
+                                        doBodyFormatter();
+                                    }
+                                );
+                            }
+                        );
+                    }
+                    innerFormatter = new UriTemplateClientFormatter(
+                        operationDescription,
+                        innerFormatter,
+                        GetQueryStringConverter(operationDescription),
+                        endpoint.Address.Uri,
+                        isUntypedWhenUriParamsNotConsidered,
+                        endpoint.Contract.Name
+                    );
                 }
-                innerFormatter = new UriTemplateClientFormatter(operationDescription, innerFormatter, GetQueryStringConverter(operationDescription), endpoint.Address.Uri, isUntypedWhenUriParamsNotConsidered, endpoint.Contract.Name);
-            });
+            );
             string defaultContentType = GetDefaultContentType(isStream, useJson, webEncoding);
             if (!string.IsNullOrEmpty(defaultContentType))
             {
-                innerFormatter = new ContentTypeSettingClientMessageFormatter(defaultContentType, innerFormatter);
+                innerFormatter = new ContentTypeSettingClientMessageFormatter(
+                    defaultContentType,
+                    innerFormatter
+                );
             }
             return innerFormatter;
         }
 
-        protected virtual IDispatchMessageFormatter GetRequestDispatchFormatter(OperationDescription operationDescription, ServiceEndpoint endpoint)
+        protected virtual IDispatchMessageFormatter GetRequestDispatchFormatter(
+            OperationDescription operationDescription,
+            ServiceEndpoint endpoint
+        )
         {
             IDispatchMessageFormatter result = null;
             // get some validation errors by creating "throwAway" formatter
-            UriTemplateDispatchFormatter throwAway = new UriTemplateDispatchFormatter(operationDescription, null, GetQueryStringConverter(operationDescription), endpoint.Contract.Name, endpoint.Address.Uri);
+            UriTemplateDispatchFormatter throwAway = new UriTemplateDispatchFormatter(
+                operationDescription,
+                null,
+                GetQueryStringConverter(operationDescription),
+                endpoint.Contract.Name,
+                endpoint.Address.Uri
+            );
             int numUriVariables = throwAway.pathMapping.Count + throwAway.queryMapping.Count;
-            HideReplyMessage(operationDescription, delegate()
-            {
-                WebMessageBodyStyle style = GetBodyStyle(operationDescription);
-                Effect doBodyFormatter = delegate()
+            HideReplyMessage(
+                operationDescription,
+                delegate()
                 {
-                    if (numUriVariables != 0)
+                    WebMessageBodyStyle style = GetBodyStyle(operationDescription);
+                    Effect doBodyFormatter = delegate()
                     {
-                        EnsureNotUntypedMessageNorMessageContract(operationDescription);
-                    }
-                    // get body formatter
-                    ValidateBodyParameters(operationDescription, true);
-                    Type type;
-                    if (TryGetStreamParameterType(operationDescription.Messages[0], operationDescription, true, out type))
-                    {
-                        result = new HttpStreamFormatter(operationDescription);
-                    }
-                    else
-                    {
-                        Type parameterType;
-                        if (UseBareRequestFormatter(style, operationDescription, out parameterType))
+                        if (numUriVariables != 0)
                         {
-                            result = SingleBodyParameterMessageFormatter.CreateXmlAndJsonDispatchFormatter(operationDescription, parameterType, true, this.xmlSerializerManager, this.JavascriptCallbackParameterName);
+                            EnsureNotUntypedMessageNorMessageContract(operationDescription);
+                        }
+                        // get body formatter
+                        ValidateBodyParameters(operationDescription, true);
+                        Type type;
+                        if (
+                            TryGetStreamParameterType(
+                                operationDescription.Messages[0],
+                                operationDescription,
+                                true,
+                                out type
+                            )
+                        )
+                        {
+                            result = new HttpStreamFormatter(operationDescription);
                         }
                         else
                         {
-                            result = GetDefaultXmlAndJsonDispatchFormatter(operationDescription, !IsBareRequest(style));
+                            Type parameterType;
+                            if (
+                                UseBareRequestFormatter(
+                                    style,
+                                    operationDescription,
+                                    out parameterType
+                                )
+                            )
+                            {
+                                result =
+                                    SingleBodyParameterMessageFormatter.CreateXmlAndJsonDispatchFormatter(
+                                        operationDescription,
+                                        parameterType,
+                                        true,
+                                        this.xmlSerializerManager,
+                                        this.JavascriptCallbackParameterName
+                                    );
+                            }
+                            else
+                            {
+                                result = GetDefaultXmlAndJsonDispatchFormatter(
+                                    operationDescription,
+                                    !IsBareRequest(style)
+                                );
+                            }
                         }
-                    }
-                };
-                if (numUriVariables == 0)
-                {
-                    if (IsUntypedMessage(operationDescription.Messages[0]))
+                    };
+                    if (numUriVariables == 0)
                     {
-                        ValidateBodyParameters(operationDescription, true);
-                        result = new MessagePassthroughFormatter();
-                    }
-                    else if (IsTypedMessage(operationDescription.Messages[0]))
-                    {
-                        ValidateBodyParameters(operationDescription, true);
-                        result = GetDefaultXmlAndJsonDispatchFormatter(operationDescription, !IsBareRequest(style));
+                        if (IsUntypedMessage(operationDescription.Messages[0]))
+                        {
+                            ValidateBodyParameters(operationDescription, true);
+                            result = new MessagePassthroughFormatter();
+                        }
+                        else if (IsTypedMessage(operationDescription.Messages[0]))
+                        {
+                            ValidateBodyParameters(operationDescription, true);
+                            result = GetDefaultXmlAndJsonDispatchFormatter(
+                                operationDescription,
+                                !IsBareRequest(style)
+                            );
+                        }
+                        else
+                        {
+                            doBodyFormatter();
+                        }
                     }
                     else
                     {
-                        doBodyFormatter();
+                        HideRequestUriTemplateParameters(
+                            operationDescription,
+                            throwAway,
+                            delegate()
+                            {
+                                CloneMessageDescriptionsBeforeActing(
+                                    operationDescription,
+                                    delegate()
+                                    {
+                                        doBodyFormatter();
+                                    }
+                                );
+                            }
+                        );
                     }
+                    result = new UriTemplateDispatchFormatter(
+                        operationDescription,
+                        result,
+                        GetQueryStringConverter(operationDescription),
+                        endpoint.Contract.Name,
+                        endpoint.Address.Uri
+                    );
                 }
-                else
-                {
-                    HideRequestUriTemplateParameters(operationDescription, throwAway, delegate()
-                    {
-                        CloneMessageDescriptionsBeforeActing(operationDescription, delegate()
-                        {
-                            doBodyFormatter();
-                        });
-                    });
-                }
-                result = new UriTemplateDispatchFormatter(operationDescription, result, GetQueryStringConverter(operationDescription), endpoint.Contract.Name, endpoint.Address.Uri);
-            });
+            );
             return result;
         }
 
-        static void CloneMessageDescriptionsBeforeActing(OperationDescription operationDescription, Effect effect)
+        static void CloneMessageDescriptionsBeforeActing(
+            OperationDescription operationDescription,
+            Effect effect
+        )
         {
             MessageDescription originalRequest = operationDescription.Messages[0];
             bool thereIsAReply = operationDescription.Messages.Count > 1;
-            MessageDescription originalReply = thereIsAReply ? operationDescription.Messages[1] : null;
+            MessageDescription originalReply = thereIsAReply
+                ? operationDescription.Messages[1]
+                : null;
             operationDescription.Messages[0] = originalRequest.Clone();
             if (thereIsAReply)
             {
@@ -821,16 +1234,27 @@ namespace System.ServiceModel.Description
             }
         }
 
-        internal virtual bool UseBareRequestFormatter(WebMessageBodyStyle style, OperationDescription operationDescription, out Type parameterType)
+        internal virtual bool UseBareRequestFormatter(
+            WebMessageBodyStyle style,
+            OperationDescription operationDescription,
+            out Type parameterType
+        )
         {
             parameterType = null;
-            return IsBareRequest(style) && TryGetNonMessageParameterType(operationDescription.Messages[0], operationDescription, true, out parameterType);
+            return IsBareRequest(style)
+                && TryGetNonMessageParameterType(
+                    operationDescription.Messages[0],
+                    operationDescription,
+                    true,
+                    out parameterType
+                );
         }
 
         static Collection<MessagePartDescription> CloneParts(MessageDescription md)
         {
             MessagePartDescriptionCollection bodyParameters = md.Body.Parts;
-            Collection<MessagePartDescription> bodyParametersClone = new Collection<MessagePartDescription>();
+            Collection<MessagePartDescription> bodyParametersClone =
+                new Collection<MessagePartDescription>();
             for (int i = 0; i < bodyParameters.Count; ++i)
             {
                 MessagePartDescription copy = bodyParameters[i].Clone();
@@ -839,12 +1263,17 @@ namespace System.ServiceModel.Description
             return bodyParametersClone;
         }
 
-        static void EnsureNotUntypedMessageNorMessageContract(OperationDescription operationDescription)
+        static void EnsureNotUntypedMessageNorMessageContract(
+            OperationDescription operationDescription
+        )
         {
             // Called when there are UriTemplate parameters.  UT does not compose with Message
             // or MessageContract because the SOAP and REST programming models must be uniform here.
             bool isUnadornedWebGet = false;
-            if (GetWebMethod(operationDescription) == GET && GetWebUriTemplate(operationDescription) == null)
+            if (
+                GetWebMethod(operationDescription) == GET
+                && GetWebUriTemplate(operationDescription) == null
+            )
             {
                 isUnadornedWebGet = true;
             }
@@ -854,20 +1283,42 @@ namespace System.ServiceModel.Description
                 {
                     // WebGet will give you UriTemplate parameters by default.
                     // We need a special error message for this case to prevent confusion.
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(
-                        SR2.GetString(SR2.GETCannotHaveMCParameter, operationDescription.Name, operationDescription.DeclaringContract.Name, operationDescription.Messages[0].MessageType.Name)));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new InvalidOperationException(
+                            SR2.GetString(
+                                SR2.GETCannotHaveMCParameter,
+                                operationDescription.Name,
+                                operationDescription.DeclaringContract.Name,
+                                operationDescription.Messages[0].MessageType.Name
+                            )
+                        )
+                    );
                 }
                 else
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(SR2.GetString(
-                        SR2.UTParamsDoNotComposeWithMessageContract, operationDescription.Name, operationDescription.DeclaringContract.Name)));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new InvalidOperationException(
+                            SR2.GetString(
+                                SR2.UTParamsDoNotComposeWithMessageContract,
+                                operationDescription.Name,
+                                operationDescription.DeclaringContract.Name
+                            )
+                        )
+                    );
                 }
             }
 
             if (IsUntypedMessage(operationDescription.Messages[0]))
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(SR2.GetString(
-                    SR2.UTParamsDoNotComposeWithMessage, operationDescription.Name, operationDescription.DeclaringContract.Name)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new InvalidOperationException(
+                        SR2.GetString(
+                            SR2.UTParamsDoNotComposeWithMessage,
+                            operationDescription.Name,
+                            operationDescription.DeclaringContract.Name
+                        )
+                    )
+                );
             }
         }
 
@@ -875,8 +1326,11 @@ namespace System.ServiceModel.Description
         {
             if (wga != null && wia != null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(
-                    SR2.GetString(SR2.MultipleWebAttributes, od.Name, od.DeclaringContract.Name)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new InvalidOperationException(
+                        SR2.GetString(SR2.MultipleWebAttributes, od.Name, od.DeclaringContract.Name)
+                    )
+                );
             }
         }
 
@@ -886,7 +1340,9 @@ namespace System.ServiceModel.Description
             if (operationDescription.Messages.Count > 1)
             {
                 temp = operationDescription.Messages[1];
-                operationDescription.Messages[1] = MakeDummyMessageDescription(MessageDirection.Output);
+                operationDescription.Messages[1] = MakeDummyMessageDescription(
+                    MessageDirection.Output
+                );
             }
             effect();
             if (operationDescription.Messages.Count > 1)
@@ -895,20 +1351,45 @@ namespace System.ServiceModel.Description
             }
         }
 
-        static void HideRequestUriTemplateParameters(OperationDescription operationDescription, UriTemplateClientFormatter throwAway, Effect effect)
+        static void HideRequestUriTemplateParameters(
+            OperationDescription operationDescription,
+            UriTemplateClientFormatter throwAway,
+            Effect effect
+        )
         {
-            HideRequestUriTemplateParameters(operationDescription, throwAway.pathMapping, throwAway.queryMapping, effect);
+            HideRequestUriTemplateParameters(
+                operationDescription,
+                throwAway.pathMapping,
+                throwAway.queryMapping,
+                effect
+            );
         }
 
-        internal static void HideRequestUriTemplateParameters(OperationDescription operationDescription, UriTemplateDispatchFormatter throwAway, Effect effect)
+        internal static void HideRequestUriTemplateParameters(
+            OperationDescription operationDescription,
+            UriTemplateDispatchFormatter throwAway,
+            Effect effect
+        )
         {
-            HideRequestUriTemplateParameters(operationDescription, throwAway.pathMapping, throwAway.queryMapping, effect);
+            HideRequestUriTemplateParameters(
+                operationDescription,
+                throwAway.pathMapping,
+                throwAway.queryMapping,
+                effect
+            );
         }
 
-        static void HideRequestUriTemplateParameters(OperationDescription operationDescription, Dictionary<int, string> pathMapping, Dictionary<int, KeyValuePair<string, Type>> queryMapping, Effect effect)
+        static void HideRequestUriTemplateParameters(
+            OperationDescription operationDescription,
+            Dictionary<int, string> pathMapping,
+            Dictionary<int, KeyValuePair<string, Type>> queryMapping,
+            Effect effect
+        )
         {
             // mutate description to hide UriTemplate parameters
-            Collection<MessagePartDescription> originalParts = CloneParts(operationDescription.Messages[0]);
+            Collection<MessagePartDescription> originalParts = CloneParts(
+                operationDescription.Messages[0]
+            );
             Collection<MessagePartDescription> parts = CloneParts(operationDescription.Messages[0]);
             operationDescription.Messages[0].Body.Parts.Clear();
             int newIndex = 0;
@@ -931,15 +1412,24 @@ namespace System.ServiceModel.Description
 
         static bool IsBareRequest(WebMessageBodyStyle style)
         {
-            return (style == WebMessageBodyStyle.Bare || style == WebMessageBodyStyle.WrappedResponse);
+            return (
+                style == WebMessageBodyStyle.Bare || style == WebMessageBodyStyle.WrappedResponse
+            );
         }
 
         static bool IsBareResponse(WebMessageBodyStyle style)
         {
-            return (style == WebMessageBodyStyle.Bare || style == WebMessageBodyStyle.WrappedRequest);
+            return (
+                style == WebMessageBodyStyle.Bare || style == WebMessageBodyStyle.WrappedRequest
+            );
         }
 
-        internal static bool TryGetNonMessageParameterType(MessageDescription message, OperationDescription declaringOperation, bool isRequest, out Type type)
+        internal static bool TryGetNonMessageParameterType(
+            MessageDescription message,
+            OperationDescription declaringOperation,
+            bool isRequest,
+            out Type type
+        )
         {
             type = null;
             if (message == null)
@@ -954,7 +1444,15 @@ namespace System.ServiceModel.Description
             {
                 if (message.Body.Parts.Count > 1)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(SR2.GetString(SR2.AtMostOneRequestBodyParameterAllowedForUnwrappedMessages, declaringOperation.Name, declaringOperation.DeclaringContract.Name)));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new InvalidOperationException(
+                            SR2.GetString(
+                                SR2.AtMostOneRequestBodyParameterAllowedForUnwrappedMessages,
+                                declaringOperation.Name,
+                                declaringOperation.DeclaringContract.Name
+                            )
+                        )
+                    );
                 }
                 if (message.Body.Parts.Count == 1 && message.Body.Parts[0].Type != typeof(void))
                 {
@@ -966,9 +1464,20 @@ namespace System.ServiceModel.Description
             {
                 if (message.Body.Parts.Count > 0)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(SR2.GetString(SR2.OnlyReturnValueBodyParameterAllowedForUnwrappedMessages, declaringOperation.Name, declaringOperation.DeclaringContract.Name)));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new InvalidOperationException(
+                            SR2.GetString(
+                                SR2.OnlyReturnValueBodyParameterAllowedForUnwrappedMessages,
+                                declaringOperation.Name,
+                                declaringOperation.DeclaringContract.Name
+                            )
+                        )
+                    );
                 }
-                if (message.Body.ReturnValue != null && message.Body.ReturnValue.Type != typeof(void))
+                if (
+                    message.Body.ReturnValue != null
+                    && message.Body.ReturnValue.Type != typeof(void)
+                )
                 {
                     type = message.Body.ReturnValue.Type;
                 }
@@ -976,7 +1485,12 @@ namespace System.ServiceModel.Description
             }
         }
 
-        static bool TryGetStreamParameterType(MessageDescription message, OperationDescription declaringOperation, bool isRequest, out Type type)
+        static bool TryGetStreamParameterType(
+            MessageDescription message,
+            OperationDescription declaringOperation,
+            bool isRequest,
+            out Type type
+        )
         {
             type = null;
             if (message == null || IsTypedMessage(message) || IsUntypedMessage(message))
@@ -994,11 +1508,18 @@ namespace System.ServiceModel.Description
                         hasStream = true;
                         break;
                     }
-
                 }
                 if (hasStream && message.Body.Parts.Count > 1)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentException(SR2.GetString(SR2.AtMostOneRequestBodyParameterAllowedForStream, declaringOperation.Name, declaringOperation.DeclaringContract.Name)));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new ArgumentException(
+                            SR2.GetString(
+                                SR2.AtMostOneRequestBodyParameterAllowedForStream,
+                                declaringOperation.Name,
+                                declaringOperation.DeclaringContract.Name
+                            )
+                        )
+                    );
                 }
                 return hasStream;
             }
@@ -1009,20 +1530,39 @@ namespace System.ServiceModel.Description
                 {
                     if (typeof(Stream) == message.Body.Parts[i].Type)
                     {
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentException(SR2.GetString(SR2.NoOutOrRefStreamParametersAllowed, message.Body.Parts[i].Name, declaringOperation.Name, declaringOperation.DeclaringContract.Name)));
+                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                            new ArgumentException(
+                                SR2.GetString(
+                                    SR2.NoOutOrRefStreamParametersAllowed,
+                                    message.Body.Parts[i].Name,
+                                    declaringOperation.Name,
+                                    declaringOperation.DeclaringContract.Name
+                                )
+                            )
+                        );
                     }
                 }
-                if (message.Body.ReturnValue != null && typeof(Stream) == message.Body.ReturnValue.Type)
+                if (
+                    message.Body.ReturnValue != null
+                    && typeof(Stream) == message.Body.ReturnValue.Type
+                )
                 {
                     // validate that there are no out or ref params
                     if (message.Body.Parts.Count > 0)
                     {
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentException(SR2.GetString(SR2.NoOutOrRefParametersAllowedWithStreamResult, declaringOperation.Name, declaringOperation.DeclaringContract.Name)));
+                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                            new ArgumentException(
+                                SR2.GetString(
+                                    SR2.NoOutOrRefParametersAllowedWithStreamResult,
+                                    declaringOperation.Name,
+                                    declaringOperation.DeclaringContract.Name
+                                )
+                            )
+                        );
                     }
                     type = message.Body.ReturnValue.Type;
                     return true;
                 }
-
                 else
                 {
                     return false;
@@ -1046,7 +1586,11 @@ namespace System.ServiceModel.Description
             }
         }
 
-        string GetDefaultContentType(bool isStream, bool useJson, WebMessageEncodingBindingElement webEncoding)
+        string GetDefaultContentType(
+            bool isStream,
+            bool useJson,
+            WebMessageEncodingBindingElement webEncoding
+        )
         {
             if (isStream)
             {
@@ -1062,22 +1606,44 @@ namespace System.ServiceModel.Description
             }
         }
 
-        IDispatchMessageFormatter GetDefaultDispatchFormatter(OperationDescription od, bool useJson, bool isWrapped)
+        IDispatchMessageFormatter GetDefaultDispatchFormatter(
+            OperationDescription od,
+            bool useJson,
+            bool isWrapped
+        )
         {
-            DataContractSerializerOperationBehavior dcsob = od.Behaviors.Find<DataContractSerializerOperationBehavior>();
+            DataContractSerializerOperationBehavior dcsob =
+                od.Behaviors.Find<DataContractSerializerOperationBehavior>();
             if (useJson)
             {
                 if (dcsob == null)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(SR2.GetString(SR2.JsonFormatRequiresDataContract, od.Name, od.DeclaringContract.Name, od.DeclaringContract.Namespace)));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new InvalidOperationException(
+                            SR2.GetString(
+                                SR2.JsonFormatRequiresDataContract,
+                                od.Name,
+                                od.DeclaringContract.Name,
+                                od.DeclaringContract.Namespace
+                            )
+                        )
+                    );
                 }
                 return CreateDataContractJsonSerializerOperationFormatter(od, dcsob, isWrapped);
             }
             else
             {
-                EndpointDispatcher dummyED = new EndpointDispatcher(new EndpointAddress("http://localhost/"), "name", "");
+                EndpointDispatcher dummyED = new EndpointDispatcher(
+                    new EndpointAddress("http://localhost/"),
+                    "name",
+                    ""
+                );
                 DispatchRuntime dispatchRuntime = dummyED.DispatchRuntime;
-                DispatchOperation dop = new DispatchOperation(dispatchRuntime, "dummyDispatch", "urn:dummy");
+                DispatchOperation dop = new DispatchOperation(
+                    dispatchRuntime,
+                    "dummyDispatch",
+                    "urn:dummy"
+                );
                 dop.Formatter = null;
 
                 if (dcsob != null)
@@ -1085,10 +1651,15 @@ namespace System.ServiceModel.Description
                     (dcsob as IOperationBehavior).ApplyDispatchBehavior(od, dop);
                     return dop.Formatter;
                 }
-                XmlSerializerOperationBehavior xsob = od.Behaviors.Find<XmlSerializerOperationBehavior>();
+                XmlSerializerOperationBehavior xsob =
+                    od.Behaviors.Find<XmlSerializerOperationBehavior>();
                 if (xsob != null)
                 {
-                    xsob = new XmlSerializerOperationBehavior(od, xsob.XmlSerializerFormatAttribute, this.reflector);
+                    xsob = new XmlSerializerOperationBehavior(
+                        od,
+                        xsob.XmlSerializerFormatAttribute,
+                        this.reflector
+                    );
                     (xsob as IOperationBehavior).ApplyDispatchBehavior(od, dop);
                     return dop.Formatter;
                 }
@@ -1096,12 +1667,27 @@ namespace System.ServiceModel.Description
             return null;
         }
 
-        internal virtual DataContractJsonSerializerOperationFormatter CreateDataContractJsonSerializerOperationFormatter(OperationDescription od, DataContractSerializerOperationBehavior dcsob, bool isWrapped)
+        internal virtual DataContractJsonSerializerOperationFormatter CreateDataContractJsonSerializerOperationFormatter(
+            OperationDescription od,
+            DataContractSerializerOperationBehavior dcsob,
+            bool isWrapped
+        )
         {
-            return new DataContractJsonSerializerOperationFormatter(od, dcsob.MaxItemsInObjectGraph, dcsob.IgnoreExtensionDataObject, dcsob.DataContractSurrogate, isWrapped, false, JavascriptCallbackParameterName);
+            return new DataContractJsonSerializerOperationFormatter(
+                od,
+                dcsob.MaxItemsInObjectGraph,
+                dcsob.IgnoreExtensionDataObject,
+                dcsob.DataContractSurrogate,
+                isWrapped,
+                false,
+                JavascriptCallbackParameterName
+            );
         }
 
-        IClientMessageFormatter GetDefaultXmlAndJsonClientFormatter(OperationDescription od, bool isWrapped)
+        IClientMessageFormatter GetDefaultXmlAndJsonClientFormatter(
+            OperationDescription od,
+            bool isWrapped
+        )
         {
             IClientMessageFormatter xmlFormatter = GetDefaultClientFormatter(od, false, isWrapped);
             if (!SupportsJsonFormat(od))
@@ -1109,22 +1695,35 @@ namespace System.ServiceModel.Description
                 return xmlFormatter;
             }
             IClientMessageFormatter jsonFormatter = GetDefaultClientFormatter(od, true, isWrapped);
-            Dictionary<WebContentFormat, IClientMessageFormatter> map = new Dictionary<WebContentFormat, IClientMessageFormatter>();
+            Dictionary<WebContentFormat, IClientMessageFormatter> map =
+                new Dictionary<WebContentFormat, IClientMessageFormatter>();
             map.Add(WebContentFormat.Xml, xmlFormatter);
             map.Add(WebContentFormat.Json, jsonFormatter);
             // In case there is no format property, the default formatter to use is XML
             return new DemultiplexingClientMessageFormatter(map, xmlFormatter);
         }
 
-        IDispatchMessageFormatter GetDefaultXmlAndJsonDispatchFormatter(OperationDescription od, bool isWrapped)
+        IDispatchMessageFormatter GetDefaultXmlAndJsonDispatchFormatter(
+            OperationDescription od,
+            bool isWrapped
+        )
         {
-            IDispatchMessageFormatter xmlFormatter = GetDefaultDispatchFormatter(od, false, isWrapped);
+            IDispatchMessageFormatter xmlFormatter = GetDefaultDispatchFormatter(
+                od,
+                false,
+                isWrapped
+            );
             if (!SupportsJsonFormat(od))
             {
                 return xmlFormatter;
             }
-            IDispatchMessageFormatter jsonFormatter = GetDefaultDispatchFormatter(od, true, isWrapped);
-            Dictionary<WebContentFormat, IDispatchMessageFormatter> map = new Dictionary<WebContentFormat, IDispatchMessageFormatter>();
+            IDispatchMessageFormatter jsonFormatter = GetDefaultDispatchFormatter(
+                od,
+                true,
+                isWrapped
+            );
+            Dictionary<WebContentFormat, IDispatchMessageFormatter> map =
+                new Dictionary<WebContentFormat, IDispatchMessageFormatter>();
             map.Add(WebContentFormat.Xml, xmlFormatter);
             map.Add(WebContentFormat.Json, jsonFormatter);
             return new DemultiplexingDispatchMessageFormatter(map, xmlFormatter);
@@ -1137,11 +1736,15 @@ namespace System.ServiceModel.Description
             EnsureOk(wga, wia, od);
             if (wga != null)
             {
-                return wga.IsRequestFormatSetExplicitly ? wga.RequestFormat : this.DefaultOutgoingRequestFormat;
+                return wga.IsRequestFormatSetExplicitly
+                    ? wga.RequestFormat
+                    : this.DefaultOutgoingRequestFormat;
             }
             else if (wia != null)
             {
-                return wia.IsRequestFormatSetExplicitly ? wia.RequestFormat : this.DefaultOutgoingRequestFormat;
+                return wia.IsRequestFormatSetExplicitly
+                    ? wia.RequestFormat
+                    : this.DefaultOutgoingRequestFormat;
             }
             else
             {
@@ -1156,11 +1759,15 @@ namespace System.ServiceModel.Description
             EnsureOk(wga, wia, od);
             if (wga != null)
             {
-                return wga.IsResponseFormatSetExplicitly ? wga.ResponseFormat : this.DefaultOutgoingResponseFormat;
+                return wga.IsResponseFormatSetExplicitly
+                    ? wga.ResponseFormat
+                    : this.DefaultOutgoingResponseFormat;
             }
             else if (wia != null)
             {
-                return wia.IsResponseFormatSetExplicitly ? wia.ResponseFormat : this.DefaultOutgoingResponseFormat;
+                return wia.IsResponseFormatSetExplicitly
+                    ? wia.ResponseFormat
+                    : this.DefaultOutgoingResponseFormat;
             }
             else
             {
@@ -1200,17 +1807,36 @@ namespace System.ServiceModel.Description
         {
             if (method == GET)
             {
-                if (!IsUntypedMessage(operation.Messages[0]) && operation.Messages[0].Body.Parts.Count != 0)
+                if (
+                    !IsUntypedMessage(operation.Messages[0])
+                    && operation.Messages[0].Body.Parts.Count != 0
+                )
                 {
                     if (!IsTypedMessage(operation.Messages[0]))
                     {
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(
-                            SR2.GetString(SR2.GETCannotHaveBody, operation.Name, operation.DeclaringContract.Name, operation.Messages[0].Body.Parts[0].Name)));
+                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                            new InvalidOperationException(
+                                SR2.GetString(
+                                    SR2.GETCannotHaveBody,
+                                    operation.Name,
+                                    operation.DeclaringContract.Name,
+                                    operation.Messages[0].Body.Parts[0].Name
+                                )
+                            )
+                        );
                     }
                     else
                     {
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(
-                            SR2.GetString(SR2.GETCannotHaveMCParameter, operation.Name, operation.DeclaringContract.Name, operation.Messages[0].MessageType.Name)));
+                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                            new InvalidOperationException(
+                                SR2.GetString(
+                                    SR2.GETCannotHaveMCParameter,
+                                    operation.Name,
+                                    operation.DeclaringContract.Name,
+                                    operation.Messages[0].MessageType.Name
+                                )
+                            )
+                        );
                     }
                 }
             }
@@ -1222,24 +1848,49 @@ namespace System.ServiceModel.Description
             {
                 ValidateNoOperationHasEncodedXmlSerializer(od);
                 ValidateNoMessageContractHeaders(od.Messages[0], od.Name, endpoint.Contract.Name);
-                ValidateNoBareMessageContractWithMultipleParts(od.Messages[0], od.Name, endpoint.Contract.Name);
-                ValidateNoMessageContractWithStream(od.Messages[0], od.Name, endpoint.Contract.Name);
+                ValidateNoBareMessageContractWithMultipleParts(
+                    od.Messages[0],
+                    od.Name,
+                    endpoint.Contract.Name
+                );
+                ValidateNoMessageContractWithStream(
+                    od.Messages[0],
+                    od.Name,
+                    endpoint.Contract.Name
+                );
                 if (od.Messages.Count > 1)
                 {
-                    ValidateNoMessageContractHeaders(od.Messages[1], od.Name, endpoint.Contract.Name);
-                    ValidateNoBareMessageContractWithMultipleParts(od.Messages[1], od.Name, endpoint.Contract.Name);
-                    ValidateNoMessageContractWithStream(od.Messages[1], od.Name, endpoint.Contract.Name);
+                    ValidateNoMessageContractHeaders(
+                        od.Messages[1],
+                        od.Name,
+                        endpoint.Contract.Name
+                    );
+                    ValidateNoBareMessageContractWithMultipleParts(
+                        od.Messages[1],
+                        od.Name,
+                        endpoint.Contract.Name
+                    );
+                    ValidateNoMessageContractWithStream(
+                        od.Messages[1],
+                        od.Name,
+                        endpoint.Contract.Name
+                    );
                 }
             }
         }
 
         internal static bool IsXmlSerializerFaultFormat(OperationDescription operationDescription)
         {
-            XmlSerializerOperationBehavior xsob = operationDescription.Behaviors.Find<XmlSerializerOperationBehavior>();
+            XmlSerializerOperationBehavior xsob =
+                operationDescription.Behaviors.Find<XmlSerializerOperationBehavior>();
             return (xsob != null && xsob.XmlSerializerFormatAttribute.SupportFaults);
         }
 
-        void ValidateNoMessageContractWithStream(MessageDescription md, string opName, string contractName)
+        void ValidateNoMessageContractWithStream(
+            MessageDescription md,
+            string opName,
+            string contractName
+        )
         {
             if (IsTypedMessage(md))
             {
@@ -1248,7 +1899,17 @@ namespace System.ServiceModel.Description
                     if (description.Type == typeof(Stream))
                     {
                         throw System.ServiceModel.DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                            new InvalidOperationException(System.ServiceModel.SR2.GetString(System.ServiceModel.SR2.StreamBodyMemberNotSupported, this.GetType().ToString(), contractName, opName, md.MessageType.ToString(), description.Name)));
+                            new InvalidOperationException(
+                                System.ServiceModel.SR2.GetString(
+                                    System.ServiceModel.SR2.StreamBodyMemberNotSupported,
+                                    this.GetType().ToString(),
+                                    contractName,
+                                    opName,
+                                    md.MessageType.ToString(),
+                                    description.Name
+                                )
+                            )
+                        );
                     }
                 }
             }
@@ -1256,39 +1917,85 @@ namespace System.ServiceModel.Description
 
         void ValidateNoOperationHasEncodedXmlSerializer(OperationDescription od)
         {
-            XmlSerializerOperationBehavior xsob = od.Behaviors.Find<XmlSerializerOperationBehavior>();
-            if (xsob != null && (xsob.XmlSerializerFormatAttribute.Style == OperationFormatStyle.Rpc || xsob.XmlSerializerFormatAttribute.IsEncoded))
+            XmlSerializerOperationBehavior xsob =
+                od.Behaviors.Find<XmlSerializerOperationBehavior>();
+            if (
+                xsob != null
+                && (
+                    xsob.XmlSerializerFormatAttribute.Style == OperationFormatStyle.Rpc
+                    || xsob.XmlSerializerFormatAttribute.IsEncoded
+                )
+            )
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(SR2.GetString(SR2.RpcEncodedNotSupportedForNoneMessageVersion, od.Name, od.DeclaringContract.Name, od.DeclaringContract.Namespace)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new InvalidOperationException(
+                        SR2.GetString(
+                            SR2.RpcEncodedNotSupportedForNoneMessageVersion,
+                            od.Name,
+                            od.DeclaringContract.Name,
+                            od.DeclaringContract.Namespace
+                        )
+                    )
+                );
             }
         }
 
-        void ValidateNoBareMessageContractWithMultipleParts(MessageDescription md, string opName, string contractName)
+        void ValidateNoBareMessageContractWithMultipleParts(
+            MessageDescription md,
+            string opName,
+            string contractName
+        )
         {
             if (IsTypedMessage(md) && md.Body.WrapperName == null)
             {
                 if (md.Body.Parts.Count > 1)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(
-                        SR2.GetString(SR2.InvalidMessageContractWithoutWrapperName, opName, contractName, md.MessageType)));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new InvalidOperationException(
+                            SR2.GetString(
+                                SR2.InvalidMessageContractWithoutWrapperName,
+                                opName,
+                                contractName,
+                                md.MessageType
+                            )
+                        )
+                    );
                 }
                 if (md.Body.Parts.Count == 1 && md.Body.Parts[0].Multiple)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(SR2.GetString(SR2.MCAtMostOneRequestBodyParameterAllowedForUnwrappedMessages, opName, contractName, md.MessageType)));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new InvalidOperationException(
+                            SR2.GetString(
+                                SR2.MCAtMostOneRequestBodyParameterAllowedForUnwrappedMessages,
+                                opName,
+                                contractName,
+                                md.MessageType
+                            )
+                        )
+                    );
                 }
             }
         }
 
-        void ValidateNoMessageContractHeaders(MessageDescription md, string opName, string contractName)
+        void ValidateNoMessageContractHeaders(
+            MessageDescription md,
+            string opName,
+            string contractName
+        )
         {
             if (md.Headers.Count != 0)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(
-                    SR2.GetString(SR2.InvalidMethodWithSOAPHeaders, opName, contractName)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new InvalidOperationException(
+                        SR2.GetString(SR2.InvalidMethodWithSOAPHeaders, opName, contractName)
+                    )
+                );
             }
         }
 
-        internal class MessagePassthroughFormatter : IClientMessageFormatter, IDispatchMessageFormatter
+        internal class MessagePassthroughFormatter
+            : IClientMessageFormatter,
+                IDispatchMessageFormatter
         {
             public object DeserializeReply(Message message, object[] parameters)
             {
@@ -1300,7 +2007,11 @@ namespace System.ServiceModel.Description
                 parameters[0] = message;
             }
 
-            public Message SerializeReply(MessageVersion messageVersion, object[] parameters, object result)
+            public Message SerializeReply(
+                MessageVersion messageVersion,
+                object[] parameters,
+                object result
+            )
             {
                 return result as Message;
             }
@@ -1311,15 +2022,24 @@ namespace System.ServiceModel.Description
             }
         }
 
-        static internal JavascriptCallbackResponseMessageProperty TrySetupJavascriptCallback(string callbackParameterName)
+        internal static JavascriptCallbackResponseMessageProperty TrySetupJavascriptCallback(
+            string callbackParameterName
+        )
         {
             JavascriptCallbackResponseMessageProperty javascriptProperty = null;
-            if (!String.IsNullOrEmpty(callbackParameterName) &&
-                !OperationContext.Current.OutgoingMessageProperties.TryGetValue<JavascriptCallbackResponseMessageProperty>(JavascriptCallbackResponseMessageProperty.Name, out javascriptProperty))
+            if (
+                !String.IsNullOrEmpty(callbackParameterName)
+                && !OperationContext.Current.OutgoingMessageProperties.TryGetValue<JavascriptCallbackResponseMessageProperty>(
+                    JavascriptCallbackResponseMessageProperty.Name,
+                    out javascriptProperty
+                )
+            )
             {
-                UriTemplateMatch match = WebOperationContext.Current.IncomingRequest.UriTemplateMatch;
-                if (match != null &&
-                    match.QueryParameters.AllKeys.Contains(callbackParameterName))
+                UriTemplateMatch match = WebOperationContext
+                    .Current
+                    .IncomingRequest
+                    .UriTemplateMatch;
+                if (match != null && match.QueryParameters.AllKeys.Contains(callbackParameterName))
                 {
                     string callbackName = match.QueryParameters[callbackParameterName];
 
@@ -1327,9 +2047,12 @@ namespace System.ServiceModel.Description
                     {
                         javascriptProperty = new JavascriptCallbackResponseMessageProperty
                         {
-                            CallbackFunctionName = callbackName
+                            CallbackFunctionName = callbackName,
                         };
-                        OperationContext.Current.OutgoingMessageProperties.Add(JavascriptCallbackResponseMessageProperty.Name, javascriptProperty);
+                        OperationContext.Current.OutgoingMessageProperties.Add(
+                            JavascriptCallbackResponseMessageProperty.Name,
+                            javascriptProperty
+                        );
                     }
                 }
             }

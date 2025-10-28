@@ -15,10 +15,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -29,42 +29,48 @@
 //
 
 using System.Web;
-namespace System.Web.Mail 
-{
-	public class RelatedBodyPart
-	{
-		string id;
-		string fileName;
-		
-		public RelatedBodyPart (string id, string fileName)
-		{
-			this.id = id;
-			if (FileExists (fileName))
-				this.fileName = fileName;
-			else
-				throw new HttpException(500, "Invalid related body part");
-		}
-		
-		public string Name {
-			get { return id; }
-			set { id = value; }
-		}
 
-		public string Path {
-			get { return fileName; }
-			set { fileName = value; }
-		}
-		
-		bool FileExists (string fileName)
-		{
-			//I am handling local files only . Not sure how URL's
-			//need to be handled.
-			try {
-				System.IO.File.OpenRead (fileName).Close ();
-				return true;
-			} catch (Exception) {
-			    return false;
-			}
-		}
-	}
+namespace System.Web.Mail
+{
+    public class RelatedBodyPart
+    {
+        string id;
+        string fileName;
+
+        public RelatedBodyPart(string id, string fileName)
+        {
+            this.id = id;
+            if (FileExists(fileName))
+                this.fileName = fileName;
+            else
+                throw new HttpException(500, "Invalid related body part");
+        }
+
+        public string Name
+        {
+            get { return id; }
+            set { id = value; }
+        }
+
+        public string Path
+        {
+            get { return fileName; }
+            set { fileName = value; }
+        }
+
+        bool FileExists(string fileName)
+        {
+            //I am handling local files only . Not sure how URL's
+            //need to be handled.
+            try
+            {
+                System.IO.File.OpenRead(fileName).Close();
+                return true;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+        }
+    }
 }

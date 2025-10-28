@@ -20,7 +20,8 @@ public class CodeGenMethodGroupConversionCachingTests : CSharpTestBase
     [Fact]
     public void Not_DelegateCreations_Static()
     {
-        var source = @"
+        var source =
+            @"
 using System;
 delegate void D();
 class C
@@ -33,8 +34,14 @@ class C
     static void Target() { Console.WriteLine(""FAIL""); }
     static void Invoke(D x, D y) { Console.Write(Object.ReferenceEquals(x, y) ? ""FAIL"" : ""PASS""); }
 }";
-        var verifier = CompileAndVerify(source, expectedOutput: PASS, symbolValidator: VerifyNoCacheContainersIn("C"));
-        verifier.VerifyIL("C.Main", @"
+        var verifier = CompileAndVerify(
+            source,
+            expectedOutput: PASS,
+            symbolValidator: VerifyNoCacheContainersIn("C")
+        );
+        verifier.VerifyIL(
+            "C.Main",
+            @"
 {
   // Code size       30 (0x1e)
   .maxstack  3
@@ -47,13 +54,15 @@ class C
   IL_0018:  call       ""void C.Invoke(D, D)""
   IL_001d:  ret
 }
-");
+"
+        );
     }
 
     [Fact]
     public void Not_DelegateCreations_Instance()
     {
-        var source = @"
+        var source =
+            @"
 using System;
 delegate void D();
 class C
@@ -67,8 +76,14 @@ class C
     void Target() { Console.WriteLine(""FAIL""); }
     void Invoke(D x, D y) { Console.Write(Object.ReferenceEquals(x, y) ? ""FAIL"" : ""PASS""); }
 }";
-        var verifier = CompileAndVerify(source, expectedOutput: PASS, symbolValidator: VerifyNoCacheContainersIn("C"));
-        verifier.VerifyIL("C.Main", @"
+        var verifier = CompileAndVerify(
+            source,
+            expectedOutput: PASS,
+            symbolValidator: VerifyNoCacheContainersIn("C")
+        );
+        verifier.VerifyIL(
+            "C.Main",
+            @"
 {
   // Code size       37 (0x25)
   .maxstack  4
@@ -85,13 +100,15 @@ class C
   IL_001f:  callvirt   ""void C.Invoke(D, D)""
   IL_0024:  ret
 }
-");
+"
+        );
     }
 
     [Fact]
     public void Not_Conversions_Instance()
     {
-        var source = @"
+        var source =
+            @"
 using System;
 delegate void D();
 class C
@@ -105,8 +122,14 @@ class C
     void Target() { Console.WriteLine(""FAIL""); }
     void Invoke(D x, D y) { Console.Write(Object.ReferenceEquals(x, y) ? ""FAIL"" : ""PASS""); }
 }";
-        var verifier = CompileAndVerify(source, expectedOutput: PASS, symbolValidator: VerifyNoCacheContainersIn("C"));
-        verifier.VerifyIL("C.Main", @"
+        var verifier = CompileAndVerify(
+            source,
+            expectedOutput: PASS,
+            symbolValidator: VerifyNoCacheContainersIn("C")
+        );
+        verifier.VerifyIL(
+            "C.Main",
+            @"
 {
   // Code size       37 (0x25)
   .maxstack  4
@@ -123,13 +146,15 @@ class C
   IL_001f:  callvirt   ""void C.Invoke(D, D)""
   IL_0024:  ret
 }
-");
+"
+        );
     }
 
     [Fact]
     public void Not_DelegateCreations_InstanceExtensionMethod()
     {
-        var source = @"
+        var source =
+            @"
 using System;
 delegate void D();
 class C
@@ -148,8 +173,15 @@ static class E
 }
 ";
         // ILVerify: Unrecognized arguments for delegate .ctor. { Offset = 14 }
-        var verifier = CompileAndVerify(source, expectedOutput: PASS, symbolValidator: VerifyNoCacheContainersIn("C"), verify: Verification.FailsILVerify);
-        verifier.VerifyIL("C.Main", @"
+        var verifier = CompileAndVerify(
+            source,
+            expectedOutput: PASS,
+            symbolValidator: VerifyNoCacheContainersIn("C"),
+            verify: Verification.FailsILVerify
+        );
+        verifier.VerifyIL(
+            "C.Main",
+            @"
 {
   // Code size       37 (0x25)
   .maxstack  4
@@ -166,13 +198,15 @@ static class E
   IL_001f:  callvirt   ""void C.Invoke(D, D)""
   IL_0024:  ret
 }
-");
+"
+        );
     }
 
     [Fact]
     public void Not_Conversions_InstanceExtensionMethod()
     {
-        var source = @"
+        var source =
+            @"
 using System;
 delegate void D();
 class C
@@ -191,8 +225,15 @@ static class E
 }
 ";
         // ILVerify: Unrecognized arguments for delegate .ctor. { Offset = 14 }
-        var verifier = CompileAndVerify(source, expectedOutput: PASS, symbolValidator: VerifyNoCacheContainersIn("C"), verify: Verification.FailsILVerify);
-        verifier.VerifyIL("C.Main", @"
+        var verifier = CompileAndVerify(
+            source,
+            expectedOutput: PASS,
+            symbolValidator: VerifyNoCacheContainersIn("C"),
+            verify: Verification.FailsILVerify
+        );
+        verifier.VerifyIL(
+            "C.Main",
+            @"
 {
   // Code size       37 (0x25)
   .maxstack  4
@@ -209,13 +250,15 @@ static class E
   IL_001f:  callvirt   ""void C.Invoke(D, D)""
   IL_0024:  ret
 }
-");
+"
+        );
     }
 
     [Fact]
     public void Not_DelegateCreations_StaticExtensionMethod()
     {
-        var source = @"
+        var source =
+            @"
 using System;
 delegate void D(C arg);
 class C
@@ -233,8 +276,14 @@ static class E
     public static void Target(this C that) { Console.WriteLine(""FAIL""); }
 }
 ";
-        var verifier = CompileAndVerify(source, expectedOutput: PASS, symbolValidator: VerifyNoCacheContainersIn("C"));
-        verifier.VerifyIL("C.Main", @"
+        var verifier = CompileAndVerify(
+            source,
+            expectedOutput: PASS,
+            symbolValidator: VerifyNoCacheContainersIn("C")
+        );
+        verifier.VerifyIL(
+            "C.Main",
+            @"
 {
   // Code size       35 (0x23)
   .maxstack  4
@@ -248,13 +297,15 @@ static class E
   IL_001d:  callvirt   ""void C.Invoke(D, D)""
   IL_0022:  ret
 }
-");
+"
+        );
     }
 
     [Fact]
     public void Not_InExpressionLambda0()
     {
-        var source = @"
+        var source =
+            @"
 using System;
 using System.Linq.Expressions;
 class C
@@ -268,14 +319,21 @@ class C
     static int Target(int x) => 0;
 }
 ";
-        var verifier = CompileAndVerify(source
+        var verifier = CompileAndVerify(
+            source
 #if NETFRAMEWORK
-            , expectedOutput: "x => Convert(Int32 Target(Int32).CreateDelegate(System.Func`2[System.Int32,System.Int32], null))"
+            ,
+            expectedOutput: "x => Convert(Int32 Target(Int32).CreateDelegate(System.Func`2[System.Int32,System.Int32], null))"
 #else
-            , expectedOutput: "x => Convert(Int32 Target(Int32).CreateDelegate(System.Func`2[System.Int32,System.Int32], null), Func`2)"
+            ,
+            expectedOutput: "x => Convert(Int32 Target(Int32).CreateDelegate(System.Func`2[System.Int32,System.Int32], null), Func`2)"
 #endif
-            , symbolValidator: VerifyNoCacheContainersIn("C"));
-        verifier.VerifyIL("C.Main", @"
+            ,
+            symbolValidator: VerifyNoCacheContainersIn("C")
+        );
+        verifier.VerifyIL(
+            "C.Main",
+            @"
 {
   // Code size      160 (0xa0)
   .maxstack  7
@@ -325,13 +383,15 @@ class C
   IL_009a:  call       ""void System.Console.WriteLine(object)""
   IL_009f:  ret
 }
-");
+"
+        );
     }
 
     [Fact]
     public void Not_InExpressionLambda1()
     {
-        var source = @"
+        var source =
+            @"
 using System;
 using System.Linq.Expressions;
 class C
@@ -345,14 +405,21 @@ class C
     static int Target(int x) => 0;
 }
 ";
-        var verifier = CompileAndVerify(source
+        var verifier = CompileAndVerify(
+            source
 #if NETFRAMEWORK
-            , expectedOutput: "y => Convert(Int32 Target(Int32).CreateDelegate(System.Func`2[System.Int32,System.Int32], null))"
+            ,
+            expectedOutput: "y => Convert(Int32 Target(Int32).CreateDelegate(System.Func`2[System.Int32,System.Int32], null))"
 #else
-            , expectedOutput: "y => Convert(Int32 Target(Int32).CreateDelegate(System.Func`2[System.Int32,System.Int32], null), Func`2)"
+            ,
+            expectedOutput: "y => Convert(Int32 Target(Int32).CreateDelegate(System.Func`2[System.Int32,System.Int32], null), Func`2)"
 #endif
-            , symbolValidator: VerifyNoCacheContainersIn("C"));
-        verifier.VerifyIL("C.<>c.<Main>b__0_0", @"
+            ,
+            symbolValidator: VerifyNoCacheContainersIn("C")
+        );
+        verifier.VerifyIL(
+            "C.<>c.<Main>b__0_0",
+            @"
 {
   // Code size      155 (0x9b)
   .maxstack  7
@@ -401,13 +468,15 @@ class C
   IL_0095:  call       ""System.Linq.Expressions.Expression<System.Func<int, System.Func<int, int>>> System.Linq.Expressions.Expression.Lambda<System.Func<int, System.Func<int, int>>>(System.Linq.Expressions.Expression, params System.Linq.Expressions.ParameterExpression[])""
   IL_009a:  ret
 }
-");
+"
+        );
     }
 
     [Fact]
     public void Not_InStaticConstructor0()
     {
-        var source = @"
+        var source =
+            @"
 using System;
 class C
 {
@@ -416,7 +485,9 @@ class C
 }
 ";
         var verifier = CompileAndVerify(source, symbolValidator: VerifyNoCacheContainersIn("C"));
-        verifier.VerifyIL("C..cctor", @"
+        verifier.VerifyIL(
+            "C..cctor",
+            @"
 {
   // Code size       18 (0x12)
   .maxstack  2
@@ -426,13 +497,15 @@ class C
   IL_000c:  stsfld     ""System.Action C.ManualCache""
   IL_0011:  ret
 }
-");
+"
+        );
     }
 
     [Fact]
     public void Not_InStaticConstructor1()
     {
-        var source = @"
+        var source =
+            @"
 using System;
 struct C
 {
@@ -446,7 +519,9 @@ struct C
 }
 ";
         var verifier = CompileAndVerify(source, symbolValidator: VerifyNoCacheContainersIn("C"));
-        verifier.VerifyIL("C..cctor", @"
+        verifier.VerifyIL(
+            "C..cctor",
+            @"
 {
   // Code size       18 (0x12)
   .maxstack  2
@@ -456,13 +531,15 @@ struct C
   IL_000c:  stsfld     ""System.Action C.ManualCache""
   IL_0011:  ret
 }
-");
+"
+        );
     }
 
     [Fact]
     public void Not_TargetTypedNew0()
     {
-        var source = @"
+        var source =
+            @"
 using System;
 
 Action f = new(Target);
@@ -470,8 +547,14 @@ f();
 
 static void Target() { Console.WriteLine(""PASS""); }
 ";
-        var verifier = CompileAndVerify(source, expectedOutput: PASS, symbolValidator: VerifyNoCacheContainersIn("Program"));
-        verifier.VerifyIL("<top-level-statements-entry-point>", @"
+        var verifier = CompileAndVerify(
+            source,
+            expectedOutput: PASS,
+            symbolValidator: VerifyNoCacheContainersIn("Program")
+        );
+        verifier.VerifyIL(
+            "<top-level-statements-entry-point>",
+            @"
 {
   // Code size       18 (0x12)
   .maxstack  2
@@ -481,13 +564,15 @@ static void Target() { Console.WriteLine(""PASS""); }
   IL_000c:  callvirt   ""void System.Action.Invoke()""
   IL_0011:  ret
 }
-");
+"
+        );
     }
 
     [Fact]
     public void Not_TargetTypedNew1()
     {
-        var source = @"
+        var source =
+            @"
 #nullable enable
 using System;
 
@@ -496,8 +581,14 @@ f();
 
 static void Target() { Console.WriteLine(""PASS""); }
 ";
-        var verifier = CompileAndVerify(source, expectedOutput: PASS, symbolValidator: VerifyNoCacheContainersIn("Program"));
-        verifier.VerifyIL("<top-level-statements-entry-point>", @"
+        var verifier = CompileAndVerify(
+            source,
+            expectedOutput: PASS,
+            symbolValidator: VerifyNoCacheContainersIn("Program")
+        );
+        verifier.VerifyIL(
+            "<top-level-statements-entry-point>",
+            @"
 {
   // Code size       18 (0x12)
   .maxstack  2
@@ -507,19 +598,27 @@ static void Target() { Console.WriteLine(""PASS""); }
   IL_000c:  callvirt   ""void System.Action.Invoke()""
   IL_0011:  ret
 }
-");
+"
+        );
     }
 
     [Fact]
     public void Not_CSharp10()
     {
-        var source = @"
+        var source =
+            @"
 var f = Target;
 f();
 static void Target() { }
 ";
-        var verifier = CompileAndVerify(source, parseOptions: TestOptions.Regular10, symbolValidator: VerifyNoCacheContainersIn("Program"));
-        verifier.VerifyIL("<top-level-statements-entry-point>", @"
+        var verifier = CompileAndVerify(
+            source,
+            parseOptions: TestOptions.Regular10,
+            symbolValidator: VerifyNoCacheContainersIn("Program")
+        );
+        verifier.VerifyIL(
+            "<top-level-statements-entry-point>",
+            @"
 {
   // Code size       18 (0x12)
   .maxstack  2
@@ -529,13 +628,15 @@ static void Target() { }
   IL_000c:  callvirt   ""void System.Action.Invoke()""
   IL_0011:  ret
 }
-");
+"
+        );
     }
 
     [Fact]
     public void CacheExplicitConversions_TypeScoped_CouldBeModuleScoped0()
     {
-        var source = @"
+        var source =
+            @"
 using System;
 class C
 {
@@ -553,7 +654,9 @@ class C
 }
 ";
         var verifier = CompileAndVerify(source, expectedOutput: PASS);
-        verifier.VerifyIL("C.Main", @"
+        verifier.VerifyIL(
+            "C.Main",
+            @"
 {
   // Code size       33 (0x21)
   .maxstack  2
@@ -569,13 +672,15 @@ class C
   IL_001b:  call       ""void C.Test(System.Action)""
   IL_0020:  ret
 }
-");
+"
+        );
     }
 
     [Fact]
     public void CacheExplicitConversions_TypeScoped_CouldBeModuleScoped1()
     {
-        var source = @"
+        var source =
+            @"
 using System;
 class C
 {
@@ -596,7 +701,9 @@ class D<T>
 }
 ";
         var verifier = CompileAndVerify(source, expectedOutput: PASS);
-        verifier.VerifyIL("D<T>.Test", @"
+        verifier.VerifyIL(
+            "D<T>.Test",
+            @"
 {
   // Code size       28 (0x1c)
   .maxstack  2
@@ -611,13 +718,15 @@ class D<T>
   IL_0016:  stsfld     ""System.Action D<T>.<>O.<0>__Target""
   IL_001b:  ret
 }
-");
+"
+        );
     }
 
     [Fact]
     public void CacheExplicitConversions_TypeScoped_CouldBeModuleScoped2()
     {
-        var source = @"
+        var source =
+            @"
 using System;
 class C
 {
@@ -640,7 +749,9 @@ class E<V>
 }
 ";
         var verifier = CompileAndVerify(source, expectedOutput: PASS);
-        verifier.VerifyIL("D<T>.Test", @"
+        verifier.VerifyIL(
+            "D<T>.Test",
+            @"
 {
   // Code size       33 (0x21)
   .maxstack  2
@@ -656,13 +767,15 @@ class E<V>
   IL_001b:  callvirt   ""void System.Action.Invoke()""
   IL_0020:  ret
 }
-");
+"
+        );
     }
 
     [Fact]
     public void CacheExplicitConversions_TypeScoped_CouldBeModuleScoped3()
     {
-        var source = @"
+        var source =
+            @"
 using System;
 class C
 {
@@ -685,7 +798,9 @@ class E<V>
 }
 ";
         var verifier = CompileAndVerify(source, expectedOutput: PASS);
-        verifier.VerifyIL("D<T>.Test", @"
+        verifier.VerifyIL(
+            "D<T>.Test",
+            @"
 {
   // Code size       34 (0x22)
   .maxstack  2
@@ -702,13 +817,15 @@ class E<V>
   IL_001c:  callvirt   ""void System.Action<int>.Invoke(int)""
   IL_0021:  ret
 }
-");
+"
+        );
     }
 
     [Fact]
     public void CacheExplicitConversions_TypeScoped_CouldBeModuleScoped4()
     {
-        var source = @"
+        var source =
+            @"
 using System;
 class C
 {
@@ -731,7 +848,9 @@ class E<V>
 }
 ";
         var verifier = CompileAndVerify(source, expectedOutput: PASS);
-        verifier.VerifyIL("D<T>.Test", @"
+        verifier.VerifyIL(
+            "D<T>.Test",
+            @"
 {
   // Code size       34 (0x22)
   .maxstack  2
@@ -748,13 +867,15 @@ class E<V>
   IL_001c:  callvirt   ""void System.Action<int>.Invoke(int)""
   IL_0021:  ret
 }
-");
+"
+        );
     }
 
     [Fact]
     public void CacheExplicitConversions_TypeScoped_CouldBeModuleScoped5()
     {
-        var source = @"
+        var source =
+            @"
 using System;
 class C
 {
@@ -777,7 +898,9 @@ class E<V>
 }
 ";
         var verifier = CompileAndVerify(source, expectedOutput: PASS);
-        verifier.VerifyIL("D<T>.Test", @"
+        verifier.VerifyIL(
+            "D<T>.Test",
+            @"
 {
   // Code size       35 (0x23)
   .maxstack  2
@@ -795,13 +918,15 @@ class E<V>
   IL_0021:  pop
   IL_0022:  ret
 }
-");
+"
+        );
     }
 
     [Fact]
     public void CacheExplicitConversions_TypeScoped0()
     {
-        var source = @"
+        var source =
+            @"
 using System;
 class C
 {
@@ -822,7 +947,9 @@ class D<T>
 }
 ";
         var verifier = CompileAndVerify(source, expectedOutput: PASS);
-        verifier.VerifyIL("D<T>.Test", @"
+        verifier.VerifyIL(
+            "D<T>.Test",
+            @"
 {
   // Code size       33 (0x21)
   .maxstack  2
@@ -838,13 +965,15 @@ class D<T>
   IL_001b:  callvirt   ""void System.Action.Invoke()""
   IL_0020:  ret
 }
-");
+"
+        );
     }
 
     [Fact]
     public void CacheExplicitConversions_TypeScoped1()
     {
-        var source = @"
+        var source =
+            @"
 using System;
 class C
 {
@@ -865,7 +994,9 @@ class D<T>
 }
 ";
         var verifier = CompileAndVerify(source, expectedOutput: PASS);
-        verifier.VerifyIL("D<T>.Test", @"
+        verifier.VerifyIL(
+            "D<T>.Test",
+            @"
 {
   // Code size       33 (0x21)
   .maxstack  2
@@ -881,13 +1012,15 @@ class D<T>
   IL_001b:  callvirt   ""void System.Action.Invoke()""
   IL_0020:  ret
 }
-");
+"
+        );
     }
 
     [Fact]
     public void CacheExplicitConversions_TypeScoped2()
     {
-        var source = @"
+        var source =
+            @"
 using System;
 class C
 {
@@ -908,7 +1041,9 @@ class D<T>
 }
 ";
         var verifier = CompileAndVerify(source, expectedOutput: PASS);
-        verifier.VerifyIL("D<T>.Test", @"
+        verifier.VerifyIL(
+            "D<T>.Test",
+            @"
 {
   // Code size       33 (0x21)
   .maxstack  2
@@ -924,13 +1059,15 @@ class D<T>
   IL_001b:  callvirt   ""void System.Action.Invoke()""
   IL_0020:  ret
 }
-");
+"
+        );
     }
 
     [Fact]
     public void CacheExplicitConversions_TypeScoped3()
     {
-        var source = @"
+        var source =
+            @"
 using System;
 class C
 {
@@ -953,7 +1090,9 @@ class E<V>
 }
 ";
         var verifier = CompileAndVerify(source, expectedOutput: PASS);
-        verifier.VerifyIL("D<T>.Test", @"
+        verifier.VerifyIL(
+            "D<T>.Test",
+            @"
 {
   // Code size       33 (0x21)
   .maxstack  2
@@ -969,13 +1108,15 @@ class E<V>
   IL_001b:  callvirt   ""void System.Action.Invoke()""
   IL_0020:  ret
 }
-");
+"
+        );
     }
 
     [Fact]
     public void CacheExplicitConversions_TypeScoped4()
     {
-        var source = @"
+        var source =
+            @"
 using System;
 class C
 {
@@ -998,7 +1139,9 @@ class E<V>
 }
 ";
         var verifier = CompileAndVerify(source, expectedOutput: PASS);
-        verifier.VerifyIL("D<T>.Test", @"
+        verifier.VerifyIL(
+            "D<T>.Test",
+            @"
 {
   // Code size       33 (0x21)
   .maxstack  2
@@ -1014,13 +1157,15 @@ class E<V>
   IL_001b:  callvirt   ""void System.Action.Invoke()""
   IL_0020:  ret
 }
-");
+"
+        );
     }
 
     [Fact]
     public void CacheExplicitConversions_TypeScoped5()
     {
-        var source = @"
+        var source =
+            @"
 using System;
 class C
 {
@@ -1043,7 +1188,9 @@ class E<V>
 }
 ";
         var verifier = CompileAndVerify(source, expectedOutput: PASS);
-        verifier.VerifyIL("D<T>.Test", @"
+        verifier.VerifyIL(
+            "D<T>.Test",
+            @"
 {
   // Code size       34 (0x22)
   .maxstack  2
@@ -1060,13 +1207,15 @@ class E<V>
   IL_0020:  pop
   IL_0021:  ret
 }
-");
+"
+        );
     }
 
     [Fact]
     public void CacheExplicitConversions_TypeScoped6()
     {
-        var source = @"
+        var source =
+            @"
 using System;
 class C
 {
@@ -1089,7 +1238,9 @@ class E<K>
 }
 ";
         var verifier = CompileAndVerify(source, expectedOutput: PASS);
-        verifier.VerifyIL("D<T>.Test", @"
+        verifier.VerifyIL(
+            "D<T>.Test",
+            @"
 {
   // Code size       34 (0x22)
   .maxstack  2
@@ -1106,13 +1257,15 @@ class E<K>
   IL_0020:  pop
   IL_0021:  ret
 }
-");
+"
+        );
     }
 
     [Fact]
     public void CacheExplicitConversions_TypeScoped7()
     {
-        var source = @"
+        var source =
+            @"
 using System;
 class C
 {
@@ -1135,7 +1288,9 @@ class E<K>
 }
 ";
         var verifier = CompileAndVerify(source, expectedOutput: PASS);
-        verifier.VerifyIL("D<T>.Test", @"
+        verifier.VerifyIL(
+            "D<T>.Test",
+            @"
 {
   // Code size       43 (0x2b)
   .maxstack  2
@@ -1156,13 +1311,15 @@ class E<K>
   IL_0029:  pop
   IL_002a:  ret
 }
-");
+"
+        );
     }
 
     [Fact]
     public void CacheExplicitConversions_MethodScoped0()
     {
-        var source = @"
+        var source =
+            @"
 using System;
 class C
 {
@@ -1183,7 +1340,9 @@ class D
 }
 ";
         var verifier = CompileAndVerify(source, expectedOutput: PASS);
-        verifier.VerifyIL("D.Test<T>", @"
+        verifier.VerifyIL(
+            "D.Test<T>",
+            @"
 {
   // Code size       33 (0x21)
   .maxstack  2
@@ -1199,13 +1358,15 @@ class D
   IL_001b:  callvirt   ""void System.Action.Invoke()""
   IL_0020:  ret
 }
-");
+"
+        );
     }
 
     [Fact]
     public void CacheExplicitConversions_MethodScoped1()
     {
-        var source = @"
+        var source =
+            @"
 using System;
 class C
 {
@@ -1228,7 +1389,9 @@ class E<K>
 }
 ";
         var verifier = CompileAndVerify(source, expectedOutput: PASS);
-        verifier.VerifyIL("D.Test<T>", @"
+        verifier.VerifyIL(
+            "D.Test<T>",
+            @"
 {
   // Code size       33 (0x21)
   .maxstack  2
@@ -1244,13 +1407,15 @@ class E<K>
   IL_001b:  callvirt   ""void System.Action.Invoke()""
   IL_0020:  ret
 }
-");
+"
+        );
     }
 
     [Fact]
     public void CacheExplicitConversions_MethodScoped2()
     {
-        var source = @"
+        var source =
+            @"
 using System;
 class C
 {
@@ -1273,7 +1438,9 @@ class E<K>
 }
 ";
         var verifier = CompileAndVerify(source, expectedOutput: PASS);
-        verifier.VerifyIL("D.Test<T>", @"
+        verifier.VerifyIL(
+            "D.Test<T>",
+            @"
 {
   // Code size       43 (0x2b)
   .maxstack  2
@@ -1294,13 +1461,15 @@ class E<K>
   IL_0029:  pop
   IL_002a:  ret
 }
-");
+"
+        );
     }
 
     [Fact]
     public void CacheExplicitConversions_MethodScoped3()
     {
-        var source = @"
+        var source =
+            @"
 using System;
 class C
 {
@@ -1323,7 +1492,9 @@ class E<K>
 }
 ";
         var verifier = CompileAndVerify(source, expectedOutput: PASS);
-        verifier.VerifyIL("D<M>.Test<T>", @"
+        verifier.VerifyIL(
+            "D<M>.Test<T>",
+            @"
 {
   // Code size       51 (0x33)
   .maxstack  3
@@ -1347,13 +1518,15 @@ class E<K>
   IL_002d:  callvirt   ""void System.Action<M, T>.Invoke(M, T)""
   IL_0032:  ret
 }
-");
+"
+        );
     }
 
     [Fact]
     public void CacheImplicitConversions_TypeScoped_CouldBeModuleScoped0()
     {
-        var source = @"
+        var source =
+            @"
 using System;
 delegate void MyAction<T>();
 class C
@@ -1368,7 +1541,9 @@ class C
 }
 ";
         var verifier = CompileAndVerify(source, expectedOutput: PASS);
-        verifier.VerifyIL("C.Main", @"
+        verifier.VerifyIL(
+            "C.Main",
+            @"
 {
   // Code size       33 (0x21)
   .maxstack  2
@@ -1384,13 +1559,15 @@ class C
   IL_001b:  callvirt   ""void MyAction<int>.Invoke()""
   IL_0020:  ret
 }
-");
+"
+        );
     }
 
     [Fact]
     public void CacheImplicitConversions_TypeScoped_CouldBeModuleScoped1()
     {
-        var source = @"
+        var source =
+            @"
 using System;
 class C
 {
@@ -1406,7 +1583,9 @@ class C
 }
 ";
         var verifier = CompileAndVerify(source, expectedOutput: PASS);
-        verifier.VerifyIL("C.Main", @"
+        verifier.VerifyIL(
+            "C.Main",
+            @"
 {
   // Code size       33 (0x21)
   .maxstack  2
@@ -1422,13 +1601,15 @@ class C
   IL_001b:  callvirt   ""void C.MyAction<int>.Invoke()""
   IL_0020:  ret
 }
-");
+"
+        );
     }
 
     [Fact]
     public void CacheImplicitConversions_TypeScoped0()
     {
-        var source = @"
+        var source =
+            @"
 using System;
 delegate void MyAction();
 class C
@@ -1450,7 +1631,9 @@ class D<T>
 }
 ";
         var verifier = CompileAndVerify(source, expectedOutput: PASS);
-        verifier.VerifyIL("D<T>.Test", @"
+        verifier.VerifyIL(
+            "D<T>.Test",
+            @"
 {
   // Code size       33 (0x21)
   .maxstack  2
@@ -1466,13 +1649,15 @@ class D<T>
   IL_001b:  callvirt   ""void MyAction.Invoke()""
   IL_0020:  ret
 }
-");
+"
+        );
     }
 
     [Fact]
     public void CacheImplicitConversions_TypeScoped1()
     {
-        var source = @"
+        var source =
+            @"
 using System;
 class C
 {
@@ -1494,7 +1679,9 @@ class D<T>
 }
 ";
         var verifier = CompileAndVerify(source, expectedOutput: PASS);
-        verifier.VerifyIL("D<T>.Test", @"
+        verifier.VerifyIL(
+            "D<T>.Test",
+            @"
 {
   // Code size       28 (0x1c)
   .maxstack  2
@@ -1509,13 +1696,15 @@ class D<T>
   IL_0016:  stsfld     ""D<T>.MyAction D<T>.<>O.<0>__Target""
   IL_001b:  ret
 }
-");
+"
+        );
     }
 
     [Fact]
     public void CacheImplicitConversions_TypeScoped2()
     {
-        var source = @"
+        var source =
+            @"
 using System;
 class C
 {
@@ -1538,7 +1727,9 @@ class D<T>
 }
 ";
         var verifier = CompileAndVerify(source, expectedOutput: PASS);
-        verifier.VerifyIL("D<T>.Test", @"
+        verifier.VerifyIL(
+            "D<T>.Test",
+            @"
 {
   // Code size       33 (0x21)
   .maxstack  2
@@ -1554,13 +1745,15 @@ class D<T>
   IL_001b:  callvirt   ""void D<T>.MyAction<int>.Invoke()""
   IL_0020:  ret
 }
-");
+"
+        );
     }
 
     [Fact]
     public void CacheImplicitConversions_TypeScoped3()
     {
-        var source = @"
+        var source =
+            @"
 using System;
 class C
 {
@@ -1585,7 +1778,9 @@ class E<V>
 }
 ";
         var verifier = CompileAndVerify(source, expectedOutput: PASS);
-        verifier.VerifyIL("D<T>.Test", @"
+        verifier.VerifyIL(
+            "D<T>.Test",
+            @"
 {
   // Code size       33 (0x21)
   .maxstack  2
@@ -1601,13 +1796,15 @@ class E<V>
   IL_001b:  callvirt   ""void D<T>.MyAction<T>.Invoke()""
   IL_0020:  ret
 }
-");
+"
+        );
     }
 
     [Fact]
     public void CacheImplicitConversions_TypeScoped4()
     {
-        var source = @"
+        var source =
+            @"
 using System;
 class C
 {
@@ -1632,7 +1829,9 @@ class E<V>
 }
 ";
         var verifier = CompileAndVerify(source, expectedOutput: PASS);
-        verifier.VerifyIL("D<T>.Test", @"
+        verifier.VerifyIL(
+            "D<T>.Test",
+            @"
 {
   // Code size       33 (0x21)
   .maxstack  2
@@ -1648,13 +1847,15 @@ class E<V>
   IL_001b:  callvirt   ""void D<T>.MyAction<T>.Invoke()""
   IL_0020:  ret
 }
-");
+"
+        );
     }
 
     [Fact]
     public void CacheImplicitConversions_TypeScoped5()
     {
-        var source = @"
+        var source =
+            @"
 using System;
 class C
 {
@@ -1679,7 +1880,9 @@ class E<K>
 }
 ";
         var verifier = CompileAndVerify(source, expectedOutput: PASS);
-        verifier.VerifyIL("D<T>.Test", @"
+        verifier.VerifyIL(
+            "D<T>.Test",
+            @"
 {
   // Code size       34 (0x22)
   .maxstack  2
@@ -1696,13 +1899,15 @@ class E<K>
   IL_0020:  pop
   IL_0021:  ret
 }
-");
+"
+        );
     }
 
     [Fact]
     public void CacheImplicitConversions_TypeScoped6()
     {
-        var source = @"
+        var source =
+            @"
 using System;
 class C
 {
@@ -1727,7 +1932,9 @@ class E<K>
 }
 ";
         var verifier = CompileAndVerify(source, expectedOutput: PASS);
-        verifier.VerifyIL("D<T>.Test", @"
+        verifier.VerifyIL(
+            "D<T>.Test",
+            @"
 {
   // Code size       43 (0x2b)
   .maxstack  2
@@ -1748,13 +1955,15 @@ class E<K>
   IL_0029:  pop
   IL_002a:  ret
 }
-");
+"
+        );
     }
 
     [Fact]
     public void CacheImplicitConversions_TypeScoped7()
     {
-        var source = @"
+        var source =
+            @"
 using System;
 class C
 {
@@ -1779,7 +1988,9 @@ class E<K>
 }
 ";
         var verifier = CompileAndVerify(source, expectedOutput: PASS);
-        verifier.VerifyIL("D<T, M>.Test", @"
+        verifier.VerifyIL(
+            "D<T, M>.Test",
+            @"
 {
   // Code size       43 (0x2b)
   .maxstack  2
@@ -1800,13 +2011,15 @@ class E<K>
   IL_0029:  pop
   IL_002a:  ret
 }
-");
+"
+        );
     }
 
     [Fact]
     public void CacheImplicitConversions_TypeScoped8()
     {
-        var source = @"
+        var source =
+            @"
 using System;
 class C
 {
@@ -1822,7 +2035,9 @@ class C
 }
 ";
         var verifier = CompileAndVerify(source, expectedOutput: PASS);
-        verifier.VerifyIL("C.Main", @"
+        verifier.VerifyIL(
+            "C.Main",
+            @"
 {
   // Code size       33 (0x21)
   .maxstack  2
@@ -1838,13 +2053,15 @@ class C
   IL_001b:  callvirt   ""void C.MyAction<int>.Invoke()""
   IL_0020:  ret
 }
-");
+"
+        );
     }
 
     [Fact]
     public void CacheImplicitConversions_MethodScoped0()
     {
-        var source = @"
+        var source =
+            @"
 using System;
 class C
 {
@@ -1867,7 +2084,9 @@ class D
 }
 ";
         var verifier = CompileAndVerify(source, expectedOutput: PASS);
-        verifier.VerifyIL("D.Test<T>", @"
+        verifier.VerifyIL(
+            "D.Test<T>",
+            @"
 {
   // Code size       33 (0x21)
   .maxstack  2
@@ -1883,13 +2102,15 @@ class D
   IL_001b:  callvirt   ""void D.MyAction.Invoke()""
   IL_0020:  ret
 }
-");
+"
+        );
     }
 
     [Fact]
     public void CacheImplicitConversions_MethodScoped1()
     {
-        var source = @"
+        var source =
+            @"
 using System;
 class C
 {
@@ -1912,7 +2133,9 @@ class D<V>
 }
 ";
         var verifier = CompileAndVerify(source, expectedOutput: PASS);
-        verifier.VerifyIL("D<V>.Test<T>", @"
+        verifier.VerifyIL(
+            "D<V>.Test<T>",
+            @"
 {
   // Code size       42 (0x2a)
   .maxstack  2
@@ -1932,13 +2155,15 @@ class D<V>
   IL_0024:  callvirt   ""void D<V>.MyAction<V>.Invoke(V)""
   IL_0029:  ret
 }
-");
+"
+        );
     }
 
     [Fact]
     public void CacheImplicitConversions_MethodScoped2()
     {
-        var source = @"
+        var source =
+            @"
 using System;
 class C
 {
@@ -1961,7 +2186,9 @@ class D<V>
 }
 ";
         var verifier = CompileAndVerify(source, expectedOutput: PASS);
-        verifier.VerifyIL("D<V>.Test<T>", @"
+        verifier.VerifyIL(
+            "D<V>.Test<T>",
+            @"
 {
   // Code size       52 (0x34)
   .maxstack  3
@@ -1986,13 +2213,15 @@ class D<V>
   IL_0032:  pop
   IL_0033:  ret
 }
-");
+"
+        );
     }
 
     [Fact]
     public void Where_TypeScoped0()
     {
-        var source = @"
+        var source =
+            @"
 using System;
 class C
 {
@@ -2017,7 +2246,9 @@ class E<V>
 }
 ";
         var verifier = CompileAndVerify(source, expectedOutput: PASS);
-        verifier.VerifyIL("D<T>.Test", @"
+        verifier.VerifyIL(
+            "D<T>.Test",
+            @"
 {
   // Code size       42 (0x2a)
   .maxstack  2
@@ -2037,13 +2268,15 @@ class E<V>
   IL_0024:  callvirt   ""void D<T>.MyAction.Invoke(T)""
   IL_0029:  ret
 }
-");
+"
+        );
     }
 
     [Fact]
     public void Where_MethodScoped0()
     {
-        var source = @"
+        var source =
+            @"
 using System;
 class C
 {
@@ -2080,7 +2313,10 @@ class E<V>
             Assert.Equal(1, m.ConstraintTypes().Length);
             Assert.Equal(testClass.TypeParameters[0], m.ConstraintTypes()[0]);
         }
-        CompileAndVerify(source, symbolValidator: containerValidator, expectedOutput: PASS).VerifyIL("D<T>.Test<M>", @"
+        CompileAndVerify(source, symbolValidator: containerValidator, expectedOutput: PASS)
+            .VerifyIL(
+                "D<T>.Test<M>",
+                @"
 {
   // Code size       34 (0x22)
   .maxstack  2
@@ -2097,13 +2333,15 @@ class E<V>
   IL_0020:  pop
   IL_0021:  ret
 }
-");
+"
+            );
     }
 
     [Fact]
     public void Where_MethodScoped1()
     {
-        var source = @"
+        var source =
+            @"
 using System;
 class C
 {
@@ -2141,7 +2379,10 @@ class E<V>
             Assert.Equal(1, m.ConstraintTypes().Length);
             Assert.Equal(mainClass, m.ConstraintTypes()[0]);
         }
-        CompileAndVerify(source, symbolValidator: containerValidator, expectedOutput: PASS).VerifyIL("D.Test<M>", @"
+        CompileAndVerify(source, symbolValidator: containerValidator, expectedOutput: PASS)
+            .VerifyIL(
+                "D.Test<M>",
+                @"
 {
   // Code size       34 (0x22)
   .maxstack  2
@@ -2158,13 +2399,15 @@ class E<V>
   IL_0020:  pop
   IL_0021:  ret
 }
-");
+"
+            );
     }
 
     [Fact]
     public void Where_MethodScoped2()
     {
-        var source = @"
+        var source =
+            @"
 using System;
 class C
 {
@@ -2198,7 +2441,10 @@ class E
             AssertEx.NotNull(m);
             Assert.True(m.IsValueType);
         }
-        CompileAndVerify(source, symbolValidator: containerValidator, expectedOutput: PASS).VerifyIL("D.Test<M>", @"
+        CompileAndVerify(source, symbolValidator: containerValidator, expectedOutput: PASS)
+            .VerifyIL(
+                "D.Test<M>",
+                @"
 {
   // Code size       34 (0x22)
   .maxstack  2
@@ -2215,13 +2461,15 @@ class E
   IL_0020:  pop
   IL_0021:  ret
 }
-");
+"
+            );
     }
 
     [Fact]
     public void ExtensionMethod_TypeScoped_CouldBeModuleScoped0()
     {
-        var source = @"
+        var source =
+            @"
 using System;
 class C
 {
@@ -2236,7 +2484,10 @@ static class E
     public static void Target(this C c) { Console.WriteLine(""PASS""); }
 }
 ";
-        CompileAndVerify(source, expectedOutput: PASS).VerifyIL("C.Main", @"
+        CompileAndVerify(source, expectedOutput: PASS)
+            .VerifyIL(
+                "C.Main",
+                @"
 {
   // Code size       34 (0x22)
   .maxstack  2
@@ -2253,13 +2504,15 @@ static class E
   IL_001c:  callvirt   ""void System.Action<C>.Invoke(C)""
   IL_0021:  ret
 }
-");
+"
+            );
     }
 
     [Fact]
     public void ExtensionMethod_TypeScoped_CouldBeModuleScoped1()
     {
-        var source = @"
+        var source =
+            @"
 using System;
 class C
 {
@@ -2274,7 +2527,10 @@ static class E
     public static void Target<T>(this T t) { Console.WriteLine(""PASS""); }
 }
 ";
-        CompileAndVerify(source, expectedOutput: PASS).VerifyIL("C.Main", @"
+        CompileAndVerify(source, expectedOutput: PASS)
+            .VerifyIL(
+                "C.Main",
+                @"
 {
   // Code size       34 (0x22)
   .maxstack  2
@@ -2291,13 +2547,15 @@ static class E
   IL_001c:  callvirt   ""void System.Action<C>.Invoke(C)""
   IL_0021:  ret
 }
-");
+"
+            );
     }
 
     [Fact]
     public void ExtensionMethod_TypeScoped_CouldBeModuleScoped2()
     {
-        var source = @"
+        var source =
+            @"
 using System;
 static class E
 {
@@ -2309,7 +2567,10 @@ static class E
     public static void Target<T>(this T t) { }
 }
 ";
-        CompileAndVerify(source).VerifyIL("E.Test", @"
+        CompileAndVerify(source)
+            .VerifyIL(
+                "E.Test",
+                @"
 {
   // Code size       25 (0x19)
   .maxstack  2
@@ -2321,13 +2582,15 @@ static class E
   IL_0013:  stsfld     ""System.Action<int> E.<>O.<0>__Target""
   IL_0018:  ret
 }
-");
+"
+            );
     }
 
     [Fact]
     public void ExtensionMethod_TypeScoped0()
     {
-        var source = @"
+        var source =
+            @"
 using System;
 class C
 {
@@ -2349,7 +2612,10 @@ static class E
     public static void Target(this C c) { Console.WriteLine(""PASS""); }
 }
 ";
-        CompileAndVerify(source, expectedOutput: PASS).VerifyIL("D<T>.Test", @"
+        CompileAndVerify(source, expectedOutput: PASS)
+            .VerifyIL(
+                "D<T>.Test",
+                @"
 {
   // Code size       42 (0x2a)
   .maxstack  2
@@ -2369,13 +2635,15 @@ static class E
   IL_0024:  callvirt   ""void System.Action<T>.Invoke(T)""
   IL_0029:  ret
 }
-");
+"
+            );
     }
 
     [Fact]
     public void ExtensionMethod_TypeScoped1()
     {
-        var source = @"
+        var source =
+            @"
 using System;
 class C
 {
@@ -2397,7 +2665,10 @@ static class E
     public static void Target<T>(this T t) { Console.WriteLine(""PASS""); }
 }
 ";
-        CompileAndVerify(source, expectedOutput: PASS).VerifyIL("D<K>.Test", @"
+        CompileAndVerify(source, expectedOutput: PASS)
+            .VerifyIL(
+                "D<K>.Test",
+                @"
 {
   // Code size       34 (0x22)
   .maxstack  2
@@ -2414,13 +2685,15 @@ static class E
   IL_001c:  callvirt   ""void System.Action<K>.Invoke(K)""
   IL_0021:  ret
 }
-");
+"
+            );
     }
 
     [Fact]
     public void ExtensionMethod_TypeScoped2()
     {
-        var source = @"
+        var source =
+            @"
 using System;
 static class E
 {
@@ -2435,7 +2708,10 @@ static class E
     public static void Target<T>(this T t) { }
 }
 ";
-        CompileAndVerify(source).VerifyIL("E.F<T>.Test", @"
+        CompileAndVerify(source)
+            .VerifyIL(
+                "E.F<T>.Test",
+                @"
 {
   // Code size       25 (0x19)
   .maxstack  2
@@ -2447,13 +2723,15 @@ static class E
   IL_0013:  stsfld     ""System.Action<T> E.F<T>.<>O.<0>__Target""
   IL_0018:  ret
 }
-");
+"
+            );
     }
 
     [Fact]
     public void ExtensionMethod_MethodScoped0()
     {
-        var source = @"
+        var source =
+            @"
 using System;
 class C
 {
@@ -2473,7 +2751,10 @@ static class E
     public static void Target<M>(this M m) { Console.WriteLine(""PASS""); }
 }
 ";
-        CompileAndVerify(source, expectedOutput: PASS).VerifyIL("C.Test<T>", @"
+        CompileAndVerify(source, expectedOutput: PASS)
+            .VerifyIL(
+                "C.Test<T>",
+                @"
 {
   // Code size       34 (0x22)
   .maxstack  2
@@ -2490,13 +2771,15 @@ static class E
   IL_001c:  callvirt   ""void System.Action<T>.Invoke(T)""
   IL_0021:  ret
 }
-");
+"
+            );
     }
 
     [Fact]
     public void ExtensionMethod_MethodScoped1()
     {
-        var source = @"
+        var source =
+            @"
 using System;
 class C
 {
@@ -2516,7 +2799,10 @@ static class E
     public static void Target(this C c) { Console.WriteLine(""PASS""); }
 }
 ";
-        CompileAndVerify(source, expectedOutput: PASS).VerifyIL("C.Test<T>", @"
+        CompileAndVerify(source, expectedOutput: PASS)
+            .VerifyIL(
+                "C.Test<T>",
+                @"
 {
   // Code size       42 (0x2a)
   .maxstack  2
@@ -2536,13 +2822,15 @@ static class E
   IL_0024:  callvirt   ""void System.Action<T>.Invoke(T)""
   IL_0029:  ret
 }
-");
+"
+            );
     }
 
     [Fact]
     public void ExtensionMethod_MethodScoped2()
     {
-        var source = @"
+        var source =
+            @"
 using System;
 static class E
 {
@@ -2554,7 +2842,10 @@ static class E
     public static void Target<T>(this T t) { }
 }
 ";
-        CompileAndVerify(source).VerifyIL("E.Test<T>", @"
+        CompileAndVerify(source)
+            .VerifyIL(
+                "E.Test<T>",
+                @"
 {
   // Code size       25 (0x19)
   .maxstack  2
@@ -2566,13 +2857,15 @@ static class E
   IL_0013:  stsfld     ""System.Action<T> E.<Test>O__0_0<T>.<0>__Target""
   IL_0018:  ret
 }
-");
+"
+            );
     }
 
     [Fact]
     public void Lambda_TypeScoped_CouldBeModuleScoped0()
     {
-        var source = @"
+        var source =
+            @"
 using System;
 class C
 {
@@ -2588,7 +2881,9 @@ class C
 }
 ";
         var verifier = CompileAndVerify(source, expectedOutput: PASS);
-        verifier.VerifyIL("C.<>c.<Main>b__0_0", @"
+        verifier.VerifyIL(
+            "C.<>c.<Main>b__0_0",
+            @"
 {
   // Code size       33 (0x21)
   .maxstack  2
@@ -2604,13 +2899,15 @@ class C
   IL_001b:  call       ""void C.Invoke(System.Action)""
   IL_0020:  ret
 }
-");
+"
+        );
     }
 
     [Fact]
     public void Lambda_TypeScoped_CouldBeModuleScoped1()
     {
-        var source = @"
+        var source =
+            @"
 using System;
 class C
 {
@@ -2626,7 +2923,9 @@ class D
 }
 ";
         var verifier = CompileAndVerify(source, expectedOutput: PASS);
-        verifier.VerifyIL("C.<>c.<Main>b__0_0", @"
+        verifier.VerifyIL(
+            "C.<>c.<Main>b__0_0",
+            @"
 {
   // Code size       33 (0x21)
   .maxstack  2
@@ -2642,13 +2941,15 @@ class D
   IL_001b:  callvirt   ""void System.Action.Invoke()""
   IL_0020:  ret
 }
-");
+"
+        );
     }
 
     [Fact]
     public void Lambda_TypeScoped0()
     {
-        var source = @"
+        var source =
+            @"
 using System;
 class C
 {
@@ -2672,7 +2973,9 @@ class D<T>
 }
 ";
         var verifier = CompileAndVerify(source, expectedOutput: PASS);
-        verifier.VerifyIL("D<T>.<>c.<Test>b__0_0", @"
+        verifier.VerifyIL(
+            "D<T>.<>c.<Test>b__0_0",
+            @"
 {
   // Code size       34 (0x22)
   .maxstack  2
@@ -2689,13 +2992,15 @@ class D<T>
   IL_0020:  pop
   IL_0021:  ret
 }
-");
+"
+        );
     }
 
     [Fact]
     public void Lambda_TypeScoped1()
     {
-        var source = @"
+        var source =
+            @"
 using System;
 class C
 {
@@ -2719,7 +3024,9 @@ class E
 }
 ";
         var verifier = CompileAndVerify(source, expectedOutput: PASS);
-        verifier.VerifyIL("D<T>.<>c.<Test>b__1_0", @"
+        verifier.VerifyIL(
+            "D<T>.<>c.<Test>b__1_0",
+            @"
 {
   // Code size       28 (0x1c)
   .maxstack  2
@@ -2734,13 +3041,15 @@ class E
   IL_0016:  stsfld     ""D<T>.MyFunc D<T>.<>O.<0>__Target""
   IL_001b:  ret
 }
-");
+"
+        );
     }
 
     [Fact]
     public void Lambda_MethodScoped0()
     {
-        var source = @"
+        var source =
+            @"
 using System;
 class C
 {
@@ -2764,7 +3073,9 @@ class D<T>
 }
 ";
         var verifier = CompileAndVerify(source, expectedOutput: PASS);
-        verifier.VerifyIL("D<T>.<>c__0<G>.<Test>b__0_0", @"
+        verifier.VerifyIL(
+            "D<T>.<>c__0<G>.<Test>b__0_0",
+            @"
 {
   // Code size       34 (0x22)
   .maxstack  2
@@ -2781,13 +3092,15 @@ class D<T>
   IL_0020:  pop
   IL_0021:  ret
 }
-");
+"
+        );
     }
 
     [Fact]
     public void Lambda_MethodScoped1()
     {
-        var source = @"
+        var source =
+            @"
 using System;
 class C
 {
@@ -2810,7 +3123,9 @@ class E<V>
 }
 ";
         var verifier = CompileAndVerify(source, expectedOutput: PASS);
-        verifier.VerifyIL("D.<>c__0<G>.<Test>b__0_0", @"
+        verifier.VerifyIL(
+            "D.<>c__0<G>.<Test>b__0_0",
+            @"
 {
   // Code size       28 (0x1c)
   .maxstack  2
@@ -2825,13 +3140,15 @@ class E<V>
   IL_0016:  stsfld     ""System.Func<G> D.<Test>O__0_0<G>.<0>__Target""
   IL_001b:  ret
 }
-");
+"
+        );
     }
 
     [Fact]
     public void SameTypeAndSymbolResultsSameField_TypeScoped0()
     {
-        var source = @"
+        var source =
+            @"
 using System;
 class C<T>
 {
@@ -2843,10 +3160,13 @@ class D
     public static void Target<V>() { }
 }
 ";
-        var verifier = CompileAndVerify(source, symbolValidator: VerifyCacheContainer("C.<>O", arity: 0
-            , "System.Action <0>__Target"
-        ));
-        verifier.VerifyIL("C<T>.Test0", @"
+        var verifier = CompileAndVerify(
+            source,
+            symbolValidator: VerifyCacheContainer("C.<>O", arity: 0, "System.Action <0>__Target")
+        );
+        verifier.VerifyIL(
+            "C<T>.Test0",
+            @"
 {
   // Code size       25 (0x19)
   .maxstack  2
@@ -2858,8 +3178,11 @@ class D
   IL_0013:  stsfld     ""System.Action C<T>.<>O.<0>__Target""
   IL_0018:  ret
 }
-");
-        verifier.VerifyIL("C<T>.Test1", @"
+"
+        );
+        verifier.VerifyIL(
+            "C<T>.Test1",
+            @"
 {
   // Code size       25 (0x19)
   .maxstack  2
@@ -2871,13 +3194,15 @@ class D
   IL_0013:  stsfld     ""System.Action C<T>.<>O.<0>__Target""
   IL_0018:  ret
 }
-");
+"
+        );
     }
 
     [Fact]
     public void SameTypeAndSymbolResultsSameField_TypeScoped1()
     {
-        var source = @"
+        var source =
+            @"
 using System;
 class C<T>
 {
@@ -2886,10 +3211,13 @@ class C<T>
     static V Target<V>() { return default(V); }
 }
 ";
-        var verifier = CompileAndVerify(source, symbolValidator: VerifyCacheContainer("C.<>O", arity: 0
-            , "System.Func<T> <0>__Target"
-        ));
-        verifier.VerifyIL("C<T>.Test0", @"
+        var verifier = CompileAndVerify(
+            source,
+            symbolValidator: VerifyCacheContainer("C.<>O", arity: 0, "System.Func<T> <0>__Target")
+        );
+        verifier.VerifyIL(
+            "C<T>.Test0",
+            @"
 {
   // Code size       25 (0x19)
   .maxstack  2
@@ -2901,8 +3229,11 @@ class C<T>
   IL_0013:  stsfld     ""System.Func<T> C<T>.<>O.<0>__Target""
   IL_0018:  ret
 }
-");
-        verifier.VerifyIL("C<T>.Test1", @"
+"
+        );
+        verifier.VerifyIL(
+            "C<T>.Test1",
+            @"
 {
   // Code size       25 (0x19)
   .maxstack  2
@@ -2914,13 +3245,15 @@ class C<T>
   IL_0013:  stsfld     ""System.Func<T> C<T>.<>O.<0>__Target""
   IL_0018:  ret
 }
-");
+"
+        );
     }
 
     [Fact]
     public void SameTypeAndSymbolResultsSameField_TypeScoped2()
     {
-        var source = @"
+        var source =
+            @"
 using System;
 class C<T, V>
 {
@@ -2930,10 +3263,13 @@ class C<T, V>
     static T Target() { return default(T); }
 }
 ";
-        var verifier = CompileAndVerify(source, symbolValidator: VerifyCacheContainer("C.<>O", arity: 0
-            , "C<T, V>.MyFunc <0>__Target"
-        ));
-        verifier.VerifyIL("C<T, V>.Test0", @"
+        var verifier = CompileAndVerify(
+            source,
+            symbolValidator: VerifyCacheContainer("C.<>O", arity: 0, "C<T, V>.MyFunc <0>__Target")
+        );
+        verifier.VerifyIL(
+            "C<T, V>.Test0",
+            @"
 {
   // Code size       25 (0x19)
   .maxstack  2
@@ -2945,8 +3281,11 @@ class C<T, V>
   IL_0013:  stsfld     ""C<T, V>.MyFunc C<T, V>.<>O.<0>__Target""
   IL_0018:  ret
 }
-");
-        verifier.VerifyIL("C<T, V>.Test1", @"
+"
+        );
+        verifier.VerifyIL(
+            "C<T, V>.Test1",
+            @"
 {
   // Code size       25 (0x19)
   .maxstack  2
@@ -2958,13 +3297,15 @@ class C<T, V>
   IL_0013:  stsfld     ""C<T, V>.MyFunc C<T, V>.<>O.<0>__Target""
   IL_0018:  ret
 }
-");
+"
+        );
     }
 
     [Fact]
     public void SameTypeAndSymbolResultsSameField_TypeScoped3_CLRSignature()
     {
-        var source = @"
+        var source =
+            @"
 #nullable enable
 using System;
 class C<T>
@@ -2974,10 +3315,13 @@ class C<T>
     static V Target<V>() { return default(V); }
 }
 ";
-        var verifier = CompileAndVerify(source, symbolValidator: VerifyCacheContainer("C.<>O", arity: 0
-            , "System.Func<T?> <0>__Target"
-        ));
-        verifier.VerifyIL("C<T>.Test0", @"
+        var verifier = CompileAndVerify(
+            source,
+            symbolValidator: VerifyCacheContainer("C.<>O", arity: 0, "System.Func<T?> <0>__Target")
+        );
+        verifier.VerifyIL(
+            "C<T>.Test0",
+            @"
 {
   // Code size       25 (0x19)
   .maxstack  2
@@ -2989,8 +3333,11 @@ class C<T>
   IL_0013:  stsfld     ""System.Func<T> C<T>.<>O.<0>__Target""
   IL_0018:  ret
 }
-");
-        verifier.VerifyIL("C<T>.Test1", @"
+"
+        );
+        verifier.VerifyIL(
+            "C<T>.Test1",
+            @"
 {
   // Code size       25 (0x19)
   .maxstack  2
@@ -3002,13 +3349,15 @@ class C<T>
   IL_0013:  stsfld     ""System.Func<T> C<T>.<>O.<0>__Target""
   IL_0018:  ret
 }
-");
+"
+        );
     }
 
     [Fact]
     public void SameTypeAndSymbolResultsSameField_TypeScoped4_CLRSignature()
     {
-        var source = @"
+        var source =
+            @"
 using System;
 class C<T>
 {
@@ -3017,10 +3366,17 @@ class C<T>
     static V Target<V>() { return default(V); }
 }
 ";
-        var verifier = CompileAndVerify(source, symbolValidator: VerifyCacheContainer("C.<>O", arity: 0
-            , "System.Func<(T x, T y)> <0>__Target"
-        ));
-        verifier.VerifyIL("C<T>.Test0", @"
+        var verifier = CompileAndVerify(
+            source,
+            symbolValidator: VerifyCacheContainer(
+                "C.<>O",
+                arity: 0,
+                "System.Func<(T x, T y)> <0>__Target"
+            )
+        );
+        verifier.VerifyIL(
+            "C<T>.Test0",
+            @"
 {
   // Code size       25 (0x19)
   .maxstack  2
@@ -3032,8 +3388,11 @@ class C<T>
   IL_0013:  stsfld     ""System.Func<System.ValueTuple<T, T>> C<T>.<>O.<0>__Target""
   IL_0018:  ret
 }
-");
-        verifier.VerifyIL("C<T>.Test1", @"
+"
+        );
+        verifier.VerifyIL(
+            "C<T>.Test1",
+            @"
 {
   // Code size       25 (0x19)
   .maxstack  2
@@ -3045,13 +3404,15 @@ class C<T>
   IL_0013:  stsfld     ""System.Func<System.ValueTuple<T, T>> C<T>.<>O.<0>__Target""
   IL_0018:  ret
 }
-");
+"
+        );
     }
 
     [Fact]
     public void SameTypeAndSymbolResultsSameField_TypeScoped5_AnonymousDelegate()
     {
-        var source = @"
+        var source =
+            @"
 class C
 {
     void Test0<T>(T t) { G0(Target<int>); }
@@ -3063,10 +3424,17 @@ class C
     static dynamic Target<G>(ref G g) => 0;
 }
 ";
-        var verifier = CompileAndVerify(source, symbolValidator: VerifyCacheContainer("C.<>O", arity: 0
-            , "<>F{00000001}<System.Int32, System.Object> <0>__Target"
-        ));
-        verifier.VerifyIL("C.Test0<T>", @"
+        var verifier = CompileAndVerify(
+            source,
+            symbolValidator: VerifyCacheContainer(
+                "C.<>O",
+                arity: 0,
+                "<>F{00000001}<System.Int32, System.Object> <0>__Target"
+            )
+        );
+        verifier.VerifyIL(
+            "C.Test0<T>",
+            @"
 {
   // Code size       34 (0x22)
   .maxstack  3
@@ -3083,8 +3451,11 @@ class C
   IL_001c:  call       ""void C.G0(System.Delegate)""
   IL_0021:  ret
 }
-");
-        verifier.VerifyIL("C.Test1<T>", @"
+"
+        );
+        verifier.VerifyIL(
+            "C.Test1<T>",
+            @"
 {
   // Code size       34 (0x22)
   .maxstack  3
@@ -3101,13 +3472,15 @@ class C
   IL_001c:  call       ""void C.G1(System.Delegate)""
   IL_0021:  ret
 }
-");
+"
+        );
     }
 
     [Fact]
     public void SameTypeAndSymbolResultsSameField_MethodScoped0()
     {
-        var source = @"
+        var source =
+            @"
 using System;
 class C
 {
@@ -3122,10 +3495,17 @@ class D
     public static void Target<B>() { }
 }
 ";
-        var verifier = CompileAndVerify(source, symbolValidator: VerifyCacheContainer("C.<Test>O__0_0", arity: 1
-            , "System.Action <0>__Target"
-        ));
-        verifier.VerifyIL("C.Test<V>", @"
+        var verifier = CompileAndVerify(
+            source,
+            symbolValidator: VerifyCacheContainer(
+                "C.<Test>O__0_0",
+                arity: 1,
+                "System.Action <0>__Target"
+            )
+        );
+        verifier.VerifyIL(
+            "C.Test<V>",
+            @"
 {
   // Code size       49 (0x31)
   .maxstack  2
@@ -3143,13 +3523,15 @@ class D
   IL_002b:  stsfld     ""System.Action C.<Test>O__0_0<V>.<0>__Target""
   IL_0030:  ret
 }
-");
+"
+        );
     }
 
     [Fact]
     public void SameTypeAndSymbolResultsSameField_MethodScoped1()
     {
-        var source = @"
+        var source =
+            @"
 using System;
 class C<T>
 {
@@ -3164,10 +3546,17 @@ class D<B>
     public static B Target<H>(H h) => default(B);
 }
 ";
-        var verifier = CompileAndVerify(source, symbolValidator: VerifyCacheContainer("C.<Test>O__0_0", arity: 1
-            , "System.Func<T, V> <0>__Target"
-        ));
-        verifier.VerifyIL("C<T>.Test<V>", @"
+        var verifier = CompileAndVerify(
+            source,
+            symbolValidator: VerifyCacheContainer(
+                "C.<Test>O__0_0",
+                arity: 1,
+                "System.Func<T, V> <0>__Target"
+            )
+        );
+        verifier.VerifyIL(
+            "C<T>.Test<V>",
+            @"
 {
   // Code size       49 (0x31)
   .maxstack  2
@@ -3185,13 +3574,15 @@ class D<B>
   IL_002b:  stsfld     ""System.Func<T, V> C<T>.<Test>O__0_0<V>.<0>__Target""
   IL_0030:  ret
 }
-");
+"
+        );
     }
 
     [Fact]
     public void SameTypeAndSymbolResultsSameField_MethodScoped2()
     {
-        var source = @"
+        var source =
+            @"
 using System;
 class C<A, T>
 {
@@ -3208,10 +3599,17 @@ static class D
     public static B Target<B>(this int num) => default(B);
 }
 ";
-        var verifier = CompileAndVerify(source, symbolValidator: VerifyCacheContainer("C.<Test>O__2_0", arity: 1
-            , "C<A, T>.MyFunc <0>__Target"
-        ));
-        verifier.VerifyIL("C<A, T>.Test<V>", @"
+        var verifier = CompileAndVerify(
+            source,
+            symbolValidator: VerifyCacheContainer(
+                "C.<Test>O__2_0",
+                arity: 1,
+                "C<A, T>.MyFunc <0>__Target"
+            )
+        );
+        verifier.VerifyIL(
+            "C<A, T>.Test<V>",
+            @"
 {
   // Code size       49 (0x31)
   .maxstack  2
@@ -3229,13 +3627,15 @@ static class D
   IL_002b:  stsfld     ""C<A, T>.MyFunc C<A, T>.<Test>O__2_0<V>.<0>__Target""
   IL_0030:  ret
 }
-");
+"
+        );
     }
 
     [Fact]
     public void SameTypeAndSymbolResultsSameField_MethodScoped3_CLRSignature()
     {
-        var source = @"
+        var source =
+            @"
 using System;
 class C<T>
 {
@@ -3250,10 +3650,17 @@ class D<B>
     public static B Target<H>(dynamic o, H h) => default(B);
 }
 ";
-        var verifier = CompileAndVerify(source, symbolValidator: VerifyCacheContainer("C.<Test>O__0_0", arity: 1
-            , "System.Func<System.Object, T, V> <0>__Target"
-        ));
-        verifier.VerifyIL("C<T>.Test<V>", @"
+        var verifier = CompileAndVerify(
+            source,
+            symbolValidator: VerifyCacheContainer(
+                "C.<Test>O__0_0",
+                arity: 1,
+                "System.Func<System.Object, T, V> <0>__Target"
+            )
+        );
+        verifier.VerifyIL(
+            "C<T>.Test<V>",
+            @"
 {
   // Code size       49 (0x31)
   .maxstack  2
@@ -3271,13 +3678,15 @@ class D<B>
   IL_002b:  stsfld     ""System.Func<object, T, V> C<T>.<Test>O__0_0<V>.<0>__Target""
   IL_0030:  ret
 }
-");
+"
+        );
     }
 
     [Fact]
     public void SameTypeAndSymbolResultsSameField_MethodScoped4_AnonymousDelegate()
     {
-        var source = @"
+        var source =
+            @"
 class C
 {
     void Test<T>(T t)
@@ -3292,10 +3701,17 @@ class C
     static dynamic Target<G>(ref G g) => 0;
 }
 ";
-        var verifier = CompileAndVerify(source, symbolValidator: VerifyCacheContainer("C.<Test>O__0_0", arity: 1
-            , "<>F{00000001}<T, System.Object> <0>__Target"
-        ));
-        verifier.VerifyIL("C.Test<T>", @"
+        var verifier = CompileAndVerify(
+            source,
+            symbolValidator: VerifyCacheContainer(
+                "C.<Test>O__0_0",
+                arity: 1,
+                "<>F{00000001}<T, System.Object> <0>__Target"
+            )
+        );
+        verifier.VerifyIL(
+            "C.Test<T>",
+            @"
 {
   // Code size       67 (0x43)
   .maxstack  3
@@ -3323,13 +3739,15 @@ class C
   IL_003d:  call       ""void C.G1(System.Delegate)""
   IL_0042:  ret
 }
-");
+"
+        );
     }
 
     [Fact]
     public void ContainersCanBeShared_TypeScoped0()
     {
-        var source = @"
+        var source =
+            @"
 using System;
 class A<T>
 {
@@ -3392,16 +3810,23 @@ static class E
     public static void Target5<N>(this N n) { }
 }
 ";
-        var verifier = CompileAndVerify(source, symbolValidator: VerifyCacheContainer("A.B.<>O", arity: 0
-            , "System.Action<T> <0>__Target0"
-            , "System.Action<T> <1>__Target1"
-            , "System.Action<T> <2>__Target2"
-            , "System.Action<T, V> <3>__Target3"
-            , "System.Action<T, V> <4>__Target4"
-            , "System.Action<T> <5>__Target5"
-            , "System.Action<V> <6>__Target5"
-        ));
-        verifier.VerifyIL("A<T>.B<V>.Test0", @"
+        var verifier = CompileAndVerify(
+            source,
+            symbolValidator: VerifyCacheContainer(
+                "A.B.<>O",
+                arity: 0,
+                "System.Action<T> <0>__Target0",
+                "System.Action<T> <1>__Target1",
+                "System.Action<T> <2>__Target2",
+                "System.Action<T, V> <3>__Target3",
+                "System.Action<T, V> <4>__Target4",
+                "System.Action<T> <5>__Target5",
+                "System.Action<V> <6>__Target5"
+            )
+        );
+        verifier.VerifyIL(
+            "A<T>.B<V>.Test0",
+            @"
 {
   // Code size       49 (0x31)
   .maxstack  2
@@ -3419,8 +3844,11 @@ static class E
   IL_002b:  stsfld     ""System.Action<T> A<T>.B<V>.<>O.<1>__Target1""
   IL_0030:  ret
 }
-");
-        verifier.VerifyIL("A<T>.B<V>.Test1", @"
+"
+        );
+        verifier.VerifyIL(
+            "A<T>.B<V>.Test1",
+            @"
 {
   // Code size       49 (0x31)
   .maxstack  2
@@ -3438,8 +3866,11 @@ static class E
   IL_002b:  stsfld     ""System.Action<T> A<T>.B<V>.<>O.<2>__Target2""
   IL_0030:  ret
 }
-");
-        verifier.VerifyIL("A<T>.B<V>.Test2", @"
+"
+        );
+        verifier.VerifyIL(
+            "A<T>.B<V>.Test2",
+            @"
 {
   // Code size       49 (0x31)
   .maxstack  2
@@ -3457,8 +3888,11 @@ static class E
   IL_002b:  stsfld     ""System.Action<T, V> A<T>.B<V>.<>O.<3>__Target3""
   IL_0030:  ret
 }
-");
-        verifier.VerifyIL("A<T>.B<V>.Test3", @"
+"
+        );
+        verifier.VerifyIL(
+            "A<T>.B<V>.Test3",
+            @"
 {
   // Code size       49 (0x31)
   .maxstack  2
@@ -3476,8 +3910,11 @@ static class E
   IL_002b:  stsfld     ""System.Action<T, V> A<T>.B<V>.<>O.<4>__Target4""
   IL_0030:  ret
 }
-");
-        verifier.VerifyIL("A<T>.B<V>.Test4", @"
+"
+        );
+        verifier.VerifyIL(
+            "A<T>.B<V>.Test4",
+            @"
 {
   // Code size       49 (0x31)
   .maxstack  2
@@ -3495,8 +3932,11 @@ static class E
   IL_002b:  stsfld     ""System.Action<T> A<T>.B<V>.<>O.<5>__Target5""
   IL_0030:  ret
 }
-");
-        verifier.VerifyIL("A<T>.B<V>.Test5", @"
+"
+        );
+        verifier.VerifyIL(
+            "A<T>.B<V>.Test5",
+            @"
 {
   // Code size       49 (0x31)
   .maxstack  2
@@ -3514,13 +3954,15 @@ static class E
   IL_002b:  stsfld     ""System.Action<V> A<T>.B<V>.<>O.<6>__Target5""
   IL_0030:  ret
 }
-");
+"
+        );
     }
 
     [Fact]
     public void ContainersCanBeShared_MethodScoped0()
     {
-        var source = @"
+        var source =
+            @"
 using System;
 class C
 {
@@ -3545,13 +3987,20 @@ static class E
     public static void Target3<V>(this C c) { }
 }
 ";
-        var verifier = CompileAndVerify(source, symbolValidator: VerifyCacheContainer("C.<Test>O__0_0", arity: 1
-            , "System.Action <0>__Target0"
-            , "System.Action<T> <1>__Target1"
-            , "System.Action <2>__Target2"
-            , "System.Action<C> <3>__Target3"
-        ));
-        verifier.VerifyIL("C.Test<T>", @"
+        var verifier = CompileAndVerify(
+            source,
+            symbolValidator: VerifyCacheContainer(
+                "C.<Test>O__0_0",
+                arity: 1,
+                "System.Action <0>__Target0",
+                "System.Action<T> <1>__Target1",
+                "System.Action <2>__Target2",
+                "System.Action<C> <3>__Target3"
+            )
+        );
+        verifier.VerifyIL(
+            "C.Test<T>",
+            @"
 {
   // Code size       97 (0x61)
   .maxstack  2
@@ -3581,13 +4030,15 @@ static class E
   IL_005b:  stsfld     ""System.Action<C> C.<Test>O__0_0<T>.<3>__Target3""
   IL_0060:  ret
 }
-");
+"
+        );
     }
 
     [Fact]
     public void ContainersCanBeShared_MethodScoped1()
     {
-        var source = @"
+        var source =
+            @"
 using System;
 class C
 {
@@ -3612,13 +4063,20 @@ static class E
     public static void Target3<T>(this C c) { }
 }
 ";
-        var verifier = CompileAndVerify(source, symbolValidator: VerifyCacheContainer("E.<Test>O__0_0", arity: 1
-            , "System.Action <0>__Target0"
-            , "System.Action<T> <1>__Target1"
-            , "System.Action <2>__Target2"
-            , "System.Action<C> <3>__Target3"
-        ));
-        verifier.VerifyIL("E.Test<T>", @"
+        var verifier = CompileAndVerify(
+            source,
+            symbolValidator: VerifyCacheContainer(
+                "E.<Test>O__0_0",
+                arity: 1,
+                "System.Action <0>__Target0",
+                "System.Action<T> <1>__Target1",
+                "System.Action <2>__Target2",
+                "System.Action<C> <3>__Target3"
+            )
+        );
+        verifier.VerifyIL(
+            "E.Test<T>",
+            @"
 {
   // Code size       97 (0x61)
   .maxstack  2
@@ -3648,13 +4106,15 @@ static class E
   IL_005b:  stsfld     ""System.Action<C> E.<Test>O__0_0<T>.<3>__Target3""
   IL_0060:  ret
 }
-");
+"
+        );
     }
 
     [Fact]
     public void ContainersCanBeShared_SkippingUnused()
     {
-        var source = @"
+        var source =
+            @"
 using System;
 class C
 {
@@ -3686,10 +4146,17 @@ static class E
     }
 }
 ";
-        var verifier = CompileAndVerify(source, symbolValidator: VerifyCacheContainer("E.<Test>O__0_0", arity: 1
-            , "System.Action<T> <0>__Target"
-        ));
-        verifier.VerifyIL("E.<Test>g__LF3|0_1<T, G>", @"
+        var verifier = CompileAndVerify(
+            source,
+            symbolValidator: VerifyCacheContainer(
+                "E.<Test>O__0_0",
+                arity: 1,
+                "System.Action<T> <0>__Target"
+            )
+        );
+        verifier.VerifyIL(
+            "E.<Test>g__LF3|0_1<T, G>",
+            @"
 {
   // Code size       30 (0x1e)
   .maxstack  2
@@ -3702,8 +4169,11 @@ static class E
   IL_0018:  call       ""void E.<Test>g__LF4|0_3<T, G>()""
   IL_001d:  ret
 }
-");
-        verifier.VerifyIL("E.<Test>g__LF4|0_3<T, G>", @"
+"
+        );
+        verifier.VerifyIL(
+            "E.<Test>g__LF4|0_3<T, G>",
+            @"
 {
   // Code size       25 (0x19)
   .maxstack  2
@@ -3715,8 +4185,11 @@ static class E
   IL_0013:  stsfld     ""System.Action<T> E.<Test>O__0_0<T>.<0>__Target""
   IL_0018:  ret
 }
-");
-        verifier.VerifyIL("E.<Test>g__LF5|0_2<T, G>", @"
+"
+        );
+        verifier.VerifyIL(
+            "E.<Test>g__LF5|0_2<T, G>",
+            @"
 {
   // Code size       25 (0x19)
   .maxstack  2
@@ -3728,13 +4201,15 @@ static class E
   IL_0013:  stsfld     ""System.Action<T> E.<Test>O__0_0<T>.<0>__Target""
   IL_0018:  ret
 }
-");
+"
+        );
     }
 
     [Fact]
     public void ContainersCanBeShared_LocalFunctions()
     {
-        var source = @"
+        var source =
+            @"
 using System;
 static class E
 {
@@ -3767,11 +4242,19 @@ static class E
     static void Main(string[] args) { Test<int>(); }
 }
 ";
-        var verifier = CompileAndVerify(source, expectedOutput: PASS, symbolValidator: VerifyCacheContainer("E.<Owner>O__0_0", arity: 2
-            , "System.Action <0>__LF2"
-            , "System.Action <1>__LF2"
-        ));
-        verifier.VerifyIL("E.<Test>g__LF1|0_1<T, G>", @"
+        var verifier = CompileAndVerify(
+            source,
+            expectedOutput: PASS,
+            symbolValidator: VerifyCacheContainer(
+                "E.<Owner>O__0_0",
+                arity: 2,
+                "System.Action <0>__LF2",
+                "System.Action <1>__LF2"
+            )
+        );
+        verifier.VerifyIL(
+            "E.<Test>g__LF1|0_1<T, G>",
+            @"
 {
   // Code size       33 (0x21)
   .maxstack  2
@@ -3787,8 +4270,11 @@ static class E
   IL_001b:  callvirt   ""void System.Action.Invoke()""
   IL_0020:  ret
 }
-");
-        verifier.VerifyIL("E.<Test>g__LF3|0_2<T, G>", @"
+"
+        );
+        verifier.VerifyIL(
+            "E.<Test>g__LF3|0_2<T, G>",
+            @"
 {
   // Code size       33 (0x21)
   .maxstack  2
@@ -3804,13 +4290,15 @@ static class E
   IL_001b:  callvirt   ""void System.Action.Invoke()""
   IL_0020:  ret
 }
-");
+"
+        );
     }
 
     [Fact]
     public void NameAmbiguity_Containers0()
     {
-        var source = @"
+        var source =
+            @"
 void Owner<T>(int i)
 {
     var f = Target<T>;
@@ -3824,12 +4312,25 @@ void X()
 }
 static void Target<T>() { }
 ";
-        var verifier = CompileAndVerify(source, symbolValidator: static module =>
-        {
-            VerifyCacheContainer("Program.<Owner>O__0_0", arity: 1, "System.Action <0>__Target")(module);
-            VerifyCacheContainer("Program.<Owner>O__0_1", arity: 1, "System.Action <0>__Target")(module);
-        });
-        verifier.VerifyIL("Program.<<Main>$>g__Owner|0_0<T>", @"
+        var verifier = CompileAndVerify(
+            source,
+            symbolValidator: static module =>
+            {
+                VerifyCacheContainer(
+                    "Program.<Owner>O__0_0",
+                    arity: 1,
+                    "System.Action <0>__Target"
+                )(module);
+                VerifyCacheContainer(
+                    "Program.<Owner>O__0_1",
+                    arity: 1,
+                    "System.Action <0>__Target"
+                )(module);
+            }
+        );
+        verifier.VerifyIL(
+            "Program.<<Main>$>g__Owner|0_0<T>",
+            @"
 {
   // Code size       25 (0x19)
   .maxstack  2
@@ -3841,8 +4342,11 @@ static void Target<T>() { }
   IL_0013:  stsfld     ""System.Action Program.<Owner>O__0_0<T>.<0>__Target""
   IL_0018:  ret
 }
-");
-        verifier.VerifyIL("Program.<<Main>$>g__Owner|0_3<T>", @"
+"
+        );
+        verifier.VerifyIL(
+            "Program.<<Main>$>g__Owner|0_3<T>",
+            @"
 {
   // Code size       25 (0x19)
   .maxstack  2
@@ -3854,13 +4358,15 @@ static void Target<T>() { }
   IL_0013:  stsfld     ""System.Action Program.<Owner>O__0_1<T>.<0>__Target""
   IL_0018:  ret
 }
-");
+"
+        );
     }
 
     [Fact]
     public void NameAmbiguity_Containers1()
     {
-        var source = @"
+        var source =
+            @"
 class C
 {
     void Owner<T>(int i)
@@ -3874,12 +4380,21 @@ class C
     static void Target<T>() { }
 }
 ";
-        var verifier = CompileAndVerify(source, symbolValidator: static module =>
-        {
-            VerifyCacheContainer("C.<Owner>O__0_0", arity: 1, "System.Action <0>__Target")(module);
-            VerifyCacheContainer("C.<Owner>O__1_0", arity: 1, "System.Action <0>__Target")(module);
-        });
-        verifier.VerifyIL("C.Owner<T>(int)", @"
+        var verifier = CompileAndVerify(
+            source,
+            symbolValidator: static module =>
+            {
+                VerifyCacheContainer("C.<Owner>O__0_0", arity: 1, "System.Action <0>__Target")(
+                    module
+                );
+                VerifyCacheContainer("C.<Owner>O__1_0", arity: 1, "System.Action <0>__Target")(
+                    module
+                );
+            }
+        );
+        verifier.VerifyIL(
+            "C.Owner<T>(int)",
+            @"
 {
   // Code size       25 (0x19)
   .maxstack  2
@@ -3891,8 +4406,11 @@ class C
   IL_0013:  stsfld     ""System.Action C.<Owner>O__0_0<T>.<0>__Target""
   IL_0018:  ret
 }
-");
-        verifier.VerifyIL("C.Owner<T>(string)", @"
+"
+        );
+        verifier.VerifyIL(
+            "C.Owner<T>(string)",
+            @"
 {
   // Code size       25 (0x19)
   .maxstack  2
@@ -3904,13 +4422,15 @@ class C
   IL_0013:  stsfld     ""System.Action C.<Owner>O__1_0<T>.<0>__Target""
   IL_0018:  ret
 }
-");
+"
+        );
     }
 
     [Fact]
     public void NameAmbiguity_Containers2()
     {
-        var source = @"
+        var source =
+            @"
 class C
 {
     void Owner<T>(int i)
@@ -3927,12 +4447,21 @@ class C
     static void Target<T>() { }
 }
 ";
-        var verifier = CompileAndVerify(source, symbolValidator: static module =>
-        {
-            VerifyCacheContainer("C.<Owner>O__0_0", arity: 1, "System.Action <0>__Target")(module);
-            VerifyCacheContainer("C.<Owner>O__1_0", arity: 1, "System.Action <0>__Target")(module);
-        });
-        verifier.VerifyIL("C.Owner<T>(int)", @"
+        var verifier = CompileAndVerify(
+            source,
+            symbolValidator: static module =>
+            {
+                VerifyCacheContainer("C.<Owner>O__0_0", arity: 1, "System.Action <0>__Target")(
+                    module
+                );
+                VerifyCacheContainer("C.<Owner>O__1_0", arity: 1, "System.Action <0>__Target")(
+                    module
+                );
+            }
+        );
+        verifier.VerifyIL(
+            "C.Owner<T>(int)",
+            @"
 {
   // Code size       25 (0x19)
   .maxstack  2
@@ -3944,8 +4473,11 @@ class C
   IL_0013:  stsfld     ""System.Action C.<Owner>O__0_0<T>.<0>__Target""
   IL_0018:  ret
 }
-");
-        verifier.VerifyIL("C.<F>g__Owner|1_0<T>", @"
+"
+        );
+        verifier.VerifyIL(
+            "C.<F>g__Owner|1_0<T>",
+            @"
 {
   // Code size       25 (0x19)
   .maxstack  2
@@ -3957,13 +4489,15 @@ class C
   IL_0013:  stsfld     ""System.Action C.<Owner>O__1_0<T>.<0>__Target""
   IL_0018:  ret
 }
-");
+"
+        );
     }
 
     [Fact]
     public void NameAmbiguity_Fields0()
     {
-        var source = @"
+        var source =
+            @"
 void F0()
 {
     var f = Target;
@@ -3975,11 +4509,18 @@ void F1()
     static void Target() { }
 }
 ";
-        var verifier = CompileAndVerify(source, symbolValidator: VerifyCacheContainer("Program.<>O", arity: 0
-            , "System.Action <0>__Target"
-            , "System.Action <1>__Target"
-        ));
-        verifier.VerifyIL("Program.<<Main>$>g__F0|0_0", @"
+        var verifier = CompileAndVerify(
+            source,
+            symbolValidator: VerifyCacheContainer(
+                "Program.<>O",
+                arity: 0,
+                "System.Action <0>__Target",
+                "System.Action <1>__Target"
+            )
+        );
+        verifier.VerifyIL(
+            "Program.<<Main>$>g__F0|0_0",
+            @"
 {
   // Code size       25 (0x19)
   .maxstack  2
@@ -3991,8 +4532,11 @@ void F1()
   IL_0013:  stsfld     ""System.Action Program.<>O.<0>__Target""
   IL_0018:  ret
 }
-");
-        verifier.VerifyIL("Program.<<Main>$>g__F1|0_1", @"
+"
+        );
+        verifier.VerifyIL(
+            "Program.<<Main>$>g__F1|0_1",
+            @"
 {
   // Code size       25 (0x19)
   .maxstack  2
@@ -4004,13 +4548,15 @@ void F1()
   IL_0013:  stsfld     ""System.Action Program.<>O.<1>__Target""
   IL_0018:  ret
 }
-");
+"
+        );
     }
 
     [Fact]
     public void NameAmbiguity_Fields2()
     {
-        var source = @"
+        var source =
+            @"
 class C
 {
     void F()
@@ -4031,11 +4577,18 @@ class C
     }
 }
 ";
-        var verifier = CompileAndVerify(source, symbolValidator: VerifyCacheContainer("C.<Owner>O__0_0", arity: 1
-            , "System.Action <0>__Target"
-            , "System.Action <1>__Target"
-        ));
-        verifier.VerifyIL("C.<F>g__F0|0_1<T>", @"
+        var verifier = CompileAndVerify(
+            source,
+            symbolValidator: VerifyCacheContainer(
+                "C.<Owner>O__0_0",
+                arity: 1,
+                "System.Action <0>__Target",
+                "System.Action <1>__Target"
+            )
+        );
+        verifier.VerifyIL(
+            "C.<F>g__F0|0_1<T>",
+            @"
 {
   // Code size       25 (0x19)
   .maxstack  2
@@ -4047,8 +4600,11 @@ class C
   IL_0013:  stsfld     ""System.Action C.<Owner>O__0_0<T>.<0>__Target""
   IL_0018:  ret
 }
-");
-        verifier.VerifyIL("C.<F>g__F1|0_2<T>", @"
+"
+        );
+        verifier.VerifyIL(
+            "C.<F>g__F1|0_2<T>",
+            @"
 {
   // Code size       25 (0x19)
   .maxstack  2
@@ -4060,13 +4616,15 @@ class C
   IL_0013:  stsfld     ""System.Action C.<Owner>O__0_0<T>.<1>__Target""
   IL_0018:  ret
 }
-");
+"
+        );
     }
 
     [Fact]
     public void NameAmbiguity_Fields3()
     {
-        var source = @"
+        var source =
+            @"
 using System;
 class C
 {
@@ -4089,11 +4647,18 @@ class E<T>
     public static void Target(string i) { }
 }
 ";
-        var verifier = CompileAndVerify(source, symbolValidator: VerifyCacheContainer("C.<Owner>O__0_0", arity: 1
-            , "System.Action<System.Int32> <0>__Target"
-            , "System.Action<System.String> <1>__Target"
-        ));
-        verifier.VerifyIL("C.<F>g__Owner|0_0<T>", @"
+        var verifier = CompileAndVerify(
+            source,
+            symbolValidator: VerifyCacheContainer(
+                "C.<Owner>O__0_0",
+                arity: 1,
+                "System.Action<System.Int32> <0>__Target",
+                "System.Action<System.String> <1>__Target"
+            )
+        );
+        verifier.VerifyIL(
+            "C.<F>g__Owner|0_0<T>",
+            @"
 {
   // Code size       25 (0x19)
   .maxstack  2
@@ -4105,8 +4670,11 @@ class E<T>
   IL_0013:  stsfld     ""System.Action<int> C.<Owner>O__0_0<T>.<0>__Target""
   IL_0018:  ret
 }
-");
-        verifier.VerifyIL("C.<F>g__F1|0_1<T>", @"
+"
+        );
+        verifier.VerifyIL(
+            "C.<F>g__F1|0_1<T>",
+            @"
 {
   // Code size       25 (0x19)
   .maxstack  2
@@ -4118,13 +4686,15 @@ class E<T>
   IL_0013:  stsfld     ""System.Action<string> C.<Owner>O__0_0<T>.<1>__Target""
   IL_0018:  ret
 }
-");
+"
+        );
     }
 
     [Fact]
     public void NameAmbiguity_Fields1()
     {
-        var source = @"
+        var source =
+            @"
 class C
 {
     void F0()
@@ -4139,11 +4709,18 @@ class C
     }
 }
 ";
-        var verifier = CompileAndVerify(source, symbolValidator: VerifyCacheContainer("C.<>O", arity: 0
-            , "System.Action <0>__Target"
-            , "System.Action <1>__Target"
-        ));
-        verifier.VerifyIL("C.F0", @"
+        var verifier = CompileAndVerify(
+            source,
+            symbolValidator: VerifyCacheContainer(
+                "C.<>O",
+                arity: 0,
+                "System.Action <0>__Target",
+                "System.Action <1>__Target"
+            )
+        );
+        verifier.VerifyIL(
+            "C.F0",
+            @"
 {
   // Code size       25 (0x19)
   .maxstack  2
@@ -4155,8 +4732,11 @@ class C
   IL_0013:  stsfld     ""System.Action C.<>O.<0>__Target""
   IL_0018:  ret
 }
-");
-        verifier.VerifyIL("C.F1", @"
+"
+        );
+        verifier.VerifyIL(
+            "C.F1",
+            @"
 {
   // Code size       25 (0x19)
   .maxstack  2
@@ -4168,13 +4748,15 @@ class C
   IL_0013:  stsfld     ""System.Action C.<>O.<1>__Target""
   IL_0018:  ret
 }
-");
+"
+        );
     }
 
     [Fact]
     public void EventHandlers_TypeScoped_CouldBeModuleScoped0()
     {
-        var source = @"
+        var source =
+            @"
 using System;
 using System.Reflection;
 class C
@@ -4187,7 +4769,10 @@ class C
     static Assembly Target(object sender, ResolveEventArgs e) => null;
 }
 ";
-        CompileAndVerify(source).VerifyIL("C.Test", @"
+        CompileAndVerify(source)
+            .VerifyIL(
+                "C.Test",
+                @"
 {
   // Code size       38 (0x26)
   .maxstack  3
@@ -4204,13 +4789,15 @@ class C
   IL_0020:  callvirt   ""void System.AppDomain.AssemblyResolve.add""
   IL_0025:  ret
 }
-");
+"
+            );
     }
 
     [Fact]
     public void EventHandlers_TypeScoped_CouldBeModuleScoped1()
     {
-        var source = @"
+        var source =
+            @"
 using System;
 class MyEventArgs : EventArgs { }
 class C<TEventArgs> where TEventArgs : EventArgs
@@ -4229,7 +4816,10 @@ class D
     public static void Target(object sender, MyEventArgs e) { }
 }
 ";
-        CompileAndVerify(source).VerifyIL("C<TEventArgs>.Test", @"
+        CompileAndVerify(source)
+            .VerifyIL(
+                "C<TEventArgs>.Test",
+                @"
 {
   // Code size       38 (0x26)
   .maxstack  3
@@ -4246,13 +4836,15 @@ class D
   IL_0020:  callvirt   ""void C<MyEventArgs>.SomethingHappened.add""
   IL_0025:  ret
 }
-");
+"
+            );
     }
 
     [Fact]
     public void EventHandlers_TypeScoped0()
     {
-        var source = @"
+        var source =
+            @"
 using System;
 class C<TEventArgs> where TEventArgs : EventArgs
 {
@@ -4266,7 +4858,10 @@ class C<TEventArgs> where TEventArgs : EventArgs
     static void Target(object sender, TEventArgs e) { }
 }
 ";
-        CompileAndVerify(source).VerifyIL("C<TEventArgs>.Test", @"
+        CompileAndVerify(source)
+            .VerifyIL(
+                "C<TEventArgs>.Test",
+                @"
 {
   // Code size       34 (0x22)
   .maxstack  3
@@ -4283,13 +4878,15 @@ class C<TEventArgs> where TEventArgs : EventArgs
   IL_001c:  call       ""void C<TEventArgs>.SomethingHappened.add""
   IL_0021:  ret
 }
-");
+"
+            );
     }
 
     [Fact]
     public void EventHandlers_MethodScoped0()
     {
-        var source = @"
+        var source =
+            @"
 using System;
 class C
 {
@@ -4306,7 +4903,10 @@ class D<TEventArgs> where TEventArgs : EventArgs
     public event EventHandler<TEventArgs> SomethingHappened;
 }
 ";
-        CompileAndVerify(source).VerifyIL("C.Test<TEventArgs>", @"
+        CompileAndVerify(source)
+            .VerifyIL(
+                "C.Test<TEventArgs>",
+                @"
 {
   // Code size       38 (0x26)
   .maxstack  3
@@ -4323,13 +4923,15 @@ class D<TEventArgs> where TEventArgs : EventArgs
   IL_0020:  callvirt   ""void D<TEventArgs>.SomethingHappened.add""
   IL_0025:  ret
 }
-");
+"
+            );
     }
 
     [Fact]
     public void AnonymousTypes_TypeScoped_CouldBeModuleScoped0()
     {
-        var source = @"
+        var source =
+            @"
 using System;
 class C
 {
@@ -4340,7 +4942,10 @@ class C
     static void Target<T>(T t) => Console.WriteLine(t);
 }
 ";
-        CompileAndVerify(source, expectedOutput: "{ x = 0 }").VerifyIL("C.Main", @"
+        CompileAndVerify(source, expectedOutput: "{ x = 0 }")
+            .VerifyIL(
+                "C.Main",
+                @"
 {
   // Code size       39 (0x27)
   .maxstack  3
@@ -4358,13 +4963,15 @@ class C
   IL_0021:  call       ""void C.Invoke<<anonymous type: int x>>(<anonymous type: int x>, System.Action<<anonymous type: int x>>)""
   IL_0026:  ret
 }
-");
+"
+            );
     }
 
     [Fact]
     public void AnonymousTypes_TypeScoped0()
     {
-        var source = @"
+        var source =
+            @"
 using System;
 class C
 {
@@ -4379,7 +4986,10 @@ class D<G>
     static void Target<T>(T t) => Console.WriteLine(t);
 }
 ";
-        CompileAndVerify(source, expectedOutput: "{ x = 0 }").VerifyIL("D<G>.Test", @"
+        CompileAndVerify(source, expectedOutput: "{ x = 0 }")
+            .VerifyIL(
+                "D<G>.Test",
+                @"
 {
   // Code size       39 (0x27)
   .maxstack  3
@@ -4397,13 +5007,15 @@ class D<G>
   IL_0021:  call       ""void D<G>.Invoke<<anonymous type: G x>>(<anonymous type: G x>, System.Action<<anonymous type: G x>>)""
   IL_0026:  ret
 }
-");
+"
+            );
     }
 
     [Fact]
     public void AnonymousTypes_TypeScoped1()
     {
-        var source = @"
+        var source =
+            @"
 using System;
 class C
 {
@@ -4420,7 +5032,10 @@ class E
     public static void Target<T>(T t) => Console.WriteLine(t);
 }
 ";
-        CompileAndVerify(source, expectedOutput: "{ x = 0 }").VerifyIL("D<G>.Test", @"
+        CompileAndVerify(source, expectedOutput: "{ x = 0 }")
+            .VerifyIL(
+                "D<G>.Test",
+                @"
 {
   // Code size       39 (0x27)
   .maxstack  3
@@ -4438,13 +5053,15 @@ class E
   IL_0021:  call       ""void D<G>.Invoke<<anonymous type: G x>>(<anonymous type: G x>, System.Action<<anonymous type: G x>>)""
   IL_0026:  ret
 }
-");
+"
+            );
     }
 
     [Fact]
     public void AnonymousTypes_TypeScoped2()
     {
-        var source = @"
+        var source =
+            @"
 using System;
 class C
 {
@@ -4461,7 +5078,10 @@ class D<G>
     static void Target<T>(T t) => Console.WriteLine(t);
 }
 ";
-        CompileAndVerify(source, expectedOutput: "{ x = 0 }").VerifyIL("D<G>.Test", @"
+        CompileAndVerify(source, expectedOutput: "{ x = 0 }")
+            .VerifyIL(
+                "D<G>.Test",
+                @"
 {
   // Code size       39 (0x27)
   .maxstack  3
@@ -4479,13 +5099,15 @@ class D<G>
   IL_0021:  call       ""void D<G>.Invoke<<anonymous type: int x>>(<anonymous type: int x>, D<G>.MyAction<<anonymous type: int x>>)""
   IL_0026:  ret
 }
-");
+"
+            );
     }
 
     [Fact]
     public void AnonymousTypes_MethodScoped0()
     {
-        var source = @"
+        var source =
+            @"
 using System;
 class C
 {
@@ -4500,7 +5122,10 @@ class D
     static void Target<T>(T t) => Console.WriteLine(t);
 }
 ";
-        CompileAndVerify(source, expectedOutput: "{ x = 0 }").VerifyIL("D.Test<T>", @"
+        CompileAndVerify(source, expectedOutput: "{ x = 0 }")
+            .VerifyIL(
+                "D.Test<T>",
+                @"
 {
   // Code size       39 (0x27)
   .maxstack  3
@@ -4518,13 +5143,15 @@ class D
   IL_0021:  call       ""void D.Invoke<<anonymous type: T x>>(<anonymous type: T x>, System.Action<<anonymous type: T x>>)""
   IL_0026:  ret
 }
-");
+"
+            );
     }
 
     [Fact]
     public void AnonymousTypes_MethodScoped1()
     {
-        var source = @"
+        var source =
+            @"
 using System;
 class C
 {
@@ -4539,7 +5166,10 @@ class D
     static void Target<T, V>(T t, V v) => Console.WriteLine(v);
 }
 ";
-        CompileAndVerify(source, expectedOutput: "{ x = 0 }").VerifyIL("D.Test<T>", @"
+        CompileAndVerify(source, expectedOutput: "{ x = 0 }")
+            .VerifyIL(
+                "D.Test<T>",
+                @"
 {
   // Code size       40 (0x28)
   .maxstack  4
@@ -4558,13 +5188,15 @@ class D
   IL_0022:  call       ""void D.Invoke<T, <anonymous type: int x>>(T, <anonymous type: int x>, System.Action<T, <anonymous type: int x>>)""
   IL_0027:  ret
 }
-");
+"
+            );
     }
 
     [Fact]
     public void AnonymousClass_AnonymousDelegate0()
     {
-        var source = @"
+        var source =
+            @"
 using System;
 class D
 {
@@ -4586,7 +5218,10 @@ class D
     static void Target<T>(T t) { }
 }
 ";
-        CompileAndVerify(source).VerifyIL("D.<Owner>g__Test|0_0<T, NotUsed>", @"
+        CompileAndVerify(source)
+            .VerifyIL(
+                "D.<Owner>g__Test|0_0<T, NotUsed>",
+                @"
 {
   // Code size       65 (0x41)
   .maxstack  3
@@ -4612,13 +5247,15 @@ class D
   IL_003b:  call       ""void D.Invoke<<anonymous type: <anonymous delegate> x>>(<anonymous type: <anonymous delegate> x>, System.Action<<anonymous type: <anonymous delegate> x>>)""
   IL_0040:  ret
 }
-");
+"
+            );
     }
 
     [Fact]
     public void AnonymousClass_AnonymousDelegate1()
     {
-        var source = @"
+        var source =
+            @"
 using System;
 class D<T>
 {
@@ -4640,7 +5277,10 @@ class D<T>
     static void Target<G>(G t) { }
 }
 ";
-        CompileAndVerify(source).VerifyIL("D<T>.<Top>g__Test|0_0<N0, N1>", @"
+        CompileAndVerify(source)
+            .VerifyIL(
+                "D<T>.<Top>g__Test|0_0<N0, N1>",
+                @"
 {
   // Code size       65 (0x41)
   .maxstack  3
@@ -4666,13 +5306,15 @@ class D<T>
   IL_003b:  call       ""void D<T>.Invoke<<anonymous type: <anonymous delegate> x>>(<anonymous type: <anonymous delegate> x>, System.Action<<anonymous type: <anonymous delegate> x>>)""
   IL_0040:  ret
 }
-");
+"
+            );
     }
 
     [Fact]
     public void Pointer_TypeScoped_CouldBeModuleScoped0()
     {
-        var source = @"
+        var source =
+            @"
 using System;
 class C
 {
@@ -4685,7 +5327,10 @@ class C
     unsafe static int*[] Target() => default(int*[]);
 }
 ";
-        CompileAndVerify(source, options: TestOptions.UnsafeReleaseDll).VerifyIL("C.Test", @"
+        CompileAndVerify(source, options: TestOptions.UnsafeReleaseDll)
+            .VerifyIL(
+                "C.Test",
+                @"
 {
   // Code size       34 (0x22)
   .maxstack  2
@@ -4702,13 +5347,15 @@ class C
   IL_0020:  pop
   IL_0021:  ret
 }
-");
+"
+            );
     }
 
     [Fact]
     public void Pointer_TypeScoped0()
     {
-        var source = @"
+        var source =
+            @"
 using System;
 class C<T>
 {
@@ -4721,7 +5368,10 @@ class C<T>
     unsafe static int*[] Target(T t) => default(int*[]);
 }
 ";
-        CompileAndVerify(source, options: TestOptions.UnsafeReleaseDll).VerifyIL("C<T>.Test", @"
+        CompileAndVerify(source, options: TestOptions.UnsafeReleaseDll)
+            .VerifyIL(
+                "C<T>.Test",
+                @"
 {
   // Code size       43 (0x2b)
   .maxstack  2
@@ -4742,13 +5392,15 @@ class C<T>
   IL_0029:  pop
   IL_002a:  ret
 }
-");
+"
+            );
     }
 
     [Fact]
     public void Pointer_MethodScoped0()
     {
-        var source = @"
+        var source =
+            @"
 using System;
 class C
 {
@@ -4761,7 +5413,10 @@ class C
     unsafe static int*[] Target<G>(G g) => default(int*[]);
 }
 ";
-        CompileAndVerify(source, options: TestOptions.UnsafeReleaseDll).VerifyIL("C.Test<T>", @"
+        CompileAndVerify(source, options: TestOptions.UnsafeReleaseDll)
+            .VerifyIL(
+                "C.Test<T>",
+                @"
 {
   // Code size       35 (0x23)
   .maxstack  2
@@ -4779,13 +5434,15 @@ class C
   IL_0021:  pop
   IL_0022:  ret
 }
-");
+"
+            );
     }
 
     [Fact]
     public void Dynamic_TypeScoped_CouldBeModuleScoped0()
     {
-        var source = @"
+        var source =
+            @"
 using System;
 class C
 {
@@ -4798,7 +5455,10 @@ class C
     static dynamic Target() => 0;
 }
 ";
-        CompileAndVerify(source).VerifyIL("C.Test", @"
+        CompileAndVerify(source)
+            .VerifyIL(
+                "C.Test",
+                @"
 {
   // Code size       34 (0x22)
   .maxstack  2
@@ -4815,13 +5475,15 @@ class C
   IL_0020:  pop
   IL_0021:  ret
 }
-");
+"
+            );
     }
 
     [Fact]
     public void Dynamic_TypeScoped0()
     {
-        var source = @"
+        var source =
+            @"
 using System;
 class C<T>
 {
@@ -4834,7 +5496,10 @@ class C<T>
     static dynamic Target(T t) => 0;
 }
 ";
-        CompileAndVerify(source).VerifyIL("C<T>.Test", @"
+        CompileAndVerify(source)
+            .VerifyIL(
+                "C<T>.Test",
+                @"
 {
   // Code size       43 (0x2b)
   .maxstack  2
@@ -4855,13 +5520,15 @@ class C<T>
   IL_0029:  pop
   IL_002a:  ret
 }
-");
+"
+            );
     }
 
     [Fact]
     public void Dynamic_MethodScoped0()
     {
-        var source = @"
+        var source =
+            @"
 using System;
 class C
 {
@@ -4874,7 +5541,10 @@ class C
     static dynamic Target<G>(G g) => 0;
 }
 ";
-        CompileAndVerify(source).VerifyIL("C.Test<T>", @"
+        CompileAndVerify(source)
+            .VerifyIL(
+                "C.Test<T>",
+                @"
 {
   // Code size       35 (0x23)
   .maxstack  2
@@ -4892,13 +5562,15 @@ class C
   IL_0021:  pop
   IL_0022:  ret
 }
-");
+"
+            );
     }
 
     [Fact]
     public void SynthesizedAnonymousDelegate_TypeScoped0()
     {
-        var source = @"
+        var source =
+            @"
 using System;
 class C
 {
@@ -4912,7 +5584,10 @@ class C
     static dynamic Target<G>(ref G g) => 0;
 }
 ";
-        CompileAndVerify(source).VerifyIL("C.Test<T>", @"
+        CompileAndVerify(source)
+            .VerifyIL(
+                "C.Test<T>",
+                @"
 {
   // Code size       34 (0x22)
   .maxstack  3
@@ -4929,13 +5604,15 @@ class C
   IL_001c:  call       ""void C.G(System.Delegate)""
   IL_0021:  ret
 }
-");
+"
+            );
     }
 
     [Fact]
     public void SynthesizedAnonymousDelegate_MethodScoped0()
     {
-        var source = @"
+        var source =
+            @"
 using System;
 class C
 {
@@ -4949,7 +5626,10 @@ class C
     static dynamic Target<G>(ref G g) => 0;
 }
 ";
-        CompileAndVerify(source).VerifyIL("C.Test<T>", @"
+        CompileAndVerify(source)
+            .VerifyIL(
+                "C.Test<T>",
+                @"
 {
   // Code size       34 (0x22)
   .maxstack  3
@@ -4966,13 +5646,15 @@ class C
   IL_001c:  call       ""void C.G(System.Delegate)""
   IL_0021:  ret
 }
-");
+"
+            );
     }
 
     [Fact]
     public void TopLevelMethod_LocalFunctions_TypeScoped0()
     {
-        var source = @"
+        var source =
+            @"
 using System;
 class C
 {
@@ -4985,7 +5667,10 @@ class C
     }
 }
 ";
-        CompileAndVerify(source).VerifyIL("C.Test", @"
+        CompileAndVerify(source)
+            .VerifyIL(
+                "C.Test",
+                @"
 {
   // Code size       35 (0x23)
   .maxstack  2
@@ -5003,13 +5688,15 @@ class C
   IL_0021:  pop
   IL_0022:  ret
 }
-");
+"
+            );
     }
 
     [Fact]
     public void TopLevelMethod_LocalFunctions_NotStatic()
     {
-        var source = @"
+        var source =
+            @"
 using System;
 class C
 {
@@ -5022,7 +5709,10 @@ class C
     }
 }
 ";
-        CompileAndVerify(source).VerifyIL("C.Test", @"
+        CompileAndVerify(source)
+            .VerifyIL(
+                "C.Test",
+                @"
 {
   // Code size       20 (0x14)
   .maxstack  2
@@ -5034,13 +5724,15 @@ class C
   IL_0012:  pop
   IL_0013:  ret
 }
-");
+"
+            );
     }
 
     [Fact]
     public void TopLevelMethod_LocalFunctions_MethodScoped0()
     {
-        var source = @"
+        var source =
+            @"
 using System;
 class C
 {
@@ -5053,7 +5745,10 @@ class C
     }
 }
 ";
-        CompileAndVerify(source).VerifyIL("C.Test<T>", @"
+        CompileAndVerify(source)
+            .VerifyIL(
+                "C.Test<T>",
+                @"
 {
   // Code size       35 (0x23)
   .maxstack  2
@@ -5071,13 +5766,15 @@ class C
   IL_0021:  pop
   IL_0022:  ret
 }
-");
+"
+            );
     }
 
     [Fact]
     public void Local_LocalFunctions_MethodScoped0()
     {
-        var source = @"
+        var source =
+            @"
 using System;
 class C
 {
@@ -5093,7 +5790,10 @@ class C
     }
 }
 ";
-        CompileAndVerify(source).VerifyIL("C.<TopLevel>g__Test|0_0<T>", @"
+        CompileAndVerify(source)
+            .VerifyIL(
+                "C.<TopLevel>g__Test|0_0<T>",
+                @"
 {
   // Code size       40 (0x28)
   .maxstack  2
@@ -5112,13 +5812,15 @@ class C
   IL_0026:  pop
   IL_0027:  ret
 }
-");
+"
+            );
     }
 
     [Fact]
     public void Lambda_Local_LocalFunctions_MethodScoped0()
     {
-        var source = @"
+        var source =
+            @"
 using System;
 class C
 {
@@ -5141,7 +5843,10 @@ class C
     }
 }
 ";
-        CompileAndVerify(source).VerifyIL("C.<>c__DisplayClass0_0<T>.<TopLevel>g__Test|1", @"
+        CompileAndVerify(source)
+            .VerifyIL(
+                "C.<>c__DisplayClass0_0<T>.<TopLevel>g__Test|1",
+                @"
 {
   // Code size       40 (0x28)
   .maxstack  2
@@ -5160,13 +5865,15 @@ class C
   IL_0026:  pop
   IL_0027:  ret
 }
-");
+"
+            );
     }
 
     [Fact]
     public void Lambda_Local_LocalFunctions_MethodScoped1()
     {
-        var source = @"
+        var source =
+            @"
 using System;
 class C
 {
@@ -5195,7 +5902,10 @@ class C
     }
 }
 ";
-        CompileAndVerify(source).VerifyIL("C.<>c__DisplayClass0_0<T>.<TopLevel>g__Test|3", @"
+        CompileAndVerify(source)
+            .VerifyIL(
+                "C.<>c__DisplayClass0_0<T>.<TopLevel>g__Test|3",
+                @"
 {
   // Code size       40 (0x28)
   .maxstack  2
@@ -5214,13 +5924,15 @@ class C
   IL_0026:  pop
   IL_0027:  ret
 }
-");
+"
+            );
     }
 
     [Fact]
     public void TopLevelStatement_Lambda_Local_LocalFunctions_MethodScoped0()
     {
-        var source = @"
+        var source =
+            @"
 using System;
 
 Action y = () =>
@@ -5244,7 +5956,10 @@ Action x = () =>
 x();
 y();
 ";
-        CompileAndVerify(source).VerifyIL("Program.<<Main>$>g__Test|0_3<T>", @"
+        CompileAndVerify(source)
+            .VerifyIL(
+                "Program.<<Main>$>g__Test|0_3<T>",
+                @"
 {
   // Code size       35 (0x23)
   .maxstack  2
@@ -5262,13 +5977,15 @@ y();
   IL_0021:  pop
   IL_0022:  ret
 }
-");
+"
+            );
     }
 
     [Fact]
     public void TopLevelStatement_Lambda_Local_LocalFunctions_MethodScoped1()
     {
-        var source = @"
+        var source =
+            @"
 var y = () =>
 {
     void Test() { /* Test method ordinals in generated names */ }
@@ -5294,7 +6011,10 @@ var x = () =>
 x();
 y();
 ";
-        CompileAndVerify(source).VerifyIL("Program.<<Main>$>g__Test|0_3<T>", @"
+        CompileAndVerify(source)
+            .VerifyIL(
+                "Program.<<Main>$>g__Test|0_3<T>",
+                @"
 {
   // Code size       35 (0x23)
   .maxstack  2
@@ -5312,17 +6032,22 @@ y();
   IL_0021:  pop
   IL_0022:  ret
 }
-");
+"
+            );
     }
 
     [Fact]
     public void TopLevelStatement_Tuples_LocalFunction_TypeScoped0()
     {
-        var source = @"
+        var source =
+            @"
 (System.Action a, int _) = (Target, 0);
 static void Target() { }
 ";
-        CompileAndVerify(source).VerifyIL("<top-level-statements-entry-point>", @"
+        CompileAndVerify(source)
+            .VerifyIL(
+                "<top-level-statements-entry-point>",
+                @"
 {
   // Code size       29 (0x1d)
   .maxstack  2
@@ -5338,17 +6063,22 @@ static void Target() { }
   IL_001b:  pop
   IL_001c:  ret
 }
-");
+"
+            );
     }
 
     [Fact]
     public void TopLevelStatement_Tuples_LocalFunction_TypeScoped1()
     {
-        var source = @"
+        var source =
+            @"
 var t = Target;
 static (int a, int b) Target() => (0, 0);
 ";
-        CompileAndVerify(source).VerifyIL("<top-level-statements-entry-point>", @"
+        CompileAndVerify(source)
+            .VerifyIL(
+                "<top-level-statements-entry-point>",
+                @"
 {
   // Code size       25 (0x19)
   .maxstack  2
@@ -5360,13 +6090,15 @@ static (int a, int b) Target() => (0, 0);
   IL_0013:  stsfld     ""System.Func<System.ValueTuple<int, int>> Program.<>O.<0>__Target""
   IL_0018:  ret
 }
-");
+"
+            );
     }
 
     [Fact]
     public void TopLevelStatement_Tuples_LocalFunction_MethodScoped0()
     {
-        var source = @"
+        var source =
+            @"
 Test(0);
 static void Test<T>(T t)
 {
@@ -5374,7 +6106,10 @@ static void Test<T>(T t)
     static void Target() { }
 }
 ";
-        CompileAndVerify(source).VerifyIL("Program.<<Main>$>g__Test|0_0<T>", @"
+        CompileAndVerify(source)
+            .VerifyIL(
+                "Program.<<Main>$>g__Test|0_0<T>",
+                @"
 {
   // Code size       29 (0x1d)
   .maxstack  2
@@ -5390,13 +6125,15 @@ static void Test<T>(T t)
   IL_001b:  pop
   IL_001c:  ret
 }
-");
+"
+            );
     }
 
     [Fact]
     public void TopLevelStatement_Tuples_LocalFunction_MethodScoped1()
     {
-        var source = @"
+        var source =
+            @"
 Test(0);
 static void Test<T>(T t)
 {
@@ -5404,7 +6141,10 @@ static void Test<T>(T t)
     static (T, int) Target() => (default(T), 0);
 }
 ";
-        CompileAndVerify(source).VerifyIL("Program.<<Main>$>g__Test|0_0<T>", @"
+        CompileAndVerify(source)
+            .VerifyIL(
+                "Program.<<Main>$>g__Test|0_0<T>",
+                @"
 {
   // Code size       29 (0x1d)
   .maxstack  2
@@ -5420,13 +6160,15 @@ static void Test<T>(T t)
   IL_001b:  pop
   IL_001c:  ret
 }
-");
+"
+            );
     }
 
     [Fact]
     public void TopLevelStatement_Tuples_LocalFunction_MethodScoped2()
     {
-        var source = @"
+        var source =
+            @"
 Test(0);
 static void Test<T>(T t)
 {
@@ -5434,7 +6176,10 @@ static void Test<T>(T t)
     static (T, G) Target<G>(G g) => (default(T), g);
 }
 ";
-        CompileAndVerify(source).VerifyIL("Program.<<Main>$>g__Test|0_0<T>", @"
+        CompileAndVerify(source)
+            .VerifyIL(
+                "Program.<<Main>$>g__Test|0_0<T>",
+                @"
 {
   // Code size       29 (0x1d)
   .maxstack  2
@@ -5450,13 +6195,15 @@ static void Test<T>(T t)
   IL_001b:  pop
   IL_001c:  ret
 }
-");
+"
+            );
     }
 
     [Fact]
     public void TopLevelStatement_Tuples_LocalFunction_MethodScoped3()
     {
-        var source = @"
+        var source =
+            @"
 Test(0);
 static void Test<T>(T t)
 {
@@ -5464,7 +6211,10 @@ static void Test<T>(T t)
 }
 static (T, G) Target<T, G>(G g) => (default(T), g);
 ";
-        CompileAndVerify(source).VerifyIL("Program.<<Main>$>g__Test|0_0<T>", @"
+        CompileAndVerify(source)
+            .VerifyIL(
+                "Program.<<Main>$>g__Test|0_0<T>",
+                @"
 {
   // Code size       29 (0x1d)
   .maxstack  2
@@ -5480,13 +6230,15 @@ static (T, G) Target<T, G>(G g) => (default(T), g);
   IL_001b:  pop
   IL_001c:  ret
 }
-");
+"
+            );
     }
 
     [Fact]
     public void Tuples_LocalFunction_TypeScoped0()
     {
-        var source = @"
+        var source =
+            @"
 class C<T>
 {
     void Test()
@@ -5496,7 +6248,10 @@ class C<T>
     }
 }
 ";
-        CompileAndVerify(source).VerifyIL("C<T>.Test", @"
+        CompileAndVerify(source)
+            .VerifyIL(
+                "C<T>.Test",
+                @"
 {
   // Code size       25 (0x19)
   .maxstack  2
@@ -5508,13 +6263,15 @@ class C<T>
   IL_0013:  stsfld     ""System.Func<T, System.ValueTuple<T, T>> C<T>.<>O.<0>__Target""
   IL_0018:  ret
 }
-");
+"
+            );
     }
 
     [Fact]
     public void Tuples_LocalFunction_MethodScoped0()
     {
-        var source = @"
+        var source =
+            @"
 class C<T>
 {
     void Test<G>()
@@ -5524,7 +6281,10 @@ class C<T>
     }
 }
 ";
-        CompileAndVerify(source).VerifyIL("C<T>.Test<G>", @"
+        CompileAndVerify(source)
+            .VerifyIL(
+                "C<T>.Test<G>",
+                @"
 {
   // Code size       25 (0x19)
   .maxstack  2
@@ -5536,13 +6296,15 @@ class C<T>
   IL_0013:  stsfld     ""System.Func<T, G, System.ValueTuple<T, G>> C<T>.<Test>O__0_0<G>.<0>__Target""
   IL_0018:  ret
 }
-");
+"
+            );
     }
 
     [Fact]
     public void Tuples_LocalFunction_MethodScoped1()
     {
-        var source = @"
+        var source =
+            @"
 class C<T>
 {
     void Test<G>()
@@ -5552,7 +6314,10 @@ class C<T>
     }
 }
 ";
-        CompileAndVerify(source).VerifyIL("C<T>.Test<G>", @"
+        CompileAndVerify(source)
+            .VerifyIL(
+                "C<T>.Test<G>",
+                @"
 {
   // Code size       25 (0x19)
   .maxstack  2
@@ -5564,13 +6329,15 @@ class C<T>
   IL_0013:  stsfld     ""System.Func<T, G, T, System.ValueTuple<T, G, T>> C<T>.<Test>O__0_0<G>.<0>__Target""
   IL_0018:  ret
 }
-");
+"
+            );
     }
 
     [Fact]
     public void Tuples_LocalFunction_MethodScoped2()
     {
-        var source = @"
+        var source =
+            @"
 class M<N>
 {
     void F<I>()
@@ -5583,7 +6350,10 @@ class M<N>
     }
 }
 ";
-        CompileAndVerify(source).VerifyIL("M<N>.<F>g__Test|0_0<I, C>", @"
+        CompileAndVerify(source)
+            .VerifyIL(
+                "M<N>.<F>g__Test|0_0<I, C>",
+                @"
 {
   // Code size       25 (0x19)
   .maxstack  2
@@ -5595,13 +6365,15 @@ class M<N>
   IL_0013:  stsfld     ""System.Func<N, I, C, N, System.ValueTuple<N, I, C, N>> M<N>.<Test>O__0_0<I, C>.<0>__Target""
   IL_0018:  ret
 }
-");
+"
+            );
     }
 
     [Fact]
     public void TestConditionalOperatorMethodGroup()
     {
-        var source = @"
+        var source =
+            @"
 class C
 {
     static void Main()
@@ -5622,7 +6394,9 @@ class C
 }";
         var comp = CompileAndVerify(source, parseOptions: TestOptions.Regular11);
         comp.VerifyDiagnostics();
-        comp.VerifyIL("C.Main", @"
+        comp.VerifyIL(
+            "C.Main",
+            @"
 {
   // Code size       85 (0x55)
   .maxstack  3
@@ -5661,13 +6435,15 @@ class C
   IL_004f:  call       ""void System.Console.WriteLine(object)""
   IL_0054:  ret
 }
-");
+"
+        );
     }
 
     [Fact]
     public void WinMdEventAssignment()
     {
-        var source = @"
+        var source =
+            @"
 class C
 {
     public event System.Action Instance;
@@ -5703,9 +6479,15 @@ class D
     }
 }
 ";
-        var verifier = CompileAndVerifyWithWinRt(source, parseOptions: TestOptions.Regular11, options: TestOptions.ReleaseWinMD);
+        var verifier = CompileAndVerifyWithWinRt(
+            source,
+            parseOptions: TestOptions.Regular11,
+            options: TestOptions.ReleaseWinMD
+        );
 
-        verifier.VerifyIL("D.InstanceAdd", @"
+        verifier.VerifyIL(
+            "D.InstanceAdd",
+            @"
 {
   // Code size       64 (0x40)
   .maxstack  4
@@ -5730,9 +6512,12 @@ class D
   IL_0035:  stsfld     ""System.Action D.<>O.<0>__Action""
   IL_003a:  call       ""void System.Runtime.InteropServices.WindowsRuntime.WindowsRuntimeMarshal.AddEventHandler<System.Action>(System.Func<System.Action, System.Runtime.InteropServices.WindowsRuntime.EventRegistrationToken>, System.Action<System.Runtime.InteropServices.WindowsRuntime.EventRegistrationToken>, System.Action)""
   IL_003f:  ret
-}");
+}"
+        );
 
-        verifier.VerifyIL("D.InstanceRemove", @"
+        verifier.VerifyIL(
+            "D.InstanceRemove",
+            @"
 {
   // Code size       50 (0x32)
   .maxstack  3
@@ -5751,8 +6536,11 @@ class D
   IL_0027:  stsfld     ""System.Action D.<>O.<0>__Action""
   IL_002c:  call       ""void System.Runtime.InteropServices.WindowsRuntime.WindowsRuntimeMarshal.RemoveEventHandler<System.Action>(System.Action<System.Runtime.InteropServices.WindowsRuntime.EventRegistrationToken>, System.Action)""
   IL_0031:  ret
-}");
-        verifier.VerifyIL("D.StaticAdd", @"
+}"
+        );
+        verifier.VerifyIL(
+            "D.StaticAdd",
+            @"
 {
   // Code size       57 (0x39)
   .maxstack  4
@@ -5773,9 +6561,12 @@ class D
   IL_002e:  stsfld     ""System.Action D.<>O.<0>__Action""
   IL_0033:  call       ""void System.Runtime.InteropServices.WindowsRuntime.WindowsRuntimeMarshal.AddEventHandler<System.Action>(System.Func<System.Action, System.Runtime.InteropServices.WindowsRuntime.EventRegistrationToken>, System.Action<System.Runtime.InteropServices.WindowsRuntime.EventRegistrationToken>, System.Action)""
   IL_0038:  ret
-}");
+}"
+        );
 
-        verifier.VerifyIL("D.StaticRemove", @"
+        verifier.VerifyIL(
+            "D.StaticRemove",
+            @"
 {
   // Code size       45 (0x2d)
   .maxstack  3
@@ -5793,13 +6584,15 @@ class D
   IL_0022:  stsfld     ""System.Action D.<>O.<0>__Action""
   IL_0027:  call       ""void System.Runtime.InteropServices.WindowsRuntime.WindowsRuntimeMarshal.RemoveEventHandler<System.Action>(System.Action<System.Runtime.InteropServices.WindowsRuntime.EventRegistrationToken>, System.Action)""
   IL_002c:  ret
-}");
+}"
+        );
     }
 
     [Fact]
     public void WinMdEventFieldAssignment()
     {
-        var source = @"
+        var source =
+            @"
 class C
 {
     public event System.Action Instance;
@@ -5820,9 +6613,15 @@ class C
     }
 }
 ";
-        var verifier = CompileAndVerifyWithWinRt(source, parseOptions: TestOptions.Regular11, options: TestOptions.ReleaseWinMD);
+        var verifier = CompileAndVerifyWithWinRt(
+            source,
+            parseOptions: TestOptions.Regular11,
+            options: TestOptions.ReleaseWinMD
+        );
 
-        verifier.VerifyIL("C.InstanceAssign", @"
+        verifier.VerifyIL(
+            "C.InstanceAssign",
+            @"
 {
   // Code size       74 (0x4a)
   .maxstack  4
@@ -5847,9 +6646,12 @@ class C
   IL_003f:  stsfld     ""System.Action C.<>O.<0>__Action""
   IL_0044:  call       ""void System.Runtime.InteropServices.WindowsRuntime.WindowsRuntimeMarshal.AddEventHandler<System.Action>(System.Func<System.Action, System.Runtime.InteropServices.WindowsRuntime.EventRegistrationToken>, System.Action<System.Runtime.InteropServices.WindowsRuntime.EventRegistrationToken>, System.Action)""
   IL_0049:  ret
-}");
+}"
+        );
 
-        verifier.VerifyIL("C.StaticAssign", @"
+        verifier.VerifyIL(
+            "C.StaticAssign",
+            @"
 {
   // Code size       74 (0x4a)
   .maxstack  4
@@ -5874,14 +6676,15 @@ class C
   IL_003f:  stsfld     ""System.Action C.<>O.<0>__Action""
   IL_0044:  call       ""void System.Runtime.InteropServices.WindowsRuntime.WindowsRuntimeMarshal.AddEventHandler<System.Action>(System.Func<System.Action, System.Runtime.InteropServices.WindowsRuntime.EventRegistrationToken>, System.Action<System.Runtime.InteropServices.WindowsRuntime.EventRegistrationToken>, System.Action)""
   IL_0049:  ret
-}");
+}"
+        );
     }
 
     [Fact]
     public void LockDelegate()
     {
         var text =
-@"
+            @"
 delegate void D(string p1);
 partial class Test
 {
@@ -5901,7 +6704,10 @@ partial class Test
 }
 ";
 
-        CompileAndVerify(text, parseOptions: TestOptions.Regular11, expectedOutput: PASS).VerifyIL("Test.Main", @"
+        CompileAndVerify(text, parseOptions: TestOptions.Regular11, expectedOutput: PASS)
+            .VerifyIL(
+                "Test.Main",
+                @"
 {
   // Code size       64 (0x40)
   .maxstack  2
@@ -5942,13 +6748,15 @@ partial class Test
   }
   IL_003f:  ret
 }
-");
+"
+            );
     }
 
     [Fact]
     public void NullCoalescingAssignmentValidRHS()
     {
-        CompileAndVerify(@"
+        CompileAndVerify(
+                @"
 using System;
 public class C
 {
@@ -5960,10 +6768,16 @@ public class C
     }
     static void TestMethod() => Console.WriteLine(""In TestMethod"");
 }
-", parseOptions: TestOptions.Regular11, expectedOutput: @"
+",
+                parseOptions: TestOptions.Regular11,
+                expectedOutput: @"
 In TestMethod
 In TestMethod
-").VerifyIL("C.Main()", @"
+"
+            )
+            .VerifyIL(
+                "C.Main()",
+                @"
 {
   // Code size       85 (0x55)
   .maxstack  2
@@ -6003,14 +6817,15 @@ In TestMethod
   IL_004e:  stloc.0
   IL_004f:  callvirt   ""void System.Action.Invoke()""
   IL_0054:  ret
-}");
+}"
+            );
     }
 
     [Fact]
     public void ImplicitlyTypedVariables_01()
     {
         var source =
-@"using System;
+            @"using System;
 class Program
 {
     static void Main()
@@ -6025,14 +6840,22 @@ class Program
     static void Report(Delegate d) => Console.WriteLine($""{d.GetType().Namespace}.{d.GetType().Name}"");
 }";
 
-        var comp = CreateCompilation(source, parseOptions: TestOptions.Regular11, options: TestOptions.DebugExe);
+        var comp = CreateCompilation(
+            source,
+            parseOptions: TestOptions.Regular11,
+            options: TestOptions.DebugExe
+        );
         comp.VerifyDiagnostics();
 
-        var verifier = CompileAndVerify(comp, expectedOutput:
-@"System.Action
+        var verifier = CompileAndVerify(
+            comp,
+            expectedOutput: @"System.Action
 System.Action
-System.Action");
-        verifier.VerifyIL("Program.Main", @"
+System.Action"
+        );
+        verifier.VerifyIL(
+            "Program.Main",
+            @"
 {
   // Code size      115 (0x73)
   .maxstack  2
@@ -6081,13 +6904,15 @@ System.Action");
   IL_0071:  nop
   IL_0072:  ret
 }
-");
+"
+        );
     }
 
     [Fact]
     public void CustomModifiers_Method()
     {
-        var ilSource = @"
+        var ilSource =
+            @"
 .class public auto ansi beforefieldinit C1`1<T>
     extends System.Object
 {
@@ -6153,7 +6978,8 @@ System.Action");
 
 } // end of class C3`1
 ";
-        var source = @"
+        var source =
+            @"
 class Test
 {
     static void Main()
@@ -6168,9 +6994,15 @@ class Test
     }
 }
 ";
-        var compilation = CreateCompilationWithIL(source, ilSource, options: TestOptions.ReleaseExe);
+        var compilation = CreateCompilationWithIL(
+            source,
+            ilSource,
+            options: TestOptions.ReleaseExe
+        );
         var verifier = CompileAndVerify(compilation, expectedOutput: PASS);
-        verifier.VerifyIL("Test.M<G>", @"
+        verifier.VerifyIL(
+            "Test.M<G>",
+            @"
 {
   // Code size       38 (0x26)
   .maxstack  2
@@ -6187,13 +7019,15 @@ class Test
   IL_0020:  call       ""void System.Console.WriteLine(string)""
   IL_0025:  ret
 }
-");
+"
+        );
     }
 
     [Fact]
     public void CustomModifiers_Delegate()
     {
-        var ilSource = @"
+        var ilSource =
+            @"
 .class public auto ansi beforefieldinit C1`1<T>
 	extends [mscorlib]System.Object
 {
@@ -6285,7 +7119,8 @@ class Test
 
 } // end of class C3`1
 ";
-        var source = @"
+        var source =
+            @"
 class Test
 {
     static void Main()
@@ -6309,24 +7144,33 @@ class Test
             AssertEx.NotNull(field);
 
             var typeParameters = new List<TypeParameterSymbol>();
-            field.Type.VisitType(static (typeSymbol, typeParameters, _) =>
-            {
-                if (typeSymbol is TypeParameterSymbol typeParameter)
+            field.Type.VisitType(
+                static (typeSymbol, typeParameters, _) =>
                 {
-                    typeParameters.Add(typeParameter);
-                }
+                    if (typeSymbol is TypeParameterSymbol typeParameter)
+                    {
+                        typeParameters.Add(typeParameter);
+                    }
 
-                return false;
-            },
-            typeParameters, visitCustomModifiers: true);
+                    return false;
+                },
+                typeParameters,
+                visitCustomModifiers: true
+            );
 
             var typeParameter = Assert.Single(typeParameters);
             Assert.Equal("G", typeParameter.Name);
             Assert.Equal("<M>O__1_0", typeParameter.ContainingSymbol.Name);
         }
         var compilation = CreateCompilationWithIL(source, ilSource, options: TestOptions.DebugExe);
-        var verifier = CompileAndVerify(compilation, expectedOutput: PASS, symbolValidator: containerValidator);
-        verifier.VerifyIL("Test.M<G>", @"
+        var verifier = CompileAndVerify(
+            compilation,
+            expectedOutput: PASS,
+            symbolValidator: containerValidator
+        );
+        verifier.VerifyIL(
+            "Test.M<G>",
+            @"
 {
   // Code size       42 (0x2a)
   .maxstack  2
@@ -6348,10 +7192,15 @@ class Test
   IL_0028:  nop
   IL_0029:  ret
 }
-");
+"
+        );
     }
 
-    private static Action<ModuleSymbol> VerifyCacheContainer(string typeName, int arity, params string[] expectedFields)
+    private static Action<ModuleSymbol> VerifyCacheContainer(
+        string typeName,
+        int arity,
+        params string[] expectedFields
+    )
     {
         return module =>
         {
@@ -6359,7 +7208,11 @@ class Test
             AssertEx.NotNull(container);
             Assert.Equal(arity, container.Arity);
 
-            var fields = container.GetMembers().OfType<FieldSymbol>().Select(field => $"{field.Type.ToTestDisplayString()} {field.Name}").ToArray();
+            var fields = container
+                .GetMembers()
+                .OfType<FieldSymbol>()
+                .Select(field => $"{field.Type.ToTestDisplayString()} {field.Name}")
+                .ToArray();
             AssertEx.SetEqual(expectedFields, fields);
         };
     }
@@ -6368,12 +7221,16 @@ class Test
     {
         return module =>
         {
-            var containingType = module.GlobalNamespace.GetMember<NamedTypeSymbol>(containingTypeName);
+            var containingType = module.GlobalNamespace.GetMember<NamedTypeSymbol>(
+                containingTypeName
+            );
             AssertEx.NotNull(containingType);
 
             var nestedTypes = containingType.GetTypeMembers();
-            Assert.DoesNotContain(nestedTypes, t => t.Name.StartsWith("<") && t.Name.Contains(">O"));
+            Assert.DoesNotContain(
+                nestedTypes,
+                t => t.Name.StartsWith("<") && t.Name.Contains(">O")
+            );
         };
     }
-
 }

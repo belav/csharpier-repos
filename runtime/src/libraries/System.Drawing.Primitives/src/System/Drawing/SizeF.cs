@@ -11,8 +11,12 @@ namespace System.Drawing
     /// Represents the size of a rectangular region with an ordered pair of width and height.
     /// </summary>
     [Serializable]
-    [System.Runtime.CompilerServices.TypeForwardedFrom("System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a")]
-    [TypeConverter("System.Drawing.SizeFConverter, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a")]
+    [System.Runtime.CompilerServices.TypeForwardedFrom(
+        "System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
+    )]
+    [TypeConverter(
+        "System.Drawing.SizeFConverter, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
+    )]
     public struct SizeF : IEquatable<SizeF>
     {
         /// <summary>
@@ -108,13 +112,14 @@ namespace System.Drawing
         /// <param name="left">Dividend of type <see cref="SizeF"/>.</param>
         /// <param name="right">Divisor of type <see cref="int"/>.</param>
         /// <returns>Result of type <see cref="SizeF"/>.</returns>
-        public static SizeF operator /(SizeF left, float right)
-            => new SizeF(left.width / right, left.height / right);
+        public static SizeF operator /(SizeF left, float right) =>
+            new SizeF(left.width / right, left.height / right);
 
         /// <summary>
         /// Tests whether two <see cref='System.Drawing.SizeF'/> objects are identical.
         /// </summary>
-        public static bool operator ==(SizeF sz1, SizeF sz2) => sz1.Width == sz2.Width && sz1.Height == sz2.Height;
+        public static bool operator ==(SizeF sz1, SizeF sz2) =>
+            sz1.Width == sz2.Width && sz1.Height == sz2.Height;
 
         /// <summary>
         /// Tests whether two <see cref='System.Drawing.SizeF'/> objects are different.
@@ -153,18 +158,21 @@ namespace System.Drawing
         /// <summary>
         /// Performs vector addition of two <see cref='System.Drawing.SizeF'/> objects.
         /// </summary>
-        public static SizeF Add(SizeF sz1, SizeF sz2) => new SizeF(sz1.Width + sz2.Width, sz1.Height + sz2.Height);
+        public static SizeF Add(SizeF sz1, SizeF sz2) =>
+            new SizeF(sz1.Width + sz2.Width, sz1.Height + sz2.Height);
 
         /// <summary>
         /// Contracts a <see cref='System.Drawing.SizeF'/> by another <see cref='System.Drawing.SizeF'/>.
         /// </summary>
-        public static SizeF Subtract(SizeF sz1, SizeF sz2) => new SizeF(sz1.Width - sz2.Width, sz1.Height - sz2.Height);
+        public static SizeF Subtract(SizeF sz1, SizeF sz2) =>
+            new SizeF(sz1.Width - sz2.Width, sz1.Height - sz2.Height);
 
         /// <summary>
         /// Tests to see whether the specified object is a <see cref='System.Drawing.SizeF'/>  with the same dimensions
         /// as this <see cref='System.Drawing.SizeF'/>.
         /// </summary>
-        public override readonly bool Equals([NotNullWhen(true)] object? obj) => obj is SizeF && Equals((SizeF)obj);
+        public override readonly bool Equals([NotNullWhen(true)] object? obj) =>
+            obj is SizeF && Equals((SizeF)obj);
 
         public readonly bool Equals(SizeF other) => this == other;
 

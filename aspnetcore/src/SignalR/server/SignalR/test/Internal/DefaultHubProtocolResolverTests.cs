@@ -67,8 +67,8 @@ public class DefaultHubProtocolResolverTests
             HubProtocolHelpers.AllProtocols,
             NullLogger<DefaultHubProtocolResolver>.Instance
         );
-        var exception = Assert.Throws<ArgumentNullException>(
-            () => resolver.GetProtocol(null, HubProtocolHelpers.AllProtocolNames)
+        var exception = Assert.Throws<ArgumentNullException>(() =>
+            resolver.GetProtocol(null, HubProtocolHelpers.AllProtocolNames)
         );
 
         Assert.Equal("protocolName", exception.ParamName);

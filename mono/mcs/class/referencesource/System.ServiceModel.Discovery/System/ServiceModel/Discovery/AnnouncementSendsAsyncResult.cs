@@ -3,10 +3,9 @@
 //----------------------------------------------------------------
 namespace System.ServiceModel.Discovery
 {
-    using System.Xml;
-    using System.Runtime;
     using System.Collections.ObjectModel;
-
+    using System.Runtime;
+    using System.Xml;
 
     class AnnouncementSendsAsyncResult : RandomDelaySendsAsyncResult
     {
@@ -16,24 +15,33 @@ namespace System.ServiceModel.Discovery
         bool online;
 
         internal AnnouncementSendsAsyncResult(
-            AnnouncementClient announcementClient, 
-            Collection<EndpointDiscoveryMetadata> publishedEndpoints, 
+            AnnouncementClient announcementClient,
+            Collection<EndpointDiscoveryMetadata> publishedEndpoints,
             Collection<UniqueId> messageIds,
             bool online,
             TimeSpan maxDelay,
             Random random,
             AsyncCallback callback,
-            object state)
+            object state
+        )
             : base(publishedEndpoints.Count, maxDelay, announcementClient, random, callback, state)
         {
-            Fx.Assert(publishedEndpoints.Count == messageIds.Count, "There must be one message Ids for each EndpointDiscoveryMetadata.");
+            Fx.Assert(
+                publishedEndpoints.Count == messageIds.Count,
+                "There must be one message Ids for each EndpointDiscoveryMetadata."
+            );
             this.announcementClient = announcementClient;
             this.publishedEndpoints = publishedEndpoints;
             this.messageIds = messageIds;
             this.online = online;
         }
 
-        protected override IAsyncResult OnBeginSend(int index, TimeSpan timeout, AsyncCallback callback, object state)
+        protected override IAsyncResult OnBeginSend(
+            int index,
+            TimeSpan timeout,
+            AsyncCallback callback,
+            object state
+        )
         {
             using (new OperationContextScope(this.announcementClient.InnerChannel))
             {
@@ -41,11 +49,19 @@ namespace System.ServiceModel.Discovery
 
                 if (this.online)
                 {
-                    return this.announcementClient.BeginAnnounceOnline(this.publishedEndpoints[index], callback, state);
+                    return this.announcementClient.BeginAnnounceOnline(
+                        this.publishedEndpoints[index],
+                        callback,
+                        state
+                    );
                 }
                 else
                 {
-                    return this.announcementClient.BeginAnnounceOffline(this.publishedEndpoints[index], callback, state);
+                    return this.announcementClient.BeginAnnounceOffline(
+                        this.publishedEndpoints[index],
+                        callback,
+                        state
+                    );
                 }
             }
         }
@@ -61,6 +77,7 @@ namespace System.ServiceModel.Discovery
                 this.announcementClient.EndAnnounceOffline(result);
             }
         }
+
         public static void End(IAsyncResult result)
         {
             AsyncResult.End<AnnouncementSendsAsyncResult>(result);

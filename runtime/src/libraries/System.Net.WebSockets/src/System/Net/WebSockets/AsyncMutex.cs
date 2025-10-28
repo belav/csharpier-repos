@@ -20,6 +20,7 @@ namespace System.Threading
         /// If the value is less than or equal to 0, the mutex is held and requires fallback to enter it.
         /// </remarks>
         private int _gate = 1;
+
         /// <summary>Secondary check guarded by the lock to indicate whether the mutex is acquired.</summary>
         /// <remarks>
         /// This is only meaningful after having updated <see cref="_gate"/> via interlockeds and taken the appropriate path.
@@ -32,6 +33,7 @@ namespace System.Threading
         /// with an initial count of 0.
         /// </remarks>
         private bool _lockedSemaphoreFull = true;
+
         /// <summary>The tail of the double-linked circular waiting queue.</summary>
         /// <remarks>
         /// Waiters are added at the tail.
@@ -54,10 +56,9 @@ namespace System.Threading
             // If cancellation was requested, bail immediately.
             // If the mutex is not currently held nor contended, enter immediately.
             // Otherwise, fall back to a more expensive likely-asynchronous wait.
-            return
-                cancellationToken.IsCancellationRequested ? Task.FromCanceled(cancellationToken) :
-                Interlocked.Decrement(ref _gate) >= 0 ? Task.CompletedTask :
-                Contended(cancellationToken);
+            return cancellationToken.IsCancellationRequested ? Task.FromCanceled(cancellationToken)
+                : Interlocked.Decrement(ref _gate) >= 0 ? Task.CompletedTask
+                : Contended(cancellationToken);
 
             // Everything that follows is the equivalent of:
             //     return _sem.WaitAsync(cancellationToken);
@@ -74,7 +75,10 @@ namespace System.Threading
                 // the list; if that happens, we could end up adding the waiter and have it still stored in the list even
                 // though OnCancellation was called. So once we hold the lock, which OnCancellation also needs to take, we
                 // check again whether cancellation has been requested,and avoid storing the waiter if it has.
-                w.CancellationRegistration = cancellationToken.UnsafeRegister((s, token) => OnCancellation(s, token), w);
+                w.CancellationRegistration = cancellationToken.UnsafeRegister(
+                    (s, token) => OnCancellation(s, token),
+                    w
+                );
 
                 lock (SyncObj)
                 {
@@ -232,7 +236,9 @@ namespace System.Threading
         /// <summary>Represents a waiter for the mutex.</summary>
         private sealed class Waiter : TaskCompletionSource
         {
-            public Waiter(AsyncMutex owner) : base(TaskCreationOptions.RunContinuationsAsynchronously) => Owner = owner;
+            public Waiter(AsyncMutex owner)
+                : base(TaskCreationOptions.RunContinuationsAsynchronously) => Owner = owner;
+
             public AsyncMutex Owner { get; }
             public CancellationTokenRegistration CancellationRegistration { get; set; }
             public Waiter? Next { get; set; }

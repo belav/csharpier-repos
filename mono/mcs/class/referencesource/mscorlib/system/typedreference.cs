@@ -3,22 +3,22 @@
 //   Copyright (c) Microsoft Corporation.  All rights reserved.
 //
 // ==--==
-namespace System {
-
+namespace System
+{
     // TypedReference is basically only ever seen on the call stack, and in param arrays.
     //  These are blob that must be dealt with by the compiler.
     using System;
+    using System.Diagnostics.Contracts;
     using System.Reflection;
     using System.Runtime.CompilerServices;
+    using System.Runtime.Versioning;
     using CultureInfo = System.Globalization.CultureInfo;
     using FieldInfo = System.Reflection.FieldInfo;
 #if !MONO
     using System.Security.Permissions;
 #endif
-    using System.Runtime.Versioning;
-    using System.Diagnostics.Contracts;
 
-    [CLSCompliant(false)] 
+    [CLSCompliant(false)]
     [System.Runtime.InteropServices.ComVisible(true)]
     [System.Runtime.Versioning.NonVersionable] // This only applies to field layout
     public
@@ -35,48 +35,65 @@ namespace System {
         private IntPtr Value;
         private IntPtr Type;
 
-        [System.Security.SecurityCritical]  // auto-generated_required
+        [System.Security.SecurityCritical] // auto-generated_required
         [CLSCompliant(false)]
-        public static TypedReference MakeTypedReference(Object target, FieldInfo[] flds) {
+        public static TypedReference MakeTypedReference(Object target, FieldInfo[] flds)
+        {
             if (target == null)
                 throw new ArgumentNullException("target");
             if (flds == null)
                 throw new ArgumentNullException("flds");
             Contract.EndContractBlock();
             if (flds.Length == 0)
-                throw new ArgumentException(Environment.GetResourceString("Arg_ArrayZeroError"), nameof (flds));
+                throw new ArgumentException(
+                    Environment.GetResourceString("Arg_ArrayZeroError"),
+                    nameof(flds)
+                );
 
             IntPtr[] fields = new IntPtr[flds.Length];
             // For proper handling of Nullable<T> don't change GetType() to something like 'IsAssignableFrom'
-            // Currently we can't make a TypedReference to fields of Nullable<T>, which is fine.  
+            // Currently we can't make a TypedReference to fields of Nullable<T>, which is fine.
             RuntimeType targetType = (RuntimeType)target.GetType();
             for (int i = 0; i < flds.Length; i++)
             {
                 RuntimeFieldInfo field = flds[i] as RuntimeFieldInfo;
                 if (field == null)
-                    throw new ArgumentException(Environment.GetResourceString("Argument_MustBeRuntimeFieldInfo"));
+                    throw new ArgumentException(
+                        Environment.GetResourceString("Argument_MustBeRuntimeFieldInfo")
+                    );
 
                 if (field.IsStatic)
-                    throw new ArgumentException(Environment.GetResourceString("Argument_TypedReferenceInvalidField"));
-                
-                if (targetType != field.GetDeclaringTypeInternal() && !targetType.IsSubclassOf(field.GetDeclaringTypeInternal()))
-                    throw new MissingMemberException(Environment.GetResourceString("MissingMemberTypeRef"));
+                    throw new ArgumentException(
+                        Environment.GetResourceString("Argument_TypedReferenceInvalidField")
+                    );
+
+                if (
+                    targetType != field.GetDeclaringTypeInternal()
+                    && !targetType.IsSubclassOf(field.GetDeclaringTypeInternal())
+                )
+                    throw new MissingMemberException(
+                        Environment.GetResourceString("MissingMemberTypeRef")
+                    );
 
                 RuntimeType fieldType = (RuntimeType)field.FieldType;
                 if (fieldType.IsPrimitive)
-                    throw new ArgumentException(Environment.GetResourceString("Arg_TypeRefPrimitve"));
-                
+                    throw new ArgumentException(
+                        Environment.GetResourceString("Arg_TypeRefPrimitve")
+                    );
+
                 if (i < (flds.Length - 1) && !fieldType.IsValueType)
-                    throw new MissingMemberException(Environment.GetResourceString("MissingMemberNestErr"));
-                
+                    throw new MissingMemberException(
+                        Environment.GetResourceString("MissingMemberNestErr")
+                    );
+
                 fields[i] = field.FieldHandle.Value;
                 targetType = fieldType;
             }
 
-            TypedReference result = new TypedReference ();
+            TypedReference result = new TypedReference();
 
             // reference to TypedReference is banned, so have to pass result as pointer
-            unsafe 
+            unsafe
             {
                 InternalMakeTypedReference(&result, target, fields, targetType);
             }
@@ -84,12 +101,17 @@ namespace System {
         }
 
 #if !MONO
-        [System.Security.SecurityCritical]  // auto-generated
+        [System.Security.SecurityCritical] // auto-generated
         [ResourceExposure(ResourceScope.None)]
 #endif
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
         // reference to TypedReference is banned, so have to pass result as pointer
-        private unsafe static extern void InternalMakeTypedReference(void* result, Object target, IntPtr[] flds, RuntimeType lastFieldType);
+        private unsafe static extern void InternalMakeTypedReference(
+            void* result,
+            Object target,
+            IntPtr[] flds,
+            RuntimeType lastFieldType
+        );
 
         public override int GetHashCode()
         {
@@ -104,54 +126,51 @@ namespace System {
             throw new NotSupportedException(Environment.GetResourceString("NotSupported_NYI"));
         }
 
-        [System.Security.SecuritySafeCritical]  // auto-generated
-        public unsafe static Object ToObject(TypedReference value)
+        [System.Security.SecuritySafeCritical] // auto-generated
+        public static unsafe Object ToObject(TypedReference value)
         {
             return InternalToObject(&value);
         }
 
 #if !MONO
-        [System.Security.SecurityCritical]  // auto-generated
+        [System.Security.SecurityCritical] // auto-generated
         [ResourceExposure(ResourceScope.None)]
 #endif
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        internal unsafe extern static Object InternalToObject(void * value);
+        internal static extern unsafe Object InternalToObject(void* value);
 
-        internal bool IsNull 
-        { 
-            get
-            {
-                return Value == IntPtr.Zero && Type == IntPtr.Zero;
-            }
+        internal bool IsNull
+        {
+            get { return Value == IntPtr.Zero && Type == IntPtr.Zero; }
         }
 
-        public static Type GetTargetType (TypedReference value)
+        public static Type GetTargetType(TypedReference value)
         {
             return __reftype(value);
         }
 
-        public static RuntimeTypeHandle TargetTypeToken (TypedReference value)
+        public static RuntimeTypeHandle TargetTypeToken(TypedReference value)
         {
             return __reftype(value).TypeHandle;
         }
 
         //  This may cause the type to be changed.
-        [System.Security.SecuritySafeCritical]  // auto-generated
+        [System.Security.SecuritySafeCritical] // auto-generated
         [CLSCompliant(false)]
-        public unsafe static void SetTypedReference(TypedReference target, Object value)
+        public static unsafe void SetTypedReference(TypedReference target, Object value)
         {
 #if MONO
-            throw new NotImplementedException ("SetTypedReference");
+            throw new NotImplementedException("SetTypedReference");
 #else
             InternalSetTypedReference(&target, value);
 #endif
         }
+
 #if !MONO
-        [System.Security.SecurityCritical]  // auto-generated
+        [System.Security.SecurityCritical] // auto-generated
         [ResourceExposure(ResourceScope.None)]
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        internal unsafe extern static void InternalSetTypedReference(void * target, Object value);
+        internal static extern unsafe void InternalSetTypedReference(void* target, Object value);
 #endif
     }
-
 }

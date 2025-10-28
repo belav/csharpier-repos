@@ -6,11 +6,11 @@
 
 using System.Collections.Generic;
 using System.Collections.Immutable;
-using System.Linq;
 using System.Diagnostics;
+using System.Linq;
 using Microsoft.CodeAnalysis.CSharp.Symbols;
-using Microsoft.CodeAnalysis.PooledObjects;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
+using Microsoft.CodeAnalysis.PooledObjects;
 
 namespace Microsoft.CodeAnalysis.CSharp
 {
@@ -34,7 +34,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             TypeCompilationState compilationState,
             BindingDiagnosticBag diagnostics,
             bool hasTrailingExpression,
-            bool originalBodyNested)
+            bool originalBodyNested
+        )
         {
 #if DEBUG
             // We should only see a trailingExpression if we're in a Script initializer.
@@ -43,22 +44,51 @@ namespace Microsoft.CodeAnalysis.CSharp
 #endif
             var compilation = method.DeclaringCompilation;
 
-            if (method.ReturnsVoid || method.IsIterator || method.IsAsyncEffectivelyReturningTask(compilation))
+            if (
+                method.ReturnsVoid
+                || method.IsIterator
+                || method.IsAsyncEffectivelyReturningTask(compilation)
+            )
             {
                 ImmutableArray<FieldSymbol> implicitlyInitializedFields = default;
                 bool needsImplicitReturn = true;
                 // we don't analyze synthesized void methods.
-                if ((method.IsImplicitlyDeclared && !method.IsScriptInitializer) ||
-                    Analyze(compilation, method, block, diagnostics.DiagnosticBag, out needsImplicitReturn, out implicitlyInitializedFields))
+                if (
+                    (method.IsImplicitlyDeclared && !method.IsScriptInitializer)
+                    || Analyze(
+                        compilation,
+                        method,
+                        block,
+                        diagnostics.DiagnosticBag,
+                        out needsImplicitReturn,
+                        out implicitlyInitializedFields
+                    )
+                )
                 {
                     if (!implicitlyInitializedFields.IsDefault)
                     {
                         Debug.Assert(!implicitlyInitializedFields.IsEmpty);
 
                         // It's not expected to have implicitly initialized fields when a constructor initializer is present, except in error scenarios.
-                        Debug.Assert(method is not SourceMemberMethodSymbol { SyntaxNode: ConstructorDeclarationSyntax { Initializer: not null } } || block.HasErrors);
+                        Debug.Assert(
+                            method
+                                is not SourceMemberMethodSymbol
+                                {
+                                    SyntaxNode: ConstructorDeclarationSyntax
+                                    {
+                                        Initializer: not null
+                                    }
+                                }
+                                || block.HasErrors
+                        );
 
-                        block = PrependImplicitInitializations(block, method, implicitlyInitializedFields, compilationState, diagnostics);
+                        block = PrependImplicitInitializations(
+                            block,
+                            method,
+                            implicitlyInitializedFields,
+                            compilationState,
+                            diagnostics
+                        );
                     }
                     if (needsImplicitReturn)
                     {
@@ -66,7 +96,16 @@ namespace Microsoft.CodeAnalysis.CSharp
                     }
                 }
             }
-            else if (Analyze(compilation, method, block, diagnostics.DiagnosticBag, out var needsImplicitReturn, out var unusedImplicitlyInitializedFields))
+            else if (
+                Analyze(
+                    compilation,
+                    method,
+                    block,
+                    diagnostics.DiagnosticBag,
+                    out var needsImplicitReturn,
+                    out var unusedImplicitlyInitializedFields
+                )
+            )
             {
                 Debug.Assert(unusedImplicitlyInitializedFields.IsDefault);
                 Debug.Assert(needsImplicitReturn);
@@ -76,23 +115,61 @@ namespace Microsoft.CodeAnalysis.CSharp
                 Debug.Assert(method.MethodKind != MethodKind.AnonymousFunction);
 
                 // Add implicit "return default(T)" if this is a submission that does not have a trailing expression.
-                var submissionResultType = (method as SynthesizedInteractiveInitializerMethod)?.ResultType;
+                var submissionResultType = (
+                    method as SynthesizedInteractiveInitializerMethod
+                )?.ResultType;
                 if (!hasTrailingExpression && ((object)submissionResultType != null))
                 {
                     Debug.Assert(!submissionResultType.IsVoidType());
 
-                    var trailingExpression = new BoundDefaultExpression(method.GetNonNullSyntaxNode(), submissionResultType);
-                    var newStatements = block.Statements.Add(new BoundReturnStatement(trailingExpression.Syntax, RefKind.None, trailingExpression, @checked: false));
-                    block = new BoundBlock(block.Syntax, ImmutableArray<LocalSymbol>.Empty, newStatements) { WasCompilerGenerated = true };
+                    var trailingExpression = new BoundDefaultExpression(
+                        method.GetNonNullSyntaxNode(),
+                        submissionResultType
+                    );
+                    var newStatements = block.Statements.Add(
+                        new BoundReturnStatement(
+                            trailingExpression.Syntax,
+                            RefKind.None,
+                            trailingExpression,
+                            @checked: false
+                        )
+                    );
+                    block = new BoundBlock(
+                        block.Syntax,
+                        ImmutableArray<LocalSymbol>.Empty,
+                        newStatements
+                    )
+                    {
+                        WasCompilerGenerated = true,
+                    };
 #if DEBUG
                     // It should not be necessary to repeat analysis after adding this node, because adding a trailing
                     // return in cases where one was missing should never produce different Diagnostics.
-                    IEnumerable<Diagnostic> getErrorsOnly(IEnumerable<Diagnostic> diags) => diags.Where(d => d.Severity == DiagnosticSeverity.Error);
+                    IEnumerable<Diagnostic> getErrorsOnly(IEnumerable<Diagnostic> diags) =>
+                        diags.Where(d => d.Severity == DiagnosticSeverity.Error);
                     var flowAnalysisDiagnostics = DiagnosticBag.GetInstance();
-                    Debug.Assert(!Analyze(compilation, method, block, flowAnalysisDiagnostics, needsImplicitReturn: out _, out unusedImplicitlyInitializedFields));
+                    Debug.Assert(
+                        !Analyze(
+                            compilation,
+                            method,
+                            block,
+                            flowAnalysisDiagnostics,
+                            needsImplicitReturn: out _,
+                            out unusedImplicitlyInitializedFields
+                        )
+                    );
                     Debug.Assert(unusedImplicitlyInitializedFields.IsDefault);
                     // Ignore warnings since flow analysis reports nullability mismatches.
-                    Debug.Assert(getErrorsOnly(flowAnalysisDiagnostics.ToReadOnly()).SequenceEqual(getErrorsOnly(diagnostics.ToReadOnly().Diagnostics.Skip(initialDiagnosticCount))));
+                    Debug.Assert(
+                        getErrorsOnly(flowAnalysisDiagnostics.ToReadOnly())
+                            .SequenceEqual(
+                                getErrorsOnly(
+                                    diagnostics
+                                        .ToReadOnly()
+                                        .Diagnostics.Skip(initialDiagnosticCount)
+                                )
+                            )
+                    );
                     flowAnalysisDiagnostics.Free();
 #endif
                 }
@@ -100,36 +177,58 @@ namespace Microsoft.CodeAnalysis.CSharp
                 // have already reported a non-void partial method error.
                 else if (method.Locations.Length == 1)
                 {
-                    diagnostics.Add(ErrorCode.ERR_ReturnExpected, method.GetFirstLocation(), method);
+                    diagnostics.Add(
+                        ErrorCode.ERR_ReturnExpected,
+                        method.GetFirstLocation(),
+                        method
+                    );
                 }
             }
 
             return block;
         }
 
-        private static BoundBlock PrependImplicitInitializations(BoundBlock body, MethodSymbol method, ImmutableArray<FieldSymbol> implicitlyInitializedFields, TypeCompilationState compilationState, BindingDiagnosticBag diagnostics)
+        private static BoundBlock PrependImplicitInitializations(
+            BoundBlock body,
+            MethodSymbol method,
+            ImmutableArray<FieldSymbol> implicitlyInitializedFields,
+            TypeCompilationState compilationState,
+            BindingDiagnosticBag diagnostics
+        )
         {
             Debug.Assert(!implicitlyInitializedFields.IsEmpty);
             Debug.Assert(method.MethodKind == MethodKind.Constructor);
             NamedTypeSymbol containingType = method.ContainingType;
             Debug.Assert(containingType.IsStructType());
 
-            var F = new SyntheticBoundNodeFactory(method, body.Syntax, compilationState, diagnostics);
+            var F = new SyntheticBoundNodeFactory(
+                method,
+                body.Syntax,
+                compilationState,
+                diagnostics
+            );
 
-            var builder = ArrayBuilder<BoundStatement>.GetInstance(implicitlyInitializedFields.Length);
+            var builder = ArrayBuilder<BoundStatement>.GetInstance(
+                implicitlyInitializedFields.Length
+            );
 
             // Inline arrays of length > 1 must be initialized completely, simply initializing the element field is not sufficient.
             // For arrays of length == 1, initializing the element field is sufficient.
-            if (containingType.HasInlineArrayAttribute(out int length) && length > 1 && containingType.TryGetPossiblyUnsupportedByLanguageInlineArrayElementField() is FieldSymbol elementField)
+            if (
+                containingType.HasInlineArrayAttribute(out int length)
+                && length > 1
+                && containingType.TryGetPossiblyUnsupportedByLanguageInlineArrayElementField()
+                    is FieldSymbol elementField
+            )
             {
                 Debug.Assert(elementField == implicitlyInitializedFields.Single());
 
                 // this = default;
                 builder.Add(
                     F.ExpressionStatement(
-                        F.AssignmentExpression(
-                            F.This(),
-                            F.Default(containingType))));
+                        F.AssignmentExpression(F.This(), F.Default(containingType))
+                    )
+                );
             }
             else
             {
@@ -142,7 +241,10 @@ namespace Microsoft.CodeAnalysis.CSharp
                             F.ExpressionStatement(
                                 F.AssignmentExpression(
                                     F.Field(F.This(), field),
-                                    F.Default(field.Type))));
+                                    F.Default(field.Type)
+                                )
+                            )
+                        );
                     }
                     else
                     {
@@ -152,17 +254,30 @@ namespace Microsoft.CodeAnalysis.CSharp
                                 F.AssignmentExpression(
                                     F.Field(F.This(), field),
                                     F.NullRef(field.TypeWithAnnotations),
-                                    isRef: true)));
+                                    isRef: true
+                                )
+                            )
+                        );
                     }
                 }
             }
 
             var initializations = F.HiddenSequencePoint(F.Block(builder.ToImmutableAndFree()));
 
-            return body.Update(body.Locals, body.LocalFunctions, body.HasUnsafeModifier, body.Instrumentation, body.Statements.Insert(index: 0, initializations));
+            return body.Update(
+                body.Locals,
+                body.LocalFunctions,
+                body.HasUnsafeModifier,
+                body.Instrumentation,
+                body.Statements.Insert(index: 0, initializations)
+            );
         }
 
-        private static BoundBlock AppendImplicitReturn(BoundBlock body, MethodSymbol method, bool originalBodyNested)
+        private static BoundBlock AppendImplicitReturn(
+            BoundBlock body,
+            MethodSymbol method,
+            bool originalBodyNested
+        )
         {
             if (originalBodyNested)
             {
@@ -173,7 +288,13 @@ namespace Microsoft.CodeAnalysis.CSharp
                 builder.AddRange(statements, n - 1);
                 builder.Add(AppendImplicitReturn((BoundBlock)statements[n - 1], method));
 
-                return body.Update(body.Locals, ImmutableArray<LocalFunctionSymbol>.Empty, body.HasUnsafeModifier, body.Instrumentation, builder.ToImmutableAndFree());
+                return body.Update(
+                    body.Locals,
+                    ImmutableArray<LocalFunctionSymbol>.Empty,
+                    body.HasUnsafeModifier,
+                    body.Instrumentation,
+                    builder.ToImmutableAndFree()
+                );
             }
             else
             {
@@ -191,17 +312,26 @@ namespace Microsoft.CodeAnalysis.CSharp
 
             SyntaxNode syntax = body.Syntax;
 
-            Debug.Assert(body.WasCompilerGenerated ||
-                         syntax.IsKind(SyntaxKind.Block) ||
-                         syntax.IsKind(SyntaxKind.ArrowExpressionClause) ||
-                         syntax.IsKind(SyntaxKind.ConstructorDeclaration) ||
-                         syntax.IsKind(SyntaxKind.CompilationUnit));
+            Debug.Assert(
+                body.WasCompilerGenerated
+                    || syntax.IsKind(SyntaxKind.Block)
+                    || syntax.IsKind(SyntaxKind.ArrowExpressionClause)
+                    || syntax.IsKind(SyntaxKind.ConstructorDeclaration)
+                    || syntax.IsKind(SyntaxKind.CompilationUnit)
+            );
 
-            BoundStatement ret = (method.IsIterator && !method.IsAsync)
-                ? (BoundStatement)BoundYieldBreakStatement.Synthesized(syntax)
-                : BoundReturnStatement.Synthesized(syntax, RefKind.None, null);
+            BoundStatement ret =
+                (method.IsIterator && !method.IsAsync)
+                    ? (BoundStatement)BoundYieldBreakStatement.Synthesized(syntax)
+                    : BoundReturnStatement.Synthesized(syntax, RefKind.None, null);
 
-            return body.Update(body.Locals, body.LocalFunctions, body.HasUnsafeModifier, body.Instrumentation, body.Statements.Add(ret));
+            return body.Update(
+                body.Locals,
+                body.LocalFunctions,
+                body.HasUnsafeModifier,
+                body.Instrumentation,
+                body.Statements.Add(ret)
+            );
         }
 
         private static bool Analyze(
@@ -210,10 +340,18 @@ namespace Microsoft.CodeAnalysis.CSharp
             BoundBlock block,
             DiagnosticBag diagnostics,
             out bool needsImplicitReturn,
-            out ImmutableArray<FieldSymbol> implicitlyInitializedFieldsOpt)
+            out ImmutableArray<FieldSymbol> implicitlyInitializedFieldsOpt
+        )
         {
             needsImplicitReturn = ControlFlowPass.Analyze(compilation, method, block, diagnostics);
-            DefiniteAssignmentPass.Analyze(compilation, method, block, diagnostics, out implicitlyInitializedFieldsOpt, requireOutParamsAssigned: true);
+            DefiniteAssignmentPass.Analyze(
+                compilation,
+                method,
+                block,
+                diagnostics,
+                out implicitlyInitializedFieldsOpt,
+                requireOutParamsAssigned: true
+            );
             return needsImplicitReturn || !implicitlyInitializedFieldsOpt.IsDefault;
         }
     }

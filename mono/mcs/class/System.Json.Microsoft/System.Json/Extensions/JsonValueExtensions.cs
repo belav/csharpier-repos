@@ -11,7 +11,7 @@ using System.Linq.Expressions;
 namespace System.Runtime.Serialization.Json
 {
     /// <summary>
-    /// This class extends the functionality of the <see cref="JsonValue"/> type. 
+    /// This class extends the functionality of the <see cref="JsonValue"/> type.
     /// </summary>
     [EditorBrowsable(EditorBrowsableState.Never)]
     public static class JsonValueExtensions
@@ -86,8 +86,11 @@ namespace System.Runtime.Serialization.Json
         /// specified if the conversion.</returns>
         /// <exception cref="System.NotSupportedException">If this <see cref="System.Json.JsonValue"/> value cannot be
         /// converted into the type T.</exception>
-        [SuppressMessage("Microsoft.Design", "CA1004:GenericMethodsShouldProvideTypeParameter",
-            Justification = "The generic parameter is used to specify the output type")]
+        [SuppressMessage(
+            "Microsoft.Design",
+            "CA1004:GenericMethodsShouldProvideTypeParameter",
+            Justification = "The generic parameter is used to specify the output type"
+        )]
         public static T ReadAsType<T>(this JsonValue jsonValue)
         {
             if (jsonValue == null)
@@ -150,7 +153,13 @@ namespace System.Runtime.Serialization.Json
                 return result;
             }
 
-            throw new NotSupportedException(RS.Format(System.Json.Properties.Resources.CannotReadAsType, jsonValue.GetType().FullName, type.FullName));
+            throw new NotSupportedException(
+                RS.Format(
+                    System.Json.Properties.Resources.CannotReadAsType,
+                    jsonValue.GetType().FullName,
+                    type.FullName
+                )
+            );
         }
 
         /// <summary>
@@ -160,9 +169,16 @@ namespace System.Runtime.Serialization.Json
         /// <param name="type">The type to which the conversion is being performed.</param>
         /// <param name="value">An object to be initialized with this instance or null if the conversion cannot be performed.</param>
         /// <returns>true if this <see cref="System.Json.JsonValue"/> instance can be read as the specified type; otherwise, false.</returns>
-        [SuppressMessage("Microsoft.Design", "CA1007:UseGenericsWhereAppropriate",
-            Justification = "This is the non-generic version of the method.")]
-        [SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes", Justification = "Exception translates to fail.")]
+        [SuppressMessage(
+            "Microsoft.Design",
+            "CA1007:UseGenericsWhereAppropriate",
+            Justification = "This is the non-generic version of the method."
+        )]
+        [SuppressMessage(
+            "Microsoft.Design",
+            "CA1031:DoNotCatchGeneralExceptionTypes",
+            Justification = "Exception translates to fail."
+        )]
         public static bool TryReadAsType(this JsonValue jsonValue, Type type, out object value)
         {
             if (jsonValue == null)
@@ -224,8 +240,11 @@ namespace System.Runtime.Serialization.Json
         {
             if (jsonValue != null)
             {
-                return (jsonValue.JsonType == JsonType.Object && collectionType == typeof(Dictionary<string, object>)) ||
-                       (jsonValue.JsonType == JsonType.Array && collectionType == typeof(object[]));
+                return (
+                        jsonValue.JsonType == JsonType.Object
+                        && collectionType == typeof(Dictionary<string, object>)
+                    )
+                    || (jsonValue.JsonType == JsonType.Array && collectionType == typeof(object[]));
             }
 
             return false;
@@ -254,7 +273,11 @@ namespace System.Runtime.Serialization.Json
             }
         }
 
-        [SuppressMessage("Microsoft.Performance", "CA1800:DoNotCastUnnecessarily", Justification = "value is not the same")]
+        [SuppressMessage(
+            "Microsoft.Performance",
+            "CA1800:DoNotCastUnnecessarily",
+            Justification = "value is not the same"
+        )]
         private static JsonValue CreateFromDynamic(object value)
         {
             JsonObject parent = null;
@@ -326,8 +349,7 @@ namespace System.Runtime.Serialization.Json
                         dynObj = info.DynamicObject;
                         keys = info.Keys;
                     }
-                }
-                while (infoStack.Count > 0);
+                } while (infoStack.Count > 0);
             }
 
             return parent;
@@ -335,7 +357,11 @@ namespace System.Runtime.Serialization.Json
 
         private class CreateFromTypeStackInfo
         {
-            public CreateFromTypeStackInfo(JsonObject jsonObject, DynamicObject dynamicObject, IEnumerator<string> keyEnumerator)
+            public CreateFromTypeStackInfo(
+                JsonObject jsonObject,
+                DynamicObject dynamicObject,
+                IEnumerator<string> keyEnumerator
+            )
             {
                 JsonObject = jsonObject;
                 DynamicObject = dynamicObject;
@@ -361,16 +387,24 @@ namespace System.Runtime.Serialization.Json
         private class SimpleGetMemberBinder : GetMemberBinder
         {
             public SimpleGetMemberBinder(string name)
-                : base(name, false)
-            {
-            }
+                : base(name, false) { }
 
-            public override DynamicMetaObject FallbackGetMember(DynamicMetaObject target, DynamicMetaObject errorSuggestion)
+            public override DynamicMetaObject FallbackGetMember(
+                DynamicMetaObject target,
+                DynamicMetaObject errorSuggestion
+            )
             {
                 if (target != null && errorSuggestion == null)
                 {
-                    string exceptionMessage = RS.Format(System.Json.Properties.Resources.DynamicPropertyNotDefined, target.LimitType, Name);
-                    Expression throwExpression = Expression.Throw(Expression.Constant(new InvalidOperationException(exceptionMessage)), typeof(object));
+                    string exceptionMessage = RS.Format(
+                        System.Json.Properties.Resources.DynamicPropertyNotDefined,
+                        target.LimitType,
+                        Name
+                    );
+                    Expression throwExpression = Expression.Throw(
+                        Expression.Constant(new InvalidOperationException(exceptionMessage)),
+                        typeof(object)
+                    );
 
                     errorSuggestion = new DynamicMetaObject(throwExpression, target.Restrictions);
                 }

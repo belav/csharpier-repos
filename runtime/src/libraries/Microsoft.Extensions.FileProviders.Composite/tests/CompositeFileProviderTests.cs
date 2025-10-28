@@ -29,7 +29,9 @@ namespace Microsoft.Extensions.FileProviders.Composite
         public void GetFileInfo_ReturnsNotFoundFileInfo_IfFileDoesNotExist()
         {
             // Arrange
-            var provider = new CompositeFileProvider(new MockFileProvider(new MockFileInfo("DoesExist.txt")));
+            var provider = new CompositeFileProvider(
+                new MockFileProvider(new MockFileInfo("DoesExist.txt"))
+            );
 
             // Act
             var fileInfo = provider.GetFileInfo("DoesNotExist.txt");
@@ -46,15 +48,10 @@ namespace Microsoft.Extensions.FileProviders.Composite
             var fileName = "File1";
             var expectedFileInfo = new MockFileInfo(fileName);
             var provider = new CompositeFileProvider(
-                new MockFileProvider(
-                    new MockFileInfo("FileA"),
-                    new MockFileInfo("FileB")),
-                new MockFileProvider(
-                    expectedFileInfo,
-                    new MockFileInfo("File2")),
-                new MockFileProvider(
-                    new MockFileInfo(fileName),
-                    new MockFileInfo("File3")));
+                new MockFileProvider(new MockFileInfo("FileA"), new MockFileInfo("FileB")),
+                new MockFileProvider(expectedFileInfo, new MockFileInfo("File2")),
+                new MockFileProvider(new MockFileInfo(fileName), new MockFileInfo("File3"))
+            );
 
             // Act
             var fileInfo = provider.GetFileInfo(fileName);
@@ -94,7 +91,10 @@ namespace Microsoft.Extensions.FileProviders.Composite
         }
 
         // Moq heavily utilizes RefEmit, which does not work on most aot workloads
-        [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsReflectionEmitSupported))]
+        [ConditionalFact(
+            typeof(PlatformDetection),
+            nameof(PlatformDetection.IsReflectionEmitSupported)
+        )]
         public void GetDirectoryContents_ReturnsCombinaisionOFFiles()
         {
             // Arrange
@@ -103,12 +103,9 @@ namespace Microsoft.Extensions.FileProviders.Composite
             var file2Bis = new MockFileInfo("File2");
             var file3 = new MockFileInfo("File3");
             var provider = new CompositeFileProvider(
-                new MockFileProvider(
-                    file1,
-                    file2),
-                new MockFileProvider(
-                    file2Bis,
-                    file3));
+                new MockFileProvider(file1, file2),
+                new MockFileProvider(file2Bis, file3)
+            );
 
             // Act
             var files = provider.GetDirectoryContents(string.Empty);
@@ -116,14 +113,19 @@ namespace Microsoft.Extensions.FileProviders.Composite
             // Assert
             Assert.NotNull(files);
             Assert.True(files.Exists);
-            Assert.Collection(files.OrderBy(f => f.Name, StringComparer.Ordinal),
+            Assert.Collection(
+                files.OrderBy(f => f.Name, StringComparer.Ordinal),
                 file => Assert.Same(file1, file),
                 file => Assert.Same(file2, file),
-                file => Assert.Same(file3, file));
+                file => Assert.Same(file3, file)
+            );
         }
 
         // Moq heavily utilizes RefEmit, which does not work on most aot workloads
-        [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsReflectionEmitSupported))]
+        [ConditionalFact(
+            typeof(PlatformDetection),
+            nameof(PlatformDetection.IsReflectionEmitSupported)
+        )]
         public void GetDirectoryContents_ReturnsCombinaitionOFFiles_WhenSomeFileProviderRetunsNoContent()
         {
             // Arrange
@@ -134,14 +136,9 @@ namespace Microsoft.Extensions.FileProviders.Composite
             var folderBFile2 = new MockFileInfo("FolderB/File2");
             var folderCFile3 = new MockFileInfo("FolderC/File3");
             var provider = new CompositeFileProvider(
-                new MockFileProvider(
-                    folderAFile1,
-                    folderAFile2,
-                    folderBFile2),
-                new MockFileProvider(
-                    folderAFile2Bis,
-                    folderBFile1,
-                    folderCFile3));
+                new MockFileProvider(folderAFile1, folderAFile2, folderBFile2),
+                new MockFileProvider(folderAFile2Bis, folderBFile1, folderCFile3)
+            );
 
             // Act
             var files = provider.GetDirectoryContents("FolderC/");
@@ -149,8 +146,10 @@ namespace Microsoft.Extensions.FileProviders.Composite
             // Assert
             Assert.NotNull(files);
             Assert.True(files.Exists);
-            Assert.Collection(files.OrderBy(f => f.Name, StringComparer.Ordinal),
-                file => Assert.Equal(folderCFile3, file));
+            Assert.Collection(
+                files.OrderBy(f => f.Name, StringComparer.Ordinal),
+                file => Assert.Equal(folderCFile3, file)
+            );
         }
 
         [Fact]
@@ -171,8 +170,7 @@ namespace Microsoft.Extensions.FileProviders.Composite
         public void Watch_ReturnsNoopChangeToken_IfNoWatcherReturnedByFileProviders()
         {
             // Arrange
-            var provider = new CompositeFileProvider(
-                new MockFileProvider());
+            var provider = new CompositeFileProvider(new MockFileProvider());
 
             // Act
             var changeToken = provider.Watch("DoesntExist*Pattern");
@@ -192,8 +190,12 @@ namespace Microsoft.Extensions.FileProviders.Composite
             var provider = new CompositeFileProvider(
                 new MockFileProvider(
                     new KeyValuePair<string, IChangeToken>("pattern", firstChangeToken),
-                    new KeyValuePair<string, IChangeToken>("2ndpattern", secondChangeToken)),
-                new MockFileProvider(new KeyValuePair<string, IChangeToken>("pattern", thirdChangeToken)));
+                    new KeyValuePair<string, IChangeToken>("2ndpattern", secondChangeToken)
+                ),
+                new MockFileProvider(
+                    new KeyValuePair<string, IChangeToken>("pattern", thirdChangeToken)
+                )
+            );
 
             // Act
             var changeToken = provider.Watch("pattern");
@@ -227,8 +229,12 @@ namespace Microsoft.Extensions.FileProviders.Composite
             var provider = new CompositeFileProvider(
                 new MockFileProvider(
                     new KeyValuePair<string, IChangeToken>("pattern", firstChangeToken),
-                    new KeyValuePair<string, IChangeToken>("2ndpattern", secondChangeToken)),
-                new MockFileProvider(new KeyValuePair<string, IChangeToken>("pattern", thirdChangeToken)));
+                    new KeyValuePair<string, IChangeToken>("2ndpattern", secondChangeToken)
+                ),
+                new MockFileProvider(
+                    new KeyValuePair<string, IChangeToken>("pattern", thirdChangeToken)
+                )
+            );
 
             // Act
             var changeToken = provider.Watch("pattern");
@@ -245,11 +251,14 @@ namespace Microsoft.Extensions.FileProviders.Composite
             var hasBeenCalled = false;
             object result = null;
             object state = new object();
-            changeToken.RegisterChangeCallback(item =>
-            {
-                hasBeenCalled = true;
-                result = item;
-            }, state);
+            changeToken.RegisterChangeCallback(
+                item =>
+                {
+                    hasBeenCalled = true;
+                    result = item;
+                },
+                state
+            );
             Assert.Single(firstChangeToken.Callbacks);
             Assert.Empty(secondChangeToken.Callbacks);
             Assert.Single(thirdChangeToken.Callbacks);

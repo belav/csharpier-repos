@@ -55,7 +55,10 @@ namespace System.Web.WebPages
         /// <summary>
         /// Given an object of anonymous type, add each property as a key and associated with its value to the given dictionary.
         /// </summary>
-        public static void AddAnonymousObjectToDictionary(IDictionary<string, object> dictionary, object value)
+        public static void AddAnonymousObjectToDictionary(
+            IDictionary<string, object> dictionary,
+            object value
+        )
         {
             var values = ObjectToDictionary(value);
             foreach (var item in values)
@@ -74,9 +77,13 @@ namespace System.Web.WebPages
 
             // TODO: The only way to detect anonymous types right now.
             return Attribute.IsDefined(type, typeof(CompilerGeneratedAttribute), false)
-                   && type.IsGenericType && type.Name.Contains("AnonymousType")
-                   && (type.Name.StartsWith("<>", StringComparison.OrdinalIgnoreCase) || type.Name.StartsWith("VB$", StringComparison.OrdinalIgnoreCase))
-                   && (type.Attributes & TypeAttributes.NotPublic) == TypeAttributes.NotPublic;
+                && type.IsGenericType
+                && type.Name.Contains("AnonymousType")
+                && (
+                    type.Name.StartsWith("<>", StringComparison.OrdinalIgnoreCase)
+                    || type.Name.StartsWith("VB$", StringComparison.OrdinalIgnoreCase)
+                )
+                && (type.Attributes & TypeAttributes.NotPublic) == TypeAttributes.NotPublic;
         }
     }
 }

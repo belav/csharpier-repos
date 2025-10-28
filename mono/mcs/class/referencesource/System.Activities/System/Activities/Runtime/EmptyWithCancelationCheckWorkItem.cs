@@ -5,17 +5,20 @@
 namespace System.Activities.Runtime
 {
     using System;
-    using System.Runtime;
-    using System.Reflection;
-    using System.Runtime.Serialization;
     using System.Diagnostics.CodeAnalysis;
+    using System.Reflection;
+    using System.Runtime;
+    using System.Runtime.Serialization;
 
     [DataContract]
     class EmptyWithCancelationCheckWorkItem : ActivityExecutionWorkItem
     {
         ActivityInstance completedInstance;
 
-        public EmptyWithCancelationCheckWorkItem(ActivityInstance activityInstance, ActivityInstance completedInstance)
+        public EmptyWithCancelationCheckWorkItem(
+            ActivityInstance activityInstance,
+            ActivityInstance completedInstance
+        )
             : base(activityInstance)
         {
             this.completedInstance = completedInstance;
@@ -53,7 +56,10 @@ namespace System.Activities.Runtime
 
         public override void PostProcess(ActivityExecutor executor)
         {
-            if (this.completedInstance.State != ActivityInstanceState.Closed && this.ActivityInstance.IsPerformingDefaultCancelation)
+            if (
+                this.completedInstance.State != ActivityInstanceState.Closed
+                && this.ActivityInstance.IsPerformingDefaultCancelation
+            )
             {
                 this.ActivityInstance.MarkCanceled();
             }

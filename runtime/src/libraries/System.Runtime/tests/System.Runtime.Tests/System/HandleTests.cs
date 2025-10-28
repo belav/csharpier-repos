@@ -2,15 +2,14 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
-using System.Runtime;
 using System.Reflection;
+using System.Runtime;
 using Xunit;
-
 
 public static class HandleTests
 {
     [Fact]
-    public static void  RuntimeFieldHandleTest()
+    public static void RuntimeFieldHandleTest()
     {
         Type t = typeof(Derived);
         FieldInfo f = t.GetField(nameof(Base.MyField));
@@ -19,7 +18,10 @@ public static class HandleTests
         Assert.True(h.Value != IntPtr.Zero);
 
         Assert.Equal(h.GetHashCode(), h.GetHashCode());
-        Assert.Equal(default(RuntimeFieldHandle).GetHashCode(), default(RuntimeFieldHandle).GetHashCode());
+        Assert.Equal(
+            default(RuntimeFieldHandle).GetHashCode(),
+            default(RuntimeFieldHandle).GetHashCode()
+        );
 
         Assert.True(h.Equals(h));
         Assert.False(h.Equals(default(RuntimeFieldHandle)));
@@ -41,7 +43,7 @@ public static class HandleTests
     }
 
     [Fact]
-    public static void  RuntimeMethodHandleTest()
+    public static void RuntimeMethodHandleTest()
     {
         MethodInfo mi = typeof(Base).GetMethod(nameof(Base.MyMethod));
         RuntimeMethodHandle h = mi.MethodHandle;
@@ -50,7 +52,10 @@ public static class HandleTests
         Assert.True(h.Value != IntPtr.Zero);
 
         Assert.Equal(h.GetHashCode(), h.GetHashCode());
-        Assert.Equal(default(RuntimeMethodHandle).GetHashCode(), default(RuntimeMethodHandle).GetHashCode());
+        Assert.Equal(
+            default(RuntimeMethodHandle).GetHashCode(),
+            default(RuntimeMethodHandle).GetHashCode()
+        );
 
         Assert.True(h.Equals(h));
         Assert.False(h.Equals(default(RuntimeMethodHandle)));
@@ -75,7 +80,7 @@ public static class HandleTests
     }
 
     [Fact]
-    public static void  GenericMethodRuntimeMethodHandleTest()
+    public static void GenericMethodRuntimeMethodHandleTest()
     {
         // Make sure uninstantiated generic method has a valid handle
         MethodInfo mi1 = typeof(Base).GetMethod(nameof(Base.GenericMethod));
@@ -84,7 +89,7 @@ public static class HandleTests
     }
 
     [Fact]
-    public static void  RuntimeTypeHandleTest()
+    public static void RuntimeTypeHandleTest()
     {
         RuntimeTypeHandle h = typeof(int).TypeHandle;
         Assert.NotEqual(h, typeof(uint).TypeHandle);
@@ -92,7 +97,10 @@ public static class HandleTests
         Assert.True(h.Value != IntPtr.Zero);
 
         Assert.Equal(h.GetHashCode(), h.GetHashCode());
-        Assert.Equal(default(RuntimeTypeHandle).GetHashCode(), default(RuntimeTypeHandle).GetHashCode());
+        Assert.Equal(
+            default(RuntimeTypeHandle).GetHashCode(),
+            default(RuntimeTypeHandle).GetHashCode()
+        );
 
         Assert.True(h.Equals(h));
         Assert.False(h.Equals(default(RuntimeTypeHandle)));
@@ -118,7 +126,11 @@ public static class HandleTests
 
     private class Base
     {
-        public event Action MyEvent { add { } remove { } }
+        public event Action MyEvent
+        {
+            add { }
+            remove { }
+        }
 #pragma warning disable 0649
         public int MyField;
 #pragma warning restore 0649
@@ -132,7 +144,5 @@ public static class HandleTests
         public static void GenericMethod<T>() { }
     }
 
-    private class Derived : Base
-    {
-    }
+    private class Derived : Base { }
 }

@@ -1,5 +1,4 @@
 <Project Sdk="Microsoft.NET.Sdk">
-
   <PropertyGroup>
     <TargetFrameworks>$(NetCoreAppCurrent);$(NetCoreAppPrevious);$(NetCoreAppMinimum);netstandard2.0;$(NetFrameworkMinimum)</TargetFrameworks>
     <RootNamespace>System.Composition</RootNamespace>
@@ -13,7 +12,7 @@
 Commonly Used Types:
 System.Composition.CompositionContextExtensions
 System.Composition.Hosting.ContainerConfiguration</PackageDescription>
-    
+
     <!-- TODO https://github.com/dotnet/runtime/issues/90400: Annotate for nullable reference types -->
     <Nullable>disable</Nullable>
     <NoWarn>$(NoWarn);nullable</NoWarn>
@@ -43,8 +42,10 @@ System.Composition.Hosting.ContainerConfiguration</PackageDescription>
     <Compile Include="System\Composition\TypedParts\ImportInfo.cs" />
     <Compile Include="System\Composition\TypedParts\TypedPartExportDescriptorProvider.cs" />
     <Compile Include="System\Composition\TypedParts\Util\DirectAttributeContext.cs" />
-    <Compile Include="$(CoreLibSharedDir)System\Numerics\Hashing\HashHelpers.cs"
-             Link="Common\System\Numerics\Hashing\HashHelpers.cs" />
+    <Compile
+      Include="$(CoreLibSharedDir)System\Numerics\Hashing\HashHelpers.cs"
+      Link="Common\System\Numerics\Hashing\HashHelpers.cs"
+    />
   </ItemGroup>
 
   <ItemGroup>
@@ -52,5 +53,4 @@ System.Composition.Hosting.ContainerConfiguration</PackageDescription>
     <ProjectReference Include="$(LibrariesProjectRoot)System.Composition.Hosting\src\System.Composition.Hosting.csproj" />
     <ProjectReference Include="$(LibrariesProjectRoot)System.Composition.Runtime\src\System.Composition.Runtime.csproj" />
   </ItemGroup>
-
 </Project>

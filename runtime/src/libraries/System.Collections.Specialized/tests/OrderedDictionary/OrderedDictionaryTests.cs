@@ -1,10 +1,10 @@
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
-using Xunit;
 using System;
 using System.Collections;
 using System.Collections.Specialized;
+using Xunit;
 
 namespace System.Collections.Specialized.Tests
 {
@@ -163,7 +163,10 @@ namespace System.Collections.Specialized.Tests
             }
 
             AssertExtensions.Throws<ArgumentNullException>("array", () => keys.CopyTo(null, 0));
-            AssertExtensions.Throws<ArgumentOutOfRangeException>("index", () => keys.CopyTo(new object[keys.Count], -1));
+            AssertExtensions.Throws<ArgumentOutOfRangeException>(
+                "index",
+                () => keys.CopyTo(new object[keys.Count], -1)
+            );
         }
 
         // bool System.Collections.ICollection.IsSynchronized { get; }
@@ -219,10 +222,22 @@ namespace System.Collections.Specialized.Tests
                 Assert.Equal(d[i], 100 + i);
             }
 
-            Assert.Throws<ArgumentOutOfRangeException>(() => { int foo = (int)d[-1]; });
-            Assert.Throws<ArgumentOutOfRangeException>(() => { d[-1] = 5; });
-            Assert.Throws<ArgumentOutOfRangeException>(() => { int foo = (int)d[1000]; });
-            Assert.Throws<ArgumentOutOfRangeException>(() => { d[1000] = 5; });
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+            {
+                int foo = (int)d[-1];
+            });
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+            {
+                d[-1] = 5;
+            });
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+            {
+                int foo = (int)d[1000];
+            });
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+            {
+                d[1000] = 5;
+            });
         }
 
         // public object this[object key] { get; set; }
@@ -248,8 +263,14 @@ namespace System.Collections.Specialized.Tests
             }
 
             Assert.Null(d["asdasd"]);
-            Assert.Throws<ArgumentNullException>(() => { var a = d[null]; });
-            Assert.Throws<ArgumentNullException>(() => { d[null] = 1337; });
+            Assert.Throws<ArgumentNullException>(() =>
+            {
+                var a = d[null];
+            });
+            Assert.Throws<ArgumentNullException>(() =>
+            {
+                d[null] = 1337;
+            });
         }
 
         // public ICollection Values { get; }
@@ -289,7 +310,10 @@ namespace System.Collections.Specialized.Tests
             }
 
             AssertExtensions.Throws<ArgumentNullException>("array", () => values.CopyTo(null, 0));
-            AssertExtensions.Throws<ArgumentOutOfRangeException>("index", () => values.CopyTo(new object[values.Count], -1));
+            AssertExtensions.Throws<ArgumentOutOfRangeException>(
+                "index",
+                () => values.CopyTo(new object[values.Count], -1)
+            );
         }
 
         // public void Add(object key, object value);
@@ -337,10 +361,19 @@ namespace System.Collections.Specialized.Tests
             Assert.True(d.IsReadOnly);
             Assert.Equal("bar", d["foo"]);
             Assert.Equal(37, d[(object)13]);
-            Assert.Throws<NotSupportedException>(() => { d["foo"] = "moooooooooaaah"; });
-            Assert.Throws<NotSupportedException>(() => { d["asdasd"] = "moooooooooaaah"; });
+            Assert.Throws<NotSupportedException>(() =>
+            {
+                d["foo"] = "moooooooooaaah";
+            });
+            Assert.Throws<NotSupportedException>(() =>
+            {
+                d["asdasd"] = "moooooooooaaah";
+            });
             Assert.Null(d["asdasd"]);
-            Assert.Throws<ArgumentNullException>(() => { var a = d[null]; });
+            Assert.Throws<ArgumentNullException>(() =>
+            {
+                var a = d[null];
+            });
         }
 
         // public void Clear();
@@ -578,7 +611,9 @@ namespace System.Collections.Specialized.Tests
                 orderedDictionary.Add(item, item);
             }
 
-            IList list = Assert.IsAssignableFrom<IList>(testKeysProperty ? orderedDictionary.Keys : orderedDictionary.Values);
+            IList list = Assert.IsAssignableFrom<IList>(
+                testKeysProperty ? orderedDictionary.Keys : orderedDictionary.Values
+            );
 
             Assert.True(list.IsFixedSize);
             Assert.True(list.IsReadOnly);
@@ -613,7 +648,9 @@ namespace System.Collections.Specialized.Tests
         {
             var orderedDictionary = new OrderedDictionary();
             orderedDictionary.Add("foo", "bar");
-            IList list = Assert.IsAssignableFrom<IList>(testKeysProperty ? orderedDictionary.Keys : orderedDictionary.Values);
+            IList list = Assert.IsAssignableFrom<IList>(
+                testKeysProperty ? orderedDictionary.Keys : orderedDictionary.Values
+            );
 
             Assert.Throws<NotSupportedException>(() =>
             {
@@ -629,7 +666,9 @@ namespace System.Collections.Specialized.Tests
         [Fact]
         public void IListedKeysPropertyCanUseCustomEqualityComparer()
         {
-            var orderedDictionary = new OrderedDictionary(StringComparer.InvariantCultureIgnoreCase);
+            var orderedDictionary = new OrderedDictionary(
+                StringComparer.InvariantCultureIgnoreCase
+            );
             orderedDictionary.Add("KeY", null);
 
             IList list = (IList)orderedDictionary.Keys;

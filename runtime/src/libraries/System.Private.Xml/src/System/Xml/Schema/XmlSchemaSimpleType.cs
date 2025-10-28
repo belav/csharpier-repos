@@ -15,9 +15,11 @@ namespace System.Xml.Schema
             Debug.Assert(SchemaContentType == XmlSchemaContentType.TextOnly);
         }
 
-        [XmlElement("restriction", typeof(XmlSchemaSimpleTypeRestriction)),
-        XmlElement("list", typeof(XmlSchemaSimpleTypeList)),
-        XmlElement("union", typeof(XmlSchemaSimpleTypeUnion))]
+        [
+            XmlElement("restriction", typeof(XmlSchemaSimpleTypeRestriction)),
+            XmlElement("list", typeof(XmlSchemaSimpleTypeList)),
+            XmlElement("union", typeof(XmlSchemaSimpleTypeUnion))
+        ]
         public XmlSchemaSimpleTypeContent? Content
         {
             get { return _content; }

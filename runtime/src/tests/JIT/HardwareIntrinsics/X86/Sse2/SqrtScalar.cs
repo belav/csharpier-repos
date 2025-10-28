@@ -28,7 +28,12 @@ namespace IntelHardwareIntrinsicTest.SSE2
                         doubleTable.SetOutArray(result);
                     }
 
-                    CheckMethodEight<double, double> checkDouble = (Span<double> x, Span<double> y, Span<double> z, Span<double> a) =>
+                    CheckMethodEight<double, double> checkDouble = (
+                        Span<double> x,
+                        Span<double> y,
+                        Span<double> z,
+                        Span<double> a
+                    ) =>
                     {
                         a[0] = Math.Sqrt(x[0]);
                         a[1] = x[1];
@@ -37,14 +42,21 @@ namespace IntelHardwareIntrinsicTest.SSE2
 
                     if (!doubleTable.CheckResult(checkDouble))
                     {
-                        PrintError(doubleTable, methodUnderTestName, "(Span<double> x, Span<double> y, Span<double> z, Span<double> a) => SqrtScalar", checkDouble);
+                        PrintError(
+                            doubleTable,
+                            methodUnderTestName,
+                            "(Span<double> x, Span<double> y, Span<double> z, Span<double> a) => SqrtScalar",
+                            checkDouble
+                        );
                         Assert.Fail("");
                     }
                 }
             }
             else
             {
-                Console.WriteLine($"Sse2.IsSupported: {Sse2.IsSupported}, skipped tests of {typeof(Sse2)}.{methodUnderTestName}");
+                Console.WriteLine(
+                    $"Sse2.IsSupported: {Sse2.IsSupported}, skipped tests of {typeof(Sse2)}.{methodUnderTestName}"
+                );
             }
         }
     }

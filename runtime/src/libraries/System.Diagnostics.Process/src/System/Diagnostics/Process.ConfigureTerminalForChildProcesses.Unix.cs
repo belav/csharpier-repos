@@ -10,11 +10,17 @@ namespace System.Diagnostics
     {
         private static int s_childrenUsingTerminalCount;
 
-        internal static void ConfigureTerminalForChildProcesses(int increment, bool configureConsole = true)
+        internal static void ConfigureTerminalForChildProcesses(
+            int increment,
+            bool configureConsole = true
+        )
         {
             Debug.Assert(increment != 0);
 
-            int childrenUsingTerminalRemaining = Interlocked.Add(ref s_childrenUsingTerminalCount, increment);
+            int childrenUsingTerminalRemaining = Interlocked.Add(
+                ref s_childrenUsingTerminalCount,
+                increment
+            );
             if (increment > 0)
             {
                 Debug.Assert(s_processStartLock.IsReadLockHeld);
@@ -37,7 +43,9 @@ namespace System.Diagnostics
 
         private static unsafe void SetDelayedSigChildConsoleConfigurationHandler()
         {
-            Interop.Sys.SetDelayedSigChildConsoleConfigurationHandler(&DelayedSigChildConsoleConfiguration);
+            Interop.Sys.SetDelayedSigChildConsoleConfigurationHandler(
+                &DelayedSigChildConsoleConfiguration
+            );
         }
 
         [UnmanagedCallersOnly]

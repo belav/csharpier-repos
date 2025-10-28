@@ -4,57 +4,79 @@
 // </copyright>
 //------------------------------------------------------------------------------
 
-namespace System.Configuration {
+namespace System.Configuration
+{
     using System.Collections;
-    using System.Collections.Specialized;
     using System.Collections.Generic;
+    using System.Collections.Specialized;
 
-    static internal class ErrorsHelper {
-
-        static internal int GetErrorCount(List<ConfigurationException> errors) {
+    internal static class ErrorsHelper
+    {
+        internal static int GetErrorCount(List<ConfigurationException> errors)
+        {
             return (errors != null) ? errors.Count : 0;
         }
 
-        static internal bool GetHasErrors(List<ConfigurationException> errors) {
+        internal static bool GetHasErrors(List<ConfigurationException> errors)
+        {
             return GetErrorCount(errors) > 0;
         }
 
-        static internal void AddError(ref List<ConfigurationException> errors, ConfigurationException e) {
+        internal static void AddError(
+            ref List<ConfigurationException> errors,
+            ConfigurationException e
+        )
+        {
             Debug.Assert(e != null, "e != null");
 
             // Create on demand
-            if (errors == null) {
+            if (errors == null)
+            {
                 errors = new List<ConfigurationException>();
             }
 
             ConfigurationErrorsException ce = e as ConfigurationErrorsException;
-            if (ce == null) {
+            if (ce == null)
+            {
                 errors.Add(e);
             }
-            else {
+            else
+            {
                 ICollection<ConfigurationException> col = ce.ErrorsGeneric;
-                if (col.Count == 1) {
+                if (col.Count == 1)
+                {
                     errors.Add(e);
                 }
-                else {
+                else
+                {
                     errors.AddRange(col);
                 }
             }
         }
 
-        static internal void AddErrors(ref List<ConfigurationException> errors, ICollection<ConfigurationException> coll) {
-            if (coll == null || coll.Count == 0) {
+        internal static void AddErrors(
+            ref List<ConfigurationException> errors,
+            ICollection<ConfigurationException> coll
+        )
+        {
+            if (coll == null || coll.Count == 0)
+            {
                 // Nothing to do here, bail
                 return;
             }
 
-            foreach (ConfigurationException e in coll) {
+            foreach (ConfigurationException e in coll)
+            {
                 AddError(ref errors, e);
             }
         }
 
-        static internal ConfigurationErrorsException GetErrorsException(List<ConfigurationException> errors) {
-            if (errors == null) {
+        internal static ConfigurationErrorsException GetErrorsException(
+            List<ConfigurationException> errors
+        )
+        {
+            if (errors == null)
+            {
                 return null;
             }
 
@@ -62,9 +84,11 @@ namespace System.Configuration {
             return new ConfigurationErrorsException(errors);
         }
 
-        static internal void ThrowOnErrors(List<ConfigurationException> errors) {
+        internal static void ThrowOnErrors(List<ConfigurationException> errors)
+        {
             ConfigurationErrorsException e = GetErrorsException(errors);
-            if (e != null) {
+            if (e != null)
+            {
                 throw e;
             }
         }

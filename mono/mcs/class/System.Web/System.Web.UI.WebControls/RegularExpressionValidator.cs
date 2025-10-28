@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -27,64 +27,80 @@
 //
 
 using System.ComponentModel;
-using System.Web;
-using System.Web.UI.WebControls;
+using System.Security.Permissions;
 using System.Text;
 using System.Text.RegularExpressions;
-using System.Security.Permissions;
+using System.Web;
+using System.Web.UI.WebControls;
 
-namespace System.Web.UI.WebControls {
+namespace System.Web.UI.WebControls
+{
+    // CAS
+    [AspNetHostingPermissionAttribute(
+        SecurityAction.LinkDemand,
+        Level = AspNetHostingPermissionLevel.Minimal
+    )]
+    [AspNetHostingPermissionAttribute(
+        SecurityAction.InheritanceDemand,
+        Level = AspNetHostingPermissionLevel.Minimal
+    )]
+    // attributes
+    [ToolboxData(
+        "<{0}:RegularExpressionValidator runat=\"server\" ErrorMessage=\"RegularExpressionValidator\"></{0}:RegularExpressionValidator>"
+    )]
+    public class RegularExpressionValidator : BaseValidator
+    {
+        public RegularExpressionValidator() { }
 
-	// CAS
-	[AspNetHostingPermissionAttribute (SecurityAction.LinkDemand, Level = AspNetHostingPermissionLevel.Minimal)]
-	[AspNetHostingPermissionAttribute (SecurityAction.InheritanceDemand, Level = AspNetHostingPermissionLevel.Minimal)]
-	// attributes
-	[ToolboxData ("<{0}:RegularExpressionValidator runat=\"server\" ErrorMessage=\"RegularExpressionValidator\"></{0}:RegularExpressionValidator>")]
-	public class RegularExpressionValidator : BaseValidator
-	{
-		public RegularExpressionValidator ()
-		{
-		}
+        protected override void AddAttributesToRender(HtmlTextWriter writer)
+        {
+            if (RenderUplevel)
+            {
+                RegisterExpandoAttribute(
+                    ClientID,
+                    "evaluationfunction",
+                    "RegularExpressionValidatorEvaluateIsValid"
+                );
+                if (ValidationExpression.Length > 0)
+                    RegisterExpandoAttribute(
+                        ClientID,
+                        "validationexpression",
+                        ValidationExpression,
+                        true
+                    );
+            }
 
-		protected override void AddAttributesToRender (HtmlTextWriter writer)
-		{
-			if (RenderUplevel) {
-				RegisterExpandoAttribute (ClientID, "evaluationfunction", "RegularExpressionValidatorEvaluateIsValid");
-				if (ValidationExpression.Length > 0)
-					RegisterExpandoAttribute (ClientID, "validationexpression", ValidationExpression, true);
-			}
+            base.AddAttributesToRender(writer);
+        }
 
-			base.AddAttributesToRender (writer);
-		}
+        protected override bool EvaluateIsValid()
+        {
+            if (GetControlValidationValue(ControlToValidate).Trim() == "")
+                return true;
 
-		protected override bool EvaluateIsValid ()
-		{
-			if (GetControlValidationValue (ControlToValidate).Trim() == "")
-				return true;
+            StringBuilder expr = new StringBuilder(ValidationExpression);
 
-			StringBuilder expr = new StringBuilder(ValidationExpression);
+            if (expr.Length == 0 || expr[0] != '^')
+                expr.Insert(0, '^');
 
-			if (expr.Length == 0 || expr [0] != '^')
-				expr.Insert(0, '^');
-								
-			if (expr [expr.Length - 1] != '$')
-				expr.Append('$');
-				
-			return Regex.IsMatch (GetControlValidationValue(ControlToValidate), expr.ToString ());
-		}
+            if (expr[expr.Length - 1] != '$')
+                expr.Append('$');
 
-		[Themeable (false)]
-		[DefaultValue ("")]
-		[Editor ("System.Web.UI.Design.WebControls.RegexTypeEditor, " + Consts.AssemblySystem_Design, typeof(System.Drawing.Design.UITypeEditor))]
-		[WebSysDescription ("")]
-		[WebCategory ("Behavior")]
-		public string ValidationExpression {
-			get {
-				return ViewState.GetString ("ValidationExpression", "");
-			}
-			set {
-				ViewState ["ValidationExpression"] = value;
-			}
-		}
-	}
+            return Regex.IsMatch(GetControlValidationValue(ControlToValidate), expr.ToString());
+        }
+
+        [Themeable(false)]
+        [DefaultValue("")]
+        [Editor(
+            "System.Web.UI.Design.WebControls.RegexTypeEditor, " + Consts.AssemblySystem_Design,
+            typeof(System.Drawing.Design.UITypeEditor)
+        )]
+        [WebSysDescription("")]
+        [WebCategory("Behavior")]
+        public string ValidationExpression
+        {
+            get { return ViewState.GetString("ValidationExpression", ""); }
+            set { ViewState["ValidationExpression"] = value; }
+        }
+    }
 }

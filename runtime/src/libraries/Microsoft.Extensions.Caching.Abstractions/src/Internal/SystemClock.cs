@@ -15,10 +15,7 @@ namespace Microsoft.Extensions.Internal
         /// </summary>
         public DateTimeOffset UtcNow
         {
-            get
-            {
-                return DateTimeOffset.UtcNow;
-            }
+            get { return DateTimeOffset.UtcNow; }
         }
     }
 }

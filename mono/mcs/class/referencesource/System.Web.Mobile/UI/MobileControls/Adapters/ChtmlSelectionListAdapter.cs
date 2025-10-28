@@ -1,23 +1,23 @@
 //------------------------------------------------------------------------------
 // <copyright file="ChtmlSelectionListAdapter.cs" company="Microsoft">
 //     Copyright (c) Microsoft Corporation.  All rights reserved.
-// </copyright>                                                                
+// </copyright>
 //------------------------------------------------------------------------------
 
 using System;
 using System.Globalization;
 using System.IO;
+using System.Security.Permissions;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.HtmlControls;
 using System.Web.UI.MobileControls;
-using System.Security.Permissions;
 
 #if COMPILING_FOR_SHIPPED_SOURCE
 namespace System.Web.UI.MobileControls.ShippedAdapterSource
 #else
 namespace System.Web.UI.MobileControls.Adapters
-#endif    
+#endif
 
 {
     /*
@@ -26,9 +26,17 @@ namespace System.Web.UI.MobileControls.Adapters
      * Copyright (c) 2000 Microsoft Corporation
      */
     /// <include file='doc\ChtmlSelectionListAdapter.uex' path='docs/doc[@for="ChtmlSelectionListAdapter"]/*' />
-    [AspNetHostingPermission(SecurityAction.LinkDemand, Level=AspNetHostingPermissionLevel.Minimal)]
-    [AspNetHostingPermission(SecurityAction.InheritanceDemand, Level=AspNetHostingPermissionLevel.Minimal)]
-    [Obsolete("The System.Web.Mobile.dll assembly has been deprecated and should no longer be used. For information about how to develop ASP.NET mobile applications, see http://go.microsoft.com/fwlink/?LinkId=157231.")]
+    [AspNetHostingPermission(
+        SecurityAction.LinkDemand,
+        Level = AspNetHostingPermissionLevel.Minimal
+    )]
+    [AspNetHostingPermission(
+        SecurityAction.InheritanceDemand,
+        Level = AspNetHostingPermissionLevel.Minimal
+    )]
+    [Obsolete(
+        "The System.Web.Mobile.dll assembly has been deprecated and should no longer be used. For information about how to develop ASP.NET mobile applications, see http://go.microsoft.com/fwlink/?LinkId=157231."
+    )]
     public class ChtmlSelectionListAdapter : HtmlSelectionListAdapter
     {
         /// <include file='doc\ChtmlSelectionListAdapter.uex' path='docs/doc[@for="ChtmlSelectionListAdapter.RequiresFormTag"]/*' />
@@ -46,21 +54,22 @@ namespace System.Web.UI.MobileControls.Adapters
         public override void Render(HtmlMobileTextWriter writer)
         {
             ListSelectType selectType = Control.SelectType;
-            if (selectType == ListSelectType.MultiSelectListBox && 
-                Device.SupportsSelectMultiple == false)
+            if (
+                selectType == ListSelectType.MultiSelectListBox
+                && Device.SupportsSelectMultiple == false
+            )
             {
                 // Render occurs after SaveViewState.  Here we make a temp
                 // change which is not persisted to the view state.
                 Control.SelectType = selectType = ListSelectType.CheckBox;
             }
 
-            if (!Device.RequiresUniqueHtmlCheckboxNames ||
-                selectType != ListSelectType.CheckBox)
+            if (!Device.RequiresUniqueHtmlCheckboxNames || selectType != ListSelectType.CheckBox)
             {
                 base.Render(writer);
             }
             else
-            { 
+            {
                 MobileListItemCollection items = Control.Items;
                 if (items.Count == 0)
                 {
@@ -71,13 +80,13 @@ namespace System.Web.UI.MobileControls.Adapters
                 foreach (MobileListItem item in items)
                 {
                     int index = items.IndexOf(item);
-                    if(writeBreak)
+                    if (writeBreak)
                     {
                         writer.WriteBreak();
                     }
 
                     writer.Write("<input type=\"checkbox\" name=\"");
-                    if(Device.RequiresAttributeColonSubstitution)
+                    if (Device.RequiresAttributeColonSubstitution)
                     {
                         writer.Write(Control.UniqueID.Replace(':', ','));
                     }
@@ -96,8 +105,7 @@ namespace System.Web.UI.MobileControls.Adapters
                     {
                         writer.Write(item.Index.ToString(CultureInfo.InvariantCulture));
                     }
-                    if (item.Selected &&
-                        Device.SupportsUncheck)
+                    if (item.Selected && Device.SupportsUncheck)
                     {
                         writer.Write("\" checked>");
                     }

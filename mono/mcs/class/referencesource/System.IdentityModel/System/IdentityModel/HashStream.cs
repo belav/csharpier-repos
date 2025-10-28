@@ -4,9 +4,9 @@
 
 namespace System.IdentityModel
 {
+    using System.IdentityModel.Diagnostics;
     using System.IO;
     using System.Security.Cryptography;
-    using System.IdentityModel.Diagnostics;
 
     sealed class HashStream : Stream
     {
@@ -59,13 +59,13 @@ namespace System.IdentityModel
             {
                 // PreSharp Bug: Property get methods should not throw exceptions.
 #pragma warning suppress 56503
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new NotSupportedException());
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new NotSupportedException()
+                );
             }
         }
 
-        public override void Flush()
-        {
-        }
+        public override void Flush() { }
 
         public void FlushHash()
         {
@@ -74,7 +74,6 @@ namespace System.IdentityModel
 
         public void FlushHash(MemoryStream preCanonicalBytes)
         {
-
             this.hash.TransformFinalBlock(CryptoHelper.EmptyBuffer, 0, 0);
 
             if (DigestTraceRecordHelper.ShouldTraceDigest)
@@ -108,7 +107,6 @@ namespace System.IdentityModel
 
             if (DigestTraceRecordHelper.ShouldTraceDigest)
                 this.logStream = new MemoryStream();
-
         }
 
         public void Reset(HashAlgorithm hash)

@@ -23,30 +23,47 @@
   <!-- NSwag's OpenApiReference support for C# (default target). -->
 
   <Target Name="GenerateNSwagCSharp" DependsOnTargets="_GetMetadataProperties">
-    <Message Importance="high" Text="$(_Message.Replace('__TargetName__', 'GenerateNSwagCSharp'))" />
-    <WriteLinesToFile File="%(CurrentOpenApiReference.OutputPath)"
-        Lines="$(_Lines)"
-        Overwrite="true" />
+    <Message
+      Importance="high"
+      Text="$(_Message.Replace('__TargetName__', 'GenerateNSwagCSharp'))"
+    />
+    <WriteLinesToFile
+      File="%(CurrentOpenApiReference.OutputPath)"
+      Lines="$(_Lines)"
+      Overwrite="true"
+    />
   </Target>
 
   <!-- NSwag's OpenApiReference support for TypeScript. -->
 
   <Target Name="GenerateNSwagTypeScript" DependsOnTargets="_GetMetadataProperties">
-    <Message Importance="high" Text="$(_Message.Replace('__TargetName__', 'GenerateNSwagTypeScript'))" />
-    <WriteLinesToFile File="%(CurrentOpenApiReference.OutputPath)"
-        Lines="$(_Lines)"
-        Overwrite="true" />
+    <Message
+      Importance="high"
+      Text="$(_Message.Replace('__TargetName__', 'GenerateNSwagTypeScript'))"
+    />
+    <WriteLinesToFile
+      File="%(CurrentOpenApiReference.OutputPath)"
+      Lines="$(_Lines)"
+      Overwrite="true"
+    />
   </Target>
 
   <!-- Custom OpenApiReference support for C#. -->
 
   <Target Name="GenerateCustomCSharp" DependsOnTargets="_GetMetadataProperties">
-    <Message Importance="high" Text="$(_Message.Replace('__TargetName__', 'GenerateCustomCSharp'))" />
-    <WriteLinesToFile File="%(CurrentOpenApiReference.OutputPath)/Generated1.cs"
-        Lines="$(_Lines)"
-        Overwrite="true" />
-    <WriteLinesToFile File="%(CurrentOpenApiReference.OutputPath)/Generated2.cs"
-        Lines="$(_Lines)"
-        Overwrite="true" />
+    <Message
+      Importance="high"
+      Text="$(_Message.Replace('__TargetName__', 'GenerateCustomCSharp'))"
+    />
+    <WriteLinesToFile
+      File="%(CurrentOpenApiReference.OutputPath)/Generated1.cs"
+      Lines="$(_Lines)"
+      Overwrite="true"
+    />
+    <WriteLinesToFile
+      File="%(CurrentOpenApiReference.OutputPath)/Generated2.cs"
+      Lines="$(_Lines)"
+      Overwrite="true"
+    />
   </Target>
 </Project>

@@ -20,7 +20,11 @@ namespace System.Net.Primitives.Functional.Tests
             const string OriginalDomain = "contoso.com";
 
             var container = new CookieContainer();
-            var cookie = new Cookie(CookieName1, CookieValue1) { Version = 1, Domain = OriginalDomain };
+            var cookie = new Cookie(CookieName1, CookieValue1)
+            {
+                Version = 1,
+                Domain = OriginalDomain,
+            };
             var uri = new Uri(SchemePrefix + OriginalDomain);
             container.Add(uri, cookie);
             Assert.Equal(1, container.GetCookies(uri).Count);
@@ -101,7 +105,11 @@ namespace System.Net.Primitives.Functional.Tests
             const string OriginalDomainWithLeadingDot = "." + OriginalDomain;
 
             var container = new CookieContainer();
-            var cookie1 = new Cookie(CookieName1, CookieValue1) { Domain = OriginalDomainWithLeadingDot, Version = 1 };
+            var cookie1 = new Cookie(CookieName1, CookieValue1)
+            {
+                Domain = OriginalDomainWithLeadingDot,
+                Version = 1,
+            };
             container.Add(new Uri(SchemePrefix + OriginalDomain), cookie1);
 
             var uri = new Uri(SchemePrefix + OriginalDomain);
@@ -142,9 +150,17 @@ namespace System.Net.Primitives.Functional.Tests
             container.PerDomainCapacity = 100;
             container.Capacity = 100;
 
-            Cookie[] cookies = Enumerable.Range(0, 100).Select(i => new Cookie($"name{i}", $"value{i}")).ToArray();
+            Cookie[] cookies = Enumerable
+                .Range(0, 100)
+                .Select(i => new Cookie($"name{i}", $"value{i}"))
+                .ToArray();
 
-            Uri[] uris = new[] { new Uri("https://dot.net"), new Uri("https://source.dot.net"), new Uri("https://microsoft.com") };
+            Uri[] uris = new[]
+            {
+                new Uri("https://dot.net"),
+                new Uri("https://source.dot.net"),
+                new Uri("https://microsoft.com"),
+            };
             for (int i = 0; i < cookies.Length; i++)
             {
                 container.Add(uris[i % uris.Length], cookies[i]);
@@ -155,7 +171,8 @@ namespace System.Net.Primitives.Functional.Tests
 
             Assert.Equal(
                 cookies.Select(c => c.Name + "=" + c.Value).ToHashSet(),
-                actual.Select(c => c.Name + "=" + c.Value).ToHashSet());
+                actual.Select(c => c.Name + "=" + c.Value).ToHashSet()
+            );
         }
     }
 }

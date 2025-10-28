@@ -28,7 +28,12 @@ namespace System.Text.RegularExpressions
         /// <param name="equivalences">If <paramref name="c"/> is involved in case conversion, then equivalences will contain the
         /// span of character which should be considered equal to <paramref name="c"/> in a case-insensitive comparison.</param>
         /// <returns><see langword="true"/> if <paramref name="c"/> is involved in case conversion; otherwise, <see langword="false"/></returns>
-        public static bool TryFindCaseEquivalencesForCharWithIBehavior(char c, CultureInfo culture, scoped ref RegexCaseBehavior mappingBehavior, out ReadOnlySpan<char> equivalences)
+        public static bool TryFindCaseEquivalencesForCharWithIBehavior(
+            char c,
+            CultureInfo culture,
+            scoped ref RegexCaseBehavior mappingBehavior,
+            out ReadOnlySpan<char> equivalences
+        )
         {
             if ((c | 0x20) == 'i' || (c | 0x01) == '\u0131')
             {
@@ -43,14 +48,17 @@ namespace System.Text.RegularExpressions
                     'i' or 'I' when mappingBehavior is RegexCaseBehavior.Invariant => "Ii".AsSpan(),
 
                     // Non-Turkish mappings
-                    'i' or 'I' or '\u0130' when mappingBehavior is RegexCaseBehavior.NonTurkish => "Ii\u0130".AsSpan(),
+                    'i' or 'I' or '\u0130' when mappingBehavior is RegexCaseBehavior.NonTurkish =>
+                        "Ii\u0130".AsSpan(),
 
                     // Turkish mappings
-                    'I' or '\u0131' when mappingBehavior is RegexCaseBehavior.Turkish => "I\u0131".AsSpan(),
-                    'i' or '\u0130' when mappingBehavior is RegexCaseBehavior.Turkish => "i\u0130".AsSpan(),
+                    'I' or '\u0131' when mappingBehavior is RegexCaseBehavior.Turkish =>
+                        "I\u0131".AsSpan(),
+                    'i' or '\u0130' when mappingBehavior is RegexCaseBehavior.Turkish =>
+                        "i\u0130".AsSpan(),
 
                     // Default
-                    _ => default
+                    _ => default,
                 };
                 return equivalences != default;
             }
@@ -68,10 +76,9 @@ namespace System.Text.RegularExpressions
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static RegexCaseBehavior GetRegexBehavior(CultureInfo culture)
         {
-            return
-                culture.Name.Length == 0 ? RegexCaseBehavior.Invariant :
-                IsTurkishOrAzeri(culture.Name) ? RegexCaseBehavior.Turkish :
-                RegexCaseBehavior.NonTurkish;
+            return culture.Name.Length == 0 ? RegexCaseBehavior.Invariant
+                : IsTurkishOrAzeri(culture.Name) ? RegexCaseBehavior.Turkish
+                : RegexCaseBehavior.NonTurkish;
 
             static bool IsTurkishOrAzeri(string cultureName)
             {
@@ -83,9 +90,11 @@ namespace System.Text.RegularExpressions
                     switch (cultureName[0])
                     {
                         case 't':
-                            return cultureName[1] == 'r' && (cultureName.Length == 2 || cultureName[2] == '-');
+                            return cultureName[1] == 'r'
+                                && (cultureName.Length == 2 || cultureName[2] == '-');
                         case 'a':
-                            return cultureName[1] == 'z' && (cultureName.Length == 2 || cultureName[2] == '-');
+                            return cultureName[1] == 'z'
+                                && (cultureName.Length == 2 || cultureName[2] == '-');
                     }
                 }
                 return false;
@@ -127,7 +136,10 @@ namespace System.Text.RegularExpressions
         /// equivalent in a case comparison for 'A'.
         /// </remarks>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        private static bool TryFindCaseEquivalencesForChar(char c, out ReadOnlySpan<char> equivalences)
+        private static bool TryFindCaseEquivalencesForChar(
+            char c,
+            out ReadOnlySpan<char> equivalences
+        )
         {
             // Dividing by CharactersPerRange, in order to get the range index for c
             Debug.Assert((c / CharactersPerRange) < 0xFF);

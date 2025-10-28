@@ -38,16 +38,21 @@ namespace System.Diagnostics
         /// </summary>
         public IEnumerable<KeyValuePair<string, object?>>? Tags => _tags;
 
-        public override bool Equals([NotNullWhen(true)] object? obj) => (obj is ActivityLink link) && this.Equals(link);
+        public override bool Equals([NotNullWhen(true)] object? obj) =>
+            (obj is ActivityLink link) && this.Equals(link);
 
         public bool Equals(ActivityLink value) => Context == value.Context && value.Tags == Tags;
+
         public static bool operator ==(ActivityLink left, ActivityLink right) => left.Equals(right);
-        public static bool operator !=(ActivityLink left, ActivityLink right) => !left.Equals(right);
+
+        public static bool operator !=(ActivityLink left, ActivityLink right) =>
+            !left.Equals(right);
 
         /// <summary>
         /// Enumerate the tags attached to this <see cref="ActivityLink"/> object.
         /// </summary>
         /// <returns><see cref="Activity.Enumerator{T}"/>.</returns>
-        public Activity.Enumerator<KeyValuePair<string, object?>> EnumerateTagObjects() => new Activity.Enumerator<KeyValuePair<string, object?>>(_tags?.First);
+        public Activity.Enumerator<KeyValuePair<string, object?>> EnumerateTagObjects() =>
+            new Activity.Enumerator<KeyValuePair<string, object?>>(_tags?.First);
     }
 }

@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -29,57 +29,58 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Web.Util;
-
+using NUnit.Framework;
 using StandAloneRunnerSupport;
 using StandAloneTests;
 
-using NUnit.Framework;
-
 namespace StandAloneTests.GridViewShowHeaderWhenEmpty
 {
-	[TestCase ("GridViewShowHeaderWhenEmpty 01", "GridView.ShowHeaderWhenEmpty tests")]
-	public sealed class Test_01 : ITestCase
-	{
-		public string PhysicalPath {
-			get { return Path.Combine (Consts.BasePhysicalDir, "GridViewShowHeaderWhenEmpty"); }
-		}
-		
-		public string VirtualPath  {
-			get { return "/"; }
-		}
+    [TestCase("GridViewShowHeaderWhenEmpty 01", "GridView.ShowHeaderWhenEmpty tests")]
+    public sealed class Test_01 : ITestCase
+    {
+        public string PhysicalPath
+        {
+            get { return Path.Combine(Consts.BasePhysicalDir, "GridViewShowHeaderWhenEmpty"); }
+        }
 
-		public bool SetUp (List <TestRunItem> runItems)
-		{
-			runItems.Add (new TestRunItem ("Default.aspx", Default_Aspx));
-			runItems.Add (new TestRunItem ("NoHeaderAtAll.aspx", NoHeaderAtAll_Aspx));
-			runItems.Add (new TestRunItem ("NoHeaderWhenEmpty.aspx", NoHeaderWhenEmpty_Aspx));
-			runItems.Add (new TestRunItem ("WithHeaderWhenEmpty.aspx", WithHeaderWhenEmpty_Aspx));
-			
-			return true;
-		}
-		
-		void Default_Aspx (string result, TestRunItem runItem)
-		{
-			string originalHtml = "<div>\r\n\r\n</div><pre id=\"log\"></pre>";
-			Helpers.ExtractAndCompareCodeFromHtml (result, originalHtml, "#A1");
-		}
-		
-		void NoHeaderAtAll_Aspx (string result, TestRunItem runItem)
-		{
-			string originalHtml = "<div>\r\n\r\n</div><pre id=\"log\"></pre>";
-			Helpers.ExtractAndCompareCodeFromHtml (result, originalHtml, "#A1");
-		}
+        public string VirtualPath
+        {
+            get { return "/"; }
+        }
 
-		void NoHeaderWhenEmpty_Aspx (string result, TestRunItem runItem)
-		{
-			string originalHtml = "<div>\r\n\r\n</div><pre id=\"log\"></pre>";
-			Helpers.ExtractAndCompareCodeFromHtml (result, originalHtml, "#A1");
-		}
+        public bool SetUp(List<TestRunItem> runItems)
+        {
+            runItems.Add(new TestRunItem("Default.aspx", Default_Aspx));
+            runItems.Add(new TestRunItem("NoHeaderAtAll.aspx", NoHeaderAtAll_Aspx));
+            runItems.Add(new TestRunItem("NoHeaderWhenEmpty.aspx", NoHeaderWhenEmpty_Aspx));
+            runItems.Add(new TestRunItem("WithHeaderWhenEmpty.aspx", WithHeaderWhenEmpty_Aspx));
 
-		void WithHeaderWhenEmpty_Aspx (string result, TestRunItem runItem)
-		{
-			string originalHtml = "<div>\r\n\t<table cellspacing=\"0\" rules=\"all\" border=\"1\" id=\"GridView1\" style=\"border-collapse:collapse;\">\r\n\t\t<tr>\r\n\t\t\t<th scope=\"col\">ProductID</th><th scope=\"col\">ProductName</th><th scope=\"col\">ProductComment</th>\r\n\t\t</tr>\r\n\t</table>\r\n</div><pre id=\"log\">OnRowCreated called</pre>";
-			Helpers.ExtractAndCompareCodeFromHtml (result, originalHtml, "#A1");
-		}
-	}
+            return true;
+        }
+
+        void Default_Aspx(string result, TestRunItem runItem)
+        {
+            string originalHtml = "<div>\r\n\r\n</div><pre id=\"log\"></pre>";
+            Helpers.ExtractAndCompareCodeFromHtml(result, originalHtml, "#A1");
+        }
+
+        void NoHeaderAtAll_Aspx(string result, TestRunItem runItem)
+        {
+            string originalHtml = "<div>\r\n\r\n</div><pre id=\"log\"></pre>";
+            Helpers.ExtractAndCompareCodeFromHtml(result, originalHtml, "#A1");
+        }
+
+        void NoHeaderWhenEmpty_Aspx(string result, TestRunItem runItem)
+        {
+            string originalHtml = "<div>\r\n\r\n</div><pre id=\"log\"></pre>";
+            Helpers.ExtractAndCompareCodeFromHtml(result, originalHtml, "#A1");
+        }
+
+        void WithHeaderWhenEmpty_Aspx(string result, TestRunItem runItem)
+        {
+            string originalHtml =
+                "<div>\r\n\t<table cellspacing=\"0\" rules=\"all\" border=\"1\" id=\"GridView1\" style=\"border-collapse:collapse;\">\r\n\t\t<tr>\r\n\t\t\t<th scope=\"col\">ProductID</th><th scope=\"col\">ProductName</th><th scope=\"col\">ProductComment</th>\r\n\t\t</tr>\r\n\t</table>\r\n</div><pre id=\"log\">OnRowCreated called</pre>";
+            Helpers.ExtractAndCompareCodeFromHtml(result, originalHtml, "#A1");
+        }
+    }
 }

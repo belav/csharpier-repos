@@ -7,18 +7,12 @@ namespace Internal.TypeSystem.Interop
     {
         TypeDesc IPrefixMangledType.BaseType
         {
-            get
-            {
-                return DelegateType;
-            }
+            get { return DelegateType; }
         }
 
         string IPrefixMangledType.Prefix
         {
-            get
-            {
-                return "PInvokeDelegateWrapper";
-            }
+            get { return "PInvokeDelegateWrapper"; }
         }
     }
 }

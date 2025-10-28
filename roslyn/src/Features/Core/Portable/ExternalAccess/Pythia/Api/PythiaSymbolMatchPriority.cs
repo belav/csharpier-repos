@@ -12,7 +12,9 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.Pythia.Api
         internal static readonly int PreferType = SymbolMatchPriority.PreferType;
         internal static readonly int PreferNamedArgument = SymbolMatchPriority.PreferNamedArgument;
         internal static readonly int PreferEventOrMethod = SymbolMatchPriority.PreferEventOrMethod;
-        internal static readonly int PreferFieldOrProperty = SymbolMatchPriority.PreferFieldOrProperty;
-        internal static readonly int PreferLocalOrParameterOrRangeVariable = SymbolMatchPriority.PreferLocalOrParameterOrRangeVariable;
+        internal static readonly int PreferFieldOrProperty =
+            SymbolMatchPriority.PreferFieldOrProperty;
+        internal static readonly int PreferLocalOrParameterOrRangeVariable =
+            SymbolMatchPriority.PreferLocalOrParameterOrRangeVariable;
     }
 }

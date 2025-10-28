@@ -1,16 +1,16 @@
 //------------------------------------------------------------------------------
 // <copyright file="MarshalByValueComponent.cs" company="Microsoft">
 //     Copyright (c) Microsoft Corporation.  All rights reserved.
-// </copyright>                                                                
+// </copyright>
 //------------------------------------------------------------------------------
 
-namespace System.ComponentModel {
-
+namespace System.ComponentModel
+{
     using System;
     using System.ComponentModel.Design;
     using System.Diagnostics.CodeAnalysis;
-    using System.Security.Permissions;
     using System.Runtime.InteropServices;
+    using System.Security.Permissions;
 
     /// <devdoc>
     /// <para>Provides the base implementation for <see cref='System.ComponentModel.IComponent'/>,
@@ -18,16 +18,19 @@ namespace System.ComponentModel {
     /// </devdoc>
     [
         ComVisible(true),
-        Designer("System.Windows.Forms.Design.ComponentDocumentDesigner, " + AssemblyRef.SystemDesign, typeof(IRootDesigner)),
+        Designer(
+            "System.Windows.Forms.Design.ComponentDocumentDesigner, " + AssemblyRef.SystemDesign,
+            typeof(IRootDesigner)
+        ),
         DesignerCategory("Component"),
         TypeConverter(typeof(ComponentConverter))
     ]
-    public class MarshalByValueComponent : IComponent, IServiceProvider {
-
+    public class MarshalByValueComponent : IComponent, IServiceProvider
+    {
         /// <devdoc>
         ///    <para>Static hask key for the Disposed event. This field is read-only.</para>
         /// </devdoc>
-        private static readonly object EventDisposed = new object(); 
+        private static readonly object EventDisposed = new object();
 
         private ISite site;
         private EventHandlerList events;
@@ -35,31 +38,31 @@ namespace System.ComponentModel {
         /// <devdoc>
         /// <para>Initializes a new instance of the <see cref='System.ComponentModel.MarshalByValueComponent'/> class.</para>
         /// </devdoc>
-        public MarshalByValueComponent() {
-        }
+        public MarshalByValueComponent() { }
 
-        ~MarshalByValueComponent() {
+        ~MarshalByValueComponent()
+        {
             Dispose(false);
         }
 
         /// <devdoc>
         ///    <para>Adds a event handler to listen to the Disposed event on the component.</para>
         /// </devdoc>
-        public event EventHandler Disposed {
-            add {
-                Events.AddHandler(EventDisposed, value);
-            }
-            remove {
-                Events.RemoveHandler(EventDisposed, value);
-            }
+        public event EventHandler Disposed
+        {
+            add { Events.AddHandler(EventDisposed, value); }
+            remove { Events.RemoveHandler(EventDisposed, value); }
         }
 
         /// <devdoc>
         ///    <para>Gets the list of event handlers that are attached to this component.</para>
         /// </devdoc>
-        protected EventHandlerList Events {
-            get {
-                if (events == null) {
+        protected EventHandlerList Events
+        {
+            get
+            {
+                if (events == null)
+                {
                     events = new EventHandlerList();
                 }
                 return events;
@@ -70,16 +73,18 @@ namespace System.ComponentModel {
         ///    <para>Gets or sets the site of the component.</para>
         /// </devdoc>
         [Browsable(false), DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
-        public virtual ISite Site {
-            get { return site;}
-            set { site = value;}
+        public virtual ISite Site
+        {
+            get { return site; }
+            set { site = value; }
         }
 
         /// <devdoc>
         ///    <para>Disposes of the resources (other than memory) used by the component.</para>
         /// </devdoc>
         [SuppressMessage("Microsoft.Usage", "CA2213:DisposableFieldsShouldBeDisposed")]
-        public void Dispose() {
+        public void Dispose()
+        {
             Dispose(true);
             GC.SuppressFinalize(this);
         }
@@ -123,7 +128,7 @@ namespace System.ComponentModel {
         ///    <para>
         ///    For base classes, you should never override the Finalier (~Class in C#)
         ///    or the Dispose method that takes no arguments, rather you should
-        ///    always override the Dispose method that takes a bool. 
+        ///    always override the Dispose method that takes a bool.
         ///    </para>
         ///    <code>
         ///    protected override void Dispose(bool disposing) {
@@ -141,15 +146,21 @@ namespace System.ComponentModel {
         ///    }
         ///    </code>
         /// </devdoc>
-        protected virtual void Dispose(bool disposing) {
-            if (disposing) {
-                lock(this) {
-                    if (site != null && site.Container != null) {
+        protected virtual void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                lock (this)
+                {
+                    if (site != null && site.Container != null)
+                    {
                         site.Container.Remove(this);
                     }
-                    if (events != null) {
+                    if (events != null)
+                    {
                         EventHandler handler = (EventHandler)events[EventDisposed];
-                        if (handler != null) handler(this, EventArgs.Empty);
+                        if (handler != null)
+                            handler(this, EventArgs.Empty);
                     }
                 }
             }
@@ -159,8 +170,10 @@ namespace System.ComponentModel {
         ///    <para>Gets the container for the component.</para>
         /// </devdoc>
         [Browsable(false), DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
-        public virtual IContainer Container {
-            get {
+        public virtual IContainer Container
+        {
+            get
+            {
                 ISite s = site;
                 return s == null ? null : s.Container;
             }
@@ -169,21 +182,24 @@ namespace System.ComponentModel {
         /// <devdoc>
         /// <para>Gets the implementer of the <see cref='System.IServiceProvider'/>.</para>
         /// </devdoc>
-        public virtual object GetService(Type service) {
-            return((site==null)? null : site.GetService(service));
+        public virtual object GetService(Type service)
+        {
+            return ((site == null) ? null : site.GetService(service));
         }
-
 
         /// <devdoc>
         ///    <para>Gets a value indicating whether the component is currently in design mode.</para>
         /// </devdoc>
         [Browsable(false), DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
-        public virtual bool DesignMode {
-            get {
+        public virtual bool DesignMode
+        {
+            get
+            {
                 ISite s = site;
-                return(s == null) ? false : s.DesignMode;
+                return (s == null) ? false : s.DesignMode;
             }
         }
+
         /// <internalonly/>
         /// <devdoc>
         ///    <para>
@@ -192,7 +208,8 @@ namespace System.ComponentModel {
         ///       internal use only.
         ///    </para>
         /// </devdoc>
-        public override String ToString() {
+        public override String ToString()
+        {
             ISite s = site;
 
             if (s != null)

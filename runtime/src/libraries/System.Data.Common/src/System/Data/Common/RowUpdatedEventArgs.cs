@@ -20,7 +20,12 @@ namespace System.Data.Common
         private UpdateStatus _status; // UpdateStatus.Continue; /*0*/
         private int _recordsAffected;
 
-        public RowUpdatedEventArgs(DataRow dataRow, IDbCommand? command, StatementType statementType, DataTableMapping tableMapping)
+        public RowUpdatedEventArgs(
+            DataRow dataRow,
+            IDbCommand? command,
+            StatementType statementType,
+            DataTableMapping tableMapping
+        )
         {
             switch (statementType)
             {
@@ -41,46 +46,28 @@ namespace System.Data.Common
 
         public IDbCommand? Command
         {
-            get
-            {
-                return _command;
-            }
+            get { return _command; }
         }
 
         public Exception? Errors
         {
-            get
-            {
-                return _errors;
-            }
-            set
-            {
-                _errors = value;
-            }
+            get { return _errors; }
+            set { _errors = value; }
         }
 
         public int RecordsAffected
         {
-            get
-            {
-                return _recordsAffected;
-            }
+            get { return _recordsAffected; }
         }
 
         public DataRow Row
         {
-            get
-            {
-                return _dataRow;
-            }
+            get { return _dataRow; }
         }
 
         internal DataRow[]? Rows
         {
-            get
-            {
-                return _dataRows;
-            }
+            get { return _dataRows; }
         }
 
         public int RowCount
@@ -94,18 +81,12 @@ namespace System.Data.Common
 
         public StatementType StatementType
         {
-            get
-            {
-                return _statementType;
-            }
+            get { return _statementType; }
         }
 
         public UpdateStatus Status
         {
-            get
-            {
-                return _status;
-            }
+            get { return _status; }
             set
             {
                 switch (value)
@@ -124,10 +105,7 @@ namespace System.Data.Common
 
         public DataTableMapping TableMapping
         {
-            get
-            {
-                return _tableMapping;
-            }
+            get { return _tableMapping; }
         }
 
         internal void AdapterInit(DataRow[] dataRows)

@@ -11,7 +11,12 @@ namespace Microsoft.Diagnostics.NETCore.Client
 {
     public sealed class EventPipeProvider
     {
-        public EventPipeProvider(string name, EventLevel eventLevel, long keywords = 0xF00000000000, IDictionary<string, string> arguments = null)
+        public EventPipeProvider(
+            string name,
+            EventLevel eventLevel,
+            long keywords = 0xF00000000000,
+            IDictionary<string, string> arguments = null
+        )
         {
             Name = name;
             EventLevel = eventLevel;
@@ -31,14 +36,14 @@ namespace Microsoft.Diagnostics.NETCore.Client
         {
             return $"{Name}:0x{Keywords:X16}:{(uint)EventLevel}{(Arguments == null ? "" : $":{GetArgumentString()}")}";
         }
-        
+
         public override bool Equals(object obj)
         {
             if (obj == null || GetType() != obj.GetType())
             {
                 return false;
             }
-            
+
             return this == (EventPipeProvider)obj;
         }
 
@@ -59,7 +64,7 @@ namespace Microsoft.Diagnostics.NETCore.Client
 
         public static bool operator !=(EventPipeProvider left, EventPipeProvider right)
         {
-            return !(left == right);    
+            return !(left == right);
         }
 
         internal string GetArgumentString()
@@ -68,12 +73,17 @@ namespace Microsoft.Diagnostics.NETCore.Client
             {
                 return "";
             }
-            return string.Join(";", Arguments.Select(a => {
-                var escapedKey = a.Key.Contains(";") || a.Key.Contains("=") ? $"\"{a.Key}\"" : a.Key;
-                var escapedValue = a.Value.Contains(";") || a.Value.Contains("=") ? $"\"{a.Value}\"" : a.Value;
-                return $"{escapedKey}={escapedValue}";
-            }));
+            return string.Join(
+                ";",
+                Arguments.Select(a =>
+                {
+                    var escapedKey =
+                        a.Key.Contains(";") || a.Key.Contains("=") ? $"\"{a.Key}\"" : a.Key;
+                    var escapedValue =
+                        a.Value.Contains(";") || a.Value.Contains("=") ? $"\"{a.Value}\"" : a.Value;
+                    return $"{escapedKey}={escapedValue}";
+                })
+            );
         }
-
     }
 }

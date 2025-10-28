@@ -18,10 +18,7 @@ namespace System.Web.Mvc.Html.Test
             HtmlHelper<FooBarModel> helper = MvcHelper.GetHtmlHelper(GetValueViewData());
 
             // Act & Assert
-            Assert.ThrowsArgumentNull(
-                () => helper.Value(name: null),
-                "name"
-                );
+            Assert.ThrowsArgumentNull(() => helper.Value(name: null), "name");
         }
 
         [Fact]
@@ -49,7 +46,7 @@ namespace System.Web.Mvc.Html.Test
             Assert.ThrowsArgumentNull(
                 () => helper.ValueFor<FooBarModel, object>(expression: null),
                 "expression"
-                );
+            );
         }
 
         [Fact]
@@ -71,16 +68,29 @@ namespace System.Web.Mvc.Html.Test
         public void ValueHelpersWithErrorsGetValueFromModelState()
         {
             // Arrange
-            ViewDataDictionary<FooBarModel> viewDataWithErrors = new ViewDataDictionary<FooBarModel> { { "foo", "ViewDataFoo" } };
-            viewDataWithErrors.Model = new FooBarModel() { foo = "ViewItemFoo", bar = "ViewItemBar" };
+            ViewDataDictionary<FooBarModel> viewDataWithErrors = new ViewDataDictionary<FooBarModel>
+            {
+                { "foo", "ViewDataFoo" },
+            };
+            viewDataWithErrors.Model = new FooBarModel()
+            {
+                foo = "ViewItemFoo",
+                bar = "ViewItemBar",
+            };
             viewDataWithErrors.TemplateInfo.HtmlFieldPrefix = "FieldPrefix";
 
             ModelState modelStateFoo = new ModelState();
-            modelStateFoo.Value = HtmlHelperTest.GetValueProviderResult(new string[] { "AttemptedValueFoo" }, "AttemptedValueFoo");
+            modelStateFoo.Value = HtmlHelperTest.GetValueProviderResult(
+                new string[] { "AttemptedValueFoo" },
+                "AttemptedValueFoo"
+            );
             viewDataWithErrors.ModelState["FieldPrefix.foo"] = modelStateFoo;
 
             ModelState modelStateFooBar = new ModelState();
-            modelStateFooBar.Value = HtmlHelperTest.GetValueProviderResult(new string[] { "AttemptedValueFooBar" }, "AttemptedValueFooBar");
+            modelStateFooBar.Value = HtmlHelperTest.GetValueProviderResult(
+                new string[] { "AttemptedValueFooBar" },
+                "AttemptedValueFooBar"
+            );
             viewDataWithErrors.ModelState["FieldPrefix"] = modelStateFooBar;
 
             HtmlHelper<FooBarModel> helper = MvcHelper.GetHtmlHelper(viewDataWithErrors);
@@ -124,25 +134,44 @@ namespace System.Web.Mvc.Html.Test
         public void ValueHelpersEncodeValue()
         {
             // Arrange
-            ViewDataDictionary<FooBarModel> viewData = new ViewDataDictionary<FooBarModel> { { "foo", @"ViewDataFoo <"">" } };
+            ViewDataDictionary<FooBarModel> viewData = new ViewDataDictionary<FooBarModel>
+            {
+                { "foo", @"ViewDataFoo <"">" },
+            };
             viewData.Model = new FooBarModel { foo = @"ViewItemFoo <"">" };
 
             ModelState modelStateFoo = new ModelState();
-            modelStateFoo.Value = HtmlHelperTest.GetValueProviderResult(new string[] { @"AttemptedValueBar <"">" }, @"AttemptedValueBar <"">");
+            modelStateFoo.Value = HtmlHelperTest.GetValueProviderResult(
+                new string[] { @"AttemptedValueBar <"">" },
+                @"AttemptedValueBar <"">"
+            );
             viewData.ModelState["bar"] = modelStateFoo;
 
             HtmlHelper<FooBarModel> helper = MvcHelper.GetHtmlHelper(viewData);
 
             // Act & Assert
-            Assert.Equal("&lt;{ foo = ViewItemFoo &lt;&quot;>, bar = (null) }", helper.ValueForModel("<{0}").ToHtmlString());
+            Assert.Equal(
+                "&lt;{ foo = ViewItemFoo &lt;&quot;>, bar = (null) }",
+                helper.ValueForModel("<{0}").ToHtmlString()
+            );
             Assert.Equal("&lt;ViewDataFoo &lt;&quot;>", helper.Value("foo", "<{0}").ToHtmlString());
-            Assert.Equal("&lt;ViewItemFoo &lt;&quot;>", helper.ValueFor(m => m.foo, "<{0}").ToHtmlString());
-            Assert.Equal("AttemptedValueBar &lt;&quot;>", helper.ValueFor(m => m.bar).ToHtmlString());
+            Assert.Equal(
+                "&lt;ViewItemFoo &lt;&quot;>",
+                helper.ValueFor(m => m.foo, "<{0}").ToHtmlString()
+            );
+            Assert.Equal(
+                "AttemptedValueBar &lt;&quot;>",
+                helper.ValueFor(m => m.bar).ToHtmlString()
+            );
         }
 
         [Theory]
         [PropertyData("AttributeEncodedData", PropertyType = typeof(EncodedDataSets))]
-        public void ValueHelpers_AttributeEncode_Value(string text, bool htmlEncode, string encodedText)
+        public void ValueHelpers_AttributeEncode_Value(
+            string text,
+            bool htmlEncode,
+            string encodedText
+        )
         {
             // Arrange
             var viewData = new ViewDataDictionary<string>(text);
@@ -167,14 +196,25 @@ namespace System.Web.Mvc.Html.Test
 
             public override string ToString()
             {
-                return String.Format("{{ foo = {0}, bar = {1} }}", foo ?? "(null)", bar ?? "(null)");
+                return String.Format(
+                    "{{ foo = {0}, bar = {1} }}",
+                    foo ?? "(null)",
+                    bar ?? "(null)"
+                );
             }
         }
 
         private static ViewDataDictionary<FooBarModel> GetValueViewData()
         {
-            ViewDataDictionary<FooBarModel> viewData = new ViewDataDictionary<FooBarModel> { { "foo", "ViewDataFoo" } };
-            viewData.Model = new FooBarModel { foo = "ViewItemFoo", bar = new DateTime(1900, 1, 1, 0, 0, 0) };
+            ViewDataDictionary<FooBarModel> viewData = new ViewDataDictionary<FooBarModel>
+            {
+                { "foo", "ViewDataFoo" },
+            };
+            viewData.Model = new FooBarModel
+            {
+                foo = "ViewItemFoo",
+                bar = new DateTime(1900, 1, 1, 0, 0, 0),
+            };
 
             return viewData;
         }

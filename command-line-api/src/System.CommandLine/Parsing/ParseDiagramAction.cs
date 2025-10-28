@@ -16,14 +16,15 @@ namespace System.CommandLine.Parsing
     {
         private readonly int _parseErrorReturnValue;
 
-        internal ParseDiagramAction(int parseErrorReturnValue) => _parseErrorReturnValue = parseErrorReturnValue;
+        internal ParseDiagramAction(int parseErrorReturnValue) =>
+            _parseErrorReturnValue = parseErrorReturnValue;
 
         public override int Invoke(ParseResult parseResult)
         {
             parseResult.Configuration.Output.WriteLine(Diagram(parseResult));
             return parseResult.Errors.Count == 0 ? 0 : _parseErrorReturnValue;
         }
-        
+
         /// <summary>
         /// Formats a string explaining a parse result.
         /// </summary>
@@ -54,7 +55,8 @@ namespace System.CommandLine.Parsing
         private static void Diagram(
             StringBuilder builder,
             SymbolResult symbolResult,
-            ParseResult parseResult)
+            ParseResult parseResult
+        )
         {
             if (parseResult.Errors.Any(e => e.SymbolResult == symbolResult))
             {
@@ -69,7 +71,8 @@ namespace System.CommandLine.Parsing
                 case ArgumentResult argumentResult:
                 {
                     var includeArgumentName =
-                        argumentResult.Argument.FirstParent!.Symbol is CliCommand { HasArguments: true, Arguments.Count: > 1 };
+                        argumentResult.Argument.FirstParent!.Symbol
+                            is CliCommand { HasArguments: true, Arguments.Count: > 1 };
 
                     if (includeArgumentName)
                     {
@@ -80,7 +83,8 @@ namespace System.CommandLine.Parsing
 
                     if (argumentResult.Argument.Arity.MaximumNumberOfValues > 0)
                     {
-                        ArgumentConversionResult conversionResult = argumentResult.GetArgumentConversionResult();
+                        ArgumentConversionResult conversionResult =
+                            argumentResult.GetArgumentConversionResult();
                         switch (conversionResult.Result)
                         {
                             case ArgumentConversionResultType.NoArgument:
@@ -91,12 +95,12 @@ namespace System.CommandLine.Parsing
                                     case string s:
                                         builder.Append($"<{s}>");
                                         break;
-                                
+
                                     case IEnumerable items:
                                         builder.Append('<');
                                         builder.Append(
-                                            string.Join("> <",
-                                                        items.Cast<object>().ToArray()));
+                                            string.Join("> <", items.Cast<object>().ToArray())
+                                        );
                                         builder.Append('>');
                                         break;
 
@@ -111,7 +115,9 @@ namespace System.CommandLine.Parsing
 
                             default: // failures
                                 builder.Append('<');
-                                builder.Append(string.Join("> <", symbolResult.Tokens.Select(t => t.Value)));
+                                builder.Append(
+                                    string.Join("> <", symbolResult.Tokens.Select(t => t.Value))
+                                );
                                 builder.Append('>');
 
                                 break;
@@ -139,18 +145,28 @@ namespace System.CommandLine.Parsing
 
                     if (optionResult is not null)
                     {
-                        builder.Append(optionResult.IdentifierToken?.Value ?? optionResult.Option.Name);
+                        builder.Append(
+                            optionResult.IdentifierToken?.Value ?? optionResult.Option.Name
+                        );
                     }
                     else
                     {
                         builder.Append(((CommandResult)symbolResult).IdentifierToken.Value);
                     }
 
-                    foreach (SymbolResult child in symbolResult.SymbolResultTree.GetChildren(symbolResult))
+                    foreach (
+                        SymbolResult child in symbolResult.SymbolResultTree.GetChildren(
+                            symbolResult
+                        )
+                    )
                     {
-                        if (child is ArgumentResult arg &&
-                            (arg.Argument.ValueType == typeof(bool) ||
-                             arg.Argument.Arity.MaximumNumberOfValues == 0))
+                        if (
+                            child is ArgumentResult arg
+                            && (
+                                arg.Argument.ValueType == typeof(bool)
+                                || arg.Argument.Arity.MaximumNumberOfValues == 0
+                            )
+                        )
                         {
                             continue;
                         }

@@ -5,9 +5,9 @@
 namespace System.Activities.Tracking
 {
     using System;
-    using System.Runtime.Serialization;
-    using System.Runtime;
     using System.Globalization;
+    using System.Runtime;
+    using System.Runtime.Serialization;
 
     [Fx.Tag.XamlVisible(false)]
     [DataContract]
@@ -16,12 +16,18 @@ namespace System.Activities.Tracking
         ActivityInfo activity;
         ActivityInfo child;
 
-        internal ActivityScheduledRecord(Guid instanceId, ActivityInstance instance, ActivityInstance child)
-            : this(instanceId, instance, new ActivityInfo(child))
-        {
-        }
+        internal ActivityScheduledRecord(
+            Guid instanceId,
+            ActivityInstance instance,
+            ActivityInstance child
+        )
+            : this(instanceId, instance, new ActivityInfo(child)) { }
 
-        internal ActivityScheduledRecord(Guid instanceId, ActivityInstance instance, ActivityInfo child)
+        internal ActivityScheduledRecord(
+            Guid instanceId,
+            ActivityInstance instance,
+            ActivityInfo child
+        )
             : base(instanceId)
         {
             Fx.Assert(child != null, "Child activity cannot be null.");
@@ -37,15 +43,16 @@ namespace System.Activities.Tracking
             Guid instanceId,
             long recordNumber,
             ActivityInfo activity,
-            ActivityInfo child)
+            ActivityInfo child
+        )
             : base(instanceId, recordNumber)
         {
             if (child == null)
             {
                 throw FxTrace.Exception.ArgumentNull("child");
             }
-            
-            this.Activity = activity;            
+
+            this.Activity = activity;
             this.Child = child;
         }
 
@@ -53,31 +60,19 @@ namespace System.Activities.Tracking
             : base(record)
         {
             this.Activity = record.Activity;
-            this.Child = record.Child;            
+            this.Child = record.Child;
         }
-        
+
         public ActivityInfo Activity
         {
-            get
-            {
-                return this.activity;
-            }
-            private set
-            {
-                this.activity = value;
-            }
+            get { return this.activity; }
+            private set { this.activity = value; }
         }
-        
+
         public ActivityInfo Child
         {
-            get
-            {
-                return this.child;
-            }
-            private set
-            {
-                this.child = value;
-            }
+            get { return this.child; }
+            private set { this.child = value; }
         }
 
         [DataMember(Name = "Activity")]
@@ -101,12 +96,13 @@ namespace System.Activities.Tracking
 
         public override string ToString()
         {
-            return string.Format(CultureInfo.CurrentCulture,
-               "ActivityScheduledRecord {{ {0}, Activity {{ {1} }}, ChildActivity {{ {2} }} }}",
-               base.ToString(),
-               this.Activity == null ? "<null>" : this.Activity.ToString(),               
-               this.Child.ToString());
+            return string.Format(
+                CultureInfo.CurrentCulture,
+                "ActivityScheduledRecord {{ {0}, Activity {{ {1} }}, ChildActivity {{ {2} }} }}",
+                base.ToString(),
+                this.Activity == null ? "<null>" : this.Activity.ToString(),
+                this.Child.ToString()
+            );
         }
-
     }
 }

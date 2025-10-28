@@ -3,8 +3,8 @@
 
 // Code adapted from https://blogs.msdn.microsoft.com/haibo_luo/2010/04/19/ilvisualizer-2010-solution
 
-using System.Reflection.Emit;
 using System.Reflection;
+using System.Reflection.Emit;
 
 namespace System.Linq.Expressions.Tests
 {
@@ -27,7 +27,8 @@ namespace System.Linq.Expressions.Tests
         internal InlineNoneInstruction(int offset, OpCode opCode)
             : base(offset, opCode) { }
 
-        public override void Accept(ILInstructionVisitor visitor) => visitor.VisitInlineNoneInstruction(this);
+        public override void Accept(ILInstructionVisitor visitor) =>
+            visitor.VisitInlineNoneInstruction(this);
     }
 
     public sealed class InlineBrTargetInstruction : ILInstruction
@@ -41,7 +42,8 @@ namespace System.Linq.Expressions.Tests
         public int Delta { get; }
         public int TargetOffset => Offset + Delta + 1 + 4;
 
-        public override void Accept(ILInstructionVisitor visitor) => visitor.VisitInlineBrTargetInstruction(this);
+        public override void Accept(ILInstructionVisitor visitor) =>
+            visitor.VisitInlineBrTargetInstruction(this);
     }
 
     public sealed class ShortInlineBrTargetInstruction : ILInstruction
@@ -55,7 +57,8 @@ namespace System.Linq.Expressions.Tests
         public sbyte Delta { get; }
         public int TargetOffset => Offset + Delta + 1 + 1;
 
-        public override void Accept(ILInstructionVisitor visitor) => visitor.VisitShortInlineBrTargetInstruction(this);
+        public override void Accept(ILInstructionVisitor visitor) =>
+            visitor.VisitShortInlineBrTargetInstruction(this);
     }
 
     public sealed class InlineSwitchInstruction : ILInstruction
@@ -87,7 +90,8 @@ namespace System.Linq.Expressions.Tests
             }
         }
 
-        public override void Accept(ILInstructionVisitor visitor) => visitor.VisitInlineSwitchInstruction(this);
+        public override void Accept(ILInstructionVisitor visitor) =>
+            visitor.VisitInlineSwitchInstruction(this);
     }
 
     public sealed class InlineIInstruction : ILInstruction
@@ -100,7 +104,8 @@ namespace System.Linq.Expressions.Tests
 
         public int Value { get; }
 
-        public override void Accept(ILInstructionVisitor visitor) => visitor.VisitInlineIInstruction(this);
+        public override void Accept(ILInstructionVisitor visitor) =>
+            visitor.VisitInlineIInstruction(this);
     }
 
     public sealed class InlineI8Instruction : ILInstruction
@@ -113,7 +118,8 @@ namespace System.Linq.Expressions.Tests
 
         public long Value { get; }
 
-        public override void Accept(ILInstructionVisitor visitor) => visitor.VisitInlineI8Instruction(this);
+        public override void Accept(ILInstructionVisitor visitor) =>
+            visitor.VisitInlineI8Instruction(this);
     }
 
     public sealed class ShortInlineIInstruction : ILInstruction
@@ -126,7 +132,8 @@ namespace System.Linq.Expressions.Tests
 
         public sbyte Value { get; }
 
-        public override void Accept(ILInstructionVisitor visitor) => visitor.VisitShortInlineIInstruction(this);
+        public override void Accept(ILInstructionVisitor visitor) =>
+            visitor.VisitShortInlineIInstruction(this);
     }
 
     public sealed class InlineRInstruction : ILInstruction
@@ -139,7 +146,8 @@ namespace System.Linq.Expressions.Tests
 
         public double Value { get; }
 
-        public override void Accept(ILInstructionVisitor visitor) => visitor.VisitInlineRInstruction(this);
+        public override void Accept(ILInstructionVisitor visitor) =>
+            visitor.VisitInlineRInstruction(this);
     }
 
     public sealed class ShortInlineRInstruction : ILInstruction
@@ -152,7 +160,8 @@ namespace System.Linq.Expressions.Tests
 
         public float Value { get; }
 
-        public override void Accept(ILInstructionVisitor visitor) => visitor.VisitShortInlineRInstruction(this);
+        public override void Accept(ILInstructionVisitor visitor) =>
+            visitor.VisitShortInlineRInstruction(this);
     }
 
     public sealed class InlineFieldInstruction : ILInstruction
@@ -160,7 +169,12 @@ namespace System.Linq.Expressions.Tests
         private readonly ITokenResolver _resolver;
         private FieldInfo _field;
 
-        internal InlineFieldInstruction(ITokenResolver resolver, int offset, OpCode opCode, int token)
+        internal InlineFieldInstruction(
+            ITokenResolver resolver,
+            int offset,
+            OpCode opCode,
+            int token
+        )
             : base(offset, opCode)
         {
             _resolver = resolver;
@@ -170,7 +184,8 @@ namespace System.Linq.Expressions.Tests
         public FieldInfo Field => _field ??= _resolver.AsField(Token);
         public int Token { get; }
 
-        public override void Accept(ILInstructionVisitor visitor) => visitor.VisitInlineFieldInstruction(this);
+        public override void Accept(ILInstructionVisitor visitor) =>
+            visitor.VisitInlineFieldInstruction(this);
     }
 
     public sealed class InlineMethodInstruction : ILInstruction
@@ -178,7 +193,12 @@ namespace System.Linq.Expressions.Tests
         private readonly ITokenResolver _resolver;
         private MethodBase _method;
 
-        internal InlineMethodInstruction(int offset, OpCode opCode, int token, ITokenResolver resolver)
+        internal InlineMethodInstruction(
+            int offset,
+            OpCode opCode,
+            int token,
+            ITokenResolver resolver
+        )
             : base(offset, opCode)
         {
             _resolver = resolver;
@@ -188,7 +208,8 @@ namespace System.Linq.Expressions.Tests
         public MethodBase Method => _method ??= _resolver.AsMethod(Token);
         public int Token { get; }
 
-        public override void Accept(ILInstructionVisitor visitor) => visitor.VisitInlineMethodInstruction(this);
+        public override void Accept(ILInstructionVisitor visitor) =>
+            visitor.VisitInlineMethodInstruction(this);
     }
 
     public sealed class InlineTypeInstruction : ILInstruction
@@ -196,7 +217,12 @@ namespace System.Linq.Expressions.Tests
         private readonly ITokenResolver _resolver;
         private Type _type;
 
-        internal InlineTypeInstruction(int offset, OpCode opCode, int token, ITokenResolver resolver)
+        internal InlineTypeInstruction(
+            int offset,
+            OpCode opCode,
+            int token,
+            ITokenResolver resolver
+        )
             : base(offset, opCode)
         {
             _resolver = resolver;
@@ -206,7 +232,8 @@ namespace System.Linq.Expressions.Tests
         public Type Type => _type ??= _resolver.AsType(Token);
         public int Token { get; }
 
-        public override void Accept(ILInstructionVisitor visitor) => visitor.VisitInlineTypeInstruction(this);
+        public override void Accept(ILInstructionVisitor visitor) =>
+            visitor.VisitInlineTypeInstruction(this);
     }
 
     public sealed class InlineSigInstruction : ILInstruction
@@ -224,7 +251,8 @@ namespace System.Linq.Expressions.Tests
         public byte[] Signature => _signature ??= _resolver.AsSignature(Token);
         public int Token { get; }
 
-        public override void Accept(ILInstructionVisitor visitor) => visitor.VisitInlineSigInstruction(this);
+        public override void Accept(ILInstructionVisitor visitor) =>
+            visitor.VisitInlineSigInstruction(this);
     }
 
     public sealed class InlineTokInstruction : ILInstruction
@@ -242,7 +270,8 @@ namespace System.Linq.Expressions.Tests
         public MemberInfo Member => _member ??= _resolver.AsMember(Token);
         public int Token { get; }
 
-        public override void Accept(ILInstructionVisitor visitor) => visitor.VisitInlineTokInstruction(this);
+        public override void Accept(ILInstructionVisitor visitor) =>
+            visitor.VisitInlineTokInstruction(this);
     }
 
     public sealed class InlineStringInstruction : ILInstruction
@@ -250,7 +279,12 @@ namespace System.Linq.Expressions.Tests
         private readonly ITokenResolver _resolver;
         private string _string;
 
-        internal InlineStringInstruction(int offset, OpCode opCode, int token, ITokenResolver resolver)
+        internal InlineStringInstruction(
+            int offset,
+            OpCode opCode,
+            int token,
+            ITokenResolver resolver
+        )
             : base(offset, opCode)
         {
             _resolver = resolver;
@@ -260,7 +294,8 @@ namespace System.Linq.Expressions.Tests
         public string String => _string ??= _resolver.AsString(Token);
         public int Token { get; }
 
-        public override void Accept(ILInstructionVisitor visitor) => visitor.VisitInlineStringInstruction(this);
+        public override void Accept(ILInstructionVisitor visitor) =>
+            visitor.VisitInlineStringInstruction(this);
     }
 
     public sealed class InlineVarInstruction : ILInstruction
@@ -273,7 +308,8 @@ namespace System.Linq.Expressions.Tests
 
         public ushort Ordinal { get; }
 
-        public override void Accept(ILInstructionVisitor visitor) => visitor.VisitInlineVarInstruction(this);
+        public override void Accept(ILInstructionVisitor visitor) =>
+            visitor.VisitInlineVarInstruction(this);
     }
 
     public sealed class ShortInlineVarInstruction : ILInstruction
@@ -286,6 +322,7 @@ namespace System.Linq.Expressions.Tests
 
         public byte Ordinal { get; }
 
-        public override void Accept(ILInstructionVisitor visitor) => visitor.VisitShortInlineVarInstruction(this);
+        public override void Accept(ILInstructionVisitor visitor) =>
+            visitor.VisitShortInlineVarInstruction(this);
     }
 }

@@ -12,9 +12,9 @@ namespace System.ServiceModel.Description
     using System.Security.Claims;
     using System.Security.Cryptography.X509Certificates;
     using System.ServiceModel.Channels;
+    using System.ServiceModel.Dispatcher;
     using System.ServiceModel.Security;
     using System.ServiceModel.Security.Tokens;
-    using System.ServiceModel.Dispatcher;
 
     public class ServiceCredentials : SecurityCredentialsManager, IServiceBehavior
     {
@@ -53,12 +53,18 @@ namespace System.ServiceModel.Description
                 throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("other");
             }
             this.userName = new UserNamePasswordServiceCredential(other.userName);
-            this.clientCertificate = new X509CertificateInitiatorServiceCredential(other.clientCertificate);
-            this.serviceCertificate = new X509CertificateRecipientServiceCredential(other.serviceCertificate);
+            this.clientCertificate = new X509CertificateInitiatorServiceCredential(
+                other.clientCertificate
+            );
+            this.serviceCertificate = new X509CertificateRecipientServiceCredential(
+                other.serviceCertificate
+            );
             this.windows = new WindowsServiceCredential(other.windows);
             this.issuedToken = new IssuedTokenServiceCredential(other.issuedToken);
             this.peer = new PeerCredential(other.peer);
-            this.secureConversation = new SecureConversationServiceCredential(other.secureConversation);
+            this.secureConversation = new SecureConversationServiceCredential(
+                other.secureConversation
+            );
             this.identityConfiguration = other.identityConfiguration;
             this.saveBootstrapTokenInSession = other.saveBootstrapTokenInSession;
             this.exceptionMapper = other.exceptionMapper;
@@ -67,58 +73,37 @@ namespace System.ServiceModel.Description
 
         public UserNamePasswordServiceCredential UserNameAuthentication
         {
-            get
-            {
-                return this.userName;
-            }
+            get { return this.userName; }
         }
 
         public X509CertificateInitiatorServiceCredential ClientCertificate
         {
-            get
-            {
-                return this.clientCertificate;
-            }
+            get { return this.clientCertificate; }
         }
 
         public X509CertificateRecipientServiceCredential ServiceCertificate
         {
-            get
-            {
-                return this.serviceCertificate;
-            }
+            get { return this.serviceCertificate; }
         }
 
         public WindowsServiceCredential WindowsAuthentication
         {
-            get
-            {
-                return this.windows;
-            }
+            get { return this.windows; }
         }
 
         public IssuedTokenServiceCredential IssuedTokenAuthentication
         {
-            get
-            {
-                return this.issuedToken;
-            }
+            get { return this.issuedToken; }
         }
 
         public PeerCredential Peer
         {
-            get
-            {
-                return this.peer;
-            }
+            get { return this.peer; }
         }
 
         public SecureConversationServiceCredential SecureConversationAuthentication
         {
-            get
-            {
-                return this.secureConversation;
-            }
+            get { return this.secureConversation; }
         }
 
         /// <summary>
@@ -126,10 +111,7 @@ namespace System.ServiceModel.Description
         /// </summary>
         public ExceptionMapper ExceptionMapper
         {
-            get
-            {
-                return this.exceptionMapper;
-            }
+            get { return this.exceptionMapper; }
             set
             {
                 ThrowIfImmutable();
@@ -143,10 +125,7 @@ namespace System.ServiceModel.Description
 
         public IdentityConfiguration IdentityConfiguration
         {
-            get
-            {
-                return this.identityConfiguration;
-            }
+            get { return this.identityConfiguration; }
             set
             {
                 ThrowIfImmutable();
@@ -156,10 +135,7 @@ namespace System.ServiceModel.Description
 
         public bool UseIdentityConfiguration
         {
-            get
-            {
-                return this.useIdentityConfiguration;
-            }
+            get { return this.useIdentityConfiguration; }
             set
             {
                 ThrowIfImmutable();
@@ -202,15 +178,26 @@ namespace System.ServiceModel.Description
             ServiceCredentials result = CloneCore();
             if (result == null || result.GetType() != this.GetType())
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new NotImplementedException(SR.GetString(SR.CloneNotImplementedCorrectly, this.GetType(), (result != null) ? result.ToString() : "null")));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new NotImplementedException(
+                        SR.GetString(
+                            SR.CloneNotImplementedCorrectly,
+                            this.GetType(),
+                            (result != null) ? result.ToString() : "null"
+                        )
+                    )
+                );
             }
             return result;
         }
 
-        void IServiceBehavior.Validate(ServiceDescription description, ServiceHostBase serviceHostBase)
+        void IServiceBehavior.Validate(
+            ServiceDescription description,
+            ServiceHostBase serviceHostBase
+        )
         {
             //
-            // Only pass a name if there was a name explicitly given to this class, otherwise ServiceConfig will require 
+            // Only pass a name if there was a name explicitly given to this class, otherwise ServiceConfig will require
             // a config section with the default configuration.
             //
             if (this.UseIdentityConfiguration)
@@ -220,7 +207,7 @@ namespace System.ServiceModel.Description
         }
 
         /// <summary>
-        /// Helper method that Initializes the SecurityTokenManager used by the ServiceHost. 
+        /// Helper method that Initializes the SecurityTokenManager used by the ServiceHost.
         /// By default the method sets the SecurityTokenHandlers initialized with IdentityConfiguration on the ServiceHost.
         /// </summary>
         /// <param name="serviceHost">ServiceHost instance to configure with FederatedSecurityTokenManager.</param>
@@ -233,9 +220,16 @@ namespace System.ServiceModel.Description
             }
 
             // Throw if the serviceHost is in a bad state to do the configuration
-            if (!(serviceHost.State == CommunicationState.Created || serviceHost.State == CommunicationState.Opening))
+            if (
+                !(
+                    serviceHost.State == CommunicationState.Created
+                    || serviceHost.State == CommunicationState.Opening
+                )
+            )
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperInvalidOperation(SR.GetString(SR.ID4041, serviceHost));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperInvalidOperation(
+                    SR.GetString(SR.ID4041, serviceHost)
+                );
             }
 
 #pragma warning suppress 56506
@@ -249,9 +243,15 @@ namespace System.ServiceModel.Description
                 }
             }
 
-            if (this.IssuedTokenAuthentication != null && this.IssuedTokenAuthentication.KnownCertificates != null && this.IssuedTokenAuthentication.KnownCertificates.Count > 0)
+            if (
+                this.IssuedTokenAuthentication != null
+                && this.IssuedTokenAuthentication.KnownCertificates != null
+                && this.IssuedTokenAuthentication.KnownCertificates.Count > 0
+            )
             {
-                this.IdentityConfiguration.KnownIssuerCertificates = new List<X509Certificate2> (this.IssuedTokenAuthentication.KnownCertificates);
+                this.IdentityConfiguration.KnownIssuerCertificates = new List<X509Certificate2>(
+                    this.IssuedTokenAuthentication.KnownCertificates
+                );
             }
 
             //
@@ -262,52 +262,94 @@ namespace System.ServiceModel.Description
                 this.IdentityConfiguration.Initialize();
             }
 
-            // 
+            //
 
 #pragma warning suppress 56506 // serviceHost.Authorization is never null.
             if (serviceHost.Authorization.ServiceAuthorizationManager == null)
             {
-                serviceHost.Authorization.ServiceAuthorizationManager = new IdentityModelServiceAuthorizationManager();
+                serviceHost.Authorization.ServiceAuthorizationManager =
+                    new IdentityModelServiceAuthorizationManager();
             }
-            else if (!(serviceHost.Authorization.ServiceAuthorizationManager is IdentityModelServiceAuthorizationManager))
+            else if (
+                !(
+                    serviceHost.Authorization.ServiceAuthorizationManager
+                    is IdentityModelServiceAuthorizationManager
+                )
+            )
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(SR.GetString(SR.ID4039)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new InvalidOperationException(SR.GetString(SR.ID4039))
+                );
             }
 
             // If SecuritySessionTokenHandler is being used then null the WCF SecurityStateEncoder.
-            if ((this.IdentityConfiguration.SecurityTokenHandlers[typeof(SecurityContextSecurityToken)] != null) &&
-                (serviceHost.Credentials.SecureConversationAuthentication.SecurityStateEncoder == null))
+            if (
+                (
+                    this.IdentityConfiguration.SecurityTokenHandlers[
+                        typeof(SecurityContextSecurityToken)
+                    ] != null
+                )
+                && (
+                    serviceHost.Credentials.SecureConversationAuthentication.SecurityStateEncoder
+                    == null
+                )
+            )
             {
-                serviceHost.Credentials.SecureConversationAuthentication.SecurityStateEncoder = new NoOpSecurityStateEncoder();
+                serviceHost.Credentials.SecureConversationAuthentication.SecurityStateEncoder =
+                    new NoOpSecurityStateEncoder();
             }
         }
 
-        void IServiceBehavior.AddBindingParameters(ServiceDescription description, ServiceHostBase serviceHostBase, Collection<ServiceEndpoint> endpoints, BindingParameterCollection parameters)
+        void IServiceBehavior.AddBindingParameters(
+            ServiceDescription description,
+            ServiceHostBase serviceHostBase,
+            Collection<ServiceEndpoint> endpoints,
+            BindingParameterCollection parameters
+        )
         {
             if (parameters == null)
             {
                 throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("parameters");
             }
             // throw if bindingParameters already has a SecurityCredentialsManager
-            SecurityCredentialsManager otherCredentialsManager = parameters.Find<SecurityCredentialsManager>();
+            SecurityCredentialsManager otherCredentialsManager =
+                parameters.Find<SecurityCredentialsManager>();
             if (otherCredentialsManager != null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(SR.GetString(SR.MultipleSecurityCredentialsManagersInServiceBindingParameters, otherCredentialsManager)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new InvalidOperationException(
+                        SR.GetString(
+                            SR.MultipleSecurityCredentialsManagersInServiceBindingParameters,
+                            otherCredentialsManager
+                        )
+                    )
+                );
             }
             parameters.Add(this);
         }
 
-        void IServiceBehavior.ApplyDispatchBehavior(ServiceDescription description, ServiceHostBase serviceHostBase)
+        void IServiceBehavior.ApplyDispatchBehavior(
+            ServiceDescription description,
+            ServiceHostBase serviceHostBase
+        )
         {
             for (int i = 0; i < serviceHostBase.ChannelDispatchers.Count; i++)
             {
-                ChannelDispatcher channelDispatcher = serviceHostBase.ChannelDispatchers[i] as ChannelDispatcher;
-                if (channelDispatcher != null && !ServiceMetadataBehavior.IsHttpGetMetadataDispatcher(description, channelDispatcher))
+                ChannelDispatcher channelDispatcher =
+                    serviceHostBase.ChannelDispatchers[i] as ChannelDispatcher;
+                if (
+                    channelDispatcher != null
+                    && !ServiceMetadataBehavior.IsHttpGetMetadataDispatcher(
+                        description,
+                        channelDispatcher
+                    )
+                )
                 {
                     foreach (EndpointDispatcher endpointDispatcher in channelDispatcher.Endpoints)
                     {
                         DispatchRuntime behavior = endpointDispatcher.DispatchRuntime;
-                        behavior.RequireClaimsPrincipalOnOperationContext = this.useIdentityConfiguration;
+                        behavior.RequireClaimsPrincipalOnOperationContext =
+                            this.useIdentityConfiguration;
                     }
                 }
             }
@@ -329,7 +371,9 @@ namespace System.ServiceModel.Description
         {
             if (this.isReadOnly)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(SR.GetString(SR.ObjectIsReadOnly)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new InvalidOperationException(SR.GetString(SR.ObjectIsReadOnly))
+                );
             }
         }
     }

@@ -28,118 +28,120 @@
 //
 
 using System;
+using System.Drawing;
 using System.Web;
 using System.Web.UI;
-using System.Web.UI.WebControls;
 using System.Web.UI.HtmlControls;
-using System.Drawing;
+using System.Web.UI.WebControls;
 
 namespace GHTTests.System_Web_dll.System_Web_UI_WebControls
-{public class WebControl_Style_ForeColor
-        : GHTWebControlBase
- {
-	 #region Web Form Designer generated code
-	 override protected void OnInit(EventArgs e) {
-		 //
-		 // CODEGEN: This call is required by the ASP.NET Web Form Designer.
-		 //
-		 InitializeComponent();
-		 base.OnInit(e);
-	 }
-		
-	 /// <summary>
-	 /// Required method for Designer support - do not modify
-	 /// the contents of this method with the code editor.
-	 /// </summary>
-	 private void InitializeComponent() {    
-		 this.Load += new System.EventHandler(this.Page_Load);
-	 }
-	 #endregion
+{
+    public class WebControl_Style_ForeColor : GHTWebControlBase
+    {
+        #region Web Form Designer generated code
+        override protected void OnInit(EventArgs e)
+        {
+            //
+            // CODEGEN: This call is required by the ASP.NET Web Form Designer.
+            //
+            InitializeComponent();
+            base.OnInit(e);
+        }
 
-        private void Page_Load(object sender, System.EventArgs e) {
-            HtmlForm frm  = (HtmlForm)FindControl("Form1");
+        /// <summary>
+        /// Required method for Designer support - do not modify
+        /// the contents of this method with the code editor.
+        /// </summary>
+        private void InitializeComponent()
+        {
+            this.Load += new System.EventHandler(this.Page_Load);
+        }
+        #endregion
+
+        private void Page_Load(object sender, System.EventArgs e)
+        {
+            HtmlForm frm = (HtmlForm)FindControl("Form1");
             GHTTestBegin(frm);
-			foreach (Type currentType in TypesToTest)
-			{
-				GHTHeader(currentType.ToString());
-				Test(currentType);
-			}
-			GHTTestEnd();
+            foreach (Type currentType in TypesToTest)
+            {
+                GHTHeader(currentType.ToString());
+                Test(currentType);
+            }
+            GHTTestEnd();
         }
 
         // This tests that the style attribute renders o.k. on all  webcontrols.
-	 private void Test(Type ctrlType)
-	 {
-		 try
-		 {
-			 this.GHTSubTestBegin(ctrlType, "Set color once");
-			 this.TestedControl.ControlStyle.ForeColor = Color.Cyan;
-		 }
-		 catch (Exception exception6)
-		 {
-			 // ProjectData.SetProjectError(exception6);
-			 Exception exception1 = exception6;
-			 this.GHTSubTestUnexpectedExceptionCaught(exception1);
-			 // ProjectData.ClearProjectError();
-		 }
-		 this.GHTSubTestEnd();
-		 try
-		 {
-			 this.GHTSubTestBegin(ctrlType, "Set color twice");
-			 this.TestedControl.ControlStyle.ForeColor = Color.Cyan;
-			 this.TestedControl.ControlStyle.ForeColor = Color.Purple;
-		 }
-		 catch (Exception exception7)
-		 {
-			 // ProjectData.SetProjectError(exception7);
-			 Exception exception2 = exception7;
-			 this.GHTSubTestUnexpectedExceptionCaught(exception2);
-			 // ProjectData.ClearProjectError();
-		 }
-		 this.GHTSubTestEnd();
-		 try
-		 {
-			 this.GHTSubTestBegin(ctrlType, "Set empty color.");
-			 this.TestedControl.ControlStyle.ForeColor = Color.RoyalBlue;
-			 this.TestedControl.ControlStyle.ForeColor = Color.Empty;
-		 }
-		 catch (Exception exception8)
-		 {
-			 // ProjectData.SetProjectError(exception8);
-			 Exception exception3 = exception8;
-			 this.GHTSubTestUnexpectedExceptionCaught(exception3);
-			 // ProjectData.ClearProjectError();
-		 }
-		 this.GHTSubTestEnd();
-		 try
-		 {
-			 this.GHTSubTestBegin(ctrlType, "Set transparent color.");
-			 this.TestedControl.ControlStyle.ForeColor = Color.ForestGreen;
-			 this.TestedControl.ControlStyle.ForeColor = Color.Transparent;
-		 }
-		 catch (Exception exception9)
-		 {
-			 // ProjectData.SetProjectError(exception9);
-			 Exception exception4 = exception9;
-			 this.GHTSubTestUnexpectedExceptionCaught(exception4);
-			 // ProjectData.ClearProjectError();
-		 }
-		 this.GHTSubTestEnd();
-		 try
-		 {
-			 this.GHTSubTestBegin(ctrlType, "Set color and CssClass.");
-			 this.TestedControl.ControlStyle.CssClass = "CssClass1";
-			 this.TestedControl.ControlStyle.ForeColor = Color.ForestGreen;
-		 }
-		 catch (Exception exception10)
-		 {
-			 // ProjectData.SetProjectError(exception10);
-			 Exception exception5 = exception10;
-			 this.GHTSubTestUnexpectedExceptionCaught(exception5);
-			 // ProjectData.ClearProjectError();
-		 }
-		 this.GHTSubTestEnd();
-	 }
- 
- }
+        private void Test(Type ctrlType)
+        {
+            try
+            {
+                this.GHTSubTestBegin(ctrlType, "Set color once");
+                this.TestedControl.ControlStyle.ForeColor = Color.Cyan;
+            }
+            catch (Exception exception6)
+            {
+                // ProjectData.SetProjectError(exception6);
+                Exception exception1 = exception6;
+                this.GHTSubTestUnexpectedExceptionCaught(exception1);
+                // ProjectData.ClearProjectError();
+            }
+            this.GHTSubTestEnd();
+            try
+            {
+                this.GHTSubTestBegin(ctrlType, "Set color twice");
+                this.TestedControl.ControlStyle.ForeColor = Color.Cyan;
+                this.TestedControl.ControlStyle.ForeColor = Color.Purple;
+            }
+            catch (Exception exception7)
+            {
+                // ProjectData.SetProjectError(exception7);
+                Exception exception2 = exception7;
+                this.GHTSubTestUnexpectedExceptionCaught(exception2);
+                // ProjectData.ClearProjectError();
+            }
+            this.GHTSubTestEnd();
+            try
+            {
+                this.GHTSubTestBegin(ctrlType, "Set empty color.");
+                this.TestedControl.ControlStyle.ForeColor = Color.RoyalBlue;
+                this.TestedControl.ControlStyle.ForeColor = Color.Empty;
+            }
+            catch (Exception exception8)
+            {
+                // ProjectData.SetProjectError(exception8);
+                Exception exception3 = exception8;
+                this.GHTSubTestUnexpectedExceptionCaught(exception3);
+                // ProjectData.ClearProjectError();
+            }
+            this.GHTSubTestEnd();
+            try
+            {
+                this.GHTSubTestBegin(ctrlType, "Set transparent color.");
+                this.TestedControl.ControlStyle.ForeColor = Color.ForestGreen;
+                this.TestedControl.ControlStyle.ForeColor = Color.Transparent;
+            }
+            catch (Exception exception9)
+            {
+                // ProjectData.SetProjectError(exception9);
+                Exception exception4 = exception9;
+                this.GHTSubTestUnexpectedExceptionCaught(exception4);
+                // ProjectData.ClearProjectError();
+            }
+            this.GHTSubTestEnd();
+            try
+            {
+                this.GHTSubTestBegin(ctrlType, "Set color and CssClass.");
+                this.TestedControl.ControlStyle.CssClass = "CssClass1";
+                this.TestedControl.ControlStyle.ForeColor = Color.ForestGreen;
+            }
+            catch (Exception exception10)
+            {
+                // ProjectData.SetProjectError(exception10);
+                Exception exception5 = exception10;
+                this.GHTSubTestUnexpectedExceptionCaught(exception5);
+                // ProjectData.ClearProjectError();
+            }
+            this.GHTSubTestEnd();
+        }
+    }
 }

@@ -22,6 +22,6 @@ namespace Microsoft.CodeAnalysis
         /// Binds the given expression as a type or namespace only. If this option
         /// is selected, then the given expression must derive from TypeSyntax.
         /// </summary>
-        BindAsTypeOrNamespace = 1
+        BindAsTypeOrNamespace = 1,
     }
 }

@@ -7,15 +7,15 @@
 // @backupOwner Microsoft
 //---------------------------------------------------------------------
 
+using System.Collections.Generic;
 using System.Data.Common.CommandTrees;
 using System.Data.Common.CommandTrees.ExpressionBuilder;
 using System.Data.Common.Utils;
-using System.Text;
-using System.Collections.Generic;
 using System.Data.Mapping.ViewGeneration.CqlGeneration;
 using System.Data.Metadata.Edm;
 using System.Diagnostics;
 using System.Linq;
+using System.Text;
 
 namespace System.Data.Mapping.ViewGeneration.Structures
 {
@@ -25,12 +25,14 @@ namespace System.Data.Mapping.ViewGeneration.Structures
     internal sealed class WithRelationship : InternalBase
     {
         #region Constructors
-        internal WithRelationship(AssociationSet associationSet,
-                                  AssociationEndMember fromEnd,
-                                  EntityType fromEndEntityType,
-                                  AssociationEndMember toEnd,
-                                  EntityType toEndEntityType,
-                                  IEnumerable<MemberPath> toEndEntityKeyMemberPaths)
+        internal WithRelationship(
+            AssociationSet associationSet,
+            AssociationEndMember fromEnd,
+            EntityType fromEndEntityType,
+            AssociationEndMember toEnd,
+            EntityType toEndEntityType,
+            IEnumerable<MemberPath> toEndEntityKeyMemberPaths
+        )
         {
             m_associationSet = associationSet;
             m_fromEnd = fromEnd;
@@ -67,11 +69,18 @@ namespace System.Data.Mapping.ViewGeneration.Structures
             List<string> fields = new List<string>();
             // If the variable is a relation end, we will gets it scope Extent, e.g., CPerson1 for the CPerson end of CPersonAddress1.
             builder.Append("CREATEREF(");
-            CqlWriter.AppendEscapedQualifiedName(builder, m_toEndEntitySet.EntityContainer.Name, m_toEndEntitySet.Name);
+            CqlWriter.AppendEscapedQualifiedName(
+                builder,
+                m_toEndEntitySet.EntityContainer.Name,
+                m_toEndEntitySet.Name
+            );
             builder.Append(", ROW(");
             foreach (MemberPath memberPath in m_toEndEntityKeyMemberPaths)
             {
-                string fullFieldAlias = CqlWriter.GetQualifiedName(blockAlias, memberPath.CqlFieldAlias);
+                string fullFieldAlias = CqlWriter.GetQualifiedName(
+                    blockAlias,
+                    memberPath.CqlFieldAlias
+                );
                 fields.Add(fullFieldAlias);
             }
             StringUtil.ToSeparatedString(builder, fields, ", ", null);
@@ -94,9 +103,15 @@ namespace System.Data.Mapping.ViewGeneration.Structures
         internal DbRelatedEntityRef AsCqt(DbExpression row)
         {
             return DbExpressionBuilder.CreateRelatedEntityRef(
-                m_fromEnd, 
+                m_fromEnd,
                 m_toEnd,
-                m_toEndEntitySet.CreateRef(m_toEndEntityType, m_toEndEntityKeyMemberPaths.Select(keyMember => row.Property(keyMember.CqlFieldAlias))));
+                m_toEndEntitySet.CreateRef(
+                    m_toEndEntityType,
+                    m_toEndEntityKeyMemberPaths.Select(keyMember =>
+                        row.Property(keyMember.CqlFieldAlias)
+                    )
+                )
+            );
         }
 
         /// <summary>

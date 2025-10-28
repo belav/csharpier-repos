@@ -2,22 +2,22 @@
      when aggressive trimming is enabled. -->
 <linker>
   <assembly fullname="TestUtilities">
-   	<namespace fullname="System" />
-        <type fullname="System.PlatformDetection" />
+    <namespace fullname="System" />
+    <type fullname="System.PlatformDetection" />
   </assembly>
   <assembly fullname="Castle.Core">
-      <namespace fullname="Castle.DynamicProxy" />
-      <type fullname="Castle.DynamicProxy.Internal.CompositionInvocation" />
-      <type fullname="Castle.DynamicProxy.Internal.InheritanceInvocation" />
-      <type fullname="Castle.DynamicProxy.Internal.InheritanceInvocationWithoutTarget" />
-      <type fullname="Castle.DynamicProxy.Internal.InterfaceMethodWithoutTargetInvocation" />
+    <namespace fullname="Castle.DynamicProxy" />
+    <type fullname="Castle.DynamicProxy.Internal.CompositionInvocation" />
+    <type fullname="Castle.DynamicProxy.Internal.InheritanceInvocation" />
+    <type fullname="Castle.DynamicProxy.Internal.InheritanceInvocationWithoutTarget" />
+    <type fullname="Castle.DynamicProxy.Internal.InterfaceMethodWithoutTargetInvocation" />
   </assembly>
   <assembly fullname="Moq">
-      <type fullname="Moq.Internals.InterfaceProxy">
-          <method signature="System.Void .ctor()" />
-      </type>
+    <type fullname="Moq.Internals.InterfaceProxy">
+      <method signature="System.Void .ctor()" />
+    </type>
   </assembly>
   <assembly fullname="System.ComponentModel.TypeConverter">
-      <type fullname="MS.Internal.Xml.Linq.ComponentModel.XDeferredSingleton`1" />
+    <type fullname="MS.Internal.Xml.Linq.ComponentModel.XDeferredSingleton`1" />
   </assembly>
 </linker>

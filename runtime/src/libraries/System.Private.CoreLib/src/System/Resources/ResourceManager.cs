@@ -99,32 +99,36 @@ namespace System.Resources
         }
 
         protected string BaseNameField; // The field is protected for .NET Framework compatibility
-        protected Assembly? MainAssembly;    // Need the assembly manifest sometimes.
+        protected Assembly? MainAssembly; // Need the assembly manifest sometimes.
 
         private Dictionary<string, ResourceSet>? _resourceSets;
-        private readonly string? _moduleDir;          // For assembly-ignorant directory location
+        private readonly string? _moduleDir; // For assembly-ignorant directory location
 
-        [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors | DynamicallyAccessedMemberTypes.NonPublicConstructors)]
-        private readonly Type? _userResourceSet;      // Which ResourceSet instance to create
+        [DynamicallyAccessedMembers(
+            DynamicallyAccessedMemberTypes.PublicConstructors
+                | DynamicallyAccessedMemberTypes.NonPublicConstructors
+        )]
+        private readonly Type? _userResourceSet; // Which ResourceSet instance to create
 
-        private CultureInfo? _neutralResourcesCulture;  // For perf optimizations.
+        private CultureInfo? _neutralResourcesCulture; // For perf optimizations.
 
         private CultureNameResourceSetPair? _lastUsedResourceCache;
 
-        private bool _ignoreCase;   // Whether case matters in GetString & GetObject
+        private bool _ignoreCase; // Whether case matters in GetString & GetObject
 
-        private bool _useManifest;  // Use Assembly manifest, or grovel disk.
+        private bool _useManifest; // Use Assembly manifest, or grovel disk.
 
         // Whether to fall back to the main assembly or a particular
         // satellite for the neutral resources.
         private UltimateResourceFallbackLocation _fallbackLoc;
+
         // Version number of satellite assemblies to look for.  May be null.
         private Version? _satelliteContractVersion;
         private bool _lookedForSatelliteContractVersion;
 
         private IResourceGroveler _resourceGroveler;
 
-        public static readonly int MagicNumber = unchecked((int)0xBEEFCACE);  // If only hex had a K...
+        public static readonly int MagicNumber = unchecked((int)0xBEEFCACE); // If only hex had a K...
 
         // Version number so ResMgr can get the ideal set of classes for you.
         // ResMgr header is:
@@ -165,9 +169,15 @@ namespace System.Resources
         //
         // Note: System.Windows.Forms uses this method at design time.
         //
-        private ResourceManager(string baseName, string resourceDir,
-            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors | DynamicallyAccessedMemberTypes.NonPublicConstructors)]
-            Type? userResourceSet)
+        private ResourceManager(
+            string baseName,
+            string resourceDir,
+            [DynamicallyAccessedMembers(
+                DynamicallyAccessedMemberTypes.PublicConstructors
+                    | DynamicallyAccessedMemberTypes.NonPublicConstructors
+            )]
+                Type? userResourceSet
+        )
         {
             ArgumentNullException.ThrowIfNull(baseName);
             ArgumentNullException.ThrowIfNull(resourceDir);
@@ -197,9 +207,15 @@ namespace System.Resources
             CommonAssemblyInit();
         }
 
-        public ResourceManager(string baseName, Assembly assembly,
-            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors | DynamicallyAccessedMemberTypes.NonPublicConstructors)]
-        Type? usingResourceSet)
+        public ResourceManager(
+            string baseName,
+            Assembly assembly,
+            [DynamicallyAccessedMembers(
+                DynamicallyAccessedMemberTypes.PublicConstructors
+                    | DynamicallyAccessedMemberTypes.NonPublicConstructors
+            )]
+                Type? usingResourceSet
+        )
         {
             ArgumentNullException.ThrowIfNull(baseName);
             ArgumentNullException.ThrowIfNull(assembly);
@@ -210,7 +226,11 @@ namespace System.Resources
             MainAssembly = assembly;
             BaseNameField = baseName;
 
-            if (usingResourceSet != null && (usingResourceSet != typeof(ResourceSet)) && !usingResourceSet.IsSubclassOf(typeof(ResourceSet)))
+            if (
+                usingResourceSet != null
+                && (usingResourceSet != typeof(ResourceSet))
+                && !usingResourceSet.IsSubclassOf(typeof(ResourceSet))
+            )
                 throw new ArgumentException(SR.Arg_ResMgrNotResSet, nameof(usingResourceSet));
             _userResourceSet = usingResourceSet;
 
@@ -250,7 +270,10 @@ namespace System.Resources
             _resourceGroveler = new ManifestBasedResourceGroveler(mediator);
 
             Debug.Assert(MainAssembly != null);
-            _neutralResourcesCulture = ManifestBasedResourceGroveler.GetNeutralResourcesLanguage(MainAssembly, out _fallbackLoc);
+            _neutralResourcesCulture = ManifestBasedResourceGroveler.GetNeutralResourcesLanguage(
+                MainAssembly,
+                out _fallbackLoc
+            );
         }
 
         // Gets the base name for the ResourceManager.
@@ -266,7 +289,10 @@ namespace System.Resources
 
         // Returns the Type of the ResourceSet the ResourceManager uses
         // to construct ResourceSets.
-        [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors | DynamicallyAccessedMemberTypes.NonPublicConstructors)]
+        [DynamicallyAccessedMembers(
+            DynamicallyAccessedMemberTypes.PublicConstructors
+                | DynamicallyAccessedMemberTypes.NonPublicConstructors
+        )]
         public virtual Type ResourceSetType => _userResourceSet ?? typeof(RuntimeResourceSet);
 
         protected UltimateResourceFallbackLocation FallbackLocation
@@ -303,9 +329,15 @@ namespace System.Resources
             }
         }
 
-        public static ResourceManager CreateFileBasedResourceManager(string baseName, string resourceDir,
-            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors | DynamicallyAccessedMemberTypes.NonPublicConstructors)]
-            Type? usingResourceSet)
+        public static ResourceManager CreateFileBasedResourceManager(
+            string baseName,
+            string resourceDir,
+            [DynamicallyAccessedMembers(
+                DynamicallyAccessedMemberTypes.PublicConstructors
+                    | DynamicallyAccessedMemberTypes.NonPublicConstructors
+            )]
+                Type? usingResourceSet
+        )
         {
             return new ResourceManager(baseName, resourceDir, usingResourceSet);
         }
@@ -389,7 +421,11 @@ namespace System.Resources
         // if it hasn't yet been loaded and if parent CultureInfos should be
         // loaded as well for resource inheritance.
         //
-        public virtual ResourceSet? GetResourceSet(CultureInfo culture, bool createIfNotExists, bool tryParents)
+        public virtual ResourceSet? GetResourceSet(
+            CultureInfo culture,
+            bool createIfNotExists,
+            bool tryParents
+        )
         {
             ArgumentNullException.ThrowIfNull(culture);
 
@@ -411,7 +447,10 @@ namespace System.Resources
                 Stream? stream = MainAssembly.GetManifestResourceStream(fileName);
                 if (createIfNotExists && stream != null)
                 {
-                    rs = ((ManifestBasedResourceGroveler)_resourceGroveler).CreateResourceSet(stream, MainAssembly);
+                    rs = ((ManifestBasedResourceGroveler)_resourceGroveler).CreateResourceSet(
+                        stream,
+                        MainAssembly
+                    );
                     Debug.Assert(localResourceSets != null);
                     AddResourceSet(localResourceSets, culture.Name, ref rs);
                     return rs;
@@ -425,7 +464,11 @@ namespace System.Resources
         // for getting a resource set lives.  Access to it is controlled by
         // threadsafe methods such as GetResourceSet, GetString, & GetObject.
         // This will take a minimal number of locks.
-        protected virtual ResourceSet? InternalGetResourceSet(CultureInfo culture, bool createIfNotExists, bool tryParents)
+        protected virtual ResourceSet? InternalGetResourceSet(
+            CultureInfo culture,
+            bool createIfNotExists,
+            bool tryParents
+        )
         {
             Debug.Assert(culture != null, "culture != null");
             Debug.Assert(_resourceSets != null);
@@ -441,7 +484,11 @@ namespace System.Resources
                 }
             }
 
-            ResourceFallbackManager mgr = new ResourceFallbackManager(culture, _neutralResourcesCulture, tryParents);
+            ResourceFallbackManager mgr = new ResourceFallbackManager(
+                culture,
+                _neutralResourcesCulture,
+                tryParents
+            );
 
             foreach (CultureInfo currentCultureInfo in mgr)
             {
@@ -450,7 +497,8 @@ namespace System.Resources
                     if (localResourceSets.TryGetValue(currentCultureInfo.Name, out rs))
                     {
                         // we need to update the cache if we fellback
-                        if (culture != currentCultureInfo) foundCulture = currentCultureInfo;
+                        if (culture != currentCultureInfo)
+                            foundCulture = currentCultureInfo;
                         break;
                     }
                 }
@@ -461,8 +509,12 @@ namespace System.Resources
                 // Assembly load event, which could fail then call back into the
                 // ResourceManager).  It's happened.
 
-                rs = _resourceGroveler.GrovelForResourceSet(currentCultureInfo, localResourceSets,
-                                                           tryParents, createIfNotExists);
+                rs = _resourceGroveler.GrovelForResourceSet(
+                    currentCultureInfo,
+                    localResourceSets,
+                    tryParents,
+                    createIfNotExists
+                );
 
                 // found a ResourceSet; we're done
                 if (rs != null)
@@ -495,7 +547,11 @@ namespace System.Resources
         }
 
         // Simple helper to ease maintenance and improve readability.
-        private static void AddResourceSet(Dictionary<string, ResourceSet> localResourceSets, string cultureName, ref ResourceSet rs)
+        private static void AddResourceSet(
+            Dictionary<string, ResourceSet> localResourceSets,
+            string cultureName,
+            ref ResourceSet rs
+        )
         {
             // InternalGetResourceSet is both recursive and reentrant -
             // assembly load callbacks in particular are a way we can call
@@ -537,7 +593,9 @@ namespace System.Resources
 
             if (!Version.TryParse(v, out Version? version))
             {
-                throw new ArgumentException(SR.Format(SR.Arg_InvalidSatelliteContract_Asm_Ver, a, v));
+                throw new ArgumentException(
+                    SR.Format(SR.Arg_InvalidSatelliteContract_Asm_Ver, a, v)
+                );
             }
 
             return version;
@@ -550,8 +608,7 @@ namespace System.Resources
             return ManifestBasedResourceGroveler.GetNeutralResourcesLanguage(a, out _);
         }
 
-        internal static bool IsDefaultType(string asmTypeName,
-                                           string defaultTypeName)
+        internal static bool IsDefaultType(string asmTypeName, string defaultTypeName)
         {
             Debug.Assert(asmTypeName != null, "asmTypeName was unexpectedly null");
 
@@ -560,7 +617,11 @@ namespace System.Resources
             int typeNameLength = (firstComma != -1) ? firstComma : asmTypeName.Length;
 
             // Type names are case sensitive
-            if (!asmTypeName.AsSpan(0, typeNameLength).Equals(defaultTypeName, StringComparison.Ordinal))
+            if (
+                !asmTypeName
+                    .AsSpan(0, typeNameLength)
+                    .Equals(defaultTypeName, StringComparison.Ordinal)
+            )
                 return false;
 
             // No assembly name specified means system assembly.
@@ -569,14 +630,18 @@ namespace System.Resources
 
             // Now, compare assembly simple names, ignore the rest (version, public key token, etc.)
             int secondComma = asmTypeName.IndexOf(',', firstComma + 1);
-            int simpleAsmNameLength = ((secondComma != -1) ? secondComma : asmTypeName.Length) - (firstComma + 1);
+            int simpleAsmNameLength =
+                ((secondComma != -1) ? secondComma : asmTypeName.Length) - (firstComma + 1);
 
             // We have kept mscorlib as the simple assembly name for the default resource format. The type name of the default resource
             // format is de-facto a magic string that we check for and it is not actually used to load any types. There has not been
             // a good reason to change the magic string to have the current assembly name.
 
             // Assembly names are case insensitive
-            return asmTypeName.AsSpan(firstComma + 1, simpleAsmNameLength).Trim().Equals("mscorlib", StringComparison.OrdinalIgnoreCase);
+            return asmTypeName
+                .AsSpan(firstComma + 1, simpleAsmNameLength)
+                .Trim()
+                .Equals("mscorlib", StringComparison.OrdinalIgnoreCase);
         }
 
         // Looks up a resource value for a particular name.  Looks in the
@@ -610,7 +675,11 @@ namespace System.Resources
             // This is the CultureInfo hierarchy traversal code for resource
             // lookups, similar but necessarily orthogonal to the ResourceSet
             // lookup logic.
-            ResourceFallbackManager mgr = new ResourceFallbackManager(culture, _neutralResourcesCulture, true);
+            ResourceFallbackManager mgr = new ResourceFallbackManager(
+                culture,
+                _neutralResourcesCulture,
+                true
+            );
             foreach (CultureInfo currentCultureInfo in mgr)
             {
                 ResourceSet? rs = InternalGetResourceSet(currentCultureInfo, true, true);
@@ -684,7 +753,11 @@ namespace System.Resources
             // This is the CultureInfo hierarchy traversal code for resource
             // lookups, similar but necessarily orthogonal to the ResourceSet
             // lookup logic.
-            ResourceFallbackManager mgr = new ResourceFallbackManager(culture, _neutralResourcesCulture, true);
+            ResourceFallbackManager mgr = new ResourceFallbackManager(
+                culture,
+                _neutralResourcesCulture,
+                true
+            );
 
             foreach (CultureInfo currentCultureInfo in mgr)
             {
@@ -730,7 +803,9 @@ namespace System.Resources
             object? obj = GetObject(name, culture, false);
             UnmanagedMemoryStream? ums = obj as UnmanagedMemoryStream;
             if (ums == null && obj != null)
-                throw new InvalidOperationException(SR.Format(SR.InvalidOperation_ResourceNotStream_Name, name));
+                throw new InvalidOperationException(
+                    SR.Format(SR.InvalidOperation_ResourceNotStream_Name, name)
+                );
             return ums;
         }
 
@@ -748,7 +823,10 @@ namespace System.Resources
             // NEEDED ONLY BY FILE-BASED
             internal string? ModuleDir => _rm._moduleDir;
 
-            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors | DynamicallyAccessedMemberTypes.NonPublicConstructors)]
+            [DynamicallyAccessedMembers(
+                DynamicallyAccessedMemberTypes.PublicConstructors
+                    | DynamicallyAccessedMemberTypes.NonPublicConstructors
+            )]
             internal Type? UserResourceSet => _rm._userResourceSet;
 
             internal string? BaseNameField => _rm.BaseNameField;

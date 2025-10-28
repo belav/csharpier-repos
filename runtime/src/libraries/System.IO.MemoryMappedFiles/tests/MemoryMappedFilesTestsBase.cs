@@ -1,9 +1,9 @@
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
-using Microsoft.Win32.SafeHandles;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
+using Microsoft.Win32.SafeHandles;
 using Xunit;
 
 namespace System.IO.MemoryMappedFiles.Tests
@@ -15,7 +15,10 @@ namespace System.IO.MemoryMappedFiles.Tests
         internal static bool MapNamesSupported => OperatingSystem.IsWindows();
 
         /// <summary>Creates a map name guaranteed to be unique.</summary>
-        internal static string CreateUniqueMapName() { return Guid.NewGuid().ToString("N"); }
+        internal static string CreateUniqueMapName()
+        {
+            return Guid.NewGuid().ToString("N");
+        }
 
         /// <summary>Creates a map name guaranteed to be unique and contain only whitespace characters.</summary>
         protected static string CreateUniqueWhitespaceMapName()
@@ -58,15 +61,30 @@ namespace System.IO.MemoryMappedFiles.Tests
         /// views created from maps.
         /// </summary>
         protected IEnumerable<MemoryMappedFile> CreateSampleMaps(
-            int capacity = 4096, MemoryMappedFileAccess access = MemoryMappedFileAccess.ReadWrite,
-            [CallerMemberName]string fileName = null, [CallerLineNumber] int lineNumber = 0)
+            int capacity = 4096,
+            MemoryMappedFileAccess access = MemoryMappedFileAccess.ReadWrite,
+            [CallerMemberName] string fileName = null,
+            [CallerLineNumber] int lineNumber = 0
+        )
         {
             yield return MemoryMappedFile.CreateNew(null, capacity, access);
-            yield return MemoryMappedFile.CreateFromFile(Path.Combine(TestDirectory, Guid.NewGuid().ToString("N")), FileMode.CreateNew, null, capacity, access);
+            yield return MemoryMappedFile.CreateFromFile(
+                Path.Combine(TestDirectory, Guid.NewGuid().ToString("N")),
+                FileMode.CreateNew,
+                null,
+                capacity,
+                access
+            );
             if (MapNamesSupported)
             {
                 yield return MemoryMappedFile.CreateNew(CreateUniqueMapName(), capacity, access);
-                yield return MemoryMappedFile.CreateFromFile(GetTestFilePath(null, fileName, lineNumber), FileMode.CreateNew, CreateUniqueMapName(), capacity, access);
+                yield return MemoryMappedFile.CreateFromFile(
+                    GetTestFilePath(null, fileName, lineNumber),
+                    FileMode.CreateNew,
+                    CreateUniqueMapName(),
+                    capacity,
+                    access
+                );
             }
         }
 
@@ -88,10 +106,12 @@ namespace System.IO.MemoryMappedFiles.Tests
         /// <param name="expectedCapacity">The capacity that was specified to create the map.</param>
         /// <param name="expectedAccess">The access specified to create the map.</param>
         /// <param name="expectedInheritability">The inheritability specified to create the map.</param>
-        protected static void ValidateMemoryMappedFile(MemoryMappedFile mmf,
+        protected static void ValidateMemoryMappedFile(
+            MemoryMappedFile mmf,
             long expectedCapacity,
             MemoryMappedFileAccess expectedAccess = MemoryMappedFileAccess.ReadWrite,
-            HandleInheritability expectedInheritability = HandleInheritability.None)
+            HandleInheritability expectedInheritability = HandleInheritability.None
+        )
         {
             // Validate that we got a MemoryMappedFile object and that its handle is valid
             Assert.NotNull(mmf);
@@ -118,9 +138,15 @@ namespace System.IO.MemoryMappedFiles.Tests
             }
             else
             {
-                Assert.Throws<UnauthorizedAccessException>(() => mmf.CreateViewAccessor(0, expectedCapacity, MemoryMappedFileAccess.Read));
-                Assert.Throws<UnauthorizedAccessException>(() => mmf.CreateViewAccessor(0, expectedCapacity, MemoryMappedFileAccess.Write));
-                Assert.Throws<UnauthorizedAccessException>(() => mmf.CreateViewAccessor(0, expectedCapacity, MemoryMappedFileAccess.ReadWrite));
+                Assert.Throws<UnauthorizedAccessException>(() =>
+                    mmf.CreateViewAccessor(0, expectedCapacity, MemoryMappedFileAccess.Read)
+                );
+                Assert.Throws<UnauthorizedAccessException>(() =>
+                    mmf.CreateViewAccessor(0, expectedCapacity, MemoryMappedFileAccess.Write)
+                );
+                Assert.Throws<UnauthorizedAccessException>(() =>
+                    mmf.CreateViewAccessor(0, expectedCapacity, MemoryMappedFileAccess.ReadWrite)
+                );
             }
         }
 
@@ -128,7 +154,11 @@ namespace System.IO.MemoryMappedFiles.Tests
         /// <param name="mmf">The map.</param>
         /// <param name="capacity">The capacity to use when creating the view.</param>
         /// <param name="access">The access to use when creating the view.</param>
-        private static void CreateAndValidateViews(MemoryMappedFile mmf, long capacity, MemoryMappedFileAccess access)
+        private static void CreateAndValidateViews(
+            MemoryMappedFile mmf,
+            long capacity,
+            MemoryMappedFileAccess access
+        )
         {
             using (MemoryMappedViewAccessor accessor = mmf.CreateViewAccessor(0, capacity, access))
             {
@@ -144,7 +174,11 @@ namespace System.IO.MemoryMappedFiles.Tests
         /// <param name="accessor">The accessor to validate.</param>
         /// <param name="capacity">The capacity specified when creating the accessor.</param>
         /// <param name="access">The access specified when creating the accessor.</param>
-        protected static void ValidateMemoryMappedViewAccessor(MemoryMappedViewAccessor accessor, long capacity, MemoryMappedFileAccess access)
+        protected static void ValidateMemoryMappedViewAccessor(
+            MemoryMappedViewAccessor accessor,
+            long capacity,
+            MemoryMappedFileAccess access
+        )
         {
             // Validate the accessor and its handle
             Assert.NotNull(accessor);
@@ -200,7 +234,11 @@ namespace System.IO.MemoryMappedFiles.Tests
         /// <param name="stream">The stream to verify.</param>
         /// <param name="capacity">The capacity specified when the stream was created.</param>
         /// <param name="access">The access specified when the stream was created.</param>
-        protected static void ValidateMemoryMappedViewStream(MemoryMappedViewStream stream, long capacity, MemoryMappedFileAccess access)
+        protected static void ValidateMemoryMappedViewStream(
+            MemoryMappedViewStream stream,
+            long capacity,
+            MemoryMappedFileAccess access
+        )
         {
             // Validate the stream and its handle
             Assert.NotNull(stream);

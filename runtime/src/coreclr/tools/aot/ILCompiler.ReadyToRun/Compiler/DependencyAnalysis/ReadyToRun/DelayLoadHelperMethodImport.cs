@@ -2,11 +2,10 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System.Collections.Generic;
-
 using Internal.JitInterface;
+using Internal.ReadyToRunConstants;
 using Internal.Text;
 using Internal.TypeSystem;
-using Internal.ReadyToRunConstants;
 
 namespace ILCompiler.DependencyAnalysis.ReadyToRun
 {
@@ -22,15 +21,24 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
         private readonly bool _useInstantiatingStub;
 
         public DelayLoadHelperMethodImport(
-            NodeFactory factory, 
-            ImportSectionNode importSectionNode, 
-            ReadyToRunHelper helper, 
+            NodeFactory factory,
+            ImportSectionNode importSectionNode,
+            ReadyToRunHelper helper,
             MethodWithToken method,
             bool useVirtualCall,
             bool useInstantiatingStub,
-            Signature instanceSignature, 
-            MethodDesc callingMethod = null)
-            : base(factory, importSectionNode, helper, instanceSignature, useVirtualCall, useJumpableStub: false, callingMethod)
+            Signature instanceSignature,
+            MethodDesc callingMethod = null
+        )
+            : base(
+                factory,
+                importSectionNode,
+                helper,
+                instanceSignature,
+                useVirtualCall,
+                useJumpableStub: false,
+                callingMethod
+            )
         {
             _method = method;
             _useInstantiatingStub = useInstantiatingStub;
@@ -45,7 +53,9 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
             if (_useInstantiatingStub)
             {
                 // Require compilation of the canonical version for instantiating stubs
-                MethodDesc canonMethod = _method.Method.GetCanonMethodTarget(CanonicalFormKind.Specific);
+                MethodDesc canonMethod = _method.Method.GetCanonMethodTarget(
+                    CanonicalFormKind.Specific
+                );
                 if (factory.CompilationModuleGroup.ContainsMethodBody(canonMethod, false))
                 {
                     bool useDependency = true;
@@ -60,7 +70,10 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
                     if (useDependency)
                     {
                         ISymbolNode canonMethodNode = factory.CompiledMethodNode(canonMethod);
-                        yield return new DependencyListEntry(canonMethodNode, "Canonical method for instantiating stub");
+                        yield return new DependencyListEntry(
+                            canonMethodNode,
+                            "Canonical method for instantiating stub"
+                        );
                     }
                 }
             }

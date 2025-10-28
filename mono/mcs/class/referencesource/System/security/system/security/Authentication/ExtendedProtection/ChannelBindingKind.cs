@@ -10,6 +10,6 @@ namespace System.Security.Authentication.ExtendedProtection
     {
         Unknown = 0,
         Unique = 0x19,
-        Endpoint = 0x1A
+        Endpoint = 0x1A,
     }
 }

@@ -43,7 +43,11 @@ namespace System.Net.Test.Common
 
         public long StreamId => _stream.Id;
 
-        public async Task<HttpRequestData> HandleRequestAsync(HttpStatusCode statusCode = HttpStatusCode.OK, IList<HttpHeaderData> headers = null, string content = "")
+        public async Task<HttpRequestData> HandleRequestAsync(
+            HttpStatusCode statusCode = HttpStatusCode.OK,
+            IList<HttpHeaderData> headers = null,
+            string content = ""
+        )
         {
             HttpRequestData request = await ReadRequestDataAsync().ConfigureAwait(false);
             await SendResponseAsync(statusCode, headers, content).ConfigureAwait(false);
@@ -65,14 +69,22 @@ namespace System.Net.Test.Common
 
             foreach (SettingsEntry setting in settingsEntries)
             {
-                bytesWritten += EncodeHttpInteger((int)setting.SettingId, buffer.AsSpan(bytesWritten));
+                bytesWritten += EncodeHttpInteger(
+                    (int)setting.SettingId,
+                    buffer.AsSpan(bytesWritten)
+                );
                 bytesWritten += EncodeHttpInteger(setting.Value, buffer.AsSpan(bytesWritten));
             }
 
-            await SendFrameAsync(SettingsFrame, buffer.AsMemory(0, bytesWritten)).ConfigureAwait(false);
+            await SendFrameAsync(SettingsFrame, buffer.AsMemory(0, bytesWritten))
+                .ConfigureAwait(false);
         }
 
-        private Memory<byte> ConstructHeadersPayload(HttpStatusCode? statusCode, IEnumerable<HttpHeaderData> headers, bool qpackEncodeStatus = false)
+        private Memory<byte> ConstructHeadersPayload(
+            HttpStatusCode? statusCode,
+            IEnumerable<HttpHeaderData> headers,
+            bool qpackEncodeStatus = false
+        )
         {
             int bufferLength = QPackTestEncoder.MaxPrefixLength;
 
@@ -84,8 +96,14 @@ namespace System.Net.Test.Common
                 }
                 else
                 {
-                    headers = headers.Prepend(new HttpHeaderData(":status", ((int)statusCode.Value).ToString(CultureInfo.InvariantCulture)));
-                };
+                    headers = headers.Prepend(
+                        new HttpHeaderData(
+                            ":status",
+                            ((int)statusCode.Value).ToString(CultureInfo.InvariantCulture)
+                        )
+                    );
+                }
+                ;
             }
 
             foreach (HttpHeaderData header in headers)
@@ -94,7 +112,10 @@ namespace System.Net.Test.Common
                 Debug.Assert(header.Value != null);
 
                 // Two varints for length, and double the name/value lengths to account for expanding Huffman coding.
-                bufferLength += QPackTestEncoder.MaxVarIntLength * 2 + header.Name.Length * 2 + header.Value.Length * 2;
+                bufferLength +=
+                    QPackTestEncoder.MaxVarIntLength * 2
+                    + header.Name.Length * 2
+                    + header.Value.Length * 2;
             }
 
             var buffer = new byte[bufferLength];
@@ -104,23 +125,43 @@ namespace System.Net.Test.Common
 
             if (statusCode.HasValue && qpackEncodeStatus)
             {
-                bytesWritten += QPackTestEncoder.EncodeStatusCode((int)statusCode.Value, buffer.AsSpan(bytesWritten));
+                bytesWritten += QPackTestEncoder.EncodeStatusCode(
+                    (int)statusCode.Value,
+                    buffer.AsSpan(bytesWritten)
+                );
             }
 
             foreach (HttpHeaderData header in headers)
             {
-                bytesWritten += QPackTestEncoder.EncodeHeader(buffer.AsSpan(bytesWritten), header.Name, header.Value, header.ValueEncoding, header.HuffmanEncoded ? QPackFlags.HuffmanEncode : QPackFlags.None);
+                bytesWritten += QPackTestEncoder.EncodeHeader(
+                    buffer.AsSpan(bytesWritten),
+                    header.Name,
+                    header.Value,
+                    header.ValueEncoding,
+                    header.HuffmanEncoded ? QPackFlags.HuffmanEncode : QPackFlags.None
+                );
             }
 
             return buffer.AsMemory(0, bytesWritten);
         }
 
-        private async Task SendHeadersFrameAsync(HttpStatusCode? statusCode, IEnumerable<HttpHeaderData> headers, bool qpackEncodeStatus = false)
+        private async Task SendHeadersFrameAsync(
+            HttpStatusCode? statusCode,
+            IEnumerable<HttpHeaderData> headers,
+            bool qpackEncodeStatus = false
+        )
         {
-            await SendFrameAsync(HeadersFrame, ConstructHeadersPayload(statusCode, headers, qpackEncodeStatus)).ConfigureAwait(false);
+            await SendFrameAsync(
+                    HeadersFrame,
+                    ConstructHeadersPayload(statusCode, headers, qpackEncodeStatus)
+                )
+                .ConfigureAwait(false);
         }
 
-        private async Task SendPartialHeadersFrameAsync(HttpStatusCode? statusCode, IEnumerable<HttpHeaderData> headers)
+        private async Task SendPartialHeadersFrameAsync(
+            HttpStatusCode? statusCode,
+            IEnumerable<HttpHeaderData> headers
+        )
         {
             Memory<byte> payload = ConstructHeadersPayload(statusCode, headers);
 
@@ -181,7 +222,10 @@ namespace System.Net.Test.Common
             }
             else if (longToEncode < TwoByteLimit)
             {
-                BinaryPrimitives.WriteUInt16BigEndian(buffer, (ushort)((uint)longToEncode | 0x4000u));
+                BinaryPrimitives.WriteUInt16BigEndian(
+                    buffer,
+                    (ushort)((uint)longToEncode | 0x4000u)
+                );
                 return 2;
             }
             else if (longToEncode < FourByteLimit)
@@ -191,7 +235,10 @@ namespace System.Net.Test.Common
             }
             else
             {
-                BinaryPrimitives.WriteUInt64BigEndian(buffer, (ulong)longToEncode | 0xC000000000000000);
+                BinaryPrimitives.WriteUInt64BigEndian(
+                    buffer,
+                    (ulong)longToEncode | 0xC000000000000000
+                );
                 return 8;
             }
         }
@@ -223,8 +270,12 @@ namespace System.Net.Test.Common
         {
             (long? frameType, byte[] payload) = await ReadFrameAsync().ConfigureAwait(false);
 
-            if (frameType == null) throw new Exception("unable to read request headers; unexpected end of stream.");
-            if (frameType != HeadersFrame) throw new Exception($"unable to read request headers; received frame type 0x{frameType:x}.");
+            if (frameType == null)
+                throw new Exception("unable to read request headers; unexpected end of stream.");
+            if (frameType != HeadersFrame)
+                throw new Exception(
+                    $"unable to read request headers; received frame type 0x{frameType:x}."
+                );
 
             HttpRequestData requestData = ParseHeaders(payload);
 
@@ -236,17 +287,28 @@ namespace System.Net.Test.Common
             return requestData;
         }
 
-        public async Task SendResponseAsync(HttpStatusCode statusCode = HttpStatusCode.OK, IList<HttpHeaderData> headers = null, string content = "", bool isFinal = true)
+        public async Task SendResponseAsync(
+            HttpStatusCode statusCode = HttpStatusCode.OK,
+            IList<HttpHeaderData> headers = null,
+            string content = "",
+            bool isFinal = true
+        )
         {
             IEnumerable<HttpHeaderData> newHeaders = headers ?? Enumerable.Empty<HttpHeaderData>();
 
             if (content != null && !newHeaders.Any(x => x.Name == "Content-Length"))
             {
-                newHeaders = newHeaders.Append(new HttpHeaderData("Content-Length", content.Length.ToString(CultureInfo.InvariantCulture)));
+                newHeaders = newHeaders.Append(
+                    new HttpHeaderData(
+                        "Content-Length",
+                        content.Length.ToString(CultureInfo.InvariantCulture)
+                    )
+                );
             }
 
             await SendResponseHeadersAsync(statusCode, newHeaders).ConfigureAwait(false);
-            await SendResponseBodyAsync(Encoding.UTF8.GetBytes(content ?? ""), isFinal).ConfigureAwait(false);
+            await SendResponseBodyAsync(Encoding.UTF8.GetBytes(content ?? ""), isFinal)
+                .ConfigureAwait(false);
         }
 
         private IEnumerable<HttpHeaderData> PrepareHeaders(IEnumerable<HttpHeaderData> headers)
@@ -259,19 +321,29 @@ namespace System.Net.Test.Common
             return headers;
         }
 
-        public async Task SendResponseHeadersAsync(HttpStatusCode? statusCode = HttpStatusCode.OK, IEnumerable<HttpHeaderData> headers = null)
+        public async Task SendResponseHeadersAsync(
+            HttpStatusCode? statusCode = HttpStatusCode.OK,
+            IEnumerable<HttpHeaderData> headers = null
+        )
         {
             headers = PrepareHeaders(headers);
             await SendHeadersFrameAsync(statusCode, headers).ConfigureAwait(false);
         }
 
-        public async Task SendResponseHeadersWithEncodedStatusAsync(HttpStatusCode statusCode = HttpStatusCode.OK, IEnumerable<HttpHeaderData> headers = null)
+        public async Task SendResponseHeadersWithEncodedStatusAsync(
+            HttpStatusCode statusCode = HttpStatusCode.OK,
+            IEnumerable<HttpHeaderData> headers = null
+        )
         {
             headers = PrepareHeaders(headers);
-            await SendHeadersFrameAsync(statusCode, headers, qpackEncodeStatus: true).ConfigureAwait(false);
+            await SendHeadersFrameAsync(statusCode, headers, qpackEncodeStatus: true)
+                .ConfigureAwait(false);
         }
 
-        public async Task SendPartialResponseHeadersAsync(HttpStatusCode statusCode = HttpStatusCode.OK, IEnumerable<HttpHeaderData> headers = null)
+        public async Task SendPartialResponseHeadersAsync(
+            HttpStatusCode statusCode = HttpStatusCode.OK,
+            IEnumerable<HttpHeaderData> headers = null
+        )
         {
             headers = PrepareHeaders(headers);
             await SendPartialHeadersFrameAsync(statusCode, headers).ConfigureAwait(false);
@@ -294,13 +366,19 @@ namespace System.Net.Test.Common
         {
             (long? frameType, byte[] payload) = await ReadFrameAsync().ConfigureAwait(false);
 
-            if (frameType == null) throw new Exception("Unable to read settings; unexpected end of stream.");
-            if (frameType != SettingsFrame) throw new Exception($"Unable to read settings; received frame type 0x{frameType:x}.");
+            if (frameType == null)
+                throw new Exception("Unable to read settings; unexpected end of stream.");
+            if (frameType != SettingsFrame)
+                throw new Exception(
+                    $"Unable to read settings; received frame type 0x{frameType:x}."
+                );
 
             return ParseSettingsPayload(payload);
         }
 
-        private List<(long settingId, long settingValue)> ParseSettingsPayload(ReadOnlySpan<byte> settingsPayload)
+        private List<(long settingId, long settingValue)> ParseSettingsPayload(
+            ReadOnlySpan<byte> settingsPayload
+        )
         {
             var settings = new List<(long settingId, long settingValue)>();
 
@@ -315,7 +393,9 @@ namespace System.Net.Test.Common
 
                 if (!TryDecodeHttpInteger(settingsPayload, out long settingValue, out bytesRead))
                 {
-                    throw new Exception($"Unable to read value for setting 0x{settingId:x}; unexpected end of payload.");
+                    throw new Exception(
+                        $"Unable to read value for setting 0x{settingId:x}; unexpected end of payload."
+                    );
                 }
 
                 settingsPayload = settingsPayload.Slice(bytesRead);
@@ -327,10 +407,15 @@ namespace System.Net.Test.Common
 
         private HttpRequestData ParseHeaders(ReadOnlySpan<byte> buffer)
         {
-            HttpRequestData request = new HttpRequestData { RequestId = Http3LoopbackConnection.GetRequestId(_stream) };
+            HttpRequestData request = new HttpRequestData
+            {
+                RequestId = Http3LoopbackConnection.GetRequestId(_stream),
+            };
 
-            (int prefixLength, int requiredInsertCount, int deltaBase) = QPackTestDecoder.DecodePrefix(buffer);
-            if (requiredInsertCount != 0 || deltaBase != 0) throw new Exception("QPack dynamic table not yet supported.");
+            (int prefixLength, int requiredInsertCount, int deltaBase) =
+                QPackTestDecoder.DecodePrefix(buffer);
+            if (requiredInsertCount != 0 || deltaBase != 0)
+                throw new Exception("QPack dynamic table not yet supported.");
 
             buffer = buffer.Slice(prefixLength);
 
@@ -374,11 +459,16 @@ namespace System.Net.Test.Common
                         int bytesRead = await _stream.ReadAsync(new byte[1]);
                         if (bytesRead != 0)
                         {
-                            throw new Exception($"Unexpected data received while waiting for client cancllation.");
+                            throw new Exception(
+                                $"Unexpected data received while waiting for client cancllation."
+                            );
                         }
                     }
                 }
-                catch (QuicException ex) when (ex.QuicError == QuicError.StreamAborted && ex.ApplicationErrorCode == Http3LoopbackConnection.H3_REQUEST_CANCELLED)
+                catch (QuicException ex)
+                    when (ex.QuicError == QuicError.StreamAborted
+                        && ex.ApplicationErrorCode == Http3LoopbackConnection.H3_REQUEST_CANCELLED
+                    )
                 {
                     readCanceled = true;
                 }
@@ -390,7 +480,10 @@ namespace System.Net.Test.Common
                 {
                     await _stream.WritesClosed;
                 }
-                catch (QuicException ex) when (ex.QuicError == QuicError.StreamAborted && ex.ApplicationErrorCode == Http3LoopbackConnection.H3_REQUEST_CANCELLED)
+                catch (QuicException ex)
+                    when (ex.QuicError == QuicError.StreamAborted
+                        && ex.ApplicationErrorCode == Http3LoopbackConnection.H3_REQUEST_CANCELLED
+                    )
                 {
                     writeCanceled = true;
                 }
@@ -400,7 +493,9 @@ namespace System.Net.Test.Common
 
             if (!readCanceled && !writeCanceled)
             {
-                throw new Exception("Both read and write completed successfully; expected clien cancellation");
+                throw new Exception(
+                    "Both read and write completed successfully; expected clien cancellation"
+                );
             }
         }
 
@@ -418,7 +513,9 @@ namespace System.Net.Test.Common
                     case DataFrame:
                         break;
                     default:
-                        throw new Exception($"Unexpected frame type {frameType} while draining response data.");
+                        throw new Exception(
+                            $"Unexpected frame type {frameType} while draining response data."
+                        );
                 }
             }
         }
@@ -431,18 +528,23 @@ namespace System.Net.Test.Common
         public async Task<(long? frameType, byte[] payload)> ReadFrameAsync()
         {
             long? frameType = await ReadIntegerAsync().ConfigureAwait(false);
-            if (frameType == null) return (null, null);
+            if (frameType == null)
+                return (null, null);
 
             long? payloadLength = await ReadIntegerAsync().ConfigureAwait(false);
-            if (payloadLength == null) throw new Exception("Unable to read frame; unexpected end of stream.");
+            if (payloadLength == null)
+                throw new Exception("Unable to read frame; unexpected end of stream.");
 
             byte[] payload = new byte[checked((int)payloadLength)];
             int totalBytesRead = 0;
 
             while (totalBytesRead != payloadLength)
             {
-                int bytesRead = await _stream.ReadAsync(payload.AsMemory(totalBytesRead)).ConfigureAwait(false);
-                if (bytesRead == 0) throw new Exception("Unable to read frame; unexpected end of stream.");
+                int bytesRead = await _stream
+                    .ReadAsync(payload.AsMemory(totalBytesRead))
+                    .ConfigureAwait(false);
+                if (bytesRead == 0)
+                    throw new Exception("Unable to read frame; unexpected end of stream.");
 
                 totalBytesRead += bytesRead;
             }
@@ -460,21 +562,34 @@ namespace System.Net.Test.Common
 
             do
             {
-                bytesRead = await _stream.ReadAsync(buffer.AsMemory(bufferActiveLength++, 1)).ConfigureAwait(false);
+                bytesRead = await _stream
+                    .ReadAsync(buffer.AsMemory(bufferActiveLength++, 1))
+                    .ConfigureAwait(false);
                 if (bytesRead == 0)
                 {
-                    return bufferActiveLength == 1 ? (long?)null : throw new Exception("Unable to read varint; unexpected end of stream.");
+                    return bufferActiveLength == 1
+                        ? (long?)null
+                        : throw new Exception("Unable to read varint; unexpected end of stream.");
                 }
                 Debug.Assert(bytesRead == 1);
-            }
-            while (!TryDecodeHttpInteger(buffer.AsSpan(0, bufferActiveLength), out integerValue, out bytesRead));
+            } while (
+                !TryDecodeHttpInteger(
+                    buffer.AsSpan(0, bufferActiveLength),
+                    out integerValue,
+                    out bytesRead
+                )
+            );
 
             Debug.Assert(bytesRead == bufferActiveLength);
 
             return integerValue;
         }
 
-        static bool TryDecodeHttpInteger(ReadOnlySpan<byte> buffer, out long value, out int bytesRead)
+        static bool TryDecodeHttpInteger(
+            ReadOnlySpan<byte> buffer,
+            out long value,
+            out int bytesRead
+        )
         {
             const byte LengthMask = 0xC0;
             const byte LengthOneByte = 0x00;
@@ -497,7 +612,12 @@ namespace System.Net.Test.Common
                         bytesRead = 1;
                         return true;
                     case LengthTwoByte:
-                        if (BinaryPrimitives.TryReadUInt16BigEndian(buffer, out ushort serializedShort))
+                        if (
+                            BinaryPrimitives.TryReadUInt16BigEndian(
+                                buffer,
+                                out ushort serializedShort
+                            )
+                        )
                         {
                             value = serializedShort - TwoByteSubtract;
                             bytesRead = 2;
@@ -514,10 +634,18 @@ namespace System.Net.Test.Common
                         break;
                     default: // LengthEightByte
                         Debug.Assert((firstByte & LengthMask) == LengthEightByte);
-                        if (BinaryPrimitives.TryReadUInt64BigEndian(buffer, out ulong serializedLong))
+                        if (
+                            BinaryPrimitives.TryReadUInt64BigEndian(
+                                buffer,
+                                out ulong serializedLong
+                            )
+                        )
                         {
                             value = (long)(serializedLong - EightByteSubtract);
-                            Debug.Assert(value >= 0 && value <= VarIntMax, "Serialized values are within [0, 2^62).");
+                            Debug.Assert(
+                                value >= 0 && value <= VarIntMax,
+                                "Serialized values are within [0, 2^62)."
+                            );
 
                             bytesRead = 8;
                             return true;
@@ -531,5 +659,4 @@ namespace System.Net.Test.Common
             return false;
         }
     }
-
 }

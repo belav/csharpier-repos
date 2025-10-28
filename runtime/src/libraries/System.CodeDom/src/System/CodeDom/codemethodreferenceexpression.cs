@@ -16,7 +16,11 @@ namespace System.CodeDom
             MethodName = methodName;
         }
 
-        public CodeMethodReferenceExpression(CodeExpression targetObject, string methodName, params CodeTypeReference[] typeParameters)
+        public CodeMethodReferenceExpression(
+            CodeExpression targetObject,
+            string methodName,
+            params CodeTypeReference[] typeParameters
+        )
         {
             TargetObject = targetObject;
             MethodName = methodName;
@@ -34,6 +38,7 @@ namespace System.CodeDom
             set => _methodName = value;
         }
 
-        public CodeTypeReferenceCollection TypeArguments => _typeArguments ??= new CodeTypeReferenceCollection();
+        public CodeTypeReferenceCollection TypeArguments =>
+            _typeArguments ??= new CodeTypeReferenceCollection();
     }
 }

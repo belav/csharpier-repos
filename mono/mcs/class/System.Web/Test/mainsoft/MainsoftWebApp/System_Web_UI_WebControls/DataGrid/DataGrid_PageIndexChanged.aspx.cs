@@ -28,121 +28,137 @@
 //
 
 using System;
-using System.Data;
 using System.Collections;
+using System.Data;
 using System.Web;
 using System.Web.UI;
-using System.Web.UI.WebControls;
 using System.Web.UI.HtmlControls;
+using System.Web.UI.WebControls;
 
 namespace GHTTests.System_Web_dll.System_Web_UI_WebControls
 {
-	public class DataGrid_PageIndexChanged
-		: GHTBaseWeb 
-	{
-		protected System.Web.UI.WebControls.DataGrid DataGrid1;
-		protected GHTWebControls.GHTSubTest GHTSubTest1;
-		protected System.Web.UI.WebControls.DataGrid DataGrid2;
-		protected GHTWebControls.GHTSubTest Ghtsubtest2;
-		#region Web Form Designer generated code
-		override protected void OnInit(EventArgs e) 
-		{
-			//
-			// CODEGEN: This call is required by the ASP.NET Web Form Designer.
-			//
-			InitializeComponent();
-			base.OnInit(e);
-		}
-		
-		/// <summary>
-		/// Required method for Designer support - do not modify
-		/// the contents of this method with the code editor.
-		/// </summary>
-		private void InitializeComponent() 
-		{    
-			this.Load += new System.EventHandler(this.Page_Load);
-			this.DataGrid1.ItemDataBound += new DataGridItemEventHandler(DataGrid1_ItemDataBound);
-			this.DataGrid1.PageIndexChanged += new DataGridPageChangedEventHandler(DataGrid1_PageIndexChanged);
-			this.DataGrid2.ItemDataBound += new DataGridItemEventHandler(DataGrid2_ItemDataBound);
-			this.DataGrid2.PageIndexChanged += new DataGridPageChangedEventHandler(DataGrid2_PageIndexChanged);
-		}
-		#endregion
+    public class DataGrid_PageIndexChanged : GHTBaseWeb
+    {
+        protected System.Web.UI.WebControls.DataGrid DataGrid1;
+        protected GHTWebControls.GHTSubTest GHTSubTest1;
+        protected System.Web.UI.WebControls.DataGrid DataGrid2;
+        protected GHTWebControls.GHTSubTest Ghtsubtest2;
 
-		private void BindGrid(System.Web.UI.WebControls.DataGrid dg)
-		{
-			dg.DataSource = GHTTests.GHDataSources.DSDataTable();
-			dg.DataBind();;
-		}
+        #region Web Form Designer generated code
+        override protected void OnInit(EventArgs e)
+        {
+            //
+            // CODEGEN: This call is required by the ASP.NET Web Form Designer.
+            //
+            InitializeComponent();
+            base.OnInit(e);
+        }
 
-		private void Page_Load(object sender, System.EventArgs e) 
-		{
-			//Put user code to initialize the page here
+        /// <summary>
+        /// Required method for Designer support - do not modify
+        /// the contents of this method with the code editor.
+        /// </summary>
+        private void InitializeComponent()
+        {
+            this.Load += new System.EventHandler(this.Page_Load);
+            this.DataGrid1.ItemDataBound += new DataGridItemEventHandler(DataGrid1_ItemDataBound);
+            this.DataGrid1.PageIndexChanged += new DataGridPageChangedEventHandler(
+                DataGrid1_PageIndexChanged
+            );
+            this.DataGrid2.ItemDataBound += new DataGridItemEventHandler(DataGrid2_ItemDataBound);
+            this.DataGrid2.PageIndexChanged += new DataGridPageChangedEventHandler(
+                DataGrid2_PageIndexChanged
+            );
+        }
+        #endregion
 
-			System.Web.UI.HtmlControls.HtmlForm frm = (HtmlForm)this.FindControl("Form1");
-			GHTTestBegin(frm);
+        private void BindGrid(System.Web.UI.WebControls.DataGrid dg)
+        {
+            dg.DataSource = GHTTests.GHDataSources.DSDataTable();
+            dg.DataBind();
+            ;
+        }
 
-			GHTActiveSubTest = GHTSubTest1;
-			try 
-			{
-				DataGrid1.AllowPaging = true;
-				DataGrid1.ShowFooter = true;
-				BindGrid(DataGrid1);
-			}
+        private void Page_Load(object sender, System.EventArgs e)
+        {
+            //Put user code to initialize the page here
 
-			catch (Exception ex) 
-			{
-				GHTSubTestUnexpectedExceptionCaught(ex);
-			}
+            System.Web.UI.HtmlControls.HtmlForm frm = (HtmlForm)this.FindControl("Form1");
+            GHTTestBegin(frm);
 
-			GHTActiveSubTest = Ghtsubtest2;
-			try 
-			{
-				DataGrid2.AllowPaging = true;
-				DataGrid2.ShowFooter = true;
-				DataGrid2.PagerStyle.Mode = PagerMode.NumericPages;
-				DataGrid2.PageSize = 5;
-				BindGrid(DataGrid2);
-			}
-			catch (Exception ex) 
-			{
-				GHTSubTestUnexpectedExceptionCaught(ex);
-			}
+            GHTActiveSubTest = GHTSubTest1;
+            try
+            {
+                DataGrid1.AllowPaging = true;
+                DataGrid1.ShowFooter = true;
+                BindGrid(DataGrid1);
+            }
+            catch (Exception ex)
+            {
+                GHTSubTestUnexpectedExceptionCaught(ex);
+            }
 
-			GHTTestEnd();
-		}
+            GHTActiveSubTest = Ghtsubtest2;
+            try
+            {
+                DataGrid2.AllowPaging = true;
+                DataGrid2.ShowFooter = true;
+                DataGrid2.PagerStyle.Mode = PagerMode.NumericPages;
+                DataGrid2.PageSize = 5;
+                BindGrid(DataGrid2);
+            }
+            catch (Exception ex)
+            {
+                GHTSubTestUnexpectedExceptionCaught(ex);
+            }
 
-		private void DataGrid1_PageIndexChanged(object source, System.Web.UI.WebControls.DataGridPageChangedEventArgs e)
-		{
-			DataGrid1.CurrentPageIndex = e.NewPageIndex;
-			BindGrid(DataGrid1);
-		}
+            GHTTestEnd();
+        }
 
-		private void DataGrid1_ItemDataBound(object sender, System.Web.UI.WebControls.DataGridItemEventArgs e)
-		{
-			ListItemType itemType = (ListItemType)e.Item.ItemType;
+        private void DataGrid1_PageIndexChanged(
+            object source,
+            System.Web.UI.WebControls.DataGridPageChangedEventArgs e
+        )
+        {
+            DataGrid1.CurrentPageIndex = e.NewPageIndex;
+            BindGrid(DataGrid1);
+        }
 
-			if (itemType == ListItemType.Footer)
-			{
-				e.Item.Cells[0].Text = "Page:";
-				e.Item.Cells[1].Text = DataGrid1.CurrentPageIndex.ToString();
-			}
-		}
+        private void DataGrid1_ItemDataBound(
+            object sender,
+            System.Web.UI.WebControls.DataGridItemEventArgs e
+        )
+        {
+            ListItemType itemType = (ListItemType)e.Item.ItemType;
 
-		private void DataGrid2_PageIndexChanged(object source, System.Web.UI.WebControls.DataGridPageChangedEventArgs e)
-		{
-			DataGrid2.CurrentPageIndex = e.NewPageIndex;
-			BindGrid(DataGrid2);
-		}
+            if (itemType == ListItemType.Footer)
+            {
+                e.Item.Cells[0].Text = "Page:";
+                e.Item.Cells[1].Text = DataGrid1.CurrentPageIndex.ToString();
+            }
+        }
 
-		private void DataGrid2_ItemDataBound(object sender, System.Web.UI.WebControls.DataGridItemEventArgs e)
-		{
-			ListItemType itemType = (ListItemType)e.Item.ItemType;
+        private void DataGrid2_PageIndexChanged(
+            object source,
+            System.Web.UI.WebControls.DataGridPageChangedEventArgs e
+        )
+        {
+            DataGrid2.CurrentPageIndex = e.NewPageIndex;
+            BindGrid(DataGrid2);
+        }
 
-			if (itemType == ListItemType.Footer)
-			{
-				e.Item.Cells[0].Text = "Page:";
-				e.Item.Cells[1].Text = DataGrid2.CurrentPageIndex.ToString();
-			}
-		}
-	}
+        private void DataGrid2_ItemDataBound(
+            object sender,
+            System.Web.UI.WebControls.DataGridItemEventArgs e
+        )
+        {
+            ListItemType itemType = (ListItemType)e.Item.ItemType;
+
+            if (itemType == ListItemType.Footer)
+            {
+                e.Item.Cells[0].Text = "Page:";
+                e.Item.Cells[1].Text = DataGrid2.CurrentPageIndex.ToString();
+            }
+        }
+    }
 }

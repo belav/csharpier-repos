@@ -25,9 +25,10 @@ namespace Microsoft.CodeAnalysis.Rename.ConflictEngine
         [property: DataMember(Order = 1)] DocumentId DocumentId,
         [property: DataMember(Order = 2)] RelatedLocationType Type,
         [property: DataMember(Order = 3)] bool IsReference = false,
-        [property: DataMember(Order = 4)] TextSpan ComplexifiedTargetSpan = default)
+        [property: DataMember(Order = 4)] TextSpan ComplexifiedTargetSpan = default
+    )
     {
-        public RelatedLocation WithType(RelatedLocationType type)
-            => new(ConflictCheckSpan, DocumentId, type, IsReference, ComplexifiedTargetSpan);
+        public RelatedLocation WithType(RelatedLocationType type) =>
+            new(ConflictCheckSpan, DocumentId, type, IsReference, ComplexifiedTargetSpan);
     }
 }

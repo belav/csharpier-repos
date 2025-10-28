@@ -16,7 +16,10 @@ namespace System.Activities.Expressions
     // consciously not XAML-friendly since Linq Expressions aren't create-set-use
     [Fx.Tag.XamlVisible(false)]
     [DebuggerStepThrough]
-    public sealed class LambdaReference<T> : CodeActivity<Location<T>>, IExpressionContainer, IValueSerializableExpression
+    public sealed class LambdaReference<T>
+        : CodeActivity<Location<T>>,
+            IExpressionContainer,
+            IValueSerializableExpression
     {
         Expression<Func<ActivityContext, T>> locationExpression;
         Expression<Func<ActivityContext, T>> rewrittenTree;
@@ -35,19 +38,24 @@ namespace System.Activities.Expressions
         // this is called via reflection from Microsoft.CDF.Test.ExpressionUtilities.Activities.ActivityUtilities.ReplaceLambdaValuesInActivityTree
         internal Expression LambdaExpression
         {
-            get
-            {
-                return this.locationExpression;
-            }
+            get { return this.locationExpression; }
         }
 
         protected override void CacheMetadata(CodeActivityMetadata metadata)
         {
-            CodeActivityPublicEnvironmentAccessor publicAccessor = CodeActivityPublicEnvironmentAccessor.Create(metadata);
+            CodeActivityPublicEnvironmentAccessor publicAccessor =
+                CodeActivityPublicEnvironmentAccessor.Create(metadata);
 
             // We need to rewrite the tree.
             Expression newTree;
-            if (ExpressionUtilities.TryRewriteLambdaExpression(this.locationExpression, out newTree, publicAccessor, true))
+            if (
+                ExpressionUtilities.TryRewriteLambdaExpression(
+                    this.locationExpression,
+                    out newTree,
+                    publicAccessor,
+                    true
+                )
+            )
             {
                 this.rewrittenTree = (Expression<Func<ActivityContext, T>>)newTree;
             }
@@ -58,7 +66,13 @@ namespace System.Activities.Expressions
 
             // inspect the expressionTree to see if it is a valid location expression(L-value)
             string extraErrorMessage = null;
-            if (!ExpressionUtilities.IsLocation(this.rewrittenTree, typeof(T), out extraErrorMessage))
+            if (
+                !ExpressionUtilities.IsLocation(
+                    this.rewrittenTree,
+                    typeof(T),
+                    out extraErrorMessage
+                )
+            )
             {
                 string errorMessage = SR.InvalidLValueExpression;
                 if (extraErrorMessage != null)
@@ -73,7 +87,9 @@ namespace System.Activities.Expressions
         {
             if (this.locationFactory == null)
             {
-                this.locationFactory = ExpressionUtilities.CreateLocationFactory<T>(this.rewrittenTree);
+                this.locationFactory = ExpressionUtilities.CreateLocationFactory<T>(
+                    this.rewrittenTree
+                );
             }
             return this.locationFactory.CreateLocation(context);
         }
@@ -85,10 +101,10 @@ namespace System.Activities.Expressions
 
         public string ConvertToString(IValueSerializerContext context)
         {
-            // This workflow contains lambda expressions specified in code. 
-            // These expressions are not XAML serializable. 
-            // In order to make your workflow XAML-serializable, 
-            // use either VisualBasicValue/Reference or ExpressionServices.Convert  
+            // This workflow contains lambda expressions specified in code.
+            // These expressions are not XAML serializable.
+            // In order to make your workflow XAML-serializable,
+            // use either VisualBasicValue/Reference or ExpressionServices.Convert
             // This will convert your lambda expressions into expression activities.
             throw FxTrace.Exception.AsError(new LambdaSerializationException());
         }

@@ -1,5 +1,4 @@
 <Project Sdk="Microsoft.NET.Sdk">
-
   <PropertyGroup>
     <StrongNameKeyId>Microsoft</StrongNameKeyId>
   </PropertyGroup>
@@ -38,5 +37,4 @@
     <ForwardedType Include="System.Security.Cryptography.Pkcs.SubjectIdentifierType" />
     <ForwardedType Include="System.Security.Cryptography.Xml.X509IssuerSerial" />
   </ItemGroup>
-
 </Project>

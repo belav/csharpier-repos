@@ -18,12 +18,20 @@ namespace Microsoft.Web.Helpers
         private const string GravatarUrl = "http://www.gravatar.com/avatar/";
 
         // review - extract conversion of anonymous object to html attributes string into separate helper
-        public static HtmlString GetHtml(string email, int imageSize = 80, string defaultImage = null,
-                                         GravatarRating rating = GravatarRating.Default, string imageExtension = null, object attributes = null)
+        public static HtmlString GetHtml(
+            string email,
+            int imageSize = 80,
+            string defaultImage = null,
+            GravatarRating rating = GravatarRating.Default,
+            string imageExtension = null,
+            object attributes = null
+        )
         {
             bool altSpecified = false;
             string url = GetUrl(email, imageSize, defaultImage, rating, imageExtension);
-            StringBuilder html = new StringBuilder(String.Format(CultureInfo.InvariantCulture, "<img src=\"{0}\" ", url));
+            StringBuilder html = new StringBuilder(
+                String.Format(CultureInfo.InvariantCulture, "<img src=\"{0}\" ", url)
+            );
             if (attributes != null)
             {
                 foreach (var p in attributes.GetType().GetProperties().OrderBy(p => p.Name))
@@ -34,7 +42,14 @@ namespace Microsoft.Web.Helpers
                         if (value != null)
                         {
                             string encodedValue = HttpUtility.HtmlAttributeEncode(value.ToString());
-                            html.Append(String.Format(CultureInfo.InvariantCulture, "{0}=\"{1}\" ", p.Name, encodedValue));
+                            html.Append(
+                                String.Format(
+                                    CultureInfo.InvariantCulture,
+                                    "{0}=\"{1}\" ",
+                                    p.Name,
+                                    encodedValue
+                                )
+                            );
                         }
                         if (p.Name.Equals("alt", StringComparison.OrdinalIgnoreCase))
                         {
@@ -52,18 +67,37 @@ namespace Microsoft.Web.Helpers
         }
 
         // See: http://en.gravatar.com/site/implement/url
-        [SuppressMessage("Microsoft.Design", "CA1055:UriReturnValuesShouldNotBeStrings", Justification = "Strings are easier to work with for Plan9 scenario")]
-        [SuppressMessage("Microsoft.Globalization", "CA1308:NormalizeStringsToUppercase", Justification = "Gravatar.com requires lowercase")]
-        public static string GetUrl(string email, int imageSize = 80, string defaultImage = null,
-                                    GravatarRating rating = GravatarRating.Default, string imageExtension = null)
+        [SuppressMessage(
+            "Microsoft.Design",
+            "CA1055:UriReturnValuesShouldNotBeStrings",
+            Justification = "Strings are easier to work with for Plan9 scenario"
+        )]
+        [SuppressMessage(
+            "Microsoft.Globalization",
+            "CA1308:NormalizeStringsToUppercase",
+            Justification = "Gravatar.com requires lowercase"
+        )]
+        public static string GetUrl(
+            string email,
+            int imageSize = 80,
+            string defaultImage = null,
+            GravatarRating rating = GravatarRating.Default,
+            string imageExtension = null
+        )
         {
             if (String.IsNullOrEmpty(email))
             {
-                throw new ArgumentException(CommonResources.Argument_Cannot_Be_Null_Or_Empty, "email");
+                throw new ArgumentException(
+                    CommonResources.Argument_Cannot_Be_Null_Or_Empty,
+                    "email"
+                );
             }
             if ((imageSize <= 0) || (imageSize > 512))
             {
-                throw new ArgumentException(HelpersToolkitResources.Gravatar_InvalidImageSize, "imageSize");
+                throw new ArgumentException(
+                    HelpersToolkitResources.Gravatar_InvalidImageSize,
+                    "imageSize"
+                );
             }
 
             StringBuilder url = new StringBuilder(GravatarUrl);

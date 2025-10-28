@@ -6,41 +6,44 @@
 // with the bug present test was getting assert dialog box with message that Consistency check failed: FAILED: state.fFound
 
 using System;
-using System.Threading;
 using System.Reflection;
 using System.Reflection.Emit;
+using System.Threading;
 using Xunit;
 
-public class My {
-
+public class My
+{
     static Exception theException = new Exception();
 
-    static void Thrower() {
+    static void Thrower()
+    {
         for (int j = 0; j <= 100; j++)
         {
-            try {
+            try
+            {
                 throw theException;
             }
-            catch {
-            }
+            catch { }
         }
     }
 
-    static void Dynamizer() {
+    static void Dynamizer()
+    {
         for (int j = 0; j <= 100; j++)
         {
-             DynamicMethod method = EmitDynamicMethod(typeof(My).GetMethod("Noop"));
-             ((Action)method.CreateDelegate(typeof(Action)))();    
+            DynamicMethod method = EmitDynamicMethod(typeof(My).GetMethod("Noop"));
+            ((Action)method.CreateDelegate(typeof(Action)))();
         }
     }
 
     static DynamicMethod EmitDynamicMethod(MethodInfo callee)
     {
         DynamicMethod method = new DynamicMethod(
-            "MyMethod", 
-            typeof(void), 
-            new Type[0], 
-            typeof(My).GetTypeInfo().Module);
+            "MyMethod",
+            typeof(void),
+            new Type[0],
+            typeof(My).GetTypeInfo().Module
+        );
 
         ILGenerator il = method.GetILGenerator();
         for (int i = 0; i < 5; i++)
@@ -50,17 +53,18 @@ public class My {
         return method;
     }
 
-    public static void ThrowException() {
+    public static void ThrowException()
+    {
         throw theException;
     }
 
-    public static void Noop() {
-    }
+    public static void Noop() { }
 
-    static void DoStuff() {
+    static void DoStuff()
+    {
         DynamicMethod method = EmitDynamicMethod(typeof(My).GetMethod("ThrowException"));
         for (int i = 0; i < 20; i++)
-             method = EmitDynamicMethod(method);
+            method = EmitDynamicMethod(method);
         ((Action)method.CreateDelegate(typeof(Action)))();
     }
 
@@ -73,27 +77,29 @@ public class My {
 
         Thread.Sleep(100);
         Console.WriteLine("TestCase Started");
-        for (int j=0;j<=100;j++) {             
+        for (int j = 0; j <= 100; j++)
+        {
             Console.WriteLine("Counter = " + j.ToString());
-             try {
-                 try {
-                     
-                     DoStuff();                                          
-                 }
-                 finally {
-                     Console.WriteLine("Sleeping");
-                     Thread.Sleep(100);
-                     Console.WriteLine("Running GC");
-                     GC.Collect();
-                     Console.WriteLine("Waiting for finalizers...");
-                     for (int i = 0; i < 10; i++) GC.WaitForPendingFinalizers();
-                     Console.WriteLine("Running GC");
-                     GC.Collect();
-                 }           
-             }
-             catch (Exception) 
-             {
-             }
+            try
+            {
+                try
+                {
+                    DoStuff();
+                }
+                finally
+                {
+                    Console.WriteLine("Sleeping");
+                    Thread.Sleep(100);
+                    Console.WriteLine("Running GC");
+                    GC.Collect();
+                    Console.WriteLine("Waiting for finalizers...");
+                    for (int i = 0; i < 10; i++)
+                        GC.WaitForPendingFinalizers();
+                    Console.WriteLine("Running GC");
+                    GC.Collect();
+                }
+            }
+            catch (Exception) { }
         }
         Console.WriteLine("Test case Pass");
     }

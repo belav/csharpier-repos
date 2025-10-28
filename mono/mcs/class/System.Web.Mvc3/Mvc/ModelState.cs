@@ -1,19 +1,15 @@
-﻿namespace System.Web.Mvc {
-
+﻿namespace System.Web.Mvc
+{
     [Serializable]
-    public class ModelState {
-
+    public class ModelState
+    {
         private ModelErrorCollection _errors = new ModelErrorCollection();
 
-        public ValueProviderResult Value {
-            get;
-            set;
-        }
+        public ValueProviderResult Value { get; set; }
 
-        public ModelErrorCollection Errors {
-            get {
-                return _errors;
-            }
+        public ModelErrorCollection Errors
+        {
+            get { return _errors; }
         }
     }
 }

@@ -11,7 +11,10 @@ namespace Microsoft.VisualStudio.LanguageServices.ProjectSystem
     /// </summary>
     internal interface ICodeModelFactory
     {
-        EnvDTE.FileCodeModel GetFileCodeModel(IWorkspaceProjectContext context, EnvDTE.ProjectItem item);
+        EnvDTE.FileCodeModel GetFileCodeModel(
+            IWorkspaceProjectContext context,
+            EnvDTE.ProjectItem item
+        );
         EnvDTE.CodeModel GetCodeModel(IWorkspaceProjectContext context, EnvDTE.Project project);
     }
 }

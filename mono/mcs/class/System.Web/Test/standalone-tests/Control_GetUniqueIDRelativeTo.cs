@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -29,36 +29,36 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Web.Util;
-
+using NUnit.Framework;
 using StandAloneRunnerSupport;
 using StandAloneTests;
 
-using NUnit.Framework;
-
-
 namespace StandAloneTests.Control_GetUniqueIDRelativeTo
 {
-	[TestCase ("Control_GetUniqueIDRelativeTo", "Control.GetUniqueIDRelativeTo tests")]
-	public sealed class Control_GetUniqueIDRelativeTo : ITestCase
-	{
-		public string PhysicalPath {
-			get { return Path.Combine (Consts.BasePhysicalDir, "Control_GetUniqueIDRelativeTo"); }
-		}
-		
-		public string VirtualPath  {
-			get { return "/"; }
-		}
+    [TestCase("Control_GetUniqueIDRelativeTo", "Control.GetUniqueIDRelativeTo tests")]
+    public sealed class Control_GetUniqueIDRelativeTo : ITestCase
+    {
+        public string PhysicalPath
+        {
+            get { return Path.Combine(Consts.BasePhysicalDir, "Control_GetUniqueIDRelativeTo"); }
+        }
 
-		public bool SetUp (List <TestRunItem> runItems)
-		{
-			runItems.Add (new TestRunItem ("default.aspx", Default_Aspx));
-			
-			return true;
-		}
-		
-		void Default_Aspx (string result, TestRunItem runItem)
-		{
-			string originalHtml = @"<pre id=""log"">Page; Relative to: null; Result: exception System.ArgumentNullException (expected)
+        public string VirtualPath
+        {
+            get { return "/"; }
+        }
+
+        public bool SetUp(List<TestRunItem> runItems)
+        {
+            runItems.Add(new TestRunItem("default.aspx", Default_Aspx));
+
+            return true;
+        }
+
+        void Default_Aspx(string result, TestRunItem runItem)
+        {
+            string originalHtml =
+                @"<pre id=""log"">Page; Relative to: null; Result: exception System.ArgumentNullException (expected)
 A control; Relative to: __Page; Result: exception System.InvalidOperationException (expected)
 TextBox; Relative to: __Page; Result: exception System.InvalidOperationException (expected)
 Item: 0; Relative to: repeater1$ctl00; Result: &#39;ctl00$label1&#39;
@@ -107,8 +107,7 @@ Item: 2; Relative to: __Page; Result: exception System.InvalidOperationException
 	Item: 2; Relative to: repeater1$ctl04$innerRepeater1; Result: &#39;innerRepeater1$ctl02$innerLabel1&#39;
 	Item: 2; Relative to: __Page; Result: exception System.InvalidOperationException (expected)
 </pre>";
-			Helpers.ExtractAndCompareCodeFromHtml (result, originalHtml, "#A1");
-		}
-	}
+            Helpers.ExtractAndCompareCodeFromHtml(result, originalHtml, "#A1");
+        }
+    }
 }
-

@@ -10,24 +10,36 @@ namespace System.Reflection.Metadata.Ecma335
         private const int TableHeaderSize = 4;
 
         private const int SmallRegionSize =
-            sizeof(short) +  // Flags
-            sizeof(short) +  // TryOffset
-            sizeof(byte) +   // TryLength
-            sizeof(short) +  // HandlerOffset
-            sizeof(byte) +   // HandleLength
-            sizeof(int);     // ClassToken | FilterOffset
+            sizeof(short)
+            + // Flags
+            sizeof(short)
+            + // TryOffset
+            sizeof(byte)
+            + // TryLength
+            sizeof(short)
+            + // HandlerOffset
+            sizeof(byte)
+            + // HandleLength
+            sizeof(int); // ClassToken | FilterOffset
 
         private const int FatRegionSize =
-            sizeof(int) +    // Flags
-            sizeof(int) +    // TryOffset
-            sizeof(int) +    // TryLength
-            sizeof(int) +    // HandlerOffset
-            sizeof(int) +    // HandleLength
-            sizeof(int);     // ClassToken | FilterOffset
+            sizeof(int)
+            + // Flags
+            sizeof(int)
+            + // TryOffset
+            sizeof(int)
+            + // TryLength
+            sizeof(int)
+            + // HandlerOffset
+            sizeof(int)
+            + // HandleLength
+            sizeof(int); // ClassToken | FilterOffset
 
         private const int ThreeBytesMaxValue = 0xffffff;
-        internal const int MaxSmallExceptionRegions = (byte.MaxValue - TableHeaderSize) / SmallRegionSize;
-        internal const int MaxExceptionRegions = (ThreeBytesMaxValue - TableHeaderSize) / FatRegionSize;
+        internal const int MaxSmallExceptionRegions =
+            (byte.MaxValue - TableHeaderSize) / SmallRegionSize;
+        internal const int MaxExceptionRegions =
+            (ThreeBytesMaxValue - TableHeaderSize) / FatRegionSize;
 
         /// <summary>
         /// The underlying builder.
@@ -58,26 +70,34 @@ namespace System.Reflection.Metadata.Ecma335
         /// <param name="startOffset">Start offset of the region.</param>
         /// <param name="length">Length of the region.</param>
         public static bool IsSmallExceptionRegion(int startOffset, int length) =>
-            unchecked((uint)startOffset) <= ushort.MaxValue && unchecked((uint)length) <= byte.MaxValue;
+            unchecked((uint)startOffset) <= ushort.MaxValue
+            && unchecked((uint)length) <= byte.MaxValue;
 
         internal static bool IsSmallExceptionRegionFromBounds(int startOffset, int endOffset) =>
             IsSmallExceptionRegion(startOffset, endOffset - startOffset);
 
         internal static int GetExceptionTableSize(int exceptionRegionCount, bool isSmallFormat) =>
-            TableHeaderSize + exceptionRegionCount * (isSmallFormat ? SmallRegionSize : FatRegionSize);
+            TableHeaderSize
+            + exceptionRegionCount * (isSmallFormat ? SmallRegionSize : FatRegionSize);
 
         internal static bool IsExceptionRegionCountInBounds(int exceptionRegionCount) =>
             unchecked((uint)exceptionRegionCount) <= MaxExceptionRegions;
 
         internal static bool IsValidCatchTypeHandle(EntityHandle catchType)
         {
-            return !catchType.IsNil &&
-                   (catchType.Kind == HandleKind.TypeDefinition ||
-                    catchType.Kind == HandleKind.TypeSpecification ||
-                    catchType.Kind == HandleKind.TypeReference);
+            return !catchType.IsNil
+                && (
+                    catchType.Kind == HandleKind.TypeDefinition
+                    || catchType.Kind == HandleKind.TypeSpecification
+                    || catchType.Kind == HandleKind.TypeReference
+                );
         }
 
-        internal static ExceptionRegionEncoder SerializeTableHeader(BlobBuilder builder, int exceptionRegionCount, bool hasSmallRegions)
+        internal static ExceptionRegionEncoder SerializeTableHeader(
+            BlobBuilder builder,
+            int exceptionRegionCount,
+            bool hasSmallRegions
+        )
         {
             Debug.Assert(exceptionRegionCount > 0);
 
@@ -117,9 +137,22 @@ namespace System.Reflection.Metadata.Ecma335
         /// <paramref name="tryOffset"/>, <paramref name="tryLength"/>, <paramref name="handlerOffset"/> or <paramref name="handlerLength"/> is out of range.
         /// </exception>
         /// <exception cref="InvalidOperationException">Method body was not declared to have exception regions.</exception>
-        public ExceptionRegionEncoder AddFinally(int tryOffset, int tryLength, int handlerOffset, int handlerLength)
+        public ExceptionRegionEncoder AddFinally(
+            int tryOffset,
+            int tryLength,
+            int handlerOffset,
+            int handlerLength
+        )
         {
-            return Add(ExceptionRegionKind.Finally, tryOffset, tryLength, handlerOffset, handlerLength, default(EntityHandle), 0);
+            return Add(
+                ExceptionRegionKind.Finally,
+                tryOffset,
+                tryLength,
+                handlerOffset,
+                handlerLength,
+                default(EntityHandle),
+                0
+            );
         }
 
         /// <summary>
@@ -134,9 +167,22 @@ namespace System.Reflection.Metadata.Ecma335
         /// <paramref name="tryOffset"/>, <paramref name="tryLength"/>, <paramref name="handlerOffset"/> or <paramref name="handlerLength"/> is out of range.
         /// </exception>
         /// <exception cref="InvalidOperationException">Method body was not declared to have exception regions.</exception>
-        public ExceptionRegionEncoder AddFault(int tryOffset, int tryLength, int handlerOffset, int handlerLength)
+        public ExceptionRegionEncoder AddFault(
+            int tryOffset,
+            int tryLength,
+            int handlerOffset,
+            int handlerLength
+        )
         {
-            return Add(ExceptionRegionKind.Fault, tryOffset, tryLength, handlerOffset, handlerLength, default(EntityHandle), 0);
+            return Add(
+                ExceptionRegionKind.Fault,
+                tryOffset,
+                tryLength,
+                handlerOffset,
+                handlerLength,
+                default(EntityHandle),
+                0
+            );
         }
 
         /// <summary>
@@ -155,9 +201,23 @@ namespace System.Reflection.Metadata.Ecma335
         /// <paramref name="tryOffset"/>, <paramref name="tryLength"/>, <paramref name="handlerOffset"/> or <paramref name="handlerLength"/> is out of range.
         /// </exception>
         /// <exception cref="InvalidOperationException">Method body was not declared to have exception regions.</exception>
-        public ExceptionRegionEncoder AddCatch(int tryOffset, int tryLength, int handlerOffset, int handlerLength, EntityHandle catchType)
+        public ExceptionRegionEncoder AddCatch(
+            int tryOffset,
+            int tryLength,
+            int handlerOffset,
+            int handlerLength,
+            EntityHandle catchType
+        )
         {
-            return Add(ExceptionRegionKind.Catch, tryOffset, tryLength, handlerOffset, handlerLength, catchType, 0);
+            return Add(
+                ExceptionRegionKind.Catch,
+                tryOffset,
+                tryLength,
+                handlerOffset,
+                handlerLength,
+                catchType,
+                0
+            );
         }
 
         /// <summary>
@@ -173,9 +233,23 @@ namespace System.Reflection.Metadata.Ecma335
         /// <paramref name="tryOffset"/>, <paramref name="tryLength"/>, <paramref name="handlerOffset"/> or <paramref name="handlerLength"/> is out of range.
         /// </exception>
         /// <exception cref="InvalidOperationException">Method body was not declared to have exception regions.</exception>
-        public ExceptionRegionEncoder AddFilter(int tryOffset, int tryLength, int handlerOffset, int handlerLength, int filterOffset)
+        public ExceptionRegionEncoder AddFilter(
+            int tryOffset,
+            int tryLength,
+            int handlerOffset,
+            int handlerLength,
+            int filterOffset
+        )
         {
-            return Add(ExceptionRegionKind.Filter, tryOffset, tryLength, handlerOffset, handlerLength, default(EntityHandle), filterOffset);
+            return Add(
+                ExceptionRegionKind.Filter,
+                tryOffset,
+                tryLength,
+                handlerOffset,
+                handlerLength,
+                default(EntityHandle),
+                filterOffset
+            );
         }
 
         /// <summary>
@@ -207,7 +281,8 @@ namespace System.Reflection.Metadata.Ecma335
             int handlerOffset,
             int handlerLength,
             EntityHandle catchType = default(EntityHandle),
-            int filterOffset = 0)
+            int filterOffset = 0
+        )
         {
             if (Builder == null)
             {
@@ -216,17 +291,25 @@ namespace System.Reflection.Metadata.Ecma335
 
             if (HasSmallFormat)
             {
-                if (unchecked((ushort)tryOffset) != tryOffset) Throw.ArgumentOutOfRange(nameof(tryOffset));
-                if (unchecked((byte)tryLength) != tryLength) Throw.ArgumentOutOfRange(nameof(tryLength));
-                if (unchecked((ushort)handlerOffset) != handlerOffset) Throw.ArgumentOutOfRange(nameof(handlerOffset));
-                if (unchecked((byte)handlerLength) != handlerLength) Throw.ArgumentOutOfRange(nameof(handlerLength));
+                if (unchecked((ushort)tryOffset) != tryOffset)
+                    Throw.ArgumentOutOfRange(nameof(tryOffset));
+                if (unchecked((byte)tryLength) != tryLength)
+                    Throw.ArgumentOutOfRange(nameof(tryLength));
+                if (unchecked((ushort)handlerOffset) != handlerOffset)
+                    Throw.ArgumentOutOfRange(nameof(handlerOffset));
+                if (unchecked((byte)handlerLength) != handlerLength)
+                    Throw.ArgumentOutOfRange(nameof(handlerLength));
             }
             else
             {
-                if (tryOffset < 0) Throw.ArgumentOutOfRange(nameof(tryOffset));
-                if (tryLength < 0) Throw.ArgumentOutOfRange(nameof(tryLength));
-                if (handlerOffset < 0) Throw.ArgumentOutOfRange(nameof(handlerOffset));
-                if (handlerLength < 0) Throw.ArgumentOutOfRange(nameof(handlerLength));
+                if (tryOffset < 0)
+                    Throw.ArgumentOutOfRange(nameof(tryOffset));
+                if (tryLength < 0)
+                    Throw.ArgumentOutOfRange(nameof(tryLength));
+                if (handlerOffset < 0)
+                    Throw.ArgumentOutOfRange(nameof(handlerOffset));
+                if (handlerLength < 0)
+                    Throw.ArgumentOutOfRange(nameof(handlerLength));
             }
 
             int catchTokenOrOffset;
@@ -259,7 +342,14 @@ namespace System.Reflection.Metadata.Ecma335
                     throw new ArgumentOutOfRangeException(nameof(kind));
             }
 
-            AddUnchecked(kind, tryOffset, tryLength, handlerOffset, handlerLength, catchTokenOrOffset);
+            AddUnchecked(
+                kind,
+                tryOffset,
+                tryLength,
+                handlerOffset,
+                handlerLength,
+                catchTokenOrOffset
+            );
             return this;
         }
 
@@ -269,7 +359,8 @@ namespace System.Reflection.Metadata.Ecma335
             int tryLength,
             int handlerOffset,
             int handlerLength,
-            int catchTokenOrOffset)
+            int catchTokenOrOffset
+        )
         {
             if (HasSmallFormat)
             {

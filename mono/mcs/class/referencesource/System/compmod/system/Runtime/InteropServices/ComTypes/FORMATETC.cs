@@ -1,26 +1,27 @@
 //------------------------------------------------------------------------------
 // <copyright file="FORMATETC.cs" company="Microsoft">
 //     Copyright (c) Microsoft Corporation.  All rights reserved.
-// </copyright>                                                                
+// </copyright>
 //------------------------------------------------------------------------------
 
-namespace System.Runtime.InteropServices.ComTypes {
-
+namespace System.Runtime.InteropServices.ComTypes
+{
     using System;
     using System.Runtime.InteropServices;
 
     /// <devdoc>
     /// </devdoc>
-    public struct FORMATETC {
+    public struct FORMATETC
+    {
         [MarshalAs(UnmanagedType.U2)]
-        public short    cfFormat;
-        public IntPtr   ptd;
+        public short cfFormat;
+        public IntPtr ptd;
+
         [MarshalAs(UnmanagedType.U4)]
         public DVASPECT dwAspect;
-        public int      lindex;
+        public int lindex;
+
         [MarshalAs(UnmanagedType.U4)]
-        public TYMED    tymed;
+        public TYMED tymed;
     }
 }
-
-

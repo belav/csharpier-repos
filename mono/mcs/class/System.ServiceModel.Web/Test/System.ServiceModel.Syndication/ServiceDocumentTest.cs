@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -35,40 +35,42 @@ using System.Text;
 using System.Xml;
 using System.ServiceModel.Syndication;
 using NUnit.Framework;
-
 using QName = System.Xml.XmlQualifiedName;
 
 namespace MonoTests.System.ServiceModel.Syndication
 {
-	[TestFixture]
-	public class ServiceDocumentTest
-	{
-		static XmlWriterSettings settings = new XmlWriterSettings () { OmitXmlDeclaration = true};
+    [TestFixture]
+    public class ServiceDocumentTest
+    {
+        static XmlWriterSettings settings = new XmlWriterSettings() { OmitXmlDeclaration = true };
 
-		[Test]
-		public void ConstructorNullWorkspaces ()
-		{
-			new ServiceDocument (null); // null workspaces is allowed
-		}
+        [Test]
+        public void ConstructorNullWorkspaces()
+        {
+            new ServiceDocument(null); // null workspaces is allowed
+        }
 
-		[Test]
-		public void GetFormatter ()
-		{
-			var v = new ServiceDocument ();
-			var f = v.GetFormatter ();
-			Assert.IsTrue (f is AtomPub10ServiceDocumentFormatter, "#1");
-			Assert.IsTrue (f.Document == v, "#2");
-		}
+        [Test]
+        public void GetFormatter()
+        {
+            var v = new ServiceDocument();
+            var f = v.GetFormatter();
+            Assert.IsTrue(f is AtomPub10ServiceDocumentFormatter, "#1");
+            Assert.IsTrue(f.Document == v, "#2");
+        }
 
-		[Test]
-		public void Save ()
-		{
-			var v = new ServiceDocument ();
-			var sw = new StringWriter ();
-			using (var xw = XmlWriter.Create (sw, settings))
-				v.Save (xw);
-			Assert.AreEqual ("<app:service xmlns:a10=\"http://www.w3.org/2005/Atom\" xmlns:app=\"http://www.w3.org/2007/app\" />", sw.ToString ());
-		}
-	}
+        [Test]
+        public void Save()
+        {
+            var v = new ServiceDocument();
+            var sw = new StringWriter();
+            using (var xw = XmlWriter.Create(sw, settings))
+                v.Save(xw);
+            Assert.AreEqual(
+                "<app:service xmlns:a10=\"http://www.w3.org/2005/Atom\" xmlns:app=\"http://www.w3.org/2007/app\" />",
+                sw.ToString()
+            );
+        }
+    }
 }
 #endif

@@ -6,40 +6,45 @@ namespace Microsoft.EntityFrameworkCore;
 public partial class DbContextTest
 {
     [ConditionalFact]
-    public Task Can_add_existing_entities_to_context_to_be_deleted()
-        => TrackEntitiesTest((c, e) => c.Remove(e), (c, e) => c.Remove(e), EntityState.Deleted);
+    public Task Can_add_existing_entities_to_context_to_be_deleted() =>
+        TrackEntitiesTest((c, e) => c.Remove(e), (c, e) => c.Remove(e), EntityState.Deleted);
 
     [ConditionalFact]
-    public Task Can_add_new_entities_to_context_with_graph_method()
-        => TrackEntitiesTest((c, e) => c.Add(e), (c, e) => c.Add(e), EntityState.Added);
+    public Task Can_add_new_entities_to_context_with_graph_method() =>
+        TrackEntitiesTest((c, e) => c.Add(e), (c, e) => c.Add(e), EntityState.Added);
 
     [ConditionalFact]
-    public Task Can_add_new_entities_to_context_with_graph_method_async()
-        => TrackEntitiesTest((c, e) => c.AddAsync(e), (c, e) => c.AddAsync(e), EntityState.Added);
+    public Task Can_add_new_entities_to_context_with_graph_method_async() =>
+        TrackEntitiesTest((c, e) => c.AddAsync(e), (c, e) => c.AddAsync(e), EntityState.Added);
 
     [ConditionalFact]
-    public Task Can_add_existing_entities_to_context_to_be_attached_with_graph_method()
-        => TrackEntitiesTest((c, e) => c.Attach(e), (c, e) => c.Attach(e), EntityState.Unchanged);
+    public Task Can_add_existing_entities_to_context_to_be_attached_with_graph_method() =>
+        TrackEntitiesTest((c, e) => c.Attach(e), (c, e) => c.Attach(e), EntityState.Unchanged);
 
     [ConditionalFact]
-    public Task Can_add_existing_entities_to_context_to_be_updated_with_graph_method()
-        => TrackEntitiesTest((c, e) => c.Update(e), (c, e) => c.Update(e), EntityState.Modified);
+    public Task Can_add_existing_entities_to_context_to_be_updated_with_graph_method() =>
+        TrackEntitiesTest((c, e) => c.Update(e), (c, e) => c.Update(e), EntityState.Modified);
 
     private static Task TrackEntitiesTest(
         Func<DbContext, Category, EntityEntry<Category>> categoryAdder,
         Func<DbContext, Product, EntityEntry<Product>> productAdder,
-        EntityState expectedState)
-        => TrackEntitiesTest(
+        EntityState expectedState
+    ) =>
+        TrackEntitiesTest(
             (c, e) => ValueTask.FromResult(categoryAdder(c, e)),
             (c, e) => ValueTask.FromResult(productAdder(c, e)),
-            expectedState);
+            expectedState
+        );
 
     private static async Task TrackEntitiesTest(
         Func<DbContext, Category, ValueTask<EntityEntry<Category>>> categoryAdder,
         Func<DbContext, Product, ValueTask<EntityEntry<Product>>> productAdder,
-        EntityState expectedState)
+        EntityState expectedState
+    )
     {
-        using var context = new EarlyLearningCenter(InMemoryTestHelpers.Instance.CreateServiceProvider());
+        using var context = new EarlyLearningCenter(
+            InMemoryTestHelpers.Instance.CreateServiceProvider()
+        );
         var relatedDependent = new Product
         {
             Id = 1,
@@ -50,8 +55,8 @@ public partial class DbContextTest
             {
                 Name = "Tanavast",
                 Stamp = new Stamp { Code = new Guid("984ade3c-2f7b-4651-a351-642e92ab7147") },
-                Notes = new[] { "A", "B" }
-            }
+                Notes = new[] { "A", "B" },
+            },
         };
         var principal = new Category
         {
@@ -63,8 +68,8 @@ public partial class DbContextTest
             {
                 Name = "Tanavast",
                 Stamp = new Stamp { Code = new Guid("984ade3c-2f7b-4651-a351-642e92ab7147") },
-                Notes = new[] { "A", "B" }
-            }
+                Notes = new[] { "A", "B" },
+            },
         };
 
         var relatedPrincipal = new Category
@@ -76,8 +81,8 @@ public partial class DbContextTest
             {
                 Name = "Tanavast",
                 Stamp = new Stamp { Code = new Guid("984ade3c-2f7b-4651-a351-642e92ab7147") },
-                Notes = new[] { "A", "B" }
-            }
+                Notes = new[] { "A", "B" },
+            },
         };
         var dependent = new Product
         {
@@ -90,8 +95,8 @@ public partial class DbContextTest
             {
                 Name = "Tanavast",
                 Stamp = new Stamp { Code = new Guid("984ade3c-2f7b-4651-a351-642e92ab7147") },
-                Notes = new[] { "A", "B" }
-            }
+                Notes = new[] { "A", "B" },
+            },
         };
 
         var principalEntry = await categoryAdder(context, principal);
@@ -108,55 +113,75 @@ public partial class DbContextTest
         Assert.Same(principal, principalEntry.Entity);
         Assert.Equal(expectedState, principalEntry.State);
         Assert.Same(relatedPrincipal, relatedPrincipalEntry.Entity);
-        Assert.Equal(expectedState == EntityState.Deleted ? EntityState.Unchanged : expectedState, relatedPrincipalEntry.State);
+        Assert.Equal(
+            expectedState == EntityState.Deleted ? EntityState.Unchanged : expectedState,
+            relatedPrincipalEntry.State
+        );
 
         Assert.Same(relatedDependent, relatedDependentEntry.Entity);
         Assert.Equal(expectedState, relatedDependentEntry.State);
         Assert.Same(dependent, dependentEntry.Entity);
         Assert.Equal(expectedState, dependentEntry.State);
 
-        Assert.Same(principalEntry.GetInfrastructure(), context.Entry(principal).GetInfrastructure());
-        Assert.Same(relatedPrincipalEntry.GetInfrastructure(), context.Entry(relatedPrincipal).GetInfrastructure());
-        Assert.Same(relatedDependentEntry.GetInfrastructure(), context.Entry(relatedDependent).GetInfrastructure());
-        Assert.Same(dependentEntry.GetInfrastructure(), context.Entry(dependent).GetInfrastructure());
+        Assert.Same(
+            principalEntry.GetInfrastructure(),
+            context.Entry(principal).GetInfrastructure()
+        );
+        Assert.Same(
+            relatedPrincipalEntry.GetInfrastructure(),
+            context.Entry(relatedPrincipal).GetInfrastructure()
+        );
+        Assert.Same(
+            relatedDependentEntry.GetInfrastructure(),
+            context.Entry(relatedDependent).GetInfrastructure()
+        );
+        Assert.Same(
+            dependentEntry.GetInfrastructure(),
+            context.Entry(dependent).GetInfrastructure()
+        );
     }
 
     [ConditionalFact]
-    public Task Can_add_multiple_new_entities_to_context()
-        => TrackMultipleEntitiesTest((c, e) => c.AddRange(e[0], e[1]), EntityState.Added);
+    public Task Can_add_multiple_new_entities_to_context() =>
+        TrackMultipleEntitiesTest((c, e) => c.AddRange(e[0], e[1]), EntityState.Added);
 
     [ConditionalFact]
-    public Task Can_add_multiple_new_entities_to_context_async()
-        => TrackMultipleEntitiesTest((c, e) => c.AddRangeAsync(e[0], e[1]), EntityState.Added);
+    public Task Can_add_multiple_new_entities_to_context_async() =>
+        TrackMultipleEntitiesTest((c, e) => c.AddRangeAsync(e[0], e[1]), EntityState.Added);
 
     [ConditionalFact]
-    public Task Can_add_multiple_existing_entities_to_context_to_be_attached()
-        => TrackMultipleEntitiesTest((c, e) => c.AttachRange(e[0], e[1]), EntityState.Unchanged);
+    public Task Can_add_multiple_existing_entities_to_context_to_be_attached() =>
+        TrackMultipleEntitiesTest((c, e) => c.AttachRange(e[0], e[1]), EntityState.Unchanged);
 
     [ConditionalFact]
-    public Task Can_add_multiple_existing_entities_to_context_to_be_updated()
-        => TrackMultipleEntitiesTest((c, e) => c.UpdateRange(e[0], e[1]), EntityState.Modified);
+    public Task Can_add_multiple_existing_entities_to_context_to_be_updated() =>
+        TrackMultipleEntitiesTest((c, e) => c.UpdateRange(e[0], e[1]), EntityState.Modified);
 
     [ConditionalFact]
-    public Task Can_add_multiple_existing_entities_to_context_to_be_deleted()
-        => TrackMultipleEntitiesTest((c, e) => c.RemoveRange(e[0], e[1]), EntityState.Deleted);
+    public Task Can_add_multiple_existing_entities_to_context_to_be_deleted() =>
+        TrackMultipleEntitiesTest((c, e) => c.RemoveRange(e[0], e[1]), EntityState.Deleted);
 
     private static Task TrackMultipleEntitiesTest(
         Action<DbContext, object[]> adder,
-        EntityState expectedState)
-        => TrackMultipleEntitiesTest(
+        EntityState expectedState
+    ) =>
+        TrackMultipleEntitiesTest(
             (c, e) =>
             {
                 adder(c, e);
                 return Task.FromResult(0);
             },
-            expectedState);
+            expectedState
+        );
 
     private static async Task TrackMultipleEntitiesTest(
         Func<DbContext, object[], Task> adder,
-        EntityState expectedState)
+        EntityState expectedState
+    )
     {
-        using var context = new EarlyLearningCenter(InMemoryTestHelpers.Instance.CreateServiceProvider());
+        using var context = new EarlyLearningCenter(
+            InMemoryTestHelpers.Instance.CreateServiceProvider()
+        );
         var relatedDependent = new Product
         {
             Id = 1,
@@ -167,8 +192,8 @@ public partial class DbContextTest
             {
                 Name = "Tanavast",
                 Stamp = new Stamp { Code = new Guid("984ade3c-2f7b-4651-a351-642e92ab7147") },
-                Notes = new[] { "A", "B" }
-            }
+                Notes = new[] { "A", "B" },
+            },
         };
         var principal = new Category
         {
@@ -180,8 +205,8 @@ public partial class DbContextTest
             {
                 Name = "Tanavast",
                 Stamp = new Stamp { Code = new Guid("984ade3c-2f7b-4651-a351-642e92ab7147") },
-                Notes = new[] { "A", "B" }
-            }
+                Notes = new[] { "A", "B" },
+            },
         };
 
         var relatedPrincipal = new Category
@@ -193,8 +218,8 @@ public partial class DbContextTest
             {
                 Name = "Tanavast",
                 Stamp = new Stamp { Code = new Guid("984ade3c-2f7b-4651-a351-642e92ab7147") },
-                Notes = new[] { "A", "B" }
-            }
+                Notes = new[] { "A", "B" },
+            },
         };
         var dependent = new Product
         {
@@ -207,8 +232,8 @@ public partial class DbContextTest
             {
                 Name = "Tanavast",
                 Stamp = new Stamp { Code = new Guid("984ade3c-2f7b-4651-a351-642e92ab7147") },
-                Notes = new[] { "A", "B" }
-            }
+                Notes = new[] { "A", "B" },
+            },
         };
 
         await adder(context, new object[] { principal, dependent });
@@ -222,7 +247,9 @@ public partial class DbContextTest
         Assert.Equal(expectedState, context.Entry(principal).State);
         Assert.Same(relatedPrincipal, context.Entry(relatedPrincipal).Entity);
         Assert.Equal(
-            expectedState == EntityState.Deleted ? EntityState.Unchanged : expectedState, context.Entry(relatedPrincipal).State);
+            expectedState == EntityState.Deleted ? EntityState.Unchanged : expectedState,
+            context.Entry(relatedPrincipal).State
+        );
 
         Assert.Same(relatedDependent, context.Entry(relatedDependent).Entity);
         Assert.Equal(expectedState, context.Entry(relatedDependent).State);
@@ -231,41 +258,62 @@ public partial class DbContextTest
     }
 
     [ConditionalFact]
-    public Task Can_add_existing_entities_with_default_value_to_context_to_be_deleted()
-        => TrackEntitiesDefaultValueTest((c, e) => c.Remove(e), (c, e) => c.Remove(e), EntityState.Deleted);
+    public Task Can_add_existing_entities_with_default_value_to_context_to_be_deleted() =>
+        TrackEntitiesDefaultValueTest(
+            (c, e) => c.Remove(e),
+            (c, e) => c.Remove(e),
+            EntityState.Deleted
+        );
 
     [ConditionalFact]
-    public Task Can_add_new_entities_with_default_value_to_context_with_graph_method()
-        => TrackEntitiesDefaultValueTest((c, e) => c.Add(e), (c, e) => c.Add(e), EntityState.Added);
+    public Task Can_add_new_entities_with_default_value_to_context_with_graph_method() =>
+        TrackEntitiesDefaultValueTest((c, e) => c.Add(e), (c, e) => c.Add(e), EntityState.Added);
 
     [ConditionalFact]
-    public Task Can_add_new_entities_with_default_value_to_context_with_graph_method_async()
-        => TrackEntitiesDefaultValueTest((c, e) => c.AddAsync(e), (c, e) => c.AddAsync(e), EntityState.Added);
+    public Task Can_add_new_entities_with_default_value_to_context_with_graph_method_async() =>
+        TrackEntitiesDefaultValueTest(
+            (c, e) => c.AddAsync(e),
+            (c, e) => c.AddAsync(e),
+            EntityState.Added
+        );
 
     [ConditionalFact]
-    public Task Can_add_existing_entities_with_default_value_to_context_to_be_attached_with_graph_method()
-        => TrackEntitiesDefaultValueTest((c, e) => c.Attach(e), (c, e) => c.Attach(e), EntityState.Added);
+    public Task Can_add_existing_entities_with_default_value_to_context_to_be_attached_with_graph_method() =>
+        TrackEntitiesDefaultValueTest(
+            (c, e) => c.Attach(e),
+            (c, e) => c.Attach(e),
+            EntityState.Added
+        );
 
     [ConditionalFact]
-    public Task Can_add_existing_entities_with_default_value_to_context_to_be_updated_with_graph_method()
-        => TrackEntitiesDefaultValueTest((c, e) => c.Update(e), (c, e) => c.Update(e), EntityState.Added);
+    public Task Can_add_existing_entities_with_default_value_to_context_to_be_updated_with_graph_method() =>
+        TrackEntitiesDefaultValueTest(
+            (c, e) => c.Update(e),
+            (c, e) => c.Update(e),
+            EntityState.Added
+        );
 
     private static Task TrackEntitiesDefaultValueTest(
         Func<DbContext, Category, EntityEntry<Category>> categoryAdder,
         Func<DbContext, Product, EntityEntry<Product>> productAdder,
-        EntityState expectedState)
-        => TrackEntitiesDefaultValueTest(
+        EntityState expectedState
+    ) =>
+        TrackEntitiesDefaultValueTest(
             (c, e) => ValueTask.FromResult(categoryAdder(c, e)),
             (c, e) => ValueTask.FromResult(productAdder(c, e)),
-            expectedState);
+            expectedState
+        );
 
     // Issue #3890
     private static async Task TrackEntitiesDefaultValueTest(
         Func<DbContext, Category, ValueTask<EntityEntry<Category>>> categoryAdder,
         Func<DbContext, Product, ValueTask<EntityEntry<Product>>> productAdder,
-        EntityState expectedState)
+        EntityState expectedState
+    )
     {
-        using var context = new EarlyLearningCenter(InMemoryTestHelpers.Instance.CreateServiceProvider());
+        using var context = new EarlyLearningCenter(
+            InMemoryTestHelpers.Instance.CreateServiceProvider()
+        );
         var category1 = new Category
         {
             Id = 0,
@@ -275,8 +323,8 @@ public partial class DbContextTest
             {
                 Name = "Tanavast",
                 Stamp = new Stamp { Code = new Guid("984ade3c-2f7b-4651-a351-642e92ab7147") },
-                Notes = new[] { "A", "B" }
-            }
+                Notes = new[] { "A", "B" },
+            },
         };
         var product1 = new Product
         {
@@ -288,8 +336,8 @@ public partial class DbContextTest
             {
                 Name = "Tanavast",
                 Stamp = new Stamp { Code = new Guid("984ade3c-2f7b-4651-a351-642e92ab7147") },
-                Notes = new[] { "A", "B" }
-            }
+                Notes = new[] { "A", "B" },
+            },
         };
 
         var categoryEntry1 = await categoryAdder(context, category1);
@@ -304,55 +352,96 @@ public partial class DbContextTest
         Assert.Same(product1, productEntry1.Entity);
         Assert.Equal(expectedState, productEntry1.State);
 
-        Assert.Same(categoryEntry1.GetInfrastructure(), context.Entry(category1).GetInfrastructure());
+        Assert.Same(
+            categoryEntry1.GetInfrastructure(),
+            context.Entry(category1).GetInfrastructure()
+        );
         Assert.Same(productEntry1.GetInfrastructure(), context.Entry(product1).GetInfrastructure());
     }
 
     [ConditionalFact]
-    public Task Can_add_existing_entities_with_sentinel_value_to_context_to_be_deleted()
-        => TrackEntitiesSentinelValueTest((c, e) => c.Remove(e), (c, e) => c.Remove(e), (c, e) => c.Remove(e), EntityState.Deleted);
+    public Task Can_add_existing_entities_with_sentinel_value_to_context_to_be_deleted() =>
+        TrackEntitiesSentinelValueTest(
+            (c, e) => c.Remove(e),
+            (c, e) => c.Remove(e),
+            (c, e) => c.Remove(e),
+            EntityState.Deleted
+        );
 
     [ConditionalFact]
-    public Task Can_add_new_entities_with_sentinel_value_to_context_with_graph_method()
-        => TrackEntitiesSentinelValueTest((c, e) => c.Add(e), (c, e) => c.Add(e), (c, e) => c.Add(e), EntityState.Added);
+    public Task Can_add_new_entities_with_sentinel_value_to_context_with_graph_method() =>
+        TrackEntitiesSentinelValueTest(
+            (c, e) => c.Add(e),
+            (c, e) => c.Add(e),
+            (c, e) => c.Add(e),
+            EntityState.Added
+        );
 
     [ConditionalFact]
-    public Task Can_add_new_entities_with_sentinel_value_to_context_with_graph_method_async()
-        => TrackEntitiesSentinelValueTest((c, e) => c.AddAsync(e), (c, e) => c.AddAsync(e), (c, e) => c.AddAsync(e), EntityState.Added);
+    public Task Can_add_new_entities_with_sentinel_value_to_context_with_graph_method_async() =>
+        TrackEntitiesSentinelValueTest(
+            (c, e) => c.AddAsync(e),
+            (c, e) => c.AddAsync(e),
+            (c, e) => c.AddAsync(e),
+            EntityState.Added
+        );
 
     [ConditionalFact]
-    public Task Can_add_existing_entities_with_sentinel_value_to_context_to_be_attached_with_graph_method()
-        => TrackEntitiesSentinelValueTest((c, e) => c.Attach(e), (c, e) => c.Attach(e), (c, e) => c.Attach(e), EntityState.Added);
+    public Task Can_add_existing_entities_with_sentinel_value_to_context_to_be_attached_with_graph_method() =>
+        TrackEntitiesSentinelValueTest(
+            (c, e) => c.Attach(e),
+            (c, e) => c.Attach(e),
+            (c, e) => c.Attach(e),
+            EntityState.Added
+        );
 
     [ConditionalFact]
-    public Task Can_add_existing_entities_with_sentinel_value_to_context_to_be_updated_with_graph_method()
-        => TrackEntitiesSentinelValueTest((c, e) => c.Update(e), (c, e) => c.Update(e), (c, e) => c.Update(e), EntityState.Added);
+    public Task Can_add_existing_entities_with_sentinel_value_to_context_to_be_updated_with_graph_method() =>
+        TrackEntitiesSentinelValueTest(
+            (c, e) => c.Update(e),
+            (c, e) => c.Update(e),
+            (c, e) => c.Update(e),
+            EntityState.Added
+        );
 
     private static Task TrackEntitiesSentinelValueTest(
         Func<DbContext, CategoryWithSentinel, EntityEntry<CategoryWithSentinel>> categoryAdder,
         Func<DbContext, ProductWithSentinel, EntityEntry<ProductWithSentinel>> productAdder,
         Func<DbContext, TheGuWithSentinel, EntityEntry<TheGuWithSentinel>> guAdder,
-        EntityState expectedState)
-        => TrackEntitiesSentinelValueTest(
+        EntityState expectedState
+    ) =>
+        TrackEntitiesSentinelValueTest(
             (c, e) => ValueTask.FromResult(categoryAdder(c, e)),
             (c, e) => ValueTask.FromResult(productAdder(c, e)),
             (c, e) => ValueTask.FromResult(guAdder(c, e)),
-            expectedState);
+            expectedState
+        );
 
     // Issue #3890
     private static async Task TrackEntitiesSentinelValueTest(
-        Func<DbContext, CategoryWithSentinel, ValueTask<EntityEntry<CategoryWithSentinel>>> categoryAdder,
-        Func<DbContext, ProductWithSentinel, ValueTask<EntityEntry<ProductWithSentinel>>> productAdder,
+        Func<
+            DbContext,
+            CategoryWithSentinel,
+            ValueTask<EntityEntry<CategoryWithSentinel>>
+        > categoryAdder,
+        Func<
+            DbContext,
+            ProductWithSentinel,
+            ValueTask<EntityEntry<ProductWithSentinel>>
+        > productAdder,
         Func<DbContext, TheGuWithSentinel, ValueTask<EntityEntry<TheGuWithSentinel>>> guAdder,
-        EntityState expectedState)
+        EntityState expectedState
+    )
     {
-        using var context = new EarlyLearningCenter(InMemoryTestHelpers.Instance.CreateServiceProvider());
+        using var context = new EarlyLearningCenter(
+            InMemoryTestHelpers.Instance.CreateServiceProvider()
+        );
         var category1 = new CategoryWithSentinel { Id = IntSentinel, Name = "Beverages" };
         var product1 = new ProductWithSentinel
         {
             Id = IntSentinel,
             Name = "Marmite",
-            Price = 7.99m
+            Price = 7.99m,
         };
         var gu1 = new TheGuWithSentinel { Id = GuidSentinel, ShirtColor = "Red" };
 
@@ -373,38 +462,60 @@ public partial class DbContextTest
         Assert.Same(gu1, guEntry1.Entity);
         Assert.Equal(expectedState, guEntry1.State);
 
-        Assert.Same(categoryEntry1.GetInfrastructure(), context.Entry(category1).GetInfrastructure());
+        Assert.Same(
+            categoryEntry1.GetInfrastructure(),
+            context.Entry(category1).GetInfrastructure()
+        );
         Assert.Same(productEntry1.GetInfrastructure(), context.Entry(product1).GetInfrastructure());
         Assert.Same(guEntry1.GetInfrastructure(), context.Entry(gu1).GetInfrastructure());
     }
 
     [ConditionalFact]
-    public Task Can_add_multiple_new_entities_with_default_values_to_context()
-        => TrackMultipleEntitiesDefaultValuesTest((c, e) => c.AddRange(e[0]), (c, e) => c.AddRange(e[0]), EntityState.Added);
+    public Task Can_add_multiple_new_entities_with_default_values_to_context() =>
+        TrackMultipleEntitiesDefaultValuesTest(
+            (c, e) => c.AddRange(e[0]),
+            (c, e) => c.AddRange(e[0]),
+            EntityState.Added
+        );
 
     [ConditionalFact]
-    public Task Can_add_multiple_new_entities_with_default_values_to_context_async()
-        => TrackMultipleEntitiesDefaultValuesTest(
-            (c, e) => c.AddRangeAsync(e[0]), (c, e) => c.AddRangeAsync(e[0]), EntityState.Added);
+    public Task Can_add_multiple_new_entities_with_default_values_to_context_async() =>
+        TrackMultipleEntitiesDefaultValuesTest(
+            (c, e) => c.AddRangeAsync(e[0]),
+            (c, e) => c.AddRangeAsync(e[0]),
+            EntityState.Added
+        );
 
     [ConditionalFact]
-    public Task Can_add_multiple_existing_entities_with_default_values_to_context_to_be_attached()
-        => TrackMultipleEntitiesDefaultValuesTest((c, e) => c.AttachRange(e[0]), (c, e) => c.AttachRange(e[0]), EntityState.Added);
+    public Task Can_add_multiple_existing_entities_with_default_values_to_context_to_be_attached() =>
+        TrackMultipleEntitiesDefaultValuesTest(
+            (c, e) => c.AttachRange(e[0]),
+            (c, e) => c.AttachRange(e[0]),
+            EntityState.Added
+        );
 
     [ConditionalFact]
-    public Task Can_add_multiple_existing_entities_with_default_values_to_context_to_be_updated()
-        => TrackMultipleEntitiesDefaultValuesTest((c, e) => c.UpdateRange(e[0]), (c, e) => c.UpdateRange(e[0]), EntityState.Added);
+    public Task Can_add_multiple_existing_entities_with_default_values_to_context_to_be_updated() =>
+        TrackMultipleEntitiesDefaultValuesTest(
+            (c, e) => c.UpdateRange(e[0]),
+            (c, e) => c.UpdateRange(e[0]),
+            EntityState.Added
+        );
 
     [ConditionalFact]
-    public Task Can_add_multiple_existing_entities_with_default_values_to_context_to_be_deleted()
-        => TrackMultipleEntitiesDefaultValuesTest(
-            (c, e) => c.RemoveRange(e[0]), (c, e) => c.RemoveRange(e[0]), EntityState.Deleted);
+    public Task Can_add_multiple_existing_entities_with_default_values_to_context_to_be_deleted() =>
+        TrackMultipleEntitiesDefaultValuesTest(
+            (c, e) => c.RemoveRange(e[0]),
+            (c, e) => c.RemoveRange(e[0]),
+            EntityState.Deleted
+        );
 
     private static Task TrackMultipleEntitiesDefaultValuesTest(
         Action<DbContext, object[]> categoryAdder,
         Action<DbContext, object[]> productAdder,
-        EntityState expectedState)
-        => TrackMultipleEntitiesDefaultValuesTest(
+        EntityState expectedState
+    ) =>
+        TrackMultipleEntitiesDefaultValuesTest(
             (c, e) =>
             {
                 categoryAdder(c, e);
@@ -415,15 +526,19 @@ public partial class DbContextTest
                 productAdder(c, e);
                 return Task.FromResult(0);
             },
-            expectedState);
+            expectedState
+        );
 
     // Issue #3890
     private static async Task TrackMultipleEntitiesDefaultValuesTest(
         Func<DbContext, object[], Task> categoryAdder,
         Func<DbContext, object[], Task> productAdder,
-        EntityState expectedState)
+        EntityState expectedState
+    )
     {
-        using var context = new EarlyLearningCenter(InMemoryTestHelpers.Instance.CreateServiceProvider());
+        using var context = new EarlyLearningCenter(
+            InMemoryTestHelpers.Instance.CreateServiceProvider()
+        );
         var category1 = new Category
         {
             Id = 0,
@@ -433,8 +548,8 @@ public partial class DbContextTest
             {
                 Name = "Tanavast",
                 Stamp = new Stamp { Code = new Guid("984ade3c-2f7b-4651-a351-642e92ab7147") },
-                Notes = new[] { "A", "B" }
-            }
+                Notes = new[] { "A", "B" },
+            },
         };
         var product1 = new Product
         {
@@ -446,8 +561,8 @@ public partial class DbContextTest
             {
                 Name = "Tanavast",
                 Stamp = new Stamp { Code = new Guid("984ade3c-2f7b-4651-a351-642e92ab7147") },
-                Notes = new[] { "A", "B" }
-            }
+                Notes = new[] { "A", "B" },
+            },
         };
 
         await categoryAdder(context, new[] { category1 });
@@ -464,73 +579,101 @@ public partial class DbContextTest
     }
 
     [ConditionalFact]
-    public void Can_add_no_new_entities_to_context()
-        => TrackNoEntitiesTest(c => c.AddRange(), c => c.AddRange());
+    public void Can_add_no_new_entities_to_context() =>
+        TrackNoEntitiesTest(c => c.AddRange(), c => c.AddRange());
 
     [ConditionalFact]
     public async Task Can_add_no_new_entities_to_context_async()
     {
-        using var context = new EarlyLearningCenter(InMemoryTestHelpers.Instance.CreateServiceProvider());
+        using var context = new EarlyLearningCenter(
+            InMemoryTestHelpers.Instance.CreateServiceProvider()
+        );
         await context.AddRangeAsync();
         await context.AddRangeAsync();
         Assert.Empty(context.ChangeTracker.Entries());
     }
 
     [ConditionalFact]
-    public void Can_add_no_existing_entities_to_context_to_be_attached()
-        => TrackNoEntitiesTest(c => c.AttachRange(), c => c.AttachRange());
+    public void Can_add_no_existing_entities_to_context_to_be_attached() =>
+        TrackNoEntitiesTest(c => c.AttachRange(), c => c.AttachRange());
 
     [ConditionalFact]
-    public void Can_add_no_existing_entities_to_context_to_be_updated()
-        => TrackNoEntitiesTest(c => c.UpdateRange(), c => c.UpdateRange());
+    public void Can_add_no_existing_entities_to_context_to_be_updated() =>
+        TrackNoEntitiesTest(c => c.UpdateRange(), c => c.UpdateRange());
 
     [ConditionalFact]
-    public void Can_add_no_existing_entities_to_context_to_be_deleted()
-        => TrackNoEntitiesTest(c => c.RemoveRange(), c => c.RemoveRange());
+    public void Can_add_no_existing_entities_to_context_to_be_deleted() =>
+        TrackNoEntitiesTest(c => c.RemoveRange(), c => c.RemoveRange());
 
-    private static void TrackNoEntitiesTest(Action<DbContext> categoryAdder, Action<DbContext> productAdder)
+    private static void TrackNoEntitiesTest(
+        Action<DbContext> categoryAdder,
+        Action<DbContext> productAdder
+    )
     {
-        using var context = new EarlyLearningCenter(InMemoryTestHelpers.Instance.CreateServiceProvider());
+        using var context = new EarlyLearningCenter(
+            InMemoryTestHelpers.Instance.CreateServiceProvider()
+        );
         categoryAdder(context);
         productAdder(context);
         Assert.Empty(context.ChangeTracker.Entries());
     }
 
     [ConditionalFact]
-    public Task Can_add_existing_entities_to_context_to_be_deleted_non_generic()
-        => TrackEntitiesTestNonGeneric((c, e) => c.Remove(e), (c, e) => c.Remove(e), EntityState.Deleted);
+    public Task Can_add_existing_entities_to_context_to_be_deleted_non_generic() =>
+        TrackEntitiesTestNonGeneric(
+            (c, e) => c.Remove(e),
+            (c, e) => c.Remove(e),
+            EntityState.Deleted
+        );
 
     [ConditionalFact]
-    public Task Can_add_new_entities_to_context_non_generic_graph()
-        => TrackEntitiesTestNonGeneric((c, e) => c.AddAsync(e), (c, e) => c.AddAsync(e), EntityState.Added);
+    public Task Can_add_new_entities_to_context_non_generic_graph() =>
+        TrackEntitiesTestNonGeneric(
+            (c, e) => c.AddAsync(e),
+            (c, e) => c.AddAsync(e),
+            EntityState.Added
+        );
 
     [ConditionalFact]
-    public Task Can_add_new_entities_to_context_non_generic_graph_async()
-        => TrackEntitiesTestNonGeneric((c, e) => c.Add(e), (c, e) => c.Add(e), EntityState.Added);
+    public Task Can_add_new_entities_to_context_non_generic_graph_async() =>
+        TrackEntitiesTestNonGeneric((c, e) => c.Add(e), (c, e) => c.Add(e), EntityState.Added);
 
     [ConditionalFact]
-    public Task Can_add_existing_entities_to_context_to_be_attached_non_generic_graph()
-        => TrackEntitiesTestNonGeneric((c, e) => c.Attach(e), (c, e) => c.Attach(e), EntityState.Unchanged);
+    public Task Can_add_existing_entities_to_context_to_be_attached_non_generic_graph() =>
+        TrackEntitiesTestNonGeneric(
+            (c, e) => c.Attach(e),
+            (c, e) => c.Attach(e),
+            EntityState.Unchanged
+        );
 
     [ConditionalFact]
-    public Task Can_add_existing_entities_to_context_to_be_updated_non_generic_graph()
-        => TrackEntitiesTestNonGeneric((c, e) => c.Update(e), (c, e) => c.Update(e), EntityState.Modified);
+    public Task Can_add_existing_entities_to_context_to_be_updated_non_generic_graph() =>
+        TrackEntitiesTestNonGeneric(
+            (c, e) => c.Update(e),
+            (c, e) => c.Update(e),
+            EntityState.Modified
+        );
 
     private static Task TrackEntitiesTestNonGeneric(
         Func<DbContext, object, EntityEntry> categoryAdder,
         Func<DbContext, object, EntityEntry> productAdder,
-        EntityState expectedState)
-        => TrackEntitiesTestNonGeneric(
+        EntityState expectedState
+    ) =>
+        TrackEntitiesTestNonGeneric(
             (c, e) => ValueTask.FromResult(categoryAdder(c, e)),
             (c, e) => ValueTask.FromResult(productAdder(c, e)),
-            expectedState);
+            expectedState
+        );
 
     private static async Task TrackEntitiesTestNonGeneric(
         Func<DbContext, object, ValueTask<EntityEntry>> categoryAdder,
         Func<DbContext, object, ValueTask<EntityEntry>> productAdder,
-        EntityState expectedState)
+        EntityState expectedState
+    )
     {
-        using var context = new EarlyLearningCenter(InMemoryTestHelpers.Instance.CreateServiceProvider());
+        using var context = new EarlyLearningCenter(
+            InMemoryTestHelpers.Instance.CreateServiceProvider()
+        );
         var relatedDependent = new Product
         {
             Id = 1,
@@ -541,8 +684,8 @@ public partial class DbContextTest
             {
                 Name = "Tanavast",
                 Stamp = new Stamp { Code = new Guid("984ade3c-2f7b-4651-a351-642e92ab7147") },
-                Notes = new[] { "A", "B" }
-            }
+                Notes = new[] { "A", "B" },
+            },
         };
         var principal = new Category
         {
@@ -554,8 +697,8 @@ public partial class DbContextTest
             {
                 Name = "Tanavast",
                 Stamp = new Stamp { Code = new Guid("984ade3c-2f7b-4651-a351-642e92ab7147") },
-                Notes = new[] { "A", "B" }
-            }
+                Notes = new[] { "A", "B" },
+            },
         };
 
         var relatedPrincipal = new Category
@@ -567,8 +710,8 @@ public partial class DbContextTest
             {
                 Name = "Tanavast",
                 Stamp = new Stamp { Code = new Guid("984ade3c-2f7b-4651-a351-642e92ab7147") },
-                Notes = new[] { "A", "B" }
-            }
+                Notes = new[] { "A", "B" },
+            },
         };
         var dependent = new Product
         {
@@ -581,8 +724,8 @@ public partial class DbContextTest
             {
                 Name = "Tanavast",
                 Stamp = new Stamp { Code = new Guid("984ade3c-2f7b-4651-a351-642e92ab7147") },
-                Notes = new[] { "A", "B" }
-            }
+                Notes = new[] { "A", "B" },
+            },
         };
 
         var principalEntry = await categoryAdder(context, principal);
@@ -599,55 +742,75 @@ public partial class DbContextTest
         Assert.Same(principal, principalEntry.Entity);
         Assert.Equal(expectedState, principalEntry.State);
         Assert.Same(relatedPrincipal, relatedPrincipalEntry.Entity);
-        Assert.Equal(expectedState == EntityState.Deleted ? EntityState.Unchanged : expectedState, relatedPrincipalEntry.State);
+        Assert.Equal(
+            expectedState == EntityState.Deleted ? EntityState.Unchanged : expectedState,
+            relatedPrincipalEntry.State
+        );
 
         Assert.Same(relatedDependent, relatedDependentEntry.Entity);
         Assert.Equal(expectedState, relatedDependentEntry.State);
         Assert.Same(dependent, dependentEntry.Entity);
         Assert.Equal(expectedState, dependentEntry.State);
 
-        Assert.Same(principalEntry.GetInfrastructure(), context.Entry(principal).GetInfrastructure());
-        Assert.Same(relatedPrincipalEntry.GetInfrastructure(), context.Entry(relatedPrincipal).GetInfrastructure());
-        Assert.Same(relatedDependentEntry.GetInfrastructure(), context.Entry(relatedDependent).GetInfrastructure());
-        Assert.Same(dependentEntry.GetInfrastructure(), context.Entry(dependent).GetInfrastructure());
+        Assert.Same(
+            principalEntry.GetInfrastructure(),
+            context.Entry(principal).GetInfrastructure()
+        );
+        Assert.Same(
+            relatedPrincipalEntry.GetInfrastructure(),
+            context.Entry(relatedPrincipal).GetInfrastructure()
+        );
+        Assert.Same(
+            relatedDependentEntry.GetInfrastructure(),
+            context.Entry(relatedDependent).GetInfrastructure()
+        );
+        Assert.Same(
+            dependentEntry.GetInfrastructure(),
+            context.Entry(dependent).GetInfrastructure()
+        );
     }
 
     [ConditionalFact]
-    public Task Can_add_multiple_existing_entities_to_context_to_be_deleted_Enumerable()
-        => TrackMultipleEntitiesTestEnumerable((c, e) => c.RemoveRange(e), EntityState.Deleted);
+    public Task Can_add_multiple_existing_entities_to_context_to_be_deleted_Enumerable() =>
+        TrackMultipleEntitiesTestEnumerable((c, e) => c.RemoveRange(e), EntityState.Deleted);
 
     [ConditionalFact]
-    public Task Can_add_multiple_new_entities_to_context_Enumerable_graph()
-        => TrackMultipleEntitiesTestEnumerable((c, e) => c.AddRange(e), EntityState.Added);
+    public Task Can_add_multiple_new_entities_to_context_Enumerable_graph() =>
+        TrackMultipleEntitiesTestEnumerable((c, e) => c.AddRange(e), EntityState.Added);
 
     [ConditionalFact]
-    public Task Can_add_multiple_new_entities_to_context_Enumerable_graph_async()
-        => TrackMultipleEntitiesTestEnumerable((c, e) => c.AddRangeAsync(e), EntityState.Added);
+    public Task Can_add_multiple_new_entities_to_context_Enumerable_graph_async() =>
+        TrackMultipleEntitiesTestEnumerable((c, e) => c.AddRangeAsync(e), EntityState.Added);
 
     [ConditionalFact]
-    public Task Can_add_multiple_existing_entities_to_context_to_be_attached_Enumerable_graph()
-        => TrackMultipleEntitiesTestEnumerable((c, e) => c.AttachRange(e), EntityState.Unchanged);
+    public Task Can_add_multiple_existing_entities_to_context_to_be_attached_Enumerable_graph() =>
+        TrackMultipleEntitiesTestEnumerable((c, e) => c.AttachRange(e), EntityState.Unchanged);
 
     [ConditionalFact]
-    public Task Can_add_multiple_existing_entities_to_context_to_be_updated_Enumerable_graph()
-        => TrackMultipleEntitiesTestEnumerable((c, e) => c.UpdateRange(e), EntityState.Modified);
+    public Task Can_add_multiple_existing_entities_to_context_to_be_updated_Enumerable_graph() =>
+        TrackMultipleEntitiesTestEnumerable((c, e) => c.UpdateRange(e), EntityState.Modified);
 
     private static Task TrackMultipleEntitiesTestEnumerable(
         Action<DbContext, IEnumerable<object>> adder,
-        EntityState expectedState)
-        => TrackMultipleEntitiesTestEnumerable(
+        EntityState expectedState
+    ) =>
+        TrackMultipleEntitiesTestEnumerable(
             (c, e) =>
             {
                 adder(c, e);
                 return Task.FromResult(0);
             },
-            expectedState);
+            expectedState
+        );
 
     private static async Task TrackMultipleEntitiesTestEnumerable(
         Func<DbContext, IEnumerable<object>, Task> adder,
-        EntityState expectedState)
+        EntityState expectedState
+    )
     {
-        using var context = new EarlyLearningCenter(InMemoryTestHelpers.Instance.CreateServiceProvider());
+        using var context = new EarlyLearningCenter(
+            InMemoryTestHelpers.Instance.CreateServiceProvider()
+        );
         var relatedDependent = new Product
         {
             Id = 1,
@@ -658,8 +821,8 @@ public partial class DbContextTest
             {
                 Name = "Tanavast",
                 Stamp = new Stamp { Code = new Guid("984ade3c-2f7b-4651-a351-642e92ab7147") },
-                Notes = new[] { "A", "B" }
-            }
+                Notes = new[] { "A", "B" },
+            },
         };
         var principal = new Category
         {
@@ -671,8 +834,8 @@ public partial class DbContextTest
             {
                 Name = "Tanavast",
                 Stamp = new Stamp { Code = new Guid("984ade3c-2f7b-4651-a351-642e92ab7147") },
-                Notes = new[] { "A", "B" }
-            }
+                Notes = new[] { "A", "B" },
+            },
         };
 
         var relatedPrincipal = new Category
@@ -684,8 +847,8 @@ public partial class DbContextTest
             {
                 Name = "Tanavast",
                 Stamp = new Stamp { Code = new Guid("984ade3c-2f7b-4651-a351-642e92ab7147") },
-                Notes = new[] { "A", "B" }
-            }
+                Notes = new[] { "A", "B" },
+            },
         };
         var dependent = new Product
         {
@@ -698,8 +861,8 @@ public partial class DbContextTest
             {
                 Name = "Tanavast",
                 Stamp = new Stamp { Code = new Guid("984ade3c-2f7b-4651-a351-642e92ab7147") },
-                Notes = new[] { "A", "B" }
-            }
+                Notes = new[] { "A", "B" },
+            },
         };
 
         await adder(context, new object[] { principal, dependent });
@@ -713,7 +876,9 @@ public partial class DbContextTest
         Assert.Equal(expectedState, context.Entry(principal).State);
         Assert.Same(relatedPrincipal, context.Entry(relatedPrincipal).Entity);
         Assert.Equal(
-            expectedState == EntityState.Deleted ? EntityState.Unchanged : expectedState, context.Entry(relatedPrincipal).State);
+            expectedState == EntityState.Deleted ? EntityState.Unchanged : expectedState,
+            context.Entry(relatedPrincipal).State
+        );
 
         Assert.Same(relatedDependent, context.Entry(relatedDependent).Entity);
         Assert.Equal(expectedState, context.Entry(relatedDependent).State);
@@ -722,41 +887,66 @@ public partial class DbContextTest
     }
 
     [ConditionalFact]
-    public Task Can_add_existing_entities_with_default_value_to_context_to_be_deleted_non_generic()
-        => TrackEntitiesDefaultValuesTestNonGeneric((c, e) => c.Remove(e), (c, e) => c.Remove(e), EntityState.Deleted);
+    public Task Can_add_existing_entities_with_default_value_to_context_to_be_deleted_non_generic() =>
+        TrackEntitiesDefaultValuesTestNonGeneric(
+            (c, e) => c.Remove(e),
+            (c, e) => c.Remove(e),
+            EntityState.Deleted
+        );
 
     [ConditionalFact]
-    public Task Can_add_new_entities_with_default_value_to_context_non_generic_graph()
-        => TrackEntitiesDefaultValuesTestNonGeneric((c, e) => c.Add(e), (c, e) => c.Add(e), EntityState.Added);
+    public Task Can_add_new_entities_with_default_value_to_context_non_generic_graph() =>
+        TrackEntitiesDefaultValuesTestNonGeneric(
+            (c, e) => c.Add(e),
+            (c, e) => c.Add(e),
+            EntityState.Added
+        );
 
     [ConditionalFact]
-    public Task Can_add_new_entities_with_default_value_to_context_non_generic_graph_async()
-        => TrackEntitiesDefaultValuesTestNonGeneric((c, e) => c.AddAsync(e), (c, e) => c.AddAsync(e), EntityState.Added);
+    public Task Can_add_new_entities_with_default_value_to_context_non_generic_graph_async() =>
+        TrackEntitiesDefaultValuesTestNonGeneric(
+            (c, e) => c.AddAsync(e),
+            (c, e) => c.AddAsync(e),
+            EntityState.Added
+        );
 
     [ConditionalFact]
-    public Task Can_add_existing_entities_with_default_value_to_context_to_be_attached_non_generic_graph()
-        => TrackEntitiesDefaultValuesTestNonGeneric((c, e) => c.Attach(e), (c, e) => c.Attach(e), EntityState.Added);
+    public Task Can_add_existing_entities_with_default_value_to_context_to_be_attached_non_generic_graph() =>
+        TrackEntitiesDefaultValuesTestNonGeneric(
+            (c, e) => c.Attach(e),
+            (c, e) => c.Attach(e),
+            EntityState.Added
+        );
 
     [ConditionalFact]
-    public Task Can_add_existing_entities_with_default_value_to_context_to_be_updated_non_generic_graph()
-        => TrackEntitiesDefaultValuesTestNonGeneric((c, e) => c.Update(e), (c, e) => c.Update(e), EntityState.Added);
+    public Task Can_add_existing_entities_with_default_value_to_context_to_be_updated_non_generic_graph() =>
+        TrackEntitiesDefaultValuesTestNonGeneric(
+            (c, e) => c.Update(e),
+            (c, e) => c.Update(e),
+            EntityState.Added
+        );
 
     private static Task TrackEntitiesDefaultValuesTestNonGeneric(
         Func<DbContext, object, EntityEntry> categoryAdder,
         Func<DbContext, object, EntityEntry> productAdder,
-        EntityState expectedState)
-        => TrackEntitiesDefaultValuesTestNonGeneric(
+        EntityState expectedState
+    ) =>
+        TrackEntitiesDefaultValuesTestNonGeneric(
             (c, e) => ValueTask.FromResult(categoryAdder(c, e)),
             (c, e) => ValueTask.FromResult(productAdder(c, e)),
-            expectedState);
+            expectedState
+        );
 
     // Issue #3890
     private static async Task TrackEntitiesDefaultValuesTestNonGeneric(
         Func<DbContext, object, ValueTask<EntityEntry>> categoryAdder,
         Func<DbContext, object, ValueTask<EntityEntry>> productAdder,
-        EntityState expectedState)
+        EntityState expectedState
+    )
     {
-        using var context = new EarlyLearningCenter(InMemoryTestHelpers.Instance.CreateServiceProvider());
+        using var context = new EarlyLearningCenter(
+            InMemoryTestHelpers.Instance.CreateServiceProvider()
+        );
         var category1 = new Category
         {
             Id = 0,
@@ -766,8 +956,8 @@ public partial class DbContextTest
             {
                 Name = "Tanavast",
                 Stamp = new Stamp { Code = new Guid("984ade3c-2f7b-4651-a351-642e92ab7147") },
-                Notes = new[] { "A", "B" }
-            }
+                Notes = new[] { "A", "B" },
+            },
         };
         var product1 = new Product
         {
@@ -779,8 +969,8 @@ public partial class DbContextTest
             {
                 Name = "Tanavast",
                 Stamp = new Stamp { Code = new Guid("984ade3c-2f7b-4651-a351-642e92ab7147") },
-                Notes = new[] { "A", "B" }
-            }
+                Notes = new[] { "A", "B" },
+            },
         };
 
         var categoryEntry1 = await categoryAdder(context, category1);
@@ -795,39 +985,59 @@ public partial class DbContextTest
         Assert.Same(product1, productEntry1.Entity);
         Assert.Equal(expectedState, productEntry1.State);
 
-        Assert.Same(categoryEntry1.GetInfrastructure(), context.Entry(category1).GetInfrastructure());
+        Assert.Same(
+            categoryEntry1.GetInfrastructure(),
+            context.Entry(category1).GetInfrastructure()
+        );
         Assert.Same(productEntry1.GetInfrastructure(), context.Entry(product1).GetInfrastructure());
     }
 
     [ConditionalFact]
-    public Task Can_add_multiple_existing_entities_with_default_values_to_context_to_be_deleted_Enumerable()
-        => TrackMultipleEntitiesDefaultValueTestEnumerable(
-            (c, e) => c.RemoveRange(e), (c, e) => c.RemoveRange(e), EntityState.Deleted);
+    public Task Can_add_multiple_existing_entities_with_default_values_to_context_to_be_deleted_Enumerable() =>
+        TrackMultipleEntitiesDefaultValueTestEnumerable(
+            (c, e) => c.RemoveRange(e),
+            (c, e) => c.RemoveRange(e),
+            EntityState.Deleted
+        );
 
     [ConditionalFact]
-    public Task Can_add_multiple_new_entities_with_default_values_to_context_Enumerable_graph()
-        => TrackMultipleEntitiesDefaultValueTestEnumerable((c, e) => c.AddRange(e), (c, e) => c.AddRange(e), EntityState.Added);
+    public Task Can_add_multiple_new_entities_with_default_values_to_context_Enumerable_graph() =>
+        TrackMultipleEntitiesDefaultValueTestEnumerable(
+            (c, e) => c.AddRange(e),
+            (c, e) => c.AddRange(e),
+            EntityState.Added
+        );
 
     [ConditionalFact]
-    public Task Can_add_multiple_new_entities_with_default_values_to_context_Enumerable_graph_async()
-        => TrackMultipleEntitiesDefaultValueTestEnumerable(
-            (c, e) => c.AddRangeAsync(e), (c, e) => c.AddRangeAsync(e), EntityState.Added);
+    public Task Can_add_multiple_new_entities_with_default_values_to_context_Enumerable_graph_async() =>
+        TrackMultipleEntitiesDefaultValueTestEnumerable(
+            (c, e) => c.AddRangeAsync(e),
+            (c, e) => c.AddRangeAsync(e),
+            EntityState.Added
+        );
 
     [ConditionalFact]
-    public Task Can_add_multiple_existing_entities_with_default_values_to_context_to_be_attached_Enumerable_graph()
-        => TrackMultipleEntitiesDefaultValueTestEnumerable(
-            (c, e) => c.AttachRange(e), (c, e) => c.AttachRange(e), EntityState.Added);
+    public Task Can_add_multiple_existing_entities_with_default_values_to_context_to_be_attached_Enumerable_graph() =>
+        TrackMultipleEntitiesDefaultValueTestEnumerable(
+            (c, e) => c.AttachRange(e),
+            (c, e) => c.AttachRange(e),
+            EntityState.Added
+        );
 
     [ConditionalFact]
-    public Task Can_add_multiple_existing_entities_with_default_values_to_context_to_be_updated_Enumerable_graph()
-        => TrackMultipleEntitiesDefaultValueTestEnumerable(
-            (c, e) => c.UpdateRange(e), (c, e) => c.UpdateRange(e), EntityState.Added);
+    public Task Can_add_multiple_existing_entities_with_default_values_to_context_to_be_updated_Enumerable_graph() =>
+        TrackMultipleEntitiesDefaultValueTestEnumerable(
+            (c, e) => c.UpdateRange(e),
+            (c, e) => c.UpdateRange(e),
+            EntityState.Added
+        );
 
     private static Task TrackMultipleEntitiesDefaultValueTestEnumerable(
         Action<DbContext, IEnumerable<object>> categoryAdder,
         Action<DbContext, IEnumerable<object>> productAdder,
-        EntityState expectedState)
-        => TrackMultipleEntitiesDefaultValueTestEnumerable(
+        EntityState expectedState
+    ) =>
+        TrackMultipleEntitiesDefaultValueTestEnumerable(
             (c, e) =>
             {
                 categoryAdder(c, e);
@@ -838,15 +1048,19 @@ public partial class DbContextTest
                 productAdder(c, e);
                 return Task.FromResult(0);
             },
-            expectedState);
+            expectedState
+        );
 
     // Issue #3890
     private static async Task TrackMultipleEntitiesDefaultValueTestEnumerable(
         Func<DbContext, IEnumerable<object>, Task> categoryAdder,
         Func<DbContext, IEnumerable<object>, Task> productAdder,
-        EntityState expectedState)
+        EntityState expectedState
+    )
     {
-        using var context = new EarlyLearningCenter(InMemoryTestHelpers.Instance.CreateServiceProvider());
+        using var context = new EarlyLearningCenter(
+            InMemoryTestHelpers.Instance.CreateServiceProvider()
+        );
         var category1 = new Category
         {
             Id = 0,
@@ -856,8 +1070,8 @@ public partial class DbContextTest
             {
                 Name = "Tanavast",
                 Stamp = new Stamp { Code = new Guid("984ade3c-2f7b-4651-a351-642e92ab7147") },
-                Notes = new[] { "A", "B" }
-            }
+                Notes = new[] { "A", "B" },
+            },
         };
         var product1 = new Product
         {
@@ -869,14 +1083,12 @@ public partial class DbContextTest
             {
                 Name = "Tanavast",
                 Stamp = new Stamp { Code = new Guid("984ade3c-2f7b-4651-a351-642e92ab7147") },
-                Notes = new[] { "A", "B" }
-            }
+                Notes = new[] { "A", "B" },
+            },
         };
 
-        await categoryAdder(
-            context, new List<Category> { category1 });
-        await productAdder(
-            context, new List<Product> { product1 });
+        await categoryAdder(context, new List<Category> { category1 });
+        await productAdder(context, new List<Product> { product1 });
 
         Assert.Same(category1, context.Entry(category1).Entity);
         Assert.Same(product1, context.Entry(product1).Entity);
@@ -889,35 +1101,40 @@ public partial class DbContextTest
     }
 
     [ConditionalFact]
-    public void Can_add_no_existing_entities_to_context_to_be_deleted_Enumerable()
-        => TrackNoEntitiesTestEnumerable((c, e) => c.RemoveRange(e), (c, e) => c.RemoveRange(e));
+    public void Can_add_no_existing_entities_to_context_to_be_deleted_Enumerable() =>
+        TrackNoEntitiesTestEnumerable((c, e) => c.RemoveRange(e), (c, e) => c.RemoveRange(e));
 
     [ConditionalFact]
-    public void Can_add_no_new_entities_to_context_Enumerable_graph()
-        => TrackNoEntitiesTestEnumerable((c, e) => c.AddRange(e), (c, e) => c.AddRange(e));
+    public void Can_add_no_new_entities_to_context_Enumerable_graph() =>
+        TrackNoEntitiesTestEnumerable((c, e) => c.AddRange(e), (c, e) => c.AddRange(e));
 
     [ConditionalFact]
     public async Task Can_add_no_new_entities_to_context_Enumerable_graph_async()
     {
-        using var context = new EarlyLearningCenter(InMemoryTestHelpers.Instance.CreateServiceProvider());
+        using var context = new EarlyLearningCenter(
+            InMemoryTestHelpers.Instance.CreateServiceProvider()
+        );
         await context.AddRangeAsync(new HashSet<Category>());
         await context.AddRangeAsync(new HashSet<Product>());
         Assert.Empty(context.ChangeTracker.Entries());
     }
 
     [ConditionalFact]
-    public void Can_add_no_existing_entities_to_context_to_be_attached_Enumerable_graph()
-        => TrackNoEntitiesTestEnumerable((c, e) => c.AttachRange(e), (c, e) => c.AttachRange(e));
+    public void Can_add_no_existing_entities_to_context_to_be_attached_Enumerable_graph() =>
+        TrackNoEntitiesTestEnumerable((c, e) => c.AttachRange(e), (c, e) => c.AttachRange(e));
 
     [ConditionalFact]
-    public void Can_add_no_existing_entities_to_context_to_be_updated_Enumerable_graph()
-        => TrackNoEntitiesTestEnumerable((c, e) => c.UpdateRange(e), (c, e) => c.UpdateRange(e));
+    public void Can_add_no_existing_entities_to_context_to_be_updated_Enumerable_graph() =>
+        TrackNoEntitiesTestEnumerable((c, e) => c.UpdateRange(e), (c, e) => c.UpdateRange(e));
 
     private static void TrackNoEntitiesTestEnumerable(
         Action<DbContext, IEnumerable<object>> categoryAdder,
-        Action<DbContext, IEnumerable<object>> productAdder)
+        Action<DbContext, IEnumerable<object>> productAdder
+    )
     {
-        using var context = new EarlyLearningCenter(InMemoryTestHelpers.Instance.CreateServiceProvider());
+        using var context = new EarlyLearningCenter(
+            InMemoryTestHelpers.Instance.CreateServiceProvider()
+        );
         categoryAdder(context, new HashSet<Category>());
         productAdder(context, new HashSet<Product>());
         Assert.Empty(context.ChangeTracker.Entries());
@@ -930,9 +1147,15 @@ public partial class DbContextTest
     [InlineData(true, false, true)]
     [InlineData(true, false, false)]
     [InlineData(true, true, false)]
-    public async Task Can_add_new_entities_to_context_with_key_generation_graph(bool attachFirst, bool useEntry, bool async)
+    public async Task Can_add_new_entities_to_context_with_key_generation_graph(
+        bool attachFirst,
+        bool useEntry,
+        bool async
+    )
     {
-        using var context = new EarlyLearningCenter(InMemoryTestHelpers.Instance.CreateServiceProvider());
+        using var context = new EarlyLearningCenter(
+            InMemoryTestHelpers.Instance.CreateServiceProvider()
+        );
         var gu1 = new TheGu { ShirtColor = "Red" };
         var gu2 = new TheGu { ShirtColor = "Still Red" };
 
@@ -978,10 +1201,26 @@ public partial class DbContextTest
     [ConditionalFact]
     public async Task Can_use_Remove_to_change_entity_state()
     {
-        await ChangeStateWithMethod((c, e) => c.Remove(e), EntityState.Detached, EntityState.Deleted);
-        await ChangeStateWithMethod((c, e) => c.Remove(e), EntityState.Unchanged, EntityState.Deleted);
-        await ChangeStateWithMethod((c, e) => c.Remove(e), EntityState.Deleted, EntityState.Deleted);
-        await ChangeStateWithMethod((c, e) => c.Remove(e), EntityState.Modified, EntityState.Deleted);
+        await ChangeStateWithMethod(
+            (c, e) => c.Remove(e),
+            EntityState.Detached,
+            EntityState.Deleted
+        );
+        await ChangeStateWithMethod(
+            (c, e) => c.Remove(e),
+            EntityState.Unchanged,
+            EntityState.Deleted
+        );
+        await ChangeStateWithMethod(
+            (c, e) => c.Remove(e),
+            EntityState.Deleted,
+            EntityState.Deleted
+        );
+        await ChangeStateWithMethod(
+            (c, e) => c.Remove(e),
+            EntityState.Modified,
+            EntityState.Deleted
+        );
         await ChangeStateWithMethod((c, e) => c.Remove(e), EntityState.Added, EntityState.Detached);
     }
 
@@ -998,52 +1237,109 @@ public partial class DbContextTest
     [ConditionalFact]
     public async Task Can_use_graph_Add_to_change_entity_state_async()
     {
-        await ChangeStateWithMethod((c, e) => c.AddAsync(e), EntityState.Detached, EntityState.Added);
-        await ChangeStateWithMethod((c, e) => c.AddAsync(e), EntityState.Unchanged, EntityState.Added);
-        await ChangeStateWithMethod((c, e) => c.AddAsync(e), EntityState.Deleted, EntityState.Added);
-        await ChangeStateWithMethod((c, e) => c.AddAsync(e), EntityState.Modified, EntityState.Added);
+        await ChangeStateWithMethod(
+            (c, e) => c.AddAsync(e),
+            EntityState.Detached,
+            EntityState.Added
+        );
+        await ChangeStateWithMethod(
+            (c, e) => c.AddAsync(e),
+            EntityState.Unchanged,
+            EntityState.Added
+        );
+        await ChangeStateWithMethod(
+            (c, e) => c.AddAsync(e),
+            EntityState.Deleted,
+            EntityState.Added
+        );
+        await ChangeStateWithMethod(
+            (c, e) => c.AddAsync(e),
+            EntityState.Modified,
+            EntityState.Added
+        );
         await ChangeStateWithMethod((c, e) => c.AddAsync(e), EntityState.Added, EntityState.Added);
     }
 
     [ConditionalFact]
     public async Task Can_use_graph_Attach_to_change_entity_state()
     {
-        await ChangeStateWithMethod((c, e) => c.Attach(e), EntityState.Detached, EntityState.Unchanged);
-        await ChangeStateWithMethod((c, e) => c.Attach(e), EntityState.Unchanged, EntityState.Unchanged);
-        await ChangeStateWithMethod((c, e) => c.Attach(e), EntityState.Deleted, EntityState.Unchanged);
-        await ChangeStateWithMethod((c, e) => c.Attach(e), EntityState.Modified, EntityState.Unchanged);
-        await ChangeStateWithMethod((c, e) => c.Attach(e), EntityState.Added, EntityState.Unchanged);
+        await ChangeStateWithMethod(
+            (c, e) => c.Attach(e),
+            EntityState.Detached,
+            EntityState.Unchanged
+        );
+        await ChangeStateWithMethod(
+            (c, e) => c.Attach(e),
+            EntityState.Unchanged,
+            EntityState.Unchanged
+        );
+        await ChangeStateWithMethod(
+            (c, e) => c.Attach(e),
+            EntityState.Deleted,
+            EntityState.Unchanged
+        );
+        await ChangeStateWithMethod(
+            (c, e) => c.Attach(e),
+            EntityState.Modified,
+            EntityState.Unchanged
+        );
+        await ChangeStateWithMethod(
+            (c, e) => c.Attach(e),
+            EntityState.Added,
+            EntityState.Unchanged
+        );
     }
 
     [ConditionalFact]
     public async Task Can_use_graph_Update_to_change_entity_state()
     {
-        await ChangeStateWithMethod((c, e) => c.Update(e), EntityState.Detached, EntityState.Modified);
-        await ChangeStateWithMethod((c, e) => c.Update(e), EntityState.Unchanged, EntityState.Modified);
-        await ChangeStateWithMethod((c, e) => c.Update(e), EntityState.Deleted, EntityState.Modified);
-        await ChangeStateWithMethod((c, e) => c.Update(e), EntityState.Modified, EntityState.Modified);
+        await ChangeStateWithMethod(
+            (c, e) => c.Update(e),
+            EntityState.Detached,
+            EntityState.Modified
+        );
+        await ChangeStateWithMethod(
+            (c, e) => c.Update(e),
+            EntityState.Unchanged,
+            EntityState.Modified
+        );
+        await ChangeStateWithMethod(
+            (c, e) => c.Update(e),
+            EntityState.Deleted,
+            EntityState.Modified
+        );
+        await ChangeStateWithMethod(
+            (c, e) => c.Update(e),
+            EntityState.Modified,
+            EntityState.Modified
+        );
         await ChangeStateWithMethod((c, e) => c.Update(e), EntityState.Added, EntityState.Modified);
     }
 
     private Task ChangeStateWithMethod(
         Action<DbContext, object> action,
         EntityState initialState,
-        EntityState expectedState)
-        => ChangeStateWithMethod(
+        EntityState expectedState
+    ) =>
+        ChangeStateWithMethod(
             (c, e) =>
             {
                 action(c, e);
                 return new ValueTask<EntityEntry>();
             },
             initialState,
-            expectedState);
+            expectedState
+        );
 
     private async Task ChangeStateWithMethod(
         Func<DbContext, object, ValueTask<EntityEntry>> action,
         EntityState initialState,
-        EntityState expectedState)
+        EntityState expectedState
+    )
     {
-        using var context = new EarlyLearningCenter(InMemoryTestHelpers.Instance.CreateServiceProvider());
+        using var context = new EarlyLearningCenter(
+            InMemoryTestHelpers.Instance.CreateServiceProvider()
+        );
         var entity = new Category
         {
             Id = 1,
@@ -1053,8 +1349,8 @@ public partial class DbContextTest
             {
                 Name = "Tanavast",
                 Stamp = new Stamp { Code = new Guid("984ade3c-2f7b-4651-a351-642e92ab7147") },
-                Notes = new[] { "A", "B" }
-            }
+                Notes = new[] { "A", "B" },
+            },
         };
         var entry = context.Entry(entity);
 
@@ -1068,7 +1364,9 @@ public partial class DbContextTest
     [ConditionalFact] // Issue #1246
     public void Can_attach_with_inconsistent_FK_principal_first_fully_fixed_up()
     {
-        using var context = new EarlyLearningCenter(InMemoryTestHelpers.Instance.CreateServiceProvider());
+        using var context = new EarlyLearningCenter(
+            InMemoryTestHelpers.Instance.CreateServiceProvider()
+        );
         var category = new Category
         {
             Id = 1,
@@ -1078,8 +1376,8 @@ public partial class DbContextTest
             {
                 Name = "Tanavast",
                 Stamp = new Stamp { Code = new Guid("984ade3c-2f7b-4651-a351-642e92ab7147") },
-                Notes = new[] { "A", "B" }
-            }
+                Notes = new[] { "A", "B" },
+            },
         };
         var product = new Product
         {
@@ -1092,8 +1390,8 @@ public partial class DbContextTest
             {
                 Name = "Tanavast",
                 Stamp = new Stamp { Code = new Guid("984ade3c-2f7b-4651-a351-642e92ab7147") },
-                Notes = new[] { "A", "B" }
-            }
+                Notes = new[] { "A", "B" },
+            },
         };
         category.Products = new List<Product> { product };
 
@@ -1119,7 +1417,9 @@ public partial class DbContextTest
     [ConditionalFact] // Issue #1246
     public void Can_attach_with_inconsistent_FK_dependent_first_fully_fixed_up()
     {
-        using var context = new EarlyLearningCenter(InMemoryTestHelpers.Instance.CreateServiceProvider());
+        using var context = new EarlyLearningCenter(
+            InMemoryTestHelpers.Instance.CreateServiceProvider()
+        );
         var category = new Category
         {
             Id = 1,
@@ -1129,8 +1429,8 @@ public partial class DbContextTest
             {
                 Name = "Tanavast",
                 Stamp = new Stamp { Code = new Guid("984ade3c-2f7b-4651-a351-642e92ab7147") },
-                Notes = new[] { "A", "B" }
-            }
+                Notes = new[] { "A", "B" },
+            },
         };
         var product = new Product
         {
@@ -1143,8 +1443,8 @@ public partial class DbContextTest
             {
                 Name = "Tanavast",
                 Stamp = new Stamp { Code = new Guid("984ade3c-2f7b-4651-a351-642e92ab7147") },
-                Notes = new[] { "A", "B" }
-            }
+                Notes = new[] { "A", "B" },
+            },
         };
         category.Products = new List<Product> { product };
 
@@ -1168,7 +1468,9 @@ public partial class DbContextTest
     [ConditionalFact] // Issue #1246
     public void Can_attach_with_inconsistent_FK_principal_first_collection_not_fixed_up()
     {
-        using var context = new EarlyLearningCenter(InMemoryTestHelpers.Instance.CreateServiceProvider());
+        using var context = new EarlyLearningCenter(
+            InMemoryTestHelpers.Instance.CreateServiceProvider()
+        );
         var category = new Category
         {
             Id = 1,
@@ -1178,8 +1480,8 @@ public partial class DbContextTest
             {
                 Name = "Tanavast",
                 Stamp = new Stamp { Code = new Guid("984ade3c-2f7b-4651-a351-642e92ab7147") },
-                Notes = new[] { "A", "B" }
-            }
+                Notes = new[] { "A", "B" },
+            },
         };
         var product = new Product
         {
@@ -1192,8 +1494,8 @@ public partial class DbContextTest
             {
                 Name = "Tanavast",
                 Stamp = new Stamp { Code = new Guid("984ade3c-2f7b-4651-a351-642e92ab7147") },
-                Notes = new[] { "A", "B" }
-            }
+                Notes = new[] { "A", "B" },
+            },
         };
         category.Products = new List<Product>();
 
@@ -1217,7 +1519,9 @@ public partial class DbContextTest
     [ConditionalFact] // Issue #1246
     public void Can_attach_with_inconsistent_FK_dependent_first_collection_not_fixed_up()
     {
-        using var context = new EarlyLearningCenter(InMemoryTestHelpers.Instance.CreateServiceProvider());
+        using var context = new EarlyLearningCenter(
+            InMemoryTestHelpers.Instance.CreateServiceProvider()
+        );
         var category = new Category
         {
             Id = 1,
@@ -1227,8 +1531,8 @@ public partial class DbContextTest
             {
                 Name = "Tanavast",
                 Stamp = new Stamp { Code = new Guid("984ade3c-2f7b-4651-a351-642e92ab7147") },
-                Notes = new[] { "A", "B" }
-            }
+                Notes = new[] { "A", "B" },
+            },
         };
         var product = new Product
         {
@@ -1241,8 +1545,8 @@ public partial class DbContextTest
             {
                 Name = "Tanavast",
                 Stamp = new Stamp { Code = new Guid("984ade3c-2f7b-4651-a351-642e92ab7147") },
-                Notes = new[] { "A", "B" }
-            }
+                Notes = new[] { "A", "B" },
+            },
         };
         category.Products = new List<Product>();
 
@@ -1266,7 +1570,9 @@ public partial class DbContextTest
     [ConditionalFact] // Issue #1246
     public void Can_attach_with_inconsistent_FK_principal_first_reference_not_fixed_up()
     {
-        using var context = new EarlyLearningCenter(InMemoryTestHelpers.Instance.CreateServiceProvider());
+        using var context = new EarlyLearningCenter(
+            InMemoryTestHelpers.Instance.CreateServiceProvider()
+        );
         var category = new Category
         {
             Id = 1,
@@ -1276,8 +1582,8 @@ public partial class DbContextTest
             {
                 Name = "Tanavast",
                 Stamp = new Stamp { Code = new Guid("984ade3c-2f7b-4651-a351-642e92ab7147") },
-                Notes = new[] { "A", "B" }
-            }
+                Notes = new[] { "A", "B" },
+            },
         };
         var product = new Product
         {
@@ -1289,8 +1595,8 @@ public partial class DbContextTest
             {
                 Name = "Tanavast",
                 Stamp = new Stamp { Code = new Guid("984ade3c-2f7b-4651-a351-642e92ab7147") },
-                Notes = new[] { "A", "B" }
-            }
+                Notes = new[] { "A", "B" },
+            },
         };
         category.Products = new List<Product> { product };
 
@@ -1314,7 +1620,9 @@ public partial class DbContextTest
     [ConditionalFact] // Issue #1246
     public void Can_attach_with_inconsistent_FK_dependent_first_reference_not_fixed_up()
     {
-        using var context = new EarlyLearningCenter(InMemoryTestHelpers.Instance.CreateServiceProvider());
+        using var context = new EarlyLearningCenter(
+            InMemoryTestHelpers.Instance.CreateServiceProvider()
+        );
         var category = new Category
         {
             Id = 1,
@@ -1324,8 +1632,8 @@ public partial class DbContextTest
             {
                 Name = "Tanavast",
                 Stamp = new Stamp { Code = new Guid("984ade3c-2f7b-4651-a351-642e92ab7147") },
-                Notes = new[] { "A", "B" }
-            }
+                Notes = new[] { "A", "B" },
+            },
         };
         var product = new Product
         {
@@ -1337,8 +1645,8 @@ public partial class DbContextTest
             {
                 Name = "Tanavast",
                 Stamp = new Stamp { Code = new Guid("984ade3c-2f7b-4651-a351-642e92ab7147") },
-                Notes = new[] { "A", "B" }
-            }
+                Notes = new[] { "A", "B" },
+            },
         };
         category.Products = new List<Product> { product };
 
@@ -1362,7 +1670,9 @@ public partial class DbContextTest
     [ConditionalFact] // Issue #1246
     public void Can_set_set_to_Unchanged_with_inconsistent_FK_principal_first_fully_fixed_up()
     {
-        using var context = new EarlyLearningCenter(InMemoryTestHelpers.Instance.CreateServiceProvider());
+        using var context = new EarlyLearningCenter(
+            InMemoryTestHelpers.Instance.CreateServiceProvider()
+        );
         var category = new Category
         {
             Id = 1,
@@ -1372,8 +1682,8 @@ public partial class DbContextTest
             {
                 Name = "Tanavast",
                 Stamp = new Stamp { Code = new Guid("984ade3c-2f7b-4651-a351-642e92ab7147") },
-                Notes = new[] { "A", "B" }
-            }
+                Notes = new[] { "A", "B" },
+            },
         };
         var product = new Product
         {
@@ -1386,8 +1696,8 @@ public partial class DbContextTest
             {
                 Name = "Tanavast",
                 Stamp = new Stamp { Code = new Guid("984ade3c-2f7b-4651-a351-642e92ab7147") },
-                Notes = new[] { "A", "B" }
-            }
+                Notes = new[] { "A", "B" },
+            },
         };
         category.Products = new List<Product> { product };
 
@@ -1413,7 +1723,9 @@ public partial class DbContextTest
     [ConditionalFact] // Issue #1246
     public void Can_set_set_to_Unchanged_with_inconsistent_FK_dependent_first_fully_fixed_up()
     {
-        using var context = new EarlyLearningCenter(InMemoryTestHelpers.Instance.CreateServiceProvider());
+        using var context = new EarlyLearningCenter(
+            InMemoryTestHelpers.Instance.CreateServiceProvider()
+        );
         var category = new Category
         {
             Id = 1,
@@ -1423,8 +1735,8 @@ public partial class DbContextTest
             {
                 Name = "Tanavast",
                 Stamp = new Stamp { Code = new Guid("984ade3c-2f7b-4651-a351-642e92ab7147") },
-                Notes = new[] { "A", "B" }
-            }
+                Notes = new[] { "A", "B" },
+            },
         };
         var product = new Product
         {
@@ -1437,8 +1749,8 @@ public partial class DbContextTest
             {
                 Name = "Tanavast",
                 Stamp = new Stamp { Code = new Guid("984ade3c-2f7b-4651-a351-642e92ab7147") },
-                Notes = new[] { "A", "B" }
-            }
+                Notes = new[] { "A", "B" },
+            },
         };
         category.Products = new List<Product> { product };
 
@@ -1462,7 +1774,9 @@ public partial class DbContextTest
     [ConditionalFact] // Issue #1246
     public void Can_set_set_to_Unchanged_with_inconsistent_FK_principal_first_collection_not_fixed_up()
     {
-        using var context = new EarlyLearningCenter(InMemoryTestHelpers.Instance.CreateServiceProvider());
+        using var context = new EarlyLearningCenter(
+            InMemoryTestHelpers.Instance.CreateServiceProvider()
+        );
         var category = new Category
         {
             Id = 1,
@@ -1472,8 +1786,8 @@ public partial class DbContextTest
             {
                 Name = "Tanavast",
                 Stamp = new Stamp { Code = new Guid("984ade3c-2f7b-4651-a351-642e92ab7147") },
-                Notes = new[] { "A", "B" }
-            }
+                Notes = new[] { "A", "B" },
+            },
         };
         var product = new Product
         {
@@ -1486,8 +1800,8 @@ public partial class DbContextTest
             {
                 Name = "Tanavast",
                 Stamp = new Stamp { Code = new Guid("984ade3c-2f7b-4651-a351-642e92ab7147") },
-                Notes = new[] { "A", "B" }
-            }
+                Notes = new[] { "A", "B" },
+            },
         };
         category.Products = new List<Product>();
 
@@ -1511,7 +1825,9 @@ public partial class DbContextTest
     [ConditionalFact] // Issue #1246
     public void Can_set_set_to_Unchanged_with_inconsistent_FK_dependent_first_collection_not_fixed_up()
     {
-        using var context = new EarlyLearningCenter(InMemoryTestHelpers.Instance.CreateServiceProvider());
+        using var context = new EarlyLearningCenter(
+            InMemoryTestHelpers.Instance.CreateServiceProvider()
+        );
         var category = new Category
         {
             Id = 1,
@@ -1521,8 +1837,8 @@ public partial class DbContextTest
             {
                 Name = "Tanavast",
                 Stamp = new Stamp { Code = new Guid("984ade3c-2f7b-4651-a351-642e92ab7147") },
-                Notes = new[] { "A", "B" }
-            }
+                Notes = new[] { "A", "B" },
+            },
         };
         var product = new Product
         {
@@ -1535,8 +1851,8 @@ public partial class DbContextTest
             {
                 Name = "Tanavast",
                 Stamp = new Stamp { Code = new Guid("984ade3c-2f7b-4651-a351-642e92ab7147") },
-                Notes = new[] { "A", "B" }
-            }
+                Notes = new[] { "A", "B" },
+            },
         };
         category.Products = new List<Product>();
 
@@ -1560,7 +1876,9 @@ public partial class DbContextTest
     [ConditionalFact] // Issue #1246
     public void Can_set_set_to_Unchanged_with_inconsistent_FK_principal_first_reference_not_fixed_up()
     {
-        using var context = new EarlyLearningCenter(InMemoryTestHelpers.Instance.CreateServiceProvider());
+        using var context = new EarlyLearningCenter(
+            InMemoryTestHelpers.Instance.CreateServiceProvider()
+        );
         var category = new Category
         {
             Id = 1,
@@ -1570,8 +1888,8 @@ public partial class DbContextTest
             {
                 Name = "Tanavast",
                 Stamp = new Stamp { Code = new Guid("984ade3c-2f7b-4651-a351-642e92ab7147") },
-                Notes = new[] { "A", "B" }
-            }
+                Notes = new[] { "A", "B" },
+            },
         };
         var product = new Product
         {
@@ -1583,8 +1901,8 @@ public partial class DbContextTest
             {
                 Name = "Tanavast",
                 Stamp = new Stamp { Code = new Guid("984ade3c-2f7b-4651-a351-642e92ab7147") },
-                Notes = new[] { "A", "B" }
-            }
+                Notes = new[] { "A", "B" },
+            },
         };
         category.Products = new List<Product> { product };
 
@@ -1608,7 +1926,9 @@ public partial class DbContextTest
     [ConditionalFact] // Issue #1246
     public void Can_set_set_to_Unchanged_with_inconsistent_FK_dependent_first_reference_not_fixed_up()
     {
-        using var context = new EarlyLearningCenter(InMemoryTestHelpers.Instance.CreateServiceProvider());
+        using var context = new EarlyLearningCenter(
+            InMemoryTestHelpers.Instance.CreateServiceProvider()
+        );
         var category = new Category
         {
             Id = 1,
@@ -1618,8 +1938,8 @@ public partial class DbContextTest
             {
                 Name = "Tanavast",
                 Stamp = new Stamp { Code = new Guid("984ade3c-2f7b-4651-a351-642e92ab7147") },
-                Notes = new[] { "A", "B" }
-            }
+                Notes = new[] { "A", "B" },
+            },
         };
         var product = new Product
         {
@@ -1631,8 +1951,8 @@ public partial class DbContextTest
             {
                 Name = "Tanavast",
                 Stamp = new Stamp { Code = new Guid("984ade3c-2f7b-4651-a351-642e92ab7147") },
-                Notes = new[] { "A", "B" }
-            }
+                Notes = new[] { "A", "B" },
+            },
         };
         category.Products = new List<Product> { product };
 
@@ -1656,20 +1976,28 @@ public partial class DbContextTest
     [ConditionalFact] // Issue #1246
     public void Can_attach_with_inconsistent_FK_principal_first_fully_fixed_up_with_tracked_FK_match()
     {
-        using var context = new EarlyLearningCenter(InMemoryTestHelpers.Instance.CreateServiceProvider());
-        var category7 = context.Attach(
-            new Category
-            {
-                Id = 7,
-                Products = new List<Product>(),
-                Stamp = new Stamp { Code = new Guid("984ade3c-2f7b-4651-a351-642e92ab7146") },
-                Tag = new Tag
+        using var context = new EarlyLearningCenter(
+            InMemoryTestHelpers.Instance.CreateServiceProvider()
+        );
+        var category7 = context
+            .Attach(
+                new Category
                 {
-                    Name = "Tanavast",
-                    Stamp = new Stamp { Code = new Guid("984ade3c-2f7b-4651-a351-642e92ab7147") },
-                    Notes = new[] { "A", "B" }
+                    Id = 7,
+                    Products = new List<Product>(),
+                    Stamp = new Stamp { Code = new Guid("984ade3c-2f7b-4651-a351-642e92ab7146") },
+                    Tag = new Tag
+                    {
+                        Name = "Tanavast",
+                        Stamp = new Stamp
+                        {
+                            Code = new Guid("984ade3c-2f7b-4651-a351-642e92ab7147"),
+                        },
+                        Notes = new[] { "A", "B" },
+                    },
                 }
-            }).Entity;
+            )
+            .Entity;
 
         var category = new Category
         {
@@ -1680,8 +2008,8 @@ public partial class DbContextTest
             {
                 Name = "Tanavast",
                 Stamp = new Stamp { Code = new Guid("984ade3c-2f7b-4651-a351-642e92ab7147") },
-                Notes = new[] { "A", "B" }
-            }
+                Notes = new[] { "A", "B" },
+            },
         };
         var product = new Product
         {
@@ -1694,8 +2022,8 @@ public partial class DbContextTest
             {
                 Name = "Tanavast",
                 Stamp = new Stamp { Code = new Guid("984ade3c-2f7b-4651-a351-642e92ab7147") },
-                Notes = new[] { "A", "B" }
-            }
+                Notes = new[] { "A", "B" },
+            },
         };
         category.Products = new List<Product> { product };
 
@@ -1722,20 +2050,28 @@ public partial class DbContextTest
     [ConditionalFact] // Issue #1246
     public void Can_attach_with_inconsistent_FK_dependent_first_fully_fixed_up_with_tracked_FK_match()
     {
-        using var context = new EarlyLearningCenter(InMemoryTestHelpers.Instance.CreateServiceProvider());
-        var category7 = context.Attach(
-            new Category
-            {
-                Id = 7,
-                Products = new List<Product>(),
-                Stamp = new Stamp { Code = new Guid("984ade3c-2f7b-4651-a351-642e92ab7146") },
-                Tag = new Tag
+        using var context = new EarlyLearningCenter(
+            InMemoryTestHelpers.Instance.CreateServiceProvider()
+        );
+        var category7 = context
+            .Attach(
+                new Category
                 {
-                    Name = "Tanavast",
-                    Stamp = new Stamp { Code = new Guid("984ade3c-2f7b-4651-a351-642e92ab7147") },
-                    Notes = new[] { "A", "B" }
+                    Id = 7,
+                    Products = new List<Product>(),
+                    Stamp = new Stamp { Code = new Guid("984ade3c-2f7b-4651-a351-642e92ab7146") },
+                    Tag = new Tag
+                    {
+                        Name = "Tanavast",
+                        Stamp = new Stamp
+                        {
+                            Code = new Guid("984ade3c-2f7b-4651-a351-642e92ab7147"),
+                        },
+                        Notes = new[] { "A", "B" },
+                    },
                 }
-            }).Entity;
+            )
+            .Entity;
 
         var category = new Category
         {
@@ -1746,8 +2082,8 @@ public partial class DbContextTest
             {
                 Name = "Tanavast",
                 Stamp = new Stamp { Code = new Guid("984ade3c-2f7b-4651-a351-642e92ab7147") },
-                Notes = new[] { "A", "B" }
-            }
+                Notes = new[] { "A", "B" },
+            },
         };
 
         var product = new Product
@@ -1761,8 +2097,8 @@ public partial class DbContextTest
             {
                 Name = "Tanavast",
                 Stamp = new Stamp { Code = new Guid("984ade3c-2f7b-4651-a351-642e92ab7147") },
-                Notes = new[] { "A", "B" }
-            }
+                Notes = new[] { "A", "B" },
+            },
         };
 
         category.Products = new List<Product> { product };
@@ -1791,20 +2127,28 @@ public partial class DbContextTest
     [ConditionalFact] // Issue #1246
     public void Can_attach_with_inconsistent_FK_principal_first_collection_not_fixed_up_with_tracked_FK_match()
     {
-        using var context = new EarlyLearningCenter(InMemoryTestHelpers.Instance.CreateServiceProvider());
-        var category7 = context.Attach(
-            new Category
-            {
-                Id = 7,
-                Products = new List<Product>(),
-                Stamp = new Stamp { Code = new Guid("984ade3c-2f7b-4651-a351-642e92ab7146") },
-                Tag = new Tag
+        using var context = new EarlyLearningCenter(
+            InMemoryTestHelpers.Instance.CreateServiceProvider()
+        );
+        var category7 = context
+            .Attach(
+                new Category
                 {
-                    Name = "Tanavast",
-                    Stamp = new Stamp { Code = new Guid("984ade3c-2f7b-4651-a351-642e92ab7147") },
-                    Notes = new[] { "A", "B" }
+                    Id = 7,
+                    Products = new List<Product>(),
+                    Stamp = new Stamp { Code = new Guid("984ade3c-2f7b-4651-a351-642e92ab7146") },
+                    Tag = new Tag
+                    {
+                        Name = "Tanavast",
+                        Stamp = new Stamp
+                        {
+                            Code = new Guid("984ade3c-2f7b-4651-a351-642e92ab7147"),
+                        },
+                        Notes = new[] { "A", "B" },
+                    },
                 }
-            }).Entity;
+            )
+            .Entity;
 
         var category = new Category
         {
@@ -1815,8 +2159,8 @@ public partial class DbContextTest
             {
                 Name = "Tanavast",
                 Stamp = new Stamp { Code = new Guid("984ade3c-2f7b-4651-a351-642e92ab7147") },
-                Notes = new[] { "A", "B" }
-            }
+                Notes = new[] { "A", "B" },
+            },
         };
 
         var product = new Product
@@ -1830,8 +2174,8 @@ public partial class DbContextTest
             {
                 Name = "Tanavast",
                 Stamp = new Stamp { Code = new Guid("984ade3c-2f7b-4651-a351-642e92ab7147") },
-                Notes = new[] { "A", "B" }
-            }
+                Notes = new[] { "A", "B" },
+            },
         };
 
         category.Products = new List<Product>();
@@ -1860,20 +2204,28 @@ public partial class DbContextTest
     [ConditionalFact] // Issue #1246
     public void Can_attach_with_inconsistent_FK_dependent_first_collection_not_fixed_up_with_tracked_FK_match()
     {
-        using var context = new EarlyLearningCenter(InMemoryTestHelpers.Instance.CreateServiceProvider());
-        var category7 = context.Attach(
-            new Category
-            {
-                Id = 7,
-                Products = new List<Product>(),
-                Stamp = new Stamp { Code = new Guid("984ade3c-2f7b-4651-a351-642e92ab7146") },
-                Tag = new Tag
+        using var context = new EarlyLearningCenter(
+            InMemoryTestHelpers.Instance.CreateServiceProvider()
+        );
+        var category7 = context
+            .Attach(
+                new Category
                 {
-                    Name = "Tanavast",
-                    Stamp = new Stamp { Code = new Guid("984ade3c-2f7b-4651-a351-642e92ab7147") },
-                    Notes = new[] { "A", "B" }
+                    Id = 7,
+                    Products = new List<Product>(),
+                    Stamp = new Stamp { Code = new Guid("984ade3c-2f7b-4651-a351-642e92ab7146") },
+                    Tag = new Tag
+                    {
+                        Name = "Tanavast",
+                        Stamp = new Stamp
+                        {
+                            Code = new Guid("984ade3c-2f7b-4651-a351-642e92ab7147"),
+                        },
+                        Notes = new[] { "A", "B" },
+                    },
                 }
-            }).Entity;
+            )
+            .Entity;
 
         var category = new Category
         {
@@ -1884,8 +2236,8 @@ public partial class DbContextTest
             {
                 Name = "Tanavast",
                 Stamp = new Stamp { Code = new Guid("984ade3c-2f7b-4651-a351-642e92ab7147") },
-                Notes = new[] { "A", "B" }
-            }
+                Notes = new[] { "A", "B" },
+            },
         };
 
         var product = new Product
@@ -1899,8 +2251,8 @@ public partial class DbContextTest
             {
                 Name = "Tanavast",
                 Stamp = new Stamp { Code = new Guid("984ade3c-2f7b-4651-a351-642e92ab7147") },
-                Notes = new[] { "A", "B" }
-            }
+                Notes = new[] { "A", "B" },
+            },
         };
 
         category.Products = new List<Product>();
@@ -1929,20 +2281,28 @@ public partial class DbContextTest
     [ConditionalFact] // Issue #1246
     public void Can_attach_with_inconsistent_FK_principal_first_reference_not_fixed_up_with_tracked_FK_match()
     {
-        using var context = new EarlyLearningCenter(InMemoryTestHelpers.Instance.CreateServiceProvider());
-        var category7 = context.Attach(
-            new Category
-            {
-                Id = 7,
-                Products = new List<Product>(),
-                Stamp = new Stamp { Code = new Guid("984ade3c-2f7b-4651-a351-642e92ab7146") },
-                Tag = new Tag
+        using var context = new EarlyLearningCenter(
+            InMemoryTestHelpers.Instance.CreateServiceProvider()
+        );
+        var category7 = context
+            .Attach(
+                new Category
                 {
-                    Name = "Tanavast",
-                    Stamp = new Stamp { Code = new Guid("984ade3c-2f7b-4651-a351-642e92ab7147") },
-                    Notes = new[] { "A", "B" }
+                    Id = 7,
+                    Products = new List<Product>(),
+                    Stamp = new Stamp { Code = new Guid("984ade3c-2f7b-4651-a351-642e92ab7146") },
+                    Tag = new Tag
+                    {
+                        Name = "Tanavast",
+                        Stamp = new Stamp
+                        {
+                            Code = new Guid("984ade3c-2f7b-4651-a351-642e92ab7147"),
+                        },
+                        Notes = new[] { "A", "B" },
+                    },
                 }
-            }).Entity;
+            )
+            .Entity;
 
         var category = new Category
         {
@@ -1953,8 +2313,8 @@ public partial class DbContextTest
             {
                 Name = "Tanavast",
                 Stamp = new Stamp { Code = new Guid("984ade3c-2f7b-4651-a351-642e92ab7147") },
-                Notes = new[] { "A", "B" }
-            }
+                Notes = new[] { "A", "B" },
+            },
         };
         var product = new Product
         {
@@ -1966,8 +2326,8 @@ public partial class DbContextTest
             {
                 Name = "Tanavast",
                 Stamp = new Stamp { Code = new Guid("984ade3c-2f7b-4651-a351-642e92ab7147") },
-                Notes = new[] { "A", "B" }
-            }
+                Notes = new[] { "A", "B" },
+            },
         };
         category.Products = new List<Product> { product };
 
@@ -1993,20 +2353,28 @@ public partial class DbContextTest
     [ConditionalFact] // Issue #1246
     public void Can_attach_with_inconsistent_FK_dependent_first_reference_not_fixed_up_with_tracked_FK_match()
     {
-        using var context = new EarlyLearningCenter(InMemoryTestHelpers.Instance.CreateServiceProvider());
-        var category7 = context.Attach(
-            new Category
-            {
-                Id = 7,
-                Products = new List<Product>(),
-                Stamp = new Stamp { Code = new Guid("984ade3c-2f7b-4651-a351-642e92ab7146") },
-                Tag = new Tag
+        using var context = new EarlyLearningCenter(
+            InMemoryTestHelpers.Instance.CreateServiceProvider()
+        );
+        var category7 = context
+            .Attach(
+                new Category
                 {
-                    Name = "Tanavast",
-                    Stamp = new Stamp { Code = new Guid("984ade3c-2f7b-4651-a351-642e92ab7147") },
-                    Notes = new[] { "A", "B" }
+                    Id = 7,
+                    Products = new List<Product>(),
+                    Stamp = new Stamp { Code = new Guid("984ade3c-2f7b-4651-a351-642e92ab7146") },
+                    Tag = new Tag
+                    {
+                        Name = "Tanavast",
+                        Stamp = new Stamp
+                        {
+                            Code = new Guid("984ade3c-2f7b-4651-a351-642e92ab7147"),
+                        },
+                        Notes = new[] { "A", "B" },
+                    },
                 }
-            }).Entity;
+            )
+            .Entity;
 
         var category = new Category
         {
@@ -2017,8 +2385,8 @@ public partial class DbContextTest
             {
                 Name = "Tanavast",
                 Stamp = new Stamp { Code = new Guid("984ade3c-2f7b-4651-a351-642e92ab7147") },
-                Notes = new[] { "A", "B" }
-            }
+                Notes = new[] { "A", "B" },
+            },
         };
         var product = new Product
         {
@@ -2030,8 +2398,8 @@ public partial class DbContextTest
             {
                 Name = "Tanavast",
                 Stamp = new Stamp { Code = new Guid("984ade3c-2f7b-4651-a351-642e92ab7147") },
-                Notes = new[] { "A", "B" }
-            }
+                Notes = new[] { "A", "B" },
+            },
         };
         category.Products = new List<Product> { product };
 
@@ -2056,20 +2424,28 @@ public partial class DbContextTest
     [ConditionalFact] // Issue #1246
     public void Can_set_set_to_Unchanged_with_inconsistent_FK_principal_first_fully_fixed_up_with_tracked_FK_match()
     {
-        using var context = new EarlyLearningCenter(InMemoryTestHelpers.Instance.CreateServiceProvider());
-        var category7 = context.Attach(
-            new Category
-            {
-                Id = 7,
-                Products = new List<Product>(),
-                Stamp = new Stamp { Code = new Guid("984ade3c-2f7b-4651-a351-642e92ab7146") },
-                Tag = new Tag
+        using var context = new EarlyLearningCenter(
+            InMemoryTestHelpers.Instance.CreateServiceProvider()
+        );
+        var category7 = context
+            .Attach(
+                new Category
                 {
-                    Name = "Tanavast",
-                    Stamp = new Stamp { Code = new Guid("984ade3c-2f7b-4651-a351-642e92ab7147") },
-                    Notes = new[] { "A", "B" }
+                    Id = 7,
+                    Products = new List<Product>(),
+                    Stamp = new Stamp { Code = new Guid("984ade3c-2f7b-4651-a351-642e92ab7146") },
+                    Tag = new Tag
+                    {
+                        Name = "Tanavast",
+                        Stamp = new Stamp
+                        {
+                            Code = new Guid("984ade3c-2f7b-4651-a351-642e92ab7147"),
+                        },
+                        Notes = new[] { "A", "B" },
+                    },
                 }
-            }).Entity;
+            )
+            .Entity;
 
         var category = new Category
         {
@@ -2080,8 +2456,8 @@ public partial class DbContextTest
             {
                 Name = "Tanavast",
                 Stamp = new Stamp { Code = new Guid("984ade3c-2f7b-4651-a351-642e92ab7147") },
-                Notes = new[] { "A", "B" }
-            }
+                Notes = new[] { "A", "B" },
+            },
         };
         var product = new Product
         {
@@ -2094,8 +2470,8 @@ public partial class DbContextTest
             {
                 Name = "Tanavast",
                 Stamp = new Stamp { Code = new Guid("984ade3c-2f7b-4651-a351-642e92ab7147") },
-                Notes = new[] { "A", "B" }
-            }
+                Notes = new[] { "A", "B" },
+            },
         };
         category.Products = new List<Product> { product };
 
@@ -2121,20 +2497,28 @@ public partial class DbContextTest
     [ConditionalFact] // Issue #1246
     public void Can_set_set_to_Unchanged_with_inconsistent_FK_dependent_first_fully_fixed_up_with_tracked_FK_match()
     {
-        using var context = new EarlyLearningCenter(InMemoryTestHelpers.Instance.CreateServiceProvider());
-        var category7 = context.Attach(
-            new Category
-            {
-                Id = 7,
-                Products = new List<Product>(),
-                Stamp = new Stamp { Code = new Guid("984ade3c-2f7b-4651-a351-642e92ab7146") },
-                Tag = new Tag
+        using var context = new EarlyLearningCenter(
+            InMemoryTestHelpers.Instance.CreateServiceProvider()
+        );
+        var category7 = context
+            .Attach(
+                new Category
                 {
-                    Name = "Tanavast",
-                    Stamp = new Stamp { Code = new Guid("984ade3c-2f7b-4651-a351-642e92ab7147") },
-                    Notes = new[] { "A", "B" }
+                    Id = 7,
+                    Products = new List<Product>(),
+                    Stamp = new Stamp { Code = new Guid("984ade3c-2f7b-4651-a351-642e92ab7146") },
+                    Tag = new Tag
+                    {
+                        Name = "Tanavast",
+                        Stamp = new Stamp
+                        {
+                            Code = new Guid("984ade3c-2f7b-4651-a351-642e92ab7147"),
+                        },
+                        Notes = new[] { "A", "B" },
+                    },
                 }
-            }).Entity;
+            )
+            .Entity;
 
         var category = new Category
         {
@@ -2145,8 +2529,8 @@ public partial class DbContextTest
             {
                 Name = "Tanavast",
                 Stamp = new Stamp { Code = new Guid("984ade3c-2f7b-4651-a351-642e92ab7147") },
-                Notes = new[] { "A", "B" }
-            }
+                Notes = new[] { "A", "B" },
+            },
         };
 
         var product = new Product
@@ -2160,8 +2544,8 @@ public partial class DbContextTest
             {
                 Name = "Tanavast",
                 Stamp = new Stamp { Code = new Guid("984ade3c-2f7b-4651-a351-642e92ab7147") },
-                Notes = new[] { "A", "B" }
-            }
+                Notes = new[] { "A", "B" },
+            },
         };
 
         category.Products = new List<Product> { product };
@@ -2190,20 +2574,28 @@ public partial class DbContextTest
     [ConditionalFact] // Issue #1246
     public void Can_set_set_to_Unchanged_with_inconsistent_FK_principal_first_collection_not_fixed_up_with_tracked_FK_match()
     {
-        using var context = new EarlyLearningCenter(InMemoryTestHelpers.Instance.CreateServiceProvider());
-        var category7 = context.Attach(
-            new Category
-            {
-                Id = 7,
-                Products = new List<Product>(),
-                Stamp = new Stamp { Code = new Guid("984ade3c-2f7b-4651-a351-642e92ab7146") },
-                Tag = new Tag
+        using var context = new EarlyLearningCenter(
+            InMemoryTestHelpers.Instance.CreateServiceProvider()
+        );
+        var category7 = context
+            .Attach(
+                new Category
                 {
-                    Name = "Tanavast",
-                    Stamp = new Stamp { Code = new Guid("984ade3c-2f7b-4651-a351-642e92ab7147") },
-                    Notes = new[] { "A", "B" }
+                    Id = 7,
+                    Products = new List<Product>(),
+                    Stamp = new Stamp { Code = new Guid("984ade3c-2f7b-4651-a351-642e92ab7146") },
+                    Tag = new Tag
+                    {
+                        Name = "Tanavast",
+                        Stamp = new Stamp
+                        {
+                            Code = new Guid("984ade3c-2f7b-4651-a351-642e92ab7147"),
+                        },
+                        Notes = new[] { "A", "B" },
+                    },
                 }
-            }).Entity;
+            )
+            .Entity;
 
         var category = new Category
         {
@@ -2214,8 +2606,8 @@ public partial class DbContextTest
             {
                 Name = "Tanavast",
                 Stamp = new Stamp { Code = new Guid("984ade3c-2f7b-4651-a351-642e92ab7147") },
-                Notes = new[] { "A", "B" }
-            }
+                Notes = new[] { "A", "B" },
+            },
         };
         var product = new Product
         {
@@ -2228,8 +2620,8 @@ public partial class DbContextTest
             {
                 Name = "Tanavast",
                 Stamp = new Stamp { Code = new Guid("984ade3c-2f7b-4651-a351-642e92ab7147") },
-                Notes = new[] { "A", "B" }
-            }
+                Notes = new[] { "A", "B" },
+            },
         };
         category.Products = new List<Product>();
 
@@ -2256,20 +2648,28 @@ public partial class DbContextTest
     [ConditionalFact] // Issue #1246
     public void Can_set_set_to_Unchanged_with_inconsistent_FK_dependent_first_collection_not_fixed_up_with_tracked_FK_match()
     {
-        using var context = new EarlyLearningCenter(InMemoryTestHelpers.Instance.CreateServiceProvider());
-        var category7 = context.Attach(
-            new Category
-            {
-                Id = 7,
-                Products = new List<Product>(),
-                Stamp = new Stamp { Code = new Guid("984ade3c-2f7b-4651-a351-642e92ab7146") },
-                Tag = new Tag
+        using var context = new EarlyLearningCenter(
+            InMemoryTestHelpers.Instance.CreateServiceProvider()
+        );
+        var category7 = context
+            .Attach(
+                new Category
                 {
-                    Name = "Tanavast",
-                    Stamp = new Stamp { Code = new Guid("984ade3c-2f7b-4651-a351-642e92ab7147") },
-                    Notes = new[] { "A", "B" }
+                    Id = 7,
+                    Products = new List<Product>(),
+                    Stamp = new Stamp { Code = new Guid("984ade3c-2f7b-4651-a351-642e92ab7146") },
+                    Tag = new Tag
+                    {
+                        Name = "Tanavast",
+                        Stamp = new Stamp
+                        {
+                            Code = new Guid("984ade3c-2f7b-4651-a351-642e92ab7147"),
+                        },
+                        Notes = new[] { "A", "B" },
+                    },
                 }
-            }).Entity;
+            )
+            .Entity;
 
         var category = new Category
         {
@@ -2280,8 +2680,8 @@ public partial class DbContextTest
             {
                 Name = "Tanavast",
                 Stamp = new Stamp { Code = new Guid("984ade3c-2f7b-4651-a351-642e92ab7147") },
-                Notes = new[] { "A", "B" }
-            }
+                Notes = new[] { "A", "B" },
+            },
         };
 
         var product = new Product
@@ -2295,8 +2695,8 @@ public partial class DbContextTest
             {
                 Name = "Tanavast",
                 Stamp = new Stamp { Code = new Guid("984ade3c-2f7b-4651-a351-642e92ab7147") },
-                Notes = new[] { "A", "B" }
-            }
+                Notes = new[] { "A", "B" },
+            },
         };
 
         category.Products = new List<Product>();
@@ -2325,20 +2725,28 @@ public partial class DbContextTest
     [ConditionalFact] // Issue #1246
     public void Can_set_set_to_Unchanged_with_inconsistent_FK_principal_first_reference_not_fixed_up_with_tracked_FK_match()
     {
-        using var context = new EarlyLearningCenter(InMemoryTestHelpers.Instance.CreateServiceProvider());
-        var category7 = context.Attach(
-            new Category
-            {
-                Id = 7,
-                Products = new List<Product>(),
-                Stamp = new Stamp { Code = new Guid("984ade3c-2f7b-4651-a351-642e92ab7146") },
-                Tag = new Tag
+        using var context = new EarlyLearningCenter(
+            InMemoryTestHelpers.Instance.CreateServiceProvider()
+        );
+        var category7 = context
+            .Attach(
+                new Category
                 {
-                    Name = "Tanavast",
-                    Stamp = new Stamp { Code = new Guid("984ade3c-2f7b-4651-a351-642e92ab7147") },
-                    Notes = new[] { "A", "B" }
+                    Id = 7,
+                    Products = new List<Product>(),
+                    Stamp = new Stamp { Code = new Guid("984ade3c-2f7b-4651-a351-642e92ab7146") },
+                    Tag = new Tag
+                    {
+                        Name = "Tanavast",
+                        Stamp = new Stamp
+                        {
+                            Code = new Guid("984ade3c-2f7b-4651-a351-642e92ab7147"),
+                        },
+                        Notes = new[] { "A", "B" },
+                    },
                 }
-            }).Entity;
+            )
+            .Entity;
 
         var category = new Category
         {
@@ -2349,8 +2757,8 @@ public partial class DbContextTest
             {
                 Name = "Tanavast",
                 Stamp = new Stamp { Code = new Guid("984ade3c-2f7b-4651-a351-642e92ab7147") },
-                Notes = new[] { "A", "B" }
-            }
+                Notes = new[] { "A", "B" },
+            },
         };
         var product = new Product
         {
@@ -2362,8 +2770,8 @@ public partial class DbContextTest
             {
                 Name = "Tanavast",
                 Stamp = new Stamp { Code = new Guid("984ade3c-2f7b-4651-a351-642e92ab7147") },
-                Notes = new[] { "A", "B" }
-            }
+                Notes = new[] { "A", "B" },
+            },
         };
         category.Products = new List<Product> { product };
 
@@ -2389,20 +2797,28 @@ public partial class DbContextTest
     [ConditionalFact] // Issue #1246
     public void Can_set_set_to_Unchanged_with_inconsistent_FK_dependent_first_reference_not_fixed_up_with_tracked_FK_match()
     {
-        using var context = new EarlyLearningCenter(InMemoryTestHelpers.Instance.CreateServiceProvider());
-        var category7 = context.Attach(
-            new Category
-            {
-                Id = 7,
-                Products = new List<Product>(),
-                Stamp = new Stamp { Code = new Guid("984ade3c-2f7b-4651-a351-642e92ab7146") },
-                Tag = new Tag
+        using var context = new EarlyLearningCenter(
+            InMemoryTestHelpers.Instance.CreateServiceProvider()
+        );
+        var category7 = context
+            .Attach(
+                new Category
                 {
-                    Name = "Tanavast",
-                    Stamp = new Stamp { Code = new Guid("984ade3c-2f7b-4651-a351-642e92ab7147") },
-                    Notes = new[] { "A", "B" }
+                    Id = 7,
+                    Products = new List<Product>(),
+                    Stamp = new Stamp { Code = new Guid("984ade3c-2f7b-4651-a351-642e92ab7146") },
+                    Tag = new Tag
+                    {
+                        Name = "Tanavast",
+                        Stamp = new Stamp
+                        {
+                            Code = new Guid("984ade3c-2f7b-4651-a351-642e92ab7147"),
+                        },
+                        Notes = new[] { "A", "B" },
+                    },
                 }
-            }).Entity;
+            )
+            .Entity;
 
         var category = new Category
         {
@@ -2413,8 +2829,8 @@ public partial class DbContextTest
             {
                 Name = "Tanavast",
                 Stamp = new Stamp { Code = new Guid("984ade3c-2f7b-4651-a351-642e92ab7147") },
-                Notes = new[] { "A", "B" }
-            }
+                Notes = new[] { "A", "B" },
+            },
         };
         var product = new Product
         {
@@ -2426,8 +2842,8 @@ public partial class DbContextTest
             {
                 Name = "Tanavast",
                 Stamp = new Stamp { Code = new Guid("984ade3c-2f7b-4651-a351-642e92ab7147") },
-                Notes = new[] { "A", "B" }
-            }
+                Notes = new[] { "A", "B" },
+            },
         };
         category.Products = new List<Product> { product };
 
@@ -2533,16 +2949,15 @@ public partial class DbContextTest
 
     private class Parent77Context : DbContext
     {
-        protected internal override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-            => optionsBuilder.UseInMemoryDatabase(nameof(Parent77Context));
+        protected internal override void OnConfiguring(DbContextOptionsBuilder optionsBuilder) =>
+            optionsBuilder.UseInMemoryDatabase(nameof(Parent77Context));
 
-        protected internal override void OnModelCreating(ModelBuilder modelBuilder)
-            => modelBuilder.Entity<Parent77>(
-                b =>
-                {
-                    b.HasMany<Optional77>().WithOne(e => e.Parent77);
-                    b.HasMany<Required77>().WithOne(e => e.Parent77);
-                });
+        protected internal override void OnModelCreating(ModelBuilder modelBuilder) =>
+            modelBuilder.Entity<Parent77>(b =>
+            {
+                b.HasMany<Optional77>().WithOne(e => e.Parent77);
+                b.HasMany<Required77>().WithOne(e => e.Parent77);
+            });
     }
 
     private class Parent77

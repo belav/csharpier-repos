@@ -23,7 +23,9 @@ public interface IReadOnlyElementType : IReadOnlyAnnotatable
     /// <summary>
     ///     The type of elements in the collection.
     /// </summary>
-    [DynamicallyAccessedMembers(IEntityType.DynamicallyAccessedMemberTypes | IProperty.DynamicallyAccessedMemberTypes)]
+    [DynamicallyAccessedMembers(
+        IEntityType.DynamicallyAccessedMemberTypes | IProperty.DynamicallyAccessedMemberTypes
+    )]
     Type ClrType { get; }
 
     /// <summary>
@@ -40,7 +42,9 @@ public interface IReadOnlyElementType : IReadOnlyAnnotatable
         var mapping = FindTypeMapping();
         if (mapping == null)
         {
-            throw new InvalidOperationException(CoreStrings.ModelNotFinalized(nameof(GetTypeMapping)));
+            throw new InvalidOperationException(
+                CoreStrings.ModelNotFinalized(nameof(GetTypeMapping))
+            );
         }
 
         return mapping;
@@ -118,7 +122,10 @@ public interface IReadOnlyElementType : IReadOnlyAnnotatable
     /// <param name="options">Options for generating the string.</param>
     /// <param name="indent">The number of indent spaces to use before each new line.</param>
     /// <returns>A human-readable representation.</returns>
-    string ToDebugString(MetadataDebugStringOptions options = MetadataDebugStringOptions.ShortDefault, int indent = 0)
+    string ToDebugString(
+        MetadataDebugStringOptions options = MetadataDebugStringOptions.ShortDefault,
+        int indent = 0
+    )
     {
         var builder = new StringBuilder();
         var indentString = new string(' ', indent);

@@ -12,8 +12,10 @@
     <Compile Include="WellKnownSidTypeTests.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="$(CommonTestPath)System\Threading\ThreadTestHelpers.cs"
-             Link="Common\System\Threading\ThreadTestHelpers.cs" />
+    <Compile
+      Include="$(CommonTestPath)System\Threading\ThreadTestHelpers.cs"
+      Link="Common\System\Threading\ThreadTestHelpers.cs"
+    />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\src\System.Security.Principal.Windows.csproj" />

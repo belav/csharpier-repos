@@ -3,9 +3,9 @@
 // See the LICENSE file in the project root for more information.
 
 using System;
-using System.Linq;
 using System.Collections.Generic;
 using System.Collections.Immutable;
+using System.Linq;
 using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis
@@ -22,12 +22,14 @@ namespace Microsoft.CodeAnalysis
         /// <summary>
         /// Default properties for a module reference.
         /// </summary>
-        public static MetadataReferenceProperties Module => new MetadataReferenceProperties(MetadataImageKind.Module);
+        public static MetadataReferenceProperties Module =>
+            new MetadataReferenceProperties(MetadataImageKind.Module);
 
         /// <summary>
         /// Default properties for an assembly reference.
         /// </summary>
-        public static MetadataReferenceProperties Assembly => new MetadataReferenceProperties(MetadataImageKind.Assembly);
+        public static MetadataReferenceProperties Assembly =>
+            new MetadataReferenceProperties(MetadataImageKind.Assembly);
 
         /// <summary>
         /// Initializes reference properties.
@@ -35,7 +37,11 @@ namespace Microsoft.CodeAnalysis
         /// <param name="kind">The image kind - assembly or module.</param>
         /// <param name="aliases">Assembly aliases. Can't be set for a module.</param>
         /// <param name="embedInteropTypes">True to embed interop types from the referenced assembly to the referencing compilation. Must be false for a module.</param>
-        public MetadataReferenceProperties(MetadataImageKind kind = MetadataImageKind.Assembly, ImmutableArray<string> aliases = default, bool embedInteropTypes = false)
+        public MetadataReferenceProperties(
+            MetadataImageKind kind = MetadataImageKind.Assembly,
+            ImmutableArray<string> aliases = default,
+            bool embedInteropTypes = false
+        )
         {
             if (!kind.IsValid())
             {
@@ -46,12 +52,18 @@ namespace Microsoft.CodeAnalysis
             {
                 if (embedInteropTypes)
                 {
-                    throw new ArgumentException(CodeAnalysisResources.CannotEmbedInteropTypesFromModule, nameof(embedInteropTypes));
+                    throw new ArgumentException(
+                        CodeAnalysisResources.CannotEmbedInteropTypesFromModule,
+                        nameof(embedInteropTypes)
+                    );
                 }
 
                 if (!aliases.IsDefaultOrEmpty)
                 {
-                    throw new ArgumentException(CodeAnalysisResources.CannotAliasModule, nameof(aliases));
+                    throw new ArgumentException(
+                        CodeAnalysisResources.CannotAliasModule,
+                        nameof(aliases)
+                    );
                 }
             }
 
@@ -61,7 +73,10 @@ namespace Microsoft.CodeAnalysis
                 {
                     if (!alias.IsValidClrTypeName())
                     {
-                        throw new ArgumentException(CodeAnalysisResources.InvalidAlias, nameof(aliases));
+                        throw new ArgumentException(
+                            CodeAnalysisResources.InvalidAlias,
+                            nameof(aliases)
+                        );
                     }
                 }
             }
@@ -72,7 +87,12 @@ namespace Microsoft.CodeAnalysis
             HasRecursiveAliases = false;
         }
 
-        internal MetadataReferenceProperties(MetadataImageKind kind, ImmutableArray<string> aliases, bool embedInteropTypes, bool hasRecursiveAliases)
+        internal MetadataReferenceProperties(
+            MetadataImageKind kind,
+            ImmutableArray<string> aliases,
+            bool embedInteropTypes,
+            bool hasRecursiveAliases
+        )
             : this(kind, aliases, embedInteropTypes)
         {
             HasRecursiveAliases = hasRecursiveAliases;
@@ -97,7 +117,12 @@ namespace Microsoft.CodeAnalysis
         /// </exception>
         public MetadataReferenceProperties WithAliases(ImmutableArray<string> aliases)
         {
-            return new MetadataReferenceProperties(_kind, aliases, _embedInteropTypes, HasRecursiveAliases);
+            return new MetadataReferenceProperties(
+                _kind,
+                aliases,
+                _embedInteropTypes,
+                HasRecursiveAliases
+            );
         }
 
         /// <summary>
@@ -106,7 +131,12 @@ namespace Microsoft.CodeAnalysis
         /// <exception cref="ArgumentException"><see cref="Kind"/> is <see cref="MetadataImageKind.Module"/>, as interop types can't be embedded from modules.</exception>
         public MetadataReferenceProperties WithEmbedInteropTypes(bool embedInteropTypes)
         {
-            return new MetadataReferenceProperties(_kind, _aliases, embedInteropTypes, HasRecursiveAliases);
+            return new MetadataReferenceProperties(
+                _kind,
+                _aliases,
+                embedInteropTypes,
+                HasRecursiveAliases
+            );
         }
 
         /// <summary>
@@ -134,7 +164,7 @@ namespace Microsoft.CodeAnalysis
         /// Aliases for the metadata reference. Empty if the reference has no aliases.
         /// </summary>
         /// <remarks>
-        /// In C# these aliases can be used in "extern alias" syntax to disambiguate type names. 
+        /// In C# these aliases can be used in "extern alias" syntax to disambiguate type names.
         /// </remarks>
         public ImmutableArray<string> Aliases
         {
@@ -171,15 +201,27 @@ namespace Microsoft.CodeAnalysis
 
         public override int GetHashCode()
         {
-            return Hash.Combine(Hash.CombineValues(Aliases), Hash.Combine(_embedInteropTypes, Hash.Combine(HasRecursiveAliases, ((int)_kind).GetHashCode())));
+            return Hash.Combine(
+                Hash.CombineValues(Aliases),
+                Hash.Combine(
+                    _embedInteropTypes,
+                    Hash.Combine(HasRecursiveAliases, ((int)_kind).GetHashCode())
+                )
+            );
         }
 
-        public static bool operator ==(MetadataReferenceProperties left, MetadataReferenceProperties right)
+        public static bool operator ==(
+            MetadataReferenceProperties left,
+            MetadataReferenceProperties right
+        )
         {
             return left.Equals(right);
         }
 
-        public static bool operator !=(MetadataReferenceProperties left, MetadataReferenceProperties right)
+        public static bool operator !=(
+            MetadataReferenceProperties left,
+            MetadataReferenceProperties right
+        )
         {
             return !left.Equals(right);
         }

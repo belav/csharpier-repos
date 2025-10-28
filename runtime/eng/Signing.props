@@ -26,8 +26,7 @@
     <FileSignInfo Include="mscordaccore.dll" CertificateName="None" />
     <FileSignInfo Include="mscordbi.dll" CertificateName="None" />
 
-    <!-- We don't need to code sign .js files because they are not used in Windows Script Host. -->
-    <!-- WARNING: Needs to happed outside of any target -->
+    <!-- We don't need to code sign .js files because they are not used in Windows Script Host. --><!-- WARNING: Needs to happed outside of any target -->
     <FileExtensionSignInfo Update=".js" CertificateName="None" />
 
     <!-- Third-party components which should be signed.  -->
@@ -41,7 +40,10 @@
          other feeds (in fact, that have identical identity to their non-symbol variant) -->
     <DownloadedSymbolPackages Include="$(DownloadDirectory)**\*.symbols.nupkg" />
     <DownloadedSymbolPackagesWithoutPaths Include="@(DownloadedSymbolPackages->'%(Filename)%(Extension)')" />
-    <FileSignInfo Include="@(DownloadedSymbolPackagesWithoutPaths->Distinct())" CertificateName="None" />
+    <FileSignInfo
+      Include="@(DownloadedSymbolPackagesWithoutPaths->Distinct())"
+      CertificateName="None"
+    />
 
     <FileExtensionSignInfo Include=".msi" CertificateName="MicrosoftDotNet500" />
     <FileExtensionSignInfo Include=".pkg" CertificateName="8003" />
@@ -50,9 +52,18 @@
 
   <!-- Update existing defaults from arcade that were using Microsoft400 to use the .NET-specific cert -->
   <ItemGroup>
-    <FileExtensionSignInfo Update="@(FileExtensionSignInfo->WithMetadataValue('CertificateName','Microsoft400'))" CertificateName="MicrosoftDotNet500" />
-    <StrongNameSignInfo Update="@(StrongNameSignInfo->WithMetadataValue('CertificateName','Microsoft400'))" CertificateName="MicrosoftDotNet500" />
-    <FileSignInfo Update="@(FileSignInfo->WithMetadataValue('CertificateName','Microsoft400'))" CertificateName="MicrosoftDotNet500" />
+    <FileExtensionSignInfo
+      Update="@(FileExtensionSignInfo->WithMetadataValue('CertificateName','Microsoft400'))"
+      CertificateName="MicrosoftDotNet500"
+    />
+    <StrongNameSignInfo
+      Update="@(StrongNameSignInfo->WithMetadataValue('CertificateName','Microsoft400'))"
+      CertificateName="MicrosoftDotNet500"
+    />
+    <FileSignInfo
+      Update="@(FileSignInfo->WithMetadataValue('CertificateName','Microsoft400'))"
+      CertificateName="MicrosoftDotNet500"
+    />
   </ItemGroup>
 
   <ItemGroup Condition="'$(PrepareArtifacts)' == 'true'">
@@ -62,7 +73,13 @@
     <ItemsToSignWithPaths Include="$(DownloadDirectory)**\*.zip" />
 
     <ItemsToSignWithoutPaths Include="@(ItemsToSignWithPaths->'%(Filename)%(Extension)')" />
-    <ItemsToSignPostBuild Include="@(ItemsToSignWithoutPaths->Distinct())" Condition="'$(PostBuildSign)' == 'true'" />
-    <ItemsToSign Include="@(ItemsToSignWithPaths->Distinct())" Condition="'$(PostBuildSign)' != 'true'" />
+    <ItemsToSignPostBuild
+      Include="@(ItemsToSignWithoutPaths->Distinct())"
+      Condition="'$(PostBuildSign)' == 'true'"
+    />
+    <ItemsToSign
+      Include="@(ItemsToSignWithPaths->Distinct())"
+      Condition="'$(PostBuildSign)' != 'true'"
+    />
   </ItemGroup>
 </Project>

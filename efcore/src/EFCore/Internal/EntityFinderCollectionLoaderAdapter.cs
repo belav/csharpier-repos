@@ -34,8 +34,8 @@ public class EntityFinderCollectionLoaderAdapter : ICollectionLoader
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public virtual void Load(InternalEntityEntry entry, LoadOptions options)
-        => _entityFinder.Load(_navigation, entry, options);
+    public virtual void Load(InternalEntityEntry entry, LoadOptions options) =>
+        _entityFinder.Load(_navigation, entry, options);
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -43,8 +43,11 @@ public class EntityFinderCollectionLoaderAdapter : ICollectionLoader
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public virtual Task LoadAsync(InternalEntityEntry entry, LoadOptions options, CancellationToken cancellationToken = default)
-        => _entityFinder.LoadAsync(_navigation, entry, options, cancellationToken);
+    public virtual Task LoadAsync(
+        InternalEntityEntry entry,
+        LoadOptions options,
+        CancellationToken cancellationToken = default
+    ) => _entityFinder.LoadAsync(_navigation, entry, options, cancellationToken);
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -52,6 +55,6 @@ public class EntityFinderCollectionLoaderAdapter : ICollectionLoader
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public virtual IQueryable Query(InternalEntityEntry entry)
-        => _entityFinder.Query(_navigation, entry);
+    public virtual IQueryable Query(InternalEntityEntry entry) =>
+        _entityFinder.Query(_navigation, entry);
 }

@@ -16,9 +16,9 @@ namespace System.ServiceModel.Channels
     // was UdpTransportBindingElement
     public class UdpTransportBindingElement
         : TransportBindingElement,
-        IPolicyExportExtension,
-        ITransportPolicyImport,
-        IWsdlExportExtension
+            IPolicyExportExtension,
+            ITransportPolicyImport,
+            IWsdlExportExtension
     {
         int duplicateMessageHistoryLength;
         long maxPendingMessagesTotalSize;
@@ -26,12 +26,20 @@ namespace System.ServiceModel.Channels
         int socketReceiveBufferSize;
         int timeToLive;
 
-        [SuppressMessage(FxCop.Category.Usage, FxCop.Rule.DoNotCallOverridableMethodsInConstructors, Justification = "this call is intended")]
+        [SuppressMessage(
+            FxCop.Category.Usage,
+            FxCop.Rule.DoNotCallOverridableMethodsInConstructors,
+            Justification = "this call is intended"
+        )]
         public UdpTransportBindingElement()
             : base()
         {
-            this.duplicateMessageHistoryLength = UdpConstants.Defaults.DuplicateMessageHistoryLength;
-            this.maxPendingMessagesTotalSize = UdpConstants.Defaults.DefaultMaxPendingMessagesTotalSize;
+            this.duplicateMessageHistoryLength = UdpConstants
+                .Defaults
+                .DuplicateMessageHistoryLength;
+            this.maxPendingMessagesTotalSize = UdpConstants
+                .Defaults
+                .DefaultMaxPendingMessagesTotalSize;
 
             this.retransmissionSettings = new UdpRetransmissionSettings();
             this.socketReceiveBufferSize = UdpConstants.Defaults.SocketReceiveBufferSize;
@@ -58,8 +66,11 @@ namespace System.ServiceModel.Channels
                 const int min = 0;
                 if (value < min)
                 {
-                    throw FxTrace.Exception.ArgumentOutOfRange("value", value,
-                        SR.ArgumentOutOfMinRange(min));
+                    throw FxTrace.Exception.ArgumentOutOfRange(
+                        "value",
+                        value,
+                        SR.ArgumentOutOfMinRange(min)
+                    );
                 }
                 this.duplicateMessageHistoryLength = value;
             }
@@ -68,18 +79,17 @@ namespace System.ServiceModel.Channels
         [DefaultValue(UdpConstants.Defaults.DefaultMaxPendingMessagesTotalSize)]
         public long MaxPendingMessagesTotalSize
         {
-            get
-            {
-                return this.maxPendingMessagesTotalSize;
-            }
-
+            get { return this.maxPendingMessagesTotalSize; }
             set
             {
                 const long min = UdpConstants.MinPendingMessagesTotalSize;
                 if (value < min)
                 {
-                    throw FxTrace.Exception.ArgumentOutOfRange("value", value,
-                        SR.ArgumentOutOfMinRange(min));
+                    throw FxTrace.Exception.ArgumentOutOfRange(
+                        "value",
+                        value,
+                        SR.ArgumentOutOfMinRange(min)
+                    );
                 }
 
                 this.maxPendingMessagesTotalSize = value;
@@ -91,10 +101,7 @@ namespace System.ServiceModel.Channels
 
         public UdpRetransmissionSettings RetransmissionSettings
         {
-            get
-            {
-                return this.retransmissionSettings;
-            }
+            get { return this.retransmissionSettings; }
             set
             {
                 if (value == null)
@@ -117,11 +124,13 @@ namespace System.ServiceModel.Channels
             get { return this.socketReceiveBufferSize; }
             set
             {
-
                 if (value < UdpConstants.MinReceiveBufferSize)
                 {
-                    throw FxTrace.Exception.ArgumentOutOfRange("value", value,
-                        SR.ArgumentOutOfMinRange(UdpConstants.MinReceiveBufferSize));
+                    throw FxTrace.Exception.ArgumentOutOfRange(
+                        "value",
+                        value,
+                        SR.ArgumentOutOfMinRange(UdpConstants.MinReceiveBufferSize)
+                    );
                 }
 
                 this.socketReceiveBufferSize = value;
@@ -134,17 +143,24 @@ namespace System.ServiceModel.Channels
             get { return this.timeToLive; }
             set
             {
-
                 if (value < UdpConstants.MinTimeToLive || value > UdpConstants.MaxTimeToLive)
                 {
-                    throw FxTrace.Exception.ArgumentOutOfRange("value", value,
-                        SR.ArgumentOutOfMinMaxRange(UdpConstants.MinTimeToLive, UdpConstants.MaxTimeToLive));
+                    throw FxTrace.Exception.ArgumentOutOfRange(
+                        "value",
+                        value,
+                        SR.ArgumentOutOfMinMaxRange(
+                            UdpConstants.MinTimeToLive,
+                            UdpConstants.MaxTimeToLive
+                        )
+                    );
                 }
                 this.timeToLive = value;
             }
         }
 
-        public override IChannelFactory<TChannel> BuildChannelFactory<TChannel>(BindingContext context)
+        public override IChannelFactory<TChannel> BuildChannelFactory<TChannel>(
+            BindingContext context
+        )
         {
             if (context == null)
             {
@@ -153,13 +169,20 @@ namespace System.ServiceModel.Channels
 
             if (!this.CanBuildChannelFactory<TChannel>(context))
             {
-                throw FxTrace.Exception.Argument("TChannel", SR.ChannelTypeNotSupported(typeof(TChannel)));
+                throw FxTrace.Exception.Argument(
+                    "TChannel",
+                    SR.ChannelTypeNotSupported(typeof(TChannel))
+                );
             }
 
-            return (IChannelFactory<TChannel>)(object)new UdpChannelFactory<TChannel>(new UdpTransportBindingElement(this), context);
+            return (IChannelFactory<TChannel>)
+                (object)
+                    new UdpChannelFactory<TChannel>(new UdpTransportBindingElement(this), context);
         }
 
-        public override IChannelListener<TChannel> BuildChannelListener<TChannel>(BindingContext context)
+        public override IChannelListener<TChannel> BuildChannelListener<TChannel>(
+            BindingContext context
+        )
         {
             if (context == null)
             {
@@ -169,15 +192,22 @@ namespace System.ServiceModel.Channels
             IChannelListener<TChannel> listener;
             if (typeof(TChannel) == typeof(IDuplexChannel))
             {
-                listener = (IChannelListener<TChannel>) new UdpDuplexChannelListener(new UdpTransportBindingElement(this), context);
+                listener =
+                    (IChannelListener<TChannel>)
+                        new UdpDuplexChannelListener(new UdpTransportBindingElement(this), context);
             }
             else if (typeof(TChannel) == typeof(IReplyChannel))
             {
-                listener = (IChannelListener<TChannel>) new UdpReplyChannelListener(new UdpTransportBindingElement(this), context);
+                listener =
+                    (IChannelListener<TChannel>)
+                        new UdpReplyChannelListener(new UdpTransportBindingElement(this), context);
             }
             else
             {
-                throw FxTrace.Exception.Argument("TChannel", SR.ChannelTypeNotSupported(typeof(TChannel)));
+                throw FxTrace.Exception.Argument(
+                    "TChannel",
+                    SR.ChannelTypeNotSupported(typeof(TChannel))
+                );
             }
 
             return (IChannelListener<TChannel>)(object)listener;
@@ -190,7 +220,10 @@ namespace System.ServiceModel.Channels
                 throw FxTrace.Exception.ArgumentNull("context");
             }
 
-            return (typeof(TChannel) == typeof(IOutputChannel) || typeof(TChannel) == typeof(IDuplexChannel));
+            return (
+                typeof(TChannel) == typeof(IOutputChannel)
+                || typeof(TChannel) == typeof(IDuplexChannel)
+            );
         }
 
         public override bool CanBuildChannelListener<TChannel>(BindingContext context)
@@ -203,7 +236,10 @@ namespace System.ServiceModel.Channels
             // We don't need to return IBindingMulticastCapabilities, because IBindingMulticastCapabilities assumes
             // that you always use multicast for both send and receive.
 
-            return (typeof(TChannel) == typeof(IDuplexChannel) || typeof(TChannel) == typeof(IReplyChannel));
+            return (
+                typeof(TChannel) == typeof(IDuplexChannel)
+                || typeof(TChannel) == typeof(IReplyChannel)
+            );
         }
 
         public override T GetProperty<T>(BindingContext context)
@@ -227,13 +263,25 @@ namespace System.ServiceModel.Channels
             return !this.RetransmissionSettings.IsMatch(new UdpRetransmissionSettings()); // only serialize non-default settings
         }
 
-        [SuppressMessage(FxCop.Category.Design, FxCop.Rule.InterfaceMethodsShouldBeCallableByChildTypes, Justification = "no need to call this from derrived classes")]
-        void IWsdlExportExtension.ExportContract(WsdlExporter exporter, WsdlContractConversionContext context)
-        {
-        }
+        [SuppressMessage(
+            FxCop.Category.Design,
+            FxCop.Rule.InterfaceMethodsShouldBeCallableByChildTypes,
+            Justification = "no need to call this from derrived classes"
+        )]
+        void IWsdlExportExtension.ExportContract(
+            WsdlExporter exporter,
+            WsdlContractConversionContext context
+        ) { }
 
-        [SuppressMessage(FxCop.Category.Design, FxCop.Rule.InterfaceMethodsShouldBeCallableByChildTypes, Justification = "no need to call this from derrived classes")]
-        void IWsdlExportExtension.ExportEndpoint(WsdlExporter exporter, WsdlEndpointConversionContext context)
+        [SuppressMessage(
+            FxCop.Category.Design,
+            FxCop.Rule.InterfaceMethodsShouldBeCallableByChildTypes,
+            Justification = "no need to call this from derrived classes"
+        )]
+        void IWsdlExportExtension.ExportEndpoint(
+            WsdlExporter exporter,
+            WsdlEndpointConversionContext context
+        )
         {
             if (exporter == null)
             {
@@ -245,7 +293,9 @@ namespace System.ServiceModel.Channels
                 throw FxTrace.Exception.ArgumentNull("context");
             }
 
-            MessageVersion messageVersion = context.Endpoint.Binding.GetProperty<MessageVersion>(new BindingParameterCollection());
+            MessageVersion messageVersion = context.Endpoint.Binding.GetProperty<MessageVersion>(
+                new BindingParameterCollection()
+            );
 
             if (messageVersion == null)
             {
@@ -253,45 +303,79 @@ namespace System.ServiceModel.Channels
             }
 
             AddressingVersion addressingVersion = messageVersion.Addressing;
-            TransportBindingElement.ExportWsdlEndpoint(exporter, context, UdpConstants.WsdlSoapUdpTransportUri, addressingVersion);
+            TransportBindingElement.ExportWsdlEndpoint(
+                exporter,
+                context,
+                UdpConstants.WsdlSoapUdpTransportUri,
+                addressingVersion
+            );
         }
-        
-        [SuppressMessage(FxCop.Category.Design, FxCop.Rule.InterfaceMethodsShouldBeCallableByChildTypes, Justification = "no need to call this from derrived classes")]
-        void IPolicyExportExtension.ExportPolicy(MetadataExporter exporter, PolicyConversionContext context)
+
+        [SuppressMessage(
+            FxCop.Category.Design,
+            FxCop.Rule.InterfaceMethodsShouldBeCallableByChildTypes,
+            Justification = "no need to call this from derrived classes"
+        )]
+        void IPolicyExportExtension.ExportPolicy(
+            MetadataExporter exporter,
+            PolicyConversionContext context
+        )
         {
             if (exporter == null)
             {
                 throw FxTrace.Exception.ArgumentNull("exporter");
             }
-            
+
             if (context == null)
             {
                 throw FxTrace.Exception.ArgumentNull("context");
             }
 
-            MessageEncodingBindingElement encodingBindingElement = context.BindingElements.Find<MessageEncodingBindingElement>();
+            MessageEncodingBindingElement encodingBindingElement =
+                context.BindingElements.Find<MessageEncodingBindingElement>();
 
             if (encodingBindingElement == null)
             {
                 encodingBindingElement = new TextMessageEncodingBindingElement();
             }
 
-            WsdlExporter.WSAddressingHelper.AddWSAddressingAssertion(exporter, context, encodingBindingElement.MessageVersion.Addressing);
+            WsdlExporter.WSAddressingHelper.AddWSAddressingAssertion(
+                exporter,
+                context,
+                encodingBindingElement.MessageVersion.Addressing
+            );
 
-            UdpTransportBindingElementPolicy.ExportRetransmissionEnabledAssertion(this, context.GetBindingAssertions());
+            UdpTransportBindingElementPolicy.ExportRetransmissionEnabledAssertion(
+                this,
+                context.GetBindingAssertions()
+            );
         }
 
-        [SuppressMessage(FxCop.Category.Design, FxCop.Rule.InterfaceMethodsShouldBeCallableByChildTypes, Justification = "no need to call this from derrived classes")]
-        void ITransportPolicyImport.ImportPolicy(MetadataImporter importer, PolicyConversionContext policyContext)
+        [SuppressMessage(
+            FxCop.Category.Design,
+            FxCop.Rule.InterfaceMethodsShouldBeCallableByChildTypes,
+            Justification = "no need to call this from derrived classes"
+        )]
+        void ITransportPolicyImport.ImportPolicy(
+            MetadataImporter importer,
+            PolicyConversionContext policyContext
+        )
         {
             ICollection<XmlElement> bindingAssertions = policyContext.GetBindingAssertions();
 
             XmlElement retransmitAssertion = null;
             foreach (XmlElement assertion in bindingAssertions)
             {
-                if (assertion.LocalName.Equals(UdpConstants.RetransmissionEnabled, StringComparison.Ordinal))
+                if (
+                    assertion.LocalName.Equals(
+                        UdpConstants.RetransmissionEnabled,
+                        StringComparison.Ordinal
+                    )
+                )
                 {
-                    this.DuplicateMessageHistoryLength = UdpConstants.Defaults.DuplicateMessageHistoryLengthWithRetransmission;
+                    this.DuplicateMessageHistoryLength = UdpConstants
+                        .Defaults
+                        .DuplicateMessageHistoryLengthWithRetransmission;
                     retransmitAssertion = assertion;
                 }
             }
@@ -301,7 +385,7 @@ namespace System.ServiceModel.Channels
                 bindingAssertions.Remove(retransmitAssertion);
             }
         }
-        
+
         internal override bool IsMatch(BindingElement b)
         {
             if (!base.IsMatch(b))
@@ -325,7 +409,13 @@ namespace System.ServiceModel.Channels
                 return false;
             }
 
-            if (!String.Equals(this.MulticastInterfaceId, udpTransport.MulticastInterfaceId, StringComparison.OrdinalIgnoreCase))
+            if (
+                !String.Equals(
+                    this.MulticastInterfaceId,
+                    udpTransport.MulticastInterfaceId,
+                    StringComparison.OrdinalIgnoreCase
+                )
+            )
             {
                 return false;
             }
@@ -339,7 +429,7 @@ namespace System.ServiceModel.Channels
             {
                 return false;
             }
-            
+
             return true;
         }
     }

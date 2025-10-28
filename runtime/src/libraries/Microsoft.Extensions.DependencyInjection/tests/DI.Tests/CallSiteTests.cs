@@ -13,9 +13,16 @@ namespace Microsoft.Extensions.DependencyInjection.Tests
 {
     internal static class CallSiteTestsExtensions
     {
-        internal static ServiceCallSite GetCallSite(this CallSiteFactory callSiteFactory, Type type, CallSiteChain callSiteChain)
+        internal static ServiceCallSite GetCallSite(
+            this CallSiteFactory callSiteFactory,
+            Type type,
+            CallSiteChain callSiteChain
+        )
         {
-            return callSiteFactory.GetCallSite(ServiceIdentifier.FromServiceType(type), callSiteChain);
+            return callSiteFactory.GetCallSite(
+                ServiceIdentifier.FromServiceType(type),
+                callSiteChain
+            );
         }
     }
 
@@ -39,14 +46,24 @@ namespace Microsoft.Extensions.DependencyInjection.Tests
             // Implementation Type Descriptor
             yield return new object[]
             {
-                new[] { new ServiceDescriptor(typeof(IFakeService), typeof(FakeService), lifetime) },
+                new[]
+                {
+                    new ServiceDescriptor(typeof(IFakeService), typeof(FakeService), lifetime),
+                },
                 typeof(IFakeService),
                 compare,
             };
             // Closed Generic Descriptor
             yield return new object[]
             {
-                new[] { new ServiceDescriptor(typeof(IFakeOpenGenericService<PocoClass>), typeof(FakeService), lifetime) },
+                new[]
+                {
+                    new ServiceDescriptor(
+                        typeof(IFakeOpenGenericService<PocoClass>),
+                        typeof(FakeService),
+                        lifetime
+                    ),
+                },
                 typeof(IFakeOpenGenericService<PocoClass>),
                 compare,
             };
@@ -56,7 +73,11 @@ namespace Microsoft.Extensions.DependencyInjection.Tests
                 new[]
                 {
                     new ServiceDescriptor(typeof(IFakeService), typeof(FakeService), lifetime),
-                    new ServiceDescriptor(typeof(IFakeOpenGenericService<>), typeof(FakeOpenGenericService<>), lifetime),
+                    new ServiceDescriptor(
+                        typeof(IFakeOpenGenericService<>),
+                        typeof(FakeOpenGenericService<>),
+                        lifetime
+                    ),
                 },
                 typeof(IFakeOpenGenericService<IFakeService>),
                 compare,
@@ -64,7 +85,10 @@ namespace Microsoft.Extensions.DependencyInjection.Tests
             // Factory Descriptor
             yield return new object[]
             {
-                new[] { new ServiceDescriptor(typeof(IFakeService), _ => new FakeService(), lifetime) },
+                new[]
+                {
+                    new ServiceDescriptor(typeof(IFakeService), _ => new FakeService(), lifetime),
+                },
                 typeof(IFakeService),
                 compare,
             };
@@ -74,9 +98,9 @@ namespace Microsoft.Extensions.DependencyInjection.Tests
                 // Instance Descriptor
                 yield return new object[]
                 {
-                   new[] { new ServiceDescriptor(typeof(IFakeService), new FakeService()) },
-                   typeof(IFakeService),
-                   compare,
+                    new[] { new ServiceDescriptor(typeof(IFakeService), new FakeService()) },
+                    typeof(IFakeService),
+                    compare,
                 };
             }
         }
@@ -86,12 +110,18 @@ namespace Microsoft.Extensions.DependencyInjection.Tests
         [MemberData(nameof(TestServiceDescriptors), ServiceLifetime.Scoped)]
         [MemberData(nameof(TestServiceDescriptors), ServiceLifetime.Transient)]
         public void BuiltExpressionWillReturnResolvedServiceWhenAppropriate(
-            ServiceDescriptor[] descriptors, Type serviceType, Func<object, object, bool> compare)
+            ServiceDescriptor[] descriptors,
+            Type serviceType,
+            Func<object, object, bool> compare
+        )
         {
             var provider = new ServiceProvider(descriptors, ServiceProviderOptions.Default);
 
             var callSite = provider.CallSiteFactory.GetCallSite(serviceType, new CallSiteChain());
-            var collectionCallSite = provider.CallSiteFactory.GetCallSite(typeof(IEnumerable<>).MakeGenericType(serviceType), new CallSiteChain());
+            var collectionCallSite = provider.CallSiteFactory.GetCallSite(
+                typeof(IEnumerable<>).MakeGenericType(serviceType),
+                new CallSiteChain()
+            );
 
             var compiledCallSite = CompileCallSite(callSite, provider);
             var compiledCollectionCallSite = CompileCallSite(collectionCallSite, provider);
@@ -100,7 +130,9 @@ namespace Microsoft.Extensions.DependencyInjection.Tests
 
             var service1 = Invoke(callSite, scope);
             var service2 = compiledCallSite(scope);
-            var serviceEnumerator = ((IEnumerable)compiledCollectionCallSite(scope)).GetEnumerator();
+            var serviceEnumerator = (
+                (IEnumerable)compiledCollectionCallSite(scope)
+            ).GetEnumerator();
 
             Assert.NotNull(service1);
             Assert.True(compare(service1, service2));
@@ -120,7 +152,10 @@ namespace Microsoft.Extensions.DependencyInjection.Tests
             descriptors.AddScoped<ServiceC>();
 
             var provider = new ServiceProvider(descriptors, ServiceProviderOptions.Default);
-            var callSite = provider.CallSiteFactory.GetCallSite(typeof(ServiceC), new CallSiteChain());
+            var callSite = provider.CallSiteFactory.GetCallSite(
+                typeof(ServiceC),
+                new CallSiteChain()
+            );
             var compiledCallSite = CompileCallSite(callSite, provider);
 
             using var scope = (ServiceProviderEngineScope)provider.CreateScope();
@@ -135,17 +170,28 @@ namespace Microsoft.Extensions.DependencyInjection.Tests
         [InlineData(ServiceLifetime.Scoped)]
         [InlineData(ServiceLifetime.Transient)]
         [InlineData(ServiceLifetime.Singleton)]
-        public void BuildExpressionAddsDisposableCaptureForDisposableServices(ServiceLifetime lifetime)
+        public void BuildExpressionAddsDisposableCaptureForDisposableServices(
+            ServiceLifetime lifetime
+        )
         {
             IServiceCollection descriptors = new ServiceCollection();
-            descriptors.Add(ServiceDescriptor.Describe(typeof(ServiceA), typeof(DisposableServiceA), lifetime));
-            descriptors.Add(ServiceDescriptor.Describe(typeof(ServiceB), typeof(DisposableServiceB), lifetime));
-            descriptors.Add(ServiceDescriptor.Describe(typeof(ServiceC), typeof(DisposableServiceC), lifetime));
+            descriptors.Add(
+                ServiceDescriptor.Describe(typeof(ServiceA), typeof(DisposableServiceA), lifetime)
+            );
+            descriptors.Add(
+                ServiceDescriptor.Describe(typeof(ServiceB), typeof(DisposableServiceB), lifetime)
+            );
+            descriptors.Add(
+                ServiceDescriptor.Describe(typeof(ServiceC), typeof(DisposableServiceC), lifetime)
+            );
 
             var disposables = new List<object>();
             var provider = new ServiceProvider(descriptors, ServiceProviderOptions.Default);
 
-            var callSite = provider.CallSiteFactory.GetCallSite(typeof(ServiceC), new CallSiteChain());
+            var callSite = provider.CallSiteFactory.GetCallSite(
+                typeof(ServiceC),
+                new CallSiteChain()
+            );
             var compiledCallSite = CompileCallSite(callSite, provider);
 
             var serviceC = (DisposableServiceC)compiledCallSite(provider.Root);
@@ -157,18 +203,32 @@ namespace Microsoft.Extensions.DependencyInjection.Tests
         [InlineData(ServiceLifetime.Scoped)]
         [InlineData(ServiceLifetime.Transient)]
         [InlineData(ServiceLifetime.Singleton)]
-        public void BuildExpressionAddsDisposableCaptureForDisposableFactoryServices(ServiceLifetime lifetime)
+        public void BuildExpressionAddsDisposableCaptureForDisposableFactoryServices(
+            ServiceLifetime lifetime
+        )
         {
             IServiceCollection descriptors = new ServiceCollection();
-            descriptors.Add(ServiceDescriptor.Describe(typeof(ServiceA), typeof(DisposableServiceA), lifetime));
-            descriptors.Add(ServiceDescriptor.Describe(typeof(ServiceB), typeof(DisposableServiceB), lifetime));
-            descriptors.Add(ServiceDescriptor.Describe(
-                typeof(ServiceC), p => new DisposableServiceC(p.GetService<ServiceB>()), lifetime));
+            descriptors.Add(
+                ServiceDescriptor.Describe(typeof(ServiceA), typeof(DisposableServiceA), lifetime)
+            );
+            descriptors.Add(
+                ServiceDescriptor.Describe(typeof(ServiceB), typeof(DisposableServiceB), lifetime)
+            );
+            descriptors.Add(
+                ServiceDescriptor.Describe(
+                    typeof(ServiceC),
+                    p => new DisposableServiceC(p.GetService<ServiceB>()),
+                    lifetime
+                )
+            );
 
             var disposables = new List<object>();
             var provider = new ServiceProvider(descriptors, ServiceProviderOptions.Default);
 
-            var callSite = provider.CallSiteFactory.GetCallSite(typeof(ServiceC), new CallSiteChain());
+            var callSite = provider.CallSiteFactory.GetCallSite(
+                typeof(ServiceC),
+                new CallSiteChain()
+            );
             var compiledCallSite = CompileCallSite(callSite, provider);
 
             var serviceC = (DisposableServiceC)compiledCallSite(provider.Root);
@@ -181,12 +241,20 @@ namespace Microsoft.Extensions.DependencyInjection.Tests
         [InlineData(ServiceLifetime.Transient)]
         // We are not testing singleton here because singleton resolutions always got through
         // runtime resolver and there is no sense to eliminating call from there
-        public void BuildExpressionElidesDisposableCaptureForNonDisposableServices(ServiceLifetime lifetime)
+        public void BuildExpressionElidesDisposableCaptureForNonDisposableServices(
+            ServiceLifetime lifetime
+        )
         {
             IServiceCollection descriptors = new ServiceCollection();
-            descriptors.Add(ServiceDescriptor.Describe(typeof(ServiceA), typeof(ServiceA), lifetime));
-            descriptors.Add(ServiceDescriptor.Describe(typeof(ServiceB), typeof(ServiceB), lifetime));
-            descriptors.Add(ServiceDescriptor.Describe(typeof(ServiceC), typeof(ServiceC), lifetime));
+            descriptors.Add(
+                ServiceDescriptor.Describe(typeof(ServiceA), typeof(ServiceA), lifetime)
+            );
+            descriptors.Add(
+                ServiceDescriptor.Describe(typeof(ServiceB), typeof(ServiceB), lifetime)
+            );
+            descriptors.Add(
+                ServiceDescriptor.Describe(typeof(ServiceC), typeof(ServiceC), lifetime)
+            );
 
             descriptors.AddScoped<ServiceB>();
             descriptors.AddTransient<ServiceC>();
@@ -194,7 +262,10 @@ namespace Microsoft.Extensions.DependencyInjection.Tests
             var disposables = new List<object>();
             var provider = new ServiceProvider(descriptors, ServiceProviderOptions.Default);
 
-            var callSite = provider.CallSiteFactory.GetCallSite(typeof(ServiceC), new CallSiteChain());
+            var callSite = provider.CallSiteFactory.GetCallSite(
+                typeof(ServiceC),
+                new CallSiteChain()
+            );
             var compiledCallSite = CompileCallSite(callSite, provider);
 
             var serviceC = (ServiceC)compiledCallSite(provider.Root);
@@ -207,16 +278,25 @@ namespace Microsoft.Extensions.DependencyInjection.Tests
         [InlineData(ServiceLifetime.Transient)]
         // We are not testing singleton here because singleton resolutions always got through
         // runtime resolver and there is no sense to eliminating call from there
-        public void BuildExpressionElidesDisposableCaptureForEnumerableServices(ServiceLifetime lifetime)
+        public void BuildExpressionElidesDisposableCaptureForEnumerableServices(
+            ServiceLifetime lifetime
+        )
         {
             IServiceCollection descriptors = new ServiceCollection();
-            descriptors.Add(ServiceDescriptor.Describe(typeof(ServiceA), typeof(ServiceA), lifetime));
-            descriptors.Add(ServiceDescriptor.Describe(typeof(ServiceD), typeof(ServiceD), lifetime));
+            descriptors.Add(
+                ServiceDescriptor.Describe(typeof(ServiceA), typeof(ServiceA), lifetime)
+            );
+            descriptors.Add(
+                ServiceDescriptor.Describe(typeof(ServiceD), typeof(ServiceD), lifetime)
+            );
 
             var disposables = new List<object>();
             var provider = new ServiceProvider(descriptors, ServiceProviderOptions.Default);
 
-            var callSite = provider.CallSiteFactory.GetCallSite(typeof(ServiceD), new CallSiteChain());
+            var callSite = provider.CallSiteFactory.GetCallSite(
+                typeof(ServiceD),
+                new CallSiteChain()
+            );
             var compiledCallSite = CompileCallSite(callSite, provider);
 
             var serviceD = (ServiceD)compiledCallSite(provider.Root);
@@ -234,10 +314,16 @@ namespace Microsoft.Extensions.DependencyInjection.Tests
 
             var provider = new ServiceProvider(descriptors, ServiceProviderOptions.Default);
 
-            var callSite1 = provider.CallSiteFactory.GetCallSite(typeof(ClassWithThrowingEmptyCtor), new CallSiteChain());
+            var callSite1 = provider.CallSiteFactory.GetCallSite(
+                typeof(ClassWithThrowingEmptyCtor),
+                new CallSiteChain()
+            );
             var compiledCallSite1 = CompileCallSite(callSite1, provider);
 
-            var callSite2 = provider.CallSiteFactory.GetCallSite(typeof(ClassWithThrowingCtor), new CallSiteChain());
+            var callSite2 = provider.CallSiteFactory.GetCallSite(
+                typeof(ClassWithThrowingCtor),
+                new CallSiteChain()
+            );
             var compiledCallSite2 = CompileCallSite(callSite2, provider);
 
             var ex1 = Assert.Throws<Exception>(() => compiledCallSite1(provider.Root));
@@ -257,7 +343,10 @@ namespace Microsoft.Extensions.DependencyInjection.Tests
 
             var provider = new ServiceProvider(descriptors, ServiceProviderOptions.Default);
 
-            var callSite1 = provider.CallSiteFactory.GetCallSite(typeof(ServiceE), new CallSiteChain());
+            var callSite1 = provider.CallSiteFactory.GetCallSite(
+                typeof(ServiceE),
+                new CallSiteChain()
+            );
             var compileCallSite = CompileCallSite(callSite1, provider);
 
             Assert.NotNull(compileCallSite);
@@ -285,13 +374,27 @@ namespace Microsoft.Extensions.DependencyInjection.Tests
         public void CallSiteFactoryResolvesIEnumerableOfOpenGenericServiceAfterResolvingClosedImplementation()
         {
             IServiceCollection descriptors = new ServiceCollection();
-            descriptors.Add(ServiceDescriptor.Scoped(typeof(IFakeOpenGenericService<int>), typeof(FakeIntService)));
-            descriptors.Add(ServiceDescriptor.Scoped(typeof(IFakeOpenGenericService<>), typeof(FakeOpenGenericService<>)));
+            descriptors.Add(
+                ServiceDescriptor.Scoped(
+                    typeof(IFakeOpenGenericService<int>),
+                    typeof(FakeIntService)
+                )
+            );
+            descriptors.Add(
+                ServiceDescriptor.Scoped(
+                    typeof(IFakeOpenGenericService<>),
+                    typeof(FakeOpenGenericService<>)
+                )
+            );
 
             ServiceProvider provider = descriptors.BuildServiceProvider();
 
-            IFakeOpenGenericService<int> processor = provider.GetService<IFakeOpenGenericService<int>>();
-            IEnumerable<IFakeOpenGenericService<int>> processors = provider.GetService<IEnumerable<IFakeOpenGenericService<int>>>();
+            IFakeOpenGenericService<int> processor = provider.GetService<
+                IFakeOpenGenericService<int>
+            >();
+            IEnumerable<IFakeOpenGenericService<int>> processors = provider.GetService<
+                IEnumerable<IFakeOpenGenericService<int>>
+            >();
 
             Type[] implementationTypes = processors.Select(p => p.GetType()).ToArray();
             Assert.Equal(typeof(FakeIntService), processor.GetType());
@@ -305,9 +408,7 @@ namespace Microsoft.Extensions.DependencyInjection.Tests
             public int Value => 0;
         }
 
-        private interface IServiceG
-        {
-        }
+        private interface IServiceG { }
 
         private class ServiceG
         {
@@ -321,15 +422,10 @@ namespace Microsoft.Extensions.DependencyInjection.Tests
 
         private class ServiceD
         {
-            public ServiceD(IEnumerable<ServiceA> services)
-            {
-
-            }
+            public ServiceD(IEnumerable<ServiceA> services) { }
         }
 
-        private class ServiceA
-        {
-        }
+        private class ServiceA { }
 
         private class ServiceB
         {
@@ -366,33 +462,23 @@ namespace Microsoft.Extensions.DependencyInjection.Tests
 
         private class DisposableServiceA : ServiceA, IDisposable
         {
-            public void Dispose()
-            {
-            }
+            public void Dispose() { }
         }
 
         private class DisposableServiceB : ServiceB, IDisposable
         {
             public DisposableServiceB(ServiceA serviceA)
-                : base(serviceA)
-            {
-            }
+                : base(serviceA) { }
 
-            public void Dispose()
-            {
-            }
+            public void Dispose() { }
         }
 
         private class DisposableServiceC : ServiceC, IDisposable
         {
             public DisposableServiceC(ServiceB serviceB)
-                : base(serviceB)
-            {
-            }
+                : base(serviceB) { }
 
-            public void Dispose()
-            {
-            }
+            public void Dispose() { }
         }
 
         private static object Invoke(ServiceCallSite callSite, ServiceProviderEngineScope scope)
@@ -400,7 +486,10 @@ namespace Microsoft.Extensions.DependencyInjection.Tests
             return CallSiteRuntimeResolver.Instance.Resolve(callSite, scope);
         }
 
-        private static Func<ServiceProviderEngineScope, object> CompileCallSite(ServiceCallSite callSite, ServiceProvider provider)
+        private static Func<ServiceProviderEngineScope, object> CompileCallSite(
+            ServiceCallSite callSite,
+            ServiceProvider provider
+        )
         {
             return new ExpressionResolverBuilder(provider).Build(callSite);
         }

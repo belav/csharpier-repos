@@ -75,6 +75,7 @@ internal static partial class Interop
             inodefs = 0x11307854,
             inotifyfs = 0x2BAD1DEA,
             isofs = 0x9660,
+
             // isofs = 0x4004, // R_WIN
             // isofs = 0x4000, // WIN
             jffs = 0x07C0,
@@ -152,11 +153,17 @@ internal static partial class Interop
         [LibraryImport(Libraries.SystemNative, EntryPoint = "SystemNative_GetFileSystemType")]
         private static partial uint GetFileSystemType(SafeFileHandle fd);
 
-        internal static bool TryGetFileSystemType(SafeFileHandle fd, out UnixFileSystemTypes fileSystemType)
+        internal static bool TryGetFileSystemType(
+            SafeFileHandle fd,
+            out UnixFileSystemTypes fileSystemType
+        )
         {
             uint fstatfsResult = GetFileSystemType(fd);
             fileSystemType = (UnixFileSystemTypes)fstatfsResult;
-            Debug.Assert(Enum.IsDefined(fileSystemType) || fstatfsResult == 0, $"GetFileSystemType returned {fstatfsResult}");
+            Debug.Assert(
+                Enum.IsDefined(fileSystemType) || fstatfsResult == 0,
+                $"GetFileSystemType returned {fstatfsResult}"
+            );
             return fstatfsResult != 0;
         }
     }

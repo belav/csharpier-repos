@@ -26,7 +26,9 @@ public interface IReadOnlyPropertyBase : IReadOnlyAnnotatable
     /// <summary>
     ///     Gets the type of value that this property-like object holds.
     /// </summary>
-    [DynamicallyAccessedMembers(IEntityType.DynamicallyAccessedMemberTypes | IProperty.DynamicallyAccessedMemberTypes)]
+    [DynamicallyAccessedMembers(
+        IEntityType.DynamicallyAccessedMemberTypes | IProperty.DynamicallyAccessedMemberTypes
+    )]
     Type ClrType { get; }
 
     /// <summary>
@@ -51,8 +53,7 @@ public interface IReadOnlyPropertyBase : IReadOnlyAnnotatable
     ///     is not known.
     /// </summary>
     /// <returns>The name of the backing field, or <see langword="null" />.</returns>
-    string? GetFieldName()
-        => FieldInfo?.GetSimpleMemberName();
+    string? GetFieldName() => FieldInfo?.GetSimpleMemberName();
 
     /// <summary>
     ///     Gets a value indicating whether this is a shadow property. A shadow property is one that does not have a
@@ -62,8 +63,7 @@ public interface IReadOnlyPropertyBase : IReadOnlyAnnotatable
     /// <returns>
     ///     <see langword="true" /> if the property is a shadow property, otherwise <see langword="false" />.
     /// </returns>
-    bool IsShadowProperty()
-        => PropertyInfo == null && FieldInfo == null;
+    bool IsShadowProperty() => PropertyInfo == null && FieldInfo == null;
 
     /// <summary>
     ///     Gets a value indicating whether this is an indexer property. An indexer property is one that is accessed through
@@ -72,9 +72,9 @@ public interface IReadOnlyPropertyBase : IReadOnlyAnnotatable
     /// <returns>
     ///     <see langword="true" /> if the property is an indexer property, otherwise <see langword="false" />.
     /// </returns>
-    bool IsIndexerProperty()
-        => PropertyInfo is PropertyInfo propertyInfo
-            && propertyInfo == DeclaringType.FindIndexerPropertyInfo();
+    bool IsIndexerProperty() =>
+        PropertyInfo is PropertyInfo propertyInfo
+        && propertyInfo == DeclaringType.FindIndexerPropertyInfo();
 
     /// <summary>
     ///     Gets the <see cref="PropertyAccessMode" /> being used for this property-like object.

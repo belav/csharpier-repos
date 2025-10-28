@@ -11,29 +11,41 @@ namespace System.Web.Http.SelfHost.ServiceModel
 {
     internal static class HttpTransportSecurityExtensionMethods
     {
-        internal static void ConfigureTransportProtectionAndAuthentication(this HttpTransportSecurity httpTransportSecurity, HttpsTransportBindingElement httpsTransportBindingElement)
+        internal static void ConfigureTransportProtectionAndAuthentication(
+            this HttpTransportSecurity httpTransportSecurity,
+            HttpsTransportBindingElement httpsTransportBindingElement
+        )
         {
             Contract.Assert(httpTransportSecurity != null);
             Contract.Assert(httpsTransportBindingElement != null);
 
             httpTransportSecurity.ConfigureAuthentication(httpsTransportBindingElement);
-            httpsTransportBindingElement.RequireClientCertificate = httpTransportSecurity.ClientCredentialType == HttpClientCredentialType.Certificate;
+            httpsTransportBindingElement.RequireClientCertificate =
+                httpTransportSecurity.ClientCredentialType == HttpClientCredentialType.Certificate;
         }
 
-        internal static void ConfigureTransportAuthentication(this HttpTransportSecurity httpTransportSecurity, HttpTransportBindingElement httpTransportBindingElement)
+        internal static void ConfigureTransportAuthentication(
+            this HttpTransportSecurity httpTransportSecurity,
+            HttpTransportBindingElement httpTransportBindingElement
+        )
         {
             Contract.Assert(httpTransportSecurity != null);
             Contract.Assert(httpTransportBindingElement != null);
 
             if (httpTransportSecurity.ClientCredentialType == HttpClientCredentialType.Certificate)
             {
-                throw Error.InvalidOperation(SRResources.CertificateUnsupportedForHttpTransportCredentialOnly);
+                throw Error.InvalidOperation(
+                    SRResources.CertificateUnsupportedForHttpTransportCredentialOnly
+                );
             }
 
             httpTransportSecurity.ConfigureAuthentication(httpTransportBindingElement);
         }
 
-        internal static void DisableTransportAuthentication(this HttpTransportSecurity httpTransportSecurity, HttpTransportBindingElement httpTransportBindingElement)
+        internal static void DisableTransportAuthentication(
+            this HttpTransportSecurity httpTransportSecurity,
+            HttpTransportBindingElement httpTransportBindingElement
+        )
         {
             Contract.Assert(httpTransportSecurity != null);
             Contract.Assert(httpTransportBindingElement != null);
@@ -41,18 +53,29 @@ namespace System.Web.Http.SelfHost.ServiceModel
             httpTransportBindingElement.AuthenticationScheme = AuthenticationSchemes.Anonymous;
             httpTransportBindingElement.ProxyAuthenticationScheme = AuthenticationSchemes.Anonymous;
             httpTransportBindingElement.Realm = String.Empty;
-            httpTransportBindingElement.ExtendedProtectionPolicy = httpTransportSecurity.ExtendedProtectionPolicy;
+            httpTransportBindingElement.ExtendedProtectionPolicy =
+                httpTransportSecurity.ExtendedProtectionPolicy;
         }
 
-        private static void ConfigureAuthentication(this HttpTransportSecurity httpTransportSecurity, HttpTransportBindingElement httpTransportBindingElement)
+        private static void ConfigureAuthentication(
+            this HttpTransportSecurity httpTransportSecurity,
+            HttpTransportBindingElement httpTransportBindingElement
+        )
         {
             Contract.Assert(httpTransportSecurity != null);
             Contract.Assert(httpTransportBindingElement != null);
 
-            httpTransportBindingElement.AuthenticationScheme = HttpClientCredentialTypeHelper.MapToAuthenticationScheme(httpTransportSecurity.ClientCredentialType);
-            httpTransportBindingElement.ProxyAuthenticationScheme = HttpProxyCredentialTypeHelper.MapToAuthenticationScheme(httpTransportSecurity.ProxyCredentialType);
+            httpTransportBindingElement.AuthenticationScheme =
+                HttpClientCredentialTypeHelper.MapToAuthenticationScheme(
+                    httpTransportSecurity.ClientCredentialType
+                );
+            httpTransportBindingElement.ProxyAuthenticationScheme =
+                HttpProxyCredentialTypeHelper.MapToAuthenticationScheme(
+                    httpTransportSecurity.ProxyCredentialType
+                );
             httpTransportBindingElement.Realm = httpTransportSecurity.Realm;
-            httpTransportBindingElement.ExtendedProtectionPolicy = httpTransportSecurity.ExtendedProtectionPolicy;
+            httpTransportBindingElement.ExtendedProtectionPolicy =
+                httpTransportSecurity.ExtendedProtectionPolicy;
         }
     }
 }

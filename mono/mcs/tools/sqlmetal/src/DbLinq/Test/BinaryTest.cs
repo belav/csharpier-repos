@@ -1,19 +1,19 @@
 ﻿#region MIT license
-// 
+//
 // MIT license
 //
 // Copyright (c) 2009 Novell, Inc.
-// 
+//
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
 // in the Software without restriction, including without limitation the rights
 // to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
 // copies of the Software, and to permit persons to whom the Software is
 // furnished to do so, subject to the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be included in
 // all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
 // IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
 // FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
@@ -21,15 +21,13 @@
 // LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
-// 
+//
 #endregion
 
 using System;
+using System.Data.Linq;
 using System.Linq;
 using System.Text;
-
-using System.Data.Linq;
-
 using NUnit.Framework;
 
 namespace DbLinqTest
@@ -37,7 +35,7 @@ namespace DbLinqTest
     [TestFixture]
     public class BinaryTest
     {
-        // XXX: oddly, MSDN documents that while ArgumentNullException is 
+        // XXX: oddly, MSDN documents that while ArgumentNullException is
         //      thrown, that may change in the future.  Why would this change?
         [Test, ExpectedException(typeof(ArgumentNullException))]
         public void Constructor_ValueNull()
@@ -65,9 +63,9 @@ namespace DbLinqTest
         [Test]
         public void Equality()
         {
-            Binary a    = new Binary(Encoding.UTF8.GetBytes("a"));
-            Binary a2   = new Binary(Encoding.UTF8.GetBytes("a"));
-            Binary b    = new Binary(Encoding.UTF8.GetBytes("b"));
+            Binary a = new Binary(Encoding.UTF8.GetBytes("a"));
+            Binary a2 = new Binary(Encoding.UTF8.GetBytes("a"));
+            Binary b = new Binary(Encoding.UTF8.GetBytes("b"));
 
             Assert.IsTrue(a == a);
             Assert.IsTrue(a == a2);
@@ -84,9 +82,9 @@ namespace DbLinqTest
         [Test]
         public void Inequality()
         {
-            Binary a    = new Binary(Encoding.UTF8.GetBytes("a"));
-            Binary a2   = new Binary(Encoding.UTF8.GetBytes("a"));
-            Binary b    = new Binary(Encoding.UTF8.GetBytes("b"));
+            Binary a = new Binary(Encoding.UTF8.GetBytes("a"));
+            Binary a2 = new Binary(Encoding.UTF8.GetBytes("a"));
+            Binary b = new Binary(Encoding.UTF8.GetBytes("b"));
 
             Assert.IsFalse(a != a);
             Assert.IsFalse(a != a2);
@@ -123,7 +121,7 @@ namespace DbLinqTest
             Binary b = new Binary(data);
             Assert.IsTrue(data.SequenceEqual(b.ToArray()));
 
-            data[0] = (byte) 'I';
+            data[0] = (byte)'I';
             Assert.IsFalse(data.SequenceEqual(b.ToArray()));
         }
 

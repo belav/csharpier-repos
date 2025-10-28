@@ -16,7 +16,9 @@ namespace Microsoft.CodeAnalysis.Indentation
         protected abstract IHeaderFacts HeaderFacts { get; }
         protected abstract ISyntaxFormatting SyntaxFormatting { get; }
 
-        protected abstract AbstractFormattingRule GetSpecializedIndentationFormattingRule(FormattingOptions2.IndentStyle indentStyle);
+        protected abstract AbstractFormattingRule GetSpecializedIndentationFormattingRule(
+            FormattingOptions2.IndentStyle indentStyle
+        );
 
         /// <summary>
         /// Returns <see langword="true"/> if the language specific <see
@@ -26,9 +28,17 @@ namespace Microsoft.CodeAnalysis.Indentation
         /// </summary>
         protected abstract bool ShouldUseTokenIndenter(Indenter indenter, out SyntaxToken token);
         protected abstract ISmartTokenFormatter CreateSmartTokenFormatter(
-            TSyntaxRoot root, SourceText text, TextLine lineToBeIndented, IndentationOptions options, AbstractFormattingRule baseFormattingRule);
+            TSyntaxRoot root,
+            SourceText text,
+            TextLine lineToBeIndented,
+            IndentationOptions options,
+            AbstractFormattingRule baseFormattingRule
+        );
 
         protected abstract IndentationResult? GetDesiredIndentationWorker(
-            Indenter indenter, SyntaxToken? token, SyntaxTrivia? trivia);
+            Indenter indenter,
+            SyntaxToken? token,
+            SyntaxTrivia? trivia
+        );
     }
 }

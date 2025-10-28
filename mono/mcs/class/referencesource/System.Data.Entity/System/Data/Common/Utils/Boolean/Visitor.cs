@@ -9,11 +9,11 @@
 
 using System;
 using System.Collections.Generic;
-using System.Text;
-using System.Globalization;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
+using System.Globalization;
 using System.Linq;
+using System.Text;
 
 namespace System.Data.Common.Utils.Boolean
 {
@@ -38,26 +38,47 @@ namespace System.Data.Common.Utils.Boolean
     /// Basic visitor which reproduces the given expression tree.
     /// </summary>
     /// <typeparam name="T_Identifier">Type of leaf term identifiers in expression.</typeparam>
-    internal abstract class BasicVisitor<T_Identifier> : Visitor<T_Identifier, BoolExpr<T_Identifier>>
+    internal abstract class BasicVisitor<T_Identifier>
+        : Visitor<T_Identifier, BoolExpr<T_Identifier>>
     {
-        internal override BoolExpr<T_Identifier> VisitFalse(FalseExpr<T_Identifier> expression) { return expression; }
-        internal override BoolExpr<T_Identifier> VisitTrue(TrueExpr<T_Identifier> expression) { return expression; }
-        internal override BoolExpr<T_Identifier> VisitTerm(TermExpr<T_Identifier> expression) { return expression; }
-        internal override BoolExpr<T_Identifier> VisitNot(NotExpr<T_Identifier> expression) 
-        { 
-            return new NotExpr<T_Identifier>(expression.Child.Accept(this)); 
+        internal override BoolExpr<T_Identifier> VisitFalse(FalseExpr<T_Identifier> expression)
+        {
+            return expression;
         }
-        internal override BoolExpr<T_Identifier> VisitAnd(AndExpr<T_Identifier> expression) 
-        { 
-            return new AndExpr<T_Identifier>(AcceptChildren(expression.Children)); 
+
+        internal override BoolExpr<T_Identifier> VisitTrue(TrueExpr<T_Identifier> expression)
+        {
+            return expression;
         }
-        internal override BoolExpr<T_Identifier> VisitOr(OrExpr<T_Identifier> expression) 
+
+        internal override BoolExpr<T_Identifier> VisitTerm(TermExpr<T_Identifier> expression)
+        {
+            return expression;
+        }
+
+        internal override BoolExpr<T_Identifier> VisitNot(NotExpr<T_Identifier> expression)
+        {
+            return new NotExpr<T_Identifier>(expression.Child.Accept(this));
+        }
+
+        internal override BoolExpr<T_Identifier> VisitAnd(AndExpr<T_Identifier> expression)
+        {
+            return new AndExpr<T_Identifier>(AcceptChildren(expression.Children));
+        }
+
+        internal override BoolExpr<T_Identifier> VisitOr(OrExpr<T_Identifier> expression)
         {
             return new OrExpr<T_Identifier>(AcceptChildren(expression.Children));
         }
-        private IEnumerable<BoolExpr<T_Identifier>> AcceptChildren(IEnumerable<BoolExpr<T_Identifier>> children)
+
+        private IEnumerable<BoolExpr<T_Identifier>> AcceptChildren(
+            IEnumerable<BoolExpr<T_Identifier>> children
+        )
         {
-            foreach (BoolExpr<T_Identifier> child in children) { yield return child.Accept(this); }
+            foreach (BoolExpr<T_Identifier> child in children)
+            {
+                yield return child.Accept(this);
+            }
         }
     }
 
@@ -133,7 +154,7 @@ namespace System.Data.Common.Utils.Boolean
             return visitor._terms;
         }
 
-        internal static IEnumerable<T_Identifier> GetLeaves(BoolExpr<T_Identifier> expression) 
+        internal static IEnumerable<T_Identifier> GetLeaves(BoolExpr<T_Identifier> expression)
         {
             return GetTerms(expression).Select(term => term.Identifier);
         }
@@ -176,7 +197,7 @@ namespace System.Data.Common.Utils.Boolean
                 child.Accept(this);
             }
             return true;
-        }            
+        }
     }
 
     /// <summary>
@@ -250,7 +271,10 @@ namespace System.Data.Common.Utils.Boolean
             _context = context;
         }
 
-        internal static Vertex TranslateToRobdd(BoolExpr<T_Identifier> expr, ConversionContext<T_Identifier> context)
+        internal static Vertex TranslateToRobdd(
+            BoolExpr<T_Identifier> expr,
+            ConversionContext<T_Identifier> context
+        )
         {
             Debug.Assert(null != expr, "must provide an expression");
             ToDecisionDiagramConverter<T_Identifier> converter =

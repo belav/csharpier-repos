@@ -1,7 +1,7 @@
 // ==++==
-// 
+//
 //   Copyright (c) Microsoft Corporation.  All rights reserved.
-// 
+//
 // ==--==
 /*============================================================
 **
@@ -15,19 +15,20 @@
 
 using System;
 using System.Collections;
+using System.IO;
+using System.Runtime.InteropServices;
+using System.Runtime.Versioning;
 using System.Security.AccessControl;
 using System.Security.Permissions;
 using System.Security.Principal;
 using Microsoft.Win32;
 using Microsoft.Win32.SafeHandles;
-using System.Runtime.InteropServices;
-using System.IO;
-using System.Runtime.Versioning;
 
-namespace System.IO.Pipes {
-
+namespace System.IO.Pipes
+{
     [Flags]
-    public enum PipeAccessRights {
+    public enum PipeAccessRights
+    {
         // No None field - An ACE with the value 0 cannot grant nor deny.
         ReadData = 0x000001,
         WriteData = 0x000002,
@@ -53,53 +54,50 @@ namespace System.IO.Pipes {
         TakeOwnership = 0x080000,
         Synchronize = 0x100000,
 
-        FullControl = ReadData | WriteData | ReadAttributes | ReadExtendedAttributes |
-                                       WriteAttributes | WriteExtendedAttributes | CreateNewInstance |
-                                       Delete | ReadPermissions | ChangePermissions | TakeOwnership |
-                                       Synchronize,
+        FullControl =
+            ReadData
+            | WriteData
+            | ReadAttributes
+            | ReadExtendedAttributes
+            | WriteAttributes
+            | WriteExtendedAttributes
+            | CreateNewInstance
+            | Delete
+            | ReadPermissions
+            | ChangePermissions
+            | TakeOwnership
+            | Synchronize,
 
         Read = ReadData | ReadAttributes | ReadExtendedAttributes | ReadPermissions,
-        Write = WriteData | WriteAttributes | WriteExtendedAttributes, // | CreateNewInstance, For security, I really don't this CreateNewInstance belongs here.   
+        Write = WriteData | WriteAttributes | WriteExtendedAttributes, // | CreateNewInstance, For security, I really don't this CreateNewInstance belongs here.
         ReadWrite = Read | Write,
 
         // These are somewhat similar to what you get if you use PipeDirection:
-        //In                           = ReadData | ReadAttributes | ReadExtendedAttributes | ReadPermissions, 
-        //Out                          = WriteData | WriteAttributes | WriteExtendedAttributes | ChangePermissions | CreateNewInstance | ReadAttributes, // NOTE: Not sure if ReadAttributes should really be here 
+        //In                           = ReadData | ReadAttributes | ReadExtendedAttributes | ReadPermissions,
+        //Out                          = WriteData | WriteAttributes | WriteExtendedAttributes | ChangePermissions | CreateNewInstance | ReadAttributes, // NOTE: Not sure if ReadAttributes should really be here
         //InOut                        = In | Out,
 
-        AccessSystemSecurity = 0x01000000, // Allow changes to SACL. 
+        AccessSystemSecurity = 0x01000000, // Allow changes to SACL.
     }
 
-
     [System.Security.Permissions.HostProtection(MayLeakOnAbort = true)]
-    public sealed class PipeAccessRule : AccessRule {
+    public sealed class PipeAccessRule : AccessRule
+    {
         #region Constructors
 
         //
         // Constructor for creating access rules for pipe objects
         //
 
-        public PipeAccessRule(
-            String identity,
-            PipeAccessRights rights,
-            AccessControlType type)
-            : this(
-                new NTAccount(identity),
-                AccessMaskFromRights(rights, type),
-                false,
-                type) {
-        }
+        public PipeAccessRule(String identity, PipeAccessRights rights, AccessControlType type)
+            : this(new NTAccount(identity), AccessMaskFromRights(rights, type), false, type) { }
 
         public PipeAccessRule(
             IdentityReference identity,
             PipeAccessRights rights,
-            AccessControlType type)
-            : this(
-                identity,
-                AccessMaskFromRights(rights, type),
-                false,
-                type) {
-        }
+            AccessControlType type
+        )
+            : this(identity, AccessMaskFromRights(rights, type), false, type) { }
 
         //
         // Internal constructor to be called by public constructors
@@ -109,44 +107,57 @@ namespace System.IO.Pipes {
             IdentityReference identity,
             int accessMask,
             bool isInherited,
-            AccessControlType type)
+            AccessControlType type
+        )
             : base(
                 identity,
                 accessMask,
                 isInherited,
-                InheritanceFlags.None,  // these do not apply to pipes
-                PropagationFlags.None,  // these do not apply to pipes
-                type) {
-        }
-        
+                InheritanceFlags.None, // these do not apply to pipes
+                PropagationFlags.None, // these do not apply to pipes
+                type
+            ) { }
+
         #endregion
 
         #region Public properties
 
-        public PipeAccessRights PipeAccessRights {
-            get { 
-                return RightsFromAccessMask(base.AccessMask); 
-            }
+        public PipeAccessRights PipeAccessRights
+        {
+            get { return RightsFromAccessMask(base.AccessMask); }
         }
 
         #endregion
 
         #region Access mask to rights translation
 
-        // ACL's on pipes have a SYNCHRONIZE bit, and CreateFile ALWAYS asks for it.  
+        // ACL's on pipes have a SYNCHRONIZE bit, and CreateFile ALWAYS asks for it.
         // So for allows, let's always include this bit, and for denies, let's never
-        // include this bit unless we're denying full control.  This is the right 
+        // include this bit unless we're denying full control.  This is the right
         // thing for users, even if it does make the model look asymmetrical from a
         // purist point of view.
-        internal static int AccessMaskFromRights(PipeAccessRights rights, AccessControlType controlType) {
-            if (rights < (PipeAccessRights)0 || rights > (PipeAccessRights.FullControl | PipeAccessRights.AccessSystemSecurity))
-                throw new ArgumentOutOfRangeException("rights", SR.GetString(SR.ArgumentOutOfRange_NeedValidPipeAccessRights));
+        internal static int AccessMaskFromRights(
+            PipeAccessRights rights,
+            AccessControlType controlType
+        )
+        {
+            if (
+                rights < (PipeAccessRights)0
+                || rights > (PipeAccessRights.FullControl | PipeAccessRights.AccessSystemSecurity)
+            )
+                throw new ArgumentOutOfRangeException(
+                    "rights",
+                    SR.GetString(SR.ArgumentOutOfRange_NeedValidPipeAccessRights)
+                );
 
-            if (controlType == AccessControlType.Allow) {
+            if (controlType == AccessControlType.Allow)
+            {
                 rights |= PipeAccessRights.Synchronize;
             }
-            else if (controlType == AccessControlType.Deny) {
-                if (rights != PipeAccessRights.FullControl) {
+            else if (controlType == AccessControlType.Deny)
+            {
+                if (rights != PipeAccessRights.FullControl)
+                {
                     rights &= ~PipeAccessRights.Synchronize;
                 }
             }
@@ -154,60 +165,54 @@ namespace System.IO.Pipes {
             return (int)rights;
         }
 
-        internal static PipeAccessRights RightsFromAccessMask(int accessMask) {
+        internal static PipeAccessRights RightsFromAccessMask(int accessMask)
+        {
             return (PipeAccessRights)accessMask;
         }
 
         #endregion
     }
 
-
     [System.Security.Permissions.HostProtection(MayLeakOnAbort = true)]
-    public sealed class PipeAuditRule : AuditRule {
+    public sealed class PipeAuditRule : AuditRule
+    {
         #region Constructors
 
-        public PipeAuditRule(
-            IdentityReference identity,
-            PipeAccessRights rights,
-            AuditFlags flags)
-            : this(
-                identity,
-                AccessMaskFromRights(rights),
-                false,
-                flags) {
-        }
+        public PipeAuditRule(IdentityReference identity, PipeAccessRights rights, AuditFlags flags)
+            : this(identity, AccessMaskFromRights(rights), false, flags) { }
 
-        public PipeAuditRule(
-            String identity,
-            PipeAccessRights rights,
-            AuditFlags flags)
-            : this(
-                new NTAccount(identity),
-                AccessMaskFromRights(rights),
-                false,
-                flags) {
-        }
+        public PipeAuditRule(String identity, PipeAccessRights rights, AuditFlags flags)
+            : this(new NTAccount(identity), AccessMaskFromRights(rights), false, flags) { }
 
         internal PipeAuditRule(
             IdentityReference identity,
             int accessMask,
             bool isInherited,
-            AuditFlags flags)
+            AuditFlags flags
+        )
             : base(
                 identity,
                 accessMask,
                 isInherited,
                 InheritanceFlags.None,
                 PropagationFlags.None,
-                flags) {
-        }
+                flags
+            ) { }
         #endregion
 
         #region Private methods
 
-        private static int AccessMaskFromRights(PipeAccessRights rights) {
-            if (rights < (PipeAccessRights)0 || rights > (PipeAccessRights.FullControl | PipeAccessRights.AccessSystemSecurity)) {
-                throw new ArgumentOutOfRangeException("rights", SR.GetString(SR.ArgumentOutOfRange_NeedValidPipeAccessRights));
+        private static int AccessMaskFromRights(PipeAccessRights rights)
+        {
+            if (
+                rights < (PipeAccessRights)0
+                || rights > (PipeAccessRights.FullControl | PipeAccessRights.AccessSystemSecurity)
+            )
+            {
+                throw new ArgumentOutOfRangeException(
+                    "rights",
+                    SR.GetString(SR.ArgumentOutOfRange_NeedValidPipeAccessRights)
+                );
             }
 
             return (int)rights;
@@ -217,18 +222,17 @@ namespace System.IO.Pipes {
 
         #region Public properties
 
-        public PipeAccessRights PipeAccessRights {
-            get { 
-                return PipeAccessRule.RightsFromAccessMask(base.AccessMask); 
-            }
+        public PipeAccessRights PipeAccessRights
+        {
+            get { return PipeAccessRule.RightsFromAccessMask(base.AccessMask); }
         }
 
         #endregion
     }
 
-
     [System.Security.Permissions.HostProtection(MayLeakOnAbort = true)]
-    public class PipeSecurity : NativeObjectSecurity {
+    public class PipeSecurity : NativeObjectSecurity
+    {
         public PipeSecurity()
             : base(false, ResourceType.KernelObject) { }
 
@@ -237,43 +241,56 @@ namespace System.IO.Pipes {
         internal PipeSecurity(SafePipeHandle safeHandle, AccessControlSections includeSections)
             : base(false, ResourceType.KernelObject, safeHandle, includeSections) { }
 
-        public void AddAccessRule(PipeAccessRule rule) {
+        public void AddAccessRule(PipeAccessRule rule)
+        {
             if (rule == null)
                 throw new ArgumentNullException("rule");
 
             base.AddAccessRule(rule);
         }
 
-        public void SetAccessRule(PipeAccessRule rule) {
+        public void SetAccessRule(PipeAccessRule rule)
+        {
             if (rule == null)
                 throw new ArgumentNullException("rule");
 
             base.SetAccessRule(rule);
         }
 
-        public void ResetAccessRule(PipeAccessRule rule) {
+        public void ResetAccessRule(PipeAccessRule rule)
+        {
             if (rule == null)
                 throw new ArgumentNullException("rule");
 
             base.ResetAccessRule(rule);
         }
 
-        public bool RemoveAccessRule(PipeAccessRule rule) {
-            if (rule == null) {
+        public bool RemoveAccessRule(PipeAccessRule rule)
+        {
+            if (rule == null)
+            {
                 throw new ArgumentNullException("rule");
             }
 
-            // If the rule to be removed matches what is there currently then 
+            // If the rule to be removed matches what is there currently then
             // remove it unaltered. That is, don't mask off the Synchronize bit.
-            AuthorizationRuleCollection rules = GetAccessRules(true, true,
-                    rule.IdentityReference.GetType());
+            AuthorizationRuleCollection rules = GetAccessRules(
+                true,
+                true,
+                rule.IdentityReference.GetType()
+            );
 
-            for (int i = 0; i < rules.Count; i++) {
+            for (int i = 0; i < rules.Count; i++)
+            {
                 PipeAccessRule fsrule = rules[i] as PipeAccessRule;
 
-                if ((fsrule != null) && (fsrule.PipeAccessRights == rule.PipeAccessRights)
-                        && (fsrule.IdentityReference == rule.IdentityReference)
-                        && (fsrule.AccessControlType == rule.AccessControlType)) {
+                if (
+                    (fsrule != null)
+                    && (fsrule.PipeAccessRights == rule.PipeAccessRights)
+                    && (fsrule.IdentityReference == rule.IdentityReference)
+                    && (fsrule.AccessControlType == rule.AccessControlType)
+                )
+                {
                     return base.RemoveAccessRule(rule);
                 }
             }
@@ -282,94 +299,134 @@ namespace System.IO.Pipes {
             // mask off the synchronize bit (that is automatically added for Allow)
             // before removing the ACL. The logic here should be same as Deny and hence
             // fake a call to AccessMaskFromRights as though the ACL is for Deny
-            if (rule.PipeAccessRights != PipeAccessRights.FullControl) {
-                return base.RemoveAccessRule(new PipeAccessRule(
-                            rule.IdentityReference,
-                            PipeAccessRule.AccessMaskFromRights(rule.PipeAccessRights, AccessControlType.Deny),
-                            false,
-                            rule.AccessControlType));
+            if (rule.PipeAccessRights != PipeAccessRights.FullControl)
+            {
+                return base.RemoveAccessRule(
+                    new PipeAccessRule(
+                        rule.IdentityReference,
+                        PipeAccessRule.AccessMaskFromRights(
+                            rule.PipeAccessRights,
+                            AccessControlType.Deny
+                        ),
+                        false,
+                        rule.AccessControlType
+                    )
+                );
             }
-            else {
+            else
+            {
                 return base.RemoveAccessRule(rule);
             }
         }
 
-        public void RemoveAccessRuleSpecific(PipeAccessRule rule) {
-            if (rule == null) {
+        public void RemoveAccessRuleSpecific(PipeAccessRule rule)
+        {
+            if (rule == null)
+            {
                 throw new ArgumentNullException("rule");
             }
 
-            // If the rule to be removed matches what is there currently then 
+            // If the rule to be removed matches what is there currently then
             // remove it unaltered. That is, don't mask off the Synchronize bit
-            AuthorizationRuleCollection rules = GetAccessRules(true, true,
-                    rule.IdentityReference.GetType());
+            AuthorizationRuleCollection rules = GetAccessRules(
+                true,
+                true,
+                rule.IdentityReference.GetType()
+            );
 
-            for (int i = 0; i < rules.Count; i++) {
+            for (int i = 0; i < rules.Count; i++)
+            {
                 PipeAccessRule fsrule = rules[i] as PipeAccessRule;
 
-                if ((fsrule != null) && (fsrule.PipeAccessRights == rule.PipeAccessRights)
+                if (
+                    (fsrule != null)
+                    && (fsrule.PipeAccessRights == rule.PipeAccessRights)
                     && (fsrule.IdentityReference == rule.IdentityReference)
-                    && (fsrule.AccessControlType == rule.AccessControlType)) {
+                    && (fsrule.AccessControlType == rule.AccessControlType)
+                )
+                {
                     base.RemoveAccessRuleSpecific(rule);
                     return;
                 }
             }
 
-            // It wasn't an exact match so try masking the sychronize bit (that is 
-            // automatically added for Allow) before removing the ACL. The logic 
-            // here should be same as Deny and hence fake a call to 
+            // It wasn't an exact match so try masking the sychronize bit (that is
+            // automatically added for Allow) before removing the ACL. The logic
+            // here should be same as Deny and hence fake a call to
             // AccessMaskFromRights as though the ACL is for Deny
-            if (rule.PipeAccessRights != PipeAccessRights.FullControl) {
-                base.RemoveAccessRuleSpecific(new PipeAccessRule(rule.IdentityReference,
-                    PipeAccessRule.AccessMaskFromRights(rule.PipeAccessRights, AccessControlType.Deny),
-                    false,
-                    rule.AccessControlType));
+            if (rule.PipeAccessRights != PipeAccessRights.FullControl)
+            {
+                base.RemoveAccessRuleSpecific(
+                    new PipeAccessRule(
+                        rule.IdentityReference,
+                        PipeAccessRule.AccessMaskFromRights(
+                            rule.PipeAccessRights,
+                            AccessControlType.Deny
+                        ),
+                        false,
+                        rule.AccessControlType
+                    )
+                );
             }
-            else {
+            else
+            {
                 base.RemoveAccessRuleSpecific(rule);
             }
         }
 
-        public void AddAuditRule(PipeAuditRule rule) {
+        public void AddAuditRule(PipeAuditRule rule)
+        {
             base.AddAuditRule(rule);
         }
 
-        public void SetAuditRule(PipeAuditRule rule) {
+        public void SetAuditRule(PipeAuditRule rule)
+        {
             base.SetAuditRule(rule);
         }
 
-        public bool RemoveAuditRule(PipeAuditRule rule) {
+        public bool RemoveAuditRule(PipeAuditRule rule)
+        {
             return base.RemoveAuditRule(rule);
         }
 
-        public void RemoveAuditRuleAll(PipeAuditRule rule) {
+        public void RemoveAuditRuleAll(PipeAuditRule rule)
+        {
             base.RemoveAuditRuleAll(rule);
         }
 
-        public void RemoveAuditRuleSpecific(PipeAuditRule rule) {
+        public void RemoveAuditRuleSpecific(PipeAuditRule rule)
+        {
             base.RemoveAuditRuleSpecific(rule);
         }
 
-        public override AccessRule AccessRuleFactory(IdentityReference identityReference,
-                int accessMask, bool isInherited, InheritanceFlags inheritanceFlags,
-                PropagationFlags propagationFlags, AccessControlType type) {
+        public override AccessRule AccessRuleFactory(
+            IdentityReference identityReference,
+            int accessMask,
+            bool isInherited,
+            InheritanceFlags inheritanceFlags,
+            PropagationFlags propagationFlags,
+            AccessControlType type
+        )
+        {
             // Throw if inheritance flags or propagation flags set. Have to include in signature
             // since this is an override
-            if (inheritanceFlags != InheritanceFlags.None) {
-                throw new ArgumentException(SR.GetString(SR.Argument_NonContainerInvalidAnyFlag), "inheritanceFlags");
+            if (inheritanceFlags != InheritanceFlags.None)
+            {
+                throw new ArgumentException(
+                    SR.GetString(SR.Argument_NonContainerInvalidAnyFlag),
+                    "inheritanceFlags"
+                );
             }
-            if (propagationFlags != PropagationFlags.None) {
-                throw new ArgumentException(SR.GetString(SR.Argument_NonContainerInvalidAnyFlag),  "propagationFlags");
+            if (propagationFlags != PropagationFlags.None)
+            {
+                throw new ArgumentException(
+                    SR.GetString(SR.Argument_NonContainerInvalidAnyFlag),
+                    "propagationFlags"
+                );
             }
 
-            return new PipeAccessRule(
-                identityReference,
-                accessMask,
-                isInherited,
-                type);
-
+            return new PipeAccessRule(identityReference, accessMask, isInherited, type);
         }
-
 
         public sealed override AuditRule AuditRuleFactory(
             IdentityReference identityReference,
@@ -377,27 +434,33 @@ namespace System.IO.Pipes {
             bool isInherited,
             InheritanceFlags inheritanceFlags,
             PropagationFlags propagationFlags,
-            AuditFlags flags) {
-
+            AuditFlags flags
+        )
+        {
             // Throw if inheritance flags or propagation flags set. Have to include in signature
             // since this is an override
-            if (inheritanceFlags != InheritanceFlags.None) {
-                throw new ArgumentException(SR.GetString(SR.Argument_NonContainerInvalidAnyFlag), "inheritanceFlags");
+            if (inheritanceFlags != InheritanceFlags.None)
+            {
+                throw new ArgumentException(
+                    SR.GetString(SR.Argument_NonContainerInvalidAnyFlag),
+                    "inheritanceFlags"
+                );
             }
-            if (propagationFlags != PropagationFlags.None) {
-                throw new ArgumentException(SR.GetString(SR.Argument_NonContainerInvalidAnyFlag), "propagationFlags");
+            if (propagationFlags != PropagationFlags.None)
+            {
+                throw new ArgumentException(
+                    SR.GetString(SR.Argument_NonContainerInvalidAnyFlag),
+                    "propagationFlags"
+                );
             }
 
-            return new PipeAuditRule(
-                identityReference,
-                accessMask,
-                isInherited,
-                flags);
+            return new PipeAuditRule(identityReference, accessMask, isInherited, flags);
         }
 
         #region Private Methods
 
-        private AccessControlSections GetAccessControlSectionsFromChanges() {
+        private AccessControlSections GetAccessControlSectionsFromChanges()
+        {
             AccessControlSections persistRules = AccessControlSections.None;
             if (AccessRulesModified)
                 persistRules = AccessControlSections.Access;
@@ -414,35 +477,41 @@ namespace System.IO.Pipes {
         #region Protected Methods
 
         // Use this in your own Persist after you have demanded any appropriate CAS permissions.
-        // Note that you will want your version to be internal and use a specialized Safe Handle. 
+        // Note that you will want your version to be internal and use a specialized Safe Handle.
         [System.Security.SecurityCritical]
         [SecurityPermission(SecurityAction.Assert, UnmanagedCode = true)]
-        protected internal void Persist(SafeHandle handle) {
+        protected internal void Persist(SafeHandle handle)
+        {
             WriteLock();
 
-            try {
+            try
+            {
                 AccessControlSections persistRules = GetAccessControlSectionsFromChanges();
                 base.Persist(handle, persistRules);
                 OwnerModified = GroupModified = AuditRulesModified = AccessRulesModified = false;
             }
-            finally {
+            finally
+            {
                 WriteUnlock();
             }
         }
 
         // Use this in your own Persist after you have demanded any appropriate CAS permissions.
-        // Note that you will want your version to be internal. 
+        // Note that you will want your version to be internal.
         [System.Security.SecurityCritical]
         [SecurityPermission(SecurityAction.Assert, UnmanagedCode = true)]
-        protected internal void Persist(String name) {
+        protected internal void Persist(String name)
+        {
             WriteLock();
 
-            try {
+            try
+            {
                 AccessControlSections persistRules = GetAccessControlSectionsFromChanges();
                 base.Persist(name, persistRules);
                 OwnerModified = GroupModified = AuditRulesModified = AccessRulesModified = false;
             }
-            finally {
+            finally
+            {
                 WriteUnlock();
             }
         }
@@ -450,24 +519,20 @@ namespace System.IO.Pipes {
         #endregion
 
         #region some overrides
-        public override Type AccessRightType {
-            get { 
-                return typeof(PipeAccessRights); 
-            }
+        public override Type AccessRightType
+        {
+            get { return typeof(PipeAccessRights); }
         }
 
-        public override Type AccessRuleType {
-            get { 
-                return typeof(PipeAccessRule); 
-            }
+        public override Type AccessRuleType
+        {
+            get { return typeof(PipeAccessRule); }
         }
 
-        public override Type AuditRuleType {
-            get { 
-                return typeof(PipeAuditRule); 
-            }
+        public override Type AuditRuleType
+        {
+            get { return typeof(PipeAuditRule); }
         }
         #endregion
     }
 }
-

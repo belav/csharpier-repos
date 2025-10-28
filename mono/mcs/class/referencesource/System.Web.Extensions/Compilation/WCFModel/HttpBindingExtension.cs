@@ -28,7 +28,8 @@ namespace Microsoft.VSDesigner.WCFModel
     [PermissionSet(SecurityAction.InheritanceDemand, Name = "FullTrust")]
     internal class HttpBindingExtension : IWsdlImportExtension
     {
-        readonly HashSet<ContractDescription> httpBindingContracts = new HashSet<ContractDescription>();
+        readonly HashSet<ContractDescription> httpBindingContracts =
+            new HashSet<ContractDescription>();
 
         static bool ContainsHttpBindingExtension(WsdlNS.Binding wsdlBinding)
         {
@@ -38,7 +39,10 @@ namespace Microsoft.VSDesigner.WCFModel
                 if (extension is WsdlNS.HttpBinding)
                 {
                     string httpVerb = ((WsdlNS.HttpBinding)extension).Verb;
-                    if (httpVerb.Equals("GET", StringComparison.OrdinalIgnoreCase) || httpVerb.Equals("POST", StringComparison.OrdinalIgnoreCase))
+                    if (
+                        httpVerb.Equals("GET", StringComparison.OrdinalIgnoreCase)
+                        || httpVerb.Equals("POST", StringComparison.OrdinalIgnoreCase)
+                    )
                     {
                         return true;
                     }
@@ -53,19 +57,29 @@ namespace Microsoft.VSDesigner.WCFModel
         }
 
         [SecuritySafeCritical]
-        void IWsdlImportExtension.BeforeImport(WsdlNS.ServiceDescriptionCollection wsdlDocuments, XmlSchemaSet xmlSchemas, ICollection<XmlElement> policy)
-        {
-        }
+        void IWsdlImportExtension.BeforeImport(
+            WsdlNS.ServiceDescriptionCollection wsdlDocuments,
+            XmlSchemaSet xmlSchemas,
+            ICollection<XmlElement> policy
+        ) { }
 
         [SecuritySafeCritical]
-        void IWsdlImportExtension.ImportContract(WsdlImporter importer, WsdlContractConversionContext context)
-        {
-        }
+        void IWsdlImportExtension.ImportContract(
+            WsdlImporter importer,
+            WsdlContractConversionContext context
+        ) { }
 
         [SecuritySafeCritical]
-        void IWsdlImportExtension.ImportEndpoint(WsdlImporter importer, WsdlEndpointConversionContext context)
+        void IWsdlImportExtension.ImportEndpoint(
+            WsdlImporter importer,
+            WsdlEndpointConversionContext context
+        )
         {
-            if (context != null && context.WsdlBinding != null && ContainsHttpBindingExtension(context.WsdlBinding))
+            if (
+                context != null
+                && context.WsdlBinding != null
+                && ContainsHttpBindingExtension(context.WsdlBinding)
+            )
             {
                 httpBindingContracts.Add(context.ContractConversionContext.Contract);
             }

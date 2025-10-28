@@ -17,7 +17,6 @@ using static Microsoft.VisualStudio.LanguageServices.EditorConfigSettings.Common
 
 namespace Microsoft.VisualStudio.LanguageServices.EditorConfigSettings.Whitespace.View.ColumnDefnitions
 {
-
     [Export(typeof(ITableColumnDefinition))]
     [Name(Value)]
     internal class WhitespaceValueColumnDefinition : TableColumnDefinitionBase
@@ -26,7 +25,9 @@ namespace Microsoft.VisualStudio.LanguageServices.EditorConfigSettings.Whitespac
 
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public WhitespaceValueColumnDefinition([ImportMany] IEnumerable<IEnumSettingViewModelFactory> factories)
+        public WhitespaceValueColumnDefinition(
+            [ImportMany] IEnumerable<IEnumSettingViewModelFactory> factories
+        )
         {
             _factories = factories;
         }
@@ -39,7 +40,11 @@ namespace Microsoft.VisualStudio.LanguageServices.EditorConfigSettings.Whitespac
         public override bool IsSortable => false;
         public override TextWrapping TextWrapping => TextWrapping.NoWrap;
 
-        public override bool TryCreateColumnContent(ITableEntryHandle entry, bool singleColumnView, out FrameworkElement? content)
+        public override bool TryCreateColumnContent(
+            ITableEntryHandle entry,
+            bool singleColumnView,
+            out FrameworkElement? content
+        )
         {
             if (!entry.TryGetValue(Value, out Setting setting))
             {

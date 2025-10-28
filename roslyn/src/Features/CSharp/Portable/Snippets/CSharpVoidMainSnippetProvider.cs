@@ -27,31 +27,39 @@ namespace Microsoft.CodeAnalysis.CSharp.Snippets
 
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public CSharpVoidMainSnippetProvider()
-        {
-        }
+        public CSharpVoidMainSnippetProvider() { }
 
-        protected override SyntaxNode GenerateReturnType(SyntaxGenerator generator)
-            => SyntaxFactory.PredefinedType(SyntaxFactory.Token(SyntaxKind.VoidKeyword));
+        protected override SyntaxNode GenerateReturnType(SyntaxGenerator generator) =>
+            SyntaxFactory.PredefinedType(SyntaxFactory.Token(SyntaxKind.VoidKeyword));
 
-        protected override IEnumerable<SyntaxNode> GenerateInnerStatements(SyntaxGenerator generator)
-            => SpecializedCollections.EmptyEnumerable<SyntaxNode>();
+        protected override IEnumerable<SyntaxNode> GenerateInnerStatements(
+            SyntaxGenerator generator
+        ) => SpecializedCollections.EmptyEnumerable<SyntaxNode>();
 
-        protected override int GetTargetCaretPosition(ISyntaxFactsService syntaxFacts, SyntaxNode caretTarget, SourceText sourceText)
+        protected override int GetTargetCaretPosition(
+            ISyntaxFactsService syntaxFacts,
+            SyntaxNode caretTarget,
+            SourceText sourceText
+        )
         {
             return CSharpSnippetHelpers.GetTargetCaretPositionInBlock<MethodDeclarationSyntax>(
                 caretTarget,
                 static d => d.Body!,
-                sourceText);
+                sourceText
+            );
         }
 
-        protected override Task<Document> AddIndentationToDocumentAsync(Document document, CancellationToken cancellationToken)
+        protected override Task<Document> AddIndentationToDocumentAsync(
+            Document document,
+            CancellationToken cancellationToken
+        )
         {
             return CSharpSnippetHelpers.AddBlockIndentationToDocumentAsync<MethodDeclarationSyntax>(
                 document,
                 FindSnippetAnnotation,
                 static m => m.Body!,
-                cancellationToken);
+                cancellationToken
+            );
         }
     }
 }

@@ -22,11 +22,15 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
         public static IEnumerable<ITypeSymbol> LookupTypeRegardlessOfArity(
             this SemanticModel semanticModel,
             SyntaxToken name,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
             if (name.Parent is ExpressionSyntax expression)
             {
-                var results = semanticModel.LookupName(expression, cancellationToken: cancellationToken);
+                var results = semanticModel.LookupName(
+                    expression,
+                    cancellationToken: cancellationToken
+                );
                 if (results.Length > 0)
                 {
                     return results.OfType<ITypeSymbol>();
@@ -39,7 +43,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
         public static ImmutableArray<ISymbol> LookupName(
             this SemanticModel semanticModel,
             SyntaxToken name,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
             if (name.Parent is ExpressionSyntax expression)
             {
@@ -56,7 +61,12 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
         /// <param name="qualifier">The qualifier (or left-hand-side) of the name expression. This may be null if there is no qualifier.</param>
         /// <param name="name">The name of the expression.</param>
         /// <param name="arity">The number of generic type parameters.</param>
-        private static void DecomposeName(ExpressionSyntax expression, out ExpressionSyntax qualifier, out string name, out int arity)
+        private static void DecomposeName(
+            ExpressionSyntax expression,
+            out ExpressionSyntax qualifier,
+            out string name,
+            out int arity
+        )
         {
             switch (expression.Kind())
             {
@@ -102,7 +112,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
         public static ImmutableArray<ISymbol> LookupName(
             this SemanticModel semanticModel,
             ExpressionSyntax expression,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
             var expr = SyntaxFactory.GetStandaloneExpression(expression);
             DecomposeName(expr, out var qualifier, out var name, out _);
@@ -122,7 +133,12 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
                 }
             }
 
-            return semanticModel.LookupSymbols(expr.SpanStart, container: symbol, name: name, includeReducedExtensionMethods: true);
+            return semanticModel.LookupSymbols(
+                expr.SpanStart,
+                container: symbol,
+                name: name,
+                includeReducedExtensionMethods: true
+            );
         }
 
         public static SymbolInfo GetSymbolInfo(this SemanticModel semanticModel, SyntaxToken token)
@@ -158,7 +174,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
             return true;
         }
 
-        public static ISet<INamespaceSymbol> GetUsingNamespacesInScope(this SemanticModel semanticModel, SyntaxNode location)
+        public static ISet<INamespaceSymbol> GetUsingNamespacesInScope(
+            this SemanticModel semanticModel,
+            SyntaxNode location
+        )
         {
             // Avoiding linq here for perf reasons. This is used heavily in the AddImport service
             var result = new HashSet<INamespaceSymbol>();
@@ -183,7 +202,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
         public static Accessibility DetermineAccessibilityConstraint(
             this SemanticModel semanticModel,
             TypeSyntax type,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
             if (type == null)
             {
@@ -204,11 +224,16 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
             //    as the interface type itself.
             if (type != null)
             {
-                if (type.Parent is BaseTypeSyntax baseType &&
-                    baseType.Parent is BaseListSyntax baseList &&
-                    baseType.Type == type)
+                if (
+                    type.Parent is BaseTypeSyntax baseType
+                    && baseType.Parent is BaseListSyntax baseList
+                    && baseType.Type == type
+                )
                 {
-                    var containingType = semanticModel.GetDeclaredSymbol(type.GetAncestor<BaseTypeDeclarationSyntax>(), cancellationToken);
+                    var containingType = semanticModel.GetDeclaredSymbol(
+                        type.GetAncestor<BaseTypeDeclarationSyntax>(),
+                        cancellationToken
+                    );
                     if (containingType != null && containingType.TypeKind == TypeKind.Interface)
                     {
                         return containingType.DeclaredAccessibility;
@@ -222,22 +247,31 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
 
             // 4) The type of a constant must be at least as accessible as the constant itself.
             // 5) The type of a field must be at least as accessible as the field itself.
-            if (type?.Parent is VariableDeclarationSyntax variableDeclaration &&
-                variableDeclaration.IsParentKind(SyntaxKind.FieldDeclaration))
+            if (
+                type?.Parent is VariableDeclarationSyntax variableDeclaration
+                && variableDeclaration.IsParentKind(SyntaxKind.FieldDeclaration)
+            )
             {
-                return semanticModel.GetDeclaredSymbol(
-                    variableDeclaration.Variables[0], cancellationToken).DeclaredAccessibility;
+                return semanticModel
+                    .GetDeclaredSymbol(variableDeclaration.Variables[0], cancellationToken)
+                    .DeclaredAccessibility;
             }
 
             // Also do the same check if we are in an object creation expression
-            if (type.IsParentKind(SyntaxKind.ObjectCreationExpression) &&
-                type.Parent.IsParentKind(SyntaxKind.EqualsValueClause) &&
-                type.Parent.Parent.IsParentKind(SyntaxKind.VariableDeclarator) &&
-                type.Parent.Parent.Parent.IsParentKind(SyntaxKind.VariableDeclaration, out variableDeclaration) &&
-                variableDeclaration.IsParentKind(SyntaxKind.FieldDeclaration))
+            if (
+                type.IsParentKind(SyntaxKind.ObjectCreationExpression)
+                && type.Parent.IsParentKind(SyntaxKind.EqualsValueClause)
+                && type.Parent.Parent.IsParentKind(SyntaxKind.VariableDeclarator)
+                && type.Parent.Parent.Parent.IsParentKind(
+                    SyntaxKind.VariableDeclaration,
+                    out variableDeclaration
+                )
+                && variableDeclaration.IsParentKind(SyntaxKind.FieldDeclaration)
+            )
             {
-                return semanticModel.GetDeclaredSymbol(
-                    variableDeclaration.Variables[0], cancellationToken).DeclaredAccessibility;
+                return semanticModel
+                    .GetDeclaredSymbol(variableDeclaration.Variables[0], cancellationToken)
+                    .DeclaredAccessibility;
             }
 
             // 3) The return type of a delegate type must be at least as accessible as the
@@ -249,16 +283,19 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
             // 9) The type of an indexer must be at least as accessible as the indexer itself.
             // 10) The return type of an operator must be at least as accessible as the operator
             //     itself.
-            if (type.Parent.Kind()
-                    is SyntaxKind.DelegateDeclaration
+            if (
+                type.Parent.Kind()
+                is SyntaxKind.DelegateDeclaration
                     or SyntaxKind.MethodDeclaration
                     or SyntaxKind.PropertyDeclaration
                     or SyntaxKind.EventDeclaration
                     or SyntaxKind.IndexerDeclaration
-                    or SyntaxKind.OperatorDeclaration)
+                    or SyntaxKind.OperatorDeclaration
+            )
             {
-                return semanticModel.GetDeclaredSymbol(
-                    type.Parent, cancellationToken).DeclaredAccessibility;
+                return semanticModel
+                    .GetDeclaredSymbol(type.Parent, cancellationToken)
+                    .DeclaredAccessibility;
             }
 
             // 3) The parameter types of a delegate type must be at least as accessible as the
@@ -271,21 +308,30 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
             //     operator itself.
             // 11) The parameter types of an instance constructor must be at least as accessible
             //     as the instance constructor itself.
-            if (type.IsParentKind(SyntaxKind.Parameter) && type.Parent.IsParentKind(SyntaxKind.ParameterList))
+            if (
+                type.IsParentKind(SyntaxKind.Parameter)
+                && type.Parent.IsParentKind(SyntaxKind.ParameterList)
+            )
             {
-                if (type.Parent.Parent.Parent?.Kind()
-                        is SyntaxKind.DelegateDeclaration
+                if (
+                    type.Parent.Parent.Parent?.Kind()
+                    is SyntaxKind.DelegateDeclaration
                         or SyntaxKind.MethodDeclaration
                         or SyntaxKind.IndexerDeclaration
-                        or SyntaxKind.OperatorDeclaration)
+                        or SyntaxKind.OperatorDeclaration
+                )
                 {
-                    return semanticModel.GetDeclaredSymbol(
-                        type.Parent.Parent.Parent, cancellationToken).DeclaredAccessibility;
+                    return semanticModel
+                        .GetDeclaredSymbol(type.Parent.Parent.Parent, cancellationToken)
+                        .DeclaredAccessibility;
                 }
 
                 if (type.Parent.Parent.IsParentKind(SyntaxKind.ConstructorDeclaration))
                 {
-                    var symbol = semanticModel.GetDeclaredSymbol(type.Parent.Parent.Parent, cancellationToken);
+                    var symbol = semanticModel.GetDeclaredSymbol(
+                        type.Parent.Parent.Parent,
+                        cancellationToken
+                    );
                     if (!symbol.IsStatic)
                     {
                         return symbol.DeclaredAccessibility;
@@ -294,10 +340,15 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
             }
 
             // 8) The type of an event must be at least as accessible as the event itself.
-            if (type.IsParentKind(SyntaxKind.VariableDeclaration, out variableDeclaration) &&
-                variableDeclaration.IsParentKind(SyntaxKind.EventFieldDeclaration))
+            if (
+                type.IsParentKind(SyntaxKind.VariableDeclaration, out variableDeclaration)
+                && variableDeclaration.IsParentKind(SyntaxKind.EventFieldDeclaration)
+            )
             {
-                var symbol = semanticModel.GetDeclaredSymbol(variableDeclaration.Variables[0], cancellationToken);
+                var symbol = semanticModel.GetDeclaredSymbol(
+                    variableDeclaration.Variables[0],
+                    cancellationToken
+                );
                 if (symbol != null)
                 {
                     return symbol.DeclaredAccessibility;
@@ -307,7 +358,11 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
             // Type constraint must be at least as accessible as the declaring member (class, interface, delegate, method)
             if (type.IsParentKind(SyntaxKind.TypeConstraint))
             {
-                return AllContainingTypesArePublicOrProtected(semanticModel, type, cancellationToken)
+                return AllContainingTypesArePublicOrProtected(
+                    semanticModel,
+                    type,
+                    cancellationToken
+                )
                     ? Accessibility.Public
                     : Accessibility.Internal;
             }
@@ -318,7 +373,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
         public static bool AllContainingTypesArePublicOrProtected(
             this SemanticModel semanticModel,
             TypeSyntax type,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
             if (type == null)
             {
@@ -331,9 +387,12 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
             {
                 var symbol = semanticModel.GetDeclaredSymbol(typeDeclaration, cancellationToken);
 
-                if (symbol.DeclaredAccessibility is Accessibility.Private or
-                    Accessibility.ProtectedAndInternal or
-                    Accessibility.Internal)
+                if (
+                    symbol.DeclaredAccessibility
+                    is Accessibility.Private
+                        or Accessibility.ProtectedAndInternal
+                        or Accessibility.Internal
+                )
                 {
                     return false;
                 }
@@ -342,16 +401,19 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
             return true;
         }
 
-        private static TypeSyntax GetOutermostType(TypeSyntax type)
-            => type.GetAncestorsOrThis<TypeSyntax>().Last();
+        private static TypeSyntax GetOutermostType(TypeSyntax type) =>
+            type.GetAncestorsOrThis<TypeSyntax>().Last();
 
         /// <summary>
         /// Given an expression node, tries to generate an appropriate name that can be used for
-        /// that expression. 
+        /// that expression.
         /// </summary>
         public static string GenerateNameForExpression(
-            this SemanticModel semanticModel, ExpressionSyntax expression,
-            bool capitalize, CancellationToken cancellationToken)
+            this SemanticModel semanticModel,
+            ExpressionSyntax expression,
+            bool capitalize,
+            CancellationToken cancellationToken
+        )
         {
             // Try to find a usable name node that we can use to name the
             // parameter.  If we have an expression that has a name as part of it
@@ -390,8 +452,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
 
                     return name.Identifier.ValueText.ToCamelCase();
                 }
-                else if (current.Parent is ForEachStatementSyntax foreachStatement &&
-                         foreachStatement.Expression == expression)
+                else if (
+                    current.Parent is ForEachStatementSyntax foreachStatement
+                    && foreachStatement.Expression == expression
+                )
                 {
                     var word = foreachStatement.Identifier.ValueText.ToCamelCase();
                     return CodeAnalysis.Shared.Extensions.SemanticModelExtensions.Pluralize(word);
@@ -405,7 +469,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
             // there was nothing in the expression to signify a name.  If we're in an argument
             // location, then try to choose a name based on the argument name.
             var argumentName = TryGenerateNameForArgumentExpression(
-                semanticModel, expression, cancellationToken);
+                semanticModel,
+                expression,
+                cancellationToken
+            );
             if (argumentName != null)
             {
                 return capitalize ? argumentName.ToPascalCase() : argumentName.ToCamelCase();
@@ -419,11 +486,18 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
                 return CodeAnalysis.Shared.Extensions.ITypeSymbolExtensions.DefaultParameterName;
             }
 
-            return semanticModel.GenerateNameFromType(info.Type, CSharpSyntaxFacts.Instance, capitalize);
+            return semanticModel.GenerateNameFromType(
+                info.Type,
+                CSharpSyntaxFacts.Instance,
+                capitalize
+            );
         }
 
         private static string TryGenerateNameForArgumentExpression(
-            SemanticModel semanticModel, ExpressionSyntax expression, CancellationToken cancellationToken)
+            SemanticModel semanticModel,
+            ExpressionSyntax expression,
+            CancellationToken cancellationToken
+        )
         {
             var topExpression = expression.WalkUpParentheses();
             if (topExpression?.Parent is ArgumentSyntax argument)
@@ -436,12 +510,19 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
                 if (argument.Parent is BaseArgumentListSyntax argumentList)
                 {
                     var index = argumentList.Arguments.IndexOf(argument);
-                    if (semanticModel.GetSymbolInfo(argumentList.Parent, cancellationToken).Symbol is IMethodSymbol member && index < member.Parameters.Length)
+                    if (
+                        semanticModel.GetSymbolInfo(argumentList.Parent, cancellationToken).Symbol
+                            is IMethodSymbol member
+                        && index < member.Parameters.Length
+                    )
                     {
                         var parameter = member.Parameters[index];
                         if (parameter.Type.OriginalDefinition.TypeKind != TypeKind.TypeParameter)
                         {
-                            if (SyntaxFacts.GetContextualKeywordKind(parameter.Name) is not SyntaxKind.UnderscoreToken)
+                            if (
+                                SyntaxFacts.GetContextualKeywordKind(parameter.Name)
+                                is not SyntaxKind.UnderscoreToken
+                            )
                             {
                                 return parameter.Name;
                             }
@@ -453,31 +534,51 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
             return null;
         }
 
-        public static INamedTypeSymbol GetRequiredDeclaredSymbol(this SemanticModel semanticModel, BaseTypeDeclarationSyntax syntax, CancellationToken cancellationToken)
+        public static INamedTypeSymbol GetRequiredDeclaredSymbol(
+            this SemanticModel semanticModel,
+            BaseTypeDeclarationSyntax syntax,
+            CancellationToken cancellationToken
+        )
         {
             return semanticModel.GetDeclaredSymbol(syntax, cancellationToken)
                 ?? throw new InvalidOperationException();
         }
 
-        public static IMethodSymbol GetRequiredDeclaredSymbol(this SemanticModel semanticModel, ConstructorDeclarationSyntax syntax, CancellationToken cancellationToken)
+        public static IMethodSymbol GetRequiredDeclaredSymbol(
+            this SemanticModel semanticModel,
+            ConstructorDeclarationSyntax syntax,
+            CancellationToken cancellationToken
+        )
         {
             return semanticModel.GetDeclaredSymbol(syntax, cancellationToken)
                 ?? throw new InvalidOperationException();
         }
 
-        public static IParameterSymbol GetRequiredDeclaredSymbol(this SemanticModel semanticModel, ParameterSyntax syntax, CancellationToken cancellationToken)
+        public static IParameterSymbol GetRequiredDeclaredSymbol(
+            this SemanticModel semanticModel,
+            ParameterSyntax syntax,
+            CancellationToken cancellationToken
+        )
         {
             return semanticModel.GetDeclaredSymbol(syntax, cancellationToken)
                 ?? throw new InvalidOperationException();
         }
 
-        public static IPropertySymbol GetRequiredDeclaredSymbol(this SemanticModel semanticModel, PropertyDeclarationSyntax syntax, CancellationToken cancellationToken)
+        public static IPropertySymbol GetRequiredDeclaredSymbol(
+            this SemanticModel semanticModel,
+            PropertyDeclarationSyntax syntax,
+            CancellationToken cancellationToken
+        )
         {
             return semanticModel.GetDeclaredSymbol(syntax, cancellationToken)
                 ?? throw new InvalidOperationException();
         }
 
-        public static ISymbol GetRequiredDeclaredSymbol(this SemanticModel semanticModel, VariableDeclaratorSyntax syntax, CancellationToken cancellationToken)
+        public static ISymbol GetRequiredDeclaredSymbol(
+            this SemanticModel semanticModel,
+            VariableDeclaratorSyntax syntax,
+            CancellationToken cancellationToken
+        )
         {
             return semanticModel.GetDeclaredSymbol(syntax, cancellationToken)
                 ?? throw new InvalidOperationException();

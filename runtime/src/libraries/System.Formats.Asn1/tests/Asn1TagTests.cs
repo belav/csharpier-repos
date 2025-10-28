@@ -14,7 +14,8 @@ namespace System.Formats.Asn1.Tests
         {
             AssertExtensions.Throws<ArgumentOutOfRangeException>(
                 "universalTagNumber",
-                () => new Asn1Tag((UniversalTagNumber)15));
+                () => new Asn1Tag((UniversalTagNumber)15)
+            );
         }
 
         [Fact]
@@ -40,7 +41,8 @@ namespace System.Formats.Asn1.Tests
         {
             AssertExtensions.Throws<ArgumentOutOfRangeException>(
                 "universalTagNumber",
-                () => new Asn1Tag((UniversalTagNumber)value));
+                () => new Asn1Tag((UniversalTagNumber)value)
+            );
         }
 
         [Theory]
@@ -54,7 +56,8 @@ namespace System.Formats.Asn1.Tests
         {
             AssertExtensions.Throws<ArgumentOutOfRangeException>(
                 "tagClass",
-                () => new Asn1Tag((TagClass)value, 1));
+                () => new Asn1Tag((TagClass)value, 1)
+            );
         }
 
         [Theory]
@@ -74,14 +77,17 @@ namespace System.Formats.Asn1.Tests
         {
             AssertExtensions.Throws<ArgumentOutOfRangeException>(
                 "tagValue",
-                () => new Asn1Tag(tagClass, value));
+                () => new Asn1Tag(tagClass, value)
+            );
         }
 
         [Fact]
         public static void EqualsIsExact()
         {
             Assert.False(Asn1Tag.PrimitiveOctetString.Equals(Asn1Tag.ConstructedOctetString));
-            Assert.False(Asn1Tag.PrimitiveOctetString.Equals((object)Asn1Tag.ConstructedOctetString));
+            Assert.False(
+                Asn1Tag.PrimitiveOctetString.Equals((object)Asn1Tag.ConstructedOctetString)
+            );
             Assert.True(Asn1Tag.PrimitiveOctetString.Equals(Asn1Tag.PrimitiveOctetString));
             Assert.True(Asn1Tag.PrimitiveOctetString.Equals((object)Asn1Tag.PrimitiveOctetString));
         }
@@ -89,10 +95,20 @@ namespace System.Formats.Asn1.Tests
         [Fact]
         public static void HasSameClassAndValueIsSoft()
         {
-            Assert.True(Asn1Tag.PrimitiveOctetString.HasSameClassAndValue(Asn1Tag.ConstructedOctetString));
-            Assert.True(Asn1Tag.PrimitiveOctetString.HasSameClassAndValue(Asn1Tag.PrimitiveOctetString));
-            Assert.False(Asn1Tag.PrimitiveOctetString.HasSameClassAndValue(Asn1Tag.PrimitiveBitString));
-            Assert.False(Asn1Tag.PrimitiveOctetString.HasSameClassAndValue(new Asn1Tag(TagClass.ContextSpecific, 4)));
+            Assert.True(
+                Asn1Tag.PrimitiveOctetString.HasSameClassAndValue(Asn1Tag.ConstructedOctetString)
+            );
+            Assert.True(
+                Asn1Tag.PrimitiveOctetString.HasSameClassAndValue(Asn1Tag.PrimitiveOctetString)
+            );
+            Assert.False(
+                Asn1Tag.PrimitiveOctetString.HasSameClassAndValue(Asn1Tag.PrimitiveBitString)
+            );
+            Assert.False(
+                Asn1Tag.PrimitiveOctetString.HasSameClassAndValue(
+                    new Asn1Tag(TagClass.ContextSpecific, 4)
+                )
+            );
         }
 
         public static IEnumerable<object[]> EncodeDecodeCases { get; } =
@@ -166,7 +182,12 @@ namespace System.Formats.Asn1.Tests
 
         [Theory]
         [MemberData(nameof(EncodeDecodeCases))]
-        public static void VerifyEncode(TagClass tagClass, int tagValue, bool constructed, string expectedHex)
+        public static void VerifyEncode(
+            TagClass tagClass,
+            int tagValue,
+            bool constructed,
+            string expectedHex
+        )
         {
             Asn1Tag tag = new Asn1Tag(tagClass, tagValue, constructed);
             Span<byte> buf = stackalloc byte[10];
@@ -186,7 +207,8 @@ namespace System.Formats.Asn1.Tests
                 {
                     Span<byte> tmp = stackalloc byte[expectedSize - 1];
                     return tag.Encode(tmp);
-                });
+                }
+            );
 
             Assert.True(tag.TryEncode(buf, out written));
             Assert.Equal(expectedSize, written);
@@ -207,7 +229,12 @@ namespace System.Formats.Asn1.Tests
 
         [Theory]
         [MemberData(nameof(EncodeDecodeCases))]
-        public static void VerifyDecode(TagClass tagClass, int tagValue, bool constructed, string inputHex)
+        public static void VerifyDecode(
+            TagClass tagClass,
+            int tagValue,
+            bool constructed,
+            string inputHex
+        )
         {
             Asn1Tag expectedTag = new Asn1Tag(tagClass, tagValue, constructed);
             byte[] input = inputHex.HexToByteArray();
@@ -217,11 +244,15 @@ namespace System.Formats.Asn1.Tests
             int consumed;
             Asn1Tag tag;
 
-            Assert.False(Asn1Tag.TryDecode(input.AsSpan(0, input.Length - 1), out tag, out consumed));
+            Assert.False(
+                Asn1Tag.TryDecode(input.AsSpan(0, input.Length - 1), out tag, out consumed)
+            );
             Assert.Equal(0, consumed);
             Assert.Equal(default(Asn1Tag), tag);
 
-            Assert.Throws<AsnContentException>(() => Asn1Tag.Decode(input.AsSpan(0, input.Length - 1), out consumed));
+            Assert.Throws<AsnContentException>(() =>
+                Asn1Tag.Decode(input.AsSpan(0, input.Length - 1), out consumed)
+            );
             Assert.Equal(0, consumed);
 
             Assert.True(Asn1Tag.TryDecode(padded, out tag, out consumed));

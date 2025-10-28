@@ -17,10 +17,19 @@ internal static partial class Interop
         /// <returns>
         /// Returns 0 on success; otherwise, returns -1
         /// </returns>
-        [LibraryImport(Libraries.SystemNative, EntryPoint = "SystemNative_Rename", StringMarshalling = StringMarshalling.Utf8, SetLastError = true)]
+        [LibraryImport(
+            Libraries.SystemNative,
+            EntryPoint = "SystemNative_Rename",
+            StringMarshalling = StringMarshalling.Utf8,
+            SetLastError = true
+        )]
         internal static partial int Rename(string oldPath, string newPath);
 
-        [LibraryImport(Libraries.SystemNative, EntryPoint = "SystemNative_Rename", SetLastError = true)]
+        [LibraryImport(
+            Libraries.SystemNative,
+            EntryPoint = "SystemNative_Rename",
+            SetLastError = true
+        )]
         internal static partial int Rename(ref byte oldPath, ref byte newPath);
 
         internal static int Rename(ReadOnlySpan<char> oldPath, ReadOnlySpan<char> newPath)
@@ -29,7 +38,8 @@ internal static partial class Interop
             ValueUtf8Converter converterOldPath = new(stackalloc byte[DefaultPathBufferSize]);
             int result = Rename(
                 ref MemoryMarshal.GetReference(converterOldPath.ConvertAndTerminateString(oldPath)),
-                ref MemoryMarshal.GetReference(converterNewPath.ConvertAndTerminateString(newPath)));
+                ref MemoryMarshal.GetReference(converterNewPath.ConvertAndTerminateString(newPath))
+            );
             converterNewPath.Dispose();
             converterOldPath.Dispose();
             return result;

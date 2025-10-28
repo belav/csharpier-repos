@@ -11,11 +11,13 @@ namespace System.ServiceModel.Security
     /// <summary>
     /// An enumeration that lists the ways of validating a certificate.
     /// </summary>
-    [TypeForwardedFrom( "System.ServiceModel, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" )]
+    [TypeForwardedFrom(
+        "System.ServiceModel, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+    )]
     public enum X509CertificateValidationMode
     {
         /// <summary>
-        /// No validation of the certificate is performed. 
+        /// No validation of the certificate is performed.
         /// </summary>
         None,
 
@@ -37,6 +39,6 @@ namespace System.ServiceModel.Security
         /// <summary>
         /// The user must plug in a custom <c>X509CertificateValidator</c> to validate the certificate.
         /// </summary>
-        Custom
-    }    
+        Custom,
+    }
 }

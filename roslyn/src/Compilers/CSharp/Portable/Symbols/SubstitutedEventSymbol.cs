@@ -14,7 +14,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
         private TypeWithAnnotations.Boxed? _lazyType;
 
-        internal SubstitutedEventSymbol(SubstitutedNamedTypeSymbol containingType, EventSymbol originalDefinition)
+        internal SubstitutedEventSymbol(
+            SubstitutedNamedTypeSymbol containingType,
+            EventSymbol originalDefinition
+        )
             : base(originalDefinition)
         {
             Debug.Assert(originalDefinition.IsDefinition);
@@ -27,8 +30,14 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             {
                 if (_lazyType == null)
                 {
-                    var type = _containingType.TypeSubstitution.SubstituteType(OriginalDefinition.TypeWithAnnotations);
-                    Interlocked.CompareExchange(ref _lazyType, new TypeWithAnnotations.Boxed(type), null);
+                    var type = _containingType.TypeSubstitution.SubstituteType(
+                        OriginalDefinition.TypeWithAnnotations
+                    );
+                    Interlocked.CompareExchange(
+                        ref _lazyType,
+                        new TypeWithAnnotations.Boxed(type),
+                        null
+                    );
                 }
 
                 return _lazyType.Value;
@@ -37,18 +46,12 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
         public override Symbol ContainingSymbol
         {
-            get
-            {
-                return _containingType;
-            }
+            get { return _containingType; }
         }
 
         public override EventSymbol OriginalDefinition
         {
-            get
-            {
-                return _underlyingEvent;
-            }
+            get { return _underlyingEvent; }
         }
 
         public override ImmutableArray<CSharpAttributeData> GetAttributes()
@@ -61,7 +64,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             get
             {
                 MethodSymbol? originalAddMethod = OriginalDefinition.AddMethod;
-                return (object?)originalAddMethod == null ? null : originalAddMethod.AsMember(_containingType);
+                return (object?)originalAddMethod == null
+                    ? null
+                    : originalAddMethod.AsMember(_containingType);
             }
         }
 
@@ -70,7 +75,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             get
             {
                 MethodSymbol? originalRemoveMethod = OriginalDefinition.RemoveMethod;
-                return (object?)originalRemoveMethod == null ? null : originalRemoveMethod.AsMember(_containingType);
+                return (object?)originalRemoveMethod == null
+                    ? null
+                    : originalRemoveMethod.AsMember(_containingType);
             }
         }
 
@@ -79,7 +86,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             get
             {
                 FieldSymbol? originalAssociatedField = OriginalDefinition.AssociatedField;
-                return (object?)originalAssociatedField == null ? null : originalAssociatedField.AsMember(_containingType);
+                return (object?)originalAssociatedField == null
+                    ? null
+                    : originalAssociatedField.AsMember(_containingType);
             }
         }
 
@@ -101,8 +110,12 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 {
                     ImmutableInterlocked.InterlockedCompareExchange(
                         ref _lazyExplicitInterfaceImplementations,
-                        ExplicitInterfaceHelpers.SubstituteExplicitInterfaceImplementations(OriginalDefinition.ExplicitInterfaceImplementations, _containingType.TypeSubstitution),
-                        default(ImmutableArray<EventSymbol>));
+                        ExplicitInterfaceHelpers.SubstituteExplicitInterfaceImplementations(
+                            OriginalDefinition.ExplicitInterfaceImplementations,
+                            _containingType.TypeSubstitution
+                        ),
+                        default(ImmutableArray<EventSymbol>)
+                    );
                 }
                 return _lazyExplicitInterfaceImplementations;
             }
@@ -119,7 +132,11 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             {
                 if (_lazyOverriddenOrHiddenMembers == null)
                 {
-                    Interlocked.CompareExchange(ref _lazyOverriddenOrHiddenMembers, this.MakeOverriddenOrHiddenMembers(), null);
+                    Interlocked.CompareExchange(
+                        ref _lazyOverriddenOrHiddenMembers,
+                        this.MakeOverriddenOrHiddenMembers(),
+                        null
+                    );
                 }
                 return _lazyOverriddenOrHiddenMembers;
             }
@@ -131,7 +148,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             {
                 // A substituted event computes overriding and interface implementation separately
                 // from the original definition, in case the type has changed.  However, is should
-                // never be the case that providing type arguments changes a WinRT event to a 
+                // never be the case that providing type arguments changes a WinRT event to a
                 // non-WinRT event or vice versa, so we'll delegate to the original definition.
                 return OriginalDefinition.IsWindowsRuntimeEvent;
             }

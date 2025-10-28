@@ -49,7 +49,7 @@ namespace Newtonsoft.Json.Tests.Documentation.Samples.Serializer
     [TestFixture]
     public class DeserializeWithDependencyInjection : TestFixtureBase
     {
-        #region Types
+#region Types
         public class AutofacContractResolver : DefaultContractResolver
         {
             private readonly IContainer _container;
@@ -77,7 +77,12 @@ namespace Newtonsoft.Json.Tests.Documentation.Samples.Serializer
             {
                 // attempt to create the contact from the resolved type
                 IComponentRegistration registration;
-                if (_container.ComponentRegistry.TryGetRegistration(new TypedService(objectType), out registration))
+                if (
+                    _container.ComponentRegistry.TryGetRegistration(
+                        new TypedService(objectType),
+                        out registration
+                    )
+                )
                 {
                     Type viewType = (registration.Activator as ReflectionActivator)?.LimitType;
                     if (viewType != null)
@@ -112,12 +117,12 @@ namespace Newtonsoft.Json.Tests.Documentation.Samples.Serializer
                 get { return _logger; }
             }
         }
-        #endregion
+#endregion
 
         [Test]
         public void Example()
         {
-            #region Usage
+#region Usage
             ContainerBuilder builder = new ContainerBuilder();
             builder.RegisterType<TaskRepository>().As<ITaskRepository>();
             builder.RegisterType<TaskController>();
@@ -127,21 +132,22 @@ namespace Newtonsoft.Json.Tests.Documentation.Samples.Serializer
 
             AutofacContractResolver contractResolver = new AutofacContractResolver(container);
 
-            string json = @"{
+            string json =
+                @"{
               'Logger': {
                 'Level':'Debug'
               }
             }";
 
-            // ITaskRespository and ILogger constructor parameters are injected by Autofac 
-            TaskController controller = JsonConvert.DeserializeObject<TaskController>(json, new JsonSerializerSettings
-            {
-                ContractResolver = contractResolver
-            });
+            // ITaskRespository and ILogger constructor parameters are injected by Autofac
+            TaskController controller = JsonConvert.DeserializeObject<TaskController>(
+                json,
+                new JsonSerializerSettings { ContractResolver = contractResolver }
+            );
 
             Console.WriteLine(controller.Repository.GetType().Name);
             // TaskRepository
-            #endregion
+#endregion
 
             Assert.IsNotNull(controller);
             Assert.IsNotNull(controller.Logger);

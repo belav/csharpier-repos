@@ -6,7 +6,9 @@ namespace System.Workflow.ComponentModel.Compiler
     using System.Workflow.ComponentModel.Serialization;
 
     #region Class ActivityCodeGenerator
-    [Obsolete("The System.Workflow.* types are deprecated.  Instead, please use the new types from System.Activities.*")]
+    [Obsolete(
+        "The System.Workflow.* types are deprecated.  Instead, please use the new types from System.Activities.*"
+    )]
     public class ActivityCodeGenerator
     {
         public virtual void GenerateCode(CodeGenerationManager manager, object obj)
@@ -18,7 +20,10 @@ namespace System.Workflow.ComponentModel.Compiler
 
             Activity activity = obj as Activity;
             if (activity == null)
-                throw new ArgumentException(SR.GetString(SR.Error_UnexpectedArgumentType, typeof(Activity).FullName), "obj");
+                throw new ArgumentException(
+                    SR.GetString(SR.Error_UnexpectedArgumentType, typeof(Activity).FullName),
+                    "obj"
+                );
 
             manager.Context.Push(activity);
 
@@ -36,7 +41,11 @@ namespace System.Workflow.ComponentModel.Compiler
                     manager.Context.Push(args.CurrentPropertyOwner);
 
                     // call generate code
-                    foreach (ActivityCodeGenerator codeGenerator in manager.GetCodeGenerators(bindBase.GetType()))
+                    foreach (
+                        ActivityCodeGenerator codeGenerator in manager.GetCodeGenerators(
+                            bindBase.GetType()
+                        )
+                    )
                         codeGenerator.GenerateCode(manager, args.CurrentValue);
 
                     // pops
@@ -49,7 +58,10 @@ namespace System.Workflow.ComponentModel.Compiler
             manager.Context.Pop();
         }
 
-        protected CodeTypeDeclaration GetCodeTypeDeclaration(CodeGenerationManager manager, string fullClassName)
+        protected CodeTypeDeclaration GetCodeTypeDeclaration(
+            CodeGenerationManager manager,
+            string fullClassName
+        )
         {
             if (manager == null)
                 throw new ArgumentNullException("manager");
@@ -60,12 +72,23 @@ namespace System.Workflow.ComponentModel.Compiler
             string className;
             Helpers.GetNamespaceAndClassName(fullClassName, out namespaceName, out className);
 
-            CodeNamespaceCollection codeNamespaces = manager.Context[typeof(CodeNamespaceCollection)] as CodeNamespaceCollection;
+            CodeNamespaceCollection codeNamespaces =
+                manager.Context[typeof(CodeNamespaceCollection)] as CodeNamespaceCollection;
             if (codeNamespaces == null)
-                throw new InvalidOperationException(SR.GetString(SR.Error_ContextStackItemMissing, typeof(CodeNamespaceCollection).Name));
+                throw new InvalidOperationException(
+                    SR.GetString(
+                        SR.Error_ContextStackItemMissing,
+                        typeof(CodeNamespaceCollection).Name
+                    )
+                );
 
             CodeNamespace codeNS = null;
-            return Helpers.GetCodeNamespaceAndClass(codeNamespaces, namespaceName, className, out codeNS);
+            return Helpers.GetCodeNamespaceAndClass(
+                codeNamespaces,
+                namespaceName,
+                className,
+                out codeNS
+            );
         }
     }
     #endregion

@@ -3,7 +3,7 @@
 //
 // Authors:
 //   Ravi Pratap (ravi@ximian.com)
-//   Eyal Alaluf <eyala@mainsoft.com> 
+//   Eyal Alaluf <eyala@mainsoft.com>
 //
 // (C) Ximian, Inc.  http://www.ximian.com
 //
@@ -19,10 +19,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -32,89 +32,83 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
-namespace System {
-	
-	[AttributeUsage (AttributeTargets.All, AllowMultiple=true)]
-	internal class MonoTODOAttribute : Attribute {
+namespace System
+{
+    [AttributeUsage(AttributeTargets.All, AllowMultiple = true)]
+    internal class MonoTODOAttribute : Attribute
+    {
+        string comment;
 
-		string comment;
-		
-		public MonoTODOAttribute ()
-		{
-		}
+        public MonoTODOAttribute() { }
 
-		public MonoTODOAttribute (string comment)
-		{
-			this.comment = comment;
-		}
+        public MonoTODOAttribute(string comment)
+        {
+            this.comment = comment;
+        }
 
-		public virtual string Comment {
-			get { return comment; }
-		}
-	}
+        public virtual string Comment
+        {
+            get { return comment; }
+        }
+    }
 
-	[AttributeUsage (AttributeTargets.All, AllowMultiple=true)]
-	internal class MonoDocumentationNoteAttribute : MonoTODOAttribute {
+    [AttributeUsage(AttributeTargets.All, AllowMultiple = true)]
+    internal class MonoDocumentationNoteAttribute : MonoTODOAttribute
+    {
+        public MonoDocumentationNoteAttribute(string comment)
+            : base(comment) { }
 
-		public MonoDocumentationNoteAttribute (string comment)
-			: base (comment)
-		{
-		}
+        public override string Comment
+        {
+            get { return base.Comment; }
+        }
+    }
 
-		public override string Comment {
-			get { return base.Comment; }
-		}
-	}
+    [AttributeUsage(AttributeTargets.All, AllowMultiple = true)]
+    internal class MonoExtensionAttribute : MonoTODOAttribute
+    {
+        public MonoExtensionAttribute(string comment)
+            : base(comment) { }
 
-	[AttributeUsage (AttributeTargets.All, AllowMultiple=true)]
-	internal class MonoExtensionAttribute : MonoTODOAttribute {
+        public override string Comment
+        {
+            get { return base.Comment; }
+        }
+    }
 
-		public MonoExtensionAttribute (string comment)
-			: base (comment)
-		{
-		}
+    [AttributeUsage(AttributeTargets.All, AllowMultiple = true)]
+    internal class MonoInternalNoteAttribute : MonoTODOAttribute
+    {
+        public MonoInternalNoteAttribute(string comment)
+            : base(comment) { }
 
-		public override string Comment {
-			get { return base.Comment; }
-		}
-	}
+        public override string Comment
+        {
+            get { return base.Comment; }
+        }
+    }
 
-	[AttributeUsage (AttributeTargets.All, AllowMultiple=true)]
-	internal class MonoInternalNoteAttribute : MonoTODOAttribute {
+    [AttributeUsage(AttributeTargets.All, AllowMultiple = true)]
+    internal class MonoLimitationAttribute : MonoTODOAttribute
+    {
+        public MonoLimitationAttribute(string comment)
+            : base(comment) { }
 
-		public MonoInternalNoteAttribute (string comment)
-			: base (comment)
-		{
-		}
+        public override string Comment
+        {
+            get { return base.Comment; }
+        }
+    }
 
-		public override string Comment {
-			get { return base.Comment; }
-		}
-	}
+    [AttributeUsage(AttributeTargets.All, AllowMultiple = true)]
+    internal class MonoNotSupportedAttribute : MonoTODOAttribute
+    {
+        public MonoNotSupportedAttribute(string comment)
+            : base(comment) { }
 
-	[AttributeUsage (AttributeTargets.All, AllowMultiple=true)]
-	internal class MonoLimitationAttribute : MonoTODOAttribute {
-
-		public MonoLimitationAttribute (string comment)
-			: base (comment)
-		{
-		}
-
-		public override string Comment {
-			get { return base.Comment; }
-		}
-	}
-
-	[AttributeUsage (AttributeTargets.All, AllowMultiple=true)]
-	internal class MonoNotSupportedAttribute : MonoTODOAttribute {
-
-		public MonoNotSupportedAttribute (string comment)
-			: base (comment)
-		{
-		}
-
-		public override string Comment {
-			get { return base.Comment; }
-		}
-	}
+        public override string Comment
+        {
+            get { return base.Comment; }
+        }
+    }
 }

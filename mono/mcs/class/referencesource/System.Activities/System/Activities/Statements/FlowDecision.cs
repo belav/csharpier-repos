@@ -45,39 +45,21 @@ namespace System.Activities.Statements
         }
 
         [DefaultValue(null)]
-        public Activity<bool> Condition
-        {
-            get;
-            set;
-        }
+        public Activity<bool> Condition { get; set; }
 
         [DefaultValue(null)]
         [DependsOn("Condition")]
-        public FlowNode True
-        {
-            get;
-            set;
-        }
+        public FlowNode True { get; set; }
 
         [DefaultValue(null)]
         [DependsOn("True")]
-        public FlowNode False
-        {
-            get;
-            set;
-        }
+        public FlowNode False { get; set; }
 
         [DefaultValue(FlowDecision.DefaultDisplayName)]
         public string DisplayName
         {
-            get
-            {
-                return this.displayName;
-            }
-            set
-            {
-                this.displayName = value;
-            }
+            get { return this.displayName; }
+            set { this.displayName = value; }
         }
 
         internal override void OnOpen(Flowchart owner, NativeActivityMetadata metadata)
@@ -106,7 +88,10 @@ namespace System.Activities.Statements
             get { return Condition; }
         }
 
-        internal bool Execute(NativeActivityContext context, CompletionCallback<bool> onConditionCompleted)
+        internal bool Execute(
+            NativeActivityContext context,
+            CompletionCallback<bool> onConditionCompleted
+        )
         {
             context.ScheduleActivity(Condition, onConditionCompleted);
             return false;

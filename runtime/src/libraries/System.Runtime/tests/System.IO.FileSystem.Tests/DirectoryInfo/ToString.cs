@@ -23,12 +23,7 @@ namespace System.IO.Tests
             Assert.Equal(path, info.ToString());
         }
 
-        [Theory,
-            InlineData(@"."),
-            InlineData(@".."),
-            InlineData(@"foo"),
-            InlineData(@"foo/bar"),
-            ]
+        [Theory, InlineData(@"."), InlineData(@".."), InlineData(@"foo"), InlineData(@"foo/bar")]
         public void KeepsOriginalPath(string path)
         {
             // ToString should return the passed in path
@@ -37,7 +32,7 @@ namespace System.IO.Tests
         }
 
         [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsNotInAppContainer))] // Can't read root in appcontainer
-        [PlatformSpecific(TestPlatforms.Windows)]  // Drive letter only
+        [PlatformSpecific(TestPlatforms.Windows)] // Drive letter only
         public void DriveOnlyReturnsDrive_Windows()
         {
             string path = @"C:";
@@ -67,8 +62,12 @@ namespace System.IO.Tests
             string parentDirPath = Path.GetDirectoryName(dirPath);
             DirectoryInfo parentDirInfo = new DirectoryInfo(parentDirPath);
 
-            string dirInfoParentString = compareFullName ? dirInfo.Parent.FullName : dirInfo.Parent.Name;
-            string parentDirInfoString = compareFullName ? parentDirInfo.FullName : parentDirInfo.Name;
+            string dirInfoParentString = compareFullName
+                ? dirInfo.Parent.FullName
+                : dirInfo.Parent.Name;
+            string parentDirInfoString = compareFullName
+                ? parentDirInfo.FullName
+                : parentDirInfo.Name;
 
             Assert.Equal(dirInfo.Parent.ToString(), dirInfoParentString);
             Assert.Equal(dirInfo.Parent.ToString(), parentDirInfoString);

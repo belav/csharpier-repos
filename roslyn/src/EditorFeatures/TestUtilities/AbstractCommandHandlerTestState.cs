@@ -21,8 +21,8 @@ using Microsoft.VisualStudio.Text.Editor.Commanding.Commands;
 using Microsoft.VisualStudio.Text.Operations;
 using Roslyn.Test.EditorUtilities;
 using Roslyn.Test.Utilities;
-using Xunit;
 using Roslyn.Utilities;
+using Xunit;
 
 namespace Microsoft.CodeAnalysis.Editor.UnitTests
 {
@@ -38,9 +38,9 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests
         /// <summary>
         /// This can use input files with an (optionally) annotated span 'Selection' and a cursor position ($$),
         /// and use it to create a selected span in the TextView.
-        /// 
+        ///
         /// For instance, the following will create a TextView that has a multiline selection with the cursor at the end.
-        /// 
+        ///
         /// Sub Goo
         ///     {|Selection:SomeMethodCall()
         ///     AnotherMethodCall()$$|}
@@ -60,72 +60,114 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests
             TestComposition composition,
             string? workspaceKind = null,
             bool makeSeparateBufferForCursor = false,
-            ImmutableArray<string> roles = default)
+            ImmutableArray<string> roles = default
+        )
         {
             Workspace = TestWorkspace.CreateWorkspace(
                 workspaceElement,
                 composition: composition,
-                workspaceKind: workspaceKind);
+                workspaceKind: workspaceKind
+            );
 
             if (makeSeparateBufferForCursor)
             {
                 var languageName = Workspace.Projects.First().Language;
-                var contentType = Workspace.Services.GetLanguageServices(languageName).GetRequiredService<IContentTypeLanguageService>().GetDefaultContentType();
-                _createdTextView = EditorFactory.CreateView(Workspace.ExportProvider, contentType, roles);
+                var contentType = Workspace
+                    .Services.GetLanguageServices(languageName)
+                    .GetRequiredService<IContentTypeLanguageService>()
+                    .GetDefaultContentType();
+                _createdTextView = EditorFactory.CreateView(
+                    Workspace.ExportProvider,
+                    contentType,
+                    roles
+                );
                 _textView = _createdTextView.TextView;
                 _subjectBuffer = _textView.TextBuffer;
             }
             else
             {
-                var cursorDocument = Workspace.Documents.First(d => d.CursorPosition.HasValue || d.SelectedSpans.Any(ss => ss.IsEmpty));
+                var cursorDocument = Workspace.Documents.First(d =>
+                    d.CursorPosition.HasValue || d.SelectedSpans.Any(ss => ss.IsEmpty)
+                );
                 _textView = cursorDocument.GetTextView();
                 _subjectBuffer = cursorDocument.GetTextBuffer();
 
-                var cursorPosition = cursorDocument.CursorPosition ?? cursorDocument.SelectedSpans.First(ss => ss.IsEmpty).Start;
+                var cursorPosition =
+                    cursorDocument.CursorPosition
+                    ?? cursorDocument.SelectedSpans.First(ss => ss.IsEmpty).Start;
                 _textView.Caret.MoveTo(
-                    new SnapshotPoint(_subjectBuffer.CurrentSnapshot, cursorPosition));
+                    new SnapshotPoint(_subjectBuffer.CurrentSnapshot, cursorPosition)
+                );
 
-                if (cursorDocument.AnnotatedSpans.TryGetValue("Selection", out var selectionSpanList))
+                if (
+                    cursorDocument.AnnotatedSpans.TryGetValue(
+                        "Selection",
+                        out var selectionSpanList
+                    )
+                )
                 {
                     var firstSpan = selectionSpanList.First();
                     var lastSpan = selectionSpanList.Last();
 
-                    Assert.True(cursorPosition == firstSpan.Start || cursorPosition == firstSpan.End
-                                || cursorPosition == lastSpan.Start || cursorPosition == lastSpan.End,
-                        "cursorPosition wasn't at an endpoint of the 'Selection' annotated span");
+                    Assert.True(
+                        cursorPosition == firstSpan.Start
+                            || cursorPosition == firstSpan.End
+                            || cursorPosition == lastSpan.Start
+                            || cursorPosition == lastSpan.End,
+                        "cursorPosition wasn't at an endpoint of the 'Selection' annotated span"
+                    );
 
-                    _textView.Selection.Mode = selectionSpanList.Length > 1
-                        ? TextSelectionMode.Box
-                        : TextSelectionMode.Stream;
+                    _textView.Selection.Mode =
+                        selectionSpanList.Length > 1
+                            ? TextSelectionMode.Box
+                            : TextSelectionMode.Stream;
 
-                    SnapshotPoint boxSelectionStart, boxSelectionEnd;
+                    SnapshotPoint boxSelectionStart,
+                        boxSelectionEnd;
                     bool isReversed;
 
                     if (cursorPosition == firstSpan.Start || cursorPosition == lastSpan.End)
                     {
                         // Top-left and bottom-right corners used as anchor points.
-                        boxSelectionStart = new SnapshotPoint(_subjectBuffer.CurrentSnapshot, firstSpan.Start);
-                        boxSelectionEnd = new SnapshotPoint(_subjectBuffer.CurrentSnapshot, lastSpan.End);
+                        boxSelectionStart = new SnapshotPoint(
+                            _subjectBuffer.CurrentSnapshot,
+                            firstSpan.Start
+                        );
+                        boxSelectionEnd = new SnapshotPoint(
+                            _subjectBuffer.CurrentSnapshot,
+                            lastSpan.End
+                        );
                         isReversed = cursorPosition == firstSpan.Start;
                     }
                     else
                     {
                         // Top-right and bottom-left corners used as anchor points.
-                        boxSelectionStart = new SnapshotPoint(_subjectBuffer.CurrentSnapshot, firstSpan.End);
-                        boxSelectionEnd = new SnapshotPoint(_subjectBuffer.CurrentSnapshot, lastSpan.Start);
+                        boxSelectionStart = new SnapshotPoint(
+                            _subjectBuffer.CurrentSnapshot,
+                            firstSpan.End
+                        );
+                        boxSelectionEnd = new SnapshotPoint(
+                            _subjectBuffer.CurrentSnapshot,
+                            lastSpan.Start
+                        );
                         isReversed = cursorPosition == firstSpan.End;
                     }
 
                     _textView.Selection.Select(
                         new SnapshotSpan(boxSelectionStart, boxSelectionEnd),
-                        isReversed: isReversed);
+                        isReversed: isReversed
+                    );
                 }
             }
 
-            this.EditorOperations = GetService<IEditorOperationsFactoryService>().GetEditorOperations(_textView);
+            this.EditorOperations = GetService<IEditorOperationsFactoryService>()
+                .GetEditorOperations(_textView);
             this.UndoHistoryRegistry = GetService<ITextUndoHistoryRegistry>();
 
-            _textView.Options.GlobalOptions.SetOptionValue(DefaultOptions.IndentStyleId, IndentingStyle.Smart);
+            _textView.Options.GlobalOptions.SetOptionValue(
+                DefaultOptions.IndentStyleId,
+                IndentingStyle.Smart
+            );
         }
 
         public void Dispose()
@@ -134,8 +176,7 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests
             Workspace.Dispose();
         }
 
-        public T GetService<T>()
-            => Workspace.GetService<T>();
+        public T GetService<T>() => Workspace.GetService<T>();
 
         public virtual ITextView TextView
         {
@@ -148,37 +189,34 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests
         }
 
         #region MEF
-        public Lazy<TExport, TMetadata> GetExport<TExport, TMetadata>()
-            => (Lazy<TExport, TMetadata>)(object)Workspace.ExportProvider.GetExport<TExport, TMetadata>();
+        public Lazy<TExport, TMetadata> GetExport<TExport, TMetadata>() =>
+            (Lazy<TExport, TMetadata>)
+                (object)Workspace.ExportProvider.GetExport<TExport, TMetadata>();
 
-        public IEnumerable<Lazy<TExport, TMetadata>> GetExports<TExport, TMetadata>()
-            => Workspace.ExportProvider.GetExports<TExport, TMetadata>();
+        public IEnumerable<Lazy<TExport, TMetadata>> GetExports<TExport, TMetadata>() =>
+            Workspace.ExportProvider.GetExports<TExport, TMetadata>();
 
-        public T GetExportedValue<T>()
-            => Workspace.ExportProvider.GetExportedValue<T>();
+        public T GetExportedValue<T>() => Workspace.ExportProvider.GetExportedValue<T>();
 
-        public IEnumerable<T> GetExportedValues<T>()
-            => Workspace.ExportProvider.GetExportedValues<T>();
+        public IEnumerable<T> GetExportedValues<T>() =>
+            Workspace.ExportProvider.GetExportedValues<T>();
         #endregion
 
         #region editor related operation
-        public virtual void SendBackspace()
-            => EditorOperations.Backspace();
+        public virtual void SendBackspace() => EditorOperations.Backspace();
 
-        public virtual void SendDelete()
-            => EditorOperations.Delete();
+        public virtual void SendDelete() => EditorOperations.Delete();
 
-        public void SendRightKey(bool extendSelection = false)
-            => EditorOperations.MoveToNextCharacter(extendSelection);
+        public void SendRightKey(bool extendSelection = false) =>
+            EditorOperations.MoveToNextCharacter(extendSelection);
 
-        public void SendLeftKey(bool extendSelection = false)
-            => EditorOperations.MoveToPreviousCharacter(extendSelection);
+        public void SendLeftKey(bool extendSelection = false) =>
+            EditorOperations.MoveToPreviousCharacter(extendSelection);
 
-        public void SendMoveToPreviousCharacter(bool extendSelection = false)
-            => EditorOperations.MoveToPreviousCharacter(extendSelection);
+        public void SendMoveToPreviousCharacter(bool extendSelection = false) =>
+            EditorOperations.MoveToPreviousCharacter(extendSelection);
 
-        public virtual void SendDeleteWordToLeft()
-            => EditorOperations.DeleteWordToLeft();
+        public virtual void SendDeleteWordToLeft() => EditorOperations.DeleteWordToLeft();
 
         public void SendUndo(int count = 1)
         {
@@ -190,8 +228,15 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests
         {
             var currentCaret = GetCaretPoint();
             EditorOperations.SelectAndMoveCaret(
-                new VirtualSnapshotPoint(SubjectBuffer.CurrentSnapshot, currentCaret.BufferPosition.Position),
-                new VirtualSnapshotPoint(SubjectBuffer.CurrentSnapshot, currentCaret.BufferPosition.Position + offset));
+                new VirtualSnapshotPoint(
+                    SubjectBuffer.CurrentSnapshot,
+                    currentCaret.BufferPosition.Position
+                ),
+                new VirtualSnapshotPoint(
+                    SubjectBuffer.CurrentSnapshot,
+                    currentCaret.BufferPosition.Position + offset
+                )
+            );
         }
         #endregion
 
@@ -221,11 +266,9 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests
             return (textBeforeCaret, textAfterCaret);
         }
 
-        public string GetDocumentText()
-            => SubjectBuffer.CurrentSnapshot.GetText();
+        public string GetDocumentText() => SubjectBuffer.CurrentSnapshot.GetText();
 
-        public CaretPosition GetCaretPoint()
-            => TextView.Caret.Position;
+        public CaretPosition GetCaretPoint() => TextView.Caret.Position;
 
         /// <summary>
         /// Used in synchronous methods to ensure all outstanding <see cref="IAsyncToken"/> work has been
@@ -233,15 +276,29 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests
         /// </summary>
         public void AssertNoAsynchronousOperationsRunning()
         {
-            var provider = Workspace.ExportProvider.GetExportedValue<AsynchronousOperationListenerProvider>();
-            Assert.False(provider.HasPendingWaiter(FeatureAttribute.EventHookup, FeatureAttribute.CompletionSet, FeatureAttribute.SignatureHelp), "IAsyncTokens unexpectedly alive. Call WaitForAsynchronousOperationsAsync before this method");
+            var provider =
+                Workspace.ExportProvider.GetExportedValue<AsynchronousOperationListenerProvider>();
+            Assert.False(
+                provider.HasPendingWaiter(
+                    FeatureAttribute.EventHookup,
+                    FeatureAttribute.CompletionSet,
+                    FeatureAttribute.SignatureHelp
+                ),
+                "IAsyncTokens unexpectedly alive. Call WaitForAsynchronousOperationsAsync before this method"
+            );
         }
 
         // This one is not used by the completion but used by SignatureHelp.
         public async Task WaitForAsynchronousOperationsAsync()
         {
-            var provider = Workspace.ExportProvider.GetExportedValue<AsynchronousOperationListenerProvider>();
-            await provider.WaitAllDispatcherOperationAndTasksAsync(Workspace, FeatureAttribute.EventHookup, FeatureAttribute.CompletionSet, FeatureAttribute.SignatureHelp);
+            var provider =
+                Workspace.ExportProvider.GetExportedValue<AsynchronousOperationListenerProvider>();
+            await provider.WaitAllDispatcherOperationAndTasksAsync(
+                Workspace,
+                FeatureAttribute.EventHookup,
+                FeatureAttribute.CompletionSet,
+                FeatureAttribute.SignatureHelp
+            );
         }
 
         public void AssertMatchesTextStartingAtLine(int line, string text)
@@ -249,108 +306,314 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests
             var lines = text.Split('\r');
             foreach (var expectedLine in lines)
             {
-                Assert.Equal(expectedLine.Trim(), SubjectBuffer.CurrentSnapshot.GetLineFromLineNumber(line).GetText().Trim());
+                Assert.Equal(
+                    expectedLine.Trim(),
+                    SubjectBuffer.CurrentSnapshot.GetLineFromLineNumber(line).GetText().Trim()
+                );
                 line += 1;
             }
         }
         #endregion
 
         #region command handler
-        public void SendBackspace(Action<BackspaceKeyCommandArgs, Action, CommandExecutionContext> commandHandler, Action nextHandler)
-            => commandHandler(new BackspaceKeyCommandArgs(TextView, SubjectBuffer), nextHandler, TestCommandExecutionContext.Create());
+        public void SendBackspace(
+            Action<BackspaceKeyCommandArgs, Action, CommandExecutionContext> commandHandler,
+            Action nextHandler
+        ) =>
+            commandHandler(
+                new BackspaceKeyCommandArgs(TextView, SubjectBuffer),
+                nextHandler,
+                TestCommandExecutionContext.Create()
+            );
 
-        public void SendDelete(Action<DeleteKeyCommandArgs, Action, CommandExecutionContext> commandHandler, Action nextHandler)
-            => commandHandler(new DeleteKeyCommandArgs(TextView, SubjectBuffer), nextHandler, TestCommandExecutionContext.Create());
+        public void SendDelete(
+            Action<DeleteKeyCommandArgs, Action, CommandExecutionContext> commandHandler,
+            Action nextHandler
+        ) =>
+            commandHandler(
+                new DeleteKeyCommandArgs(TextView, SubjectBuffer),
+                nextHandler,
+                TestCommandExecutionContext.Create()
+            );
 
-        public void SendWordDeleteToStart(Action<WordDeleteToStartCommandArgs, Action, CommandExecutionContext> commandHandler, Action nextHandler)
-            => commandHandler(new WordDeleteToStartCommandArgs(TextView, SubjectBuffer), nextHandler, TestCommandExecutionContext.Create());
+        public void SendWordDeleteToStart(
+            Action<WordDeleteToStartCommandArgs, Action, CommandExecutionContext> commandHandler,
+            Action nextHandler
+        ) =>
+            commandHandler(
+                new WordDeleteToStartCommandArgs(TextView, SubjectBuffer),
+                nextHandler,
+                TestCommandExecutionContext.Create()
+            );
 
-        public void SendEscape(Action<EscapeKeyCommandArgs, Action, CommandExecutionContext> commandHandler, Action nextHandler)
-            => commandHandler(new EscapeKeyCommandArgs(TextView, SubjectBuffer), nextHandler, TestCommandExecutionContext.Create());
+        public void SendEscape(
+            Action<EscapeKeyCommandArgs, Action, CommandExecutionContext> commandHandler,
+            Action nextHandler
+        ) =>
+            commandHandler(
+                new EscapeKeyCommandArgs(TextView, SubjectBuffer),
+                nextHandler,
+                TestCommandExecutionContext.Create()
+            );
 
-        public bool SendEscape(Func<EscapeKeyCommandArgs, CommandExecutionContext, bool> commandHandler)
-            => commandHandler(new EscapeKeyCommandArgs(TextView, SubjectBuffer), TestCommandExecutionContext.Create());
+        public bool SendEscape(
+            Func<EscapeKeyCommandArgs, CommandExecutionContext, bool> commandHandler
+        ) =>
+            commandHandler(
+                new EscapeKeyCommandArgs(TextView, SubjectBuffer),
+                TestCommandExecutionContext.Create()
+            );
 
-        public void SendUpKey(Action<UpKeyCommandArgs, Action, CommandExecutionContext> commandHandler, Action nextHandler)
-            => commandHandler(new UpKeyCommandArgs(TextView, SubjectBuffer), nextHandler, TestCommandExecutionContext.Create());
+        public void SendUpKey(
+            Action<UpKeyCommandArgs, Action, CommandExecutionContext> commandHandler,
+            Action nextHandler
+        ) =>
+            commandHandler(
+                new UpKeyCommandArgs(TextView, SubjectBuffer),
+                nextHandler,
+                TestCommandExecutionContext.Create()
+            );
 
-        public void SendDownKey(Action<DownKeyCommandArgs, Action, CommandExecutionContext> commandHandler, Action nextHandler)
-            => commandHandler(new DownKeyCommandArgs(TextView, SubjectBuffer), nextHandler, TestCommandExecutionContext.Create());
+        public void SendDownKey(
+            Action<DownKeyCommandArgs, Action, CommandExecutionContext> commandHandler,
+            Action nextHandler
+        ) =>
+            commandHandler(
+                new DownKeyCommandArgs(TextView, SubjectBuffer),
+                nextHandler,
+                TestCommandExecutionContext.Create()
+            );
 
-        public void SendTab(Action<TabKeyCommandArgs, Action, CommandExecutionContext> commandHandler, Action nextHandler)
-            => commandHandler(new TabKeyCommandArgs(TextView, SubjectBuffer), nextHandler, TestCommandExecutionContext.Create());
+        public void SendTab(
+            Action<TabKeyCommandArgs, Action, CommandExecutionContext> commandHandler,
+            Action nextHandler
+        ) =>
+            commandHandler(
+                new TabKeyCommandArgs(TextView, SubjectBuffer),
+                nextHandler,
+                TestCommandExecutionContext.Create()
+            );
 
-        public bool SendTab(Func<TabKeyCommandArgs, CommandExecutionContext, bool> commandHandler)
-            => commandHandler(new TabKeyCommandArgs(TextView, SubjectBuffer), TestCommandExecutionContext.Create());
+        public bool SendTab(
+            Func<TabKeyCommandArgs, CommandExecutionContext, bool> commandHandler
+        ) =>
+            commandHandler(
+                new TabKeyCommandArgs(TextView, SubjectBuffer),
+                TestCommandExecutionContext.Create()
+            );
 
-        public void SendBackTab(Action<BackTabKeyCommandArgs, Action, CommandExecutionContext> commandHandler, Action nextHandler)
-            => commandHandler(new BackTabKeyCommandArgs(TextView, SubjectBuffer), nextHandler, TestCommandExecutionContext.Create());
+        public void SendBackTab(
+            Action<BackTabKeyCommandArgs, Action, CommandExecutionContext> commandHandler,
+            Action nextHandler
+        ) =>
+            commandHandler(
+                new BackTabKeyCommandArgs(TextView, SubjectBuffer),
+                nextHandler,
+                TestCommandExecutionContext.Create()
+            );
 
-        public bool SendBackTab(Func<BackTabKeyCommandArgs, CommandExecutionContext, bool> commandHandler)
-            => commandHandler(new BackTabKeyCommandArgs(TextView, SubjectBuffer), TestCommandExecutionContext.Create());
+        public bool SendBackTab(
+            Func<BackTabKeyCommandArgs, CommandExecutionContext, bool> commandHandler
+        ) =>
+            commandHandler(
+                new BackTabKeyCommandArgs(TextView, SubjectBuffer),
+                TestCommandExecutionContext.Create()
+            );
 
-        public void SendReturn(Action<ReturnKeyCommandArgs, Action, CommandExecutionContext> commandHandler, Action nextHandler)
-            => commandHandler(new ReturnKeyCommandArgs(TextView, SubjectBuffer), nextHandler, TestCommandExecutionContext.Create());
+        public void SendReturn(
+            Action<ReturnKeyCommandArgs, Action, CommandExecutionContext> commandHandler,
+            Action nextHandler
+        ) =>
+            commandHandler(
+                new ReturnKeyCommandArgs(TextView, SubjectBuffer),
+                nextHandler,
+                TestCommandExecutionContext.Create()
+            );
 
-        public bool SendReturn(Func<ReturnKeyCommandArgs, CommandExecutionContext, bool> commandHandler)
-            => commandHandler(new ReturnKeyCommandArgs(TextView, SubjectBuffer), TestCommandExecutionContext.Create());
+        public bool SendReturn(
+            Func<ReturnKeyCommandArgs, CommandExecutionContext, bool> commandHandler
+        ) =>
+            commandHandler(
+                new ReturnKeyCommandArgs(TextView, SubjectBuffer),
+                TestCommandExecutionContext.Create()
+            );
 
-        public void SendPageUp(Action<PageUpKeyCommandArgs, Action, CommandExecutionContext> commandHandler, Action nextHandler)
-            => commandHandler(new PageUpKeyCommandArgs(TextView, SubjectBuffer), nextHandler, TestCommandExecutionContext.Create());
+        public void SendPageUp(
+            Action<PageUpKeyCommandArgs, Action, CommandExecutionContext> commandHandler,
+            Action nextHandler
+        ) =>
+            commandHandler(
+                new PageUpKeyCommandArgs(TextView, SubjectBuffer),
+                nextHandler,
+                TestCommandExecutionContext.Create()
+            );
 
-        public void SendPageDown(Action<PageDownKeyCommandArgs, Action, CommandExecutionContext> commandHandler, Action nextHandler)
-            => commandHandler(new PageDownKeyCommandArgs(TextView, SubjectBuffer), nextHandler, TestCommandExecutionContext.Create());
+        public void SendPageDown(
+            Action<PageDownKeyCommandArgs, Action, CommandExecutionContext> commandHandler,
+            Action nextHandler
+        ) =>
+            commandHandler(
+                new PageDownKeyCommandArgs(TextView, SubjectBuffer),
+                nextHandler,
+                TestCommandExecutionContext.Create()
+            );
 
-        public void SendCopy(Action<CopyCommandArgs, Action, CommandExecutionContext> commandHandler, Action nextHandler)
-            => commandHandler(new CopyCommandArgs(TextView, SubjectBuffer), nextHandler, TestCommandExecutionContext.Create());
+        public void SendCopy(
+            Action<CopyCommandArgs, Action, CommandExecutionContext> commandHandler,
+            Action nextHandler
+        ) =>
+            commandHandler(
+                new CopyCommandArgs(TextView, SubjectBuffer),
+                nextHandler,
+                TestCommandExecutionContext.Create()
+            );
 
-        public void SendCut(Action<CutCommandArgs, Action, CommandExecutionContext> commandHandler, Action nextHandler)
-            => commandHandler(new CutCommandArgs(TextView, SubjectBuffer), nextHandler, TestCommandExecutionContext.Create());
+        public void SendCut(
+            Action<CutCommandArgs, Action, CommandExecutionContext> commandHandler,
+            Action nextHandler
+        ) =>
+            commandHandler(
+                new CutCommandArgs(TextView, SubjectBuffer),
+                nextHandler,
+                TestCommandExecutionContext.Create()
+            );
 
-        public void SendPaste(Action<PasteCommandArgs, Action, CommandExecutionContext> commandHandler, Action nextHandler)
-            => commandHandler(new PasteCommandArgs(TextView, SubjectBuffer), nextHandler, TestCommandExecutionContext.Create());
+        public void SendPaste(
+            Action<PasteCommandArgs, Action, CommandExecutionContext> commandHandler,
+            Action nextHandler
+        ) =>
+            commandHandler(
+                new PasteCommandArgs(TextView, SubjectBuffer),
+                nextHandler,
+                TestCommandExecutionContext.Create()
+            );
 
-        public void SendInvokeCompletionList(Action<InvokeCompletionListCommandArgs, Action, CommandExecutionContext> commandHandler, Action nextHandler)
-            => commandHandler(new InvokeCompletionListCommandArgs(TextView, SubjectBuffer), nextHandler, TestCommandExecutionContext.Create());
+        public void SendInvokeCompletionList(
+            Action<InvokeCompletionListCommandArgs, Action, CommandExecutionContext> commandHandler,
+            Action nextHandler
+        ) =>
+            commandHandler(
+                new InvokeCompletionListCommandArgs(TextView, SubjectBuffer),
+                nextHandler,
+                TestCommandExecutionContext.Create()
+            );
 
-        public void SendCommitUniqueCompletionListItem(Action<CommitUniqueCompletionListItemCommandArgs, Action, CommandExecutionContext> commandHandler, Action nextHandler)
-            => commandHandler(new CommitUniqueCompletionListItemCommandArgs(TextView, SubjectBuffer), nextHandler, TestCommandExecutionContext.Create());
+        public void SendCommitUniqueCompletionListItem(
+            Action<
+                CommitUniqueCompletionListItemCommandArgs,
+                Action,
+                CommandExecutionContext
+            > commandHandler,
+            Action nextHandler
+        ) =>
+            commandHandler(
+                new CommitUniqueCompletionListItemCommandArgs(TextView, SubjectBuffer),
+                nextHandler,
+                TestCommandExecutionContext.Create()
+            );
 
-        public void SendInsertSnippetCommand(Action<InsertSnippetCommandArgs, Action, CommandExecutionContext> commandHandler, Action nextHandler)
-            => commandHandler(new InsertSnippetCommandArgs(TextView, SubjectBuffer), nextHandler, TestCommandExecutionContext.Create());
+        public void SendInsertSnippetCommand(
+            Action<InsertSnippetCommandArgs, Action, CommandExecutionContext> commandHandler,
+            Action nextHandler
+        ) =>
+            commandHandler(
+                new InsertSnippetCommandArgs(TextView, SubjectBuffer),
+                nextHandler,
+                TestCommandExecutionContext.Create()
+            );
 
-        public bool SendInsertSnippetCommand(Func<InsertSnippetCommandArgs, CommandExecutionContext, bool> commandHandler)
-            => commandHandler(new InsertSnippetCommandArgs(TextView, SubjectBuffer), TestCommandExecutionContext.Create());
+        public bool SendInsertSnippetCommand(
+            Func<InsertSnippetCommandArgs, CommandExecutionContext, bool> commandHandler
+        ) =>
+            commandHandler(
+                new InsertSnippetCommandArgs(TextView, SubjectBuffer),
+                TestCommandExecutionContext.Create()
+            );
 
-        public void SendSurroundWithCommand(Action<SurroundWithCommandArgs, Action, CommandExecutionContext> commandHandler, Action nextHandler)
-            => commandHandler(new SurroundWithCommandArgs(TextView, SubjectBuffer), nextHandler, TestCommandExecutionContext.Create());
+        public void SendSurroundWithCommand(
+            Action<SurroundWithCommandArgs, Action, CommandExecutionContext> commandHandler,
+            Action nextHandler
+        ) =>
+            commandHandler(
+                new SurroundWithCommandArgs(TextView, SubjectBuffer),
+                nextHandler,
+                TestCommandExecutionContext.Create()
+            );
 
-        public bool SendSurroundWithCommand(Func<SurroundWithCommandArgs, CommandExecutionContext, bool> commandHandler)
-            => commandHandler(new SurroundWithCommandArgs(TextView, SubjectBuffer), TestCommandExecutionContext.Create());
+        public bool SendSurroundWithCommand(
+            Func<SurroundWithCommandArgs, CommandExecutionContext, bool> commandHandler
+        ) =>
+            commandHandler(
+                new SurroundWithCommandArgs(TextView, SubjectBuffer),
+                TestCommandExecutionContext.Create()
+            );
 
-        public void SendInvokeSignatureHelp(Action<InvokeSignatureHelpCommandArgs, Action, CommandExecutionContext> commandHandler, Action nextHandler)
-            => commandHandler(new InvokeSignatureHelpCommandArgs(TextView, SubjectBuffer), nextHandler, TestCommandExecutionContext.Create());
+        public void SendInvokeSignatureHelp(
+            Action<InvokeSignatureHelpCommandArgs, Action, CommandExecutionContext> commandHandler,
+            Action nextHandler
+        ) =>
+            commandHandler(
+                new InvokeSignatureHelpCommandArgs(TextView, SubjectBuffer),
+                nextHandler,
+                TestCommandExecutionContext.Create()
+            );
 
-        public void SendTypeChar(char typeChar, Action<TypeCharCommandArgs, Action, CommandExecutionContext> commandHandler, Action nextHandler)
-            => commandHandler(new TypeCharCommandArgs(TextView, SubjectBuffer, typeChar), nextHandler, TestCommandExecutionContext.Create());
+        public void SendTypeChar(
+            char typeChar,
+            Action<TypeCharCommandArgs, Action, CommandExecutionContext> commandHandler,
+            Action nextHandler
+        ) =>
+            commandHandler(
+                new TypeCharCommandArgs(TextView, SubjectBuffer, typeChar),
+                nextHandler,
+                TestCommandExecutionContext.Create()
+            );
 
-        public void SendTypeChars(string typeChars, Action<TypeCharCommandArgs, Action, CommandExecutionContext> commandHandler)
+        public void SendTypeChars(
+            string typeChars,
+            Action<TypeCharCommandArgs, Action, CommandExecutionContext> commandHandler
+        )
         {
             foreach (var ch in typeChars)
             {
                 var localCh = ch;
-                SendTypeChar(ch, commandHandler, () => EditorOperations.InsertText(localCh.ToString()));
+                SendTypeChar(
+                    ch,
+                    commandHandler,
+                    () => EditorOperations.InsertText(localCh.ToString())
+                );
             }
         }
 
-        public void SendSave(Action<SaveCommandArgs, Action, CommandExecutionContext> commandHandler, Action nextHandler)
-            => commandHandler(new SaveCommandArgs(TextView, SubjectBuffer), nextHandler, TestCommandExecutionContext.Create());
+        public void SendSave(
+            Action<SaveCommandArgs, Action, CommandExecutionContext> commandHandler,
+            Action nextHandler
+        ) =>
+            commandHandler(
+                new SaveCommandArgs(TextView, SubjectBuffer),
+                nextHandler,
+                TestCommandExecutionContext.Create()
+            );
 
-        public void SendSelectAll(Action<SelectAllCommandArgs, Action, CommandExecutionContext> commandHandler, Action nextHandler)
-            => commandHandler(new SelectAllCommandArgs(TextView, SubjectBuffer), nextHandler, TestCommandExecutionContext.Create());
+        public void SendSelectAll(
+            Action<SelectAllCommandArgs, Action, CommandExecutionContext> commandHandler,
+            Action nextHandler
+        ) =>
+            commandHandler(
+                new SelectAllCommandArgs(TextView, SubjectBuffer),
+                nextHandler,
+                TestCommandExecutionContext.Create()
+            );
 
-        public void SendToggleCompletionMode(Action<ToggleCompletionModeCommandArgs, Action, CommandExecutionContext> commandHandler, Action nextHandler)
-            => commandHandler(new ToggleCompletionModeCommandArgs(TextView, SubjectBuffer), nextHandler, TestCommandExecutionContext.Create());
+        public void SendToggleCompletionMode(
+            Action<ToggleCompletionModeCommandArgs, Action, CommandExecutionContext> commandHandler,
+            Action nextHandler
+        ) =>
+            commandHandler(
+                new ToggleCompletionModeCommandArgs(TextView, SubjectBuffer),
+                nextHandler,
+                TestCommandExecutionContext.Create()
+            );
         #endregion
     }
 }

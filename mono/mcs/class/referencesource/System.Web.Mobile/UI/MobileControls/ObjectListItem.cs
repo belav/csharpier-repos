@@ -1,18 +1,18 @@
 //------------------------------------------------------------------------------
 // <copyright file="ObjectListItem.cs" company="Microsoft">
 //     Copyright (c) Microsoft Corporation.  All rights reserved.
-// </copyright>                                                                
+// </copyright>
 //------------------------------------------------------------------------------
 
 using System;
 using System.Collections;
 using System.ComponentModel;
+using System.Security.Permissions;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-using System.Security.Permissions;
 
-namespace System.Web.UI.MobileControls 
+namespace System.Web.UI.MobileControls
 {
     /*
      * Object List Item class.
@@ -21,23 +21,29 @@ namespace System.Web.UI.MobileControls
      */
 
     /// <include file='doc\ObjectListItem.uex' path='docs/doc[@for="ObjectListItem"]/*' />
-    [
-        ToolboxItem(false)
-    ]
-    [AspNetHostingPermission(SecurityAction.LinkDemand, Level=AspNetHostingPermissionLevel.Minimal)]
-    [AspNetHostingPermission(SecurityAction.InheritanceDemand, Level=AspNetHostingPermissionLevel.Minimal)]
-    [Obsolete("The System.Web.Mobile.dll assembly has been deprecated and should no longer be used. For information about how to develop ASP.NET mobile applications, see http://go.microsoft.com/fwlink/?LinkId=157231.")]
+    [ToolboxItem(false)]
+    [AspNetHostingPermission(
+        SecurityAction.LinkDemand,
+        Level = AspNetHostingPermissionLevel.Minimal
+    )]
+    [AspNetHostingPermission(
+        SecurityAction.InheritanceDemand,
+        Level = AspNetHostingPermissionLevel.Minimal
+    )]
+    [Obsolete(
+        "The System.Web.Mobile.dll assembly has been deprecated and should no longer be used. For information about how to develop ASP.NET mobile applications, see http://go.microsoft.com/fwlink/?LinkId=157231."
+    )]
     public class ObjectListItem : MobileListItem
     {
         private String[] _fields;
         private bool _dirty;
         private ObjectList _owner;
-            
-        internal ObjectListItem(ObjectList owner) : this(owner, null)
-        {
-        }
 
-        internal ObjectListItem(ObjectList owner, Object dataItem) : base(dataItem, null, null)
+        internal ObjectListItem(ObjectList owner)
+            : this(owner, null) { }
+
+        internal ObjectListItem(ObjectList owner, Object dataItem)
+            : base(dataItem, null, null)
         {
             _owner = owner;
             _fields = new String[owner.AllFields.Count];
@@ -45,11 +51,10 @@ namespace System.Web.UI.MobileControls
 
         private int FieldIndexFromKey(String key)
         {
-            int index = _owner.AllFields.IndexOf (key);
+            int index = _owner.AllFields.IndexOf(key);
             if (index == -1)
             {
-                throw new ArgumentException(
-                    SR.GetString(SR.ObjectList_FieldNotFound, key));
+                throw new ArgumentException(SR.GetString(SR.ObjectList_FieldNotFound, key));
             }
             return index;
         }
@@ -57,15 +62,8 @@ namespace System.Web.UI.MobileControls
         /// <include file='doc\ObjectListItem.uex' path='docs/doc[@for="ObjectListItem.this"]/*' />
         public String this[String key]
         {
-            get
-            {
-                return this[FieldIndexFromKey (key)];
-            }
-
-            set
-            {
-                this[FieldIndexFromKey (key)] = value;
-            }
+            get { return this[FieldIndexFromKey(key)]; }
+            set { this[FieldIndexFromKey(key)] = value; }
         }
 
         /// <include file='doc\ObjectListItem.uex' path='docs/doc[@for="ObjectListItem.this1"]/*' />
@@ -76,7 +74,6 @@ namespace System.Web.UI.MobileControls
                 String s = _fields[index];
                 return (s != null) ? s : String.Empty;
             }
-
             set
             {
                 _fields[index] = value;
@@ -88,10 +85,10 @@ namespace System.Web.UI.MobileControls
         }
 
         /// <include file='doc\ObjectListItem.uex' path='docs/doc[@for="ObjectListItem.Equals"]/*' />
-        public override bool Equals(Object obj) 
+        public override bool Equals(Object obj)
         {
             ObjectListItem other = obj as ObjectListItem;
-            
+
             if (other == null)
             {
                 return false;
@@ -119,11 +116,11 @@ namespace System.Web.UI.MobileControls
                 }
             }
 
-            if(!Value.Equals(other.Value) || !Text.Equals(other.Text))
+            if (!Value.Equals(other.Value) || !Text.Equals(other.Text))
             {
                 return false;
             }
-            
+
             return true;
         }
 
@@ -140,14 +137,13 @@ namespace System.Web.UI.MobileControls
             }
         }
 
-        
         /////////////////////////////////////////////////////////////////////////
         //  STATE MANAGEMENT, FOR ITEM'S DATA (NON-CONTROL) STATE.
         /////////////////////////////////////////////////////////////////////////
 
         internal override Object SaveDataState()
         {
-            Object baseState = base.SaveDataState ();
+            Object baseState = base.SaveDataState();
             if (_dirty && _fields != null)
             {
                 int fieldCount = _fields.Length;
@@ -175,7 +171,7 @@ namespace System.Web.UI.MobileControls
             {
                 Object[] itemState = (Object[])state;
                 int fieldCount = itemState.Length;
-                base.LoadDataState (itemState[0]);
+                base.LoadDataState(itemState[0]);
                 _fields = new String[fieldCount - 1];
                 for (int i = 1; i < fieldCount; i++)
                 {
@@ -184,13 +180,11 @@ namespace System.Web.UI.MobileControls
             }
         }
 
-        internal override bool Dirty 
+        internal override bool Dirty
         {
-            get 
-            { 
-                return _dirty || base.Dirty;
-            }
-            set { 
+            get { return _dirty || base.Dirty; }
+            set
+            {
                 _dirty = true;
                 base.Dirty = value;
             }
@@ -201,18 +195,19 @@ namespace System.Web.UI.MobileControls
         /////////////////////////////////////////////////////////////////////////
 
         /// <include file='doc\ObjectListItem.uex' path='docs/doc[@for="ObjectListItem.OnBubbleEvent"]/*' />
-        protected override bool OnBubbleEvent(Object source, EventArgs e) 
+        protected override bool OnBubbleEvent(Object source, EventArgs e)
         {
-            if (e is CommandEventArgs) 
+            if (e is CommandEventArgs)
             {
-                ObjectListCommandEventArgs args = new ObjectListCommandEventArgs(this, source, (CommandEventArgs)e);
-                RaiseBubbleEvent (this, args);
+                ObjectListCommandEventArgs args = new ObjectListCommandEventArgs(
+                    this,
+                    source,
+                    (CommandEventArgs)e
+                );
+                RaiseBubbleEvent(this, args);
                 return true;
             }
             return false;
         }
-
-    } 
-
+    }
 }
-

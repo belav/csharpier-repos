@@ -22,8 +22,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         {
             var source = @"";
             var comp = CreateCompilation(source);
-            var expected =
-@"";
+            var expected = @"";
             AssertNullableAttributes(comp, expected);
         }
 
@@ -31,14 +30,14 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         public void ExplicitAttribute_FromSource()
         {
             var source =
-@"#nullable enable
+                @"#nullable enable
 public class Program
 {
     public object F(object arg) => arg;
 }";
             var comp = CreateCompilation(new[] { NullableContextAttributeDefinition, source });
             var expected =
-@"Program
+                @"Program
     [NullableContext(1)] System.Object! F(System.Object! arg)
         System.Object! arg
 ";
@@ -53,14 +52,14 @@ public class Program
             var ref0 = comp.EmitToImageReference();
 
             var source =
-@"#nullable enable
+                @"#nullable enable
 public class Program
 {
     public object F(object arg) => arg;
 }";
             comp = CreateCompilation(source, references: new[] { ref0 });
             var expected =
-@"Program
+                @"Program
     [NullableContext(1)] System.Object! F(System.Object! arg)
         System.Object! arg
 ";
@@ -71,20 +70,23 @@ public class Program
         public void ExplicitAttribute_MissingSingleByteConstructor()
         {
             var source1 =
-@"namespace System.Runtime.CompilerServices
+                @"namespace System.Runtime.CompilerServices
 {
     public sealed class NullableContextAttribute : Attribute
     {
     }
 }";
             var source2 =
-@"public class Program
+                @"public class Program
 {
     public object F(object arg) => arg;
 }";
 
             // C#7
-            var comp = CreateCompilation(new[] { source1, source2 }, parseOptions: TestOptions.Regular7);
+            var comp = CreateCompilation(
+                new[] { source1, source2 },
+                parseOptions: TestOptions.Regular7
+            );
             comp.VerifyEmitDiagnostics();
 
             // C#8, nullable disabled
@@ -96,14 +98,20 @@ public class Program
             comp.VerifyEmitDiagnostics(
                 // (3,19): error CS0656: Missing compiler required member 'System.Runtime.CompilerServices.NullableContextAttribute..ctor'
                 //     public object F(object arg) => arg;
-                Diagnostic(ErrorCode.ERR_MissingPredefinedMember, "F").WithArguments("System.Runtime.CompilerServices.NullableContextAttribute", ".ctor").WithLocation(3, 19));
+                Diagnostic(ErrorCode.ERR_MissingPredefinedMember, "F")
+                    .WithArguments(
+                        "System.Runtime.CompilerServices.NullableContextAttribute",
+                        ".ctor"
+                    )
+                    .WithLocation(3, 19)
+            );
         }
 
         [Fact]
         public void ExplicitAttribute_ReferencedInSource()
         {
             var sourceAttribute =
-@"namespace System.Runtime.CompilerServices
+                @"namespace System.Runtime.CompilerServices
 {
     internal class NullableContextAttribute : System.Attribute
     {
@@ -111,7 +119,7 @@ public class Program
     }
 }";
             var source =
-@"#pragma warning disable 169
+                @"#pragma warning disable 169
 using System.Runtime.CompilerServices;
 [assembly: NullableContext(0)]
 [module: NullableContext(0)]
@@ -125,7 +133,10 @@ class Program
 }";
 
             // C#7
-            var comp = CreateCompilation(new[] { sourceAttribute, source }, parseOptions: TestOptions.Regular7);
+            var comp = CreateCompilation(
+                new[] { sourceAttribute, source },
+                parseOptions: TestOptions.Regular7
+            );
             verifyDiagnostics(comp);
 
             // C#8
@@ -137,13 +148,20 @@ class Program
                 comp.VerifyDiagnostics(
                     // (4,10): error CS8335: Do not use 'System.Runtime.CompilerServices.NullableContextAttribute'. This is reserved for compiler usage.
                     // [module: NullableContext(0)]
-                    Diagnostic(ErrorCode.ERR_ExplicitReservedAttr, "NullableContext(0)").WithArguments("System.Runtime.CompilerServices.NullableContextAttribute").WithLocation(4, 10),
+                    Diagnostic(ErrorCode.ERR_ExplicitReservedAttr, "NullableContext(0)")
+                        .WithArguments("System.Runtime.CompilerServices.NullableContextAttribute")
+                        .WithLocation(4, 10),
                     // (5,2): error CS8335: Do not use 'System.Runtime.CompilerServices.NullableContextAttribute'. This is reserved for compiler usage.
                     // [NullableContext(0)]
-                    Diagnostic(ErrorCode.ERR_ExplicitReservedAttr, "NullableContext(0)").WithArguments("System.Runtime.CompilerServices.NullableContextAttribute").WithLocation(5, 2),
+                    Diagnostic(ErrorCode.ERR_ExplicitReservedAttr, "NullableContext(0)")
+                        .WithArguments("System.Runtime.CompilerServices.NullableContextAttribute")
+                        .WithLocation(5, 2),
                     // (9,6): error CS8335: Do not use 'System.Runtime.CompilerServices.NullableContextAttribute'. This is reserved for compiler usage.
                     //     [NullableContext(0)]static object M1() => throw null;
-                    Diagnostic(ErrorCode.ERR_ExplicitReservedAttr, "NullableContext(0)").WithArguments("System.Runtime.CompilerServices.NullableContextAttribute").WithLocation(9, 6));
+                    Diagnostic(ErrorCode.ERR_ExplicitReservedAttr, "NullableContext(0)")
+                        .WithArguments("System.Runtime.CompilerServices.NullableContextAttribute")
+                        .WithLocation(9, 6)
+                );
             }
         }
 
@@ -151,7 +169,7 @@ class Program
         public void ExplicitAttribute_WithNullableContext()
         {
             var sourceAttribute =
-@"#nullable enable
+                @"#nullable enable
 namespace System.Runtime.CompilerServices
 {
     public sealed class NullableContextAttribute : Attribute
@@ -167,14 +185,14 @@ namespace System.Runtime.CompilerServices
             var comp = CreateCompilation(sourceAttribute);
             var ref0 = comp.EmitToImageReference();
             var expected =
-@"[NullableContext(1)] [Nullable(0)] System.Runtime.CompilerServices.NullableContextAttribute
+                @"[NullableContext(1)] [Nullable(0)] System.Runtime.CompilerServices.NullableContextAttribute
     NullableContextAttribute(System.Byte b)
         System.Byte b
 ";
             AssertNullableAttributes(comp, expected);
 
             var source =
-@"#nullable enable
+                @"#nullable enable
 public class Program
 {
     private object _f1;
@@ -183,7 +201,7 @@ public class Program
 }";
             comp = CreateCompilation(source, references: new[] { ref0 });
             expected =
-@"[NullableContext(1)] [Nullable(0)] Program
+                @"[NullableContext(1)] [Nullable(0)] Program
     Program()
 ";
             AssertNullableAttributes(comp, expected);
@@ -194,31 +212,44 @@ public class Program
         public void AttributeUsage()
         {
             var source =
-@"#nullable enable
+                @"#nullable enable
 public class Program
 {
     private object _f1;
     private object _f2;
     private object _f3;
 }";
-            var comp = CreateCompilation(source, options: TestOptions.ReleaseDll.WithMetadataImportOptions(MetadataImportOptions.All));
-            CompileAndVerify(comp, symbolValidator: module =>
-            {
-                var attributeType = module.GlobalNamespace.GetMember<NamedTypeSymbol>("System.Runtime.CompilerServices.NullableContextAttribute");
-                AttributeUsageInfo attributeUsage = attributeType.GetAttributeUsageInfo();
-                Assert.False(attributeUsage.Inherited);
-                Assert.False(attributeUsage.AllowMultiple);
-                Assert.True(attributeUsage.HasValidAttributeTargets);
-                var expectedTargets = AttributeTargets.Class | AttributeTargets.Delegate | AttributeTargets.Interface | AttributeTargets.Method | AttributeTargets.Struct;
-                Assert.Equal(expectedTargets, attributeUsage.ValidTargets);
-            });
+            var comp = CreateCompilation(
+                source,
+                options: TestOptions.ReleaseDll.WithMetadataImportOptions(MetadataImportOptions.All)
+            );
+            CompileAndVerify(
+                comp,
+                symbolValidator: module =>
+                {
+                    var attributeType = module.GlobalNamespace.GetMember<NamedTypeSymbol>(
+                        "System.Runtime.CompilerServices.NullableContextAttribute"
+                    );
+                    AttributeUsageInfo attributeUsage = attributeType.GetAttributeUsageInfo();
+                    Assert.False(attributeUsage.Inherited);
+                    Assert.False(attributeUsage.AllowMultiple);
+                    Assert.True(attributeUsage.HasValidAttributeTargets);
+                    var expectedTargets =
+                        AttributeTargets.Class
+                        | AttributeTargets.Delegate
+                        | AttributeTargets.Interface
+                        | AttributeTargets.Method
+                        | AttributeTargets.Struct;
+                    Assert.Equal(expectedTargets, attributeUsage.ValidTargets);
+                }
+            );
         }
 
         [Fact]
         public void MissingAttributeUsageAttribute()
         {
             var source =
-@"#pragma warning disable 169
+                @"#pragma warning disable 169
 #pragma warning disable 414
 #nullable enable
 public class Program
@@ -228,21 +259,37 @@ public class Program
     private object _f3 = null!;
 }";
 
-            var comp = CreateCompilation(source, parseOptions: TestOptions.Regular.WithNoRefSafetyRulesAttribute());
+            var comp = CreateCompilation(
+                source,
+                parseOptions: TestOptions.Regular.WithNoRefSafetyRulesAttribute()
+            );
             comp.MakeTypeMissing(WellKnownType.System_AttributeUsageAttribute);
             comp.VerifyEmitDiagnostics(
                 // error CS0656: Missing compiler required member 'System.AttributeUsageAttribute..ctor'
-                Diagnostic(ErrorCode.ERR_MissingPredefinedMember).WithArguments("System.AttributeUsageAttribute", ".ctor").WithLocation(1, 1),
+                Diagnostic(ErrorCode.ERR_MissingPredefinedMember)
+                    .WithArguments("System.AttributeUsageAttribute", ".ctor")
+                    .WithLocation(1, 1),
                 // error CS0656: Missing compiler required member 'System.AttributeUsageAttribute.AllowMultiple'
-                Diagnostic(ErrorCode.ERR_MissingPredefinedMember).WithArguments("System.AttributeUsageAttribute", "AllowMultiple").WithLocation(1, 1),
+                Diagnostic(ErrorCode.ERR_MissingPredefinedMember)
+                    .WithArguments("System.AttributeUsageAttribute", "AllowMultiple")
+                    .WithLocation(1, 1),
                 // error CS0656: Missing compiler required member 'System.AttributeUsageAttribute.Inherited'
-                Diagnostic(ErrorCode.ERR_MissingPredefinedMember).WithArguments("System.AttributeUsageAttribute", "Inherited").WithLocation(1, 1),
+                Diagnostic(ErrorCode.ERR_MissingPredefinedMember)
+                    .WithArguments("System.AttributeUsageAttribute", "Inherited")
+                    .WithLocation(1, 1),
                 // error CS0656: Missing compiler required member 'System.AttributeUsageAttribute..ctor'
-                Diagnostic(ErrorCode.ERR_MissingPredefinedMember).WithArguments("System.AttributeUsageAttribute", ".ctor").WithLocation(1, 1),
+                Diagnostic(ErrorCode.ERR_MissingPredefinedMember)
+                    .WithArguments("System.AttributeUsageAttribute", ".ctor")
+                    .WithLocation(1, 1),
                 // error CS0656: Missing compiler required member 'System.AttributeUsageAttribute.AllowMultiple'
-                Diagnostic(ErrorCode.ERR_MissingPredefinedMember).WithArguments("System.AttributeUsageAttribute", "AllowMultiple").WithLocation(1, 1),
+                Diagnostic(ErrorCode.ERR_MissingPredefinedMember)
+                    .WithArguments("System.AttributeUsageAttribute", "AllowMultiple")
+                    .WithLocation(1, 1),
                 // error CS0656: Missing compiler required member 'System.AttributeUsageAttribute.Inherited'
-                Diagnostic(ErrorCode.ERR_MissingPredefinedMember).WithArguments("System.AttributeUsageAttribute", "Inherited").WithLocation(1, 1));
+                Diagnostic(ErrorCode.ERR_MissingPredefinedMember)
+                    .WithArguments("System.AttributeUsageAttribute", "Inherited")
+                    .WithLocation(1, 1)
+            );
         }
 
         /// <summary>
@@ -252,7 +299,7 @@ public class Program
         public void ExplicitAttribute_Module()
         {
             var source0 =
-@"namespace System.Runtime.CompilerServices
+                @"namespace System.Runtime.CompilerServices
 {
     public sealed class NullableContextAttribute : Attribute
     {
@@ -263,7 +310,7 @@ public class Program
             var ref0 = comp0.EmitToImageReference();
 
             var source1 =
-@"Imports System.Runtime.CompilerServices
+                @"Imports System.Runtime.CompilerServices
 <Module: NullableContext(2)>
 Public Class A
     Public Shared FA As Object
@@ -272,11 +319,16 @@ End Class
 Public Class B
     Public Shared FB As Object
 End Class";
-            var comp1 = CreateVisualBasicCompilation(source1, referencedAssemblies: TargetFrameworkUtil.GetReferences(TargetFramework.Standard).Concat(ref0));
+            var comp1 = CreateVisualBasicCompilation(
+                source1,
+                referencedAssemblies: TargetFrameworkUtil
+                    .GetReferences(TargetFramework.Standard)
+                    .Concat(ref0)
+            );
             var ref1 = comp1.EmitToImageReference();
 
             var source2 =
-@"#nullable enable
+                @"#nullable enable
 class Program
 {
     static void Main()
@@ -289,14 +341,15 @@ class Program
             comp2.VerifyDiagnostics(
                 // (7,9): warning CS8602: Dereference of a possibly null reference.
                 //         B.FB.ToString(); // warning
-                Diagnostic(ErrorCode.WRN_NullReferenceReceiver, "B.FB").WithLocation(7, 9));
+                Diagnostic(ErrorCode.WRN_NullReferenceReceiver, "B.FB").WithLocation(7, 9)
+            );
         }
 
         [Fact]
         public void AttributeField()
         {
             var source =
-@"#nullable enable
+                @"#nullable enable
 using System;
 using System.Linq;
 public class A
@@ -326,16 +379,24 @@ class Program
     }
 }";
             var expectedOutput =
-@"1
+                @"1
 2";
             var expectedAttributes =
-@"[NullableContext(1)] [Nullable(0)] A
+                @"[NullableContext(1)] [Nullable(0)] A
     A()
 [NullableContext(2)] [Nullable(0)] B
     B()
 ";
-            var comp = CreateCompilation(source, parseOptions: TestOptions.Regular8, options: TestOptions.DebugExe);
-            CompileAndVerify(comp, expectedOutput: expectedOutput, symbolValidator: module => AssertNullableAttributes(module, expectedAttributes));
+            var comp = CreateCompilation(
+                source,
+                parseOptions: TestOptions.Regular8,
+                options: TestOptions.DebugExe
+            );
+            CompileAndVerify(
+                comp,
+                expectedOutput: expectedOutput,
+                symbolValidator: module => AssertNullableAttributes(module, expectedAttributes)
+            );
         }
 
         [Fact]
@@ -417,7 +478,10 @@ class Program
 
         private void AssertNullableAttributes(CSharpCompilation comp, string expected)
         {
-            CompileAndVerify(comp, symbolValidator: module => AssertNullableAttributes(module, expected));
+            CompileAndVerify(
+                comp,
+                symbolValidator: module => AssertNullableAttributes(module, expected)
+            );
         }
 
         private static void AssertNullableAttributes(ModuleSymbol module, string expected)

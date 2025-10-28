@@ -9,12 +9,18 @@ namespace System.Text.Json.Serialization.Converters
     /// <summary>
     /// Default base class implementation of <cref>JsonIEnumerableConverter{TCollection, TElement}</cref>.
     /// </summary>
-    internal abstract class IEnumerableDefaultConverter<TCollection, TElement> : JsonCollectionConverter<TCollection, TElement>
+    internal abstract class IEnumerableDefaultConverter<TCollection, TElement>
+        : JsonCollectionConverter<TCollection, TElement>
         where TCollection : IEnumerable<TElement>
     {
         internal override bool CanHaveMetadata => true;
 
-        protected override bool OnWriteResume(Utf8JsonWriter writer, TCollection value, JsonSerializerOptions options, ref WriteStack state)
+        protected override bool OnWriteResume(
+            Utf8JsonWriter writer,
+            TCollection value,
+            JsonSerializerOptions options,
+            ref WriteStack state
+        )
         {
             Debug.Assert(value is not null);
 

@@ -23,9 +23,7 @@ namespace System
 
     // To accommodate class libraries that wish to implement generic interfaces on arrays, all class libraries
     // are now required to provide an Array<T> class that derives from Array.
-    internal class Array<T> : Array
-    {
-    }
+    internal class Array<T> : Array { }
 
     [StructLayout(LayoutKind.Sequential)]
     internal class RawArrayData

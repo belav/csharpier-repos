@@ -15,12 +15,12 @@ internal static partial class HandleFactory
 
     public static Win32Handle CreateSyncFileHandleForWrite(string fileName)
     {
-        return CreateHandle(async:false, fileName:fileName);
+        return CreateHandle(async: false, fileName: fileName);
     }
 
     public static Win32Handle CreateAsyncFileHandleForWrite(string fileName)
     {
-        return CreateHandle(async:true, fileName:fileName);
+        return CreateHandle(async: true, fileName: fileName);
     }
 
     private static unsafe Win32Handle CreateHandle(bool async, string fileName)
@@ -32,7 +32,8 @@ internal static partial class HandleFactory
             IntPtr.Zero,
             DllImport.CreationDisposition.CreateAlways,
             async ? DllImport.FileAttributes.Overlapped : DllImport.FileAttributes.Normal,
-            IntPtr.Zero);
+            IntPtr.Zero
+        );
 
         if (!handle.IsInvalid)
         {
@@ -42,9 +43,9 @@ internal static partial class HandleFactory
         int errorCode = Marshal.GetLastPInvokeError();
         string filePath = Path.GetFullPath(fileName);
         string message =
-            $"CreateFile or CreateFile2 failed (error code {errorCode}): {new Win32Exception(errorCode).Message}{Environment.NewLine}" +
-            $"    File name: {fileName}{Environment.NewLine}" +
-            $"    File path: {filePath}{Environment.NewLine}";
+            $"CreateFile or CreateFile2 failed (error code {errorCode}): {new Win32Exception(errorCode).Message}{Environment.NewLine}"
+            + $"    File name: {fileName}{Environment.NewLine}"
+            + $"    File path: {filePath}{Environment.NewLine}";
         if (Directory.Exists(Path.GetDirectoryName(filePath)))
         {
             try

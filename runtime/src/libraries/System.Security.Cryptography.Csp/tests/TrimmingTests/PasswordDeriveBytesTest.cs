@@ -14,7 +14,9 @@ class Program
         string testPassword = "PasswordGoesHere";
         byte[] testSalt = new byte[] { 9, 5, 5, 5, 1, 2, 1, 2 };
 
-        byte[] expected = HexToByteArray("12F2497EC3EB78B0EA32AABFD8B9515FBC800BEEB6316A4DDF4EA62518341488A116DA3BBC26C685");
+        byte[] expected = HexToByteArray(
+            "12F2497EC3EB78B0EA32AABFD8B9515FBC800BEEB6316A4DDF4EA62518341488A116DA3BBC26C685"
+        );
 
         using (var deriveBytes = new PasswordDeriveBytes(testPassword, testSalt))
         {

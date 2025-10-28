@@ -14,10 +14,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -30,59 +30,57 @@
 #if !MOBILE
 
 using NUnit.Framework;
-
 using System;
 using System.IO;
 using System.Security;
 using System.Security.Permissions;
 using System.Security.Policy;
 using System.Xml;
-
 using MonoTests.System.Xml;
 
-namespace MonoCasTests.System.Xml {
+namespace MonoCasTests.System.Xml
+{
+    [TestFixture]
+    [Category("CAS")]
+    public class XmlSecureResolverCas
+    {
+        [SetUp]
+        public void SetUp()
+        {
+            if (!SecurityManager.SecurityEnabled)
+                Assert.Ignore("SecurityManager.SecurityEnabled is OFF");
+        }
 
-	[TestFixture]
-	[Category ("CAS")]
-	public class XmlSecureResolverCas {
+        [Test]
+        [ExpectedException(typeof(SecurityException))]
+        [Category("NotWorking")] // requires imperative stack modifiers to work
+        public void EmptyEvidenceDeniedAccess()
+        {
+            XmlSecureResolver r = new XmlSecureResolver(new XmlUrlResolver(), (Evidence)null);
+            Uri uri = r.ResolveUri(null, "http://www.example.com");
+            r.GetEntity(uri, null, typeof(Stream));
+        }
 
-		[SetUp]
-		public void SetUp ()
-		{
-			if (!SecurityManager.SecurityEnabled)
-				Assert.Ignore ("SecurityManager.SecurityEnabled is OFF");
-		}
+        [Test]
+        [PermissionSet(SecurityAction.Deny, Unrestricted = true)]
+        public void DenyUnrestricted_UnitTests()
+        {
+            XmlSecureResolverTests unittest = new XmlSecureResolverTests();
+            unittest.EmptyCtor();
+            unittest.EmptyEvidenceWontMatter();
+            unittest.CreateEvidenceForUrl_Basic();
+            unittest.CreateEvidenceForUrl_Http();
+        }
 
-		[Test]
-		[ExpectedException (typeof (SecurityException))]
-		[Category ("NotWorking")] // requires imperative stack modifiers to work
-		public void EmptyEvidenceDeniedAccess ()
-		{
-			XmlSecureResolver r = new XmlSecureResolver (new XmlUrlResolver (), (Evidence)null);
-			Uri uri = r.ResolveUri (null, "http://www.example.com");
-			r.GetEntity (uri, null, typeof (Stream));
-		}
-
-		[Test]
-		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-		public void DenyUnrestricted_UnitTests ()
-		{
-			XmlSecureResolverTests unittest = new XmlSecureResolverTests ();
-			unittest.EmptyCtor ();
-			unittest.EmptyEvidenceWontMatter ();
-			unittest.CreateEvidenceForUrl_Basic ();
-			unittest.CreateEvidenceForUrl_Http ();
-		}
-
-		[Test]
-		[FileIOPermission (SecurityAction.PermitOnly, Unrestricted = true)]
-		public void DenyUnrestricted_CreateEvidenceForUrl_Local ()
-		{
-			XmlSecureResolverTests unittest = new XmlSecureResolverTests ();
-			// requires path discovery to get assembly location
-			unittest.CreateEvidenceForUrl_Local ();
-		}
-	}
+        [Test]
+        [FileIOPermission(SecurityAction.PermitOnly, Unrestricted = true)]
+        public void DenyUnrestricted_CreateEvidenceForUrl_Local()
+        {
+            XmlSecureResolverTests unittest = new XmlSecureResolverTests();
+            // requires path discovery to get assembly location
+            unittest.CreateEvidenceForUrl_Local();
+        }
+    }
 }
 
 #endif

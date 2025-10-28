@@ -26,7 +26,8 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler.CodeActions;
 internal sealed class CodeActionFixAllResolveHandler(
     ICodeFixService codeFixService,
     ICodeRefactoringService codeRefactoringService,
-    IGlobalOptionService globalOptions) : ILspServiceDocumentRequestHandler<RoslynFixAllCodeAction, RoslynFixAllCodeAction>
+    IGlobalOptionService globalOptions
+) : ILspServiceDocumentRequestHandler<RoslynFixAllCodeAction, RoslynFixAllCodeAction>
 {
     private readonly ICodeFixService _codeFixService = codeFixService;
     private readonly ICodeRefactoringService _codeRefactoringService = codeRefactoringService;
@@ -36,33 +37,52 @@ internal sealed class CodeActionFixAllResolveHandler(
 
     public bool RequiresLSPSolution => true;
 
-    public TextDocumentIdentifier GetTextDocumentIdentifier(RoslynFixAllCodeAction request)
-        => ((JToken)request.Data!).ToObject<CodeActionResolveData>()!.TextDocument;
+    public TextDocumentIdentifier GetTextDocumentIdentifier(RoslynFixAllCodeAction request) =>
+        ((JToken)request.Data!).ToObject<CodeActionResolveData>()!.TextDocument;
 
-    public async Task<RoslynFixAllCodeAction> HandleRequestAsync(RoslynFixAllCodeAction request, RequestContext context, CancellationToken cancellationToken)
+    public async Task<RoslynFixAllCodeAction> HandleRequestAsync(
+        RoslynFixAllCodeAction request,
+        RequestContext context,
+        CancellationToken cancellationToken
+    )
     {
         var document = context.GetRequiredDocument();
         var data = ((JToken)request.Data!).ToObject<CodeActionResolveData>();
         Assumes.Present(data);
 
         var options = _globalOptions.GetCodeActionOptionsProvider();
-        var codeActions = await CodeActionHelpers.GetCodeActionsAsync(
-            document,
-            data.Range,
-            options,
-            _codeFixService,
-            _codeRefactoringService,
-            request.Scope,
-            cancellationToken).ConfigureAwait(false);
+        var codeActions = await CodeActionHelpers
+            .GetCodeActionsAsync(
+                document,
+                data.Range,
+                options,
+                _codeFixService,
+                _codeRefactoringService,
+                request.Scope,
+                cancellationToken
+            )
+            .ConfigureAwait(false);
 
         Contract.ThrowIfNull(data.CodeActionPath);
-        var codeActionToResolve = CodeActionHelpers.GetCodeActionToResolve(data.CodeActionPath, codeActions, isFixAllAction: true);
+        var codeActionToResolve = CodeActionHelpers.GetCodeActionToResolve(
+            data.CodeActionPath,
+            codeActions,
+            isFixAllAction: true
+        );
 
         var fixAllCodeAction = (FixAllCodeAction)codeActionToResolve;
         Contract.ThrowIfNull(fixAllCodeAction);
 
-        var operations = await fixAllCodeAction.GetOperationsAsync(document.Project.Solution, CodeAnalysisProgress.None, cancellationToken).ConfigureAwait(false);
-        var edit = await CodeActionResolveHelper.GetCodeActionResolveEditsAsync(context, data, operations, cancellationToken).ConfigureAwait(false);
+        var operations = await fixAllCodeAction
+            .GetOperationsAsync(
+                document.Project.Solution,
+                CodeAnalysisProgress.None,
+                cancellationToken
+            )
+            .ConfigureAwait(false);
+        var edit = await CodeActionResolveHelper
+            .GetCodeActionResolveEditsAsync(context, data, operations, cancellationToken)
+            .ConfigureAwait(false);
 
         request.Edit = edit;
         return request;

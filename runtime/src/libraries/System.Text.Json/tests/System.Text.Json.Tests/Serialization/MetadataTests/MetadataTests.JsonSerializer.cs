@@ -16,12 +16,27 @@ namespace System.Text.Json.Serialization.Tests
         public async Task RoundTripSerializerOverloads()
         {
             WeatherForecastWithPOCOs expected = CreateWeatherForecastWithPOCOs();
-            string json = await Serializer.SerializeWrapper(expected, JsonContext.Default.WeatherForecastWithPOCOs);
-            WeatherForecastWithPOCOs actual = await Serializer.DeserializeWrapper(json, JsonContext.Default.WeatherForecastWithPOCOs);
+            string json = await Serializer.SerializeWrapper(
+                expected,
+                JsonContext.Default.WeatherForecastWithPOCOs
+            );
+            WeatherForecastWithPOCOs actual = await Serializer.DeserializeWrapper(
+                json,
+                JsonContext.Default.WeatherForecastWithPOCOs
+            );
             VerifyWeatherForecastWithPOCOs(expected, actual);
 
-            json = await Serializer.SerializeWrapper(actual, typeof(WeatherForecastWithPOCOs), JsonContext.Default);
-            actual = (WeatherForecastWithPOCOs)await Serializer.DeserializeWrapper(json, typeof(WeatherForecastWithPOCOs), JsonContext.Default);
+            json = await Serializer.SerializeWrapper(
+                actual,
+                typeof(WeatherForecastWithPOCOs),
+                JsonContext.Default
+            );
+            actual = (WeatherForecastWithPOCOs)
+                await Serializer.DeserializeWrapper(
+                    json,
+                    typeof(WeatherForecastWithPOCOs),
+                    JsonContext.Default
+                );
             VerifyWeatherForecastWithPOCOs(expected, actual);
         }
 
@@ -32,7 +47,9 @@ namespace System.Text.Json.Serialization.Tests
 
             WeatherForecastWithPOCOs expected = CreateWeatherForecastWithPOCOs();
             string json = await Serializer.SerializeWrapper(expected, untypedMetadata);
-            WeatherForecastWithPOCOs actual = Assert.IsType<WeatherForecastWithPOCOs>(await Serializer.DeserializeWrapper(json, untypedMetadata));
+            WeatherForecastWithPOCOs actual = Assert.IsType<WeatherForecastWithPOCOs>(
+                await Serializer.DeserializeWrapper(json, untypedMetadata)
+            );
             VerifyWeatherForecastWithPOCOs(expected, actual);
         }
 
@@ -41,8 +58,14 @@ namespace System.Text.Json.Serialization.Tests
         {
             JsonTypeInfo nullMetadata = null!;
             WeatherForecastWithPOCOs expected = CreateWeatherForecastWithPOCOs();
-            await AssertExtensions.ThrowsAsync<ArgumentNullException>("jsonTypeInfo", () => Serializer.SerializeWrapper(expected, nullMetadata));
-            await AssertExtensions.ThrowsAsync<ArgumentNullException>("jsonTypeInfo", () => Serializer.DeserializeWrapper("{}", nullMetadata));
+            await AssertExtensions.ThrowsAsync<ArgumentNullException>(
+                "jsonTypeInfo",
+                () => Serializer.SerializeWrapper(expected, nullMetadata)
+            );
+            await AssertExtensions.ThrowsAsync<ArgumentNullException>(
+                "jsonTypeInfo",
+                () => Serializer.DeserializeWrapper("{}", nullMetadata)
+            );
         }
 
         private static WeatherForecastWithPOCOs CreateWeatherForecastWithPOCOs()
@@ -57,29 +80,25 @@ namespace System.Text.Json.Serialization.Tests
                     DateTimeOffset.Parse("2019-08-01T00:00:00-07:00"),
                     DateTimeOffset.Parse("2019-08-02T00:00:00-07:00"),
                 },
-                TemperatureRanges = new Dictionary<string, HighLowTemps> {
+                TemperatureRanges = new Dictionary<string, HighLowTemps>
+                {
                     {
                         "Cold",
-                        new HighLowTemps
-                        {
-                            High = 20,
-                            Low = -10,
-                        }
+                        new HighLowTemps { High = 20, Low = -10 }
                     },
                     {
                         "Hot",
-                        new HighLowTemps
-                        {
-                            High = 60,
-                            Low = 20,
-                        }
+                        new HighLowTemps { High = 60, Low = 20 }
                     },
                 },
                 SummaryWords = new string[] { "Cool", "Windy", "Humid" },
             };
         }
 
-        private static void VerifyWeatherForecastWithPOCOs(WeatherForecastWithPOCOs expected, WeatherForecastWithPOCOs obj)
+        private static void VerifyWeatherForecastWithPOCOs(
+            WeatherForecastWithPOCOs expected,
+            WeatherForecastWithPOCOs obj
+        )
         {
             Assert.Equal(expected.Date, obj.Date);
             Assert.Equal(expected.TemperatureCelsius, obj.TemperatureCelsius);
@@ -89,14 +108,24 @@ namespace System.Text.Json.Serialization.Tests
             {
                 Assert.Equal(expected.DatesAvailable[i], obj.DatesAvailable[i]);
             }
-            List<KeyValuePair<string, HighLowTemps>> expectedTemperatureRanges = expected.TemperatureRanges.OrderBy(kv => kv.Key).ToList();
-            List<KeyValuePair<string, HighLowTemps>> objTemperatureRanges = obj.TemperatureRanges.OrderBy(kv => kv.Key).ToList();
+            List<KeyValuePair<string, HighLowTemps>> expectedTemperatureRanges = expected
+                .TemperatureRanges.OrderBy(kv => kv.Key)
+                .ToList();
+            List<KeyValuePair<string, HighLowTemps>> objTemperatureRanges = obj
+                .TemperatureRanges.OrderBy(kv => kv.Key)
+                .ToList();
             Assert.Equal(expectedTemperatureRanges.Count, objTemperatureRanges.Count);
             for (int i = 0; i < expectedTemperatureRanges.Count; i++)
             {
                 Assert.Equal(expectedTemperatureRanges[i].Key, objTemperatureRanges[i].Key);
-                Assert.Equal(expectedTemperatureRanges[i].Value.Low, objTemperatureRanges[i].Value.Low);
-                Assert.Equal(expectedTemperatureRanges[i].Value.High, objTemperatureRanges[i].Value.High);
+                Assert.Equal(
+                    expectedTemperatureRanges[i].Value.Low,
+                    objTemperatureRanges[i].Value.Low
+                );
+                Assert.Equal(
+                    expectedTemperatureRanges[i].Value.High,
+                    objTemperatureRanges[i].Value.High
+                );
             }
             Assert.Equal(expected.SummaryWords.Length, obj.SummaryWords.Length);
             for (int i = 0; i < expected.SummaryWords.Length; i++)

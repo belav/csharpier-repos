@@ -16,38 +16,54 @@ using Xunit.Abstractions;
 
 namespace Microsoft.CodeAnalysis.LanguageServer.UnitTests;
 
-public class LocaleTests(ITestOutputHelper? testOutputHelper) : AbstractLanguageServerProtocolTests(testOutputHelper)
+public class LocaleTests(ITestOutputHelper? testOutputHelper)
+    : AbstractLanguageServerProtocolTests(testOutputHelper)
 {
-    protected override TestComposition Composition => base.Composition
-            .AddParts(typeof(LocaleTestHandler));
+    protected override TestComposition Composition =>
+        base.Composition.AddParts(typeof(LocaleTestHandler));
 
     [Theory, CombinatorialData]
     public async Task TestUsesLspLocale(bool mutatingLspWorkspace)
     {
-        await using var testLspServer = await CreateTestLspServerAsync(string.Empty, mutatingLspWorkspace, new InitializationOptions
-        {
-            Locale = "ja"
-        });
+        await using var testLspServer = await CreateTestLspServerAsync(
+            string.Empty,
+            mutatingLspWorkspace,
+            new InitializationOptions { Locale = "ja" }
+        );
 
-        var result = await testLspServer.ExecuteRequestAsync<Request, Response>(LocaleTestHandler.MethodName, new Request(), CancellationToken.None);
+        var result = await testLspServer.ExecuteRequestAsync<Request, Response>(
+            LocaleTestHandler.MethodName,
+            new Request(),
+            CancellationToken.None
+        );
         Assert.Equal("ja-JP", result!.HandlerCulture);
     }
 
     [Theory, CombinatorialData]
     public async Task TestUsesLspLocalePerServer(bool mutatingLspWorkspace)
     {
-        await using var testLspServerOne = await CreateTestLspServerAsync(string.Empty, mutatingLspWorkspace, new InitializationOptions
-        {
-            Locale = "ja"
-        });
+        await using var testLspServerOne = await CreateTestLspServerAsync(
+            string.Empty,
+            mutatingLspWorkspace,
+            new InitializationOptions { Locale = "ja" }
+        );
 
-        await using var testLspServerTwo = await CreateTestLspServerAsync(string.Empty, mutatingLspWorkspace, new InitializationOptions
-        {
-            Locale = "zh"
-        });
+        await using var testLspServerTwo = await CreateTestLspServerAsync(
+            string.Empty,
+            mutatingLspWorkspace,
+            new InitializationOptions { Locale = "zh" }
+        );
 
-        var resultOne = await testLspServerOne.ExecuteRequestAsync<Request, Response>(LocaleTestHandler.MethodName, new Request(), CancellationToken.None);
-        var resultTwo = await testLspServerTwo.ExecuteRequestAsync<Request, Response>(LocaleTestHandler.MethodName, new Request(), CancellationToken.None);
+        var resultOne = await testLspServerOne.ExecuteRequestAsync<Request, Response>(
+            LocaleTestHandler.MethodName,
+            new Request(),
+            CancellationToken.None
+        );
+        var resultTwo = await testLspServerTwo.ExecuteRequestAsync<Request, Response>(
+            LocaleTestHandler.MethodName,
+            new Request(),
+            CancellationToken.None
+        );
         Assert.Equal("ja-JP", resultOne!.HandlerCulture);
         Assert.Equal("zh-CN", resultTwo!.HandlerCulture);
     }
@@ -56,12 +72,17 @@ public class LocaleTests(ITestOutputHelper? testOutputHelper) : AbstractLanguage
     public async Task TestUsesDefaultLocaleIfNotProvided(bool mutatingLspWorkspace)
     {
         var currentCulture = CultureInfo.CurrentUICulture.Name;
-        await using var testLspServer = await CreateTestLspServerAsync(string.Empty, mutatingLspWorkspace, new InitializationOptions
-        {
-            Locale = null
-        });
+        await using var testLspServer = await CreateTestLspServerAsync(
+            string.Empty,
+            mutatingLspWorkspace,
+            new InitializationOptions { Locale = null }
+        );
 
-        var result = await testLspServer.ExecuteRequestAsync<Request, Response>(LocaleTestHandler.MethodName, new Request(), CancellationToken.None);
+        var result = await testLspServer.ExecuteRequestAsync<Request, Response>(
+            LocaleTestHandler.MethodName,
+            new Request(),
+            CancellationToken.None
+        );
         Assert.Equal(currentCulture, result!.HandlerCulture);
     }
 
@@ -69,16 +90,25 @@ public class LocaleTests(ITestOutputHelper? testOutputHelper) : AbstractLanguage
     public async Task TestUsesDefaultLocaleIfInvalidLocaleProvided(bool mutatingLspWorkspace)
     {
         var currentCulture = CultureInfo.CurrentUICulture.Name;
-        await using var testLspServer = await CreateTestLspServerAsync(string.Empty, mutatingLspWorkspace, new InitializationOptions
-        {
-            Locale = "this is invalid"
-        });
+        await using var testLspServer = await CreateTestLspServerAsync(
+            string.Empty,
+            mutatingLspWorkspace,
+            new InitializationOptions { Locale = "this is invalid" }
+        );
 
-        var result = await testLspServer.ExecuteRequestAsync<Request, Response>(LocaleTestHandler.MethodName, new Request(), CancellationToken.None);
+        var result = await testLspServer.ExecuteRequestAsync<Request, Response>(
+            LocaleTestHandler.MethodName,
+            new Request(),
+            CancellationToken.None
+        );
         Assert.Equal(currentCulture, result!.HandlerCulture);
     }
 
-    [ExportCSharpVisualBasicStatelessLspService(typeof(LocaleTestHandler)), PartNotDiscoverable, Shared]
+    [
+        ExportCSharpVisualBasicStatelessLspService(typeof(LocaleTestHandler)),
+        PartNotDiscoverable,
+        Shared
+    ]
     [Method(MethodName)]
     internal class LocaleTestHandler : ILspServiceRequestHandler<Request, Response>
     {
@@ -86,14 +116,16 @@ public class LocaleTests(ITestOutputHelper? testOutputHelper) : AbstractLanguage
 
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public LocaleTestHandler()
-        {
-        }
+        public LocaleTestHandler() { }
 
         public bool MutatesSolutionState => true;
         public bool RequiresLSPSolution => true;
 
-        public Task<Response> HandleRequestAsync(Request request, RequestContext context, CancellationToken cancellationToken)
+        public Task<Response> HandleRequestAsync(
+            Request request,
+            RequestContext context,
+            CancellationToken cancellationToken
+        )
         {
             return Task.FromResult(new Response(CultureInfo.CurrentUICulture.Name));
         }

@@ -12,7 +12,12 @@ namespace System.Reflection.Emit.Tests
         {
             ModuleBuilder module = Helpers.DynamicModule();
             TypeBuilder type = module.DefineType("C1", TypeAttributes.Public);
-            MethodBuilder method1 = type.DefineMethod("meth1", MethodAttributes.Public, typeof(int), new Type[0]);
+            MethodBuilder method1 = type.DefineMethod(
+                "meth1",
+                MethodAttributes.Public,
+                typeof(int),
+                new Type[0]
+            );
 
             int expectedRet = 1;
 
@@ -26,7 +31,12 @@ namespace System.Reflection.Emit.Tests
             MethodInfo createdMethod1 = createdType1.GetMethod("meth1");
 
             TypeBuilder type2 = module.DefineType("C2", TypeAttributes.Public);
-            MethodBuilder method2 = type2.DefineMethod("meth2", MethodAttributes.Public | MethodAttributes.Static, typeof(int), new Type[0]);
+            MethodBuilder method2 = type2.DefineMethod(
+                "meth2",
+                MethodAttributes.Public | MethodAttributes.Static,
+                typeof(int),
+                new Type[0]
+            );
 
             // Generate code for the method which will be invoking the first method
             ILGenerator ilgen2 = method2.GetILGenerator();
@@ -47,7 +57,12 @@ namespace System.Reflection.Emit.Tests
         {
             ModuleBuilder module = Helpers.DynamicModule();
             TypeBuilder type1 = module.DefineType("C1", TypeAttributes.Public);
-            MethodBuilder method1 = type1.DefineMethod("meth1", MethodAttributes.Public, typeof(int), new Type[0]);
+            MethodBuilder method1 = type1.DefineMethod(
+                "meth1",
+                MethodAttributes.Public,
+                typeof(int),
+                new Type[0]
+            );
             int expectedRet = 12;
 
             // Generate code for the method that we are going to use as MethodInfo in ILGenerator.Emit()
@@ -60,7 +75,12 @@ namespace System.Reflection.Emit.Tests
             MethodInfo createdMethod1 = createdType1.GetMethod("meth1");
 
             TypeBuilder type2 = module.DefineType("C2", TypeAttributes.Public);
-            MethodBuilder method2 = type2.DefineMethod("meth2", MethodAttributes.Public, typeof(int), new Type[0]);
+            MethodBuilder method2 = type2.DefineMethod(
+                "meth2",
+                MethodAttributes.Public,
+                typeof(int),
+                new Type[0]
+            );
 
             // Generate code for the method which will be invoking the first method
             ILGenerator ilGenerator2 = method2.GetILGenerator();
@@ -73,7 +93,10 @@ namespace System.Reflection.Emit.Tests
             MethodInfo createdMethod2 = createdType2.GetMethod("meth2");
 
             // meth2 should invoke meth1 which should return value 'methodRet'
-            Assert.Equal(expectedRet, createdMethod2.Invoke(Activator.CreateInstance(createdType2), null));
+            Assert.Equal(
+                expectedRet,
+                createdMethod2.Invoke(Activator.CreateInstance(createdType2), null)
+            );
         }
 
         [Fact]
@@ -82,7 +105,12 @@ namespace System.Reflection.Emit.Tests
             ModuleBuilder modbuild = Helpers.DynamicModule();
 
             TypeBuilder type1 = modbuild.DefineType("C1", TypeAttributes.Public);
-            MethodBuilder method1 = type1.DefineMethod("meth1", MethodAttributes.Public, typeof(int), new Type[0]);
+            MethodBuilder method1 = type1.DefineMethod(
+                "meth1",
+                MethodAttributes.Public,
+                typeof(int),
+                new Type[0]
+            );
             method1.DefineGenericParameters("T");
 
             int expectedRet = 101;
@@ -98,7 +126,12 @@ namespace System.Reflection.Emit.Tests
             MethodInfo genericMethod = createdMethod1.MakeGenericMethod(typeof(int));
 
             TypeBuilder type2 = modbuild.DefineType("C2", TypeAttributes.Public);
-            MethodBuilder method2 = type2.DefineMethod("meth2", MethodAttributes.Public | MethodAttributes.Static, typeof(int), new Type[0]);
+            MethodBuilder method2 = type2.DefineMethod(
+                "meth2",
+                MethodAttributes.Public | MethodAttributes.Static,
+                typeof(int),
+                new Type[0]
+            );
 
             // Generate code for the method which will be invoking the first method
             ILGenerator ilGenerator2 = method2.GetILGenerator();
@@ -122,7 +155,12 @@ namespace System.Reflection.Emit.Tests
             TypeBuilder type1 = module.DefineType("C1", TypeAttributes.Public);
             type1.DefineGenericParameters(new string[] { "T" });
 
-            MethodBuilder method1 = type1.DefineMethod("meth1", MethodAttributes.Public, typeof(long), new Type[0]);
+            MethodBuilder method1 = type1.DefineMethod(
+                "meth1",
+                MethodAttributes.Public,
+                typeof(long),
+                new Type[0]
+            );
 
             long expectedRet = 500000;
             // Generate code for the method that we are going to use as MethodInfo in ILGenerator.Emit()
@@ -136,7 +174,12 @@ namespace System.Reflection.Emit.Tests
             MethodInfo genericMethod = genericType.GetMethod("meth1");
 
             TypeBuilder type2 = module.DefineType("C2", TypeAttributes.Public);
-            MethodBuilder method2 = type2.DefineMethod("meth2", MethodAttributes.Public | MethodAttributes.Static, typeof(long), new Type[0]);
+            MethodBuilder method2 = type2.DefineMethod(
+                "meth2",
+                MethodAttributes.Public | MethodAttributes.Static,
+                typeof(long),
+                new Type[0]
+            );
 
             // Generate code for the method which will be invoking the first method
             ILGenerator ilGenerator2 = method2.GetILGenerator();
@@ -160,7 +203,12 @@ namespace System.Reflection.Emit.Tests
             TypeBuilder type1 = module.DefineType("C1", TypeAttributes.Public);
             type1.DefineGenericParameters("T");
 
-            MethodBuilder method1 = type1.DefineMethod("meth1", MethodAttributes.Public, typeof(int), new Type[0]);
+            MethodBuilder method1 = type1.DefineMethod(
+                "meth1",
+                MethodAttributes.Public,
+                typeof(int),
+                new Type[0]
+            );
             method1.DefineGenericParameters("U");
 
             int expectedRet = 1;
@@ -176,7 +224,12 @@ namespace System.Reflection.Emit.Tests
             MethodInfo genericMethod = createdMethod1.MakeGenericMethod(typeof(string));
 
             TypeBuilder type2 = module.DefineType("C2", TypeAttributes.Public);
-            MethodBuilder method2 = type2.DefineMethod("meth2", MethodAttributes.Public | MethodAttributes.Static, typeof(int), new Type[0]);
+            MethodBuilder method2 = type2.DefineMethod(
+                "meth2",
+                MethodAttributes.Public | MethodAttributes.Static,
+                typeof(int),
+                new Type[0]
+            );
 
             // Generate code for the method which will be invoking the first method
             ILGenerator ilGenerator2 = method2.GetILGenerator();
@@ -196,10 +249,18 @@ namespace System.Reflection.Emit.Tests
         public void Emit_OpCodes_MethodInfo_NullMethod_ThrowsArgumentNullException()
         {
             ModuleBuilder module = Helpers.DynamicModule();
-            MethodBuilder method = module.DefineGlobalMethod("Method", MethodAttributes.Public | MethodAttributes.Static, typeof(Type), new Type[0]);
+            MethodBuilder method = module.DefineGlobalMethod(
+                "Method",
+                MethodAttributes.Public | MethodAttributes.Static,
+                typeof(Type),
+                new Type[0]
+            );
 
             ILGenerator ilGenerator = method.GetILGenerator();
-            AssertExtensions.Throws<ArgumentNullException>("meth", () => ilGenerator.Emit(OpCodes.Call, (MethodInfo)null));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "meth",
+                () => ilGenerator.Emit(OpCodes.Call, (MethodInfo)null)
+            );
         }
     }
 }

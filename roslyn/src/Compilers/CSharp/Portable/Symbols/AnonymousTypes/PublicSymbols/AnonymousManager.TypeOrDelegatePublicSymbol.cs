@@ -20,7 +20,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             /// <summary> Anonymous type descriptor </summary>
             internal readonly AnonymousTypeDescriptor TypeDescriptor;
 
-            internal AnonymousTypeOrDelegatePublicSymbol(AnonymousTypeManager manager, AnonymousTypeDescriptor typeDescr)
+            internal AnonymousTypeOrDelegatePublicSymbol(
+                AnonymousTypeManager manager,
+                AnonymousTypeDescriptor typeDescr
+            )
             {
                 typeDescr.AssertIsGood();
 
@@ -30,10 +33,12 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
             internal abstract NamedTypeSymbol MapToImplementationSymbol();
 
-            internal abstract AnonymousTypeOrDelegatePublicSymbol SubstituteTypes(AbstractTypeMap typeMap);
+            internal abstract AnonymousTypeOrDelegatePublicSymbol SubstituteTypes(
+                AbstractTypeMap typeMap
+            );
 
-            protected override NamedTypeSymbol WithTupleDataCore(TupleExtraData newData)
-                => throw ExceptionUtilities.Unreachable();
+            protected override NamedTypeSymbol WithTupleDataCore(TupleExtraData newData) =>
+                throw ExceptionUtilities.Unreachable();
 
             internal sealed override IEnumerable<FieldSymbol> GetFieldsToEmit()
             {
@@ -49,7 +54,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 return this.GetMembersUnordered();
             }
 
-            internal sealed override ImmutableArray<Symbol> GetEarlyAttributeDecodingMembers(string name)
+            internal sealed override ImmutableArray<Symbol> GetEarlyAttributeDecodingMembers(
+                string name
+            )
             {
                 return this.GetMembers(name);
             }
@@ -82,10 +89,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 get { return 0; }
             }
 
-            public abstract override bool IsImplicitlyDeclared
-            {
-                get;
-            }
+            public abstract override bool IsImplicitlyDeclared { get; }
 
             public sealed override ImmutableArray<TypeParameterSymbol> TypeParameters
             {
@@ -134,12 +138,17 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 return ImmutableArray<NamedTypeSymbol>.Empty;
             }
 
-            public sealed override ImmutableArray<NamedTypeSymbol> GetTypeMembers(ReadOnlyMemory<char> name)
+            public sealed override ImmutableArray<NamedTypeSymbol> GetTypeMembers(
+                ReadOnlyMemory<char> name
+            )
             {
                 return ImmutableArray<NamedTypeSymbol>.Empty;
             }
 
-            public sealed override ImmutableArray<NamedTypeSymbol> GetTypeMembers(ReadOnlyMemory<char> name, int arity)
+            public sealed override ImmutableArray<NamedTypeSymbol> GetTypeMembers(
+                ReadOnlyMemory<char> name,
+                int arity
+            )
             {
                 return ImmutableArray<NamedTypeSymbol>.Empty;
             }
@@ -149,7 +158,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 get { return Accessibility.Internal; }
             }
 
-            internal sealed override ImmutableArray<NamedTypeSymbol> InterfacesNoUseSiteDiagnostics(ConsList<TypeSymbol> basesBeingResolved)
+            internal sealed override ImmutableArray<NamedTypeSymbol> InterfacesNoUseSiteDiagnostics(
+                ConsList<TypeSymbol> basesBeingResolved
+            )
             {
                 return ImmutableArray<NamedTypeSymbol>.Empty;
             }
@@ -173,10 +184,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 get { return ImmutableArray.Create<Location>(this.TypeDescriptor.Location); }
             }
 
-            public abstract override ImmutableArray<SyntaxReference> DeclaringSyntaxReferences
-            {
-                get;
-            }
+            public abstract override ImmutableArray<SyntaxReference> DeclaringSyntaxReferences { get; }
 
             public sealed override bool IsStatic
             {
@@ -253,17 +261,22 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 return AttributeUsageInfo.Null;
             }
 
-            internal sealed override NamedTypeSymbol GetDeclaredBaseType(ConsList<TypeSymbol> basesBeingResolved)
+            internal sealed override NamedTypeSymbol GetDeclaredBaseType(
+                ConsList<TypeSymbol> basesBeingResolved
+            )
             {
                 return BaseTypeNoUseSiteDiagnostics;
             }
 
-            internal sealed override ImmutableArray<NamedTypeSymbol> GetDeclaredInterfaces(ConsList<TypeSymbol> basesBeingResolved)
+            internal sealed override ImmutableArray<NamedTypeSymbol> GetDeclaredInterfaces(
+                ConsList<TypeSymbol> basesBeingResolved
+            )
             {
                 return ImmutableArray<NamedTypeSymbol>.Empty;
             }
 
-            internal sealed override NamedTypeSymbol AsNativeInteger() => throw ExceptionUtilities.Unreachable();
+            internal sealed override NamedTypeSymbol AsNativeInteger() =>
+                throw ExceptionUtilities.Unreachable();
 
             internal sealed override NamedTypeSymbol? NativeIntegerUnderlyingType => null;
 
@@ -276,9 +289,15 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
             internal sealed override bool HasPossibleWellKnownCloneMethod() => false;
 
-            internal sealed override IEnumerable<(MethodSymbol Body, MethodSymbol Implemented)> SynthesizedInterfaceMethodImpls()
+            internal sealed override IEnumerable<(
+                MethodSymbol Body,
+                MethodSymbol Implemented
+            )> SynthesizedInterfaceMethodImpls()
             {
-                return SpecializedCollections.EmptyEnumerable<(MethodSymbol Body, MethodSymbol Implemented)>();
+                return SpecializedCollections.EmptyEnumerable<(
+                    MethodSymbol Body,
+                    MethodSymbol Implemented
+                )>();
             }
 
             internal override bool GetGuidString(out string? guidString)
@@ -293,14 +312,19 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 return false;
             }
 
-            internal sealed override bool HasCollectionBuilderAttribute(out TypeSymbol? builderType, out string? methodName)
+            internal sealed override bool HasCollectionBuilderAttribute(
+                out TypeSymbol? builderType,
+                out string? methodName
+            )
             {
                 builderType = null;
                 methodName = null;
                 return false;
             }
 
-            internal sealed override bool HasAsyncMethodBuilderAttribute(out TypeSymbol? builderArgument)
+            internal sealed override bool HasAsyncMethodBuilderAttribute(
+                out TypeSymbol? builderArgument
+            )
             {
                 builderArgument = null;
                 return false;

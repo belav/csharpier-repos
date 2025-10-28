@@ -23,14 +23,30 @@ namespace System.CodeDom.Tests
         public static IEnumerable<object[]> Ctor_TestData()
         {
             yield return new object[] { null, null, null, new CodeStatement[0] };
-            yield return new object[] { new CodeCommentStatement("1"), new CodePrimitiveExpression("2"), new CodeCommentStatement("3"), new CodeStatement[] { new CodeCommentStatement("4") } };
+            yield return new object[]
+            {
+                new CodeCommentStatement("1"),
+                new CodePrimitiveExpression("2"),
+                new CodeCommentStatement("3"),
+                new CodeStatement[] { new CodeCommentStatement("4") },
+            };
         }
 
         [Theory]
         [MemberData(nameof(Ctor_TestData))]
-        public void Ctor(CodeStatement initStatement, CodeExpression testExpression, CodeStatement incrementStatement, CodeStatement[] statements)
+        public void Ctor(
+            CodeStatement initStatement,
+            CodeExpression testExpression,
+            CodeStatement incrementStatement,
+            CodeStatement[] statements
+        )
         {
-            var iteration = new CodeIterationStatement(initStatement, testExpression, incrementStatement, statements);
+            var iteration = new CodeIterationStatement(
+                initStatement,
+                testExpression,
+                incrementStatement,
+                statements
+            );
             Assert.Equal(initStatement, iteration.InitStatement);
             Assert.Equal(testExpression, iteration.TestExpression);
             Assert.Equal(incrementStatement, iteration.IncrementStatement);
@@ -40,14 +56,20 @@ namespace System.CodeDom.Tests
         [Fact]
         public void Ctor_NullStatements_ThrowsArgumentNullException()
         {
-            AssertExtensions.Throws<ArgumentNullException>("value", () => new CodeIterationStatement(null, null, null, null));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "value",
+                () => new CodeIterationStatement(null, null, null, null)
+            );
         }
 
         [Fact]
         public void Ctor_NullObjectInStatements_ThrowsArgumentNullException()
         {
             CodeStatement[] statements = new CodeStatement[] { null };
-            AssertExtensions.Throws<ArgumentNullException>("value", () => new CodeIterationStatement(null, null, null, statements));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "value",
+                () => new CodeIterationStatement(null, null, null, statements)
+            );
         }
 
         [Theory]
@@ -84,11 +106,17 @@ namespace System.CodeDom.Tests
 
             CodeStatement statement1 = new CodeCommentStatement("Value1");
             iteration.Statements.Add(statement1);
-            Assert.Equal(new CodeStatement[] { statement1 }, iteration.Statements.Cast<CodeStatement>());
+            Assert.Equal(
+                new CodeStatement[] { statement1 },
+                iteration.Statements.Cast<CodeStatement>()
+            );
 
             CodeStatement statement2 = new CodeCommentStatement("Value2");
             iteration.Statements.Add(statement2);
-            Assert.Equal(new CodeStatement[] { statement1, statement2 }, iteration.Statements.Cast<CodeStatement>());
+            Assert.Equal(
+                new CodeStatement[] { statement1, statement2 },
+                iteration.Statements.Cast<CodeStatement>()
+            );
         }
     }
 }

@@ -9,8 +9,8 @@ namespace System.Net.Configuration
     using System;
     using System.Configuration;
     using System.Net.Cache;
-    using System.Xml;
     using System.Security.Permissions;
+    using System.Xml;
 
     public sealed class FtpCachePolicyElement : ConfigurationElement
     {
@@ -21,19 +21,18 @@ namespace System.Net.Configuration
 
         protected override ConfigurationPropertyCollection Properties
         {
-            get
-            {
-                return this.properties;
-            }
+            get { return this.properties; }
         }
 
-        [ConfigurationProperty(ConfigurationStrings.PolicyLevel, DefaultValue = RequestCacheLevel.Default)]
+        [ConfigurationProperty(
+            ConfigurationStrings.PolicyLevel,
+            DefaultValue = RequestCacheLevel.Default
+        )]
         public RequestCacheLevel PolicyLevel
         {
             get { return (RequestCacheLevel)this[this.policyLevel]; }
             set { this[this.policyLevel] = value; }
         }
-
 
         protected override void DeserializeElement(XmlReader reader, bool serializeCollectionKey)
         {
@@ -59,10 +58,11 @@ namespace System.Net.Configuration
         bool wasReadFromConfig = false;
         ConfigurationPropertyCollection properties = new ConfigurationPropertyCollection();
 
-        readonly ConfigurationProperty policyLevel =
-            new ConfigurationProperty(ConfigurationStrings.PolicyLevel, typeof(RequestCacheLevel), RequestCacheLevel.Default, ConfigurationPropertyOptions.None);
-
+        readonly ConfigurationProperty policyLevel = new ConfigurationProperty(
+            ConfigurationStrings.PolicyLevel,
+            typeof(RequestCacheLevel),
+            RequestCacheLevel.Default,
+            ConfigurationPropertyOptions.None
+        );
     }
-
 }
-

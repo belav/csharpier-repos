@@ -15,10 +15,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -30,88 +30,102 @@
 
 using System;
 using System.IO;
-
 using Mono.Security.Authenticode;
 using Mono.Security.X509;
 using Mono.Security.X509.Stores;
 
-namespace Mono.Security.X509.Stores {
+namespace Mono.Security.X509.Stores
+{
+    public class FileCertificateStore : ICertificateStore
+    {
+        private string _name;
+        private string _location;
+        private bool _readOnly;
+        private bool _createIfRequired;
+        private bool _includeArchives;
+        private bool _saveOnClose;
+        private SoftwarePublisherCertificate _spc;
 
-	public class FileCertificateStore : ICertificateStore {
+        public FileCertificateStore()
+        {
+            _readOnly = true;
+            _includeArchives = false;
+            _createIfRequired = true;
+        }
 
-		private string _name;
-		private string _location;
-		private bool _readOnly;
-		private bool _createIfRequired;
-		private bool _includeArchives;
-		private bool _saveOnClose;
-		private SoftwarePublisherCertificate _spc;
+        // properties
 
-		public FileCertificateStore ()
-		{
-			_readOnly = true;
-			_includeArchives = false;
-			_createIfRequired = true;
-		}
+        public X509CertificateCollection Certificates
+        {
+            get
+            {
+                if (_spc != null)
+                    return _spc.Certificates;
+                return null;
+            }
+        }
 
-		// properties
+        public IntPtr Handle
+        {
+            get { return (IntPtr)0; }
+        }
 
-		public X509CertificateCollection Certificates {
-			get { 
-				if (_spc != null)
-					return _spc.Certificates; 
-				return null;
-			}
-		}
-                
-		public IntPtr Handle {
-			get { return (IntPtr) 0; }
-		}
+        // methods
 
-		// methods
+        public void Open(
+            string name,
+            string location,
+            bool readOnly,
+            bool createIfNonExisting,
+            bool includeArchives
+        )
+        {
+            _name = name;
+            _location = _location;
+            _readOnly = readOnly;
+            _createIfRequired = createIfNonExisting;
+            _includeArchives = includeArchives;
+            _saveOnClose = false;
 
-		public void Open (string name, string location, bool readOnly, bool createIfNonExisting, bool includeArchives) 
-		{
-			_name = name;
-			_location = _location;
-			_readOnly = readOnly;
-			_createIfRequired = createIfNonExisting;
-			_includeArchives = includeArchives;
-			_saveOnClose = false;
+            if (File.Exists(_name))
+            {
+                _spc = SoftwarePublisherCertificate.CreateFromFile(_name);
+            }
+            else if (_createIfRequired)
+            {
+                _spc = new SoftwarePublisherCertificate();
+                _saveOnClose = true;
+            }
+        }
 
-			if (File.Exists (_name)) {
-				_spc = SoftwarePublisherCertificate.CreateFromFile (_name);
-			}
-			else if (_createIfRequired) {
-				_spc = new SoftwarePublisherCertificate ();
-				_saveOnClose = true;
-			}
-		}
+        public void Close()
+        {
+            if (_saveOnClose)
+            {
+                byte[] store = _spc.GetBytes();
+                using (FileStream fs = File.Create(_name))
+                {
+                    fs.Write(store, 0, store.Length);
+                }
+            }
+        }
 
-		public void Close () 
-		{
-			if (_saveOnClose) {
-				byte[] store = _spc.GetBytes ();
-				using (FileStream fs = File.Create (_name)) {
-					fs.Write (store, 0, store.Length);
-				}
-			}
-		}
-		
-		public void Add (X509Certificate certificate) 
-		{
-			if ((!_readOnly) && (_spc != null)) {
-				_spc.Certificates.Add (certificate);
-				_saveOnClose = true;
-			}
-		}
-		
-		public void Remove (X509Certificate certificate) 
-		{
-			if ((!_readOnly) && (_spc != null)) {
-				_spc.Certificates.Remove (certificate);
-				_saveOnClose = true;
-			}
-		}
-	}
+        public void Add(X509Certificate certificate)
+        {
+            if ((!_readOnly) && (_spc != null))
+            {
+                _spc.Certificates.Add(certificate);
+                _saveOnClose = true;
+            }
+        }
+
+        public void Remove(X509Certificate certificate)
+        {
+            if ((!_readOnly) && (_spc != null))
+            {
+                _spc.Certificates.Remove(certificate);
+                _saveOnClose = true;
+            }
+        }
+    }
 }

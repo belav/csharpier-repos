@@ -24,7 +24,10 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageIndex Condition="'$(MSBuildProjectExtension)' == '.pkgproj'" Include="$(PackageIndexFile)" />
+    <PackageIndex
+      Condition="'$(MSBuildProjectExtension)' == '.pkgproj'"
+      Include="$(PackageIndexFile)"
+    />
   </ItemGroup>
 
   <PropertyGroup>
@@ -33,7 +36,9 @@
     transport packages to flow dependencies anymore -->
     <CreatePackedPackage Condition="'$(CreatePackedPackage)' == ''">false</CreatePackedPackage>
 
-    <SupportedPackageOSGroups Condition="'$(SupportedPackageOSGroups)' == ''">windows;osx;android;linux;freebsd;netbsd;illumos;solaris;haiku</SupportedPackageOSGroups>
+    <SupportedPackageOSGroups Condition="'$(SupportedPackageOSGroups)' == ''"
+      >windows;osx;android;linux;freebsd;netbsd;illumos;solaris;haiku</SupportedPackageOSGroups
+    >
     <SupportedPackageOSGroups>;$(SupportedPackageOSGroups);</SupportedPackageOSGroups>
 
     <_isSupportedOSGroup>true</_isSupportedOSGroup>
@@ -41,10 +46,18 @@
 
   <!-- derive an OS Group based on the OS Family -->
   <PropertyGroup>
-    <_derivedPackageTargetOSGroup Condition="'$(_derivedPackageTargetOSGroup)' == '' and '$(TargetOS)' != ''">$(TargetOS)</_derivedPackageTargetOSGroup>
-    <_derivedPackageTargetOSGroup Condition="'$(_derivedPackageTargetOSGroup)' == ''">linux</_derivedPackageTargetOSGroup>
+    <_derivedPackageTargetOSGroup
+      Condition="'$(_derivedPackageTargetOSGroup)' == '' and '$(TargetOS)' != ''"
+      >$(TargetOS)</_derivedPackageTargetOSGroup
+    >
+    <_derivedPackageTargetOSGroup Condition="'$(_derivedPackageTargetOSGroup)' == ''"
+      >linux</_derivedPackageTargetOSGroup
+    >
 
-    <_isSupportedOSGroup Condition="!$(SupportedPackageOSGroups.Contains(';$(_derivedPackageTargetOSGroup);'))">false</_isSupportedOSGroup>
+    <_isSupportedOSGroup
+      Condition="!$(SupportedPackageOSGroups.Contains(';$(_derivedPackageTargetOSGroup);'))"
+      >false</_isSupportedOSGroup
+    >
   </PropertyGroup>
 
   <!-- _packageTargetOSGroup is used to control the runtime package imports, don't import runtime package targets for
@@ -52,7 +65,9 @@
   <PropertyGroup Condition="'$(PackageTargetRuntime)' != '' and '$(_isSupportedOSGroup)' == 'true'">
     <!-- Android will use Linux package definitions -->
     <_packageTargetOSGroup>$(_derivedPackageTargetOSGroup)</_packageTargetOSGroup>
-    <_packageTargetOSGroup Condition="'$(_derivedPackageTargetOSGroup)' == 'android'">linux</_packageTargetOSGroup>
+    <_packageTargetOSGroup Condition="'$(_derivedPackageTargetOSGroup)' == 'android'"
+      >linux</_packageTargetOSGroup
+    >
   </PropertyGroup>
   <PropertyGroup>
     <SkipPackageFileCheck>true</SkipPackageFileCheck>
@@ -120,9 +135,8 @@
   <ItemGroup>
     <!-- Ensure we have a RID-specific package for the current build, even if it isn't in our official set, but
          don't build the RID-specific package if we're in an unsupported os family -->
-    <BuildRID Include="@(OfficialBuildRID)" Exclude="$(OutputRID)"/>
-    <BuildRID Include="$(OutputRID)"
-              Condition="'$(_isSupportedOSGroup)' == 'true'">
+    <BuildRID Include="@(OfficialBuildRID)" Exclude="$(OutputRID)" />
+    <BuildRID Include="$(OutputRID)" Condition="'$(_isSupportedOSGroup)' == 'true'">
       <Platform Condition="'$(TargetArchitecture)' == 'x64'">amd64</Platform>
       <Platform Condition="'$(TargetArchitecture)' != 'x64'">$(TargetArchitecture)</Platform>
     </BuildRID>

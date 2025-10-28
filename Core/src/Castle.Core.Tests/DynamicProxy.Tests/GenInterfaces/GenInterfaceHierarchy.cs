@@ -1,11 +1,11 @@
 // Copyright 2004-2021 Castle Project - http://www.castleproject.org/
-// 
+//
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
-// 
+//
 //     http://www.apache.org/licenses/LICENSE-2.0
-// 
+//
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -14,59 +14,57 @@
 
 namespace Castle.DynamicProxy.Tests.GenInterfaces
 {
-	using System.Collections.Generic;
+    using System.Collections.Generic;
 
-	public class GenInterfaceHierarchy<T> : IGenInterfaceHierarchySpecialization<T>
-	{
-		private List<T> items = new List<T>();
+    public class GenInterfaceHierarchy<T> : IGenInterfaceHierarchySpecialization<T>
+    {
+        private List<T> items = new List<T>();
 
-		public int Count()
-		{
-			return items.Count;
-		}
+        public int Count()
+        {
+            return items.Count;
+        }
 
-		public T[] FetchAll()
-		{
-			T[] copy = new T[Count()];
-			items.CopyTo(copy);
-			return copy;
-		}
+        public T[] FetchAll()
+        {
+            T[] copy = new T[Count()];
+            items.CopyTo(copy);
+            return copy;
+        }
 
-		public void Add()
-		{
-		}
+        public void Add() { }
 
-		public void Add(T item)
-		{
-			items.Add(item);
-		}
+        public void Add(T item)
+        {
+            items.Add(item);
+        }
 
-		public T Get()
-		{
-			return items[0];
-		}
+        public T Get()
+        {
+            return items[0];
+        }
 
-		public T[] GetAll()
-		{
-			return FetchAll();
-		}
-	}
+        public T[] GetAll()
+        {
+            return FetchAll();
+        }
+    }
 
-	public interface IGenInterfaceHierarchySpecialization<T> : IGenInterfaceHierarchyBase<T>
-	{
-		int Count();
+    public interface IGenInterfaceHierarchySpecialization<T> : IGenInterfaceHierarchyBase<T>
+    {
+        int Count();
 
-		T[] FetchAll();
-	}
+        T[] FetchAll();
+    }
 
-	public interface IGenInterfaceHierarchyBase<T>
-	{
-		void Add();
+    public interface IGenInterfaceHierarchyBase<T>
+    {
+        void Add();
 
-		void Add(T item);
+        void Add(T item);
 
-		T Get();
+        T Get();
 
-		T[] GetAll();
-	}
+        T[] GetAll();
+    }
 }

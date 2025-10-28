@@ -24,10 +24,12 @@ namespace Microsoft.CodeAnalysis.UnitTests.Interactive
         [Fact]
         public async Task DefaultReferencesAndImports()
         {
-            await Execute(@"
+            await Execute(
+                @"
 dynamic d = (""home"", Directory.GetCurrentDirectory(), await Task.FromResult(1));
 WriteLine(d.ToString());
-");
+"
+            );
 
             var dir = Path.GetDirectoryName(typeof(InteractiveHostCoreInitTests).Assembly.Location);
 
@@ -45,14 +47,18 @@ WriteLine(d.ToString());
             await Execute($@"#r ""{scriptingAssemblyName}""");
 
             var error = await ReadErrorOutputToEnd();
-            AssertEx.AssertEqualToleratingWhitespaceDifferences(@$"
-(1,1): error CS0006: {string.Format(CSharpResources.ERR_NoMetadataFile, scriptingAssemblyName)}", error);
+            AssertEx.AssertEqualToleratingWhitespaceDifferences(
+                @$"
+(1,1): error CS0006: {string.Format(CSharpResources.ERR_NoMetadataFile, scriptingAssemblyName)}",
+                error
+            );
         }
 
         [Fact]
         public async Task SearchPaths1()
         {
-            var dll = Temp.CreateFile(extension: ".dll").WriteAllBytes(TestResources.MetadataTests.InterfaceAndClass.CSInterfaces01);
+            var dll = Temp.CreateFile(extension: ".dll")
+                .WriteAllBytes(TestResources.MetadataTests.InterfaceAndClass.CSInterfaces01);
             var srcDir = Temp.CreateDirectory();
             var dllDir = Path.GetDirectoryName(dll.Path)!;
             srcDir.CreateFile("goo.csx").WriteAllText("ReferencePaths.Add(@\"" + dllDir + "\");");
@@ -72,7 +78,10 @@ WriteLine(d.ToString());
             await Host.ExecuteAsync(@"SourcePaths");
 
             output = await ReadOutputToEnd();
-            AssertEx.AssertEqualToleratingWhitespaceDifferences(PrintSearchPaths(srcDir.Path), output);
+            AssertEx.AssertEqualToleratingWhitespaceDifferences(
+                PrintSearchPaths(srcDir.Path),
+                output
+            );
 
             // execute file (uses modified search paths), the file adds a reference path
             await Host.ExecuteFileAsync("goo.csx");

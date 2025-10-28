@@ -5,10 +5,11 @@
 namespace System.ServiceModel.Activities.Presentation
 {
     using System;
+    using System.Activities;
     using System.Activities.Core.Presentation.Themes;
     using System.Activities.Presentation;
-    using System.Activities.Presentation.Model;
     using System.Activities.Presentation.Metadata;
+    using System.Activities.Presentation.Model;
     using System.Activities.Presentation.PropertyEditing;
     using System.Collections.Generic;
     using System.ComponentModel;
@@ -16,7 +17,6 @@ namespace System.ServiceModel.Activities.Presentation
     using System.Runtime;
     using System.Windows;
     using System.Windows.Input;
-    using System.Activities;
 
     partial class SendReplyDesigner
     {
@@ -28,31 +28,71 @@ namespace System.ServiceModel.Activities.Presentation
         static string Action;
         static string DeclaredMessageType;
 
-        [SuppressMessage(FxCop.Category.Performance, FxCop.Rule.InitializeReferenceTypeStaticFieldsInline,
-            Justification = "PropertyValueEditors association needs to be done in the static constructor.")]
+        [SuppressMessage(
+            FxCop.Category.Performance,
+            FxCop.Rule.InitializeReferenceTypeStaticFieldsInline,
+            Justification = "PropertyValueEditors association needs to be done in the static constructor."
+        )]
         static SendReplyDesigner()
         {
             AttributeTableBuilder builder = new AttributeTableBuilder();
             Type sendType = typeof(SendReply);
 
-            builder.AddCustomAttributes(sendType, sendType.GetProperty("CorrelationInitializers"), PropertyValueEditor.CreateEditorAttribute(typeof(CorrelationInitializerValueEditor)));
+            builder.AddCustomAttributes(
+                sendType,
+                sendType.GetProperty("CorrelationInitializers"),
+                PropertyValueEditor.CreateEditorAttribute(typeof(CorrelationInitializerValueEditor))
+            );
 
-            var categoryAttribute = new CategoryAttribute(EditorCategoryTemplateDictionary.Instance.GetCategoryTitle(CorrelationsCategoryLabelKey));
+            var categoryAttribute = new CategoryAttribute(
+                EditorCategoryTemplateDictionary.Instance.GetCategoryTitle(
+                    CorrelationsCategoryLabelKey
+                )
+            );
 
-            builder.AddCustomAttributes(sendType, sendType.GetProperty("CorrelationInitializers"), categoryAttribute, BrowsableAttribute.Yes,
-                PropertyValueEditor.CreateEditorAttribute(typeof(CorrelationInitializerValueEditor)));
-
-            categoryAttribute = new CategoryAttribute(EditorCategoryTemplateDictionary.Instance.GetCategoryTitle(MiscellaneousCategoryLabelKey));
-
-            builder.AddCustomAttributes(sendType, sendType.GetProperty("DisplayName"), categoryAttribute);
-            var descriptionAttribute = new DescriptionAttribute(StringResourceDictionary.Instance.GetString("messagingValueHint", "<Value to bind>"));
-            builder.AddCustomAttributes(sendType, sendType.GetProperty("Content"), categoryAttribute, descriptionAttribute, PropertyValueEditor.CreateEditorAttribute(typeof(SendContentPropertyEditor)));
-            builder.AddCustomAttributes(sendType, sendType.GetProperty("Request"),
+            builder.AddCustomAttributes(
+                sendType,
+                sendType.GetProperty("CorrelationInitializers"),
                 categoryAttribute,
-                PropertyValueEditor.CreateEditorAttribute(typeof(ActivityXRefPropertyEditor)));
+                BrowsableAttribute.Yes,
+                PropertyValueEditor.CreateEditorAttribute(typeof(CorrelationInitializerValueEditor))
+            );
+
+            categoryAttribute = new CategoryAttribute(
+                EditorCategoryTemplateDictionary.Instance.GetCategoryTitle(
+                    MiscellaneousCategoryLabelKey
+                )
+            );
+
+            builder.AddCustomAttributes(
+                sendType,
+                sendType.GetProperty("DisplayName"),
+                categoryAttribute
+            );
+            var descriptionAttribute = new DescriptionAttribute(
+                StringResourceDictionary.Instance.GetString("messagingValueHint", "<Value to bind>")
+            );
+            builder.AddCustomAttributes(
+                sendType,
+                sendType.GetProperty("Content"),
+                categoryAttribute,
+                descriptionAttribute,
+                PropertyValueEditor.CreateEditorAttribute(typeof(SendContentPropertyEditor))
+            );
+            builder.AddCustomAttributes(
+                sendType,
+                sendType.GetProperty("Request"),
+                categoryAttribute,
+                PropertyValueEditor.CreateEditorAttribute(typeof(ActivityXRefPropertyEditor))
+            );
 
             var advancedAttribute = new EditorBrowsableAttribute(EditorBrowsableState.Advanced);
-            builder.AddCustomAttributes(sendType, sendType.GetProperty("Action"), categoryAttribute, advancedAttribute);
+            builder.AddCustomAttributes(
+                sendType,
+                sendType.GetProperty("Action"),
+                categoryAttribute,
+                advancedAttribute
+            );
 
             Action = sendType.GetProperty("Action").Name;
 
@@ -62,27 +102,28 @@ namespace System.ServiceModel.Activities.Presentation
 
             MetadataStore.AddAttributeTable(builder.CreateTable());
 
-            Func<Activity, IEnumerable<ArgumentAccessor>> argumentAccessorGenerator = (activity) => new ArgumentAccessor[]
-            {
-                new ArgumentAccessor
+            Func<Activity, IEnumerable<ArgumentAccessor>> argumentAccessorGenerator = (activity) =>
+                new ArgumentAccessor[]
                 {
-                    Getter = (ownerActivity) =>
+                    new ArgumentAccessor
                     {
-                        SendReply sendReply = (SendReply)ownerActivity;
-                        SendMessageContent content = sendReply.Content as SendMessageContent;
-                        return content != null ? content.Message : null;
-                    },
-                    Setter = (ownerActivity, arg) =>
-                    {
-                        SendReply sendReply = (SendReply)ownerActivity;
-                        SendMessageContent content = sendReply.Content as SendMessageContent;
-                        if (content != null)
+                        Getter = (ownerActivity) =>
                         {
-                            content.Message = arg as InArgument;
-                        }
+                            SendReply sendReply = (SendReply)ownerActivity;
+                            SendMessageContent content = sendReply.Content as SendMessageContent;
+                            return content != null ? content.Message : null;
+                        },
+                        Setter = (ownerActivity, arg) =>
+                        {
+                            SendReply sendReply = (SendReply)ownerActivity;
+                            SendMessageContent content = sendReply.Content as SendMessageContent;
+                            if (content != null)
+                            {
+                                content.Message = arg as InArgument;
+                            }
+                        },
                     },
-                },
-            };
+                };
             ActivityArgumentHelper.RegisterAccessorsGenerator(sendType, argumentAccessorGenerator);
         }
 
@@ -104,14 +145,23 @@ namespace System.ServiceModel.Activities.Presentation
         {
             if (string.Equals(e.PropertyName, Message))
             {
-                SendMessageContent messageContent = ((SendReply)this.ModelItem.GetCurrentValue()).Content as SendMessageContent;
-                this.ModelItem.Properties[DeclaredMessageType].SetValue(null == messageContent ? null : messageContent.Message.ArgumentType);
+                SendMessageContent messageContent =
+                    ((SendReply)this.ModelItem.GetCurrentValue()).Content as SendMessageContent;
+                this.ModelItem.Properties[DeclaredMessageType]
+                    .SetValue(null == messageContent ? null : messageContent.Message.ArgumentType);
             }
         }
 
         void OnDefineButtonClicked(object sender, RoutedEventArgs args)
         {
-            using (EditingScope scope = this.Context.Services.GetRequiredService<ModelTreeManager>().CreateEditingScope(StringResourceDictionary.Instance.GetString("editSendContent"), true))
+            using (
+                EditingScope scope = this
+                    .Context.Services.GetRequiredService<ModelTreeManager>()
+                    .CreateEditingScope(
+                        StringResourceDictionary.Instance.GetString("editSendContent"),
+                        true
+                    )
+            )
             {
                 if (SendContentDialog.ShowDialog(this.ModelItem, this.Context, this))
                 {

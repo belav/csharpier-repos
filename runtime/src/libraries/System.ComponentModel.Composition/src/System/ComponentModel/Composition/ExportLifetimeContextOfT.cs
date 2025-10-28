@@ -16,10 +16,7 @@ namespace System.ComponentModel.Composition
 
         public T Value
         {
-            get
-            {
-                return _value;
-            }
+            get { return _value; }
         }
 
         public void Dispose()

@@ -21,10 +21,8 @@ namespace System.Xml.Xsl.Qil
         /// <summary>
         /// Construct a new node
         /// </summary>
-        public QilStrConcat(QilNodeType nodeType, QilNode delimiter, QilNode values) : base(nodeType, delimiter, values)
-        {
-        }
-
+        public QilStrConcat(QilNodeType nodeType, QilNode delimiter, QilNode values)
+            : base(nodeType, delimiter, values) { }
 
         //-----------------------------------------------
         // QilStrConcat methods

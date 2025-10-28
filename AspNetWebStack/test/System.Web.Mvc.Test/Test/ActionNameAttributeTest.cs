@@ -12,7 +12,12 @@ namespace System.Web.Mvc.Test
         {
             // Act & Assert
             Assert.ThrowsArgumentNullOrEmpty(
-                delegate { new ActionNameAttribute(String.Empty); }, "name");
+                delegate
+                {
+                    new ActionNameAttribute(String.Empty);
+                },
+                "name"
+            );
         }
 
         [Fact]
@@ -20,7 +25,12 @@ namespace System.Web.Mvc.Test
         {
             // Act & Assert
             Assert.ThrowsArgumentNullOrEmpty(
-                delegate { new ActionNameAttribute(null); }, "name");
+                delegate
+                {
+                    new ActionNameAttribute(null);
+                },
+                "name"
+            );
         }
 
         [Fact]

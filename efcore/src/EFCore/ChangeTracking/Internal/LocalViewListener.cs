@@ -11,8 +11,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal;
 /// </summary>
 public class LocalViewListener : ILocalViewListener
 {
-    private readonly IList<Action<InternalEntityEntry, EntityState>> _viewActions
-        = new List<Action<InternalEntityEntry, EntityState>>();
+    private readonly IList<Action<InternalEntityEntry, EntityState>> _viewActions =
+        new List<Action<InternalEntityEntry, EntityState>>();
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -20,8 +20,8 @@ public class LocalViewListener : ILocalViewListener
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public virtual void RegisterView(Action<InternalEntityEntry, EntityState> viewAction)
-        => _viewActions.Add(viewAction);
+    public virtual void RegisterView(Action<InternalEntityEntry, EntityState> viewAction) =>
+        _viewActions.Add(viewAction);
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -29,7 +29,11 @@ public class LocalViewListener : ILocalViewListener
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public virtual void StateChanged(InternalEntityEntry entry, EntityState oldState, bool fromQuery)
+    public virtual void StateChanged(
+        InternalEntityEntry entry,
+        EntityState oldState,
+        bool fromQuery
+    )
     {
         // ReSharper disable once ForCanBeConvertedToForeach
         for (var i = 0; i < _viewActions.Count; i++)
@@ -44,7 +48,5 @@ public class LocalViewListener : ILocalViewListener
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public virtual void StateChanging(InternalEntityEntry entry, EntityState newState)
-    {
-    }
+    public virtual void StateChanging(InternalEntityEntry entry, EntityState newState) { }
 }

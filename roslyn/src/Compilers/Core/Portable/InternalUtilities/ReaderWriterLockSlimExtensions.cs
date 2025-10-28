@@ -31,7 +31,9 @@ namespace Roslyn.Utilities
             }
         }
 
-        internal static UpgradeableReadLockExiter DisposableUpgradeableRead(this ReaderWriterLockSlim @lock)
+        internal static UpgradeableReadLockExiter DisposableUpgradeableRead(
+            this ReaderWriterLockSlim @lock
+        )
         {
             return new UpgradeableReadLockExiter(@lock);
         }

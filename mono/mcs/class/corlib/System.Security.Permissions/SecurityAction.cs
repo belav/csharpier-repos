@@ -18,10 +18,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -33,26 +33,31 @@
 
 using System.Runtime.InteropServices;
 
-namespace System.Security.Permissions {
-
+namespace System.Security.Permissions
+{
 #if MOBILE && !MONOTOUCH
-	[Obsolete ("CAS support is not available with Silverlight applications.")]
+    [Obsolete("CAS support is not available with Silverlight applications.")]
 #endif
-	[ComVisible (true)]
-	[Serializable]
-	public enum SecurityAction {
-		Demand = 2,
-		Assert = 3,
-		[Obsolete ("This requests should not be used")]
-		Deny = 4,
-		PermitOnly = 5,
-		LinkDemand = 6,
-		InheritanceDemand = 7,
-		[Obsolete ("This requests should not be used")]
-		RequestMinimum = 8,
-		[Obsolete ("This requests should not be used")]
-		RequestOptional = 9,
-		[Obsolete ("This requests should not be used")]
-		RequestRefuse = 10,
-	}
+    [ComVisible(true)]
+    [Serializable]
+    public enum SecurityAction
+    {
+        Demand = 2,
+        Assert = 3,
+
+        [Obsolete("This requests should not be used")]
+        Deny = 4,
+        PermitOnly = 5,
+        LinkDemand = 6,
+        InheritanceDemand = 7,
+
+        [Obsolete("This requests should not be used")]
+        RequestMinimum = 8,
+
+        [Obsolete("This requests should not be used")]
+        RequestOptional = 9,
+
+        [Obsolete("This requests should not be used")]
+        RequestRefuse = 10,
+    }
 }

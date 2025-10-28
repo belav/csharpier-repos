@@ -16,7 +16,11 @@ namespace System.Net.Http
         /// <param name="httpRequestError">The <see cref="Http.HttpRequestError"/> that caused the exception.</param>
         /// <param name="message">The message string describing the error.</param>
         /// <param name="innerException">The exception that is the cause of the current exception.</param>
-        public HttpIOException(HttpRequestError httpRequestError, string? message = null, Exception? innerException = null)
+        public HttpIOException(
+            HttpRequestError httpRequestError,
+            string? message = null,
+            Exception? innerException = null
+        )
             : base(message, innerException)
         {
             HttpRequestError = httpRequestError;

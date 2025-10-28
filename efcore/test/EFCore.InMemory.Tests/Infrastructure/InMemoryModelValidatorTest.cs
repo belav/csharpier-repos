@@ -17,9 +17,9 @@ public class InMemoryModelValidatorTest : ModelValidatorTestBase
 
         VerifyError(
             CoreStrings.DerivedTypeDefiningQuery("Generic<int>", nameof(Abstract)),
-            modelBuilder);
+            modelBuilder
+        );
     }
 
-    protected override TestHelpers TestHelpers
-        => InMemoryTestHelpers.Instance;
+    protected override TestHelpers TestHelpers => InMemoryTestHelpers.Instance;
 }

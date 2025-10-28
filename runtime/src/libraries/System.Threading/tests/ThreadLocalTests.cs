@@ -78,16 +78,22 @@ namespace System.Threading.Tests
                 // there is no guarantee that the Task will be created on another thread.
                 // There is also no guarantee that using this TaskCreationOption will force
                 // it to be run on another thread.
-                threads[i] = new Task(() =>
-                {
-                    string value = tlocal.Value;
-                    Debug.WriteLine("Val: " + value);
-                    seenValuesFromAllThreads.Add(value);
-                }, TaskCreationOptions.LongRunning);
+                threads[i] = new Task(
+                    () =>
+                    {
+                        string value = tlocal.Value;
+                        Debug.WriteLine("Val: " + value);
+                        seenValuesFromAllThreads.Add(value);
+                    },
+                    TaskCreationOptions.LongRunning
+                );
                 threads[i].Start(TaskScheduler.Default);
                 threads[i].Wait();
             }
-            Assert.Equal(Enumerable.Range(1, threads.Length).Select(x => x.ToString()), seenValuesFromAllThreads);
+            Assert.Equal(
+                Enumerable.Range(1, threads.Length).Select(x => x.ToString()),
+                seenValuesFromAllThreads
+            );
         }
 
         [Fact]
@@ -97,13 +103,15 @@ namespace System.Threading.Tests
             Assert.Throws<InvalidOperationException>(() =>
             {
                 int x = 0;
-                tlocal = new ThreadLocal<string>(delegate
-                {
-                    if (x++ < 5)
-                        return tlocal.Value;
-                    else
-                        return "Test";
-                });
+                tlocal = new ThreadLocal<string>(
+                    delegate
+                    {
+                        if (x++ < 5)
+                            return tlocal.Value;
+                        else
+                            return "Test";
+                    }
+                );
                 string str = tlocal.Value;
             });
         }
@@ -126,7 +134,13 @@ namespace System.Threading.Tests
             // there is no guarantee that the Task will be created on another thread.
             // There is also no guarantee that using this TaskCreationOption will force
             // it to be run on another thread.
-            new Task(() => { threadLocal.Value = new SetMreOnFinalize(mres); }, TaskCreationOptions.LongRunning).Start(TaskScheduler.Default);
+            new Task(
+                () =>
+                {
+                    threadLocal.Value = new SetMreOnFinalize(mres);
+                },
+                TaskCreationOptions.LongRunning
+            ).Start(TaskScheduler.Default);
 
             ThreadTestHelpers.WaitForConditionWithCustomDelay(
                 () => mres.IsSet,
@@ -136,7 +150,8 @@ namespace System.Threading.Tests
                     GC.Collect();
                     GC.WaitForPendingFinalizers();
                     GC.Collect();
-                });
+                }
+            );
         }
 
         [Fact]
@@ -147,15 +162,23 @@ namespace System.Threading.Tests
 
             tl.Dispose();
 
-            Assert.Throws<ObjectDisposedException>(() => { string tmp = tl.Value; });
+            Assert.Throws<ObjectDisposedException>(() =>
+            {
+                string tmp = tl.Value;
+            });
             // Failure Case: The Value property of the disposed ThreadLocal object should throw ODE
 
-            Assert.Throws<ObjectDisposedException>(() => { bool tmp = tl.IsValueCreated; });
+            Assert.Throws<ObjectDisposedException>(() =>
+            {
+                bool tmp = tl.IsValueCreated;
+            });
             // Failure Case: The IsValueCreated property of the disposed ThreadLocal object should throw ODE
 
-            Assert.Throws<ObjectDisposedException>(() => { string tmp = tl.ToString(); });
+            Assert.Throws<ObjectDisposedException>(() =>
+            {
+                string tmp = tl.ToString();
+            });
             // Failure Case: The ToString method of the disposed ThreadLocal object should throw ODE
-
         }
 
         [Fact]
@@ -192,8 +215,8 @@ namespace System.Threading.Tests
         {
             private object _foo;
             private WeakReference _wFoo;
-            [MethodImplAttribute(MethodImplOptions.NoInlining)]
 
+            [MethodImplAttribute(MethodImplOptions.NoInlining)]
             private void Method()
             {
                 _foo = new object();
@@ -230,18 +253,42 @@ namespace System.Threading.Tests
             // Test adding values and updating values
             {
                 var threadLocal = new ThreadLocal<int>(true);
-                Assert.True(threadLocal.Values.Count == 0, "RunThreadLocalTest8_Values: Expected thread local to initially have 0 values");
-                Assert.True(threadLocal.Value == 0, "RunThreadLocalTest8_Values: Expected initial value of 0");
-                Assert.True(threadLocal.Values.Count == 1, "RunThreadLocalTest8_Values: Expected values count to now be 1 from initialized value");
-                Assert.True(threadLocal.Values[0] == 0, "RunThreadLocalTest8_Values: Expected values to contain initialized value");
+                Assert.True(
+                    threadLocal.Values.Count == 0,
+                    "RunThreadLocalTest8_Values: Expected thread local to initially have 0 values"
+                );
+                Assert.True(
+                    threadLocal.Value == 0,
+                    "RunThreadLocalTest8_Values: Expected initial value of 0"
+                );
+                Assert.True(
+                    threadLocal.Values.Count == 1,
+                    "RunThreadLocalTest8_Values: Expected values count to now be 1 from initialized value"
+                );
+                Assert.True(
+                    threadLocal.Values[0] == 0,
+                    "RunThreadLocalTest8_Values: Expected values to contain initialized value"
+                );
 
                 threadLocal.Value = 1000;
-                Assert.True(threadLocal.Values.Count == 1, "RunThreadLocalTest8_Values: Expected values count to still be 1 after updating existing value");
-                Assert.True(threadLocal.Values[0] == 1000, "RunThreadLocalTest8_Values: Expected values to contain updated value");
+                Assert.True(
+                    threadLocal.Values.Count == 1,
+                    "RunThreadLocalTest8_Values: Expected values count to still be 1 after updating existing value"
+                );
+                Assert.True(
+                    threadLocal.Values[0] == 1000,
+                    "RunThreadLocalTest8_Values: Expected values to contain updated value"
+                );
 
                 ((IAsyncResult)Task.Run(() => threadLocal.Value = 1001)).AsyncWaitHandle.WaitOne();
-                Assert.True(threadLocal.Values.Count == 2, "RunThreadLocalTest8_Values: Expected values count to be 2 now that another thread stored a value");
-                Assert.True(threadLocal.Values.Contains(1000) && threadLocal.Values.Contains(1001), "RunThreadLocalTest8_Values: Expected values to contain both thread's values");
+                Assert.True(
+                    threadLocal.Values.Count == 2,
+                    "RunThreadLocalTest8_Values: Expected values count to be 2 now that another thread stored a value"
+                );
+                Assert.True(
+                    threadLocal.Values.Contains(1000) && threadLocal.Values.Contains(1001),
+                    "RunThreadLocalTest8_Values: Expected values to contain both thread's values"
+                );
 
                 int numTasks = 1000;
                 Task[] allTasks = new Task[numTasks];
@@ -251,7 +298,12 @@ namespace System.Threading.Tests
                     // there is no guarantee that the Task will be created on another thread.
                     // There is also no guarantee that using this TaskCreationOption will force
                     // it to be run on another thread.
-                    var task = Task.Factory.StartNew(() => threadLocal.Value = i, CancellationToken.None, TaskCreationOptions.LongRunning, TaskScheduler.Default);
+                    var task = Task.Factory.StartNew(
+                        () => threadLocal.Value = i,
+                        CancellationToken.None,
+                        TaskCreationOptions.LongRunning,
+                        TaskScheduler.Default
+                    );
                     task.Wait();
                 }
 
@@ -259,9 +311,9 @@ namespace System.Threading.Tests
                 if (values.Count != 1002)
                 {
                     string message =
-                        "RunThreadLocalTest8_Values: Expected values to contain both previous values and 1000 new values. Actual count: " +
-                        values.Count +
-                        '.';
+                        "RunThreadLocalTest8_Values: Expected values to contain both previous values and 1000 new values. Actual count: "
+                        + values.Count
+                        + '.';
                     if (values.Count != 0)
                     {
                         message += " Missing items:";
@@ -277,7 +329,11 @@ namespace System.Threading.Tests
                 }
                 for (int i = 0; i < 1000; i++)
                 {
-                    Assert.True(values.Contains(i), "RunThreadLocalTest8_Values: Expected values to contain value for thread #: " + i);
+                    Assert.True(
+                        values.Contains(i),
+                        "RunThreadLocalTest8_Values: Expected values to contain value for thread #: "
+                            + i
+                    );
                 }
 
                 threadLocal.Dispose();
@@ -292,8 +348,14 @@ namespace System.Threading.Tests
                 GC.Collect();
                 GC.WaitForPendingFinalizers();
                 GC.Collect();
-                Assert.True(tl.Values.Count == 1, "RunThreadLocalTest8_Values: Expected values count to be 1 from other thread's initialization");
-                Assert.True(tl.Values.Contains("Parallel"), "RunThreadLocalTest8_Values: Expected values to contain 'Parallel'");
+                Assert.True(
+                    tl.Values.Count == 1,
+                    "RunThreadLocalTest8_Values: Expected values count to be 1 from other thread's initialization"
+                );
+                Assert.True(
+                    tl.Values.Contains("Parallel"),
+                    "RunThreadLocalTest8_Values: Expected values to contain 'Parallel'"
+                );
             }
         }
 
@@ -307,8 +369,14 @@ namespace System.Threading.Tests
             GC.Collect();
             GC.WaitForPendingFinalizers();
             GC.Collect();
-            Assert.True(tl.Values.Count == 1, "RunThreadLocalTest8_Values: Expected other thread to have set value");
-            Assert.True(tl.Values[0] is SetMreOnFinalize, "RunThreadLocalTest8_Values: Expected other thread's value to be of the right type");
+            Assert.True(
+                tl.Values.Count == 1,
+                "RunThreadLocalTest8_Values: Expected other thread to have set value"
+            );
+            Assert.True(
+                tl.Values[0] is SetMreOnFinalize,
+                "RunThreadLocalTest8_Values: Expected other thread's value to be of the right type"
+            );
             tl.Dispose();
 
             object values;
@@ -323,15 +391,21 @@ namespace System.Threading.Tests
                 var mres = new ManualResetEventSlim();
                 RunThreadLocalTest8Helper(mres);
 
-                SpinWait.SpinUntil(() =>
-                {
-                    GC.Collect();
-                    GC.WaitForPendingFinalizers();
-                    GC.Collect();
-                    return mres.IsSet;
-                }, ThreadTestHelpers.UnexpectedTimeoutMilliseconds);
+                SpinWait.SpinUntil(
+                    () =>
+                    {
+                        GC.Collect();
+                        GC.WaitForPendingFinalizers();
+                        GC.Collect();
+                        return mres.IsSet;
+                    },
+                    ThreadTestHelpers.UnexpectedTimeoutMilliseconds
+                );
 
-                Assert.True(mres.IsSet, "RunThreadLocalTest8_Values: Expected thread local to release the object and for it to be finalized");
+                Assert.True(
+                    mres.IsSet,
+                    "RunThreadLocalTest8_Values: Expected thread local to release the object and for it to be finalized"
+                );
             }
 
             // Test that Values property throws an exception unless true was passed into the constructor
@@ -348,10 +422,15 @@ namespace System.Threading.Tests
                     exceptionCaught = ex;
                 }
 
-                Assert.True(exceptionCaught != null, "RunThreadLocalTest8_Values: Expected Values to throw an InvalidOperationException. No exception was thrown.");
                 Assert.True(
-                   exceptionCaught != null && exceptionCaught is InvalidOperationException,
-                   "RunThreadLocalTest8_Values: Expected Values to throw an InvalidOperationException. Wrong exception was thrown: " + exceptionCaught.GetType().ToString());
+                    exceptionCaught != null,
+                    "RunThreadLocalTest8_Values: Expected Values to throw an InvalidOperationException. No exception was thrown."
+                );
+                Assert.True(
+                    exceptionCaught != null && exceptionCaught is InvalidOperationException,
+                    "RunThreadLocalTest8_Values: Expected Values to throw an InvalidOperationException. Wrong exception was thrown: "
+                        + exceptionCaught.GetType().ToString()
+                );
             }
         }
 
@@ -363,7 +442,10 @@ namespace System.Threading.Tests
                 ThreadLocal<int> t1 = new ThreadLocal<int>();
                 t1.Value = 177;
                 ThreadLocal<int> t2 = new ThreadLocal<int>();
-                Assert.True(!t2.IsValueCreated, "RunThreadLocalTest9_Uninitialized: The ThreadLocal instance should have been uninitialized.");
+                Assert.True(
+                    !t2.IsValueCreated,
+                    "RunThreadLocalTest9_Uninitialized: The ThreadLocal instance should have been uninitialized."
+                );
             }
         }
 
@@ -377,17 +459,20 @@ namespace System.Threading.Tests
             bool stop = false;
 
             Action waitForCreatorDisposer;
-            Thread creatorDisposer = ThreadTestHelpers.CreateGuardedThread(out waitForCreatorDisposer, () =>
-            {
-                startTest.CheckedWait();
-                do
+            Thread creatorDisposer = ThreadTestHelpers.CreateGuardedThread(
+                out waitForCreatorDisposer,
+                () =>
                 {
-                    var tl = new ThreadLocal<int>(trackAllValues: true);
-                    Volatile.Write(ref threadLocal, tl);
-                    tl.Value = 1;
-                    tl.Dispose();
-                } while (!Volatile.Read(ref stop));
-            });
+                    startTest.CheckedWait();
+                    do
+                    {
+                        var tl = new ThreadLocal<int>(trackAllValues: true);
+                        Volatile.Write(ref threadLocal, tl);
+                        tl.Value = 1;
+                        tl.Dispose();
+                    } while (!Volatile.Read(ref stop));
+                }
+            );
             creatorDisposer.IsBackground = true;
             creatorDisposer.Start();
 
@@ -395,31 +480,32 @@ namespace System.Threading.Tests
             var waitsForReader = new Action[readerCount];
             for (int i = 0; i < readerCount; ++i)
             {
-                Thread reader = ThreadTestHelpers.CreateGuardedThread(out waitsForReader[i], () =>
-                {
-                    startTest.CheckedWait();
-                    do
+                Thread reader = ThreadTestHelpers.CreateGuardedThread(
+                    out waitsForReader[i],
+                    () =>
                     {
-                        var tl = Volatile.Read(ref threadLocal);
-                        if (tl == null)
+                        startTest.CheckedWait();
+                        do
                         {
-                            continue;
-                        }
+                            var tl = Volatile.Read(ref threadLocal);
+                            if (tl == null)
+                            {
+                                continue;
+                            }
 
-                        try
-                        {
-                            IList<int> values = tl.Values;
-                        }
-                        catch (ObjectDisposedException)
-                        {
-                        }
-                        catch
-                        {
-                            gotUnexpectedException.Set();
-                            throw;
-                        }
-                    } while (!Volatile.Read(ref stop));
-                });
+                            try
+                            {
+                                IList<int> values = tl.Values;
+                            }
+                            catch (ObjectDisposedException) { }
+                            catch
+                            {
+                                gotUnexpectedException.Set();
+                                throw;
+                            }
+                        } while (!Volatile.Read(ref stop));
+                    }
+                );
                 reader.IsBackground = true;
                 reader.Start();
             }
@@ -435,13 +521,19 @@ namespace System.Threading.Tests
             Assert.False(failed);
         }
 
-        private enum UniqueEnumUsedOnlyWithNonInterferenceTest { True, False }
+        private enum UniqueEnumUsedOnlyWithNonInterferenceTest
+        {
+            True,
+            False,
+        }
 
         [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsThreadingSupported))]
         public static void TestUnrelatedThreadLocalDoesNotInterfereWithTrackAllValues()
         {
-            ThreadLocal<UniqueEnumUsedOnlyWithNonInterferenceTest> localThatDoesNotTrackValues = new ThreadLocal<UniqueEnumUsedOnlyWithNonInterferenceTest>(false);
-            ThreadLocal<UniqueEnumUsedOnlyWithNonInterferenceTest> localThatDoesTrackValues = new ThreadLocal<UniqueEnumUsedOnlyWithNonInterferenceTest>(true);
+            ThreadLocal<UniqueEnumUsedOnlyWithNonInterferenceTest> localThatDoesNotTrackValues =
+                new ThreadLocal<UniqueEnumUsedOnlyWithNonInterferenceTest>(false);
+            ThreadLocal<UniqueEnumUsedOnlyWithNonInterferenceTest> localThatDoesTrackValues =
+                new ThreadLocal<UniqueEnumUsedOnlyWithNonInterferenceTest>(true);
 
             for (int i = 0; i < 10; i++)
             {
@@ -469,10 +561,12 @@ namespace System.Threading.Tests
         private class SetMreOnFinalize
         {
             private ManualResetEventSlim _mres;
+
             public SetMreOnFinalize(ManualResetEventSlim mres)
             {
                 _mres = mres;
             }
+
             ~SetMreOnFinalize()
             {
                 _mres.Set();

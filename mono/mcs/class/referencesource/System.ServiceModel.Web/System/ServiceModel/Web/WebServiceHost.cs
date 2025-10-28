@@ -22,33 +22,35 @@ namespace System.ServiceModel.Web
         static readonly string WebHttpEndpointKind = "webHttpEndpoint";
 
         public WebServiceHost()
-            : base()
-        {
-        }
+            : base() { }
 
         public WebServiceHost(object singletonInstance, params Uri[] baseAddresses)
-            : base(singletonInstance, baseAddresses)
-        {
-        }
+            : base(singletonInstance, baseAddresses) { }
 
-        public WebServiceHost(Type serviceType, params Uri[] baseAddresses) :
-            base(serviceType, baseAddresses)
-        {
-        }
+        public WebServiceHost(Type serviceType, params Uri[] baseAddresses)
+            : base(serviceType, baseAddresses) { }
 
         // This method adds automatic endpoints at the base addresses, 1 per site binding (http or https). It only configures
         // the security on the binding. It does not add any behaviors.
         // If there are no base addresses, or if endpoints have been configured explicitly, it does not add any
         // automatic endpoints.
         // If it adds automatic endpoints, it validates that the service implements a single contract
-        internal static void AddAutomaticWebHttpBindingEndpoints(ServiceHost host, IDictionary<string, ContractDescription> implementedContracts,  string multipleContractsErrorMessage, string noContractErrorMessage, string standardEndpointKind)
+        internal static void AddAutomaticWebHttpBindingEndpoints(
+            ServiceHost host,
+            IDictionary<string, ContractDescription> implementedContracts,
+            string multipleContractsErrorMessage,
+            string noContractErrorMessage,
+            string standardEndpointKind
+        )
         {
             bool enableAutoEndpointCompat = AppSettings.EnableAutomaticEndpointsCompatibility;
             // We do not add an automatic endpoint if an explicit endpoint has been configured unless
             // the user has specifically opted into compat mode.  See CSDMain bugs 176157 & 262728 for history
-            if (host.Description.Endpoints != null 
+            if (
+                host.Description.Endpoints != null
                 && host.Description.Endpoints.Count > 0
-                && !enableAutoEndpointCompat)
+                && !enableAutoEndpointCompat
+            )
             {
                 return;
             }
@@ -56,13 +58,18 @@ namespace System.ServiceModel.Web
             AuthenticationSchemes supportedSchemes = AuthenticationSchemes.None;
             if (host.BaseAddresses.Count > 0)
             {
-                supportedSchemes = AspNetEnvironment.Current.GetAuthenticationSchemes(host.BaseAddresses[0]);
+                supportedSchemes = AspNetEnvironment.Current.GetAuthenticationSchemes(
+                    host.BaseAddresses[0]
+                );
 
                 if (AspNetEnvironment.Current.IsSimpleApplicationHost)
                 {
                     // Cassini always reports the auth scheme as anonymous or Ntlm. Map this to Ntlm, except when forms auth
                     // is requested
-                    if (supportedSchemes == (AuthenticationSchemes.Anonymous | AuthenticationSchemes.Ntlm))
+                    if (
+                        supportedSchemes
+                        == (AuthenticationSchemes.Anonymous | AuthenticationSchemes.Ntlm)
+                    )
                     {
                         if (AspNetEnvironment.Current.IsWindowsAuthenticationConfigured())
                         {
@@ -80,15 +87,26 @@ namespace System.ServiceModel.Web
             foreach (Uri baseAddress in host.BaseAddresses)
             {
                 string uriScheme = baseAddress.Scheme;
-                
+
                 // HTTP and HTTPs are only supported schemes
-                if (Object.ReferenceEquals(uriScheme, Uri.UriSchemeHttp) || Object.ReferenceEquals(uriScheme, Uri.UriSchemeHttps))
+                if (
+                    Object.ReferenceEquals(uriScheme, Uri.UriSchemeHttp)
+                    || Object.ReferenceEquals(uriScheme, Uri.UriSchemeHttps)
+                )
                 {
                     // bypass adding the automatic endpoint if there's already one at the base address
                     bool isExplicitEndpointConfigured = false;
                     foreach (ServiceEndpoint endpoint in host.Description.Endpoints)
                     {
-                        if (endpoint.Address != null && EndpointAddress.UriEquals(endpoint.Address.Uri, baseAddress, true, false))
+                        if (
+                            endpoint.Address != null
+                            && EndpointAddress.UriEquals(
+                                endpoint.Address.Uri,
+                                baseAddress,
+                                true,
+                                false
+                            )
+                        )
                         {
                             isExplicitEndpointConfigured = true;
                             break;
@@ -103,11 +121,15 @@ namespace System.ServiceModel.Web
                     {
                         if (implementedContracts.Count > 1)
                         {
-                            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(multipleContractsErrorMessage));
+                            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                                new InvalidOperationException(multipleContractsErrorMessage)
+                            );
                         }
                         else if (implementedContracts.Count == 0)
                         {
-                            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(noContractErrorMessage));
+                            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                                new InvalidOperationException(noContractErrorMessage)
+                            );
                         }
                         foreach (ContractDescription contract in implementedContracts.Values)
                         {
@@ -115,26 +137,45 @@ namespace System.ServiceModel.Web
                             break;
                         }
                     }
-                    
+
                     // Get the default web endpoint
-                    ConfigLoader configLoader = new ConfigLoader(host.GetContractResolver(implementedContracts));
+                    ConfigLoader configLoader = new ConfigLoader(
+                        host.GetContractResolver(implementedContracts)
+                    );
                     ServiceEndpointElement serviceEndpointElement = new ServiceEndpointElement();
                     serviceEndpointElement.Contract = contractType.FullName;
                     // Check for a protocol mapping
-                    ProtocolMappingItem protocolMappingItem = ConfigLoader.LookupProtocolMapping(baseAddress.Scheme);
-                    if (protocolMappingItem != null &&
-                        string.Equals(protocolMappingItem.Binding, WebHttpBinding.WebHttpBindingConfigurationStrings.WebHttpBindingCollectionElementName, StringComparison.Ordinal))
+                    ProtocolMappingItem protocolMappingItem = ConfigLoader.LookupProtocolMapping(
+                        baseAddress.Scheme
+                    );
+                    if (
+                        protocolMappingItem != null
+                        && string.Equals(
+                            protocolMappingItem.Binding,
+                            WebHttpBinding
+                                .WebHttpBindingConfigurationStrings
+                                .WebHttpBindingCollectionElementName,
+                            StringComparison.Ordinal
+                        )
+                    )
                     {
-                        serviceEndpointElement.BindingConfiguration = protocolMappingItem.BindingConfiguration;
+                        serviceEndpointElement.BindingConfiguration =
+                            protocolMappingItem.BindingConfiguration;
                     }
                     serviceEndpointElement.Kind = standardEndpointKind;
 
                     // LookupEndpoint will not set the Endpoint address and listenUri
                     // because omitSettingEndpointAddress is set to true.
                     // We will set them after setting the binding security
-                    ServiceEndpoint automaticEndpoint = configLoader.LookupEndpoint(serviceEndpointElement, null, host, host.Description, true /*omitSettingEndpointAddress*/);
+                    ServiceEndpoint automaticEndpoint = configLoader.LookupEndpoint(
+                        serviceEndpointElement,
+                        null,
+                        host,
+                        host.Description,
+                        true /*omitSettingEndpointAddress*/
+                    );
                     WebHttpBinding binding = automaticEndpoint.Binding as WebHttpBinding;
-                                    
+
                     bool automaticallyConfigureSecurity = !binding.Security.IsModeSet;
                     if (automaticallyConfigureSecurity)
                     {
@@ -142,7 +183,10 @@ namespace System.ServiceModel.Web
                         {
                             binding.Security.Mode = WebHttpSecurityMode.Transport;
                         }
-                        else if (supportedSchemes != AuthenticationSchemes.None && supportedSchemes != AuthenticationSchemes.Anonymous)
+                        else if (
+                            supportedSchemes != AuthenticationSchemes.None
+                            && supportedSchemes != AuthenticationSchemes.Anonymous
+                        )
                         {
                             binding.Security.Mode = WebHttpSecurityMode.TransportCredentialOnly;
                         }
@@ -151,22 +195,36 @@ namespace System.ServiceModel.Web
                             binding.Security.Mode = WebHttpSecurityMode.None;
                         }
                     }
-                    
+
                     if (automaticallyConfigureSecurity && AspNetEnvironment.Enabled)
                     {
-                        SetBindingCredentialBasedOnHostedEnvironment(automaticEndpoint, supportedSchemes);
+                        SetBindingCredentialBasedOnHostedEnvironment(
+                            automaticEndpoint,
+                            supportedSchemes
+                        );
                     }
 
                     // Setting the Endpoint address and listenUri now that we've set the binding security
-                    ConfigLoader.ConfigureEndpointAddress(serviceEndpointElement, host, automaticEndpoint);
-                    ConfigLoader.ConfigureEndpointListenUri(serviceEndpointElement, host, automaticEndpoint);
+                    ConfigLoader.ConfigureEndpointAddress(
+                        serviceEndpointElement,
+                        host,
+                        automaticEndpoint
+                    );
+                    ConfigLoader.ConfigureEndpointListenUri(
+                        serviceEndpointElement,
+                        host,
+                        automaticEndpoint
+                    );
 
                     host.AddServiceEndpoint(automaticEndpoint);
                 }
             }
         }
 
-        internal static void SetRawContentTypeMapperIfNecessary(ServiceEndpoint endpoint, bool isDispatch)
+        internal static void SetRawContentTypeMapperIfNecessary(
+            ServiceEndpoint endpoint,
+            bool isDispatch
+        )
         {
             Binding binding = endpoint.Binding;
             ContractDescription contract = endpoint.Contract;
@@ -176,7 +234,8 @@ namespace System.ServiceModel.Web
             }
             CustomBinding customBinding = new CustomBinding(binding);
             BindingElementCollection bec = customBinding.Elements;
-            WebMessageEncodingBindingElement encodingElement = bec.Find<WebMessageEncodingBindingElement>();
+            WebMessageEncodingBindingElement encodingElement =
+                bec.Find<WebMessageEncodingBindingElement>();
             if (encodingElement == null || encodingElement.ContentTypeMapper != null)
             {
                 return;
@@ -185,7 +244,16 @@ namespace System.ServiceModel.Web
             int numStreamOperations = 0;
             foreach (OperationDescription operation in contract.Operations)
             {
-                bool isCompatible = (isDispatch) ? IsRawContentMapperCompatibleDispatchOperation(operation, ref numStreamOperations) : IsRawContentMapperCompatibleClientOperation(operation, ref numStreamOperations);
+                bool isCompatible =
+                    (isDispatch)
+                        ? IsRawContentMapperCompatibleDispatchOperation(
+                            operation,
+                            ref numStreamOperations
+                        )
+                        : IsRawContentMapperCompatibleClientOperation(
+                            operation,
+                            ref numStreamOperations
+                        );
                 if (!isCompatible)
                 {
                     areAllOperationsRawMapperCompatible = false;
@@ -205,7 +273,7 @@ namespace System.ServiceModel.Web
             {
                 return;
             }
-            
+
             // disable other things that listen for GET at base address and may conflict with auto-endpoints
             ServiceDebugBehavior sdb = this.Description.Behaviors.Find<ServiceDebugBehavior>();
             if (sdb != null)
@@ -213,19 +281,31 @@ namespace System.ServiceModel.Web
                 sdb.HttpHelpPageEnabled = false;
                 sdb.HttpsHelpPageEnabled = false;
             }
-            ServiceMetadataBehavior smb = this.Description.Behaviors.Find<ServiceMetadataBehavior>();
+            ServiceMetadataBehavior smb =
+                this.Description.Behaviors.Find<ServiceMetadataBehavior>();
             if (smb != null)
             {
                 smb.HttpGetEnabled = false;
                 smb.HttpsGetEnabled = false;
             }
 
-            AddAutomaticWebHttpBindingEndpoints(this, this.ImplementedContracts, SR2.GetString(SR2.HttpTransferServiceHostMultipleContracts, this.Description.Name), SR2.GetString(SR2.HttpTransferServiceHostNoContract, this.Description.Name), WebHttpEndpointKind);
+            AddAutomaticWebHttpBindingEndpoints(
+                this,
+                this.ImplementedContracts,
+                SR2.GetString(SR2.HttpTransferServiceHostMultipleContracts, this.Description.Name),
+                SR2.GetString(SR2.HttpTransferServiceHostNoContract, this.Description.Name),
+                WebHttpEndpointKind
+            );
 
             // for both user-defined and automatic endpoints, ensure they have the right behavior and content type mapper added
             foreach (ServiceEndpoint serviceEndpoint in this.Description.Endpoints)
             {
-                if (serviceEndpoint.Binding != null && serviceEndpoint.Binding.CreateBindingElements().Find<WebMessageEncodingBindingElement>() != null)
+                if (
+                    serviceEndpoint.Binding != null
+                    && serviceEndpoint
+                        .Binding.CreateBindingElements()
+                        .Find<WebMessageEncodingBindingElement>() != null
+                )
                 {
                     SetRawContentTypeMapperIfNecessary(serviceEndpoint, true);
                     if (serviceEndpoint.Behaviors.Find<WebHttpBehavior>() == null)
@@ -242,23 +322,37 @@ namespace System.ServiceModel.Web
             base.OnOpening();
         }
 
-        static bool IsRawContentMapperCompatibleClientOperation(OperationDescription operation, ref int numStreamOperations)
+        static bool IsRawContentMapperCompatibleClientOperation(
+            OperationDescription operation,
+            ref int numStreamOperations
+        )
         {
             // An operation is raw encoder compatible on the client side iff the response is a Stream or void
-            // The request is driven by the format property on the message and not by the content type 
-            if (operation.Messages.Count > 1 & !IsResponseStreamOrVoid(operation, ref numStreamOperations))
+            // The request is driven by the format property on the message and not by the content type
+            if (
+                operation.Messages.Count > 1
+                & !IsResponseStreamOrVoid(operation, ref numStreamOperations)
+            )
             {
                 return false;
             }
             return true;
-
         }
 
-        static bool IsRawContentMapperCompatibleDispatchOperation(OperationDescription operation, ref int numStreamOperations)
+        static bool IsRawContentMapperCompatibleDispatchOperation(
+            OperationDescription operation,
+            ref int numStreamOperations
+        )
         {
             // An operation is raw encoder compatible on the dispatch side iff the request body is a Stream or void
-            // The response is driven by the format property on the message and not by the content type 
-            UriTemplateDispatchFormatter throwAway = new UriTemplateDispatchFormatter(operation, null, new QueryStringConverter(), operation.DeclaringContract.Name, new Uri("http://localhost"));
+            // The response is driven by the format property on the message and not by the content type
+            UriTemplateDispatchFormatter throwAway = new UriTemplateDispatchFormatter(
+                operation,
+                null,
+                new QueryStringConverter(),
+                operation.DeclaringContract.Name,
+                new Uri("http://localhost")
+            );
             int numUriVariables = throwAway.pathMapping.Count + throwAway.queryMapping.Count;
             bool isRequestCompatible = false;
             if (numUriVariables > 0)
@@ -266,10 +360,14 @@ namespace System.ServiceModel.Web
                 // we need the local variable tmp because ref parameters are not allowed to be passed into
                 // anonymous methods by the compiler.
                 int tmp = 0;
-                WebHttpBehavior.HideRequestUriTemplateParameters(operation, throwAway, delegate()
-                {
-                    isRequestCompatible = IsRequestStreamOrVoid(operation, ref tmp);
-                });
+                WebHttpBehavior.HideRequestUriTemplateParameters(
+                    operation,
+                    throwAway,
+                    delegate()
+                    {
+                        isRequestCompatible = IsRequestStreamOrVoid(operation, ref tmp);
+                    }
+                );
                 numStreamOperations += tmp;
             }
             else
@@ -279,10 +377,15 @@ namespace System.ServiceModel.Web
             return isRequestCompatible;
         }
 
-        static bool IsRequestStreamOrVoid(OperationDescription operation, ref int numStreamOperations)
+        static bool IsRequestStreamOrVoid(
+            OperationDescription operation,
+            ref int numStreamOperations
+        )
         {
             MessageDescription message = operation.Messages[0];
-            if (WebHttpBehavior.IsTypedMessage(message) || WebHttpBehavior.IsUntypedMessage(message))
+            if (
+                WebHttpBehavior.IsTypedMessage(message) || WebHttpBehavior.IsUntypedMessage(message)
+            )
             {
                 return false;
             }
@@ -305,14 +408,19 @@ namespace System.ServiceModel.Web
             return false;
         }
 
-        static bool IsResponseStreamOrVoid(OperationDescription operation, ref int numStreamOperations)
+        static bool IsResponseStreamOrVoid(
+            OperationDescription operation,
+            ref int numStreamOperations
+        )
         {
             if (operation.Messages.Count <= 1)
             {
                 return true;
             }
             MessageDescription message = operation.Messages[1];
-            if (WebHttpBehavior.IsTypedMessage(message) || WebHttpBehavior.IsUntypedMessage(message))
+            if (
+                WebHttpBehavior.IsTypedMessage(message) || WebHttpBehavior.IsUntypedMessage(message)
+            )
             {
                 return false;
             }
@@ -343,11 +451,14 @@ namespace System.ServiceModel.Web
 
         // For automatic endpoints, in the hosted case we configure a credential type based on the vdir settings.
         // For IIS, in IntegratedWindowsAuth mode we pick Negotiate.
-        static void SetBindingCredentialBasedOnHostedEnvironment(ServiceEndpoint serviceEndpoint, AuthenticationSchemes supportedSchemes)
+        static void SetBindingCredentialBasedOnHostedEnvironment(
+            ServiceEndpoint serviceEndpoint,
+            AuthenticationSchemes supportedSchemes
+        )
         {
             WebHttpBinding whb = serviceEndpoint.Binding as WebHttpBinding;
             Fx.Assert(whb != null, "Automatic endpoint must be WebHttpBinding");
-            
+
             switch (supportedSchemes)
             {
                 case AuthenticationSchemes.Digest:
@@ -368,10 +479,10 @@ namespace System.ServiceModel.Web
                     whb.Security.Transport.ClientCredentialType = HttpClientCredentialType.None;
                     break;
                 default:
-                    whb.Security.Transport.ClientCredentialType = HttpClientCredentialType.InheritedFromHost;
+                    whb.Security.Transport.ClientCredentialType =
+                        HttpClientCredentialType.InheritedFromHost;
                     break;
             }
-            
         }
     }
 }

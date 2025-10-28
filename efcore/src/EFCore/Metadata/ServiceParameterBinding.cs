@@ -27,7 +27,8 @@ public abstract class ServiceParameterBinding : ParameterBinding
     protected ServiceParameterBinding(
         Type parameterType,
         Type serviceType,
-        params IPropertyBase[]? serviceProperties)
+        params IPropertyBase[]? serviceProperties
+    )
         : base(parameterType, serviceProperties)
     {
         Check.NotNull(serviceType, nameof(serviceType));
@@ -48,7 +49,9 @@ public abstract class ServiceParameterBinding : ParameterBinding
     /// <returns>The expression tree.</returns>
     public override Expression BindToParameter(ParameterBindingInfo bindingInfo)
     {
-        var serviceInstance = bindingInfo.ServiceInstances.FirstOrDefault(e => e.Type == ServiceType);
+        var serviceInstance = bindingInfo.ServiceInstances.FirstOrDefault(e =>
+            e.Type == ServiceType
+        );
         if (serviceInstance != null)
         {
             return serviceInstance;
@@ -56,7 +59,8 @@ public abstract class ServiceParameterBinding : ParameterBinding
 
         return BindToParameter(
             bindingInfo.MaterializationContextExpression,
-            Expression.Constant(bindingInfo));
+            Expression.Constant(bindingInfo)
+        );
     }
 
     /// <summary>
@@ -68,28 +72,41 @@ public abstract class ServiceParameterBinding : ParameterBinding
     /// <returns>The expression tree.</returns>
     public abstract Expression BindToParameter(
         Expression materializationExpression,
-        Expression bindingInfoExpression);
+        Expression bindingInfoExpression
+    );
 
     /// <summary>
     ///     A delegate to set a CLR service property on an entity instance.
     /// </summary>
-    public virtual Func<MaterializationContext, IEntityType, object, object?> ServiceDelegate
-        => NonCapturingLazyInitializer.EnsureInitialized(
-            ref _serviceDelegate, this, static b =>
+    public virtual Func<MaterializationContext, IEntityType, object, object?> ServiceDelegate =>
+        NonCapturingLazyInitializer.EnsureInitialized(
+            ref _serviceDelegate,
+            this,
+            static b =>
             {
-                var materializationContextParam = Expression.Parameter(typeof(MaterializationContext));
+                var materializationContextParam = Expression.Parameter(
+                    typeof(MaterializationContext)
+                );
                 var entityTypeParam = Expression.Parameter(typeof(IEntityType));
                 var entityParam = Expression.Parameter(typeof(object));
 
-                return Expression.Lambda<Func<MaterializationContext, IEntityType, object, object>>(
-                    b.BindToParameter(
+                return Expression
+                    .Lambda<Func<MaterializationContext, IEntityType, object, object>>(
+                        b.BindToParameter(
+                            materializationContextParam,
+                            Expression.New(
+                                typeof(ParameterBindingInfo).GetConstructor(
+                                    new[] { typeof(IEntityType), typeof(Expression) }
+                                )!,
+                                entityTypeParam,
+                                Expression.Constant(materializationContextParam)
+                            )
+                        ),
                         materializationContextParam,
-                        Expression.New(
-                            typeof(ParameterBindingInfo).GetConstructor(new[] { typeof(IEntityType), typeof(Expression) })!,
-                            entityTypeParam,
-                            Expression.Constant(materializationContextParam))),
-                    materializationContextParam,
-                    entityTypeParam,
-                    entityParam).Compile();
-            });
+                        entityTypeParam,
+                        entityParam
+                    )
+                    .Compile();
+            }
+        );
 }

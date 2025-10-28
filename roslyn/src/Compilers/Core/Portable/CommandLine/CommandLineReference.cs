@@ -47,8 +47,7 @@ namespace Microsoft.CodeAnalysis
 
         public bool Equals(CommandLineReference other)
         {
-            return _reference == other._reference
-                && _properties.Equals(other._properties);
+            return _reference == other._reference && _properties.Equals(other._properties);
         }
 
         public override int GetHashCode()

@@ -26,25 +26,29 @@ namespace Microsoft.CodeAnalysis.LanguageServer.UnitTests.Configuration
     {
         // A regex help to check the message we send to client.
         // It should look like "feature_group.feature_name"
-        private static readonly string s_clientSideSectionPattern = @"^((csharp|visual_basic)\|)?([\w_|\.]+)([\w_]+)$";
+        private static readonly string s_clientSideSectionPattern =
+            @"^((csharp|visual_basic)\|)?([\w_|\.]+)([\w_]+)$";
 
-        public DidChangeConfigurationNotificationHandlerTest(ITestOutputHelper? testOutputHelper) : base(testOutputHelper)
-        {
-        }
+        public DidChangeConfigurationNotificationHandlerTest(ITestOutputHelper? testOutputHelper)
+            : base(testOutputHelper) { }
 
         [Theory, CombinatorialData]
         public async Task VerifyNoRequestToClientWithoutCapability(bool mutatingLspWorkspace)
         {
-            var markup = @"
+            var markup =
+                @"
 public class B { }";
 
             var clientCapabilities = new ClientCapabilities()
             {
                 Workspace = new WorkspaceClientCapabilities()
                 {
-                    DidChangeConfiguration = new DynamicRegistrationSetting() { DynamicRegistration = true },
-                    Configuration = false
-                }
+                    DidChangeConfiguration = new DynamicRegistrationSetting()
+                    {
+                        DynamicRegistration = true,
+                    },
+                    Configuration = false,
+                },
             };
 
             var clientCallbackTarget = new ClientCallbackTarget();
@@ -56,24 +60,27 @@ public class B { }";
                 ClientTarget = clientCallbackTarget,
             };
 
-            await CreateTestLspServerAsync(
-                markup, mutatingLspWorkspace, initializationOptions);
+            await CreateTestLspServerAsync(markup, mutatingLspWorkspace, initializationOptions);
             Assert.False(clientCallbackTarget.ReceivedWorkspaceConfigurationRequest);
         }
 
         [Theory, CombinatorialData]
         public async Task VerifyWorkflow(bool mutatingLspWorkspace)
         {
-            var markup = @"
+            var markup =
+                @"
 public class A { }";
 
             var clientCapabilities = new ClientCapabilities()
             {
                 Workspace = new WorkspaceClientCapabilities()
                 {
-                    DidChangeConfiguration = new DynamicRegistrationSetting() { DynamicRegistration = true },
-                    Configuration = true
-                }
+                    DidChangeConfiguration = new DynamicRegistrationSetting()
+                    {
+                        DynamicRegistration = true,
+                    },
+                    Configuration = true,
+                },
             };
 
             var clientCallbackTarget = new ClientCallbackTarget();
@@ -90,7 +97,10 @@ public class A { }";
 
             // 1. When initialized, server should register workspace/didChangeConfiguration if client support DynamicRegistration
             var server = await CreateTestLspServerAsync(
-                markup, mutatingLspWorkspace, initializationOptions);
+                markup,
+                mutatingLspWorkspace,
+                initializationOptions
+            );
 
             Assert.True(clientCallbackTarget.WorkspaceDidChangeConfigurationRegistered);
 
@@ -101,15 +111,25 @@ public class A { }";
             // Let client has a default values for all options.
             clientCallbackTarget.SetClientSideOptionValues(setToDefaultValue: true);
 
-            await server.ExecuteRequestAsync<DidChangeConfigurationParams, object>(Methods.WorkspaceDidChangeConfigurationName, new DidChangeConfigurationParams(), CancellationToken.None).ConfigureAwait(false);
+            await server
+                .ExecuteRequestAsync<DidChangeConfigurationParams, object>(
+                    Methods.WorkspaceDidChangeConfigurationName,
+                    new DidChangeConfigurationParams(),
+                    CancellationToken.None
+                )
+                .ConfigureAwait(false);
             VerifyValuesInServer(server.TestWorkspace, clientCallbackTarget.MockClientSideValues);
         }
 
         [Fact]
         public void VerifyLspClientOptionNames()
         {
-            var actualNames = DidChangeConfigurationNotificationHandler.SupportedOptions.Select(
-                DidChangeConfigurationNotificationHandler.GenerateFullNameForOption).OrderBy(name => name).ToArray();
+            var actualNames = DidChangeConfigurationNotificationHandler
+                .SupportedOptions.Select(
+                    DidChangeConfigurationNotificationHandler.GenerateFullNameForOption
+                )
+                .OrderBy(name => name)
+                .ToArray();
             // These options are persist in the LSP client. Please make sure also modify the LSP client code if these strings are changed.
             var expectedNames = new[]
             {
@@ -150,14 +170,24 @@ public class A { }";
             Assert.Equal(expectedNames, actualNames);
         }
 
-        private static void VerifyValuesInServer(TestWorkspace workspace, List<string> expectedValues)
+        private static void VerifyValuesInServer(
+            TestWorkspace workspace,
+            List<string> expectedValues
+        )
         {
             var globalOptionService = workspace.GetService<IGlobalOptionService>();
             var supportedOptions = DidChangeConfigurationNotificationHandler.SupportedOptions;
-            Assert.Equal(supportedOptions.Sum(option => option is IPerLanguageValuedOption ? 2 : 1), expectedValues.Count);
-            var optionsAndLanguageToVerify = supportedOptions.SelectManyAsArray(option => option is IPerLanguageValuedOption
-                ? DidChangeConfigurationNotificationHandler.SupportedLanguages.SelectAsArray(lang => (option, lang))
-                : SpecializedCollections.SingletonEnumerable((option, string.Empty)));
+            Assert.Equal(
+                supportedOptions.Sum(option => option is IPerLanguageValuedOption ? 2 : 1),
+                expectedValues.Count
+            );
+            var optionsAndLanguageToVerify = supportedOptions.SelectManyAsArray(option =>
+                option is IPerLanguageValuedOption
+                    ? DidChangeConfigurationNotificationHandler.SupportedLanguages.SelectAsArray(
+                        lang => (option, lang)
+                    )
+                    : SpecializedCollections.SingletonEnumerable((option, string.Empty))
+            );
 
             for (var i = 0; i < expectedValues.Count; i++)
             {
@@ -167,12 +197,16 @@ public class A { }";
                 Assert.True(option.Definition.Serializer.TryParse(valueFromClient, out var result));
                 if (option is IPerLanguageValuedOption)
                 {
-                    var valueInServer = globalOptionService.GetOption<object>(new OptionKey2(option, languageName));
+                    var valueInServer = globalOptionService.GetOption<object>(
+                        new OptionKey2(option, languageName)
+                    );
                     Assert.Equal(result, valueInServer);
                 }
                 else
                 {
-                    var valueInServer = globalOptionService.GetOption<object>(new OptionKey2(option, null));
+                    var valueInServer = globalOptionService.GetOption<object>(
+                        new OptionKey2(option, null)
+                    );
                     Assert.Equal(result, valueInServer);
                 }
             }
@@ -185,24 +219,43 @@ public class A { }";
             public List<string> MockClientSideValues { get; } = new();
             public bool ReceivedWorkspaceConfigurationRequest { get; private set; } = false;
 
-            [JsonRpcMethod(Methods.ClientRegisterCapabilityName, UseSingleObjectParameterDeserialization = true)]
-            public void ClientRegisterCapability(RegistrationParams @registrationParams, CancellationToken _)
+            [JsonRpcMethod(
+                Methods.ClientRegisterCapabilityName,
+                UseSingleObjectParameterDeserialization = true
+            )]
+            public void ClientRegisterCapability(
+                RegistrationParams @registrationParams,
+                CancellationToken _
+            )
             {
                 if (WorkspaceDidChangeConfigurationRegistered)
                 {
-                    AssertEx.Fail($"{Methods.WorkspaceDidChangeConfigurationName} is registered twice.");
+                    AssertEx.Fail(
+                        $"{Methods.WorkspaceDidChangeConfigurationName} is registered twice."
+                    );
                     return;
                 }
 
-                WorkspaceDidChangeConfigurationRegistered = registrationParams.Registrations.Any(item => item.Method == Methods.WorkspaceDidChangeConfigurationName);
+                WorkspaceDidChangeConfigurationRegistered = registrationParams.Registrations.Any(
+                    item => item.Method == Methods.WorkspaceDidChangeConfigurationName
+                );
                 return;
             }
 
-            [JsonRpcMethod(Methods.WorkspaceConfigurationName, UseSingleObjectParameterDeserialization = true)]
-            public JArray WorkspaceConfigurationName(ConfigurationParams configurationParams, CancellationToken _)
+            [JsonRpcMethod(
+                Methods.WorkspaceConfigurationName,
+                UseSingleObjectParameterDeserialization = true
+            )]
+            public JArray WorkspaceConfigurationName(
+                ConfigurationParams configurationParams,
+                CancellationToken _
+            )
             {
                 ReceivedWorkspaceConfigurationRequest = true;
-                var expectConfigurationItemsNumber = DidChangeConfigurationNotificationHandler.SupportedOptions.Sum(option => option is IPerLanguageValuedOption ? 2 : 1);
+                var expectConfigurationItemsNumber =
+                    DidChangeConfigurationNotificationHandler.SupportedOptions.Sum(option =>
+                        option is IPerLanguageValuedOption ? 2 : 1
+                    );
                 Assert.Equal(expectConfigurationItemsNumber, configurationParams!.Items.Length);
                 Assert.Equal(expectConfigurationItemsNumber, MockClientSideValues.Count);
 
@@ -219,10 +272,14 @@ public class A { }";
                 MockClientSideValues.Clear();
                 foreach (var option in DidChangeConfigurationNotificationHandler.SupportedOptions)
                 {
-                    var valueToSet = setToDefaultValue ? GenerateDefaultValue(option) : GenerateNonDefaultValue(option);
+                    var valueToSet = setToDefaultValue
+                        ? GenerateDefaultValue(option)
+                        : GenerateNonDefaultValue(option);
                     if (option is IPerLanguageValuedOption)
                     {
-                        foreach (var _ in DidChangeConfigurationNotificationHandler.SupportedLanguages)
+                        foreach (
+                            var _ in DidChangeConfigurationNotificationHandler.SupportedLanguages
+                        )
                         {
                             MockClientSideValues.Add(valueToSet);
                         }
@@ -234,11 +291,11 @@ public class A { }";
                 }
             }
 
-            private static string ConvertToString(object? value)
-                => value switch
+            private static string ConvertToString(object? value) =>
+                value switch
                 {
                     null => "null",
-                    _ => value.ToString()
+                    _ => value.ToString(),
                 };
 
             private static string GenerateNonDefaultValue(IOption2 option)
@@ -247,8 +304,8 @@ public class A { }";
                 return ConvertToString(nonDefaultValue);
             }
 
-            private static string GenerateDefaultValue(IOption2 option)
-                => ConvertToString(option.DefaultValue);
+            private static string GenerateDefaultValue(IOption2 option) =>
+                ConvertToString(option.DefaultValue);
 
             private static object? GetNonDefaultValue(IOption2 option)
             {
@@ -282,7 +339,7 @@ public class A { }";
                     return defaultValue switch
                     {
                         null => true,
-                        _ => !defaultValue.Value
+                        _ => !defaultValue.Value,
                     };
                 }
                 else if (Nullable.GetUnderlyingType(type)?.IsEnum == true)
@@ -292,12 +349,14 @@ public class A { }";
                     return option.DefaultValue switch
                     {
                         null => Enum.GetValues(type).GetValue(0),
-                        _ => GetDifferentEnumValue(enumType, option.DefaultValue)
+                        _ => GetDifferentEnumValue(enumType, option.DefaultValue),
                     };
                 }
                 else
                 {
-                    throw new Exception($"Please return a non-default value based on the config name, config name: {option.Name}.");
+                    throw new Exception(
+                        $"Please return a non-default value based on the config name, config name: {option.Name}."
+                    );
                 }
 
                 object GetDifferentEnumValue(Type enumType, object enumValue)
@@ -313,7 +372,10 @@ public class A { }";
                     throw new ArgumentException($"{enumType.Name} has only one value.");
                 }
 
-                static bool TryGetValueNonDefaultValueBasedOnName(IOption option, out object? nonDefaultValue)
+                static bool TryGetValueNonDefaultValueBasedOnName(
+                    IOption option,
+                    out object? nonDefaultValue
+                )
                 {
                     if (option.Name is "end_of_line")
                     {

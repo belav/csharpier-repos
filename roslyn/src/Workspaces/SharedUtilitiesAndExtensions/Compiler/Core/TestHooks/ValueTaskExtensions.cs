@@ -22,7 +22,10 @@ internal static class ValueTaskExtensions
     /// <param name="task">The task whose completion should signal the completion of the returned awaitable.</param>
     /// <param name="captureContext">if set to <see langword="true"/> the continuation will be scheduled on the caller's context; <see langword="false"/> to always execute the continuation on the threadpool.</param>
     /// <returns>An awaitable.</returns>
-    public static NoThrowValueTaskAwaitable NoThrowAwaitableInternal(this ValueTask task, bool captureContext = true)
+    public static NoThrowValueTaskAwaitable NoThrowAwaitableInternal(
+        this ValueTask task,
+        bool captureContext = true
+    )
     {
         return new NoThrowValueTaskAwaitable(task, captureContext);
     }
@@ -53,7 +56,10 @@ internal static class ValueTaskExtensions
     /// <param name="captureContext">if set to <see langword="true"/> the continuation will be scheduled on the caller's context; <see langword="false"/> to always execute the continuation on the threadpool.</param>
     /// <returns>An awaitable.</returns>
     /// <typeparam name="TResult">The type of the result.</typeparam>
-    public static NoThrowValueTaskAwaitable<TResult> NoThrowAwaitableInternal<TResult>(this ValueTask<TResult> task, bool captureContext = true)
+    public static NoThrowValueTaskAwaitable<TResult> NoThrowAwaitableInternal<TResult>(
+        this ValueTask<TResult> task,
+        bool captureContext = true
+    )
     {
         return new NoThrowValueTaskAwaitable<TResult>(task, captureContext);
     }

@@ -3,21 +3,25 @@
 
 using System.Collections.Generic;
 using System.IO;
-using System.Threading.Tasks;
 using System.Threading;
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
-using Microsoft.WebAssembly.AppHost;
 using Microsoft.Extensions.Options;
-using Microsoft.Extensions.DependencyInjection;
+using Microsoft.WebAssembly.AppHost;
 
 namespace Microsoft.WebAssembly.AppHost.DevServer;
 
 internal static class DevServer
 {
-    internal static async Task<(ServerURLs, IWebHost)> StartAsync(DevServerOptions options, ILogger logger, CancellationToken token)
+    internal static async Task<(ServerURLs, IWebHost)> StartAsync(
+        DevServerOptions options,
+        ILogger logger,
+        CancellationToken token
+    )
     {
         TaskCompletionSource<ServerURLs> realUrlsAvailableTcs = new();
 
@@ -30,25 +34,32 @@ internal static class DevServer
             {
                 logging.AddConsole().AddFilter(null, LogLevel.Warning);
             })
-            .ConfigureServices((ctx, services) =>
-            {
-                if (options.WebServerUseCors)
+            .ConfigureServices(
+                (ctx, services) =>
                 {
-                    services.AddCors(o => o.AddPolicy("AnyCors", builder =>
+                    if (options.WebServerUseCors)
                     {
-                        builder.AllowAnyOrigin()
-                            .AllowAnyMethod()
-                            .AllowAnyHeader()
-                            .WithExposedHeaders("*");
-                    }));
+                        services.AddCors(o =>
+                            o.AddPolicy(
+                                "AnyCors",
+                                builder =>
+                                {
+                                    builder
+                                        .AllowAnyOrigin()
+                                        .AllowAnyMethod()
+                                        .AllowAnyHeader()
+                                        .WithExposedHeaders("*");
+                                }
+                            )
+                        );
+                    }
+                    services.AddSingleton(logger);
+                    services.AddSingleton(Options.Create(options));
+                    services.AddSingleton(realUrlsAvailableTcs);
+                    services.AddRouting();
                 }
-                services.AddSingleton(logger);
-                services.AddSingleton(Options.Create(options));
-                services.AddSingleton(realUrlsAvailableTcs);
-                services.AddRouting();
-            })
+            )
             .UseUrls(options.Urls);
-
 
         IWebHost? host = builder.Build();
         await host.StartAsync(token);
@@ -71,11 +82,15 @@ internal static class DevServer
             [WebHostDefaults.EnvironmentKey] = "Development",
             ["Logging:LogLevel:Microsoft"] = "Warning",
             ["Logging:LogLevel:Microsoft.Hosting.Lifetime"] = "Information",
-            [WebHostDefaults.StaticWebAssetsKey] = options.StaticWebAssetsPath
+            [WebHostDefaults.StaticWebAssetsKey] = options.StaticWebAssetsPath,
         };
 
         config.AddInMemoryCollection(inMemoryConfiguration);
-        config.AddJsonFile(Path.Combine(applicationDirectory, "dotnet-devserversettings.json"), optional: true, reloadOnChange: true);
+        config.AddJsonFile(
+            Path.Combine(applicationDirectory, "dotnet-devserversettings.json"),
+            optional: true,
+            reloadOnChange: true
+        );
 
         return config.Build();
     }

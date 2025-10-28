@@ -4,13 +4,13 @@
 namespace System.Activities.Statements
 {
     using System;
+    using System.Activities.Expressions;
+    using System.Activities.Validation;
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
     using System.ComponentModel;
-    using System.Runtime;
-    using System.Activities.Validation;
     using System.Linq;
-    using System.Activities.Expressions;
+    using System.Runtime;
 
     public sealed class Compensate : NativeActivity
     {
@@ -28,11 +28,7 @@ namespace System.Activities.Statements
         }
 
         [DefaultValue(null)]
-        public InArgument<CompensationToken> Target
-        {
-            get;
-            set;
-        }
+        public InArgument<CompensationToken> Target { get; set; }
 
         DefaultCompensation DefaultCompensation
         {
@@ -41,9 +37,9 @@ namespace System.Activities.Statements
                 if (this.defaultCompensation == null)
                 {
                     this.defaultCompensation = new DefaultCompensation()
-                        {
-                            Target = new InArgument<CompensationToken>(this.currentCompensationToken),
-                        };
+                    {
+                        Target = new InArgument<CompensationToken>(this.currentCompensationToken),
+                    };
                 }
 
                 return this.defaultCompensation;
@@ -57,9 +53,11 @@ namespace System.Activities.Statements
                 if (this.internalCompensate == null)
                 {
                     this.internalCompensate = new InternalCompensate()
-                        {
-                            Target = new InArgument<CompensationToken>(new ArgumentValue<CompensationToken> { ArgumentName = "Target" }),
-                        };
+                    {
+                        Target = new InArgument<CompensationToken>(
+                            new ArgumentValue<CompensationToken> { ArgumentName = "Target" }
+                        ),
+                    };
                 }
 
                 return this.internalCompensate;
@@ -68,20 +66,23 @@ namespace System.Activities.Statements
 
         protected override void CacheMetadata(NativeActivityMetadata metadata)
         {
-            RuntimeArgument targetArgument = new RuntimeArgument("Target", typeof(CompensationToken), ArgumentDirection.In);
+            RuntimeArgument targetArgument = new RuntimeArgument(
+                "Target",
+                typeof(CompensationToken),
+                ArgumentDirection.In
+            );
             metadata.Bind(this.Target, targetArgument);
             metadata.SetArgumentsCollection(new Collection<RuntimeArgument> { targetArgument });
 
-            metadata.SetImplementationVariablesCollection(new Collection<Variable> { this.currentCompensationToken });
+            metadata.SetImplementationVariablesCollection(
+                new Collection<Variable> { this.currentCompensationToken }
+            );
 
             Fx.Assert(DefaultCompensation != null, "DefaultCompensation must be valid");
             Fx.Assert(InternalCompensate != null, "InternalCompensate must be valid");
             metadata.SetImplementationChildrenCollection(
-                new Collection<Activity>
-                {
-                    DefaultCompensation,
-                    InternalCompensate
-                });
+                new Collection<Activity> { DefaultCompensation, InternalCompensate }
+            );
         }
 
         internal override IList<Constraint> InternalGetConstraints()
@@ -91,10 +92,17 @@ namespace System.Activities.Statements
 
         static Constraint CompensateWithNoTarget()
         {
-            DelegateInArgument<Compensate> element = new DelegateInArgument<Compensate> { Name = "element" };
-            DelegateInArgument<ValidationContext> validationContext = new DelegateInArgument<ValidationContext> { Name = "validationContext" };
+            DelegateInArgument<Compensate> element = new DelegateInArgument<Compensate>
+            {
+                Name = "element",
+            };
+            DelegateInArgument<ValidationContext> validationContext =
+                new DelegateInArgument<ValidationContext> { Name = "validationContext" };
             Variable<bool> assertFlag = new Variable<bool> { Name = "assertFlag" };
-            Variable<IEnumerable<Activity>> elements = new Variable<IEnumerable<Activity>>() { Name = "elements" };
+            Variable<IEnumerable<Activity>> elements = new Variable<IEnumerable<Activity>>()
+            {
+                Name = "elements",
+            };
             Variable<int> index = new Variable<int>() { Name = "index" };
 
             return new Constraint<Compensate>
@@ -105,25 +113,18 @@ namespace System.Activities.Statements
                     Argument2 = validationContext,
                     Handler = new Sequence
                     {
-                        Variables = 
-                        {
-                            assertFlag,
-                            elements,
-                            index
-                        },
+                        Variables = { assertFlag, elements, index },
                         Activities =
                         {
                             new If
                             {
-                                Condition = new InArgument<bool>((env) => element.Get(env).Target != null),
-                                Then = new Assign<bool>
-                                {
-                                    To = assertFlag,
-                                    Value = true
-                                },
+                                Condition = new InArgument<bool>(
+                                    (env) => element.Get(env).Target != null
+                                ),
+                                Then = new Assign<bool> { To = assertFlag, Value = true },
                                 Else = new Sequence
                                 {
-                                    Activities = 
+                                    Activities =
                                     {
                                         new Assign<IEnumerable<Activity>>
                                         {
@@ -133,54 +134,77 @@ namespace System.Activities.Statements
                                                 ValidationContext = validationContext,
                                             },
                                         },
-                                        new While(env => (assertFlag.Get(env) != true) && index.Get(env) < elements.Get(env).Count())
+                                        new While(env =>
+                                            (assertFlag.Get(env) != true)
+                                            && index.Get(env) < elements.Get(env).Count()
+                                        )
                                         {
                                             Body = new Sequence
                                             {
-                                                Activities = 
+                                                Activities =
                                                 {
-                                                    new If(env => (elements.Get(env).ElementAt(index.Get(env))).GetType() == typeof(CompensationParticipant))
+                                                    new If(env =>
+                                                        (
+                                                            elements
+                                                                .Get(env)
+                                                                .ElementAt(index.Get(env))
+                                                        ).GetType()
+                                                        == typeof(CompensationParticipant)
+                                                    )
                                                     {
                                                         Then = new Assign<bool>
                                                         {
                                                             To = assertFlag,
-                                                            Value = true                                                            
+                                                            Value = true,
                                                         },
                                                     },
                                                     new Assign<int>
                                                     {
                                                         To = index,
-                                                        Value = new InArgument<int>(env => index.Get(env) + 1)
+                                                        Value = new InArgument<int>(env =>
+                                                            index.Get(env) + 1
+                                                        ),
                                                     },
-                                                }
-                                            }
-                                        }
-                                    }
-                                }                                
+                                                },
+                                            },
+                                        },
+                                    },
+                                },
                             },
                             new AssertValidation
                             {
                                 Assertion = new InArgument<bool>(assertFlag),
-                                Message = new InArgument<string>(SR.CompensateWithNoTargetConstraint)   
-                            }
-                        }
-                    }
-                }
+                                Message = new InArgument<string>(
+                                    SR.CompensateWithNoTargetConstraint
+                                ),
+                            },
+                        },
+                    },
+                },
             };
         }
 
         protected override void Execute(NativeActivityContext context)
         {
-            CompensationExtension compensationExtension = context.GetExtension<CompensationExtension>();
+            CompensationExtension compensationExtension =
+                context.GetExtension<CompensationExtension>();
             if (compensationExtension == null)
             {
-                throw FxTrace.Exception.AsError(new InvalidOperationException(SR.CompensateWithoutCompensableActivity(this.DisplayName)));
+                throw FxTrace.Exception.AsError(
+                    new InvalidOperationException(
+                        SR.CompensateWithoutCompensableActivity(this.DisplayName)
+                    )
+                );
             }
 
             if (Target.IsEmpty)
             {
-                CompensationToken ambientCompensationToken = (CompensationToken)context.Properties.Find(CompensationToken.PropertyName);
-                CompensationTokenData ambientTokenData = ambientCompensationToken == null ? null : compensationExtension.Get(ambientCompensationToken.CompensationId);
+                CompensationToken ambientCompensationToken = (CompensationToken)
+                    context.Properties.Find(CompensationToken.PropertyName);
+                CompensationTokenData ambientTokenData =
+                    ambientCompensationToken == null
+                        ? null
+                        : compensationExtension.Get(ambientCompensationToken.CompensationId);
 
                 if (ambientTokenData != null && ambientTokenData.IsTokenValidInSecondaryRoot)
                 {
@@ -192,17 +216,27 @@ namespace System.Activities.Statements
                 }
                 else
                 {
-                    throw FxTrace.Exception.AsError(new InvalidOperationException(SR.InvalidCompensateActivityUsage(this.DisplayName)));
+                    throw FxTrace.Exception.AsError(
+                        new InvalidOperationException(
+                            SR.InvalidCompensateActivityUsage(this.DisplayName)
+                        )
+                    );
                 }
             }
             else
             {
                 CompensationToken compensationToken = Target.Get(context);
-                CompensationTokenData tokenData = compensationToken == null ? null : compensationExtension.Get(compensationToken.CompensationId);
+                CompensationTokenData tokenData =
+                    compensationToken == null
+                        ? null
+                        : compensationExtension.Get(compensationToken.CompensationId);
 
                 if (compensationToken == null)
                 {
-                    throw FxTrace.Exception.Argument("Target", SR.InvalidCompensationToken(this.DisplayName));
+                    throw FxTrace.Exception.Argument(
+                        "Target",
+                        SR.InvalidCompensationToken(this.DisplayName)
+                    );
                 }
 
                 if (compensationToken.CompensateCalled)
@@ -213,10 +247,14 @@ namespace System.Activities.Statements
 
                 if (tokenData == null || tokenData.CompensationState != CompensationState.Completed)
                 {
-                    throw FxTrace.Exception.AsError(new InvalidOperationException(SR.CompensableActivityAlreadyConfirmedOrCompensated));
+                    throw FxTrace.Exception.AsError(
+                        new InvalidOperationException(
+                            SR.CompensableActivityAlreadyConfirmedOrCompensated
+                        )
+                    );
                 }
 
-                // A valid in-arg was passed...            
+                // A valid in-arg was passed...
                 tokenData.CompensationState = CompensationState.Compensating;
                 compensationToken.CompensateCalled = true;
                 context.ScheduleActivity(InternalCompensate);
@@ -225,7 +263,7 @@ namespace System.Activities.Statements
 
         protected override void Cancel(NativeActivityContext context)
         {
-            // Suppress Cancel   
+            // Suppress Cancel
         }
     }
 }

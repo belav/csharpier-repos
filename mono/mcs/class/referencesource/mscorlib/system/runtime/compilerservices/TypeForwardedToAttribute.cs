@@ -1,7 +1,7 @@
 // ==++==
-// 
+//
 //   Copyright (c) Microsoft Corporation.  All rights reserved.
-// 
+//
 // ==--==
 
 using System;
@@ -10,7 +10,8 @@ using System.Reflection;
 namespace System.Runtime.CompilerServices
 {
     using System;
-    [AttributeUsage(AttributeTargets.Assembly, AllowMultiple=true, Inherited=false)]
+
+    [AttributeUsage(AttributeTargets.Assembly, AllowMultiple = true, Inherited = false)]
     public sealed class TypeForwardedToAttribute : Attribute
     {
         private Type _destination;
@@ -22,9 +23,7 @@ namespace System.Runtime.CompilerServices
 
         public Type Destination
         {
-            get {
-                return _destination;
-            }
+            get { return _destination; }
         }
 #if false
         [System.Security.SecurityCritical]
@@ -42,7 +41,3 @@ namespace System.Runtime.CompilerServices
 #endif
     }
 }
-
-
- 
-

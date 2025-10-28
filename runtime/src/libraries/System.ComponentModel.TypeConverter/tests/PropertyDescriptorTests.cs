@@ -14,10 +14,17 @@ namespace System.ComponentModel.Tests
         {
             var component = new DescriptorTestComponent();
             var properties = TypeDescriptor.GetProperties(component.GetType());
-            PropertyDescriptor oldPropertyDescriptor = properties.Find(nameof(component.Property), false);
+            PropertyDescriptor oldPropertyDescriptor = properties.Find(
+                nameof(component.Property),
+                false
+            );
             var newAttribute = new DescriptorTestAttribute();
 
-            PropertyDescriptor newPropertyDescriptor = TypeDescriptor.CreateProperty(component.GetType(), oldPropertyDescriptor, newAttribute);
+            PropertyDescriptor newPropertyDescriptor = TypeDescriptor.CreateProperty(
+                component.GetType(),
+                oldPropertyDescriptor,
+                newAttribute
+            );
 
             Assert.True(newPropertyDescriptor.Attributes.Contains(newAttribute));
         }
@@ -27,7 +34,10 @@ namespace System.ComponentModel.Tests
         {
             var component = new DescriptorTestComponent();
             var properties = TypeDescriptor.GetProperties(component.GetType());
-            PropertyDescriptor propertyDescriptor = properties.Find(nameof(component.Property), false);
+            PropertyDescriptor propertyDescriptor = properties.Find(
+                nameof(component.Property),
+                false
+            );
             var handlerWasCalled = false;
             EventHandler valueChangedHandler = (_, __) => handlerWasCalled = true;
 
@@ -44,7 +54,10 @@ namespace System.ComponentModel.Tests
             var properties = TypeDescriptor.GetProperties(component.GetType());
             var handlerWasCalled = false;
             EventHandler valueChangedHandler = (_, __) => handlerWasCalled = true;
-            PropertyDescriptor propertyDescriptor = properties.Find(nameof(component.Property), false);
+            PropertyDescriptor propertyDescriptor = properties.Find(
+                nameof(component.Property),
+                false
+            );
 
             propertyDescriptor.AddValueChanged(component, valueChangedHandler);
             propertyDescriptor.RemoveValueChanged(component, valueChangedHandler);
@@ -59,7 +72,10 @@ namespace System.ComponentModel.Tests
             var component = new DescriptorTestComponent();
             component.Property = DescriptorTestComponent.DefaultPropertyValue;
             var properties = TypeDescriptor.GetProperties(component.GetType());
-            PropertyDescriptor propertyDescriptor = properties.Find(nameof(component.Property), false);
+            PropertyDescriptor propertyDescriptor = properties.Find(
+                nameof(component.Property),
+                false
+            );
 
             Assert.False(propertyDescriptor.CanResetValue(component));
         }
@@ -69,7 +85,10 @@ namespace System.ComponentModel.Tests
         {
             var component = new DescriptorTestComponent();
             var properties = TypeDescriptor.GetProperties(component.GetType());
-            PropertyDescriptor propertyDescriptor = properties.Find(nameof(component.Property), false);
+            PropertyDescriptor propertyDescriptor = properties.Find(
+                nameof(component.Property),
+                false
+            );
 
             Assert.Equal(component.GetType(), propertyDescriptor.ComponentType);
         }
@@ -79,7 +98,10 @@ namespace System.ComponentModel.Tests
         {
             var component = new DescriptorTestComponent();
             var properties = TypeDescriptor.GetProperties(component.GetType());
-            PropertyDescriptor propertyDescriptor = properties.Find(nameof(component.Property), false);
+            PropertyDescriptor propertyDescriptor = properties.Find(
+                nameof(component.Property),
+                false
+            );
 
             Assert.Equal(component.Property.GetType(), propertyDescriptor.PropertyType);
         }
@@ -90,20 +112,25 @@ namespace System.ComponentModel.Tests
             var component = new DescriptorTestComponent();
             component.Property = 37;
             var properties = TypeDescriptor.GetProperties(component.GetType());
-            PropertyDescriptor propertyDescriptor = properties.Find(nameof(component.Property), false);
+            PropertyDescriptor propertyDescriptor = properties.Find(
+                nameof(component.Property),
+                false
+            );
 
             var retrievedValue = propertyDescriptor.GetValue(component);
 
             Assert.Equal(component.Property, retrievedValue);
         }
 
-
         [Fact]
         public void GetValueDoesNotHandleExceptions()
         {
             var component = new DescriptorTestComponent();
             var properties = TypeDescriptor.GetProperties(component.GetType());
-            PropertyDescriptor propertyDescriptor = properties.Find(nameof(component.PropertyWhichThrows), false);
+            PropertyDescriptor propertyDescriptor = properties.Find(
+                nameof(component.PropertyWhichThrows),
+                false
+            );
 
             Assert.Throws<TargetInvocationException>(() => propertyDescriptor.GetValue(component));
         }
@@ -114,7 +141,10 @@ namespace System.ComponentModel.Tests
             var component = new DescriptorTestComponent();
             component.Property = DescriptorTestComponent.DefaultPropertyValue - 1;
             var properties = TypeDescriptor.GetProperties(component.GetType());
-            PropertyDescriptor propertyDescriptor = properties.Find(nameof(component.Property), false);
+            PropertyDescriptor propertyDescriptor = properties.Find(
+                nameof(component.Property),
+                false
+            );
 
             // this should set the property's value to that provided by the DefaultValueAttribute
             propertyDescriptor.ResetValue(component);
@@ -128,7 +158,10 @@ namespace System.ComponentModel.Tests
             var component = new DescriptorTestComponent();
             component.Property = DescriptorTestComponent.DefaultPropertyValue;
             var properties = TypeDescriptor.GetProperties(component.GetType());
-            PropertyDescriptor propertyDescriptor = properties.Find(nameof(component.Property), false);
+            PropertyDescriptor propertyDescriptor = properties.Find(
+                nameof(component.Property),
+                false
+            );
 
             Assert.False(propertyDescriptor.ShouldSerializeValue(component));
         }
@@ -139,7 +172,10 @@ namespace System.ComponentModel.Tests
             var component = new DescriptorTestComponent();
             component.Property = DescriptorTestComponent.DefaultPropertyValue - 1;
             var properties = TypeDescriptor.GetProperties(component.GetType());
-            PropertyDescriptor propertyDescriptor = properties.Find(nameof(component.Property), false);
+            PropertyDescriptor propertyDescriptor = properties.Find(
+                nameof(component.Property),
+                false
+            );
 
             Assert.True(propertyDescriptor.ShouldSerializeValue(component));
         }
@@ -150,7 +186,10 @@ namespace System.ComponentModel.Tests
             var component = new DescriptorTestComponent();
             component.EnumProperty = DescriptorTestEnum.Value1;
             var properties = TypeDescriptor.GetProperties(component.GetType());
-            PropertyDescriptor propertyDescriptor = properties.Find(nameof(component.EnumProperty), false);
+            PropertyDescriptor propertyDescriptor = properties.Find(
+                nameof(component.EnumProperty),
+                false
+            );
 
             Assert.True(propertyDescriptor.ShouldSerializeValue(component));
         }
@@ -159,7 +198,9 @@ namespace System.ComponentModel.Tests
         public static void ReadOnlyPropertyReturnsTrue()
         {
             var foo = new ReadOnlyPropertyTestClass();
-            PropertyDescriptor property = TypeDescriptor.GetProperties(foo).Find("BarReadOnly", true);
+            PropertyDescriptor property = TypeDescriptor
+                .GetProperties(foo)
+                .Find("BarReadOnly", true);
             Assert.True(property.IsReadOnly);
         }
 
@@ -167,14 +208,18 @@ namespace System.ComponentModel.Tests
         public static void ReadOnlyPropertyReturnsFalse()
         {
             var foo = new ReadOnlyPropertyTestClass();
-            PropertyDescriptor property = TypeDescriptor.GetProperties(foo).Find("BarNotReadOnly", true);
+            PropertyDescriptor property = TypeDescriptor
+                .GetProperties(foo)
+                .Find("BarNotReadOnly", true);
             Assert.False(property.IsReadOnly);
         }
 
         [Fact]
         public static void ReadOnlyVirtualPropertyReturnsTrue()
         {
-            PropertyDescriptor property = TypeDescriptor.GetProperties(typeof(ReadOnlyPropertyTestClass), new[] { BrowsableAttribute.Yes }).Find("BarReadOnlyBaseClass", true);
+            PropertyDescriptor property = TypeDescriptor
+                .GetProperties(typeof(ReadOnlyPropertyTestClass), new[] { BrowsableAttribute.Yes })
+                .Find("BarReadOnlyBaseClass", true);
             Assert.True(property.IsReadOnly);
         }
 
@@ -199,7 +244,8 @@ namespace System.ComponentModel.Tests
             PropertyDescriptor property = TypeDescriptor.CreateProperty(
                 componentType: typeof(DescriptorTestComponent),
                 name: DescriptorTestComponent.ProtectedStringPropertyName,
-                type: typeof(string));
+                type: typeof(string)
+            );
 
             const string PropertyValue = "Test";
 
@@ -219,7 +265,9 @@ namespace System.ComponentModel.Tests
             component.AddService(typeof(IDesignerHost), designerHost);
 
             PropertyDescriptorCollection properties = TypeDescriptor.GetProperties(component);
-            PropertyDescriptor stringProperty = properties[nameof(DescriptorTestComponent.StringProperty)];
+            PropertyDescriptor stringProperty = properties[
+                nameof(DescriptorTestComponent.StringProperty)
+            ];
             Assert.NotNull(stringProperty);
 
             // Create new property that "wraps" stringProperty and redirects to the designer.
@@ -227,7 +275,8 @@ namespace System.ComponentModel.Tests
             PropertyDescriptor newStringProperty = TypeDescriptor.CreateProperty(
                 componentType: typeof(MockDesigner),
                 oldPropertyDescriptor: stringProperty,
-                attributes: new[] { ReadOnlyAttribute.No });
+                attributes: new[] { ReadOnlyAttribute.No }
+            );
 
             // The property descriptor should be redirected to reflect over the designer.
             const string PropertyValue = "Test";

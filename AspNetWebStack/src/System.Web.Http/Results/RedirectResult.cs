@@ -23,9 +23,7 @@ namespace System.Web.Http.Results
         /// <param name="location">The location to which to redirect.</param>
         /// <param name="request">The request message which led to this result.</param>
         public RedirectResult(Uri location, HttpRequestMessage request)
-            : this(location, new StatusCodeResult.DirectDependencyProvider(request))
-        {
-        }
+            : this(location, new StatusCodeResult.DirectDependencyProvider(request)) { }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="RedirectResult"/> class with the values provided.
@@ -33,9 +31,7 @@ namespace System.Web.Http.Results
         /// <param name="location">The location to which to redirect.</param>
         /// <param name="controller">The controller from which to obtain the dependencies needed for execution.</param>
         public RedirectResult(Uri location, ApiController controller)
-            : this(location, new StatusCodeResult.ApiControllerDependencyProvider(controller))
-        {
-        }
+            : this(location, new StatusCodeResult.ApiControllerDependencyProvider(controller)) { }
 
         private RedirectResult(Uri location, StatusCodeResult.IDependencyProvider dependencies)
         {

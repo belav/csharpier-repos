@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -31,45 +31,51 @@ using System.Security.Permissions;
 
 namespace System.Web.UI.HtmlControls
 {
-	// CAS
-	[AspNetHostingPermission (SecurityAction.LinkDemand, Level = AspNetHostingPermissionLevel.Minimal)]
-	[AspNetHostingPermission (SecurityAction.InheritanceDemand, Level = AspNetHostingPermissionLevel.Minimal)]
-	public class HtmlTitle : HtmlControl
-	{
-		string text;
-		
-		protected override void AddParsedSubObject(object obj)
-		{
-			LiteralControl lit = obj as LiteralControl;
-			if (lit != null)
-				text = lit.Text;
-			else
-				base.AddParsedSubObject (obj);
-		}
+    // CAS
+    [AspNetHostingPermission(
+        SecurityAction.LinkDemand,
+        Level = AspNetHostingPermissionLevel.Minimal
+    )]
+    [AspNetHostingPermission(
+        SecurityAction.InheritanceDemand,
+        Level = AspNetHostingPermissionLevel.Minimal
+    )]
+    public class HtmlTitle : HtmlControl
+    {
+        string text;
 
-		protected override ControlCollection CreateControlCollection ()
-		{
-			return new ControlCollection (this);
-		}
-		
-		[DesignerSerializationVisibility (DesignerSerializationVisibility.Hidden)]
-		[DefaultValue ("")]
-		[PersistenceMode (PersistenceMode.InnerDefaultProperty)]
-		[Localizable (true)]
-		public virtual string Text {
-			get { return text; }
-			set { text = value; }
-		}
-		
-		protected internal override void Render (HtmlTextWriter writer)
-		{
-			writer.RenderBeginTag (HtmlTextWriterTag.Title);
-			if (HasControls () || HasRenderMethodDelegate ())
-				RenderChildren (writer);
-			else
-				writer.Write (text);
-			writer.RenderEndTag ();
-		}
-	}
+        protected override void AddParsedSubObject(object obj)
+        {
+            LiteralControl lit = obj as LiteralControl;
+            if (lit != null)
+                text = lit.Text;
+            else
+                base.AddParsedSubObject(obj);
+        }
+
+        protected override ControlCollection CreateControlCollection()
+        {
+            return new ControlCollection(this);
+        }
+
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        [DefaultValue("")]
+        [PersistenceMode(PersistenceMode.InnerDefaultProperty)]
+        [Localizable(true)]
+        public virtual string Text
+        {
+            get { return text; }
+            set { text = value; }
+        }
+
+        protected internal override void Render(HtmlTextWriter writer)
+        {
+            writer.RenderBeginTag(HtmlTextWriterTag.Title);
+            if (HasControls() || HasRenderMethodDelegate())
+                RenderChildren(writer);
+            else
+                writer.Write(text);
+            writer.RenderEndTag();
+        }
+    }
 }
-

@@ -1,16 +1,16 @@
 namespace System.Workflow.ComponentModel
 {
     using System;
-    using System.Text;
-    using System.Reflection;
+    using System.CodeDom;
     using System.Collections;
     using System.Collections.Specialized;
-    using System.CodeDom;
     using System.ComponentModel;
     using System.ComponentModel.Design;
+    using System.Diagnostics;
     using System.Drawing;
     using System.Drawing.Drawing2D;
-    using System.Diagnostics;
+    using System.Reflection;
+    using System.Text;
     using System.Workflow.ComponentModel;
     using System.Workflow.ComponentModel.Design;
 
@@ -24,7 +24,11 @@ namespace System.Workflow.ComponentModel
             Activity parentActivity = parentActivityDesigner.Activity;
             while (parentActivity != null)
             {
-                if (parentActivity is CancellationHandlerActivity || parentActivity is CompensationHandlerActivity || parentActivity is FaultHandlerActivity)
+                if (
+                    parentActivity is CancellationHandlerActivity
+                    || parentActivity is CompensationHandlerActivity
+                    || parentActivity is FaultHandlerActivity
+                )
                     return true;
 
                 parentActivity = parentActivity.Parent;
@@ -51,5 +55,4 @@ namespace System.Workflow.ComponentModel
         }
     }
     #endregion
-
 }

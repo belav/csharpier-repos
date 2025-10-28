@@ -24,6 +24,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel.Inter
         int GetHandledEvents([MarshalAs(UnmanagedType.Interface)] out IVsEnumBSTR ppUnk);
 
         [PreserveSig]
-        int HandlesEvent([MarshalAs(UnmanagedType.BStr)] string bstrEventName, [MarshalAs(UnmanagedType.Bool)] out bool result);
+        int HandlesEvent(
+            [MarshalAs(UnmanagedType.BStr)] string bstrEventName,
+            [MarshalAs(UnmanagedType.Bool)] out bool result
+        );
     }
 }

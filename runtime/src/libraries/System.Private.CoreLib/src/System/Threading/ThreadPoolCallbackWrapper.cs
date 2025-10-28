@@ -18,10 +18,7 @@ namespace System.Threading
                 ThreadPool.InitializeForThreadPoolThread();
 #endif
             }
-            return new ThreadPoolCallbackWrapper
-            {
-                _currentThread = currentThread,
-            };
+            return new ThreadPoolCallbackWrapper { _currentThread = currentThread };
         }
 
         public void Exit(bool resetThread = true)

@@ -5,10 +5,10 @@
 namespace System.ServiceModel.Routing
 {
     using System;
+    using System.Runtime;
     using System.ServiceModel;
     using System.ServiceModel.Channels;
     using System.Xml;
-    using System.Runtime;
 
     class DelegatingHeader : MessageHeader
     {
@@ -33,19 +33,29 @@ namespace System.ServiceModel.Routing
                 this.index = this.originalHeaders.FindHeader(this.info.Name, this.info.Namespace);
                 if (this.index < 0)
                 {
-                    throw FxTrace.Exception.AsError(new InvalidOperationException(SR.SourceHeaderNotFound(this.info.Name, this.info.Namespace)));
+                    throw FxTrace.Exception.AsError(
+                        new InvalidOperationException(
+                            SR.SourceHeaderNotFound(this.info.Name, this.info.Namespace)
+                        )
+                    );
                 }
             }
         }
 
-        protected override void OnWriteHeaderContents(XmlDictionaryWriter writer, MessageVersion messageVersion)
+        protected override void OnWriteHeaderContents(
+            XmlDictionaryWriter writer,
+            MessageVersion messageVersion
+        )
         {
             this.EnsureIndex();
             this.originalHeaders.WriteHeaderContents(index, writer);
             this.index = -1;
         }
 
-        protected override void OnWriteStartHeader(XmlDictionaryWriter writer, MessageVersion messageVersion)
+        protected override void OnWriteStartHeader(
+            XmlDictionaryWriter writer,
+            MessageVersion messageVersion
+        )
         {
             this.EnsureIndex();
             this.originalHeaders.WriteStartHeader(this.index, writer);

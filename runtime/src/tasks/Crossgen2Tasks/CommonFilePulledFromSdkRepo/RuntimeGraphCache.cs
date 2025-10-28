@@ -35,12 +35,20 @@ namespace Microsoft.NET.Build.Tasks
             string key = GetTaskObjectKey(runtimeJsonPath);
 
             RuntimeGraph result;
-            object existingRuntimeGraphTaskObject = _buildEngine.GetRegisteredTaskObject(key, RegisteredTaskObjectLifetime.AppDomain);
+            object existingRuntimeGraphTaskObject = _buildEngine.GetRegisteredTaskObject(
+                key,
+                RegisteredTaskObjectLifetime.AppDomain
+            );
             if (existingRuntimeGraphTaskObject == null)
             {
                 result = JsonRuntimeFormat.ReadRuntimeGraph(runtimeJsonPath);
 
-                _buildEngine.RegisterTaskObject(key, result, RegisteredTaskObjectLifetime.AppDomain, true);
+                _buildEngine.RegisterTaskObject(
+                    key,
+                    result,
+                    RegisteredTaskObjectLifetime.AppDomain,
+                    true
+                );
             }
             else
             {

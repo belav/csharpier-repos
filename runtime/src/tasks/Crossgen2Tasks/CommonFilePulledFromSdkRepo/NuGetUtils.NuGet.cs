@@ -36,9 +36,12 @@ namespace Microsoft.NET.Build.Tasks
         {
             switch (projectLanguage)
             {
-                case "C#": return "cs";
-                case "F#": return "fs";
-                default: return projectLanguage?.ToLowerInvariant();
+                case "C#":
+                    return "cs";
+                case "F#":
+                    return "fs";
+                default:
+                    return projectLanguage?.ToLowerInvariant();
             }
         }
 
@@ -80,13 +83,19 @@ namespace Microsoft.NET.Build.Tasks
             return IsAnalyzer() && FileMatchesProjectLanguage();
         }
 
-        public static string GetBestMatchingRid(RuntimeGraph runtimeGraph, string runtimeIdentifier,
-            IEnumerable<string> availableRuntimeIdentifiers, out bool wasInGraph)
+        public static string GetBestMatchingRid(
+            RuntimeGraph runtimeGraph,
+            string runtimeIdentifier,
+            IEnumerable<string> availableRuntimeIdentifiers,
+            out bool wasInGraph
+        )
         {
             wasInGraph = runtimeGraph.Runtimes.ContainsKey(runtimeIdentifier);
 
             HashSet<string> availableRids = new HashSet<string>(availableRuntimeIdentifiers);
-            foreach (var candidateRuntimeIdentifier in runtimeGraph.ExpandRuntime(runtimeIdentifier))
+            foreach (
+                var candidateRuntimeIdentifier in runtimeGraph.ExpandRuntime(runtimeIdentifier)
+            )
             {
                 if (availableRids.Contains(candidateRuntimeIdentifier))
                 {

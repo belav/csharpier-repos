@@ -10,9 +10,9 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.CodeAnalysis.Host.Mef;
+using Microsoft.CodeAnalysis.Options;
 using Microsoft.CodeAnalysis.PooledObjects;
 using Microsoft.CodeAnalysis.SignatureHelp;
-using Microsoft.CodeAnalysis.Options;
 using Microsoft.VisualStudio.Text.Adornments;
 using LSP = Microsoft.VisualStudio.LanguageServer.Protocol;
 
@@ -20,16 +20,21 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler
 {
     [ExportCSharpVisualBasicStatelessLspService(typeof(SignatureHelpHandler)), Shared]
     [Method(LSP.Methods.TextDocumentSignatureHelpName)]
-    internal class SignatureHelpHandler : ILspServiceDocumentRequestHandler<LSP.TextDocumentPositionParams, LSP.SignatureHelp?>
+    internal class SignatureHelpHandler
+        : ILspServiceDocumentRequestHandler<LSP.TextDocumentPositionParams, LSP.SignatureHelp?>
     {
-        private readonly IEnumerable<Lazy<ISignatureHelpProvider, OrderableLanguageMetadata>> _allProviders;
+        private readonly IEnumerable<
+            Lazy<ISignatureHelpProvider, OrderableLanguageMetadata>
+        > _allProviders;
         private readonly IGlobalOptionService _globalOptions;
 
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
         public SignatureHelpHandler(
-            [ImportMany] IEnumerable<Lazy<ISignatureHelpProvider, OrderableLanguageMetadata>> allProviders,
-            IGlobalOptionService globalOptions)
+            [ImportMany]
+                IEnumerable<Lazy<ISignatureHelpProvider, OrderableLanguageMetadata>> allProviders,
+            IGlobalOptionService globalOptions
+        )
         {
             _allProviders = allProviders;
             _globalOptions = globalOptions;
@@ -38,24 +43,47 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler
         public bool MutatesSolutionState => false;
         public bool RequiresLSPSolution => true;
 
-        public LSP.TextDocumentIdentifier GetTextDocumentIdentifier(LSP.TextDocumentPositionParams request) => request.TextDocument;
+        public LSP.TextDocumentIdentifier GetTextDocumentIdentifier(
+            LSP.TextDocumentPositionParams request
+        ) => request.TextDocument;
 
-        public async Task<LSP.SignatureHelp?> HandleRequestAsync(LSP.TextDocumentPositionParams request, RequestContext context, CancellationToken cancellationToken)
+        public async Task<LSP.SignatureHelp?> HandleRequestAsync(
+            LSP.TextDocumentPositionParams request,
+            RequestContext context,
+            CancellationToken cancellationToken
+        )
         {
             var clientCapabilities = context.GetRequiredClientCapabilities();
             var document = context.Document;
             if (document == null)
                 return null;
 
-            var position = await document.GetPositionFromLinePositionAsync(ProtocolConversions.PositionToLinePosition(request.Position), cancellationToken).ConfigureAwait(false);
+            var position = await document
+                .GetPositionFromLinePositionAsync(
+                    ProtocolConversions.PositionToLinePosition(request.Position),
+                    cancellationToken
+                )
+                .ConfigureAwait(false);
 
-            var providers = _allProviders.Where(p => p.Metadata.Language == document.Project.Language);
-            var triggerInfo = new SignatureHelpTriggerInfo(SignatureHelpTriggerReason.InvokeSignatureHelpCommand);
+            var providers = _allProviders.Where(p =>
+                p.Metadata.Language == document.Project.Language
+            );
+            var triggerInfo = new SignatureHelpTriggerInfo(
+                SignatureHelpTriggerReason.InvokeSignatureHelpCommand
+            );
             var options = _globalOptions.GetSignatureHelpOptions(document.Project.Language);
 
             foreach (var provider in providers)
             {
-                var items = await provider.Value.GetItemsAsync(document, position, triggerInfo, options, cancellationToken).ConfigureAwait(false);
+                var items = await provider
+                    .Value.GetItemsAsync(
+                        document,
+                        position,
+                        triggerInfo,
+                        options,
+                        cancellationToken
+                    )
+                    .ConfigureAwait(false);
 
                 if (items != null)
                 {
@@ -68,7 +96,7 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler
                         {
                             sigInfo = new LSP.VSInternalSignatureInformation
                             {
-                                ColorizedLabel = GetSignatureClassifiedText(item)
+                                ColorizedLabel = GetSignatureClassifiedText(item),
                             };
                         }
                         else
@@ -77,12 +105,22 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler
                         }
 
                         sigInfo.Label = GetSignatureText(item);
-                        sigInfo.Documentation = new LSP.MarkupContent { Kind = LSP.MarkupKind.PlainText, Value = item.DocumentationFactory(cancellationToken).GetFullText() };
-                        sigInfo.Parameters = item.Parameters.Select(p => new LSP.ParameterInformation
+                        sigInfo.Documentation = new LSP.MarkupContent
                         {
-                            Label = p.Name,
-                            Documentation = new LSP.MarkupContent { Kind = LSP.MarkupKind.PlainText, Value = p.DocumentationFactory(cancellationToken).GetFullText() }
-                        }).ToArray();
+                            Kind = LSP.MarkupKind.PlainText,
+                            Value = item.DocumentationFactory(cancellationToken).GetFullText(),
+                        };
+                        sigInfo.Parameters = item
+                            .Parameters.Select(p => new LSP.ParameterInformation
+                            {
+                                Label = p.Name,
+                                Documentation = new LSP.MarkupContent
+                                {
+                                    Kind = LSP.MarkupKind.PlainText,
+                                    Value = p.DocumentationFactory(cancellationToken).GetFullText(),
+                                },
+                            })
+                            .ToArray();
                         sigInfos.Add(sigInfo);
                     }
 
@@ -90,7 +128,7 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler
                     {
                         ActiveSignature = GetActiveSignature(items),
                         ActiveParameter = items.ArgumentIndex,
-                        Signatures = sigInfos.ToArrayAndFree()
+                        Signatures = sigInfos.ToArrayAndFree(),
                     };
 
                     return sigHelp;
@@ -113,7 +151,9 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler
             // However, the LSP spec expects the language server to make this decision.
             // So implement the logic of picking a signature that has enough arguments here.
 
-            var matchingSignature = items.Items.FirstOrDefault(sig => sig.Parameters.Length > items.ArgumentIndex);
+            var matchingSignature = items.Items.FirstOrDefault(sig =>
+                sig.Parameters.Length > items.ArgumentIndex
+            );
             return matchingSignature != null ? items.Items.IndexOf(matchingSignature) : 0;
         }
 
@@ -148,6 +188,7 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler
 
             return sb.ToString();
         }
+
         private static ClassifiedTextElement GetSignatureClassifiedText(SignatureHelpItem item)
         {
             var taggedTexts = new ArrayBuilder<TaggedText>();
@@ -172,7 +213,14 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler
             taggedTexts.AddRange(item.SuffixDisplayParts);
             taggedTexts.AddRange(item.DescriptionParts);
 
-            return new ClassifiedTextElement(taggedTexts.ToArrayAndFree().Select(part => new ClassifiedTextRun(part.Tag.ToClassificationTypeName(), part.Text)));
+            return new ClassifiedTextElement(
+                taggedTexts
+                    .ToArrayAndFree()
+                    .Select(part => new ClassifiedTextRun(
+                        part.Tag.ToClassificationTypeName(),
+                        part.Text
+                    ))
+            );
         }
     }
 }

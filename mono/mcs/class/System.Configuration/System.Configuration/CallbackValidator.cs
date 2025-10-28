@@ -11,10 +11,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -28,27 +28,27 @@
 
 using System;
 
-namespace System.Configuration {
-	public sealed class CallbackValidator : ConfigurationValidatorBase
-	{
-		Type type;
-		ValidatorCallback callback;
+namespace System.Configuration
+{
+    public sealed class CallbackValidator : ConfigurationValidatorBase
+    {
+        Type type;
+        ValidatorCallback callback;
 
-		public CallbackValidator (Type type, ValidatorCallback callback)
-		{
-			this.type = type;
-			this.callback = callback;
-		}
+        public CallbackValidator(Type type, ValidatorCallback callback)
+        {
+            this.type = type;
+            this.callback = callback;
+        }
 
-		public override bool CanValidate (Type type)
-		{
-			return type == this.type;
-		}
+        public override bool CanValidate(Type type)
+        {
+            return type == this.type;
+        }
 
-		public override void Validate (object value)
-		{
-			callback (value);
-		}
-	}
+        public override void Validate(object value)
+        {
+            callback(value);
+        }
+    }
 }
-

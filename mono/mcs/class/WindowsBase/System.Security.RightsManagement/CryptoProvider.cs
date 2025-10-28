@@ -5,10 +5,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -24,61 +24,61 @@
 //
 
 using System;
-using System.Security;
 using System.Collections.ObjectModel;
+using System.Security;
 
-namespace System.Security.RightsManagement {
+namespace System.Security.RightsManagement
+{
+    [SecurityCritical(SecurityCriticalScope.Everything)]
+    public class CryptoProvider : IDisposable
+    {
+        internal CryptoProvider() { }
 
-	[SecurityCritical (SecurityCriticalScope.Everything)]
-	public class CryptoProvider : IDisposable
-	{
-		internal CryptoProvider ()
-		{
-		}
+        ~CryptoProvider() { }
 
-		~CryptoProvider ()
-		{
-		}
+        public int BlockSize
+        {
+            get { throw new NotImplementedException(); }
+        }
 
-		public int BlockSize {
-			get { throw new NotImplementedException (); }
-		}
+        public ReadOnlyCollection<ContentGrant> BoundGrants
+        {
+            get { throw new NotImplementedException(); }
+        }
 
-		public ReadOnlyCollection<ContentGrant> BoundGrants {
-			get { throw new NotImplementedException (); }
-		}
+        public bool CanDecrypt
+        {
+            get { throw new NotImplementedException(); }
+        }
 
-		public bool CanDecrypt {
-			get { throw new NotImplementedException (); }
-		}
+        public bool CanEncrypt
+        {
+            get { throw new NotImplementedException(); }
+        }
 
-		public bool CanEncrypt {
-			get { throw new NotImplementedException (); }
-		}
+        public bool CanMergeBlocks
+        {
+            get { throw new NotImplementedException(); }
+        }
 
-		public bool CanMergeBlocks {
-			get { throw new NotImplementedException (); }
-		}
+        public byte[] Decrypt(byte[] cryptoText)
+        {
+            throw new NotImplementedException();
+        }
 
-		public byte[] Decrypt (byte[] cryptoText)
-		{
-			throw new NotImplementedException ();			
-		}
+        public byte[] Encrypt(byte[] clearText)
+        {
+            throw new NotImplementedException();
+        }
 
-		public byte[] Encrypt (byte[] clearText)
-		{
-			throw new NotImplementedException ();			
-		}
+        protected virtual void Dispose(bool disposing)
+        {
+            throw new NotImplementedException();
+        }
 
-		protected virtual void Dispose (bool disposing)
-		{
-			throw new NotImplementedException ();			
-		}
-
-		public void Dispose ()
-		{
-			throw new NotImplementedException ();			
-		}
-	}
-
+        public void Dispose()
+        {
+            throw new NotImplementedException();
+        }
+    }
 }

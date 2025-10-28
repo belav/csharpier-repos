@@ -3,18 +3,24 @@
 // See the LICENSE file in the project root for more information.
 
 using System.Collections.Immutable;
-using Microsoft.CodeAnalysis.CSharp.Symbols;
 using System.Diagnostics;
+using Microsoft.CodeAnalysis.CSharp.Symbols;
 using Microsoft.CodeAnalysis.Symbols;
 using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.CSharp
 {
-    internal sealed class DynamicSiteContainer : SynthesizedContainer, ISynthesizedMethodBodyImplementationSymbol
+    internal sealed class DynamicSiteContainer
+        : SynthesizedContainer,
+            ISynthesizedMethodBodyImplementationSymbol
     {
         private readonly MethodSymbol _topLevelMethod;
 
-        internal DynamicSiteContainer(string name, MethodSymbol topLevelMethod, MethodSymbol containingMethod)
+        internal DynamicSiteContainer(
+            string name,
+            MethodSymbol topLevelMethod,
+            MethodSymbol containingMethod
+        )
             : base(name, containingMethod)
         {
             Debug.Assert(topLevelMethod != null);
@@ -38,6 +44,7 @@ namespace Microsoft.CodeAnalysis.CSharp
 
         internal override bool IsRecord => false;
         internal override bool IsRecordStruct => false;
+
         internal override bool HasPossibleWellKnownCloneMethod() => false;
 
         bool ISynthesizedMethodBodyImplementationSymbol.HasMethodBodyDependency

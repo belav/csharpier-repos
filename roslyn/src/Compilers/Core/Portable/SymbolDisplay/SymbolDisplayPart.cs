@@ -22,14 +22,20 @@ namespace Microsoft.CodeAnalysis
         /// <summary>
         /// Gets the kind of this display part.
         /// </summary>
-        public SymbolDisplayPartKind Kind { get { return _kind; } }
+        public SymbolDisplayPartKind Kind
+        {
+            get { return _kind; }
+        }
 
         /// <summary>
         /// Gets the symbol associated with this display part, if there is one.
         /// For example, the <see cref="ITypeSymbol"/> associated with a class name.
         /// </summary>
         /// <returns></returns>
-        public ISymbol? Symbol { get { return _symbol; } }
+        public ISymbol? Symbol
+        {
+            get { return _symbol; }
+        }
 
         /// <summary>
         /// Construct a non-formattable <see cref="SymbolDisplayPart"/> (i.e. with a fixed string value).

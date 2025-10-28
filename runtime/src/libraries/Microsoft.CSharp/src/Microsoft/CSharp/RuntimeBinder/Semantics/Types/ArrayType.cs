@@ -63,6 +63,7 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
         public override ConstValKind ConstValKind => ConstValKind.IntPtr;
 
         [RequiresUnreferencedCode(Binder.TrimmerWarning)]
-        public override AggregateType GetAts() => SymbolLoader.GetPredefindType(PredefinedType.PT_ARRAY);
+        public override AggregateType GetAts() =>
+            SymbolLoader.GetPredefindType(PredefinedType.PT_ARRAY);
     }
 }

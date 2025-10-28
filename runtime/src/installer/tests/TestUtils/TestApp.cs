@@ -44,10 +44,7 @@ namespace Microsoft.DotNet.CoreSetup.Test
         public static TestApp CreateEmpty(string name)
         {
             var (location, parentPath) = GetNewTestArtifactPath(name);
-            return new TestApp(location)
-            {
-                DirectoryToDelete = parentPath
-            };
+            return new TestApp(location) { DirectoryToDelete = parentPath };
         }
 
         /// <summary>
@@ -64,11 +61,16 @@ namespace Microsoft.DotNet.CoreSetup.Test
             TestApp app = CreateEmpty(appName);
             TestArtifact.CopyRecursive(
                 Path.Combine(TestContext.TestAssetsOutput, assetRelativePath),
-                app.Location);
+                app.Location
+            );
             return app;
         }
 
-        public void PopulateFrameworkDependent(string fxName, string fxVersion, Action<NetCoreAppBuilder> customizer = null)
+        public void PopulateFrameworkDependent(
+            string fxName,
+            string fxVersion,
+            Action<NetCoreAppBuilder> customizer = null
+        )
         {
             var builder = NetCoreAppBuilder.PortableForNETCoreApp(this);
 
@@ -84,13 +86,17 @@ namespace Microsoft.DotNet.CoreSetup.Test
             builder.Build(this);
         }
 
-        public void CreateAppHost(bool isWindowsGui = false, bool copyResources = true)
-            => CreateAppHost(Binaries.AppHost.FilePath, isWindowsGui, copyResources);
+        public void CreateAppHost(bool isWindowsGui = false, bool copyResources = true) =>
+            CreateAppHost(Binaries.AppHost.FilePath, isWindowsGui, copyResources);
 
-        public void CreateSingleFileHost(bool isWindowsGui = false, bool copyResources = true)
-            => CreateAppHost(Binaries.SingleFileHost.FilePath, isWindowsGui, copyResources);
+        public void CreateSingleFileHost(bool isWindowsGui = false, bool copyResources = true) =>
+            CreateAppHost(Binaries.SingleFileHost.FilePath, isWindowsGui, copyResources);
 
-        public void CreateAppHost(string hostSourcePath, bool isWindowsGui = false, bool copyResources = true)
+        public void CreateAppHost(
+            string hostSourcePath,
+            bool isWindowsGui = false,
+            bool copyResources = true
+        )
         {
             // Use the live-built apphost and HostModel to create the apphost to run
             HostWriter.CreateAppHost(
@@ -98,82 +104,127 @@ namespace Microsoft.DotNet.CoreSetup.Test
                 AppExe,
                 Path.GetFileName(AppDll),
                 windowsGraphicalUserInterface: isWindowsGui,
-                assemblyToCopyResourcesFrom: copyResources ? AppDll : null);
+                assemblyToCopyResourcesFrom: copyResources ? AppDll : null
+            );
         }
 
         public enum MockedComponent
         {
-            None,       // Product components
-            CoreClr,    // Mock coreclr
+            None, // Product components
+            CoreClr, // Mock coreclr
             HostPolicy, // Mock hostpolicy
         }
 
-        public void PopulateSelfContained(MockedComponent mock, Action<NetCoreAppBuilder> customizer = null)
+        public void PopulateSelfContained(
+            MockedComponent mock,
+            Action<NetCoreAppBuilder> customizer = null
+        )
         {
             var builder = NetCoreAppBuilder.ForNETCoreApp(Name, TestContext.TargetRID);
 
             // Update the .runtimeconfig.json - add included framework and remove any existing NETCoreApp framework
             builder.WithRuntimeConfig(c =>
-                c.WithIncludedFramework(Constants.MicrosoftNETCoreApp, TestContext.MicrosoftNETCoreAppVersion)
-                    .RemoveFramework(Constants.MicrosoftNETCoreApp));
+                c.WithIncludedFramework(
+                        Constants.MicrosoftNETCoreApp,
+                        TestContext.MicrosoftNETCoreAppVersion
+                    )
+                    .RemoveFramework(Constants.MicrosoftNETCoreApp)
+            );
 
             // Add main project assembly
             builder.WithProject(p => p.WithAssemblyGroup(null, g => g.WithMainAssembly()));
 
             // Add runtime libraries and assets
-            builder.WithRuntimePack($"{Constants.MicrosoftNETCoreApp}.Runtime.{TestContext.TargetRID}", TestContext.MicrosoftNETCoreAppVersion, l =>
-            {
-                if (mock == MockedComponent.None)
+            builder.WithRuntimePack(
+                $"{Constants.MicrosoftNETCoreApp}.Runtime.{TestContext.TargetRID}",
+                TestContext.MicrosoftNETCoreAppVersion,
+                l =>
                 {
-                    // All product components
-                    var (assemblies, nativeLibraries) = Binaries.GetRuntimeFiles();
-                    l.WithAssemblyGroup(string.Empty, g =>
+                    if (mock == MockedComponent.None)
                     {
-                        foreach (var file in assemblies)
-                        {
-                            var fileVersion = FileVersionInfo.GetVersionInfo(file).FileVersion;
-                            var asmVersion = System.Reflection.AssemblyName.GetAssemblyName(file).Version!.ToString();
-                            g.WithAsset(Path.GetFileName(file),
-                                f => f.WithVersion(asmVersion, fileVersion!).CopyFromFile(file));
-                        }
-                    });
-                    l.WithNativeLibraryGroup(string.Empty, g =>
-                    {
-                        // ./hostfxr - real component and will load hostpolicy
-                        g.WithAsset(Binaries.HostFxr.FileName,
-                            f => f.CopyFromFile(Binaries.HostFxr.FilePath));
+                        // All product components
+                        var (assemblies, nativeLibraries) = Binaries.GetRuntimeFiles();
+                        l.WithAssemblyGroup(
+                            string.Empty,
+                            g =>
+                            {
+                                foreach (var file in assemblies)
+                                {
+                                    var fileVersion = FileVersionInfo
+                                        .GetVersionInfo(file)
+                                        .FileVersion;
+                                    var asmVersion = System
+                                        .Reflection.AssemblyName.GetAssemblyName(file)
+                                        .Version!.ToString();
+                                    g.WithAsset(
+                                        Path.GetFileName(file),
+                                        f =>
+                                            f.WithVersion(asmVersion, fileVersion!)
+                                                .CopyFromFile(file)
+                                    );
+                                }
+                            }
+                        );
+                        l.WithNativeLibraryGroup(
+                            string.Empty,
+                            g =>
+                            {
+                                // ./hostfxr - real component and will load hostpolicy
+                                g.WithAsset(
+                                    Binaries.HostFxr.FileName,
+                                    f => f.CopyFromFile(Binaries.HostFxr.FilePath)
+                                );
 
-                        foreach (var file in nativeLibraries)
-                        {
-                            g.WithAsset(Path.GetFileName(file),
-                                f => f.CopyFromFile(file));
-                        }
-                    });
+                                foreach (var file in nativeLibraries)
+                                {
+                                    g.WithAsset(Path.GetFileName(file), f => f.CopyFromFile(file));
+                                }
+                            }
+                        );
+                    }
+                    else if (mock == MockedComponent.CoreClr)
+                    {
+                        l.WithNativeLibraryGroup(
+                            string.Empty,
+                            g =>
+                                g
+                                // ./hostfxr - real component and will load hostpolicy
+                                .WithAsset(
+                                        Binaries.HostFxr.FileName,
+                                        f => f.CopyFromFile(Binaries.HostFxr.FilePath)
+                                    )
+                                    // ./hostpolicy - real component and will load coreclr
+                                    .WithAsset(
+                                        Binaries.HostPolicy.FileName,
+                                        f => f.CopyFromFile(Binaries.HostPolicy.FilePath)
+                                    )
+                                    // ./coreclr - mocked component
+                                    .WithAsset(
+                                        Binaries.CoreClr.FileName,
+                                        f => f.CopyFromFile(Binaries.CoreClr.MockPath)
+                                    )
+                        );
+                    }
+                    else if (mock == MockedComponent.HostPolicy)
+                    {
+                        l.WithNativeLibraryGroup(
+                            string.Empty,
+                            g =>
+                                g
+                                // ./hostfxr - real component and will load hostpolicy
+                                .WithAsset(
+                                        Binaries.HostFxr.FileName,
+                                        f => f.CopyFromFile(Binaries.HostFxr.FilePath)
+                                    )
+                                    // ./hostpolicy - mocked component
+                                    .WithAsset(
+                                        Binaries.HostPolicy.FileName,
+                                        f => f.CopyFromFile(Binaries.HostPolicy.MockPath)
+                                    )
+                        );
+                    }
                 }
-                else if (mock == MockedComponent.CoreClr)
-                {
-                    l.WithNativeLibraryGroup(string.Empty, g => g
-                        // ./hostfxr - real component and will load hostpolicy
-                        .WithAsset(Binaries.HostFxr.FileName,
-                            f => f.CopyFromFile(Binaries.HostFxr.FilePath))
-                        // ./hostpolicy - real component and will load coreclr
-                        .WithAsset(Binaries.HostPolicy.FileName,
-                            f => f.CopyFromFile(Binaries.HostPolicy.FilePath))
-                        // ./coreclr - mocked component
-                        .WithAsset(Binaries.CoreClr.FileName,
-                            f => f.CopyFromFile(Binaries.CoreClr.MockPath)));
-                }
-                else if (mock == MockedComponent.HostPolicy)
-                {
-                    l.WithNativeLibraryGroup(string.Empty, g => g
-                        // ./hostfxr - real component and will load hostpolicy
-                        .WithAsset(Binaries.HostFxr.FileName,
-                            f => f.CopyFromFile(Binaries.HostFxr.FilePath))
-                        // ./hostpolicy - mocked component
-                        .WithAsset(Binaries.HostPolicy.FileName,
-                            f => f.CopyFromFile(Binaries.HostPolicy.MockPath)));
-                }
-            });
+            );
 
             builder.WithCustomizer(customizer);
 
@@ -190,7 +241,10 @@ namespace Microsoft.DotNet.CoreSetup.Test
         {
             Directory.CreateDirectory(Location);
             AppDll = Path.Combine(Location, $"{AssemblyName}.dll");
-            AppExe = Path.Combine(Location, Binaries.GetExeFileNameForCurrentPlatform(AssemblyName));
+            AppExe = Path.Combine(
+                Location,
+                Binaries.GetExeFileNameForCurrentPlatform(AssemblyName)
+            );
             DepsJson = Path.Combine(Location, $"{AssemblyName}.deps.json");
             RuntimeConfigJson = Path.Combine(Location, $"{AssemblyName}.runtimeconfig.json");
             RuntimeDevConfigJson = Path.Combine(Location, $"{AssemblyName}.runtimeconfig.dev.json");

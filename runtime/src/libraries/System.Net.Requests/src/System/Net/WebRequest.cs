@@ -13,6 +13,7 @@ using System.Runtime.Serialization;
 using System.Security.Principal;
 using System.Threading;
 using System.Threading.Tasks;
+
 namespace System.Net
 {
     public abstract class WebRequest : MarshalByRefObject, ISerializable
@@ -34,10 +35,18 @@ namespace System.Net
 
         internal const int DefaultTimeoutMilliseconds = 100 * 1000;
 
-        [Obsolete(Obsoletions.WebRequestMessage, DiagnosticId = Obsoletions.WebRequestDiagId, UrlFormat = Obsoletions.SharedUrlFormat)]
+        [Obsolete(
+            Obsoletions.WebRequestMessage,
+            DiagnosticId = Obsoletions.WebRequestDiagId,
+            UrlFormat = Obsoletions.SharedUrlFormat
+        )]
         protected WebRequest() { }
 
-        [Obsolete(Obsoletions.WebRequestMessage, DiagnosticId = Obsoletions.WebRequestDiagId, UrlFormat = Obsoletions.SharedUrlFormat)]
+        [Obsolete(
+            Obsoletions.WebRequestMessage,
+            DiagnosticId = Obsoletions.WebRequestDiagId,
+            UrlFormat = Obsoletions.SharedUrlFormat
+        )]
         [EditorBrowsable(EditorBrowsableState.Never)]
         protected WebRequest(SerializationInfo serializationInfo, StreamingContext streamingContext)
         {
@@ -45,13 +54,19 @@ namespace System.Net
         }
 
         [Obsolete("Serialization has been deprecated for WebRequest.")]
-        void ISerializable.GetObjectData(SerializationInfo serializationInfo, StreamingContext streamingContext)
+        void ISerializable.GetObjectData(
+            SerializationInfo serializationInfo,
+            StreamingContext streamingContext
+        )
         {
             throw new PlatformNotSupportedException();
         }
 
         [Obsolete("Serialization has been deprecated for WebRequest.")]
-        protected virtual void GetObjectData(SerializationInfo serializationInfo, StreamingContext streamingContext)
+        protected virtual void GetObjectData(
+            SerializationInfo serializationInfo,
+            StreamingContext streamingContext
+        )
         {
             throw new PlatformNotSupportedException();
         }
@@ -110,12 +125,16 @@ namespace System.Net
                 if (LookupLength >= Current.Prefix.Length)
                 {
                     // It is. See if these match.
-                    if (string.Compare(Current.Prefix,
-                                       0,
-                                       LookupUri,
-                                       0,
-                                       Current.Prefix.Length,
-                                       StringComparison.OrdinalIgnoreCase) == 0)
+                    if (
+                        string.Compare(
+                            Current.Prefix,
+                            0,
+                            LookupUri,
+                            0,
+                            Current.Prefix.Length,
+                            StringComparison.OrdinalIgnoreCase
+                        ) == 0
+                    )
                     {
                         // These match. Remember that we found it and break
                         // out.
@@ -146,7 +165,11 @@ namespace System.Net
         //
         // Returns:
         //     Newly created WebRequest.
-        [Obsolete(Obsoletions.WebRequestMessage, DiagnosticId = Obsoletions.WebRequestDiagId, UrlFormat = Obsoletions.SharedUrlFormat)]
+        [Obsolete(
+            Obsoletions.WebRequestMessage,
+            DiagnosticId = Obsoletions.WebRequestDiagId,
+            UrlFormat = Obsoletions.SharedUrlFormat
+        )]
         public static WebRequest Create(string requestUriString)
         {
             ArgumentNullException.ThrowIfNull(requestUriString);
@@ -164,7 +187,11 @@ namespace System.Net
         //
         // Returns:
         //     Newly created WebRequest.
-        [Obsolete(Obsoletions.WebRequestMessage, DiagnosticId = Obsoletions.WebRequestDiagId, UrlFormat = Obsoletions.SharedUrlFormat)]
+        [Obsolete(
+            Obsoletions.WebRequestMessage,
+            DiagnosticId = Obsoletions.WebRequestDiagId,
+            UrlFormat = Obsoletions.SharedUrlFormat
+        )]
         public static WebRequest Create(Uri requestUri)
         {
             ArgumentNullException.ThrowIfNull(requestUri);
@@ -183,7 +210,11 @@ namespace System.Net
         //
         // Returns:
         //     Newly created WebRequest.
-        [Obsolete(Obsoletions.WebRequestMessage, DiagnosticId = Obsoletions.WebRequestDiagId, UrlFormat = Obsoletions.SharedUrlFormat)]
+        [Obsolete(
+            Obsoletions.WebRequestMessage,
+            DiagnosticId = Obsoletions.WebRequestDiagId,
+            UrlFormat = Obsoletions.SharedUrlFormat
+        )]
         public static WebRequest CreateDefault(Uri requestUri)
         {
             ArgumentNullException.ThrowIfNull(requestUri);
@@ -191,7 +222,11 @@ namespace System.Net
             return Create(requestUri, true);
         }
 
-        [Obsolete(Obsoletions.WebRequestMessage, DiagnosticId = Obsoletions.WebRequestDiagId, UrlFormat = Obsoletions.SharedUrlFormat)]
+        [Obsolete(
+            Obsoletions.WebRequestMessage,
+            DiagnosticId = Obsoletions.WebRequestDiagId,
+            UrlFormat = Obsoletions.SharedUrlFormat
+        )]
         public static HttpWebRequest CreateHttp(string requestUriString)
         {
             ArgumentNullException.ThrowIfNull(requestUriString);
@@ -199,7 +234,11 @@ namespace System.Net
             return CreateHttp(new Uri(requestUriString));
         }
 
-        [Obsolete(Obsoletions.WebRequestMessage, DiagnosticId = Obsoletions.WebRequestDiagId, UrlFormat = Obsoletions.SharedUrlFormat)]
+        [Obsolete(
+            Obsoletions.WebRequestMessage,
+            DiagnosticId = Obsoletions.WebRequestDiagId,
+            UrlFormat = Obsoletions.SharedUrlFormat
+        )]
         public static HttpWebRequest CreateHttp(Uri requestUri)
         {
             ArgumentNullException.ThrowIfNull(requestUri);
@@ -243,7 +282,9 @@ namespace System.Net
             {
                 // Clone the object and update the clone, thus
                 // allowing other threads to still read from the original.
-                List<WebRequestPrefixElement> prefixList = new List<WebRequestPrefixElement>(PrefixList);
+                List<WebRequestPrefixElement> prefixList = new List<WebRequestPrefixElement>(
+                    PrefixList
+                );
 
                 // As AbsoluteUri is used later for Create, account for formating changes
                 // like Unicode escaping, default ports, etc.
@@ -253,9 +294,15 @@ namespace System.Net
 
                     // Special case for when a partial host matching is requested, drop the added trailing slash
                     // IE: http://host could match host or host.domain
-                    if (!prefix.EndsWith('/')
-                        && tempUri.GetComponents(UriComponents.PathAndQuery | UriComponents.Fragment, UriFormat.UriEscaped)
-                            .Equals("/"))
+                    if (
+                        !prefix.EndsWith('/')
+                        && tempUri
+                            .GetComponents(
+                                UriComponents.PathAndQuery | UriComponents.Fragment,
+                                UriFormat.UriEscaped
+                            )
+                            .Equals("/")
+                    )
                     {
                         cookedUri = cookedUri.Substring(0, cookedUri.Length - 1);
                     }
@@ -284,7 +331,13 @@ namespace System.Net
                     if (prefix.Length == Current.Prefix.Length)
                     {
                         // They're the same length.
-                        if (string.Equals(Current.Prefix, prefix, StringComparison.OrdinalIgnoreCase))
+                        if (
+                            string.Equals(
+                                Current.Prefix,
+                                prefix,
+                                StringComparison.OrdinalIgnoreCase
+                            )
+                        )
                         {
                             // ...and the strings are identical. This is an error.
                             Error = true;
@@ -345,38 +398,45 @@ namespace System.Net
                 // GetConfig() might use us, so we have a circular dependency issue
                 // that causes us to nest here. We grab the lock only if we haven't
                 // initialized.
-                return LazyInitializer.EnsureInitialized(ref s_prefixList, ref s_internalSyncObject, () =>
-                {
-                    var httpRequestCreator = new HttpRequestCreator();
-                    var ftpRequestCreator = new FtpWebRequestCreator();
-                    var fileRequestCreator = new FileWebRequestCreator();
-
-                    const int Count = 4;
-                    var prefixList = new List<WebRequestPrefixElement>(Count)
+                return LazyInitializer.EnsureInitialized(
+                    ref s_prefixList,
+                    ref s_internalSyncObject,
+                    () =>
                     {
-                        new WebRequestPrefixElement("http:", httpRequestCreator),
-                        new WebRequestPrefixElement("https:", httpRequestCreator),
-                        new WebRequestPrefixElement("ftp:", ftpRequestCreator),
-                        new WebRequestPrefixElement("file:", fileRequestCreator),
-                    };
-                    Debug.Assert(prefixList.Count == Count, $"Expected {Count}, got {prefixList.Count}");
+                        var httpRequestCreator = new HttpRequestCreator();
+                        var ftpRequestCreator = new FtpWebRequestCreator();
+                        var fileRequestCreator = new FileWebRequestCreator();
 
-                    return prefixList;
-                });
+                        const int Count = 4;
+                        var prefixList = new List<WebRequestPrefixElement>(Count)
+                        {
+                            new WebRequestPrefixElement("http:", httpRequestCreator),
+                            new WebRequestPrefixElement("https:", httpRequestCreator),
+                            new WebRequestPrefixElement("ftp:", ftpRequestCreator),
+                            new WebRequestPrefixElement("file:", fileRequestCreator),
+                        };
+                        Debug.Assert(
+                            prefixList.Count == Count,
+                            $"Expected {Count}, got {prefixList.Count}"
+                        );
+
+                        return prefixList;
+                    }
+                );
             }
-            set
-            {
-                Volatile.Write(ref s_prefixList, value);
-            }
+            set { Volatile.Write(ref s_prefixList, value); }
         }
 
-        public static RequestCachePolicy? DefaultCachePolicy { get; set; } = new RequestCachePolicy(RequestCacheLevel.BypassCache);
+        public static RequestCachePolicy? DefaultCachePolicy { get; set; } =
+            new RequestCachePolicy(RequestCacheLevel.BypassCache);
 
         public virtual RequestCachePolicy? CachePolicy { get; set; }
 
-        public AuthenticationLevel AuthenticationLevel { get; set; } = AuthenticationLevel.MutualAuthRequested;
+        public AuthenticationLevel AuthenticationLevel { get; set; } =
+            AuthenticationLevel.MutualAuthRequested;
 
-        public TokenImpersonationLevel ImpersonationLevel { get; set; } = TokenImpersonationLevel.Delegation;
+        public TokenImpersonationLevel ImpersonationLevel { get; set; } =
+            TokenImpersonationLevel.Delegation;
 
         public virtual string? ConnectionGroupName
         {
@@ -518,10 +578,14 @@ namespace System.Net
             // Offload to a different thread to avoid blocking the caller during request submission.
             await Task.CompletedTask.ConfigureAwait(ConfigureAwaitOptions.ForceYielding);
 
-            return await Task<Stream>.Factory.FromAsync(
-                (callback, state) => ((WebRequest)state!).BeginGetRequestStream(callback, state),
-                iar => ((WebRequest)iar.AsyncState!).EndGetRequestStream(iar),
-                this).ConfigureAwait(false);
+            return await Task<Stream>
+                .Factory.FromAsync(
+                    (callback, state) =>
+                        ((WebRequest)state!).BeginGetRequestStream(callback, state),
+                    iar => ((WebRequest)iar.AsyncState!).EndGetRequestStream(iar),
+                    this
+                )
+                .ConfigureAwait(false);
         }
 
         public virtual async Task<WebResponse> GetResponseAsync()
@@ -529,10 +593,13 @@ namespace System.Net
             // Offload to a different thread to avoid blocking the caller during request submission.
             await Task.CompletedTask.ConfigureAwait(ConfigureAwaitOptions.ForceYielding);
 
-            return await Task<WebResponse>.Factory.FromAsync(
-                (callback, state) => ((WebRequest)state!).BeginGetResponse(callback, state),
-                iar => ((WebRequest)iar.AsyncState!).EndGetResponse(iar),
-                this).ConfigureAwait(false);
+            return await Task<WebResponse>
+                .Factory.FromAsync(
+                    (callback, state) => ((WebRequest)state!).BeginGetResponse(callback, state),
+                    iar => ((WebRequest)iar.AsyncState!).EndGetResponse(iar),
+                    this
+                )
+                .ConfigureAwait(false);
         }
 
         public virtual void Abort()
@@ -547,7 +614,13 @@ namespace System.Net
 
         public static IWebProxy? DefaultWebProxy
         {
-            get => LazyInitializer.EnsureInitialized<IWebProxy>(ref s_DefaultWebProxy, ref s_DefaultWebProxyInitialized, ref s_internalSyncObject, GetSystemWebProxy);
+            get =>
+                LazyInitializer.EnsureInitialized<IWebProxy>(
+                    ref s_DefaultWebProxy,
+                    ref s_DefaultWebProxyInitialized,
+                    ref s_internalSyncObject,
+                    GetSystemWebProxy
+                );
             set
             {
                 lock (s_internalSyncObject)

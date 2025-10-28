@@ -4,22 +4,23 @@
 // </copyright>
 //------------------------------------------------------------------------------
 
-namespace System.Web.Configuration {
+namespace System.Web.Configuration
+{
     using System;
-    using System.Xml;
-    using System.Configuration;
-    using System.Collections.Specialized;
     using System.Collections;
+    using System.Collections.Specialized;
+    using System.ComponentModel;
+    using System.Configuration;
     using System.Globalization;
     using System.IO;
-    using System.Text;
-    using System.ComponentModel;
-    using System.Web.Hosting;
-    using System.Web.Util;
-    using System.Web.Configuration;
-    using System.Web.Management;
-    using System.Web.Compilation;
     using System.Security.Permissions;
+    using System.Text;
+    using System.Web.Compilation;
+    using System.Web.Configuration;
+    using System.Web.Hosting;
+    using System.Web.Management;
+    using System.Web.Util;
+    using System.Xml;
 
     /*
             <!--
@@ -249,58 +250,71 @@ namespace System.Web.Configuration {
 
     */
 
-    public sealed class HealthMonitoringSection : ConfigurationSection {
-        const int MAX_HEARTBEAT_VALUE = Int32.MaxValue / 1000;      // in sec; this value will be converted to ms and passed to Timer ctor, which takes a ms param
+    public sealed class HealthMonitoringSection : ConfigurationSection
+    {
+        const int MAX_HEARTBEAT_VALUE = Int32.MaxValue / 1000; // in sec; this value will be converted to ms and passed to Timer ctor, which takes a ms param
         const bool DEFAULT_HEALTH_MONITORING_ENABLED = true;
-        const int DEFAULT_HEARTBEATINTERVAL = 0;  // This was Zero in Machine.config and 60 in here
+        const int DEFAULT_HEARTBEATINTERVAL = 0; // This was Zero in Machine.config and 60 in here
 
         private static ConfigurationPropertyCollection _properties;
 
         private static readonly ConfigurationProperty _propHeartbeatInterval =
-            new ConfigurationProperty("heartbeatInterval",
-                                        typeof(TimeSpan),
-                                        TimeSpan.FromSeconds((long)DEFAULT_HEARTBEATINTERVAL),
-                                        StdValidatorsAndConverters.TimeSpanSecondsConverter,
-                                        new TimeSpanValidator(TimeSpan.Zero, TimeSpan.FromSeconds(MAX_HEARTBEAT_VALUE)),
-                                        ConfigurationPropertyOptions.None);
+            new ConfigurationProperty(
+                "heartbeatInterval",
+                typeof(TimeSpan),
+                TimeSpan.FromSeconds((long)DEFAULT_HEARTBEATINTERVAL),
+                StdValidatorsAndConverters.TimeSpanSecondsConverter,
+                new TimeSpanValidator(TimeSpan.Zero, TimeSpan.FromSeconds(MAX_HEARTBEAT_VALUE)),
+                ConfigurationPropertyOptions.None
+            );
 
-        private static readonly ConfigurationProperty _propEnabled =
-            new ConfigurationProperty("enabled", 
-                                        typeof(bool), 
-                                        DEFAULT_HEALTH_MONITORING_ENABLED, 
-                                        ConfigurationPropertyOptions.None);
+        private static readonly ConfigurationProperty _propEnabled = new ConfigurationProperty(
+            "enabled",
+            typeof(bool),
+            DEFAULT_HEALTH_MONITORING_ENABLED,
+            ConfigurationPropertyOptions.None
+        );
 
-        private static readonly ConfigurationProperty _propBufferModes =
-            new ConfigurationProperty("bufferModes", 
-                                        typeof(BufferModesCollection), 
-                                        null, 
-                                        ConfigurationPropertyOptions.None);
+        private static readonly ConfigurationProperty _propBufferModes = new ConfigurationProperty(
+            "bufferModes",
+            typeof(BufferModesCollection),
+            null,
+            ConfigurationPropertyOptions.None
+        );
 
-        private static readonly ConfigurationProperty _propProviders =
-            new ConfigurationProperty("providers", 
-                                        typeof(ProviderSettingsCollection), 
-                                        null, 
-                                        ConfigurationPropertyOptions.None);
+        private static readonly ConfigurationProperty _propProviders = new ConfigurationProperty(
+            "providers",
+            typeof(ProviderSettingsCollection),
+            null,
+            ConfigurationPropertyOptions.None
+        );
 
         private static readonly ConfigurationProperty _propProfileSettingsCollection =
-            new ConfigurationProperty("profiles", 
-                                        typeof(ProfileSettingsCollection), 
-                                        null, 
-                                        ConfigurationPropertyOptions.None);
+            new ConfigurationProperty(
+                "profiles",
+                typeof(ProfileSettingsCollection),
+                null,
+                ConfigurationPropertyOptions.None
+            );
 
         private static readonly ConfigurationProperty _propRuleSettingsCollection =
-            new ConfigurationProperty("rules", 
-                                        typeof(RuleSettingsCollection), 
-                                        null, 
-                                        ConfigurationPropertyOptions.None);
+            new ConfigurationProperty(
+                "rules",
+                typeof(RuleSettingsCollection),
+                null,
+                ConfigurationPropertyOptions.None
+            );
 
         private static readonly ConfigurationProperty _propEventMappingSettingsCollection =
-            new ConfigurationProperty("eventMappings", 
-                                        typeof(EventMappingSettingsCollection), 
-                                        null, 
-                                        ConfigurationPropertyOptions.None);
+            new ConfigurationProperty(
+                "eventMappings",
+                typeof(EventMappingSettingsCollection),
+                null,
+                ConfigurationPropertyOptions.None
+            );
 
-        static HealthMonitoringSection() {
+        static HealthMonitoringSection()
+        {
             // Property initialization
             _properties = new ConfigurationPropertyCollection();
             _properties.Add(_propHeartbeatInterval);
@@ -312,70 +326,63 @@ namespace System.Web.Configuration {
             _properties.Add(_propEventMappingSettingsCollection);
         }
 
-        public HealthMonitoringSection() {
+        public HealthMonitoringSection() { }
+
+        protected override ConfigurationPropertyCollection Properties
+        {
+            get { return _properties; }
         }
 
-        protected override ConfigurationPropertyCollection Properties {
-            get {
-                return _properties;
-            }
-        }
-
-        [ConfigurationProperty("heartbeatInterval", DefaultValue = "00:00:00" /* DEFAULT_HEARTBEATINTERVAL */)]
+        [ConfigurationProperty(
+            "heartbeatInterval",
+            DefaultValue = "00:00:00" /* DEFAULT_HEARTBEATINTERVAL */
+        )]
         [TypeConverter(typeof(TimeSpanSecondsConverter))]
         [TimeSpanValidator(MinValueString = "00:00:00", MaxValueString = "24.20:31:23")]
-        public TimeSpan HeartbeatInterval {
-            get {
-                return (TimeSpan)base[_propHeartbeatInterval];
-            }
-            set {
-                base[_propHeartbeatInterval] = value;
-            }
+        public TimeSpan HeartbeatInterval
+        {
+            get { return (TimeSpan)base[_propHeartbeatInterval]; }
+            set { base[_propHeartbeatInterval] = value; }
         }
 
         [ConfigurationProperty("enabled", DefaultValue = DEFAULT_HEALTH_MONITORING_ENABLED)]
-        public bool Enabled {
-            get {
-                return (bool)base[_propEnabled];
-            }
-            set {
-                base[_propEnabled] = value;
-            }
+        public bool Enabled
+        {
+            get { return (bool)base[_propEnabled]; }
+            set { base[_propEnabled] = value; }
         }
 
         [ConfigurationProperty("bufferModes")]
-        public BufferModesCollection BufferModes {
-            get {
-                return (BufferModesCollection)base[_propBufferModes];
-            }
+        public BufferModesCollection BufferModes
+        {
+            get { return (BufferModesCollection)base[_propBufferModes]; }
         }
 
         [ConfigurationProperty("providers")]
-        public ProviderSettingsCollection Providers {
-            get {
-                return (ProviderSettingsCollection)base[_propProviders];
-            }
+        public ProviderSettingsCollection Providers
+        {
+            get { return (ProviderSettingsCollection)base[_propProviders]; }
         }
 
         [ConfigurationProperty("profiles")]
-        public ProfileSettingsCollection Profiles {
-            get {
-                return (ProfileSettingsCollection)base[_propProfileSettingsCollection];
-            }
+        public ProfileSettingsCollection Profiles
+        {
+            get { return (ProfileSettingsCollection)base[_propProfileSettingsCollection]; }
         }
 
         [ConfigurationProperty("rules")]
-        public RuleSettingsCollection Rules {
-            get {
-                return (RuleSettingsCollection)base[_propRuleSettingsCollection];
-            }
+        public RuleSettingsCollection Rules
+        {
+            get { return (RuleSettingsCollection)base[_propRuleSettingsCollection]; }
         }
 
         [ConfigurationProperty("eventMappings")]
-        public EventMappingSettingsCollection EventMappings {
-            get {
+        public EventMappingSettingsCollection EventMappings
+        {
+            get
+            {
                 return (EventMappingSettingsCollection)base[_propEventMappingSettingsCollection];
             }
         }
-    } // class HealthMonitoringSection 
+    } // class HealthMonitoringSection
 }

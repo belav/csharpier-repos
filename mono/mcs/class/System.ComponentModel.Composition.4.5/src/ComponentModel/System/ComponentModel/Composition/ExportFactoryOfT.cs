@@ -2,8 +2,8 @@
 // Copyright (c) Microsoft Corporation.  All rights reserved.
 // -----------------------------------------------------------------------
 using System;
-using Microsoft.Internal;
 using System.ComponentModel.Composition.Primitives;
+using Microsoft.Internal;
 
 namespace System.ComponentModel.Composition
 {
@@ -24,7 +24,10 @@ namespace System.ComponentModel.Composition
         public ExportLifetimeContext<T> CreateExport()
         {
             Tuple<T, Action> untypedLifetimeContext = this._exportLifetimeContextCreator.Invoke();
-            return new ExportLifetimeContext<T>(untypedLifetimeContext.Item1, untypedLifetimeContext.Item2);
+            return new ExportLifetimeContext<T>(
+                untypedLifetimeContext.Item1,
+                untypedLifetimeContext.Item2
+            );
         }
 
         internal bool IncludeInScopedCatalog(ComposablePartDefinition composablePartDefinition)
@@ -32,10 +35,11 @@ namespace System.ComponentModel.Composition
             return this.OnFilterScopedCatalog(composablePartDefinition);
         }
 
-        protected virtual bool OnFilterScopedCatalog(ComposablePartDefinition composablePartDefinition)
+        protected virtual bool OnFilterScopedCatalog(
+            ComposablePartDefinition composablePartDefinition
+        )
         {
             return true;
         }
-
     }
 }

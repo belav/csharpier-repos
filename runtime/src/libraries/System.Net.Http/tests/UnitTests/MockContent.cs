@@ -19,14 +19,18 @@ namespace System.Net.Http.Tests
         DontOverrideCreateContentReadStream = 0x8,
         CanCalculateLength = 0x10,
         ThrowInTryComputeLength = 0x20,
-        ThrowInAsyncSerializeMethods = 0x40
+        ThrowInAsyncSerializeMethods = 0x40,
     }
 
     public class MockException : Exception
     {
         public MockException() { }
-        public MockException(string message) : base(message) { }
-        public MockException(string message, Exception inner) : base(message, inner) { }
+
+        public MockException(string message)
+            : base(message) { }
+
+        public MockException(string message, Exception inner)
+            : base(message, inner) { }
     }
 
     public class MockContent : HttpContent
@@ -46,19 +50,13 @@ namespace System.Net.Http.Tests
         }
 
         public MockContent()
-            : this((byte[])null, MockOptions.None)
-        {
-        }
+            : this((byte[])null, MockOptions.None) { }
 
         public MockContent(byte[] mockData)
-            : this(mockData, MockOptions.None)
-        {
-        }
+            : this(mockData, MockOptions.None) { }
 
         public MockContent(MockOptions options)
-            : this((byte[])null, options)
-        {
-        }
+            : this((byte[])null, options) { }
 
         public MockContent(Exception customException, MockOptions options)
             : this((byte[])null, options)
@@ -101,7 +99,11 @@ namespace System.Net.Http.Tests
         protected override Task SerializeToStreamAsync(Stream stream, TransportContext context) =>
             throw new NotImplementedException(); // The overload with the CancellationToken should be called
 
-        protected override Task SerializeToStreamAsync(Stream stream, TransportContext context, CancellationToken cancellationToken)
+        protected override Task SerializeToStreamAsync(
+            Stream stream,
+            TransportContext context,
+            CancellationToken cancellationToken
+        )
         {
             SerializeToStreamAsyncCount++;
 
@@ -137,7 +139,9 @@ namespace System.Net.Http.Tests
             }
             else
             {
-                return Task.FromResult<Stream>(new MockMemoryStream(_mockData, 0, _mockData.Length, false));
+                return Task.FromResult<Stream>(
+                    new MockMemoryStream(_mockData, 0, _mockData.Length, false)
+                );
             }
         }
 
@@ -161,9 +165,7 @@ namespace System.Net.Http.Tests
         public int DisposeCount { get; private set; }
 
         public MockMemoryStream(byte[] buffer, int index, int count, bool writable)
-            : base(buffer, index, count, writable)
-        {
-        }
+            : base(buffer, index, count, writable) { }
 
         protected override void Dispose(bool disposing)
         {

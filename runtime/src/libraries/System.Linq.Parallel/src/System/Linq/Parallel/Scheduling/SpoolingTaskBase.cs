@@ -28,10 +28,8 @@ namespace System.Linq.Parallel
         //     taskIndex   - the unique index of this task
         //
 
-        protected SpoolingTaskBase(int taskIndex, QueryTaskGroupState groupState) :
-            base(taskIndex, groupState)
-        {
-        }
+        protected SpoolingTaskBase(int taskIndex, QueryTaskGroupState groupState)
+            : base(taskIndex, groupState) { }
 
         //-----------------------------------------------------------------------------------
         // The implementation of the Work API just enumerates the producer's data, and
@@ -48,9 +46,12 @@ namespace System.Linq.Parallel
             }
             catch (Exception ex)
             {
-                if (ex is OperationCanceledException oce &&
-                    oce.CancellationToken == _groupState.CancellationState.MergedCancellationToken
-                    && _groupState.CancellationState.MergedCancellationToken.IsCancellationRequested)
+                if (
+                    ex is OperationCanceledException oce
+                    && oce.CancellationToken
+                        == _groupState.CancellationState.MergedCancellationToken
+                    && _groupState.CancellationState.MergedCancellationToken.IsCancellationRequested
+                )
                 {
                     //an expected internal cancellation has occurred.  suppress this exception.
                 }
@@ -59,7 +60,9 @@ namespace System.Linq.Parallel
                     // TPL will catch and store the exception on the task object. We'll then later
                     // turn around and wait on it, having the effect of propagating it. In the meantime,
                     // we want to cooperative cancel all workers.
-                    Debug.Assert(_groupState.CancellationState.InternalCancellationTokenSource != null);
+                    Debug.Assert(
+                        _groupState.CancellationState.InternalCancellationTokenSource != null
+                    );
                     _groupState.CancellationState.InternalCancellationTokenSource.Cancel();
 
                     // And then repropagate to let TPL catch it.

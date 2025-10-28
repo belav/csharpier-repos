@@ -7,9 +7,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.overloadRes
 {
     public class Test
     {
-        public void Method()
-        {
-        }
+        public void Method() { }
 
         protected void Method(int x, object o)
         {
@@ -28,7 +26,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.overloadRes
 
         private static int s_status = -1;
 
-
         public static void DynamicCSharpRunTest()
         {
             Assert.Equal(0, MainMethod(null));
@@ -46,15 +43,11 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.overloadRes
     // </Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.overloadResolution.method.Oneclass.Twoparam.accessibility002.accessibility002
 {
     public class Test
     {
-        public void Method()
-        {
-        }
+        public void Method() { }
 
         protected void Method(int x, object o)
         {
@@ -90,8 +83,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.overloadRes
     }
     // </Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.overloadResolution.method.Oneclass.Twoparam.errorverifier.errorverifier
 {
@@ -212,6 +203,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.overloadRes
         RefReadonlyLocal, // Cannot pass '{0}' as a ref or out argument because it is read-only
         ReturnNotLValue, // Cannot modify the return value of '{0}' because it is not a variable
         BadArgExtraRef, // Argument '{0}' should not be passed with the '{1}' keyword
+
         // DelegateOnConditional, // Cannot create delegate with '{0}' because it has a Conditional attribute (REMOVED)
         BadArgRef, // Argument '{0}' must be passed with the '{1}' keyword
         AssgReadonly2, // Members of readonly field '{0}' cannot be modified (except in a constructor or a variable initializer)
@@ -238,57 +230,69 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.overloadRes
     public enum RuntimeErrorId
     {
         None,
+
         // RuntimeBinderInternalCompilerException
         InternalCompilerError, // An unexpected exception occurred while binding a dynamic operation
+
         // ArgumentException
         BindRequireArguments, // Cannot bind call with no calling object
+
         // RuntimeBinderException
         BindCallFailedOverloadResolution, // Overload resolution failed
+
         // ArgumentException
         BindBinaryOperatorRequireTwoArguments, // Binary operators must be invoked with two arguments
+
         // ArgumentException
         BindUnaryOperatorRequireOneArgument, // Unary operators must be invoked with one argument
+
         // RuntimeBinderException
         BindPropertyFailedMethodGroup, // The name '{0}' is bound to a method and cannot be used like a property
+
         // RuntimeBinderException
         BindPropertyFailedEvent, // The event '{0}' can only appear on the left hand side of += or -=
+
         // RuntimeBinderException
         BindInvokeFailedNonDelegate, // Cannot invoke a non-delegate type
+
         // ArgumentException
         BindImplicitConversionRequireOneArgument, // Implicit conversion takes exactly one argument
+
         // ArgumentException
         BindExplicitConversionRequireOneArgument, // Explicit conversion takes exactly one argument
+
         // ArgumentException
         BindBinaryAssignmentRequireTwoArguments, // Binary operators cannot be invoked with one argument
+
         // RuntimeBinderException
         BindBinaryAssignmentFailedNullReference, // Cannot perform member assignment on a null reference
+
         // RuntimeBinderException
         NullReferenceOnMemberException, // Cannot perform runtime binding on a null reference
+
         // RuntimeBinderException
         BindCallToConditionalMethod, // Cannot dynamically invoke method '{0}' because it has a Conditional attribute
+
         // RuntimeBinderException
         BindToVoidMethodButExpectResult, // Cannot implicitly convert type 'void' to 'object'
+
         // EE?
         EmptyDynamicView, // No further information on this object could be discovered
+
         // MissingMemberException
         GetValueonWriteOnlyProperty, // Write Only properties are not supported
     }
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.overloadResolution.method.Oneclass.Twoparam.accessibility003.accessibility003
 {
     public class Test
     {
         private delegate void Del(long x, int y);
-        public void Method(long x, int y)
-        {
-        }
 
-        private void Method(int x, int y)
-        {
-        }
+        public void Method(long x, int y) { }
+
+        private void Method(int x, int y) { }
 
         [Fact]
         public static void DynamicCSharpRunTest()
@@ -317,8 +321,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.overloadRes
     // </Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.overloadResolution.method.Oneclass.Twoparam.accessibility004.accessibility004
 {
     // <Title>Accessibility</Title>
@@ -329,9 +331,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.overloadRes
     // <Code>
     public struct Test
     {
-        public void Method()
-        {
-        }
+        public void Method() { }
 
         private void Method(int x, object o)
         {
@@ -367,19 +367,14 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.overloadRes
     // </Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.overloadResolution.method.Oneclass.Twoparam.accessibility005.accessibility005
 {
     public class Test
     {
         private class Base
         {
-            public void Method(int x)
-            {
-            }
+            public void Method(int x) { }
         }
-
 
         public static void DynamicCSharpRunTest()
         {
@@ -397,35 +392,22 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.overloadRes
     // </Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.overloadResolution.method.Oneclass.Twoparam.accessibility006.accessibility006
 {
     public class Test
     {
         protected class Base
         {
-            public void Method()
-            {
-            }
+            public void Method() { }
 
-            protected void Method(int x, object o)
-            {
-            }
+            protected void Method(int x, object o) { }
 
-            protected internal void Method(long x, object o)
-            {
-            }
+            protected internal void Method(long x, object o) { }
 
-            internal void Method(short x, object o)
-            {
-            }
+            internal void Method(short x, object o) { }
 
-            public void Method(byte x, object o)
-            {
-            }
+            public void Method(byte x, object o) { }
         }
-
 
         public static void DynamicCSharpRunTest()
         {
@@ -443,8 +425,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.overloadRes
     }
     // </Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.overloadResolution.method.Oneclass.Twoparam.accessibility007.accessibility007
 {
@@ -472,7 +452,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.overloadRes
 
         private static int s_status = -1;
 
-
         public static void DynamicCSharpRunTest()
         {
             Assert.Equal(0, MainMethod(null));
@@ -493,8 +472,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.overloadRes
     // </Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.overloadResolution.method.Oneclass.Twoparam.accessibility011.accessibility011
 {
     public class Test
@@ -503,11 +480,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.overloadRes
         {
             private class Base
             {
-                public void Method(int x)
-                {
-                }
+                public void Method(int x) { }
             }
-
 
             public static void DynamicCSharpRunTest()
             {
@@ -526,8 +500,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.overloadRes
     // </Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.overloadResolution.method.Oneclass.Twoparam.accessibility012.accessibility012
 {
     public class Test
@@ -541,7 +513,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.overloadRes
         }
 
         public static int Status;
-
 
         public static void DynamicCSharpRunTest()
         {

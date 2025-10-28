@@ -20,7 +20,9 @@ namespace Roslyn.VisualStudio.CSharp.UnitTests.ProjectSystemShim
         public void DisconnectingAProjectDoesNotLeak()
         {
             using var environment = new TestEnvironment();
-            var project = ObjectReference.CreateFromFactory(() => CSharpHelpers.CreateCSharpProject(environment, "Test"));
+            var project = ObjectReference.CreateFromFactory(() =>
+                CSharpHelpers.CreateCSharpProject(environment, "Test")
+            );
 
             Assert.Single(environment.Workspace.CurrentSolution.Projects);
 

@@ -42,7 +42,11 @@ namespace System.Formats.Cbor.Tests
         [InlineData(1, 2, "0101")]
         [InlineData(10, 10, "0a0a0a0a0a0a0a0a0a0a")]
         [InlineData(new object[] { 1, 2 }, 3, "820102820102820102")]
-        public static void CborWriter_MultipleRootLevelValuesAllowed_WritingMultipleRootValues_HappyPath(object value, int repetitions, string expectedHexEncoding)
+        public static void CborWriter_MultipleRootLevelValuesAllowed_WritingMultipleRootValues_HappyPath(
+            object value,
+            int repetitions,
+            string expectedHexEncoding
+        )
         {
             byte[] expectedEncoding = expectedHexEncoding.HexToByteArray();
             var writer = new CborWriter(allowMultipleRootLevelValues: true);
@@ -110,7 +114,10 @@ namespace System.Formats.Cbor.Tests
             // End set up
 
             Assert.Equal(11, writer.CurrentDepth);
-            Assert.True(writer.BytesWritten > 11, "must have written a nontrivial number of bytes to the buffer");
+            Assert.True(
+                writer.BytesWritten > 11,
+                "must have written a nontrivial number of bytes to the buffer"
+            );
 
             writer.Reset();
 
@@ -247,12 +254,21 @@ namespace System.Formats.Cbor.Tests
         [InlineData(new object[] { Map, new object[] { Enc, "8101" }, 42 }, false, "bf8101182aff")]
         [InlineData(new object[] { Map, 42, new object[] { Enc, "8101" } }, true, "a1182a8101")]
         [InlineData(new object[] { Map, 42, new object[] { Enc, "8101" } }, false, "bf182a8101ff")]
-
-        public static void WriteEncodedValue_ContextScenaria_HappyPath(object value, bool useDefiniteLengthEncoding, string hexExpectedEncoding)
+        public static void WriteEncodedValue_ContextScenaria_HappyPath(
+            object value,
+            bool useDefiniteLengthEncoding,
+            string hexExpectedEncoding
+        )
         {
-            var writer = new CborWriter(convertIndefiniteLengthEncodings: useDefiniteLengthEncoding);
+            var writer = new CborWriter(
+                convertIndefiniteLengthEncodings: useDefiniteLengthEncoding
+            );
 
-            Helpers.WriteValue(writer, value, useDefiniteLengthCollections: useDefiniteLengthEncoding);
+            Helpers.WriteValue(
+                writer,
+                value,
+                useDefiniteLengthCollections: useDefiniteLengthEncoding
+            );
 
             string hexEncoding = writer.Encode().ByteArrayToHex().ToLower();
             Assert.Equal(hexExpectedEncoding, hexEncoding);
@@ -291,7 +307,9 @@ namespace System.Formats.Cbor.Tests
         {
             var writer = new CborWriter();
             writer.WriteStartIndefiniteLengthTextString();
-            Assert.Throws<InvalidOperationException>(() => writer.WriteEncodedValue(new byte[] { 0x01 }));
+            Assert.Throws<InvalidOperationException>(() =>
+                writer.WriteEncodedValue(new byte[] { 0x01 })
+            );
         }
 
         [Fact]
@@ -299,12 +317,16 @@ namespace System.Formats.Cbor.Tests
         {
             var writer = new CborWriter();
             writer.WriteInt64(0);
-            Assert.Throws<InvalidOperationException>(() => writer.WriteEncodedValue(new byte[] { 0x01 }));
+            Assert.Throws<InvalidOperationException>(() =>
+                writer.WriteEncodedValue(new byte[] { 0x01 })
+            );
         }
 
         [Theory]
         [MemberData(nameof(EncodedValueBadInputs))]
-        public static void WriteEncodedValue_InvalidCbor_ShouldThrowArgumentException(string hexEncodedInput)
+        public static void WriteEncodedValue_InvalidCbor_ShouldThrowArgumentException(
+            string hexEncodedInput
+        )
         {
             byte[] encodedInput = hexEncodedInput.HexToByteArray();
             var writer = new CborWriter();
@@ -313,9 +335,12 @@ namespace System.Formats.Cbor.Tests
 
         [Theory]
         [InlineData(CborConformanceMode.Strict, "a201010101")] // duplicate key encodings
-        [InlineData(CborConformanceMode.Canonical, "9f01ff")]  // indefinite-length array
-        [InlineData(CborConformanceMode.Ctap2Canonical, "a280800101")]  // unsorted key encodings
-        public static void WriteEncodedValue_InvalidConformance_ShouldThrowArgumentException(CborConformanceMode conformanceMode, string hexEncodedInput)
+        [InlineData(CborConformanceMode.Canonical, "9f01ff")] // indefinite-length array
+        [InlineData(CborConformanceMode.Ctap2Canonical, "a280800101")] // unsorted key encodings
+        public static void WriteEncodedValue_InvalidConformance_ShouldThrowArgumentException(
+            CborConformanceMode conformanceMode,
+            string hexEncodedInput
+        )
         {
             byte[] encodedInput = hexEncodedInput.HexToByteArray();
             var writer = new CborWriter(conformanceMode);
@@ -326,22 +351,34 @@ namespace System.Formats.Cbor.Tests
         public static void WriteEncodedValue_ValidPayloadWithTrailingBytes_ShouldThrowArgumentException()
         {
             var writer = new CborWriter();
-            Assert.Throws<ArgumentException>(() => writer.WriteEncodedValue(new byte[] { 0x01, 0x01 }));
+            Assert.Throws<ArgumentException>(() =>
+                writer.WriteEncodedValue(new byte[] { 0x01, 0x01 })
+            );
         }
 
         [Theory]
         [InlineData((CborConformanceMode)(-1))]
-        public static void InvalidConformanceMode_ShouldThrowArgumentOutOfRangeException(CborConformanceMode mode)
+        public static void InvalidConformanceMode_ShouldThrowArgumentOutOfRangeException(
+            CborConformanceMode mode
+        )
         {
-            Assert.Throws<ArgumentOutOfRangeException>("conformanceMode", () => new CborWriter(conformanceMode: mode));
+            Assert.Throws<ArgumentOutOfRangeException>(
+                "conformanceMode",
+                () => new CborWriter(conformanceMode: mode)
+            );
         }
 
         [Theory]
         [InlineData(-2)]
         [InlineData(int.MinValue)]
-        public static void InvalidInitialCapacity_ShouldThrowArgumentOutOfRangeException(int capacity)
+        public static void InvalidInitialCapacity_ShouldThrowArgumentOutOfRangeException(
+            int capacity
+        )
         {
-            Assert.Throws<ArgumentOutOfRangeException>("initialCapacity", () => new CborWriter(initialCapacity: capacity));
+            Assert.Throws<ArgumentOutOfRangeException>(
+                "initialCapacity",
+                () => new CborWriter(initialCapacity: capacity)
+            );
         }
 
         [Theory]
@@ -349,10 +386,16 @@ namespace System.Formats.Cbor.Tests
         [InlineData(0, 0)]
         [InlineData(1, 1)]
         [InlineData(1023, 1023)]
-        public static void InitialCapacity_ShouldSetInitialBuffer(int capacity, int expectedBufferLength)
+        public static void InitialCapacity_ShouldSetInitialBuffer(
+            int capacity,
+            int expectedBufferLength
+        )
         {
             CborWriter writer = new CborWriter(initialCapacity: capacity);
-            byte[]? buffer = (byte[]?)typeof(CborWriter).GetField("_buffer", BindingFlags.Instance | BindingFlags.NonPublic)?.GetValue(writer);
+            byte[]? buffer = (byte[]?)
+                typeof(CborWriter)
+                    .GetField("_buffer", BindingFlags.Instance | BindingFlags.NonPublic)
+                    ?.GetValue(writer);
 
             Assert.NotNull(buffer);
             Assert.Equal(expectedBufferLength, buffer.Length);
@@ -372,31 +415,57 @@ namespace System.Formats.Cbor.Tests
             AssertExtensions.SequenceEqual(expected, encoded);
         }
 
-        public static IEnumerable<object[]> EncodedValueInputs => CborReaderTests.SampleCborValues.Select(x => new [] { x });
-        public static IEnumerable<object[]> EncodedValueBadInputs => CborReaderTests.InvalidCborValues.Select(x => new[] { x });
+        public static IEnumerable<object[]> EncodedValueInputs =>
+            CborReaderTests.SampleCborValues.Select(x => new[] { x });
+        public static IEnumerable<object[]> EncodedValueBadInputs =>
+            CborReaderTests.InvalidCborValues.Select(x => new[] { x });
 
         [Theory]
-        [ActiveIssue("https://github.com/dotnet/runtime/issues/37669", TestPlatforms.Browser | TestPlatforms.Wasi)]
-        [InlineData("a501020326200121582065eda5a12577c2bae829437fe338701a10aaa375e1bb5b5de108de439c08551d2258201e52ed75701163f7f9e40ddf9f341b3dc9ba860af7e0ca7ca7e9eecd0084d19c",
-                    "65eda5a12577c2bae829437fe338701a10aaa375e1bb5b5de108de439c08551d",
-                    "1e52ed75701163f7f9e40ddf9f341b3dc9ba860af7e0ca7ca7e9eecd0084d19c",
-                    "SHA256", "ECDSA_P256")]
-        [InlineData("a501020338222002215830ed57d8608c5734a5ed5d22026bad8700636823e45297306479beb61a5bd6b04688c34a2f0de51d91064355eef7548bdd22583024376b4fee60ba65db61de54234575eec5d37e1184fbafa1f49d71e1795bba6bda9cbe2ebb815f9b49b371486b38fa1b",
-                    "ed57d8608c5734a5ed5d22026bad8700636823e45297306479beb61a5bd6b04688c34a2f0de51d91064355eef7548bdd",
-                    "24376b4fee60ba65db61de54234575eec5d37e1184fbafa1f49d71e1795bba6bda9cbe2ebb815f9b49b371486b38fa1b",
-                    "SHA384", "ECDSA_P384")]
-        [InlineData("a50102033823200321584200b03811bef65e330bb974224ec3ab0a5469f038c92177b4171f6f66f91244d4476e016ee77cf7e155a4f73567627b5d72eaf0cb4a6036c6509a6432d7cd6a3b325c2258420114b597b6c271d8435cfa02e890608c93f5bc118ca7f47bf191e9f9e49a22f8a15962315f0729781e1d78b302970c832db2fa8f7f782a33f8e1514950dc7499035f",
-                    "00b03811bef65e330bb974224ec3ab0a5469f038c92177b4171f6f66f91244d4476e016ee77cf7e155a4f73567627b5d72eaf0cb4a6036c6509a6432d7cd6a3b325c",
-                    "0114b597b6c271d8435cfa02e890608c93f5bc118ca7f47bf191e9f9e49a22f8a15962315f0729781e1d78b302970c832db2fa8f7f782a33f8e1514950dc7499035f",
-                    "SHA512", "ECDSA_P521")]
-        [InlineData("a40102200121582065eda5a12577c2bae829437fe338701a10aaa375e1bb5b5de108de439c08551d2258201e52ed75701163f7f9e40ddf9f341b3dc9ba860af7e0ca7ca7e9eecd0084d19c",
-                    "65eda5a12577c2bae829437fe338701a10aaa375e1bb5b5de108de439c08551d",
-                    "1e52ed75701163f7f9e40ddf9f341b3dc9ba860af7e0ca7ca7e9eecd0084d19c",
-                    null, "ECDSA_P256")]
-        public static void CoseKeyHelpers_ECDsaExportCosePublicKey_HappyPath(string expectedHexEncoding, string hexQx, string hexQy, string? hashAlgorithmName, string curveFriendlyName)
+        [ActiveIssue(
+            "https://github.com/dotnet/runtime/issues/37669",
+            TestPlatforms.Browser | TestPlatforms.Wasi
+        )]
+        [InlineData(
+            "a501020326200121582065eda5a12577c2bae829437fe338701a10aaa375e1bb5b5de108de439c08551d2258201e52ed75701163f7f9e40ddf9f341b3dc9ba860af7e0ca7ca7e9eecd0084d19c",
+            "65eda5a12577c2bae829437fe338701a10aaa375e1bb5b5de108de439c08551d",
+            "1e52ed75701163f7f9e40ddf9f341b3dc9ba860af7e0ca7ca7e9eecd0084d19c",
+            "SHA256",
+            "ECDSA_P256"
+        )]
+        [InlineData(
+            "a501020338222002215830ed57d8608c5734a5ed5d22026bad8700636823e45297306479beb61a5bd6b04688c34a2f0de51d91064355eef7548bdd22583024376b4fee60ba65db61de54234575eec5d37e1184fbafa1f49d71e1795bba6bda9cbe2ebb815f9b49b371486b38fa1b",
+            "ed57d8608c5734a5ed5d22026bad8700636823e45297306479beb61a5bd6b04688c34a2f0de51d91064355eef7548bdd",
+            "24376b4fee60ba65db61de54234575eec5d37e1184fbafa1f49d71e1795bba6bda9cbe2ebb815f9b49b371486b38fa1b",
+            "SHA384",
+            "ECDSA_P384"
+        )]
+        [InlineData(
+            "a50102033823200321584200b03811bef65e330bb974224ec3ab0a5469f038c92177b4171f6f66f91244d4476e016ee77cf7e155a4f73567627b5d72eaf0cb4a6036c6509a6432d7cd6a3b325c2258420114b597b6c271d8435cfa02e890608c93f5bc118ca7f47bf191e9f9e49a22f8a15962315f0729781e1d78b302970c832db2fa8f7f782a33f8e1514950dc7499035f",
+            "00b03811bef65e330bb974224ec3ab0a5469f038c92177b4171f6f66f91244d4476e016ee77cf7e155a4f73567627b5d72eaf0cb4a6036c6509a6432d7cd6a3b325c",
+            "0114b597b6c271d8435cfa02e890608c93f5bc118ca7f47bf191e9f9e49a22f8a15962315f0729781e1d78b302970c832db2fa8f7f782a33f8e1514950dc7499035f",
+            "SHA512",
+            "ECDSA_P521"
+        )]
+        [InlineData(
+            "a40102200121582065eda5a12577c2bae829437fe338701a10aaa375e1bb5b5de108de439c08551d2258201e52ed75701163f7f9e40ddf9f341b3dc9ba860af7e0ca7ca7e9eecd0084d19c",
+            "65eda5a12577c2bae829437fe338701a10aaa375e1bb5b5de108de439c08551d",
+            "1e52ed75701163f7f9e40ddf9f341b3dc9ba860af7e0ca7ca7e9eecd0084d19c",
+            null,
+            "ECDSA_P256"
+        )]
+        public static void CoseKeyHelpers_ECDsaExportCosePublicKey_HappyPath(
+            string expectedHexEncoding,
+            string hexQx,
+            string hexQy,
+            string? hashAlgorithmName,
+            string curveFriendlyName
+        )
         {
             byte[] expectedEncoding = expectedHexEncoding.HexToByteArray();
-            var hashAlgName = hashAlgorithmName != null ? new HashAlgorithmName(hashAlgorithmName) : (HashAlgorithmName?)null;
+            var hashAlgName =
+                hashAlgorithmName != null
+                    ? new HashAlgorithmName(hashAlgorithmName)
+                    : (HashAlgorithmName?)null;
             var ecParameters = new ECParameters()
             {
                 Curve = ECCurve.CreateFromFriendlyName(curveFriendlyName),

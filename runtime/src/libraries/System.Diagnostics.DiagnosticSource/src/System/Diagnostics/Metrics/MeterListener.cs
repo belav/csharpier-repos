@@ -9,7 +9,13 @@ namespace System.Diagnostics.Metrics
     /// <summary>
     /// A delegate to represent the MeterListener callbacks used in measurements recording operation.
     /// </summary>
-    public delegate void MeasurementCallback<T>(Instrument instrument, T measurement, ReadOnlySpan<KeyValuePair<string, object?>> tags, object? state) where T : struct;
+    public delegate void MeasurementCallback<T>(
+        Instrument instrument,
+        T measurement,
+        ReadOnlySpan<KeyValuePair<string, object?>> tags,
+        object? state
+    )
+        where T : struct;
 
     /// <summary>
     /// MeterListener is class used to listen to the metrics instrument measurements recording.
@@ -18,20 +24,64 @@ namespace System.Diagnostics.Metrics
     {
         // We use LikedList here so we don't have to take any lock while iterating over the list as we always hold on a node which be either valid or null.
         // DiagLinkedList is thread safe for Add, Remove, and Clear operations.
-        private static readonly List<MeterListener> s_allStartedListeners = new List<MeterListener>();
+        private static readonly List<MeterListener> s_allStartedListeners =
+            new List<MeterListener>();
 
         // List of the instruments which the current listener is listening to.
-        private readonly DiagLinkedList<Instrument> _enabledMeasurementInstruments = new DiagLinkedList<Instrument>();
+        private readonly DiagLinkedList<Instrument> _enabledMeasurementInstruments =
+            new DiagLinkedList<Instrument>();
         private bool _disposed;
 
         // We initialize all measurement callback with no-op operations so we'll avoid the null checks during the execution;
-        private MeasurementCallback<byte>    _byteMeasurementCallback    = (instrument, measurement, tags, state) => { /* no-op */ };
-        private MeasurementCallback<short>   _shortMeasurementCallback   = (instrument, measurement, tags, state) => { /* no-op */ };
-        private MeasurementCallback<int>     _intMeasurementCallback     = (instrument, measurement, tags, state) => { /* no-op */ };
-        private MeasurementCallback<long>    _longMeasurementCallback    = (instrument, measurement, tags, state) => { /* no-op */ };
-        private MeasurementCallback<float>   _floatMeasurementCallback   = (instrument, measurement, tags, state) => { /* no-op */ };
-        private MeasurementCallback<double>  _doubleMeasurementCallback  = (instrument, measurement, tags, state) => { /* no-op */ };
-        private MeasurementCallback<decimal> _decimalMeasurementCallback = (instrument, measurement, tags, state) => { /* no-op */ };
+        private MeasurementCallback<byte> _byteMeasurementCallback = (
+            instrument,
+            measurement,
+            tags,
+            state
+        ) => { /* no-op */
+        };
+        private MeasurementCallback<short> _shortMeasurementCallback = (
+            instrument,
+            measurement,
+            tags,
+            state
+        ) => { /* no-op */
+        };
+        private MeasurementCallback<int> _intMeasurementCallback = (
+            instrument,
+            measurement,
+            tags,
+            state
+        ) => { /* no-op */
+        };
+        private MeasurementCallback<long> _longMeasurementCallback = (
+            instrument,
+            measurement,
+            tags,
+            state
+        ) => { /* no-op */
+        };
+        private MeasurementCallback<float> _floatMeasurementCallback = (
+            instrument,
+            measurement,
+            tags,
+            state
+        ) => { /* no-op */
+        };
+        private MeasurementCallback<double> _doubleMeasurementCallback = (
+            instrument,
+            measurement,
+            tags,
+            state
+        ) => { /* no-op */
+        };
+        private MeasurementCallback<decimal> _decimalMeasurementCallback = (
+            instrument,
+            measurement,
+            tags,
+            state
+        ) => { /* no-op */
+        };
 
         /// <summary>
         /// Creates a MeterListener object.
@@ -69,8 +119,14 @@ namespace System.Diagnostics.Metrics
             {
                 if (instrument is not null && !_disposed && !instrument.Meter.Disposed)
                 {
-                    _enabledMeasurementInstruments.AddIfNotExist(instrument, object.ReferenceEquals);
-                    oldState = instrument.EnableMeasurement(new ListenerSubscription(this, state), out oldStateStored);
+                    _enabledMeasurementInstruments.AddIfNotExist(
+                        instrument,
+                        object.ReferenceEquals
+                    );
+                    oldState = instrument.EnableMeasurement(
+                        new ListenerSubscription(this, state),
+                        out oldStateStored
+                    );
                     enabled = true;
                 }
             }
@@ -102,15 +158,19 @@ namespace System.Diagnostics.Metrics
                 return default;
             }
 
-            object? state =  null;
+            object? state = null;
             lock (Instrument.SyncObject)
             {
-                if (instrument is null || _enabledMeasurementInstruments.Remove(instrument, object.ReferenceEquals) == default)
+                if (
+                    instrument is null
+                    || _enabledMeasurementInstruments.Remove(instrument, object.ReferenceEquals)
+                        == default
+                )
                 {
                     return default;
                 }
 
-                state =  instrument.DisableMeasurements(this);
+                state = instrument.DisableMeasurements(this);
             }
 
             MeasurementsCompleted?.Invoke(instrument, state);
@@ -122,14 +182,21 @@ namespace System.Diagnostics.Metrics
         /// If a measurement of type T is recorded and a callback of type T is registered, that callback will be used.
         /// </summary>
         /// <param name="measurementCallback">The callback which can be used to get measurement recording of numeric type T.</param>
-        public void SetMeasurementEventCallback<T>(MeasurementCallback<T>? measurementCallback) where T : struct
+        public void SetMeasurementEventCallback<T>(MeasurementCallback<T>? measurementCallback)
+            where T : struct
         {
             if (!Meter.IsSupported)
             {
                 return;
             }
 
-            measurementCallback ??= (instrument, measurement, tags, state) => { /* no-op */};
+            measurementCallback ??= (
+                instrument,
+                measurement,
+                tags,
+                state
+            ) => { /* no-op */
+            };
 
             if (typeof(T) == typeof(byte))
             {
@@ -145,11 +212,13 @@ namespace System.Diagnostics.Metrics
             }
             else if (typeof(T) == typeof(double))
             {
-                _doubleMeasurementCallback = (MeasurementCallback<double>)(object)measurementCallback;
+                _doubleMeasurementCallback =
+                    (MeasurementCallback<double>)(object)measurementCallback;
             }
             else if (typeof(T) == typeof(decimal))
             {
-                _decimalMeasurementCallback = (MeasurementCallback<decimal>)(object)measurementCallback;
+                _decimalMeasurementCallback =
+                    (MeasurementCallback<decimal>)(object)measurementCallback;
             }
             else if (typeof(T) == typeof(short))
             {
@@ -283,10 +352,19 @@ namespace System.Diagnostics.Metrics
         }
 
         // Publish is called from Instrument.Publish
-        internal static List<MeterListener>? GetAllListeners() => s_allStartedListeners.Count == 0 ? null : new List<MeterListener>(s_allStartedListeners);
+        internal static List<MeterListener>? GetAllListeners() =>
+            s_allStartedListeners.Count == 0
+                ? null
+                : new List<MeterListener>(s_allStartedListeners);
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal void NotifyMeasurement<T>(Instrument instrument, T measurement, ReadOnlySpan<KeyValuePair<string, object?>> tags, object? state) where T : struct
+        internal void NotifyMeasurement<T>(
+            Instrument instrument,
+            T measurement,
+            ReadOnlySpan<KeyValuePair<string, object?>> tags,
+            object? state
+        )
+            where T : struct
         {
             if (typeof(T) == typeof(byte))
             {

@@ -17,10 +17,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -32,48 +32,30 @@
 
 using System.Reflection;
 
-namespace System.Runtime.Remoting.Messaging {
+namespace System.Runtime.Remoting.Messaging
+{
+    [System.Runtime.InteropServices.ComVisible(true)]
+    public interface IMethodMessage : IMessage
+    {
+        int ArgCount { get; }
 
-	[System.Runtime.InteropServices.ComVisible (true)]
-	public interface IMethodMessage : IMessage {
-		int       ArgCount        {
-			get;
-		}
-		
-		object [] Args            {
-			get;
-		}
-		
-		bool      HasVarArgs      {
-			get;
-		}
+        object[] Args { get; }
 
-		LogicalCallContext LogicalCallContext {
-			get;
-		}
+        bool HasVarArgs { get; }
 
-		MethodBase MethodBase {
-			get;
-		}
+        LogicalCallContext LogicalCallContext { get; }
 
-		string MethodName {
-			get;
-		}
+        MethodBase MethodBase { get; }
 
-		object MethodSignature {
-			get;
-		}
+        string MethodName { get; }
 
-		string TypeName {
-			get;
-		}
+        object MethodSignature { get; }
 
-		string Uri {
-			get;
-		}
+        string TypeName { get; }
 
-		object GetArg     (int argNum);
-		string GetArgName (int index);
-	}
+        string Uri { get; }
+
+        object GetArg(int argNum);
+        string GetArgName(int index);
+    }
 }
-

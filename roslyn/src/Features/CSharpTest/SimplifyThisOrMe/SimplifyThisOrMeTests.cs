@@ -18,15 +18,19 @@ using Xunit.Abstractions;
 
 namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SimplifyThisOrMe
 {
-    public partial class SimplifyThisOrMeTests : AbstractCSharpDiagnosticProviderBasedUserDiagnosticTest
+    public partial class SimplifyThisOrMeTests
+        : AbstractCSharpDiagnosticProviderBasedUserDiagnosticTest
     {
         public SimplifyThisOrMeTests(ITestOutputHelper logger)
-            : base(logger)
-        {
-        }
+            : base(logger) { }
 
-        internal override (DiagnosticAnalyzer, CodeFixProvider) CreateDiagnosticProviderAndFixer(Workspace workspace)
-            => (new CSharpSimplifyThisOrMeDiagnosticAnalyzer(), new CSharpSimplifyThisOrMeCodeFixProvider());
+        internal override (DiagnosticAnalyzer, CodeFixProvider) CreateDiagnosticProviderAndFixer(
+            Workspace workspace
+        ) =>
+            (
+                new CSharpSimplifyThisOrMeDiagnosticAnalyzer(),
+                new CSharpSimplifyThisOrMeCodeFixProvider()
+            );
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsSimplifyThisOrMe)]
         public async Task TestSimplifyDiagnosticId()
@@ -55,7 +59,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SimplifyThisOrMe
                         var a = x;
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsSimplifyThisOrMe)]
@@ -84,7 +89,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SimplifyThisOrMe
                         x = default(dynamic);
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsSimplifyThisOrMe)]
@@ -102,9 +108,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SimplifyThisOrMe
                     }
                 }
                 """,
-                options: Option(CodeStyleOptions2.QualifyPropertyAccess, false, NotificationOption2.Warning),
+                options: Option(
+                    CodeStyleOptions2.QualifyPropertyAccess,
+                    false,
+                    NotificationOption2.Warning
+                ),
                 diagnosticId: IDEDiagnosticIds.RemoveThisOrMeQualificationDiagnosticId,
-                diagnosticSeverity: DiagnosticSeverity.Warning);
+                diagnosticSeverity: DiagnosticSeverity.Warning
+            );
         }
 
         [Fact]
@@ -440,17 +451,17 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SimplifyThisOrMe
                 </Workspace>
                 """;
 
-            var options =
-                new OptionsCollection(GetLanguage())
-                {
-                    { CodeStyleOptions2.QualifyPropertyAccess, false, NotificationOption2.Suggestion },
-                    { CodeStyleOptions2.QualifyFieldAccess, true, NotificationOption2.Suggestion },
-                };
+            var options = new OptionsCollection(GetLanguage())
+            {
+                { CodeStyleOptions2.QualifyPropertyAccess, false, NotificationOption2.Suggestion },
+                { CodeStyleOptions2.QualifyFieldAccess, true, NotificationOption2.Suggestion },
+            };
 
             await TestInRegularAndScriptAsync(
                 initialMarkup: input,
                 expectedMarkup: expected,
-                options: options);
+                options: options
+            );
         }
     }
 }

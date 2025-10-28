@@ -13,8 +13,6 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.LanguageService
     internal class CSharpCodePageEditorFactory : AbstractCodePageEditorFactory
     {
         public CSharpCodePageEditorFactory(AbstractEditorFactory editorFactory)
-            : base(editorFactory)
-        {
-        }
+            : base(editorFactory) { }
     }
 }

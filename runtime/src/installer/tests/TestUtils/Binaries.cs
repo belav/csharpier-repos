@@ -36,63 +36,111 @@ namespace Microsoft.DotNet.CoreSetup.Test
         public static class AppHost
         {
             public static string FileName = GetExeFileNameForCurrentPlatform("apphost");
-            public static string FilePath = Path.Combine(RepoDirectoriesProvider.Default.HostArtifacts, FileName);
+            public static string FilePath = Path.Combine(
+                RepoDirectoriesProvider.Default.HostArtifacts,
+                FileName
+            );
         }
 
         public static class CoreClr
         {
             public static string FileName = GetSharedLibraryFileNameForCurrentPlatform("coreclr");
-            public static string FilePath = Path.Combine(TestContext.BuiltDotNet.GreatestVersionSharedFxPath, FileName);
+            public static string FilePath = Path.Combine(
+                TestContext.BuiltDotNet.GreatestVersionSharedFxPath,
+                FileName
+            );
 
-            public static string MockName = GetSharedLibraryFileNameForCurrentPlatform("mockcoreclr");
-            public static string MockPath = Path.Combine(RepoDirectoriesProvider.Default.HostTestArtifacts, MockName);
+            public static string MockName = GetSharedLibraryFileNameForCurrentPlatform(
+                "mockcoreclr"
+            );
+            public static string MockPath = Path.Combine(
+                RepoDirectoriesProvider.Default.HostTestArtifacts,
+                MockName
+            );
         }
 
         public static class DotNet
         {
             public static string FileName = GetExeFileNameForCurrentPlatform("dotnet");
-            public static string FilePath = Path.Combine(RepoDirectoriesProvider.Default.HostArtifacts, FileName);
+            public static string FilePath = Path.Combine(
+                RepoDirectoriesProvider.Default.HostArtifacts,
+                FileName
+            );
         }
 
         public static class HostFxr
         {
             public static string FileName = GetSharedLibraryFileNameForCurrentPlatform("hostfxr");
-            public static string FilePath = Path.Combine(RepoDirectoriesProvider.Default.HostArtifacts, FileName);
+            public static string FilePath = Path.Combine(
+                RepoDirectoriesProvider.Default.HostArtifacts,
+                FileName
+            );
 
-            public static string MockName_2_2 = GetSharedLibraryFileNameForCurrentPlatform("mockhostfxr_2_2");
-            public static string MockName_5_0 = GetSharedLibraryFileNameForCurrentPlatform("mockhostfxr_5_0");
-            public static string MockPath_2_2 = Path.Combine(RepoDirectoriesProvider.Default.HostTestArtifacts, MockName_2_2);
-            public static string MockPath_5_0 = Path.Combine(RepoDirectoriesProvider.Default.HostTestArtifacts, MockName_5_0);
+            public static string MockName_2_2 = GetSharedLibraryFileNameForCurrentPlatform(
+                "mockhostfxr_2_2"
+            );
+            public static string MockName_5_0 = GetSharedLibraryFileNameForCurrentPlatform(
+                "mockhostfxr_5_0"
+            );
+            public static string MockPath_2_2 = Path.Combine(
+                RepoDirectoriesProvider.Default.HostTestArtifacts,
+                MockName_2_2
+            );
+            public static string MockPath_5_0 = Path.Combine(
+                RepoDirectoriesProvider.Default.HostTestArtifacts,
+                MockName_5_0
+            );
         }
 
         public static class HostPolicy
         {
-            public static string FileName = GetSharedLibraryFileNameForCurrentPlatform("hostpolicy");
-            public static string FilePath = Path.Combine(RepoDirectoriesProvider.Default.HostArtifacts, FileName);
+            public static string FileName = GetSharedLibraryFileNameForCurrentPlatform(
+                "hostpolicy"
+            );
+            public static string FilePath = Path.Combine(
+                RepoDirectoriesProvider.Default.HostArtifacts,
+                FileName
+            );
 
-            public static string MockName = GetSharedLibraryFileNameForCurrentPlatform("mockhostpolicy");
-            public static string MockPath = Path.Combine(RepoDirectoriesProvider.Default.HostTestArtifacts, MockName);
+            public static string MockName = GetSharedLibraryFileNameForCurrentPlatform(
+                "mockhostpolicy"
+            );
+            public static string MockPath = Path.Combine(
+                RepoDirectoriesProvider.Default.HostTestArtifacts,
+                MockName
+            );
         }
 
         public static class NetHost
         {
             public static string FileName = GetSharedLibraryFileNameForCurrentPlatform("nethost");
-            public static string FilePath = Path.Combine(RepoDirectoriesProvider.Default.HostArtifacts, FileName);
+            public static string FilePath = Path.Combine(
+                RepoDirectoriesProvider.Default.HostArtifacts,
+                FileName
+            );
         }
 
         public static class SingleFileHost
         {
             public static string FileName = GetExeFileNameForCurrentPlatform("singlefilehost");
-            public static string FilePath = Path.Combine(RepoDirectoriesProvider.Default.HostArtifacts, FileName);
+            public static string FilePath = Path.Combine(
+                RepoDirectoriesProvider.Default.HostArtifacts,
+                FileName
+            );
         }
 
-        public static (IEnumerable<string> Assemblies, IEnumerable<string> NativeLibraries) GetRuntimeFiles()
+        public static (
+            IEnumerable<string> Assemblies,
+            IEnumerable<string> NativeLibraries
+        ) GetRuntimeFiles()
         {
             var runtimePackDir = TestContext.BuiltDotNet.GreatestVersionSharedFxPath;
             var assemblies = Directory.GetFiles(runtimePackDir, "*.dll").Where(f => IsAssembly(f));
 
             (string prefix, string suffix) = Binaries.GetSharedLibraryPrefixSuffix();
-            var nativeLibraries = Directory.GetFiles(runtimePackDir, $"{prefix}*{suffix}").Where(f => !IsAssembly(f) && Path.GetExtension(f) != ".json");
+            var nativeLibraries = Directory
+                .GetFiles(runtimePackDir, $"{prefix}*{suffix}")
+                .Where(f => !IsAssembly(f) && Path.GetExtension(f) != ".json");
 
             return (assemblies, nativeLibraries);
 

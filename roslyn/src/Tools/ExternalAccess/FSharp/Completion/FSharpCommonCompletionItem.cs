@@ -23,11 +23,25 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.FSharp.Completion
             bool showsWarningIcon = false,
             ImmutableDictionary<string, string> properties = null,
             ImmutableArray<string> tags = default,
-            string inlineDescription = null)
+            string inlineDescription = null
+        )
         {
-            var roslynGlyph = glyph.HasValue ? FSharpGlyphHelpers.ConvertTo(glyph.Value) : (Glyph?)null;
+            var roslynGlyph = glyph.HasValue
+                ? FSharpGlyphHelpers.ConvertTo(glyph.Value)
+                : (Glyph?)null;
             return CommonCompletionItem.Create(
-                displayText, displayTextSuffix, rules, roslynGlyph, description, sortText, filterText, showsWarningIcon, properties.AsImmutableOrNull(), tags, inlineDescription);
+                displayText,
+                displayTextSuffix,
+                rules,
+                roslynGlyph,
+                description,
+                sortText,
+                filterText,
+                showsWarningIcon,
+                properties.AsImmutableOrNull(),
+                tags,
+                inlineDescription
+            );
         }
     }
 }

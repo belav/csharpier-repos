@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -27,33 +27,37 @@
 //
 using System;
 using System.Collections.Generic;
-using System.Xml;
 using System.IdentityModel.Claims;
 using System.IdentityModel.Policy;
 using System.IdentityModel.Selectors;
+using System.Xml;
 
 namespace System.IdentityModel.Tokens
 {
-	public abstract class SamlStatement
-	{
-		protected SamlStatement ()
-		{
-		}
+    public abstract class SamlStatement
+    {
+        protected SamlStatement() { }
 
-		public abstract bool IsReadOnly { get; }
+        public abstract bool IsReadOnly { get; }
 
-		public abstract IAuthorizationPolicy CreatePolicy (
-			ClaimSet issuer, SamlSecurityTokenAuthenticator samlAuthenticator);
+        public abstract IAuthorizationPolicy CreatePolicy(
+            ClaimSet issuer,
+            SamlSecurityTokenAuthenticator samlAuthenticator
+        );
 
-		public abstract void MakeReadOnly ();
+        public abstract void MakeReadOnly();
 
-		public abstract void ReadXml (XmlDictionaryReader reader,
-			SamlSerializer samlSerializer,
-			SecurityTokenSerializer keyInfoSerializer,
-			SecurityTokenResolver outOfBandTokenResolver);
+        public abstract void ReadXml(
+            XmlDictionaryReader reader,
+            SamlSerializer samlSerializer,
+            SecurityTokenSerializer keyInfoSerializer,
+            SecurityTokenResolver outOfBandTokenResolver
+        );
 
-		public abstract void WriteXml (XmlDictionaryWriter writer,
-			SamlSerializer samlSerializer,
-			SecurityTokenSerializer keyInfoSerializer);
-	}
+        public abstract void WriteXml(
+            XmlDictionaryWriter writer,
+            SamlSerializer samlSerializer,
+            SecurityTokenSerializer keyInfoSerializer
+        );
+    }
 }

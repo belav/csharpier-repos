@@ -10,7 +10,9 @@ namespace System.SpanTests
         [Fact]
         public static void IndexOfSequenceMatchAtStart_Byte()
         {
-            ReadOnlySpan<byte> span = new ReadOnlySpan<byte>(new byte[] { 5, 1, 77, 2, 3, 77, 77, 4, 5, 77, 77, 77, 88, 6, 6, 77, 77, 88, 9 });
+            ReadOnlySpan<byte> span = new ReadOnlySpan<byte>(
+                new byte[] { 5, 1, 77, 2, 3, 77, 77, 4, 5, 77, 77, 77, 88, 6, 6, 77, 77, 88, 9 }
+            );
             ReadOnlySpan<byte> value = new ReadOnlySpan<byte>(new byte[] { 5, 1, 77 });
             int index = span.IndexOf(value);
             Assert.Equal(0, index);
@@ -19,7 +21,9 @@ namespace System.SpanTests
         [Fact]
         public static void IndexOfSequenceMultipleMatch_Byte()
         {
-            ReadOnlySpan<byte> span = new ReadOnlySpan<byte>(new byte[] { 1, 2, 3, 1, 2, 3, 1, 2, 3 });
+            ReadOnlySpan<byte> span = new ReadOnlySpan<byte>(
+                new byte[] { 1, 2, 3, 1, 2, 3, 1, 2, 3 }
+            );
             ReadOnlySpan<byte> value = new ReadOnlySpan<byte>(new byte[] { 2, 3 });
             int index = span.IndexOf(value);
             Assert.Equal(1, index);
@@ -28,7 +32,9 @@ namespace System.SpanTests
         [Fact]
         public static void IndexOfSequenceRestart_Byte()
         {
-            ReadOnlySpan<byte> span = new ReadOnlySpan<byte>(new byte[] { 0, 1, 77, 2, 3, 77, 77, 4, 5, 77, 77, 77, 88, 6, 6, 77, 77, 88, 9 });
+            ReadOnlySpan<byte> span = new ReadOnlySpan<byte>(
+                new byte[] { 0, 1, 77, 2, 3, 77, 77, 4, 5, 77, 77, 77, 88, 6, 6, 77, 77, 88, 9 }
+            );
             ReadOnlySpan<byte> value = new ReadOnlySpan<byte>(new byte[] { 77, 77, 88 });
             int index = span.IndexOf(value);
             Assert.Equal(10, index);
@@ -37,7 +43,9 @@ namespace System.SpanTests
         [Fact]
         public static void IndexOfSequenceNoMatch_Byte()
         {
-            ReadOnlySpan<byte> span = new ReadOnlySpan<byte>(new byte[] { 0, 1, 77, 2, 3, 77, 77, 4, 5, 77, 77, 77, 88, 6, 6, 77, 77, 88, 9 });
+            ReadOnlySpan<byte> span = new ReadOnlySpan<byte>(
+                new byte[] { 0, 1, 77, 2, 3, 77, 77, 4, 5, 77, 77, 77, 88, 6, 6, 77, 77, 88, 9 }
+            );
             ReadOnlySpan<byte> value = new ReadOnlySpan<byte>(new byte[] { 77, 77, 88, 99 });
             int index = span.IndexOf(value);
             Assert.Equal(-1, index);
@@ -46,7 +54,9 @@ namespace System.SpanTests
         [Fact]
         public static void IndexOfSequenceNotEvenAHeadMatch_Byte()
         {
-            ReadOnlySpan<byte> span = new ReadOnlySpan<byte>(new byte[] { 0, 1, 77, 2, 3, 77, 77, 4, 5, 77, 77, 77, 88, 6, 6, 77, 77, 88, 9 });
+            ReadOnlySpan<byte> span = new ReadOnlySpan<byte>(
+                new byte[] { 0, 1, 77, 2, 3, 77, 77, 4, 5, 77, 77, 77, 88, 6, 6, 77, 77, 88, 9 }
+            );
             ReadOnlySpan<byte> value = new ReadOnlySpan<byte>(new byte[] { 100, 77, 88, 99 });
             int index = span.IndexOf(value);
             Assert.Equal(-1, index);
@@ -74,7 +84,9 @@ namespace System.SpanTests
         public static void IndexOfSequenceZeroLengthValue_Byte()
         {
             // A zero-length value is always "found" at the start of the span.
-            ReadOnlySpan<byte> span = new ReadOnlySpan<byte>(new byte[] { 0, 1, 77, 2, 3, 77, 77, 4, 5, 77, 77, 77, 88, 6, 6, 77, 77, 88, 9 });
+            ReadOnlySpan<byte> span = new ReadOnlySpan<byte>(
+                new byte[] { 0, 1, 77, 2, 3, 77, 77, 4, 5, 77, 77, 77, 88, 6, 6, 77, 77, 88, 9 }
+            );
             ReadOnlySpan<byte> value = new ReadOnlySpan<byte>(Array.Empty<byte>());
             int index = span.IndexOf(value);
             Assert.Equal(0, index);

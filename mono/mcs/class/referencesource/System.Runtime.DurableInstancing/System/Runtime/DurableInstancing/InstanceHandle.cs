@@ -6,10 +6,10 @@ namespace System.Runtime.DurableInstancing
 {
     using System.Collections.Generic;
     using System.Linq;
+    using System.Runtime.Diagnostics;
     using System.Threading;
     using System.Transactions;
     using System.Xml.Linq;
-    using System.Runtime.Diagnostics;
 
     [Fx.Tag.XamlVisible(false)]
     public sealed class InstanceHandle
@@ -60,9 +60,7 @@ namespace System.Runtime.DurableInstancing
             }
         }
 
-
         public bool IsValid { get; private set; }
-
 
         internal InstanceView View { get; private set; }
         internal InstanceStore Store { get; private set; }
@@ -84,7 +82,6 @@ namespace System.Runtime.DurableInstancing
                 }
                 return this.id;
             }
-
             private set
             {
                 Fx.Assert(value != Guid.Empty, "Cannot set an empty Id.");
@@ -109,10 +106,7 @@ namespace System.Runtime.DurableInstancing
 
         internal object ProviderObject
         {
-            get
-            {
-                return this.providerObject;
-            }
+            get { return this.providerObject; }
             set
             {
                 this.providerObject = value;
@@ -122,10 +116,7 @@ namespace System.Runtime.DurableInstancing
 
         internal EventTraceActivity EventTraceActivity
         {
-            get
-            {
-                return this.eventTraceActivity;
-            }
+            get { return this.eventTraceActivity; }
         }
 
         // When non-null, a transaction is pending.
@@ -138,18 +129,16 @@ namespace System.Runtime.DurableInstancing
 
         object ThisLock
         {
-            get
-            {
-                return this.thisLock;
-            }
+            get { return this.thisLock; }
         }
-
 
         public void Free()
         {
             if (!this.providerObjectSet)
             {
-                throw Fx.Exception.AsError(new InvalidOperationException(SRCore.HandleFreedBeforeInitialized));
+                throw Fx.Exception.AsError(
+                    new InvalidOperationException(SRCore.HandleFreedBeforeInitialized)
+                );
             }
 
             if (!IsValid)
@@ -176,11 +165,16 @@ namespace System.Runtime.DurableInstancing
                     IEnumerable<XName> eventsToUnbind = null;
                     if (this.pendingOwnerEvents != null && this.pendingOwnerEvents.Count > 0)
                     {
-                        eventsToUnbind = this.pendingOwnerEvents.Select(persistenceEvent => persistenceEvent.Name);
+                        eventsToUnbind = this.pendingOwnerEvents.Select(persistenceEvent =>
+                            persistenceEvent.Name
+                        );
                     }
                     if (this.boundOwnerEvents != null && this.boundOwnerEvents.Count > 0)
                     {
-                        eventsToUnbind = eventsToUnbind == null ? this.boundOwnerEvents : eventsToUnbind.Concat(this.boundOwnerEvents);
+                        eventsToUnbind =
+                            eventsToUnbind == null
+                                ? this.boundOwnerEvents
+                                : eventsToUnbind.Concat(this.boundOwnerEvents);
                     }
                     if (eventsToUnbind != null)
                     {
@@ -198,14 +192,20 @@ namespace System.Runtime.DurableInstancing
                         if (AcquirePending != null)
                         {
                             // If in this stage, we need to short-circuit the pending transaction.
-                            Fx.Assert(CurrentTransactionalAsyncResult != null, "Should have a pending transaction if we are waiting for it.");
+                            Fx.Assert(
+                                CurrentTransactionalAsyncResult != null,
+                                "Should have a pending transaction if we are waiting for it."
+                            );
                             CurrentTransactionalAsyncResult.WaitForHostTransaction.Set();
                             this.needFreedNotification = true;
                         }
                         else
                         {
                             // Here, just notify the currently executing command.
-                            Fx.Assert(CurrentExecutionContext != null, "Must have either this or AcquirePending set.");
+                            Fx.Assert(
+                                CurrentExecutionContext != null,
+                                "Must have either this or AcquirePending set."
+                            );
                             currentContext = CurrentExecutionContext;
                         }
                     }
@@ -239,11 +239,18 @@ namespace System.Runtime.DurableInstancing
                             // Cancel any pending lock reclaim here.
                             if (this.inProgressBind != null)
                             {
-                                Fx.Assert(Owner != null, "Must be bound to owner to have an inProgressBind for the lock in CancelReclaim.");
+                                Fx.Assert(
+                                    Owner != null,
+                                    "Must be bound to owner to have an inProgressBind for the lock in CancelReclaim."
+                                );
 
                                 // Null reason defaults to OperationCanceledException.  (Defer creating it since this might not be a
                                 // reclaim attempt, but we don't know until we take the HandlesLock.)
-                                Owner.FaultBind(ref this.inProgressBind, ref handlesPendingResolution, null);
+                                Owner.FaultBind(
+                                    ref this.inProgressBind,
+                                    ref handlesPendingResolution,
+                                    null
+                                );
                             }
                         }
                         else
@@ -274,10 +281,19 @@ namespace System.Runtime.DurableInstancing
             lock (ThisLock)
             {
                 Fx.Assert(OperationPending, "Should only be called during an operation.");
-                Fx.Assert(AcquirePending == null, "Should only be called after acquiring the transaction.");
+                Fx.Assert(
+                    AcquirePending == null,
+                    "Should only be called after acquiring the transaction."
+                );
                 Fx.Assert(Owner != null, "Must be bound to owner to have an owner-scoped event.");
 
-                if (IsValid && (this.boundOwnerEvents == null || !this.boundOwnerEvents.Contains(persistenceEvent.Name)))
+                if (
+                    IsValid
+                    && (
+                        this.boundOwnerEvents == null
+                        || !this.boundOwnerEvents.Contains(persistenceEvent.Name)
+                    )
+                )
                 {
                     if (this.pendingOwnerEvents == null)
                     {
@@ -300,9 +316,18 @@ namespace System.Runtime.DurableInstancing
                 Fx.AssertAndThrow(Version == -1, "Handle already bound to a lock.");
 
                 Fx.Assert(OperationPending, "Should only be called during an operation.");
-                Fx.Assert(AcquirePending == null, "Should only be called after acquiring the transaction.");
-                Fx.Assert(this.inProgressBind == null, "StartPotentialBind should only be called once per command.");
-                Fx.Assert(Owner != null, "Must be bound to owner to have an inProgressBind for the lock.");
+                Fx.Assert(
+                    AcquirePending == null,
+                    "Should only be called after acquiring the transaction."
+                );
+                Fx.Assert(
+                    this.inProgressBind == null,
+                    "StartPotentialBind should only be called once per command."
+                );
+                Fx.Assert(
+                    Owner != null,
+                    "Must be bound to owner to have an inProgressBind for the lock."
+                );
 
                 Owner.StartBind(this, ref this.inProgressBind);
             }
@@ -314,7 +339,10 @@ namespace System.Runtime.DurableInstancing
 
             lock (ThisLock)
             {
-                Fx.Assert(this.inProgressBind == null, "How did we get a bind in progress without an owner?");
+                Fx.Assert(
+                    this.inProgressBind == null,
+                    "How did we get a bind in progress without an owner?"
+                );
 
                 Fx.Assert(Owner == null, "BindOwner called when we already have an owner.");
                 Owner = owner;
@@ -333,11 +361,20 @@ namespace System.Runtime.DurableInstancing
                     Fx.Assert(Id == Guid.Empty, "Instance already boud in BindInstance.");
                     Id = instanceId;
 
-                    Fx.Assert(OperationPending, "BindInstance should only be called during an operation.");
-                    Fx.Assert(AcquirePending == null, "BindInstance should only be called after acquiring the transaction.");
+                    Fx.Assert(
+                        OperationPending,
+                        "BindInstance should only be called during an operation."
+                    );
+                    Fx.Assert(
+                        AcquirePending == null,
+                        "BindInstance should only be called after acquiring the transaction."
+                    );
                     if (this.inProgressBind != null)
                     {
-                        Fx.Assert(Owner != null, "Must be bound to owner to have an inProgressBind for the lock.");
+                        Fx.Assert(
+                            Owner != null,
+                            "Must be bound to owner to have an inProgressBind for the lock."
+                        );
                         Owner.InstanceBound(ref this.inProgressBind, ref handlesPendingResolution);
                     }
                 }
@@ -360,10 +397,15 @@ namespace System.Runtime.DurableInstancing
                 Version = instanceVersion;
 
                 Fx.Assert(OperationPending, "Bind should only be called during an operation.");
-                Fx.Assert(AcquirePending == null, "Bind should only be called after acquiring the transaction.");
+                Fx.Assert(
+                    AcquirePending == null,
+                    "Bind should only be called after acquiring the transaction."
+                );
                 if (this.inProgressBind == null)
                 {
-                    throw Fx.Exception.AsError(new InvalidOperationException(SRCore.BindLockRequiresCommandFlag));
+                    throw Fx.Exception.AsError(
+                        new InvalidOperationException(SRCore.BindLockRequiresCommandFlag)
+                    );
                 }
             }
         }
@@ -376,17 +418,35 @@ namespace System.Runtime.DurableInstancing
             {
                 lock (ThisLock)
                 {
-                    Fx.AssertAndThrow(Version == -1, "StartReclaim should only be reachable if the lock hasn't been bound.");
+                    Fx.AssertAndThrow(
+                        Version == -1,
+                        "StartReclaim should only be reachable if the lock hasn't been bound."
+                    );
 
-                    Fx.Assert(OperationPending, "StartReclaim should only be called during an operation.");
-                    Fx.Assert(AcquirePending == null, "StartReclaim should only be called after acquiring the transaction.");
+                    Fx.Assert(
+                        OperationPending,
+                        "StartReclaim should only be called during an operation."
+                    );
+                    Fx.Assert(
+                        AcquirePending == null,
+                        "StartReclaim should only be called after acquiring the transaction."
+                    );
                     if (this.inProgressBind == null)
                     {
-                        throw Fx.Exception.AsError(new InvalidOperationException(SRCore.BindLockRequiresCommandFlag));
+                        throw Fx.Exception.AsError(
+                            new InvalidOperationException(SRCore.BindLockRequiresCommandFlag)
+                        );
                     }
 
-                    Fx.Assert(Owner != null, "Must be bound to owner to have an inProgressBind for the lock in StartReclaim.");
-                    return Owner.InitiateLockResolution(instanceVersion, ref this.inProgressBind, ref handlesPendingResolution);
+                    Fx.Assert(
+                        Owner != null,
+                        "Must be bound to owner to have an inProgressBind for the lock in StartReclaim."
+                    );
+                    return Owner.InitiateLockResolution(
+                        instanceVersion,
+                        ref this.inProgressBind,
+                        ref handlesPendingResolution
+                    );
                 }
             }
             finally
@@ -405,10 +465,17 @@ namespace System.Runtime.DurableInstancing
                 {
                     if (this.inProgressBind == null)
                     {
-                        throw Fx.Exception.AsError(new InvalidOperationException(SRCore.DoNotCompleteTryCommandWithPendingReclaim));
+                        throw Fx.Exception.AsError(
+                            new InvalidOperationException(
+                                SRCore.DoNotCompleteTryCommandWithPendingReclaim
+                            )
+                        );
                     }
 
-                    Fx.Assert(Owner != null, "Must be bound to owner to have an inProgressBind for the lock in CancelReclaim.");
+                    Fx.Assert(
+                        Owner != null,
+                        "Must be bound to owner to have an inProgressBind for the lock in CancelReclaim."
+                    );
                     Owner.FaultBind(ref this.inProgressBind, ref handlesPendingResolution, reason);
                 }
             }
@@ -428,17 +495,36 @@ namespace System.Runtime.DurableInstancing
                 {
                     if (this.inProgressBind == null)
                     {
-                        throw Fx.Exception.AsError(new InvalidOperationException(SRCore.DoNotCompleteTryCommandWithPendingReclaim));
+                        throw Fx.Exception.AsError(
+                            new InvalidOperationException(
+                                SRCore.DoNotCompleteTryCommandWithPendingReclaim
+                            )
+                        );
                     }
 
-                    Fx.Assert(Owner != null, "Must be bound to owner to have an inProgressBind for the lock in CancelReclaim.");
-                    if (!Owner.FinishBind(ref this.inProgressBind, ref instanceVersion, ref handlesPendingResolution))
+                    Fx.Assert(
+                        Owner != null,
+                        "Must be bound to owner to have an inProgressBind for the lock in CancelReclaim."
+                    );
+                    if (
+                        !Owner.FinishBind(
+                            ref this.inProgressBind,
+                            ref instanceVersion,
+                            ref handlesPendingResolution
+                        )
+                    )
                     {
                         return false;
                     }
 
-                    Fx.AssertAndThrow(Version == -1, "Should only be able to set the version once per handle.");
-                    Fx.AssertAndThrow(instanceVersion >= 0, "Incorrect version resulting from conflict resolution.");
+                    Fx.AssertAndThrow(
+                        Version == -1,
+                        "Should only be able to set the version once per handle."
+                    );
+                    Fx.AssertAndThrow(
+                        instanceVersion >= 0,
+                        "Incorrect version resulting from conflict resolution."
+                    );
                     Version = instanceVersion;
                     return true;
                 }
@@ -450,14 +536,27 @@ namespace System.Runtime.DurableInstancing
         }
 
         [Fx.Tag.Blocking(CancelMethod = "Free")]
-        internal InstancePersistenceContext AcquireExecutionContext(Transaction hostTransaction, TimeSpan timeout)
+        internal InstancePersistenceContext AcquireExecutionContext(
+            Transaction hostTransaction,
+            TimeSpan timeout
+        )
         {
             bool setOperationPending = false;
             InstancePersistenceContext result = null;
             try
             {
-                result = AcquireContextAsyncResult.End(new AcquireContextAsyncResult(this, hostTransaction, timeout, out setOperationPending));
-                Fx.AssertAndThrow(result != null, "Null result returned from AcquireContextAsyncResult (synchronous).");
+                result = AcquireContextAsyncResult.End(
+                    new AcquireContextAsyncResult(
+                        this,
+                        hostTransaction,
+                        timeout,
+                        out setOperationPending
+                    )
+                );
+                Fx.AssertAndThrow(
+                    result != null,
+                    "Null result returned from AcquireContextAsyncResult (synchronous)."
+                );
                 return result;
             }
             finally
@@ -469,13 +568,25 @@ namespace System.Runtime.DurableInstancing
             }
         }
 
-        internal IAsyncResult BeginAcquireExecutionContext(Transaction hostTransaction, TimeSpan timeout, AsyncCallback callback, object state)
+        internal IAsyncResult BeginAcquireExecutionContext(
+            Transaction hostTransaction,
+            TimeSpan timeout,
+            AsyncCallback callback,
+            object state
+        )
         {
             bool setOperationPending = false;
             IAsyncResult result = null;
             try
             {
-                result = new AcquireContextAsyncResult(this, hostTransaction, timeout, out setOperationPending, callback, state);
+                result = new AcquireContextAsyncResult(
+                    this,
+                    hostTransaction,
+                    timeout,
+                    out setOperationPending,
+                    callback,
+                    state
+                );
                 return result;
             }
             finally
@@ -495,7 +606,10 @@ namespace System.Runtime.DurableInstancing
 
         internal void ReleaseExecutionContext()
         {
-            Fx.Assert(OperationPending, "ReleaseExecutionContext called with no operation pending.");
+            Fx.Assert(
+                OperationPending,
+                "ReleaseExecutionContext called with no operation pending."
+            );
             FinishOperation();
         }
 
@@ -519,15 +633,27 @@ namespace System.Runtime.DurableInstancing
                         // If there's a Version, it should be committed.
                         if (Version != -1)
                         {
-                            if (!Owner.TryCompleteBind(ref this.inProgressBind, ref handlesPendingResolution, out handleToFree))
+                            if (
+                                !Owner.TryCompleteBind(
+                                    ref this.inProgressBind,
+                                    ref handlesPendingResolution,
+                                    out handleToFree
+                                )
+                            )
                             {
                                 return null;
                             }
                         }
                         else
                         {
-                            Fx.Assert(OperationPending, "Should have cancelled this bind in FinishOperation.");
-                            Fx.Assert(AcquirePending == null, "Should not be in Commit during AcquirePending.");
+                            Fx.Assert(
+                                OperationPending,
+                                "Should have cancelled this bind in FinishOperation."
+                            );
+                            Fx.Assert(
+                                AcquirePending == null,
+                                "Should not be in Commit during AcquirePending."
+                            );
                             Owner.CancelBind(ref this.inProgressBind, ref handlesPendingResolution);
                         }
                     }
@@ -539,20 +665,30 @@ namespace System.Runtime.DurableInstancing
                             this.boundOwnerEvents = new HashSet<XName>();
                         }
 
-                        foreach (InstancePersistenceEvent persistenceEvent in this.pendingOwnerEvents)
+                        foreach (
+                            InstancePersistenceEvent persistenceEvent in this.pendingOwnerEvents
+                        )
                         {
                             if (!this.boundOwnerEvents.Add(persistenceEvent.Name))
                             {
-                                Fx.Assert("Should not have conflicts between pending and bound events.");
+                                Fx.Assert(
+                                    "Should not have conflicts between pending and bound events."
+                                );
                                 continue;
                             }
 
-                            InstancePersistenceEvent normal = Store.AddHandleToEvent(this, persistenceEvent, Owner);
+                            InstancePersistenceEvent normal = Store.AddHandleToEvent(
+                                this,
+                                persistenceEvent,
+                                Owner
+                            );
                             if (normal != null)
                             {
                                 if (normals == null)
                                 {
-                                    normals = new List<InstancePersistenceEvent>(this.pendingOwnerEvents.Count);
+                                    normals = new List<InstancePersistenceEvent>(
+                                        this.pendingOwnerEvents.Count
+                                    );
                                 }
                                 normals.Add(normal);
                             }
@@ -577,7 +713,10 @@ namespace System.Runtime.DurableInstancing
                 // This is a convenience, it is not required for correctness.
                 if (handleToFree != null)
                 {
-                    Fx.Assert(!object.ReferenceEquals(handleToFree, this), "Shouldn't have been told to free ourselves.");
+                    Fx.Assert(
+                        !object.ReferenceEquals(handleToFree, this),
+                        "Shouldn't have been told to free ourselves."
+                    );
                     handleToFree.Free();
                 }
 
@@ -601,7 +740,10 @@ namespace System.Runtime.DurableInstancing
                 TooLateToEnlist = true;
                 if (OperationPending && AcquirePending == null)
                 {
-                    Fx.Assert(CurrentExecutionContext != null, "Should either be acquiring or executing in Prepare.");
+                    Fx.Assert(
+                        CurrentExecutionContext != null,
+                        "Should either be acquiring or executing in Prepare."
+                    );
                     this.pendingPreparingEnlistment = preparingEnlistment;
                 }
                 else
@@ -623,7 +765,10 @@ namespace System.Runtime.DurableInstancing
                 TooLateToEnlist = true;
                 if (OperationPending && AcquirePending == null)
                 {
-                    Fx.Assert(CurrentExecutionContext != null, "Should either be acquiring or executing in RollBack.");
+                    Fx.Assert(
+                        CurrentExecutionContext != null,
+                        "Should either be acquiring or executing in RollBack."
+                    );
                     this.pendingRollback = rollingBack;
 
                     // Don't prepare and roll back.
@@ -700,13 +845,19 @@ namespace System.Runtime.DurableInstancing
             }
         }
 
-        List<InstancePersistenceEvent> StartWaiting(WaitForEventsAsyncResult result, IOThreadTimer timeoutTimer, TimeSpan timeout)
+        List<InstancePersistenceEvent> StartWaiting(
+            WaitForEventsAsyncResult result,
+            IOThreadTimer timeoutTimer,
+            TimeSpan timeout
+        )
         {
             lock (ThisLock)
             {
                 if (this.waitResult != null)
                 {
-                    throw Fx.Exception.AsError(new InvalidOperationException(SRCore.WaitAlreadyInProgress));
+                    throw Fx.Exception.AsError(
+                        new InvalidOperationException(SRCore.WaitAlreadyInProgress)
+                    );
                 }
                 if (!IsValid)
                 {
@@ -716,7 +867,10 @@ namespace System.Runtime.DurableInstancing
                 if (this.boundOwnerEvents != null && this.boundOwnerEvents.Count > 0)
                 {
                     Fx.Assert(Owner != null, "How do we have owner events without an owner.");
-                    List<InstancePersistenceEvent> readyEvents = Store.SelectSignaledEvents(this.boundOwnerEvents, Owner);
+                    List<InstancePersistenceEvent> readyEvents = Store.SelectSignaledEvents(
+                        this.boundOwnerEvents,
+                        Owner
+                    );
                     if (readyEvents != null)
                     {
                         Fx.Assert(readyEvents.Count != 0, "Should not return a zero-length list.");
@@ -768,7 +922,12 @@ namespace System.Runtime.DurableInstancing
             }
         }
 
-        internal static IAsyncResult BeginWaitForEvents(InstanceHandle handle, TimeSpan timeout, AsyncCallback callback, object state)
+        internal static IAsyncResult BeginWaitForEvents(
+            InstanceHandle handle,
+            TimeSpan timeout,
+            AsyncCallback callback,
+            object state
+        )
         {
             return new WaitForEventsAsyncResult(handle, timeout, callback, state);
         }
@@ -780,26 +939,58 @@ namespace System.Runtime.DurableInstancing
 
         class AcquireContextAsyncResult : AsyncResult, IEnlistmentNotification
         {
-            static Action<object, TimeoutException> onHostTransaction = new Action<object, TimeoutException>(OnHostTransaction);
+            static Action<object, TimeoutException> onHostTransaction = new Action<
+                object,
+                TimeoutException
+            >(OnHostTransaction);
 
             readonly InstanceHandle handle;
             readonly TimeoutHelper timeoutHelper;
 
             InstancePersistenceContext executionContext;
 
-            public AcquireContextAsyncResult(InstanceHandle handle, Transaction hostTransaction, TimeSpan timeout, out bool setOperationPending, AsyncCallback callback, object state)
-                : this(handle, hostTransaction, timeout, out setOperationPending, false, callback, state)
-            {
-            }
+            public AcquireContextAsyncResult(
+                InstanceHandle handle,
+                Transaction hostTransaction,
+                TimeSpan timeout,
+                out bool setOperationPending,
+                AsyncCallback callback,
+                object state
+            )
+                : this(
+                    handle,
+                    hostTransaction,
+                    timeout,
+                    out setOperationPending,
+                    false,
+                    callback,
+                    state
+                ) { }
 
             [Fx.Tag.Blocking(CancelMethod = "Free", CancelDeclaringType = typeof(InstanceHandle))]
-            public AcquireContextAsyncResult(InstanceHandle handle, Transaction hostTransaction, TimeSpan timeout, out bool setOperationPending)
+            public AcquireContextAsyncResult(
+                InstanceHandle handle,
+                Transaction hostTransaction,
+                TimeSpan timeout,
+                out bool setOperationPending
+            )
                 : this(handle, hostTransaction, timeout, out setOperationPending, true, null, null)
-            {
-            }
+            { }
 
-            [Fx.Tag.Blocking(CancelMethod = "Free", CancelDeclaringType = typeof(InstanceHandle), Conditional = "synchronous")]
-            AcquireContextAsyncResult(InstanceHandle handle, Transaction hostTransaction, TimeSpan timeout, out bool setOperationPending, bool synchronous, AsyncCallback callback, object state)
+            [Fx.Tag.Blocking(
+                CancelMethod = "Free",
+                CancelDeclaringType = typeof(InstanceHandle),
+                Conditional = "synchronous"
+            )]
+            AcquireContextAsyncResult(
+                InstanceHandle handle,
+                Transaction hostTransaction,
+                TimeSpan timeout,
+                out bool setOperationPending,
+                bool synchronous,
+                AsyncCallback callback,
+                object state
+            )
                 : base(callback, state)
             {
                 // Need to report back to the caller whether or not we set OperationPending.
@@ -815,12 +1006,16 @@ namespace System.Runtime.DurableInstancing
                 {
                     if (!this.handle.IsValid)
                     {
-                        throw Fx.Exception.AsError(new OperationCanceledException(SRCore.HandleFreed));
+                        throw Fx.Exception.AsError(
+                            new OperationCanceledException(SRCore.HandleFreed)
+                        );
                     }
 
                     if (this.handle.OperationPending)
                     {
-                        throw Fx.Exception.AsError(new InvalidOperationException(SRCore.CommandExecutionCannotOverlap));
+                        throw Fx.Exception.AsError(
+                            new InvalidOperationException(SRCore.CommandExecutionCannotOverlap)
+                        );
                     }
                     setOperationPending = true;
                     this.handle.OperationPending = true;
@@ -828,12 +1023,18 @@ namespace System.Runtime.DurableInstancing
                     transactionWait = this.handle.CurrentTransactionalAsyncResult;
                     if (transactionWait != null)
                     {
-                        Fx.Assert(this.handle.AcquirePending == null, "Overlapped acquires pending.");
+                        Fx.Assert(
+                            this.handle.AcquirePending == null,
+                            "Overlapped acquires pending."
+                        );
 
                         // If the transaction matches but is already completed (or completing), the easiest ting to do
                         // is wait for it to complete, then try to re-enlist, and have that failure be the failure mode for Execute.
                         // We do that by following the regular, non-matching transaction path.
-                        if (transactionWait.HostTransaction.Equals(hostTransaction) && !this.handle.TooLateToEnlist)
+                        if (
+                            transactionWait.HostTransaction.Equals(hostTransaction)
+                            && !this.handle.TooLateToEnlist
+                        )
                         {
                             reuseContext = true;
                             this.executionContext = transactionWait.ReuseContext();
@@ -848,7 +1049,10 @@ namespace System.Runtime.DurableInstancing
 
                 if (transactionWait != null)
                 {
-                    Fx.Assert(transactionWait.IsCompleted, "Old AsyncResult must be completed by now.");
+                    Fx.Assert(
+                        transactionWait.IsCompleted,
+                        "Old AsyncResult must be completed by now."
+                    );
 
                     // Reuse the existing InstanceExecutionContext if this is the same transaction we're waiting for.
                     if (reuseContext)
@@ -862,12 +1066,20 @@ namespace System.Runtime.DurableInstancing
                     {
                         if (!transactionWait.WaitForHostTransaction.Wait(waitTimeout))
                         {
-                            throw Fx.Exception.AsError(new TimeoutException(InternalSR.TimeoutOnOperation(waitTimeout)));
+                            throw Fx.Exception.AsError(
+                                new TimeoutException(InternalSR.TimeoutOnOperation(waitTimeout))
+                            );
                         }
                     }
                     else
                     {
-                        if (!transactionWait.WaitForHostTransaction.WaitAsync(AcquireContextAsyncResult.onHostTransaction, this, waitTimeout))
+                        if (
+                            !transactionWait.WaitForHostTransaction.WaitAsync(
+                                AcquireContextAsyncResult.onHostTransaction,
+                                this,
+                                waitTimeout
+                            )
+                        )
                         {
                             return;
                         }
@@ -885,8 +1097,13 @@ namespace System.Runtime.DurableInstancing
 
             public static InstancePersistenceContext End(IAsyncResult result)
             {
-                AcquireContextAsyncResult pThis = AsyncResult.End<AcquireContextAsyncResult>(result);
-                Fx.Assert(pThis.executionContext != null, "Somehow the execution context didn't get set.");
+                AcquireContextAsyncResult pThis = AsyncResult.End<AcquireContextAsyncResult>(
+                    result
+                );
+                Fx.Assert(
+                    pThis.executionContext != null,
+                    "Somehow the execution context didn't get set."
+                );
                 return pThis.executionContext;
             }
 
@@ -898,8 +1115,14 @@ namespace System.Runtime.DurableInstancing
                 }
                 else
                 {
-                    Fx.Assert(this.handle.inProgressBind == null, "Either this should have been bound to a lock, hence dooming the handle by rollback, or this should have been cancelled in FinishOperation.");
-                    Fx.Assert(this.handle.pendingOwnerEvents == null, "Either this should have doomed the handle or already been committed.");
+                    Fx.Assert(
+                        this.handle.inProgressBind == null,
+                        "Either this should have been bound to a lock, hence dooming the handle by rollback, or this should have been cancelled in FinishOperation."
+                    );
+                    Fx.Assert(
+                        this.handle.pendingOwnerEvents == null,
+                        "Either this should have doomed the handle or already been committed."
+                    );
                     WaitForHostTransaction.Set();
                 }
             }
@@ -947,16 +1170,24 @@ namespace System.Runtime.DurableInstancing
                     {
                         if (!this.handle.IsValid)
                         {
-                            throw Fx.Exception.AsError(new OperationCanceledException(SRCore.HandleFreed));
+                            throw Fx.Exception.AsError(
+                                new OperationCanceledException(SRCore.HandleFreed)
+                            );
                         }
 
                         if (HostTransaction == null)
                         {
-                            this.executionContext = new InstancePersistenceContext(this.handle, this.timeoutHelper.RemainingTime());
+                            this.executionContext = new InstancePersistenceContext(
+                                this.handle,
+                                this.timeoutHelper.RemainingTime()
+                            );
                         }
                         else
                         {
-                            this.executionContext = new InstancePersistenceContext(this.handle, HostTransaction);
+                            this.executionContext = new InstancePersistenceContext(
+                                this.handle,
+                                HostTransaction
+                            );
                         }
 
                         this.handle.AcquirePending = null;
@@ -981,7 +1212,10 @@ namespace System.Runtime.DurableInstancing
 
             InstancePersistenceContext ReuseContext()
             {
-                Fx.Assert(this.executionContext != null, "ReuseContext called but there is no context.");
+                Fx.Assert(
+                    this.executionContext != null,
+                    "ReuseContext called but there is no context."
+                );
 
                 this.executionContext.PrepareForReuse();
                 return this.executionContext;
@@ -989,9 +1223,13 @@ namespace System.Runtime.DurableInstancing
 
             void IEnlistmentNotification.Commit(Enlistment enlistment)
             {
-                Fx.AssertAndThrow(this.handle.CurrentExecutionContext == null, "Prepare should have been called first and waited until after command processing.");
+                Fx.AssertAndThrow(
+                    this.handle.CurrentExecutionContext == null,
+                    "Prepare should have been called first and waited until after command processing."
+                );
 
-                bool commitSuccessful = this.handle.Commit(this.executionContext.InstanceView) != null;
+                bool commitSuccessful =
+                    this.handle.Commit(this.executionContext.InstanceView) != null;
                 enlistment.Done();
                 if (commitSuccessful)
                 {
@@ -1032,7 +1270,12 @@ namespace System.Runtime.DurableInstancing
 
             List<InstancePersistenceEvent> readyEvents;
 
-            internal WaitForEventsAsyncResult(InstanceHandle handle, TimeSpan timeout, AsyncCallback callback, object state)
+            internal WaitForEventsAsyncResult(
+                InstanceHandle handle,
+                TimeSpan timeout,
+                AsyncCallback callback,
+                object state
+            )
                 : base(callback, state)
             {
                 this.handle = handle;
@@ -1040,16 +1283,26 @@ namespace System.Runtime.DurableInstancing
 
                 if (this.timeout != TimeSpan.Zero && this.timeout != TimeSpan.MaxValue)
                 {
-                    this.timer = new IOThreadTimer(WaitForEventsAsyncResult.timeoutCallback, this, false);
+                    this.timer = new IOThreadTimer(
+                        WaitForEventsAsyncResult.timeoutCallback,
+                        this,
+                        false
+                    );
                 }
 
-                List<InstancePersistenceEvent> existingReadyEvents = this.handle.StartWaiting(this, this.timer, this.timeout);
+                List<InstancePersistenceEvent> existingReadyEvents = this.handle.StartWaiting(
+                    this,
+                    this.timer,
+                    this.timeout
+                );
                 if (existingReadyEvents == null)
                 {
                     if (this.timeout == TimeSpan.Zero)
                     {
                         this.handle.CancelWaiting(this);
-                        throw Fx.Exception.AsError(new TimeoutException(SRCore.WaitForEventsTimedOut(TimeSpan.Zero)));
+                        throw Fx.Exception.AsError(
+                            new TimeoutException(SRCore.WaitForEventsTimedOut(TimeSpan.Zero))
+                        );
                     }
                 }
                 else
@@ -1088,7 +1341,10 @@ namespace System.Runtime.DurableInstancing
                 WaitForEventsAsyncResult thisPtr = (WaitForEventsAsyncResult)state;
                 if (thisPtr.handle.CancelWaiting(thisPtr))
                 {
-                    thisPtr.Complete(false, new TimeoutException(SRCore.WaitForEventsTimedOut(thisPtr.timeout)));
+                    thisPtr.Complete(
+                        false,
+                        new TimeoutException(SRCore.WaitForEventsTimedOut(thisPtr.timeout))
+                    );
                 }
             }
 

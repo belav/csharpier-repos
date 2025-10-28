@@ -17,18 +17,38 @@ public class Program
     public static int TestEntryPoint()
     {
         // Some corner cases
-        var testValues = new List<double>(new []
+        var testValues = new List<double>(
+            new[]
             {
-                0, 0.01, 1.333, 1/3.0, 0.5, 1, 2, 3, 4,
-                MathF.PI, MathF.E, Math.PI, Math.E,
-                float.MinValue, double.MinValue,
-                float.MaxValue, double.MaxValue,
-                int.MaxValue, long.MaxValue,
-                int.MinValue, long.MinValue,
-                float.NegativeInfinity, double.NegativeInfinity,
-                float.PositiveInfinity, double.PositiveInfinity,
-                float.NaN, double.NaN
-            });
+                0,
+                0.01,
+                1.333,
+                1 / 3.0,
+                0.5,
+                1,
+                2,
+                3,
+                4,
+                MathF.PI,
+                MathF.E,
+                Math.PI,
+                Math.E,
+                float.MinValue,
+                double.MinValue,
+                float.MaxValue,
+                double.MaxValue,
+                int.MaxValue,
+                long.MaxValue,
+                int.MinValue,
+                long.MinValue,
+                float.NegativeInfinity,
+                double.NegativeInfinity,
+                float.PositiveInfinity,
+                double.PositiveInfinity,
+                float.NaN,
+                double.NaN,
+            }
+        );
 
         foreach (double value in testValues)
         {
@@ -75,7 +95,6 @@ public class Program
         AssertEquals(expected: x / ConstToVar(-0.00012207031f), actual: x / -0.00012207031f);
         AssertEquals(expected: x / ConstToVar(-2147483648), actual: x / -2147483648);
     }
-
 
     private static void TestPowOfTwo_Double(double x)
     {
@@ -126,8 +145,14 @@ public class Program
         AssertEquals(expected: x / ConstToVar(float.Epsilon), actual: x / float.Epsilon);
         AssertEquals(expected: x / ConstToVar(float.MinValue), actual: x / float.MinValue);
         AssertEquals(expected: x / ConstToVar(float.MaxValue), actual: x / float.MaxValue);
-        AssertEquals(expected: x / ConstToVar(float.PositiveInfinity), actual: x / float.PositiveInfinity);
-        AssertEquals(expected: x / ConstToVar(float.NegativeInfinity), actual: x / float.NegativeInfinity);
+        AssertEquals(
+            expected: x / ConstToVar(float.PositiveInfinity),
+            actual: x / float.PositiveInfinity
+        );
+        AssertEquals(
+            expected: x / ConstToVar(float.NegativeInfinity),
+            actual: x / float.NegativeInfinity
+        );
     }
 
     private static void TestNotPowOfTwo_Double(double x)
@@ -154,10 +179,15 @@ public class Program
         AssertEquals(expected: x / ConstToVar(double.Epsilon), actual: x / double.Epsilon);
         AssertEquals(expected: x / ConstToVar(double.MinValue), actual: x / double.MinValue);
         AssertEquals(expected: x / ConstToVar(double.MaxValue), actual: x / double.MaxValue);
-        AssertEquals(expected: x / ConstToVar(double.PositiveInfinity), actual: x / double.PositiveInfinity);
-        AssertEquals(expected: x / ConstToVar(double.NegativeInfinity), actual: x / double.NegativeInfinity);
+        AssertEquals(
+            expected: x / ConstToVar(double.PositiveInfinity),
+            actual: x / double.PositiveInfinity
+        );
+        AssertEquals(
+            expected: x / ConstToVar(double.NegativeInfinity),
+            actual: x / double.NegativeInfinity
+        );
     }
-
 
     [MethodImpl(MethodImplOptions.NoInlining)]
     private static void AssertEquals(float expected, float actual)

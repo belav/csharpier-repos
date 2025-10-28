@@ -10,6 +10,6 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.UnitTesting.SolutionCrawler
 #if false // Not used in unit testing crawling
             Workspace workspace
 #endif
-            );
+        );
     }
 }

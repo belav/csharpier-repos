@@ -14,10 +14,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -27,61 +27,58 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
-
-using NUnit.Framework;
-
 using System;
 using System.CodeDom;
 using System.Reflection;
 using System.Security;
 using System.Security.Permissions;
+using NUnit.Framework;
 
-namespace MonoCasTests.System.CodeDom {
+namespace MonoCasTests.System.CodeDom
+{
+    [TestFixture]
+    [Category("CAS")]
+    public class CodeChecksumPragmaCas
+    {
+        [SetUp]
+        public void SetUp()
+        {
+            if (!SecurityManager.SecurityEnabled)
+                Assert.Ignore("SecurityManager.SecurityEnabled is OFF");
+        }
 
-	[TestFixture]
-	[Category ("CAS")]
-	public class CodeChecksumPragmaCas {
+        [Test]
+        [PermissionSet(SecurityAction.Deny, Unrestricted = true)]
+        public void Constructor0_Deny_Unrestricted()
+        {
+            CodeChecksumPragma ccp = new CodeChecksumPragma();
+            Assert.AreEqual(Guid.Empty, ccp.ChecksumAlgorithmId, "ChecksumAlgorithmId");
+            ccp.ChecksumAlgorithmId = Guid.NewGuid();
+            Assert.IsNull(ccp.ChecksumData, "ChecksumData");
+            ccp.ChecksumData = new byte[1];
+            Assert.AreEqual(String.Empty, ccp.FileName, "FileName");
+        }
 
-		[SetUp]
-		public void SetUp ()
-		{
-			if (!SecurityManager.SecurityEnabled)
-				Assert.Ignore ("SecurityManager.SecurityEnabled is OFF");
-		}
+        [Test]
+        [PermissionSet(SecurityAction.Deny, Unrestricted = true)]
+        public void Constructor1_Deny_Unrestricted()
+        {
+            Guid g = Guid.NewGuid();
+            CodeChecksumPragma ccp = new CodeChecksumPragma("mono", g, new byte[1]);
+            Assert.AreEqual(g, ccp.ChecksumAlgorithmId, "ChecksumAlgorithmId");
+            ccp.ChecksumAlgorithmId = Guid.Empty;
+            Assert.AreEqual(1, ccp.ChecksumData.Length, "ChecksumData");
+            ccp.ChecksumData = new byte[0];
+            Assert.AreEqual("mono", ccp.FileName, "FileName");
+        }
 
-		[Test]
-		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-		public void Constructor0_Deny_Unrestricted ()
-		{
-			CodeChecksumPragma ccp = new CodeChecksumPragma ();
-			Assert.AreEqual (Guid.Empty, ccp.ChecksumAlgorithmId, "ChecksumAlgorithmId");
-			ccp.ChecksumAlgorithmId = Guid.NewGuid ();
-			Assert.IsNull (ccp.ChecksumData, "ChecksumData");
-			ccp.ChecksumData = new byte [1];
-			Assert.AreEqual (String.Empty, ccp.FileName, "FileName");
-		}
-
-		[Test]
-		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-		public void Constructor1_Deny_Unrestricted ()
-		{
-			Guid g = Guid.NewGuid ();
-			CodeChecksumPragma ccp = new CodeChecksumPragma ("mono", g, new byte [1]);
-			Assert.AreEqual (g, ccp.ChecksumAlgorithmId, "ChecksumAlgorithmId");
-			ccp.ChecksumAlgorithmId = Guid.Empty;
-			Assert.AreEqual (1, ccp.ChecksumData.Length, "ChecksumData");
-			ccp.ChecksumData = new byte[0];
-			Assert.AreEqual ("mono", ccp.FileName, "FileName");
-		}
-
-		[Test]
-		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-		public void LinkDemand_Deny_Unrestricted ()
-		{
-			ConstructorInfo ci = typeof (CodeChecksumPragma).GetConstructor (new Type[0]);
-			Assert.IsNotNull (ci, "default .ctor");
-			Assert.IsNotNull (ci.Invoke (null), "invoke");
-		}
-	}
+        [Test]
+        [PermissionSet(SecurityAction.Deny, Unrestricted = true)]
+        public void LinkDemand_Deny_Unrestricted()
+        {
+            ConstructorInfo ci = typeof(CodeChecksumPragma).GetConstructor(new Type[0]);
+            Assert.IsNotNull(ci, "default .ctor");
+            Assert.IsNotNull(ci.Invoke(null), "invoke");
+        }
+    }
 }
-

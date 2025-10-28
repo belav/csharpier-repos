@@ -15,10 +15,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -37,45 +37,53 @@ using System.IO;
 
 namespace System.CodeDom.Compiler
 {
-	internal sealed class CodeDomConfigurationHandler: ConfigurationSection
-	{
-		static ConfigurationPropertyCollection properties;
-		static ConfigurationProperty compilersProp;
-		static CompilerCollection default_compilers;
+    internal sealed class CodeDomConfigurationHandler : ConfigurationSection
+    {
+        static ConfigurationPropertyCollection properties;
+        static ConfigurationProperty compilersProp;
+        static CompilerCollection default_compilers;
 
-		static CodeDomConfigurationHandler ()
-		{
-			default_compilers = new CompilerCollection ();
-			compilersProp = new ConfigurationProperty ("compilers", typeof (CompilerCollection), default_compilers);
-			properties = new ConfigurationPropertyCollection ();
-			properties.Add (compilersProp);
-		}
+        static CodeDomConfigurationHandler()
+        {
+            default_compilers = new CompilerCollection();
+            compilersProp = new ConfigurationProperty(
+                "compilers",
+                typeof(CompilerCollection),
+                default_compilers
+            );
+            properties = new ConfigurationPropertyCollection();
+            properties.Add(compilersProp);
+        }
 
-		public CodeDomConfigurationHandler ()
-		{
-		}
-		
-		protected override void InitializeDefault ()
-		{
-			compilersProp = new ConfigurationProperty ("compilers", typeof (CompilerCollection), default_compilers);
-		}
-		
-		[MonoTODO]
-		protected override void PostDeserialize () => base.PostDeserialize ();
+        public CodeDomConfigurationHandler() { }
 
-		protected override object GetRuntimeObject () => this;
+        protected override void InitializeDefault()
+        {
+            compilersProp = new ConfigurationProperty(
+                "compilers",
+                typeof(CompilerCollection),
+                default_compilers
+            );
+        }
 
-		[ConfigurationProperty ("compilers")]
-		public CompilerCollection Compilers => (CompilerCollection) base [compilersProp];
+        [MonoTODO]
+        protected override void PostDeserialize() => base.PostDeserialize();
 
-		public CompilerInfo[] CompilerInfos {
-			get {
-				var cc = (CompilerCollection) base [compilersProp];
-				return cc?.CompilerInfos;
-			}
-		}
-		
-		protected override ConfigurationPropertyCollection Properties => properties;
-	}
+        protected override object GetRuntimeObject() => this;
+
+        [ConfigurationProperty("compilers")]
+        public CompilerCollection Compilers => (CompilerCollection)base[compilersProp];
+
+        public CompilerInfo[] CompilerInfos
+        {
+            get
+            {
+                var cc = (CompilerCollection)base[compilersProp];
+                return cc?.CompilerInfos;
+            }
+        }
+
+        protected override ConfigurationPropertyCollection Properties => properties;
+    }
 }
 #endif

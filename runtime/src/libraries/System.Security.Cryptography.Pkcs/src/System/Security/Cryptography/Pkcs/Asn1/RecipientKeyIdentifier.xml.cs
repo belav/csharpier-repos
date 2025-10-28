@@ -31,7 +31,6 @@ namespace System.Security.Cryptography.Pkcs.Asn1
                 writer.WriteGeneralizedTime(Date.Value, false);
             }
 
-
             if (Other.HasValue)
             {
                 Other.Value.Encode(writer);
@@ -40,12 +39,19 @@ namespace System.Security.Cryptography.Pkcs.Asn1
             writer.PopSequence(tag);
         }
 
-        internal static RecipientKeyIdentifier Decode(ReadOnlyMemory<byte> encoded, AsnEncodingRules ruleSet)
+        internal static RecipientKeyIdentifier Decode(
+            ReadOnlyMemory<byte> encoded,
+            AsnEncodingRules ruleSet
+        )
         {
             return Decode(Asn1Tag.Sequence, encoded, ruleSet);
         }
 
-        internal static RecipientKeyIdentifier Decode(Asn1Tag expectedTag, ReadOnlyMemory<byte> encoded, AsnEncodingRules ruleSet)
+        internal static RecipientKeyIdentifier Decode(
+            Asn1Tag expectedTag,
+            ReadOnlyMemory<byte> encoded,
+            AsnEncodingRules ruleSet
+        )
         {
             try
             {
@@ -61,12 +67,21 @@ namespace System.Security.Cryptography.Pkcs.Asn1
             }
         }
 
-        internal static void Decode(ref AsnValueReader reader, ReadOnlyMemory<byte> rebind, out RecipientKeyIdentifier decoded)
+        internal static void Decode(
+            ref AsnValueReader reader,
+            ReadOnlyMemory<byte> rebind,
+            out RecipientKeyIdentifier decoded
+        )
         {
             Decode(ref reader, Asn1Tag.Sequence, rebind, out decoded);
         }
 
-        internal static void Decode(ref AsnValueReader reader, Asn1Tag expectedTag, ReadOnlyMemory<byte> rebind, out RecipientKeyIdentifier decoded)
+        internal static void Decode(
+            ref AsnValueReader reader,
+            Asn1Tag expectedTag,
+            ReadOnlyMemory<byte> rebind,
+            out RecipientKeyIdentifier decoded
+        )
         {
             try
             {
@@ -78,7 +93,12 @@ namespace System.Security.Cryptography.Pkcs.Asn1
             }
         }
 
-        private static void DecodeCore(ref AsnValueReader reader, Asn1Tag expectedTag, ReadOnlyMemory<byte> rebind, out RecipientKeyIdentifier decoded)
+        private static void DecodeCore(
+            ref AsnValueReader reader,
+            Asn1Tag expectedTag,
+            ReadOnlyMemory<byte> rebind,
+            out RecipientKeyIdentifier decoded
+        )
         {
             decoded = default;
             AsnValueReader sequenceReader = reader.ReadSequence(expectedTag);
@@ -86,31 +106,38 @@ namespace System.Security.Cryptography.Pkcs.Asn1
             int offset;
             ReadOnlySpan<byte> tmpSpan;
 
-
             if (sequenceReader.TryReadPrimitiveOctetString(out tmpSpan))
             {
-                decoded.SubjectKeyIdentifier = rebindSpan.Overlaps(tmpSpan, out offset) ? rebind.Slice(offset, tmpSpan.Length) : tmpSpan.ToArray();
+                decoded.SubjectKeyIdentifier = rebindSpan.Overlaps(tmpSpan, out offset)
+                    ? rebind.Slice(offset, tmpSpan.Length)
+                    : tmpSpan.ToArray();
             }
             else
             {
                 decoded.SubjectKeyIdentifier = sequenceReader.ReadOctetString();
             }
 
-
-            if (sequenceReader.HasData && sequenceReader.PeekTag().HasSameClassAndValue(Asn1Tag.GeneralizedTime))
+            if (
+                sequenceReader.HasData
+                && sequenceReader.PeekTag().HasSameClassAndValue(Asn1Tag.GeneralizedTime)
+            )
             {
                 decoded.Date = sequenceReader.ReadGeneralizedTime();
             }
 
-
-            if (sequenceReader.HasData && sequenceReader.PeekTag().HasSameClassAndValue(Asn1Tag.Sequence))
+            if (
+                sequenceReader.HasData
+                && sequenceReader.PeekTag().HasSameClassAndValue(Asn1Tag.Sequence)
+            )
             {
                 System.Security.Cryptography.Pkcs.Asn1.OtherKeyAttributeAsn tmpOther;
-                System.Security.Cryptography.Pkcs.Asn1.OtherKeyAttributeAsn.Decode(ref sequenceReader, rebind, out tmpOther);
+                System.Security.Cryptography.Pkcs.Asn1.OtherKeyAttributeAsn.Decode(
+                    ref sequenceReader,
+                    rebind,
+                    out tmpOther
+                );
                 decoded.Other = tmpOther;
-
             }
-
 
             sequenceReader.ThrowIfNotEmpty();
         }

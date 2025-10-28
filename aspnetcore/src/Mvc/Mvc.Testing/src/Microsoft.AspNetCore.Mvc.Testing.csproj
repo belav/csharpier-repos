@@ -19,15 +19,29 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Reference Include="Microsoft.AspNetCore.Mvc.Testing.Tasks"
+    <Reference
+      Include="Microsoft.AspNetCore.Mvc.Testing.Tasks"
       Private="false"
       ReferenceOutputAssembly="false"
-      SkipGetTargetFrameworkProperties="true" />
+      SkipGetTargetFrameworkProperties="true"
+    />
   </ItemGroup>
 
   <ItemGroup>
-    <Content Include="Microsoft.AspNetCore.Mvc.Testing.targets" Pack="true" PackagePath="build/$(TargetFramework)/" />
-    <Content Include="$(ArtifactsDir)bin\Microsoft.AspNetCore.Mvc.Testing.Tasks\$(Configuration)\netstandard2.0\Microsoft.AspNetCore.Mvc.Testing.Tasks.dll" Pack="true" PackagePath="tasks/netstandard2.0/" />
-    <Content Include="buildTransitive\*" Pack="true" PackagePath="buildTransitive/$(TargetFramework)/" />
+    <Content
+      Include="Microsoft.AspNetCore.Mvc.Testing.targets"
+      Pack="true"
+      PackagePath="build/$(TargetFramework)/"
+    />
+    <Content
+      Include="$(ArtifactsDir)bin\Microsoft.AspNetCore.Mvc.Testing.Tasks\$(Configuration)\netstandard2.0\Microsoft.AspNetCore.Mvc.Testing.Tasks.dll"
+      Pack="true"
+      PackagePath="tasks/netstandard2.0/"
+    />
+    <Content
+      Include="buildTransitive\*"
+      Pack="true"
+      PackagePath="buildTransitive/$(TargetFramework)/"
+    />
   </ItemGroup>
 </Project>

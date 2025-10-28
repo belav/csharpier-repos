@@ -162,7 +162,13 @@ namespace XPathTests.FunctionalTests.CoreFunctionLibrary
             var testExpression = @"number(child::*)";
             var expected = 10d;
 
-            Utils.XPathNumberTest(kind, xml, testExpression, expected, startingNodePath: startingNodePath);
+            Utils.XPathNumberTest(
+                kind,
+                xml,
+                testExpression,
+                expected,
+                startingNodePath: startingNodePath
+            );
         }
 
         /// <summary>
@@ -197,7 +203,13 @@ namespace XPathTests.FunctionalTests.CoreFunctionLibrary
             var testExpression = @"sum(child::*)";
             var expected = 60d;
 
-            Utils.XPathNumberTest(kind, xml, testExpression, expected, startingNodePath: startingNodePath);
+            Utils.XPathNumberTest(
+                kind,
+                xml,
+                testExpression,
+                expected,
+                startingNodePath: startingNodePath
+            );
         }
 
         /// <summary>
@@ -215,7 +227,13 @@ namespace XPathTests.FunctionalTests.CoreFunctionLibrary
             var testExpression = @"sum(child::*)";
             var expected = double.NaN;
 
-            Utils.XPathNumberTest(kind, xml, testExpression, expected, startingNodePath: startingNodePath);
+            Utils.XPathNumberTest(
+                kind,
+                xml,
+                testExpression,
+                expected,
+                startingNodePath: startingNodePath
+            );
         }
 
         /// <summary>
@@ -301,7 +319,13 @@ namespace XPathTests.FunctionalTests.CoreFunctionLibrary
             var testExpression = @"floor(number(child::Para[1]))";
             var expected = 2d;
 
-            Utils.XPathNumberTest(kind, xml, testExpression, expected, startingNodePath: startingNodePath);
+            Utils.XPathNumberTest(
+                kind,
+                xml,
+                testExpression,
+                expected,
+                startingNodePath: startingNodePath
+            );
         }
 
         /// <summary>
@@ -387,7 +411,13 @@ namespace XPathTests.FunctionalTests.CoreFunctionLibrary
             var testExpression = @"ceiling(number(child::Para[2]))";
             var expected = 3d;
 
-            Utils.XPathNumberTest(kind, xml, testExpression, expected, startingNodePath: startingNodePath);
+            Utils.XPathNumberTest(
+                kind,
+                xml,
+                testExpression,
+                expected,
+                startingNodePath: startingNodePath
+            );
         }
 
         /// <summary>
@@ -473,7 +503,13 @@ namespace XPathTests.FunctionalTests.CoreFunctionLibrary
             var testExpression = @"round(number(child::Para[3]))";
             var expected = 3d;
 
-            Utils.XPathNumberTest(kind, xml, testExpression, expected, startingNodePath: startingNodePath);
+            Utils.XPathNumberTest(
+                kind,
+                xml,
+                testExpression,
+                expected,
+                startingNodePath: startingNodePath
+            );
         }
 
         /// <summary>

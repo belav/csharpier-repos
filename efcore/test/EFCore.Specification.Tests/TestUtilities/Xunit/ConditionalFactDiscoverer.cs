@@ -12,17 +12,17 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities.Xunit;
 public class ConditionalFactDiscoverer : FactDiscoverer
 {
     public ConditionalFactDiscoverer(IMessageSink messageSink)
-        : base(messageSink)
-    {
-    }
+        : base(messageSink) { }
 
     protected override IXunitTestCase CreateTestCase(
         ITestFrameworkDiscoveryOptions discoveryOptions,
         ITestMethod testMethod,
-        IAttributeInfo factAttribute)
-        => new ConditionalFactTestCase(
+        IAttributeInfo factAttribute
+    ) =>
+        new ConditionalFactTestCase(
             DiagnosticMessageSink,
             discoveryOptions.MethodDisplayOrDefault(),
             discoveryOptions.MethodDisplayOptionsOrDefault(),
-            testMethod);
+            testMethod
+        );
 }

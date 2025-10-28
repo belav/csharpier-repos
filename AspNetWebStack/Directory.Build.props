@@ -12,5 +12,4 @@
     <!-- Workaround continued use of netcoreapp2.1; suppress the NETSDK1138 warning. -->
     <CheckEolTargetFramework>false</CheckEolTargetFramework>
   </PropertyGroup>
-
 </Project>

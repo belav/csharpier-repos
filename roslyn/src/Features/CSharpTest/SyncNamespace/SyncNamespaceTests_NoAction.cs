@@ -23,7 +23,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.SyncNamespa
             var (folder, filePath) = CreateDocumentFilePath(folders);
 
             var code =
-$@"
+                $@"
 <Workspace>
     <Project Language=""C#"" AssemblyName=""Assembly1"" FilePath=""{ProjectFilePath}"" CommonReferences=""true"">
         <Document Folders=""{folder}"" FilePath=""{filePath}""> 
@@ -39,6 +39,7 @@ namespace NS
 
             await TestMissingInRegularAndScriptAsync(code);
         }
+
         [WpfFact]
         public async Task NoAction_NotOnNamespaceDeclaration_FileScopedNamespace()
         {
@@ -46,7 +47,7 @@ namespace NS
             var (folder, filePath) = CreateDocumentFilePath(folders);
 
             var code =
-$@"
+                $@"
 <Workspace>
     <Project Language=""C#"" AssemblyName=""Assembly1"" FilePath=""{ProjectFilePath}"" CommonReferences=""true"">
         <Document Folders=""{folder}"" FilePath=""{filePath}""> 
@@ -69,7 +70,7 @@ class [||]Class1
             var (folder, filePath) = CreateDocumentFilePath(folders);
 
             var code =
-$@"
+                $@"
 <Workspace>
     <Project Language=""C#"" AssemblyName=""Assembly1"" FilePath=""{ProjectFilePath}"" RootNamespace="""" CommonReferences=""true"">
         <Document Folders=""{folder}"" FilePath=""{filePath}"">    
@@ -94,7 +95,7 @@ class [||]Class2
             var (folder, filePath) = CreateDocumentFilePath(folders);
 
             var code =
-$@"
+                $@"
 <Workspace>
     <Project Language=""C#"" AssemblyName=""Assembly1"" FilePath=""{ProjectFilePath}"" CommonReferences=""true"">
         <Document Folders=""{folder}"" FilePath=""{filePath}""> 
@@ -125,7 +126,7 @@ namespace NS2
             var (folder, filePath) = CreateDocumentFilePath(folders);
 
             var code =
-$@"
+                $@"
 <Workspace>
     <Project Language=""C#"" AssemblyName=""Assembly1"" FilePath=""{ProjectFilePath}"" CommonReferences=""true"">
         <Document Folders=""{folder}"" FilePath=""{filePath}""> 
@@ -153,7 +154,7 @@ class Class2
             var (folder, filePath) = CreateDocumentFilePath(folders);
 
             var code =
-$@"
+                $@"
 <Workspace>
     <Project Language=""C#"" AssemblyName=""Assembly1"" FilePath=""{ProjectFilePath}"" CommonReferences=""true"">
         <Document Folders=""{folder}"" FilePath=""{filePath}""> 
@@ -181,7 +182,7 @@ namespace NS1
             var (folder, filePath) = CreateDocumentFilePath(folders);
 
             var code =
-$@"
+                $@"
 <Workspace>
     <Project Language=""C#"" AssemblyName=""Assembly1"" FilePath=""{ProjectFilePath}"" CommonReferences=""true"">
         <Document Folders=""{folder}"" FilePath=""{filePath}""> 
@@ -208,7 +209,7 @@ namespace [||]NS1
             var (folder, filePath) = CreateDocumentFilePath(folders);
 
             var code =
-$@"
+                $@"
 <Workspace>
     <Project Language=""C#"" AssemblyName=""Assembly1"" FilePath=""{ProjectFilePath}"" RootNamespace="""" CommonReferences=""true"">
         <Document Folders=""{folder}"" FilePath=""{filePath}""> 
@@ -232,7 +233,7 @@ namespace [||]
             var (folder, filePath) = CreateDocumentFilePath(folders);
 
             var code =
-$@"
+                $@"
 <Workspace>
     <Project Language=""C#"" AssemblyName=""Assembly1"" FilePath=""{ProjectFilePath}"" RootNamespace=""""  CommonReferences=""true"">
         <Document Folders=""{folder}"" FilePath=""{filePath}"">    
@@ -253,7 +254,7 @@ class [||]Class1
             var (folder, filePath) = CreateDocumentFilePath(folders);
 
             var code =
-$@"
+                $@"
 <Workspace>
     <Project Language=""C#"" AssemblyName=""Assembly1"" FilePath=""{ProjectFilePath}"" RootNamespace=""""  CommonReferences=""true"">
         <Document Folders=""{folder}"" FilePath=""{filePath}"">    
@@ -277,7 +278,7 @@ namespace [||]A.B.C
             var (folder, filePath) = CreateDocumentFilePath(folders);
 
             var code =
-$@"
+                $@"
 <Workspace>
     <Project Language=""C#"" AssemblyName=""Assembly1"" FilePath=""{ProjectFilePath}"" RootNamespace=""A"" CommonReferences=""true"">
         <Document Folders=""{folder}"" FilePath=""{filePath}""> 
@@ -297,10 +298,13 @@ namespace [||]A.B.C
         [WpfFact]
         public async Task NoAction_FileNotRooted()
         {
-            var filePath = PathUtilities.CombineAbsoluteAndRelativePaths(PathUtilities.GetPathRoot(ProjectFilePath), "Foo.cs");
+            var filePath = PathUtilities.CombineAbsoluteAndRelativePaths(
+                PathUtilities.GetPathRoot(ProjectFilePath),
+                "Foo.cs"
+            );
 
             var code =
-$@"
+                $@"
 <Workspace>
     <Project Language=""C#"" AssemblyName=""Assembly1"" FilePath=""{ProjectFilePath}"" CommonReferences=""true"">
         <Document FilePath=""{filePath}""> 
@@ -324,7 +328,7 @@ namespace [||]NS
             var (folder, filePath) = CreateDocumentFilePath(folders);
 
             var code =
-$@"
+                $@"
 <Workspace>
     <Project Language=""C#"" AssemblyName=""Assembly1"" FilePath=""{ProjectFilePath}"" CommonReferences=""true"">
         <Document Folders=""{folder}"" FilePath=""{filePath}""> 

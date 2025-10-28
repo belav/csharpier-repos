@@ -5,9 +5,9 @@
 namespace System.ServiceModel.Description
 {
     using System;
-    using System.Collections.Generic;
     using System.CodeDom;
     using System.CodeDom.Compiler;
+    using System.Collections.Generic;
     using System.ServiceModel;
 
     public class OperationContractGenerationContext
@@ -22,16 +22,26 @@ namespace System.ServiceModel.Description
         readonly CodeMemberMethod taskMethod;
 
         CodeTypeReference declaringTypeReference;
-        
 
-        OperationContractGenerationContext(ServiceContractGenerator serviceContractGenerator, ServiceContractGenerationContext contract, OperationDescription operation, CodeTypeDeclaration declaringType)
+        OperationContractGenerationContext(
+            ServiceContractGenerator serviceContractGenerator,
+            ServiceContractGenerationContext contract,
+            OperationDescription operation,
+            CodeTypeDeclaration declaringType
+        )
         {
             if (serviceContractGenerator == null)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentNullException("serviceContractGenerator"));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new ArgumentNullException("serviceContractGenerator")
+                );
             if (contract == null)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentNullException("contract"));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new ArgumentNullException("contract")
+                );
             if (declaringType == null)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentNullException("declaringType"));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new ArgumentNullException("declaringType")
+                );
 
             this.serviceContractGenerator = serviceContractGenerator;
             this.contract = contract;
@@ -39,17 +49,34 @@ namespace System.ServiceModel.Description
             this.declaringType = declaringType;
         }
 
-        public OperationContractGenerationContext(ServiceContractGenerator serviceContractGenerator, ServiceContractGenerationContext contract, OperationDescription operation, CodeTypeDeclaration declaringType, CodeMemberMethod syncMethod, CodeMemberMethod beginMethod, CodeMemberMethod endMethod, CodeMemberMethod taskMethod)
+        public OperationContractGenerationContext(
+            ServiceContractGenerator serviceContractGenerator,
+            ServiceContractGenerationContext contract,
+            OperationDescription operation,
+            CodeTypeDeclaration declaringType,
+            CodeMemberMethod syncMethod,
+            CodeMemberMethod beginMethod,
+            CodeMemberMethod endMethod,
+            CodeMemberMethod taskMethod
+        )
             : this(serviceContractGenerator, contract, operation, declaringType)
         {
             if (syncMethod == null)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentNullException("syncMethod"));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new ArgumentNullException("syncMethod")
+                );
             if (beginMethod == null)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentNullException("beginMethod"));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new ArgumentNullException("beginMethod")
+                );
             if (endMethod == null)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentNullException("endMethod"));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new ArgumentNullException("endMethod")
+                );
             if (taskMethod == null)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentNullException("taskMethod"));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new ArgumentNullException("taskMethod")
+                );
 
             this.syncMethod = syncMethod;
             this.beginMethod = beginMethod;
@@ -57,38 +84,71 @@ namespace System.ServiceModel.Description
             this.taskMethod = taskMethod;
         }
 
-        public OperationContractGenerationContext(ServiceContractGenerator serviceContractGenerator, ServiceContractGenerationContext contract, OperationDescription operation, CodeTypeDeclaration declaringType, CodeMemberMethod syncMethod, CodeMemberMethod beginMethod, CodeMemberMethod endMethod)
+        public OperationContractGenerationContext(
+            ServiceContractGenerator serviceContractGenerator,
+            ServiceContractGenerationContext contract,
+            OperationDescription operation,
+            CodeTypeDeclaration declaringType,
+            CodeMemberMethod syncMethod,
+            CodeMemberMethod beginMethod,
+            CodeMemberMethod endMethod
+        )
             : this(serviceContractGenerator, contract, operation, declaringType)
         {
             if (syncMethod == null)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentNullException("syncMethod"));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new ArgumentNullException("syncMethod")
+                );
             if (beginMethod == null)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentNullException("beginMethod"));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new ArgumentNullException("beginMethod")
+                );
             if (endMethod == null)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentNullException("endMethod"));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new ArgumentNullException("endMethod")
+                );
 
             this.syncMethod = syncMethod;
             this.beginMethod = beginMethod;
             this.endMethod = endMethod;
         }
 
-        public OperationContractGenerationContext(ServiceContractGenerator serviceContractGenerator, ServiceContractGenerationContext contract, OperationDescription operation, CodeTypeDeclaration declaringType, CodeMemberMethod syncMethod, CodeMemberMethod taskMethod)
+        public OperationContractGenerationContext(
+            ServiceContractGenerator serviceContractGenerator,
+            ServiceContractGenerationContext contract,
+            OperationDescription operation,
+            CodeTypeDeclaration declaringType,
+            CodeMemberMethod syncMethod,
+            CodeMemberMethod taskMethod
+        )
             : this(serviceContractGenerator, contract, operation, declaringType)
         {
             if (syncMethod == null)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentNullException("syncMethod"));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new ArgumentNullException("syncMethod")
+                );
             if (taskMethod == null)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentNullException("taskMethod"));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new ArgumentNullException("taskMethod")
+                );
 
             this.syncMethod = syncMethod;
             this.taskMethod = taskMethod;
         }
 
-        public OperationContractGenerationContext(ServiceContractGenerator serviceContractGenerator, ServiceContractGenerationContext contract, OperationDescription operation, CodeTypeDeclaration declaringType, CodeMemberMethod method)
+        public OperationContractGenerationContext(
+            ServiceContractGenerator serviceContractGenerator,
+            ServiceContractGenerationContext contract,
+            OperationDescription operation,
+            CodeTypeDeclaration declaringType,
+            CodeMemberMethod method
+        )
             : this(serviceContractGenerator, contract, operation, declaringType)
         {
             if (method == null)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentNullException("method"));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new ArgumentNullException("method")
+                );
 
             this.syncMethod = method;
             this.beginMethod = null;
@@ -144,7 +204,13 @@ namespace System.ServiceModel.Description
         // true if this operation was declared somewhere up the hierarchy (rather than at this level)
         internal bool IsInherited
         {
-            get { return !(this.declaringType == contract.ContractType || this.declaringType == contract.DuplexCallbackType); }
+            get
+            {
+                return !(
+                    this.declaringType == contract.ContractType
+                    || this.declaringType == contract.DuplexCallbackType
+                );
+            }
         }
 
         public OperationDescription Operation

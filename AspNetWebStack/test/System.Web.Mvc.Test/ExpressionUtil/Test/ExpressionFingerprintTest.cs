@@ -12,8 +12,14 @@ namespace System.Web.Mvc.ExpressionUtil.Test
         public void Comparison_Equality()
         {
             // Act
-            DummyExpressionFingerprint fingerprint1 = new DummyExpressionFingerprint(ExpressionType.Default, typeof(object));
-            DummyExpressionFingerprint fingerprint2 = new DummyExpressionFingerprint(ExpressionType.Default, typeof(object));
+            DummyExpressionFingerprint fingerprint1 = new DummyExpressionFingerprint(
+                ExpressionType.Default,
+                typeof(object)
+            );
+            DummyExpressionFingerprint fingerprint2 = new DummyExpressionFingerprint(
+                ExpressionType.Default,
+                typeof(object)
+            );
 
             // Assert
             Assert.Equal(fingerprint1, fingerprint2);
@@ -24,8 +30,14 @@ namespace System.Web.Mvc.ExpressionUtil.Test
         public void Comparison_Inequality_NodeType()
         {
             // Act
-            DummyExpressionFingerprint fingerprint1 = new DummyExpressionFingerprint(ExpressionType.Default, typeof(object));
-            DummyExpressionFingerprint fingerprint2 = new DummyExpressionFingerprint(ExpressionType.Parameter, typeof(object));
+            DummyExpressionFingerprint fingerprint1 = new DummyExpressionFingerprint(
+                ExpressionType.Default,
+                typeof(object)
+            );
+            DummyExpressionFingerprint fingerprint2 = new DummyExpressionFingerprint(
+                ExpressionType.Parameter,
+                typeof(object)
+            );
 
             // Assert
             Assert.NotEqual(fingerprint1, fingerprint2);
@@ -35,8 +47,14 @@ namespace System.Web.Mvc.ExpressionUtil.Test
         public void Comparison_Inequality_Type()
         {
             // Act
-            DummyExpressionFingerprint fingerprint1 = new DummyExpressionFingerprint(ExpressionType.Default, typeof(object));
-            DummyExpressionFingerprint fingerprint2 = new DummyExpressionFingerprint(ExpressionType.Default, typeof(string));
+            DummyExpressionFingerprint fingerprint1 = new DummyExpressionFingerprint(
+                ExpressionType.Default,
+                typeof(object)
+            );
+            DummyExpressionFingerprint fingerprint2 = new DummyExpressionFingerprint(
+                ExpressionType.Default,
+                typeof(string)
+            );
 
             // Assert
             Assert.NotEqual(fingerprint1, fingerprint2);

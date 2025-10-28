@@ -9,15 +9,14 @@
 
 using System;
 using System.CodeDom;
-using System.Data;
 using System.Collections.Generic;
+using System.Data;
 using System.Data.Entity.Design;
-using Som=System.Data.EntityModel.SchemaObjectModel;
+using System.Data.Entity.Design.Common;
+using System.Data.Entity.Design.SsdlGenerator;
 using System.Data.Metadata.Edm;
 using System.Diagnostics;
-using System.Data.Entity.Design.SsdlGenerator;
-using System.Data.Entity.Design.Common;
-
+using Som = System.Data.EntityModel.SchemaObjectModel;
 
 namespace System.Data.EntityModel.Emitters
 {
@@ -29,14 +28,16 @@ namespace System.Data.EntityModel.Emitters
         private const string ValuePropertyName = "Value";
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="generator"></param>
         /// <param name="navigationProperty"></param>
-        public NavigationPropertyEmitter(ClientApiGenerator generator, NavigationProperty navigationProperty, bool declaringTypeUsesStandardBaseType)
-            : base(generator, navigationProperty, declaringTypeUsesStandardBaseType)
-        {
-        }
+        public NavigationPropertyEmitter(
+            ClientApiGenerator generator,
+            NavigationProperty navigationProperty,
+            bool declaringTypeUsesStandardBaseType
+        )
+            : base(generator, navigationProperty, declaringTypeUsesStandardBaseType) { }
 
         /// <summary>
         /// Generate the navigation property
@@ -48,10 +49,10 @@ namespace System.Data.EntityModel.Emitters
         }
 
         /// <summary>
-        /// Generate the navigation property specified 
+        /// Generate the navigation property specified
         /// </summary>
         /// <param name="typeDecl">The type to add the property to.</param>
-        private void EmitNavigationProperty( CodeTypeDeclaration typeDecl )
+        private void EmitNavigationProperty(CodeTypeDeclaration typeDecl)
         {
             // create a regular property
             CodeMemberProperty property = EmitNavigationProperty(Item.ToEndMember, false);
@@ -62,7 +63,6 @@ namespace System.Data.EntityModel.Emitters
                 // create a ref property
                 property = EmitNavigationProperty(Item.ToEndMember, true);
                 typeDecl.Members.Add(property);
-
             }
         }
 
@@ -72,14 +72,19 @@ namespace System.Data.EntityModel.Emitters
         /// <param name="target">the other end</param>
         /// <param name="referenceProperty">True to emit Reference navigation property</param>
         /// <returns>the generated property</returns>
-        private CodeMemberProperty EmitNavigationProperty(RelationshipEndMember target, bool referenceProperty)
+        private CodeMemberProperty EmitNavigationProperty(
+            RelationshipEndMember target,
+            bool referenceProperty
+        )
         {
             CodeTypeReference typeRef = GetReturnType(target, referenceProperty);
 
             // raise the PropertyGenerated event
-            PropertyGeneratedEventArgs eventArgs = new PropertyGeneratedEventArgs(Item, 
-                                                                                  null, // no backing field
-                                                                                  typeRef);
+            PropertyGeneratedEventArgs eventArgs = new PropertyGeneratedEventArgs(
+                Item,
+                null, // no backing field
+                typeRef
+            );
             this.Generator.RaisePropertyGeneratedEvent(eventArgs);
 
             // [System.ComponentModel.Browsable(false)]
@@ -95,13 +100,18 @@ namespace System.Data.EntityModel.Emitters
             }
             else
             {
-                Generator.AttributeEmitter.EmitNavigationPropertyAttributes(Generator, target, property, eventArgs.AdditionalAttributes);
+                Generator.AttributeEmitter.EmitNavigationPropertyAttributes(
+                    Generator,
+                    target,
+                    property,
+                    eventArgs.AdditionalAttributes
+                );
 
                 // Only reference navigation properties are currently currently supported with XML serialization
                 // and thus we should use the XmlIgnore and SoapIgnore attributes on other property types.
-                AttributeEmitter.AddIgnoreAttributes(property);                
+                AttributeEmitter.AddIgnoreAttributes(property);
             }
-            
+
             AttributeEmitter.AddDataMemberAttribute(property);
 
             CommentEmitter.EmitSummaryComments(Item, property.Comments);
@@ -110,11 +120,25 @@ namespace System.Data.EntityModel.Emitters
             if (referenceProperty)
             {
                 property.Name += "Reference";
-                if (IsNameAlreadyAMemberName(Item.DeclaringType, property.Name, Generator.LanguageAppropriateStringComparer))
+                if (
+                    IsNameAlreadyAMemberName(
+                        Item.DeclaringType,
+                        property.Name,
+                        Generator.LanguageAppropriateStringComparer
+                    )
+                )
                 {
-                    Generator.AddError(Strings.GeneratedNavigationPropertyNameConflict(Item.Name, Item.DeclaringType.Name, property.Name),
+                    Generator.AddError(
+                        Strings.GeneratedNavigationPropertyNameConflict(
+                            Item.Name,
+                            Item.DeclaringType.Name,
+                            property.Name
+                        ),
                         ModelBuilderErrorCode.GeneratedNavigationPropertyNameConflict,
-                        EdmSchemaErrorSeverity.Error, Item.DeclaringType.FullName, property.Name);
+                        EdmSchemaErrorSeverity.Error,
+                        Item.DeclaringType.FullName,
+                        property.Name
+                    );
                 }
             }
 
@@ -134,15 +158,25 @@ namespace System.Data.EntityModel.Emitters
 
             property.Attributes |= AccessibilityFromGettersAndSetters(Item);
             // setup the accessibility of the navigation property setter and getter
-            MemberAttributes propertyAccessibility = property.Attributes & MemberAttributes.AccessMask;
-            PropertyEmitter.AddGetterSetterFixUp(Generator.FixUps, GetFullyQualifiedPropertyName(property.Name),
-                PropertyEmitter.GetGetterAccessibility(Item), propertyAccessibility, true);
-            PropertyEmitter.AddGetterSetterFixUp(Generator.FixUps, GetFullyQualifiedPropertyName(property.Name),
-                PropertyEmitter.GetSetterAccessibility(Item), propertyAccessibility, false);
+            MemberAttributes propertyAccessibility =
+                property.Attributes & MemberAttributes.AccessMask;
+            PropertyEmitter.AddGetterSetterFixUp(
+                Generator.FixUps,
+                GetFullyQualifiedPropertyName(property.Name),
+                PropertyEmitter.GetGetterAccessibility(Item),
+                propertyAccessibility,
+                true
+            );
+            PropertyEmitter.AddGetterSetterFixUp(
+                Generator.FixUps,
+                GetFullyQualifiedPropertyName(property.Name),
+                PropertyEmitter.GetSetterAccessibility(Item),
+                propertyAccessibility,
+                false
+            );
 
             if (target.RelationshipMultiplicity != RelationshipMultiplicity.Many)
             {
-                
                 // insert user-supplied Set code here, before the assignment
                 //
                 List<CodeStatement> additionalSetStatements = eventArgs.AdditionalSetStatements;
@@ -154,15 +188,17 @@ namespace System.Data.EntityModel.Emitters
                     }
                     catch (ArgumentNullException ex)
                     {
-                        Generator.AddError(Strings.InvalidSetStatementSuppliedForProperty(Item.Name),
-                                           ModelBuilderErrorCode.InvalidSetStatementSuppliedForProperty,
-                                           EdmSchemaErrorSeverity.Error,
-                                           ex);
+                        Generator.AddError(
+                            Strings.InvalidSetStatementSuppliedForProperty(Item.Name),
+                            ModelBuilderErrorCode.InvalidSetStatementSuppliedForProperty,
+                            EdmSchemaErrorSeverity.Error,
+                            ex
+                        );
                     }
                 }
 
-                CodeExpression valueRef =  new CodePropertySetValueReferenceExpression();
-                if(typeRef != eventArgs.ReturnType)
+                CodeExpression valueRef = new CodePropertySetValueReferenceExpression();
+                if (typeRef != eventArgs.ReturnType)
                 {
                     // we need to cast to the actual type
                     valueRef = new CodeCastExpression(typeRef, valueRef);
@@ -179,39 +215,59 @@ namespace System.Data.EntityModel.Emitters
                     // {
                     //    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<TTargetEntity>"CSpaceQualifiedRelationshipName", "TargetRoleName", value);
                     // }
-                    
-                    CodeMethodReferenceExpression initReferenceMethod = new CodeMethodReferenceExpression();
+
+                    CodeMethodReferenceExpression initReferenceMethod =
+                        new CodeMethodReferenceExpression();
                     initReferenceMethod.MethodName = "InitializeRelatedReference";
 
-                    initReferenceMethod.TypeArguments.Add(Generator.GetLeastPossibleQualifiedTypeReference(GetEntityType(target)));
+                    initReferenceMethod.TypeArguments.Add(
+                        Generator.GetLeastPossibleQualifiedTypeReference(GetEntityType(target))
+                    );
                     initReferenceMethod.TargetObject = new CodePropertyReferenceExpression(
-                        new CodeCastExpression(TypeReference.IEntityWithRelationshipsTypeBaseClass, ThisRef),
-                        "RelationshipManager");
+                        new CodeCastExpression(
+                            TypeReference.IEntityWithRelationshipsTypeBaseClass,
+                            ThisRef
+                        ),
+                        "RelationshipManager"
+                    );
 
                     // relationships aren't backed by types so we won't map the namespace
                     // or we can't find the relationship again later
-                    string cspaceNamespaceNameQualifiedRelationshipName = target.DeclaringType.FullName;
-                                         
+                    string cspaceNamespaceNameQualifiedRelationshipName = target
+                        .DeclaringType
+                        .FullName;
+
                     property.SetStatements.Add(
                         new CodeConditionStatement(
-                            EmitExpressionDoesNotEqualNull(valueRef),                           
+                            EmitExpressionDoesNotEqualNull(valueRef),
                             new CodeExpressionStatement(
                                 new CodeMethodInvokeExpression(
-                                initReferenceMethod, new CodeExpression[] {
-                                    new CodePrimitiveExpression(cspaceNamespaceNameQualifiedRelationshipName), new CodePrimitiveExpression(target.Name), valueRef}))));
+                                    initReferenceMethod,
+                                    new CodeExpression[]
+                                    {
+                                        new CodePrimitiveExpression(
+                                            cspaceNamespaceNameQualifiedRelationshipName
+                                        ),
+                                        new CodePrimitiveExpression(target.Name),
+                                        valueRef,
+                                    }
+                                )
+                            )
+                        )
+                    );
                 }
                 else
                 {
-                    CodePropertyReferenceExpression valueProperty = new CodePropertyReferenceExpression(getMethod, ValuePropertyName);
+                    CodePropertyReferenceExpression valueProperty =
+                        new CodePropertyReferenceExpression(getMethod, ValuePropertyName);
 
-                    // get                
+                    // get
                     //     return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<TTargetEntity>("CSpaceQualifiedRelationshipName", "TargetRoleName").Value;
                     getReturnExpression = valueProperty;
 
                     // set
                     //     ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<TTargetEntity>("CSpaceQualifiedRelationshipName", "TargetRoleName").Value = value;
-                    property.SetStatements.Add(
-                        new CodeAssignStatement(valueProperty, valueRef));
+                    property.SetStatements.Add(new CodeAssignStatement(valueProperty, valueRef));
                 }
             }
             else
@@ -226,14 +282,21 @@ namespace System.Data.EntityModel.Emitters
                 //    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<TTargetEntity>"CSpaceQualifiedRelationshipName", "TargetRoleName", value);
                 // }
                 CodeExpression valueRef = new CodePropertySetValueReferenceExpression();
-                
-                CodeMethodReferenceExpression initCollectionMethod = new CodeMethodReferenceExpression();
+
+                CodeMethodReferenceExpression initCollectionMethod =
+                    new CodeMethodReferenceExpression();
                 initCollectionMethod.MethodName = "InitializeRelatedCollection";
 
-                initCollectionMethod.TypeArguments.Add(Generator.GetLeastPossibleQualifiedTypeReference(GetEntityType(target)));
+                initCollectionMethod.TypeArguments.Add(
+                    Generator.GetLeastPossibleQualifiedTypeReference(GetEntityType(target))
+                );
                 initCollectionMethod.TargetObject = new CodePropertyReferenceExpression(
-                    new CodeCastExpression(TypeReference.IEntityWithRelationshipsTypeBaseClass, ThisRef),
-                    "RelationshipManager");
+                    new CodeCastExpression(
+                        TypeReference.IEntityWithRelationshipsTypeBaseClass,
+                        ThisRef
+                    ),
+                    "RelationshipManager"
+                );
 
                 // relationships aren't backed by types so we won't map the namespace
                 // or we can't find the relationship again later
@@ -244,9 +307,19 @@ namespace System.Data.EntityModel.Emitters
                         EmitExpressionDoesNotEqualNull(valueRef),
                         new CodeExpressionStatement(
                             new CodeMethodInvokeExpression(
-                            initCollectionMethod, new CodeExpression[] {
-                                    new CodePrimitiveExpression(cspaceNamespaceNameQualifiedRelationshipName), new CodePrimitiveExpression(target.Name), valueRef}))));
-
+                                initCollectionMethod,
+                                new CodeExpression[]
+                                {
+                                    new CodePrimitiveExpression(
+                                        cspaceNamespaceNameQualifiedRelationshipName
+                                    ),
+                                    new CodePrimitiveExpression(target.Name),
+                                    valueRef,
+                                }
+                            )
+                        )
+                    )
+                );
             }
 
             // if additional Get statements were specified by the event subscriber, insert them now
@@ -260,10 +333,12 @@ namespace System.Data.EntityModel.Emitters
                 }
                 catch (ArgumentNullException ex)
                 {
-                    Generator.AddError(Strings.InvalidGetStatementSuppliedForProperty(Item.Name),
-                                       ModelBuilderErrorCode.InvalidGetStatementSuppliedForProperty,
-                                       EdmSchemaErrorSeverity.Error,
-                                       ex);
+                    Generator.AddError(
+                        Strings.InvalidGetStatementSuppliedForProperty(Item.Name),
+                        ModelBuilderErrorCode.InvalidGetStatementSuppliedForProperty,
+                        EdmSchemaErrorSeverity.Error,
+                        ex
+                    );
                 }
             }
 
@@ -272,12 +347,18 @@ namespace System.Data.EntityModel.Emitters
             return property;
         }
 
-        internal static bool IsNameAlreadyAMemberName(StructuralType type, string generatedPropertyName, StringComparison comparison)
+        internal static bool IsNameAlreadyAMemberName(
+            StructuralType type,
+            string generatedPropertyName,
+            StringComparison comparison
+        )
         {
             foreach (EdmMember member in type.Members)
             {
-                if (member.DeclaringType == type &&
-                    member.Name.Equals(generatedPropertyName, comparison))
+                if (
+                    member.DeclaringType == type
+                    && member.Name.Equals(generatedPropertyName, comparison)
+                )
                 {
                     return true;
                 }
@@ -297,10 +378,7 @@ namespace System.Data.EntityModel.Emitters
         /// </summary>
         private new NavigationProperty Item
         {
-            get
-            {
-                return base.Item as NavigationProperty;
-            }
+            get { return base.Item as NavigationProperty; }
         }
 
         /// <summary>
@@ -311,23 +389,33 @@ namespace System.Data.EntityModel.Emitters
         /// <returns>the return type for a target</returns>
         private CodeTypeReference GetReturnType(RelationshipEndMember target, bool referenceMethod)
         {
-            CodeTypeReference returnType = Generator.GetLeastPossibleQualifiedTypeReference(GetEntityType(target));
+            CodeTypeReference returnType = Generator.GetLeastPossibleQualifiedTypeReference(
+                GetEntityType(target)
+            );
             if (referenceMethod)
             {
-                returnType = TypeReference.AdoFrameworkGenericDataClass("EntityReference", returnType);
+                returnType = TypeReference.AdoFrameworkGenericDataClass(
+                    "EntityReference",
+                    returnType
+                );
             }
             else if (target.RelationshipMultiplicity == RelationshipMultiplicity.Many)
             {
-                returnType = TypeReference.AdoFrameworkGenericDataClass("EntityCollection", returnType);
+                returnType = TypeReference.AdoFrameworkGenericDataClass(
+                    "EntityCollection",
+                    returnType
+                );
             }
 
             return returnType;
         }
 
-
         private static EntityTypeBase GetEntityType(RelationshipEndMember endMember)
         {
-            Debug.Assert(endMember.TypeUsage.EdmType.BuiltInTypeKind == BuiltInTypeKind.RefType, "not a reference type");
+            Debug.Assert(
+                endMember.TypeUsage.EdmType.BuiltInTypeKind == BuiltInTypeKind.RefType,
+                "not a reference type"
+            );
             EntityTypeBase type = ((RefType)endMember.TypeUsage.EdmType).ElementType;
             return type;
         }
@@ -335,7 +423,7 @@ namespace System.Data.EntityModel.Emitters
         /// <summary>
         /// Emit the GetRelatedCollection or GetRelatedReference methods
         /// </summary>
-        /// <param name="target">Target end of the relationship</param>        
+        /// <param name="target">Target end of the relationship</param>
         /// <returns>Expression to invoke the appropriate method</returns>
         private CodeMethodInvokeExpression EmitGetMethod(RelationshipEndMember target)
         {
@@ -349,16 +437,28 @@ namespace System.Data.EntityModel.Emitters
             else
                 getMethod.MethodName = "GetRelatedCollection";
 
-            getMethod.TypeArguments.Add(Generator.GetLeastPossibleQualifiedTypeReference(GetEntityType(target)));
+            getMethod.TypeArguments.Add(
+                Generator.GetLeastPossibleQualifiedTypeReference(GetEntityType(target))
+            );
             getMethod.TargetObject = new CodePropertyReferenceExpression(
-                new CodeCastExpression(TypeReference.IEntityWithRelationshipsTypeBaseClass, ThisRef),
-                "RelationshipManager");
+                new CodeCastExpression(
+                    TypeReference.IEntityWithRelationshipsTypeBaseClass,
+                    ThisRef
+                ),
+                "RelationshipManager"
+            );
 
             // relationships aren't backed by types so we won't map the namespace
             // or we can't find the relationship again later
             string cspaceNamespaceNameQualifiedRelationshipName = target.DeclaringType.FullName;
             return new CodeMethodInvokeExpression(
-                getMethod, new CodeExpression[] { new CodePrimitiveExpression(cspaceNamespaceNameQualifiedRelationshipName), new CodePrimitiveExpression(target.Name)});
+                getMethod,
+                new CodeExpression[]
+                {
+                    new CodePrimitiveExpression(cspaceNamespaceNameQualifiedRelationshipName),
+                    new CodePrimitiveExpression(target.Name),
+                }
+            );
         }
     }
 }

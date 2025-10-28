@@ -25,9 +25,7 @@ namespace System.ComponentModel.Composition.Hosting
         ///     Initializes a new instance of the <see cref="AggregateCatalog"/> class.
         /// </summary>
         public AggregateCatalog()
-            : this((IEnumerable<ComposablePartCatalog>?)null)
-        {
-        }
+            : this((IEnumerable<ComposablePartCatalog>?)null) { }
 
         /// <summary>
         ///     Initializes a new instance of the <see cref="AggregateCatalog"/> class
@@ -44,9 +42,7 @@ namespace System.ComponentModel.Composition.Hosting
         ///     <paramref name="catalogs"/> contains an element that is <see langword="null"/>.
         /// </exception>
         public AggregateCatalog(params ComposablePartCatalog[]? catalogs)
-            : this((IEnumerable<ComposablePartCatalog>?)catalogs)
-        {
-        }
+            : this((IEnumerable<ComposablePartCatalog>?)catalogs) { }
 
         /// <summary>
         ///     Initializes a new instance of the <see cref="AggregateCatalog"/> class
@@ -72,14 +68,8 @@ namespace System.ComponentModel.Composition.Hosting
         /// </summary>
         public event EventHandler<ComposablePartCatalogChangeEventArgs>? Changed
         {
-            add
-            {
-                _catalogs.Changed += value;
-            }
-            remove
-            {
-                _catalogs.Changed -= value;
-            }
+            add { _catalogs.Changed += value; }
+            remove { _catalogs.Changed -= value; }
         }
 
         /// <summary>
@@ -87,14 +77,8 @@ namespace System.ComponentModel.Composition.Hosting
         /// </summary>
         public event EventHandler<ComposablePartCatalogChangeEventArgs>? Changing
         {
-            add
-            {
-                _catalogs.Changing += value;
-            }
-            remove
-            {
-                _catalogs.Changing -= value;
-            }
+            add { _catalogs.Changing += value; }
+            remove { _catalogs.Changing -= value; }
         }
 
         /// <summary>
@@ -116,7 +100,9 @@ namespace System.ComponentModel.Composition.Hosting
         /// <exception cref="ObjectDisposedException">
         ///     The <see cref="AggregateCatalog"/> has been disposed of.
         /// </exception>
-        public override IEnumerable<Tuple<ComposablePartDefinition, ExportDefinition>> GetExports(ImportDefinition definition)
+        public override IEnumerable<Tuple<ComposablePartDefinition, ExportDefinition>> GetExports(
+            ImportDefinition definition
+        )
         {
             ThrowIfDisposed();
 
@@ -142,7 +128,9 @@ namespace System.ComponentModel.Composition.Hosting
                         // sadly the result has already been assigned, which means we are in the aggregate case
                         if (aggregateResult == null)
                         {
-                            aggregateResult = new List<Tuple<ComposablePartDefinition, ExportDefinition>>(result);
+                            aggregateResult = new List<
+                                Tuple<ComposablePartDefinition, ExportDefinition>
+                            >(result);
                             result = aggregateResult;
                         }
                         aggregateResult.AddRange(catalogExports);

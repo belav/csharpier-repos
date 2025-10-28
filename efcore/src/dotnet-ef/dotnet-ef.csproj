@@ -1,5 +1,4 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
-
   <PropertyGroup>
     <Description>Entity Framework Core Tools for the .NET Command-Line Interface.
 
@@ -42,7 +41,10 @@ dotnet ef database update
     <Compile Include="..\ef\CommandException.cs" />
     <Compile Include="..\ef\Json.cs" />
     <Compile Include="..\ef\Reporter.cs" />
-    <Compile Include="..\ef\Commands\**\*.Configure.cs" Link="Commands\%(RecursiveDir)%(Filename).cs" />
+    <Compile
+      Include="..\ef\Commands\**\*.Configure.cs"
+      Link="Commands\%(RecursiveDir)%(Filename).cs"
+    />
     <Compile Include="..\Shared\CodeAnnotations.cs" />
   </ItemGroup>
 
@@ -73,7 +75,11 @@ dotnet ef database update
     </Compile>
   </ItemGroup>
 
-  <Target Name="SetPackageProperties" BeforeTargets="InitializeStandardNuspecProperties" DependsOnTargets="BuiltProjectOutputGroup;DebugSymbolsProjectOutputGroup">
+  <Target
+    Name="SetPackageProperties"
+    BeforeTargets="InitializeStandardNuspecProperties"
+    DependsOnTargets="BuiltProjectOutputGroup;DebugSymbolsProjectOutputGroup"
+  >
     <PropertyGroup>
       <!-- Make sure we create a symbols.nupkg. -->
       <IncludeSymbols>true</IncludeSymbols>

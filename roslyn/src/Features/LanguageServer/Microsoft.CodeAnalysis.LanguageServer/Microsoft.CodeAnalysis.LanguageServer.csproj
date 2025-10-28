@@ -20,7 +20,10 @@
     -->
     <IsPackable>true</IsPackable>
     <!-- Our outer Pack task (defined in PackAllRids.targets) invokes Pack passing in a PackRuntimeIdentifier to produce one package per RID; from that we can set everything else. -->
-    <RuntimeIdentifier Condition="'$(PackRuntimeIdentifier)' != '' and '$(PackRuntimeIdentifier)' != 'neutral'">$(PackRuntimeIdentifier)</RuntimeIdentifier>
+    <RuntimeIdentifier
+      Condition="'$(PackRuntimeIdentifier)' != '' and '$(PackRuntimeIdentifier)' != 'neutral'"
+      >$(PackRuntimeIdentifier)</RuntimeIdentifier
+    >
     <PackageId>$(AssemblyName).$(PackRuntimeIdentifier)</PackageId>
     <!--
         Publish the platform specific executables before any of the pack related targets run.
@@ -36,8 +39,12 @@
 
     <!-- Publishing settings -->
     <SelfContained>false</SelfContained>
-    <PublishDir Condition="'$(RuntimeIdentifier)' != ''">$(ArtifactsDir)/LanguageServer/$(Configuration)/$(TargetFramework)/$(RuntimeIdentifier)</PublishDir>
-    <PublishDir Condition="'$(RuntimeIdentifier)' == ''">$(ArtifactsDir)/LanguageServer/$(Configuration)/$(TargetFramework)/neutral</PublishDir>
+    <PublishDir Condition="'$(RuntimeIdentifier)' != ''"
+      >$(ArtifactsDir)/LanguageServer/$(Configuration)/$(TargetFramework)/$(RuntimeIdentifier)</PublishDir
+    >
+    <PublishDir Condition="'$(RuntimeIdentifier)' == ''"
+      >$(ArtifactsDir)/LanguageServer/$(Configuration)/$(TargetFramework)/neutral</PublishDir
+    >
 
     <!-- List of runtime identifiers that we want to publish an executable for -->
     <RuntimeIdentifiers>win-x64;win-x86;win-arm64;linux-x64;linux-arm64;alpine-x64;alpine-arm64;osx-x64;osx-arm64</RuntimeIdentifiers>
@@ -70,15 +77,42 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.Extensions.Logging" Version="$(MicrosoftExtensionsLoggingVersion)" />
-    <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="$(MicrosoftExtensionsLoggingAbstractionsVersion)" />
-    <PackageReference Include="Microsoft.Extensions.Logging.Console" Version="$(MicrosoftExtensionsLoggingConsoleVersion)" />
-    <PackageReference Include="Microsoft.ServiceHub.Framework" Version="$(MicrosoftServiceHubFrameworkVersion)" />
-    <PackageReference Include="Microsoft.TestPlatform.TranslationLayer" Version="$(MicrosoftTestPlatformTranslationLayerVersion)" />
-    <PackageReference Include="Microsoft.TestPlatform.ObjectModel" Version="$(MicrosoftTestPlatformObjectModelVersion)" />
-    <PackageReference Include="Microsoft.VisualStudio.Composition" Version="$(MicrosoftVisualStudioCompositionVersion)" />
-    <PackageReference Include="Microsoft.VisualStudio.LanguageServer.Protocol" Version="$(MicrosoftVisualStudioLanguageServerProtocolVersion)" />
-    <PackageReference Include="Microsoft.AspNetCore.Razor.ExternalAccess.RoslynWorkspace" Version="$(MicrosoftAspNetCoreRazorExternalAccessRoslynWorkspaceVersion)" />
+    <PackageReference
+      Include="Microsoft.Extensions.Logging"
+      Version="$(MicrosoftExtensionsLoggingVersion)"
+    />
+    <PackageReference
+      Include="Microsoft.Extensions.Logging.Abstractions"
+      Version="$(MicrosoftExtensionsLoggingAbstractionsVersion)"
+    />
+    <PackageReference
+      Include="Microsoft.Extensions.Logging.Console"
+      Version="$(MicrosoftExtensionsLoggingConsoleVersion)"
+    />
+    <PackageReference
+      Include="Microsoft.ServiceHub.Framework"
+      Version="$(MicrosoftServiceHubFrameworkVersion)"
+    />
+    <PackageReference
+      Include="Microsoft.TestPlatform.TranslationLayer"
+      Version="$(MicrosoftTestPlatformTranslationLayerVersion)"
+    />
+    <PackageReference
+      Include="Microsoft.TestPlatform.ObjectModel"
+      Version="$(MicrosoftTestPlatformObjectModelVersion)"
+    />
+    <PackageReference
+      Include="Microsoft.VisualStudio.Composition"
+      Version="$(MicrosoftVisualStudioCompositionVersion)"
+    />
+    <PackageReference
+      Include="Microsoft.VisualStudio.LanguageServer.Protocol"
+      Version="$(MicrosoftVisualStudioLanguageServerProtocolVersion)"
+    />
+    <PackageReference
+      Include="Microsoft.AspNetCore.Razor.ExternalAccess.RoslynWorkspace"
+      Version="$(MicrosoftAspNetCoreRazorExternalAccessRoslynWorkspaceVersion)"
+    />
     <PackageReference Include="StreamJsonRpc" Version="$(StreamJsonRpcVersion)" />
     <PackageReference Include="System.CommandLine" Version="$(SystemCommandLineVersion)" />
   </ItemGroup>
@@ -90,7 +124,10 @@
       Only allow C# DevKit to use types from Microsoft.CodeAnalysis.Contracts namespace. The contracts should not introduce breaking changes between versions,
       because the versions of C# DevKit and C# Extension might not be aligned.
     -->
-    <RestrictedInternalsVisibleTo Include="Microsoft.VisualStudio.LanguageServices.DevKit" Namespace="Microsoft.CodeAnalysis.Contracts" />
+    <RestrictedInternalsVisibleTo
+      Include="Microsoft.VisualStudio.LanguageServices.DevKit"
+      Namespace="Microsoft.CodeAnalysis.Contracts"
+    />
   </ItemGroup>
 
   <ItemGroup>
@@ -103,7 +140,11 @@
   </ItemGroup>
 
   <Target Name="WriteRoslynVersion" AfterTargets="Build">
-    <WriteLinesToFile File="@(RoslynVersionFile)" Lines="$(MicrosoftCodeAnalysisVersion)" Overwrite="true" />
+    <WriteLinesToFile
+      File="@(RoslynVersionFile)"
+      Lines="$(MicrosoftCodeAnalysisVersion)"
+      Overwrite="true"
+    />
   </Target>
 
   <Target Name="PublishRoslynVersion" AfterTargets="Publish">

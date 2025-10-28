@@ -14,11 +14,17 @@ namespace System.Security.Cryptography.X509Certificates
 {
     internal abstract class UnixExportProvider : IExportPal
     {
-        private static readonly Asn1Tag s_contextSpecific0 =
-            new Asn1Tag(TagClass.ContextSpecific, 0, isConstructed: true);
+        private static readonly Asn1Tag s_contextSpecific0 = new Asn1Tag(
+            TagClass.ContextSpecific,
+            0,
+            isConstructed: true
+        );
 
-        internal static readonly PbeParameters s_windowsPbe =
-            new PbeParameters(PbeEncryptionAlgorithm.TripleDes3KeyPkcs12, HashAlgorithmName.SHA1, 2000);
+        internal static readonly PbeParameters s_windowsPbe = new PbeParameters(
+            PbeEncryptionAlgorithm.TripleDes3KeyPkcs12,
+            HashAlgorithmName.SHA1,
+            2000
+        );
 
         protected ICertificatePalCore? _singleCertPal;
         protected X509Certificate2Collection? _certs;
@@ -42,7 +48,10 @@ namespace System.Security.Cryptography.X509Certificates
 
         protected abstract byte[] ExportPkcs7();
 
-        protected abstract byte[] ExportPkcs8(ICertificatePalCore certificatePal, ReadOnlySpan<char> password);
+        protected abstract byte[] ExportPkcs8(
+            ICertificatePalCore certificatePal,
+            ReadOnlySpan<char> password
+        );
 
         public byte[]? Export(X509ContentType contentType, SafePasswordHandle password)
         {
@@ -57,7 +66,9 @@ namespace System.Security.Cryptography.X509Certificates
                     return ExportPkcs7();
                 case X509ContentType.SerializedCert:
                 case X509ContentType.SerializedStore:
-                    throw new PlatformNotSupportedException(SR.Cryptography_Unix_X509_SerializedExport);
+                    throw new PlatformNotSupportedException(
+                        SR.Cryptography_Unix_X509_SerializedExport
+                    );
                 default:
                     throw new CryptographicException(SR.Cryptography_X509_InvalidContentType);
             }
@@ -120,7 +131,8 @@ namespace System.Security.Cryptography.X509Certificates
                         certAttrs,
                         keyBags,
                         ref certIdx,
-                        ref keyIdx);
+                        ref keyIdx
+                    );
                 }
                 else
                 {
@@ -134,7 +146,8 @@ namespace System.Security.Cryptography.X509Certificates
                             certAttrs,
                             keyBags,
                             ref certIdx,
-                            ref keyIdx);
+                            ref keyIdx
+                        );
                     }
                 }
 
@@ -145,7 +158,8 @@ namespace System.Security.Cryptography.X509Certificates
                     certBags,
                     certAttrs,
                     certIdx,
-                    passwordSpan);
+                    passwordSpan
+                );
 
                 return MacAndEncode(tmpWriter, encodedAuthSafe, passwordSpan);
             }
@@ -174,7 +188,8 @@ namespace System.Security.Cryptography.X509Certificates
             AttributeAsn[] certAttrs,
             SafeBagAsn[] keyBags,
             ref int certIdx,
-            ref int keyIdx)
+            ref int keyIdx
+        )
         {
             tmpWriter.WriteOctetString(certPal.RawData);
 
@@ -196,16 +211,13 @@ namespace System.Security.Cryptography.X509Certificates
                 AttributeAsn attribute = new AttributeAsn
                 {
                     AttrType = Oids.LocalKeyId,
-                    AttrValues = new ReadOnlyMemory<byte>[]
-                    {
-                        attrBytes,
-                    }
+                    AttrValues = new ReadOnlyMemory<byte>[] { attrBytes },
                 };
                 keyBags[keyIdx] = new SafeBagAsn
                 {
                     BagId = Oids.Pkcs12ShroudedKeyBag,
                     BagValue = ExportPkcs8(certPal, passwordSpan),
-                    BagAttributes = new[] { attribute }
+                    BagAttributes = new[] { attribute },
                 };
 
                 // Reuse the attribute between the cert and the key.
@@ -223,7 +235,8 @@ namespace System.Security.Cryptography.X509Certificates
             CertBagAsn[] certBags,
             AttributeAsn[] certAttrs,
             int certIdx,
-            ReadOnlySpan<char> passwordSpan)
+            ReadOnlySpan<char> passwordSpan
+        )
         {
             string? encryptionAlgorithmOid = null;
             bool certsIsPkcs12Encryption = false;
@@ -255,7 +268,8 @@ namespace System.Security.Cryptography.X509Certificates
                         certContentsIv,
                         out certsHmacOid,
                         out encryptionAlgorithmOid,
-                        out certsIsPkcs12Encryption);
+                        out certsIsPkcs12Encryption
+                    );
                 }
 
                 return EncodeAuthSafe(
@@ -266,7 +280,8 @@ namespace System.Security.Cryptography.X509Certificates
                     certsHmacOid!,
                     encryptionAlgorithmOid!,
                     salt,
-                    certContentsIv);
+                    certContentsIv
+                );
             }
             finally
             {
@@ -282,7 +297,11 @@ namespace System.Security.Cryptography.X509Certificates
             }
         }
 
-        private static ArraySegment<byte> EncodeKeys(AsnWriter tmpWriter, SafeBagAsn[] keyBags, int keyCount)
+        private static ArraySegment<byte> EncodeKeys(
+            AsnWriter tmpWriter,
+            SafeBagAsn[] keyBags,
+            int keyCount
+        )
         {
             Debug.Assert(tmpWriter.GetEncodedLength() == 0);
 
@@ -319,7 +338,8 @@ namespace System.Security.Cryptography.X509Certificates
             Span<byte> certContentsIv,
             out string hmacOid,
             out string encryptionAlgorithmOid,
-            out bool isPkcs12)
+            out bool isPkcs12
+        )
         {
             Debug.Assert(tmpWriter.GetEncodedLength() == 0);
             tmpWriter.PushSequence();
@@ -329,7 +349,8 @@ namespace System.Security.Cryptography.X509Certificates
                 out SymmetricAlgorithm cipher,
                 out hmacOid,
                 out encryptionAlgorithmOid,
-                out isPkcs12);
+                out isPkcs12
+            );
 
             using (cipher)
             {
@@ -380,7 +401,8 @@ namespace System.Security.Cryptography.X509Certificates
                     s_windowsPbe,
                     salt,
                     certContents,
-                    certContentsIv);
+                    certContentsIv
+                );
 
                 Debug.Assert(encryptedLength <= requestedSize);
                 tmpWriter.Reset();
@@ -397,7 +419,8 @@ namespace System.Security.Cryptography.X509Certificates
             string hmacOid,
             string encryptionAlgorithmOid,
             Span<byte> salt,
-            Span<byte> certContentsIv)
+            Span<byte> certContentsIv
+        )
         {
             Debug.Assert(tmpWriter.GetEncodedLength() == 0);
 
@@ -442,9 +465,13 @@ namespace System.Security.Cryptography.X509Certificates
                                 salt,
                                 s_windowsPbe.IterationCount,
                                 hmacOid,
-                                certContentsIv);
+                                certContentsIv
+                            );
 
-                            tmpWriter.WriteOctetString(encodedCertContents.Span, s_contextSpecific0);
+                            tmpWriter.WriteOctetString(
+                                encodedCertContents.Span,
+                                s_contextSpecific0
+                            );
                             tmpWriter.PopSequence();
                         }
 
@@ -472,11 +499,16 @@ namespace System.Security.Cryptography.X509Certificates
             return new ArraySegment<byte>(authSafe, 0, authSafeLength);
         }
 
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Security", "CA5350", Justification = "HMACSHA1 is required for compat with other platforms")]
+        [System.Diagnostics.CodeAnalysis.SuppressMessage(
+            "Microsoft.Security",
+            "CA5350",
+            Justification = "HMACSHA1 is required for compat with other platforms"
+        )]
         private static unsafe byte[] MacAndEncode(
             AsnWriter tmpWriter,
             ReadOnlyMemory<byte> encodedAuthSafe,
-            ReadOnlySpan<char> passwordSpan)
+            ReadOnlySpan<char> passwordSpan
+        )
         {
             Span<byte> macKey = stackalloc byte[HMACSHA1.HashSizeInBytes];
             Span<byte> macSalt = stackalloc byte[HMACSHA1.HashSizeInBytes];
@@ -488,13 +520,16 @@ namespace System.Security.Cryptography.X509Certificates
                 HashAlgorithmName.SHA1,
                 s_windowsPbe.IterationCount,
                 macSalt,
-                macKey);
+                macKey
+            );
 
             int bytesWritten = HMACSHA1.HashData(macKey, encodedAuthSafe.Span, macSpan);
 
             if (bytesWritten != HMACSHA1.HashSizeInBytes)
             {
-                Debug.Fail($"HMACSHA1.HashData wrote {bytesWritten} of {HMACSHA1.HashSizeInBytes} bytes");
+                Debug.Fail(
+                    $"HMACSHA1.HashData wrote {bytesWritten} of {HMACSHA1.HashSizeInBytes} bytes"
+                );
                 throw new CryptographicException();
             }
 

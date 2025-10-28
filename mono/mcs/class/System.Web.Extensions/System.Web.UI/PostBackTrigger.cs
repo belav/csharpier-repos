@@ -14,10 +14,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -33,32 +33,31 @@ using System.Text;
 
 namespace System.Web.UI
 {
-	public class PostBackTrigger : UpdatePanelControlTrigger
-	{
-		public new string ControlID {
-			get {
-				return base.ControlID;
-			}
-			set {
-				base.ControlID = value;
-			}
-		}
+    public class PostBackTrigger : UpdatePanelControlTrigger
+    {
+        public new string ControlID
+        {
+            get { return base.ControlID; }
+            set { base.ControlID = value; }
+        }
 
-		protected internal override bool HasTriggered ()
-		{
-			// Since this kind of trigger causes a normal postback, we never get
-			// triggered
-			return false;
-		}
+        protected internal override bool HasTriggered()
+        {
+            // Since this kind of trigger causes a normal postback, we never get
+            // triggered
+            return false;
+        }
 
-		protected internal override void Initialize () {
-			Control c = FindTargetControl (false);
-			ScriptManager sm = Owner.ScriptManager;
-			sm.RegisterPostBackControl (c);
-		}
+        protected internal override void Initialize()
+        {
+            Control c = FindTargetControl(false);
+            ScriptManager sm = Owner.ScriptManager;
+            sm.RegisterPostBackControl(c);
+        }
 
-		public override string ToString () {
-			return String.Format ("PostBack: {0}", ControlID);
-		}
-	}
+        public override string ToString()
+        {
+            return String.Format("PostBack: {0}", ControlID);
+        }
+    }
 }

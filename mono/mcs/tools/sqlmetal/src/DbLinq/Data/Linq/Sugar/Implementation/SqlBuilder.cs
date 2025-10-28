@@ -1,19 +1,19 @@
 ﻿#region MIT license
-// 
+//
 // MIT license
 //
 // Copyright (c) 2007-2008 Jiri Moudry, Pascal Craponne
-// 
+//
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
 // in the Software without restriction, including without limitation the rights
 // to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
 // copies of the Software, and to permit persons to whom the Software is
 // furnished to do so, subject to the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be included in
 // all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
 // IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
 // FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
@@ -21,18 +21,16 @@
 // LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
-// 
+//
 #endregion
 
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
-
 using DbLinq.Data.Linq.Sql;
 using DbLinq.Data.Linq.Sugar.ExpressionMutator;
 using DbLinq.Data.Linq.Sugar.Expressions;
-
 using DbLinq.Factory;
 using DbLinq.Util;
 
@@ -81,7 +79,10 @@ namespace DbLinq.Data.Linq.Sugar.Implementation
                     if (tables[tableIndex - 1] == table.JoinedTable)
                         break;
                     // if the current table is joining and we have a non-joining table above, we stop here too
-                    if (table.JoinExpression != null && tables[tableIndex - 1].JoinExpression == null)
+                    if (
+                        table.JoinExpression != null
+                        && tables[tableIndex - 1].JoinExpression == null
+                    )
                         break;
                 }
                 tables.Insert(tableIndex, table);
@@ -113,13 +114,18 @@ namespace DbLinq.Data.Linq.Sugar.Implementation
                 SubSelectExpression subselect = null;
                 if (selectExpression.Tables.Count == 1)
                     subselect = selectExpression.Tables[0] as SubSelectExpression;
-                if(subselect != null)
+                if (subselect != null)
                     return sqlProvider.GetParenthesis(Build(subselect.Select, queryContext));
             }
 
             // TODO: the following might be wrong (at least this might be the wrong place to do this
             if (select.ToString() == string.Empty)
-                select = new SqlStatement("SELECT " + sqlProvider.GetLiteral(null) + " AS " + sqlProvider.GetSafeName("Empty"));
+                select = new SqlStatement(
+                    "SELECT "
+                        + sqlProvider.GetLiteral(null)
+                        + " AS "
+                        + sqlProvider.GetSafeName("Empty")
+                );
 
             var tables = GetSortedTables(selectExpression);
             var from = BuildFrom(tables, queryContext);
@@ -136,7 +142,9 @@ namespace DbLinq.Data.Linq.Sugar.Implementation
                 var nextLiteralSelect = Build(selectExpression.NextSelectExpression, queryContext);
                 select = queryContext.DataContext.Vendor.SqlProvider.GetLiteral(
                     selectExpression.NextSelectExpressionOperator,
-                    select, nextLiteralSelect);
+                    select,
+                    nextLiteralSelect
+                );
             }
 
             return select;
@@ -144,8 +152,14 @@ namespace DbLinq.Data.Linq.Sugar.Implementation
 
         public SqlStatement Join(QueryContext queryContext, params SqlStatement[] clauses)
         {
-            return SqlStatement.Join(queryContext.DataContext.Vendor.SqlProvider.NewLine,
-                               (from clause in clauses where clause.ToString() != string.Empty select clause).ToList());
+            return SqlStatement.Join(
+                queryContext.DataContext.Vendor.SqlProvider.NewLine,
+                (
+                    from clause in clauses
+                    where clause.ToString() != string.Empty
+                    select clause
+                ).ToList()
+            );
         }
 
         /// <summary>
@@ -155,7 +169,10 @@ namespace DbLinq.Data.Linq.Sugar.Implementation
         /// <param name="expression"></param>
         /// <param name="queryContext"></param>
         /// <returns></returns>
-        protected virtual SqlStatement BuildExpression(Expression expression, QueryContext queryContext)
+        protected virtual SqlStatement BuildExpression(
+            Expression expression,
+            QueryContext queryContext
+        )
         {
             var sqlProvider = queryContext.DataContext.Vendor.SqlProvider;
             var currentPrecedence = ExpressionQualifier.GetPrecedence(expression);
@@ -173,7 +190,10 @@ namespace DbLinq.Data.Linq.Sugar.Implementation
 
             // then converts expression
             if (expression is SpecialExpression)
-                return sqlProvider.GetLiteral(((SpecialExpression)expression).SpecialNodeType, literalOperands);
+                return sqlProvider.GetLiteral(
+                    ((SpecialExpression)expression).SpecialNodeType,
+                    literalOperands
+                );
             if (expression is EntitySetExpression)
                 expression = ((EntitySetExpression)expression).TableExpression;
             if (expression is TableExpression)
@@ -181,8 +201,10 @@ namespace DbLinq.Data.Linq.Sugar.Implementation
                 var tableExpression = (TableExpression)expression;
                 if (tableExpression.Alias != null) // if we have an alias, use it
                 {
-                    return sqlProvider.GetColumn(sqlProvider.GetTableAlias(tableExpression.Alias),
-                                                 sqlProvider.GetColumns());
+                    return sqlProvider.GetColumn(
+                        sqlProvider.GetTableAlias(tableExpression.Alias),
+                        sqlProvider.GetColumns()
+                    );
                 }
                 return sqlProvider.GetColumns();
             }
@@ -191,8 +213,10 @@ namespace DbLinq.Data.Linq.Sugar.Implementation
                 var columnExpression = (ColumnExpression)expression;
                 if (columnExpression.Table.Alias != null)
                 {
-                    return sqlProvider.GetColumn(sqlProvider.GetTableAlias(columnExpression.Table.Alias),
-                                                 columnExpression.Name);
+                    return sqlProvider.GetColumn(
+                        sqlProvider.GetTableAlias(columnExpression.Table.Alias),
+                        columnExpression.Name
+                    );
                 }
                 return sqlProvider.GetColumn(columnExpression.Name);
             }
@@ -205,25 +229,39 @@ namespace DbLinq.Data.Linq.Sugar.Implementation
                     List<SqlStatement> inputParameters = new List<SqlStatement>();
                     foreach (object p in (Array)inputParameterExpression.GetValue())
                     {
-                        inputParameters.Add(new SqlStatement(new SqlParameterPart(sqlProvider.GetParameterName(inputParameterExpression.Alias + i.ToString()),
-                                                          inputParameterExpression.Alias + i.ToString())));
+                        inputParameters.Add(
+                            new SqlStatement(
+                                new SqlParameterPart(
+                                    sqlProvider.GetParameterName(
+                                        inputParameterExpression.Alias + i.ToString()
+                                    ),
+                                    inputParameterExpression.Alias + i.ToString()
+                                )
+                            )
+                        );
                         ++i;
                     }
                     return new SqlStatement(sqlProvider.GetLiteral(inputParameters.ToArray()));
                 }
-                return
-                    new SqlStatement(new SqlParameterPart(sqlProvider.GetParameterName(inputParameterExpression.Alias),
-                                                          inputParameterExpression.Alias));
+                return new SqlStatement(
+                    new SqlParameterPart(
+                        sqlProvider.GetParameterName(inputParameterExpression.Alias),
+                        inputParameterExpression.Alias
+                    )
+                );
             }
             if (expression is SelectExpression)
                 return Build((SelectExpression)expression, queryContext);
             if (expression is ConstantExpression)
                 return sqlProvider.GetLiteral(((ConstantExpression)expression).Value);
             if (expression is GroupExpression)
-                return BuildExpression(((GroupExpression)expression).GroupedExpression, queryContext);
+                return BuildExpression(
+                    ((GroupExpression)expression).GroupedExpression,
+                    queryContext
+                );
 
             StartIndexOffsetExpression indexExpression = expression as StartIndexOffsetExpression;
-            if (indexExpression!=null)
+            if (indexExpression != null)
             {
                 if (indexExpression.StartsAtOne)
                 {
@@ -233,7 +271,10 @@ namespace DbLinq.Data.Linq.Sugar.Implementation
                 else
                     return literalOperands.First();
             }
-            if (expression.NodeType == ExpressionType.Convert || expression.NodeType == ExpressionType.ConvertChecked)
+            if (
+                expression.NodeType == ExpressionType.Convert
+                || expression.NodeType == ExpressionType.ConvertChecked
+            )
             {
                 var unaryExpression = (UnaryExpression)expression;
                 var firstOperand = literalOperands.First();
@@ -278,7 +319,10 @@ namespace DbLinq.Data.Linq.Sugar.Implementation
             return true;
         }
 
-        protected virtual bool MustDeclareAsJoin(IList<TableExpression> tables, TableExpression table)
+        protected virtual bool MustDeclareAsJoin(
+            IList<TableExpression> tables,
+            TableExpression table
+        )
         {
             // the first table can not be declared as join
             if (table == tables[0])
@@ -290,7 +334,10 @@ namespace DbLinq.Data.Linq.Sugar.Implementation
             return false;
         }
 
-        protected virtual SqlStatement BuildFrom(IList<TableExpression> tables, QueryContext queryContext)
+        protected virtual SqlStatement BuildFrom(
+            IList<TableExpression> tables,
+            QueryContext queryContext
+        )
         {
             var sqlProvider = queryContext.DataContext.Vendor.SqlProvider;
             var fromClauses = new List<SqlStatement>();
@@ -305,11 +352,19 @@ namespace DbLinq.Data.Linq.Sugar.Implementation
                         // All subqueries has an alias in FROM
                         SubSelectExpression subquery = tableExpression as SubSelectExpression;
                         if (subquery == null)
-                            tableAlias = sqlProvider.GetTableAsAlias(tableExpression.Name, tableExpression.Alias);
+                            tableAlias = sqlProvider.GetTableAsAlias(
+                                tableExpression.Name,
+                                tableExpression.Alias
+                            );
                         else
                         {
-                            var subqueryStatements = new SqlStatement(Build(subquery.Select, queryContext));
-                            tableAlias = sqlProvider.GetSubQueryAsAlias(subqueryStatements.ToString(), tableExpression.Alias);
+                            var subqueryStatements = new SqlStatement(
+                                Build(subquery.Select, queryContext)
+                            );
+                            tableAlias = sqlProvider.GetSubQueryAsAlias(
+                                subqueryStatements.ToString(),
+                                tableExpression.Alias
+                            );
                         }
 
                         if ((tableExpression.JoinType & TableJoinType.LeftOuter) != 0)
@@ -333,7 +388,10 @@ namespace DbLinq.Data.Linq.Sugar.Implementation
         /// <param name="tables"></param>
         /// <param name="queryContext"></param>
         /// <returns></returns>
-        protected virtual SqlStatement BuildJoin(IList<TableExpression> tables, QueryContext queryContext)
+        protected virtual SqlStatement BuildJoin(
+            IList<TableExpression> tables,
+            QueryContext queryContext
+        )
         {
             var sqlProvider = queryContext.DataContext.Vendor.SqlProvider;
             var joinClauses = new List<SqlStatement>();
@@ -343,8 +401,14 @@ namespace DbLinq.Data.Linq.Sugar.Implementation
                 if (MustDeclareAsJoin(tables, tableExpression))
                 {
                     // get constitutive Parts
-                    var joinExpression = BuildExpression(tableExpression.JoinExpression, queryContext);
-                    var tableAlias = sqlProvider.GetTableAsAlias(tableExpression.Name, tableExpression.Alias);
+                    var joinExpression = BuildExpression(
+                        tableExpression.JoinExpression,
+                        queryContext
+                    );
+                    var tableAlias = sqlProvider.GetTableAsAlias(
+                        tableExpression.Name,
+                        tableExpression.Alias
+                    );
                     SqlStatement joinClause;
                     switch (tableExpression.JoinType)
                     {
@@ -352,10 +416,16 @@ namespace DbLinq.Data.Linq.Sugar.Implementation
                             joinClause = sqlProvider.GetInnerJoinClause(tableAlias, joinExpression);
                             break;
                         case TableJoinType.LeftOuter:
-                            joinClause = sqlProvider.GetLeftOuterJoinClause(tableAlias, joinExpression);
+                            joinClause = sqlProvider.GetLeftOuterJoinClause(
+                                tableAlias,
+                                joinExpression
+                            );
                             break;
                         case TableJoinType.RightOuter:
-                            joinClause = sqlProvider.GetRightOuterJoinClause(tableAlias, joinExpression);
+                            joinClause = sqlProvider.GetRightOuterJoinClause(
+                                tableAlias,
+                                joinExpression
+                            );
                             break;
                         case TableJoinType.FullOuter:
                             throw new NotImplementedException();
@@ -371,22 +441,31 @@ namespace DbLinq.Data.Linq.Sugar.Implementation
         protected virtual bool IsHavingClause(Expression expression)
         {
             bool isHaving = false;
-            expression.Recurse(delegate(Expression e)
-                                   {
-                                       if (e is GroupExpression)
-                                           isHaving = true;
-                                       return e;
-                                   });
+            expression.Recurse(
+                delegate(Expression e)
+                {
+                    if (e is GroupExpression)
+                        isHaving = true;
+                    return e;
+                }
+            );
             return isHaving;
         }
 
-        protected virtual SqlStatement BuildWhere(IList<TableExpression> tables, IList<Expression> wheres, QueryContext queryContext)
+        protected virtual SqlStatement BuildWhere(
+            IList<TableExpression> tables,
+            IList<Expression> wheres,
+            QueryContext queryContext
+        )
         {
             var sqlProvider = queryContext.DataContext.Vendor.SqlProvider;
             var whereClauses = new List<SqlStatement>();
             foreach (var tableExpression in tables)
             {
-                if (!MustDeclareAsJoin(tables, tableExpression) && tableExpression.JoinExpression != null)
+                if (
+                    !MustDeclareAsJoin(tables, tableExpression)
+                    && tableExpression.JoinExpression != null
+                )
                     whereClauses.Add(BuildExpression(tableExpression.JoinExpression, queryContext));
             }
             foreach (var whereExpression in wheres)
@@ -397,7 +476,10 @@ namespace DbLinq.Data.Linq.Sugar.Implementation
             return sqlProvider.GetWhereClause(whereClauses.ToArray());
         }
 
-        protected virtual SqlStatement BuildHaving(IList<Expression> wheres, QueryContext queryContext)
+        protected virtual SqlStatement BuildHaving(
+            IList<Expression> wheres,
+            QueryContext queryContext
+        )
         {
             var sqlProvider = queryContext.DataContext.Vendor.SqlProvider;
             var havingClauses = new List<SqlStatement>();
@@ -409,18 +491,26 @@ namespace DbLinq.Data.Linq.Sugar.Implementation
             return sqlProvider.GetHavingClause(havingClauses.ToArray());
         }
 
-        protected virtual SqlStatement GetGroupByClause(ColumnExpression columnExpression, QueryContext queryContext)
+        protected virtual SqlStatement GetGroupByClause(
+            ColumnExpression columnExpression,
+            QueryContext queryContext
+        )
         {
             var sqlProvider = queryContext.DataContext.Vendor.SqlProvider;
             if (columnExpression.Table.Alias != null)
             {
-                return sqlProvider.GetColumn(sqlProvider.GetTableAlias(columnExpression.Table.Alias),
-                                             columnExpression.Name);
+                return sqlProvider.GetColumn(
+                    sqlProvider.GetTableAlias(columnExpression.Table.Alias),
+                    columnExpression.Name
+                );
             }
             return sqlProvider.GetColumn(columnExpression.Name);
         }
 
-        protected virtual SqlStatement BuildGroupBy(IList<GroupExpression> groupByExpressions, QueryContext queryContext)
+        protected virtual SqlStatement BuildGroupBy(
+            IList<GroupExpression> groupByExpressions,
+            QueryContext queryContext
+        )
         {
             var sqlProvider = queryContext.DataContext.Vendor.SqlProvider;
             var groupByClauses = new List<SqlStatement>();
@@ -430,21 +520,30 @@ namespace DbLinq.Data.Linq.Sugar.Implementation
                 {
                     var columnOperand = operand as ColumnExpression;
                     if (columnOperand == null)
-                        throw Error.BadArgument("S0201: Groupby argument must be a ColumnExpression");
+                        throw Error.BadArgument(
+                            "S0201: Groupby argument must be a ColumnExpression"
+                        );
                     groupByClauses.Add(GetGroupByClause(columnOperand, queryContext));
                 }
             }
             return sqlProvider.GetGroupByClause(groupByClauses.ToArray());
         }
 
-        protected virtual SqlStatement BuildOrderBy(IList<OrderByExpression> orderByExpressions, QueryContext queryContext)
+        protected virtual SqlStatement BuildOrderBy(
+            IList<OrderByExpression> orderByExpressions,
+            QueryContext queryContext
+        )
         {
             var sqlProvider = queryContext.DataContext.Vendor.SqlProvider;
             var orderByClauses = new List<SqlStatement>();
             foreach (var clause in orderByExpressions)
             {
-                orderByClauses.Add(sqlProvider.GetOrderByColumn(BuildExpression(clause.ColumnExpression, queryContext),
-                                                                clause.Descending));
+                orderByClauses.Add(
+                    sqlProvider.GetOrderByColumn(
+                        BuildExpression(clause.ColumnExpression, queryContext),
+                        clause.Descending
+                    )
+                );
             }
             return sqlProvider.GetOrderByClause(orderByClauses.ToArray());
         }
@@ -464,7 +563,10 @@ namespace DbLinq.Data.Linq.Sugar.Implementation
             SelectExpression selectExp = select as SelectExpression;
             if (selectExp != null)
             {
-                if (selectExp.Group.Count == 1 && selectExp.Group[0].GroupedExpression == selectExp.Group[0].KeyExpression)
+                if (
+                    selectExp.Group.Count == 1
+                    && selectExp.Group[0].GroupedExpression == selectExp.Group[0].KeyExpression
+                )
                 {
                     // this is a select DISTINCT expression
                     // TODO: better handle selected columns on DISTINCT: I suspect this will not work in some cases
@@ -478,7 +580,11 @@ namespace DbLinq.Data.Linq.Sugar.Implementation
             return sqlProvider.GetSelectClause(selectClauses.ToArray());
         }
 
-        protected virtual SqlStatement BuildLimit(SelectExpression select, SqlStatement literalSelect, QueryContext queryContext)
+        protected virtual SqlStatement BuildLimit(
+            SelectExpression select,
+            SqlStatement literalSelect,
+            QueryContext queryContext
+        )
         {
             if (select.Limit != null)
             {
@@ -486,12 +592,21 @@ namespace DbLinq.Data.Linq.Sugar.Implementation
                 if (select.Offset != null)
                 {
                     var literalOffset = BuildExpression(select.Offset, queryContext);
-                    var literalOffsetAndLimit = BuildExpression(select.OffsetAndLimit, queryContext);
-                    return queryContext.DataContext.Vendor.SqlProvider.GetLiteralLimit(literalSelect, literalLimit,
-                                                                                       literalOffset,
-                                                                                       literalOffsetAndLimit);
+                    var literalOffsetAndLimit = BuildExpression(
+                        select.OffsetAndLimit,
+                        queryContext
+                    );
+                    return queryContext.DataContext.Vendor.SqlProvider.GetLiteralLimit(
+                        literalSelect,
+                        literalLimit,
+                        literalOffset,
+                        literalOffsetAndLimit
+                    );
                 }
-                return queryContext.DataContext.Vendor.SqlProvider.GetLiteralLimit(literalSelect, literalLimit);
+                return queryContext.DataContext.Vendor.SqlProvider.GetLiteralLimit(
+                    literalSelect,
+                    literalLimit
+                );
             }
             return literalSelect;
         }

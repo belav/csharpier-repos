@@ -51,7 +51,10 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities
                             break;
                     }
 
-                    return string.Join(separator, containerElement.Elements.Select(GetStringFromItem));
+                    return string.Join(
+                        separator,
+                        containerElement.Elements.Select(GetStringFromItem)
+                    );
                 case ClassifiedTextElement classifiedTextElement:
                     return string.Join("", classifiedTextElement.Runs.Select(GetStringFromItem));
                 case ClassifiedTextRun classifiedTextRun:
@@ -73,7 +76,10 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities
             return sb.ToString();
         }
 
-        private static void BuildStringFromInlineCollection(InlineCollection inlines, StringBuilder sb)
+        private static void BuildStringFromInlineCollection(
+            InlineCollection inlines,
+            StringBuilder sb
+        )
         {
             foreach (var inline in inlines)
             {

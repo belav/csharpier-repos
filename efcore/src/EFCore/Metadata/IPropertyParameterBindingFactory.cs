@@ -30,7 +30,8 @@ public interface IPropertyParameterBindingFactory
     ParameterBinding? FindParameter(
         IEntityType entityType,
         Type parameterType,
-        string parameterName);
+        string parameterName
+    );
 
     /// <summary>
     ///     Finds a <see cref="ParameterBinding" /> specifically for an <see cref="IPropertyBase" /> in the model.
@@ -42,5 +43,6 @@ public interface IPropertyParameterBindingFactory
     ParameterBinding? FindParameter(
         IComplexType complexType,
         Type parameterType,
-        string parameterName);
+        string parameterName
+    );
 }

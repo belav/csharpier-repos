@@ -6,19 +6,23 @@ using Microsoft.Extensions.DependencyInjection.Specification;
 
 namespace Microsoft.Extensions.DependencyInjection.Tests
 {
-    public class ServiceProviderDefaultContainerTestsWithOptions : DependencyInjectionSpecificationTests
+    public class ServiceProviderDefaultContainerTestsWithOptions
+        : DependencyInjectionSpecificationTests
     {
         protected override IServiceProvider CreateServiceProvider(IServiceCollection collection)
         {
             try
             {
-                return collection.BuildServiceProvider(ServiceProviderMode.Default, new ServiceProviderOptions
-                {
-                    ValidateOnBuild = true,
-                    // Too many tests fail because they try to resolve scoped services from the root
-                    // provider
-                    // ValidateScopes = true
-                });
+                return collection.BuildServiceProvider(
+                    ServiceProviderMode.Default,
+                    new ServiceProviderOptions
+                    {
+                        ValidateOnBuild = true,
+                        // Too many tests fail because they try to resolve scoped services from the root
+                        // provider
+                        // ValidateScopes = true
+                    }
+                );
             }
             catch (AggregateException)
             {

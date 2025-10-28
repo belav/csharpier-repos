@@ -24,7 +24,10 @@ namespace System.Tests
 
         [Theory]
         [MemberData(nameof(Parse_Invalid_TestData))]
-        public static void CtorInvalidVersionString_ThrowsException(string input, Type exceptionType)
+        public static void CtorInvalidVersionString_ThrowsException(
+            string input,
+            Type exceptionType
+        )
         {
             Assert.Throws(exceptionType, () => new Version(input));
         }
@@ -60,65 +63,91 @@ namespace System.Tests
         [InlineData(int.MaxValue, int.MaxValue, int.MaxValue, int.MaxValue)]
         public static void Ctor_Int_Int_Int_Int(int major, int minor, int build, int revision)
         {
-            VerifyVersion(new Version(major, minor, build, revision), major, minor, build, revision);
+            VerifyVersion(
+                new Version(major, minor, build, revision),
+                major,
+                minor,
+                build,
+                revision
+            );
         }
 
         [Fact]
         public void Ctor_NegativeMajor_ThrowsArgumentOutOfRangeException()
         {
             AssertExtensions.Throws<ArgumentOutOfRangeException>("major", () => new Version(-1, 0));
-            AssertExtensions.Throws<ArgumentOutOfRangeException>("major", () => new Version(-1, 0, 0));
-            AssertExtensions.Throws<ArgumentOutOfRangeException>("major", () => new Version(-1, 0, 0, 0));
+            AssertExtensions.Throws<ArgumentOutOfRangeException>(
+                "major",
+                () => new Version(-1, 0, 0)
+            );
+            AssertExtensions.Throws<ArgumentOutOfRangeException>(
+                "major",
+                () => new Version(-1, 0, 0, 0)
+            );
         }
 
         [Fact]
         public void Ctor_NegativeMinor_ThrowsArgumentOutOfRangeException()
         {
             AssertExtensions.Throws<ArgumentOutOfRangeException>("minor", () => new Version(0, -1));
-            AssertExtensions.Throws<ArgumentOutOfRangeException>("minor", () => new Version(0, -1, 0));
-            AssertExtensions.Throws<ArgumentOutOfRangeException>("minor", () => new Version(0, -1, 0, 0));
+            AssertExtensions.Throws<ArgumentOutOfRangeException>(
+                "minor",
+                () => new Version(0, -1, 0)
+            );
+            AssertExtensions.Throws<ArgumentOutOfRangeException>(
+                "minor",
+                () => new Version(0, -1, 0, 0)
+            );
         }
 
         [Fact]
         public void Ctor_NegativeBuild_ThrowsArgumentOutOfRangeException()
         {
-            AssertExtensions.Throws<ArgumentOutOfRangeException>("build", () => new Version(0, 0, -1));
-            AssertExtensions.Throws<ArgumentOutOfRangeException>("build", () => new Version(0, 0, -1, 0));
+            AssertExtensions.Throws<ArgumentOutOfRangeException>(
+                "build",
+                () => new Version(0, 0, -1)
+            );
+            AssertExtensions.Throws<ArgumentOutOfRangeException>(
+                "build",
+                () => new Version(0, 0, -1, 0)
+            );
         }
 
         [Fact]
         public void Ctor_NegativeRevision_ThrowsArgumentOutOfRangeException()
         {
-            AssertExtensions.Throws<ArgumentOutOfRangeException>("revision", () => new Version(0, 0, 0, -1));
+            AssertExtensions.Throws<ArgumentOutOfRangeException>(
+                "revision",
+                () => new Version(0, 0, 0, -1)
+            );
         }
 
         public static IEnumerable<object[]> Comparison_TestData()
         {
-            foreach (var input in new (Version v1, Version v2, int expectedSign)[]
-            {
-                (null, null, 0),
-
-                (new Version(1, 2), null, 1),
-                (new Version(1, 2), new Version(1, 2), 0),
-                (new Version(1, 2), new Version(1, 3), -1),
-                (new Version(1, 2), new Version(1, 1), 1),
-                (new Version(1, 2), new Version(2, 0), -1),
-                (new Version(1, 2), new Version(1, 2, 1), -1),
-                (new Version(1, 2), new Version(1, 2, 0, 1), -1),
-                (new Version(1, 2), new Version(1, 0), 1),
-                (new Version(1, 2), new Version(1, 0, 1), 1),
-                (new Version(1, 2), new Version(1, 0, 0, 1), 1),
-
-                (new Version(3, 2, 1), null, 1),
-                (new Version(3, 2, 1), new Version(2, 2, 1), 1),
-                (new Version(3, 2, 1), new Version(3, 1, 1), 1),
-                (new Version(3, 2, 1), new Version(3, 2, 0), 1),
-
-                (new Version(1, 2, 3, 4), null, 1),
-                (new Version(1, 2, 3, 4), new Version(1, 2, 3, 4), 0),
-                (new Version(1, 2, 3, 4), new Version(1, 2, 3, 5), -1),
-                (new Version(1, 2, 3, 4), new Version(1, 2, 3, 3), 1)
-            })
+            foreach (
+                var input in new (Version v1, Version v2, int expectedSign)[]
+                {
+                    (null, null, 0),
+                    (new Version(1, 2), null, 1),
+                    (new Version(1, 2), new Version(1, 2), 0),
+                    (new Version(1, 2), new Version(1, 3), -1),
+                    (new Version(1, 2), new Version(1, 1), 1),
+                    (new Version(1, 2), new Version(2, 0), -1),
+                    (new Version(1, 2), new Version(1, 2, 1), -1),
+                    (new Version(1, 2), new Version(1, 2, 0, 1), -1),
+                    (new Version(1, 2), new Version(1, 0), 1),
+                    (new Version(1, 2), new Version(1, 0, 1), 1),
+                    (new Version(1, 2), new Version(1, 0, 0, 1), 1),
+                    (new Version(3, 2, 1), null, 1),
+                    (new Version(3, 2, 1), new Version(2, 2, 1), 1),
+                    (new Version(3, 2, 1), new Version(3, 1, 1), 1),
+                    (new Version(3, 2, 1), new Version(3, 2, 0), 1),
+                    (new Version(1, 2, 3, 4), null, 1),
+                    (new Version(1, 2, 3, 4), new Version(1, 2, 3, 4), 0),
+                    (new Version(1, 2, 3, 4), new Version(1, 2, 3, 5), -1),
+                    (new Version(1, 2, 3, 4), new Version(1, 2, 3, 3), 1),
+                }
+            )
             {
                 yield return new object[] { input.v1, input.v2, input.expectedSign };
                 yield return new object[] { input.v2, input.v1, input.expectedSign * -1 };
@@ -141,7 +170,11 @@ namespace System.Tests
         [ActiveIssue("https://github.com/dotnet/coreclr/pull/23898")]
         [Theory]
         [MemberData(nameof(Comparison_TestData))]
-        public void ComparisonOperators_ReturnExpected(Version version1, Version version2, int expectedSign)
+        public void ComparisonOperators_ReturnExpected(
+            Version version1,
+            Version version2,
+            int expectedSign
+        )
         {
             if (expectedSign < 0)
             {
@@ -179,7 +212,10 @@ namespace System.Tests
         {
             var version = new Version(1, 1);
             AssertExtensions.Throws<ArgumentException>("version", () => version.CompareTo(other));
-            AssertExtensions.Throws<ArgumentException>("version", () => ((IComparable)version).CompareTo(other));
+            AssertExtensions.Throws<ArgumentException>(
+                "version",
+                () => ((IComparable)version).CompareTo(other)
+            );
         }
 
         public static IEnumerable<object[]> Equals_TestData()
@@ -298,7 +334,12 @@ namespace System.Tests
 
         [Theory]
         [MemberData(nameof(Parse_ValidWithOffsetCount_TestData))]
-        public static void Parse_Span_ValidInput_ReturnsExpected(string input, int offset, int count, Version expected)
+        public static void Parse_Span_ValidInput_ReturnsExpected(
+            string input,
+            int offset,
+            int count,
+            Version expected
+        )
         {
             if (input == null)
             {
@@ -329,8 +370,16 @@ namespace System.Tests
         public static IEnumerable<object[]> ToString_TestData()
         {
             yield return new object[] { new Version(1, 2), new string[] { "", "1", "1.2" } };
-            yield return new object[] { new Version(1, 2, 3), new string[] { "", "1", "1.2", "1.2.3" } };
-            yield return new object[] { new Version(1, 2, 3, 4), new string[] { "", "1", "1.2", "1.2.3", "1.2.3.4" } };
+            yield return new object[]
+            {
+                new Version(1, 2, 3),
+                new string[] { "", "1", "1.2", "1.2.3" },
+            };
+            yield return new object[]
+            {
+                new Version(1, 2, 3, 4),
+                new string[] { "", "1", "1.2", "1.2.3", "1.2.3.4" },
+            };
         }
 
         [Theory]
@@ -346,10 +395,19 @@ namespace System.Tests
             Assert.Equal(expected[maxFieldCount], version.ToString());
 
             AssertExtensions.Throws<ArgumentException>("fieldCount", () => version.ToString(-1)); // Index < 0
-            AssertExtensions.Throws<ArgumentException>("fieldCount", () => version.ToString(maxFieldCount + 1)); // Index > version.fieldCount
+            AssertExtensions.Throws<ArgumentException>(
+                "fieldCount",
+                () => version.ToString(maxFieldCount + 1)
+            ); // Index > version.fieldCount
         }
 
-        private static void VerifyVersion(Version version, int major, int minor, int build, int revision)
+        private static void VerifyVersion(
+            Version version,
+            int major,
+            int minor,
+            int build,
+            int revision
+        )
         {
             Assert.Equal(major, version.Major);
             Assert.Equal(minor, version.Minor);
@@ -404,11 +462,20 @@ namespace System.Tests
                 dest = new byte[Encoding.UTF8.GetByteCount(expected[maxFieldCount])];
                 Assert.True(version.TryFormat(dest, out bytesWritten));
                 Assert.Equal(dest.Length, bytesWritten);
-                Assert.Equal(Encoding.UTF8.GetBytes(expected[maxFieldCount]), dest.AsSpan(0, bytesWritten).ToArray());
+                Assert.Equal(
+                    Encoding.UTF8.GetBytes(expected[maxFieldCount]),
+                    dest.AsSpan(0, bytesWritten).ToArray()
+                );
 
                 dest = new byte[0];
-                AssertExtensions.Throws<ArgumentException>("fieldCount", () => version.TryFormat(dest, -1, out bytesWritten)); // Index < 0
-                AssertExtensions.Throws<ArgumentException>("fieldCount", () => version.TryFormat(dest, maxFieldCount + 1, out bytesWritten)); // Index > version.fieldCount
+                AssertExtensions.Throws<ArgumentException>(
+                    "fieldCount",
+                    () => version.TryFormat(dest, -1, out bytesWritten)
+                ); // Index < 0
+                AssertExtensions.Throws<ArgumentException>(
+                    "fieldCount",
+                    () => version.TryFormat(dest, maxFieldCount + 1, out bytesWritten)
+                ); // Index > version.fieldCount
             }
         }
     }

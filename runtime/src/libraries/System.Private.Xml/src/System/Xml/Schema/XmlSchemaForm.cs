@@ -16,11 +16,13 @@ namespace System.Xml.Schema
         /// </devdoc>
         [XmlIgnore]
         None,
+
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
         [XmlEnum("qualified")]
         Qualified,
+
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>

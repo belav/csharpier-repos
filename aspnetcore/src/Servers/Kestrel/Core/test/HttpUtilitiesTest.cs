@@ -275,14 +275,13 @@ public class HttpUtilitiesTest
     private void ExceptionThrownForCRLF(Func<string, Encoding> selector)
     {
         byte[] encodedBytes = { 0x01, 0x0A, 0x0D };
-        Assert.Throws<InvalidOperationException>(
-            () =>
-                HttpUtilities.GetRequestHeaderString(
-                    encodedBytes.AsSpan(),
-                    HeaderNames.Accept,
-                    selector,
-                    checkForNewlineChars: true
-                )
+        Assert.Throws<InvalidOperationException>(() =>
+            HttpUtilities.GetRequestHeaderString(
+                encodedBytes.AsSpan(),
+                HeaderNames.Accept,
+                selector,
+                checkForNewlineChars: true
+            )
         );
     }
 

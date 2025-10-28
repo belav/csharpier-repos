@@ -18,12 +18,19 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.Editor.CSharp.RawStringLiteral
 {
-    internal partial class RawStringLiteralCommandHandler : IChainedCommandHandler<TypeCharCommandArgs>
+    internal partial class RawStringLiteralCommandHandler
+        : IChainedCommandHandler<TypeCharCommandArgs>
     {
-        public CommandState GetCommandState(TypeCharCommandArgs args, Func<CommandState> nextCommandHandler)
-            => nextCommandHandler();
+        public CommandState GetCommandState(
+            TypeCharCommandArgs args,
+            Func<CommandState> nextCommandHandler
+        ) => nextCommandHandler();
 
-        public void ExecuteCommand(TypeCharCommandArgs args, Action nextCommandHandler, CommandExecutionContext context)
+        public void ExecuteCommand(
+            TypeCharCommandArgs args,
+            Action nextCommandHandler,
+            CommandExecutionContext context
+        )
         {
             if (!ExecuteCommandWorker(args, nextCommandHandler))
                 nextCommandHandler();
@@ -51,9 +58,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.RawStringLiteral
 
             var cancellationToken = CancellationToken.None;
             var textChangeOpt =
-                TryGenerateInitialEmptyRawString(caret.Value, cancellationToken) ??
-                TryGrowInitialEmptyRawString(caret.Value, cancellationToken) ??
-                TryGrowRawStringDelimeters(caret.Value, cancellationToken);
+                TryGenerateInitialEmptyRawString(caret.Value, cancellationToken)
+                ?? TryGrowInitialEmptyRawString(caret.Value, cancellationToken)
+                ?? TryGrowRawStringDelimeters(caret.Value, cancellationToken);
 
             if (textChangeOpt is not TextChange textChange)
                 return false;
@@ -63,14 +70,20 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.RawStringLiteral
             nextCommandHandler();
 
             using var transaction = CaretPreservingEditTransaction.TryCreate(
-                CSharpEditorResources.Grow_raw_string, textView, _undoHistoryRegistry, _editorOperationsFactoryService);
+                CSharpEditorResources.Grow_raw_string,
+                textView,
+                _undoHistoryRegistry,
+                _editorOperationsFactoryService
+            );
 
             var edit = subjectBuffer.CreateEdit();
             edit.Insert(textChange.Span.Start, textChange.NewText);
             edit.Apply();
 
             // ensure the caret is placed after where the original quote got added.
-            textView.Caret.MoveTo(new SnapshotPoint(subjectBuffer.CurrentSnapshot, caret.Value.Position + 1));
+            textView.Caret.MoveTo(
+                new SnapshotPoint(subjectBuffer.CurrentSnapshot, caret.Value.Position + 1)
+            );
 
             transaction?.Complete();
             return true;
@@ -82,7 +95,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.RawStringLiteral
         /// </summary>
         private static TextChange? TryGenerateInitialEmptyRawString(
             SnapshotPoint caret,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
             var snapshot = caret.Snapshot;
             var position = caret.Position;
@@ -115,7 +129,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.RawStringLiteral
             if (token.SpanStart != start)
                 return null;
 
-            if (token.Kind() is not (SyntaxKind.StringLiteralToken or SyntaxKind.InterpolatedStringStartToken or SyntaxKind.InterpolatedSingleLineRawStringStartToken))
+            if (
+                token.Kind()
+                is not (
+                    SyntaxKind.StringLiteralToken
+                    or SyntaxKind.InterpolatedStringStartToken
+                    or SyntaxKind.InterpolatedSingleLineRawStringStartToken
+                )
+            )
                 return null;
 
             return new TextChange(new TextSpan(position + 1, 0), "\"\"\"");
@@ -129,7 +150,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.RawStringLiteral
         /// </summary>
         private static TextChange? TryGrowInitialEmptyRawString(
             SnapshotPoint caret,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
             var snapshot = caret.Snapshot;
             var position = caret.Position;
@@ -167,10 +189,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.RawStringLiteral
             if (token.SpanStart != start)
                 return null;
 
-            if (token.Kind() is not (SyntaxKind.SingleLineRawStringLiteralToken or
-                                     SyntaxKind.MultiLineRawStringLiteralToken or
-                                     SyntaxKind.InterpolatedSingleLineRawStringStartToken or
-                                     SyntaxKind.InterpolatedMultiLineRawStringStartToken))
+            if (
+                token.Kind()
+                is not (
+                    SyntaxKind.SingleLineRawStringLiteralToken
+                    or SyntaxKind.MultiLineRawStringLiteralToken
+                    or SyntaxKind.InterpolatedSingleLineRawStringStartToken
+                    or SyntaxKind.InterpolatedMultiLineRawStringStartToken
+                )
+            )
             {
                 return null;
             }
@@ -185,7 +212,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.RawStringLiteral
         /// </summary>
         private static TextChange? TryGrowRawStringDelimeters(
             SnapshotPoint caret,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
             var snapshot = caret.Snapshot;
             var position = caret.Position;
@@ -219,14 +247,23 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.RawStringLiteral
             if (token.Span.Length < (2 * quoteCount))
                 return null;
 
-            if (token.Kind() is SyntaxKind.InterpolatedSingleLineRawStringStartToken or SyntaxKind.InterpolatedMultiLineRawStringStartToken)
+            if (
+                token.Kind()
+                is SyntaxKind.InterpolatedSingleLineRawStringStartToken
+                    or SyntaxKind.InterpolatedMultiLineRawStringStartToken
+            )
             {
-                var interpolatedString = (InterpolatedStringExpressionSyntax)token.GetRequiredParent();
+                var interpolatedString = (InterpolatedStringExpressionSyntax)
+                    token.GetRequiredParent();
                 var endToken = interpolatedString.StringEndToken;
                 if (!endToken.Text.EndsWith(new string('"', quoteCount)))
                     return null;
             }
-            else if (token.Kind() is SyntaxKind.SingleLineRawStringLiteralToken or SyntaxKind.MultiLineRawStringLiteralToken)
+            else if (
+                token.Kind()
+                is SyntaxKind.SingleLineRawStringLiteralToken
+                    or SyntaxKind.MultiLineRawStringLiteralToken
+            )
             {
                 if (!token.Text.EndsWith(new string('"', quoteCount)))
                     return null;

@@ -14,6 +14,9 @@ namespace Microsoft.CodeAnalysis.SpellCheck
     /// </summary>
     internal interface ISpellCheckSpanService : ILanguageService
     {
-        Task<ImmutableArray<SpellCheckSpan>> GetSpansAsync(Document document, CancellationToken cancellationToken);
+        Task<ImmutableArray<SpellCheckSpan>> GetSpansAsync(
+            Document document,
+            CancellationToken cancellationToken
+        );
     }
 }

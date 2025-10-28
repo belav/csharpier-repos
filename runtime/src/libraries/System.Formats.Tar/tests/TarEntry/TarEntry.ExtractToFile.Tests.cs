@@ -16,13 +16,19 @@ namespace System.Formats.Tar.Tests
         [InlineData(TarEntryFormat.Ustar)]
         [InlineData(TarEntryFormat.Pax)]
         [InlineData(TarEntryFormat.Gnu)]
-        public void Constructor_Name_FullPath_DestinationDirectory_Mismatch_Throws(TarEntryFormat format)
+        public void Constructor_Name_FullPath_DestinationDirectory_Mismatch_Throws(
+            TarEntryFormat format
+        )
         {
             using TempDirectory root = new TempDirectory();
 
             string fullPath = Path.Join(Path.GetPathRoot(root.Path), "dir", "file.txt");
 
-            TarEntry entry = InvokeTarEntryCreationConstructor(format, GetTarEntryTypeForTarEntryFormat(TarEntryType.RegularFile, format), fullPath);
+            TarEntry entry = InvokeTarEntryCreationConstructor(
+                format,
+                GetTarEntryTypeForTarEntryFormat(TarEntryType.RegularFile, format),
+                fullPath
+            );
 
             entry.DataStream = new MemoryStream();
             entry.DataStream.Write(new byte[] { 0x1 });
@@ -38,13 +44,19 @@ namespace System.Formats.Tar.Tests
         [InlineData(TarEntryFormat.Ustar)]
         [InlineData(TarEntryFormat.Pax)]
         [InlineData(TarEntryFormat.Gnu)]
-        public void Constructor_Name_FullPath_DestinationDirectory_Match_AdditionalSubdirectory_Throws(TarEntryFormat format)
+        public void Constructor_Name_FullPath_DestinationDirectory_Match_AdditionalSubdirectory_Throws(
+            TarEntryFormat format
+        )
         {
             using TempDirectory root = new TempDirectory();
 
             string fullPath = Path.Join(root.Path, "dir", "file.txt");
 
-            TarEntry entry = InvokeTarEntryCreationConstructor(format, GetTarEntryTypeForTarEntryFormat(TarEntryType.RegularFile, format), fullPath);
+            TarEntry entry = InvokeTarEntryCreationConstructor(
+                format,
+                GetTarEntryTypeForTarEntryFormat(TarEntryType.RegularFile, format),
+                fullPath
+            );
 
             entry.DataStream = new MemoryStream();
             entry.DataStream.Write(new byte[] { 0x1 });
@@ -66,7 +78,11 @@ namespace System.Formats.Tar.Tests
 
             string fullPath = Path.Join(root.Path, "file.txt");
 
-            TarEntry entry = InvokeTarEntryCreationConstructor(format, GetTarEntryTypeForTarEntryFormat(TarEntryType.RegularFile, format), fullPath);
+            TarEntry entry = InvokeTarEntryCreationConstructor(
+                format,
+                GetTarEntryTypeForTarEntryFormat(TarEntryType.RegularFile, format),
+                fullPath
+            );
 
             entry.DataStream = new MemoryStream();
             entry.DataStream.Write(new byte[] { 0x1 });
@@ -85,12 +101,16 @@ namespace System.Formats.Tar.Tests
             string fileName = "mylink";
             string fullPath = Path.Join(root.Path, fileName);
 
-            string linkTarget = PlatformDetection.IsWindows ? @"C:\Windows\system32\notepad.exe" : "/usr/bin/nano";
+            string linkTarget = PlatformDetection.IsWindows
+                ? @"C:\Windows\system32\notepad.exe"
+                : "/usr/bin/nano";
 
             TarEntry entry = InvokeTarEntryCreationConstructor(format, entryType, fileName);
             entry.LinkName = linkTarget;
 
-            Assert.Throws<InvalidOperationException>(() => entry.ExtractToFile(fileName, overwrite: false));
+            Assert.Throws<InvalidOperationException>(() =>
+                entry.ExtractToFile(fileName, overwrite: false)
+            );
 
             Assert.Equal(0, Directory.GetFileSystemEntries(root.Path).Count());
         }
@@ -101,7 +121,11 @@ namespace System.Formats.Tar.Tests
         {
             using TempDirectory root = new TempDirectory();
 
-            (string entryName, string destination, TarEntry entry) = Prepare_Extract(root, format, entryType);
+            (string entryName, string destination, TarEntry entry) = Prepare_Extract(
+                root,
+                format,
+                entryType
+            );
 
             entry.ExtractToFile(destination, overwrite: true);
 

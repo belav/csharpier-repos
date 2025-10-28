@@ -14,13 +14,32 @@ namespace Internal.Cryptography
         private static SafeAlgorithmHandle? s_aesGcm;
         private static SafeAlgorithmHandle? s_chaCha20Poly1305;
 
-        internal static SafeAlgorithmHandle AesCcm => GetCachedAlgorithmHandle(ref s_aesCcm, Cng.BCRYPT_AES_ALGORITHM, Cng.BCRYPT_CHAIN_MODE_CCM);
-        internal static SafeAlgorithmHandle AesGcm => GetCachedAlgorithmHandle(ref s_aesGcm, Cng.BCRYPT_AES_ALGORITHM, Cng.BCRYPT_CHAIN_MODE_GCM);
+        internal static SafeAlgorithmHandle AesCcm =>
+            GetCachedAlgorithmHandle(
+                ref s_aesCcm,
+                Cng.BCRYPT_AES_ALGORITHM,
+                Cng.BCRYPT_CHAIN_MODE_CCM
+            );
+        internal static SafeAlgorithmHandle AesGcm =>
+            GetCachedAlgorithmHandle(
+                ref s_aesGcm,
+                Cng.BCRYPT_AES_ALGORITHM,
+                Cng.BCRYPT_CHAIN_MODE_GCM
+            );
 
-        internal static bool IsChaCha20Poly1305Supported { get; } = OperatingSystem.IsWindowsVersionAtLeast(10, 0, 20142);
-        internal static SafeAlgorithmHandle ChaCha20Poly1305 => GetCachedAlgorithmHandle(ref s_chaCha20Poly1305, Cng.BCRYPT_CHACHA20_POLY1305_ALGORITHM);
+        internal static bool IsChaCha20Poly1305Supported { get; } =
+            OperatingSystem.IsWindowsVersionAtLeast(10, 0, 20142);
+        internal static SafeAlgorithmHandle ChaCha20Poly1305 =>
+            GetCachedAlgorithmHandle(
+                ref s_chaCha20Poly1305,
+                Cng.BCRYPT_CHACHA20_POLY1305_ALGORITHM
+            );
 
-        private static SafeAlgorithmHandle GetCachedAlgorithmHandle(ref SafeAlgorithmHandle? handle, string algId, string? chainingMode = null)
+        private static SafeAlgorithmHandle GetCachedAlgorithmHandle(
+            ref SafeAlgorithmHandle? handle,
+            string algId,
+            string? chainingMode = null
+        )
         {
             // Do we already have a handle to this algorithm?
             SafeAlgorithmHandle? existingHandle = Volatile.Read(ref handle);
@@ -31,7 +50,11 @@ namespace Internal.Cryptography
 
             // No cached handle exists; create a new handle. It's ok if multiple threads call
             // this concurrently. Only one handle will "win" and the rest will be destroyed.
-            SafeAlgorithmHandle newHandle = Cng.BCryptOpenAlgorithmProvider(algId, null, Cng.OpenAlgorithmProviderFlags.NONE);
+            SafeAlgorithmHandle newHandle = Cng.BCryptOpenAlgorithmProvider(
+                algId,
+                null,
+                Cng.OpenAlgorithmProviderFlags.NONE
+            );
             if (chainingMode != null)
             {
                 newHandle.SetCipherMode(chainingMode);

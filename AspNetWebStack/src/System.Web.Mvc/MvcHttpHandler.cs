@@ -11,13 +11,21 @@ namespace System.Web.Mvc
     {
         private static readonly object _processRequestTag = new object();
 
-        protected virtual IAsyncResult BeginProcessRequest(HttpContext httpContext, AsyncCallback callback, object state)
+        protected virtual IAsyncResult BeginProcessRequest(
+            HttpContext httpContext,
+            AsyncCallback callback,
+            object state
+        )
         {
             HttpContextBase httpContextBase = new HttpContextWrapper(httpContext);
             return BeginProcessRequest(httpContextBase, callback, state);
         }
 
-        protected internal virtual IAsyncResult BeginProcessRequest(HttpContextBase httpContext, AsyncCallback callback, object state)
+        protected internal virtual IAsyncResult BeginProcessRequest(
+            HttpContextBase httpContext,
+            AsyncCallback callback,
+            object state
+        )
         {
             IHttpHandler httpHandler = GetHttpHandler(httpContext);
             IHttpAsyncHandler httpAsyncHandler = httpHandler as IHttpAsyncHandler;
@@ -27,15 +35,33 @@ namespace System.Web.Mvc
                 // asynchronous handler
 
                 // Ensure delegates continue to use the C# Compiler static delegate caching optimization.
-                BeginInvokeDelegate<IHttpAsyncHandler> beginDelegate = delegate(AsyncCallback asyncCallback, object asyncState, IHttpAsyncHandler innerHandler)
+                BeginInvokeDelegate<IHttpAsyncHandler> beginDelegate = delegate(
+                    AsyncCallback asyncCallback,
+                    object asyncState,
+                    IHttpAsyncHandler innerHandler
+                )
                 {
-                    return innerHandler.BeginProcessRequest(HttpContext.Current, asyncCallback, asyncState);
+                    return innerHandler.BeginProcessRequest(
+                        HttpContext.Current,
+                        asyncCallback,
+                        asyncState
+                    );
                 };
-                EndInvokeVoidDelegate<IHttpAsyncHandler> endDelegate = delegate(IAsyncResult asyncResult, IHttpAsyncHandler innerHandler)
+                EndInvokeVoidDelegate<IHttpAsyncHandler> endDelegate = delegate(
+                    IAsyncResult asyncResult,
+                    IHttpAsyncHandler innerHandler
+                )
                 {
                     innerHandler.EndProcessRequest(asyncResult);
                 };
-                return AsyncResultWrapper.Begin(callback, state, beginDelegate, endDelegate, httpAsyncHandler, _processRequestTag);
+                return AsyncResultWrapper.Begin(
+                    callback,
+                    state,
+                    beginDelegate,
+                    endDelegate,
+                    httpAsyncHandler,
+                    _processRequestTag
+                );
             }
             else
             {
@@ -44,7 +70,12 @@ namespace System.Web.Mvc
                 {
                     httpHandler.ProcessRequest(HttpContext.Current);
                 };
-                return AsyncResultWrapper.BeginSynchronous(callback, state, action, _processRequestTag);
+                return AsyncResultWrapper.BeginSynchronous(
+                    callback,
+                    state,
+                    action,
+                    _processRequestTag
+                );
             }
         }
 
@@ -61,7 +92,10 @@ namespace System.Web.Mvc
         }
 
         // synchronous code
-        protected override void VerifyAndProcessRequest(IHttpHandler httpHandler, HttpContextBase httpContext)
+        protected override void VerifyAndProcessRequest(
+            IHttpHandler httpHandler,
+            HttpContextBase httpContext
+        )
         {
             if (httpHandler == null)
             {
@@ -73,7 +107,11 @@ namespace System.Web.Mvc
 
         #region IHttpAsyncHandler Members
 
-        IAsyncResult IHttpAsyncHandler.BeginProcessRequest(HttpContext context, AsyncCallback cb, object extraData)
+        IAsyncResult IHttpAsyncHandler.BeginProcessRequest(
+            HttpContext context,
+            AsyncCallback cb,
+            object extraData
+        )
         {
             return BeginProcessRequest(context, cb, extraData);
         }
@@ -100,7 +138,10 @@ namespace System.Web.Mvc
                 ProcessRequest(httpContext);
             }
 
-            protected override void VerifyAndProcessRequest(IHttpHandler httpHandler, HttpContextBase httpContext)
+            protected override void VerifyAndProcessRequest(
+                IHttpHandler httpHandler,
+                HttpContextBase httpContext
+            )
             {
                 // don't process the request, just store a reference to it
                 HttpHandler = httpHandler;

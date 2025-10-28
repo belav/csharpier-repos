@@ -19,7 +19,7 @@ namespace Microsoft.Web.Mvc.ModelBinding.Test
             ExtensibleModelBindingContext bindingContext = GetBindingContext(typeof(int));
             bindingContext.ValueProvider = new SimpleValueProvider
             {
-                { "theModelName", "not an integer" }
+                { "theModelName", "not an integer" },
             };
 
             TypeConverterModelBinder binder = new TypeConverterModelBinder();
@@ -29,7 +29,10 @@ namespace Microsoft.Web.Mvc.ModelBinding.Test
 
             // Assert
             Assert.False(retVal);
-            Assert.Equal("The value 'not an integer' is not valid for Int32.", bindingContext.ModelState["theModelName"].Errors[0].ErrorMessage);
+            Assert.Equal(
+                "The value 'not an integer' is not valid for Int32.",
+                bindingContext.ModelState["theModelName"].Errors[0].ErrorMessage
+            );
         }
 
         [Fact]
@@ -39,17 +42,21 @@ namespace Microsoft.Web.Mvc.ModelBinding.Test
             ExtensibleModelBindingContext bindingContext = GetBindingContext(typeof(int));
             bindingContext.ValueProvider = new SimpleValueProvider
             {
-                { "theModelName", "not an integer" }
+                { "theModelName", "not an integer" },
             };
 
             TypeConverterModelBinder binder = new TypeConverterModelBinder();
 
             // Act
-            ModelBinderErrorMessageProvider originalProvider = ModelBinderConfig.TypeConversionErrorMessageProvider;
+            ModelBinderErrorMessageProvider originalProvider =
+                ModelBinderConfig.TypeConversionErrorMessageProvider;
             bool retVal;
             try
             {
-                ModelBinderConfig.TypeConversionErrorMessageProvider = delegate { return null; };
+                ModelBinderConfig.TypeConversionErrorMessageProvider = delegate
+                {
+                    return null;
+                };
                 retVal = binder.BindModel(null, bindingContext);
             }
             finally
@@ -68,10 +75,7 @@ namespace Microsoft.Web.Mvc.ModelBinding.Test
         {
             // Arrange
             ExtensibleModelBindingContext bindingContext = GetBindingContext(typeof(Dummy));
-            bindingContext.ValueProvider = new SimpleValueProvider
-            {
-                { "theModelName", "foo" }
-            };
+            bindingContext.ValueProvider = new SimpleValueProvider { { "theModelName", "foo" } };
 
             TypeConverterModelBinder binder = new TypeConverterModelBinder();
 
@@ -81,8 +85,14 @@ namespace Microsoft.Web.Mvc.ModelBinding.Test
             // Assert
             Assert.False(retVal);
             Assert.Null(bindingContext.Model);
-            Assert.Equal("The parameter conversion from type 'System.String' to type 'Microsoft.Web.Mvc.ModelBinding.Test.TypeConverterModelBinderTest+Dummy' failed. See the inner exception for more information.", bindingContext.ModelState["theModelName"].Errors[0].Exception.Message);
-            Assert.Equal("From DummyTypeConverter: foo", bindingContext.ModelState["theModelName"].Errors[0].Exception.InnerException.Message);
+            Assert.Equal(
+                "The parameter conversion from type 'System.String' to type 'Microsoft.Web.Mvc.ModelBinding.Test.TypeConverterModelBinderTest+Dummy' failed. See the inner exception for more information.",
+                bindingContext.ModelState["theModelName"].Errors[0].Exception.Message
+            );
+            Assert.Equal(
+                "From DummyTypeConverter: foo",
+                bindingContext.ModelState["theModelName"].Errors[0].Exception.InnerException.Message
+            );
         }
 
         [Fact]
@@ -106,10 +116,7 @@ namespace Microsoft.Web.Mvc.ModelBinding.Test
         {
             // Arrange
             ExtensibleModelBindingContext bindingContext = GetBindingContext(typeof(string));
-            bindingContext.ValueProvider = new SimpleValueProvider
-            {
-                { "theModelName", "" }
-            };
+            bindingContext.ValueProvider = new SimpleValueProvider { { "theModelName", "" } };
 
             TypeConverterModelBinder binder = new TypeConverterModelBinder();
 
@@ -127,10 +134,7 @@ namespace Microsoft.Web.Mvc.ModelBinding.Test
         {
             // Arrange
             ExtensibleModelBindingContext bindingContext = GetBindingContext(typeof(int));
-            bindingContext.ValueProvider = new SimpleValueProvider
-            {
-                { "theModelName", "42" }
-            };
+            bindingContext.ValueProvider = new SimpleValueProvider { { "theModelName", "42" } };
 
             TypeConverterModelBinder binder = new TypeConverterModelBinder();
 
@@ -147,16 +151,17 @@ namespace Microsoft.Web.Mvc.ModelBinding.Test
         {
             return new ExtensibleModelBindingContext
             {
-                ModelMetadata = new EmptyModelMetadataProvider().GetMetadataForType(null, modelType),
+                ModelMetadata = new EmptyModelMetadataProvider().GetMetadataForType(
+                    null,
+                    modelType
+                ),
                 ModelName = "theModelName",
-                ValueProvider = new SimpleValueProvider() // empty
+                ValueProvider = new SimpleValueProvider(), // empty
             };
         }
 
         [TypeConverter(typeof(DummyTypeConverter))]
-        private struct Dummy
-        {
-        }
+        private struct Dummy { }
 
         private sealed class DummyTypeConverter : TypeConverter
         {
@@ -165,9 +170,15 @@ namespace Microsoft.Web.Mvc.ModelBinding.Test
                 return (sourceType == typeof(string)) || base.CanConvertFrom(context, sourceType);
             }
 
-            public override object ConvertFrom(ITypeDescriptorContext context, CultureInfo culture, object value)
+            public override object ConvertFrom(
+                ITypeDescriptorContext context,
+                CultureInfo culture,
+                object value
+            )
             {
-                throw new InvalidOperationException(String.Format("From DummyTypeConverter: {0}", value));
+                throw new InvalidOperationException(
+                    String.Format("From DummyTypeConverter: {0}", value)
+                );
             }
         }
     }

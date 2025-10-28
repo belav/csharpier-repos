@@ -11,10 +11,16 @@
     <SkipTests Condition="'$(TestRuntime)' == 'Mono'">true</SkipTests>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="..\..\..\EditorFeatures\CSharpTest\Diagnostics\AbstractCSharpDiagnosticProviderBasedUserDiagnosticTest.cs" Link="AbstractCSharpDiagnosticProviderBasedUserDiagnosticTest.cs" />
+    <Compile
+      Include="..\..\..\EditorFeatures\CSharpTest\Diagnostics\AbstractCSharpDiagnosticProviderBasedUserDiagnosticTest.cs"
+      Link="AbstractCSharpDiagnosticProviderBasedUserDiagnosticTest.cs"
+    />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="Microsoft.CodeAnalysis.CSharp.CodeFix.Testing.XUnit" Version="$(MicrosoftCodeAnalysisCSharpCodeFixTestingXUnitVersion)" />
+    <PackageReference
+      Include="Microsoft.CodeAnalysis.CSharp.CodeFix.Testing.XUnit"
+      Version="$(MicrosoftCodeAnalysisCSharpCodeFixTestingXUnitVersion)"
+    />
   </ItemGroup>
   <ItemGroup Label="Project References">
     <!-- Directly reference the Workspaces project so we always test against the latest Roslyn bits -->
@@ -56,5 +62,8 @@
     <ProjectReference Include="..\..\..\Compilers\Test\Core\Microsoft.CodeAnalysis.Test.Utilities.csproj" />
     <ProjectReference Include="..\..\..\Workspaces\CoreTestUtilities\Microsoft.CodeAnalysis.Workspaces.Test.Utilities.csproj" />
   </ItemGroup>
-  <Import Project="..\..\..\Analyzers\CSharp\Tests\CSharpAnalyzers.UnitTests.projitems" Label="Shared" />
+  <Import
+    Project="..\..\..\Analyzers\CSharp\Tests\CSharpAnalyzers.UnitTests.projitems"
+    Label="Shared"
+  />
 </Project>

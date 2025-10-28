@@ -10,7 +10,12 @@ namespace System.Web.Http.SelfHost.ServiceModel.Channels
     {
         private readonly string _quotaExceededString;
 
-        public BufferManagerOutputStream(string quotaExceededString, int initialSize, int maxSize, BufferManager bufferManager)
+        public BufferManagerOutputStream(
+            string quotaExceededString,
+            int initialSize,
+            int maxSize,
+            BufferManager bufferManager
+        )
             : base(initialSize, maxSize, bufferManager)
         {
             _quotaExceededString = quotaExceededString;
@@ -21,7 +26,12 @@ namespace System.Web.Http.SelfHost.ServiceModel.Channels
             Init(initialSize, maxSizeQuota, maxSizeQuota, bufferManager);
         }
 
-        public void Init(int initialSize, int maxSizeQuota, int effectiveMaxSize, BufferManager bufferManager)
+        public void Init(
+            int initialSize,
+            int maxSizeQuota,
+            int effectiveMaxSize,
+            BufferManager bufferManager
+        )
         {
             Reinitialize(initialSize, maxSizeQuota, effectiveMaxSize, bufferManager);
         }

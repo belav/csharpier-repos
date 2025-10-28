@@ -7,7 +7,11 @@ namespace System.CommandLine.NamingConventionBinder;
 
 internal class MissingValueSource : IValueSource
 {
-    public bool TryGetValue(IValueDescriptor valueDescriptor, BindingContext? bindingContext, out object? boundValue)
+    public bool TryGetValue(
+        IValueDescriptor valueDescriptor,
+        BindingContext? bindingContext,
+        out object? boundValue
+    )
     {
         boundValue = null;
         return false;

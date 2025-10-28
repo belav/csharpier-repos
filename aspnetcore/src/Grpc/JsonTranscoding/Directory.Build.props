@@ -10,6 +10,8 @@
 
     <!-- Workaround lack of Linux MUSL x64 support. -->
     <ExcludeFromBuild
-        Condition=" '$(TargetOsName)' == 'linux-musl' and '$(TargetArchitecture)' == 'x64' ">true</ExcludeFromBuild>
+      Condition=" '$(TargetOsName)' == 'linux-musl' and '$(TargetArchitecture)' == 'x64' "
+      >true</ExcludeFromBuild
+    >
   </PropertyGroup>
 </Project>

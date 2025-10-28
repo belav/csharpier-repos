@@ -11,7 +11,12 @@ namespace System
     {
         // methods
         // Parse and canonicalize
-        internal static string ParseCanonicalName(string str, int start, int end, ref bool isLoopback)
+        internal static string ParseCanonicalName(
+            string str,
+            int start,
+            int end,
+            ref bool isLoopback
+        )
         {
             unsafe
             {
@@ -19,7 +24,8 @@ namespace System
                 isLoopback = Parse(str, numbers, start, end);
 
                 Span<char> stackSpace = stackalloc char[NumberOfLabels * 3 + 3];
-                int totalChars = 0, charsWritten;
+                int totalChars = 0,
+                    charsWritten;
                 for (int i = 0; i < 3; i++)
                 {
                     numbers[i].TryFormat(stackSpace.Slice(totalChars), out charsWritten);
@@ -43,10 +49,14 @@ namespace System
             {
                 // end includes ports, so changedEnd may be different from end
                 int changedEnd = end;
-                long result = IPv4AddressHelper.ParseNonCanonical(ipString, start, ref changedEnd, true);
+                long result = IPv4AddressHelper.ParseNonCanonical(
+                    ipString,
+                    start,
+                    ref changedEnd,
+                    true
+                );
 
                 Debug.Assert(result != Invalid, $"Failed to parse after already validated: {name}");
-
                 unchecked
                 {
                     numbers[0] = (byte)(result >> 24);

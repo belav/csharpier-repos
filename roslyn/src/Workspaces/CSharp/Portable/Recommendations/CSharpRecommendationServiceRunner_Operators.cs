@@ -30,12 +30,19 @@ internal partial class CSharpRecommendationService
             {
                 foreach (var member in type.GetMembers())
                 {
-                    if (member is not IMethodSymbol { MethodKind: MethodKind.UserDefinedOperator } method)
+                    if (
+                        member
+                        is not IMethodSymbol { MethodKind: MethodKind.UserDefinedOperator } method
+                    )
                         continue;
 
                     // Don't add operator true/false.  They only are used for conversions in special boolean contexts
                     // (like `if` statement conditions), and are not invoked explicitly by the user.
-                    if (method.Name is WellKnownMemberNames.TrueOperatorName or WellKnownMemberNames.FalseOperatorName)
+                    if (
+                        method.Name
+                        is WellKnownMemberNames.TrueOperatorName
+                            or WellKnownMemberNames.FalseOperatorName
+                    )
                         continue;
 
                     // If we're on a nullable version of the type, but this operator wouldn't naturally 'lift' to be
@@ -51,8 +58,9 @@ internal partial class CSharpRecommendationService
             }
         }
 
-        private static bool ExcludeOperatorType(ITypeSymbol container)
-            => container.IsSpecialType() || container.SpecialType is SpecialType.System_IntPtr or SpecialType.System_UIntPtr;
+        private static bool ExcludeOperatorType(ITypeSymbol container) =>
+            container.IsSpecialType()
+            || container.SpecialType is SpecialType.System_IntPtr or SpecialType.System_UIntPtr;
 
         private static bool IsLiftableOperator(IMethodSymbol symbol)
         {
@@ -72,7 +80,7 @@ internal partial class CSharpRecommendationService
                     case WellKnownMemberNames.OnesComplementOperatorName:
                         return symbol.Parameters.Length == 1 && symbol.ReturnType.IsValueType;
 
-                    // Binary 
+                    // Binary
                     case WellKnownMemberNames.AdditionOperatorName:
                     case WellKnownMemberNames.SubtractionOperatorName:
                     case WellKnownMemberNames.MultiplyOperatorName:
@@ -86,14 +94,15 @@ internal partial class CSharpRecommendationService
                     case WellKnownMemberNames.UnsignedRightShiftOperatorName:
                         return symbol.Parameters.Length == 2 && symbol.ReturnType.IsValueType;
 
-                    // Equality + Relational 
+                    // Equality + Relational
                     case WellKnownMemberNames.EqualityOperatorName:
                     case WellKnownMemberNames.InequalityOperatorName:
                     case WellKnownMemberNames.LessThanOperatorName:
                     case WellKnownMemberNames.GreaterThanOperatorName:
                     case WellKnownMemberNames.LessThanOrEqualOperatorName:
                     case WellKnownMemberNames.GreaterThanOrEqualOperatorName:
-                        return symbol.Parameters.Length == 2 && symbol.ReturnType.SpecialType == SpecialType.System_Boolean;
+                        return symbol.Parameters.Length == 2
+                            && symbol.ReturnType.SpecialType == SpecialType.System_Boolean;
                 }
             }
 

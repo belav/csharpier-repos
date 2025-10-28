@@ -3,6 +3,7 @@
   Expect:       ValidURI{parent:channel,element:docs}
 -->
 
+
 <rss version="2.0">
   <channel>
     <title>Valid docs</title>

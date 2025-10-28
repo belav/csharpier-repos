@@ -16,17 +16,33 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.InProcess
 
         public string GetText()
         {
-            var vsUIShell = (IVsUIShell)ServiceProvider.GlobalProvider.GetService(typeof(SVsUIShell));
+            var vsUIShell = (IVsUIShell)
+                ServiceProvider.GlobalProvider.GetService(typeof(SVsUIShell));
             var immediateWindowGuid = VSConstants.StandardToolWindows.Immediate;
             IVsWindowFrame immediateWindowFrame;
-            ErrorHandler.ThrowOnFailure(vsUIShell.FindToolWindow((uint)__VSFINDTOOLWIN.FTW_fForceCreate, ref immediateWindowGuid, out immediateWindowFrame));
+            ErrorHandler.ThrowOnFailure(
+                vsUIShell.FindToolWindow(
+                    (uint)__VSFINDTOOLWIN.FTW_fForceCreate,
+                    ref immediateWindowGuid,
+                    out immediateWindowFrame
+                )
+            );
             ErrorHandler.ThrowOnFailure(immediateWindowFrame.Show());
-            ErrorHandler.ThrowOnFailure(immediateWindowFrame.GetProperty((int)__VSFPROPID.VSFPROPID_DocView, out var docView));
+            ErrorHandler.ThrowOnFailure(
+                immediateWindowFrame.GetProperty(
+                    (int)__VSFPROPID.VSFPROPID_DocView,
+                    out var docView
+                )
+            );
             var vsTextView = (IVsTextView)docView;
             ErrorHandler.ThrowOnFailure(vsTextView.GetBuffer(out var vsTextLines));
             ErrorHandler.ThrowOnFailure(vsTextLines.GetLineCount(out var lineCount));
-            ErrorHandler.ThrowOnFailure(vsTextLines.GetLengthOfLine(lineCount - 1, out var lastLineLength));
-            ErrorHandler.ThrowOnFailure(vsTextLines.GetLineText(0, 0, lineCount - 1, lastLineLength, out var text));
+            ErrorHandler.ThrowOnFailure(
+                vsTextLines.GetLengthOfLine(lineCount - 1, out var lastLineLength)
+            );
+            ErrorHandler.ThrowOnFailure(
+                vsTextLines.GetLineText(0, 0, lineCount - 1, lastLineLength, out var text)
+            );
             return text;
         }
 

@@ -17,7 +17,9 @@ namespace System.Data.EntityModel.SchemaObjectModel
     /// <summary>
     /// Summary description for Association.
     /// </summary>
-    [System.Diagnostics.DebuggerDisplay("Name={Name}, Relationship={_unresolvedRelationshipName}, FromRole={_unresolvedFromEndRole}, ToRole={_unresolvedToEndRole}")]
+    [System.Diagnostics.DebuggerDisplay(
+        "Name={Name}, Relationship={_unresolvedRelationshipName}, FromRole={_unresolvedFromEndRole}, ToRole={_unresolvedToEndRole}"
+    )]
     internal sealed class NavigationProperty : Property
     {
         private string _unresolvedFromEndRole = null;
@@ -28,23 +30,18 @@ namespace System.Data.EntityModel.SchemaObjectModel
         private IRelationship _relationship = null;
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="parent"></param>
         public NavigationProperty(SchemaEntityType parent)
-            : base(parent)
-        {
-        }
+            : base(parent) { }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         public new SchemaEntityType ParentElement
         {
-            get
-            {
-                return base.ParentElement as SchemaEntityType;
-            }
+            get { return base.ParentElement as SchemaEntityType; }
         }
 
         internal IRelationship Relationship
@@ -109,7 +106,7 @@ namespace System.Data.EntityModel.SchemaObjectModel
         }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         internal override void ResolveTopLevelNames()
         {
@@ -122,49 +119,79 @@ namespace System.Data.EntityModel.SchemaObjectModel
             _relationship = element as IRelationship;
             if (_relationship == null)
             {
-                AddError(ErrorCode.BadNavigationProperty, EdmSchemaErrorSeverity.Error,
-                    System.Data.Entity.Strings.BadNavigationPropertyRelationshipNotRelationship(_unresolvedRelationshipName));
+                AddError(
+                    ErrorCode.BadNavigationProperty,
+                    EdmSchemaErrorSeverity.Error,
+                    System.Data.Entity.Strings.BadNavigationPropertyRelationshipNotRelationship(
+                        _unresolvedRelationshipName
+                    )
+                );
                 return;
             }
 
             bool foundBothEnds = true;
             if (!_relationship.TryGetEnd(_unresolvedFromEndRole, out _fromEnd))
             {
-                AddError(ErrorCode.BadNavigationProperty, EdmSchemaErrorSeverity.Error,
-                    System.Data.Entity.Strings.BadNavigationPropertyUndefinedRole(_unresolvedFromEndRole, _relationship.FQName));
+                AddError(
+                    ErrorCode.BadNavigationProperty,
+                    EdmSchemaErrorSeverity.Error,
+                    System.Data.Entity.Strings.BadNavigationPropertyUndefinedRole(
+                        _unresolvedFromEndRole,
+                        _relationship.FQName
+                    )
+                );
                 foundBothEnds = false;
             }
 
             if (!_relationship.TryGetEnd(_unresolvedToEndRole, out _toEnd))
             {
-                AddError(ErrorCode.BadNavigationProperty, EdmSchemaErrorSeverity.Error,
-                    System.Data.Entity.Strings.BadNavigationPropertyUndefinedRole(_unresolvedToEndRole, _relationship.FQName));
+                AddError(
+                    ErrorCode.BadNavigationProperty,
+                    EdmSchemaErrorSeverity.Error,
+                    System.Data.Entity.Strings.BadNavigationPropertyUndefinedRole(
+                        _unresolvedToEndRole,
+                        _relationship.FQName
+                    )
+                );
 
                 foundBothEnds = false;
             }
 
             if (foundBothEnds && _fromEnd == _toEnd)
             {
-                AddError(ErrorCode.BadNavigationProperty, EdmSchemaErrorSeverity.Error,
-                    System.Data.Entity.Strings.BadNavigationPropertyRolesCannotBeTheSame);
+                AddError(
+                    ErrorCode.BadNavigationProperty,
+                    EdmSchemaErrorSeverity.Error,
+                    System.Data.Entity.Strings.BadNavigationPropertyRolesCannotBeTheSame
+                );
             }
         }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         internal override void Validate()
         {
             base.Validate();
 
-            System.Diagnostics.Debug.Assert(_fromEnd != null && _toEnd != null, 
-                "FromEnd and ToEnd must not be null in Validate. ResolveNames must have resolved it or added error");
+            System.Diagnostics.Debug.Assert(
+                _fromEnd != null && _toEnd != null,
+                "FromEnd and ToEnd must not be null in Validate. ResolveNames must have resolved it or added error"
+            );
 
             if (_fromEnd.Type != ParentElement)
             {
-                AddError(ErrorCode.BadNavigationProperty, EdmSchemaErrorSeverity.Error,
-                    System.Data.Entity.Strings.BadNavigationPropertyBadFromRoleType(this.Name,
-                    _fromEnd.Type.FQName, _fromEnd.Name, _relationship.FQName, ParentElement.FQName));
+                AddError(
+                    ErrorCode.BadNavigationProperty,
+                    EdmSchemaErrorSeverity.Error,
+                    System.Data.Entity.Strings.BadNavigationPropertyBadFromRoleType(
+                        this.Name,
+                        _fromEnd.Type.FQName,
+                        _fromEnd.Name,
+                        _relationship.FQName,
+                        ParentElement.FQName
+                    )
+                );
             }
 
             StructuredType type = _toEnd.Type;
@@ -172,28 +199,33 @@ namespace System.Data.EntityModel.SchemaObjectModel
 
         #region Private Methods
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="reader"></param>
         private void HandleToRoleAttribute(XmlReader reader)
         {
             _unresolvedToEndRole = HandleUndottedNameAttribute(reader, _unresolvedToEndRole);
         }
+
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="reader"></param>
         private void HandleFromRoleAttribute(XmlReader reader)
         {
             _unresolvedFromEndRole = HandleUndottedNameAttribute(reader, _unresolvedFromEndRole);
         }
+
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="reader"></param>
         private void HandleAssociationAttribute(XmlReader reader)
         {
-            Debug.Assert(_unresolvedRelationshipName == null, string.Format(CultureInfo.CurrentCulture, "{0} is already defined", reader.Name));
+            Debug.Assert(
+                _unresolvedRelationshipName == null,
+                string.Format(CultureInfo.CurrentCulture, "{0} is already defined", reader.Name)
+            );
 
             string association;
             if (!Utils.GetDottedName(this.Schema, reader, out association))

@@ -3,11 +3,11 @@ Description:  link with a "rel" which matches isegment-nz-nc but is not in the I
 Expect:       UnregisteredAtomLinkRel{value:service.post,element:link,parent:feed}
 -->
 
-<feed xmlns="http://www.w3.org/2005/Atom">
 
+<feed xmlns="http://www.w3.org/2005/Atom">
   <title>Example Feed</title>
-  <link href="http://contoso.com/"/>
-  <link rel="service.post" href="http://contoso.com/atom.cgi"/>
+  <link href="http://contoso.com/" />
+  <link rel="service.post" href="http://contoso.com/atom.cgi" />
   <updated>2003-12-13T18:30:02Z</updated>
   <author>
     <name>Author Name</name>
@@ -16,10 +16,9 @@ Expect:       UnregisteredAtomLinkRel{value:service.post,element:link,parent:fee
 
   <entry>
     <title>Atom-Powered Robots Run Amok</title>
-    <link href="http://contoso.com/2003/12/13/atom03"/>
+    <link href="http://contoso.com/2003/12/13/atom03" />
     <id>urn:uuid:1225c695-cfb8-4ebb-aaaa-80da344efa6a</id>
     <updated>2003-12-13T18:30:02Z</updated>
     <summary>Some text.</summary>
   </entry>
-
 </feed>

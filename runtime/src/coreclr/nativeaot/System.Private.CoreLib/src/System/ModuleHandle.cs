@@ -60,10 +60,7 @@ namespace System
 
         public int MDStreamVersion
         {
-            get
-            {
-                throw new PlatformNotSupportedException();
-            }
+            get { throw new PlatformNotSupportedException(); }
         }
 
         public static bool operator ==(ModuleHandle left, ModuleHandle right)
@@ -83,7 +80,11 @@ namespace System
         }
 
         [RequiresUnreferencedCode("Trimming changes metadata tokens")]
-        public RuntimeFieldHandle ResolveFieldHandle(int fieldToken, RuntimeTypeHandle[] typeInstantiationContext, RuntimeTypeHandle[] methodInstantiationContext)
+        public RuntimeFieldHandle ResolveFieldHandle(
+            int fieldToken,
+            RuntimeTypeHandle[] typeInstantiationContext,
+            RuntimeTypeHandle[] methodInstantiationContext
+        )
         {
             throw new PlatformNotSupportedException();
         }
@@ -95,7 +96,11 @@ namespace System
         }
 
         [RequiresUnreferencedCode("Trimming changes metadata tokens")]
-        public RuntimeMethodHandle ResolveMethodHandle(int methodToken, RuntimeTypeHandle[] typeInstantiationContext, RuntimeTypeHandle[] methodInstantiationContext)
+        public RuntimeMethodHandle ResolveMethodHandle(
+            int methodToken,
+            RuntimeTypeHandle[] typeInstantiationContext,
+            RuntimeTypeHandle[] methodInstantiationContext
+        )
         {
             throw new PlatformNotSupportedException();
         }
@@ -107,7 +112,11 @@ namespace System
         }
 
         [RequiresUnreferencedCode("Trimming changes metadata tokens")]
-        public RuntimeTypeHandle ResolveTypeHandle(int typeToken, RuntimeTypeHandle[] typeInstantiationContext, RuntimeTypeHandle[] methodInstantiationContext)
+        public RuntimeTypeHandle ResolveTypeHandle(
+            int typeToken,
+            RuntimeTypeHandle[] typeInstantiationContext,
+            RuntimeTypeHandle[] methodInstantiationContext
+        )
         {
             throw new PlatformNotSupportedException();
         }

@@ -23,7 +23,10 @@ namespace Microsoft.Web.Helpers
         private readonly VirtualPathProvider _vpp;
         private readonly IDictionary<object, object> _currentScope;
 
-        public ThemesImplementation(VirtualPathProvider vpp, IDictionary<object, object> scopeStorage)
+        public ThemesImplementation(
+            VirtualPathProvider vpp,
+            IDictionary<object, object> scopeStorage
+        )
         {
             _vpp = vpp;
             _currentScope = scopeStorage;
@@ -78,13 +81,23 @@ namespace Microsoft.Web.Helpers
             {
                 if (String.IsNullOrEmpty(value))
                 {
-                    throw new ArgumentException(CommonResources.Argument_Cannot_Be_Null_Or_Empty, "value");
+                    throw new ArgumentException(
+                        CommonResources.Argument_Cannot_Be_Null_Or_Empty,
+                        "value"
+                    );
                 }
 
                 // EnsureValidTheme would verify if themes have been correctly initialized and that the value specified is a valid theme.
                 if (!IsValidTheme(AvailableThemes, value))
                 {
-                    throw new ArgumentException(String.Format(CultureInfo.CurrentCulture, HelpersToolkitResources.Themes_InvalidTheme, value), "value");
+                    throw new ArgumentException(
+                        String.Format(
+                            CultureInfo.CurrentCulture,
+                            HelpersToolkitResources.Themes_InvalidTheme,
+                            value
+                        ),
+                        "value"
+                    );
                 }
                 _currentScope[CurrentThemeKey] = value;
             }
@@ -123,18 +136,31 @@ namespace Microsoft.Web.Helpers
         {
             if (String.IsNullOrEmpty(themeDirectory))
             {
-                throw new ArgumentException(CommonResources.Argument_Cannot_Be_Null_Or_Empty, "themeDirectory");
+                throw new ArgumentException(
+                    CommonResources.Argument_Cannot_Be_Null_Or_Empty,
+                    "themeDirectory"
+                );
             }
 
             if (String.IsNullOrEmpty(defaultTheme))
             {
-                throw new ArgumentException(CommonResources.Argument_Cannot_Be_Null_Or_Empty, "defaultTheme");
+                throw new ArgumentException(
+                    CommonResources.Argument_Cannot_Be_Null_Or_Empty,
+                    "defaultTheme"
+                );
             }
 
             var availableThemes = GetAvailableThemes(themeDirectory);
             if (!IsValidTheme(availableThemes, defaultTheme))
             {
-                throw new ArgumentException(String.Format(CultureInfo.CurrentCulture, HelpersToolkitResources.Themes_InvalidTheme, defaultTheme), "defaultTheme");
+                throw new ArgumentException(
+                    String.Format(
+                        CultureInfo.CurrentCulture,
+                        HelpersToolkitResources.Themes_InvalidTheme,
+                        defaultTheme
+                    ),
+                    "defaultTheme"
+                );
             }
 
             ThemeDirectory = themeDirectory;
@@ -158,16 +184,22 @@ namespace Microsoft.Web.Helpers
 
             if (folder == null)
             {
-                throw new ArgumentNullException("folder", HelpersToolkitResources.Themes_FolderCannotBeNull);
+                throw new ArgumentNullException(
+                    "folder",
+                    HelpersToolkitResources.Themes_FolderCannotBeNull
+                );
             }
 
             if (String.IsNullOrEmpty(fileName))
             {
-                throw new ArgumentException(CommonResources.Argument_Cannot_Be_Null_Or_Empty, "fileName");
+                throw new ArgumentException(
+                    CommonResources.Argument_Cannot_Be_Null_Or_Empty,
+                    "fileName"
+                );
             }
 
-            return FindMatchingFile(Path.Combine(CurrentThemePath, folder), fileName) ??
-                   FindMatchingFile(Path.Combine(DefaultThemePath, folder), fileName);
+            return FindMatchingFile(Path.Combine(CurrentThemePath, folder), fileName)
+                ?? FindMatchingFile(Path.Combine(DefaultThemePath, folder), fileName);
         }
 
         /// <summary>

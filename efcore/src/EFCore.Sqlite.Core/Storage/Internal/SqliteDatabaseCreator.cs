@@ -29,7 +29,8 @@ public class SqliteDatabaseCreator : RelationalDatabaseCreator
     public SqliteDatabaseCreator(
         RelationalDatabaseCreatorDependencies dependencies,
         ISqliteRelationalConnection connection,
-        IRawSqlCommandBuilder rawSqlCommandBuilder)
+        IRawSqlCommandBuilder rawSqlCommandBuilder
+    )
         : base(dependencies)
     {
         _connection = connection;
@@ -46,14 +47,18 @@ public class SqliteDatabaseCreator : RelationalDatabaseCreator
     {
         Dependencies.Connection.Open();
 
-        _rawSqlCommandBuilder.Build("PRAGMA journal_mode = 'wal';")
+        _rawSqlCommandBuilder
+            .Build("PRAGMA journal_mode = 'wal';")
             .ExecuteNonQuery(
                 new RelationalCommandParameterObject(
                     Dependencies.Connection,
                     null,
                     null,
                     null,
-                    Dependencies.CommandLogger, CommandSource.Migrations));
+                    Dependencies.CommandLogger,
+                    CommandSource.Migrations
+                )
+            );
 
         Dependencies.Connection.Close();
     }
@@ -67,8 +72,10 @@ public class SqliteDatabaseCreator : RelationalDatabaseCreator
     public override bool Exists()
     {
         var connectionOptions = new SqliteConnectionStringBuilder(_connection.ConnectionString);
-        if (connectionOptions.DataSource.Equals(":memory:", StringComparison.OrdinalIgnoreCase)
-            || connectionOptions.Mode == SqliteOpenMode.Memory)
+        if (
+            connectionOptions.DataSource.Equals(":memory:", StringComparison.OrdinalIgnoreCase)
+            || connectionOptions.Mode == SqliteOpenMode.Memory
+        )
         {
             return true;
         }
@@ -94,15 +101,21 @@ public class SqliteDatabaseCreator : RelationalDatabaseCreator
     /// </summary>
     public override bool HasTables()
     {
-        var count = (long)_rawSqlCommandBuilder
-            .Build("SELECT COUNT(*) FROM \"sqlite_master\" WHERE \"type\" = 'table' AND \"rootpage\" IS NOT NULL;")
-            .ExecuteScalar(
-                new RelationalCommandParameterObject(
-                    Dependencies.Connection,
-                    null,
-                    null,
-                    null,
-                    Dependencies.CommandLogger, CommandSource.Migrations))!;
+        var count = (long)
+            _rawSqlCommandBuilder
+                .Build(
+                    "SELECT COUNT(*) FROM \"sqlite_master\" WHERE \"type\" = 'table' AND \"rootpage\" IS NOT NULL;"
+                )
+                .ExecuteScalar(
+                    new RelationalCommandParameterObject(
+                        Dependencies.Connection,
+                        null,
+                        null,
+                        null,
+                        Dependencies.CommandLogger,
+                        CommandSource.Migrations
+                    )
+                )!;
 
         return count != 0;
     }
@@ -134,7 +147,9 @@ public class SqliteDatabaseCreator : RelationalDatabaseCreator
 
         if (!string.IsNullOrEmpty(path))
         {
-            SqliteConnection.ClearPool(new SqliteConnection(Dependencies.Connection.ConnectionString));
+            SqliteConnection.ClearPool(
+                new SqliteConnection(Dependencies.Connection.ConnectionString)
+            );
             // See issues #25797 and #26016
             // SqliteConnection.ClearAllPools();
             File.Delete(path);
@@ -142,7 +157,9 @@ public class SqliteDatabaseCreator : RelationalDatabaseCreator
         else if (dbConnection.State == ConnectionState.Open)
         {
             dbConnection.Close();
-            SqliteConnection.ClearPool(new SqliteConnection(Dependencies.Connection.ConnectionString));
+            SqliteConnection.ClearPool(
+                new SqliteConnection(Dependencies.Connection.ConnectionString)
+            );
             dbConnection.Open();
         }
     }

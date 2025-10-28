@@ -3,14 +3,12 @@ using System;
 
 readonly struct S
 {
-	static S shared = new S ();
+    static S shared = new S();
 
-	public S (int arg)
-	{
-		this = shared;
-	}
+    public S(int arg)
+    {
+        this = shared;
+    }
 
-	public static void Main ()
-	{
-	}
+    public static void Main() { }
 }

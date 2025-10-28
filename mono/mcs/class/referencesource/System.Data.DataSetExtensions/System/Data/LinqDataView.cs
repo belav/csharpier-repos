@@ -8,25 +8,25 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
-using System.Diagnostics;
 using System.ComponentModel;
 using System.Data;
-using System.Text;
 using System.Data.DataSetExtensions;
+using System.Diagnostics;
+using System.Linq;
+using System.Text;
 
 namespace System.Data
 {
     /// <summary>
     /// Represents a bindable, queryable DataView of DataRow, that can be created from from LINQ queries over DataTable
-    /// and from DataTable. 
+    /// and from DataTable.
     /// </summary>
     internal class LinqDataView : DataView, IBindingList, IBindingListView
     {
         /// <summary>
         /// A Comparer that compares a Key and a Row.
         /// </summary>
-        internal Func<object, DataRow, int> comparerKeyRow;  // comparer for DataView.Find(..
+        internal Func<object, DataRow, int> comparerKeyRow; // comparer for DataView.Find(..
 
         /// <summary>
         /// Builds the sort expression in case multiple selector/comparers are added
@@ -42,14 +42,14 @@ namespace System.Data
             : base(table)
         {
             Debug.Assert(table != null, "null DataTable");
-            this.sortExpressionBuilder = sortExpressionBuilder ?? new SortExpressionBuilder<DataRow>();
+            this.sortExpressionBuilder =
+                sortExpressionBuilder ?? new SortExpressionBuilder<DataRow>();
         }
-
 
         //I have two forms of predicate because I need to pass in null if predicate is null. Otherwise I need to convert it into delegate and pass it into
         // data view's constructor. That logic for checking null can't be embedded in the base constructor call.
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="table">Table from which to create the view</param>
         /// <param name="predicate_func">User-provided filter-predicate as a Func<DataRow>, bool>"/></param>
@@ -63,20 +63,20 @@ namespace System.Data
         /// <param name="isDescending">Whether sorting is ascending or descending.</param>
         /// <param name="rowState">Row state filter. For the purpose of LinkDataView it should always be CurrentRows.</param>
         internal LinqDataView(
-                    DataTable table,
-                    Func<DataRow, bool> predicate_func,
-                    Predicate<DataRow> predicate_system,
-                    Comparison<DataRow> comparison,
-                    Func<object, DataRow, int> comparerKeyRow,
-                    SortExpressionBuilder<DataRow> sortExpressionBuilder)
-
-                //Parent constructor
-            : base(table,
-                predicate_system,
-                comparison,
-                DataViewRowState.CurrentRows)
+            DataTable table,
+            Func<DataRow, bool> predicate_func,
+            Predicate<DataRow> predicate_system,
+            Comparison<DataRow> comparison,
+            Func<object, DataRow, int> comparerKeyRow,
+            SortExpressionBuilder<DataRow> sortExpressionBuilder
+        )
+            //Parent constructor
+            : base(table, predicate_system, comparison, DataViewRowState.CurrentRows)
         {
-            this.sortExpressionBuilder = (sortExpressionBuilder == null) ? this.sortExpressionBuilder : sortExpressionBuilder;    
+            this.sortExpressionBuilder =
+                (sortExpressionBuilder == null)
+                    ? this.sortExpressionBuilder
+                    : sortExpressionBuilder;
             this.comparerKeyRow = comparerKeyRow;
         }
 
@@ -87,7 +87,7 @@ namespace System.Data
         {
             get
             {
-                if (base.RowPredicate == null)//using string based filter or no filter
+                if (base.RowPredicate == null) //using string based filter or no filter
                 {
                     return base.RowFilter;
                 }
@@ -96,10 +96,9 @@ namespace System.Data
                     return null;
                 }
             }
-
             set
             {
-                if (value == null) 
+                if (value == null)
                 {
                     base.RowPredicate = null;
                     base.RowFilter = String.Empty; //INDEX rebuild twice
@@ -113,7 +112,7 @@ namespace System.Data
         }
 
         #region Find
-        
+
         /// <summary>
         /// Searches the index and finds a single row where the sort-key matches the input key
         /// </summary>
@@ -127,7 +126,7 @@ namespace System.Data
             Debug.Assert(!(!String.IsNullOrEmpty(base.Sort) && base.SortComparison != null));
             /////////////////////////////////////////////
 
-            if (!String.IsNullOrEmpty(base.Sort))  //use find for DV's sort string
+            if (!String.IsNullOrEmpty(base.Sort)) //use find for DV's sort string
             {
                 return base.FindByKey(key);
             }
@@ -136,10 +135,12 @@ namespace System.Data
                 //This is the exception message from DataView that we want to use
                 throw ExceptionBuilder.IndexKeyLength(0, 0);
             }
-            else  //find for expression based sort
+            else //find for expression based sort
             {
-                if (sortExpressionBuilder.Count !=1)
-                    throw DataSetUtil.InvalidOperation(Strings.LDV_InvalidNumOfKeys(sortExpressionBuilder.Count));
+                if (sortExpressionBuilder.Count != 1)
+                    throw DataSetUtil.InvalidOperation(
+                        Strings.LDV_InvalidNumOfKeys(sortExpressionBuilder.Count)
+                    );
 
                 Index.ComparisonBySelector<object, DataRow> compareDelg =
                     new Index.ComparisonBySelector<object, DataRow>(comparerKeyRow);
@@ -147,7 +148,7 @@ namespace System.Data
                 List<object> keyList = new List<object>();
                 keyList.Add(key);
                 Range range = FindRecords<object, DataRow>(compareDelg, keyList);
-               
+
                 return (range.Count == 0) ? -1 : range.Min;
             }
         }
@@ -161,18 +162,20 @@ namespace System.Data
         {
             //---------Checks ----------------
             //must have string or expression based sort specified
-            if (base.SortComparison == null && String.IsNullOrEmpty(base.Sort)) 
+            if (base.SortComparison == null && String.IsNullOrEmpty(base.Sort))
             {
                 //This is the exception message from DataView that we want to use
                 throw ExceptionBuilder.IndexKeyLength(0, 0);
             }
             else if (base.SortComparison != null && key.Length != sortExpressionBuilder.Count)
             {
-                throw DataSetUtil.InvalidOperation(Strings.LDV_InvalidNumOfKeys(sortExpressionBuilder.Count));
+                throw DataSetUtil.InvalidOperation(
+                    Strings.LDV_InvalidNumOfKeys(sortExpressionBuilder.Count)
+                );
             }
             //--------------------------------
 
-            if (base.SortComparison == null)//using string to sort
+            if (base.SortComparison == null) //using string to sort
                 return base.FindByKey(key);
             else
             {
@@ -182,12 +185,11 @@ namespace System.Data
                 List<object> keyList = new List<object>();
                 foreach (object singleKey in key)
                 {
-                    keyList.Add(singleKey);    
+                    keyList.Add(singleKey);
                 }
                 Range range = FindRecords<object, DataRow>(compareDelg, keyList);
                 return (range.Count == 0) ? -1 : range.Min;
             }
-               
         }
 
         /// <summary>
@@ -206,19 +208,22 @@ namespace System.Data
             }
             else if (base.SortComparison != null && key.Length != sortExpressionBuilder.Count)
             {
-                throw DataSetUtil.InvalidOperation(Strings.LDV_InvalidNumOfKeys(sortExpressionBuilder.Count));
+                throw DataSetUtil.InvalidOperation(
+                    Strings.LDV_InvalidNumOfKeys(sortExpressionBuilder.Count)
+                );
             }
             //--------------------------------
 
-            if (base.SortComparison == null)//using string to sort
+            if (base.SortComparison == null) //using string to sort
             {
                 return base.FindRowsByKey(key);
             }
-            else 
+            else
             {
                 Range range = FindRecords<object, DataRow>(
                     new Index.ComparisonBySelector<object, DataRow>(comparerKeyRow),
-                    new List<object>(key));
+                    new List<object>(key)
+                );
                 return base.GetDataRowViewFromRange(range);
             }
         }
@@ -230,11 +235,17 @@ namespace System.Data
         /// Overriding DataView's SetIndex to prevent users from setting RowState filter to anything other
         /// than CurrentRows.
         /// </summary>
-        internal override void SetIndex(string newSort, DataViewRowState newRowStates, IFilter newRowFilter)
+        internal override void SetIndex(
+            string newSort,
+            DataViewRowState newRowStates,
+            IFilter newRowFilter
+        )
         {
-            //Throw only if expressions (filter or sort) are used and rowstate is not current rows        
-            if ( (base.SortComparison != null || base.RowPredicate != null)
-                    && newRowStates != DataViewRowState.CurrentRows)
+            //Throw only if expressions (filter or sort) are used and rowstate is not current rows
+            if (
+                (base.SortComparison != null || base.RowPredicate != null)
+                && newRowStates != DataViewRowState.CurrentRows
+            )
             {
                 throw DataSetUtil.Argument(Strings.LDVRowStateError);
             }
@@ -263,10 +274,7 @@ namespace System.Data
         /// </summary>
         PropertyDescriptor IBindingList.SortProperty
         {
-            get
-            {
-                return (base.SortComparison == null) ? base.GetSortProperty() : null;
-            }
+            get { return (base.SortComparison == null) ? base.GetSortProperty() : null; }
         }
 
         /// <summary>
@@ -294,12 +302,11 @@ namespace System.Data
         bool IBindingList.IsSorted
         {
             get
-            {   //Sorted if either expression based sort or string based sort is set
+            { //Sorted if either expression based sort or string based sort is set
                 return !(base.SortComparison == null && base.Sort.Length == 0);
             }
         }
 
         #endregion
-    } 
+    }
 }
-

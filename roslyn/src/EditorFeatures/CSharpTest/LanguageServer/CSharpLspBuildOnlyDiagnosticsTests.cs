@@ -15,7 +15,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.LanguageServer
     {
         protected override Type ErrorCodeType => typeof(ErrorCode);
 
-        protected override Type LspBuildOnlyDiagnosticsType => typeof(CSharpLspBuildOnlyDiagnostics);
+        protected override Type LspBuildOnlyDiagnosticsType =>
+            typeof(CSharpLspBuildOnlyDiagnostics);
 
         protected override ImmutableArray<string> ExpectedDiagnosticCodes
         {

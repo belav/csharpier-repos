@@ -13,14 +13,20 @@ namespace XPathTests
         public XPathNavigator CreateNavigatorFromFile(string fileName)
         {
             var stream = FileHelper.CreateStreamFromFile(fileName);
-            var reader = XmlReader.Create(stream, new XmlReaderSettings { DtdProcessing = DtdProcessing.Ignore });
+            var reader = XmlReader.Create(
+                stream,
+                new XmlReaderSettings { DtdProcessing = DtdProcessing.Ignore }
+            );
             var x = new XPathDocument(reader, XmlSpace.Preserve);
             return x.CreateNavigator();
         }
 
         public XPathNavigator CreateNavigator(string xml)
         {
-            var reader = XmlReader.Create(new StringReader(xml), new XmlReaderSettings { DtdProcessing = DtdProcessing.Ignore });
+            var reader = XmlReader.Create(
+                new StringReader(xml),
+                new XmlReaderSettings { DtdProcessing = DtdProcessing.Ignore }
+            );
             var x = new XPathDocument(reader, XmlSpace.None);
             return x.CreateNavigator();
         }

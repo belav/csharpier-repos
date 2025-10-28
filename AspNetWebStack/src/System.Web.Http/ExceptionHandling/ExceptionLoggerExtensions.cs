@@ -14,8 +14,11 @@ namespace System.Web.Http.ExceptionHandling
         /// <param name="context">The exception context.</param>
         /// <param name="cancellationToken">The token to monitor for cancellation requests.</param>
         /// <returns>A task representing the asynchronous exception logging operation.</returns>
-        public static Task LogAsync(this IExceptionLogger logger, ExceptionContext context,
-            CancellationToken cancellationToken)
+        public static Task LogAsync(
+            this IExceptionLogger logger,
+            ExceptionContext context,
+            CancellationToken cancellationToken
+        )
         {
             if (logger == null)
             {

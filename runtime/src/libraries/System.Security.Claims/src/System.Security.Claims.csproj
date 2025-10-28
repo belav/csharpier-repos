@@ -1,5 +1,4 @@
 <Project Sdk="Microsoft.NET.Sdk">
-
   <PropertyGroup>
     <TargetFramework>$(NetCoreAppCurrent)</TargetFramework>
     <UseCompilerGeneratedDocXmlFile>false</UseCompilerGeneratedDocXmlFile>
@@ -21,5 +20,4 @@
     <Reference Include="System.Runtime" />
     <Reference Include="System.Threading.Thread" />
   </ItemGroup>
-
 </Project>

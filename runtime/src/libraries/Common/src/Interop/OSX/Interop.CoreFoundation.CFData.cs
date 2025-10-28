@@ -3,11 +3,9 @@
 
 using System;
 using System.Runtime.InteropServices;
-
 using Microsoft.Win32.SafeHandles;
-
 // Declared as signed long, which has sizeof(void*) on OSX.
-using CFIndex=System.IntPtr;
+using CFIndex = System.IntPtr;
 
 internal static partial class Interop
 {
@@ -44,7 +42,11 @@ internal static partial class Interop
             }
         }
 
-        internal static unsafe bool TryCFWriteData(SafeCFDataHandle cfData, Span<byte> destination, out int bytesWritten)
+        internal static unsafe bool TryCFWriteData(
+            SafeCFDataHandle cfData,
+            Span<byte> destination,
+            out int bytesWritten
+        )
         {
             bool addedRef = false;
             try
@@ -87,14 +89,10 @@ namespace Microsoft.Win32.SafeHandles
     internal sealed class SafeCFDataHandle : SafeHandle
     {
         public SafeCFDataHandle()
-            : base(IntPtr.Zero, ownsHandle: true)
-        {
-        }
+            : base(IntPtr.Zero, ownsHandle: true) { }
 
         internal SafeCFDataHandle(IntPtr handle, bool ownsHandle)
-            : base(handle, ownsHandle)
-        {
-        }
+            : base(handle, ownsHandle) { }
 
         protected override bool ReleaseHandle()
         {

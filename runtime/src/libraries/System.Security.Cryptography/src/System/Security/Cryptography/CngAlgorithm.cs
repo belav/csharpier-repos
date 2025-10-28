@@ -26,10 +26,7 @@ namespace System.Security.Cryptography
         /// </summary>
         public string Algorithm
         {
-            get
-            {
-                return _algorithm;
-            }
+            get { return _algorithm; }
         }
 
         public static bool operator ==(CngAlgorithm? left, CngAlgorithm? right)

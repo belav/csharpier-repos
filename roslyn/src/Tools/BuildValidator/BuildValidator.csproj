@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- Licensed to the .NET Foundation under one or more agreements. The .NET Foundation licenses this file to you under the MIT license. See the LICENSE file in the project root for more information. -->
 
+
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <OutputType>Exe</OutputType>
@@ -22,12 +23,30 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.Extensions.Logging" Version="$(MicrosoftExtensionsLoggingVersion)" />
-    <PackageReference Include="Microsoft.Extensions.Logging.Console" Version="$(MicrosoftExtensionsLoggingConsoleVersion)" />
-    <PackageReference Include="Microsoft.Win32.Registry" Version="$(MicrosoftWin32RegistryVersion)" />
-    <PackageReference Include="System.Reflection.Metadata" Version="$(SystemReflectionMetadataVersion)" />
-    <PackageReference Include="Microsoft.Metadata.Visualizer" Version="$(MicrosoftMetadataVisualizerVersion)" />
-    <PackageReference Include="Microsoft.DiaSymReader.Converter.Xml" Version="$(MicrosoftDiaSymReaderConverterXmlVersion)" />
+    <PackageReference
+      Include="Microsoft.Extensions.Logging"
+      Version="$(MicrosoftExtensionsLoggingVersion)"
+    />
+    <PackageReference
+      Include="Microsoft.Extensions.Logging.Console"
+      Version="$(MicrosoftExtensionsLoggingConsoleVersion)"
+    />
+    <PackageReference
+      Include="Microsoft.Win32.Registry"
+      Version="$(MicrosoftWin32RegistryVersion)"
+    />
+    <PackageReference
+      Include="System.Reflection.Metadata"
+      Version="$(SystemReflectionMetadataVersion)"
+    />
+    <PackageReference
+      Include="Microsoft.Metadata.Visualizer"
+      Version="$(MicrosoftMetadataVisualizerVersion)"
+    />
+    <PackageReference
+      Include="Microsoft.DiaSymReader.Converter.Xml"
+      Version="$(MicrosoftDiaSymReaderConverterXmlVersion)"
+    />
     <PackageReference Include="Newtonsoft.Json" Version="$(NewtonsoftJsonVersion)" />
     <PackageReference Include="System.CommandLine" Version="$(SystemCommandLineVersion)" />
   </ItemGroup>

@@ -7,14 +7,15 @@
 /*      2. resurrect the object while the finalize() method is call.
 /*******************************************************************************/
 
-namespace DefaultNamespace {
+namespace DefaultNamespace
+{
     using System;
-    using System.Runtime.CompilerServices;
     using System.Collections.Generic;
+    using System.Runtime.CompilerServices;
 
     internal class BaseFinal
     {
-// disabling unused variable warning
+        // disabling unused variable warning
 #pragma warning disable 0414
         internal static Object StObj;
 #pragma warning restore 0414
@@ -25,80 +26,77 @@ namespace DefaultNamespace {
             CreateObj temp = new CreateObj();
             if (temp.RunTest())
             {
-                Console.WriteLine( "Test passed!" );
+                Console.WriteLine("Test passed!");
                 return 100;
             }
             else
             {
-                Console.WriteLine( "Test failed!" );
+                Console.WriteLine("Test failed!");
                 return 1;
             }
         }
 
-
         ~BaseFinal()
         {
-            BaseFinal.StObj = ( this );
-            Console.WriteLine( "Main class Finalize().");
+            BaseFinal.StObj = (this);
+            Console.WriteLine("Main class Finalize().");
         }
 
-        public void CreateNode( int i )
+        public void CreateNode(int i)
         {
-            BNode rgobj = new BNode( i );
+            BNode rgobj = new BNode(i);
         }
     }
-
 
     internal class BNode
     {
         public static int icCreateNode = 0;
         public static int icFinalNode = 0;
-        internal static List<object> rlNode = new List<object>( );
-        public int [] mem;
+        internal static List<object> rlNode = new List<object>();
+        public int[] mem;
 
-        public BNode( int i )
+        public BNode(int i)
         {
             icCreateNode++;
             mem = new int[i];
             mem[0] = 99;
-            if(i > 1 )
+            if (i > 1)
             {
-                mem[mem.Length-1] = mem.Length-1;
+                mem[mem.Length - 1] = mem.Length - 1;
             }
         }
 
         ~BNode()
         {
             icFinalNode++;
-            rlNode.Add(this);  //resurrect objects
+            rlNode.Add(this); //resurrect objects
         }
     }
 
-
     internal class CreateObj
     {
-
         public BaseFinal mv_Obj;
 
-// disabling unused variable warning
+        // disabling unused variable warning
 #pragma warning disable 0414
         public BNode obj;
 #pragma warning restore 0414
 
-
         public CreateObj()
         {
-
             mv_Obj = new BaseFinal();
-            Console.WriteLine("before starting the test, heap size is {0}", GC.GetTotalMemory(false));
+            Console.WriteLine(
+                "before starting the test, heap size is {0}",
+                GC.GetTotalMemory(false)
+            );
 
-            for( int i=1; i< 1000; i++)
+            for (int i = 1; i < 1000; i++)
             {
-                obj = new BNode(i);     //create new one and delete the last one.
-                mv_Obj.CreateNode( i ); //create locate objects in createNode().
+                obj = new BNode(i); //create new one and delete the last one.
+                mv_Obj.CreateNode(i); //create locate objects in createNode().
             }
             Console.Write(BNode.icCreateNode);
-             Console.WriteLine(" Nodes were created.");
+            Console.WriteLine(" Nodes were created.");
 
             //Console.WriteLine("after all objects were created, the heapsize is " + GC.GetTotalMemory(false));
         }
@@ -112,15 +110,15 @@ namespace DefaultNamespace {
         [MethodImplAttribute(MethodImplOptions.NoInlining)]
         public void ResurrectNodes()
         {
-            for(int i=0; i< BNode.rlNode.Count; i++)
+            for (int i = 0; i < BNode.rlNode.Count; i++)
             {
-                BNode oldNode = (BNode)BNode.rlNode[ i ];
-                if ( oldNode.mem[0] != 99 )
+                BNode oldNode = (BNode)BNode.rlNode[i];
+                if (oldNode.mem[0] != 99)
                 {
-                    Console.WriteLine( "One Node is not resurrected correctly.");
+                    Console.WriteLine("One Node is not resurrected correctly.");
                 }
                 oldNode = null;
-                BNode.rlNode[ i ] = null;
+                BNode.rlNode[i] = null;
             }
         }
 
@@ -136,7 +134,7 @@ namespace DefaultNamespace {
             Console.WriteLine(" Nodes were finalized and resurrected.");
             //Console.WriteLine("after all objects were deleted and resurrected in Finalize() , the heapsize is " + GC.GetTotalMemory(false));
 
-            ResurrectNodes(); 
+            ResurrectNodes();
 
             GC.Collect();
             GC.WaitForPendingFinalizers();
@@ -144,11 +142,7 @@ namespace DefaultNamespace {
 
             //Console.WriteLine("after all objects were deleted , the heapsize is " + GC.GetTotalMemory(false));
 
-            return ( BNode.icCreateNode == BNode.icFinalNode );
-
-
+            return (BNode.icCreateNode == BNode.icFinalNode);
         }
     }
-
-
 }

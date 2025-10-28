@@ -15,8 +15,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Library.ObjectB
     {
         private static string GetSearchText(VSOBSEARCHCRITERIA2[] pobSrch)
         {
-            if (pobSrch.Length == 0 ||
-                pobSrch[0].szName == null)
+            if (pobSrch.Length == 0 || pobSrch[0].szName == null)
             {
                 return null;
             }
@@ -36,7 +35,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Library.ObjectB
             ObjectListKind listKind,
             uint flags,
             VSOBSEARCHCRITERIA2[] pobSrch,
-            ImmutableHashSet<Tuple<ProjectId, IAssemblySymbol>> projectAndAssemblySet)
+            ImmutableHashSet<Tuple<ProjectId, IAssemblySymbol>> projectAndAssemblySet
+        )
         {
             var searchText = GetSearchText(pobSrch);
             if (searchText == null)
@@ -49,61 +49,78 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Library.ObjectB
             switch (listKind)
             {
                 case ObjectListKind.Namespaces:
+                {
+                    var builder = ImmutableArray.CreateBuilder<ObjectListItem>();
+
+                    foreach (var projectIdAndAssembly in projectAndAssemblySet)
                     {
-                        var builder = ImmutableArray.CreateBuilder<ObjectListItem>();
+                        var projectId = projectIdAndAssembly.Item1;
+                        var assemblySymbol = projectIdAndAssembly.Item2;
 
-                        foreach (var projectIdAndAssembly in projectAndAssemblySet)
-                        {
-                            var projectId = projectIdAndAssembly.Item1;
-                            var assemblySymbol = projectIdAndAssembly.Item2;
-
-                            CollectNamespaceListItems(assemblySymbol, projectId, builder, searchText);
-                        }
-
-                        return new ObjectList(ObjectListKind.Namespaces, flags, this, builder.ToImmutable());
+                        CollectNamespaceListItems(assemblySymbol, projectId, builder, searchText);
                     }
+
+                    return new ObjectList(
+                        ObjectListKind.Namespaces,
+                        flags,
+                        this,
+                        builder.ToImmutable()
+                    );
+                }
 
                 case ObjectListKind.Types:
+                {
+                    var builder = ImmutableArray.CreateBuilder<ObjectListItem>();
+
+                    foreach (var projectIdAndAssembly in projectAndAssemblySet)
                     {
-                        var builder = ImmutableArray.CreateBuilder<ObjectListItem>();
+                        var projectId = projectIdAndAssembly.Item1;
+                        var assemblySymbol = projectIdAndAssembly.Item2;
 
-                        foreach (var projectIdAndAssembly in projectAndAssemblySet)
+                        var compilation = this.GetCompilation(projectId);
+                        if (compilation == null)
                         {
-                            var projectId = projectIdAndAssembly.Item1;
-                            var assemblySymbol = projectIdAndAssembly.Item2;
-
-                            var compilation = this.GetCompilation(projectId);
-                            if (compilation == null)
-                            {
-                                return null;
-                            }
-
-                            CollectTypeListItems(assemblySymbol, compilation, projectId, builder, searchText);
+                            return null;
                         }
 
-                        return new ObjectList(ObjectListKind.Types, flags, this, builder.ToImmutable());
+                        CollectTypeListItems(
+                            assemblySymbol,
+                            compilation,
+                            projectId,
+                            builder,
+                            searchText
+                        );
                     }
+
+                    return new ObjectList(ObjectListKind.Types, flags, this, builder.ToImmutable());
+                }
 
                 case ObjectListKind.Members:
+                {
+                    var builder = ImmutableArray.CreateBuilder<ObjectListItem>();
+
+                    foreach (var projectIdAndAssembly in projectAndAssemblySet)
                     {
-                        var builder = ImmutableArray.CreateBuilder<ObjectListItem>();
+                        var projectId = projectIdAndAssembly.Item1;
+                        var assemblySymbol = projectIdAndAssembly.Item2;
 
-                        foreach (var projectIdAndAssembly in projectAndAssemblySet)
+                        var compilation = this.GetCompilation(projectId);
+                        if (compilation == null)
                         {
-                            var projectId = projectIdAndAssembly.Item1;
-                            var assemblySymbol = projectIdAndAssembly.Item2;
-
-                            var compilation = this.GetCompilation(projectId);
-                            if (compilation == null)
-                            {
-                                return null;
-                            }
-
-                            CollectMemberListItems(assemblySymbol, compilation, projectId, builder, searchText);
+                            return null;
                         }
 
-                        return new ObjectList(ObjectListKind.Types, flags, this, builder.ToImmutable());
+                        CollectMemberListItems(
+                            assemblySymbol,
+                            compilation,
+                            projectId,
+                            builder,
+                            searchText
+                        );
                     }
+
+                    return new ObjectList(ObjectListKind.Types, flags, this, builder.ToImmutable());
+                }
 
                 default:
                     return null;

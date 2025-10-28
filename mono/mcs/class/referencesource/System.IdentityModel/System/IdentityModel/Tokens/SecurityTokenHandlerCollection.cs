@@ -19,8 +19,10 @@ namespace System.IdentityModel.Tokens
     {
         internal static int defaultHandlerCollectionCount = 8;
 
-        private Dictionary<string, SecurityTokenHandler> handlersByIdentifier = new Dictionary<string, SecurityTokenHandler>();
-        private Dictionary<Type, SecurityTokenHandler> handlersByType = new Dictionary<Type, SecurityTokenHandler>();
+        private Dictionary<string, SecurityTokenHandler> handlersByIdentifier =
+            new Dictionary<string, SecurityTokenHandler>();
+        private Dictionary<Type, SecurityTokenHandler> handlersByType =
+            new Dictionary<Type, SecurityTokenHandler>();
 
         private SecurityTokenHandlerConfiguration configuration;
 
@@ -31,9 +33,7 @@ namespace System.IdentityModel.Tokens
         /// Creates an empty set.
         /// </summary>
         public SecurityTokenHandlerCollection()
-            : this(new SecurityTokenHandlerConfiguration())
-        {
-        }
+            : this(new SecurityTokenHandlerConfiguration()) { }
 
         /// <summary>
         /// Creates an instance of <see cref="SecurityTokenHandlerCollection"/>.
@@ -60,9 +60,7 @@ namespace System.IdentityModel.Tokens
         /// use the Clone method instead.
         /// </remarks>
         public SecurityTokenHandlerCollection(IEnumerable<SecurityTokenHandler> handlers)
-            : this(handlers, new SecurityTokenHandlerConfiguration())
-        {
-        }
+            : this(handlers, new SecurityTokenHandlerConfiguration()) { }
 
         /// <summary>
         /// Creates an instance of <see cref="SecurityTokenHandlerCollection"/>
@@ -73,7 +71,10 @@ namespace System.IdentityModel.Tokens
         /// Do not use this constructor to attempt to clone an instance of a SecurityTokenHandlerCollection,
         /// use the Clone method instead.
         /// </remarks>
-        public SecurityTokenHandlerCollection(IEnumerable<SecurityTokenHandler> handlers, SecurityTokenHandlerConfiguration configuration)
+        public SecurityTokenHandlerCollection(
+            IEnumerable<SecurityTokenHandler> handlers,
+            SecurityTokenHandlerConfiguration configuration
+        )
             : this(configuration)
         {
             if (handlers == null)
@@ -108,10 +109,7 @@ namespace System.IdentityModel.Tokens
         /// </summary>
         public IEnumerable<string> TokenTypeIdentifiers
         {
-            get
-            {
-                return this.handlersByIdentifier.Keys;
-            }
+            get { return this.handlersByIdentifier.Keys; }
         }
 
         /// <summary>
@@ -178,7 +176,9 @@ namespace System.IdentityModel.Tokens
         /// <returns>A SecurityTokenHandlerCollection with default basic SecurityTokenHandlers.</returns>
         public static SecurityTokenHandlerCollection CreateDefaultSecurityTokenHandlerCollection()
         {
-            return CreateDefaultSecurityTokenHandlerCollection(new SecurityTokenHandlerConfiguration());
+            return CreateDefaultSecurityTokenHandlerCollection(
+                new SecurityTokenHandlerConfiguration()
+            );
         }
 
         /// <summary>
@@ -187,20 +187,24 @@ namespace System.IdentityModel.Tokens
         /// </summary>
         /// <param name="configuration">The configuration to associate with the collection.</param>
         /// <returns>A SecurityTokenHandlerCollection with default basic SecurityTokenHandlers.</returns>
-        public static SecurityTokenHandlerCollection CreateDefaultSecurityTokenHandlerCollection(SecurityTokenHandlerConfiguration configuration)
+        public static SecurityTokenHandlerCollection CreateDefaultSecurityTokenHandlerCollection(
+            SecurityTokenHandlerConfiguration configuration
+        )
         {
-
-            SecurityTokenHandlerCollection collection = new SecurityTokenHandlerCollection(new SecurityTokenHandler[] {
-                                                                                                 new KerberosSecurityTokenHandler(),
-                                                                                                 new RsaSecurityTokenHandler(),
-                                                                                                 new SamlSecurityTokenHandler(), 
-                                                                                                 new Saml2SecurityTokenHandler(),
-                                                                                                 new WindowsUserNameSecurityTokenHandler(),
-                                                                                                 new X509SecurityTokenHandler(),
-                                                                                                 new EncryptedSecurityTokenHandler(),
-                                                                                                 new SessionSecurityTokenHandler(),
-                                                                                                },
-                                                                                             configuration);
+            SecurityTokenHandlerCollection collection = new SecurityTokenHandlerCollection(
+                new SecurityTokenHandler[]
+                {
+                    new KerberosSecurityTokenHandler(),
+                    new RsaSecurityTokenHandler(),
+                    new SamlSecurityTokenHandler(),
+                    new Saml2SecurityTokenHandler(),
+                    new WindowsUserNameSecurityTokenHandler(),
+                    new X509SecurityTokenHandler(),
+                    new EncryptedSecurityTokenHandler(),
+                    new SessionSecurityTokenHandler(),
+                },
+                configuration
+            );
 
             defaultHandlerCollectionCount = collection.Count;
 
@@ -213,7 +217,7 @@ namespace System.IdentityModel.Tokens
         }
 
         /// <summary>
-        /// Adds a new handler or replace the existing handler with the same token type identifier 
+        /// Adds a new handler or replace the existing handler with the same token type identifier
         /// with with the new handler.
         /// </summary>
         /// <param name="handler">The SecurityTokenHandler to add or replace</param>
@@ -238,7 +242,10 @@ namespace System.IdentityModel.Tokens
                 {
                     foreach (string tokenTypeIdentifier in identifiers)
                     {
-                        if (tokenTypeIdentifier != null && this.handlersByIdentifier.ContainsKey(tokenTypeIdentifier))
+                        if (
+                            tokenTypeIdentifier != null
+                            && this.handlersByIdentifier.ContainsKey(tokenTypeIdentifier)
+                        )
                         {
                             Remove(this[tokenTypeIdentifier]);
                             break;
@@ -285,7 +292,9 @@ namespace System.IdentityModel.Tokens
         {
             if (String.IsNullOrEmpty(tokenString))
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNullOrEmptyString("tokenString");
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNullOrEmptyString(
+                    "tokenString"
+                );
             }
 
             foreach (SecurityTokenHandler handler in this)
@@ -298,7 +307,7 @@ namespace System.IdentityModel.Tokens
 
             return false;
         }
-        
+
         /// <summary>
         /// Checks if a token can be written using the SecurityTokenHandlers.
         /// </summary>
@@ -338,7 +347,11 @@ namespace System.IdentityModel.Tokens
             SecurityTokenHandler handler = this[tokenDescriptor.TokenType];
             if (null == handler)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(SR.GetString(SR.ID4020, tokenDescriptor.TokenType)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new InvalidOperationException(
+                        SR.GetString(SR.ID4020, tokenDescriptor.TokenType)
+                    )
+                );
             }
 
             return handler.CreateToken(tokenDescriptor);
@@ -350,7 +363,7 @@ namespace System.IdentityModel.Tokens
         /// <param name="token">The SecurityToken to be validated.</param>
         /// <returns>A <see cref="ReadOnlyCollection{T}"/> of <see cref="ClaimsIdentity"/> representing the identities contained in the token.</returns>
         /// <exception cref="ArgumentNullException">The input argument 'token' is null.</exception>
-        /// <exception cref="InvalidOperationException">A <see cref="SecurityTokenHandler"/> cannot be found that can validate the <see cref="SecurityToken"/>.</exception>                
+        /// <exception cref="InvalidOperationException">A <see cref="SecurityTokenHandler"/> cannot be found that can validate the <see cref="SecurityToken"/>.</exception>
         public ReadOnlyCollection<ClaimsIdentity> ValidateToken(SecurityToken token)
         {
             if (token == null)
@@ -361,7 +374,9 @@ namespace System.IdentityModel.Tokens
             SecurityTokenHandler handler = this[token];
             if (null == handler || !handler.CanValidateToken)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(SR.GetString(SR.ID4011, token.GetType())));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new InvalidOperationException(SR.GetString(SR.ID4011, token.GetType()))
+                );
             }
 
             return handler.ValidateToken(token);
@@ -401,7 +416,9 @@ namespace System.IdentityModel.Tokens
         {
             if (String.IsNullOrEmpty(tokenString))
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNullOrEmptyString("tokenString");
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNullOrEmptyString(
+                    "tokenString"
+                );
             }
 
             foreach (SecurityTokenHandler handler in this)
@@ -436,7 +453,9 @@ namespace System.IdentityModel.Tokens
             SecurityTokenHandler handler = this[token];
             if (null == handler || !handler.CanWriteToken)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(SR.GetString(SR.ID4010, token.GetType())));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new InvalidOperationException(SR.GetString(SR.ID4010, token.GetType()))
+                );
             }
 
             handler.WriteToken(writer, token);
@@ -458,7 +477,9 @@ namespace System.IdentityModel.Tokens
             SecurityTokenHandler handler = this[token];
             if (null == handler || !handler.CanWriteToken)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(SR.GetString(SR.ID4010, token.GetType())));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new InvalidOperationException(SR.GetString(SR.ID4010, token.GetType()))
+                );
             }
 
             return handler.WriteToken(token);
@@ -540,7 +561,7 @@ namespace System.IdentityModel.Tokens
         }
 
         /// <summary>
-        /// Checks if the wrapped SecurityTokenHandler or the base WSSecurityTokenSerializer can read the 
+        /// Checks if the wrapped SecurityTokenHandler or the base WSSecurityTokenSerializer can read the
         /// SecurityKeyIdentifierClause.
         /// </summary>
         /// <param name="reader">Reader to a SecurityKeyIdentifierClause.</param>
@@ -598,7 +619,10 @@ namespace System.IdentityModel.Tokens
             return this.keyInfoSerializer.ReadKeyIdentifierClause(reader);
         }
 
-        public void WriteKeyIdentifierClause(XmlWriter writer, SecurityKeyIdentifierClause keyIdentifierClause)
+        public void WriteKeyIdentifierClause(
+            XmlWriter writer,
+            SecurityKeyIdentifierClause keyIdentifierClause
+        )
         {
             if (writer == null)
             {
@@ -607,7 +631,9 @@ namespace System.IdentityModel.Tokens
 
             if (keyIdentifierClause == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("keyIdentifierClause");
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
+                    "keyIdentifierClause"
+                );
             }
 
             WriteKeyIdentifierClauseCore(writer, keyIdentifierClause);
@@ -619,7 +645,10 @@ namespace System.IdentityModel.Tokens
         /// <param name="writer">XmlWriter to write into.</param>
         /// <param name="keyIdentifierClause">SecurityKeyIdentifierClause to be written.</param>
         /// <exception cref="ArgumentNullException">The input parameter 'writer' or 'keyIdentifierClause' is null.</exception>
-        protected virtual void WriteKeyIdentifierClauseCore(XmlWriter writer, SecurityKeyIdentifierClause keyIdentifierClause)
+        protected virtual void WriteKeyIdentifierClauseCore(
+            XmlWriter writer,
+            SecurityKeyIdentifierClause keyIdentifierClause
+        )
         {
             if (writer == null)
             {
@@ -628,7 +657,9 @@ namespace System.IdentityModel.Tokens
 
             if (keyIdentifierClause == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("keyIdentifierClause");
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
+                    "keyIdentifierClause"
+                );
             }
 
             foreach (SecurityTokenHandler securityTokenHandler in this)

@@ -13,6 +13,6 @@ namespace System.Reflection.Metadata
         AliasAssemblyReference = 6,
         AliasNamespace = 7,
         AliasAssemblyNamespace = 8,
-        AliasType = 9
+        AliasType = 9,
     }
 }

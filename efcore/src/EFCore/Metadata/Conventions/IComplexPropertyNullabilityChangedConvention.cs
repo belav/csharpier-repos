@@ -18,5 +18,6 @@ public interface IComplexPropertyNullabilityChangedConvention : IConvention
     /// <param name="context">Additional information associated with convention execution.</param>
     void ProcessComplexPropertyNullabilityChanged(
         IConventionComplexPropertyBuilder propertyBuilder,
-        IConventionContext<bool?> context);
+        IConventionContext<bool?> context
+    );
 }

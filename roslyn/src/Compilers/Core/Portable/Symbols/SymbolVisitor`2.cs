@@ -98,7 +98,10 @@ namespace Microsoft.CodeAnalysis
             return DefaultVisit(symbol, argument);
         }
 
-        public virtual TResult VisitFunctionPointerType(IFunctionPointerTypeSymbol symbol, TArgument argument)
+        public virtual TResult VisitFunctionPointerType(
+            IFunctionPointerTypeSymbol symbol,
+            TArgument argument
+        )
         {
             return DefaultVisit(symbol, argument);
         }

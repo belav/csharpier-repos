@@ -13,9 +13,18 @@ namespace System.Collections.Specialized.Tests
         public void Get_InvalidIndex_ThrowsArgumentOutOfRangeException(int count)
         {
             NameValueCollection nameValueCollection = Helpers.CreateNameValueCollection(count);
-            AssertExtensions.Throws<ArgumentOutOfRangeException>("index", () => nameValueCollection.Get(-1));
-            AssertExtensions.Throws<ArgumentOutOfRangeException>("index", () => nameValueCollection.Get(count));
-            AssertExtensions.Throws<ArgumentOutOfRangeException>("index", () => nameValueCollection.Get(count + 1));
+            AssertExtensions.Throws<ArgumentOutOfRangeException>(
+                "index",
+                () => nameValueCollection.Get(-1)
+            );
+            AssertExtensions.Throws<ArgumentOutOfRangeException>(
+                "index",
+                () => nameValueCollection.Get(count)
+            );
+            AssertExtensions.Throws<ArgumentOutOfRangeException>(
+                "index",
+                () => nameValueCollection.Get(count + 1)
+            );
         }
     }
 }

@@ -5,14 +5,22 @@ namespace System.Configuration
 {
     public class KeyValueConfigurationElement : ConfigurationElement
     {
-        private static readonly ConfigurationProperty s_propKey =
-            new ConfigurationProperty("key", typeof(string), string.Empty,
-                ConfigurationPropertyOptions.IsKey | ConfigurationPropertyOptions.IsRequired);
+        private static readonly ConfigurationProperty s_propKey = new ConfigurationProperty(
+            "key",
+            typeof(string),
+            string.Empty,
+            ConfigurationPropertyOptions.IsKey | ConfigurationPropertyOptions.IsRequired
+        );
 
-        private static readonly ConfigurationProperty s_propValue =
-            new ConfigurationProperty("value", typeof(string), string.Empty, ConfigurationPropertyOptions.None);
+        private static readonly ConfigurationProperty s_propValue = new ConfigurationProperty(
+            "value",
+            typeof(string),
+            string.Empty,
+            ConfigurationPropertyOptions.None
+        );
 
-        private static readonly ConfigurationPropertyCollection s_properties = new ConfigurationPropertyCollection { s_propKey, s_propValue };
+        private static readonly ConfigurationPropertyCollection s_properties =
+            new ConfigurationPropertyCollection { s_propKey, s_propValue };
 
         private readonly string _initKey;
         private readonly string _initValue;
@@ -30,7 +38,11 @@ namespace System.Configuration
 
         protected internal override ConfigurationPropertyCollection Properties => s_properties;
 
-        [ConfigurationProperty("key", Options = ConfigurationPropertyOptions.IsKey, DefaultValue = "")]
+        [ConfigurationProperty(
+            "key",
+            Options = ConfigurationPropertyOptions.IsKey,
+            DefaultValue = ""
+        )]
         public string Key => (string)base[s_propKey];
 
         [ConfigurationProperty("value", DefaultValue = "")]

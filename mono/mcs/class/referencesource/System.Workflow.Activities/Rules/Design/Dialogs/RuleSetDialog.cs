@@ -43,17 +43,23 @@ namespace System.Workflow.Activities.Rules.Design
             this.serviceProvider = activity.Site;
             if (this.serviceProvider != null)
             {
-                typeProvider = (ITypeProvider)this.serviceProvider.GetService(typeof(ITypeProvider));
+                typeProvider = (ITypeProvider)
+                    this.serviceProvider.GetService(typeof(ITypeProvider));
                 if (typeProvider == null)
                 {
-                    string message = string.Format(CultureInfo.CurrentCulture, Messages.MissingService, typeof(ITypeProvider).FullName);
+                    string message = string.Format(
+                        CultureInfo.CurrentCulture,
+                        Messages.MissingService,
+                        typeof(ITypeProvider).FullName
+                    );
                     throw new InvalidOperationException(message);
                 }
 
-                WorkflowDesignerLoader loader = this.serviceProvider.GetService(typeof(WorkflowDesignerLoader)) as WorkflowDesignerLoader;
+                WorkflowDesignerLoader loader =
+                    this.serviceProvider.GetService(typeof(WorkflowDesignerLoader))
+                    as WorkflowDesignerLoader;
                 if (loader != null)
                     loader.Flush();
-
             }
             else
             {
@@ -83,13 +89,24 @@ namespace System.Workflow.Activities.Rules.Design
         {
             InitializeComponent();
 
-            this.conditionTextBox.PopulateAutoCompleteList += new EventHandler<AutoCompletionEventArgs>(PopulateAutoCompleteList);
-            this.thenTextBox.PopulateAutoCompleteList += new EventHandler<AutoCompletionEventArgs>(PopulateAutoCompleteList);
-            this.elseTextBox.PopulateAutoCompleteList += new EventHandler<AutoCompletionEventArgs>(PopulateAutoCompleteList);
+            this.conditionTextBox.PopulateAutoCompleteList +=
+                new EventHandler<AutoCompletionEventArgs>(PopulateAutoCompleteList);
+            this.thenTextBox.PopulateAutoCompleteList += new EventHandler<AutoCompletionEventArgs>(
+                PopulateAutoCompleteList
+            );
+            this.elseTextBox.PopulateAutoCompleteList += new EventHandler<AutoCompletionEventArgs>(
+                PopulateAutoCompleteList
+            );
 
-            this.conditionTextBox.PopulateToolTipList += new EventHandler<AutoCompletionEventArgs>(PopulateAutoCompleteList);
-            this.thenTextBox.PopulateToolTipList += new EventHandler<AutoCompletionEventArgs>(PopulateAutoCompleteList);
-            this.elseTextBox.PopulateToolTipList += new EventHandler<AutoCompletionEventArgs>(PopulateAutoCompleteList);
+            this.conditionTextBox.PopulateToolTipList += new EventHandler<AutoCompletionEventArgs>(
+                PopulateAutoCompleteList
+            );
+            this.thenTextBox.PopulateToolTipList += new EventHandler<AutoCompletionEventArgs>(
+                PopulateAutoCompleteList
+            );
+            this.elseTextBox.PopulateToolTipList += new EventHandler<AutoCompletionEventArgs>(
+                PopulateAutoCompleteList
+            );
 
             this.reevaluationComboBox.Items.Add(Messages.ReevaluationNever);
             this.reevaluationComboBox.Items.Add(Messages.ReevaluationAlways);
@@ -122,10 +139,7 @@ namespace System.Workflow.Activities.Rules.Design
         #region public members
         public RuleSet RuleSet
         {
-            get
-            {
-                return this.dialogRuleSet;
-            }
+            get { return this.dialogRuleSet; }
         }
 
         #endregion
@@ -136,7 +150,6 @@ namespace System.Workflow.Activities.Rules.Design
         {
             e.AutoCompleteValues = this.ruleParser.GetExpressionCompletions(e.Prefix);
         }
-
 
         private void rulesListView_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -157,8 +170,11 @@ namespace System.Workflow.Activities.Rules.Design
                 this.reevaluationComboBox.SelectedIndex = (int)rule.ReevaluationBehavior;
                 this.priorityTextBox.Text = rule.Priority.ToString(CultureInfo.CurrentCulture);
 
-                //Condition 
-                this.conditionTextBox.Text = rule.Condition != null ? rule.Condition.ToString().Replace("\n", "\r\n") : string.Empty;
+                //Condition
+                this.conditionTextBox.Text =
+                    rule.Condition != null
+                        ? rule.Condition.ToString().Replace("\n", "\r\n")
+                        : string.Empty;
                 try
                 {
                     this.ruleParser.ParseCondition(this.conditionTextBox.Text);
@@ -228,7 +244,9 @@ namespace System.Workflow.Activities.Rules.Design
             try
             {
                 Rule rule = this.rulesListView.SelectedItems[0].Tag as Rule;
-                RuleCondition ruleCondition = this.ruleParser.ParseCondition(this.conditionTextBox.Text);
+                RuleCondition ruleCondition = this.ruleParser.ParseCondition(
+                    this.conditionTextBox.Text
+                );
                 rule.Condition = ruleCondition;
                 if (!string.IsNullOrEmpty(this.conditionTextBox.Text))
                     this.conditionTextBox.Text = ruleCondition.ToString().Replace("\n", "\r\n");
@@ -238,7 +256,11 @@ namespace System.Workflow.Activities.Rules.Design
             catch (Exception ex)
             {
                 conditionErrorProvider.SetError(this.conditionTextBox, ex.Message);
-                DesignerHelpers.DisplayError(Messages.Error_ConditionParser + "\n" + ex.Message, this.Text, this.serviceProvider);
+                DesignerHelpers.DisplayError(
+                    Messages.Error_ConditionParser + "\n" + ex.Message,
+                    this.Text,
+                    this.serviceProvider
+                );
                 e.Cancel = true;
             }
         }
@@ -251,7 +273,9 @@ namespace System.Workflow.Activities.Rules.Design
             try
             {
                 Rule rule = this.rulesListView.SelectedItems[0].Tag as Rule;
-                List<RuleAction> ruleThenActions = this.ruleParser.ParseStatementList(this.thenTextBox.Text);
+                List<RuleAction> ruleThenActions = this.ruleParser.ParseStatementList(
+                    this.thenTextBox.Text
+                );
                 this.thenTextBox.Text = GetActionsString(ruleThenActions);
                 rule.ThenActions.Clear();
                 foreach (RuleAction ruleAction in ruleThenActions)
@@ -262,7 +286,11 @@ namespace System.Workflow.Activities.Rules.Design
             catch (Exception ex)
             {
                 thenErrorProvider.SetError(this.thenTextBox, ex.Message);
-                DesignerHelpers.DisplayError(Messages.Error_ActionsParser + "\n" + ex.Message, this.Text, this.serviceProvider);
+                DesignerHelpers.DisplayError(
+                    Messages.Error_ActionsParser + "\n" + ex.Message,
+                    this.Text,
+                    this.serviceProvider
+                );
                 e.Cancel = true;
             }
         }
@@ -275,7 +303,9 @@ namespace System.Workflow.Activities.Rules.Design
             try
             {
                 Rule rule = (Rule)this.rulesListView.SelectedItems[0].Tag;
-                List<RuleAction> ruleElseActions = this.ruleParser.ParseStatementList(this.elseTextBox.Text);
+                List<RuleAction> ruleElseActions = this.ruleParser.ParseStatementList(
+                    this.elseTextBox.Text
+                );
                 this.elseTextBox.Text = GetActionsString(ruleElseActions);
                 rule.ElseActions.Clear();
                 foreach (RuleAction ruleAction in ruleElseActions)
@@ -286,7 +316,11 @@ namespace System.Workflow.Activities.Rules.Design
             catch (Exception ex)
             {
                 elseErrorProvider.SetError(this.elseTextBox, ex.Message);
-                DesignerHelpers.DisplayError(Messages.Error_ActionsParser + "\n" + ex.Message, this.Text, this.serviceProvider);
+                DesignerHelpers.DisplayError(
+                    Messages.Error_ActionsParser + "\n" + ex.Message,
+                    this.Text,
+                    this.serviceProvider
+                );
                 e.Cancel = true;
             }
         }
@@ -315,8 +349,15 @@ namespace System.Workflow.Activities.Rules.Design
             MessageBoxOptions mbo = (MessageBoxOptions)0;
             if (CultureInfo.CurrentUICulture.TextInfo.IsRightToLeft)
                 mbo = MessageBoxOptions.RightAlign | MessageBoxOptions.RtlReading;
-            DialogResult dr = MessageBox.Show(this, Messages.RuleConfirmDeleteMessageText, Messages.DeleteRule,
-                MessageBoxButtons.OKCancel, MessageBoxIcon.Question, MessageBoxDefaultButton.Button1, mbo);
+            DialogResult dr = MessageBox.Show(
+                this,
+                Messages.RuleConfirmDeleteMessageText,
+                Messages.DeleteRule,
+                MessageBoxButtons.OKCancel,
+                MessageBoxIcon.Question,
+                MessageBoxDefaultButton.Button1,
+                mbo
+            );
             if (dr == DialogResult.OK)
             {
                 Rule rule = this.rulesListView.SelectedItems[0].Tag as Rule;
@@ -326,7 +367,10 @@ namespace System.Workflow.Activities.Rules.Design
                 this.rulesListView.Items.RemoveAt(selectionIndex);
                 if (this.rulesListView.Items.Count > 0)
                 {
-                    int newSelectionIndex = Math.Min(selectionIndex, this.rulesListView.Items.Count - 1);
+                    int newSelectionIndex = Math.Min(
+                        selectionIndex,
+                        this.rulesListView.Items.Count - 1
+                    );
                     this.rulesListView.Items[newSelectionIndex].Selected = true;
                 }
             }
@@ -343,7 +387,11 @@ namespace System.Workflow.Activities.Rules.Design
                     if (string.IsNullOrEmpty(ruleName))
                     {
                         e.Cancel = true;
-                        DesignerHelpers.DisplayError(Messages.Error_RuleNameIsEmpty, this.Text, this.serviceProvider);
+                        DesignerHelpers.DisplayError(
+                            Messages.Error_RuleNameIsEmpty,
+                            this.Text,
+                            this.serviceProvider
+                        );
                     }
                     else if (rule.Name == ruleName)
                     {
@@ -352,7 +400,11 @@ namespace System.Workflow.Activities.Rules.Design
                     else if (!IsUniqueIdentifier(ruleName))
                     {
                         e.Cancel = true;
-                        DesignerHelpers.DisplayError(Messages.Error_DuplicateRuleName, this.Text, this.serviceProvider);
+                        DesignerHelpers.DisplayError(
+                            Messages.Error_DuplicateRuleName,
+                            this.Text,
+                            this.serviceProvider
+                        );
                     }
                     else
                     {
@@ -371,13 +423,20 @@ namespace System.Workflow.Activities.Rules.Design
                 Rule rule = this.rulesListView.SelectedItems[0].Tag as Rule;
                 try
                 {
-                    rule.Priority = int.Parse(this.priorityTextBox.Text, CultureInfo.CurrentCulture);
+                    rule.Priority = int.Parse(
+                        this.priorityTextBox.Text,
+                        CultureInfo.CurrentCulture
+                    );
                     UpdateItem(this.rulesListView.SelectedItems[0], rule);
                 }
                 catch
                 {
                     e.Cancel = true;
-                    DesignerHelpers.DisplayError(Messages.Error_InvalidPriority, this.Text, this.serviceProvider);
+                    DesignerHelpers.DisplayError(
+                        Messages.Error_InvalidPriority,
+                        this.Text,
+                        this.serviceProvider
+                    );
                 }
             }
         }
@@ -397,21 +456,26 @@ namespace System.Workflow.Activities.Rules.Design
             if (this.rulesListView.SelectedItems.Count > 0)
             {
                 Rule rule = this.rulesListView.SelectedItems[0].Tag as Rule;
-                rule.ReevaluationBehavior = (RuleReevaluationBehavior)this.reevaluationComboBox.SelectedIndex;
+                rule.ReevaluationBehavior = (RuleReevaluationBehavior)
+                    this.reevaluationComboBox.SelectedIndex;
                 UpdateItem(this.rulesListView.SelectedItems[0], rule);
             }
         }
 
         private void chainingBehaviourComboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
-            this.dialogRuleSet.ChainingBehavior = (RuleChainingBehavior)this.chainingBehaviourComboBox.SelectedIndex;
+            this.dialogRuleSet.ChainingBehavior = (RuleChainingBehavior)
+                this.chainingBehaviourComboBox.SelectedIndex;
         }
 
         private void rulesListView_ColumnClick(object sender, ColumnClickEventArgs e)
         {
             if (e.Column < numCols)
             {
-                this.rulesListView.ListViewItemSorter = new ListViewItemComparer(e.Column, sortOrder[e.Column]);
+                this.rulesListView.ListViewItemSorter = new ListViewItemComparer(
+                    e.Column,
+                    sortOrder[e.Column]
+                );
                 sortOrder[e.Column] = !sortOrder[e.Column];
             }
         }
@@ -422,7 +486,9 @@ namespace System.Workflow.Activities.Rules.Design
 
         private ListViewItem AddNewItem(Rule rule)
         {
-            ListViewItem listViewItem = new ListViewItem(new string[] { rule.Name, String.Empty, String.Empty, String.Empty, String.Empty });
+            ListViewItem listViewItem = new ListViewItem(
+                new string[] { rule.Name, String.Empty, String.Empty, String.Empty, String.Empty }
+            );
             this.rulesListView.Items.Add(listViewItem);
             listViewItem.Tag = rule;
             UpdateItem(listViewItem, rule);
@@ -434,7 +500,8 @@ namespace System.Workflow.Activities.Rules.Design
         {
             listViewItem.SubItems[0].Text = rule.Name;
             listViewItem.SubItems[1].Text = rule.Priority.ToString(CultureInfo.CurrentCulture);
-            listViewItem.SubItems[2].Text = (string)this.reevaluationComboBox.Items[(int)rule.ReevaluationBehavior];
+            listViewItem.SubItems[2].Text = (string)
+                this.reevaluationComboBox.Items[(int)rule.ReevaluationBehavior];
             listViewItem.SubItems[3].Text = rule.Active.ToString(CultureInfo.CurrentCulture);
             listViewItem.SubItems[4].Text = DesignerHelpers.GetRulePreview(rule);
         }
@@ -516,17 +583,35 @@ namespace System.Workflow.Activities.Rules.Design
                     // looking at priority
                     int val1 = 0;
                     int val2 = 0;
-                    int.TryParse(item1.SubItems[col].Text, NumberStyles.Integer, CultureInfo.CurrentCulture, out val1);
-                    int.TryParse(item2.SubItems[col].Text, NumberStyles.Integer, CultureInfo.CurrentCulture, out val2);
+                    int.TryParse(
+                        item1.SubItems[col].Text,
+                        NumberStyles.Integer,
+                        CultureInfo.CurrentCulture,
+                        out val1
+                    );
+                    int.TryParse(
+                        item2.SubItems[col].Text,
+                        NumberStyles.Integer,
+                        CultureInfo.CurrentCulture,
+                        out val2
+                    );
                     if (val1 != val2)
                         retval = (val2 - val1);
                     else
                         // priorities are the same, so sort on name (column 0)
-                        retval = String.Compare(item1.SubItems[0].Text, item2.SubItems[0].Text, StringComparison.CurrentCulture);
+                        retval = String.Compare(
+                            item1.SubItems[0].Text,
+                            item2.SubItems[0].Text,
+                            StringComparison.CurrentCulture
+                        );
                 }
                 else
                 {
-                    retval = String.Compare(item1.SubItems[col].Text, item2.SubItems[col].Text, StringComparison.CurrentCulture);
+                    retval = String.Compare(
+                        item1.SubItems[col].Text,
+                        item2.SubItems[col].Text,
+                        StringComparison.CurrentCulture
+                    );
                 }
                 return ascending ? retval : -retval;
             }
@@ -551,18 +636,17 @@ namespace System.Workflow.Activities.Rules.Design
             ShowHelp();
         }
 
-
         private void OnHelpRequested(object sender, HelpEventArgs e)
         {
             ShowHelp();
         }
 
-
         private void ShowHelp()
         {
             if (serviceProvider != null)
             {
-                IHelpService helpService = serviceProvider.GetService(typeof(IHelpService)) as IHelpService;
+                IHelpService helpService =
+                    serviceProvider.GetService(typeof(IHelpService)) as IHelpService;
                 if (helpService != null)
                 {
                     helpService.ShowHelpFromKeyword(this.GetType().FullName + ".UI");
@@ -584,5 +668,4 @@ namespace System.Workflow.Activities.Rules.Design
     }
 
     #endregion
-
 }

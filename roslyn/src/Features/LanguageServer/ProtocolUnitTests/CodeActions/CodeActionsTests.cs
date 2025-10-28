@@ -20,13 +20,13 @@ using LSP = Microsoft.VisualStudio.LanguageServer.Protocol;
 
 namespace Microsoft.CodeAnalysis.LanguageServer.UnitTests.CodeActions;
 
-public class CodeActionsTests(ITestOutputHelper testOutputHelper) : AbstractLanguageServerProtocolTests(testOutputHelper)
+public class CodeActionsTests(ITestOutputHelper testOutputHelper)
+    : AbstractLanguageServerProtocolTests(testOutputHelper)
 {
     [WpfTheory, CombinatorialData]
     public async Task TestCodeActionHandlerAsync(bool mutatingLspWorkspace)
     {
-        var markup =
-            """
+        var markup = """
             class A
             {
                 void M()
@@ -35,7 +35,17 @@ public class CodeActionsTests(ITestOutputHelper testOutputHelper) : AbstractLang
                 }
             }
             """;
-        await using var testLspServer = await CreateTestLspServerAsync(markup, mutatingLspWorkspace, initializationOptions: new InitializationOptions() { ClientCapabilities = new VSInternalClientCapabilities { SupportsVisualStudioExtensions = true } });
+        await using var testLspServer = await CreateTestLspServerAsync(
+            markup,
+            mutatingLspWorkspace,
+            initializationOptions: new InitializationOptions()
+            {
+                ClientCapabilities = new VSInternalClientCapabilities
+                {
+                    SupportsVisualStudioExtensions = true,
+                },
+            }
+        );
 
         var caretLocation = testLspServer.GetLocations("caret").Single();
         var expected = CreateCodeAction(
@@ -45,14 +55,25 @@ public class CodeActionsTests(ITestOutputHelper testOutputHelper) : AbstractLang
             data: CreateCodeActionResolveData(
                 CSharpAnalyzersResources.Use_implicit_type,
                 caretLocation,
-                customTags: new[] { PredefinedCodeRefactoringProviderNames.UseImplicitType }),
+                customTags: new[] { PredefinedCodeRefactoringProviderNames.UseImplicitType }
+            ),
             priority: VSInternalPriorityLevel.Low,
             groupName: "Roslyn2",
-            applicableRange: new LSP.Range { Start = new Position { Line = 4, Character = 8 }, End = new Position { Line = 4, Character = 11 } },
-            diagnostics: null);
+            applicableRange: new LSP.Range
+            {
+                Start = new Position { Line = 4, Character = 8 },
+                End = new Position { Line = 4, Character = 11 },
+            },
+            diagnostics: null
+        );
 
-        var results = await RunGetCodeActionsAsync(testLspServer, CreateCodeActionParams(caretLocation));
-        var useImplicitType = results.FirstOrDefault(r => r.Title == CSharpAnalyzersResources.Use_implicit_type);
+        var results = await RunGetCodeActionsAsync(
+            testLspServer,
+            CreateCodeActionParams(caretLocation)
+        );
+        var useImplicitType = results.FirstOrDefault(r =>
+            r.Title == CSharpAnalyzersResources.Use_implicit_type
+        );
 
         AssertJsonEquals(expected, useImplicitType);
     }
@@ -60,8 +81,7 @@ public class CodeActionsTests(ITestOutputHelper testOutputHelper) : AbstractLang
     [WpfTheory, CombinatorialData]
     public async Task TestCodeActionHandlerAsync_NestedAction(bool mutatingLspWorkspace)
     {
-        var markup =
-            """
+        var markup = """
             class A
             {
                 void M()
@@ -70,7 +90,11 @@ public class CodeActionsTests(ITestOutputHelper testOutputHelper) : AbstractLang
                 }
             }
             """;
-        await using var testLspServer = await CreateTestLspServerAsync(markup, mutatingLspWorkspace, CapabilitiesWithVSExtensions);
+        await using var testLspServer = await CreateTestLspServerAsync(
+            markup,
+            mutatingLspWorkspace,
+            CapabilitiesWithVSExtensions
+        );
 
         var caretLocation = testLspServer.GetLocations("caret").Single();
         var expected = CreateCodeAction(
@@ -78,19 +102,37 @@ public class CodeActionsTests(ITestOutputHelper testOutputHelper) : AbstractLang
             kind: CodeActionKind.Refactor,
             children: Array.Empty<VSInternalCodeAction>(),
             data: CreateCodeActionResolveData(
-                FeaturesResources.Introduce_constant + '|' + string.Format(FeaturesResources.Introduce_constant_for_0, "1"),
-                caretLocation),
+                FeaturesResources.Introduce_constant
+                    + '|'
+                    + string.Format(FeaturesResources.Introduce_constant_for_0, "1"),
+                caretLocation
+            ),
             priority: VSInternalPriorityLevel.Normal,
             groupName: "Roslyn3",
-            applicableRange: new LSP.Range { Start = new Position { Line = 4, Character = 12 }, End = new Position { Line = 4, Character = 12 } },
-            diagnostics: null);
+            applicableRange: new LSP.Range
+            {
+                Start = new Position { Line = 4, Character = 12 },
+                End = new Position { Line = 4, Character = 12 },
+            },
+            diagnostics: null
+        );
 
-        var results = await RunGetCodeActionsAsync(testLspServer, CreateCodeActionParams(caretLocation));
+        var results = await RunGetCodeActionsAsync(
+            testLspServer,
+            CreateCodeActionParams(caretLocation)
+        );
 
-        var topLevelAction = Assert.Single(results.Where(action => action.Title == FeaturesResources.Introduce_constant));
-        var expectedChildActionTitle = FeaturesResources.Introduce_constant + '|' + string.Format(FeaturesResources.Introduce_constant_for_0, "1");
-        var introduceConstant = topLevelAction.Children.FirstOrDefault(
-            r => ((JObject)r.Data!).ToObject<CodeActionResolveData>()!.UniqueIdentifier == expectedChildActionTitle);
+        var topLevelAction = Assert.Single(
+            results.Where(action => action.Title == FeaturesResources.Introduce_constant)
+        );
+        var expectedChildActionTitle =
+            FeaturesResources.Introduce_constant
+            + '|'
+            + string.Format(FeaturesResources.Introduce_constant_for_0, "1");
+        var introduceConstant = topLevelAction.Children.FirstOrDefault(r =>
+            ((JObject)r.Data!).ToObject<CodeActionResolveData>()!.UniqueIdentifier
+            == expectedChildActionTitle
+        );
 
         AssertJsonEquals(expected, introduceConstant);
     }
@@ -98,8 +140,7 @@ public class CodeActionsTests(ITestOutputHelper testOutputHelper) : AbstractLang
     [WpfTheory, CombinatorialData]
     public async Task TestCodeActionHasCorrectDiagnostics(bool mutatingLspWorkspace)
     {
-        var markup =
-            """
+        var markup = """
             class A
             {
                 void M()
@@ -108,7 +149,10 @@ public class CodeActionsTests(ITestOutputHelper testOutputHelper) : AbstractLang
                 }
             }
             """;
-        await using var testLspServer = await CreateTestLspServerAsync(markup, mutatingLspWorkspace);
+        await using var testLspServer = await CreateTestLspServerAsync(
+            markup,
+            mutatingLspWorkspace
+        );
 
         var caret = testLspServer.GetLocations("caret").Single();
         var codeActionParams = new CodeActionParams
@@ -119,20 +163,16 @@ public class CodeActionsTests(ITestOutputHelper testOutputHelper) : AbstractLang
             {
                 Diagnostics =
                 [
-                    new LSP.Diagnostic
-                    {
-                        Code = AddImportDiagnosticIds.CS0103
-                    },
-                    new LSP.Diagnostic
-                    {
-                        Code = "SomeCode"
-                    }
-                ]
-            }
+                    new LSP.Diagnostic { Code = AddImportDiagnosticIds.CS0103 },
+                    new LSP.Diagnostic { Code = "SomeCode" },
+                ],
+            },
         };
 
         var results = await RunGetCodeActionsAsync(testLspServer, codeActionParams);
-        var addImport = results.FirstOrDefault(r => r.Title.Contains($"using System.Threading.Tasks"));
+        var addImport = results.FirstOrDefault(r =>
+            r.Title.Contains($"using System.Threading.Tasks")
+        );
         Assert.Equal(1, addImport.Diagnostics!.Length);
         Assert.Equal(AddImportDiagnosticIds.CS0103, addImport.Diagnostics.Single().Code!.Value);
     }
@@ -149,7 +189,10 @@ public class CodeActionsTests(ITestOutputHelper testOutputHelper) : AbstractLang
             }
             """;
 
-        await using var testLspServer = await CreateTestLspServerAsync(markup, mutatingLspWorkspace);
+        await using var testLspServer = await CreateTestLspServerAsync(
+            markup,
+            mutatingLspWorkspace
+        );
 
         var caret = testLspServer.GetLocations("caret").Single();
         var codeActionParams = new CodeActionParams
@@ -163,10 +206,10 @@ public class CodeActionsTests(ITestOutputHelper testOutputHelper) : AbstractLang
                     new LSP.Diagnostic
                     {
                         // async method lack of await.
-                        Code = "CS1998"
-                    }
-                ]
-            }
+                        Code = "CS1998",
+                    },
+                ],
+            },
         };
 
         var results = await RunGetCodeActionsAsync(testLspServer, codeActionParams);
@@ -189,16 +232,17 @@ public class CodeActionsTests(ITestOutputHelper testOutputHelper) : AbstractLang
             }
             """;
 
-        await using var testLspServer = await CreateTestLspServerAsync(markup, mutatingLspWorkspace);
+        await using var testLspServer = await CreateTestLspServerAsync(
+            markup,
+            mutatingLspWorkspace
+        );
 
         var caret = testLspServer.GetLocations("caret").Single();
         var codeActionParams = new CodeActionParams
         {
             TextDocument = CreateTextDocumentIdentifier(caret.Uri),
             Range = caret.Range,
-            Context = new CodeActionContext
-            {
-            }
+            Context = new CodeActionContext { },
         };
 
         var results = await RunGetCodeActionsAsync(testLspServer, codeActionParams);
@@ -226,7 +270,10 @@ public class CodeActionsTests(ITestOutputHelper testOutputHelper) : AbstractLang
             }
             """;
 
-        await using var testLspServer = await CreateTestLspServerAsync(markup, mutatingLspWorkspace);
+        await using var testLspServer = await CreateTestLspServerAsync(
+            markup,
+            mutatingLspWorkspace
+        );
 
         var caret = testLspServer.GetLocations("caret").Single();
         var codeActionParams = new CodeActionParams
@@ -240,10 +287,10 @@ public class CodeActionsTests(ITestOutputHelper testOutputHelper) : AbstractLang
                     new LSP.Diagnostic
                     {
                         // async method lack of await.
-                        Code = "CS1998"
-                    }
-                ]
-            }
+                        Code = "CS1998",
+                    },
+                ],
+            },
         };
 
         var results = await RunGetCodeActionsAsync(testLspServer, codeActionParams);
@@ -274,16 +321,17 @@ public class CodeActionsTests(ITestOutputHelper testOutputHelper) : AbstractLang
             }
             """;
 
-        await using var testLspServer = await CreateTestLspServerAsync(markup, mutatingLspWorkspace);
+        await using var testLspServer = await CreateTestLspServerAsync(
+            markup,
+            mutatingLspWorkspace
+        );
 
         var caret = testLspServer.GetLocations("caret").Single();
         var codeActionParams = new CodeActionParams
         {
             TextDocument = CreateTextDocumentIdentifier(caret.Uri),
             Range = caret.Range,
-            Context = new CodeActionContext
-            {
-            }
+            Context = new CodeActionContext { },
         };
 
         var results = await RunGetCodeActionsAsync(testLspServer, codeActionParams);
@@ -295,19 +343,27 @@ public class CodeActionsTests(ITestOutputHelper testOutputHelper) : AbstractLang
 
     private static async Task<VSInternalCodeAction[]> RunGetCodeActionsAsync(
         TestLspServer testLspServer,
-        CodeActionParams codeActionParams)
+        CodeActionParams codeActionParams
+    )
     {
         var result = await testLspServer.ExecuteRequestAsync<CodeActionParams, CodeAction[]>(
-            LSP.Methods.TextDocumentCodeActionName, codeActionParams, CancellationToken.None);
+            LSP.Methods.TextDocumentCodeActionName,
+            codeActionParams,
+            CancellationToken.None
+        );
         return result.Cast<VSInternalCodeAction>().ToArray();
     }
 
     private static async Task<VSInternalCodeAction> RunGetCodeActionResolveAsync(
         TestLspServer testLspServer,
-        CodeAction codeAction)
+        CodeAction codeAction
+    )
     {
         var result = await testLspServer.ExecuteRequestAsync<CodeAction, CodeAction>(
-            LSP.Methods.CodeActionResolveName, codeAction, CancellationToken.None);
+            LSP.Methods.CodeActionResolveName,
+            codeAction,
+            CancellationToken.None
+        );
         Assert.NotNull(result);
         return (VSInternalCodeAction)result!;
     }
@@ -315,25 +371,31 @@ public class CodeActionsTests(ITestOutputHelper testOutputHelper) : AbstractLang
     private static CodeActionResolveData? GetCodeActionResolveData(CodeAction codeAction)
     {
         return ((JToken)codeAction.Data!).ToObject<CodeActionResolveData>();
-
     }
 
-    internal static CodeActionParams CreateCodeActionParams(LSP.Location caret)
-        => new CodeActionParams
+    internal static CodeActionParams CreateCodeActionParams(LSP.Location caret) =>
+        new CodeActionParams
         {
             TextDocument = CreateTextDocumentIdentifier(caret.Uri),
             Range = caret.Range,
             Context = new CodeActionContext
             {
                 // TODO - Code actions should respect context.
-            }
+            },
         };
 
     internal static VSInternalCodeAction CreateCodeAction(
-        string title, CodeActionKind kind, VSInternalCodeAction[] children,
-        CodeActionResolveData data, LSP.Diagnostic[]? diagnostics,
-        VSInternalPriorityLevel? priority, string groupName, LSP.Range applicableRange,
-        WorkspaceEdit? edit = null, Command? command = null)
+        string title,
+        CodeActionKind kind,
+        VSInternalCodeAction[] children,
+        CodeActionResolveData data,
+        LSP.Diagnostic[]? diagnostics,
+        VSInternalPriorityLevel? priority,
+        string groupName,
+        LSP.Range applicableRange,
+        WorkspaceEdit? edit = null,
+        Command? command = null
+    )
     {
         var action = new VSInternalCodeAction
         {
@@ -346,7 +408,7 @@ public class CodeActionsTests(ITestOutputHelper testOutputHelper) : AbstractLang
             Group = groupName,
             Priority = priority,
             ApplicableRange = applicableRange,
-            Command = command
+            Command = command,
         };
 
         return action;

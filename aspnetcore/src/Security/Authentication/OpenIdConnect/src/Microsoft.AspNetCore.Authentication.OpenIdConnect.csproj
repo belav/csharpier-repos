@@ -1,5 +1,4 @@
 <Project Sdk="Microsoft.NET.Sdk">
-
   <PropertyGroup>
     <Description>ASP.NET Core middleware that enables an application to support the OpenID Connect authentication workflow.</Description>
     <TargetFramework>$(DefaultNetCoreTargetFramework)</TargetFramework>
@@ -16,5 +15,4 @@
   <ItemGroup>
     <Compile Include="$(SharedSourceRoot)StringHelpers.cs" LinkBase="Shared" />
   </ItemGroup>
-
 </Project>

@@ -15,6 +15,7 @@ class C0
     public short F1;
     public ulong F2;
     public short F3;
+
     public C0(ushort f0, ulong f2, short f3)
     {
         F0 = f0;
@@ -39,6 +40,7 @@ public class Runtime_57061_3
     static long s_2;
     static S0[][][] s_3;
     static S0 s_4;
+
     [Fact]
     public static void TestEntryPoint()
     {

@@ -25,34 +25,46 @@ using Xunit;
 
 namespace Microsoft.CodeAnalysis.Rebuild.UnitTests
 {
-    public partial class DeterministicKeyBuilderTests<TCompilation, TCompilationOptions, TParseOptions>
+    public partial class DeterministicKeyBuilderTests<
+        TCompilation,
+        TCompilationOptions,
+        TParseOptions
+    >
     {
         private sealed class Analyzer : DiagnosticAnalyzer
         {
-            public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => throw new NotImplementedException();
+            public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics =>
+                throw new NotImplementedException();
 
-            public override void Initialize(AnalysisContext context) => throw new NotImplementedException();
+            public override void Initialize(AnalysisContext context) =>
+                throw new NotImplementedException();
         }
 
         private sealed class Analyzer2 : DiagnosticAnalyzer
         {
-            public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => throw new NotImplementedException();
+            public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics =>
+                throw new NotImplementedException();
 
-            public override void Initialize(AnalysisContext context) => throw new NotImplementedException();
+            public override void Initialize(AnalysisContext context) =>
+                throw new NotImplementedException();
         }
 
         private sealed class Generator : ISourceGenerator
         {
-            public void Execute(GeneratorExecutionContext context) => throw new NotImplementedException();
+            public void Execute(GeneratorExecutionContext context) =>
+                throw new NotImplementedException();
 
-            public void Initialize(GeneratorInitializationContext context) => throw new NotImplementedException();
+            public void Initialize(GeneratorInitializationContext context) =>
+                throw new NotImplementedException();
         }
 
         private sealed class Generator2 : ISourceGenerator
         {
-            public void Execute(GeneratorExecutionContext context) => throw new NotImplementedException();
+            public void Execute(GeneratorExecutionContext context) =>
+                throw new NotImplementedException();
 
-            public void Initialize(GeneratorInitializationContext context) => throw new NotImplementedException();
+            public void Initialize(GeneratorInitializationContext context) =>
+                throw new NotImplementedException();
         }
     }
 }

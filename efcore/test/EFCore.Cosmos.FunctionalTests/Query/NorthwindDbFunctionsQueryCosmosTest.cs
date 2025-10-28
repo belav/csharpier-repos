@@ -3,19 +3,21 @@
 
 namespace Microsoft.EntityFrameworkCore.Query;
 
-public class NorthwindDbFunctionsQueryCosmosTest : NorthwindDbFunctionsQueryTestBase<NorthwindQueryCosmosFixture<NoopModelCustomizer>>
+public class NorthwindDbFunctionsQueryCosmosTest
+    : NorthwindDbFunctionsQueryTestBase<NorthwindQueryCosmosFixture<NoopModelCustomizer>>
 {
     public NorthwindDbFunctionsQueryCosmosTest(
         NorthwindQueryCosmosFixture<NoopModelCustomizer> fixture,
-        ITestOutputHelper testOutputHelper)
+        ITestOutputHelper testOutputHelper
+    )
         : base(fixture)
     {
         ClearLog();
     }
 
     [ConditionalFact]
-    public virtual void Check_all_tests_overridden()
-        => TestHelpers.AssertAllMethodsOverridden(GetType());
+    public virtual void Check_all_tests_overridden() =>
+        TestHelpers.AssertAllMethodsOverridden(GetType());
 
     public override async Task Like_all_literals(bool async)
     {
@@ -61,7 +63,8 @@ public class NorthwindDbFunctionsQueryCosmosTest : NorthwindDbFunctionsQueryTest
 SELECT COUNT(1) AS c
 FROM root c
 WHERE ((c["Discriminator"] = "Order") AND (RAND() < 1.0))
-""");
+"""
+        );
     }
 
     public override async Task Random_return_greater_than_0(bool async)
@@ -73,12 +76,12 @@ WHERE ((c["Discriminator"] = "Order") AND (RAND() < 1.0))
 SELECT COUNT(1) AS c
 FROM root c
 WHERE ((c["Discriminator"] = "Order") AND (RAND() >= 0.0))
-""");
+"""
+        );
     }
 
-    private void AssertSql(params string[] expected)
-        => Fixture.TestSqlLoggerFactory.AssertBaseline(expected);
+    private void AssertSql(params string[] expected) =>
+        Fixture.TestSqlLoggerFactory.AssertBaseline(expected);
 
-    protected void ClearLog()
-        => Fixture.TestSqlLoggerFactory.Clear();
+    protected void ClearLog() => Fixture.TestSqlLoggerFactory.Clear();
 }

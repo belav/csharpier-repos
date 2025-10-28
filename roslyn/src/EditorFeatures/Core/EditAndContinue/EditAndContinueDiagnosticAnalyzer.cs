@@ -13,34 +13,41 @@ using Microsoft.CodeAnalysis.Diagnostics;
 using Microsoft.CodeAnalysis.Host;
 using Microsoft.CodeAnalysis.Host.Mef;
 using Microsoft.CodeAnalysis.Options;
-using Roslyn.Utilities;
-using Microsoft.VisualStudio.Debugger.Contracts;
 using Microsoft.CodeAnalysis.Simplification;
+using Microsoft.VisualStudio.Debugger.Contracts;
+using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.EditAndContinue
 {
     [DiagnosticAnalyzer(LanguageNames.CSharp, LanguageNames.VisualBasic)]
-    internal sealed class EditAndContinueDiagnosticAnalyzer : DocumentDiagnosticAnalyzer, IBuiltInAnalyzer
+    internal sealed class EditAndContinueDiagnosticAnalyzer
+        : DocumentDiagnosticAnalyzer,
+            IBuiltInAnalyzer
     {
-        private static readonly ImmutableArray<DiagnosticDescriptor> s_supportedDiagnostics = EditAndContinueDiagnosticDescriptors.GetDescriptors();
+        private static readonly ImmutableArray<DiagnosticDescriptor> s_supportedDiagnostics =
+            EditAndContinueDiagnosticDescriptors.GetDescriptors();
 
         // Return known descriptors. This will not include module diagnostics reported on behalf of the debugger.
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics
-            => s_supportedDiagnostics;
+        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics =>
+            s_supportedDiagnostics;
 
-        public DiagnosticAnalyzerCategory GetAnalyzerCategory()
-            => DiagnosticAnalyzerCategory.SemanticDocumentAnalysis;
+        public DiagnosticAnalyzerCategory GetAnalyzerCategory() =>
+            DiagnosticAnalyzerCategory.SemanticDocumentAnalysis;
 
         public bool IsHighPriority => false;
 
-        public bool OpenFileOnly(SimplifierOptions? options)
-            => false;
+        public bool OpenFileOnly(SimplifierOptions? options) => false;
 
-        // No syntax diagnostics produced by the EnC engine.  
-        public override Task<ImmutableArray<Diagnostic>> AnalyzeSyntaxAsync(Document document, CancellationToken cancellationToken)
-            => SpecializedTasks.EmptyImmutableArray<Diagnostic>();
+        // No syntax diagnostics produced by the EnC engine.
+        public override Task<ImmutableArray<Diagnostic>> AnalyzeSyntaxAsync(
+            Document document,
+            CancellationToken cancellationToken
+        ) => SpecializedTasks.EmptyImmutableArray<Diagnostic>();
 
-        public override Task<ImmutableArray<Diagnostic>> AnalyzeSemanticsAsync(Document document, CancellationToken cancellationToken)
+        public override Task<ImmutableArray<Diagnostic>> AnalyzeSemanticsAsync(
+            Document document,
+            CancellationToken cancellationToken
+        )
         {
             if (!DebuggerContractVersionCheck.IsRequiredDebuggerContractVersionAvailable())
             {
@@ -51,7 +58,10 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
         }
 
         [MethodImpl(MethodImplOptions.NoInlining)]
-        private static async Task<ImmutableArray<Diagnostic>> AnalyzeSemanticsImplAsync(Document designTimeDocument, CancellationToken cancellationToken)
+        private static async Task<ImmutableArray<Diagnostic>> AnalyzeSemanticsImplAsync(
+            Document designTimeDocument,
+            CancellationToken cancellationToken
+        )
         {
             var workspace = designTimeDocument.Project.Solution.Workspace;
 
@@ -61,15 +71,28 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
             }
 
             // avoid creating and synchronizing compile-time solution if the Hot Reload/EnC session is not active
-            if (mefServices.GetExports<EditAndContinueLanguageService>().SingleOrDefault()?.Value.IsSessionActive != true)
+            if (
+                mefServices
+                    .GetExports<EditAndContinueLanguageService>()
+                    .SingleOrDefault()
+                    ?.Value.IsSessionActive != true
+            )
             {
                 return ImmutableArray<Diagnostic>.Empty;
             }
 
             var designTimeSolution = designTimeDocument.Project.Solution;
-            var compileTimeSolution = workspace.Services.GetRequiredService<ICompileTimeSolutionProvider>().GetCompileTimeSolution(designTimeSolution);
+            var compileTimeSolution = workspace
+                .Services.GetRequiredService<ICompileTimeSolutionProvider>()
+                .GetCompileTimeSolution(designTimeSolution);
 
-            var compileTimeDocument = await CompileTimeSolutionProvider.TryGetCompileTimeDocumentAsync(designTimeDocument, compileTimeSolution, cancellationToken).ConfigureAwait(false);
+            var compileTimeDocument = await CompileTimeSolutionProvider
+                .TryGetCompileTimeDocumentAsync(
+                    designTimeDocument,
+                    compileTimeSolution,
+                    cancellationToken
+                )
+                .ConfigureAwait(false);
             if (compileTimeDocument == null)
             {
                 return ImmutableArray<Diagnostic>.Empty;
@@ -79,13 +102,25 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
 
             var proxy = new RemoteEditAndContinueServiceProxy(workspace);
 
-            var activeStatementSpanProvider = new ActiveStatementSpanProvider(async (documentId, filePath, cancellationToken) =>
-            {
-                var trackingService = workspace.Services.GetRequiredService<IActiveStatementTrackingService>();
-                return await trackingService.GetSpansAsync(compileTimeSolution, documentId, filePath, cancellationToken).ConfigureAwait(false);
-            });
+            var activeStatementSpanProvider = new ActiveStatementSpanProvider(
+                async (documentId, filePath, cancellationToken) =>
+                {
+                    var trackingService =
+                        workspace.Services.GetRequiredService<IActiveStatementTrackingService>();
+                    return await trackingService
+                        .GetSpansAsync(compileTimeSolution, documentId, filePath, cancellationToken)
+                        .ConfigureAwait(false);
+                }
+            );
 
-            return await proxy.GetDocumentDiagnosticsAsync(compileTimeDocument, designTimeDocument, activeStatementSpanProvider, cancellationToken).ConfigureAwait(false);
+            return await proxy
+                .GetDocumentDiagnosticsAsync(
+                    compileTimeDocument,
+                    designTimeDocument,
+                    activeStatementSpanProvider,
+                    cancellationToken
+                )
+                .ConfigureAwait(false);
         }
     }
 }

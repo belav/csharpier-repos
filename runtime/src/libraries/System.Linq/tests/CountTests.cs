@@ -11,9 +11,10 @@ namespace System.Linq.Tests
         [Fact]
         public void SameResultsRepeatCallsIntQuery()
         {
-            var q = from x in new[] { 9999, 0, 888, -1, 66, -777, 1, 2, -12345 }
-                    where x > int.MinValue
-                    select x;
+            var q =
+                from x in new[] { 9999, 0, 888, -1, 66, -777, 1, 2, -12345 }
+                where x > int.MinValue
+                select x;
 
             Assert.Equal(q.Count(), q.Count());
         }
@@ -21,9 +22,10 @@ namespace System.Linq.Tests
         [Fact]
         public void SameResultsRepeatCallsStringQuery()
         {
-            var q = from x in new[] { "!@#$%^", "C", "AAA", "", "Calling Twice", "SoS", string.Empty }
-                    where !string.IsNullOrEmpty(x)
-                    select x;
+            var q =
+                from x in new[] { "!@#$%^", "C", "AAA", "", "Calling Twice", "SoS", string.Empty }
+                where !string.IsNullOrEmpty(x)
+                select x;
 
             Assert.Equal(q.Count(), q.Count());
         }
@@ -41,7 +43,12 @@ namespace System.Linq.Tests
 
             yield return new object[] { RepeatedNumberGuaranteedNotCollectionType(0, 0), null, 0 };
             yield return new object[] { RepeatedNumberGuaranteedNotCollectionType(5, 1), null, 1 };
-            yield return new object[] { RepeatedNumberGuaranteedNotCollectionType(5, 10), null, 10 };
+            yield return new object[]
+            {
+                RepeatedNumberGuaranteedNotCollectionType(5, 10),
+                null,
+                10,
+            };
         }
 
         [Theory]
@@ -91,7 +98,10 @@ namespace System.Linq.Tests
             Assert.Equal(count, enumerable.RunOnce().Count());
         }
 
-        private static IEnumerable<object[]> EnumerateCollectionTypesAndCounts<T>(int count, IEnumerable<T> enumerable)
+        private static IEnumerable<object[]> EnumerateCollectionTypesAndCounts<T>(
+            int count,
+            IEnumerable<T> enumerable
+        )
         {
             yield return new object[] { count, enumerable };
             yield return new object[] { count, enumerable.ToArray() };
@@ -105,37 +115,67 @@ namespace System.Linq.Tests
             var range = Enumerable.Range(1, count);
             foreach (object[] variant in EnumerateCollectionTypesAndCounts(count, range))
                 yield return variant;
-            foreach (object[] variant in EnumerateCollectionTypesAndCounts(count, range.Select(i => (float)i)))
+            foreach (
+                object[] variant in EnumerateCollectionTypesAndCounts(
+                    count,
+                    range.Select(i => (float)i)
+                )
+            )
                 yield return variant;
-            foreach (object[] variant in EnumerateCollectionTypesAndCounts(count, range.Select(i => (double)i)))
+            foreach (
+                object[] variant in EnumerateCollectionTypesAndCounts(
+                    count,
+                    range.Select(i => (double)i)
+                )
+            )
                 yield return variant;
-            foreach (object[] variant in EnumerateCollectionTypesAndCounts(count, range.Select(i => (decimal)i)))
+            foreach (
+                object[] variant in EnumerateCollectionTypesAndCounts(
+                    count,
+                    range.Select(i => (decimal)i)
+                )
+            )
                 yield return variant;
         }
 
         [Fact]
         public void NullSource_ThrowsArgumentNullException()
         {
-            AssertExtensions.Throws<ArgumentNullException>("source", () => ((IEnumerable<int>)null).Count());
-            AssertExtensions.Throws<ArgumentNullException>("source", () => ((IEnumerable<int>)null).Count(i => i != 0));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "source",
+                () => ((IEnumerable<int>)null).Count()
+            );
+            AssertExtensions.Throws<ArgumentNullException>(
+                "source",
+                () => ((IEnumerable<int>)null).Count(i => i != 0)
+            );
         }
 
         [Fact]
         public void NullPredicate_ThrowsArgumentNullException()
         {
             Func<int, bool> predicate = null;
-            AssertExtensions.Throws<ArgumentNullException>("predicate", () => Enumerable.Range(0, 3).Count(predicate));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "predicate",
+                () => Enumerable.Range(0, 3).Count(predicate)
+            );
         }
 
         [Fact]
         public void NonEnumeratedCount_NullSource_ThrowsArgumentNullException()
         {
-            AssertExtensions.Throws<ArgumentNullException>("source", () => ((IEnumerable<int>)null).TryGetNonEnumeratedCount(out _));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "source",
+                () => ((IEnumerable<int>)null).TryGetNonEnumeratedCount(out _)
+            );
         }
 
         [Theory]
         [MemberData(nameof(NonEnumeratedCount_SupportedEnumerables))]
-        public void NonEnumeratedCount_SupportedEnumerables_ShouldReturnExpectedCount<T>(int expectedCount, IEnumerable<T> source)
+        public void NonEnumeratedCount_SupportedEnumerables_ShouldReturnExpectedCount<T>(
+            int expectedCount,
+            IEnumerable<T> source
+        )
         {
             Assert.True(source.TryGetNonEnumeratedCount(out int actualCount));
             Assert.Equal(expectedCount, actualCount);
@@ -143,7 +183,9 @@ namespace System.Linq.Tests
 
         [Theory]
         [MemberData(nameof(NonEnumeratedCount_UnsupportedEnumerables))]
-        public void NonEnumeratedCount_UnsupportedEnumerables_ShouldReturnFalse<T>(IEnumerable<T> source)
+        public void NonEnumeratedCount_UnsupportedEnumerables_ShouldReturnFalse<T>(
+            IEnumerable<T> source
+        )
         {
             Assert.False(source.TryGetNonEnumeratedCount(out int actualCount));
             Assert.Equal(0, actualCount);
@@ -166,7 +208,7 @@ namespace System.Linq.Tests
 
         public static IEnumerable<object[]> NonEnumeratedCount_SupportedEnumerables()
         {
-            yield return WrapArgs(4, new int[]{ 1, 2, 3, 4 });
+            yield return WrapArgs(4, new int[] { 1, 2, 3, 4 });
             yield return WrapArgs(4, new List<int>(new int[] { 1, 2, 3, 4 }));
             yield return WrapArgs(4, new Stack<int>(new int[] { 1, 2, 3, 4 }));
 
@@ -178,13 +220,17 @@ namespace System.Linq.Tests
                 yield return WrapArgs(80, Enumerable.Repeat(1, 80));
                 yield return WrapArgs(50, Enumerable.Range(1, 50).Select(x => x + 1));
                 yield return WrapArgs(4, new int[] { 1, 2, 3, 4 }.Select(x => x + 1));
-                yield return WrapArgs(50, Enumerable.Range(1, 50).Select(x => x + 1).Select(x => x - 1));
+                yield return WrapArgs(
+                    50,
+                    Enumerable.Range(1, 50).Select(x => x + 1).Select(x => x - 1)
+                );
                 yield return WrapArgs(20, Enumerable.Range(1, 20).Reverse());
                 yield return WrapArgs(20, Enumerable.Range(1, 20).OrderBy(x => -x));
                 yield return WrapArgs(20, Enumerable.Range(1, 10).Concat(Enumerable.Range(11, 10)));
             }
 
-            static object[] WrapArgs<T>(int expectedCount, IEnumerable<T> source) => new object[] { expectedCount, source };
+            static object[] WrapArgs<T>(int expectedCount, IEnumerable<T> source) =>
+                new object[] { expectedCount, source };
         }
 
         public static IEnumerable<object[]> NonEnumeratedCount_UnsupportedEnumerables()
@@ -199,8 +245,10 @@ namespace System.Linq.Tests
                 yield return WrapArgs(Enumerable.Range(1, 100));
                 yield return WrapArgs(Enumerable.Repeat(1, 80));
                 yield return WrapArgs(Enumerable.Range(1, 50).Select(x => x + 1));
-                yield return WrapArgs(new int[] { 1, 2, 3, 4 }.Select(x => x + 1));            
-                yield return WrapArgs(Enumerable.Range(1, 50).Select(x => x + 1).Select(x => x - 1));
+                yield return WrapArgs(new int[] { 1, 2, 3, 4 }.Select(x => x + 1));
+                yield return WrapArgs(
+                    Enumerable.Range(1, 50).Select(x => x + 1).Select(x => x - 1)
+                );
                 yield return WrapArgs(Enumerable.Range(1, 20).Reverse());
                 yield return WrapArgs(Enumerable.Range(1, 20).OrderBy(x => -x));
                 yield return WrapArgs(Enumerable.Range(1, 10).Concat(Enumerable.Range(11, 10)));

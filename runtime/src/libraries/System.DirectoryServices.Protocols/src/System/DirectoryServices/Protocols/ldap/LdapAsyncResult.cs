@@ -49,7 +49,8 @@ namespace System.DirectoryServices.Protocols
 
         private sealed class LdapAsyncWaitHandle : WaitHandle
         {
-            public LdapAsyncWaitHandle(SafeWaitHandle handle) : base()
+            public LdapAsyncWaitHandle(SafeWaitHandle handle)
+                : base()
             {
                 SafeWaitHandle = handle;
             }
@@ -72,7 +73,7 @@ namespace System.DirectoryServices.Protocols
     {
         PartialResult = 0,
         CompleteResult = 1,
-        Done = 2
+        Done = 2,
     }
 
     internal sealed class LdapPartialAsyncResult : LdapAsyncResult
@@ -87,7 +88,16 @@ namespace System.DirectoryServices.Protocols
         internal Exception _exception;
         internal DateTime _startTime;
 
-        public LdapPartialAsyncResult(int messageID, AsyncCallback callbackRoutine, object state, bool partialResults, LdapConnection con, bool partialCallback, TimeSpan requestTimeout) : base(callbackRoutine, state, partialResults)
+        public LdapPartialAsyncResult(
+            int messageID,
+            AsyncCallback callbackRoutine,
+            object state,
+            bool partialResults,
+            LdapConnection con,
+            bool partialCallback,
+            TimeSpan requestTimeout
+        )
+            : base(callbackRoutine, state, partialResults)
         {
             _messageID = messageID;
             _con = con;

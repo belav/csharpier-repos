@@ -1,30 +1,27 @@
 //------------------------------------------------------------------------------
 // <copyright file="CodeObjectCreateExpression.cs" company="Microsoft">
-// 
+//
 // <OWNER>Microsoft</OWNER>
 //     Copyright (c) Microsoft Corporation.  All rights reserved.
-// </copyright>                                                                
+// </copyright>
 //------------------------------------------------------------------------------
 
-namespace System.CodeDom {
-
-    using System.Diagnostics;
+namespace System.CodeDom
+{
     using System;
-    using Microsoft.Win32;
     using System.Collections;
+    using System.Diagnostics;
     using System.Runtime.InteropServices;
+    using Microsoft.Win32;
 
     /// <devdoc>
     ///    <para>
     ///       Represents an object create expression.
     ///    </para>
     /// </devdoc>
-    [
-        ClassInterface(ClassInterfaceType.AutoDispatch),
-        ComVisible(true),
-        Serializable,
-    ]
-    public class CodeObjectCreateExpression : CodeExpression {
+    [ClassInterface(ClassInterfaceType.AutoDispatch), ComVisible(true), Serializable]
+    public class CodeObjectCreateExpression : CodeExpression
+    {
         private CodeTypeReference createType;
         private CodeExpressionCollection parameters = new CodeExpressionCollection();
 
@@ -33,8 +30,7 @@ namespace System.CodeDom {
         ///       Initializes a new <see cref='System.CodeDom.CodeObjectCreateExpression'/>.
         ///    </para>
         /// </devdoc>
-        public CodeObjectCreateExpression() {
-        }
+        public CodeObjectCreateExpression() { }
 
         /// <devdoc>
         ///    <para>
@@ -42,7 +38,11 @@ namespace System.CodeDom {
         ///       parameters.
         ///    </para>
         /// </devdoc>
-        public CodeObjectCreateExpression(CodeTypeReference createType, params CodeExpression[] parameters) {
+        public CodeObjectCreateExpression(
+            CodeTypeReference createType,
+            params CodeExpression[] parameters
+        )
+        {
             CreateType = createType;
             Parameters.AddRange(parameters);
         }
@@ -50,7 +50,8 @@ namespace System.CodeDom {
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public CodeObjectCreateExpression(string createType, params CodeExpression[] parameters) {
+        public CodeObjectCreateExpression(string createType, params CodeExpression[] parameters)
+        {
             CreateType = new CodeTypeReference(createType);
             Parameters.AddRange(parameters);
         }
@@ -58,7 +59,8 @@ namespace System.CodeDom {
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public CodeObjectCreateExpression(Type createType, params CodeExpression[] parameters) {
+        public CodeObjectCreateExpression(Type createType, params CodeExpression[] parameters)
+        {
             CreateType = new CodeTypeReference(createType);
             Parameters.AddRange(parameters);
         }
@@ -68,16 +70,17 @@ namespace System.CodeDom {
         ///       The type of the object to create.
         ///    </para>
         /// </devdoc>
-        public CodeTypeReference CreateType {
-            get {
-                if (createType == null) {
+        public CodeTypeReference CreateType
+        {
+            get
+            {
+                if (createType == null)
+                {
                     createType = new CodeTypeReference("");
                 }
                 return createType;
             }
-            set {
-                createType = value;
-            }
+            set { createType = value; }
         }
 
         /// <devdoc>
@@ -86,10 +89,9 @@ namespace System.CodeDom {
         ///       object.
         ///    </para>
         /// </devdoc>
-        public CodeExpressionCollection Parameters {
-            get {
-                return parameters;
-            }
+        public CodeExpressionCollection Parameters
+        {
+            get { return parameters; }
         }
     }
 }

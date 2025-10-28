@@ -4,18 +4,21 @@
 
 namespace System.ServiceModel.Configuration
 {
+    using System.ComponentModel;
     using System.Configuration;
-    using System.ServiceModel.Channels;
     using System.Globalization;
     using System.Net;
     using System.Net.Security;
     using System.ServiceModel;
+    using System.ServiceModel.Channels;
     using System.ServiceModel.Security;
-    using System.ComponentModel;
 
     public sealed partial class PeerSecurityElement : ServiceModelConfigurationElement
     {
-        [ConfigurationProperty(ConfigurationStrings.Mode, DefaultValue = PeerSecuritySettings.DefaultMode)]
+        [ConfigurationProperty(
+            ConfigurationStrings.Mode,
+            DefaultValue = PeerSecuritySettings.DefaultMode
+        )]
         [ServiceModelEnumValidator(typeof(SecurityModeHelper))]
         public SecurityMode Mode
         {
@@ -37,7 +40,7 @@ namespace System.ServiceModel.Configuration
             }
             security.Mode = this.Mode;
             if (security.Mode != SecurityMode.None)
-            {   
+            {
                 this.Transport.ApplyConfiguration(security.Transport);
             }
         }
@@ -50,11 +53,11 @@ namespace System.ServiceModel.Configuration
             }
             SetPropertyValueIfNotDefaultValue(ConfigurationStrings.Mode, security.Mode);
             if (security.Mode != SecurityMode.None)
-            {   
+            {
                 this.Transport.InitializeFrom(security.Transport);
             }
         }
-        
+
         internal void CopyFrom(PeerSecurityElement source)
         {
             if (source == null)
@@ -63,10 +66,9 @@ namespace System.ServiceModel.Configuration
             }
             this.Mode = source.Mode;
             if (source.Mode != SecurityMode.None)
-            {   
+            {
                 this.Transport.CopyFrom(source.Transport);
             }
         }
     }
 }
-

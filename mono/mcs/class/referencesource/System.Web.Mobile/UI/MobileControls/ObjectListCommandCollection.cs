@@ -1,7 +1,7 @@
 //------------------------------------------------------------------------------
 // <copyright file="ObjectListCommandCollection.cs" company="Microsoft">
 //     Copyright (c) Microsoft Corporation.  All rights reserved.
-// </copyright>                                                                
+// </copyright>
 //------------------------------------------------------------------------------
 
 using System;
@@ -9,11 +9,11 @@ using System.Collections;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.Globalization;
+using System.Security.Permissions;
 using System.Web;
 using System.Web.UI;
-using System.Web.UI.WebControls;
 using System.Web.UI.HtmlControls;
-using System.Security.Permissions;
+using System.Web.UI.WebControls;
 
 namespace System.Web.UI.MobileControls
 {
@@ -24,13 +24,21 @@ namespace System.Web.UI.MobileControls
      */
 
     /// <include file='doc\ObjectListCommandCollection.uex' path='docs/doc[@for="ObjectListCommandCollection"]/*' />
-    [AspNetHostingPermission(SecurityAction.LinkDemand, Level=AspNetHostingPermissionLevel.Minimal)]
-    [AspNetHostingPermission(SecurityAction.InheritanceDemand, Level=AspNetHostingPermissionLevel.Minimal)]
-    [Obsolete("The System.Web.Mobile.dll assembly has been deprecated and should no longer be used. For information about how to develop ASP.NET mobile applications, see http://go.microsoft.com/fwlink/?LinkId=157231.")]
+    [AspNetHostingPermission(
+        SecurityAction.LinkDemand,
+        Level = AspNetHostingPermissionLevel.Minimal
+    )]
+    [AspNetHostingPermission(
+        SecurityAction.InheritanceDemand,
+        Level = AspNetHostingPermissionLevel.Minimal
+    )]
+    [Obsolete(
+        "The System.Web.Mobile.dll assembly has been deprecated and should no longer be used. For information about how to develop ASP.NET mobile applications, see http://go.microsoft.com/fwlink/?LinkId=157231."
+    )]
     public class ObjectListCommandCollection : ArrayListCollectionBase, IStateManager
     {
         // ObjectListCommandCollection has a special form of viewstate management.
-        // In normal operation, if you add, remove or modify commands in the 
+        // In normal operation, if you add, remove or modify commands in the
         // collection, the results are saved as part of view state.
         //
         // However, when showing the commands for an item, the ObjectList control
@@ -46,7 +54,7 @@ namespace System.Web.UI.MobileControls
         // 3) Framework calls TrackViewState. MarkState is set to MarkState.MArked.
         // 4) Properties can be changed. Changes are reflected in viewstate.
         // 5) Just before raising the ShowItemCommands event, the ObjectList control
-        //    calls GlobalStateSet. PreSaveViewState is called to create a 
+        //    calls GlobalStateSet. PreSaveViewState is called to create a
         //    snapshot of viewstate, and MarkState is set to MarkState.PostMarked.
         // 6) If any changes are made after this, they will be ignored for view state
         //    purposes.
@@ -65,17 +73,12 @@ namespace System.Web.UI.MobileControls
         private bool _dirty;
         private String[] _savedState;
 
-        internal ObjectListCommandCollection()
-        {
-        }
+        internal ObjectListCommandCollection() { }
 
         /// <include file='doc\ObjectListCommandCollection.uex' path='docs/doc[@for="ObjectListCommandCollection.this"]/*' />
         public ObjectListCommand this[int index]
         {
-            get
-            {
-                return (ObjectListCommand)Items[index];
-            }
+            get { return (ObjectListCommand)Items[index]; }
         }
 
         /// <include file='doc\ObjectListCommandCollection.uex' path='docs/doc[@for="ObjectListCommandCollection.Clear"]/*' />
@@ -114,7 +117,7 @@ namespace System.Web.UI.MobileControls
         public void Remove(String s)
         {
             RemoveAt(IndexOf(s));
-        }    
+        }
 
         /// <include file='doc\ObjectListCommandCollection.uex' path='docs/doc[@for="ObjectListCommandCollection.RemoveAt"]/*' />
         public void RemoveAt(int index)
@@ -183,20 +186,17 @@ namespace System.Web.UI.MobileControls
         /// <internalonly/>
         protected bool IsTrackingViewState
         {
-            get
-            {
-                return _markState != MarkState.NotMarked;
-            }
+            get { return _markState != MarkState.NotMarked; }
         }
 
         /// <internalonly/>
-        protected void TrackViewState() 
+        protected void TrackViewState()
         {
             _markState = MarkState.Marked;
         }
 
         /// <internalonly/>
-        protected void LoadViewState(Object state) 
+        protected void LoadViewState(Object state)
         {
             if (state != null)
             {
@@ -211,7 +211,7 @@ namespace System.Web.UI.MobileControls
         }
 
         /// <internalonly/>
-        protected Object SaveViewState() 
+        protected Object SaveViewState()
         {
             if (_markState == MarkState.Marked)
             {
@@ -222,28 +222,28 @@ namespace System.Web.UI.MobileControls
 
         #region Implementation of IStateManager
         /// <internalonly/>
-        bool IStateManager.IsTrackingViewState {
-            get {
-                return IsTrackingViewState;
-            }
+        bool IStateManager.IsTrackingViewState
+        {
+            get { return IsTrackingViewState; }
         }
 
         /// <internalonly/>
-        void IStateManager.LoadViewState(object state) {
+        void IStateManager.LoadViewState(object state)
+        {
             LoadViewState(state);
         }
 
         /// <internalonly/>
-        void IStateManager.TrackViewState() {
+        void IStateManager.TrackViewState()
+        {
             TrackViewState();
         }
 
         /// <internalonly/>
-        object IStateManager.SaveViewState() {
+        object IStateManager.SaveViewState()
+        {
             return SaveViewState();
         }
         #endregion
     }
 }
-
-

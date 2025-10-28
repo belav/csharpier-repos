@@ -9,14 +9,37 @@ namespace System.IO.Strategies
     internal static partial class FileStreamHelpers
     {
 #pragma warning disable IDE0060
-        private static UnixFileStreamStrategy ChooseStrategyCore(SafeFileHandle handle, FileAccess access, bool isAsync) =>
-            new UnixFileStreamStrategy(handle, access);
+        private static UnixFileStreamStrategy ChooseStrategyCore(
+            SafeFileHandle handle,
+            FileAccess access,
+            bool isAsync
+        ) => new UnixFileStreamStrategy(handle, access);
 #pragma warning restore IDE0060
 
-        private static UnixFileStreamStrategy ChooseStrategyCore(string path, FileMode mode, FileAccess access, FileShare share, FileOptions options, long preallocationSize, UnixFileMode? unixCreateMode) =>
-            new UnixFileStreamStrategy(path, mode, access, share, options, preallocationSize, unixCreateMode);
+        private static UnixFileStreamStrategy ChooseStrategyCore(
+            string path,
+            FileMode mode,
+            FileAccess access,
+            FileShare share,
+            FileOptions options,
+            long preallocationSize,
+            UnixFileMode? unixCreateMode
+        ) =>
+            new UnixFileStreamStrategy(
+                path,
+                mode,
+                access,
+                share,
+                options,
+                preallocationSize,
+                unixCreateMode
+            );
 
-        internal static long CheckFileCall(long result, string? path, bool ignoreNotSupported = false)
+        internal static long CheckFileCall(
+            long result,
+            string? path,
+            bool ignoreNotSupported = false
+        )
         {
             if (result < 0)
             {
@@ -31,10 +54,16 @@ namespace System.IO.Strategies
         }
 
         internal static long Seek(SafeFileHandle handle, long offset, SeekOrigin origin) =>
-            CheckFileCall(Interop.Sys.LSeek(handle, offset, (Interop.Sys.SeekWhence)(int)origin), handle.Path); // SeekOrigin values are the same as Interop.libc.SeekWhence values
+            CheckFileCall(
+                Interop.Sys.LSeek(handle, offset, (Interop.Sys.SeekWhence)(int)origin),
+                handle.Path
+            ); // SeekOrigin values are the same as Interop.libc.SeekWhence values
 
         internal static void ThrowInvalidArgument(SafeFileHandle handle) =>
-            throw Interop.GetExceptionForIoErrno(new Interop.ErrorInfo(Interop.Error.EINVAL), handle.Path);
+            throw Interop.GetExceptionForIoErrno(
+                new Interop.ErrorInfo(Interop.Error.EINVAL),
+                handle.Path
+            );
 
         /// <summary>Flushes the file's OS buffer.</summary>
         internal static void FlushToDisk(SafeFileHandle handle)
@@ -63,7 +92,15 @@ namespace System.IO.Strategies
                 throw new PlatformNotSupportedException(SR.PlatformNotSupported_OSXFileLocking);
             }
 
-            CheckFileCall(Interop.Sys.LockFileRegion(handle, position, length, canWrite ? Interop.Sys.LockType.F_WRLCK : Interop.Sys.LockType.F_RDLCK), handle.Path);
+            CheckFileCall(
+                Interop.Sys.LockFileRegion(
+                    handle,
+                    position,
+                    length,
+                    canWrite ? Interop.Sys.LockType.F_WRLCK : Interop.Sys.LockType.F_RDLCK
+                ),
+                handle.Path
+            );
         }
 
         internal static void Unlock(SafeFileHandle handle, long position, long length)
@@ -73,7 +110,10 @@ namespace System.IO.Strategies
                 throw new PlatformNotSupportedException(SR.PlatformNotSupported_OSXFileLocking);
             }
 
-            CheckFileCall(Interop.Sys.LockFileRegion(handle, position, length, Interop.Sys.LockType.F_UNLCK), handle.Path);
+            CheckFileCall(
+                Interop.Sys.LockFileRegion(handle, position, length, Interop.Sys.LockType.F_UNLCK),
+                handle.Path
+            );
         }
     }
 }

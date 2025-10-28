@@ -27,7 +27,8 @@ namespace System
             var id = new ApplicationId(token, "Pizza", new Version(1, 0), "pepperoni", "it-it");
             Assert.Equal(
                 "Pizza, culture=\"it-it\", version=\"1.0\", publicKeyToken=\"0102030405\", processorArchitecture =\"pepperoni\"",
-                id.ToString());
+                id.ToString()
+            );
         }
 
         private void CheckId(ApplicationId id, byte[] token)

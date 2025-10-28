@@ -7,33 +7,32 @@
 // (C) 2003 Erik LeBel
 //
 
-using NUnit.Framework;
-
 using System;
 using System.Web.Services.Description;
 using System.Xml;
+using NUnit.Framework;
 
 namespace MonoTests.System.Web.Services.Description
 {
-	[TestFixture]
-	public class OperationMessageTest
-	{
-		OperationMessage operation;
+    [TestFixture]
+    public class OperationMessageTest
+    {
+        OperationMessage operation;
 
-		[SetUp]
-		public void InitializeOperation()
-		{
-			// workaround: OperationInput, OperationOutput and OperationFault are all empty derivations of OperationMessage
-			operation = new OperationInput();
-		}
+        [SetUp]
+        public void InitializeOperation()
+        {
+            // workaround: OperationInput, OperationOutput and OperationFault are all empty derivations of OperationMessage
+            operation = new OperationInput();
+        }
 
-		[Test]
-		public void TestDefaultProperties()
-		{
-			Assert.AreEqual (String.Empty, operation.Documentation);
-			Assert.IsNull (operation.Name);
-			Assert.AreEqual (XmlQualifiedName.Empty, operation.Message);
-			Assert.IsNull (operation.Operation);
-		}
-	}
+        [Test]
+        public void TestDefaultProperties()
+        {
+            Assert.AreEqual(String.Empty, operation.Documentation);
+            Assert.IsNull(operation.Name);
+            Assert.AreEqual(XmlQualifiedName.Empty, operation.Message);
+            Assert.IsNull(operation.Operation);
+        }
+    }
 }

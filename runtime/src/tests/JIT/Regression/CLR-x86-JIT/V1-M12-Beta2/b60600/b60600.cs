@@ -3,16 +3,19 @@
 
 using System;
 using Xunit;
+
 public unsafe class bug1
 {
     public struct VT1
     {
         public double a;
     }
+
     public static double f(double* a0)
     {
         return *a0;
     }
+
     [Fact]
     public static int TestEntryPoint()
     {

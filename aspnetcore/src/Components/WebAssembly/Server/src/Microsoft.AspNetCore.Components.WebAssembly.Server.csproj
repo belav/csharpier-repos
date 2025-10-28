@@ -1,5 +1,4 @@
 <Project Sdk="Microsoft.NET.Sdk">
-
   <PropertyGroup>
     <TargetFramework>$(DefaultNetCoreTargetFramework)</TargetFramework>
     <Description>Runtime server features for ASP.NET Core Blazor applications.</Description>
@@ -14,7 +13,11 @@
   <ItemGroup>
     <Reference Include="Microsoft.AspNetCore.Components.Endpoints" />
     <Reference Include="Microsoft.AspNetCore.StaticFiles" />
-    <Reference Include="Microsoft.NETCore.BrowserDebugHost.Transport" GeneratePathProperty="true" PrivateAssets="All" />
+    <Reference
+      Include="Microsoft.NETCore.BrowserDebugHost.Transport"
+      GeneratePathProperty="true"
+      PrivateAssets="All"
+    />
   </ItemGroup>
 
   <ItemGroup>
@@ -22,18 +25,33 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Include="$(ComponentsSharedSourceRoot)\src\CacheHeaderSettings.cs" Link="Shared\CacheHeaderSettings.cs" />
-    <Compile Include="$(SharedSourceRoot)\CommandLineUtils\Utilities\DotNetMuxer.cs" Link="Shared\DotNetMuxer.cs" />
+    <Compile
+      Include="$(ComponentsSharedSourceRoot)\src\CacheHeaderSettings.cs"
+      Link="Shared\CacheHeaderSettings.cs"
+    />
+    <Compile
+      Include="$(SharedSourceRoot)\CommandLineUtils\Utilities\DotNetMuxer.cs"
+      Link="Shared\DotNetMuxer.cs"
+    />
 
-    <Content Include="build\**" Pack="true" PackagePath="build\%(RecursiveDir)%(FileName)%(Extension)" />
+    <Content
+      Include="build\**"
+      Pack="true"
+      PackagePath="build\%(RecursiveDir)%(FileName)%(Extension)"
+    />
   </ItemGroup>
 
   <!-- Emit debug proxy binaries to output directory. This lets us launch it as a separate process while keeping the build output self-contained.  -->
   <Target Name="IncludeDebugProxyBinariesAsContent" BeforeTargets="AssignTargetPaths">
     <ItemGroup>
       <DebugProxyBinaries Include="$(PkgMicrosoft_NETCore_BrowserDebugHost_Transport)\tools\$(DefaultNetCoreTargetFramework)\**" />
-      <Content Include="@(DebugProxyBinaries)" Pack="true" PackagePath="tools\BlazorDebugProxy\%(RecursiveDir)%(FileName)%(Extension)" Link="BlazorDebugProxy\%(RecursiveDir)%(FileName)%(Extension)" CopyToOutputDirectory="PreserveNewest" />
+      <Content
+        Include="@(DebugProxyBinaries)"
+        Pack="true"
+        PackagePath="tools\BlazorDebugProxy\%(RecursiveDir)%(FileName)%(Extension)"
+        Link="BlazorDebugProxy\%(RecursiveDir)%(FileName)%(Extension)"
+        CopyToOutputDirectory="PreserveNewest"
+      />
     </ItemGroup>
   </Target>
-
 </Project>

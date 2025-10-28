@@ -6,7 +6,8 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis
 {
     internal static partial class ControlFlowRegionExtensions
     {
-        internal static bool ContainsBlock(this ControlFlowRegion region, int destinationOrdinal)
-            => region.FirstBlockOrdinal <= destinationOrdinal && region.LastBlockOrdinal >= destinationOrdinal;
+        internal static bool ContainsBlock(this ControlFlowRegion region, int destinationOrdinal) =>
+            region.FirstBlockOrdinal <= destinationOrdinal
+            && region.LastBlockOrdinal >= destinationOrdinal;
     }
 }

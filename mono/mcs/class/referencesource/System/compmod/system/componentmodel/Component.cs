@@ -1,10 +1,11 @@
 //------------------------------------------------------------------------------
 // <copyright file="Component.cs" company="Microsoft">
 //     Copyright (c) Microsoft Corporation.  All rights reserved.
-// </copyright>                                                                
+// </copyright>
 //------------------------------------------------------------------------------
 
-namespace System.ComponentModel {
+namespace System.ComponentModel
+{
     using System;
     using System.ComponentModel.Design;
     using System.ComponentModel.Design.Serialization;
@@ -12,7 +13,7 @@ namespace System.ComponentModel {
     using System.Security.Permissions;
 
     /// <devdoc>
-    ///    <para>Provides the default implementation for the 
+    ///    <para>Provides the default implementation for the
     ///    <see cref='System.ComponentModel.IComponent'/>
     ///    interface and enables object-sharing between applications.</para>
     /// </devdoc>
@@ -21,17 +22,18 @@ namespace System.ComponentModel {
         ClassInterface(ClassInterfaceType.AutoDispatch),
         DesignerCategory("Component")
     ]
-    public class Component : MarshalByRefObject, IComponent {
-
+    public class Component : MarshalByRefObject, IComponent
+    {
         /// <devdoc>
         ///    <para>Static hask key for the Disposed event. This field is read-only.</para>
         /// </devdoc>
-        private static readonly object EventDisposed = new object(); 
+        private static readonly object EventDisposed = new object();
 
         private ISite site;
         private EventHandlerList events;
 
-        ~Component() {
+        ~Component()
+        {
             Dispose(false);
         }
 
@@ -47,10 +49,7 @@ namespace System.ComponentModel {
         /// </devdoc>
         protected virtual bool CanRaiseEvents
         {
-            get
-            {
-                return true;
-            }
+            get { return true; }
         }
 
         /// <devdoc>
@@ -59,34 +58,28 @@ namespace System.ComponentModel {
         /// </devdoc>
         internal bool CanRaiseEventsInternal
         {
-            get
-            {
-                return CanRaiseEvents;
-            }
+            get { return CanRaiseEvents; }
         }
 
         /// <devdoc>
         ///    <para>Adds a event handler to listen to the Disposed event on the component.</para>
         /// </devdoc>
-        [
-        Browsable(false),
-        EditorBrowsable(EditorBrowsableState.Advanced)
-        ]
-        public event EventHandler Disposed {
-            add {
-                Events.AddHandler(EventDisposed, value);
-            }
-            remove {
-                Events.RemoveHandler(EventDisposed, value);
-            }
+        [Browsable(false), EditorBrowsable(EditorBrowsableState.Advanced)]
+        public event EventHandler Disposed
+        {
+            add { Events.AddHandler(EventDisposed, value); }
+            remove { Events.RemoveHandler(EventDisposed, value); }
         }
 
         /// <devdoc>
         ///    <para>Gets the list of event handlers that are attached to this component.</para>
         /// </devdoc>
-        protected EventHandlerList Events {
-            get {
-                if (events == null) {
+        protected EventHandlerList Events
+        {
+            get
+            {
+                if (events == null)
+                {
                     events = new EventHandlerList(this);
                 }
                 return events;
@@ -99,13 +92,11 @@ namespace System.ComponentModel {
         ///       .
         ///    </para>
         /// </devdoc>
-        [
-        Browsable(false),
-        DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)
-        ]
-        public virtual ISite Site {
-            get { return site;}
-            set { site = value;}
+        [Browsable(false), DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        public virtual ISite Site
+        {
+            get { return site; }
+            set { site = value; }
         }
 
         /// <devdoc>
@@ -114,12 +105,16 @@ namespace System.ComponentModel {
         ///       .
         ///    </para>
         /// </devdoc>
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2213:DisposableFieldsShouldBeDisposed")]
-        public void Dispose() {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage(
+            "Microsoft.Usage",
+            "CA2213:DisposableFieldsShouldBeDisposed"
+        )]
+        public void Dispose()
+        {
             Dispose(true);
             GC.SuppressFinalize(this);
         }
-    
+
         /// <devdoc>
         ///    <para>
         ///    Disposes all the resources associated with this component.
@@ -159,7 +154,7 @@ namespace System.ComponentModel {
         ///    <para>
         ///    For base classes, you should never override the Finalier (~Class in C#)
         ///    or the Dispose method that takes no arguments, rather you should
-        ///    always override the Dispose method that takes a bool. 
+        ///    always override the Dispose method that takes a bool.
         ///    </para>
         ///    <code>
         ///    protected override void Dispose(bool disposing) {
@@ -177,15 +172,21 @@ namespace System.ComponentModel {
         ///    }
         ///    </code>
         /// </devdoc>
-        protected virtual void Dispose(bool disposing) {
-            if (disposing) {
-                lock(this) {
-                    if (site != null && site.Container != null) {
+        protected virtual void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                lock (this)
+                {
+                    if (site != null && site.Container != null)
+                    {
                         site.Container.Remove(this);
                     }
-                    if (events != null) {
+                    if (events != null)
+                    {
                         EventHandler handler = (EventHandler)events[EventDisposed];
-                        if (handler != null) handler(this, EventArgs.Empty);
+                        if (handler != null)
+                            handler(this, EventArgs.Empty);
                     }
                 }
             }
@@ -201,13 +202,15 @@ namespace System.ComponentModel {
         ///    </para>
         /// </devdoc>
         [
-        Browsable(false),
-        DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)
+            Browsable(false),
+            DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)
         ]
-        public IContainer Container {
-            get {
+        public IContainer Container
+        {
+            get
+            {
                 ISite s = site;
-                return s == null? null : s.Container;
+                return s == null ? null : s.Container;
             }
         }
 
@@ -218,9 +221,10 @@ namespace System.ComponentModel {
         ///       .
         ///    </para>
         /// </devdoc>
-        protected virtual object GetService(Type service) {
+        protected virtual object GetService(Type service)
+        {
             ISite s = site;
-            return((s== null) ? null : s.GetService(service));
+            return ((s == null) ? null : s.GetService(service));
         }
 
         /// <devdoc>
@@ -229,14 +233,13 @@ namespace System.ComponentModel {
         ///       is currently in design mode.
         ///    </para>
         /// </devdoc>
-        [
-        Browsable(false),
-        DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)
-        ]
-        protected bool DesignMode {
-            get {
+        [Browsable(false), DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        protected bool DesignMode
+        {
+            get
+            {
                 ISite s = site;
-                return(s == null) ? false : s.DesignMode;
+                return (s == null) ? false : s.DesignMode;
             }
         }
 
@@ -248,7 +251,8 @@ namespace System.ComponentModel {
         ///       internal use only.
         ///    </para>
         /// </devdoc>
-        public override String ToString() {
+        public override String ToString()
+        {
             ISite s = site;
 
             if (s != null)

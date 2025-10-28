@@ -21,7 +21,12 @@ namespace System.ComponentModel.Tests
         public static IEnumerable<object[]> Equals_TestData()
         {
             yield return new object[] { BrowsableAttribute.Yes, BrowsableAttribute.Yes, true };
-            yield return new object[] { BrowsableAttribute.Yes, new BrowsableAttribute(false), false };
+            yield return new object[]
+            {
+                BrowsableAttribute.Yes,
+                new BrowsableAttribute(false),
+                false,
+            };
             yield return new object[] { BrowsableAttribute.Yes, BrowsableAttribute.No, false };
 
             yield return new object[] { BrowsableAttribute.Yes, new object(), false };
@@ -30,7 +35,11 @@ namespace System.ComponentModel.Tests
 
         [Theory]
         [MemberData(nameof(Equals_TestData))]
-        public void Equals_Object_ReturnsExpected(BrowsableAttribute attribute, object other, bool expected)
+        public void Equals_Object_ReturnsExpected(
+            BrowsableAttribute attribute,
+            object other,
+            bool expected
+        )
         {
             Assert.Equal(expected, attribute.Equals(other));
             if (other is BrowsableAttribute)
@@ -48,7 +57,10 @@ namespace System.ComponentModel.Tests
 
         [Theory]
         [MemberData(nameof(DefaultProperties_TestData))]
-        public void DefaultProperties_GetBrowsable_ReturnsExpected(BrowsableAttribute attribute, bool expectedBrowsable)
+        public void DefaultProperties_GetBrowsable_ReturnsExpected(
+            BrowsableAttribute attribute,
+            bool expectedBrowsable
+        )
         {
             Assert.Equal(expectedBrowsable, attribute.Browsable);
             Assert.Equal(expectedBrowsable, attribute.IsDefaultAttribute());

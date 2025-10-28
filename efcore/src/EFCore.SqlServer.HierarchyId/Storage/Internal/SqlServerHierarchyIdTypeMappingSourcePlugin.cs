@@ -27,8 +27,7 @@ public class SqlServerHierarchyIdTypeMappingSourcePlugin : IRelationalTypeMappin
 
         if (string.Equals(storeTypeName, "hierarchyid", StringComparison.OrdinalIgnoreCase))
         {
-            if (clrType is null
-                || clrType == typeof(HierarchyId))
+            if (clrType is null || clrType == typeof(HierarchyId))
             {
                 return SqlServerHierarchyIdTypeMapping.Default;
             }

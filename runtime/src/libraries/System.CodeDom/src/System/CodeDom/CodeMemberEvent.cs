@@ -18,6 +18,7 @@ namespace System.CodeDom
 
         public CodeTypeReference PrivateImplementationType { get; set; }
 
-        public CodeTypeReferenceCollection ImplementationTypes => _implementationTypes ??= new CodeTypeReferenceCollection();
+        public CodeTypeReferenceCollection ImplementationTypes =>
+            _implementationTypes ??= new CodeTypeReferenceCollection();
     }
 }

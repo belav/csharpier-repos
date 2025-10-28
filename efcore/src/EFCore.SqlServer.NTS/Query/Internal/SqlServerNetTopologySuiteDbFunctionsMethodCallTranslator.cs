@@ -14,8 +14,11 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Query.Internal;
 /// </summary>
 public class SqlServerNetTopologySuiteDbFunctionsMethodCallTranslator : IMethodCallTranslator
 {
-    private static readonly MethodInfo CurveToLineMethodInfo = typeof(SqlServerNetTopologySuiteDbFunctionsExtensions)
-        .GetMethod(nameof(SqlServerNetTopologySuiteDbFunctionsExtensions.CurveToLine), new[] { typeof(DbFunctions), typeof(Geometry) })!;
+    private static readonly MethodInfo CurveToLineMethodInfo =
+        typeof(SqlServerNetTopologySuiteDbFunctionsExtensions).GetMethod(
+            nameof(SqlServerNetTopologySuiteDbFunctionsExtensions.CurveToLine),
+            new[] { typeof(DbFunctions), typeof(Geometry) }
+        )!;
 
     private readonly IRelationalTypeMappingSource _typeMappingSource;
     private readonly ISqlExpressionFactory _sqlExpressionFactory;
@@ -28,7 +31,8 @@ public class SqlServerNetTopologySuiteDbFunctionsMethodCallTranslator : IMethodC
     /// </summary>
     public SqlServerNetTopologySuiteDbFunctionsMethodCallTranslator(
         IRelationalTypeMappingSource typeMappingSource,
-        ISqlExpressionFactory sqlExpressionFactory)
+        ISqlExpressionFactory sqlExpressionFactory
+    )
     {
         _typeMappingSource = typeMappingSource;
         _sqlExpressionFactory = sqlExpressionFactory;
@@ -44,7 +48,8 @@ public class SqlServerNetTopologySuiteDbFunctionsMethodCallTranslator : IMethodC
         SqlExpression? instance,
         MethodInfo method,
         IReadOnlyList<SqlExpression> arguments,
-        IDiagnosticsLogger<DbLoggerCategory.Query> logger)
+        IDiagnosticsLogger<DbLoggerCategory.Query> logger
+    )
     {
         if (method.Equals(CurveToLineMethodInfo))
         {
@@ -56,7 +61,8 @@ public class SqlServerNetTopologySuiteDbFunctionsMethodCallTranslator : IMethodC
                 instancePropagatesNullability: true,
                 argumentsPropagateNullability: Enumerable.Empty<bool>(),
                 typeof(Geometry),
-                arguments[1].TypeMapping);
+                arguments[1].TypeMapping
+            );
         }
 
         return null;

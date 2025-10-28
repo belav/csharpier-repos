@@ -2,7 +2,6 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System.Collections.Generic;
-
 using IEqualityComparer = System.Collections.IEqualityComparer;
 
 namespace System.Xml.Linq
@@ -11,9 +10,7 @@ namespace System.Xml.Linq
     /// Contains functionality to compare nodes for value equality.
     /// This class cannot be inherited.
     /// </summary>
-    public sealed class XNodeEqualityComparer :
-        IEqualityComparer,
-        IEqualityComparer<XNode>
+    public sealed class XNodeEqualityComparer : IEqualityComparer, IEqualityComparer<XNode>
     {
         /// <summary>
         /// Compares the values of two nodes.
@@ -76,9 +73,17 @@ namespace System.Xml.Linq
         bool IEqualityComparer.Equals(object? x, object? y)
         {
             XNode? n1 = x as XNode;
-            if (n1 == null && x != null) throw new ArgumentException(SR.Format(SR.Argument_MustBeDerivedFrom, typeof(XNode)), nameof(x));
+            if (n1 == null && x != null)
+                throw new ArgumentException(
+                    SR.Format(SR.Argument_MustBeDerivedFrom, typeof(XNode)),
+                    nameof(x)
+                );
             XNode? n2 = y as XNode;
-            if (n2 == null && y != null) throw new ArgumentException(SR.Format(SR.Argument_MustBeDerivedFrom, typeof(XNode)), nameof(y));
+            if (n2 == null && y != null)
+                throw new ArgumentException(
+                    SR.Format(SR.Argument_MustBeDerivedFrom, typeof(XNode)),
+                    nameof(y)
+                );
             return Equals(n1, n2);
         }
 
@@ -95,7 +100,11 @@ namespace System.Xml.Linq
         int IEqualityComparer.GetHashCode(object obj)
         {
             XNode? n = obj as XNode;
-            if (n == null && obj != null) throw new ArgumentException(SR.Format(SR.Argument_MustBeDerivedFrom, typeof(XNode)), nameof(obj));
+            if (n == null && obj != null)
+                throw new ArgumentException(
+                    SR.Format(SR.Argument_MustBeDerivedFrom, typeof(XNode)),
+                    nameof(obj)
+                );
             return GetHashCode(n!);
         }
     }

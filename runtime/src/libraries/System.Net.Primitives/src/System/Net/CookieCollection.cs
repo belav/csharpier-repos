@@ -11,7 +11,9 @@ namespace System.Net
     //
     // A list of cookies maintained in Sorted order. Only one cookie with matching Name/Domain/Path
     [Serializable]
-    [System.Runtime.CompilerServices.TypeForwardedFrom("System, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089")]
+    [System.Runtime.CompilerServices.TypeForwardedFrom(
+        "System, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+    )]
     public class CookieCollection : ICollection<Cookie>, IReadOnlyCollection<Cookie>, ICollection
     {
         internal enum Stamp
@@ -28,9 +30,7 @@ namespace System.Net
         private DateTime m_TimeStamp = DateTime.MinValue; // Do not rename (binary serialization)
         private bool m_has_other_versions; // Do not rename (binary serialization)
 
-        public CookieCollection()
-        {
-        }
+        public CookieCollection() { }
 
         public Cookie this[int index]
         {
@@ -112,34 +112,22 @@ namespace System.Net
 
         public bool IsReadOnly
         {
-            get
-            {
-                return false;
-            }
+            get { return false; }
         }
 
         public int Count
         {
-            get
-            {
-                return m_list.Count;
-            }
+            get { return m_list.Count; }
         }
 
         public bool IsSynchronized
         {
-            get
-            {
-                return false;
-            }
+            get { return false; }
         }
 
         public object SyncRoot
         {
-            get
-            {
-                return this;
-            }
+            get { return this; }
         }
 
         public void CopyTo(Array array, int index)
@@ -172,17 +160,12 @@ namespace System.Net
             return m_TimeStamp;
         }
 
-
         // This is for internal cookie container usage.
         // For others not that _hasOtherVersions gets changed ONLY in InternalAdd
         internal bool IsOtherVersionSeen
         {
-            get
-            {
-                return m_has_other_versions;
-            }
+            get { return m_has_other_versions; }
         }
-
 
         // If isStrict == false, assumes that incoming cookie is unique.
         // If isStrict == true, replace the cookie if found same with newest Variant.

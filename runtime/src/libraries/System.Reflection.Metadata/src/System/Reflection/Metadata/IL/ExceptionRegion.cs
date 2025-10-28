@@ -18,7 +18,8 @@ namespace System.Reflection.Metadata
             int tryLength,
             int handlerOffset,
             int handlerLength,
-            int classTokenOrFilterOffset)
+            int classTokenOrFilterOffset
+        )
         {
             _kind = kind;
             _tryOffset = tryOffset;
@@ -78,7 +79,12 @@ namespace System.Reflection.Metadata
         /// </summary>
         public EntityHandle CatchType
         {
-            get { return (Kind == ExceptionRegionKind.Catch) ? new EntityHandle((uint)_classTokenOrFilterOffset) : default(EntityHandle); }
+            get
+            {
+                return (Kind == ExceptionRegionKind.Catch)
+                    ? new EntityHandle((uint)_classTokenOrFilterOffset)
+                    : default(EntityHandle);
+            }
         }
     }
 }

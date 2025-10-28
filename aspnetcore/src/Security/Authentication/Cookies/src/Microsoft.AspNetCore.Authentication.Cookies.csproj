@@ -1,5 +1,4 @@
 <Project Sdk="Microsoft.NET.Sdk">
-
   <PropertyGroup>
     <Description>ASP.NET Core middleware that enables an application to use cookie based authentication.</Description>
     <TargetFramework>$(DefaultNetCoreTargetFramework)</TargetFramework>
@@ -18,5 +17,4 @@
   <ItemGroup>
     <Reference Include="Microsoft.AspNetCore.Authentication" />
   </ItemGroup>
-
 </Project>

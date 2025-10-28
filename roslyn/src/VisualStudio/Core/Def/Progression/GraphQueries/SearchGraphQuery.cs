@@ -18,11 +18,18 @@ internal sealed partial class SearchGraphQuery(
     string searchPattern,
     NavigateToSearchScope searchScope,
     IThreadingContext threadingContext,
-    IAsynchronousOperationListener asyncListener) : IGraphQuery
+    IAsynchronousOperationListener asyncListener
+) : IGraphQuery
 {
-    public async Task<GraphBuilder> GetGraphAsync(Solution solution, IGraphContext context, CancellationToken cancellationToken)
+    public async Task<GraphBuilder> GetGraphAsync(
+        Solution solution,
+        IGraphContext context,
+        CancellationToken cancellationToken
+    )
     {
-        var graphBuilder = await GraphBuilder.CreateForInputNodesAsync(solution, context.InputNodes, cancellationToken).ConfigureAwait(false);
+        var graphBuilder = await GraphBuilder
+            .CreateForInputNodesAsync(solution, context.InputNodes, cancellationToken)
+            .ConfigureAwait(false);
         var callback = new ProgressionNavigateToSearchCallback(context, graphBuilder);
 
         // We have a specialized host for progression vs normal nav-to.  Progression itself will tell the client if
@@ -30,7 +37,9 @@ internal sealed partial class SearchGraphQuery(
         // results should reflect that.  So we create a host here that will always give complete results once the
         // solution is loaded and not give cached/incomplete results at that point.
         var statusService = solution.Services.GetRequiredService<IWorkspaceStatusService>();
-        var isFullyLoaded = await statusService.IsFullyLoadedAsync(cancellationToken).ConfigureAwait(false);
+        var isFullyLoaded = await statusService
+            .IsFullyLoadedAsync(cancellationToken)
+            .ConfigureAwait(false);
         var host = new SearchGraphQueryNavigateToSearchHost(isFullyLoaded);
 
         var searcher = NavigateToSearcher.Create(
@@ -40,19 +49,23 @@ internal sealed partial class SearchGraphQuery(
             searchPattern,
             NavigateToUtilities.GetKindsProvided(solution),
             threadingContext.DisposalToken,
-            host);
+            host
+        );
 
-        await searcher.SearchAsync(searchCurrentDocument: false, searchScope, cancellationToken).ConfigureAwait(false);
+        await searcher
+            .SearchAsync(searchCurrentDocument: false, searchScope, cancellationToken)
+            .ConfigureAwait(false);
 
         return graphBuilder;
     }
 
-    private sealed class SearchGraphQueryNavigateToSearchHost(bool isFullyLoaded) : INavigateToSearcherHost
+    private sealed class SearchGraphQueryNavigateToSearchHost(bool isFullyLoaded)
+        : INavigateToSearcherHost
     {
-        public INavigateToSearchService? GetNavigateToSearchService(Project project)
-            => project.GetLanguageService<INavigateToSearchService>();
+        public INavigateToSearchService? GetNavigateToSearchService(Project project) =>
+            project.GetLanguageService<INavigateToSearchService>();
 
-        public ValueTask<bool> IsFullyLoadedAsync(CancellationToken cancellationToken)
-            => new(isFullyLoaded);
+        public ValueTask<bool> IsFullyLoadedAsync(CancellationToken cancellationToken) =>
+            new(isFullyLoaded);
     }
 }

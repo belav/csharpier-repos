@@ -1,5 +1,4 @@
 <Project Sdk="Microsoft.NET.Sdk">
-
   <PropertyGroup>
     <TargetFrameworks>$(NetCoreAppCurrent);$(NetFrameworkMinimum)</TargetFrameworks>
     <EnableDefaultItems>true</EnableDefaultItems>
@@ -16,8 +15,10 @@
     <PackageReference Include="Microsoft.DotNet.InternalAbstractions" Version="1.0.0" />
     <PackageReference Include="Microsoft.DotNet.ProjectModel" Version="1.0.0-rc3-003121" />
     <PackageReference Include="Moq" Version="$(MoqVersion)" />
-    <ProjectReference Include="..\src\Microsoft.Extensions.DependencyModel.csproj" SkipUseReferenceAssembly="true" />
+    <ProjectReference
+      Include="..\src\Microsoft.Extensions.DependencyModel.csproj"
+      SkipUseReferenceAssembly="true"
+    />
     <ProjectReference Include="nonentrypointassembly\nonentrypointassembly.csproj" />
   </ItemGroup>
-
 </Project>

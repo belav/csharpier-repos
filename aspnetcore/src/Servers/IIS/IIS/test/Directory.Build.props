@@ -10,5 +10,4 @@
     <IsWindowsOnlyTest>true</IsWindowsOnlyTest>
     <TestDependsOnIIS>true</TestDependsOnIIS>
   </PropertyGroup>
-
 </Project>

@@ -1,5 +1,4 @@
 <Project Sdk="Microsoft.NET.Sdk">
-
   <PropertyGroup>
     <Description>ASP.NET Core authentication handler used to authenticate requests using Negotiate, Kerberos, or NTLM.</Description>
     <TargetFramework>$(DefaultNetCoreTargetFramework)</TargetFramework>

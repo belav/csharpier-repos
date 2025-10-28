@@ -57,7 +57,12 @@ namespace System.Net.Http.Headers
         // pointing to the next non-whitespace character after a delimiter. E.g. if called with a start index of 0
         // for string "value , second_value", then after the call completes, 'index' must point to 's', i.e. the first
         // non-whitespace after the separator ','.
-        public abstract bool TryParseValue(string? value, object? storeValue, ref int index, [NotNullWhen(true)] out object? parsedValue);
+        public abstract bool TryParseValue(
+            string? value,
+            object? storeValue,
+            ref int index,
+            [NotNullWhen(true)] out object? parsedValue
+        );
 
         public object ParseValue(string? value, object? storeValue, ref int index)
         {
@@ -69,8 +74,13 @@ namespace System.Net.Http.Headers
             // can ignore the value.
             if (!TryParseValue(value, storeValue, ref index, out object? result))
             {
-                throw new FormatException(SR.Format(System.Globalization.CultureInfo.InvariantCulture, SR.net_http_headers_invalid_value,
-                    value == null ? "<null>" : value.Substring(index)));
+                throw new FormatException(
+                    SR.Format(
+                        System.Globalization.CultureInfo.InvariantCulture,
+                        SR.net_http_headers_invalid_value,
+                        value == null ? "<null>" : value.Substring(index)
+                    )
+                );
             }
             return result;
         }

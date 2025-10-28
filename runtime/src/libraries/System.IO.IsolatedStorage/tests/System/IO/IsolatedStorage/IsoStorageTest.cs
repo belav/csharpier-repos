@@ -18,14 +18,25 @@ namespace System.IO.IsolatedStorage
                 return new TheoryData<IsolatedStorageScope>
                 {
                     IsolatedStorageScope.User | IsolatedStorageScope.Assembly,
-                    IsolatedStorageScope.User | IsolatedStorageScope.Assembly | IsolatedStorageScope.Domain,
-                    IsolatedStorageScope.Roaming | IsolatedStorageScope.User | IsolatedStorageScope.Assembly,
-                    IsolatedStorageScope.Roaming | IsolatedStorageScope.User | IsolatedStorageScope.Assembly | IsolatedStorageScope.Domain,
+                    IsolatedStorageScope.User
+                        | IsolatedStorageScope.Assembly
+                        | IsolatedStorageScope.Domain,
+                    IsolatedStorageScope.Roaming
+                        | IsolatedStorageScope.User
+                        | IsolatedStorageScope.Assembly,
+                    IsolatedStorageScope.Roaming
+                        | IsolatedStorageScope.User
+                        | IsolatedStorageScope.Assembly
+                        | IsolatedStorageScope.Domain,
                     IsolatedStorageScope.Application | IsolatedStorageScope.User,
-                    IsolatedStorageScope.Application | IsolatedStorageScope.User | IsolatedStorageScope.Roaming,
+                    IsolatedStorageScope.Application
+                        | IsolatedStorageScope.User
+                        | IsolatedStorageScope.Roaming,
                     IsolatedStorageScope.Application | IsolatedStorageScope.Machine,
                     IsolatedStorageScope.Machine | IsolatedStorageScope.Assembly,
-                    IsolatedStorageScope.Machine | IsolatedStorageScope.Assembly | IsolatedStorageScope.Domain
+                    IsolatedStorageScope.Machine
+                        | IsolatedStorageScope.Assembly
+                        | IsolatedStorageScope.Domain,
                 };
             }
         }
@@ -37,7 +48,7 @@ namespace System.IO.IsolatedStorage
             UserStoreForDomain,
             MachineStoreForAssembly,
             MachineStoreForApplication,
-            MachineStoreForDomain
+            MachineStoreForDomain,
         }
 
         public static IsolatedStorageFile GetPresetScope(PresetScopes scope)
@@ -77,8 +88,7 @@ namespace System.IO.IsolatedStorage
                 };
 
                 // https://github.com/dotnet/runtime/issues/2092
-                if (OperatingSystem.IsWindows()
-                    && !PlatformDetection.IsInAppContainer)
+                if (OperatingSystem.IsWindows() && !PlatformDetection.IsInAppContainer)
                 {
                     validScopes.Add(PresetScopes.MachineStoreForApplication);
                     validScopes.Add(PresetScopes.MachineStoreForAssembly);
@@ -89,19 +99,19 @@ namespace System.IO.IsolatedStorage
             }
         }
 
-/*
- *      Template for Store test method
- *
-        [Theory, MemberData(nameof(ValidStores))]
-        public void ExampleTest(PresetScopes scope)
-        {
-            // If a dirty state will fail the test, use this
-            TestHelper.WipeStores();
-
-            using (var isf = GetPresetScope(scope))
-            {
-            }
-        }
-*/
+        /*
+         *      Template for Store test method
+         *
+                [Theory, MemberData(nameof(ValidStores))]
+                public void ExampleTest(PresetScopes scope)
+                {
+                    // If a dirty state will fail the test, use this
+                    TestHelper.WipeStores();
+        
+                    using (var isf = GetPresetScope(scope))
+                    {
+                    }
+                }
+        */
     }
 }

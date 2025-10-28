@@ -16,7 +16,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseTupleSwap
 {
     using VerifyCS = CSharpCodeFixVerifier<
         CSharpUseTupleSwapDiagnosticAnalyzer,
-        CSharpUseTupleSwapCodeFixProvider>;
+        CSharpUseTupleSwapCodeFixProvider
+    >;
 
     [Trait(Traits.Feature, Traits.Features.CodeActionsUseLocalFunction)]
     public partial class UseTupleSwapTests
@@ -65,8 +66,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseTupleSwap
                 FixedCode = code,
                 Options =
                 {
-                    { CSharpCodeStyleOptions.PreferTupleSwap, false, CodeStyle.NotificationOption2.Silent }
-                }
+                    {
+                        CSharpCodeStyleOptions.PreferTupleSwap,
+                        false,
+                        CodeStyle.NotificationOption2.Silent
+                    },
+                },
             }.RunAsync();
         }
 
@@ -93,7 +98,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseTupleSwap
                         (args[1], args[0]) = (args[0], args[1]);
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -111,11 +117,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseTupleSwap
                 }
                 """;
 
-            await new VerifyCS.Test
-            {
-                TestCode = code,
-                FixedCode = code,
-            }.RunAsync();
+            await new VerifyCS.Test { TestCode = code, FixedCode = code }.RunAsync();
         }
 
         [Fact]
@@ -141,7 +143,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseTupleSwap
                         (args[1], args[0]) = (args[0], args[1]);
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -169,7 +172,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseTupleSwap
                         (args[1], args[0]) = (args[0], args[1]);
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -195,7 +199,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseTupleSwap
                         (args   [   1   ], args  [  0  ]) = (args  [  0  ], args   [   1   ]);
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -213,11 +218,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseTupleSwap
                 }
                 """;
 
-            await new VerifyCS.Test
-            {
-                TestCode = code,
-                FixedCode = code,
-            }.RunAsync();
+            await new VerifyCS.Test { TestCode = code, FixedCode = code }.RunAsync();
         }
 
         [Fact]
@@ -235,11 +236,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseTupleSwap
                 }
                 """;
 
-            await new VerifyCS.Test
-            {
-                TestCode = code,
-                FixedCode = code,
-            }.RunAsync();
+            await new VerifyCS.Test { TestCode = code, FixedCode = code }.RunAsync();
         }
 
         [Fact]
@@ -257,11 +254,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseTupleSwap
                 }
                 """;
 
-            await new VerifyCS.Test
-            {
-                TestCode = code,
-                FixedCode = code,
-            }.RunAsync();
+            await new VerifyCS.Test { TestCode = code, FixedCode = code }.RunAsync();
         }
 
         [Fact]
@@ -279,11 +272,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseTupleSwap
                 }
                 """;
 
-            await new VerifyCS.Test
-            {
-                TestCode = code,
-                FixedCode = code,
-            }.RunAsync();
+            await new VerifyCS.Test { TestCode = code, FixedCode = code }.RunAsync();
         }
 
         [Fact]
@@ -301,11 +290,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseTupleSwap
                 }
                 """;
 
-            await new VerifyCS.Test
-            {
-                TestCode = code,
-                FixedCode = code,
-            }.RunAsync();
+            await new VerifyCS.Test { TestCode = code, FixedCode = code }.RunAsync();
         }
 
         [Fact]
@@ -323,11 +308,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseTupleSwap
                 }
                 """;
 
-            await new VerifyCS.Test
-            {
-                TestCode = code,
-                FixedCode = code,
-            }.RunAsync();
+            await new VerifyCS.Test { TestCode = code, FixedCode = code }.RunAsync();
         }
 
         [Fact]
@@ -345,11 +326,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseTupleSwap
                 }
                 """;
 
-            await new VerifyCS.Test
-            {
-                TestCode = code,
-                FixedCode = code,
-            }.RunAsync();
+            await new VerifyCS.Test { TestCode = code, FixedCode = code }.RunAsync();
         }
 
         [Fact]
@@ -385,7 +362,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseTupleSwap
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -421,7 +399,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseTupleSwap
                         (args[3], args[2]) = (args[2], args[3]);
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -439,11 +418,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseTupleSwap
                 }
                 """;
 
-            await new VerifyCS.Test
-            {
-                TestCode = code,
-                FixedCode = code,
-            }.RunAsync();
+            await new VerifyCS.Test { TestCode = code, FixedCode = code }.RunAsync();
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/58759")]
@@ -458,10 +433,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseTupleSwap
                     Sources =
                     {
                         """
-                        [|var|] temp = args[0];
-                        args[0] = args[1];
-                        args[1] = temp;
-                        """,
+                            [|var|] temp = args[0];
+                            args[0] = args[1];
+                            args[1] = temp;
+                            """,
                     },
                     OutputKind = OutputKind.ConsoleApplication,
                 },
@@ -492,11 +467,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseTupleSwap
                 }
                 """;
 
-            await new VerifyCS.Test
-            {
-                TestCode = code,
-                FixedCode = code,
-            }.RunAsync();
+            await new VerifyCS.Test { TestCode = code, FixedCode = code }.RunAsync();
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/66427")]
@@ -505,35 +476,35 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseTupleSwap
             await new VerifyCS.Test
             {
                 TestCode = """
-                struct S { }
+                    struct S { }
 
-                class C
-                {
-                    void M()
+                    class C
                     {
-                        S v0 = default;
-                        S v1 = default;
+                        void M()
+                        {
+                            S v0 = default;
+                            S v1 = default;
 
-                        [|var|] vTmp = v0;
-                        v0 = v1;
-                        v1 = vTmp;
+                            [|var|] vTmp = v0;
+                            v0 = v1;
+                            v1 = vTmp;
+                        }
                     }
-                }
-                """,
+                    """,
                 FixedCode = """
-                struct S { }
+                    struct S { }
 
-                class C
-                {
-                    void M()
+                    class C
                     {
-                        S v0 = default;
-                        S v1 = default;
+                        void M()
+                        {
+                            S v0 = default;
+                            S v1 = default;
 
-                        (v1, v0) = (v0, v1);
+                            (v1, v0) = (v0, v1);
+                        }
                     }
-                }
-                """,
+                    """,
             }.RunAsync();
         }
 
@@ -552,11 +523,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseTupleSwap
                 }
                 """;
 
-            await new VerifyCS.Test
-            {
-                TestCode = code,
-                FixedCode = code,
-            }.RunAsync();
+            await new VerifyCS.Test { TestCode = code, FixedCode = code }.RunAsync();
         }
     }
 }

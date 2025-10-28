@@ -8,12 +8,12 @@ namespace System.Text
 {
     using System;
     using System.Diagnostics.Contracts;
-    using System.Text;
-    using System.Threading;
     using System.Globalization;
     using System.Runtime.Serialization;
     using System.Security;
     using System.Security.Permissions;
+    using System.Text;
+    using System.Threading;
 
     // SBCSCodePageEncoding
     [Serializable]
@@ -22,39 +22,44 @@ namespace System.Text
         // Pointers to our memory section parts
         [NonSerialized]
         [SecurityCritical]
-        unsafe char* mapBytesToUnicode = null;      // char 256
-        [NonSerialized]
-        [SecurityCritical]
-        unsafe byte* mapUnicodeToBytes = null;      // byte 65536
-        [NonSerialized]
-        [SecurityCritical]
-        unsafe int*  mapCodePageCached = null;      // to remember which CP is cached
+        unsafe char* mapBytesToUnicode = null; // char 256
 
-        const char UNKNOWN_CHAR=(char)0xFFFD;
+        [NonSerialized]
+        [SecurityCritical]
+        unsafe byte* mapUnicodeToBytes = null; // byte 65536
+
+        [NonSerialized]
+        [SecurityCritical]
+        unsafe int* mapCodePageCached = null; // to remember which CP is cached
+
+        const char UNKNOWN_CHAR = (char)0xFFFD;
 
         // byteUnknown is used for default fallback only
         [NonSerialized]
-        byte  byteUnknown;
+        byte byteUnknown;
+
         [NonSerialized]
-        char  charUnknown;
+        char charUnknown;
 
-        [System.Security.SecurityCritical]  // auto-generated
-        public SBCSCodePageEncoding(int codePage) : this(codePage, codePage)
-        {
-        }
+        [System.Security.SecurityCritical] // auto-generated
+        public SBCSCodePageEncoding(int codePage)
+            : this(codePage, codePage) { }
 
-        [System.Security.SecurityCritical]  // auto-generated
-        internal SBCSCodePageEncoding(int codePage, int dataCodePage) : base(codePage, dataCodePage)
-        {
-        }
+        [System.Security.SecurityCritical] // auto-generated
+        internal SBCSCodePageEncoding(int codePage, int dataCodePage)
+            : base(codePage, dataCodePage) { }
 
         // Constructor called by serialization.
         // Note:  We use the base GetObjectData however
-        [System.Security.SecurityCritical]  // auto-generated
-        internal SBCSCodePageEncoding(SerializationInfo info, StreamingContext context) : base(0)
+        [System.Security.SecurityCritical] // auto-generated
+        internal SBCSCodePageEncoding(SerializationInfo info, StreamingContext context)
+            : base(0)
         {
             // Actually this can't ever get called, CodePageEncoding is our proxy
-            Contract.Assert(false, "Didn't expect to make it to SBCSCodePageEncoding serialization constructor");
+            Contract.Assert(
+                false,
+                "Didn't expect to make it to SBCSCodePageEncoding serialization constructor"
+            );
             throw new ArgumentNullException("this");
         }
 
@@ -70,17 +75,20 @@ namespace System.Text
         //              byte < 0x20 means skip the next n positions.  (Where n is the byte #)
         //              byte == 1 means that next word is another unicode code point #
         //              byte == 0 is unknown.  (doesn't override initial WCHAR[256] table!
-        [System.Security.SecurityCritical]  // auto-generated
+        [System.Security.SecurityCritical] // auto-generated
         protected override unsafe void LoadManagedCodePage()
         {
             // Should be loading OUR code page
-            Contract.Assert(pCodePage->CodePage == this.dataTableCodePage,
-                "[SBCSCodePageEncoding.LoadManagedCodePage]Expected to load data table code page");
+            Contract.Assert(
+                pCodePage->CodePage == this.dataTableCodePage,
+                "[SBCSCodePageEncoding.LoadManagedCodePage]Expected to load data table code page"
+            );
 
             // Make sure we're really a 1 byte code page
             if (pCodePage->ByteCount != 1)
                 throw new NotSupportedException(
-                    Environment.GetResourceString("NotSupported_NoCodepageData", CodePage));
+                    Environment.GetResourceString("NotSupported_NoCodepageData", CodePage)
+                );
 
             // Remember our unknown bytes & chars
             byteUnknown = (byte)pCodePage->ByteReplace;
@@ -88,7 +96,7 @@ namespace System.Text
 
             // Get our mapped section 65536 bytes for unicode->bytes, 256 * 2 bytes for bytes->unicode
             // Plus 4 byte to remember CP # when done loading it. (Don't want to get IA64 or anything out of alignment)
-            byte *pMemorySection = GetSharedMemory(65536*1 + 256*2 + 4 + iExtraBytes);
+            byte* pMemorySection = GetSharedMemory(65536 * 1 + 256 * 2 + 4 + iExtraBytes);
 
             mapBytesToUnicode = (char*)pMemorySection;
             mapUnicodeToBytes = (byte*)(pMemorySection + 256 * 2);
@@ -97,13 +105,18 @@ namespace System.Text
             // If its cached (& filled in) we don't have to do anything else
             if (*mapCodePageCached != 0)
             {
-                Contract.Assert(*mapCodePageCached == this.dataTableCodePage,
-                    "[DBCSCodePageEncoding.LoadManagedCodePage]Expected mapped section cached page to be same as data table code page.  Cached : " +
-                    *mapCodePageCached + " Expected:" + this.dataTableCodePage);
+                Contract.Assert(
+                    *mapCodePageCached == this.dataTableCodePage,
+                    "[DBCSCodePageEncoding.LoadManagedCodePage]Expected mapped section cached page to be same as data table code page.  Cached : "
+                        + *mapCodePageCached
+                        + " Expected:"
+                        + this.dataTableCodePage
+                );
 
                 if (*mapCodePageCached != this.dataTableCodePage)
                     throw new OutOfMemoryException(
-                        Environment.GetResourceString("Arg_OutOfMemoryException"));
+                        Environment.GetResourceString("Arg_OutOfMemoryException")
+                    );
 
                 // If its cached (& filled in) we don't have to do anything else
                 return;
@@ -152,11 +165,11 @@ namespace System.Text
         }
 
         // Read in our best fit table
-        [System.Security.SecurityCritical]  // auto-generated
-        protected unsafe override void ReadBestFitTable()
+        [System.Security.SecurityCritical] // auto-generated
+        protected override unsafe void ReadBestFitTable()
         {
             // Lock so we don't confuse ourselves.
-            lock(InternalSyncObject)
+            lock (InternalSyncObject)
             {
                 // If we got a best fit array already, then don't do this
                 if (arrayUnicodeBestFit == null)
@@ -180,10 +193,16 @@ namespace System.Text
                     ushort byteTemp;
                     while ((byteTemp = *((ushort*)pData)) != 0)
                     {
-
-                        Contract.Assert(arrayTemp[byteTemp] == UNKNOWN_CHAR, String.Format(CultureInfo.InvariantCulture,
-                            "[SBCSCodePageEncoding::ReadBestFitTable] Expected unallocated byte (not 0x{2:X2}) for best fit byte at 0x{0:X2} for code page {1}",
-                            byteTemp, CodePage, (int)arrayTemp[byteTemp]));
+                        Contract.Assert(
+                            arrayTemp[byteTemp] == UNKNOWN_CHAR,
+                            String.Format(
+                                CultureInfo.InvariantCulture,
+                                "[SBCSCodePageEncoding::ReadBestFitTable] Expected unallocated byte (not 0x{2:X2}) for best fit byte at 0x{0:X2} for code page {1}",
+                                byteTemp,
+                                CodePage,
+                                (int)arrayTemp[byteTemp]
+                            )
+                        );
                         pData += 2;
 
                         arrayTemp[byteTemp] = *((char*)pData);
@@ -194,7 +213,7 @@ namespace System.Text
                     arrayBytesBestFit = arrayTemp;
 
                     // It was on 0, it needs to be on next byte
-                    pData+=2;
+                    pData += 2;
                     byte* pUnicodeToSBCS = pData;
 
                     // Now count our characters from our Unicode->SBCS best fit table,
@@ -217,7 +236,7 @@ namespace System.Text
                         {
                             // Use next 2 bytes as our byte position
                             unicodePosition = *((ushort*)pData);
-                            pData+=2;
+                            pData += 2;
                         }
                         else if (input < 0x20 && input > 0 && input != 0x1e)
                         {
@@ -236,7 +255,7 @@ namespace System.Text
                     }
 
                     // Make an array for our best fit data
-                    arrayTemp = new char[iBestFitCount*2];
+                    arrayTemp = new char[iBestFitCount * 2];
 
                     // Now actually read in the data
                     // reset pData should be pointing at the first data point for Bytes->Unicode table
@@ -256,7 +275,7 @@ namespace System.Text
                         {
                             // Use next 2 bytes as our byte position
                             unicodePosition = *((ushort*)pData);
-                            pData+=2;
+                            pData += 2;
                         }
                         else if (input < 0x20 && input > 0 && input != 0x1e)
                         {
@@ -282,10 +301,16 @@ namespace System.Text
                                 arrayTemp[iBestFitCount++] = mapBytesToUnicode[input];
 
                                 // This won't work if it won't round trip.
-                                Contract.Assert(arrayTemp[iBestFitCount-1] != (char)0,
-                                    String.Format(CultureInfo.InvariantCulture,
-                                    "[SBCSCodePageEncoding.ReadBestFitTable] No valid Unicode value {0:X4} for round trip bytes {1:X4}, encoding {2}",
-                                    (int)mapBytesToUnicode[input], (int)input, CodePage));
+                                Contract.Assert(
+                                    arrayTemp[iBestFitCount - 1] != (char)0,
+                                    String.Format(
+                                        CultureInfo.InvariantCulture,
+                                        "[SBCSCodePageEncoding.ReadBestFitTable] No valid Unicode value {0:X4} for round trip bytes {1:X4}, encoding {2}",
+                                        (int)mapBytesToUnicode[input],
+                                        (int)input,
+                                        CodePage
+                                    )
+                                );
                             }
                             unicodePosition++;
                         }
@@ -300,7 +325,7 @@ namespace System.Text
         // GetByteCount
         // Note: We start by assuming that the output will be the same as count.  Having
         // an encoder or fallback may change that assumption
-        [System.Security.SecurityCritical]  // auto-generated
+        [System.Security.SecurityCritical] // auto-generated
         internal override unsafe int GetByteCount(char* chars, int count, EncoderNLS encoder)
         {
             // Just need to ASSERT, this is called by something else internal that checked parameters already
@@ -308,7 +333,10 @@ namespace System.Text
             Contract.Assert(chars != null, "[SBCSCodePageEncoding.GetByteCount]chars is null");
 
             // Assert because we shouldn't be able to have a null encoder.
-            Contract.Assert(encoderFallback != null, "[SBCSCodePageEncoding.GetByteCount]Attempting to use null fallback");
+            Contract.Assert(
+                encoderFallback != null,
+                "[SBCSCodePageEncoding.GetByteCount]Attempting to use null fallback"
+            );
 
             CheckMemorySection();
 
@@ -320,14 +348,19 @@ namespace System.Text
             if (encoder != null)
             {
                 charLeftOver = encoder.charLeftOver;
-                Contract.Assert(charLeftOver == 0 || Char.IsHighSurrogate(charLeftOver),
-                    "[SBCSCodePageEncoding.GetByteCount]leftover character should be high surrogate");
+                Contract.Assert(
+                    charLeftOver == 0 || Char.IsHighSurrogate(charLeftOver),
+                    "[SBCSCodePageEncoding.GetByteCount]leftover character should be high surrogate"
+                );
                 fallback = encoder.Fallback as EncoderReplacementFallback;
 
                 // Verify that we have no fallbackbuffer, actually for SBCS this is always empty, so just assert
-                Contract.Assert(!encoder.m_throwOnOverflow || !encoder.InternalHasFallbackBuffer ||
-                    encoder.FallbackBuffer.Remaining == 0,
-                    "[SBCSCodePageEncoding.GetByteCount]Expected empty fallback buffer at start");
+                Contract.Assert(
+                    !encoder.m_throwOnOverflow
+                        || !encoder.InternalHasFallbackBuffer
+                        || encoder.FallbackBuffer.Remaining == 0,
+                    "[SBCSCodePageEncoding.GetByteCount]Expected empty fallback buffer at start"
+                );
             }
             else
             {
@@ -335,7 +368,9 @@ namespace System.Text
                 fallback = this.EncoderFallback as EncoderReplacementFallback;
             }
 
-            if ((fallback != null && fallback.MaxCharCount == 1)/* || bIsBestFit*/)
+            if (
+                (fallback != null && fallback.MaxCharCount == 1) /* || bIsBestFit*/
+            )
             {
                 // Replacement fallback encodes surrogate pairs as two ?? (or two whatever), so return size is always
                 // same as input size.
@@ -364,7 +399,10 @@ namespace System.Text
             {
                 // Since left over char was a surrogate, it'll have to be fallen back.
                 // Get Fallback
-                Contract.Assert(encoder != null, "[SBCSCodePageEncoding.GetByteCount]Expect to have encoder if we have a charLeftOver");
+                Contract.Assert(
+                    encoder != null,
+                    "[SBCSCodePageEncoding.GetByteCount]Expect to have encoder if we have a charLeftOver"
+                );
                 fallbackBuffer = encoder.FallbackBuffer;
                 fallbackBuffer.InternalInitialize(chars, charEnd, encoder, false);
 
@@ -376,8 +414,10 @@ namespace System.Text
 
             // Go ahead and do it, including the fallback.
             char ch;
-            while ((ch = (fallbackBuffer == null) ? '\0' : fallbackBuffer.InternalGetNextChar()) != 0 ||
-                    chars < charEnd)
+            while (
+                (ch = (fallbackBuffer == null) ? '\0' : fallbackBuffer.InternalGetNextChar()) != 0
+                || chars < charEnd
+            )
             {
                 // First unwind any fallback
                 if (ch == 0)
@@ -415,15 +455,22 @@ namespace System.Text
                 byteCount++;
             }
 
-            Contract.Assert(fallbackBuffer == null || fallbackBuffer.Remaining == 0,
-                "[SBCSEncoding.GetByteCount]Expected Empty fallback buffer at end");
+            Contract.Assert(
+                fallbackBuffer == null || fallbackBuffer.Remaining == 0,
+                "[SBCSEncoding.GetByteCount]Expected Empty fallback buffer at end"
+            );
 
             return (int)byteCount;
         }
 
-        [System.Security.SecurityCritical]  // auto-generated
-        internal override unsafe int GetBytes(char* chars, int charCount,
-                                                byte* bytes, int byteCount, EncoderNLS encoder)
+        [System.Security.SecurityCritical] // auto-generated
+        internal override unsafe int GetBytes(
+            char* chars,
+            int charCount,
+            byte* bytes,
+            int byteCount,
+            EncoderNLS encoder
+        )
         {
             // Just need to ASSERT, this is called by something else internal that checked parameters already
             Contract.Assert(bytes != null, "[SBCSCodePageEncoding.GetBytes]bytes is null");
@@ -432,7 +479,10 @@ namespace System.Text
             Contract.Assert(charCount >= 0, "[SBCSCodePageEncoding.GetBytes]charCount is negative");
 
             // Assert because we shouldn't be able to have a null encoder.
-            Contract.Assert(encoderFallback != null, "[SBCSCodePageEncoding.GetBytes]Attempting to use null encoder fallback");
+            Contract.Assert(
+                encoderFallback != null,
+                "[SBCSCodePageEncoding.GetBytes]Attempting to use null encoder fallback"
+            );
 
             CheckMemorySection();
 
@@ -444,18 +494,23 @@ namespace System.Text
             if (encoder != null)
             {
                 charLeftOver = encoder.charLeftOver;
-                Contract.Assert(charLeftOver == 0 || Char.IsHighSurrogate(charLeftOver),
-                    "[SBCSCodePageEncoding.GetBytes]leftover character should be high surrogate");
+                Contract.Assert(
+                    charLeftOver == 0 || Char.IsHighSurrogate(charLeftOver),
+                    "[SBCSCodePageEncoding.GetBytes]leftover character should be high surrogate"
+                );
                 fallback = encoder.Fallback as EncoderReplacementFallback;
 
                 // Verify that we have no fallbackbuffer, for SBCS its always empty, so just assert
-                Contract.Assert(!encoder.m_throwOnOverflow || !encoder.InternalHasFallbackBuffer ||
-                    encoder.FallbackBuffer.Remaining == 0,
-                    "[SBCSCodePageEncoding.GetBytes]Expected empty fallback buffer at start");
-//                if (encoder.m_throwOnOverflow && encoder.InternalHasFallbackBuffer &&
-//                    encoder.FallbackBuffer.Remaining > 0)
-//                    throw new ArgumentException(Environment.GetResourceString("Argument_EncoderFallbackNotEmpty",
-//                        this.EncodingName, encoder.Fallback.GetType()));
+                Contract.Assert(
+                    !encoder.m_throwOnOverflow
+                        || !encoder.InternalHasFallbackBuffer
+                        || encoder.FallbackBuffer.Remaining == 0,
+                    "[SBCSCodePageEncoding.GetBytes]Expected empty fallback buffer at start"
+                );
+                //                if (encoder.m_throwOnOverflow && encoder.InternalHasFallbackBuffer &&
+                //                    encoder.FallbackBuffer.Remaining > 0)
+                //                    throw new ArgumentException(Environment.GetResourceString("Argument_EncoderFallbackNotEmpty",
+                //                        this.EncodingName, encoder.Fallback.GetType()));
             }
             else
             {
@@ -493,7 +548,7 @@ namespace System.Text
 
                         // This'll make sure we still have more room and also make sure our return value is correct.
                         *(bytes++) = bReplacement;
-                        byteCount--;                // We used one of the ones we were counting.
+                        byteCount--; // We used one of the ones we were counting.
                     }
 
                     // This keeps us from overrunning our output buffer
@@ -527,7 +582,7 @@ namespace System.Text
                     if (encoder != null)
                     {
                         encoder.charLeftOver = (char)0;
-                        encoder.m_charsUsed = (int)(chars-charStart);
+                        encoder.m_charsUsed = (int)(chars - charStart);
                     }
                     return (int)(bytes - byteStart);
                 }
@@ -546,7 +601,10 @@ namespace System.Text
             {
                 // Since left over char was a surrogate, it'll have to be fallen back.
                 // Get Fallback
-                Contract.Assert(encoder != null, "[SBCSCodePageEncoding.GetBytes]Expect to have encoder if we have a charLeftOver");
+                Contract.Assert(
+                    encoder != null,
+                    "[SBCSCodePageEncoding.GetBytes]Expect to have encoder if we have a charLeftOver"
+                );
                 fallbackBuffer = encoder.FallbackBuffer;
                 fallbackBuffer.InternalInitialize(chars, charEnd, encoder, true);
 
@@ -563,8 +621,10 @@ namespace System.Text
 
             // Go ahead and do it, including the fallback.
             char ch;
-            while ((ch = (fallbackBuffer == null) ? '\0' : fallbackBuffer.InternalGetNextChar()) != 0 ||
-                    chars < charEnd)
+            while (
+                (ch = (fallbackBuffer == null) ? '\0' : fallbackBuffer.InternalGetNextChar()) != 0
+                || chars < charEnd
+            )
             {
                 // First unwind any fallback
                 if (ch == 0)
@@ -581,7 +641,7 @@ namespace System.Text
                 if (bTemp == 0 && ch != (char)0)
                 {
                     // Get Fallback
-                    if ( fallbackBuffer == null )
+                    if (fallbackBuffer == null)
                     {
                         // Create & init fallback buffer
                         if (encoder == null)
@@ -590,7 +650,12 @@ namespace System.Text
                             fallbackBuffer = encoder.FallbackBuffer;
                         // chars has moved so we need to remember figure it out so Exception fallback
                         // index will be correct
-                        fallbackBuffer.InternalInitialize(charEnd - charCount, charEnd, encoder, true);
+                        fallbackBuffer.InternalInitialize(
+                            charEnd - charCount,
+                            charEnd,
+                            encoder,
+                            true
+                        );
                     }
 
                     // Make sure we have enough room.  Each fallback char will be 1 output char
@@ -599,8 +664,10 @@ namespace System.Text
                     if (fallbackBuffer.Remaining > byteEnd - bytes)
                     {
                         // Didn't use this char, reset it
-                        Contract.Assert(chars > charStart,
-                            "[SBCSCodePageEncoding.GetBytes]Expected chars to have advanced (fallback)");
+                        Contract.Assert(
+                            chars > charStart,
+                            "[SBCSCodePageEncoding.GetBytes]Expected chars to have advanced (fallback)"
+                        );
                         chars--;
                         fallbackBuffer.InternalReset();
 
@@ -616,16 +683,20 @@ namespace System.Text
                 if (bytes >= byteEnd)
                 {
                     // didn't use this char, we'll throw or use buffer
-                    Contract.Assert(fallbackBuffer == null || fallbackBuffer.bFallingBack == false,
-                        "[SBCSCodePageEncoding.GetBytes]Expected to NOT be falling back");
+                    Contract.Assert(
+                        fallbackBuffer == null || fallbackBuffer.bFallingBack == false,
+                        "[SBCSCodePageEncoding.GetBytes]Expected to NOT be falling back"
+                    );
                     if (fallbackBuffer == null || fallbackBuffer.bFallingBack == false)
                     {
-                        Contract.Assert(chars > charStart,
-                            "[SBCSCodePageEncoding.GetBytes]Expected chars to have advanced (normal)");                        
-                        chars--;                                        // don't use last char
+                        Contract.Assert(
+                            chars > charStart,
+                            "[SBCSCodePageEncoding.GetBytes]Expected chars to have advanced (normal)"
+                        );
+                        chars--; // don't use last char
                     }
-                    ThrowBytesOverflow(encoder, chars == charStart);    // throw ?
-                    break;                                              // don't throw, stop
+                    ThrowBytesOverflow(encoder, chars == charStart); // throw ?
+                    break; // don't throw, stop
                 }
 
                 // Go ahead and add it
@@ -646,14 +717,16 @@ namespace System.Text
             }
 
             // Expect Empty fallback buffer for SBCS
-            Contract.Assert(fallbackBuffer == null || fallbackBuffer.Remaining == 0,
-                "[SBCSEncoding.GetBytes]Expected Empty fallback buffer at end");
+            Contract.Assert(
+                fallbackBuffer == null || fallbackBuffer.Remaining == 0,
+                "[SBCSEncoding.GetBytes]Expected Empty fallback buffer at end"
+            );
 
             return (int)(bytes - byteStart);
         }
 
         // This is internal and called by something else,
-        [System.Security.SecurityCritical]  // auto-generated
+        [System.Security.SecurityCritical] // auto-generated
         internal override unsafe int GetCharCount(byte* bytes, int count, DecoderNLS decoder)
         {
             // Just assert, we're called internally so these should be safe, checked already
@@ -664,22 +737,25 @@ namespace System.Text
 
             // See if we have best fit
             bool bUseBestFit = false;
-            
+
             // Only need decoder fallback buffer if not using default replacement fallback or best fit fallback.
             DecoderReplacementFallback fallback = null;
 
             if (decoder == null)
             {
                 fallback = this.DecoderFallback as DecoderReplacementFallback;
-                bUseBestFit = this.DecoderFallback.IsMicrosoftBestFitFallback;                
+                bUseBestFit = this.DecoderFallback.IsMicrosoftBestFitFallback;
             }
             else
             {
                 fallback = decoder.Fallback as DecoderReplacementFallback;
                 bUseBestFit = decoder.Fallback.IsMicrosoftBestFitFallback;
-                Contract.Assert(!decoder.m_throwOnOverflow || !decoder.InternalHasFallbackBuffer ||
-                    decoder.FallbackBuffer.Remaining == 0,
-                    "[SBCSCodePageEncoding.GetChars]Expected empty fallback buffer at start");
+                Contract.Assert(
+                    !decoder.m_throwOnOverflow
+                        || !decoder.InternalHasFallbackBuffer
+                        || decoder.FallbackBuffer.Remaining == 0,
+                    "[SBCSCodePageEncoding.GetChars]Expected empty fallback buffer at start"
+                );
             }
 
             if (bUseBestFit || (fallback != null && fallback.MaxCharCount == 1))
@@ -724,22 +800,29 @@ namespace System.Text
 
                     // Use fallback buffer
                     byteBuffer[0] = *(bytes - 1);
-                    charCount--;                            // We'd already reserved one for *(bytes-1)
+                    charCount--; // We'd already reserved one for *(bytes-1)
                     charCount += fallbackBuffer.InternalFallback(byteBuffer, bytes);
                 }
             }
 
             // Fallback buffer must be empty
-            Contract.Assert(fallbackBuffer == null || fallbackBuffer.Remaining == 0,
-                "[SBCSEncoding.GetCharCount]Expected Empty fallback buffer at end");
+            Contract.Assert(
+                fallbackBuffer == null || fallbackBuffer.Remaining == 0,
+                "[SBCSEncoding.GetCharCount]Expected Empty fallback buffer at end"
+            );
 
             // Converted sequence is same length as input
             return charCount;
         }
 
-        [System.Security.SecurityCritical]  // auto-generated
-        internal override unsafe int GetChars(byte* bytes, int byteCount,
-                                                char* chars, int charCount, DecoderNLS decoder)
+        [System.Security.SecurityCritical] // auto-generated
+        internal override unsafe int GetChars(
+            byte* bytes,
+            int byteCount,
+            char* chars,
+            int charCount,
+            DecoderNLS decoder
+        )
         {
             // Just need to ASSERT, this is called by something else internal that checked parameters already
             Contract.Assert(bytes != null, "[SBCSCodePageEncoding.GetChars]bytes is null");
@@ -763,15 +846,18 @@ namespace System.Text
             if (decoder == null)
             {
                 fallback = this.DecoderFallback as DecoderReplacementFallback;
-                bUseBestFit = this.DecoderFallback.IsMicrosoftBestFitFallback;                
+                bUseBestFit = this.DecoderFallback.IsMicrosoftBestFitFallback;
             }
             else
             {
                 fallback = decoder.Fallback as DecoderReplacementFallback;
                 bUseBestFit = decoder.Fallback.IsMicrosoftBestFitFallback;
-                Contract.Assert(!decoder.m_throwOnOverflow || !decoder.InternalHasFallbackBuffer ||
-                    decoder.FallbackBuffer.Remaining == 0,
-                    "[SBCSCodePageEncoding.GetChars]Expected empty fallback buffer at start");
+                Contract.Assert(
+                    !decoder.m_throwOnOverflow
+                        || !decoder.InternalHasFallbackBuffer
+                        || decoder.FallbackBuffer.Remaining == 0,
+                    "[SBCSCodePageEncoding.GetChars]Expected empty fallback buffer at start"
+                );
             }
 
             if (bUseBestFit || (fallback != null && fallback.MaxCharCount == 1))
@@ -779,7 +865,7 @@ namespace System.Text
                 // Try it the fast way
                 char replacementChar;
                 if (fallback == null)
-                    replacementChar = '?';  // Best fit alwasy has ? for fallback for SBCS
+                    replacementChar = '?'; // Best fit alwasy has ? for fallback for SBCS
                 else
                     replacementChar = fallback.DefaultString[0];
 
@@ -826,7 +912,7 @@ namespace System.Text
             // Slower way's going to need a fallback buffer
             DecoderFallbackBuffer fallbackBuffer = null;
             byte[] byteBuffer = new byte[1];
-            char*   charEnd = chars + charCount;
+            char* charEnd = chars + charCount;
 
             // Not quite so fast loop
             while (bytes < byteEnd)
@@ -849,17 +935,19 @@ namespace System.Text
                     }
 
                     // Use fallback buffer
-                    Contract.Assert(bytes > byteStart,
-                        "[SBCSCodePageEncoding.GetChars]Expected bytes to have advanced already (unknown byte)");
+                    Contract.Assert(
+                        bytes > byteStart,
+                        "[SBCSCodePageEncoding.GetChars]Expected bytes to have advanced already (unknown byte)"
+                    );
                     byteBuffer[0] = *(bytes - 1);
                     // Fallback adds fallback to chars, but doesn't increment chars unless the whole thing fits.
                     if (!fallbackBuffer.InternalFallback(byteBuffer, bytes, ref chars))
                     {
                         // May or may not throw, but we didn't get this byte
-                        bytes--;                                            // unused byte
-                        fallbackBuffer.InternalReset();                     // Didn't fall this back
-                        ThrowCharsOverflow(decoder, bytes == byteStart);    // throw?
-                        break;                                              // don't throw, but stop loop
+                        bytes--; // unused byte
+                        fallbackBuffer.InternalReset(); // Didn't fall this back
+                        ThrowCharsOverflow(decoder, bytes == byteStart); // throw?
+                        break; // don't throw, but stop loop
                     }
                 }
                 else
@@ -867,11 +955,13 @@ namespace System.Text
                     // Make sure we have buffer space
                     if (chars >= charEnd)
                     {
-                        Contract.Assert(bytes > byteStart,
-                            "[SBCSCodePageEncoding.GetChars]Expected bytes to have advanced already (known byte)");                        
-                        bytes--;                                            // unused byte
-                        ThrowCharsOverflow(decoder, bytes == byteStart);    // throw?
-                        break;                                              // don't throw, but stop loop
+                        Contract.Assert(
+                            bytes > byteStart,
+                            "[SBCSCodePageEncoding.GetChars]Expected bytes to have advanced already (known byte)"
+                        );
+                        bytes--; // unused byte
+                        ThrowCharsOverflow(decoder, bytes == byteStart); // throw?
+                        break; // don't throw, but stop loop
                     }
 
                     *(chars) = c;
@@ -884,8 +974,10 @@ namespace System.Text
                 decoder.m_bytesUsed = (int)(bytes - byteStart);
 
             // Expect Empty fallback buffer for GetChars
-            Contract.Assert(fallbackBuffer == null || fallbackBuffer.Remaining == 0,
-                "[SBCSEncoding.GetChars]Expected Empty fallback buffer at end");
+            Contract.Assert(
+                fallbackBuffer == null || fallbackBuffer.Remaining == 0,
+                "[SBCSEncoding.GetChars]Expected Empty fallback buffer at end"
+            );
 
             return (int)(chars - charStart);
         }
@@ -893,8 +985,10 @@ namespace System.Text
         public override int GetMaxByteCount(int charCount)
         {
             if (charCount < 0)
-               throw new ArgumentOutOfRangeException("charCount",
-                    Environment.GetResourceString("ArgumentOutOfRange_NeedNonNegNum"));
+                throw new ArgumentOutOfRangeException(
+                    "charCount",
+                    Environment.GetResourceString("ArgumentOutOfRange_NeedNonNegNum")
+                );
             Contract.EndContractBlock();
 
             // Characters would be # of characters + 1 in case high surrogate is ? * max fallback
@@ -906,15 +1000,20 @@ namespace System.Text
             // 1 to 1 for most characters.  Only surrogates with fallbacks have less.
 
             if (byteCount > 0x7fffffff)
-                throw new ArgumentOutOfRangeException("charCount", Environment.GetResourceString("ArgumentOutOfRange_GetByteCountOverflow"));
+                throw new ArgumentOutOfRangeException(
+                    "charCount",
+                    Environment.GetResourceString("ArgumentOutOfRange_GetByteCountOverflow")
+                );
             return (int)byteCount;
         }
 
         public override int GetMaxCharCount(int byteCount)
         {
             if (byteCount < 0)
-               throw new ArgumentOutOfRangeException("byteCount",
-                    Environment.GetResourceString("ArgumentOutOfRange_NeedNonNegNum"));
+                throw new ArgumentOutOfRangeException(
+                    "byteCount",
+                    Environment.GetResourceString("ArgumentOutOfRange_NeedNonNegNum")
+                );
             Contract.EndContractBlock();
 
             // Just return length, SBCS stay the same length because they don't map to surrogate
@@ -925,7 +1024,10 @@ namespace System.Text
                 charCount *= DecoderFallback.MaxCharCount;
 
             if (charCount > 0x7fffffff)
-                throw new ArgumentOutOfRangeException("byteCount", Environment.GetResourceString("ArgumentOutOfRange_GetCharCountOverflow"));
+                throw new ArgumentOutOfRangeException(
+                    "byteCount",
+                    Environment.GetResourceString("ArgumentOutOfRange_GetCharCountOverflow")
+                );
 
             return (int)charCount;
         }
@@ -933,10 +1035,7 @@ namespace System.Text
         // True if and only if the encoding only uses single byte code points.  (Ie, ASCII, 1252, etc)
         public override bool IsSingleByte
         {
-            get
-            {
-                return true;
-            }
+            get { return true; }
         }
 
         [System.Runtime.InteropServices.ComVisible(false)]
@@ -951,71 +1050,71 @@ namespace System.Text
                 switch (CodePage)
                 {
                     // Return true for some code pages.
-                    case 1252:     // (Latin I - ANSI)
-                    case 1250:     // (Eastern Europe - ANSI)
-                    case 1251:     // (Cyrillic - ANSI)
-                    case 1254:     // (Turkish - ANSI)
-                    case 1256:     // (Arabic - ANSI)
-                    case 28591:    // (ISO 8859-1 Latin I)
-                    case 437:      // (United States - OEM)
-                    case 737:      // (Greek (aka 437G) - OEM)
-                    case 775:      // (Baltic - OEM)
-                    case 850:      // (Multilingual (Latin I) - OEM)
-                    case 852:      // (Slovak (Latin II) - OEM)
-                    case 855:      // (Cyrillic - OEM)
-                    case 858:      // (Multilingual (Latin I) - OEM + Euro)
-                    case 860:      // (Portuguese - OEM)
-                    case 861:      // (Icelandic - OEM)
-                    case 862:      // (Hebrew - OEM)
-                    case 863:      // (Canadian French - OEM)
-                    case 865:      // (Nordic - OEM)
-                    case 866:      // (Russian - OEM)
-                    case 869:      // (Modern Greek - OEM)
-                    case 10007:    // (Cyrillic - MAC)
-                    case 10017:    // (Ukraine - MAC)
-                    case 10029:    // (Latin II - MAC)
-                    case 28592:    // (ISO 8859-2 Eastern Europe)
-                    case 28594:    // (ISO 8859-4 Baltic)
-                    case 28595:    // (ISO 8859-5 Cyrillic)
-                    case 28599:    // (ISO 8859-9 Latin Alphabet No.5)
-                    case 28603:    // (ISO/IEC 8859-13:1998 (Lithuanian))
-                    case 28605:    // (ISO 8859-15 Latin 9 (IBM923=IBM819+Euro))
-                    case 037:      // (IBM EBCDIC U.S./Canada)
-                    case 500:      // (IBM EBCDIC International)
-                    case 870:      // (IBM EBCDIC Latin-2 Multilingual/ROECE)
-                    case 1026:     // (IBM EBCDIC Latin-5 Turkey)
-                    case 1047:     // (IBM Latin-1/Open System)
-                    case 1140:     // (IBM EBCDIC U.S./Canada (037+Euro))
-                    case 1141:     // (IBM EBCDIC Germany (20273(IBM273)+Euro))
-                    case 1142:     // (IBM EBCDIC Denmark/Norway (20277(IBM277+Euro))
-                    case 1143:     // (IBM EBCDIC Finland/Sweden (20278(IBM278)+Euro))
-                    case 1144:     // (IBM EBCDIC Italy (20280(IBM280)+Euro))
-                    case 1145:     // (IBM EBCDIC Latin America/Spain (20284(IBM284)+Euro))
-                    case 1146:     // (IBM EBCDIC United Kingdom (20285(IBM285)+Euro))
-                    case 1147:     // (IBM EBCDIC France (20297(IBM297+Euro))
-                    case 1148:     // (IBM EBCDIC International (500+Euro))
-                    case 1149:     // (IBM EBCDIC Icelandic (20871(IBM871+Euro))
-                    case 20273:    // (IBM EBCDIC Germany)
-                    case 20277:    // (IBM EBCDIC Denmark/Norway)
-                    case 20278:    // (IBM EBCDIC Finland/Sweden)
-                    case 20280:    // (IBM EBCDIC Italy)
-                    case 20284:    // (IBM EBCDIC Latin America/Spain)
-                    case 20285:    // (IBM EBCDIC United Kingdom)
-                    case 20297:    // (IBM EBCDIC France)
-                    case 20871:    // (IBM EBCDIC Icelandic)
-                    case 20880:    // (IBM EBCDIC Cyrillic)
-                    case 20924:    // (IBM Latin-1/Open System (IBM924=IBM1047+Euro))
-                    case 21025:    // (IBM EBCDIC Cyrillic (Serbian, Bulgarian))
-                    case 720:      // (Arabic - Transparent ASMO)
-                    case 20866:    // (Russian - KOI8)
-                    case 21866:    // (Ukrainian - KOI8-U)
-                        return true;        
+                    case 1252: // (Latin I - ANSI)
+                    case 1250: // (Eastern Europe - ANSI)
+                    case 1251: // (Cyrillic - ANSI)
+                    case 1254: // (Turkish - ANSI)
+                    case 1256: // (Arabic - ANSI)
+                    case 28591: // (ISO 8859-1 Latin I)
+                    case 437: // (United States - OEM)
+                    case 737: // (Greek (aka 437G) - OEM)
+                    case 775: // (Baltic - OEM)
+                    case 850: // (Multilingual (Latin I) - OEM)
+                    case 852: // (Slovak (Latin II) - OEM)
+                    case 855: // (Cyrillic - OEM)
+                    case 858: // (Multilingual (Latin I) - OEM + Euro)
+                    case 860: // (Portuguese - OEM)
+                    case 861: // (Icelandic - OEM)
+                    case 862: // (Hebrew - OEM)
+                    case 863: // (Canadian French - OEM)
+                    case 865: // (Nordic - OEM)
+                    case 866: // (Russian - OEM)
+                    case 869: // (Modern Greek - OEM)
+                    case 10007: // (Cyrillic - MAC)
+                    case 10017: // (Ukraine - MAC)
+                    case 10029: // (Latin II - MAC)
+                    case 28592: // (ISO 8859-2 Eastern Europe)
+                    case 28594: // (ISO 8859-4 Baltic)
+                    case 28595: // (ISO 8859-5 Cyrillic)
+                    case 28599: // (ISO 8859-9 Latin Alphabet No.5)
+                    case 28603: // (ISO/IEC 8859-13:1998 (Lithuanian))
+                    case 28605: // (ISO 8859-15 Latin 9 (IBM923=IBM819+Euro))
+                    case 037: // (IBM EBCDIC U.S./Canada)
+                    case 500: // (IBM EBCDIC International)
+                    case 870: // (IBM EBCDIC Latin-2 Multilingual/ROECE)
+                    case 1026: // (IBM EBCDIC Latin-5 Turkey)
+                    case 1047: // (IBM Latin-1/Open System)
+                    case 1140: // (IBM EBCDIC U.S./Canada (037+Euro))
+                    case 1141: // (IBM EBCDIC Germany (20273(IBM273)+Euro))
+                    case 1142: // (IBM EBCDIC Denmark/Norway (20277(IBM277+Euro))
+                    case 1143: // (IBM EBCDIC Finland/Sweden (20278(IBM278)+Euro))
+                    case 1144: // (IBM EBCDIC Italy (20280(IBM280)+Euro))
+                    case 1145: // (IBM EBCDIC Latin America/Spain (20284(IBM284)+Euro))
+                    case 1146: // (IBM EBCDIC United Kingdom (20285(IBM285)+Euro))
+                    case 1147: // (IBM EBCDIC France (20297(IBM297+Euro))
+                    case 1148: // (IBM EBCDIC International (500+Euro))
+                    case 1149: // (IBM EBCDIC Icelandic (20871(IBM871+Euro))
+                    case 20273: // (IBM EBCDIC Germany)
+                    case 20277: // (IBM EBCDIC Denmark/Norway)
+                    case 20278: // (IBM EBCDIC Finland/Sweden)
+                    case 20280: // (IBM EBCDIC Italy)
+                    case 20284: // (IBM EBCDIC Latin America/Spain)
+                    case 20285: // (IBM EBCDIC United Kingdom)
+                    case 20297: // (IBM EBCDIC France)
+                    case 20871: // (IBM EBCDIC Icelandic)
+                    case 20880: // (IBM EBCDIC Cyrillic)
+                    case 20924: // (IBM Latin-1/Open System (IBM924=IBM1047+Euro))
+                    case 21025: // (IBM EBCDIC Cyrillic (Serbian, Bulgarian))
+                    case 720: // (Arabic - Transparent ASMO)
+                    case 20866: // (Russian - KOI8)
+                    case 21866: // (Ukrainian - KOI8-U)
+                        return true;
                 }
             }
 
             // False for IDNA and unknown
             return false;
-        }        
+        }
     }
 }
 #endif // FEATURE_CODEPAGES_FILE

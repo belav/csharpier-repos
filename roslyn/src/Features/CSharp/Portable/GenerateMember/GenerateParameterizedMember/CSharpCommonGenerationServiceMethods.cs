@@ -8,10 +8,8 @@ namespace Microsoft.CodeAnalysis.CSharp.GenerateMember.GenerateParameterizedMemb
 {
     internal static class CSharpCommonGenerationServiceMethods
     {
-        public static bool AreSpecialOptionsActive()
-            => false;
+        public static bool AreSpecialOptionsActive() => false;
 
-        public static bool IsValidSymbol()
-            => false;
+        public static bool IsValidSymbol() => false;
     }
 }

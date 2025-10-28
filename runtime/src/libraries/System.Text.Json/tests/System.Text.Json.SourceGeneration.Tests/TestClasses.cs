@@ -109,9 +109,7 @@ namespace System.Text.Json.SourceGeneration.Tests
 
     public record HighLowTempsRecord(int High, int Low);
 
-    public class EmptyPoco
-    {
-    }
+    public class EmptyPoco { }
 
     public class MyType
     {
@@ -133,6 +131,7 @@ namespace System.Text.Json.SourceGeneration.Tests
         public string MyProperty { get; set; }
 
         public void OnSerializing() => MyProperty = "Before";
+
         void IJsonOnSerialized.OnSerialized() => MyProperty = "After";
     }
 
@@ -154,7 +153,7 @@ namespace System.Text.Json.SourceGeneration.Tests
         public int Length => Message?.Length ?? 0; // Read-only property
     }
 
-    public class AllocatingOnPropertyAccess 
+    public class AllocatingOnPropertyAccess
     {
         public int WhenWritingNullAccessCounter = 0;
         public int WhenWritingDefaultAccessCounter = 0;
@@ -163,7 +162,8 @@ namespace System.Text.Json.SourceGeneration.Tests
         public string SomeAllocatingProperty => $"Current Value: {++WhenWritingNullAccessCounter}";
 
         [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
-        public string SomeAllocatingProperty2 => $"Current Value: {++WhenWritingDefaultAccessCounter}";
+        public string SomeAllocatingProperty2 =>
+            $"Current Value: {++WhenWritingDefaultAccessCounter}";
     }
 
     internal struct MyStruct { }
@@ -177,7 +177,10 @@ namespace System.Text.Json.SourceGeneration.Tests
     public class TypeWithValidationAttributes
     {
         [ComponentModel.DataAnnotations.Required(ErrorMessage = "Name is required")]
-        [ComponentModel.DataAnnotations.StringLength(100, ErrorMessage = "Name must not be longer than 100 characters")]
+        [ComponentModel.DataAnnotations.StringLength(
+            100,
+            ErrorMessage = "Name must not be longer than 100 characters"
+        )]
         public string Name { get; set; }
 
         [ComponentModel.DataAnnotations.Required]
@@ -189,12 +192,10 @@ namespace System.Text.Json.SourceGeneration.Tests
         public string TestProperty { get; set; }
     }
 
-    public class DerivedAttribute : BaseAttribute
-    { }
+    public class DerivedAttribute : BaseAttribute { }
 
     [Derived(TestProperty = "Test")]
-    public class TypeWithDerivedAttribute
-    { }
+    public class TypeWithDerivedAttribute { }
 
     [JsonDerivedType(typeof(DerivedClass), "derivedClass")]
     public class PolymorphicClass
@@ -212,11 +213,14 @@ namespace System.Text.Json.SourceGeneration.Tests
         public class MyNestedClass
         {
             public class MyNestedNestedClass { }
+
             public class MyNestedNestedGenericClass<T1> { }
         }
+
         public class MyNestedGenericClass<T1>
         {
             public class MyNestedGenericNestedClass { }
+
             public class MyNestedGenericNestedGenericClass<T2> { }
         }
     }
@@ -226,11 +230,14 @@ namespace System.Text.Json.SourceGeneration.Tests
         public class MyNestedClass
         {
             public class MyNestedNestedClass { }
+
             public class MyNestedNestedGenericClass<T1> { }
         }
+
         public class MyNestedGenericClass<T1>
         {
             public class MyNestedGenericNestedClass { }
+
             public class MyNestedGenericNestedGenericClass<T2>
             {
                 public T DataT { get; set; }
@@ -272,15 +279,20 @@ namespace System.Text.Json.SourceGeneration.Tests
 #pragma warning restore
 
         private class PrivateClass { }
+
         protected class ProtectedClass { }
+
         protected internal class ProtectedInternalClass { }
+
         private protected class PrivateProtectedClass { }
+
         class PrivateClass2 { }
     }
 
     internal class InternalTestClass
     {
         public class PublicClass { }
+
         protected internal class ProtectedInternalClass { }
     }
 
@@ -296,7 +308,9 @@ namespace System.Text.Json.SourceGeneration.Tests
 
     public class ClassWithDictionaryProperty
     {
-        public ClassWithDictionaryProperty(Dictionary<string, object?> property) => DictionaryProperty = property;
+        public ClassWithDictionaryProperty(Dictionary<string, object?> property) =>
+            DictionaryProperty = property;
+
         public Dictionary<string, object?> DictionaryProperty { get; }
     }
 

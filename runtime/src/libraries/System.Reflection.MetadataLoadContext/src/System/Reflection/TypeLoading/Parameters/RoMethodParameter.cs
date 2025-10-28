@@ -41,17 +41,23 @@ namespace System.Reflection.TypeLoading
             }
         }
 
-        public sealed override Type[] GetOptionalCustomModifiers() => ModifiedType.GetOptionalCustomModifiers();
-        public sealed override Type[] GetRequiredCustomModifiers() => ModifiedType.GetRequiredCustomModifiers();
+        public sealed override Type[] GetOptionalCustomModifiers() =>
+            ModifiedType.GetOptionalCustomModifiers();
+
+        public sealed override Type[] GetRequiredCustomModifiers() =>
+            ModifiedType.GetRequiredCustomModifiers();
 
         public sealed override Type GetModifiedParameterType()
         {
             return ModifiedType;
         }
 
-        public sealed override string ToString() => Loader.GetDisposedString() ?? GetRoMethodBase().GetMethodSigString(Position) + " " + Name;
+        public sealed override string ToString() =>
+            Loader.GetDisposedString()
+            ?? GetRoMethodBase().GetMethodSigString(Position) + " " + Name;
 
         internal IRoMethodBase GetRoMethodBase() => (IRoMethodBase)Member;
+
         private MetadataLoadContext Loader => GetRoMethodBase().Loader;
     }
 }

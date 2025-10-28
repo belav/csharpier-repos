@@ -12,11 +12,7 @@ public class CustomAttrTests
     [Fact]
     public void Invalid()
     {
-        var firstModel = new FirstModel
-        {
-            P1 = 'a',
-            P2 = 'x',
-        };
+        var firstModel = new FirstModel { P1 = 'a', P2 = 'x' };
 
         var validator = new FirstValidator();
         var vr = validator.Validate("CustomAttr", firstModel);
@@ -27,11 +23,7 @@ public class CustomAttrTests
     [Fact]
     public void Valid()
     {
-        var firstModel = new FirstModel
-        {
-            P1 = 'A',
-            P2 = 'A',
-        };
+        var firstModel = new FirstModel { P1 = 'A', P2 = 'A' };
 
         var validator = new FirstValidator();
         Assert.Equal(ValidateOptionsResult.Success, validator.Validate("CustomAttr", firstModel));

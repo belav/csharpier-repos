@@ -1,7 +1,7 @@
 <!-- Whenever altering this or other Source Build files, please include @dotnet/source-build-internal as a reviewer. -->
 
-<Project>
 
+<Project>
   <PropertyGroup>
     <GitHubRepositoryName>roslyn</GitHubRepositoryName>
     <SourceBuildManagedOnly>true</SourceBuildManagedOnly>
@@ -10,7 +10,10 @@
     <EnableDefaultSourceBuildIntermediateItems>false</EnableDefaultSourceBuildIntermediateItems>
   </PropertyGroup>
 
-  <Target Name="GetCustomIntermediateNupkgContents" BeforeTargets="GetCategorizedIntermediateNupkgContents">
+  <Target
+    Name="GetCustomIntermediateNupkgContents"
+    BeforeTargets="GetCategorizedIntermediateNupkgContents"
+  >
     <ItemGroup>
       <IntermediateNupkgArtifactFile Include="$(CurrentRepoSourceBuildArtifactsPackagesDir)Shipping\**\*.nupkg" />
       <IntermediateNupkgArtifactFile Include="$(CurrentRepoSourceBuildArtifactsPackagesDir)NonShipping\**\*.nupkg" />
@@ -29,5 +32,4 @@
       <InnerBuildArgs>$(InnerBuildArgs) /p:Projects="$(InnerSourceBuildRepoRoot)\Roslyn.sln"</InnerBuildArgs>
     </PropertyGroup>
   </Target>
-
 </Project>

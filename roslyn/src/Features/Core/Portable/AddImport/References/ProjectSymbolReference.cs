@@ -21,7 +21,7 @@ namespace Microsoft.CodeAnalysis.AddImport
         /// <summary>
         /// Handles references to source symbols both from the current project the user is invoking
         /// 'add-import' from, as well as symbols from other viable projects.
-        /// 
+        ///
         /// In the case where the reference is from another project we put a glyph in the add using
         /// light bulb and we say "(from ProjectXXX)" to make it clear that this will do more than
         /// just add a using/import.
@@ -29,19 +29,18 @@ namespace Microsoft.CodeAnalysis.AddImport
         private partial class ProjectSymbolReference(
             AbstractAddImportFeatureService<TSimpleNameSyntax> provider,
             SymbolResult<INamespaceOrTypeSymbol> symbolResult,
-            Project project) : SymbolReference(provider, symbolResult)
+            Project project
+        ) : SymbolReference(provider, symbolResult)
         {
             private readonly Project _project = project;
 
             protected override ImmutableArray<string> GetTags(Document document)
             {
-                return document.Project.Id == _project.Id
-                    ? ImmutableArray<string>.Empty
-                    : _project.Language == LanguageNames.CSharp
-                        ? WellKnownTagArrays.CSharpProject
-                        : _project.Language == LanguageNames.VisualBasic
-                            ? WellKnownTagArrays.VisualBasicProject
-                            : WellKnownTagArrays.AddReference;
+                return document.Project.Id == _project.Id ? ImmutableArray<string>.Empty
+                    : _project.Language == LanguageNames.CSharp ? WellKnownTagArrays.CSharpProject
+                    : _project.Language == LanguageNames.VisualBasic
+                        ? WellKnownTagArrays.VisualBasicProject
+                    : WellKnownTagArrays.AddReference;
             }
 
             /// <summary>
@@ -49,8 +48,8 @@ namespace Microsoft.CodeAnalysis.AddImport
             /// is an existing source-import in the file.  We won't add the import, but we'll still
             /// add the project-reference.
             /// </summary>
-            protected override bool ShouldAddWithExistingImport(Document document)
-                => document.Project.Id != _project.Id;
+            protected override bool ShouldAddWithExistingImport(Document document) =>
+                document.Project.Id != _project.Id;
 
             protected override CodeActionPriority GetPriority(Document document)
             {
@@ -74,27 +73,47 @@ namespace Microsoft.CodeAnalysis.AddImport
             }
 
             protected override AddImportFixData GetFixData(
-                Document document, ImmutableArray<TextChange> textChanges, string description,
-                ImmutableArray<string> tags, CodeActionPriority priority)
+                Document document,
+                ImmutableArray<TextChange> textChanges,
+                string description,
+                ImmutableArray<string> tags,
+                CodeActionPriority priority
+            )
             {
                 return AddImportFixData.CreateForProjectSymbol(
-                    textChanges, description, tags, priority, _project.Id);
+                    textChanges,
+                    description,
+                    tags,
+                    priority,
+                    _project.Id
+                );
             }
 
             protected override (string description, bool hasExistingImport) GetDescription(
-                Document document, CodeCleanupOptions options, SyntaxNode node,
-                SemanticModel semanticModel, CancellationToken cancellationToken)
+                Document document,
+                CodeCleanupOptions options,
+                SyntaxNode node,
+                SemanticModel semanticModel,
+                CancellationToken cancellationToken
+            )
             {
-                var (description, hasExistingImport) = base.GetDescription(document, options, node, semanticModel, cancellationToken);
+                var (description, hasExistingImport) = base.GetDescription(
+                    document,
+                    options,
+                    node,
+                    semanticModel,
+                    cancellationToken
+                );
                 if (description == null)
                 {
                     return (null, false);
                 }
 
                 var project = document.Project;
-                description = project.Id == _project.Id
-                    ? description
-                    : string.Format(FeaturesResources.Add_reference_to_0, _project.Name);
+                description =
+                    project.Id == _project.Id
+                        ? description
+                        : string.Format(FeaturesResources.Add_reference_to_0, _project.Name);
 
                 return (description, hasExistingImport);
             }
@@ -102,12 +121,10 @@ namespace Microsoft.CodeAnalysis.AddImport
             public override bool Equals(object obj)
             {
                 var reference = obj as ProjectSymbolReference;
-                return base.Equals(reference) &&
-                    _project.Id == reference._project.Id;
+                return base.Equals(reference) && _project.Id == reference._project.Id;
             }
 
-            public override int GetHashCode()
-                => Hash.Combine(_project.Id, base.GetHashCode());
+            public override int GetHashCode() => Hash.Combine(_project.Id, base.GetHashCode());
         }
     }
 }

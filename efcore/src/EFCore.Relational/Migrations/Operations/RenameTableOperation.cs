@@ -33,6 +33,5 @@ public class RenameTableOperation : MigrationOperation, ITableMigrationOperation
     public virtual string? NewName { get; set; }
 
     /// <inheritdoc />
-    string ITableMigrationOperation.Table
-        => Name;
+    string ITableMigrationOperation.Table => Name;
 }

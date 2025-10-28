@@ -21,9 +21,7 @@ namespace System.Web.Http
         /// <summary>
         /// Initializes a new instance of the <see cref="HubControllerBase" /> class.
         /// </summary>
-        protected HubControllerBase()
-        {
-        }
+        protected HubControllerBase() { }
 
         /// <summary>
         /// Gets an <see cref="IHubConnectionContext"/> that represents the clients connected to the hub.
@@ -58,10 +56,7 @@ namespace System.Web.Http
         /// <summary>
         /// Gets the <see cref="IHubContext"/> for the associated hub.
         /// </summary>
-        protected abstract IHubContext HubContext
-        {
-            get;
-        }
+        protected abstract IHubContext HubContext { get; }
 
         /// <summary>
         /// Gets the <see cref="IConnectionManager"/> used to resolve hub contexts. The connection manager will
@@ -85,7 +80,9 @@ namespace System.Web.Http
             if (Configuration != null)
             {
                 Contract.Assert(Configuration.DependencyResolver != null);
-                IConnectionManager connectionManager = Configuration.DependencyResolver.GetService(typeof(IConnectionManager)) as IConnectionManager;
+                IConnectionManager connectionManager =
+                    Configuration.DependencyResolver.GetService(typeof(IConnectionManager))
+                    as IConnectionManager;
                 if (connectionManager != null)
                 {
                     return connectionManager;

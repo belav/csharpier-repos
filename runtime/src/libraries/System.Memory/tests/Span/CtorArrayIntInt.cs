@@ -63,7 +63,9 @@ namespace System.SpanTests
             Assert.Throws<ArgumentOutOfRangeException>(() => new Span<int>(a, 2, 2).DontBox());
             Assert.Throws<ArgumentOutOfRangeException>(() => new Span<int>(a, 1, 3).DontBox());
             Assert.Throws<ArgumentOutOfRangeException>(() => new Span<int>(a, 0, 4).DontBox());
-            Assert.Throws<ArgumentOutOfRangeException>(() => new Span<int>(a, int.MaxValue, int.MaxValue).DontBox());
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+                new Span<int>(a, int.MaxValue, int.MaxValue).DontBox()
+            );
         }
 
         [Fact]

@@ -30,56 +30,90 @@ using static InitializeParameterHelpers;
 using static InitializeParameterHelpersCore;
 using static SyntaxFactory;
 
-[ExportCodeRefactoringProvider(LanguageNames.CSharp, Name = PredefinedCodeRefactoringProviderNames.InitializeMemberFromPrimaryConstructorParameter), Shared]
+[
+    ExportCodeRefactoringProvider(
+        LanguageNames.CSharp,
+        Name = PredefinedCodeRefactoringProviderNames.InitializeMemberFromPrimaryConstructorParameter
+    ),
+    Shared
+]
 internal sealed partial class CSharpInitializeMemberFromPrimaryConstructorParameterCodeRefactoringProvider
     : CodeRefactoringProvider
 {
     [ImportingConstructor]
-    [SuppressMessage("RoslynDiagnosticsReliability", "RS0033:Importing constructor should be [Obsolete]", Justification = "Used in test code: https://github.com/dotnet/roslyn/issues/42814")]
-    public CSharpInitializeMemberFromPrimaryConstructorParameterCodeRefactoringProvider()
-    {
-    }
+    [SuppressMessage(
+        "RoslynDiagnosticsReliability",
+        "RS0033:Importing constructor should be [Obsolete]",
+        Justification = "Used in test code: https://github.com/dotnet/roslyn/issues/42814"
+    )]
+    public CSharpInitializeMemberFromPrimaryConstructorParameterCodeRefactoringProvider() { }
 
     public override async Task ComputeRefactoringsAsync(CodeRefactoringContext context)
     {
         var (document, _, cancellationToken) = context;
 
-        var selectedParameter = await context.TryGetRelevantNodeAsync<ParameterSyntax>().ConfigureAwait(false);
+        var selectedParameter = await context
+            .TryGetRelevantNodeAsync<ParameterSyntax>()
+            .ConfigureAwait(false);
         if (selectedParameter == null)
             return;
 
-        if (selectedParameter.Parent is not ParameterListSyntax { Parent: TypeDeclarationSyntax(kind: SyntaxKind.ClassDeclaration or SyntaxKind.StructDeclaration) typeDeclaration })
+        if (
+            selectedParameter.Parent
+            is not ParameterListSyntax
+            {
+                Parent: TypeDeclarationSyntax
+                (kind: SyntaxKind.ClassDeclaration or SyntaxKind.StructDeclaration) typeDeclaration
+            }
+        )
             return;
 
-        var semanticModel = await document.GetRequiredSemanticModelAsync(cancellationToken).ConfigureAwait(false);
-        var parameter = semanticModel.GetRequiredDeclaredSymbol(selectedParameter, cancellationToken);
+        var semanticModel = await document
+            .GetRequiredSemanticModelAsync(cancellationToken)
+            .ConfigureAwait(false);
+        var parameter = semanticModel.GetRequiredDeclaredSymbol(
+            selectedParameter,
+            cancellationToken
+        );
         if (parameter?.Name is null or "")
             return;
 
-        if (parameter.ContainingSymbol is not IMethodSymbol { MethodKind: MethodKind.Constructor } constructor)
+        if (
+            parameter.ContainingSymbol
+            is not IMethodSymbol { MethodKind: MethodKind.Constructor } constructor
+        )
             return;
 
         // See if we're already assigning this parameter to a field/property in this type. If so, there's nothing
         // more for us to do.
         var compilation = semanticModel.Compilation;
-        var (initializerValue, _) = TryFindFieldOrPropertyInitializerValue(compilation, parameter, cancellationToken);
+        var (initializerValue, _) = TryFindFieldOrPropertyInitializerValue(
+            compilation,
+            parameter,
+            cancellationToken
+        );
         if (initializerValue != null)
             return;
 
         // Haven't initialized any fields/properties with this parameter.  Offer to assign to an existing matching
         // field/prop if we can find one, or add a new field/prop if we can't.
         var fallbackOptions = context.Options;
-        var rules = await document.GetNamingRulesAsync(fallbackOptions, cancellationToken).ConfigureAwait(false);
+        var rules = await document
+            .GetNamingRulesAsync(fallbackOptions, cancellationToken)
+            .ConfigureAwait(false);
         var parameterNameParts = IdentifierNameParts.CreateIdentifierNameParts(parameter, rules);
         if (parameterNameParts.BaseName == "")
             return;
 
-        var formattingOptions = await document.GetSyntaxFormattingOptionsAsync(fallbackOptions, cancellationToken).ConfigureAwait(false);
+        var formattingOptions = await document
+            .GetSyntaxFormattingOptionsAsync(fallbackOptions, cancellationToken)
+            .ConfigureAwait(false);
 
         var fieldOrProperty = TryFindMatchingUninitializedFieldOrPropertySymbol();
-        var refactorings = fieldOrProperty == null
-            ? HandleNoExistingFieldOrProperty()
-            : HandleExistingFieldOrProperty();
+        var refactorings =
+            fieldOrProperty == null
+                ? HandleNoExistingFieldOrProperty()
+                : HandleExistingFieldOrProperty();
 
         context.RegisterRefactorings(refactorings.ToImmutableArray(), context.Span);
         return;
@@ -104,18 +138,41 @@ internal sealed partial class CSharpInitializeMemberFromPrimaryConstructorParame
                     // We found members in our type with that name.  If it's a writable field that we could assign
                     // this parameter to, and it's not already been assigned to, then this field is a good candidate
                     // for us to hook up to.
-                    if (memberWithName is IFieldSymbol { IsConst: false, DeclaringSyntaxReferences: [var syntaxRef1, ..] } field &&
-                        IsImplicitConversion(compilation, source: parameter.Type, destination: field.Type) &&
-                        syntaxRef1.GetSyntax(cancellationToken) is VariableDeclaratorSyntax { Initializer: null })
+                    if (
+                        memberWithName
+                            is IFieldSymbol
+                            {
+                                IsConst: false,
+                                DeclaringSyntaxReferences: [var syntaxRef1, ..]
+                            } field
+                        && IsImplicitConversion(
+                            compilation,
+                            source: parameter.Type,
+                            destination: field.Type
+                        )
+                        && syntaxRef1.GetSyntax(cancellationToken)
+                            is VariableDeclaratorSyntax { Initializer: null }
+                    )
                     {
                         return field;
                     }
 
                     // If it's a writable property that we could assign this parameter to, and it's not already been
                     // assigned to, then this property is a good candidate for us to hook up to.
-                    if (memberWithName is IPropertySymbol { DeclaringSyntaxReferences: [var syntaxRef2, ..] } property &&
-                        IsImplicitConversion(compilation, source: parameter.Type, destination: property.Type) &&
-                        syntaxRef2.GetSyntax(cancellationToken) is PropertyDeclarationSyntax { Initializer: null })
+                    if (
+                        memberWithName
+                            is IPropertySymbol
+                            {
+                                DeclaringSyntaxReferences: [var syntaxRef2, ..]
+                            } property
+                        && IsImplicitConversion(
+                            compilation,
+                            source: parameter.Type,
+                            destination: property.Type
+                        )
+                        && syntaxRef2.GetSyntax(cancellationToken)
+                            is PropertyDeclarationSyntax { Initializer: null }
+                    )
                     {
                         // We also allow assigning into a property of the form `=> throw new
                         // NotImplementedException()`. That way users can easily spit out those methods, but then
@@ -133,15 +190,29 @@ internal sealed partial class CSharpInitializeMemberFromPrimaryConstructorParame
             return null;
         }
 
-        static CodeAction CreateCodeAction(string title, Func<CancellationToken, Task<Solution>> createSolution)
-            => CodeAction.Create(title, createSolution, title);
+        static CodeAction CreateCodeAction(
+            string title,
+            Func<CancellationToken, Task<Solution>> createSolution
+        ) => CodeAction.Create(title, createSolution, title);
 
         IEnumerable<CodeAction> HandleExistingFieldOrProperty()
         {
             // Found a field/property that this parameter should be assigned to. Just offer the simple assignment to it.
             yield return CreateCodeAction(
-                string.Format(fieldOrProperty.Kind == SymbolKind.Field ? FeaturesResources.Initialize_field_0 : FeaturesResources.Initialize_property_0, fieldOrProperty.Name),
-                cancellationToken => UpdateExistingMemberAsync(document, parameter, fieldOrProperty, cancellationToken));
+                string.Format(
+                    fieldOrProperty.Kind == SymbolKind.Field
+                        ? FeaturesResources.Initialize_field_0
+                        : FeaturesResources.Initialize_property_0,
+                    fieldOrProperty.Name
+                ),
+                cancellationToken =>
+                    UpdateExistingMemberAsync(
+                        document,
+                        parameter,
+                        fieldOrProperty,
+                        cancellationToken
+                    )
+            );
         }
 
         IEnumerable<CodeAction> HandleNoExistingFieldOrProperty()
@@ -157,10 +228,28 @@ internal sealed partial class CSharpInitializeMemberFromPrimaryConstructorParame
 
             var fieldAction = CreateCodeAction(
                 string.Format(FeaturesResources.Create_and_assign_field_0, field.Name),
-                cancellationToken => AddMultipleMembersAsync(document, typeDeclaration, ImmutableArray.Create(parameter), ImmutableArray.Create(field), fallbackOptions, cancellationToken));
+                cancellationToken =>
+                    AddMultipleMembersAsync(
+                        document,
+                        typeDeclaration,
+                        ImmutableArray.Create(parameter),
+                        ImmutableArray.Create(field),
+                        fallbackOptions,
+                        cancellationToken
+                    )
+            );
             var propertyAction = CreateCodeAction(
                 string.Format(FeaturesResources.Create_and_assign_property_0, property.Name),
-                cancellationToken => AddMultipleMembersAsync(document, typeDeclaration, ImmutableArray.Create(parameter), ImmutableArray.Create(property), fallbackOptions, cancellationToken));
+                cancellationToken =>
+                    AddMultipleMembersAsync(
+                        document,
+                        typeDeclaration,
+                        ImmutableArray.Create(parameter),
+                        ImmutableArray.Create(property),
+                        fallbackOptions,
+                        cancellationToken
+                    )
+            );
 
             yield return siblingFieldOrProperty is IFieldSymbol ? fieldAction : propertyAction;
             yield return siblingFieldOrProperty is IFieldSymbol ? propertyAction : fieldAction;
@@ -170,21 +259,51 @@ internal sealed partial class CSharpInitializeMemberFromPrimaryConstructorParame
             {
                 var allFieldsAction = CodeAction.Create(
                     FeaturesResources.Create_and_assign_remaining_as_fields,
-                    cancellationToken => AddMultipleMembersAsync(document, typeDeclaration, parameters, parameters.SelectAsArray(CreateField), fallbackOptions, cancellationToken));
+                    cancellationToken =>
+                        AddMultipleMembersAsync(
+                            document,
+                            typeDeclaration,
+                            parameters,
+                            parameters.SelectAsArray(CreateField),
+                            fallbackOptions,
+                            cancellationToken
+                        )
+                );
                 var allPropertiesAction = CodeAction.Create(
                     FeaturesResources.Create_and_assign_remaining_as_properties,
-                    cancellationToken => AddMultipleMembersAsync(document, typeDeclaration, parameters, parameters.SelectAsArray(CreateProperty), fallbackOptions, cancellationToken));
+                    cancellationToken =>
+                        AddMultipleMembersAsync(
+                            document,
+                            typeDeclaration,
+                            parameters,
+                            parameters.SelectAsArray(CreateProperty),
+                            fallbackOptions,
+                            cancellationToken
+                        )
+                );
 
-                yield return siblingFieldOrProperty is IFieldSymbol ? allFieldsAction : allPropertiesAction;
-                yield return siblingFieldOrProperty is IFieldSymbol ? allPropertiesAction : allFieldsAction;
+                yield return siblingFieldOrProperty is IFieldSymbol
+                    ? allFieldsAction
+                    : allPropertiesAction;
+                yield return siblingFieldOrProperty is IFieldSymbol
+                    ? allPropertiesAction
+                    : allFieldsAction;
             }
         }
 
         ISymbol? TryFindSiblingFieldOrProperty()
         {
-            foreach (var (siblingParam, _) in InitializeParameterHelpersCore.GetSiblingParameters(parameter))
+            foreach (
+                var (siblingParam, _) in InitializeParameterHelpersCore.GetSiblingParameters(
+                    parameter
+                )
+            )
             {
-                var (_, sibling) = TryFindFieldOrPropertyInitializerValue(compilation, siblingParam, cancellationToken);
+                var (_, sibling) = TryFindFieldOrPropertyInitializerValue(
+                    compilation,
+                    siblingParam,
+                    cancellationToken
+                );
                 if (sibling != null)
                     return sibling;
             }
@@ -198,11 +317,18 @@ internal sealed partial class CSharpInitializeMemberFromPrimaryConstructorParame
 
             foreach (var parameter in constructor.Parameters)
             {
-                var parameterNameParts = IdentifierNameParts.CreateIdentifierNameParts(parameter, rules);
+                var parameterNameParts = IdentifierNameParts.CreateIdentifierNameParts(
+                    parameter,
+                    rules
+                );
                 if (parameterNameParts.BaseName == "")
                     continue;
 
-                var (assignmentOp, _) = TryFindFieldOrPropertyInitializerValue(compilation, parameter, cancellationToken);
+                var (assignmentOp, _) = TryFindFieldOrPropertyInitializerValue(
+                    compilation,
+                    parameter,
+                    cancellationToken
+                );
                 if (assignmentOp != null)
                     continue;
 
@@ -214,8 +340,12 @@ internal sealed partial class CSharpInitializeMemberFromPrimaryConstructorParame
 
         ISymbol CreateField(IParameterSymbol parameter)
         {
-            var parameterNameParts = IdentifierNameParts.CreateIdentifierNameParts(parameter, rules).BaseNameParts;
-            var accessibilityLevel = formattingOptions.AccessibilityModifiersRequired is AccessibilityModifiersRequired.Never or AccessibilityModifiersRequired.OmitIfDefault
+            var parameterNameParts = IdentifierNameParts
+                .CreateIdentifierNameParts(parameter, rules)
+                .BaseNameParts;
+            var accessibilityLevel = formattingOptions.AccessibilityModifiersRequired
+                is AccessibilityModifiersRequired.Never
+                    or AccessibilityModifiersRequired.OmitIfDefault
                 ? Accessibility.NotApplicable
                 : Accessibility.Private;
 
@@ -229,18 +359,21 @@ internal sealed partial class CSharpInitializeMemberFromPrimaryConstructorParame
                         DeclarationModifiers.ReadOnly,
                         parameter.Type,
                         name: GenerateUniqueName(parameter, parameterNameParts, rule),
-                        initializer: IdentifierName(parameter.Name.EscapeIdentifier()));
+                        initializer: IdentifierName(parameter.Name.EscapeIdentifier())
+                    );
                 }
             }
 
-            // We place a special rule in s_builtInRules that matches all fields.  So we should 
+            // We place a special rule in s_builtInRules that matches all fields.  So we should
             // always find a matching rule.
             throw ExceptionUtilities.Unreachable();
         }
 
         ISymbol CreateProperty(IParameterSymbol parameter)
         {
-            var parameterNameParts = IdentifierNameParts.CreateIdentifierNameParts(parameter, rules).BaseNameParts;
+            var parameterNameParts = IdentifierNameParts
+                .CreateIdentifierNameParts(parameter, rules)
+                .BaseNameParts;
 
             foreach (var rule in rules)
             {
@@ -259,37 +392,69 @@ internal sealed partial class CSharpInitializeMemberFromPrimaryConstructorParame
                         getMethod: CodeGenerationSymbolFactory.CreateAccessorSymbol(
                             attributes: default,
                             Accessibility.Public,
-                            statements: default),
+                            statements: default
+                        ),
                         setMethod: null,
-                        initializer: IdentifierName(parameter.Name.EscapeIdentifier()));
+                        initializer: IdentifierName(parameter.Name.EscapeIdentifier())
+                    );
                 }
             }
 
-            // We place a special rule in s_builtInRules that matches all properties.  So we should 
+            // We place a special rule in s_builtInRules that matches all properties.  So we should
             // always find a matching rule.
             throw ExceptionUtilities.Unreachable();
         }
     }
 
-    private static (IOperation? initializer, ISymbol? fieldOrProperty) TryFindFieldOrPropertyInitializerValue(
+    private static (
+        IOperation? initializer,
+        ISymbol? fieldOrProperty
+    ) TryFindFieldOrPropertyInitializerValue(
         Compilation compilation,
         IParameterSymbol parameter,
-        CancellationToken cancellationToken)
+        CancellationToken cancellationToken
+    )
     {
-        foreach (var group in parameter.ContainingType.DeclaringSyntaxReferences.GroupBy(r => r.SyntaxTree))
+        foreach (
+            var group in parameter.ContainingType.DeclaringSyntaxReferences.GroupBy(r =>
+                r.SyntaxTree
+            )
+        )
         {
             var semanticModel = compilation.GetSemanticModel(group.Key);
             foreach (var syntaxReference in group)
             {
-                if (syntaxReference.GetSyntax(cancellationToken) is TypeDeclarationSyntax typeDeclaration)
+                if (
+                    syntaxReference.GetSyntax(cancellationToken)
+                    is TypeDeclarationSyntax typeDeclaration
+                )
                 {
                     foreach (var member in typeDeclaration.Members)
                     {
-                        if (member is PropertyDeclarationSyntax { Initializer.Value: var propertyInitializer } propertyDeclaration)
+                        if (
+                            member is PropertyDeclarationSyntax
+                            {
+                                Initializer.Value: var propertyInitializer
+                            } propertyDeclaration
+                        )
                         {
-                            var operation = semanticModel.GetOperation(propertyInitializer, cancellationToken);
-                            if (IsParameterReferenceOrCoalesceOfParameterReference(operation, parameter))
-                                return (operation, semanticModel.GetRequiredDeclaredSymbol(propertyDeclaration, cancellationToken));
+                            var operation = semanticModel.GetOperation(
+                                propertyInitializer,
+                                cancellationToken
+                            );
+                            if (
+                                IsParameterReferenceOrCoalesceOfParameterReference(
+                                    operation,
+                                    parameter
+                                )
+                            )
+                                return (
+                                    operation,
+                                    semanticModel.GetRequiredDeclaredSymbol(
+                                        propertyDeclaration,
+                                        cancellationToken
+                                    )
+                                );
                         }
                         else if (member is FieldDeclarationSyntax field)
                         {
@@ -297,9 +462,23 @@ internal sealed partial class CSharpInitializeMemberFromPrimaryConstructorParame
                             {
                                 if (varDecl is { Initializer.Value: var fieldInitializer })
                                 {
-                                    var operation = semanticModel.GetOperation(fieldInitializer, cancellationToken);
-                                    if (IsParameterReferenceOrCoalesceOfParameterReference(operation, parameter))
-                                        return (operation, semanticModel.GetRequiredDeclaredSymbol(varDecl, cancellationToken));
+                                    var operation = semanticModel.GetOperation(
+                                        fieldInitializer,
+                                        cancellationToken
+                                    );
+                                    if (
+                                        IsParameterReferenceOrCoalesceOfParameterReference(
+                                            operation,
+                                            parameter
+                                        )
+                                    )
+                                        return (
+                                            operation,
+                                            semanticModel.GetRequiredDeclaredSymbol(
+                                                varDecl,
+                                                cancellationToken
+                                            )
+                                        );
                                 }
                             }
                         }

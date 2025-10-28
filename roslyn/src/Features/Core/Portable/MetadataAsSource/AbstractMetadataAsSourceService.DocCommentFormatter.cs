@@ -26,21 +26,28 @@ namespace Microsoft.CodeAnalysis.MetadataAsSource
             private static readonly string s_summaryHeader = FeaturesResources.Summary_colon;
             private static readonly string s_paramHeader = FeaturesResources.Parameters_colon;
             private const string s_labelFormat = "{0}:";
-            private static readonly string s_typeParameterHeader = FeaturesResources.Type_parameters_colon;
+            private static readonly string s_typeParameterHeader =
+                FeaturesResources.Type_parameters_colon;
             private static readonly string s_returnsHeader = FeaturesResources.Returns_colon;
             private static readonly string s_valueHeader = FeaturesResources.Value_colon;
             private static readonly string s_exceptionsHeader = FeaturesResources.Exceptions_colon;
             private static readonly string s_remarksHeader = FeaturesResources.Remarks_colon;
 
-            internal static ImmutableArray<string> Format(IDocumentationCommentFormattingService docCommentFormattingService, DocumentationComment docComment)
+            internal static ImmutableArray<string> Format(
+                IDocumentationCommentFormattingService docCommentFormattingService,
+                DocumentationComment docComment
+            )
             {
-                using var _1 = ArrayBuilder<string>.GetInstance(out var formattedCommentLinesBuilder);
+                using var _1 = ArrayBuilder<string>.GetInstance(
+                    out var formattedCommentLinesBuilder
+                );
                 using var _2 = PooledStringBuilder.GetInstance(out var lineBuilder);
 
                 AddWrappedTextFromRawText(
                     docCommentFormattingService.Format(docComment.SummaryText),
                     formattedCommentLinesBuilder,
-                    prefix: s_summaryHeader);
+                    prefix: s_summaryHeader
+                );
 
                 var parameterNames = docComment.ParameterNames;
                 if (parameterNames.Length > 0)
@@ -61,8 +68,11 @@ namespace Microsoft.CodeAnalysis.MetadataAsSource
                         formattedCommentLinesBuilder.Add(lineBuilder.ToString());
 
                         AddWrappedTextFromRawText(
-                            docCommentFormattingService.Format(docComment.GetParameterText(parameterNames[i])),
-                            formattedCommentLinesBuilder);
+                            docCommentFormattingService.Format(
+                                docComment.GetParameterText(parameterNames[i])
+                            ),
+                            formattedCommentLinesBuilder
+                        );
                     }
                 }
 
@@ -85,20 +95,25 @@ namespace Microsoft.CodeAnalysis.MetadataAsSource
                         formattedCommentLinesBuilder.Add(lineBuilder.ToString());
 
                         AddWrappedTextFromRawText(
-                            docCommentFormattingService.Format(docComment.GetTypeParameterText(typeParameterNames[i])),
-                            formattedCommentLinesBuilder);
+                            docCommentFormattingService.Format(
+                                docComment.GetTypeParameterText(typeParameterNames[i])
+                            ),
+                            formattedCommentLinesBuilder
+                        );
                     }
                 }
 
                 AddWrappedTextFromRawText(
                     docCommentFormattingService.Format(docComment.ReturnsText),
                     formattedCommentLinesBuilder,
-                    prefix: s_returnsHeader);
+                    prefix: s_returnsHeader
+                );
 
                 AddWrappedTextFromRawText(
                     docCommentFormattingService.Format(docComment.ValueText),
                     formattedCommentLinesBuilder,
-                    prefix: s_valueHeader);
+                    prefix: s_valueHeader
+                );
 
                 var exceptionTypes = docComment.ExceptionTypes;
                 if (exceptionTypes.Length > 0)
@@ -122,7 +137,10 @@ namespace Microsoft.CodeAnalysis.MetadataAsSource
                             lineBuilder.Append(string.Format(s_labelFormat, exceptionTypes[i]));
                             formattedCommentLinesBuilder.Add(lineBuilder.ToString());
 
-                            AddWrappedTextFromRawText(docCommentFormattingService.Format(rawExceptionTexts[j]), formattedCommentLinesBuilder);
+                            AddWrappedTextFromRawText(
+                                docCommentFormattingService.Format(rawExceptionTexts[j]),
+                                formattedCommentLinesBuilder
+                            );
                         }
                     }
                 }
@@ -130,7 +148,8 @@ namespace Microsoft.CodeAnalysis.MetadataAsSource
                 AddWrappedTextFromRawText(
                     docCommentFormattingService.Format(docComment.RemarksText),
                     formattedCommentLinesBuilder,
-                    prefix: s_remarksHeader);
+                    prefix: s_remarksHeader
+                );
 
                 // Eliminate any blank lines at the beginning.
                 while (formattedCommentLinesBuilder is [{ Length: 0 }, ..])
@@ -144,7 +163,10 @@ namespace Microsoft.CodeAnalysis.MetadataAsSource
             }
 
             private static void AddWrappedTextFromRawText(
-                string rawText, ArrayBuilder<string> result, string prefix = null)
+                string rawText,
+                ArrayBuilder<string> result,
+                string prefix = null
+            )
             {
                 if (string.IsNullOrWhiteSpace(rawText))
                     return;
@@ -166,7 +188,9 @@ namespace Microsoft.CodeAnalysis.MetadataAsSource
             }
 
             private static void SplitRawLineIntoFormattedLines(
-                ReadOnlyMemory<char> line, ArrayBuilder<string> formattedLines)
+                ReadOnlyMemory<char> line,
+                ArrayBuilder<string> formattedLines
+            )
             {
                 var firstInLine = true;
 
@@ -215,7 +239,8 @@ namespace Microsoft.CodeAnalysis.MetadataAsSource
 
             public static ImmutableArray<ReadOnlyMemory<char>> Split(
                 ReadOnlyMemory<char> source,
-                ReadOnlySpan<char> separator)
+                ReadOnlySpan<char> separator
+            )
             {
                 var result = ArrayBuilder<ReadOnlyMemory<char>>.GetInstance();
 

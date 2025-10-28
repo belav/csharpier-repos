@@ -1,8 +1,8 @@
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
-using MockHostTypes;
 using Microsoft.Extensions.Hosting;
+using MockHostTypes;
 
 namespace CreateHostBuilderPatternTestSite
 {
@@ -14,7 +14,6 @@ namespace CreateHostBuilderPatternTestSite
         }
 
         // Do not change the signature of this method. It's used for tests.
-        private static HostBuilder CreateHostBuilder(string[] args) =>
-            new HostBuilder();
+        private static HostBuilder CreateHostBuilder(string[] args) => new HostBuilder();
     }
 }

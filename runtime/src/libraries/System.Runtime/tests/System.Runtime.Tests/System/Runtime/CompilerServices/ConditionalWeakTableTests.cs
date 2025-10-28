@@ -3,9 +3,9 @@
 
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Reflection;
 using System.Runtime.CompilerServices;
-using System.Linq;
 using System.Threading.Tasks;
 using Xunit;
 
@@ -19,17 +19,29 @@ namespace System.Runtime.CompilerServices.Tests
             var cwt = new ConditionalWeakTable<object, object>();
 
             object ignored;
-            AssertExtensions.Throws<ArgumentNullException>("key", () => cwt.Add(null, new object())); // null key
-            AssertExtensions.Throws<ArgumentNullException>("key", () => cwt.TryGetValue(null, out ignored)); // null key
+            AssertExtensions.Throws<ArgumentNullException>(
+                "key",
+                () => cwt.Add(null, new object())
+            ); // null key
+            AssertExtensions.Throws<ArgumentNullException>(
+                "key",
+                () => cwt.TryGetValue(null, out ignored)
+            ); // null key
             AssertExtensions.Throws<ArgumentNullException>("key", () => cwt.Remove(null)); // null key
-            AssertExtensions.Throws<ArgumentNullException>("createValueCallback", () => cwt.GetValue(new object(), null)); // null delegate
+            AssertExtensions.Throws<ArgumentNullException>(
+                "createValueCallback",
+                () => cwt.GetValue(new object(), null)
+            ); // null delegate
 
             object key = new object();
             cwt.Add(key, key);
             AssertExtensions.Throws<ArgumentException>(null, () => cwt.Add(key, key)); // duplicate key
         }
 
-        [ConditionalTheory(typeof(PlatformDetection), nameof(PlatformDetection.IsPreciseGcSupported))]
+        [ConditionalTheory(
+            typeof(PlatformDetection),
+            nameof(PlatformDetection.IsPreciseGcSupported)
+        )]
         [InlineData(1, false)]
         [InlineData(1, true)]
         [InlineData(100, false)]
@@ -37,7 +49,10 @@ namespace System.Runtime.CompilerServices.Tests
         public static void Add(int numObjects, bool tryAdd)
         {
             // Isolated to ensure we drop all references even in debug builds where lifetime is extended by the JIT to the end of the method
-            Func<int, Tuple<ConditionalWeakTable<object, object>, WeakReference[], WeakReference[]>> body = count =>
+            Func<
+                int,
+                Tuple<ConditionalWeakTable<object, object>, WeakReference[], WeakReference[]>
+            > body = count =>
             {
                 object[] keys = Enumerable.Range(0, count).Select(_ => new object()).ToArray();
                 object[] values = Enumerable.Range(0, count).Select(_ => new object()).ToArray();
@@ -64,10 +79,15 @@ namespace System.Runtime.CompilerServices.Tests
                     Assert.Same(value, cwt.GetValue(keys[i], _ => new object()));
                 }
 
-                return Tuple.Create(cwt, keys.Select(k => new WeakReference(k)).ToArray(), values.Select(v => new WeakReference(v)).ToArray());
+                return Tuple.Create(
+                    cwt,
+                    keys.Select(k => new WeakReference(k)).ToArray(),
+                    values.Select(v => new WeakReference(v)).ToArray()
+                );
             };
 
-            Tuple<ConditionalWeakTable<object, object>, WeakReference[], WeakReference[]> result = body(numObjects);
+            Tuple<ConditionalWeakTable<object, object>, WeakReference[], WeakReference[]> result =
+                body(numObjects);
             GC.Collect();
 
             Assert.NotNull(result.Item1);
@@ -162,7 +182,8 @@ namespace System.Runtime.CompilerServices.Tests
             for (int i = 0; i < 10000; i++)
             {
                 cwt.Add(i.ToString(), i.ToString());
-                if (i % 1000 == 0) GC.Collect();
+                if (i % 1000 == 0)
+                    GC.Collect();
             }
         }
 
@@ -171,18 +192,22 @@ namespace System.Runtime.CompilerServices.Tests
         {
             var cwt = new ConditionalWeakTable<object, object>();
             DateTime end = DateTime.UtcNow + TimeSpan.FromSeconds(0.25);
-            Parallel.For(0, Environment.ProcessorCount, i =>
-            {
-                while (DateTime.UtcNow < end)
+            Parallel.For(
+                0,
+                Environment.ProcessorCount,
+                i =>
                 {
-                    object key = new object();
-                    object value = new object();
-                    cwt.Add(key, value);
-                    Assert.Same(value, cwt.GetValue(key, _ => new object()));
-                    Assert.True(cwt.Remove(key));
-                    Assert.False(cwt.Remove(key));
+                    while (DateTime.UtcNow < end)
+                    {
+                        object key = new object();
+                        object value = new object();
+                        cwt.Add(key, value);
+                        Assert.Same(value, cwt.GetValue(key, _ => new object()));
+                        Assert.True(cwt.Remove(key));
+                        Assert.False(cwt.Remove(key));
+                    }
                 }
-            });
+            );
         }
 
         [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsThreadingSupported))]
@@ -190,17 +215,21 @@ namespace System.Runtime.CompilerServices.Tests
         {
             var cwt = new ConditionalWeakTable<object, object>();
             DateTime end = DateTime.UtcNow + TimeSpan.FromSeconds(0.25);
-            Parallel.For(0, Environment.ProcessorCount, i =>
-            {
-                while (DateTime.UtcNow < end)
+            Parallel.For(
+                0,
+                Environment.ProcessorCount,
+                i =>
                 {
-                    object key = new object();
-                    object value = new object();
-                    Assert.Same(value, cwt.GetValue(key, _ => value));
-                    Assert.True(cwt.Remove(key));
-                    Assert.False(cwt.Remove(key));
+                    while (DateTime.UtcNow < end)
+                    {
+                        object key = new object();
+                        object value = new object();
+                        Assert.Same(value, cwt.GetValue(key, _ => value));
+                        Assert.True(cwt.Remove(key));
+                        Assert.False(cwt.Remove(key));
+                    }
                 }
-            });
+            );
         }
 
         [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsThreadingSupported))]
@@ -211,18 +240,27 @@ namespace System.Runtime.CompilerServices.Tests
 
             var cwt = new ConditionalWeakTable<object, object>();
             DateTime end = DateTime.UtcNow + TimeSpan.FromSeconds(0.25);
-            Parallel.For(0, Environment.ProcessorCount, i =>
-            {
-                while (DateTime.UtcNow < end)
+            Parallel.For(
+                0,
+                Environment.ProcessorCount,
+                i =>
                 {
-                    Assert.Same(value, cwt.GetValue(key, _ => value));
-                    cwt.Remove(key);
+                    while (DateTime.UtcNow < end)
+                    {
+                        Assert.Same(value, cwt.GetValue(key, _ => value));
+                        cwt.Remove(key);
+                    }
                 }
-            });
+            );
         }
 
-        [System.Runtime.CompilerServices.MethodImplAttribute(System.Runtime.CompilerServices.MethodImplOptions.NoInlining)]
-        static WeakReference GetWeakCondTabRef(out ConditionalWeakTable<object, object> cwt_out, out object key_out)
+        [System.Runtime.CompilerServices.MethodImplAttribute(
+            System.Runtime.CompilerServices.MethodImplOptions.NoInlining
+        )]
+        static WeakReference GetWeakCondTabRef(
+            out ConditionalWeakTable<object, object> cwt_out,
+            out object key_out
+        )
         {
             var key = new object();
             var value = new object();
@@ -254,8 +292,13 @@ namespace System.Runtime.CompilerServices.Tests
             GC.KeepAlive(key);
         }
 
-        [System.Runtime.CompilerServices.MethodImplAttribute(System.Runtime.CompilerServices.MethodImplOptions.NoInlining)]
-        static void GetWeakRefPair(out WeakReference<object> key_out, out WeakReference<object> val_out)
+        [System.Runtime.CompilerServices.MethodImplAttribute(
+            System.Runtime.CompilerServices.MethodImplOptions.NoInlining
+        )]
+        static void GetWeakRefPair(
+            out WeakReference<object> key_out,
+            out WeakReference<object> val_out
+        )
         {
             var cwt = new ConditionalWeakTable<object, object>();
             var key = new object();
@@ -285,8 +328,13 @@ namespace System.Runtime.CompilerServices.Tests
             Assert.False(wrKey.TryGetTarget(out obj));
         }
 
-        [System.Runtime.CompilerServices.MethodImplAttribute(System.Runtime.CompilerServices.MethodImplOptions.NoInlining)]
-        static void GetWeakRefValPair(out WeakReference<object> key_out, out WeakReference<object> val_out)
+        [System.Runtime.CompilerServices.MethodImplAttribute(
+            System.Runtime.CompilerServices.MethodImplOptions.NoInlining
+        )]
+        static void GetWeakRefValPair(
+            out WeakReference<object> key_out,
+            out WeakReference<object> val_out
+        )
         {
             var cwt = new ConditionalWeakTable<object, object>();
             var key = new object();
@@ -324,7 +372,8 @@ namespace System.Runtime.CompilerServices.Tests
         {
             var cwt = new ConditionalWeakTable<object, object>();
 
-            MethodInfo clear = cwt.GetType().GetMethod("Clear", BindingFlags.NonPublic | BindingFlags.Instance);
+            MethodInfo clear = cwt.GetType()
+                .GetMethod("Clear", BindingFlags.NonPublic | BindingFlags.Instance);
             if (clear == null)
             {
                 // Couldn't access the Clear method; skip the test.
@@ -391,7 +440,8 @@ namespace System.Runtime.CompilerServices.Tests
         public static void Clear_AddThenEmptyRepeatedly_ItemsRemoved()
         {
             var cwt = new ConditionalWeakTable<object, object>();
-            object key = new object(), value = new object();
+            object key = new object(),
+                value = new object();
             object result;
             for (int i = 0; i < 3; i++)
             {
@@ -443,7 +493,8 @@ namespace System.Runtime.CompilerServices.Tests
             var cwt = new ConditionalWeakTable<object, object>();
             var enumerable = (IEnumerable<KeyValuePair<object, object>>)cwt;
 
-            object key1 = new object(), value1 = new object();
+            object key1 = new object(),
+                value1 = new object();
 
             for (int i = 0; i < 20; i++) // adding and removing multiple times, across internal container boundary
             {
@@ -467,10 +518,11 @@ namespace System.Runtime.CompilerServices.Tests
 
             // Delegate to add collectible items to the table, separated out
             // to avoid the JIT extending the lifetimes of the temporaries
-            Action<ConditionalWeakTable<object, object>> addItem =
-                t => t.Add(new object(), new object());
+            Action<ConditionalWeakTable<object, object>> addItem = t =>
+                t.Add(new object(), new object());
 
-            for (int i = 0; i < 10; i++) addItem(cwt);
+            for (int i = 0; i < 10; i++)
+                addItem(cwt);
             GC.Collect();
             Assert.Equal(0, enumerable.Count());
         }
@@ -488,8 +540,12 @@ namespace System.Runtime.CompilerServices.Tests
                 cwt.Add(keys[i], values[i]);
             }
 
-            using (IEnumerator<KeyValuePair<object, object>> enumerator1 = enumerable.GetEnumerator())
-            using (IEnumerator<KeyValuePair<object, object>> enumerator2 = enumerable.GetEnumerator())
+            using (
+                IEnumerator<KeyValuePair<object, object>> enumerator1 = enumerable.GetEnumerator()
+            )
+            using (
+                IEnumerator<KeyValuePair<object, object>> enumerator2 = enumerable.GetEnumerator()
+            )
             {
                 while (enumerator1.MoveNext())
                 {
@@ -520,8 +576,11 @@ namespace System.Runtime.CompilerServices.Tests
             {
                 Assert.Equal(keys.Length - i, enumerable.Count());
                 Assert.Equal(
-                    Enumerable.Range(i, keys.Length - i).Select(j => new KeyValuePair<object, object>(keys[j], values[j])),
-                    enumerable);
+                    Enumerable
+                        .Range(i, keys.Length - i)
+                        .Select(j => new KeyValuePair<object, object>(keys[j], values[j])),
+                    enumerable
+                );
                 cwt.Remove(keys[i]);
             }
             Assert.Equal(0, enumerable.Count());
@@ -536,7 +595,10 @@ namespace System.Runtime.CompilerServices.Tests
             var cwt = new ConditionalWeakTable<object, object>();
             var enumerable = (IEnumerable<KeyValuePair<object, object>>)cwt;
 
-            object key1 = new object(), key2 = new object(), value1 = new object(), value2 = new object();
+            object key1 = new object(),
+                key2 = new object(),
+                value1 = new object(),
+                value2 = new object();
 
             cwt.Add(key1, value1);
             IEnumerator<KeyValuePair<object, object>> enumerator1 = enumerable.GetEnumerator();
@@ -568,7 +630,10 @@ namespace System.Runtime.CompilerServices.Tests
             var cwt = new ConditionalWeakTable<object, object>();
             var enumerable = (IEnumerable<KeyValuePair<object, object>>)cwt;
 
-            object key1 = new object(), key2 = new object(), value1 = new object(), value2 = new object();
+            object key1 = new object(),
+                key2 = new object(),
+                value1 = new object(),
+                value2 = new object();
 
             cwt.Add(key1, value1);
             cwt.Add(key2, value2);
@@ -599,7 +664,10 @@ namespace System.Runtime.CompilerServices.Tests
             var cwt = new ConditionalWeakTable<object, object>();
             var enumerable = (IEnumerable<KeyValuePair<object, object>>)cwt;
 
-            object key1 = new object(), key2 = new object(), value1 = new object(), value2 = new object();
+            object key1 = new object(),
+                key2 = new object(),
+                value1 = new object(),
+                value2 = new object();
 
             cwt.Add(key1, value1);
             cwt.Add(key2, value2);
@@ -625,10 +693,13 @@ namespace System.Runtime.CompilerServices.Tests
             var cwt = new ConditionalWeakTable<object, object>();
             var enumerable = (IEnumerable<KeyValuePair<object, object>>)cwt;
 
-            object key1 = new object(), value1 = new object();
+            object key1 = new object(),
+                value1 = new object();
             cwt.Add(key1, value1);
 
-            using (IEnumerator<KeyValuePair<object, object>> enumerator = enumerable.GetEnumerator())
+            using (
+                IEnumerator<KeyValuePair<object, object>> enumerator = enumerable.GetEnumerator()
+            )
             {
                 Assert.Throws<InvalidOperationException>(() => enumerator.Current); // before first MoveNext
             }

@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.ComponentModel.Composition.Hosting;
 using System.ComponentModel.Composition.ReflectionModel;
+using System.Linq;
+using System.Text;
 
 namespace System.ComponentModel.Composition.Primitives
 {
@@ -16,7 +16,8 @@ namespace System.ComponentModel.Composition.Primitives
 
         public static ImportDefinition GetProductImportDefinition(this ImportDefinition import)
         {
-            IPartCreatorImportDefinition partCreatorDefinition = import as IPartCreatorImportDefinition;
+            IPartCreatorImportDefinition partCreatorDefinition =
+                import as IPartCreatorImportDefinition;
 
             if (partCreatorDefinition != null)
             {
@@ -28,18 +29,31 @@ namespace System.ComponentModel.Composition.Primitives
             }
         }
 
-        internal static IEnumerable<string> GetCandidateContractNames(this ImportDefinition import, ComposablePartDefinition part)
+        internal static IEnumerable<string> GetCandidateContractNames(
+            this ImportDefinition import,
+            ComposablePartDefinition part
+        )
         {
             import = import.GetProductImportDefinition();
             string contractName = import.ContractName;
-            string genericContractName = import.Metadata.GetValue<string>(CompositionConstants.GenericContractMetadataName);
-            int[] importParametersOrder = import.Metadata.GetValue<int[]>(CompositionConstants.GenericImportParametersOrderMetadataName);
+            string genericContractName = import.Metadata.GetValue<string>(
+                CompositionConstants.GenericContractMetadataName
+            );
+            int[] importParametersOrder = import.Metadata.GetValue<int[]>(
+                CompositionConstants.GenericImportParametersOrderMetadataName
+            );
             if (importParametersOrder != null)
             {
-                int partArity = part.Metadata.GetValue<int>(CompositionConstants.GenericPartArityMetadataName);
+                int partArity = part.Metadata.GetValue<int>(
+                    CompositionConstants.GenericPartArityMetadataName
+                );
                 if (partArity > 0)
                 {
-                    contractName = GenericServices.GetGenericName(contractName, importParametersOrder, partArity);
+                    contractName = GenericServices.GetGenericName(
+                        contractName,
+                        importParametersOrder,
+                        partArity
+                    );
                 }
             }
 
@@ -50,8 +64,12 @@ namespace System.ComponentModel.Composition.Primitives
             }
         }
 
-
-        internal static bool IsImportDependentOnPart(this ImportDefinition import, ComposablePartDefinition part, ExportDefinition export, bool expandGenerics)
+        internal static bool IsImportDependentOnPart(
+            this ImportDefinition import,
+            ComposablePartDefinition part,
+            ExportDefinition export,
+            bool expandGenerics
+        )
         {
             import = import.GetProductImportDefinition();
             if (expandGenerics)
@@ -64,37 +82,54 @@ namespace System.ComponentModel.Composition.Primitives
             }
         }
 
-        private static ImportDefinition TranslateImport(ImportDefinition import, ComposablePartDefinition part)
+        private static ImportDefinition TranslateImport(
+            ImportDefinition import,
+            ComposablePartDefinition part
+        )
         {
-            ContractBasedImportDefinition contractBasedImport = import as ContractBasedImportDefinition;
+            ContractBasedImportDefinition contractBasedImport =
+                import as ContractBasedImportDefinition;
             if (contractBasedImport == null)
             {
                 return import;
             }
 
-            int[] importParametersOrder = contractBasedImport.Metadata.GetValue<int[]>(CompositionConstants.GenericImportParametersOrderMetadataName);
+            int[] importParametersOrder = contractBasedImport.Metadata.GetValue<int[]>(
+                CompositionConstants.GenericImportParametersOrderMetadataName
+            );
             if (importParametersOrder == null)
             {
                 return import;
             }
 
-            int partArity = part.Metadata.GetValue<int>(CompositionConstants.GenericPartArityMetadataName);
+            int partArity = part.Metadata.GetValue<int>(
+                CompositionConstants.GenericPartArityMetadataName
+            );
             if (partArity == 0)
             {
                 return import;
             }
 
-            string contractName = GenericServices.GetGenericName(contractBasedImport.ContractName, importParametersOrder, partArity);
-            string requiredTypeIdentity = GenericServices.GetGenericName(contractBasedImport.RequiredTypeIdentity, importParametersOrder, partArity);
+            string contractName = GenericServices.GetGenericName(
+                contractBasedImport.ContractName,
+                importParametersOrder,
+                partArity
+            );
+            string requiredTypeIdentity = GenericServices.GetGenericName(
+                contractBasedImport.RequiredTypeIdentity,
+                importParametersOrder,
+                partArity
+            );
             return new ContractBasedImportDefinition(
-                         contractName,
-                         requiredTypeIdentity,
-                         contractBasedImport.RequiredMetadata,
-                         contractBasedImport.Cardinality,
-                         contractBasedImport.IsRecomposable,
-                         false,
-                         contractBasedImport.RequiredCreationPolicy,
-                         contractBasedImport.Metadata);
+                contractName,
+                requiredTypeIdentity,
+                contractBasedImport.RequiredMetadata,
+                contractBasedImport.Cardinality,
+                contractBasedImport.IsRecomposable,
+                false,
+                contractBasedImport.RequiredCreationPolicy,
+                contractBasedImport.Metadata
+            );
         }
     }
 }

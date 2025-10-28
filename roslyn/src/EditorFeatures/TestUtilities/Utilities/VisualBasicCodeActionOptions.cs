@@ -29,15 +29,26 @@ internal static class VisualBasicCodeActionOptions
             SimplifierOptions = VisualBasicSimplifierOptions.Default,
         },
         CodeGenerationOptions = VisualBasicCodeGenerationOptions.Default,
-        CodeStyleOptions = VisualBasicIdeCodeStyleOptions.Default
+        CodeStyleOptions = VisualBasicIdeCodeStyleOptions.Default,
     };
 
-    public static CodeActionOptions WithWrappingColumn(this CodeActionOptions options, int value)
-        => options with { WrappingColumn = value };
+    public static CodeActionOptions WithWrappingColumn(this CodeActionOptions options, int value) =>
+        options with
+        {
+            WrappingColumn = value,
+        };
 
-    public static CodeActionOptions With(this CodeActionOptions options, VisualBasicSyntaxFormattingOptions value)
-        => options with { CleanupOptions = options.CleanupOptions with { FormattingOptions = value } };
+    public static CodeActionOptions With(
+        this CodeActionOptions options,
+        VisualBasicSyntaxFormattingOptions value
+    ) =>
+        options with
+        {
+            CleanupOptions = options.CleanupOptions with { FormattingOptions = value },
+        };
 
-    public static CodeActionOptions With(this CodeActionOptions options, ImplementTypeOptions value)
-        => options with { ImplementTypeOptions = value };
+    public static CodeActionOptions With(
+        this CodeActionOptions options,
+        ImplementTypeOptions value
+    ) => options with { ImplementTypeOptions = value };
 }

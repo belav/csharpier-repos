@@ -25,7 +25,10 @@ public abstract partial class LoadTestBase<TFixture> : IClassFixture<TFixture>
     [InlineData(EntityState.Unchanged, true)]
     [InlineData(EntityState.Modified, true)]
     [InlineData(EntityState.Added, true)]
-    public virtual void Attached_references_to_principal_are_marked_as_loaded(EntityState state, bool lazy)
+    public virtual void Attached_references_to_principal_are_marked_as_loaded(
+        EntityState state,
+        bool lazy
+    )
     {
         using var context = CreateContext(lazy);
         var parent = new Parent
@@ -37,7 +40,7 @@ public abstract partial class LoadTestBase<TFixture> : IClassFixture<TFixture>
             RequiredSingle = new RequiredSingle { Id = 21 },
             SingleAk = new SingleAk { Id = 42 },
             SingleShadowFk = new SingleShadowFk { Id = 62 },
-            SingleCompositeKey = new SingleCompositeKey { Id = 62 }
+            SingleCompositeKey = new SingleCompositeKey { Id = 62 },
         };
 
         context.Attach(parent);
@@ -70,7 +73,10 @@ public abstract partial class LoadTestBase<TFixture> : IClassFixture<TFixture>
     [InlineData(EntityState.Unchanged, true)]
     [InlineData(EntityState.Modified, true)]
     [InlineData(EntityState.Added, true)]
-    public virtual void Attached_references_to_dependents_are_marked_as_loaded(EntityState state, bool lazy)
+    public virtual void Attached_references_to_dependents_are_marked_as_loaded(
+        EntityState state,
+        bool lazy
+    )
     {
         using var context = CreateContext(lazy);
         var parent = new Parent
@@ -82,7 +88,7 @@ public abstract partial class LoadTestBase<TFixture> : IClassFixture<TFixture>
             RequiredSingle = new RequiredSingle { Id = 21 },
             SingleAk = new SingleAk { Id = 42 },
             SingleShadowFk = new SingleShadowFk { Id = 62 },
-            SingleCompositeKey = new SingleCompositeKey { Id = 62 }
+            SingleCompositeKey = new SingleCompositeKey { Id = 62 },
         };
 
         context.Attach(parent);
@@ -124,10 +130,26 @@ public abstract partial class LoadTestBase<TFixture> : IClassFixture<TFixture>
         {
             Id = 707,
             AlternateId = "Root",
-            Children = new List<Child> { new() { Id = 11 }, new() { Id = 12 } },
-            ChildrenAk = new List<ChildAk> { new() { Id = 31 }, new() { Id = 32 } },
-            ChildrenShadowFk = new List<ChildShadowFk> { new() { Id = 51 }, new() { Id = 52 } },
-            ChildrenCompositeKey = new List<ChildCompositeKey> { new() { Id = 51 }, new() { Id = 52 } }
+            Children = new List<Child>
+            {
+                new() { Id = 11 },
+                new() { Id = 12 },
+            },
+            ChildrenAk = new List<ChildAk>
+            {
+                new() { Id = 31 },
+                new() { Id = 32 },
+            },
+            ChildrenShadowFk = new List<ChildShadowFk>
+            {
+                new() { Id = 51 },
+                new() { Id = 52 },
+            },
+            ChildrenCompositeKey = new List<ChildCompositeKey>
+            {
+                new() { Id = 51 },
+                new() { Id = 52 },
+            },
         };
 
         context.Attach(parent);
@@ -136,10 +158,13 @@ public abstract partial class LoadTestBase<TFixture> : IClassFixture<TFixture>
         {
             context.ChangeTracker.LazyLoadingEnabled = false;
 
-            foreach (var child in parent.Children.Cast<object>()
-                         .Concat(parent.ChildrenAk)
-                         .Concat(parent.ChildrenShadowFk)
-                         .Concat(parent.ChildrenCompositeKey))
+            foreach (
+                var child in parent
+                    .Children.Cast<object>()
+                    .Concat(parent.ChildrenAk)
+                    .Concat(parent.ChildrenShadowFk)
+                    .Concat(parent.ChildrenCompositeKey)
+            )
             {
                 context.Entry(child).State = state;
             }
@@ -176,17 +201,37 @@ public abstract partial class LoadTestBase<TFixture> : IClassFixture<TFixture>
     [InlineData(EntityState.Deleted, QueryTrackingBehavior.NoTracking, false)]
     [InlineData(EntityState.Detached, QueryTrackingBehavior.NoTracking, true)]
     [InlineData(EntityState.Detached, QueryTrackingBehavior.NoTracking, false)]
-    [InlineData(EntityState.Unchanged, QueryTrackingBehavior.NoTrackingWithIdentityResolution, true)]
-    [InlineData(EntityState.Unchanged, QueryTrackingBehavior.NoTrackingWithIdentityResolution, false)]
+    [InlineData(
+        EntityState.Unchanged,
+        QueryTrackingBehavior.NoTrackingWithIdentityResolution,
+        true
+    )]
+    [InlineData(
+        EntityState.Unchanged,
+        QueryTrackingBehavior.NoTrackingWithIdentityResolution,
+        false
+    )]
     [InlineData(EntityState.Added, QueryTrackingBehavior.NoTrackingWithIdentityResolution, true)]
     [InlineData(EntityState.Added, QueryTrackingBehavior.NoTrackingWithIdentityResolution, false)]
     [InlineData(EntityState.Modified, QueryTrackingBehavior.NoTrackingWithIdentityResolution, true)]
-    [InlineData(EntityState.Modified, QueryTrackingBehavior.NoTrackingWithIdentityResolution, false)]
+    [InlineData(
+        EntityState.Modified,
+        QueryTrackingBehavior.NoTrackingWithIdentityResolution,
+        false
+    )]
     [InlineData(EntityState.Deleted, QueryTrackingBehavior.NoTrackingWithIdentityResolution, true)]
     [InlineData(EntityState.Deleted, QueryTrackingBehavior.NoTrackingWithIdentityResolution, false)]
     [InlineData(EntityState.Detached, QueryTrackingBehavior.NoTrackingWithIdentityResolution, true)]
-    [InlineData(EntityState.Detached, QueryTrackingBehavior.NoTrackingWithIdentityResolution, false)]
-    public virtual async Task Load_collection(EntityState state, QueryTrackingBehavior queryTrackingBehavior, bool async)
+    [InlineData(
+        EntityState.Detached,
+        QueryTrackingBehavior.NoTrackingWithIdentityResolution,
+        false
+    )]
+    public virtual async Task Load_collection(
+        EntityState state,
+        QueryTrackingBehavior queryTrackingBehavior,
+        bool async
+    )
     {
         using var context = CreateContext();
         context.ChangeTracker.QueryTrackingBehavior = queryTrackingBehavior;
@@ -218,7 +263,10 @@ public abstract partial class LoadTestBase<TFixture> : IClassFixture<TFixture>
         Assert.Equal(2, parent.Children.Count());
         Assert.All(parent.Children.Select(e => e.Parent), c => Assert.Same(parent, c));
 
-        Assert.Equal(state == EntityState.Detached ? 0 : 3, context.ChangeTracker.Entries().Count());
+        Assert.Equal(
+            state == EntityState.Detached ? 0 : 3,
+            context.ChangeTracker.Entries().Count()
+        );
     }
 
     [ConditionalTheory]
@@ -258,7 +306,10 @@ public abstract partial class LoadTestBase<TFixture> : IClassFixture<TFixture>
 
         RecordLog();
 
-        Assert.Equal(state == EntityState.Detached ? 0 : 2, context.ChangeTracker.Entries().Count());
+        Assert.Equal(
+            state == EntityState.Detached ? 0 : 2,
+            context.ChangeTracker.Entries().Count()
+        );
 
         if (state != EntityState.Deleted)
         {
@@ -319,7 +370,10 @@ public abstract partial class LoadTestBase<TFixture> : IClassFixture<TFixture>
 
         RecordLog();
 
-        Assert.Equal(state == EntityState.Detached ? 0 : 2, context.ChangeTracker.Entries().Count());
+        Assert.Equal(
+            state == EntityState.Detached ? 0 : 2,
+            context.ChangeTracker.Entries().Count()
+        );
 
         if (state != EntityState.Deleted)
         {
@@ -354,7 +408,10 @@ public abstract partial class LoadTestBase<TFixture> : IClassFixture<TFixture>
     [InlineData(EntityState.Deleted, false)]
     [InlineData(EntityState.Detached, true)]
     [InlineData(EntityState.Detached, false)]
-    public virtual async Task Load_one_to_one_reference_to_principal_when_NoTracking_behavior(EntityState state, bool async)
+    public virtual async Task Load_one_to_one_reference_to_principal_when_NoTracking_behavior(
+        EntityState state,
+        bool async
+    )
     {
         using var context = CreateContext();
         context.ChangeTracker.QueryTrackingBehavior = QueryTrackingBehavior.NoTracking;
@@ -382,7 +439,10 @@ public abstract partial class LoadTestBase<TFixture> : IClassFixture<TFixture>
 
         RecordLog();
 
-        Assert.Equal(state == EntityState.Detached ? 0 : 2, context.ChangeTracker.Entries().Count());
+        Assert.Equal(
+            state == EntityState.Detached ? 0 : 2,
+            context.ChangeTracker.Entries().Count()
+        );
 
         if (state != EntityState.Deleted)
         {
@@ -443,7 +503,10 @@ public abstract partial class LoadTestBase<TFixture> : IClassFixture<TFixture>
 
         RecordLog();
 
-        Assert.Equal(state == EntityState.Detached ? 0 : 2, context.ChangeTracker.Entries().Count());
+        Assert.Equal(
+            state == EntityState.Detached ? 0 : 2,
+            context.ChangeTracker.Entries().Count()
+        );
 
         Assert.Same(parent, parent.Single.Parent);
 
@@ -467,7 +530,10 @@ public abstract partial class LoadTestBase<TFixture> : IClassFixture<TFixture>
     [InlineData(EntityState.Deleted, false)]
     [InlineData(EntityState.Detached, true)]
     [InlineData(EntityState.Detached, false)]
-    public virtual async Task Load_one_to_one_PK_to_PK_reference_to_principal(EntityState state, bool async)
+    public virtual async Task Load_one_to_one_PK_to_PK_reference_to_principal(
+        EntityState state,
+        bool async
+    )
     {
         using var context = CreateContext();
         var single = context.Set<SinglePkToPk>().Single();
@@ -493,7 +559,10 @@ public abstract partial class LoadTestBase<TFixture> : IClassFixture<TFixture>
 
         RecordLog();
 
-        Assert.Equal(state == EntityState.Detached ? 0 : 2, context.ChangeTracker.Entries().Count());
+        Assert.Equal(
+            state == EntityState.Detached ? 0 : 2,
+            context.ChangeTracker.Entries().Count()
+        );
 
         if (state != EntityState.Detached)
         {
@@ -523,7 +592,10 @@ public abstract partial class LoadTestBase<TFixture> : IClassFixture<TFixture>
     [InlineData(EntityState.Deleted, false)]
     [InlineData(EntityState.Detached, true)]
     [InlineData(EntityState.Detached, false)]
-    public virtual async Task Load_one_to_one_PK_to_PK_reference_to_dependent(EntityState state, bool async)
+    public virtual async Task Load_one_to_one_PK_to_PK_reference_to_dependent(
+        EntityState state,
+        bool async
+    )
     {
         using var context = CreateContext();
         var parent = context.Set<Parent>().Single();
@@ -620,7 +692,10 @@ public abstract partial class LoadTestBase<TFixture> : IClassFixture<TFixture>
     [InlineData(EntityState.Deleted, false)]
     [InlineData(EntityState.Detached, true)]
     [InlineData(EntityState.Detached, false)]
-    public virtual async Task Load_many_to_one_reference_to_principal_using_Query(EntityState state, bool async)
+    public virtual async Task Load_many_to_one_reference_to_principal_using_Query(
+        EntityState state,
+        bool async
+    )
     {
         using var context = CreateContext();
         var child = context.Set<Child>().Single(e => e.Id == 12);
@@ -671,7 +746,10 @@ public abstract partial class LoadTestBase<TFixture> : IClassFixture<TFixture>
     [InlineData(EntityState.Deleted, false)]
     [InlineData(EntityState.Detached, true)]
     [InlineData(EntityState.Detached, false)]
-    public virtual async Task Load_one_to_one_reference_to_principal_using_Query(EntityState state, bool async)
+    public virtual async Task Load_one_to_one_reference_to_principal_using_Query(
+        EntityState state,
+        bool async
+    )
     {
         using var context = CreateContext();
         var single = context.Set<Single>().Single();
@@ -722,7 +800,10 @@ public abstract partial class LoadTestBase<TFixture> : IClassFixture<TFixture>
     [InlineData(EntityState.Deleted, false)]
     [InlineData(EntityState.Detached, true)]
     [InlineData(EntityState.Detached, false)]
-    public virtual async Task Load_one_to_one_reference_to_dependent_using_Query(EntityState state, bool async)
+    public virtual async Task Load_one_to_one_reference_to_dependent_using_Query(
+        EntityState state,
+        bool async
+    )
     {
         using var context = CreateContext();
         var parent = context.Set<Parent>().Single();
@@ -765,7 +846,10 @@ public abstract partial class LoadTestBase<TFixture> : IClassFixture<TFixture>
     [InlineData(EntityState.Deleted, false)]
     [InlineData(EntityState.Detached, true)]
     [InlineData(EntityState.Detached, false)]
-    public virtual async Task Load_one_to_one_PK_to_PK_reference_to_principal_using_Query(EntityState state, bool async)
+    public virtual async Task Load_one_to_one_PK_to_PK_reference_to_principal_using_Query(
+        EntityState state,
+        bool async
+    )
     {
         using var context = CreateContext();
         var single = context.Set<SinglePkToPk>().Single();
@@ -816,7 +900,10 @@ public abstract partial class LoadTestBase<TFixture> : IClassFixture<TFixture>
     [InlineData(EntityState.Deleted, false)]
     [InlineData(EntityState.Detached, true)]
     [InlineData(EntityState.Detached, false)]
-    public virtual async Task Load_one_to_one_PK_to_PK_reference_to_dependent_using_Query(EntityState state, bool async)
+    public virtual async Task Load_one_to_one_PK_to_PK_reference_to_dependent_using_Query(
+        EntityState state,
+        bool async
+    )
     {
         using var context = CreateContext();
         var parent = context.Set<Parent>().Single();
@@ -859,7 +946,10 @@ public abstract partial class LoadTestBase<TFixture> : IClassFixture<TFixture>
     [InlineData(EntityState.Deleted, false)]
     [InlineData(EntityState.Detached, true)]
     [InlineData(EntityState.Detached, false)]
-    public virtual async Task Load_many_to_one_reference_to_principal_null_FK(EntityState state, bool async)
+    public virtual async Task Load_many_to_one_reference_to_principal_null_FK(
+        EntityState state,
+        bool async
+    )
     {
         using var context = CreateContext();
         var child = context.Attach(new Child { Id = 767, ParentId = null }).Entity;
@@ -885,7 +975,10 @@ public abstract partial class LoadTestBase<TFixture> : IClassFixture<TFixture>
 
         RecordLog();
 
-        Assert.Equal(state == EntityState.Detached ? 0 : 1, context.ChangeTracker.Entries().Count());
+        Assert.Equal(
+            state == EntityState.Detached ? 0 : 1,
+            context.ChangeTracker.Entries().Count()
+        );
         Assert.Null(child.Parent);
     }
 
@@ -900,7 +993,10 @@ public abstract partial class LoadTestBase<TFixture> : IClassFixture<TFixture>
     [InlineData(EntityState.Deleted, false)]
     [InlineData(EntityState.Detached, true)]
     [InlineData(EntityState.Detached, false)]
-    public virtual async Task Load_one_to_one_reference_to_principal_null_FK(EntityState state, bool async)
+    public virtual async Task Load_one_to_one_reference_to_principal_null_FK(
+        EntityState state,
+        bool async
+    )
     {
         using var context = CreateContext();
         var single = context.Attach(new Single { Id = 767, ParentId = null }).Entity;
@@ -926,7 +1022,10 @@ public abstract partial class LoadTestBase<TFixture> : IClassFixture<TFixture>
 
         RecordLog();
 
-        Assert.Equal(state == EntityState.Detached ? 0 : 1, context.ChangeTracker.Entries().Count());
+        Assert.Equal(
+            state == EntityState.Detached ? 0 : 1,
+            context.ChangeTracker.Entries().Count()
+        );
 
         Assert.Null(single.Parent);
     }
@@ -942,7 +1041,10 @@ public abstract partial class LoadTestBase<TFixture> : IClassFixture<TFixture>
     [InlineData(EntityState.Deleted, false)]
     [InlineData(EntityState.Detached, true)]
     [InlineData(EntityState.Detached, false)]
-    public virtual async Task Load_many_to_one_reference_to_principal_using_Query_null_FK(EntityState state, bool async)
+    public virtual async Task Load_many_to_one_reference_to_principal_using_Query_null_FK(
+        EntityState state,
+        bool async
+    )
     {
         using var context = CreateContext();
         var child = context.Attach(new Child { Id = 767, ParentId = null }).Entity;
@@ -966,7 +1068,10 @@ public abstract partial class LoadTestBase<TFixture> : IClassFixture<TFixture>
         Assert.Null(parent);
         Assert.Null(child.Parent);
 
-        Assert.Equal(state == EntityState.Detached ? 0 : 1, context.ChangeTracker.Entries().Count());
+        Assert.Equal(
+            state == EntityState.Detached ? 0 : 1,
+            context.ChangeTracker.Entries().Count()
+        );
     }
 
     [ConditionalTheory]
@@ -980,7 +1085,10 @@ public abstract partial class LoadTestBase<TFixture> : IClassFixture<TFixture>
     [InlineData(EntityState.Deleted, false)]
     [InlineData(EntityState.Detached, true)]
     [InlineData(EntityState.Detached, false)]
-    public virtual async Task Load_one_to_one_reference_to_principal_using_Query_null_FK(EntityState state, bool async)
+    public virtual async Task Load_one_to_one_reference_to_principal_using_Query_null_FK(
+        EntityState state,
+        bool async
+    )
     {
         using var context = CreateContext();
         var single = context.Attach(new Single { Id = 767, ParentId = null }).Entity;
@@ -1004,7 +1112,10 @@ public abstract partial class LoadTestBase<TFixture> : IClassFixture<TFixture>
         Assert.Null(parent);
         Assert.Null(single.Parent);
 
-        Assert.Equal(state == EntityState.Detached ? 0 : 1, context.ChangeTracker.Entries().Count());
+        Assert.Equal(
+            state == EntityState.Detached ? 0 : 1,
+            context.ChangeTracker.Entries().Count()
+        );
     }
 
     [ConditionalTheory]
@@ -1045,7 +1156,10 @@ public abstract partial class LoadTestBase<TFixture> : IClassFixture<TFixture>
         RecordLog();
 
         Assert.Empty(parent.Children);
-        Assert.Equal(state == EntityState.Detached ? 0 : 1, context.ChangeTracker.Entries().Count());
+        Assert.Equal(
+            state == EntityState.Detached ? 0 : 1,
+            context.ChangeTracker.Entries().Count()
+        );
     }
 
     [ConditionalTheory]
@@ -1059,7 +1173,10 @@ public abstract partial class LoadTestBase<TFixture> : IClassFixture<TFixture>
     [InlineData(EntityState.Deleted, false)]
     [InlineData(EntityState.Detached, true)]
     [InlineData(EntityState.Detached, false)]
-    public virtual async Task Load_many_to_one_reference_to_principal_not_found(EntityState state, bool async)
+    public virtual async Task Load_many_to_one_reference_to_principal_not_found(
+        EntityState state,
+        bool async
+    )
     {
         using var context = CreateContext();
         var child = context.Attach(new Child { Id = 767, ParentId = 787 }).Entity;
@@ -1085,7 +1202,10 @@ public abstract partial class LoadTestBase<TFixture> : IClassFixture<TFixture>
 
         RecordLog();
 
-        Assert.Equal(state == EntityState.Detached ? 0 : 1, context.ChangeTracker.Entries().Count());
+        Assert.Equal(
+            state == EntityState.Detached ? 0 : 1,
+            context.ChangeTracker.Entries().Count()
+        );
         Assert.Null(child.Parent);
     }
 
@@ -1100,7 +1220,10 @@ public abstract partial class LoadTestBase<TFixture> : IClassFixture<TFixture>
     [InlineData(EntityState.Deleted, false)]
     [InlineData(EntityState.Detached, true)]
     [InlineData(EntityState.Detached, false)]
-    public virtual async Task Load_one_to_one_reference_to_principal_not_found(EntityState state, bool async)
+    public virtual async Task Load_one_to_one_reference_to_principal_not_found(
+        EntityState state,
+        bool async
+    )
     {
         using var context = CreateContext();
         var single = context.Attach(new Single { Id = 767, ParentId = 787 }).Entity;
@@ -1126,7 +1249,10 @@ public abstract partial class LoadTestBase<TFixture> : IClassFixture<TFixture>
 
         RecordLog();
 
-        Assert.Equal(state == EntityState.Detached ? 0 : 1, context.ChangeTracker.Entries().Count());
+        Assert.Equal(
+            state == EntityState.Detached ? 0 : 1,
+            context.ChangeTracker.Entries().Count()
+        );
 
         Assert.Null(single.Parent);
     }
@@ -1142,7 +1268,10 @@ public abstract partial class LoadTestBase<TFixture> : IClassFixture<TFixture>
     [InlineData(EntityState.Deleted, false)]
     [InlineData(EntityState.Detached, true)]
     [InlineData(EntityState.Detached, false)]
-    public virtual async Task Load_one_to_one_reference_to_dependent_not_found(EntityState state, bool async)
+    public virtual async Task Load_one_to_one_reference_to_dependent_not_found(
+        EntityState state,
+        bool async
+    )
     {
         using var context = CreateContext();
         var parent = context.Attach(new Parent { Id = 767, AlternateId = "NewRoot" }).Entity;
@@ -1168,7 +1297,10 @@ public abstract partial class LoadTestBase<TFixture> : IClassFixture<TFixture>
 
         RecordLog();
 
-        Assert.Equal(state == EntityState.Detached ? 0 : 1, context.ChangeTracker.Entries().Count());
+        Assert.Equal(
+            state == EntityState.Detached ? 0 : 1,
+            context.ChangeTracker.Entries().Count()
+        );
 
         Assert.Null(parent.Single);
     }
@@ -1208,7 +1340,10 @@ public abstract partial class LoadTestBase<TFixture> : IClassFixture<TFixture>
         Assert.Empty(children);
         Assert.Empty(parent.Children);
 
-        Assert.Equal(state == EntityState.Detached ? 0 : 1, context.ChangeTracker.Entries().Count());
+        Assert.Equal(
+            state == EntityState.Detached ? 0 : 1,
+            context.ChangeTracker.Entries().Count()
+        );
     }
 
     [ConditionalTheory]
@@ -1222,7 +1357,10 @@ public abstract partial class LoadTestBase<TFixture> : IClassFixture<TFixture>
     [InlineData(EntityState.Deleted, false)]
     [InlineData(EntityState.Detached, true)]
     [InlineData(EntityState.Detached, false)]
-    public virtual async Task Load_many_to_one_reference_to_principal_using_Query_not_found(EntityState state, bool async)
+    public virtual async Task Load_many_to_one_reference_to_principal_using_Query_not_found(
+        EntityState state,
+        bool async
+    )
     {
         using var context = CreateContext();
         var child = context.Attach(new Child { Id = 767, ParentId = 787 }).Entity;
@@ -1246,7 +1384,10 @@ public abstract partial class LoadTestBase<TFixture> : IClassFixture<TFixture>
         Assert.Null(parent);
         Assert.Null(child.Parent);
 
-        Assert.Equal(state == EntityState.Detached ? 0 : 1, context.ChangeTracker.Entries().Count());
+        Assert.Equal(
+            state == EntityState.Detached ? 0 : 1,
+            context.ChangeTracker.Entries().Count()
+        );
     }
 
     [ConditionalTheory]
@@ -1260,7 +1401,10 @@ public abstract partial class LoadTestBase<TFixture> : IClassFixture<TFixture>
     [InlineData(EntityState.Deleted, false)]
     [InlineData(EntityState.Detached, true)]
     [InlineData(EntityState.Detached, false)]
-    public virtual async Task Load_one_to_one_reference_to_principal_using_Query_not_found(EntityState state, bool async)
+    public virtual async Task Load_one_to_one_reference_to_principal_using_Query_not_found(
+        EntityState state,
+        bool async
+    )
     {
         using var context = CreateContext();
         var single = context.Attach(new Single { Id = 767, ParentId = 787 }).Entity;
@@ -1284,7 +1428,10 @@ public abstract partial class LoadTestBase<TFixture> : IClassFixture<TFixture>
         Assert.Null(parent);
         Assert.Null(single.Parent);
 
-        Assert.Equal(state == EntityState.Detached ? 0 : 1, context.ChangeTracker.Entries().Count());
+        Assert.Equal(
+            state == EntityState.Detached ? 0 : 1,
+            context.ChangeTracker.Entries().Count()
+        );
     }
 
     [ConditionalTheory]
@@ -1298,7 +1445,10 @@ public abstract partial class LoadTestBase<TFixture> : IClassFixture<TFixture>
     [InlineData(EntityState.Deleted, false)]
     [InlineData(EntityState.Detached, true)]
     [InlineData(EntityState.Detached, false)]
-    public virtual async Task Load_one_to_one_reference_to_dependent_using_Query_not_found(EntityState state, bool async)
+    public virtual async Task Load_one_to_one_reference_to_dependent_using_Query_not_found(
+        EntityState state,
+        bool async
+    )
     {
         using var context = CreateContext();
         var parent = context.Attach(new Parent { Id = 767, AlternateId = "NewRoot" }).Entity;
@@ -1322,7 +1472,10 @@ public abstract partial class LoadTestBase<TFixture> : IClassFixture<TFixture>
         Assert.Null(single);
         Assert.Null(parent.Single);
 
-        Assert.Equal(state == EntityState.Detached ? 0 : 1, context.ChangeTracker.Entries().Count());
+        Assert.Equal(
+            state == EntityState.Detached ? 0 : 1,
+            context.ChangeTracker.Entries().Count()
+        );
     }
 
     [ConditionalTheory]
@@ -1342,7 +1495,11 @@ public abstract partial class LoadTestBase<TFixture> : IClassFixture<TFixture>
     [InlineData(EntityState.Deleted, false, CascadeTiming.OnSaveChanges)]
     [InlineData(EntityState.Detached, true, CascadeTiming.OnSaveChanges)]
     [InlineData(EntityState.Detached, false, CascadeTiming.OnSaveChanges)]
-    public virtual async Task Load_collection_already_loaded(EntityState state, bool async, CascadeTiming deleteOrphansTiming)
+    public virtual async Task Load_collection_already_loaded(
+        EntityState state,
+        bool async,
+        CascadeTiming deleteOrphansTiming
+    )
     {
         using var context = CreateContext();
         context.ChangeTracker.DeleteOrphansTiming = deleteOrphansTiming;
@@ -1378,7 +1535,10 @@ public abstract partial class LoadTestBase<TFixture> : IClassFixture<TFixture>
         Assert.Equal(2, parent.Children.Count());
         Assert.All(parent.Children.Select(e => e.Parent), c => Assert.Same(parent, c));
 
-        Assert.Equal(state == EntityState.Detached ? 0 : 3, context.ChangeTracker.Entries().Count());
+        Assert.Equal(
+            state == EntityState.Detached ? 0 : 3,
+            context.ChangeTracker.Entries().Count()
+        );
     }
 
     [ConditionalTheory]
@@ -1392,7 +1552,10 @@ public abstract partial class LoadTestBase<TFixture> : IClassFixture<TFixture>
     [InlineData(EntityState.Deleted, false)]
     [InlineData(EntityState.Detached, true)]
     [InlineData(EntityState.Detached, false)]
-    public virtual async Task Load_many_to_one_reference_to_principal_already_loaded(EntityState state, bool async)
+    public virtual async Task Load_many_to_one_reference_to_principal_already_loaded(
+        EntityState state,
+        bool async
+    )
     {
         using var context = CreateContext();
         var child = context.Set<Child>().Include(e => e.Parent).Single(e => e.Id == 12);
@@ -1419,7 +1582,10 @@ public abstract partial class LoadTestBase<TFixture> : IClassFixture<TFixture>
 
         RecordLog();
 
-        Assert.Equal(state == EntityState.Detached ? 0 : 2, context.ChangeTracker.Entries().Count());
+        Assert.Equal(
+            state == EntityState.Detached ? 0 : 2,
+            context.ChangeTracker.Entries().Count()
+        );
 
         if (state != EntityState.Detached && state != EntityState.Deleted)
         {
@@ -1450,7 +1616,8 @@ public abstract partial class LoadTestBase<TFixture> : IClassFixture<TFixture>
     public virtual async Task Load_one_to_one_reference_to_principal_already_loaded(
         EntityState state,
         bool async,
-        CascadeTiming deleteOrphansTiming)
+        CascadeTiming deleteOrphansTiming
+    )
     {
         using var context = CreateContext();
         context.ChangeTracker.DeleteOrphansTiming = deleteOrphansTiming;
@@ -1479,7 +1646,10 @@ public abstract partial class LoadTestBase<TFixture> : IClassFixture<TFixture>
 
         RecordLog();
 
-        Assert.Equal(state == EntityState.Detached ? 0 : 2, context.ChangeTracker.Entries().Count());
+        Assert.Equal(
+            state == EntityState.Detached ? 0 : 2,
+            context.ChangeTracker.Entries().Count()
+        );
 
         if (state != EntityState.Detached && state != EntityState.Deleted)
         {
@@ -1510,7 +1680,8 @@ public abstract partial class LoadTestBase<TFixture> : IClassFixture<TFixture>
     public virtual async Task Load_one_to_one_reference_to_dependent_already_loaded(
         EntityState state,
         bool async,
-        CascadeTiming deleteOrphansTiming)
+        CascadeTiming deleteOrphansTiming
+    )
     {
         using var context = CreateContext();
         context.ChangeTracker.DeleteOrphansTiming = deleteOrphansTiming;
@@ -1539,7 +1710,10 @@ public abstract partial class LoadTestBase<TFixture> : IClassFixture<TFixture>
 
         RecordLog();
 
-        Assert.Equal(state == EntityState.Detached ? 0 : 2, context.ChangeTracker.Entries().Count());
+        Assert.Equal(
+            state == EntityState.Detached ? 0 : 2,
+            context.ChangeTracker.Entries().Count()
+        );
 
         if (state != EntityState.Detached)
         {
@@ -1561,7 +1735,10 @@ public abstract partial class LoadTestBase<TFixture> : IClassFixture<TFixture>
     [InlineData(EntityState.Deleted, false)]
     [InlineData(EntityState.Detached, true)]
     [InlineData(EntityState.Detached, false)]
-    public virtual async Task Load_one_to_one_PK_to_PK_reference_to_principal_already_loaded(EntityState state, bool async)
+    public virtual async Task Load_one_to_one_PK_to_PK_reference_to_principal_already_loaded(
+        EntityState state,
+        bool async
+    )
     {
         using var context = CreateContext();
         var single = context.Set<SinglePkToPk>().Include(e => e.Parent).Single();
@@ -1588,7 +1765,10 @@ public abstract partial class LoadTestBase<TFixture> : IClassFixture<TFixture>
 
         RecordLog();
 
-        Assert.Equal(state == EntityState.Detached ? 0 : 2, context.ChangeTracker.Entries().Count());
+        Assert.Equal(
+            state == EntityState.Detached ? 0 : 2,
+            context.ChangeTracker.Entries().Count()
+        );
 
         if (state != EntityState.Detached)
         {
@@ -1610,7 +1790,10 @@ public abstract partial class LoadTestBase<TFixture> : IClassFixture<TFixture>
     [InlineData(EntityState.Deleted, false)]
     [InlineData(EntityState.Detached, true)]
     [InlineData(EntityState.Detached, false)]
-    public virtual async Task Load_one_to_one_PK_to_PK_reference_to_dependent_already_loaded(EntityState state, bool async)
+    public virtual async Task Load_one_to_one_PK_to_PK_reference_to_dependent_already_loaded(
+        EntityState state,
+        bool async
+    )
     {
         using var context = CreateContext();
         var parent = context.Set<Parent>().Include(e => e.SinglePkToPk).Single();
@@ -1637,7 +1820,10 @@ public abstract partial class LoadTestBase<TFixture> : IClassFixture<TFixture>
 
         RecordLog();
 
-        Assert.Equal(state == EntityState.Detached ? 0 : 2, context.ChangeTracker.Entries().Count());
+        Assert.Equal(
+            state == EntityState.Detached ? 0 : 2,
+            context.ChangeTracker.Entries().Count()
+        );
 
         if (state != EntityState.Detached)
         {
@@ -1668,7 +1854,8 @@ public abstract partial class LoadTestBase<TFixture> : IClassFixture<TFixture>
     public virtual async Task Load_collection_using_Query_already_loaded(
         EntityState state,
         bool async,
-        CascadeTiming deleteOrphansTiming)
+        CascadeTiming deleteOrphansTiming
+    )
     {
         using var context = CreateContext();
         context.ChangeTracker.DeleteOrphansTiming = deleteOrphansTiming;
@@ -1725,7 +1912,10 @@ public abstract partial class LoadTestBase<TFixture> : IClassFixture<TFixture>
     [InlineData(EntityState.Deleted, false)]
     [InlineData(EntityState.Detached, true)]
     [InlineData(EntityState.Detached, false)]
-    public virtual async Task Load_many_to_one_reference_to_principal_using_Query_already_loaded(EntityState state, bool async)
+    public virtual async Task Load_many_to_one_reference_to_principal_using_Query_already_loaded(
+        EntityState state,
+        bool async
+    )
     {
         using var context = CreateContext();
         var child = context.Set<Child>().Include(e => e.Parent).Single(e => e.Id == 12);
@@ -1757,7 +1947,10 @@ public abstract partial class LoadTestBase<TFixture> : IClassFixture<TFixture>
                 Assert.Same(child, parent.Children.Single());
             }
 
-            Assert.Equal(state == EntityState.Detached ? 0 : 2, context.ChangeTracker.Entries().Count());
+            Assert.Equal(
+                state == EntityState.Detached ? 0 : 2,
+                context.ChangeTracker.Entries().Count()
+            );
         }
     }
 
@@ -1772,7 +1965,10 @@ public abstract partial class LoadTestBase<TFixture> : IClassFixture<TFixture>
     [InlineData(EntityState.Deleted, false)]
     [InlineData(EntityState.Detached, true)]
     [InlineData(EntityState.Detached, false)]
-    public virtual async Task Load_one_to_one_reference_to_principal_using_Query_already_loaded(EntityState state, bool async)
+    public virtual async Task Load_one_to_one_reference_to_principal_using_Query_already_loaded(
+        EntityState state,
+        bool async
+    )
     {
         using var context = CreateContext();
         var single = context.Set<Single>().Include(e => e.Parent).Single();
@@ -1805,7 +2001,10 @@ public abstract partial class LoadTestBase<TFixture> : IClassFixture<TFixture>
             }
         }
 
-        Assert.Equal(state == EntityState.Detached ? 0 : 2, context.ChangeTracker.Entries().Count());
+        Assert.Equal(
+            state == EntityState.Detached ? 0 : 2,
+            context.ChangeTracker.Entries().Count()
+        );
     }
 
     [ConditionalTheory]
@@ -1828,7 +2027,8 @@ public abstract partial class LoadTestBase<TFixture> : IClassFixture<TFixture>
     public virtual async Task Load_one_to_one_reference_to_dependent_using_Query_already_loaded(
         EntityState state,
         bool async,
-        CascadeTiming deleteOrphansTiming)
+        CascadeTiming deleteOrphansTiming
+    )
     {
         using var context = CreateContext();
         context.ChangeTracker.DeleteOrphansTiming = deleteOrphansTiming;
@@ -1853,7 +2053,10 @@ public abstract partial class LoadTestBase<TFixture> : IClassFixture<TFixture>
 
         RecordLog();
 
-        Assert.Equal(state == EntityState.Detached ? 0 : 2, context.ChangeTracker.Entries().Count());
+        Assert.Equal(
+            state == EntityState.Detached ? 0 : 2,
+            context.ChangeTracker.Entries().Count()
+        );
 
         Assert.NotNull(single);
 
@@ -1875,7 +2078,10 @@ public abstract partial class LoadTestBase<TFixture> : IClassFixture<TFixture>
     [InlineData(EntityState.Deleted, false)]
     [InlineData(EntityState.Detached, true)]
     [InlineData(EntityState.Detached, false)]
-    public virtual async Task Load_one_to_one_PK_to_PK_reference_to_principal_using_Query_already_loaded(EntityState state, bool async)
+    public virtual async Task Load_one_to_one_PK_to_PK_reference_to_principal_using_Query_already_loaded(
+        EntityState state,
+        bool async
+    )
     {
         using var context = CreateContext();
         var single = context.Set<SinglePkToPk>().Include(e => e.Parent).Single();
@@ -1897,7 +2103,10 @@ public abstract partial class LoadTestBase<TFixture> : IClassFixture<TFixture>
 
         RecordLog();
 
-        Assert.Equal(state == EntityState.Detached ? 0 : 2, context.ChangeTracker.Entries().Count());
+        Assert.Equal(
+            state == EntityState.Detached ? 0 : 2,
+            context.ChangeTracker.Entries().Count()
+        );
 
         Assert.NotNull(parent);
 
@@ -1919,7 +2128,10 @@ public abstract partial class LoadTestBase<TFixture> : IClassFixture<TFixture>
     [InlineData(EntityState.Deleted, false)]
     [InlineData(EntityState.Detached, true)]
     [InlineData(EntityState.Detached, false)]
-    public virtual async Task Load_one_to_one_PK_to_PK_reference_to_dependent_using_Query_already_loaded(EntityState state, bool async)
+    public virtual async Task Load_one_to_one_PK_to_PK_reference_to_dependent_using_Query_already_loaded(
+        EntityState state,
+        bool async
+    )
     {
         using var context = CreateContext();
         var parent = context.Set<Parent>().Include(e => e.SinglePkToPk).Single();
@@ -1943,7 +2155,10 @@ public abstract partial class LoadTestBase<TFixture> : IClassFixture<TFixture>
 
         Assert.NotNull(single);
 
-        Assert.Equal(state == EntityState.Detached ? 0 : 2, context.ChangeTracker.Entries().Count());
+        Assert.Equal(
+            state == EntityState.Detached ? 0 : 2,
+            context.ChangeTracker.Entries().Count()
+        );
 
         if (state != EntityState.Detached)
         {
@@ -1990,7 +2205,10 @@ public abstract partial class LoadTestBase<TFixture> : IClassFixture<TFixture>
         Assert.Equal(2, parent.Children.Count());
         Assert.All(parent.Children.Select(e => e.Parent), c => Assert.Same(parent, c));
 
-        Assert.Equal(state == EntityState.Detached ? 0 : 3, context.ChangeTracker.Entries().Count());
+        Assert.Equal(
+            state == EntityState.Detached ? 0 : 3,
+            context.ChangeTracker.Entries().Count()
+        );
     }
 
     [ConditionalTheory]
@@ -2004,7 +2222,10 @@ public abstract partial class LoadTestBase<TFixture> : IClassFixture<TFixture>
     [InlineData(EntityState.Deleted, false)]
     [InlineData(EntityState.Detached, true)]
     [InlineData(EntityState.Detached, false)]
-    public virtual async Task Load_many_to_one_reference_to_principal_untyped(EntityState state, bool async)
+    public virtual async Task Load_many_to_one_reference_to_principal_untyped(
+        EntityState state,
+        bool async
+    )
     {
         using var context = CreateContext();
         var child = context.Set<Child>().Single(e => e.Id == 12);
@@ -2030,7 +2251,10 @@ public abstract partial class LoadTestBase<TFixture> : IClassFixture<TFixture>
 
         RecordLog();
 
-        Assert.Equal(state == EntityState.Detached ? 0 : 2, context.ChangeTracker.Entries().Count());
+        Assert.Equal(
+            state == EntityState.Detached ? 0 : 2,
+            context.ChangeTracker.Entries().Count()
+        );
 
         if (state != EntityState.Deleted)
         {
@@ -2065,7 +2289,10 @@ public abstract partial class LoadTestBase<TFixture> : IClassFixture<TFixture>
     [InlineData(EntityState.Deleted, false)]
     [InlineData(EntityState.Detached, true)]
     [InlineData(EntityState.Detached, false)]
-    public virtual async Task Load_one_to_one_reference_to_principal_untyped(EntityState state, bool async)
+    public virtual async Task Load_one_to_one_reference_to_principal_untyped(
+        EntityState state,
+        bool async
+    )
     {
         using var context = CreateContext();
         var single = context.Set<Single>().Single();
@@ -2091,7 +2318,10 @@ public abstract partial class LoadTestBase<TFixture> : IClassFixture<TFixture>
 
         RecordLog();
 
-        Assert.Equal(state == EntityState.Detached ? 0 : 2, context.ChangeTracker.Entries().Count());
+        Assert.Equal(
+            state == EntityState.Detached ? 0 : 2,
+            context.ChangeTracker.Entries().Count()
+        );
 
         if (state != EntityState.Detached)
         {
@@ -2121,7 +2351,10 @@ public abstract partial class LoadTestBase<TFixture> : IClassFixture<TFixture>
     [InlineData(EntityState.Deleted, false)]
     [InlineData(EntityState.Detached, true)]
     [InlineData(EntityState.Detached, false)]
-    public virtual async Task Load_one_to_one_reference_to_dependent_untyped(EntityState state, bool async)
+    public virtual async Task Load_one_to_one_reference_to_dependent_untyped(
+        EntityState state,
+        bool async
+    )
     {
         using var context = CreateContext();
         var parent = context.Set<Parent>().Single();
@@ -2219,7 +2452,10 @@ public abstract partial class LoadTestBase<TFixture> : IClassFixture<TFixture>
     [InlineData(EntityState.Deleted, false)]
     [InlineData(EntityState.Detached, true)]
     [InlineData(EntityState.Detached, false)]
-    public virtual async Task Load_many_to_one_reference_to_principal_using_Query_untyped(EntityState state, bool async)
+    public virtual async Task Load_many_to_one_reference_to_principal_using_Query_untyped(
+        EntityState state,
+        bool async
+    )
     {
         using var context = CreateContext();
         var child = context.Set<Child>().Single(e => e.Id == 12);
@@ -2271,7 +2507,10 @@ public abstract partial class LoadTestBase<TFixture> : IClassFixture<TFixture>
     [InlineData(EntityState.Deleted, false)]
     [InlineData(EntityState.Detached, true)]
     [InlineData(EntityState.Detached, false)]
-    public virtual async Task Load_one_to_one_reference_to_principal_using_Query_untyped(EntityState state, bool async)
+    public virtual async Task Load_one_to_one_reference_to_principal_using_Query_untyped(
+        EntityState state,
+        bool async
+    )
     {
         using var context = CreateContext();
         var single = context.Set<Single>().Single();
@@ -2323,7 +2562,10 @@ public abstract partial class LoadTestBase<TFixture> : IClassFixture<TFixture>
     [InlineData(EntityState.Deleted, false)]
     [InlineData(EntityState.Detached, true)]
     [InlineData(EntityState.Detached, false)]
-    public virtual async Task Load_one_to_one_reference_to_dependent_using_Query_untyped(EntityState state, bool async)
+    public virtual async Task Load_one_to_one_reference_to_dependent_using_Query_untyped(
+        EntityState state,
+        bool async
+    )
     {
         using var context = CreateContext();
         var parent = context.Set<Parent>().Single();
@@ -2394,7 +2636,10 @@ public abstract partial class LoadTestBase<TFixture> : IClassFixture<TFixture>
         RecordLog();
 
         Assert.Empty(parent.Children);
-        Assert.Equal(state == EntityState.Detached ? 0 : 1, context.ChangeTracker.Entries().Count());
+        Assert.Equal(
+            state == EntityState.Detached ? 0 : 1,
+            context.ChangeTracker.Entries().Count()
+        );
     }
 
     [ConditionalTheory]
@@ -2408,7 +2653,10 @@ public abstract partial class LoadTestBase<TFixture> : IClassFixture<TFixture>
     [InlineData(EntityState.Deleted, false)]
     [InlineData(EntityState.Detached, true)]
     [InlineData(EntityState.Detached, false)]
-    public virtual async Task Load_many_to_one_reference_to_principal_not_found_untyped(EntityState state, bool async)
+    public virtual async Task Load_many_to_one_reference_to_principal_not_found_untyped(
+        EntityState state,
+        bool async
+    )
     {
         using var context = CreateContext();
         var child = context.Attach(new Child { Id = 767, ParentId = 787 }).Entity;
@@ -2434,7 +2682,10 @@ public abstract partial class LoadTestBase<TFixture> : IClassFixture<TFixture>
 
         RecordLog();
 
-        Assert.Equal(state == EntityState.Detached ? 0 : 1, context.ChangeTracker.Entries().Count());
+        Assert.Equal(
+            state == EntityState.Detached ? 0 : 1,
+            context.ChangeTracker.Entries().Count()
+        );
         Assert.Null(child.Parent);
     }
 
@@ -2449,7 +2700,10 @@ public abstract partial class LoadTestBase<TFixture> : IClassFixture<TFixture>
     [InlineData(EntityState.Deleted, false)]
     [InlineData(EntityState.Detached, true)]
     [InlineData(EntityState.Detached, false)]
-    public virtual async Task Load_one_to_one_reference_to_principal_not_found_untyped(EntityState state, bool async)
+    public virtual async Task Load_one_to_one_reference_to_principal_not_found_untyped(
+        EntityState state,
+        bool async
+    )
     {
         using var context = CreateContext();
         var single = context.Attach(new Single { Id = 767, ParentId = 787 }).Entity;
@@ -2475,7 +2729,10 @@ public abstract partial class LoadTestBase<TFixture> : IClassFixture<TFixture>
 
         RecordLog();
 
-        Assert.Equal(state == EntityState.Detached ? 0 : 1, context.ChangeTracker.Entries().Count());
+        Assert.Equal(
+            state == EntityState.Detached ? 0 : 1,
+            context.ChangeTracker.Entries().Count()
+        );
 
         Assert.Null(single.Parent);
     }
@@ -2491,7 +2748,10 @@ public abstract partial class LoadTestBase<TFixture> : IClassFixture<TFixture>
     [InlineData(EntityState.Deleted, false)]
     [InlineData(EntityState.Detached, true)]
     [InlineData(EntityState.Detached, false)]
-    public virtual async Task Load_one_to_one_reference_to_dependent_not_found_untyped(EntityState state, bool async)
+    public virtual async Task Load_one_to_one_reference_to_dependent_not_found_untyped(
+        EntityState state,
+        bool async
+    )
     {
         using var context = CreateContext();
         var parent = context.Attach(new Parent { Id = 767, AlternateId = "NewRoot" }).Entity;
@@ -2517,7 +2777,10 @@ public abstract partial class LoadTestBase<TFixture> : IClassFixture<TFixture>
 
         RecordLog();
 
-        Assert.Equal(state == EntityState.Detached ? 0 : 1, context.ChangeTracker.Entries().Count());
+        Assert.Equal(
+            state == EntityState.Detached ? 0 : 1,
+            context.ChangeTracker.Entries().Count()
+        );
 
         Assert.Null(parent.Single);
     }
@@ -2533,7 +2796,10 @@ public abstract partial class LoadTestBase<TFixture> : IClassFixture<TFixture>
     [InlineData(EntityState.Deleted, false)]
     [InlineData(EntityState.Detached, true)]
     [InlineData(EntityState.Detached, false)]
-    public virtual async Task Load_collection_using_Query_not_found_untyped(EntityState state, bool async)
+    public virtual async Task Load_collection_using_Query_not_found_untyped(
+        EntityState state,
+        bool async
+    )
     {
         using var context = CreateContext();
         var parent = context.Attach(new Parent { Id = 767, AlternateId = "NewRoot" }).Entity;
@@ -2558,7 +2824,10 @@ public abstract partial class LoadTestBase<TFixture> : IClassFixture<TFixture>
         Assert.Empty(children);
         Assert.Empty(parent.Children);
 
-        Assert.Equal(state == EntityState.Detached ? 0 : 1, context.ChangeTracker.Entries().Count());
+        Assert.Equal(
+            state == EntityState.Detached ? 0 : 1,
+            context.ChangeTracker.Entries().Count()
+        );
     }
 
     [ConditionalTheory]
@@ -2572,7 +2841,10 @@ public abstract partial class LoadTestBase<TFixture> : IClassFixture<TFixture>
     [InlineData(EntityState.Deleted, false)]
     [InlineData(EntityState.Detached, true)]
     [InlineData(EntityState.Detached, false)]
-    public virtual async Task Load_many_to_one_reference_to_principal_using_Query_not_found_untyped(EntityState state, bool async)
+    public virtual async Task Load_many_to_one_reference_to_principal_using_Query_not_found_untyped(
+        EntityState state,
+        bool async
+    )
     {
         using var context = CreateContext();
         var child = context.Attach(new Child { Id = 767, ParentId = 787 }).Entity;
@@ -2597,7 +2869,10 @@ public abstract partial class LoadTestBase<TFixture> : IClassFixture<TFixture>
         Assert.Null(parent);
         Assert.Null(child.Parent);
 
-        Assert.Equal(state == EntityState.Detached ? 0 : 1, context.ChangeTracker.Entries().Count());
+        Assert.Equal(
+            state == EntityState.Detached ? 0 : 1,
+            context.ChangeTracker.Entries().Count()
+        );
     }
 
     [ConditionalTheory]
@@ -2611,7 +2886,10 @@ public abstract partial class LoadTestBase<TFixture> : IClassFixture<TFixture>
     [InlineData(EntityState.Deleted, false)]
     [InlineData(EntityState.Detached, true)]
     [InlineData(EntityState.Detached, false)]
-    public virtual async Task Load_one_to_one_reference_to_principal_using_Query_not_found_untyped(EntityState state, bool async)
+    public virtual async Task Load_one_to_one_reference_to_principal_using_Query_not_found_untyped(
+        EntityState state,
+        bool async
+    )
     {
         using var context = CreateContext();
         var single = context.Attach(new Single { Id = 767, ParentId = 787 }).Entity;
@@ -2636,7 +2914,10 @@ public abstract partial class LoadTestBase<TFixture> : IClassFixture<TFixture>
         Assert.Null(parent);
         Assert.Null(single.Parent);
 
-        Assert.Equal(state == EntityState.Detached ? 0 : 1, context.ChangeTracker.Entries().Count());
+        Assert.Equal(
+            state == EntityState.Detached ? 0 : 1,
+            context.ChangeTracker.Entries().Count()
+        );
     }
 
     [ConditionalTheory]
@@ -2650,7 +2931,10 @@ public abstract partial class LoadTestBase<TFixture> : IClassFixture<TFixture>
     [InlineData(EntityState.Deleted, false)]
     [InlineData(EntityState.Detached, true)]
     [InlineData(EntityState.Detached, false)]
-    public virtual async Task Load_one_to_one_reference_to_dependent_using_Query_not_found_untyped(EntityState state, bool async)
+    public virtual async Task Load_one_to_one_reference_to_dependent_using_Query_not_found_untyped(
+        EntityState state,
+        bool async
+    )
     {
         using var context = CreateContext();
         var parent = context.Attach(new Parent { Id = 767, AlternateId = "NewRoot" }).Entity;
@@ -2675,7 +2959,10 @@ public abstract partial class LoadTestBase<TFixture> : IClassFixture<TFixture>
         Assert.Null(single);
         Assert.Null(parent.Single);
 
-        Assert.Equal(state == EntityState.Detached ? 0 : 1, context.ChangeTracker.Entries().Count());
+        Assert.Equal(
+            state == EntityState.Detached ? 0 : 1,
+            context.ChangeTracker.Entries().Count()
+        );
     }
 
     [ConditionalTheory]
@@ -2695,7 +2982,11 @@ public abstract partial class LoadTestBase<TFixture> : IClassFixture<TFixture>
     [InlineData(EntityState.Deleted, false, CascadeTiming.OnSaveChanges)]
     [InlineData(EntityState.Detached, true, CascadeTiming.OnSaveChanges)]
     [InlineData(EntityState.Detached, false, CascadeTiming.OnSaveChanges)]
-    public virtual async Task Load_collection_already_loaded_untyped(EntityState state, bool async, CascadeTiming deleteOrphansTiming)
+    public virtual async Task Load_collection_already_loaded_untyped(
+        EntityState state,
+        bool async,
+        CascadeTiming deleteOrphansTiming
+    )
     {
         using var context = CreateContext();
         context.ChangeTracker.DeleteOrphansTiming = deleteOrphansTiming;
@@ -2731,7 +3022,10 @@ public abstract partial class LoadTestBase<TFixture> : IClassFixture<TFixture>
         Assert.Equal(2, parent.Children.Count());
         Assert.All(parent.Children.Select(e => e.Parent), c => Assert.Same(parent, c));
 
-        Assert.Equal(state == EntityState.Detached ? 0 : 3, context.ChangeTracker.Entries().Count());
+        Assert.Equal(
+            state == EntityState.Detached ? 0 : 3,
+            context.ChangeTracker.Entries().Count()
+        );
     }
 
     [ConditionalTheory]
@@ -2745,7 +3039,10 @@ public abstract partial class LoadTestBase<TFixture> : IClassFixture<TFixture>
     [InlineData(EntityState.Deleted, false)]
     [InlineData(EntityState.Detached, true)]
     [InlineData(EntityState.Detached, false)]
-    public virtual async Task Load_many_to_one_reference_to_principal_already_loaded_untyped(EntityState state, bool async)
+    public virtual async Task Load_many_to_one_reference_to_principal_already_loaded_untyped(
+        EntityState state,
+        bool async
+    )
     {
         using var context = CreateContext();
         var child = context.Set<Child>().Include(e => e.Parent).Single(e => e.Id == 12);
@@ -2772,7 +3069,10 @@ public abstract partial class LoadTestBase<TFixture> : IClassFixture<TFixture>
 
         RecordLog();
 
-        Assert.Equal(state == EntityState.Detached ? 0 : 2, context.ChangeTracker.Entries().Count());
+        Assert.Equal(
+            state == EntityState.Detached ? 0 : 2,
+            context.ChangeTracker.Entries().Count()
+        );
 
         if (state != EntityState.Detached && state != EntityState.Deleted)
         {
@@ -2794,7 +3094,10 @@ public abstract partial class LoadTestBase<TFixture> : IClassFixture<TFixture>
     [InlineData(EntityState.Deleted, false)]
     [InlineData(EntityState.Detached, true)]
     [InlineData(EntityState.Detached, false)]
-    public virtual async Task Load_one_to_one_reference_to_principal_already_loaded_untyped(EntityState state, bool async)
+    public virtual async Task Load_one_to_one_reference_to_principal_already_loaded_untyped(
+        EntityState state,
+        bool async
+    )
     {
         using var context = CreateContext();
         var single = context.Set<Single>().Include(e => e.Parent).Single();
@@ -2821,7 +3124,10 @@ public abstract partial class LoadTestBase<TFixture> : IClassFixture<TFixture>
 
         RecordLog();
 
-        Assert.Equal(state == EntityState.Detached ? 0 : 2, context.ChangeTracker.Entries().Count());
+        Assert.Equal(
+            state == EntityState.Detached ? 0 : 2,
+            context.ChangeTracker.Entries().Count()
+        );
 
         if (state != EntityState.Detached && state != EntityState.Deleted)
         {
@@ -2852,7 +3158,8 @@ public abstract partial class LoadTestBase<TFixture> : IClassFixture<TFixture>
     public virtual async Task Load_one_to_one_reference_to_dependent_already_loaded_untyped(
         EntityState state,
         bool async,
-        CascadeTiming deleteOrphansTiming)
+        CascadeTiming deleteOrphansTiming
+    )
     {
         using var context = CreateContext();
         context.ChangeTracker.DeleteOrphansTiming = deleteOrphansTiming;
@@ -2881,7 +3188,10 @@ public abstract partial class LoadTestBase<TFixture> : IClassFixture<TFixture>
 
         RecordLog();
 
-        Assert.Equal(state == EntityState.Detached ? 0 : 2, context.ChangeTracker.Entries().Count());
+        Assert.Equal(
+            state == EntityState.Detached ? 0 : 2,
+            context.ChangeTracker.Entries().Count()
+        );
 
         if (state != EntityState.Detached)
         {
@@ -2912,7 +3222,8 @@ public abstract partial class LoadTestBase<TFixture> : IClassFixture<TFixture>
     public virtual async Task Load_collection_using_Query_already_loaded_untyped(
         EntityState state,
         bool async,
-        CascadeTiming deleteOrphansTiming)
+        CascadeTiming deleteOrphansTiming
+    )
     {
         using var context = CreateContext();
         context.ChangeTracker.DeleteOrphansTiming = deleteOrphansTiming;
@@ -2970,7 +3281,10 @@ public abstract partial class LoadTestBase<TFixture> : IClassFixture<TFixture>
     [InlineData(EntityState.Deleted, false)]
     [InlineData(EntityState.Detached, true)]
     [InlineData(EntityState.Detached, false)]
-    public virtual async Task Load_many_to_one_reference_to_principal_using_Query_already_loaded_untyped(EntityState state, bool async)
+    public virtual async Task Load_many_to_one_reference_to_principal_using_Query_already_loaded_untyped(
+        EntityState state,
+        bool async
+    )
     {
         using var context = CreateContext();
         var child = context.Set<Child>().Include(e => e.Parent).Single(e => e.Id == 12);
@@ -3003,7 +3317,10 @@ public abstract partial class LoadTestBase<TFixture> : IClassFixture<TFixture>
                 Assert.Same(child, ((Parent)parent).Children.Single());
             }
 
-            Assert.Equal(state == EntityState.Detached ? 0 : 2, context.ChangeTracker.Entries().Count());
+            Assert.Equal(
+                state == EntityState.Detached ? 0 : 2,
+                context.ChangeTracker.Entries().Count()
+            );
         }
     }
 
@@ -3018,7 +3335,10 @@ public abstract partial class LoadTestBase<TFixture> : IClassFixture<TFixture>
     [InlineData(EntityState.Deleted, false)]
     [InlineData(EntityState.Detached, true)]
     [InlineData(EntityState.Detached, false)]
-    public virtual async Task Load_one_to_one_reference_to_principal_using_Query_already_loaded_untyped(EntityState state, bool async)
+    public virtual async Task Load_one_to_one_reference_to_principal_using_Query_already_loaded_untyped(
+        EntityState state,
+        bool async
+    )
     {
         using var context = CreateContext();
         var single = context.Set<Single>().Include(e => e.Parent).Single();
@@ -3052,7 +3372,10 @@ public abstract partial class LoadTestBase<TFixture> : IClassFixture<TFixture>
             }
         }
 
-        Assert.Equal(state == EntityState.Detached ? 0 : 2, context.ChangeTracker.Entries().Count());
+        Assert.Equal(
+            state == EntityState.Detached ? 0 : 2,
+            context.ChangeTracker.Entries().Count()
+        );
     }
 
     [ConditionalTheory]
@@ -3075,7 +3398,8 @@ public abstract partial class LoadTestBase<TFixture> : IClassFixture<TFixture>
     public virtual async Task Load_one_to_one_reference_to_dependent_using_Query_already_loaded_untyped(
         EntityState state,
         bool async,
-        CascadeTiming deleteOrphansTiming)
+        CascadeTiming deleteOrphansTiming
+    )
     {
         using var context = CreateContext();
         context.ChangeTracker.DeleteOrphansTiming = deleteOrphansTiming;
@@ -3157,7 +3481,10 @@ public abstract partial class LoadTestBase<TFixture> : IClassFixture<TFixture>
         Assert.Equal(2, parent.ChildrenAk.Count());
         Assert.All(parent.ChildrenAk.Select(e => e.Parent), c => Assert.Same(parent, c));
 
-        Assert.Equal(state == EntityState.Detached ? 0 : 3, context.ChangeTracker.Entries().Count());
+        Assert.Equal(
+            state == EntityState.Detached ? 0 : 3,
+            context.ChangeTracker.Entries().Count()
+        );
     }
 
     [ConditionalTheory]
@@ -3171,7 +3498,10 @@ public abstract partial class LoadTestBase<TFixture> : IClassFixture<TFixture>
     [InlineData(EntityState.Deleted, false)]
     [InlineData(EntityState.Detached, true)]
     [InlineData(EntityState.Detached, false)]
-    public virtual async Task Load_many_to_one_reference_to_principal_alternate_key(EntityState state, bool async)
+    public virtual async Task Load_many_to_one_reference_to_principal_alternate_key(
+        EntityState state,
+        bool async
+    )
     {
         using var context = CreateContext();
         var child = context.Set<ChildAk>().Single(e => e.Id == 32);
@@ -3197,7 +3527,10 @@ public abstract partial class LoadTestBase<TFixture> : IClassFixture<TFixture>
 
         RecordLog();
 
-        Assert.Equal(state == EntityState.Detached ? 0 : 2, context.ChangeTracker.Entries().Count());
+        Assert.Equal(
+            state == EntityState.Detached ? 0 : 2,
+            context.ChangeTracker.Entries().Count()
+        );
 
         if (state != EntityState.Detached)
         {
@@ -3227,7 +3560,10 @@ public abstract partial class LoadTestBase<TFixture> : IClassFixture<TFixture>
     [InlineData(EntityState.Deleted, false)]
     [InlineData(EntityState.Detached, true)]
     [InlineData(EntityState.Detached, false)]
-    public virtual async Task Load_one_to_one_reference_to_principal_alternate_key(EntityState state, bool async)
+    public virtual async Task Load_one_to_one_reference_to_principal_alternate_key(
+        EntityState state,
+        bool async
+    )
     {
         using var context = CreateContext();
         var single = context.Set<SingleAk>().Single();
@@ -3253,7 +3589,10 @@ public abstract partial class LoadTestBase<TFixture> : IClassFixture<TFixture>
 
         RecordLog();
 
-        Assert.Equal(state == EntityState.Detached ? 0 : 2, context.ChangeTracker.Entries().Count());
+        Assert.Equal(
+            state == EntityState.Detached ? 0 : 2,
+            context.ChangeTracker.Entries().Count()
+        );
 
         if (state != EntityState.Detached)
         {
@@ -3283,7 +3622,10 @@ public abstract partial class LoadTestBase<TFixture> : IClassFixture<TFixture>
     [InlineData(EntityState.Deleted, false)]
     [InlineData(EntityState.Detached, true)]
     [InlineData(EntityState.Detached, false)]
-    public virtual async Task Load_one_to_one_reference_to_dependent_alternate_key(EntityState state, bool async)
+    public virtual async Task Load_one_to_one_reference_to_dependent_alternate_key(
+        EntityState state,
+        bool async
+    )
     {
         using var context = CreateContext();
         var parent = context.Set<Parent>().Single();
@@ -3331,7 +3673,10 @@ public abstract partial class LoadTestBase<TFixture> : IClassFixture<TFixture>
     [InlineData(EntityState.Deleted, false)]
     [InlineData(EntityState.Detached, true)]
     [InlineData(EntityState.Detached, false)]
-    public virtual async Task Load_collection_using_Query_alternate_key(EntityState state, bool async)
+    public virtual async Task Load_collection_using_Query_alternate_key(
+        EntityState state,
+        bool async
+    )
     {
         using var context = CreateContext();
         var parent = context.Set<Parent>().Single();
@@ -3380,7 +3725,10 @@ public abstract partial class LoadTestBase<TFixture> : IClassFixture<TFixture>
     [InlineData(EntityState.Deleted, false)]
     [InlineData(EntityState.Detached, true)]
     [InlineData(EntityState.Detached, false)]
-    public virtual async Task Load_many_to_one_reference_to_principal_using_Query_alternate_key(EntityState state, bool async)
+    public virtual async Task Load_many_to_one_reference_to_principal_using_Query_alternate_key(
+        EntityState state,
+        bool async
+    )
     {
         using var context = CreateContext();
         var child = context.Set<ChildAk>().Single(e => e.Id == 32);
@@ -3431,7 +3779,10 @@ public abstract partial class LoadTestBase<TFixture> : IClassFixture<TFixture>
     [InlineData(EntityState.Deleted, false)]
     [InlineData(EntityState.Detached, true)]
     [InlineData(EntityState.Detached, false)]
-    public virtual async Task Load_one_to_one_reference_to_principal_using_Query_alternate_key(EntityState state, bool async)
+    public virtual async Task Load_one_to_one_reference_to_principal_using_Query_alternate_key(
+        EntityState state,
+        bool async
+    )
     {
         using var context = CreateContext();
         var single = context.Set<SingleAk>().Single();
@@ -3482,7 +3833,10 @@ public abstract partial class LoadTestBase<TFixture> : IClassFixture<TFixture>
     [InlineData(EntityState.Deleted, false)]
     [InlineData(EntityState.Detached, true)]
     [InlineData(EntityState.Detached, false)]
-    public virtual async Task Load_one_to_one_reference_to_dependent_using_Query_alternate_key(EntityState state, bool async)
+    public virtual async Task Load_one_to_one_reference_to_dependent_using_Query_alternate_key(
+        EntityState state,
+        bool async
+    )
     {
         using var context = CreateContext();
         var parent = context.Set<Parent>().Single();
@@ -3525,7 +3879,10 @@ public abstract partial class LoadTestBase<TFixture> : IClassFixture<TFixture>
     [InlineData(EntityState.Deleted, false)]
     [InlineData(EntityState.Detached, true)]
     [InlineData(EntityState.Detached, false)]
-    public virtual async Task Load_many_to_one_reference_to_principal_null_FK_alternate_key(EntityState state, bool async)
+    public virtual async Task Load_many_to_one_reference_to_principal_null_FK_alternate_key(
+        EntityState state,
+        bool async
+    )
     {
         using var context = CreateContext();
         var child = context.Attach(new ChildAk { Id = 767, ParentId = null }).Entity;
@@ -3551,7 +3908,10 @@ public abstract partial class LoadTestBase<TFixture> : IClassFixture<TFixture>
 
         RecordLog();
 
-        Assert.Equal(state == EntityState.Detached ? 0 : 1, context.ChangeTracker.Entries().Count());
+        Assert.Equal(
+            state == EntityState.Detached ? 0 : 1,
+            context.ChangeTracker.Entries().Count()
+        );
         Assert.Null(child.Parent);
     }
 
@@ -3566,7 +3926,10 @@ public abstract partial class LoadTestBase<TFixture> : IClassFixture<TFixture>
     [InlineData(EntityState.Deleted, false)]
     [InlineData(EntityState.Detached, true)]
     [InlineData(EntityState.Detached, false)]
-    public virtual async Task Load_one_to_one_reference_to_principal_null_FK_alternate_key(EntityState state, bool async)
+    public virtual async Task Load_one_to_one_reference_to_principal_null_FK_alternate_key(
+        EntityState state,
+        bool async
+    )
     {
         using var context = CreateContext();
         var single = context.Attach(new SingleAk { Id = 767, ParentId = null }).Entity;
@@ -3592,7 +3955,10 @@ public abstract partial class LoadTestBase<TFixture> : IClassFixture<TFixture>
 
         RecordLog();
 
-        Assert.Equal(state == EntityState.Detached ? 0 : 1, context.ChangeTracker.Entries().Count());
+        Assert.Equal(
+            state == EntityState.Detached ? 0 : 1,
+            context.ChangeTracker.Entries().Count()
+        );
 
         Assert.Null(single.Parent);
     }
@@ -3608,7 +3974,10 @@ public abstract partial class LoadTestBase<TFixture> : IClassFixture<TFixture>
     [InlineData(EntityState.Deleted, false)]
     [InlineData(EntityState.Detached, true)]
     [InlineData(EntityState.Detached, false)]
-    public virtual async Task Load_many_to_one_reference_to_principal_using_Query_null_FK_alternate_key(EntityState state, bool async)
+    public virtual async Task Load_many_to_one_reference_to_principal_using_Query_null_FK_alternate_key(
+        EntityState state,
+        bool async
+    )
     {
         using var context = CreateContext();
         var child = context.Attach(new ChildAk { Id = 767, ParentId = null }).Entity;
@@ -3632,7 +4001,10 @@ public abstract partial class LoadTestBase<TFixture> : IClassFixture<TFixture>
         Assert.Null(parent);
         Assert.Null(child.Parent);
 
-        Assert.Equal(state == EntityState.Detached ? 0 : 1, context.ChangeTracker.Entries().Count());
+        Assert.Equal(
+            state == EntityState.Detached ? 0 : 1,
+            context.ChangeTracker.Entries().Count()
+        );
     }
 
     [ConditionalTheory]
@@ -3646,7 +4018,10 @@ public abstract partial class LoadTestBase<TFixture> : IClassFixture<TFixture>
     [InlineData(EntityState.Deleted, false)]
     [InlineData(EntityState.Detached, true)]
     [InlineData(EntityState.Detached, false)]
-    public virtual async Task Load_one_to_one_reference_to_principal_using_Query_null_FK_alternate_key(EntityState state, bool async)
+    public virtual async Task Load_one_to_one_reference_to_principal_using_Query_null_FK_alternate_key(
+        EntityState state,
+        bool async
+    )
     {
         using var context = CreateContext();
         var single = context.Attach(new SingleAk { Id = 767, ParentId = null }).Entity;
@@ -3670,7 +4045,10 @@ public abstract partial class LoadTestBase<TFixture> : IClassFixture<TFixture>
         Assert.Null(parent);
         Assert.Null(single.Parent);
 
-        Assert.Equal(state == EntityState.Detached ? 0 : 1, context.ChangeTracker.Entries().Count());
+        Assert.Equal(
+            state == EntityState.Detached ? 0 : 1,
+            context.ChangeTracker.Entries().Count()
+        );
     }
 
     [ConditionalTheory]
@@ -3713,7 +4091,10 @@ public abstract partial class LoadTestBase<TFixture> : IClassFixture<TFixture>
         Assert.Equal(2, parent.ChildrenShadowFk.Count());
         Assert.All(parent.ChildrenShadowFk.Select(e => e.Parent), c => Assert.Same(parent, c));
 
-        Assert.Equal(state == EntityState.Detached ? 0 : 3, context.ChangeTracker.Entries().Count());
+        Assert.Equal(
+            state == EntityState.Detached ? 0 : 3,
+            context.ChangeTracker.Entries().Count()
+        );
     }
 
     [ConditionalTheory]
@@ -3727,7 +4108,10 @@ public abstract partial class LoadTestBase<TFixture> : IClassFixture<TFixture>
     [InlineData(EntityState.Deleted, false)]
     [InlineData(EntityState.Detached, true)]
     [InlineData(EntityState.Detached, false)]
-    public virtual async Task Load_many_to_one_reference_to_principal_shadow_fk(EntityState state, bool async)
+    public virtual async Task Load_many_to_one_reference_to_principal_shadow_fk(
+        EntityState state,
+        bool async
+    )
     {
         using var context = CreateContext();
         var child = context.Set<ChildShadowFk>().Single(e => e.Id == 52);
@@ -3746,13 +4130,19 @@ public abstract partial class LoadTestBase<TFixture> : IClassFixture<TFixture>
             {
                 Assert.Equal(
                     CoreStrings.CannotLoadDetachedShadow("Parent", "ChildShadowFk"),
-                    (await Assert.ThrowsAsync<InvalidOperationException>(() => referenceEntry.LoadAsync())).Message);
+                    (
+                        await Assert.ThrowsAsync<InvalidOperationException>(() =>
+                            referenceEntry.LoadAsync()
+                        )
+                    ).Message
+                );
             }
             else
             {
                 Assert.Equal(
                     CoreStrings.CannotLoadDetachedShadow("Parent", "ChildShadowFk"),
-                    Assert.Throws<InvalidOperationException>(() => referenceEntry.Load()).Message);
+                    Assert.Throws<InvalidOperationException>(() => referenceEntry.Load()).Message
+                );
             }
         }
         else
@@ -3798,7 +4188,10 @@ public abstract partial class LoadTestBase<TFixture> : IClassFixture<TFixture>
     [InlineData(EntityState.Deleted, false)]
     [InlineData(EntityState.Detached, true)]
     [InlineData(EntityState.Detached, false)]
-    public virtual async Task Load_one_to_one_reference_to_principal_shadow_fk(EntityState state, bool async)
+    public virtual async Task Load_one_to_one_reference_to_principal_shadow_fk(
+        EntityState state,
+        bool async
+    )
     {
         using var context = CreateContext();
         var single = context.Set<SingleShadowFk>().Single();
@@ -3815,8 +4208,8 @@ public abstract partial class LoadTestBase<TFixture> : IClassFixture<TFixture>
         {
             Assert.Equal(
                 CoreStrings.CannotLoadDetachedShadow("Parent", "SingleShadowFk"),
-                (await Assert.ThrowsAsync<InvalidOperationException>(
-                    async () =>
+                (
+                    await Assert.ThrowsAsync<InvalidOperationException>(async () =>
                     {
                         if (async)
                         {
@@ -3826,7 +4219,9 @@ public abstract partial class LoadTestBase<TFixture> : IClassFixture<TFixture>
                         {
                             referenceEntry.Load();
                         }
-                    })).Message);
+                    })
+                ).Message
+            );
         }
         else
         {
@@ -3871,7 +4266,10 @@ public abstract partial class LoadTestBase<TFixture> : IClassFixture<TFixture>
     [InlineData(EntityState.Deleted, false)]
     [InlineData(EntityState.Detached, true)]
     [InlineData(EntityState.Detached, false)]
-    public virtual async Task Load_one_to_one_reference_to_dependent_shadow_fk(EntityState state, bool async)
+    public virtual async Task Load_one_to_one_reference_to_dependent_shadow_fk(
+        EntityState state,
+        bool async
+    )
     {
         using var context = CreateContext();
         var parent = context.Set<Parent>().Single();
@@ -3968,7 +4366,10 @@ public abstract partial class LoadTestBase<TFixture> : IClassFixture<TFixture>
     [InlineData(EntityState.Deleted, false)]
     [InlineData(EntityState.Detached, true)]
     [InlineData(EntityState.Detached, false)]
-    public virtual async Task Load_many_to_one_reference_to_principal_using_Query_shadow_fk(EntityState state, bool async)
+    public virtual async Task Load_many_to_one_reference_to_principal_using_Query_shadow_fk(
+        EntityState state,
+        bool async
+    )
     {
         using var context = CreateContext();
         var child = context.Set<ChildShadowFk>().Single(e => e.Id == 52);
@@ -3985,13 +4386,15 @@ public abstract partial class LoadTestBase<TFixture> : IClassFixture<TFixture>
         {
             Assert.Equal(
                 CoreStrings.CannotLoadDetachedShadow("Parent", "ChildShadowFk"),
-                (await Assert.ThrowsAsync<InvalidOperationException>(
-                    async () =>
+                (
+                    await Assert.ThrowsAsync<InvalidOperationException>(async () =>
                     {
                         _ = async
                             ? await referenceEntry.Query().SingleOrDefaultAsync()
                             : referenceEntry.Query().SingleOrDefault();
-                    })).Message);
+                    })
+                ).Message
+            );
         }
         else
         {
@@ -4031,7 +4434,10 @@ public abstract partial class LoadTestBase<TFixture> : IClassFixture<TFixture>
     [InlineData(EntityState.Deleted, false)]
     [InlineData(EntityState.Detached, true)]
     [InlineData(EntityState.Detached, false)]
-    public virtual async Task Load_one_to_one_reference_to_principal_using_Query_shadow_fk(EntityState state, bool async)
+    public virtual async Task Load_one_to_one_reference_to_principal_using_Query_shadow_fk(
+        EntityState state,
+        bool async
+    )
     {
         using var context = CreateContext();
         var single = context.Set<SingleShadowFk>().Single();
@@ -4048,13 +4454,15 @@ public abstract partial class LoadTestBase<TFixture> : IClassFixture<TFixture>
         {
             Assert.Equal(
                 CoreStrings.CannotLoadDetachedShadow("Parent", "SingleShadowFk"),
-                (await Assert.ThrowsAsync<InvalidOperationException>(
-                    async () =>
+                (
+                    await Assert.ThrowsAsync<InvalidOperationException>(async () =>
                     {
                         _ = async
                             ? await referenceEntry.Query().SingleAsync()
                             : referenceEntry.Query().Single();
-                    })).Message);
+                    })
+                ).Message
+            );
         }
         else
         {
@@ -4094,7 +4502,10 @@ public abstract partial class LoadTestBase<TFixture> : IClassFixture<TFixture>
     [InlineData(EntityState.Deleted, false)]
     [InlineData(EntityState.Detached, true)]
     [InlineData(EntityState.Detached, false)]
-    public virtual async Task Load_one_to_one_reference_to_dependent_using_Query_shadow_fk(EntityState state, bool async)
+    public virtual async Task Load_one_to_one_reference_to_dependent_using_Query_shadow_fk(
+        EntityState state,
+        bool async
+    )
     {
         using var context = CreateContext();
         var parent = context.Set<Parent>().Single();
@@ -4137,7 +4548,10 @@ public abstract partial class LoadTestBase<TFixture> : IClassFixture<TFixture>
     [InlineData(EntityState.Deleted, false)]
     [InlineData(EntityState.Detached, true)]
     [InlineData(EntityState.Detached, false)]
-    public virtual async Task Load_many_to_one_reference_to_principal_null_FK_shadow_fk(EntityState state, bool async)
+    public virtual async Task Load_many_to_one_reference_to_principal_null_FK_shadow_fk(
+        EntityState state,
+        bool async
+    )
     {
         using var context = CreateContext();
         var child = context.Attach(new ChildShadowFk { Id = 767 }).Entity;
@@ -4157,13 +4571,19 @@ public abstract partial class LoadTestBase<TFixture> : IClassFixture<TFixture>
             {
                 Assert.Equal(
                     CoreStrings.CannotLoadDetachedShadow("Parent", "ChildShadowFk"),
-                    (await Assert.ThrowsAsync<InvalidOperationException>(() => referenceEntry.LoadAsync())).Message);
+                    (
+                        await Assert.ThrowsAsync<InvalidOperationException>(() =>
+                            referenceEntry.LoadAsync()
+                        )
+                    ).Message
+                );
             }
             else
             {
                 Assert.Equal(
                     CoreStrings.CannotLoadDetachedShadow("Parent", "ChildShadowFk"),
-                    Assert.Throws<InvalidOperationException>(() => referenceEntry.Load()).Message);
+                    Assert.Throws<InvalidOperationException>(() => referenceEntry.Load()).Message
+                );
             }
         }
         else
@@ -4181,7 +4601,10 @@ public abstract partial class LoadTestBase<TFixture> : IClassFixture<TFixture>
 
             RecordLog();
 
-            Assert.Equal(state == EntityState.Detached ? 0 : 1, context.ChangeTracker.Entries().Count());
+            Assert.Equal(
+                state == EntityState.Detached ? 0 : 1,
+                context.ChangeTracker.Entries().Count()
+            );
             Assert.Null(child.Parent);
         }
     }
@@ -4197,7 +4620,10 @@ public abstract partial class LoadTestBase<TFixture> : IClassFixture<TFixture>
     [InlineData(EntityState.Deleted, false)]
     [InlineData(EntityState.Detached, true)]
     [InlineData(EntityState.Detached, false)]
-    public virtual async Task Load_one_to_one_reference_to_principal_null_FK_shadow_fk(EntityState state, bool async)
+    public virtual async Task Load_one_to_one_reference_to_principal_null_FK_shadow_fk(
+        EntityState state,
+        bool async
+    )
     {
         using var context = CreateContext();
         var single = context.Attach(new SingleShadowFk { Id = 767 }).Entity;
@@ -4215,8 +4641,8 @@ public abstract partial class LoadTestBase<TFixture> : IClassFixture<TFixture>
         {
             Assert.Equal(
                 CoreStrings.CannotLoadDetachedShadow("Parent", "SingleShadowFk"),
-                (await Assert.ThrowsAsync<InvalidOperationException>(
-                    async () =>
+                (
+                    await Assert.ThrowsAsync<InvalidOperationException>(async () =>
                     {
                         if (async)
                         {
@@ -4226,7 +4652,9 @@ public abstract partial class LoadTestBase<TFixture> : IClassFixture<TFixture>
                         {
                             referenceEntry.Load();
                         }
-                    })).Message);
+                    })
+                ).Message
+            );
         }
         else
         {
@@ -4243,7 +4671,10 @@ public abstract partial class LoadTestBase<TFixture> : IClassFixture<TFixture>
 
             RecordLog();
 
-            Assert.Equal(state == EntityState.Detached ? 0 : 1, context.ChangeTracker.Entries().Count());
+            Assert.Equal(
+                state == EntityState.Detached ? 0 : 1,
+                context.ChangeTracker.Entries().Count()
+            );
 
             Assert.Null(single.Parent);
         }
@@ -4260,7 +4691,10 @@ public abstract partial class LoadTestBase<TFixture> : IClassFixture<TFixture>
     [InlineData(EntityState.Deleted, false)]
     [InlineData(EntityState.Detached, true)]
     [InlineData(EntityState.Detached, false)]
-    public virtual async Task Load_many_to_one_reference_to_principal_using_Query_null_FK_shadow_fk(EntityState state, bool async)
+    public virtual async Task Load_many_to_one_reference_to_principal_using_Query_null_FK_shadow_fk(
+        EntityState state,
+        bool async
+    )
     {
         using var context = CreateContext();
         var child = context.Attach(new ChildShadowFk { Id = 767 }).Entity;
@@ -4278,13 +4712,15 @@ public abstract partial class LoadTestBase<TFixture> : IClassFixture<TFixture>
         {
             Assert.Equal(
                 CoreStrings.CannotLoadDetachedShadow("Parent", "ChildShadowFk"),
-                (await Assert.ThrowsAsync<InvalidOperationException>(
-                    async () =>
+                (
+                    await Assert.ThrowsAsync<InvalidOperationException>(async () =>
                     {
                         _ = async
                             ? await referenceEntry.Query().SingleOrDefaultAsync()
                             : referenceEntry.Query().SingleOrDefault();
-                    })).Message);
+                    })
+                ).Message
+            );
         }
         else
         {
@@ -4314,7 +4750,10 @@ public abstract partial class LoadTestBase<TFixture> : IClassFixture<TFixture>
     [InlineData(EntityState.Deleted, false)]
     [InlineData(EntityState.Detached, true)]
     [InlineData(EntityState.Detached, false)]
-    public virtual async Task Load_one_to_one_reference_to_principal_using_Query_null_FK_shadow_fk(EntityState state, bool async)
+    public virtual async Task Load_one_to_one_reference_to_principal_using_Query_null_FK_shadow_fk(
+        EntityState state,
+        bool async
+    )
     {
         using var context = CreateContext();
         var single = context.Attach(new SingleShadowFk { Id = 767 }).Entity;
@@ -4332,13 +4771,15 @@ public abstract partial class LoadTestBase<TFixture> : IClassFixture<TFixture>
         {
             Assert.Equal(
                 CoreStrings.CannotLoadDetachedShadow("Parent", "SingleShadowFk"),
-                (await Assert.ThrowsAsync<InvalidOperationException>(
-                    async () =>
+                (
+                    await Assert.ThrowsAsync<InvalidOperationException>(async () =>
                     {
                         _ = async
                             ? await referenceEntry.Query().SingleOrDefaultAsync()
                             : referenceEntry.Query().SingleOrDefault();
-                    })).Message);
+                    })
+                ).Message
+            );
         }
         else
         {
@@ -4397,7 +4838,10 @@ public abstract partial class LoadTestBase<TFixture> : IClassFixture<TFixture>
         Assert.Equal(2, parent.ChildrenCompositeKey.Count());
         Assert.All(parent.ChildrenCompositeKey.Select(e => e.Parent), c => Assert.Same(parent, c));
 
-        Assert.Equal(state == EntityState.Detached ? 0 : 3, context.ChangeTracker.Entries().Count());
+        Assert.Equal(
+            state == EntityState.Detached ? 0 : 3,
+            context.ChangeTracker.Entries().Count()
+        );
     }
 
     [ConditionalTheory]
@@ -4411,7 +4855,10 @@ public abstract partial class LoadTestBase<TFixture> : IClassFixture<TFixture>
     [InlineData(EntityState.Deleted, false)]
     [InlineData(EntityState.Detached, true)]
     [InlineData(EntityState.Detached, false)]
-    public virtual async Task Load_many_to_one_reference_to_principal_composite_key(EntityState state, bool async)
+    public virtual async Task Load_many_to_one_reference_to_principal_composite_key(
+        EntityState state,
+        bool async
+    )
     {
         using var context = CreateContext();
         var child = context.Set<ChildCompositeKey>().Single(e => e.Id == 52);
@@ -4437,7 +4884,10 @@ public abstract partial class LoadTestBase<TFixture> : IClassFixture<TFixture>
 
         RecordLog();
 
-        Assert.Equal(state == EntityState.Detached ? 0 : 2, context.ChangeTracker.Entries().Count());
+        Assert.Equal(
+            state == EntityState.Detached ? 0 : 2,
+            context.ChangeTracker.Entries().Count()
+        );
 
         if (state != EntityState.Detached)
         {
@@ -4467,7 +4917,10 @@ public abstract partial class LoadTestBase<TFixture> : IClassFixture<TFixture>
     [InlineData(EntityState.Deleted, false)]
     [InlineData(EntityState.Detached, true)]
     [InlineData(EntityState.Detached, false)]
-    public virtual async Task Load_one_to_one_reference_to_principal_composite_key(EntityState state, bool async)
+    public virtual async Task Load_one_to_one_reference_to_principal_composite_key(
+        EntityState state,
+        bool async
+    )
     {
         using var context = CreateContext();
         var single = context.Set<SingleCompositeKey>().Single();
@@ -4493,7 +4946,10 @@ public abstract partial class LoadTestBase<TFixture> : IClassFixture<TFixture>
 
         RecordLog();
 
-        Assert.Equal(state == EntityState.Detached ? 0 : 2, context.ChangeTracker.Entries().Count());
+        Assert.Equal(
+            state == EntityState.Detached ? 0 : 2,
+            context.ChangeTracker.Entries().Count()
+        );
 
         if (state != EntityState.Detached)
         {
@@ -4523,7 +4979,10 @@ public abstract partial class LoadTestBase<TFixture> : IClassFixture<TFixture>
     [InlineData(EntityState.Deleted, false)]
     [InlineData(EntityState.Detached, true)]
     [InlineData(EntityState.Detached, false)]
-    public virtual async Task Load_one_to_one_reference_to_dependent_composite_key(EntityState state, bool async)
+    public virtual async Task Load_one_to_one_reference_to_dependent_composite_key(
+        EntityState state,
+        bool async
+    )
     {
         using var context = CreateContext();
         var parent = context.Set<Parent>().Single();
@@ -4571,7 +5030,10 @@ public abstract partial class LoadTestBase<TFixture> : IClassFixture<TFixture>
     [InlineData(EntityState.Deleted, false)]
     [InlineData(EntityState.Detached, true)]
     [InlineData(EntityState.Detached, false)]
-    public virtual async Task Load_collection_using_Query_composite_key(EntityState state, bool async)
+    public virtual async Task Load_collection_using_Query_composite_key(
+        EntityState state,
+        bool async
+    )
     {
         using var context = CreateContext();
         var parent = context.Set<Parent>().Single();
@@ -4620,7 +5082,10 @@ public abstract partial class LoadTestBase<TFixture> : IClassFixture<TFixture>
     [InlineData(EntityState.Deleted, false)]
     [InlineData(EntityState.Detached, true)]
     [InlineData(EntityState.Detached, false)]
-    public virtual async Task Load_many_to_one_reference_to_principal_using_Query_composite_key(EntityState state, bool async)
+    public virtual async Task Load_many_to_one_reference_to_principal_using_Query_composite_key(
+        EntityState state,
+        bool async
+    )
     {
         using var context = CreateContext();
         var child = context.Set<ChildCompositeKey>().Single(e => e.Id == 52);
@@ -4671,7 +5136,10 @@ public abstract partial class LoadTestBase<TFixture> : IClassFixture<TFixture>
     [InlineData(EntityState.Deleted, false)]
     [InlineData(EntityState.Detached, true)]
     [InlineData(EntityState.Detached, false)]
-    public virtual async Task Load_one_to_one_reference_to_principal_using_Query_composite_key(EntityState state, bool async)
+    public virtual async Task Load_one_to_one_reference_to_principal_using_Query_composite_key(
+        EntityState state,
+        bool async
+    )
     {
         using var context = CreateContext();
         var single = context.Set<SingleCompositeKey>().Single();
@@ -4722,7 +5190,10 @@ public abstract partial class LoadTestBase<TFixture> : IClassFixture<TFixture>
     [InlineData(EntityState.Deleted, false)]
     [InlineData(EntityState.Detached, true)]
     [InlineData(EntityState.Detached, false)]
-    public virtual async Task Load_one_to_one_reference_to_dependent_using_Query_composite_key(EntityState state, bool async)
+    public virtual async Task Load_one_to_one_reference_to_dependent_using_Query_composite_key(
+        EntityState state,
+        bool async
+    )
     {
         using var context = CreateContext();
         var parent = context.Set<Parent>().Single();
@@ -4765,7 +5236,10 @@ public abstract partial class LoadTestBase<TFixture> : IClassFixture<TFixture>
     [InlineData(EntityState.Deleted, false)]
     [InlineData(EntityState.Detached, true)]
     [InlineData(EntityState.Detached, false)]
-    public virtual async Task Load_many_to_one_reference_to_principal_null_FK_composite_key(EntityState state, bool async)
+    public virtual async Task Load_many_to_one_reference_to_principal_null_FK_composite_key(
+        EntityState state,
+        bool async
+    )
     {
         using var context = CreateContext();
         var child = context.Attach(new ChildCompositeKey { Id = 767, ParentId = 567 }).Entity;
@@ -4791,7 +5265,10 @@ public abstract partial class LoadTestBase<TFixture> : IClassFixture<TFixture>
 
         RecordLog();
 
-        Assert.Equal(state == EntityState.Detached ? 0 : 1, context.ChangeTracker.Entries().Count());
+        Assert.Equal(
+            state == EntityState.Detached ? 0 : 1,
+            context.ChangeTracker.Entries().Count()
+        );
         Assert.Null(child.Parent);
     }
 
@@ -4806,10 +5283,15 @@ public abstract partial class LoadTestBase<TFixture> : IClassFixture<TFixture>
     [InlineData(EntityState.Deleted, false)]
     [InlineData(EntityState.Detached, true)]
     [InlineData(EntityState.Detached, false)]
-    public virtual async Task Load_one_to_one_reference_to_principal_null_FK_composite_key(EntityState state, bool async)
+    public virtual async Task Load_one_to_one_reference_to_principal_null_FK_composite_key(
+        EntityState state,
+        bool async
+    )
     {
         using var context = CreateContext();
-        var single = context.Attach(new SingleCompositeKey { Id = 767, ParentAlternateId = "Boot" }).Entity;
+        var single = context
+            .Attach(new SingleCompositeKey { Id = 767, ParentAlternateId = "Boot" })
+            .Entity;
 
         ClearLog();
 
@@ -4832,7 +5314,10 @@ public abstract partial class LoadTestBase<TFixture> : IClassFixture<TFixture>
 
         RecordLog();
 
-        Assert.Equal(state == EntityState.Detached ? 0 : 1, context.ChangeTracker.Entries().Count());
+        Assert.Equal(
+            state == EntityState.Detached ? 0 : 1,
+            context.ChangeTracker.Entries().Count()
+        );
 
         Assert.Null(single.Parent);
     }
@@ -4848,10 +5333,15 @@ public abstract partial class LoadTestBase<TFixture> : IClassFixture<TFixture>
     [InlineData(EntityState.Deleted, false)]
     [InlineData(EntityState.Detached, true)]
     [InlineData(EntityState.Detached, false)]
-    public virtual async Task Load_many_to_one_reference_to_principal_using_Query_null_FK_composite_key(EntityState state, bool async)
+    public virtual async Task Load_many_to_one_reference_to_principal_using_Query_null_FK_composite_key(
+        EntityState state,
+        bool async
+    )
     {
         using var context = CreateContext();
-        var child = context.Attach(new ChildCompositeKey { Id = 767, ParentAlternateId = "Boot" }).Entity;
+        var child = context
+            .Attach(new ChildCompositeKey { Id = 767, ParentAlternateId = "Boot" })
+            .Entity;
 
         ClearLog();
 
@@ -4872,7 +5362,10 @@ public abstract partial class LoadTestBase<TFixture> : IClassFixture<TFixture>
         Assert.Null(parent);
         Assert.Null(child.Parent);
 
-        Assert.Equal(state == EntityState.Detached ? 0 : 1, context.ChangeTracker.Entries().Count());
+        Assert.Equal(
+            state == EntityState.Detached ? 0 : 1,
+            context.ChangeTracker.Entries().Count()
+        );
     }
 
     [ConditionalTheory]
@@ -4886,7 +5379,10 @@ public abstract partial class LoadTestBase<TFixture> : IClassFixture<TFixture>
     [InlineData(EntityState.Deleted, false)]
     [InlineData(EntityState.Detached, true)]
     [InlineData(EntityState.Detached, false)]
-    public virtual async Task Load_one_to_one_reference_to_principal_using_Query_null_FK_composite_key(EntityState state, bool async)
+    public virtual async Task Load_one_to_one_reference_to_principal_using_Query_null_FK_composite_key(
+        EntityState state,
+        bool async
+    )
     {
         using var context = CreateContext();
         var single = context.Attach(new SingleCompositeKey { Id = 767, ParentId = 567 }).Entity;
@@ -4910,7 +5406,10 @@ public abstract partial class LoadTestBase<TFixture> : IClassFixture<TFixture>
         Assert.Null(parent);
         Assert.Null(single.Parent);
 
-        Assert.Equal(state == EntityState.Detached ? 0 : 1, context.ChangeTracker.Entries().Count());
+        Assert.Equal(
+            state == EntityState.Detached ? 0 : 1,
+            context.ChangeTracker.Entries().Count()
+        );
     }
 
     [ConditionalFact]
@@ -4979,7 +5478,8 @@ public abstract partial class LoadTestBase<TFixture> : IClassFixture<TFixture>
 
         Assert.Equal(
             CoreStrings.ReferenceMustBeLoaded("Parent", typeof(Child).Name),
-            Assert.Throws<InvalidOperationException>(() => referenceEntry.IsLoaded = false).Message);
+            Assert.Throws<InvalidOperationException>(() => referenceEntry.IsLoaded = false).Message
+        );
     }
 
     [ConditionalFact] // Issue #27497
@@ -5043,10 +5543,18 @@ public abstract partial class LoadTestBase<TFixture> : IClassFixture<TFixture>
         object entity,
         EntityState state,
         QueryTrackingBehavior queryTrackingBehavior,
-        bool isAttached = false)
+        bool isAttached = false
+    )
     {
-        if (isAttached && state == EntityState.Detached
-            || state != (queryTrackingBehavior == QueryTrackingBehavior.TrackAll ? EntityState.Unchanged : EntityState.Detached))
+        if (
+            isAttached && state == EntityState.Detached
+            || state
+                != (
+                    queryTrackingBehavior == QueryTrackingBehavior.TrackAll
+                        ? EntityState.Unchanged
+                        : EntityState.Detached
+                )
+        )
         {
             context.Entry(entity).State = state;
         }
@@ -5360,9 +5868,7 @@ public abstract partial class LoadTestBase<TFixture> : IClassFixture<TFixture>
             LazyLoader = lazyLoader;
         }
 
-        protected RootClass()
-        {
-        }
+        protected RootClass() { }
 
         public int Id { get; set; }
 
@@ -5372,25 +5878,17 @@ public abstract partial class LoadTestBase<TFixture> : IClassFixture<TFixture>
     protected class Deposit : RootClass
     {
         private Deposit(Action<object, string> lazyLoader)
-            : base(lazyLoader)
-        {
-        }
+            : base(lazyLoader) { }
 
-        public Deposit()
-        {
-        }
+        public Deposit() { }
     }
 
     protected abstract class Product : RootClass
     {
         protected Product(Action<object, string> lazyLoader)
-            : base(lazyLoader)
-        {
-        }
+            : base(lazyLoader) { }
 
-        protected Product()
-        {
-        }
+        protected Product() { }
 
         public int? DepositID { get; set; }
 
@@ -5406,13 +5904,9 @@ public abstract partial class LoadTestBase<TFixture> : IClassFixture<TFixture>
     protected class SimpleProduct : Product
     {
         private SimpleProduct(Action<object, string> lazyLoader)
-            : base(lazyLoader)
-        {
-        }
+            : base(lazyLoader) { }
 
-        public SimpleProduct()
-        {
-        }
+        public SimpleProduct() { }
     }
 
     protected class OptionalChildView
@@ -5420,9 +5914,7 @@ public abstract partial class LoadTestBase<TFixture> : IClassFixture<TFixture>
         private readonly Action<object, string> _loader;
         private RootClass _root;
 
-        public OptionalChildView()
-        {
-        }
+        public OptionalChildView() { }
 
         public OptionalChildView(Action<object, string> lazyLoader)
         {
@@ -5443,9 +5935,7 @@ public abstract partial class LoadTestBase<TFixture> : IClassFixture<TFixture>
         private readonly Action<object, string> _loader;
         private RootClass _root;
 
-        public RequiredChildView()
-        {
-        }
+        public RequiredChildView() { }
 
         public RequiredChildView(Action<object, string> lazyLoader)
         {
@@ -5467,9 +5957,7 @@ public abstract partial class LoadTestBase<TFixture> : IClassFixture<TFixture>
         private IEnumerable<ChildFullLoaderByConstructor> _children;
         private SingleFullLoaderByConstructor _single;
 
-        public ParentFullLoaderByConstructor()
-        {
-        }
+        public ParentFullLoaderByConstructor() { }
 
         private ParentFullLoaderByConstructor(ILazyLoader loader)
         {
@@ -5519,9 +6007,7 @@ public abstract partial class LoadTestBase<TFixture> : IClassFixture<TFixture>
         private readonly ILazyLoader _loader;
         private ParentFullLoaderByConstructor _parent;
 
-        public ChildFullLoaderByConstructor()
-        {
-        }
+        public ChildFullLoaderByConstructor() { }
 
         public ChildFullLoaderByConstructor(ILazyLoader loader)
         {
@@ -5556,9 +6042,7 @@ public abstract partial class LoadTestBase<TFixture> : IClassFixture<TFixture>
         private readonly ILazyLoader _loader;
         private ParentFullLoaderByConstructor _parent;
 
-        public SingleFullLoaderByConstructor()
-        {
-        }
+        public SingleFullLoaderByConstructor() { }
 
         public SingleFullLoaderByConstructor(ILazyLoader loader)
         {
@@ -5594,9 +6078,7 @@ public abstract partial class LoadTestBase<TFixture> : IClassFixture<TFixture>
         private IEnumerable<ChildDelegateLoaderByConstructor> _children;
         private SingleDelegateLoaderByConstructor _single;
 
-        public ParentDelegateLoaderByConstructor()
-        {
-        }
+        public ParentDelegateLoaderByConstructor() { }
 
         private ParentDelegateLoaderByConstructor(Action<object, string> lazyLoader)
         {
@@ -5625,9 +6107,7 @@ public abstract partial class LoadTestBase<TFixture> : IClassFixture<TFixture>
         private ParentDelegateLoaderByConstructor _parent;
         private int? _parentId;
 
-        public ChildDelegateLoaderByConstructor()
-        {
-        }
+        public ChildDelegateLoaderByConstructor() { }
 
         private ChildDelegateLoaderByConstructor(Action<object, string> lazyLoader)
         {
@@ -5663,9 +6143,7 @@ public abstract partial class LoadTestBase<TFixture> : IClassFixture<TFixture>
         private ParentDelegateLoaderByConstructor _parent;
         private int? _parentId;
 
-        public SingleDelegateLoaderByConstructor()
-        {
-        }
+        public SingleDelegateLoaderByConstructor() { }
 
         private SingleDelegateLoaderByConstructor(Action<object, string> lazyLoader)
         {
@@ -5876,22 +6354,17 @@ public abstract partial class LoadTestBase<TFixture> : IClassFixture<TFixture>
         return context;
     }
 
-    protected virtual void ClearLog()
-    {
-    }
+    protected virtual void ClearLog() { }
 
-    protected virtual void RecordLog()
-    {
-    }
+    protected virtual void RecordLog() { }
 
     protected class ChangeDetectorProxy : ChangeDetector
     {
         public ChangeDetectorProxy(
             IDiagnosticsLogger<DbLoggerCategory.ChangeTracking> logger,
-            ILoggingOptions loggingOptions)
-            : base(logger, loggingOptions)
-        {
-        }
+            ILoggingOptions loggingOptions
+        )
+            : base(logger, loggingOptions) { }
 
         public bool DetectChangesCalled { get; set; }
 
@@ -5905,153 +6378,187 @@ public abstract partial class LoadTestBase<TFixture> : IClassFixture<TFixture>
 
     public abstract class LoadFixtureBase : SharedStoreFixtureBase<PoolableDbContext>
     {
-        protected override string StoreName
-            => "LoadTest";
+        protected override string StoreName => "LoadTest";
 
-        protected override IServiceCollection AddServices(IServiceCollection serviceCollection)
-            => base.AddServices(serviceCollection.AddScoped<IChangeDetector, ChangeDetectorProxy>());
+        protected override IServiceCollection AddServices(IServiceCollection serviceCollection) =>
+            base.AddServices(serviceCollection.AddScoped<IChangeDetector, ChangeDetectorProxy>());
 
         protected override void OnModelCreating(ModelBuilder modelBuilder, DbContext context)
         {
-            modelBuilder.Entity<SingleShadowFk>()
-                .Property<int?>("ParentId");
+            modelBuilder.Entity<SingleShadowFk>().Property<int?>("ParentId");
 
-            modelBuilder.Entity<Parent>(
-                b =>
-                {
-                    b.Property(e => e.AlternateId).ValueGeneratedOnAdd();
+            modelBuilder.Entity<Parent>(b =>
+            {
+                b.Property(e => e.AlternateId).ValueGeneratedOnAdd();
 
-                    b.HasMany<Child>(nameof(Parent.Children))
-                        .WithOne(nameof(Child.Parent))
-                        .HasForeignKey(e => e.ParentId);
+                b.HasMany<Child>(nameof(Parent.Children))
+                    .WithOne(nameof(Child.Parent))
+                    .HasForeignKey(e => e.ParentId);
 
-                    b.HasOne<SinglePkToPk>(nameof(Parent.SinglePkToPk))
-                        .WithOne(nameof(SinglePkToPk.Parent))
-                        .HasForeignKey<SinglePkToPk>(e => e.Id)
-                        .IsRequired();
+                b.HasOne<SinglePkToPk>(nameof(Parent.SinglePkToPk))
+                    .WithOne(nameof(SinglePkToPk.Parent))
+                    .HasForeignKey<SinglePkToPk>(e => e.Id)
+                    .IsRequired();
 
-                    b.HasOne<Single>(nameof(Parent.Single))
-                        .WithOne(e => e.Parent)
-                        .HasForeignKey<Single>(e => e.ParentId);
+                b.HasOne<Single>(nameof(Parent.Single))
+                    .WithOne(e => e.Parent)
+                    .HasForeignKey<Single>(e => e.ParentId);
 
-                    b.HasOne<RequiredSingle>(nameof(Parent.RequiredSingle))
-                        .WithOne(e => e.Parent)
-                        .HasForeignKey<RequiredSingle>(e => e.ParentId);
+                b.HasOne<RequiredSingle>(nameof(Parent.RequiredSingle))
+                    .WithOne(e => e.Parent)
+                    .HasForeignKey<RequiredSingle>(e => e.ParentId);
 
-                    b.HasMany<ChildAk>(nameof(Parent.ChildrenAk))
-                        .WithOne(e => e.Parent)
-                        .HasPrincipalKey(e => e.AlternateId)
-                        .HasForeignKey(e => e.ParentId);
+                b.HasMany<ChildAk>(nameof(Parent.ChildrenAk))
+                    .WithOne(e => e.Parent)
+                    .HasPrincipalKey(e => e.AlternateId)
+                    .HasForeignKey(e => e.ParentId);
 
-                    b.HasOne<SingleAk>(nameof(Parent.SingleAk))
-                        .WithOne(e => e.Parent)
-                        .HasPrincipalKey<Parent>(e => e.AlternateId)
-                        .HasForeignKey<SingleAk>(e => e.ParentId);
+                b.HasOne<SingleAk>(nameof(Parent.SingleAk))
+                    .WithOne(e => e.Parent)
+                    .HasPrincipalKey<Parent>(e => e.AlternateId)
+                    .HasForeignKey<SingleAk>(e => e.ParentId);
 
-                    b.HasMany(e => e.ChildrenShadowFk)
-                        .WithOne(nameof(ChildShadowFk.Parent))
-                        .HasPrincipalKey(e => e.Id)
-                        .HasForeignKey("ParentId");
+                b.HasMany(e => e.ChildrenShadowFk)
+                    .WithOne(nameof(ChildShadowFk.Parent))
+                    .HasPrincipalKey(e => e.Id)
+                    .HasForeignKey("ParentId");
 
-                    b.HasOne<SingleShadowFk>(nameof(Parent.SingleShadowFk))
-                        .WithOne(e => e.Parent)
-                        .HasPrincipalKey<Parent>(e => e.Id)
-                        .HasForeignKey<SingleShadowFk>("ParentId");
+                b.HasOne<SingleShadowFk>(nameof(Parent.SingleShadowFk))
+                    .WithOne(e => e.Parent)
+                    .HasPrincipalKey<Parent>(e => e.Id)
+                    .HasForeignKey<SingleShadowFk>("ParentId");
 
-                    b.HasMany(e => e.ChildrenCompositeKey)
-                        .WithOne(e => e.Parent)
-                        .HasPrincipalKey(
-                            e => new { e.AlternateId, e.Id })
-                        .HasForeignKey(
-                            e => new { e.ParentAlternateId, e.ParentId });
+                b.HasMany(e => e.ChildrenCompositeKey)
+                    .WithOne(e => e.Parent)
+                    .HasPrincipalKey(e => new { e.AlternateId, e.Id })
+                    .HasForeignKey(e => new { e.ParentAlternateId, e.ParentId });
 
-                    b.HasOne<SingleCompositeKey>(nameof(Parent.SingleCompositeKey))
-                        .WithOne(e => e.Parent)
-                        .HasPrincipalKey<Parent>(
-                            e => new { e.AlternateId, e.Id })
-                        .HasForeignKey<SingleCompositeKey>(
-                            e => new { e.ParentAlternateId, e.ParentId });
-                });
+                b.HasOne<SingleCompositeKey>(nameof(Parent.SingleCompositeKey))
+                    .WithOne(e => e.Parent)
+                    .HasPrincipalKey<Parent>(e => new { e.AlternateId, e.Id })
+                    .HasForeignKey<SingleCompositeKey>(e => new
+                    {
+                        e.ParentAlternateId,
+                        e.ParentId,
+                    });
+            });
 
-            modelBuilder.Entity<ParentFullLoaderByConstructor>(
-                b =>
-                {
-                    b.HasMany<ChildFullLoaderByConstructor>(nameof(ParentFullLoaderByConstructor.Children))
-                        .WithOne(nameof(ChildFullLoaderByConstructor.Parent))
-                        .HasForeignKey(e => e.ParentId);
+            modelBuilder.Entity<ParentFullLoaderByConstructor>(b =>
+            {
+                b.HasMany<ChildFullLoaderByConstructor>(
+                        nameof(ParentFullLoaderByConstructor.Children)
+                    )
+                    .WithOne(nameof(ChildFullLoaderByConstructor.Parent))
+                    .HasForeignKey(e => e.ParentId);
 
-                    b.HasOne<SingleFullLoaderByConstructor>(nameof(ParentFullLoaderByConstructor.Single))
-                        .WithOne(e => e.Parent)
-                        .HasForeignKey<SingleFullLoaderByConstructor>(e => e.ParentId);
-                });
+                b.HasOne<SingleFullLoaderByConstructor>(
+                        nameof(ParentFullLoaderByConstructor.Single)
+                    )
+                    .WithOne(e => e.Parent)
+                    .HasForeignKey<SingleFullLoaderByConstructor>(e => e.ParentId);
+            });
 
-            modelBuilder.Entity<ParentDelegateLoaderByConstructor>(
-                b =>
-                {
-                    b.HasMany<ChildDelegateLoaderByConstructor>(nameof(ParentDelegateLoaderByConstructor.Children))
-                        .WithOne(nameof(ChildDelegateLoaderByConstructor.Parent))
-                        .HasForeignKey(e => e.ParentId);
+            modelBuilder.Entity<ParentDelegateLoaderByConstructor>(b =>
+            {
+                b.HasMany<ChildDelegateLoaderByConstructor>(
+                        nameof(ParentDelegateLoaderByConstructor.Children)
+                    )
+                    .WithOne(nameof(ChildDelegateLoaderByConstructor.Parent))
+                    .HasForeignKey(e => e.ParentId);
 
-                    b.HasOne<SingleDelegateLoaderByConstructor>(nameof(ParentDelegateLoaderByConstructor.Single))
-                        .WithOne(e => e.Parent)
-                        .HasForeignKey<SingleDelegateLoaderByConstructor>(e => e.ParentId);
-                });
+                b.HasOne<SingleDelegateLoaderByConstructor>(
+                        nameof(ParentDelegateLoaderByConstructor.Single)
+                    )
+                    .WithOne(e => e.Parent)
+                    .HasForeignKey<SingleDelegateLoaderByConstructor>(e => e.ParentId);
+            });
 
-            modelBuilder.Entity<ParentDelegateLoaderByProperty>(
-                b =>
-                {
-                    b.HasMany<ChildDelegateLoaderByProperty>(nameof(ParentDelegateLoaderByProperty.Children))
-                        .WithOne(nameof(ChildDelegateLoaderByProperty.Parent))
-                        .HasForeignKey(e => e.ParentId);
+            modelBuilder.Entity<ParentDelegateLoaderByProperty>(b =>
+            {
+                b.HasMany<ChildDelegateLoaderByProperty>(
+                        nameof(ParentDelegateLoaderByProperty.Children)
+                    )
+                    .WithOne(nameof(ChildDelegateLoaderByProperty.Parent))
+                    .HasForeignKey(e => e.ParentId);
 
-                    b.HasOne<SingleDelegateLoaderByProperty>(nameof(ParentDelegateLoaderByProperty.Single))
-                        .WithOne(e => e.Parent)
-                        .HasForeignKey<SingleDelegateLoaderByProperty>(e => e.ParentId);
-                });
+                b.HasOne<SingleDelegateLoaderByProperty>(
+                        nameof(ParentDelegateLoaderByProperty.Single)
+                    )
+                    .WithOne(e => e.Parent)
+                    .HasForeignKey<SingleDelegateLoaderByProperty>(e => e.ParentId);
+            });
 
-            modelBuilder.Entity<ChildDelegateLoaderWithStateByProperty>(
-                b =>
-                {
-                    var serviceProperty = (ServiceProperty)b.Metadata.AddServiceProperty(
-                        typeof(ChildDelegateLoaderWithStateByProperty).GetAnyProperty("LazyLoaderState")!,
-                        typeof(ILazyLoader));
+            modelBuilder.Entity<ChildDelegateLoaderWithStateByProperty>(b =>
+            {
+                var serviceProperty = (ServiceProperty)
+                    b.Metadata.AddServiceProperty(
+                        typeof(ChildDelegateLoaderWithStateByProperty).GetAnyProperty(
+                            "LazyLoaderState"
+                        )!,
+                        typeof(ILazyLoader)
+                    );
 
-                    serviceProperty.SetParameterBinding(
-                        new DependencyInjectionParameterBinding(typeof(object), typeof(ILazyLoader), serviceProperty),
-                        ConfigurationSource.Explicit);
-                });
+                serviceProperty.SetParameterBinding(
+                    new DependencyInjectionParameterBinding(
+                        typeof(object),
+                        typeof(ILazyLoader),
+                        serviceProperty
+                    ),
+                    ConfigurationSource.Explicit
+                );
+            });
 
-            modelBuilder.Entity<SingleDelegateLoaderWithStateByProperty>(
-                b =>
-                {
-                    var serviceProperty = (ServiceProperty)b.Metadata.AddServiceProperty(
-                        typeof(SingleDelegateLoaderWithStateByProperty).GetAnyProperty("LazyLoaderState")!,
-                        typeof(ILazyLoader));
+            modelBuilder.Entity<SingleDelegateLoaderWithStateByProperty>(b =>
+            {
+                var serviceProperty = (ServiceProperty)
+                    b.Metadata.AddServiceProperty(
+                        typeof(SingleDelegateLoaderWithStateByProperty).GetAnyProperty(
+                            "LazyLoaderState"
+                        )!,
+                        typeof(ILazyLoader)
+                    );
 
-                    serviceProperty.SetParameterBinding(
-                        new DependencyInjectionParameterBinding(typeof(object), typeof(ILazyLoader), serviceProperty),
-                        ConfigurationSource.Explicit);
-                });
+                serviceProperty.SetParameterBinding(
+                    new DependencyInjectionParameterBinding(
+                        typeof(object),
+                        typeof(ILazyLoader),
+                        serviceProperty
+                    ),
+                    ConfigurationSource.Explicit
+                );
+            });
 
-            modelBuilder.Entity<ParentDelegateLoaderWithStateByProperty>(
-                b =>
-                {
-                    var serviceProperty = (ServiceProperty)b.Metadata.AddServiceProperty(
-                        typeof(ParentDelegateLoaderWithStateByProperty).GetAnyProperty("LazyLoaderState")!,
-                        typeof(ILazyLoader));
+            modelBuilder.Entity<ParentDelegateLoaderWithStateByProperty>(b =>
+            {
+                var serviceProperty = (ServiceProperty)
+                    b.Metadata.AddServiceProperty(
+                        typeof(ParentDelegateLoaderWithStateByProperty).GetAnyProperty(
+                            "LazyLoaderState"
+                        )!,
+                        typeof(ILazyLoader)
+                    );
 
-                    serviceProperty.SetParameterBinding(
-                        new DependencyInjectionParameterBinding(typeof(object), typeof(ILazyLoader), serviceProperty),
-                        ConfigurationSource.Explicit);
+                serviceProperty.SetParameterBinding(
+                    new DependencyInjectionParameterBinding(
+                        typeof(object),
+                        typeof(ILazyLoader),
+                        serviceProperty
+                    ),
+                    ConfigurationSource.Explicit
+                );
 
-                    b.HasMany<ChildDelegateLoaderWithStateByProperty>(nameof(ParentDelegateLoaderWithStateByProperty.Children))
-                        .WithOne(nameof(ChildDelegateLoaderWithStateByProperty.Parent))
-                        .HasForeignKey(e => e.ParentId);
+                b.HasMany<ChildDelegateLoaderWithStateByProperty>(
+                        nameof(ParentDelegateLoaderWithStateByProperty.Children)
+                    )
+                    .WithOne(nameof(ChildDelegateLoaderWithStateByProperty.Parent))
+                    .HasForeignKey(e => e.ParentId);
 
-                    b.HasOne<SingleDelegateLoaderWithStateByProperty>(nameof(ParentDelegateLoaderWithStateByProperty.Single))
-                        .WithOne(e => e.Parent)
-                        .HasForeignKey<SingleDelegateLoaderWithStateByProperty>(e => e.ParentId);
-                });
+                b.HasOne<SingleDelegateLoaderWithStateByProperty>(
+                        nameof(ParentDelegateLoaderWithStateByProperty.Single)
+                    )
+                    .WithOne(e => e.Parent)
+                    .HasForeignKey<SingleDelegateLoaderWithStateByProperty>(e => e.ParentId);
+            });
 
             modelBuilder.Entity<RootClass>();
             modelBuilder.Entity<Product>();
@@ -6069,52 +6576,88 @@ public abstract partial class LoadTestBase<TFixture> : IClassFixture<TFixture>
                 {
                     Id = 707,
                     AlternateId = "Root",
-                    Children = new List<Child> { new() { Id = 11 }, new() { Id = 12 } },
+                    Children = new List<Child>
+                    {
+                        new() { Id = 11 },
+                        new() { Id = 12 },
+                    },
                     SinglePkToPk = new SinglePkToPk { Id = 707 },
                     Single = new Single { Id = 21 },
                     RequiredSingle = new RequiredSingle { Id = 21 },
-                    ChildrenAk = new List<ChildAk> { new() { Id = 31 }, new() { Id = 32 } },
+                    ChildrenAk = new List<ChildAk>
+                    {
+                        new() { Id = 31 },
+                        new() { Id = 32 },
+                    },
                     SingleAk = new SingleAk { Id = 42 },
-                    ChildrenShadowFk = new List<ChildShadowFk> { new() { Id = 51 }, new() { Id = 52 } },
+                    ChildrenShadowFk = new List<ChildShadowFk>
+                    {
+                        new() { Id = 51 },
+                        new() { Id = 52 },
+                    },
                     SingleShadowFk = new SingleShadowFk { Id = 62 },
-                    ChildrenCompositeKey = new List<ChildCompositeKey> { new() { Id = 51 }, new() { Id = 52 } },
-                    SingleCompositeKey = new SingleCompositeKey { Id = 62 }
-                });
+                    ChildrenCompositeKey = new List<ChildCompositeKey>
+                    {
+                        new() { Id = 51 },
+                        new() { Id = 52 },
+                    },
+                    SingleCompositeKey = new SingleCompositeKey { Id = 62 },
+                }
+            );
 
             context.Add(
                 new ParentFullLoaderByConstructor
                 {
                     Id = 707,
-                    Children = new List<ChildFullLoaderByConstructor> { new() { Id = 11 }, new() { Id = 12 } },
-                    Single = new SingleFullLoaderByConstructor { Id = 21 }
-                });
+                    Children = new List<ChildFullLoaderByConstructor>
+                    {
+                        new() { Id = 11 },
+                        new() { Id = 12 },
+                    },
+                    Single = new SingleFullLoaderByConstructor { Id = 21 },
+                }
+            );
 
             context.Add(
                 new ParentDelegateLoaderByConstructor
                 {
                     Id = 707,
-                    Children = new List<ChildDelegateLoaderByConstructor> { new() { Id = 11 }, new() { Id = 12 } },
-                    Single = new SingleDelegateLoaderByConstructor { Id = 21 }
-                });
+                    Children = new List<ChildDelegateLoaderByConstructor>
+                    {
+                        new() { Id = 11 },
+                        new() { Id = 12 },
+                    },
+                    Single = new SingleDelegateLoaderByConstructor { Id = 21 },
+                }
+            );
 
             context.Add(
                 new ParentDelegateLoaderByProperty
                 {
                     Id = 707,
-                    Children = new List<ChildDelegateLoaderByProperty> { new() { Id = 11 }, new() { Id = 12 } },
-                    Single = new SingleDelegateLoaderByProperty { Id = 21 }
-                });
+                    Children = new List<ChildDelegateLoaderByProperty>
+                    {
+                        new() { Id = 11 },
+                        new() { Id = 12 },
+                    },
+                    Single = new SingleDelegateLoaderByProperty { Id = 21 },
+                }
+            );
 
             context.Add(
                 new ParentDelegateLoaderWithStateByProperty
                 {
                     Id = 707,
-                    Children = new List<ChildDelegateLoaderWithStateByProperty> { new() { Id = 11 }, new() { Id = 12 } },
-                    Single = new SingleDelegateLoaderWithStateByProperty { Id = 21 }
-                });
+                    Children = new List<ChildDelegateLoaderWithStateByProperty>
+                    {
+                        new() { Id = 11 },
+                        new() { Id = 12 },
+                    },
+                    Single = new SingleDelegateLoaderWithStateByProperty { Id = 21 },
+                }
+            );
 
-            context.Add(
-                new SimpleProduct { Deposit = new Deposit() });
+            context.Add(new SimpleProduct { Deposit = new Deposit() });
 
             context.SaveChanges();
         }

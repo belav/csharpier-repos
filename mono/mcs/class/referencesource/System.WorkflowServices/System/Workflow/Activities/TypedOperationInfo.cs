@@ -6,28 +6,31 @@ namespace System.Workflow.Activities
 {
     using System;
     using System.ComponentModel;
-    using System.Drawing.Design;
     using System.Diagnostics.CodeAnalysis;
+    using System.Drawing.Design;
     using System.Net.Security;
     using System.Reflection;
     using System.ServiceModel;
     using System.ServiceModel.Description;
+    using System.Workflow.Activities.Design;
     using System.Workflow.ComponentModel;
     using System.Workflow.ComponentModel.Compiler;
-    using System.Workflow.Activities.Design;
 
-    [Obsolete("The System.Workflow.* types are deprecated.  Instead, please use the new types from System.Activities.*")]
+    [Obsolete(
+        "The System.Workflow.* types are deprecated.  Instead, please use the new types from System.Activities.*"
+    )]
     public sealed class TypedOperationInfo : OperationInfoBase
     {
         [SuppressMessage("Microsoft.Security", "CA2104:DoNotDeclareReadOnlyMutableReferenceTypes")]
         internal static readonly DependencyProperty ContractTypeProperty =
-            DependencyProperty.Register("ContractType",
-            typeof(Type), typeof(TypedOperationInfo),
-            new PropertyMetadata(null, DependencyPropertyOptions.Metadata));
+            DependencyProperty.Register(
+                "ContractType",
+                typeof(Type),
+                typeof(TypedOperationInfo),
+                new PropertyMetadata(null, DependencyPropertyOptions.Metadata)
+            );
 
-        public TypedOperationInfo()
-        {
-        }
+        public TypedOperationInfo() { }
 
         public TypedOperationInfo(Type contractType, string operationName)
         {
@@ -37,8 +40,10 @@ namespace System.Workflow.Activities
             }
             if (string.IsNullOrEmpty(operationName))
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument("operationName",
-                    SR2.GetString(SR2.Error_ArgumentValueNullOrEmptyString));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
+                    "operationName",
+                    SR2.GetString(SR2.Error_ArgumentValueNullOrEmptyString)
+                );
             }
 
             this.ContractType = contractType;
@@ -47,13 +52,13 @@ namespace System.Workflow.Activities
 
         public Type ContractType
         {
-            get { return (Type) this.GetValue(TypedOperationInfo.ContractTypeProperty); }
+            get { return (Type)this.GetValue(TypedOperationInfo.ContractTypeProperty); }
             set { this.SetValue(TypedOperationInfo.ContractTypeProperty, value); }
         }
 
         public override OperationInfoBase Clone()
         {
-            TypedOperationInfo clonedOperation = (TypedOperationInfo) base.Clone();
+            TypedOperationInfo clonedOperation = (TypedOperationInfo)base.Clone();
             clonedOperation.ContractType = this.ContractType;
 
             return clonedOperation;
@@ -109,7 +114,7 @@ namespace System.Workflow.Activities
             return string.Empty;
         }
 
-        internal protected override Type GetContractType(IServiceProvider provider)
+        protected internal override Type GetContractType(IServiceProvider provider)
         {
             if (this.ContractType == null)
             {
@@ -128,10 +133,17 @@ namespace System.Workflow.Activities
             {
                 //Get the type from TypeProvider in case the type definition has changed in the local assembly.
                 // the refresh is needed if contractType is a designtime type or is in the runtime type from the built assembly
-                if (contractType is DesignTimeType ||
-                    (typeProvider.LocalAssembly != null && typeProvider.LocalAssembly.Equals(contractType.Assembly)))
+                if (
+                    contractType is DesignTimeType
+                    || (
+                        typeProvider.LocalAssembly != null
+                        && typeProvider.LocalAssembly.Equals(contractType.Assembly)
+                    )
+                )
                 {
-                    Type currentDesignTimeType = typeProvider.GetType(contractType.AssemblyQualifiedName);
+                    Type currentDesignTimeType = typeProvider.GetType(
+                        contractType.AssemblyQualifiedName
+                    );
                     if (currentDesignTimeType != null)
                     {
                         this.ContractType = currentDesignTimeType;
@@ -143,26 +155,31 @@ namespace System.Workflow.Activities
             return this.ContractType;
         }
 
-        internal protected override bool GetIsOneWay(IServiceProvider provider)
+        protected internal override bool GetIsOneWay(IServiceProvider provider)
         {
             MethodInfo methodInfo = this.GetMethodInfo(provider);
             if (methodInfo != null)
             {
-                object[] operationContractAttribs =
-                    methodInfo.GetCustomAttributes(typeof(OperationContractAttribute), true);
+                object[] operationContractAttribs = methodInfo.GetCustomAttributes(
+                    typeof(OperationContractAttribute),
+                    true
+                );
 
                 if (operationContractAttribs != null && operationContractAttribs.Length > 0)
                 {
                     if (operationContractAttribs[0] is OperationContractAttribute)
                     {
-                        return ((OperationContractAttribute) operationContractAttribs[0]).IsOneWay;
+                        return ((OperationContractAttribute)operationContractAttribs[0]).IsOneWay;
                     }
                     if (operationContractAttribs[0] is AttributeInfoAttribute)
                     {
-                        AttributeInfoAttribute attribInfoAttrib = operationContractAttribs[0] as AttributeInfoAttribute;
-                        return GetAttributePropertyValue<bool>(provider,
+                        AttributeInfoAttribute attribInfoAttrib =
+                            operationContractAttribs[0] as AttributeInfoAttribute;
+                        return GetAttributePropertyValue<bool>(
+                            provider,
                             attribInfoAttrib.AttributeInfo,
-                            "IsOneWay");
+                            "IsOneWay"
+                        );
                     }
                 }
             }
@@ -170,7 +187,7 @@ namespace System.Workflow.Activities
             return false;
         }
 
-        internal protected override MethodInfo GetMethodInfo(IServiceProvider provider)
+        protected internal override MethodInfo GetMethodInfo(IServiceProvider provider)
         {
             if (string.IsNullOrEmpty(this.Name))
             {
@@ -205,7 +222,9 @@ namespace System.Workflow.Activities
             return methodInfo;
         }
 
-        internal protected override OperationParameterInfoCollection GetParameters(IServiceProvider provider)
+        protected internal override OperationParameterInfoCollection GetParameters(
+            IServiceProvider provider
+        )
         {
             OperationParameterInfoCollection parameters = new OperationParameterInfoCollection();
 
@@ -220,11 +239,16 @@ namespace System.Workflow.Activities
                     }
                 }
 
-                if (methodInfo.ReturnParameter != null && methodInfo.ReturnParameter.ParameterType != typeof(void))
+                if (
+                    methodInfo.ReturnParameter != null
+                    && methodInfo.ReturnParameter.ParameterType != typeof(void)
+                )
                 {
                     if (parameters["(ReturnValue)"] == null)
                     {
-                        OperationParameterInfo parameterInfo = new OperationParameterInfo(methodInfo.ReturnParameter);
+                        OperationParameterInfo parameterInfo = new OperationParameterInfo(
+                            methodInfo.ReturnParameter
+                        );
                         parameterInfo.Name = "(ReturnValue)";
                         parameters.Add(parameterInfo);
                     }
@@ -242,8 +266,12 @@ namespace System.Workflow.Activities
             }
 
             string[] argumentNames = null;
-            BindingFlags bindingFlags = BindingFlags.DeclaredOnly | BindingFlags.Instance | BindingFlags.NonPublic;
-            FieldInfo argumentNamesField = typeof(AttributeInfo).GetField("argumentNames", bindingFlags);
+            BindingFlags bindingFlags =
+                BindingFlags.DeclaredOnly | BindingFlags.Instance | BindingFlags.NonPublic;
+            FieldInfo argumentNamesField = typeof(AttributeInfo).GetField(
+                "argumentNames",
+                bindingFlags
+            );
             if (argumentNamesField != null)
             {
                 argumentNames = argumentNamesField.GetValue(attributeInfo) as string[];
@@ -252,7 +280,11 @@ namespace System.Workflow.Activities
             return argumentNames;
         }
 
-        T GetAttributePropertyValue<T>(IServiceProvider provider, AttributeInfo attribInfo, string propertyName)
+        T GetAttributePropertyValue<T>(
+            IServiceProvider provider,
+            AttributeInfo attribInfo,
+            string propertyName
+        )
         {
             string[] argumentNames = GetAttributePropertyNames(attribInfo);
             int argumentIndex = -1;
@@ -274,7 +306,7 @@ namespace System.Workflow.Activities
             }
             if (argumentIndex != -1)
             {
-                return (T) attribInfo.GetArgumentValueAs(provider, argumentIndex, typeof(T));
+                return (T)attribInfo.GetArgumentValueAs(provider, argumentIndex, typeof(T));
             }
             else
             {
@@ -286,12 +318,17 @@ namespace System.Workflow.Activities
         {
             MethodInfo methodInfo = null;
 
-            if (contractType != null && ServiceOperationHelpers.IsValidServiceContract(contractType))
+            if (
+                contractType != null
+                && ServiceOperationHelpers.IsValidServiceContract(contractType)
+            )
             {
                 foreach (MethodInfo currentMethodInfo in contractType.GetMethods())
                 {
-                    object[] operationContractAttribs =
-                        currentMethodInfo.GetCustomAttributes(typeof(OperationContractAttribute), true);
+                    object[] operationContractAttribs = currentMethodInfo.GetCustomAttributes(
+                        typeof(OperationContractAttribute),
+                        true
+                    );
 
                     if (operationContractAttribs != null && operationContractAttribs.Length > 0)
                     {
@@ -308,18 +345,28 @@ namespace System.Workflow.Activities
                             AttributeInfoAttribute attribInfoAttrib =
                                 operationContractAttribs[0] as AttributeInfoAttribute;
 
-                            operationName = GetAttributePropertyValue<string>(provider,
+                            operationName = GetAttributePropertyValue<string>(
+                                provider,
                                 attribInfoAttrib.AttributeInfo,
-                                "Name");
+                                "Name"
+                            );
                         }
 
-                        if (string.IsNullOrEmpty(operationName) &&
-                            string.Compare(currentMethodInfo.Name, this.Name, StringComparison.Ordinal) == 0)
+                        if (
+                            string.IsNullOrEmpty(operationName)
+                            && string.Compare(
+                                currentMethodInfo.Name,
+                                this.Name,
+                                StringComparison.Ordinal
+                            ) == 0
+                        )
                         {
                             methodInfo = currentMethodInfo;
                             break;
                         }
-                        else if (string.Compare(operationName, this.Name, StringComparison.Ordinal) == 0)
+                        else if (
+                            string.Compare(operationName, this.Name, StringComparison.Ordinal) == 0
+                        )
                         {
                             methodInfo = currentMethodInfo;
                             break;

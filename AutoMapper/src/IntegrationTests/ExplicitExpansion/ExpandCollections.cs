@@ -4,19 +4,26 @@ public class ExpandCollections : IntegrationTest<ExpandCollections.DatabaseIniti
 {
     TrainingCourseDto _course;
 
-    protected override MapperConfiguration CreateConfiguration() => new(cfg =>
-    {
-        cfg.CreateProjection<Category, CategoryDto>();
-        cfg.CreateProjection<TrainingCourse, TrainingCourseDto>();
-        cfg.CreateProjection<TrainingContent, TrainingContentDto>().ForMember(c => c.Category, o => o.ExplicitExpansion());
-    });
+    protected override MapperConfiguration CreateConfiguration() =>
+        new(cfg =>
+        {
+            cfg.CreateProjection<Category, CategoryDto>();
+            cfg.CreateProjection<TrainingCourse, TrainingCourseDto>();
+            cfg.CreateProjection<TrainingContent, TrainingContentDto>()
+                .ForMember(c => c.Category, o => o.ExplicitExpansion());
+        });
 
     [Fact]
     public void Should_expand_collections_items()
     {
         using (var context = new ClientContext())
         {
-            _course = ProjectTo<TrainingCourseDto>(context.TrainingCourses, null, c => c.Content.Select(co => co.Category)).FirstOrDefault(n => n.CourseName == "Course 1");
+            _course = ProjectTo<TrainingCourseDto>(
+                    context.TrainingCourses,
+                    null,
+                    c => c.Content.Select(co => co.Category)
+                )
+                .FirstOrDefault(n => n.CourseName == "Course 1");
         }
         _course.Content[0].Category.CategoryName.ShouldBe("Category 1");
     }
@@ -66,7 +73,6 @@ public class ExpandCollections : IntegrationTest<ExpandCollections.DatabaseIniti
         public int CategoryId { get; set; }
         public string CategoryName { get; set; }
     }
-
 
     public class TrainingCourseDto
     {

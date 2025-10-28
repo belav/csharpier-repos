@@ -33,6 +33,6 @@ namespace System.DirectoryServices
         ADSTYPE_NT_SECURITY_DESCRIPTOR = 25,
         ADSTYPE_UNKNOWN = 26,
         ADSTYPE_DN_WITH_BINARY = 27,
-        ADSTYPE_DN_WITH_STRING = 28
+        ADSTYPE_DN_WITH_STRING = 28,
     }
 }

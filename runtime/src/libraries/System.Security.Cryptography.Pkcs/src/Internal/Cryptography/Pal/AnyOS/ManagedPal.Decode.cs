@@ -22,7 +22,8 @@ namespace Internal.Cryptography.Pal.AnyOS
             out ContentInfo contentInfo,
             out AlgorithmIdentifier contentEncryptionAlgorithm,
             out X509Certificate2Collection originatorCerts,
-            out CryptographicAttributeObjectCollection unprotectedAttributes)
+            out CryptographicAttributeObjectCollection unprotectedAttributes
+        )
         {
             // Read using BER because the CMS specification says the encoding is BER.
             byte[] copy = CopyContent(encodedMessage);
@@ -32,7 +33,8 @@ namespace Internal.Cryptography.Pal.AnyOS
 
             contentInfo = new ContentInfo(
                 new Oid(data.EncryptedContentInfo.ContentType),
-                data.EncryptedContentInfo.EncryptedContent?.ToArray() ?? Array.Empty<byte>());
+                data.EncryptedContentInfo.EncryptedContent?.ToArray() ?? Array.Empty<byte>()
+            );
 
             contentEncryptionAlgorithm =
                 data.EncryptedContentInfo.ContentEncryptionAlgorithm.ToPresentationObject();
@@ -41,11 +43,15 @@ namespace Internal.Cryptography.Pal.AnyOS
 
             if (data.OriginatorInfo.HasValue && data.OriginatorInfo.Value.CertificateSet != null)
             {
-                foreach (CertificateChoiceAsn certChoice in data.OriginatorInfo.Value.CertificateSet)
+                foreach (
+                    CertificateChoiceAsn certChoice in data.OriginatorInfo.Value.CertificateSet
+                )
                 {
                     if (certChoice.Certificate != null)
                     {
-                        originatorCerts.Add(new X509Certificate2(certChoice.Certificate.Value.ToArray()));
+                        originatorCerts.Add(
+                            new X509Certificate2(certChoice.Certificate.Value.ToArray())
+                        );
                     }
                 }
             }
@@ -58,19 +64,26 @@ namespace Internal.Cryptography.Pal.AnyOS
             {
                 if (recipientInfo.Ktri.HasValue)
                 {
-                    recipientInfos.Add(new KeyTransRecipientInfo(new ManagedKeyTransPal(recipientInfo.Ktri.Value)));
+                    recipientInfos.Add(
+                        new KeyTransRecipientInfo(new ManagedKeyTransPal(recipientInfo.Ktri.Value))
+                    );
                 }
                 else if (recipientInfo.Kari.HasValue)
                 {
                     for (int i = 0; i < recipientInfo.Kari.Value.RecipientEncryptedKeys.Length; i++)
                     {
                         recipientInfos.Add(
-                            new KeyAgreeRecipientInfo(new ManagedKeyAgreePal(recipientInfo.Kari.Value, i)));
+                            new KeyAgreeRecipientInfo(
+                                new ManagedKeyAgreePal(recipientInfo.Kari.Value, i)
+                            )
+                        );
                     }
                 }
                 else
                 {
-                    Debug.Fail($"{nameof(RecipientInfoAsn)} deserialized with an unknown recipient type");
+                    Debug.Fail(
+                        $"{nameof(RecipientInfoAsn)} deserialized with an unknown recipient type"
+                    );
                     throw new CryptographicException();
                 }
             }
@@ -86,16 +99,22 @@ namespace Internal.Cryptography.Pal.AnyOS
                 {
                     using (var manager = new PointerMemoryManager<byte>(pin, encodedMessage.Length))
                     {
-                        AsnValueReader reader = new AsnValueReader(encodedMessage, AsnEncodingRules.BER);
+                        AsnValueReader reader = new AsnValueReader(
+                            encodedMessage,
+                            AsnEncodingRules.BER
+                        );
 
                         ContentInfoAsn.Decode(
                             ref reader,
                             manager.Memory,
-                            out ContentInfoAsn parsedContentInfo);
+                            out ContentInfoAsn parsedContentInfo
+                        );
 
                         if (parsedContentInfo.ContentType != Oids.Pkcs7Enveloped)
                         {
-                            throw new CryptographicException(SR.Cryptography_Cms_InvalidMessageType);
+                            throw new CryptographicException(
+                                SR.Cryptography_Cms_InvalidMessageType
+                            );
                         }
 
                         return parsedContentInfo.Content.ToArray();

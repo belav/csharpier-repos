@@ -9,8 +9,7 @@ namespace Samples.AspNet.CS.Controls
 {
     public class AuthorConverter : ExpandableObjectConverter
     {
-        public override bool CanConvertFrom(
-            ITypeDescriptorContext context, Type sourceType)
+        public override bool CanConvertFrom(ITypeDescriptorContext context, Type sourceType)
         {
             if (sourceType == typeof(string))
             {
@@ -19,8 +18,7 @@ namespace Samples.AspNet.CS.Controls
             return base.CanConvertFrom(context, sourceType);
         }
 
-        public override bool CanConvertTo(
-            ITypeDescriptorContext context, Type destinationType)
+        public override bool CanConvertTo(ITypeDescriptorContext context, Type destinationType)
         {
             if (destinationType == typeof(string))
             {
@@ -29,8 +27,11 @@ namespace Samples.AspNet.CS.Controls
             return base.CanConvertTo(context, destinationType);
         }
 
-        public override object ConvertFrom(ITypeDescriptorContext 
-            context, CultureInfo culture, object value)
+        public override object ConvertFrom(
+            ITypeDescriptorContext context,
+            CultureInfo culture,
+            object value
+        )
         {
             if (value == null)
             {
@@ -47,13 +48,12 @@ namespace Samples.AspNet.CS.Controls
 
                 string[] parts = s.Split(' ');
 
-                        // Determine if name is stored as first and 
-                        // last; first, middle, and last;
-                        // or is in error.
+                // Determine if name is stored as first and
+                // last; first, middle, and last;
+                // or is in error.
                 if ((parts.Length < 2) || (parts.Length > 3))
                 {
-                    throw new ArgumentException(
-                        "Name must have 2 or 3 parts.", "value");
+                    throw new ArgumentException("Name must have 2 or 3 parts.", "value");
                 }
 
                 if (parts.Length == 2)
@@ -72,14 +72,16 @@ namespace Samples.AspNet.CS.Controls
 
         public override object ConvertTo(
             ITypeDescriptorContext context,
-            CultureInfo culture, object value, Type destinationType)
+            CultureInfo culture,
+            object value,
+            Type destinationType
+        )
         {
             if (value != null)
             {
                 if (!(value is Author))
                 {
-                    throw new ArgumentException(
-                        "Invalid Author", "value");
+                    throw new ArgumentException("Invalid Author", "value");
                 }
             }
 
@@ -94,21 +96,20 @@ namespace Samples.AspNet.CS.Controls
 
                 if (auth.MiddleName != String.Empty)
                 {
-                    return String.Format("{0} {1} {2}",
+                    return String.Format(
+                        "{0} {1} {2}",
                         auth.FirstName,
                         auth.MiddleName,
-                        auth.LastName);
+                        auth.LastName
+                    );
                 }
                 else
                 {
-                    return String.Format("{0} {1}",
-                         auth.FirstName,
-                        auth.LastName);
+                    return String.Format("{0} {1}", auth.FirstName, auth.LastName);
                 }
             }
 
-            return base.ConvertTo(context, culture, value, 
-                destinationType);
+            return base.ConvertTo(context, culture, value, destinationType);
         }
     }
 }

@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Type Name="IDataErrorInfo" FullName="System.ComponentModel.IDataErrorInfo">
   <TypeSignature Language="C#" Maintainer="auto" Value="public interface IDataErrorInfo" />
-  <TypeSignature Language="ILAsm" Value=".class public interface auto ansi abstract IDataErrorInfo" />
+  <TypeSignature
+    Language="ILAsm"
+    Value=".class public interface auto ansi abstract IDataErrorInfo"
+  />
   <AssemblyInfo>
     <AssemblyName>System</AssemblyName>
     <AssemblyPublicKey>[00 00 00 00 00 00 00 00 04 00 00 00 00 00 00 00]</AssemblyPublicKey>

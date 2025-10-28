@@ -34,7 +34,8 @@ public class ScaffoldingTypeMapper : IScaffoldingTypeMapper
         string storeType,
         bool keyOrIndex,
         bool rowVersion,
-        Type? clrType = null)
+        Type? clrType = null
+    )
     {
         var mapping = clrType is null
             ? _typeMappingSource.FindMapping(storeType)
@@ -63,10 +64,13 @@ public class ScaffoldingTypeMapper : IScaffoldingTypeMapper
             rowVersion: rowVersion,
             fixedLength: mapping.IsFixedLength,
             precision: mapping.Precision,
-            scale: mapping.Scale);
+            scale: mapping.Scale
+        );
 
-        if (defaultTypeMapping != null
-            && string.Equals(defaultTypeMapping.StoreType, storeType, StringComparison.Ordinal))
+        if (
+            defaultTypeMapping != null
+            && string.Equals(defaultTypeMapping.StoreType, storeType, StringComparison.Ordinal)
+        )
         {
             canInfer = true;
 
@@ -80,9 +84,13 @@ public class ScaffoldingTypeMapper : IScaffoldingTypeMapper
                 rowVersion: rowVersion,
                 fixedLength: mapping.IsFixedLength,
                 precision: mapping.Precision,
-                scale: mapping.Scale)!;
+                scale: mapping.Scale
+            )!;
 
-            scaffoldUnicode = unicodeMapping.IsUnicode != defaultTypeMapping.IsUnicode ? defaultTypeMapping.IsUnicode : null;
+            scaffoldUnicode =
+                unicodeMapping.IsUnicode != defaultTypeMapping.IsUnicode
+                    ? defaultTypeMapping.IsUnicode
+                    : null;
 
             // Check for fixed-length
             var fixedLengthMapping = _typeMappingSource.FindMapping(
@@ -93,11 +101,13 @@ public class ScaffoldingTypeMapper : IScaffoldingTypeMapper
                 size: mapping.Size,
                 fixedLength: null,
                 precision: mapping.Precision,
-                scale: mapping.Scale)!;
+                scale: mapping.Scale
+            )!;
 
-            scaffoldFixedLength = fixedLengthMapping.IsFixedLength != defaultTypeMapping.IsFixedLength
-                ? defaultTypeMapping.IsFixedLength
-                : null;
+            scaffoldFixedLength =
+                fixedLengthMapping.IsFixedLength != defaultTypeMapping.IsFixedLength
+                    ? defaultTypeMapping.IsFixedLength
+                    : null;
 
             // Check for size (= max-length)
             var sizedMapping = _typeMappingSource.FindMapping(
@@ -109,9 +119,11 @@ public class ScaffoldingTypeMapper : IScaffoldingTypeMapper
                 rowVersion: rowVersion,
                 fixedLength: false, // Fixed length with no size is not valid
                 precision: mapping.Precision,
-                scale: mapping.Scale)!;
+                scale: mapping.Scale
+            )!;
 
-            scaffoldMaxLength = (sizedMapping.Size == null && defaultTypeMapping.Size == -1)
+            scaffoldMaxLength =
+                (sizedMapping.Size == null && defaultTypeMapping.Size == -1)
                 || sizedMapping.Size == defaultTypeMapping.Size
                     ? null
                     : defaultTypeMapping.Size;
@@ -126,9 +138,13 @@ public class ScaffoldingTypeMapper : IScaffoldingTypeMapper
                 rowVersion: rowVersion,
                 fixedLength: mapping.IsFixedLength,
                 precision: null,
-                scale: mapping.Scale)!;
+                scale: mapping.Scale
+            )!;
 
-            scaffoldPrecision = precisionMapping.Precision != defaultTypeMapping.Precision ? defaultTypeMapping.Precision : null;
+            scaffoldPrecision =
+                precisionMapping.Precision != defaultTypeMapping.Precision
+                    ? defaultTypeMapping.Precision
+                    : null;
 
             // Check for scale
             var scaleMapping = _typeMappingSource.FindMapping(
@@ -140,9 +156,11 @@ public class ScaffoldingTypeMapper : IScaffoldingTypeMapper
                 rowVersion: rowVersion,
                 fixedLength: mapping.IsFixedLength,
                 precision: mapping.Precision,
-                scale: null)!;
+                scale: null
+            )!;
 
-            scaffoldScale = scaleMapping.Scale != defaultTypeMapping.Scale ? defaultTypeMapping.Scale : null;
+            scaffoldScale =
+                scaleMapping.Scale != defaultTypeMapping.Scale ? defaultTypeMapping.Scale : null;
         }
 
         return new TypeScaffoldingInfo(
@@ -152,6 +170,7 @@ public class ScaffoldingTypeMapper : IScaffoldingTypeMapper
             scaffoldMaxLength,
             scaffoldFixedLength,
             scaffoldPrecision,
-            scaffoldScale);
+            scaffoldScale
+        );
     }
 }

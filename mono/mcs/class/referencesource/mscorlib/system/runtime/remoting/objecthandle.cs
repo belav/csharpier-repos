@@ -1,27 +1,27 @@
 // ==++==
-// 
+//
 //   Copyright (c) Microsoft Corporation.  All rights reserved.
-// 
+//
 // ==--==
 /*============================================================
 **
 ** Class:  ObjectHandle
 **
 **
-** ObjectHandle wraps object references. A Handle allows a 
-** marshal by value object to be returned through an 
+** ObjectHandle wraps object references. A Handle allows a
+** marshal by value object to be returned through an
 ** indirection allowing the caller to control when the
 ** object is loaded into their domain.
 **
-** 
+**
 ===========================================================*/
 
-namespace System.Runtime.Remoting{
-
+namespace System.Runtime.Remoting
+{
     using System;
-    using System.Security.Permissions;
     using System.Runtime.InteropServices;
     using System.Runtime.Remoting;
+    using System.Security.Permissions;
 #if FEATURE_REMOTING
     using System.Runtime.Remoting.Activation;
     using System.Runtime.Remoting.Lifetime;
@@ -29,17 +29,15 @@ namespace System.Runtime.Remoting{
 
     [ClassInterface(ClassInterfaceType.AutoDual)]
     [System.Runtime.InteropServices.ComVisible(true)]
-    public class ObjectHandle: 
+    public class ObjectHandle :
 #if FEATURE_REMOTING
-        MarshalByRefObject, 
+        MarshalByRefObject,
 #endif
-        IObjectHandle 
+            IObjectHandle
     {
         private Object WrappedObject;
-        
-        private ObjectHandle()
-        {
-        }
+
+        private ObjectHandle() { }
 
         public ObjectHandle(Object o)
         {
@@ -55,7 +53,7 @@ namespace System.Runtime.Remoting{
         // lifetime is being used, this can be changed in this method to
         // specify a custom lifetime.
 #if FEATURE_REMOTING
-        [System.Security.SecurityCritical]  // auto-generated_required
+        [System.Security.SecurityCritical] // auto-generated_required
         public override Object InitializeLifetimeService()
         {
             BCLDebug.Trace("REMOTE", "ObjectHandle.InitializeLifetimeService");
@@ -70,7 +68,8 @@ namespace System.Runtime.Remoting{
             //
 
             MarshalByRefObject mbr = WrappedObject as MarshalByRefObject;
-            if (mbr != null) {
+            if (mbr != null)
+            {
                 Object o = mbr.InitializeLifetimeService();
                 if (o == null)
                     return null;

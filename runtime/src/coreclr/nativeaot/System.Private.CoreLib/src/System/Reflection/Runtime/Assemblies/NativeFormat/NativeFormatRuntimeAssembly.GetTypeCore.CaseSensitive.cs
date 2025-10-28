@@ -4,7 +4,6 @@
 using System.Reflection;
 using System.Reflection.Runtime.General;
 using System.Reflection.Runtime.TypeInfos;
-
 using Internal.Metadata.NativeFormat;
 using Internal.Reflection.Core;
 
@@ -27,7 +26,14 @@ namespace System.Reflection.Runtime.Assemblies.NativeFormat
                 ScopeDefinitionHandle scopeDefinitionHandle = scopeDefinition.Handle;
 
                 NamespaceDefinition namespaceDefinition;
-                if (!TryResolveNamespaceDefinitionCaseSensitive(reader, namespaceParts, scopeDefinitionHandle, out namespaceDefinition))
+                if (
+                    !TryResolveNamespaceDefinitionCaseSensitive(
+                        reader,
+                        namespaceParts,
+                        scopeDefinitionHandle,
+                        out namespaceDefinition
+                    )
+                )
                     continue;
 
                 // We've successfully drilled down the namespace chain. Now look for a top-level type matching the type name.
@@ -40,14 +46,17 @@ namespace System.Reflection.Runtime.Assemblies.NativeFormat
                 }
 
                 // No match found in this assembly - see if there's a matching type forwarder.
-                TypeForwarderHandleCollection candidateTypeForwarders = namespaceDefinition.TypeForwarders;
+                TypeForwarderHandleCollection candidateTypeForwarders =
+                    namespaceDefinition.TypeForwarders;
                 foreach (TypeForwarderHandle typeForwarderHandle in candidateTypeForwarders)
                 {
                     TypeForwarder typeForwarder = typeForwarderHandle.GetTypeForwarder(reader);
                     if (typeForwarder.Name.StringEquals(name, reader))
                     {
-                        RuntimeAssemblyName redirectedAssemblyName = typeForwarder.Scope.ToRuntimeAssemblyName(reader);
-                        RuntimeAssemblyInfo redirectedAssembly = RuntimeAssemblyInfo.GetRuntimeAssemblyIfExists(redirectedAssemblyName);
+                        RuntimeAssemblyName redirectedAssemblyName =
+                            typeForwarder.Scope.ToRuntimeAssemblyName(reader);
+                        RuntimeAssemblyInfo redirectedAssembly =
+                            RuntimeAssemblyInfo.GetRuntimeAssemblyIfExists(redirectedAssemblyName);
                         if (redirectedAssembly == null)
                             return null;
                         return redirectedAssembly.GetTypeCoreCaseSensitive(fullName);
@@ -58,10 +67,18 @@ namespace System.Reflection.Runtime.Assemblies.NativeFormat
             return null;
         }
 
-        private static bool TryResolveNamespaceDefinitionCaseSensitive(MetadataReader reader, string[] namespaceParts, ScopeDefinitionHandle scopeDefinitionHandle, out NamespaceDefinition namespaceDefinition)
+        private static bool TryResolveNamespaceDefinitionCaseSensitive(
+            MetadataReader reader,
+            string[] namespaceParts,
+            ScopeDefinitionHandle scopeDefinitionHandle,
+            out NamespaceDefinition namespaceDefinition
+        )
         {
-            namespaceDefinition = scopeDefinitionHandle.GetScopeDefinition(reader).RootNamespaceDefinition.GetNamespaceDefinition(reader);
-            NamespaceDefinitionHandleCollection candidates = namespaceDefinition.NamespaceDefinitions;
+            namespaceDefinition = scopeDefinitionHandle
+                .GetScopeDefinition(reader)
+                .RootNamespaceDefinition.GetNamespaceDefinition(reader);
+            NamespaceDefinitionHandleCollection candidates =
+                namespaceDefinition.NamespaceDefinitions;
             int idx = namespaceParts.Length;
             while (idx-- != 0)
             {

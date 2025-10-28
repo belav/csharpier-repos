@@ -3,12 +3,14 @@
 //   Copyright (c) Microsoft Corporation.  All rights reserved.
 //
 // ==--==
-namespace System.Globalization {
+namespace System.Globalization
+{
     using System;
 
     [Serializable]
-[System.Runtime.InteropServices.ComVisible(true)]
-    public enum GregorianCalendarTypes {
+    [System.Runtime.InteropServices.ComVisible(true)]
+    public enum GregorianCalendarTypes
+    {
         Localized = Calendar.CAL_GREGORIAN,
         USEnglish = Calendar.CAL_GREGORIAN_US,
         MiddleEastFrench = Calendar.CAL_GREGORIAN_ME_FRENCH,

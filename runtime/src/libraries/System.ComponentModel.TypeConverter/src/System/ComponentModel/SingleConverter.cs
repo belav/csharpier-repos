@@ -24,7 +24,8 @@ namespace System.ComponentModel
         /// <summary>
         /// Convert the given value to a string using the given radix
         /// </summary>
-        internal override object FromString(string value, int radix) => Convert.ToSingle(value, CultureInfo.CurrentCulture);
+        internal override object FromString(string value, int radix) =>
+            Convert.ToSingle(value, CultureInfo.CurrentCulture);
 
         /// <summary>
         /// Convert the given value to a string using the given formatInfo

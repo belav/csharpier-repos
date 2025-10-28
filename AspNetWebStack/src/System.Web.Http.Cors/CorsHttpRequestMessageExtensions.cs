@@ -44,16 +44,22 @@ namespace System.Web.Http.Cors
                     HttpMethod = request.Method.Method,
                     Host = request.Headers.Host,
                     Origin = request.GetHeader(CorsConstants.Origin),
-                    AccessControlRequestMethod = request.GetHeader(CorsConstants.AccessControlRequestMethod)
+                    AccessControlRequestMethod = request.GetHeader(
+                        CorsConstants.AccessControlRequestMethod
+                    ),
                 };
                 requestContext.Properties.Add(typeof(HttpRequestMessage).FullName, request);
 
-                IEnumerable<string> accessControlRequestHeaders = request.GetHeaders(CorsConstants.AccessControlRequestHeaders);
+                IEnumerable<string> accessControlRequestHeaders = request.GetHeaders(
+                    CorsConstants.AccessControlRequestHeaders
+                );
                 foreach (string accessControlRequestHeader in accessControlRequestHeaders)
                 {
                     if (accessControlRequestHeader != null)
                     {
-                        IEnumerable<string> headerValues = accessControlRequestHeader.Split(',').Select(x => x.Trim());
+                        IEnumerable<string> headerValues = accessControlRequestHeader
+                            .Split(',')
+                            .Select(x => x.Trim());
                         foreach (string header in headerValues)
                         {
                             requestContext.AccessControlRequestHeaders.Add(header);

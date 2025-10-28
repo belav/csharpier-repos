@@ -15,13 +15,10 @@ namespace Microsoft.Build.Tasks.Xaml
             LinePosition = linePosition;
         }
 
-        public string Message 
-        { get; private set; }
-        
-        public int LineNumber 
-        { get; private set; }
-        
-        public int LinePosition 
-        { get; private set; }
+        public string Message { get; private set; }
+
+        public int LineNumber { get; private set; }
+
+        public int LinePosition { get; private set; }
     }
 }

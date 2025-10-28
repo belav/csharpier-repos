@@ -25,8 +25,7 @@
   -->
   <Choose>
     <When Condition=" '$(IsHelixPRCheck)' == 'true' ">
-      <!-- aspnetcore-ci[-official] (ci.yml) -->
-      <!-- aspnetcore-quarantined-pr (quarantined-pr.yml) -->
+      <!-- aspnetcore-ci[-official] (ci.yml) --><!-- aspnetcore-quarantined-pr (quarantined-pr.yml) -->
       <ItemGroup>
         <HelixAvailableTargetQueue Include="Ubuntu.2004.Amd64.Open" Platform="Linux" />
         <HelixAvailableTargetQueue Include="OSX.13.Amd64.Open" Platform="OSX" />
@@ -35,8 +34,7 @@
       </ItemGroup>
     </When>
     <Otherwise>
-      <!-- aspnetcore-helix-matrix[-internal] (helix-matrix.yml) and RunHelix.ps1 -->
-      <!-- aspnetcore-quarantined-tests (quarantined-tests.yml) and RunHelix.ps1 -RunQuarantinedTests -->
+      <!-- aspnetcore-helix-matrix[-internal] (helix-matrix.yml) and RunHelix.ps1 --><!-- aspnetcore-quarantined-tests (quarantined-tests.yml) and RunHelix.ps1 -RunQuarantinedTests -->
       <ItemGroup>
         <!-- Linux -->
         <HelixAvailableTargetQueue Include="$(HelixQueueAlmaLinux8)" Platform="Linux" />
@@ -55,8 +53,11 @@
         <HelixAvailableTargetQueue Include="Windows.Amd64.Server2022.Open" Platform="Windows" />
 
         <!-- IIS Express isn't supported on arm64 and most of the IsWindowsOnlyTests depend on its setup scripts. -->
-        <HelixAvailableTargetQueue Include="windows.11.arm64.open" Platform="Windows"
-            Condition=" '$(IsWindowsOnlyTest)' != 'true' "/>
+        <HelixAvailableTargetQueue
+          Include="windows.11.arm64.open"
+          Platform="Windows"
+          Condition=" '$(IsWindowsOnlyTest)' != 'true' "
+        />
       </ItemGroup>
     </Otherwise>
   </Choose>

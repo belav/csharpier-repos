@@ -9,17 +9,18 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities;
 
 public class BuildSource
 {
-    public ICollection<BuildReference> References { get; } = new List<BuildReference>
-    {
-        BuildReference.ByName("netstandard"),
-        BuildReference.ByName("System.Collections"),
-        BuildReference.ByName("System.ComponentModel.Annotations"),
-        BuildReference.ByName("System.Data.Common"),
-        BuildReference.ByName("System.Linq.Expressions"),
-        BuildReference.ByName("System.Runtime"),
-        BuildReference.ByName("System.Runtime.Extensions"),
-        BuildReference.ByName("System.Text.RegularExpressions")
-    };
+    public ICollection<BuildReference> References { get; } =
+        new List<BuildReference>
+        {
+            BuildReference.ByName("netstandard"),
+            BuildReference.ByName("System.Collections"),
+            BuildReference.ByName("System.ComponentModel.Annotations"),
+            BuildReference.ByName("System.Data.Common"),
+            BuildReference.ByName("System.Linq.Expressions"),
+            BuildReference.ByName("System.Runtime"),
+            BuildReference.ByName("System.Runtime.Extensions"),
+            BuildReference.ByName("System.Text.RegularExpressions"),
+        };
 
     public string TargetDir { get; set; }
     public Dictionary<string, string> Sources { get; set; } = new();
@@ -37,10 +38,16 @@ public class BuildSource
             {
                 if (string.IsNullOrEmpty(reference.Path))
                 {
-                    throw new InvalidOperationException("Could not find path for reference " + reference);
+                    throw new InvalidOperationException(
+                        "Could not find path for reference " + reference
+                    );
                 }
 
-                File.Copy(reference.Path, Path.Combine(TargetDir, Path.GetFileName(reference.Path)), overwrite: true);
+                File.Copy(
+                    reference.Path,
+                    Path.Combine(TargetDir, Path.GetFileName(reference.Path)),
+                    overwrite: true
+                );
             }
 
             references.AddRange(reference.References);
@@ -48,15 +55,21 @@ public class BuildSource
 
         var compilation = CSharpCompilation.Create(
             projectName,
-            Sources.Select(
-                s => SyntaxFactory.ParseSyntaxTree(
+            Sources.Select(s =>
+                SyntaxFactory.ParseSyntaxTree(
                     text: s.Value,
                     path: s.Key,
                     options: new CSharpParseOptions(
                         LanguageVersion.Latest,
-                        EmitDocumentationDiagnostics ? DocumentationMode.Diagnose : DocumentationMode.Parse))),
+                        EmitDocumentationDiagnostics
+                            ? DocumentationMode.Diagnose
+                            : DocumentationMode.Parse
+                    )
+                )
+            ),
             references,
-            CreateOptions());
+            CreateOptions()
+        );
 
         var targetPath = Path.Combine(TargetDir ?? Path.GetTempPath(), projectName + ".dll");
 
@@ -67,7 +80,8 @@ public class BuildSource
             {
                 throw new InvalidOperationException(
                     $@"Build failed:
-{string.Join(Environment.NewLine, result.Diagnostics)}");
+{string.Join(Environment.NewLine, result.Diagnostics)}"
+                );
             }
         }
 
@@ -86,15 +100,21 @@ public class BuildSource
 
         var compilation = CSharpCompilation.Create(
             projectName,
-            Sources.Select(
-                s => SyntaxFactory.ParseSyntaxTree(
+            Sources.Select(s =>
+                SyntaxFactory.ParseSyntaxTree(
                     text: s.Value,
                     path: s.Key,
                     options: new CSharpParseOptions(
                         LanguageVersion.Latest,
-                        EmitDocumentationDiagnostics ? DocumentationMode.Diagnose : DocumentationMode.Parse))),
+                        EmitDocumentationDiagnostics
+                            ? DocumentationMode.Diagnose
+                            : DocumentationMode.Parse
+                    )
+                )
+            ),
             references,
-            CreateOptions());
+            CreateOptions()
+        );
 
         var diagnostics = compilation.GetDiagnostics();
         if (!diagnostics.IsEmpty)
@@ -109,7 +129,8 @@ Location:
 {diagnostics[0].Location.SourceTree?.GetRoot().FindNode(diagnostics[0].Location.SourceSpan)}
 
 All diagnostics:
-{string.Join(Environment.NewLine, diagnostics)}");
+{string.Join(Environment.NewLine, diagnostics)}"
+            );
         }
 
         Assembly assembly;
@@ -120,7 +141,8 @@ All diagnostics:
             {
                 throw new InvalidOperationException(
                     $@"Failed to emit compilation:
-{string.Join(Environment.NewLine, result.Diagnostics)}");
+{string.Join(Environment.NewLine, result.Diagnostics)}"
+                );
             }
 
             assembly = Assembly.Load(stream.ToArray());
@@ -134,15 +156,21 @@ All diagnostics:
         var compilation = CSharpCompilation
             .Create(
                 assemblyName: Path.GetRandomFileName(),
-                Sources.Select(
-                    s => SyntaxFactory.ParseSyntaxTree(
+                Sources.Select(s =>
+                    SyntaxFactory.ParseSyntaxTree(
                         text: s.Value,
                         path: s.Key,
                         options: new CSharpParseOptions(
                             LanguageVersion.Latest,
-                            EmitDocumentationDiagnostics ? DocumentationMode.Diagnose : DocumentationMode.Parse))),
+                            EmitDocumentationDiagnostics
+                                ? DocumentationMode.Diagnose
+                                : DocumentationMode.Parse
+                        )
+                    )
+                ),
                 References.SelectMany(r => r.References),
-                CreateOptions())
+                CreateOptions()
+            )
             .WithAnalyzers([new UninitializedDbSetDiagnosticSuppressor()]);
 
         var diagnostics = await compilation.GetAllDiagnosticsAsync();
@@ -158,7 +186,8 @@ Location:
 {diagnostics[0].Location.SourceTree?.GetRoot().FindNode(diagnostics[0].Location.SourceSpan)}
 
 All diagnostics:
-{string.Join(Environment.NewLine, diagnostics)}");
+{string.Join(Environment.NewLine, diagnostics)}"
+            );
         }
 
         Assembly assembly;
@@ -169,7 +198,8 @@ All diagnostics:
             {
                 throw new InvalidOperationException(
                     $@"Failed to emit compilation:
-{string.Join(Environment.NewLine, result.Diagnostics)}");
+{string.Join(Environment.NewLine, result.Diagnostics)}"
+                );
             }
 
             assembly = Assembly.Load(stream.ToArray());
@@ -178,26 +208,25 @@ All diagnostics:
         return assembly;
     }
 
-    private CSharpCompilationOptions CreateOptions()
-        => new(
+    private CSharpCompilationOptions CreateOptions() =>
+        new(
             OutputKind.DynamicallyLinkedLibrary,
-            nullableContextOptions: NullableReferenceTypes ? NullableContextOptions.Enable : NullableContextOptions.Disable,
+            nullableContextOptions: NullableReferenceTypes
+                ? NullableContextOptions.Enable
+                : NullableContextOptions.Disable,
             reportSuppressedDiagnostics: false,
             specificDiagnosticOptions: new Dictionary<string, ReportDiagnostic>
             {
                 // Displays the text of a warning defined with the #warning directive
                 { "CS1030", ReportDiagnostic.Suppress },
-
                 // Assuming assembly reference "Assembly Name #1" matches "Assembly Name #2", you may need to supply runtime policy
                 { "CS1701", ReportDiagnostic.Suppress },
-
                 // Assuming assembly reference "Assembly Name #1" matches "Assembly Name #2", you may need to supply runtime policy
                 { "CS1702", ReportDiagnostic.Suppress },
-
                 // Assembly 'AssemblyName1' uses 'TypeName' which has a higher version than referenced assembly 'AssemblyName2'
                 { "CS1705", ReportDiagnostic.Suppress },
-
                 // Unnecessary using directive.
-                { "CS8019", ReportDiagnostic.Suppress }
-            });
+                { "CS8019", ReportDiagnostic.Suppress },
+            }
+        );
 }

@@ -28,7 +28,12 @@ namespace IntelHardwareIntrinsicTest.SSE2
                         longTable.SetOutArray(result, i);
                     }
 
-                    CheckMethodEight<long, long> checkLong = (Span<long> x, Span<long> y, Span<long> z, Span<long> a) =>
+                    CheckMethodEight<long, long> checkLong = (
+                        Span<long> x,
+                        Span<long> y,
+                        Span<long> z,
+                        Span<long> a
+                    ) =>
                     {
                         a[0] = x[0];
                         a[1] = 0;
@@ -37,14 +42,21 @@ namespace IntelHardwareIntrinsicTest.SSE2
 
                     if (!longTable.CheckResult(checkLong))
                     {
-                        PrintError(longTable, methodUnderTestName, "(Span<long> x, Span<long> y, Span<long> z, Span<long> a) => MoveScalar", checkLong);
+                        PrintError(
+                            longTable,
+                            methodUnderTestName,
+                            "(Span<long> x, Span<long> y, Span<long> z, Span<long> a) => MoveScalar",
+                            checkLong
+                        );
                         Assert.Fail("");
                     }
                 }
             }
             else
             {
-                Console.WriteLine($"Sse2.IsSupported: {Sse2.IsSupported}, skipped tests of {typeof(Sse2)}.{methodUnderTestName}");
+                Console.WriteLine(
+                    $"Sse2.IsSupported: {Sse2.IsSupported}, skipped tests of {typeof(Sse2)}.{methodUnderTestName}"
+                );
             }
         }
     }

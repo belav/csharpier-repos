@@ -25,7 +25,8 @@ namespace HtmlAgilityPack
             int linePosition,
             int streamPosition,
             string sourceText,
-            string reason)
+            string reason
+        )
         {
             _code = code;
             _line = line;

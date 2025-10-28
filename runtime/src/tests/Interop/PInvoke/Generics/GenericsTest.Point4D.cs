@@ -11,16 +11,38 @@ unsafe partial class GenericsNative
     public static extern Point4<double> GetPoint4D(double e00, double e01, double e02, double e03);
 
     [DllImport(nameof(GenericsNative))]
-    public static extern void GetPoint4DOut(double e00, double e01, double e02, double e03, Point4<double>* value);
+    public static extern void GetPoint4DOut(
+        double e00,
+        double e01,
+        double e02,
+        double e03,
+        Point4<double>* value
+    );
 
     [DllImport(nameof(GenericsNative))]
-    public static extern void GetPoint4DOut(double e00, double e01, double e02, double e03, out Point4<double> value);
+    public static extern void GetPoint4DOut(
+        double e00,
+        double e01,
+        double e02,
+        double e03,
+        out Point4<double> value
+    );
 
     [DllImport(nameof(GenericsNative))]
-    public static extern Point4<double>* GetPoint4DPtr(double e00, double e01, double e02, double e03);
+    public static extern Point4<double>* GetPoint4DPtr(
+        double e00,
+        double e01,
+        double e02,
+        double e03
+    );
 
     [DllImport(nameof(GenericsNative), EntryPoint = "GetPoint4DPtr")]
-    public static extern ref readonly Point4<double> GetPoint4DRef(double e00, double e01, double e02, double e03);
+    public static extern ref readonly Point4<double> GetPoint4DRef(
+        double e00,
+        double e01,
+        double e02,
+        double e03
+    );
 
     [DllImport(nameof(GenericsNative))]
     public static extern Point4<double> AddPoint4D(Point4<double> lhs, Point4<double> rhs);
@@ -29,7 +51,10 @@ unsafe partial class GenericsNative
     public static extern Point4<double> AddPoint4Ds(Point4<double>* pValues, int count);
 
     [DllImport(nameof(GenericsNative))]
-    public static extern Point4<double> AddPoint4Ds([MarshalAs(UnmanagedType.LPArray, SizeParamIndex = 1)] Point4<double>[] pValues, int count);
+    public static extern Point4<double> AddPoint4Ds(
+        [MarshalAs(UnmanagedType.LPArray, SizeParamIndex = 1)] Point4<double>[] pValues,
+        int count
+    );
 
     [DllImport(nameof(GenericsNative))]
     public static extern Point4<double> AddPoint4Ds(in Point4<double> pValues, int count);
@@ -64,7 +89,12 @@ unsafe partial class GenericsTest
         Assert.Equal(value4->e02, 3.0);
         Assert.Equal(value4->e03, 4.0);
 
-        ref readonly GenericsNative.Point4<double> value5 = ref GenericsNative.GetPoint4DRef(1.0, 2.0, 3.0, 4.0);
+        ref readonly GenericsNative.Point4<double> value5 = ref GenericsNative.GetPoint4DRef(
+            1.0,
+            2.0,
+            3.0,
+            4.0
+        );
         Assert.Equal(value5.e00, 1.0);
         Assert.Equal(value5.e01, 2.0);
         Assert.Equal(value5.e02, 3.0);
@@ -76,17 +106,21 @@ unsafe partial class GenericsTest
         Assert.Equal(result.e02, 6.0);
         Assert.Equal(result.e03, 8.0);
 
-        GenericsNative.Point4<double>[] values = new GenericsNative.Point4<double>[] {
+        GenericsNative.Point4<double>[] values = new GenericsNative.Point4<double>[]
+        {
             value,
             value2,
             value3,
             *value4,
-            value5
+            value5,
         };
 
         fixed (GenericsNative.Point4<double>* pValues = &values[0])
         {
-            GenericsNative.Point4<double> result2 = GenericsNative.AddPoint4Ds(pValues, values.Length);
+            GenericsNative.Point4<double> result2 = GenericsNative.AddPoint4Ds(
+                pValues,
+                values.Length
+            );
             Assert.Equal(result2.e00, 5.0);
             Assert.Equal(result2.e01, 10.0);
             Assert.Equal(result2.e02, 15.0);
@@ -99,7 +133,10 @@ unsafe partial class GenericsTest
         Assert.Equal(result3.e02, 15.0);
         Assert.Equal(result3.e03, 20.0);
 
-        GenericsNative.Point4<double> result4 = GenericsNative.AddPoint4Ds(in values[0], values.Length);
+        GenericsNative.Point4<double> result4 = GenericsNative.AddPoint4Ds(
+            in values[0],
+            values.Length
+        );
         Assert.Equal(result4.e00, 5.0);
         Assert.Equal(result4.e01, 10.0);
         Assert.Equal(result4.e02, 15.0);

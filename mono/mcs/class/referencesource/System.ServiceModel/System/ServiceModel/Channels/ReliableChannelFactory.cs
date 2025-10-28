@@ -7,7 +7,9 @@ namespace System.ServiceModel.Channels
     using System.Runtime;
     using System.ServiceModel;
 
-    class ReliableChannelFactory<TChannel, InnerChannel> : ChannelFactoryBase<TChannel>, IReliableFactorySettings
+    class ReliableChannelFactory<TChannel, InnerChannel>
+        : ChannelFactoryBase<TChannel>,
+            IReliableFactorySettings
         where InnerChannel : class, IChannel
     {
         TimeSpan acknowledgementInterval;
@@ -23,7 +25,11 @@ namespace System.ServiceModel.Channels
 
         IChannelFactory<InnerChannel> innerChannelFactory;
 
-        public ReliableChannelFactory(ReliableSessionBindingElement settings, IChannelFactory<InnerChannel> innerChannelFactory, Binding binding)
+        public ReliableChannelFactory(
+            ReliableSessionBindingElement settings,
+            IChannelFactory<InnerChannel> innerChannelFactory,
+            Binding binding
+        )
             : base(binding)
         {
             this.acknowledgementInterval = settings.AcknowledgementInterval;
@@ -129,7 +135,11 @@ namespace System.ServiceModel.Channels
             this.innerChannelFactory.Open(timeout);
         }
 
-        protected override IAsyncResult OnBeginOpen(TimeSpan timeout, AsyncCallback callback, object state)
+        protected override IAsyncResult OnBeginOpen(
+            TimeSpan timeout,
+            AsyncCallback callback,
+            object state
+        )
         {
             return this.innerChannelFactory.BeginOpen(callback, state);
         }
@@ -148,25 +158,30 @@ namespace System.ServiceModel.Channels
             this.innerChannelFactory.Close(timeoutHelper.RemainingTime());
         }
 
-        protected override IAsyncResult OnBeginClose(TimeSpan timeout, AsyncCallback callback, object state)
+        protected override IAsyncResult OnBeginClose(
+            TimeSpan timeout,
+            AsyncCallback callback,
+            object state
+        )
         {
             // Closing base first to close channels.  Must close higher channels before closing lower channels.
             return OperationWithTimeoutComposer.BeginComposeAsyncOperations(
                 timeout,
-                new OperationWithTimeoutBeginCallback[] 
+                new OperationWithTimeoutBeginCallback[]
                 {
                     new OperationWithTimeoutBeginCallback(base.OnBeginClose),
                     new OperationWithTimeoutBeginCallback(this.faultHelper.BeginClose),
-                    new OperationWithTimeoutBeginCallback(this.innerChannelFactory.BeginClose) 
+                    new OperationWithTimeoutBeginCallback(this.innerChannelFactory.BeginClose),
                 },
-                new OperationEndCallback[] 
+                new OperationEndCallback[]
                 {
                     new OperationEndCallback(base.OnEndClose),
                     new OperationEndCallback(this.faultHelper.EndClose),
-                    new OperationEndCallback(this.innerChannelFactory.EndClose)
+                    new OperationEndCallback(this.innerChannelFactory.EndClose),
                 },
-                callback, 
-                state);
+                callback,
+                state
+            );
         }
 
         protected override void OnEndClose(IAsyncResult result)
@@ -176,28 +191,73 @@ namespace System.ServiceModel.Channels
 
         protected override TChannel OnCreateChannel(EndpointAddress address, Uri via)
         {
-            LateBoundChannelParameterCollection channelParameters = new LateBoundChannelParameterCollection();
+            LateBoundChannelParameterCollection channelParameters =
+                new LateBoundChannelParameterCollection();
 
-            IClientReliableChannelBinder binder = ClientReliableChannelBinder<InnerChannel>.CreateBinder(address, via,
-                this.InnerChannelFactory, MaskingMode.All,
-                TolerateFaultsMode.IfNotSecuritySession, channelParameters, this.DefaultCloseTimeout,
-                this.DefaultSendTimeout);
+            IClientReliableChannelBinder binder =
+                ClientReliableChannelBinder<InnerChannel>.CreateBinder(
+                    address,
+                    via,
+                    this.InnerChannelFactory,
+                    MaskingMode.All,
+                    TolerateFaultsMode.IfNotSecuritySession,
+                    channelParameters,
+                    this.DefaultCloseTimeout,
+                    this.DefaultSendTimeout
+                );
 
             if (typeof(TChannel) == typeof(IOutputSessionChannel))
             {
-                if (typeof(InnerChannel) == typeof(IDuplexChannel) || typeof(InnerChannel) == typeof(IDuplexSessionChannel))
-                    return (TChannel)(object)new ReliableOutputSessionChannelOverDuplex(this, this, binder, this.faultHelper, channelParameters);
+                if (
+                    typeof(InnerChannel) == typeof(IDuplexChannel)
+                    || typeof(InnerChannel) == typeof(IDuplexSessionChannel)
+                )
+                    return (TChannel)
+                        (object)
+                            new ReliableOutputSessionChannelOverDuplex(
+                                this,
+                                this,
+                                binder,
+                                this.faultHelper,
+                                channelParameters
+                            );
 
                 // typeof(InnerChannel) == typeof(IRequestChannel) || typeof(InnerChannel) == typeof(IRequestSessionChannel))
-                return (TChannel)(object)new ReliableOutputSessionChannelOverRequest(this, this, binder, this.faultHelper, channelParameters);
+                return (TChannel)
+                    (object)
+                        new ReliableOutputSessionChannelOverRequest(
+                            this,
+                            this,
+                            binder,
+                            this.faultHelper,
+                            channelParameters
+                        );
             }
             else if (typeof(TChannel) == typeof(IDuplexSessionChannel))
             {
-                return (TChannel)(object)new ClientReliableDuplexSessionChannel(this, this, binder, this.faultHelper, channelParameters, WsrmUtilities.NextSequenceId());
+                return (TChannel)
+                    (object)
+                        new ClientReliableDuplexSessionChannel(
+                            this,
+                            this,
+                            binder,
+                            this.faultHelper,
+                            channelParameters,
+                            WsrmUtilities.NextSequenceId()
+                        );
             }
 
             // (typeof(TChannel) == typeof(IRequestSessionChannel)
-            return (TChannel)(object)new ReliableRequestSessionChannel(this, this, binder, this.faultHelper, channelParameters, WsrmUtilities.NextSequenceId());
+            return (TChannel)
+                (object)
+                    new ReliableRequestSessionChannel(
+                        this,
+                        this,
+                        binder,
+                        this.faultHelper,
+                        channelParameters,
+                        WsrmUtilities.NextSequenceId()
+                    );
         }
     }
 }

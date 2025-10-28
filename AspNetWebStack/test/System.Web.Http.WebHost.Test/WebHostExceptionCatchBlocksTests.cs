@@ -12,12 +12,15 @@ namespace System.Web.Http.WebHost
         public void HttpControllerHandlerBufferContent_IsSpecifiedValue()
         {
             // Act
-            ExceptionContextCatchBlock catchBlock = WebHostExceptionCatchBlocks.HttpControllerHandlerBufferContent;
+            ExceptionContextCatchBlock catchBlock =
+                WebHostExceptionCatchBlocks.HttpControllerHandlerBufferContent;
 
             // Assert
-            ExceptionContextCatchBlock expected =
-                new ExceptionContextCatchBlock("HttpControllerHandler.BufferContent", isTopLevel: true,
-                    callsHandler: true);
+            ExceptionContextCatchBlock expected = new ExceptionContextCatchBlock(
+                "HttpControllerHandler.BufferContent",
+                isTopLevel: true,
+                callsHandler: true
+            );
             AssertEqual(expected, catchBlock);
         }
 
@@ -25,10 +28,12 @@ namespace System.Web.Http.WebHost
         public void HttpControllerHandlerBufferContent_IsSameInstance()
         {
             // Arrange
-            ExceptionContextCatchBlock first = WebHostExceptionCatchBlocks.HttpControllerHandlerBufferContent;
+            ExceptionContextCatchBlock first =
+                WebHostExceptionCatchBlocks.HttpControllerHandlerBufferContent;
 
             // Act
-            ExceptionContextCatchBlock second = WebHostExceptionCatchBlocks.HttpControllerHandlerBufferContent;
+            ExceptionContextCatchBlock second =
+                WebHostExceptionCatchBlocks.HttpControllerHandlerBufferContent;
 
             // Assert
             Assert.Same(first, second);
@@ -38,12 +43,15 @@ namespace System.Web.Http.WebHost
         public void HttpControllerHandlerBufferError_IsSpecifiedValue()
         {
             // Act
-            ExceptionContextCatchBlock catchBlock = WebHostExceptionCatchBlocks.HttpControllerHandlerBufferError;
+            ExceptionContextCatchBlock catchBlock =
+                WebHostExceptionCatchBlocks.HttpControllerHandlerBufferError;
 
             // Assert
-            ExceptionContextCatchBlock expected =
-                new ExceptionContextCatchBlock("HttpControllerHandler.BufferError", isTopLevel: true,
-                    callsHandler: false);
+            ExceptionContextCatchBlock expected = new ExceptionContextCatchBlock(
+                "HttpControllerHandler.BufferError",
+                isTopLevel: true,
+                callsHandler: false
+            );
             AssertEqual(expected, catchBlock);
         }
 
@@ -51,10 +59,12 @@ namespace System.Web.Http.WebHost
         public void HttpControllerHandlerBufferError_IsSameInstance()
         {
             // Arrange
-            ExceptionContextCatchBlock first = WebHostExceptionCatchBlocks.HttpControllerHandlerBufferError;
+            ExceptionContextCatchBlock first =
+                WebHostExceptionCatchBlocks.HttpControllerHandlerBufferError;
 
             // Act
-            ExceptionContextCatchBlock second = WebHostExceptionCatchBlocks.HttpControllerHandlerBufferError;
+            ExceptionContextCatchBlock second =
+                WebHostExceptionCatchBlocks.HttpControllerHandlerBufferError;
 
             // Assert
             Assert.Same(first, second);
@@ -64,12 +74,15 @@ namespace System.Web.Http.WebHost
         public void HttpControllerHandlerComputeContentLength_IsSpecifiedValue()
         {
             // Act
-            ExceptionContextCatchBlock catchBlock = WebHostExceptionCatchBlocks.HttpControllerHandlerComputeContentLength;
+            ExceptionContextCatchBlock catchBlock =
+                WebHostExceptionCatchBlocks.HttpControllerHandlerComputeContentLength;
 
             // Assert
-            ExceptionContextCatchBlock expected =
-                new ExceptionContextCatchBlock("HttpControllerHandler.ComputeContentLength", isTopLevel: true,
-                    callsHandler: false);
+            ExceptionContextCatchBlock expected = new ExceptionContextCatchBlock(
+                "HttpControllerHandler.ComputeContentLength",
+                isTopLevel: true,
+                callsHandler: false
+            );
             AssertEqual(expected, catchBlock);
         }
 
@@ -77,10 +90,12 @@ namespace System.Web.Http.WebHost
         public void HttpControllerHandlerComputeContentLength_IsSameInstance()
         {
             // Arrange
-            ExceptionContextCatchBlock first = WebHostExceptionCatchBlocks.HttpControllerHandlerComputeContentLength;
+            ExceptionContextCatchBlock first =
+                WebHostExceptionCatchBlocks.HttpControllerHandlerComputeContentLength;
 
             // Act
-            ExceptionContextCatchBlock second = WebHostExceptionCatchBlocks.HttpControllerHandlerComputeContentLength;
+            ExceptionContextCatchBlock second =
+                WebHostExceptionCatchBlocks.HttpControllerHandlerComputeContentLength;
 
             // Assert
             Assert.Same(first, second);
@@ -90,12 +105,15 @@ namespace System.Web.Http.WebHost
         public void HttpControllerHandlerStreamContent_IsSpecifiedValue()
         {
             // Act
-            ExceptionContextCatchBlock catchBlock = WebHostExceptionCatchBlocks.HttpControllerHandlerStreamContent;
+            ExceptionContextCatchBlock catchBlock =
+                WebHostExceptionCatchBlocks.HttpControllerHandlerStreamContent;
 
             // Assert
-            ExceptionContextCatchBlock expected =
-                new ExceptionContextCatchBlock("HttpControllerHandler.StreamContent", isTopLevel: true,
-                    callsHandler: false);
+            ExceptionContextCatchBlock expected = new ExceptionContextCatchBlock(
+                "HttpControllerHandler.StreamContent",
+                isTopLevel: true,
+                callsHandler: false
+            );
             AssertEqual(expected, catchBlock);
         }
 
@@ -103,10 +121,12 @@ namespace System.Web.Http.WebHost
         public void HttpControllerHandlerStreamContent_IsSameInstance()
         {
             // Arrange
-            ExceptionContextCatchBlock first = WebHostExceptionCatchBlocks.HttpControllerHandlerStreamContent;
+            ExceptionContextCatchBlock first =
+                WebHostExceptionCatchBlocks.HttpControllerHandlerStreamContent;
 
             // Act
-            ExceptionContextCatchBlock second = WebHostExceptionCatchBlocks.HttpControllerHandlerStreamContent;
+            ExceptionContextCatchBlock second =
+                WebHostExceptionCatchBlocks.HttpControllerHandlerStreamContent;
 
             // Assert
             Assert.Same(first, second);
@@ -119,8 +139,11 @@ namespace System.Web.Http.WebHost
             ExceptionContextCatchBlock catchBlock = WebHostExceptionCatchBlocks.HttpWebRoute;
 
             // Assert
-            ExceptionContextCatchBlock expected =
-                new ExceptionContextCatchBlock("HttpWebRoute", isTopLevel: true, callsHandler: true);
+            ExceptionContextCatchBlock expected = new ExceptionContextCatchBlock(
+                "HttpWebRoute",
+                isTopLevel: true,
+                callsHandler: true
+            );
             AssertEqual(expected, catchBlock);
         }
 
@@ -137,7 +160,10 @@ namespace System.Web.Http.WebHost
             Assert.Same(first, second);
         }
 
-        private static void AssertEqual(ExceptionContextCatchBlock expected, ExceptionContextCatchBlock actual)
+        private static void AssertEqual(
+            ExceptionContextCatchBlock expected,
+            ExceptionContextCatchBlock actual
+        )
         {
             if (expected == null)
             {

@@ -7,6 +7,6 @@ namespace System.CommandLine.Rendering.Views
     {
         Fixed,
         Star,
-        SizeToContent
+        SizeToContent,
     }
 }

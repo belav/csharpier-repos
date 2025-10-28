@@ -24,23 +24,125 @@ namespace XLinqTests
 
         public override void AddChildren()
         {
-            AddChild(new TestVariation(EmptyElement) { Attribute = new VariationAttribute("Empty XElement") { Params = new object[] { "<A/>" }, Priority = 0 } });
-            AddChild(new TestVariation(EmptyElement) { Attribute = new VariationAttribute("Empty XElement - II.") { Params = new object[] { "<A></A>" }, Priority = 1 } });
-            AddChild(new TestVariation(EmptyElement) { Attribute = new VariationAttribute("Empty XElement - with attribute") { Params = new object[] { "<A attr='a'/>" }, Priority = 0 } });
-            AddChild(new TestVariation(EmptyElement) { Attribute = new VariationAttribute("Empty XElement - with parent") { Params = new object[] { "<B><A attr='a'/></B>" }, Priority = 1 } });
-            AddChild(new TestVariation(elementWithText) { Attribute = new VariationAttribute("XElement - string content [whitespace]") { Params = new object[] { "<B><A attr='a'> </A></B>", " " }, Priority = 1 } });
-            AddChild(new TestVariation(elementWithText) { Attribute = new VariationAttribute("XElement - string content") { Params = new object[] { "<B><A attr='a'>text</A></B>", "text" }, Priority = 0 } });
-            AddChild(new TestVariation(elementWithText) { Attribute = new VariationAttribute("XElement - string content [cdata]") { Params = new object[] { "<B><A attr='a'><![CDATA[cdata]]></A></B>", "cdata" }, Priority = 1 } });
-            AddChild(new TestVariation(ElementOtherTypes) { Attribute = new VariationAttribute("XElement - mixed content") { Priority = 1 } });
-            AddChild(new TestVariation(DocumentOtherTypes) { Attribute = new VariationAttribute("XDocument - mixed content - with decl") { Param = true, Priority = 1 } });
-            AddChild(new TestVariation(DocumentOtherTypes) { Attribute = new VariationAttribute("XDocument - mixed content - no decl") { Param = false, Priority = 1 } });
+            AddChild(
+                new TestVariation(EmptyElement)
+                {
+                    Attribute = new VariationAttribute("Empty XElement")
+                    {
+                        Params = new object[] { "<A/>" },
+                        Priority = 0,
+                    },
+                }
+            );
+            AddChild(
+                new TestVariation(EmptyElement)
+                {
+                    Attribute = new VariationAttribute("Empty XElement - II.")
+                    {
+                        Params = new object[] { "<A></A>" },
+                        Priority = 1,
+                    },
+                }
+            );
+            AddChild(
+                new TestVariation(EmptyElement)
+                {
+                    Attribute = new VariationAttribute("Empty XElement - with attribute")
+                    {
+                        Params = new object[] { "<A attr='a'/>" },
+                        Priority = 0,
+                    },
+                }
+            );
+            AddChild(
+                new TestVariation(EmptyElement)
+                {
+                    Attribute = new VariationAttribute("Empty XElement - with parent")
+                    {
+                        Params = new object[] { "<B><A attr='a'/></B>" },
+                        Priority = 1,
+                    },
+                }
+            );
+            AddChild(
+                new TestVariation(elementWithText)
+                {
+                    Attribute = new VariationAttribute("XElement - string content [whitespace]")
+                    {
+                        Params = new object[] { "<B><A attr='a'> </A></B>", " " },
+                        Priority = 1,
+                    },
+                }
+            );
+            AddChild(
+                new TestVariation(elementWithText)
+                {
+                    Attribute = new VariationAttribute("XElement - string content")
+                    {
+                        Params = new object[] { "<B><A attr='a'>text</A></B>", "text" },
+                        Priority = 0,
+                    },
+                }
+            );
+            AddChild(
+                new TestVariation(elementWithText)
+                {
+                    Attribute = new VariationAttribute("XElement - string content [cdata]")
+                    {
+                        Params = new object[]
+                        {
+                            "<B><A attr='a'><![CDATA[cdata]]></A></B>",
+                            "cdata",
+                        },
+                        Priority = 1,
+                    },
+                }
+            );
+            AddChild(
+                new TestVariation(ElementOtherTypes)
+                {
+                    Attribute = new VariationAttribute("XElement - mixed content") { Priority = 1 },
+                }
+            );
+            AddChild(
+                new TestVariation(DocumentOtherTypes)
+                {
+                    Attribute = new VariationAttribute("XDocument - mixed content - with decl")
+                    {
+                        Param = true,
+                        Priority = 1,
+                    },
+                }
+            );
+            AddChild(
+                new TestVariation(DocumentOtherTypes)
+                {
+                    Attribute = new VariationAttribute("XDocument - mixed content - no decl")
+                    {
+                        Param = false,
+                        Priority = 1,
+                    },
+                }
+            );
         }
 
         public void DocumentOtherTypes()
         {
-            object[] nodeset = { " ", new XProcessingInstruction("pi", "data"), new XProcessingInstruction("pi2", "data2"), new XComment("comm"), new XDocumentType("root", null, null, null), new XElement("single"), new XElement("complex", new XElement("a1"), new XElement("a2")) };
+            object[] nodeset =
+            {
+                " ",
+                new XProcessingInstruction("pi", "data"),
+                new XProcessingInstruction("pi2", "data2"),
+                new XComment("comm"),
+                new XDocumentType("root", null, null, null),
+                new XElement("single"),
+                new XElement("complex", new XElement("a1"), new XElement("a2")),
+            };
 
-            XDocument doc = ((bool)Variation.Param) ? new XDocument(new XDeclaration("1.0", null, null)) : new XDocument();
+            XDocument doc =
+                ((bool)Variation.Param)
+                    ? new XDocument(new XDeclaration("1.0", null, null))
+                    : new XDocument();
 
             int pos = ((bool)Param) ? 0 : nodeset.Length - 1;
 
@@ -68,7 +170,14 @@ namespace XLinqTests
 
         public void ElementOtherTypes()
         {
-            object[] nodeset = { "text", new XProcessingInstruction("pi", "data"), new XComment("comm"), new XElement("single"), new XElement("complex", new XElement("a1"), new XElement("a2")) };
+            object[] nodeset =
+            {
+                "text",
+                new XProcessingInstruction("pi", "data"),
+                new XComment("comm"),
+                new XElement("single"),
+                new XElement("complex", new XElement("a1"), new XElement("a2")),
+            };
 
             XElement e = XElement.Parse("<A/>");
             int pos = ((bool)Param) ? 0 : nodeset.Length - 1;

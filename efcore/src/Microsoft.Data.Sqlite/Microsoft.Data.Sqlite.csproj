@@ -1,5 +1,4 @@
 <Project>
-
   <Import Project="Sdk.props" Sdk="Microsoft.NET.Sdk" />
 
   <PropertyGroup>
@@ -42,5 +41,4 @@ Microsoft.Data.Sqlite.SqliteTransaction</Description>
 
   <Target Name="Compile" />
   <Target Name="CopyFilesToOutputDirectory" />
-
 </Project>

@@ -24,11 +24,14 @@ namespace System.Data.Query.InternalTrees
         #endregion
 
         #region constructors
-        internal VarDefOp(Var v) : this()
-        { 
-            m_var = v; 
+        internal VarDefOp(Var v)
+            : this()
+        {
+            m_var = v;
         }
-        private VarDefOp() : base(OpType.VarDef) { }
+
+        private VarDefOp()
+            : base(OpType.VarDef) { }
         #endregion
 
         #region public methods
@@ -37,12 +40,18 @@ namespace System.Data.Query.InternalTrees
         /// <summary>
         /// 1 child - the defining expression
         /// </summary>
-        internal override int Arity { get { return 1; } }
+        internal override int Arity
+        {
+            get { return 1; }
+        }
 
         /// <summary>
         /// The Var being defined
         /// </summary>
-        internal Var Var { get { return m_var; } }
+        internal Var Var
+        {
+            get { return m_var; }
+        }
 
         /// <summary>
         /// Visitor pattern method
@@ -50,8 +59,11 @@ namespace System.Data.Query.InternalTrees
         /// <param name="v">The BasicOpVisitor that is visiting this Op</param>
         /// <param name="n">The Node that references this Op</param>
         [DebuggerNonUserCode]
-        internal override void Accept(BasicOpVisitor v, Node n) { v.Visit(this, n); }
-        
+        internal override void Accept(BasicOpVisitor v, Node n)
+        {
+            v.Visit(this, n);
+        }
+
         /// <summary>
         /// Visitor pattern method for visitors with a return value
         /// </summary>
@@ -59,7 +71,10 @@ namespace System.Data.Query.InternalTrees
         /// <param name="n">The node in question</param>
         /// <returns>An instance of TResultType</returns>
         [DebuggerNonUserCode]
-        internal override TResultType Accept<TResultType>(BasicOpVisitorOfT<TResultType> v, Node n) { return v.Visit(this, n); }
+        internal override TResultType Accept<TResultType>(BasicOpVisitorOfT<TResultType> v, Node n)
+        {
+            return v.Visit(this, n);
+        }
         #endregion
     }
 
@@ -69,7 +84,8 @@ namespace System.Data.Query.InternalTrees
     internal sealed class VarDefListOp : AncillaryOp
     {
         #region constructors
-        private VarDefListOp() : base(OpType.VarDefList) { }
+        private VarDefListOp()
+            : base(OpType.VarDefList) { }
         #endregion
 
         #region public methods
@@ -85,8 +101,11 @@ namespace System.Data.Query.InternalTrees
         /// <param name="v">The BasicOpVisitor that is visiting this Op</param>
         /// <param name="n">The Node that references this Op</param>
         [DebuggerNonUserCode]
-        internal override void Accept(BasicOpVisitor v, Node n) { v.Visit(this, n); }
-        
+        internal override void Accept(BasicOpVisitor v, Node n)
+        {
+            v.Visit(this, n);
+        }
+
         /// <summary>
         /// Visitor pattern method for visitors with a return value
         /// </summary>
@@ -94,7 +113,10 @@ namespace System.Data.Query.InternalTrees
         /// <param name="n">The node in question</param>
         /// <returns>An instance of TResultType</returns>
         [DebuggerNonUserCode]
-        internal override TResultType Accept<TResultType>(BasicOpVisitorOfT<TResultType> v, Node n) { return v.Visit(this, n); }
+        internal override TResultType Accept<TResultType>(BasicOpVisitorOfT<TResultType> v, Node n)
+        {
+            return v.Visit(this, n);
+        }
         #endregion
     }
 }

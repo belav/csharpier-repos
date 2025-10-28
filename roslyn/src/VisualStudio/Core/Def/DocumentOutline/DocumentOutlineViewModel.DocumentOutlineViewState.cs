@@ -47,7 +47,8 @@ namespace Microsoft.VisualStudio.LanguageServices.DocumentOutline
                 ITextSnapshot textSnapshot,
                 string searchText,
                 ImmutableArray<DocumentSymbolDataViewModel> viewModelItems,
-                IntervalTree<DocumentSymbolDataViewModel> viewModelItemsTree)
+                IntervalTree<DocumentSymbolDataViewModel> viewModelItemsTree
+            )
             {
                 TextSnapshot = textSnapshot;
                 SearchText = searchText;

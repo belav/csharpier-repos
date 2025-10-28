@@ -19,14 +19,21 @@ namespace HttpStress
     /// <summary>Client context containing information pertaining to a single request.</summary>
     public sealed class RequestContext
     {
-        private const string alphaNumeric = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
+        private const string alphaNumeric =
+            "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
 
         private readonly Random _random;
         private readonly HttpClient _client;
         private readonly CancellationToken _globalToken;
         private readonly Configuration _config;
 
-        public RequestContext(Configuration config, HttpClient httpClient, Random random, CancellationToken globalToken, int taskNum)
+        public RequestContext(
+            Configuration config,
+            HttpClient httpClient,
+            Random random,
+            CancellationToken globalToken,
+            int taskNum
+        )
         {
             Debug.Assert(httpClient.BaseAddress != null);
 
@@ -52,7 +59,11 @@ namespace HttpStress
         public Uri BaseAddress => _client.BaseAddress!;
 
         // HttpClient.SendAsync() wrapper that wires randomized cancellation
-        public async Task<HttpResponseMessage> SendAsync(HttpRequestMessage request, HttpCompletionOption httpCompletion = HttpCompletionOption.ResponseContentRead, CancellationToken? token = null)
+        public async Task<HttpResponseMessage> SendAsync(
+            HttpRequestMessage request,
+            HttpCompletionOption httpCompletion = HttpCompletionOption.ResponseContentRead,
+            CancellationToken? token = null
+        )
         {
             request.Version = HttpVersion;
             request.VersionPolicy = VersionPolicy;
@@ -60,15 +71,24 @@ namespace HttpStress
             if (token != null)
             {
                 // user-supplied cancellation token overrides random cancellation
-                using var cts = CancellationTokenSource.CreateLinkedTokenSource(_globalToken, token.Value);
-                return WithVersionValidation(await _client.SendAsync(request, httpCompletion, cts.Token));
+                using var cts = CancellationTokenSource.CreateLinkedTokenSource(
+                    _globalToken,
+                    token.Value
+                );
+                return WithVersionValidation(
+                    await _client.SendAsync(request, httpCompletion, cts.Token)
+                );
             }
             else if (GetRandomBoolean(_config.CancellationProbability))
             {
                 // trigger a random cancellation
                 using var cts = CancellationTokenSource.CreateLinkedTokenSource(_globalToken);
 
-                Task<HttpResponseMessage> task = _client.SendAsync(request, httpCompletion, cts.Token);
+                Task<HttpResponseMessage> task = _client.SendAsync(
+                    request,
+                    httpCompletion,
+                    cts.Token
+                );
 
                 // either spinwait or delay before triggering cancellation
                 if (GetRandomBoolean(probability: 0.66))
@@ -76,7 +96,10 @@ namespace HttpStress
                     // bound spinning to 100 us
                     double spinTimeMs = 0.1 * _random.NextDouble();
                     Stopwatch sw = Stopwatch.StartNew();
-                    do { Thread.SpinWait(10); } while (!task.IsCompleted && sw.Elapsed.TotalMilliseconds < spinTimeMs);
+                    do
+                    {
+                        Thread.SpinWait(10);
+                    } while (!task.IsCompleted && sw.Elapsed.TotalMilliseconds < spinTimeMs);
                 }
                 else
                 {
@@ -92,7 +115,9 @@ namespace HttpStress
             else
             {
                 // no cancellation
-                return WithVersionValidation(await _client.SendAsync(request, httpCompletion, _globalToken));
+                return WithVersionValidation(
+                    await _client.SendAsync(request, httpCompletion, _globalToken)
+                );
             }
 
             HttpResponseMessage WithVersionValidation(HttpResponseMessage m)
@@ -100,7 +125,9 @@ namespace HttpStress
                 // WinHttpHandler seems to not report HttpResponseMessage.Version correctly
                 if (!_config.UseWinHttpHandler && m.Version != HttpVersion)
                 {
-                    throw new Exception($"Expected response version {HttpVersion}, got {m.Version}");
+                    throw new Exception(
+                        $"Expected response version {HttpVersion}, got {m.Version}"
+                    );
                 }
 
                 return m;
@@ -152,8 +179,12 @@ namespace HttpStress
             for (int i = 0; i < headerCount; i++)
             {
                 string name = $"header-{i}";
-                string CreateHeaderValue() => HttpUtility.UrlEncode(GetRandomString(1, 30, alphaNumericOnly: false));
-                string[] values = Enumerable.Range(0, _random.Next(1, 6)).Select(_ => CreateHeaderValue()).ToArray();
+                string CreateHeaderValue() =>
+                    HttpUtility.UrlEncode(GetRandomString(1, 30, alphaNumericOnly: false));
+                string[] values = Enumerable
+                    .Range(0, _random.Next(1, 6))
+                    .Select(_ => CreateHeaderValue())
+                    .ToArray();
                 totalSize += name.Length + values.Select(v => v.Length + 2).Sum();
 
                 if (totalSize > MaxRequestHeaderTotalSize)
@@ -166,14 +197,24 @@ namespace HttpStress
         }
 
         // Generates a random expected response content length and adds it to the request headers
-        public int SetExpectedResponseContentLengthHeader(HttpRequestHeaders headers, int minLength = 0)
+        public int SetExpectedResponseContentLengthHeader(
+            HttpRequestHeaders headers,
+            int minLength = 0
+        )
         {
-            int expectedResponseContentLength = _random.Next(minLength, Math.Max(minLength, MaxContentLength));
-            headers.Add(StressServer.ExpectedResponseContentLength, expectedResponseContentLength.ToString());
+            int expectedResponseContentLength = _random.Next(
+                minLength,
+                Math.Max(minLength, MaxContentLength)
+            );
+            headers.Add(
+                StressServer.ExpectedResponseContentLength,
+                expectedResponseContentLength.ToString()
+            );
             return expectedResponseContentLength;
         }
 
-        public int GetRandomInt32(int minValueInclusive, int maxValueExclusive) => _random.Next(minValueInclusive, maxValueExclusive);
+        public int GetRandomInt32(int minValueInclusive, int maxValueExclusive) =>
+            _random.Next(minValueInclusive, maxValueExclusive);
     }
 
     public static class ClientOperations
@@ -185,292 +226,439 @@ namespace HttpStress
         public static (string name, Func<RequestContext, Task> operation)[] Operations =>
             new (string, Func<RequestContext, Task>)[]
             {
-                ("GET",
-                async ctx =>
-                {
-                    using var req = new HttpRequestMessage(HttpMethod.Get, "/get");
-                    int expectedLength = ctx.SetExpectedResponseContentLengthHeader(req.Headers);
-                    using HttpResponseMessage m = await ctx.SendAsync(req);
-
-                    ValidateStatusCode(m);
-                    ValidateServerContent(await m.Content.ReadAsStringAsync(), expectedLength);
-                }),
-
-                ("GET Partial",
-                async ctx =>
-                {
-                    using var req = new HttpRequestMessage(HttpMethod.Get, "/slow");
-                    int expectedLength = ctx.SetExpectedResponseContentLengthHeader(req.Headers, minLength: 2);
-                    using HttpResponseMessage m = await ctx.SendAsync(req, HttpCompletionOption.ResponseHeadersRead);
-
-                    ValidateStatusCode(m);
-
-                    using (Stream s = await m.Content.ReadAsStreamAsync())
+                (
+                    "GET",
+                    async ctx =>
                     {
-                        s.ReadByte(); // read single byte from response and throw the rest away
+                        using var req = new HttpRequestMessage(HttpMethod.Get, "/get");
+                        int expectedLength = ctx.SetExpectedResponseContentLengthHeader(
+                            req.Headers
+                        );
+                        using HttpResponseMessage m = await ctx.SendAsync(req);
+
+                        ValidateStatusCode(m);
+                        ValidateServerContent(await m.Content.ReadAsStringAsync(), expectedLength);
                     }
-                }),
-
-                ("GET Headers",
-                async ctx =>
-                {
-                    using var req = new HttpRequestMessage(HttpMethod.Get, "/headers");
-                    ctx.PopulateWithRandomHeaders(req.Headers);
-                    ulong expectedChecksum = CRC.CalculateHeaderCrc(req.Headers.Select(x => (x.Key, x.Value)));
-
-                    using HttpResponseMessage m = await ctx.SendAsync(req);
-
-                    ValidateStatusCode(m);
-
-                    await m.Content.ReadAsStringAsync();
-
-                    bool isValidChecksum = ValidateServerChecksum(m.Headers, expectedChecksum);
-                    string failureDetails = isValidChecksum ? "server checksum matches client checksum" : "server checksum mismatch";
-
-                    // Validate that request headers are being echoed
-                    foreach (KeyValuePair<string, IEnumerable<string>> reqHeader in req.Headers)
+                ),
+                (
+                    "GET Partial",
+                    async ctx =>
                     {
-                        if (!m.Headers.TryGetValues(reqHeader.Key, out IEnumerable<string>? values))
+                        using var req = new HttpRequestMessage(HttpMethod.Get, "/slow");
+                        int expectedLength = ctx.SetExpectedResponseContentLengthHeader(
+                            req.Headers,
+                            minLength: 2
+                        );
+                        using HttpResponseMessage m = await ctx.SendAsync(
+                            req,
+                            HttpCompletionOption.ResponseHeadersRead
+                        );
+
+                        ValidateStatusCode(m);
+
+                        using (Stream s = await m.Content.ReadAsStreamAsync())
                         {
-                            throw new Exception($"Expected response header name {reqHeader.Key} missing. {failureDetails}");
-                        }
-                        else if (!reqHeader.Value.SequenceEqual(values))
-                        {
-                            throw new Exception($"Unexpected values for header {reqHeader.Key}. Expected {FmtValues(reqHeader.Value)} but got {FmtValues(values)}. {failureDetails}");
+                            s.ReadByte(); // read single byte from response and throw the rest away
                         }
                     }
-
-                    // Validate trailing headers are being echoed
-                    if (m.TrailingHeaders.Count() > 0)
+                ),
+                (
+                    "GET Headers",
+                    async ctx =>
                     {
+                        using var req = new HttpRequestMessage(HttpMethod.Get, "/headers");
+                        ctx.PopulateWithRandomHeaders(req.Headers);
+                        ulong expectedChecksum = CRC.CalculateHeaderCrc(
+                            req.Headers.Select(x => (x.Key, x.Value))
+                        );
+
+                        using HttpResponseMessage m = await ctx.SendAsync(req);
+
+                        ValidateStatusCode(m);
+
+                        await m.Content.ReadAsStringAsync();
+
+                        bool isValidChecksum = ValidateServerChecksum(m.Headers, expectedChecksum);
+                        string failureDetails = isValidChecksum
+                            ? "server checksum matches client checksum"
+                            : "server checksum mismatch";
+
+                        // Validate that request headers are being echoed
                         foreach (KeyValuePair<string, IEnumerable<string>> reqHeader in req.Headers)
                         {
-                            if (!m.TrailingHeaders.TryGetValues(reqHeader.Key + "-trailer", out IEnumerable<string>? values))
+                            if (
+                                !m.Headers.TryGetValues(
+                                    reqHeader.Key,
+                                    out IEnumerable<string>? values
+                                )
+                            )
                             {
-                                throw new Exception($"Expected trailing header name {reqHeader.Key}-trailer missing. {failureDetails}");
+                                throw new Exception(
+                                    $"Expected response header name {reqHeader.Key} missing. {failureDetails}"
+                                );
                             }
                             else if (!reqHeader.Value.SequenceEqual(values))
                             {
-                                throw new Exception($"Unexpected values for trailing header {reqHeader.Key}-trailer. Expected {FmtValues(reqHeader.Value)} but got {FmtValues(values)}. {failureDetails}");
+                                throw new Exception(
+                                    $"Unexpected values for header {reqHeader.Key}. Expected {FmtValues(reqHeader.Value)} but got {FmtValues(values)}. {failureDetails}"
+                                );
                             }
                         }
-                    }
 
-                    if (!isValidChecksum)
-                    {
-                        // Should not reach this block unless there's a bug in checksum validation logic. Do throw now
-                        throw new Exception("server checksum mismatch");
-                    }
-
-                    static string FmtValues(IEnumerable<string> values) => string.Join(", ", values.Select(x => $"\"{x}\""));
-                }),
-
-                ("GET Parameters",
-                async ctx =>
-                {
-                    string uri = "/variables";
-                    string expectedResponse = GetGetQueryParameters(ref uri, ctx.MaxRequestUriSize, ctx, ctx.MaxRequestParameters);
-                    using var req = new HttpRequestMessage(HttpMethod.Get, uri);
-                    using HttpResponseMessage m = await ctx.SendAsync(req);
-
-                    ValidateStatusCode(m);
-                    ValidateContent(expectedResponse, await m.Content.ReadAsStringAsync(), $"Uri: {uri}");
-                }),
-
-                ("GET Aborted",
-                async ctx =>
-                {
-                    try
-                    {
-                        using var req = new HttpRequestMessage(HttpMethod.Get, "/abort");
-                        ctx.SetExpectedResponseContentLengthHeader(req.Headers, minLength: 2);
-
-                        await ctx.SendAsync(req);
-
-                        throw new Exception("Completed unexpectedly");
-                    }
-                    catch (Exception e)
-                    {
-                        if (e is HttpRequestException hre && hre.InnerException is IOException)
+                        // Validate trailing headers are being echoed
+                        if (m.TrailingHeaders.Count() > 0)
                         {
-                            e = hre.InnerException;
-                        }
-
-                        if (e is IOException ioe)
-                        {
-                            if (ctx.HttpVersion < HttpVersion.Version20 ||
-                                e is HttpProtocolException protocolException &&
-                                (protocolException.ErrorCode == 0x2 ||  // INTERNAL_ERROR, UseKestrel (https://github.com/dotnet/aspnetcore/issues/12256)
-                                 protocolException.ErrorCode == 0x8 ||  // CANCEL, UseHttpSys
-                                 protocolException.ErrorCode == 0x102)) // H3_INTERNAL_ERROR (258)
+                            foreach (
+                                KeyValuePair<string, IEnumerable<string>> reqHeader in req.Headers
+                            )
                             {
-                                return;
+                                if (
+                                    !m.TrailingHeaders.TryGetValues(
+                                        reqHeader.Key + "-trailer",
+                                        out IEnumerable<string>? values
+                                    )
+                                )
+                                {
+                                    throw new Exception(
+                                        $"Expected trailing header name {reqHeader.Key}-trailer missing. {failureDetails}"
+                                    );
+                                }
+                                else if (!reqHeader.Value.SequenceEqual(values))
+                                {
+                                    throw new Exception(
+                                        $"Unexpected values for trailing header {reqHeader.Key}-trailer. Expected {FmtValues(reqHeader.Value)} but got {FmtValues(values)}. {failureDetails}"
+                                    );
+                                }
                             }
                         }
 
-                        throw;
+                        if (!isValidChecksum)
+                        {
+                            // Should not reach this block unless there's a bug in checksum validation logic. Do throw now
+                            throw new Exception("server checksum mismatch");
+                        }
+
+                        static string FmtValues(IEnumerable<string> values) =>
+                            string.Join(", ", values.Select(x => $"\"{x}\""));
                     }
-                }),
-
-                ("POST",
-                async ctx =>
-                {
-                    string content = ctx.GetRandomString(0, ctx.MaxContentLength);
-                    ulong checksum = CRC.CalculateCRC(content);
-
-                    using var req = new HttpRequestMessage(HttpMethod.Post, "/") { Content = new StringDuplexContent(content) };
-                    using HttpResponseMessage m = await ctx.SendAsync(req);
-
-                    ValidateStatusCode(m);
-
-                    string checksumMessage = ValidateServerChecksum(m.Headers, checksum) ? "server checksum matches client checksum" : "server checksum mismatch";
-                    ValidateContent(content, await m.Content.ReadAsStringAsync(), checksumMessage);
-                }),
-
-                ("POST Multipart Data",
-                async ctx =>
-                {
-                    (string expected, MultipartContent formDataContent) formData = GetMultipartContent(ctx, ctx.MaxRequestParameters);
-                    ulong checksum = CRC.CalculateCRC(formData.expected);
-
-                    using var req = new HttpRequestMessage(HttpMethod.Post, "/") { Content = formData.formDataContent };
-                    using HttpResponseMessage m = await ctx.SendAsync(req);
-
-                    ValidateStatusCode(m);
-
-                    string checksumMessage = ValidateServerChecksum(m.Headers, checksum) ? "server checksum matches client checksum" : "server checksum mismatch";
-                    ValidateContent(formData.expected, await m.Content.ReadAsStringAsync(), checksumMessage);
-                }),
-
-                ("POST Duplex",
-                async ctx =>
-                {
-                    string content = ctx.GetRandomString(0, ctx.MaxContentLength);
-                    ulong checksum = CRC.CalculateCRC(content);
-
-                    using var req = new HttpRequestMessage(HttpMethod.Post, "/duplex") { Content = new StringDuplexContent(content) };
-                    using HttpResponseMessage m = await ctx.SendAsync(req, HttpCompletionOption.ResponseHeadersRead);
-
-                    ValidateStatusCode(m);
-                    string response = await m.Content.ReadAsStringAsync();
-
-                    string checksumMessage = ValidateServerChecksum(m.TrailingHeaders, checksum, required: false) ? "server checksum matches client checksum" : "server checksum mismatch";
-                    ValidateContent(content, response, checksumMessage);
-                }),
-
-                ("POST Duplex Slow",
-                async ctx =>
-                {
-                    string content = ctx.GetRandomString(0, ctx.MaxContentLength);
-                    byte[] byteContent = Encoding.ASCII.GetBytes(content);
-                    ulong checksum = CRC.CalculateCRC(byteContent);
-
-                    using var req = new HttpRequestMessage(HttpMethod.Post, "/duplexSlow") { Content = new ByteAtATimeNoLengthContent(byteContent) };
-                    using HttpResponseMessage m = await ctx.SendAsync(req, HttpCompletionOption.ResponseHeadersRead);
-
-                    ValidateStatusCode(m);
-                    string response = await m.Content.ReadAsStringAsync();
-
-                    // trailing headers not supported for all servers, so do not require checksums
-                    bool isValidChecksum = ValidateServerChecksum(m.TrailingHeaders, checksum, required: false);
-
-                    ValidateContent(content, response, details: $"server checksum {(isValidChecksum ? "matches" : "does not match")} client value.");
-
-                    if (!isValidChecksum)
+                ),
+                (
+                    "GET Parameters",
+                    async ctx =>
                     {
-                        // Should not reach this block unless there's a bug in checksum validation logic. Do throw now
-                        throw new Exception("server checksum mismatch");
+                        string uri = "/variables";
+                        string expectedResponse = GetGetQueryParameters(
+                            ref uri,
+                            ctx.MaxRequestUriSize,
+                            ctx,
+                            ctx.MaxRequestParameters
+                        );
+                        using var req = new HttpRequestMessage(HttpMethod.Get, uri);
+                        using HttpResponseMessage m = await ctx.SendAsync(req);
+
+                        ValidateStatusCode(m);
+                        ValidateContent(
+                            expectedResponse,
+                            await m.Content.ReadAsStringAsync(),
+                            $"Uri: {uri}"
+                        );
                     }
-                }),
-
-                ("POST Duplex Dispose",
-                async ctx =>
-                {
-                    // try to reproduce conditions described in https://github.com/dotnet/runtime/issues/30393
-                    string content = ctx.GetRandomString(0, ctx.MaxContentLength);
-
-                    using var req = new HttpRequestMessage(HttpMethod.Post, "/duplex") { Content = new StringDuplexContent(content) };
-                    using HttpResponseMessage m = await ctx.SendAsync(req, HttpCompletionOption.ResponseHeadersRead);
-
-                    ValidateStatusCode(m);
-                    // Cause the response to be disposed without reading the response body, which will cause the client to cancel the request
-                }),
-
-                ("POST ExpectContinue",
-                async ctx =>
-                {
-                    string content = ctx.GetRandomString(0, ctx.MaxContentLength);
-                    ulong checksum = CRC.CalculateCRC(content);
-
-                    using var req = new HttpRequestMessage(HttpMethod.Post, "/") { Content = new StringContent(content) };
-
-                    req.Headers.ExpectContinue = true;
-                    using HttpResponseMessage m = await ctx.SendAsync(req, HttpCompletionOption.ResponseHeadersRead);
-
-                    ValidateStatusCode(m);
-
-                    string checksumMessage = ValidateServerChecksum(m.Headers, checksum) ? "server checksum matches client checksum" : "server checksum mismatch";
-                    ValidateContent(content, await m.Content.ReadAsStringAsync(), checksumMessage);
-                }),
-
-                ("HEAD",
-                async ctx =>
-                {
-                    using var req = new HttpRequestMessage(HttpMethod.Head, "/");
-                    int expectedLength = ctx.SetExpectedResponseContentLengthHeader(req.Headers);
-                    using HttpResponseMessage m = await ctx.SendAsync(req);
-
-                    ValidateStatusCode(m);
-
-                    if (m.Content.Headers.ContentLength != expectedLength)
+                ),
+                (
+                    "GET Aborted",
+                    async ctx =>
                     {
-                        throw new Exception($"Expected {expectedLength}, got {m.Content.Headers.ContentLength}");
+                        try
+                        {
+                            using var req = new HttpRequestMessage(HttpMethod.Get, "/abort");
+                            ctx.SetExpectedResponseContentLengthHeader(req.Headers, minLength: 2);
+
+                            await ctx.SendAsync(req);
+
+                            throw new Exception("Completed unexpectedly");
+                        }
+                        catch (Exception e)
+                        {
+                            if (e is HttpRequestException hre && hre.InnerException is IOException)
+                            {
+                                e = hre.InnerException;
+                            }
+
+                            if (e is IOException ioe)
+                            {
+                                if (
+                                    ctx.HttpVersion < HttpVersion.Version20
+                                    || e is HttpProtocolException protocolException
+                                        && (
+                                            protocolException.ErrorCode == 0x2
+                                            || // INTERNAL_ERROR, UseKestrel (https://github.com/dotnet/aspnetcore/issues/12256)
+                                            protocolException.ErrorCode == 0x8
+                                            || // CANCEL, UseHttpSys
+                                            protocolException.ErrorCode == 0x102
+                                        )
+                                ) // H3_INTERNAL_ERROR (258)
+                                {
+                                    return;
+                                }
+                            }
+
+                            throw;
+                        }
                     }
-                    string response = await m.Content.ReadAsStringAsync();
-                    if (response.Length > 0) throw new Exception($"Got unexpected response: {response}");
-                }),
+                ),
+                (
+                    "POST",
+                    async ctx =>
+                    {
+                        string content = ctx.GetRandomString(0, ctx.MaxContentLength);
+                        ulong checksum = CRC.CalculateCRC(content);
 
-                ("PUT",
-                async ctx =>
-                {
-                    string content = ctx.GetRandomString(0, ctx.MaxContentLength);
+                        using var req = new HttpRequestMessage(HttpMethod.Post, "/")
+                        {
+                            Content = new StringDuplexContent(content),
+                        };
+                        using HttpResponseMessage m = await ctx.SendAsync(req);
 
-                    using var req = new HttpRequestMessage(HttpMethod.Put, "/") { Content = new StringContent(content) };
-                    using HttpResponseMessage m = await ctx.SendAsync(req);
+                        ValidateStatusCode(m);
 
-                    ValidateStatusCode(m);
+                        string checksumMessage = ValidateServerChecksum(m.Headers, checksum)
+                            ? "server checksum matches client checksum"
+                            : "server checksum mismatch";
+                        ValidateContent(
+                            content,
+                            await m.Content.ReadAsStringAsync(),
+                            checksumMessage
+                        );
+                    }
+                ),
+                (
+                    "POST Multipart Data",
+                    async ctx =>
+                    {
+                        (string expected, MultipartContent formDataContent) formData =
+                            GetMultipartContent(ctx, ctx.MaxRequestParameters);
+                        ulong checksum = CRC.CalculateCRC(formData.expected);
 
-                    string response = await m.Content.ReadAsStringAsync();
-                    if (response != "") throw new Exception($"Got unexpected response: {response}");
-                }),
+                        using var req = new HttpRequestMessage(HttpMethod.Post, "/")
+                        {
+                            Content = formData.formDataContent,
+                        };
+                        using HttpResponseMessage m = await ctx.SendAsync(req);
 
-                ("PUT Slow",
-                async ctx =>
-                {
-                    string content = ctx.GetRandomString(0, ctx.MaxContentLength);
+                        ValidateStatusCode(m);
 
-                    using var req = new HttpRequestMessage(HttpMethod.Put, "/") { Content = new ByteAtATimeNoLengthContent(Encoding.ASCII.GetBytes(content)) };
-                    using HttpResponseMessage m = await ctx.SendAsync(req);
+                        string checksumMessage = ValidateServerChecksum(m.Headers, checksum)
+                            ? "server checksum matches client checksum"
+                            : "server checksum mismatch";
+                        ValidateContent(
+                            formData.expected,
+                            await m.Content.ReadAsStringAsync(),
+                            checksumMessage
+                        );
+                    }
+                ),
+                (
+                    "POST Duplex",
+                    async ctx =>
+                    {
+                        string content = ctx.GetRandomString(0, ctx.MaxContentLength);
+                        ulong checksum = CRC.CalculateCRC(content);
 
-                    ValidateStatusCode(m);
+                        using var req = new HttpRequestMessage(HttpMethod.Post, "/duplex")
+                        {
+                            Content = new StringDuplexContent(content),
+                        };
+                        using HttpResponseMessage m = await ctx.SendAsync(
+                            req,
+                            HttpCompletionOption.ResponseHeadersRead
+                        );
 
-                    string response = await m.Content.ReadAsStringAsync();
-                    if (response != "") throw new Exception($"Got unexpected response: {response}");
-                }),
+                        ValidateStatusCode(m);
+                        string response = await m.Content.ReadAsStringAsync();
 
-                ("GET Slow",
-                async ctx =>
-                {
-                    using var req = new HttpRequestMessage(HttpMethod.Get, "/slow");
-                    int expectedLength = ctx.SetExpectedResponseContentLengthHeader(req.Headers);
-                    using HttpResponseMessage m = await ctx.SendAsync(req);
+                        string checksumMessage = ValidateServerChecksum(
+                            m.TrailingHeaders,
+                            checksum,
+                            required: false
+                        )
+                            ? "server checksum matches client checksum"
+                            : "server checksum mismatch";
+                        ValidateContent(content, response, checksumMessage);
+                    }
+                ),
+                (
+                    "POST Duplex Slow",
+                    async ctx =>
+                    {
+                        string content = ctx.GetRandomString(0, ctx.MaxContentLength);
+                        byte[] byteContent = Encoding.ASCII.GetBytes(content);
+                        ulong checksum = CRC.CalculateCRC(byteContent);
 
-                    ValidateStatusCode(m);
-                    ValidateServerContent(await m.Content.ReadAsStringAsync(), expectedLength);
-                }),
+                        using var req = new HttpRequestMessage(HttpMethod.Post, "/duplexSlow")
+                        {
+                            Content = new ByteAtATimeNoLengthContent(byteContent),
+                        };
+                        using HttpResponseMessage m = await ctx.SendAsync(
+                            req,
+                            HttpCompletionOption.ResponseHeadersRead
+                        );
+
+                        ValidateStatusCode(m);
+                        string response = await m.Content.ReadAsStringAsync();
+
+                        // trailing headers not supported for all servers, so do not require checksums
+                        bool isValidChecksum = ValidateServerChecksum(
+                            m.TrailingHeaders,
+                            checksum,
+                            required: false
+                        );
+
+                        ValidateContent(
+                            content,
+                            response,
+                            details: $"server checksum {(isValidChecksum ? "matches" : "does not match")} client value."
+                        );
+
+                        if (!isValidChecksum)
+                        {
+                            // Should not reach this block unless there's a bug in checksum validation logic. Do throw now
+                            throw new Exception("server checksum mismatch");
+                        }
+                    }
+                ),
+                (
+                    "POST Duplex Dispose",
+                    async ctx =>
+                    {
+                        // try to reproduce conditions described in https://github.com/dotnet/runtime/issues/30393
+                        string content = ctx.GetRandomString(0, ctx.MaxContentLength);
+
+                        using var req = new HttpRequestMessage(HttpMethod.Post, "/duplex")
+                        {
+                            Content = new StringDuplexContent(content),
+                        };
+                        using HttpResponseMessage m = await ctx.SendAsync(
+                            req,
+                            HttpCompletionOption.ResponseHeadersRead
+                        );
+
+                        ValidateStatusCode(m);
+                        // Cause the response to be disposed without reading the response body, which will cause the client to cancel the request
+                    }
+                ),
+                (
+                    "POST ExpectContinue",
+                    async ctx =>
+                    {
+                        string content = ctx.GetRandomString(0, ctx.MaxContentLength);
+                        ulong checksum = CRC.CalculateCRC(content);
+
+                        using var req = new HttpRequestMessage(HttpMethod.Post, "/")
+                        {
+                            Content = new StringContent(content),
+                        };
+
+                        req.Headers.ExpectContinue = true;
+                        using HttpResponseMessage m = await ctx.SendAsync(
+                            req,
+                            HttpCompletionOption.ResponseHeadersRead
+                        );
+
+                        ValidateStatusCode(m);
+
+                        string checksumMessage = ValidateServerChecksum(m.Headers, checksum)
+                            ? "server checksum matches client checksum"
+                            : "server checksum mismatch";
+                        ValidateContent(
+                            content,
+                            await m.Content.ReadAsStringAsync(),
+                            checksumMessage
+                        );
+                    }
+                ),
+                (
+                    "HEAD",
+                    async ctx =>
+                    {
+                        using var req = new HttpRequestMessage(HttpMethod.Head, "/");
+                        int expectedLength = ctx.SetExpectedResponseContentLengthHeader(
+                            req.Headers
+                        );
+                        using HttpResponseMessage m = await ctx.SendAsync(req);
+
+                        ValidateStatusCode(m);
+
+                        if (m.Content.Headers.ContentLength != expectedLength)
+                        {
+                            throw new Exception(
+                                $"Expected {expectedLength}, got {m.Content.Headers.ContentLength}"
+                            );
+                        }
+                        string response = await m.Content.ReadAsStringAsync();
+                        if (response.Length > 0)
+                            throw new Exception($"Got unexpected response: {response}");
+                    }
+                ),
+                (
+                    "PUT",
+                    async ctx =>
+                    {
+                        string content = ctx.GetRandomString(0, ctx.MaxContentLength);
+
+                        using var req = new HttpRequestMessage(HttpMethod.Put, "/")
+                        {
+                            Content = new StringContent(content),
+                        };
+                        using HttpResponseMessage m = await ctx.SendAsync(req);
+
+                        ValidateStatusCode(m);
+
+                        string response = await m.Content.ReadAsStringAsync();
+                        if (response != "")
+                            throw new Exception($"Got unexpected response: {response}");
+                    }
+                ),
+                (
+                    "PUT Slow",
+                    async ctx =>
+                    {
+                        string content = ctx.GetRandomString(0, ctx.MaxContentLength);
+
+                        using var req = new HttpRequestMessage(HttpMethod.Put, "/")
+                        {
+                            Content = new ByteAtATimeNoLengthContent(
+                                Encoding.ASCII.GetBytes(content)
+                            ),
+                        };
+                        using HttpResponseMessage m = await ctx.SendAsync(req);
+
+                        ValidateStatusCode(m);
+
+                        string response = await m.Content.ReadAsStringAsync();
+                        if (response != "")
+                            throw new Exception($"Got unexpected response: {response}");
+                    }
+                ),
+                (
+                    "GET Slow",
+                    async ctx =>
+                    {
+                        using var req = new HttpRequestMessage(HttpMethod.Get, "/slow");
+                        int expectedLength = ctx.SetExpectedResponseContentLengthHeader(
+                            req.Headers
+                        );
+                        using HttpResponseMessage m = await ctx.SendAsync(req);
+
+                        ValidateStatusCode(m);
+                        ValidateServerContent(await m.Content.ReadAsStringAsync(), expectedLength);
+                    }
+                ),
             };
 
-        private static void ValidateStatusCode(HttpResponseMessage m, HttpStatusCode expectedStatus = HttpStatusCode.OK)
+        private static void ValidateStatusCode(
+            HttpResponseMessage m,
+            HttpStatusCode expectedStatus = HttpStatusCode.OK
+        )
         {
             if (m.StatusCode != expectedStatus)
             {
@@ -478,20 +666,25 @@ namespace HttpStress
             }
         }
 
-        private static void ValidateContent(string expectedContent, string actualContent, string? details = null)
+        private static void ValidateContent(
+            string expectedContent,
+            string actualContent,
+            string? details = null
+        )
         {
             if (actualContent != expectedContent)
             {
-                int divergentIndex =
-                    Enumerable
-                        .Zip(actualContent, expectedContent)
-                        .Select((x, i) => (x.First, x.Second, i))
-                        .Where(x => x.First != x.Second)
-                        .Select(x => (int?)x.i)
-                        .FirstOrDefault()
-                        .GetValueOrDefault(Math.Min(actualContent.Length, expectedContent.Length));
+                int divergentIndex = Enumerable
+                    .Zip(actualContent, expectedContent)
+                    .Select((x, i) => (x.First, x.Second, i))
+                    .Where(x => x.First != x.Second)
+                    .Select(x => (int?)x.i)
+                    .FirstOrDefault()
+                    .GetValueOrDefault(Math.Min(actualContent.Length, expectedContent.Length));
 
-                throw new Exception($"Expected response content \"{expectedContent}\", got \"{actualContent}\".\n Diverging at index {divergentIndex}. {details}");
+                throw new Exception(
+                    $"Expected response content \"{expectedContent}\", got \"{actualContent}\".\n Diverging at index {divergentIndex}. {details}"
+                );
             }
         }
 
@@ -499,7 +692,9 @@ namespace HttpStress
         {
             if (content.Length != expectedLength)
             {
-                throw new Exception($"Unexpected response content {content}. Should have length {expectedLength} long but was {content.Length}");
+                throw new Exception(
+                    $"Unexpected response content {content}. Should have length {expectedLength} long but was {content.Length}"
+                );
             }
 
             if (!ServerContentUtils.IsValidServerContent(content))
@@ -508,7 +703,12 @@ namespace HttpStress
             }
         }
 
-        private static string GetGetQueryParameters(ref string uri, int maxRequestUriSize, RequestContext clientContext, int numParameters)
+        private static string GetGetQueryParameters(
+            ref string uri,
+            int maxRequestUriSize,
+            RequestContext clientContext,
+            int numParameters
+        )
         {
             if (maxRequestUriSize < uri.Length)
             {
@@ -538,7 +738,10 @@ namespace HttpStress
 
                 uriSb.Append(key);
 
-                string value = clientContext.GetRandomString(0, Math.Min(appxMaxValueLength, remainingLength));
+                string value = clientContext.GetRandomString(
+                    0,
+                    Math.Min(appxMaxValueLength, remainingLength)
+                );
                 expectedString.Append(value);
                 uriSb.Append(value);
             }
@@ -547,9 +750,15 @@ namespace HttpStress
             return expectedString.ToString();
         }
 
-        private static (string, MultipartContent) GetMultipartContent(RequestContext clientContext, int numFormFields)
+        private static (string, MultipartContent) GetMultipartContent(
+            RequestContext clientContext,
+            int numFormFields
+        )
         {
-            var multipartContent = new MultipartContent("prefix" + clientContext.GetRandomString(0, clientContext.MaxContentLength), "test_boundary");
+            var multipartContent = new MultipartContent(
+                "prefix" + clientContext.GetRandomString(0, clientContext.MaxContentLength),
+                "test_boundary"
+            );
             StringBuilder sb = new StringBuilder();
 
             int num = clientContext.GetRandomInt32(1, numFormFields + 1);
@@ -567,10 +776,16 @@ namespace HttpStress
             return (sb.ToString(), multipartContent);
         }
 
-        private static bool ValidateServerChecksum(HttpResponseHeaders headers, ulong expectedChecksum, bool required = true)
+        private static bool ValidateServerChecksum(
+            HttpResponseHeaders headers,
+            ulong expectedChecksum,
+            bool required = true
+        )
         {
-            if (headers.TryGetValues("crc32", out IEnumerable<string>? values) &&
-                uint.TryParse(values.First(), out uint serverChecksum))
+            if (
+                headers.TryGetValues("crc32", out IEnumerable<string>? values)
+                && uint.TryParse(values.First(), out uint serverChecksum)
+            )
             {
                 return serverChecksum == expectedChecksum;
             }
@@ -591,8 +806,10 @@ namespace HttpStress
 
             public StringDuplexContent(string value) => _data = Encoding.UTF8.GetBytes(value);
 
-            protected override Task SerializeToStreamAsync(Stream stream, TransportContext? context) =>
-                stream.WriteAsync(_data, 0, _data.Length);
+            protected override Task SerializeToStreamAsync(
+                Stream stream,
+                TransportContext? context
+            ) => stream.WriteAsync(_data, 0, _data.Length);
 
             protected override bool TryComputeLength(out long length)
             {
@@ -608,7 +825,10 @@ namespace HttpStress
 
             public ByteAtATimeNoLengthContent(byte[] buffer) => _buffer = buffer;
 
-            protected override async Task SerializeToStreamAsync(Stream stream, TransportContext? context)
+            protected override async Task SerializeToStreamAsync(
+                Stream stream,
+                TransportContext? context
+            )
             {
                 for (int i = 0; i < _buffer.Length; i++)
                 {

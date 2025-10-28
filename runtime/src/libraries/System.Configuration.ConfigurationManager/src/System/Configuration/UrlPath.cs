@@ -28,10 +28,12 @@ namespace System.Configuration
 
             // Compare up to but not including trailing backslash
             int lDir = dir.Length;
-            if (dir[lDir - 1] == '\\' || dir[lDir - 1] == '/') lDir -= 1;
+            if (dir[lDir - 1] == '\\' || dir[lDir - 1] == '/')
+                lDir -= 1;
 
             int lSubdir = subdir.Length;
-            if (subdir[lSubdir - 1] == '\\' || dir[lDir - 1] == '/') lSubdir -= 1;
+            if (subdir[lSubdir - 1] == '\\' || dir[lDir - 1] == '/')
+                lSubdir -= 1;
 
             if (lSubdir < lDir)
                 return false;
@@ -73,10 +75,12 @@ namespace System.Configuration
 
             // Compare up to but not including trailing slash
             int lPath = path.Length;
-            if (path[lPath - 1] == '/') lPath -= 1;
+            if (path[lPath - 1] == '/')
+                lPath -= 1;
 
             int lSubpath = subpath.Length;
-            if (subpath[lSubpath - 1] == '/') lSubpath -= 1;
+            if (subpath[lSubpath - 1] == '/')
+                lSubpath -= 1;
 
             if (lSubpath < lPath)
                 return false;
@@ -118,10 +122,12 @@ namespace System.Configuration
         {
             string prefix;
 
-            if (IsAbsoluteLocalPhysicalPath(fileName)) prefix = FileUrlLocal;
+            if (IsAbsoluteLocalPhysicalPath(fileName))
+                prefix = FileUrlLocal;
             else
             {
-                if (IsAbsoluteUncPhysicalPath(fileName)) prefix = FileUrlUnc;
+                if (IsAbsoluteUncPhysicalPath(fileName))
+                    prefix = FileUrlUnc;
                 else
                 {
                     // We should never get here, but if we do we are likely to have

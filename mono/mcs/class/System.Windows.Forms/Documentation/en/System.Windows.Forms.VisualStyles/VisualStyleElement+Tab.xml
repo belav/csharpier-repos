@@ -1,4 +1,7 @@
-<Type Name="VisualStyleElement+Tab" FullName="System.Windows.Forms.VisualStyles.VisualStyleElement+Tab">
+<Type
+  Name="VisualStyleElement+Tab"
+  FullName="System.Windows.Forms.VisualStyles.VisualStyleElement+Tab"
+>
   <TypeSignature Language="C#" Value="public static class VisualStyleElement.Tab" />
   <AssemblyInfo>
     <AssemblyName>System.Windows.Forms</AssemblyName>

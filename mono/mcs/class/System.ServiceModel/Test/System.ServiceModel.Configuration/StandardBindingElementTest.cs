@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -36,39 +36,47 @@ using System.Configuration;
 
 namespace MonoTests.System.ServiceModel.Configuration
 {
-	[TestFixture]
-	public class StandardBindingElementTest
-	{
-		class Poker : StandardBindingElement
-		{
-			protected override Type BindingElementType {
-				get { throw new NotImplementedException (); }
-			}
+    [TestFixture]
+    public class StandardBindingElementTest
+    {
+        class Poker : StandardBindingElement
+        {
+            protected override Type BindingElementType
+            {
+                get { throw new NotImplementedException(); }
+            }
 
-			protected override void OnApplyConfiguration (Binding binding) {
-				throw new NotImplementedException ();
-			}
+            protected override void OnApplyConfiguration(Binding binding)
+            {
+                throw new NotImplementedException();
+            }
 
-			public ConfigurationPropertyCollection GetProperties () {
-				return Properties;
-			}
+            public ConfigurationPropertyCollection GetProperties()
+            {
+                return Properties;
+            }
 
-			[ConfigurationProperty ("myProperty")]
-			string MyProperty {
-				get { return "myProperty"; }
-				set { }
-			}
-		}
+            [ConfigurationProperty("myProperty")]
+            string MyProperty
+            {
+                get { return "myProperty"; }
+                set { }
+            }
+        }
 
-		[Test]
-		public void Properties () {
+        [Test]
+        public void Properties()
+        {
+            Poker p1 = new Poker();
+            Poker p2 = new Poker();
 
-			Poker p1 = new Poker ();
-			Poker p2 = new Poker ();
-
-			Assert.AreEqual (false, p1.GetProperties ().Contains ("myProperty"), "Contains myProperty");
-			Assert.AreEqual (false, p1.GetProperties () == p2.GetProperties (), "#");
-		}
-	}
+            Assert.AreEqual(
+                false,
+                p1.GetProperties().Contains("myProperty"),
+                "Contains myProperty"
+            );
+            Assert.AreEqual(false, p1.GetProperties() == p2.GetProperties(), "#");
+        }
+    }
 }
 #endif

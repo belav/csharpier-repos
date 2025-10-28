@@ -21,7 +21,8 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
                 isVirtual: symbol.IsVirtual,
                 isOverride: symbol.IsOverride,
                 isSealed: symbol.IsSealed,
-                isRequired: symbol.IsRequired());
+                isRequired: symbol.IsRequired()
+            );
         }
     }
 }

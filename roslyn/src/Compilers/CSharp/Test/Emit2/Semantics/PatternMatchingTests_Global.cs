@@ -12,19 +12,18 @@ using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.CSharp.Test.Utilities;
 using Microsoft.CodeAnalysis.Test.Utilities;
 using Roslyn.Test.Utilities;
-using Xunit;
 using Roslyn.Utilities;
+using Xunit;
 
 namespace Microsoft.CodeAnalysis.CSharp.UnitTests
 {
     public class PatternMatchingTests_Global : PatternMatchingTestBase
     {
-
         [Fact]
         public void GlobalCode_ExpressionStatement_01()
         {
             string source =
-@"
+                @"
 H.Dummy(1 is int x1);
 H.Dummy(x1);
 
@@ -50,28 +49,44 @@ class H
 }
 ";
             {
-                var compilation = CreateCompilationWithMscorlib45(source, options: TestOptions.ReleaseExe.WithScriptClassName("Script"), parseOptions: TestOptions.Script);
+                var compilation = CreateCompilationWithMscorlib45(
+                    source,
+                    options: TestOptions.ReleaseExe.WithScriptClassName("Script"),
+                    parseOptions: TestOptions.Script
+                );
 
                 compilation.VerifyDiagnostics(
-                // (6,18): error CS0102: The type 'Script' already contains a definition for 'x2'
-                // H.Dummy(2 is int x2);
-                Diagnostic(ErrorCode.ERR_DuplicateNameInClass, "x2").WithArguments("Script", "x2").WithLocation(6, 18),
-                // (9,8): error CS0102: The type 'Script' already contains a definition for 'x3'
-                // object x3;
-                Diagnostic(ErrorCode.ERR_DuplicateNameInClass, "x3").WithArguments("Script", "x3").WithLocation(9, 8),
-                // (12,20): error CS0102: The type 'Script' already contains a definition for 'x4'
-                //         (42 is int x4));
-                Diagnostic(ErrorCode.ERR_DuplicateNameInClass, "x4").WithArguments("Script", "x4").WithLocation(12, 20),
-                // (16,17): error CS0229: Ambiguity between 'x2' and 'x2'
-                //     H.Dummy(x1, x2, x3, x4);
-                Diagnostic(ErrorCode.ERR_AmbigMember, "x2").WithArguments("x2", "x2").WithLocation(16, 17),
-                // (16,21): error CS0229: Ambiguity between 'x3' and 'x3'
-                //     H.Dummy(x1, x2, x3, x4);
-                Diagnostic(ErrorCode.ERR_AmbigMember, "x3").WithArguments("x3", "x3").WithLocation(16, 21),
-                // (16,25): error CS0229: Ambiguity between 'x4' and 'x4'
-                //     H.Dummy(x1, x2, x3, x4);
-                Diagnostic(ErrorCode.ERR_AmbigMember, "x4").WithArguments("x4", "x4").WithLocation(16, 25)
-                    );
+                    // (6,18): error CS0102: The type 'Script' already contains a definition for 'x2'
+                    // H.Dummy(2 is int x2);
+                    Diagnostic(ErrorCode.ERR_DuplicateNameInClass, "x2")
+                        .WithArguments("Script", "x2")
+                        .WithLocation(6, 18),
+                    // (9,8): error CS0102: The type 'Script' already contains a definition for 'x3'
+                    // object x3;
+                    Diagnostic(ErrorCode.ERR_DuplicateNameInClass, "x3")
+                        .WithArguments("Script", "x3")
+                        .WithLocation(9, 8),
+                    // (12,20): error CS0102: The type 'Script' already contains a definition for 'x4'
+                    //         (42 is int x4));
+                    Diagnostic(ErrorCode.ERR_DuplicateNameInClass, "x4")
+                        .WithArguments("Script", "x4")
+                        .WithLocation(12, 20),
+                    // (16,17): error CS0229: Ambiguity between 'x2' and 'x2'
+                    //     H.Dummy(x1, x2, x3, x4);
+                    Diagnostic(ErrorCode.ERR_AmbigMember, "x2")
+                        .WithArguments("x2", "x2")
+                        .WithLocation(16, 17),
+                    // (16,21): error CS0229: Ambiguity between 'x3' and 'x3'
+                    //     H.Dummy(x1, x2, x3, x4);
+                    Diagnostic(ErrorCode.ERR_AmbigMember, "x3")
+                        .WithArguments("x3", "x3")
+                        .WithLocation(16, 21),
+                    // (16,25): error CS0229: Ambiguity between 'x4' and 'x4'
+                    //     H.Dummy(x1, x2, x3, x4);
+                    Diagnostic(ErrorCode.ERR_AmbigMember, "x4")
+                        .WithArguments("x4", "x4")
+                        .WithLocation(16, 25)
+                );
 
                 var tree = compilation.SyntaxTrees.Single();
                 var model = compilation.GetSemanticModel(tree);
@@ -97,25 +112,39 @@ class H
             }
 
             {
-                var compilation = CreateCompilationWithMscorlib45(source, options: TestOptions.ReleaseExe, parseOptions: TestOptions.Regular9);
+                var compilation = CreateCompilationWithMscorlib45(
+                    source,
+                    options: TestOptions.ReleaseExe,
+                    parseOptions: TestOptions.Regular9
+                );
 
                 compilation.VerifyDiagnostics(
                     // (6,18): error CS0128: A local variable or function named 'x2' is already defined in this scope
                     // H.Dummy(2 is int x2);
-                    Diagnostic(ErrorCode.ERR_LocalDuplicate, "x2").WithArguments("x2").WithLocation(6, 18),
+                    Diagnostic(ErrorCode.ERR_LocalDuplicate, "x2")
+                        .WithArguments("x2")
+                        .WithLocation(6, 18),
                     // (9,8): error CS0128: A local variable or function named 'x3' is already defined in this scope
                     // object x3;
-                    Diagnostic(ErrorCode.ERR_LocalDuplicate, "x3").WithArguments("x3").WithLocation(9, 8),
+                    Diagnostic(ErrorCode.ERR_LocalDuplicate, "x3")
+                        .WithArguments("x3")
+                        .WithLocation(9, 8),
                     // (9,8): warning CS0168: The variable 'x3' is declared but never used
                     // object x3;
-                    Diagnostic(ErrorCode.WRN_UnreferencedVar, "x3").WithArguments("x3").WithLocation(9, 8),
+                    Diagnostic(ErrorCode.WRN_UnreferencedVar, "x3")
+                        .WithArguments("x3")
+                        .WithLocation(9, 8),
                     // (12,20): error CS0128: A local variable or function named 'x4' is already defined in this scope
                     //         (42 is int x4));
-                    Diagnostic(ErrorCode.ERR_LocalDuplicate, "x4").WithArguments("x4").WithLocation(12, 20),
+                    Diagnostic(ErrorCode.ERR_LocalDuplicate, "x4")
+                        .WithArguments("x4")
+                        .WithLocation(12, 20),
                     // (19,1): error CS0165: Use of unassigned local variable 'x2'
                     // Test();
-                    Diagnostic(ErrorCode.ERR_UseDefViolation, "Test()").WithArguments("x2").WithLocation(19, 1)
-                    );
+                    Diagnostic(ErrorCode.ERR_UseDefViolation, "Test()")
+                        .WithArguments("x2")
+                        .WithLocation(19, 1)
+                );
 
                 var tree = compilation.SyntaxTrees.Single();
                 var model = compilation.GetSemanticModel(tree);
@@ -146,7 +175,7 @@ class H
         public void GlobalCode_ExpressionStatement_02()
         {
             string source =
-@"
+                @"
 H.Dummy(1 is var x1);
 H.Dummy(x1);
 
@@ -172,28 +201,44 @@ class H
 }
 ";
             {
-                var compilation = CreateCompilationWithMscorlib45(source, options: TestOptions.ReleaseExe.WithScriptClassName("Script"), parseOptions: TestOptions.Script);
+                var compilation = CreateCompilationWithMscorlib45(
+                    source,
+                    options: TestOptions.ReleaseExe.WithScriptClassName("Script"),
+                    parseOptions: TestOptions.Script
+                );
 
                 compilation.VerifyDiagnostics(
-                // (6,18): error CS0102: The type 'Script' already contains a definition for 'x2'
-                // H.Dummy(2 is var x2);
-                Diagnostic(ErrorCode.ERR_DuplicateNameInClass, "x2").WithArguments("Script", "x2").WithLocation(6, 18),
-                // (9,8): error CS0102: The type 'Script' already contains a definition for 'x3'
-                // object x3;
-                Diagnostic(ErrorCode.ERR_DuplicateNameInClass, "x3").WithArguments("Script", "x3").WithLocation(9, 8),
-                // (12,20): error CS0102: The type 'Script' already contains a definition for 'x4'
-                //         (42 is var x4));
-                Diagnostic(ErrorCode.ERR_DuplicateNameInClass, "x4").WithArguments("Script", "x4").WithLocation(12, 20),
-                // (16,17): error CS0229: Ambiguity between 'x2' and 'x2'
-                //     H.Dummy(x1, x2, x3, x4);
-                Diagnostic(ErrorCode.ERR_AmbigMember, "x2").WithArguments("x2", "x2").WithLocation(16, 17),
-                // (16,21): error CS0229: Ambiguity between 'x3' and 'x3'
-                //     H.Dummy(x1, x2, x3, x4);
-                Diagnostic(ErrorCode.ERR_AmbigMember, "x3").WithArguments("x3", "x3").WithLocation(16, 21),
-                // (16,25): error CS0229: Ambiguity between 'x4' and 'x4'
-                //     H.Dummy(x1, x2, x3, x4);
-                Diagnostic(ErrorCode.ERR_AmbigMember, "x4").WithArguments("x4", "x4").WithLocation(16, 25)
-                    );
+                    // (6,18): error CS0102: The type 'Script' already contains a definition for 'x2'
+                    // H.Dummy(2 is var x2);
+                    Diagnostic(ErrorCode.ERR_DuplicateNameInClass, "x2")
+                        .WithArguments("Script", "x2")
+                        .WithLocation(6, 18),
+                    // (9,8): error CS0102: The type 'Script' already contains a definition for 'x3'
+                    // object x3;
+                    Diagnostic(ErrorCode.ERR_DuplicateNameInClass, "x3")
+                        .WithArguments("Script", "x3")
+                        .WithLocation(9, 8),
+                    // (12,20): error CS0102: The type 'Script' already contains a definition for 'x4'
+                    //         (42 is var x4));
+                    Diagnostic(ErrorCode.ERR_DuplicateNameInClass, "x4")
+                        .WithArguments("Script", "x4")
+                        .WithLocation(12, 20),
+                    // (16,17): error CS0229: Ambiguity between 'x2' and 'x2'
+                    //     H.Dummy(x1, x2, x3, x4);
+                    Diagnostic(ErrorCode.ERR_AmbigMember, "x2")
+                        .WithArguments("x2", "x2")
+                        .WithLocation(16, 17),
+                    // (16,21): error CS0229: Ambiguity between 'x3' and 'x3'
+                    //     H.Dummy(x1, x2, x3, x4);
+                    Diagnostic(ErrorCode.ERR_AmbigMember, "x3")
+                        .WithArguments("x3", "x3")
+                        .WithLocation(16, 21),
+                    // (16,25): error CS0229: Ambiguity between 'x4' and 'x4'
+                    //     H.Dummy(x1, x2, x3, x4);
+                    Diagnostic(ErrorCode.ERR_AmbigMember, "x4")
+                        .WithArguments("x4", "x4")
+                        .WithLocation(16, 25)
+                );
 
                 var tree = compilation.SyntaxTrees.Single();
                 var model = compilation.GetSemanticModel(tree);
@@ -219,25 +264,39 @@ class H
             }
 
             {
-                var compilation = CreateCompilationWithMscorlib45(source, options: TestOptions.ReleaseExe, parseOptions: TestOptions.Regular9);
+                var compilation = CreateCompilationWithMscorlib45(
+                    source,
+                    options: TestOptions.ReleaseExe,
+                    parseOptions: TestOptions.Regular9
+                );
 
                 compilation.VerifyDiagnostics(
                     // (6,18): error CS0128: A local variable or function named 'x2' is already defined in this scope
                     // H.Dummy(2 is var x2);
-                    Diagnostic(ErrorCode.ERR_LocalDuplicate, "x2").WithArguments("x2").WithLocation(6, 18),
+                    Diagnostic(ErrorCode.ERR_LocalDuplicate, "x2")
+                        .WithArguments("x2")
+                        .WithLocation(6, 18),
                     // (9,8): error CS0128: A local variable or function named 'x3' is already defined in this scope
                     // object x3;
-                    Diagnostic(ErrorCode.ERR_LocalDuplicate, "x3").WithArguments("x3").WithLocation(9, 8),
+                    Diagnostic(ErrorCode.ERR_LocalDuplicate, "x3")
+                        .WithArguments("x3")
+                        .WithLocation(9, 8),
                     // (9,8): warning CS0168: The variable 'x3' is declared but never used
                     // object x3;
-                    Diagnostic(ErrorCode.WRN_UnreferencedVar, "x3").WithArguments("x3").WithLocation(9, 8),
+                    Diagnostic(ErrorCode.WRN_UnreferencedVar, "x3")
+                        .WithArguments("x3")
+                        .WithLocation(9, 8),
                     // (12,20): error CS0128: A local variable or function named 'x4' is already defined in this scope
                     //         (42 is var x4));
-                    Diagnostic(ErrorCode.ERR_LocalDuplicate, "x4").WithArguments("x4").WithLocation(12, 20),
+                    Diagnostic(ErrorCode.ERR_LocalDuplicate, "x4")
+                        .WithArguments("x4")
+                        .WithLocation(12, 20),
                     // (19,1): error CS0165: Use of unassigned local variable 'x2'
                     // Test();
-                    Diagnostic(ErrorCode.ERR_UseDefViolation, "Test()").WithArguments("x2").WithLocation(19, 1)
-                    );
+                    Diagnostic(ErrorCode.ERR_UseDefViolation, "Test()")
+                        .WithArguments("x2")
+                        .WithLocation(19, 1)
+                );
 
                 var tree = compilation.SyntaxTrees.Single();
                 var model = compilation.GetSemanticModel(tree);
@@ -268,7 +327,7 @@ class H
         public void GlobalCode_ExpressionStatement_03()
         {
             string source =
-@"
+                @"
 System.Console.WriteLine(x1);
 H.Dummy(1 is var x1);
 Test();
@@ -283,11 +342,18 @@ class H
 }
 ";
 
-            var compilation = CreateCompilationWithMscorlib45(source, options: TestOptions.ReleaseExe.WithScriptClassName("Script"), parseOptions: TestOptions.Script);
+            var compilation = CreateCompilationWithMscorlib45(
+                source,
+                options: TestOptions.ReleaseExe.WithScriptClassName("Script"),
+                parseOptions: TestOptions.Script
+            );
 
-            CompileAndVerify(compilation, expectedOutput:
-@"0
-1").VerifyDiagnostics();
+            CompileAndVerify(
+                    compilation,
+                    expectedOutput: @"0
+1"
+                )
+                .VerifyDiagnostics();
 
             var tree = compilation.SyntaxTrees.Single();
             var model = compilation.GetSemanticModel(tree);
@@ -302,7 +368,7 @@ class H
         public void GlobalCode_IfStatement_01()
         {
             string source =
-@"
+                @"
 if ((1 is int x1)) {}
 H.Dummy(x1);
 
@@ -342,28 +408,44 @@ class H
 }
 ";
             {
-                var compilation = CreateCompilationWithMscorlib45(source, options: TestOptions.ReleaseExe.WithScriptClassName("Script"), parseOptions: TestOptions.Script);
+                var compilation = CreateCompilationWithMscorlib45(
+                    source,
+                    options: TestOptions.ReleaseExe.WithScriptClassName("Script"),
+                    parseOptions: TestOptions.Script
+                );
 
                 compilation.VerifyDiagnostics(
-                // (6,15): error CS0102: The type 'Script' already contains a definition for 'x2'
-                // if ((2 is int x2)) {}
-                Diagnostic(ErrorCode.ERR_DuplicateNameInClass, "x2").WithArguments("Script", "x2").WithLocation(6, 15),
-                // (9,8): error CS0102: The type 'Script' already contains a definition for 'x3'
-                // object x3;
-                Diagnostic(ErrorCode.ERR_DuplicateNameInClass, "x3").WithArguments("Script", "x3").WithLocation(9, 8),
-                // (12,24): error CS0102: The type 'Script' already contains a definition for 'x4'
-                //             (42 is int x4))) {}
-                Diagnostic(ErrorCode.ERR_DuplicateNameInClass, "x4").WithArguments("Script", "x4").WithLocation(12, 24),
-                // (30,17): error CS0229: Ambiguity between 'x2' and 'x2'
-                //     H.Dummy(x1, x2, x3, x4, x5);
-                Diagnostic(ErrorCode.ERR_AmbigMember, "x2").WithArguments("x2", "x2").WithLocation(30, 17),
-                // (30,21): error CS0229: Ambiguity between 'x3' and 'x3'
-                //     H.Dummy(x1, x2, x3, x4, x5);
-                Diagnostic(ErrorCode.ERR_AmbigMember, "x3").WithArguments("x3", "x3").WithLocation(30, 21),
-                // (30,25): error CS0229: Ambiguity between 'x4' and 'x4'
-                //     H.Dummy(x1, x2, x3, x4, x5);
-                Diagnostic(ErrorCode.ERR_AmbigMember, "x4").WithArguments("x4", "x4").WithLocation(30, 25)
-                    );
+                    // (6,15): error CS0102: The type 'Script' already contains a definition for 'x2'
+                    // if ((2 is int x2)) {}
+                    Diagnostic(ErrorCode.ERR_DuplicateNameInClass, "x2")
+                        .WithArguments("Script", "x2")
+                        .WithLocation(6, 15),
+                    // (9,8): error CS0102: The type 'Script' already contains a definition for 'x3'
+                    // object x3;
+                    Diagnostic(ErrorCode.ERR_DuplicateNameInClass, "x3")
+                        .WithArguments("Script", "x3")
+                        .WithLocation(9, 8),
+                    // (12,24): error CS0102: The type 'Script' already contains a definition for 'x4'
+                    //             (42 is int x4))) {}
+                    Diagnostic(ErrorCode.ERR_DuplicateNameInClass, "x4")
+                        .WithArguments("Script", "x4")
+                        .WithLocation(12, 24),
+                    // (30,17): error CS0229: Ambiguity between 'x2' and 'x2'
+                    //     H.Dummy(x1, x2, x3, x4, x5);
+                    Diagnostic(ErrorCode.ERR_AmbigMember, "x2")
+                        .WithArguments("x2", "x2")
+                        .WithLocation(30, 17),
+                    // (30,21): error CS0229: Ambiguity between 'x3' and 'x3'
+                    //     H.Dummy(x1, x2, x3, x4, x5);
+                    Diagnostic(ErrorCode.ERR_AmbigMember, "x3")
+                        .WithArguments("x3", "x3")
+                        .WithLocation(30, 21),
+                    // (30,25): error CS0229: Ambiguity between 'x4' and 'x4'
+                    //     H.Dummy(x1, x2, x3, x4, x5);
+                    Diagnostic(ErrorCode.ERR_AmbigMember, "x4")
+                        .WithArguments("x4", "x4")
+                        .WithLocation(30, 25)
+                );
 
                 var tree = compilation.SyntaxTrees.Single();
                 var model = compilation.GetSemanticModel(tree);
@@ -396,34 +478,54 @@ class H
             }
 
             {
-                var compilation = CreateCompilationWithMscorlib45(source, options: TestOptions.ReleaseExe, parseOptions: TestOptions.Regular9);
+                var compilation = CreateCompilationWithMscorlib45(
+                    source,
+                    options: TestOptions.ReleaseExe,
+                    parseOptions: TestOptions.Regular9
+                );
 
                 compilation.VerifyDiagnostics(
                     // (6,15): error CS0128: A local variable or function named 'x2' is already defined in this scope
                     // if ((2 is int x2)) {}
-                    Diagnostic(ErrorCode.ERR_LocalDuplicate, "x2").WithArguments("x2").WithLocation(6, 15),
+                    Diagnostic(ErrorCode.ERR_LocalDuplicate, "x2")
+                        .WithArguments("x2")
+                        .WithLocation(6, 15),
                     // (9,8): error CS0128: A local variable or function named 'x3' is already defined in this scope
                     // object x3;
-                    Diagnostic(ErrorCode.ERR_LocalDuplicate, "x3").WithArguments("x3").WithLocation(9, 8),
+                    Diagnostic(ErrorCode.ERR_LocalDuplicate, "x3")
+                        .WithArguments("x3")
+                        .WithLocation(9, 8),
                     // (9,8): warning CS0168: The variable 'x3' is declared but never used
                     // object x3;
-                    Diagnostic(ErrorCode.WRN_UnreferencedVar, "x3").WithArguments("x3").WithLocation(9, 8),
+                    Diagnostic(ErrorCode.WRN_UnreferencedVar, "x3")
+                        .WithArguments("x3")
+                        .WithLocation(9, 8),
                     // (12,24): error CS0128: A local variable or function named 'x4' is already defined in this scope
                     //             (42 is int x4))) {}
-                    Diagnostic(ErrorCode.ERR_LocalDuplicate, "x4").WithArguments("x4").WithLocation(12, 24),
+                    Diagnostic(ErrorCode.ERR_LocalDuplicate, "x4")
+                        .WithArguments("x4")
+                        .WithLocation(12, 24),
                     // (16,28): error CS0136: A local or parameter named 'x5' cannot be declared in this scope because that name is used in an enclosing local scope to define a local or parameter
                     //     H.Dummy("52" is string x5);
-                    Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "x5").WithArguments("x5").WithLocation(16, 28),
+                    Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "x5")
+                        .WithArguments("x5")
+                        .WithLocation(16, 28),
                     // (21,5): warning CS0219: The variable 'x6' is assigned but its value is never used
                     // int x6 = 6;
-                    Diagnostic(ErrorCode.WRN_UnreferencedVarAssg, "x6").WithArguments("x6").WithLocation(21, 5),
+                    Diagnostic(ErrorCode.WRN_UnreferencedVarAssg, "x6")
+                        .WithArguments("x6")
+                        .WithLocation(21, 5),
                     // (24,12): error CS0136: A local or parameter named 'x6' cannot be declared in this scope because that name is used in an enclosing local scope to define a local or parameter
                     //     string x6 = "6";
-                    Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "x6").WithArguments("x6").WithLocation(24, 12),
+                    Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "x6")
+                        .WithArguments("x6")
+                        .WithLocation(24, 12),
                     // (33,1): error CS0165: Use of unassigned local variable 'x2'
                     // Test();
-                    Diagnostic(ErrorCode.ERR_UseDefViolation, "Test()").WithArguments("x2").WithLocation(33, 1)
-                    );
+                    Diagnostic(ErrorCode.ERR_UseDefViolation, "Test()")
+                        .WithArguments("x2")
+                        .WithLocation(33, 1)
+                );
 
                 var tree = compilation.SyntaxTrees.Single();
                 var model = compilation.GetSemanticModel(tree);
@@ -461,7 +563,7 @@ class H
         public void GlobalCode_IfStatement_02()
         {
             string source =
-@"
+                @"
 if ((1 is var x1)) {}
 H.Dummy(x1);
 
@@ -494,28 +596,44 @@ class H
 }
 ";
             {
-                var compilation = CreateCompilationWithMscorlib45(source, options: TestOptions.ReleaseExe.WithScriptClassName("Script"), parseOptions: TestOptions.Script);
+                var compilation = CreateCompilationWithMscorlib45(
+                    source,
+                    options: TestOptions.ReleaseExe.WithScriptClassName("Script"),
+                    parseOptions: TestOptions.Script
+                );
 
                 compilation.VerifyDiagnostics(
-                // (6,15): error CS0102: The type 'Script' already contains a definition for 'x2'
-                // if ((2 is var x2)) {}
-                Diagnostic(ErrorCode.ERR_DuplicateNameInClass, "x2").WithArguments("Script", "x2").WithLocation(6, 15),
-                // (9,8): error CS0102: The type 'Script' already contains a definition for 'x3'
-                // object x3;
-                Diagnostic(ErrorCode.ERR_DuplicateNameInClass, "x3").WithArguments("Script", "x3").WithLocation(9, 8),
-                // (12,24): error CS0102: The type 'Script' already contains a definition for 'x4'
-                //             (42 is var x4))) {}
-                Diagnostic(ErrorCode.ERR_DuplicateNameInClass, "x4").WithArguments("Script", "x4").WithLocation(12, 24),
-                // (16,17): error CS0229: Ambiguity between 'x2' and 'x2'
-                //     H.Dummy(x1, x2, x3, x4, x5);
-                Diagnostic(ErrorCode.ERR_AmbigMember, "x2").WithArguments("x2", "x2").WithLocation(16, 17),
-                // (16,21): error CS0229: Ambiguity between 'x3' and 'x3'
-                //     H.Dummy(x1, x2, x3, x4, x5);
-                Diagnostic(ErrorCode.ERR_AmbigMember, "x3").WithArguments("x3", "x3").WithLocation(16, 21),
-                // (16,25): error CS0229: Ambiguity between 'x4' and 'x4'
-                //     H.Dummy(x1, x2, x3, x4, x5);
-                Diagnostic(ErrorCode.ERR_AmbigMember, "x4").WithArguments("x4", "x4").WithLocation(16, 25)
-                    );
+                    // (6,15): error CS0102: The type 'Script' already contains a definition for 'x2'
+                    // if ((2 is var x2)) {}
+                    Diagnostic(ErrorCode.ERR_DuplicateNameInClass, "x2")
+                        .WithArguments("Script", "x2")
+                        .WithLocation(6, 15),
+                    // (9,8): error CS0102: The type 'Script' already contains a definition for 'x3'
+                    // object x3;
+                    Diagnostic(ErrorCode.ERR_DuplicateNameInClass, "x3")
+                        .WithArguments("Script", "x3")
+                        .WithLocation(9, 8),
+                    // (12,24): error CS0102: The type 'Script' already contains a definition for 'x4'
+                    //             (42 is var x4))) {}
+                    Diagnostic(ErrorCode.ERR_DuplicateNameInClass, "x4")
+                        .WithArguments("Script", "x4")
+                        .WithLocation(12, 24),
+                    // (16,17): error CS0229: Ambiguity between 'x2' and 'x2'
+                    //     H.Dummy(x1, x2, x3, x4, x5);
+                    Diagnostic(ErrorCode.ERR_AmbigMember, "x2")
+                        .WithArguments("x2", "x2")
+                        .WithLocation(16, 17),
+                    // (16,21): error CS0229: Ambiguity between 'x3' and 'x3'
+                    //     H.Dummy(x1, x2, x3, x4, x5);
+                    Diagnostic(ErrorCode.ERR_AmbigMember, "x3")
+                        .WithArguments("x3", "x3")
+                        .WithLocation(16, 21),
+                    // (16,25): error CS0229: Ambiguity between 'x4' and 'x4'
+                    //     H.Dummy(x1, x2, x3, x4, x5);
+                    Diagnostic(ErrorCode.ERR_AmbigMember, "x4")
+                        .WithArguments("x4", "x4")
+                        .WithLocation(16, 25)
+                );
 
                 var tree = compilation.SyntaxTrees.Single();
                 var model = compilation.GetSemanticModel(tree);
@@ -548,31 +666,49 @@ class H
             }
 
             {
-                var compilation = CreateCompilationWithMscorlib45(source, options: TestOptions.ReleaseExe, parseOptions: TestOptions.Regular9);
+                var compilation = CreateCompilationWithMscorlib45(
+                    source,
+                    options: TestOptions.ReleaseExe,
+                    parseOptions: TestOptions.Regular9
+                );
 
                 compilation.VerifyDiagnostics(
                     // (6,15): error CS0128: A local variable or function named 'x2' is already defined in this scope
                     // if ((2 is var x2)) {}
-                    Diagnostic(ErrorCode.ERR_LocalDuplicate, "x2").WithArguments("x2").WithLocation(6, 15),
+                    Diagnostic(ErrorCode.ERR_LocalDuplicate, "x2")
+                        .WithArguments("x2")
+                        .WithLocation(6, 15),
                     // (9,8): error CS0128: A local variable or function named 'x3' is already defined in this scope
                     // object x3;
-                    Diagnostic(ErrorCode.ERR_LocalDuplicate, "x3").WithArguments("x3").WithLocation(9, 8),
+                    Diagnostic(ErrorCode.ERR_LocalDuplicate, "x3")
+                        .WithArguments("x3")
+                        .WithLocation(9, 8),
                     // (12,24): error CS0128: A local variable or function named 'x4' is already defined in this scope
                     //             (42 is var x4))) {}
-                    Diagnostic(ErrorCode.ERR_LocalDuplicate, "x4").WithArguments("x4").WithLocation(12, 24),
+                    Diagnostic(ErrorCode.ERR_LocalDuplicate, "x4")
+                        .WithArguments("x4")
+                        .WithLocation(12, 24),
                     // (16,29): error CS0841: Cannot use local variable 'x5' before it is declared
                     //     H.Dummy(x1, x2, x3, x4, x5);
-                    Diagnostic(ErrorCode.ERR_VariableUsedBeforeDeclaration, "x5").WithArguments("x5").WithLocation(16, 29),
+                    Diagnostic(ErrorCode.ERR_VariableUsedBeforeDeclaration, "x5")
+                        .WithArguments("x5")
+                        .WithLocation(16, 29),
                     // (21,25): error CS0136: A local or parameter named 'x5' cannot be declared in this scope because that name is used in an enclosing local scope to define a local or parameter
                     //     H.Dummy("52" is var x5);
-                    Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "x5").WithArguments("x5").WithLocation(21, 25),
+                    Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "x5")
+                        .WithArguments("x5")
+                        .WithLocation(21, 25),
                     // (26,1): error CS0165: Use of unassigned local variable 'x2'
                     // Test();
-                    Diagnostic(ErrorCode.ERR_UseDefViolation, "Test()").WithArguments("x2").WithLocation(26, 1),
+                    Diagnostic(ErrorCode.ERR_UseDefViolation, "Test()")
+                        .WithArguments("x2")
+                        .WithLocation(26, 1),
                     // (9,8): warning CS0168: The variable 'x3' is declared but never used
                     // object x3;
-                    Diagnostic(ErrorCode.WRN_UnreferencedVar, "x3").WithArguments("x3").WithLocation(9, 8)
-                    );
+                    Diagnostic(ErrorCode.WRN_UnreferencedVar, "x3")
+                        .WithArguments("x3")
+                        .WithLocation(9, 8)
+                );
 
                 var tree = compilation.SyntaxTrees.Single();
                 var model = compilation.GetSemanticModel(tree);
@@ -610,7 +746,7 @@ class H
         public void GlobalCode_IfStatement_03()
         {
             string source =
-@"
+                @"
 System.Console.WriteLine(x1);
 if ((1 is var x1)) 
 {
@@ -629,12 +765,19 @@ class H
 }
 ";
 
-            var compilation = CreateCompilationWithMscorlib45(source, options: TestOptions.ReleaseExe.WithScriptClassName("Script"), parseOptions: TestOptions.Script);
+            var compilation = CreateCompilationWithMscorlib45(
+                source,
+                options: TestOptions.ReleaseExe.WithScriptClassName("Script"),
+                parseOptions: TestOptions.Script
+            );
 
-            CompileAndVerify(compilation, expectedOutput:
-@"0
+            CompileAndVerify(
+                    compilation,
+                    expectedOutput: @"0
 11
-1").VerifyDiagnostics();
+1"
+                )
+                .VerifyDiagnostics();
 
             var tree = compilation.SyntaxTrees.Single();
             var model = compilation.GetSemanticModel(tree);
@@ -651,7 +794,7 @@ class H
         public void GlobalCode_IfStatement_04()
         {
             string source =
-@"
+                @"
 System.Console.WriteLine(x1);
 if ((1 is var x1)) 
     H.Dummy((""11"" is var x1), x1);
@@ -671,12 +814,19 @@ class H
 }
 ";
 
-            var compilation = CreateCompilationWithMscorlib45(source, options: TestOptions.ReleaseExe.WithScriptClassName("Script"), parseOptions: TestOptions.Script);
+            var compilation = CreateCompilationWithMscorlib45(
+                source,
+                options: TestOptions.ReleaseExe.WithScriptClassName("Script"),
+                parseOptions: TestOptions.Script
+            );
 
-            CompileAndVerify(compilation, expectedOutput:
-@"0
+            CompileAndVerify(
+                    compilation,
+                    expectedOutput: @"0
 11
-1").VerifyDiagnostics();
+1"
+                )
+                .VerifyDiagnostics();
 
             var tree = compilation.SyntaxTrees.Single();
             var model = compilation.GetSemanticModel(tree);
@@ -693,7 +843,7 @@ class H
         public void GlobalCode_YieldReturnStatement_01()
         {
             string source =
-@"
+                @"
 yield return (1 is int x1);
 H.Dummy(x1);
 
@@ -719,40 +869,57 @@ class H
 }
 ";
             {
-                var compilation = CreateCompilationWithMscorlib45(source, options: TestOptions.ReleaseExe.WithScriptClassName("Script"), parseOptions: TestOptions.Script);
+                var compilation = CreateCompilationWithMscorlib45(
+                    source,
+                    options: TestOptions.ReleaseExe.WithScriptClassName("Script"),
+                    parseOptions: TestOptions.Script
+                );
 
                 compilation.VerifyDiagnostics(
-                // (6,24): error CS0102: The type 'Script' already contains a definition for 'x2'
-                // yield return (2 is int x2);
-                Diagnostic(ErrorCode.ERR_DuplicateNameInClass, "x2").WithArguments("Script", "x2").WithLocation(6, 24),
-                // (9,8): error CS0102: The type 'Script' already contains a definition for 'x3'
-                // object x3;
-                Diagnostic(ErrorCode.ERR_DuplicateNameInClass, "x3").WithArguments("Script", "x3").WithLocation(9, 8),
-                // (12,33): error CS0102: The type 'Script' already contains a definition for 'x4'
-                //                      (42 is int x4));
-                Diagnostic(ErrorCode.ERR_DuplicateNameInClass, "x4").WithArguments("Script", "x4").WithLocation(12, 33),
-                // (2,1): error CS7020: Cannot use 'yield' in top-level script code
-                // yield return (1 is int x1);
-                Diagnostic(ErrorCode.ERR_YieldNotAllowedInScript, "yield").WithLocation(2, 1),
-                // (6,1): error CS7020: Cannot use 'yield' in top-level script code
-                // yield return (2 is int x2);
-                Diagnostic(ErrorCode.ERR_YieldNotAllowedInScript, "yield").WithLocation(6, 1),
-                // (8,1): error CS7020: Cannot use 'yield' in top-level script code
-                // yield return (3 is int x3);
-                Diagnostic(ErrorCode.ERR_YieldNotAllowedInScript, "yield").WithLocation(8, 1),
-                // (11,1): error CS7020: Cannot use 'yield' in top-level script code
-                // yield return H.Dummy((41 is int x4),
-                Diagnostic(ErrorCode.ERR_YieldNotAllowedInScript, "yield").WithLocation(11, 1),
-                // (16,17): error CS0229: Ambiguity between 'x2' and 'x2'
-                //     H.Dummy(x1, x2, x3, x4);
-                Diagnostic(ErrorCode.ERR_AmbigMember, "x2").WithArguments("x2", "x2").WithLocation(16, 17),
-                // (16,21): error CS0229: Ambiguity between 'x3' and 'x3'
-                //     H.Dummy(x1, x2, x3, x4);
-                Diagnostic(ErrorCode.ERR_AmbigMember, "x3").WithArguments("x3", "x3").WithLocation(16, 21),
-                // (16,25): error CS0229: Ambiguity between 'x4' and 'x4'
-                //     H.Dummy(x1, x2, x3, x4);
-                Diagnostic(ErrorCode.ERR_AmbigMember, "x4").WithArguments("x4", "x4").WithLocation(16, 25)
-                    );
+                    // (6,24): error CS0102: The type 'Script' already contains a definition for 'x2'
+                    // yield return (2 is int x2);
+                    Diagnostic(ErrorCode.ERR_DuplicateNameInClass, "x2")
+                        .WithArguments("Script", "x2")
+                        .WithLocation(6, 24),
+                    // (9,8): error CS0102: The type 'Script' already contains a definition for 'x3'
+                    // object x3;
+                    Diagnostic(ErrorCode.ERR_DuplicateNameInClass, "x3")
+                        .WithArguments("Script", "x3")
+                        .WithLocation(9, 8),
+                    // (12,33): error CS0102: The type 'Script' already contains a definition for 'x4'
+                    //                      (42 is int x4));
+                    Diagnostic(ErrorCode.ERR_DuplicateNameInClass, "x4")
+                        .WithArguments("Script", "x4")
+                        .WithLocation(12, 33),
+                    // (2,1): error CS7020: Cannot use 'yield' in top-level script code
+                    // yield return (1 is int x1);
+                    Diagnostic(ErrorCode.ERR_YieldNotAllowedInScript, "yield").WithLocation(2, 1),
+                    // (6,1): error CS7020: Cannot use 'yield' in top-level script code
+                    // yield return (2 is int x2);
+                    Diagnostic(ErrorCode.ERR_YieldNotAllowedInScript, "yield").WithLocation(6, 1),
+                    // (8,1): error CS7020: Cannot use 'yield' in top-level script code
+                    // yield return (3 is int x3);
+                    Diagnostic(ErrorCode.ERR_YieldNotAllowedInScript, "yield").WithLocation(8, 1),
+                    // (11,1): error CS7020: Cannot use 'yield' in top-level script code
+                    // yield return H.Dummy((41 is int x4),
+                    Diagnostic(ErrorCode.ERR_YieldNotAllowedInScript, "yield")
+                        .WithLocation(11, 1),
+                    // (16,17): error CS0229: Ambiguity between 'x2' and 'x2'
+                    //     H.Dummy(x1, x2, x3, x4);
+                    Diagnostic(ErrorCode.ERR_AmbigMember, "x2")
+                        .WithArguments("x2", "x2")
+                        .WithLocation(16, 17),
+                    // (16,21): error CS0229: Ambiguity between 'x3' and 'x3'
+                    //     H.Dummy(x1, x2, x3, x4);
+                    Diagnostic(ErrorCode.ERR_AmbigMember, "x3")
+                        .WithArguments("x3", "x3")
+                        .WithLocation(16, 21),
+                    // (16,25): error CS0229: Ambiguity between 'x4' and 'x4'
+                    //     H.Dummy(x1, x2, x3, x4);
+                    Diagnostic(ErrorCode.ERR_AmbigMember, "x4")
+                        .WithArguments("x4", "x4")
+                        .WithLocation(16, 25)
+                );
 
                 var tree = compilation.SyntaxTrees.Single();
                 var model = compilation.GetSemanticModel(tree);
@@ -778,28 +945,44 @@ class H
             }
 
             {
-                var compilation = CreateCompilationWithMscorlib45(source, options: TestOptions.ReleaseExe, parseOptions: TestOptions.Regular9);
+                var compilation = CreateCompilationWithMscorlib45(
+                    source,
+                    options: TestOptions.ReleaseExe,
+                    parseOptions: TestOptions.Regular9
+                );
 
                 compilation.VerifyDiagnostics(
                     // (2,1): error CS1624: The body of '<top-level-statements-entry-point>' cannot be an iterator block because 'void' is not an iterator interface type
                     // yield return (1 is int x1);
-                    Diagnostic(ErrorCode.ERR_BadIteratorReturn, "yield return (1 is int x1);").WithArguments("<top-level-statements-entry-point>", "void").WithLocation(2, 1),
+                    Diagnostic(ErrorCode.ERR_BadIteratorReturn, "yield return (1 is int x1);")
+                        .WithArguments("<top-level-statements-entry-point>", "void")
+                        .WithLocation(2, 1),
                     // (6,24): error CS0128: A local variable or function named 'x2' is already defined in this scope
                     // yield return (2 is int x2);
-                    Diagnostic(ErrorCode.ERR_LocalDuplicate, "x2").WithArguments("x2").WithLocation(6, 24),
+                    Diagnostic(ErrorCode.ERR_LocalDuplicate, "x2")
+                        .WithArguments("x2")
+                        .WithLocation(6, 24),
                     // (9,8): error CS0128: A local variable or function named 'x3' is already defined in this scope
                     // object x3;
-                    Diagnostic(ErrorCode.ERR_LocalDuplicate, "x3").WithArguments("x3").WithLocation(9, 8),
+                    Diagnostic(ErrorCode.ERR_LocalDuplicate, "x3")
+                        .WithArguments("x3")
+                        .WithLocation(9, 8),
                     // (9,8): warning CS0168: The variable 'x3' is declared but never used
                     // object x3;
-                    Diagnostic(ErrorCode.WRN_UnreferencedVar, "x3").WithArguments("x3").WithLocation(9, 8),
+                    Diagnostic(ErrorCode.WRN_UnreferencedVar, "x3")
+                        .WithArguments("x3")
+                        .WithLocation(9, 8),
                     // (12,33): error CS0128: A local variable or function named 'x4' is already defined in this scope
                     //                      (42 is int x4));
-                    Diagnostic(ErrorCode.ERR_LocalDuplicate, "x4").WithArguments("x4").WithLocation(12, 33),
+                    Diagnostic(ErrorCode.ERR_LocalDuplicate, "x4")
+                        .WithArguments("x4")
+                        .WithLocation(12, 33),
                     // (19,1): error CS0165: Use of unassigned local variable 'x2'
                     // Test();
-                    Diagnostic(ErrorCode.ERR_UseDefViolation, "Test()").WithArguments("x2").WithLocation(19, 1)
-                    );
+                    Diagnostic(ErrorCode.ERR_UseDefViolation, "Test()")
+                        .WithArguments("x2")
+                        .WithLocation(19, 1)
+                );
 
                 var tree = compilation.SyntaxTrees.Single();
                 var model = compilation.GetSemanticModel(tree);
@@ -830,7 +1013,7 @@ class H
         public void GlobalCode_YieldReturnStatement_02()
         {
             string source =
-@"
+                @"
 yield return (1 is var x1);
 H.Dummy(x1);
 
@@ -856,40 +1039,57 @@ class H
 }
 ";
             {
-                var compilation = CreateCompilationWithMscorlib45(source, options: TestOptions.ReleaseExe.WithScriptClassName("Script"), parseOptions: TestOptions.Script);
+                var compilation = CreateCompilationWithMscorlib45(
+                    source,
+                    options: TestOptions.ReleaseExe.WithScriptClassName("Script"),
+                    parseOptions: TestOptions.Script
+                );
 
                 compilation.VerifyDiagnostics(
-                // (6,24): error CS0102: The type 'Script' already contains a definition for 'x2'
-                // yield return (2 is var x2);
-                Diagnostic(ErrorCode.ERR_DuplicateNameInClass, "x2").WithArguments("Script", "x2").WithLocation(6, 24),
-                // (9,8): error CS0102: The type 'Script' already contains a definition for 'x3'
-                // object x3;
-                Diagnostic(ErrorCode.ERR_DuplicateNameInClass, "x3").WithArguments("Script", "x3").WithLocation(9, 8),
-                // (12,33): error CS0102: The type 'Script' already contains a definition for 'x4'
-                //                      (42 is var x4));
-                Diagnostic(ErrorCode.ERR_DuplicateNameInClass, "x4").WithArguments("Script", "x4").WithLocation(12, 33),
-                // (2,1): error CS7020: Cannot use 'yield' in top-level script code
-                // yield return (1 is var x1);
-                Diagnostic(ErrorCode.ERR_YieldNotAllowedInScript, "yield").WithLocation(2, 1),
-                // (6,1): error CS7020: Cannot use 'yield' in top-level script code
-                // yield return (2 is var x2);
-                Diagnostic(ErrorCode.ERR_YieldNotAllowedInScript, "yield").WithLocation(6, 1),
-                // (8,1): error CS7020: Cannot use 'yield' in top-level script code
-                // yield return (3 is var x3);
-                Diagnostic(ErrorCode.ERR_YieldNotAllowedInScript, "yield").WithLocation(8, 1),
-                // (11,1): error CS7020: Cannot use 'yield' in top-level script code
-                // yield return H.Dummy((41 is var x4),
-                Diagnostic(ErrorCode.ERR_YieldNotAllowedInScript, "yield").WithLocation(11, 1),
-                // (16,17): error CS0229: Ambiguity between 'x2' and 'x2'
-                //     H.Dummy(x1, x2, x3, x4);
-                Diagnostic(ErrorCode.ERR_AmbigMember, "x2").WithArguments("x2", "x2").WithLocation(16, 17),
-                // (16,21): error CS0229: Ambiguity between 'x3' and 'x3'
-                //     H.Dummy(x1, x2, x3, x4);
-                Diagnostic(ErrorCode.ERR_AmbigMember, "x3").WithArguments("x3", "x3").WithLocation(16, 21),
-                // (16,25): error CS0229: Ambiguity between 'x4' and 'x4'
-                //     H.Dummy(x1, x2, x3, x4);
-                Diagnostic(ErrorCode.ERR_AmbigMember, "x4").WithArguments("x4", "x4").WithLocation(16, 25)
-                    );
+                    // (6,24): error CS0102: The type 'Script' already contains a definition for 'x2'
+                    // yield return (2 is var x2);
+                    Diagnostic(ErrorCode.ERR_DuplicateNameInClass, "x2")
+                        .WithArguments("Script", "x2")
+                        .WithLocation(6, 24),
+                    // (9,8): error CS0102: The type 'Script' already contains a definition for 'x3'
+                    // object x3;
+                    Diagnostic(ErrorCode.ERR_DuplicateNameInClass, "x3")
+                        .WithArguments("Script", "x3")
+                        .WithLocation(9, 8),
+                    // (12,33): error CS0102: The type 'Script' already contains a definition for 'x4'
+                    //                      (42 is var x4));
+                    Diagnostic(ErrorCode.ERR_DuplicateNameInClass, "x4")
+                        .WithArguments("Script", "x4")
+                        .WithLocation(12, 33),
+                    // (2,1): error CS7020: Cannot use 'yield' in top-level script code
+                    // yield return (1 is var x1);
+                    Diagnostic(ErrorCode.ERR_YieldNotAllowedInScript, "yield").WithLocation(2, 1),
+                    // (6,1): error CS7020: Cannot use 'yield' in top-level script code
+                    // yield return (2 is var x2);
+                    Diagnostic(ErrorCode.ERR_YieldNotAllowedInScript, "yield").WithLocation(6, 1),
+                    // (8,1): error CS7020: Cannot use 'yield' in top-level script code
+                    // yield return (3 is var x3);
+                    Diagnostic(ErrorCode.ERR_YieldNotAllowedInScript, "yield").WithLocation(8, 1),
+                    // (11,1): error CS7020: Cannot use 'yield' in top-level script code
+                    // yield return H.Dummy((41 is var x4),
+                    Diagnostic(ErrorCode.ERR_YieldNotAllowedInScript, "yield")
+                        .WithLocation(11, 1),
+                    // (16,17): error CS0229: Ambiguity between 'x2' and 'x2'
+                    //     H.Dummy(x1, x2, x3, x4);
+                    Diagnostic(ErrorCode.ERR_AmbigMember, "x2")
+                        .WithArguments("x2", "x2")
+                        .WithLocation(16, 17),
+                    // (16,21): error CS0229: Ambiguity between 'x3' and 'x3'
+                    //     H.Dummy(x1, x2, x3, x4);
+                    Diagnostic(ErrorCode.ERR_AmbigMember, "x3")
+                        .WithArguments("x3", "x3")
+                        .WithLocation(16, 21),
+                    // (16,25): error CS0229: Ambiguity between 'x4' and 'x4'
+                    //     H.Dummy(x1, x2, x3, x4);
+                    Diagnostic(ErrorCode.ERR_AmbigMember, "x4")
+                        .WithArguments("x4", "x4")
+                        .WithLocation(16, 25)
+                );
 
                 var tree = compilation.SyntaxTrees.Single();
                 var model = compilation.GetSemanticModel(tree);
@@ -898,7 +1098,12 @@ class H
                 var x1Ref = GetReferences(tree, "x1").ToArray();
                 Assert.Equal(2, x1Ref.Length);
                 VerifyModelForDeclarationField(model, x1Decl, x1Ref);
-                Assert.Equal("System.Int32", ((IFieldSymbol)compilation.GetSemanticModel(tree).GetDeclaredSymbol(x1Decl)).Type.ToTestDisplayString());
+                Assert.Equal(
+                    "System.Int32",
+                    (
+                        (IFieldSymbol)compilation.GetSemanticModel(tree).GetDeclaredSymbol(x1Decl)
+                    ).Type.ToTestDisplayString()
+                );
 
                 var x2Decl = GetPatternDeclarations(tree, "x2").Single();
                 var x2Ref = GetReferences(tree, "x2").Single();
@@ -916,28 +1121,44 @@ class H
             }
 
             {
-                var compilation = CreateCompilationWithMscorlib45(source, options: TestOptions.ReleaseExe, parseOptions: TestOptions.Regular9);
+                var compilation = CreateCompilationWithMscorlib45(
+                    source,
+                    options: TestOptions.ReleaseExe,
+                    parseOptions: TestOptions.Regular9
+                );
 
                 compilation.VerifyDiagnostics(
                     // (2,1): error CS1624: The body of '<top-level-statements-entry-point>' cannot be an iterator block because 'void' is not an iterator interface type
                     // yield return (1 is var x1);
-                    Diagnostic(ErrorCode.ERR_BadIteratorReturn, "yield return (1 is var x1);").WithArguments("<top-level-statements-entry-point>", "void").WithLocation(2, 1),
+                    Diagnostic(ErrorCode.ERR_BadIteratorReturn, "yield return (1 is var x1);")
+                        .WithArguments("<top-level-statements-entry-point>", "void")
+                        .WithLocation(2, 1),
                     // (6,24): error CS0128: A local variable or function named 'x2' is already defined in this scope
                     // yield return (2 is var x2);
-                    Diagnostic(ErrorCode.ERR_LocalDuplicate, "x2").WithArguments("x2").WithLocation(6, 24),
+                    Diagnostic(ErrorCode.ERR_LocalDuplicate, "x2")
+                        .WithArguments("x2")
+                        .WithLocation(6, 24),
                     // (9,8): error CS0128: A local variable or function named 'x3' is already defined in this scope
                     // object x3;
-                    Diagnostic(ErrorCode.ERR_LocalDuplicate, "x3").WithArguments("x3").WithLocation(9, 8),
+                    Diagnostic(ErrorCode.ERR_LocalDuplicate, "x3")
+                        .WithArguments("x3")
+                        .WithLocation(9, 8),
                     // (9,8): warning CS0168: The variable 'x3' is declared but never used
                     // object x3;
-                    Diagnostic(ErrorCode.WRN_UnreferencedVar, "x3").WithArguments("x3").WithLocation(9, 8),
+                    Diagnostic(ErrorCode.WRN_UnreferencedVar, "x3")
+                        .WithArguments("x3")
+                        .WithLocation(9, 8),
                     // (12,33): error CS0128: A local variable or function named 'x4' is already defined in this scope
                     //                      (42 is var x4));
-                    Diagnostic(ErrorCode.ERR_LocalDuplicate, "x4").WithArguments("x4").WithLocation(12, 33),
+                    Diagnostic(ErrorCode.ERR_LocalDuplicate, "x4")
+                        .WithArguments("x4")
+                        .WithLocation(12, 33),
                     // (19,1): error CS0165: Use of unassigned local variable 'x2'
                     // Test();
-                    Diagnostic(ErrorCode.ERR_UseDefViolation, "Test()").WithArguments("x2").WithLocation(19, 1)
-                    );
+                    Diagnostic(ErrorCode.ERR_UseDefViolation, "Test()")
+                        .WithArguments("x2")
+                        .WithLocation(19, 1)
+                );
 
                 var tree = compilation.SyntaxTrees.Single();
                 var model = compilation.GetSemanticModel(tree);
@@ -968,7 +1189,7 @@ class H
         public void GlobalCode_ReturnStatement_01()
         {
             string source =
-@"
+                @"
 return (1 is int x1);
 H.Dummy(x1);
 
@@ -992,31 +1213,47 @@ class H
 }
 ";
             {
-                var compilation = CreateCompilationWithMscorlib45(source, options: TestOptions.ReleaseExe.WithScriptClassName("Script"), parseOptions: TestOptions.Script);
+                var compilation = CreateCompilationWithMscorlib45(
+                    source,
+                    options: TestOptions.ReleaseExe.WithScriptClassName("Script"),
+                    parseOptions: TestOptions.Script
+                );
 
                 compilation.VerifyDiagnostics(
-                // (6,18): error CS0102: The type 'Script' already contains a definition for 'x2'
-                // return (2 is int x2);
-                Diagnostic(ErrorCode.ERR_DuplicateNameInClass, "x2").WithArguments("Script", "x2").WithLocation(6, 18),
-                // (9,8): error CS0102: The type 'Script' already contains a definition for 'x3'
-                // object x3;
-                Diagnostic(ErrorCode.ERR_DuplicateNameInClass, "x3").WithArguments("Script", "x3").WithLocation(9, 8),
-                // (12,27): error CS0102: The type 'Script' already contains a definition for 'x4'
-                //                (42 is int x4));
-                Diagnostic(ErrorCode.ERR_DuplicateNameInClass, "x4").WithArguments("Script", "x4").WithLocation(12, 27),
-                // (3,1): warning CS0162: Unreachable code detected
-                // H.Dummy(x1);
-                Diagnostic(ErrorCode.WRN_UnreachableCode, "H").WithLocation(3, 1),
-                // (16,17): error CS0229: Ambiguity between 'x2' and 'x2'
-                //     H.Dummy(x1, x2, x3, x4);
-                Diagnostic(ErrorCode.ERR_AmbigMember, "x2").WithArguments("x2", "x2").WithLocation(16, 17),
-                // (16,21): error CS0229: Ambiguity between 'x3' and 'x3'
-                //     H.Dummy(x1, x2, x3, x4);
-                Diagnostic(ErrorCode.ERR_AmbigMember, "x3").WithArguments("x3", "x3").WithLocation(16, 21),
-                // (16,25): error CS0229: Ambiguity between 'x4' and 'x4'
-                //     H.Dummy(x1, x2, x3, x4);
-                Diagnostic(ErrorCode.ERR_AmbigMember, "x4").WithArguments("x4", "x4").WithLocation(16, 25)
-                    );
+                    // (6,18): error CS0102: The type 'Script' already contains a definition for 'x2'
+                    // return (2 is int x2);
+                    Diagnostic(ErrorCode.ERR_DuplicateNameInClass, "x2")
+                        .WithArguments("Script", "x2")
+                        .WithLocation(6, 18),
+                    // (9,8): error CS0102: The type 'Script' already contains a definition for 'x3'
+                    // object x3;
+                    Diagnostic(ErrorCode.ERR_DuplicateNameInClass, "x3")
+                        .WithArguments("Script", "x3")
+                        .WithLocation(9, 8),
+                    // (12,27): error CS0102: The type 'Script' already contains a definition for 'x4'
+                    //                (42 is int x4));
+                    Diagnostic(ErrorCode.ERR_DuplicateNameInClass, "x4")
+                        .WithArguments("Script", "x4")
+                        .WithLocation(12, 27),
+                    // (3,1): warning CS0162: Unreachable code detected
+                    // H.Dummy(x1);
+                    Diagnostic(ErrorCode.WRN_UnreachableCode, "H").WithLocation(3, 1),
+                    // (16,17): error CS0229: Ambiguity between 'x2' and 'x2'
+                    //     H.Dummy(x1, x2, x3, x4);
+                    Diagnostic(ErrorCode.ERR_AmbigMember, "x2")
+                        .WithArguments("x2", "x2")
+                        .WithLocation(16, 17),
+                    // (16,21): error CS0229: Ambiguity between 'x3' and 'x3'
+                    //     H.Dummy(x1, x2, x3, x4);
+                    Diagnostic(ErrorCode.ERR_AmbigMember, "x3")
+                        .WithArguments("x3", "x3")
+                        .WithLocation(16, 21),
+                    // (16,25): error CS0229: Ambiguity between 'x4' and 'x4'
+                    //     H.Dummy(x1, x2, x3, x4);
+                    Diagnostic(ErrorCode.ERR_AmbigMember, "x4")
+                        .WithArguments("x4", "x4")
+                        .WithLocation(16, 25)
+                );
 
                 var tree = compilation.SyntaxTrees.Single();
                 var model = compilation.GetSemanticModel(tree);
@@ -1042,34 +1279,52 @@ class H
             }
 
             {
-                var compilation = CreateCompilationWithMscorlib45(source, options: TestOptions.ReleaseExe, parseOptions: TestOptions.Regular9);
+                var compilation = CreateCompilationWithMscorlib45(
+                    source,
+                    options: TestOptions.ReleaseExe,
+                    parseOptions: TestOptions.Regular9
+                );
 
                 compilation.VerifyDiagnostics(
                     // (2,9): error CS0029: Cannot implicitly convert type 'bool' to 'int'
                     // return (1 is int x1);
-                    Diagnostic(ErrorCode.ERR_NoImplicitConv, "1 is int x1").WithArguments("bool", "int").WithLocation(2, 9),
+                    Diagnostic(ErrorCode.ERR_NoImplicitConv, "1 is int x1")
+                        .WithArguments("bool", "int")
+                        .WithLocation(2, 9),
                     // (3,1): warning CS0162: Unreachable code detected
                     // H.Dummy(x1);
                     Diagnostic(ErrorCode.WRN_UnreachableCode, "H").WithLocation(3, 1),
                     // (6,18): error CS0128: A local variable or function named 'x2' is already defined in this scope
                     // return (2 is int x2);
-                    Diagnostic(ErrorCode.ERR_LocalDuplicate, "x2").WithArguments("x2").WithLocation(6, 18),
+                    Diagnostic(ErrorCode.ERR_LocalDuplicate, "x2")
+                        .WithArguments("x2")
+                        .WithLocation(6, 18),
                     // (8,9): error CS0029: Cannot implicitly convert type 'bool' to 'int'
                     // return (3 is int x3);
-                    Diagnostic(ErrorCode.ERR_NoImplicitConv, "3 is int x3").WithArguments("bool", "int").WithLocation(8, 9),
+                    Diagnostic(ErrorCode.ERR_NoImplicitConv, "3 is int x3")
+                        .WithArguments("bool", "int")
+                        .WithLocation(8, 9),
                     // (9,8): error CS0128: A local variable or function named 'x3' is already defined in this scope
                     // object x3;
-                    Diagnostic(ErrorCode.ERR_LocalDuplicate, "x3").WithArguments("x3").WithLocation(9, 8),
+                    Diagnostic(ErrorCode.ERR_LocalDuplicate, "x3")
+                        .WithArguments("x3")
+                        .WithLocation(9, 8),
                     // (9,8): warning CS0168: The variable 'x3' is declared but never used
                     // object x3;
-                    Diagnostic(ErrorCode.WRN_UnreferencedVar, "x3").WithArguments("x3").WithLocation(9, 8),
+                    Diagnostic(ErrorCode.WRN_UnreferencedVar, "x3")
+                        .WithArguments("x3")
+                        .WithLocation(9, 8),
                     // (12,27): error CS0128: A local variable or function named 'x4' is already defined in this scope
                     //                (42 is int x4));
-                    Diagnostic(ErrorCode.ERR_LocalDuplicate, "x4").WithArguments("x4").WithLocation(12, 27),
+                    Diagnostic(ErrorCode.ERR_LocalDuplicate, "x4")
+                        .WithArguments("x4")
+                        .WithLocation(12, 27),
                     // (14,6): warning CS8321: The local function 'Test' is declared but never used
                     // void Test()
-                    Diagnostic(ErrorCode.WRN_UnreferencedLocalFunction, "Test").WithArguments("Test").WithLocation(14, 6)
-                    );
+                    Diagnostic(ErrorCode.WRN_UnreferencedLocalFunction, "Test")
+                        .WithArguments("Test")
+                        .WithLocation(14, 6)
+                );
 
                 var tree = compilation.SyntaxTrees.Single();
                 var model = compilation.GetSemanticModel(tree);
@@ -1100,7 +1355,7 @@ class H
         public void GlobalCode_ReturnStatement_02()
         {
             string source =
-@"
+                @"
 return (1 is var x1);
 H.Dummy(x1);
 
@@ -1124,31 +1379,47 @@ class H
 }
 ";
             {
-                var compilation = CreateCompilationWithMscorlib45(source, options: TestOptions.ReleaseExe.WithScriptClassName("Script"), parseOptions: TestOptions.Script);
+                var compilation = CreateCompilationWithMscorlib45(
+                    source,
+                    options: TestOptions.ReleaseExe.WithScriptClassName("Script"),
+                    parseOptions: TestOptions.Script
+                );
 
                 compilation.VerifyDiagnostics(
-                // (6,18): error CS0102: The type 'Script' already contains a definition for 'x2'
-                // return (2 is var x2);
-                Diagnostic(ErrorCode.ERR_DuplicateNameInClass, "x2").WithArguments("Script", "x2").WithLocation(6, 18),
-                // (9,8): error CS0102: The type 'Script' already contains a definition for 'x3'
-                // object x3;
-                Diagnostic(ErrorCode.ERR_DuplicateNameInClass, "x3").WithArguments("Script", "x3").WithLocation(9, 8),
-                // (12,27): error CS0102: The type 'Script' already contains a definition for 'x4'
-                //                (42 is var x4));
-                Diagnostic(ErrorCode.ERR_DuplicateNameInClass, "x4").WithArguments("Script", "x4").WithLocation(12, 27),
-                // (3,1): warning CS0162: Unreachable code detected
-                // H.Dummy(x1);
-                Diagnostic(ErrorCode.WRN_UnreachableCode, "H").WithLocation(3, 1),
-                // (16,17): error CS0229: Ambiguity between 'x2' and 'x2'
-                //     H.Dummy(x1, x2, x3, x4);
-                Diagnostic(ErrorCode.ERR_AmbigMember, "x2").WithArguments("x2", "x2").WithLocation(16, 17),
-                // (16,21): error CS0229: Ambiguity between 'x3' and 'x3'
-                //     H.Dummy(x1, x2, x3, x4);
-                Diagnostic(ErrorCode.ERR_AmbigMember, "x3").WithArguments("x3", "x3").WithLocation(16, 21),
-                // (16,25): error CS0229: Ambiguity between 'x4' and 'x4'
-                //     H.Dummy(x1, x2, x3, x4);
-                Diagnostic(ErrorCode.ERR_AmbigMember, "x4").WithArguments("x4", "x4").WithLocation(16, 25)
-                    );
+                    // (6,18): error CS0102: The type 'Script' already contains a definition for 'x2'
+                    // return (2 is var x2);
+                    Diagnostic(ErrorCode.ERR_DuplicateNameInClass, "x2")
+                        .WithArguments("Script", "x2")
+                        .WithLocation(6, 18),
+                    // (9,8): error CS0102: The type 'Script' already contains a definition for 'x3'
+                    // object x3;
+                    Diagnostic(ErrorCode.ERR_DuplicateNameInClass, "x3")
+                        .WithArguments("Script", "x3")
+                        .WithLocation(9, 8),
+                    // (12,27): error CS0102: The type 'Script' already contains a definition for 'x4'
+                    //                (42 is var x4));
+                    Diagnostic(ErrorCode.ERR_DuplicateNameInClass, "x4")
+                        .WithArguments("Script", "x4")
+                        .WithLocation(12, 27),
+                    // (3,1): warning CS0162: Unreachable code detected
+                    // H.Dummy(x1);
+                    Diagnostic(ErrorCode.WRN_UnreachableCode, "H").WithLocation(3, 1),
+                    // (16,17): error CS0229: Ambiguity between 'x2' and 'x2'
+                    //     H.Dummy(x1, x2, x3, x4);
+                    Diagnostic(ErrorCode.ERR_AmbigMember, "x2")
+                        .WithArguments("x2", "x2")
+                        .WithLocation(16, 17),
+                    // (16,21): error CS0229: Ambiguity between 'x3' and 'x3'
+                    //     H.Dummy(x1, x2, x3, x4);
+                    Diagnostic(ErrorCode.ERR_AmbigMember, "x3")
+                        .WithArguments("x3", "x3")
+                        .WithLocation(16, 21),
+                    // (16,25): error CS0229: Ambiguity between 'x4' and 'x4'
+                    //     H.Dummy(x1, x2, x3, x4);
+                    Diagnostic(ErrorCode.ERR_AmbigMember, "x4")
+                        .WithArguments("x4", "x4")
+                        .WithLocation(16, 25)
+                );
 
                 var tree = compilation.SyntaxTrees.Single();
                 var model = compilation.GetSemanticModel(tree);
@@ -1174,34 +1445,52 @@ class H
             }
 
             {
-                var compilation = CreateCompilationWithMscorlib45(source, options: TestOptions.ReleaseExe, parseOptions: TestOptions.Regular9);
+                var compilation = CreateCompilationWithMscorlib45(
+                    source,
+                    options: TestOptions.ReleaseExe,
+                    parseOptions: TestOptions.Regular9
+                );
 
                 compilation.VerifyDiagnostics(
                     // (2,9): error CS0029: Cannot implicitly convert type 'bool' to 'int'
                     // return (1 is var x1);
-                    Diagnostic(ErrorCode.ERR_NoImplicitConv, "1 is var x1").WithArguments("bool", "int").WithLocation(2, 9),
+                    Diagnostic(ErrorCode.ERR_NoImplicitConv, "1 is var x1")
+                        .WithArguments("bool", "int")
+                        .WithLocation(2, 9),
                     // (3,1): warning CS0162: Unreachable code detected
                     // H.Dummy(x1);
                     Diagnostic(ErrorCode.WRN_UnreachableCode, "H").WithLocation(3, 1),
                     // (6,18): error CS0128: A local variable or function named 'x2' is already defined in this scope
                     // return (2 is var x2);
-                    Diagnostic(ErrorCode.ERR_LocalDuplicate, "x2").WithArguments("x2").WithLocation(6, 18),
+                    Diagnostic(ErrorCode.ERR_LocalDuplicate, "x2")
+                        .WithArguments("x2")
+                        .WithLocation(6, 18),
                     // (8,9): error CS0029: Cannot implicitly convert type 'bool' to 'int'
                     // return (3 is var x3);
-                    Diagnostic(ErrorCode.ERR_NoImplicitConv, "3 is var x3").WithArguments("bool", "int").WithLocation(8, 9),
+                    Diagnostic(ErrorCode.ERR_NoImplicitConv, "3 is var x3")
+                        .WithArguments("bool", "int")
+                        .WithLocation(8, 9),
                     // (9,8): error CS0128: A local variable or function named 'x3' is already defined in this scope
                     // object x3;
-                    Diagnostic(ErrorCode.ERR_LocalDuplicate, "x3").WithArguments("x3").WithLocation(9, 8),
+                    Diagnostic(ErrorCode.ERR_LocalDuplicate, "x3")
+                        .WithArguments("x3")
+                        .WithLocation(9, 8),
                     // (9,8): warning CS0168: The variable 'x3' is declared but never used
                     // object x3;
-                    Diagnostic(ErrorCode.WRN_UnreferencedVar, "x3").WithArguments("x3").WithLocation(9, 8),
+                    Diagnostic(ErrorCode.WRN_UnreferencedVar, "x3")
+                        .WithArguments("x3")
+                        .WithLocation(9, 8),
                     // (12,27): error CS0128: A local variable or function named 'x4' is already defined in this scope
                     //                (42 is var x4));
-                    Diagnostic(ErrorCode.ERR_LocalDuplicate, "x4").WithArguments("x4").WithLocation(12, 27),
+                    Diagnostic(ErrorCode.ERR_LocalDuplicate, "x4")
+                        .WithArguments("x4")
+                        .WithLocation(12, 27),
                     // (14,6): warning CS8321: The local function 'Test' is declared but never used
                     // void Test()
-                    Diagnostic(ErrorCode.WRN_UnreferencedLocalFunction, "Test").WithArguments("Test").WithLocation(14, 6)
-                    );
+                    Diagnostic(ErrorCode.WRN_UnreferencedLocalFunction, "Test")
+                        .WithArguments("Test")
+                        .WithLocation(14, 6)
+                );
 
                 var tree = compilation.SyntaxTrees.Single();
                 var model = compilation.GetSemanticModel(tree);
@@ -1232,7 +1521,7 @@ class H
         public void GlobalCode_ReturnStatement_03()
         {
             string source =
-@"
+                @"
 System.Console.WriteLine(x1);
 Test();
 return H.Dummy((1 is var x1), x1);
@@ -1252,12 +1541,19 @@ class H
 }
 ";
 
-            var compilation = CreateCompilationWithMscorlib45(source, options: TestOptions.ReleaseExe.WithScriptClassName("Script"), parseOptions: TestOptions.Script);
+            var compilation = CreateCompilationWithMscorlib45(
+                source,
+                options: TestOptions.ReleaseExe.WithScriptClassName("Script"),
+                parseOptions: TestOptions.Script
+            );
 
-            CompileAndVerify(compilation, expectedOutput:
-@"0
+            CompileAndVerify(
+                    compilation,
+                    expectedOutput: @"0
 0
-1").VerifyDiagnostics();
+1"
+                )
+                .VerifyDiagnostics();
 
             var tree = compilation.SyntaxTrees.Single();
             var model = compilation.GetSemanticModel(tree);
@@ -1272,7 +1568,7 @@ class H
         public void GlobalCode_ThrowStatement_01()
         {
             string source =
-@"
+                @"
 throw H.Dummy(1 is int x1);
 H.Dummy(x1);
 
@@ -1298,31 +1594,47 @@ class H
 }
 ";
             {
-                var compilation = CreateCompilationWithMscorlib45(source, options: TestOptions.ReleaseExe.WithScriptClassName("Script"), parseOptions: TestOptions.Script);
+                var compilation = CreateCompilationWithMscorlib45(
+                    source,
+                    options: TestOptions.ReleaseExe.WithScriptClassName("Script"),
+                    parseOptions: TestOptions.Script
+                );
 
                 compilation.VerifyDiagnostics(
-                // (6,24): error CS0102: The type 'Script' already contains a definition for 'x2'
-                // throw H.Dummy(2 is int x2);
-                Diagnostic(ErrorCode.ERR_DuplicateNameInClass, "x2").WithArguments("Script", "x2").WithLocation(6, 24),
-                // (9,8): error CS0102: The type 'Script' already contains a definition for 'x3'
-                // object x3;
-                Diagnostic(ErrorCode.ERR_DuplicateNameInClass, "x3").WithArguments("Script", "x3").WithLocation(9, 8),
-                // (12,26): error CS0102: The type 'Script' already contains a definition for 'x4'
-                //               (42 is int x4));
-                Diagnostic(ErrorCode.ERR_DuplicateNameInClass, "x4").WithArguments("Script", "x4").WithLocation(12, 26),
-                // (3,1): warning CS0162: Unreachable code detected
-                // H.Dummy(x1);
-                Diagnostic(ErrorCode.WRN_UnreachableCode, "H").WithLocation(3, 1),
-                // (16,17): error CS0229: Ambiguity between 'x2' and 'x2'
-                //     H.Dummy(x1, x2, x3, x4);
-                Diagnostic(ErrorCode.ERR_AmbigMember, "x2").WithArguments("x2", "x2").WithLocation(16, 17),
-                // (16,21): error CS0229: Ambiguity between 'x3' and 'x3'
-                //     H.Dummy(x1, x2, x3, x4);
-                Diagnostic(ErrorCode.ERR_AmbigMember, "x3").WithArguments("x3", "x3").WithLocation(16, 21),
-                // (16,25): error CS0229: Ambiguity between 'x4' and 'x4'
-                //     H.Dummy(x1, x2, x3, x4);
-                Diagnostic(ErrorCode.ERR_AmbigMember, "x4").WithArguments("x4", "x4").WithLocation(16, 25)
-                    );
+                    // (6,24): error CS0102: The type 'Script' already contains a definition for 'x2'
+                    // throw H.Dummy(2 is int x2);
+                    Diagnostic(ErrorCode.ERR_DuplicateNameInClass, "x2")
+                        .WithArguments("Script", "x2")
+                        .WithLocation(6, 24),
+                    // (9,8): error CS0102: The type 'Script' already contains a definition for 'x3'
+                    // object x3;
+                    Diagnostic(ErrorCode.ERR_DuplicateNameInClass, "x3")
+                        .WithArguments("Script", "x3")
+                        .WithLocation(9, 8),
+                    // (12,26): error CS0102: The type 'Script' already contains a definition for 'x4'
+                    //               (42 is int x4));
+                    Diagnostic(ErrorCode.ERR_DuplicateNameInClass, "x4")
+                        .WithArguments("Script", "x4")
+                        .WithLocation(12, 26),
+                    // (3,1): warning CS0162: Unreachable code detected
+                    // H.Dummy(x1);
+                    Diagnostic(ErrorCode.WRN_UnreachableCode, "H").WithLocation(3, 1),
+                    // (16,17): error CS0229: Ambiguity between 'x2' and 'x2'
+                    //     H.Dummy(x1, x2, x3, x4);
+                    Diagnostic(ErrorCode.ERR_AmbigMember, "x2")
+                        .WithArguments("x2", "x2")
+                        .WithLocation(16, 17),
+                    // (16,21): error CS0229: Ambiguity between 'x3' and 'x3'
+                    //     H.Dummy(x1, x2, x3, x4);
+                    Diagnostic(ErrorCode.ERR_AmbigMember, "x3")
+                        .WithArguments("x3", "x3")
+                        .WithLocation(16, 21),
+                    // (16,25): error CS0229: Ambiguity between 'x4' and 'x4'
+                    //     H.Dummy(x1, x2, x3, x4);
+                    Diagnostic(ErrorCode.ERR_AmbigMember, "x4")
+                        .WithArguments("x4", "x4")
+                        .WithLocation(16, 25)
+                );
 
                 var tree = compilation.SyntaxTrees.Single();
                 var model = compilation.GetSemanticModel(tree);
@@ -1348,7 +1660,11 @@ class H
             }
 
             {
-                var compilation = CreateCompilationWithMscorlib45(source, options: TestOptions.ReleaseExe, parseOptions: TestOptions.Regular9);
+                var compilation = CreateCompilationWithMscorlib45(
+                    source,
+                    options: TestOptions.ReleaseExe,
+                    parseOptions: TestOptions.Regular9
+                );
 
                 compilation.VerifyDiagnostics(
                     // (3,1): warning CS0162: Unreachable code detected
@@ -1356,17 +1672,25 @@ class H
                     Diagnostic(ErrorCode.WRN_UnreachableCode, "H").WithLocation(3, 1),
                     // (6,24): error CS0128: A local variable or function named 'x2' is already defined in this scope
                     // throw H.Dummy(2 is int x2);
-                    Diagnostic(ErrorCode.ERR_LocalDuplicate, "x2").WithArguments("x2").WithLocation(6, 24),
+                    Diagnostic(ErrorCode.ERR_LocalDuplicate, "x2")
+                        .WithArguments("x2")
+                        .WithLocation(6, 24),
                     // (9,8): error CS0128: A local variable or function named 'x3' is already defined in this scope
                     // object x3;
-                    Diagnostic(ErrorCode.ERR_LocalDuplicate, "x3").WithArguments("x3").WithLocation(9, 8),
+                    Diagnostic(ErrorCode.ERR_LocalDuplicate, "x3")
+                        .WithArguments("x3")
+                        .WithLocation(9, 8),
                     // (9,8): warning CS0168: The variable 'x3' is declared but never used
                     // object x3;
-                    Diagnostic(ErrorCode.WRN_UnreferencedVar, "x3").WithArguments("x3").WithLocation(9, 8),
+                    Diagnostic(ErrorCode.WRN_UnreferencedVar, "x3")
+                        .WithArguments("x3")
+                        .WithLocation(9, 8),
                     // (12,26): error CS0128: A local variable or function named 'x4' is already defined in this scope
                     //               (42 is int x4));
-                    Diagnostic(ErrorCode.ERR_LocalDuplicate, "x4").WithArguments("x4").WithLocation(12, 26)
-                    );
+                    Diagnostic(ErrorCode.ERR_LocalDuplicate, "x4")
+                        .WithArguments("x4")
+                        .WithLocation(12, 26)
+                );
 
                 var tree = compilation.SyntaxTrees.Single();
                 var model = compilation.GetSemanticModel(tree);
@@ -1397,7 +1721,7 @@ class H
         public void GlobalCode_ThrowStatement_02()
         {
             string source =
-@"
+                @"
 throw H.Dummy(1 is var x1);
 H.Dummy(x1);
 
@@ -1423,31 +1747,47 @@ class H
 }
 ";
             {
-                var compilation = CreateCompilationWithMscorlib45(source, options: TestOptions.ReleaseExe.WithScriptClassName("Script"), parseOptions: TestOptions.Script);
+                var compilation = CreateCompilationWithMscorlib45(
+                    source,
+                    options: TestOptions.ReleaseExe.WithScriptClassName("Script"),
+                    parseOptions: TestOptions.Script
+                );
 
                 compilation.VerifyDiagnostics(
-                // (6,24): error CS0102: The type 'Script' already contains a definition for 'x2'
-                // throw H.Dummy(2 is var x2);
-                Diagnostic(ErrorCode.ERR_DuplicateNameInClass, "x2").WithArguments("Script", "x2").WithLocation(6, 24),
-                // (9,8): error CS0102: The type 'Script' already contains a definition for 'x3'
-                // object x3;
-                Diagnostic(ErrorCode.ERR_DuplicateNameInClass, "x3").WithArguments("Script", "x3").WithLocation(9, 8),
-                // (12,26): error CS0102: The type 'Script' already contains a definition for 'x4'
-                //               (42 is var x4));
-                Diagnostic(ErrorCode.ERR_DuplicateNameInClass, "x4").WithArguments("Script", "x4").WithLocation(12, 26),
-                // (3,1): warning CS0162: Unreachable code detected
-                // H.Dummy(x1);
-                Diagnostic(ErrorCode.WRN_UnreachableCode, "H").WithLocation(3, 1),
-                // (16,17): error CS0229: Ambiguity between 'x2' and 'x2'
-                //     H.Dummy(x1, x2, x3, x4);
-                Diagnostic(ErrorCode.ERR_AmbigMember, "x2").WithArguments("x2", "x2").WithLocation(16, 17),
-                // (16,21): error CS0229: Ambiguity between 'x3' and 'x3'
-                //     H.Dummy(x1, x2, x3, x4);
-                Diagnostic(ErrorCode.ERR_AmbigMember, "x3").WithArguments("x3", "x3").WithLocation(16, 21),
-                // (16,25): error CS0229: Ambiguity between 'x4' and 'x4'
-                //     H.Dummy(x1, x2, x3, x4);
-                Diagnostic(ErrorCode.ERR_AmbigMember, "x4").WithArguments("x4", "x4").WithLocation(16, 25)
-                    );
+                    // (6,24): error CS0102: The type 'Script' already contains a definition for 'x2'
+                    // throw H.Dummy(2 is var x2);
+                    Diagnostic(ErrorCode.ERR_DuplicateNameInClass, "x2")
+                        .WithArguments("Script", "x2")
+                        .WithLocation(6, 24),
+                    // (9,8): error CS0102: The type 'Script' already contains a definition for 'x3'
+                    // object x3;
+                    Diagnostic(ErrorCode.ERR_DuplicateNameInClass, "x3")
+                        .WithArguments("Script", "x3")
+                        .WithLocation(9, 8),
+                    // (12,26): error CS0102: The type 'Script' already contains a definition for 'x4'
+                    //               (42 is var x4));
+                    Diagnostic(ErrorCode.ERR_DuplicateNameInClass, "x4")
+                        .WithArguments("Script", "x4")
+                        .WithLocation(12, 26),
+                    // (3,1): warning CS0162: Unreachable code detected
+                    // H.Dummy(x1);
+                    Diagnostic(ErrorCode.WRN_UnreachableCode, "H").WithLocation(3, 1),
+                    // (16,17): error CS0229: Ambiguity between 'x2' and 'x2'
+                    //     H.Dummy(x1, x2, x3, x4);
+                    Diagnostic(ErrorCode.ERR_AmbigMember, "x2")
+                        .WithArguments("x2", "x2")
+                        .WithLocation(16, 17),
+                    // (16,21): error CS0229: Ambiguity between 'x3' and 'x3'
+                    //     H.Dummy(x1, x2, x3, x4);
+                    Diagnostic(ErrorCode.ERR_AmbigMember, "x3")
+                        .WithArguments("x3", "x3")
+                        .WithLocation(16, 21),
+                    // (16,25): error CS0229: Ambiguity between 'x4' and 'x4'
+                    //     H.Dummy(x1, x2, x3, x4);
+                    Diagnostic(ErrorCode.ERR_AmbigMember, "x4")
+                        .WithArguments("x4", "x4")
+                        .WithLocation(16, 25)
+                );
 
                 var tree = compilation.SyntaxTrees.Single();
                 var model = compilation.GetSemanticModel(tree);
@@ -1456,7 +1796,12 @@ class H
                 var x1Ref = GetReferences(tree, "x1").ToArray();
                 Assert.Equal(2, x1Ref.Length);
                 VerifyModelForDeclarationField(model, x1Decl, x1Ref);
-                Assert.Equal("System.Int32", ((IFieldSymbol)compilation.GetSemanticModel(tree).GetDeclaredSymbol(x1Decl)).Type.ToTestDisplayString());
+                Assert.Equal(
+                    "System.Int32",
+                    (
+                        (IFieldSymbol)compilation.GetSemanticModel(tree).GetDeclaredSymbol(x1Decl)
+                    ).Type.ToTestDisplayString()
+                );
 
                 var x2Decl = GetPatternDeclarations(tree, "x2").Single();
                 var x2Ref = GetReferences(tree, "x2").Single();
@@ -1474,7 +1819,11 @@ class H
             }
 
             {
-                var compilation = CreateCompilationWithMscorlib45(source, options: TestOptions.ReleaseExe, parseOptions: TestOptions.Regular9);
+                var compilation = CreateCompilationWithMscorlib45(
+                    source,
+                    options: TestOptions.ReleaseExe,
+                    parseOptions: TestOptions.Regular9
+                );
 
                 compilation.VerifyDiagnostics(
                     // (3,1): warning CS0162: Unreachable code detected
@@ -1482,17 +1831,25 @@ class H
                     Diagnostic(ErrorCode.WRN_UnreachableCode, "H").WithLocation(3, 1),
                     // (6,24): error CS0128: A local variable or function named 'x2' is already defined in this scope
                     // throw H.Dummy(2 is var x2);
-                    Diagnostic(ErrorCode.ERR_LocalDuplicate, "x2").WithArguments("x2").WithLocation(6, 24),
+                    Diagnostic(ErrorCode.ERR_LocalDuplicate, "x2")
+                        .WithArguments("x2")
+                        .WithLocation(6, 24),
                     // (9,8): error CS0128: A local variable or function named 'x3' is already defined in this scope
                     // object x3;
-                    Diagnostic(ErrorCode.ERR_LocalDuplicate, "x3").WithArguments("x3").WithLocation(9, 8),
+                    Diagnostic(ErrorCode.ERR_LocalDuplicate, "x3")
+                        .WithArguments("x3")
+                        .WithLocation(9, 8),
                     // (9,8): warning CS0168: The variable 'x3' is declared but never used
                     // object x3;
-                    Diagnostic(ErrorCode.WRN_UnreferencedVar, "x3").WithArguments("x3").WithLocation(9, 8),
+                    Diagnostic(ErrorCode.WRN_UnreferencedVar, "x3")
+                        .WithArguments("x3")
+                        .WithLocation(9, 8),
                     // (12,26): error CS0128: A local variable or function named 'x4' is already defined in this scope
                     //               (42 is var x4));
-                    Diagnostic(ErrorCode.ERR_LocalDuplicate, "x4").WithArguments("x4").WithLocation(12, 26)
-                    );
+                    Diagnostic(ErrorCode.ERR_LocalDuplicate, "x4")
+                        .WithArguments("x4")
+                        .WithLocation(12, 26)
+                );
 
                 var tree = compilation.SyntaxTrees.Single();
                 var model = compilation.GetSemanticModel(tree);
@@ -1523,7 +1880,7 @@ class H
         public void GlobalCode_SwitchStatement_01()
         {
             string source =
-@"
+                @"
 switch ((1 is int x1)) {default: break;}
 H.Dummy(x1);
 
@@ -1558,28 +1915,44 @@ class H
 }
 ";
             {
-                var compilation = CreateCompilationWithMscorlib45(source, options: TestOptions.ReleaseExe.WithScriptClassName("Script"), parseOptions: TestOptions.Script);
+                var compilation = CreateCompilationWithMscorlib45(
+                    source,
+                    options: TestOptions.ReleaseExe.WithScriptClassName("Script"),
+                    parseOptions: TestOptions.Script
+                );
 
                 compilation.VerifyDiagnostics(
-                // (6,19): error CS0102: The type 'Script' already contains a definition for 'x2'
-                // switch ((2 is int x2)) {default: break;}
-                Diagnostic(ErrorCode.ERR_DuplicateNameInClass, "x2").WithArguments("Script", "x2").WithLocation(6, 19),
-                // (9,8): error CS0102: The type 'Script' already contains a definition for 'x3'
-                // object x3;
-                Diagnostic(ErrorCode.ERR_DuplicateNameInClass, "x3").WithArguments("Script", "x3").WithLocation(9, 8),
-                // (12,28): error CS0102: The type 'Script' already contains a definition for 'x4'
-                //                 (42 is int x4))) {default: break;}
-                Diagnostic(ErrorCode.ERR_DuplicateNameInClass, "x4").WithArguments("Script", "x4").WithLocation(12, 28),
-                // (25,17): error CS0229: Ambiguity between 'x2' and 'x2'
-                //     H.Dummy(x1, x2, x3, x4, x5);
-                Diagnostic(ErrorCode.ERR_AmbigMember, "x2").WithArguments("x2", "x2").WithLocation(25, 17),
-                // (25,21): error CS0229: Ambiguity between 'x3' and 'x3'
-                //     H.Dummy(x1, x2, x3, x4, x5);
-                Diagnostic(ErrorCode.ERR_AmbigMember, "x3").WithArguments("x3", "x3").WithLocation(25, 21),
-                // (25,25): error CS0229: Ambiguity between 'x4' and 'x4'
-                //     H.Dummy(x1, x2, x3, x4, x5);
-                Diagnostic(ErrorCode.ERR_AmbigMember, "x4").WithArguments("x4", "x4").WithLocation(25, 25)
-                    );
+                    // (6,19): error CS0102: The type 'Script' already contains a definition for 'x2'
+                    // switch ((2 is int x2)) {default: break;}
+                    Diagnostic(ErrorCode.ERR_DuplicateNameInClass, "x2")
+                        .WithArguments("Script", "x2")
+                        .WithLocation(6, 19),
+                    // (9,8): error CS0102: The type 'Script' already contains a definition for 'x3'
+                    // object x3;
+                    Diagnostic(ErrorCode.ERR_DuplicateNameInClass, "x3")
+                        .WithArguments("Script", "x3")
+                        .WithLocation(9, 8),
+                    // (12,28): error CS0102: The type 'Script' already contains a definition for 'x4'
+                    //                 (42 is int x4))) {default: break;}
+                    Diagnostic(ErrorCode.ERR_DuplicateNameInClass, "x4")
+                        .WithArguments("Script", "x4")
+                        .WithLocation(12, 28),
+                    // (25,17): error CS0229: Ambiguity between 'x2' and 'x2'
+                    //     H.Dummy(x1, x2, x3, x4, x5);
+                    Diagnostic(ErrorCode.ERR_AmbigMember, "x2")
+                        .WithArguments("x2", "x2")
+                        .WithLocation(25, 17),
+                    // (25,21): error CS0229: Ambiguity between 'x3' and 'x3'
+                    //     H.Dummy(x1, x2, x3, x4, x5);
+                    Diagnostic(ErrorCode.ERR_AmbigMember, "x3")
+                        .WithArguments("x3", "x3")
+                        .WithLocation(25, 21),
+                    // (25,25): error CS0229: Ambiguity between 'x4' and 'x4'
+                    //     H.Dummy(x1, x2, x3, x4, x5);
+                    Diagnostic(ErrorCode.ERR_AmbigMember, "x4")
+                        .WithArguments("x4", "x4")
+                        .WithLocation(25, 25)
+                );
 
                 var tree = compilation.SyntaxTrees.Single();
                 var model = compilation.GetSemanticModel(tree);
@@ -1612,28 +1985,44 @@ class H
             }
 
             {
-                var compilation = CreateCompilationWithMscorlib45(source, options: TestOptions.ReleaseExe, parseOptions: TestOptions.Regular9);
+                var compilation = CreateCompilationWithMscorlib45(
+                    source,
+                    options: TestOptions.ReleaseExe,
+                    parseOptions: TestOptions.Regular9
+                );
 
                 compilation.VerifyDiagnostics(
                     // (6,19): error CS0128: A local variable or function named 'x2' is already defined in this scope
                     // switch ((2 is int x2)) {default: break;}
-                    Diagnostic(ErrorCode.ERR_LocalDuplicate, "x2").WithArguments("x2").WithLocation(6, 19),
+                    Diagnostic(ErrorCode.ERR_LocalDuplicate, "x2")
+                        .WithArguments("x2")
+                        .WithLocation(6, 19),
                     // (9,8): error CS0128: A local variable or function named 'x3' is already defined in this scope
                     // object x3;
-                    Diagnostic(ErrorCode.ERR_LocalDuplicate, "x3").WithArguments("x3").WithLocation(9, 8),
+                    Diagnostic(ErrorCode.ERR_LocalDuplicate, "x3")
+                        .WithArguments("x3")
+                        .WithLocation(9, 8),
                     // (9,8): warning CS0168: The variable 'x3' is declared but never used
                     // object x3;
-                    Diagnostic(ErrorCode.WRN_UnreferencedVar, "x3").WithArguments("x3").WithLocation(9, 8),
+                    Diagnostic(ErrorCode.WRN_UnreferencedVar, "x3")
+                        .WithArguments("x3")
+                        .WithLocation(9, 8),
                     // (12,28): error CS0128: A local variable or function named 'x4' is already defined in this scope
                     //                 (42 is int x4))) {default: break;}
-                    Diagnostic(ErrorCode.ERR_LocalDuplicate, "x4").WithArguments("x4").WithLocation(12, 28),
+                    Diagnostic(ErrorCode.ERR_LocalDuplicate, "x4")
+                        .WithArguments("x4")
+                        .WithLocation(12, 28),
                     // (17,28): error CS0136: A local or parameter named 'x5' cannot be declared in this scope because that name is used in an enclosing local scope to define a local or parameter
                     //     H.Dummy("52" is string x5);
-                    Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "x5").WithArguments("x5").WithLocation(17, 28),
+                    Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "x5")
+                        .WithArguments("x5")
+                        .WithLocation(17, 28),
                     // (28,1): error CS0165: Use of unassigned local variable 'x2'
                     // Test();
-                    Diagnostic(ErrorCode.ERR_UseDefViolation, "Test()").WithArguments("x2").WithLocation(28, 1)
-                    );
+                    Diagnostic(ErrorCode.ERR_UseDefViolation, "Test()")
+                        .WithArguments("x2")
+                        .WithLocation(28, 1)
+                );
 
                 var tree = compilation.SyntaxTrees.Single();
                 var model = compilation.GetSemanticModel(tree);
@@ -1671,7 +2060,7 @@ class H
         public void GlobalCode_SwitchStatement_02()
         {
             string source =
-@"
+                @"
 switch ((1 is var x1)) {default: break;}
 H.Dummy(x1);
 
@@ -1706,28 +2095,44 @@ class H
 }
 ";
             {
-                var compilation = CreateCompilationWithMscorlib45(source, options: TestOptions.ReleaseExe.WithScriptClassName("Script"), parseOptions: TestOptions.Script);
+                var compilation = CreateCompilationWithMscorlib45(
+                    source,
+                    options: TestOptions.ReleaseExe.WithScriptClassName("Script"),
+                    parseOptions: TestOptions.Script
+                );
 
                 compilation.VerifyDiagnostics(
-                // (6,19): error CS0102: The type 'Script' already contains a definition for 'x2'
-                // switch ((2 is var x2)) {default: break;}
-                Diagnostic(ErrorCode.ERR_DuplicateNameInClass, "x2").WithArguments("Script", "x2").WithLocation(6, 19),
-                // (9,8): error CS0102: The type 'Script' already contains a definition for 'x3'
-                // object x3;
-                Diagnostic(ErrorCode.ERR_DuplicateNameInClass, "x3").WithArguments("Script", "x3").WithLocation(9, 8),
-                // (12,28): error CS0102: The type 'Script' already contains a definition for 'x4'
-                //                 (42 is var x4))) {default: break;}
-                Diagnostic(ErrorCode.ERR_DuplicateNameInClass, "x4").WithArguments("Script", "x4").WithLocation(12, 28),
-                // (25,17): error CS0229: Ambiguity between 'x2' and 'x2'
-                //     H.Dummy(x1, x2, x3, x4, x5);
-                Diagnostic(ErrorCode.ERR_AmbigMember, "x2").WithArguments("x2", "x2").WithLocation(25, 17),
-                // (25,21): error CS0229: Ambiguity between 'x3' and 'x3'
-                //     H.Dummy(x1, x2, x3, x4, x5);
-                Diagnostic(ErrorCode.ERR_AmbigMember, "x3").WithArguments("x3", "x3").WithLocation(25, 21),
-                // (25,25): error CS0229: Ambiguity between 'x4' and 'x4'
-                //     H.Dummy(x1, x2, x3, x4, x5);
-                Diagnostic(ErrorCode.ERR_AmbigMember, "x4").WithArguments("x4", "x4").WithLocation(25, 25)
-                    );
+                    // (6,19): error CS0102: The type 'Script' already contains a definition for 'x2'
+                    // switch ((2 is var x2)) {default: break;}
+                    Diagnostic(ErrorCode.ERR_DuplicateNameInClass, "x2")
+                        .WithArguments("Script", "x2")
+                        .WithLocation(6, 19),
+                    // (9,8): error CS0102: The type 'Script' already contains a definition for 'x3'
+                    // object x3;
+                    Diagnostic(ErrorCode.ERR_DuplicateNameInClass, "x3")
+                        .WithArguments("Script", "x3")
+                        .WithLocation(9, 8),
+                    // (12,28): error CS0102: The type 'Script' already contains a definition for 'x4'
+                    //                 (42 is var x4))) {default: break;}
+                    Diagnostic(ErrorCode.ERR_DuplicateNameInClass, "x4")
+                        .WithArguments("Script", "x4")
+                        .WithLocation(12, 28),
+                    // (25,17): error CS0229: Ambiguity between 'x2' and 'x2'
+                    //     H.Dummy(x1, x2, x3, x4, x5);
+                    Diagnostic(ErrorCode.ERR_AmbigMember, "x2")
+                        .WithArguments("x2", "x2")
+                        .WithLocation(25, 17),
+                    // (25,21): error CS0229: Ambiguity between 'x3' and 'x3'
+                    //     H.Dummy(x1, x2, x3, x4, x5);
+                    Diagnostic(ErrorCode.ERR_AmbigMember, "x3")
+                        .WithArguments("x3", "x3")
+                        .WithLocation(25, 21),
+                    // (25,25): error CS0229: Ambiguity between 'x4' and 'x4'
+                    //     H.Dummy(x1, x2, x3, x4, x5);
+                    Diagnostic(ErrorCode.ERR_AmbigMember, "x4")
+                        .WithArguments("x4", "x4")
+                        .WithLocation(25, 25)
+                );
 
                 var tree = compilation.SyntaxTrees.Single();
                 var model = compilation.GetSemanticModel(tree);
@@ -1760,28 +2165,44 @@ class H
             }
 
             {
-                var compilation = CreateCompilationWithMscorlib45(source, options: TestOptions.ReleaseExe, parseOptions: TestOptions.Regular9);
+                var compilation = CreateCompilationWithMscorlib45(
+                    source,
+                    options: TestOptions.ReleaseExe,
+                    parseOptions: TestOptions.Regular9
+                );
 
                 compilation.VerifyDiagnostics(
                     // (6,19): error CS0128: A local variable or function named 'x2' is already defined in this scope
                     // switch ((2 is var x2)) {default: break;}
-                    Diagnostic(ErrorCode.ERR_LocalDuplicate, "x2").WithArguments("x2").WithLocation(6, 19),
+                    Diagnostic(ErrorCode.ERR_LocalDuplicate, "x2")
+                        .WithArguments("x2")
+                        .WithLocation(6, 19),
                     // (9,8): error CS0128: A local variable or function named 'x3' is already defined in this scope
                     // object x3;
-                    Diagnostic(ErrorCode.ERR_LocalDuplicate, "x3").WithArguments("x3").WithLocation(9, 8),
+                    Diagnostic(ErrorCode.ERR_LocalDuplicate, "x3")
+                        .WithArguments("x3")
+                        .WithLocation(9, 8),
                     // (9,8): warning CS0168: The variable 'x3' is declared but never used
                     // object x3;
-                    Diagnostic(ErrorCode.WRN_UnreferencedVar, "x3").WithArguments("x3").WithLocation(9, 8),
+                    Diagnostic(ErrorCode.WRN_UnreferencedVar, "x3")
+                        .WithArguments("x3")
+                        .WithLocation(9, 8),
                     // (12,28): error CS0128: A local variable or function named 'x4' is already defined in this scope
                     //                 (42 is var x4))) {default: break;}
-                    Diagnostic(ErrorCode.ERR_LocalDuplicate, "x4").WithArguments("x4").WithLocation(12, 28),
+                    Diagnostic(ErrorCode.ERR_LocalDuplicate, "x4")
+                        .WithArguments("x4")
+                        .WithLocation(12, 28),
                     // (17,25): error CS0136: A local or parameter named 'x5' cannot be declared in this scope because that name is used in an enclosing local scope to define a local or parameter
                     //     H.Dummy("52" is var x5);
-                    Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "x5").WithArguments("x5").WithLocation(17, 25),
+                    Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "x5")
+                        .WithArguments("x5")
+                        .WithLocation(17, 25),
                     // (28,1): error CS0165: Use of unassigned local variable 'x2'
                     // Test();
-                    Diagnostic(ErrorCode.ERR_UseDefViolation, "Test()").WithArguments("x2").WithLocation(28, 1)
-                    );
+                    Diagnostic(ErrorCode.ERR_UseDefViolation, "Test()")
+                        .WithArguments("x2")
+                        .WithLocation(28, 1)
+                );
 
                 var tree = compilation.SyntaxTrees.Single();
                 var model = compilation.GetSemanticModel(tree);
@@ -1819,7 +2240,7 @@ class H
         public void GlobalCode_SwitchStatement_03()
         {
             string source =
-@"
+                @"
 System.Console.WriteLine(x1);
 switch ((1 is var x1)) 
 {
@@ -1840,12 +2261,19 @@ class H
 }
 ";
 
-            var compilation = CreateCompilationWithMscorlib45(source, options: TestOptions.ReleaseExe.WithScriptClassName("Script"), parseOptions: TestOptions.Script);
+            var compilation = CreateCompilationWithMscorlib45(
+                source,
+                options: TestOptions.ReleaseExe.WithScriptClassName("Script"),
+                parseOptions: TestOptions.Script
+            );
 
-            CompileAndVerify(compilation, expectedOutput:
-@"0
+            CompileAndVerify(
+                    compilation,
+                    expectedOutput: @"0
 11
-1").VerifyDiagnostics();
+1"
+                )
+                .VerifyDiagnostics();
 
             var tree = compilation.SyntaxTrees.Single();
             var model = compilation.GetSemanticModel(tree);
@@ -1862,7 +2290,7 @@ class H
         public void GlobalCode_WhileStatement_01()
         {
             string source =
-@"
+                @"
 while ((1 is int x1)) {}
 H.Dummy(x1);
 
@@ -1895,31 +2323,49 @@ class H
 }
 ";
             {
-                var compilation = CreateCompilationWithMscorlib45(source, options: TestOptions.ReleaseExe.WithScriptClassName("Script"), parseOptions: TestOptions.Script);
+                var compilation = CreateCompilationWithMscorlib45(
+                    source,
+                    options: TestOptions.ReleaseExe.WithScriptClassName("Script"),
+                    parseOptions: TestOptions.Script
+                );
 
                 compilation.VerifyDiagnostics(
-                // (3,9): error CS0103: The name 'x1' does not exist in the current context
-                // H.Dummy(x1);
-                Diagnostic(ErrorCode.ERR_NameNotInContext, "x1").WithArguments("x1").WithLocation(3, 9),
-                // (12,27): error CS0128: A local variable or function named 'x4' is already defined in this scope
-                //                (42 is int x4))) {}
-                Diagnostic(ErrorCode.ERR_LocalDuplicate, "x4").WithArguments("x4").WithLocation(12, 27),
-                // (16,28): error CS0136: A local or parameter named 'x5' cannot be declared in this scope because that name is used in an enclosing local scope to define a local or parameter
-                //     H.Dummy("52" is string x5);
-                Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "x5").WithArguments("x5").WithLocation(16, 28),
-                // (19,9): error CS0103: The name 'x5' does not exist in the current context
-                // H.Dummy(x5);
-                Diagnostic(ErrorCode.ERR_NameNotInContext, "x5").WithArguments("x5").WithLocation(19, 9),
-                // (23,13): error CS0103: The name 'x1' does not exist in the current context
-                //     H.Dummy(x1, x2, x3, x4, x5);
-                Diagnostic(ErrorCode.ERR_NameNotInContext, "x1").WithArguments("x1").WithLocation(23, 13),
-                // (23,25): error CS0103: The name 'x4' does not exist in the current context
-                //     H.Dummy(x1, x2, x3, x4, x5);
-                Diagnostic(ErrorCode.ERR_NameNotInContext, "x4").WithArguments("x4").WithLocation(23, 25),
-                // (23,29): error CS0103: The name 'x5' does not exist in the current context
-                //     H.Dummy(x1, x2, x3, x4, x5);
-                Diagnostic(ErrorCode.ERR_NameNotInContext, "x5").WithArguments("x5").WithLocation(23, 29)
-                    );
+                    // (3,9): error CS0103: The name 'x1' does not exist in the current context
+                    // H.Dummy(x1);
+                    Diagnostic(ErrorCode.ERR_NameNotInContext, "x1")
+                        .WithArguments("x1")
+                        .WithLocation(3, 9),
+                    // (12,27): error CS0128: A local variable or function named 'x4' is already defined in this scope
+                    //                (42 is int x4))) {}
+                    Diagnostic(ErrorCode.ERR_LocalDuplicate, "x4")
+                        .WithArguments("x4")
+                        .WithLocation(12, 27),
+                    // (16,28): error CS0136: A local or parameter named 'x5' cannot be declared in this scope because that name is used in an enclosing local scope to define a local or parameter
+                    //     H.Dummy("52" is string x5);
+                    Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "x5")
+                        .WithArguments("x5")
+                        .WithLocation(16, 28),
+                    // (19,9): error CS0103: The name 'x5' does not exist in the current context
+                    // H.Dummy(x5);
+                    Diagnostic(ErrorCode.ERR_NameNotInContext, "x5")
+                        .WithArguments("x5")
+                        .WithLocation(19, 9),
+                    // (23,13): error CS0103: The name 'x1' does not exist in the current context
+                    //     H.Dummy(x1, x2, x3, x4, x5);
+                    Diagnostic(ErrorCode.ERR_NameNotInContext, "x1")
+                        .WithArguments("x1")
+                        .WithLocation(23, 13),
+                    // (23,25): error CS0103: The name 'x4' does not exist in the current context
+                    //     H.Dummy(x1, x2, x3, x4, x5);
+                    Diagnostic(ErrorCode.ERR_NameNotInContext, "x4")
+                        .WithArguments("x4")
+                        .WithLocation(23, 25),
+                    // (23,29): error CS0103: The name 'x5' does not exist in the current context
+                    //     H.Dummy(x1, x2, x3, x4, x5);
+                    Diagnostic(ErrorCode.ERR_NameNotInContext, "x5")
+                        .WithArguments("x5")
+                        .WithLocation(23, 29)
+                );
 
                 var tree = compilation.SyntaxTrees.Single();
                 var model = compilation.GetSemanticModel(tree);
@@ -1959,37 +2405,59 @@ class H
             }
 
             {
-                var compilation = CreateCompilationWithMscorlib45(source, options: TestOptions.ReleaseExe, parseOptions: TestOptions.Regular9);
+                var compilation = CreateCompilationWithMscorlib45(
+                    source,
+                    options: TestOptions.ReleaseExe,
+                    parseOptions: TestOptions.Regular9
+                );
 
                 compilation.VerifyDiagnostics(
                     // (3,9): error CS0103: The name 'x1' does not exist in the current context
                     // H.Dummy(x1);
-                    Diagnostic(ErrorCode.ERR_NameNotInContext, "x1").WithArguments("x1").WithLocation(3, 9),
+                    Diagnostic(ErrorCode.ERR_NameNotInContext, "x1")
+                        .WithArguments("x1")
+                        .WithLocation(3, 9),
                     // (6,18): error CS0136: A local or parameter named 'x2' cannot be declared in this scope because that name is used in an enclosing local scope to define a local or parameter
                     // while ((2 is int x2)) {}
-                    Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "x2").WithArguments("x2").WithLocation(6, 18),
+                    Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "x2")
+                        .WithArguments("x2")
+                        .WithLocation(6, 18),
                     // (8,18): error CS0136: A local or parameter named 'x3' cannot be declared in this scope because that name is used in an enclosing local scope to define a local or parameter
                     // while ((3 is int x3)) {}
-                    Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "x3").WithArguments("x3").WithLocation(8, 18),
+                    Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "x3")
+                        .WithArguments("x3")
+                        .WithLocation(8, 18),
                     // (12,27): error CS0128: A local variable or function named 'x4' is already defined in this scope
                     //                (42 is int x4))) {}
-                    Diagnostic(ErrorCode.ERR_LocalDuplicate, "x4").WithArguments("x4").WithLocation(12, 27),
+                    Diagnostic(ErrorCode.ERR_LocalDuplicate, "x4")
+                        .WithArguments("x4")
+                        .WithLocation(12, 27),
                     // (16,28): error CS0136: A local or parameter named 'x5' cannot be declared in this scope because that name is used in an enclosing local scope to define a local or parameter
                     //     H.Dummy("52" is string x5);
-                    Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "x5").WithArguments("x5").WithLocation(16, 28),
+                    Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "x5")
+                        .WithArguments("x5")
+                        .WithLocation(16, 28),
                     // (19,9): error CS0103: The name 'x5' does not exist in the current context
                     // H.Dummy(x5);
-                    Diagnostic(ErrorCode.ERR_NameNotInContext, "x5").WithArguments("x5").WithLocation(19, 9),
+                    Diagnostic(ErrorCode.ERR_NameNotInContext, "x5")
+                        .WithArguments("x5")
+                        .WithLocation(19, 9),
                     // (23,13): error CS0103: The name 'x1' does not exist in the current context
                     //     H.Dummy(x1, x2, x3, x4, x5);
-                    Diagnostic(ErrorCode.ERR_NameNotInContext, "x1").WithArguments("x1").WithLocation(23, 13),
+                    Diagnostic(ErrorCode.ERR_NameNotInContext, "x1")
+                        .WithArguments("x1")
+                        .WithLocation(23, 13),
                     // (23,25): error CS0103: The name 'x4' does not exist in the current context
                     //     H.Dummy(x1, x2, x3, x4, x5);
-                    Diagnostic(ErrorCode.ERR_NameNotInContext, "x4").WithArguments("x4").WithLocation(23, 25),
+                    Diagnostic(ErrorCode.ERR_NameNotInContext, "x4")
+                        .WithArguments("x4")
+                        .WithLocation(23, 25),
                     // (23,29): error CS0103: The name 'x5' does not exist in the current context
                     //     H.Dummy(x1, x2, x3, x4, x5);
-                    Diagnostic(ErrorCode.ERR_NameNotInContext, "x5").WithArguments("x5").WithLocation(23, 29)
-                    );
+                    Diagnostic(ErrorCode.ERR_NameNotInContext, "x5")
+                        .WithArguments("x5")
+                        .WithLocation(23, 29)
+                );
 
                 var tree = compilation.SyntaxTrees.Single();
                 var model = compilation.GetSemanticModel(tree);
@@ -2033,7 +2501,7 @@ class H
         public void GlobalCode_WhileStatement_02()
         {
             string source =
-@"
+                @"
 while ((1 is var x1)) {}
 H.Dummy(x1);
 
@@ -2066,31 +2534,49 @@ class H
 }
 ";
             {
-                var compilation = CreateCompilationWithMscorlib45(source, options: TestOptions.ReleaseExe.WithScriptClassName("Script"), parseOptions: TestOptions.Script);
+                var compilation = CreateCompilationWithMscorlib45(
+                    source,
+                    options: TestOptions.ReleaseExe.WithScriptClassName("Script"),
+                    parseOptions: TestOptions.Script
+                );
 
                 compilation.VerifyDiagnostics(
-                // (3,9): error CS0103: The name 'x1' does not exist in the current context
-                // H.Dummy(x1);
-                Diagnostic(ErrorCode.ERR_NameNotInContext, "x1").WithArguments("x1").WithLocation(3, 9),
-                // (12,27): error CS0128: A local variable or function named 'x4' is already defined in this scope
-                //                (42 is var x4))) {}
-                Diagnostic(ErrorCode.ERR_LocalDuplicate, "x4").WithArguments("x4").WithLocation(12, 27),
-                // (16,25): error CS0136: A local or parameter named 'x5' cannot be declared in this scope because that name is used in an enclosing local scope to define a local or parameter
-                //     H.Dummy("52" is var x5);
-                Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "x5").WithArguments("x5").WithLocation(16, 25),
-                // (19,9): error CS0103: The name 'x5' does not exist in the current context
-                // H.Dummy(x5);
-                Diagnostic(ErrorCode.ERR_NameNotInContext, "x5").WithArguments("x5").WithLocation(19, 9),
-                // (23,13): error CS0103: The name 'x1' does not exist in the current context
-                //     H.Dummy(x1, x2, x3, x4, x5);
-                Diagnostic(ErrorCode.ERR_NameNotInContext, "x1").WithArguments("x1").WithLocation(23, 13),
-                // (23,25): error CS0103: The name 'x4' does not exist in the current context
-                //     H.Dummy(x1, x2, x3, x4, x5);
-                Diagnostic(ErrorCode.ERR_NameNotInContext, "x4").WithArguments("x4").WithLocation(23, 25),
-                // (23,29): error CS0103: The name 'x5' does not exist in the current context
-                //     H.Dummy(x1, x2, x3, x4, x5);
-                Diagnostic(ErrorCode.ERR_NameNotInContext, "x5").WithArguments("x5").WithLocation(23, 29)
-                    );
+                    // (3,9): error CS0103: The name 'x1' does not exist in the current context
+                    // H.Dummy(x1);
+                    Diagnostic(ErrorCode.ERR_NameNotInContext, "x1")
+                        .WithArguments("x1")
+                        .WithLocation(3, 9),
+                    // (12,27): error CS0128: A local variable or function named 'x4' is already defined in this scope
+                    //                (42 is var x4))) {}
+                    Diagnostic(ErrorCode.ERR_LocalDuplicate, "x4")
+                        .WithArguments("x4")
+                        .WithLocation(12, 27),
+                    // (16,25): error CS0136: A local or parameter named 'x5' cannot be declared in this scope because that name is used in an enclosing local scope to define a local or parameter
+                    //     H.Dummy("52" is var x5);
+                    Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "x5")
+                        .WithArguments("x5")
+                        .WithLocation(16, 25),
+                    // (19,9): error CS0103: The name 'x5' does not exist in the current context
+                    // H.Dummy(x5);
+                    Diagnostic(ErrorCode.ERR_NameNotInContext, "x5")
+                        .WithArguments("x5")
+                        .WithLocation(19, 9),
+                    // (23,13): error CS0103: The name 'x1' does not exist in the current context
+                    //     H.Dummy(x1, x2, x3, x4, x5);
+                    Diagnostic(ErrorCode.ERR_NameNotInContext, "x1")
+                        .WithArguments("x1")
+                        .WithLocation(23, 13),
+                    // (23,25): error CS0103: The name 'x4' does not exist in the current context
+                    //     H.Dummy(x1, x2, x3, x4, x5);
+                    Diagnostic(ErrorCode.ERR_NameNotInContext, "x4")
+                        .WithArguments("x4")
+                        .WithLocation(23, 25),
+                    // (23,29): error CS0103: The name 'x5' does not exist in the current context
+                    //     H.Dummy(x1, x2, x3, x4, x5);
+                    Diagnostic(ErrorCode.ERR_NameNotInContext, "x5")
+                        .WithArguments("x5")
+                        .WithLocation(23, 29)
+                );
 
                 var tree = compilation.SyntaxTrees.Single();
                 var model = compilation.GetSemanticModel(tree);
@@ -2130,37 +2616,59 @@ class H
             }
 
             {
-                var compilation = CreateCompilationWithMscorlib45(source, options: TestOptions.ReleaseExe, parseOptions: TestOptions.Regular9);
+                var compilation = CreateCompilationWithMscorlib45(
+                    source,
+                    options: TestOptions.ReleaseExe,
+                    parseOptions: TestOptions.Regular9
+                );
 
                 compilation.VerifyDiagnostics(
                     // (3,9): error CS0103: The name 'x1' does not exist in the current context
                     // H.Dummy(x1);
-                    Diagnostic(ErrorCode.ERR_NameNotInContext, "x1").WithArguments("x1").WithLocation(3, 9),
+                    Diagnostic(ErrorCode.ERR_NameNotInContext, "x1")
+                        .WithArguments("x1")
+                        .WithLocation(3, 9),
                     // (6,18): error CS0136: A local or parameter named 'x2' cannot be declared in this scope because that name is used in an enclosing local scope to define a local or parameter
                     // while ((2 is var x2)) {}
-                    Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "x2").WithArguments("x2").WithLocation(6, 18),
+                    Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "x2")
+                        .WithArguments("x2")
+                        .WithLocation(6, 18),
                     // (8,18): error CS0136: A local or parameter named 'x3' cannot be declared in this scope because that name is used in an enclosing local scope to define a local or parameter
                     // while ((3 is var x3)) {}
-                    Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "x3").WithArguments("x3").WithLocation(8, 18),
+                    Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "x3")
+                        .WithArguments("x3")
+                        .WithLocation(8, 18),
                     // (12,27): error CS0128: A local variable or function named 'x4' is already defined in this scope
                     //                (42 is var x4))) {}
-                    Diagnostic(ErrorCode.ERR_LocalDuplicate, "x4").WithArguments("x4").WithLocation(12, 27),
+                    Diagnostic(ErrorCode.ERR_LocalDuplicate, "x4")
+                        .WithArguments("x4")
+                        .WithLocation(12, 27),
                     // (16,25): error CS0136: A local or parameter named 'x5' cannot be declared in this scope because that name is used in an enclosing local scope to define a local or parameter
                     //     H.Dummy("52" is var x5);
-                    Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "x5").WithArguments("x5").WithLocation(16, 25),
+                    Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "x5")
+                        .WithArguments("x5")
+                        .WithLocation(16, 25),
                     // (19,9): error CS0103: The name 'x5' does not exist in the current context
                     // H.Dummy(x5);
-                    Diagnostic(ErrorCode.ERR_NameNotInContext, "x5").WithArguments("x5").WithLocation(19, 9),
+                    Diagnostic(ErrorCode.ERR_NameNotInContext, "x5")
+                        .WithArguments("x5")
+                        .WithLocation(19, 9),
                     // (23,13): error CS0103: The name 'x1' does not exist in the current context
                     //     H.Dummy(x1, x2, x3, x4, x5);
-                    Diagnostic(ErrorCode.ERR_NameNotInContext, "x1").WithArguments("x1").WithLocation(23, 13),
+                    Diagnostic(ErrorCode.ERR_NameNotInContext, "x1")
+                        .WithArguments("x1")
+                        .WithLocation(23, 13),
                     // (23,25): error CS0103: The name 'x4' does not exist in the current context
                     //     H.Dummy(x1, x2, x3, x4, x5);
-                    Diagnostic(ErrorCode.ERR_NameNotInContext, "x4").WithArguments("x4").WithLocation(23, 25),
+                    Diagnostic(ErrorCode.ERR_NameNotInContext, "x4")
+                        .WithArguments("x4")
+                        .WithLocation(23, 25),
                     // (23,29): error CS0103: The name 'x5' does not exist in the current context
                     //     H.Dummy(x1, x2, x3, x4, x5);
-                    Diagnostic(ErrorCode.ERR_NameNotInContext, "x5").WithArguments("x5").WithLocation(23, 29)
-                    );
+                    Diagnostic(ErrorCode.ERR_NameNotInContext, "x5")
+                        .WithArguments("x5")
+                        .WithLocation(23, 29)
+                );
 
                 var tree = compilation.SyntaxTrees.Single();
                 var model = compilation.GetSemanticModel(tree);
@@ -2204,7 +2712,7 @@ class H
         public void GlobalCode_WhileStatement_03()
         {
             string source =
-@"
+                @"
 while ((1 is var x1)) 
 {
     System.Console.WriteLine(x1);
@@ -2217,7 +2725,11 @@ class H
 }
 ";
 
-            var compilation = CreateCompilationWithMscorlib45(source, options: TestOptions.ReleaseExe.WithScriptClassName("Script"), parseOptions: TestOptions.Script);
+            var compilation = CreateCompilationWithMscorlib45(
+                source,
+                options: TestOptions.ReleaseExe.WithScriptClassName("Script"),
+                parseOptions: TestOptions.Script
+            );
 
             CompileAndVerify(compilation, expectedOutput: @"1").VerifyDiagnostics();
 
@@ -2235,7 +2747,7 @@ class H
         public void GlobalCode_DoStatement_01()
         {
             string source =
-@"
+                @"
 do {} while ((1 is int x1));
 H.Dummy(x1);
 
@@ -2269,31 +2781,49 @@ class H
 }
 ";
             {
-                var compilation = CreateCompilationWithMscorlib45(source, options: TestOptions.ReleaseExe.WithScriptClassName("Script"), parseOptions: TestOptions.Script);
+                var compilation = CreateCompilationWithMscorlib45(
+                    source,
+                    options: TestOptions.ReleaseExe.WithScriptClassName("Script"),
+                    parseOptions: TestOptions.Script
+                );
 
                 compilation.VerifyDiagnostics(
-                // (3,9): error CS0103: The name 'x1' does not exist in the current context
-                // H.Dummy(x1);
-                Diagnostic(ErrorCode.ERR_NameNotInContext, "x1").WithArguments("x1").WithLocation(3, 9),
-                // (12,33): error CS0128: A local variable or function named 'x4' is already defined in this scope
-                //                      (42 is int x4)));
-                Diagnostic(ErrorCode.ERR_LocalDuplicate, "x4").WithArguments("x4").WithLocation(12, 33),
-                // (16,28): error CS0136: A local or parameter named 'x5' cannot be declared in this scope because that name is used in an enclosing local scope to define a local or parameter
-                //     H.Dummy("52" is string x5);
-                Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "x5").WithArguments("x5").WithLocation(16, 28),
-                // (20,9): error CS0103: The name 'x5' does not exist in the current context
-                // H.Dummy(x5);
-                Diagnostic(ErrorCode.ERR_NameNotInContext, "x5").WithArguments("x5").WithLocation(20, 9),
-                // (24,13): error CS0103: The name 'x1' does not exist in the current context
-                //     H.Dummy(x1, x2, x3, x4, x5);
-                Diagnostic(ErrorCode.ERR_NameNotInContext, "x1").WithArguments("x1").WithLocation(24, 13),
-                // (24,25): error CS0103: The name 'x4' does not exist in the current context
-                //     H.Dummy(x1, x2, x3, x4, x5);
-                Diagnostic(ErrorCode.ERR_NameNotInContext, "x4").WithArguments("x4").WithLocation(24, 25),
-                // (24,29): error CS0103: The name 'x5' does not exist in the current context
-                //     H.Dummy(x1, x2, x3, x4, x5);
-                Diagnostic(ErrorCode.ERR_NameNotInContext, "x5").WithArguments("x5").WithLocation(24, 29)
-                    );
+                    // (3,9): error CS0103: The name 'x1' does not exist in the current context
+                    // H.Dummy(x1);
+                    Diagnostic(ErrorCode.ERR_NameNotInContext, "x1")
+                        .WithArguments("x1")
+                        .WithLocation(3, 9),
+                    // (12,33): error CS0128: A local variable or function named 'x4' is already defined in this scope
+                    //                      (42 is int x4)));
+                    Diagnostic(ErrorCode.ERR_LocalDuplicate, "x4")
+                        .WithArguments("x4")
+                        .WithLocation(12, 33),
+                    // (16,28): error CS0136: A local or parameter named 'x5' cannot be declared in this scope because that name is used in an enclosing local scope to define a local or parameter
+                    //     H.Dummy("52" is string x5);
+                    Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "x5")
+                        .WithArguments("x5")
+                        .WithLocation(16, 28),
+                    // (20,9): error CS0103: The name 'x5' does not exist in the current context
+                    // H.Dummy(x5);
+                    Diagnostic(ErrorCode.ERR_NameNotInContext, "x5")
+                        .WithArguments("x5")
+                        .WithLocation(20, 9),
+                    // (24,13): error CS0103: The name 'x1' does not exist in the current context
+                    //     H.Dummy(x1, x2, x3, x4, x5);
+                    Diagnostic(ErrorCode.ERR_NameNotInContext, "x1")
+                        .WithArguments("x1")
+                        .WithLocation(24, 13),
+                    // (24,25): error CS0103: The name 'x4' does not exist in the current context
+                    //     H.Dummy(x1, x2, x3, x4, x5);
+                    Diagnostic(ErrorCode.ERR_NameNotInContext, "x4")
+                        .WithArguments("x4")
+                        .WithLocation(24, 25),
+                    // (24,29): error CS0103: The name 'x5' does not exist in the current context
+                    //     H.Dummy(x1, x2, x3, x4, x5);
+                    Diagnostic(ErrorCode.ERR_NameNotInContext, "x5")
+                        .WithArguments("x5")
+                        .WithLocation(24, 29)
+                );
 
                 var tree = compilation.SyntaxTrees.Single();
                 var model = compilation.GetSemanticModel(tree);
@@ -2333,37 +2863,59 @@ class H
             }
 
             {
-                var compilation = CreateCompilationWithMscorlib45(source, options: TestOptions.ReleaseExe, parseOptions: TestOptions.Regular9);
+                var compilation = CreateCompilationWithMscorlib45(
+                    source,
+                    options: TestOptions.ReleaseExe,
+                    parseOptions: TestOptions.Regular9
+                );
 
                 compilation.VerifyDiagnostics(
                     // (3,9): error CS0103: The name 'x1' does not exist in the current context
                     // H.Dummy(x1);
-                    Diagnostic(ErrorCode.ERR_NameNotInContext, "x1").WithArguments("x1").WithLocation(3, 9),
+                    Diagnostic(ErrorCode.ERR_NameNotInContext, "x1")
+                        .WithArguments("x1")
+                        .WithLocation(3, 9),
                     // (6,24): error CS0136: A local or parameter named 'x2' cannot be declared in this scope because that name is used in an enclosing local scope to define a local or parameter
                     // do {} while ((2 is int x2));
-                    Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "x2").WithArguments("x2").WithLocation(6, 24),
+                    Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "x2")
+                        .WithArguments("x2")
+                        .WithLocation(6, 24),
                     // (8,24): error CS0136: A local or parameter named 'x3' cannot be declared in this scope because that name is used in an enclosing local scope to define a local or parameter
                     // do {} while ((3 is int x3));
-                    Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "x3").WithArguments("x3").WithLocation(8, 24),
+                    Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "x3")
+                        .WithArguments("x3")
+                        .WithLocation(8, 24),
                     // (12,33): error CS0128: A local variable or function named 'x4' is already defined in this scope
                     //                      (42 is int x4)));
-                    Diagnostic(ErrorCode.ERR_LocalDuplicate, "x4").WithArguments("x4").WithLocation(12, 33),
+                    Diagnostic(ErrorCode.ERR_LocalDuplicate, "x4")
+                        .WithArguments("x4")
+                        .WithLocation(12, 33),
                     // (16,28): error CS0136: A local or parameter named 'x5' cannot be declared in this scope because that name is used in an enclosing local scope to define a local or parameter
                     //     H.Dummy("52" is string x5);
-                    Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "x5").WithArguments("x5").WithLocation(16, 28),
+                    Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "x5")
+                        .WithArguments("x5")
+                        .WithLocation(16, 28),
                     // (20,9): error CS0103: The name 'x5' does not exist in the current context
                     // H.Dummy(x5);
-                    Diagnostic(ErrorCode.ERR_NameNotInContext, "x5").WithArguments("x5").WithLocation(20, 9),
+                    Diagnostic(ErrorCode.ERR_NameNotInContext, "x5")
+                        .WithArguments("x5")
+                        .WithLocation(20, 9),
                     // (24,13): error CS0103: The name 'x1' does not exist in the current context
                     //     H.Dummy(x1, x2, x3, x4, x5);
-                    Diagnostic(ErrorCode.ERR_NameNotInContext, "x1").WithArguments("x1").WithLocation(24, 13),
+                    Diagnostic(ErrorCode.ERR_NameNotInContext, "x1")
+                        .WithArguments("x1")
+                        .WithLocation(24, 13),
                     // (24,25): error CS0103: The name 'x4' does not exist in the current context
                     //     H.Dummy(x1, x2, x3, x4, x5);
-                    Diagnostic(ErrorCode.ERR_NameNotInContext, "x4").WithArguments("x4").WithLocation(24, 25),
+                    Diagnostic(ErrorCode.ERR_NameNotInContext, "x4")
+                        .WithArguments("x4")
+                        .WithLocation(24, 25),
                     // (24,29): error CS0103: The name 'x5' does not exist in the current context
                     //     H.Dummy(x1, x2, x3, x4, x5);
-                    Diagnostic(ErrorCode.ERR_NameNotInContext, "x5").WithArguments("x5").WithLocation(24, 29)
-                    );
+                    Diagnostic(ErrorCode.ERR_NameNotInContext, "x5")
+                        .WithArguments("x5")
+                        .WithLocation(24, 29)
+                );
 
                 var tree = compilation.SyntaxTrees.Single();
                 var model = compilation.GetSemanticModel(tree);
@@ -2407,7 +2959,7 @@ class H
         public void GlobalCode_DoStatement_02()
         {
             string source =
-@"
+                @"
 do {} while ((1 is var x1));
 H.Dummy(x1);
 
@@ -2441,31 +2993,49 @@ class H
 }
 ";
             {
-                var compilation = CreateCompilationWithMscorlib45(source, options: TestOptions.ReleaseExe.WithScriptClassName("Script"), parseOptions: TestOptions.Script);
+                var compilation = CreateCompilationWithMscorlib45(
+                    source,
+                    options: TestOptions.ReleaseExe.WithScriptClassName("Script"),
+                    parseOptions: TestOptions.Script
+                );
 
                 compilation.VerifyDiagnostics(
-                // (3,9): error CS0103: The name 'x1' does not exist in the current context
-                // H.Dummy(x1);
-                Diagnostic(ErrorCode.ERR_NameNotInContext, "x1").WithArguments("x1").WithLocation(3, 9),
-                // (12,33): error CS0128: A local variable or function named 'x4' is already defined in this scope
-                //                      (42 is var x4)));
-                Diagnostic(ErrorCode.ERR_LocalDuplicate, "x4").WithArguments("x4").WithLocation(12, 33),
-                // (16,25): error CS0136: A local or parameter named 'x5' cannot be declared in this scope because that name is used in an enclosing local scope to define a local or parameter
-                //     H.Dummy("52" is var x5);
-                Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "x5").WithArguments("x5").WithLocation(16, 25),
-                // (20,9): error CS0103: The name 'x5' does not exist in the current context
-                // H.Dummy(x5);
-                Diagnostic(ErrorCode.ERR_NameNotInContext, "x5").WithArguments("x5").WithLocation(20, 9),
-                // (24,13): error CS0103: The name 'x1' does not exist in the current context
-                //     H.Dummy(x1, x2, x3, x4, x5);
-                Diagnostic(ErrorCode.ERR_NameNotInContext, "x1").WithArguments("x1").WithLocation(24, 13),
-                // (24,25): error CS0103: The name 'x4' does not exist in the current context
-                //     H.Dummy(x1, x2, x3, x4, x5);
-                Diagnostic(ErrorCode.ERR_NameNotInContext, "x4").WithArguments("x4").WithLocation(24, 25),
-                // (24,29): error CS0103: The name 'x5' does not exist in the current context
-                //     H.Dummy(x1, x2, x3, x4, x5);
-                Diagnostic(ErrorCode.ERR_NameNotInContext, "x5").WithArguments("x5").WithLocation(24, 29)
-                    );
+                    // (3,9): error CS0103: The name 'x1' does not exist in the current context
+                    // H.Dummy(x1);
+                    Diagnostic(ErrorCode.ERR_NameNotInContext, "x1")
+                        .WithArguments("x1")
+                        .WithLocation(3, 9),
+                    // (12,33): error CS0128: A local variable or function named 'x4' is already defined in this scope
+                    //                      (42 is var x4)));
+                    Diagnostic(ErrorCode.ERR_LocalDuplicate, "x4")
+                        .WithArguments("x4")
+                        .WithLocation(12, 33),
+                    // (16,25): error CS0136: A local or parameter named 'x5' cannot be declared in this scope because that name is used in an enclosing local scope to define a local or parameter
+                    //     H.Dummy("52" is var x5);
+                    Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "x5")
+                        .WithArguments("x5")
+                        .WithLocation(16, 25),
+                    // (20,9): error CS0103: The name 'x5' does not exist in the current context
+                    // H.Dummy(x5);
+                    Diagnostic(ErrorCode.ERR_NameNotInContext, "x5")
+                        .WithArguments("x5")
+                        .WithLocation(20, 9),
+                    // (24,13): error CS0103: The name 'x1' does not exist in the current context
+                    //     H.Dummy(x1, x2, x3, x4, x5);
+                    Diagnostic(ErrorCode.ERR_NameNotInContext, "x1")
+                        .WithArguments("x1")
+                        .WithLocation(24, 13),
+                    // (24,25): error CS0103: The name 'x4' does not exist in the current context
+                    //     H.Dummy(x1, x2, x3, x4, x5);
+                    Diagnostic(ErrorCode.ERR_NameNotInContext, "x4")
+                        .WithArguments("x4")
+                        .WithLocation(24, 25),
+                    // (24,29): error CS0103: The name 'x5' does not exist in the current context
+                    //     H.Dummy(x1, x2, x3, x4, x5);
+                    Diagnostic(ErrorCode.ERR_NameNotInContext, "x5")
+                        .WithArguments("x5")
+                        .WithLocation(24, 29)
+                );
 
                 var tree = compilation.SyntaxTrees.Single();
                 var model = compilation.GetSemanticModel(tree);
@@ -2505,37 +3075,59 @@ class H
             }
 
             {
-                var compilation = CreateCompilationWithMscorlib45(source, options: TestOptions.ReleaseExe, parseOptions: TestOptions.Regular9);
+                var compilation = CreateCompilationWithMscorlib45(
+                    source,
+                    options: TestOptions.ReleaseExe,
+                    parseOptions: TestOptions.Regular9
+                );
 
                 compilation.VerifyDiagnostics(
                     // (3,9): error CS0103: The name 'x1' does not exist in the current context
                     // H.Dummy(x1);
-                    Diagnostic(ErrorCode.ERR_NameNotInContext, "x1").WithArguments("x1").WithLocation(3, 9),
+                    Diagnostic(ErrorCode.ERR_NameNotInContext, "x1")
+                        .WithArguments("x1")
+                        .WithLocation(3, 9),
                     // (6,24): error CS0136: A local or parameter named 'x2' cannot be declared in this scope because that name is used in an enclosing local scope to define a local or parameter
                     // do {} while ((2 is var x2));
-                    Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "x2").WithArguments("x2").WithLocation(6, 24),
+                    Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "x2")
+                        .WithArguments("x2")
+                        .WithLocation(6, 24),
                     // (8,24): error CS0136: A local or parameter named 'x3' cannot be declared in this scope because that name is used in an enclosing local scope to define a local or parameter
                     // do {} while ((3 is var x3));
-                    Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "x3").WithArguments("x3").WithLocation(8, 24),
+                    Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "x3")
+                        .WithArguments("x3")
+                        .WithLocation(8, 24),
                     // (12,33): error CS0128: A local variable or function named 'x4' is already defined in this scope
                     //                      (42 is var x4)));
-                    Diagnostic(ErrorCode.ERR_LocalDuplicate, "x4").WithArguments("x4").WithLocation(12, 33),
+                    Diagnostic(ErrorCode.ERR_LocalDuplicate, "x4")
+                        .WithArguments("x4")
+                        .WithLocation(12, 33),
                     // (16,25): error CS0136: A local or parameter named 'x5' cannot be declared in this scope because that name is used in an enclosing local scope to define a local or parameter
                     //     H.Dummy("52" is var x5);
-                    Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "x5").WithArguments("x5").WithLocation(16, 25),
+                    Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "x5")
+                        .WithArguments("x5")
+                        .WithLocation(16, 25),
                     // (20,9): error CS0103: The name 'x5' does not exist in the current context
                     // H.Dummy(x5);
-                    Diagnostic(ErrorCode.ERR_NameNotInContext, "x5").WithArguments("x5").WithLocation(20, 9),
+                    Diagnostic(ErrorCode.ERR_NameNotInContext, "x5")
+                        .WithArguments("x5")
+                        .WithLocation(20, 9),
                     // (24,13): error CS0103: The name 'x1' does not exist in the current context
                     //     H.Dummy(x1, x2, x3, x4, x5);
-                    Diagnostic(ErrorCode.ERR_NameNotInContext, "x1").WithArguments("x1").WithLocation(24, 13),
+                    Diagnostic(ErrorCode.ERR_NameNotInContext, "x1")
+                        .WithArguments("x1")
+                        .WithLocation(24, 13),
                     // (24,25): error CS0103: The name 'x4' does not exist in the current context
                     //     H.Dummy(x1, x2, x3, x4, x5);
-                    Diagnostic(ErrorCode.ERR_NameNotInContext, "x4").WithArguments("x4").WithLocation(24, 25),
+                    Diagnostic(ErrorCode.ERR_NameNotInContext, "x4")
+                        .WithArguments("x4")
+                        .WithLocation(24, 25),
                     // (24,29): error CS0103: The name 'x5' does not exist in the current context
                     //     H.Dummy(x1, x2, x3, x4, x5);
-                    Diagnostic(ErrorCode.ERR_NameNotInContext, "x5").WithArguments("x5").WithLocation(24, 29)
-                    );
+                    Diagnostic(ErrorCode.ERR_NameNotInContext, "x5")
+                        .WithArguments("x5")
+                        .WithLocation(24, 29)
+                );
 
                 var tree = compilation.SyntaxTrees.Single();
                 var model = compilation.GetSemanticModel(tree);
@@ -2579,7 +3171,7 @@ class H
         public void GlobalCode_DoStatement_03()
         {
             string source =
-@"
+                @"
 int f = 1;
 
 do
@@ -2599,12 +3191,19 @@ class H
 }
 ";
 
-            var compilation = CreateCompilationWithMscorlib45(source, options: TestOptions.ReleaseExe.WithScriptClassName("Script"), parseOptions: TestOptions.Script);
+            var compilation = CreateCompilationWithMscorlib45(
+                source,
+                options: TestOptions.ReleaseExe.WithScriptClassName("Script"),
+                parseOptions: TestOptions.Script
+            );
 
-            CompileAndVerify(compilation, expectedOutput:
-@"1
+            CompileAndVerify(
+                    compilation,
+                    expectedOutput: @"1
 2
-3").VerifyDiagnostics();
+3"
+                )
+                .VerifyDiagnostics();
 
             var tree = compilation.SyntaxTrees.Single();
             var model = compilation.GetSemanticModel(tree);
@@ -2620,7 +3219,7 @@ class H
         public void GlobalCode_LockStatement_01()
         {
             string source =
-@"
+                @"
 lock (H.Dummy(1 is int x1)) {}
 H.Dummy(x1);
 
@@ -2653,28 +3252,44 @@ class H
 }
 ";
             {
-                var compilation = CreateCompilationWithMscorlib45(source, options: TestOptions.ReleaseExe.WithScriptClassName("Script"), parseOptions: TestOptions.Script);
+                var compilation = CreateCompilationWithMscorlib45(
+                    source,
+                    options: TestOptions.ReleaseExe.WithScriptClassName("Script"),
+                    parseOptions: TestOptions.Script
+                );
 
                 compilation.VerifyDiagnostics(
-                // (6,24): error CS0102: The type 'Script' already contains a definition for 'x2'
-                // lock (H.Dummy(2 is int x2)) {}
-                Diagnostic(ErrorCode.ERR_DuplicateNameInClass, "x2").WithArguments("Script", "x2").WithLocation(6, 24),
-                // (9,8): error CS0102: The type 'Script' already contains a definition for 'x3'
-                // object x3;
-                Diagnostic(ErrorCode.ERR_DuplicateNameInClass, "x3").WithArguments("Script", "x3").WithLocation(9, 8),
-                // (12,26): error CS0102: The type 'Script' already contains a definition for 'x4'
-                //               (42 is int x4))) {}
-                Diagnostic(ErrorCode.ERR_DuplicateNameInClass, "x4").WithArguments("Script", "x4").WithLocation(12, 26),
-                // (23,17): error CS0229: Ambiguity between 'x2' and 'x2'
-                //     H.Dummy(x1, x2, x3, x4, x5);
-                Diagnostic(ErrorCode.ERR_AmbigMember, "x2").WithArguments("x2", "x2").WithLocation(23, 17),
-                // (23,21): error CS0229: Ambiguity between 'x3' and 'x3'
-                //     H.Dummy(x1, x2, x3, x4, x5);
-                Diagnostic(ErrorCode.ERR_AmbigMember, "x3").WithArguments("x3", "x3").WithLocation(23, 21),
-                // (23,25): error CS0229: Ambiguity between 'x4' and 'x4'
-                //     H.Dummy(x1, x2, x3, x4, x5);
-                Diagnostic(ErrorCode.ERR_AmbigMember, "x4").WithArguments("x4", "x4").WithLocation(23, 25)
-                    );
+                    // (6,24): error CS0102: The type 'Script' already contains a definition for 'x2'
+                    // lock (H.Dummy(2 is int x2)) {}
+                    Diagnostic(ErrorCode.ERR_DuplicateNameInClass, "x2")
+                        .WithArguments("Script", "x2")
+                        .WithLocation(6, 24),
+                    // (9,8): error CS0102: The type 'Script' already contains a definition for 'x3'
+                    // object x3;
+                    Diagnostic(ErrorCode.ERR_DuplicateNameInClass, "x3")
+                        .WithArguments("Script", "x3")
+                        .WithLocation(9, 8),
+                    // (12,26): error CS0102: The type 'Script' already contains a definition for 'x4'
+                    //               (42 is int x4))) {}
+                    Diagnostic(ErrorCode.ERR_DuplicateNameInClass, "x4")
+                        .WithArguments("Script", "x4")
+                        .WithLocation(12, 26),
+                    // (23,17): error CS0229: Ambiguity between 'x2' and 'x2'
+                    //     H.Dummy(x1, x2, x3, x4, x5);
+                    Diagnostic(ErrorCode.ERR_AmbigMember, "x2")
+                        .WithArguments("x2", "x2")
+                        .WithLocation(23, 17),
+                    // (23,21): error CS0229: Ambiguity between 'x3' and 'x3'
+                    //     H.Dummy(x1, x2, x3, x4, x5);
+                    Diagnostic(ErrorCode.ERR_AmbigMember, "x3")
+                        .WithArguments("x3", "x3")
+                        .WithLocation(23, 21),
+                    // (23,25): error CS0229: Ambiguity between 'x4' and 'x4'
+                    //     H.Dummy(x1, x2, x3, x4, x5);
+                    Diagnostic(ErrorCode.ERR_AmbigMember, "x4")
+                        .WithArguments("x4", "x4")
+                        .WithLocation(23, 25)
+                );
 
                 var tree = compilation.SyntaxTrees.Single();
                 var model = compilation.GetSemanticModel(tree);
@@ -2707,28 +3322,44 @@ class H
             }
 
             {
-                var compilation = CreateCompilationWithMscorlib45(source, options: TestOptions.ReleaseExe, parseOptions: TestOptions.Regular9);
+                var compilation = CreateCompilationWithMscorlib45(
+                    source,
+                    options: TestOptions.ReleaseExe,
+                    parseOptions: TestOptions.Regular9
+                );
 
                 compilation.VerifyDiagnostics(
                     // (6,24): error CS0128: A local variable or function named 'x2' is already defined in this scope
                     // lock (H.Dummy(2 is int x2)) {}
-                    Diagnostic(ErrorCode.ERR_LocalDuplicate, "x2").WithArguments("x2").WithLocation(6, 24),
+                    Diagnostic(ErrorCode.ERR_LocalDuplicate, "x2")
+                        .WithArguments("x2")
+                        .WithLocation(6, 24),
                     // (9,8): error CS0128: A local variable or function named 'x3' is already defined in this scope
                     // object x3;
-                    Diagnostic(ErrorCode.ERR_LocalDuplicate, "x3").WithArguments("x3").WithLocation(9, 8),
+                    Diagnostic(ErrorCode.ERR_LocalDuplicate, "x3")
+                        .WithArguments("x3")
+                        .WithLocation(9, 8),
                     // (9,8): warning CS0168: The variable 'x3' is declared but never used
                     // object x3;
-                    Diagnostic(ErrorCode.WRN_UnreferencedVar, "x3").WithArguments("x3").WithLocation(9, 8),
+                    Diagnostic(ErrorCode.WRN_UnreferencedVar, "x3")
+                        .WithArguments("x3")
+                        .WithLocation(9, 8),
                     // (12,26): error CS0128: A local variable or function named 'x4' is already defined in this scope
                     //               (42 is int x4))) {}
-                    Diagnostic(ErrorCode.ERR_LocalDuplicate, "x4").WithArguments("x4").WithLocation(12, 26),
+                    Diagnostic(ErrorCode.ERR_LocalDuplicate, "x4")
+                        .WithArguments("x4")
+                        .WithLocation(12, 26),
                     // (16,28): error CS0136: A local or parameter named 'x5' cannot be declared in this scope because that name is used in an enclosing local scope to define a local or parameter
                     //     H.Dummy("52" is string x5);
-                    Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "x5").WithArguments("x5").WithLocation(16, 28),
+                    Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "x5")
+                        .WithArguments("x5")
+                        .WithLocation(16, 28),
                     // (26,1): error CS0165: Use of unassigned local variable 'x2'
                     // Test();
-                    Diagnostic(ErrorCode.ERR_UseDefViolation, "Test()").WithArguments("x2").WithLocation(26, 1)
-                    );
+                    Diagnostic(ErrorCode.ERR_UseDefViolation, "Test()")
+                        .WithArguments("x2")
+                        .WithLocation(26, 1)
+                );
 
                 var tree = compilation.SyntaxTrees.Single();
                 var model = compilation.GetSemanticModel(tree);
@@ -2766,7 +3397,7 @@ class H
         public void GlobalCode_LockStatement_02()
         {
             string source =
-@"
+                @"
 lock (H.Dummy(1 is var x1)) {}
 H.Dummy(x1);
 
@@ -2799,28 +3430,44 @@ class H
 }
 ";
             {
-                var compilation = CreateCompilationWithMscorlib45(source, options: TestOptions.ReleaseExe.WithScriptClassName("Script"), parseOptions: TestOptions.Script);
+                var compilation = CreateCompilationWithMscorlib45(
+                    source,
+                    options: TestOptions.ReleaseExe.WithScriptClassName("Script"),
+                    parseOptions: TestOptions.Script
+                );
 
                 compilation.VerifyDiagnostics(
-                // (6,24): error CS0102: The type 'Script' already contains a definition for 'x2'
-                // lock (H.Dummy(2 is var x2)) {}
-                Diagnostic(ErrorCode.ERR_DuplicateNameInClass, "x2").WithArguments("Script", "x2").WithLocation(6, 24),
-                // (9,8): error CS0102: The type 'Script' already contains a definition for 'x3'
-                // object x3;
-                Diagnostic(ErrorCode.ERR_DuplicateNameInClass, "x3").WithArguments("Script", "x3").WithLocation(9, 8),
-                // (12,26): error CS0102: The type 'Script' already contains a definition for 'x4'
-                //               (42 is var x4))) {}
-                Diagnostic(ErrorCode.ERR_DuplicateNameInClass, "x4").WithArguments("Script", "x4").WithLocation(12, 26),
-                // (23,17): error CS0229: Ambiguity between 'x2' and 'x2'
-                //     H.Dummy(x1, x2, x3, x4, x5);
-                Diagnostic(ErrorCode.ERR_AmbigMember, "x2").WithArguments("x2", "x2").WithLocation(23, 17),
-                // (23,21): error CS0229: Ambiguity between 'x3' and 'x3'
-                //     H.Dummy(x1, x2, x3, x4, x5);
-                Diagnostic(ErrorCode.ERR_AmbigMember, "x3").WithArguments("x3", "x3").WithLocation(23, 21),
-                // (23,25): error CS0229: Ambiguity between 'x4' and 'x4'
-                //     H.Dummy(x1, x2, x3, x4, x5);
-                Diagnostic(ErrorCode.ERR_AmbigMember, "x4").WithArguments("x4", "x4").WithLocation(23, 25)
-                    );
+                    // (6,24): error CS0102: The type 'Script' already contains a definition for 'x2'
+                    // lock (H.Dummy(2 is var x2)) {}
+                    Diagnostic(ErrorCode.ERR_DuplicateNameInClass, "x2")
+                        .WithArguments("Script", "x2")
+                        .WithLocation(6, 24),
+                    // (9,8): error CS0102: The type 'Script' already contains a definition for 'x3'
+                    // object x3;
+                    Diagnostic(ErrorCode.ERR_DuplicateNameInClass, "x3")
+                        .WithArguments("Script", "x3")
+                        .WithLocation(9, 8),
+                    // (12,26): error CS0102: The type 'Script' already contains a definition for 'x4'
+                    //               (42 is var x4))) {}
+                    Diagnostic(ErrorCode.ERR_DuplicateNameInClass, "x4")
+                        .WithArguments("Script", "x4")
+                        .WithLocation(12, 26),
+                    // (23,17): error CS0229: Ambiguity between 'x2' and 'x2'
+                    //     H.Dummy(x1, x2, x3, x4, x5);
+                    Diagnostic(ErrorCode.ERR_AmbigMember, "x2")
+                        .WithArguments("x2", "x2")
+                        .WithLocation(23, 17),
+                    // (23,21): error CS0229: Ambiguity between 'x3' and 'x3'
+                    //     H.Dummy(x1, x2, x3, x4, x5);
+                    Diagnostic(ErrorCode.ERR_AmbigMember, "x3")
+                        .WithArguments("x3", "x3")
+                        .WithLocation(23, 21),
+                    // (23,25): error CS0229: Ambiguity between 'x4' and 'x4'
+                    //     H.Dummy(x1, x2, x3, x4, x5);
+                    Diagnostic(ErrorCode.ERR_AmbigMember, "x4")
+                        .WithArguments("x4", "x4")
+                        .WithLocation(23, 25)
+                );
 
                 var tree = compilation.SyntaxTrees.Single();
                 var model = compilation.GetSemanticModel(tree);
@@ -2853,28 +3500,44 @@ class H
             }
 
             {
-                var compilation = CreateCompilationWithMscorlib45(source, options: TestOptions.ReleaseExe, parseOptions: TestOptions.Regular9);
+                var compilation = CreateCompilationWithMscorlib45(
+                    source,
+                    options: TestOptions.ReleaseExe,
+                    parseOptions: TestOptions.Regular9
+                );
 
                 compilation.VerifyDiagnostics(
                     // (6,24): error CS0128: A local variable or function named 'x2' is already defined in this scope
                     // lock (H.Dummy(2 is var x2)) {}
-                    Diagnostic(ErrorCode.ERR_LocalDuplicate, "x2").WithArguments("x2").WithLocation(6, 24),
+                    Diagnostic(ErrorCode.ERR_LocalDuplicate, "x2")
+                        .WithArguments("x2")
+                        .WithLocation(6, 24),
                     // (9,8): error CS0128: A local variable or function named 'x3' is already defined in this scope
                     // object x3;
-                    Diagnostic(ErrorCode.ERR_LocalDuplicate, "x3").WithArguments("x3").WithLocation(9, 8),
+                    Diagnostic(ErrorCode.ERR_LocalDuplicate, "x3")
+                        .WithArguments("x3")
+                        .WithLocation(9, 8),
                     // (9,8): warning CS0168: The variable 'x3' is declared but never used
                     // object x3;
-                    Diagnostic(ErrorCode.WRN_UnreferencedVar, "x3").WithArguments("x3").WithLocation(9, 8),
+                    Diagnostic(ErrorCode.WRN_UnreferencedVar, "x3")
+                        .WithArguments("x3")
+                        .WithLocation(9, 8),
                     // (12,26): error CS0128: A local variable or function named 'x4' is already defined in this scope
                     //               (42 is var x4))) {}
-                    Diagnostic(ErrorCode.ERR_LocalDuplicate, "x4").WithArguments("x4").WithLocation(12, 26),
+                    Diagnostic(ErrorCode.ERR_LocalDuplicate, "x4")
+                        .WithArguments("x4")
+                        .WithLocation(12, 26),
                     // (16,25): error CS0136: A local or parameter named 'x5' cannot be declared in this scope because that name is used in an enclosing local scope to define a local or parameter
                     //     H.Dummy("52" is var x5);
-                    Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "x5").WithArguments("x5").WithLocation(16, 25),
+                    Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "x5")
+                        .WithArguments("x5")
+                        .WithLocation(16, 25),
                     // (26,1): error CS0165: Use of unassigned local variable 'x2'
                     // Test();
-                    Diagnostic(ErrorCode.ERR_UseDefViolation, "Test()").WithArguments("x2").WithLocation(26, 1)
-                    );
+                    Diagnostic(ErrorCode.ERR_UseDefViolation, "Test()")
+                        .WithArguments("x2")
+                        .WithLocation(26, 1)
+                );
 
                 var tree = compilation.SyntaxTrees.Single();
                 var model = compilation.GetSemanticModel(tree);
@@ -2912,7 +3575,7 @@ class H
         public void GlobalCode_LockStatement_03()
         {
             string source =
-@"
+                @"
 System.Console.WriteLine(x1);
 lock (H.Dummy(1 is var x1)) 
 {
@@ -2931,12 +3594,19 @@ class H
 }
 ";
 
-            var compilation = CreateCompilationWithMscorlib45(source, options: TestOptions.ReleaseExe.WithScriptClassName("Script"), parseOptions: TestOptions.Script);
+            var compilation = CreateCompilationWithMscorlib45(
+                source,
+                options: TestOptions.ReleaseExe.WithScriptClassName("Script"),
+                parseOptions: TestOptions.Script
+            );
 
-            CompileAndVerify(compilation, expectedOutput:
-@"0
+            CompileAndVerify(
+                    compilation,
+                    expectedOutput: @"0
 11
-1").VerifyDiagnostics();
+1"
+                )
+                .VerifyDiagnostics();
 
             var tree = compilation.SyntaxTrees.Single();
             var model = compilation.GetSemanticModel(tree);
@@ -2953,7 +3623,7 @@ class H
         public void GlobalCode_LockStatement_04()
         {
             string source =
-@"
+                @"
 System.Console.WriteLine(x1);
 lock (H.Dummy(1 is var x1)) 
     H.Dummy((""11"" is var x1), x1);
@@ -2977,12 +3647,19 @@ class H
 }
 ";
 
-            var compilation = CreateCompilationWithMscorlib45(source, options: TestOptions.ReleaseExe.WithScriptClassName("Script"), parseOptions: TestOptions.Script);
+            var compilation = CreateCompilationWithMscorlib45(
+                source,
+                options: TestOptions.ReleaseExe.WithScriptClassName("Script"),
+                parseOptions: TestOptions.Script
+            );
 
-            CompileAndVerify(compilation, expectedOutput:
-@"0
+            CompileAndVerify(
+                    compilation,
+                    expectedOutput: @"0
 11
-1").VerifyDiagnostics();
+1"
+                )
+                .VerifyDiagnostics();
 
             var tree = compilation.SyntaxTrees.Single();
             var model = compilation.GetSemanticModel(tree);
@@ -3000,7 +3677,7 @@ class H
         public void GlobalCode_DeconstructionDeclarationStatement_01()
         {
             string source =
-@"
+                @"
 (bool a, int b) = ((1 is int x1), 1);
 H.Dummy(x1);
 
@@ -3029,41 +3706,65 @@ class H
 }
 ";
             {
-                var compilation = CreateCompilationWithMscorlib45(source, references: new[] { ValueTupleRef, SystemRuntimeFacadeRef },
-                                                                  options: TestOptions.ReleaseExe.WithScriptClassName("Script"), parseOptions: TestOptions.Script);
+                var compilation = CreateCompilationWithMscorlib45(
+                    source,
+                    references: new[] { ValueTupleRef, SystemRuntimeFacadeRef },
+                    options: TestOptions.ReleaseExe.WithScriptClassName("Script"),
+                    parseOptions: TestOptions.Script
+                );
 
                 compilation.VerifyDiagnostics(
                     // (6,30): error CS0102: The type 'Script' already contains a definition for 'x2'
                     // (bool c, int d) = ((2 is int x2), 2);
-                    Diagnostic(ErrorCode.ERR_DuplicateNameInClass, "x2").WithArguments("Script", "x2").WithLocation(6, 30),
+                    Diagnostic(ErrorCode.ERR_DuplicateNameInClass, "x2")
+                        .WithArguments("Script", "x2")
+                        .WithLocation(6, 30),
                     // (9,8): error CS0102: The type 'Script' already contains a definition for 'x3'
                     // object x3;
-                    Diagnostic(ErrorCode.ERR_DuplicateNameInClass, "x3").WithArguments("Script", "x3").WithLocation(9, 8),
+                    Diagnostic(ErrorCode.ERR_DuplicateNameInClass, "x3")
+                        .WithArguments("Script", "x3")
+                        .WithLocation(9, 8),
                     // (12,32): error CS0102: The type 'Script' already contains a definition for 'x4'
                     //                     (42 is int x4));
-                    Diagnostic(ErrorCode.ERR_DuplicateNameInClass, "x4").WithArguments("Script", "x4").WithLocation(12, 32),
+                    Diagnostic(ErrorCode.ERR_DuplicateNameInClass, "x4")
+                        .WithArguments("Script", "x4")
+                        .WithLocation(12, 32),
                     // (14,33): error CS0102: The type 'Script' already contains a definition for 'x5'
                     // (bool x5, bool x6) = ((5 is int x5),
-                    Diagnostic(ErrorCode.ERR_DuplicateNameInClass, "x5").WithArguments("Script", "x5").WithLocation(14, 33),
+                    Diagnostic(ErrorCode.ERR_DuplicateNameInClass, "x5")
+                        .WithArguments("Script", "x5")
+                        .WithLocation(14, 33),
                     // (15,33): error CS0102: The type 'Script' already contains a definition for 'x6'
                     //                       (6 is int x6));
-                    Diagnostic(ErrorCode.ERR_DuplicateNameInClass, "x6").WithArguments("Script", "x6").WithLocation(15, 33),
+                    Diagnostic(ErrorCode.ERR_DuplicateNameInClass, "x6")
+                        .WithArguments("Script", "x6")
+                        .WithLocation(15, 33),
                     // (19,17): error CS0229: Ambiguity between 'x2' and 'x2'
                     //     H.Dummy(x1, x2, x3, x4, x5, x6);
-                    Diagnostic(ErrorCode.ERR_AmbigMember, "x2").WithArguments("x2", "x2").WithLocation(19, 17),
+                    Diagnostic(ErrorCode.ERR_AmbigMember, "x2")
+                        .WithArguments("x2", "x2")
+                        .WithLocation(19, 17),
                     // (19,21): error CS0229: Ambiguity between 'x3' and 'x3'
                     //     H.Dummy(x1, x2, x3, x4, x5, x6);
-                    Diagnostic(ErrorCode.ERR_AmbigMember, "x3").WithArguments("x3", "x3").WithLocation(19, 21),
+                    Diagnostic(ErrorCode.ERR_AmbigMember, "x3")
+                        .WithArguments("x3", "x3")
+                        .WithLocation(19, 21),
                     // (19,25): error CS0229: Ambiguity between 'x4' and 'x4'
                     //     H.Dummy(x1, x2, x3, x4, x5, x6);
-                    Diagnostic(ErrorCode.ERR_AmbigMember, "x4").WithArguments("x4", "x4").WithLocation(19, 25),
+                    Diagnostic(ErrorCode.ERR_AmbigMember, "x4")
+                        .WithArguments("x4", "x4")
+                        .WithLocation(19, 25),
                     // (19,29): error CS0229: Ambiguity between 'x5' and 'x5'
                     //     H.Dummy(x1, x2, x3, x4, x5, x6);
-                    Diagnostic(ErrorCode.ERR_AmbigMember, "x5").WithArguments("x5", "x5").WithLocation(19, 29),
+                    Diagnostic(ErrorCode.ERR_AmbigMember, "x5")
+                        .WithArguments("x5", "x5")
+                        .WithLocation(19, 29),
                     // (19,33): error CS0229: Ambiguity between 'x6' and 'x6'
                     //     H.Dummy(x1, x2, x3, x4, x5, x6);
-                    Diagnostic(ErrorCode.ERR_AmbigMember, "x6").WithArguments("x6", "x6").WithLocation(19, 33)
-                    );
+                    Diagnostic(ErrorCode.ERR_AmbigMember, "x6")
+                        .WithArguments("x6", "x6")
+                        .WithLocation(19, 33)
+                );
 
                 var tree = compilation.SyntaxTrees.Single();
                 var model = compilation.GetSemanticModel(tree);
@@ -3097,32 +3798,50 @@ class H
             }
 
             {
-                var compilation = CreateCompilationWithMscorlib45(source, references: new[] { ValueTupleRef, SystemRuntimeFacadeRef },
-                                                                  options: TestOptions.ReleaseExe, parseOptions: TestOptions.Regular9);
+                var compilation = CreateCompilationWithMscorlib45(
+                    source,
+                    references: new[] { ValueTupleRef, SystemRuntimeFacadeRef },
+                    options: TestOptions.ReleaseExe,
+                    parseOptions: TestOptions.Regular9
+                );
 
                 compilation.VerifyDiagnostics(
                     // (6,30): error CS0128: A local variable or function named 'x2' is already defined in this scope
                     // (bool c, int d) = ((2 is int x2), 2);
-                    Diagnostic(ErrorCode.ERR_LocalDuplicate, "x2").WithArguments("x2").WithLocation(6, 30),
+                    Diagnostic(ErrorCode.ERR_LocalDuplicate, "x2")
+                        .WithArguments("x2")
+                        .WithLocation(6, 30),
                     // (9,8): error CS0128: A local variable or function named 'x3' is already defined in this scope
                     // object x3;
-                    Diagnostic(ErrorCode.ERR_LocalDuplicate, "x3").WithArguments("x3").WithLocation(9, 8),
+                    Diagnostic(ErrorCode.ERR_LocalDuplicate, "x3")
+                        .WithArguments("x3")
+                        .WithLocation(9, 8),
                     // (9,8): warning CS0168: The variable 'x3' is declared but never used
                     // object x3;
-                    Diagnostic(ErrorCode.WRN_UnreferencedVar, "x3").WithArguments("x3").WithLocation(9, 8),
+                    Diagnostic(ErrorCode.WRN_UnreferencedVar, "x3")
+                        .WithArguments("x3")
+                        .WithLocation(9, 8),
                     // (12,32): error CS0128: A local variable or function named 'x4' is already defined in this scope
                     //                     (42 is int x4));
-                    Diagnostic(ErrorCode.ERR_LocalDuplicate, "x4").WithArguments("x4").WithLocation(12, 32),
+                    Diagnostic(ErrorCode.ERR_LocalDuplicate, "x4")
+                        .WithArguments("x4")
+                        .WithLocation(12, 32),
                     // (14,33): error CS0128: A local variable or function named 'x5' is already defined in this scope
                     // (bool x5, bool x6) = ((5 is int x5),
-                    Diagnostic(ErrorCode.ERR_LocalDuplicate, "x5").WithArguments("x5").WithLocation(14, 33),
+                    Diagnostic(ErrorCode.ERR_LocalDuplicate, "x5")
+                        .WithArguments("x5")
+                        .WithLocation(14, 33),
                     // (15,33): error CS0128: A local variable or function named 'x6' is already defined in this scope
                     //                       (6 is int x6));
-                    Diagnostic(ErrorCode.ERR_LocalDuplicate, "x6").WithArguments("x6").WithLocation(15, 33),
+                    Diagnostic(ErrorCode.ERR_LocalDuplicate, "x6")
+                        .WithArguments("x6")
+                        .WithLocation(15, 33),
                     // (22,1): error CS0165: Use of unassigned local variable 'x2'
                     // Test();
-                    Diagnostic(ErrorCode.ERR_UseDefViolation, "Test()").WithArguments("x2").WithLocation(22, 1)
-                    );
+                    Diagnostic(ErrorCode.ERR_UseDefViolation, "Test()")
+                        .WithArguments("x2")
+                        .WithLocation(22, 1)
+                );
 
                 var tree = compilation.SyntaxTrees.Single();
                 var model = compilation.GetSemanticModel(tree);
@@ -3163,7 +3882,7 @@ class H
         public void GlobalCode_LabeledStatement_01()
         {
             string source =
-@"
+                @"
 a: H.Dummy(1 is int x1);
 H.Dummy(x1);
 
@@ -3189,40 +3908,56 @@ class H
 }
 ";
             {
-                var compilation = CreateCompilationWithMscorlib45(source, options: TestOptions.ReleaseExe.WithScriptClassName("Script"), parseOptions: TestOptions.Script);
+                var compilation = CreateCompilationWithMscorlib45(
+                    source,
+                    options: TestOptions.ReleaseExe.WithScriptClassName("Script"),
+                    parseOptions: TestOptions.Script
+                );
 
                 compilation.VerifyDiagnostics(
-                // (6,21): error CS0102: The type 'Script' already contains a definition for 'x2'
-                // b: H.Dummy(2 is int x2);
-                Diagnostic(ErrorCode.ERR_DuplicateNameInClass, "x2").WithArguments("Script", "x2").WithLocation(6, 21),
-                // (9,8): error CS0102: The type 'Script' already contains a definition for 'x3'
-                // object x3;
-                Diagnostic(ErrorCode.ERR_DuplicateNameInClass, "x3").WithArguments("Script", "x3").WithLocation(9, 8),
-                // (12,23): error CS0102: The type 'Script' already contains a definition for 'x4'
-                //            (42 is int x4));
-                Diagnostic(ErrorCode.ERR_DuplicateNameInClass, "x4").WithArguments("Script", "x4").WithLocation(12, 23),
-                // (2,1): warning CS0164: This label has not been referenced
-                // a: H.Dummy(1 is int x1);
-                Diagnostic(ErrorCode.WRN_UnreferencedLabel, "a").WithLocation(2, 1),
-                // (6,1): warning CS0164: This label has not been referenced
-                // b: H.Dummy(2 is int x2);
-                Diagnostic(ErrorCode.WRN_UnreferencedLabel, "b").WithLocation(6, 1),
-                // (8,1): warning CS0164: This label has not been referenced
-                // c: H.Dummy(3 is int x3);
-                Diagnostic(ErrorCode.WRN_UnreferencedLabel, "c").WithLocation(8, 1),
-                // (11,1): warning CS0164: This label has not been referenced
-                // d: H.Dummy((41 is int x4),
-                Diagnostic(ErrorCode.WRN_UnreferencedLabel, "d").WithLocation(11, 1),
-                // (16,17): error CS0229: Ambiguity between 'x2' and 'x2'
-                //     H.Dummy(x1, x2, x3, x4);
-                Diagnostic(ErrorCode.ERR_AmbigMember, "x2").WithArguments("x2", "x2").WithLocation(16, 17),
-                // (16,21): error CS0229: Ambiguity between 'x3' and 'x3'
-                //     H.Dummy(x1, x2, x3, x4);
-                Diagnostic(ErrorCode.ERR_AmbigMember, "x3").WithArguments("x3", "x3").WithLocation(16, 21),
-                // (16,25): error CS0229: Ambiguity between 'x4' and 'x4'
-                //     H.Dummy(x1, x2, x3, x4);
-                Diagnostic(ErrorCode.ERR_AmbigMember, "x4").WithArguments("x4", "x4").WithLocation(16, 25)
-                    );
+                    // (6,21): error CS0102: The type 'Script' already contains a definition for 'x2'
+                    // b: H.Dummy(2 is int x2);
+                    Diagnostic(ErrorCode.ERR_DuplicateNameInClass, "x2")
+                        .WithArguments("Script", "x2")
+                        .WithLocation(6, 21),
+                    // (9,8): error CS0102: The type 'Script' already contains a definition for 'x3'
+                    // object x3;
+                    Diagnostic(ErrorCode.ERR_DuplicateNameInClass, "x3")
+                        .WithArguments("Script", "x3")
+                        .WithLocation(9, 8),
+                    // (12,23): error CS0102: The type 'Script' already contains a definition for 'x4'
+                    //            (42 is int x4));
+                    Diagnostic(ErrorCode.ERR_DuplicateNameInClass, "x4")
+                        .WithArguments("Script", "x4")
+                        .WithLocation(12, 23),
+                    // (2,1): warning CS0164: This label has not been referenced
+                    // a: H.Dummy(1 is int x1);
+                    Diagnostic(ErrorCode.WRN_UnreferencedLabel, "a").WithLocation(2, 1),
+                    // (6,1): warning CS0164: This label has not been referenced
+                    // b: H.Dummy(2 is int x2);
+                    Diagnostic(ErrorCode.WRN_UnreferencedLabel, "b").WithLocation(6, 1),
+                    // (8,1): warning CS0164: This label has not been referenced
+                    // c: H.Dummy(3 is int x3);
+                    Diagnostic(ErrorCode.WRN_UnreferencedLabel, "c").WithLocation(8, 1),
+                    // (11,1): warning CS0164: This label has not been referenced
+                    // d: H.Dummy((41 is int x4),
+                    Diagnostic(ErrorCode.WRN_UnreferencedLabel, "d").WithLocation(11, 1),
+                    // (16,17): error CS0229: Ambiguity between 'x2' and 'x2'
+                    //     H.Dummy(x1, x2, x3, x4);
+                    Diagnostic(ErrorCode.ERR_AmbigMember, "x2")
+                        .WithArguments("x2", "x2")
+                        .WithLocation(16, 17),
+                    // (16,21): error CS0229: Ambiguity between 'x3' and 'x3'
+                    //     H.Dummy(x1, x2, x3, x4);
+                    Diagnostic(ErrorCode.ERR_AmbigMember, "x3")
+                        .WithArguments("x3", "x3")
+                        .WithLocation(16, 21),
+                    // (16,25): error CS0229: Ambiguity between 'x4' and 'x4'
+                    //     H.Dummy(x1, x2, x3, x4);
+                    Diagnostic(ErrorCode.ERR_AmbigMember, "x4")
+                        .WithArguments("x4", "x4")
+                        .WithLocation(16, 25)
+                );
 
                 var tree = compilation.SyntaxTrees.Single();
                 var model = compilation.GetSemanticModel(tree);
@@ -3248,7 +3983,11 @@ class H
             }
 
             {
-                var compilation = CreateCompilationWithMscorlib45(source, options: TestOptions.ReleaseExe, parseOptions: TestOptions.Regular9);
+                var compilation = CreateCompilationWithMscorlib45(
+                    source,
+                    options: TestOptions.ReleaseExe,
+                    parseOptions: TestOptions.Regular9
+                );
 
                 compilation.VerifyDiagnostics(
                     // (2,1): warning CS0164: This label has not been referenced
@@ -3259,26 +3998,36 @@ class H
                     Diagnostic(ErrorCode.WRN_UnreferencedLabel, "b").WithLocation(6, 1),
                     // (6,21): error CS0128: A local variable or function named 'x2' is already defined in this scope
                     // b: H.Dummy(2 is int x2);
-                    Diagnostic(ErrorCode.ERR_LocalDuplicate, "x2").WithArguments("x2").WithLocation(6, 21),
+                    Diagnostic(ErrorCode.ERR_LocalDuplicate, "x2")
+                        .WithArguments("x2")
+                        .WithLocation(6, 21),
                     // (8,1): warning CS0164: This label has not been referenced
                     // c: H.Dummy(3 is int x3);
                     Diagnostic(ErrorCode.WRN_UnreferencedLabel, "c").WithLocation(8, 1),
                     // (9,8): error CS0128: A local variable or function named 'x3' is already defined in this scope
                     // object x3;
-                    Diagnostic(ErrorCode.ERR_LocalDuplicate, "x3").WithArguments("x3").WithLocation(9, 8),
+                    Diagnostic(ErrorCode.ERR_LocalDuplicate, "x3")
+                        .WithArguments("x3")
+                        .WithLocation(9, 8),
                     // (9,8): warning CS0168: The variable 'x3' is declared but never used
                     // object x3;
-                    Diagnostic(ErrorCode.WRN_UnreferencedVar, "x3").WithArguments("x3").WithLocation(9, 8),
+                    Diagnostic(ErrorCode.WRN_UnreferencedVar, "x3")
+                        .WithArguments("x3")
+                        .WithLocation(9, 8),
                     // (11,1): warning CS0164: This label has not been referenced
                     // d: H.Dummy((41 is int x4),
                     Diagnostic(ErrorCode.WRN_UnreferencedLabel, "d").WithLocation(11, 1),
                     // (12,23): error CS0128: A local variable or function named 'x4' is already defined in this scope
                     //            (42 is int x4));
-                    Diagnostic(ErrorCode.ERR_LocalDuplicate, "x4").WithArguments("x4").WithLocation(12, 23),
+                    Diagnostic(ErrorCode.ERR_LocalDuplicate, "x4")
+                        .WithArguments("x4")
+                        .WithLocation(12, 23),
                     // (19,1): error CS0165: Use of unassigned local variable 'x2'
                     // Test();
-                    Diagnostic(ErrorCode.ERR_UseDefViolation, "Test()").WithArguments("x2").WithLocation(19, 1)
-                    );
+                    Diagnostic(ErrorCode.ERR_UseDefViolation, "Test()")
+                        .WithArguments("x2")
+                        .WithLocation(19, 1)
+                );
 
                 var tree = compilation.SyntaxTrees.Single();
                 var model = compilation.GetSemanticModel(tree);
@@ -3309,7 +4058,7 @@ class H
         public void GlobalCode_LabeledStatement_02()
         {
             string source =
-@"
+                @"
 a: H.Dummy(1 is var x1);
 H.Dummy(x1);
 
@@ -3335,40 +4084,56 @@ class H
 }
 ";
             {
-                var compilation = CreateCompilationWithMscorlib45(source, options: TestOptions.ReleaseExe.WithScriptClassName("Script"), parseOptions: TestOptions.Script);
+                var compilation = CreateCompilationWithMscorlib45(
+                    source,
+                    options: TestOptions.ReleaseExe.WithScriptClassName("Script"),
+                    parseOptions: TestOptions.Script
+                );
 
                 compilation.VerifyDiagnostics(
-                // (6,21): error CS0102: The type 'Script' already contains a definition for 'x2'
-                // b: H.Dummy(2 is var x2);
-                Diagnostic(ErrorCode.ERR_DuplicateNameInClass, "x2").WithArguments("Script", "x2").WithLocation(6, 21),
-                // (9,8): error CS0102: The type 'Script' already contains a definition for 'x3'
-                // object x3;
-                Diagnostic(ErrorCode.ERR_DuplicateNameInClass, "x3").WithArguments("Script", "x3").WithLocation(9, 8),
-                // (12,23): error CS0102: The type 'Script' already contains a definition for 'x4'
-                //            (42 is var x4));
-                Diagnostic(ErrorCode.ERR_DuplicateNameInClass, "x4").WithArguments("Script", "x4").WithLocation(12, 23),
-                // (2,1): warning CS0164: This label has not been referenced
-                // a: H.Dummy(1 is var x1);
-                Diagnostic(ErrorCode.WRN_UnreferencedLabel, "a").WithLocation(2, 1),
-                // (6,1): warning CS0164: This label has not been referenced
-                // b: H.Dummy(2 is var x2);
-                Diagnostic(ErrorCode.WRN_UnreferencedLabel, "b").WithLocation(6, 1),
-                // (8,1): warning CS0164: This label has not been referenced
-                // c: H.Dummy(3 is var x3);
-                Diagnostic(ErrorCode.WRN_UnreferencedLabel, "c").WithLocation(8, 1),
-                // (11,1): warning CS0164: This label has not been referenced
-                // d: H.Dummy((41 is var x4),
-                Diagnostic(ErrorCode.WRN_UnreferencedLabel, "d").WithLocation(11, 1),
-                // (16,17): error CS0229: Ambiguity between 'x2' and 'x2'
-                //     H.Dummy(x1, x2, x3, x4);
-                Diagnostic(ErrorCode.ERR_AmbigMember, "x2").WithArguments("x2", "x2").WithLocation(16, 17),
-                // (16,21): error CS0229: Ambiguity between 'x3' and 'x3'
-                //     H.Dummy(x1, x2, x3, x4);
-                Diagnostic(ErrorCode.ERR_AmbigMember, "x3").WithArguments("x3", "x3").WithLocation(16, 21),
-                // (16,25): error CS0229: Ambiguity between 'x4' and 'x4'
-                //     H.Dummy(x1, x2, x3, x4);
-                Diagnostic(ErrorCode.ERR_AmbigMember, "x4").WithArguments("x4", "x4").WithLocation(16, 25)
-                    );
+                    // (6,21): error CS0102: The type 'Script' already contains a definition for 'x2'
+                    // b: H.Dummy(2 is var x2);
+                    Diagnostic(ErrorCode.ERR_DuplicateNameInClass, "x2")
+                        .WithArguments("Script", "x2")
+                        .WithLocation(6, 21),
+                    // (9,8): error CS0102: The type 'Script' already contains a definition for 'x3'
+                    // object x3;
+                    Diagnostic(ErrorCode.ERR_DuplicateNameInClass, "x3")
+                        .WithArguments("Script", "x3")
+                        .WithLocation(9, 8),
+                    // (12,23): error CS0102: The type 'Script' already contains a definition for 'x4'
+                    //            (42 is var x4));
+                    Diagnostic(ErrorCode.ERR_DuplicateNameInClass, "x4")
+                        .WithArguments("Script", "x4")
+                        .WithLocation(12, 23),
+                    // (2,1): warning CS0164: This label has not been referenced
+                    // a: H.Dummy(1 is var x1);
+                    Diagnostic(ErrorCode.WRN_UnreferencedLabel, "a").WithLocation(2, 1),
+                    // (6,1): warning CS0164: This label has not been referenced
+                    // b: H.Dummy(2 is var x2);
+                    Diagnostic(ErrorCode.WRN_UnreferencedLabel, "b").WithLocation(6, 1),
+                    // (8,1): warning CS0164: This label has not been referenced
+                    // c: H.Dummy(3 is var x3);
+                    Diagnostic(ErrorCode.WRN_UnreferencedLabel, "c").WithLocation(8, 1),
+                    // (11,1): warning CS0164: This label has not been referenced
+                    // d: H.Dummy((41 is var x4),
+                    Diagnostic(ErrorCode.WRN_UnreferencedLabel, "d").WithLocation(11, 1),
+                    // (16,17): error CS0229: Ambiguity between 'x2' and 'x2'
+                    //     H.Dummy(x1, x2, x3, x4);
+                    Diagnostic(ErrorCode.ERR_AmbigMember, "x2")
+                        .WithArguments("x2", "x2")
+                        .WithLocation(16, 17),
+                    // (16,21): error CS0229: Ambiguity between 'x3' and 'x3'
+                    //     H.Dummy(x1, x2, x3, x4);
+                    Diagnostic(ErrorCode.ERR_AmbigMember, "x3")
+                        .WithArguments("x3", "x3")
+                        .WithLocation(16, 21),
+                    // (16,25): error CS0229: Ambiguity between 'x4' and 'x4'
+                    //     H.Dummy(x1, x2, x3, x4);
+                    Diagnostic(ErrorCode.ERR_AmbigMember, "x4")
+                        .WithArguments("x4", "x4")
+                        .WithLocation(16, 25)
+                );
 
                 var tree = compilation.SyntaxTrees.Single();
                 var model = compilation.GetSemanticModel(tree);
@@ -3394,7 +4159,11 @@ class H
             }
 
             {
-                var compilation = CreateCompilationWithMscorlib45(source, options: TestOptions.ReleaseExe, parseOptions: TestOptions.Regular9);
+                var compilation = CreateCompilationWithMscorlib45(
+                    source,
+                    options: TestOptions.ReleaseExe,
+                    parseOptions: TestOptions.Regular9
+                );
 
                 compilation.VerifyDiagnostics(
                     // (2,1): warning CS0164: This label has not been referenced
@@ -3405,26 +4174,36 @@ class H
                     Diagnostic(ErrorCode.WRN_UnreferencedLabel, "b").WithLocation(6, 1),
                     // (6,21): error CS0128: A local variable or function named 'x2' is already defined in this scope
                     // b: H.Dummy(2 is var x2);
-                    Diagnostic(ErrorCode.ERR_LocalDuplicate, "x2").WithArguments("x2").WithLocation(6, 21),
+                    Diagnostic(ErrorCode.ERR_LocalDuplicate, "x2")
+                        .WithArguments("x2")
+                        .WithLocation(6, 21),
                     // (8,1): warning CS0164: This label has not been referenced
                     // c: H.Dummy(3 is var x3);
                     Diagnostic(ErrorCode.WRN_UnreferencedLabel, "c").WithLocation(8, 1),
                     // (9,8): error CS0128: A local variable or function named 'x3' is already defined in this scope
                     // object x3;
-                    Diagnostic(ErrorCode.ERR_LocalDuplicate, "x3").WithArguments("x3").WithLocation(9, 8),
+                    Diagnostic(ErrorCode.ERR_LocalDuplicate, "x3")
+                        .WithArguments("x3")
+                        .WithLocation(9, 8),
                     // (9,8): warning CS0168: The variable 'x3' is declared but never used
                     // object x3;
-                    Diagnostic(ErrorCode.WRN_UnreferencedVar, "x3").WithArguments("x3").WithLocation(9, 8),
+                    Diagnostic(ErrorCode.WRN_UnreferencedVar, "x3")
+                        .WithArguments("x3")
+                        .WithLocation(9, 8),
                     // (11,1): warning CS0164: This label has not been referenced
                     // d: H.Dummy((41 is var x4),
                     Diagnostic(ErrorCode.WRN_UnreferencedLabel, "d").WithLocation(11, 1),
                     // (12,23): error CS0128: A local variable or function named 'x4' is already defined in this scope
                     //            (42 is var x4));
-                    Diagnostic(ErrorCode.ERR_LocalDuplicate, "x4").WithArguments("x4").WithLocation(12, 23),
+                    Diagnostic(ErrorCode.ERR_LocalDuplicate, "x4")
+                        .WithArguments("x4")
+                        .WithLocation(12, 23),
                     // (19,1): error CS0165: Use of unassigned local variable 'x2'
                     // Test();
-                    Diagnostic(ErrorCode.ERR_UseDefViolation, "Test()").WithArguments("x2").WithLocation(19, 1)
-                    );
+                    Diagnostic(ErrorCode.ERR_UseDefViolation, "Test()")
+                        .WithArguments("x2")
+                        .WithLocation(19, 1)
+                );
 
                 var tree = compilation.SyntaxTrees.Single();
                 var model = compilation.GetSemanticModel(tree);
@@ -3455,7 +4234,7 @@ class H
         public void GlobalCode_LabeledStatement_03()
         {
             string source =
-@"
+                @"
 System.Console.WriteLine(x1);
 a:b:c:H.Dummy(1 is var x1);
 Test();
@@ -3470,20 +4249,27 @@ class H
 }
 ";
 
-            var compilation = CreateCompilationWithMscorlib45(source, options: TestOptions.ReleaseExe.WithScriptClassName("Script"), parseOptions: TestOptions.Script);
+            var compilation = CreateCompilationWithMscorlib45(
+                source,
+                options: TestOptions.ReleaseExe.WithScriptClassName("Script"),
+                parseOptions: TestOptions.Script
+            );
 
-            CompileAndVerify(compilation, expectedOutput:
-@"0
-1").VerifyDiagnostics(
-                // (3,1): warning CS0164: This label has not been referenced
-                // a:b:c:(1 is var x1);
-                Diagnostic(ErrorCode.WRN_UnreferencedLabel, "a").WithLocation(3, 1),
-                // (3,3): warning CS0164: This label has not been referenced
-                // a:b:c:(1 is var x1);
-                Diagnostic(ErrorCode.WRN_UnreferencedLabel, "b").WithLocation(3, 3),
-                // (3,5): warning CS0164: This label has not been referenced
-                // a:b:c:(1 is var x1);
-                Diagnostic(ErrorCode.WRN_UnreferencedLabel, "c").WithLocation(3, 5)
+            CompileAndVerify(
+                    compilation,
+                    expectedOutput: @"0
+1"
+                )
+                .VerifyDiagnostics(
+                    // (3,1): warning CS0164: This label has not been referenced
+                    // a:b:c:(1 is var x1);
+                    Diagnostic(ErrorCode.WRN_UnreferencedLabel, "a").WithLocation(3, 1),
+                    // (3,3): warning CS0164: This label has not been referenced
+                    // a:b:c:(1 is var x1);
+                    Diagnostic(ErrorCode.WRN_UnreferencedLabel, "b").WithLocation(3, 3),
+                    // (3,5): warning CS0164: This label has not been referenced
+                    // a:b:c:(1 is var x1);
+                    Diagnostic(ErrorCode.WRN_UnreferencedLabel, "c").WithLocation(3, 5)
                 );
 
             var tree = compilation.SyntaxTrees.Single();
@@ -3499,7 +4285,7 @@ class H
         public void GlobalCode_LabeledStatement_04()
         {
             string source =
-@"
+                @"
 a: 
 bool b = (1 is int x1);
 H.Dummy(x1);
@@ -3529,43 +4315,59 @@ class H
 }
 ";
             {
-                var compilation = CreateCompilationWithMscorlib45(source, options: TestOptions.ReleaseExe.WithScriptClassName("Script"), parseOptions: TestOptions.Script);
+                var compilation = CreateCompilationWithMscorlib45(
+                    source,
+                    options: TestOptions.ReleaseExe.WithScriptClassName("Script"),
+                    parseOptions: TestOptions.Script
+                );
 
                 compilation.VerifyDiagnostics(
-                // (7,20): error CS0102: The type 'Script' already contains a definition for 'x2'
-                // bool d = (2 is int x2);
-                Diagnostic(ErrorCode.ERR_DuplicateNameInClass, "x2").WithArguments("Script", "x2").WithLocation(7, 20),
-                // (10,8): error CS0102: The type 'Script' already contains a definition for 'x3'
-                // object x3;
-                Diagnostic(ErrorCode.ERR_DuplicateNameInClass, "x3").WithArguments("Script", "x3").WithLocation(10, 8),
-                // (13,29): error CS0102: The type 'Script' already contains a definition for 'x4'
-                //                  (42 is int x4));
-                Diagnostic(ErrorCode.ERR_DuplicateNameInClass, "x4").WithArguments("Script", "x4").WithLocation(13, 29),
-                // (2,1): warning CS0164: This label has not been referenced
-                // a: 
-                Diagnostic(ErrorCode.WRN_UnreferencedLabel, "a").WithLocation(2, 1),
-                // (6,1): warning CS0164: This label has not been referenced
-                // c:
-                Diagnostic(ErrorCode.WRN_UnreferencedLabel, "c").WithLocation(6, 1),
-                // (8,1): warning CS0164: This label has not been referenced
-                // e:
-                Diagnostic(ErrorCode.WRN_UnreferencedLabel, "e").WithLocation(8, 1),
-                // (11,1): warning CS0164: This label has not been referenced
-                // g:
-                Diagnostic(ErrorCode.WRN_UnreferencedLabel, "g").WithLocation(11, 1),
-                // (14,1): warning CS0164: This label has not been referenced
-                // i:
-                Diagnostic(ErrorCode.WRN_UnreferencedLabel, "i").WithLocation(14, 1),
-                // (20,17): error CS0229: Ambiguity between 'x2' and 'x2'
-                //     H.Dummy(x1, x2, x3, x4, x5);
-                Diagnostic(ErrorCode.ERR_AmbigMember, "x2").WithArguments("x2", "x2").WithLocation(20, 17),
-                // (20,21): error CS0229: Ambiguity between 'x3' and 'x3'
-                //     H.Dummy(x1, x2, x3, x4, x5);
-                Diagnostic(ErrorCode.ERR_AmbigMember, "x3").WithArguments("x3", "x3").WithLocation(20, 21),
-                // (20,25): error CS0229: Ambiguity between 'x4' and 'x4'
-                //     H.Dummy(x1, x2, x3, x4, x5);
-                Diagnostic(ErrorCode.ERR_AmbigMember, "x4").WithArguments("x4", "x4").WithLocation(20, 25)
-                    );
+                    // (7,20): error CS0102: The type 'Script' already contains a definition for 'x2'
+                    // bool d = (2 is int x2);
+                    Diagnostic(ErrorCode.ERR_DuplicateNameInClass, "x2")
+                        .WithArguments("Script", "x2")
+                        .WithLocation(7, 20),
+                    // (10,8): error CS0102: The type 'Script' already contains a definition for 'x3'
+                    // object x3;
+                    Diagnostic(ErrorCode.ERR_DuplicateNameInClass, "x3")
+                        .WithArguments("Script", "x3")
+                        .WithLocation(10, 8),
+                    // (13,29): error CS0102: The type 'Script' already contains a definition for 'x4'
+                    //                  (42 is int x4));
+                    Diagnostic(ErrorCode.ERR_DuplicateNameInClass, "x4")
+                        .WithArguments("Script", "x4")
+                        .WithLocation(13, 29),
+                    // (2,1): warning CS0164: This label has not been referenced
+                    // a:
+                    Diagnostic(ErrorCode.WRN_UnreferencedLabel, "a").WithLocation(2, 1),
+                    // (6,1): warning CS0164: This label has not been referenced
+                    // c:
+                    Diagnostic(ErrorCode.WRN_UnreferencedLabel, "c").WithLocation(6, 1),
+                    // (8,1): warning CS0164: This label has not been referenced
+                    // e:
+                    Diagnostic(ErrorCode.WRN_UnreferencedLabel, "e").WithLocation(8, 1),
+                    // (11,1): warning CS0164: This label has not been referenced
+                    // g:
+                    Diagnostic(ErrorCode.WRN_UnreferencedLabel, "g").WithLocation(11, 1),
+                    // (14,1): warning CS0164: This label has not been referenced
+                    // i:
+                    Diagnostic(ErrorCode.WRN_UnreferencedLabel, "i").WithLocation(14, 1),
+                    // (20,17): error CS0229: Ambiguity between 'x2' and 'x2'
+                    //     H.Dummy(x1, x2, x3, x4, x5);
+                    Diagnostic(ErrorCode.ERR_AmbigMember, "x2")
+                        .WithArguments("x2", "x2")
+                        .WithLocation(20, 17),
+                    // (20,21): error CS0229: Ambiguity between 'x3' and 'x3'
+                    //     H.Dummy(x1, x2, x3, x4, x5);
+                    Diagnostic(ErrorCode.ERR_AmbigMember, "x3")
+                        .WithArguments("x3", "x3")
+                        .WithLocation(20, 21),
+                    // (20,25): error CS0229: Ambiguity between 'x4' and 'x4'
+                    //     H.Dummy(x1, x2, x3, x4, x5);
+                    Diagnostic(ErrorCode.ERR_AmbigMember, "x4")
+                        .WithArguments("x4", "x4")
+                        .WithLocation(20, 25)
+                );
 
                 var tree = compilation.SyntaxTrees.Single();
                 var model = compilation.GetSemanticModel(tree);
@@ -3596,43 +4398,59 @@ class H
             }
 
             {
-                var compilation = CreateCompilationWithMscorlib45(source, options: TestOptions.ReleaseExe, parseOptions: TestOptions.Regular9);
+                var compilation = CreateCompilationWithMscorlib45(
+                    source,
+                    options: TestOptions.ReleaseExe,
+                    parseOptions: TestOptions.Regular9
+                );
 
                 compilation.VerifyDiagnostics(
                     // (2,1): warning CS0164: This label has not been referenced
-                    // a: 
+                    // a:
                     Diagnostic(ErrorCode.WRN_UnreferencedLabel, "a").WithLocation(2, 1),
                     // (6,1): warning CS0164: This label has not been referenced
                     // c:
                     Diagnostic(ErrorCode.WRN_UnreferencedLabel, "c").WithLocation(6, 1),
                     // (7,20): error CS0128: A local variable or function named 'x2' is already defined in this scope
                     // bool d = (2 is int x2);
-                    Diagnostic(ErrorCode.ERR_LocalDuplicate, "x2").WithArguments("x2").WithLocation(7, 20),
+                    Diagnostic(ErrorCode.ERR_LocalDuplicate, "x2")
+                        .WithArguments("x2")
+                        .WithLocation(7, 20),
                     // (8,1): warning CS0164: This label has not been referenced
                     // e:
                     Diagnostic(ErrorCode.WRN_UnreferencedLabel, "e").WithLocation(8, 1),
                     // (10,8): error CS0128: A local variable or function named 'x3' is already defined in this scope
                     // object x3;
-                    Diagnostic(ErrorCode.ERR_LocalDuplicate, "x3").WithArguments("x3").WithLocation(10, 8),
+                    Diagnostic(ErrorCode.ERR_LocalDuplicate, "x3")
+                        .WithArguments("x3")
+                        .WithLocation(10, 8),
                     // (10,8): warning CS0168: The variable 'x3' is declared but never used
                     // object x3;
-                    Diagnostic(ErrorCode.WRN_UnreferencedVar, "x3").WithArguments("x3").WithLocation(10, 8),
+                    Diagnostic(ErrorCode.WRN_UnreferencedVar, "x3")
+                        .WithArguments("x3")
+                        .WithLocation(10, 8),
                     // (11,1): warning CS0164: This label has not been referenced
                     // g:
                     Diagnostic(ErrorCode.WRN_UnreferencedLabel, "g").WithLocation(11, 1),
                     // (13,29): error CS0128: A local variable or function named 'x4' is already defined in this scope
                     //                  (42 is int x4));
-                    Diagnostic(ErrorCode.ERR_LocalDuplicate, "x4").WithArguments("x4").WithLocation(13, 29),
+                    Diagnostic(ErrorCode.ERR_LocalDuplicate, "x4")
+                        .WithArguments("x4")
+                        .WithLocation(13, 29),
                     // (14,1): warning CS0164: This label has not been referenced
                     // i:
                     Diagnostic(ErrorCode.WRN_UnreferencedLabel, "i").WithLocation(14, 1),
                     // (15,21): error CS0128: A local variable or function named 'x5' is already defined in this scope
                     // bool x5 = (5 is int x5);
-                    Diagnostic(ErrorCode.ERR_LocalDuplicate, "x5").WithArguments("x5").WithLocation(15, 21),
+                    Diagnostic(ErrorCode.ERR_LocalDuplicate, "x5")
+                        .WithArguments("x5")
+                        .WithLocation(15, 21),
                     // (23,1): error CS0165: Use of unassigned local variable 'x2'
                     // Test();
-                    Diagnostic(ErrorCode.ERR_UseDefViolation, "Test()").WithArguments("x2").WithLocation(23, 1)
-                    );
+                    Diagnostic(ErrorCode.ERR_UseDefViolation, "Test()")
+                        .WithArguments("x2")
+                        .WithLocation(23, 1)
+                );
 
                 var tree = compilation.SyntaxTrees.Single();
                 var model = compilation.GetSemanticModel(tree);
@@ -3670,7 +4488,7 @@ class H
         public void GlobalCode_LabeledStatement_05()
         {
             string source =
-@"
+                @"
 a: 
 bool b = (1 is var x1);
 H.Dummy(x1);
@@ -3700,43 +4518,59 @@ class H
 }
 ";
             {
-                var compilation = CreateCompilationWithMscorlib45(source, options: TestOptions.ReleaseExe.WithScriptClassName("Script"), parseOptions: TestOptions.Script);
+                var compilation = CreateCompilationWithMscorlib45(
+                    source,
+                    options: TestOptions.ReleaseExe.WithScriptClassName("Script"),
+                    parseOptions: TestOptions.Script
+                );
 
                 compilation.VerifyDiagnostics(
-                // (7,20): error CS0102: The type 'Script' already contains a definition for 'x2'
-                // bool d = (2 is var x2);
-                Diagnostic(ErrorCode.ERR_DuplicateNameInClass, "x2").WithArguments("Script", "x2").WithLocation(7, 20),
-                // (10,8): error CS0102: The type 'Script' already contains a definition for 'x3'
-                // object x3;
-                Diagnostic(ErrorCode.ERR_DuplicateNameInClass, "x3").WithArguments("Script", "x3").WithLocation(10, 8),
-                // (13,29): error CS0102: The type 'Script' already contains a definition for 'x4'
-                //                  (42 is var x4));
-                Diagnostic(ErrorCode.ERR_DuplicateNameInClass, "x4").WithArguments("Script", "x4").WithLocation(13, 29),
-                // (2,1): warning CS0164: This label has not been referenced
-                // a: 
-                Diagnostic(ErrorCode.WRN_UnreferencedLabel, "a").WithLocation(2, 1),
-                // (6,1): warning CS0164: This label has not been referenced
-                // c:
-                Diagnostic(ErrorCode.WRN_UnreferencedLabel, "c").WithLocation(6, 1),
-                // (8,1): warning CS0164: This label has not been referenced
-                // e:
-                Diagnostic(ErrorCode.WRN_UnreferencedLabel, "e").WithLocation(8, 1),
-                // (11,1): warning CS0164: This label has not been referenced
-                // g:
-                Diagnostic(ErrorCode.WRN_UnreferencedLabel, "g").WithLocation(11, 1),
-                // (14,1): warning CS0164: This label has not been referenced
-                // i:
-                Diagnostic(ErrorCode.WRN_UnreferencedLabel, "i").WithLocation(14, 1),
-                // (20,17): error CS0229: Ambiguity between 'x2' and 'x2'
-                //     H.Dummy(x1, x2, x3, x4, x5);
-                Diagnostic(ErrorCode.ERR_AmbigMember, "x2").WithArguments("x2", "x2").WithLocation(20, 17),
-                // (20,21): error CS0229: Ambiguity between 'x3' and 'x3'
-                //     H.Dummy(x1, x2, x3, x4, x5);
-                Diagnostic(ErrorCode.ERR_AmbigMember, "x3").WithArguments("x3", "x3").WithLocation(20, 21),
-                // (20,25): error CS0229: Ambiguity between 'x4' and 'x4'
-                //     H.Dummy(x1, x2, x3, x4, x5);
-                Diagnostic(ErrorCode.ERR_AmbigMember, "x4").WithArguments("x4", "x4").WithLocation(20, 25)
-                    );
+                    // (7,20): error CS0102: The type 'Script' already contains a definition for 'x2'
+                    // bool d = (2 is var x2);
+                    Diagnostic(ErrorCode.ERR_DuplicateNameInClass, "x2")
+                        .WithArguments("Script", "x2")
+                        .WithLocation(7, 20),
+                    // (10,8): error CS0102: The type 'Script' already contains a definition for 'x3'
+                    // object x3;
+                    Diagnostic(ErrorCode.ERR_DuplicateNameInClass, "x3")
+                        .WithArguments("Script", "x3")
+                        .WithLocation(10, 8),
+                    // (13,29): error CS0102: The type 'Script' already contains a definition for 'x4'
+                    //                  (42 is var x4));
+                    Diagnostic(ErrorCode.ERR_DuplicateNameInClass, "x4")
+                        .WithArguments("Script", "x4")
+                        .WithLocation(13, 29),
+                    // (2,1): warning CS0164: This label has not been referenced
+                    // a:
+                    Diagnostic(ErrorCode.WRN_UnreferencedLabel, "a").WithLocation(2, 1),
+                    // (6,1): warning CS0164: This label has not been referenced
+                    // c:
+                    Diagnostic(ErrorCode.WRN_UnreferencedLabel, "c").WithLocation(6, 1),
+                    // (8,1): warning CS0164: This label has not been referenced
+                    // e:
+                    Diagnostic(ErrorCode.WRN_UnreferencedLabel, "e").WithLocation(8, 1),
+                    // (11,1): warning CS0164: This label has not been referenced
+                    // g:
+                    Diagnostic(ErrorCode.WRN_UnreferencedLabel, "g").WithLocation(11, 1),
+                    // (14,1): warning CS0164: This label has not been referenced
+                    // i:
+                    Diagnostic(ErrorCode.WRN_UnreferencedLabel, "i").WithLocation(14, 1),
+                    // (20,17): error CS0229: Ambiguity between 'x2' and 'x2'
+                    //     H.Dummy(x1, x2, x3, x4, x5);
+                    Diagnostic(ErrorCode.ERR_AmbigMember, "x2")
+                        .WithArguments("x2", "x2")
+                        .WithLocation(20, 17),
+                    // (20,21): error CS0229: Ambiguity between 'x3' and 'x3'
+                    //     H.Dummy(x1, x2, x3, x4, x5);
+                    Diagnostic(ErrorCode.ERR_AmbigMember, "x3")
+                        .WithArguments("x3", "x3")
+                        .WithLocation(20, 21),
+                    // (20,25): error CS0229: Ambiguity between 'x4' and 'x4'
+                    //     H.Dummy(x1, x2, x3, x4, x5);
+                    Diagnostic(ErrorCode.ERR_AmbigMember, "x4")
+                        .WithArguments("x4", "x4")
+                        .WithLocation(20, 25)
+                );
 
                 var tree = compilation.SyntaxTrees.Single();
                 var model = compilation.GetSemanticModel(tree);
@@ -3767,43 +4601,59 @@ class H
             }
 
             {
-                var compilation = CreateCompilationWithMscorlib45(source, options: TestOptions.ReleaseExe, parseOptions: TestOptions.Regular9);
+                var compilation = CreateCompilationWithMscorlib45(
+                    source,
+                    options: TestOptions.ReleaseExe,
+                    parseOptions: TestOptions.Regular9
+                );
 
                 compilation.VerifyDiagnostics(
                     // (2,1): warning CS0164: This label has not been referenced
-                    // a: 
+                    // a:
                     Diagnostic(ErrorCode.WRN_UnreferencedLabel, "a").WithLocation(2, 1),
                     // (6,1): warning CS0164: This label has not been referenced
                     // c:
                     Diagnostic(ErrorCode.WRN_UnreferencedLabel, "c").WithLocation(6, 1),
                     // (7,20): error CS0128: A local variable or function named 'x2' is already defined in this scope
                     // bool d = (2 is var x2);
-                    Diagnostic(ErrorCode.ERR_LocalDuplicate, "x2").WithArguments("x2").WithLocation(7, 20),
+                    Diagnostic(ErrorCode.ERR_LocalDuplicate, "x2")
+                        .WithArguments("x2")
+                        .WithLocation(7, 20),
                     // (8,1): warning CS0164: This label has not been referenced
                     // e:
                     Diagnostic(ErrorCode.WRN_UnreferencedLabel, "e").WithLocation(8, 1),
                     // (10,8): error CS0128: A local variable or function named 'x3' is already defined in this scope
                     // object x3;
-                    Diagnostic(ErrorCode.ERR_LocalDuplicate, "x3").WithArguments("x3").WithLocation(10, 8),
+                    Diagnostic(ErrorCode.ERR_LocalDuplicate, "x3")
+                        .WithArguments("x3")
+                        .WithLocation(10, 8),
                     // (10,8): warning CS0168: The variable 'x3' is declared but never used
                     // object x3;
-                    Diagnostic(ErrorCode.WRN_UnreferencedVar, "x3").WithArguments("x3").WithLocation(10, 8),
+                    Diagnostic(ErrorCode.WRN_UnreferencedVar, "x3")
+                        .WithArguments("x3")
+                        .WithLocation(10, 8),
                     // (11,1): warning CS0164: This label has not been referenced
                     // g:
                     Diagnostic(ErrorCode.WRN_UnreferencedLabel, "g").WithLocation(11, 1),
                     // (13,29): error CS0128: A local variable or function named 'x4' is already defined in this scope
                     //                  (42 is var x4));
-                    Diagnostic(ErrorCode.ERR_LocalDuplicate, "x4").WithArguments("x4").WithLocation(13, 29),
+                    Diagnostic(ErrorCode.ERR_LocalDuplicate, "x4")
+                        .WithArguments("x4")
+                        .WithLocation(13, 29),
                     // (14,1): warning CS0164: This label has not been referenced
                     // i:
                     Diagnostic(ErrorCode.WRN_UnreferencedLabel, "i").WithLocation(14, 1),
                     // (15,21): error CS0128: A local variable or function named 'x5' is already defined in this scope
                     // bool x5 = (5 is var x5);
-                    Diagnostic(ErrorCode.ERR_LocalDuplicate, "x5").WithArguments("x5").WithLocation(15, 21),
+                    Diagnostic(ErrorCode.ERR_LocalDuplicate, "x5")
+                        .WithArguments("x5")
+                        .WithLocation(15, 21),
                     // (23,1): error CS0165: Use of unassigned local variable 'x2'
                     // Test();
-                    Diagnostic(ErrorCode.ERR_UseDefViolation, "Test()").WithArguments("x2").WithLocation(23, 1)
-                    );
+                    Diagnostic(ErrorCode.ERR_UseDefViolation, "Test()")
+                        .WithArguments("x2")
+                        .WithLocation(23, 1)
+                );
 
                 var tree = compilation.SyntaxTrees.Single();
                 var model = compilation.GetSemanticModel(tree);
@@ -3837,11 +4687,14 @@ class H
             }
         }
 
-        [ConditionalFact(typeof(IsRelease), Reason = "https://github.com/dotnet/roslyn/issues/25702")]
+        [ConditionalFact(
+            typeof(IsRelease),
+            Reason = "https://github.com/dotnet/roslyn/issues/25702"
+        )]
         public void GlobalCode_LabeledStatement_06()
         {
             string source =
-@"
+                @"
 System.Console.WriteLine(x1);
 a:b:c:
 var d = (1 is var x1);
@@ -3853,20 +4706,27 @@ void Test()
 }
 ";
 
-            var compilation = CreateCompilationWithMscorlib45(source, options: TestOptions.DebugExe.WithScriptClassName("Script"), parseOptions: TestOptions.Script);
+            var compilation = CreateCompilationWithMscorlib45(
+                source,
+                options: TestOptions.DebugExe.WithScriptClassName("Script"),
+                parseOptions: TestOptions.Script
+            );
 
-            CompileAndVerify(compilation, expectedOutput:
-@"0
-1").VerifyDiagnostics(
-                // (3,1): warning CS0164: This label has not been referenced
-                // a:b:c:
-                Diagnostic(ErrorCode.WRN_UnreferencedLabel, "a").WithLocation(3, 1),
-                // (3,3): warning CS0164: This label has not been referenced
-                // a:b:c:
-                Diagnostic(ErrorCode.WRN_UnreferencedLabel, "b").WithLocation(3, 3),
-                // (3,5): warning CS0164: This label has not been referenced
-                // a:b:c:
-                Diagnostic(ErrorCode.WRN_UnreferencedLabel, "c").WithLocation(3, 5)
+            CompileAndVerify(
+                    compilation,
+                    expectedOutput: @"0
+1"
+                )
+                .VerifyDiagnostics(
+                    // (3,1): warning CS0164: This label has not been referenced
+                    // a:b:c:
+                    Diagnostic(ErrorCode.WRN_UnreferencedLabel, "a").WithLocation(3, 1),
+                    // (3,3): warning CS0164: This label has not been referenced
+                    // a:b:c:
+                    Diagnostic(ErrorCode.WRN_UnreferencedLabel, "b").WithLocation(3, 3),
+                    // (3,5): warning CS0164: This label has not been referenced
+                    // a:b:c:
+                    Diagnostic(ErrorCode.WRN_UnreferencedLabel, "c").WithLocation(3, 5)
                 );
 
             var tree = compilation.SyntaxTrees.Single();
@@ -3883,7 +4743,7 @@ void Test()
         public void GlobalCode_LabeledStatement_07()
         {
             string source =
-@"l1:
+                @"l1:
 (bool a, int b) = ((1 is int x1), 1);
 H.Dummy(x1);
 object x2;
@@ -3912,56 +4772,80 @@ class H
 }
 ";
             {
-                var compilation = CreateCompilationWithMscorlib45(source, references: new[] { ValueTupleRef, SystemRuntimeFacadeRef },
-                                                                  options: TestOptions.ReleaseExe.WithScriptClassName("Script"), parseOptions: TestOptions.Script);
+                var compilation = CreateCompilationWithMscorlib45(
+                    source,
+                    references: new[] { ValueTupleRef, SystemRuntimeFacadeRef },
+                    options: TestOptions.ReleaseExe.WithScriptClassName("Script"),
+                    parseOptions: TestOptions.Script
+                );
 
                 compilation.VerifyDiagnostics(
-                // (6,30): error CS0102: The type 'Script' already contains a definition for 'x2'
-                // (bool c, int d) = ((2 is int x2), 2);
-                Diagnostic(ErrorCode.ERR_DuplicateNameInClass, "x2").WithArguments("Script", "x2").WithLocation(6, 30),
-                // (9,8): error CS0102: The type 'Script' already contains a definition for 'x3'
-                // object x3;
-                Diagnostic(ErrorCode.ERR_DuplicateNameInClass, "x3").WithArguments("Script", "x3").WithLocation(9, 8),
-                // (12,32): error CS0102: The type 'Script' already contains a definition for 'x4'
-                //                     (42 is int x4));
-                Diagnostic(ErrorCode.ERR_DuplicateNameInClass, "x4").WithArguments("Script", "x4").WithLocation(12, 32),
-                // (14,33): error CS0102: The type 'Script' already contains a definition for 'x5'
-                // (bool x5, bool x6) = ((5 is int x5),
-                Diagnostic(ErrorCode.ERR_DuplicateNameInClass, "x5").WithArguments("Script", "x5").WithLocation(14, 33),
-                // (15,33): error CS0102: The type 'Script' already contains a definition for 'x6'
-                //                       (6 is int x6));
-                Diagnostic(ErrorCode.ERR_DuplicateNameInClass, "x6").WithArguments("Script", "x6").WithLocation(15, 33),
-                // (1,1): warning CS0164: This label has not been referenced
-                // l1:
-                Diagnostic(ErrorCode.WRN_UnreferencedLabel, "l1").WithLocation(1, 1),
-                // (5,1): warning CS0164: This label has not been referenced
-                // l2:
-                Diagnostic(ErrorCode.WRN_UnreferencedLabel, "l2").WithLocation(5, 1),
-                // (7,1): warning CS0164: This label has not been referenced
-                // l3:
-                Diagnostic(ErrorCode.WRN_UnreferencedLabel, "l3").WithLocation(7, 1),
-                // (10,1): warning CS0164: This label has not been referenced
-                // l4:
-                Diagnostic(ErrorCode.WRN_UnreferencedLabel, "l4").WithLocation(10, 1),
-                // (13,1): warning CS0164: This label has not been referenced
-                // l5:
-                Diagnostic(ErrorCode.WRN_UnreferencedLabel, "l5").WithLocation(13, 1),
-                // (19,17): error CS0229: Ambiguity between 'x2' and 'x2'
-                //     H.Dummy(x1, x2, x3, x4, x5, x6);
-                Diagnostic(ErrorCode.ERR_AmbigMember, "x2").WithArguments("x2", "x2").WithLocation(19, 17),
-                // (19,21): error CS0229: Ambiguity between 'x3' and 'x3'
-                //     H.Dummy(x1, x2, x3, x4, x5, x6);
-                Diagnostic(ErrorCode.ERR_AmbigMember, "x3").WithArguments("x3", "x3").WithLocation(19, 21),
-                // (19,25): error CS0229: Ambiguity between 'x4' and 'x4'
-                //     H.Dummy(x1, x2, x3, x4, x5, x6);
-                Diagnostic(ErrorCode.ERR_AmbigMember, "x4").WithArguments("x4", "x4").WithLocation(19, 25),
-                // (19,29): error CS0229: Ambiguity between 'x5' and 'x5'
-                //     H.Dummy(x1, x2, x3, x4, x5, x6);
-                Diagnostic(ErrorCode.ERR_AmbigMember, "x5").WithArguments("x5", "x5").WithLocation(19, 29),
-                // (19,33): error CS0229: Ambiguity between 'x6' and 'x6'
-                //     H.Dummy(x1, x2, x3, x4, x5, x6);
-                Diagnostic(ErrorCode.ERR_AmbigMember, "x6").WithArguments("x6", "x6").WithLocation(19, 33)
-                    );
+                    // (6,30): error CS0102: The type 'Script' already contains a definition for 'x2'
+                    // (bool c, int d) = ((2 is int x2), 2);
+                    Diagnostic(ErrorCode.ERR_DuplicateNameInClass, "x2")
+                        .WithArguments("Script", "x2")
+                        .WithLocation(6, 30),
+                    // (9,8): error CS0102: The type 'Script' already contains a definition for 'x3'
+                    // object x3;
+                    Diagnostic(ErrorCode.ERR_DuplicateNameInClass, "x3")
+                        .WithArguments("Script", "x3")
+                        .WithLocation(9, 8),
+                    // (12,32): error CS0102: The type 'Script' already contains a definition for 'x4'
+                    //                     (42 is int x4));
+                    Diagnostic(ErrorCode.ERR_DuplicateNameInClass, "x4")
+                        .WithArguments("Script", "x4")
+                        .WithLocation(12, 32),
+                    // (14,33): error CS0102: The type 'Script' already contains a definition for 'x5'
+                    // (bool x5, bool x6) = ((5 is int x5),
+                    Diagnostic(ErrorCode.ERR_DuplicateNameInClass, "x5")
+                        .WithArguments("Script", "x5")
+                        .WithLocation(14, 33),
+                    // (15,33): error CS0102: The type 'Script' already contains a definition for 'x6'
+                    //                       (6 is int x6));
+                    Diagnostic(ErrorCode.ERR_DuplicateNameInClass, "x6")
+                        .WithArguments("Script", "x6")
+                        .WithLocation(15, 33),
+                    // (1,1): warning CS0164: This label has not been referenced
+                    // l1:
+                    Diagnostic(ErrorCode.WRN_UnreferencedLabel, "l1").WithLocation(1, 1),
+                    // (5,1): warning CS0164: This label has not been referenced
+                    // l2:
+                    Diagnostic(ErrorCode.WRN_UnreferencedLabel, "l2").WithLocation(5, 1),
+                    // (7,1): warning CS0164: This label has not been referenced
+                    // l3:
+                    Diagnostic(ErrorCode.WRN_UnreferencedLabel, "l3").WithLocation(7, 1),
+                    // (10,1): warning CS0164: This label has not been referenced
+                    // l4:
+                    Diagnostic(ErrorCode.WRN_UnreferencedLabel, "l4").WithLocation(10, 1),
+                    // (13,1): warning CS0164: This label has not been referenced
+                    // l5:
+                    Diagnostic(ErrorCode.WRN_UnreferencedLabel, "l5").WithLocation(13, 1),
+                    // (19,17): error CS0229: Ambiguity between 'x2' and 'x2'
+                    //     H.Dummy(x1, x2, x3, x4, x5, x6);
+                    Diagnostic(ErrorCode.ERR_AmbigMember, "x2")
+                        .WithArguments("x2", "x2")
+                        .WithLocation(19, 17),
+                    // (19,21): error CS0229: Ambiguity between 'x3' and 'x3'
+                    //     H.Dummy(x1, x2, x3, x4, x5, x6);
+                    Diagnostic(ErrorCode.ERR_AmbigMember, "x3")
+                        .WithArguments("x3", "x3")
+                        .WithLocation(19, 21),
+                    // (19,25): error CS0229: Ambiguity between 'x4' and 'x4'
+                    //     H.Dummy(x1, x2, x3, x4, x5, x6);
+                    Diagnostic(ErrorCode.ERR_AmbigMember, "x4")
+                        .WithArguments("x4", "x4")
+                        .WithLocation(19, 25),
+                    // (19,29): error CS0229: Ambiguity between 'x5' and 'x5'
+                    //     H.Dummy(x1, x2, x3, x4, x5, x6);
+                    Diagnostic(ErrorCode.ERR_AmbigMember, "x5")
+                        .WithArguments("x5", "x5")
+                        .WithLocation(19, 29),
+                    // (19,33): error CS0229: Ambiguity between 'x6' and 'x6'
+                    //     H.Dummy(x1, x2, x3, x4, x5, x6);
+                    Diagnostic(ErrorCode.ERR_AmbigMember, "x6")
+                        .WithArguments("x6", "x6")
+                        .WithLocation(19, 33)
+                );
 
                 var tree = compilation.SyntaxTrees.Single();
                 var model = compilation.GetSemanticModel(tree);
@@ -3997,8 +4881,12 @@ class H
             }
 
             {
-                var compilation = CreateCompilationWithMscorlib45(source, references: new[] { ValueTupleRef, SystemRuntimeFacadeRef },
-                                                                  options: TestOptions.ReleaseExe, parseOptions: TestOptions.Regular9);
+                var compilation = CreateCompilationWithMscorlib45(
+                    source,
+                    references: new[] { ValueTupleRef, SystemRuntimeFacadeRef },
+                    options: TestOptions.ReleaseExe,
+                    parseOptions: TestOptions.Regular9
+                );
 
                 compilation.VerifyDiagnostics(
                     // (1,1): warning CS0164: This label has not been referenced
@@ -4009,35 +4897,49 @@ class H
                     Diagnostic(ErrorCode.WRN_UnreferencedLabel, "l2").WithLocation(5, 1),
                     // (6,30): error CS0128: A local variable or function named 'x2' is already defined in this scope
                     // (bool c, int d) = ((2 is int x2), 2);
-                    Diagnostic(ErrorCode.ERR_LocalDuplicate, "x2").WithArguments("x2").WithLocation(6, 30),
+                    Diagnostic(ErrorCode.ERR_LocalDuplicate, "x2")
+                        .WithArguments("x2")
+                        .WithLocation(6, 30),
                     // (7,1): warning CS0164: This label has not been referenced
                     // l3:
                     Diagnostic(ErrorCode.WRN_UnreferencedLabel, "l3").WithLocation(7, 1),
                     // (9,8): error CS0128: A local variable or function named 'x3' is already defined in this scope
                     // object x3;
-                    Diagnostic(ErrorCode.ERR_LocalDuplicate, "x3").WithArguments("x3").WithLocation(9, 8),
+                    Diagnostic(ErrorCode.ERR_LocalDuplicate, "x3")
+                        .WithArguments("x3")
+                        .WithLocation(9, 8),
                     // (9,8): warning CS0168: The variable 'x3' is declared but never used
                     // object x3;
-                    Diagnostic(ErrorCode.WRN_UnreferencedVar, "x3").WithArguments("x3").WithLocation(9, 8),
+                    Diagnostic(ErrorCode.WRN_UnreferencedVar, "x3")
+                        .WithArguments("x3")
+                        .WithLocation(9, 8),
                     // (10,1): warning CS0164: This label has not been referenced
                     // l4:
                     Diagnostic(ErrorCode.WRN_UnreferencedLabel, "l4").WithLocation(10, 1),
                     // (12,32): error CS0128: A local variable or function named 'x4' is already defined in this scope
                     //                     (42 is int x4));
-                    Diagnostic(ErrorCode.ERR_LocalDuplicate, "x4").WithArguments("x4").WithLocation(12, 32),
+                    Diagnostic(ErrorCode.ERR_LocalDuplicate, "x4")
+                        .WithArguments("x4")
+                        .WithLocation(12, 32),
                     // (13,1): warning CS0164: This label has not been referenced
                     // l5:
                     Diagnostic(ErrorCode.WRN_UnreferencedLabel, "l5").WithLocation(13, 1),
                     // (14,33): error CS0128: A local variable or function named 'x5' is already defined in this scope
                     // (bool x5, bool x6) = ((5 is int x5),
-                    Diagnostic(ErrorCode.ERR_LocalDuplicate, "x5").WithArguments("x5").WithLocation(14, 33),
+                    Diagnostic(ErrorCode.ERR_LocalDuplicate, "x5")
+                        .WithArguments("x5")
+                        .WithLocation(14, 33),
                     // (15,33): error CS0128: A local variable or function named 'x6' is already defined in this scope
                     //                       (6 is int x6));
-                    Diagnostic(ErrorCode.ERR_LocalDuplicate, "x6").WithArguments("x6").WithLocation(15, 33),
+                    Diagnostic(ErrorCode.ERR_LocalDuplicate, "x6")
+                        .WithArguments("x6")
+                        .WithLocation(15, 33),
                     // (22,1): error CS0165: Use of unassigned local variable 'x2'
                     // Test();
-                    Diagnostic(ErrorCode.ERR_UseDefViolation, "Test()").WithArguments("x2").WithLocation(22, 1)
-                    );
+                    Diagnostic(ErrorCode.ERR_UseDefViolation, "Test()")
+                        .WithArguments("x2")
+                        .WithLocation(22, 1)
+                );
 
                 var tree = compilation.SyntaxTrees.Single();
                 var model = compilation.GetSemanticModel(tree);
@@ -4081,7 +4983,7 @@ class H
         public void GlobalCode_LabeledStatement_08()
         {
             string source =
-@"l1:
+                @"l1:
 (bool a, int b) = ((1 is var x1), 1);
 H.Dummy(x1);
 object x2;
@@ -4110,56 +5012,80 @@ class H
 }
 ";
             {
-                var compilation = CreateCompilationWithMscorlib45(source, references: new[] { ValueTupleRef, SystemRuntimeFacadeRef },
-                                                                  options: TestOptions.ReleaseExe.WithScriptClassName("Script"), parseOptions: TestOptions.Script);
+                var compilation = CreateCompilationWithMscorlib45(
+                    source,
+                    references: new[] { ValueTupleRef, SystemRuntimeFacadeRef },
+                    options: TestOptions.ReleaseExe.WithScriptClassName("Script"),
+                    parseOptions: TestOptions.Script
+                );
 
                 compilation.VerifyDiagnostics(
-                // (6,30): error CS0102: The type 'Script' already contains a definition for 'x2'
-                // (bool c, int d) = ((2 is var x2), 2);
-                Diagnostic(ErrorCode.ERR_DuplicateNameInClass, "x2").WithArguments("Script", "x2").WithLocation(6, 30),
-                // (9,8): error CS0102: The type 'Script' already contains a definition for 'x3'
-                // object x3;
-                Diagnostic(ErrorCode.ERR_DuplicateNameInClass, "x3").WithArguments("Script", "x3").WithLocation(9, 8),
-                // (12,32): error CS0102: The type 'Script' already contains a definition for 'x4'
-                //                     (42 is var x4));
-                Diagnostic(ErrorCode.ERR_DuplicateNameInClass, "x4").WithArguments("Script", "x4").WithLocation(12, 32),
-                // (14,33): error CS0102: The type 'Script' already contains a definition for 'x5'
-                // (bool x5, bool x6) = ((5 is var x5),
-                Diagnostic(ErrorCode.ERR_DuplicateNameInClass, "x5").WithArguments("Script", "x5").WithLocation(14, 33),
-                // (15,33): error CS0102: The type 'Script' already contains a definition for 'x6'
-                //                       (6 is var x6));
-                Diagnostic(ErrorCode.ERR_DuplicateNameInClass, "x6").WithArguments("Script", "x6").WithLocation(15, 33),
-                // (1,1): warning CS0164: This label has not been referenced
-                // l1:
-                Diagnostic(ErrorCode.WRN_UnreferencedLabel, "l1").WithLocation(1, 1),
-                // (5,1): warning CS0164: This label has not been referenced
-                // l2:
-                Diagnostic(ErrorCode.WRN_UnreferencedLabel, "l2").WithLocation(5, 1),
-                // (7,1): warning CS0164: This label has not been referenced
-                // l3:
-                Diagnostic(ErrorCode.WRN_UnreferencedLabel, "l3").WithLocation(7, 1),
-                // (10,1): warning CS0164: This label has not been referenced
-                // l4:
-                Diagnostic(ErrorCode.WRN_UnreferencedLabel, "l4").WithLocation(10, 1),
-                // (13,1): warning CS0164: This label has not been referenced
-                // l5:
-                Diagnostic(ErrorCode.WRN_UnreferencedLabel, "l5").WithLocation(13, 1),
-                // (19,17): error CS0229: Ambiguity between 'x2' and 'x2'
-                //     H.Dummy(x1, x2, x3, x4, x5, x6);
-                Diagnostic(ErrorCode.ERR_AmbigMember, "x2").WithArguments("x2", "x2").WithLocation(19, 17),
-                // (19,21): error CS0229: Ambiguity between 'x3' and 'x3'
-                //     H.Dummy(x1, x2, x3, x4, x5, x6);
-                Diagnostic(ErrorCode.ERR_AmbigMember, "x3").WithArguments("x3", "x3").WithLocation(19, 21),
-                // (19,25): error CS0229: Ambiguity between 'x4' and 'x4'
-                //     H.Dummy(x1, x2, x3, x4, x5, x6);
-                Diagnostic(ErrorCode.ERR_AmbigMember, "x4").WithArguments("x4", "x4").WithLocation(19, 25),
-                // (19,29): error CS0229: Ambiguity between 'x5' and 'x5'
-                //     H.Dummy(x1, x2, x3, x4, x5, x6);
-                Diagnostic(ErrorCode.ERR_AmbigMember, "x5").WithArguments("x5", "x5").WithLocation(19, 29),
-                // (19,33): error CS0229: Ambiguity between 'x6' and 'x6'
-                //     H.Dummy(x1, x2, x3, x4, x5, x6);
-                Diagnostic(ErrorCode.ERR_AmbigMember, "x6").WithArguments("x6", "x6").WithLocation(19, 33)
-                    );
+                    // (6,30): error CS0102: The type 'Script' already contains a definition for 'x2'
+                    // (bool c, int d) = ((2 is var x2), 2);
+                    Diagnostic(ErrorCode.ERR_DuplicateNameInClass, "x2")
+                        .WithArguments("Script", "x2")
+                        .WithLocation(6, 30),
+                    // (9,8): error CS0102: The type 'Script' already contains a definition for 'x3'
+                    // object x3;
+                    Diagnostic(ErrorCode.ERR_DuplicateNameInClass, "x3")
+                        .WithArguments("Script", "x3")
+                        .WithLocation(9, 8),
+                    // (12,32): error CS0102: The type 'Script' already contains a definition for 'x4'
+                    //                     (42 is var x4));
+                    Diagnostic(ErrorCode.ERR_DuplicateNameInClass, "x4")
+                        .WithArguments("Script", "x4")
+                        .WithLocation(12, 32),
+                    // (14,33): error CS0102: The type 'Script' already contains a definition for 'x5'
+                    // (bool x5, bool x6) = ((5 is var x5),
+                    Diagnostic(ErrorCode.ERR_DuplicateNameInClass, "x5")
+                        .WithArguments("Script", "x5")
+                        .WithLocation(14, 33),
+                    // (15,33): error CS0102: The type 'Script' already contains a definition for 'x6'
+                    //                       (6 is var x6));
+                    Diagnostic(ErrorCode.ERR_DuplicateNameInClass, "x6")
+                        .WithArguments("Script", "x6")
+                        .WithLocation(15, 33),
+                    // (1,1): warning CS0164: This label has not been referenced
+                    // l1:
+                    Diagnostic(ErrorCode.WRN_UnreferencedLabel, "l1").WithLocation(1, 1),
+                    // (5,1): warning CS0164: This label has not been referenced
+                    // l2:
+                    Diagnostic(ErrorCode.WRN_UnreferencedLabel, "l2").WithLocation(5, 1),
+                    // (7,1): warning CS0164: This label has not been referenced
+                    // l3:
+                    Diagnostic(ErrorCode.WRN_UnreferencedLabel, "l3").WithLocation(7, 1),
+                    // (10,1): warning CS0164: This label has not been referenced
+                    // l4:
+                    Diagnostic(ErrorCode.WRN_UnreferencedLabel, "l4").WithLocation(10, 1),
+                    // (13,1): warning CS0164: This label has not been referenced
+                    // l5:
+                    Diagnostic(ErrorCode.WRN_UnreferencedLabel, "l5").WithLocation(13, 1),
+                    // (19,17): error CS0229: Ambiguity between 'x2' and 'x2'
+                    //     H.Dummy(x1, x2, x3, x4, x5, x6);
+                    Diagnostic(ErrorCode.ERR_AmbigMember, "x2")
+                        .WithArguments("x2", "x2")
+                        .WithLocation(19, 17),
+                    // (19,21): error CS0229: Ambiguity between 'x3' and 'x3'
+                    //     H.Dummy(x1, x2, x3, x4, x5, x6);
+                    Diagnostic(ErrorCode.ERR_AmbigMember, "x3")
+                        .WithArguments("x3", "x3")
+                        .WithLocation(19, 21),
+                    // (19,25): error CS0229: Ambiguity between 'x4' and 'x4'
+                    //     H.Dummy(x1, x2, x3, x4, x5, x6);
+                    Diagnostic(ErrorCode.ERR_AmbigMember, "x4")
+                        .WithArguments("x4", "x4")
+                        .WithLocation(19, 25),
+                    // (19,29): error CS0229: Ambiguity between 'x5' and 'x5'
+                    //     H.Dummy(x1, x2, x3, x4, x5, x6);
+                    Diagnostic(ErrorCode.ERR_AmbigMember, "x5")
+                        .WithArguments("x5", "x5")
+                        .WithLocation(19, 29),
+                    // (19,33): error CS0229: Ambiguity between 'x6' and 'x6'
+                    //     H.Dummy(x1, x2, x3, x4, x5, x6);
+                    Diagnostic(ErrorCode.ERR_AmbigMember, "x6")
+                        .WithArguments("x6", "x6")
+                        .WithLocation(19, 33)
+                );
 
                 var tree = compilation.SyntaxTrees.Single();
                 var model = compilation.GetSemanticModel(tree);
@@ -4195,8 +5121,12 @@ class H
             }
 
             {
-                var compilation = CreateCompilationWithMscorlib45(source, references: new[] { ValueTupleRef, SystemRuntimeFacadeRef },
-                                                                  options: TestOptions.ReleaseExe, parseOptions: TestOptions.Regular9);
+                var compilation = CreateCompilationWithMscorlib45(
+                    source,
+                    references: new[] { ValueTupleRef, SystemRuntimeFacadeRef },
+                    options: TestOptions.ReleaseExe,
+                    parseOptions: TestOptions.Regular9
+                );
 
                 compilation.VerifyDiagnostics(
                     // (1,1): warning CS0164: This label has not been referenced
@@ -4207,35 +5137,49 @@ class H
                     Diagnostic(ErrorCode.WRN_UnreferencedLabel, "l2").WithLocation(5, 1),
                     // (6,30): error CS0128: A local variable or function named 'x2' is already defined in this scope
                     // (bool c, int d) = ((2 is var x2), 2);
-                    Diagnostic(ErrorCode.ERR_LocalDuplicate, "x2").WithArguments("x2").WithLocation(6, 30),
+                    Diagnostic(ErrorCode.ERR_LocalDuplicate, "x2")
+                        .WithArguments("x2")
+                        .WithLocation(6, 30),
                     // (7,1): warning CS0164: This label has not been referenced
                     // l3:
                     Diagnostic(ErrorCode.WRN_UnreferencedLabel, "l3").WithLocation(7, 1),
                     // (9,8): error CS0128: A local variable or function named 'x3' is already defined in this scope
                     // object x3;
-                    Diagnostic(ErrorCode.ERR_LocalDuplicate, "x3").WithArguments("x3").WithLocation(9, 8),
+                    Diagnostic(ErrorCode.ERR_LocalDuplicate, "x3")
+                        .WithArguments("x3")
+                        .WithLocation(9, 8),
                     // (9,8): warning CS0168: The variable 'x3' is declared but never used
                     // object x3;
-                    Diagnostic(ErrorCode.WRN_UnreferencedVar, "x3").WithArguments("x3").WithLocation(9, 8),
+                    Diagnostic(ErrorCode.WRN_UnreferencedVar, "x3")
+                        .WithArguments("x3")
+                        .WithLocation(9, 8),
                     // (10,1): warning CS0164: This label has not been referenced
                     // l4:
                     Diagnostic(ErrorCode.WRN_UnreferencedLabel, "l4").WithLocation(10, 1),
                     // (12,32): error CS0128: A local variable or function named 'x4' is already defined in this scope
                     //                     (42 is var x4));
-                    Diagnostic(ErrorCode.ERR_LocalDuplicate, "x4").WithArguments("x4").WithLocation(12, 32),
+                    Diagnostic(ErrorCode.ERR_LocalDuplicate, "x4")
+                        .WithArguments("x4")
+                        .WithLocation(12, 32),
                     // (13,1): warning CS0164: This label has not been referenced
                     // l5:
                     Diagnostic(ErrorCode.WRN_UnreferencedLabel, "l5").WithLocation(13, 1),
                     // (14,33): error CS0128: A local variable or function named 'x5' is already defined in this scope
                     // (bool x5, bool x6) = ((5 is var x5),
-                    Diagnostic(ErrorCode.ERR_LocalDuplicate, "x5").WithArguments("x5").WithLocation(14, 33),
+                    Diagnostic(ErrorCode.ERR_LocalDuplicate, "x5")
+                        .WithArguments("x5")
+                        .WithLocation(14, 33),
                     // (15,33): error CS0128: A local variable or function named 'x6' is already defined in this scope
                     //                       (6 is var x6));
-                    Diagnostic(ErrorCode.ERR_LocalDuplicate, "x6").WithArguments("x6").WithLocation(15, 33),
+                    Diagnostic(ErrorCode.ERR_LocalDuplicate, "x6")
+                        .WithArguments("x6")
+                        .WithLocation(15, 33),
                     // (22,1): error CS0165: Use of unassigned local variable 'x2'
                     // Test();
-                    Diagnostic(ErrorCode.ERR_UseDefViolation, "Test()").WithArguments("x2").WithLocation(22, 1)
-                    );
+                    Diagnostic(ErrorCode.ERR_UseDefViolation, "Test()")
+                        .WithArguments("x2")
+                        .WithLocation(22, 1)
+                );
 
                 var tree = compilation.SyntaxTrees.Single();
                 var model = compilation.GetSemanticModel(tree);
@@ -4279,7 +5223,7 @@ class H
         public void GlobalCode_LabeledStatement_09()
         {
             string source =
-@"
+                @"
 System.Console.WriteLine(x1);
 a:b:c:
 var (d, e) = ((1 is var x1), 1);
@@ -4291,21 +5235,28 @@ void Test()
 }
 ";
 
-            var compilation = CreateCompilationWithMscorlib45(source, references: new[] { ValueTupleRef, SystemRuntimeFacadeRef },
-                                                              options: TestOptions.DebugExe.WithScriptClassName("Script"), parseOptions: TestOptions.Script);
+            var compilation = CreateCompilationWithMscorlib45(
+                source,
+                references: new[] { ValueTupleRef, SystemRuntimeFacadeRef },
+                options: TestOptions.DebugExe.WithScriptClassName("Script"),
+                parseOptions: TestOptions.Script
+            );
 
-            CompileAndVerify(compilation, expectedOutput:
-@"0
-1").VerifyDiagnostics(
-                // (3,1): warning CS0164: This label has not been referenced
-                // a:b:c:
-                Diagnostic(ErrorCode.WRN_UnreferencedLabel, "a").WithLocation(3, 1),
-                // (3,3): warning CS0164: This label has not been referenced
-                // a:b:c:
-                Diagnostic(ErrorCode.WRN_UnreferencedLabel, "b").WithLocation(3, 3),
-                // (3,5): warning CS0164: This label has not been referenced
-                // a:b:c:
-                Diagnostic(ErrorCode.WRN_UnreferencedLabel, "c").WithLocation(3, 5)
+            CompileAndVerify(
+                    compilation,
+                    expectedOutput: @"0
+1"
+                )
+                .VerifyDiagnostics(
+                    // (3,1): warning CS0164: This label has not been referenced
+                    // a:b:c:
+                    Diagnostic(ErrorCode.WRN_UnreferencedLabel, "a").WithLocation(3, 1),
+                    // (3,3): warning CS0164: This label has not been referenced
+                    // a:b:c:
+                    Diagnostic(ErrorCode.WRN_UnreferencedLabel, "b").WithLocation(3, 3),
+                    // (3,5): warning CS0164: This label has not been referenced
+                    // a:b:c:
+                    Diagnostic(ErrorCode.WRN_UnreferencedLabel, "c").WithLocation(3, 5)
                 );
 
             var tree = compilation.SyntaxTrees.Single();
@@ -4321,7 +5272,7 @@ void Test()
         public void GlobalCode_FieldDeclaration_01()
         {
             string source =
-@"
+                @"
  
 bool b = (1 is int x1);
 H.Dummy(x1);
@@ -4354,40 +5305,64 @@ class H
 }
 ";
             {
-                var compilation = CreateCompilationWithMscorlib45(source, options: TestOptions.ReleaseExe.WithScriptClassName("Script"), parseOptions: TestOptions.Script);
+                var compilation = CreateCompilationWithMscorlib45(
+                    source,
+                    options: TestOptions.ReleaseExe.WithScriptClassName("Script"),
+                    parseOptions: TestOptions.Script
+                );
 
                 compilation.VerifyDiagnostics(
-                // (7,20): error CS0102: The type 'Script' already contains a definition for 'x2'
-                // bool d = (2 is int x2);
-                Diagnostic(ErrorCode.ERR_DuplicateNameInClass, "x2").WithArguments("Script", "x2").WithLocation(7, 20),
-                // (10,8): error CS0102: The type 'Script' already contains a definition for 'x3'
-                // object x3;
-                Diagnostic(ErrorCode.ERR_DuplicateNameInClass, "x3").WithArguments("Script", "x3").WithLocation(10, 8),
-                // (13,29): error CS0102: The type 'Script' already contains a definition for 'x4'
-                //                  (42 is int x4));
-                Diagnostic(ErrorCode.ERR_DuplicateNameInClass, "x4").WithArguments("Script", "x4").WithLocation(13, 29),
-                // (16,21): error CS0102: The type 'Script' already contains a definition for 'x5'
-                //           (5 is int x5);
-                Diagnostic(ErrorCode.ERR_DuplicateNameInClass, "x5").WithArguments("Script", "x5").WithLocation(16, 21),
-                // (19,10): error CS0102: The type 'Script' already contains a definition for 'x6'
-                //          x6;
-                Diagnostic(ErrorCode.ERR_DuplicateNameInClass, "x6").WithArguments("Script", "x6").WithLocation(19, 10),
-                // (23,17): error CS0229: Ambiguity between 'x2' and 'x2'
-                //     H.Dummy(x1, x2, x3, x4, x5, x6);
-                Diagnostic(ErrorCode.ERR_AmbigMember, "x2").WithArguments("x2", "x2").WithLocation(23, 17),
-                // (23,21): error CS0229: Ambiguity between 'x3' and 'x3'
-                //     H.Dummy(x1, x2, x3, x4, x5, x6);
-                Diagnostic(ErrorCode.ERR_AmbigMember, "x3").WithArguments("x3", "x3").WithLocation(23, 21),
-                // (23,25): error CS0229: Ambiguity between 'x4' and 'x4'
-                //     H.Dummy(x1, x2, x3, x4, x5, x6);
-                Diagnostic(ErrorCode.ERR_AmbigMember, "x4").WithArguments("x4", "x4").WithLocation(23, 25),
-                // (23,29): error CS0229: Ambiguity between 'x5' and 'x5'
-                //     H.Dummy(x1, x2, x3, x4, x5, x6);
-                Diagnostic(ErrorCode.ERR_AmbigMember, "x5").WithArguments("x5", "x5").WithLocation(23, 29),
-                // (23,33): error CS0229: Ambiguity between 'x6' and 'x6'
-                //     H.Dummy(x1, x2, x3, x4, x5, x6);
-                Diagnostic(ErrorCode.ERR_AmbigMember, "x6").WithArguments("x6", "x6").WithLocation(23, 33)
-                    );
+                    // (7,20): error CS0102: The type 'Script' already contains a definition for 'x2'
+                    // bool d = (2 is int x2);
+                    Diagnostic(ErrorCode.ERR_DuplicateNameInClass, "x2")
+                        .WithArguments("Script", "x2")
+                        .WithLocation(7, 20),
+                    // (10,8): error CS0102: The type 'Script' already contains a definition for 'x3'
+                    // object x3;
+                    Diagnostic(ErrorCode.ERR_DuplicateNameInClass, "x3")
+                        .WithArguments("Script", "x3")
+                        .WithLocation(10, 8),
+                    // (13,29): error CS0102: The type 'Script' already contains a definition for 'x4'
+                    //                  (42 is int x4));
+                    Diagnostic(ErrorCode.ERR_DuplicateNameInClass, "x4")
+                        .WithArguments("Script", "x4")
+                        .WithLocation(13, 29),
+                    // (16,21): error CS0102: The type 'Script' already contains a definition for 'x5'
+                    //           (5 is int x5);
+                    Diagnostic(ErrorCode.ERR_DuplicateNameInClass, "x5")
+                        .WithArguments("Script", "x5")
+                        .WithLocation(16, 21),
+                    // (19,10): error CS0102: The type 'Script' already contains a definition for 'x6'
+                    //          x6;
+                    Diagnostic(ErrorCode.ERR_DuplicateNameInClass, "x6")
+                        .WithArguments("Script", "x6")
+                        .WithLocation(19, 10),
+                    // (23,17): error CS0229: Ambiguity between 'x2' and 'x2'
+                    //     H.Dummy(x1, x2, x3, x4, x5, x6);
+                    Diagnostic(ErrorCode.ERR_AmbigMember, "x2")
+                        .WithArguments("x2", "x2")
+                        .WithLocation(23, 17),
+                    // (23,21): error CS0229: Ambiguity between 'x3' and 'x3'
+                    //     H.Dummy(x1, x2, x3, x4, x5, x6);
+                    Diagnostic(ErrorCode.ERR_AmbigMember, "x3")
+                        .WithArguments("x3", "x3")
+                        .WithLocation(23, 21),
+                    // (23,25): error CS0229: Ambiguity between 'x4' and 'x4'
+                    //     H.Dummy(x1, x2, x3, x4, x5, x6);
+                    Diagnostic(ErrorCode.ERR_AmbigMember, "x4")
+                        .WithArguments("x4", "x4")
+                        .WithLocation(23, 25),
+                    // (23,29): error CS0229: Ambiguity between 'x5' and 'x5'
+                    //     H.Dummy(x1, x2, x3, x4, x5, x6);
+                    Diagnostic(ErrorCode.ERR_AmbigMember, "x5")
+                        .WithArguments("x5", "x5")
+                        .WithLocation(23, 29),
+                    // (23,33): error CS0229: Ambiguity between 'x6' and 'x6'
+                    //     H.Dummy(x1, x2, x3, x4, x5, x6);
+                    Diagnostic(ErrorCode.ERR_AmbigMember, "x6")
+                        .WithArguments("x6", "x6")
+                        .WithLocation(23, 33)
+                );
 
                 var tree = compilation.SyntaxTrees.Single();
                 var model = compilation.GetSemanticModel(tree);
@@ -4421,34 +5396,54 @@ class H
             }
 
             {
-                var compilation = CreateCompilationWithMscorlib45(source, options: TestOptions.ReleaseExe, parseOptions: TestOptions.Regular9);
+                var compilation = CreateCompilationWithMscorlib45(
+                    source,
+                    options: TestOptions.ReleaseExe,
+                    parseOptions: TestOptions.Regular9
+                );
 
                 compilation.VerifyDiagnostics(
                     // (7,20): error CS0128: A local variable or function named 'x2' is already defined in this scope
                     // bool d = (2 is int x2);
-                    Diagnostic(ErrorCode.ERR_LocalDuplicate, "x2").WithArguments("x2").WithLocation(7, 20),
+                    Diagnostic(ErrorCode.ERR_LocalDuplicate, "x2")
+                        .WithArguments("x2")
+                        .WithLocation(7, 20),
                     // (10,8): error CS0128: A local variable or function named 'x3' is already defined in this scope
                     // object x3;
-                    Diagnostic(ErrorCode.ERR_LocalDuplicate, "x3").WithArguments("x3").WithLocation(10, 8),
+                    Diagnostic(ErrorCode.ERR_LocalDuplicate, "x3")
+                        .WithArguments("x3")
+                        .WithLocation(10, 8),
                     // (10,8): warning CS0168: The variable 'x3' is declared but never used
                     // object x3;
-                    Diagnostic(ErrorCode.WRN_UnreferencedVar, "x3").WithArguments("x3").WithLocation(10, 8),
+                    Diagnostic(ErrorCode.WRN_UnreferencedVar, "x3")
+                        .WithArguments("x3")
+                        .WithLocation(10, 8),
                     // (13,29): error CS0128: A local variable or function named 'x4' is already defined in this scope
                     //                  (42 is int x4));
-                    Diagnostic(ErrorCode.ERR_LocalDuplicate, "x4").WithArguments("x4").WithLocation(13, 29),
+                    Diagnostic(ErrorCode.ERR_LocalDuplicate, "x4")
+                        .WithArguments("x4")
+                        .WithLocation(13, 29),
                     // (16,21): error CS0128: A local variable or function named 'x5' is already defined in this scope
                     //           (5 is int x5);
-                    Diagnostic(ErrorCode.ERR_LocalDuplicate, "x5").WithArguments("x5").WithLocation(16, 21),
+                    Diagnostic(ErrorCode.ERR_LocalDuplicate, "x5")
+                        .WithArguments("x5")
+                        .WithLocation(16, 21),
                     // (19,10): error CS0128: A local variable or function named 'x6' is already defined in this scope
                     //          x6;
-                    Diagnostic(ErrorCode.ERR_LocalDuplicate, "x6").WithArguments("x6").WithLocation(19, 10),
+                    Diagnostic(ErrorCode.ERR_LocalDuplicate, "x6")
+                        .WithArguments("x6")
+                        .WithLocation(19, 10),
                     // (19,10): warning CS0168: The variable 'x6' is declared but never used
                     //          x6;
-                    Diagnostic(ErrorCode.WRN_UnreferencedVar, "x6").WithArguments("x6").WithLocation(19, 10),
+                    Diagnostic(ErrorCode.WRN_UnreferencedVar, "x6")
+                        .WithArguments("x6")
+                        .WithLocation(19, 10),
                     // (26,1): error CS0165: Use of unassigned local variable 'x2'
                     // Test();
-                    Diagnostic(ErrorCode.ERR_UseDefViolation, "Test()").WithArguments("x2").WithLocation(26, 1)
-                    );
+                    Diagnostic(ErrorCode.ERR_UseDefViolation, "Test()")
+                        .WithArguments("x2")
+                        .WithLocation(26, 1)
+                );
 
                 var tree = compilation.SyntaxTrees.Single();
                 var model = compilation.GetSemanticModel(tree);
@@ -4488,7 +5483,7 @@ class H
         public void GlobalCode_FieldDeclaration_02()
         {
             string source =
-@"
+                @"
  
 bool b = (1 is var x1);
 H.Dummy(x1);
@@ -4521,40 +5516,64 @@ class H
 }
 ";
             {
-                var compilation = CreateCompilationWithMscorlib45(source, options: TestOptions.ReleaseExe.WithScriptClassName("Script"), parseOptions: TestOptions.Script);
+                var compilation = CreateCompilationWithMscorlib45(
+                    source,
+                    options: TestOptions.ReleaseExe.WithScriptClassName("Script"),
+                    parseOptions: TestOptions.Script
+                );
 
                 compilation.VerifyDiagnostics(
-                // (7,20): error CS0102: The type 'Script' already contains a definition for 'x2'
-                // bool d = (2 is var x2);
-                Diagnostic(ErrorCode.ERR_DuplicateNameInClass, "x2").WithArguments("Script", "x2").WithLocation(7, 20),
-                // (10,8): error CS0102: The type 'Script' already contains a definition for 'x3'
-                // object x3;
-                Diagnostic(ErrorCode.ERR_DuplicateNameInClass, "x3").WithArguments("Script", "x3").WithLocation(10, 8),
-                // (13,29): error CS0102: The type 'Script' already contains a definition for 'x4'
-                //                  (42 is var x4));
-                Diagnostic(ErrorCode.ERR_DuplicateNameInClass, "x4").WithArguments("Script", "x4").WithLocation(13, 29),
-                // (16,21): error CS0102: The type 'Script' already contains a definition for 'x5'
-                //           (5 is var x5);
-                Diagnostic(ErrorCode.ERR_DuplicateNameInClass, "x5").WithArguments("Script", "x5").WithLocation(16, 21),
-                // (19,10): error CS0102: The type 'Script' already contains a definition for 'x6'
-                //          x6;
-                Diagnostic(ErrorCode.ERR_DuplicateNameInClass, "x6").WithArguments("Script", "x6").WithLocation(19, 10),
-                // (23,17): error CS0229: Ambiguity between 'x2' and 'x2'
-                //     H.Dummy(x1, x2, x3, x4, x5, x6);
-                Diagnostic(ErrorCode.ERR_AmbigMember, "x2").WithArguments("x2", "x2").WithLocation(23, 17),
-                // (23,21): error CS0229: Ambiguity between 'x3' and 'x3'
-                //     H.Dummy(x1, x2, x3, x4, x5, x6);
-                Diagnostic(ErrorCode.ERR_AmbigMember, "x3").WithArguments("x3", "x3").WithLocation(23, 21),
-                // (23,25): error CS0229: Ambiguity between 'x4' and 'x4'
-                //     H.Dummy(x1, x2, x3, x4, x5, x6);
-                Diagnostic(ErrorCode.ERR_AmbigMember, "x4").WithArguments("x4", "x4").WithLocation(23, 25),
-                // (23,29): error CS0229: Ambiguity between 'x5' and 'x5'
-                //     H.Dummy(x1, x2, x3, x4, x5, x6);
-                Diagnostic(ErrorCode.ERR_AmbigMember, "x5").WithArguments("x5", "x5").WithLocation(23, 29),
-                // (23,33): error CS0229: Ambiguity between 'x6' and 'x6'
-                //     H.Dummy(x1, x2, x3, x4, x5, x6);
-                Diagnostic(ErrorCode.ERR_AmbigMember, "x6").WithArguments("x6", "x6").WithLocation(23, 33)
-                    );
+                    // (7,20): error CS0102: The type 'Script' already contains a definition for 'x2'
+                    // bool d = (2 is var x2);
+                    Diagnostic(ErrorCode.ERR_DuplicateNameInClass, "x2")
+                        .WithArguments("Script", "x2")
+                        .WithLocation(7, 20),
+                    // (10,8): error CS0102: The type 'Script' already contains a definition for 'x3'
+                    // object x3;
+                    Diagnostic(ErrorCode.ERR_DuplicateNameInClass, "x3")
+                        .WithArguments("Script", "x3")
+                        .WithLocation(10, 8),
+                    // (13,29): error CS0102: The type 'Script' already contains a definition for 'x4'
+                    //                  (42 is var x4));
+                    Diagnostic(ErrorCode.ERR_DuplicateNameInClass, "x4")
+                        .WithArguments("Script", "x4")
+                        .WithLocation(13, 29),
+                    // (16,21): error CS0102: The type 'Script' already contains a definition for 'x5'
+                    //           (5 is var x5);
+                    Diagnostic(ErrorCode.ERR_DuplicateNameInClass, "x5")
+                        .WithArguments("Script", "x5")
+                        .WithLocation(16, 21),
+                    // (19,10): error CS0102: The type 'Script' already contains a definition for 'x6'
+                    //          x6;
+                    Diagnostic(ErrorCode.ERR_DuplicateNameInClass, "x6")
+                        .WithArguments("Script", "x6")
+                        .WithLocation(19, 10),
+                    // (23,17): error CS0229: Ambiguity between 'x2' and 'x2'
+                    //     H.Dummy(x1, x2, x3, x4, x5, x6);
+                    Diagnostic(ErrorCode.ERR_AmbigMember, "x2")
+                        .WithArguments("x2", "x2")
+                        .WithLocation(23, 17),
+                    // (23,21): error CS0229: Ambiguity between 'x3' and 'x3'
+                    //     H.Dummy(x1, x2, x3, x4, x5, x6);
+                    Diagnostic(ErrorCode.ERR_AmbigMember, "x3")
+                        .WithArguments("x3", "x3")
+                        .WithLocation(23, 21),
+                    // (23,25): error CS0229: Ambiguity between 'x4' and 'x4'
+                    //     H.Dummy(x1, x2, x3, x4, x5, x6);
+                    Diagnostic(ErrorCode.ERR_AmbigMember, "x4")
+                        .WithArguments("x4", "x4")
+                        .WithLocation(23, 25),
+                    // (23,29): error CS0229: Ambiguity between 'x5' and 'x5'
+                    //     H.Dummy(x1, x2, x3, x4, x5, x6);
+                    Diagnostic(ErrorCode.ERR_AmbigMember, "x5")
+                        .WithArguments("x5", "x5")
+                        .WithLocation(23, 29),
+                    // (23,33): error CS0229: Ambiguity between 'x6' and 'x6'
+                    //     H.Dummy(x1, x2, x3, x4, x5, x6);
+                    Diagnostic(ErrorCode.ERR_AmbigMember, "x6")
+                        .WithArguments("x6", "x6")
+                        .WithLocation(23, 33)
+                );
 
                 var tree = compilation.SyntaxTrees.Single();
                 var model = compilation.GetSemanticModel(tree);
@@ -4588,34 +5607,54 @@ class H
             }
 
             {
-                var compilation = CreateCompilationWithMscorlib45(source, options: TestOptions.ReleaseExe, parseOptions: TestOptions.Regular9);
+                var compilation = CreateCompilationWithMscorlib45(
+                    source,
+                    options: TestOptions.ReleaseExe,
+                    parseOptions: TestOptions.Regular9
+                );
 
                 compilation.VerifyDiagnostics(
                     // (7,20): error CS0128: A local variable or function named 'x2' is already defined in this scope
                     // bool d = (2 is var x2);
-                    Diagnostic(ErrorCode.ERR_LocalDuplicate, "x2").WithArguments("x2").WithLocation(7, 20),
+                    Diagnostic(ErrorCode.ERR_LocalDuplicate, "x2")
+                        .WithArguments("x2")
+                        .WithLocation(7, 20),
                     // (10,8): error CS0128: A local variable or function named 'x3' is already defined in this scope
                     // object x3;
-                    Diagnostic(ErrorCode.ERR_LocalDuplicate, "x3").WithArguments("x3").WithLocation(10, 8),
+                    Diagnostic(ErrorCode.ERR_LocalDuplicate, "x3")
+                        .WithArguments("x3")
+                        .WithLocation(10, 8),
                     // (10,8): warning CS0168: The variable 'x3' is declared but never used
                     // object x3;
-                    Diagnostic(ErrorCode.WRN_UnreferencedVar, "x3").WithArguments("x3").WithLocation(10, 8),
+                    Diagnostic(ErrorCode.WRN_UnreferencedVar, "x3")
+                        .WithArguments("x3")
+                        .WithLocation(10, 8),
                     // (13,29): error CS0128: A local variable or function named 'x4' is already defined in this scope
                     //                  (42 is var x4));
-                    Diagnostic(ErrorCode.ERR_LocalDuplicate, "x4").WithArguments("x4").WithLocation(13, 29),
+                    Diagnostic(ErrorCode.ERR_LocalDuplicate, "x4")
+                        .WithArguments("x4")
+                        .WithLocation(13, 29),
                     // (16,21): error CS0128: A local variable or function named 'x5' is already defined in this scope
                     //           (5 is var x5);
-                    Diagnostic(ErrorCode.ERR_LocalDuplicate, "x5").WithArguments("x5").WithLocation(16, 21),
+                    Diagnostic(ErrorCode.ERR_LocalDuplicate, "x5")
+                        .WithArguments("x5")
+                        .WithLocation(16, 21),
                     // (19,10): error CS0128: A local variable or function named 'x6' is already defined in this scope
                     //          x6;
-                    Diagnostic(ErrorCode.ERR_LocalDuplicate, "x6").WithArguments("x6").WithLocation(19, 10),
+                    Diagnostic(ErrorCode.ERR_LocalDuplicate, "x6")
+                        .WithArguments("x6")
+                        .WithLocation(19, 10),
                     // (19,10): warning CS0168: The variable 'x6' is declared but never used
                     //          x6;
-                    Diagnostic(ErrorCode.WRN_UnreferencedVar, "x6").WithArguments("x6").WithLocation(19, 10),
+                    Diagnostic(ErrorCode.WRN_UnreferencedVar, "x6")
+                        .WithArguments("x6")
+                        .WithLocation(19, 10),
                     // (26,1): error CS0165: Use of unassigned local variable 'x2'
                     // Test();
-                    Diagnostic(ErrorCode.ERR_UseDefViolation, "Test()").WithArguments("x2").WithLocation(26, 1)
-                    );
+                    Diagnostic(ErrorCode.ERR_UseDefViolation, "Test()")
+                        .WithArguments("x2")
+                        .WithLocation(26, 1)
+                );
 
                 var tree = compilation.SyntaxTrees.Single();
                 var model = compilation.GetSemanticModel(tree);
@@ -4655,7 +5694,7 @@ class H
         public void GlobalCode_FieldDeclaration_03()
         {
             string source =
-@"
+                @"
 System.Console.WriteLine(x1);
 var d = (1 is var x1);
 Test();
@@ -4666,11 +5705,18 @@ void Test()
 }
 ";
 
-            var compilation = CreateCompilationWithMscorlib45(source, options: TestOptions.ReleaseExe.WithScriptClassName("Script"), parseOptions: TestOptions.Script);
+            var compilation = CreateCompilationWithMscorlib45(
+                source,
+                options: TestOptions.ReleaseExe.WithScriptClassName("Script"),
+                parseOptions: TestOptions.Script
+            );
 
-            CompileAndVerify(compilation, expectedOutput:
-@"0
-1").VerifyDiagnostics();
+            CompileAndVerify(
+                    compilation,
+                    expectedOutput: @"0
+1"
+                )
+                .VerifyDiagnostics();
 
             var tree = compilation.SyntaxTrees.Single();
             var model = compilation.GetSemanticModel(tree);
@@ -4685,7 +5731,7 @@ void Test()
         public void GlobalCode_FieldDeclaration_04()
         {
             string source =
-@"
+                @"
 static var a = InitA();
 System.Console.WriteLine(x1);
 static var b = (1 is var x1);
@@ -4710,13 +5756,20 @@ static object InitB()
 }
 ";
 
-            var compilation = CreateCompilationWithMscorlib45(source, options: TestOptions.ReleaseExe.WithScriptClassName("Script"), parseOptions: TestOptions.Script);
+            var compilation = CreateCompilationWithMscorlib45(
+                source,
+                options: TestOptions.ReleaseExe.WithScriptClassName("Script"),
+                parseOptions: TestOptions.Script
+            );
 
-            CompileAndVerify(compilation, expectedOutput:
-@"InitA 0
+            CompileAndVerify(
+                    compilation,
+                    expectedOutput: @"InitA 0
 InitB 1
 1
-1").VerifyDiagnostics();
+1"
+                )
+                .VerifyDiagnostics();
 
             var tree = compilation.SyntaxTrees.Single();
             var model = compilation.GetSemanticModel(tree);
@@ -4731,7 +5784,7 @@ InitB 1
         public void GlobalCode_FieldDeclaration_05()
         {
             string source =
-@"
+                @"
  
 bool b = (1 is var x1);
 static var d = x1;
@@ -4746,16 +5799,24 @@ class H
     public static bool Dummy(params object[] x) {return true;}
 }
 ";
-            var compilation = CreateCompilationWithMscorlib45(source, options: TestOptions.ReleaseExe.WithScriptClassName("Script"), parseOptions: TestOptions.Script);
+            var compilation = CreateCompilationWithMscorlib45(
+                source,
+                options: TestOptions.ReleaseExe.WithScriptClassName("Script"),
+                parseOptions: TestOptions.Script
+            );
 
             compilation.VerifyDiagnostics(
                 // (4,16): error CS0120: An object reference is required for the non-static field, method, or property 'x1'
                 // static var d = x1;
-                Diagnostic(ErrorCode.ERR_ObjectRequired, "x1").WithArguments("x1").WithLocation(4, 16),
+                Diagnostic(ErrorCode.ERR_ObjectRequired, "x1")
+                    .WithArguments("x1")
+                    .WithLocation(4, 16),
                 // (8,13): error CS0120: An object reference is required for the non-static field, method, or property 'x1'
                 //     H.Dummy(x1);
-                Diagnostic(ErrorCode.ERR_ObjectRequired, "x1").WithArguments("x1").WithLocation(8, 13)
-                );
+                Diagnostic(ErrorCode.ERR_ObjectRequired, "x1")
+                    .WithArguments("x1")
+                    .WithLocation(8, 13)
+            );
 
             var tree = compilation.SyntaxTrees.Single();
             var model = compilation.GetSemanticModel(tree);
@@ -4770,7 +5831,7 @@ class H
         public void GlobalCode_FieldDeclaration_06()
         {
             string source =
-@"
+                @"
  
 bool b = (1 is int x1);
 static var d = x1;
@@ -4785,16 +5846,24 @@ class H
     public static bool Dummy(params object[] x) {return true;}
 }
 ";
-            var compilation = CreateCompilationWithMscorlib45(source, options: TestOptions.ReleaseExe.WithScriptClassName("Script"), parseOptions: TestOptions.Script);
+            var compilation = CreateCompilationWithMscorlib45(
+                source,
+                options: TestOptions.ReleaseExe.WithScriptClassName("Script"),
+                parseOptions: TestOptions.Script
+            );
 
             compilation.VerifyDiagnostics(
                 // (4,16): error CS0120: An object reference is required for the non-static field, method, or property 'x1'
                 // static var d = x1;
-                Diagnostic(ErrorCode.ERR_ObjectRequired, "x1").WithArguments("x1").WithLocation(4, 16),
+                Diagnostic(ErrorCode.ERR_ObjectRequired, "x1")
+                    .WithArguments("x1")
+                    .WithLocation(4, 16),
                 // (8,13): error CS0120: An object reference is required for the non-static field, method, or property 'x1'
                 //     H.Dummy(x1);
-                Diagnostic(ErrorCode.ERR_ObjectRequired, "x1").WithArguments("x1").WithLocation(8, 13)
-                );
+                Diagnostic(ErrorCode.ERR_ObjectRequired, "x1")
+                    .WithArguments("x1")
+                    .WithLocation(8, 13)
+            );
 
             var tree = compilation.SyntaxTrees.Single();
             var model = compilation.GetSemanticModel(tree);
@@ -4809,7 +5878,7 @@ class H
         public void GlobalCode_FieldDeclaration_07()
         {
             string source =
-@"
+                @"
 Test();
 bool a = (1 is var x1), b = Test(), c = (2 is var x2);
 Test();
@@ -4821,12 +5890,19 @@ bool Test()
 }
 ";
 
-            var compilation = CreateCompilationWithMscorlib45(source, options: TestOptions.ReleaseExe.WithScriptClassName("Script"), parseOptions: TestOptions.Script);
+            var compilation = CreateCompilationWithMscorlib45(
+                source,
+                options: TestOptions.ReleaseExe.WithScriptClassName("Script"),
+                parseOptions: TestOptions.Script
+            );
 
-            CompileAndVerify(compilation, expectedOutput:
-@"0 0
+            CompileAndVerify(
+                    compilation,
+                    expectedOutput: @"0 0
 1 0
-1 2").VerifyDiagnostics();
+1 2"
+                )
+                .VerifyDiagnostics();
 
             var tree = compilation.SyntaxTrees.Single();
             var model = compilation.GetSemanticModel(tree);
@@ -4844,7 +5920,7 @@ bool Test()
         public void GlobalCode_PropertyDeclaration_01()
         {
             string source =
-@"
+                @"
  
 bool b { get; } = (1 is int x1);
 H.Dummy(x1);
@@ -4874,34 +5950,54 @@ class H
 }
 ";
             {
-                var compilation = CreateCompilationWithMscorlib45(source, options: TestOptions.ReleaseExe.WithScriptClassName("Script"), parseOptions: TestOptions.Script);
+                var compilation = CreateCompilationWithMscorlib45(
+                    source,
+                    options: TestOptions.ReleaseExe.WithScriptClassName("Script"),
+                    parseOptions: TestOptions.Script
+                );
 
                 compilation.VerifyDiagnostics(
-                // (7,29): error CS0102: The type 'Script' already contains a definition for 'x2'
-                // bool d { get; } = (2 is int x2);
-                Diagnostic(ErrorCode.ERR_DuplicateNameInClass, "x2").WithArguments("Script", "x2").WithLocation(7, 29),
-                // (10,8): error CS0102: The type 'Script' already contains a definition for 'x3'
-                // object x3;
-                Diagnostic(ErrorCode.ERR_DuplicateNameInClass, "x3").WithArguments("Script", "x3").WithLocation(10, 8),
-                // (13,38): error CS0102: The type 'Script' already contains a definition for 'x4'
-                //                           (42 is int x4));
-                Diagnostic(ErrorCode.ERR_DuplicateNameInClass, "x4").WithArguments("Script", "x4").WithLocation(13, 38),
-                // (16,21): error CS0102: The type 'Script' already contains a definition for 'x5'
-                //           (5 is int x5);
-                Diagnostic(ErrorCode.ERR_DuplicateNameInClass, "x5").WithArguments("Script", "x5").WithLocation(16, 21),
-                // (20,17): error CS0229: Ambiguity between 'x2' and 'x2'
-                //     H.Dummy(x1, x2, x3, x4, x5);
-                Diagnostic(ErrorCode.ERR_AmbigMember, "x2").WithArguments("x2", "x2").WithLocation(20, 17),
-                // (20,21): error CS0229: Ambiguity between 'x3' and 'x3'
-                //     H.Dummy(x1, x2, x3, x4, x5);
-                Diagnostic(ErrorCode.ERR_AmbigMember, "x3").WithArguments("x3", "x3").WithLocation(20, 21),
-                // (20,25): error CS0229: Ambiguity between 'x4' and 'x4'
-                //     H.Dummy(x1, x2, x3, x4, x5);
-                Diagnostic(ErrorCode.ERR_AmbigMember, "x4").WithArguments("x4", "x4").WithLocation(20, 25),
-                // (20,29): error CS0229: Ambiguity between 'x5' and 'x5'
-                //     H.Dummy(x1, x2, x3, x4, x5);
-                Diagnostic(ErrorCode.ERR_AmbigMember, "x5").WithArguments("x5", "x5").WithLocation(20, 29)
-                    );
+                    // (7,29): error CS0102: The type 'Script' already contains a definition for 'x2'
+                    // bool d { get; } = (2 is int x2);
+                    Diagnostic(ErrorCode.ERR_DuplicateNameInClass, "x2")
+                        .WithArguments("Script", "x2")
+                        .WithLocation(7, 29),
+                    // (10,8): error CS0102: The type 'Script' already contains a definition for 'x3'
+                    // object x3;
+                    Diagnostic(ErrorCode.ERR_DuplicateNameInClass, "x3")
+                        .WithArguments("Script", "x3")
+                        .WithLocation(10, 8),
+                    // (13,38): error CS0102: The type 'Script' already contains a definition for 'x4'
+                    //                           (42 is int x4));
+                    Diagnostic(ErrorCode.ERR_DuplicateNameInClass, "x4")
+                        .WithArguments("Script", "x4")
+                        .WithLocation(13, 38),
+                    // (16,21): error CS0102: The type 'Script' already contains a definition for 'x5'
+                    //           (5 is int x5);
+                    Diagnostic(ErrorCode.ERR_DuplicateNameInClass, "x5")
+                        .WithArguments("Script", "x5")
+                        .WithLocation(16, 21),
+                    // (20,17): error CS0229: Ambiguity between 'x2' and 'x2'
+                    //     H.Dummy(x1, x2, x3, x4, x5);
+                    Diagnostic(ErrorCode.ERR_AmbigMember, "x2")
+                        .WithArguments("x2", "x2")
+                        .WithLocation(20, 17),
+                    // (20,21): error CS0229: Ambiguity between 'x3' and 'x3'
+                    //     H.Dummy(x1, x2, x3, x4, x5);
+                    Diagnostic(ErrorCode.ERR_AmbigMember, "x3")
+                        .WithArguments("x3", "x3")
+                        .WithLocation(20, 21),
+                    // (20,25): error CS0229: Ambiguity between 'x4' and 'x4'
+                    //     H.Dummy(x1, x2, x3, x4, x5);
+                    Diagnostic(ErrorCode.ERR_AmbigMember, "x4")
+                        .WithArguments("x4", "x4")
+                        .WithLocation(20, 25),
+                    // (20,29): error CS0229: Ambiguity between 'x5' and 'x5'
+                    //     H.Dummy(x1, x2, x3, x4, x5);
+                    Diagnostic(ErrorCode.ERR_AmbigMember, "x5")
+                        .WithArguments("x5", "x5")
+                        .WithLocation(20, 29)
+                );
 
                 var tree = compilation.SyntaxTrees.Single();
                 var model = compilation.GetSemanticModel(tree);
@@ -4931,7 +6027,11 @@ class H
             }
 
             {
-                var compilation = CreateCompilationWithMscorlib45(source, options: TestOptions.ReleaseExe, parseOptions: TestOptions.Regular9);
+                var compilation = CreateCompilationWithMscorlib45(
+                    source,
+                    options: TestOptions.ReleaseExe,
+                    parseOptions: TestOptions.Regular9
+                );
 
                 compilation.VerifyDiagnostics(
                     // (3,6): error CS0116: A namespace cannot directly contain members such as fields or methods
@@ -4939,7 +6039,9 @@ class H
                     Diagnostic(ErrorCode.ERR_NamespaceUnexpected, "b").WithLocation(3, 6),
                     // (4,9): error CS0103: The name 'x1' does not exist in the current context
                     // H.Dummy(x1);
-                    Diagnostic(ErrorCode.ERR_NameNotInContext, "x1").WithArguments("x1").WithLocation(4, 9),
+                    Diagnostic(ErrorCode.ERR_NameNotInContext, "x1")
+                        .WithArguments("x1")
+                        .WithLocation(4, 9),
                     // (7,6): error CS0116: A namespace cannot directly contain members such as fields or methods
                     // bool d { get; } = (2 is int x2);
                     Diagnostic(ErrorCode.ERR_NamespaceUnexpected, "d").WithLocation(7, 6),
@@ -4951,26 +6053,38 @@ class H
                     Diagnostic(ErrorCode.ERR_NamespaceUnexpected, "h").WithLocation(12, 6),
                     // (13,38): error CS0128: A local variable or function named 'x4' is already defined in this scope
                     //                           (42 is int x4));
-                    Diagnostic(ErrorCode.ERR_LocalDuplicate, "x4").WithArguments("x4").WithLocation(13, 38),
+                    Diagnostic(ErrorCode.ERR_LocalDuplicate, "x4")
+                        .WithArguments("x4")
+                        .WithLocation(13, 38),
                     // (15,6): error CS0116: A namespace cannot directly contain members such as fields or methods
-                    // bool x5 { get; } = 
+                    // bool x5 { get; } =
                     Diagnostic(ErrorCode.ERR_NamespaceUnexpected, "x5").WithLocation(15, 6),
                     // (20,13): error CS0103: The name 'x1' does not exist in the current context
                     //     H.Dummy(x1, x2, x3, x4, x5);
-                    Diagnostic(ErrorCode.ERR_NameNotInContext, "x1").WithArguments("x1").WithLocation(20, 13),
+                    Diagnostic(ErrorCode.ERR_NameNotInContext, "x1")
+                        .WithArguments("x1")
+                        .WithLocation(20, 13),
                     // (20,25): error CS0103: The name 'x4' does not exist in the current context
                     //     H.Dummy(x1, x2, x3, x4, x5);
-                    Diagnostic(ErrorCode.ERR_NameNotInContext, "x4").WithArguments("x4").WithLocation(20, 25),
+                    Diagnostic(ErrorCode.ERR_NameNotInContext, "x4")
+                        .WithArguments("x4")
+                        .WithLocation(20, 25),
                     // (20,29): error CS0103: The name 'x5' does not exist in the current context
                     //     H.Dummy(x1, x2, x3, x4, x5);
-                    Diagnostic(ErrorCode.ERR_NameNotInContext, "x5").WithArguments("x5").WithLocation(20, 29),
+                    Diagnostic(ErrorCode.ERR_NameNotInContext, "x5")
+                        .WithArguments("x5")
+                        .WithLocation(20, 29),
                     // (23,1): error CS0165: Use of unassigned local variable 'x2'
                     // Test();
-                    Diagnostic(ErrorCode.ERR_UseDefViolation, "Test()").WithArguments("x2").WithLocation(23, 1),
+                    Diagnostic(ErrorCode.ERR_UseDefViolation, "Test()")
+                        .WithArguments("x2")
+                        .WithLocation(23, 1),
                     // (23,1): error CS0165: Use of unassigned local variable 'x3'
                     // Test();
-                    Diagnostic(ErrorCode.ERR_UseDefViolation, "Test()").WithArguments("x3").WithLocation(23, 1)
-                    );
+                    Diagnostic(ErrorCode.ERR_UseDefViolation, "Test()")
+                        .WithArguments("x3")
+                        .WithLocation(23, 1)
+                );
 
                 var tree = compilation.SyntaxTrees.Single();
                 var model = compilation.GetSemanticModel(tree);
@@ -5010,7 +6124,7 @@ class H
         public void GlobalCode_PropertyDeclaration_02()
         {
             string source =
-@"
+                @"
  
 bool b { get; } = (1 is var x1);
 H.Dummy(x1);
@@ -5040,34 +6154,54 @@ class H
 }
 ";
             {
-                var compilation = CreateCompilationWithMscorlib45(source, options: TestOptions.ReleaseExe.WithScriptClassName("Script"), parseOptions: TestOptions.Script);
+                var compilation = CreateCompilationWithMscorlib45(
+                    source,
+                    options: TestOptions.ReleaseExe.WithScriptClassName("Script"),
+                    parseOptions: TestOptions.Script
+                );
 
                 compilation.VerifyDiagnostics(
-                // (7,29): error CS0102: The type 'Script' already contains a definition for 'x2'
-                // bool d { get; } = (2 is var x2);
-                Diagnostic(ErrorCode.ERR_DuplicateNameInClass, "x2").WithArguments("Script", "x2").WithLocation(7, 29),
-                // (10,8): error CS0102: The type 'Script' already contains a definition for 'x3'
-                // object x3;
-                Diagnostic(ErrorCode.ERR_DuplicateNameInClass, "x3").WithArguments("Script", "x3").WithLocation(10, 8),
-                // (13,38): error CS0102: The type 'Script' already contains a definition for 'x4'
-                //                           (42 is var x4));
-                Diagnostic(ErrorCode.ERR_DuplicateNameInClass, "x4").WithArguments("Script", "x4").WithLocation(13, 38),
-                // (16,21): error CS0102: The type 'Script' already contains a definition for 'x5'
-                //           (5 is var x5);
-                Diagnostic(ErrorCode.ERR_DuplicateNameInClass, "x5").WithArguments("Script", "x5").WithLocation(16, 21),
-                // (20,17): error CS0229: Ambiguity between 'x2' and 'x2'
-                //     H.Dummy(x1, x2, x3, x4, x5);
-                Diagnostic(ErrorCode.ERR_AmbigMember, "x2").WithArguments("x2", "x2").WithLocation(20, 17),
-                // (20,21): error CS0229: Ambiguity between 'x3' and 'x3'
-                //     H.Dummy(x1, x2, x3, x4, x5);
-                Diagnostic(ErrorCode.ERR_AmbigMember, "x3").WithArguments("x3", "x3").WithLocation(20, 21),
-                // (20,25): error CS0229: Ambiguity between 'x4' and 'x4'
-                //     H.Dummy(x1, x2, x3, x4, x5);
-                Diagnostic(ErrorCode.ERR_AmbigMember, "x4").WithArguments("x4", "x4").WithLocation(20, 25),
-                // (20,29): error CS0229: Ambiguity between 'x5' and 'x5'
-                //     H.Dummy(x1, x2, x3, x4, x5);
-                Diagnostic(ErrorCode.ERR_AmbigMember, "x5").WithArguments("x5", "x5").WithLocation(20, 29)
-                    );
+                    // (7,29): error CS0102: The type 'Script' already contains a definition for 'x2'
+                    // bool d { get; } = (2 is var x2);
+                    Diagnostic(ErrorCode.ERR_DuplicateNameInClass, "x2")
+                        .WithArguments("Script", "x2")
+                        .WithLocation(7, 29),
+                    // (10,8): error CS0102: The type 'Script' already contains a definition for 'x3'
+                    // object x3;
+                    Diagnostic(ErrorCode.ERR_DuplicateNameInClass, "x3")
+                        .WithArguments("Script", "x3")
+                        .WithLocation(10, 8),
+                    // (13,38): error CS0102: The type 'Script' already contains a definition for 'x4'
+                    //                           (42 is var x4));
+                    Diagnostic(ErrorCode.ERR_DuplicateNameInClass, "x4")
+                        .WithArguments("Script", "x4")
+                        .WithLocation(13, 38),
+                    // (16,21): error CS0102: The type 'Script' already contains a definition for 'x5'
+                    //           (5 is var x5);
+                    Diagnostic(ErrorCode.ERR_DuplicateNameInClass, "x5")
+                        .WithArguments("Script", "x5")
+                        .WithLocation(16, 21),
+                    // (20,17): error CS0229: Ambiguity between 'x2' and 'x2'
+                    //     H.Dummy(x1, x2, x3, x4, x5);
+                    Diagnostic(ErrorCode.ERR_AmbigMember, "x2")
+                        .WithArguments("x2", "x2")
+                        .WithLocation(20, 17),
+                    // (20,21): error CS0229: Ambiguity between 'x3' and 'x3'
+                    //     H.Dummy(x1, x2, x3, x4, x5);
+                    Diagnostic(ErrorCode.ERR_AmbigMember, "x3")
+                        .WithArguments("x3", "x3")
+                        .WithLocation(20, 21),
+                    // (20,25): error CS0229: Ambiguity between 'x4' and 'x4'
+                    //     H.Dummy(x1, x2, x3, x4, x5);
+                    Diagnostic(ErrorCode.ERR_AmbigMember, "x4")
+                        .WithArguments("x4", "x4")
+                        .WithLocation(20, 25),
+                    // (20,29): error CS0229: Ambiguity between 'x5' and 'x5'
+                    //     H.Dummy(x1, x2, x3, x4, x5);
+                    Diagnostic(ErrorCode.ERR_AmbigMember, "x5")
+                        .WithArguments("x5", "x5")
+                        .WithLocation(20, 29)
+                );
 
                 var tree = compilation.SyntaxTrees.Single();
                 var model = compilation.GetSemanticModel(tree);
@@ -5097,7 +6231,11 @@ class H
             }
 
             {
-                var compilation = CreateCompilationWithMscorlib45(source, options: TestOptions.ReleaseExe, parseOptions: TestOptions.Regular9);
+                var compilation = CreateCompilationWithMscorlib45(
+                    source,
+                    options: TestOptions.ReleaseExe,
+                    parseOptions: TestOptions.Regular9
+                );
 
                 compilation.VerifyDiagnostics(
                     // (3,6): error CS0116: A namespace cannot directly contain members such as fields or methods
@@ -5105,7 +6243,9 @@ class H
                     Diagnostic(ErrorCode.ERR_NamespaceUnexpected, "b").WithLocation(3, 6),
                     // (4,9): error CS0103: The name 'x1' does not exist in the current context
                     // H.Dummy(x1);
-                    Diagnostic(ErrorCode.ERR_NameNotInContext, "x1").WithArguments("x1").WithLocation(4, 9),
+                    Diagnostic(ErrorCode.ERR_NameNotInContext, "x1")
+                        .WithArguments("x1")
+                        .WithLocation(4, 9),
                     // (7,6): error CS0116: A namespace cannot directly contain members such as fields or methods
                     // bool d { get; } = (2 is var x2);
                     Diagnostic(ErrorCode.ERR_NamespaceUnexpected, "d").WithLocation(7, 6),
@@ -5117,26 +6257,38 @@ class H
                     Diagnostic(ErrorCode.ERR_NamespaceUnexpected, "h").WithLocation(12, 6),
                     // (13,38): error CS0128: A local variable or function named 'x4' is already defined in this scope
                     //                           (42 is var x4));
-                    Diagnostic(ErrorCode.ERR_LocalDuplicate, "x4").WithArguments("x4").WithLocation(13, 38),
+                    Diagnostic(ErrorCode.ERR_LocalDuplicate, "x4")
+                        .WithArguments("x4")
+                        .WithLocation(13, 38),
                     // (15,6): error CS0116: A namespace cannot directly contain members such as fields or methods
-                    // bool x5 { get; } = 
+                    // bool x5 { get; } =
                     Diagnostic(ErrorCode.ERR_NamespaceUnexpected, "x5").WithLocation(15, 6),
                     // (20,13): error CS0103: The name 'x1' does not exist in the current context
                     //     H.Dummy(x1, x2, x3, x4, x5);
-                    Diagnostic(ErrorCode.ERR_NameNotInContext, "x1").WithArguments("x1").WithLocation(20, 13),
+                    Diagnostic(ErrorCode.ERR_NameNotInContext, "x1")
+                        .WithArguments("x1")
+                        .WithLocation(20, 13),
                     // (20,25): error CS0103: The name 'x4' does not exist in the current context
                     //     H.Dummy(x1, x2, x3, x4, x5);
-                    Diagnostic(ErrorCode.ERR_NameNotInContext, "x4").WithArguments("x4").WithLocation(20, 25),
+                    Diagnostic(ErrorCode.ERR_NameNotInContext, "x4")
+                        .WithArguments("x4")
+                        .WithLocation(20, 25),
                     // (20,29): error CS0103: The name 'x5' does not exist in the current context
                     //     H.Dummy(x1, x2, x3, x4, x5);
-                    Diagnostic(ErrorCode.ERR_NameNotInContext, "x5").WithArguments("x5").WithLocation(20, 29),
+                    Diagnostic(ErrorCode.ERR_NameNotInContext, "x5")
+                        .WithArguments("x5")
+                        .WithLocation(20, 29),
                     // (23,1): error CS0165: Use of unassigned local variable 'x2'
                     // Test();
-                    Diagnostic(ErrorCode.ERR_UseDefViolation, "Test()").WithArguments("x2").WithLocation(23, 1),
+                    Diagnostic(ErrorCode.ERR_UseDefViolation, "Test()")
+                        .WithArguments("x2")
+                        .WithLocation(23, 1),
                     // (23,1): error CS0165: Use of unassigned local variable 'x3'
                     // Test();
-                    Diagnostic(ErrorCode.ERR_UseDefViolation, "Test()").WithArguments("x3").WithLocation(23, 1)
-                    );
+                    Diagnostic(ErrorCode.ERR_UseDefViolation, "Test()")
+                        .WithArguments("x3")
+                        .WithLocation(23, 1)
+                );
 
                 var tree = compilation.SyntaxTrees.Single();
                 var model = compilation.GetSemanticModel(tree);
@@ -5176,7 +6328,7 @@ class H
         public void GlobalCode_PropertyDeclaration_03()
         {
             string source =
-@"
+                @"
 System.Console.WriteLine(x1);
 bool d { get; set; } = (1 is var x1);
 Test();
@@ -5187,11 +6339,18 @@ void Test()
 }
 ";
 
-            var compilation = CreateCompilationWithMscorlib45(source, options: TestOptions.ReleaseExe.WithScriptClassName("Script"), parseOptions: TestOptions.Script);
+            var compilation = CreateCompilationWithMscorlib45(
+                source,
+                options: TestOptions.ReleaseExe.WithScriptClassName("Script"),
+                parseOptions: TestOptions.Script
+            );
 
-            CompileAndVerify(compilation, expectedOutput:
-@"0
-1").VerifyDiagnostics();
+            CompileAndVerify(
+                    compilation,
+                    expectedOutput: @"0
+1"
+                )
+                .VerifyDiagnostics();
 
             var tree = compilation.SyntaxTrees.Single();
             var model = compilation.GetSemanticModel(tree);
@@ -5206,7 +6365,7 @@ void Test()
         public void GlobalCode_PropertyDeclaration_04()
         {
             string source =
-@"
+                @"
 static var a = InitA();
 System.Console.WriteLine(x1);
 static bool b { get; } = (1 is var x1);
@@ -5231,13 +6390,20 @@ static object InitB()
 }
 ";
 
-            var compilation = CreateCompilationWithMscorlib45(source, options: TestOptions.ReleaseExe.WithScriptClassName("Script"), parseOptions: TestOptions.Script);
+            var compilation = CreateCompilationWithMscorlib45(
+                source,
+                options: TestOptions.ReleaseExe.WithScriptClassName("Script"),
+                parseOptions: TestOptions.Script
+            );
 
-            CompileAndVerify(compilation, expectedOutput:
-@"InitA 0
+            CompileAndVerify(
+                    compilation,
+                    expectedOutput: @"InitA 0
 InitB 1
 1
-1").VerifyDiagnostics();
+1"
+                )
+                .VerifyDiagnostics();
 
             var tree = compilation.SyntaxTrees.Single();
             var model = compilation.GetSemanticModel(tree);
@@ -5252,7 +6418,7 @@ InitB 1
         public void GlobalCode_PropertyDeclaration_05()
         {
             string source =
-@"
+                @"
  
 bool b { get; } = (1 is var x1);
 static var d = x1;
@@ -5267,16 +6433,24 @@ class H
     public static bool Dummy(params object[] x) {return true;}
 }
 ";
-            var compilation = CreateCompilationWithMscorlib45(source, options: TestOptions.ReleaseExe.WithScriptClassName("Script"), parseOptions: TestOptions.Script);
+            var compilation = CreateCompilationWithMscorlib45(
+                source,
+                options: TestOptions.ReleaseExe.WithScriptClassName("Script"),
+                parseOptions: TestOptions.Script
+            );
 
             compilation.VerifyDiagnostics(
                 // (4,16): error CS0120: An object reference is required for the non-static field, method, or property 'x1'
                 // static var d = x1;
-                Diagnostic(ErrorCode.ERR_ObjectRequired, "x1").WithArguments("x1").WithLocation(4, 16),
+                Diagnostic(ErrorCode.ERR_ObjectRequired, "x1")
+                    .WithArguments("x1")
+                    .WithLocation(4, 16),
                 // (8,13): error CS0120: An object reference is required for the non-static field, method, or property 'x1'
                 //     H.Dummy(x1);
-                Diagnostic(ErrorCode.ERR_ObjectRequired, "x1").WithArguments("x1").WithLocation(8, 13)
-                );
+                Diagnostic(ErrorCode.ERR_ObjectRequired, "x1")
+                    .WithArguments("x1")
+                    .WithLocation(8, 13)
+            );
 
             var tree = compilation.SyntaxTrees.Single();
             var model = compilation.GetSemanticModel(tree);
@@ -5291,7 +6465,7 @@ class H
         public void GlobalCode_PropertyDeclaration_06()
         {
             string source =
-@"
+                @"
  
 bool b { get; } = (1 is int x1);
 static var d = x1;
@@ -5306,16 +6480,24 @@ class H
     public static bool Dummy(params object[] x) {return true;}
 }
 ";
-            var compilation = CreateCompilationWithMscorlib45(source, options: TestOptions.ReleaseExe.WithScriptClassName("Script"), parseOptions: TestOptions.Script);
+            var compilation = CreateCompilationWithMscorlib45(
+                source,
+                options: TestOptions.ReleaseExe.WithScriptClassName("Script"),
+                parseOptions: TestOptions.Script
+            );
 
             compilation.VerifyDiagnostics(
                 // (4,16): error CS0120: An object reference is required for the non-static field, method, or property 'x1'
                 // static var d = x1;
-                Diagnostic(ErrorCode.ERR_ObjectRequired, "x1").WithArguments("x1").WithLocation(4, 16),
+                Diagnostic(ErrorCode.ERR_ObjectRequired, "x1")
+                    .WithArguments("x1")
+                    .WithLocation(4, 16),
                 // (8,13): error CS0120: An object reference is required for the non-static field, method, or property 'x1'
                 //     H.Dummy(x1);
-                Diagnostic(ErrorCode.ERR_ObjectRequired, "x1").WithArguments("x1").WithLocation(8, 13)
-                );
+                Diagnostic(ErrorCode.ERR_ObjectRequired, "x1")
+                    .WithArguments("x1")
+                    .WithLocation(8, 13)
+            );
 
             var tree = compilation.SyntaxTrees.Single();
             var model = compilation.GetSemanticModel(tree);
@@ -5330,7 +6512,7 @@ class H
         public void GlobalCode_EventDeclaration_01()
         {
             string source =
-@"
+                @"
  
 event System.Action b = H.Dummy(1 is int x1);
 H.Dummy(x1);
@@ -5361,40 +6543,64 @@ class H
 }
 ";
             {
-                var compilation = CreateCompilationWithMscorlib45(source, options: TestOptions.ReleaseExe.WithScriptClassName("Script"), parseOptions: TestOptions.Script);
+                var compilation = CreateCompilationWithMscorlib45(
+                    source,
+                    options: TestOptions.ReleaseExe.WithScriptClassName("Script"),
+                    parseOptions: TestOptions.Script
+                );
 
                 compilation.VerifyDiagnostics(
-                // (7,42): error CS0102: The type 'Script' already contains a definition for 'x2'
-                // event System.Action d = H.Dummy(2 is int x2);
-                Diagnostic(ErrorCode.ERR_DuplicateNameInClass, "x2").WithArguments("Script", "x2").WithLocation(7, 42),
-                // (10,8): error CS0102: The type 'Script' already contains a definition for 'x3'
-                // object x3;
-                Diagnostic(ErrorCode.ERR_DuplicateNameInClass, "x3").WithArguments("Script", "x3").WithLocation(10, 8),
-                // (13,36): error CS0102: The type 'Script' already contains a definition for 'x4'
-                //                         (42 is int x4));
-                Diagnostic(ErrorCode.ERR_DuplicateNameInClass, "x4").WithArguments("Script", "x4").WithLocation(13, 36),
-                // (16,28): error CS0102: The type 'Script' already contains a definition for 'x5'
-                //           H.Dummy(5 is int x5);
-                Diagnostic(ErrorCode.ERR_DuplicateNameInClass, "x5").WithArguments("Script", "x5").WithLocation(16, 28),
-                // (19,10): error CS0102: The type 'Script' already contains a definition for 'x6'
-                //          x6;
-                Diagnostic(ErrorCode.ERR_DuplicateNameInClass, "x6").WithArguments("Script", "x6").WithLocation(19, 10),
-                // (23,17): error CS0229: Ambiguity between 'x2' and 'x2'
-                //     H.Dummy(x1, x2, x3, x4, x5, x6);
-                Diagnostic(ErrorCode.ERR_AmbigMember, "x2").WithArguments("x2", "x2").WithLocation(23, 17),
-                // (23,21): error CS0229: Ambiguity between 'x3' and 'x3'
-                //     H.Dummy(x1, x2, x3, x4, x5, x6);
-                Diagnostic(ErrorCode.ERR_AmbigMember, "x3").WithArguments("x3", "x3").WithLocation(23, 21),
-                // (23,25): error CS0229: Ambiguity between 'x4' and 'x4'
-                //     H.Dummy(x1, x2, x3, x4, x5, x6);
-                Diagnostic(ErrorCode.ERR_AmbigMember, "x4").WithArguments("x4", "x4").WithLocation(23, 25),
-                // (23,29): error CS0229: Ambiguity between 'x5' and 'x5'
-                //     H.Dummy(x1, x2, x3, x4, x5, x6);
-                Diagnostic(ErrorCode.ERR_AmbigMember, "x5").WithArguments("x5", "x5").WithLocation(23, 29),
-                // (23,33): error CS0229: Ambiguity between 'x6' and 'x6'
-                //     H.Dummy(x1, x2, x3, x4, x5, x6);
-                Diagnostic(ErrorCode.ERR_AmbigMember, "x6").WithArguments("x6", "x6").WithLocation(23, 33)
-                    );
+                    // (7,42): error CS0102: The type 'Script' already contains a definition for 'x2'
+                    // event System.Action d = H.Dummy(2 is int x2);
+                    Diagnostic(ErrorCode.ERR_DuplicateNameInClass, "x2")
+                        .WithArguments("Script", "x2")
+                        .WithLocation(7, 42),
+                    // (10,8): error CS0102: The type 'Script' already contains a definition for 'x3'
+                    // object x3;
+                    Diagnostic(ErrorCode.ERR_DuplicateNameInClass, "x3")
+                        .WithArguments("Script", "x3")
+                        .WithLocation(10, 8),
+                    // (13,36): error CS0102: The type 'Script' already contains a definition for 'x4'
+                    //                         (42 is int x4));
+                    Diagnostic(ErrorCode.ERR_DuplicateNameInClass, "x4")
+                        .WithArguments("Script", "x4")
+                        .WithLocation(13, 36),
+                    // (16,28): error CS0102: The type 'Script' already contains a definition for 'x5'
+                    //           H.Dummy(5 is int x5);
+                    Diagnostic(ErrorCode.ERR_DuplicateNameInClass, "x5")
+                        .WithArguments("Script", "x5")
+                        .WithLocation(16, 28),
+                    // (19,10): error CS0102: The type 'Script' already contains a definition for 'x6'
+                    //          x6;
+                    Diagnostic(ErrorCode.ERR_DuplicateNameInClass, "x6")
+                        .WithArguments("Script", "x6")
+                        .WithLocation(19, 10),
+                    // (23,17): error CS0229: Ambiguity between 'x2' and 'x2'
+                    //     H.Dummy(x1, x2, x3, x4, x5, x6);
+                    Diagnostic(ErrorCode.ERR_AmbigMember, "x2")
+                        .WithArguments("x2", "x2")
+                        .WithLocation(23, 17),
+                    // (23,21): error CS0229: Ambiguity between 'x3' and 'x3'
+                    //     H.Dummy(x1, x2, x3, x4, x5, x6);
+                    Diagnostic(ErrorCode.ERR_AmbigMember, "x3")
+                        .WithArguments("x3", "x3")
+                        .WithLocation(23, 21),
+                    // (23,25): error CS0229: Ambiguity between 'x4' and 'x4'
+                    //     H.Dummy(x1, x2, x3, x4, x5, x6);
+                    Diagnostic(ErrorCode.ERR_AmbigMember, "x4")
+                        .WithArguments("x4", "x4")
+                        .WithLocation(23, 25),
+                    // (23,29): error CS0229: Ambiguity between 'x5' and 'x5'
+                    //     H.Dummy(x1, x2, x3, x4, x5, x6);
+                    Diagnostic(ErrorCode.ERR_AmbigMember, "x5")
+                        .WithArguments("x5", "x5")
+                        .WithLocation(23, 29),
+                    // (23,33): error CS0229: Ambiguity between 'x6' and 'x6'
+                    //     H.Dummy(x1, x2, x3, x4, x5, x6);
+                    Diagnostic(ErrorCode.ERR_AmbigMember, "x6")
+                        .WithArguments("x6", "x6")
+                        .WithLocation(23, 33)
+                );
 
                 var tree = compilation.SyntaxTrees.Single();
                 var model = compilation.GetSemanticModel(tree);
@@ -5428,7 +6634,11 @@ class H
             }
 
             {
-                var compilation = CreateCompilationWithMscorlib45(source, options: TestOptions.ReleaseExe, parseOptions: TestOptions.Regular9);
+                var compilation = CreateCompilationWithMscorlib45(
+                    source,
+                    options: TestOptions.ReleaseExe,
+                    parseOptions: TestOptions.Regular9
+                );
 
                 compilation.VerifyDiagnostics(
                     // (3,21): error CS0116: A namespace cannot directly contain members such as fields or methods
@@ -5436,7 +6646,9 @@ class H
                     Diagnostic(ErrorCode.ERR_NamespaceUnexpected, "b").WithLocation(3, 21),
                     // (4,9): error CS0103: The name 'x1' does not exist in the current context
                     // H.Dummy(x1);
-                    Diagnostic(ErrorCode.ERR_NameNotInContext, "x1").WithArguments("x1").WithLocation(4, 9),
+                    Diagnostic(ErrorCode.ERR_NameNotInContext, "x1")
+                        .WithArguments("x1")
+                        .WithLocation(4, 9),
                     // (7,21): error CS0116: A namespace cannot directly contain members such as fields or methods
                     // event System.Action d = H.Dummy(2 is int x2);
                     Diagnostic(ErrorCode.ERR_NamespaceUnexpected, "d").WithLocation(7, 21),
@@ -5448,29 +6660,41 @@ class H
                     Diagnostic(ErrorCode.ERR_NamespaceUnexpected, "h").WithLocation(12, 21),
                     // (13,36): error CS0128: A local variable or function named 'x4' is already defined in this scope
                     //                         (42 is int x4));
-                    Diagnostic(ErrorCode.ERR_LocalDuplicate, "x4").WithArguments("x4").WithLocation(13, 36),
+                    Diagnostic(ErrorCode.ERR_LocalDuplicate, "x4")
+                        .WithArguments("x4")
+                        .WithLocation(13, 36),
                     // (15,21): error CS0116: A namespace cannot directly contain members such as fields or methods
-                    // event System.Action x5 = 
+                    // event System.Action x5 =
                     Diagnostic(ErrorCode.ERR_NamespaceUnexpected, "x5").WithLocation(15, 21),
                     // (18,21): error CS0116: A namespace cannot directly contain members such as fields or methods
                     // event System.Action i = H.Dummy(5 is int x6),
                     Diagnostic(ErrorCode.ERR_NamespaceUnexpected, "i").WithLocation(18, 21),
                     // (21,6): warning CS8321: The local function 'Test' is declared but never used
                     // void Test()
-                    Diagnostic(ErrorCode.WRN_UnreferencedLocalFunction, "Test").WithArguments("Test").WithLocation(21, 6),
+                    Diagnostic(ErrorCode.WRN_UnreferencedLocalFunction, "Test")
+                        .WithArguments("Test")
+                        .WithLocation(21, 6),
                     // (23,13): error CS0103: The name 'x1' does not exist in the current context
                     //     H.Dummy(x1, x2, x3, x4, x5, x6);
-                    Diagnostic(ErrorCode.ERR_NameNotInContext, "x1").WithArguments("x1").WithLocation(23, 13),
+                    Diagnostic(ErrorCode.ERR_NameNotInContext, "x1")
+                        .WithArguments("x1")
+                        .WithLocation(23, 13),
                     // (23,25): error CS0103: The name 'x4' does not exist in the current context
                     //     H.Dummy(x1, x2, x3, x4, x5, x6);
-                    Diagnostic(ErrorCode.ERR_NameNotInContext, "x4").WithArguments("x4").WithLocation(23, 25),
+                    Diagnostic(ErrorCode.ERR_NameNotInContext, "x4")
+                        .WithArguments("x4")
+                        .WithLocation(23, 25),
                     // (23,29): error CS0103: The name 'x5' does not exist in the current context
                     //     H.Dummy(x1, x2, x3, x4, x5, x6);
-                    Diagnostic(ErrorCode.ERR_NameNotInContext, "x5").WithArguments("x5").WithLocation(23, 29),
+                    Diagnostic(ErrorCode.ERR_NameNotInContext, "x5")
+                        .WithArguments("x5")
+                        .WithLocation(23, 29),
                     // (23,33): error CS0103: The name 'x6' does not exist in the current context
                     //     H.Dummy(x1, x2, x3, x4, x5, x6);
-                    Diagnostic(ErrorCode.ERR_NameNotInContext, "x6").WithArguments("x6").WithLocation(23, 33)
-                    );
+                    Diagnostic(ErrorCode.ERR_NameNotInContext, "x6")
+                        .WithArguments("x6")
+                        .WithLocation(23, 33)
+                );
 
                 var tree = compilation.SyntaxTrees.Single();
                 var model = compilation.GetSemanticModel(tree);
@@ -5515,7 +6739,7 @@ class H
         public void GlobalCode_EventDeclaration_02()
         {
             string source =
-@"
+                @"
  
 event System.Action b = H.Dummy(1 is var x1);
 H.Dummy(x1);
@@ -5546,40 +6770,64 @@ class H
 }
 ";
             {
-                var compilation = CreateCompilationWithMscorlib45(source, options: TestOptions.ReleaseExe.WithScriptClassName("Script"), parseOptions: TestOptions.Script);
+                var compilation = CreateCompilationWithMscorlib45(
+                    source,
+                    options: TestOptions.ReleaseExe.WithScriptClassName("Script"),
+                    parseOptions: TestOptions.Script
+                );
 
                 compilation.VerifyDiagnostics(
-                // (7,42): error CS0102: The type 'Script' already contains a definition for 'x2'
-                // event System.Action d = H.Dummy(2 is var x2);
-                Diagnostic(ErrorCode.ERR_DuplicateNameInClass, "x2").WithArguments("Script", "x2").WithLocation(7, 42),
-                // (10,8): error CS0102: The type 'Script' already contains a definition for 'x3'
-                // object x3;
-                Diagnostic(ErrorCode.ERR_DuplicateNameInClass, "x3").WithArguments("Script", "x3").WithLocation(10, 8),
-                // (13,36): error CS0102: The type 'Script' already contains a definition for 'x4'
-                //                         (42 is var x4));
-                Diagnostic(ErrorCode.ERR_DuplicateNameInClass, "x4").WithArguments("Script", "x4").WithLocation(13, 36),
-                // (16,28): error CS0102: The type 'Script' already contains a definition for 'x5'
-                //           H.Dummy(5 is var x5);
-                Diagnostic(ErrorCode.ERR_DuplicateNameInClass, "x5").WithArguments("Script", "x5").WithLocation(16, 28),
-                // (19,10): error CS0102: The type 'Script' already contains a definition for 'x6'
-                //          x6;
-                Diagnostic(ErrorCode.ERR_DuplicateNameInClass, "x6").WithArguments("Script", "x6").WithLocation(19, 10),
-                // (23,17): error CS0229: Ambiguity between 'x2' and 'x2'
-                //     H.Dummy(x1, x2, x3, x4, x5, x6);
-                Diagnostic(ErrorCode.ERR_AmbigMember, "x2").WithArguments("x2", "x2").WithLocation(23, 17),
-                // (23,21): error CS0229: Ambiguity between 'x3' and 'x3'
-                //     H.Dummy(x1, x2, x3, x4, x5, x6);
-                Diagnostic(ErrorCode.ERR_AmbigMember, "x3").WithArguments("x3", "x3").WithLocation(23, 21),
-                // (23,25): error CS0229: Ambiguity between 'x4' and 'x4'
-                //     H.Dummy(x1, x2, x3, x4, x5, x6);
-                Diagnostic(ErrorCode.ERR_AmbigMember, "x4").WithArguments("x4", "x4").WithLocation(23, 25),
-                // (23,29): error CS0229: Ambiguity between 'x5' and 'x5'
-                //     H.Dummy(x1, x2, x3, x4, x5, x6);
-                Diagnostic(ErrorCode.ERR_AmbigMember, "x5").WithArguments("x5", "x5").WithLocation(23, 29),
-                // (23,33): error CS0229: Ambiguity between 'x6' and 'x6'
-                //     H.Dummy(x1, x2, x3, x4, x5, x6);
-                Diagnostic(ErrorCode.ERR_AmbigMember, "x6").WithArguments("x6", "x6").WithLocation(23, 33)
-                    );
+                    // (7,42): error CS0102: The type 'Script' already contains a definition for 'x2'
+                    // event System.Action d = H.Dummy(2 is var x2);
+                    Diagnostic(ErrorCode.ERR_DuplicateNameInClass, "x2")
+                        .WithArguments("Script", "x2")
+                        .WithLocation(7, 42),
+                    // (10,8): error CS0102: The type 'Script' already contains a definition for 'x3'
+                    // object x3;
+                    Diagnostic(ErrorCode.ERR_DuplicateNameInClass, "x3")
+                        .WithArguments("Script", "x3")
+                        .WithLocation(10, 8),
+                    // (13,36): error CS0102: The type 'Script' already contains a definition for 'x4'
+                    //                         (42 is var x4));
+                    Diagnostic(ErrorCode.ERR_DuplicateNameInClass, "x4")
+                        .WithArguments("Script", "x4")
+                        .WithLocation(13, 36),
+                    // (16,28): error CS0102: The type 'Script' already contains a definition for 'x5'
+                    //           H.Dummy(5 is var x5);
+                    Diagnostic(ErrorCode.ERR_DuplicateNameInClass, "x5")
+                        .WithArguments("Script", "x5")
+                        .WithLocation(16, 28),
+                    // (19,10): error CS0102: The type 'Script' already contains a definition for 'x6'
+                    //          x6;
+                    Diagnostic(ErrorCode.ERR_DuplicateNameInClass, "x6")
+                        .WithArguments("Script", "x6")
+                        .WithLocation(19, 10),
+                    // (23,17): error CS0229: Ambiguity between 'x2' and 'x2'
+                    //     H.Dummy(x1, x2, x3, x4, x5, x6);
+                    Diagnostic(ErrorCode.ERR_AmbigMember, "x2")
+                        .WithArguments("x2", "x2")
+                        .WithLocation(23, 17),
+                    // (23,21): error CS0229: Ambiguity between 'x3' and 'x3'
+                    //     H.Dummy(x1, x2, x3, x4, x5, x6);
+                    Diagnostic(ErrorCode.ERR_AmbigMember, "x3")
+                        .WithArguments("x3", "x3")
+                        .WithLocation(23, 21),
+                    // (23,25): error CS0229: Ambiguity between 'x4' and 'x4'
+                    //     H.Dummy(x1, x2, x3, x4, x5, x6);
+                    Diagnostic(ErrorCode.ERR_AmbigMember, "x4")
+                        .WithArguments("x4", "x4")
+                        .WithLocation(23, 25),
+                    // (23,29): error CS0229: Ambiguity between 'x5' and 'x5'
+                    //     H.Dummy(x1, x2, x3, x4, x5, x6);
+                    Diagnostic(ErrorCode.ERR_AmbigMember, "x5")
+                        .WithArguments("x5", "x5")
+                        .WithLocation(23, 29),
+                    // (23,33): error CS0229: Ambiguity between 'x6' and 'x6'
+                    //     H.Dummy(x1, x2, x3, x4, x5, x6);
+                    Diagnostic(ErrorCode.ERR_AmbigMember, "x6")
+                        .WithArguments("x6", "x6")
+                        .WithLocation(23, 33)
+                );
 
                 var tree = compilation.SyntaxTrees.Single();
                 var model = compilation.GetSemanticModel(tree);
@@ -5613,7 +6861,11 @@ class H
             }
 
             {
-                var compilation = CreateCompilationWithMscorlib45(source, options: TestOptions.ReleaseExe, parseOptions: TestOptions.Regular9);
+                var compilation = CreateCompilationWithMscorlib45(
+                    source,
+                    options: TestOptions.ReleaseExe,
+                    parseOptions: TestOptions.Regular9
+                );
 
                 compilation.VerifyDiagnostics(
                     // (3,21): error CS0116: A namespace cannot directly contain members such as fields or methods
@@ -5621,7 +6873,9 @@ class H
                     Diagnostic(ErrorCode.ERR_NamespaceUnexpected, "b").WithLocation(3, 21),
                     // (4,9): error CS0103: The name 'x1' does not exist in the current context
                     // H.Dummy(x1);
-                    Diagnostic(ErrorCode.ERR_NameNotInContext, "x1").WithArguments("x1").WithLocation(4, 9),
+                    Diagnostic(ErrorCode.ERR_NameNotInContext, "x1")
+                        .WithArguments("x1")
+                        .WithLocation(4, 9),
                     // (7,21): error CS0116: A namespace cannot directly contain members such as fields or methods
                     // event System.Action d = H.Dummy(2 is var x2);
                     Diagnostic(ErrorCode.ERR_NamespaceUnexpected, "d").WithLocation(7, 21),
@@ -5633,29 +6887,41 @@ class H
                     Diagnostic(ErrorCode.ERR_NamespaceUnexpected, "h").WithLocation(12, 21),
                     // (13,36): error CS0128: A local variable or function named 'x4' is already defined in this scope
                     //                         (42 is var x4));
-                    Diagnostic(ErrorCode.ERR_LocalDuplicate, "x4").WithArguments("x4").WithLocation(13, 36),
+                    Diagnostic(ErrorCode.ERR_LocalDuplicate, "x4")
+                        .WithArguments("x4")
+                        .WithLocation(13, 36),
                     // (15,21): error CS0116: A namespace cannot directly contain members such as fields or methods
-                    // event System.Action x5 = 
+                    // event System.Action x5 =
                     Diagnostic(ErrorCode.ERR_NamespaceUnexpected, "x5").WithLocation(15, 21),
                     // (18,21): error CS0116: A namespace cannot directly contain members such as fields or methods
                     // event System.Action i = H.Dummy(5 is var x6),
                     Diagnostic(ErrorCode.ERR_NamespaceUnexpected, "i").WithLocation(18, 21),
                     // (21,6): warning CS8321: The local function 'Test' is declared but never used
                     // void Test()
-                    Diagnostic(ErrorCode.WRN_UnreferencedLocalFunction, "Test").WithArguments("Test").WithLocation(21, 6),
+                    Diagnostic(ErrorCode.WRN_UnreferencedLocalFunction, "Test")
+                        .WithArguments("Test")
+                        .WithLocation(21, 6),
                     // (23,13): error CS0103: The name 'x1' does not exist in the current context
                     //     H.Dummy(x1, x2, x3, x4, x5, x6);
-                    Diagnostic(ErrorCode.ERR_NameNotInContext, "x1").WithArguments("x1").WithLocation(23, 13),
+                    Diagnostic(ErrorCode.ERR_NameNotInContext, "x1")
+                        .WithArguments("x1")
+                        .WithLocation(23, 13),
                     // (23,25): error CS0103: The name 'x4' does not exist in the current context
                     //     H.Dummy(x1, x2, x3, x4, x5, x6);
-                    Diagnostic(ErrorCode.ERR_NameNotInContext, "x4").WithArguments("x4").WithLocation(23, 25),
+                    Diagnostic(ErrorCode.ERR_NameNotInContext, "x4")
+                        .WithArguments("x4")
+                        .WithLocation(23, 25),
                     // (23,29): error CS0103: The name 'x5' does not exist in the current context
                     //     H.Dummy(x1, x2, x3, x4, x5, x6);
-                    Diagnostic(ErrorCode.ERR_NameNotInContext, "x5").WithArguments("x5").WithLocation(23, 29),
+                    Diagnostic(ErrorCode.ERR_NameNotInContext, "x5")
+                        .WithArguments("x5")
+                        .WithLocation(23, 29),
                     // (23,33): error CS0103: The name 'x6' does not exist in the current context
                     //     H.Dummy(x1, x2, x3, x4, x5, x6);
-                    Diagnostic(ErrorCode.ERR_NameNotInContext, "x6").WithArguments("x6").WithLocation(23, 33)
-                    );
+                    Diagnostic(ErrorCode.ERR_NameNotInContext, "x6")
+                        .WithArguments("x6")
+                        .WithLocation(23, 33)
+                );
 
                 var tree = compilation.SyntaxTrees.Single();
                 var model = compilation.GetSemanticModel(tree);
@@ -5700,7 +6966,7 @@ class H
         public void GlobalCode_EventDeclaration_03()
         {
             string source =
-@"
+                @"
 System.Console.WriteLine(x1);
 event System.Action d = H.Dummy(1 is var x1);
 Test();
@@ -5716,11 +6982,18 @@ class H
 }
 ";
 
-            var compilation = CreateCompilationWithMscorlib45(source, options: TestOptions.ReleaseExe.WithScriptClassName("Script"), parseOptions: TestOptions.Script);
+            var compilation = CreateCompilationWithMscorlib45(
+                source,
+                options: TestOptions.ReleaseExe.WithScriptClassName("Script"),
+                parseOptions: TestOptions.Script
+            );
 
-            CompileAndVerify(compilation, expectedOutput:
-@"0
-1").VerifyDiagnostics();
+            CompileAndVerify(
+                    compilation,
+                    expectedOutput: @"0
+1"
+                )
+                .VerifyDiagnostics();
 
             var tree = compilation.SyntaxTrees.Single();
             var model = compilation.GetSemanticModel(tree);
@@ -5735,7 +7008,7 @@ class H
         public void GlobalCode_EventDeclaration_04()
         {
             string source =
-@"
+                @"
 static var a = InitA();
 System.Console.WriteLine(x1);
 static event System.Action b = H.Dummy(1 is var x1);
@@ -5765,13 +7038,20 @@ class H
 }
 ";
 
-            var compilation = CreateCompilationWithMscorlib45(source, options: TestOptions.ReleaseExe.WithScriptClassName("Script"), parseOptions: TestOptions.Script);
+            var compilation = CreateCompilationWithMscorlib45(
+                source,
+                options: TestOptions.ReleaseExe.WithScriptClassName("Script"),
+                parseOptions: TestOptions.Script
+            );
 
-            CompileAndVerify(compilation, expectedOutput:
-@"InitA 0
+            CompileAndVerify(
+                    compilation,
+                    expectedOutput: @"InitA 0
 InitB 1
 1
-1").VerifyDiagnostics();
+1"
+                )
+                .VerifyDiagnostics();
 
             var tree = compilation.SyntaxTrees.Single();
             var model = compilation.GetSemanticModel(tree);
@@ -5786,7 +7066,7 @@ InitB 1
         public void GlobalCode_EventDeclaration_05()
         {
             string source =
-@"
+                @"
  
 event System.Action b = H.Dummy(1 is var x1);
 static var d = x1;
@@ -5801,16 +7081,24 @@ class H
     public static System.Action Dummy(params object[] x) {return null;}
 }
 ";
-            var compilation = CreateCompilationWithMscorlib45(source, options: TestOptions.ReleaseExe.WithScriptClassName("Script"), parseOptions: TestOptions.Script);
+            var compilation = CreateCompilationWithMscorlib45(
+                source,
+                options: TestOptions.ReleaseExe.WithScriptClassName("Script"),
+                parseOptions: TestOptions.Script
+            );
 
             compilation.VerifyDiagnostics(
                 // (4,16): error CS0120: An object reference is required for the non-static field, method, or property 'x1'
                 // static var d = x1;
-                Diagnostic(ErrorCode.ERR_ObjectRequired, "x1").WithArguments("x1").WithLocation(4, 16),
+                Diagnostic(ErrorCode.ERR_ObjectRequired, "x1")
+                    .WithArguments("x1")
+                    .WithLocation(4, 16),
                 // (8,13): error CS0120: An object reference is required for the non-static field, method, or property 'x1'
                 //     H.Dummy(x1);
-                Diagnostic(ErrorCode.ERR_ObjectRequired, "x1").WithArguments("x1").WithLocation(8, 13)
-                );
+                Diagnostic(ErrorCode.ERR_ObjectRequired, "x1")
+                    .WithArguments("x1")
+                    .WithLocation(8, 13)
+            );
 
             var tree = compilation.SyntaxTrees.Single();
             var model = compilation.GetSemanticModel(tree);
@@ -5825,7 +7113,7 @@ class H
         public void GlobalCode_EventDeclaration_06()
         {
             string source =
-@"
+                @"
  
 event System.Action b = H.Dummy(1 is int x1);
 static var d = x1;
@@ -5840,16 +7128,24 @@ class H
     public static System.Action Dummy(params object[] x) {return null;}
 }
 ";
-            var compilation = CreateCompilationWithMscorlib45(source, options: TestOptions.ReleaseExe.WithScriptClassName("Script"), parseOptions: TestOptions.Script);
+            var compilation = CreateCompilationWithMscorlib45(
+                source,
+                options: TestOptions.ReleaseExe.WithScriptClassName("Script"),
+                parseOptions: TestOptions.Script
+            );
 
             compilation.VerifyDiagnostics(
                 // (4,16): error CS0120: An object reference is required for the non-static field, method, or property 'x1'
                 // static var d = x1;
-                Diagnostic(ErrorCode.ERR_ObjectRequired, "x1").WithArguments("x1").WithLocation(4, 16),
+                Diagnostic(ErrorCode.ERR_ObjectRequired, "x1")
+                    .WithArguments("x1")
+                    .WithLocation(4, 16),
                 // (8,13): error CS0120: An object reference is required for the non-static field, method, or property 'x1'
                 //     H.Dummy(x1);
-                Diagnostic(ErrorCode.ERR_ObjectRequired, "x1").WithArguments("x1").WithLocation(8, 13)
-                );
+                Diagnostic(ErrorCode.ERR_ObjectRequired, "x1")
+                    .WithArguments("x1")
+                    .WithLocation(8, 13)
+            );
 
             var tree = compilation.SyntaxTrees.Single();
             var model = compilation.GetSemanticModel(tree);
@@ -5864,7 +7160,7 @@ class H
         public void GlobalCode_EventDeclaration_07()
         {
             string source =
-@"
+                @"
 Test();
 event System.Action a = H.Dummy(1 is var x1), b = Test(), c = H.Dummy(2 is var x2);
 Test();
@@ -5881,12 +7177,19 @@ class H
 }
 ";
 
-            var compilation = CreateCompilationWithMscorlib45(source, options: TestOptions.ReleaseExe.WithScriptClassName("Script"), parseOptions: TestOptions.Script);
+            var compilation = CreateCompilationWithMscorlib45(
+                source,
+                options: TestOptions.ReleaseExe.WithScriptClassName("Script"),
+                parseOptions: TestOptions.Script
+            );
 
-            CompileAndVerify(compilation, expectedOutput:
-@"0 0
+            CompileAndVerify(
+                    compilation,
+                    expectedOutput: @"0 0
 1 0
-1 2").VerifyDiagnostics();
+1 2"
+                )
+                .VerifyDiagnostics();
 
             var tree = compilation.SyntaxTrees.Single();
             var model = compilation.GetSemanticModel(tree);
@@ -5904,7 +7207,7 @@ class H
         public void GlobalCode_DeclaratorArguments_01()
         {
             string source =
-@"
+                @"
  
 bool a, b(""5948"" is var x1);
 H.Dummy(x1);
@@ -5920,19 +7223,28 @@ class H
 }
 ";
             {
-                var compilation = CreateCompilationWithMscorlib45(source, options: TestOptions.ReleaseExe.WithScriptClassName("Script"), parseOptions: TestOptions.Script);
+                var compilation = CreateCompilationWithMscorlib45(
+                    source,
+                    options: TestOptions.ReleaseExe.WithScriptClassName("Script"),
+                    parseOptions: TestOptions.Script
+                );
 
                 compilation.VerifyDiagnostics(
-                // (3,10): error CS1528: Expected ; or = (cannot specify constructor arguments in declaration)
-                // bool a, b("5948" is var x1);
-                Diagnostic(ErrorCode.ERR_BadVarDecl, @"(""5948"" is var x1").WithLocation(3, 10),
-                // (3,10): error CS1003: Syntax error, '[' expected
-                // bool a, b("5948" is var x1);
-                Diagnostic(ErrorCode.ERR_SyntaxError, "(").WithArguments("[").WithLocation(3, 10),
-                // (3,27): error CS1003: Syntax error, ']' expected
-                // bool a, b("5948" is var x1);
-                Diagnostic(ErrorCode.ERR_SyntaxError, ")").WithArguments("]").WithLocation(3, 27)
-                    );
+                    // (3,10): error CS1528: Expected ; or = (cannot specify constructor arguments in declaration)
+                    // bool a, b("5948" is var x1);
+                    Diagnostic(ErrorCode.ERR_BadVarDecl, @"(""5948"" is var x1")
+                        .WithLocation(3, 10),
+                    // (3,10): error CS1003: Syntax error, '[' expected
+                    // bool a, b("5948" is var x1);
+                    Diagnostic(ErrorCode.ERR_SyntaxError, "(")
+                        .WithArguments("[")
+                        .WithLocation(3, 10),
+                    // (3,27): error CS1003: Syntax error, ']' expected
+                    // bool a, b("5948" is var x1);
+                    Diagnostic(ErrorCode.ERR_SyntaxError, ")")
+                        .WithArguments("]")
+                        .WithLocation(3, 27)
+                );
 
                 var tree = compilation.SyntaxTrees.Single();
                 var model = compilation.GetSemanticModel(tree);
@@ -5946,31 +7258,48 @@ class H
             }
 
             {
-                var compilation = CreateCompilationWithMscorlib45(source, options: TestOptions.ReleaseExe, parseOptions: TestOptions.Regular9);
+                var compilation = CreateCompilationWithMscorlib45(
+                    source,
+                    options: TestOptions.ReleaseExe,
+                    parseOptions: TestOptions.Regular9
+                );
 
                 compilation.VerifyDiagnostics(
                     // (3,6): warning CS0168: The variable 'a' is declared but never used
                     // bool a, b("5948" is var x1);
-                    Diagnostic(ErrorCode.WRN_UnreferencedVar, "a").WithArguments("a").WithLocation(3, 6),
+                    Diagnostic(ErrorCode.WRN_UnreferencedVar, "a")
+                        .WithArguments("a")
+                        .WithLocation(3, 6),
                     // (3,9): warning CS0168: The variable 'b' is declared but never used
                     // bool a, b("5948" is var x1);
-                    Diagnostic(ErrorCode.WRN_UnreferencedVar, "b").WithArguments("b").WithLocation(3, 9),
+                    Diagnostic(ErrorCode.WRN_UnreferencedVar, "b")
+                        .WithArguments("b")
+                        .WithLocation(3, 9),
                     // (3,10): error CS1528: Expected ; or = (cannot specify constructor arguments in declaration)
                     // bool a, b("5948" is var x1);
-                    Diagnostic(ErrorCode.ERR_BadVarDecl, @"(""5948"" is var x1").WithLocation(3, 10),
+                    Diagnostic(ErrorCode.ERR_BadVarDecl, @"(""5948"" is var x1")
+                        .WithLocation(3, 10),
                     // (3,10): error CS1003: Syntax error, '[' expected
                     // bool a, b("5948" is var x1);
-                    Diagnostic(ErrorCode.ERR_SyntaxError, "(").WithArguments("[").WithLocation(3, 10),
+                    Diagnostic(ErrorCode.ERR_SyntaxError, "(")
+                        .WithArguments("[")
+                        .WithLocation(3, 10),
                     // (3,27): error CS1003: Syntax error, ']' expected
                     // bool a, b("5948" is var x1);
-                    Diagnostic(ErrorCode.ERR_SyntaxError, ")").WithArguments("]").WithLocation(3, 27),
+                    Diagnostic(ErrorCode.ERR_SyntaxError, ")")
+                        .WithArguments("]")
+                        .WithLocation(3, 27),
                     // (4,9): error CS0165: Use of unassigned local variable 'x1'
                     // H.Dummy(x1);
-                    Diagnostic(ErrorCode.ERR_UseDefViolation, "x1").WithArguments("x1").WithLocation(4, 9),
+                    Diagnostic(ErrorCode.ERR_UseDefViolation, "x1")
+                        .WithArguments("x1")
+                        .WithLocation(4, 9),
                     // (6,6): warning CS8321: The local function 'Test' is declared but never used
                     // void Test()
-                    Diagnostic(ErrorCode.WRN_UnreferencedLocalFunction, "Test").WithArguments("Test").WithLocation(6, 6)
-                    );
+                    Diagnostic(ErrorCode.WRN_UnreferencedLocalFunction, "Test")
+                        .WithArguments("Test")
+                        .WithLocation(6, 6)
+                );
 
                 var tree = compilation.SyntaxTrees.Single();
                 var model = compilation.GetSemanticModel(tree);
@@ -5987,7 +7316,7 @@ class H
         public void GlobalCode_DeclaratorArguments_02()
         {
             string source =
-@"
+                @"
 label: 
 bool a, b((1 is var x1));
 H.Dummy(x1);
@@ -6005,22 +7334,30 @@ class H
 }
 ";
             {
-                var compilation = CreateCompilationWithMscorlib45(source, options: TestOptions.ReleaseExe.WithScriptClassName("Script"), parseOptions: TestOptions.Script);
+                var compilation = CreateCompilationWithMscorlib45(
+                    source,
+                    options: TestOptions.ReleaseExe.WithScriptClassName("Script"),
+                    parseOptions: TestOptions.Script
+                );
 
                 compilation.VerifyDiagnostics(
-                // (3,10): error CS1528: Expected ; or = (cannot specify constructor arguments in declaration)
-                // bool a, b((1 is var x1));
-                Diagnostic(ErrorCode.ERR_BadVarDecl, "((1 is var x1)").WithLocation(3, 10),
-                // (3,10): error CS1003: Syntax error, '[' expected
-                // bool a, b((1 is var x1));
-                Diagnostic(ErrorCode.ERR_SyntaxError, "(").WithArguments("[").WithLocation(3, 10),
-                // (3,24): error CS1003: Syntax error, ']' expected
-                // bool a, b((1 is var x1));
-                Diagnostic(ErrorCode.ERR_SyntaxError, ")").WithArguments("]").WithLocation(3, 24),
-                // (2,1): warning CS0164: This label has not been referenced
-                // label: 
-                Diagnostic(ErrorCode.WRN_UnreferencedLabel, "label").WithLocation(2, 1)
-                    );
+                    // (3,10): error CS1528: Expected ; or = (cannot specify constructor arguments in declaration)
+                    // bool a, b((1 is var x1));
+                    Diagnostic(ErrorCode.ERR_BadVarDecl, "((1 is var x1)").WithLocation(3, 10),
+                    // (3,10): error CS1003: Syntax error, '[' expected
+                    // bool a, b((1 is var x1));
+                    Diagnostic(ErrorCode.ERR_SyntaxError, "(")
+                        .WithArguments("[")
+                        .WithLocation(3, 10),
+                    // (3,24): error CS1003: Syntax error, ']' expected
+                    // bool a, b((1 is var x1));
+                    Diagnostic(ErrorCode.ERR_SyntaxError, ")")
+                        .WithArguments("]")
+                        .WithLocation(3, 24),
+                    // (2,1): warning CS0164: This label has not been referenced
+                    // label:
+                    Diagnostic(ErrorCode.WRN_UnreferencedLabel, "label").WithLocation(2, 1)
+                );
 
                 var tree = compilation.SyntaxTrees.Single();
                 var model = compilation.GetSemanticModel(tree);
@@ -6033,31 +7370,45 @@ class H
             }
 
             {
-                var compilation = CreateCompilationWithMscorlib45(source, options: TestOptions.ReleaseExe, parseOptions: TestOptions.Regular9);
+                var compilation = CreateCompilationWithMscorlib45(
+                    source,
+                    options: TestOptions.ReleaseExe,
+                    parseOptions: TestOptions.Regular9
+                );
 
                 compilation.VerifyDiagnostics(
                     // (2,1): warning CS0164: This label has not been referenced
-                    // label: 
+                    // label:
                     Diagnostic(ErrorCode.WRN_UnreferencedLabel, "label").WithLocation(2, 1),
                     // (3,6): warning CS0168: The variable 'a' is declared but never used
                     // bool a, b((1 is var x1));
-                    Diagnostic(ErrorCode.WRN_UnreferencedVar, "a").WithArguments("a").WithLocation(3, 6),
+                    Diagnostic(ErrorCode.WRN_UnreferencedVar, "a")
+                        .WithArguments("a")
+                        .WithLocation(3, 6),
                     // (3,9): warning CS0168: The variable 'b' is declared but never used
                     // bool a, b((1 is var x1));
-                    Diagnostic(ErrorCode.WRN_UnreferencedVar, "b").WithArguments("b").WithLocation(3, 9),
+                    Diagnostic(ErrorCode.WRN_UnreferencedVar, "b")
+                        .WithArguments("b")
+                        .WithLocation(3, 9),
                     // (3,10): error CS1528: Expected ; or = (cannot specify constructor arguments in declaration)
                     // bool a, b((1 is var x1));
                     Diagnostic(ErrorCode.ERR_BadVarDecl, "((1 is var x1)").WithLocation(3, 10),
                     // (3,10): error CS1003: Syntax error, '[' expected
                     // bool a, b((1 is var x1));
-                    Diagnostic(ErrorCode.ERR_SyntaxError, "(").WithArguments("[").WithLocation(3, 10),
+                    Diagnostic(ErrorCode.ERR_SyntaxError, "(")
+                        .WithArguments("[")
+                        .WithLocation(3, 10),
                     // (3,24): error CS1003: Syntax error, ']' expected
                     // bool a, b((1 is var x1));
-                    Diagnostic(ErrorCode.ERR_SyntaxError, ")").WithArguments("]").WithLocation(3, 24),
+                    Diagnostic(ErrorCode.ERR_SyntaxError, ")")
+                        .WithArguments("]")
+                        .WithLocation(3, 24),
                     // (4,9): error CS0165: Use of unassigned local variable 'x1'
                     // H.Dummy(x1);
-                    Diagnostic(ErrorCode.ERR_UseDefViolation, "x1").WithArguments("x1").WithLocation(4, 9)
-                    );
+                    Diagnostic(ErrorCode.ERR_UseDefViolation, "x1")
+                        .WithArguments("x1")
+                        .WithLocation(4, 9)
+                );
 
                 var tree = compilation.SyntaxTrees.Single();
                 var model = compilation.GetSemanticModel(tree);
@@ -6074,7 +7425,7 @@ class H
         public void GlobalCode_DeclaratorArguments_03()
         {
             string source =
-@"
+                @"
  
 event System.Action a, b(H.Dummy(1 is var x1));
 H.Dummy(x1);
@@ -6092,19 +7443,28 @@ class H
 }
 ";
             {
-                var compilation = CreateCompilationWithMscorlib45(source, options: TestOptions.ReleaseExe.WithScriptClassName("Script"), parseOptions: TestOptions.Script);
+                var compilation = CreateCompilationWithMscorlib45(
+                    source,
+                    options: TestOptions.ReleaseExe.WithScriptClassName("Script"),
+                    parseOptions: TestOptions.Script
+                );
 
                 compilation.VerifyDiagnostics(
-                // (3,25): error CS1528: Expected ; or = (cannot specify constructor arguments in declaration)
-                // event System.Action a, b(H.Dummy(1 is var x1));
-                Diagnostic(ErrorCode.ERR_BadVarDecl, "(H.Dummy(1 is var x1)").WithLocation(3, 25),
-                // (3,25): error CS1003: Syntax error, '[' expected
-                // event System.Action a, b(H.Dummy(1 is var x1));
-                Diagnostic(ErrorCode.ERR_SyntaxError, "(").WithArguments("[").WithLocation(3, 25),
-                // (3,46): error CS1003: Syntax error, ']' expected
-                // event System.Action a, b(H.Dummy(1 is var x1));
-                Diagnostic(ErrorCode.ERR_SyntaxError, ")").WithArguments("]").WithLocation(3, 46)
-                    );
+                    // (3,25): error CS1528: Expected ; or = (cannot specify constructor arguments in declaration)
+                    // event System.Action a, b(H.Dummy(1 is var x1));
+                    Diagnostic(ErrorCode.ERR_BadVarDecl, "(H.Dummy(1 is var x1)")
+                        .WithLocation(3, 25),
+                    // (3,25): error CS1003: Syntax error, '[' expected
+                    // event System.Action a, b(H.Dummy(1 is var x1));
+                    Diagnostic(ErrorCode.ERR_SyntaxError, "(")
+                        .WithArguments("[")
+                        .WithLocation(3, 25),
+                    // (3,46): error CS1003: Syntax error, ']' expected
+                    // event System.Action a, b(H.Dummy(1 is var x1));
+                    Diagnostic(ErrorCode.ERR_SyntaxError, ")")
+                        .WithArguments("]")
+                        .WithLocation(3, 46)
+                );
 
                 var tree = compilation.SyntaxTrees.Single();
                 var model = compilation.GetSemanticModel(tree);
@@ -6118,25 +7478,38 @@ class H
             }
 
             {
-                var compilation = CreateCompilationWithMscorlib45(source, options: TestOptions.ReleaseExe, parseOptions: TestOptions.Regular9);
+                var compilation = CreateCompilationWithMscorlib45(
+                    source,
+                    options: TestOptions.ReleaseExe,
+                    parseOptions: TestOptions.Regular9
+                );
 
                 compilation.VerifyDiagnostics(
                     // (3,25): error CS1528: Expected ; or = (cannot specify constructor arguments in declaration)
                     // event System.Action a, b(H.Dummy(1 is var x1));
-                    Diagnostic(ErrorCode.ERR_BadVarDecl, "(H.Dummy(1 is var x1)").WithLocation(3, 25),
+                    Diagnostic(ErrorCode.ERR_BadVarDecl, "(H.Dummy(1 is var x1)")
+                        .WithLocation(3, 25),
                     // (3,25): error CS1003: Syntax error, '[' expected
                     // event System.Action a, b(H.Dummy(1 is var x1));
-                    Diagnostic(ErrorCode.ERR_SyntaxError, "(").WithArguments("[").WithLocation(3, 25),
+                    Diagnostic(ErrorCode.ERR_SyntaxError, "(")
+                        .WithArguments("[")
+                        .WithLocation(3, 25),
                     // (3,46): error CS1003: Syntax error, ']' expected
                     // event System.Action a, b(H.Dummy(1 is var x1));
-                    Diagnostic(ErrorCode.ERR_SyntaxError, ")").WithArguments("]").WithLocation(3, 46),
+                    Diagnostic(ErrorCode.ERR_SyntaxError, ")")
+                        .WithArguments("]")
+                        .WithLocation(3, 46),
                     // (4,9): error CS0103: The name 'x1' does not exist in the current context
                     // H.Dummy(x1);
-                    Diagnostic(ErrorCode.ERR_NameNotInContext, "x1").WithArguments("x1").WithLocation(4, 9),
+                    Diagnostic(ErrorCode.ERR_NameNotInContext, "x1")
+                        .WithArguments("x1")
+                        .WithLocation(4, 9),
                     // (8,13): error CS0103: The name 'x1' does not exist in the current context
                     //     H.Dummy(x1);
-                    Diagnostic(ErrorCode.ERR_NameNotInContext, "x1").WithArguments("x1").WithLocation(8, 13)
-                    );
+                    Diagnostic(ErrorCode.ERR_NameNotInContext, "x1")
+                        .WithArguments("x1")
+                        .WithLocation(8, 13)
+                );
 
                 var tree = compilation.SyntaxTrees.Single();
                 var model = compilation.GetSemanticModel(tree);
@@ -6156,7 +7529,7 @@ class H
         public void GlobalCode_DeclaratorArguments_04()
         {
             string source =
-@"
+                @"
 
 fixed bool a[2], b[H.Dummy(1 is var x1)];
 H.Dummy(x1);
@@ -6174,23 +7547,28 @@ class H
 }
 ";
             {
-                var compilation = CreateCompilationWithMscorlib45(source, options: TestOptions.ReleaseExe.WithScriptClassName("Script"),
-                                                                  parseOptions: TestOptions.Script);
+                var compilation = CreateCompilationWithMscorlib45(
+                    source,
+                    options: TestOptions.ReleaseExe.WithScriptClassName("Script"),
+                    parseOptions: TestOptions.Script
+                );
 
                 compilation.VerifyDiagnostics(
-                // (3,18): error CS1642: Fixed size buffer fields may only be members of structs
-                // fixed bool a[2], b[H.Dummy(1 is var x1)];
-                Diagnostic(ErrorCode.ERR_FixedNotInStruct, "b").WithLocation(3, 18),
-                // (3,20): error CS0133: The expression being assigned to 'b' must be constant
-                // fixed bool a[2], b[H.Dummy(1 is var x1)];
-                Diagnostic(ErrorCode.ERR_NotConstantExpression, "H.Dummy(1 is var x1)").WithArguments("b").WithLocation(3, 20),
-                // (3,12): error CS1642: Fixed size buffer fields may only be members of structs
-                // fixed bool a[2], b[H.Dummy(1 is var x1)];
-                Diagnostic(ErrorCode.ERR_FixedNotInStruct, "a").WithLocation(3, 12),
-                // (3,12): error CS0214: Pointers and fixed size buffers may only be used in an unsafe context
-                // fixed bool a[2], b[H.Dummy(1 is var x1)];
-                Diagnostic(ErrorCode.ERR_UnsafeNeeded, "a[2]").WithLocation(3, 12)
-                    );
+                    // (3,18): error CS1642: Fixed size buffer fields may only be members of structs
+                    // fixed bool a[2], b[H.Dummy(1 is var x1)];
+                    Diagnostic(ErrorCode.ERR_FixedNotInStruct, "b").WithLocation(3, 18),
+                    // (3,20): error CS0133: The expression being assigned to 'b' must be constant
+                    // fixed bool a[2], b[H.Dummy(1 is var x1)];
+                    Diagnostic(ErrorCode.ERR_NotConstantExpression, "H.Dummy(1 is var x1)")
+                        .WithArguments("b")
+                        .WithLocation(3, 20),
+                    // (3,12): error CS1642: Fixed size buffer fields may only be members of structs
+                    // fixed bool a[2], b[H.Dummy(1 is var x1)];
+                    Diagnostic(ErrorCode.ERR_FixedNotInStruct, "a").WithLocation(3, 12),
+                    // (3,12): error CS0214: Pointers and fixed size buffers may only be used in an unsafe context
+                    // fixed bool a[2], b[H.Dummy(1 is var x1)];
+                    Diagnostic(ErrorCode.ERR_UnsafeNeeded, "a[2]").WithLocation(3, 12)
+                );
 
                 var tree = compilation.SyntaxTrees.Single();
                 var model = compilation.GetSemanticModel(tree);
@@ -6204,7 +7582,11 @@ class H
             }
 
             {
-                var compilation = CreateCompilationWithMscorlib45(source, options: TestOptions.ReleaseExe, parseOptions: TestOptions.Regular9);
+                var compilation = CreateCompilationWithMscorlib45(
+                    source,
+                    options: TestOptions.ReleaseExe,
+                    parseOptions: TestOptions.Regular9
+                );
 
                 compilation.VerifyDiagnostics(
                     // (3,12): error CS0116: A namespace cannot directly contain members such as fields or methods
@@ -6221,14 +7603,20 @@ class H
                     Diagnostic(ErrorCode.ERR_UnsafeNeeded, "a[2]").WithLocation(3, 12),
                     // (3,20): error CS0133: The expression being assigned to '<invalid-global-code>.b' must be constant
                     // fixed bool a[2], b[H.Dummy(1 is var x1)];
-                    Diagnostic(ErrorCode.ERR_NotConstantExpression, "H.Dummy(1 is var x1)").WithArguments("<invalid-global-code>.b").WithLocation(3, 20),
+                    Diagnostic(ErrorCode.ERR_NotConstantExpression, "H.Dummy(1 is var x1)")
+                        .WithArguments("<invalid-global-code>.b")
+                        .WithLocation(3, 20),
                     // (4,9): error CS0103: The name 'x1' does not exist in the current context
                     // H.Dummy(x1);
-                    Diagnostic(ErrorCode.ERR_NameNotInContext, "x1").WithArguments("x1").WithLocation(4, 9),
+                    Diagnostic(ErrorCode.ERR_NameNotInContext, "x1")
+                        .WithArguments("x1")
+                        .WithLocation(4, 9),
                     // (8,13): error CS0103: The name 'x1' does not exist in the current context
                     //     H.Dummy(x1);
-                    Diagnostic(ErrorCode.ERR_NameNotInContext, "x1").WithArguments("x1").WithLocation(8, 13)
-                    );
+                    Diagnostic(ErrorCode.ERR_NameNotInContext, "x1")
+                        .WithArguments("x1")
+                        .WithLocation(8, 13)
+                );
 
                 var tree = compilation.SyntaxTrees.Single();
                 var model = compilation.GetSemanticModel(tree);
@@ -6248,7 +7636,7 @@ class H
         public void GlobalCode_RestrictedType_01()
         {
             string source =
-@"
+                @"
 
 H.Dummy(null is System.ArgIterator x1);
 
@@ -6257,12 +7645,20 @@ class H
     public static void Dummy(params object[] x) {}
 }
 ";
-            var compilation = CreateCompilationWithMscorlib45(source, options: TestOptions.ReleaseExe.WithScriptClassName("Script"), parseOptions: TestOptions.Script);
+            var compilation = CreateCompilationWithMscorlib45(
+                source,
+                options: TestOptions.ReleaseExe.WithScriptClassName("Script"),
+                parseOptions: TestOptions.Script
+            );
 
-            compilation.GetDeclarationDiagnostics().Verify(
-                // (3,17): error CS0610: Field or property cannot be of type 'ArgIterator'
-                // H.Dummy(null is System.ArgIterator x1);
-                Diagnostic(ErrorCode.ERR_FieldCantBeRefAny, "System.ArgIterator").WithArguments("System.ArgIterator").WithLocation(3, 17)
+            compilation
+                .GetDeclarationDiagnostics()
+                .Verify(
+                    // (3,17): error CS0610: Field or property cannot be of type 'ArgIterator'
+                    // H.Dummy(null is System.ArgIterator x1);
+                    Diagnostic(ErrorCode.ERR_FieldCantBeRefAny, "System.ArgIterator")
+                        .WithArguments("System.ArgIterator")
+                        .WithLocation(3, 17)
                 );
 
             var tree = compilation.SyntaxTrees.Single();
@@ -6276,7 +7672,7 @@ class H
         public void GlobalCode_StaticType_01()
         {
             string source =
-@"
+                @"
 H.Dummy(null is StaticType x1);
 
 class H
@@ -6286,12 +7682,20 @@ class H
 
 static class StaticType{}
 ";
-            var compilation = CreateCompilationWithMscorlib45(source, options: TestOptions.ReleaseExe.WithScriptClassName("Script"), parseOptions: TestOptions.Script);
+            var compilation = CreateCompilationWithMscorlib45(
+                source,
+                options: TestOptions.ReleaseExe.WithScriptClassName("Script"),
+                parseOptions: TestOptions.Script
+            );
 
-            compilation.GetDeclarationDiagnostics().Verify(
-                // (2,28): error CS0723: Cannot declare a variable of static type 'StaticType'
-                // H.Dummy(null is StaticType x1);
-                Diagnostic(ErrorCode.ERR_VarDeclIsStaticClass, "x1").WithArguments("StaticType").WithLocation(2, 28)
+            compilation
+                .GetDeclarationDiagnostics()
+                .Verify(
+                    // (2,28): error CS0723: Cannot declare a variable of static type 'StaticType'
+                    // H.Dummy(null is StaticType x1);
+                    Diagnostic(ErrorCode.ERR_VarDeclIsStaticClass, "x1")
+                        .WithArguments("StaticType")
+                        .WithLocation(2, 28)
                 );
 
             var tree = compilation.SyntaxTrees.Single();
@@ -6305,7 +7709,7 @@ static class StaticType{}
         public void GlobalCode_AliasInfo_01()
         {
             string source =
-@"
+                @"
 H.Dummy(1 is var x1);
 
 class H
@@ -6314,7 +7718,11 @@ class H
 }
 ";
 
-            var compilation = CreateCompilationWithMscorlib45(source, options: TestOptions.ReleaseExe.WithScriptClassName("Script"), parseOptions: TestOptions.Script);
+            var compilation = CreateCompilationWithMscorlib45(
+                source,
+                options: TestOptions.ReleaseExe.WithScriptClassName("Script"),
+                parseOptions: TestOptions.Script
+            );
 
             var tree = compilation.SyntaxTrees.Single();
             var model = compilation.GetSemanticModel(tree);
@@ -6327,7 +7735,7 @@ class H
         public void GlobalCode_AliasInfo_02()
         {
             string source =
-@"
+                @"
 using @var = System.Int32;
 
 H.Dummy(1 is var x1);
@@ -6338,12 +7746,18 @@ class H
 }
 ";
 
-            var compilation = CreateCompilationWithMscorlib45(source, options: TestOptions.ReleaseExe.WithScriptClassName("Script"), parseOptions: TestOptions.Script);
+            var compilation = CreateCompilationWithMscorlib45(
+                source,
+                options: TestOptions.ReleaseExe.WithScriptClassName("Script"),
+                parseOptions: TestOptions.Script
+            );
             compilation.VerifyDiagnostics(
                 // (4,14): error CS8508: The syntax 'var' for a pattern is not permitted to refer to a type, but 'var' is in scope here.
                 // H.Dummy(1 is var x1);
-                Diagnostic(ErrorCode.ERR_VarMayNotBindToType, "var").WithArguments("var").WithLocation(4, 14)
-                );
+                Diagnostic(ErrorCode.ERR_VarMayNotBindToType, "var")
+                    .WithArguments("var")
+                    .WithLocation(4, 14)
+            );
 
             var tree = compilation.SyntaxTrees.Single();
             var model = compilation.GetSemanticModel(tree);
@@ -6356,7 +7770,7 @@ class H
         public void GlobalCode_AliasInfo_03()
         {
             string source =
-@"
+                @"
 using a = System.Int32;
 
 H.Dummy(1 is a x1);
@@ -6367,7 +7781,11 @@ class H
 }
 ";
 
-            var compilation = CreateCompilationWithMscorlib45(source, options: TestOptions.ReleaseExe.WithScriptClassName("Script"), parseOptions: TestOptions.Script);
+            var compilation = CreateCompilationWithMscorlib45(
+                source,
+                options: TestOptions.ReleaseExe.WithScriptClassName("Script"),
+                parseOptions: TestOptions.Script
+            );
 
             var tree = compilation.SyntaxTrees.Single();
             var model = compilation.GetSemanticModel(tree);
@@ -6381,7 +7799,7 @@ class H
         public void GlobalCode_AliasInfo_04()
         {
             string source =
-@"
+                @"
 H.Dummy(1 is int x1);
 
 class H
@@ -6390,7 +7808,11 @@ class H
 }
 ";
 
-            var compilation = CreateCompilationWithMscorlib45(source, options: TestOptions.ReleaseExe.WithScriptClassName("Script"), parseOptions: TestOptions.Script);
+            var compilation = CreateCompilationWithMscorlib45(
+                source,
+                options: TestOptions.ReleaseExe.WithScriptClassName("Script"),
+                parseOptions: TestOptions.Script
+            );
 
             var tree = compilation.SyntaxTrees.Single();
             var model = compilation.GetSemanticModel(tree);
@@ -6404,7 +7826,7 @@ class H
         public void GlobalCode_Catch_01()
         {
             var source =
-@"
+                @"
 bool Dummy(params object[] x) {return true;}
 
 try {}
@@ -6484,30 +7906,48 @@ catch (System.Exception x15)
 }
 ";
             {
-                var compilation = CreateCompilationWithMscorlib45(source, options: TestOptions.ReleaseExe.WithScriptClassName("Script"), parseOptions: TestOptions.Script);
+                var compilation = CreateCompilationWithMscorlib45(
+                    source,
+                    options: TestOptions.ReleaseExe.WithScriptClassName("Script"),
+                    parseOptions: TestOptions.Script
+                );
                 compilation.VerifyDiagnostics(
-                // (20,13): error CS0841: Cannot use local variable 'x6' before it is declared
-                // catch when (x6 && 123 is var x6)
-                Diagnostic(ErrorCode.ERR_VariableUsedBeforeDeclaration, "x6").WithArguments("x6").WithLocation(20, 13),
-                // (28,9): error CS0136: A local or parameter named 'x7' cannot be declared in this scope because that name is used in an enclosing local scope to define a local or parameter
-                //     var x7 = 12;
-                Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "x7").WithArguments("x7").WithLocation(28, 9),
-                // (38,26): error CS0103: The name 'x8' does not exist in the current context
-                // System.Console.WriteLine(x8);
-                Diagnostic(ErrorCode.ERR_NameNotInContext, "x8").WithArguments("x8").WithLocation(38, 26),
-                // (45,28): error CS0136: A local or parameter named 'x9' cannot be declared in this scope because that name is used in an enclosing local scope to define a local or parameter
-                //     catch when (123 is var x9 && x9 > 0) // 2
-                Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "x9").WithArguments("x9").WithLocation(45, 28),
-                // (52,13): error CS0103: The name 'y10' does not exist in the current context
-                // catch when (y10 is var x10)
-                Diagnostic(ErrorCode.ERR_NameNotInContext, "y10").WithArguments("y10").WithLocation(52, 13),
-                // (67,32): error CS0128: A local variable or function named 'x14' is already defined in this scope
-                //                     123 is var x14, // 2
-                Diagnostic(ErrorCode.ERR_LocalDuplicate, "x14").WithArguments("x14").WithLocation(67, 32),
-                // (75,32): error CS0128: A local variable or function named 'x15' is already defined in this scope
-                //         when (Dummy(123 is var x15, x15))
-                Diagnostic(ErrorCode.ERR_LocalDuplicate, "x15").WithArguments("x15").WithLocation(75, 32)
-                    );
+                    // (20,13): error CS0841: Cannot use local variable 'x6' before it is declared
+                    // catch when (x6 && 123 is var x6)
+                    Diagnostic(ErrorCode.ERR_VariableUsedBeforeDeclaration, "x6")
+                        .WithArguments("x6")
+                        .WithLocation(20, 13),
+                    // (28,9): error CS0136: A local or parameter named 'x7' cannot be declared in this scope because that name is used in an enclosing local scope to define a local or parameter
+                    //     var x7 = 12;
+                    Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "x7")
+                        .WithArguments("x7")
+                        .WithLocation(28, 9),
+                    // (38,26): error CS0103: The name 'x8' does not exist in the current context
+                    // System.Console.WriteLine(x8);
+                    Diagnostic(ErrorCode.ERR_NameNotInContext, "x8")
+                        .WithArguments("x8")
+                        .WithLocation(38, 26),
+                    // (45,28): error CS0136: A local or parameter named 'x9' cannot be declared in this scope because that name is used in an enclosing local scope to define a local or parameter
+                    //     catch when (123 is var x9 && x9 > 0) // 2
+                    Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "x9")
+                        .WithArguments("x9")
+                        .WithLocation(45, 28),
+                    // (52,13): error CS0103: The name 'y10' does not exist in the current context
+                    // catch when (y10 is var x10)
+                    Diagnostic(ErrorCode.ERR_NameNotInContext, "y10")
+                        .WithArguments("y10")
+                        .WithLocation(52, 13),
+                    // (67,32): error CS0128: A local variable or function named 'x14' is already defined in this scope
+                    //                     123 is var x14, // 2
+                    Diagnostic(ErrorCode.ERR_LocalDuplicate, "x14")
+                        .WithArguments("x14")
+                        .WithLocation(67, 32),
+                    // (75,32): error CS0128: A local variable or function named 'x15' is already defined in this scope
+                    //         when (Dummy(123 is var x15, x15))
+                    Diagnostic(ErrorCode.ERR_LocalDuplicate, "x15")
+                        .WithArguments("x15")
+                        .WithLocation(75, 32)
+                );
 
                 var tree = compilation.SyntaxTrees.Single();
                 var model = compilation.GetSemanticModel(tree);
@@ -6568,34 +8008,54 @@ catch (System.Exception x15)
             }
 
             {
-                var compilation = CreateCompilationWithMscorlib45(source, options: TestOptions.ReleaseExe, parseOptions: TestOptions.Regular9);
+                var compilation = CreateCompilationWithMscorlib45(
+                    source,
+                    options: TestOptions.ReleaseExe,
+                    parseOptions: TestOptions.Regular9
+                );
 
                 compilation.VerifyDiagnostics(
                     // (14,24): error CS0136: A local or parameter named 'x4' cannot be declared in this scope because that name is used in an enclosing local scope to define a local or parameter
                     // catch when (123 is var x4 && x4 > 0)
-                    Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "x4").WithArguments("x4").WithLocation(14, 24),
+                    Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "x4")
+                        .WithArguments("x4")
+                        .WithLocation(14, 24),
                     // (20,13): error CS0841: Cannot use local variable 'x6' before it is declared
                     // catch when (x6 && 123 is var x6)
-                    Diagnostic(ErrorCode.ERR_VariableUsedBeforeDeclaration, "x6").WithArguments("x6").WithLocation(20, 13),
+                    Diagnostic(ErrorCode.ERR_VariableUsedBeforeDeclaration, "x6")
+                        .WithArguments("x6")
+                        .WithLocation(20, 13),
                     // (28,9): error CS0136: A local or parameter named 'x7' cannot be declared in this scope because that name is used in an enclosing local scope to define a local or parameter
                     //     var x7 = 12;
-                    Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "x7").WithArguments("x7").WithLocation(28, 9),
+                    Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "x7")
+                        .WithArguments("x7")
+                        .WithLocation(28, 9),
                     // (38,26): error CS0103: The name 'x8' does not exist in the current context
                     // System.Console.WriteLine(x8);
-                    Diagnostic(ErrorCode.ERR_NameNotInContext, "x8").WithArguments("x8").WithLocation(38, 26),
+                    Diagnostic(ErrorCode.ERR_NameNotInContext, "x8")
+                        .WithArguments("x8")
+                        .WithLocation(38, 26),
                     // (45,28): error CS0136: A local or parameter named 'x9' cannot be declared in this scope because that name is used in an enclosing local scope to define a local or parameter
                     //     catch when (123 is var x9 && x9 > 0) // 2
-                    Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "x9").WithArguments("x9").WithLocation(45, 28),
+                    Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "x9")
+                        .WithArguments("x9")
+                        .WithLocation(45, 28),
                     // (52,13): error CS0103: The name 'y10' does not exist in the current context
                     // catch when (y10 is var x10)
-                    Diagnostic(ErrorCode.ERR_NameNotInContext, "y10").WithArguments("y10").WithLocation(52, 13),
+                    Diagnostic(ErrorCode.ERR_NameNotInContext, "y10")
+                        .WithArguments("y10")
+                        .WithLocation(52, 13),
                     // (67,32): error CS0128: A local variable or function named 'x14' is already defined in this scope
                     //                     123 is var x14, // 2
-                    Diagnostic(ErrorCode.ERR_LocalDuplicate, "x14").WithArguments("x14").WithLocation(67, 32),
+                    Diagnostic(ErrorCode.ERR_LocalDuplicate, "x14")
+                        .WithArguments("x14")
+                        .WithLocation(67, 32),
                     // (75,32): error CS0128: A local variable or function named 'x15' is already defined in this scope
                     //         when (Dummy(123 is var x15, x15))
-                    Diagnostic(ErrorCode.ERR_LocalDuplicate, "x15").WithArguments("x15").WithLocation(75, 32)
-                    );
+                    Diagnostic(ErrorCode.ERR_LocalDuplicate, "x15")
+                        .WithArguments("x15")
+                        .WithLocation(75, 32)
+                );
 
                 var tree = compilation.SyntaxTrees.Single();
                 var model = compilation.GetSemanticModel(tree);
@@ -6660,7 +8120,7 @@ catch (System.Exception x15)
         public void GlobalCode_Catch_02()
         {
             var source =
-@"
+                @"
 try
 {
     throw new System.InvalidOperationException();
@@ -6676,10 +8136,16 @@ static bool Dummy(object y, object z)
     return true;
 }
 ";
-            var compilation = CreateCompilationWithMscorlib45(source, options: TestOptions.ReleaseExe.WithScriptClassName("Script"), parseOptions: TestOptions.Script);
-            CompileAndVerify(compilation, expectedOutput:
-@"System.InvalidOperationException
-System.InvalidOperationException");
+            var compilation = CreateCompilationWithMscorlib45(
+                source,
+                options: TestOptions.ReleaseExe.WithScriptClassName("Script"),
+                parseOptions: TestOptions.Script
+            );
+            CompileAndVerify(
+                compilation,
+                expectedOutput: @"System.InvalidOperationException
+System.InvalidOperationException"
+            );
 
             var tree = compilation.SyntaxTrees.Single();
             var model = compilation.GetSemanticModel(tree);
@@ -6694,7 +8160,7 @@ System.InvalidOperationException");
         public void GlobalCode_Block_01()
         {
             string source =
-@"
+                @"
 {
     H.Dummy(1 is var x1);
     H.Dummy(x1);
@@ -6716,13 +8182,19 @@ class H
 }
 ";
             {
-                var compilation = CreateCompilationWithMscorlib45(source, options: TestOptions.ReleaseExe.WithScriptClassName("Script"), parseOptions: TestOptions.Script);
+                var compilation = CreateCompilationWithMscorlib45(
+                    source,
+                    options: TestOptions.ReleaseExe.WithScriptClassName("Script"),
+                    parseOptions: TestOptions.Script
+                );
 
                 compilation.VerifyDiagnostics(
-                // (15,9): error CS0103: The name 'x3' does not exist in the current context
-                // H.Dummy(x3);
-                Diagnostic(ErrorCode.ERR_NameNotInContext, "x3").WithArguments("x3").WithLocation(15, 9)
-                    );
+                    // (15,9): error CS0103: The name 'x3' does not exist in the current context
+                    // H.Dummy(x3);
+                    Diagnostic(ErrorCode.ERR_NameNotInContext, "x3")
+                        .WithArguments("x3")
+                        .WithLocation(15, 9)
+                );
 
                 var tree = compilation.SyntaxTrees.Single();
                 var model = compilation.GetSemanticModel(tree);
@@ -6743,19 +8215,29 @@ class H
             }
 
             {
-                var compilation = CreateCompilationWithMscorlib45(source, options: TestOptions.ReleaseExe, parseOptions: TestOptions.Regular9);
+                var compilation = CreateCompilationWithMscorlib45(
+                    source,
+                    options: TestOptions.ReleaseExe,
+                    parseOptions: TestOptions.Regular9
+                );
 
                 compilation.VerifyDiagnostics(
                     // (7,8): warning CS0168: The variable 'x2' is declared but never used
                     // object x2;
-                    Diagnostic(ErrorCode.WRN_UnreferencedVar, "x2").WithArguments("x2").WithLocation(7, 8),
+                    Diagnostic(ErrorCode.WRN_UnreferencedVar, "x2")
+                        .WithArguments("x2")
+                        .WithLocation(7, 8),
                     // (9,22): error CS0136: A local or parameter named 'x2' cannot be declared in this scope because that name is used in an enclosing local scope to define a local or parameter
                     //     H.Dummy(2 is var x2);
-                    Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "x2").WithArguments("x2").WithLocation(9, 22),
+                    Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "x2")
+                        .WithArguments("x2")
+                        .WithLocation(9, 22),
                     // (15,9): error CS0103: The name 'x3' does not exist in the current context
                     // H.Dummy(x3);
-                    Diagnostic(ErrorCode.ERR_NameNotInContext, "x3").WithArguments("x3").WithLocation(15, 9)
-                    );
+                    Diagnostic(ErrorCode.ERR_NameNotInContext, "x3")
+                        .WithArguments("x3")
+                        .WithLocation(15, 9)
+                );
 
                 var tree = compilation.SyntaxTrees.Single();
                 var model = compilation.GetSemanticModel(tree);
@@ -6780,7 +8262,7 @@ class H
         public void GlobalCode_Block_02()
         {
             string source =
-@"
+                @"
 {
     var tmp = 1 is var x1;
     System.Console.WriteLine(x1);
@@ -6793,11 +8275,18 @@ class H
 }
 ";
 
-            var compilation = CreateCompilationWithMscorlib45(source, options: TestOptions.ReleaseExe.WithScriptClassName("Script"), parseOptions: TestOptions.Script);
+            var compilation = CreateCompilationWithMscorlib45(
+                source,
+                options: TestOptions.ReleaseExe.WithScriptClassName("Script"),
+                parseOptions: TestOptions.Script
+            );
 
-            CompileAndVerify(compilation, expectedOutput:
-@"1
-1").VerifyDiagnostics();
+            CompileAndVerify(
+                    compilation,
+                    expectedOutput: @"1
+1"
+                )
+                .VerifyDiagnostics();
 
             var tree = compilation.SyntaxTrees.Single();
             var model = compilation.GetSemanticModel(tree);
@@ -6812,7 +8301,7 @@ class H
         public void GlobalCode_For_01()
         {
             var source =
-@"
+                @"
 bool Dummy(params object[] x) {return true;}
 
 for (
@@ -6903,39 +8392,60 @@ for (
 ";
 
             {
-                var compilation = CreateCompilationWithMscorlib45(source, options: TestOptions.ReleaseExe.WithScriptClassName("Script"), parseOptions: TestOptions.Script);
+                var compilation = CreateCompilationWithMscorlib45(
+                    source,
+                    options: TestOptions.ReleaseExe.WithScriptClassName("Script"),
+                    parseOptions: TestOptions.Script
+                );
                 compilation.VerifyDiagnostics(
-                // (74,5): error CS1023: Embedded statement cannot be a declaration or labeled statement
-                //     var y12 = 12;
-                Diagnostic(ErrorCode.ERR_BadEmbeddedStmt, "var y12 = 12;").WithLocation(74, 5),
-                // (25,15): error CS0841: Cannot use local variable 'x6' before it is declared
-                //         Dummy(x6 && true is var x6)
-                Diagnostic(ErrorCode.ERR_VariableUsedBeforeDeclaration, "x6").WithArguments("x6").WithLocation(25, 15),
-                // (33,9): error CS0136: A local or parameter named 'x7' cannot be declared in this scope because that name is used in an enclosing local scope to define a local or parameter
-                //     var x7 = 12;
-                Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "x7").WithArguments("x7").WithLocation(33, 9),
-                // (42,26): error CS0103: The name 'x8' does not exist in the current context
-                // System.Console.WriteLine(x8);
-                Diagnostic(ErrorCode.ERR_NameNotInContext, "x8").WithArguments("x8").WithLocation(42, 26),
-                // (50,31): error CS0136: A local or parameter named 'x9' cannot be declared in this scope because that name is used in an enclosing local scope to define a local or parameter
-                //             Dummy(true is var x9 && x9) // 2
-                Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "x9").WithArguments("x9").WithLocation(50, 31),
-                // (56,15): error CS0103: The name 'y10' does not exist in the current context
-                //         Dummy(y10 is var x10)
-                Diagnostic(ErrorCode.ERR_NameNotInContext, "y10").WithArguments("y10").WithLocation(56, 15),
-                // (72,15): error CS0103: The name 'y12' does not exist in the current context
-                //         Dummy(y12 is var x12)
-                Diagnostic(ErrorCode.ERR_NameNotInContext, "y12").WithArguments("y12").WithLocation(72, 15),
-                // (83,22): error CS0128: A local variable or function named 'x14' is already defined in this scope
-                //             2 is var x14, 
-                Diagnostic(ErrorCode.ERR_LocalDuplicate, "x14").WithArguments("x14").WithLocation(83, 22),
-                // (11,1): warning CS0162: Unreachable code detected
-                // for ( // 2
-                Diagnostic(ErrorCode.WRN_UnreachableCode, "for").WithLocation(11, 1),
-                // (74,9): warning CS0219: The variable 'y12' is assigned but its value is never used
-                //     var y12 = 12;
-                Diagnostic(ErrorCode.WRN_UnreferencedVarAssg, "y12").WithArguments("y12").WithLocation(74, 9)
-                    );
+                    // (74,5): error CS1023: Embedded statement cannot be a declaration or labeled statement
+                    //     var y12 = 12;
+                    Diagnostic(ErrorCode.ERR_BadEmbeddedStmt, "var y12 = 12;")
+                        .WithLocation(74, 5),
+                    // (25,15): error CS0841: Cannot use local variable 'x6' before it is declared
+                    //         Dummy(x6 && true is var x6)
+                    Diagnostic(ErrorCode.ERR_VariableUsedBeforeDeclaration, "x6")
+                        .WithArguments("x6")
+                        .WithLocation(25, 15),
+                    // (33,9): error CS0136: A local or parameter named 'x7' cannot be declared in this scope because that name is used in an enclosing local scope to define a local or parameter
+                    //     var x7 = 12;
+                    Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "x7")
+                        .WithArguments("x7")
+                        .WithLocation(33, 9),
+                    // (42,26): error CS0103: The name 'x8' does not exist in the current context
+                    // System.Console.WriteLine(x8);
+                    Diagnostic(ErrorCode.ERR_NameNotInContext, "x8")
+                        .WithArguments("x8")
+                        .WithLocation(42, 26),
+                    // (50,31): error CS0136: A local or parameter named 'x9' cannot be declared in this scope because that name is used in an enclosing local scope to define a local or parameter
+                    //             Dummy(true is var x9 && x9) // 2
+                    Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "x9")
+                        .WithArguments("x9")
+                        .WithLocation(50, 31),
+                    // (56,15): error CS0103: The name 'y10' does not exist in the current context
+                    //         Dummy(y10 is var x10)
+                    Diagnostic(ErrorCode.ERR_NameNotInContext, "y10")
+                        .WithArguments("y10")
+                        .WithLocation(56, 15),
+                    // (72,15): error CS0103: The name 'y12' does not exist in the current context
+                    //         Dummy(y12 is var x12)
+                    Diagnostic(ErrorCode.ERR_NameNotInContext, "y12")
+                        .WithArguments("y12")
+                        .WithLocation(72, 15),
+                    // (83,22): error CS0128: A local variable or function named 'x14' is already defined in this scope
+                    //             2 is var x14,
+                    Diagnostic(ErrorCode.ERR_LocalDuplicate, "x14")
+                        .WithArguments("x14")
+                        .WithLocation(83, 22),
+                    // (11,1): warning CS0162: Unreachable code detected
+                    // for ( // 2
+                    Diagnostic(ErrorCode.WRN_UnreachableCode, "for").WithLocation(11, 1),
+                    // (74,9): warning CS0219: The variable 'y12' is assigned but its value is never used
+                    //     var y12 = 12;
+                    Diagnostic(ErrorCode.WRN_UnreferencedVarAssg, "y12")
+                        .WithArguments("y12")
+                        .WithLocation(74, 9)
+                );
 
                 var tree = compilation.SyntaxTrees.Single();
                 var model = compilation.GetSemanticModel(tree);
@@ -6997,43 +8507,66 @@ for (
             }
 
             {
-                var compilation = CreateCompilationWithMscorlib45(source, options: TestOptions.ReleaseExe, parseOptions: TestOptions.Regular9);
+                var compilation = CreateCompilationWithMscorlib45(
+                    source,
+                    options: TestOptions.ReleaseExe,
+                    parseOptions: TestOptions.Regular9
+                );
 
                 compilation.VerifyDiagnostics(
                     // (20,27): error CS0136: A local or parameter named 'x4' cannot be declared in this scope because that name is used in an enclosing local scope to define a local or parameter
                     //         Dummy(true is var x4 && x4)
-                    Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "x4").WithArguments("x4").WithLocation(20, 27),
+                    Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "x4")
+                        .WithArguments("x4")
+                        .WithLocation(20, 27),
                     // (74,5): error CS1023: Embedded statement cannot be a declaration or labeled statement
                     //     var y12 = 12;
-                    Diagnostic(ErrorCode.ERR_BadEmbeddedStmt, "var y12 = 12;").WithLocation(74, 5),
+                    Diagnostic(ErrorCode.ERR_BadEmbeddedStmt, "var y12 = 12;")
+                        .WithLocation(74, 5),
                     // (25,15): error CS0841: Cannot use local variable 'x6' before it is declared
                     //         Dummy(x6 && true is var x6)
-                    Diagnostic(ErrorCode.ERR_VariableUsedBeforeDeclaration, "x6").WithArguments("x6").WithLocation(25, 15),
+                    Diagnostic(ErrorCode.ERR_VariableUsedBeforeDeclaration, "x6")
+                        .WithArguments("x6")
+                        .WithLocation(25, 15),
                     // (33,9): error CS0136: A local or parameter named 'x7' cannot be declared in this scope because that name is used in an enclosing local scope to define a local or parameter
                     //     var x7 = 12;
-                    Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "x7").WithArguments("x7").WithLocation(33, 9),
+                    Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "x7")
+                        .WithArguments("x7")
+                        .WithLocation(33, 9),
                     // (42,26): error CS0103: The name 'x8' does not exist in the current context
                     // System.Console.WriteLine(x8);
-                    Diagnostic(ErrorCode.ERR_NameNotInContext, "x8").WithArguments("x8").WithLocation(42, 26),
+                    Diagnostic(ErrorCode.ERR_NameNotInContext, "x8")
+                        .WithArguments("x8")
+                        .WithLocation(42, 26),
                     // (50,31): error CS0136: A local or parameter named 'x9' cannot be declared in this scope because that name is used in an enclosing local scope to define a local or parameter
                     //             Dummy(true is var x9 && x9) // 2
-                    Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "x9").WithArguments("x9").WithLocation(50, 31),
+                    Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "x9")
+                        .WithArguments("x9")
+                        .WithLocation(50, 31),
                     // (56,15): error CS0103: The name 'y10' does not exist in the current context
                     //         Dummy(y10 is var x10)
-                    Diagnostic(ErrorCode.ERR_NameNotInContext, "y10").WithArguments("y10").WithLocation(56, 15),
+                    Diagnostic(ErrorCode.ERR_NameNotInContext, "y10")
+                        .WithArguments("y10")
+                        .WithLocation(56, 15),
                     // (72,15): error CS0103: The name 'y12' does not exist in the current context
                     //         Dummy(y12 is var x12)
-                    Diagnostic(ErrorCode.ERR_NameNotInContext, "y12").WithArguments("y12").WithLocation(72, 15),
+                    Diagnostic(ErrorCode.ERR_NameNotInContext, "y12")
+                        .WithArguments("y12")
+                        .WithLocation(72, 15),
                     // (83,22): error CS0128: A local variable or function named 'x14' is already defined in this scope
-                    //             2 is var x14, 
-                    Diagnostic(ErrorCode.ERR_LocalDuplicate, "x14").WithArguments("x14").WithLocation(83, 22),
+                    //             2 is var x14,
+                    Diagnostic(ErrorCode.ERR_LocalDuplicate, "x14")
+                        .WithArguments("x14")
+                        .WithLocation(83, 22),
                     // (11,1): warning CS0162: Unreachable code detected
                     // for ( // 2
                     Diagnostic(ErrorCode.WRN_UnreachableCode, "for").WithLocation(11, 1),
                     // (74,9): warning CS0219: The variable 'y12' is assigned but its value is never used
                     //     var y12 = 12;
-                    Diagnostic(ErrorCode.WRN_UnreferencedVarAssg, "y12").WithArguments("y12").WithLocation(74, 9)
-                    );
+                    Diagnostic(ErrorCode.WRN_UnreferencedVarAssg, "y12")
+                        .WithArguments("y12")
+                        .WithLocation(74, 9)
+                );
 
                 var tree = compilation.SyntaxTrees.Single();
                 var model = compilation.GetSemanticModel(tree);
@@ -7099,7 +8632,7 @@ for (
         public void GlobalCode_For_02()
         {
             var source =
-@"
+                @"
 bool f = true;
 
 for (Dummy(f, ((f ? 10 : 20)) is var x0, x0); 
@@ -7117,15 +8650,21 @@ static bool Dummy(bool x, object y, object z)
     return x;
 }
 ";
-            var compilation = CreateCompilationWithMscorlib45(source, options: TestOptions.ReleaseExe.WithScriptClassName("Script"), parseOptions: TestOptions.Script);
-            CompileAndVerify(compilation, expectedOutput:
-@"10
+            var compilation = CreateCompilationWithMscorlib45(
+                source,
+                options: TestOptions.ReleaseExe.WithScriptClassName("Script"),
+                parseOptions: TestOptions.Script
+            );
+            CompileAndVerify(
+                compilation,
+                expectedOutput: @"10
 1
 10
 1
 200
 200
-2");
+2"
+            );
 
             var tree = compilation.SyntaxTrees.Single();
             var model = compilation.GetSemanticModel(tree);
@@ -7150,7 +8689,7 @@ static bool Dummy(bool x, object y, object z)
         public void GlobalCode_Foreach_01()
         {
             var source =
-@"
+                @"
 System.Collections.IEnumerable Dummy(params object[] x) {return null;}
 
 foreach (var i in Dummy(true is var x1 && x1))
@@ -7220,39 +8759,62 @@ foreach (var x15 in
 }
 ";
             {
-                var compilation = CreateCompilationWithMscorlib45(source, options: TestOptions.ReleaseExe.WithScriptClassName("Script"), parseOptions: TestOptions.Script);
+                var compilation = CreateCompilationWithMscorlib45(
+                    source,
+                    options: TestOptions.ReleaseExe.WithScriptClassName("Script"),
+                    parseOptions: TestOptions.Script
+                );
                 compilation.VerifyDiagnostics(
-                // (52,5): error CS1023: Embedded statement cannot be a declaration or labeled statement
-                //     var y12 = 12;
-                Diagnostic(ErrorCode.ERR_BadEmbeddedStmt, "var y12 = 12;").WithLocation(52, 5),
-                // (18,25): error CS0841: Cannot use local variable 'x6' before it is declared
-                // foreach (var i in Dummy(x6 && true is var x6))
-                Diagnostic(ErrorCode.ERR_VariableUsedBeforeDeclaration, "x6").WithArguments("x6").WithLocation(18, 25),
-                // (23,9): error CS0136: A local or parameter named 'x7' cannot be declared in this scope because that name is used in an enclosing local scope to define a local or parameter
-                //     var x7 = 12;
-                Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "x7").WithArguments("x7").WithLocation(23, 9),
-                // (30,26): error CS0103: The name 'x8' does not exist in the current context
-                // System.Console.WriteLine(x8);
-                Diagnostic(ErrorCode.ERR_NameNotInContext, "x8").WithArguments("x8").WithLocation(30, 26),
-                // (35,42): error CS0136: A local or parameter named 'x9' cannot be declared in this scope because that name is used in an enclosing local scope to define a local or parameter
-                //     foreach (var i2 in Dummy(true is var x9 && x9)) // 2
-                Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "x9").WithArguments("x9").WithLocation(35, 42),
-                // (39,25): error CS0103: The name 'y10' does not exist in the current context
-                // foreach (var i in Dummy(y10 is var x10))
-                Diagnostic(ErrorCode.ERR_NameNotInContext, "y10").WithArguments("y10").WithLocation(39, 25),
-                // (51,25): error CS0103: The name 'y12' does not exist in the current context
-                // foreach (var i in Dummy(y12 is var x12))
-                Diagnostic(ErrorCode.ERR_NameNotInContext, "y12").WithArguments("y12").WithLocation(51, 25),
-                // (58,34): error CS0128: A local variable or function named 'x14' is already defined in this scope
-                //                         2 is var x14, 
-                Diagnostic(ErrorCode.ERR_LocalDuplicate, "x14").WithArguments("x14").WithLocation(58, 34),
-                // (64,14): error CS0136: A local or parameter named 'x15' cannot be declared in this scope because that name is used in an enclosing local scope to define a local or parameter
-                // foreach (var x15 in 
-                Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "x15").WithArguments("x15").WithLocation(64, 14),
-                // (52,9): warning CS0219: The variable 'y12' is assigned but its value is never used
-                //     var y12 = 12;
-                Diagnostic(ErrorCode.WRN_UnreferencedVarAssg, "y12").WithArguments("y12").WithLocation(52, 9)
-                    );
+                    // (52,5): error CS1023: Embedded statement cannot be a declaration or labeled statement
+                    //     var y12 = 12;
+                    Diagnostic(ErrorCode.ERR_BadEmbeddedStmt, "var y12 = 12;")
+                        .WithLocation(52, 5),
+                    // (18,25): error CS0841: Cannot use local variable 'x6' before it is declared
+                    // foreach (var i in Dummy(x6 && true is var x6))
+                    Diagnostic(ErrorCode.ERR_VariableUsedBeforeDeclaration, "x6")
+                        .WithArguments("x6")
+                        .WithLocation(18, 25),
+                    // (23,9): error CS0136: A local or parameter named 'x7' cannot be declared in this scope because that name is used in an enclosing local scope to define a local or parameter
+                    //     var x7 = 12;
+                    Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "x7")
+                        .WithArguments("x7")
+                        .WithLocation(23, 9),
+                    // (30,26): error CS0103: The name 'x8' does not exist in the current context
+                    // System.Console.WriteLine(x8);
+                    Diagnostic(ErrorCode.ERR_NameNotInContext, "x8")
+                        .WithArguments("x8")
+                        .WithLocation(30, 26),
+                    // (35,42): error CS0136: A local or parameter named 'x9' cannot be declared in this scope because that name is used in an enclosing local scope to define a local or parameter
+                    //     foreach (var i2 in Dummy(true is var x9 && x9)) // 2
+                    Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "x9")
+                        .WithArguments("x9")
+                        .WithLocation(35, 42),
+                    // (39,25): error CS0103: The name 'y10' does not exist in the current context
+                    // foreach (var i in Dummy(y10 is var x10))
+                    Diagnostic(ErrorCode.ERR_NameNotInContext, "y10")
+                        .WithArguments("y10")
+                        .WithLocation(39, 25),
+                    // (51,25): error CS0103: The name 'y12' does not exist in the current context
+                    // foreach (var i in Dummy(y12 is var x12))
+                    Diagnostic(ErrorCode.ERR_NameNotInContext, "y12")
+                        .WithArguments("y12")
+                        .WithLocation(51, 25),
+                    // (58,34): error CS0128: A local variable or function named 'x14' is already defined in this scope
+                    //                         2 is var x14,
+                    Diagnostic(ErrorCode.ERR_LocalDuplicate, "x14")
+                        .WithArguments("x14")
+                        .WithLocation(58, 34),
+                    // (64,14): error CS0136: A local or parameter named 'x15' cannot be declared in this scope because that name is used in an enclosing local scope to define a local or parameter
+                    // foreach (var x15 in
+                    Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "x15")
+                        .WithArguments("x15")
+                        .WithLocation(64, 14),
+                    // (52,9): warning CS0219: The variable 'y12' is assigned but its value is never used
+                    //     var y12 = 12;
+                    Diagnostic(ErrorCode.WRN_UnreferencedVarAssg, "y12")
+                        .WithArguments("y12")
+                        .WithLocation(52, 9)
+                );
 
                 var tree = compilation.SyntaxTrees.Single();
                 var model = compilation.GetSemanticModel(tree);
@@ -7320,43 +8882,68 @@ foreach (var x15 in
             }
 
             {
-                var compilation = CreateCompilationWithMscorlib45(source, options: TestOptions.ReleaseExe, parseOptions: TestOptions.Regular9);
+                var compilation = CreateCompilationWithMscorlib45(
+                    source,
+                    options: TestOptions.ReleaseExe,
+                    parseOptions: TestOptions.Regular9
+                );
 
                 compilation.VerifyDiagnostics(
                     // (15,37): error CS0136: A local or parameter named 'x4' cannot be declared in this scope because that name is used in an enclosing local scope to define a local or parameter
                     // foreach (var i in Dummy(true is var x4 && x4))
-                    Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "x4").WithArguments("x4").WithLocation(15, 37),
+                    Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "x4")
+                        .WithArguments("x4")
+                        .WithLocation(15, 37),
                     // (52,5): error CS1023: Embedded statement cannot be a declaration or labeled statement
                     //     var y12 = 12;
-                    Diagnostic(ErrorCode.ERR_BadEmbeddedStmt, "var y12 = 12;").WithLocation(52, 5),
+                    Diagnostic(ErrorCode.ERR_BadEmbeddedStmt, "var y12 = 12;")
+                        .WithLocation(52, 5),
                     // (18,25): error CS0841: Cannot use local variable 'x6' before it is declared
                     // foreach (var i in Dummy(x6 && true is var x6))
-                    Diagnostic(ErrorCode.ERR_VariableUsedBeforeDeclaration, "x6").WithArguments("x6").WithLocation(18, 25),
+                    Diagnostic(ErrorCode.ERR_VariableUsedBeforeDeclaration, "x6")
+                        .WithArguments("x6")
+                        .WithLocation(18, 25),
                     // (23,9): error CS0136: A local or parameter named 'x7' cannot be declared in this scope because that name is used in an enclosing local scope to define a local or parameter
                     //     var x7 = 12;
-                    Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "x7").WithArguments("x7").WithLocation(23, 9),
+                    Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "x7")
+                        .WithArguments("x7")
+                        .WithLocation(23, 9),
                     // (30,26): error CS0103: The name 'x8' does not exist in the current context
                     // System.Console.WriteLine(x8);
-                    Diagnostic(ErrorCode.ERR_NameNotInContext, "x8").WithArguments("x8").WithLocation(30, 26),
+                    Diagnostic(ErrorCode.ERR_NameNotInContext, "x8")
+                        .WithArguments("x8")
+                        .WithLocation(30, 26),
                     // (35,42): error CS0136: A local or parameter named 'x9' cannot be declared in this scope because that name is used in an enclosing local scope to define a local or parameter
                     //     foreach (var i2 in Dummy(true is var x9 && x9)) // 2
-                    Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "x9").WithArguments("x9").WithLocation(35, 42),
+                    Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "x9")
+                        .WithArguments("x9")
+                        .WithLocation(35, 42),
                     // (39,25): error CS0103: The name 'y10' does not exist in the current context
                     // foreach (var i in Dummy(y10 is var x10))
-                    Diagnostic(ErrorCode.ERR_NameNotInContext, "y10").WithArguments("y10").WithLocation(39, 25),
+                    Diagnostic(ErrorCode.ERR_NameNotInContext, "y10")
+                        .WithArguments("y10")
+                        .WithLocation(39, 25),
                     // (51,25): error CS0103: The name 'y12' does not exist in the current context
                     // foreach (var i in Dummy(y12 is var x12))
-                    Diagnostic(ErrorCode.ERR_NameNotInContext, "y12").WithArguments("y12").WithLocation(51, 25),
+                    Diagnostic(ErrorCode.ERR_NameNotInContext, "y12")
+                        .WithArguments("y12")
+                        .WithLocation(51, 25),
                     // (58,34): error CS0128: A local variable or function named 'x14' is already defined in this scope
-                    //                         2 is var x14, 
-                    Diagnostic(ErrorCode.ERR_LocalDuplicate, "x14").WithArguments("x14").WithLocation(58, 34),
+                    //                         2 is var x14,
+                    Diagnostic(ErrorCode.ERR_LocalDuplicate, "x14")
+                        .WithArguments("x14")
+                        .WithLocation(58, 34),
                     // (64,14): error CS0136: A local or parameter named 'x15' cannot be declared in this scope because that name is used in an enclosing local scope to define a local or parameter
-                    // foreach (var x15 in 
-                    Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "x15").WithArguments("x15").WithLocation(64, 14),
+                    // foreach (var x15 in
+                    Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "x15")
+                        .WithArguments("x15")
+                        .WithLocation(64, 14),
                     // (52,9): warning CS0219: The variable 'y12' is assigned but its value is never used
                     //     var y12 = 12;
-                    Diagnostic(ErrorCode.WRN_UnreferencedVarAssg, "y12").WithArguments("y12").WithLocation(52, 9)
-                    );
+                    Diagnostic(ErrorCode.WRN_UnreferencedVarAssg, "y12")
+                        .WithArguments("y12")
+                        .WithLocation(52, 9)
+                );
 
                 var tree = compilation.SyntaxTrees.Single();
                 var model = compilation.GetSemanticModel(tree);
@@ -7428,7 +9015,7 @@ foreach (var x15 in
         public void GlobalCode_Foreach_02()
         {
             var source =
-@"
+                @"
 bool f = true;
 
 foreach (var i in Dummy(3 is var x1, x1))
@@ -7442,10 +9029,16 @@ static System.Collections.IEnumerable Dummy(object y, object z)
     return ""a"";
 }
 ";
-            var compilation = CreateCompilationWithMscorlib45(source, options: TestOptions.ReleaseExe.WithScriptClassName("Script"), parseOptions: TestOptions.Script);
-            CompileAndVerify(compilation, expectedOutput:
-@"3
-3");
+            var compilation = CreateCompilationWithMscorlib45(
+                source,
+                options: TestOptions.ReleaseExe.WithScriptClassName("Script"),
+                parseOptions: TestOptions.Script
+            );
+            CompileAndVerify(
+                compilation,
+                expectedOutput: @"3
+3"
+            );
 
             var tree = compilation.SyntaxTrees.Single();
             var model = compilation.GetSemanticModel(tree);
@@ -7460,7 +9053,7 @@ static System.Collections.IEnumerable Dummy(object y, object z)
         public void GlobalCode_Lambda_01()
         {
             var source =
-@"
+                @"
 bool Dummy(params object[] x) {return true;}
 
 Dummy((System.Func<int, bool>) (o => o is var x3 && x3 > 0));
@@ -7501,27 +9094,43 @@ var x12 = 11;
 Dummy(x12);
 ";
             {
-                var compilation = CreateCompilationWithMscorlib45(source, options: TestOptions.ReleaseExe.WithScriptClassName("Script"), parseOptions: TestOptions.Script);
+                var compilation = CreateCompilationWithMscorlib45(
+                    source,
+                    options: TestOptions.ReleaseExe.WithScriptClassName("Script"),
+                    parseOptions: TestOptions.Script
+                );
                 compilation.VerifyDiagnostics(
-                // (6,39): error CS0841: Cannot use local variable 'x4' before it is declared
-                // Dummy((System.Func<bool, bool>) (o => x4 && o is var x4));
-                Diagnostic(ErrorCode.ERR_VariableUsedBeforeDeclaration, "x4").WithArguments("x4").WithLocation(6, 39),
-                // (9,67): error CS0128: A local variable or function named 'x5' is already defined in this scope
-                //                                                         o2 is var x5 && 
-                Diagnostic(ErrorCode.ERR_LocalDuplicate, "x5").WithArguments("x5").WithLocation(9, 67),
-                // (14,7): error CS0103: The name 'x7' does not exist in the current context
-                // Dummy(x7, 1);
-                Diagnostic(ErrorCode.ERR_NameNotInContext, "x7").WithArguments("x7").WithLocation(14, 7),
-                // (15,7): error CS0103: The name 'x7' does not exist in the current context
-                // Dummy(x7, 
-                Diagnostic(ErrorCode.ERR_NameNotInContext, "x7").WithArguments("x7").WithLocation(15, 7),
-                // (17,9): error CS0103: The name 'x7' does not exist in the current context
-                //         x7);
-                Diagnostic(ErrorCode.ERR_NameNotInContext, "x7").WithArguments("x7").WithLocation(17, 9),
-                // (18,7): error CS0103: The name 'x7' does not exist in the current context
-                // Dummy(x7, 2); 
-                Diagnostic(ErrorCode.ERR_NameNotInContext, "x7").WithArguments("x7").WithLocation(18, 7)
-                    );
+                    // (6,39): error CS0841: Cannot use local variable 'x4' before it is declared
+                    // Dummy((System.Func<bool, bool>) (o => x4 && o is var x4));
+                    Diagnostic(ErrorCode.ERR_VariableUsedBeforeDeclaration, "x4")
+                        .WithArguments("x4")
+                        .WithLocation(6, 39),
+                    // (9,67): error CS0128: A local variable or function named 'x5' is already defined in this scope
+                    //                                                         o2 is var x5 &&
+                    Diagnostic(ErrorCode.ERR_LocalDuplicate, "x5")
+                        .WithArguments("x5")
+                        .WithLocation(9, 67),
+                    // (14,7): error CS0103: The name 'x7' does not exist in the current context
+                    // Dummy(x7, 1);
+                    Diagnostic(ErrorCode.ERR_NameNotInContext, "x7")
+                        .WithArguments("x7")
+                        .WithLocation(14, 7),
+                    // (15,7): error CS0103: The name 'x7' does not exist in the current context
+                    // Dummy(x7,
+                    Diagnostic(ErrorCode.ERR_NameNotInContext, "x7")
+                        .WithArguments("x7")
+                        .WithLocation(15, 7),
+                    // (17,9): error CS0103: The name 'x7' does not exist in the current context
+                    //         x7);
+                    Diagnostic(ErrorCode.ERR_NameNotInContext, "x7")
+                        .WithArguments("x7")
+                        .WithLocation(17, 9),
+                    // (18,7): error CS0103: The name 'x7' does not exist in the current context
+                    // Dummy(x7, 2);
+                    Diagnostic(ErrorCode.ERR_NameNotInContext, "x7")
+                        .WithArguments("x7")
+                        .WithLocation(18, 7)
+                );
 
                 var tree = compilation.SyntaxTrees.Single();
                 var model = compilation.GetSemanticModel(tree);
@@ -7591,31 +9200,49 @@ Dummy(x12);
             }
 
             {
-                var compilation = CreateCompilationWithMscorlib45(source, options: TestOptions.ReleaseExe, parseOptions: TestOptions.Regular9);
+                var compilation = CreateCompilationWithMscorlib45(
+                    source,
+                    options: TestOptions.ReleaseExe,
+                    parseOptions: TestOptions.Regular9
+                );
 
                 compilation.VerifyDiagnostics(
                     // (6,39): error CS0841: Cannot use local variable 'x4' before it is declared
                     // Dummy((System.Func<bool, bool>) (o => x4 && o is var x4));
-                    Diagnostic(ErrorCode.ERR_VariableUsedBeforeDeclaration, "x4").WithArguments("x4").WithLocation(6, 39),
+                    Diagnostic(ErrorCode.ERR_VariableUsedBeforeDeclaration, "x4")
+                        .WithArguments("x4")
+                        .WithLocation(6, 39),
                     // (9,67): error CS0128: A local variable or function named 'x5' is already defined in this scope
-                    //                                                         o2 is var x5 && 
-                    Diagnostic(ErrorCode.ERR_LocalDuplicate, "x5").WithArguments("x5").WithLocation(9, 67),
+                    //                                                         o2 is var x5 &&
+                    Diagnostic(ErrorCode.ERR_LocalDuplicate, "x5")
+                        .WithArguments("x5")
+                        .WithLocation(9, 67),
                     // (14,7): error CS0103: The name 'x7' does not exist in the current context
                     // Dummy(x7, 1);
-                    Diagnostic(ErrorCode.ERR_NameNotInContext, "x7").WithArguments("x7").WithLocation(14, 7),
+                    Diagnostic(ErrorCode.ERR_NameNotInContext, "x7")
+                        .WithArguments("x7")
+                        .WithLocation(14, 7),
                     // (15,7): error CS0103: The name 'x7' does not exist in the current context
-                    // Dummy(x7, 
-                    Diagnostic(ErrorCode.ERR_NameNotInContext, "x7").WithArguments("x7").WithLocation(15, 7),
+                    // Dummy(x7,
+                    Diagnostic(ErrorCode.ERR_NameNotInContext, "x7")
+                        .WithArguments("x7")
+                        .WithLocation(15, 7),
                     // (17,9): error CS0103: The name 'x7' does not exist in the current context
                     //         x7);
-                    Diagnostic(ErrorCode.ERR_NameNotInContext, "x7").WithArguments("x7").WithLocation(17, 9),
+                    Diagnostic(ErrorCode.ERR_NameNotInContext, "x7")
+                        .WithArguments("x7")
+                        .WithLocation(17, 9),
                     // (18,7): error CS0103: The name 'x7' does not exist in the current context
-                    // Dummy(x7, 2); 
-                    Diagnostic(ErrorCode.ERR_NameNotInContext, "x7").WithArguments("x7").WithLocation(18, 7),
+                    // Dummy(x7, 2);
+                    Diagnostic(ErrorCode.ERR_NameNotInContext, "x7")
+                        .WithArguments("x7")
+                        .WithLocation(18, 7),
                     // (37,9): error CS0841: Cannot use local variable 'x12' before it is declared
                     //         x12);
-                    Diagnostic(ErrorCode.ERR_VariableUsedBeforeDeclaration, "x12").WithArguments("x12").WithLocation(37, 9)
-                    );
+                    Diagnostic(ErrorCode.ERR_VariableUsedBeforeDeclaration, "x12")
+                        .WithArguments("x12")
+                        .WithLocation(37, 9)
+                );
 
                 var tree = compilation.SyntaxTrees.Single();
                 var model = compilation.GetSemanticModel(tree);
@@ -7690,7 +9317,7 @@ Dummy(x12);
         public void GlobalCode_Lambda_02()
         {
             var source =
-@"
+                @"
 System.Func<bool> l = () => 1 is int x1 && Dummy(x1); 
 System.Console.WriteLine(l());
 
@@ -7700,9 +9327,16 @@ static bool Dummy(int x)
     return true;
 }
 ";
-            var compilation = CreateCompilationWithMscorlib45(source, options: TestOptions.ReleaseExe.WithScriptClassName("Script"), parseOptions: TestOptions.Script);
-            CompileAndVerify(compilation, expectedOutput: @"1
-True");
+            var compilation = CreateCompilationWithMscorlib45(
+                source,
+                options: TestOptions.ReleaseExe.WithScriptClassName("Script"),
+                parseOptions: TestOptions.Script
+            );
+            CompileAndVerify(
+                compilation,
+                expectedOutput: @"1
+True"
+            );
 
             var tree = compilation.SyntaxTrees.Single();
             var model = compilation.GetSemanticModel(tree);
@@ -7716,7 +9350,7 @@ True");
         public void GlobalCode_Lambda_03()
         {
             var source =
-@"
+                @"
 System.Console.WriteLine(((System.Func<bool>)(() => 1 is int x1 && Dummy(x1)))());
 
 static bool Dummy(int x) 
@@ -7725,9 +9359,16 @@ static bool Dummy(int x)
     return true;
 }
 ";
-            var compilation = CreateCompilationWithMscorlib45(source, options: TestOptions.ReleaseExe.WithScriptClassName("Script"), parseOptions: TestOptions.Script);
-            CompileAndVerify(compilation, expectedOutput: @"1
-True");
+            var compilation = CreateCompilationWithMscorlib45(
+                source,
+                options: TestOptions.ReleaseExe.WithScriptClassName("Script"),
+                parseOptions: TestOptions.Script
+            );
+            CompileAndVerify(
+                compilation,
+                expectedOutput: @"1
+True"
+            );
 
             var tree = compilation.SyntaxTrees.Single();
             var model = compilation.GetSemanticModel(tree);
@@ -7741,7 +9382,7 @@ True");
         public void GlobalCode_Query_01()
         {
             var source =
-@"
+                @"
 using System.Linq;
 
 bool Dummy(params object[] x) {return true;}
@@ -7834,96 +9475,159 @@ var r11 = from x1 in new[] { 1 is var y11 ? y11 : 0}
             select x1 + y11;
 ";
             {
-                var compilation = CreateCompilationWithMscorlib45(source, new[] { SystemCoreRef }, options: TestOptions.ReleaseExe.WithScriptClassName("Script"), parseOptions: TestOptions.Script);
+                var compilation = CreateCompilationWithMscorlib45(
+                    source,
+                    new[] { SystemCoreRef },
+                    options: TestOptions.ReleaseExe.WithScriptClassName("Script"),
+                    parseOptions: TestOptions.Script
+                );
                 compilation.VerifyDiagnostics(
-                // (14,21): error CS0103: The name 'z2' does not exist in the current context
-                //                     z2;
-                Diagnostic(ErrorCode.ERR_NameNotInContext, "z2").WithArguments("z2").WithLocation(14, 21),
-                // (21,25): error CS0103: The name 'z3' does not exist in the current context
-                //                         z3};
-                Diagnostic(ErrorCode.ERR_NameNotInContext, "z3").WithArguments("z3").WithLocation(21, 25),
-                // (28,29): error CS0103: The name 'v4' does not exist in the current context
-                //                             v4 
-                Diagnostic(ErrorCode.ERR_NameNotInContext, "v4").WithArguments("v4").WithLocation(28, 29),
-                // (30,29): error CS1938: The name 'u4' is not in scope on the right side of 'equals'.  Consider swapping the expressions on either side of 'equals'.
-                //                             u4 
-                Diagnostic(ErrorCode.ERR_QueryInnerKey, "u4").WithArguments("u4").WithLocation(30, 29),
-                // (32,25): error CS0103: The name 'u4' does not exist in the current context
-                //                         u4, v4 };
-                Diagnostic(ErrorCode.ERR_NameNotInContext, "u4").WithArguments("u4").WithLocation(32, 25),
-                // (32,29): error CS0103: The name 'v4' does not exist in the current context
-                //                         u4, v4 };
-                Diagnostic(ErrorCode.ERR_NameNotInContext, "v4").WithArguments("v4").WithLocation(32, 29),
-                // (41,29): error CS0103: The name 'v5' does not exist in the current context
-                //                             v5 
-                Diagnostic(ErrorCode.ERR_NameNotInContext, "v5").WithArguments("v5").WithLocation(41, 29),
-                // (43,29): error CS1938: The name 'u5' is not in scope on the right side of 'equals'.  Consider swapping the expressions on either side of 'equals'.
-                //                             u5 
-                Diagnostic(ErrorCode.ERR_QueryInnerKey, "u5").WithArguments("u5").WithLocation(43, 29),
-                // (46,25): error CS0103: The name 'u5' does not exist in the current context
-                //                         u5, v5 };
-                Diagnostic(ErrorCode.ERR_NameNotInContext, "u5").WithArguments("u5").WithLocation(46, 25),
-                // (46,29): error CS0103: The name 'v5' does not exist in the current context
-                //                         u5, v5 };
-                Diagnostic(ErrorCode.ERR_NameNotInContext, "v5").WithArguments("v5").WithLocation(46, 29),
-                // (55,21): error CS0103: The name 'z6' does not exist in the current context
-                //                     z6;
-                Diagnostic(ErrorCode.ERR_NameNotInContext, "z6").WithArguments("z6").WithLocation(55, 21),
-                // (61,21): error CS0103: The name 'u7' does not exist in the current context
-                //                     u7,
-                Diagnostic(ErrorCode.ERR_NameNotInContext, "u7").WithArguments("u7").WithLocation(61, 21),
-                // (63,21): error CS0103: The name 'z7' does not exist in the current context
-                //                     z7   
-                Diagnostic(ErrorCode.ERR_NameNotInContext, "z7").WithArguments("z7").WithLocation(63, 21),
-                // (65,21): error CS0103: The name 'z7' does not exist in the current context
-                //                     z7 + u7;
-                Diagnostic(ErrorCode.ERR_NameNotInContext, "z7").WithArguments("z7").WithLocation(65, 21),
-                // (65,26): error CS0103: The name 'u7' does not exist in the current context
-                //                     z7 + u7;
-                Diagnostic(ErrorCode.ERR_NameNotInContext, "u7").WithArguments("u7").WithLocation(65, 26),
-                // (80,17): error CS0103: The name 'z9' does not exist in the current context
-                //                 z9;   
-                Diagnostic(ErrorCode.ERR_NameNotInContext, "z9").WithArguments("z9").WithLocation(80, 17),
-                // (77,17): error CS0103: The name 'u9' does not exist in the current context
-                //                 u9
-                Diagnostic(ErrorCode.ERR_NameNotInContext, "u9").WithArguments("u9").WithLocation(77, 17),
-                // (16,7): error CS0103: The name 'z2' does not exist in the current context
-                // Dummy(z2); 
-                Diagnostic(ErrorCode.ERR_NameNotInContext, "z2").WithArguments("z2").WithLocation(16, 7),
-                // (23,7): error CS0103: The name 'z3' does not exist in the current context
-                // Dummy(z3); 
-                Diagnostic(ErrorCode.ERR_NameNotInContext, "z3").WithArguments("z3").WithLocation(23, 7),
-                // (35,7): error CS0103: The name 'u4' does not exist in the current context
-                // Dummy(u4); 
-                Diagnostic(ErrorCode.ERR_NameNotInContext, "u4").WithArguments("u4").WithLocation(35, 7),
-                // (36,7): error CS0103: The name 'v4' does not exist in the current context
-                // Dummy(v4); 
-                Diagnostic(ErrorCode.ERR_NameNotInContext, "v4").WithArguments("v4").WithLocation(36, 7),
-                // (49,7): error CS0103: The name 'u5' does not exist in the current context
-                // Dummy(u5); 
-                Diagnostic(ErrorCode.ERR_NameNotInContext, "u5").WithArguments("u5").WithLocation(49, 7),
-                // (50,7): error CS0103: The name 'v5' does not exist in the current context
-                // Dummy(v5); 
-                Diagnostic(ErrorCode.ERR_NameNotInContext, "v5").WithArguments("v5").WithLocation(50, 7),
-                // (57,7): error CS0103: The name 'z6' does not exist in the current context
-                // Dummy(z6); 
-                Diagnostic(ErrorCode.ERR_NameNotInContext, "z6").WithArguments("z6").WithLocation(57, 7),
-                // (67,7): error CS0103: The name 'z7' does not exist in the current context
-                // Dummy(z7); 
-                Diagnostic(ErrorCode.ERR_NameNotInContext, "z7").WithArguments("z7").WithLocation(67, 7),
-                // (68,7): error CS0103: The name 'u7' does not exist in the current context
-                // Dummy(u7); 
-                Diagnostic(ErrorCode.ERR_NameNotInContext, "u7").WithArguments("u7").WithLocation(68, 7),
-                // (73,7): error CS0103: The name 'z8' does not exist in the current context
-                // Dummy(z8); 
-                Diagnostic(ErrorCode.ERR_NameNotInContext, "z8").WithArguments("z8").WithLocation(73, 7),
-                // (82,7): error CS0103: The name 'z9' does not exist in the current context
-                // Dummy(z9); 
-                Diagnostic(ErrorCode.ERR_NameNotInContext, "z9").WithArguments("z9").WithLocation(82, 7),
-                // (83,7): error CS0103: The name 'u9' does not exist in the current context
-                // Dummy(u9); 
-                Diagnostic(ErrorCode.ERR_NameNotInContext, "u9").WithArguments("u9").WithLocation(83, 7)
-                    );
+                    // (14,21): error CS0103: The name 'z2' does not exist in the current context
+                    //                     z2;
+                    Diagnostic(ErrorCode.ERR_NameNotInContext, "z2")
+                        .WithArguments("z2")
+                        .WithLocation(14, 21),
+                    // (21,25): error CS0103: The name 'z3' does not exist in the current context
+                    //                         z3};
+                    Diagnostic(ErrorCode.ERR_NameNotInContext, "z3")
+                        .WithArguments("z3")
+                        .WithLocation(21, 25),
+                    // (28,29): error CS0103: The name 'v4' does not exist in the current context
+                    //                             v4
+                    Diagnostic(ErrorCode.ERR_NameNotInContext, "v4")
+                        .WithArguments("v4")
+                        .WithLocation(28, 29),
+                    // (30,29): error CS1938: The name 'u4' is not in scope on the right side of 'equals'.  Consider swapping the expressions on either side of 'equals'.
+                    //                             u4
+                    Diagnostic(ErrorCode.ERR_QueryInnerKey, "u4")
+                        .WithArguments("u4")
+                        .WithLocation(30, 29),
+                    // (32,25): error CS0103: The name 'u4' does not exist in the current context
+                    //                         u4, v4 };
+                    Diagnostic(ErrorCode.ERR_NameNotInContext, "u4")
+                        .WithArguments("u4")
+                        .WithLocation(32, 25),
+                    // (32,29): error CS0103: The name 'v4' does not exist in the current context
+                    //                         u4, v4 };
+                    Diagnostic(ErrorCode.ERR_NameNotInContext, "v4")
+                        .WithArguments("v4")
+                        .WithLocation(32, 29),
+                    // (41,29): error CS0103: The name 'v5' does not exist in the current context
+                    //                             v5
+                    Diagnostic(ErrorCode.ERR_NameNotInContext, "v5")
+                        .WithArguments("v5")
+                        .WithLocation(41, 29),
+                    // (43,29): error CS1938: The name 'u5' is not in scope on the right side of 'equals'.  Consider swapping the expressions on either side of 'equals'.
+                    //                             u5
+                    Diagnostic(ErrorCode.ERR_QueryInnerKey, "u5")
+                        .WithArguments("u5")
+                        .WithLocation(43, 29),
+                    // (46,25): error CS0103: The name 'u5' does not exist in the current context
+                    //                         u5, v5 };
+                    Diagnostic(ErrorCode.ERR_NameNotInContext, "u5")
+                        .WithArguments("u5")
+                        .WithLocation(46, 25),
+                    // (46,29): error CS0103: The name 'v5' does not exist in the current context
+                    //                         u5, v5 };
+                    Diagnostic(ErrorCode.ERR_NameNotInContext, "v5")
+                        .WithArguments("v5")
+                        .WithLocation(46, 29),
+                    // (55,21): error CS0103: The name 'z6' does not exist in the current context
+                    //                     z6;
+                    Diagnostic(ErrorCode.ERR_NameNotInContext, "z6")
+                        .WithArguments("z6")
+                        .WithLocation(55, 21),
+                    // (61,21): error CS0103: The name 'u7' does not exist in the current context
+                    //                     u7,
+                    Diagnostic(ErrorCode.ERR_NameNotInContext, "u7")
+                        .WithArguments("u7")
+                        .WithLocation(61, 21),
+                    // (63,21): error CS0103: The name 'z7' does not exist in the current context
+                    //                     z7
+                    Diagnostic(ErrorCode.ERR_NameNotInContext, "z7")
+                        .WithArguments("z7")
+                        .WithLocation(63, 21),
+                    // (65,21): error CS0103: The name 'z7' does not exist in the current context
+                    //                     z7 + u7;
+                    Diagnostic(ErrorCode.ERR_NameNotInContext, "z7")
+                        .WithArguments("z7")
+                        .WithLocation(65, 21),
+                    // (65,26): error CS0103: The name 'u7' does not exist in the current context
+                    //                     z7 + u7;
+                    Diagnostic(ErrorCode.ERR_NameNotInContext, "u7")
+                        .WithArguments("u7")
+                        .WithLocation(65, 26),
+                    // (80,17): error CS0103: The name 'z9' does not exist in the current context
+                    //                 z9;
+                    Diagnostic(ErrorCode.ERR_NameNotInContext, "z9")
+                        .WithArguments("z9")
+                        .WithLocation(80, 17),
+                    // (77,17): error CS0103: The name 'u9' does not exist in the current context
+                    //                 u9
+                    Diagnostic(ErrorCode.ERR_NameNotInContext, "u9")
+                        .WithArguments("u9")
+                        .WithLocation(77, 17),
+                    // (16,7): error CS0103: The name 'z2' does not exist in the current context
+                    // Dummy(z2);
+                    Diagnostic(ErrorCode.ERR_NameNotInContext, "z2")
+                        .WithArguments("z2")
+                        .WithLocation(16, 7),
+                    // (23,7): error CS0103: The name 'z3' does not exist in the current context
+                    // Dummy(z3);
+                    Diagnostic(ErrorCode.ERR_NameNotInContext, "z3")
+                        .WithArguments("z3")
+                        .WithLocation(23, 7),
+                    // (35,7): error CS0103: The name 'u4' does not exist in the current context
+                    // Dummy(u4);
+                    Diagnostic(ErrorCode.ERR_NameNotInContext, "u4")
+                        .WithArguments("u4")
+                        .WithLocation(35, 7),
+                    // (36,7): error CS0103: The name 'v4' does not exist in the current context
+                    // Dummy(v4);
+                    Diagnostic(ErrorCode.ERR_NameNotInContext, "v4")
+                        .WithArguments("v4")
+                        .WithLocation(36, 7),
+                    // (49,7): error CS0103: The name 'u5' does not exist in the current context
+                    // Dummy(u5);
+                    Diagnostic(ErrorCode.ERR_NameNotInContext, "u5")
+                        .WithArguments("u5")
+                        .WithLocation(49, 7),
+                    // (50,7): error CS0103: The name 'v5' does not exist in the current context
+                    // Dummy(v5);
+                    Diagnostic(ErrorCode.ERR_NameNotInContext, "v5")
+                        .WithArguments("v5")
+                        .WithLocation(50, 7),
+                    // (57,7): error CS0103: The name 'z6' does not exist in the current context
+                    // Dummy(z6);
+                    Diagnostic(ErrorCode.ERR_NameNotInContext, "z6")
+                        .WithArguments("z6")
+                        .WithLocation(57, 7),
+                    // (67,7): error CS0103: The name 'z7' does not exist in the current context
+                    // Dummy(z7);
+                    Diagnostic(ErrorCode.ERR_NameNotInContext, "z7")
+                        .WithArguments("z7")
+                        .WithLocation(67, 7),
+                    // (68,7): error CS0103: The name 'u7' does not exist in the current context
+                    // Dummy(u7);
+                    Diagnostic(ErrorCode.ERR_NameNotInContext, "u7")
+                        .WithArguments("u7")
+                        .WithLocation(68, 7),
+                    // (73,7): error CS0103: The name 'z8' does not exist in the current context
+                    // Dummy(z8);
+                    Diagnostic(ErrorCode.ERR_NameNotInContext, "z8")
+                        .WithArguments("z8")
+                        .WithLocation(73, 7),
+                    // (82,7): error CS0103: The name 'z9' does not exist in the current context
+                    // Dummy(z9);
+                    Diagnostic(ErrorCode.ERR_NameNotInContext, "z9")
+                        .WithArguments("z9")
+                        .WithLocation(82, 7),
+                    // (83,7): error CS0103: The name 'u9' does not exist in the current context
+                    // Dummy(u9);
+                    Diagnostic(ErrorCode.ERR_NameNotInContext, "u9")
+                        .WithArguments("u9")
+                        .WithLocation(83, 7)
+                );
 
                 var tree = compilation.SyntaxTrees.Single();
                 var model = compilation.GetSemanticModel(tree);
@@ -8086,103 +9790,170 @@ var r11 = from x1 in new[] { 1 is var y11 ? y11 : 0}
             }
 
             {
-                var compilation = CreateCompilationWithMscorlib45(source, new[] { SystemCoreRef }, options: TestOptions.ReleaseExe, parseOptions: TestOptions.Regular9);
+                var compilation = CreateCompilationWithMscorlib45(
+                    source,
+                    new[] { SystemCoreRef },
+                    options: TestOptions.ReleaseExe,
+                    parseOptions: TestOptions.Regular9
+                );
 
                 compilation.VerifyDiagnostics(
-                // (14,21): error CS0103: The name 'z2' does not exist in the current context
-                //                     z2;
-                Diagnostic(ErrorCode.ERR_NameNotInContext, "z2").WithArguments("z2").WithLocation(14, 21),
-                // (21,25): error CS0103: The name 'z3' does not exist in the current context
-                //                         z3};
-                Diagnostic(ErrorCode.ERR_NameNotInContext, "z3").WithArguments("z3").WithLocation(21, 25),
-                // (28,29): error CS0103: The name 'v4' does not exist in the current context
-                //                             v4 
-                Diagnostic(ErrorCode.ERR_NameNotInContext, "v4").WithArguments("v4").WithLocation(28, 29),
-                // (30,29): error CS1938: The name 'u4' is not in scope on the right side of 'equals'.  Consider swapping the expressions on either side of 'equals'.
-                //                             u4 
-                Diagnostic(ErrorCode.ERR_QueryInnerKey, "u4").WithArguments("u4").WithLocation(30, 29),
-                // (32,25): error CS0103: The name 'u4' does not exist in the current context
-                //                         u4, v4 };
-                Diagnostic(ErrorCode.ERR_NameNotInContext, "u4").WithArguments("u4").WithLocation(32, 25),
-                // (32,29): error CS0103: The name 'v4' does not exist in the current context
-                //                         u4, v4 };
-                Diagnostic(ErrorCode.ERR_NameNotInContext, "v4").WithArguments("v4").WithLocation(32, 29),
-                // (41,29): error CS0103: The name 'v5' does not exist in the current context
-                //                             v5 
-                Diagnostic(ErrorCode.ERR_NameNotInContext, "v5").WithArguments("v5").WithLocation(41, 29),
-                // (43,29): error CS1938: The name 'u5' is not in scope on the right side of 'equals'.  Consider swapping the expressions on either side of 'equals'.
-                //                             u5 
-                Diagnostic(ErrorCode.ERR_QueryInnerKey, "u5").WithArguments("u5").WithLocation(43, 29),
-                // (46,25): error CS0103: The name 'u5' does not exist in the current context
-                //                         u5, v5 };
-                Diagnostic(ErrorCode.ERR_NameNotInContext, "u5").WithArguments("u5").WithLocation(46, 25),
-                // (46,29): error CS0103: The name 'v5' does not exist in the current context
-                //                         u5, v5 };
-                Diagnostic(ErrorCode.ERR_NameNotInContext, "v5").WithArguments("v5").WithLocation(46, 29),
-                // (55,21): error CS0103: The name 'z6' does not exist in the current context
-                //                     z6;
-                Diagnostic(ErrorCode.ERR_NameNotInContext, "z6").WithArguments("z6").WithLocation(55, 21),
-                // (61,21): error CS0103: The name 'u7' does not exist in the current context
-                //                     u7,
-                Diagnostic(ErrorCode.ERR_NameNotInContext, "u7").WithArguments("u7").WithLocation(61, 21),
-                // (63,21): error CS0103: The name 'z7' does not exist in the current context
-                //                     z7   
-                Diagnostic(ErrorCode.ERR_NameNotInContext, "z7").WithArguments("z7").WithLocation(63, 21),
-                // (65,21): error CS0103: The name 'z7' does not exist in the current context
-                //                     z7 + u7;
-                Diagnostic(ErrorCode.ERR_NameNotInContext, "z7").WithArguments("z7").WithLocation(65, 21),
-                // (65,26): error CS0103: The name 'u7' does not exist in the current context
-                //                     z7 + u7;
-                Diagnostic(ErrorCode.ERR_NameNotInContext, "u7").WithArguments("u7").WithLocation(65, 26),
-                // (80,17): error CS0103: The name 'z9' does not exist in the current context
-                //                 z9;   
-                Diagnostic(ErrorCode.ERR_NameNotInContext, "z9").WithArguments("z9").WithLocation(80, 17),
-                // (77,17): error CS0103: The name 'u9' does not exist in the current context
-                //                 u9
-                Diagnostic(ErrorCode.ERR_NameNotInContext, "u9").WithArguments("u9").WithLocation(77, 17),
-                // (16,7): error CS0103: The name 'z2' does not exist in the current context
-                // Dummy(z2); 
-                Diagnostic(ErrorCode.ERR_NameNotInContext, "z2").WithArguments("z2").WithLocation(16, 7),
-                // (23,7): error CS0103: The name 'z3' does not exist in the current context
-                // Dummy(z3); 
-                Diagnostic(ErrorCode.ERR_NameNotInContext, "z3").WithArguments("z3").WithLocation(23, 7),
-                // (35,7): error CS0103: The name 'u4' does not exist in the current context
-                // Dummy(u4); 
-                Diagnostic(ErrorCode.ERR_NameNotInContext, "u4").WithArguments("u4").WithLocation(35, 7),
-                // (36,7): error CS0103: The name 'v4' does not exist in the current context
-                // Dummy(v4); 
-                Diagnostic(ErrorCode.ERR_NameNotInContext, "v4").WithArguments("v4").WithLocation(36, 7),
-                // (49,7): error CS0103: The name 'u5' does not exist in the current context
-                // Dummy(u5); 
-                Diagnostic(ErrorCode.ERR_NameNotInContext, "u5").WithArguments("u5").WithLocation(49, 7),
-                // (50,7): error CS0103: The name 'v5' does not exist in the current context
-                // Dummy(v5); 
-                Diagnostic(ErrorCode.ERR_NameNotInContext, "v5").WithArguments("v5").WithLocation(50, 7),
-                // (57,7): error CS0103: The name 'z6' does not exist in the current context
-                // Dummy(z6); 
-                Diagnostic(ErrorCode.ERR_NameNotInContext, "z6").WithArguments("z6").WithLocation(57, 7),
-                // (67,7): error CS0103: The name 'z7' does not exist in the current context
-                // Dummy(z7); 
-                Diagnostic(ErrorCode.ERR_NameNotInContext, "z7").WithArguments("z7").WithLocation(67, 7),
-                // (68,7): error CS0103: The name 'u7' does not exist in the current context
-                // Dummy(u7); 
-                Diagnostic(ErrorCode.ERR_NameNotInContext, "u7").WithArguments("u7").WithLocation(68, 7),
-                // (73,7): error CS0103: The name 'z8' does not exist in the current context
-                // Dummy(z8); 
-                Diagnostic(ErrorCode.ERR_NameNotInContext, "z8").WithArguments("z8").WithLocation(73, 7),
-                // (82,7): error CS0103: The name 'z9' does not exist in the current context
-                // Dummy(z9); 
-                Diagnostic(ErrorCode.ERR_NameNotInContext, "z9").WithArguments("z9").WithLocation(82, 7),
-                // (83,7): error CS0103: The name 'u9' does not exist in the current context
-                // Dummy(u9); 
-                Diagnostic(ErrorCode.ERR_NameNotInContext, "u9").WithArguments("u9").WithLocation(83, 7),
-                // (86,18): error CS1931: The range variable 'y10' conflicts with a previous declaration of 'y10'
-                //             from y10 in new[] { 1 }
-                Diagnostic(ErrorCode.ERR_QueryRangeVariableOverrides, "y10").WithArguments("y10").WithLocation(86, 18),
-                // (90,17): error CS1931: The range variable 'y11' conflicts with a previous declaration of 'y11'
-                //             let y11 = x1 + 1
-                Diagnostic(ErrorCode.ERR_QueryRangeVariableOverrides, "y11").WithArguments("y11").WithLocation(90, 17)
-                    );
+                    // (14,21): error CS0103: The name 'z2' does not exist in the current context
+                    //                     z2;
+                    Diagnostic(ErrorCode.ERR_NameNotInContext, "z2")
+                        .WithArguments("z2")
+                        .WithLocation(14, 21),
+                    // (21,25): error CS0103: The name 'z3' does not exist in the current context
+                    //                         z3};
+                    Diagnostic(ErrorCode.ERR_NameNotInContext, "z3")
+                        .WithArguments("z3")
+                        .WithLocation(21, 25),
+                    // (28,29): error CS0103: The name 'v4' does not exist in the current context
+                    //                             v4
+                    Diagnostic(ErrorCode.ERR_NameNotInContext, "v4")
+                        .WithArguments("v4")
+                        .WithLocation(28, 29),
+                    // (30,29): error CS1938: The name 'u4' is not in scope on the right side of 'equals'.  Consider swapping the expressions on either side of 'equals'.
+                    //                             u4
+                    Diagnostic(ErrorCode.ERR_QueryInnerKey, "u4")
+                        .WithArguments("u4")
+                        .WithLocation(30, 29),
+                    // (32,25): error CS0103: The name 'u4' does not exist in the current context
+                    //                         u4, v4 };
+                    Diagnostic(ErrorCode.ERR_NameNotInContext, "u4")
+                        .WithArguments("u4")
+                        .WithLocation(32, 25),
+                    // (32,29): error CS0103: The name 'v4' does not exist in the current context
+                    //                         u4, v4 };
+                    Diagnostic(ErrorCode.ERR_NameNotInContext, "v4")
+                        .WithArguments("v4")
+                        .WithLocation(32, 29),
+                    // (41,29): error CS0103: The name 'v5' does not exist in the current context
+                    //                             v5
+                    Diagnostic(ErrorCode.ERR_NameNotInContext, "v5")
+                        .WithArguments("v5")
+                        .WithLocation(41, 29),
+                    // (43,29): error CS1938: The name 'u5' is not in scope on the right side of 'equals'.  Consider swapping the expressions on either side of 'equals'.
+                    //                             u5
+                    Diagnostic(ErrorCode.ERR_QueryInnerKey, "u5")
+                        .WithArguments("u5")
+                        .WithLocation(43, 29),
+                    // (46,25): error CS0103: The name 'u5' does not exist in the current context
+                    //                         u5, v5 };
+                    Diagnostic(ErrorCode.ERR_NameNotInContext, "u5")
+                        .WithArguments("u5")
+                        .WithLocation(46, 25),
+                    // (46,29): error CS0103: The name 'v5' does not exist in the current context
+                    //                         u5, v5 };
+                    Diagnostic(ErrorCode.ERR_NameNotInContext, "v5")
+                        .WithArguments("v5")
+                        .WithLocation(46, 29),
+                    // (55,21): error CS0103: The name 'z6' does not exist in the current context
+                    //                     z6;
+                    Diagnostic(ErrorCode.ERR_NameNotInContext, "z6")
+                        .WithArguments("z6")
+                        .WithLocation(55, 21),
+                    // (61,21): error CS0103: The name 'u7' does not exist in the current context
+                    //                     u7,
+                    Diagnostic(ErrorCode.ERR_NameNotInContext, "u7")
+                        .WithArguments("u7")
+                        .WithLocation(61, 21),
+                    // (63,21): error CS0103: The name 'z7' does not exist in the current context
+                    //                     z7
+                    Diagnostic(ErrorCode.ERR_NameNotInContext, "z7")
+                        .WithArguments("z7")
+                        .WithLocation(63, 21),
+                    // (65,21): error CS0103: The name 'z7' does not exist in the current context
+                    //                     z7 + u7;
+                    Diagnostic(ErrorCode.ERR_NameNotInContext, "z7")
+                        .WithArguments("z7")
+                        .WithLocation(65, 21),
+                    // (65,26): error CS0103: The name 'u7' does not exist in the current context
+                    //                     z7 + u7;
+                    Diagnostic(ErrorCode.ERR_NameNotInContext, "u7")
+                        .WithArguments("u7")
+                        .WithLocation(65, 26),
+                    // (80,17): error CS0103: The name 'z9' does not exist in the current context
+                    //                 z9;
+                    Diagnostic(ErrorCode.ERR_NameNotInContext, "z9")
+                        .WithArguments("z9")
+                        .WithLocation(80, 17),
+                    // (77,17): error CS0103: The name 'u9' does not exist in the current context
+                    //                 u9
+                    Diagnostic(ErrorCode.ERR_NameNotInContext, "u9")
+                        .WithArguments("u9")
+                        .WithLocation(77, 17),
+                    // (16,7): error CS0103: The name 'z2' does not exist in the current context
+                    // Dummy(z2);
+                    Diagnostic(ErrorCode.ERR_NameNotInContext, "z2")
+                        .WithArguments("z2")
+                        .WithLocation(16, 7),
+                    // (23,7): error CS0103: The name 'z3' does not exist in the current context
+                    // Dummy(z3);
+                    Diagnostic(ErrorCode.ERR_NameNotInContext, "z3")
+                        .WithArguments("z3")
+                        .WithLocation(23, 7),
+                    // (35,7): error CS0103: The name 'u4' does not exist in the current context
+                    // Dummy(u4);
+                    Diagnostic(ErrorCode.ERR_NameNotInContext, "u4")
+                        .WithArguments("u4")
+                        .WithLocation(35, 7),
+                    // (36,7): error CS0103: The name 'v4' does not exist in the current context
+                    // Dummy(v4);
+                    Diagnostic(ErrorCode.ERR_NameNotInContext, "v4")
+                        .WithArguments("v4")
+                        .WithLocation(36, 7),
+                    // (49,7): error CS0103: The name 'u5' does not exist in the current context
+                    // Dummy(u5);
+                    Diagnostic(ErrorCode.ERR_NameNotInContext, "u5")
+                        .WithArguments("u5")
+                        .WithLocation(49, 7),
+                    // (50,7): error CS0103: The name 'v5' does not exist in the current context
+                    // Dummy(v5);
+                    Diagnostic(ErrorCode.ERR_NameNotInContext, "v5")
+                        .WithArguments("v5")
+                        .WithLocation(50, 7),
+                    // (57,7): error CS0103: The name 'z6' does not exist in the current context
+                    // Dummy(z6);
+                    Diagnostic(ErrorCode.ERR_NameNotInContext, "z6")
+                        .WithArguments("z6")
+                        .WithLocation(57, 7),
+                    // (67,7): error CS0103: The name 'z7' does not exist in the current context
+                    // Dummy(z7);
+                    Diagnostic(ErrorCode.ERR_NameNotInContext, "z7")
+                        .WithArguments("z7")
+                        .WithLocation(67, 7),
+                    // (68,7): error CS0103: The name 'u7' does not exist in the current context
+                    // Dummy(u7);
+                    Diagnostic(ErrorCode.ERR_NameNotInContext, "u7")
+                        .WithArguments("u7")
+                        .WithLocation(68, 7),
+                    // (73,7): error CS0103: The name 'z8' does not exist in the current context
+                    // Dummy(z8);
+                    Diagnostic(ErrorCode.ERR_NameNotInContext, "z8")
+                        .WithArguments("z8")
+                        .WithLocation(73, 7),
+                    // (82,7): error CS0103: The name 'z9' does not exist in the current context
+                    // Dummy(z9);
+                    Diagnostic(ErrorCode.ERR_NameNotInContext, "z9")
+                        .WithArguments("z9")
+                        .WithLocation(82, 7),
+                    // (83,7): error CS0103: The name 'u9' does not exist in the current context
+                    // Dummy(u9);
+                    Diagnostic(ErrorCode.ERR_NameNotInContext, "u9")
+                        .WithArguments("u9")
+                        .WithLocation(83, 7),
+                    // (86,18): error CS1931: The range variable 'y10' conflicts with a previous declaration of 'y10'
+                    //             from y10 in new[] { 1 }
+                    Diagnostic(ErrorCode.ERR_QueryRangeVariableOverrides, "y10")
+                        .WithArguments("y10")
+                        .WithLocation(86, 18),
+                    // (90,17): error CS1931: The range variable 'y11' conflicts with a previous declaration of 'y11'
+                    //             let y11 = x1 + 1
+                    Diagnostic(ErrorCode.ERR_QueryRangeVariableOverrides, "y11")
+                        .WithArguments("y11")
+                        .WithLocation(90, 17)
+                );
 
                 var tree = compilation.SyntaxTrees.Single();
                 var model = compilation.GetSemanticModel(tree);
@@ -8349,7 +10120,7 @@ var r11 = from x1 in new[] { 1 is var y11 ? y11 : 0}
         public void GlobalCode_Query_02()
         {
             var source =
-@"
+                @"
 using System.Linq;
 
 var res = from x1 in new[] { 1 is var y1 && Print(y1) ? 2 : 0}
@@ -8363,11 +10134,18 @@ static bool Print(object x)
     return true;
 }
 ";
-            var compilation = CreateCompilationWithMscorlib45(source, new[] { SystemCoreRef }, options: TestOptions.ReleaseExe.WithScriptClassName("Script"), parseOptions: TestOptions.Script);
+            var compilation = CreateCompilationWithMscorlib45(
+                source,
+                new[] { SystemCoreRef },
+                options: TestOptions.ReleaseExe.WithScriptClassName("Script"),
+                parseOptions: TestOptions.Script
+            );
 
-            CompileAndVerify(compilation, expectedOutput:
-@"1
-2");
+            CompileAndVerify(
+                compilation,
+                expectedOutput: @"1
+2"
+            );
 
             var tree = compilation.SyntaxTrees.Single();
             var model = compilation.GetSemanticModel(tree);
@@ -8381,7 +10159,7 @@ static bool Print(object x)
         public void GlobalCode_Using_01()
         {
             var source =
-@"
+                @"
 System.IDisposable Dummy(params object[] x) {return null;}
 
 using (Dummy(true is var x1, x1))
@@ -8445,36 +10223,57 @@ using (Dummy(1 is var x14,
 }
 ";
             {
-                var compilation = CreateCompilationWithMscorlib45(source, options: TestOptions.ReleaseExe.WithScriptClassName("Script"), parseOptions: TestOptions.Script);
+                var compilation = CreateCompilationWithMscorlib45(
+                    source,
+                    options: TestOptions.ReleaseExe.WithScriptClassName("Script"),
+                    parseOptions: TestOptions.Script
+                );
                 compilation.VerifyDiagnostics(
-                // (52,5): error CS1023: Embedded statement cannot be a declaration or labeled statement
-                //     var y12 = 12;
-                Diagnostic(ErrorCode.ERR_BadEmbeddedStmt, "var y12 = 12;").WithLocation(52, 5),
-                // (18,14): error CS0841: Cannot use local variable 'x6' before it is declared
-                // using (Dummy(x6 && true is var x6))
-                Diagnostic(ErrorCode.ERR_VariableUsedBeforeDeclaration, "x6").WithArguments("x6").WithLocation(18, 14),
-                // (23,9): error CS0136: A local or parameter named 'x7' cannot be declared in this scope because that name is used in an enclosing local scope to define a local or parameter
-                //     var x7 = 12;
-                Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "x7").WithArguments("x7").WithLocation(23, 9),
-                // (30,26): error CS0103: The name 'x8' does not exist in the current context
-                // System.Console.WriteLine(x8);
-                Diagnostic(ErrorCode.ERR_NameNotInContext, "x8").WithArguments("x8").WithLocation(30, 26),
-                // (35,30): error CS0136: A local or parameter named 'x9' cannot be declared in this scope because that name is used in an enclosing local scope to define a local or parameter
-                //     using (Dummy(true is var x9, x9)) // 2
-                Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "x9").WithArguments("x9").WithLocation(35, 30),
-                // (39,14): error CS0103: The name 'y10' does not exist in the current context
-                // using (Dummy(y10 is var x10, x10))
-                Diagnostic(ErrorCode.ERR_NameNotInContext, "y10").WithArguments("y10").WithLocation(39, 14),
-                // (51,14): error CS0103: The name 'y12' does not exist in the current context
-                // using (Dummy(y12 is var x12, x12))
-                Diagnostic(ErrorCode.ERR_NameNotInContext, "y12").WithArguments("y12").WithLocation(51, 14),
-                // (58,26): error CS0128: A local variable or function named 'x14' is already defined in this scope
-                //                 2 is var x14, 
-                Diagnostic(ErrorCode.ERR_LocalDuplicate, "x14").WithArguments("x14").WithLocation(58, 26),
-                // (52,9): warning CS0219: The variable 'y12' is assigned but its value is never used
-                //     var y12 = 12;
-                Diagnostic(ErrorCode.WRN_UnreferencedVarAssg, "y12").WithArguments("y12").WithLocation(52, 9)
-                    );
+                    // (52,5): error CS1023: Embedded statement cannot be a declaration or labeled statement
+                    //     var y12 = 12;
+                    Diagnostic(ErrorCode.ERR_BadEmbeddedStmt, "var y12 = 12;")
+                        .WithLocation(52, 5),
+                    // (18,14): error CS0841: Cannot use local variable 'x6' before it is declared
+                    // using (Dummy(x6 && true is var x6))
+                    Diagnostic(ErrorCode.ERR_VariableUsedBeforeDeclaration, "x6")
+                        .WithArguments("x6")
+                        .WithLocation(18, 14),
+                    // (23,9): error CS0136: A local or parameter named 'x7' cannot be declared in this scope because that name is used in an enclosing local scope to define a local or parameter
+                    //     var x7 = 12;
+                    Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "x7")
+                        .WithArguments("x7")
+                        .WithLocation(23, 9),
+                    // (30,26): error CS0103: The name 'x8' does not exist in the current context
+                    // System.Console.WriteLine(x8);
+                    Diagnostic(ErrorCode.ERR_NameNotInContext, "x8")
+                        .WithArguments("x8")
+                        .WithLocation(30, 26),
+                    // (35,30): error CS0136: A local or parameter named 'x9' cannot be declared in this scope because that name is used in an enclosing local scope to define a local or parameter
+                    //     using (Dummy(true is var x9, x9)) // 2
+                    Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "x9")
+                        .WithArguments("x9")
+                        .WithLocation(35, 30),
+                    // (39,14): error CS0103: The name 'y10' does not exist in the current context
+                    // using (Dummy(y10 is var x10, x10))
+                    Diagnostic(ErrorCode.ERR_NameNotInContext, "y10")
+                        .WithArguments("y10")
+                        .WithLocation(39, 14),
+                    // (51,14): error CS0103: The name 'y12' does not exist in the current context
+                    // using (Dummy(y12 is var x12, x12))
+                    Diagnostic(ErrorCode.ERR_NameNotInContext, "y12")
+                        .WithArguments("y12")
+                        .WithLocation(51, 14),
+                    // (58,26): error CS0128: A local variable or function named 'x14' is already defined in this scope
+                    //                 2 is var x14,
+                    Diagnostic(ErrorCode.ERR_LocalDuplicate, "x14")
+                        .WithArguments("x14")
+                        .WithLocation(58, 26),
+                    // (52,9): warning CS0219: The variable 'y12' is assigned but its value is never used
+                    //     var y12 = 12;
+                    Diagnostic(ErrorCode.WRN_UnreferencedVarAssg, "y12")
+                        .WithArguments("y12")
+                        .WithLocation(52, 9)
+                );
 
                 var tree = compilation.SyntaxTrees.Single();
                 var model = compilation.GetSemanticModel(tree);
@@ -8540,40 +10339,63 @@ using (Dummy(1 is var x14,
             }
 
             {
-                var compilation = CreateCompilationWithMscorlib45(source, options: TestOptions.ReleaseExe, parseOptions: TestOptions.Regular9);
+                var compilation = CreateCompilationWithMscorlib45(
+                    source,
+                    options: TestOptions.ReleaseExe,
+                    parseOptions: TestOptions.Regular9
+                );
 
                 compilation.VerifyDiagnostics(
                     // (15,26): error CS0136: A local or parameter named 'x4' cannot be declared in this scope because that name is used in an enclosing local scope to define a local or parameter
                     // using (Dummy(true is var x4, x4))
-                    Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "x4").WithArguments("x4").WithLocation(15, 26),
+                    Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "x4")
+                        .WithArguments("x4")
+                        .WithLocation(15, 26),
                     // (18,14): error CS0841: Cannot use local variable 'x6' before it is declared
                     // using (Dummy(x6 && true is var x6))
-                    Diagnostic(ErrorCode.ERR_VariableUsedBeforeDeclaration, "x6").WithArguments("x6").WithLocation(18, 14),
+                    Diagnostic(ErrorCode.ERR_VariableUsedBeforeDeclaration, "x6")
+                        .WithArguments("x6")
+                        .WithLocation(18, 14),
                     // (23,9): error CS0136: A local or parameter named 'x7' cannot be declared in this scope because that name is used in an enclosing local scope to define a local or parameter
                     //     var x7 = 12;
-                    Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "x7").WithArguments("x7").WithLocation(23, 9),
+                    Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "x7")
+                        .WithArguments("x7")
+                        .WithLocation(23, 9),
                     // (30,26): error CS0103: The name 'x8' does not exist in the current context
                     // System.Console.WriteLine(x8);
-                    Diagnostic(ErrorCode.ERR_NameNotInContext, "x8").WithArguments("x8").WithLocation(30, 26),
+                    Diagnostic(ErrorCode.ERR_NameNotInContext, "x8")
+                        .WithArguments("x8")
+                        .WithLocation(30, 26),
                     // (35,30): error CS0136: A local or parameter named 'x9' cannot be declared in this scope because that name is used in an enclosing local scope to define a local or parameter
                     //     using (Dummy(true is var x9, x9)) // 2
-                    Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "x9").WithArguments("x9").WithLocation(35, 30),
+                    Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "x9")
+                        .WithArguments("x9")
+                        .WithLocation(35, 30),
                     // (39,14): error CS0103: The name 'y10' does not exist in the current context
                     // using (Dummy(y10 is var x10, x10))
-                    Diagnostic(ErrorCode.ERR_NameNotInContext, "y10").WithArguments("y10").WithLocation(39, 14),
+                    Diagnostic(ErrorCode.ERR_NameNotInContext, "y10")
+                        .WithArguments("y10")
+                        .WithLocation(39, 14),
                     // (51,14): error CS0103: The name 'y12' does not exist in the current context
                     // using (Dummy(y12 is var x12, x12))
-                    Diagnostic(ErrorCode.ERR_NameNotInContext, "y12").WithArguments("y12").WithLocation(51, 14),
+                    Diagnostic(ErrorCode.ERR_NameNotInContext, "y12")
+                        .WithArguments("y12")
+                        .WithLocation(51, 14),
                     // (52,5): error CS1023: Embedded statement cannot be a declaration or labeled statement
                     //     var y12 = 12;
-                    Diagnostic(ErrorCode.ERR_BadEmbeddedStmt, "var y12 = 12;").WithLocation(52, 5),
+                    Diagnostic(ErrorCode.ERR_BadEmbeddedStmt, "var y12 = 12;")
+                        .WithLocation(52, 5),
                     // (52,9): warning CS0219: The variable 'y12' is assigned but its value is never used
                     //     var y12 = 12;
-                    Diagnostic(ErrorCode.WRN_UnreferencedVarAssg, "y12").WithArguments("y12").WithLocation(52, 9),
+                    Diagnostic(ErrorCode.WRN_UnreferencedVarAssg, "y12")
+                        .WithArguments("y12")
+                        .WithLocation(52, 9),
                     // (58,26): error CS0128: A local variable or function named 'x14' is already defined in this scope
-                    //                 2 is var x14, 
-                    Diagnostic(ErrorCode.ERR_LocalDuplicate, "x14").WithArguments("x14").WithLocation(58, 26)
-                    );
+                    //                 2 is var x14,
+                    Diagnostic(ErrorCode.ERR_LocalDuplicate, "x14")
+                        .WithArguments("x14")
+                        .WithLocation(58, 26)
+                );
 
                 var tree = compilation.SyntaxTrees.Single();
                 var model = compilation.GetSemanticModel(tree);
@@ -8643,7 +10465,7 @@ using (Dummy(1 is var x14,
         public void GlobalCode_Using_02()
         {
             var source =
-@"
+                @"
 using (System.IDisposable d1 = Dummy(new C(""a""), (new C(""b"")) is var x1),
                             d2 = Dummy(new C(""c""), (new C(""d"")) is var x2))
 {
@@ -8680,16 +10502,22 @@ class C : System.IDisposable
     }
 }
 ";
-            var compilation = CreateCompilationWithMscorlib45(source, options: TestOptions.ReleaseExe.WithScriptClassName("Script"), parseOptions: TestOptions.Script);
-            CompileAndVerify(compilation, expectedOutput:
-@"a
+            var compilation = CreateCompilationWithMscorlib45(
+                source,
+                options: TestOptions.ReleaseExe.WithScriptClassName("Script"),
+                parseOptions: TestOptions.Script
+            );
+            CompileAndVerify(
+                compilation,
+                expectedOutput: @"a
 b
 c
 d
 Disposing c
 Disposing a
 f
-Disposing e");
+Disposing e"
+            );
         }
     }
 }

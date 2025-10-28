@@ -22,7 +22,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.property.regpro
     {
         First = 1,
         Second = 2,
-        Third = 3
+        Third = 3,
     }
 
     public class MemberClass<T>
@@ -58,61 +58,31 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.property.regpro
         public T myT;
         public T Property_T
         {
-            set
-            {
-                myT = value;
-            }
-
-            get
-            {
-                return myT;
-            }
+            set { myT = value; }
+            get { return myT; }
         }
 
         public decimal[] Property_decimalArr
         {
-            protected internal set
-            {
-                myDecimalArr = value;
-            }
-
-            get
-            {
-                return myDecimalArr;
-            }
+            protected internal set { myDecimalArr = value; }
+            get { return myDecimalArr; }
         }
 
         public dynamic Property_dynamic
         {
-            get
-            {
-                return myDynamic;
-            }
-
-            set
-            {
-                myDynamic = value;
-            }
+            get { return myDynamic; }
+            set { myDynamic = value; }
         }
 
         public static float myFloatStatic;
         public static T myTStatic;
         public static T Property_TStatic
         {
-            set
-            {
-                myTStatic = value;
-            }
-
-            get
-            {
-                return myTStatic;
-            }
+            set { myTStatic = value; }
+            get { return myTStatic; }
         }
     }
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.property.regproperty.genclass.genclass001.genclass001
 {
@@ -134,7 +104,12 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.property.regpro
         public static int MainMethod()
         {
             Test t1 = new Test();
-            return t1.TestGetMethod(new MemberClass<bool>()) + t1.TestSetMethod(new MemberClass<bool>()) == 0 ? 0 : 1;
+            return
+                t1.TestGetMethod(new MemberClass<bool>())
+                    + t1.TestSetMethod(new MemberClass<bool>())
+                == 0
+                ? 0
+                : 1;
         }
 
         public int TestGetMethod(MemberClass<bool> mc)
@@ -161,8 +136,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.property.regpro
     //</Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.property.regproperty.genclass.genclass002.genclass002
 {
     // <Title> Tests generic class regular property used in regular method body with conditional attribute.</Title>
@@ -175,6 +148,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.property.regpro
     public class Test
     {
         private static int s_count = 0;
+
         [Fact]
         public static void DynamicCSharpRunTest()
         {
@@ -202,20 +176,13 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.property.regpro
         public void TestSetMethod(MemberClass<bool> mc)
         {
             dynamic dy = mc;
-            dy.Property_decimalArr = new decimal[]
-            {
-            0M, 1M
-            }
-
-            ;
+            dy.Property_decimalArr = new decimal[] { 0M, 1M };
             if (!((int)mc.Property_decimalArr.Length != 2))
                 s_count++;
         }
     }
     //</Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.property.regproperty.genclass.genclass003.genclass003
 {
@@ -238,30 +205,27 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.property.regpro
         {
             MemberClass<string> mc = new MemberClass<string>();
             mc.myT = "Test";
-            mc.myDecimalArr = new decimal[]
-            {
-            0M, 1M
-            }
-
-            ;
+            mc.myDecimalArr = new decimal[] { 0M, 1M };
             dynamic dy = mc;
             var tc = new
             {
                 A1 = (string)dy.Property_T,
                 A2 = (decimal[])dy.Property_decimalArr,
-                A3 = (object)dy.Property_dynamic
-            }
-
-            ;
-            if (tc != null && mc.myT == tc.A1 && tc.A2[0] == 0M && tc.A2[1] == 1M && tc.A3 == mc.myDynamic)
+                A3 = (object)dy.Property_dynamic,
+            };
+            if (
+                tc != null
+                && mc.myT == tc.A1
+                && tc.A2[0] == 0M
+                && tc.A2[1] == 1M
+                && tc.A3 == mc.myDynamic
+            )
                 return 0;
             return 1;
         }
     }
     //</Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.property.regproperty.genclass.genclass005.genclass005
 {
@@ -271,8 +235,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.property.regpro
     // <RelatedBugs></RelatedBugs>
     //<Expects Status=success></Expects>
     // <Code>
-    using System.Linq;
     using System.Collections.Generic;
+    using System.Linq;
 
     public class Test
     {
@@ -284,12 +248,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.property.regpro
 
         public static int MainMethod()
         {
-            var list = new List<string>()
-            {
-            null, "b", null, "a"
-            }
-
-            ;
+            var list = new List<string>() { null, "b", null, "a" };
             MemberClass<string> mc = new MemberClass<string>();
             mc.myT = "a";
             dynamic dy = mc;
@@ -301,8 +260,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.property.regpro
     }
     //</Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.property.regproperty.genclass.genclass006.genclass006
 {
@@ -338,11 +295,10 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.property.regpro
             var test = new Test()
             {
                 _field1 = dy1.Property_dynamic,
-                _field2 = dy2.Property_dynamic == null ? string.Empty : dy2.Property_dynamic.ToString(),
-                _field3 = dy3.Property_dynamic
-            }
-
-            ;
+                _field2 =
+                    dy2.Property_dynamic == null ? string.Empty : dy2.Property_dynamic.ToString(),
+                _field3 = dy3.Property_dynamic,
+            };
             if (test._field1 == 10 && test._field2 != null && test._field3 == MyEnum.Second)
                 return 0;
             return 1;
@@ -350,8 +306,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.property.regpro
     }
     //</Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.property.regproperty.genclass.genclass007.genclass007
 {
@@ -367,15 +321,11 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.property.regpro
         public class InnerTest1
         {
             public int field;
+
             public static explicit operator InnerTest2(InnerTest1 t1)
             {
                 var dy = new MemberClass<InnerTest2>();
-                dy.Property_T = new InnerTest2()
-                {
-                    field = t1.field + 1
-                }
-
-                ;
+                dy.Property_T = new InnerTest2() { field = t1.field + 1 };
                 return dy.Property_T;
             }
         }
@@ -393,20 +343,13 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.property.regpro
 
         public static int MainMethod()
         {
-            InnerTest1 t = new InnerTest1()
-            {
-                field = 20
-            }
-
-            ;
+            InnerTest1 t = new InnerTest1() { field = 20 };
             InnerTest2 result = (InnerTest2)t; //explicit
             return (result.field == 21) ? 0 : 1;
         }
     }
     //</Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.property.regproperty.genclass.genclass008.genclass008
 {
@@ -422,15 +365,11 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.property.regpro
         public class InnerTest1
         {
             public int field;
+
             public static implicit operator InnerTest2(InnerTest1 t1)
             {
                 var dy = new MemberClass<InnerTest2>();
-                dy.Property_T = new InnerTest2()
-                {
-                    field = t1.field + 1
-                }
-
-                ;
+                dy.Property_T = new InnerTest2() { field = t1.field + 1 };
                 return dy.Property_T;
             }
         }
@@ -448,12 +387,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.property.regpro
 
         public static int MainMethod()
         {
-            InnerTest1 t = new InnerTest1()
-            {
-                field = 20
-            }
-
-            ;
+            InnerTest1 t = new InnerTest1() { field = 20 };
             InnerTest2 result1 = (InnerTest2)t; //explicit
             InnerTest2 result2 = t; //implicit
             return (result1.field == 21 && result2.field == 21) ? 0 : 1;
@@ -461,8 +395,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.property.regpro
     }
     //</Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.property.regproperty.genclass.genclass011.genclass011
 {
@@ -477,15 +409,11 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.property.regpro
     {
         private static MemberClass<MyClass> s_mc;
         private static dynamic s_dy;
+
         static Test()
         {
             s_mc = new MemberClass<MyClass>();
-            s_mc.Property_dynamic = new MyClass()
-            {
-                Field = 10
-            }
-
-            ;
+            s_mc.Property_dynamic = new MyClass() { Field = 10 };
             s_dy = s_mc;
         }
 
@@ -508,8 +436,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.property.regpro
     //</Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.property.regproperty.genclass.genclass012.genclass012
 {
     // <Title> Tests generic class regular property used in volatile field initializer.</Title>
@@ -519,8 +445,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.property.regpro
     //<Expects Status=success></Expects>
     // <Code>
     //<Expects Status=warning>\(17,16\).*CS0219</Expects>
-    using System.Linq;
     using System.Collections.Generic;
+    using System.Linq;
 
     public class Test
     {
@@ -532,29 +458,25 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.property.regpro
 
         public static int MainMethod()
         {
-            List<int> list = new List<int>()
-            {
-            0, 4, 1, 6, 4, 4, 5
-            }
-
-            ;
+            List<int> list = new List<int>() { 0, 4, 1, 6, 4, 4, 5 };
             string s = "test";
             var mc = new MemberClass<int>();
             mc.Property_T = 4;
             mc.Property_dynamic = "Test";
             dynamic dy = mc;
-            var result = list.Where(p => p == (int)dy.Property_T).Select(p => new
-            {
-                A = dy.Property_T,
-                B = dy.Property_dynamic
-            }
-
-            ).ToList();
+            var result = list.Where(p => p == (int)dy.Property_T)
+                .Select(p => new { A = dy.Property_T, B = dy.Property_dynamic })
+                .ToList();
             if (result.Count == 3)
             {
                 foreach (var m in result)
                 {
-                    if ((int)m.A != 4 || m.A.GetType() != typeof(int) || (string)m.B != "Test" || m.B.GetType() != typeof(string))
+                    if (
+                        (int)m.A != 4
+                        || m.A.GetType() != typeof(int)
+                        || (string)m.B != "Test"
+                        || m.B.GetType() != typeof(string)
+                    )
                         return 1;
                 }
 
