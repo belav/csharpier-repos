@@ -11,7 +11,9 @@ namespace Profiler.Tests
 {
     class InliningTest
     {
-        private static readonly Guid InliningGuid = new Guid("DDADC0CB-21C8-4E53-9A6C-7C65EE5800CE");
+        private static readonly Guid InliningGuid = new Guid(
+            "DDADC0CB-21C8-4E53-9A6C-7C65EE5800CE"
+        );
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static int Inlinee()
@@ -57,10 +59,12 @@ namespace Profiler.Tests
                 return RunTest(args);
             }
 
-            return ProfilerTestRunner.Run(profileePath: System.Reflection.Assembly.GetExecutingAssembly().Location,
-                                          testName: "UnitTestInlining",
-                                          profilerClsid: InliningGuid,
-                                          profileeOptions: ProfileeOptions.OptimizationSensitive);
+            return ProfilerTestRunner.Run(
+                profileePath: System.Reflection.Assembly.GetExecutingAssembly().Location,
+                testName: "UnitTestInlining",
+                profilerClsid: InliningGuid,
+                profileeOptions: ProfileeOptions.OptimizationSensitive
+            );
         }
     }
 }

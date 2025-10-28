@@ -10,7 +10,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
 {
     internal static partial class MemberDeclarationSyntaxExtensions
     {
-        public static SyntaxList<AttributeListSyntax> GetAttributes(this MemberDeclarationSyntax member)
+        public static SyntaxList<AttributeListSyntax> GetAttributes(
+            this MemberDeclarationSyntax member
+        )
         {
             if (member != null)
             {

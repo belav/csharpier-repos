@@ -17,7 +17,12 @@ namespace System.Reflection.TypeLoading.Ecma
         private readonly EcmaModule _module;
         private readonly ParameterHandle _handle;
 
-        internal EcmaFatMethodParameter(IRoMethodBase roMethodBase, int position, Type parameterType, ParameterHandle handle)
+        internal EcmaFatMethodParameter(
+            IRoMethodBase roMethodBase,
+            int position,
+            Type parameterType,
+            ParameterHandle handle
+        )
             : base(roMethodBase, position, parameterType)
         {
             Debug.Assert(roMethodBase != null);
@@ -33,9 +38,11 @@ namespace System.Reflection.TypeLoading.Ecma
         public sealed override int MetadataToken => _handle.GetToken();
 
         protected sealed override string? ComputeName() => Parameter.Name.GetStringOrNull(Reader);
+
         protected sealed override ParameterAttributes ComputeAttributes() => Parameter.Attributes;
 
-        protected sealed override IEnumerable<CustomAttributeData> GetTrueCustomAttributes() => Parameter.GetCustomAttributes().ToTrueCustomAttributes(GetEcmaModule());
+        protected sealed override IEnumerable<CustomAttributeData> GetTrueCustomAttributes() =>
+            Parameter.GetCustomAttributes().ToTrueCustomAttributes(GetEcmaModule());
 
         public sealed override bool HasDefaultValue => TryGetRawDefaultValue(out _);
 
@@ -59,17 +66,29 @@ namespace System.Reflection.TypeLoading.Ecma
                 return true;
             }
 
-            return Parameter.GetCustomAttributes().TryFindRawDefaultValueFromCustomAttributes(GetEcmaModule(), out rawDefaultValue);
+            return Parameter
+                .GetCustomAttributes()
+                .TryFindRawDefaultValueFromCustomAttributes(GetEcmaModule(), out rawDefaultValue);
         }
 
-        protected sealed override MarshalAsAttribute ComputeMarshalAsAttribute() => Parameter.GetMarshallingDescriptor().ToMarshalAsAttribute(GetEcmaModule());
+        protected sealed override MarshalAsAttribute ComputeMarshalAsAttribute() =>
+            Parameter.GetMarshallingDescriptor().ToMarshalAsAttribute(GetEcmaModule());
 
         private EcmaModule GetEcmaModule() => _module;
+
         private MetadataReader Reader => GetEcmaModule().Reader;
         private MetadataLoadContext Loader => GetEcmaModule().Loader;
 
-        private ref readonly Parameter Parameter { get { Loader.DisposeCheck(); return ref _neverAccessThisExceptThroughParameterProperty; } }
-        [DebuggerBrowsable(DebuggerBrowsableState.Never)]  // Block from debugger watch windows so they don't AV the debugged process.
+        private ref readonly Parameter Parameter
+        {
+            get
+            {
+                Loader.DisposeCheck();
+                return ref _neverAccessThisExceptThroughParameterProperty;
+            }
+        }
+
+        [DebuggerBrowsable(DebuggerBrowsableState.Never)] // Block from debugger watch windows so they don't AV the debugged process.
         private readonly Parameter _neverAccessThisExceptThroughParameterProperty;
     }
 }

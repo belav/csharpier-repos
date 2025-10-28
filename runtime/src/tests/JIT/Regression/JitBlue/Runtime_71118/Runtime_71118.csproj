@@ -8,6 +8,9 @@
     <Compile Include="$(MSBuildProjectName).cs" />
 
     <CLRTestEnvironmentVariable Include="DOTNET_JitStressModeNamesOnly" Value="1" />
-    <CLRTestEnvironmentVariable Include="DOTNET_JitStressModeNames" Value="STRESS_NULL_OBJECT_CHECK" />
+    <CLRTestEnvironmentVariable
+      Include="DOTNET_JitStressModeNames"
+      Value="STRESS_NULL_OBJECT_CHECK"
+    />
   </ItemGroup>
 </Project>

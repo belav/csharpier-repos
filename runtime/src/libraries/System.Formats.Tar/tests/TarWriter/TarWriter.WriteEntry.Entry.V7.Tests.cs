@@ -10,16 +10,20 @@ namespace System.Formats.Tar.Tests
     public class TarWriter_WriteEntry_V7_Tests : TarWriter_WriteEntry_Base
     {
         [Fact]
-        public void WriteEntry_Null_Throws() =>
-            WriteEntry_Null_Throws_Internal(TarEntryFormat.V7);
+        public void WriteEntry_Null_Throws() => WriteEntry_Null_Throws_Internal(TarEntryFormat.V7);
 
         [Fact]
         public void WriteRegularFile()
         {
             using MemoryStream archiveStream = new MemoryStream();
-            using (TarWriter writer = new TarWriter(archiveStream, TarEntryFormat.V7, leaveOpen: true))
+            using (
+                TarWriter writer = new TarWriter(archiveStream, TarEntryFormat.V7, leaveOpen: true)
+            )
             {
-                V7TarEntry oldRegularFile = new V7TarEntry(TarEntryType.V7RegularFile, InitialEntryName);
+                V7TarEntry oldRegularFile = new V7TarEntry(
+                    TarEntryType.V7RegularFile,
+                    InitialEntryName
+                );
                 SetRegularFile(oldRegularFile);
                 VerifyRegularFile(oldRegularFile, isWritable: true);
                 writer.WriteEntry(oldRegularFile);
@@ -37,7 +41,9 @@ namespace System.Formats.Tar.Tests
         public void WriteHardLink()
         {
             using MemoryStream archiveStream = new MemoryStream();
-            using (TarWriter writer = new TarWriter(archiveStream, TarEntryFormat.V7, leaveOpen: true))
+            using (
+                TarWriter writer = new TarWriter(archiveStream, TarEntryFormat.V7, leaveOpen: true)
+            )
             {
                 V7TarEntry hardLink = new V7TarEntry(TarEntryType.HardLink, InitialEntryName);
                 SetHardLink(hardLink);
@@ -57,9 +63,14 @@ namespace System.Formats.Tar.Tests
         public void WriteSymbolicLink()
         {
             using MemoryStream archiveStream = new MemoryStream();
-            using (TarWriter writer = new TarWriter(archiveStream, TarEntryFormat.V7, leaveOpen: true))
+            using (
+                TarWriter writer = new TarWriter(archiveStream, TarEntryFormat.V7, leaveOpen: true)
+            )
             {
-                V7TarEntry symbolicLink = new V7TarEntry(TarEntryType.SymbolicLink, InitialEntryName);
+                V7TarEntry symbolicLink = new V7TarEntry(
+                    TarEntryType.SymbolicLink,
+                    InitialEntryName
+                );
                 SetSymbolicLink(symbolicLink);
                 VerifySymbolicLink(symbolicLink);
                 writer.WriteEntry(symbolicLink);
@@ -77,7 +88,9 @@ namespace System.Formats.Tar.Tests
         public void WriteDirectory()
         {
             using MemoryStream archiveStream = new MemoryStream();
-            using (TarWriter writer = new TarWriter(archiveStream, TarEntryFormat.V7, leaveOpen: true))
+            using (
+                TarWriter writer = new TarWriter(archiveStream, TarEntryFormat.V7, leaveOpen: true)
+            )
             {
                 V7TarEntry directory = new V7TarEntry(TarEntryType.Directory, InitialEntryName);
                 SetDirectory(directory);
@@ -100,7 +113,10 @@ namespace System.Formats.Tar.Tests
         {
             using MemoryStream archiveStream = new MemoryStream();
             using TarWriter writer = new TarWriter(archiveStream, leaveOpen: false);
-            Assert.Throws<ArgumentException>("entry", () => writer.WriteEntry(new V7TarEntry(entryType, "link")));
+            Assert.Throws<ArgumentException>(
+                "entry",
+                () => writer.WriteEntry(new V7TarEntry(entryType, "link"))
+            );
         }
     }
 }

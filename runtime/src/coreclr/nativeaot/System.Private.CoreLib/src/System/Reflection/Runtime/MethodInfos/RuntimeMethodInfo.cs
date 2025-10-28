@@ -12,7 +12,6 @@ using System.Reflection.Runtime.General;
 using System.Reflection.Runtime.ParameterInfos;
 using System.Reflection.Runtime.TypeInfos;
 using System.Runtime.CompilerServices;
-
 using Internal.Reflection.Core.Execution;
 using Internal.Runtime.Augments;
 
@@ -23,19 +22,11 @@ namespace System.Reflection.Runtime.MethodInfos
     //
     internal abstract partial class RuntimeMethodInfo : MethodInfo
     {
-        protected RuntimeMethodInfo()
-        {
-        }
+        protected RuntimeMethodInfo() { }
 
-        public abstract override MethodAttributes Attributes
-        {
-            get;
-        }
+        public abstract override MethodAttributes Attributes { get; }
 
-        public abstract override CallingConventions CallingConvention
-        {
-            get;
-        }
+        public abstract override CallingConventions CallingConvention { get; }
 
         public sealed override bool ContainsGenericParameters
         {
@@ -82,23 +73,21 @@ namespace System.Reflection.Runtime.MethodInfos
             if (!runtimeDelegateTypeInfo.IsDelegate)
                 throw new ArgumentException(SR.Arg_MustBeDelegate);
 
-            Delegate result = CreateDelegateNoThrowOnBindFailure(runtimeDelegateTypeInfo, target, allowClosed);
+            Delegate result = CreateDelegateNoThrowOnBindFailure(
+                runtimeDelegateTypeInfo,
+                target,
+                allowClosed
+            );
             if (result == null)
                 throw new ArgumentException(SR.Arg_DlgtTargMeth);
             return result;
         }
 
-        public abstract override IEnumerable<CustomAttributeData> CustomAttributes
-        {
-            get;
-        }
+        public abstract override IEnumerable<CustomAttributeData> CustomAttributes { get; }
 
         public sealed override Type DeclaringType
         {
-            get
-            {
-                return this.RuntimeDeclaringType.ToType();
-            }
+            get { return this.RuntimeDeclaringType.ToType(); }
         }
 
         public abstract override bool Equals(object obj);
@@ -120,7 +109,9 @@ namespace System.Reflection.Runtime.MethodInfos
 
             while (true)
             {
-                MethodInfo next = method.GetImplicitlyOverriddenBaseClassMember(MethodPolicies.Instance);
+                MethodInfo next = method.GetImplicitlyOverriddenBaseClassMember(
+                    MethodPolicies.Instance
+                );
                 if (next == null)
                     return ((RuntimeMethodInfo)method).WithReflectedTypeSetToDeclaringType;
 
@@ -137,7 +128,9 @@ namespace System.Reflection.Runtime.MethodInfos
 
         public abstract override MethodInfo GetGenericMethodDefinition();
 
-        [RequiresUnreferencedCode("Trimming may change method bodies. For example it can change some instructions, remove branches or local variables.")]
+        [RequiresUnreferencedCode(
+            "Trimming may change method bodies. For example it can change some instructions, remove branches or local variables."
+        )]
         public sealed override MethodBody GetMethodBody()
         {
             throw new PlatformNotSupportedException();
@@ -162,7 +155,13 @@ namespace System.Reflection.Runtime.MethodInfos
         public abstract override bool HasSameMetadataDefinitionAs(MemberInfo other);
 
         [DebuggerGuidedStepThrough]
-        public sealed override object? Invoke(object? obj, BindingFlags invokeAttr, Binder binder, object?[]? parameters, CultureInfo culture)
+        public sealed override object? Invoke(
+            object? obj,
+            BindingFlags invokeAttr,
+            Binder binder,
+            object?[]? parameters,
+            CultureInfo culture
+        )
         {
             MethodBaseInvoker methodInvoker = this.MethodInvoker;
             object? result = methodInvoker.Invoke(obj, parameters, binder, invokeAttr, culture);
@@ -170,81 +169,52 @@ namespace System.Reflection.Runtime.MethodInfos
             return result;
         }
 
-        public abstract override bool IsConstructedGenericMethod
-        {
-            get;
-        }
+        public abstract override bool IsConstructedGenericMethod { get; }
 
-        public abstract override bool IsGenericMethod
-        {
-            get;
-        }
+        public abstract override bool IsGenericMethod { get; }
 
-        public abstract override bool IsGenericMethodDefinition
-        {
-            get;
-        }
+        public abstract override bool IsGenericMethodDefinition { get; }
 
-        [RequiresDynamicCode("The native code for this instantiation might not be available at runtime.")]
-        [RequiresUnreferencedCode("If some of the generic arguments are annotated (either with DynamicallyAccessedMembersAttribute, or generic constraints), trimming can't validate that the requirements of those annotations are met.")]
+        [RequiresDynamicCode(
+            "The native code for this instantiation might not be available at runtime."
+        )]
+        [RequiresUnreferencedCode(
+            "If some of the generic arguments are annotated (either with DynamicallyAccessedMembersAttribute, or generic constraints), trimming can't validate that the requirements of those annotations are met."
+        )]
         public abstract override MethodInfo MakeGenericMethod(params Type[] typeArguments);
 
         public abstract override MethodBase MetadataDefinitionMethod { get; }
 
-        public abstract override int MetadataToken
-        {
-            get;
-        }
+        public abstract override int MetadataToken { get; }
 
-        public abstract override MethodImplAttributes MethodImplementationFlags
-        {
-            get;
-        }
+        public abstract override MethodImplAttributes MethodImplementationFlags { get; }
 
-        public abstract override Module Module
-        {
-            get;
-        }
+        public abstract override Module Module { get; }
 
         public sealed override string Name
         {
-            get
-            {
-                return this.RuntimeName;
-            }
+            get { return this.RuntimeName; }
         }
 
         public abstract override Type ReflectedType { get; }
 
         public sealed override ParameterInfo ReturnParameter
         {
-            get
-            {
-                return this.RuntimeReturnParameter;
-            }
+            get { return this.RuntimeReturnParameter; }
         }
 
         public sealed override Type ReturnType
         {
-            get
-            {
-                return ReturnParameter.ParameterType;
-            }
+            get { return ReturnParameter.ParameterType; }
         }
 
         public abstract override string ToString();
 
         public abstract override RuntimeMethodHandle MethodHandle { get; }
 
-        internal abstract RuntimeTypeInfo RuntimeDeclaringType
-        {
-            get;
-        }
+        internal abstract RuntimeTypeInfo RuntimeDeclaringType { get; }
 
-        internal abstract string RuntimeName
-        {
-            get;
-        }
+        internal abstract string RuntimeName { get; }
 
         internal abstract RuntimeMethodInfo WithReflectedTypeSetToDeclaringType { get; }
 
@@ -255,7 +225,10 @@ namespace System.Reflection.Runtime.MethodInfos
         //
         internal abstract RuntimeTypeInfo[] RuntimeGenericArgumentsOrParameters { get; }
 
-        internal abstract RuntimeParameterInfo[] GetRuntimeParameters(RuntimeMethodInfo contextMethod, out RuntimeParameterInfo returnParameter);
+        internal abstract RuntimeParameterInfo[] GetRuntimeParameters(
+            RuntimeMethodInfo contextMethod,
+            out RuntimeParameterInfo returnParameter
+        );
 
         //
         // The non-public version of MethodInfo.GetParameters() (does not array-copy.)
@@ -269,7 +242,7 @@ namespace System.Reflection.Runtime.MethodInfos
                 {
                     RuntimeParameterInfo returnParameter;
                     parameters = _lazyParameters = GetRuntimeParameters(this, out returnParameter);
-                    _lazyReturnParameter = returnParameter;  // Opportunistically initialize the _lazyReturnParameter latch as well.
+                    _lazyReturnParameter = returnParameter; // Opportunistically initialize the _lazyReturnParameter latch as well.
                 }
                 return parameters;
             }
@@ -295,10 +268,7 @@ namespace System.Reflection.Runtime.MethodInfos
 
         internal MethodBaseInvoker MethodInvoker
         {
-            get
-            {
-                return _lazyMethodInvoker ??= UncachedMethodInvoker;
-            }
+            get { return _lazyMethodInvoker ??= UncachedMethodInvoker; }
         }
 
         internal IntPtr LdFtnResult => MethodInvoker.LdFtnResult;
@@ -309,7 +279,11 @@ namespace System.Reflection.Runtime.MethodInfos
         /// Common CreateDelegate worker. NOTE: If the method signature is not compatible, this method returns null rather than throwing an ArgumentException.
         /// This is needed to support the api overloads that have a "throwOnBindFailure" parameter.
         /// </summary>
-        internal Delegate CreateDelegateNoThrowOnBindFailure(RuntimeTypeInfo runtimeDelegateType, object target, bool allowClosed)
+        internal Delegate CreateDelegateNoThrowOnBindFailure(
+            RuntimeTypeInfo runtimeDelegateType,
+            object target,
+            bool allowClosed
+        )
         {
             Debug.Assert(runtimeDelegateType.IsDelegate);
 
@@ -329,8 +303,10 @@ namespace System.Reflection.Runtime.MethodInfos
 
             ReadOnlySpan<ParameterInfo> delegateParameters = invokeMethod.GetParametersAsSpan();
             ReadOnlySpan<ParameterInfo> targetParameters = this.GetParametersAsSpan();
-            ReadOnlySpan<ParameterInfo>.Enumerator delegateParameterEnumerator = delegateParameters.GetEnumerator();
-            ReadOnlySpan<ParameterInfo>.Enumerator targetParameterEnumerator = targetParameters.GetEnumerator();
+            ReadOnlySpan<ParameterInfo>.Enumerator delegateParameterEnumerator =
+                delegateParameters.GetEnumerator();
+            ReadOnlySpan<ParameterInfo>.Enumerator targetParameterEnumerator =
+                targetParameters.GetEnumerator();
 
             bool isStatic = this.IsStatic;
             bool isOpen;
@@ -352,7 +328,13 @@ namespace System.Reflection.Runtime.MethodInfos
                     isOpen = false;
                     if (!targetParameterEnumerator.MoveNext())
                         return null;
-                    if (target != null && !IsAssignableFrom(targetParameterEnumerator.Current.ParameterType, target.GetType()))
+                    if (
+                        target != null
+                        && !IsAssignableFrom(
+                            targetParameterEnumerator.Current.ParameterType,
+                            target.GetType()
+                        )
+                    )
                         return null;
                 }
             }
@@ -378,7 +360,12 @@ namespace System.Reflection.Runtime.MethodInfos
                     if (firstParameterOfMethodType.IsValueType)
                         firstParameterOfMethodType = firstParameterOfMethodType.MakeByRefType();
 
-                    if (!IsAssignableFrom(firstParameterOfMethodType, delegateParameterEnumerator.Current.ParameterType))
+                    if (
+                        !IsAssignableFrom(
+                            firstParameterOfMethodType,
+                            delegateParameterEnumerator.Current.ParameterType
+                        )
+                    )
                         return null;
                     if (target != null)
                         return null;
@@ -390,18 +377,39 @@ namespace System.Reflection.Runtime.MethodInfos
             {
                 if (!targetParameterEnumerator.MoveNext())
                     return null;
-                if (!IsAssignableFrom(targetParameterEnumerator.Current.ParameterType, delegateParameterEnumerator.Current.ParameterType))
+                if (
+                    !IsAssignableFrom(
+                        targetParameterEnumerator.Current.ParameterType,
+                        delegateParameterEnumerator.Current.ParameterType
+                    )
+                )
                     return null;
             }
             if (targetParameterEnumerator.MoveNext())
                 return null;
 
-            return CreateDelegateWithoutSignatureValidation(runtimeDelegateType.ToType(), target, isStatic: isStatic, isOpen: isOpen);
+            return CreateDelegateWithoutSignatureValidation(
+                runtimeDelegateType.ToType(),
+                target,
+                isStatic: isStatic,
+                isOpen: isOpen
+            );
         }
 
-        internal Delegate CreateDelegateWithoutSignatureValidation(Type delegateType, object target, bool isStatic, bool isOpen)
+        internal Delegate CreateDelegateWithoutSignatureValidation(
+            Type delegateType,
+            object target,
+            bool isStatic,
+            bool isOpen
+        )
         {
-            return MethodInvoker.CreateDelegate(delegateType.TypeHandle, target, isStatic: isStatic, isVirtual: false, isOpen: isOpen);
+            return MethodInvoker.CreateDelegate(
+                delegateType.TypeHandle,
+                target,
+                isStatic: isStatic,
+                isVirtual: false,
+                isOpen: isOpen
+            );
         }
 
         private static bool IsAssignableFrom(Type dstType, Type srcType)

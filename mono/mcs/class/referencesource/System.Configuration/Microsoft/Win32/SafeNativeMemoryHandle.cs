@@ -4,39 +4,46 @@
 // </copyright>
 //------------------------------------------------------------------------------
 
-namespace Microsoft.Win32 {
-    using System.Runtime.InteropServices;
+namespace Microsoft.Win32
+{
     using System;
+    using System.Configuration;
+    using System.Runtime.InteropServices;
     using System.Security.Permissions;
     using Microsoft.Win32.SafeHandles;
-    using System.Configuration;
 
     // Safehandle for memory handles
     [System.Security.SuppressUnmanagedCodeSecurityAttribute()]
-    internal sealed class SafeNativeMemoryHandle : SafeHandleZeroOrMinusOneIsInvalid {
+    internal sealed class SafeNativeMemoryHandle : SafeHandleZeroOrMinusOneIsInvalid
+    {
         private bool _useLocalFree = false;
+
         [SecurityPermission(SecurityAction.LinkDemand, UnmanagedCode = true)]
         internal SafeNativeMemoryHandle()
-            : this(false) {
-        }
+            : this(false) { }
 
         internal SafeNativeMemoryHandle(bool useLocalFree)
-            : base(true) {
+            : base(true)
+        {
             _useLocalFree = useLocalFree;
         }
 
         [SecurityPermission(SecurityAction.LinkDemand, UnmanagedCode = true)]
         internal SafeNativeMemoryHandle(IntPtr handle, bool ownsHandle)
-            : base(ownsHandle) {
+            : base(ownsHandle)
+        {
             SetHandle(handle);
         }
 
-        internal void SetDataHandle(IntPtr handle) {
+        internal void SetDataHandle(IntPtr handle)
+        {
             SetHandle(handle);
         }
 
-        override protected bool ReleaseHandle() {
-            if (handle != IntPtr.Zero) {
+        protected override bool ReleaseHandle()
+        {
+            if (handle != IntPtr.Zero)
+            {
                 if (_useLocalFree == true)
                     UnsafeNativeMethods.LocalFree(handle);
                 else
@@ -47,7 +54,4 @@ namespace Microsoft.Win32 {
             return false;
         }
     }
-
-
 }
-

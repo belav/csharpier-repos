@@ -21,7 +21,8 @@ namespace HttpStress
         private static void make_crc_table()
         {
             ulong c;
-            int n, k;
+            int n,
+                k;
 
             for (n = 0; n < 256; n++)
             {
@@ -63,17 +64,24 @@ namespace HttpStress
             return update_crc(crc, bytes, bytes.Length);
         }
 
-        public static ulong CalculateCRC(byte[] buf) => update_crc(InitialCrc, buf, buf.Length) ^ InitialCrc;
-        public static ulong CalculateCRC(string text, Encoding? encoding = null) => update_crc(InitialCrc, text, encoding) ^ InitialCrc;
+        public static ulong CalculateCRC(byte[] buf) =>
+            update_crc(InitialCrc, buf, buf.Length) ^ InitialCrc;
 
-        public static ulong CalculateHeaderCrc<T>(IEnumerable<(string name, T)> headers, Encoding? encoding = null) where T : IEnumerable<string>
+        public static ulong CalculateCRC(string text, Encoding? encoding = null) =>
+            update_crc(InitialCrc, text, encoding) ^ InitialCrc;
+
+        public static ulong CalculateHeaderCrc<T>(
+            IEnumerable<(string name, T)> headers,
+            Encoding? encoding = null
+        )
+            where T : IEnumerable<string>
         {
             ulong checksum = InitialCrc;
 
             foreach ((string name, IEnumerable<string> values) in headers)
             {
                 checksum = update_crc(checksum, name);
-                foreach (string value in values) 
+                foreach (string value in values)
                 {
                     checksum = update_crc(checksum, value);
                 }

@@ -9,8 +9,8 @@ using System;
 namespace Microsoft.CodeAnalysis.Editor.Tagging
 {
     /// <summary>
-    /// The events that the <see cref="AbstractAsynchronousTaggerProvider{TTag}"/> listens to, to know when 
-    /// to request more tags.  For example, an <see cref="ITaggerEventSource"/> may listen to text 
+    /// The events that the <see cref="AbstractAsynchronousTaggerProvider{TTag}"/> listens to, to know when
+    /// to request more tags.  For example, an <see cref="ITaggerEventSource"/> may listen to text
     /// buffer changes, and can tell the <see cref="AbstractAsynchronousTaggerProvider{TTag}"/> that it needs
     /// to recompute tags.
     /// </summary>
@@ -19,7 +19,7 @@ namespace Microsoft.CodeAnalysis.Editor.Tagging
         /// <summary>
         /// Let event source know that it should start sending out events.  Implementation can use
         /// that as a point to attach to events and perform other initialization. This will only be
-        /// called once. 
+        /// called once.
         /// </summary>
         void Connect();
 

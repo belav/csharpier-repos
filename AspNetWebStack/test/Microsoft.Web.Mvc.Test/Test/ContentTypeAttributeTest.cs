@@ -32,7 +32,10 @@ namespace Microsoft.Web.Mvc.Test
             mockHttpContext.Setup(c => c.Response).Returns(mockHttpResponse.Object);
 
             var mockController = new Mock<Controller>();
-            var controllerContext = new ControllerContext(new RequestContext(mockHttpContext.Object, new RouteData()), mockController.Object);
+            var controllerContext = new ControllerContext(
+                new RequestContext(mockHttpContext.Object, new RouteData()),
+                mockController.Object
+            );
             var result = new ContentResult { Content = "blah blah" };
             var filterContext = new ResultExecutingContext(controllerContext, result);
 

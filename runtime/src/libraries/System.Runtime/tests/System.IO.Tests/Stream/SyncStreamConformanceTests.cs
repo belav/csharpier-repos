@@ -10,10 +10,18 @@ namespace System.IO.Tests
         protected override bool NopFlushCompletesSynchronously => false;
 
         protected override Task<Stream> CreateReadOnlyStreamCore(byte[] initialData) =>
-            Task.FromResult(Stream.Synchronized(new MemoryStream(initialData ?? Array.Empty<byte>(), writable: false)));
+            Task.FromResult(
+                Stream.Synchronized(
+                    new MemoryStream(initialData ?? Array.Empty<byte>(), writable: false)
+                )
+            );
 
         protected override Task<Stream> CreateReadWriteStreamCore(byte[] initialData) =>
-            Task.FromResult(Stream.Synchronized(initialData != null ? new MemoryStream(initialData) : new MemoryStream()));
+            Task.FromResult(
+                Stream.Synchronized(
+                    initialData != null ? new MemoryStream(initialData) : new MemoryStream()
+                )
+            );
 
         protected override Task<Stream> CreateWriteOnlyStreamCore(byte[] initialData) =>
             Task.FromResult<Stream>(null);

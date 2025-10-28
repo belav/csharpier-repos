@@ -3,7 +3,6 @@
 
 using System.IO;
 using System.Threading.Tasks;
-
 using Xunit;
 
 namespace System.Net.Http.Functional.Tests
@@ -40,9 +39,13 @@ namespace System.Net.Http.Functional.Tests
         public void Ctor_InvalidStatusCodeRange_Throw()
         {
             int x = -1;
-            Assert.Throws<ArgumentOutOfRangeException>(() => new HttpResponseMessage((HttpStatusCode)x));
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+                new HttpResponseMessage((HttpStatusCode)x)
+            );
             x = 1000;
-            Assert.Throws<ArgumentOutOfRangeException>(() => new HttpResponseMessage((HttpStatusCode)x));
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+                new HttpResponseMessage((HttpStatusCode)x)
+            );
         }
 
         [Fact]
@@ -58,10 +61,22 @@ namespace System.Net.Http.Functional.Tests
                 rm.Dispose(); // Multiple calls don't throw.
 
                 Assert.True(content.IsDisposed);
-                Assert.Throws<ObjectDisposedException>(() => { rm.StatusCode = HttpStatusCode.BadRequest; });
-                Assert.Throws<ObjectDisposedException>(() => { rm.ReasonPhrase = "Bad Request"; });
-                Assert.Throws<ObjectDisposedException>(() => { rm.Version = new Version(1, 0); });
-                Assert.Throws<ObjectDisposedException>(() => { rm.Content = null; });
+                Assert.Throws<ObjectDisposedException>(() =>
+                {
+                    rm.StatusCode = HttpStatusCode.BadRequest;
+                });
+                Assert.Throws<ObjectDisposedException>(() =>
+                {
+                    rm.ReasonPhrase = "Bad Request";
+                });
+                Assert.Throws<ObjectDisposedException>(() =>
+                {
+                    rm.Version = new Version(1, 0);
+                });
+                Assert.Throws<ObjectDisposedException>(() =>
+                {
+                    rm.Content = null;
+                });
 
                 // Property getters should still work after disposing.
                 Assert.Equal(HttpStatusCode.OK, rm.StatusCode);
@@ -88,9 +103,16 @@ namespace System.Net.Http.Functional.Tests
         [InlineData(HttpStatusCode.Continue, false)]
         [InlineData(HttpStatusCode.BadRequest, false)]
         [InlineData(HttpStatusCode.BadGateway, false)]
-        public void IsSuccessStatusCode_VariousStatusCodes_ReturnTrueFor2xxFalseOtherwise(HttpStatusCode? status, bool expectedSuccess)
+        public void IsSuccessStatusCode_VariousStatusCodes_ReturnTrueFor2xxFalseOtherwise(
+            HttpStatusCode? status,
+            bool expectedSuccess
+        )
         {
-            using (var m = status.HasValue ? new HttpResponseMessage(status.Value) : new HttpResponseMessage())
+            using (
+                var m = status.HasValue
+                    ? new HttpResponseMessage(status.Value)
+                    : new HttpResponseMessage()
+            )
             {
                 Assert.Equal(expectedSuccess, m.IsSuccessStatusCode);
             }
@@ -185,7 +207,10 @@ namespace System.Net.Http.Functional.Tests
         {
             using (var rm = new HttpResponseMessage())
             {
-                Assert.Throws<ArgumentNullException>(() => { rm.Version = null; });
+                Assert.Throws<ArgumentNullException>(() =>
+                {
+                    rm.Version = null;
+                });
             }
         }
 
@@ -194,7 +219,10 @@ namespace System.Net.Http.Functional.Tests
         {
             using (var rm = new HttpResponseMessage())
             {
-                Assert.Throws<FormatException>(() => { rm.ReasonPhrase = "text\rtext"; });
+                Assert.Throws<FormatException>(() =>
+                {
+                    rm.ReasonPhrase = "text\rtext";
+                });
             }
         }
 
@@ -203,7 +231,10 @@ namespace System.Net.Http.Functional.Tests
         {
             using (var rm = new HttpResponseMessage())
             {
-                Assert.Throws<FormatException>(() => { rm.ReasonPhrase = "text\ntext"; });
+                Assert.Throws<FormatException>(() =>
+                {
+                    rm.ReasonPhrase = "text\ntext";
+                });
             }
         }
 
@@ -260,9 +291,15 @@ namespace System.Net.Http.Functional.Tests
             using (var rm = new HttpResponseMessage())
             {
                 int x = -1;
-                Assert.Throws<ArgumentOutOfRangeException>(() => { rm.StatusCode = (HttpStatusCode)x; });
+                Assert.Throws<ArgumentOutOfRangeException>(() =>
+                {
+                    rm.StatusCode = (HttpStatusCode)x;
+                });
                 x = 1000;
-                Assert.Throws<ArgumentOutOfRangeException>(() => { rm.StatusCode = (HttpStatusCode)x; });
+                Assert.Throws<ArgumentOutOfRangeException>(() =>
+                {
+                    rm.StatusCode = (HttpStatusCode)x;
+                });
             }
         }
 
@@ -292,7 +329,9 @@ namespace System.Net.Http.Functional.Tests
             Assert.Throws<NotSupportedException>(() => s.WriteByte(0));
             Assert.Throws<NotSupportedException>(() => s.Write(new byte[1], 0, 1));
             await Assert.ThrowsAsync<NotSupportedException>(() => s.WriteAsync(new byte[1], 0, 1));
-            await Assert.ThrowsAsync<NotSupportedException>(async () => await s.WriteAsync(new ReadOnlyMemory<byte>(new byte[1])));
+            await Assert.ThrowsAsync<NotSupportedException>(async () =>
+                await s.WriteAsync(new ReadOnlyMemory<byte>(new byte[1]))
+            );
         }
 
         [Fact]
@@ -300,7 +339,10 @@ namespace System.Net.Http.Functional.Tests
         {
             using (var rm = new HttpResponseMessage())
             {
-                Assert.Equal($"StatusCode: 200, ReasonPhrase: 'OK', Version: 1.1, Content: <null>, Headers:{Environment.NewLine}{{{Environment.NewLine}}}", rm.ToString());
+                Assert.Equal(
+                    $"StatusCode: 200, ReasonPhrase: 'OK', Version: 1.1, Content: <null>, Headers:{Environment.NewLine}{{{Environment.NewLine}}}",
+                    rm.ToString()
+                );
 
                 rm.StatusCode = HttpStatusCode.BadRequest;
                 rm.ReasonPhrase = null;
@@ -310,10 +352,17 @@ namespace System.Net.Http.Functional.Tests
                 // Note that there is no Content-Length header: The reason is that the value for Content-Length header
                 // doesn't get set by StringContent..ctor, but only if someone actually accesses the ContentLength property.
                 Assert.Equal(
-                    "StatusCode: 400, ReasonPhrase: 'Bad Request', Version: 1.0, Content: " + typeof(StringContent).ToString() + ", Headers:" + Environment.NewLine +
-                    "{" + Environment.NewLine +
-                    "  Content-Type: text/plain; charset=utf-8" + Environment.NewLine +
-                    "}", rm.ToString());
+                    "StatusCode: 400, ReasonPhrase: 'Bad Request', Version: 1.0, Content: "
+                        + typeof(StringContent).ToString()
+                        + ", Headers:"
+                        + Environment.NewLine
+                        + "{"
+                        + Environment.NewLine
+                        + "  Content-Type: text/plain; charset=utf-8"
+                        + Environment.NewLine
+                        + "}",
+                    rm.ToString()
+                );
 
                 rm.Headers.AcceptRanges.Add("bytes");
                 rm.Headers.AcceptRanges.Add("pages");
@@ -321,31 +370,57 @@ namespace System.Net.Http.Functional.Tests
                 rm.Content.Headers.Add("Custom-Content-Header", "value2");
 
                 Assert.Equal(
-                    "StatusCode: 400, ReasonPhrase: 'Bad Request', Version: 1.0, Content: " + typeof(StringContent).ToString() + ", Headers:" + Environment.NewLine +
-                    "{" + Environment.NewLine +
-                    "  Accept-Ranges: bytes" + Environment.NewLine +
-                    "  Accept-Ranges: pages" + Environment.NewLine +
-                    "  Custom-Response-Header: value1" + Environment.NewLine +
-                    "  Content-Type: text/plain; charset=utf-8" + Environment.NewLine +
-                    "  Custom-Content-Header: value2" + Environment.NewLine +
-                    "}", rm.ToString());
+                    "StatusCode: 400, ReasonPhrase: 'Bad Request', Version: 1.0, Content: "
+                        + typeof(StringContent).ToString()
+                        + ", Headers:"
+                        + Environment.NewLine
+                        + "{"
+                        + Environment.NewLine
+                        + "  Accept-Ranges: bytes"
+                        + Environment.NewLine
+                        + "  Accept-Ranges: pages"
+                        + Environment.NewLine
+                        + "  Custom-Response-Header: value1"
+                        + Environment.NewLine
+                        + "  Content-Type: text/plain; charset=utf-8"
+                        + Environment.NewLine
+                        + "  Custom-Content-Header: value2"
+                        + Environment.NewLine
+                        + "}",
+                    rm.ToString()
+                );
 
                 rm.TrailingHeaders.Add("Custom-Trailing-Header", "value3");
                 rm.TrailingHeaders.Add("Content-MD5", "Q2hlY2sgSW50ZWdyaXR5IQ==");
 
                 Assert.Equal(
-                    "StatusCode: 400, ReasonPhrase: 'Bad Request', Version: 1.0, Content: " + typeof(StringContent).ToString() + ", Headers:" + Environment.NewLine +
-                    "{" + Environment.NewLine +
-                    "  Accept-Ranges: bytes" + Environment.NewLine +
-                    "  Accept-Ranges: pages" + Environment.NewLine +
-                    "  Custom-Response-Header: value1" + Environment.NewLine +
-                    "  Content-Type: text/plain; charset=utf-8" + Environment.NewLine +
-                    "  Custom-Content-Header: value2" + Environment.NewLine +
-                    "}, Trailing Headers:" + Environment.NewLine +
-                    "{" + Environment.NewLine +
-                    "  Custom-Trailing-Header: value3" + Environment.NewLine +
-                    "  Content-MD5: Q2hlY2sgSW50ZWdyaXR5IQ==" + Environment.NewLine +
-                    "}", rm.ToString());
+                    "StatusCode: 400, ReasonPhrase: 'Bad Request', Version: 1.0, Content: "
+                        + typeof(StringContent).ToString()
+                        + ", Headers:"
+                        + Environment.NewLine
+                        + "{"
+                        + Environment.NewLine
+                        + "  Accept-Ranges: bytes"
+                        + Environment.NewLine
+                        + "  Accept-Ranges: pages"
+                        + Environment.NewLine
+                        + "  Custom-Response-Header: value1"
+                        + Environment.NewLine
+                        + "  Content-Type: text/plain; charset=utf-8"
+                        + Environment.NewLine
+                        + "  Custom-Content-Header: value2"
+                        + Environment.NewLine
+                        + "}, Trailing Headers:"
+                        + Environment.NewLine
+                        + "{"
+                        + Environment.NewLine
+                        + "  Custom-Trailing-Header: value3"
+                        + Environment.NewLine
+                        + "  Content-MD5: Q2hlY2sgSW50ZWdyaXR5IQ=="
+                        + Environment.NewLine
+                        + "}",
+                    rm.ToString()
+                );
             }
         }
 

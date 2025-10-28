@@ -1,23 +1,24 @@
 //------------------------------------------------------------------------------
 // <copyright file="ProcessThread.cs" company="Microsoft">
 //     Copyright (c) Microsoft Corporation.  All rights reserved.
-// </copyright>                                                                
+// </copyright>
 //------------------------------------------------------------------------------
 
-namespace System.Diagnostics {
-
-    using System.Threading;
-    using System.Runtime.InteropServices;
-    using System.ComponentModel;
-    using System.Diagnostics;
+namespace System.Diagnostics
+{
     using System;
     using System.Collections;
+    using System.ComponentModel;
+    using System.Diagnostics;
     using System.IO;
-    using Microsoft.Win32;       
-    using System.Security.Permissions;
-    using Microsoft.Win32.SafeHandles;
+    using System.Runtime.InteropServices;
     using System.Runtime.Versioning;
-//    using System.Windows.Forms;
+    using System.Security.Permissions;
+    using System.Threading;
+    using Microsoft.Win32;
+    using Microsoft.Win32.SafeHandles;
+
+    //    using System.Windows.Forms;
 
     /// <devdoc>
     ///    <para>
@@ -33,11 +34,11 @@ namespace System.Diagnostics {
     ///    </note>
     /// </devdoc>
     [
-    Designer("System.Diagnostics.Design.ProcessThreadDesigner, " + AssemblyRef.SystemDesign),
-    HostProtection(SelfAffectingProcessMgmt=true, SelfAffectingThreading=true)
+        Designer("System.Diagnostics.Design.ProcessThreadDesigner, " + AssemblyRef.SystemDesign),
+        HostProtection(SelfAffectingProcessMgmt = true, SelfAffectingThreading = true)
     ]
-    public class ProcessThread : Component {
-
+    public class ProcessThread : Component
+    {
         //
         // FIELDS
         //
@@ -59,7 +60,8 @@ namespace System.Diagnostics {
         /// <internalonly/>
         [ResourceExposure(ResourceScope.Process)]
         [ResourceConsumption(ResourceScope.Process)]
-        internal ProcessThread(bool isRemoteMachine, ThreadInfo threadInfo) {
+        internal ProcessThread(bool isRemoteMachine, ThreadInfo threadInfo)
+        {
             this.isRemoteMachine = isRemoteMachine;
             this.threadInfo = threadInfo;
             GC.SuppressFinalize(this);
@@ -74,10 +76,9 @@ namespace System.Diagnostics {
         ///     process priority class with the priority level of the associated thread.
         /// </devdoc>
         [MonitoringDescription(SR.ThreadBasePriority)]
-        public int BasePriority {
-            get {
-                return threadInfo.basePriority;
-            }
+        public int BasePriority
+        {
+            get { return threadInfo.basePriority; }
         }
 
         /// <devdoc>
@@ -86,21 +87,19 @@ namespace System.Diagnostics {
         ///     scheduling the thread.
         /// </devdoc>
         [MonitoringDescription(SR.ThreadCurrentPriority)]
-        public int CurrentPriority {
-            get {
-                return threadInfo.currentPriority;
-            }
+        public int CurrentPriority
+        {
+            get { return threadInfo.currentPriority; }
         }
 
         /// <devdoc>
         ///     Returns the unique identifier for the associated thread.
         /// </devdoc>
         [MonitoringDescription(SR.ThreadId)]
-        public int Id {
+        public int Id
+        {
             [ResourceExposure(ResourceScope.Process)]
-            get {
-                return threadInfo.threadId;
-            }
+            get { return threadInfo.threadId; }
         }
 
         /// <devdoc>
@@ -109,18 +108,23 @@ namespace System.Diagnostics {
         ///    </para>
         /// </devdoc>
         [Browsable(false)]
-        public int IdealProcessor {
+        public int IdealProcessor
+        {
             [ResourceExposure(ResourceScope.Process)]
             [ResourceConsumption(ResourceScope.Process)]
-            set {
+            set
+            {
                 SafeThreadHandle threadHandle = null;
-                try {
+                try
+                {
                     threadHandle = OpenThreadHandle(NativeMethods.THREAD_SET_INFORMATION);
-                    if (NativeMethods.SetThreadIdealProcessor(threadHandle, value) < 0) {
+                    if (NativeMethods.SetThreadIdealProcessor(threadHandle, value) < 0)
+                    {
                         throw new Win32Exception();
                     }
                 }
-                finally {
+                finally
+                {
                     CloseThreadHandle(threadHandle);
                 }
             }
@@ -131,35 +135,44 @@ namespace System.Diagnostics {
         ///      with user interface associated with this thread.
         /// </devdoc>
         [MonitoringDescription(SR.ThreadPriorityBoostEnabled)]
-        public bool PriorityBoostEnabled {
-            get {
-                if (!havePriorityBoostEnabled) {
+        public bool PriorityBoostEnabled
+        {
+            get
+            {
+                if (!havePriorityBoostEnabled)
+                {
                     SafeThreadHandle threadHandle = null;
-                    try {
+                    try
+                    {
                         threadHandle = OpenThreadHandle(NativeMethods.THREAD_QUERY_INFORMATION);
                         bool disabled = false;
-                        if (!NativeMethods.GetThreadPriorityBoost(threadHandle, out disabled)) {
+                        if (!NativeMethods.GetThreadPriorityBoost(threadHandle, out disabled))
+                        {
                             throw new Win32Exception();
                         }
                         priorityBoostEnabled = !disabled;
                         havePriorityBoostEnabled = true;
                     }
-                    finally {
+                    finally
+                    {
                         CloseThreadHandle(threadHandle);
                     }
                 }
                 return priorityBoostEnabled;
             }
-            set {
+            set
+            {
                 SafeThreadHandle threadHandle = null;
-                try {
+                try
+                {
                     threadHandle = OpenThreadHandle(NativeMethods.THREAD_SET_INFORMATION);
                     if (!NativeMethods.SetThreadPriorityBoost(threadHandle, !value))
                         throw new Win32Exception();
                     priorityBoostEnabled = value;
                     havePriorityBoostEnabled = true;
                 }
-                finally {
+                finally
+                {
                     CloseThreadHandle(threadHandle);
                 }
             }
@@ -171,20 +184,26 @@ namespace System.Diagnostics {
         ///     considering the priority class of the process.
         /// </devdoc>
         [MonitoringDescription(SR.ThreadPriorityLevel)]
-        public ThreadPriorityLevel PriorityLevel {
-            get {
-                if (!havePriorityLevel) {
+        public ThreadPriorityLevel PriorityLevel
+        {
+            get
+            {
+                if (!havePriorityLevel)
+                {
                     SafeThreadHandle threadHandle = null;
-                    try {
+                    try
+                    {
                         threadHandle = OpenThreadHandle(NativeMethods.THREAD_QUERY_INFORMATION);
                         int value = NativeMethods.GetThreadPriority(threadHandle);
-                        if (value == 0x7fffffff) {
+                        if (value == 0x7fffffff)
+                        {
                             throw new Win32Exception();
                         }
                         priorityLevel = (ThreadPriorityLevel)value;
                         havePriorityLevel = true;
                     }
-                    finally {
+                    finally
+                    {
                         CloseThreadHandle(threadHandle);
                     }
                 }
@@ -192,16 +211,20 @@ namespace System.Diagnostics {
             }
             [ResourceExposure(ResourceScope.Process)]
             [ResourceConsumption(ResourceScope.Process)]
-            set {            
+            set
+            {
                 SafeThreadHandle threadHandle = null;
-                try {
+                try
+                {
                     threadHandle = OpenThreadHandle(NativeMethods.THREAD_SET_INFORMATION);
-                    if (!NativeMethods.SetThreadPriority(threadHandle, (int)value)) {
+                    if (!NativeMethods.SetThreadPriority(threadHandle, (int)value))
+                    {
                         throw new Win32Exception();
                     }
                     priorityLevel = value;
                 }
-                finally {
+                finally
+                {
                     CloseThreadHandle(threadHandle);
                 }
             }
@@ -212,8 +235,10 @@ namespace System.Diagnostics {
         ///     system core.
         /// </devdoc>
         [MonitoringDescription(SR.ThreadPrivilegedProcessorTime)]
-        public TimeSpan PrivilegedProcessorTime {
-            get {
+        public TimeSpan PrivilegedProcessorTime
+        {
+            get
+            {
                 EnsureState(State.IsNt);
                 return GetThreadTimes().PrivilegedProcessorTime;
             }
@@ -224,8 +249,10 @@ namespace System.Diagnostics {
         ///     thread was started.
         /// </devdoc>
         [MonitoringDescription(SR.ThreadStartAddress)]
-        public IntPtr StartAddress {
-            get {
+        public IntPtr StartAddress
+        {
+            get
+            {
                 EnsureState(State.IsNt);
                 return threadInfo.startAddress;
             }
@@ -235,8 +262,10 @@ namespace System.Diagnostics {
         ///     Returns the time the associated thread was started.
         /// </devdoc>
         [MonitoringDescription(SR.ThreadStartTime)]
-        public DateTime StartTime {
-            get {
+        public DateTime StartTime
+        {
+            get
+            {
                 EnsureState(State.IsNt);
                 return GetThreadTimes().StartTime;
             }
@@ -246,8 +275,10 @@ namespace System.Diagnostics {
         ///     Returns the current state of the associated thread, e.g. is it running, waiting, etc.
         /// </devdoc>
         [MonitoringDescription(SR.ThreadThreadState)]
-        public ThreadState ThreadState {
-            get {
+        public ThreadState ThreadState
+        {
+            get
+            {
                 EnsureState(State.IsNt);
                 return threadInfo.threadState;
             }
@@ -259,8 +290,10 @@ namespace System.Diagnostics {
         ///     System.Diagnostics.ProcessThread.PrivilegedProcessorTime.
         /// </devdoc>
         [MonitoringDescription(SR.ThreadTotalProcessorTime)]
-        public TimeSpan TotalProcessorTime {
-            get {
+        public TimeSpan TotalProcessorTime
+        {
+            get
+            {
                 EnsureState(State.IsNt);
                 return GetThreadTimes().TotalProcessorTime;
             }
@@ -271,8 +304,10 @@ namespace System.Diagnostics {
         ///     inside the application (not the operating system core).
         /// </devdoc>
         [MonitoringDescription(SR.ThreadUserProcessorTime)]
-        public TimeSpan UserProcessorTime {
-            get {
+        public TimeSpan UserProcessorTime
+        {
+            get
+            {
                 EnsureState(State.IsNt);
                 return GetThreadTimes().UserProcessorTime;
             }
@@ -282,10 +317,13 @@ namespace System.Diagnostics {
         ///     Returns the reason the associated thread is waiting, if any.
         /// </devdoc>
         [MonitoringDescription(SR.ThreadWaitReason)]
-        public ThreadWaitReason WaitReason {
-            get {
+        public ThreadWaitReason WaitReason
+        {
+            get
+            {
                 EnsureState(State.IsNt);
-                if (threadInfo.threadState != ThreadState.Wait) {
+                if (threadInfo.threadState != ThreadState.Wait)
+                {
                     throw new InvalidOperationException(SR.GetString(SR.WaitReasonUnavailable));
                 }
                 return threadInfo.threadWaitReason;
@@ -300,8 +338,10 @@ namespace System.Diagnostics {
         ///     Helper to close a thread handle.
         /// </devdoc>
         /// <internalonly/>
-        private static void CloseThreadHandle(SafeThreadHandle handle) {
-            if (handle != null) {
+        private static void CloseThreadHandle(SafeThreadHandle handle)
+        {
+            if (handle != null)
+            {
                 handle.Close();
             }
         }
@@ -309,13 +349,17 @@ namespace System.Diagnostics {
         /// <devdoc>
         ///     Helper to check preconditions for property access.
         /// </devdoc>
-        void EnsureState(State state) {
-            if ( ((state & State.IsLocal) != (State)0) && isRemoteMachine) {
+        void EnsureState(State state)
+        {
+            if (((state & State.IsLocal) != (State)0) && isRemoteMachine)
+            {
                 throw new NotSupportedException(SR.GetString(SR.NotSupportedRemoteThread));
             }
 
-            if ((state & State.IsNt) != (State)0) {
-                if (Environment.OSVersion.Platform != PlatformID.Win32NT) {
+            if ((state & State.IsNt) != (State)0)
+            {
+                if (Environment.OSVersion.Platform != PlatformID.Win32NT)
+                {
                     throw new PlatformNotSupportedException(SR.GetString(SR.WinNTRequired));
                 }
             }
@@ -325,9 +369,10 @@ namespace System.Diagnostics {
         ///     Helper to open a thread handle.
         /// </devdoc>
         /// <internalonly/>
-        [ResourceExposure(ResourceScope.None)]  // Scoped by threadId
+        [ResourceExposure(ResourceScope.None)] // Scoped by threadId
         [ResourceConsumption(ResourceScope.Process, ResourceScope.Process)]
-        SafeThreadHandle OpenThreadHandle(int access) {
+        SafeThreadHandle OpenThreadHandle(int access)
+        {
             EnsureState(State.IsLocal);
             return ProcessManager.OpenThread(threadInfo.threadId, access);
         }
@@ -338,7 +383,8 @@ namespace System.Diagnostics {
         /// </devdoc>
         [ResourceExposure(ResourceScope.None)]
         [ResourceConsumption(ResourceScope.Machine, ResourceScope.Machine)]
-        public void ResetIdealProcessor() {
+        public void ResetIdealProcessor()
+        {
             // 32 means "any processor is fine"
             IdealProcessor = 32;
         }
@@ -350,53 +396,74 @@ namespace System.Diagnostics {
         ///     processor two, 3 means run on processor one or two.
         /// </devdoc>
         [Browsable(false)]
-        public IntPtr ProcessorAffinity {
+        public IntPtr ProcessorAffinity
+        {
             [ResourceExposure(ResourceScope.Process)]
             [ResourceConsumption(ResourceScope.Process)]
-            set {
+            set
+            {
                 SafeThreadHandle threadHandle = null;
-                try {
-                    threadHandle = OpenThreadHandle(NativeMethods.THREAD_SET_INFORMATION | NativeMethods.THREAD_QUERY_INFORMATION);
-                    if (NativeMethods.SetThreadAffinityMask(threadHandle, new HandleRef(this, value)) == IntPtr.Zero) {
+                try
+                {
+                    threadHandle = OpenThreadHandle(
+                        NativeMethods.THREAD_SET_INFORMATION
+                            | NativeMethods.THREAD_QUERY_INFORMATION
+                    );
+                    if (
+                        NativeMethods.SetThreadAffinityMask(
+                            threadHandle,
+                            new HandleRef(this, value)
+                        ) == IntPtr.Zero
+                    )
+                    {
                         throw new Win32Exception();
                     }
                 }
-                finally {
+                finally
+                {
                     CloseThreadHandle(threadHandle);
                 }
             }
         }
 
-        private ProcessThreadTimes GetThreadTimes() {
+        private ProcessThreadTimes GetThreadTimes()
+        {
             ProcessThreadTimes threadTimes = new ProcessThreadTimes();
 
             SafeThreadHandle threadHandle = null;
-            try {
+            try
+            {
                 threadHandle = OpenThreadHandle(NativeMethods.THREAD_QUERY_INFORMATION);
 
-                if (!NativeMethods.GetThreadTimes(threadHandle, 
-                    out threadTimes.create, 
-                    out threadTimes.exit, 
-                    out threadTimes.kernel, 
-                    out threadTimes.user)) {
+                if (
+                    !NativeMethods.GetThreadTimes(
+                        threadHandle,
+                        out threadTimes.create,
+                        out threadTimes.exit,
+                        out threadTimes.kernel,
+                        out threadTimes.user
+                    )
+                )
+                {
                     throw new Win32Exception();
                 }
             }
-            finally {
+            finally
+            {
                 CloseThreadHandle(threadHandle);
             }
 
             return threadTimes;
         }
 
-
         /// <summary>
         ///      Preconditions for accessing properties.
         /// </summary>
         /// <internalonly/>
-        enum State {
+        enum State
+        {
             IsLocal = 0x2,
-            IsNt = 0x4
+            IsNt = 0x4,
         }
     }
 }

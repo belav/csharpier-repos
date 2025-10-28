@@ -22,8 +22,7 @@ namespace System.Threading.Tasks.Tests
         private ActionType _actionType; // type of actions
 
         private Action[] _actions;
-        private double[] _results;  // global place to store the workload results for verification
-
+        private double[] _results; // global place to store the workload results for verification
         #endregion
 
         public ParallelInvokeTest(ParallelInvokeTestParameters parameters)
@@ -44,17 +43,21 @@ namespace System.Threading.Tasks.Tests
                 }
                 else if (_actionType == ActionType.EqualWorkload)
                 {
-                    _actions[i] = new Action(delegate
-                    {
-                        _results[iCopy] = ZetaSequence(SEED);
-                    });
+                    _actions[i] = new Action(
+                        delegate
+                        {
+                            _results[iCopy] = ZetaSequence(SEED);
+                        }
+                    );
                 }
                 else
                 {
-                    _actions[i] = new Action(delegate
-                    {
-                        _results[iCopy] = ZetaSequence((iCopy + 1) * SEED);
-                    });
+                    _actions[i] = new Action(
+                        delegate
+                        {
+                            _results[iCopy] = ZetaSequence((iCopy + 1) * SEED);
+                        }
+                    );
                 }
             }
         }
@@ -80,9 +83,20 @@ namespace System.Threading.Tasks.Tests
             foreach (double r in _results)
             {
                 //If action is empty we are expected zero as result
-                Assert.False(_actionType == ActionType.Empty && r != 0, string.Format("Differ in results. Expected result to be Zero but got {0}", r));
+                Assert.False(
+                    _actionType == ActionType.Empty && r != 0,
+                    string.Format("Differ in results. Expected result to be Zero but got {0}", r)
+                );
 
-                Assert.False(_actionType != ActionType.Empty && (r < minLimit || r > maxLimit), string.Format("Differ in results. Expected result to lie between {0} and {1} but got {2}", minLimit, maxLimit, r));
+                Assert.False(
+                    _actionType != ActionType.Empty && (r < minLimit || r > maxLimit),
+                    string.Format(
+                        "Differ in results. Expected result to lie between {0} and {1} but got {2}",
+                        minLimit,
+                        maxLimit,
+                        r
+                    )
+                );
             }
         }
 
@@ -122,10 +136,9 @@ namespace System.Threading.Tasks.Tests
         public ActionType ActionType;
     }
 
-     #region Test Methods
+    #region Test Methods
     public static class TestMethods
     {
-
         [Fact]
         public static void ParallelInvoke0()
         {
@@ -269,8 +282,7 @@ namespace System.Threading.Tasks.Tests
             ParallelInvokeTest test = new ParallelInvokeTest(parameters);
             test.RealRun();
         }
-
     }
 
-#endregion
+    #endregion
 }

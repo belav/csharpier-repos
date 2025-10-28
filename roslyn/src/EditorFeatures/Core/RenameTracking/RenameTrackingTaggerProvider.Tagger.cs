@@ -28,26 +28,48 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.RenameTracking
                 _stateMachine.TrackingSessionCleared += StateMachine_TrackingSessionCleared;
             }
 
-            private void StateMachine_TrackingSessionCleared(ITrackingSpan trackingSpanToClear)
-                => TagsChanged(this, new SnapshotSpanEventArgs(trackingSpanToClear.GetSpan(_stateMachine.Buffer.CurrentSnapshot)));
+            private void StateMachine_TrackingSessionCleared(ITrackingSpan trackingSpanToClear) =>
+                TagsChanged(
+                    this,
+                    new SnapshotSpanEventArgs(
+                        trackingSpanToClear.GetSpan(_stateMachine.Buffer.CurrentSnapshot)
+                    )
+                );
 
             private void StateMachine_TrackingSessionUpdated()
             {
                 if (_stateMachine.TrackingSession != null)
                 {
-                    TagsChanged(this, new SnapshotSpanEventArgs(_stateMachine.TrackingSession.TrackingSpan.GetSpan(_stateMachine.Buffer.CurrentSnapshot)));
+                    TagsChanged(
+                        this,
+                        new SnapshotSpanEventArgs(
+                            _stateMachine.TrackingSession.TrackingSpan.GetSpan(
+                                _stateMachine.Buffer.CurrentSnapshot
+                            )
+                        )
+                    );
                 }
             }
 
-            public IEnumerable<ITagSpan<RenameTrackingTag>> GetTags(NormalizedSnapshotSpanCollection spans)
-                => GetTags(spans, RenameTrackingTag.Instance);
+            public IEnumerable<ITagSpan<RenameTrackingTag>> GetTags(
+                NormalizedSnapshotSpanCollection spans
+            ) => GetTags(spans, RenameTrackingTag.Instance);
 
-            IEnumerable<ITagSpan<IErrorTag>> ITagger<IErrorTag>.GetTags(NormalizedSnapshotSpanCollection spans)
-                => GetTags(spans, new ErrorTag(PredefinedErrorTypeNames.Suggestion));
+            IEnumerable<ITagSpan<IErrorTag>> ITagger<IErrorTag>.GetTags(
+                NormalizedSnapshotSpanCollection spans
+            ) => GetTags(spans, new ErrorTag(PredefinedErrorTypeNames.Suggestion));
 
-            private IEnumerable<ITagSpan<T>> GetTags<T>(NormalizedSnapshotSpanCollection spans, T tag) where T : ITag
+            private IEnumerable<ITagSpan<T>> GetTags<T>(
+                NormalizedSnapshotSpanCollection spans,
+                T tag
+            )
+                where T : ITag
             {
-                if (!_stateMachine.GlobalOptions.GetOption(RenameTrackingOptionsStorage.RenameTracking))
+                if (
+                    !_stateMachine.GlobalOptions.GetOption(
+                        RenameTrackingOptionsStorage.RenameTracking
+                    )
+                )
                 {
                     // Changes aren't being triggered by the buffer, but there may still be taggers
                     // out there which we should prevent from doing work.

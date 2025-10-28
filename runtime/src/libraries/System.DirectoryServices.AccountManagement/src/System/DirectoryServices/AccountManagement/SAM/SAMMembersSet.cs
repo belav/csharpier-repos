@@ -14,14 +14,22 @@ namespace System.DirectoryServices.AccountManagement
 {
     internal sealed class SAMMembersSet : BookmarkableResultSet
     {
-        internal SAMMembersSet(string groupPath, UnsafeNativeMethods.IADsGroup group, bool recursive, SAMStoreCtx storeCtx, DirectoryEntry ctxBase)
+        internal SAMMembersSet(
+            string groupPath,
+            UnsafeNativeMethods.IADsGroup group,
+            bool recursive,
+            SAMStoreCtx storeCtx,
+            DirectoryEntry ctxBase
+        )
         {
-            GlobalDebug.WriteLineIf(GlobalDebug.Info,
-                                    "SAMMembersSet",
-                                    "SAMMembersSet: groupPath={0}, recursive={1}, base={2}",
-                                    groupPath,
-                                    recursive,
-                                    ctxBase.Path);
+            GlobalDebug.WriteLineIf(
+                GlobalDebug.Info,
+                "SAMMembersSet",
+                "SAMMembersSet: groupPath={0}, recursive={1}, base={2}",
+                groupPath,
+                recursive,
+                ctxBase.Path
+            );
 
             _storeCtx = storeCtx;
 
@@ -29,7 +37,7 @@ namespace System.DirectoryServices.AccountManagement
             _originalGroup = group;
             _recursive = recursive;
 
-            _groupsVisited.Add(groupPath);    // so we don't revisit it
+            _groupsVisited.Add(groupPath); // so we don't revisit it
 
             UnsafeNativeMethods.IADsMembers iADsMembers = group.Members();
             _membersEnumerator = ((IEnumerable)iADsMembers).GetEnumerator();
@@ -44,26 +52,42 @@ namespace System.DirectoryServices.AccountManagement
                 if (_current != null)
                 {
                     // Local principal --- handle it ourself
-                    GlobalDebug.WriteLineIf(GlobalDebug.Info, "SAMMembersSet", "CurrentAsPrincipal: returning current");
+                    GlobalDebug.WriteLineIf(
+                        GlobalDebug.Info,
+                        "SAMMembersSet",
+                        "CurrentAsPrincipal: returning current"
+                    );
                     return SAMUtils.DirectoryEntryAsPrincipal(_current, _storeCtx);
                 }
                 else if (_currentFakePrincipal != null)
                 {
                     // Local fake principal --- handle it ourself
-                    GlobalDebug.WriteLineIf(GlobalDebug.Info, "SAMMembersSet", "CurrentAsPrincipal: returning currentFakePrincipal");
+                    GlobalDebug.WriteLineIf(
+                        GlobalDebug.Info,
+                        "SAMMembersSet",
+                        "CurrentAsPrincipal: returning currentFakePrincipal"
+                    );
                     return _currentFakePrincipal;
                 }
                 else if (_currentForeign != null)
                 {
                     // Foreign, non-recursive principal.  Just return the principal.
-                    GlobalDebug.WriteLineIf(GlobalDebug.Info, "SAMMembersSet", "CurrentAsPrincipal: returning currentForeign");
+                    GlobalDebug.WriteLineIf(
+                        GlobalDebug.Info,
+                        "SAMMembersSet",
+                        "CurrentAsPrincipal: returning currentForeign"
+                    );
                     return _currentForeign;
                 }
                 else
                 {
                     // Foreign recursive expansion.  Proxy the call to the foreign ResultSet.
                     Debug.Assert(_foreignResultSet != null);
-                    GlobalDebug.WriteLineIf(GlobalDebug.Info, "SAMMembersSet", "CurrentAsPrincipal: returning foreignResultSet");
+                    GlobalDebug.WriteLineIf(
+                        GlobalDebug.Info,
+                        "SAMMembersSet",
+                        "CurrentAsPrincipal: returning foreignResultSet"
+                    );
                     return _foreignResultSet.CurrentAsPrincipal;
                 }
             }
@@ -82,7 +106,11 @@ namespace System.DirectoryServices.AccountManagement
 
             if (!f)
             {
-                GlobalDebug.WriteLineIf(GlobalDebug.Info, "SAMMembersSet", "MoveNext: trying foreign");
+                GlobalDebug.WriteLineIf(
+                    GlobalDebug.Info,
+                    "SAMMembersSet",
+                    "MoveNext: trying foreign"
+                );
 
                 f = MoveNextForeign();
             }
@@ -102,9 +130,14 @@ namespace System.DirectoryServices.AccountManagement
 
                 if (f) // got a value
                 {
-                    GlobalDebug.WriteLineIf(GlobalDebug.Info, "SAMMembersSet", "MoveNextLocal: got a value from the enumerator");
+                    GlobalDebug.WriteLineIf(
+                        GlobalDebug.Info,
+                        "SAMMembersSet",
+                        "MoveNextLocal: got a value from the enumerator"
+                    );
 
-                    UnsafeNativeMethods.IADs nativeMember = (UnsafeNativeMethods.IADs)_membersEnumerator.Current;
+                    UnsafeNativeMethods.IADs nativeMember = (UnsafeNativeMethods.IADs)
+                        _membersEnumerator.Current;
 
                     // If we encountered a group member corresponding to a fake principal such as
                     // NT AUTHORITY/NETWORK SERVICE, construct and prepare to return the fake principal.
@@ -112,7 +145,12 @@ namespace System.DirectoryServices.AccountManagement
                     SidType sidType = Utils.ClassifySID(sid);
                     if (sidType == SidType.FakeObject)
                     {
-                        GlobalDebug.WriteLineIf(GlobalDebug.Info, "SAMMembersSet", "MoveNextLocal: fake principal, sid={0}", Utils.ByteArrayToString(sid));
+                        GlobalDebug.WriteLineIf(
+                            GlobalDebug.Info,
+                            "SAMMembersSet",
+                            "MoveNextLocal: fake principal, sid={0}",
+                            Utils.ByteArrayToString(sid)
+                        );
 
                         _currentFakePrincipal = _storeCtx.ConstructFakePrincipalFromSID(sid);
                         _current = null;
@@ -128,18 +166,24 @@ namespace System.DirectoryServices.AccountManagement
                     // object constructor, the native object will have the right credentials, but the DirectoryEntry
                     // will have default (null) credentials, which it'll use anytime it needs to use credentials.
                     DirectoryEntry de = SDSUtils.BuildDirectoryEntry(
-                                                        _storeCtx.Credentials,
-                                                        _storeCtx.AuthTypes);
+                        _storeCtx.Credentials,
+                        _storeCtx.AuthTypes
+                    );
 
                     if (sidType == SidType.RealObjectFakeDomain)
                     {
                         // Transform the "WinNT://BUILTIN/foo" path to "WinNT://machineName/foo"
                         string builtinADsPath = nativeMember.ADsPath;
 
-                        UnsafeNativeMethods.Pathname pathCracker = new UnsafeNativeMethods.Pathname();
-                        UnsafeNativeMethods.IADsPathname pathName = (UnsafeNativeMethods.IADsPathname)pathCracker;
+                        UnsafeNativeMethods.Pathname pathCracker =
+                            new UnsafeNativeMethods.Pathname();
+                        UnsafeNativeMethods.IADsPathname pathName =
+                            (UnsafeNativeMethods.IADsPathname)pathCracker;
 
-                        pathName.Set(builtinADsPath, 1 /* ADS_SETTYPE_FULL */);
+                        pathName.Set(
+                            builtinADsPath,
+                            1 /* ADS_SETTYPE_FULL */
+                        );
 
                         // Build the "WinNT://" portion of the new path
                         StringBuilder adsPath = new StringBuilder();
@@ -153,7 +197,7 @@ namespace System.DirectoryServices.AccountManagement
                         // Build the "WinNT://machineName/foo" portion of the new path
                         int cElements = pathName.GetNumElements();
 
-                        Debug.Assert(cElements >= 2);       // "WinNT://BUILTIN/foo" == 2 elements
+                        Debug.Assert(cElements >= 2); // "WinNT://BUILTIN/foo" == 2 elements
 
                         // Note that the ADSI WinNT provider indexes them backwards, e.g., in
                         // "WinNT://BUILTIN/A/B", BUILTIN == 2, A == 1, B == 0.
@@ -163,18 +207,29 @@ namespace System.DirectoryServices.AccountManagement
                             adsPath.Append('/');
                         }
 
-                        adsPath.Remove(adsPath.Length - 1, 1);  // remove the trailing "/"
+                        adsPath.Remove(adsPath.Length - 1, 1); // remove the trailing "/"
 
                         de.Path = adsPath.ToString();
 
-                        GlobalDebug.WriteLineIf(GlobalDebug.Info, "SAMMembersSet", "MoveNextLocal: fake domain: {0} --> {1}", builtinADsPath, adsPath);
+                        GlobalDebug.WriteLineIf(
+                            GlobalDebug.Info,
+                            "SAMMembersSet",
+                            "MoveNextLocal: fake domain: {0} --> {1}",
+                            builtinADsPath,
+                            adsPath
+                        );
                     }
                     else
                     {
                         Debug.Assert(sidType == SidType.RealObject);
                         de.Path = nativeMember.ADsPath;
 
-                        GlobalDebug.WriteLineIf(GlobalDebug.Info, "SAMMembersSet", "MoveNextLocal: real domain {0}", de.Path);
+                        GlobalDebug.WriteLineIf(
+                            GlobalDebug.Info,
+                            "SAMMembersSet",
+                            "MoveNextLocal: real domain {0}",
+                            de.Path
+                        );
                     }
 
                     //  Debug.Assert(Utils.AreBytesEqual(sid, (byte[]) de.Properties["objectSid"].Value));
@@ -186,7 +241,12 @@ namespace System.DirectoryServices.AccountManagement
                         // visit (expand) later.
                         if (!_recursive || !SAMUtils.IsOfObjectClass(de, "Group"))
                         {
-                            GlobalDebug.WriteLineIf(GlobalDebug.Info, "SAMMembersSet", "MoveNextLocal: setting current to {0}", de.Path);
+                            GlobalDebug.WriteLineIf(
+                                GlobalDebug.Info,
+                                "SAMMembersSet",
+                                "MoveNextLocal: setting current to {0}",
+                                de.Path
+                            );
 
                             // Not recursive, or not a group.  Return the principal.
                             _current = de;
@@ -199,10 +259,18 @@ namespace System.DirectoryServices.AccountManagement
                         }
                         else
                         {
-                            GlobalDebug.WriteLineIf(GlobalDebug.Info, "SAMMembersSet", "MoveNextLocal: adding {0} to groupsToVisit", de.Path);
+                            GlobalDebug.WriteLineIf(
+                                GlobalDebug.Info,
+                                "SAMMembersSet",
+                                "MoveNextLocal: adding {0} to groupsToVisit",
+                                de.Path
+                            );
 
                             // Save off for later, if we haven't done so already.
-                            if (!_groupsVisited.Contains(de.Path) && !_groupsToVisit.Contains(de.Path))
+                            if (
+                                !_groupsVisited.Contains(de.Path)
+                                && !_groupsToVisit.Contains(de.Path)
+                            )
                                 _groupsToVisit.Add(de.Path);
 
                             needToRetry = true;
@@ -214,7 +282,12 @@ namespace System.DirectoryServices.AccountManagement
                         // It's a foreign principal (e..g, an AD user or group).
                         // Save it off for later.
 
-                        GlobalDebug.WriteLineIf(GlobalDebug.Info, "SAMMembersSet", "MoveNextLocal: adding {0} to foreignMembers", de.Path);
+                        GlobalDebug.WriteLineIf(
+                            GlobalDebug.Info,
+                            "SAMMembersSet",
+                            "MoveNextLocal: adding {0} to foreignMembers",
+                            de.Path
+                        );
 
                         _foreignMembers.Add(de);
                         needToRetry = true;
@@ -228,22 +301,33 @@ namespace System.DirectoryServices.AccountManagement
                     // any remaining non-foreign groups we earlier visited.
                     if (_recursive)
                     {
-                        GlobalDebug.WriteLineIf(GlobalDebug.Info, "SAMMembersSet", "MoveNextLocal: recursive processing, groupsToVisit={0}", _groupsToVisit.Count);
+                        GlobalDebug.WriteLineIf(
+                            GlobalDebug.Info,
+                            "SAMMembersSet",
+                            "MoveNextLocal: recursive processing, groupsToVisit={0}",
+                            _groupsToVisit.Count
+                        );
 
                         if (_groupsToVisit.Count > 0)
                         {
                             // Pull off the next group to visit
                             string groupPath = _groupsToVisit[0];
-                            GlobalDebug.WriteLineIf(GlobalDebug.Info, "SAMMembersSet", "MoveNextLocal: recursively processing {0}", groupPath);
+                            GlobalDebug.WriteLineIf(
+                                GlobalDebug.Info,
+                                "SAMMembersSet",
+                                "MoveNextLocal: recursively processing {0}",
+                                groupPath
+                            );
 
                             _groupsToVisit.RemoveAt(0);
                             _groupsVisited.Add(groupPath);
 
                             // Set up for the next round of enumeration
                             DirectoryEntry de = SDSUtils.BuildDirectoryEntry(
-                                                                        groupPath,
-                                                                        _storeCtx.Credentials,
-                                                                        _storeCtx.AuthTypes);
+                                groupPath,
+                                _storeCtx.Credentials,
+                                _storeCtx.AuthTypes
+                            );
 
                             _group = (UnsafeNativeMethods.IADsGroup)de.NativeObject;
 
@@ -256,8 +340,7 @@ namespace System.DirectoryServices.AccountManagement
                         }
                     }
                 }
-            }
-            while (needToRetry);
+            } while (needToRetry);
 
             return false;
         }
@@ -270,7 +353,12 @@ namespace System.DirectoryServices.AccountManagement
             {
                 needToRetry = false;
 
-                GlobalDebug.WriteLineIf(GlobalDebug.Info, "SAMMembersSet", "MoveNextForeign: foreignMembers count={0}", _foreignMembers.Count);
+                GlobalDebug.WriteLineIf(
+                    GlobalDebug.Info,
+                    "SAMMembersSet",
+                    "MoveNextForeign: foreignMembers count={0}",
+                    _foreignMembers.Count
+                );
 
                 if (_foreignMembers.Count > 0)
                 {
@@ -278,17 +366,29 @@ namespace System.DirectoryServices.AccountManagement
                     DirectoryEntry foreignDE = _foreignMembers[0];
                     _foreignMembers.RemoveAt(0);
 
-                    GlobalDebug.WriteLineIf(GlobalDebug.Info, "SAMMembersSet", "MoveNextForeign: foreignDE={0}", foreignDE.Path);
+                    GlobalDebug.WriteLineIf(
+                        GlobalDebug.Info,
+                        "SAMMembersSet",
+                        "MoveNextForeign: foreignDE={0}",
+                        foreignDE.Path
+                    );
 
                     // foreignPrincipal is a principal from _another_ store (e.g., it's backed by an ADStoreCtx)
-                    Principal foreignPrincipal = _storeCtx.ResolveCrossStoreRefToPrincipal(foreignDE);
+                    Principal foreignPrincipal = _storeCtx.ResolveCrossStoreRefToPrincipal(
+                        foreignDE
+                    );
 
                     // If we're not enumerating recursively, return the principal.
                     // If we are enumerating recursively, and it's a group, save it off for later.
                     if (!_recursive || !(foreignPrincipal is GroupPrincipal))
                     {
                         // Return the principal.
-                        GlobalDebug.WriteLineIf(GlobalDebug.Info, "SAMMembersSet", "MoveNextForeign: setting currentForeign to {0}", foreignDE.Path);
+                        GlobalDebug.WriteLineIf(
+                            GlobalDebug.Info,
+                            "SAMMembersSet",
+                            "MoveNextForeign: setting currentForeign to {0}",
+                            foreignDE.Path
+                        );
 
                         _current = null;
                         _currentFakePrincipal = null;
@@ -301,7 +401,12 @@ namespace System.DirectoryServices.AccountManagement
                     else
                     {
                         // Save off the group for recursive expansion, and go on to the next principal.
-                        GlobalDebug.WriteLineIf(GlobalDebug.Info, "SAMMembersSet", "MoveNextForeign: adding {0} to foreignGroups", foreignDE.Path);
+                        GlobalDebug.WriteLineIf(
+                            GlobalDebug.Info,
+                            "SAMMembersSet",
+                            "MoveNextForeign: adding {0} to foreignGroups",
+                            foreignDE.Path
+                        );
 
                         _foreignGroups.Add((GroupPrincipal)foreignPrincipal);
                         needToRetry = true;
@@ -311,10 +416,12 @@ namespace System.DirectoryServices.AccountManagement
 
                 if (_foreignResultSet == null && _foreignGroups.Count > 0)
                 {
-                    GlobalDebug.WriteLineIf(GlobalDebug.Info,
-                                            "SAMMembersSet",
-                                            "MoveNextForeign: getting foreignResultSet (foreignGroups count={0})",
-                                            _foreignGroups.Count);
+                    GlobalDebug.WriteLineIf(
+                        GlobalDebug.Info,
+                        "SAMMembersSet",
+                        "MoveNextForeign: getting foreignResultSet (foreignGroups count={0})",
+                        _foreignGroups.Count
+                    );
 
                     // We're expanding recursively, and either (1) we're immediately before
                     // the recursive expansion of the first foreign group, or (2) we just completed
@@ -328,7 +435,9 @@ namespace System.DirectoryServices.AccountManagement
                     // Since it's a foreign group, we don't know how to enumerate its members.  So we'll
                     // ask the group, through its StoreCtx, to do it for us.  Effectively, we'll end up acting
                     // as a proxy to the foreign group's ResultSet.
-                    _foreignResultSet = foreignGroup.GetStoreCtxToUse().GetGroupMembership(foreignGroup, true);
+                    _foreignResultSet = foreignGroup
+                        .GetStoreCtxToUse()
+                        .GetGroupMembership(foreignGroup, true);
                 }
 
                 // We're either just beginning the recursive expansion of a foreign group, or we're continuing the expansion
@@ -343,7 +452,11 @@ namespace System.DirectoryServices.AccountManagement
                     {
                         // By setting current, currentFakePrincipal, and currentForeign to null,
                         // CurrentAsPrincipal/CurrentAsIdentityReference will know to proxy out to foreignResultSet.
-                        GlobalDebug.WriteLineIf(GlobalDebug.Info, "SAMMembersSet", "MoveNextForeign: using foreignResultSet");
+                        GlobalDebug.WriteLineIf(
+                            GlobalDebug.Info,
+                            "SAMMembersSet",
+                            "MoveNextForeign: using foreignResultSet"
+                        );
 
                         _current = null;
                         _currentFakePrincipal = null;
@@ -357,7 +470,11 @@ namespace System.DirectoryServices.AccountManagement
                     {
                         // Yes, there is.  Null out the foreignResultSet so we'll pull out the next foreign group
                         // the next time around the loop.
-                        GlobalDebug.WriteLineIf(GlobalDebug.Info, "SAMMembersSet", "MoveNextForeign: ran out of members, using next foreignResultSet");
+                        GlobalDebug.WriteLineIf(
+                            GlobalDebug.Info,
+                            "SAMMembersSet",
+                            "MoveNextForeign: ran out of members, using next foreignResultSet"
+                        );
 
                         _foreignResultSet.Dispose();
                         _foreignResultSet = null;
@@ -368,14 +485,17 @@ namespace System.DirectoryServices.AccountManagement
                     {
                         // No, there isn't.  Nothing left to do.  We set foreignResultSet to null here just
                         // to leave things in a clean state --- it shouldn't really be necessary.
-                        GlobalDebug.WriteLineIf(GlobalDebug.Info, "SAMMembersSet", "MoveNextForeign: ran out of members, nothing more to do");
+                        GlobalDebug.WriteLineIf(
+                            GlobalDebug.Info,
+                            "SAMMembersSet",
+                            "MoveNextForeign: ran out of members, nothing more to do"
+                        );
 
                         _foreignResultSet.Dispose();
                         _foreignResultSet = null;
                     }
                 }
-            }
-            while (needToRetry);
+            } while (needToRetry);
 
             return false;
         }
@@ -388,10 +508,12 @@ namespace System.DirectoryServices.AccountManagement
 
             if (sidType == SidType.RealObjectFakeDomain)
             {
-                GlobalDebug.WriteLineIf(GlobalDebug.Info,
-                                        "SAMMembersSet",
-                                        "IsLocalMember: fake domain, SID={0}",
-                                        Utils.ByteArrayToString(sid));
+                GlobalDebug.WriteLineIf(
+                    GlobalDebug.Info,
+                    "SAMMembersSet",
+                    "IsLocalMember: fake domain, SID={0}",
+                    Utils.ByteArrayToString(sid)
+                );
 
                 return true;
             }
@@ -402,35 +524,47 @@ namespace System.DirectoryServices.AccountManagement
             string domainName;
 
             int err = Utils.LookupSid(
-                                _storeCtx.MachineUserSuppliedName,
-                                _storeCtx.Credentials,
-                                sid,
-                                out _,
-                                out domainName,
-                                out _);
+                _storeCtx.MachineUserSuppliedName,
+                _storeCtx.Credentials,
+                sid,
+                out _,
+                out domainName,
+                out _
+            );
 
             if (err != 0)
             {
-                GlobalDebug.WriteLineIf(GlobalDebug.Error,
-                                        "SAMMembersSet",
-                                        "IsLocalMember: LookupSid failed, sid={0}, server={1}, err={2}",
-                                        Utils.ByteArrayToString(sid),
-                                        _storeCtx.MachineUserSuppliedName,
-                                        err);
+                GlobalDebug.WriteLineIf(
+                    GlobalDebug.Error,
+                    "SAMMembersSet",
+                    "IsLocalMember: LookupSid failed, sid={0}, server={1}, err={2}",
+                    Utils.ByteArrayToString(sid),
+                    _storeCtx.MachineUserSuppliedName,
+                    err
+                );
 
                 throw new PrincipalOperationException(
-                            SR.Format(SR.SAMStoreCtxErrorEnumeratingGroup, err));
+                    SR.Format(SR.SAMStoreCtxErrorEnumeratingGroup, err)
+                );
             }
 
-            if (string.Equals(_storeCtx.MachineFlatName, domainName, StringComparison.OrdinalIgnoreCase))
+            if (
+                string.Equals(
+                    _storeCtx.MachineFlatName,
+                    domainName,
+                    StringComparison.OrdinalIgnoreCase
+                )
+            )
                 isLocal = true;
 
-            GlobalDebug.WriteLineIf(GlobalDebug.Info,
-                                    "SAMMembersSet",
-                                    "IsLocalMember: sid={0}, isLocal={1}, domainName={2}",
-                                    Utils.ByteArrayToString(sid),
-                                    isLocal,
-                                    domainName);
+            GlobalDebug.WriteLineIf(
+                GlobalDebug.Info,
+                "SAMMembersSet",
+                "IsLocalMember: sid={0}, isLocal={1}, domainName={2}",
+                Utils.ByteArrayToString(sid),
+                isLocal,
+                domainName
+            );
 
             return isLocal;
         }
@@ -540,11 +674,19 @@ namespace System.DirectoryServices.AccountManagement
             {
                 if (!_disposed)
                 {
-                    GlobalDebug.WriteLineIf(GlobalDebug.Info, "SAMMembersSet", "Dispose: disposing");
+                    GlobalDebug.WriteLineIf(
+                        GlobalDebug.Info,
+                        "SAMMembersSet",
+                        "Dispose: disposing"
+                    );
 
                     if (_foreignResultSet != null)
                     {
-                        GlobalDebug.WriteLineIf(GlobalDebug.Info, "SAMMembersSet", "Dispose: disposing foreignResultSet");
+                        GlobalDebug.WriteLineIf(
+                            GlobalDebug.Info,
+                            "SAMMembersSet",
+                            "Dispose: disposing foreignResultSet"
+                        );
                         _foreignResultSet.Dispose();
                     }
 
@@ -577,12 +719,12 @@ namespace System.DirectoryServices.AccountManagement
         private List<string> _groupsToVisit = new List<string>();
 
         private DirectoryEntry _current; // current member of the group (if enumerating local group and found a real principal)
-        private Principal _currentFakePrincipal;  // current member of the group (if enumerating local group and found a fake pricipal)
+        private Principal _currentFakePrincipal; // current member of the group (if enumerating local group and found a fake pricipal)
 
-        private UnsafeNativeMethods.IADsGroup _group;            // the group whose membership we're currently enumerating over
-        private readonly UnsafeNativeMethods.IADsGroup _originalGroup;    // the group whose membership we started off with (before recursing)
+        private UnsafeNativeMethods.IADsGroup _group; // the group whose membership we're currently enumerating over
+        private readonly UnsafeNativeMethods.IADsGroup _originalGroup; // the group whose membership we started off with (before recursing)
 
-        private IEnumerator _membersEnumerator;         // the current group's membership enumerator
+        private IEnumerator _membersEnumerator; // the current group's membership enumerator
 
         // foreign
         private List<DirectoryEntry> _foreignMembers = new List<DirectoryEntry>();

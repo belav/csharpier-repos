@@ -21,7 +21,9 @@ namespace Microsoft.CodeAnalysis.UnitTests.Options;
 public class OptionSerializerTests
 {
     [Theory, CombinatorialData]
-    public void SerializationAndDeserializationForNullableBool([CombinatorialValues(true, false, null)] bool? value)
+    public void SerializationAndDeserializationForNullableBool(
+        [CombinatorialValues(true, false, null)] bool? value
+    )
     {
         var options = new IOption2[]
         {

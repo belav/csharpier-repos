@@ -21,11 +21,7 @@ public abstract class NorthwindQueryTaggingQueryTestBase<TFixture> : IClassFixtu
     public virtual void Single_query_tag()
     {
         using var context = CreateContext();
-        var customer
-            = context.Set<Customer>()
-                .OrderBy(c => c.CustomerID)
-                .TagWith("Yanni")
-                .First();
+        var customer = context.Set<Customer>().OrderBy(c => c.CustomerID).TagWith("Yanni").First();
 
         Assert.NotNull(customer);
     }
@@ -34,12 +30,12 @@ public abstract class NorthwindQueryTaggingQueryTestBase<TFixture> : IClassFixtu
     public virtual void Single_query_multiple_tags()
     {
         using var context = CreateContext();
-        var customer
-            = context.Set<Customer>()
-                .OrderBy(c => c.CustomerID)
-                .TagWith("Yanni")
-                .TagWith("Enya")
-                .First();
+        var customer = context
+            .Set<Customer>()
+            .OrderBy(c => c.CustomerID)
+            .TagWith("Yanni")
+            .TagWith("Enya")
+            .First();
 
         Assert.NotNull(customer);
     }
@@ -48,12 +44,12 @@ public abstract class NorthwindQueryTaggingQueryTestBase<TFixture> : IClassFixtu
     public virtual void Duplicate_tags()
     {
         using var context = CreateContext();
-        var customer
-            = context.Set<Customer>()
-                .OrderBy(c => c.CustomerID)
-                .TagWith("Yanni")
-                .TagWith("Yanni")
-                .First();
+        var customer = context
+            .Set<Customer>()
+            .OrderBy(c => c.CustomerID)
+            .TagWith("Yanni")
+            .TagWith("Yanni")
+            .First();
 
         Assert.NotNull(customer);
     }
@@ -62,10 +58,15 @@ public abstract class NorthwindQueryTaggingQueryTestBase<TFixture> : IClassFixtu
     public virtual void Tags_on_subquery()
     {
         using var context = CreateContext();
-        var customers
-            = (from c in context.Set<Customer>().Where(c => c.CustomerID == "ALFKI").AsNoTracking().TagWith("Yanni")
-               from o in context.Orders.OrderBy(o => o.OrderID).Take(5).TagWith("Laurel")
-               select c).ToList();
+        var customers = (
+            from c in context
+                .Set<Customer>()
+                .Where(c => c.CustomerID == "ALFKI")
+                .AsNoTracking()
+                .TagWith("Yanni")
+            from o in context.Orders.OrderBy(o => o.OrderID).Take(5).TagWith("Laurel")
+            select c
+        ).ToList();
 
         Assert.Equal(5, customers.Count);
     }
@@ -74,12 +75,12 @@ public abstract class NorthwindQueryTaggingQueryTestBase<TFixture> : IClassFixtu
     public virtual void Tag_on_include_query()
     {
         using var context = CreateContext();
-        var customer
-            = context.Set<Customer>()
-                .Include(c => c.Orders)
-                .OrderBy(c => c.CustomerID)
-                .TagWith("Yanni")
-                .First();
+        var customer = context
+            .Set<Customer>()
+            .Include(c => c.Orders)
+            .OrderBy(c => c.CustomerID)
+            .TagWith("Yanni")
+            .First();
 
         Assert.NotNull(customer);
     }
@@ -88,12 +89,12 @@ public abstract class NorthwindQueryTaggingQueryTestBase<TFixture> : IClassFixtu
     public virtual void Tag_on_scalar_query()
     {
         using var context = CreateContext();
-        var customer
-            = context.Set<Order>()
-                .OrderBy(o => o.OrderID)
-                .Select(o => o.OrderDate)
-                .TagWith("Yanni")
-                .First();
+        var customer = context
+            .Set<Order>()
+            .OrderBy(o => o.OrderID)
+            .Select(o => o.OrderDate)
+            .TagWith("Yanni")
+            .First();
 
         Assert.NotNull(customer);
     }
@@ -102,14 +103,15 @@ public abstract class NorthwindQueryTaggingQueryTestBase<TFixture> : IClassFixtu
     public virtual void Single_query_multiline_tag()
     {
         using var context = CreateContext();
-        var customer
-            = context.Set<Customer>()
-                .OrderBy(c => c.CustomerID)
-                .TagWith(
-                    @"Yanni
+        var customer = context
+            .Set<Customer>()
+            .OrderBy(c => c.CustomerID)
+            .TagWith(
+                @"Yanni
 AND
-Laurel")
-                .First();
+Laurel"
+            )
+            .First();
 
         Assert.NotNull(customer);
     }
@@ -118,19 +120,21 @@ Laurel")
     public virtual void Single_query_multiple_multiline_tag()
     {
         using var context = CreateContext();
-        var customer
-            = context.Set<Customer>()
-                .OrderBy(c => c.CustomerID)
-                .TagWith(
-                    @"Yanni
+        var customer = context
+            .Set<Customer>()
+            .OrderBy(c => c.CustomerID)
+            .TagWith(
+                @"Yanni
 AND
-Laurel")
-                .TagWith(
-                    @"Yet
+Laurel"
+            )
+            .TagWith(
+                @"Yet
 Another
 Multiline
-Tag")
-                .First();
+Tag"
+            )
+            .First();
 
         Assert.NotNull(customer);
     }
@@ -139,20 +143,20 @@ Tag")
     public virtual void Single_query_multiline_tag_with_empty_lines()
     {
         using var context = CreateContext();
-        var customer
-            = context.Set<Customer>()
-                .OrderBy(c => c.CustomerID)
-                .TagWith(
-                    @"Yanni
+        var customer = context
+            .Set<Customer>()
+            .OrderBy(c => c.CustomerID)
+            .TagWith(
+                @"Yanni
 
 AND
 
-Laurel")
-                .First();
+Laurel"
+            )
+            .First();
 
         Assert.NotNull(customer);
     }
 
-    protected NorthwindContext CreateContext()
-        => Fixture.CreateContext();
+    protected NorthwindContext CreateContext() => Fixture.CreateContext();
 }

@@ -11,7 +11,11 @@ namespace Newtonsoft.Json.Linq.JsonPath
         public int? End { get; set; }
         public int? Step { get; set; }
 
-        public override IEnumerable<JToken> ExecuteFilter(JToken root, IEnumerable<JToken> current, JsonSelectSettings? settings)
+        public override IEnumerable<JToken> ExecuteFilter(
+            JToken root,
+            IEnumerable<JToken> current,
+            JsonSelectSettings? settings
+        )
         {
             if (Step == 0)
             {
@@ -49,7 +53,11 @@ namespace Newtonsoft.Json.Linq.JsonPath
 
                     if (IsValid(startIndex, stopIndex, positiveStep))
                     {
-                        for (int i = startIndex; IsValid(i, stopIndex, positiveStep); i += stepCount)
+                        for (
+                            int i = startIndex;
+                            IsValid(i, stopIndex, positiveStep);
+                            i += stepCount
+                        )
                         {
                             yield return a[i];
                         }
@@ -58,9 +66,20 @@ namespace Newtonsoft.Json.Linq.JsonPath
                     {
                         if (settings?.ErrorWhenNoMatch ?? false)
                         {
-                            throw new JsonException("Array slice of {0} to {1} returned no results.".FormatWith(CultureInfo.InvariantCulture,
-                                Start != null ? Start.GetValueOrDefault().ToString(CultureInfo.InvariantCulture) : "*",
-                                End != null ? End.GetValueOrDefault().ToString(CultureInfo.InvariantCulture) : "*"));
+                            throw new JsonException(
+                                "Array slice of {0} to {1} returned no results.".FormatWith(
+                                    CultureInfo.InvariantCulture,
+                                    Start != null
+                                        ? Start
+                                            .GetValueOrDefault()
+                                            .ToString(CultureInfo.InvariantCulture)
+                                        : "*",
+                                    End != null
+                                        ? End.GetValueOrDefault()
+                                            .ToString(CultureInfo.InvariantCulture)
+                                        : "*"
+                                )
+                            );
                         }
                     }
                 }
@@ -68,7 +87,12 @@ namespace Newtonsoft.Json.Linq.JsonPath
                 {
                     if (settings?.ErrorWhenNoMatch ?? false)
                     {
-                        throw new JsonException("Array slice is not valid on {0}.".FormatWith(CultureInfo.InvariantCulture, t.GetType().Name));
+                        throw new JsonException(
+                            "Array slice is not valid on {0}.".FormatWith(
+                                CultureInfo.InvariantCulture,
+                                t.GetType().Name
+                            )
+                        );
                     }
                 }
             }

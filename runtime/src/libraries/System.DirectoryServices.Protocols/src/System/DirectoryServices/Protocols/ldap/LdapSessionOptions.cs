@@ -14,20 +14,67 @@ using System.Text;
 
 namespace System.DirectoryServices.Protocols
 {
-    public delegate LdapConnection QueryForConnectionCallback(LdapConnection primaryConnection, LdapConnection referralFromConnection, string newDistinguishedName, LdapDirectoryIdentifier identifier, NetworkCredential credential, long currentUserToken);
-    public delegate bool NotifyOfNewConnectionCallback(LdapConnection primaryConnection, LdapConnection referralFromConnection, string newDistinguishedName, LdapDirectoryIdentifier identifier, LdapConnection newConnection, NetworkCredential credential, long currentUserToken, int errorCodeFromBind);
-    public delegate void DereferenceConnectionCallback(LdapConnection primaryConnection, LdapConnection connectionToDereference);
-    public delegate X509Certificate QueryClientCertificateCallback(LdapConnection connection, byte[][] trustedCAs);
-    public delegate bool VerifyServerCertificateCallback(LdapConnection connection, X509Certificate certificate);
+    public delegate LdapConnection QueryForConnectionCallback(
+        LdapConnection primaryConnection,
+        LdapConnection referralFromConnection,
+        string newDistinguishedName,
+        LdapDirectoryIdentifier identifier,
+        NetworkCredential credential,
+        long currentUserToken
+    );
+    public delegate bool NotifyOfNewConnectionCallback(
+        LdapConnection primaryConnection,
+        LdapConnection referralFromConnection,
+        string newDistinguishedName,
+        LdapDirectoryIdentifier identifier,
+        LdapConnection newConnection,
+        NetworkCredential credential,
+        long currentUserToken,
+        int errorCodeFromBind
+    );
+    public delegate void DereferenceConnectionCallback(
+        LdapConnection primaryConnection,
+        LdapConnection connectionToDereference
+    );
+    public delegate X509Certificate QueryClientCertificateCallback(
+        LdapConnection connection,
+        byte[][] trustedCAs
+    );
+    public delegate bool VerifyServerCertificateCallback(
+        LdapConnection connection,
+        X509Certificate certificate
+    );
 
     [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
-    internal unsafe delegate int QUERYFORCONNECTIONInternal(IntPtr Connection, IntPtr ReferralFromConnection, IntPtr NewDNPtr, IntPtr HostName, int PortNumber, SEC_WINNT_AUTH_IDENTITY_EX.Native* SecAuthIdentity, Luid* CurrentUserToken, IntPtr* ConnectionToUse);
+    internal unsafe delegate int QUERYFORCONNECTIONInternal(
+        IntPtr Connection,
+        IntPtr ReferralFromConnection,
+        IntPtr NewDNPtr,
+        IntPtr HostName,
+        int PortNumber,
+        SEC_WINNT_AUTH_IDENTITY_EX.Native* SecAuthIdentity,
+        Luid* CurrentUserToken,
+        IntPtr* ConnectionToUse
+    );
 
     [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
-    internal unsafe delegate Interop.BOOL NOTIFYOFNEWCONNECTIONInternal(IntPtr Connection, IntPtr ReferralFromConnection, IntPtr NewDNPtr, IntPtr HostName, IntPtr NewConnection, int PortNumber, SEC_WINNT_AUTH_IDENTITY_EX.Native* SecAuthIdentity, Luid* CurrentUser, int ErrorCodeFromBind);
+    internal unsafe delegate Interop.BOOL NOTIFYOFNEWCONNECTIONInternal(
+        IntPtr Connection,
+        IntPtr ReferralFromConnection,
+        IntPtr NewDNPtr,
+        IntPtr HostName,
+        IntPtr NewConnection,
+        int PortNumber,
+        SEC_WINNT_AUTH_IDENTITY_EX.Native* SecAuthIdentity,
+        Luid* CurrentUser,
+        int ErrorCodeFromBind
+    );
 
     [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
-    internal delegate int DEREFERENCECONNECTIONInternal(IntPtr Connection, IntPtr ConnectionToDereference);
+    internal delegate int DEREFERENCECONNECTIONInternal(
+        IntPtr Connection,
+        IntPtr ConnectionToDereference
+    );
 
     [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
     internal delegate Interop.BOOL VERIFYSERVERCERT(IntPtr Connection, IntPtr pServerCert);
@@ -63,7 +110,7 @@ namespace System.DirectoryServices.Protocols
         Ssl3Server = 0x10,
         Ssl3Client = 0x20,
         Tls1Server = 0x40,
-        Tls1Client = 0x80
+        Tls1Client = 0x80,
     }
 
     [StructLayout(LayoutKind.Sequential, CharSet = CharSet.Unicode)]
@@ -78,9 +125,7 @@ namespace System.DirectoryServices.Protocols
         private readonly int _keyExchangeAlgorithm;
         private readonly int _exchangeStrength;
 
-        internal SecurityPackageContextConnectionInformation()
-        {
-        }
+        internal SecurityPackageContextConnectionInformation() { }
 
         public SecurityProtocol Protocol => _securityProtocol;
 
@@ -96,14 +141,13 @@ namespace System.DirectoryServices.Protocols
 
         public int ExchangeStrength => _exchangeStrength;
 
-        internal ref readonly byte GetPinnableReference() => ref Unsafe.As<SecurityProtocol, byte>(ref _securityProtocol);
+        internal ref readonly byte GetPinnableReference() =>
+            ref Unsafe.As<SecurityProtocol, byte>(ref _securityProtocol);
     }
 
     public sealed class ReferralCallback
     {
-        public ReferralCallback()
-        {
-        }
+        public ReferralCallback() { }
 
         public QueryForConnectionCallback QueryForConnection { get; set; }
 
@@ -283,7 +327,11 @@ namespace System.DirectoryServices.Protocols
                 }
 
                 var secInfo = new SecurityPackageContextConnectionInformation();
-                int error = LdapPal.GetSecInfoOption(_connection._ldapHandle, LdapOption.LDAP_OPT_SSL_INFO, secInfo);
+                int error = LdapPal.GetSecInfoOption(
+                    _connection._ldapHandle,
+                    LdapOption.LDAP_OPT_SSL_INFO,
+                    secInfo
+                );
                 ErrorChecking.CheckAndSetLdapError(error);
 
                 return secInfo;
@@ -301,7 +349,11 @@ namespace System.DirectoryServices.Protocols
 
                 SecurityHandle tempHandle = default;
 
-                int error = LdapPal.GetSecurityHandleOption(_connection._ldapHandle, LdapOption.LDAP_OPT_SECURITY_CONTEXT, ref tempHandle);
+                int error = LdapPal.GetSecurityHandleOption(
+                    _connection._ldapHandle,
+                    LdapOption.LDAP_OPT_SECURITY_CONTEXT,
+                    ref tempHandle
+                );
                 ErrorChecking.CheckAndSetLdapError(error);
 
                 return tempHandle;
@@ -453,7 +505,11 @@ namespace System.DirectoryServices.Protocols
 
                 if (value != null)
                 {
-                    int certError = LdapPal.SetClientCertOption(_connection._ldapHandle, LdapOption.LDAP_OPT_CLIENT_CERTIFICATE, _connection._clientCertificateRoutine);
+                    int certError = LdapPal.SetClientCertOption(
+                        _connection._ldapHandle,
+                        LdapOption.LDAP_OPT_CLIENT_CERTIFICATE,
+                        _connection._clientCertificateRoutine
+                    );
                     if (certError != (int)ResultCode.Success)
                     {
                         if (LdapErrorMappings.IsLdapError(certError))
@@ -495,7 +551,11 @@ namespace System.DirectoryServices.Protocols
 
                 if (value != null)
                 {
-                    int error = LdapPal.SetServerCertOption(_connection._ldapHandle, LdapOption.LDAP_OPT_SERVER_CERTIFICATE, _serverCertificateRoutine);
+                    int error = LdapPal.SetServerCertOption(
+                        _connection._ldapHandle,
+                        LdapOption.LDAP_OPT_SERVER_CERTIFICATE,
+                        _serverCertificateRoutine
+                    );
                     ErrorChecking.CheckAndSetLdapError(error);
                 }
 
@@ -504,7 +564,8 @@ namespace System.DirectoryServices.Protocols
         }
 
         // In practice, this apparently rarely if ever contains useful text
-        internal string ServerErrorMessage => GetStringValueHelper(LdapOption.LDAP_OPT_SERVER_ERROR, true);
+        internal string ServerErrorMessage =>
+            GetStringValueHelper(LdapOption.LDAP_OPT_SERVER_ERROR, true);
 
         internal DereferenceAlias DerefAlias
         {
@@ -524,13 +585,16 @@ namespace System.DirectoryServices.Protocols
                 throw new ObjectDisposedException(GetType().Name);
             }
 
-
             // Bump up the protocol version
             ProtocolVersion = 3;
 
             // Do the fast concurrent bind.
             int inValue = 1;
-            int error = LdapPal.SetIntOption(_connection._ldapHandle, LdapOption.LDAP_OPT_FAST_CONCURRENT_BIND, ref inValue);
+            int error = LdapPal.SetIntOption(
+                _connection._ldapHandle,
+                LdapOption.LDAP_OPT_FAST_CONCURRENT_BIND,
+                ref inValue
+            );
             ErrorChecking.CheckAndSetLdapError(error);
         }
 
@@ -558,7 +622,9 @@ namespace System.DirectoryServices.Protocols
                 int structSize = Marshal.SizeOf(typeof(LdapControl));
                 if (managedServerControls != null)
                 {
-                    serverControlArray = Utility.AllocHGlobalIntPtrArray(managedServerControls.Length + 1);
+                    serverControlArray = Utility.AllocHGlobalIntPtrArray(
+                        managedServerControls.Length + 1
+                    );
                     void** pServerControlArray = (void**)serverControlArray;
                     for (int i = 0; i < managedServerControls.Length; i++)
                     {
@@ -574,7 +640,9 @@ namespace System.DirectoryServices.Protocols
                 managedClientControls = LdapConnection.BuildControlArray(controls, false);
                 if (managedClientControls != null)
                 {
-                    clientControlArray = Utility.AllocHGlobalIntPtrArray(managedClientControls.Length + 1);
+                    clientControlArray = Utility.AllocHGlobalIntPtrArray(
+                        managedClientControls.Length + 1
+                    );
                     void** pClientControlArray = (void**)clientControlArray;
                     for (int i = 0; i < managedClientControls.Length; i++)
                     {
@@ -586,11 +654,26 @@ namespace System.DirectoryServices.Protocols
                     pClientControlArray[managedClientControls.Length] = null;
                 }
 
-                int error = LdapPal.StartTls(_connection._ldapHandle, ref serverError, ref ldapResult, serverControlArray, clientControlArray);
+                int error = LdapPal.StartTls(
+                    _connection._ldapHandle,
+                    ref serverError,
+                    ref ldapResult,
+                    serverControlArray,
+                    clientControlArray
+                );
                 if (ldapResult != IntPtr.Zero)
                 {
                     // Parse the referral.
-                    int resultError = LdapPal.ParseResultReferral(_connection._ldapHandle, ldapResult, IntPtr.Zero, IntPtr.Zero, IntPtr.Zero, ref referral, IntPtr.Zero, 0 /* not free it */);
+                    int resultError = LdapPal.ParseResultReferral(
+                        _connection._ldapHandle,
+                        ldapResult,
+                        IntPtr.Zero,
+                        IntPtr.Zero,
+                        IntPtr.Zero,
+                        ref referral,
+                        IntPtr.Zero,
+                        0 /* not free it */
+                    );
                     if (resultError == 0 && referral != IntPtr.Zero)
                     {
                         char** referralPtr = (char**)referral;
@@ -636,7 +719,13 @@ namespace System.DirectoryServices.Protocols
                         }
 
                         string errorMessage = OperationErrorMappings.MapResultCode(error);
-                        ExtendedResponse response = new ExtendedResponse(null, null, (ResultCode)error, errorMessage, responseReferral);
+                        ExtendedResponse response = new ExtendedResponse(
+                            null,
+                            null,
+                            (ResultCode)error,
+                            errorMessage,
+                            responseReferral
+                        );
                         response.ResponseName = "1.3.6.1.4.1.1466.20037";
                         throw new TlsOperationException(response);
                     }
@@ -851,13 +940,27 @@ namespace System.DirectoryServices.Protocols
                 sizeofcallback = Marshal.SizeOf(typeof(LdapReferralCallback)),
                 query = tempCallback.QueryForConnection == null ? null : _queryDelegate,
                 notify = tempCallback.NotifyNewConnection == null ? null : _notifiyDelegate,
-                dereference = tempCallback.DereferenceConnection == null ? null : _dereferenceDelegate
+                dereference =
+                    tempCallback.DereferenceConnection == null ? null : _dereferenceDelegate,
             };
-            int error = LdapPal.SetReferralOption(_connection._ldapHandle, LdapOption.LDAP_OPT_REFERRAL_CALLBACK, ref value);
+            int error = LdapPal.SetReferralOption(
+                _connection._ldapHandle,
+                LdapOption.LDAP_OPT_REFERRAL_CALLBACK,
+                ref value
+            );
             ErrorChecking.CheckAndSetLdapError(error);
         }
 
-        private unsafe int ProcessQueryConnection(IntPtr PrimaryConnection, IntPtr ReferralFromConnection, IntPtr NewDNPtr, IntPtr HostNamePtr, int PortNumber, SEC_WINNT_AUTH_IDENTITY_EX.Native* SecAuthIdentity, Luid* CurrentUserToken, IntPtr* ConnectionToUse)
+        private unsafe int ProcessQueryConnection(
+            IntPtr PrimaryConnection,
+            IntPtr ReferralFromConnection,
+            IntPtr NewDNPtr,
+            IntPtr HostNamePtr,
+            int PortNumber,
+            SEC_WINNT_AUTH_IDENTITY_EX.Native* SecAuthIdentity,
+            Luid* CurrentUserToken,
+            IntPtr* ConnectionToUse
+        )
         {
             *ConnectionToUse = IntPtr.Zero;
             string NewDN = null;
@@ -885,7 +988,9 @@ namespace System.DirectoryServices.Protocols
                     lock (LdapConnection.s_objectLock)
                     {
                         // Make sure first whether we have saved it in the handle table before
-                        WeakReference reference = (WeakReference)(LdapConnection.s_handleTable[ReferralFromConnection]);
+                        WeakReference reference = (WeakReference)(
+                            LdapConnection.s_handleTable[ReferralFromConnection]
+                        );
                         if (reference != null && reference.IsAlive)
                         {
                             // Save this before and object has not been garbage collected yet.
@@ -900,17 +1005,33 @@ namespace System.DirectoryServices.Protocols
                             }
 
                             // We don't have it yet, construct a new one.
-                            tempReferralConnection = new LdapConnection(((LdapDirectoryIdentifier)(_connection.Directory)), _connection.GetCredential(), _connection.AuthType, ReferralFromConnection);
+                            tempReferralConnection = new LdapConnection(
+                                ((LdapDirectoryIdentifier)(_connection.Directory)),
+                                _connection.GetCredential(),
+                                _connection.AuthType,
+                                ReferralFromConnection
+                            );
 
                             // Save it to the handle table.
-                            LdapConnection.s_handleTable.Add(ReferralFromConnection, new WeakReference(tempReferralConnection));
+                            LdapConnection.s_handleTable.Add(
+                                ReferralFromConnection,
+                                new WeakReference(tempReferralConnection)
+                            );
                         }
                     }
                 }
 
-                long tokenValue = (uint)CurrentUserToken->LowPart + (((long)CurrentUserToken->HighPart) << 32);
+                long tokenValue =
+                    (uint)CurrentUserToken->LowPart + (((long)CurrentUserToken->HighPart) << 32);
 
-                LdapConnection con = _callbackRoutine.QueryForConnection(_connection, tempReferralConnection, NewDN, identifier, cred, tokenValue);
+                LdapConnection con = _callbackRoutine.QueryForConnection(
+                    _connection,
+                    tempReferralConnection,
+                    NewDN,
+                    identifier,
+                    cred,
+                    tokenValue
+                );
                 if (con != null && con._ldapHandle != null && !con._ldapHandle.IsInvalid)
                 {
                     bool success = AddLdapHandleRef(con);
@@ -927,7 +1048,17 @@ namespace System.DirectoryServices.Protocols
             return 1;
         }
 
-        private unsafe Interop.BOOL ProcessNotifyConnection(IntPtr primaryConnection, IntPtr referralFromConnection, IntPtr newDNPtr, IntPtr hostNamePtr, IntPtr newConnection, int portNumber, SEC_WINNT_AUTH_IDENTITY_EX.Native* SecAuthIdentity, Luid* currentUser, int errorCodeFromBind)
+        private unsafe Interop.BOOL ProcessNotifyConnection(
+            IntPtr primaryConnection,
+            IntPtr referralFromConnection,
+            IntPtr newDNPtr,
+            IntPtr hostNamePtr,
+            IntPtr newConnection,
+            int portNumber,
+            SEC_WINNT_AUTH_IDENTITY_EX.Native* SecAuthIdentity,
+            Luid* currentUser,
+            int errorCodeFromBind
+        )
         {
             if (newConnection != IntPtr.Zero && _callbackRoutine.NotifyNewConnection != null)
             {
@@ -950,8 +1081,14 @@ namespace System.DirectoryServices.Protocols
                     if (referralFromConnection != IntPtr.Zero)
                     {
                         // Check whether we have save it in the handle table before.
-                        WeakReference reference = (WeakReference)(LdapConnection.s_handleTable[referralFromConnection]);
-                        if (reference != null && reference.Target is LdapConnection conn && conn._ldapHandle != null)
+                        WeakReference reference = (WeakReference)(
+                            LdapConnection.s_handleTable[referralFromConnection]
+                        );
+                        if (
+                            reference != null
+                            && reference.Target is LdapConnection conn
+                            && conn._ldapHandle != null
+                        )
                         {
                             // Save this before and object has not been garbage collected yet.
                             tempReferralConnection = conn;
@@ -965,18 +1102,32 @@ namespace System.DirectoryServices.Protocols
                             }
 
                             // We don't have it yet, construct a new one.
-                            tempReferralConnection = new LdapConnection(((LdapDirectoryIdentifier)(_connection.Directory)), _connection.GetCredential(), _connection.AuthType, referralFromConnection);
+                            tempReferralConnection = new LdapConnection(
+                                ((LdapDirectoryIdentifier)(_connection.Directory)),
+                                _connection.GetCredential(),
+                                _connection.AuthType,
+                                referralFromConnection
+                            );
 
                             // Save it to the handle table.
-                            LdapConnection.s_handleTable.Add(referralFromConnection, new WeakReference(tempReferralConnection));
+                            LdapConnection.s_handleTable.Add(
+                                referralFromConnection,
+                                new WeakReference(tempReferralConnection)
+                            );
                         }
                     }
 
                     if (newConnection != IntPtr.Zero)
                     {
                         // Check whether we have save it in the handle table before.
-                        WeakReference reference = (WeakReference)(LdapConnection.s_handleTable[newConnection]);
-                        if (reference != null && reference.IsAlive && null != ((LdapConnection)reference.Target)._ldapHandle)
+                        WeakReference reference = (WeakReference)(
+                            LdapConnection.s_handleTable[newConnection]
+                        );
+                        if (
+                            reference != null
+                            && reference.IsAlive
+                            && null != ((LdapConnection)reference.Target)._ldapHandle
+                        )
                         {
                             // Save this before and object has not been garbage collected yet.
                             tempNewConnection = (LdapConnection)reference.Target;
@@ -990,16 +1141,34 @@ namespace System.DirectoryServices.Protocols
                             }
 
                             // We don't have it yet, construct a new one.
-                            tempNewConnection = new LdapConnection(identifier, cred, _connection.AuthType, newConnection);
+                            tempNewConnection = new LdapConnection(
+                                identifier,
+                                cred,
+                                _connection.AuthType,
+                                newConnection
+                            );
 
                             // Save it to the handle table.
-                            LdapConnection.s_handleTable.Add(newConnection, new WeakReference(tempNewConnection));
+                            LdapConnection.s_handleTable.Add(
+                                newConnection,
+                                new WeakReference(tempNewConnection)
+                            );
                         }
                     }
                 }
 
-                long tokenValue = (uint)currentUser->LowPart + (((long)currentUser->HighPart) << 32);
-                bool value = _callbackRoutine.NotifyNewConnection(_connection, tempReferralConnection, newDN, identifier, tempNewConnection, cred, tokenValue, errorCodeFromBind);
+                long tokenValue =
+                    (uint)currentUser->LowPart + (((long)currentUser->HighPart) << 32);
+                bool value = _callbackRoutine.NotifyNewConnection(
+                    _connection,
+                    tempReferralConnection,
+                    newDN,
+                    identifier,
+                    tempNewConnection,
+                    cred,
+                    tokenValue,
+                    errorCodeFromBind
+                );
 
                 if (value)
                 {
@@ -1016,9 +1185,15 @@ namespace System.DirectoryServices.Protocols
             return Interop.BOOL.FALSE;
         }
 
-        private int ProcessDereferenceConnection(IntPtr PrimaryConnection, IntPtr ConnectionToDereference)
+        private int ProcessDereferenceConnection(
+            IntPtr PrimaryConnection,
+            IntPtr ConnectionToDereference
+        )
         {
-            if (ConnectionToDereference != IntPtr.Zero && _callbackRoutine.DereferenceConnection != null)
+            if (
+                ConnectionToDereference != IntPtr.Zero
+                && _callbackRoutine.DereferenceConnection != null
+            )
             {
                 LdapConnection dereferenceConnection;
                 WeakReference reference = null;
@@ -1026,13 +1201,20 @@ namespace System.DirectoryServices.Protocols
                 // in most cases it should be in our table
                 lock (LdapConnection.s_objectLock)
                 {
-                    reference = (WeakReference)(LdapConnection.s_handleTable[ConnectionToDereference]);
+                    reference = (WeakReference)(
+                        LdapConnection.s_handleTable[ConnectionToDereference]
+                    );
                 }
 
                 // not been added to the table before or it is garbage collected, we need to construct it
                 if (reference == null || !reference.IsAlive)
                 {
-                    dereferenceConnection = new LdapConnection(((LdapDirectoryIdentifier)(_connection.Directory)), _connection.GetCredential(), _connection.AuthType, ConnectionToDereference);
+                    dereferenceConnection = new LdapConnection(
+                        ((LdapDirectoryIdentifier)(_connection.Directory)),
+                        _connection.GetCredential(),
+                        _connection.AuthType,
+                        ConnectionToDereference
+                    );
                 }
                 else
                 {
@@ -1049,7 +1231,9 @@ namespace System.DirectoryServices.Protocols
             return 1;
         }
 
-        private unsafe NetworkCredential ProcessSecAuthIdentity(SEC_WINNT_AUTH_IDENTITY_EX.Native* SecAuthIdentit)
+        private unsafe NetworkCredential ProcessSecAuthIdentity(
+            SEC_WINNT_AUTH_IDENTITY_EX.Native* SecAuthIdentit
+        )
         {
             if (SecAuthIdentit == null)
             {
@@ -1091,7 +1275,11 @@ namespace System.DirectoryServices.Protocols
         private static bool AddLdapHandleRef(LdapConnection ldapConnection)
         {
             bool success = false;
-            if (ldapConnection != null && ldapConnection._ldapHandle != null && !ldapConnection._ldapHandle.IsInvalid)
+            if (
+                ldapConnection != null
+                && ldapConnection._ldapHandle != null
+                && !ldapConnection._ldapHandle.IsInvalid
+            )
             {
                 ldapConnection._ldapHandle.DangerousAddRef(ref success);
             }
@@ -1101,7 +1289,11 @@ namespace System.DirectoryServices.Protocols
 
         private static void ReleaseLdapHandleRef(LdapConnection ldapConnection)
         {
-            if (ldapConnection != null && ldapConnection._ldapHandle != null && !ldapConnection._ldapHandle.IsInvalid)
+            if (
+                ldapConnection != null
+                && ldapConnection._ldapHandle != null
+                && !ldapConnection._ldapHandle.IsInvalid
+            )
             {
                 ldapConnection._ldapHandle.DangerousRelease();
             }

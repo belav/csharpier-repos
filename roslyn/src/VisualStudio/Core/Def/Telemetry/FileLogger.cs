@@ -37,18 +37,28 @@ namespace Microsoft.VisualStudio.LanguageServices.Telemetry
             _logFilePath = logFilePath;
             _gate = new();
             _buffer = new();
-            _taskQueue = new(AsynchronousOperationListenerProvider.NullListener, TaskScheduler.Default);
-            _enabled = globalOptions.GetOption(VisualStudioLoggingOptionsStorage.EnableFileLoggingForDiagnostics);
+            _taskQueue = new(
+                AsynchronousOperationListenerProvider.NullListener,
+                TaskScheduler.Default
+            );
+            _enabled = globalOptions.GetOption(
+                VisualStudioLoggingOptionsStorage.EnableFileLoggingForDiagnostics
+            );
             globalOptions.AddOptionChangedHandler(this, OptionService_OptionChanged);
         }
 
         public FileLogger(IGlobalOptionService optionService)
-            : this(optionService, Path.Combine(Path.GetTempPath(), "Roslyn", "Telemetry", GetLogFileName()))
-        {
-        }
+            : this(
+                optionService,
+                Path.Combine(Path.GetTempPath(), "Roslyn", "Telemetry", GetLogFileName())
+            ) { }
 
-        private static string GetLogFileName()
-            => DateTime.Now.ToString(CultureInfo.InvariantCulture).Replace(' ', '_').Replace('/', '_').Replace(':', '_') + ".log";
+        private static string GetLogFileName() =>
+            DateTime
+                .Now.ToString(CultureInfo.InvariantCulture)
+                .Replace(' ', '_')
+                .Replace('/', '_')
+                .Replace(':', '_') + ".log";
 
         private void OptionService_OptionChanged(object? sender, OptionChangedEventArgs e)
         {
@@ -69,46 +79,71 @@ namespace Microsoft.VisualStudio.LanguageServices.Telemetry
 
             // Limit logged function IDs to keep a reasonable log file size.
             var str = functionId.ToString();
-            return str.StartsWith("Diagnostic") ||
-                str.StartsWith("CodeAnalysisService") ||
-                str.StartsWith("Workspace") ||
-                str.StartsWith("WorkCoordinator") ||
-                str.StartsWith("IncrementalAnalyzerProcessor") ||
-                str.StartsWith("ExternalErrorDiagnosticUpdateSource");
+            return str.StartsWith("Diagnostic")
+                || str.StartsWith("CodeAnalysisService")
+                || str.StartsWith("Workspace")
+                || str.StartsWith("WorkCoordinator")
+                || str.StartsWith("IncrementalAnalyzerProcessor")
+                || str.StartsWith("ExternalErrorDiagnosticUpdateSource");
         }
 
         private void Log(FunctionId functionId, string message)
         {
-            _taskQueue.ScheduleTask(nameof(FileLogger), () =>
-            {
-                lock (_gate)
+            _taskQueue.ScheduleTask(
+                nameof(FileLogger),
+                () =>
                 {
-                    _buffer.AppendLine($"{DateTime.Now} ({functionId}) : {message}");
-
-                    IOUtilities.PerformIO(() =>
+                    lock (_gate)
                     {
-                        if (!File.Exists(_logFilePath))
-                        {
-                            Directory.CreateDirectory(PathUtilities.GetDirectoryName(_logFilePath));
-                        }
+                        _buffer.AppendLine($"{DateTime.Now} ({functionId}) : {message}");
 
-                        File.AppendAllText(_logFilePath, _buffer.ToString());
-                        _buffer.Clear();
-                    });
-                }
-            }, CancellationToken.None);
+                        IOUtilities.PerformIO(() =>
+                        {
+                            if (!File.Exists(_logFilePath))
+                            {
+                                Directory.CreateDirectory(
+                                    PathUtilities.GetDirectoryName(_logFilePath)
+                                );
+                            }
+
+                            File.AppendAllText(_logFilePath, _buffer.ToString());
+                            _buffer.Clear();
+                        });
+                    }
+                },
+                CancellationToken.None
+            );
         }
 
-        public void Log(FunctionId functionId, LogMessage logMessage)
-            => Log(functionId, logMessage.GetMessage());
+        public void Log(FunctionId functionId, LogMessage logMessage) =>
+            Log(functionId, logMessage.GetMessage());
 
-        public void LogBlockStart(FunctionId functionId, LogMessage logMessage, int uniquePairId, CancellationToken cancellationToken)
-            => LogBlockEvent(functionId, logMessage, uniquePairId, "BlockStart");
+        public void LogBlockStart(
+            FunctionId functionId,
+            LogMessage logMessage,
+            int uniquePairId,
+            CancellationToken cancellationToken
+        ) => LogBlockEvent(functionId, logMessage, uniquePairId, "BlockStart");
 
-        public void LogBlockEnd(FunctionId functionId, LogMessage logMessage, int uniquePairId, int delta, CancellationToken cancellationToken)
-            => LogBlockEvent(functionId, logMessage, uniquePairId, cancellationToken.IsCancellationRequested ? "BlockCancelled" : "BlockEnd");
+        public void LogBlockEnd(
+            FunctionId functionId,
+            LogMessage logMessage,
+            int uniquePairId,
+            int delta,
+            CancellationToken cancellationToken
+        ) =>
+            LogBlockEvent(
+                functionId,
+                logMessage,
+                uniquePairId,
+                cancellationToken.IsCancellationRequested ? "BlockCancelled" : "BlockEnd"
+            );
 
-        private void LogBlockEvent(FunctionId functionId, LogMessage logMessage, int uniquePairId, string blockEvent)
-            => Log(functionId, $"[{blockEvent} - {uniquePairId}] {logMessage.GetMessage()}");
+        private void LogBlockEvent(
+            FunctionId functionId,
+            LogMessage logMessage,
+            int uniquePairId,
+            string blockEvent
+        ) => Log(functionId, $"[{blockEvent} - {uniquePairId}] {logMessage.GetMessage()}");
     }
 }

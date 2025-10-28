@@ -201,7 +201,8 @@ internal sealed class InternalUsageAnalyzer
                     symbolForDiagnostic
                         .DeclaringSyntaxReferences.FirstOrDefault()
                         ?.GetSyntax()
-                        .GetLocation() ?? Location.None,
+                        .GetLocation()
+                    ?? Location.None,
                     symbol.ToDisplayString(SymbolDisplayFormat.CSharpShortErrorMessageFormat)
                 )
             );
@@ -217,7 +218,8 @@ internal sealed class InternalUsageAnalyzer
                     symbolForDiagnostic
                         .DeclaringSyntaxReferences.FirstOrDefault()
                         ?.GetSyntax()
-                        .GetLocation() ?? Location.None,
+                        .GetLocation()
+                    ?? Location.None,
                     containingType.ToDisplayString(
                         SymbolDisplayFormat.CSharpShortErrorMessageFormat
                     )

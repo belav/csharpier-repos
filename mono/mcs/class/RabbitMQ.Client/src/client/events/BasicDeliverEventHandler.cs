@@ -57,6 +57,8 @@
 namespace RabbitMQ.Client.Events
 {
     ///<summary>Delegate used to process Basic.Deliver events.</summary>
-    public delegate void BasicDeliverEventHandler(IBasicConsumer sender,
-                                                  BasicDeliverEventArgs args);
+    public delegate void BasicDeliverEventHandler(
+        IBasicConsumer sender,
+        BasicDeliverEventArgs args
+    );
 }

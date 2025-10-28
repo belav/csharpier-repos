@@ -27,11 +27,13 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
             var dotnet = fixture.BuiltDotnet;
             var appDll = fixture.TestProject.AppDll;
 
-            dotnet.Exec(appDll)
+            dotnet
+                .Exec(appDll)
                 .CaptureStdOut()
                 .CaptureStdErr()
                 .Execute()
-                .Should().Pass()
+                .Should()
+                .Pass()
                 .And.NotHaveStdErrContaining(ExpectedInfoMessage)
                 .And.NotHaveStdErrContaining(ExpectedVerboseMessage);
         }
@@ -43,10 +45,12 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
             var dotnet = fixture.BuiltDotnet;
             var appDll = fixture.TestProject.AppDll;
 
-            dotnet.Exec(appDll)
+            dotnet
+                .Exec(appDll)
                 .EnableTracingAndCaptureOutputs()
                 .Execute()
-                .Should().Pass()
+                .Should()
+                .Pass()
                 .And.HaveStdOutContaining("Hello World")
                 .And.HaveStdErrContaining(ExpectedInfoMessage)
                 .And.HaveStdErrContaining(ExpectedVerboseMessage);
@@ -59,11 +63,13 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
             var dotnet = fixture.BuiltDotnet;
             var appDll = fixture.TestProject.AppDll;
 
-            dotnet.Exec(appDll)
+            dotnet
+                .Exec(appDll)
                 .EnableTracingAndCaptureOutputs()
                 .EnvironmentVariable(Constants.HostTracing.VerbosityEnvironmentVariable, "4")
                 .Execute()
-                .Should().Pass()
+                .Should()
+                .Pass()
                 .And.HaveStdOutContaining("Hello World")
                 .And.HaveStdErrContaining(ExpectedInfoMessage)
                 .And.HaveStdErrContaining(ExpectedVerboseMessage);
@@ -76,11 +82,13 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
             var dotnet = fixture.BuiltDotnet;
             var appDll = fixture.TestProject.AppDll;
 
-            dotnet.Exec(appDll)
+            dotnet
+                .Exec(appDll)
                 .EnableTracingAndCaptureOutputs()
                 .EnvironmentVariable(Constants.HostTracing.VerbosityEnvironmentVariable, "3")
                 .Execute()
-                .Should().Pass()
+                .Should()
+                .Pass()
                 .And.HaveStdOutContaining("Hello World")
                 .And.HaveStdErrContaining(ExpectedInfoMessage)
                 .And.NotHaveStdErrContaining(ExpectedVerboseMessage);
@@ -93,11 +101,13 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
             var dotnet = fixture.BuiltDotnet;
             var appDll = fixture.TestProject.AppDll;
 
-            dotnet.Exec(appDll)
+            dotnet
+                .Exec(appDll)
                 .EnableTracingAndCaptureOutputs()
                 .EnvironmentVariable(Constants.HostTracing.VerbosityEnvironmentVariable, "2")
                 .Execute()
-                .Should().Pass()
+                .Should()
+                .Pass()
                 .And.HaveStdOutContaining("Hello World")
                 .And.NotHaveStdErrContaining(ExpectedInfoMessage)
                 .And.NotHaveStdErrContaining(ExpectedVerboseMessage);
@@ -111,12 +121,14 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
             var appDll = fixture.TestProject.AppDll;
 
             string traceFilePath;
-            dotnet.Exec(appDll)
+            dotnet
+                .Exec(appDll)
                 .EnableHostTracingToFile(out traceFilePath)
                 .CaptureStdOut()
                 .CaptureStdErr()
                 .Execute()
-                .Should().Pass()
+                .Should()
+                .Pass()
                 .And.HaveStdOutContaining("Hello World")
                 .And.NotHaveStdErrContaining(ExpectedInfoMessage)
                 .And.NotHaveStdErrContaining(ExpectedVerboseMessage)
@@ -133,11 +145,16 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
             var dotnet = fixture.BuiltDotnet;
             var appDll = fixture.TestProject.AppDll;
 
-            dotnet.Exec(appDll)
+            dotnet
+                .Exec(appDll)
                 .EnableTracingAndCaptureOutputs()
-                .EnvironmentVariable(Constants.HostTracing.TraceFileEnvironmentVariable, "badpath/TracingOnToFileBadPathDefault.log")
+                .EnvironmentVariable(
+                    Constants.HostTracing.TraceFileEnvironmentVariable,
+                    "badpath/TracingOnToFileBadPathDefault.log"
+                )
                 .Execute()
-                .Should().Pass()
+                .Should()
+                .Pass()
                 .And.HaveStdOutContaining("Hello World")
                 .And.HaveStdErrContaining(ExpectedInfoMessage)
                 .And.HaveStdErrContaining(ExpectedVerboseMessage)

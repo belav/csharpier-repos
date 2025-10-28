@@ -34,23 +34,40 @@ namespace System.Linq.Expressions.Tests
         {
             switch (corType)
             {
-                case ELEMENT_TYPE_VOID: return typeof(void);
-                case ELEMENT_TYPE_BOOLEAN: return typeof(bool);
-                case ELEMENT_TYPE_CHAR: return typeof(char);
-                case ELEMENT_TYPE_I1: return typeof(sbyte);
-                case ELEMENT_TYPE_U1: return typeof(byte);
-                case ELEMENT_TYPE_I2: return typeof(short);
-                case ELEMENT_TYPE_U2: return typeof(ushort);
-                case ELEMENT_TYPE_I4: return typeof(int);
-                case ELEMENT_TYPE_U4: return typeof(uint);
-                case ELEMENT_TYPE_I8: return typeof(long);
-                case ELEMENT_TYPE_U8: return typeof(ulong);
-                case ELEMENT_TYPE_R4: return typeof(float);
-                case ELEMENT_TYPE_R8: return typeof(double);
-                case ELEMENT_TYPE_STRING: return typeof(string);
-                case ELEMENT_TYPE_I: return typeof(IntPtr);
-                case ELEMENT_TYPE_U: return typeof(UIntPtr);
-                case ELEMENT_TYPE_OBJECT: return typeof(object);
+                case ELEMENT_TYPE_VOID:
+                    return typeof(void);
+                case ELEMENT_TYPE_BOOLEAN:
+                    return typeof(bool);
+                case ELEMENT_TYPE_CHAR:
+                    return typeof(char);
+                case ELEMENT_TYPE_I1:
+                    return typeof(sbyte);
+                case ELEMENT_TYPE_U1:
+                    return typeof(byte);
+                case ELEMENT_TYPE_I2:
+                    return typeof(short);
+                case ELEMENT_TYPE_U2:
+                    return typeof(ushort);
+                case ELEMENT_TYPE_I4:
+                    return typeof(int);
+                case ELEMENT_TYPE_U4:
+                    return typeof(uint);
+                case ELEMENT_TYPE_I8:
+                    return typeof(long);
+                case ELEMENT_TYPE_U8:
+                    return typeof(ulong);
+                case ELEMENT_TYPE_R4:
+                    return typeof(float);
+                case ELEMENT_TYPE_R8:
+                    return typeof(double);
+                case ELEMENT_TYPE_STRING:
+                    return typeof(string);
+                case ELEMENT_TYPE_I:
+                    return typeof(IntPtr);
+                case ELEMENT_TYPE_U:
+                    return typeof(UIntPtr);
+                case ELEMENT_TYPE_OBJECT:
+                    return typeof(object);
             }
 
             throw new NotSupportedException();
@@ -306,9 +323,13 @@ namespace System.Linq.Expressions.Tests
 
         // NB: We can't stuff these in a System.Type, so won't forward them
         protected override void NotifyNumSizes(int count) { }
+
         protected override void NotifySize(int count) { }
+
         protected override void NotifyNumLoBounds(int count) { }
+
         protected override void NotifyLoBound(int count) { }
+
         protected override void NotifyEndArrayShape() { }
 
         protected override void NotifyTypedByref()
@@ -317,17 +338,64 @@ namespace System.Linq.Expressions.Tests
         }
 
         // NB: These are not needed for local signatures
-        protected override void NotifyBeginProperty(byte elem_type) { throw new NotImplementedException(); }
-        protected override void NotifyEndProperty() { throw new NotImplementedException(); }
-        protected override void NotifyBeginMethod(byte elem_type) { throw new NotImplementedException(); }
-        protected override void NotifyEndMethod() { throw new NotImplementedException(); }
-        protected override void NotifyBeginField(byte elem_type) { throw new NotImplementedException(); }
-        protected override void NotifyEndField() { throw new NotImplementedException(); }
-        protected override void NotifyBeginRetType() { throw new NotImplementedException(); }
-        protected override void NotifyEndRetType() { throw new NotImplementedException(); }
-        protected override void NotifyBeginParam() { throw new NotImplementedException(); }
-        protected override void NotifyParamCount(int count) { throw new NotImplementedException(); }
-        protected override void NotifyEndParam() { throw new NotImplementedException(); }
-        protected override void NotifyGenericParamCount(int count) { throw new NotImplementedException(); }
+        protected override void NotifyBeginProperty(byte elem_type)
+        {
+            throw new NotImplementedException();
+        }
+
+        protected override void NotifyEndProperty()
+        {
+            throw new NotImplementedException();
+        }
+
+        protected override void NotifyBeginMethod(byte elem_type)
+        {
+            throw new NotImplementedException();
+        }
+
+        protected override void NotifyEndMethod()
+        {
+            throw new NotImplementedException();
+        }
+
+        protected override void NotifyBeginField(byte elem_type)
+        {
+            throw new NotImplementedException();
+        }
+
+        protected override void NotifyEndField()
+        {
+            throw new NotImplementedException();
+        }
+
+        protected override void NotifyBeginRetType()
+        {
+            throw new NotImplementedException();
+        }
+
+        protected override void NotifyEndRetType()
+        {
+            throw new NotImplementedException();
+        }
+
+        protected override void NotifyBeginParam()
+        {
+            throw new NotImplementedException();
+        }
+
+        protected override void NotifyParamCount(int count)
+        {
+            throw new NotImplementedException();
+        }
+
+        protected override void NotifyEndParam()
+        {
+            throw new NotImplementedException();
+        }
+
+        protected override void NotifyGenericParamCount(int count)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

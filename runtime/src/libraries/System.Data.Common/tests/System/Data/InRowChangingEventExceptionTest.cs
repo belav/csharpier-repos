@@ -25,12 +25,12 @@
 
 using Xunit;
 
-
 namespace System.Data.Tests
 {
     public class InRowChangingEventExceptionTest
     {
         private bool _eventTriggered = false;
+
         [Fact]
         public void Generate()
         {

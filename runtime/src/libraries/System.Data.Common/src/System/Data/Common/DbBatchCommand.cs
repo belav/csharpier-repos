@@ -18,10 +18,8 @@ namespace System.Data.Common
 
         protected abstract DbParameterCollection DbParameterCollection { get; }
 
-        public virtual DbParameter CreateParameter()
-            => throw new NotSupportedException();
+        public virtual DbParameter CreateParameter() => throw new NotSupportedException();
 
-        public virtual bool CanCreateParameter
-            => false;
+        public virtual bool CanCreateParameter => false;
     }
 }

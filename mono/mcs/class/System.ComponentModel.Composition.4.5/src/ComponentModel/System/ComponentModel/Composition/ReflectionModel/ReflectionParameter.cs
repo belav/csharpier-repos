@@ -4,8 +4,8 @@
 using System;
 using System.Globalization;
 using System.Reflection;
-using Microsoft.Internal;
 using System.Threading;
+using Microsoft.Internal;
 
 namespace System.ComponentModel.Composition.ReflectionModel
 {
@@ -34,9 +34,10 @@ namespace System.ComponentModel.Composition.ReflectionModel
         {
             return string.Format(
                 CultureInfo.CurrentCulture,
-                "{0} (Parameter=\"{1}\")",  // NOLOC
+                "{0} (Parameter=\"{1}\")", // NOLOC
                 this.UnderlyingParameter.Member.GetDisplayName(),
-                this.UnderlyingParameter.Name);
+                this.UnderlyingParameter.Name
+            );
         }
 
         public override Type ReturnType

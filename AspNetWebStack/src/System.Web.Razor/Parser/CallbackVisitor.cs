@@ -15,29 +15,26 @@ namespace System.Web.Razor.Parser
         private Action _completeCallback;
 
         public CallbackVisitor(Action<Span> spanCallback)
-            : this(spanCallback, _ =>
-            {
-            })
-        {
-        }
+            : this(spanCallback, _ => { }) { }
 
         public CallbackVisitor(Action<Span> spanCallback, Action<RazorError> errorCallback)
-            : this(spanCallback, errorCallback, _ =>
-            {
-            }, _ =>
-            {
-            })
-        {
-        }
+            : this(spanCallback, errorCallback, _ => { }, _ => { }) { }
 
-        public CallbackVisitor(Action<Span> spanCallback, Action<RazorError> errorCallback, Action<BlockType> startBlockCallback, Action<BlockType> endBlockCallback)
-            : this(spanCallback, errorCallback, startBlockCallback, endBlockCallback, () =>
-            {
-            })
-        {
-        }
+        public CallbackVisitor(
+            Action<Span> spanCallback,
+            Action<RazorError> errorCallback,
+            Action<BlockType> startBlockCallback,
+            Action<BlockType> endBlockCallback
+        )
+            : this(spanCallback, errorCallback, startBlockCallback, endBlockCallback, () => { }) { }
 
-        public CallbackVisitor(Action<Span> spanCallback, Action<RazorError> errorCallback, Action<BlockType> startBlockCallback, Action<BlockType> endBlockCallback, Action completeCallback)
+        public CallbackVisitor(
+            Action<Span> spanCallback,
+            Action<RazorError> errorCallback,
+            Action<BlockType> startBlockCallback,
+            Action<BlockType> endBlockCallback,
+            Action completeCallback
+        )
         {
             _spanCallback = spanCallback;
             _errorCallback = errorCallback;
@@ -78,7 +75,11 @@ namespace System.Web.Razor.Parser
             RaiseCallback<object>(SynchronizationContext, null, _ => _completeCallback());
         }
 
-        private static void RaiseCallback<T>(SynchronizationContext syncContext, T param, Action<T> callback)
+        private static void RaiseCallback<T>(
+            SynchronizationContext syncContext,
+            T param,
+            Action<T> callback
+        )
         {
             if (callback != null)
             {

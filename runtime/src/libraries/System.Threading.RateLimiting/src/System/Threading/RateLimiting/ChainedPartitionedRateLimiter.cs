@@ -13,7 +13,8 @@ namespace System.Threading.RateLimiting
     /// Acquires leases from rate limiters in the order given. If a lease fails to be acquired (throwing or IsAcquired == false)
     /// then the already acquired leases are disposed in reverse order and the failing lease is returned or the exception is thrown to user code.
     /// </summary>
-    internal sealed class ChainedPartitionedRateLimiter<TResource> : PartitionedRateLimiter<TResource>
+    internal sealed class ChainedPartitionedRateLimiter<TResource>
+        : PartitionedRateLimiter<TResource>
     {
         private readonly PartitionedRateLimiter<TResource>[] _limiters;
         private bool _disposed;
@@ -68,7 +69,13 @@ namespace System.Threading.RateLimiting
                 {
                     exception = ex;
                 }
-                RateLimitLease? notAcquiredLease = CommonAcquireLogic(exception, lease, ref leases, i, _limiters.Length);
+                RateLimitLease? notAcquiredLease = CommonAcquireLogic(
+                    exception,
+                    lease,
+                    ref leases,
+                    i,
+                    _limiters.Length
+                );
                 if (notAcquiredLease is not null)
                 {
                     return notAcquiredLease;
@@ -78,7 +85,11 @@ namespace System.Threading.RateLimiting
             return new CombinedRateLimitLease(leases!);
         }
 
-        protected override async ValueTask<RateLimitLease> AcquireAsyncCore(TResource resource, int permitCount, CancellationToken cancellationToken)
+        protected override async ValueTask<RateLimitLease> AcquireAsyncCore(
+            TResource resource,
+            int permitCount,
+            CancellationToken cancellationToken
+        )
         {
             ThrowIfDisposed();
             RateLimitLease[]? leases = null;
@@ -88,13 +99,21 @@ namespace System.Threading.RateLimiting
                 Exception? exception = null;
                 try
                 {
-                    lease = await _limiters[i].AcquireAsync(resource, permitCount, cancellationToken).ConfigureAwait(false);
+                    lease = await _limiters[i]
+                        .AcquireAsync(resource, permitCount, cancellationToken)
+                        .ConfigureAwait(false);
                 }
                 catch (Exception ex)
                 {
                     exception = ex;
                 }
-                RateLimitLease? notAcquiredLease = CommonAcquireLogic(exception, lease, ref leases, i, _limiters.Length);
+                RateLimitLease? notAcquiredLease = CommonAcquireLogic(
+                    exception,
+                    lease,
+                    ref leases,
+                    i,
+                    _limiters.Length
+                );
                 if (notAcquiredLease is not null)
                 {
                     return notAcquiredLease;
@@ -117,7 +136,13 @@ namespace System.Threading.RateLimiting
             }
         }
 
-        private static RateLimitLease? CommonAcquireLogic(Exception? ex, RateLimitLease? lease, ref RateLimitLease[]? leases, int index, int length)
+        private static RateLimitLease? CommonAcquireLogic(
+            Exception? ex,
+            RateLimitLease? lease,
+            ref RateLimitLease[]? leases,
+            int index,
+            int length
+        )
         {
             if (ex is not null)
             {

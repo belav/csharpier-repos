@@ -15,8 +15,7 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeStyle.TypeStyle
 {
     internal static class TypeStyleHelper
     {
-        public static bool IsBuiltInType(ITypeSymbol type)
-            => type?.IsSpecialType() == true;
+        public static bool IsBuiltInType(ITypeSymbol type) => type?.IsSpecialType() == true;
 
         /// <summary>
         /// Analyzes if type information is obvious to the reader by simply looking at the assignment expression.
@@ -31,7 +30,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeStyle.TypeStyle
             ExpressionSyntax initializerExpression,
             SemanticModel semanticModel,
             ITypeSymbol? typeInDeclaration,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
             // tuple literals
             if (initializerExpression is TupleExpressionSyntax tuple)
@@ -52,8 +52,15 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeStyle.TypeStyle
                     var argument = tuple.Arguments[i];
                     var tupleElementType = tupleType.TupleElements[i].Type;
 
-                    if (!IsTypeApparentInAssignmentExpression(
-                            stylePreferences, argument.Expression, semanticModel, tupleElementType, cancellationToken))
+                    if (
+                        !IsTypeApparentInAssignmentExpression(
+                            stylePreferences,
+                            argument.Expression,
+                            semanticModel,
+                            tupleElementType,
+                            cancellationToken
+                        )
+                    )
                     {
                         return false;
                     }
@@ -76,15 +83,24 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeStyle.TypeStyle
 
             // constructor invocations cases:
             //      = new type();
-            if (initializerExpression.Kind() is SyntaxKind.ObjectCreationExpression or SyntaxKind.ArrayCreationExpression &&
-                !initializerExpression.IsKind(SyntaxKind.AnonymousObjectCreationExpression))
+            if (
+                initializerExpression.Kind()
+                    is SyntaxKind.ObjectCreationExpression
+                        or SyntaxKind.ArrayCreationExpression
+                && !initializerExpression.IsKind(SyntaxKind.AnonymousObjectCreationExpression)
+            )
             {
                 return true;
             }
 
-            // explicit conversion cases: 
+            // explicit conversion cases:
             //      (type)expr, expr is type, expr as type
-            if (initializerExpression.Kind() is SyntaxKind.CastExpression or SyntaxKind.IsExpression or SyntaxKind.AsExpression)
+            if (
+                initializerExpression.Kind()
+                is SyntaxKind.CastExpression
+                    or SyntaxKind.IsExpression
+                    or SyntaxKind.AsExpression
+            )
             {
                 return true;
             }
@@ -93,13 +109,17 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeStyle.TypeStyle
             //      a. conversion with helpers like: int.Parse methods
             //      b. types that implement IConvertible and then invoking .ToType()
             //      c. System.Convert.ToType()
-            var memberName = GetRightmostInvocationExpression(initializerExpression).GetRightmostName();
+            var memberName = GetRightmostInvocationExpression(initializerExpression)
+                .GetRightmostName();
             if (memberName == null)
             {
                 return false;
             }
 
-            if (semanticModel.GetSymbolInfo(memberName, cancellationToken).Symbol is not IMethodSymbol methodSymbol)
+            if (
+                semanticModel.GetSymbolInfo(memberName, cancellationToken).Symbol
+                is not IMethodSymbol methodSymbol
+            )
             {
                 return false;
             }
@@ -107,24 +127,34 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeStyle.TypeStyle
             if (memberName.IsRightSideOfDot())
             {
                 var containingTypeName = memberName.GetLeftSideOfDot();
-                return IsPossibleCreationOrConversionMethod(methodSymbol, typeInDeclaration, semanticModel, containingTypeName, cancellationToken);
+                return IsPossibleCreationOrConversionMethod(
+                    methodSymbol,
+                    typeInDeclaration,
+                    semanticModel,
+                    containingTypeName,
+                    cancellationToken
+                );
             }
 
             return false;
         }
 
-        private static bool IsPossibleCreationOrConversionMethod(IMethodSymbol methodSymbol,
+        private static bool IsPossibleCreationOrConversionMethod(
+            IMethodSymbol methodSymbol,
             ITypeSymbol? typeInDeclaration,
             SemanticModel semanticModel,
             ExpressionSyntax containingTypeName,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
             if (methodSymbol.ReturnsVoid)
             {
                 return false;
             }
 
-            var containingType = semanticModel.GetTypeInfo(containingTypeName, cancellationToken).Type;
+            var containingType = semanticModel
+                .GetTypeInfo(containingTypeName, cancellationToken)
+                .Type;
 
             // The containing type was determined from an expression of the form ContainingType.MemberName, and the
             // caller verifies that MemberName resolves to a method symbol.
@@ -138,16 +168,22 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeStyle.TypeStyle
         /// Looks for types that have static methods that return the same type as the container.
         /// e.g: int.Parse, XElement.Load, Tuple.Create etc.
         /// </summary>
-        private static bool IsPossibleCreationMethod(IMethodSymbol methodSymbol,
+        private static bool IsPossibleCreationMethod(
+            IMethodSymbol methodSymbol,
             ITypeSymbol? typeInDeclaration,
-            ITypeSymbol containingType)
+            ITypeSymbol containingType
+        )
         {
             if (!methodSymbol.IsStatic)
             {
                 return false;
             }
 
-            return IsContainerTypeEqualToReturnType(methodSymbol, typeInDeclaration, containingType);
+            return IsContainerTypeEqualToReturnType(
+                methodSymbol,
+                typeInDeclaration,
+                containingType
+            );
         }
 
         /// <summary>
@@ -165,19 +201,23 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeStyle.TypeStyle
         }
 
         /// <remarks>
-        /// If there are type arguments on either side of assignment, we match type names instead of type equality 
+        /// If there are type arguments on either side of assignment, we match type names instead of type equality
         /// to account for inferred generic type arguments.
         /// e.g: Tuple.Create(0, true) returns Tuple&lt;X,y&gt; which isn't the same as type Tuple.
         /// otherwise, we match for type equivalence
         /// </remarks>
-        private static bool IsContainerTypeEqualToReturnType(IMethodSymbol methodSymbol,
+        private static bool IsContainerTypeEqualToReturnType(
+            IMethodSymbol methodSymbol,
             ITypeSymbol? typeInDeclaration,
-            ITypeSymbol containingType)
+            ITypeSymbol containingType
+        )
         {
             var returnType = UnwrapTupleType(methodSymbol.ReturnType);
 
-            if (UnwrapTupleType(typeInDeclaration)?.GetTypeArguments().Length > 0 ||
-                containingType.GetTypeArguments().Length > 0)
+            if (
+                UnwrapTupleType(typeInDeclaration)?.GetTypeArguments().Length > 0
+                || containingType.GetTypeArguments().Length > 0
+            )
             {
                 return UnwrapTupleType(containingType).Name.Equals(returnType.Name);
             }
@@ -206,7 +246,10 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeStyle.TypeStyle
                 return GetRightmostInvocationExpression(awaitExpression.Expression);
             }
 
-            if (node is InvocationExpressionSyntax invocationExpression && invocationExpression.Expression != null)
+            if (
+                node is InvocationExpressionSyntax invocationExpression
+                && invocationExpression.Expression != null
+            )
             {
                 return GetRightmostInvocationExpression(invocationExpression.Expression);
             }

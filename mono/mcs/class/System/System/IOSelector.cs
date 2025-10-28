@@ -33,132 +33,126 @@ using System.Threading;
 
 namespace System
 {
-	internal enum IOOperation : int
-	{
-		/* Keep in sync with MonoIOOperation in mono/metadata/threadpool-ms-io.c */
+    internal enum IOOperation : int
+    {
+        /* Keep in sync with MonoIOOperation in mono/metadata/threadpool-ms-io.c */
 
-		Read  = 1 << 0,
-		Write = 1 << 1,
-	}
+        Read = 1 << 0,
+        Write = 1 << 1,
+    }
 
-	internal delegate void IOAsyncCallback (IOAsyncResult ioares);
+    internal delegate void IOAsyncCallback(IOAsyncResult ioares);
 
-	[StructLayout (LayoutKind.Sequential)]
-	internal abstract class IOAsyncResult : IAsyncResult
-	{
-		AsyncCallback async_callback;
-		object async_state;
+    [StructLayout(LayoutKind.Sequential)]
+    internal abstract class IOAsyncResult : IAsyncResult
+    {
+        AsyncCallback async_callback;
+        object async_state;
 
-		ManualResetEvent wait_handle;
-		bool completed_synchronously;
-		bool completed;
+        ManualResetEvent wait_handle;
+        bool completed_synchronously;
+        bool completed;
 
-		protected IOAsyncResult ()
-		{
-		}
+        protected IOAsyncResult() { }
 
-		protected void Init (AsyncCallback async_callback, object async_state)
-		{
-			this.async_callback = async_callback;
-			this.async_state = async_state;
+        protected void Init(AsyncCallback async_callback, object async_state)
+        {
+            this.async_callback = async_callback;
+            this.async_state = async_state;
 
-			completed = false;
-			completed_synchronously = false;
+            completed = false;
+            completed_synchronously = false;
 
-			if (wait_handle != null)
-				wait_handle.Reset ();
-		}
+            if (wait_handle != null)
+                wait_handle.Reset();
+        }
 
-		protected IOAsyncResult (AsyncCallback async_callback, object async_state)
-		{
-			this.async_callback = async_callback;
-			this.async_state = async_state;
-		}
+        protected IOAsyncResult(AsyncCallback async_callback, object async_state)
+        {
+            this.async_callback = async_callback;
+            this.async_state = async_state;
+        }
 
-		public AsyncCallback AsyncCallback
-		{
-			get { return async_callback; }
-		}
+        public AsyncCallback AsyncCallback
+        {
+            get { return async_callback; }
+        }
 
-		public object AsyncState
-		{
-			get { return async_state; }
-		}
+        public object AsyncState
+        {
+            get { return async_state; }
+        }
 
-		public WaitHandle AsyncWaitHandle
-		{
-			get {
-				lock (this) {
-					if (wait_handle == null)
-						wait_handle = new ManualResetEvent (completed);
-					return wait_handle;
-				}
-			}
-		}
+        public WaitHandle AsyncWaitHandle
+        {
+            get
+            {
+                lock (this)
+                {
+                    if (wait_handle == null)
+                        wait_handle = new ManualResetEvent(completed);
+                    return wait_handle;
+                }
+            }
+        }
 
-		public bool CompletedSynchronously
-		{
-			get {
-				return completed_synchronously;
-			}
-			protected set {
-				completed_synchronously = value;
-			}
-		}
+        public bool CompletedSynchronously
+        {
+            get { return completed_synchronously; }
+            protected set { completed_synchronously = value; }
+        }
 
-		public bool IsCompleted
-		{
-			get {
-				return completed;
-			}
-			protected set {
-				completed = value;
-				lock (this) {
-					if (value && wait_handle != null)
-						wait_handle.Set ();
-				}
-			}
-		}
+        public bool IsCompleted
+        {
+            get { return completed; }
+            protected set
+            {
+                completed = value;
+                lock (this)
+                {
+                    if (value && wait_handle != null)
+                        wait_handle.Set();
+                }
+            }
+        }
 
-		internal abstract void CompleteDisposed();
-	}
+        internal abstract void CompleteDisposed();
+    }
 
-	[StructLayout (LayoutKind.Sequential)]
-	internal class IOSelectorJob : IThreadPoolWorkItem
-	{
-		/* Keep in sync with MonoIOSelectorJob in mono/metadata/threadpool-ms-io.c */
-		IOOperation operation;
-		IOAsyncCallback callback;
-		IOAsyncResult state;
+    [StructLayout(LayoutKind.Sequential)]
+    internal class IOSelectorJob : IThreadPoolWorkItem
+    {
+        /* Keep in sync with MonoIOSelectorJob in mono/metadata/threadpool-ms-io.c */
+        IOOperation operation;
+        IOAsyncCallback callback;
+        IOAsyncResult state;
 
-		public IOSelectorJob (IOOperation operation, IOAsyncCallback callback, IOAsyncResult state)
-		{
-			this.operation = operation;
-			this.callback = callback;
-			this.state = state;
-		}
+        public IOSelectorJob(IOOperation operation, IOAsyncCallback callback, IOAsyncResult state)
+        {
+            this.operation = operation;
+            this.callback = callback;
+            this.state = state;
+        }
 
-		void IThreadPoolWorkItem.ExecuteWorkItem ()
-		{
-			this.callback (this.state);
-		}
+        void IThreadPoolWorkItem.ExecuteWorkItem()
+        {
+            this.callback(this.state);
+        }
 
-		void IThreadPoolWorkItem.MarkAborted (ThreadAbortException tae)
-		{
-		}
+        void IThreadPoolWorkItem.MarkAborted(ThreadAbortException tae) { }
 
-		public void MarkDisposed ()
-		{
-			state.CompleteDisposed ();
-		}
-	}
+        public void MarkDisposed()
+        {
+            state.CompleteDisposed();
+        }
+    }
 
-	internal static class IOSelector
-	{
-		[MethodImplAttribute(MethodImplOptions.InternalCall)]
-		public static extern void Add (IntPtr handle, IOSelectorJob job);
+    internal static class IOSelector
+    {
+        [MethodImplAttribute(MethodImplOptions.InternalCall)]
+        public static extern void Add(IntPtr handle, IOSelectorJob job);
 
-		[MethodImplAttribute(MethodImplOptions.InternalCall)]
-		public static extern void Remove (IntPtr handle);
-	}
+        [MethodImplAttribute(MethodImplOptions.InternalCall)]
+        public static extern void Remove(IntPtr handle);
+    }
 }

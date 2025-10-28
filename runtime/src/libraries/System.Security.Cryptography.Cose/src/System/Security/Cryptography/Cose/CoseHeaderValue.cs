@@ -141,14 +141,17 @@ namespace System.Security.Cryptography.Cose
             {
                 retVal = reader.ReadInt32();
             }
-            catch (Exception ex) when (ex is CborContentException or InvalidOperationException or OverflowException)
+            catch (Exception ex)
+                when (ex is CborContentException or InvalidOperationException or OverflowException)
             {
                 throw new InvalidOperationException(SR.CoseHeaderValueErrorWhileDecoding, ex);
             }
 
             if (reader.BytesRemaining != 0)
             {
-                throw new InvalidOperationException(SR.Format(SR.CoseHeaderMapCborEncodedValueNotValid));
+                throw new InvalidOperationException(
+                    SR.Format(SR.CoseHeaderMapCborEncodedValueNotValid)
+                );
             }
 
             return retVal;
@@ -175,7 +178,9 @@ namespace System.Security.Cryptography.Cose
 
             if (reader.BytesRemaining != 0)
             {
-                throw new InvalidOperationException(SR.Format(SR.CoseHeaderMapCborEncodedValueNotValid));
+                throw new InvalidOperationException(
+                    SR.Format(SR.CoseHeaderMapCborEncodedValueNotValid)
+                );
             }
 
             return retVal;
@@ -202,7 +207,9 @@ namespace System.Security.Cryptography.Cose
 
             if (reader.BytesRemaining != 0)
             {
-                throw new InvalidOperationException(SR.Format(SR.CoseHeaderMapCborEncodedValueNotValid));
+                throw new InvalidOperationException(
+                    SR.Format(SR.CoseHeaderMapCborEncodedValueNotValid)
+                );
             }
 
             return retVal;
@@ -224,7 +231,10 @@ namespace System.Security.Cryptography.Cose
             {
                 if (!reader.TryReadByteString(destination, out bytesWritten))
                 {
-                    throw new ArgumentException(SR.Argument_DestinationTooSmall, nameof(destination));
+                    throw new ArgumentException(
+                        SR.Argument_DestinationTooSmall,
+                        nameof(destination)
+                    );
                 }
             }
             catch (Exception ex) when (ex is CborContentException or InvalidOperationException)
@@ -234,7 +244,9 @@ namespace System.Security.Cryptography.Cose
 
             if (reader.BytesRemaining != 0)
             {
-                throw new InvalidOperationException(SR.Format(SR.CoseHeaderMapCborEncodedValueNotValid));
+                throw new InvalidOperationException(
+                    SR.Format(SR.CoseHeaderMapCborEncodedValueNotValid)
+                );
             }
 
             return bytesWritten;
@@ -245,14 +257,16 @@ namespace System.Security.Cryptography.Cose
         /// </summary>
         /// <param name="obj">The object to compare to this instance.</param>
         /// <returns><see langword="true"/> if the value parameter equals the value of this instance; otherwise, <see langword="false"/>.</returns>
-        public override bool Equals([NotNullWhen(true)] object? obj) => obj is CoseHeaderValue otherObj && Equals(otherObj);
+        public override bool Equals([NotNullWhen(true)] object? obj) =>
+            obj is CoseHeaderValue otherObj && Equals(otherObj);
 
         /// <summary>
         /// Returns a value indicating whether this instance is equal to a specified object.
         /// </summary>
         /// <param name="other">The object to compare to this instance.</param>
         /// <returns><see langword="true"/> if value is an instance of <see cref="CoseHeaderValue"/> and equals the value of this instance; otherwise, <see langword="false"/>.</returns>
-        public bool Equals(CoseHeaderValue other) => EncodedValue.Span.SequenceEqual(other.EncodedValue.Span);
+        public bool Equals(CoseHeaderValue other) =>
+            EncodedValue.Span.SequenceEqual(other.EncodedValue.Span);
 
         /// <summary>
         /// Returns the hash code for this instance.
@@ -278,7 +292,8 @@ namespace System.Security.Cryptography.Cose
         /// <param name="left">The first object to compare.</param>
         /// <param name="right">The second object to compare.</param>
         /// <returns><see langword="true"/> if left and right represent the same value; otherwise, <see langword="false"/>.</returns>
-        public static bool operator ==(CoseHeaderValue left, CoseHeaderValue right) => left.Equals(right);
+        public static bool operator ==(CoseHeaderValue left, CoseHeaderValue right) =>
+            left.Equals(right);
 
         /// <summary>
         /// Determines whether two specified header value instances are not equal.
@@ -286,6 +301,7 @@ namespace System.Security.Cryptography.Cose
         /// <param name="left">The first object to compare.</param>
         /// <param name="right">The second object to compare.</param>
         /// <returns><see langword="true"/> if left and right do not represent the same value; otherwise, <see langword="false"/>.</returns>
-        public static bool operator !=(CoseHeaderValue left, CoseHeaderValue right) => !left.Equals(right);
+        public static bool operator !=(CoseHeaderValue left, CoseHeaderValue right) =>
+            !left.Equals(right);
     }
 }

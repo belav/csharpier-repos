@@ -14,6 +14,6 @@ namespace System.Data.SqlClient
     {
         PlainText = 0,
         Deterministic,
-        Randomized
+        Randomized,
     }
 }

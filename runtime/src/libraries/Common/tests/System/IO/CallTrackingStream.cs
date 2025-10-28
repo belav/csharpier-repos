@@ -106,7 +106,11 @@ namespace System.IO
 
         // Overridden methods
 
-        public override Task CopyToAsync(Stream destination, int bufferSize, CancellationToken cancellationToken)
+        public override Task CopyToAsync(
+            Stream destination,
+            int bufferSize,
+            CancellationToken cancellationToken
+        )
         {
             UpdateCallCount();
             CopyToAsyncDestination = destination;
@@ -139,7 +143,12 @@ namespace System.IO
             return Inner.Read(buffer, offset, count);
         }
 
-        public override Task<int> ReadAsync(byte[] buffer, int offset, int count, CancellationToken cancellationToken)
+        public override Task<int> ReadAsync(
+            byte[] buffer,
+            int offset,
+            int count,
+            CancellationToken cancellationToken
+        )
         {
             UpdateCallCount();
             ReadAsyncBuffer = buffer;
@@ -179,7 +188,12 @@ namespace System.IO
             Inner.Write(buffer, offset, count);
         }
 
-        public override Task WriteAsync(byte[] buffer, int offset, int count, CancellationToken cancellationToken)
+        public override Task WriteAsync(
+            byte[] buffer,
+            int offset,
+            int count,
+            CancellationToken cancellationToken
+        )
         {
             UpdateCallCount();
             WriteAsyncBuffer = buffer;

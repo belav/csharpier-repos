@@ -13,7 +13,7 @@ namespace BuildBoss
 {
     /// <summary>
     /// This type invokes the analyzer here:
-    /// 
+    ///
     ///   https://github.com/KirillOsenkov/MSBuildStructuredLog/blob/master/src/StructuredLogger/Analyzers/DoubleWritesAnalyzer.cs
     ///
     /// </summary>
@@ -34,7 +34,12 @@ namespace BuildBoss
                 var doubleWrites = DoubleWritesAnalyzer.GetDoubleWrites(build).ToArray();
 
                 // Issue https://github.com/dotnet/roslyn/issues/62372
-                if (doubleWrites.Any(doubleWrite => Path.GetFileName(doubleWrite.Key) != "Microsoft.VisualStudio.Text.Internal.dll"))
+                if (
+                    doubleWrites.Any(doubleWrite =>
+                        Path.GetFileName(doubleWrite.Key)
+                        != "Microsoft.VisualStudio.Text.Internal.dll"
+                    )
+                )
                 {
                     foreach (var doubleWrite in doubleWrites)
                     {

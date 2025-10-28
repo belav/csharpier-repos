@@ -7,18 +7,18 @@
 // @backupOwner Microsoft
 //---------------------------------------------------------------------
 using System;
-using System.Data;
-using System.Configuration;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Configuration;
+using System.Data;
 using System.Data.Common;
 using System.Data.Metadata.Edm;
-using System.Reflection;
 using System.Data.Objects;
 using System.Data.Objects.DataClasses;
-using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
-using System.Collections.ObjectModel;
+using System.Reflection;
 using System.Text;
 using System.Web.UI;
 
@@ -33,7 +33,10 @@ namespace System.Web.UI.WebControls
         private readonly EntityDataSourceWrapperCollection _collection;
         private readonly ObjectStateEntry _stateEntry;
 
-        internal EntityDataSourceWrapper(EntityDataSourceWrapperCollection collection, object trackedEntity)
+        internal EntityDataSourceWrapper(
+            EntityDataSourceWrapperCollection collection,
+            object trackedEntity
+        )
         {
             EntityDataSourceUtil.CheckArgumentNull(collection, "collection");
             EntityDataSourceUtil.CheckArgumentNull(trackedEntity, "trackedEntity");
@@ -41,9 +44,17 @@ namespace System.Web.UI.WebControls
             this._collection = collection;
 
             // retrieve state entry
-            if (!this._collection.Context.ObjectStateManager.TryGetObjectStateEntry(trackedEntity, out _stateEntry))
+            if (
+                !this._collection.Context.ObjectStateManager.TryGetObjectStateEntry(
+                    trackedEntity,
+                    out _stateEntry
+                )
+            )
             {
-                throw new ArgumentException(Strings.ComponentNotFromProperCollection, "trackedEntity");
+                throw new ArgumentException(
+                    Strings.ComponentNotFromProperCollection,
+                    "trackedEntity"
+                );
             }
         }
 
@@ -52,18 +63,12 @@ namespace System.Web.UI.WebControls
         /// </summary>
         internal object WrappedEntity
         {
-            get
-            {
-                return this._stateEntry.Entity;
-            }
+            get { return this._stateEntry.Entity; }
         }
 
         internal RelationshipManager RelationshipManager
         {
-            get
-            {
-                return this._stateEntry.RelationshipManager;
-            }
+            get { return this._stateEntry.RelationshipManager; }
         }
 
         /// <summary>
@@ -75,16 +80,50 @@ namespace System.Web.UI.WebControls
         }
 
         #region ICustomTypeDescriptor Implementation
-        System.ComponentModel.AttributeCollection System.ComponentModel.ICustomTypeDescriptor.GetAttributes() { return new System.ComponentModel.AttributeCollection(); }
-        string ICustomTypeDescriptor.GetClassName() { return null; }
-        string ICustomTypeDescriptor.GetComponentName() { return null; }
-        TypeConverter ICustomTypeDescriptor.GetConverter() { return null; }
-        EventDescriptor ICustomTypeDescriptor.GetDefaultEvent() { return null; }
-        PropertyDescriptor ICustomTypeDescriptor.GetDefaultProperty() { return null; }
-        object ICustomTypeDescriptor.GetEditor(Type editorBaseType) { return null; }
-        EventDescriptorCollection ICustomTypeDescriptor.GetEvents() { return null; }
-        EventDescriptorCollection ICustomTypeDescriptor.GetEvents(Attribute[] attributes) { return null; }
+        System.ComponentModel.AttributeCollection System.ComponentModel.ICustomTypeDescriptor.GetAttributes()
+        {
+            return new System.ComponentModel.AttributeCollection();
+        }
 
+        string ICustomTypeDescriptor.GetClassName()
+        {
+            return null;
+        }
+
+        string ICustomTypeDescriptor.GetComponentName()
+        {
+            return null;
+        }
+
+        TypeConverter ICustomTypeDescriptor.GetConverter()
+        {
+            return null;
+        }
+
+        EventDescriptor ICustomTypeDescriptor.GetDefaultEvent()
+        {
+            return null;
+        }
+
+        PropertyDescriptor ICustomTypeDescriptor.GetDefaultProperty()
+        {
+            return null;
+        }
+
+        object ICustomTypeDescriptor.GetEditor(Type editorBaseType)
+        {
+            return null;
+        }
+
+        EventDescriptorCollection ICustomTypeDescriptor.GetEvents()
+        {
+            return null;
+        }
+
+        EventDescriptorCollection ICustomTypeDescriptor.GetEvents(Attribute[] attributes)
+        {
+            return null;
+        }
 
         public PropertyDescriptorCollection GetProperties()
         {
@@ -108,15 +147,21 @@ namespace System.Web.UI.WebControls
         /// <param name="propertiesFromViewState"></param>
         /// <param name="wrapper"></param>
         /// <param name="overwriteSameValue"></param>
-        internal void SetAllProperties(Dictionary<string, object> propertiesFromViewState, bool overwriteSameValue,
-            ref Dictionary<string, Exception> propertySettingExceptionsCaught)
+        internal void SetAllProperties(
+            Dictionary<string, object> propertiesFromViewState,
+            bool overwriteSameValue,
+            ref Dictionary<string, Exception> propertySettingExceptionsCaught
+        )
         {
             // We aggregate the reference descriptors rather than setting them directly
             // to account for compound keys (we need all components of the key to create
             // an EntityKey that can be set on the EntityReference)
-            var referenceList = new List<KeyValuePair<EntityDataSourceReferenceKeyColumn, object>>();
+            var referenceList =
+                new List<KeyValuePair<EntityDataSourceReferenceKeyColumn, object>>();
 
-            foreach (EntityDataSourceWrapperPropertyDescriptor descriptor in _collection.AllPropertyDescriptors)
+            foreach (
+                EntityDataSourceWrapperPropertyDescriptor descriptor in _collection.AllPropertyDescriptors
+            )
             {
                 // figure out which display name to match for this descriptor
                 string displayName = descriptor.Column.DisplayName;
@@ -131,21 +176,33 @@ namespace System.Web.UI.WebControls
                 if (propertiesFromViewState.TryGetValue(displayName, out value))
                 {
                     // get all changed ReferencePropertyDescriptor from ViewState
-                    EntityDataSourceReferenceKeyColumn referenceColumn = descriptor.Column as EntityDataSourceReferenceKeyColumn;
+                    EntityDataSourceReferenceKeyColumn referenceColumn =
+                        descriptor.Column as EntityDataSourceReferenceKeyColumn;
 
                     // convert the value as needed
-                    object adjustedValue = EntityDataSourceUtil.ConvertType(value, descriptor.PropertyType, descriptor.DisplayName);
+                    object adjustedValue = EntityDataSourceUtil.ConvertType(
+                        value,
+                        descriptor.PropertyType,
+                        descriptor.DisplayName
+                    );
 
                     if (null != referenceColumn)
                     {
-                        referenceList.Add(new KeyValuePair<EntityDataSourceReferenceKeyColumn, object>(
-                                referenceColumn, adjustedValue));
+                        referenceList.Add(
+                            new KeyValuePair<EntityDataSourceReferenceKeyColumn, object>(
+                                referenceColumn,
+                                adjustedValue
+                            )
+                        );
                         continue;
                     }
 
                     if (overwriteSameValue || adjustedValue != descriptor.GetValue(this))
                     {
-                        if (EntityDataSourceUtil.NullCanBeAssignedTo(descriptor.PropertyType) || null != adjustedValue)
+                        if (
+                            EntityDataSourceUtil.NullCanBeAssignedTo(descriptor.PropertyType)
+                            || null != adjustedValue
+                        )
                         {
                             try
                             {
@@ -161,9 +218,13 @@ namespace System.Web.UI.WebControls
                                 }
                                 if (null == propertySettingExceptionsCaught)
                                 {
-                                    propertySettingExceptionsCaught = new Dictionary<string, Exception>();
+                                    propertySettingExceptionsCaught =
+                                        new Dictionary<string, Exception>();
                                 }
-                                propertySettingExceptionsCaught.Add(descriptor.DisplayName, exceptionToThrow);
+                                propertySettingExceptionsCaught.Add(
+                                    descriptor.DisplayName,
+                                    exceptionToThrow
+                                );
                             }
                         }
                     }
@@ -175,7 +236,9 @@ namespace System.Web.UI.WebControls
         }
 
         private void SetEntityKeyProperties(
-            List<KeyValuePair<EntityDataSourceReferenceKeyColumn, object>> referenceList, bool overwriteSameValue)
+            List<KeyValuePair<EntityDataSourceReferenceKeyColumn, object>> referenceList,
+            bool overwriteSameValue
+        )
         {
             EntityDataSourceUtil.CheckArgumentNull(referenceList, "referenceList");
 
@@ -185,7 +248,9 @@ namespace System.Web.UI.WebControls
             {
                 Dictionary<string, object> partialKeys = new Dictionary<string, object>();
 
-                foreach (KeyValuePair<EntityDataSourceReferenceKeyColumn, object> reference in group)
+                foreach (
+                    KeyValuePair<EntityDataSourceReferenceKeyColumn, object> reference in group
+                )
                 {
                     // convert the value as needed
                     EntityDataSourceReferenceKeyColumn column = reference.Key;
@@ -200,7 +265,7 @@ namespace System.Web.UI.WebControls
                     partialKeys.Add(column.KeyMember.Name, keyValue);
                 }
 
-                // we only set the entitykey for once, although there might be more than one 
+                // we only set the entitykey for once, although there might be more than one
                 // properties descriptor associated with the same entitykey
                 group.Key.SetKeyValues(this, partialKeys);
             }

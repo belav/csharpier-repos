@@ -93,15 +93,15 @@ namespace System.Management
         /// </summary>
         /// <param name="wbemObject">The WMI object whose __PATH property will
         /// be used to supply the returned object</param>
-        internal static string GetManagementPath(
-            IWbemClassObjectFreeThreaded wbemObject)
+        internal static string GetManagementPath(IWbemClassObjectFreeThreaded wbemObject)
         {
             string path = null;
             int status = (int)ManagementStatus.Failed;
 
             if (null != wbemObject)
             {
-                int dummy1 = 0, dummy2 = 0;
+                int dummy1 = 0,
+                    dummy2 = 0;
                 object val = null;
                 status = wbemObject.Get_("__PATH", 0, ref val, ref dummy1, ref dummy2);
                 if ((status < 0) || (val == System.DBNull.Value))
@@ -146,13 +146,15 @@ namespace System.Management
             return true;
         }
 
-
         internal static ManagementPath _Clone(ManagementPath path)
         {
             return ManagementPath._Clone(path, null);
         }
 
-        internal static ManagementPath _Clone(ManagementPath path, IdentifierChangedEventHandler handler)
+        internal static ManagementPath _Clone(
+            ManagementPath path,
+            IdentifierChangedEventHandler handler
+        )
         {
             ManagementPath pathTmp = new ManagementPath();
 
@@ -181,7 +183,8 @@ namespace System.Management
         /// <summary>
         /// <para> Initializes a new instance of the <see cref='System.Management.ManagementPath'/> class that is empty. This is the default constructor.</para>
         /// </summary>
-        public ManagementPath() : this((string)null) { }
+        public ManagementPath()
+            : this((string)null) { }
 
         /// <summary>
         /// <para>Initializes a new instance of the <see cref='System.Management.ManagementPath'/> class for the given path.</para>
@@ -336,7 +339,6 @@ namespace System.Management
                     {
                         // Interpret as unspecified - return ""
                     }
-
                     else if ((status & 0xfffff000) == 0x80041000)
                         ManagementException.ThrowWithExtendedInfo((ManagementStatus)status);
                     else
@@ -388,12 +390,8 @@ namespace System.Management
 
         internal bool IsEmpty
         {
-            get
-            {
-                return (Path.Length == 0);
-            }
+            get { return (Path.Length == 0); }
         }
-
 
         //
         // Methods
@@ -457,10 +455,7 @@ namespace System.Management
         [RefreshProperties(RefreshProperties.All)]
         public string Path
         {
-            get
-            {
-                return this.GetWbemPath();
-            }
+            get { return this.GetWbemPath(); }
             set
             {
                 try
@@ -508,7 +503,8 @@ namespace System.Management
                     int status = wmiPath.GetText_(
                         (int)tag_WBEM_GET_TEXT_FLAGS.WBEMPATH_GET_RELATIVE_ONLY,
                         ref bufLen,
-                        null);
+                        null
+                    );
 
                     if (status >= 0 && 0 < bufLen)
                     {
@@ -516,7 +512,8 @@ namespace System.Management
                         status = wmiPath.GetText_(
                             (int)tag_WBEM_GET_TEXT_FLAGS.WBEMPATH_GET_RELATIVE_ONLY,
                             ref bufLen,
-                            pathChars);
+                            pathChars
+                        );
                         pathStr = new string(pathChars, 0, Array.IndexOf(pathChars, '\0'));
                     }
 
@@ -535,7 +532,6 @@ namespace System.Management
 
                 return pathStr;
             }
-
             set
             {
                 try
@@ -557,7 +553,9 @@ namespace System.Management
             // No need for isWbemPathShared here since internal SetRelativePath
             // always creates a new copy.
             ManagementPath newPath = new ManagementPath(relPath);
-            newPath.NamespacePath = this.GetNamespacePath((int)tag_WBEM_GET_TEXT_FLAGS.WBEMPATH_GET_SERVER_AND_NAMESPACE_ONLY);
+            newPath.NamespacePath = this.GetNamespacePath(
+                (int)tag_WBEM_GET_TEXT_FLAGS.WBEMPATH_GET_SERVER_AND_NAMESPACE_ONLY
+            );
             newPath.Server = this.Server;
             wmiPath = newPath.wmiPath;
         }
@@ -571,7 +569,9 @@ namespace System.Management
             //Get the server & namespace part from the existing path, and concatenate the given relPath.
             //NOTE : we need to do this because IWbemPath doesn't have a function to set the relative path alone...
             string newPath = string.Empty;
-            string nsPath = this.GetNamespacePath((int)tag_WBEM_GET_TEXT_FLAGS.WBEMPATH_GET_SERVER_AND_NAMESPACE_ONLY);
+            string nsPath = this.GetNamespacePath(
+                (int)tag_WBEM_GET_TEXT_FLAGS.WBEMPATH_GET_SERVER_AND_NAMESPACE_ONLY
+            );
 
             if (nsPath.Length > 0)
                 newPath = string.Concat(nsPath, ":", relPath);
@@ -589,7 +589,6 @@ namespace System.Management
             this.SetWbemPath(newPath);
         }
 
-
         /// <summary>
         ///    <para>Gets or sets the server part of the path.</para>
         /// </summary>
@@ -606,7 +605,6 @@ namespace System.Management
 
                 if (null != wmiPath)
                 {
-
                     uint uLen = 0;
                     int status = wmiPath.GetServer_(ref uLen, null);
 
@@ -676,7 +674,9 @@ namespace System.Management
 
             //Do some validation on the path to make sure it is a valid namespace path (at least syntactically)
             if (!IsValidNamespaceSyntax(nsPath))
-                ManagementException.ThrowWithExtendedInfo((ManagementStatus)tag_WBEMSTATUS.WBEM_E_INVALID_NAMESPACE);
+                ManagementException.ThrowWithExtendedInfo(
+                    (ManagementStatus)tag_WBEMSTATUS.WBEM_E_INVALID_NAMESPACE
+                );
 
             wmiPathTmp = CreateWbemPath(nsPath);
             if (wmiPath == null)
@@ -691,17 +691,21 @@ namespace System.Management
                 isWbemPathShared = false;
             }
 
-            nsOrg = GetNamespacePath(wmiPath,
-                (int)tag_WBEM_GET_TEXT_FLAGS.WBEMPATH_GET_NAMESPACE_ONLY);
-            nsNew = GetNamespacePath(wmiPathTmp,
-                (int)tag_WBEM_GET_TEXT_FLAGS.WBEMPATH_GET_NAMESPACE_ONLY);
+            nsOrg = GetNamespacePath(
+                wmiPath,
+                (int)tag_WBEM_GET_TEXT_FLAGS.WBEMPATH_GET_NAMESPACE_ONLY
+            );
+            nsNew = GetNamespacePath(
+                wmiPathTmp,
+                (int)tag_WBEM_GET_TEXT_FLAGS.WBEMPATH_GET_NAMESPACE_ONLY
+            );
 
             if (!string.Equals(nsOrg, nsNew, StringComparison.OrdinalIgnoreCase))
             {
-                wmiPath.RemoveAllNamespaces_();                                 // Out with the old... Ignore status code.
+                wmiPath.RemoveAllNamespaces_(); // Out with the old... Ignore status code.
 
                 // Add the new ones in
-                bChange = true;                                                 // Now dirty from above.
+                bChange = true; // Now dirty from above.
                 uint nCount = 0;
                 status = wmiPathTmp.GetNamespaceCount_(out nCount);
 
@@ -731,15 +735,20 @@ namespace System.Management
                     }
                 }
             }
-            else {; }    // Continue on. Could have different server name, same ns specified.
+            else
+            {
+                ;
+            } // Continue on. Could have different server name, same ns specified.
 
             //
             // Update Server property if specified in the namespace.
             // eg: "\\MyServer\root\cimv2".
             //
-            if (status >= 0 && nsPath.Length > 1 &&
-                (nsPath[0] == '\\' && nsPath[1] == '\\' ||
-                nsPath[0] == '/' && nsPath[1] == '/'))
+            if (
+                status >= 0
+                && nsPath.Length > 1
+                && (nsPath[0] == '\\' && nsPath[1] == '\\' || nsPath[0] == '/' && nsPath[1] == '/')
+            )
             {
                 uint uLen = 0;
                 status = wmiPathTmp.GetServer_(ref uLen, null);
@@ -748,22 +757,37 @@ namespace System.Management
                 {
                     char[] newServerChars = new char[(int)uLen];
                     status = wmiPathTmp.GetServer_(ref uLen, newServerChars);
-                    string serverNew = new string(newServerChars, 0, Array.IndexOf(newServerChars, '\0'));
+                    string serverNew = new string(
+                        newServerChars,
+                        0,
+                        Array.IndexOf(newServerChars, '\0')
+                    );
 
                     if (status >= 0)
                     {
                         // Compare server name on this object, if specified, to the caller's.
                         //     Update this object if different or unspecified.
                         uLen = 0;
-                        status = wmiPath.GetServer_(ref uLen, null);            // NB: Cannot use property get since it may throw.
+                        status = wmiPath.GetServer_(ref uLen, null); // NB: Cannot use property get since it may throw.
 
                         if (status >= 0)
                         {
                             char[] orgServerChars = new char[(int)uLen];
                             status = wmiPath.GetServer_(ref uLen, orgServerChars);
-                            string serverOrg = new string(orgServerChars, 0, Array.IndexOf(orgServerChars, '\0'));
+                            string serverOrg = new string(
+                                orgServerChars,
+                                0,
+                                Array.IndexOf(orgServerChars, '\0')
+                            );
 
-                            if (status >= 0 && !string.Equals(serverOrg, serverNew, StringComparison.OrdinalIgnoreCase))
+                            if (
+                                status >= 0
+                                && !string.Equals(
+                                    serverOrg,
+                                    serverNew,
+                                    StringComparison.OrdinalIgnoreCase
+                                )
+                            )
                                 status = wmiPath.SetServer_(serverNew);
                         }
                         else if (status == (int)tag_WBEMSTATUS.WBEM_E_NOT_AVAILABLE)
@@ -774,8 +798,8 @@ namespace System.Management
                         }
                     }
                 }
-                else if (status == (int)tag_WBEMSTATUS.WBEM_E_NOT_AVAILABLE)    // No caller-supplied server name;
-                    status = (int)ManagementStatus.NoError;                     // Ignore error.
+                else if (status == (int)tag_WBEMSTATUS.WBEM_E_NOT_AVAILABLE) // No caller-supplied server name;
+                    status = (int)ManagementStatus.NoError; // Ignore error.
             }
 
             if (status < 0)
@@ -884,10 +908,7 @@ namespace System.Management
         [RefreshProperties(RefreshProperties.All)]
         public string ClassName
         {
-            get
-            {
-                return internalClassName;
-            }
+            get { return internalClassName; }
             set
             {
                 string oldValue = ClassName;
@@ -1055,7 +1076,6 @@ namespace System.Management
     /// </summary>
     internal sealed class ManagementPathConverter : ExpandableObjectConverter
     {
-
         /// <summary>
         /// Determines if this converter can convert an object in the given source type to the native type of the converter.
         /// </summary>
@@ -1102,9 +1122,13 @@ namespace System.Management
         /// <param name='value'>The Object to convert.</param>
         /// <param name='destinationType'>The Type to convert the value parameter to.</param>
         /// <returns>An Object that represents the converted value.</returns>
-        public override object ConvertTo(ITypeDescriptorContext context, CultureInfo culture, object value, Type destinationType)
+        public override object ConvertTo(
+            ITypeDescriptorContext context,
+            CultureInfo culture,
+            object value,
+            Type destinationType
+        )
         {
-
             if (destinationType == null)
             {
                 throw new ArgumentNullException(nameof(destinationType));
@@ -1113,7 +1137,9 @@ namespace System.Management
             if (value is ManagementPath && destinationType == typeof(InstanceDescriptor))
             {
                 ManagementPath obj = ((ManagementPath)(value));
-                ConstructorInfo ctor = typeof(ManagementPath).GetConstructor(new Type[] { typeof(string) });
+                ConstructorInfo ctor = typeof(ManagementPath).GetConstructor(
+                    new Type[] { typeof(string) }
+                );
                 if (ctor != null)
                 {
                     return new InstanceDescriptor(ctor, new object[] { obj.Path });

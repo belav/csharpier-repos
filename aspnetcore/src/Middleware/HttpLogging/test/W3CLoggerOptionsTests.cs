@@ -40,8 +40,8 @@ public class W3CLoggerOptionsTests
     public void ThrowsOnNegativeFlushInterval()
     {
         var options = new W3CLoggerOptions();
-        var ex = Assert.Throws<ArgumentOutOfRangeException>(
-            () => options.FlushInterval = TimeSpan.FromSeconds(-1)
+        var ex = Assert.Throws<ArgumentOutOfRangeException>(() =>
+            options.FlushInterval = TimeSpan.FromSeconds(-1)
         );
         Assert.Contains("FlushInterval must be positive", ex.Message);
     }

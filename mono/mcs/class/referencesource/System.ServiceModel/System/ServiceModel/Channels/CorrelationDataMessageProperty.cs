@@ -12,9 +12,7 @@ namespace System.ServiceModel.Channels
         const string PropertyName = "CorrelationDataMessageProperty";
         Dictionary<string, DataProviderEntry> dataProviders;
 
-        public CorrelationDataMessageProperty()
-        {
-        }
+        public CorrelationDataMessageProperty() { }
 
         CorrelationDataMessageProperty(IDictionary<string, DataProviderEntry> dataProviders)
         {
@@ -84,7 +82,10 @@ namespace System.ServiceModel.Channels
             return TryGet(message.Properties, out property);
         }
 
-        public static bool TryGet(MessageProperties properties, out CorrelationDataMessageProperty property)
+        public static bool TryGet(
+            MessageProperties properties,
+            out CorrelationDataMessageProperty property
+        )
         {
             object value = null;
             if (properties.TryGetValue(PropertyName, out value))

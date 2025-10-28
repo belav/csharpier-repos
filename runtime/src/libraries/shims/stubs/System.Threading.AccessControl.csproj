@@ -1,5 +1,4 @@
 <Project Sdk="Microsoft.NET.Sdk">
-
   <PropertyGroup>
     <StrongNameKeyId>Microsoft</StrongNameKeyId>
   </PropertyGroup>
@@ -18,5 +17,4 @@
     <ForwardedType Include="System.Security.AccessControl.SemaphoreRights" />
     <ForwardedType Include="System.Security.AccessControl.SemaphoreSecurity" />
   </ItemGroup>
-
 </Project>

@@ -62,7 +62,8 @@ namespace Microsoft.VisualStudio.LanguageServices.FindUsages
                 SourceText lineText,
                 SymbolUsageInfo symbolUsageInfo,
                 ImmutableDictionary<string, string> customColumnsData,
-                IThreadingContext threadingContext)
+                IThreadingContext threadingContext
+            )
                 : base(context, definitionBucket, projectGuid, lineText, mappedSpanResult)
             {
                 _spanKind = spanKind;
@@ -80,7 +81,8 @@ namespace Microsoft.VisualStudio.LanguageServices.FindUsages
                 // so the user can know htat in the UI.
                 lock (_projectFlavors)
                 {
-                    _cachedProjectName ??= _projectFlavors.Count < 2
+                    _cachedProjectName ??=
+                        _projectFlavors.Count < 2
                             ? _rawProjectName
                             : $"{_rawProjectName} ({string.Join(", ", _projectFlavors)})";
 
@@ -118,14 +120,23 @@ namespace Microsoft.VisualStudio.LanguageServices.FindUsages
                 SourceText lineText,
                 SymbolUsageInfo symbolUsageInfo,
                 ImmutableDictionary<string, string> customColumnsData,
-                IThreadingContext threadingContext)
+                IThreadingContext threadingContext
+            )
             {
                 var entry = new DocumentSpanEntry(
-                    context, definitionBucket,
-                    projectName, projectFlavor, guid,
-                    spanKind, mappedSpanResult, excerptResult,
-                    lineText, symbolUsageInfo, customColumnsData,
-                    threadingContext);
+                    context,
+                    definitionBucket,
+                    projectName,
+                    projectFlavor,
+                    guid,
+                    spanKind,
+                    mappedSpanResult,
+                    excerptResult,
+                    lineText,
+                    symbolUsageInfo,
+                    customColumnsData,
+                    threadingContext
+                );
 
                 // Because of things like linked files, we may have a reference up in multiple
                 // different locations that are effectively at the exact same navigation location
@@ -147,24 +158,27 @@ namespace Microsoft.VisualStudio.LanguageServices.FindUsages
 
             protected override IList<System.Windows.Documents.Inline> CreateLineTextInlines()
             {
-                var propertyId = _spanKind == HighlightSpanKind.Definition
-                    ? DefinitionHighlightTag.TagId
+                var propertyId =
+                    _spanKind == HighlightSpanKind.Definition ? DefinitionHighlightTag.TagId
                     : _spanKind == HighlightSpanKind.WrittenReference
                         ? WrittenReferenceHighlightTag.TagId
-                        : ReferenceHighlightTag.TagId;
+                    : ReferenceHighlightTag.TagId;
 
-                var properties = Presenter.FormatMapService
-                                          .GetEditorFormatMap("text")
-                                          .GetProperties(propertyId);
+                var properties = Presenter
+                    .FormatMapService.GetEditorFormatMap("text")
+                    .GetProperties(propertyId);
 
                 // Remove additive classified spans before creating classified text.
                 // Otherwise the text will be repeated since there are two classifications
                 // for the same span. Additive classifications should not change the foreground
                 // color, so the resulting classified text will retain the proper look.
-                var classifiedSpans = _excerptResult.ClassifiedSpans.WhereAsArray(
-                    cs => !ClassificationTypeNames.AdditiveTypeNames.Contains(cs.ClassificationType));
-                var classifiedTexts = classifiedSpans.SelectAsArray(
-                    cs => new ClassifiedText(cs.ClassificationType, _excerptResult.Content.ToString(cs.TextSpan)));
+                var classifiedSpans = _excerptResult.ClassifiedSpans.WhereAsArray(cs =>
+                    !ClassificationTypeNames.AdditiveTypeNames.Contains(cs.ClassificationType)
+                );
+                var classifiedTexts = classifiedSpans.SelectAsArray(cs => new ClassifiedText(
+                    cs.ClassificationType,
+                    _excerptResult.Content.ToString(cs.TextSpan)
+                ));
 
                 var inlines = classifiedTexts.ToInlines(
                     Presenter.ClassificationFormatMap,
@@ -177,15 +191,20 @@ namespace Microsoft.VisualStudio.LanguageServices.FindUsages
                             {
                                 run.SetValue(
                                     System.Windows.Documents.TextElement.BackgroundProperty,
-                                    highlightBrush);
+                                    highlightBrush
+                                );
                             }
                         }
-                    });
+                    }
+                );
 
                 return inlines;
             }
 
-            public override bool TryCreateColumnContent(string columnName, [NotNullWhen(true)] out FrameworkElement? content)
+            public override bool TryCreateColumnContent(
+                string columnName,
+                [NotNullWhen(true)] out FrameworkElement? content
+            )
             {
                 if (base.TryCreateColumnContent(columnName, out content))
                 {
@@ -193,9 +212,12 @@ namespace Microsoft.VisualStudio.LanguageServices.FindUsages
                     // solution is never supposed to be kept alive for long time, meaning there is bunch of conditional weaktable or weak reference
                     // keyed by solution/project/document or corresponding states. this will cause all those to be kept alive in memory as well.
                     // probably we need to dig in to see how expensvie it is to support this
-                    var controlService = _excerptResult.Document.Project.Solution.Services.GetRequiredService<IContentControlService>();
-                    controlService.AttachToolTipToControl(content, () =>
-                        CreateDisposableToolTip(_excerptResult.Document, _excerptResult.Span));
+                    var controlService =
+                        _excerptResult.Document.Project.Solution.Services.GetRequiredService<IContentControlService>();
+                    controlService.AttachToolTipToControl(
+                        content,
+                        () => CreateDisposableToolTip(_excerptResult.Document, _excerptResult.Span)
+                    );
 
                     return true;
                 }
@@ -218,26 +240,46 @@ namespace Microsoft.VisualStudio.LanguageServices.FindUsages
                 return base.GetValueWorker(keyName);
             }
 
-            private DisposableToolTip CreateDisposableToolTip(Document document, TextSpan sourceSpan)
+            private DisposableToolTip CreateDisposableToolTip(
+                Document document,
+                TextSpan sourceSpan
+            )
             {
                 Presenter.AssertIsForeground();
 
-                var controlService = document.Project.Solution.Services.GetRequiredService<IContentControlService>();
+                var controlService =
+                    document.Project.Solution.Services.GetRequiredService<IContentControlService>();
                 var sourceText = document.GetTextSynchronously(CancellationToken.None);
 
                 var excerptService = document.Services.GetService<IDocumentExcerptService>();
                 if (excerptService != null)
                 {
-                    var classificationOptions = Presenter._globalOptions.GetClassificationOptions(document.Project.Language);
-                    var excerpt = Presenter.ThreadingContext.JoinableTaskFactory.Run(() => excerptService.TryExcerptAsync(document, sourceSpan, ExcerptMode.Tooltip, classificationOptions, CancellationToken.None));
+                    var classificationOptions = Presenter._globalOptions.GetClassificationOptions(
+                        document.Project.Language
+                    );
+                    var excerpt = Presenter.ThreadingContext.JoinableTaskFactory.Run(() =>
+                        excerptService.TryExcerptAsync(
+                            document,
+                            sourceSpan,
+                            ExcerptMode.Tooltip,
+                            classificationOptions,
+                            CancellationToken.None
+                        )
+                    );
                     if (excerpt != null)
                     {
                         // get tooltip from excerpt service
-                        var clonedBuffer = excerpt.Value.Content.CreateTextBufferWithRoslynContentType(document.Project.Solution.Workspace);
+                        var clonedBuffer =
+                            excerpt.Value.Content.CreateTextBufferWithRoslynContentType(
+                                document.Project.Solution.Workspace
+                            );
                         SetHighlightSpan(_spanKind, clonedBuffer, excerpt.Value.MappedSpan);
                         SetStaticClassifications(clonedBuffer, excerpt.Value.ClassifiedSpans);
 
-                        return controlService.CreateDisposableToolTip(clonedBuffer, EnvironmentColors.ToolWindowBackgroundBrushKey);
+                        return controlService.CreateDisposableToolTip(
+                            clonedBuffer,
+                            EnvironmentColors.ToolWindowBackgroundBrushKey
+                        );
                     }
                 }
 
@@ -246,41 +288,68 @@ namespace Microsoft.VisualStudio.LanguageServices.FindUsages
                 SetHighlightSpan(_spanKind, textBuffer, sourceSpan);
 
                 var contentSpan = GetRegionSpanForReference(sourceText, sourceSpan);
-                return controlService.CreateDisposableToolTip(document, textBuffer, contentSpan, EnvironmentColors.ToolWindowBackgroundBrushKey);
+                return controlService.CreateDisposableToolTip(
+                    document,
+                    textBuffer,
+                    contentSpan,
+                    EnvironmentColors.ToolWindowBackgroundBrushKey
+                );
             }
 
-            private static void SetStaticClassifications(ITextBuffer textBuffer, ImmutableArray<ClassifiedSpan> classifiedSpans)
+            private static void SetStaticClassifications(
+                ITextBuffer textBuffer,
+                ImmutableArray<ClassifiedSpan> classifiedSpans
+            )
             {
                 var key = PredefinedPreviewTaggerKeys.StaticClassificationSpansKey;
                 textBuffer.Properties.RemoveProperty(key);
                 textBuffer.Properties.AddProperty(key, classifiedSpans);
             }
 
-            private static void SetHighlightSpan(HighlightSpanKind spanKind, ITextBuffer textBuffer, TextSpan span)
+            private static void SetHighlightSpan(
+                HighlightSpanKind spanKind,
+                ITextBuffer textBuffer,
+                TextSpan span
+            )
             {
                 // Create an appropriate highlight span on that buffer for the reference.
-                var key = spanKind == HighlightSpanKind.Definition
-                    ? PredefinedPreviewTaggerKeys.DefinitionHighlightingSpansKey
+                var key =
+                    spanKind == HighlightSpanKind.Definition
+                        ? PredefinedPreviewTaggerKeys.DefinitionHighlightingSpansKey
                     : spanKind == HighlightSpanKind.WrittenReference
                         ? PredefinedPreviewTaggerKeys.WrittenReferenceHighlightingSpansKey
-                        : PredefinedPreviewTaggerKeys.ReferenceHighlightingSpansKey;
+                    : PredefinedPreviewTaggerKeys.ReferenceHighlightingSpansKey;
 
                 textBuffer.Properties.RemoveProperty(key);
-                textBuffer.Properties.AddProperty(key, new NormalizedSnapshotSpanCollection(span.ToSnapshotSpan(textBuffer.CurrentSnapshot)));
+                textBuffer.Properties.AddProperty(
+                    key,
+                    new NormalizedSnapshotSpanCollection(
+                        span.ToSnapshotSpan(textBuffer.CurrentSnapshot)
+                    )
+                );
             }
 
-            private static Span GetRegionSpanForReference(SourceText sourceText, TextSpan sourceSpan)
+            private static Span GetRegionSpanForReference(
+                SourceText sourceText,
+                TextSpan sourceSpan
+            )
             {
                 const int AdditionalLineCountPerSide = 3;
 
                 var referenceSpan = sourceSpan;
-                var lineNumber = sourceText.Lines.GetLineFromPosition(referenceSpan.Start).LineNumber;
+                var lineNumber = sourceText
+                    .Lines.GetLineFromPosition(referenceSpan.Start)
+                    .LineNumber;
                 var firstLineNumber = Math.Max(0, lineNumber - AdditionalLineCountPerSide);
-                var lastLineNumber = Math.Min(sourceText.Lines.Count - 1, lineNumber + AdditionalLineCountPerSide);
+                var lastLineNumber = Math.Min(
+                    sourceText.Lines.Count - 1,
+                    lineNumber + AdditionalLineCountPerSide
+                );
 
                 return Span.FromBounds(
                     sourceText.Lines[firstLineNumber].Start,
-                    sourceText.Lines[lastLineNumber].End);
+                    sourceText.Lines[lastLineNumber].End
+                );
             }
 
             public bool CanNavigateTo()
@@ -288,7 +357,8 @@ namespace Microsoft.VisualStudio.LanguageServices.FindUsages
                 if (_excerptResult.Document is SourceGeneratedDocument)
                 {
                     var workspace = _excerptResult.Document.Project.Solution.Workspace;
-                    var documentNavigationService = workspace.Services.GetService<IDocumentNavigationService>();
+                    var documentNavigationService =
+                        workspace.Services.GetService<IDocumentNavigationService>();
 
                     return documentNavigationService != null;
                 }
@@ -296,7 +366,10 @@ namespace Microsoft.VisualStudio.LanguageServices.FindUsages
                 return false;
             }
 
-            public async Task NavigateToAsync(NavigationOptions options, CancellationToken cancellationToken)
+            public async Task NavigateToAsync(
+                NavigationOptions options,
+                CancellationToken cancellationToken
+            )
             {
                 Contract.ThrowIfFalse(CanNavigateTo());
 
@@ -305,15 +378,19 @@ namespace Microsoft.VisualStudio.LanguageServices.FindUsages
                 // on disk.
 
                 var workspace = _excerptResult.Document.Project.Solution.Workspace;
-                var documentNavigationService = workspace.Services.GetRequiredService<IDocumentNavigationService>();
+                var documentNavigationService =
+                    workspace.Services.GetRequiredService<IDocumentNavigationService>();
 
-                await documentNavigationService.TryNavigateToSpanAsync(
-                    _threadingContext,
-                    workspace,
-                    _excerptResult.Document.Id,
-                    _excerptResult.Span,
-                    options,
-                    cancellationToken).ConfigureAwait(false);
+                await documentNavigationService
+                    .TryNavigateToSpanAsync(
+                        _threadingContext,
+                        workspace,
+                        _excerptResult.Document.Id,
+                        _excerptResult.Span,
+                        options,
+                        cancellationToken
+                    )
+                    .ConfigureAwait(false);
             }
         }
     }

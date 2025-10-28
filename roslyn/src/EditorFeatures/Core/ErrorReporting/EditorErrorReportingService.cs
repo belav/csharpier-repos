@@ -15,19 +15,25 @@ namespace Microsoft.CodeAnalysis.ErrorReporting
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public EditorErrorReportingService()
-        {
-        }
+        public EditorErrorReportingService() { }
 
         public string HostDisplayName => "host";
 
-        public void ShowDetailedErrorInfo(Exception exception)
-            => Logger.Log(FunctionId.Extension_Exception, exception.StackTrace);
+        public void ShowDetailedErrorInfo(Exception exception) =>
+            Logger.Log(FunctionId.Extension_Exception, exception.StackTrace);
 
-        public void ShowGlobalErrorInfo(string message, TelemetryFeatureName featureName, Exception? exception, params InfoBarUI[] items)
-            => Logger.Log(FunctionId.Extension_Exception, message);
+        public void ShowGlobalErrorInfo(
+            string message,
+            TelemetryFeatureName featureName,
+            Exception? exception,
+            params InfoBarUI[] items
+        ) => Logger.Log(FunctionId.Extension_Exception, message);
 
-        public void ShowFeatureNotAvailableErrorInfo(string message, TelemetryFeatureName featureName, Exception? exception)
+        public void ShowFeatureNotAvailableErrorInfo(
+            string message,
+            TelemetryFeatureName featureName,
+            Exception? exception
+        )
         {
             // telemetry has already been reported
         }

@@ -2,16 +2,17 @@
 // <copyright file="SoapSchemaMember.cs" company="Microsoft">
 //     Copyright (c) Microsoft Corporation.  All rights reserved.
 // </copyright>
-// <owner current="true" primary="true">Microsoft</owner>                                                                
+// <owner current="true" primary="true">Microsoft</owner>
 //------------------------------------------------------------------------------
 
-namespace System.Xml.Serialization {
-
+namespace System.Xml.Serialization
+{
     using System;
 
     /// <include file='doc\SoapSchemaMember.uex' path='docs/doc[@for="SoapSchemaMember"]/*' />
     /// <internalonly/>
-    public class SoapSchemaMember {
+    public class SoapSchemaMember
+    {
         string memberName;
         XmlQualifiedName type = XmlQualifiedName.Empty;
 
@@ -19,7 +20,8 @@ namespace System.Xml.Serialization {
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public XmlQualifiedName MemberType {
+        public XmlQualifiedName MemberType
+        {
             get { return type; }
             set { type = value; }
         }
@@ -28,11 +30,10 @@ namespace System.Xml.Serialization {
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public string MemberName {
+        public string MemberName
+        {
             get { return memberName == null ? string.Empty : memberName; }
             set { memberName = value; }
         }
     }
-
-
 }

@@ -1,5 +1,4 @@
 ﻿<Project>
-
   <Import Project="$([MSBuild]::GetDirectoryNameOfFileAbove($(MSBuildThisFileDirectory)..\, Directory.Build.props))\Directory.Build.props" />
 
   <PropertyGroup>
@@ -8,7 +7,6 @@
       Remove when fixed.
     -->
     <HasRuntimeOutput>true</HasRuntimeOutput>
-
   </PropertyGroup>
 
   <!-- Temporarary until all of aspnet/WebSocket's dependencies have been merged into this repo -->
@@ -23,5 +21,4 @@
     <MicrosoftAspNetCoreServerKestrelVersion>2.2.0</MicrosoftAspNetCoreServerKestrelVersion>
     <MicrosoftAspNetCoreStaticFilesVersion>2.2.0</MicrosoftAspNetCoreStaticFilesVersion>
   </PropertyGroup>
-
 </Project>

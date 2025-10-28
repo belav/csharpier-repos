@@ -17,11 +17,9 @@ namespace Microsoft.CodeAnalysis.CSharp
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public CSharpSyntaxFactsServiceFactory()
-        {
-        }
+        public CSharpSyntaxFactsServiceFactory() { }
 
-        public ILanguageService CreateLanguageService(HostLanguageServices languageServices)
-            => CSharpSyntaxFactsService.Instance;
+        public ILanguageService CreateLanguageService(HostLanguageServices languageServices) =>
+            CSharpSyntaxFactsService.Instance;
     }
 }

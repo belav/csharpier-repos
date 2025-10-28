@@ -20,10 +20,10 @@ namespace Microsoft.NET.Build.Tasks
 
     internal static class MessageLevelExtensions
     {
-        public static MessageLevel ToLevel(this MessageImportance importance)
-            => (MessageLevel)(importance);
+        public static MessageLevel ToLevel(this MessageImportance importance) =>
+            (MessageLevel)(importance);
 
-        public static MessageImportance ToImportance(this MessageLevel level)
-            => level >= 0 ? (MessageImportance)level : throw new InvalidCastException();
+        public static MessageImportance ToImportance(this MessageLevel level) =>
+            level >= 0 ? (MessageImportance)level : throw new InvalidCastException();
     }
 }

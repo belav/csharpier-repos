@@ -22,17 +22,33 @@ internal class TestOption : IOption
 
 internal class TestOption<T> : Option<T>
 {
-    public TestOption(string feature = "test", string name = "test", T? defaultValue = default, OptionStorageLocation[]? storageLocations = null)
-        : base(feature, name, defaultValue!, storageLocations ?? Array.Empty<OptionStorageLocation>())
-    {
-    }
+    public TestOption(
+        string feature = "test",
+        string name = "test",
+        T? defaultValue = default,
+        OptionStorageLocation[]? storageLocations = null
+    )
+        : base(
+            feature,
+            name,
+            defaultValue!,
+            storageLocations ?? Array.Empty<OptionStorageLocation>()
+        ) { }
 }
 
 internal class PerLanguageTestOption<T> : PerLanguageOption<T>
 {
-    public PerLanguageTestOption(string feature = "test", string name = "test", T? defaultValue = default, OptionStorageLocation[]? storageLocations = null)
-        : base(feature, name, defaultValue!, storageLocations ?? Array.Empty<OptionStorageLocation>())
-    {
-    }
+    public PerLanguageTestOption(
+        string feature = "test",
+        string name = "test",
+        T? defaultValue = default,
+        OptionStorageLocation[]? storageLocations = null
+    )
+        : base(
+            feature,
+            name,
+            defaultValue!,
+            storageLocations ?? Array.Empty<OptionStorageLocation>()
+        ) { }
 }
 #pragma warning restore

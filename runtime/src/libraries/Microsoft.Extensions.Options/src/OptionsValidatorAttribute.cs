@@ -10,7 +10,5 @@ namespace Microsoft.Extensions.Options
     /// Triggers the automatic generation of the implementation of <see cref="Microsoft.Extensions.Options.IValidateOptions{T}" /> at compile time.
     /// </summary>
     [AttributeUsage(AttributeTargets.Class | AttributeTargets.Struct)]
-    public sealed class OptionsValidatorAttribute : Attribute
-    {
-    }
+    public sealed class OptionsValidatorAttribute : Attribute { }
 }

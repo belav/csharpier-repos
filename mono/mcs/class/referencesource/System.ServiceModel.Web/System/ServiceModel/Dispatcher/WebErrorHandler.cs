@@ -24,7 +24,11 @@ namespace System.ServiceModel.Dispatcher
         ContractDescription contractDescription;
         bool includeExceptionDetailInFaults;
 
-        public WebErrorHandler(WebHttpBehavior webHttpBehavior, ContractDescription contractDescription, bool includeExceptionDetailInFaults)
+        public WebErrorHandler(
+            WebHttpBehavior webHttpBehavior,
+            ContractDescription contractDescription,
+            bool includeExceptionDetailInFaults
+        )
         {
             this.webHttpBehavior = webHttpBehavior;
             this.contractDescription = contractDescription;
@@ -59,31 +63,74 @@ namespace System.ServiceModel.Dispatcher
                     WebOperationContext context = WebOperationContext.Current;
                     context.OutgoingResponse.StatusCode = webFaultException.StatusCode;
                     string operationName;
-                    if (OperationContext.Current.IncomingMessageProperties.TryGetValue<string>(WebHttpDispatchOperationSelector.HttpOperationNamePropertyName, out operationName))
+                    if (
+                        OperationContext.Current.IncomingMessageProperties.TryGetValue<string>(
+                            WebHttpDispatchOperationSelector.HttpOperationNamePropertyName,
+                            out operationName
+                        )
+                    )
                     {
-                        OperationDescription description = this.contractDescription.Operations.Find(operationName);
-                        bool isXmlSerializerFaultFormat = WebHttpBehavior.IsXmlSerializerFaultFormat(description);
-                        if (isXmlSerializerFaultFormat && WebOperationContext.Current.OutgoingResponse.Format == WebMessageFormat.Json)
+                        OperationDescription description = this.contractDescription.Operations.Find(
+                            operationName
+                        );
+                        bool isXmlSerializerFaultFormat =
+                            WebHttpBehavior.IsXmlSerializerFaultFormat(description);
+                        if (
+                            isXmlSerializerFaultFormat
+                            && WebOperationContext.Current.OutgoingResponse.Format
+                                == WebMessageFormat.Json
+                        )
                         {
-                            throw System.ServiceModel.DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(SR2.GetString(SR2.JsonFormatRequiresDataContract, description.Name, description.DeclaringContract.Name, description.DeclaringContract.Namespace)));
+                            throw System.ServiceModel.DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                                new InvalidOperationException(
+                                    SR2.GetString(
+                                        SR2.JsonFormatRequiresDataContract,
+                                        description.Name,
+                                        description.DeclaringContract.Name,
+                                        description.DeclaringContract.Namespace
+                                    )
+                                )
+                            );
                         }
-                        WebMessageFormat? nullableFormat = !isXmlSerializerFaultFormat ? context.OutgoingResponse.Format : WebMessageFormat.Xml;
-                        WebMessageFormat format = nullableFormat.HasValue ? nullableFormat.Value : this.webHttpBehavior.GetResponseFormat(description);
+                        WebMessageFormat? nullableFormat = !isXmlSerializerFaultFormat
+                            ? context.OutgoingResponse.Format
+                            : WebMessageFormat.Xml;
+                        WebMessageFormat format = nullableFormat.HasValue
+                            ? nullableFormat.Value
+                            : this.webHttpBehavior.GetResponseFormat(description);
                         if (webFaultException.DetailObject != null)
                         {
                             switch (format)
                             {
                                 case WebMessageFormat.Json:
-                                    fault = context.CreateJsonResponse(webFaultException.DetailObject, new DataContractJsonSerializer(webFaultException.DetailType, webFaultException.KnownTypes));
+                                    fault = context.CreateJsonResponse(
+                                        webFaultException.DetailObject,
+                                        new DataContractJsonSerializer(
+                                            webFaultException.DetailType,
+                                            webFaultException.KnownTypes
+                                        )
+                                    );
                                     break;
                                 case WebMessageFormat.Xml:
                                     if (isXmlSerializerFaultFormat)
                                     {
-                                        fault = context.CreateXmlResponse(webFaultException.DetailObject, new XmlSerializer(webFaultException.DetailType, webFaultException.KnownTypes));
+                                        fault = context.CreateXmlResponse(
+                                            webFaultException.DetailObject,
+                                            new XmlSerializer(
+                                                webFaultException.DetailType,
+                                                webFaultException.KnownTypes
+                                            )
+                                        );
                                     }
                                     else
                                     {
-                                        fault = context.CreateXmlResponse(webFaultException.DetailObject, new DataContractSerializer(webFaultException.DetailType, webFaultException.KnownTypes));
+                                        fault = context.CreateXmlResponse(
+                                            webFaultException.DetailObject,
+                                            new DataContractSerializer(
+                                                webFaultException.DetailType,
+                                                webFaultException.KnownTypes
+                                            )
+                                        );
                                     }
                                     break;
                             }
@@ -91,27 +138,36 @@ namespace System.ServiceModel.Dispatcher
                         else
                         {
                             HttpResponseMessageProperty property;
-                            if (OperationContext.Current.OutgoingMessageProperties.TryGetValue<HttpResponseMessageProperty>(HttpResponseMessageProperty.Name, out property) &&
-                                property != null)
+                            if (
+                                OperationContext.Current.OutgoingMessageProperties.TryGetValue<HttpResponseMessageProperty>(
+                                    HttpResponseMessageProperty.Name,
+                                    out property
+                                )
+                                && property != null
+                            )
                             {
                                 property.SuppressEntityBody = true;
                             }
                             if (format == WebMessageFormat.Json)
                             {
-                                fault.Properties.Add(WebBodyFormatMessageProperty.Name, WebBodyFormatMessageProperty.JsonProperty);
+                                fault.Properties.Add(
+                                    WebBodyFormatMessageProperty.Name,
+                                    WebBodyFormatMessageProperty.JsonProperty
+                                );
                             }
                         }
                     }
                     else
                     {
-                        throw System.ServiceModel.DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(SR2.OperationNameNotFound));
+                        throw System.ServiceModel.DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                            new InvalidOperationException(SR2.OperationNameNotFound)
+                        );
                     }
                 }
                 else
                 {
                     fault = CreateHtmlResponse(error);
                 }
-
             }
             catch (Exception ex)
             {
@@ -121,7 +177,12 @@ namespace System.ServiceModel.Dispatcher
                 }
                 if (System.ServiceModel.DiagnosticUtility.ShouldTraceWarning)
                 {
-                    System.ServiceModel.DiagnosticUtility.TraceHandledException(new InvalidOperationException(SR2.GetString(SR2.HelpPageFailedToCreateErrorMessage)), TraceEventType.Warning);
+                    System.ServiceModel.DiagnosticUtility.TraceHandledException(
+                        new InvalidOperationException(
+                            SR2.GetString(SR2.HelpPageFailedToCreateErrorMessage)
+                        ),
+                        TraceEventType.Warning
+                    );
                 }
 
                 WebOperationContext.Current.OutgoingResponse.StatusCode = HttpStatusCode.BadRequest;
@@ -135,32 +196,58 @@ namespace System.ServiceModel.Dispatcher
             Uri helpUri = null;
             if (WebOperationContext.Current != null)
             {
-                helpUri = this.webHttpBehavior.HelpUri != null ? UriTemplate.RewriteUri(this.webHttpBehavior.HelpUri, WebOperationContext.Current.IncomingRequest.Headers[HttpRequestHeader.Host]) : null;
+                helpUri =
+                    this.webHttpBehavior.HelpUri != null
+                        ? UriTemplate.RewriteUri(
+                            this.webHttpBehavior.HelpUri,
+                            WebOperationContext.Current.IncomingRequest.Headers[
+                                HttpRequestHeader.Host
+                            ]
+                        )
+                        : null;
             }
             StreamBodyWriter bodyWriter;
             if (this.includeExceptionDetailInFaults)
             {
-                bodyWriter = StreamBodyWriter.CreateStreamBodyWriter(s => HelpHtmlBuilder.CreateServerErrorPage(helpUri, error).Save(s, SaveOptions.OmitDuplicateNamespaces));
+                bodyWriter = StreamBodyWriter.CreateStreamBodyWriter(s =>
+                    HelpHtmlBuilder
+                        .CreateServerErrorPage(helpUri, error)
+                        .Save(s, SaveOptions.OmitDuplicateNamespaces)
+                );
             }
             else
             {
-                bodyWriter = StreamBodyWriter.CreateStreamBodyWriter(s => HelpHtmlBuilder.CreateServerErrorPage(helpUri, null).Save(s, SaveOptions.OmitDuplicateNamespaces));
+                bodyWriter = StreamBodyWriter.CreateStreamBodyWriter(s =>
+                    HelpHtmlBuilder
+                        .CreateServerErrorPage(helpUri, null)
+                        .Save(s, SaveOptions.OmitDuplicateNamespaces)
+                );
             }
             Message response = new HttpStreamMessage(bodyWriter);
-            response.Properties.Add(WebBodyFormatMessageProperty.Name, WebBodyFormatMessageProperty.RawProperty);
+            response.Properties.Add(
+                WebBodyFormatMessageProperty.Name,
+                WebBodyFormatMessageProperty.RawProperty
+            );
 
-            HttpResponseMessageProperty responseProperty = GetResponseProperty(WebOperationContext.Current, response);
+            HttpResponseMessageProperty responseProperty = GetResponseProperty(
+                WebOperationContext.Current,
+                response
+            );
             if (!responseProperty.HasStatusCodeBeenSet)
             {
                 responseProperty.StatusCode = HttpStatusCode.BadRequest;
             }
-            responseProperty.Headers[HttpResponseHeader.ContentType] = Atom10Constants.HtmlMediaType;
+            responseProperty.Headers[HttpResponseHeader.ContentType] =
+                Atom10Constants.HtmlMediaType;
             return response;
         }
 
-        static HttpResponseMessageProperty GetResponseProperty(WebOperationContext currentContext, Message response)
+        static HttpResponseMessageProperty GetResponseProperty(
+            WebOperationContext currentContext,
+            Message response
+        )
         {
-            HttpResponseMessageProperty responseProperty; 
+            HttpResponseMessageProperty responseProperty;
             if (currentContext != null)
             {
                 responseProperty = currentContext.OutgoingResponse.MessageProperty;

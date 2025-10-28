@@ -7,11 +7,10 @@ public class CompositeVehicle : PoweredVehicle
 {
     public Vehicle AttachedVehicle { get; set; }
 
-    public override bool Equals(object obj)
-        => obj is CompositeVehicle other
-            && base.Equals(other)
-            && Equals(AttachedVehicle, other.AttachedVehicle);
+    public override bool Equals(object obj) =>
+        obj is CompositeVehicle other
+        && base.Equals(other)
+        && Equals(AttachedVehicle, other.AttachedVehicle);
 
-    public override int GetHashCode()
-        => HashCode.Combine(base.GetHashCode(), AttachedVehicle);
+    public override int GetHashCode() => HashCode.Combine(base.GetHashCode(), AttachedVehicle);
 }

@@ -76,10 +76,18 @@ namespace System
                 // "dynamic" and "static" variables are much less often used (the "dynamic" and "static"
                 // terminology appears to just refer to two different collections rather than to any semantic
                 // meaning).  As such, we'll only initialize them if we really need them.
-                FormatParam[]? dynamicVars = null, staticVars = null;
+                FormatParam[]? dynamicVars = null,
+                    staticVars = null;
 
                 int pos = 0;
-                return EvaluateInternal(format, ref pos, args, stack, ref dynamicVars, ref staticVars);
+                return EvaluateInternal(
+                    format,
+                    ref pos,
+                    args,
+                    stack,
+                    ref dynamicVars,
+                    ref staticVars
+                );
 
                 // EvaluateInternal may throw IndexOutOfRangeException and InvalidOperationException
                 // if the format string is malformed or if it's inconsistent with the parameters provided.
@@ -98,8 +106,13 @@ namespace System
             /// of recursion, and a 0 at the top if we're still inside of a conditional that requires more processing.
             /// </returns>
             private static string EvaluateInternal(
-                string format, ref int pos, FormatParam[] args, Stack<FormatParam> stack,
-                ref FormatParam[]? dynamicVars, ref FormatParam[]? staticVars)
+                string format,
+                ref int pos,
+                FormatParam[] args,
+                Stack<FormatParam> stack,
+                ref FormatParam[]? dynamicVars,
+                ref FormatParam[]? staticVars
+            )
             {
                 // Create a StringBuilder to store the output of this processing.  We use the format's length as an
                 // approximation of an upper-bound for how large the output will be, though with parameter processing,
@@ -212,13 +225,23 @@ namespace System
                         case 'P': // Pop a value and store it into either static or dynamic variables based on whether the a-z variable is capitalized
                             pos++;
                             int setIndex;
-                            FormatParam[] targetVars = GetDynamicOrStaticVariables(format[pos], ref dynamicVars, ref staticVars, out setIndex);
+                            FormatParam[] targetVars = GetDynamicOrStaticVariables(
+                                format[pos],
+                                ref dynamicVars,
+                                ref staticVars,
+                                out setIndex
+                            );
                             targetVars[setIndex] = stack.Pop();
                             break;
                         case 'g': // Push a static or dynamic variable; which is based on whether the a-z variable is capitalized
                             pos++;
                             int getIndex;
-                            FormatParam[] sourceVars = GetDynamicOrStaticVariables(format[pos], ref dynamicVars, ref staticVars, out getIndex);
+                            FormatParam[] sourceVars = GetDynamicOrStaticVariables(
+                                format[pos],
+                                ref dynamicVars,
+                                ref staticVars,
+                                out getIndex
+                            );
                             stack.Push(sourceVars[getIndex]);
                             break;
 
@@ -230,39 +253,38 @@ namespace System
                         case 'm':
                         case '^': // arithmetic
                         case '&':
-                        case '|':                                         // bitwise
+                        case '|': // bitwise
                         case '=':
                         case '>':
-                        case '<':                               // comparison
+                        case '<': // comparison
                         case 'A':
-                        case 'O':                                         // logical
+                        case 'O': // logical
                             int second = stack.Pop().Int32; // it's a stack... the second value was pushed last
                             int first = stack.Pop().Int32;
                             char c = format[pos];
                             stack.Push(
-                                c == '+' ? (first + second) :
-                                c == '-' ? (first - second) :
-                                c == '*' ? (first * second) :
-                                c == '/' ? (first / second) :
-                                c == 'm' ? (first % second) :
-                                c == '^' ? (first ^ second) :
-                                c == '&' ? (first & second) :
-                                c == '|' ? (first | second) :
-                                c == '=' ? AsInt(first == second) :
-                                c == '>' ? AsInt(first > second) :
-                                c == '<' ? AsInt(first < second) :
-                                c == 'A' ? AsInt(AsBool(first) && AsBool(second)) :
-                                c == 'O' ? AsInt(AsBool(first) || AsBool(second)) :
-                                0); // not possible; we just validated above
+                                c == '+' ? (first + second)
+                                : c == '-' ? (first - second)
+                                : c == '*' ? (first * second)
+                                : c == '/' ? (first / second)
+                                : c == 'm' ? (first % second)
+                                : c == '^' ? (first ^ second)
+                                : c == '&' ? (first & second)
+                                : c == '|' ? (first | second)
+                                : c == '=' ? AsInt(first == second)
+                                : c == '>' ? AsInt(first > second)
+                                : c == '<' ? AsInt(first < second)
+                                : c == 'A' ? AsInt(AsBool(first) && AsBool(second))
+                                : c == 'O' ? AsInt(AsBool(first) || AsBool(second))
+                                : 0
+                            ); // not possible; we just validated above
                             break;
 
                         // Unary operations
                         case '!':
                         case '~':
                             int value = stack.Pop().Int32;
-                            stack.Push(
-                                format[pos] == '!' ? AsInt(!AsBool(value)) :
-                                ~value);
+                            stack.Push(format[pos] == '!' ? AsInt(!AsBool(value)) : ~value);
                             break;
 
                         // Some terminfo files appear to have a fairly liberal interpretation of %i. The spec states that %i increments the first two arguments,
@@ -290,7 +312,14 @@ namespace System
                             // Regardless of whether it's true, run the then-part to get past it.
                             // If the conditional was true, output the then results.
                             pos++;
-                            string thenResult = EvaluateInternal(format, ref pos, args, stack, ref dynamicVars, ref staticVars);
+                            string thenResult = EvaluateInternal(
+                                format,
+                                ref pos,
+                                args,
+                                stack,
+                                ref dynamicVars,
+                                ref staticVars
+                            );
                             if (conditionalResult)
                             {
                                 output.Append(thenResult);
@@ -303,7 +332,14 @@ namespace System
                             {
                                 // Process the else clause, and if the conditional was false, output the else results.
                                 pos++;
-                                string elseResult = EvaluateInternal(format, ref pos, args, stack, ref dynamicVars, ref staticVars);
+                                string elseResult = EvaluateInternal(
+                                    format,
+                                    ref pos,
+                                    args,
+                                    stack,
+                                    ref dynamicVars,
+                                    ref staticVars
+                                );
                                 if (!conditionalResult)
                                 {
                                     output.Append(elseResult);
@@ -345,12 +381,18 @@ namespace System
             /// <summary>Converts an Int32 to a Boolean, with 0 meaning false and all non-zero values meaning true.</summary>
             /// <param name="i">The integer value to convert.</param>
             /// <returns>true if the integer was non-zero; otherwise, false.</returns>
-            private static bool AsBool(int i) { return i != 0; }
+            private static bool AsBool(int i)
+            {
+                return i != 0;
+            }
 
             /// <summary>Converts a Boolean to an Int32, with true meaning 1 and false meaning 0.</summary>
             /// <param name="b">The Boolean value to convert.</param>
             /// <returns>1 if the Boolean is true; otherwise, 0.</returns>
-            private static int AsInt(bool b) { return b ? 1 : 0; }
+            private static int AsInt(bool b)
+            {
+                return b ? 1 : 0;
+            }
 
             /// <summary>Formats an argument into a printf-style format string.</summary>
             /// <param name="format">The printf-style format string.</param>
@@ -362,9 +404,10 @@ namespace System
 
                 // Determine how much space is needed to store the formatted string.
                 string? stringArg = arg as string;
-                int neededLength = stringArg != null ?
-                    Interop.Sys.SNPrintF(null, 0, format, stringArg) :
-                    Interop.Sys.SNPrintF(null, 0, format, (int)arg);
+                int neededLength =
+                    stringArg != null
+                        ? Interop.Sys.SNPrintF(null, 0, format, stringArg)
+                        : Interop.Sys.SNPrintF(null, 0, format, (int)arg);
                 if (neededLength == 0)
                 {
                     return string.Empty;
@@ -378,9 +421,10 @@ namespace System
                 byte[] bytes = new byte[neededLength + 1]; // extra byte for the null terminator
                 fixed (byte* ptr = &bytes[0])
                 {
-                    int length = stringArg != null ?
-                        Interop.Sys.SNPrintF(ptr, bytes.Length, format, stringArg) :
-                        Interop.Sys.SNPrintF(ptr, bytes.Length, format, (int)arg);
+                    int length =
+                        stringArg != null
+                            ? Interop.Sys.SNPrintF(ptr, bytes.Length, format, stringArg)
+                            : Interop.Sys.SNPrintF(ptr, bytes.Length, format, (int)arg);
                     if (length != neededLength)
                     {
                         throw new InvalidOperationException(SR.InvalidOperation_PrintF);
@@ -396,7 +440,11 @@ namespace System
             /// <param name="index">The index to use to index into the variables.</param>
             /// <returns>The variables collection.</returns>
             private static FormatParam[] GetDynamicOrStaticVariables(
-                char c, ref FormatParam[]? dynamicVars, ref FormatParam[]? staticVars, out int index)
+                char c,
+                ref FormatParam[]? dynamicVars,
+                ref FormatParam[]? staticVars,
+                out int index
+            )
             {
                 if (char.IsAsciiLetterUpper(c))
                 {
@@ -408,7 +456,8 @@ namespace System
                     index = c - 'a';
                     return dynamicVars ??= new FormatParam[26]; // one slot for each letter of alphabet
                 }
-                else throw new InvalidOperationException(SR.IO_TermInfoInvalid);
+                else
+                    throw new InvalidOperationException(SR.IO_TermInfoInvalid);
             }
 
             /// <summary>
@@ -420,16 +469,19 @@ namespace System
             {
                 /// <summary>The integer stored in the parameter.</summary>
                 private readonly int _int32;
+
                 /// <summary>The string stored in the parameter.</summary>
                 private readonly string? _string; // null means an Int32 is stored
 
                 /// <summary>Initializes the parameter with an integer value.</summary>
                 /// <param name="value">The value to be stored in the parameter.</param>
-                public FormatParam(int value) : this(value, null) { }
+                public FormatParam(int value)
+                    : this(value, null) { }
 
                 /// <summary>Initializes the parameter with a string value.</summary>
                 /// <param name="value">The value to be stored in the parameter.</param>
-                public FormatParam(string? value) : this(0, value ?? string.Empty) { }
+                public FormatParam(string? value)
+                    : this(0, value ?? string.Empty) { }
 
                 /// <summary>Initializes the parameter.</summary>
                 /// <param name="intValue">The integer value.</param>
@@ -453,13 +505,22 @@ namespace System
                 }
 
                 /// <summary>Gets the integer value of the parameter. If a string was stored, 0 is returned.</summary>
-                public int Int32 { get { return _int32; } }
+                public int Int32
+                {
+                    get { return _int32; }
+                }
 
                 /// <summary>Gets the string value of the parameter.  If an Int32 or a null String were stored, an empty string is returned.</summary>
-                public string String { get { return _string ?? string.Empty; } }
+                public string String
+                {
+                    get { return _string ?? string.Empty; }
+                }
 
                 /// <summary>Gets the string or the integer value as an object.</summary>
-                public object Object { get { return _string ?? (object)_int32; } }
+                public object Object
+                {
+                    get { return _string ?? (object)_int32; }
+                }
             }
         }
     }

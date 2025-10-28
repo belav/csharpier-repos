@@ -1,5 +1,4 @@
 <Project Sdk="Microsoft.NET.Sdk">
-
   <PropertyGroup>
     <TargetFramework>$(NetCoreAppCurrent)</TargetFramework>
     <OutputType>Exe</OutputType>
@@ -8,9 +7,8 @@
     <SelfContained>true</SelfContained>
   </PropertyGroup>
 
-<ItemGroup>
-   <Compile Remove="Location\**" />
-   <ProjectReference Include="Location\Location.csproj"/>
-</ItemGroup>
-
+  <ItemGroup>
+    <Compile Remove="Location\**" />
+    <ProjectReference Include="Location\Location.csproj" />
+  </ItemGroup>
 </Project>

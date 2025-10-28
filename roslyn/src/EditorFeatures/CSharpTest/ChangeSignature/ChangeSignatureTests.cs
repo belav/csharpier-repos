@@ -64,7 +64,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ChangeSignature
                 LanguageNames.CSharp,
                 markup: markup,
                 updatedSignature: new[] { 1, 0 },
-                expectedUpdatedInvocationDocumentCode: expectedCode);
+                expectedUpdatedInvocationDocumentCode: expectedCode
+            );
         }
 
         [Fact]
@@ -93,7 +94,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ChangeSignature
                 LanguageNames.CSharp,
                 markup: markup,
                 updatedSignature: new[] { 1, 0 },
-                expectedUpdatedInvocationDocumentCode: expectedCode);
+                expectedUpdatedInvocationDocumentCode: expectedCode
+            );
         }
 
         [Fact]

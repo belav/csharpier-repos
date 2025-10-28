@@ -4,5 +4,4 @@
   <PropertyGroup>
     <IdentityTestSharedSourceRoot>$(MSBuildThisFileDirectory)test\Shared\</IdentityTestSharedSourceRoot>
   </PropertyGroup>
-
 </Project>

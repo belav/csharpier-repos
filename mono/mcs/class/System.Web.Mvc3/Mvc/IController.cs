@@ -1,7 +1,9 @@
-﻿namespace System.Web.Mvc {
+﻿namespace System.Web.Mvc
+{
     using System.Web.Routing;
 
-    public interface IController {
+    public interface IController
+    {
         void Execute(RequestContext requestContext);
     }
 }

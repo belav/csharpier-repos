@@ -44,7 +44,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.RenameTracking
             // Store committed sessions so they can be restored on undo/redo. The undo transactions
             // may live beyond the lifetime of the buffer tracked by this StateMachine, so storing
             // them here allows them to be correctly cleaned up when the buffer goes away.
-            private readonly IList<TrackingSession> _committedSessions = new List<TrackingSession>();
+            private readonly IList<TrackingSession> _committedSessions =
+                new List<TrackingSession>();
 
             private int _refCount;
 
@@ -61,7 +62,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.RenameTracking
                 IInlineRenameService inlineRenameService,
                 IDiagnosticAnalyzerService diagnosticAnalyzerService,
                 IGlobalOptionService globalOptions,
-                IAsynchronousOperationListener asyncListener)
+                IAsynchronousOperationListener asyncListener
+            )
             {
                 ThreadingContext = threadingContext;
                 _buffer = buffer;
@@ -82,7 +84,12 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.RenameTracking
                     return;
                 }
 
-                using (Logger.LogBlock(FunctionId.Rename_Tracking_BufferChanged, CancellationToken.None))
+                using (
+                    Logger.LogBlock(
+                        FunctionId.Rename_Tracking_BufferChanged,
+                        CancellationToken.None
+                    )
+                )
                 {
                     // When the buffer changes, several things might be happening:
                     // 1. If a non-identifier character has been added or deleted, we stop tracking
@@ -113,7 +120,9 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.RenameTracking
                     // There's an existing session. Continue that session if the current change is
                     // contained inside the tracking span.
 
-                    var trackingSpanInNewSnapshot = this.TrackingSession.TrackingSpan.GetSpan(e.After);
+                    var trackingSpanInNewSnapshot = this.TrackingSession.TrackingSpan.GetSpan(
+                        e.After
+                    );
                     if (trackingSpanInNewSnapshot.Contains(change.NewSpan))
                     {
                         // Continuing an existing tracking session. If there may have been a tag
@@ -145,8 +154,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.RenameTracking
                     return true;
                 }
 
-                // The editor will replace virtual space with spaces and/or tabs when typing on a 
-                // previously blank line. Trim these characters from the start of change.NewText. If 
+                // The editor will replace virtual space with spaces and/or tabs when typing on a
+                // previously blank line. Trim these characters from the start of change.NewText. If
                 // the resulting change is empty (the user just typed a <space>), clear the session.
                 var changedText = change.OldText + change.NewText.TrimStart(' ', '\t');
                 if (changedText.IsEmpty())
@@ -179,18 +188,28 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.RenameTracking
                 var leftSidePosition = change.OldPosition;
                 var rightSidePosition = change.OldPosition + change.OldText.Length;
 
-                while (leftSidePosition > 0 && IsTrackableCharacter(syntaxFactsService, beforeText[leftSidePosition - 1]))
+                while (
+                    leftSidePosition > 0
+                    && IsTrackableCharacter(syntaxFactsService, beforeText[leftSidePosition - 1])
+                )
                 {
                     leftSidePosition--;
                 }
 
-                while (rightSidePosition < beforeText.Length && IsTrackableCharacter(syntaxFactsService, beforeText[rightSidePosition]))
+                while (
+                    rightSidePosition < beforeText.Length
+                    && IsTrackableCharacter(syntaxFactsService, beforeText[rightSidePosition])
+                )
                 {
                     rightSidePosition++;
                 }
 
                 var originalSpan = new Span(leftSidePosition, rightSidePosition - leftSidePosition);
-                this.TrackingSession = new TrackingSession(this, new SnapshotSpan(eventArgs.Before, originalSpan), _asyncListener);
+                this.TrackingSession = new TrackingSession(
+                    this,
+                    new SnapshotSpan(eventArgs.Before, originalSpan),
+                    _asyncListener
+                );
             }
 
             private static bool IsTrackableCharacter(ISyntaxFactsService syntaxFactsService, char c)
@@ -199,7 +218,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.RenameTracking
                 // not identifier start characters). If an intermediate name is not valid, the smart
                 // tag will not be shown due to later checks. Also allow escape chars anywhere as
                 // they might be in the middle of a complex edit.
-                return syntaxFactsService.IsIdentifierPartCharacter(c) || syntaxFactsService.IsIdentifierEscapeCharacter(c);
+                return syntaxFactsService.IsIdentifierPartCharacter(c)
+                    || syntaxFactsService.IsIdentifierEscapeCharacter(c);
             }
 
             public bool ClearTrackingSession()
@@ -230,21 +250,26 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.RenameTracking
             {
                 ThreadingContext.ThrowIfNotOnUIThread();
 
-                if (this.TrackingSession != null && this.TrackingSession.IsDefinitelyRenamableIdentifier())
+                if (
+                    this.TrackingSession != null
+                    && this.TrackingSession.IsDefinitelyRenamableIdentifier()
+                )
                 {
-                    var document = _buffer.CurrentSnapshot.GetOpenDocumentInCurrentContextWithChanges();
+                    var document =
+                        _buffer.CurrentSnapshot.GetOpenDocumentInCurrentContextWithChanges();
                     if (document != null)
                     {
                         // When rename tracking is dismissed via escape, we no longer wish to
                         // provide a diagnostic/codefix, but nothing has changed in the workspace
-                        // to trigger the diagnostic system to reanalyze, so we trigger it 
+                        // to trigger the diagnostic system to reanalyze, so we trigger it
                         // manually.
 
                         _diagnosticAnalyzerService?.Reanalyze(
                             document.Project.Solution.Workspace,
                             projectIds: null,
                             documentIds: SpecializedCollections.SingletonEnumerable(document.Id),
-                            highPriority: true);
+                            highPriority: true
+                        );
                     }
 
                     // Disallow the existing TrackingSession from triggering IdentifierFound.
@@ -276,7 +301,10 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.RenameTracking
 
             public bool CanInvokeRename(
                 [NotNullWhen(true)] out TrackingSession trackingSession,
-                bool isSmartTagCheck = false, bool waitForResult = false, CancellationToken cancellationToken = default)
+                bool isSmartTagCheck = false,
+                bool waitForResult = false,
+                CancellationToken cancellationToken = default
+            )
             {
                 // This needs to be able to run on a background thread for the diagnostic.
 
@@ -284,29 +312,47 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.RenameTracking
                 if (trackingSession == null)
                     return false;
 
-                return TryGetSyntaxFactsService(out var syntaxFactsService) && TryGetLanguageHeuristicsService(out var languageHeuristicsService) &&
-                    trackingSession.CanInvokeRename(syntaxFactsService, languageHeuristicsService, isSmartTagCheck, waitForResult, cancellationToken);
+                return TryGetSyntaxFactsService(out var syntaxFactsService)
+                    && TryGetLanguageHeuristicsService(out var languageHeuristicsService)
+                    && trackingSession.CanInvokeRename(
+                        syntaxFactsService,
+                        languageHeuristicsService,
+                        isSmartTagCheck,
+                        waitForResult,
+                        cancellationToken
+                    );
             }
 
             internal (CodeAction action, TextSpan renameSpan) TryGetCodeAction(
-                Document document, SourceText text, TextSpan userSpan,
+                Document document,
+                SourceText text,
+                TextSpan userSpan,
                 IEnumerable<IRefactorNotifyService> refactorNotifyServices,
                 ITextUndoHistoryRegistry undoHistoryRegistry,
-                CancellationToken cancellationToken)
+                CancellationToken cancellationToken
+            )
             {
                 try
                 {
-                    // This can be called on a background thread. We are being asked whether a 
-                    // lightbulb should be shown for the given document, but we only know about the 
+                    // This can be called on a background thread. We are being asked whether a
+                    // lightbulb should be shown for the given document, but we only know about the
                     // current state of the buffer. Compare the text to see if we should bail early.
                     // Even if the text is the same, the buffer may change on the UI thread during this
-                    // method. If it does, we may give an incorrect response, but the diagnostics 
+                    // method. If it does, we may give an incorrect response, but the diagnostics
                     // engine will know that the document changed and not display the lightbulb anyway.
 
-                    if (Buffer.AsTextContainer().CurrentText == text &&
-                        CanInvokeRename(out var trackingSession, waitForResult: true, cancellationToken: cancellationToken))
+                    if (
+                        Buffer.AsTextContainer().CurrentText == text
+                        && CanInvokeRename(
+                            out var trackingSession,
+                            waitForResult: true,
+                            cancellationToken: cancellationToken
+                        )
+                    )
                     {
-                        var snapshotSpan = trackingSession.TrackingSpan.GetSpan(Buffer.CurrentSnapshot);
+                        var snapshotSpan = trackingSession.TrackingSpan.GetSpan(
+                            Buffer.CurrentSnapshot
+                        );
 
                         // user needs to be on the same line as the diagnostic location.
                         if (text.AreOnSameLine(userSpan.Start, snapshotSpan.Start))
@@ -314,16 +360,27 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.RenameTracking
                             var title = string.Format(
                                 EditorFeaturesResources.Rename_0_to_1,
                                 trackingSession.OriginalName,
-                                snapshotSpan.GetText());
+                                snapshotSpan.GetText()
+                            );
 
-                            return (new RenameTrackingCodeAction(ThreadingContext, document, title, refactorNotifyServices, undoHistoryRegistry, GlobalOptions),
-                                    snapshotSpan.Span.ToTextSpan());
+                            return (
+                                new RenameTrackingCodeAction(
+                                    ThreadingContext,
+                                    document,
+                                    title,
+                                    refactorNotifyServices,
+                                    undoHistoryRegistry,
+                                    GlobalOptions
+                                ),
+                                snapshotSpan.Span.ToTextSpan()
+                            );
                         }
                     }
 
                     return default;
                 }
-                catch (Exception e) when (FatalError.ReportAndPropagateUnlessCanceled(e, cancellationToken))
+                catch (Exception e)
+                    when (FatalError.ReportAndPropagateUnlessCanceled(e, cancellationToken))
                 {
                     throw ExceptionUtilities.Unreachable();
                 }
@@ -362,7 +419,9 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.RenameTracking
                 return syntaxFactsService != null;
             }
 
-            private bool TryGetLanguageHeuristicsService(out IRenameTrackingLanguageHeuristicsService languageHeuristicsService)
+            private bool TryGetLanguageHeuristicsService(
+                out IRenameTrackingLanguageHeuristicsService languageHeuristicsService
+            )
             {
                 // Can be called on a background thread
 
@@ -370,7 +429,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.RenameTracking
                 var document = _buffer.CurrentSnapshot.GetOpenDocumentInCurrentContextWithChanges();
                 if (document != null)
                 {
-                    languageHeuristicsService = document.GetLanguageService<IRenameTrackingLanguageHeuristicsService>();
+                    languageHeuristicsService =
+                        document.GetLanguageService<IRenameTrackingLanguageHeuristicsService>();
                 }
 
                 return languageHeuristicsService != null;

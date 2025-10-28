@@ -1,10 +1,12 @@
 <Type Name="LdapLocalException" FullName="Novell.Directory.Ldap.LdapLocalException">
-  <TypeSignature Language="C#" Value="public class LdapLocalException : Novell.Directory.Ldap.LdapException, System.Runtime.Serialization.ISerializable" />
+  <TypeSignature
+    Language="C#"
+    Value="public class LdapLocalException : Novell.Directory.Ldap.LdapException, System.Runtime.Serialization.ISerializable"
+  />
   <AssemblyInfo>
     <AssemblyName>Novell.Directory.Ldap</AssemblyName>
     <AssemblyVersion>1.0.5000.0</AssemblyVersion>
-    <AssemblyCulture>
-    </AssemblyCulture>
+    <AssemblyCulture></AssemblyCulture>
     <Attributes>
       <Attribute>
         <AttributeName>System.Reflection.AssemblyKeyFile(KeyFile="../mono.pub")</AttributeName>
@@ -60,7 +62,10 @@
       </Docs>
     </Member>
     <Member MemberName=".ctor">
-      <MemberSignature Language="C#" Value="public LdapLocalException(string messageOrKey, int resultCode)" />
+      <MemberSignature
+        Language="C#"
+        Value="public LdapLocalException(string messageOrKey, int resultCode)"
+      />
       <MemberType>Constructor</MemberType>
       <Parameters>
         <Parameter Name="messageOrKey" Type="System.String" />
@@ -74,7 +79,10 @@
       </Docs>
     </Member>
     <Member MemberName=".ctor">
-      <MemberSignature Language="C#" Value="public LdapLocalException(string messageOrKey, object[] arguments, int resultCode)" />
+      <MemberSignature
+        Language="C#"
+        Value="public LdapLocalException(string messageOrKey, object[] arguments, int resultCode)"
+      />
       <MemberType>Constructor</MemberType>
       <Parameters>
         <Parameter Name="messageOrKey" Type="System.String" />
@@ -90,7 +98,10 @@
       </Docs>
     </Member>
     <Member MemberName=".ctor">
-      <MemberSignature Language="C#" Value="public LdapLocalException(string messageOrKey, int resultCode, System.Exception rootException)" />
+      <MemberSignature
+        Language="C#"
+        Value="public LdapLocalException(string messageOrKey, int resultCode, System.Exception rootException)"
+      />
       <MemberType>Constructor</MemberType>
       <Parameters>
         <Parameter Name="messageOrKey" Type="System.String" />
@@ -106,7 +117,10 @@
       </Docs>
     </Member>
     <Member MemberName=".ctor">
-      <MemberSignature Language="C#" Value="public LdapLocalException(string messageOrKey, object[] arguments, int resultCode, System.Exception rootException)" />
+      <MemberSignature
+        Language="C#"
+        Value="public LdapLocalException(string messageOrKey, object[] arguments, int resultCode, System.Exception rootException)"
+      />
       <MemberType>Constructor</MemberType>
       <Parameters>
         <Parameter Name="messageOrKey" Type="System.String" />

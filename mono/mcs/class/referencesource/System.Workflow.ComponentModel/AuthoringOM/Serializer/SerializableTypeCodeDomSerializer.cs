@@ -2,20 +2,20 @@ namespace System.Workflow.ComponentModel.Serialization
 {
     using System;
     using System.CodeDom;
+    using System.CodeDom.Compiler;
+    using System.Collections;
+    using System.Collections.Generic;
     using System.ComponentModel;
     using System.ComponentModel.Design;
     using System.ComponentModel.Design.Serialization;
-    using System.Collections;
-    using System.Resources;
-    using System.Workflow.ComponentModel.Design;
-    using System.Collections.Generic;
-    using Microsoft.CSharp;
-    using System.Workflow.ComponentModel;
-    using System.Workflow.ComponentModel.Compiler;
-    using System.CodeDom.Compiler;
+    using System.Diagnostics;
     using System.IO;
     using System.Reflection;
-    using System.Diagnostics;
+    using System.Resources;
+    using System.Workflow.ComponentModel;
+    using System.Workflow.ComponentModel.Compiler;
+    using System.Workflow.ComponentModel.Design;
+    using Microsoft.CSharp;
 
     #region Class SerializableTypeCodeDomSerializer
     internal sealed class SerializableTypeCodeDomSerializer : CodeDomSerializer
@@ -54,8 +54,14 @@ namespace System.Workflow.ComponentModel.Serialization
                             try
                             {
                                 statements = new CodeStatementCollection();
-                                CodeVariableReferenceExpression varExpression = AddVariableExpression(manager, statements, value);
-                                varExct = new ExpressionContext(varExpression, value.GetType(), cxt.Owner, value);
+                                CodeVariableReferenceExpression varExpression =
+                                    AddVariableExpression(manager, statements, value);
+                                varExct = new ExpressionContext(
+                                    varExpression,
+                                    value.GetType(),
+                                    cxt.Owner,
+                                    value
+                                );
                                 manager.Context.Push(varExct);
                                 result = this.originalSerializer.Serialize(manager, value);
                                 if (result is CodeStatementCollection)
@@ -67,7 +73,12 @@ namespace System.Workflow.ComponentModel.Serialization
                                     // can not be serialized using statements, instead it has been serialized as resources.
                                     // In this case, we just over-write the variable init expression with the "GetObject"
                                     // expression for resource objects.
-                                    statements.Add(new CodeAssignStatement(varExpression, result as CodeExpression));
+                                    statements.Add(
+                                        new CodeAssignStatement(
+                                            varExpression,
+                                            result as CodeExpression
+                                        )
+                                    );
 
                                 result = statements;
                             }
@@ -86,9 +97,23 @@ namespace System.Workflow.ComponentModel.Serialization
                 else
                 {
                     statements = new CodeStatementCollection();
-                    CodeVariableReferenceExpression varExpression = AddVariableExpression(manager, statements, value);
-                    SerializeProperties(manager, statements, value, new Attribute[] { DesignOnlyAttribute.No });
-                    SerializeEvents(manager, statements, value, new Attribute[] { DesignOnlyAttribute.No });
+                    CodeVariableReferenceExpression varExpression = AddVariableExpression(
+                        manager,
+                        statements,
+                        value
+                    );
+                    SerializeProperties(
+                        manager,
+                        statements,
+                        value,
+                        new Attribute[] { DesignOnlyAttribute.No }
+                    );
+                    SerializeEvents(
+                        manager,
+                        statements,
+                        value,
+                        new Attribute[] { DesignOnlyAttribute.No }
+                    );
                     result = statements;
                 }
             }
@@ -100,13 +125,25 @@ namespace System.Workflow.ComponentModel.Serialization
             return result;
         }
 
-        private CodeVariableReferenceExpression AddVariableExpression(IDesignerSerializationManager manager, CodeStatementCollection statements, object value)
+        private CodeVariableReferenceExpression AddVariableExpression(
+            IDesignerSerializationManager manager,
+            CodeStatementCollection statements,
+            object value
+        )
         {
             string varName = GetUniqueName(manager, value).Replace('`', '_');
-            CodeVariableDeclarationStatement varDecl = new CodeVariableDeclarationStatement(TypeDescriptor.GetClassName(value), varName);
-            varDecl.InitExpression = new CodeObjectCreateExpression(TypeDescriptor.GetClassName(value), new CodeExpression[0]);
+            CodeVariableDeclarationStatement varDecl = new CodeVariableDeclarationStatement(
+                TypeDescriptor.GetClassName(value),
+                varName
+            );
+            varDecl.InitExpression = new CodeObjectCreateExpression(
+                TypeDescriptor.GetClassName(value),
+                new CodeExpression[0]
+            );
             statements.Add(varDecl);
-            CodeVariableReferenceExpression varExpression = new CodeVariableReferenceExpression(varName);
+            CodeVariableReferenceExpression varExpression = new CodeVariableReferenceExpression(
+                varName
+            );
             SetExpression(manager, value, varExpression);
 
             return varExpression;

@@ -6,7 +6,6 @@ using System.Diagnostics;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 using System.Runtime.Serialization;
-
 using static System.WeakReferenceHandleTags;
 
 namespace System
@@ -28,7 +27,9 @@ namespace System
     }
 
     [Serializable]
-    [TypeForwardedFrom("mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089")]
+    [TypeForwardedFrom(
+        "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+    )]
     public partial class WeakReference : ISerializable
     {
         // If you fix bugs here, please fix them in WeakReference<T> at the same time.
@@ -43,16 +44,18 @@ namespace System
         // Assumes a Short Weak Reference (ie TrackResurrection is false.)
         //
         public WeakReference(object? target)
-            : this(target, false)
-        {
-        }
+            : this(target, false) { }
 
         public WeakReference(object? target, bool trackResurrection)
         {
             Create(target, trackResurrection);
         }
 
-        [Obsolete(Obsoletions.LegacyFormatterImplMessage, DiagnosticId = Obsoletions.LegacyFormatterImplDiagId, UrlFormat = Obsoletions.SharedUrlFormat)]
+        [Obsolete(
+            Obsoletions.LegacyFormatterImplMessage,
+            DiagnosticId = Obsoletions.LegacyFormatterImplDiagId,
+            UrlFormat = Obsoletions.SharedUrlFormat
+        )]
         [EditorBrowsable(EditorBrowsableState.Never)]
         protected WeakReference(SerializationInfo info, StreamingContext context)
         {
@@ -64,7 +67,11 @@ namespace System
             Create(target, trackResurrection);
         }
 
-        [Obsolete(Obsoletions.LegacyFormatterImplMessage, DiagnosticId = Obsoletions.LegacyFormatterImplDiagId, UrlFormat = Obsoletions.SharedUrlFormat)]
+        [Obsolete(
+            Obsoletions.LegacyFormatterImplMessage,
+            DiagnosticId = Obsoletions.LegacyFormatterImplDiagId,
+            UrlFormat = Obsoletions.SharedUrlFormat
+        )]
         [EditorBrowsable(EditorBrowsableState.Never)]
         public virtual void GetObjectData(SerializationInfo info, StreamingContext context)
         {
@@ -80,13 +87,16 @@ namespace System
 
         private void Create(object? target, bool trackResurrection)
         {
-            nint h = GCHandle.InternalAlloc(target, trackResurrection ? GCHandleType.WeakTrackResurrection : GCHandleType.Weak);
-            _taggedHandle = trackResurrection ?
-                h | TracksResurrectionBit :
-                h;
+            nint h = GCHandle.InternalAlloc(
+                target,
+                trackResurrection ? GCHandleType.WeakTrackResurrection : GCHandleType.Weak
+            );
+            _taggedHandle = trackResurrection ? h | TracksResurrectionBit : h;
 
 #if FEATURE_COMINTEROP || FEATURE_COMWRAPPERS
-            ComAwareWeakReference.ComInfo? comInfo = ComAwareWeakReference.ComInfo.FromObject(target);
+            ComAwareWeakReference.ComInfo? comInfo = ComAwareWeakReference.ComInfo.FromObject(
+                target
+            );
             if (comInfo != null)
             {
                 ComAwareWeakReference.SetComInfoInConstructor(ref _taggedHandle, comInfo);
@@ -179,7 +189,6 @@ namespace System
 
                 return target;
             }
-
             set
             {
                 nint th = _taggedHandle & ~TracksResurrectionBit;

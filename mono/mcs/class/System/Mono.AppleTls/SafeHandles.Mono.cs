@@ -30,65 +30,59 @@ using Mono;
 
 namespace System.Security.Cryptography.X509Certificates
 {
-	partial class SafeSecIdentityHandle
-	{
-		public SafeSecIdentityHandle (IntPtr handle, bool ownsHandle = false)
-			: base (handle, ownsHandle)
-		{
-		}
-	}
+    partial class SafeSecIdentityHandle
+    {
+        public SafeSecIdentityHandle(IntPtr handle, bool ownsHandle = false)
+            : base(handle, ownsHandle) { }
+    }
 
-	partial class SafeSecCertificateHandle
-	{
-		public SafeSecCertificateHandle (IntPtr handle, bool ownsHandle = false)
-			: base (handle, ownsHandle)
-		{
-		}
-	}
+    partial class SafeSecCertificateHandle
+    {
+        public SafeSecCertificateHandle(IntPtr handle, bool ownsHandle = false)
+            : base(handle, ownsHandle) { }
+    }
 }
 
 namespace System.Security.Cryptography.Apple
 {
-	partial class SafeKeychainItemHandle
-	{
-		public SafeKeychainItemHandle (IntPtr handle, bool ownsHandle)
-			: base (handle, ownsHandle)
-		{
-			if (!ownsHandle)
-				CFObject.CFRetain (handle);
-		}
-	}
+    partial class SafeKeychainItemHandle
+    {
+        public SafeKeychainItemHandle(IntPtr handle, bool ownsHandle)
+            : base(handle, ownsHandle)
+        {
+            if (!ownsHandle)
+                CFObject.CFRetain(handle);
+        }
+    }
 
-	partial class SafeSecKeyRefHandle
-	{
-		public SafeSecKeyRefHandle (IntPtr handle, bool ownsHandle = false)
-			: base (handle, ownsHandle)
-		{
-		}
+    partial class SafeSecKeyRefHandle
+    {
+        public SafeSecKeyRefHandle(IntPtr handle, bool ownsHandle = false)
+            : base(handle, ownsHandle) { }
 
-		IntPtr owner;
+        IntPtr owner;
 
-		/*
-		 * SecItemImport() returns a SecArrayRef.  We need to free the array, not the items inside it.
-		 * 
-		 */
-		public SafeSecKeyRefHandle (IntPtr handle, IntPtr owner)
-			: base (handle, false)
-		{
-			this.owner = owner;
-			CFObject.CFRetain (owner);
-		}
+        /*
+         * SecItemImport() returns a SecArrayRef.  We need to free the array, not the items inside it.
+         *
+         */
+        public SafeSecKeyRefHandle(IntPtr handle, IntPtr owner)
+            : base(handle, false)
+        {
+            this.owner = owner;
+            CFObject.CFRetain(owner);
+        }
 
-		protected override bool ReleaseHandle ()
-		{
-			if (owner != IntPtr.Zero) {
-				CFObject.CFRelease (owner);
-				owner = IntPtr.Zero;
-				SetHandle (IntPtr.Zero);
-				return true;
-			}
-			return base.ReleaseHandle ();
-		}
-	}
-
+        protected override bool ReleaseHandle()
+        {
+            if (owner != IntPtr.Zero)
+            {
+                CFObject.CFRelease(owner);
+                owner = IntPtr.Zero;
+                SetHandle(IntPtr.Zero);
+                return true;
+            }
+            return base.ReleaseHandle();
+        }
+    }
 }

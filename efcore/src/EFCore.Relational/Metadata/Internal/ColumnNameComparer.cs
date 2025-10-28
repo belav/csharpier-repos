@@ -53,20 +53,16 @@ public sealed class ColumnNameComparer : IComparer<string>
             }
         }
 
-        if (xIndex == -1
-            && yIndex == -1)
+        if (xIndex == -1 && yIndex == -1)
         {
             return StringComparer.Ordinal.Compare(x, y);
         }
 
-        if (xIndex > -1
-            && yIndex > -1)
+        if (xIndex > -1 && yIndex > -1)
         {
             return xIndex - yIndex;
         }
 
-        return xIndex > yIndex
-            ? -1
-            : 1;
+        return xIndex > yIndex ? -1 : 1;
     }
 }

@@ -15,7 +15,10 @@ namespace System.Web.Http.Cors
     public sealed class DisableCorsAttribute : Attribute, ICorsPolicyProvider
     {
         /// <inheritdoc />
-        public Task<CorsPolicy> GetCorsPolicyAsync(HttpRequestMessage request, CancellationToken cancellationToken)
+        public Task<CorsPolicy> GetCorsPolicyAsync(
+            HttpRequestMessage request,
+            CancellationToken cancellationToken
+        )
         {
             return Task.FromResult<CorsPolicy>(null);
         }

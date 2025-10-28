@@ -15,10 +15,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -32,34 +32,33 @@ using System;
 using System.CodeDom.Compiler;
 using System.Web;
 
-namespace System.Web.Compilation {
+namespace System.Web.Compilation
+{
+    [Serializable]
+    public class ClientBuildManagerParameter
+    {
+        public ClientBuildManagerParameter() { }
 
-	[Serializable]
-	public class ClientBuildManagerParameter
-	{
-		public ClientBuildManagerParameter ()
-		{
-		}
+        public PrecompilationFlags PrecompilationFlags
+        {
+            get { return precompilationFlags; }
+            set { precompilationFlags = value; }
+        }
 
-		public PrecompilationFlags PrecompilationFlags {
-			get { return precompilationFlags; }
-			set { precompilationFlags = value; }
-		}
+        public string StrongNameKeyContainer
+        {
+            get { return strongNameKeyContainer; }
+            set { strongNameKeyContainer = value; }
+        }
 
-		public string StrongNameKeyContainer {
-			get { return strongNameKeyContainer; }
-			set { strongNameKeyContainer = value; }
-		}
+        public string StrongNameKeyFile
+        {
+            get { return strongNameKeyFile; }
+            set { strongNameKeyFile = value; }
+        }
 
-		public string StrongNameKeyFile {
-			get { return strongNameKeyFile; }
-			set { strongNameKeyFile = value; }
-		}
-
-		PrecompilationFlags precompilationFlags;
-		string strongNameKeyContainer;
-		string strongNameKeyFile;
-	}
+        PrecompilationFlags precompilationFlags;
+        string strongNameKeyContainer;
+        string strongNameKeyFile;
+    }
 }
-
-

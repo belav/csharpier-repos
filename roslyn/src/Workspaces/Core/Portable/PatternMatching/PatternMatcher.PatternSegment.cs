@@ -13,23 +13,26 @@ namespace Microsoft.CodeAnalysis.PatternMatching
     {
         /// <summary>
         /// First we break up the pattern given by dots.  Each portion of the pattern between the
-        /// dots is a 'Segment'.  The 'Segment' contains information about the entire section of 
-        /// text between the dots, as well as information about any individual 'Words' that we 
+        /// dots is a 'Segment'.  The 'Segment' contains information about the entire section of
+        /// text between the dots, as well as information about any individual 'Words' that we
         /// can break the segment into.
         /// </summary>
         [NonCopyable]
         private struct PatternSegment(string text, bool allowFuzzyMatching) : IDisposable
         {
-            // Information about the entire piece of text between the dots.  For example, if the 
-            // text between the dots is 'Get-Keyword', then TotalTextChunk.Text will be 'Get-Keyword' and 
+            // Information about the entire piece of text between the dots.  For example, if the
+            // text between the dots is 'Get-Keyword', then TotalTextChunk.Text will be 'Get-Keyword' and
             // TotalTextChunk.CharacterSpans will correspond to 'G', 'et', 'K' and 'eyword'.
             public TextChunk TotalTextChunk = new TextChunk(text, allowFuzzyMatching);
 
-            // Information about the subwords compromising the total word.  For example, if the 
+            // Information about the subwords compromising the total word.  For example, if the
             // text between the dots is 'Get-Keyword', then the subwords will be 'Get' and 'Keyword'
             // Those individual words will have CharacterSpans of ('G' and 'et') and ('K' and 'eyword')
             // respectively.
-            public readonly TextChunk[] SubWordTextChunks = BreakPatternIntoSubWords(text, allowFuzzyMatching);
+            public readonly TextChunk[] SubWordTextChunks = BreakPatternIntoSubWords(
+                text,
+                allowFuzzyMatching
+            );
 
             public void Dispose()
             {
@@ -71,7 +74,10 @@ namespace Microsoft.CodeAnalysis.PatternMatching
                 return count;
             }
 
-            private static TextChunk[] BreakPatternIntoSubWords(string pattern, bool allowFuzzyMatching)
+            private static TextChunk[] BreakPatternIntoSubWords(
+                string pattern,
+                bool allowFuzzyMatching
+            )
             {
                 var partCount = CountTextChunks(pattern);
 
@@ -99,7 +105,10 @@ namespace Microsoft.CodeAnalysis.PatternMatching
                     {
                         if (wordLength > 0)
                         {
-                            result[resultIndex++] = new TextChunk(pattern.Substring(wordStart, wordLength), allowFuzzyMatching);
+                            result[resultIndex++] = new TextChunk(
+                                pattern.Substring(wordStart, wordLength),
+                                allowFuzzyMatching
+                            );
                             wordLength = 0;
                         }
                     }
@@ -107,7 +116,10 @@ namespace Microsoft.CodeAnalysis.PatternMatching
 
                 if (wordLength > 0)
                 {
-                    result[resultIndex++] = new TextChunk(pattern.Substring(wordStart, wordLength), allowFuzzyMatching);
+                    result[resultIndex++] = new TextChunk(
+                        pattern.Substring(wordStart, wordLength),
+                        allowFuzzyMatching
+                    );
                 }
 
                 return result;

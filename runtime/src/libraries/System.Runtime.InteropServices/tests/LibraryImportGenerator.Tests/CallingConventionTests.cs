@@ -18,10 +18,31 @@ namespace LibraryImportGenerator.IntegrationTests
         {
             [LibraryImport(NativeExportsNE_Binary, EntryPoint = "add_integers_cdecl")]
             [UnmanagedCallConv(CallConvs = new[] { typeof(CallConvCdecl) })]
-            public static partial long AddLongsCdecl(long i, long j, long k, long l, long m, long n, long o, long p, long q);
+            public static partial long AddLongsCdecl(
+                long i,
+                long j,
+                long k,
+                long l,
+                long m,
+                long n,
+                long o,
+                long p,
+                long q
+            );
+
             [LibraryImport(NativeExportsNE_Binary, EntryPoint = "add_integers_stdcall")]
             [UnmanagedCallConv(CallConvs = new[] { typeof(CallConvStdcall) })]
-            public static partial long AddLongsStdcall(long i, long j, long k, long l, long m, long n, long o, long p, long q);
+            public static partial long AddLongsStdcall(
+                long i,
+                long j,
+                long k,
+                long l,
+                long m,
+                long n,
+                long o,
+                long p,
+                long q
+            );
         }
     }
 
@@ -41,8 +62,14 @@ namespace LibraryImportGenerator.IntegrationTests
             long p = rng.Next();
             long q = rng.Next();
             long expected = i + j + k + l + m + n + o + p + q;
-            Assert.Equal(expected, NativeExportsNE.CallingConventions.AddLongsCdecl(i, j, k, l, m, n, o, p, q));
-            Assert.Equal(expected, NativeExportsNE.CallingConventions.AddLongsStdcall(i, j, k, l, m, n, o, p, q));
+            Assert.Equal(
+                expected,
+                NativeExportsNE.CallingConventions.AddLongsCdecl(i, j, k, l, m, n, o, p, q)
+            );
+            Assert.Equal(
+                expected,
+                NativeExportsNE.CallingConventions.AddLongsStdcall(i, j, k, l, m, n, o, p, q)
+            );
         }
     }
 }

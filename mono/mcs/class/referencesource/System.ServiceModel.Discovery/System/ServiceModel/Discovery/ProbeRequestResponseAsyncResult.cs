@@ -7,7 +7,7 @@ namespace System.ServiceModel.Discovery
     using System.Collections.ObjectModel;
     using System.Diagnostics.CodeAnalysis;
     using System.Runtime;
-    
+
     abstract class ProbeRequestResponseAsyncResult<TProbeMessage, TResponseMessage> : AsyncResult
     {
         readonly IDiscoveryServiceImplementation discoveryServiceImpl;
@@ -25,7 +25,8 @@ namespace System.ServiceModel.Discovery
             TProbeMessage probeMessage,
             IDiscoveryServiceImplementation discoveryServiceImpl,
             AsyncCallback callback,
-            object state)
+            object state
+        )
             : base(callback, state)
         {
             Fx.Assert(probeMessage != null, "The probeMessage must be non null.");
@@ -42,7 +43,10 @@ namespace System.ServiceModel.Discovery
             else
             {
                 this.context = new DiscoveryOperationContext(OperationContext.Current);
-                this.findRequest = new FindRequestResponseContext(this.GetFindCriteria(probeMessage), this);
+                this.findRequest = new FindRequestResponseContext(
+                    this.GetFindCriteria(probeMessage),
+                    this
+                );
                 if (this.ProcessFindRequest())
                 {
                     this.Complete(true);
@@ -53,9 +57,11 @@ namespace System.ServiceModel.Discovery
 
         protected virtual bool Validate(TProbeMessage probeMessage)
         {
-            return (DiscoveryService.EnsureMessageId() &&
-                this.ValidateContent(probeMessage) &&
-                this.EnsureNotDuplicate());
+            return (
+                DiscoveryService.EnsureMessageId()
+                && this.ValidateContent(probeMessage)
+                && this.EnsureNotDuplicate()
+            );
         }
 
         protected abstract bool ValidateContent(TProbeMessage probeMessage);
@@ -64,7 +70,8 @@ namespace System.ServiceModel.Discovery
 
         protected abstract TResponseMessage GetProbeResponse(
             DiscoveryMessageSequence discoveryMessageSequence,
-            Collection<EndpointDiscoveryMetadata> matchingEndpoints);
+            Collection<EndpointDiscoveryMetadata> matchingEndpoints
+        );
 
         protected TResponseMessage End()
         {
@@ -72,11 +79,12 @@ namespace System.ServiceModel.Discovery
 
             return this.GetProbeResponse(
                 this.discoveryServiceImpl.GetNextMessageSequence(),
-                this.findRequest.MatchingEndpoints);
+                this.findRequest.MatchingEndpoints
+            );
         }
 
         static bool OnOnFindCompleted(IAsyncResult result)
-        {            
+        {
             ProbeRequestResponseAsyncResult<TProbeMessage, TResponseMessage> thisPtr =
                 (ProbeRequestResponseAsyncResult<TProbeMessage, TResponseMessage>)result.AsyncState;
 
@@ -94,21 +102,25 @@ namespace System.ServiceModel.Discovery
             IAsyncResult result = this.discoveryServiceImpl.BeginFind(
                 this.findRequest,
                 this.PrepareAsyncCompletion(onOnFindCompletedCallback),
-                this);
+                this
+            );
 
             return (result.CompletedSynchronously && OnOnFindCompleted(result));
         }
 
         bool EnsureNotDuplicate()
         {
-            bool isDuplicate = this.discoveryServiceImpl.IsDuplicate(OperationContext.Current.IncomingMessageHeaders.MessageId);
+            bool isDuplicate = this.discoveryServiceImpl.IsDuplicate(
+                OperationContext.Current.IncomingMessageHeaders.MessageId
+            );
 
             if (isDuplicate && TD.DuplicateDiscoveryMessageIsEnabled())
             {
                 TD.DuplicateDiscoveryMessage(
                     this.context.EventTraceActivity,
                     ProtocolStrings.TracingStrings.Probe,
-                    OperationContext.Current.IncomingMessageHeaders.MessageId.ToString());
+                    OperationContext.Current.IncomingMessageHeaders.MessageId.ToString()
+                );
             }
 
             return !isDuplicate;
@@ -117,11 +129,18 @@ namespace System.ServiceModel.Discovery
         class FindRequestResponseContext : FindRequestContext
         {
             Collection<EndpointDiscoveryMetadata> matchingEndpoints;
-            readonly ProbeRequestResponseAsyncResult<TProbeMessage, TResponseMessage> probeRequestResponseAsyncResult;
+            readonly ProbeRequestResponseAsyncResult<
+                TProbeMessage,
+                TResponseMessage
+            > probeRequestResponseAsyncResult;
 
             public FindRequestResponseContext(
-                FindCriteria criteria, 
-                ProbeRequestResponseAsyncResult<TProbeMessage, TResponseMessage> probeRequestResponseAsyncResult)
+                FindCriteria criteria,
+                ProbeRequestResponseAsyncResult<
+                    TProbeMessage,
+                    TResponseMessage
+                > probeRequestResponseAsyncResult
+            )
                 : base(criteria)
             {
                 this.matchingEndpoints = new Collection<EndpointDiscoveryMetadata>();
@@ -130,20 +149,20 @@ namespace System.ServiceModel.Discovery
 
             public Collection<EndpointDiscoveryMetadata> MatchingEndpoints
             {
-                get 
-                { 
-                    return this.matchingEndpoints; 
-                }
+                get { return this.matchingEndpoints; }
             }
 
-            protected override void OnAddMatchingEndpoint(EndpointDiscoveryMetadata matchingEndpoint)
+            protected override void OnAddMatchingEndpoint(
+                EndpointDiscoveryMetadata matchingEndpoint
+            )
             {
                 lock (this.probeRequestResponseAsyncResult.findCompletedLock)
                 {
                     if (this.probeRequestResponseAsyncResult.isFindCompleted)
                     {
                         throw FxTrace.Exception.AsError(
-                            new InvalidOperationException(SR.DiscoveryCannotAddMatchingEndpoint));
+                            new InvalidOperationException(SR.DiscoveryCannotAddMatchingEndpoint)
+                        );
                     }
                     else
                     {

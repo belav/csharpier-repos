@@ -12,27 +12,26 @@ namespace Microsoft.CodeAnalysis.CSharp.Simplification
         private class Rewriter : AbstractReductionRewriter
         {
             public Rewriter(ObjectPool<IReductionRewriter> pool)
-                : base(pool)
-            {
-            }
+                : base(pool) { }
 
-            public override SyntaxNode? VisitParameter(ParameterSyntax node)
-                => SimplifyNode(
+            public override SyntaxNode? VisitParameter(ParameterSyntax node) =>
+                SimplifyNode(
                     node,
                     newNode: base.VisitParameter(node),
-                    simplifier: s_simplifyParameter);
+                    simplifier: s_simplifyParameter
+                );
 
-            public override SyntaxNode? VisitParenthesizedLambdaExpression(ParenthesizedLambdaExpressionSyntax node)
-                => SimplifyNode(
+            public override SyntaxNode? VisitParenthesizedLambdaExpression(
+                ParenthesizedLambdaExpressionSyntax node
+            ) =>
+                SimplifyNode(
                     node,
                     newNode: base.VisitParenthesizedLambdaExpression(node),
-                    simplifier: s_simplifyParenthesizedLambdaExpression);
+                    simplifier: s_simplifyParenthesizedLambdaExpression
+                );
 
-            public override SyntaxNode? VisitBlock(BlockSyntax node)
-                => SimplifyNode(
-                    node,
-                    newNode: base.VisitBlock(node),
-                    simplifier: s_simplifyBlock);
+            public override SyntaxNode? VisitBlock(BlockSyntax node) =>
+                SimplifyNode(node, newNode: base.VisitBlock(node), simplifier: s_simplifyBlock);
         }
     }
 }

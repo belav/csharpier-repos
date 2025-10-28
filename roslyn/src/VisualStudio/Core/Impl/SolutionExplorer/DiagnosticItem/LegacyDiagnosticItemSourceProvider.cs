@@ -16,7 +16,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.SolutionExplore
     [Name(nameof(LegacyDiagnosticItemSourceProvider))]
     [Order]
     [AppliesToProject("(CSharp | VB) & !CPS")]
-    internal sealed class LegacyDiagnosticItemSourceProvider : AttachedCollectionSourceProvider<AnalyzerItem>
+    internal sealed class LegacyDiagnosticItemSourceProvider
+        : AttachedCollectionSourceProvider<AnalyzerItem>
     {
         private readonly IAnalyzersCommandHandler _commandHandler;
         private readonly IDiagnosticAnalyzerService _diagnosticAnalyzerService;
@@ -25,17 +26,25 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.SolutionExplore
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
         public LegacyDiagnosticItemSourceProvider(
             [Import(typeof(AnalyzersCommandHandler))] IAnalyzersCommandHandler commandHandler,
-            IDiagnosticAnalyzerService diagnosticAnalyzerService)
+            IDiagnosticAnalyzerService diagnosticAnalyzerService
+        )
         {
             _commandHandler = commandHandler;
             _diagnosticAnalyzerService = diagnosticAnalyzerService;
         }
 
-        protected override IAttachedCollectionSource? CreateCollectionSource(AnalyzerItem item, string relationshipName)
+        protected override IAttachedCollectionSource? CreateCollectionSource(
+            AnalyzerItem item,
+            string relationshipName
+        )
         {
             if (relationshipName == KnownRelationships.Contains)
             {
-                return new LegacyDiagnosticItemSource(item, _commandHandler, _diagnosticAnalyzerService);
+                return new LegacyDiagnosticItemSource(
+                    item,
+                    _commandHandler,
+                    _diagnosticAnalyzerService
+                );
             }
 
             return null;

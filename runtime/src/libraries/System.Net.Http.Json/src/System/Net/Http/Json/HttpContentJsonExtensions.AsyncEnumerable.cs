@@ -29,8 +29,13 @@ namespace System.Net.Http.Json
         [RequiresDynamicCode(SerializationDynamicCodeMessage)]
         public static IAsyncEnumerable<TValue?> ReadFromJsonAsAsyncEnumerable<TValue>(
             this HttpContent content,
-            CancellationToken cancellationToken = default) =>
-            ReadFromJsonAsAsyncEnumerable<TValue>(content, options: null, cancellationToken: cancellationToken);
+            CancellationToken cancellationToken = default
+        ) =>
+            ReadFromJsonAsAsyncEnumerable<TValue>(
+                content,
+                options: null,
+                cancellationToken: cancellationToken
+            );
 
         /// <summary>
         /// Reads the HTTP content and returns the value that results from deserializing the content as
@@ -50,7 +55,8 @@ namespace System.Net.Http.Json
         public static IAsyncEnumerable<TValue?> ReadFromJsonAsAsyncEnumerable<TValue>(
             this HttpContent content,
             JsonSerializerOptions? options,
-            CancellationToken cancellationToken = default)
+            CancellationToken cancellationToken = default
+        )
         {
             if (content is null)
             {
@@ -75,7 +81,8 @@ namespace System.Net.Http.Json
         public static IAsyncEnumerable<TValue?> ReadFromJsonAsAsyncEnumerable<TValue>(
             this HttpContent content,
             JsonTypeInfo<TValue> jsonTypeInfo,
-            CancellationToken cancellationToken = default)
+            CancellationToken cancellationToken = default
+        )
         {
             if (content is null)
             {
@@ -90,23 +97,32 @@ namespace System.Net.Http.Json
         private static IAsyncEnumerable<TValue?> ReadFromJsonAsAsyncEnumerableCore<TValue>(
             HttpContent content,
             JsonSerializerOptions? options,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
-            var jsonTypeInfo = (JsonTypeInfo<TValue>)JsonHelpers.GetJsonTypeInfo(typeof(TValue), options);
+            var jsonTypeInfo =
+                (JsonTypeInfo<TValue>)JsonHelpers.GetJsonTypeInfo(typeof(TValue), options);
             return ReadFromJsonAsAsyncEnumerableCore(content, jsonTypeInfo, cancellationToken);
         }
 
         private static async IAsyncEnumerable<TValue?> ReadFromJsonAsAsyncEnumerableCore<TValue>(
             HttpContent content,
             JsonTypeInfo<TValue> jsonTypeInfo,
-            [EnumeratorCancellation] CancellationToken cancellationToken)
+            [EnumeratorCancellation] CancellationToken cancellationToken
+        )
         {
             using Stream contentStream = await GetContentStreamAsync(content, cancellationToken)
                 .ConfigureAwait(false);
 
-            await foreach (TValue? value in JsonSerializer.DeserializeAsyncEnumerable<TValue>(
-                contentStream, jsonTypeInfo, cancellationToken)
-                .ConfigureAwait(false))
+            await foreach (
+                TValue? value in JsonSerializer
+                    .DeserializeAsyncEnumerable<TValue>(
+                        contentStream,
+                        jsonTypeInfo,
+                        cancellationToken
+                    )
+                    .ConfigureAwait(false)
+            )
             {
                 yield return value;
             }

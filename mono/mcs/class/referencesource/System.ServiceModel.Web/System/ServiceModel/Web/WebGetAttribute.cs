@@ -5,15 +5,19 @@
 namespace System.ServiceModel.Web
 {
     using System;
+    using System.Collections.Generic;
+    using System.ServiceModel.Administration;
+    using System.ServiceModel.Channels;
     using System.ServiceModel.Description;
     using System.ServiceModel.Dispatcher;
-    using System.ServiceModel.Channels;
     using System.ServiceModel.Web;
-    using System.ServiceModel.Administration;
-    using System.Collections.Generic;
 
     [AttributeUsage(AttributeTargets.Method)]
-    public sealed class WebGetAttribute : Attribute, IOperationContractAttributeProvider, IOperationBehavior, IWmiInstanceProvider
+    public sealed class WebGetAttribute
+        : Attribute,
+            IOperationContractAttributeProvider,
+            IOperationBehavior,
+            IWmiInstanceProvider
     {
         WebMessageBodyStyle bodyStyle;
         bool isBodyStyleDefined;
@@ -23,9 +27,7 @@ namespace System.ServiceModel.Web
         WebMessageFormat responseMessageFormat;
         string uriTemplate; // Note: HttpTransferEndpointBehavior interprets uriTemplate as: null means 'no opinion', whereas string.Empty means relative path of ""
 
-        public WebGetAttribute()
-        {
-        }
+        public WebGetAttribute() { }
 
         public WebMessageBodyStyle BodyStyle
         {
@@ -34,7 +36,9 @@ namespace System.ServiceModel.Web
             {
                 if (!WebMessageBodyStyleHelper.IsDefined(value))
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentOutOfRangeException("value"));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new ArgumentOutOfRangeException("value")
+                    );
                 }
                 this.bodyStyle = value;
                 this.isBodyStyleDefined = true;
@@ -66,7 +70,9 @@ namespace System.ServiceModel.Web
             {
                 if (!WebMessageFormatHelper.IsDefined(value))
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentOutOfRangeException("value"));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new ArgumentOutOfRangeException("value")
+                    );
                 }
                 this.requestMessageFormat = value;
                 this.isRequestMessageFormatSet = true;
@@ -84,7 +90,9 @@ namespace System.ServiceModel.Web
             {
                 if (!WebMessageFormatHelper.IsDefined(value))
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentOutOfRangeException("value"));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new ArgumentOutOfRangeException("value")
+                    );
                 }
                 this.responseMessageFormat = value;
                 this.isResponseMessageFormatSet = true;
@@ -92,20 +100,27 @@ namespace System.ServiceModel.Web
         }
 
         public string UriTemplate
-        { get { return this.uriTemplate; } set { this.uriTemplate = value; } }
+        {
+            get { return this.uriTemplate; }
+            set { this.uriTemplate = value; }
+        }
 
-        void IOperationBehavior.AddBindingParameters(OperationDescription operationDescription, BindingParameterCollection bindingParameters)
-        {
-        } //  do nothing 
-        void IOperationBehavior.ApplyClientBehavior(OperationDescription operationDescription, ClientOperation clientOperation)
-        {
-        } //  do nothing 
-        void IOperationBehavior.ApplyDispatchBehavior(OperationDescription operationDescription, DispatchOperation dispatchOperation)
-        {
-        } //  do nothing 
-        void IOperationBehavior.Validate(OperationDescription operationDescription)
-        {
-        } //  do nothing 
+        void IOperationBehavior.AddBindingParameters(
+            OperationDescription operationDescription,
+            BindingParameterCollection bindingParameters
+        ) { } //  do nothing
+
+        void IOperationBehavior.ApplyClientBehavior(
+            OperationDescription operationDescription,
+            ClientOperation clientOperation
+        ) { } //  do nothing
+
+        void IOperationBehavior.ApplyDispatchBehavior(
+            OperationDescription operationDescription,
+            DispatchOperation dispatchOperation
+        ) { } //  do nothing
+
+        void IOperationBehavior.Validate(OperationDescription operationDescription) { } //  do nothing
 
         void IWmiInstanceProvider.FillInstance(IWmiInstance wmiInstance)
         {
@@ -114,11 +129,20 @@ namespace System.ServiceModel.Web
                 throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument("wmiInstance");
             }
             wmiInstance.SetProperty("BodyStyle", this.BodyStyle.ToString());
-            wmiInstance.SetProperty("IsBodyStyleSetExplicitly", this.IsBodyStyleSetExplicitly.ToString());
+            wmiInstance.SetProperty(
+                "IsBodyStyleSetExplicitly",
+                this.IsBodyStyleSetExplicitly.ToString()
+            );
             wmiInstance.SetProperty("RequestFormat", this.RequestFormat.ToString());
-            wmiInstance.SetProperty("IsRequestFormatSetExplicitly", this.IsRequestFormatSetExplicitly.ToString());
+            wmiInstance.SetProperty(
+                "IsRequestFormatSetExplicitly",
+                this.IsRequestFormatSetExplicitly.ToString()
+            );
             wmiInstance.SetProperty("ResponseFormat", this.ResponseFormat.ToString());
-            wmiInstance.SetProperty("IsResponseFormatSetExplicitly", this.IsResponseFormatSetExplicitly.ToString());
+            wmiInstance.SetProperty(
+                "IsResponseFormatSetExplicitly",
+                this.IsResponseFormatSetExplicitly.ToString()
+            );
             wmiInstance.SetProperty("UriTemplate", this.UriTemplate);
         }
 
@@ -145,4 +169,3 @@ namespace System.ServiceModel.Web
         }
     }
 }
-

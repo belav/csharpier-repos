@@ -1,6 +1,12 @@
-<Type Name="MyList&lt;T&gt;+Helper&lt;U,V&gt;" FullName="Mono.DocTest.Generic.MyList&lt;T&gt;+Helper&lt;U,V&gt;">
+<Type
+  Name="MyList&lt;T&gt;+Helper&lt;U,V&gt;"
+  FullName="Mono.DocTest.Generic.MyList&lt;T&gt;+Helper&lt;U,V&gt;"
+>
   <TypeSignature Language="C#" Value="public class MyList&lt;T&gt;.Helper&lt;U,V&gt;" />
-  <TypeSignature Language="ILAsm" Value=".class nested public auto ansi beforefieldinit MyList`1/Helper`2&lt;T, U, V&gt; extends System.Object" />
+  <TypeSignature
+    Language="ILAsm"
+    Value=".class nested public auto ansi beforefieldinit MyList`1/Helper`2&lt;T, U, V&gt; extends System.Object"
+  />
   <AssemblyInfo>
     <AssemblyName>DocTest</AssemblyName>
   </AssemblyInfo>
@@ -28,7 +34,10 @@
   <Members>
     <Member MemberName=".ctor">
       <MemberSignature Language="C#" Value="public Helper ();" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor() cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig specialname rtspecialname instance void .ctor() cil managed"
+      />
       <MemberType>Constructor</MemberType>
       <Parameters />
       <Docs>
@@ -38,7 +47,10 @@
     </Member>
     <Member MemberName="UseT">
       <MemberSignature Language="C#" Value="public void UseT (T a, U b, V c);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance void UseT(!T a, !U b, !V c) cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig instance void UseT(!T a, !U b, !V c) cil managed"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Void</ReturnType>

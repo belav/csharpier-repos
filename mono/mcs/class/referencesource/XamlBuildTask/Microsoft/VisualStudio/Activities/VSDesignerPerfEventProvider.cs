@@ -17,7 +17,9 @@ namespace Microsoft.VisualStudio.Activities
         {
             try
             {
-                this.provider = new EventProvider(new Guid("{92C79DA3-CA7D-43d6-BF20-BBD15E7A4E49}"));
+                this.provider = new EventProvider(
+                    new Guid("{92C79DA3-CA7D-43d6-BF20-BBD15E7A4E49}")
+                );
             }
             catch (PlatformNotSupportedException)
             {

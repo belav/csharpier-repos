@@ -11,7 +11,9 @@ namespace System
     /// The exception that is thrown when an array with the wrong number of dimensions is passed to a method.
     /// </summary>
     [Serializable]
-    [TypeForwardedFrom("mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089")]
+    [TypeForwardedFrom(
+        "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+    )]
     public class RankException : SystemException
     {
         public RankException()
@@ -32,10 +34,13 @@ namespace System
             HResult = HResults.COR_E_RANK;
         }
 
-        [Obsolete(Obsoletions.LegacyFormatterImplMessage, DiagnosticId = Obsoletions.LegacyFormatterImplDiagId, UrlFormat = Obsoletions.SharedUrlFormat)]
+        [Obsolete(
+            Obsoletions.LegacyFormatterImplMessage,
+            DiagnosticId = Obsoletions.LegacyFormatterImplDiagId,
+            UrlFormat = Obsoletions.SharedUrlFormat
+        )]
         [EditorBrowsable(EditorBrowsableState.Never)]
-        protected RankException(SerializationInfo info, StreamingContext context) : base(info, context)
-        {
-        }
+        protected RankException(SerializationInfo info, StreamingContext context)
+            : base(info, context) { }
     }
 }

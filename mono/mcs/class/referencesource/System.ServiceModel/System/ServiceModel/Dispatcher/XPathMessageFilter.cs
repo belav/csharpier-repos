@@ -4,14 +4,14 @@
 namespace System.ServiceModel.Dispatcher
 {
     using System;
-    using System.ServiceModel.Channels;
-    using System.ServiceModel.Description;
     using System.Collections;
     using System.Collections.Generic;
     using System.Diagnostics;
     using System.Globalization;
     using System.IO;
     using System.Runtime.Serialization;
+    using System.ServiceModel.Channels;
+    using System.ServiceModel.Description;
     using System.Xml;
     using System.Xml.Schema;
     using System.Xml.Serialization;
@@ -34,35 +34,37 @@ namespace System.ServiceModel.Dispatcher
         const string WSEventingNamespace = "http://schemas.xmlsoap.org/ws/2004/06/eventing";
 
         internal const string XPathDialect = "http://www.w3.org/TR/1999/REC-xpath-19991116";
+
         //const string Namespace = NamingHelper.DefaultNamespace;
-        const string RootNamespace = "http://schemas.microsoft.com/serviceModel/2004/05/xpathfilter";
+        const string RootNamespace =
+            "http://schemas.microsoft.com/serviceModel/2004/05/xpathfilter";
         const string Namespace = RootNamespace + "/";
 
         static XPathQueryMatcher dummyMatcher = new XPathQueryMatcher(true);
 
-        XPathQueryMatcher matcher;             // by default, set to a dummy matcher
+        XPathQueryMatcher matcher; // by default, set to a dummy matcher
 
         internal XmlNamespaceManager namespaces;
 
         string xpath;
 
         /*
-        const string SchemaString = 
+        const string SchemaString =
         "<xsd:schema xmlns:xsd='" + XmlSchema.Namespace + "'>" +
-        "    <xsd:complexType name='XPathMessageFilter'>" + 
-        "      <xsd:sequence>" + 
-        "        <xsd:element name='" + InnerElem + "' >" + 
-        "          <xsd:complexType>" + 
+        "    <xsd:complexType name='XPathMessageFilter'>" +
+        "      <xsd:sequence>" +
+        "        <xsd:element name='" + InnerElem + "' >" +
+        "          <xsd:complexType>" +
         "            <xsd:simpleContent>" +
         "              <xsd:extension base='xsd:string'>" +
-        "                <xsd:attribute name='" + DialectAttr + "' type='xsd:string' use='optional'/>" + 
+        "                <xsd:attribute name='" + DialectAttr + "' type='xsd:string' use='optional'/>" +
         "              </xsd:extension>" +
         "            </xsd:simpleContent>" +
-        "          </xsd:complexType>" + 
-        "        </xsd:element>" + 
-        "      </xsd:sequence>" + 
-        "      <xsd:attribute name='" + NodeQuotaAttr + "' type='xsd:int' use='optional'/>" + 
-        "    </xsd:complexType>" + 
+        "          </xsd:complexType>" +
+        "        </xsd:element>" +
+        "      </xsd:sequence>" +
+        "      <xsd:attribute name='" + NodeQuotaAttr + "' type='xsd:int' use='optional'/>" +
+        "    </xsd:complexType>" +
         "</xsd:schema>";
         
         static XPathMessageFilter()
@@ -151,17 +153,13 @@ namespace System.ServiceModel.Dispatcher
         /// An empty XPath expression ALWAYS MATCHES
         /// </summary>
         public XPathMessageFilter()
-            : this(string.Empty)
-        {
-        }
+            : this(string.Empty) { }
 
         /// <summary>
-        /// Initializes an XPath expression 
+        /// Initializes an XPath expression
         /// </summary>
         public XPathMessageFilter(string xpath)
-            : this(xpath, new XPathMessageContext())
-        {
-        }
+            : this(xpath, new XPathMessageContext()) { }
 
         /// <summary>
         /// Initializes an XPath that uses the given namespace manager to resolve prefixes
@@ -192,22 +190,20 @@ namespace System.ServiceModel.Dispatcher
 
         /// <summary>
         /// Initializes a new instance of the class by reading in a streamed XPath with a specified Xml reader.
-        /// The reader that is to read in the streamed XPath expression. 
+        /// The reader that is to read in the streamed XPath expression.
         /// It is assumed that the reader is parked at the element containing the XPath, with ReaderState == StartElement. The
-        /// content of the element will simply be consumed and no specific tag will be looked for. This allows the user to stash 
+        /// content of the element will simply be consumed and no specific tag will be looked for. This allows the user to stash
         /// their XPaths in whatever tag they want. The entire tag will have been consumed when the method returns.
         /// The constructor will also automatically initialize the namespace manager by resolving all prefixes in the xpath.
         /// </summary>
         public XPathMessageFilter(XmlReader reader)
-            : this(reader, new XPathMessageContext())
-        {
-        }
+            : this(reader, new XPathMessageContext()) { }
 
         /// <summary>
         /// Initializes a new instance of the class by reading in a streamed XPath with a specified Xml reader.
-        /// The reader that is to read in the streamed XPath expression. 
+        /// The reader that is to read in the streamed XPath expression.
         /// It is assumed that the reader is parked at the element containing the XPath, with ReaderState == StartElement. The
-        /// content of the element will simply be consumed and no specific tag will be looked for. This allows the user to stash 
+        /// content of the element will simply be consumed and no specific tag will be looked for. This allows the user to stash
         /// their XPaths in whatever tag they want. The entire tag will have been consumed when the method returns.
         /// The constructor will also automatically initialize the namespace manager by resolving all prefixes in the xpath.
         /// </summary>
@@ -236,43 +232,41 @@ namespace System.ServiceModel.Dispatcher
 #if NO
         internal XPathFilterMatcher Matcher
         {
-            get
-            {
-                return this.matcher;
-            }
+            get { return this.matcher; }
         }
 #endif
+
         /// <summary>
-        /// XPaths contain qnames with prefixes. The namespace maps maps those prefixes to actual namespaces. 
+        /// XPaths contain qnames with prefixes. The namespace maps maps those prefixes to actual namespaces.
         /// </summary>
         /// <value></value>
         public XmlNamespaceManager Namespaces
         {
-            get
-            {
-                return this.namespaces;
-            }
+            get { return this.namespaces; }
         }
 
         /// <summary>
         /// This mitigates a security Threat.
-        /// Some filters could be extremely expensive to evaluate or are very long running. Alternatively, a 
+        /// Some filters could be extremely expensive to evaluate or are very long running. Alternatively, a
         /// filter could have a very large number of relatively simple filters that taken as a whole would be
-        /// long running. 
+        /// long running.
         /// Since filters operate on Xml infosets, a natural and simple way to set computational limits
-        /// is to specify the maximum # of nodes that should be looked at during filter evaluation. 
+        /// is to specify the maximum # of nodes that should be looked at during filter evaluation.
         /// </summary>
         public int NodeQuota
         {
-            get
-            {
-                return this.matcher.NodeQuota;
-            }
+            get { return this.matcher.NodeQuota; }
             set
             {
                 if (value <= 0)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentOutOfRangeException("NodeQuota", value, SR.GetString(SR.FilterQuotaRange)));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new ArgumentOutOfRangeException(
+                            "NodeQuota",
+                            value,
+                            SR.GetString(SR.FilterQuotaRange)
+                        )
+                    );
                 }
 
                 this.EnsureMatcher();
@@ -282,10 +276,7 @@ namespace System.ServiceModel.Dispatcher
 
         public string XPath
         {
-            get
-            {
-                return this.xpath;
-            }
+            get { return this.xpath; }
         }
 
         /// <summary>
@@ -363,7 +354,7 @@ namespace System.ServiceModel.Dispatcher
         ///     <envelope><header></header></envelope>
         /// Note: since this method never probes the message body, it should NOT close the message
         /// If the filter probes the message body, then the filter should THROW an Exception. The filter should not return false
-        /// This is deliberate - we don't want to produce false positives. 
+        /// This is deliberate - we don't want to produce false positives.
         /// Example of such a filter that probes the body: /env:Envelope/env:Body = ....
         /// </summary>
         public override bool Match(Message message)
@@ -379,11 +370,11 @@ namespace System.ServiceModel.Dispatcher
         /// <summary>
         /// Calls messageBuffer.CreateMessage(), then tests whether the message satisfies the criteria of the filter.
         /// MessageFilters will probe
-        /// Always make the user choose whether they want to match on the body or not - and be very aware that they made that choice. 
+        /// Always make the user choose whether they want to match on the body or not - and be very aware that they made that choice.
         ///
         /// We deliberately did not use a default of Match(message), with matchOnBody = false
         /// We don't want situations where a developer who used a body filter would wonder why the filter didn't work!
-        /// </summary>                
+        /// </summary>
         public override bool Match(MessageBuffer messageBuffer)
         {
             if (null == messageBuffer)
@@ -437,7 +428,10 @@ namespace System.ServiceModel.Dispatcher
 
             if (!reader.IsStartElement())
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument("reader", SR.GetString(SR.FilterReaderNotStartElem));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
+                    "reader",
+                    SR.GetString(SR.FilterReaderNotStartElem)
+                );
             }
 
             bool found = false;
@@ -446,9 +440,15 @@ namespace System.ServiceModel.Dispatcher
             {
                 if (QueryDataModel.IsAttribute(reader.NamespaceURI))
                 {
-                    if (found || reader.LocalName != DialectAttr || reader.NamespaceURI != WSEventingNamespace)
+                    if (
+                        found
+                        || reader.LocalName != DialectAttr
+                        || reader.NamespaceURI != WSEventingNamespace
+                    )
                     {
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(SR.GetString(SR.FilterInvalidAttribute)));
+                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                            new InvalidOperationException(SR.GetString(SR.FilterInvalidAttribute))
+                        );
                     }
                     dialect = reader.Value;
                     found = true;
@@ -461,7 +461,11 @@ namespace System.ServiceModel.Dispatcher
 
             if (dialect != null && dialect != XPathDialect)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(SR.GetString(SR.FilterInvalidDialect, XPathDialect)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new InvalidOperationException(
+                        SR.GetString(SR.FilterInvalidDialect, XPathDialect)
+                    )
+                );
             }
 
             bool wasEmpty = reader.IsEmptyElement;
@@ -492,12 +496,18 @@ namespace System.ServiceModel.Dispatcher
 
             if (!reader.IsStartElement())
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument("reader", SR.GetString(SR.FilterReaderNotStartElem));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
+                    "reader",
+                    SR.GetString(SR.FilterReaderNotStartElem)
+                );
             }
 
             if (reader.IsEmptyElement)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument("reader", SR.GetString(SR.FilterInvalidInner, InnerElem));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
+                    "reader",
+                    SR.GetString(SR.FilterInvalidInner, InnerElem)
+                );
             }
 
             // Pull in the node quota
@@ -525,14 +535,20 @@ namespace System.ServiceModel.Dispatcher
             {
                 reader.MoveToElement();
             }
-            int quota = quotaString == null ? int.MaxValue : int.Parse(quotaString, NumberFormatInfo.InvariantInfo);
+            int quota =
+                quotaString == null
+                    ? int.MaxValue
+                    : int.Parse(quotaString, NumberFormatInfo.InvariantInfo);
             reader.ReadStartElement();
 
             reader.MoveToContent();
 
             if (reader.LocalName != InnerElem)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument("reader", SR.GetString(SR.FilterInvalidInner, InnerElem));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
+                    "reader",
+                    SR.GetString(SR.FilterInvalidInner, InnerElem)
+                );
             }
             ReadFrom(reader, new XPathMessageContext());
 
@@ -591,7 +607,7 @@ namespace System.ServiceModel.Dispatcher
             this.Init(xpath, namespaces);
         }
 
-        /// <summary>        
+        /// <summary>
         /// Purge any cached buffers - reduces working set
         /// </summary>
         public void TrimToSize()
@@ -612,7 +628,10 @@ namespace System.ServiceModel.Dispatcher
             }
 
             // Write the NodeQuota
-            writer.WriteAttributeString(NodeQuotaAttr, this.NodeQuota.ToString(NumberFormatInfo.InvariantInfo));
+            writer.WriteAttributeString(
+                NodeQuotaAttr,
+                this.NodeQuota.ToString(NumberFormatInfo.InvariantInfo)
+            );
 
             WriteXPathTo(writer, null, InnerElem, null, true);
         }
@@ -632,7 +651,13 @@ namespace System.ServiceModel.Dispatcher
                 string nsNS = resolver.LookupNamespace(nsPrefix);
 
                 // Check if we need to write the namespace
-                if (nsPrefix.Length > 0 && (nsNS == null || (nsNS != null && nsNS != this.namespaces.LookupNamespace(nsPrefix))))
+                if (
+                    nsPrefix.Length > 0
+                    && (
+                        nsNS == null
+                        || (nsNS != null && nsNS != this.namespaces.LookupNamespace(nsPrefix))
+                    )
+                )
                 {
                     // Write the previous xpath segment
                     if (this.xpath[tmp] == '$')
@@ -654,7 +679,10 @@ namespace System.ServiceModel.Dispatcher
                         {
                             string newPrefix = nsPrefix;
                             int i = 0;
-                            while (resolver.LookupNamespace(newPrefix) != null || this.namespaces.LookupNamespace(newPrefix) != null)
+                            while (
+                                resolver.LookupNamespace(newPrefix) != null
+                                || this.namespaces.LookupNamespace(newPrefix) != null
+                            )
                             {
                                 newPrefix = newPrefix + i.ToString(NumberFormatInfo.InvariantInfo);
                                 ++i;
@@ -675,13 +703,18 @@ namespace System.ServiceModel.Dispatcher
                 }
                 tmp = lexer.FirstTokenChar;
             }
-            newXPath += this.xpath.Substring(startChar);    // Consume the remainder of the xpath
+            newXPath += this.xpath.Substring(startChar); // Consume the remainder of the xpath
 
             // Write the namespaces
             for (int i = 0; i < prefixes.Count; ++i)
             {
                 string prefix = prefixes[i];
-                writer.WriteAttributeString("xmlns", prefixMap[prefix], null, this.namespaces.LookupNamespace(prefix));
+                writer.WriteAttributeString(
+                    "xmlns",
+                    prefixMap[prefix],
+                    null,
+                    this.namespaces.LookupNamespace(prefix)
+                );
             }
 
             // Write the XPath
@@ -696,7 +729,13 @@ namespace System.ServiceModel.Dispatcher
         /// <param name='localName'><para> The local name of the XPath Xml element.</para></param>
         /// <param name='ns'>The namespace URI to associate with the Xml element.</param>
         /// <param name='writeNamespaces'>if namespaces should be serialized out separately as attributes;  if not.</param>
-        public void WriteXPathTo(XmlWriter writer, string prefix, string localName, string ns, bool writeNamespaces)
+        public void WriteXPathTo(
+            XmlWriter writer,
+            string prefix,
+            string localName,
+            string ns,
+            bool writeNamespaces
+        )
         {
             if (null == writer)
             {
@@ -710,7 +749,10 @@ namespace System.ServiceModel.Dispatcher
 
             if (localName.Length == 0)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument("localName", SR.GetString(SR.FilterEmptyString));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
+                    "localName",
+                    SR.GetString(SR.FilterEmptyString)
+                );
             }
 
             if (null == prefix)

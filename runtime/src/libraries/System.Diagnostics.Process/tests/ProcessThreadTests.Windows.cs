@@ -1,9 +1,9 @@
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
+using System.Linq;
 using System.Runtime.InteropServices;
 using System.Threading;
-using System.Linq;
 using Xunit;
 
 namespace System.Diagnostics.Tests
@@ -33,10 +33,19 @@ namespace System.Diagnostics.Tests
                 try
                 {
                     // Find the relevant ProcessThread in this process
-                    ProcessThread targetThread = currentProcess.Threads.Cast<ProcessThread>().Single(pt => pt.Id == targetThreadId);
+                    ProcessThread targetThread = currentProcess
+                        .Threads.Cast<ProcessThread>()
+                        .Single(pt => pt.Id == targetThreadId);
 
                     // Try setting and getting its priority
-                    foreach (ThreadPriorityLevel level in new[] { ThreadPriorityLevel.AboveNormal, ThreadPriorityLevel.BelowNormal, ThreadPriorityLevel.Normal })
+                    foreach (
+                        ThreadPriorityLevel level in new[]
+                        {
+                            ThreadPriorityLevel.AboveNormal,
+                            ThreadPriorityLevel.BelowNormal,
+                            ThreadPriorityLevel.Normal,
+                        }
+                    )
                     {
                         targetThread.PriorityLevel = ThreadPriorityLevel.AboveNormal;
                         Assert.Equal(ThreadPriorityLevel.AboveNormal, targetThread.PriorityLevel);

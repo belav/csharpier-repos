@@ -1,5 +1,4 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
-
   <PropertyGroup>
     <TargetFrameworks>$(NetCoreAppCurrent);$(NetFrameworkMinimum)</TargetFrameworks>
     <EnableDefaultItems>true</EnableDefaultItems>
@@ -9,5 +8,4 @@
   <ItemGroup>
     <ProjectReference Include="..\MockHostTypes\MockHostTypes.csproj" />
   </ItemGroup>
-
 </Project>

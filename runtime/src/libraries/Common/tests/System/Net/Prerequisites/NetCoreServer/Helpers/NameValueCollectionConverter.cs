@@ -3,7 +3,6 @@
 
 using System;
 using System.Collections.Specialized;
-
 using Newtonsoft.Json;
 
 namespace NetCoreServer
@@ -28,7 +27,12 @@ namespace NetCoreServer
             writer.WriteEndObject();
         }
 
-        public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
+        public override object ReadJson(
+            JsonReader reader,
+            Type objectType,
+            object existingValue,
+            JsonSerializer serializer
+        )
         {
             var nameValueCollection = new NameValueCollection();
             var key = "";

@@ -14,11 +14,26 @@ namespace System.Reflection.Tests
         [Fact]
         public static void Identity_ReflectedType1()
         {
-            MemberTypes mt = MemberTypes.Event | MemberTypes.Field | MemberTypes.Method | MemberTypes.Property;
-            const BindingFlags bf = BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.Static;
+            MemberTypes mt =
+                MemberTypes.Event | MemberTypes.Field | MemberTypes.Method | MemberTypes.Property;
+            const BindingFlags bf =
+                BindingFlags.Public
+                | BindingFlags.NonPublic
+                | BindingFlags.Instance
+                | BindingFlags.Static;
 
-            MemberInfo[] fromBase = typeof(MemberHolderBase<int>).Project().GetMember("*", mt, bf).Where(m => m.DeclaringType != typeof(object).Project()).OrderBy(m => m.Name).ToArray();
-            MemberInfo[] fromDerived = typeof(MemberHolder<int>).Project().GetMember("*", mt, bf).Where(m => m.DeclaringType != typeof(object).Project()).OrderBy(m => m.Name).ToArray();
+            MemberInfo[] fromBase = typeof(MemberHolderBase<int>)
+                .Project()
+                .GetMember("*", mt, bf)
+                .Where(m => m.DeclaringType != typeof(object).Project())
+                .OrderBy(m => m.Name)
+                .ToArray();
+            MemberInfo[] fromDerived = typeof(MemberHolder<int>)
+                .Project()
+                .GetMember("*", mt, bf)
+                .Where(m => m.DeclaringType != typeof(object).Project())
+                .OrderBy(m => m.Name)
+                .ToArray();
 
             Assert.Equal(fromBase.Length, fromDerived.Length);
             for (int i = 0; i < fromBase.Length; i++)
@@ -34,11 +49,30 @@ namespace System.Reflection.Tests
         [Fact]
         public static void Identity_DeclaringType1()
         {
-            MemberTypes mt = MemberTypes.Constructor | MemberTypes.Event | MemberTypes.Field | MemberTypes.Method | MemberTypes.Property;
-            const BindingFlags bf = BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.Static;
+            MemberTypes mt =
+                MemberTypes.Constructor
+                | MemberTypes.Event
+                | MemberTypes.Field
+                | MemberTypes.Method
+                | MemberTypes.Property;
+            const BindingFlags bf =
+                BindingFlags.Public
+                | BindingFlags.NonPublic
+                | BindingFlags.Instance
+                | BindingFlags.Static;
 
-            MemberInfo[] fromBase = typeof(MemberHolderBase<int>).Project().GetMember("*", mt, bf).Where(m => m.DeclaringType != typeof(object).Project()).OrderBy(m => m.Name).ToArray();
-            MemberInfo[] fromDerived = typeof(MemberHolderBase<long>).Project().GetMember("*", mt, bf).Where(m => m.DeclaringType != typeof(object).Project()).OrderBy(m => m.Name).ToArray();
+            MemberInfo[] fromBase = typeof(MemberHolderBase<int>)
+                .Project()
+                .GetMember("*", mt, bf)
+                .Where(m => m.DeclaringType != typeof(object).Project())
+                .OrderBy(m => m.Name)
+                .ToArray();
+            MemberInfo[] fromDerived = typeof(MemberHolderBase<long>)
+                .Project()
+                .GetMember("*", mt, bf)
+                .Where(m => m.DeclaringType != typeof(object).Project())
+                .OrderBy(m => m.Name)
+                .ToArray();
 
             Assert.Equal(fromBase.Length, fromDerived.Length);
             for (int i = 0; i < fromBase.Length; i++)
@@ -50,11 +84,30 @@ namespace System.Reflection.Tests
         [Fact]
         public static void Identity_Handle1()
         {
-            MemberTypes mt = MemberTypes.Constructor | MemberTypes.Event | MemberTypes.Field | MemberTypes.Method | MemberTypes.Property;
-            const BindingFlags bf = BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.Static;
+            MemberTypes mt =
+                MemberTypes.Constructor
+                | MemberTypes.Event
+                | MemberTypes.Field
+                | MemberTypes.Method
+                | MemberTypes.Property;
+            const BindingFlags bf =
+                BindingFlags.Public
+                | BindingFlags.NonPublic
+                | BindingFlags.Instance
+                | BindingFlags.Static;
 
-            MemberInfo[] fromBase = typeof(MemberHolderBase<>).Project().GetMember("*", mt, bf | BindingFlags.DeclaredOnly).Where(m => m.DeclaringType != typeof(object).Project()).OrderBy(m => m.Name).ToArray();
-            MemberInfo[] fromBaseAgain = typeof(MemberHolderBase<>).Project().GetMember("*", mt, bf).Where(m => m.DeclaringType != typeof(object).Project()).OrderBy(m => m.Name).ToArray();
+            MemberInfo[] fromBase = typeof(MemberHolderBase<>)
+                .Project()
+                .GetMember("*", mt, bf | BindingFlags.DeclaredOnly)
+                .Where(m => m.DeclaringType != typeof(object).Project())
+                .OrderBy(m => m.Name)
+                .ToArray();
+            MemberInfo[] fromBaseAgain = typeof(MemberHolderBase<>)
+                .Project()
+                .GetMember("*", mt, bf)
+                .Where(m => m.DeclaringType != typeof(object).Project())
+                .OrderBy(m => m.Name)
+                .ToArray();
             Assert.Equal(fromBase.Length, fromBaseAgain.Length);
 
             for (int i = 0; i < fromBase.Length; i++)
@@ -109,8 +162,12 @@ namespace System.Reflection.Tests
         [Fact]
         public static void ParameterEquality1()
         {
-            MethodInfo m1 = typeof(MemberHolderBase<int>).Project().GetMethod("MyParameterizedMethod1");
-            MethodInfo m2 = typeof(MemberHolderBase<int>).Project().GetMethod("MyParameterizedMethod1");
+            MethodInfo m1 = typeof(MemberHolderBase<int>)
+                .Project()
+                .GetMethod("MyParameterizedMethod1");
+            MethodInfo m2 = typeof(MemberHolderBase<int>)
+                .Project()
+                .GetMethod("MyParameterizedMethod1");
 
             ParameterInfo[] pis1 = m1.GetParameters();
             ParameterInfo[] pis2 = m2.GetParameters();
@@ -136,8 +193,12 @@ namespace System.Reflection.Tests
         [Fact]
         public static void ParameterEquality2()
         {
-            MethodInfo m1 = typeof(MemberHolderBase<int>).Project().GetMethod("MyParameterizedMethod1");
-            MethodInfo m2 = typeof(MemberHolderBase<long>).Project().GetMethod("MyParameterizedMethod1");
+            MethodInfo m1 = typeof(MemberHolderBase<int>)
+                .Project()
+                .GetMethod("MyParameterizedMethod1");
+            MethodInfo m2 = typeof(MemberHolderBase<long>)
+                .Project()
+                .GetMethod("MyParameterizedMethod1");
 
             ParameterInfo[] pis1 = m1.GetParameters();
             ParameterInfo[] pis2 = m2.GetParameters();
@@ -153,8 +214,10 @@ namespace System.Reflection.Tests
         [Fact]
         public static void ParameterEquality3()
         {
-            MethodInfo m1 = typeof(MemberHolderBase<int>).GetMethod("MyParameterizedMethod1");  // Intentionally not projected.
-            MethodInfo m2 = typeof(MemberHolderBase<int>).Project().GetMethod("MyParameterizedMethod1");
+            MethodInfo m1 = typeof(MemberHolderBase<int>).GetMethod("MyParameterizedMethod1"); // Intentionally not projected.
+            MethodInfo m2 = typeof(MemberHolderBase<int>)
+                .Project()
+                .GetMethod("MyParameterizedMethod1");
 
             if (object.ReferenceEquals(m1, m2))
                 return; // Projection is turned off on this so this test is pointless.
@@ -173,21 +236,42 @@ namespace System.Reflection.Tests
         private class MemberHolderBase<T>
         {
             public MemberHolderBase() { }
+
             public MemberHolderBase(int x) { }
+
             public int MyField1;
             public int MyField2;
-            public event Action MyEvent1 { add { } remove { } }
-            public event Action MyEvent2 { add { } remove { } }
+            public event Action MyEvent1
+            {
+                add { }
+                remove { }
+            }
+            public event Action MyEvent2
+            {
+                add { }
+                remove { }
+            }
+
             public void MyMethod1<M>() { }
+
             public void MyMethod2<M>() { }
+
             public void MyParameterizedMethod1(int x, int y) { }
+
             public void MyParameterizedMethod2(int x, int y) { }
-            public int MyProperty1 { get { throw null!; } set { throw null!; } }
-            public int MyProperty2 { get { throw null!; } set { throw null!; } }
+
+            public int MyProperty1
+            {
+                get { throw null!; }
+                set { throw null!; }
+            }
+            public int MyProperty2
+            {
+                get { throw null!; }
+                set { throw null!; }
+            }
         }
 
-        private class MemberHolder<T> : MemberHolderBase<T>
-        {
-        }
+        private class MemberHolder<T> : MemberHolderBase<T> { }
     }
 }

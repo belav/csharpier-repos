@@ -13,27 +13,31 @@ namespace System
     }
 
     [Serializable]
-    [TypeForwardedFrom("mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089")]
+    [TypeForwardedFrom(
+        "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+    )]
     public class ContextMarshalException : SystemException
     {
-        public ContextMarshalException() : this(SR.Arg_ContextMarshalException, null)
-        {
-        }
+        public ContextMarshalException()
+            : this(SR.Arg_ContextMarshalException, null) { }
 
-        public ContextMarshalException(string? message) : this(message, null)
-        {
-        }
+        public ContextMarshalException(string? message)
+            : this(message, null) { }
 
-        public ContextMarshalException(string? message, Exception? inner) : base(message, inner)
+        public ContextMarshalException(string? message, Exception? inner)
+            : base(message, inner)
         {
             HResult = HResults.COR_E_CONTEXTMARSHAL;
         }
 
-        [Obsolete(Obsoletions.LegacyFormatterImplMessage, DiagnosticId = Obsoletions.LegacyFormatterImplDiagId, UrlFormat = Obsoletions.SharedUrlFormat)]
+        [Obsolete(
+            Obsoletions.LegacyFormatterImplMessage,
+            DiagnosticId = Obsoletions.LegacyFormatterImplDiagId,
+            UrlFormat = Obsoletions.SharedUrlFormat
+        )]
         [EditorBrowsable(EditorBrowsableState.Never)]
-        protected ContextMarshalException(SerializationInfo info, StreamingContext context) : base(info, context)
-        {
-        }
+        protected ContextMarshalException(SerializationInfo info, StreamingContext context)
+            : base(info, context) { }
     }
 
     [AttributeUsage(AttributeTargets.Field, Inherited = false)]

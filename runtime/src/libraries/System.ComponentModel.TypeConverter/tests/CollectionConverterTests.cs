@@ -14,11 +14,19 @@ namespace System.ComponentModel.Tests
 
         public override IEnumerable<ConvertTest> ConvertToTestData()
         {
-            yield return ConvertTest.Valid(new CustomCollection(), "(Collection)").WithInvariantRemoteInvokeCulture();
+            yield return ConvertTest
+                .Valid(new CustomCollection(), "(Collection)")
+                .WithInvariantRemoteInvokeCulture();
             yield return ConvertTest.Valid(1, "1");
 
-            yield return ConvertTest.CantConvertTo(new CustomCollection(), typeof(CustomCollection));
-            yield return ConvertTest.CantConvertTo(new CustomCollection(), typeof(InstanceDescriptor));
+            yield return ConvertTest.CantConvertTo(
+                new CustomCollection(),
+                typeof(CustomCollection)
+            );
+            yield return ConvertTest.CantConvertTo(
+                new CustomCollection(),
+                typeof(InstanceDescriptor)
+            );
             yield return ConvertTest.CantConvertTo(new CustomCollection(), typeof(object));
         }
 

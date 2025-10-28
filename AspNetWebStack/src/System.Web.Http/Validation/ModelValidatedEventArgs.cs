@@ -7,7 +7,10 @@ namespace System.Web.Http.Validation
 {
     public sealed class ModelValidatedEventArgs : EventArgs
     {
-        public ModelValidatedEventArgs(HttpActionContext actionContext, ModelValidationNode parentNode)
+        public ModelValidatedEventArgs(
+            HttpActionContext actionContext,
+            ModelValidationNode parentNode
+        )
         {
             if (actionContext == null)
             {

@@ -28,37 +28,39 @@ namespace Microsoft.CodeAnalysis.CSharp.Emit
         {
             get
             {
-                return ImmutableArray<Cci.ICustomModifier>.CastUp(_underlyingParameter.TypeWithAnnotations.CustomModifiers);
+                return ImmutableArray<Cci.ICustomModifier>.CastUp(
+                    _underlyingParameter.TypeWithAnnotations.CustomModifiers
+                );
             }
         }
 
         bool Cci.IParameterTypeInformation.IsByReference
         {
-            get
-            {
-                return _underlyingParameter.RefKind != RefKind.None;
-            }
+            get { return _underlyingParameter.RefKind != RefKind.None; }
         }
 
         ImmutableArray<Cci.ICustomModifier> Cci.IParameterTypeInformation.RefCustomModifiers
         {
             get
             {
-                return ImmutableArray<Cci.ICustomModifier>.CastUp(_underlyingParameter.RefCustomModifiers);
+                return ImmutableArray<Cci.ICustomModifier>.CastUp(
+                    _underlyingParameter.RefCustomModifiers
+                );
             }
         }
 
         Cci.ITypeReference Cci.IParameterTypeInformation.GetType(EmitContext context)
         {
-            return ((PEModuleBuilder)context.Module).Translate(_underlyingParameter.Type, syntaxNodeOpt: (CSharpSyntaxNode)context.SyntaxNode, diagnostics: context.Diagnostics);
+            return ((PEModuleBuilder)context.Module).Translate(
+                _underlyingParameter.Type,
+                syntaxNodeOpt: (CSharpSyntaxNode)context.SyntaxNode,
+                diagnostics: context.Diagnostics
+            );
         }
 
         ushort Cci.IParameterListEntry.Index
         {
-            get
-            {
-                return (ushort)_underlyingParameter.Ordinal;
-            }
+            get { return (ushort)_underlyingParameter.Ordinal; }
         }
 
         public override string ToString()

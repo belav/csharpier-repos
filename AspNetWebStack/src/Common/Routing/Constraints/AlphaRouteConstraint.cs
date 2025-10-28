@@ -15,8 +15,7 @@ namespace System.Web.Mvc.Routing.Constraints
         /// <summary>
         /// Initializes a new instance of the <see cref="AlphaRouteConstraint" /> class.
         /// </summary>
-        public AlphaRouteConstraint() : base(@"^[a-z]*$")
-        {
-        }
+        public AlphaRouteConstraint()
+            : base(@"^[a-z]*$") { }
     }
 }

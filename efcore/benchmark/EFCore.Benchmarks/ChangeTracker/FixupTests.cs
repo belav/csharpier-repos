@@ -10,6 +10,7 @@ using Xunit;
 #pragma warning disable CA1034 // Nested types should not be visible
 
 namespace Microsoft.EntityFrameworkCore.Benchmarks.ChangeTracker;
+
 #pragma warning disable CA1052 // Static holder types should be Static or NotInheritable
 public class FixupTests
 #pragma warning restore CA1052 // Static holder types should be Static or NotInheritable
@@ -47,13 +48,20 @@ public class FixupTests
             _context.ChangeTracker.AutoDetectChangesEnabled = AutoDetectChanges;
 
             _customers = _fixture.CreateCustomers(5000, setPrimaryKeys: true);
-            _ordersWithoutPk = _fixture.CreateOrders(_customers, ordersPerCustomer: 2, setPrimaryKeys: false);
-            _ordersWithPk = _fixture.CreateOrders(_customers, ordersPerCustomer: 2, setPrimaryKeys: true);
+            _ordersWithoutPk = _fixture.CreateOrders(
+                _customers,
+                ordersPerCustomer: 2,
+                setPrimaryKeys: false
+            );
+            _ordersWithPk = _fixture.CreateOrders(
+                _customers,
+                ordersPerCustomer: 2,
+                setPrimaryKeys: true
+            );
         }
 
         [IterationCleanup]
-        public virtual void CleanupContext()
-            => _context.Dispose();
+        public virtual void CleanupContext() => _context.Dispose();
     }
 
     public abstract class ChildVariationsBase : FixupBase
@@ -84,8 +92,7 @@ public class FixupTests
         }
 
         [Benchmark]
-        public virtual void QueryChildren()
-            => _context.Orders.ToList();
+        public virtual void QueryChildren() => _context.Orders.ToList();
     }
 
     public abstract class ParentVariationsBase : FixupBase
@@ -116,7 +123,6 @@ public class FixupTests
         }
 
         [Benchmark]
-        public virtual void QueryParents()
-            => _context.Customers.ToList();
+        public virtual void QueryParents() => _context.Customers.ToList();
     }
 }

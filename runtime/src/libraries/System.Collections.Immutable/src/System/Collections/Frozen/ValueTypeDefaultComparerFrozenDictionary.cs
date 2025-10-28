@@ -10,10 +10,13 @@ namespace System.Collections.Frozen
     /// <summary>Provides a frozen dictionary optimized for value type keys using the default comparer.</summary>
     /// <typeparam name="TKey">The type of keys in the dictionary.</typeparam>
     /// <typeparam name="TValue">The type of values in the dictionary.</typeparam>
-    internal sealed class ValueTypeDefaultComparerFrozenDictionary<TKey, TValue> : KeysAndValuesFrozenDictionary<TKey, TValue>, IDictionary<TKey, TValue>
+    internal sealed class ValueTypeDefaultComparerFrozenDictionary<TKey, TValue>
+        : KeysAndValuesFrozenDictionary<TKey, TValue>,
+            IDictionary<TKey, TValue>
         where TKey : notnull
     {
-        internal ValueTypeDefaultComparerFrozenDictionary(Dictionary<TKey, TValue> source) : base(source, Constants.KeysAreHashCodes<TKey>())
+        internal ValueTypeDefaultComparerFrozenDictionary(Dictionary<TKey, TValue> source)
+            : base(source, Constants.KeysAreHashCodes<TKey>())
         {
             Debug.Assert(typeof(TKey).IsValueType);
             Debug.Assert(ReferenceEquals(source.Comparer, EqualityComparer<TKey>.Default));

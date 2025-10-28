@@ -15,10 +15,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -33,68 +33,78 @@ using System.Configuration;
 
 namespace System.Web.Configuration
 {
-	[ConfigurationCollection (typeof (CodeSubDirectory), CollectionType = ConfigurationElementCollectionType.BasicMap)]
-	public sealed class CodeSubDirectoriesCollection : ConfigurationElementCollection
-	{
-		static ConfigurationPropertyCollection props;
+    [ConfigurationCollection(
+        typeof(CodeSubDirectory),
+        CollectionType = ConfigurationElementCollectionType.BasicMap
+    )]
+    public sealed class CodeSubDirectoriesCollection : ConfigurationElementCollection
+    {
+        static ConfigurationPropertyCollection props;
 
-		static CodeSubDirectoriesCollection ()
-		{
-			//FIXME: add properties
-			props = new ConfigurationPropertyCollection ();
-		}
-		
-		public CodeSubDirectoriesCollection (): base (CaseInsensitiveComparer.DefaultInvariant)
-		{
-		}
+        static CodeSubDirectoriesCollection()
+        {
+            //FIXME: add properties
+            props = new ConfigurationPropertyCollection();
+        }
 
-		public CodeSubDirectory this [int index] {
-			get { return (CodeSubDirectory) BaseGet (index); }
-			set { if (BaseGet (index) != null) BaseRemoveAt (index); BaseAdd (index, value); }
-		}
+        public CodeSubDirectoriesCollection()
+            : base(CaseInsensitiveComparer.DefaultInvariant) { }
 
-		public override ConfigurationElementCollectionType CollectionType {
-			get { return ConfigurationElementCollectionType.BasicMap; }
-		}
+        public CodeSubDirectory this[int index]
+        {
+            get { return (CodeSubDirectory)BaseGet(index); }
+            set
+            {
+                if (BaseGet(index) != null)
+                    BaseRemoveAt(index);
+                BaseAdd(index, value);
+            }
+        }
 
-		protected override string ElementName {
-			get { return "add"; }
-		}
+        public override ConfigurationElementCollectionType CollectionType
+        {
+            get { return ConfigurationElementCollectionType.BasicMap; }
+        }
 
-		protected internal override ConfigurationPropertyCollection Properties {
-			get { return props; }
-		}
+        protected override string ElementName
+        {
+            get { return "add"; }
+        }
 
-		public void Add (CodeSubDirectory codeSubDirectory)
-		{
-			BaseAdd (codeSubDirectory);
-		}
+        protected internal override ConfigurationPropertyCollection Properties
+        {
+            get { return props; }
+        }
 
-		public void Clear ()
-		{
-			BaseClear ();
-		}
+        public void Add(CodeSubDirectory codeSubDirectory)
+        {
+            BaseAdd(codeSubDirectory);
+        }
 
-		protected override ConfigurationElement CreateNewElement ()
-		{
-			return new CodeSubDirectory (null);
-		}
+        public void Clear()
+        {
+            BaseClear();
+        }
 
-		protected override object GetElementKey (ConfigurationElement element)
-		{
-			CodeSubDirectory sd = (CodeSubDirectory) element;
-			return sd.DirectoryName;
-		}
+        protected override ConfigurationElement CreateNewElement()
+        {
+            return new CodeSubDirectory(null);
+        }
 
-		public void Remove (string directoryName)
-		{
-			BaseRemove (directoryName);
-		}
+        protected override object GetElementKey(ConfigurationElement element)
+        {
+            CodeSubDirectory sd = (CodeSubDirectory)element;
+            return sd.DirectoryName;
+        }
 
-		public void RemoveAt (int index)
-		{
-			BaseRemoveAt (index);
-		}
-	}
+        public void Remove(string directoryName)
+        {
+            BaseRemove(directoryName);
+        }
+
+        public void RemoveAt(int index)
+        {
+            BaseRemoveAt(index);
+        }
+    }
 }
-

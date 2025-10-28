@@ -28,88 +28,99 @@ namespace System.Net.Configuration
             if (EvaluationContext.IsMachineLevel)
                 return;
 
-            PropertyInformation[] protectedProperties = {
+            PropertyInformation[] protectedProperties =
+            {
                 ElementInformation.Properties[ConfigurationStrings.MaximumResponseHeadersLength],
-                ElementInformation.Properties[ConfigurationStrings.MaximumErrorResponseLength]
+                ElementInformation.Properties[ConfigurationStrings.MaximumErrorResponseLength],
             };
 
             foreach (PropertyInformation property in protectedProperties)
                 if (property.ValueOrigin == PropertyValueOrigin.SetHere)
                 {
-                    try {
+                    try
+                    {
                         ExceptionHelper.WebPermissionUnrestricted.Demand();
-                    } catch (Exception exception) {
+                    }
+                    catch (Exception exception)
+                    {
                         throw new ConfigurationErrorsException(
-                                      SR.GetString(SR.net_config_property_permission, 
-                                                   property.Name),
-                                      exception);
+                            SR.GetString(SR.net_config_property_permission, property.Name),
+                            exception
+                        );
                     }
                 }
         }
 
-        protected override ConfigurationPropertyCollection Properties 
+        protected override ConfigurationPropertyCollection Properties
         {
-            get 
-            {
-                return this.properties;
-            }
+            get { return this.properties; }
         }
 
-
-        [ConfigurationProperty(ConfigurationStrings.maximumUnauthorizedUploadLength, DefaultValue=(int)(-1))] 
+        [ConfigurationProperty(
+            ConfigurationStrings.maximumUnauthorizedUploadLength,
+            DefaultValue = (int)(-1)
+        )]
         public int MaximumUnauthorizedUploadLength
         {
             get { return (int)this[this.maximumUnauthorizedUploadLength]; }
             set { this[this.maximumUnauthorizedUploadLength] = value; }
         }
-        
-        [ConfigurationProperty(ConfigurationStrings.MaximumErrorResponseLength, DefaultValue=(int)(64))]
+
+        [ConfigurationProperty(
+            ConfigurationStrings.MaximumErrorResponseLength,
+            DefaultValue = (int)(64)
+        )]
         public int MaximumErrorResponseLength
         {
             get { return (int)this[this.maximumErrorResponseLength]; }
             set { this[this.maximumErrorResponseLength] = value; }
         }
-        
 
-        [ConfigurationProperty(ConfigurationStrings.MaximumResponseHeadersLength, DefaultValue= 64)]
+        [ConfigurationProperty(
+            ConfigurationStrings.MaximumResponseHeadersLength,
+            DefaultValue = 64
+        )]
         public int MaximumResponseHeadersLength
         {
             get { return (int)this[this.maximumResponseHeadersLength]; }
             set { this[this.maximumResponseHeadersLength] = value; }
         }
 
-        [ConfigurationProperty(ConfigurationStrings.UseUnsafeHeaderParsing, DefaultValue= false)]
+        [ConfigurationProperty(ConfigurationStrings.UseUnsafeHeaderParsing, DefaultValue = false)]
         public bool UseUnsafeHeaderParsing
         {
-            get { return (bool) this[this.useUnsafeHeaderParsing]; }
+            get { return (bool)this[this.useUnsafeHeaderParsing]; }
             set { this[this.useUnsafeHeaderParsing] = value; }
         }
 
         ConfigurationPropertyCollection properties = new ConfigurationPropertyCollection();
 
-        readonly ConfigurationProperty maximumResponseHeadersLength =
-            new ConfigurationProperty(ConfigurationStrings.MaximumResponseHeadersLength, 
-                                      typeof(int), 
-                                      64, 
-                                      ConfigurationPropertyOptions.None);
+        readonly ConfigurationProperty maximumResponseHeadersLength = new ConfigurationProperty(
+            ConfigurationStrings.MaximumResponseHeadersLength,
+            typeof(int),
+            64,
+            ConfigurationPropertyOptions.None
+        );
 
-        readonly ConfigurationProperty maximumErrorResponseLength =
-            new ConfigurationProperty(ConfigurationStrings.MaximumErrorResponseLength, 
-                                      typeof(int), 
-                                      64, 
-                                      ConfigurationPropertyOptions.None);
-        
-        readonly ConfigurationProperty maximumUnauthorizedUploadLength =
-            new ConfigurationProperty(ConfigurationStrings.maximumUnauthorizedUploadLength, 
-                                      typeof(int), 
-                                      -1, 
-                                      ConfigurationPropertyOptions.None);
-        
-         readonly ConfigurationProperty useUnsafeHeaderParsing =
-            new ConfigurationProperty(ConfigurationStrings.UseUnsafeHeaderParsing, 
-                                      typeof(bool), 
-                                      false, 
-                                      ConfigurationPropertyOptions.None);
+        readonly ConfigurationProperty maximumErrorResponseLength = new ConfigurationProperty(
+            ConfigurationStrings.MaximumErrorResponseLength,
+            typeof(int),
+            64,
+            ConfigurationPropertyOptions.None
+        );
+
+        readonly ConfigurationProperty maximumUnauthorizedUploadLength = new ConfigurationProperty(
+            ConfigurationStrings.maximumUnauthorizedUploadLength,
+            typeof(int),
+            -1,
+            ConfigurationPropertyOptions.None
+        );
+
+        readonly ConfigurationProperty useUnsafeHeaderParsing = new ConfigurationProperty(
+            ConfigurationStrings.UseUnsafeHeaderParsing,
+            typeof(bool),
+            false,
+            ConfigurationPropertyOptions.None
+        );
     }
 }
-

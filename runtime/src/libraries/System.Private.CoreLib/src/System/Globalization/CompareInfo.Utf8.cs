@@ -22,7 +22,11 @@ namespace System.Globalization
         /// <exception cref="ArgumentException">
         /// <paramref name="options"/> contains an unsupported combination of flags.
         /// </exception>
-        internal bool IsPrefixUtf8(ReadOnlySpan<byte> source, ReadOnlySpan<byte> prefix, CompareOptions options = CompareOptions.None)
+        internal bool IsPrefixUtf8(
+            ReadOnlySpan<byte> source,
+            ReadOnlySpan<byte> prefix,
+            CompareOptions options = CompareOptions.None
+        )
         {
             // The empty UTF-8 string is trivially a prefix of every other string. For compat with
             // earlier versions of the Framework we'll early-exit here before validating the
@@ -72,7 +76,11 @@ namespace System.Globalization
             }
         }
 
-        private unsafe bool StartsWithCoreUtf8(ReadOnlySpan<byte> source, ReadOnlySpan<byte> prefix, CompareOptions options)
+        private unsafe bool StartsWithCoreUtf8(
+            ReadOnlySpan<byte> source,
+            ReadOnlySpan<byte> prefix,
+            CompareOptions options
+        )
         {
             // NLS/ICU doesn't provide native UTF-8 support so we need to convert to UTF-16 and compare that way
 
@@ -93,7 +101,13 @@ namespace System.Globalization
                 sourceUtf16 = sourceUtf16Array.AsSpan(0, sourceMaxCharCount);
             }
 
-            OperationStatus sourceStatus = Utf8.ToUtf16PreservingReplacement(source, sourceUtf16, out _, out int sourceUtf16Length, replaceInvalidSequences: true);
+            OperationStatus sourceStatus = Utf8.ToUtf16PreservingReplacement(
+                source,
+                sourceUtf16,
+                out _,
+                out int sourceUtf16Length,
+                replaceInvalidSequences: true
+            );
 
             if (sourceStatus != OperationStatus.Done)
             {
@@ -124,7 +138,13 @@ namespace System.Globalization
                 prefixUtf16 = prefixUtf16Array.AsSpan(0, prefixMaxCharCount);
             }
 
-            OperationStatus prefixStatus = Utf8.ToUtf16PreservingReplacement(prefix, prefixUtf16, out _, out int prefixUtf16Length, replaceInvalidSequences: true);
+            OperationStatus prefixStatus = Utf8.ToUtf16PreservingReplacement(
+                prefix,
+                prefixUtf16,
+                out _,
+                out int prefixUtf16Length,
+                replaceInvalidSequences: true
+            );
 
             if (prefixStatus != OperationStatus.Done)
             {

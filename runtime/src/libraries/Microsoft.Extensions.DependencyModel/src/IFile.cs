@@ -20,7 +20,8 @@ namespace Microsoft.Extensions.DependencyModel
             FileAccess fileAccess,
             FileShare fileShare,
             int bufferSize,
-            FileOptions fileOptions);
+            FileOptions fileOptions
+        );
 
         void CreateEmptyFile(string path);
     }

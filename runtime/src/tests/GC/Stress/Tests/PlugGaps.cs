@@ -5,9 +5,9 @@
 //
 
 using System;
+using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
-using System.Collections.Generic;
 
 public class GCUtil
 {
@@ -15,7 +15,6 @@ public class GCUtil
     public static List<byte[]> blist = new List<byte[]>();
     public static List<GCHandle> list2 = new List<GCHandle>();
     public static List<byte[]> blist2 = new List<byte[]>();
-
 
     public static void Alloc(int numNodes, int percentPinned)
     {
@@ -33,7 +32,6 @@ public class GCUtil
         }
     }
 
-
     [MethodImplAttribute(MethodImplOptions.NoInlining)]
     public static void FreePins()
     {
@@ -45,14 +43,11 @@ public class GCUtil
         blist.Clear();
     }
 
-
     [MethodImplAttribute(MethodImplOptions.NoInlining)]
     public static void FreeNonPins()
     {
         blist.Clear();
     }
-
-
 
     public static void Alloc2(int numNodes, int percentPinned)
     {
@@ -70,8 +65,6 @@ public class GCUtil
         }
     }
 
-
-
     [MethodImplAttribute(MethodImplOptions.NoInlining)]
     public static void FreePins2()
     {
@@ -83,14 +76,11 @@ public class GCUtil
         blist2.Clear();
     }
 
-
-
     [MethodImplAttribute(MethodImplOptions.NoInlining)]
     public static void FreeNonPins2()
     {
         blist2.Clear();
     }
-
 
     public static void AllocWithGaps()
     {
@@ -115,7 +105,6 @@ public class Test
         GCUtil.AllocWithGaps();
 
         Console.WriteLine("phase 1 complete");
-
 
         // losing all live references to the unpinned byte arrays
         // this will fragment the heap with ~50 byte holes

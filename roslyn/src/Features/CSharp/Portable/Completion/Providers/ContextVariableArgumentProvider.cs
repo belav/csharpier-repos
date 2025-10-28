@@ -19,14 +19,16 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public ContextVariableArgumentProvider()
-        {
-        }
+        public ContextVariableArgumentProvider() { }
 
         protected override string ThisOrMeKeyword => SyntaxFacts.GetText(SyntaxKind.ThisKeyword);
 
-        protected override bool IsInstanceContext(SyntaxTree syntaxTree, SyntaxToken targetToken, SemanticModel semanticModel, CancellationToken cancellationToken)
-            => syntaxTree.IsInstanceContext(targetToken, semanticModel, cancellationToken);
+        protected override bool IsInstanceContext(
+            SyntaxTree syntaxTree,
+            SyntaxToken targetToken,
+            SemanticModel semanticModel,
+            CancellationToken cancellationToken
+        ) => syntaxTree.IsInstanceContext(targetToken, semanticModel, cancellationToken);
 
         public override async Task ProvideArgumentAsync(ArgumentContext context)
         {

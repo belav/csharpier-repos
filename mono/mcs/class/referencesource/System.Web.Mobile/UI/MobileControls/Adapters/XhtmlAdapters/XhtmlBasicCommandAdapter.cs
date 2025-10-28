@@ -1,7 +1,7 @@
 //------------------------------------------------------------------------------
 // <copyright file="XhtmlBasicCommandAdapter.cs" company="Microsoft">
 //     Copyright (c) Microsoft Corporation.  All rights reserved.
-// </copyright>                                                                
+// </copyright>
 //------------------------------------------------------------------------------
 
 using System;
@@ -17,20 +17,32 @@ namespace System.Web.UI.MobileControls.ShippedAdapterSource.XhtmlAdapters
 namespace System.Web.UI.MobileControls.Adapters.XhtmlAdapters
 #endif
 {
-
     /// <include file='doc\XhtmlBasicCommandAdapter.uex' path='docs/doc[@for="XhtmlCommandAdapter"]/*' />
-    [AspNetHostingPermission(SecurityAction.LinkDemand, Level=AspNetHostingPermissionLevel.Minimal)]
-    [AspNetHostingPermission(SecurityAction.InheritanceDemand, Level=AspNetHostingPermissionLevel.Minimal)]
-    [Obsolete("The System.Web.Mobile.dll assembly has been deprecated and should no longer be used. For information about how to develop ASP.NET mobile applications, see http://go.microsoft.com/fwlink/?LinkId=157231.")]
-    public class XhtmlCommandAdapter : XhtmlControlAdapter {
+    [AspNetHostingPermission(
+        SecurityAction.LinkDemand,
+        Level = AspNetHostingPermissionLevel.Minimal
+    )]
+    [AspNetHostingPermission(
+        SecurityAction.InheritanceDemand,
+        Level = AspNetHostingPermissionLevel.Minimal
+    )]
+    [Obsolete(
+        "The System.Web.Mobile.dll assembly has been deprecated and should no longer be used. For information about how to develop ASP.NET mobile applications, see http://go.microsoft.com/fwlink/?LinkId=157231."
+    )]
+    public class XhtmlCommandAdapter : XhtmlControlAdapter
+    {
         /// <include file='doc\XhtmlBasicCommandAdapter.uex' path='docs/doc[@for="XhtmlCommandAdapter.Control"]/*' />
-        protected new Command Control {
-            get {
-                return base.Control as Command;
-            }
+        protected new Command Control
+        {
+            get { return base.Control as Command; }
         }
 
-        public override bool LoadPostData(String key, NameValueCollection data, Object controlPrivateData, out bool dataChanged)
+        public override bool LoadPostData(
+            String key,
+            NameValueCollection data,
+            Object controlPrivateData,
+            out bool dataChanged
+        )
         {
             dataChanged = false;
 
@@ -51,24 +63,25 @@ namespace System.Web.UI.MobileControls.Adapters.XhtmlAdapters
             return base.LoadPostData(key, data, controlPrivateData, out dataChanged);
         }
 
-
         /// <include file='doc\XhtmlBasicCommandAdapter.uex' path='docs/doc[@for="XhtmlCommandAdapter.Render"]/*' />
-        public override void Render(XhtmlMobileTextWriter writer) {
+        public override void Render(XhtmlMobileTextWriter writer)
+        {
             // Note: Since XHTML Basic and MP do not include the script element, we ignore the
             // Format==Link attribute as in CHTML.
             ConditionalClearPendingBreak(writer);
             string imageUrl = Control.ImageUrl;
-            if (imageUrl != null && 
-                imageUrl.Length > 0 &&
-                Device.SupportsImageSubmit) {
+            if (imageUrl != null && imageUrl.Length > 0 && Device.SupportsImageSubmit)
+            {
                 RenderAsInputTypeImage(writer);
             }
-            else {
+            else
+            {
                 RenderAsInputTypeSubmit(writer);
             }
         }
 
-        private void RenderAsInputTypeImage(XhtmlMobileTextWriter writer) {
+        private void RenderAsInputTypeImage(XhtmlMobileTextWriter writer)
+        {
             ConditionalEnterStyle(writer, Style);
             writer.WriteBeginTag("input");
             writer.WriteAttribute("type", "image");
@@ -84,7 +97,8 @@ namespace System.Web.UI.MobileControls.Adapters.XhtmlAdapters
             ConditionalExitStyle(writer, Style);
         }
 
-        private void RenderAsInputTypeSubmit(XhtmlMobileTextWriter writer){
+        private void RenderAsInputTypeSubmit(XhtmlMobileTextWriter writer)
+        {
             ConditionalEnterStyle(writer, Style);
             writer.WriteBeginTag("input");
             writer.WriteAttribute("type", "submit");
@@ -99,6 +113,5 @@ namespace System.Web.UI.MobileControls.Adapters.XhtmlAdapters
             ConditionalPopPhysicalCssClass(writer);
             ConditionalExitStyle(writer, Style);
         }
-       
     }
 }

@@ -22,10 +22,17 @@ namespace System.Web.Razor.Generator
                 return;
             }
 
-            if (context.Host.EnableInstrumentation && context.ExpressionRenderingMode == ExpressionRenderingMode.WriteToOutput)
+            if (
+                context.Host.EnableInstrumentation
+                && context.ExpressionRenderingMode == ExpressionRenderingMode.WriteToOutput
+            )
             {
                 // Add a non-literal context call (non-literal because the expanded URL will not match the source character-by-character)
-                context.AddContextCall(target, context.Host.GeneratedClassContext.BeginContextMethodName, isLiteral: false);
+                context.AddContextCall(
+                    target,
+                    context.Host.GeneratedClassContext.BeginContextMethodName,
+                    isLiteral: false
+                );
             }
 
             if (!String.IsNullOrEmpty(target.Content) && !context.Host.DesignTimeMode)
@@ -36,16 +43,22 @@ namespace System.Web.Razor.Generator
                     {
                         if (!String.IsNullOrEmpty(context.TargetWriterName))
                         {
-                            cw.WriteStartMethodInvoke(context.Host.GeneratedClassContext.WriteLiteralToMethodName);
+                            cw.WriteStartMethodInvoke(
+                                context.Host.GeneratedClassContext.WriteLiteralToMethodName
+                            );
                             cw.WriteSnippet(context.TargetWriterName);
                             cw.WriteParameterSeparator();
                         }
                         else
                         {
-                            cw.WriteStartMethodInvoke(context.Host.GeneratedClassContext.WriteLiteralMethodName);
+                            cw.WriteStartMethodInvoke(
+                                context.Host.GeneratedClassContext.WriteLiteralMethodName
+                            );
                         }
                     }
-                    cw.WriteStartMethodInvoke(context.Host.GeneratedClassContext.ResolveUrlMethodName);
+                    cw.WriteStartMethodInvoke(
+                        context.Host.GeneratedClassContext.ResolveUrlMethodName
+                    );
                     cw.WriteStringLiteral(target.Content);
                     cw.WriteEndMethodInvoke();
 
@@ -69,9 +82,16 @@ namespace System.Web.Razor.Generator
                 }
             }
 
-            if (context.Host.EnableInstrumentation && context.ExpressionRenderingMode == ExpressionRenderingMode.WriteToOutput)
+            if (
+                context.Host.EnableInstrumentation
+                && context.ExpressionRenderingMode == ExpressionRenderingMode.WriteToOutput
+            )
             {
-                context.AddContextCall(target, context.Host.GeneratedClassContext.EndContextMethodName, isLiteral: false);
+                context.AddContextCall(
+                    target,
+                    context.Host.GeneratedClassContext.EndContextMethodName,
+                    isLiteral: false
+                );
             }
         }
 

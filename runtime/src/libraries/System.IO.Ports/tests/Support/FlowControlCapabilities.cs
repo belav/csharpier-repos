@@ -5,7 +5,11 @@ namespace Legacy.Support
 {
     public class FlowControlCapabilities
     {
-        public FlowControlCapabilities(int minimumBlockingByteCount, int hardwareTransmitBufferSize, bool hardwareWriteBlockingAvailable)
+        public FlowControlCapabilities(
+            int minimumBlockingByteCount,
+            int hardwareTransmitBufferSize,
+            bool hardwareWriteBlockingAvailable
+        )
         {
             MinimumBlockingByteCount = minimumBlockingByteCount;
             HardwareTransmitBufferSize = hardwareTransmitBufferSize;

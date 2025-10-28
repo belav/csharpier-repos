@@ -52,8 +52,8 @@ public interface IColumnBase : IAnnotatable
     ///     Gets the <see cref="ValueComparer" /> for this column.
     /// </summary>
     /// <returns>The comparer.</returns>
-    ValueComparer ProviderValueComparer
-        => PropertyMappings.First().Property.GetProviderValueComparer();
+    ValueComparer ProviderValueComparer =>
+        PropertyMappings.First().Property.GetProviderValueComparer();
 
     /// <summary>
     ///     Returns the property mapping for the given entity type.
@@ -86,7 +86,10 @@ public interface IColumnBase : IAnnotatable
     /// <param name="options">Options for generating the string.</param>
     /// <param name="indent">The number of indent spaces to use before each new line.</param>
     /// <returns>A human-readable representation.</returns>
-    string ToDebugString(MetadataDebugStringOptions options = MetadataDebugStringOptions.ShortDefault, int indent = 0)
+    string ToDebugString(
+        MetadataDebugStringOptions options = MetadataDebugStringOptions.ShortDefault,
+        int indent = 0
+    )
     {
         var builder = new StringBuilder();
         var indentString = new string(' ', indent);

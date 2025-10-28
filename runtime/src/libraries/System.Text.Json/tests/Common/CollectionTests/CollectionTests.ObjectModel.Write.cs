@@ -21,15 +21,22 @@ namespace System.Text.Json.Serialization.Tests
 
             SimpleKeyedCollection kc = new SimpleKeyedCollection() { true, false };
             Assert.Equal("[true,false]", await Serializer.SerializeWrapper(kc));
-            Assert.Equal("[true,false]", await Serializer.SerializeWrapper<KeyedCollection<string, bool>>(kc));
+            Assert.Equal(
+                "[true,false]",
+                await Serializer.SerializeWrapper<KeyedCollection<string, bool>>(kc)
+            );
 
-            ReadOnlyCollection<bool> roc = new ReadOnlyCollection<bool>(new List<bool> { true, false });
+            ReadOnlyCollection<bool> roc = new ReadOnlyCollection<bool>(
+                new List<bool> { true, false }
+            );
             Assert.Equal("[true,false]", await Serializer.SerializeWrapper(roc));
 
             ReadOnlyObservableCollection<bool> rooc = new ReadOnlyObservableCollection<bool>(oc);
             Assert.Equal("[true,false]", await Serializer.SerializeWrapper(rooc));
 
-            ReadOnlyDictionary<string, bool> rod = new ReadOnlyDictionary<string, bool>(new Dictionary<string, bool> { ["true"] = false });
+            ReadOnlyDictionary<string, bool> rod = new ReadOnlyDictionary<string, bool>(
+                new Dictionary<string, bool> { ["true"] = false }
+            );
             Assert.Equal(@"{""true"":false}", await Serializer.SerializeWrapper(rod));
         }
     }

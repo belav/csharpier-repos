@@ -31,19 +31,25 @@ using System.Xml;
 using Microsoft.Build.BuildEngine;
 using NUnit.Framework;
 
-namespace MonoTests.Microsoft.Build.BuildEngine {
-	public class TestNamespaceManager {
-		static XmlNamespaceManager manager;
-		internal static XmlNamespaceManager NamespaceManager
-		{
-			get
-			{
-				if (manager == null) {
-					manager = new XmlNamespaceManager (new NameTable ());
-					manager.AddNamespace ("tns", "http://schemas.microsoft.com/developer/msbuild/2003");
-				}
-				return manager;
-			}
-		}
-	}
+namespace MonoTests.Microsoft.Build.BuildEngine
+{
+    public class TestNamespaceManager
+    {
+        static XmlNamespaceManager manager;
+        internal static XmlNamespaceManager NamespaceManager
+        {
+            get
+            {
+                if (manager == null)
+                {
+                    manager = new XmlNamespaceManager(new NameTable());
+                    manager.AddNamespace(
+                        "tns",
+                        "http://schemas.microsoft.com/developer/msbuild/2003"
+                    );
+                }
+                return manager;
+            }
+        }
+    }
 }

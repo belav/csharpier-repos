@@ -3,12 +3,12 @@
 // See the LICENSE file in the project root for more information.
 
 using System.Collections.Immutable;
-using Microsoft.CodeAnalysis.CodeStyle;
-using Microsoft.CodeAnalysis.Options;
-using Microsoft.CodeAnalysis.CSharp.Syntax;
 using System.Diagnostics.CodeAnalysis;
-using Microsoft.CodeAnalysis.CSharp.CodeGeneration;
 using System.Threading;
+using Microsoft.CodeAnalysis.CodeStyle;
+using Microsoft.CodeAnalysis.CSharp.CodeGeneration;
+using Microsoft.CodeAnalysis.CSharp.Syntax;
+using Microsoft.CodeAnalysis.Options;
 
 namespace Microsoft.CodeAnalysis.CSharp.UseExpressionBody
 {
@@ -21,14 +21,32 @@ namespace Microsoft.CodeAnalysis.CSharp.UseExpressionBody
         public abstract EnforceOnBuild EnforceOnBuild { get; }
         public abstract ImmutableArray<SyntaxKind> SyntaxKinds { get; }
 
-        public abstract CodeStyleOption2<ExpressionBodyPreference> GetExpressionBodyPreference(CSharpCodeGenerationOptions options);
+        public abstract CodeStyleOption2<ExpressionBodyPreference> GetExpressionBodyPreference(
+            CSharpCodeGenerationOptions options
+        );
         public abstract BlockSyntax? GetBody(SyntaxNode declaration);
         public abstract ArrowExpressionClauseSyntax? GetExpressionBody(SyntaxNode declaration);
         public abstract bool IsRelevantDeclarationNode(SyntaxNode node);
 
-        public abstract bool CanOfferUseExpressionBody(CodeStyleOption2<ExpressionBodyPreference> preference, SyntaxNode declaration, bool forAnalyzer, CancellationToken cancellationToken);
-        public abstract bool CanOfferUseBlockBody(CodeStyleOption2<ExpressionBodyPreference> preference, SyntaxNode declaration, bool forAnalyzer, out bool fixesError, [NotNullWhen(true)] out ArrowExpressionClauseSyntax? expressionBody);
-        public abstract SyntaxNode Update(SemanticModel semanticModel, SyntaxNode declaration, bool useExpressionBody, CancellationToken cancellationToken);
+        public abstract bool CanOfferUseExpressionBody(
+            CodeStyleOption2<ExpressionBodyPreference> preference,
+            SyntaxNode declaration,
+            bool forAnalyzer,
+            CancellationToken cancellationToken
+        );
+        public abstract bool CanOfferUseBlockBody(
+            CodeStyleOption2<ExpressionBodyPreference> preference,
+            SyntaxNode declaration,
+            bool forAnalyzer,
+            out bool fixesError,
+            [NotNullWhen(true)] out ArrowExpressionClauseSyntax? expressionBody
+        );
+        public abstract SyntaxNode Update(
+            SemanticModel semanticModel,
+            SyntaxNode declaration,
+            bool useExpressionBody,
+            CancellationToken cancellationToken
+        );
 
         public abstract Location GetDiagnosticLocation(SyntaxNode declaration);
 
@@ -41,6 +59,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UseExpressionBody
                 UseExpressionBodyForOperatorsHelper.Instance,
                 UseExpressionBodyForPropertiesHelper.Instance,
                 UseExpressionBodyForAccessorsHelper.Instance,
-                UseExpressionBodyForLocalFunctionHelper.Instance);
+                UseExpressionBodyForLocalFunctionHelper.Instance
+            );
     }
 }

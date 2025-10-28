@@ -15,14 +15,14 @@ namespace System.Data.Metadata.Edm
 
     /// <summary>
     /// Class for representing a Facet object
-    /// This object is Immutable (not just set to readonly) and 
+    /// This object is Immutable (not just set to readonly) and
     /// some parts of the system are depending on that behavior
     /// </summary>
     [DebuggerDisplay("{Name,nq}={Value}")]
     public sealed class Facet : MetadataItem
     {
         #region Constructors
-        
+
         /// <summary>
         /// The constructor for constructing a Facet object with the facet description and a value
         /// </summary>
@@ -30,16 +30,16 @@ namespace System.Data.Metadata.Edm
         /// <param name="value">The value of the facet</param>
         /// <exception cref="System.ArgumentNullException">Thrown if facetDescription argument is null</exception>
         private Facet(FacetDescription facetDescription, object value)
-            :base(MetadataFlags.Readonly)
+            : base(MetadataFlags.Readonly)
         {
             EntityUtil.GenericCheckArgumentNull(facetDescription, "facetDescription");
 
             _facetDescription = facetDescription;
             _value = value;
         }
-        
+
         /// <summary>
-        /// Creates a Facet instance with the specified value for the given 
+        /// Creates a Facet instance with the specified value for the given
         /// facet description.
         /// </summary>
         /// <param name="facetDescription">The object describing this facet</param>
@@ -51,14 +51,18 @@ namespace System.Data.Metadata.Edm
         }
 
         /// <summary>
-        /// Creates a Facet instance with the specified value for the given 
+        /// Creates a Facet instance with the specified value for the given
         /// facet description.
         /// </summary>
         /// <param name="facetDescription">The object describing this facet</param>
         /// <param name="value">The value of the facet</param>
         /// <param name="bypassKnownValues">true to bypass caching and known values; false otherwise.</param>
         /// <exception cref="System.ArgumentNullException">Thrown if facetDescription argument is null</exception>
-        internal static Facet Create(FacetDescription facetDescription, object value, bool bypassKnownValues)
+        internal static Facet Create(
+            FacetDescription facetDescription,
+            object value,
+            bool bypassKnownValues
+        )
         {
             EntityUtil.CheckArgumentNull(facetDescription, "facetDescription");
 
@@ -87,29 +91,40 @@ namespace System.Data.Metadata.Edm
             Facet result = new Facet(facetDescription, value);
 
             // Check the type of the value only if we know what the correct CLR type is
-            if (value != null && !Helper.IsUnboundedFacetValue(result) && !Helper.IsVariableFacetValue(result) && result.FacetType.ClrType != null)
+            if (
+                value != null
+                && !Helper.IsUnboundedFacetValue(result)
+                && !Helper.IsVariableFacetValue(result)
+                && result.FacetType.ClrType != null
+            )
             {
                 Type valueType = value.GetType();
                 Debug.Assert(
-                    valueType == result.FacetType.ClrType 
-                    || result.FacetType.ClrType.IsAssignableFrom(valueType),
-                    string.Format(CultureInfo.CurrentCulture, "The facet {0} has type {1}, but a value of type {2} was supplied.", result.Name, result.FacetType.ClrType, valueType)
+                    valueType == result.FacetType.ClrType
+                        || result.FacetType.ClrType.IsAssignableFrom(valueType),
+                    string.Format(
+                        CultureInfo.CurrentCulture,
+                        "The facet {0} has type {1}, but a value of type {2} was supplied.",
+                        result.Name,
+                        result.FacetType.ClrType,
+                        valueType
+                    )
                 );
             }
 
             return result;
         }
-        
+
         #endregion
 
         #region Fields
-        
+
         /// <summary>The object describing this facet.</summary>
         private readonly FacetDescription _facetDescription;
-        
+
         /// <summary>The value assigned to this facet.</summary>
         private readonly object _value;
-        
+
         #endregion
 
         #region Properties
@@ -117,17 +132,17 @@ namespace System.Data.Metadata.Edm
         /// <summary>
         /// Returns the kind of the type
         /// </summary>
-        public override BuiltInTypeKind BuiltInTypeKind { get { return BuiltInTypeKind.Facet; } }
+        public override BuiltInTypeKind BuiltInTypeKind
+        {
+            get { return BuiltInTypeKind.Facet; }
+        }
 
         /// <summary>
         /// Gets the description object for describing the facet
         /// </summary>
         public FacetDescription Description
         {
-            get
-            {
-                return _facetDescription;
-            }
+            get { return _facetDescription; }
         }
 
         /// <summary>
@@ -136,10 +151,7 @@ namespace System.Data.Metadata.Edm
         [MetadataProperty(PrimitiveTypeKind.String, false)]
         public String Name
         {
-            get
-            {
-                return _facetDescription.FacetName;
-            }
+            get { return _facetDescription.FacetName; }
         }
 
         /// <summary>
@@ -148,10 +160,7 @@ namespace System.Data.Metadata.Edm
         [MetadataProperty(BuiltInTypeKind.EdmType, false)]
         public EdmType FacetType
         {
-            get
-            {
-                return _facetDescription.FacetType;
-            }
+            get { return _facetDescription.FacetType; }
         }
 
         /// <summary>
@@ -161,10 +170,7 @@ namespace System.Data.Metadata.Edm
         [MetadataProperty(typeof(Object), false)]
         public Object Value
         {
-            get
-            {
-                return _value;
-            }
+            get { return _value; }
         }
 
         /// <summary>
@@ -172,10 +178,7 @@ namespace System.Data.Metadata.Edm
         /// </summary>
         internal override string Identity
         {
-            get
-            {
-                return _facetDescription.FacetName;
-            }
+            get { return _facetDescription.FacetName; }
         }
 
         /// <summary>
@@ -183,16 +186,13 @@ namespace System.Data.Metadata.Edm
         /// </summary>
         public bool IsUnbounded
         {
-            get
-            {
-                return object.ReferenceEquals(Value, EdmConstants.UnboundedValue);
-            }
+            get { return object.ReferenceEquals(Value, EdmConstants.UnboundedValue); }
         }
         #endregion
 
         #region Methods
         /// <summary>
-        /// Overriding System.Object.ToString to provide better String representation 
+        /// Overriding System.Object.ToString to provide better String representation
         /// for this type.
         /// </summary>
         public override string ToString()

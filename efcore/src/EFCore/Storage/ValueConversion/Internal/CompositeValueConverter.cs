@@ -20,25 +20,26 @@ public class CompositeValueConverter<TModel, TMiddle, TProvider> : ValueConverte
     public CompositeValueConverter(
         ValueConverter converter1,
         ValueConverter converter2,
-        ConverterMappingHints? mappingHints = null)
+        ConverterMappingHints? mappingHints = null
+    )
         : base(
             Compose(
                 (Expression<Func<TModel, TMiddle>>)converter1.ConvertToProviderExpression,
-                (Expression<Func<TMiddle, TProvider>>)converter2.ConvertToProviderExpression),
+                (Expression<Func<TMiddle, TProvider>>)converter2.ConvertToProviderExpression
+            ),
             Compose(
                 (Expression<Func<TProvider, TMiddle>>)converter2.ConvertFromProviderExpression,
-                (Expression<Func<TMiddle, TModel>>)converter1.ConvertFromProviderExpression),
-            mappingHints)
-    {
-    }
+                (Expression<Func<TMiddle, TModel>>)converter1.ConvertFromProviderExpression
+            ),
+            mappingHints
+        ) { }
 
     private static Expression<Func<TIn, TOut>> Compose<TIn, TOut>(
         Expression<Func<TIn, TMiddle>> upper,
-        Expression<Func<TMiddle, TOut>> lower)
-        => Expression.Lambda<Func<TIn, TOut>>(
-            ReplacingExpressionVisitor.Replace(
-                lower.Parameters.Single(),
-                upper.Body,
-                lower.Body),
-            upper.Parameters.Single());
+        Expression<Func<TMiddle, TOut>> lower
+    ) =>
+        Expression.Lambda<Func<TIn, TOut>>(
+            ReplacingExpressionVisitor.Replace(lower.Parameters.Single(), upper.Body, lower.Body),
+            upper.Parameters.Single()
+        );
 }

@@ -12,7 +12,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.FixIncorrectConstraint
 {
     using VerifyCS = CSharpCodeFixVerifier<
         EmptyDiagnosticAnalyzer,
-        CSharpFixIncorrectConstraintCodeFixProvider>;
+        CSharpFixIncorrectConstraintCodeFixProvider
+    >;
 
     public class FixIncorrectConstraintTests
     {
@@ -22,15 +23,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.FixIncorrectConstraint
             await new VerifyCS.Test
             {
                 TestCode = """
-                class C<T> where T : {|CS9010:enum|}
-                {
-                }
-                """,
+                    class C<T> where T : {|CS9010:enum|}
+                    {
+                    }
+                    """,
                 FixedCode = """
-                class C<T> where T : struct, System.Enum
-                {
-                }
-                """,
+                    class C<T> where T : struct, System.Enum
+                    {
+                    }
+                    """,
             }.RunAsync();
         }
 
@@ -40,19 +41,19 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.FixIncorrectConstraint
             await new VerifyCS.Test
             {
                 TestCode = """
-                using System;
+                    using System;
 
-                class C<T> where T : {|CS9010:enum|}
-                {
-                }
-                """,
+                    class C<T> where T : {|CS9010:enum|}
+                    {
+                    }
+                    """,
                 FixedCode = """
-                using System;
+                    using System;
 
-                class C<T> where T : struct, Enum
-                {
-                }
-                """,
+                    class C<T> where T : struct, Enum
+                    {
+                    }
+                    """,
             }.RunAsync();
         }
 
@@ -62,15 +63,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.FixIncorrectConstraint
             await new VerifyCS.Test
             {
                 TestCode = """
-                class C<T> where T : {|CS9011:delegate|}
-                {
-                }
-                """,
+                    class C<T> where T : {|CS9011:delegate|}
+                    {
+                    }
+                    """,
                 FixedCode = """
-                class C<T> where T : System.Delegate
-                {
-                }
-                """,
+                    class C<T> where T : System.Delegate
+                    {
+                    }
+                    """,
             }.RunAsync();
         }
 
@@ -80,19 +81,19 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.FixIncorrectConstraint
             await new VerifyCS.Test
             {
                 TestCode = """
-                using System;
+                    using System;
 
-                class C<T> where T : {|CS9011:delegate|}
-                {
-                }
-                """,
+                    class C<T> where T : {|CS9011:delegate|}
+                    {
+                    }
+                    """,
                 FixedCode = """
-                using System;
+                    using System;
 
-                class C<T> where T : Delegate
-                {
-                }
-                """,
+                    class C<T> where T : Delegate
+                    {
+                    }
+                    """,
             }.RunAsync();
         }
     }

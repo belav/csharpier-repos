@@ -1,7 +1,7 @@
 //------------------------------------------------------------------------------
 // <copyright file="CookielessData.cs" company="Microsoft">
 //     Copyright (c) Microsoft Corporation.  All rights reserved.
-// </copyright>                                                                
+// </copyright>
 //------------------------------------------------------------------------------
 
 namespace System.Web.Mobile
@@ -14,13 +14,21 @@ namespace System.Web.Mobile
      */
 
     using System.Collections.Specialized;
-    using System.Web.Security;
     using System.Security.Permissions;
+    using System.Web.Security;
 
     /// <include file='doc\CookielessData.uex' path='docs/doc[@for="CookielessData"]/*' />
-    [AspNetHostingPermission(SecurityAction.LinkDemand, Level=AspNetHostingPermissionLevel.Minimal)]
-    [AspNetHostingPermission(SecurityAction.InheritanceDemand, Level=AspNetHostingPermissionLevel.Minimal)]
-    [Obsolete("The System.Web.Mobile.dll assembly has been deprecated and should no longer be used. For information about how to develop ASP.NET mobile applications, see http://go.microsoft.com/fwlink/?LinkId=157231.")]
+    [AspNetHostingPermission(
+        SecurityAction.LinkDemand,
+        Level = AspNetHostingPermissionLevel.Minimal
+    )]
+    [AspNetHostingPermission(
+        SecurityAction.InheritanceDemand,
+        Level = AspNetHostingPermissionLevel.Minimal
+    )]
+    [Obsolete(
+        "The System.Web.Mobile.dll assembly has been deprecated and should no longer be used. For information about how to develop ASP.NET mobile applications, see http://go.microsoft.com/fwlink/?LinkId=157231."
+    )]
     public class CookielessData : HybridDictionary
     {
         /// <include file='doc\CookielessData.uex' path='docs/doc[@for="CookielessData.CookielessData"]/*' />
@@ -28,11 +36,11 @@ namespace System.Web.Mobile
         {
             String name = FormsAuthentication.FormsCookieName;
             String inboundValue = HttpContext.Current.Request.QueryString[name];
-            if(inboundValue == null)
+            if (inboundValue == null)
             {
                 inboundValue = HttpContext.Current.Request.Form[name];
             }
-            if(inboundValue != null)
+            if (inboundValue != null)
             {
                 FormsAuthenticationTicket ticket = FormsAuthentication.Decrypt(inboundValue);
                 FormsAuthenticationTicket ticket2 = FormsAuthentication.RenewTicketIfOld(ticket);
@@ -41,5 +49,3 @@ namespace System.Web.Mobile
         }
     }
 }
-
-

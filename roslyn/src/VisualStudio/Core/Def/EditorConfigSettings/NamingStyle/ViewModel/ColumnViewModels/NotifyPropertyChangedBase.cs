@@ -10,7 +10,7 @@ namespace Microsoft.VisualStudio.LanguageServices.EditorConfigSettings.NamingSty
     {
         public event PropertyChangedEventHandler? PropertyChanged;
 
-        protected void OnPropertyChanged(PropertyChangedEventArgs args)
-            => PropertyChanged?.Invoke(this, args);
+        protected void OnPropertyChanged(PropertyChangedEventArgs args) =>
+            PropertyChanged?.Invoke(this, args);
     }
 }

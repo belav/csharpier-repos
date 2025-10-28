@@ -48,7 +48,8 @@ namespace System.Reflection.Metadata.Ecma335
             MetadataBuilder tablesAndHeaps,
             ImmutableArray<int> typeSystemRowCounts,
             MethodDefinitionHandle entryPoint,
-            Func<IEnumerable<Blob>, BlobContentId>? idProvider = null)
+            Func<IEnumerable<Blob>, BlobContentId>? idProvider = null
+        )
         {
             if (tablesAndHeaps is null)
             {
@@ -61,7 +62,11 @@ namespace System.Reflection.Metadata.Ecma335
             _entryPoint = entryPoint;
 
             Debug.Assert(BlobUtilities.GetUTF8ByteCount(MetadataVersion) == MetadataVersion.Length);
-            _serializedMetadata = tablesAndHeaps.GetSerializedMetadata(typeSystemRowCounts, MetadataVersion.Length, isStandaloneDebugMetadata: true);
+            _serializedMetadata = tablesAndHeaps.GetSerializedMetadata(
+                typeSystemRowCounts,
+                MetadataVersion.Length,
+                isStandaloneDebugMetadata: true
+            );
 
             IdProvider = idProvider ?? BlobContentId.GetTimeBasedProvider();
         }
@@ -75,7 +80,10 @@ namespace System.Reflection.Metadata.Ecma335
 
             if (typeSystemRowCounts.Length != MetadataTokens.TableCount)
             {
-                throw new ArgumentException(SR.Format(SR.ExpectedArrayOfSize, MetadataTokens.TableCount), nameof(typeSystemRowCounts));
+                throw new ArgumentException(
+                    SR.Format(SR.ExpectedArrayOfSize, MetadataTokens.TableCount),
+                    nameof(typeSystemRowCounts)
+                );
             }
 
             for (int i = 0; i < typeSystemRowCounts.Length; i++)
@@ -87,12 +95,18 @@ namespace System.Reflection.Metadata.Ecma335
 
                 if ((unchecked((uint)typeSystemRowCounts[i]) & ~TokenTypeIds.RIDMask) != 0)
                 {
-                    throw new ArgumentOutOfRangeException(nameof(typeSystemRowCounts), SR.Format(SR.RowCountOutOfRange, i));
+                    throw new ArgumentOutOfRangeException(
+                        nameof(typeSystemRowCounts),
+                        SR.Format(SR.RowCountOutOfRange, i)
+                    );
                 }
 
                 if (((1UL << i) & (ulong)TableMask.ValidPortablePdbExternalTables) == 0)
                 {
-                    throw new ArgumentException(SR.Format(SR.RowCountMustBeZero, i), nameof(typeSystemRowCounts));
+                    throw new ArgumentException(
+                        SR.Format(SR.RowCountMustBeZero, i),
+                        nameof(typeSystemRowCounts)
+                    );
                 }
             }
         }
@@ -110,10 +124,16 @@ namespace System.Reflection.Metadata.Ecma335
             builder.WriteInt32(_entryPoint.IsNil ? 0 : MetadataTokens.GetToken(_entryPoint));
 
             builder.WriteUInt64(_serializedMetadata.Sizes.ExternalTablesMask);
-            MetadataWriterUtilities.SerializeRowCounts(builder, _serializedMetadata.Sizes.ExternalRowCounts);
+            MetadataWriterUtilities.SerializeRowCounts(
+                builder,
+                _serializedMetadata.Sizes.ExternalRowCounts
+            );
 
             int endPosition = builder.Count;
-            Debug.Assert(_serializedMetadata.Sizes.CalculateStandalonePdbStreamSize() == endPosition - startPosition);
+            Debug.Assert(
+                _serializedMetadata.Sizes.CalculateStandalonePdbStreamSize()
+                    == endPosition - startPosition
+            );
         }
 
         /// <summary>
@@ -130,13 +150,23 @@ namespace System.Reflection.Metadata.Ecma335
             }
 
             // header:
-            MetadataBuilder.SerializeMetadataHeader(builder, MetadataVersion, _serializedMetadata.Sizes);
+            MetadataBuilder.SerializeMetadataHeader(
+                builder,
+                MetadataVersion,
+                _serializedMetadata.Sizes
+            );
 
             // #Pdb stream
             SerializeStandalonePdbStream(builder);
 
             // #~ or #- stream:
-            _builder.SerializeMetadataTables(builder, _serializedMetadata.Sizes, _serializedMetadata.StringMap, methodBodyStreamRva: 0, mappedFieldDataStreamRva: 0);
+            _builder.SerializeMetadataTables(
+                builder,
+                _serializedMetadata.Sizes,
+                _serializedMetadata.StringMap,
+                methodBodyStreamRva: 0,
+                mappedFieldDataStreamRva: 0
+            );
 
             // #Strings, #US, #Guid and #Blob streams:
             _builder.WriteHeapsTo(builder, _serializedMetadata.StringHeap);

@@ -11,16 +11,21 @@ using Microsoft.VisualStudio.Shell;
 
 namespace Microsoft.VisualStudio.LanguageServices.CSharp.ProjectSystemShim
 {
-    [ExportLanguageService(typeof(IProjectExistsUIContextProviderLanguageService), LanguageNames.CSharp), Shared]
-    internal sealed class CSharpProjectExistsUIContextProviderLanguageService : IProjectExistsUIContextProviderLanguageService
+    [
+        ExportLanguageService(
+            typeof(IProjectExistsUIContextProviderLanguageService),
+            LanguageNames.CSharp
+        ),
+        Shared
+    ]
+    internal sealed class CSharpProjectExistsUIContextProviderLanguageService
+        : IProjectExistsUIContextProviderLanguageService
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public CSharpProjectExistsUIContextProviderLanguageService()
-        {
-        }
+        public CSharpProjectExistsUIContextProviderLanguageService() { }
 
-        public UIContext GetUIContext()
-            => UIContext.FromUIContextGuid(Guids.CSharpProjectExistsInWorkspaceUIContext);
+        public UIContext GetUIContext() =>
+            UIContext.FromUIContextGuid(Guids.CSharpProjectExistsInWorkspaceUIContext);
     }
 }

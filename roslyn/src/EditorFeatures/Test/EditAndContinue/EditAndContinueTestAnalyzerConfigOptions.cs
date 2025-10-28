@@ -14,10 +14,11 @@ namespace Microsoft.CodeAnalysis.EditAndContinue.UnitTests
     {
         private readonly Dictionary<string, string> _options;
 
-        public EditAndContinueTestAnalyzerConfigOptions(IEnumerable<(string key, string value)> options)
-            => _options = options.ToDictionary(e => e.key, e => e.value);
+        public EditAndContinueTestAnalyzerConfigOptions(
+            IEnumerable<(string key, string value)> options
+        ) => _options = options.ToDictionary(e => e.key, e => e.value);
 
-        public override bool TryGetValue(string key, [NotNullWhen(true)] out string? value)
-            => _options.TryGetValue(key, out value);
+        public override bool TryGetValue(string key, [NotNullWhen(true)] out string? value) =>
+            _options.TryGetValue(key, out value);
     }
 }

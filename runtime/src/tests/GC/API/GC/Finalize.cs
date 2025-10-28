@@ -9,6 +9,7 @@ using System.Runtime.CompilerServices;
 public class Test_Finalize
 {
     public static bool visited = false;
+
     public class Dummy
     {
         ~Dummy()
@@ -21,7 +22,6 @@ public class Test_Finalize
     public class CreateObj
     {
         public Dummy obj;
-
 
         public CreateObj()
         {
@@ -41,7 +41,7 @@ public class Test_Finalize
         temp.RunTest();
 
         GC.Collect();
-        GC.WaitForPendingFinalizers();  // makes sure Finalize() is called.
+        GC.WaitForPendingFinalizers(); // makes sure Finalize() is called.
         GC.Collect();
 
         if (visited)

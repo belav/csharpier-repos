@@ -1,21 +1,18 @@
 using System;
 
-public delegate void Foo ();
-public delegate void Bar (int x);
+public delegate void Foo();
+public delegate void Bar(int x);
 
 class X
 {
-	public X (Foo foo)
-	{ }
+    public X(Foo foo) { }
 
-	public X (Bar bar)
-	{ }
+    public X(Bar bar) { }
 
-	static void Test ()
-	{ }
+    static void Test() { }
 
-	public static void Main ()
-	{
-		X x = new X (Test);
-	}
+    public static void Main()
+    {
+        X x = new X(Test);
+    }
 }

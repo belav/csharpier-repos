@@ -12,30 +12,32 @@ using Xunit;
 namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Structure;
 
 [Trait(Traits.Feature, Traits.Features.Outlining)]
-public class StringLiteralExpressionStructureTests : AbstractCSharpSyntaxNodeStructureTests<LiteralExpressionSyntax>
+public class StringLiteralExpressionStructureTests
+    : AbstractCSharpSyntaxNodeStructureTests<LiteralExpressionSyntax>
 {
-    internal override AbstractSyntaxStructureProvider CreateProvider()
-        => new StringLiteralExpressionStructureProvider();
+    internal override AbstractSyntaxStructureProvider CreateProvider() =>
+        new StringLiteralExpressionStructureProvider();
 
     [Fact]
     public async Task TestMultiLineStringLiteral()
     {
         await VerifyBlockSpansAsync(
             """
-                class C
+            class C
+            {
+                void M()
                 {
-                    void M()
-                    {
-                        var v =
-                {|hint:{|textspan:$$@"
-                class 
-                {
+                    var v =
+            {|hint:{|textspan:$$@"
+            class 
+            {
+            }
+            "|}|};
                 }
-                "|}|};
-                    }
-                }
-                """,
-            Region("textspan", "hint", CSharpStructureHelpers.Ellipsis, autoCollapse: true));
+            }
+            """,
+            Region("textspan", "hint", CSharpStructureHelpers.Ellipsis, autoCollapse: true)
+        );
     }
 
     [Fact]
@@ -43,13 +45,14 @@ public class StringLiteralExpressionStructureTests : AbstractCSharpSyntaxNodeStr
     {
         await VerifyNoBlockSpansAsync(
             """
-                class C
+            class C
+            {
+                void M()
                 {
-                    void M()
-                    {
-                        var v = $$";
-                    }
+                    var v = $$";
                 }
-                """);
+            }
+            """
+        );
     }
 }

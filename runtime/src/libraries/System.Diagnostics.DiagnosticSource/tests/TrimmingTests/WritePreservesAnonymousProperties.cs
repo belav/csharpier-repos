@@ -19,10 +19,18 @@ internal class Program
         {
             if (eventSource.Name == "Microsoft-Diagnostics-DiagnosticSource")
             {
-                EnableEvents(eventSource, EventLevel.Verbose, EventKeywords.All, new Dictionary<string, string>
-                {
-                    { "FilterAndPayloadSpecs", "TestDiagnosticListener/Test.Start@Activity2Start:-Id;Name"}
-                });
+                EnableEvents(
+                    eventSource,
+                    EventLevel.Verbose,
+                    EventKeywords.All,
+                    new Dictionary<string, string>
+                    {
+                        {
+                            "FilterAndPayloadSpecs",
+                            "TestDiagnosticListener/Test.Start@Activity2Start:-Id;Name"
+                        },
+                    }
+                );
             }
 
             base.OnEventSourceCreated(eventSource);
@@ -44,17 +52,17 @@ internal class Program
         DiagnosticSource diagnosticSource = new DiagnosticListener("TestDiagnosticListener");
         using (var listener = new TestEventListener())
         {
-            var data = new 
-            {
-                Id = Guid.NewGuid(),
-                Name = "EventName"
-            };
+            var data = new { Id = Guid.NewGuid(), Name = "EventName" };
 
             diagnosticSource.Write("Test.Start", data);
 
-            if (!(listener.LogDataPayload?.Count == 3 &&
-                (string)listener.LogDataPayload[0] == "TestDiagnosticListener" &&
-                (string)listener.LogDataPayload[1] == "Test.Start"))
+            if (
+                !(
+                    listener.LogDataPayload?.Count == 3
+                    && (string)listener.LogDataPayload[0] == "TestDiagnosticListener"
+                    && (string)listener.LogDataPayload[1] == "Test.Start"
+                )
+            )
             {
                 return -1;
             }

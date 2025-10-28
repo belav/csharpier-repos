@@ -14,7 +14,7 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.NativeHosting
         {
             FrameworkDependent,
             SelfContained_WithIncludedFrameworks,
-            SelfContained_NoIncludedFrameworks
+            SelfContained_NoIncludedFrameworks,
         }
 
         public class FrameworkCompatibilityTestData : IXunitSerializable
@@ -54,20 +54,34 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.NativeHosting
             }
         }
 
-        public static System.Collections.Generic.IEnumerable<object[]> GetFrameworkCompatibilityTestData(string scenario)
+        public static System.Collections.Generic.IEnumerable<object[]> GetFrameworkCompatibilityTestData(
+            string scenario
+        )
         {
             var testData = new System.Collections.Generic.List<FrameworkCompatibilityTestData>();
             switch (scenario)
             {
                 case Scenario.ConfigMultiple:
-                    testData.AddRange(GetFrameworkCompatibilityTestData(ExistingContextType.FrameworkDependent));
+                    testData.AddRange(
+                        GetFrameworkCompatibilityTestData(ExistingContextType.FrameworkDependent)
+                    );
                     break;
                 case Scenario.Mixed:
                 case Scenario.NonContextMixedAppHost:
                 case Scenario.NonContextMixedDotnet:
-                    testData.AddRange(GetFrameworkCompatibilityTestData(ExistingContextType.FrameworkDependent));
-                    testData.AddRange(GetFrameworkCompatibilityTestData(ExistingContextType.SelfContained_WithIncludedFrameworks));
-                    testData.AddRange(GetFrameworkCompatibilityTestData(ExistingContextType.SelfContained_NoIncludedFrameworks));
+                    testData.AddRange(
+                        GetFrameworkCompatibilityTestData(ExistingContextType.FrameworkDependent)
+                    );
+                    testData.AddRange(
+                        GetFrameworkCompatibilityTestData(
+                            ExistingContextType.SelfContained_WithIncludedFrameworks
+                        )
+                    );
+                    testData.AddRange(
+                        GetFrameworkCompatibilityTestData(
+                            ExistingContextType.SelfContained_NoIncludedFrameworks
+                        )
+                    );
                     break;
                 default:
                     throw new Exception($"Unexpected scenario: {scenario}");
@@ -79,7 +93,9 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.NativeHosting
             }
         }
 
-        private static System.Collections.Generic.IEnumerable<FrameworkCompatibilityTestData> GetFrameworkCompatibilityTestData(ExistingContextType existingContextType)
+        private static System.Collections.Generic.IEnumerable<FrameworkCompatibilityTestData> GetFrameworkCompatibilityTestData(
+            ExistingContextType existingContextType
+        )
         {
             var exactVersion = Version.Parse(SharedTestState.NetCoreAppVersion);
             Assert.True(exactVersion.Major >= 1 && exactVersion.Minor >= 1);
@@ -115,7 +131,7 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.NativeHosting
                         Constants.RollForwardSetting.Minor,
                         Constants.RollForwardSetting.LatestMinor,
                         Constants.RollForwardSetting.Major,
-                        Constants.RollForwardSetting.LatestMajor
+                        Constants.RollForwardSetting.LatestMajor,
                     };
                 }
 
@@ -123,7 +139,10 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.NativeHosting
                 foreach (string rollForward in rollForwardSettings)
                 {
                     bool? isCompatibleVersion;
-                    if (existingContextType == ExistingContextType.SelfContained_NoIncludedFrameworks)
+                    if (
+                        existingContextType
+                        == ExistingContextType.SelfContained_NoIncludedFrameworks
+                    )
                     {
                         // Self-contained without included frameworks is always considered compatible
                         isCompatibleVersion = true;
@@ -133,13 +152,20 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.NativeHosting
                         // Determine expected compatibility
                         isCompatibleVersion = rollForward switch
                         {
-                            Constants.RollForwardSetting.LatestPatch => requestedVersion.Major == exactVersion.Major && requestedVersion.Minor == exactVersion.Minor && requestedVersion.Build <= exactVersion.Build,
+                            Constants.RollForwardSetting.LatestPatch => requestedVersion.Major
+                                == exactVersion.Major
+                                && requestedVersion.Minor == exactVersion.Minor
+                                && requestedVersion.Build <= exactVersion.Build,
                             Constants.RollForwardSetting.Minor
-                                or Constants.RollForwardSetting.LatestMinor => requestedVersion.Major == exactVersion.Major && requestedVersion.Minor <= exactVersion.Minor,
+                            or Constants.RollForwardSetting.LatestMinor => requestedVersion.Major
+                                == exactVersion.Major
+                                && requestedVersion.Minor <= exactVersion.Minor,
                             Constants.RollForwardSetting.Major
-                                or Constants.RollForwardSetting.LatestMajor => requestedVersion.Major <= exactVersion.Major,
-                            Constants.RollForwardSetting.Disable => requestedVersion == exactVersion,
-                            _ => null
+                            or Constants.RollForwardSetting.LatestMajor => requestedVersion.Major
+                                <= exactVersion.Major,
+                            Constants.RollForwardSetting.Disable => requestedVersion
+                                == exactVersion,
+                            _ => null,
                         };
                     }
 
@@ -149,7 +175,7 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.NativeHosting
                         Version = requestedVersionString,
                         RollForward = rollForward,
                         ExistingContext = existingContextType,
-                        IsCompatible = isCompatibleVersion
+                        IsCompatible = isCompatibleVersion,
                     };
                 }
             }
@@ -161,7 +187,10 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.NativeHosting
                 Version = exactVersion.ToString(),
                 RollForward = null,
                 ExistingContext = existingContextType,
-                IsCompatible = existingContextType == ExistingContextType.SelfContained_NoIncludedFrameworks ? true : null
+                IsCompatible =
+                    existingContextType == ExistingContextType.SelfContained_NoIncludedFrameworks
+                        ? true
+                        : null,
             };
         }
     }

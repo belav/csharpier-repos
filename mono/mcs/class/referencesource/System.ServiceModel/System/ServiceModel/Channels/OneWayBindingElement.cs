@@ -12,8 +12,7 @@ namespace System.ServiceModel.Channels
     using System.ServiceModel.Security;
     using System.Xml;
 
-    public sealed class OneWayBindingElement : BindingElement,
-        IPolicyExportExtension
+    public sealed class OneWayBindingElement : BindingElement, IPolicyExportExtension
     {
         ChannelPoolSettings channelPoolSettings;
         bool packetRoutable;
@@ -36,11 +35,7 @@ namespace System.ServiceModel.Channels
 
         public ChannelPoolSettings ChannelPoolSettings
         {
-            get
-            {
-                return this.channelPoolSettings;
-            }
-
+            get { return this.channelPoolSettings; }
             set
             {
                 if (value == null)
@@ -53,15 +48,17 @@ namespace System.ServiceModel.Channels
         [DefaultValue(OneWayDefaults.MaxAcceptedChannels)]
         public int MaxAcceptedChannels
         {
-            get
-            {
-                return this.maxAcceptedChannels;
-            }
+            get { return this.maxAcceptedChannels; }
             set
             {
                 if (value <= 0)
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentOutOfRangeException("value", value,
-                        SR.GetString(SR.ValueMustBePositive)));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new ArgumentOutOfRangeException(
+                            "value",
+                            value,
+                            SR.GetString(SR.ValueMustBePositive)
+                        )
+                    );
 
                 this.maxAcceptedChannels = value;
             }
@@ -70,15 +67,8 @@ namespace System.ServiceModel.Channels
         [DefaultValue(OneWayDefaults.PacketRoutable)]
         public bool PacketRoutable
         {
-            get
-            {
-                return this.packetRoutable;
-            }
-
-            set
-            {
-                this.packetRoutable = value;
-            }
+            get { return this.packetRoutable; }
+            set { this.packetRoutable = value; }
         }
 
         public override BindingElement Clone()
@@ -86,7 +76,9 @@ namespace System.ServiceModel.Channels
             return new OneWayBindingElement(this);
         }
 
-        public override IChannelFactory<TChannel> BuildChannelFactory<TChannel>(BindingContext context)
+        public override IChannelFactory<TChannel> BuildChannelFactory<TChannel>(
+            BindingContext context
+        )
         {
             if (context == null)
             {
@@ -95,34 +87,44 @@ namespace System.ServiceModel.Channels
 
             if (typeof(TChannel) != typeof(IOutputChannel))
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument("TChannel",
-                    SR.GetString(SR.ChannelTypeNotSupported, typeof(TChannel)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
+                    "TChannel",
+                    SR.GetString(SR.ChannelTypeNotSupported, typeof(TChannel))
+                );
             }
 
             // Prefer IDuplexChannel
             if (context.CanBuildInnerChannelFactory<IDuplexChannel>())
             {
-                return (IChannelFactory<TChannel>)(object)new DuplexOneWayChannelFactory(this, context);
+                return (IChannelFactory<TChannel>)
+                    (object)new DuplexOneWayChannelFactory(this, context);
             }
 
             // Prefer IDuplexSessionChannel
             if (context.CanBuildInnerChannelFactory<IDuplexSessionChannel>())
             {
-                return (IChannelFactory<TChannel>)(object)new DuplexSessionOneWayChannelFactory(this, context);
+                return (IChannelFactory<TChannel>)
+                    (object)new DuplexSessionOneWayChannelFactory(this, context);
             }
 
             // Followed by IRequestChannel
             if (context.CanBuildInnerChannelFactory<IRequestChannel>())
             {
-                return (IChannelFactory<TChannel>)(object)new RequestOneWayChannelFactory(this, context);
+                return (IChannelFactory<TChannel>)
+                    (object)new RequestOneWayChannelFactory(this, context);
             }
 
             throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
 #pragma warning suppress 56506 // context.Binding will never be null.
-new InvalidOperationException(SR.GetString(SR.OneWayInternalTypeNotSupported, context.Binding.Name)));
+                new InvalidOperationException(
+                    SR.GetString(SR.OneWayInternalTypeNotSupported, context.Binding.Name)
+                )
+            );
         }
 
-        public override IChannelListener<TChannel> BuildChannelListener<TChannel>(BindingContext context)
+        public override IChannelListener<TChannel> BuildChannelListener<TChannel>(
+            BindingContext context
+        )
         {
             if (context == null)
             {
@@ -131,31 +133,39 @@ new InvalidOperationException(SR.GetString(SR.OneWayInternalTypeNotSupported, co
 
             if (typeof(TChannel) != typeof(IInputChannel))
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument("TChannel",
-                    SR.GetString(SR.ChannelTypeNotSupported, typeof(TChannel)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
+                    "TChannel",
+                    SR.GetString(SR.ChannelTypeNotSupported, typeof(TChannel))
+                );
             }
 
             // Prefer IDuplexChannel
             if (context.CanBuildInnerChannelListener<IDuplexChannel>())
             {
-                return (IChannelListener<TChannel>)(object)new DuplexOneWayChannelListener(this, context);
+                return (IChannelListener<TChannel>)
+                    (object)new DuplexOneWayChannelListener(this, context);
             }
 
             // Prefer IDuplexSessionChannel
             if (context.CanBuildInnerChannelListener<IDuplexSessionChannel>())
             {
-                return (IChannelListener<TChannel>)(object)new DuplexSessionOneWayChannelListener(this, context);
+                return (IChannelListener<TChannel>)
+                    (object)new DuplexSessionOneWayChannelListener(this, context);
             }
 
             // Followed by IRequestChannel
             if (context.CanBuildInnerChannelListener<IReplyChannel>())
             {
-                return (IChannelListener<TChannel>)(object)new ReplyOneWayChannelListener(this, context);
+                return (IChannelListener<TChannel>)
+                    (object)new ReplyOneWayChannelListener(this, context);
             }
 
             throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
 #pragma warning suppress 56506 // context.Binding will never be null.
-new InvalidOperationException(SR.GetString(SR.OneWayInternalTypeNotSupported, context.Binding.Name)));
+                new InvalidOperationException(
+                    SR.GetString(SR.OneWayInternalTypeNotSupported, context.Binding.Name)
+                )
+            );
         }
 
         public override bool CanBuildChannelFactory<TChannel>(BindingContext context)
@@ -233,8 +243,11 @@ new InvalidOperationException(SR.GetString(SR.OneWayInternalTypeNotSupported, co
                 if (oneWaySignedMessageParts == null)
                 {
                     MessagePartSpecification tempSignedMessageParts = new MessagePartSpecification(
-                        new XmlQualifiedName(DotNetOneWayStrings.HeaderName, DotNetOneWayStrings.Namespace)
-                        );
+                        new XmlQualifiedName(
+                            DotNetOneWayStrings.HeaderName,
+                            DotNetOneWayStrings.Namespace
+                        )
+                    );
                     tempSignedMessageParts.MakeReadOnly();
                     oneWaySignedMessageParts = tempSignedMessageParts;
                 }
@@ -259,7 +272,8 @@ new InvalidOperationException(SR.GetString(SR.OneWayInternalTypeNotSupported, co
                     myRequirements.IncomingSignatureParts.AddParts(OneWaySignedMessageParts);
                     myRequirements.OutgoingSignatureParts.AddParts(OneWaySignedMessageParts);
                 }
-                ChannelProtectionRequirements innerRequirements = context.GetInnerProperty<ChannelProtectionRequirements>();
+                ChannelProtectionRequirements innerRequirements =
+                    context.GetInnerProperty<ChannelProtectionRequirements>();
                 if (innerRequirements != null)
                 {
                     myRequirements.Add(innerRequirements);
@@ -303,7 +317,10 @@ new InvalidOperationException(SR.GetString(SR.OneWayInternalTypeNotSupported, co
             return true;
         }
 
-        void IPolicyExportExtension.ExportPolicy(MetadataExporter exporter, PolicyConversionContext context)
+        void IPolicyExportExtension.ExportPolicy(
+            MetadataExporter exporter,
+            PolicyConversionContext context
+        )
         {
             if (context == null)
             {
@@ -318,13 +335,20 @@ new InvalidOperationException(SR.GetString(SR.OneWayInternalTypeNotSupported, co
                 {
                     // base assertion
                     XmlDocument doc = new XmlDocument();
-                    XmlElement assertion = doc.CreateElement(OneWayPolicyConstants.Prefix,
-                        OneWayPolicyConstants.OneWay, OneWayPolicyConstants.Namespace);
+                    XmlElement assertion = doc.CreateElement(
+                        OneWayPolicyConstants.Prefix,
+                        OneWayPolicyConstants.OneWay,
+                        OneWayPolicyConstants.Namespace
+                    );
 
                     if (oneWay.PacketRoutable)
                     {
-                        // add nested packet routable assertion 
-                        XmlElement child = doc.CreateElement(OneWayPolicyConstants.Prefix, OneWayPolicyConstants.PacketRoutable, OneWayPolicyConstants.Namespace);
+                        // add nested packet routable assertion
+                        XmlElement child = doc.CreateElement(
+                            OneWayPolicyConstants.Prefix,
+                            OneWayPolicyConstants.PacketRoutable,
+                            OneWayPolicyConstants.Namespace
+                        );
                         assertion.AppendChild(child);
                     }
 

@@ -11,7 +11,7 @@ namespace Microsoft.Diagnostics.NETCore.Client
         public enum PortType
         {
             Connect,
-            Listen
+            Listen,
         }
 
         public enum TransportType
@@ -51,13 +51,17 @@ namespace Microsoft.Diagnostics.NETCore.Client
                 case TransportType.NamedPipe:
                 {
                     if (!RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
-                        throw new PlatformNotSupportedException($"{NamedPipeSchema} is only supported on Windows.");
+                        throw new PlatformNotSupportedException(
+                            $"{NamedPipeSchema} is only supported on Windows."
+                        );
                     break;
                 }
                 case TransportType.UnixDomainSocket:
                 {
                     if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
-                        throw new PlatformNotSupportedException($"{UnixDomainSocketSchema} is not supported on Windows, use {NamedPipeSchema}.");
+                        throw new PlatformNotSupportedException(
+                            $"{UnixDomainSocketSchema} is not supported on Windows, use {NamedPipeSchema}."
+                        );
                     break;
                 }
 #if DIAGNOSTICS_RUNTIME
@@ -103,7 +107,7 @@ namespace Microsoft.Diagnostics.NETCore.Client
             {
                 result = Parse(config);
             }
-            catch(Exception)
+            catch (Exception)
             {
                 result = null;
             }
@@ -117,7 +121,9 @@ namespace Microsoft.Diagnostics.NETCore.Client
 
             string address = "";
             PortType portType = PortType.Connect;
-            TransportType transportType = RuntimeInformation.IsOSPlatform(OSPlatform.Windows) ? TransportType.NamedPipe : TransportType.UnixDomainSocket;
+            TransportType transportType = RuntimeInformation.IsOSPlatform(OSPlatform.Windows)
+                ? TransportType.NamedPipe
+                : TransportType.UnixDomainSocket;
 
             if (!string.IsNullOrEmpty(config))
             {
@@ -143,24 +149,44 @@ namespace Microsoft.Diagnostics.NETCore.Client
                     }
                     else
                     {
-                        throw new FormatException($"Unknow IPC endpoint config keyword, {parts[1]} in {config}.");
+                        throw new FormatException(
+                            $"Unknow IPC endpoint config keyword, {parts[1]} in {config}."
+                        );
                     }
                 }
             }
 
             if (Uri.TryCreate(address, UriKind.Absolute, out Uri parsedAddress))
             {
-                if (string.Equals(parsedAddress.Scheme, NamedPipeSchema, StringComparison.OrdinalIgnoreCase))
+                if (
+                    string.Equals(
+                        parsedAddress.Scheme,
+                        NamedPipeSchema,
+                        StringComparison.OrdinalIgnoreCase
+                    )
+                )
                 {
                     transportType = TransportType.NamedPipe;
                     address = parsedAddress.AbsolutePath;
                 }
-                else if (string.Equals(parsedAddress.Scheme, UnixDomainSocketSchema, StringComparison.OrdinalIgnoreCase))
+                else if (
+                    string.Equals(
+                        parsedAddress.Scheme,
+                        UnixDomainSocketSchema,
+                        StringComparison.OrdinalIgnoreCase
+                    )
+                )
                 {
                     transportType = TransportType.UnixDomainSocket;
                     address = parsedAddress.AbsolutePath;
                 }
-                else if (string.Equals(parsedAddress.Scheme, Uri.UriSchemeFile, StringComparison.OrdinalIgnoreCase))
+                else if (
+                    string.Equals(
+                        parsedAddress.Scheme,
+                        Uri.UriSchemeFile,
+                        StringComparison.OrdinalIgnoreCase
+                    )
+                )
                 {
                     address = parsedAddress.AbsolutePath;
                 }
@@ -179,7 +205,12 @@ namespace Microsoft.Diagnostics.NETCore.Client
             {
                 if (address.StartsWith(NamedPipeDefaultIPCRoot, StringComparison.OrdinalIgnoreCase))
                     address = address.Substring(NamedPipeDefaultIPCRoot.Length);
-                else if (address.StartsWith(NamedPipeSchemaDefaultIPCRootPath, StringComparison.OrdinalIgnoreCase))
+                else if (
+                    address.StartsWith(
+                        NamedPipeSchemaDefaultIPCRootPath,
+                        StringComparison.OrdinalIgnoreCase
+                    )
+                )
                     address = address.Substring(NamedPipeSchemaDefaultIPCRootPath.Length);
                 else if (address.StartsWith("/", StringComparison.OrdinalIgnoreCase))
                     address = address.Substring("/".Length);

@@ -19,8 +19,11 @@ public class SqlServerSqlHierarchyIdTypeMapping : RelationalTypeMapping
 {
     private const string SqlHierarchyIdFormatConst = "hierarchyid::Parse('{0}')";
 
-    private static readonly MethodInfo SqlHierarchyIdParseMethod
-        = typeof(SqlHierarchyId).GetRuntimeMethod(nameof(SqlHierarchyId.Parse), new[] { typeof(SqlString) })!;
+    private static readonly MethodInfo SqlHierarchyIdParseMethod =
+        typeof(SqlHierarchyId).GetRuntimeMethod(
+            nameof(SqlHierarchyId.Parse),
+            new[] { typeof(SqlString) }
+        )!;
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -37,9 +40,11 @@ public class SqlServerSqlHierarchyIdTypeMapping : RelationalTypeMapping
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
     public SqlServerSqlHierarchyIdTypeMapping(string storeType)
-        : base(storeType, typeof(SqlHierarchyId), jsonValueReaderWriter: SqlServerJsonSqlHierarchyIdReaderWriter.Instance)
-    {
-    }
+        : base(
+            storeType,
+            typeof(SqlHierarchyId),
+            jsonValueReaderWriter: SqlServerJsonSqlHierarchyIdReaderWriter.Instance
+        ) { }
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -48,9 +53,7 @@ public class SqlServerSqlHierarchyIdTypeMapping : RelationalTypeMapping
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
     protected SqlServerSqlHierarchyIdTypeMapping(RelationalTypeMappingParameters parameters)
-        : base(parameters)
-    {
-    }
+        : base(parameters) { }
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -58,8 +61,7 @@ public class SqlServerSqlHierarchyIdTypeMapping : RelationalTypeMapping
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    protected override string SqlLiteralFormatString
-        => SqlHierarchyIdFormatConst;
+    protected override string SqlLiteralFormatString => SqlHierarchyIdFormatConst;
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -67,8 +69,8 @@ public class SqlServerSqlHierarchyIdTypeMapping : RelationalTypeMapping
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    protected override RelationalTypeMapping Clone(RelationalTypeMappingParameters parameters)
-        => new SqlServerSqlHierarchyIdTypeMapping(parameters);
+    protected override RelationalTypeMapping Clone(RelationalTypeMappingParameters parameters) =>
+        new SqlServerSqlHierarchyIdTypeMapping(parameters);
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -76,8 +78,12 @@ public class SqlServerSqlHierarchyIdTypeMapping : RelationalTypeMapping
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public override Expression GenerateCodeLiteral(object value)
-        => Expression.Call(
+    public override Expression GenerateCodeLiteral(object value) =>
+        Expression.Call(
             SqlHierarchyIdParseMethod,
-            Expression.Convert(Expression.Constant(((SqlHierarchyId)value).ToString()), typeof(SqlString)));
+            Expression.Convert(
+                Expression.Constant(((SqlHierarchyId)value).ToString()),
+                typeof(SqlString)
+            )
+        );
 }

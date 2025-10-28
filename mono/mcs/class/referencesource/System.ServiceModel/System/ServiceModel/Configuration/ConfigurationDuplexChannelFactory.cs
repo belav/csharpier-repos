@@ -11,28 +11,50 @@ namespace System.ServiceModel.Configuration
     public sealed class ConfigurationDuplexChannelFactory<TChannel> : DuplexChannelFactory<TChannel>
     {
         // TChannel provides ContractDescription, attr/config|Config object [TChannel,name] provides Binding, provide Address explicitly
-        public ConfigurationDuplexChannelFactory(object callbackObject, string endpointConfigurationName, EndpointAddress remoteAddress, Configuration configuration)
+        public ConfigurationDuplexChannelFactory(
+            object callbackObject,
+            string endpointConfigurationName,
+            EndpointAddress remoteAddress,
+            Configuration configuration
+        )
             : base(typeof(TChannel))
         {
-            using (ServiceModelActivity activity = DiagnosticUtility.ShouldUseActivity ? ServiceModelActivity.CreateBoundedActivity() : null)
+            using (
+                ServiceModelActivity activity = DiagnosticUtility.ShouldUseActivity
+                    ? ServiceModelActivity.CreateBoundedActivity()
+                    : null
+            )
             {
                 if (DiagnosticUtility.ShouldUseActivity)
                 {
-                    ServiceModelActivity.Start(activity, SR.GetString(SR.ActivityConstructChannelFactory, TraceUtility.CreateSourceString(this)), ActivityType.Construct);
+                    ServiceModelActivity.Start(
+                        activity,
+                        SR.GetString(
+                            SR.ActivityConstructChannelFactory,
+                            TraceUtility.CreateSourceString(this)
+                        ),
+                        ActivityType.Construct
+                    );
                 }
                 if (callbackObject == null)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("callbackObject");
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
+                        "callbackObject"
+                    );
                 }
 
                 if (endpointConfigurationName == null)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("endpointConfigurationName");
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
+                        "endpointConfigurationName"
+                    );
                 }
 
                 if (configuration == null)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("configuration");
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
+                        "configuration"
+                    );
                 }
 
                 this.CheckAndAssignCallbackInstance(callbackObject);

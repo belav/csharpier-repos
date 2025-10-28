@@ -2,18 +2,19 @@
 
 using System;
 
-[assembly:CLSCompliant(true)]
+[assembly: CLSCompliant(true)]
 
-namespace aa {
-    public class I1 {
-    }
+namespace aa
+{
+    public class I1 { }
 }
 
-namespace bb {
-    public interface i1 {
-    }
+namespace bb
+{
+    public interface i1 { }
 }
 
-public class CLSClass {
-        public static void Main() {}
+public class CLSClass
+{
+    public static void Main() { }
 }

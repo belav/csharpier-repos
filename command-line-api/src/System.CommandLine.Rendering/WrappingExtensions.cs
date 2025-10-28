@@ -31,9 +31,7 @@ namespace System.CommandLine.Rendering
 
                         yield return c.ToString();
                     }
-                    else if (c == '\r' &&
-                             text.Length > i &&
-                             text[i + 1] == '\n')
+                    else if (c == '\r' && text.Length > i && text[i + 1] == '\n')
                     {
                         if (sb.Length > 0)
                         {

@@ -3,6 +3,7 @@
 //
 
 using Xunit;
+
 namespace Test
 {
     using System;
@@ -13,6 +14,7 @@ namespace Test
         {
             param3 = (double)param4;
         }
+
         [Fact]
         public static void TestEntryPoint()
         {

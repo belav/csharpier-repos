@@ -36,7 +36,7 @@ namespace System.Xml.Tests
         LINENUMBER,
         LBNORMALIZATION,
         SCHEMATYPE,
-        BINARY
+        BINARY,
     };
 
     ////////////////////////////////////////////////////////////////
@@ -75,11 +75,9 @@ namespace System.Xml.Tests
             get { return _eType; }
         }
 
-
         /// <summary>
         /// The following methods just wrap the XmlReader methods by explicitly calling XmlReader methods from CDataReader.
         /// </summary>
-
         public virtual XmlNodeType NodeType
         {
             get { return Internal.NodeType; }
@@ -595,7 +593,12 @@ namespace System.Xml.Tests
             return x;
         }
 
-        public virtual object ReadElementContentAs(System.Type type, IXmlNamespaceResolver resolver, string localName, string namespaceUri)
+        public virtual object ReadElementContentAs(
+            System.Type type,
+            IXmlNamespaceResolver resolver,
+            string localName,
+            string namespaceUri
+        )
         {
             ResetWrappingReader();
             object x = Internal.ReadElementContentAs(type, resolver, localName, namespaceUri);
@@ -658,7 +661,6 @@ namespace System.Xml.Tests
             CheckWrappingReader();
             return x;
         }
-
 
         //Non-Element calls.
         public virtual object ReadContentAs(System.Type type, IXmlNamespaceResolver resolver)
@@ -772,13 +774,8 @@ namespace System.Xml.Tests
 
         public virtual bool Namespaces
         {
-            set
-            {
-            }
-            get
-            {
-                return false;
-            }
+            set { }
+            get { return false; }
         }
 
         public bool CanReadBinaryContent
@@ -843,9 +840,7 @@ namespace System.Xml.Tests
             return x;
         }
 
-        public void ResetState()
-        {
-        }
+        public void ResetState() { }
 
         ////////////////////////////////////////////////////////////////
         // Dump ALL properties
@@ -935,7 +930,10 @@ namespace System.Xml.Tests
                         ResolveEntity();
                 }
 
-                if (NodeType == XmlNodeType.ProcessingInstruction && NodeType == XmlNodeType.XmlDeclaration)
+                if (
+                    NodeType == XmlNodeType.ProcessingInstruction
+                    && NodeType == XmlNodeType.XmlDeclaration
+                )
                 {
                     if (string.Compare(Name, 0, ST_XML, 0, 3) != 0)
                         return STATUS_PASSED;
@@ -975,7 +973,10 @@ namespace System.Xml.Tests
 
             if (EOF)
             {
-                throw new CTestException(CTestBase.TEST_FAIL, "Couldn't find element '" + strElementName + "'");
+                throw new CTestException(
+                    CTestBase.TEST_FAIL,
+                    "Couldn't find element '" + strElementName + "'"
+                );
             }
         }
 
@@ -996,7 +997,10 @@ namespace System.Xml.Tests
                     if (CanResolveEntity)
                         ResolveEntity();
                 }
-                if (nodeType == XmlNodeType.ProcessingInstruction && NodeType == XmlNodeType.XmlDeclaration)
+                if (
+                    nodeType == XmlNodeType.ProcessingInstruction
+                    && NodeType == XmlNodeType.XmlDeclaration
+                )
                 {
                     if (string.Compare(Name, 0, ST_XML, 0, 3) != 0)
                         return;
@@ -1011,7 +1015,10 @@ namespace System.Xml.Tests
             }
             if (EOF)
             {
-                throw new CTestException(CTestBase.TEST_FAIL, "Couldn't find XmlNodeType " + nodeType);
+                throw new CTestException(
+                    CTestBase.TEST_FAIL,
+                    "Couldn't find XmlNodeType " + nodeType
+                );
             }
         }
 
@@ -1064,12 +1071,10 @@ namespace System.Xml.Tests
         }
     }
 
-
     #region CustomReader
     /// <summary>
     /// CustomReader which wraps Factory created reader.
     /// </summary>
-
     public class CustomReader : XmlReader, IXmlLineInfo
     {
         private XmlReader _tr = null;
@@ -1084,18 +1089,12 @@ namespace System.Xml.Tests
 
         public int LinePosition
         {
-            get
-            {
-                return ((IXmlLineInfo)_tr).LinePosition;
-            }
+            get { return ((IXmlLineInfo)_tr).LinePosition; }
         }
 
         public int LineNumber
         {
-            get
-            {
-                return ((IXmlLineInfo)_tr).LineNumber;
-            }
+            get { return ((IXmlLineInfo)_tr).LineNumber; }
         }
 
         public bool HasLineInfo()
@@ -1145,18 +1144,12 @@ namespace System.Xml.Tests
 
         public override int Depth
         {
-            get
-            {
-                return _tr.Depth;
-            }
+            get { return _tr.Depth; }
         }
 
         public override string Value
         {
-            get
-            {
-                return _tr.Value;
-            }
+            get { return _tr.Value; }
         }
 
         public override bool MoveToElement()
@@ -1166,18 +1159,12 @@ namespace System.Xml.Tests
 
         public override string LocalName
         {
-            get
-            {
-                return _tr.LocalName;
-            }
+            get { return _tr.LocalName; }
         }
 
         public override XmlNodeType NodeType
         {
-            get
-            {
-                return _tr.NodeType;
-            }
+            get { return _tr.NodeType; }
         }
 
         public override bool MoveToNextAttribute()
@@ -1197,26 +1184,17 @@ namespace System.Xml.Tests
 
         public override bool EOF
         {
-            get
-            {
-                return _tr.EOF;
-            }
+            get { return _tr.EOF; }
         }
 
         public override bool HasValue
         {
-            get
-            {
-                return _tr.HasValue;
-            }
+            get { return _tr.HasValue; }
         }
 
         public override string NamespaceURI
         {
-            get
-            {
-                return _tr.NamespaceURI;
-            }
+            get { return _tr.NamespaceURI; }
         }
 
         public override bool Read()
@@ -1226,18 +1204,12 @@ namespace System.Xml.Tests
 
         public override XmlNameTable NameTable
         {
-            get
-            {
-                return _tr.NameTable;
-            }
+            get { return _tr.NameTable; }
         }
 
         public override bool CanResolveEntity
         {
-            get
-            {
-                return _tr.CanResolveEntity;
-            }
+            get { return _tr.CanResolveEntity; }
         }
 
         public override void ResolveEntity()
@@ -1262,10 +1234,7 @@ namespace System.Xml.Tests
 
         public override string BaseURI
         {
-            get
-            {
-                return _tr.BaseURI;
-            }
+            get { return _tr.BaseURI; }
         }
 
         public override bool ReadAttributeValue()
@@ -1275,10 +1244,7 @@ namespace System.Xml.Tests
 
         public override string Prefix
         {
-            get
-            {
-                return _tr.Prefix;
-            }
+            get { return _tr.Prefix; }
         }
 
         public override bool MoveToAttribute(string name, string ns)
@@ -1293,26 +1259,17 @@ namespace System.Xml.Tests
 
         public override int AttributeCount
         {
-            get
-            {
-                return _tr.AttributeCount;
-            }
+            get { return _tr.AttributeCount; }
         }
 
         public override ReadState ReadState
         {
-            get
-            {
-                return _tr.ReadState;
-            }
+            get { return _tr.ReadState; }
         }
 
         public override bool IsEmptyElement
         {
-            get
-            {
-                return _tr.IsEmptyElement;
-            }
+            get { return _tr.IsEmptyElement; }
         }
     }
     #endregion

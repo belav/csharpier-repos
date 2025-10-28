@@ -22,12 +22,14 @@ namespace CookieExtensionsTest
             HttpListenerRequest request = await helper.GetRequest("POST", new[] { cookieString });
             Cookie actual = request.Cookies[0];
 
-            if (request.Cookies.Count != 1 ||
-                actual.Name != expected.Name ||
-                actual.Value != expected.Value ||
-                actual.Port != expected.Port ||
-                actual.Path != expected.Path ||
-                actual.Domain != expected.Domain)
+            if (
+                request.Cookies.Count != 1
+                || actual.Name != expected.Name
+                || actual.Value != expected.Value
+                || actual.Port != expected.Port
+                || actual.Path != expected.Path
+                || actual.Domain != expected.Domain
+            )
             {
                 return -1;
             }

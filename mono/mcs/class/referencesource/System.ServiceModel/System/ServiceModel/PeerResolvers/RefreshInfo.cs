@@ -3,9 +3,9 @@
 //------------------------------------------------------------
 namespace System.ServiceModel.PeerResolvers
 {
-    using System.ServiceModel.Channels;
-    using System.ServiceModel;
     using System.Runtime.Serialization;
+    using System.ServiceModel;
+    using System.ServiceModel.Channels;
 
     [MessageContract(IsWrapped = false)]
     public class RefreshInfo
@@ -18,7 +18,9 @@ namespace System.ServiceModel.PeerResolvers
 
             [DataMember(Name = "MeshId")]
             public string MeshId;
+
             public RefreshInfoDC() { }
+
             public RefreshInfoDC(string meshId, Guid regId)
             {
                 MeshId = meshId;
@@ -36,9 +38,15 @@ namespace System.ServiceModel.PeerResolvers
             this.body = new RefreshInfoDC();
         }
 
-        public string MeshId { get { return body.MeshId; } }
+        public string MeshId
+        {
+            get { return body.MeshId; }
+        }
 
-        public Guid RegistrationId { get { return body.RegistrationId; } }
+        public Guid RegistrationId
+        {
+            get { return body.RegistrationId; }
+        }
 
         [MessageBodyMember(Name = "Refresh", Namespace = PeerStrings.Namespace)]
         RefreshInfoDC body;
@@ -47,7 +55,5 @@ namespace System.ServiceModel.PeerResolvers
         {
             return body != null;
         }
-
     }
 }
-

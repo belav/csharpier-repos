@@ -8,8 +8,8 @@
 //---------------------------------------------------------------------
 
 using System.Collections.Generic;
-using System.Reflection;
 using System.Diagnostics;
+using System.Reflection;
 
 namespace System.Data.Metadata.Edm
 {
@@ -44,13 +44,16 @@ namespace System.Data.Metadata.Edm
             set { _seenWithEdmItemCollection = value; }
         }
 
-        public bool HaveSeenInCompatibleContext(object loaderCookie, EdmItemCollection itemCollection)
+        public bool HaveSeenInCompatibleContext(
+            object loaderCookie,
+            EdmItemCollection itemCollection
+        )
         {
             // a new "context" is only when we have not seen this assembly with an itemCollection that is non-null
             // and we now have a non-null itemCollection, and we are not already in AttributeLoader mode.
-            return SeenWithEdmItemCollection ||
-                   itemCollection == null ||
-                   ObjectItemAssemblyLoader.IsAttributeLoader(loaderCookie);
+            return SeenWithEdmItemCollection
+                || itemCollection == null
+                || ObjectItemAssemblyLoader.IsAttributeLoader(loaderCookie);
         }
     }
 }

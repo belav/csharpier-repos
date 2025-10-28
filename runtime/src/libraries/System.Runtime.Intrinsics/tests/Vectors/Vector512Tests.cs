@@ -87,7 +87,10 @@ namespace System.Runtime.Intrinsics.Tests.Vectors
             );
 
             ulong result = Vector512.ExtractMostSignificantBits(vector);
-            Assert.Equal(0b10101010_10101010_10101010_10101010_10101010_10101010_10101010_10101010UL, result);
+            Assert.Equal(
+                0b10101010_10101010_10101010_10101010_10101010_10101010_10101010_10101010UL,
+                result
+            );
         }
 
         [Fact]
@@ -111,40 +114,42 @@ namespace System.Runtime.Intrinsics.Tests.Vectors
         [Fact]
         public unsafe void Vector512Int16ExtractMostSignificantBitsTest()
         {
-            Vector512<short> vector = Vector512.Create(
-                0x0001,
-                0x8000,
-                0x0001,
-                0x8000,
-                0x0001,
-                0x8000,
-                0x0001,
-                0x8000,
-                0x0001,
-                0x8000,
-                0x0001,
-                0x8000,
-                0x0001,
-                0x8000,
-                0x0001,
-                0x8000,
-                0x0001,
-                0x8000,
-                0x0001,
-                0x8000,
-                0x0001,
-                0x8000,
-                0x0001,
-                0x8000,
-                0x0001,
-                0x8000,
-                0x0001,
-                0x8000,
-                0x0001,
-                0x8000,
-                0x0001,
-                0x8000
-            ).AsInt16();
+            Vector512<short> vector = Vector512
+                .Create(
+                    0x0001,
+                    0x8000,
+                    0x0001,
+                    0x8000,
+                    0x0001,
+                    0x8000,
+                    0x0001,
+                    0x8000,
+                    0x0001,
+                    0x8000,
+                    0x0001,
+                    0x8000,
+                    0x0001,
+                    0x8000,
+                    0x0001,
+                    0x8000,
+                    0x0001,
+                    0x8000,
+                    0x0001,
+                    0x8000,
+                    0x0001,
+                    0x8000,
+                    0x0001,
+                    0x8000,
+                    0x0001,
+                    0x8000,
+                    0x0001,
+                    0x8000,
+                    0x0001,
+                    0x8000,
+                    0x0001,
+                    0x8000
+                )
+                .AsInt16();
 
             ulong result = Vector512.ExtractMostSignificantBits(vector);
             Assert.Equal(0b10101010_10101010_10101010_10101010UL, result);
@@ -153,69 +158,8 @@ namespace System.Runtime.Intrinsics.Tests.Vectors
         [Fact]
         public unsafe void Vector512Int32ExtractMostSignificantBitsTest()
         {
-            Vector512<int> vector = Vector512.Create(
-                0x00000001U,
-                0x80000000U,
-                0x00000001U,
-                0x80000000U,
-                0x00000001U,
-                0x80000000U,
-                0x00000001U,
-                0x80000000U,
-                0x00000001U,
-                0x80000000U,
-                0x00000001U,
-                0x80000000U,
-                0x00000001U,
-                0x80000000U,
-                0x00000001U,
-                0x80000000U
-            ).AsInt32();
-
-            ulong result = Vector512.ExtractMostSignificantBits(vector);
-            Assert.Equal(0b10101010_10101010UL, result);
-        }
-
-        [Fact]
-        public unsafe void Vector512Int64ExtractMostSignificantBitsTest()
-        {
-            Vector512<long> vector = Vector512.Create(
-                0x0000000000000001UL,
-                0x8000000000000000UL,
-                0x0000000000000001UL,
-                0x8000000000000000UL,
-                0x0000000000000001UL,
-                0x8000000000000000UL,
-                0x0000000000000001UL,
-                0x8000000000000000UL
-            ).AsInt64();
-
-            ulong result = Vector512.ExtractMostSignificantBits(vector);
-            Assert.Equal(0b1010_1010UL, result);
-        }
-
-        [Fact]
-        public unsafe void Vector512NIntExtractMostSignificantBitsTest()
-        {
-            if (Environment.Is64BitProcess)
-            {
-                Vector512<nint> vector = Vector512.Create(
-                    0x0000000000000001UL,
-                    0x8000000000000000UL,
-                    0x0000000000000001UL,
-                    0x8000000000000000UL,
-                    0x0000000000000001UL,
-                    0x8000000000000000UL,
-                    0x0000000000000001UL,
-                    0x8000000000000000UL
-                ).AsNInt();
-
-                ulong result = Vector512.ExtractMostSignificantBits(vector);
-                Assert.Equal(0b10101010UL, result);
-            }
-            else
-            {
-                Vector512<nint> vector = Vector512.Create(
+            Vector512<int> vector = Vector512
+                .Create(
                     0x00000001U,
                     0x80000000U,
                     0x00000001U,
@@ -232,7 +176,76 @@ namespace System.Runtime.Intrinsics.Tests.Vectors
                     0x80000000U,
                     0x00000001U,
                     0x80000000U
-                ).AsNInt();
+                )
+                .AsInt32();
+
+            ulong result = Vector512.ExtractMostSignificantBits(vector);
+            Assert.Equal(0b10101010_10101010UL, result);
+        }
+
+        [Fact]
+        public unsafe void Vector512Int64ExtractMostSignificantBitsTest()
+        {
+            Vector512<long> vector = Vector512
+                .Create(
+                    0x0000000000000001UL,
+                    0x8000000000000000UL,
+                    0x0000000000000001UL,
+                    0x8000000000000000UL,
+                    0x0000000000000001UL,
+                    0x8000000000000000UL,
+                    0x0000000000000001UL,
+                    0x8000000000000000UL
+                )
+                .AsInt64();
+
+            ulong result = Vector512.ExtractMostSignificantBits(vector);
+            Assert.Equal(0b1010_1010UL, result);
+        }
+
+        [Fact]
+        public unsafe void Vector512NIntExtractMostSignificantBitsTest()
+        {
+            if (Environment.Is64BitProcess)
+            {
+                Vector512<nint> vector = Vector512
+                    .Create(
+                        0x0000000000000001UL,
+                        0x8000000000000000UL,
+                        0x0000000000000001UL,
+                        0x8000000000000000UL,
+                        0x0000000000000001UL,
+                        0x8000000000000000UL,
+                        0x0000000000000001UL,
+                        0x8000000000000000UL
+                    )
+                    .AsNInt();
+
+                ulong result = Vector512.ExtractMostSignificantBits(vector);
+                Assert.Equal(0b10101010UL, result);
+            }
+            else
+            {
+                Vector512<nint> vector = Vector512
+                    .Create(
+                        0x00000001U,
+                        0x80000000U,
+                        0x00000001U,
+                        0x80000000U,
+                        0x00000001U,
+                        0x80000000U,
+                        0x00000001U,
+                        0x80000000U,
+                        0x00000001U,
+                        0x80000000U,
+                        0x00000001U,
+                        0x80000000U,
+                        0x00000001U,
+                        0x80000000U,
+                        0x00000001U,
+                        0x80000000U
+                    )
+                    .AsNInt();
 
                 ulong result = Vector512.ExtractMostSignificantBits(vector);
                 Assert.Equal(0b10101010_10101010UL, result);
@@ -244,40 +257,44 @@ namespace System.Runtime.Intrinsics.Tests.Vectors
         {
             if (Environment.Is64BitProcess)
             {
-                Vector512<nuint> vector = Vector512.Create(
-                    0x0000000000000001UL,
-                    0x8000000000000000UL,
-                    0x0000000000000001UL,
-                    0x8000000000000000UL,
-                    0x0000000000000001UL,
-                    0x8000000000000000UL,
-                    0x0000000000000001UL,
-                    0x8000000000000000UL
-                ).AsNUInt();
+                Vector512<nuint> vector = Vector512
+                    .Create(
+                        0x0000000000000001UL,
+                        0x8000000000000000UL,
+                        0x0000000000000001UL,
+                        0x8000000000000000UL,
+                        0x0000000000000001UL,
+                        0x8000000000000000UL,
+                        0x0000000000000001UL,
+                        0x8000000000000000UL
+                    )
+                    .AsNUInt();
 
                 ulong result = Vector512.ExtractMostSignificantBits(vector);
                 Assert.Equal(0b10101010UL, result);
             }
             else
             {
-                Vector512<nuint> vector = Vector512.Create(
-                    0x00000001U,
-                    0x80000000U,
-                    0x00000001U,
-                    0x80000000U,
-                    0x00000001U,
-                    0x80000000U,
-                    0x00000001U,
-                    0x80000000U,
-                    0x00000001U,
-                    0x80000000U,
-                    0x00000001U,
-                    0x80000000U,
-                    0x00000001U,
-                    0x80000000U,
-                    0x00000001U,
-                    0x80000000U
-                ).AsNUInt();
+                Vector512<nuint> vector = Vector512
+                    .Create(
+                        0x00000001U,
+                        0x80000000U,
+                        0x00000001U,
+                        0x80000000U,
+                        0x00000001U,
+                        0x80000000U,
+                        0x00000001U,
+                        0x80000000U,
+                        0x00000001U,
+                        0x80000000U,
+                        0x00000001U,
+                        0x80000000U,
+                        0x00000001U,
+                        0x80000000U,
+                        0x00000001U,
+                        0x80000000U
+                    )
+                    .AsNUInt();
 
                 ulong result = Vector512.ExtractMostSignificantBits(vector);
                 Assert.Equal(0b10101010_10101010UL, result);
@@ -287,75 +304,80 @@ namespace System.Runtime.Intrinsics.Tests.Vectors
         [Fact]
         public unsafe void Vector512SByteExtractMostSignificantBitsTest()
         {
-            Vector512<sbyte> vector = Vector512.Create(
-                0x01,
-                0x80,
-                0x01,
-                0x80,
-                0x01,
-                0x80,
-                0x01,
-                0x80,
-                0x01,
-                0x80,
-                0x01,
-                0x80,
-                0x01,
-                0x80,
-                0x01,
-                0x80,
-                0x01,
-                0x80,
-                0x01,
-                0x80,
-                0x01,
-                0x80,
-                0x01,
-                0x80,
-                0x01,
-                0x80,
-                0x01,
-                0x80,
-                0x01,
-                0x80,
-                0x01,
-                0x80,
-                0x01,
-                0x80,
-                0x01,
-                0x80,
-                0x01,
-                0x80,
-                0x01,
-                0x80,
-                0x01,
-                0x80,
-                0x01,
-                0x80,
-                0x01,
-                0x80,
-                0x01,
-                0x80,
-                0x01,
-                0x80,
-                0x01,
-                0x80,
-                0x01,
-                0x80,
-                0x01,
-                0x80,
-                0x01,
-                0x80,
-                0x01,
-                0x80,
-                0x01,
-                0x80,
-                0x01,
-                0x80
-            ).AsSByte();
+            Vector512<sbyte> vector = Vector512
+                .Create(
+                    0x01,
+                    0x80,
+                    0x01,
+                    0x80,
+                    0x01,
+                    0x80,
+                    0x01,
+                    0x80,
+                    0x01,
+                    0x80,
+                    0x01,
+                    0x80,
+                    0x01,
+                    0x80,
+                    0x01,
+                    0x80,
+                    0x01,
+                    0x80,
+                    0x01,
+                    0x80,
+                    0x01,
+                    0x80,
+                    0x01,
+                    0x80,
+                    0x01,
+                    0x80,
+                    0x01,
+                    0x80,
+                    0x01,
+                    0x80,
+                    0x01,
+                    0x80,
+                    0x01,
+                    0x80,
+                    0x01,
+                    0x80,
+                    0x01,
+                    0x80,
+                    0x01,
+                    0x80,
+                    0x01,
+                    0x80,
+                    0x01,
+                    0x80,
+                    0x01,
+                    0x80,
+                    0x01,
+                    0x80,
+                    0x01,
+                    0x80,
+                    0x01,
+                    0x80,
+                    0x01,
+                    0x80,
+                    0x01,
+                    0x80,
+                    0x01,
+                    0x80,
+                    0x01,
+                    0x80,
+                    0x01,
+                    0x80,
+                    0x01,
+                    0x80
+                )
+                .AsSByte();
 
             ulong result = Vector512.ExtractMostSignificantBits(vector);
-            Assert.Equal(0b10101010_10101010_10101010_10101010_10101010_10101010_10101010_10101010UL, result);
+            Assert.Equal(
+                0b10101010_10101010_10101010_10101010_10101010_10101010_10101010_10101010UL,
+                result
+            );
         }
 
         [Fact]
@@ -2262,8 +2284,141 @@ namespace System.Runtime.Intrinsics.Tests.Vectors
         [Fact]
         public void Vector512ByteShuffleOneInputTest()
         {
-            Vector512<byte> vector = Vector512.Create((byte)1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64);
-            Vector512<byte> result = Vector512.Shuffle(vector, Vector512.Create((byte)63, 62, 61, 60, 59, 58, 57, 56, 55, 54, 53, 52, 51, 50, 49, 48, 47, 46, 45, 44, 43, 42, 41, 40, 39, 38, 37, 36, 35, 34, 33, 32, 31, 30, 29, 28, 27, 26, 25, 24, 23, 22, 21, 20, 19, 18, 17, 16, 15, 14, 13, 12, 11, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1, 0));
+            Vector512<byte> vector = Vector512.Create(
+                (byte)1,
+                2,
+                3,
+                4,
+                5,
+                6,
+                7,
+                8,
+                9,
+                10,
+                11,
+                12,
+                13,
+                14,
+                15,
+                16,
+                17,
+                18,
+                19,
+                20,
+                21,
+                22,
+                23,
+                24,
+                25,
+                26,
+                27,
+                28,
+                29,
+                30,
+                31,
+                32,
+                33,
+                34,
+                35,
+                36,
+                37,
+                38,
+                39,
+                40,
+                41,
+                42,
+                43,
+                44,
+                45,
+                46,
+                47,
+                48,
+                49,
+                50,
+                51,
+                52,
+                53,
+                54,
+                55,
+                56,
+                57,
+                58,
+                59,
+                60,
+                61,
+                62,
+                63,
+                64
+            );
+            Vector512<byte> result = Vector512.Shuffle(
+                vector,
+                Vector512.Create(
+                    (byte)63,
+                    62,
+                    61,
+                    60,
+                    59,
+                    58,
+                    57,
+                    56,
+                    55,
+                    54,
+                    53,
+                    52,
+                    51,
+                    50,
+                    49,
+                    48,
+                    47,
+                    46,
+                    45,
+                    44,
+                    43,
+                    42,
+                    41,
+                    40,
+                    39,
+                    38,
+                    37,
+                    36,
+                    35,
+                    34,
+                    33,
+                    32,
+                    31,
+                    30,
+                    29,
+                    28,
+                    27,
+                    26,
+                    25,
+                    24,
+                    23,
+                    22,
+                    21,
+                    20,
+                    19,
+                    18,
+                    17,
+                    16,
+                    15,
+                    14,
+                    13,
+                    12,
+                    11,
+                    10,
+                    9,
+                    8,
+                    7,
+                    6,
+                    5,
+                    4,
+                    3,
+                    2,
+                    1,
+                    0
+                )
+            );
 
             for (int index = 0; index < Vector512<byte>.Count; index++)
             {
@@ -2275,7 +2430,10 @@ namespace System.Runtime.Intrinsics.Tests.Vectors
         public void Vector512DoubleShuffleOneInputTest()
         {
             Vector512<double> vector = Vector512.Create((double)1, 2, 3, 4, 5, 6, 7, 8);
-            Vector512<double> result = Vector512.Shuffle(vector, Vector512.Create((long)7, 6, 5, 4, 3, 2, 1, 0));
+            Vector512<double> result = Vector512.Shuffle(
+                vector,
+                Vector512.Create((long)7, 6, 5, 4, 3, 2, 1, 0)
+            );
 
             for (int index = 0; index < Vector512<double>.Count; index++)
             {
@@ -2286,8 +2444,77 @@ namespace System.Runtime.Intrinsics.Tests.Vectors
         [Fact]
         public void Vector512Int16ShuffleOneInputTest()
         {
-            Vector512<short> vector = Vector512.Create((short)1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32);
-            Vector512<short> result = Vector512.Shuffle(vector, Vector512.Create((short)31, 30, 29, 28, 27, 26, 25, 24, 23, 22, 21, 20, 19, 18, 17, 16, 15, 14, 13, 12, 11, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1, 0));
+            Vector512<short> vector = Vector512.Create(
+                (short)1,
+                2,
+                3,
+                4,
+                5,
+                6,
+                7,
+                8,
+                9,
+                10,
+                11,
+                12,
+                13,
+                14,
+                15,
+                16,
+                17,
+                18,
+                19,
+                20,
+                21,
+                22,
+                23,
+                24,
+                25,
+                26,
+                27,
+                28,
+                29,
+                30,
+                31,
+                32
+            );
+            Vector512<short> result = Vector512.Shuffle(
+                vector,
+                Vector512.Create(
+                    (short)31,
+                    30,
+                    29,
+                    28,
+                    27,
+                    26,
+                    25,
+                    24,
+                    23,
+                    22,
+                    21,
+                    20,
+                    19,
+                    18,
+                    17,
+                    16,
+                    15,
+                    14,
+                    13,
+                    12,
+                    11,
+                    10,
+                    9,
+                    8,
+                    7,
+                    6,
+                    5,
+                    4,
+                    3,
+                    2,
+                    1,
+                    0
+                )
+            );
 
             for (int index = 0; index < Vector512<short>.Count; index++)
             {
@@ -2298,8 +2525,28 @@ namespace System.Runtime.Intrinsics.Tests.Vectors
         [Fact]
         public void Vector512Int32ShuffleOneInputTest()
         {
-            Vector512<int> vector = Vector512.Create((int)1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16);
-            Vector512<int> result = Vector512.Shuffle(vector, Vector512.Create((int)15, 14, 13, 12, 11, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1, 0));
+            Vector512<int> vector = Vector512.Create(
+                (int)1,
+                2,
+                3,
+                4,
+                5,
+                6,
+                7,
+                8,
+                9,
+                10,
+                11,
+                12,
+                13,
+                14,
+                15,
+                16
+            );
+            Vector512<int> result = Vector512.Shuffle(
+                vector,
+                Vector512.Create((int)15, 14, 13, 12, 11, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1, 0)
+            );
 
             for (int index = 0; index < Vector512<int>.Count; index++)
             {
@@ -2311,7 +2558,10 @@ namespace System.Runtime.Intrinsics.Tests.Vectors
         public void Vector512Int64ShuffleOneInputTest()
         {
             Vector512<long> vector = Vector512.Create((long)1, 2, 3, 4, 5, 6, 7, 8);
-            Vector512<long> result = Vector512.Shuffle(vector, Vector512.Create((long)7, 6, 5, 4, 3, 2, 1, 0));
+            Vector512<long> result = Vector512.Shuffle(
+                vector,
+                Vector512.Create((long)7, 6, 5, 4, 3, 2, 1, 0)
+            );
 
             for (int index = 0; index < Vector512<long>.Count; index++)
             {
@@ -2322,8 +2572,141 @@ namespace System.Runtime.Intrinsics.Tests.Vectors
         [Fact]
         public void Vector512SByteShuffleOneInputTest()
         {
-            Vector512<sbyte> vector = Vector512.Create((sbyte)1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64);
-            Vector512<sbyte> result = Vector512.Shuffle(vector, Vector512.Create((sbyte)63, 62, 61, 60, 59, 58, 57, 56, 55, 54, 53, 52, 51, 50, 49, 48, 47, 46, 45, 44, 43, 42, 41, 40, 39, 38, 37, 36, 35, 34, 33, 32, 31, 30, 29, 28, 27, 26, 25, 24, 23, 22, 21, 20, 19, 18, 17, 16, 15, 14, 13, 12, 11, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1, 0));
+            Vector512<sbyte> vector = Vector512.Create(
+                (sbyte)1,
+                2,
+                3,
+                4,
+                5,
+                6,
+                7,
+                8,
+                9,
+                10,
+                11,
+                12,
+                13,
+                14,
+                15,
+                16,
+                17,
+                18,
+                19,
+                20,
+                21,
+                22,
+                23,
+                24,
+                25,
+                26,
+                27,
+                28,
+                29,
+                30,
+                31,
+                32,
+                33,
+                34,
+                35,
+                36,
+                37,
+                38,
+                39,
+                40,
+                41,
+                42,
+                43,
+                44,
+                45,
+                46,
+                47,
+                48,
+                49,
+                50,
+                51,
+                52,
+                53,
+                54,
+                55,
+                56,
+                57,
+                58,
+                59,
+                60,
+                61,
+                62,
+                63,
+                64
+            );
+            Vector512<sbyte> result = Vector512.Shuffle(
+                vector,
+                Vector512.Create(
+                    (sbyte)63,
+                    62,
+                    61,
+                    60,
+                    59,
+                    58,
+                    57,
+                    56,
+                    55,
+                    54,
+                    53,
+                    52,
+                    51,
+                    50,
+                    49,
+                    48,
+                    47,
+                    46,
+                    45,
+                    44,
+                    43,
+                    42,
+                    41,
+                    40,
+                    39,
+                    38,
+                    37,
+                    36,
+                    35,
+                    34,
+                    33,
+                    32,
+                    31,
+                    30,
+                    29,
+                    28,
+                    27,
+                    26,
+                    25,
+                    24,
+                    23,
+                    22,
+                    21,
+                    20,
+                    19,
+                    18,
+                    17,
+                    16,
+                    15,
+                    14,
+                    13,
+                    12,
+                    11,
+                    10,
+                    9,
+                    8,
+                    7,
+                    6,
+                    5,
+                    4,
+                    3,
+                    2,
+                    1,
+                    0
+                )
+            );
 
             for (int index = 0; index < Vector512<sbyte>.Count; index++)
             {
@@ -2334,8 +2717,28 @@ namespace System.Runtime.Intrinsics.Tests.Vectors
         [Fact]
         public void Vector512SingleShuffleOneInputTest()
         {
-            Vector512<float> vector = Vector512.Create((float)1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16);
-            Vector512<float> result = Vector512.Shuffle(vector, Vector512.Create((int)15, 14, 13, 12, 11, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1, 0));
+            Vector512<float> vector = Vector512.Create(
+                (float)1,
+                2,
+                3,
+                4,
+                5,
+                6,
+                7,
+                8,
+                9,
+                10,
+                11,
+                12,
+                13,
+                14,
+                15,
+                16
+            );
+            Vector512<float> result = Vector512.Shuffle(
+                vector,
+                Vector512.Create((int)15, 14, 13, 12, 11, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1, 0)
+            );
 
             for (int index = 0; index < Vector512<float>.Count; index++)
             {
@@ -2346,8 +2749,77 @@ namespace System.Runtime.Intrinsics.Tests.Vectors
         [Fact]
         public void Vector512UInt16ShuffleOneInputTest()
         {
-            Vector512<ushort> vector = Vector512.Create((ushort)1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32);
-            Vector512<ushort> result = Vector512.Shuffle(vector, Vector512.Create((ushort)31, 30, 29, 28, 27, 26, 25, 24, 23, 22, 21, 20, 19, 18, 17, 16, 15, 14, 13, 12, 11, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1, 0));
+            Vector512<ushort> vector = Vector512.Create(
+                (ushort)1,
+                2,
+                3,
+                4,
+                5,
+                6,
+                7,
+                8,
+                9,
+                10,
+                11,
+                12,
+                13,
+                14,
+                15,
+                16,
+                17,
+                18,
+                19,
+                20,
+                21,
+                22,
+                23,
+                24,
+                25,
+                26,
+                27,
+                28,
+                29,
+                30,
+                31,
+                32
+            );
+            Vector512<ushort> result = Vector512.Shuffle(
+                vector,
+                Vector512.Create(
+                    (ushort)31,
+                    30,
+                    29,
+                    28,
+                    27,
+                    26,
+                    25,
+                    24,
+                    23,
+                    22,
+                    21,
+                    20,
+                    19,
+                    18,
+                    17,
+                    16,
+                    15,
+                    14,
+                    13,
+                    12,
+                    11,
+                    10,
+                    9,
+                    8,
+                    7,
+                    6,
+                    5,
+                    4,
+                    3,
+                    2,
+                    1,
+                    0
+                )
+            );
 
             for (int index = 0; index < Vector512<ushort>.Count; index++)
             {
@@ -2358,8 +2830,28 @@ namespace System.Runtime.Intrinsics.Tests.Vectors
         [Fact]
         public void Vector512UInt32ShuffleOneInputTest()
         {
-            Vector512<uint> vector = Vector512.Create((uint)1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16);
-            Vector512<uint> result = Vector512.Shuffle(vector, Vector512.Create((uint)15, 14, 13, 12, 11, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1, 0));
+            Vector512<uint> vector = Vector512.Create(
+                (uint)1,
+                2,
+                3,
+                4,
+                5,
+                6,
+                7,
+                8,
+                9,
+                10,
+                11,
+                12,
+                13,
+                14,
+                15,
+                16
+            );
+            Vector512<uint> result = Vector512.Shuffle(
+                vector,
+                Vector512.Create((uint)15, 14, 13, 12, 11, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1, 0)
+            );
 
             for (int index = 0; index < Vector512<uint>.Count; index++)
             {
@@ -2371,7 +2863,10 @@ namespace System.Runtime.Intrinsics.Tests.Vectors
         public void Vector512UInt64ShuffleOneInputTest()
         {
             Vector512<ulong> vector = Vector512.Create((ulong)1, 2, 3, 4, 5, 6, 7, 8);
-            Vector512<ulong> result = Vector512.Shuffle(vector, Vector512.Create((ulong)7, 6, 5, 4, 3, 2, 1, 0));
+            Vector512<ulong> result = Vector512.Shuffle(
+                vector,
+                Vector512.Create((ulong)7, 6, 5, 4, 3, 2, 1, 0)
+            );
 
             for (int index = 0; index < Vector512<ulong>.Count; index++)
             {
@@ -2383,8 +2878,138 @@ namespace System.Runtime.Intrinsics.Tests.Vectors
         public void Vector512ByteShuffleOneInputWithDirectVectorTest()
         {
             Vector512<byte> result = Vector512.Shuffle(
-                Vector512.Create((byte)1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64),
-                Vector512.Create((byte)63, 62, 61, 60, 59, 58, 57, 56, 55, 54, 53, 52, 51, 50, 49, 48, 47, 46, 45, 44, 43, 42, 41, 40, 39, 38, 37, 36, 35, 34, 33, 32, 31, 30, 29, 28, 27, 26, 25, 24, 23, 22, 21, 20, 19, 18, 17, 16, 15, 14, 13, 12, 11, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1, 0)
+                Vector512.Create(
+                    (byte)1,
+                    2,
+                    3,
+                    4,
+                    5,
+                    6,
+                    7,
+                    8,
+                    9,
+                    10,
+                    11,
+                    12,
+                    13,
+                    14,
+                    15,
+                    16,
+                    17,
+                    18,
+                    19,
+                    20,
+                    21,
+                    22,
+                    23,
+                    24,
+                    25,
+                    26,
+                    27,
+                    28,
+                    29,
+                    30,
+                    31,
+                    32,
+                    33,
+                    34,
+                    35,
+                    36,
+                    37,
+                    38,
+                    39,
+                    40,
+                    41,
+                    42,
+                    43,
+                    44,
+                    45,
+                    46,
+                    47,
+                    48,
+                    49,
+                    50,
+                    51,
+                    52,
+                    53,
+                    54,
+                    55,
+                    56,
+                    57,
+                    58,
+                    59,
+                    60,
+                    61,
+                    62,
+                    63,
+                    64
+                ),
+                Vector512.Create(
+                    (byte)63,
+                    62,
+                    61,
+                    60,
+                    59,
+                    58,
+                    57,
+                    56,
+                    55,
+                    54,
+                    53,
+                    52,
+                    51,
+                    50,
+                    49,
+                    48,
+                    47,
+                    46,
+                    45,
+                    44,
+                    43,
+                    42,
+                    41,
+                    40,
+                    39,
+                    38,
+                    37,
+                    36,
+                    35,
+                    34,
+                    33,
+                    32,
+                    31,
+                    30,
+                    29,
+                    28,
+                    27,
+                    26,
+                    25,
+                    24,
+                    23,
+                    22,
+                    21,
+                    20,
+                    19,
+                    18,
+                    17,
+                    16,
+                    15,
+                    14,
+                    13,
+                    12,
+                    11,
+                    10,
+                    9,
+                    8,
+                    7,
+                    6,
+                    5,
+                    4,
+                    3,
+                    2,
+                    1,
+                    0
+                )
             );
 
             for (int index = 0; index < Vector512<byte>.Count; index++)
@@ -2411,8 +3036,74 @@ namespace System.Runtime.Intrinsics.Tests.Vectors
         public void Vector512Int16ShuffleOneInputWithDirectVectorTest()
         {
             Vector512<short> result = Vector512.Shuffle(
-                Vector512.Create((short)1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32),
-                Vector512.Create((short)31, 30, 29, 28, 27, 26, 25, 24, 23, 22, 21, 20, 19, 18, 17, 16, 15, 14, 13, 12, 11, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1, 0)
+                Vector512.Create(
+                    (short)1,
+                    2,
+                    3,
+                    4,
+                    5,
+                    6,
+                    7,
+                    8,
+                    9,
+                    10,
+                    11,
+                    12,
+                    13,
+                    14,
+                    15,
+                    16,
+                    17,
+                    18,
+                    19,
+                    20,
+                    21,
+                    22,
+                    23,
+                    24,
+                    25,
+                    26,
+                    27,
+                    28,
+                    29,
+                    30,
+                    31,
+                    32
+                ),
+                Vector512.Create(
+                    (short)31,
+                    30,
+                    29,
+                    28,
+                    27,
+                    26,
+                    25,
+                    24,
+                    23,
+                    22,
+                    21,
+                    20,
+                    19,
+                    18,
+                    17,
+                    16,
+                    15,
+                    14,
+                    13,
+                    12,
+                    11,
+                    10,
+                    9,
+                    8,
+                    7,
+                    6,
+                    5,
+                    4,
+                    3,
+                    2,
+                    1,
+                    0
+                )
             );
 
             for (int index = 0; index < Vector512<short>.Count; index++)
@@ -2453,8 +3144,138 @@ namespace System.Runtime.Intrinsics.Tests.Vectors
         public void Vector512SByteShuffleOneInputWithDirectVectorTest()
         {
             Vector512<sbyte> result = Vector512.Shuffle(
-                Vector512.Create((sbyte)1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64),
-                Vector512.Create((sbyte)63, 62, 61, 60, 59, 58, 57, 56, 55, 54, 53, 52, 51, 50, 49, 48, 47, 46, 45, 44, 43, 42, 41, 40, 39, 38, 37, 36, 35, 34, 33, 32, 31, 30, 29, 28, 27, 26, 25, 24, 23, 22, 21, 20, 19, 18, 17, 16, 15, 14, 13, 12, 11, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1, 0)
+                Vector512.Create(
+                    (sbyte)1,
+                    2,
+                    3,
+                    4,
+                    5,
+                    6,
+                    7,
+                    8,
+                    9,
+                    10,
+                    11,
+                    12,
+                    13,
+                    14,
+                    15,
+                    16,
+                    17,
+                    18,
+                    19,
+                    20,
+                    21,
+                    22,
+                    23,
+                    24,
+                    25,
+                    26,
+                    27,
+                    28,
+                    29,
+                    30,
+                    31,
+                    32,
+                    33,
+                    34,
+                    35,
+                    36,
+                    37,
+                    38,
+                    39,
+                    40,
+                    41,
+                    42,
+                    43,
+                    44,
+                    45,
+                    46,
+                    47,
+                    48,
+                    49,
+                    50,
+                    51,
+                    52,
+                    53,
+                    54,
+                    55,
+                    56,
+                    57,
+                    58,
+                    59,
+                    60,
+                    61,
+                    62,
+                    63,
+                    64
+                ),
+                Vector512.Create(
+                    (sbyte)63,
+                    62,
+                    61,
+                    60,
+                    59,
+                    58,
+                    57,
+                    56,
+                    55,
+                    54,
+                    53,
+                    52,
+                    51,
+                    50,
+                    49,
+                    48,
+                    47,
+                    46,
+                    45,
+                    44,
+                    43,
+                    42,
+                    41,
+                    40,
+                    39,
+                    38,
+                    37,
+                    36,
+                    35,
+                    34,
+                    33,
+                    32,
+                    31,
+                    30,
+                    29,
+                    28,
+                    27,
+                    26,
+                    25,
+                    24,
+                    23,
+                    22,
+                    21,
+                    20,
+                    19,
+                    18,
+                    17,
+                    16,
+                    15,
+                    14,
+                    13,
+                    12,
+                    11,
+                    10,
+                    9,
+                    8,
+                    7,
+                    6,
+                    5,
+                    4,
+                    3,
+                    2,
+                    1,
+                    0
+                )
             );
 
             for (int index = 0; index < Vector512<sbyte>.Count; index++)
@@ -2481,8 +3302,74 @@ namespace System.Runtime.Intrinsics.Tests.Vectors
         public void Vector512UInt16ShuffleOneInputWithDirectVectorTest()
         {
             Vector512<ushort> result = Vector512.Shuffle(
-                Vector512.Create((ushort)1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32),
-                Vector512.Create((ushort)31, 30, 29, 28, 27, 26, 25, 24, 23, 22, 21, 20, 19, 18, 17, 16, 15, 14, 13, 12, 11, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1, 0)
+                Vector512.Create(
+                    (ushort)1,
+                    2,
+                    3,
+                    4,
+                    5,
+                    6,
+                    7,
+                    8,
+                    9,
+                    10,
+                    11,
+                    12,
+                    13,
+                    14,
+                    15,
+                    16,
+                    17,
+                    18,
+                    19,
+                    20,
+                    21,
+                    22,
+                    23,
+                    24,
+                    25,
+                    26,
+                    27,
+                    28,
+                    29,
+                    30,
+                    31,
+                    32
+                ),
+                Vector512.Create(
+                    (ushort)31,
+                    30,
+                    29,
+                    28,
+                    27,
+                    26,
+                    25,
+                    24,
+                    23,
+                    22,
+                    21,
+                    20,
+                    19,
+                    18,
+                    17,
+                    16,
+                    15,
+                    14,
+                    13,
+                    12,
+                    11,
+                    10,
+                    9,
+                    8,
+                    7,
+                    6,
+                    5,
+                    4,
+                    3,
+                    2,
+                    1,
+                    0
+                )
             );
 
             for (int index = 0; index < Vector512<ushort>.Count; index++)
@@ -2523,8 +3410,138 @@ namespace System.Runtime.Intrinsics.Tests.Vectors
         public void Vector512ByteShuffleOneInputWithDirectVectorAndNoCross128BitLaneTest()
         {
             Vector512<byte> result = Vector512.Shuffle(
-                Vector512.Create((byte)1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64),
-                Vector512.Create((byte)15, 14, 13, 12, 11, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1, 0, 31, 30, 29, 28, 27, 26, 25, 24, 23, 22, 21, 20, 19, 18, 17, 16, 47, 46, 45, 44, 43, 42, 41, 40, 39, 38, 37, 36, 35, 34, 33, 32, 63, 62, 61, 60, 59, 58, 57, 56, 55, 54, 53, 52, 51, 50, 49, 48)
+                Vector512.Create(
+                    (byte)1,
+                    2,
+                    3,
+                    4,
+                    5,
+                    6,
+                    7,
+                    8,
+                    9,
+                    10,
+                    11,
+                    12,
+                    13,
+                    14,
+                    15,
+                    16,
+                    17,
+                    18,
+                    19,
+                    20,
+                    21,
+                    22,
+                    23,
+                    24,
+                    25,
+                    26,
+                    27,
+                    28,
+                    29,
+                    30,
+                    31,
+                    32,
+                    33,
+                    34,
+                    35,
+                    36,
+                    37,
+                    38,
+                    39,
+                    40,
+                    41,
+                    42,
+                    43,
+                    44,
+                    45,
+                    46,
+                    47,
+                    48,
+                    49,
+                    50,
+                    51,
+                    52,
+                    53,
+                    54,
+                    55,
+                    56,
+                    57,
+                    58,
+                    59,
+                    60,
+                    61,
+                    62,
+                    63,
+                    64
+                ),
+                Vector512.Create(
+                    (byte)15,
+                    14,
+                    13,
+                    12,
+                    11,
+                    10,
+                    9,
+                    8,
+                    7,
+                    6,
+                    5,
+                    4,
+                    3,
+                    2,
+                    1,
+                    0,
+                    31,
+                    30,
+                    29,
+                    28,
+                    27,
+                    26,
+                    25,
+                    24,
+                    23,
+                    22,
+                    21,
+                    20,
+                    19,
+                    18,
+                    17,
+                    16,
+                    47,
+                    46,
+                    45,
+                    44,
+                    43,
+                    42,
+                    41,
+                    40,
+                    39,
+                    38,
+                    37,
+                    36,
+                    35,
+                    34,
+                    33,
+                    32,
+                    63,
+                    62,
+                    61,
+                    60,
+                    59,
+                    58,
+                    57,
+                    56,
+                    55,
+                    54,
+                    53,
+                    52,
+                    51,
+                    50,
+                    49,
+                    48
+                )
             );
 
             for (int index = 0; index < Vector128<byte>.Count; index++)
@@ -2534,17 +3551,41 @@ namespace System.Runtime.Intrinsics.Tests.Vectors
 
             for (int index = Vector128<byte>.Count; index < Vector256<byte>.Count; index++)
             {
-                Assert.Equal((byte)(Vector256<byte>.Count - (index - Vector128<byte>.Count)), result.GetElement(index));
+                Assert.Equal(
+                    (byte)(Vector256<byte>.Count - (index - Vector128<byte>.Count)),
+                    result.GetElement(index)
+                );
             }
 
-            for (int index = Vector256<byte>.Count; index < Vector512<byte>.Count - Vector128<byte>.Count; index++)
+            for (
+                int index = Vector256<byte>.Count;
+                index < Vector512<byte>.Count - Vector128<byte>.Count;
+                index++
+            )
             {
-                Assert.Equal((byte)(Vector512<byte>.Count - Vector128<byte>.Count - (index - Vector256<byte>.Count)), result.GetElement(index));
+                Assert.Equal(
+                    (byte)(
+                        Vector512<byte>.Count
+                        - Vector128<byte>.Count
+                        - (index - Vector256<byte>.Count)
+                    ),
+                    result.GetElement(index)
+                );
             }
 
-            for (int index = Vector256<byte>.Count + Vector128<byte>.Count; index < Vector512<byte>.Count; index++)
+            for (
+                int index = Vector256<byte>.Count + Vector128<byte>.Count;
+                index < Vector512<byte>.Count;
+                index++
+            )
             {
-                Assert.Equal((byte)(Vector512<byte>.Count - (index - Vector256<byte>.Count - Vector128<byte>.Count)), result.GetElement(index));
+                Assert.Equal(
+                    (byte)(
+                        Vector512<byte>.Count
+                        - (index - Vector256<byte>.Count - Vector128<byte>.Count)
+                    ),
+                    result.GetElement(index)
+                );
             }
         }
 
@@ -2563,17 +3604,41 @@ namespace System.Runtime.Intrinsics.Tests.Vectors
 
             for (int index = Vector128<double>.Count; index < Vector256<double>.Count; index++)
             {
-                Assert.Equal((double)(Vector256<double>.Count - (index - Vector128<double>.Count)), result.GetElement(index));
+                Assert.Equal(
+                    (double)(Vector256<double>.Count - (index - Vector128<double>.Count)),
+                    result.GetElement(index)
+                );
             }
 
-            for (int index = Vector256<double>.Count; index < Vector512<double>.Count - Vector128<double>.Count; index++)
+            for (
+                int index = Vector256<double>.Count;
+                index < Vector512<double>.Count - Vector128<double>.Count;
+                index++
+            )
             {
-                Assert.Equal((double)(Vector512<double>.Count - Vector128<double>.Count - (index - Vector256<double>.Count)), result.GetElement(index));
+                Assert.Equal(
+                    (double)(
+                        Vector512<double>.Count
+                        - Vector128<double>.Count
+                        - (index - Vector256<double>.Count)
+                    ),
+                    result.GetElement(index)
+                );
             }
 
-            for (int index = Vector256<double>.Count + Vector128<double>.Count; index < Vector512<double>.Count; index++)
+            for (
+                int index = Vector256<double>.Count + Vector128<double>.Count;
+                index < Vector512<double>.Count;
+                index++
+            )
             {
-                Assert.Equal((double)(Vector512<double>.Count - (index - Vector256<double>.Count - Vector128<double>.Count)), result.GetElement(index));
+                Assert.Equal(
+                    (double)(
+                        Vector512<double>.Count
+                        - (index - Vector256<double>.Count - Vector128<double>.Count)
+                    ),
+                    result.GetElement(index)
+                );
             }
         }
 
@@ -2581,8 +3646,74 @@ namespace System.Runtime.Intrinsics.Tests.Vectors
         public void Vector512Int16ShuffleOneInputWithDirectVectorAndNoCross128BitLaneTest()
         {
             Vector512<short> result = Vector512.Shuffle(
-                Vector512.Create((short)1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32),
-                Vector512.Create((short)7, 6, 5, 4, 3, 2, 1, 0, 15, 14, 13, 12, 11, 10, 9, 8, 23, 22, 21, 20, 19, 18, 17, 16, 31, 30, 29, 28, 27, 26, 25, 24)
+                Vector512.Create(
+                    (short)1,
+                    2,
+                    3,
+                    4,
+                    5,
+                    6,
+                    7,
+                    8,
+                    9,
+                    10,
+                    11,
+                    12,
+                    13,
+                    14,
+                    15,
+                    16,
+                    17,
+                    18,
+                    19,
+                    20,
+                    21,
+                    22,
+                    23,
+                    24,
+                    25,
+                    26,
+                    27,
+                    28,
+                    29,
+                    30,
+                    31,
+                    32
+                ),
+                Vector512.Create(
+                    (short)7,
+                    6,
+                    5,
+                    4,
+                    3,
+                    2,
+                    1,
+                    0,
+                    15,
+                    14,
+                    13,
+                    12,
+                    11,
+                    10,
+                    9,
+                    8,
+                    23,
+                    22,
+                    21,
+                    20,
+                    19,
+                    18,
+                    17,
+                    16,
+                    31,
+                    30,
+                    29,
+                    28,
+                    27,
+                    26,
+                    25,
+                    24
+                )
             );
 
             for (int index = 0; index < Vector128<short>.Count; index++)
@@ -2592,17 +3723,41 @@ namespace System.Runtime.Intrinsics.Tests.Vectors
 
             for (int index = Vector128<short>.Count; index < Vector256<short>.Count; index++)
             {
-                Assert.Equal((short)(Vector256<short>.Count - (index - Vector128<short>.Count)), result.GetElement(index));
+                Assert.Equal(
+                    (short)(Vector256<short>.Count - (index - Vector128<short>.Count)),
+                    result.GetElement(index)
+                );
             }
 
-            for (int index = Vector256<short>.Count; index < Vector512<short>.Count - Vector128<short>.Count; index++)
+            for (
+                int index = Vector256<short>.Count;
+                index < Vector512<short>.Count - Vector128<short>.Count;
+                index++
+            )
             {
-                Assert.Equal((short)(Vector512<short>.Count - Vector128<short>.Count - (index - Vector256<short>.Count)), result.GetElement(index));
+                Assert.Equal(
+                    (short)(
+                        Vector512<short>.Count
+                        - Vector128<short>.Count
+                        - (index - Vector256<short>.Count)
+                    ),
+                    result.GetElement(index)
+                );
             }
 
-            for (int index = Vector256<short>.Count + Vector128<short>.Count; index < Vector512<short>.Count; index++)
+            for (
+                int index = Vector256<short>.Count + Vector128<short>.Count;
+                index < Vector512<short>.Count;
+                index++
+            )
             {
-                Assert.Equal((short)(Vector512<short>.Count - (index - Vector256<short>.Count - Vector128<short>.Count)), result.GetElement(index));
+                Assert.Equal(
+                    (short)(
+                        Vector512<short>.Count
+                        - (index - Vector256<short>.Count - Vector128<short>.Count)
+                    ),
+                    result.GetElement(index)
+                );
             }
         }
 
@@ -2621,17 +3776,38 @@ namespace System.Runtime.Intrinsics.Tests.Vectors
 
             for (int index = Vector128<int>.Count; index < Vector256<int>.Count; index++)
             {
-                Assert.Equal((int)(Vector256<int>.Count - (index - Vector128<int>.Count)), result.GetElement(index));
+                Assert.Equal(
+                    (int)(Vector256<int>.Count - (index - Vector128<int>.Count)),
+                    result.GetElement(index)
+                );
             }
 
-            for (int index = Vector256<int>.Count; index < Vector512<int>.Count - Vector128<int>.Count; index++)
+            for (
+                int index = Vector256<int>.Count;
+                index < Vector512<int>.Count - Vector128<int>.Count;
+                index++
+            )
             {
-                Assert.Equal((int)(Vector512<int>.Count - Vector128<int>.Count - (index - Vector256<int>.Count)), result.GetElement(index));
+                Assert.Equal(
+                    (int)(
+                        Vector512<int>.Count - Vector128<int>.Count - (index - Vector256<int>.Count)
+                    ),
+                    result.GetElement(index)
+                );
             }
 
-            for (int index = Vector256<int>.Count + Vector128<int>.Count; index < Vector512<int>.Count; index++)
+            for (
+                int index = Vector256<int>.Count + Vector128<int>.Count;
+                index < Vector512<int>.Count;
+                index++
+            )
             {
-                Assert.Equal((int)(Vector512<int>.Count - (index - Vector256<int>.Count - Vector128<int>.Count)), result.GetElement(index));
+                Assert.Equal(
+                    (int)(
+                        Vector512<int>.Count - (index - Vector256<int>.Count - Vector128<int>.Count)
+                    ),
+                    result.GetElement(index)
+                );
             }
         }
 
@@ -2650,17 +3826,41 @@ namespace System.Runtime.Intrinsics.Tests.Vectors
 
             for (int index = Vector128<long>.Count; index < Vector256<long>.Count; index++)
             {
-                Assert.Equal((long)(Vector256<long>.Count - (index - Vector128<long>.Count)), result.GetElement(index));
+                Assert.Equal(
+                    (long)(Vector256<long>.Count - (index - Vector128<long>.Count)),
+                    result.GetElement(index)
+                );
             }
 
-            for (int index = Vector256<long>.Count; index < Vector512<long>.Count - Vector128<long>.Count; index++)
+            for (
+                int index = Vector256<long>.Count;
+                index < Vector512<long>.Count - Vector128<long>.Count;
+                index++
+            )
             {
-                Assert.Equal((long)(Vector512<long>.Count - Vector128<long>.Count - (index - Vector256<long>.Count)), result.GetElement(index));
+                Assert.Equal(
+                    (long)(
+                        Vector512<long>.Count
+                        - Vector128<long>.Count
+                        - (index - Vector256<long>.Count)
+                    ),
+                    result.GetElement(index)
+                );
             }
 
-            for (int index = Vector256<long>.Count + Vector128<long>.Count; index < Vector512<long>.Count; index++)
+            for (
+                int index = Vector256<long>.Count + Vector128<long>.Count;
+                index < Vector512<long>.Count;
+                index++
+            )
             {
-                Assert.Equal((long)(Vector512<long>.Count - (index - Vector256<long>.Count - Vector128<long>.Count)), result.GetElement(index));
+                Assert.Equal(
+                    (long)(
+                        Vector512<long>.Count
+                        - (index - Vector256<long>.Count - Vector128<long>.Count)
+                    ),
+                    result.GetElement(index)
+                );
             }
         }
 
@@ -2668,8 +3868,138 @@ namespace System.Runtime.Intrinsics.Tests.Vectors
         public void Vector512SByteShuffleOneInputWithDirectVectorAndNoCross128BitLaneTest()
         {
             Vector512<sbyte> result = Vector512.Shuffle(
-                Vector512.Create((sbyte)1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64),
-                Vector512.Create((sbyte)15, 14, 13, 12, 11, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1, 0, 31, 30, 29, 28, 27, 26, 25, 24, 23, 22, 21, 20, 19, 18, 17, 16, 47, 46, 45, 44, 43, 42, 41, 40, 39, 38, 37, 36, 35, 34, 33, 32, 63, 62, 61, 60, 59, 58, 57, 56, 55, 54, 53, 52, 51, 50, 49, 48)
+                Vector512.Create(
+                    (sbyte)1,
+                    2,
+                    3,
+                    4,
+                    5,
+                    6,
+                    7,
+                    8,
+                    9,
+                    10,
+                    11,
+                    12,
+                    13,
+                    14,
+                    15,
+                    16,
+                    17,
+                    18,
+                    19,
+                    20,
+                    21,
+                    22,
+                    23,
+                    24,
+                    25,
+                    26,
+                    27,
+                    28,
+                    29,
+                    30,
+                    31,
+                    32,
+                    33,
+                    34,
+                    35,
+                    36,
+                    37,
+                    38,
+                    39,
+                    40,
+                    41,
+                    42,
+                    43,
+                    44,
+                    45,
+                    46,
+                    47,
+                    48,
+                    49,
+                    50,
+                    51,
+                    52,
+                    53,
+                    54,
+                    55,
+                    56,
+                    57,
+                    58,
+                    59,
+                    60,
+                    61,
+                    62,
+                    63,
+                    64
+                ),
+                Vector512.Create(
+                    (sbyte)15,
+                    14,
+                    13,
+                    12,
+                    11,
+                    10,
+                    9,
+                    8,
+                    7,
+                    6,
+                    5,
+                    4,
+                    3,
+                    2,
+                    1,
+                    0,
+                    31,
+                    30,
+                    29,
+                    28,
+                    27,
+                    26,
+                    25,
+                    24,
+                    23,
+                    22,
+                    21,
+                    20,
+                    19,
+                    18,
+                    17,
+                    16,
+                    47,
+                    46,
+                    45,
+                    44,
+                    43,
+                    42,
+                    41,
+                    40,
+                    39,
+                    38,
+                    37,
+                    36,
+                    35,
+                    34,
+                    33,
+                    32,
+                    63,
+                    62,
+                    61,
+                    60,
+                    59,
+                    58,
+                    57,
+                    56,
+                    55,
+                    54,
+                    53,
+                    52,
+                    51,
+                    50,
+                    49,
+                    48
+                )
             );
 
             for (int index = 0; index < Vector128<sbyte>.Count; index++)
@@ -2679,17 +4009,41 @@ namespace System.Runtime.Intrinsics.Tests.Vectors
 
             for (int index = Vector128<sbyte>.Count; index < Vector256<sbyte>.Count; index++)
             {
-                Assert.Equal((sbyte)(Vector256<sbyte>.Count - (index - Vector128<sbyte>.Count)), result.GetElement(index));
+                Assert.Equal(
+                    (sbyte)(Vector256<sbyte>.Count - (index - Vector128<sbyte>.Count)),
+                    result.GetElement(index)
+                );
             }
 
-            for (int index = Vector256<sbyte>.Count; index < Vector512<sbyte>.Count - Vector128<sbyte>.Count; index++)
+            for (
+                int index = Vector256<sbyte>.Count;
+                index < Vector512<sbyte>.Count - Vector128<sbyte>.Count;
+                index++
+            )
             {
-                Assert.Equal((sbyte)(Vector512<sbyte>.Count - Vector128<sbyte>.Count - (index - Vector256<sbyte>.Count)), result.GetElement(index));
+                Assert.Equal(
+                    (sbyte)(
+                        Vector512<sbyte>.Count
+                        - Vector128<sbyte>.Count
+                        - (index - Vector256<sbyte>.Count)
+                    ),
+                    result.GetElement(index)
+                );
             }
 
-            for (int index = Vector256<sbyte>.Count + Vector128<sbyte>.Count; index < Vector512<sbyte>.Count; index++)
+            for (
+                int index = Vector256<sbyte>.Count + Vector128<sbyte>.Count;
+                index < Vector512<sbyte>.Count;
+                index++
+            )
             {
-                Assert.Equal((sbyte)(Vector512<sbyte>.Count - (index - Vector256<sbyte>.Count - Vector128<sbyte>.Count)), result.GetElement(index));
+                Assert.Equal(
+                    (sbyte)(
+                        Vector512<sbyte>.Count
+                        - (index - Vector256<sbyte>.Count - Vector128<sbyte>.Count)
+                    ),
+                    result.GetElement(index)
+                );
             }
         }
 
@@ -2708,17 +4062,41 @@ namespace System.Runtime.Intrinsics.Tests.Vectors
 
             for (int index = Vector128<float>.Count; index < Vector256<float>.Count; index++)
             {
-                Assert.Equal((float)(Vector256<float>.Count - (index - Vector128<float>.Count)), result.GetElement(index));
+                Assert.Equal(
+                    (float)(Vector256<float>.Count - (index - Vector128<float>.Count)),
+                    result.GetElement(index)
+                );
             }
 
-            for (int index = Vector256<float>.Count; index < Vector512<float>.Count - Vector128<float>.Count; index++)
+            for (
+                int index = Vector256<float>.Count;
+                index < Vector512<float>.Count - Vector128<float>.Count;
+                index++
+            )
             {
-                Assert.Equal((float)(Vector512<float>.Count - Vector128<float>.Count - (index - Vector256<float>.Count)), result.GetElement(index));
+                Assert.Equal(
+                    (float)(
+                        Vector512<float>.Count
+                        - Vector128<float>.Count
+                        - (index - Vector256<float>.Count)
+                    ),
+                    result.GetElement(index)
+                );
             }
 
-            for (int index = Vector256<float>.Count + Vector128<float>.Count; index < Vector512<float>.Count; index++)
+            for (
+                int index = Vector256<float>.Count + Vector128<float>.Count;
+                index < Vector512<float>.Count;
+                index++
+            )
             {
-                Assert.Equal((float)(Vector512<float>.Count - (index - Vector256<float>.Count - Vector128<float>.Count)), result.GetElement(index));
+                Assert.Equal(
+                    (float)(
+                        Vector512<float>.Count
+                        - (index - Vector256<float>.Count - Vector128<float>.Count)
+                    ),
+                    result.GetElement(index)
+                );
             }
         }
 
@@ -2726,8 +4104,74 @@ namespace System.Runtime.Intrinsics.Tests.Vectors
         public void Vector512UInt16ShuffleOneInputWithDirectVectorAndNoCross128BitLaneTest()
         {
             Vector512<ushort> result = Vector512.Shuffle(
-                Vector512.Create((ushort)1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32),
-                Vector512.Create((ushort)7, 6, 5, 4, 3, 2, 1, 0, 15, 14, 13, 12, 11, 10, 9, 8, 23, 22, 21, 20, 19, 18, 17, 16, 31, 30, 29, 28, 27, 26, 25, 24)
+                Vector512.Create(
+                    (ushort)1,
+                    2,
+                    3,
+                    4,
+                    5,
+                    6,
+                    7,
+                    8,
+                    9,
+                    10,
+                    11,
+                    12,
+                    13,
+                    14,
+                    15,
+                    16,
+                    17,
+                    18,
+                    19,
+                    20,
+                    21,
+                    22,
+                    23,
+                    24,
+                    25,
+                    26,
+                    27,
+                    28,
+                    29,
+                    30,
+                    31,
+                    32
+                ),
+                Vector512.Create(
+                    (ushort)7,
+                    6,
+                    5,
+                    4,
+                    3,
+                    2,
+                    1,
+                    0,
+                    15,
+                    14,
+                    13,
+                    12,
+                    11,
+                    10,
+                    9,
+                    8,
+                    23,
+                    22,
+                    21,
+                    20,
+                    19,
+                    18,
+                    17,
+                    16,
+                    31,
+                    30,
+                    29,
+                    28,
+                    27,
+                    26,
+                    25,
+                    24
+                )
             );
 
             for (int index = 0; index < Vector128<ushort>.Count; index++)
@@ -2737,17 +4181,41 @@ namespace System.Runtime.Intrinsics.Tests.Vectors
 
             for (int index = Vector128<ushort>.Count; index < Vector256<ushort>.Count; index++)
             {
-                Assert.Equal((ushort)(Vector256<ushort>.Count - (index - Vector128<ushort>.Count)), result.GetElement(index));
+                Assert.Equal(
+                    (ushort)(Vector256<ushort>.Count - (index - Vector128<ushort>.Count)),
+                    result.GetElement(index)
+                );
             }
 
-            for (int index = Vector256<ushort>.Count; index < Vector512<ushort>.Count - Vector128<ushort>.Count; index++)
+            for (
+                int index = Vector256<ushort>.Count;
+                index < Vector512<ushort>.Count - Vector128<ushort>.Count;
+                index++
+            )
             {
-                Assert.Equal((ushort)(Vector512<ushort>.Count - Vector128<ushort>.Count - (index - Vector256<ushort>.Count)), result.GetElement(index));
+                Assert.Equal(
+                    (ushort)(
+                        Vector512<ushort>.Count
+                        - Vector128<ushort>.Count
+                        - (index - Vector256<ushort>.Count)
+                    ),
+                    result.GetElement(index)
+                );
             }
 
-            for (int index = Vector256<ushort>.Count + Vector128<ushort>.Count; index < Vector512<ushort>.Count; index++)
+            for (
+                int index = Vector256<ushort>.Count + Vector128<ushort>.Count;
+                index < Vector512<ushort>.Count;
+                index++
+            )
             {
-                Assert.Equal((ushort)(Vector512<ushort>.Count - (index - Vector256<ushort>.Count - Vector128<ushort>.Count)), result.GetElement(index));
+                Assert.Equal(
+                    (ushort)(
+                        Vector512<ushort>.Count
+                        - (index - Vector256<ushort>.Count - Vector128<ushort>.Count)
+                    ),
+                    result.GetElement(index)
+                );
             }
         }
 
@@ -2766,17 +4234,41 @@ namespace System.Runtime.Intrinsics.Tests.Vectors
 
             for (int index = Vector128<uint>.Count; index < Vector256<uint>.Count; index++)
             {
-                Assert.Equal((uint)(Vector256<uint>.Count - (index - Vector128<uint>.Count)), result.GetElement(index));
+                Assert.Equal(
+                    (uint)(Vector256<uint>.Count - (index - Vector128<uint>.Count)),
+                    result.GetElement(index)
+                );
             }
 
-            for (int index = Vector256<uint>.Count; index < Vector512<uint>.Count - Vector128<uint>.Count; index++)
+            for (
+                int index = Vector256<uint>.Count;
+                index < Vector512<uint>.Count - Vector128<uint>.Count;
+                index++
+            )
             {
-                Assert.Equal((uint)(Vector512<uint>.Count - Vector128<uint>.Count - (index - Vector256<uint>.Count)), result.GetElement(index));
+                Assert.Equal(
+                    (uint)(
+                        Vector512<uint>.Count
+                        - Vector128<uint>.Count
+                        - (index - Vector256<uint>.Count)
+                    ),
+                    result.GetElement(index)
+                );
             }
 
-            for (int index = Vector256<uint>.Count + Vector128<uint>.Count; index < Vector512<uint>.Count; index++)
+            for (
+                int index = Vector256<uint>.Count + Vector128<uint>.Count;
+                index < Vector512<uint>.Count;
+                index++
+            )
             {
-                Assert.Equal((uint)(Vector512<uint>.Count - (index - Vector256<uint>.Count - Vector128<uint>.Count)), result.GetElement(index));
+                Assert.Equal(
+                    (uint)(
+                        Vector512<uint>.Count
+                        - (index - Vector256<uint>.Count - Vector128<uint>.Count)
+                    ),
+                    result.GetElement(index)
+                );
             }
         }
 
@@ -2795,17 +4287,41 @@ namespace System.Runtime.Intrinsics.Tests.Vectors
 
             for (int index = Vector128<ulong>.Count; index < Vector256<ulong>.Count; index++)
             {
-                Assert.Equal((ulong)(Vector256<ulong>.Count - (index - Vector128<ulong>.Count)), result.GetElement(index));
+                Assert.Equal(
+                    (ulong)(Vector256<ulong>.Count - (index - Vector128<ulong>.Count)),
+                    result.GetElement(index)
+                );
             }
 
-            for (int index = Vector256<ulong>.Count; index < Vector512<ulong>.Count - Vector128<ulong>.Count; index++)
+            for (
+                int index = Vector256<ulong>.Count;
+                index < Vector512<ulong>.Count - Vector128<ulong>.Count;
+                index++
+            )
             {
-                Assert.Equal((ulong)(Vector512<ulong>.Count - Vector128<ulong>.Count - (index - Vector256<ulong>.Count)), result.GetElement(index));
+                Assert.Equal(
+                    (ulong)(
+                        Vector512<ulong>.Count
+                        - Vector128<ulong>.Count
+                        - (index - Vector256<ulong>.Count)
+                    ),
+                    result.GetElement(index)
+                );
             }
 
-            for (int index = Vector256<ulong>.Count + Vector128<ulong>.Count; index < Vector512<ulong>.Count; index++)
+            for (
+                int index = Vector256<ulong>.Count + Vector128<ulong>.Count;
+                index < Vector512<ulong>.Count;
+                index++
+            )
             {
-                Assert.Equal((ulong)(Vector512<ulong>.Count - (index - Vector256<ulong>.Count - Vector128<ulong>.Count)), result.GetElement(index));
+                Assert.Equal(
+                    (ulong)(
+                        Vector512<ulong>.Count
+                        - (index - Vector256<ulong>.Count - Vector128<ulong>.Count)
+                    ),
+                    result.GetElement(index)
+                );
             }
         }
 
@@ -2813,8 +4329,138 @@ namespace System.Runtime.Intrinsics.Tests.Vectors
         public void Vector512ByteShuffleOneInputWithDirectVectorAndNoCross256BitLaneTest()
         {
             Vector512<byte> result = Vector512.Shuffle(
-                Vector512.Create((byte)1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64),
-                Vector512.Create((byte)31, 30, 29, 28, 27, 26, 25, 24, 23, 22, 21, 20, 19, 18, 17, 16, 15, 14, 13, 12, 11, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1, 0, 63, 62, 61, 60, 59, 58, 57, 56, 55, 54, 53, 52, 51, 50, 49, 48, 47, 46, 45, 44, 43, 42, 41, 40, 39, 38, 37, 36, 35, 34, 33, 32)
+                Vector512.Create(
+                    (byte)1,
+                    2,
+                    3,
+                    4,
+                    5,
+                    6,
+                    7,
+                    8,
+                    9,
+                    10,
+                    11,
+                    12,
+                    13,
+                    14,
+                    15,
+                    16,
+                    17,
+                    18,
+                    19,
+                    20,
+                    21,
+                    22,
+                    23,
+                    24,
+                    25,
+                    26,
+                    27,
+                    28,
+                    29,
+                    30,
+                    31,
+                    32,
+                    33,
+                    34,
+                    35,
+                    36,
+                    37,
+                    38,
+                    39,
+                    40,
+                    41,
+                    42,
+                    43,
+                    44,
+                    45,
+                    46,
+                    47,
+                    48,
+                    49,
+                    50,
+                    51,
+                    52,
+                    53,
+                    54,
+                    55,
+                    56,
+                    57,
+                    58,
+                    59,
+                    60,
+                    61,
+                    62,
+                    63,
+                    64
+                ),
+                Vector512.Create(
+                    (byte)31,
+                    30,
+                    29,
+                    28,
+                    27,
+                    26,
+                    25,
+                    24,
+                    23,
+                    22,
+                    21,
+                    20,
+                    19,
+                    18,
+                    17,
+                    16,
+                    15,
+                    14,
+                    13,
+                    12,
+                    11,
+                    10,
+                    9,
+                    8,
+                    7,
+                    6,
+                    5,
+                    4,
+                    3,
+                    2,
+                    1,
+                    0,
+                    63,
+                    62,
+                    61,
+                    60,
+                    59,
+                    58,
+                    57,
+                    56,
+                    55,
+                    54,
+                    53,
+                    52,
+                    51,
+                    50,
+                    49,
+                    48,
+                    47,
+                    46,
+                    45,
+                    44,
+                    43,
+                    42,
+                    41,
+                    40,
+                    39,
+                    38,
+                    37,
+                    36,
+                    35,
+                    34,
+                    33,
+                    32
+                )
             );
 
             for (int index = 0; index < Vector256<byte>.Count; index++)
@@ -2824,7 +4470,10 @@ namespace System.Runtime.Intrinsics.Tests.Vectors
 
             for (int index = Vector256<byte>.Count; index < Vector512<byte>.Count; index++)
             {
-                Assert.Equal((byte)(Vector512<byte>.Count - (index - Vector256<byte>.Count)), result.GetElement(index));
+                Assert.Equal(
+                    (byte)(Vector512<byte>.Count - (index - Vector256<byte>.Count)),
+                    result.GetElement(index)
+                );
             }
         }
 
@@ -2843,7 +4492,10 @@ namespace System.Runtime.Intrinsics.Tests.Vectors
 
             for (int index = Vector256<double>.Count; index < Vector512<double>.Count; index++)
             {
-                Assert.Equal((double)(Vector512<double>.Count - (index - Vector256<double>.Count)), result.GetElement(index));
+                Assert.Equal(
+                    (double)(Vector512<double>.Count - (index - Vector256<double>.Count)),
+                    result.GetElement(index)
+                );
             }
         }
 
@@ -2851,8 +4503,74 @@ namespace System.Runtime.Intrinsics.Tests.Vectors
         public void Vector512Int16ShuffleOneInputWithDirectVectorAndNoCross256BitLaneTest()
         {
             Vector512<short> result = Vector512.Shuffle(
-                Vector512.Create((short)1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32),
-                Vector512.Create((short)15, 14, 13, 12, 11, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1, 0, 31, 30, 29, 28, 27, 26, 25, 24, 23, 22, 21, 20, 19, 18, 17, 16)
+                Vector512.Create(
+                    (short)1,
+                    2,
+                    3,
+                    4,
+                    5,
+                    6,
+                    7,
+                    8,
+                    9,
+                    10,
+                    11,
+                    12,
+                    13,
+                    14,
+                    15,
+                    16,
+                    17,
+                    18,
+                    19,
+                    20,
+                    21,
+                    22,
+                    23,
+                    24,
+                    25,
+                    26,
+                    27,
+                    28,
+                    29,
+                    30,
+                    31,
+                    32
+                ),
+                Vector512.Create(
+                    (short)15,
+                    14,
+                    13,
+                    12,
+                    11,
+                    10,
+                    9,
+                    8,
+                    7,
+                    6,
+                    5,
+                    4,
+                    3,
+                    2,
+                    1,
+                    0,
+                    31,
+                    30,
+                    29,
+                    28,
+                    27,
+                    26,
+                    25,
+                    24,
+                    23,
+                    22,
+                    21,
+                    20,
+                    19,
+                    18,
+                    17,
+                    16
+                )
             );
 
             for (int index = 0; index < Vector256<short>.Count; index++)
@@ -2862,7 +4580,10 @@ namespace System.Runtime.Intrinsics.Tests.Vectors
 
             for (int index = Vector256<short>.Count; index < Vector512<short>.Count; index++)
             {
-                Assert.Equal((short)(Vector512<short>.Count - (index - Vector256<short>.Count)), result.GetElement(index));
+                Assert.Equal(
+                    (short)(Vector512<short>.Count - (index - Vector256<short>.Count)),
+                    result.GetElement(index)
+                );
             }
         }
 
@@ -2881,7 +4602,10 @@ namespace System.Runtime.Intrinsics.Tests.Vectors
 
             for (int index = Vector256<int>.Count; index < Vector512<int>.Count; index++)
             {
-                Assert.Equal((int)(Vector512<int>.Count - (index - Vector256<int>.Count)), result.GetElement(index));
+                Assert.Equal(
+                    (int)(Vector512<int>.Count - (index - Vector256<int>.Count)),
+                    result.GetElement(index)
+                );
             }
         }
 
@@ -2900,7 +4624,10 @@ namespace System.Runtime.Intrinsics.Tests.Vectors
 
             for (int index = Vector256<long>.Count; index < Vector512<long>.Count; index++)
             {
-                Assert.Equal((long)(Vector512<long>.Count - (index - Vector256<long>.Count)), result.GetElement(index));
+                Assert.Equal(
+                    (long)(Vector512<long>.Count - (index - Vector256<long>.Count)),
+                    result.GetElement(index)
+                );
             }
         }
 
@@ -2908,8 +4635,138 @@ namespace System.Runtime.Intrinsics.Tests.Vectors
         public void Vector512SByteShuffleOneInputWithDirectVectorAndNoCross256BitLaneTest()
         {
             Vector512<sbyte> result = Vector512.Shuffle(
-                Vector512.Create((sbyte)1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64),
-                Vector512.Create((sbyte)31, 30, 29, 28, 27, 26, 25, 24, 23, 22, 21, 20, 19, 18, 17, 16, 15, 14, 13, 12, 11, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1, 0, 63, 62, 61, 60, 59, 58, 57, 56, 55, 54, 53, 52, 51, 50, 49, 48, 47, 46, 45, 44, 43, 42, 41, 40, 39, 38, 37, 36, 35, 34, 33, 32)
+                Vector512.Create(
+                    (sbyte)1,
+                    2,
+                    3,
+                    4,
+                    5,
+                    6,
+                    7,
+                    8,
+                    9,
+                    10,
+                    11,
+                    12,
+                    13,
+                    14,
+                    15,
+                    16,
+                    17,
+                    18,
+                    19,
+                    20,
+                    21,
+                    22,
+                    23,
+                    24,
+                    25,
+                    26,
+                    27,
+                    28,
+                    29,
+                    30,
+                    31,
+                    32,
+                    33,
+                    34,
+                    35,
+                    36,
+                    37,
+                    38,
+                    39,
+                    40,
+                    41,
+                    42,
+                    43,
+                    44,
+                    45,
+                    46,
+                    47,
+                    48,
+                    49,
+                    50,
+                    51,
+                    52,
+                    53,
+                    54,
+                    55,
+                    56,
+                    57,
+                    58,
+                    59,
+                    60,
+                    61,
+                    62,
+                    63,
+                    64
+                ),
+                Vector512.Create(
+                    (sbyte)31,
+                    30,
+                    29,
+                    28,
+                    27,
+                    26,
+                    25,
+                    24,
+                    23,
+                    22,
+                    21,
+                    20,
+                    19,
+                    18,
+                    17,
+                    16,
+                    15,
+                    14,
+                    13,
+                    12,
+                    11,
+                    10,
+                    9,
+                    8,
+                    7,
+                    6,
+                    5,
+                    4,
+                    3,
+                    2,
+                    1,
+                    0,
+                    63,
+                    62,
+                    61,
+                    60,
+                    59,
+                    58,
+                    57,
+                    56,
+                    55,
+                    54,
+                    53,
+                    52,
+                    51,
+                    50,
+                    49,
+                    48,
+                    47,
+                    46,
+                    45,
+                    44,
+                    43,
+                    42,
+                    41,
+                    40,
+                    39,
+                    38,
+                    37,
+                    36,
+                    35,
+                    34,
+                    33,
+                    32
+                )
             );
 
             for (int index = 0; index < Vector256<sbyte>.Count; index++)
@@ -2919,7 +4776,10 @@ namespace System.Runtime.Intrinsics.Tests.Vectors
 
             for (int index = Vector256<sbyte>.Count; index < Vector512<sbyte>.Count; index++)
             {
-                Assert.Equal((sbyte)(Vector512<sbyte>.Count - (index - Vector256<sbyte>.Count)), result.GetElement(index));
+                Assert.Equal(
+                    (sbyte)(Vector512<sbyte>.Count - (index - Vector256<sbyte>.Count)),
+                    result.GetElement(index)
+                );
             }
         }
 
@@ -2938,7 +4798,10 @@ namespace System.Runtime.Intrinsics.Tests.Vectors
 
             for (int index = Vector256<float>.Count; index < Vector512<float>.Count; index++)
             {
-                Assert.Equal((float)(Vector512<float>.Count - (index - Vector256<float>.Count)), result.GetElement(index));
+                Assert.Equal(
+                    (float)(Vector512<float>.Count - (index - Vector256<float>.Count)),
+                    result.GetElement(index)
+                );
             }
         }
 
@@ -2946,8 +4809,74 @@ namespace System.Runtime.Intrinsics.Tests.Vectors
         public void Vector512UInt16ShuffleOneInputWithDirectVectorAndNoCross256BitLaneTest()
         {
             Vector512<ushort> result = Vector512.Shuffle(
-                Vector512.Create((ushort)1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32),
-                Vector512.Create((ushort)15, 14, 13, 12, 11, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1, 0, 31, 30, 29, 28, 27, 26, 25, 24, 23, 22, 21, 20, 19, 18, 17, 16)
+                Vector512.Create(
+                    (ushort)1,
+                    2,
+                    3,
+                    4,
+                    5,
+                    6,
+                    7,
+                    8,
+                    9,
+                    10,
+                    11,
+                    12,
+                    13,
+                    14,
+                    15,
+                    16,
+                    17,
+                    18,
+                    19,
+                    20,
+                    21,
+                    22,
+                    23,
+                    24,
+                    25,
+                    26,
+                    27,
+                    28,
+                    29,
+                    30,
+                    31,
+                    32
+                ),
+                Vector512.Create(
+                    (ushort)15,
+                    14,
+                    13,
+                    12,
+                    11,
+                    10,
+                    9,
+                    8,
+                    7,
+                    6,
+                    5,
+                    4,
+                    3,
+                    2,
+                    1,
+                    0,
+                    31,
+                    30,
+                    29,
+                    28,
+                    27,
+                    26,
+                    25,
+                    24,
+                    23,
+                    22,
+                    21,
+                    20,
+                    19,
+                    18,
+                    17,
+                    16
+                )
             );
 
             for (int index = 0; index < Vector256<ushort>.Count; index++)
@@ -2957,7 +4886,10 @@ namespace System.Runtime.Intrinsics.Tests.Vectors
 
             for (int index = Vector256<ushort>.Count; index < Vector512<ushort>.Count; index++)
             {
-                Assert.Equal((ushort)(Vector512<ushort>.Count - (index - Vector256<ushort>.Count)), result.GetElement(index));
+                Assert.Equal(
+                    (ushort)(Vector512<ushort>.Count - (index - Vector256<ushort>.Count)),
+                    result.GetElement(index)
+                );
             }
         }
 
@@ -2976,7 +4908,10 @@ namespace System.Runtime.Intrinsics.Tests.Vectors
 
             for (int index = Vector256<uint>.Count; index < Vector512<uint>.Count; index++)
             {
-                Assert.Equal((uint)(Vector512<uint>.Count - (index - Vector256<uint>.Count)), result.GetElement(index));
+                Assert.Equal(
+                    (uint)(Vector512<uint>.Count - (index - Vector256<uint>.Count)),
+                    result.GetElement(index)
+                );
             }
         }
 
@@ -2995,15 +4930,148 @@ namespace System.Runtime.Intrinsics.Tests.Vectors
 
             for (int index = Vector256<ulong>.Count; index < Vector512<ulong>.Count; index++)
             {
-                Assert.Equal((ulong)(Vector512<ulong>.Count - (index - Vector256<ulong>.Count)), result.GetElement(index));
+                Assert.Equal(
+                    (ulong)(Vector512<ulong>.Count - (index - Vector256<ulong>.Count)),
+                    result.GetElement(index)
+                );
             }
         }
 
         [Fact]
         public void Vector512ByteShuffleOneInputWithLocalIndicesTest()
         {
-            Vector512<byte> vector = Vector512.Create((byte)1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64);
-            Vector512<byte> indices = Vector512.Create((byte)63, 62, 61, 60, 59, 58, 57, 56, 55, 54, 53, 52, 51, 50, 49, 48, 47, 46, 45, 44, 43, 42, 41, 40, 39, 38, 37, 36, 35, 34, 33, 32, 31, 30, 29, 28, 27, 26, 25, 24, 23, 22, 21, 20, 19, 18, 17, 16, 15, 14, 13, 12, 11, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1, 0);
+            Vector512<byte> vector = Vector512.Create(
+                (byte)1,
+                2,
+                3,
+                4,
+                5,
+                6,
+                7,
+                8,
+                9,
+                10,
+                11,
+                12,
+                13,
+                14,
+                15,
+                16,
+                17,
+                18,
+                19,
+                20,
+                21,
+                22,
+                23,
+                24,
+                25,
+                26,
+                27,
+                28,
+                29,
+                30,
+                31,
+                32,
+                33,
+                34,
+                35,
+                36,
+                37,
+                38,
+                39,
+                40,
+                41,
+                42,
+                43,
+                44,
+                45,
+                46,
+                47,
+                48,
+                49,
+                50,
+                51,
+                52,
+                53,
+                54,
+                55,
+                56,
+                57,
+                58,
+                59,
+                60,
+                61,
+                62,
+                63,
+                64
+            );
+            Vector512<byte> indices = Vector512.Create(
+                (byte)63,
+                62,
+                61,
+                60,
+                59,
+                58,
+                57,
+                56,
+                55,
+                54,
+                53,
+                52,
+                51,
+                50,
+                49,
+                48,
+                47,
+                46,
+                45,
+                44,
+                43,
+                42,
+                41,
+                40,
+                39,
+                38,
+                37,
+                36,
+                35,
+                34,
+                33,
+                32,
+                31,
+                30,
+                29,
+                28,
+                27,
+                26,
+                25,
+                24,
+                23,
+                22,
+                21,
+                20,
+                19,
+                18,
+                17,
+                16,
+                15,
+                14,
+                13,
+                12,
+                11,
+                10,
+                9,
+                8,
+                7,
+                6,
+                5,
+                4,
+                3,
+                2,
+                1,
+                0
+            );
             Vector512<byte> result = Vector512.Shuffle(vector, indices);
 
             for (int index = 0; index < Vector512<byte>.Count; index++)
@@ -3028,8 +5096,74 @@ namespace System.Runtime.Intrinsics.Tests.Vectors
         [Fact]
         public void Vector512Int16ShuffleOneInputWithLocalIndicesTest()
         {
-            Vector512<short> vector = Vector512.Create((short)1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32);
-            Vector512<short> indices = Vector512.Create((short)31, 30, 29, 28, 27, 26, 25, 24, 23, 22, 21, 20, 19, 18, 17, 16, 15, 14, 13, 12, 11, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1, 0);
+            Vector512<short> vector = Vector512.Create(
+                (short)1,
+                2,
+                3,
+                4,
+                5,
+                6,
+                7,
+                8,
+                9,
+                10,
+                11,
+                12,
+                13,
+                14,
+                15,
+                16,
+                17,
+                18,
+                19,
+                20,
+                21,
+                22,
+                23,
+                24,
+                25,
+                26,
+                27,
+                28,
+                29,
+                30,
+                31,
+                32
+            );
+            Vector512<short> indices = Vector512.Create(
+                (short)31,
+                30,
+                29,
+                28,
+                27,
+                26,
+                25,
+                24,
+                23,
+                22,
+                21,
+                20,
+                19,
+                18,
+                17,
+                16,
+                15,
+                14,
+                13,
+                12,
+                11,
+                10,
+                9,
+                8,
+                7,
+                6,
+                5,
+                4,
+                3,
+                2,
+                1,
+                0
+            );
             Vector512<short> result = Vector512.Shuffle(vector, indices);
 
             for (int index = 0; index < Vector512<short>.Count; index++)
@@ -3041,8 +5175,42 @@ namespace System.Runtime.Intrinsics.Tests.Vectors
         [Fact]
         public void Vector512Int32ShuffleOneInputWithLocalIndicesTest()
         {
-            Vector512<int> vector = Vector512.Create((int)1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16);
-            Vector512<int> indices = Vector512.Create((int)15, 14, 13, 12, 11, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1, 0);
+            Vector512<int> vector = Vector512.Create(
+                (int)1,
+                2,
+                3,
+                4,
+                5,
+                6,
+                7,
+                8,
+                9,
+                10,
+                11,
+                12,
+                13,
+                14,
+                15,
+                16
+            );
+            Vector512<int> indices = Vector512.Create(
+                (int)15,
+                14,
+                13,
+                12,
+                11,
+                10,
+                9,
+                8,
+                7,
+                6,
+                5,
+                4,
+                3,
+                2,
+                1,
+                0
+            );
             Vector512<int> result = Vector512.Shuffle(vector, indices);
 
             for (int index = 0; index < Vector512<int>.Count; index++)
@@ -3067,8 +5235,138 @@ namespace System.Runtime.Intrinsics.Tests.Vectors
         [Fact]
         public void Vector512SByteShuffleOneInputWithLocalIndicesTest()
         {
-            Vector512<sbyte> vector = Vector512.Create((sbyte)1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64);
-            Vector512<sbyte> indices = Vector512.Create((sbyte)63, 62, 61, 60, 59, 58, 57, 56, 55, 54, 53, 52, 51, 50, 49, 48, 47, 46, 45, 44, 43, 42, 41, 40, 39, 38, 37, 36, 35, 34, 33, 32, 31, 30, 29, 28, 27, 26, 25, 24, 23, 22, 21, 20, 19, 18, 17, 16, 15, 14, 13, 12, 11, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1, 0);
+            Vector512<sbyte> vector = Vector512.Create(
+                (sbyte)1,
+                2,
+                3,
+                4,
+                5,
+                6,
+                7,
+                8,
+                9,
+                10,
+                11,
+                12,
+                13,
+                14,
+                15,
+                16,
+                17,
+                18,
+                19,
+                20,
+                21,
+                22,
+                23,
+                24,
+                25,
+                26,
+                27,
+                28,
+                29,
+                30,
+                31,
+                32,
+                33,
+                34,
+                35,
+                36,
+                37,
+                38,
+                39,
+                40,
+                41,
+                42,
+                43,
+                44,
+                45,
+                46,
+                47,
+                48,
+                49,
+                50,
+                51,
+                52,
+                53,
+                54,
+                55,
+                56,
+                57,
+                58,
+                59,
+                60,
+                61,
+                62,
+                63,
+                64
+            );
+            Vector512<sbyte> indices = Vector512.Create(
+                (sbyte)63,
+                62,
+                61,
+                60,
+                59,
+                58,
+                57,
+                56,
+                55,
+                54,
+                53,
+                52,
+                51,
+                50,
+                49,
+                48,
+                47,
+                46,
+                45,
+                44,
+                43,
+                42,
+                41,
+                40,
+                39,
+                38,
+                37,
+                36,
+                35,
+                34,
+                33,
+                32,
+                31,
+                30,
+                29,
+                28,
+                27,
+                26,
+                25,
+                24,
+                23,
+                22,
+                21,
+                20,
+                19,
+                18,
+                17,
+                16,
+                15,
+                14,
+                13,
+                12,
+                11,
+                10,
+                9,
+                8,
+                7,
+                6,
+                5,
+                4,
+                3,
+                2,
+                1,
+                0
+            );
             Vector512<sbyte> result = Vector512.Shuffle(vector, indices);
 
             for (int index = 0; index < Vector512<sbyte>.Count; index++)
@@ -3080,8 +5378,42 @@ namespace System.Runtime.Intrinsics.Tests.Vectors
         [Fact]
         public void Vector512SingleShuffleOneInputWithLocalIndicesTest()
         {
-            Vector512<float> vector = Vector512.Create((float)1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16);
-            Vector512<int> indices = Vector512.Create((int)15, 14, 13, 12, 11, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1, 0);
+            Vector512<float> vector = Vector512.Create(
+                (float)1,
+                2,
+                3,
+                4,
+                5,
+                6,
+                7,
+                8,
+                9,
+                10,
+                11,
+                12,
+                13,
+                14,
+                15,
+                16
+            );
+            Vector512<int> indices = Vector512.Create(
+                (int)15,
+                14,
+                13,
+                12,
+                11,
+                10,
+                9,
+                8,
+                7,
+                6,
+                5,
+                4,
+                3,
+                2,
+                1,
+                0
+            );
             Vector512<float> result = Vector512.Shuffle(vector, indices);
 
             for (int index = 0; index < Vector512<float>.Count; index++)
@@ -3093,8 +5425,74 @@ namespace System.Runtime.Intrinsics.Tests.Vectors
         [Fact]
         public void Vector512UInt16ShuffleOneInputWithLocalIndicesTest()
         {
-            Vector512<ushort> vector = Vector512.Create((ushort)1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32);
-            Vector512<ushort> indices = Vector512.Create((ushort)31, 30, 29, 28, 27, 26, 25, 24, 23, 22, 21, 20, 19, 18, 17, 16, 15, 14, 13, 12, 11, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1, 0);
+            Vector512<ushort> vector = Vector512.Create(
+                (ushort)1,
+                2,
+                3,
+                4,
+                5,
+                6,
+                7,
+                8,
+                9,
+                10,
+                11,
+                12,
+                13,
+                14,
+                15,
+                16,
+                17,
+                18,
+                19,
+                20,
+                21,
+                22,
+                23,
+                24,
+                25,
+                26,
+                27,
+                28,
+                29,
+                30,
+                31,
+                32
+            );
+            Vector512<ushort> indices = Vector512.Create(
+                (ushort)31,
+                30,
+                29,
+                28,
+                27,
+                26,
+                25,
+                24,
+                23,
+                22,
+                21,
+                20,
+                19,
+                18,
+                17,
+                16,
+                15,
+                14,
+                13,
+                12,
+                11,
+                10,
+                9,
+                8,
+                7,
+                6,
+                5,
+                4,
+                3,
+                2,
+                1,
+                0
+            );
             Vector512<ushort> result = Vector512.Shuffle(vector, indices);
 
             for (int index = 0; index < Vector512<ushort>.Count; index++)
@@ -3106,8 +5504,42 @@ namespace System.Runtime.Intrinsics.Tests.Vectors
         [Fact]
         public void Vector512UInt32ShuffleOneInputWithLocalIndicesTest()
         {
-            Vector512<uint> vector = Vector512.Create((uint)1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16);
-            Vector512<uint> indices = Vector512.Create((uint)15, 14, 13, 12, 11, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1, 0);
+            Vector512<uint> vector = Vector512.Create(
+                (uint)1,
+                2,
+                3,
+                4,
+                5,
+                6,
+                7,
+                8,
+                9,
+                10,
+                11,
+                12,
+                13,
+                14,
+                15,
+                16
+            );
+            Vector512<uint> indices = Vector512.Create(
+                (uint)15,
+                14,
+                13,
+                12,
+                11,
+                10,
+                9,
+                8,
+                7,
+                6,
+                5,
+                4,
+                3,
+                2,
+                1,
+                0
+            );
             Vector512<uint> result = Vector512.Shuffle(vector, indices);
 
             for (int index = 0; index < Vector512<uint>.Count; index++)
@@ -3132,7 +5564,72 @@ namespace System.Runtime.Intrinsics.Tests.Vectors
         [Fact]
         public void Vector512ByteShuffleOneInputWithAllBitsSetIndicesTest()
         {
-            Vector512<byte> vector = Vector512.Create((byte)1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64);
+            Vector512<byte> vector = Vector512.Create(
+                (byte)1,
+                2,
+                3,
+                4,
+                5,
+                6,
+                7,
+                8,
+                9,
+                10,
+                11,
+                12,
+                13,
+                14,
+                15,
+                16,
+                17,
+                18,
+                19,
+                20,
+                21,
+                22,
+                23,
+                24,
+                25,
+                26,
+                27,
+                28,
+                29,
+                30,
+                31,
+                32,
+                33,
+                34,
+                35,
+                36,
+                37,
+                38,
+                39,
+                40,
+                41,
+                42,
+                43,
+                44,
+                45,
+                46,
+                47,
+                48,
+                49,
+                50,
+                51,
+                52,
+                53,
+                54,
+                55,
+                56,
+                57,
+                58,
+                59,
+                60,
+                61,
+                62,
+                63,
+                64
+            );
             Vector512<byte> result = Vector512.Shuffle(vector, Vector512<byte>.AllBitsSet);
 
             for (int index = 0; index < Vector512<byte>.Count; index++)
@@ -3156,7 +5653,40 @@ namespace System.Runtime.Intrinsics.Tests.Vectors
         [Fact]
         public void Vector512Int16ShuffleOneInputWithAllBitsSetIndicesTest()
         {
-            Vector512<short> vector = Vector512.Create((short)1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32);
+            Vector512<short> vector = Vector512.Create(
+                (short)1,
+                2,
+                3,
+                4,
+                5,
+                6,
+                7,
+                8,
+                9,
+                10,
+                11,
+                12,
+                13,
+                14,
+                15,
+                16,
+                17,
+                18,
+                19,
+                20,
+                21,
+                22,
+                23,
+                24,
+                25,
+                26,
+                27,
+                28,
+                29,
+                30,
+                31,
+                32
+            );
             Vector512<short> result = Vector512.Shuffle(vector, Vector512<short>.AllBitsSet);
 
             for (int index = 0; index < Vector512<short>.Count; index++)
@@ -3168,7 +5698,24 @@ namespace System.Runtime.Intrinsics.Tests.Vectors
         [Fact]
         public void Vector512Int32ShuffleOneInputWithAllBitsSetIndicesTest()
         {
-            Vector512<int> vector = Vector512.Create((int)1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16);
+            Vector512<int> vector = Vector512.Create(
+                (int)1,
+                2,
+                3,
+                4,
+                5,
+                6,
+                7,
+                8,
+                9,
+                10,
+                11,
+                12,
+                13,
+                14,
+                15,
+                16
+            );
             Vector512<int> result = Vector512.Shuffle(vector, Vector512<int>.AllBitsSet);
 
             for (int index = 0; index < Vector512<int>.Count; index++)
@@ -3192,7 +5739,72 @@ namespace System.Runtime.Intrinsics.Tests.Vectors
         [Fact]
         public void Vector512SByteShuffleOneInputWithAllBitsSetIndicesTest()
         {
-            Vector512<sbyte> vector = Vector512.Create((sbyte)1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64);
+            Vector512<sbyte> vector = Vector512.Create(
+                (sbyte)1,
+                2,
+                3,
+                4,
+                5,
+                6,
+                7,
+                8,
+                9,
+                10,
+                11,
+                12,
+                13,
+                14,
+                15,
+                16,
+                17,
+                18,
+                19,
+                20,
+                21,
+                22,
+                23,
+                24,
+                25,
+                26,
+                27,
+                28,
+                29,
+                30,
+                31,
+                32,
+                33,
+                34,
+                35,
+                36,
+                37,
+                38,
+                39,
+                40,
+                41,
+                42,
+                43,
+                44,
+                45,
+                46,
+                47,
+                48,
+                49,
+                50,
+                51,
+                52,
+                53,
+                54,
+                55,
+                56,
+                57,
+                58,
+                59,
+                60,
+                61,
+                62,
+                63,
+                64
+            );
             Vector512<sbyte> result = Vector512.Shuffle(vector, Vector512<sbyte>.AllBitsSet);
 
             for (int index = 0; index < Vector512<sbyte>.Count; index++)
@@ -3204,7 +5816,24 @@ namespace System.Runtime.Intrinsics.Tests.Vectors
         [Fact]
         public void Vector512SingleShuffleOneInputWithAllBitsSetIndicesTest()
         {
-            Vector512<float> vector = Vector512.Create((float)1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16);
+            Vector512<float> vector = Vector512.Create(
+                (float)1,
+                2,
+                3,
+                4,
+                5,
+                6,
+                7,
+                8,
+                9,
+                10,
+                11,
+                12,
+                13,
+                14,
+                15,
+                16
+            );
             Vector512<float> result = Vector512.Shuffle(vector, Vector512<int>.AllBitsSet);
 
             for (int index = 0; index < Vector512<float>.Count; index++)
@@ -3216,7 +5845,40 @@ namespace System.Runtime.Intrinsics.Tests.Vectors
         [Fact]
         public void Vector512UInt16ShuffleOneInputWithAllBitsSetIndicesTest()
         {
-            Vector512<ushort> vector = Vector512.Create((ushort)1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32);
+            Vector512<ushort> vector = Vector512.Create(
+                (ushort)1,
+                2,
+                3,
+                4,
+                5,
+                6,
+                7,
+                8,
+                9,
+                10,
+                11,
+                12,
+                13,
+                14,
+                15,
+                16,
+                17,
+                18,
+                19,
+                20,
+                21,
+                22,
+                23,
+                24,
+                25,
+                26,
+                27,
+                28,
+                29,
+                30,
+                31,
+                32
+            );
             Vector512<ushort> result = Vector512.Shuffle(vector, Vector512<ushort>.AllBitsSet);
 
             for (int index = 0; index < Vector512<ushort>.Count; index++)
@@ -3228,7 +5890,24 @@ namespace System.Runtime.Intrinsics.Tests.Vectors
         [Fact]
         public void Vector512UInt32ShuffleOneInputWithAllBitsSetIndicesTest()
         {
-            Vector512<uint> vector = Vector512.Create((uint)1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16);
+            Vector512<uint> vector = Vector512.Create(
+                (uint)1,
+                2,
+                3,
+                4,
+                5,
+                6,
+                7,
+                8,
+                9,
+                10,
+                11,
+                12,
+                13,
+                14,
+                15,
+                16
+            );
             Vector512<uint> result = Vector512.Shuffle(vector, Vector512<uint>.AllBitsSet);
 
             for (int index = 0; index < Vector512<uint>.Count; index++)
@@ -3252,7 +5931,72 @@ namespace System.Runtime.Intrinsics.Tests.Vectors
         [Fact]
         public void Vector512ByteShuffleOneInputWithZeroIndicesTest()
         {
-            Vector512<byte> vector = Vector512.Create((byte)1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64);
+            Vector512<byte> vector = Vector512.Create(
+                (byte)1,
+                2,
+                3,
+                4,
+                5,
+                6,
+                7,
+                8,
+                9,
+                10,
+                11,
+                12,
+                13,
+                14,
+                15,
+                16,
+                17,
+                18,
+                19,
+                20,
+                21,
+                22,
+                23,
+                24,
+                25,
+                26,
+                27,
+                28,
+                29,
+                30,
+                31,
+                32,
+                33,
+                34,
+                35,
+                36,
+                37,
+                38,
+                39,
+                40,
+                41,
+                42,
+                43,
+                44,
+                45,
+                46,
+                47,
+                48,
+                49,
+                50,
+                51,
+                52,
+                53,
+                54,
+                55,
+                56,
+                57,
+                58,
+                59,
+                60,
+                61,
+                62,
+                63,
+                64
+            );
             Vector512<byte> result = Vector512.Shuffle(vector, Vector512<byte>.Zero);
 
             for (int index = 0; index < Vector512<byte>.Count; index++)
@@ -3276,7 +6020,40 @@ namespace System.Runtime.Intrinsics.Tests.Vectors
         [Fact]
         public void Vector512Int16ShuffleOneInputWithZeroIndicesTest()
         {
-            Vector512<short> vector = Vector512.Create((short)1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32);
+            Vector512<short> vector = Vector512.Create(
+                (short)1,
+                2,
+                3,
+                4,
+                5,
+                6,
+                7,
+                8,
+                9,
+                10,
+                11,
+                12,
+                13,
+                14,
+                15,
+                16,
+                17,
+                18,
+                19,
+                20,
+                21,
+                22,
+                23,
+                24,
+                25,
+                26,
+                27,
+                28,
+                29,
+                30,
+                31,
+                32
+            );
             Vector512<short> result = Vector512.Shuffle(vector, Vector512<short>.Zero);
 
             for (int index = 0; index < Vector512<short>.Count; index++)
@@ -3288,7 +6065,24 @@ namespace System.Runtime.Intrinsics.Tests.Vectors
         [Fact]
         public void Vector512Int32ShuffleOneInputWithZeroIndicesTest()
         {
-            Vector512<int> vector = Vector512.Create((int)1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16);
+            Vector512<int> vector = Vector512.Create(
+                (int)1,
+                2,
+                3,
+                4,
+                5,
+                6,
+                7,
+                8,
+                9,
+                10,
+                11,
+                12,
+                13,
+                14,
+                15,
+                16
+            );
             Vector512<int> result = Vector512.Shuffle(vector, Vector512<int>.Zero);
 
             for (int index = 0; index < Vector512<int>.Count; index++)
@@ -3312,7 +6106,72 @@ namespace System.Runtime.Intrinsics.Tests.Vectors
         [Fact]
         public void Vector512SByteShuffleOneInputWithZeroIndicesTest()
         {
-            Vector512<sbyte> vector = Vector512.Create((sbyte)1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64);
+            Vector512<sbyte> vector = Vector512.Create(
+                (sbyte)1,
+                2,
+                3,
+                4,
+                5,
+                6,
+                7,
+                8,
+                9,
+                10,
+                11,
+                12,
+                13,
+                14,
+                15,
+                16,
+                17,
+                18,
+                19,
+                20,
+                21,
+                22,
+                23,
+                24,
+                25,
+                26,
+                27,
+                28,
+                29,
+                30,
+                31,
+                32,
+                33,
+                34,
+                35,
+                36,
+                37,
+                38,
+                39,
+                40,
+                41,
+                42,
+                43,
+                44,
+                45,
+                46,
+                47,
+                48,
+                49,
+                50,
+                51,
+                52,
+                53,
+                54,
+                55,
+                56,
+                57,
+                58,
+                59,
+                60,
+                61,
+                62,
+                63,
+                64
+            );
             Vector512<sbyte> result = Vector512.Shuffle(vector, Vector512<sbyte>.Zero);
 
             for (int index = 0; index < Vector512<sbyte>.Count; index++)
@@ -3324,7 +6183,24 @@ namespace System.Runtime.Intrinsics.Tests.Vectors
         [Fact]
         public void Vector512SingleShuffleOneInputWithZeroIndicesTest()
         {
-            Vector512<float> vector = Vector512.Create((float)1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16);
+            Vector512<float> vector = Vector512.Create(
+                (float)1,
+                2,
+                3,
+                4,
+                5,
+                6,
+                7,
+                8,
+                9,
+                10,
+                11,
+                12,
+                13,
+                14,
+                15,
+                16
+            );
             Vector512<float> result = Vector512.Shuffle(vector, Vector512<int>.Zero);
 
             for (int index = 0; index < Vector512<float>.Count; index++)
@@ -3336,7 +6212,40 @@ namespace System.Runtime.Intrinsics.Tests.Vectors
         [Fact]
         public void Vector512UInt16ShuffleOneInputWithZeroIndicesTest()
         {
-            Vector512<ushort> vector = Vector512.Create((ushort)1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32);
+            Vector512<ushort> vector = Vector512.Create(
+                (ushort)1,
+                2,
+                3,
+                4,
+                5,
+                6,
+                7,
+                8,
+                9,
+                10,
+                11,
+                12,
+                13,
+                14,
+                15,
+                16,
+                17,
+                18,
+                19,
+                20,
+                21,
+                22,
+                23,
+                24,
+                25,
+                26,
+                27,
+                28,
+                29,
+                30,
+                31,
+                32
+            );
             Vector512<ushort> result = Vector512.Shuffle(vector, Vector512<ushort>.Zero);
 
             for (int index = 0; index < Vector512<ushort>.Count; index++)
@@ -3348,7 +6257,24 @@ namespace System.Runtime.Intrinsics.Tests.Vectors
         [Fact]
         public void Vector512UInt32ShuffleOneInputWithZeroIndicesTest()
         {
-            Vector512<uint> vector = Vector512.Create((uint)1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16);
+            Vector512<uint> vector = Vector512.Create(
+                (uint)1,
+                2,
+                3,
+                4,
+                5,
+                6,
+                7,
+                8,
+                9,
+                10,
+                11,
+                12,
+                13,
+                14,
+                15,
+                16
+            );
             Vector512<uint> result = Vector512.Shuffle(vector, Vector512<uint>.Zero);
 
             for (int index = 0; index < Vector512<uint>.Count; index++)
@@ -4924,7 +7850,24 @@ namespace System.Runtime.Intrinsics.Tests.Vectors
         [InlineData(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1)]
         [InlineData(-1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1)]
         [InlineData(0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15)]
-        [InlineData(0, 0, 50, 430, -64, 0, int.MaxValue, int.MinValue, 0, 0, 50, 430, -64, 0, int.MaxValue, int.MinValue)]
+        [InlineData(
+            0,
+            0,
+            50,
+            430,
+            -64,
+            0,
+            int.MaxValue,
+            int.MinValue,
+            0,
+            0,
+            50,
+            430,
+            -64,
+            0,
+            int.MaxValue,
+            int.MinValue
+        )]
         public void Vector512Int32IndexerTest(params int[] values)
         {
             var vector = Vector512.Create(values);
@@ -4977,14 +7920,14 @@ namespace System.Runtime.Intrinsics.Tests.Vectors
             {
                 double.CopySign(double.NaN, -0.0), // -qnan same as double.NaN
                 double.CopySign(double.NaN, +0.0), // +qnan
-                double.CopySign(snan, -0.0),       // -snan
-                double.CopySign(snan, +0.0),       // +snan
+                double.CopySign(snan, -0.0), // -snan
+                double.CopySign(snan, +0.0), // +snan
             };
 
             // all Vector<double> NaNs .Equals compare the same, but == compare as different
-            foreach(var i in nans)
+            foreach (var i in nans)
             {
-                foreach(var j in nans)
+                foreach (var j in nans)
                 {
                     Assert.True(Vector512.Create(i).Equals(Vector512.Create(j)));
                     Assert.False(Vector512.Create(i) == Vector512.Create(j));
@@ -5001,14 +7944,14 @@ namespace System.Runtime.Intrinsics.Tests.Vectors
             {
                 float.CopySign(float.NaN, -0.0f), // -qnan same as float.NaN
                 float.CopySign(float.NaN, +0.0f), // +qnan
-                float.CopySign(snan, -0.0f),      // -snan
-                float.CopySign(snan, +0.0f),      // +snan
+                float.CopySign(snan, -0.0f), // -snan
+                float.CopySign(snan, +0.0f), // +snan
             };
 
             // all Vector<float> NaNs .Equals compare the same, but == compare as different
-            foreach(var i in nans)
+            foreach (var i in nans)
             {
-                foreach(var j in nans)
+                foreach (var j in nans)
                 {
                     Assert.True(Vector512.Create(i).Equals(Vector512.Create(j)));
                     Assert.False(Vector512.Create(i) == Vector512.Create(j));
@@ -5021,7 +7964,30 @@ namespace System.Runtime.Intrinsics.Tests.Vectors
         {
             float[] array = new float[16];
             Vector512.Create(2.0f).CopyTo(array);
-            Assert.True(array.AsSpan().SequenceEqual([2.0f, 2.0f, 2.0f, 2.0f, 2.0f, 2.0f, 2.0f, 2.0f, 2.0f, 2.0f, 2.0f, 2.0f, 2.0f, 2.0f, 2.0f, 2.0f]));
+            Assert.True(
+                array
+                    .AsSpan()
+                    .SequenceEqual(
+                        [
+                            2.0f,
+                            2.0f,
+                            2.0f,
+                            2.0f,
+                            2.0f,
+                            2.0f,
+                            2.0f,
+                            2.0f,
+                            2.0f,
+                            2.0f,
+                            2.0f,
+                            2.0f,
+                            2.0f,
+                            2.0f,
+                            2.0f,
+                            2.0f,
+                        ]
+                    )
+            );
         }
 
         [Fact]
@@ -5029,7 +7995,31 @@ namespace System.Runtime.Intrinsics.Tests.Vectors
         {
             float[] array = new float[17];
             Vector512.Create(2.0f).CopyTo(array, 1);
-            Assert.True(array.AsSpan().SequenceEqual([0.0f, 2.0f, 2.0f, 2.0f, 2.0f, 2.0f, 2.0f, 2.0f, 2.0f, 2.0f, 2.0f, 2.0f, 2.0f, 2.0f, 2.0f, 2.0f, 2.0f]));
+            Assert.True(
+                array
+                    .AsSpan()
+                    .SequenceEqual(
+                        [
+                            0.0f,
+                            2.0f,
+                            2.0f,
+                            2.0f,
+                            2.0f,
+                            2.0f,
+                            2.0f,
+                            2.0f,
+                            2.0f,
+                            2.0f,
+                            2.0f,
+                            2.0f,
+                            2.0f,
+                            2.0f,
+                            2.0f,
+                            2.0f,
+                            2.0f,
+                        ]
+                    )
+            );
         }
 
         [Fact]
@@ -5073,7 +8063,9 @@ namespace System.Runtime.Intrinsics.Tests.Vectors
         {
             Assert.True(Vector512<T>.IsSupported);
 
-            MethodInfo methodInfo = typeof(Vector512<T>).GetProperty("IsSupported", BindingFlags.Public | BindingFlags.Static).GetMethod;
+            MethodInfo methodInfo = typeof(Vector512<T>)
+                .GetProperty("IsSupported", BindingFlags.Public | BindingFlags.Static)
+                .GetMethod;
             Assert.True((bool)methodInfo.Invoke(null, null));
         }
 
@@ -5097,7 +8089,9 @@ namespace System.Runtime.Intrinsics.Tests.Vectors
         {
             Assert.False(Vector512<T>.IsSupported);
 
-            MethodInfo methodInfo = typeof(Vector512<T>).GetProperty("IsSupported", BindingFlags.Public | BindingFlags.Static).GetMethod;
+            MethodInfo methodInfo = typeof(Vector512<T>)
+                .GetProperty("IsSupported", BindingFlags.Public | BindingFlags.Static)
+                .GetMethod;
             Assert.False((bool)methodInfo.Invoke(null, null));
         }
     }

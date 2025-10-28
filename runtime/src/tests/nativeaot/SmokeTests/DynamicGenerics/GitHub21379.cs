@@ -4,12 +4,10 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-
+using System.Reflection;
 using System.Runtime.CompilerServices;
 using System.Threading;
 using System.Threading.Tasks;
-using System.Reflection;
-
 using CoreFXTestLibrary;
 
 // Regression test for https://github.com/dotnet/corefx/issues/21379
@@ -48,7 +46,14 @@ public class GitHub21379
         yield return new object[] { new short[0], 0, 0, (short)0, null, -1 };
     }
 
-    public static void BinarySearch_Array(Array array, int index, int length, object value, IComparer comparer, int expected)
+    public static void BinarySearch_Array(
+        Array array,
+        int index,
+        int length,
+        object value,
+        IComparer comparer,
+        int expected
+    )
     {
         bool isDefaultComparer = comparer == null || comparer == Comparer.Default;
         if (index == array.GetLowerBound(0) && length == array.Length)
@@ -71,7 +76,14 @@ public class GitHub21379
         Assert.AreEqual(expected, Array.BinarySearch(array, index, length, value, comparer));
     }
 
-    public static void BinarySearch_SZArray<T>(T[] array, int index, int length, T value, IComparer<T> comparer, int expected)
+    public static void BinarySearch_SZArray<T>(
+        T[] array,
+        int index,
+        int length,
+        T value,
+        IComparer<T> comparer,
+        int expected
+    )
     {
         // Forward to the non-generic overload if we can.
         bool isDefaultComparer = comparer == null || comparer == Comparer<T>.Default;
@@ -104,12 +116,16 @@ public class GitHub21379
     [TestMethod]
     public static void RunTest()
     {
-        MethodInfo testMethodDefinition = typeof(GitHub21379).GetTypeInfo().GetDeclaredMethod("BinarySearch_SZArray");
+        MethodInfo testMethodDefinition = typeof(GitHub21379)
+            .GetTypeInfo()
+            .GetDeclaredMethod("BinarySearch_SZArray");
 
         foreach (object[] testData in BinarySearch_SZArray_TestData())
         {
             Type elementType = testData[0].GetType().GetElementType();
-            MethodInfo testMethod = testMethodDefinition.MakeGenericMethod(new Type[] { elementType });
+            MethodInfo testMethod = testMethodDefinition.MakeGenericMethod(
+                new Type[] { elementType }
+            );
             testMethod.Invoke(null, testData);
         }
     }

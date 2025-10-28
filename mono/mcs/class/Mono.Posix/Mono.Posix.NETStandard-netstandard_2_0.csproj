@@ -1,5 +1,4 @@
 <Project Sdk="Microsoft.NET.Sdk">
-
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
@@ -31,5 +30,4 @@
     <Compile Include="..\..\build\common\Locale.cs" />
     <Compile Remove=".\Mono.Unix.Native\CdeclFunction.cs" />
   </ItemGroup>
-
 </Project>

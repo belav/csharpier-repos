@@ -8,10 +8,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -27,44 +27,47 @@
 // (C) 2004 Novell, Inc.
 //
 
-namespace System.Windows.Forms 
+namespace System.Windows.Forms
 {
-	public class RowStyle : TableLayoutStyle 
-	{
-		float height;
-		
-		public RowStyle ()
-		{
-			this.height = 0;
-		}
+    public class RowStyle : TableLayoutStyle
+    {
+        float height;
 
-		public RowStyle (SizeType sizeType) 
-		{
-			this.height = 0;
-			base.SizeType = sizeType;
-		}
+        public RowStyle()
+        {
+            this.height = 0;
+        }
 
-		public RowStyle (SizeType sizeType, float height)
-		{
-			if (height < 0)
-				throw new ArgumentOutOfRangeException("height");
+        public RowStyle(SizeType sizeType)
+        {
+            this.height = 0;
+            base.SizeType = sizeType;
+        }
 
-			base.SizeType = sizeType;
-			this.height = height;
-		}
+        public RowStyle(SizeType sizeType, float height)
+        {
+            if (height < 0)
+                throw new ArgumentOutOfRangeException("height");
 
-		public float Height {
-			get { return this.height; }
-			set {	
-				if (value < 0)
-					throw new ArgumentOutOfRangeException();
-				
-				if (height != value) {
-					height = value; 
-					if (Owner != null)
-						Owner.PerformLayout (Owner, "Style");						
-				}
-			}
-		}		
-	}
+            base.SizeType = sizeType;
+            this.height = height;
+        }
+
+        public float Height
+        {
+            get { return this.height; }
+            set
+            {
+                if (value < 0)
+                    throw new ArgumentOutOfRangeException();
+
+                if (height != value)
+                {
+                    height = value;
+                    if (Owner != null)
+                        Owner.PerformLayout(Owner, "Style");
+                }
+            }
+        }
+    }
 }

@@ -5,8 +5,6 @@ namespace Microsoft.Extensions.DependencyInjection.Specification.Fakes
 {
     public class ClassWithPrivateCtor
     {
-        private ClassWithPrivateCtor()
-        {
-        }
+        private ClassWithPrivateCtor() { }
     }
 }

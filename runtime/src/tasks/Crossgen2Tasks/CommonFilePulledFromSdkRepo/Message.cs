@@ -14,7 +14,8 @@ namespace Microsoft.NET.Build.Tasks
             MessageLevel level,
             string text,
             string code = default,
-            string file = default)
+            string file = default
+        )
         {
             Level = level;
             Code = code;

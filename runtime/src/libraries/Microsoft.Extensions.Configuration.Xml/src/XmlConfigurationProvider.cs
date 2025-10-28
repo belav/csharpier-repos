@@ -17,7 +17,8 @@ namespace Microsoft.Extensions.Configuration.Xml
         /// Initializes a new instance with the specified source.
         /// </summary>
         /// <param name="source">The source settings.</param>
-        public XmlConfigurationProvider(XmlConfigurationSource source) : base(source) { }
+        public XmlConfigurationProvider(XmlConfigurationSource source)
+            : base(source) { }
 
         internal XmlDocumentDecryptor Decryptor { get; set; } = XmlDocumentDecryptor.Instance;
 

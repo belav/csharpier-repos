@@ -13,15 +13,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.NewLines.ConsecutiveSta
 {
     using Verify = CSharpCodeFixVerifier<
         CSharpConsecutiveStatementPlacementDiagnosticAnalyzer,
-        ConsecutiveStatementPlacementCodeFixProvider>;
+        ConsecutiveStatementPlacementCodeFixProvider
+    >;
 
     public class ConsecutiveStatementPlacementTests
     {
         [Fact]
         public async Task TestNotAfterPropertyBlock()
         {
-            var code =
-                """
+            var code = """
                 class C
                 {
                     int X { get; }
@@ -33,15 +33,20 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.NewLines.ConsecutiveSta
             {
                 TestCode = code,
                 FixedCode = code,
-                Options = { { CodeStyleOptions2.AllowStatementImmediatelyAfterBlock, CodeStyleOption2.FalseWithSuggestionEnforcement } }
+                Options =
+                {
+                    {
+                        CodeStyleOptions2.AllowStatementImmediatelyAfterBlock,
+                        CodeStyleOption2.FalseWithSuggestionEnforcement
+                    },
+                },
             }.RunAsync();
         }
 
         [Fact]
         public async Task TestNotAfterMethodBlock()
         {
-            var code =
-                """
+            var code = """
                 class C
                 {
                     void X() { }
@@ -53,15 +58,20 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.NewLines.ConsecutiveSta
             {
                 TestCode = code,
                 FixedCode = code,
-                Options = { { CodeStyleOptions2.AllowStatementImmediatelyAfterBlock, CodeStyleOption2.FalseWithSuggestionEnforcement } }
+                Options =
+                {
+                    {
+                        CodeStyleOptions2.AllowStatementImmediatelyAfterBlock,
+                        CodeStyleOption2.FalseWithSuggestionEnforcement
+                    },
+                },
             }.RunAsync();
         }
 
         [Fact]
         public async Task TestNotAfterStatementsOnSingleLine()
         {
-            var code =
-                """
+            var code = """
                 class C
                 {
                     void M()
@@ -75,15 +85,20 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.NewLines.ConsecutiveSta
             {
                 TestCode = code,
                 FixedCode = code,
-                Options = { { CodeStyleOptions2.AllowStatementImmediatelyAfterBlock, CodeStyleOption2.FalseWithSuggestionEnforcement } }
+                Options =
+                {
+                    {
+                        CodeStyleOptions2.AllowStatementImmediatelyAfterBlock,
+                        CodeStyleOption2.FalseWithSuggestionEnforcement
+                    },
+                },
             }.RunAsync();
         }
 
         [Fact]
         public async Task TestNotAfterStatementsOnSingleLineWithComment()
         {
-            var code =
-                """
+            var code = """
                 class C
                 {
                     void M()
@@ -97,15 +112,20 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.NewLines.ConsecutiveSta
             {
                 TestCode = code,
                 FixedCode = code,
-                Options = { { CodeStyleOptions2.AllowStatementImmediatelyAfterBlock, CodeStyleOption2.FalseWithSuggestionEnforcement } }
+                Options =
+                {
+                    {
+                        CodeStyleOptions2.AllowStatementImmediatelyAfterBlock,
+                        CodeStyleOption2.FalseWithSuggestionEnforcement
+                    },
+                },
             }.RunAsync();
         }
 
         [Fact]
         public async Task TestNotAfterStatementsOnMultipleLinesWithCommentBetween1()
         {
-            var code =
-                """
+            var code = """
                 class C
                 {
                     void M()
@@ -122,15 +142,20 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.NewLines.ConsecutiveSta
             {
                 TestCode = code,
                 FixedCode = code,
-                Options = { { CodeStyleOptions2.AllowStatementImmediatelyAfterBlock, CodeStyleOption2.FalseWithSuggestionEnforcement } }
+                Options =
+                {
+                    {
+                        CodeStyleOptions2.AllowStatementImmediatelyAfterBlock,
+                        CodeStyleOption2.FalseWithSuggestionEnforcement
+                    },
+                },
             }.RunAsync();
         }
 
         [Fact]
         public async Task TestNotAfterStatementsOnMultipleLinesWithCommentBetween2()
         {
-            var code =
-                """
+            var code = """
                 class C
                 {
                     void M()
@@ -147,15 +172,20 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.NewLines.ConsecutiveSta
             {
                 TestCode = code,
                 FixedCode = code,
-                Options = { { CodeStyleOptions2.AllowStatementImmediatelyAfterBlock, CodeStyleOption2.FalseWithSuggestionEnforcement } }
+                Options =
+                {
+                    {
+                        CodeStyleOptions2.AllowStatementImmediatelyAfterBlock,
+                        CodeStyleOption2.FalseWithSuggestionEnforcement
+                    },
+                },
             }.RunAsync();
         }
 
         [Fact]
         public async Task TestNotAfterStatementsWithSingleBlankLines()
         {
-            var code =
-                """
+            var code = """
                 class C
                 {
                     void M()
@@ -173,15 +203,20 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.NewLines.ConsecutiveSta
             {
                 TestCode = code,
                 FixedCode = code,
-                Options = { { CodeStyleOptions2.AllowStatementImmediatelyAfterBlock, CodeStyleOption2.FalseWithSuggestionEnforcement } }
+                Options =
+                {
+                    {
+                        CodeStyleOptions2.AllowStatementImmediatelyAfterBlock,
+                        CodeStyleOption2.FalseWithSuggestionEnforcement
+                    },
+                },
             }.RunAsync();
         }
 
         [Fact]
         public async Task TestNotAfterStatementsWithSingleBlankLinesWithSpaces()
         {
-            var code =
-                """
+            var code = """
                 class C
                 {
                     void M()
@@ -199,15 +234,20 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.NewLines.ConsecutiveSta
             {
                 TestCode = code,
                 FixedCode = code,
-                Options = { { CodeStyleOptions2.AllowStatementImmediatelyAfterBlock, CodeStyleOption2.FalseWithSuggestionEnforcement } }
+                Options =
+                {
+                    {
+                        CodeStyleOptions2.AllowStatementImmediatelyAfterBlock,
+                        CodeStyleOption2.FalseWithSuggestionEnforcement
+                    },
+                },
             }.RunAsync();
         }
 
         [Fact]
         public async Task TestNotAfterStatementsWithMultipleBlankLines()
         {
-            var code =
-                """
+            var code = """
                 class C
                 {
                     void M()
@@ -225,15 +265,20 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.NewLines.ConsecutiveSta
             {
                 TestCode = code,
                 FixedCode = code,
-                Options = { { CodeStyleOptions2.AllowStatementImmediatelyAfterBlock, CodeStyleOption2.FalseWithSuggestionEnforcement } }
+                Options =
+                {
+                    {
+                        CodeStyleOptions2.AllowStatementImmediatelyAfterBlock,
+                        CodeStyleOption2.FalseWithSuggestionEnforcement
+                    },
+                },
             }.RunAsync();
         }
 
         [Fact]
         public async Task TestNotAfterStatementsOnMultipleLinesWithPPDirectiveBetween1()
         {
-            var code =
-                """
+            var code = """
                 class C
                 {
                     void M()
@@ -251,15 +296,20 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.NewLines.ConsecutiveSta
             {
                 TestCode = code,
                 FixedCode = code,
-                Options = { { CodeStyleOptions2.AllowStatementImmediatelyAfterBlock, CodeStyleOption2.FalseWithSuggestionEnforcement } }
+                Options =
+                {
+                    {
+                        CodeStyleOptions2.AllowStatementImmediatelyAfterBlock,
+                        CodeStyleOption2.FalseWithSuggestionEnforcement
+                    },
+                },
             }.RunAsync();
         }
 
         [Fact]
         public async Task TestNotBetweenBlockAndElseClause()
         {
-            var code =
-                """
+            var code = """
                 class C
                 {
                     void M()
@@ -278,15 +328,20 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.NewLines.ConsecutiveSta
             {
                 TestCode = code,
                 FixedCode = code,
-                Options = { { CodeStyleOptions2.AllowStatementImmediatelyAfterBlock, CodeStyleOption2.FalseWithSuggestionEnforcement } }
+                Options =
+                {
+                    {
+                        CodeStyleOptions2.AllowStatementImmediatelyAfterBlock,
+                        CodeStyleOption2.FalseWithSuggestionEnforcement
+                    },
+                },
             }.RunAsync();
         }
 
         [Fact]
         public async Task TestNotBetweenBlockAndOuterBlocker()
         {
-            var code =
-                """
+            var code = """
                 class C
                 {
                     void M()
@@ -304,15 +359,20 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.NewLines.ConsecutiveSta
             {
                 TestCode = code,
                 FixedCode = code,
-                Options = { { CodeStyleOptions2.AllowStatementImmediatelyAfterBlock, CodeStyleOption2.FalseWithSuggestionEnforcement } }
+                Options =
+                {
+                    {
+                        CodeStyleOptions2.AllowStatementImmediatelyAfterBlock,
+                        CodeStyleOption2.FalseWithSuggestionEnforcement
+                    },
+                },
             }.RunAsync();
         }
 
         [Fact]
         public async Task TestNotBetweenBlockAndCase()
         {
-            var code =
-                """
+            var code = """
                 class C
                 {
                     void M()
@@ -334,7 +394,13 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.NewLines.ConsecutiveSta
             {
                 TestCode = code,
                 FixedCode = code,
-                Options = { { CodeStyleOptions2.AllowStatementImmediatelyAfterBlock, CodeStyleOption2.FalseWithSuggestionEnforcement } }
+                Options =
+                {
+                    {
+                        CodeStyleOptions2.AllowStatementImmediatelyAfterBlock,
+                        CodeStyleOption2.FalseWithSuggestionEnforcement
+                    },
+                },
             }.RunAsync();
         }
 
@@ -344,31 +410,37 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.NewLines.ConsecutiveSta
             await new Verify.Test
             {
                 TestCode = """
-                class C
-                {
-                    void M()
+                    class C
                     {
-                        if (true)
+                        void M()
                         {
-                        [|}|]
-                        return;
-                    }
-                }
-                """,
-                FixedCode = """
-                class C
-                {
-                    void M()
-                    {
-                        if (true)
-                        {
+                            if (true)
+                            {
+                            [|}|]
+                            return;
                         }
-
-                        return;
                     }
-                }
-                """,
-                Options = { { CodeStyleOptions2.AllowStatementImmediatelyAfterBlock, CodeStyleOption2.FalseWithSuggestionEnforcement } }
+                    """,
+                FixedCode = """
+                    class C
+                    {
+                        void M()
+                        {
+                            if (true)
+                            {
+                            }
+
+                            return;
+                        }
+                    }
+                    """,
+                Options =
+                {
+                    {
+                        CodeStyleOptions2.AllowStatementImmediatelyAfterBlock,
+                        CodeStyleOption2.FalseWithSuggestionEnforcement
+                    },
+                },
             }.RunAsync();
         }
 
@@ -392,7 +464,13 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.NewLines.ConsecutiveSta
             {
                 TestCode = code,
                 FixedCode = code,
-                Options = { { CodeStyleOptions2.AllowStatementImmediatelyAfterBlock, CodeStyleOption2.TrueWithSilentEnforcement } }
+                Options =
+                {
+                    {
+                        CodeStyleOptions2.AllowStatementImmediatelyAfterBlock,
+                        CodeStyleOption2.TrueWithSilentEnforcement
+                    },
+                },
             }.RunAsync();
         }
 
@@ -402,31 +480,37 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.NewLines.ConsecutiveSta
             await new Verify.Test
             {
                 TestCode = """
-                class C
-                {
-                    void M()
+                    class C
                     {
-                        switch (0)
+                        void M()
                         {
-                        [|}|]
-                        return;
-                    }
-                }
-                """,
-                FixedCode = """
-                class C
-                {
-                    void M()
-                    {
-                        switch (0)
-                        {
+                            switch (0)
+                            {
+                            [|}|]
+                            return;
                         }
-
-                        return;
                     }
-                }
-                """,
-                Options = { { CodeStyleOptions2.AllowStatementImmediatelyAfterBlock, CodeStyleOption2.FalseWithSuggestionEnforcement } }
+                    """,
+                FixedCode = """
+                    class C
+                    {
+                        void M()
+                        {
+                            switch (0)
+                            {
+                            }
+
+                            return;
+                        }
+                    }
+                    """,
+                Options =
+                {
+                    {
+                        CodeStyleOptions2.AllowStatementImmediatelyAfterBlock,
+                        CodeStyleOption2.FalseWithSuggestionEnforcement
+                    },
+                },
             }.RunAsync();
         }
 
@@ -436,31 +520,37 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.NewLines.ConsecutiveSta
             await new Verify.Test
             {
                 TestCode = """
-                class C
-                {
-                    void M()
+                    class C
                     {
-                        if (true)
+                        void M()
                         {
-                        [|}|] // trailing comment
-                        return;
+                            if (true)
+                            {
+                            [|}|] // trailing comment
+                            return;
+                        }
                     }
-                }
-                """,
+                    """,
                 FixedCode = """
-                class C
-                {
-                    void M()
+                    class C
                     {
-                        if (true)
+                        void M()
                         {
-                        } // trailing comment
+                            if (true)
+                            {
+                            } // trailing comment
 
-                        return;
+                            return;
+                        }
                     }
-                }
-                """,
-                Options = { { CodeStyleOptions2.AllowStatementImmediatelyAfterBlock, CodeStyleOption2.FalseWithSuggestionEnforcement } }
+                    """,
+                Options =
+                {
+                    {
+                        CodeStyleOptions2.AllowStatementImmediatelyAfterBlock,
+                        CodeStyleOption2.FalseWithSuggestionEnforcement
+                    },
+                },
             }.RunAsync();
         }
 
@@ -470,27 +560,33 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.NewLines.ConsecutiveSta
             await new Verify.Test
             {
                 TestCode = """
-                class C
-                {
-                    void M()
+                    class C
                     {
-                        if (true) { [|}|]
-                        return;
+                        void M()
+                        {
+                            if (true) { [|}|]
+                            return;
+                        }
                     }
-                }
-                """,
+                    """,
                 FixedCode = """
-                class C
-                {
-                    void M()
+                    class C
                     {
-                        if (true) { }
+                        void M()
+                        {
+                            if (true) { }
 
-                        return;
+                            return;
+                        }
                     }
-                }
-                """,
-                Options = { { CodeStyleOptions2.AllowStatementImmediatelyAfterBlock, CodeStyleOption2.FalseWithSuggestionEnforcement } }
+                    """,
+                Options =
+                {
+                    {
+                        CodeStyleOptions2.AllowStatementImmediatelyAfterBlock,
+                        CodeStyleOption2.FalseWithSuggestionEnforcement
+                    },
+                },
             }.RunAsync();
         }
 
@@ -500,35 +596,41 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.NewLines.ConsecutiveSta
             await new Verify.Test
             {
                 TestCode = """
-                class C
-                {
-                    void M()
+                    class C
                     {
-                        switch (0)
+                        void M()
                         {
-                        case 0:
-                            if (true) { [|}|]
-                            return;
+                            switch (0)
+                            {
+                            case 0:
+                                if (true) { [|}|]
+                                return;
+                            }
                         }
                     }
-                }
-                """,
+                    """,
                 FixedCode = """
-                class C
-                {
-                    void M()
+                    class C
                     {
-                        switch (0)
+                        void M()
                         {
-                        case 0:
-                            if (true) { }
+                            switch (0)
+                            {
+                            case 0:
+                                if (true) { }
 
-                            return;
+                                return;
+                            }
                         }
                     }
-                }
-                """,
-                Options = { { CodeStyleOptions2.AllowStatementImmediatelyAfterBlock, CodeStyleOption2.FalseWithSuggestionEnforcement } }
+                    """,
+                Options =
+                {
+                    {
+                        CodeStyleOptions2.AllowStatementImmediatelyAfterBlock,
+                        CodeStyleOption2.FalseWithSuggestionEnforcement
+                    },
+                },
             }.RunAsync();
         }
 
@@ -538,40 +640,46 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.NewLines.ConsecutiveSta
             await new Verify.Test
             {
                 TestCode = """
-                class C
-                {
-                    void M()
+                    class C
                     {
-                        if (true)
+                        void M()
                         {
-                        [|}|]
-                        return;
-                        if (true)
-                        {
-                        [|}|]
-                        return;
+                            if (true)
+                            {
+                            [|}|]
+                            return;
+                            if (true)
+                            {
+                            [|}|]
+                            return;
+                        }
                     }
-                }
-                """,
+                    """,
                 FixedCode = """
-                class C
-                {
-                    void M()
+                    class C
                     {
-                        if (true)
+                        void M()
                         {
-                        }
+                            if (true)
+                            {
+                            }
 
-                        return;
-                        if (true)
-                        {
-                        }
+                            return;
+                            if (true)
+                            {
+                            }
 
-                        return;
+                            return;
+                        }
                     }
-                }
-                """,
-                Options = { { CodeStyleOptions2.AllowStatementImmediatelyAfterBlock, CodeStyleOption2.FalseWithSuggestionEnforcement } }
+                    """,
+                Options =
+                {
+                    {
+                        CodeStyleOptions2.AllowStatementImmediatelyAfterBlock,
+                        CodeStyleOption2.FalseWithSuggestionEnforcement
+                    },
+                },
             }.RunAsync();
         }
 
@@ -942,7 +1050,13 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.NewLines.ConsecutiveSta
             {
                 TestCode = code,
                 FixedCode = code,
-                Options = { { CodeStyleOptions2.AllowStatementImmediatelyAfterBlock, CodeStyleOption2.FalseWithSuggestionEnforcement } }
+                Options =
+                {
+                    {
+                        CodeStyleOptions2.AllowStatementImmediatelyAfterBlock,
+                        CodeStyleOption2.FalseWithSuggestionEnforcement
+                    },
+                },
             }.RunAsync();
         }
 
@@ -952,186 +1066,192 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.NewLines.ConsecutiveSta
             await new Verify.Test
             {
                 TestCode = """
-                using System;
-                using System.Collections.Generic;
-                public class Goo
-                {
-                    private int x;
-                    // Invalid #1
-                    public int Property1
+                    using System;
+                    using System.Collections.Generic;
+                    public class Goo
                     {
-                        get
-                        {        
-                            return this.x;
-                        }
-                        set
+                        private int x;
+                        // Invalid #1
+                        public int Property1
                         {
-                            this.x = value;
+                            get
+                            {        
+                                return this.x;
+                            }
+                            set
+                            {
+                                this.x = value;
+                            }
+                            /* some comment */
                         }
-                        /* some comment */
-                    }
-                    // Invalid #2
-                    public int Property2
-                    {
-                        get { return this.x; }
-                    }
-                    public void Baz()
-                    {
-                        // Invalid #3
-                        switch (this.x)
+                        // Invalid #2
+                        public int Property2
                         {
-                            case 1:
+                            get { return this.x; }
+                        }
+                        public void Baz()
+                        {
+                            // Invalid #3
+                            switch (this.x)
+                            {
+                                case 1:
+                                {
+                                    this.x = 1;
+                                    break;
+                                }
+                                case 2:
+                                    this.x = 2;
+                                    break;
+                            }
+                            // Invalid #4
+                            {
+                                var temp = this.x;
+                                this.x = temp * temp;
+                            [|}|]
+                            this.x++;
+                            // Invalid #5
+                            if (this.x > 1)
                             {
                                 this.x = 1;
-                                break;
-                            }
-                            case 2:
-                                this.x = 2;
-                                break;
-                        }
-                        // Invalid #4
-                        {
-                            var temp = this.x;
-                            this.x = temp * temp;
-                        [|}|]
-                        this.x++;
-                        // Invalid #5
-                        if (this.x > 1)
-                        {
-                            this.x = 1;
-                        [|}|]
-                        if (this.x < 0)
-                        {
-                            this.x = 0;
-                        [|}|]
-                        switch (this.x)
-                        {
-                            // Invalid #6
-                            case 0:
+                            [|}|]
                             if (this.x < 0)
                             {
-                                this.x = -1;
+                                this.x = 0;
                             [|}|]
-                            break;
-                            // Invalid #7
-                            case 1:
+                            switch (this.x)
                             {
-                                var temp = this.x * this.x;
-                                this.x = temp;
-                            [|}|]
-                            break;
-                        }
-                    }
-                    public void Example()
-                    {
-                        new List<Action>
-                        {
-                            () =>
-                            {
-                                if (true)
+                                // Invalid #6
+                                case 0:
+                                if (this.x < 0)
                                 {
-                                    return;
+                                    this.x = -1;
                                 [|}|]
-                                return;
-                            }
-                        };
-                    }
-                }
-                """,
-                FixedCode = """
-                using System;
-                using System.Collections.Generic;
-                public class Goo
-                {
-                    private int x;
-                    // Invalid #1
-                    public int Property1
-                    {
-                        get
-                        {        
-                            return this.x;
-                        }
-                        set
-                        {
-                            this.x = value;
-                        }
-                        /* some comment */
-                    }
-                    // Invalid #2
-                    public int Property2
-                    {
-                        get { return this.x; }
-                    }
-                    public void Baz()
-                    {
-                        // Invalid #3
-                        switch (this.x)
-                        {
-                            case 1:
-                            {
-                                this.x = 1;
                                 break;
-                            }
-                            case 2:
-                                this.x = 2;
-                                break;
-                        }
-                        // Invalid #4
-                        {
-                            var temp = this.x;
-                            this.x = temp * temp;
-                        }
-
-                        this.x++;
-                        // Invalid #5
-                        if (this.x > 1)
-                        {
-                            this.x = 1;
-                        }
-
-                        if (this.x < 0)
-                        {
-                            this.x = 0;
-                        }
-
-                        switch (this.x)
-                        {
-                            // Invalid #6
-                            case 0:
-                            if (this.x < 0)
-                            {
-                                this.x = -1;
-                            }
-
-                            break;
-                            // Invalid #7
-                            case 1:
-                            {
-                                var temp = this.x * this.x;
-                                this.x = temp;
-                            }
-
-                            break;
-                        }
-                    }
-                    public void Example()
-                    {
-                        new List<Action>
-                        {
-                            () =>
-                            {
-                                if (true)
+                                // Invalid #7
+                                case 1:
                                 {
+                                    var temp = this.x * this.x;
+                                    this.x = temp;
+                                [|}|]
+                                break;
+                            }
+                        }
+                        public void Example()
+                        {
+                            new List<Action>
+                            {
+                                () =>
+                                {
+                                    if (true)
+                                    {
+                                        return;
+                                    [|}|]
                                     return;
                                 }
-
-                                return;
-                            }
-                        };
+                            };
+                        }
                     }
-                }
-                """,
-                Options = { { CodeStyleOptions2.AllowStatementImmediatelyAfterBlock, CodeStyleOption2.FalseWithSuggestionEnforcement } }
+                    """,
+                FixedCode = """
+                    using System;
+                    using System.Collections.Generic;
+                    public class Goo
+                    {
+                        private int x;
+                        // Invalid #1
+                        public int Property1
+                        {
+                            get
+                            {        
+                                return this.x;
+                            }
+                            set
+                            {
+                                this.x = value;
+                            }
+                            /* some comment */
+                        }
+                        // Invalid #2
+                        public int Property2
+                        {
+                            get { return this.x; }
+                        }
+                        public void Baz()
+                        {
+                            // Invalid #3
+                            switch (this.x)
+                            {
+                                case 1:
+                                {
+                                    this.x = 1;
+                                    break;
+                                }
+                                case 2:
+                                    this.x = 2;
+                                    break;
+                            }
+                            // Invalid #4
+                            {
+                                var temp = this.x;
+                                this.x = temp * temp;
+                            }
+
+                            this.x++;
+                            // Invalid #5
+                            if (this.x > 1)
+                            {
+                                this.x = 1;
+                            }
+
+                            if (this.x < 0)
+                            {
+                                this.x = 0;
+                            }
+
+                            switch (this.x)
+                            {
+                                // Invalid #6
+                                case 0:
+                                if (this.x < 0)
+                                {
+                                    this.x = -1;
+                                }
+
+                                break;
+                                // Invalid #7
+                                case 1:
+                                {
+                                    var temp = this.x * this.x;
+                                    this.x = temp;
+                                }
+
+                                break;
+                            }
+                        }
+                        public void Example()
+                        {
+                            new List<Action>
+                            {
+                                () =>
+                                {
+                                    if (true)
+                                    {
+                                        return;
+                                    }
+
+                                    return;
+                                }
+                            };
+                        }
+                    }
+                    """,
+                Options =
+                {
+                    {
+                        CodeStyleOptions2.AllowStatementImmediatelyAfterBlock,
+                        CodeStyleOption2.FalseWithSuggestionEnforcement
+                    },
+                },
             }.RunAsync();
         }
     }

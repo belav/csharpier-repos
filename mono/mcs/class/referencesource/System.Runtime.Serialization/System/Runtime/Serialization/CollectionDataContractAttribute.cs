@@ -4,7 +4,11 @@
 
 namespace System.Runtime.Serialization
 {
-    [AttributeUsage(AttributeTargets.Class | AttributeTargets.Struct, Inherited = false, AllowMultiple = false)]
+    [AttributeUsage(
+        AttributeTargets.Class | AttributeTargets.Struct,
+        Inherited = false,
+        AllowMultiple = false
+    )]
     public sealed class CollectionDataContractAttribute : Attribute
     {
         string name;
@@ -20,9 +24,7 @@ namespace System.Runtime.Serialization
         bool isKeyNameSetExplicitly;
         bool isValueNameSetExplicitly;
 
-        public CollectionDataContractAttribute()
-        {
-        }
+        public CollectionDataContractAttribute() { }
 
         public string Namespace
         {
@@ -113,6 +115,5 @@ namespace System.Runtime.Serialization
         {
             get { return isValueNameSetExplicitly; }
         }
-
     }
 }

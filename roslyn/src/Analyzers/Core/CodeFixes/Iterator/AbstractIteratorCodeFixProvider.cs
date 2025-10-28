@@ -21,11 +21,19 @@ namespace Microsoft.CodeAnalysis.CodeFixes.Iterator
             return null;
         }
 
-        protected abstract Task<CodeAction> GetCodeFixAsync(SyntaxNode root, SyntaxNode node, Document document, Diagnostic diagnostics, CancellationToken cancellationToken);
+        protected abstract Task<CodeAction> GetCodeFixAsync(
+            SyntaxNode root,
+            SyntaxNode node,
+            Document document,
+            Diagnostic diagnostics,
+            CancellationToken cancellationToken
+        );
 
         public sealed override async Task RegisterCodeFixesAsync(CodeFixContext context)
         {
-            var root = await context.Document.GetSyntaxRootAsync(context.CancellationToken).ConfigureAwait(false);
+            var root = await context
+                .Document.GetSyntaxRootAsync(context.CancellationToken)
+                .ConfigureAwait(false);
             if (!TryGetNode(root, context.Span, out var node))
             {
                 return;
@@ -33,7 +41,14 @@ namespace Microsoft.CodeAnalysis.CodeFixes.Iterator
 
             var diagnostic = context.Diagnostics.FirstOrDefault();
 
-            var codeAction = await GetCodeFixAsync(root, node, context.Document, diagnostic, context.CancellationToken).ConfigureAwait(false);
+            var codeAction = await GetCodeFixAsync(
+                    root,
+                    node,
+                    context.Document,
+                    diagnostic,
+                    context.CancellationToken
+                )
+                .ConfigureAwait(false);
 
             if (codeAction != null)
             {

@@ -37,11 +37,13 @@ namespace System.Security.Cryptography.X509Certificates.Asn1
         {
             writer.PushSequence(tag);
 
-
             // DEFAULT value handler for CA.
             {
                 const int AsnBoolDerEncodeSize = 3;
-                AsnWriter tmp = new AsnWriter(AsnEncodingRules.DER, initialCapacity: AsnBoolDerEncodeSize);
+                AsnWriter tmp = new AsnWriter(
+                    AsnEncodingRules.DER,
+                    initialCapacity: AsnBoolDerEncodeSize
+                );
                 tmp.WriteBoolean(CA);
 
                 if (!tmp.EncodedValueEquals(DefaultCA))
@@ -49,7 +51,6 @@ namespace System.Security.Cryptography.X509Certificates.Asn1
                     tmp.CopyTo(writer);
                 }
             }
-
 
             if (PathLengthConstraint.HasValue)
             {
@@ -59,12 +60,19 @@ namespace System.Security.Cryptography.X509Certificates.Asn1
             writer.PopSequence(tag);
         }
 
-        internal static BasicConstraintsAsn Decode(ReadOnlyMemory<byte> encoded, AsnEncodingRules ruleSet)
+        internal static BasicConstraintsAsn Decode(
+            ReadOnlyMemory<byte> encoded,
+            AsnEncodingRules ruleSet
+        )
         {
             return Decode(Asn1Tag.Sequence, encoded, ruleSet);
         }
 
-        internal static BasicConstraintsAsn Decode(Asn1Tag expectedTag, ReadOnlyMemory<byte> encoded, AsnEncodingRules ruleSet)
+        internal static BasicConstraintsAsn Decode(
+            Asn1Tag expectedTag,
+            ReadOnlyMemory<byte> encoded,
+            AsnEncodingRules ruleSet
+        )
         {
             try
             {
@@ -85,7 +93,11 @@ namespace System.Security.Cryptography.X509Certificates.Asn1
             Decode(ref reader, Asn1Tag.Sequence, out decoded);
         }
 
-        internal static void Decode(ref AsnValueReader reader, Asn1Tag expectedTag, out BasicConstraintsAsn decoded)
+        internal static void Decode(
+            ref AsnValueReader reader,
+            Asn1Tag expectedTag,
+            out BasicConstraintsAsn decoded
+        )
         {
             try
             {
@@ -97,14 +109,20 @@ namespace System.Security.Cryptography.X509Certificates.Asn1
             }
         }
 
-        private static void DecodeCore(ref AsnValueReader reader, Asn1Tag expectedTag, out BasicConstraintsAsn decoded)
+        private static void DecodeCore(
+            ref AsnValueReader reader,
+            Asn1Tag expectedTag,
+            out BasicConstraintsAsn decoded
+        )
         {
             decoded = default;
             AsnValueReader sequenceReader = reader.ReadSequence(expectedTag);
             AsnValueReader defaultReader;
 
-
-            if (sequenceReader.HasData && sequenceReader.PeekTag().HasSameClassAndValue(Asn1Tag.Boolean))
+            if (
+                sequenceReader.HasData
+                && sequenceReader.PeekTag().HasSameClassAndValue(Asn1Tag.Boolean)
+            )
             {
                 decoded.CA = sequenceReader.ReadBoolean();
             }
@@ -114,10 +132,11 @@ namespace System.Security.Cryptography.X509Certificates.Asn1
                 decoded.CA = defaultReader.ReadBoolean();
             }
 
-
-            if (sequenceReader.HasData && sequenceReader.PeekTag().HasSameClassAndValue(Asn1Tag.Integer))
+            if (
+                sequenceReader.HasData
+                && sequenceReader.PeekTag().HasSameClassAndValue(Asn1Tag.Integer)
+            )
             {
-
                 if (sequenceReader.TryReadInt32(out int tmpPathLengthConstraint))
                 {
                     decoded.PathLengthConstraint = tmpPathLengthConstraint;
@@ -126,9 +145,7 @@ namespace System.Security.Cryptography.X509Certificates.Asn1
                 {
                     sequenceReader.ThrowIfNotEmpty();
                 }
-
             }
-
 
             sequenceReader.ThrowIfNotEmpty();
         }

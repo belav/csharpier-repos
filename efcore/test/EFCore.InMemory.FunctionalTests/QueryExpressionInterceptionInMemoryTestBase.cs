@@ -3,12 +3,11 @@
 
 namespace Microsoft.EntityFrameworkCore;
 
-public abstract class QueryExpressionInterceptionInMemoryTestBase : QueryExpressionInterceptionTestBase
+public abstract class QueryExpressionInterceptionInMemoryTestBase
+    : QueryExpressionInterceptionTestBase
 {
     protected QueryExpressionInterceptionInMemoryTestBase(InterceptionInMemoryFixtureBase fixture)
-        : base(fixture)
-    {
-    }
+        : base(fixture) { }
 
     public override UniverseContext Seed(UniverseContext context)
     {
@@ -18,7 +17,8 @@ public abstract class QueryExpressionInterceptionInMemoryTestBase : QueryExpress
             new Singularity { Id = 77, Type = "Black Hole" },
             new Singularity { Id = 88, Type = "Bing Bang" },
             new Brane { Id = 77, Type = "Black Hole?" },
-            new Brane { Id = 88, Type = "Bing Bang?" });
+            new Brane { Id = 88, Type = "Bing Bang?" }
+        );
 
         context.SaveChanges();
         context.ChangeTracker.Clear();
@@ -28,33 +28,34 @@ public abstract class QueryExpressionInterceptionInMemoryTestBase : QueryExpress
 
     public abstract class InterceptionInMemoryFixtureBase : InterceptionFixtureBase
     {
-        protected override string StoreName
-            => "QueryExpressionInterception";
+        protected override string StoreName => "QueryExpressionInterception";
 
-        protected override ITestStoreFactory TestStoreFactory
-            => InMemoryTestStoreFactory.Instance;
+        protected override ITestStoreFactory TestStoreFactory => InMemoryTestStoreFactory.Instance;
 
         protected override IServiceCollection InjectInterceptors(
             IServiceCollection serviceCollection,
-            IEnumerable<IInterceptor> injectedInterceptors)
-            => base.InjectInterceptors(serviceCollection.AddEntityFrameworkInMemoryDatabase(), injectedInterceptors);
+            IEnumerable<IInterceptor> injectedInterceptors
+        ) =>
+            base.InjectInterceptors(
+                serviceCollection.AddEntityFrameworkInMemoryDatabase(),
+                injectedInterceptors
+            );
 
-        public override DbContextOptionsBuilder AddOptions(DbContextOptionsBuilder builder)
-            => base.AddOptions(builder).ConfigureWarnings(c => c.Ignore(InMemoryEventId.TransactionIgnoredWarning));
+        public override DbContextOptionsBuilder AddOptions(DbContextOptionsBuilder builder) =>
+            base.AddOptions(builder)
+                .ConfigureWarnings(c => c.Ignore(InMemoryEventId.TransactionIgnoredWarning));
     }
 
     public class QueryExpressionInterceptionInMemoryTest
-        : QueryExpressionInterceptionInMemoryTestBase, IClassFixture<QueryExpressionInterceptionInMemoryTest.InterceptionInMemoryFixture>
+        : QueryExpressionInterceptionInMemoryTestBase,
+            IClassFixture<QueryExpressionInterceptionInMemoryTest.InterceptionInMemoryFixture>
     {
         public QueryExpressionInterceptionInMemoryTest(InterceptionInMemoryFixture fixture)
-            : base(fixture)
-        {
-        }
+            : base(fixture) { }
 
         public class InterceptionInMemoryFixture : InterceptionInMemoryFixtureBase
         {
-            protected override bool ShouldSubscribeToDiagnosticListener
-                => false;
+            protected override bool ShouldSubscribeToDiagnosticListener => false;
         }
     }
 
@@ -62,15 +63,14 @@ public abstract class QueryExpressionInterceptionInMemoryTestBase : QueryExpress
         : QueryExpressionInterceptionInMemoryTestBase,
             IClassFixture<QueryExpressionInterceptionWithDiagnosticsInMemoryTest.InterceptionInMemoryFixture>
     {
-        public QueryExpressionInterceptionWithDiagnosticsInMemoryTest(InterceptionInMemoryFixture fixture)
-            : base(fixture)
-        {
-        }
+        public QueryExpressionInterceptionWithDiagnosticsInMemoryTest(
+            InterceptionInMemoryFixture fixture
+        )
+            : base(fixture) { }
 
         public class InterceptionInMemoryFixture : InterceptionInMemoryFixtureBase
         {
-            protected override bool ShouldSubscribeToDiagnosticListener
-                => true;
+            protected override bool ShouldSubscribeToDiagnosticListener => true;
         }
     }
 }

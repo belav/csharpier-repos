@@ -23,11 +23,11 @@ using System;
 
 namespace System.DirectoryServices.ActiveDirectory
 {
-	public enum MinuteOfHour
-	{
-		Zero,
-		Fifteen = 15,
-		Thirty = 30,
-		FortyFive = 45
-	}
+    public enum MinuteOfHour
+    {
+        Zero,
+        Fifteen = 15,
+        Thirty = 30,
+        FortyFive = 45,
+    }
 }

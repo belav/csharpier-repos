@@ -5,7 +5,6 @@ using System.Net.Http;
 using System.Net.Test.Common;
 using System.Threading;
 using System.Threading.Tasks;
-
 using Xunit;
 using Xunit.Abstractions;
 
@@ -13,15 +12,21 @@ namespace System.Net.WebSockets.Client.Tests
 {
     public static class WebSocketHelper
     {
-        private static readonly Lazy<bool> s_WebSocketSupported = new Lazy<bool>(InitWebSocketSupported);
-        public static bool WebSocketsSupported { get { return s_WebSocketSupported.Value; } }
+        private static readonly Lazy<bool> s_WebSocketSupported = new Lazy<bool>(
+            InitWebSocketSupported
+        );
+        public static bool WebSocketsSupported
+        {
+            get { return s_WebSocketSupported.Value; }
+        }
 
         public static async Task TestEcho(
             Uri server,
             WebSocketMessageType type,
             int timeOutMilliseconds,
             ITestOutputHelper output,
-            HttpMessageInvoker? invoker = null)
+            HttpMessageInvoker? invoker = null
+        )
         {
             var cts = new CancellationTokenSource(timeOutMilliseconds);
             string message = "Hello WebSockets!";
@@ -29,10 +34,22 @@ namespace System.Net.WebSockets.Client.Tests
             var receiveBuffer = new byte[100];
             var receiveSegment = new ArraySegment<byte>(receiveBuffer);
 
-            using (ClientWebSocket cws = await GetConnectedWebSocket(server, timeOutMilliseconds, output, invoker: invoker))
+            using (
+                ClientWebSocket cws = await GetConnectedWebSocket(
+                    server,
+                    timeOutMilliseconds,
+                    output,
+                    invoker: invoker
+                )
+            )
             {
                 output.WriteLine("TestEcho: SendAsync starting.");
-                await cws.SendAsync(WebSocketData.GetBufferFromText(message), type, true, cts.Token);
+                await cws.SendAsync(
+                    WebSocketData.GetBufferFromText(message),
+                    type,
+                    true,
+                    cts.Token
+                );
                 output.WriteLine("TestEcho: SendAsync done.");
                 Assert.Equal(WebSocketState.Open, cws.State);
 
@@ -46,15 +63,26 @@ namespace System.Net.WebSockets.Client.Tests
                 Assert.Null(recvRet.CloseStatus);
                 Assert.Null(recvRet.CloseStatusDescription);
 
-                var recvSegment = new ArraySegment<byte>(receiveSegment.Array, receiveSegment.Offset, recvRet.Count);
+                var recvSegment = new ArraySegment<byte>(
+                    receiveSegment.Array,
+                    receiveSegment.Offset,
+                    recvRet.Count
+                );
                 Assert.Equal(message, WebSocketData.GetTextFromBuffer(recvSegment));
 
                 output.WriteLine("TestEcho: CloseAsync starting.");
-                Task taskClose = cws.CloseAsync(WebSocketCloseStatus.NormalClosure, closeMessage, cts.Token);
+                Task taskClose = cws.CloseAsync(
+                    WebSocketCloseStatus.NormalClosure,
+                    closeMessage,
+                    cts.Token
+                );
                 Assert.True(
-                    (cws.State == WebSocketState.Open) || (cws.State == WebSocketState.CloseSent) ||
-                    (cws.State == WebSocketState.CloseReceived) || (cws.State == WebSocketState.Closed),
-                    "State immediately after CloseAsync : " + cws.State);
+                    (cws.State == WebSocketState.Open)
+                        || (cws.State == WebSocketState.CloseSent)
+                        || (cws.State == WebSocketState.CloseReceived)
+                        || (cws.State == WebSocketState.Closed),
+                    "State immediately after CloseAsync : " + cws.State
+                );
                 await taskClose;
                 output.WriteLine("TestEcho: CloseAsync done.");
                 Assert.Equal(WebSocketState.Closed, cws.State);
@@ -69,36 +97,44 @@ namespace System.Net.WebSockets.Client.Tests
             ITestOutputHelper output,
             TimeSpan keepAliveInterval = default,
             IWebProxy proxy = null,
-            HttpMessageInvoker? invoker = null) =>
-            Retry(output, async () =>
-            {
-                var cws = new ClientWebSocket();
-                if (proxy != null)
+            HttpMessageInvoker? invoker = null
+        ) =>
+            Retry(
+                output,
+                async () =>
                 {
-                    cws.Options.Proxy = proxy;
-                }
+                    var cws = new ClientWebSocket();
+                    if (proxy != null)
+                    {
+                        cws.Options.Proxy = proxy;
+                    }
 
-                if (keepAliveInterval.TotalSeconds > 0)
-                {
-                    cws.Options.KeepAliveInterval = keepAliveInterval;
-                }
+                    if (keepAliveInterval.TotalSeconds > 0)
+                    {
+                        cws.Options.KeepAliveInterval = keepAliveInterval;
+                    }
 
-                using (var cts = new CancellationTokenSource(timeOutMilliseconds))
-                {
-                    output.WriteLine("GetConnectedWebSocket: ConnectAsync starting.");
-                    Task taskConnect = invoker == null ? cws.ConnectAsync(server, cts.Token) : cws.ConnectAsync(server, invoker, cts.Token);
-                    Assert.True(
-                        (cws.State == WebSocketState.None) ||
-                        (cws.State == WebSocketState.Connecting) ||
-                        (cws.State == WebSocketState.Open) ||
-                        (cws.State == WebSocketState.Aborted),
-                        "State immediately after ConnectAsync incorrect: " + cws.State);
-                    await taskConnect;
-                    output.WriteLine("GetConnectedWebSocket: ConnectAsync done.");
-                    Assert.Equal(WebSocketState.Open, cws.State);
+                    using (var cts = new CancellationTokenSource(timeOutMilliseconds))
+                    {
+                        output.WriteLine("GetConnectedWebSocket: ConnectAsync starting.");
+                        Task taskConnect =
+                            invoker == null
+                                ? cws.ConnectAsync(server, cts.Token)
+                                : cws.ConnectAsync(server, invoker, cts.Token);
+                        Assert.True(
+                            (cws.State == WebSocketState.None)
+                                || (cws.State == WebSocketState.Connecting)
+                                || (cws.State == WebSocketState.Open)
+                                || (cws.State == WebSocketState.Aborted),
+                            "State immediately after ConnectAsync incorrect: " + cws.State
+                        );
+                        await taskConnect;
+                        output.WriteLine("GetConnectedWebSocket: ConnectAsync done.");
+                        Assert.Equal(WebSocketState.Open, cws.State);
+                    }
+                    return cws;
                 }
-                return cws;
-            });
+            );
 
         public static async Task<T> Retry<T>(ITestOutputHelper output, Func<Task<T>> func)
         {

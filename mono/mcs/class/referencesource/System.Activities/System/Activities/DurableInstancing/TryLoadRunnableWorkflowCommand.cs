@@ -11,35 +11,33 @@ namespace System.Activities.DurableInstancing
     public sealed class TryLoadRunnableWorkflowCommand : InstancePersistenceCommand
     {
         public TryLoadRunnableWorkflowCommand()
-            : base(InstancePersistence.ActivitiesCommandNamespace.GetName("TryLoadRunnableWorkflow"))
-        {
-        }
+            : base(
+                InstancePersistence.ActivitiesCommandNamespace.GetName("TryLoadRunnableWorkflow")
+            ) { }
 
         protected internal override bool IsTransactionEnlistmentOptional
         {
-            get
-            {
-                return true;
-            }
+            get { return true; }
         }
 
         protected internal override bool AutomaticallyAcquiringLock
         {
-            get
-            {
-                return true;
-            }
+            get { return true; }
         }
 
         protected internal override void Validate(InstanceView view)
         {
             if (!view.IsBoundToInstanceOwner)
             {
-                throw FxTrace.Exception.AsError(new InvalidOperationException(SRCore.OwnerRequired));
+                throw FxTrace.Exception.AsError(
+                    new InvalidOperationException(SRCore.OwnerRequired)
+                );
             }
             if (view.IsBoundToInstance)
             {
-                throw FxTrace.Exception.AsError(new InvalidOperationException(SRCore.AlreadyBoundToInstance));
+                throw FxTrace.Exception.AsError(
+                    new InvalidOperationException(SRCore.AlreadyBoundToInstance)
+                );
             }
         }
     }

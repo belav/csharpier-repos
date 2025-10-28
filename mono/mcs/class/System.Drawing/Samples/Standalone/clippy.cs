@@ -33,94 +33,106 @@ using System.Drawing.Drawing2D;
 using System.Text;
 using System.Windows.Forms;
 
-namespace Samples {
-	public partial class Clippy: Form {
+namespace Samples
+{
+    public partial class Clippy : Form
+    {
+        private GraphicsPath path;
+        private Region clipping_region;
 
-		private GraphicsPath path;
-		private Region clipping_region;
+        public Clippy()
+        {
+            InitializeComponent();
 
-		public Clippy ()
-		{
-			InitializeComponent ();
+            object[] shapes = Samples.Common.Shapes.GetList();
+            shapeComboBox.Items.AddRange(shapes);
+            clippingComboBox.Items.AddRange(shapes);
+        }
 
-			object[] shapes = Samples.Common.Shapes.GetList ();
-			shapeComboBox.Items.AddRange (shapes);
-			clippingComboBox.Items.AddRange (shapes);
-		}
+        public bool Clip
+        {
+            get { return clipCheckBox.Checked; }
+        }
 
-		public bool Clip {
-			get { return clipCheckBox.Checked; }
-		}
+        public bool ShowClippingRegion
+        {
+            get { return showRegionCheckBox.Checked; }
+        }
 
-		public bool ShowClippingRegion {
-			get { return showRegionCheckBox.Checked; }
-		}
+        public GraphicsPath Path
+        {
+            get
+            {
+                if (path == null)
+                {
+                    path = Samples.Common.Shapes.GetShape(clippingComboBox.SelectedIndex);
+                    Matrix m = new Matrix();
+                    m.Translate(20, 20);
+                    path.Transform(m);
+                }
+                return path;
+            }
+        }
 
-		public GraphicsPath Path {
-			get {
-				if (path == null) {
-					path =  Samples.Common.Shapes.GetShape (clippingComboBox.SelectedIndex);
-					Matrix m = new Matrix ();
-					m.Translate (20, 20);
-					path.Transform (m);
-				}
-				return path;
-			}
-		}
+        public Region ClippingRegion
+        {
+            get
+            {
+                if (clipping_region == null)
+                {
+                    clipping_region = new Region(Path);
+                }
+                return clipping_region;
+            }
+        }
 
-		public Region ClippingRegion {
-			get {
-				if (clipping_region == null) {
-					clipping_region = new Region (Path);
-				}
-				return clipping_region;
-			}
-		}
+        private void Form1_Paint(object sender, PaintEventArgs e)
+        {
+            Region original = null;
+            if (ShowClippingRegion)
+            {
+                e.Graphics.DrawPath(Pens.Red, Path);
+            }
 
-		private void Form1_Paint (object sender, PaintEventArgs e)
-		{
-			Region original = null;
-			if (ShowClippingRegion) {
-				e.Graphics.DrawPath (Pens.Red, Path);
-			}
+            if (Clip)
+            {
+                original = e.Graphics.Clip;
+                e.Graphics.Clip = ClippingRegion;
+            }
 
-			if (Clip) {
-				original = e.Graphics.Clip;
-				e.Graphics.Clip = ClippingRegion;
-			}
+            GraphicsPath shape = Samples.Common.Shapes.GetShape(shapeComboBox.SelectedIndex);
+            if (shape == null)
+                return;
+            shape.FillMode = fillModecheckBox.Checked ? FillMode.Winding : FillMode.Alternate;
 
-			GraphicsPath shape = Samples.Common.Shapes.GetShape (shapeComboBox.SelectedIndex);
-			if (shape == null)
-				return;
-			shape.FillMode = fillModecheckBox.Checked ? FillMode.Winding : FillMode.Alternate;
+            e.Graphics.FillPath(Brushes.Blue, shape);
 
-			e.Graphics.FillPath (Brushes.Blue, shape);
+            if (original != null)
+            {
+                e.Graphics.Clip.Dispose();
+                e.Graphics.Clip = original;
+            }
+        }
 
-			if (original != null) {
-				e.Graphics.Clip.Dispose ();
-				e.Graphics.Clip = original;
-			}
-		}
+        private void UpdateDisplay(object sender, EventArgs e)
+        {
+            Invalidate();
+            Update();
+        }
 
-		private void UpdateDisplay (object sender, EventArgs e)
-		{
-			Invalidate ();
-			Update ();
-		}
+        private void UpdateShapes(object sender, EventArgs e)
+        {
+            path = null;
+            clipping_region = null;
+            UpdateDisplay(sender, e);
+        }
 
-		private void UpdateShapes (object sender, EventArgs e)
-		{
-			path = null;
-			clipping_region = null;
-			UpdateDisplay (sender, e);
-		}
-
-		[STAThread]
-		static void Main ()
-		{
-			Application.EnableVisualStyles ();
-			Application.SetCompatibleTextRenderingDefault (false);
-			Application.Run (new Clippy ());
-		}
-	}
+        [STAThread]
+        static void Main()
+        {
+            Application.EnableVisualStyles();
+            Application.SetCompatibleTextRenderingDefault(false);
+            Application.Run(new Clippy());
+        }
+    }
 }

@@ -15,10 +15,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -33,7 +33,6 @@ using System.Collections;
 using System.ComponentModel;
 using System.IO;
 using System.Text;
-
 using RabbitMQ.Client;
 using RabbitMQ.Client.Content;
 using RabbitMQ.Client.Events;
@@ -41,23 +40,22 @@ using RabbitMQ.Client.Exceptions;
 using RabbitMQ.Client.MessagePatterns;
 using RabbitMQ.Util;
 
-namespace Mono.Messaging.RabbitMQ {
+namespace Mono.Messaging.RabbitMQ
+{
+    /// <summary>
+    /// </summary>
+    public interface IMessagingContext : IDisposable
+    {
+        IMessage Receive(QueueReference qRef, TimeSpan timeout, IsMatch matcher, bool ack);
+        void Send(QueueReference qRef, IMessage msg);
 
-	/// <summary>
-	/// </summary>
-	public interface IMessagingContext : IDisposable {
-		
-		IMessage Receive (QueueReference qRef, TimeSpan timeout, IsMatch matcher, bool ack);
-		void Send (QueueReference qRef, IMessage msg);
-		
-		// IConnection Connection { get; }
-		// IModel Model { get; }
-		void Delete (QueueReference qRef);
-		void Purge (QueueReference qRef);
-	}
-	
-	public delegate bool IsMatch (BasicDeliverEventArgs result);
-	
-	public delegate IConnection CreateConnectionDelegate (string host);
-	
+        // IConnection Connection { get; }
+        // IModel Model { get; }
+        void Delete(QueueReference qRef);
+        void Purge(QueueReference qRef);
+    }
+
+    public delegate bool IsMatch(BasicDeliverEventArgs result);
+
+    public delegate IConnection CreateConnectionDelegate(string host);
 }

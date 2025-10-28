@@ -111,14 +111,8 @@ namespace System.Text.Json.Nodes
         /// </summary>
         public JsonNode? Parent
         {
-            get
-            {
-                return _parent;
-            }
-            internal set
-            {
-                _parent = value;
-            }
+            get { return _parent; }
+            internal set { _parent = value; }
         }
 
         /// <summary>
@@ -132,7 +126,9 @@ namespace System.Text.Json.Nodes
                 return "$";
             }
 
-            var path = new ValueStringBuilder(stackalloc char[JsonConstants.StackallocCharThreshold]);
+            var path = new ValueStringBuilder(
+                stackalloc char[JsonConstants.StackallocCharThreshold]
+            );
             path.Append('$');
             GetPath(ref path, null);
             return path.ToString();
@@ -201,14 +197,8 @@ namespace System.Text.Json.Nodes
         /// </exception>
         public JsonNode? this[int index]
         {
-            get
-            {
-                return AsArray().GetItem(index);
-            }
-            set
-            {
-                AsArray().SetItem(index, value);
-            }
+            get { return AsArray().GetItem(index); }
+            set { AsArray().SetItem(index, value); }
         }
 
         /// <summary>
@@ -224,14 +214,8 @@ namespace System.Text.Json.Nodes
         /// </exception>
         public JsonNode? this[string propertyName]
         {
-            get
-            {
-                return AsObject().GetItem(propertyName);
-            }
-            set
-            {
-                AsObject().SetItem(propertyName, value);
-            }
+            get { return AsObject().GetItem(propertyName); }
+            set { AsObject().SetItem(propertyName, value); }
         }
 
         /// <summary>
@@ -371,7 +355,8 @@ namespace System.Text.Json.Nodes
                 return JsonNodeConverter.Create(element, options);
             }
 
-            var jsonTypeInfo = (JsonTypeInfo<T>)JsonSerializerOptions.Default.GetTypeInfo(typeof(T));
+            var jsonTypeInfo =
+                (JsonTypeInfo<T>)JsonSerializerOptions.Default.GetTypeInfo(typeof(T));
             return new JsonValueCustomized<T>(value, jsonTypeInfo, options);
         }
     }

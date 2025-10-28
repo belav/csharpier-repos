@@ -1,8 +1,8 @@
 #region Using Directives
 using System;
-using System.Resources;
 using System.Drawing;
 using System.Globalization;
+using System.Resources;
 #endregion
 
 namespace System.Workflow.ComponentModel.Design
@@ -10,8 +10,12 @@ namespace System.Workflow.ComponentModel.Design
     #region Class DesignerResources (DR)
     internal static class DR
     {
-        internal const string ResourceSet = "System.Workflow.ComponentModel.Design.DesignerResources";
-        private static ResourceManager resourceManager = new ResourceManager(ResourceSet, System.Reflection.Assembly.GetExecutingAssembly());
+        internal const string ResourceSet =
+            "System.Workflow.ComponentModel.Design.DesignerResources";
+        private static ResourceManager resourceManager = new ResourceManager(
+            ResourceSet,
+            System.Reflection.Assembly.GetExecutingAssembly()
+        );
 
         internal const string ViewPreviousActivity = "ViewPreviousActivity";
         internal const string ViewNextActivity = "ViewNextActivity";
@@ -50,14 +54,21 @@ namespace System.Workflow.ComponentModel.Design
         internal const string Zoom50Mode = "Zoom50Mode";
         internal const string ZoomShowAll = "ZoomShowAll";
         internal const string ActivityInsertError = "ActivityInsertError";
-        internal const string InvalidOperationBadClipboardFormat = "InvalidOperationBadClipboardFormat";
-        internal const string ArgumentExceptionDesignerVerbIdsRange = "ArgumentExceptionDesignerVerbIdsRange";
-        internal const string InvalidOperationStoreAlreadyClosed = "InvalidOperationStoreAlreadyClosed";
-        internal const string InvalidOperationDeserializationReturnedNonActivity = "InvalidOperationDeserializationReturnedNonActivity";
+        internal const string InvalidOperationBadClipboardFormat =
+            "InvalidOperationBadClipboardFormat";
+        internal const string ArgumentExceptionDesignerVerbIdsRange =
+            "ArgumentExceptionDesignerVerbIdsRange";
+        internal const string InvalidOperationStoreAlreadyClosed =
+            "InvalidOperationStoreAlreadyClosed";
+        internal const string InvalidOperationDeserializationReturnedNonActivity =
+            "InvalidOperationDeserializationReturnedNonActivity";
         internal const string AccessibleAction = "AccessibleAction";
-        internal const string LeftScrollButtonAccessibleDescription = "LeftScrollButtonAccessibleDescription";
-        internal const string RightScrollButtonAccessibleDescription = "RightScrollButtonAccessibleDescription";
-        internal const string ActivityDesignerAccessibleDescription = "ActivityDesignerAccessibleDescription";
+        internal const string LeftScrollButtonAccessibleDescription =
+            "LeftScrollButtonAccessibleDescription";
+        internal const string RightScrollButtonAccessibleDescription =
+            "RightScrollButtonAccessibleDescription";
+        internal const string ActivityDesignerAccessibleDescription =
+            "ActivityDesignerAccessibleDescription";
         internal const string LeftScrollButtonAccessibleHelp = "LeftScrollButtonAccessibleHelp";
         internal const string RightScrollButtonAccessibleHelp = "RightScrollButtonAccessibleHelp";
         internal const string ActivityDesignerAccessibleHelp = "ActivityDesignerAccessibleHelp";
@@ -66,7 +77,8 @@ namespace System.Workflow.ComponentModel.Design
         internal const string SelectActivityDesc = "SelectActivityDesc";
         internal const string PreviewMode = "PreviewMode";
         internal const string EditMode = "EditMode";
-        internal const string PreviewButtonAccessibleDescription = "PreviewButtonAccessibleDescription";
+        internal const string PreviewButtonAccessibleDescription =
+            "PreviewButtonAccessibleDescription";
         internal const string PreviewButtonAccessibleHelp = "PreviewButtonAccessibleHelp";
         internal const string PreviewButtonName = "PreviewButtonName";
         internal const string CancelDescriptionString = "CancelDescriptionString";
@@ -81,7 +93,8 @@ namespace System.Workflow.ComponentModel.Design
         internal const string HeaderFooterFormat7 = "HeaderFooterFormat7";
         internal const string HeaderFooterFormat8 = "HeaderFooterFormat8";
         internal const string HeaderFooterFormat9 = "HeaderFooterFormat9";
-        internal const string EnteredMarginsAreNotValidErrorMessage = "EnteredMarginsAreNotValidErrorMessage";
+        internal const string EnteredMarginsAreNotValidErrorMessage =
+            "EnteredMarginsAreNotValidErrorMessage";
         internal const string ChildActivitiesNotConfigured = "ChildActivitiesNotConfigured";
         internal const string ConnectorAccessibleDescription = "ConnectorAccessibleDescription";
         internal const string ConnectorAccessibleHelp = "ConnectorAccessibleHelp";
@@ -100,12 +113,16 @@ namespace System.Workflow.ComponentModel.Design
         internal const string ContentAlignmentNotSupported = "ContentAlignmentNotSupported";
         internal const string ZoomLevelException2 = "ZoomLevelException2";
         internal const string ShadowDepthException = "ShadowDepthException";
-        internal const string ThereIsNoPrinterInstalledErrorMessage = "ThereIsNoPrinterInstalledErrorMessage";
-        internal const string WorkflowViewAccessibleDescription = "WorkflowViewAccessibleDescription";
+        internal const string ThereIsNoPrinterInstalledErrorMessage =
+            "ThereIsNoPrinterInstalledErrorMessage";
+        internal const string WorkflowViewAccessibleDescription =
+            "WorkflowViewAccessibleDescription";
         internal const string WorkflowViewAccessibleHelp = "WorkflowViewAccessibleHelp";
         internal const string WorkflowViewAccessibleName = "WorkflowViewAccessibleName";
-        internal const string SelectedPrinterIsInvalidErrorMessage = "SelectedPrinterIsInvalidErrorMessage";
-        internal const string ObjectDoesNotSupportIPropertyValuesProvider = "ObjectDoesNotSupportIPropertyValuesProvider";
+        internal const string SelectedPrinterIsInvalidErrorMessage =
+            "SelectedPrinterIsInvalidErrorMessage";
+        internal const string ObjectDoesNotSupportIPropertyValuesProvider =
+            "ObjectDoesNotSupportIPropertyValuesProvider";
         internal const string ThemeFileFilter = "ThemeFileFilter";
         internal const string ThemeConfig = "ThemeConfig";
         internal const string ThemeNameNotValid = "ThemeNameNotValid";
@@ -115,7 +132,8 @@ namespace System.Workflow.ComponentModel.Design
         internal const string ThemeDescription = "ThemeDescription";
         internal const string ThemeFileCreationError = "ThemeFileCreationError";
         internal const string Preview = "Preview";
-        internal const string ArgumentExceptionSmartActionIdsRange = "ArgumentExceptionSmartActionIdsRange";
+        internal const string ArgumentExceptionSmartActionIdsRange =
+            "ArgumentExceptionSmartActionIdsRange";
         internal const string ActivitiesDesc = "ActivitiesDesc";
         internal const string MoveLeftDesc = "MoveLeftDesc";
         internal const string MoveRightDesc = "MoveRightDesc";
@@ -133,7 +151,8 @@ namespace System.Workflow.ComponentModel.Design
         internal const string InvalidClassNameIdentifier = "InvalidClassNameIdentifier";
         internal const string InvalidBaseTypeOfCompanion = "InvalidBaseTypeOfCompanion";
         internal const string Error_InvalidActivity = "Error_InvalidActivity";
-        internal const string Error_MultiviewSequentialActivityDesigner = "Error_MultiviewSequentialActivityDesigner";
+        internal const string Error_MultiviewSequentialActivityDesigner =
+            "Error_MultiviewSequentialActivityDesigner";
         internal const string AddingBranch = "AddingBranch";
         internal const string WorkflowPrintDocumentNotFound = "WorkflowPrintDocumentNotFound";
         internal const string DefaultTheme = "DefaultTheme";
@@ -150,11 +169,14 @@ namespace System.Workflow.ComponentModel.Design
         internal const string InfoTipTitle = "InfoTipTitle";
         internal const string InfoTipId = "InfoTipId";
         internal const string InfoTipDescription = "InfoTipDescription";
-        internal const string TypeBrowser_ProblemsLoadingAssembly = "TypeBrowser_ProblemsLoadingAssembly";
-        internal const string TypeBrowser_UnableToLoadOneOrMoreTypes = "TypeBrowser_UnableToLoadOneOrMoreTypes";
+        internal const string TypeBrowser_ProblemsLoadingAssembly =
+            "TypeBrowser_ProblemsLoadingAssembly";
+        internal const string TypeBrowser_UnableToLoadOneOrMoreTypes =
+            "TypeBrowser_UnableToLoadOneOrMoreTypes";
         internal const string StartWorkflow = "StartWorkflow";
         internal const string EndWorkflow = "EndWorkflow";
-        internal const string Error_FailedToDeserializeComponents = "Error_FailedToDeserializeComponents";
+        internal const string Error_FailedToDeserializeComponents =
+            "Error_FailedToDeserializeComponents";
         internal const string Error_Reason = "Error_Reason";
         internal const string WorkflowDesignerTitle = "WorkflowDesignerTitle";
         internal const string RuleName = "RuleName";
@@ -234,7 +256,10 @@ namespace System.Workflow.ComponentModel.Design
         internal static string GetString(CultureInfo culture, string resID, params object[] args)
         {
             string str = DR.resourceManager.GetString(resID, culture);
-            System.Diagnostics.Debug.Assert(str != null, string.Format(culture, "String resource {0} not found.", new object[] { resID }));
+            System.Diagnostics.Debug.Assert(
+                str != null,
+                string.Format(culture, "String resource {0} not found.", new object[] { resID })
+            );
             if (args != null && args.Length > 0)
                 str = string.Format(culture, str, args);
             return str;

@@ -10,10 +10,11 @@ namespace System.IdentityModel.Selectors
     internal struct RpcAsymmetricCryptoParameters
     {
         public int keySize;
+
         [MarshalAs(UnmanagedType.LPWStr)]
         public string keyExchangeAlgorithm;
+
         [MarshalAs(UnmanagedType.LPWStr)]
         public string signatureAlgorithm;
     }
 }
-

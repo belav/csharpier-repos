@@ -1,5 +1,4 @@
-﻿
-#if (DOTNET || PORTABLE40 || PORTABLE)
+﻿#if (DOTNET || PORTABLE40 || PORTABLE)
 using System;
 using System.Reflection;
 
@@ -25,7 +24,11 @@ namespace Newtonsoft.Json
         /// <param name="serializedType">The type of the object the formatter creates a new instance of.</param>
         /// <param name="assemblyName">Specifies the <see cref="Assembly"/> name of the serialized object.</param>
         /// <param name="typeName">Specifies the <see cref="System.Type"/> name of the serialized object.</param>
-        public virtual void BindToName(Type serializedType, out string? assemblyName, out string? typeName)
+        public virtual void BindToName(
+            Type serializedType,
+            out string? assemblyName,
+            out string? typeName
+        )
         {
             assemblyName = null;
             typeName = null;

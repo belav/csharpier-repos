@@ -1,5 +1,4 @@
 <Project Sdk="Microsoft.NET.Sdk">
-
   <PropertyGroup>
     <AssemblyVersion>4.0.0.0</AssemblyVersion>
     <StrongNameKeyId>ECMA</StrongNameKeyId>
@@ -10,5 +9,4 @@
     <ProjectReference Include="$(LibrariesProjectRoot)System.Xml.ReaderWriter\src\System.Xml.ReaderWriter.csproj" />
     <ProjectReference Include="$(LibrariesProjectRoot)System.Xml.XmlSerializer\src\System.Xml.XmlSerializer.csproj" />
   </ItemGroup>
-
 </Project>

@@ -11,14 +11,20 @@ namespace CoreXml.Test.XLinq.FunctionalTests.EventsTests
 {
     public class EventsRemove
     {
-        public static object[][] ExecuteXDocumentVariationParams = new object[][] {
+        public static object[][] ExecuteXDocumentVariationParams = new object[][]
+        {
             new object[] { new XNode[] { new XElement("element") }, 0 },
-            new object[] { new XNode[] { new XElement("parent", new XElement("child", "child text")) }, 0 },
+            new object[]
+            {
+                new XNode[] { new XElement("parent", new XElement("child", "child text")) },
+                0,
+            },
             new object[] { new XNode[] { new XDocumentType("root", "", "", "") }, 0 },
             new object[] { new XNode[] { new XProcessingInstruction("PI", "Data") }, 0 },
             new object[] { new XNode[] { new XComment("Comment") }, 0 },
-            new object[] { new XNode[] { new XText(""), new XText(" "), new XText("\t") }, 1 }
+            new object[] { new XNode[] { new XText(""), new XText(" "), new XText("\t") }, 1 },
         };
+
         [Theory, MemberData(nameof(ExecuteXDocumentVariationParams))]
         public void ExecuteXDocumentVariation(XNode[] content, int index)
         {
@@ -38,19 +44,42 @@ namespace CoreXml.Test.XLinq.FunctionalTests.EventsTests
             }
         }
 
-        public static object[][] ExecuteXElementVariationParams = new object[][] {
+        public static object[][] ExecuteXElementVariationParams = new object[][]
+        {
             new object[] { new XNode[] { new XElement("element") }, 0 },
-            new object[] { new XNode[] { new XElement("parent", new XElement("child", "child text")) }, 0 },
-            new object[] { new XNode[] { new XElement("parent", "parent text"), new XElement("child", "child text") }, 1 },
-            new object[] { new XNode[] { new XElement("parent", "parent text"), new XText("text"), new XElement("child", "child text") }, 1 },
+            new object[]
+            {
+                new XNode[] { new XElement("parent", new XElement("child", "child text")) },
+                0,
+            },
+            new object[]
+            {
+                new XNode[]
+                {
+                    new XElement("parent", "parent text"),
+                    new XElement("child", "child text"),
+                },
+                1,
+            },
+            new object[]
+            {
+                new XNode[]
+                {
+                    new XElement("parent", "parent text"),
+                    new XText("text"),
+                    new XElement("child", "child text"),
+                },
+                1,
+            },
             new object[] { new XNode[] { new XCData("x+y >= z-m") }, 0 },
             new object[] { new XNode[] { new XProcessingInstruction("PI", "Data") }, 0 },
             new object[] { new XNode[] { new XComment("Comment") }, 0 },
             new object[] { new XNode[] { new XText(""), new XText(" "), new XText("\t") }, 0 },
             new object[] { new XNode[] { new XText(""), new XText(" "), new XText("\t") }, 1 },
             new object[] { new XNode[] { new XText(""), new XText(" "), new XText("\t") }, 2 },
-            new object[] { InputSpace.GetElement(100, 10).DescendantNodes().ToArray(), 50 }
+            new object[] { InputSpace.GetElement(100, 10).DescendantNodes().ToArray(), 50 },
         };
+
         [Theory, MemberData(nameof(ExecuteXElementVariationParams))]
         public void ExecuteXElementVariation(XNode[] content, int index)
         {
@@ -67,18 +96,47 @@ namespace CoreXml.Test.XLinq.FunctionalTests.EventsTests
                     elemHelper.Verify(XObjectChange.Remove, toRemove);
                 }
                 undo.Undo();
-                Assert.True(xElem.Nodes().SequenceEqual(xElemOriginal.Nodes(), XNode.EqualityComparer), "Undo did not work!");
-                Assert.True(xElem.Attributes().EqualsAllAttributes(xElemOriginal.Attributes(), Helpers.MyAttributeComparer), "Undo did not work!");
+                Assert.True(
+                    xElem.Nodes().SequenceEqual(xElemOriginal.Nodes(), XNode.EqualityComparer),
+                    "Undo did not work!"
+                );
+                Assert.True(
+                    xElem
+                        .Attributes()
+                        .EqualsAllAttributes(
+                            xElemOriginal.Attributes(),
+                            Helpers.MyAttributeComparer
+                        ),
+                    "Undo did not work!"
+                );
             }
         }
 
-        public static object[][] ExecuteXAttributeVariationParams = new object[][] {
+        public static object[][] ExecuteXAttributeVariationParams = new object[][]
+        {
             new object[] { new XAttribute[] { new XAttribute("xxx", "yyy") }, 0 },
             new object[] { new XAttribute[] { new XAttribute("{a}xxx", "a_yyy") }, 0 },
-            new object[] { new XAttribute[] { new XAttribute("xxx", "yyy"), new XAttribute("a", "aa") }, 1 },
-            new object[] { new XAttribute[] { new XAttribute("{b}xxx", "b_yyy"), new XAttribute("{a}xxx", "a_yyy") }, 0 },
-            new object[] { InputSpace.GetAttributeElement(10, 1000).Elements().Attributes().ToArray(), 10 }
+            new object[]
+            {
+                new XAttribute[] { new XAttribute("xxx", "yyy"), new XAttribute("a", "aa") },
+                1,
+            },
+            new object[]
+            {
+                new XAttribute[]
+                {
+                    new XAttribute("{b}xxx", "b_yyy"),
+                    new XAttribute("{a}xxx", "a_yyy"),
+                },
+                0,
+            },
+            new object[]
+            {
+                InputSpace.GetAttributeElement(10, 1000).Elements().Attributes().ToArray(),
+                10,
+            },
         };
+
         [Theory, MemberData(nameof(ExecuteXAttributeVariationParams))]
         public void ExecuteXAttributeVariation(XAttribute[] content, int index)
         {
@@ -95,8 +153,19 @@ namespace CoreXml.Test.XLinq.FunctionalTests.EventsTests
                     elemHelper.Verify(XObjectChange.Remove, toRemove);
                 }
                 undo.Undo();
-                Assert.True(xElem.Nodes().SequenceEqual(xElemOriginal.Nodes(), XNode.EqualityComparer), "Undo did not work!");
-                Assert.True(xElem.Attributes().EqualsAllAttributes(xElemOriginal.Attributes(), Helpers.MyAttributeComparer), "Undo did not work!");
+                Assert.True(
+                    xElem.Nodes().SequenceEqual(xElemOriginal.Nodes(), XNode.EqualityComparer),
+                    "Undo did not work!"
+                );
+                Assert.True(
+                    xElem
+                        .Attributes()
+                        .EqualsAllAttributes(
+                            xElemOriginal.Attributes(),
+                            Helpers.MyAttributeComparer
+                        ),
+                    "Undo did not work!"
+                );
             }
         }
 
@@ -298,16 +367,20 @@ namespace CoreXml.Test.XLinq.FunctionalTests.EventsTests
             XElement child = new XElement("Add", "Me");
             element.Add(child);
             element.Changing += new EventHandler<XObjectChangeEventArgs>(
-                delegate (object sender, XObjectChangeEventArgs e)
+                delegate(object sender, XObjectChangeEventArgs e)
                 {
                     if (firstTime)
                     {
                         firstTime = false;
                         child.Remove();
                     }
-                });
+                }
+            );
 
-            Assert.Throws<InvalidOperationException>(() => { child.Remove(); });
+            Assert.Throws<InvalidOperationException>(() =>
+            {
+                child.Remove();
+            });
             element.Verify();
         }
 
@@ -319,30 +392,39 @@ namespace CoreXml.Test.XLinq.FunctionalTests.EventsTests
             XAttribute child = new XAttribute("Add", "Me");
             element.Add(child);
             element.Changing += new EventHandler<XObjectChangeEventArgs>(
-                delegate (object sender, XObjectChangeEventArgs e)
+                delegate(object sender, XObjectChangeEventArgs e)
                 {
                     if (firstTime)
                     {
                         firstTime = false;
                         child.Remove();
                     }
-                });
+                }
+            );
 
-            Assert.Throws<InvalidOperationException>(() => { child.Remove(); });
+            Assert.Throws<InvalidOperationException>(() =>
+            {
+                child.Remove();
+            });
             element.Verify();
         }
     }
 
     public class EventsRemoveNodes
     {
-        public static object[][] ExecuteXDocumentVariationParams = new object[][] {
+        public static object[][] ExecuteXDocumentVariationParams = new object[][]
+        {
             new object[] { new XNode[] { new XElement("element") } },
-            new object[] { new XNode[] { new XElement("parent", new XElement("child", "child text")) } },
+            new object[]
+            {
+                new XNode[] { new XElement("parent", new XElement("child", "child text")) },
+            },
             new object[] { new XNode[] { new XDocumentType("root", "", "", "") } },
             new object[] { new XNode[] { new XProcessingInstruction("PI", "Data") } },
             new object[] { new XNode[] { new XComment("Comment") } },
-            new object[] { new XNode[] { new XText(""), new XText(" "), new XText("\t") } }
+            new object[] { new XNode[] { new XText(""), new XText(" "), new XText("\t") } },
         };
+
         [Theory, MemberData(nameof(ExecuteXDocumentVariationParams))]
         public void ExecuteXDocumentVariation(XNode[] content)
         {
@@ -361,19 +443,28 @@ namespace CoreXml.Test.XLinq.FunctionalTests.EventsTests
             }
         }
 
-        public static object[][] ExecuteXElementVariationParams = new object[][] {
+        public static object[][] ExecuteXElementVariationParams = new object[][]
+        {
             new object[] { new XNode[] { new XElement("element") } },
-            new object[] { new XNode[] { new XElement("parent", new XElement("child", "child text")) } },
+            new object[]
+            {
+                new XNode[] { new XElement("parent", new XElement("child", "child text")) },
+            },
             new object[] { new XNode[] { new XCData("x+y >= z-m") } },
             new object[] { new XNode[] { new XProcessingInstruction("PI", "Data") } },
             new object[] { new XNode[] { new XComment("Comment") } },
             new object[] { new XNode[] { new XText(""), new XText(" "), new XText("\t") } },
-            new object[] { InputSpace.GetElement(100, 10).DescendantNodes().ToArray() }
+            new object[] { InputSpace.GetElement(100, 10).DescendantNodes().ToArray() },
         };
+
         [Theory, MemberData(nameof(ExecuteXElementVariationParams))]
         public void ExecuteXElementVariation(XNode[] content)
         {
-            XElement xElem = new XElement("root", InputSpace.GetAttributeElement(10, 1000).Elements().Attributes(), content);
+            XElement xElem = new XElement(
+                "root",
+                InputSpace.GetAttributeElement(10, 1000).Elements().Attributes(),
+                content
+            );
             XElement xElemOriginal = new XElement(xElem);
             using (UndoManager undo = new UndoManager(xElem))
             {
@@ -387,8 +478,19 @@ namespace CoreXml.Test.XLinq.FunctionalTests.EventsTests
                     elemHelper.Verify(XObjectChange.Remove, content);
                 }
                 undo.Undo();
-                Assert.True(xElem.Nodes().SequenceEqual(xElemOriginal.Nodes(), XNode.EqualityComparer), "Undo did not work!");
-                Assert.True(xElem.Attributes().EqualsAllAttributes(xElemOriginal.Attributes(), Helpers.MyAttributeComparer), "Undo did not work!");
+                Assert.True(
+                    xElem.Nodes().SequenceEqual(xElemOriginal.Nodes(), XNode.EqualityComparer),
+                    "Undo did not work!"
+                );
+                Assert.True(
+                    xElem
+                        .Attributes()
+                        .EqualsAllAttributes(
+                            xElemOriginal.Attributes(),
+                            Helpers.MyAttributeComparer
+                        ),
+                    "Undo did not work!"
+                );
             }
         }
 
@@ -409,16 +511,20 @@ namespace CoreXml.Test.XLinq.FunctionalTests.EventsTests
             XElement element = XElement.Parse("<root></root>");
             XElement child = new XElement("Add", "Me");
             element.Changing += new EventHandler<XObjectChangeEventArgs>(
-                delegate (object sender, XObjectChangeEventArgs e)
+                delegate(object sender, XObjectChangeEventArgs e)
                 {
                     if (firstTime)
                     {
                         firstTime = false;
                         element.Add(child);
                     }
-                });
+                }
+            );
 
-            Assert.Throws<InvalidOperationException>(() => { element.RemoveNodes(); });
+            Assert.Throws<InvalidOperationException>(() =>
+            {
+                element.RemoveNodes();
+            });
             element.Verify();
             Assert.NotNull(element.Element("Add"));
         }
@@ -432,16 +538,20 @@ namespace CoreXml.Test.XLinq.FunctionalTests.EventsTests
             XElement twoChild = new XElement("two", "2");
             element.Add(oneChild, twoChild);
             element.Changing += new EventHandler<XObjectChangeEventArgs>(
-                delegate (object sender, XObjectChangeEventArgs e)
+                delegate(object sender, XObjectChangeEventArgs e)
                 {
                     if (firstTime)
                     {
                         firstTime = false;
                         element.RemoveNodes();
                     }
-                });
+                }
+            );
 
-            Assert.Throws<InvalidOperationException>(() => { element.RemoveNodes(); });
+            Assert.Throws<InvalidOperationException>(() =>
+            {
+                element.RemoveNodes();
+            });
             element.Verify();
         }
 
@@ -454,25 +564,33 @@ namespace CoreXml.Test.XLinq.FunctionalTests.EventsTests
             XAttribute twoChild = new XAttribute("two", "2");
             element.Add(oneChild, twoChild);
             element.Changing += new EventHandler<XObjectChangeEventArgs>(
-                delegate (object sender, XObjectChangeEventArgs e)
+                delegate(object sender, XObjectChangeEventArgs e)
                 {
                     if (firstTime)
                     {
                         firstTime = false;
                         element.RemoveAttributes();
                     }
-                });
+                }
+            );
 
-            Assert.Throws<InvalidOperationException>(() => { element.RemoveAttributes(); });
+            Assert.Throws<InvalidOperationException>(() =>
+            {
+                element.RemoveAttributes();
+            });
             element.Verify();
         }
     }
 
     public class EventsRemoveAll
     {
-        public static object[][] ExecuteXElementVariationParams = new object[][] {
+        public static object[][] ExecuteXElementVariationParams = new object[][]
+        {
             new object[] { new XObject[] { new XElement("element") } },
-            new object[] { new XObject[] { new XElement("parent", new XElement("child", "child text")) } },
+            new object[]
+            {
+                new XObject[] { new XElement("parent", new XElement("child", "child text")) },
+            },
             new object[] { new XObject[] { new XCData("x+y >= z-m") } },
             new object[] { new XObject[] { new XProcessingInstruction("PI", "Data") } },
             new object[] { new XObject[] { new XComment("Comment") } },
@@ -480,11 +598,32 @@ namespace CoreXml.Test.XLinq.FunctionalTests.EventsTests
             new object[] { InputSpace.GetElement(100, 10).DescendantNodes().ToArray() },
             new object[] { new XObject[] { new XAttribute("xxx", "yyy") } },
             new object[] { new XObject[] { new XAttribute("{a}xxx", "a_yyy") } },
-            new object[] { new XObject[] { new XAttribute("xxx", "yyy"), new XAttribute("a", "aa") } },
-            new object[] { new XObject[] { new XAttribute("{b}xxx", "b_yyy"), new XAttribute("{a}xxx", "a_yyy") } },
-            new object[] { InputSpace.GetAttributeElement(10, 1000).Elements().Attributes().ToArray() },
-            new object[] { new XObject[] { new XAttribute("{b}xxx", "b_yyy"), new XElement("parent", new XElement("child", "child text")) } }
+            new object[]
+            {
+                new XObject[] { new XAttribute("xxx", "yyy"), new XAttribute("a", "aa") },
+            },
+            new object[]
+            {
+                new XObject[]
+                {
+                    new XAttribute("{b}xxx", "b_yyy"),
+                    new XAttribute("{a}xxx", "a_yyy"),
+                },
+            },
+            new object[]
+            {
+                InputSpace.GetAttributeElement(10, 1000).Elements().Attributes().ToArray(),
+            },
+            new object[]
+            {
+                new XObject[]
+                {
+                    new XAttribute("{b}xxx", "b_yyy"),
+                    new XElement("parent", new XElement("child", "child text")),
+                },
+            },
         };
+
         [Theory, MemberData(nameof(ExecuteXElementVariationParams))]
         public void ExecuteXElementVariation(XObject[] content)
         {
@@ -502,8 +641,19 @@ namespace CoreXml.Test.XLinq.FunctionalTests.EventsTests
                     elemHelper.Verify(XObjectChange.Remove, content);
                 }
                 undo.Undo();
-                Assert.True(xElem.Nodes().SequenceEqual(xElemOriginal.Nodes(), XNode.EqualityComparer), "Undo did not work!");
-                Assert.True(xElem.Attributes().EqualsAllAttributes(xElemOriginal.Attributes(), Helpers.MyAttributeComparer), "Undo did not work!");
+                Assert.True(
+                    xElem.Nodes().SequenceEqual(xElemOriginal.Nodes(), XNode.EqualityComparer),
+                    "Undo did not work!"
+                );
+                Assert.True(
+                    xElem
+                        .Attributes()
+                        .EqualsAllAttributes(
+                            xElemOriginal.Attributes(),
+                            Helpers.MyAttributeComparer
+                        ),
+                    "Undo did not work!"
+                );
             }
         }
     }

@@ -6,14 +6,14 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 using System.IO;
-using System.Text;
 using System.Linq;
 using System.Runtime.InteropServices;
+using System.Text;
 using Microsoft.Android.Build;
 using Microsoft.Apple.Build;
-using Microsoft.Mobile.Build.Clang;
 using Microsoft.Build.Framework;
 using Microsoft.Build.Utilities;
+using Microsoft.Mobile.Build.Clang;
 
 public class LibraryBuilderTask : AppBuilderTask
 {
@@ -36,14 +36,8 @@ public class LibraryBuilderTask : AppBuilderTask
     [Required]
     public string TargetOS
     {
-        get
-        {
-            return targetOS;
-        }
-        set
-        {
-            targetOS = value.ToLowerInvariant();
-        }
+        get { return targetOS; }
+        set { targetOS = value.ToLowerInvariant(); }
     }
 
     /// <summary>
@@ -126,7 +120,9 @@ public class LibraryBuilderTask : AppBuilderTask
 
         if (!ValidateValidTargetOS())
         {
-            throw new ArgumentException($"{TargetOS} is not yet supported by the librarybuilder task.");
+            throw new ArgumentException(
+                $"{TargetOS} is not yet supported by the librarybuilder task."
+            );
         }
 
         if (!base.Execute())
@@ -137,8 +133,10 @@ public class LibraryBuilderTask : AppBuilderTask
 
         GatherSourcesAndLibs(sources, libs, linkerArgs);
 
-        File.WriteAllText(Path.Combine(OutputDirectory, "library-builder.h"),
-            Utils.GetEmbeddedResource("library-builder.h"));
+        File.WriteAllText(
+            Path.Combine(OutputDirectory, "library-builder.h"),
+            Utils.GetEmbeddedResource("library-builder.h")
+        );
 
         GenerateAssembliesLoader();
 
@@ -160,7 +158,11 @@ public class LibraryBuilderTask : AppBuilderTask
     }
 
     // Intended for native toolchain specific builds
-    private void GatherSourcesAndLibs(List<string> sources, List<string> libs, List<string> linkerArgs)
+    private void GatherSourcesAndLibs(
+        List<string> sources,
+        List<string> libs,
+        List<string> linkerArgs
+    )
     {
         List<string> exportedSymbols = new List<string>();
 
@@ -188,7 +190,10 @@ public class LibraryBuilderTask : AppBuilderTask
 
             if (!string.IsNullOrEmpty(compiledAssembly.ExportsFile))
             {
-                int symbolsAdded = GatherExportedSymbols(compiledAssembly.ExportsFile, exportedSymbols);
+                int symbolsAdded = GatherExportedSymbols(
+                    compiledAssembly.ExportsFile,
+                    exportedSymbols
+                );
 
                 if (symbolsAdded > 0)
                 {
@@ -218,7 +223,9 @@ public class LibraryBuilderTask : AppBuilderTask
 
         if (exportedAssemblies.Count == 0)
         {
-            throw new LogAsErrorException($"None of the compiled assemblies contain exported symbols. The library must export only symbols resulting from [UnmanageCallersOnly(Entrypoint = )]Resulting shared library would be unusable.");
+            throw new LogAsErrorException(
+                $"None of the compiled assemblies contain exported symbols. The library must export only symbols resulting from [UnmanageCallersOnly(Entrypoint = )]Resulting shared library would be unusable."
+            );
         }
 
         if (IsSharedLibrary)
@@ -265,33 +272,48 @@ public class LibraryBuilderTask : AppBuilderTask
     private static void WriteLinkerScriptFile(string exportsFile, List<string> exportedSymbols)
     {
         string globalExports = string.Join(";\n", exportedSymbols.Select(symbol => symbol));
-        File.WriteAllText(exportsFile,
-            Utils.GetEmbeddedResource("linker-script.txt")
-                .Replace("%GLOBAL_SYMBOLS%", globalExports));
+        File.WriteAllText(
+            exportsFile,
+            Utils
+                .GetEmbeddedResource("linker-script.txt")
+                .Replace("%GLOBAL_SYMBOLS%", globalExports)
+        );
     }
 
     private void WriteAutoInitializationFromTemplate()
     {
-        string autoInitialization = Utils.GetEmbeddedResource("autoinit.c")
-                .Replace("%ASSEMBLIES_LOCATION%", !string.IsNullOrEmpty(AssembliesLocation) ? AssembliesLocation : "DOTNET_LIBRARY_ASSEMBLY_PATH")
-                .Replace("%RUNTIME_IDENTIFIER%", RuntimeIdentifier);
+        string autoInitialization = Utils
+            .GetEmbeddedResource("autoinit.c")
+            .Replace(
+                "%ASSEMBLIES_LOCATION%",
+                !string.IsNullOrEmpty(AssembliesLocation)
+                    ? AssembliesLocation
+                    : "DOTNET_LIBRARY_ASSEMBLY_PATH"
+            )
+            .Replace("%RUNTIME_IDENTIFIER%", RuntimeIdentifier);
 
         if (BundlesResources)
         {
             string dataSymbol = "NULL";
             string dataLenSymbol = "0";
-            StringBuilder externBundledResourcesSymbols = new ("#if defined(BUNDLED_RESOURCES)\nextern void mono_register_resources_bundle (void);");
+            StringBuilder externBundledResourcesSymbols = new(
+                "#if defined(BUNDLED_RESOURCES)\nextern void mono_register_resources_bundle (void);"
+            );
             if (BundledRuntimeConfig?.ItemSpec != null)
             {
                 dataSymbol = BundledRuntimeConfig.GetMetadata("DataSymbol");
                 if (string.IsNullOrEmpty(dataSymbol))
                 {
-                    throw new LogAsErrorException($"'{nameof(BundledRuntimeConfig)}' does not contain 'DataSymbol' metadata.");
+                    throw new LogAsErrorException(
+                        $"'{nameof(BundledRuntimeConfig)}' does not contain 'DataSymbol' metadata."
+                    );
                 }
                 dataLenSymbol = BundledRuntimeConfig.GetMetadata("DataLenSymbol");
                 if (string.IsNullOrEmpty(dataLenSymbol))
                 {
-                    throw new LogAsErrorException($"'{nameof(BundledRuntimeConfig)}' does not contain 'DataLenSymbol' metadata.");
+                    throw new LogAsErrorException(
+                        $"'{nameof(BundledRuntimeConfig)}' does not contain 'DataLenSymbol' metadata."
+                    );
                 }
                 externBundledResourcesSymbols.AppendLine();
                 externBundledResourcesSymbols.AppendLine($"extern uint8_t {dataSymbol}[];");
@@ -301,13 +323,19 @@ public class LibraryBuilderTask : AppBuilderTask
             externBundledResourcesSymbols.AppendLine("#endif");
 
             autoInitialization = autoInitialization
-                .Replace("%EXTERN_BUNDLED_RESOURCES_SYMBOLS%", externBundledResourcesSymbols.ToString())
+                .Replace(
+                    "%EXTERN_BUNDLED_RESOURCES_SYMBOLS%",
+                    externBundledResourcesSymbols.ToString()
+                )
                 .Replace("%RUNTIME_CONFIG_DATA%", dataSymbol)
                 .Replace("%RUNTIME_CONFIG_DATA_LEN%", dataLenSymbol);
         }
         else
         {
-            autoInitialization = autoInitialization.Replace("%EXTERN_BUNDLED_RESOURCES_SYMBOLS%", string.Empty);
+            autoInitialization = autoInitialization.Replace(
+                "%EXTERN_BUNDLED_RESOURCES_SYMBOLS%",
+                string.Empty
+            );
         }
 
         File.WriteAllText(Path.Combine(OutputDirectory, "autoinit.c"), autoInitialization);
@@ -321,12 +349,19 @@ public class LibraryBuilderTask : AppBuilderTask
             assemblyPreloaders.Add($"preload_assembly(\"{exportedAssembly}\");");
         }
 
-        File.WriteAllText(Path.Combine(OutputDirectory, "preloaded-assemblies.c"),
-            Utils.GetEmbeddedResource("preloaded-assemblies.c")
-                .Replace("%ASSEMBLIES_PRELOADER%", string.Join("\n    ", assemblyPreloaders)));
+        File.WriteAllText(
+            Path.Combine(OutputDirectory, "preloaded-assemblies.c"),
+            Utils
+                .GetEmbeddedResource("preloaded-assemblies.c")
+                .Replace("%ASSEMBLIES_PRELOADER%", string.Join("\n    ", assemblyPreloaders))
+        );
     }
 
-    private string BuildAndroidLibrary(List<string> sources, List<string> libs, List<string> linkerArgs)
+    private string BuildAndroidLibrary(
+        List<string> sources,
+        List<string> libs,
+        List<string> linkerArgs
+    )
     {
         string libraryName = GetLibraryName();
 
@@ -334,7 +369,9 @@ public class LibraryBuilderTask : AppBuilderTask
         buildOptions.CompilerArguments.Add("-D ANDROID=1");
         buildOptions.CompilerArguments.Add("-D HOST_ANDROID=1");
         buildOptions.CompilerArguments.Add("-fPIC");
-        buildOptions.CompilerArguments.Add(IsSharedLibrary ? $"-shared -o {libraryName}" : $"-o {libraryName}");
+        buildOptions.CompilerArguments.Add(
+            IsSharedLibrary ? $"-shared -o {libraryName}" : $"-o {libraryName}"
+        );
         buildOptions.IncludePaths.Add(MonoRuntimeHeaders);
         buildOptions.LinkerArguments.Add($"--soname={libraryName}");
         buildOptions.LinkerArguments.AddRange(linkerArgs);
@@ -363,12 +400,18 @@ public class LibraryBuilderTask : AppBuilderTask
         return Path.Combine(OutputDirectory, libraryName);
     }
 
-    private string BuildAppleLibrary(List<string> sources, List<string> libs, List<string> linkerArgs)
+    private string BuildAppleLibrary(
+        List<string> sources,
+        List<string> libs,
+        List<string> linkerArgs
+    )
     {
         string libraryName = GetLibraryName();
 
         ClangBuildOptions buildOptions = new ClangBuildOptions();
-        buildOptions.CompilerArguments.Add(IsSharedLibrary ? $"-dynamiclib -o {libraryName}" : $"-o {libraryName}");
+        buildOptions.CompilerArguments.Add(
+            IsSharedLibrary ? $"-dynamiclib -o {libraryName}" : $"-o {libraryName}"
+        );
         buildOptions.CompilerArguments.Add("-D HOST_APPLE_MOBILE=1");
         buildOptions.CompilerArguments.Add("-D FORCE_AOT=1");
         buildOptions.IncludePaths.Add(MonoRuntimeHeaders);
@@ -412,7 +455,8 @@ public class LibraryBuilderTask : AppBuilderTask
 
     private string GetLibraryName()
     {
-        string libPrefix, libExtension;
+        string libPrefix,
+            libExtension;
 
         if (TargetOS == "android")
         {
@@ -431,7 +475,8 @@ public class LibraryBuilderTask : AppBuilderTask
     private bool ValidateValidTargetOS() =>
         TargetOS switch
         {
-            "android" or "ios" or "iossimulator" or "tvos" or "tvossimulator" or "maccatalyst" => true,
-            _ => false
+            "android" or "ios" or "iossimulator" or "tvos" or "tvossimulator" or "maccatalyst" =>
+                true,
+            _ => false,
         };
 }

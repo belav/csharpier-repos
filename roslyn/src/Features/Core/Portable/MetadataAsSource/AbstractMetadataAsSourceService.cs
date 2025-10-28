@@ -29,15 +29,21 @@ namespace Microsoft.CodeAnalysis.MetadataAsSource
             Compilation symbolCompilation,
             ISymbol symbol,
             CleanCodeGenerationOptions options,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
             if (document == null)
             {
                 throw new ArgumentNullException(nameof(document));
             }
 
-            var newSemanticModel = await document.GetRequiredSemanticModelAsync(cancellationToken).ConfigureAwait(false);
-            var rootNamespace = newSemanticModel.GetEnclosingNamespace(position: 0, cancellationToken);
+            var newSemanticModel = await document
+                .GetRequiredSemanticModelAsync(cancellationToken)
+                .ConfigureAwait(false);
+            var rootNamespace = newSemanticModel.GetEnclosingNamespace(
+                position: 0,
+                cancellationToken
+            );
             Contract.ThrowIfNull(rootNamespace);
 
             var context = new CodeGenerationSolutionContext(
@@ -47,45 +53,80 @@ namespace Microsoft.CodeAnalysis.MetadataAsSource
                     generateMethodBodies: false,
                     generateDocumentationComments: true,
                     mergeAttributes: false,
-                    autoInsertionLocation: false),
+                    autoInsertionLocation: false
+                ),
                 new CodeAndImportGenerationOptions()
                 {
                     GenerationOptions = options.GenerationOptions,
-                    AddImportOptions = options.CleanupOptions.AddImportOptions
-                }.CreateProvider());
+                    AddImportOptions = options.CleanupOptions.AddImportOptions,
+                }.CreateProvider()
+            );
 
             // Add the interface of the symbol to the top of the root namespace
-            document = await CodeGenerator.AddNamespaceOrTypeDeclarationAsync(
-                context,
-                rootNamespace,
-                CreateCodeGenerationSymbol(document, symbol),
-                cancellationToken).ConfigureAwait(false);
+            document = await CodeGenerator
+                .AddNamespaceOrTypeDeclarationAsync(
+                    context,
+                    rootNamespace,
+                    CreateCodeGenerationSymbol(document, symbol),
+                    cancellationToken
+                )
+                .ConfigureAwait(false);
 
-            document = await AddNullableRegionsAsync(document, cancellationToken).ConfigureAwait(false);
+            document = await AddNullableRegionsAsync(document, cancellationToken)
+                .ConfigureAwait(false);
 
-            var docCommentFormattingService = document.GetRequiredLanguageService<IDocumentationCommentFormattingService>();
-            var docWithDocComments = await ConvertDocCommentsToRegularCommentsAsync(document, docCommentFormattingService, cancellationToken).ConfigureAwait(false);
+            var docCommentFormattingService =
+                document.GetRequiredLanguageService<IDocumentationCommentFormattingService>();
+            var docWithDocComments = await ConvertDocCommentsToRegularCommentsAsync(
+                    document,
+                    docCommentFormattingService,
+                    cancellationToken
+                )
+                .ConfigureAwait(false);
 
-            var docWithAssemblyInfo = await AddAssemblyInfoRegionAsync(docWithDocComments, symbolCompilation, symbol.GetOriginalUnreducedDefinition(), cancellationToken).ConfigureAwait(false);
-            var node = await docWithAssemblyInfo.GetRequiredSyntaxRootAsync(cancellationToken).ConfigureAwait(false);
+            var docWithAssemblyInfo = await AddAssemblyInfoRegionAsync(
+                    docWithDocComments,
+                    symbolCompilation,
+                    symbol.GetOriginalUnreducedDefinition(),
+                    cancellationToken
+                )
+                .ConfigureAwait(false);
+            var node = await docWithAssemblyInfo
+                .GetRequiredSyntaxRootAsync(cancellationToken)
+                .ConfigureAwait(false);
 
-            var formattedDoc = await Formatter.FormatAsync(
-                docWithAssemblyInfo,
-                SpecializedCollections.SingletonEnumerable(node.FullSpan),
-                options.CleanupOptions.FormattingOptions,
-                GetFormattingRules(docWithAssemblyInfo),
-                cancellationToken).ConfigureAwait(false);
+            var formattedDoc = await Formatter
+                .FormatAsync(
+                    docWithAssemblyInfo,
+                    SpecializedCollections.SingletonEnumerable(node.FullSpan),
+                    options.CleanupOptions.FormattingOptions,
+                    GetFormattingRules(docWithAssemblyInfo),
+                    cancellationToken
+                )
+                .ConfigureAwait(false);
 
             var reducers = GetReducers();
-            return await Simplifier.ReduceAsync(formattedDoc, reducers, options.CleanupOptions.SimplifierOptions, cancellationToken).ConfigureAwait(false);
+            return await Simplifier
+                .ReduceAsync(
+                    formattedDoc,
+                    reducers,
+                    options.CleanupOptions.SimplifierOptions,
+                    cancellationToken
+                )
+                .ConfigureAwait(false);
         }
 
-        protected abstract Task<Document> AddNullableRegionsAsync(Document document, CancellationToken cancellationToken);
+        protected abstract Task<Document> AddNullableRegionsAsync(
+            Document document,
+            CancellationToken cancellationToken
+        );
 
         /// <summary>
         /// provide formatting rules to be used when formatting MAS file
         /// </summary>
-        protected abstract IEnumerable<AbstractFormattingRule> GetFormattingRules(Document document);
+        protected abstract IEnumerable<AbstractFormattingRule> GetFormattingRules(
+            Document document
+        );
 
         /// <summary>
         /// Prepends a region directive at the top of the document with a name containing
@@ -99,29 +140,49 @@ namespace Microsoft.CodeAnalysis.MetadataAsSource
         /// <param name="symbol">The symbol to generate source for</param>
         /// <param name="cancellationToken">To cancel document operations</param>
         /// <returns>The updated document</returns>
-        protected abstract Task<Document> AddAssemblyInfoRegionAsync(Document document, Compilation symbolCompilation, ISymbol symbol, CancellationToken cancellationToken);
+        protected abstract Task<Document> AddAssemblyInfoRegionAsync(
+            Document document,
+            Compilation symbolCompilation,
+            ISymbol symbol,
+            CancellationToken cancellationToken
+        );
 
-        protected abstract Task<Document> ConvertDocCommentsToRegularCommentsAsync(Document document, IDocumentationCommentFormattingService docCommentFormattingService, CancellationToken cancellationToken);
+        protected abstract Task<Document> ConvertDocCommentsToRegularCommentsAsync(
+            Document document,
+            IDocumentationCommentFormattingService docCommentFormattingService,
+            CancellationToken cancellationToken
+        );
 
         protected abstract ImmutableArray<AbstractReducer> GetReducers();
 
-        private static INamespaceOrTypeSymbol CreateCodeGenerationSymbol(Document document, ISymbol symbol)
+        private static INamespaceOrTypeSymbol CreateCodeGenerationSymbol(
+            Document document,
+            ISymbol symbol
+        )
         {
             symbol = symbol.GetOriginalUnreducedDefinition();
             var topLevelNamespaceSymbol = symbol.ContainingNamespace;
             var topLevelNamedType = MetadataAsSourceHelpers.GetTopLevelContainingNamedType(symbol);
 
-            var canImplementImplicitly = document.GetRequiredLanguageService<ISemanticFactsService>().SupportsImplicitInterfaceImplementation;
-            var docCommentFormattingService = document.GetLanguageService<IDocumentationCommentFormattingService>();
+            var canImplementImplicitly = document
+                .GetRequiredLanguageService<ISemanticFactsService>()
+                .SupportsImplicitInterfaceImplementation;
+            var docCommentFormattingService =
+                document.GetLanguageService<IDocumentationCommentFormattingService>();
 
-            INamespaceOrTypeSymbol wrappedType = new WrappedNamedTypeSymbol(topLevelNamedType, canImplementImplicitly, docCommentFormattingService);
+            INamespaceOrTypeSymbol wrappedType = new WrappedNamedTypeSymbol(
+                topLevelNamedType,
+                canImplementImplicitly,
+                docCommentFormattingService
+            );
 
             return topLevelNamespaceSymbol.IsGlobalNamespace
                 ? wrappedType
                 : CodeGenerationSymbolFactory.CreateNamespaceSymbol(
                     topLevelNamespaceSymbol.ToDisplayString(SymbolDisplayFormats.NameFormat),
                     null,
-                    new[] { wrappedType });
+                    new[] { wrappedType }
+                );
         }
     }
 }

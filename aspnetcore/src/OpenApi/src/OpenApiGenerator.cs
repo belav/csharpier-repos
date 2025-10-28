@@ -380,7 +380,8 @@ internal sealed class OpenApiGenerator
                     .GetCustomAttributes()
                     .OfType<IFromBodyMetadata>()
                     .SingleOrDefault()
-                    ?.AllowEmpty ?? false;
+                    ?.AllowEmpty
+                ?? false;
             var isOptional =
                 requestBodyParameter.HasDefaultValue
                 || nullability.ReadState != NullabilityState.NotNull

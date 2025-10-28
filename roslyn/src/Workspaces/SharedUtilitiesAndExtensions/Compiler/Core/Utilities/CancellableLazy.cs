@@ -9,10 +9,9 @@ namespace Roslyn.Utilities
 {
     internal static class CancellableLazy
     {
-        public static CancellableLazy<T> Create<T>(T value)
-            => new(value);
+        public static CancellableLazy<T> Create<T>(T value) => new(value);
 
-        public static CancellableLazy<T> Create<T>(Func<CancellationToken, T> valueFactory)
-            => new(valueFactory);
+        public static CancellableLazy<T> Create<T>(Func<CancellationToken, T> valueFactory) =>
+            new(valueFactory);
     }
 }

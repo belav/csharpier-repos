@@ -10,11 +10,13 @@ namespace System.Web.Mvc
         private ActionResult _result;
 
         // parameterless constructor used for mocking
-        public ExceptionContext()
-        {
-        }
+        public ExceptionContext() { }
 
-        [SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors", Justification = "The virtual property setters are only to support mocking frameworks, in which case this constructor shouldn't be called anyway.")]
+        [SuppressMessage(
+            "Microsoft.Usage",
+            "CA2214:DoNotCallOverridableMethodsInConstructors",
+            Justification = "The virtual property setters are only to support mocking frameworks, in which case this constructor shouldn't be called anyway."
+        )]
         public ExceptionContext(ControllerContext controllerContext, Exception exception)
             : base(controllerContext)
         {

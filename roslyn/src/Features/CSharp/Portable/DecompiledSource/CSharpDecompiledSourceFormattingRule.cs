@@ -10,20 +10,25 @@ namespace Microsoft.CodeAnalysis.CSharp.DecompiledSource
 {
     internal class CSharpDecompiledSourceFormattingRule : AbstractFormattingRule
     {
-        public static readonly AbstractFormattingRule Instance = new CSharpDecompiledSourceFormattingRule();
+        public static readonly AbstractFormattingRule Instance =
+            new CSharpDecompiledSourceFormattingRule();
 
-        private CSharpDecompiledSourceFormattingRule()
-        {
-        }
+        private CSharpDecompiledSourceFormattingRule() { }
 
         public override AdjustNewLinesOperation? GetAdjustNewLinesOperation(
-            in SyntaxToken previousToken, in SyntaxToken currentToken, in NextGetAdjustNewLinesOperation nextOperation)
+            in SyntaxToken previousToken,
+            in SyntaxToken currentToken,
+            in NextGetAdjustNewLinesOperation nextOperation
+        )
         {
             var operation = GetAdjustNewLinesOperation(previousToken, currentToken);
             return operation ?? nextOperation.Invoke(in previousToken, in currentToken);
         }
 
-        private static AdjustNewLinesOperation? GetAdjustNewLinesOperation(SyntaxToken previousToken, SyntaxToken currentToken)
+        private static AdjustNewLinesOperation? GetAdjustNewLinesOperation(
+            SyntaxToken previousToken,
+            SyntaxToken currentToken
+        )
         {
             // To help code not look too tightly packed, we place a blank line after every statement that ends with a
             // `}` (unless it's also followed by another `}`).
@@ -39,15 +44,25 @@ namespace Microsoft.CodeAnalysis.CSharp.DecompiledSource
             var previousStatement = previousToken.Parent.FirstAncestorOrSelf<StatementSyntax>();
             var nextStatement = currentToken.Parent.FirstAncestorOrSelf<StatementSyntax>();
 
-            if (previousStatement == null || nextStatement == null || previousStatement == nextStatement)
+            if (
+                previousStatement == null
+                || nextStatement == null
+                || previousStatement == nextStatement
+            )
                 return null;
 
             // Ensure that we're only updating the whitespace between statements.
-            if (previousStatement.GetLastToken() != previousToken || nextStatement.GetFirstToken() != currentToken)
+            if (
+                previousStatement.GetLastToken() != previousToken
+                || nextStatement.GetFirstToken() != currentToken
+            )
                 return null;
 
             // Ensure a blank line between these two.
-            return FormattingOperations.CreateAdjustNewLinesOperation(2, AdjustNewLinesOption.ForceLines);
+            return FormattingOperations.CreateAdjustNewLinesOperation(
+                2,
+                AdjustNewLinesOption.ForceLines
+            );
         }
     }
 }

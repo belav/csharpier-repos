@@ -36,9 +36,7 @@ namespace System.Net.Http.Formatting
         /// </summary>
         /// <param name="formatter">The <see cref="BsonMediaTypeFormatter"/> instance to copy settings from.</param>
         protected BsonMediaTypeFormatter(BsonMediaTypeFormatter formatter)
-            : base(formatter)
-        {
-        }
+            : base(formatter) { }
 
         /// <summary>
         /// Gets the default media type for Json, namely "application/bson".
@@ -54,27 +52,23 @@ namespace System.Net.Http.Formatting
         /// </value>
         public static MediaTypeHeaderValue DefaultMediaType
         {
-            get
-            {
-                return MediaTypeConstants.ApplicationBsonMediaType;
-            }
+            get { return MediaTypeConstants.ApplicationBsonMediaType; }
         }
 
         /// <inheritdoc />
         public sealed override int MaxDepth
         {
-            get
-            {
-                return base.MaxDepth;
-            }
-            set
-            {
-                base.MaxDepth = value;
-            }
+            get { return base.MaxDepth; }
+            set { base.MaxDepth = value; }
         }
 
         /// <inheritdoc />
-        public override Task<object> ReadFromStreamAsync(Type type, Stream readStream, HttpContent content, IFormatterLogger formatterLogger)
+        public override Task<object> ReadFromStreamAsync(
+            Type type,
+            Stream readStream,
+            HttpContent content,
+            IFormatterLogger formatterLogger
+        )
         {
             if (type == null)
             {
@@ -86,7 +80,12 @@ namespace System.Net.Http.Formatting
                 throw Error.ArgumentNull("readStream");
             }
 
-            if (type == typeof(DBNull) && content != null && content.Headers != null && content.Headers.ContentLength == 0)
+            if (
+                type == typeof(DBNull)
+                && content != null
+                && content.Headers != null
+                && content.Headers.ContentLength == 0
+            )
             {
                 // Lower-level Json.Net deserialization can convert null to DBNull.Value. However this formatter treats
                 // DBNull.Value like null and serializes no content. Json.Net code won't be invoked at all (for read or
@@ -102,8 +101,12 @@ namespace System.Net.Http.Formatting
         }
 
         /// <inheritdoc />
-        public override object ReadFromStream(Type type, Stream readStream, Encoding effectiveEncoding,
-            IFormatterLogger formatterLogger)
+        public override object ReadFromStream(
+            Type type,
+            Stream readStream,
+            Encoding effectiveEncoding,
+            IFormatterLogger formatterLogger
+        )
         {
             if (type == null)
             {
@@ -134,16 +137,25 @@ namespace System.Net.Http.Formatting
             if (IsSimpleType(type) || type == typeof(byte[]))
             {
                 // Read as exact expected Dictionary<string, T> to ensure NewtonSoft.Json does correct top-level conversion.
-                Type dictionaryType = OpenDictionaryType.MakeGenericType(new Type[] { typeof(string), type });
+                Type dictionaryType = OpenDictionaryType.MakeGenericType(
+                    new Type[] { typeof(string), type }
+                );
                 IDictionary dictionary =
-                    base.ReadFromStream(dictionaryType, readStream, effectiveEncoding, formatterLogger) as IDictionary;
+                    base.ReadFromStream(
+                        dictionaryType,
+                        readStream,
+                        effectiveEncoding,
+                        formatterLogger
+                    ) as IDictionary;
                 if (dictionary == null)
                 {
                     // Not valid since BaseJsonMediaTypeFormatter.ReadFromStream(Type, Stream, HttpContent, IFormatterLogger)
                     // handles empty content and does not call ReadFromStream(Type, Stream, Encoding, IFormatterLogger)
                     // in that case.
-                    throw Error.InvalidOperation(Properties.Resources.MediaTypeFormatter_BsonParseError_MissingData,
-                        dictionaryType.Name);
+                    throw Error.InvalidOperation(
+                        Properties.Resources.MediaTypeFormatter_BsonParseError_MissingData,
+                        dictionaryType.Name
+                    );
                 }
 
                 // Unfortunately IDictionary doesn't have TryGetValue()...
@@ -166,8 +178,11 @@ namespace System.Net.Http.Formatting
                     }
                 }
 
-                throw Error.InvalidOperation(Properties.Resources.MediaTypeFormatter_BsonParseError_UnexpectedData,
-                    dictionary.Count, firstKey);
+                throw Error.InvalidOperation(
+                    Properties.Resources.MediaTypeFormatter_BsonParseError_UnexpectedData,
+                    dictionary.Count,
+                    firstKey
+                );
             }
             else
             {
@@ -176,7 +191,11 @@ namespace System.Net.Http.Formatting
         }
 
         /// <inheritdoc />
-        public override JsonReader CreateJsonReader(Type type, Stream readStream, Encoding effectiveEncoding)
+        public override JsonReader CreateJsonReader(
+            Type type,
+            Stream readStream,
+            Encoding effectiveEncoding
+        )
         {
             if (type == null)
             {
@@ -193,14 +212,17 @@ namespace System.Net.Http.Formatting
                 throw Error.ArgumentNull("effectiveEncoding");
             }
 
-            BsonDataReader reader = new BsonDataReader(new BinaryReader(readStream, effectiveEncoding));
+            BsonDataReader reader = new BsonDataReader(
+                new BinaryReader(readStream, effectiveEncoding)
+            );
 
             try
             {
                 // Special case discussed at http://stackoverflow.com/questions/16910369/bson-array-deserialization-with-json-net
                 // Dispensed with string (aka IEnumerable<char>) case above in ReadFromStream()
                 reader.ReadRootValueAsArray =
-                    typeof(IEnumerable).IsAssignableFrom(type) && !typeof(IDictionary).IsAssignableFrom(type);
+                    typeof(IEnumerable).IsAssignableFrom(type)
+                    && !typeof(IDictionary).IsAssignableFrom(type);
             }
             catch
             {
@@ -213,7 +235,12 @@ namespace System.Net.Http.Formatting
         }
 
         /// <inheritdoc />
-        public override void WriteToStream(Type type, object value, Stream writeStream, Encoding effectiveEncoding)
+        public override void WriteToStream(
+            Type type,
+            object value,
+            Stream writeStream,
+            Encoding effectiveEncoding
+        )
         {
             if (type == null)
             {
@@ -262,7 +289,12 @@ namespace System.Net.Http.Formatting
                 {
                     { "Value", value },
                 };
-                base.WriteToStream(typeof(Dictionary<string, object>), temporaryDictionary, writeStream, effectiveEncoding);
+                base.WriteToStream(
+                    typeof(Dictionary<string, object>),
+                    temporaryDictionary,
+                    writeStream,
+                    effectiveEncoding
+                );
             }
             else
             {
@@ -271,7 +303,11 @@ namespace System.Net.Http.Formatting
         }
 
         /// <inheritdoc />
-        public override JsonWriter CreateJsonWriter(Type type, Stream writeStream, Encoding effectiveEncoding)
+        public override JsonWriter CreateJsonWriter(
+            Type type,
+            Stream writeStream,
+            Encoding effectiveEncoding
+        )
         {
             if (type == null)
             {

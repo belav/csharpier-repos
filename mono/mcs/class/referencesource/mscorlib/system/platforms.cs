@@ -1,7 +1,7 @@
 // ==++==
-// 
+//
 //   Copyright (c) Microsoft Corporation.  All rights reserved.
-// 
+//
 // ==--==
 /*============================================================
 **
@@ -16,8 +16,7 @@
 #if FEATURE_CORECLR
 namespace System
 {
-
-[Serializable]
+    [Serializable]
     [Flags]
     public enum Platforms
     {
@@ -33,13 +32,12 @@ namespace System
         NokiaS60 = 1 << PlatformID.NokiaS60,
 #endif // FEATURE_LEGACYNETCF
 
-        All = Win32S | Win32Windows | Win32NT | WinCE | Unix | Xbox 
+        All = Win32S | Win32Windows | Win32NT | WinCE | Unix | Xbox
 #if !FEATURE_LEGACYNETCF
-| MacOSX
+            | MacOSX
 #else // FEATURE_LEGACYNETCF
-| NokiaS60
+            | NokiaS60
 #endif // FEATURE_LEGACYNETCF
     }
-
 }
 #endif // FEATURE_CORECLR

@@ -7,7 +7,10 @@ using System.Threading;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
-using DiagnosticOrInterfaceInfo = Microsoft.Interop.DiagnosticOr<(Microsoft.Interop.ComInterfaceInfo InterfaceInfo, Microsoft.CodeAnalysis.INamedTypeSymbol Symbol)>;
+using DiagnosticOrInterfaceInfo = Microsoft.Interop.DiagnosticOr<(
+    Microsoft.Interop.ComInterfaceInfo InterfaceInfo,
+    Microsoft.CodeAnalysis.INamedTypeSymbol Symbol
+)>;
 
 namespace Microsoft.Interop
 {
@@ -23,12 +26,23 @@ namespace Microsoft.Interop
         ContainingSyntax ContainingSyntax,
         Guid InterfaceId,
         ComInterfaceOptions Options,
-        Location DiagnosticLocation)
+        Location DiagnosticLocation
+    )
     {
-        public static DiagnosticOrInterfaceInfo From(INamedTypeSymbol symbol, InterfaceDeclarationSyntax syntax, StubEnvironment env, CancellationToken _)
+        public static DiagnosticOrInterfaceInfo From(
+            INamedTypeSymbol symbol,
+            InterfaceDeclarationSyntax syntax,
+            StubEnvironment env,
+            CancellationToken _
+        )
         {
             if (env.Compilation.Options is not CSharpCompilationOptions { AllowUnsafe: true }) // Unsafe code enabled
-                return DiagnosticOrInterfaceInfo.From(DiagnosticInfo.Create(GeneratorDiagnostics.RequiresAllowUnsafeBlocks, syntax.Identifier.GetLocation()));
+                return DiagnosticOrInterfaceInfo.From(
+                    DiagnosticInfo.Create(
+                        GeneratorDiagnostics.RequiresAllowUnsafeBlocks,
+                        syntax.Identifier.GetLocation()
+                    )
+                );
             // Verify the method has no generic types or defined implementation
             // and is not marked static or sealed
             if (syntax.TypeParameterList is not null)
@@ -37,7 +51,9 @@ namespace Microsoft.Interop
                     DiagnosticInfo.Create(
                         GeneratorDiagnostics.InvalidAttributedInterfaceGenericNotSupported,
                         syntax.Identifier.GetLocation(),
-                        symbol.Name));
+                        symbol.Name
+                    )
+                );
             }
 
             if (!IsInPartialContext(symbol, syntax, out DiagnosticInfo? partialContextDiagnostic))
@@ -45,52 +61,97 @@ namespace Microsoft.Interop
 
             if (!symbol.IsAccessibleFromFileScopedClass(out var details))
             {
-                return DiagnosticOrInterfaceInfo.From(DiagnosticInfo.Create(
-                    GeneratorDiagnostics.InvalidAttributedInterfaceNotAccessible,
-                    syntax.Identifier.GetLocation(),
-                    symbol.ToDisplayString(),
-                    details));
+                return DiagnosticOrInterfaceInfo.From(
+                    DiagnosticInfo.Create(
+                        GeneratorDiagnostics.InvalidAttributedInterfaceNotAccessible,
+                        syntax.Identifier.GetLocation(),
+                        symbol.ToDisplayString(),
+                        details
+                    )
+                );
             }
 
             if (!TryGetGuid(symbol, syntax, out Guid? guid, out DiagnosticInfo? guidDiagnostic))
                 return DiagnosticOrInterfaceInfo.From(guidDiagnostic);
 
-            if (!TryGetBaseComInterface(symbol, syntax, out INamedTypeSymbol? baseSymbol, out DiagnosticInfo? baseDiagnostic))
+            if (
+                !TryGetBaseComInterface(
+                    symbol,
+                    syntax,
+                    out INamedTypeSymbol? baseSymbol,
+                    out DiagnosticInfo? baseDiagnostic
+                )
+            )
                 return DiagnosticOrInterfaceInfo.From(baseDiagnostic);
 
-            var interfaceAttributeData = GeneratedComInterfaceCompilationData.GetAttributeDataFromInterfaceSymbol(symbol);
-            var baseAttributeData = baseSymbol is not null ? GeneratedComInterfaceCompilationData.GetAttributeDataFromInterfaceSymbol(baseSymbol) : null;
+            var interfaceAttributeData =
+                GeneratedComInterfaceCompilationData.GetAttributeDataFromInterfaceSymbol(symbol);
+            var baseAttributeData = baseSymbol is not null
+                ? GeneratedComInterfaceCompilationData.GetAttributeDataFromInterfaceSymbol(
+                    baseSymbol
+                )
+                : null;
 
-            if (!StringMarshallingIsValid(symbol, syntax, interfaceAttributeData, baseAttributeData, out DiagnosticInfo? stringMarshallingDiagnostic))
+            if (
+                !StringMarshallingIsValid(
+                    symbol,
+                    syntax,
+                    interfaceAttributeData,
+                    baseAttributeData,
+                    out DiagnosticInfo? stringMarshallingDiagnostic
+                )
+            )
                 return DiagnosticOrInterfaceInfo.From(stringMarshallingDiagnostic);
 
-            if (!OptionsAreValid(symbol, syntax, interfaceAttributeData, baseAttributeData, out DiagnosticInfo? optionsDiagnostic))
+            if (
+                !OptionsAreValid(
+                    symbol,
+                    syntax,
+                    interfaceAttributeData,
+                    baseAttributeData,
+                    out DiagnosticInfo? optionsDiagnostic
+                )
+            )
                 return DiagnosticOrInterfaceInfo.From(optionsDiagnostic);
 
             return DiagnosticOrInterfaceInfo.From(
-                (new ComInterfaceInfo(
-                    ManagedTypeInfo.CreateTypeInfoForTypeSymbol(symbol),
-                    symbol.ToDisplayString(),
-                    baseSymbol?.ToDisplayString(),
-                    syntax,
-                    new ContainingSyntaxContext(syntax),
-                    new ContainingSyntax(syntax.Modifiers, syntax.Kind(), syntax.Identifier, syntax.TypeParameterList),
-                    guid ?? Guid.Empty,
-                    interfaceAttributeData.Options,
-                    syntax.Identifier.GetLocation()),
-                symbol));
+                (
+                    new ComInterfaceInfo(
+                        ManagedTypeInfo.CreateTypeInfoForTypeSymbol(symbol),
+                        symbol.ToDisplayString(),
+                        baseSymbol?.ToDisplayString(),
+                        syntax,
+                        new ContainingSyntaxContext(syntax),
+                        new ContainingSyntax(
+                            syntax.Modifiers,
+                            syntax.Kind(),
+                            syntax.Identifier,
+                            syntax.TypeParameterList
+                        ),
+                        guid ?? Guid.Empty,
+                        interfaceAttributeData.Options,
+                        syntax.Identifier.GetLocation()
+                    ),
+                    symbol
+                )
+            );
         }
 
-        private static bool IsInPartialContext(INamedTypeSymbol symbol, InterfaceDeclarationSyntax syntax, [NotNullWhen(false)] out DiagnosticInfo? diagnostic)
+        private static bool IsInPartialContext(
+            INamedTypeSymbol symbol,
+            InterfaceDeclarationSyntax syntax,
+            [NotNullWhen(false)] out DiagnosticInfo? diagnostic
+        )
         {
             // Verify that the types the interface is declared in are marked partial.
             if (!syntax.IsInPartialContext(out var nonPartialIdentifier))
             {
                 diagnostic = DiagnosticInfo.Create(
-                        GeneratorDiagnostics.InvalidAttributedInterfaceMissingPartialModifiers,
-                        syntax.Identifier.GetLocation(),
-                        symbol.Name,
-                        nonPartialIdentifier);
+                    GeneratorDiagnostics.InvalidAttributedInterfaceMissingPartialModifiers,
+                    syntax.Identifier.GetLocation(),
+                    symbol.Name,
+                    nonPartialIdentifier
+                );
                 return false;
             }
             diagnostic = null;
@@ -102,10 +163,16 @@ namespace Microsoft.Interop
             InterfaceDeclarationSyntax syntax,
             GeneratedComInterfaceCompilationData attrSymbolInfo,
             GeneratedComInterfaceCompilationData? baseAttrInfo,
-            [NotNullWhen(false)] out DiagnosticInfo? stringMarshallingDiagnostic)
+            [NotNullWhen(false)] out DiagnosticInfo? stringMarshallingDiagnostic
+        )
         {
             var attrInfo = GeneratedComInterfaceData.From(attrSymbolInfo);
-            if (attrInfo.IsUserDefined.HasFlag(InteropAttributeMember.StringMarshalling) || attrInfo.IsUserDefined.HasFlag(InteropAttributeMember.StringMarshallingCustomType))
+            if (
+                attrInfo.IsUserDefined.HasFlag(InteropAttributeMember.StringMarshalling)
+                || attrInfo.IsUserDefined.HasFlag(
+                    InteropAttributeMember.StringMarshallingCustomType
+                )
+            )
             {
                 if (attrInfo.StringMarshalling is StringMarshalling.Custom)
                 {
@@ -115,16 +182,25 @@ namespace Microsoft.Interop
                             GeneratorDiagnostics.InvalidStringMarshallingConfigurationOnInterface,
                             syntax.Identifier.GetLocation(),
                             interfaceSymbol.ToDisplayString(),
-                            SR.InvalidStringMarshallingConfigurationMissingCustomType);
+                            SR.InvalidStringMarshallingConfigurationMissingCustomType
+                        );
                         return false;
                     }
-                    if (!attrSymbolInfo.StringMarshallingCustomType.IsAccessibleFromFileScopedClass(out var details))
+                    if (
+                        !attrSymbolInfo.StringMarshallingCustomType.IsAccessibleFromFileScopedClass(
+                            out var details
+                        )
+                    )
                     {
                         stringMarshallingDiagnostic = DiagnosticInfo.Create(
                             GeneratorDiagnostics.StringMarshallingCustomTypeNotAccessibleByGeneratedCode,
                             syntax.Identifier.GetLocation(),
-                            attrInfo.StringMarshallingCustomType.FullTypeName.Replace(TypeNames.GlobalAlias, ""),
-                            details);
+                            attrInfo.StringMarshallingCustomType.FullTypeName.Replace(
+                                TypeNames.GlobalAlias,
+                                ""
+                            ),
+                            details
+                        );
                         return false;
                     }
                 }
@@ -134,7 +210,8 @@ namespace Microsoft.Interop
                         GeneratorDiagnostics.InvalidStringMarshallingConfigurationOnInterface,
                         syntax.Identifier.GetLocation(),
                         interfaceSymbol.ToDisplayString(),
-                        SR.InvalidStringMarshallingConfigurationNotCustom);
+                        SR.InvalidStringMarshallingConfigurationNotCustom
+                    );
                     return false;
                 }
             }
@@ -142,14 +219,23 @@ namespace Microsoft.Interop
             {
                 var baseAttr = GeneratedComInterfaceData.From(baseAttrInfo);
                 // The base can be undefined string marshalling
-                if ((baseAttr.IsUserDefined.HasFlag(InteropAttributeMember.StringMarshalling) || baseAttr.IsUserDefined.HasFlag(InteropAttributeMember.StringMarshallingCustomType))
-                    && (baseAttr.StringMarshalling, baseAttr.StringMarshallingCustomType) != (attrInfo.StringMarshalling, attrInfo.StringMarshallingCustomType))
+                if (
+                    (
+                        baseAttr.IsUserDefined.HasFlag(InteropAttributeMember.StringMarshalling)
+                        || baseAttr.IsUserDefined.HasFlag(
+                            InteropAttributeMember.StringMarshallingCustomType
+                        )
+                    )
+                    && (baseAttr.StringMarshalling, baseAttr.StringMarshallingCustomType)
+                        != (attrInfo.StringMarshalling, attrInfo.StringMarshallingCustomType)
+                )
                 {
                     stringMarshallingDiagnostic = DiagnosticInfo.Create(
                         GeneratorDiagnostics.InvalidStringMarshallingMismatchBetweenBaseAndDerived,
                         syntax.Identifier.GetLocation(),
                         interfaceSymbol.ToDisplayString(),
-                        SR.GeneratedComInterfaceStringMarshallingMustMatchBase);
+                        SR.GeneratedComInterfaceStringMarshallingMustMatchBase
+                    );
                     return false;
                 }
             }
@@ -162,7 +248,8 @@ namespace Microsoft.Interop
             InterfaceDeclarationSyntax syntax,
             GeneratedComInterfaceCompilationData attrSymbolInfo,
             GeneratedComInterfaceCompilationData? baseAttrInfo,
-            [NotNullWhen(false)] out DiagnosticInfo? optionsDiagnostic)
+            [NotNullWhen(false)] out DiagnosticInfo? optionsDiagnostic
+        )
         {
             var attrInfo = GeneratedComInterfaceData.From(attrSymbolInfo);
             if (attrInfo.Options == ComInterfaceOptions.None)
@@ -171,21 +258,31 @@ namespace Microsoft.Interop
                     GeneratorDiagnostics.InvalidOptionsOnInterface,
                     syntax.Identifier.GetLocation(),
                     interfaceSymbol.ToDisplayString(),
-                    SR.OneWrapperMustBeGenerated);
+                    SR.OneWrapperMustBeGenerated
+                );
                 return false;
             }
             if (baseAttrInfo is not null)
             {
                 var baseAttr = GeneratedComInterfaceData.From(baseAttrInfo);
                 // The base type must specify at least the same wrappers as the derived type.
-                if ((attrInfo.Options.HasFlag(ComInterfaceOptions.ManagedObjectWrapper) && !baseAttr.Options.HasFlag(ComInterfaceOptions.ManagedObjectWrapper))
-                    || (attrInfo.Options.HasFlag(ComInterfaceOptions.ManagedObjectWrapper) && !baseAttr.Options.HasFlag(ComInterfaceOptions.ComObjectWrapper)))
+                if (
+                    (
+                        attrInfo.Options.HasFlag(ComInterfaceOptions.ManagedObjectWrapper)
+                        && !baseAttr.Options.HasFlag(ComInterfaceOptions.ManagedObjectWrapper)
+                    )
+                    || (
+                        attrInfo.Options.HasFlag(ComInterfaceOptions.ManagedObjectWrapper)
+                        && !baseAttr.Options.HasFlag(ComInterfaceOptions.ComObjectWrapper)
+                    )
+                )
                 {
                     optionsDiagnostic = DiagnosticInfo.Create(
                         GeneratorDiagnostics.InvalidOptionsOnInterface,
                         syntax.Identifier.GetLocation(),
                         interfaceSymbol.ToDisplayString(),
-                        SR.BaseInterfaceMustGenerateAtLeastSameWrappers);
+                        SR.BaseInterfaceMustGenerateAtLeastSameWrappers
+                    );
                     return false;
                 }
             }
@@ -196,21 +293,30 @@ namespace Microsoft.Interop
         /// <summary>
         /// Returns true if there is 0 or 1 base Com interfaces (i.e. the inheritance is valid), and returns false when there are 2 or more base Com interfaces and sets <paramref name="diagnostic"/>.
         /// </summary>
-        private static bool TryGetBaseComInterface(INamedTypeSymbol comIface, InterfaceDeclarationSyntax syntax, out INamedTypeSymbol? baseComIface, [NotNullWhen(false)] out DiagnosticInfo? diagnostic)
+        private static bool TryGetBaseComInterface(
+            INamedTypeSymbol comIface,
+            InterfaceDeclarationSyntax syntax,
+            out INamedTypeSymbol? baseComIface,
+            [NotNullWhen(false)] out DiagnosticInfo? diagnostic
+        )
         {
             baseComIface = null;
             foreach (var implemented in comIface.Interfaces)
             {
                 foreach (var attr in implemented.GetAttributes())
                 {
-                    if (attr.AttributeClass?.ToDisplayString() == TypeNames.GeneratedComInterfaceAttribute)
+                    if (
+                        attr.AttributeClass?.ToDisplayString()
+                        == TypeNames.GeneratedComInterfaceAttribute
+                    )
                     {
                         if (baseComIface is not null)
                         {
                             diagnostic = DiagnosticInfo.Create(
                                 GeneratorDiagnostics.MultipleComInterfaceBaseTypes,
                                 syntax.Identifier.GetLocation(),
-                                comIface.ToDisplayString());
+                                comIface.ToDisplayString()
+                            );
                             return false;
                         }
                         baseComIface = implemented;
@@ -224,7 +330,12 @@ namespace Microsoft.Interop
         /// <summary>
         /// Returns true and sets <paramref name="guid"/> if the guid is present. Returns false and sets diagnostic if the guid is not present or is invalid.
         /// </summary>
-        private static bool TryGetGuid(INamedTypeSymbol interfaceSymbol, InterfaceDeclarationSyntax syntax, [NotNullWhen(true)] out Guid? guid, [NotNullWhen(false)] out DiagnosticInfo? diagnostic)
+        private static bool TryGetGuid(
+            INamedTypeSymbol interfaceSymbol,
+            InterfaceDeclarationSyntax syntax,
+            [NotNullWhen(true)] out Guid? guid,
+            [NotNullWhen(false)] out DiagnosticInfo? diagnostic
+        )
         {
             guid = null;
             AttributeData? guidAttr = null;
@@ -238,10 +349,12 @@ namespace Microsoft.Interop
                     _ = attr;
             }
 
-            if (guidAttr is not null
+            if (
+                guidAttr is not null
                 && guidAttr.ConstructorArguments.Length == 1
                 && guidAttr.ConstructorArguments[0].Value is string guidStr
-                && Guid.TryParse(guidStr, out var result))
+                && Guid.TryParse(guidStr, out var result)
+            )
             {
                 guid = result;
             }
@@ -252,7 +365,8 @@ namespace Microsoft.Interop
                 diagnostic = DiagnosticInfo.Create(
                     GeneratorDiagnostics.InvalidAttributedInterfaceMissingGuidAttribute,
                     syntax.Identifier.GetLocation(),
-                    interfaceSymbol.ToDisplayString());
+                    interfaceSymbol.ToDisplayString()
+                );
                 return false;
             }
             diagnostic = null;
@@ -262,7 +376,13 @@ namespace Microsoft.Interop
         public override int GetHashCode()
         {
             // ContainingSyntax does not implement GetHashCode
-            return HashCode.Combine(Type, ThisInterfaceKey, BaseInterfaceKey, TypeDefinitionContext, InterfaceId);
+            return HashCode.Combine(
+                Type,
+                ThisInterfaceKey,
+                BaseInterfaceKey,
+                TypeDefinitionContext,
+                InterfaceId
+            );
         }
 
         public bool Equals(ComInterfaceInfo other)

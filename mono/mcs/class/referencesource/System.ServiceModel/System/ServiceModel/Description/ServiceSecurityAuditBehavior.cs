@@ -25,8 +25,10 @@ namespace System.ServiceModel.Description
         {
             this.auditLogLocation = ServiceSecurityAuditBehavior.defaultAuditLogLocation;
             this.suppressAuditFailure = ServiceSecurityAuditBehavior.defaultSuppressAuditFailure;
-            this.serviceAuthorizationAuditLevel = ServiceSecurityAuditBehavior.defaultServiceAuthorizationAuditLevel;
-            this.messageAuthenticationAuditLevel = ServiceSecurityAuditBehavior.defaultMessageAuthenticationAuditLevel;
+            this.serviceAuthorizationAuditLevel =
+                ServiceSecurityAuditBehavior.defaultServiceAuthorizationAuditLevel;
+            this.messageAuthenticationAuditLevel =
+                ServiceSecurityAuditBehavior.defaultMessageAuthenticationAuditLevel;
         }
 
         ServiceSecurityAuditBehavior(ServiceSecurityAuditBehavior behavior)
@@ -39,14 +41,13 @@ namespace System.ServiceModel.Description
 
         public AuditLogLocation AuditLogLocation
         {
-            get
-            {
-                return this.auditLogLocation;
-            }
+            get { return this.auditLogLocation; }
             set
             {
                 if (!AuditLogLocationHelper.IsDefined(value))
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentOutOfRangeException("value"));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new ArgumentOutOfRangeException("value")
+                    );
 
                 this.auditLogLocation = value;
             }
@@ -54,26 +55,19 @@ namespace System.ServiceModel.Description
 
         public bool SuppressAuditFailure
         {
-            get
-            {
-                return this.suppressAuditFailure;
-            }
-            set
-            {
-                this.suppressAuditFailure = value;
-            }
+            get { return this.suppressAuditFailure; }
+            set { this.suppressAuditFailure = value; }
         }
 
         public AuditLevel ServiceAuthorizationAuditLevel
         {
-            get
-            {
-                return this.serviceAuthorizationAuditLevel;
-            }
+            get { return this.serviceAuthorizationAuditLevel; }
             set
             {
                 if (!AuditLevelHelper.IsDefined(value))
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentOutOfRangeException("value"));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new ArgumentOutOfRangeException("value")
+                    );
 
                 this.serviceAuthorizationAuditLevel = value;
             }
@@ -81,14 +75,13 @@ namespace System.ServiceModel.Description
 
         public AuditLevel MessageAuthenticationAuditLevel
         {
-            get
-            {
-                return this.messageAuthenticationAuditLevel;
-            }
+            get { return this.messageAuthenticationAuditLevel; }
             set
             {
                 if (!AuditLevelHelper.IsDefined(value))
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentOutOfRangeException("value"));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new ArgumentOutOfRangeException("value")
+                    );
 
                 this.messageAuthenticationAuditLevel = value;
             }
@@ -99,28 +92,44 @@ namespace System.ServiceModel.Description
             return new ServiceSecurityAuditBehavior(this);
         }
 
-        void IServiceBehavior.Validate(ServiceDescription description, ServiceHostBase serviceHostBase)
-        {
-        }
+        void IServiceBehavior.Validate(
+            ServiceDescription description,
+            ServiceHostBase serviceHostBase
+        ) { }
 
-        void IServiceBehavior.AddBindingParameters(ServiceDescription description, ServiceHostBase serviceHostBase, Collection<ServiceEndpoint> endpoints, BindingParameterCollection parameters)
+        void IServiceBehavior.AddBindingParameters(
+            ServiceDescription description,
+            ServiceHostBase serviceHostBase,
+            Collection<ServiceEndpoint> endpoints,
+            BindingParameterCollection parameters
+        )
         {
             if (parameters == null)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentNullException("parameters"));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new ArgumentNullException("parameters")
+                );
 
             parameters.Add(this);
         }
 
-        void IServiceBehavior.ApplyDispatchBehavior(ServiceDescription description, ServiceHostBase serviceHostBase)
+        void IServiceBehavior.ApplyDispatchBehavior(
+            ServiceDescription description,
+            ServiceHostBase serviceHostBase
+        )
         {
             if (description == null)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentNullException("description"));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new ArgumentNullException("description")
+                );
             if (serviceHostBase == null)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentNullException("serviceHostBase"));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new ArgumentNullException("serviceHostBase")
+                );
 
             for (int i = 0; i < serviceHostBase.ChannelDispatchers.Count; i++)
             {
-                ChannelDispatcher channelDispatcher = serviceHostBase.ChannelDispatchers[i] as ChannelDispatcher;
+                ChannelDispatcher channelDispatcher =
+                    serviceHostBase.ChannelDispatchers[i] as ChannelDispatcher;
                 if (channelDispatcher != null)
                 {
                     foreach (EndpointDispatcher endpointDispatcher in channelDispatcher.Endpoints)
@@ -130,8 +139,10 @@ namespace System.ServiceModel.Description
                             DispatchRuntime behavior = endpointDispatcher.DispatchRuntime;
                             behavior.SecurityAuditLogLocation = this.auditLogLocation;
                             behavior.SuppressAuditFailure = this.suppressAuditFailure;
-                            behavior.ServiceAuthorizationAuditLevel = this.serviceAuthorizationAuditLevel;
-                            behavior.MessageAuthenticationAuditLevel = this.messageAuthenticationAuditLevel;
+                            behavior.ServiceAuthorizationAuditLevel =
+                                this.serviceAuthorizationAuditLevel;
+                            behavior.MessageAuthenticationAuditLevel =
+                                this.messageAuthenticationAuditLevel;
                         }
                     }
                 }

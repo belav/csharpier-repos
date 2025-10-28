@@ -15,7 +15,10 @@ namespace System.Reflection.TypeLoading.Ecma
         //
         // - All GetConstructor() apis act as if BindingFlags.DeclaredOnly were specified. So the ReflectedType will always be the declaring type and so is not passed to this method.
         //
-        internal sealed override IEnumerable<ConstructorInfo> SpecializeConstructors(NameFilter? filter, RoInstantiationProviderType declaringType)
+        internal sealed override IEnumerable<ConstructorInfo> SpecializeConstructors(
+            NameFilter? filter,
+            RoInstantiationProviderType declaringType
+        )
         {
             MetadataReader reader = Reader;
             foreach (MethodDefinitionHandle handle in TypeDefinition.GetMethods())
@@ -24,12 +27,19 @@ namespace System.Reflection.TypeLoading.Ecma
                 if (filter == null || filter.Matches(methodDefinition.Name, reader))
                 {
                     if (methodDefinition.IsConstructor(reader))
-                        yield return new RoDefinitionConstructor<EcmaMethodDecoder>(declaringType, new EcmaMethodDecoder(handle, GetEcmaModule()));
+                        yield return new RoDefinitionConstructor<EcmaMethodDecoder>(
+                            declaringType,
+                            new EcmaMethodDecoder(handle, GetEcmaModule())
+                        );
                 }
             }
         }
 
-        internal sealed override IEnumerable<MethodInfo> SpecializeMethods(NameFilter? filter, Type reflectedType, RoInstantiationProviderType declaringType)
+        internal sealed override IEnumerable<MethodInfo> SpecializeMethods(
+            NameFilter? filter,
+            Type reflectedType,
+            RoInstantiationProviderType declaringType
+        )
         {
             MetadataReader reader = Reader;
             foreach (MethodDefinitionHandle handle in TypeDefinition.GetMethods())
@@ -38,37 +48,62 @@ namespace System.Reflection.TypeLoading.Ecma
                 if (filter == null || filter.Matches(methodDefinition.Name, reader))
                 {
                     if (!methodDefinition.IsConstructor(reader))
-                        yield return new RoDefinitionMethod<EcmaMethodDecoder>(declaringType, reflectedType, new EcmaMethodDecoder(handle, GetEcmaModule()));
+                        yield return new RoDefinitionMethod<EcmaMethodDecoder>(
+                            declaringType,
+                            reflectedType,
+                            new EcmaMethodDecoder(handle, GetEcmaModule())
+                        );
                 }
             }
         }
 
-        internal sealed override IEnumerable<EventInfo> SpecializeEvents(NameFilter? filter, Type reflectedType, RoInstantiationProviderType declaringType)
+        internal sealed override IEnumerable<EventInfo> SpecializeEvents(
+            NameFilter? filter,
+            Type reflectedType,
+            RoInstantiationProviderType declaringType
+        )
         {
             MetadataReader reader = Reader;
             foreach (EventDefinitionHandle handle in TypeDefinition.GetEvents())
             {
-                if (filter == null || filter.Matches(handle.GetEventDefinition(reader).Name, reader))
+                if (
+                    filter == null
+                    || filter.Matches(handle.GetEventDefinition(reader).Name, reader)
+                )
                     yield return new EcmaEvent(declaringType, handle, reflectedType);
             }
         }
 
-        internal sealed override IEnumerable<FieldInfo> SpecializeFields(NameFilter? filter, Type reflectedType, RoInstantiationProviderType declaringType)
+        internal sealed override IEnumerable<FieldInfo> SpecializeFields(
+            NameFilter? filter,
+            Type reflectedType,
+            RoInstantiationProviderType declaringType
+        )
         {
             MetadataReader reader = Reader;
             foreach (FieldDefinitionHandle handle in TypeDefinition.GetFields())
             {
-                if (filter == null || filter.Matches(handle.GetFieldDefinition(reader).Name, reader))
+                if (
+                    filter == null
+                    || filter.Matches(handle.GetFieldDefinition(reader).Name, reader)
+                )
                     yield return new EcmaField(declaringType, handle, reflectedType);
             }
         }
 
-        internal sealed override IEnumerable<PropertyInfo> SpecializeProperties(NameFilter? filter, Type reflectedType, RoInstantiationProviderType declaringType)
+        internal sealed override IEnumerable<PropertyInfo> SpecializeProperties(
+            NameFilter? filter,
+            Type reflectedType,
+            RoInstantiationProviderType declaringType
+        )
         {
             MetadataReader reader = Reader;
             foreach (PropertyDefinitionHandle handle in TypeDefinition.GetProperties())
             {
-                if (filter == null || filter.Matches(handle.GetPropertyDefinition(reader).Name, reader))
+                if (
+                    filter == null
+                    || filter.Matches(handle.GetPropertyDefinition(reader).Name, reader)
+                )
                     yield return new EcmaProperty(declaringType, handle, reflectedType);
             }
         }

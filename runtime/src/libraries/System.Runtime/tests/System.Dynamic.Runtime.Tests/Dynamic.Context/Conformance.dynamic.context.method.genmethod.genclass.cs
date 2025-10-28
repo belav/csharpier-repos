@@ -6,13 +6,9 @@ using Xunit;
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.method.genmethod.genclass.genclassgenmeth.genclassgenmeth
 {
-    public class C
-    {
-    }
+    public class C { }
 
-    public interface I
-    {
-    }
+    public interface I { }
 
     public class MemberClass<T>
     {
@@ -90,59 +86,73 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.method.genmetho
         }
 
         #region Constraints on methods that have a new type parameter
-        public U Method_ReturnsUConstraint<U>(U u) where U : class
+        public U Method_ReturnsUConstraint<U>(U u)
+            where U : class
         {
             return null;
         }
 
-        public U Method_ReturnsUConstraint<U>(T t) where U : new()
+        public U Method_ReturnsUConstraint<U>(T t)
+            where U : new()
         {
             return new U();
         }
 
-        public U Method_ReturnsUConstraint<U, V>(T t, V v) where U : new() where V : U
+        public U Method_ReturnsUConstraint<U, V>(T t, V v)
+            where U : new()
+            where V : U
         {
             return default(V);
         }
 
-        public void Method_WithConstraints<U, V, W>(T t, U u, V v, W w) where U : struct where V : class where W : V
-        {
-        }
+        public void Method_WithConstraints<U, V, W>(T t, U u, V v, W w)
+            where U : struct
+            where V : class
+            where W : V { }
 
-        public dynamic Method_ReturnsDynamicConstraint<U>(T t, U u, dynamic d) where U : new()
+        public dynamic Method_ReturnsDynamicConstraint<U>(T t, U u, dynamic d)
+            where U : new()
         {
             return new U();
         }
 
-        public dynamic Method_ReturnsDynamicConstraint<U, V>(T t, U u, V v, dynamic d) where V : class
+        public dynamic Method_ReturnsDynamicConstraint<U, V>(T t, U u, V v, dynamic d)
+            where V : class
         {
             return u;
         }
 
-        public float Method_ReturnsFloatConstraint<U, V>(T t, dynamic d, U u, ref decimal dec) where V : U
+        public float Method_ReturnsFloatConstraint<U, V>(T t, dynamic d, U u, ref decimal dec)
+            where V : U
         {
             dec = 3m;
             return 3.4f;
         }
 
-        public string Method_ReturnsStringConstraint<U, V>(T t, dynamic d, U u) where U : class where V : U
+        public string Method_ReturnsStringConstraint<U, V>(T t, dynamic d, U u)
+            where U : class
+            where V : U
         {
             return "";
         }
 
         //These are negative methods... you should not be able to call them with the dynamic type because the dynamic type would not satisfy the constraints
         //you cannot call this like: Method_ReturnsUConstraint<dynamic>(d); because object does not derive from C
-        public U Method_ReturnsUNegConstraint<U>(U u) where U : C
+        public U Method_ReturnsUNegConstraint<U>(U u)
+            where U : C
         {
             return null;
         }
 
-        public T Method_ReturnsTNegConstraint<U>(U u) where U : struct
+        public T Method_ReturnsTNegConstraint<U>(U u)
+            where U : struct
         {
             return default(T);
         }
 
-        public float Method_ReturnsFloatNegConstraint<U, V>(T t, dynamic d, U u, ref decimal dec) where V : U where U : I
+        public float Method_ReturnsFloatNegConstraint<U, V>(T t, dynamic d, U u, ref decimal dec)
+            where V : U
+            where U : I
         {
             dec = 3m;
             return 3.4f;
@@ -196,12 +206,15 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.method.genmetho
     public class MemberClassWithClassConstraint<T>
         where T : class
     {
-        public int Method_ReturnsInt<U>() where U : T
+        public int Method_ReturnsInt<U>()
+            where U : T
         {
             return 1;
         }
 
-        public T Method_ReturnsT<U, V>(decimal dec, dynamic d) where U : T where V : U
+        public T Method_ReturnsT<U, V>(decimal dec, dynamic d)
+            where U : T
+            where V : U
         {
             return null;
         }
@@ -210,12 +223,14 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.method.genmetho
     public class MemberClassWithNewConstraint<T>
         where T : new()
     {
-        public U Method_ReturnsU<U>() where U : T
+        public U Method_ReturnsU<U>()
+            where U : T
         {
             return default(U);
         }
 
-        public dynamic Method_ReturnsDynamic<V>(T u, V v) where V : T
+        public dynamic Method_ReturnsDynamic<V>(T u, V v)
+            where V : T
         {
             return new T();
         }
@@ -229,7 +244,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.method.genmetho
             return default(U);
         }
 
-        public dynamic Method_ReturnsDynamic<V>(int x, U u, V v) where V : U
+        public dynamic Method_ReturnsDynamic<V>(int x, U u, V v)
+            where V : U
         {
             return default(T);
         }
@@ -239,7 +255,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.method.genmetho
     public class MemberClassWithUDClassConstraint<T>
         where T : C
     {
-        public U Method_ReturnsU<U>() where U : T, new()
+        public U Method_ReturnsU<U>()
+            where U : T, new()
         {
             return new U();
         }
@@ -257,15 +274,15 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.method.genmetho
     public class MemberClassWithInterfaceConstraint<T>
         where T : I
     {
-        public dynamic Method_ReturnsDynamic<U, V>(int x, U u, V v) where V : U where U : T
+        public dynamic Method_ReturnsDynamic<U, V>(int x, U u, V v)
+            where V : U
+            where U : T
         {
             return default(T);
         }
     }
     #endregion
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.method.genmethod.genclass.genclass001.genclass001
 {
@@ -303,8 +320,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.method.genmetho
     } //</Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.method.genmethod.genclass.genclass002.genclass002
 {
     // <Title> Tests generic class generic method used inside #if, #else block.</Title>
@@ -332,9 +347,9 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.method.genmetho
         public static object TestMethod()
         {
 #if c1
-dynamic mc = new MemberClass<int>();
-return (Test)mc.Method_ReturnsUConstraint<Test>(new Test());
- #else
+            dynamic mc = new MemberClass<int>();
+            return (Test)mc.Method_ReturnsUConstraint<Test>(new Test());
+#else
             dynamic mc = new MemberClass<int>();
             object ret = mc.Method_ReturnsUConstraint<string>("1");
             try
@@ -343,7 +358,15 @@ return (Test)mc.Method_ReturnsUConstraint<Test>(new Test());
             }
             catch (Microsoft.CSharp.RuntimeBinder.RuntimeBinderException e)
             {
-                if (ErrorVerifier.Verify(ErrorMessageId.NewConstraintNotSatisfied, e.Message, "MemberClass<T>.Method_ReturnsUConstraint<U>(T)", "U", "string"))
+                if (
+                    ErrorVerifier.Verify(
+                        ErrorMessageId.NewConstraintNotSatisfied,
+                        e.Message,
+                        "MemberClass<T>.Method_ReturnsUConstraint<U>(T)",
+                        "U",
+                        "string"
+                    )
+                )
                     return ret;
             }
 
@@ -353,8 +376,6 @@ return (Test)mc.Method_ReturnsUConstraint<Test>(new Test());
     }
     //</Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.method.genmethod.genclass.genclass003.genclass003
 {
@@ -368,6 +389,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.method.genmetho
     public class Test
     {
         private static dynamic s_mc = new MemberClass<string>();
+
         [Fact]
         public static void DynamicCSharpRunTest()
         {
@@ -384,8 +406,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.method.genmetho
     }
     //</Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.method.genmethod.genclass.genclass006.genclass006
 {
@@ -416,8 +436,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.method.genmetho
     //</Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.method.genmethod.genclass.genclass007.genclass007
 {
     // <Title> Tests generic class generic method used in implicit operator.</Title>
@@ -432,15 +450,11 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.method.genmetho
         public class InnerTest1
         {
             public int field;
+
             public static implicit operator InnerTest2(InnerTest1 t1)
             {
                 dynamic dy = new MemberClass<InnerTest1>();
-                return new InnerTest2()
-                {
-                    field = (int)dy.Method_ReturnsU<int>(t1.field + 1)
-                }
-
-                ;
+                return new InnerTest2() { field = (int)dy.Method_ReturnsU<int>(t1.field + 1) };
             }
         }
 
@@ -458,24 +472,17 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.method.genmetho
         public static int MainMethod()
         {
             dynamic dy = new MemberClass<InnerTest2>();
-            InnerTest2 result1 = (InnerTest1)dy.Method_ReturnsDynamic<InnerTest1>(new InnerTest2()
-            {
-                field = 0
-            }
-
-            , new InnerTest1()
-            {
-                field = 10
-            }
-
-            , 0); //implicit
+            InnerTest2 result1 = (InnerTest1)
+                dy.Method_ReturnsDynamic<InnerTest1>(
+                    new InnerTest2() { field = 0 },
+                    new InnerTest1() { field = 10 },
+                    0
+                ); //implicit
             return (result1.field == 11) ? 0 : 1;
         }
     }
     //</Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.method.genmethod.genclass.genclass008.genclass008
 {
@@ -499,19 +506,22 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.method.genmetho
         public static int MainMethod()
         {
             dynamic mc = new MemberClass<string>();
-            List<string> list = new List<string>()
-            {
-            null, string.Empty, "Test"
-            }
-
-            ;
+            List<string> list = new List<string>() { null, string.Empty, "Test" };
             List<string> list2 = new List<string>();
-            foreach (dynamic s in (IEnumerable)mc.Method_ReturnsDynamic<int, IEnumerable>(null, 0, list, string.Empty))
+            foreach (
+                dynamic s in (IEnumerable)
+                    mc.Method_ReturnsDynamic<int, IEnumerable>(null, 0, list, string.Empty)
+            )
             {
                 list2.Add(s);
             }
 
-            if (list2.Count == 3 && list2[0] == null && list2[1] == string.Empty && list2[2] == "Test")
+            if (
+                list2.Count == 3
+                && list2[0] == null
+                && list2[1] == string.Empty
+                && list2[2] == "Test"
+            )
             {
                 return 0;
             }
@@ -521,8 +531,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.method.genmetho
     }
     //</Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.method.genmethod.genclass.genclass009.genclass009
 {
@@ -545,12 +553,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.method.genmetho
         public static int MainMethod()
         {
             dynamic mc = new MemberClass<string>();
-            var list1 = new List<int>()
-            {
-            0, 1, 2
-            }
-
-            ;
+            var list1 = new List<int>() { 0, 1, 2 };
             var list2 = new List<int>();
             foreach (int s in list1)
             {
@@ -567,8 +570,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.method.genmetho
     }
     //</Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.method.genmethod.genclass.genclass010.genclass010
 {
@@ -599,8 +600,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.method.genmetho
     //</Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.method.genmethod.genclass.genclass011.genclass011
 {
     // <Title> Tests generic class generic method used in static method body.</Title>
@@ -630,8 +629,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.method.genmetho
     //</Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.method.genmethod.genclass.genclass012.genclass012
 {
     // <Title> Tests generic class generic method used in static method body.</Title>
@@ -643,7 +640,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.method.genmetho
 
     public class Test
     {
-
         public static void DynamicCSharpRunTest()
         {
             Assert.Equal(0, MainMethod());
@@ -663,8 +659,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.method.genmetho
     }
     //</Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.method.genmethod.genclass.genclass013.genclass013
 {
@@ -686,12 +680,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.method.genmetho
         public static int MainMethod()
         {
             dynamic mc = new MemberClass<int>();
-            int[] array = new int[]
-            {
-            1, 2, 1, 3, 1
-            }
-
-            ;
+            int[] array = new int[] { 1, 2, 1, 3, 1 };
             int i = 0;
             while (i < array.Length && array[i] >= (int)mc.Method_ReturnsInt(array[i]))
             {
@@ -710,8 +699,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.method.genmetho
     }
     //</Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.method.genmethod.genclass.genclass014.genclass014
 {
@@ -743,8 +730,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.method.genmetho
     //</Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.method.genmethod.genclass.genclass015.genclass015
 {
     // <Title> Tests generic class generic method used in static method body.</Title>
@@ -756,7 +741,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.method.genmetho
 
     public class Test
     {
-
         public static void DynamicCSharpRunTest()
         {
             Assert.Equal(0, MainMethod());
@@ -776,8 +760,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.method.genmetho
     //</Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.method.genmethod.genclass.genclass016.genclass016
 {
     // <Title> Tests generic class generic method used in static method body.</Title>
@@ -790,6 +772,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.method.genmetho
     public class Test
     {
         private int _field;
+
         public Test()
         {
             _field = 10;
@@ -811,13 +794,15 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.method.genmetho
             }
             catch (Microsoft.CSharp.RuntimeBinder.RuntimeBinderException e)
             {
-                if (ErrorVerifier.Verify(ErrorMessageId.AmbigCall, e.Message, "MemberClass<string>.Method_ReturnsUConstraint<Test>(Test)", "MemberClass<string>.Method_ReturnsUConstraint<Test>(string)"))
-                    result = new Test()
-                    {
-                        _field = 10
-                    }
-
-                    ;
+                if (
+                    ErrorVerifier.Verify(
+                        ErrorMessageId.AmbigCall,
+                        e.Message,
+                        "MemberClass<string>.Method_ReturnsUConstraint<Test>(Test)",
+                        "MemberClass<string>.Method_ReturnsUConstraint<Test>(string)"
+                    )
+                )
+                    result = new Test() { _field = 10 };
             }
 
             if (result != null && result._field == 10)
@@ -828,8 +813,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.method.genmetho
     }
     //</Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.method.genmethod.genclass.genclass017.genclass017
 {
@@ -843,6 +826,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.method.genmetho
     public class Test
     {
         internal int Field;
+
         public Test()
         {
             Field = 10;
@@ -865,12 +849,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.method.genmetho
         public static int MainMethod()
         {
             dynamic mc = new MemberClass<string>();
-            Test result = (Test)mc.Method_ReturnsUConstraint<Test, InnerTest>(null, new InnerTest()
-            {
-                Field = 0
-            }
-
-            );
+            Test result = (Test)
+                mc.Method_ReturnsUConstraint<Test, InnerTest>(null, new InnerTest() { Field = 0 });
             if (result == null)
                 return 0;
             else
@@ -879,8 +859,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.method.genmetho
     }
     //</Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.method.genmethod.genclass.genclass018.genclass018
 {
@@ -909,7 +887,15 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.method.genmetho
             }
             catch (Microsoft.CSharp.RuntimeBinder.RuntimeBinderException e)
             {
-                if (ErrorVerifier.Verify(ErrorMessageId.NewConstraintNotSatisfied, e.Message, "MemberClass<T>.Method_ReturnsDynamicConstraint<U>(T, U, object)", "U", "string"))
+                if (
+                    ErrorVerifier.Verify(
+                        ErrorMessageId.NewConstraintNotSatisfied,
+                        e.Message,
+                        "MemberClass<T>.Method_ReturnsDynamicConstraint<U>(T, U, object)",
+                        "U",
+                        "string"
+                    )
+                )
                     result = string.Empty;
             }
 
@@ -921,8 +907,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.method.genmetho
     }
     //</Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.method.genmethod.genclass.genclass019.genclass019
 {
@@ -946,7 +930,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.method.genmetho
             dynamic mc = new MemberClass<string>();
             dynamic mc2 = "Test2";
             dynamic mc3 = "Test3";
-            string result = (string)mc.Method_ReturnsDynamicConstraint<string, C>(null, mc2, new C(), mc3);
+            string result = (string)
+                mc.Method_ReturnsDynamicConstraint<string, C>(null, mc2, new C(), mc3);
             if (result == "Test2" && (string)mc3 == "Test3")
                 return 0;
             else
@@ -955,8 +940,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.method.genmetho
     }
     //</Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.method.genmethod.genclass.genclass020.genclass020
 {
@@ -970,10 +953,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.method.genmetho
     public class Test
     {
         internal int Field;
-        public class InnerTest : Test
-        {
-        }
 
+        public class InnerTest : Test { }
 
         public static void DynamicCSharpRunTest()
         {
@@ -984,20 +965,11 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.method.genmetho
         {
             decimal dec = 10M;
             dynamic mc = new MemberClass<Test>();
-            Test mc2 = new Test()
-            {
-                Field = 2
-            }
-
-            ;
+            Test mc2 = new Test() { Field = 2 };
             dynamic dy2 = mc2;
-            Test mc3 = new InnerTest()
-            {
-                Field = 3
-            }
-
-            ;
-            float result = (float)mc.Method_ReturnsFloatConstraint<Test, InnerTest>(mc2, dy2, mc3, ref dec);
+            Test mc3 = new InnerTest() { Field = 3 };
+            float result = (float)
+                mc.Method_ReturnsFloatConstraint<Test, InnerTest>(mc2, dy2, mc3, ref dec);
             if (dec == 3M && result == 3.4f)
                 return 0;
             else
@@ -1006,8 +978,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.method.genmetho
     }
     //</Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.method.genmethod.genclass.genclass021.genclass021
 {
@@ -1021,9 +991,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.method.genmetho
     public class Test
     {
         internal int Field;
-        public class InnerTest : Test
-        {
-        }
+
+        public class InnerTest : Test { }
 
         [Fact]
         public static void DynamicCSharpRunTest()
@@ -1034,20 +1003,11 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.method.genmetho
         public static int MainMethod()
         {
             dynamic mc = new MemberClass<Test>();
-            Test mc2 = new Test()
-            {
-                Field = 2
-            }
-
-            ;
+            Test mc2 = new Test() { Field = 2 };
             dynamic dy2 = mc2;
-            Test mc3 = new InnerTest()
-            {
-                Field = 3
-            }
-
-            ;
-            string result = (string)mc.Method_ReturnsStringConstraint<Test, InnerTest>(mc2, dy2, mc3);
+            Test mc3 = new InnerTest() { Field = 3 };
+            string result = (string)
+                mc.Method_ReturnsStringConstraint<Test, InnerTest>(mc2, dy2, mc3);
             if (result == string.Empty)
                 return 0;
             else
@@ -1056,8 +1016,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.method.genmetho
     }
     //</Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.method.genmethod.genclass.genclass023.genclass023
 {
@@ -1088,7 +1046,15 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.method.genmetho
             }
             catch (Microsoft.CSharp.RuntimeBinder.RuntimeBinderException e)
             {
-                if (ErrorVerifier.Verify(ErrorMessageId.ValConstraintNotSatisfied, e.Message, "MemberClass<T>.Method_ReturnsTNegConstraint<U>(U)", "U", "Test"))
+                if (
+                    ErrorVerifier.Verify(
+                        ErrorMessageId.ValConstraintNotSatisfied,
+                        e.Message,
+                        "MemberClass<T>.Method_ReturnsTNegConstraint<U>(U)",
+                        "U",
+                        "Test"
+                    )
+                )
                     return 0;
             }
 
@@ -1097,8 +1063,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.method.genmetho
     }
     //</Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.method.genmethod.genclass.genclass024.genclass024
 {
@@ -1112,10 +1076,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.method.genmetho
     public class Test : I
     {
         internal int Field;
-        public class InnerTest : Test
-        {
-        }
 
+        public class InnerTest : Test { }
 
         public static void DynamicCSharpRunTest()
         {
@@ -1125,22 +1087,13 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.method.genmetho
         public static int MainMethod()
         {
             dynamic mc = new MemberClass<Test>();
-            Test mc2 = new Test()
-            {
-                Field = 2
-            }
-
-            ;
+            Test mc2 = new Test() { Field = 2 };
             dynamic dy2 = mc2;
-            Test mc3 = new InnerTest()
-            {
-                Field = 3
-            }
-
-            ;
+            Test mc3 = new InnerTest() { Field = 3 };
             dynamic dy3 = mc3;
             decimal dec = 3;
-            decimal result = (decimal)mc.Method_ReturnsFloatNegConstraint<Test, InnerTest>(dy2, dy2, dy3, ref dec);
+            decimal result = (decimal)
+                mc.Method_ReturnsFloatNegConstraint<Test, InnerTest>(dy2, dy2, dy3, ref dec);
             if (result != 3.4M)
                 return 1;
             return 0;
@@ -1148,8 +1101,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.method.genmetho
     }
     //</Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.method.genmethod.genclass.genclass025.genclass025
 {
@@ -1172,12 +1123,10 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.method.genmetho
         public static int MainMethod()
         {
             dynamic mc = new MemberClass<string>.NestedMemberClass<int>();
-            Func<string, int> func = delegate (string arg)
+            Func<string, int> func = delegate(string arg)
             {
                 return (int)mc.Method_ReturnsU(null);
-            }
-
-            ;
+            };
             if (func(null) == 0)
                 return 0;
             else
@@ -1186,8 +1135,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.method.genmetho
     }
     //</Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.method.genmethod.genclass.genclass026.genclass026
 {
@@ -1210,7 +1157,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.method.genmetho
         public static int MainMethod()
         {
             dynamic mc = new MemberClass<string>.NestedMemberClass<int>();
-            Func<int, int, string> func = (int arg1, int arg2) => (string)mc.Method_ReturnsT(arg1, arg1);
+            Func<int, int, string> func = (int arg1, int arg2) =>
+                (string)mc.Method_ReturnsT(arg1, arg1);
             if (func(1, 2) == null)
                 return 0;
             else
@@ -1219,8 +1167,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.method.genmetho
     }
     //</Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.method.genmethod.genclass.genclass027.genclass027
 {
@@ -1233,7 +1179,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.method.genmetho
 
     public class Test
     {
-
         public static void DynamicCSharpRunTest()
         {
             Assert.Equal(0, MainMethod());
@@ -1254,8 +1199,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.method.genmetho
     //</Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.method.genmethod.genclass.genclass028.genclass028
 {
     // <Title> Tests generic class generic method used in volatile field initializer.</Title>
@@ -1270,6 +1213,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.method.genmetho
         private dynamic _mc = new MemberClass<string>.NestedMemberClass<string>();
         private dynamic _dy = "Me";
         private volatile dynamic _field;
+
         public Test()
         {
             _field = _mc.Method_ReturnsDynamic(null, "Test", _dy);
@@ -1292,8 +1236,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.method.genmetho
     }
     //</Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.method.genmethod.genclass.genclass030.genclass030
 {
@@ -1327,8 +1269,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.method.genmetho
     //</Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.method.genmethod.genclass.genclass031.genclass031
 {
     // <Title> Tests generic class generic method used in static method body.</Title>
@@ -1340,7 +1280,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.method.genmetho
 
     public class Test
     {
-
         public static void DynamicCSharpRunTest()
         {
             Assert.Equal(0, MainMethod());
@@ -1362,8 +1301,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.method.genmetho
     //</Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.method.genmethod.genclass.genclass032.genclass032
 {
     // <Title> Tests generic class generic method used in the default section statement list.</Title>
@@ -1376,6 +1313,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.method.genmetho
     public class Test
     {
         private static int s_field = 1;
+
         [Fact]
         public static void DynamicCSharpRunTest()
         {
@@ -1405,8 +1343,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.method.genmetho
     //</Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.method.genmethod.genclass.genclass033.genclass033
 {
     // <Title> Tests generic class generic method used in the switch section statement list.</Title>
@@ -1419,9 +1355,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.method.genmetho
     public class Test
     {
         private static int s_field = 0;
-        public class InnerTest : Test
-        {
-        }
+
+        public class InnerTest : Test { }
 
         [Fact]
         public static void DynamicCSharpRunTest()
@@ -1452,8 +1387,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.method.genmetho
     //</Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.method.genmethod.genclass.genclass034.genclass034
 {
     // <Title> Tests generic class generic method used in static method body.</Title>
@@ -1465,9 +1398,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.method.genmetho
 
     public class Test
     {
-        public class InnerTest : Test
-        {
-        }
+        public class InnerTest : Test { }
 
         [Fact]
         public static void DynamicCSharpRunTest()
@@ -1488,8 +1419,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.method.genmetho
     //</Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.method.genmethod.genclass.genclass035.genclass035
 {
     // <Title> Tests generic class generic method used in static method body.</Title>
@@ -1502,6 +1431,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.method.genmetho
     public class Test
     {
         private int _field;
+
         public Test()
         {
             _field = 10;
@@ -1524,12 +1454,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.method.genmetho
         public static int MainMethod()
         {
             dynamic mc = new MemberClassWithNewConstraint<Test>();
-            var t = new InnerTest()
-            {
-                _field = 0
-            }
-
-            ;
+            var t = new InnerTest() { _field = 0 };
             Test result = (Test)mc.Method_ReturnsDynamic<InnerTest>(t, t);
             if (result._field == 10)
                 return 0;
@@ -1539,8 +1464,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.method.genmetho
     }
     //</Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.method.genmethod.genclass.genclass036.genclass036
 {
@@ -1553,9 +1476,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.method.genmetho
 
     public class Test
     {
-        public class InnerTest : Test
-        {
-        }
+        public class InnerTest : Test { }
 
         [Fact]
         public static void DynamicCSharpRunTest()
@@ -1576,8 +1497,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.method.genmetho
     //</Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.method.genmethod.genclass.genclass037.genclass037
 {
     // <Title> Tests generic class generic method used in static method body.</Title>
@@ -1589,13 +1508,9 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.method.genmetho
 
     public class Test
     {
-        public class InnerTest : Test
-        {
-        }
+        public class InnerTest : Test { }
 
-        public class InnerTest2 : Test
-        {
-        }
+        public class InnerTest2 : Test { }
 
         [Fact]
         public static void DynamicCSharpRunTest()
@@ -1606,7 +1521,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.method.genmetho
         public static int MainMethod()
         {
             dynamic mc = new MemberClassWithAnotherTypeConstraint<InnerTest, Test>();
-            InnerTest result = (InnerTest)mc.Method_ReturnsDynamic<InnerTest2>(0, new Test(), new InnerTest2());
+            InnerTest result = (InnerTest)
+                mc.Method_ReturnsDynamic<InnerTest2>(0, new Test(), new InnerTest2());
             if (result == null)
                 return 0;
             else
@@ -1615,8 +1531,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.method.genmetho
     }
     //</Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.method.genmethod.genclass.genclass038.genclass038
 {
@@ -1645,7 +1559,16 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.method.genmetho
             }
             catch (Microsoft.CSharp.RuntimeBinder.RuntimeBinderException e)
             {
-                if (ErrorVerifier.Verify(ErrorMessageId.GenericConstraintNotSatisfiedRefType, e.Message, "MemberClassWithUDClassConstraint<T>.Method_ReturnsU<U>()", "C", "U", "object"))
+                if (
+                    ErrorVerifier.Verify(
+                        ErrorMessageId.GenericConstraintNotSatisfiedRefType,
+                        e.Message,
+                        "MemberClassWithUDClassConstraint<T>.Method_ReturnsU<U>()",
+                        "C",
+                        "U",
+                        "object"
+                    )
+                )
                     //    ex.Message.Contains("'MemberClassWithUDClassConstraint<T>.Method_ReturnsU<U>()'"))
                     return 0;
             }
@@ -1655,8 +1578,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.method.genmetho
     }
     //</Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.method.genmethod.genclass.genclass041.genclass041
 {
@@ -1672,15 +1593,11 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.method.genmetho
         public class InnerTest1
         {
             public int field;
+
             public static explicit operator InnerTest2(InnerTest1 t1)
             {
                 dynamic dy = new MemberClass<InnerTest1>();
-                return new InnerTest2()
-                {
-                    field = (int)dy.Method_ReturnsU<int>(t1.field + 1)
-                }
-
-                ;
+                return new InnerTest2() { field = (int)dy.Method_ReturnsU<int>(t1.field + 1) };
             }
         }
 
@@ -1698,24 +1615,19 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.method.genmetho
         public static int MainMethod()
         {
             dynamic dy = new MemberClass<InnerTest2>();
-            InnerTest2 result1 = (InnerTest2)((InnerTest1)dy.Method_ReturnsDynamic<InnerTest1>(new InnerTest2()
-            {
-                field = 0
-            }
-
-            , new InnerTest1()
-            {
-                field = 10
-            }
-
-            , 0)); //explicit
+            InnerTest2 result1 = (InnerTest2)(
+                (InnerTest1)
+                    dy.Method_ReturnsDynamic<InnerTest1>(
+                        new InnerTest2() { field = 0 },
+                        new InnerTest1() { field = 10 },
+                        0
+                    )
+            ); //explicit
             return (result1.field == 11) ? 0 : 1;
         }
     }
     //</Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.method.genmethod.genclass.genclass003a.genclass003a
 {
@@ -1730,6 +1642,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.method.genmetho
     public class Test
     {
         private static dynamic s_mc = new MemberClass<string>();
+
         [Fact]
         public static void DynamicCSharpRunTest()
         {
@@ -1744,7 +1657,13 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.method.genmetho
             }
             catch (Microsoft.CSharp.RuntimeBinder.RuntimeBinderException e)
             {
-                if (ErrorVerifier.Verify(ErrorMessageId.CantInferMethTypeArgs, e.Message, "MemberClass<string>.Method_ReturnsU<U>(string)"))
+                if (
+                    ErrorVerifier.Verify(
+                        ErrorMessageId.CantInferMethTypeArgs,
+                        e.Message,
+                        "MemberClass<string>.Method_ReturnsU<U>(string)"
+                    )
+                )
                     return 0;
             }
 
@@ -1753,8 +1672,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.method.genmetho
     }
     //</Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.method.genmethod.genclass.genclass007a.genclass007a
 {
@@ -1771,15 +1688,11 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.method.genmetho
         public class InnerTest1
         {
             public int field;
+
             public static implicit operator InnerTest2(InnerTest1 t1)
             {
                 dynamic dy = new MemberClass<InnerTest1>();
-                return new InnerTest2()
-                {
-                    field = dy.Method_ReturnsU(t1.field + 1)
-                }
-
-                ;
+                return new InnerTest2() { field = dy.Method_ReturnsU(t1.field + 1) };
             }
         }
 
@@ -1797,24 +1710,16 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.method.genmetho
         public static int MainMethod()
         {
             dynamic dy = new MemberClass<InnerTest2>();
-            InnerTest2 result1 = dy.Method_ReturnsDynamic(new InnerTest2()
-            {
-                field = 0
-            }
-
-            , new InnerTest1()
-            {
-                field = 10
-            }
-
-            , 0); //implicit
+            InnerTest2 result1 = dy.Method_ReturnsDynamic(
+                new InnerTest2() { field = 0 },
+                new InnerTest1() { field = 10 },
+                0
+            ); //implicit
             return (result1.field == 11) ? 0 : 1;
         }
     }
     //</Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.method.genmethod.genclass.genclass008a.genclass008a
 {
@@ -1838,19 +1743,19 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.method.genmetho
         public static int MainMethod()
         {
             dynamic mc = new MemberClass<string>();
-            List<string> list = new List<string>()
-            {
-            null, string.Empty, "Test"
-            }
-
-            ;
+            List<string> list = new List<string>() { null, string.Empty, "Test" };
             List<string> list2 = new List<string>();
             foreach (string s in mc.Method_ReturnsDynamic(null, 0, list, mc))
             {
                 list2.Add(s);
             }
 
-            if (list2.Count == 3 && list2[0] == null && list2[1] == string.Empty && list2[2] == "Test")
+            if (
+                list2.Count == 3
+                && list2[0] == null
+                && list2[1] == string.Empty
+                && list2[2] == "Test"
+            )
             {
                 return 0;
             }
@@ -1860,8 +1765,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.method.genmetho
     }
     //</Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.method.genmethod.genclass.genclass010a.genclass010a
 {
@@ -1892,8 +1795,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.method.genmetho
     }
     //</Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.method.genmethod.genclass.genclass011a.genclass011a
 {
@@ -1927,8 +1828,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.method.genmetho
     //</Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.method.genmethod.genclass.genclass011b.genclass011b
 {
     // <Title> Tests generic class generic method used in static method body.</Title>
@@ -1960,8 +1859,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.method.genmetho
     //</Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.method.genmethod.genclass.genclass012a.genclass012a
 {
     // <Title> Tests generic class generic method used in static method body.</Title>
@@ -1974,7 +1871,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.method.genmetho
 
     public class Test
     {
-
         public static void DynamicCSharpRunTest()
         {
             Assert.Equal(0, MainMethod());
@@ -1997,8 +1893,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.method.genmetho
     //</Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.method.genmethod.genclass.genclass016a.genclass016a
 {
     // <Title> Tests generic class generic method used in static method body.</Title>
@@ -2013,6 +1907,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.method.genmetho
     public class Test
     {
         private int _field;
+
         public Test()
         {
             _field = 10;
@@ -2037,8 +1932,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.method.genmetho
     }
     //</Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.method.genmethod.genclass.genclass019a.genclass019a
 {
@@ -2073,8 +1966,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.method.genmetho
     //</Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.method.genmethod.genclass.genclass023a.genclass023a
 {
     // <Title> Tests generic class generic method used in static method body.</Title>
@@ -2103,7 +1994,15 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.method.genmetho
             }
             catch (Microsoft.CSharp.RuntimeBinder.RuntimeBinderException e)
             {
-                if (ErrorVerifier.Verify(ErrorMessageId.ValConstraintNotSatisfied, e.Message, "MemberClass<T>.Method_ReturnsTNegConstraint<U>(U)", "U", "Test"))
+                if (
+                    ErrorVerifier.Verify(
+                        ErrorMessageId.ValConstraintNotSatisfied,
+                        e.Message,
+                        "MemberClass<T>.Method_ReturnsTNegConstraint<U>(U)",
+                        "U",
+                        "Test"
+                    )
+                )
                     return 0;
             }
 
@@ -2112,8 +2011,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.method.genmetho
     }
     //</Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.method.genmethod.genclass.genclass027a.genclass027a
 {
@@ -2127,7 +2024,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.method.genmetho
 
     public class Test
     {
-
         public static void DynamicCSharpRunTest()
         {
             Assert.Equal(0, MainMethod());
@@ -2147,8 +2043,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.method.genmetho
     }
     //</Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.method.genmethod.genclass.genclass029a.genclass029a
 {
@@ -2182,8 +2076,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.method.genmetho
     //</Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.method.genmethod.genclass.genclass035a.genclass035a
 {
     // <Title> Tests generic class generic method used in static method body.</Title>
@@ -2197,6 +2089,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.method.genmetho
     public class Test
     {
         private int _field;
+
         public Test()
         {
             _field = 10;
@@ -2219,12 +2112,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.method.genmetho
         public static int MainMethod()
         {
             dynamic mc = new MemberClassWithNewConstraint<Test>();
-            Test t = new InnerTest()
-            {
-                _field = 0
-            }
-
-            ;
+            Test t = new InnerTest() { _field = 0 };
             Test result = mc.Method_ReturnsDynamic(t, t);
             if (result._field == 10)
                 return 0;
@@ -2234,8 +2122,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.method.genmetho
     }
     //</Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.method.genmethod.genclass.genclass037a.genclass037a
 {
@@ -2249,13 +2135,9 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.method.genmetho
 
     public class Test
     {
-        public class InnerTest : Test
-        {
-        }
+        public class InnerTest : Test { }
 
-        public class InnerTest2 : Test
-        {
-        }
+        public class InnerTest2 : Test { }
 
         [Fact]
         public static void DynamicCSharpRunTest()
@@ -2276,8 +2158,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.method.genmetho
     //</Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.method.genmethod.genclass.genclass041a.genclass041a
 {
     // <Title> Tests generic class generic method used in explicit operator.</Title>
@@ -2293,15 +2173,11 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.method.genmetho
         public class InnerTest1
         {
             public int field;
+
             public static explicit operator InnerTest2(InnerTest1 t1)
             {
                 dynamic dy = new MemberClass<InnerTest1>();
-                return new InnerTest2()
-                {
-                    field = dy.Method_ReturnsU(t1.field + 1)
-                }
-
-                ;
+                return new InnerTest2() { field = dy.Method_ReturnsU(t1.field + 1) };
             }
         }
 
@@ -2319,17 +2195,14 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.method.genmetho
         public static int MainMethod()
         {
             dynamic dy = new MemberClass<InnerTest2>();
-            InnerTest2 result1 = (InnerTest2)((InnerTest1)dy.Method_ReturnsDynamic(new InnerTest2()
-            {
-                field = 0
-            }
-
-            , new InnerTest1()
-            {
-                field = 10
-            }
-
-            , 0)); //explicit
+            InnerTest2 result1 = (InnerTest2)(
+                (InnerTest1)
+                    dy.Method_ReturnsDynamic(
+                        new InnerTest2() { field = 0 },
+                        new InnerTest1() { field = 10 },
+                        0
+                    )
+            ); //explicit
             return (result1.field == 11) ? 0 : 1;
         }
     }

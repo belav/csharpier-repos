@@ -11,7 +11,9 @@ namespace Microsoft.CodeAnalysis.PreferFrameworkType
     internal static class PreferFrameworkTypeConstants
     {
         public const string PreferFrameworkType = nameof(PreferFrameworkType);
-        public static readonly ImmutableDictionary<string, string> Properties =
-            ImmutableDictionary<string, string>.Empty.Add(PreferFrameworkType, "");
+        public static readonly ImmutableDictionary<string, string> Properties = ImmutableDictionary<
+            string,
+            string
+        >.Empty.Add(PreferFrameworkType, "");
     }
 }

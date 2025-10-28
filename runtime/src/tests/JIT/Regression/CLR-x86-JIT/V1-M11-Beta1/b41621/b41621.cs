@@ -3,6 +3,7 @@
 //
 
 using Xunit;
+
 namespace Test
 {
     using System;
@@ -36,14 +37,17 @@ namespace Test
                 __arglist(
                     new AA().m_dField1,
                     (int)m_xStatic1,
-                    (float)m_uForward4 * (float)(new AA().Method1(param1, null, null, 0u)
-            )));
+                    (float)m_uForward4 * (float)(new AA().Method1(param1, null, null, 0u))
+                )
+            );
             new AA().Method1(
                 param1,
                 new long[4],
                 new ulong[4],
-                new AA().Method1(param1, new long[4], new ulong[4], new BB().m_uField2));
+                new AA().Method1(param1, new long[4], new ulong[4], new BB().m_uField2)
+            );
         }
+
         [Fact]
         public static void TestEntryPoint()
         {

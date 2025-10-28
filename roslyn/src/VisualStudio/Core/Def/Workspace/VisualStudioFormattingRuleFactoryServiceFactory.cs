@@ -22,22 +22,28 @@ using Roslyn.Utilities;
 
 namespace Microsoft.VisualStudio.LanguageServices.Implementation
 {
-    [ExportWorkspaceService(typeof(IHostDependentFormattingRuleFactoryService), ServiceLayer.Host), Shared]
-    internal sealed class VisualStudioFormattingRuleFactoryService : IHostDependentFormattingRuleFactoryService
+    [
+        ExportWorkspaceService(
+            typeof(IHostDependentFormattingRuleFactoryService),
+            ServiceLayer.Host
+        ),
+        Shared
+    ]
+    internal sealed class VisualStudioFormattingRuleFactoryService
+        : IHostDependentFormattingRuleFactoryService
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public VisualStudioFormattingRuleFactoryService()
-        {
-        }
-        public bool ShouldUseBaseIndentation(DocumentId documentId)
-            => IsContainedDocument(documentId);
+        public VisualStudioFormattingRuleFactoryService() { }
 
-        public bool ShouldNotFormatOrCommitOnPaste(DocumentId documentId)
-            => IsContainedDocument(documentId);
+        public bool ShouldUseBaseIndentation(DocumentId documentId) =>
+            IsContainedDocument(documentId);
 
-        private static bool IsContainedDocument(DocumentId documentId)
-            => ContainedDocument.TryGetContainedDocument(documentId) != null;
+        public bool ShouldNotFormatOrCommitOnPaste(DocumentId documentId) =>
+            IsContainedDocument(documentId);
+
+        private static bool IsContainedDocument(DocumentId documentId) =>
+            ContainedDocument.TryGetContainedDocument(documentId) != null;
 
         public AbstractFormattingRule CreateRule(ParsedDocument document, int position)
         {
@@ -88,12 +94,19 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
             }
 
             FatalError.ReportAndCatch(
-                new InvalidOperationException($"Can't find an intersection. Visible spans count: {spans.Count}"));
+                new InvalidOperationException(
+                    $"Can't find an intersection. Visible spans count: {spans.Count}"
+                )
+            );
 
             return NoOpFormattingRule.Instance;
         }
 
-        public IEnumerable<TextChange> FilterFormattedChanges(DocumentId documentId, TextSpan span, IList<TextChange> changes)
+        public IEnumerable<TextChange> FilterFormattedChanges(
+            DocumentId documentId,
+            TextSpan span,
+            IList<TextChange> changes
+        )
         {
             var containedDocument = ContainedDocument.TryGetContainedDocument(documentId);
             if (containedDocument == null)

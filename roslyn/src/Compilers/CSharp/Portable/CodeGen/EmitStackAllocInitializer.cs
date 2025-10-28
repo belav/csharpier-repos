@@ -20,13 +20,18 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGen
         {
             Debug.Assert(type is PointerTypeSymbol || type is NamedTypeSymbol);
 
-            var elementType = (type.TypeKind == TypeKind.Pointer
-                ? ((PointerTypeSymbol)type).PointedAtTypeWithAnnotations
-                : ((NamedTypeSymbol)type).TypeArgumentsWithAnnotationsNoUseSiteDiagnostics[0]).Type;
+            var elementType = (
+                type.TypeKind == TypeKind.Pointer
+                    ? ((PointerTypeSymbol)type).PointedAtTypeWithAnnotations
+                    : ((NamedTypeSymbol)type).TypeArgumentsWithAnnotationsNoUseSiteDiagnostics[0]
+            ).Type;
 
             var initExprs = inits.Initializers;
 
-            var initializationStyle = ShouldEmitBlockInitializerForStackAlloc(elementType, initExprs);
+            var initializationStyle = ShouldEmitBlockInitializerForStackAlloc(
+                elementType,
+                initExprs
+            );
             if (initializationStyle == ArrayInitializerStyle.Element)
             {
                 EmitElementStackAllocInitializers(elementType, initExprs, includeConstants: true);
@@ -44,13 +49,22 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGen
 
                     if (initializationStyle == ArrayInitializerStyle.Mixed)
                     {
-                        EmitElementStackAllocInitializers(elementType, initExprs, includeConstants: false);
+                        EmitElementStackAllocInitializers(
+                            elementType,
+                            initExprs,
+                            includeConstants: false
+                        );
                     }
                 }
                 else if (elementType.EnumUnderlyingTypeOrSelf().SpecialType.SizeInBytes() == 1)
                 {
                     // Initialize the stackalloc by copying the data from a metadata blob
-                    var field = _builder.module.GetFieldForData(data, alignment: 1, inits.Syntax, _diagnostics.DiagnosticBag);
+                    var field = _builder.module.GetFieldForData(
+                        data,
+                        alignment: 1,
+                        inits.Syntax,
+                        _diagnostics.DiagnosticBag
+                    );
                     _builder.EmitOpCode(ILOpCode.Dup);
                     _builder.EmitOpCode(ILOpCode.Ldsflda);
                     _builder.EmitToken(field, inits.Syntax, _diagnostics.DiagnosticBag);
@@ -59,17 +73,28 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGen
 
                     if (initializationStyle == ArrayInitializerStyle.Mixed)
                     {
-                        EmitElementStackAllocInitializers(elementType, initExprs, includeConstants: false);
+                        EmitElementStackAllocInitializers(
+                            elementType,
+                            initExprs,
+                            includeConstants: false
+                        );
                     }
                 }
                 else
                 {
-                    EmitElementStackAllocInitializers(elementType, initExprs, includeConstants: true);
+                    EmitElementStackAllocInitializers(
+                        elementType,
+                        initExprs,
+                        includeConstants: true
+                    );
                 }
             }
         }
 
-        private ArrayInitializerStyle ShouldEmitBlockInitializerForStackAlloc(TypeSymbol elementType, ImmutableArray<BoundExpression> inits)
+        private ArrayInitializerStyle ShouldEmitBlockInitializerForStackAlloc(
+            TypeSymbol elementType,
+            ImmutableArray<BoundExpression> inits
+        )
         {
             if (_module.IsEncDelta)
             {
@@ -103,7 +128,11 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGen
             return ArrayInitializerStyle.Element;
         }
 
-        private void StackAllocInitializerCount(ImmutableArray<BoundExpression> inits, ref int initCount, ref int constInits)
+        private void StackAllocInitializerCount(
+            ImmutableArray<BoundExpression> inits,
+            ref int initCount,
+            ref int constInits
+        )
         {
             if (inits.Length == 0)
             {
@@ -112,7 +141,10 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGen
 
             foreach (var init in inits)
             {
-                Debug.Assert(!(init is BoundArrayInitialization), "Nested initializers are not allowed for stackalloc");
+                Debug.Assert(
+                    !(init is BoundArrayInitialization),
+                    "Nested initializers are not allowed for stackalloc"
+                );
 
                 initCount += 1;
                 if (init.ConstantValueOpt != null)
@@ -122,10 +154,16 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGen
             }
         }
 
-        private void EmitElementStackAllocInitializers(TypeSymbol elementType, ImmutableArray<BoundExpression> inits, bool includeConstants)
+        private void EmitElementStackAllocInitializers(
+            TypeSymbol elementType,
+            ImmutableArray<BoundExpression> inits,
+            bool includeConstants
+        )
         {
             int index = 0;
-            int elementTypeSizeInBytes = elementType.EnumUnderlyingTypeOrSelf().SpecialType.SizeInBytes();
+            int elementTypeSizeInBytes = elementType
+                .EnumUnderlyingTypeOrSelf()
+                .SpecialType.SizeInBytes();
             foreach (BoundExpression init in inits)
             {
                 if (includeConstants || init.ConstantValueOpt == null)
@@ -140,7 +178,12 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGen
             }
         }
 
-        private void EmitPointerElementAccess(BoundExpression init, TypeSymbol elementType, int elementTypeSizeInBytes, int index)
+        private void EmitPointerElementAccess(
+            BoundExpression init,
+            TypeSymbol elementType,
+            int elementTypeSizeInBytes,
+            int index
+        )
         {
             if (index == 0)
             {
@@ -167,7 +210,11 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGen
             }
         }
 
-        private void EmitIntConstantOrSizeOf(BoundExpression init, TypeSymbol elementType, int elementTypeSizeInBytes)
+        private void EmitIntConstantOrSizeOf(
+            BoundExpression init,
+            TypeSymbol elementType,
+            int elementTypeSizeInBytes
+        )
         {
             if (elementTypeSizeInBytes == 0)
             {

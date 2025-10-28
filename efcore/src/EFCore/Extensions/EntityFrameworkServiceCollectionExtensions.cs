@@ -55,14 +55,21 @@ public static class EntityFrameworkServiceCollectionExtensions
     /// <param name="contextLifetime">The lifetime with which to register the DbContext service in the container.</param>
     /// <param name="optionsLifetime">The lifetime with which to register the DbContextOptions service in the container.</param>
     /// <returns>The same service collection so that multiple calls can be chained.</returns>
-    public static IServiceCollection AddDbContext
-        <[DynamicallyAccessedMembers(DbContext.DynamicallyAccessedMemberTypes)] TContext>(
-            this IServiceCollection serviceCollection,
-            Action<DbContextOptionsBuilder>? optionsAction = null,
-            ServiceLifetime contextLifetime = ServiceLifetime.Scoped,
-            ServiceLifetime optionsLifetime = ServiceLifetime.Scoped)
-        where TContext : DbContext
-        => AddDbContext<TContext, TContext>(serviceCollection, optionsAction, contextLifetime, optionsLifetime);
+    public static IServiceCollection AddDbContext<
+        [DynamicallyAccessedMembers(DbContext.DynamicallyAccessedMemberTypes)] TContext
+    >(
+        this IServiceCollection serviceCollection,
+        Action<DbContextOptionsBuilder>? optionsAction = null,
+        ServiceLifetime contextLifetime = ServiceLifetime.Scoped,
+        ServiceLifetime optionsLifetime = ServiceLifetime.Scoped
+    )
+        where TContext : DbContext =>
+        AddDbContext<TContext, TContext>(
+            serviceCollection,
+            optionsAction,
+            contextLifetime,
+            optionsLifetime
+        );
 
     /// <summary>
     ///     Registers the given context as a service in the <see cref="IServiceCollection" />.
@@ -107,18 +114,23 @@ public static class EntityFrameworkServiceCollectionExtensions
     /// <param name="contextLifetime">The lifetime with which to register the DbContext service in the container.</param>
     /// <param name="optionsLifetime">The lifetime with which to register the DbContextOptions service in the container.</param>
     /// <returns>The same service collection so that multiple calls can be chained.</returns>
-    public static IServiceCollection AddDbContext
-        <TContextService, [DynamicallyAccessedMembers(DbContext.DynamicallyAccessedMemberTypes)] TContextImplementation>(
-            this IServiceCollection serviceCollection,
-            Action<DbContextOptionsBuilder>? optionsAction = null,
-            ServiceLifetime contextLifetime = ServiceLifetime.Scoped,
-            ServiceLifetime optionsLifetime = ServiceLifetime.Scoped)
-        where TContextImplementation : DbContext, TContextService
-        => AddDbContext<TContextService, TContextImplementation>(
+    public static IServiceCollection AddDbContext<
+        TContextService,
+        [DynamicallyAccessedMembers(DbContext.DynamicallyAccessedMemberTypes)]
+            TContextImplementation
+    >(
+        this IServiceCollection serviceCollection,
+        Action<DbContextOptionsBuilder>? optionsAction = null,
+        ServiceLifetime contextLifetime = ServiceLifetime.Scoped,
+        ServiceLifetime optionsLifetime = ServiceLifetime.Scoped
+    )
+        where TContextImplementation : DbContext, TContextService =>
+        AddDbContext<TContextService, TContextImplementation>(
             serviceCollection,
-            optionsAction == null
-                ? null
-                : (_, b) => optionsAction(b), contextLifetime, optionsLifetime);
+            optionsAction == null ? null : (_, b) => optionsAction(b),
+            contextLifetime,
+            optionsLifetime
+        );
 
     /// <summary>
     ///     Registers the given <see cref="DbContext" /> as a service in the <see cref="IServiceCollection" />,
@@ -159,13 +171,15 @@ public static class EntityFrameworkServiceCollectionExtensions
     /// </param>
     /// <param name="poolSize">Sets the maximum number of instances retained by the pool. Defaults to 1024.</param>
     /// <returns>The same service collection so that multiple calls can be chained.</returns>
-    public static IServiceCollection AddDbContextPool
-        <[DynamicallyAccessedMembers(DbContext.DynamicallyAccessedMemberTypes)] TContext>(
-            this IServiceCollection serviceCollection,
-            Action<DbContextOptionsBuilder> optionsAction,
-            int poolSize = DbContextPool<DbContext>.DefaultPoolSize)
-        where TContext : DbContext
-        => AddDbContextPool<TContext, TContext>(serviceCollection, optionsAction, poolSize);
+    public static IServiceCollection AddDbContextPool<
+        [DynamicallyAccessedMembers(DbContext.DynamicallyAccessedMemberTypes)] TContext
+    >(
+        this IServiceCollection serviceCollection,
+        Action<DbContextOptionsBuilder> optionsAction,
+        int poolSize = DbContextPool<DbContext>.DefaultPoolSize
+    )
+        where TContext : DbContext =>
+        AddDbContextPool<TContext, TContext>(serviceCollection, optionsAction, poolSize);
 
     /// <summary>
     ///     Registers the given <see cref="DbContext" /> as a service in the <see cref="IServiceCollection" />,
@@ -207,17 +221,25 @@ public static class EntityFrameworkServiceCollectionExtensions
     /// </param>
     /// <param name="poolSize">Sets the maximum number of instances retained by the pool. Defaults to 1024.</param>
     /// <returns>The same service collection so that multiple calls can be chained.</returns>
-    public static IServiceCollection AddDbContextPool
-        <TContextService, [DynamicallyAccessedMembers(DbContext.DynamicallyAccessedMemberTypes)] TContextImplementation>(
-            this IServiceCollection serviceCollection,
-            Action<DbContextOptionsBuilder> optionsAction,
-            int poolSize = DbContextPool<DbContext>.DefaultPoolSize)
+    public static IServiceCollection AddDbContextPool<
+        TContextService,
+        [DynamicallyAccessedMembers(DbContext.DynamicallyAccessedMemberTypes)]
+            TContextImplementation
+    >(
+        this IServiceCollection serviceCollection,
+        Action<DbContextOptionsBuilder> optionsAction,
+        int poolSize = DbContextPool<DbContext>.DefaultPoolSize
+    )
         where TContextImplementation : DbContext, TContextService
         where TContextService : class
     {
         Check.NotNull(optionsAction, nameof(optionsAction));
 
-        return AddDbContextPool<TContextService, TContextImplementation>(serviceCollection, (_, ob) => optionsAction(ob), poolSize);
+        return AddDbContextPool<TContextService, TContextImplementation>(
+            serviceCollection,
+            (_, ob) => optionsAction(ob),
+            poolSize
+        );
     }
 
     /// <summary>
@@ -267,13 +289,15 @@ public static class EntityFrameworkServiceCollectionExtensions
     /// </param>
     /// <param name="poolSize">Sets the maximum number of instances retained by the pool. Defaults to 1024.</param>
     /// <returns>The same service collection so that multiple calls can be chained.</returns>
-    public static IServiceCollection AddDbContextPool
-        <[DynamicallyAccessedMembers(DbContext.DynamicallyAccessedMemberTypes)] TContext>(
-            this IServiceCollection serviceCollection,
-            Action<IServiceProvider, DbContextOptionsBuilder> optionsAction,
-            int poolSize = DbContextPool<DbContext>.DefaultPoolSize)
-        where TContext : DbContext
-        => AddDbContextPool<TContext, TContext>(serviceCollection, optionsAction, poolSize);
+    public static IServiceCollection AddDbContextPool<
+        [DynamicallyAccessedMembers(DbContext.DynamicallyAccessedMemberTypes)] TContext
+    >(
+        this IServiceCollection serviceCollection,
+        Action<IServiceProvider, DbContextOptionsBuilder> optionsAction,
+        int poolSize = DbContextPool<DbContext>.DefaultPoolSize
+    )
+        where TContext : DbContext =>
+        AddDbContextPool<TContext, TContext>(serviceCollection, optionsAction, poolSize);
 
     /// <summary>
     ///     Registers the given <see cref="DbContext" /> as a service in the <see cref="IServiceCollection" />,
@@ -324,11 +348,15 @@ public static class EntityFrameworkServiceCollectionExtensions
     /// </param>
     /// <param name="poolSize">Sets the maximum number of instances retained by the pool. Defaults to 1024.</param>
     /// <returns>The same service collection so that multiple calls can be chained.</returns>
-    public static IServiceCollection AddDbContextPool
-        <TContextService, [DynamicallyAccessedMembers(DbContext.DynamicallyAccessedMemberTypes)] TContextImplementation>(
-            this IServiceCollection serviceCollection,
-            Action<IServiceProvider, DbContextOptionsBuilder> optionsAction,
-            int poolSize = DbContextPool<DbContext>.DefaultPoolSize)
+    public static IServiceCollection AddDbContextPool<
+        TContextService,
+        [DynamicallyAccessedMembers(DbContext.DynamicallyAccessedMemberTypes)]
+            TContextImplementation
+    >(
+        this IServiceCollection serviceCollection,
+        Action<IServiceProvider, DbContextOptionsBuilder> optionsAction,
+        int poolSize = DbContextPool<DbContext>.DefaultPoolSize
+    )
         where TContextImplementation : DbContext, TContextService
         where TContextService : class
     {
@@ -336,24 +364,36 @@ public static class EntityFrameworkServiceCollectionExtensions
 
         AddPoolingOptions<TContextImplementation>(serviceCollection, optionsAction, poolSize);
 
-        serviceCollection.TryAddSingleton<IDbContextPool<TContextImplementation>, DbContextPool<TContextImplementation>>();
-        serviceCollection.TryAddScoped<IScopedDbContextLease<TContextImplementation>, ScopedDbContextLease<TContextImplementation>>();
+        serviceCollection.TryAddSingleton<
+            IDbContextPool<TContextImplementation>,
+            DbContextPool<TContextImplementation>
+        >();
+        serviceCollection.TryAddScoped<
+            IScopedDbContextLease<TContextImplementation>,
+            ScopedDbContextLease<TContextImplementation>
+        >();
 
-        serviceCollection.TryAddScoped<TContextService>(
-            sp => sp.GetRequiredService<IScopedDbContextLease<TContextImplementation>>().Context);
+        serviceCollection.TryAddScoped<TContextService>(sp =>
+            sp.GetRequiredService<IScopedDbContextLease<TContextImplementation>>().Context
+        );
 
         if (typeof(TContextService) != typeof(TContextImplementation))
         {
-            serviceCollection.TryAddScoped(p => (TContextImplementation)p.GetService<TContextService>()!);
+            serviceCollection.TryAddScoped(p =>
+                (TContextImplementation)p.GetService<TContextService>()!
+            );
         }
 
         return serviceCollection;
     }
 
-    private static void AddPoolingOptions<[DynamicallyAccessedMembers(DbContext.DynamicallyAccessedMemberTypes)] TContext>(
+    private static void AddPoolingOptions<
+        [DynamicallyAccessedMembers(DbContext.DynamicallyAccessedMemberTypes)] TContext
+    >(
         IServiceCollection serviceCollection,
         Action<IServiceProvider, DbContextOptionsBuilder> optionsAction,
-        int poolSize)
+        int poolSize
+    )
         where TContext : DbContext
     {
         if (poolSize <= 0)
@@ -369,12 +409,14 @@ public static class EntityFrameworkServiceCollectionExtensions
             {
                 optionsAction(sp, ob);
 
-                var extension = (ob.Options.FindExtension<CoreOptionsExtension>() ?? new CoreOptionsExtension())
-                    .WithMaxPoolSize(poolSize);
+                var extension = (
+                    ob.Options.FindExtension<CoreOptionsExtension>() ?? new CoreOptionsExtension()
+                ).WithMaxPoolSize(poolSize);
 
                 ((IDbContextOptionsBuilderInfrastructure)ob).AddOrUpdateExtension(extension);
             },
-            ServiceLifetime.Singleton);
+            ServiceLifetime.Singleton
+        );
     }
 
     /// <summary>
@@ -403,13 +445,15 @@ public static class EntityFrameworkServiceCollectionExtensions
     /// <param name="contextLifetime">The lifetime with which to register the DbContext service in the container.</param>
     /// <param name="optionsLifetime">The lifetime with which to register the DbContextOptions service in the container.</param>
     /// <returns>The same service collection so that multiple calls can be chained.</returns>
-    public static IServiceCollection AddDbContext
-        <[DynamicallyAccessedMembers(DbContext.DynamicallyAccessedMemberTypes)] TContext>(
-            this IServiceCollection serviceCollection,
-            ServiceLifetime contextLifetime,
-            ServiceLifetime optionsLifetime = ServiceLifetime.Scoped)
-        where TContext : DbContext
-        => AddDbContext<TContext, TContext>(serviceCollection, contextLifetime, optionsLifetime);
+    public static IServiceCollection AddDbContext<
+        [DynamicallyAccessedMembers(DbContext.DynamicallyAccessedMemberTypes)] TContext
+    >(
+        this IServiceCollection serviceCollection,
+        ServiceLifetime contextLifetime,
+        ServiceLifetime optionsLifetime = ServiceLifetime.Scoped
+    )
+        where TContext : DbContext =>
+        AddDbContext<TContext, TContext>(serviceCollection, contextLifetime, optionsLifetime);
 
     /// <summary>
     ///     Registers the given context as a service in the <see cref="IServiceCollection" />.
@@ -438,18 +482,23 @@ public static class EntityFrameworkServiceCollectionExtensions
     /// <param name="contextLifetime">The lifetime with which to register the DbContext service in the container.</param>
     /// <param name="optionsLifetime">The lifetime with which to register the DbContextOptions service in the container.</param>
     /// <returns>The same service collection so that multiple calls can be chained.</returns>
-    public static IServiceCollection AddDbContext
-        <TContextService, [DynamicallyAccessedMembers(DbContext.DynamicallyAccessedMemberTypes)] TContextImplementation>(
-            this IServiceCollection serviceCollection,
-            ServiceLifetime contextLifetime,
-            ServiceLifetime optionsLifetime = ServiceLifetime.Scoped)
+    public static IServiceCollection AddDbContext<
+        TContextService,
+        [DynamicallyAccessedMembers(DbContext.DynamicallyAccessedMemberTypes)]
+            TContextImplementation
+    >(
+        this IServiceCollection serviceCollection,
+        ServiceLifetime contextLifetime,
+        ServiceLifetime optionsLifetime = ServiceLifetime.Scoped
+    )
         where TContextImplementation : DbContext, TContextService
-        where TContextService : class
-        => AddDbContext<TContextService, TContextImplementation>(
+        where TContextService : class =>
+        AddDbContext<TContextService, TContextImplementation>(
             serviceCollection,
             (Action<IServiceProvider, DbContextOptionsBuilder>?)null,
             contextLifetime,
-            optionsLifetime);
+            optionsLifetime
+        );
 
     /// <summary>
     ///     Registers the given context as a service in the <see cref="IServiceCollection" />.
@@ -509,14 +558,21 @@ public static class EntityFrameworkServiceCollectionExtensions
     /// <param name="contextLifetime">The lifetime with which to register the DbContext service in the container.</param>
     /// <param name="optionsLifetime">The lifetime with which to register the DbContextOptions service in the container.</param>
     /// <returns>The same service collection so that multiple calls can be chained.</returns>
-    public static IServiceCollection AddDbContext
-        <[DynamicallyAccessedMembers(DbContext.DynamicallyAccessedMemberTypes)] TContext>(
-            this IServiceCollection serviceCollection,
-            Action<IServiceProvider, DbContextOptionsBuilder>? optionsAction,
-            ServiceLifetime contextLifetime = ServiceLifetime.Scoped,
-            ServiceLifetime optionsLifetime = ServiceLifetime.Scoped)
-        where TContext : DbContext
-        => AddDbContext<TContext, TContext>(serviceCollection, optionsAction, contextLifetime, optionsLifetime);
+    public static IServiceCollection AddDbContext<
+        [DynamicallyAccessedMembers(DbContext.DynamicallyAccessedMemberTypes)] TContext
+    >(
+        this IServiceCollection serviceCollection,
+        Action<IServiceProvider, DbContextOptionsBuilder>? optionsAction,
+        ServiceLifetime contextLifetime = ServiceLifetime.Scoped,
+        ServiceLifetime optionsLifetime = ServiceLifetime.Scoped
+    )
+        where TContext : DbContext =>
+        AddDbContext<TContext, TContext>(
+            serviceCollection,
+            optionsAction,
+            contextLifetime,
+            optionsLifetime
+        );
 
     /// <summary>
     ///     Registers the given context as a service in the <see cref="IServiceCollection" />.
@@ -571,12 +627,16 @@ public static class EntityFrameworkServiceCollectionExtensions
     /// <param name="contextLifetime">The lifetime with which to register the DbContext service in the container.</param>
     /// <param name="optionsLifetime">The lifetime with which to register the DbContextOptions service in the container.</param>
     /// <returns>The same service collection so that multiple calls can be chained.</returns>
-    public static IServiceCollection AddDbContext
-        <TContextService, [DynamicallyAccessedMembers(DbContext.DynamicallyAccessedMemberTypes)] TContextImplementation>(
-            this IServiceCollection serviceCollection,
-            Action<IServiceProvider, DbContextOptionsBuilder>? optionsAction,
-            ServiceLifetime contextLifetime = ServiceLifetime.Scoped,
-            ServiceLifetime optionsLifetime = ServiceLifetime.Scoped)
+    public static IServiceCollection AddDbContext<
+        TContextService,
+        [DynamicallyAccessedMembers(DbContext.DynamicallyAccessedMemberTypes)]
+            TContextImplementation
+    >(
+        this IServiceCollection serviceCollection,
+        Action<IServiceProvider, DbContextOptionsBuilder>? optionsAction,
+        ServiceLifetime contextLifetime = ServiceLifetime.Scoped,
+        ServiceLifetime optionsLifetime = ServiceLifetime.Scoped
+    )
         where TContextImplementation : DbContext, TContextService
     {
         if (contextLifetime == ServiceLifetime.Singleton)
@@ -591,17 +651,29 @@ public static class EntityFrameworkServiceCollectionExtensions
 
         AddCoreServices<TContextImplementation>(serviceCollection, optionsAction, optionsLifetime);
 
-        if (serviceCollection.Any(d => d.ServiceType == typeof(IDbContextFactorySource<TContextImplementation>)))
+        if (
+            serviceCollection.Any(d =>
+                d.ServiceType == typeof(IDbContextFactorySource<TContextImplementation>)
+            )
+        )
         {
             // Override registration made by AddDbContextFactory
-            var serviceDescriptor = serviceCollection.FirstOrDefault(d => d.ServiceType == typeof(TContextImplementation));
+            var serviceDescriptor = serviceCollection.FirstOrDefault(d =>
+                d.ServiceType == typeof(TContextImplementation)
+            );
             if (serviceDescriptor != null)
             {
                 serviceCollection.Remove(serviceDescriptor);
             }
         }
 
-        serviceCollection.TryAdd(new ServiceDescriptor(typeof(TContextService), typeof(TContextImplementation), contextLifetime));
+        serviceCollection.TryAdd(
+            new ServiceDescriptor(
+                typeof(TContextService),
+                typeof(TContextImplementation),
+                contextLifetime
+            )
+        );
 
         if (typeof(TContextService) != typeof(TContextImplementation))
         {
@@ -609,7 +681,9 @@ public static class EntityFrameworkServiceCollectionExtensions
                 new ServiceDescriptor(
                     typeof(TContextImplementation),
                     p => (TContextImplementation)p.GetService<TContextService>()!,
-                    contextLifetime));
+                    contextLifetime
+                )
+            );
         }
 
         return serviceCollection;
@@ -671,89 +745,96 @@ public static class EntityFrameworkServiceCollectionExtensions
     ///     The default is <see cref="ServiceLifetime.Singleton" />
     /// </param>
     /// <returns>The same service collection so that multiple calls can be chained.</returns>
-    public static IServiceCollection AddDbContextFactory
-        <[DynamicallyAccessedMembers(DbContext.DynamicallyAccessedMemberTypes)] TContext>(
-            this IServiceCollection serviceCollection,
-            Action<DbContextOptionsBuilder>? optionsAction = null,
-            ServiceLifetime lifetime = ServiceLifetime.Singleton)
-        where TContext : DbContext
-        => AddDbContextFactory<TContext, DbContextFactory<TContext>>(serviceCollection, optionsAction, lifetime);
-
-    /// <summary>
-    ///     Registers an <see cref="IDbContextFactory{TContext}" /> in the <see cref="IServiceCollection" /> to create instances
-    ///     of given <see cref="DbContext" /> type.
-    /// </summary>
-    /// <remarks>
-    ///     <para>
-    ///         Registering a factory instead of registering the context type directly allows for easy creation of new
-    ///         <see cref="DbContext" /> instances.
-    ///         Registering a factory is recommended for Blazor applications and other situations where the dependency
-    ///         injection scope is not aligned with the context lifetime.
-    ///     </para>
-    ///     <para>
-    ///         Use this method when using dependency injection in your application, such as with Blazor.
-    ///         For applications that don't use dependency injection, consider creating <see cref="DbContext" />
-    ///         instances directly with its constructor. The <see cref="DbContext.OnConfiguring" /> method can then be
-    ///         overridden to configure a connection string and other options.
-    ///     </para>
-    ///     <para>
-    ///         For convenience, this method also registers the context type itself as a scoped service. This allows a context
-    ///         instance to be resolved from a dependency injection scope directly or created by the factory, as appropriate.
-    ///     </para>
-    ///     <para>
-    ///         This overload allows a specific implementation of <see cref="IDbContextFactory{TContext}" /> to be registered
-    ///         instead of using the default factory shipped with EF Core.
-    ///     </para>
-    ///     <para>
-    ///         Entity Framework Core does not support multiple parallel operations being run on the same <see cref="DbContext" />
-    ///         instance. This includes both parallel execution of async queries and any explicit concurrent use from multiple threads.
-    ///         Therefore, always await async calls immediately, or use separate DbContext instances for operations that execute
-    ///         in parallel. See <see href="https://aka.ms/efcore-docs-threading">Avoiding DbContext threading issues</see> for more information
-    ///         and examples.
-    ///     </para>
-    ///     <para>
-    ///         See <see href="https://aka.ms/efcore-docs-di">Using DbContext with dependency injection</see> and
-    ///         <see href="https://aka.ms/efcore-docs-dbcontext-factory">Using DbContext factories</see> for more information and examples.
-    ///     </para>
-    /// </remarks>
-    /// <typeparam name="TContext">The type of <see cref="DbContext" /> to be created by the factory.</typeparam>
-    /// <typeparam name="TFactory">The type of <see cref="IDbContextFactory{TContext}" /> to register.</typeparam>
-    /// <param name="serviceCollection">The <see cref="IServiceCollection" /> to add services to.</param>
-    /// <param name="optionsAction">
-    ///     <para>
-    ///         An optional action to configure the <see cref="DbContextOptions" /> for the context. This provides an
-    ///         alternative to performing configuration of the context by overriding the
-    ///         <see cref="DbContext.OnConfiguring" /> method in your derived context.
-    ///     </para>
-    ///     <para>
-    ///         If an action is supplied here, the <see cref="DbContext.OnConfiguring" /> method will still be run if it has
-    ///         been overridden on the derived context. <see cref="DbContext.OnConfiguring" /> configuration will be applied
-    ///         in addition to configuration performed here.
-    ///     </para>
-    ///     <para>
-    ///         In order for the options to be passed into your context, you need to expose a constructor on your context that takes
-    ///         <see cref="DbContextOptions{TContext}" /> and passes it to the base constructor of <see cref="DbContext" />.
-    ///     </para>
-    /// </param>
-    /// <param name="lifetime">
-    ///     The lifetime with which to register the factory and options.
-    ///     The default is <see cref="ServiceLifetime.Singleton" />
-    /// </param>
-    /// <returns>The same service collection so that multiple calls can be chained.</returns>
-    public static IServiceCollection AddDbContextFactory
-    <[DynamicallyAccessedMembers(DbContext.DynamicallyAccessedMemberTypes)] TContext,
-        [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)] TFactory>(
+    public static IServiceCollection AddDbContextFactory<
+        [DynamicallyAccessedMembers(DbContext.DynamicallyAccessedMemberTypes)] TContext
+    >(
         this IServiceCollection serviceCollection,
         Action<DbContextOptionsBuilder>? optionsAction = null,
-        ServiceLifetime lifetime = ServiceLifetime.Singleton)
-        where TContext : DbContext
-        where TFactory : IDbContextFactory<TContext>
-        => AddDbContextFactory<TContext, TFactory>(
+        ServiceLifetime lifetime = ServiceLifetime.Singleton
+    )
+        where TContext : DbContext =>
+        AddDbContextFactory<TContext, DbContextFactory<TContext>>(
             serviceCollection,
-            optionsAction == null
-                ? null
-                : (_, b) => optionsAction(b),
-            lifetime);
+            optionsAction,
+            lifetime
+        );
+
+    /// <summary>
+    ///     Registers an <see cref="IDbContextFactory{TContext}" /> in the <see cref="IServiceCollection" /> to create instances
+    ///     of given <see cref="DbContext" /> type.
+    /// </summary>
+    /// <remarks>
+    ///     <para>
+    ///         Registering a factory instead of registering the context type directly allows for easy creation of new
+    ///         <see cref="DbContext" /> instances.
+    ///         Registering a factory is recommended for Blazor applications and other situations where the dependency
+    ///         injection scope is not aligned with the context lifetime.
+    ///     </para>
+    ///     <para>
+    ///         Use this method when using dependency injection in your application, such as with Blazor.
+    ///         For applications that don't use dependency injection, consider creating <see cref="DbContext" />
+    ///         instances directly with its constructor. The <see cref="DbContext.OnConfiguring" /> method can then be
+    ///         overridden to configure a connection string and other options.
+    ///     </para>
+    ///     <para>
+    ///         For convenience, this method also registers the context type itself as a scoped service. This allows a context
+    ///         instance to be resolved from a dependency injection scope directly or created by the factory, as appropriate.
+    ///     </para>
+    ///     <para>
+    ///         This overload allows a specific implementation of <see cref="IDbContextFactory{TContext}" /> to be registered
+    ///         instead of using the default factory shipped with EF Core.
+    ///     </para>
+    ///     <para>
+    ///         Entity Framework Core does not support multiple parallel operations being run on the same <see cref="DbContext" />
+    ///         instance. This includes both parallel execution of async queries and any explicit concurrent use from multiple threads.
+    ///         Therefore, always await async calls immediately, or use separate DbContext instances for operations that execute
+    ///         in parallel. See <see href="https://aka.ms/efcore-docs-threading">Avoiding DbContext threading issues</see> for more information
+    ///         and examples.
+    ///     </para>
+    ///     <para>
+    ///         See <see href="https://aka.ms/efcore-docs-di">Using DbContext with dependency injection</see> and
+    ///         <see href="https://aka.ms/efcore-docs-dbcontext-factory">Using DbContext factories</see> for more information and examples.
+    ///     </para>
+    /// </remarks>
+    /// <typeparam name="TContext">The type of <see cref="DbContext" /> to be created by the factory.</typeparam>
+    /// <typeparam name="TFactory">The type of <see cref="IDbContextFactory{TContext}" /> to register.</typeparam>
+    /// <param name="serviceCollection">The <see cref="IServiceCollection" /> to add services to.</param>
+    /// <param name="optionsAction">
+    ///     <para>
+    ///         An optional action to configure the <see cref="DbContextOptions" /> for the context. This provides an
+    ///         alternative to performing configuration of the context by overriding the
+    ///         <see cref="DbContext.OnConfiguring" /> method in your derived context.
+    ///     </para>
+    ///     <para>
+    ///         If an action is supplied here, the <see cref="DbContext.OnConfiguring" /> method will still be run if it has
+    ///         been overridden on the derived context. <see cref="DbContext.OnConfiguring" /> configuration will be applied
+    ///         in addition to configuration performed here.
+    ///     </para>
+    ///     <para>
+    ///         In order for the options to be passed into your context, you need to expose a constructor on your context that takes
+    ///         <see cref="DbContextOptions{TContext}" /> and passes it to the base constructor of <see cref="DbContext" />.
+    ///     </para>
+    /// </param>
+    /// <param name="lifetime">
+    ///     The lifetime with which to register the factory and options.
+    ///     The default is <see cref="ServiceLifetime.Singleton" />
+    /// </param>
+    /// <returns>The same service collection so that multiple calls can be chained.</returns>
+    public static IServiceCollection AddDbContextFactory<
+        [DynamicallyAccessedMembers(DbContext.DynamicallyAccessedMemberTypes)] TContext,
+        [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)] TFactory
+    >(
+        this IServiceCollection serviceCollection,
+        Action<DbContextOptionsBuilder>? optionsAction = null,
+        ServiceLifetime lifetime = ServiceLifetime.Singleton
+    )
+        where TContext : DbContext
+        where TFactory : IDbContextFactory<TContext> =>
+        AddDbContextFactory<TContext, TFactory>(
+            serviceCollection,
+            optionsAction == null ? null : (_, b) => optionsAction(b),
+            lifetime
+        );
 
     /// <summary>
     ///     Registers an <see cref="IDbContextFactory{TContext}" /> in the <see cref="IServiceCollection" /> to create instances
@@ -819,13 +900,19 @@ public static class EntityFrameworkServiceCollectionExtensions
     ///     The default is <see cref="ServiceLifetime.Singleton" />
     /// </param>
     /// <returns>The same service collection so that multiple calls can be chained.</returns>
-    public static IServiceCollection AddDbContextFactory
-        <[DynamicallyAccessedMembers(DbContext.DynamicallyAccessedMemberTypes)] TContext>(
-            this IServiceCollection serviceCollection,
-            Action<IServiceProvider, DbContextOptionsBuilder> optionsAction,
-            ServiceLifetime lifetime = ServiceLifetime.Singleton)
-        where TContext : DbContext
-        => AddDbContextFactory<TContext, DbContextFactory<TContext>>(serviceCollection, optionsAction, lifetime);
+    public static IServiceCollection AddDbContextFactory<
+        [DynamicallyAccessedMembers(DbContext.DynamicallyAccessedMemberTypes)] TContext
+    >(
+        this IServiceCollection serviceCollection,
+        Action<IServiceProvider, DbContextOptionsBuilder> optionsAction,
+        ServiceLifetime lifetime = ServiceLifetime.Singleton
+    )
+        where TContext : DbContext =>
+        AddDbContextFactory<TContext, DbContextFactory<TContext>>(
+            serviceCollection,
+            optionsAction,
+            lifetime
+        );
 
     /// <summary>
     ///     Registers an <see cref="IDbContextFactory{TContext}" /> in the <see cref="IServiceCollection" /> to create instances
@@ -896,24 +983,27 @@ public static class EntityFrameworkServiceCollectionExtensions
     ///     The default is <see cref="ServiceLifetime.Singleton" />
     /// </param>
     /// <returns>The same service collection so that multiple calls can be chained.</returns>
-    public static IServiceCollection AddDbContextFactory
-    <[DynamicallyAccessedMembers(DbContext.DynamicallyAccessedMemberTypes)] TContext,
-        [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)] TFactory>(
+    public static IServiceCollection AddDbContextFactory<
+        [DynamicallyAccessedMembers(DbContext.DynamicallyAccessedMemberTypes)] TContext,
+        [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)] TFactory
+    >(
         this IServiceCollection serviceCollection,
         Action<IServiceProvider, DbContextOptionsBuilder>? optionsAction,
-        ServiceLifetime lifetime = ServiceLifetime.Singleton)
+        ServiceLifetime lifetime = ServiceLifetime.Singleton
+    )
         where TContext : DbContext
         where TFactory : IDbContextFactory<TContext>
     {
         AddCoreServices<TContext>(serviceCollection, optionsAction, lifetime);
 
-        serviceCollection.AddSingleton<IDbContextFactorySource<TContext>, DbContextFactorySource<TContext>>();
+        serviceCollection.AddSingleton<
+            IDbContextFactorySource<TContext>,
+            DbContextFactorySource<TContext>
+        >();
 
         serviceCollection.TryAdd(
-            new ServiceDescriptor(
-                typeof(IDbContextFactory<TContext>),
-                typeof(TFactory),
-                lifetime));
+            new ServiceDescriptor(typeof(IDbContextFactory<TContext>), typeof(TFactory), lifetime)
+        );
 
         serviceCollection.TryAdd(
             new ServiceDescriptor(
@@ -921,7 +1011,9 @@ public static class EntityFrameworkServiceCollectionExtensions
                 typeof(TContext),
                 lifetime == ServiceLifetime.Transient
                     ? ServiceLifetime.Transient
-                    : ServiceLifetime.Scoped));
+                    : ServiceLifetime.Scoped
+            )
+        );
 
         return serviceCollection;
     }
@@ -965,16 +1057,22 @@ public static class EntityFrameworkServiceCollectionExtensions
     /// </param>
     /// <param name="poolSize">Sets the maximum number of instances retained by the pool. Defaults to 1024.</param>
     /// <returns>The same service collection so that multiple calls can be chained.</returns>
-    public static IServiceCollection AddPooledDbContextFactory
-        <[DynamicallyAccessedMembers(DbContext.DynamicallyAccessedMemberTypes)] TContext>(
-            this IServiceCollection serviceCollection,
-            Action<DbContextOptionsBuilder> optionsAction,
-            int poolSize = DbContextPool<DbContext>.DefaultPoolSize)
+    public static IServiceCollection AddPooledDbContextFactory<
+        [DynamicallyAccessedMembers(DbContext.DynamicallyAccessedMemberTypes)] TContext
+    >(
+        this IServiceCollection serviceCollection,
+        Action<DbContextOptionsBuilder> optionsAction,
+        int poolSize = DbContextPool<DbContext>.DefaultPoolSize
+    )
         where TContext : DbContext
     {
         Check.NotNull(optionsAction, nameof(optionsAction));
 
-        return AddPooledDbContextFactory<TContext>(serviceCollection, (_, ob) => optionsAction(ob), poolSize);
+        return AddPooledDbContextFactory<TContext>(
+            serviceCollection,
+            (_, ob) => optionsAction(ob),
+            poolSize
+        );
     }
 
     /// <summary>
@@ -1016,11 +1114,13 @@ public static class EntityFrameworkServiceCollectionExtensions
     /// </param>
     /// <param name="poolSize">Sets the maximum number of instances retained by the pool. Defaults to 1024.</param>
     /// <returns>The same service collection so that multiple calls can be chained.</returns>
-    public static IServiceCollection AddPooledDbContextFactory
-        <[DynamicallyAccessedMembers(DbContext.DynamicallyAccessedMemberTypes)] TContext>(
-            this IServiceCollection serviceCollection,
-            Action<IServiceProvider, DbContextOptionsBuilder> optionsAction,
-            int poolSize = DbContextPool<DbContext>.DefaultPoolSize)
+    public static IServiceCollection AddPooledDbContextFactory<
+        [DynamicallyAccessedMembers(DbContext.DynamicallyAccessedMemberTypes)] TContext
+    >(
+        this IServiceCollection serviceCollection,
+        Action<IServiceProvider, DbContextOptionsBuilder> optionsAction,
+        int poolSize = DbContextPool<DbContext>.DefaultPoolSize
+    )
         where TContext : DbContext
     {
         Check.NotNull(optionsAction, nameof(optionsAction));
@@ -1029,7 +1129,10 @@ public static class EntityFrameworkServiceCollectionExtensions
 
         serviceCollection.TryAddSingleton<IDbContextPool<TContext>, DbContextPool<TContext>>();
         serviceCollection.TryAddSingleton<IDbContextFactory<TContext>>(
-            sp => new PooledDbContextFactory<TContext>(sp.GetRequiredService<IDbContextPool<TContext>>()));
+            sp => new PooledDbContextFactory<TContext>(
+                sp.GetRequiredService<IDbContextPool<TContext>>()
+            )
+        );
 
         return serviceCollection;
     }
@@ -1037,7 +1140,8 @@ public static class EntityFrameworkServiceCollectionExtensions
     private static void AddCoreServices<TContextImplementation>(
         IServiceCollection serviceCollection,
         Action<IServiceProvider, DbContextOptionsBuilder>? optionsAction,
-        ServiceLifetime optionsLifetime)
+        ServiceLifetime optionsLifetime
+    )
         where TContextImplementation : DbContext
     {
         serviceCollection.TryAddSingleton<ServiceProviderAccessor>();
@@ -1046,22 +1150,28 @@ public static class EntityFrameworkServiceCollectionExtensions
             new ServiceDescriptor(
                 typeof(DbContextOptions<TContextImplementation>),
                 p => CreateDbContextOptions<TContextImplementation>(p, optionsAction),
-                optionsLifetime));
+                optionsLifetime
+            )
+        );
 
         serviceCollection.Add(
             new ServiceDescriptor(
                 typeof(DbContextOptions),
                 p => p.GetRequiredService<DbContextOptions<TContextImplementation>>(),
-                optionsLifetime));
+                optionsLifetime
+            )
+        );
     }
 
     private static DbContextOptions<TContext> CreateDbContextOptions<TContext>(
         IServiceProvider applicationServiceProvider,
-        Action<IServiceProvider, DbContextOptionsBuilder>? optionsAction)
+        Action<IServiceProvider, DbContextOptionsBuilder>? optionsAction
+    )
         where TContext : DbContext
     {
         var builder = new DbContextOptionsBuilder<TContext>(
-            new DbContextOptions<TContext>(new Dictionary<Type, IDbContextOptionsExtension>()));
+            new DbContextOptions<TContext>(new Dictionary<Type, IDbContextOptionsExtension>())
+        );
 
         builder.UseApplicationServiceProvider(applicationServiceProvider);
 
@@ -1074,10 +1184,11 @@ public static class EntityFrameworkServiceCollectionExtensions
         where TContext : DbContext
     {
         var declaredConstructors = typeof(TContext).GetTypeInfo().DeclaredConstructors.ToList();
-        if (declaredConstructors.Count == 1
-            && declaredConstructors[0].GetParameters().Length == 0)
+        if (declaredConstructors.Count == 1 && declaredConstructors[0].GetParameters().Length == 0)
         {
-            throw new ArgumentException(CoreStrings.DbContextMissingConstructor(typeof(TContext).ShortDisplayName()));
+            throw new ArgumentException(
+                CoreStrings.DbContextMissingConstructor(typeof(TContext).ShortDisplayName())
+            );
         }
     }
 }

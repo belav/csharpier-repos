@@ -8,7 +8,12 @@ namespace Microsoft.Extensions.Logging.Console
 {
     internal static class TextWriterExtensions
     {
-        public static void WriteColoredMessage(this TextWriter textWriter, string message, ConsoleColor? background, ConsoleColor? foreground)
+        public static void WriteColoredMessage(
+            this TextWriter textWriter,
+            string message,
+            ConsoleColor? background,
+            ConsoleColor? foreground
+        )
         {
             // Order: backgroundcolor, foregroundcolor, Message, reset foregroundcolor, reset backgroundcolor
             if (background.HasValue)

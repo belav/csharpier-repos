@@ -25,51 +25,78 @@ namespace Microsoft.CodeAnalysis.CSharp.NavigationBar
     internal class CSharpNavigationBarItemService : AbstractNavigationBarItemService
     {
         private static readonly SymbolDisplayFormat s_typeFormat =
-            SymbolDisplayFormat.CSharpErrorMessageFormat.AddGenericsOptions(SymbolDisplayGenericsOptions.IncludeVariance);
+            SymbolDisplayFormat.CSharpErrorMessageFormat.AddGenericsOptions(
+                SymbolDisplayGenericsOptions.IncludeVariance
+            );
 
-        private static readonly SymbolDisplayFormat s_memberFormat =
-            new(genericsOptions: SymbolDisplayGenericsOptions.IncludeTypeParameters,
-                memberOptions: SymbolDisplayMemberOptions.IncludeParameters |
-                               SymbolDisplayMemberOptions.IncludeExplicitInterface,
-                typeQualificationStyle: SymbolDisplayTypeQualificationStyle.NameOnly,
-                parameterOptions: SymbolDisplayParameterOptions.IncludeType |
-                                  SymbolDisplayParameterOptions.IncludeName |
-                                  SymbolDisplayParameterOptions.IncludeDefaultValue |
-                                  SymbolDisplayParameterOptions.IncludeParamsRefOut,
-                miscellaneousOptions: SymbolDisplayMiscellaneousOptions.UseSpecialTypes |
-                                      SymbolDisplayMiscellaneousOptions.AllowDefaultLiteral |
-                                      SymbolDisplayMiscellaneousOptions.IncludeNullableReferenceTypeModifier);
+        private static readonly SymbolDisplayFormat s_memberFormat = new(
+            genericsOptions: SymbolDisplayGenericsOptions.IncludeTypeParameters,
+            memberOptions: SymbolDisplayMemberOptions.IncludeParameters
+                | SymbolDisplayMemberOptions.IncludeExplicitInterface,
+            typeQualificationStyle: SymbolDisplayTypeQualificationStyle.NameOnly,
+            parameterOptions: SymbolDisplayParameterOptions.IncludeType
+                | SymbolDisplayParameterOptions.IncludeName
+                | SymbolDisplayParameterOptions.IncludeDefaultValue
+                | SymbolDisplayParameterOptions.IncludeParamsRefOut,
+            miscellaneousOptions: SymbolDisplayMiscellaneousOptions.UseSpecialTypes
+                | SymbolDisplayMiscellaneousOptions.AllowDefaultLiteral
+                | SymbolDisplayMiscellaneousOptions.IncludeNullableReferenceTypeModifier
+        );
 
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public CSharpNavigationBarItemService()
-        {
-        }
+        public CSharpNavigationBarItemService() { }
 
-        protected override async Task<ImmutableArray<RoslynNavigationBarItem>> GetItemsInCurrentProcessAsync(
-            Document document, bool supportsCodeGeneration, CancellationToken cancellationToken)
+        protected override async Task<
+            ImmutableArray<RoslynNavigationBarItem>
+        > GetItemsInCurrentProcessAsync(
+            Document document,
+            bool supportsCodeGeneration,
+            CancellationToken cancellationToken
+        )
         {
-            var typesInFile = await GetTypesInFileAsync(document, cancellationToken).ConfigureAwait(false);
-            var tree = await document.GetRequiredSyntaxTreeAsync(cancellationToken).ConfigureAwait(false);
-            return GetMembersInTypes(document.Project.Solution, tree, typesInFile, cancellationToken);
+            var typesInFile = await GetTypesInFileAsync(document, cancellationToken)
+                .ConfigureAwait(false);
+            var tree = await document
+                .GetRequiredSyntaxTreeAsync(cancellationToken)
+                .ConfigureAwait(false);
+            return GetMembersInTypes(
+                document.Project.Solution,
+                tree,
+                typesInFile,
+                cancellationToken
+            );
         }
 
         private static ImmutableArray<RoslynNavigationBarItem> GetMembersInTypes(
-            Solution solution, SyntaxTree tree, IEnumerable<INamedTypeSymbol> types, CancellationToken cancellationToken)
+            Solution solution,
+            SyntaxTree tree,
+            IEnumerable<INamedTypeSymbol> types,
+            CancellationToken cancellationToken
+        )
         {
-            using (Logger.LogBlock(FunctionId.NavigationBar_ItemService_GetMembersInTypes_CSharp, cancellationToken))
+            using (
+                Logger.LogBlock(
+                    FunctionId.NavigationBar_ItemService_GetMembersInTypes_CSharp,
+                    cancellationToken
+                )
+            )
             {
                 using var _1 = ArrayBuilder<RoslynNavigationBarItem>.GetInstance(out var items);
 
                 foreach (var type in types)
                 {
-                    using var _2 = ArrayBuilder<RoslynNavigationBarItem>.GetInstance(out var memberItems);
+                    using var _2 = ArrayBuilder<RoslynNavigationBarItem>.GetInstance(
+                        out var memberItems
+                    );
 
                     foreach (var member in type.GetMembers())
                     {
-                        if (member.IsImplicitlyDeclared ||
-                            member.Kind == SymbolKind.NamedType ||
-                            IsAccessor(member))
+                        if (
+                            member.IsImplicitlyDeclared
+                            || member.Kind == SymbolKind.NamedType
+                            || IsAccessor(member)
+                        )
                         {
                             continue;
                         }
@@ -77,34 +104,55 @@ namespace Microsoft.CodeAnalysis.CSharp.NavigationBar
                         var method = member as IMethodSymbol;
                         if (method != null && method.PartialImplementationPart != null)
                         {
-                            memberItems.AddIfNotNull(CreateItemForMember(solution, method, tree, cancellationToken));
-                            memberItems.AddIfNotNull(CreateItemForMember(solution, method.PartialImplementationPart, tree, cancellationToken));
+                            memberItems.AddIfNotNull(
+                                CreateItemForMember(solution, method, tree, cancellationToken)
+                            );
+                            memberItems.AddIfNotNull(
+                                CreateItemForMember(
+                                    solution,
+                                    method.PartialImplementationPart,
+                                    tree,
+                                    cancellationToken
+                                )
+                            );
                         }
                         else
                         {
-                            Debug.Assert(method == null || method.PartialDefinitionPart == null, "NavBar expected GetMembers to return partial method definition parts but the implementation part was returned.");
+                            Debug.Assert(
+                                method == null || method.PartialDefinitionPart == null,
+                                "NavBar expected GetMembers to return partial method definition parts but the implementation part was returned."
+                            );
 
-                            memberItems.AddIfNotNull(CreateItemForMember(solution, member, tree, cancellationToken));
+                            memberItems.AddIfNotNull(
+                                CreateItemForMember(solution, member, tree, cancellationToken)
+                            );
                         }
                     }
 
-                    memberItems.Sort((x, y) =>
-                    {
-                        var textComparison = x.Text.CompareTo(y.Text);
-                        return textComparison != 0 ? textComparison : x.Grayed.CompareTo(y.Grayed);
-                    });
+                    memberItems.Sort(
+                        (x, y) =>
+                        {
+                            var textComparison = x.Text.CompareTo(y.Text);
+                            return textComparison != 0
+                                ? textComparison
+                                : x.Grayed.CompareTo(y.Grayed);
+                        }
+                    );
 
                     var spans = GetSymbolLocation(solution, type, tree, cancellationToken);
                     if (spans == null)
                         continue;
 
-                    items.Add(new SymbolItem(
-                        type.Name,
-                        text: type.ToDisplayString(s_typeFormat),
-                        glyph: type.GetGlyph(),
-                        isObsolete: type.IsObsolete(),
-                        spans.Value,
-                        childItems: memberItems.ToImmutable()));
+                    items.Add(
+                        new SymbolItem(
+                            type.Name,
+                            text: type.ToDisplayString(s_typeFormat),
+                            glyph: type.GetGlyph(),
+                            isObsolete: type.IsObsolete(),
+                            spans.Value,
+                            childItems: memberItems.ToImmutable()
+                        )
+                    );
                 }
 
                 items.Sort((x1, x2) => x1.Text.CompareTo(x2.Text));
@@ -112,16 +160,29 @@ namespace Microsoft.CodeAnalysis.CSharp.NavigationBar
             }
         }
 
-        private static async Task<IEnumerable<INamedTypeSymbol>> GetTypesInFileAsync(Document document, CancellationToken cancellationToken)
+        private static async Task<IEnumerable<INamedTypeSymbol>> GetTypesInFileAsync(
+            Document document,
+            CancellationToken cancellationToken
+        )
         {
-            var semanticModel = await document.GetRequiredSemanticModelAsync(cancellationToken).ConfigureAwait(false);
+            var semanticModel = await document
+                .GetRequiredSemanticModelAsync(cancellationToken)
+                .ConfigureAwait(false);
 
             return GetTypesInFile(semanticModel, cancellationToken);
         }
 
-        private static IEnumerable<INamedTypeSymbol> GetTypesInFile(SemanticModel semanticModel, CancellationToken cancellationToken)
+        private static IEnumerable<INamedTypeSymbol> GetTypesInFile(
+            SemanticModel semanticModel,
+            CancellationToken cancellationToken
+        )
         {
-            using (Logger.LogBlock(FunctionId.NavigationBar_ItemService_GetTypesInFile_CSharp, cancellationToken))
+            using (
+                Logger.LogBlock(
+                    FunctionId.NavigationBar_ItemService_GetTypesInFile_CSharp,
+                    cancellationToken
+                )
+            )
             {
                 var types = new HashSet<INamedTypeSymbol>();
                 var nodesToVisit = new Stack<SyntaxNode>();
@@ -143,11 +204,14 @@ namespace Microsoft.CodeAnalysis.CSharp.NavigationBar
                         types.Add((INamedTypeSymbol)type);
                     }
 
-                    if (node is BaseMethodDeclarationSyntax or
-                        BasePropertyDeclarationSyntax or
-                        BaseFieldDeclarationSyntax or
-                        StatementSyntax or
-                        ExpressionSyntax)
+                    if (
+                        node
+                        is BaseMethodDeclarationSyntax
+                            or BasePropertyDeclarationSyntax
+                            or BaseFieldDeclarationSyntax
+                            or StatementSyntax
+                            or ExpressionSyntax
+                    )
                     {
                         // quick bail out to prevent us from creating every nodes exist in current file
                         continue;
@@ -163,11 +227,21 @@ namespace Microsoft.CodeAnalysis.CSharp.NavigationBar
             }
         }
 
-        private static ISymbol? GetType(SemanticModel semanticModel, SyntaxNode node, CancellationToken cancellationToken)
-            => node switch
+        private static ISymbol? GetType(
+            SemanticModel semanticModel,
+            SyntaxNode node,
+            CancellationToken cancellationToken
+        ) =>
+            node switch
             {
-                BaseTypeDeclarationSyntax t => semanticModel.GetDeclaredSymbol(t, cancellationToken),
-                DelegateDeclarationSyntax d => semanticModel.GetDeclaredSymbol(d, cancellationToken),
+                BaseTypeDeclarationSyntax t => semanticModel.GetDeclaredSymbol(
+                    t,
+                    cancellationToken
+                ),
+                DelegateDeclarationSyntax d => semanticModel.GetDeclaredSymbol(
+                    d,
+                    cancellationToken
+                ),
                 _ => null,
             };
 
@@ -184,7 +258,11 @@ namespace Microsoft.CodeAnalysis.CSharp.NavigationBar
         }
 
         private static RoslynNavigationBarItem? CreateItemForMember(
-            Solution solution, ISymbol member, SyntaxTree tree, CancellationToken cancellationToken)
+            Solution solution,
+            ISymbol member,
+            SyntaxTree tree,
+            CancellationToken cancellationToken
+        )
         {
             var location = GetSymbolLocation(solution, member, tree, cancellationToken);
             if (location == null)
@@ -195,23 +273,43 @@ namespace Microsoft.CodeAnalysis.CSharp.NavigationBar
                 member.ToDisplayString(s_memberFormat),
                 member.GetGlyph(),
                 member.IsObsolete(),
-                location.Value);
+                location.Value
+            );
         }
 
         private static SymbolItemLocation? GetSymbolLocation(
-            Solution solution, ISymbol symbol, SyntaxTree tree, CancellationToken cancellationToken)
+            Solution solution,
+            ISymbol symbol,
+            SyntaxTree tree,
+            CancellationToken cancellationToken
+        )
         {
             cancellationToken.ThrowIfCancellationRequested();
 
             if (symbol.Kind == SymbolKind.Field)
             {
                 return symbol.ContainingType.TypeKind == TypeKind.Enum
-                    ? GetSymbolLocation(solution, symbol, tree, static reference => GetEnumMemberSpan(reference))
-                    : GetSymbolLocation(solution, symbol, tree, static reference => GetFieldReferenceSpan(reference));
+                    ? GetSymbolLocation(
+                        solution,
+                        symbol,
+                        tree,
+                        static reference => GetEnumMemberSpan(reference)
+                    )
+                    : GetSymbolLocation(
+                        solution,
+                        symbol,
+                        tree,
+                        static reference => GetFieldReferenceSpan(reference)
+                    );
             }
             else
             {
-                return GetSymbolLocation(solution, symbol, tree, static reference => reference.Span);
+                return GetSymbolLocation(
+                    solution,
+                    symbol,
+                    tree,
+                    static reference => reference.Span
+                );
             }
         }
 

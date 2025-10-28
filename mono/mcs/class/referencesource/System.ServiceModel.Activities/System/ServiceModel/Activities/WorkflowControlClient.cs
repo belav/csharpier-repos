@@ -43,40 +43,25 @@ namespace System.ServiceModel.Activities
         bool supportsTransactedInvoke;
 
         public WorkflowControlClient()
-            : base()
-        {
-
-        }
+            : base() { }
 
         public WorkflowControlClient(string endpointConfigurationName)
-            : base(endpointConfigurationName)
-        {
+            : base(endpointConfigurationName) { }
 
-        }
-
-        public WorkflowControlClient(string endpointConfigurationName, EndpointAddress remoteAddress)
-            : base(endpointConfigurationName, remoteAddress)
-        {
-
-        }
+        public WorkflowControlClient(
+            string endpointConfigurationName,
+            EndpointAddress remoteAddress
+        )
+            : base(endpointConfigurationName, remoteAddress) { }
 
         public WorkflowControlClient(string endpointConfigurationName, string remoteAddress)
-            : base(endpointConfigurationName, remoteAddress)
-        {
-
-        }
+            : base(endpointConfigurationName, remoteAddress) { }
 
         public WorkflowControlClient(Binding binding, EndpointAddress remoteAddress)
-            : base(binding, remoteAddress)
-        {
-
-        }
+            : base(binding, remoteAddress) { }
 
         public WorkflowControlClient(WorkflowControlEndpoint workflowEndpoint)
-            : base(workflowEndpoint.Binding, workflowEndpoint.Address)
-        {
-
-        }
+            : base(workflowEndpoint.Binding, workflowEndpoint.Address) { }
 
         public event EventHandler<AsyncCompletedEventArgs> AbandonCompleted;
         public event EventHandler<AsyncCompletedEventArgs> CancelCompleted;
@@ -91,9 +76,12 @@ namespace System.ServiceModel.Activities
             {
                 if (!this.checkedBinding)
                 {
-                    foreach (BindingElement bindingElement in base.Endpoint.Binding.CreateBindingElements())
+                    foreach (
+                        BindingElement bindingElement in base.Endpoint.Binding.CreateBindingElements()
+                    )
                     {
-                        TransactionFlowBindingElement transactionFlowElement = bindingElement as TransactionFlowBindingElement;
+                        TransactionFlowBindingElement transactionFlowElement =
+                            bindingElement as TransactionFlowBindingElement;
 
                         if (transactionFlowElement != null)
                         {
@@ -109,13 +97,13 @@ namespace System.ServiceModel.Activities
 
         bool IsTransactedInvoke
         {
-            get
-            {
-                return this.SupportsTransactedInvoke && Transaction.Current != null;
-            }
+            get { return this.SupportsTransactedInvoke && Transaction.Current != null; }
         }
 
-        [Fx.Tag.InheritThrows(FromDeclaringType = typeof(IWorkflowInstanceManagement), From = "Abandon")]
+        [Fx.Tag.InheritThrows(
+            FromDeclaringType = typeof(IWorkflowInstanceManagement),
+            From = "Abandon"
+        )]
         public void Abandon(Guid instanceId)
         {
             Abandon(instanceId, null);
@@ -152,14 +140,24 @@ namespace System.ServiceModel.Activities
             {
                 this.onBeginAbandonDelegate = new BeginOperationDelegate(OnBeginAbandon);
                 this.onEndAbandonDelegate = new EndOperationDelegate(OnEndAbandon);
-                this.onAbandonCompleteDelegate = Fx.ThunkCallback(new SendOrPostCallback(OnAbandonCompleted));
+                this.onAbandonCompleteDelegate = Fx.ThunkCallback(
+                    new SendOrPostCallback(OnAbandonCompleted)
+                );
             }
 
-            base.InvokeAsync(this.onBeginAbandonDelegate, new object[] { instanceId, reason },
-                this.onEndAbandonDelegate, this.onAbandonCompleteDelegate, userState);
+            base.InvokeAsync(
+                this.onBeginAbandonDelegate,
+                new object[] { instanceId, reason },
+                this.onEndAbandonDelegate,
+                this.onAbandonCompleteDelegate,
+                userState
+            );
         }
 
-        [Fx.Tag.InheritThrows(FromDeclaringType = typeof(IWorkflowInstanceManagement), From = "Cancel")]
+        [Fx.Tag.InheritThrows(
+            FromDeclaringType = typeof(IWorkflowInstanceManagement),
+            From = "Cancel"
+        )]
         public void Cancel(Guid instanceId)
         {
             if (this.IsTransactedInvoke)
@@ -172,27 +170,43 @@ namespace System.ServiceModel.Activities
             }
         }
 
-        [Fx.Tag.InheritThrows(FromDeclaringType = typeof(IWorkflowInstanceManagement), From = "Cancel")]
+        [Fx.Tag.InheritThrows(
+            FromDeclaringType = typeof(IWorkflowInstanceManagement),
+            From = "Cancel"
+        )]
         public void CancelAsync(Guid instanceId)
         {
             this.CancelAsync(instanceId, null);
         }
 
-        [Fx.Tag.InheritThrows(FromDeclaringType = typeof(IWorkflowInstanceManagement), From = "Cancel")]
+        [Fx.Tag.InheritThrows(
+            FromDeclaringType = typeof(IWorkflowInstanceManagement),
+            From = "Cancel"
+        )]
         public void CancelAsync(Guid instanceId, object userState)
         {
             if (this.onBeginCancelDelegate == null)
             {
                 this.onBeginCancelDelegate = new BeginOperationDelegate(OnBeginCancel);
                 this.onEndCancelDelegate = new EndOperationDelegate(OnEndCancel);
-                this.onCancelCompleteDelegate = Fx.ThunkCallback(new SendOrPostCallback(OnCancelCompleted));
+                this.onCancelCompleteDelegate = Fx.ThunkCallback(
+                    new SendOrPostCallback(OnCancelCompleted)
+                );
             }
 
-            base.InvokeAsync(this.onBeginCancelDelegate, new object[] { instanceId },
-                this.onEndCancelDelegate, this.onCancelCompleteDelegate, userState);
+            base.InvokeAsync(
+                this.onBeginCancelDelegate,
+                new object[] { instanceId },
+                this.onEndCancelDelegate,
+                this.onCancelCompleteDelegate,
+                userState
+            );
         }
 
-        [Fx.Tag.InheritThrows(FromDeclaringType = typeof(IWorkflowInstanceManagement), From = "Run")]
+        [Fx.Tag.InheritThrows(
+            FromDeclaringType = typeof(IWorkflowInstanceManagement),
+            From = "Run"
+        )]
         public void Run(Guid instanceId)
         {
             if (this.IsTransactedInvoke)
@@ -205,30 +219,48 @@ namespace System.ServiceModel.Activities
             }
         }
 
-        [Fx.Tag.InheritThrows(FromDeclaringType = typeof(IWorkflowInstanceManagement), From = "Run")]
+        [Fx.Tag.InheritThrows(
+            FromDeclaringType = typeof(IWorkflowInstanceManagement),
+            From = "Run"
+        )]
         public void RunAsync(Guid instanceId)
         {
             this.RunAsync(instanceId, null);
         }
-        [Fx.Tag.InheritThrows(FromDeclaringType = typeof(IWorkflowInstanceManagement), From = "Run")]
+
+        [Fx.Tag.InheritThrows(
+            FromDeclaringType = typeof(IWorkflowInstanceManagement),
+            From = "Run"
+        )]
         public void RunAsync(Guid instanceId, object userState)
         {
             if (this.onBeginRunDelegate == null)
             {
                 this.onBeginRunDelegate = new BeginOperationDelegate(OnBeginRun);
                 this.onEndRunDelegate = new EndOperationDelegate(OnEndRun);
-                this.onRunCompleteDelegate = Fx.ThunkCallback(new SendOrPostCallback(OnRunCompleted));
+                this.onRunCompleteDelegate = Fx.ThunkCallback(
+                    new SendOrPostCallback(OnRunCompleted)
+                );
             }
 
-            base.InvokeAsync(this.onBeginRunDelegate, new object[] { instanceId },
-                this.onEndRunDelegate, this.onRunCompleteDelegate, userState);
+            base.InvokeAsync(
+                this.onBeginRunDelegate,
+                new object[] { instanceId },
+                this.onEndRunDelegate,
+                this.onRunCompleteDelegate,
+                userState
+            );
         }
 
-        [Fx.Tag.InheritThrows(FromDeclaringType = typeof(IWorkflowInstanceManagement), From = "Suspend")]
+        [Fx.Tag.InheritThrows(
+            FromDeclaringType = typeof(IWorkflowInstanceManagement),
+            From = "Suspend"
+        )]
         public void Suspend(Guid instanceId)
         {
             Suspend(instanceId, SR2.DefaultSuspendReason);
         }
+
         [Fx.Tag.InheritThrows(From = "Suspend")]
         public void Suspend(Guid instanceId, string reason)
         {
@@ -241,37 +273,50 @@ namespace System.ServiceModel.Activities
                 base.Channel.Suspend(instanceId, reason);
             }
         }
+
         [Fx.Tag.InheritThrows(From = "Suspend")]
         public void SuspendAsync(Guid instanceId)
         {
             this.SuspendAsync(instanceId, SR2.DefaultSuspendReason);
         }
+
         [Fx.Tag.InheritThrows(From = "Suspend")]
         public void SuspendAsync(Guid instanceId, string reason)
         {
             this.SuspendAsync(instanceId, reason, null);
         }
+
         [Fx.Tag.InheritThrows(From = "Suspend")]
         public void SuspendAsync(Guid instanceId, object userState)
         {
             this.SuspendAsync(instanceId, SR2.DefaultSuspendReason, userState);
         }
+
         [Fx.Tag.InheritThrows(From = "Suspend")]
         public void SuspendAsync(Guid instanceId, string reason, object userState)
         {
             if (this.onBeginSuspendDelegate == null)
             {
                 this.onEndSuspendDelegate = new EndOperationDelegate(OnEndSuspend);
-                this.onSuspendCompleteDelegate = Fx.ThunkCallback(new SendOrPostCallback(OnSuspendCompleted));
+                this.onSuspendCompleteDelegate = Fx.ThunkCallback(
+                    new SendOrPostCallback(OnSuspendCompleted)
+                );
                 this.onBeginSuspendDelegate = new BeginOperationDelegate(OnBeginSuspend);
             }
 
-            base.InvokeAsync(this.onBeginSuspendDelegate, new object[] { instanceId, reason },
-                this.onEndSuspendDelegate, this.onSuspendCompleteDelegate, userState);
-
+            base.InvokeAsync(
+                this.onBeginSuspendDelegate,
+                new object[] { instanceId, reason },
+                this.onEndSuspendDelegate,
+                this.onSuspendCompleteDelegate,
+                userState
+            );
         }
 
-        [Fx.Tag.InheritThrows(FromDeclaringType = typeof(IWorkflowInstanceManagement), From = "Unsuspend")]
+        [Fx.Tag.InheritThrows(
+            FromDeclaringType = typeof(IWorkflowInstanceManagement),
+            From = "Unsuspend"
+        )]
         public void Unsuspend(Guid instanceId)
         {
             if (this.IsTransactedInvoke)
@@ -283,11 +328,13 @@ namespace System.ServiceModel.Activities
                 base.Channel.Unsuspend(instanceId);
             }
         }
+
         [Fx.Tag.InheritThrows(From = "Unsuspend")]
         public void UnsuspendAsync(Guid instanceId)
         {
             this.UnsuspendAsync(instanceId, null);
         }
+
         [Fx.Tag.InheritThrows(From = "Unsuspend")]
         public void UnsuspendAsync(Guid instanceId, object userState)
         {
@@ -295,19 +342,29 @@ namespace System.ServiceModel.Activities
             {
                 this.onBeginUnsuspendDelegate = new BeginOperationDelegate(OnBeginUnsuspend);
                 this.onEndUnsuspendDelegate = new EndOperationDelegate(OnEndUnsuspend);
-                this.onUnsuspendCompleteDelegate = Fx.ThunkCallback(new SendOrPostCallback(OnUnsuspendCompleted));
+                this.onUnsuspendCompleteDelegate = Fx.ThunkCallback(
+                    new SendOrPostCallback(OnUnsuspendCompleted)
+                );
             }
 
-            base.InvokeAsync(this.onBeginUnsuspendDelegate, new object[] { instanceId },
-                this.onEndUnsuspendDelegate, this.onUnsuspendCompleteDelegate, userState);
-
+            base.InvokeAsync(
+                this.onBeginUnsuspendDelegate,
+                new object[] { instanceId },
+                this.onEndUnsuspendDelegate,
+                this.onUnsuspendCompleteDelegate,
+                userState
+            );
         }
 
-        [Fx.Tag.InheritThrows(FromDeclaringType = typeof(IWorkflowInstanceManagement), From = "Terminate")]
+        [Fx.Tag.InheritThrows(
+            FromDeclaringType = typeof(IWorkflowInstanceManagement),
+            From = "Terminate"
+        )]
         public void Terminate(Guid instanceId)
         {
             Terminate(instanceId, SR2.DefaultTerminationReason);
         }
+
         [Fx.Tag.InheritThrows(From = "Terminate")]
         public void Terminate(Guid instanceId, string reason)
         {
@@ -320,33 +377,47 @@ namespace System.ServiceModel.Activities
                 base.Channel.Terminate(instanceId, reason);
             }
         }
-        [Fx.Tag.InheritThrows(FromDeclaringType = typeof(IWorkflowInstanceManagement), From = "Terminate")]
+
+        [Fx.Tag.InheritThrows(
+            FromDeclaringType = typeof(IWorkflowInstanceManagement),
+            From = "Terminate"
+        )]
         public void TerminateAsync(Guid instanceId)
         {
             this.TerminateAsync(instanceId, SR2.DefaultTerminationReason);
         }
+
         [Fx.Tag.InheritThrows(From = "Terminate")]
         public void TerminateAsync(Guid instanceId, string reason)
         {
             this.TerminateAsync(instanceId, reason, null);
         }
+
         [Fx.Tag.InheritThrows(From = "Terminate")]
         public void TerminateAsync(Guid instanceId, object userState)
         {
             this.TerminateAsync(instanceId, SR2.DefaultTerminationReason, userState);
         }
+
         [Fx.Tag.InheritThrows(From = "Terminate")]
         public void TerminateAsync(Guid instanceId, string reason, object userState)
         {
             if (this.onBeginTerminateDelegate == null)
             {
                 this.onEndTerminateDelegate = new EndOperationDelegate(OnEndTerminate);
-                this.onTerminateCompleteDelegate = Fx.ThunkCallback(new SendOrPostCallback(OnTerminateCompleted));
+                this.onTerminateCompleteDelegate = Fx.ThunkCallback(
+                    new SendOrPostCallback(OnTerminateCompleted)
+                );
                 this.onBeginTerminateDelegate = new BeginOperationDelegate(OnBeginTerminate);
             }
 
-            base.InvokeAsync(this.onBeginTerminateDelegate, new object[] { instanceId, reason },
-                this.onEndTerminateDelegate, this.onTerminateCompleteDelegate, userState);
+            base.InvokeAsync(
+                this.onBeginTerminateDelegate,
+                new object[] { instanceId, reason },
+                this.onEndTerminateDelegate,
+                this.onTerminateCompleteDelegate,
+                userState
+            );
         }
 
         [Fx.Tag.InheritThrows(From = "Abandon")]
@@ -354,11 +425,18 @@ namespace System.ServiceModel.Activities
         {
             return BeginAbandon(instanceId, null, callback, state);
         }
+
         [Fx.Tag.InheritThrows(From = "Abandon")]
-        public IAsyncResult BeginAbandon(Guid instanceId, string reason, AsyncCallback callback, object state)
+        public IAsyncResult BeginAbandon(
+            Guid instanceId,
+            string reason,
+            AsyncCallback callback,
+            object state
+        )
         {
             return base.Channel.BeginAbandon(instanceId, reason, callback, state);
         }
+
         [Fx.Tag.InheritThrows(From = "Abandon")]
         public void EndAbandon(IAsyncResult result)
         {
@@ -368,7 +446,13 @@ namespace System.ServiceModel.Activities
         [Fx.Tag.InheritThrows(From = "Cancel")]
         public IAsyncResult BeginCancel(Guid instanceId, AsyncCallback callback, object state)
         {
-            return new CancelAsyncResult(base.Channel, this.IsTransactedInvoke, instanceId, callback, state);
+            return new CancelAsyncResult(
+                base.Channel,
+                this.IsTransactedInvoke,
+                instanceId,
+                callback,
+                state
+            );
         }
 
         [Fx.Tag.InheritThrows(From = "Cancel")]
@@ -380,7 +464,13 @@ namespace System.ServiceModel.Activities
         [Fx.Tag.InheritThrows(From = "Run")]
         public IAsyncResult BeginRun(Guid instanceId, AsyncCallback callback, object state)
         {
-            return new RunAsyncResult(base.Channel, this.IsTransactedInvoke, instanceId, callback, state);
+            return new RunAsyncResult(
+                base.Channel,
+                this.IsTransactedInvoke,
+                instanceId,
+                callback,
+                state
+            );
         }
 
         [Fx.Tag.InheritThrows(From = "Run")]
@@ -396,9 +486,21 @@ namespace System.ServiceModel.Activities
         }
 
         [Fx.Tag.InheritThrows(From = "Suspend")]
-        public IAsyncResult BeginSuspend(Guid instanceId, string reason, AsyncCallback callback, object state)
+        public IAsyncResult BeginSuspend(
+            Guid instanceId,
+            string reason,
+            AsyncCallback callback,
+            object state
+        )
         {
-            return new SuspendAsyncResult(base.Channel, this.IsTransactedInvoke, instanceId, reason, callback, state);
+            return new SuspendAsyncResult(
+                base.Channel,
+                this.IsTransactedInvoke,
+                instanceId,
+                reason,
+                callback,
+                state
+            );
         }
 
         [Fx.Tag.InheritThrows(From = "Suspend")]
@@ -410,7 +512,13 @@ namespace System.ServiceModel.Activities
         [Fx.Tag.InheritThrows(From = "Unsuspend")]
         public IAsyncResult BeginUnsuspend(Guid instanceId, AsyncCallback callback, object state)
         {
-            return new UnsuspendAsyncResult(base.Channel, this.IsTransactedInvoke, instanceId, callback, state);
+            return new UnsuspendAsyncResult(
+                base.Channel,
+                this.IsTransactedInvoke,
+                instanceId,
+                callback,
+                state
+            );
         }
 
         [Fx.Tag.InheritThrows(From = "Unsuspend")]
@@ -426,9 +534,21 @@ namespace System.ServiceModel.Activities
         }
 
         [Fx.Tag.InheritThrows(From = "Terminate")]
-        public IAsyncResult BeginTerminate(Guid instanceId, string reason, AsyncCallback callback, object state)
+        public IAsyncResult BeginTerminate(
+            Guid instanceId,
+            string reason,
+            AsyncCallback callback,
+            object state
+        )
         {
-            return new TerminateAsyncResult(base.Channel, this.IsTransactedInvoke, instanceId, reason, callback, state);
+            return new TerminateAsyncResult(
+                base.Channel,
+                this.IsTransactedInvoke,
+                instanceId,
+                reason,
+                callback,
+                state
+            );
         }
 
         [Fx.Tag.InheritThrows(From = "Terminate")]
@@ -444,8 +564,10 @@ namespace System.ServiceModel.Activities
             if (abortCompleted != null)
             {
                 InvokeAsyncCompletedEventArgs e = (InvokeAsyncCompletedEventArgs)state;
-                abortCompleted(this,
-                    new AsyncCompletedEventArgs(e.Error, e.Cancelled, e.UserState));
+                abortCompleted(
+                    this,
+                    new AsyncCompletedEventArgs(e.Error, e.Cancelled, e.UserState)
+                );
             }
         }
 
@@ -467,8 +589,10 @@ namespace System.ServiceModel.Activities
             if (cancelCompleted != null)
             {
                 InvokeAsyncCompletedEventArgs e = (InvokeAsyncCompletedEventArgs)state;
-                cancelCompleted(this,
-                    new AsyncCompletedEventArgs(e.Error, e.Cancelled, e.UserState));
+                cancelCompleted(
+                    this,
+                    new AsyncCompletedEventArgs(e.Error, e.Cancelled, e.UserState)
+                );
             }
         }
 
@@ -498,6 +622,7 @@ namespace System.ServiceModel.Activities
         {
             return this.BeginRun((Guid)inputs[0], callback, state);
         }
+
         object[] OnEndRun(IAsyncResult result)
         {
             this.EndRun(result);
@@ -511,13 +636,18 @@ namespace System.ServiceModel.Activities
             if (suspendCompleted != null)
             {
                 InvokeAsyncCompletedEventArgs e = (InvokeAsyncCompletedEventArgs)state;
-                suspendCompleted(this, new AsyncCompletedEventArgs(e.Error, e.Cancelled, e.UserState));
+                suspendCompleted(
+                    this,
+                    new AsyncCompletedEventArgs(e.Error, e.Cancelled, e.UserState)
+                );
             }
         }
+
         IAsyncResult OnBeginSuspend(object[] inputs, AsyncCallback callback, object state)
         {
             return this.BeginSuspend((Guid)inputs[0], (string)inputs[1], callback, state);
         }
+
         object[] OnEndSuspend(IAsyncResult result)
         {
             this.EndSuspend(result);
@@ -531,13 +661,18 @@ namespace System.ServiceModel.Activities
             if (unsuspendCompleted != null)
             {
                 InvokeAsyncCompletedEventArgs e = (InvokeAsyncCompletedEventArgs)state;
-                unsuspendCompleted(this, new AsyncCompletedEventArgs(e.Error, e.Cancelled, e.UserState));
+                unsuspendCompleted(
+                    this,
+                    new AsyncCompletedEventArgs(e.Error, e.Cancelled, e.UserState)
+                );
             }
         }
+
         IAsyncResult OnBeginUnsuspend(object[] inputs, AsyncCallback callback, object state)
         {
             return this.BeginUnsuspend((Guid)inputs[0], callback, state);
         }
+
         object[] OnEndUnsuspend(IAsyncResult result)
         {
             this.EndUnsuspend(result);
@@ -551,7 +686,10 @@ namespace System.ServiceModel.Activities
             if (terminateCompleted != null)
             {
                 InvokeAsyncCompletedEventArgs e = (InvokeAsyncCompletedEventArgs)state;
-                terminateCompleted(this, new AsyncCompletedEventArgs(e.Error, e.Cancelled, e.UserState));
+                terminateCompleted(
+                    this,
+                    new AsyncCompletedEventArgs(e.Error, e.Cancelled, e.UserState)
+                );
             }
         }
 
@@ -572,8 +710,13 @@ namespace System.ServiceModel.Activities
             bool isTransacted;
             IWorkflowInstanceManagement channel;
 
-            public CancelAsyncResult(IWorkflowInstanceManagement channel, bool isTransacted, Guid instanceId,
-                AsyncCallback callback, object state)
+            public CancelAsyncResult(
+                IWorkflowInstanceManagement channel,
+                bool isTransacted,
+                Guid instanceId,
+                AsyncCallback callback,
+                object state
+            )
                 : base(callback, state)
             {
                 this.isTransacted = isTransacted;
@@ -633,8 +776,13 @@ namespace System.ServiceModel.Activities
             bool isTransacted;
             IWorkflowInstanceManagement channel;
 
-            public RunAsyncResult(IWorkflowInstanceManagement channel, bool isTransacted, Guid instanceId,
-                AsyncCallback callback, object state)
+            public RunAsyncResult(
+                IWorkflowInstanceManagement channel,
+                bool isTransacted,
+                Guid instanceId,
+                AsyncCallback callback,
+                object state
+            )
                 : base(callback, state)
             {
                 this.isTransacted = isTransacted;
@@ -650,7 +798,6 @@ namespace System.ServiceModel.Activities
             {
                 AsyncResult.End<RunAsyncResult>(result);
             }
-
 
             bool Run(Guid instanceId)
             {
@@ -688,14 +835,21 @@ namespace System.ServiceModel.Activities
                 return true;
             }
         }
+
         class SuspendAsyncResult : AsyncResult
         {
             static AsyncCompletion handleEndSuspend = new AsyncCompletion(HandleEndSuspend);
             bool isTransacted;
             IWorkflowInstanceManagement channel;
 
-            public SuspendAsyncResult(IWorkflowInstanceManagement channel, bool isTransacted,
-                Guid instanceId, string reason, AsyncCallback callback, object state)
+            public SuspendAsyncResult(
+                IWorkflowInstanceManagement channel,
+                bool isTransacted,
+                Guid instanceId,
+                string reason,
+                AsyncCallback callback,
+                object state
+            )
                 : base(callback, state)
             {
                 this.isTransacted = isTransacted;
@@ -719,7 +873,12 @@ namespace System.ServiceModel.Activities
 
                 if (this.isTransacted)
                 {
-                    result = this.channel.BeginTransactedSuspend(instanceId, reason, callback, this);
+                    result = this.channel.BeginTransactedSuspend(
+                        instanceId,
+                        reason,
+                        callback,
+                        this
+                    );
                 }
                 else
                 {
@@ -749,14 +908,20 @@ namespace System.ServiceModel.Activities
                 return true;
             }
         }
+
         class UnsuspendAsyncResult : AsyncResult
         {
             static AsyncCompletion handleEndUnsuspend = new AsyncCompletion(HandleEndUnsuspend);
             bool isTransacted;
             IWorkflowInstanceManagement channel;
 
-            public UnsuspendAsyncResult(IWorkflowInstanceManagement channel, bool isTransacted,
-                Guid instanceId, AsyncCallback callback, object state)
+            public UnsuspendAsyncResult(
+                IWorkflowInstanceManagement channel,
+                bool isTransacted,
+                Guid instanceId,
+                AsyncCallback callback,
+                object state
+            )
                 : base(callback, state)
             {
                 this.isTransacted = isTransacted;
@@ -810,14 +975,21 @@ namespace System.ServiceModel.Activities
                 return true;
             }
         }
+
         class TerminateAsyncResult : AsyncResult
         {
             static AsyncCompletion handleEndTerminate = new AsyncCompletion(HandleEndTerminate);
             bool isTransacted;
             IWorkflowInstanceManagement channel;
 
-            public TerminateAsyncResult(IWorkflowInstanceManagement channel, bool isTransacted, 
-                Guid instanceId, string reason, AsyncCallback callback, object state)
+            public TerminateAsyncResult(
+                IWorkflowInstanceManagement channel,
+                bool isTransacted,
+                Guid instanceId,
+                string reason,
+                AsyncCallback callback,
+                object state
+            )
                 : base(callback, state)
             {
                 this.isTransacted = isTransacted;
@@ -841,7 +1013,12 @@ namespace System.ServiceModel.Activities
 
                 if (this.isTransacted)
                 {
-                    result = this.channel.BeginTransactedTerminate(instanceId, reason, callback, this);
+                    result = this.channel.BeginTransactedTerminate(
+                        instanceId,
+                        reason,
+                        callback,
+                        this
+                    );
                 }
                 else
                 {

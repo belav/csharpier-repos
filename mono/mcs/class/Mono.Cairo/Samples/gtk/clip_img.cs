@@ -35,78 +35,81 @@ using Gtk;
 
 public class GtkCairo
 {
-	static DrawingArea a;
+    static DrawingArea a;
 
-	static void Main ()
-	{
-		Application.Init ();
-		Gtk.Window w = new Gtk.Window ("Mono.Cairo Circles demo");
+    static void Main()
+    {
+        Application.Init();
+        Gtk.Window w = new Gtk.Window("Mono.Cairo Circles demo");
 
-		a = new CairoGraphic ();
+        a = new CairoGraphic();
 
-		Box box = new HBox (true, 0);
-		box.Add (a);
-		w.Add (box);
-		w.Resize (500,500);
-		w.ShowAll ();
+        Box box = new HBox(true, 0);
+        box.Add(a);
+        w.Add(box);
+        w.Resize(500, 500);
+        w.ShowAll();
 
-		Application.Run ();
-	}
-
+        Application.Run();
+    }
 }
 
 public class CairoGraphic : DrawingArea
 {
-        static readonly double  M_PI = 3.14159265358979323846;
+    static readonly double M_PI = 3.14159265358979323846;
 
-	static void draw (Cairo.Context gr, int width, int height)
-	{
-		int w, h;
-		ImageSurface image;
+    static void draw(Cairo.Context gr, int width, int height)
+    {
+        int w,
+            h;
+        ImageSurface image;
 
-		gr.Scale (width, height);
-		gr.LineWidth = 0.04;
+        gr.Scale(width, height);
+        gr.LineWidth = 0.04;
 
-		gr.Arc (0.5, 0.5, 0.3, 0, 2*M_PI);
-		gr.Clip ();
-		gr.NewPath ();
+        gr.Arc(0.5, 0.5, 0.3, 0, 2 * M_PI);
+        gr.Clip();
+        gr.NewPath();
 
-		image = new ImageSurface("data/e.png");
-		w = image.Width;
-		h = image.Height;
+        image = new ImageSurface("data/e.png");
+        w = image.Width;
+        h = image.Height;
 
-		gr.Scale (1.0/w, 1.0/h);
+        gr.Scale(1.0 / w, 1.0 / h);
 
-		image.Show (gr, 0, 0);
+        image.Show(gr, 0, 0);
 
-		image.Destroy();
+        image.Destroy();
 
-		gr.Arc (0.5, 0.5, 0.3, 0, 2 * M_PI);
-		gr.Clip ();
+        gr.Arc(0.5, 0.5, 0.3, 0, 2 * M_PI);
+        gr.Clip();
 
-		gr.NewPath ();
-		gr.Rectangle (new PointD (0, 0), 1, 1);
-		gr.Fill ();
-		gr.Color = new Color (0, 1, 0, 1);
-		gr.MoveTo ( new PointD (0, 0) );
-	        gr.LineTo ( new PointD (1, 1) );
-		gr.MoveTo ( new PointD (1, 0) );
-		gr.LineTo ( new PointD (0, 1) );
-		gr.Stroke ();
-	}
+        gr.NewPath();
+        gr.Rectangle(new PointD(0, 0), 1, 1);
+        gr.Fill();
+        gr.Color = new Color(0, 1, 0, 1);
+        gr.MoveTo(new PointD(0, 0));
+        gr.LineTo(new PointD(1, 1));
+        gr.MoveTo(new PointD(1, 0));
+        gr.LineTo(new PointD(0, 1));
+        gr.Stroke();
+    }
 
-	protected override bool OnExposeEvent (Gdk.EventExpose args)
-	{
-                Gdk.Window win = args.Window;
-		//Gdk.Rectangle area = args.Area;
+    protected override bool OnExposeEvent(Gdk.EventExpose args)
+    {
+        Gdk.Window win = args.Window;
+        //Gdk.Rectangle area = args.Area;
 
-		Cairo.Context g = Gdk.Context.CreateDrawable (win);
+        Cairo.Context g = Gdk.Context.CreateDrawable(win);
 
-		int x, y, w, h, d;
-		win.GetGeometry(out x, out y, out w, out h, out d);
+        int x,
+            y,
+            w,
+            h,
+            d;
+        win.GetGeometry(out x, out y, out w, out h, out d);
 
-		draw (g, w, h);
-		return true;
-	}
+        draw(g, w, h);
+        return true;
+    }
 }
-

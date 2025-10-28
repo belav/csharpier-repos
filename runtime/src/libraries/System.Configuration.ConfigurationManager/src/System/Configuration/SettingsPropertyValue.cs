@@ -38,7 +38,12 @@ namespace System.Configuration
                     Deserialized = true;
                 }
 
-                if (_value != null && !Property.PropertyType.IsPrimitive && !(_value is string) && !(_value is DateTime))
+                if (
+                    _value != null
+                    && !Property.PropertyType.IsPrimitive
+                    && !(_value is string)
+                    && !(_value is DateTime)
+                )
                 {
                     UsingDefaultValue = false;
                     _changedSinceLastSerialized = true;
@@ -93,11 +98,17 @@ namespace System.Configuration
                 {
                     if (SerializedValue is string)
                     {
-                        value = GetObjectFromString(Property.PropertyType, Property.SerializeAs, (string)SerializedValue);
+                        value = GetObjectFromString(
+                            Property.PropertyType,
+                            Property.SerializeAs,
+                            (string)SerializedValue
+                        );
                     }
                     else
                     {
-                        if (SettingsProperty.EnableUnsafeBinaryFormatterInPropertyValueSerialization)
+                        if (
+                            SettingsProperty.EnableUnsafeBinaryFormatterInPropertyValueSerialization
+                        )
                         {
                             using (MemoryStream ms = new MemoryStream((byte[])SerializedValue))
                             {
@@ -120,17 +131,23 @@ namespace System.Configuration
                         {
                             object[] args = new object[] { Property, this, exception };
 
-                            const string webBaseEventTypeName = "System.Web.Management.WebBaseEvent, System.Web";
+                            const string webBaseEventTypeName =
+                                "System.Web.Management.WebBaseEvent, System.Web";
                             Type type = Type.GetType(webBaseEventTypeName, true);
 
-                            type.InvokeMember("RaisePropertyDeserializationWebErrorEvent",
-                                BindingFlags.NonPublic | BindingFlags.Static | BindingFlags.InvokeMethod,
-                                null, null, args, CultureInfo.InvariantCulture);
+                            type.InvokeMember(
+                                "RaisePropertyDeserializationWebErrorEvent",
+                                BindingFlags.NonPublic
+                                    | BindingFlags.Static
+                                    | BindingFlags.InvokeMethod,
+                                null,
+                                null,
+                                args,
+                                CultureInfo.InvariantCulture
+                            );
                         }
                     }
-                    catch
-                    {
-                    }
+                    catch { }
                 }
 
                 if (throwBinaryFormatterDeprecationException)
@@ -161,16 +178,28 @@ namespace System.Configuration
                 {
                     try
                     {
-                        value = GetObjectFromString(Property.PropertyType, Property.SerializeAs, (string)Property.DefaultValue);
+                        value = GetObjectFromString(
+                            Property.PropertyType,
+                            Property.SerializeAs,
+                            (string)Property.DefaultValue
+                        );
                     }
                     catch (Exception e)
                     {
-                        throw new ArgumentException(SR.Format(SR.Could_not_create_from_default_value, Property.Name, e.Message));
+                        throw new ArgumentException(
+                            SR.Format(
+                                SR.Could_not_create_from_default_value,
+                                Property.Name,
+                                e.Message
+                            )
+                        );
                     }
                 }
 
                 if (value != null && !Property.PropertyType.IsAssignableFrom(value.GetType())) // is it the correct type
-                    throw new ArgumentException(SR.Format(SR.Could_not_create_from_default_value_2, Property.Name));
+                    throw new ArgumentException(
+                        SR.Format(SR.Could_not_create_from_default_value_2, Property.Name)
+                    );
             }
 
             // Attempt 3: Create via the parameterless constructor
@@ -193,10 +222,21 @@ namespace System.Configuration
             return value;
         }
 
-        private static object GetObjectFromString(Type type, SettingsSerializeAs serializeAs, string serializedValue)
+        private static object GetObjectFromString(
+            Type type,
+            SettingsSerializeAs serializeAs,
+            string serializedValue
+        )
         {
             // Deal with string types
-            if (type == typeof(string) && (serializedValue == null || serializedValue.Length < 1 || serializeAs == SettingsSerializeAs.String))
+            if (
+                type == typeof(string)
+                && (
+                    serializedValue == null
+                    || serializedValue.Length < 1
+                    || serializeAs == SettingsSerializeAs.String
+                )
+            )
                 return serializedValue;
 
             // Return null if there is nothing to convert
@@ -229,9 +269,16 @@ namespace System.Configuration
                     return xs.Deserialize(sr);
                 case SettingsSerializeAs.String:
                     TypeConverter converter = TypeDescriptor.GetConverter(type);
-                    if (converter != null && converter.CanConvertTo(typeof(string)) && converter.CanConvertFrom(typeof(string)))
+                    if (
+                        converter != null
+                        && converter.CanConvertTo(typeof(string))
+                        && converter.CanConvertFrom(typeof(string))
+                    )
                         return converter.ConvertFromInvariantString(serializedValue);
-                    throw new ArgumentException(SR.Format(SR.Unable_to_convert_type_from_string, type), nameof(type));
+                    throw new ArgumentException(
+                        SR.Format(SR.Unable_to_convert_type_from_string, type),
+                        nameof(type)
+                    );
                 default:
                     return null;
             }
@@ -246,7 +293,12 @@ namespace System.Configuration
             if (Property.SerializeAs != SettingsSerializeAs.Binary)
 #pragma warning restore CS0618 // Type or member is obsolete
             {
-                return ConvertObjectToString(_value, Property.PropertyType, Property.SerializeAs, Property.ThrowOnErrorSerializing);
+                return ConvertObjectToString(
+                    _value,
+                    Property.PropertyType,
+                    Property.SerializeAs,
+                    Property.ThrowOnErrorSerializing
+                );
             }
 
             if (SettingsProperty.EnableUnsafeBinaryFormatterInPropertyValueSerialization)
@@ -266,7 +318,12 @@ namespace System.Configuration
             }
         }
 
-        private static string ConvertObjectToString(object propertyValue, Type type, SettingsSerializeAs serializeAs, bool throwOnError)
+        private static string ConvertObjectToString(
+            object propertyValue,
+            Type type,
+            SettingsSerializeAs serializeAs,
+            bool throwOnError
+        )
         {
             if (serializeAs == SettingsSerializeAs.ProviderSpecific)
             {
@@ -282,9 +339,16 @@ namespace System.Configuration
                 {
                     case SettingsSerializeAs.String:
                         TypeConverter converter = TypeDescriptor.GetConverter(type);
-                        if (converter != null && converter.CanConvertTo(typeof(string)) && converter.CanConvertFrom(typeof(string)))
+                        if (
+                            converter != null
+                            && converter.CanConvertTo(typeof(string))
+                            && converter.CanConvertFrom(typeof(string))
+                        )
                             return converter.ConvertToInvariantString(propertyValue);
-                        throw new ArgumentException(SR.Format(SR.Unable_to_convert_type_to_string, type), nameof(type));
+                        throw new ArgumentException(
+                            SR.Format(SR.Unable_to_convert_type_to_string, type),
+                            nameof(type)
+                        );
                     case SettingsSerializeAs.Xml:
                         XmlSerializer xs = new XmlSerializer(type);
                         StringWriter sw = new StringWriter(CultureInfo.InvariantCulture);

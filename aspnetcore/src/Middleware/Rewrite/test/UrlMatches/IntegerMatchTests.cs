@@ -11,8 +11,8 @@ public class IntegerMatchTests
     [Fact]
     public void IntegerMatch_Constructor_Integer_Parse_Excetion()
     {
-        var ex = Assert.Throws<FormatException>(
-            () => new IntegerMatch("Not an int", IntegerOperationType.Equal)
+        var ex = Assert.Throws<FormatException>(() =>
+            new IntegerMatch("Not an int", IntegerOperationType.Equal)
         );
         Assert.Equal(ex.Message, Resources.Error_IntegerMatch_FormatExceptionMessage);
     }

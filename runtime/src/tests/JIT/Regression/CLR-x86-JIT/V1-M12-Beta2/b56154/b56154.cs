@@ -3,6 +3,7 @@
 //
 
 using Xunit;
+
 namespace Test
 {
     using System;
@@ -10,6 +11,7 @@ namespace Test
     public class AA
     {
         static bool m_bFlag;
+
         static void Method1(ref byte param1)
         {
             for (; m_bFlag; param1 = param1)
@@ -17,6 +19,7 @@ namespace Test
                 Array[] a = new Array[2];
             }
         }
+
         [Fact]
         public static void TestEntryPoint()
         {

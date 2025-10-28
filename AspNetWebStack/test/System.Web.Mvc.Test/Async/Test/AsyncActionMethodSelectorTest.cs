@@ -24,7 +24,9 @@ namespace System.Web.Mvc.Async.Test
             // Assert
             Assert.Equal(3, selector.AliasedMethods.Length);
 
-            List<MethodInfo> sortedAliasedMethods = selector.AliasedMethods.OrderBy(methodInfo => methodInfo.Name).ToList();
+            List<MethodInfo> sortedAliasedMethods = selector
+                .AliasedMethods.OrderBy(methodInfo => methodInfo.Name)
+                .ToList();
             Assert.Equal("Bar", sortedAliasedMethods[0].Name);
             Assert.Equal("FooRenamed", sortedAliasedMethods[1].Name);
             Assert.Equal("Renamed", sortedAliasedMethods[2].Name);
@@ -49,7 +51,10 @@ namespace System.Web.Mvc.Async.Test
             AsyncActionMethodSelector selector = new AsyncActionMethodSelector(controllerType);
 
             // Act
-            ActionDescriptorCreator creator = selector.FindAction(new ControllerContext(), "EventPatternAsync");
+            ActionDescriptorCreator creator = selector.FindAction(
+                new ControllerContext(),
+                "EventPatternAsync"
+            );
 
             // Assert
             Assert.Null(creator);
@@ -63,7 +68,10 @@ namespace System.Web.Mvc.Async.Test
             AsyncActionMethodSelector selector = new AsyncActionMethodSelector(controllerType);
 
             // Act
-            ActionDescriptorCreator creator = selector.FindAction(new ControllerContext(), "EventPatternCompleted");
+            ActionDescriptorCreator creator = selector.FindAction(
+                new ControllerContext(),
+                "EventPatternCompleted"
+            );
 
             // Assert
             Assert.Null(creator);
@@ -77,13 +85,22 @@ namespace System.Web.Mvc.Async.Test
             AsyncActionMethodSelector selector = new AsyncActionMethodSelector(controllerType);
 
             // Act
-            ActionDescriptorCreator creator = selector.FindAction(new ControllerContext(), "OneMatch");
-            ActionDescriptor actionDescriptor = creator("someName", new Mock<ControllerDescriptor>().Object);
+            ActionDescriptorCreator creator = selector.FindAction(
+                new ControllerContext(),
+                "OneMatch"
+            );
+            ActionDescriptor actionDescriptor = creator(
+                "someName",
+                new Mock<ControllerDescriptor>().Object
+            );
 
             // Assert
             var castActionDescriptor = Assert.IsType<ReflectedActionDescriptor>(actionDescriptor);
             Assert.Equal("OneMatch", castActionDescriptor.MethodInfo.Name);
-            Assert.Equal(typeof(string), castActionDescriptor.MethodInfo.GetParameters()[0].ParameterType);
+            Assert.Equal(
+                typeof(string),
+                castActionDescriptor.MethodInfo.GetParameters()[0].ParameterType
+            );
         }
 
         [Fact]
@@ -97,8 +114,14 @@ namespace System.Web.Mvc.Async.Test
             AsyncActionMethodSelector selector = new AsyncActionMethodSelector(controllerType);
 
             // Act
-            ActionDescriptorCreator creator = selector.FindAction(new ControllerContext(), "ShouldMatchMethodWithSelectionAttribute");
-            ActionDescriptor actionDescriptor = creator("someName", new Mock<ControllerDescriptor>().Object);
+            ActionDescriptorCreator creator = selector.FindAction(
+                new ControllerContext(),
+                "ShouldMatchMethodWithSelectionAttribute"
+            );
+            ActionDescriptor actionDescriptor = creator(
+                "someName",
+                new Mock<ControllerDescriptor>().Object
+            );
 
             // Assert
             var castActionDescriptor = Assert.IsType<ReflectedActionDescriptor>(actionDescriptor);
@@ -113,7 +136,10 @@ namespace System.Web.Mvc.Async.Test
             AsyncActionMethodSelector selector = new AsyncActionMethodSelector(controllerType);
 
             // Act
-            ActionDescriptorCreator creator = selector.FindAction(new ControllerContext(), "ZeroMatch");
+            ActionDescriptorCreator creator = selector.FindAction(
+                new ControllerContext(),
+                "ZeroMatch"
+            );
 
             // Assert
             Assert.Null(creator);
@@ -128,10 +154,16 @@ namespace System.Web.Mvc.Async.Test
 
             // Act & veriy
             Assert.Throws<AmbiguousMatchException>(
-                delegate { selector.FindAction(new ControllerContext(), "TwoMatch"); },
-                "The current request for action 'TwoMatch' on controller type 'SelectionAttributeController' is ambiguous between the following action methods:" + Environment.NewLine
-              + "Void TwoMatch2() on type System.Web.Mvc.Async.Test.AsyncActionMethodSelectorTest+SelectionAttributeController" + Environment.NewLine
-              + "Void TwoMatch() on type System.Web.Mvc.Async.Test.AsyncActionMethodSelectorTest+SelectionAttributeController");
+                delegate
+                {
+                    selector.FindAction(new ControllerContext(), "TwoMatch");
+                },
+                "The current request for action 'TwoMatch' on controller type 'SelectionAttributeController' is ambiguous between the following action methods:"
+                    + Environment.NewLine
+                    + "Void TwoMatch2() on type System.Web.Mvc.Async.Test.AsyncActionMethodSelectorTest+SelectionAttributeController"
+                    + Environment.NewLine
+                    + "Void TwoMatch() on type System.Web.Mvc.Async.Test.AsyncActionMethodSelectorTest+SelectionAttributeController"
+            );
         }
 
         [Fact]
@@ -142,11 +174,19 @@ namespace System.Web.Mvc.Async.Test
             AsyncActionMethodSelector selector = new AsyncActionMethodSelector(controllerType);
 
             // Act
-            ActionDescriptorCreator creator = selector.FindAction(new ControllerContext(), "EventPattern");
-            ActionDescriptor actionDescriptor = creator("someName", new Mock<ControllerDescriptor>().Object);
+            ActionDescriptorCreator creator = selector.FindAction(
+                new ControllerContext(),
+                "EventPattern"
+            );
+            ActionDescriptor actionDescriptor = creator(
+                "someName",
+                new Mock<ControllerDescriptor>().Object
+            );
 
             // Assert
-            var castActionDescriptor = Assert.IsType<ReflectedAsyncActionDescriptor>(actionDescriptor);
+            var castActionDescriptor = Assert.IsType<ReflectedAsyncActionDescriptor>(
+                actionDescriptor
+            );
             Assert.Equal("EventPatternAsync", castActionDescriptor.AsyncMethodInfo.Name);
             Assert.Equal("EventPatternCompleted", castActionDescriptor.CompletedMethodInfo.Name);
         }
@@ -159,8 +199,14 @@ namespace System.Web.Mvc.Async.Test
             AsyncActionMethodSelector selector = new AsyncActionMethodSelector(controllerType);
 
             // Act
-            ActionDescriptorCreator creator = selector.FindAction(new ControllerContext(), "TaskPattern");
-            ActionDescriptor actionDescriptor = creator("someName", new Mock<ControllerDescriptor>().Object);
+            ActionDescriptorCreator creator = selector.FindAction(
+                new ControllerContext(),
+                "TaskPattern"
+            );
+            ActionDescriptor actionDescriptor = creator(
+                "someName",
+                new Mock<ControllerDescriptor>().Object
+            );
 
             // Assert
             var castActionDescriptor = Assert.IsType<TaskAsyncActionDescriptor>(actionDescriptor);
@@ -176,8 +222,14 @@ namespace System.Web.Mvc.Async.Test
             AsyncActionMethodSelector selector = new AsyncActionMethodSelector(controllerType);
 
             // Act
-            ActionDescriptorCreator creator = selector.FindAction(new ControllerContext(), "GenericTaskPattern");
-            ActionDescriptor actionDescriptor = creator("someName", new Mock<ControllerDescriptor>().Object);
+            ActionDescriptorCreator creator = selector.FindAction(
+                new ControllerContext(),
+                "GenericTaskPattern"
+            );
+            ActionDescriptor actionDescriptor = creator(
+                "someName",
+                new Mock<ControllerDescriptor>().Object
+            );
 
             // Assert
             var castActionDescriptor = Assert.IsType<TaskAsyncActionDescriptor>(actionDescriptor);
@@ -194,8 +246,15 @@ namespace System.Web.Mvc.Async.Test
 
             // Act & assert
             Assert.Throws<InvalidOperationException>(
-                delegate { ActionDescriptorCreator creator = selector.FindAction(new ControllerContext(), "EventPatternWithoutCompletionMethod"); },
-                @"Could not locate a method named 'EventPatternWithoutCompletionMethodCompleted' on controller type System.Web.Mvc.Async.Test.AsyncActionMethodSelectorTest+MethodLocatorController.");
+                delegate
+                {
+                    ActionDescriptorCreator creator = selector.FindAction(
+                        new ControllerContext(),
+                        "EventPatternWithoutCompletionMethod"
+                    );
+                },
+                @"Could not locate a method named 'EventPatternWithoutCompletionMethodCompleted' on controller type System.Web.Mvc.Async.Test.AsyncActionMethodSelectorTest+MethodLocatorController."
+            );
         }
 
         [Fact]
@@ -207,10 +266,19 @@ namespace System.Web.Mvc.Async.Test
 
             // Act & assert
             Assert.Throws<AmbiguousMatchException>(
-                delegate { ActionDescriptorCreator creator = selector.FindAction(new ControllerContext(), "EventPatternAmbiguous"); },
-                "Lookup for method 'EventPatternAmbiguousCompleted' on controller type 'MethodLocatorController' failed because of an ambiguity between the following methods:" + Environment.NewLine
-              + "Void EventPatternAmbiguousCompleted(Int32) on type System.Web.Mvc.Async.Test.AsyncActionMethodSelectorTest+MethodLocatorController" + Environment.NewLine
-              + "Void EventPatternAmbiguousCompleted(System.String) on type System.Web.Mvc.Async.Test.AsyncActionMethodSelectorTest+MethodLocatorController");
+                delegate
+                {
+                    ActionDescriptorCreator creator = selector.FindAction(
+                        new ControllerContext(),
+                        "EventPatternAmbiguous"
+                    );
+                },
+                "Lookup for method 'EventPatternAmbiguousCompleted' on controller type 'MethodLocatorController' failed because of an ambiguity between the following methods:"
+                    + Environment.NewLine
+                    + "Void EventPatternAmbiguousCompleted(Int32) on type System.Web.Mvc.Async.Test.AsyncActionMethodSelectorTest+MethodLocatorController"
+                    + Environment.NewLine
+                    + "Void EventPatternAmbiguousCompleted(System.String) on type System.Web.Mvc.Async.Test.AsyncActionMethodSelectorTest+MethodLocatorController"
+            );
         }
 
         [Fact]
@@ -236,7 +304,10 @@ namespace System.Web.Mvc.Async.Test
             // Assert
             Assert.Equal(6, selector.NonAliasedMethods.Count);
 
-            List<MethodInfo> sortedMethods = selector.NonAliasedMethods["foo"].OrderBy(method => method.GetParameters().Length).ToList();
+            List<MethodInfo> sortedMethods = selector
+                .NonAliasedMethods["foo"]
+                .OrderBy(method => method.GetParameters().Length)
+                .ToList();
             Assert.Equal("Foo", sortedMethods[0].Name);
             Assert.Empty(sortedMethods[0].GetParameters());
             Assert.Equal("Foo", sortedMethods[1].Name);
@@ -246,7 +317,9 @@ namespace System.Web.Mvc.Async.Test
             Assert.Equal("EventPatternAsync", methodInfo.Name);
             methodInfo = Assert.Single(selector.NonAliasedMethods["EventPatternAmbiguous"]);
             Assert.Equal("EventPatternAmbiguousAsync", methodInfo.Name);
-            methodInfo = Assert.Single(selector.NonAliasedMethods["EventPatternWithoutCompletionMethod"]);
+            methodInfo = Assert.Single(
+                selector.NonAliasedMethods["EventPatternWithoutCompletionMethod"]
+            );
             Assert.Equal("EventPatternWithoutCompletionMethodAsync", methodInfo.Name);
 
             methodInfo = Assert.Single(selector.NonAliasedMethods["TaskPattern"]);
@@ -257,60 +330,34 @@ namespace System.Web.Mvc.Async.Test
 
         private class MethodLocatorController : Controller
         {
-            public void Foo()
-            {
-            }
+            public void Foo() { }
 
-            public void Foo(string s)
-            {
-            }
+            public void Foo(string s) { }
 
             [ActionName("Foo")]
-            public void FooRenamed()
-            {
-            }
+            public void FooRenamed() { }
 
             [ActionName("Bar")]
-            public void Bar()
-            {
-            }
+            public void Bar() { }
 
             [ActionName("PrivateVoid")]
-            private void PrivateVoid()
-            {
-            }
+            private void PrivateVoid() { }
 
-            protected void ProtectedVoidAction()
-            {
-            }
+            protected void ProtectedVoidAction() { }
 
-            public static void StaticMethod()
-            {
-            }
+            public static void StaticMethod() { }
 
-            public void EventPatternAsync()
-            {
-            }
+            public void EventPatternAsync() { }
 
-            public void EventPatternCompleted()
-            {
-            }
+            public void EventPatternCompleted() { }
 
-            public void EventPatternWithoutCompletionMethodAsync()
-            {
-            }
+            public void EventPatternWithoutCompletionMethodAsync() { }
 
-            public void EventPatternAmbiguousAsync()
-            {
-            }
+            public void EventPatternAmbiguousAsync() { }
 
-            public void EventPatternAmbiguousCompleted(int i)
-            {
-            }
+            public void EventPatternAmbiguousCompleted(int i) { }
 
-            public void EventPatternAmbiguousCompleted(string s)
-            {
-            }
+            public void EventPatternAmbiguousCompleted(string s) { }
 
             public Task TaskPattern()
             {
@@ -323,9 +370,7 @@ namespace System.Web.Mvc.Async.Test
             }
 
             [ActionName("RenamedCompleted")]
-            public void Renamed()
-            {
-            }
+            public void Renamed() { }
 
             // ensure that methods inheriting from Controller or a base class are not matched
             [ActionName("Blah")]
@@ -344,32 +389,20 @@ namespace System.Web.Mvc.Async.Test
         private class SelectionAttributeController : Controller
         {
             [Match(false)]
-            public void OneMatch()
-            {
-            }
+            public void OneMatch() { }
 
-            public void OneMatch(string s)
-            {
-            }
+            public void OneMatch(string s) { }
 
-            public void TwoMatch()
-            {
-            }
+            public void TwoMatch() { }
 
             [ActionName("TwoMatch")]
-            public void TwoMatch2()
-            {
-            }
+            public void TwoMatch2() { }
 
             [Match(true), ActionName("ShouldMatchMethodWithSelectionAttribute")]
-            public void MethodHasSelectionAttribute1()
-            {
-            }
+            public void MethodHasSelectionAttribute1() { }
 
             [ActionName("ShouldMatchMethodWithSelectionAttribute")]
-            public void MethodDoesNotHaveSelectionAttribute1()
-            {
-            }
+            public void MethodDoesNotHaveSelectionAttribute1() { }
 
             private class MatchAttribute : ActionMethodSelectorAttribute
             {
@@ -380,7 +413,10 @@ namespace System.Web.Mvc.Async.Test
                     _match = match;
                 }
 
-                public override bool IsValidForRequest(ControllerContext controllerContext, MethodInfo methodInfo)
+                public override bool IsValidForRequest(
+                    ControllerContext controllerContext,
+                    MethodInfo methodInfo
+                )
                 {
                     return _match;
                 }

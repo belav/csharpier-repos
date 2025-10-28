@@ -12,50 +12,103 @@ namespace System.IO.Compression.Tests
     {
         [Theory]
         [MemberData(nameof(Utf8Comment_Data))]
-        public static void Update_Comment_AsciiEntryName_NullEncoding(string originalComment, string expectedComment) =>
-            Update_Comment_EntryName_Encoding_Internal(AsciiFileName,
-                originalComment, expectedComment, null,
-                ALettersUShortMaxValueMinusOneAndCopyRightChar, ALettersUShortMaxValueMinusOne);
+        public static void Update_Comment_AsciiEntryName_NullEncoding(
+            string originalComment,
+            string expectedComment
+        ) =>
+            Update_Comment_EntryName_Encoding_Internal(
+                AsciiFileName,
+                originalComment,
+                expectedComment,
+                null,
+                ALettersUShortMaxValueMinusOneAndCopyRightChar,
+                ALettersUShortMaxValueMinusOne
+            );
 
         [Theory]
         [MemberData(nameof(Utf8Comment_Data))]
-        public static void Update_Comment_AsciiEntryName_Utf8Encoding(string originalComment, string expectedComment) =>
-            Update_Comment_EntryName_Encoding_Internal(AsciiFileName,
-                originalComment, expectedComment, Encoding.UTF8,
-                ALettersUShortMaxValueMinusOneAndCopyRightChar, ALettersUShortMaxValueMinusOne);
+        public static void Update_Comment_AsciiEntryName_Utf8Encoding(
+            string originalComment,
+            string expectedComment
+        ) =>
+            Update_Comment_EntryName_Encoding_Internal(
+                AsciiFileName,
+                originalComment,
+                expectedComment,
+                Encoding.UTF8,
+                ALettersUShortMaxValueMinusOneAndCopyRightChar,
+                ALettersUShortMaxValueMinusOne
+            );
 
         [Theory]
         [MemberData(nameof(Latin1Comment_Data))]
-        public static void Update_Comment_AsciiEntryName_Latin1Encoding(string originalComment, string expectedComment) =>
-            Update_Comment_EntryName_Encoding_Internal(AsciiFileName,
-                originalComment, expectedComment, Encoding.Latin1,
-                ALettersUShortMaxValueMinusOneAndTwoCopyRightChars, ALettersUShortMaxValueMinusOneAndCopyRightChar);
+        public static void Update_Comment_AsciiEntryName_Latin1Encoding(
+            string originalComment,
+            string expectedComment
+        ) =>
+            Update_Comment_EntryName_Encoding_Internal(
+                AsciiFileName,
+                originalComment,
+                expectedComment,
+                Encoding.Latin1,
+                ALettersUShortMaxValueMinusOneAndTwoCopyRightChars,
+                ALettersUShortMaxValueMinusOneAndCopyRightChar
+            );
 
         [Theory]
         [MemberData(nameof(Utf8Comment_Data))]
-        public static void Update_Comment_Utf8EntryName_NullEncoding(string originalComment, string expectedComment) =>
-            Update_Comment_EntryName_Encoding_Internal(Utf8FileName,
-                originalComment, expectedComment, null,
-                ALettersUShortMaxValueMinusOneAndCopyRightChar, ALettersUShortMaxValueMinusOne);
+        public static void Update_Comment_Utf8EntryName_NullEncoding(
+            string originalComment,
+            string expectedComment
+        ) =>
+            Update_Comment_EntryName_Encoding_Internal(
+                Utf8FileName,
+                originalComment,
+                expectedComment,
+                null,
+                ALettersUShortMaxValueMinusOneAndCopyRightChar,
+                ALettersUShortMaxValueMinusOne
+            );
 
         [Theory]
         [MemberData(nameof(Utf8Comment_Data))]
-        public static void Update_Comment_Utf8EntryName_Utf8Encoding(string originalComment, string expectedComment) =>
-            Update_Comment_EntryName_Encoding_Internal(Utf8FileName,
-                originalComment, expectedComment, Encoding.UTF8,
-                ALettersUShortMaxValueMinusOneAndCopyRightChar, ALettersUShortMaxValueMinusOne);
+        public static void Update_Comment_Utf8EntryName_Utf8Encoding(
+            string originalComment,
+            string expectedComment
+        ) =>
+            Update_Comment_EntryName_Encoding_Internal(
+                Utf8FileName,
+                originalComment,
+                expectedComment,
+                Encoding.UTF8,
+                ALettersUShortMaxValueMinusOneAndCopyRightChar,
+                ALettersUShortMaxValueMinusOne
+            );
 
         [Theory]
         [MemberData(nameof(Latin1Comment_Data))]
-        public static void Update_Comment_Utf8EntryName_Latin1Encoding(string originalComment, string expectedComment) =>
+        public static void Update_Comment_Utf8EntryName_Latin1Encoding(
+            string originalComment,
+            string expectedComment
+        ) =>
             // Emoji is not supported/detected in latin1
-            Update_Comment_EntryName_Encoding_Internal(Utf8AndLatin1FileName,
-                originalComment, expectedComment, Encoding.Latin1,
-                ALettersUShortMaxValueMinusOneAndTwoCopyRightChars, ALettersUShortMaxValueMinusOneAndCopyRightChar);
+            Update_Comment_EntryName_Encoding_Internal(
+                Utf8AndLatin1FileName,
+                originalComment,
+                expectedComment,
+                Encoding.Latin1,
+                ALettersUShortMaxValueMinusOneAndTwoCopyRightChars,
+                ALettersUShortMaxValueMinusOneAndCopyRightChar
+            );
 
-        private static void Update_Comment_EntryName_Encoding_Internal(string entryName,
-            string originalCreateComment, string expectedCreateComment, Encoding encoding,
-            string originalUpdateComment, string expectedUpdateComment)
+        private static void Update_Comment_EntryName_Encoding_Internal(
+            string entryName,
+            string originalCreateComment,
+            string expectedCreateComment,
+            Encoding encoding,
+            string originalUpdateComment,
+            string expectedUpdateComment
+        )
         {
             using var ms = new MemoryStream();
 

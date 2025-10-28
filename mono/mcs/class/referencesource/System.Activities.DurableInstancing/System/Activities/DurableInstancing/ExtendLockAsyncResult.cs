@@ -13,28 +13,41 @@ namespace System.Activities.DurableInstancing
 
     sealed class ExtendLockAsyncResult : SqlWorkflowInstanceStoreAsyncResult
     {
-        static readonly string commandText = string.Format(CultureInfo.InvariantCulture, "{0}.[ExtendLock]", SqlWorkflowInstanceStoreConstants.DefaultSchema);
+        static readonly string commandText = string.Format(
+            CultureInfo.InvariantCulture,
+            "{0}.[ExtendLock]",
+            SqlWorkflowInstanceStoreConstants.DefaultSchema
+        );
 
-        public ExtendLockAsyncResult
-            (
+        public ExtendLockAsyncResult(
             InstancePersistenceContext context,
             InstancePersistenceCommand command,
             SqlWorkflowInstanceStore store,
             SqlWorkflowInstanceStoreLock storeLock,
             Transaction currentTransaction,
-            TimeSpan timeout, 
-            AsyncCallback callback, 
+            TimeSpan timeout,
+            AsyncCallback callback,
             object state
-            ) :
-            base(context, command, store, storeLock, currentTransaction, timeout, int.MaxValue, callback, state)
-        {
-        }
+        )
+            : base(
+                context,
+                command,
+                store,
+                storeLock,
+                currentTransaction,
+                timeout,
+                int.MaxValue,
+                callback,
+                state
+            ) { }
 
         protected override string ConnectionString
         {
             get
             {
-                SqlConnectionStringBuilder builder = new SqlConnectionStringBuilder(base.Store.CachedConnectionString);
+                SqlConnectionStringBuilder builder = new SqlConnectionStringBuilder(
+                    base.Store.CachedConnectionString
+                );
                 builder.ApplicationName = SqlWorkflowInstanceStore.CommonConnectionPoolName;
                 return builder.ToString();
             }
@@ -45,8 +58,22 @@ namespace System.Activities.DurableInstancing
             long surrogateOwnerId = base.StoreLock.SurrogateLockOwnerId;
             double lockTimeout = base.Store.BufferedHostLockRenewalPeriod.TotalSeconds;
 
-            sqlCommand.Parameters.Add(new SqlParameter { ParameterName = "@surrogateLockOwnerId", SqlDbType = SqlDbType.BigInt, Value = surrogateOwnerId });
-            sqlCommand.Parameters.Add(new SqlParameter { ParameterName = "@lockTimeout", SqlDbType = SqlDbType.Int, Value = lockTimeout });
+            sqlCommand.Parameters.Add(
+                new SqlParameter
+                {
+                    ParameterName = "@surrogateLockOwnerId",
+                    SqlDbType = SqlDbType.BigInt,
+                    Value = surrogateOwnerId,
+                }
+            );
+            sqlCommand.Parameters.Add(
+                new SqlParameter
+                {
+                    ParameterName = "@lockTimeout",
+                    SqlDbType = SqlDbType.Int,
+                    Value = lockTimeout,
+                }
+            );
         }
 
         protected override string GetSqlCommandText()
@@ -61,7 +88,10 @@ namespace System.Activities.DurableInstancing
 
         protected override Exception ProcessSqlResult(SqlDataReader reader)
         {
-            return StoreUtilities.CheckRemainingResultSetForErrors(base.InstancePersistenceCommand.Name, reader);
+            return StoreUtilities.CheckRemainingResultSetForErrors(
+                base.InstancePersistenceCommand.Name,
+                reader
+            );
         }
     }
 }

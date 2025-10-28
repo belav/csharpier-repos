@@ -12,6 +12,6 @@ namespace System.DirectoryServices
         ADS_OPTION_MUTUAL_AUTH_STATUS = 4,
         ADS_OPTION_QUOTA = 5,
         ADS_OPTION_PASSWORD_PORTNUMBER = 6,
-        ADS_OPTION_PASSWORD_METHOD = 7
+        ADS_OPTION_PASSWORD_METHOD = 7,
     }
 }

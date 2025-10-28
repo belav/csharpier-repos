@@ -10,7 +10,7 @@ namespace System.ComponentModel.Composition.Registration.Tests
     {
         interface IFoo { }
 
-        class FooImpl {}
+        class FooImpl { }
 
         [Fact]
         public void AsContractTypeOfT_SetsContractType()
@@ -50,7 +50,7 @@ namespace System.ComponentModel.Composition.Registration.Tests
         {
             var builder = new ExportBuilder();
             builder.AsContractName("hey");
-            builder.AsContractType(typeof (IFoo));
+            builder.AsContractType(typeof(IFoo));
 
             ExportAttribute exportAtt = GetExportAttribute(builder);
             Assert.Equal("hey", exportAtt.ContractName);

@@ -1133,8 +1133,8 @@ app.MapPost("/", TestAction);
             new RequestBodyDetectionFeature(true)
         );
 
-        var badHttpRequestException = await Assert.ThrowsAsync<BadHttpRequestException>(
-            () => endpoint.RequestDelegate(httpContext)
+        var badHttpRequestException = await Assert.ThrowsAsync<BadHttpRequestException>(() =>
+            endpoint.RequestDelegate(httpContext)
         );
 
         Assert.Null(httpContext.Items["invoked"]);

@@ -20,7 +20,8 @@ namespace System.Security.Cryptography.X509Certificates
         internal Pkcs10CertificationRequestInfo(
             X500DistinguishedName subject,
             PublicKey publicKey,
-            IEnumerable<X501Attribute> attributes)
+            IEnumerable<X501Attribute> attributes
+        )
         {
             ArgumentNullException.ThrowIfNull(subject);
             ArgumentNullException.ThrowIfNull(publicKey);
@@ -34,25 +35,37 @@ namespace System.Security.Cryptography.X509Certificates
             }
         }
 
-        internal byte[] ToPkcs10Request(X509SignatureGenerator signatureGenerator, HashAlgorithmName hashAlgorithm)
+        internal byte[] ToPkcs10Request(
+            X509SignatureGenerator signatureGenerator,
+            HashAlgorithmName hashAlgorithm
+        )
         {
             // State validation should be runtime checks if/when this becomes public API
             Debug.Assert(signatureGenerator != null);
             Debug.Assert(Subject != null);
             Debug.Assert(PublicKey != null);
 
-            byte[] signatureAlgorithm = signatureGenerator.GetSignatureAlgorithmIdentifier(hashAlgorithm);
+            byte[] signatureAlgorithm = signatureGenerator.GetSignatureAlgorithmIdentifier(
+                hashAlgorithm
+            );
             AlgorithmIdentifierAsn signatureAlgorithmAsn;
 
             // Deserialization also does validation of the value (except for Parameters, which have to be validated separately).
-            signatureAlgorithmAsn = AlgorithmIdentifierAsn.Decode(signatureAlgorithm, AsnEncodingRules.DER);
+            signatureAlgorithmAsn = AlgorithmIdentifierAsn.Decode(
+                signatureAlgorithm,
+                AsnEncodingRules.DER
+            );
             if (signatureAlgorithmAsn.Parameters.HasValue)
             {
                 Helpers.ValidateDer(signatureAlgorithmAsn.Parameters.Value.Span);
             }
 
             SubjectPublicKeyInfoAsn spki = default;
-            spki.Algorithm = new AlgorithmIdentifierAsn { Algorithm = PublicKey.Oid!.Value!, Parameters = PublicKey.EncodedParameters.RawData };
+            spki.Algorithm = new AlgorithmIdentifierAsn
+            {
+                Algorithm = PublicKey.Oid!.Value!,
+                Parameters = PublicKey.EncodedParameters.RawData,
+            };
             spki.SubjectPublicKey = PublicKey.EncodedKeyValue.RawData;
 
             var attributes = new AttributeAsn[Attributes.Count];
@@ -66,7 +79,7 @@ namespace System.Security.Cryptography.X509Certificates
                 Version = 0,
                 Subject = this.Subject.RawData,
                 SubjectPublicKeyInfo = spki,
-                Attributes = attributes
+                Attributes = attributes,
             };
 
             AsnWriter writer = new AsnWriter(AsnEncodingRules.DER);

@@ -4,22 +4,21 @@
 // </copyright>
 //------------------------------------------------------------------------------
 
-namespace System.Web.UI {
-
+namespace System.Web.UI
+{
     using System;
     using System.Collections;
     using System.Reflection;
     using System.Web.Util;
 
-
     /// <devdoc>
     /// </devdoc>
-    public sealed class DataSourceControlBuilder : ControlBuilder {
-
-
+    public sealed class DataSourceControlBuilder : ControlBuilder
+    {
         /// <devdoc>
         /// </devdoc>
-        public override bool AllowWhitespaceLiterals() {
+        public override bool AllowWhitespaceLiterals()
+        {
             return false;
         }
     }

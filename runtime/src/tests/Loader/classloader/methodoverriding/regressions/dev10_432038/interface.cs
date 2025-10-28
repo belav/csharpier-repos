@@ -3,7 +3,7 @@
 
 public interface IFoo
 {
-	int A();
+    int A();
 }
 
 public interface IBar<T>

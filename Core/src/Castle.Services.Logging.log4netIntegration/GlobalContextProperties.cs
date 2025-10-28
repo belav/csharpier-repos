@@ -1,11 +1,11 @@
 // Copyright 2004-2021 Castle Project - http://www.castleproject.org/
-// 
+//
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
-// 
+//
 //     http://www.apache.org/licenses/LICENSE-2.0
-// 
+//
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -14,27 +14,26 @@
 
 namespace Castle.Services.Logging.Log4netIntegration
 {
-	using Castle.Core.Logging;
+    using Castle.Core.Logging;
+    using log4net;
 
-	using log4net;
-
-	public class GlobalContextProperties : IContextProperties
-	{
-		/// <summary>
-		///   Gets or sets the value of a property
-		/// </summary>
-		/// <value>
-		///   The value for the property with the specified key
-		/// </value>
-		/// <remarks>
-		///   <para>
-		///     Gets or sets the value of a property
-		///   </para>
-		/// </remarks>
-		public object this[string key]
-		{
-			get { return GlobalContext.Properties[key]; }
-			set { GlobalContext.Properties[key] = value; }
-		}
-	}
+    public class GlobalContextProperties : IContextProperties
+    {
+        /// <summary>
+        ///   Gets or sets the value of a property
+        /// </summary>
+        /// <value>
+        ///   The value for the property with the specified key
+        /// </value>
+        /// <remarks>
+        ///   <para>
+        ///     Gets or sets the value of a property
+        ///   </para>
+        /// </remarks>
+        public object this[string key]
+        {
+            get { return GlobalContext.Properties[key]; }
+            set { GlobalContext.Properties[key] = value; }
+        }
+    }
 }

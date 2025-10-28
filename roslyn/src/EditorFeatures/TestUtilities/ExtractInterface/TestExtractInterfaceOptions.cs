@@ -20,14 +20,16 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.Editor.UnitTests.ExtractInterface
 {
-    [ExportWorkspaceService(typeof(IExtractInterfaceOptionsService), ServiceLayer.Test), Shared, PartNotDiscoverable]
+    [
+        ExportWorkspaceService(typeof(IExtractInterfaceOptionsService), ServiceLayer.Test),
+        Shared,
+        PartNotDiscoverable
+    ]
     internal class TestExtractInterfaceOptionsService : IExtractInterfaceOptionsService
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public TestExtractInterfaceOptionsService()
-        {
-        }
+        public TestExtractInterfaceOptionsService() { }
 
         public IEnumerable<ISymbol> AllExtractableMembers { get; private set; }
         public string DefaultInterfaceName { get; private set; }
@@ -51,7 +53,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.ExtractInterface
             string generatedNameTypeParameterSuffix,
             string languageName,
             CleanCodeGenerationOptionsProvider fallbackOptions,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
             this.AllExtractableMembers = extractableMembers;
             this.DefaultInterfaceName = defaultInterfaceName;
@@ -66,8 +69,11 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.ExtractInterface
                     includedMembers: (ChosenMembers ?? AllExtractableMembers).AsImmutable(),
                     interfaceName: ChosenInterfaceName ?? defaultInterfaceName,
                     fileName: ChosenFileName ?? defaultInterfaceName,
-                    location: SameFile ? ExtractInterfaceOptionsResult.ExtractLocation.SameFile : ExtractInterfaceOptionsResult.ExtractLocation.NewFile,
-                    fallbackOptions);
+                    location: SameFile
+                        ? ExtractInterfaceOptionsResult.ExtractLocation.SameFile
+                        : ExtractInterfaceOptionsResult.ExtractLocation.NewFile,
+                    fallbackOptions
+                );
 
             return Task.FromResult(result);
         }

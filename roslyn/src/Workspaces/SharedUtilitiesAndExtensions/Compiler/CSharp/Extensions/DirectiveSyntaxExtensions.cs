@@ -14,7 +14,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
 {
     internal static partial class DirectiveSyntaxExtensions
     {
-        private static readonly ConditionalWeakTable<SyntaxNode, DirectiveInfo<DirectiveTriviaSyntax>> s_rootToDirectiveInfo = new();
+        private static readonly ConditionalWeakTable<
+            SyntaxNode,
+            DirectiveInfo<DirectiveTriviaSyntax>
+        > s_rootToDirectiveInfo = new();
 
         private static SyntaxNode GetAbsoluteRoot(this SyntaxNode node)
         {
@@ -26,32 +29,49 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
             return node;
         }
 
-        private static DirectiveInfo<DirectiveTriviaSyntax> GetDirectiveInfo(SyntaxNode node, CancellationToken cancellationToken)
-            => s_rootToDirectiveInfo.GetValue(
+        private static DirectiveInfo<DirectiveTriviaSyntax> GetDirectiveInfo(
+            SyntaxNode node,
+            CancellationToken cancellationToken
+        ) =>
+            s_rootToDirectiveInfo.GetValue(
                 node.GetAbsoluteRoot(),
-                root => GetDirectiveInfoForRoot(root, cancellationToken));
+                root => GetDirectiveInfoForRoot(root, cancellationToken)
+            );
 
-        private static DirectiveInfo<DirectiveTriviaSyntax> GetDirectiveInfoForRoot(SyntaxNode root, CancellationToken cancellationToken)
-            => CodeAnalysis.Shared.Extensions.SyntaxNodeExtensions.GetDirectiveInfoForRoot<DirectiveTriviaSyntax>(
-                root, CSharpSyntaxKinds.Instance, cancellationToken);
+        private static DirectiveInfo<DirectiveTriviaSyntax> GetDirectiveInfoForRoot(
+            SyntaxNode root,
+            CancellationToken cancellationToken
+        ) =>
+            CodeAnalysis.Shared.Extensions.SyntaxNodeExtensions.GetDirectiveInfoForRoot<DirectiveTriviaSyntax>(
+                root,
+                CSharpSyntaxKinds.Instance,
+                cancellationToken
+            );
 
-        internal static DirectiveTriviaSyntax? GetMatchingDirective(this DirectiveTriviaSyntax directive, CancellationToken cancellationToken)
+        internal static DirectiveTriviaSyntax? GetMatchingDirective(
+            this DirectiveTriviaSyntax directive,
+            CancellationToken cancellationToken
+        )
         {
             if (directive == null)
                 throw new ArgumentNullException(nameof(directive));
 
             var directiveSyntaxMap = GetDirectiveInfo(directive, cancellationToken).DirectiveMap;
-            return directiveSyntaxMap.TryGetValue(directive, out var result)
-                ? result
-                : null;
+            return directiveSyntaxMap.TryGetValue(directive, out var result) ? result : null;
         }
 
-        public static ImmutableArray<DirectiveTriviaSyntax> GetMatchingConditionalDirectives(this DirectiveTriviaSyntax directive, CancellationToken cancellationToken)
+        public static ImmutableArray<DirectiveTriviaSyntax> GetMatchingConditionalDirectives(
+            this DirectiveTriviaSyntax directive,
+            CancellationToken cancellationToken
+        )
         {
             if (directive == null)
                 throw new ArgumentNullException(nameof(directive));
 
-            var directiveConditionalMap = GetDirectiveInfo(directive, cancellationToken).ConditionalMap;
+            var directiveConditionalMap = GetDirectiveInfo(
+                directive,
+                cancellationToken
+            ).ConditionalMap;
             return directiveConditionalMap.TryGetValue(directive, out var result)
                 ? result
                 : ImmutableArray<DirectiveTriviaSyntax>.Empty;

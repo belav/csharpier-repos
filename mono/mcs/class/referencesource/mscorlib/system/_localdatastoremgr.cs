@@ -1,31 +1,31 @@
 // ==++==
-// 
+//
 //   Copyright (c) Microsoft Corporation.  All rights reserved.
-// 
+//
 // ==--==
 /*=============================================================================
 **
 ** Class: LocalDataStoreMgr
 **
 **
-** Purpose: Class that manages stores of local data. This class is used in 
+** Purpose: Class that manages stores of local data. This class is used in
 **          cooperation with the LocalDataStore class.
 **
 **
 =============================================================================*/
-namespace System {
-    
+namespace System
+{
     using System;
     using System.Collections.Generic;
-    using System.Threading;
-    using System.Runtime.CompilerServices;
     using System.Diagnostics.Contracts;
+    using System.Runtime.CompilerServices;
+    using System.Threading;
 
     // This class is an encapsulation of a slot so that it is managed in a secure fashion.
     // It is constructed by the LocalDataStoreManager, holds the slot and the manager
     // and cleans up when it is finalized.
     // This class will not be marked serializable
-[System.Runtime.InteropServices.ComVisible(true)]
+    [System.Runtime.InteropServices.ComVisible(true)]
     public sealed class LocalDataStoreSlot
     {
         private LocalDataStoreMgr m_mgr;
@@ -43,24 +43,15 @@ namespace System {
         // Accessors for the two fields of this class.
         internal LocalDataStoreMgr Manager
         {
-            get
-            {
-                return m_mgr;
-            }
+            get { return m_mgr; }
         }
         internal int Slot
         {
-            get
-            {
-                return m_slot;
-            }
+            get { return m_slot; }
         }
         internal long Cookie
         {
-            get
-            {
-                return m_cookie;
-        }
+            get { return m_cookie; }
         }
 
         // Release the slot reserved by this object when this object goes away.
@@ -72,8 +63,8 @@ namespace System {
 
             int slot = m_slot;
 
-                // Mark the slot as free.
-                m_slot = -1;
+            // Mark the slot as free.
+            m_slot = -1;
 
             mgr.FreeDataSlot(slot, m_cookie);
         }
@@ -82,16 +73,16 @@ namespace System {
     // This class will not be marked serializable
     sealed internal class LocalDataStoreMgr
     {
-        private const int InitialSlotTableSize            = 64;
-        private const int SlotTableDoubleThreshold        = 512;
-        private const int LargeSlotTableSizeIncrease    = 128;
-    
+        private const int InitialSlotTableSize = 64;
+        private const int SlotTableDoubleThreshold = 512;
+        private const int LargeSlotTableSizeIncrease = 128;
+
         /*=========================================================================
         ** Create a data store to be managed by this manager and add it to the
         ** list. The initial size of the new store matches the number of slots
         ** allocated in this manager.
         =========================================================================*/
-        [System.Security.SecuritySafeCritical]  // auto-generated
+        [System.Security.SecuritySafeCritical] // auto-generated
         public LocalDataStoreHolder CreateLocalDataStore()
         {
             // Create a new local data store.
@@ -117,7 +108,7 @@ namespace System {
         /*=========================================================================
          * Remove the specified store from the list of managed stores..
         =========================================================================*/
-        [System.Security.SecuritySafeCritical]  // auto-generated
+        [System.Security.SecuritySafeCritical] // auto-generated
         public void DeleteLocalDataStore(LocalDataStore store)
         {
             bool tookLock = false;
@@ -140,7 +131,7 @@ namespace System {
         ** an object to prevent clients from manipulating it directly, allowing us
         ** to make assumptions its integrity.
         =========================================================================*/
-        [System.Security.SecuritySafeCritical]  // auto-generated
+        [System.Security.SecuritySafeCritical] // auto-generated
         public LocalDataStoreSlot AllocateDataSlot()
         {
             bool tookLock = false;
@@ -206,11 +197,11 @@ namespace System {
                     Monitor.Exit(this);
             }
         }
-        
+
         /*=========================================================================
         ** Allocate a slot and associate a name with it.
         =========================================================================*/
-        [System.Security.SecuritySafeCritical]  // auto-generated
+        [System.Security.SecuritySafeCritical] // auto-generated
         public LocalDataStoreSlot AllocateNamedDataSlot(String name)
         {
             bool tookLock = false;
@@ -237,7 +228,7 @@ namespace System {
         ** Retrieve the slot associated with a name, allocating it if no such
         ** association has been defined.
         =========================================================================*/
-        [System.Security.SecuritySafeCritical]  // auto-generated
+        [System.Security.SecuritySafeCritical] // auto-generated
         public LocalDataStoreSlot GetNamedDataSlot(String name)
         {
             bool tookLock = false;
@@ -266,7 +257,7 @@ namespace System {
         ** Eliminate the association of a name with a slot.  The actual slot will
         ** be reclaimed when the finalizer for the slot object runs.
         =========================================================================*/
-        [System.Security.SecuritySafeCritical]  // auto-generated
+        [System.Security.SecuritySafeCritical] // auto-generated
         public void FreeNamedDataSlot(String name)
         {
             bool tookLock = false;
@@ -287,7 +278,7 @@ namespace System {
         /*=========================================================================
         ** Free's a previously allocated data slot on ALL the managed data stores.
         =========================================================================*/
-        [System.Security.SecuritySafeCritical]  // auto-generated
+        [System.Security.SecuritySafeCritical] // auto-generated
         internal void FreeDataSlot(int slot, long cookie)
         {
             bool tookLock = false;
@@ -301,7 +292,7 @@ namespace System {
                     ((LocalDataStore)m_ManagedLocalDataStores[i]).FreeData(slot, cookie);
                 }
 
-                // Mark the slot as being no longer occupied. 
+                // Mark the slot as being no longer occupied.
                 m_SlotInfoTable[slot] = false;
                 if (slot < m_FirstAvailableSlot)
                     m_FirstAvailableSlot = slot;
@@ -320,7 +311,9 @@ namespace System {
         {
             // Make sure the slot was allocated for this store.
             if (slot == null || slot.Manager != this)
-                throw new ArgumentException(Environment.GetResourceString("Argument_ALSInvalidSlot"));
+                throw new ArgumentException(
+                    Environment.GetResourceString("Argument_ALSInvalidSlot")
+                );
             Contract.EndContractBlock();
         }
 
@@ -335,7 +328,8 @@ namespace System {
         private bool[] m_SlotInfoTable = new bool[InitialSlotTableSize];
         private int m_FirstAvailableSlot;
         private List<LocalDataStore> m_ManagedLocalDataStores = new List<LocalDataStore>();
-        private Dictionary<String, LocalDataStoreSlot> m_KeyToSlotMap = new Dictionary<String, LocalDataStoreSlot>();
+        private Dictionary<String, LocalDataStoreSlot> m_KeyToSlotMap =
+            new Dictionary<String, LocalDataStoreSlot>();
         private long m_CookieGenerator;
     }
 }

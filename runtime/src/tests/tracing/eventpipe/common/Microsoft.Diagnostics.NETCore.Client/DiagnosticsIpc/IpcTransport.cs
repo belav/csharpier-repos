@@ -59,7 +59,8 @@ namespace Microsoft.Diagnostics.NETCore.Client
                     config.Address,
                     PipeDirection.InOut,
                     PipeOptions.None,
-                    TokenImpersonationLevel.Impersonation);
+                    TokenImpersonationLevel.Impersonation
+                );
                 namedPipe.Connect((int)timeout.TotalMilliseconds);
                 return namedPipe;
             }
@@ -72,7 +73,7 @@ namespace Microsoft.Diagnostics.NETCore.Client
 #if DIAGNOSTICS_RUNTIME
             else if (config.Transport == IpcEndpointConfig.TransportType.TcpSocket)
             {
-                var tcpClient = new TcpClient ();
+                var tcpClient = new TcpClient();
                 var endPoint = new IpcTcpSocketEndPoint(config.Address);
                 tcpClient.Connect(endPoint.EndPoint);
                 return tcpClient.GetStream();
@@ -80,11 +81,16 @@ namespace Microsoft.Diagnostics.NETCore.Client
 #endif
             else
             {
-                throw new ArgumentException($"Unsupported IpcEndpointConfig transport type {config.Transport}");
+                throw new ArgumentException(
+                    $"Unsupported IpcEndpointConfig transport type {config.Transport}"
+                );
             }
         }
 
-        public static async Task<Stream> ConnectAsync(IpcEndpointConfig config, CancellationToken token)
+        public static async Task<Stream> ConnectAsync(
+            IpcEndpointConfig config,
+            CancellationToken token
+        )
         {
             if (config.Transport == IpcEndpointConfig.TransportType.NamedPipe)
             {
@@ -93,25 +99,30 @@ namespace Microsoft.Diagnostics.NETCore.Client
                     config.Address,
                     PipeDirection.InOut,
                     PipeOptions.Asynchronous,
-                    TokenImpersonationLevel.Impersonation);
+                    TokenImpersonationLevel.Impersonation
+                );
 
                 // Pass non-infinite timeout in order to cause internal connection algorithm
                 // to check the CancellationToken periodically. Otherwise, if the named pipe
                 // is waited using WaitNamedPipe with an infinite timeout, then the
                 // CancellationToken cannot be observed.
                 await namedPipe.ConnectAsync(int.MaxValue, token).ConfigureAwait(false);
-                
+
                 return namedPipe;
             }
             else if (config.Transport == IpcEndpointConfig.TransportType.UnixDomainSocket)
             {
                 var socket = new IpcUnixDomainSocket();
-                await socket.ConnectAsync(new IpcUnixDomainSocketEndPoint(config.Address), token).ConfigureAwait(false);
+                await socket
+                    .ConnectAsync(new IpcUnixDomainSocketEndPoint(config.Address), token)
+                    .ConfigureAwait(false);
                 return new ExposedSocketNetworkStream(socket, ownsSocket: true);
             }
             else
             {
-                throw new ArgumentException($"Unsupported IpcEndpointConfig transport type {config.Transport}");
+                throw new ArgumentException(
+                    $"Unsupported IpcEndpointConfig transport type {config.Transport}"
+                );
             }
         }
     }
@@ -220,8 +231,12 @@ namespace Microsoft.Diagnostics.NETCore.Client
 
     internal class PidIpcEndpoint : IpcEndpoint
     {
-        public static string IpcRootPath { get; } = RuntimeInformation.IsOSPlatform(OSPlatform.Windows) ? @"\\.\pipe\" : Path.GetTempPath();
-        public static string DiagnosticsPortPattern { get; } = RuntimeInformation.IsOSPlatform(OSPlatform.Windows) ? @"^dotnet-diagnostic-(\d+)$" : @"^dotnet-diagnostic-(\d+)-(\d+)-socket$";
+        public static string IpcRootPath { get; } =
+            RuntimeInformation.IsOSPlatform(OSPlatform.Windows) ? @"\\.\pipe\" : Path.GetTempPath();
+        public static string DiagnosticsPortPattern { get; } =
+            RuntimeInformation.IsOSPlatform(OSPlatform.Windows)
+                ? @"^dotnet-diagnostic-(\d+)$"
+                : @"^dotnet-diagnostic-(\d+)-(\d+)-socket$";
 
         int _pid;
 
@@ -279,7 +294,9 @@ namespace Microsoft.Diagnostics.NETCore.Client
 
             if (!TryGetDefaultAddress(_pid, out string transportName))
             {
-                throw new ServerNotAvailableException($"Process {_pid} not running compatible .NET runtime.");
+                throw new ServerNotAvailableException(
+                    $"Process {_pid} not running compatible .NET runtime."
+                );
             }
 
             return transportName;
@@ -297,13 +314,12 @@ namespace Microsoft.Diagnostics.NETCore.Client
             {
                 try
                 {
-                    defaultAddress = Directory.GetFiles(IpcRootPath, $"dotnet-diagnostic-{pid}-*-socket") // Try best match.
+                    defaultAddress = Directory
+                        .GetFiles(IpcRootPath, $"dotnet-diagnostic-{pid}-*-socket") // Try best match.
                         .OrderByDescending(f => new FileInfo(f).LastWriteTime)
                         .FirstOrDefault();
                 }
-                catch (InvalidOperationException)
-                {
-                }
+                catch (InvalidOperationException) { }
             }
 
             return !string.IsNullOrEmpty(defaultAddress);

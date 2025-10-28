@@ -37,17 +37,22 @@ internal partial class DbContextListCommand
 
         for (var i = 0; i < contextTypes.Count; i++)
         {
-            var safeName = nameGroups.Count(g => g.Key == contextTypes[i]["Name"]) == 1
-                ? contextTypes[i]["Name"]
+            var safeName =
+                nameGroups.Count(g => g.Key == contextTypes[i]["Name"]) == 1
+                    ? contextTypes[i]["Name"]
                 : fullNameGroups.Count(g => g.Key == contextTypes[i]["FullName"]) == 1
                     ? contextTypes[i]["FullName"]
-                    : contextTypes[i]["AssemblyQualifiedName"];
+                : contextTypes[i]["AssemblyQualifiedName"];
 
             Reporter.WriteData("  {");
             Reporter.WriteData("     \"fullName\": \"" + contextTypes[i]["FullName"] + "\",");
             Reporter.WriteData("     \"safeName\": \"" + safeName + "\",");
             Reporter.WriteData("     \"name\": \"" + contextTypes[i]["Name"] + "\",");
-            Reporter.WriteData("     \"assemblyQualifiedName\": \"" + contextTypes[i]["AssemblyQualifiedName"] + "\"");
+            Reporter.WriteData(
+                "     \"assemblyQualifiedName\": \""
+                    + contextTypes[i]["AssemblyQualifiedName"]
+                    + "\""
+            );
 
             var line = "  }";
             if (i != contextTypes.Count - 1)

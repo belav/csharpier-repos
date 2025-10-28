@@ -3,7 +3,10 @@
     <!-- Needed for CLRTestTargetUnsupported -->
     <RequiresProcessIsolation>true</RequiresProcessIsolation>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
-    <CLRTestTargetUnsupported Condition="'$(TargetsWindows)' == 'true' or '$(RuntimeVariant)' == 'monointerpreter'">true</CLRTestTargetUnsupported>
+    <CLRTestTargetUnsupported
+      Condition="'$(TargetsWindows)' == 'true' or '$(RuntimeVariant)' == 'monointerpreter'"
+      >true</CLRTestTargetUnsupported
+    >
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="MainProgramHandleTests.cs" />

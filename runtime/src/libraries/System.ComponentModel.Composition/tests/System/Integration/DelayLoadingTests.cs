@@ -37,7 +37,10 @@ namespace Tests.Integration
         [Fact]
         public void PartTypeLoadedLazilyEagerDependenciesLoadEagerly()
         {
-            var catalog = new TypeLoadNotifyingCatalog(typeof(ExportingPart), typeof(PartImportingEagerly));
+            var catalog = new TypeLoadNotifyingCatalog(
+                typeof(ExportingPart),
+                typeof(PartImportingEagerly)
+            );
             var container = new CompositionContainer(catalog);
             catalog.AssertNotLoaded(typeof(ExportingPart));
             catalog.AssertNotLoaded(typeof(PartImportingEagerly));
@@ -58,7 +61,10 @@ namespace Tests.Integration
         [Fact]
         public void PartTypeLoadedLazilyLazyDependenciesLoadLazily()
         {
-            var catalog = new TypeLoadNotifyingCatalog(typeof(ExportingPart), typeof(PartImportingLazily));
+            var catalog = new TypeLoadNotifyingCatalog(
+                typeof(ExportingPart),
+                typeof(PartImportingLazily)
+            );
             var container = new CompositionContainer(catalog);
             catalog.AssertNotLoaded(typeof(ExportingPart));
             catalog.AssertNotLoaded(typeof(PartImportingLazily));
@@ -79,7 +85,10 @@ namespace Tests.Integration
         [Fact]
         public void PartTypeLoadedLazilyEagerCollectionDependenciesLoadEagerly()
         {
-            var catalog = new TypeLoadNotifyingCatalog(typeof(ExportingPart), typeof(PartImportingCollectionEagerly));
+            var catalog = new TypeLoadNotifyingCatalog(
+                typeof(ExportingPart),
+                typeof(PartImportingCollectionEagerly)
+            );
             var container = new CompositionContainer(catalog);
             catalog.AssertNotLoaded(typeof(ExportingPart));
             catalog.AssertNotLoaded(typeof(PartImportingCollectionEagerly));
@@ -100,7 +109,10 @@ namespace Tests.Integration
         [Fact]
         public void PartTypeLoadedLazilyLazyCollectionDependenciesLoadLazily()
         {
-            var catalog = new TypeLoadNotifyingCatalog(typeof(ExportingPart), typeof(PartImportingCollectionLazily));
+            var catalog = new TypeLoadNotifyingCatalog(
+                typeof(ExportingPart),
+                typeof(PartImportingCollectionLazily)
+            );
             var container = new CompositionContainer(catalog);
             catalog.AssertNotLoaded(typeof(ExportingPart));
             catalog.AssertNotLoaded(typeof(PartImportingCollectionLazily));
@@ -121,7 +133,10 @@ namespace Tests.Integration
         [Fact]
         public void PartTypeLoadedLazilyLazyLoopLoadsLazily()
         {
-            var catalog = new TypeLoadNotifyingCatalog(typeof(LazyLoopImporter), typeof(LazyLoopExporter));
+            var catalog = new TypeLoadNotifyingCatalog(
+                typeof(LazyLoopImporter),
+                typeof(LazyLoopExporter)
+            );
             var container = new CompositionContainer(catalog);
             catalog.AssertNotLoaded(typeof(LazyLoopImporter));
             catalog.AssertNotLoaded(typeof(LazyLoopExporter));
@@ -139,18 +154,12 @@ namespace Tests.Integration
             Assert.Equal(1, catalog.LoadedTypes.Count());
         }
 
-        public class IExporter
-        {
-        }
+        public class IExporter { }
 
-        public class IImporter
-        {
-        }
+        public class IImporter { }
 
         [Export(typeof(IExporter))]
-        public class ExportingPart : IExporter
-        {
-        }
+        public class ExportingPart : IExporter { }
 
         [Export(typeof(IImporter))]
         public class PartImportingLazily : IImporter
@@ -212,14 +221,23 @@ namespace Tests.Integration
 
             private ComposablePartDefinition CreatePartDefinition(Type type)
             {
-                ComposablePartDefinition partDefinition = AttributedModelServices.CreatePartDefinition(type, null);
+                ComposablePartDefinition partDefinition =
+                    AttributedModelServices.CreatePartDefinition(type, null);
                 return this.CreateWrapped(partDefinition, type);
             }
 
-            private ComposablePartDefinition CreateWrapped(ComposablePartDefinition partDefinition, Type type)
+            private ComposablePartDefinition CreateWrapped(
+                ComposablePartDefinition partDefinition,
+                Type type
+            )
             {
-                IEnumerable<ExportDefinition> exports = partDefinition.ExportDefinitions.Select(e => this.CreateWrapped(e, type)).ToArray();
-                IEnumerable<ImportDefinition> imports = partDefinition.ImportDefinitions.Cast<ContractBasedImportDefinition>().Select(i => this.CreateWrapped(i, type)).ToArray();
+                IEnumerable<ExportDefinition> exports = partDefinition
+                    .ExportDefinitions.Select(e => this.CreateWrapped(e, type))
+                    .ToArray();
+                IEnumerable<ImportDefinition> imports = partDefinition
+                    .ImportDefinitions.Cast<ContractBasedImportDefinition>()
+                    .Select(i => this.CreateWrapped(i, type))
+                    .ToArray();
 
                 return ReflectionModelServices.CreatePartDefinition(
                     this.CreateWrapped(ReflectionModelServices.GetPartType(partDefinition), type),
@@ -227,20 +245,29 @@ namespace Tests.Integration
                     imports.AsLazy(),
                     exports.AsLazy(),
                     partDefinition.Metadata.AsLazy(),
-                    null);
+                    null
+                );
             }
 
             private Lazy<T> CreateWrapped<T>(Lazy<T> lazy, Type type)
             {
-                return new Lazy<T>(
-                    () => { this.OnTypeLoaded(type); return lazy.Value; });
+                return new Lazy<T>(() =>
+                {
+                    this.OnTypeLoaded(type);
+                    return lazy.Value;
+                });
             }
 
             private LazyMemberInfo CreateWrapped(LazyMemberInfo lazyMember, Type type)
             {
                 return new LazyMemberInfo(
                     lazyMember.MemberType,
-                    () => { this.OnTypeLoaded(type); return lazyMember.GetAccessors(); });
+                    () =>
+                    {
+                        this.OnTypeLoaded(type);
+                        return lazyMember.GetAccessors();
+                    }
+                );
             }
 
             private ExportDefinition CreateWrapped(ExportDefinition export, Type type)
@@ -249,7 +276,8 @@ namespace Tests.Integration
                     this.CreateWrapped(ReflectionModelServices.GetExportingMember(export), type),
                     export.ContractName,
                     export.Metadata.AsLazy(),
-                    null);
+                    null
+                );
             }
 
             private ImportDefinition CreateWrapped(ContractBasedImportDefinition import, Type type)
@@ -257,25 +285,33 @@ namespace Tests.Integration
                 if (ReflectionModelServices.IsImportingParameter(import))
                 {
                     return ReflectionModelServices.CreateImportDefinition(
-                        this.CreateWrapped(ReflectionModelServices.GetImportingParameter(import), type),
+                        this.CreateWrapped(
+                            ReflectionModelServices.GetImportingParameter(import),
+                            type
+                        ),
                         import.ContractName,
                         import.RequiredTypeIdentity,
                         import.RequiredMetadata,
                         import.Cardinality,
                         import.RequiredCreationPolicy,
-                        null);
+                        null
+                    );
                 }
                 else
                 {
                     return ReflectionModelServices.CreateImportDefinition(
-                        this.CreateWrapped(ReflectionModelServices.GetImportingMember(import), type),
+                        this.CreateWrapped(
+                            ReflectionModelServices.GetImportingMember(import),
+                            type
+                        ),
                         import.ContractName,
                         import.RequiredTypeIdentity,
                         import.RequiredMetadata,
                         import.Cardinality,
                         import.IsRecomposable,
                         import.RequiredCreationPolicy,
-                        null);
+                        null
+                    );
                 }
             }
 
@@ -293,7 +329,6 @@ namespace Tests.Integration
             {
                 Assert.DoesNotContain(type, this.LoadedTypes);
             }
-
         }
     }
 }

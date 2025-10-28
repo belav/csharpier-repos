@@ -4,21 +4,23 @@
 // </copyright>
 //------------------------------------------------------------------------------
 
-namespace System.Web.UI.WebControls.WebParts {
-
+namespace System.Web.UI.WebControls.WebParts
+{
     using System;
     using System.Web.Util;
 
     /// <devdoc>
     /// </devdoc>
-    public sealed class WebPartUserCapability {
-
+    public sealed class WebPartUserCapability
+    {
         private string _name;
 
         /// <devdoc>
         /// </devdoc>
-        public WebPartUserCapability(string name) {
-            if (String.IsNullOrEmpty(name)) {
+        public WebPartUserCapability(string name)
+        {
+            if (String.IsNullOrEmpty(name))
+            {
                 throw ExceptionUtil.ParameterNullOrEmpty("name");
             }
 
@@ -27,16 +29,17 @@ namespace System.Web.UI.WebControls.WebParts {
 
         /// <devdoc>
         /// </devdoc>
-        public string Name {
-            get {
-                return _name;
-            }
+        public string Name
+        {
+            get { return _name; }
         }
 
         /// <devdoc>
         /// </devdoc>
-        public override bool Equals(object o) {
-            if (o == this) {
+        public override bool Equals(object o)
+        {
+            if (o == this)
+            {
                 return true;
             }
 
@@ -46,7 +49,8 @@ namespace System.Web.UI.WebControls.WebParts {
 
         /// <devdoc>
         /// </devdoc>
-        public override int GetHashCode() {
+        public override int GetHashCode()
+        {
             return _name.GetHashCode();
         }
     }

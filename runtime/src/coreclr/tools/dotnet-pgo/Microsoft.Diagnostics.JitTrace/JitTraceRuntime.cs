@@ -32,7 +32,11 @@ namespace Microsoft.Diagnostics.JitTrace
         /// <param name="fileName">Filename of .jittrace file</param>
         /// <param name="successfulPrepares">count of successful prepare operations. May exceed the could of lines in the jittrace file due to fuzzy matching</param>
         /// <param name="failedPrepares">count of failed prepare operations. May exceed the could of lines in the jittrace file due to fuzzy matching</param>
-        public static void Prepare(FileInfo fileName, out int successfulPrepares, out int failedPrepares)
+        public static void Prepare(
+            FileInfo fileName,
+            out int successfulPrepares,
+            out int failedPrepares
+        )
         {
             using (StreamReader sr = new StreamReader(fileName.FullName))
             {
@@ -45,7 +49,11 @@ namespace Microsoft.Diagnostics.JitTrace
             return input.Replace("\\s", separator).Replace("\\\\", "\\");
         }
 
-        private static string[] SplitAndUnescape(string input, string separator, char[] separatorCharArray)
+        private static string[] SplitAndUnescape(
+            string input,
+            string separator,
+            char[] separatorCharArray
+        )
         {
             string[] returnValue = input.Split(separatorCharArray);
             for (int i = 0; i < returnValue.Length; i++)
@@ -62,10 +70,21 @@ namespace Microsoft.Diagnostics.JitTrace
         /// <param name="jittraceString">string with .jittrace data</param>
         /// <param name="successfulPrepares">count of successful prepare operations. May exceed the could of lines in the jittrace file due to fuzzy matching</param>
         /// <param name="failedPrepares">count of failed prepare operations. May exceed the could of lines in the jittrace file due to fuzzy matching</param>
-        public static void Prepare(string jittraceString, out int successfulPrepares, out int failedPrepares)
+        public static void Prepare(
+            string jittraceString,
+            out int successfulPrepares,
+            out int failedPrepares
+        )
         {
             MemoryStream strStream = new MemoryStream();
-            using (var writer = new StreamWriter(strStream, encoding: null, bufferSize: -1, leaveOpen: true))
+            using (
+                var writer = new StreamWriter(
+                    strStream,
+                    encoding: null,
+                    bufferSize: -1,
+                    leaveOpen: true
+                )
+            )
             {
                 writer.Write(jittraceString);
             }
@@ -81,7 +100,11 @@ namespace Microsoft.Diagnostics.JitTrace
         /// <param name="jittraceStream">Stream with .jittrace data</param>
         /// <param name="successfulPrepares">count of successful prepare operations. May exceed the could of lines in the jittrace file due to fuzzy matching</param>
         /// <param name="failedPrepares">count of failed prepare operations. May exceed the could of lines in the jittrace file due to fuzzy matching</param>
-        public static void Prepare(StreamReader jittraceStream, out int successfulPrepares, out int failedPrepares)
+        public static void Prepare(
+            StreamReader jittraceStream,
+            out int successfulPrepares,
+            out int failedPrepares
+        )
         {
             const string outerCsvEscapeChar = "~";
             const string innerCsvEscapeChar = ":";
@@ -105,7 +128,11 @@ namespace Microsoft.Diagnostics.JitTrace
                         break;
                     }
 
-                    string[] methodStrComponents = SplitAndUnescape(methodString, outerCsvEscapeChar, outerCsvEscapeCharArray);
+                    string[] methodStrComponents = SplitAndUnescape(
+                        methodString,
+                        outerCsvEscapeChar,
+                        outerCsvEscapeCharArray
+                    );
 
                     Type owningType = Type.GetType(methodStrComponents[1], false);
 
@@ -118,13 +145,23 @@ namespace Microsoft.Diagnostics.JitTrace
                     }
 
                     int signatureLen = int.Parse(methodStrComponents[2]);
-                    string[] methodInstantiationArgComponents = SplitAndUnescape(methodStrComponents[3], innerCsvEscapeChar, innerCsvEscapeCharArray);
+                    string[] methodInstantiationArgComponents = SplitAndUnescape(
+                        methodStrComponents[3],
+                        innerCsvEscapeChar,
+                        innerCsvEscapeCharArray
+                    );
                     int genericMethodArgCount = int.Parse(methodInstantiationArgComponents[0]);
-                    Type[] methodArgs = genericMethodArgCount != 0 ? new Type[genericMethodArgCount] : Type.EmptyTypes;
+                    Type[] methodArgs =
+                        genericMethodArgCount != 0
+                            ? new Type[genericMethodArgCount]
+                            : Type.EmptyTypes;
                     bool abortMethodDiscovery = false;
                     for (int iMethodArg = 0; iMethodArg < genericMethodArgCount; iMethodArg++)
                     {
-                        Type methodArg = Type.GetType(methodInstantiationArgComponents[1 + iMethodArg], false);
+                        Type methodArg = Type.GetType(
+                            methodInstantiationArgComponents[1 + iMethodArg],
+                            false
+                        );
                         methodArgs[iMethodArg] = methodArg;
 
                         // methodArg failed to load above. Skip rest of method discovery
@@ -148,7 +185,12 @@ namespace Microsoft.Diagnostics.JitTrace
                     // Find method
                     IEnumerable<RuntimeMethodHandle> membersFound;
 
-                    BindingFlags bindingFlags = BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.Static | BindingFlags.DeclaredOnly;
+                    BindingFlags bindingFlags =
+                        BindingFlags.Public
+                        | BindingFlags.NonPublic
+                        | BindingFlags.Instance
+                        | BindingFlags.Static
+                        | BindingFlags.DeclaredOnly;
                     if (methodName == ".ctor")
                     {
                         if (genericMethodArgCount != 0)
@@ -161,7 +203,9 @@ namespace Microsoft.Diagnostics.JitTrace
                         membersFound = CtorMethodsThatMatch();
                         IEnumerable<RuntimeMethodHandle> CtorMethodsThatMatch()
                         {
-                            ConstructorInfo[] constructors = owningType.GetConstructors(bindingFlags);
+                            ConstructorInfo[] constructors = owningType.GetConstructors(
+                                bindingFlags
+                            );
                             foreach (ConstructorInfo ci in constructors)
                             {
                                 ConstructorInfo returnConstructorInfo = null;
@@ -173,9 +217,7 @@ namespace Microsoft.Diagnostics.JitTrace
                                         returnConstructorInfo = ci;
                                     }
                                 }
-                                catch
-                                {
-                                }
+                                catch { }
                                 if (returnConstructorInfo != null)
                                 {
                                     yield return returnConstructorInfo.MethodHandle;
@@ -193,7 +235,10 @@ namespace Microsoft.Diagnostics.JitTrace
                             LogOnFailure(methodString);
                             continue;
                         }
-                        membersFound = new RuntimeMethodHandle[] { owningType.TypeInitializer.MethodHandle };
+                        membersFound = new RuntimeMethodHandle[]
+                        {
+                            owningType.TypeInitializer.MethodHandle,
+                        };
                     }
                     else
                     {
@@ -228,9 +273,7 @@ namespace Microsoft.Diagnostics.JitTrace
                                         returnMethodInfo = mi;
                                     }
                                 }
-                                catch
-                                {
-                                }
+                                catch { }
 
                                 if (returnMethodInfo != null)
                                 {
@@ -246,7 +289,9 @@ namespace Microsoft.Diagnostics.JitTrace
                         foundAtLeastOneEntry = true;
                         try
                         {
-                            System.Runtime.CompilerServices.RuntimeHelpers.PrepareMethod(memberHandle);
+                            System.Runtime.CompilerServices.RuntimeHelpers.PrepareMethod(
+                                memberHandle
+                            );
                             successfulPrepares++;
                         }
                         catch

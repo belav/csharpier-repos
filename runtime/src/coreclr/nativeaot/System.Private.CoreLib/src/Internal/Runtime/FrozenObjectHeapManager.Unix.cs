@@ -10,14 +10,16 @@ namespace Internal.Runtime
         static void* ClrVirtualReserve(nuint size)
         {
             // The shim will return null for failure
-            return (void*)Interop.Sys.MMap(
-                0,
-                size,
-                Interop.Sys.MemoryMappedProtections.PROT_NONE,
-                Interop.Sys.MemoryMappedFlags.MAP_PRIVATE | Interop.Sys.MemoryMappedFlags.MAP_ANONYMOUS,
-                -1,
-                0);
-
+            return (void*)
+                Interop.Sys.MMap(
+                    0,
+                    size,
+                    Interop.Sys.MemoryMappedProtections.PROT_NONE,
+                    Interop.Sys.MemoryMappedFlags.MAP_PRIVATE
+                        | Interop.Sys.MemoryMappedFlags.MAP_ANONYMOUS,
+                    -1,
+                    0
+                );
         }
 
         static void* ClrVirtualCommit(void* pBase, nuint size)
@@ -25,7 +27,9 @@ namespace Internal.Runtime
             int result = Interop.Sys.MProtect(
                 (nint)pBase,
                 size,
-                Interop.Sys.MemoryMappedProtections.PROT_READ | Interop.Sys.MemoryMappedProtections.PROT_WRITE);
+                Interop.Sys.MemoryMappedProtections.PROT_READ
+                    | Interop.Sys.MemoryMappedProtections.PROT_WRITE
+            );
 
             return result == 0 ? pBase : null;
         }

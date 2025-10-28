@@ -188,7 +188,11 @@ namespace System.SpanTests
         [InlineData(3, 3, 0)]
         [InlineData(10, 0, 5)]
         [InlineData(10, 3, 2)]
-        public static void ArraySegmentAsSpanWithStartAndLength(int length, int start, int subLength)
+        public static void ArraySegmentAsSpanWithStartAndLength(
+            int length,
+            int start,
+            int subLength
+        )
         {
             const int segmentOffset = 5;
 
@@ -220,7 +224,11 @@ namespace System.SpanTests
         [InlineData(0, 0, 1)]
         [InlineData(5, 6, 0)]
         [InlineData(5, 3, 3)]
-        public static void ArrayAsSpanWithStartAndLengthNegative(int length, int start, int subLength)
+        public static void ArrayAsSpanWithStartAndLengthNegative(
+            int length,
+            int start,
+            int subLength
+        )
         {
             int[] a = new int[length];
             Assert.Throws<ArgumentOutOfRangeException>(() => a.AsSpan(start, subLength));

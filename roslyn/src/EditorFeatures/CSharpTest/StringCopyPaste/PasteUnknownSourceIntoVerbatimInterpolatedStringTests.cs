@@ -26,7 +26,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.StringCopyPaste
                 "var x = $@\"\n[||]\"",
                 afterUndo: """
                 var x = $@"[||]"
-                """);
+                """
+            );
         }
 
         [WpfFact]
@@ -46,7 +47,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.StringCopyPaste
                 """,
                 afterUndo: """
                 var x = $@"[||]"
-                """);
+                """
+            );
         }
 
         [WpfFact]
@@ -60,7 +62,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.StringCopyPaste
                 "var x = $@\"\t[||]\"",
                 afterUndo: """
                 var x = $@"[||]"
-                """);
+                """
+            );
         }
 
         [WpfFact]
@@ -76,7 +79,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.StringCopyPaste
                 """,
                 afterUndo: """
                 var x = $@"[||]"
-                """);
+                """
+            );
         }
 
         [WpfFact]
@@ -94,7 +98,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.StringCopyPaste
                 """",
                 afterUndo: """
                 var x = $@""[||]"
-                """);
+                """
+            );
         }
 
         [WpfFact]
@@ -108,7 +113,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.StringCopyPaste
                 "var x = $@\"\t\"\"\t[||]\"",
                 afterUndo: """
                 var x = $@"[||]"
-                """);
+                """
+            );
         }
 
         [WpfFact]
@@ -124,7 +130,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.StringCopyPaste
                 """,
                 afterUndo: """
                 var x = $@"[||]"
-                """);
+                """
+            );
         }
 
         [WpfFact]
@@ -140,7 +147,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.StringCopyPaste
                 """,
                 afterUndo: """
                 var x = $@"{[||]"
-                """);
+                """
+            );
         }
 
         [WpfFact]
@@ -156,7 +164,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.StringCopyPaste
                 """,
                 afterUndo: """
                 var x = $@"[||]"
-                """);
+                """
+            );
         }
 
         [WpfFact]
@@ -172,7 +181,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.StringCopyPaste
                 """,
                 afterUndo: """
                 var x = $@"[||]"
-                """);
+                """
+            );
         }
 
         [WpfFact]
@@ -188,7 +198,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.StringCopyPaste
                 """,
                 afterUndo: """
                 var x = $@"}[||]"
-                """);
+                """
+            );
         }
 
         [WpfFact]
@@ -204,7 +215,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.StringCopyPaste
                 """,
                 afterUndo: """
                 var x = $@"[||]"
-                """);
+                """
+            );
         }
 
         [WpfFact]
@@ -220,7 +232,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.StringCopyPaste
                 """,
                 afterUndo: """
                 var x = $@"[||]"
-                """);
+                """
+            );
         }
 
         [WpfFact]
@@ -236,7 +249,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.StringCopyPaste
                 """,
                 afterUndo: """
                 var x = $@"[||]"
-                """);
+                """
+            );
         }
 
         [WpfFact]
@@ -252,7 +266,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.StringCopyPaste
                 """,
                 afterUndo: """
                 var x = $@"[||]"
-                """);
+                """
+            );
         }
 
         #endregion
@@ -270,7 +285,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.StringCopyPaste
                 "var x = $@\"\n[||]{0}\"",
                 afterUndo: """
                 var x = $@"[||]{0}"
-                """);
+                """
+            );
         }
 
         [WpfFact]
@@ -290,7 +306,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.StringCopyPaste
                 """,
                 afterUndo: """
                 var x = $@"[||]{0}"
-                """);
+                """
+            );
         }
 
         [WpfFact]
@@ -304,7 +321,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.StringCopyPaste
                 "var x = $@\"\t[||]{0}\"",
                 afterUndo: """
                 var x = $@"[||]{0}"
-                """);
+                """
+            );
         }
 
         [WpfFact]
@@ -320,7 +338,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.StringCopyPaste
                 """,
                 afterUndo: """
                 var x = $@"[||]{0}"
-                """);
+                """
+            );
         }
 
         [WpfFact]
@@ -338,7 +357,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.StringCopyPaste
                 """",
                 afterUndo: """
                 var x = $@""[||]{0}"
-                """);
+                """
+            );
         }
 
         [WpfFact]
@@ -352,7 +372,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.StringCopyPaste
                 "var x = $@\"\t\"\"\t[||]{0}\"",
                 afterUndo: """
                 var x = $@"[||]{0}"
-                """);
+                """
+            );
         }
 
         [WpfFact]
@@ -368,7 +389,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.StringCopyPaste
                 """,
                 afterUndo: """
                 var x = $@"[||]{0}"
-                """);
+                """
+            );
         }
 
         [WpfFact]
@@ -384,7 +406,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.StringCopyPaste
                 """,
                 afterUndo: """
                 var x = $@"{[||]{0}"
-                """);
+                """
+            );
         }
 
         [WpfFact]
@@ -400,7 +423,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.StringCopyPaste
                 """,
                 afterUndo: """
                 var x = $@"[||]{0}"
-                """);
+                """
+            );
         }
 
         [WpfFact]
@@ -416,7 +440,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.StringCopyPaste
                 """,
                 afterUndo: """
                 var x = $@"[||]{0}"
-                """);
+                """
+            );
         }
 
         [WpfFact]
@@ -432,7 +457,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.StringCopyPaste
                 """,
                 afterUndo: """
                 var x = $@"}[||]{0}"
-                """);
+                """
+            );
         }
 
         [WpfFact]
@@ -448,7 +474,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.StringCopyPaste
                 """,
                 afterUndo: """
                 var x = $@"[||]{0}"
-                """);
+                """
+            );
         }
 
         [WpfFact]
@@ -464,7 +491,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.StringCopyPaste
                 """,
                 afterUndo: """
                 var x = $@"[||]{0}"
-                """);
+                """
+            );
         }
 
         [WpfFact]
@@ -480,7 +508,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.StringCopyPaste
                 """,
                 afterUndo: """
                 var x = $@"[||]{0}"
-                """);
+                """
+            );
         }
 
         [WpfFact]
@@ -496,7 +525,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.StringCopyPaste
                 """,
                 afterUndo: """
                 var x = $@"[||]{0}"
-                """);
+                """
+            );
         }
 
         #endregion
@@ -514,7 +544,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.StringCopyPaste
                 "var x = $@\"{0}\n[||]\"",
                 afterUndo: """
                 var x = $@"{0}[||]"
-                """);
+                """
+            );
         }
 
         [WpfFact]
@@ -534,7 +565,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.StringCopyPaste
                 """,
                 afterUndo: """
                 var x = $@"{0}[||]"
-                """);
+                """
+            );
         }
 
         [WpfFact]
@@ -548,7 +580,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.StringCopyPaste
                 "var x = $@\"{0}\t[||]\"",
                 afterUndo: """
                 var x = $@"{0}[||]"
-                """);
+                """
+            );
         }
 
         [WpfFact]
@@ -564,7 +597,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.StringCopyPaste
                 """,
                 afterUndo: """
                 var x = $@"{0}[||]"
-                """);
+                """
+            );
         }
 
         [WpfFact]
@@ -582,7 +616,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.StringCopyPaste
                 """,
                 afterUndo: """
                 var x = $@"{0}"[||]"
-                """);
+                """
+            );
         }
 
         [WpfFact]
@@ -596,7 +631,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.StringCopyPaste
                 "var x = $@\"{0}\t\"\"\t[||]\"",
                 afterUndo: """
                 var x = $@"{0}[||]"
-                """);
+                """
+            );
         }
 
         [WpfFact]
@@ -612,7 +648,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.StringCopyPaste
                 """,
                 afterUndo: """
                 var x = $@"{0}[||]"
-                """);
+                """
+            );
         }
 
         [WpfFact]
@@ -628,7 +665,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.StringCopyPaste
                 """,
                 afterUndo: """
                 var x = $@"{0}{[||]"
-                """);
+                """
+            );
         }
 
         [WpfFact]
@@ -644,7 +682,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.StringCopyPaste
                 """,
                 afterUndo: """
                 var x = $@"{0}[||]"
-                """);
+                """
+            );
         }
 
         [WpfFact]
@@ -660,7 +699,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.StringCopyPaste
                 """,
                 afterUndo: """
                 var x = $@"{0}[||]"
-                """);
+                """
+            );
         }
 
         [WpfFact]
@@ -676,7 +716,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.StringCopyPaste
                 """,
                 afterUndo: """
                 var x = $@"{0}}[||]"
-                """);
+                """
+            );
         }
 
         [WpfFact]
@@ -692,7 +733,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.StringCopyPaste
                 """,
                 afterUndo: """
                 var x = $@"{0}[||]"
-                """);
+                """
+            );
         }
 
         [WpfFact]
@@ -708,7 +750,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.StringCopyPaste
                 """,
                 afterUndo: """
                 var x = $@"{0}[||]"
-                """);
+                """
+            );
         }
 
         [WpfFact]
@@ -724,7 +767,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.StringCopyPaste
                 """,
                 afterUndo: """
                 var x = $@"{0}[||]"
-                """);
+                """
+            );
         }
 
         [WpfFact]
@@ -740,7 +784,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.StringCopyPaste
                 """,
                 afterUndo: """
                 var x = $@"{0}[||]"
-                """);
+                """
+            );
         }
 
         #endregion

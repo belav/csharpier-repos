@@ -42,16 +42,11 @@ namespace System.ServiceModel.Activation
         Nullable<bool> isWindowsAuthentication;
 
         HostedAspNetEnvironment()
-            : base()
-        {
-        }
+            : base() { }
 
         public override bool AspNetCompatibilityEnabled
         {
-            get
-            {
-                return ServiceHostingEnvironment.AspNetCompatibilityEnabled;
-            }
+            get { return ServiceHostingEnvironment.AspNetCompatibilityEnabled; }
         }
 
         public override string ConfigurationPath
@@ -71,44 +66,29 @@ namespace System.ServiceModel.Activation
 
         public override bool IsConfigurationBased
         {
-            get
-            {
-                return ServiceHostingEnvironment.IsConfigurationBased;
-            }
+            get { return ServiceHostingEnvironment.IsConfigurationBased; }
         }
 
         public override string CurrentVirtualPath
         {
-            get
-            {
-                return ServiceHostingEnvironment.CurrentVirtualPath;
-            }
+            get { return ServiceHostingEnvironment.CurrentVirtualPath; }
         }
 
         public override string XamlFileBaseLocation
         {
-            get
-            {
-                return ServiceHostingEnvironment.XamlFileBaseLocation;
-            }
+            get { return ServiceHostingEnvironment.XamlFileBaseLocation; }
         }
 
         public override bool UsingIntegratedPipeline
         {
-            get
-            {
-                return HttpRuntime.UsingIntegratedPipeline;
-            }
+            get { return HttpRuntime.UsingIntegratedPipeline; }
         }
 
         // Provides the version of the WebSocket protocol supported by IIS.
         // Returns null if WebSockets are not supported (because the IIS WebSocketModule is not installed or enabled).
         public override string WebSocketVersion
         {
-            get
-            {
-                return isWebSocketVersionSet ? webSocketVersion : null;
-            }
+            get { return isWebSocketVersionSet ? webSocketVersion : null; }
         }
 
         public static void Enable()
@@ -118,27 +98,33 @@ namespace System.ServiceModel.Activation
         }
 
         /// <summary>
-        /// Tries to set the 'WebSocketVersion' property. The first call of this method sets the property (based on the "WEBSOCKET_VERSION" server property). 
+        /// Tries to set the 'WebSocketVersion' property. The first call of this method sets the property (based on the "WEBSOCKET_VERSION" server property).
         /// Subsequent calls do nothing.
         /// </summary>
         /// <param name="application">The HttpApplication used to determine the WebSocket version.</param>
         /// <remarks>
         /// Take caution when calling this method. The method initializes the 'WebSocketVersion' property based on the "WEBSOCKET_VERSION" server variable.
-        /// This variable gets set by the WebSocketModule when it's loaded by IIS. If you call this method too early (before IIS got a chance to load the module list), 
+        /// This variable gets set by the WebSocketModule when it's loaded by IIS. If you call this method too early (before IIS got a chance to load the module list),
         /// this method might incorrectly set 'WebSocketVersion' to 'null'.
         /// </remarks>
         public static void TrySetWebSocketVersion(HttpApplication application)
         {
             if (!isWebSocketVersionSet)
             {
-                webSocketVersion = application.Request.ServerVariables[WebSocketVersionServerProperty];
+                webSocketVersion = application.Request.ServerVariables[
+                    WebSocketVersionServerProperty
+                ];
                 isWebSocketVersionSet = true;
             }
         }
 
-        public override void AddHostingBehavior(ServiceHostBase serviceHost, ServiceDescription description)
+        public override void AddHostingBehavior(
+            ServiceHostBase serviceHost,
+            ServiceDescription description
+        )
         {
-            VirtualPathExtension virtualPathExtension = serviceHost.Extensions.Find<VirtualPathExtension>();
+            VirtualPathExtension virtualPathExtension =
+                serviceHost.Extensions.Find<VirtualPathExtension>();
             if (virtualPathExtension != null)
             {
                 description.Behaviors.Add(new HostedBindingBehavior(virtualPathExtension));
@@ -168,7 +154,8 @@ namespace System.ServiceModel.Activation
 
         public override void EnsureCompatibilityRequirements(ServiceDescription description)
         {
-            AspNetCompatibilityRequirementsAttribute aspNetCompatibilityRequirements = description.Behaviors.Find<AspNetCompatibilityRequirementsAttribute>();
+            AspNetCompatibilityRequirementsAttribute aspNetCompatibilityRequirements =
+                description.Behaviors.Find<AspNetCompatibilityRequirementsAttribute>();
             if (aspNetCompatibilityRequirements == null)
             {
                 aspNetCompatibilityRequirements = new AspNetCompatibilityRequirementsAttribute();
@@ -185,27 +172,41 @@ namespace System.ServiceModel.Activation
 
         public override string GetAnnotationFromHost(ServiceHostBase host)
         {
-            //Format Website name\Application Virtual Path|\relative service virtual path|serviceName 
+            //Format Website name\Application Virtual Path|\relative service virtual path|serviceName
             if (host != null && host.Extensions != null)
             {
-                string serviceName = (host.Description != null) ? host.Description.Name : string.Empty;
+                string serviceName =
+                    (host.Description != null) ? host.Description.Name : string.Empty;
                 string application = ServiceHostingEnvironment.ApplicationVirtualPath;
                 string servicePath = string.Empty;
                 VirtualPathExtension extension = host.Extensions.Find<VirtualPathExtension>();
                 if (extension != null && extension.VirtualPath != null)
                 {
                     servicePath = extension.VirtualPath.Replace("~", application + "|");
-                    return string.Format(CultureInfo.InvariantCulture, "{0}{1}|{2}", ServiceHostingEnvironment.SiteName, servicePath, serviceName);
+                    return string.Format(
+                        CultureInfo.InvariantCulture,
+                        "{0}{1}|{2}",
+                        ServiceHostingEnvironment.SiteName,
+                        servicePath,
+                        serviceName
+                    );
                 }
             }
             if (string.IsNullOrEmpty(HostedAspNetEnvironment.cachedServiceReference))
             {
-                HostedAspNetEnvironment.cachedServiceReference = string.Format(CultureInfo.InvariantCulture, "{0}{1}", ServiceHostingEnvironment.SiteName, ServiceHostingEnvironment.ApplicationVirtualPath);
+                HostedAspNetEnvironment.cachedServiceReference = string.Format(
+                    CultureInfo.InvariantCulture,
+                    "{0}{1}",
+                    ServiceHostingEnvironment.SiteName,
+                    ServiceHostingEnvironment.ApplicationVirtualPath
+                );
             }
             return HostedAspNetEnvironment.cachedServiceReference;
         }
 
-        [Fx.Tag.SecurityNote(Miscellaneous = "RequiresReview - can be called outside of user context.")]
+        [Fx.Tag.SecurityNote(
+            Miscellaneous = "RequiresReview - can be called outside of user context."
+        )]
         public override void EnsureAllReferencedAssemblyLoaded()
         {
             AspNetPartialTrustHelpers.FailIfInPartialTrustOutsideAspNet();
@@ -216,34 +217,60 @@ namespace System.ServiceModel.Activation
         {
             BaseUriWithWildcard baseAddress = null;
             HostedTransportConfigurationBase hostedConfiguration =
-                HostedTransportConfigurationManager.GetConfiguration(transportScheme) as HostedTransportConfigurationBase;
+                HostedTransportConfigurationManager.GetConfiguration(transportScheme)
+                as HostedTransportConfigurationBase;
             if (hostedConfiguration != null)
             {
                 baseAddress = hostedConfiguration.FindBaseAddress(listenUri);
                 if (baseAddress == null)
                 {
-                    throw FxTrace.Exception.AsError(new InvalidOperationException(SR.Hosting_TransportBindingNotFound(listenUri.ToString())));
+                    throw FxTrace.Exception.AsError(
+                        new InvalidOperationException(
+                            SR.Hosting_TransportBindingNotFound(listenUri.ToString())
+                        )
+                    );
                 }
             }
             return baseAddress;
         }
 
-        public override void ValidateHttpSettings(string virtualPath, bool isMetadataListener, bool usingDefaultSpnList, ref AuthenticationSchemes bindingElementAuthenticationSchemes, ref ExtendedProtectionPolicy extendedProtectionPolicy, ref string realm)
+        public override void ValidateHttpSettings(
+            string virtualPath,
+            bool isMetadataListener,
+            bool usingDefaultSpnList,
+            ref AuthenticationSchemes bindingElementAuthenticationSchemes,
+            ref ExtendedProtectionPolicy extendedProtectionPolicy,
+            ref string realm
+        )
         {
             // Verify the authentication settings
-            AuthenticationSchemes hostSupportedSchemes = HostedTransportConfigurationManager.MetabaseSettings.GetAuthenticationSchemes(virtualPath);
+            AuthenticationSchemes hostSupportedSchemes =
+                HostedTransportConfigurationManager.MetabaseSettings.GetAuthenticationSchemes(
+                    virtualPath
+                );
 
             if ((bindingElementAuthenticationSchemes & hostSupportedSchemes) == 0)
             {
-                if (bindingElementAuthenticationSchemes == AuthenticationSchemes.Negotiate ||
-                    bindingElementAuthenticationSchemes == AuthenticationSchemes.Ntlm ||
-                    bindingElementAuthenticationSchemes == AuthenticationSchemes.IntegratedWindowsAuthentication)
+                if (
+                    bindingElementAuthenticationSchemes == AuthenticationSchemes.Negotiate
+                    || bindingElementAuthenticationSchemes == AuthenticationSchemes.Ntlm
+                    || bindingElementAuthenticationSchemes
+                        == AuthenticationSchemes.IntegratedWindowsAuthentication
+                )
                 {
-                    throw FxTrace.Exception.AsError(new NotSupportedException(SR.Hosting_AuthSchemesRequireWindowsAuth));
+                    throw FxTrace.Exception.AsError(
+                        new NotSupportedException(SR.Hosting_AuthSchemesRequireWindowsAuth)
+                    );
                 }
                 else
                 {
-                    throw FxTrace.Exception.AsError(new NotSupportedException(SR.Hosting_AuthSchemesRequireOtherAuth(bindingElementAuthenticationSchemes.ToString())));
+                    throw FxTrace.Exception.AsError(
+                        new NotSupportedException(
+                            SR.Hosting_AuthSchemesRequireOtherAuth(
+                                bindingElementAuthenticationSchemes.ToString()
+                            )
+                        )
+                    );
                 }
             }
 
@@ -253,20 +280,28 @@ namespace System.ServiceModel.Activation
             if (bindingElementAuthenticationSchemes != AuthenticationSchemes.Anonymous)
             {
                 //Compare the ExtendedProtectionPolicy setttings to IIS
-                ExtendedProtectionPolicy iisPolicy = HostedTransportConfigurationManager.MetabaseSettings.GetExtendedProtectionPolicy(virtualPath);
+                ExtendedProtectionPolicy iisPolicy =
+                    HostedTransportConfigurationManager.MetabaseSettings.GetExtendedProtectionPolicy(
+                        virtualPath
+                    );
 
                 if (iisPolicy == null) //OS doesn't support CBT
                 {
                     if (extendedProtectionPolicy.PolicyEnforcement == PolicyEnforcement.Always)
                     {
-                        throw FxTrace.Exception.AsError(new NotSupportedException(SR.ExtendedProtectionNotSupported));
+                        throw FxTrace.Exception.AsError(
+                            new NotSupportedException(SR.ExtendedProtectionNotSupported)
+                        );
                     }
                 }
                 else
                 {
-                    if (isMetadataListener && ChannelBindingUtility.IsDefaultPolicy(extendedProtectionPolicy))
+                    if (
+                        isMetadataListener
+                        && ChannelBindingUtility.IsDefaultPolicy(extendedProtectionPolicy)
+                    )
                     {
-                        //push the IIS policy onto the metadataListener if and only if the default policy is 
+                        //push the IIS policy onto the metadataListener if and only if the default policy is
                         //in force. policy for non metadata listeners will still have to match IIS policy.
                         extendedProtectionPolicy = iisPolicy;
                     }
@@ -275,37 +310,72 @@ namespace System.ServiceModel.Activation
                         if (!ChannelBindingUtility.AreEqual(iisPolicy, extendedProtectionPolicy))
                         {
                             string mismatchErrorMessage;
-                            if (iisPolicy.PolicyEnforcement != extendedProtectionPolicy.PolicyEnforcement)
+                            if (
+                                iisPolicy.PolicyEnforcement
+                                != extendedProtectionPolicy.PolicyEnforcement
+                            )
                             {
-                                mismatchErrorMessage = SR.ExtendedProtectionPolicyEnforcementMismatch(iisPolicy.PolicyEnforcement, extendedProtectionPolicy.PolicyEnforcement);
+                                mismatchErrorMessage =
+                                    SR.ExtendedProtectionPolicyEnforcementMismatch(
+                                        iisPolicy.PolicyEnforcement,
+                                        extendedProtectionPolicy.PolicyEnforcement
+                                    );
                             }
-                            else if (iisPolicy.ProtectionScenario != extendedProtectionPolicy.ProtectionScenario)
+                            else if (
+                                iisPolicy.ProtectionScenario
+                                != extendedProtectionPolicy.ProtectionScenario
+                            )
                             {
-                                mismatchErrorMessage = SR.ExtendedProtectionPolicyScenarioMismatch(iisPolicy.ProtectionScenario, extendedProtectionPolicy.ProtectionScenario);
+                                mismatchErrorMessage = SR.ExtendedProtectionPolicyScenarioMismatch(
+                                    iisPolicy.ProtectionScenario,
+                                    extendedProtectionPolicy.ProtectionScenario
+                                );
                             }
-                            else 
+                            else
                             {
-                                Fx.Assert(iisPolicy.CustomChannelBinding != extendedProtectionPolicy.CustomChannelBinding, "new case in ChannelBindingUtility.AreEqual to account for");
-                                mismatchErrorMessage = SR.ExtendedProtectionPolicyCustomChannelBindingMismatch;
+                                Fx.Assert(
+                                    iisPolicy.CustomChannelBinding
+                                        != extendedProtectionPolicy.CustomChannelBinding,
+                                    "new case in ChannelBindingUtility.AreEqual to account for"
+                                );
+                                mismatchErrorMessage =
+                                    SR.ExtendedProtectionPolicyCustomChannelBindingMismatch;
                             }
 
                             if (mismatchErrorMessage != null)
                             {
-                                throw FxTrace.Exception.AsError(new NotSupportedException(SR.Hosting_ExtendedProtectionPoliciesMustMatch(mismatchErrorMessage)));
+                                throw FxTrace.Exception.AsError(
+                                    new NotSupportedException(
+                                        SR.Hosting_ExtendedProtectionPoliciesMustMatch(
+                                            mismatchErrorMessage
+                                        )
+                                    )
+                                );
                             }
                         }
 
                         //when using the default SPN list we auto generate, we should make sure that the IIS policy is also the default...
-                        ServiceNameCollection listenerSpnList = usingDefaultSpnList ? null : extendedProtectionPolicy.CustomServiceNames;
-                        if (!ChannelBindingUtility.IsSubset(iisPolicy.CustomServiceNames, listenerSpnList))
+                        ServiceNameCollection listenerSpnList = usingDefaultSpnList
+                            ? null
+                            : extendedProtectionPolicy.CustomServiceNames;
+                        if (
+                            !ChannelBindingUtility.IsSubset(
+                                iisPolicy.CustomServiceNames,
+                                listenerSpnList
+                            )
+                        )
                         {
-                            throw FxTrace.Exception.AsError(new NotSupportedException(SR.Hosting_ExtendedProtectionPoliciesMustMatch(SR.Hosting_ExtendedProtectionSPNListNotSubset)));
+                            throw FxTrace.Exception.AsError(
+                                new NotSupportedException(
+                                    SR.Hosting_ExtendedProtectionPoliciesMustMatch(
+                                        SR.Hosting_ExtendedProtectionSPNListNotSubset
+                                    )
+                                )
+                            );
                         }
                     }
                 }
             }
-
-            
 
             // Do not set realm for Cassini.
             if (!ServiceHostingEnvironment.IsSimpleApplicationHost)
@@ -315,7 +385,10 @@ namespace System.ServiceModel.Activation
             }
         }
 
-        public override bool ValidateHttpsSettings(string virtualPath, ref bool requireClientCertificate)
+        public override bool ValidateHttpsSettings(
+            string virtualPath,
+            ref bool requireClientCertificate
+        )
         {
             // Do not validate settings for Cassini. Actually current implementation of Cassini does not support HTTPS.
             if (ServiceHostingEnvironment.IsSimpleApplicationHost)
@@ -324,7 +397,8 @@ namespace System.ServiceModel.Activation
             }
 
             // Validate Ssl Settings
-            HttpAccessSslFlags sslFlags = HostedTransportConfigurationManager.MetabaseSettings.GetAccessSslFlags(virtualPath);
+            HttpAccessSslFlags sslFlags =
+                HostedTransportConfigurationManager.MetabaseSettings.GetAccessSslFlags(virtualPath);
             HttpAccessSslFlags channelListenerSslFlags = HttpAccessSslFlags.None;
 
             // Validating SSL flags. SslRequireCert means "require client certificate" in IIS terminology.
@@ -334,19 +408,28 @@ namespace System.ServiceModel.Activation
                 // We apply IIS settings to the ChannelListener to fix the endpoint
                 requireClientCertificate = true;
             }
-            else if (requireClientCertificate &&
+            else if (
+                requireClientCertificate
+                &&
                 // Validating SSL flags. SslNegotiateCert means "accept client certificate" in IIS terminology.
                 // We want to allow SslNegotiateCert in IIS to support hosting one endpoint requiring client
                 // certificates and another endpoint not using client certificates in the same VirtualDirectory.
                 // HttpsChannelListener.ValidateAuthentication ensures that authentication is denied for services
                 // requiring client certificates when the client does not present one.
-                (sslFlags & HttpAccessSslFlags.SslNegotiateCert) == 0)
+                (sslFlags & HttpAccessSslFlags.SslNegotiateCert) == 0
+            )
             {
                 // IIS ignores client cert but the binding requires it.
                 channelListenerSslFlags |= HttpAccessSslFlags.SslRequireCert;
 
-                throw FxTrace.Exception.AsError(new NotSupportedException(SR.Hosting_SslSettingsMisconfigured(
-                    channelListenerSslFlags.ToString(), sslFlags.ToString())));
+                throw FxTrace.Exception.AsError(
+                    new NotSupportedException(
+                        SR.Hosting_SslSettingsMisconfigured(
+                            channelListenerSslFlags.ToString(),
+                            sslFlags.ToString()
+                        )
+                    )
+                );
             }
 
             return (sslFlags & HttpAccessSslFlags.SslMapCert) != 0;
@@ -354,28 +437,44 @@ namespace System.ServiceModel.Activation
 
         public override void ProcessNotMatchedEndpointAddress(Uri uri, string endpointName)
         {
-            if (!object.ReferenceEquals(uri.Scheme, Uri.UriSchemeHttp) &&
-                !object.ReferenceEquals(uri.Scheme, Uri.UriSchemeHttps))
+            if (
+                !object.ReferenceEquals(uri.Scheme, Uri.UriSchemeHttp)
+                && !object.ReferenceEquals(uri.Scheme, Uri.UriSchemeHttps)
+            )
             {
-                throw FxTrace.Exception.AsError(new InvalidOperationException(SR.Hosting_NonHTTPInCompatibilityMode(endpointName)));
+                throw FxTrace.Exception.AsError(
+                    new InvalidOperationException(
+                        SR.Hosting_NonHTTPInCompatibilityMode(endpointName)
+                    )
+                );
             }
         }
 
-        public override void ValidateCompatibilityRequirements(AspNetCompatibilityRequirementsMode compatibilityMode)
+        public override void ValidateCompatibilityRequirements(
+            AspNetCompatibilityRequirementsMode compatibilityMode
+        )
         {
             if (compatibilityMode == AspNetCompatibilityRequirementsMode.Allowed)
             {
                 return;
             }
-            else if (ServiceHostingEnvironment.AspNetCompatibilityEnabled &&
-                compatibilityMode == AspNetCompatibilityRequirementsMode.NotAllowed)
+            else if (
+                ServiceHostingEnvironment.AspNetCompatibilityEnabled
+                && compatibilityMode == AspNetCompatibilityRequirementsMode.NotAllowed
+            )
             {
-                throw FxTrace.Exception.AsError(new InvalidOperationException(SR.Hosting_ServiceCompatibilityNotAllowed));
+                throw FxTrace.Exception.AsError(
+                    new InvalidOperationException(SR.Hosting_ServiceCompatibilityNotAllowed)
+                );
             }
-            else if (!ServiceHostingEnvironment.AspNetCompatibilityEnabled &&
-                compatibilityMode == AspNetCompatibilityRequirementsMode.Required)
+            else if (
+                !ServiceHostingEnvironment.AspNetCompatibilityEnabled
+                && compatibilityMode == AspNetCompatibilityRequirementsMode.Required
+            )
             {
-                throw FxTrace.Exception.AsError(new InvalidOperationException(SR.Hosting_ServiceCompatibilityRequire));
+                throw FxTrace.Exception.AsError(
+                    new InvalidOperationException(SR.Hosting_ServiceCompatibilityRequire)
+                );
             }
         }
 
@@ -384,7 +483,10 @@ namespace System.ServiceModel.Activation
             return GetHostingProperty(message, false);
         }
 
-        public override IAspNetMessageProperty GetHostingProperty(Message message, bool removeFromMessage)
+        public override IAspNetMessageProperty GetHostingProperty(
+            Message message,
+            bool removeFromMessage
+        )
         {
             IAspNetMessageProperty result = null;
             object property;
@@ -404,43 +506,66 @@ namespace System.ServiceModel.Activation
         public override void PrepareMessageForDispatch(Message message)
         {
             ReceiveContext context = null;
-            if (ReceiveContext.TryGet(message, out context) && !(context is ReceiveContextBusyCountWrapper))
+            if (
+                ReceiveContext.TryGet(message, out context)
+                && !(context is ReceiveContextBusyCountWrapper)
+            )
             {
-                ReceiveContextBusyCountWrapper wrapper = new ReceiveContextBusyCountWrapper(context);
+                ReceiveContextBusyCountWrapper wrapper = new ReceiveContextBusyCountWrapper(
+                    context
+                );
                 message.Properties.Remove(ReceiveContext.Name);
                 message.Properties.Add(ReceiveContext.Name, wrapper);
             }
         }
 
-        public override void ApplyHostedContext(TransportChannelListener listener, BindingContext context)
+        public override void ApplyHostedContext(
+            TransportChannelListener listener,
+            BindingContext context
+        )
         {
-            VirtualPathExtension virtualPathExtension = context.BindingParameters.Find<VirtualPathExtension>();
+            VirtualPathExtension virtualPathExtension =
+                context.BindingParameters.Find<VirtualPathExtension>();
 
             if (virtualPathExtension != null)
             {
-                HostedMetadataBindingParameter metadataBindingParameter = context.BindingParameters.Find<HostedMetadataBindingParameter>();
-                listener.ApplyHostedContext(virtualPathExtension.VirtualPath, metadataBindingParameter != null);
+                HostedMetadataBindingParameter metadataBindingParameter =
+                    context.BindingParameters.Find<HostedMetadataBindingParameter>();
+                listener.ApplyHostedContext(
+                    virtualPathExtension.VirtualPath,
+                    metadataBindingParameter != null
+                );
             }
         }
 
-        internal override void AddMetadataBindingParameters(Uri listenUri, KeyedByTypeCollection<IServiceBehavior> serviceBehaviors, BindingParameterCollection bindingParameters)
+        internal override void AddMetadataBindingParameters(
+            Uri listenUri,
+            KeyedByTypeCollection<IServiceBehavior> serviceBehaviors,
+            BindingParameterCollection bindingParameters
+        )
         {
             if (serviceBehaviors.Find<HostedBindingBehavior>() != null)
             {
                 bindingParameters.Add(new HostedMetadataBindingParameter());
             }
 
-            VirtualPathExtension virtualPathExtension = bindingParameters.Find<VirtualPathExtension>();
+            VirtualPathExtension virtualPathExtension =
+                bindingParameters.Find<VirtualPathExtension>();
 
             if (virtualPathExtension != null)
             {
-                AuthenticationSchemes hostSupportedAuthenticationSchemes = AspNetEnvironment.Current.GetAuthenticationSchemes(listenUri);
+                AuthenticationSchemes hostSupportedAuthenticationSchemes =
+                    AspNetEnvironment.Current.GetAuthenticationSchemes(listenUri);
 
                 if (hostSupportedAuthenticationSchemes != AuthenticationSchemes.None)
                 {
                     if (bindingParameters.Find<AuthenticationSchemesBindingParameter>() == null)
                     {
-                        bindingParameters.Add(new AuthenticationSchemesBindingParameter(hostSupportedAuthenticationSchemes));
+                        bindingParameters.Add(
+                            new AuthenticationSchemesBindingParameter(
+                                hostSupportedAuthenticationSchemes
+                            )
+                        );
                     }
                 }
             }
@@ -450,7 +575,8 @@ namespace System.ServiceModel.Activation
 
         internal override bool IsMetadataListener(BindingParameterCollection bindingParameters)
         {
-            return base.IsMetadataListener(bindingParameters) || bindingParameters.Find<HostedMetadataBindingParameter>() != null;
+            return base.IsMetadataListener(bindingParameters)
+                || bindingParameters.Find<HostedMetadataBindingParameter>() != null;
         }
 
         public override void IncrementBusyCount()
@@ -462,7 +588,7 @@ namespace System.ServiceModel.Activation
         {
             HostingEnvironmentWrapper.DecrementBusyCount();
         }
-        
+
         public override bool TraceIncrementBusyCountIsEnabled()
         {
             return TD.IncrementBusyCountIsEnabled();
@@ -472,6 +598,7 @@ namespace System.ServiceModel.Activation
         {
             return TD.DecrementBusyCountIsEnabled();
         }
+
         public override void TraceIncrementBusyCount(string data)
         {
             if (data == null)
@@ -492,22 +619,27 @@ namespace System.ServiceModel.Activation
 
         public override object GetConfigurationSection(string sectionPath)
         {
-            return GetSectionFromWebConfigurationManager(sectionPath, ServiceHostingEnvironment.FullVirtualPath);
+            return GetSectionFromWebConfigurationManager(
+                sectionPath,
+                ServiceHostingEnvironment.FullVirtualPath
+            );
         }
 
-        [Fx.Tag.SecurityNote(Critical = "Uses SecurityCritical method UnsafeGetSectionFromWebConfigurationManager which elevates.")]
+        [Fx.Tag.SecurityNote(
+            Critical = "Uses SecurityCritical method UnsafeGetSectionFromWebConfigurationManager which elevates."
+        )]
         [SecurityCritical]
         public override object UnsafeGetConfigurationSection(string sectionPath)
         {
-            return UnsafeGetSectionFromWebConfigurationManager(sectionPath, ServiceHostingEnvironment.FullVirtualPath);
+            return UnsafeGetSectionFromWebConfigurationManager(
+                sectionPath,
+                ServiceHostingEnvironment.FullVirtualPath
+            );
         }
 
         public override bool IsSimpleApplicationHost
         {
-            get
-            {
-                return ServiceHostingEnvironment.IsSimpleApplicationHost;
-            }
+            get { return ServiceHostingEnvironment.IsSimpleApplicationHost; }
         }
 
         public override AuthenticationSchemes GetAuthenticationSchemes(Uri baseAddress)
@@ -523,15 +655,25 @@ namespace System.ServiceModel.Activation
             }
             else
             {
-                completePath = string.Format(CultureInfo.InvariantCulture, "{0}/{1}", virtualPath, fileName);
+                completePath = string.Format(
+                    CultureInfo.InvariantCulture,
+                    "{0}/{1}",
+                    virtualPath,
+                    fileName
+                );
             }
-            AuthenticationSchemes supportedSchemes = HostedTransportConfigurationManager.MetabaseSettings.GetAuthenticationSchemes(completePath);
+            AuthenticationSchemes supportedSchemes =
+                HostedTransportConfigurationManager.MetabaseSettings.GetAuthenticationSchemes(
+                    completePath
+                );
 
             return supportedSchemes;
         }
 
-        [Fx.Tag.SecurityNote(Critical = "Handles config objects, which should not be leaked.",
-             Safe = "Doesn't leak config objects out of SecurityCritical code.")]
+        [Fx.Tag.SecurityNote(
+            Critical = "Handles config objects, which should not be leaked.",
+            Safe = "Doesn't leak config objects out of SecurityCritical code."
+        )]
         [SecuritySafeCritical]
         [MethodImpl(MethodImplOptions.NoInlining)]
         public override bool IsWindowsAuthenticationConfigured()
@@ -540,7 +682,10 @@ namespace System.ServiceModel.Activation
             {
                 AspNetPartialTrustHelpers.FailIfInPartialTrustOutsideAspNet();
 
-                AuthenticationSection authSection = (AuthenticationSection)UnsafeGetConfigurationSection("system.web/authentication");
+                AuthenticationSection authSection =
+                    (AuthenticationSection)UnsafeGetConfigurationSection(
+                        "system.web/authentication"
+                    );
                 if (authSection != null)
                 {
                     this.isWindowsAuthentication = (authSection.Mode == AuthenticationMode.Windows);
@@ -571,13 +716,22 @@ namespace System.ServiceModel.Activation
         }
 
         // Be sure to update GetSectionFromWebConfigurationManager if you modify this method
-        [SuppressMessage(FxCop.Category.Security, FxCop.Rule.SecureAsserts, Justification = "This is from an internal helper class and users have no way to pass arbitrary information to this code.")]
-        [Fx.Tag.SecurityNote(Critical = "Asserts ConfigurationPermission in order to fetch config from WebConfigurationManager,"
-            + "caller must guard return value.")]
+        [SuppressMessage(
+            FxCop.Category.Security,
+            FxCop.Rule.SecureAsserts,
+            Justification = "This is from an internal helper class and users have no way to pass arbitrary information to this code."
+        )]
+        [Fx.Tag.SecurityNote(
+            Critical = "Asserts ConfigurationPermission in order to fetch config from WebConfigurationManager,"
+                + "caller must guard return value."
+        )]
         [SecurityCritical]
         [ConfigurationPermission(SecurityAction.Assert, Unrestricted = true)]
         [MethodImpl(MethodImplOptions.NoInlining)]
-        internal static object UnsafeGetSectionFromWebConfigurationManager(string sectionPath, string virtualPath)
+        internal static object UnsafeGetSectionFromWebConfigurationManager(
+            string sectionPath,
+            string virtualPath
+        )
         {
             AspNetPartialTrustHelpers.FailIfInPartialTrustOutsideAspNet();
 
@@ -593,42 +747,47 @@ namespace System.ServiceModel.Activation
 
         public override bool IsWithinApp(string absoluteVirtualPath)
         {
-            return HostedTransportConfigurationManager.MetabaseSettings.IsWithinApp(absoluteVirtualPath);
+            return HostedTransportConfigurationManager.MetabaseSettings.IsWithinApp(
+                absoluteVirtualPath
+            );
         }
 
         // This class is intended to be empty.
-        class HostedMetadataBindingParameter
-        {
-        }
+        class HostedMetadataBindingParameter { }
 
         class HostedMetadataExchangeEndpointBehavior : IEndpointBehavior
         {
-            void IEndpointBehavior.AddBindingParameters(ServiceEndpoint endpoint, BindingParameterCollection bindingParameters)
+            void IEndpointBehavior.AddBindingParameters(
+                ServiceEndpoint endpoint,
+                BindingParameterCollection bindingParameters
+            )
             {
                 bindingParameters.Add(new HostedMetadataBindingParameter());
             }
 
-            void IEndpointBehavior.ApplyClientBehavior(ServiceEndpoint endpoint, Dispatcher.ClientRuntime clientRuntime)
-            {
-            }
+            void IEndpointBehavior.ApplyClientBehavior(
+                ServiceEndpoint endpoint,
+                Dispatcher.ClientRuntime clientRuntime
+            ) { }
 
-            void IEndpointBehavior.ApplyDispatchBehavior(ServiceEndpoint endpoint, Dispatcher.EndpointDispatcher endpointDispatcher)
-            {
-            }
+            void IEndpointBehavior.ApplyDispatchBehavior(
+                ServiceEndpoint endpoint,
+                Dispatcher.EndpointDispatcher endpointDispatcher
+            ) { }
 
-            void IEndpointBehavior.Validate(ServiceEndpoint endpoint)
-            {
-            }
+            void IEndpointBehavior.Validate(ServiceEndpoint endpoint) { }
         }
 
         class ReceiveContextBusyCountWrapper : ReceiveContext
         {
             ReceiveContext wrappedContext;
+
             //possible values are 0 and 1.
             //using an integer to allow usage with Interlocked methods
             //synchronized access needed as there could be ---- between calls
             //to EndComplete and Tx notification.
             int busyCount;
+
             //possible values are 0 and 1
             //using an integer to allow usage with Interlocked methods
             //synchronized access needed as there could be ---- between calls
@@ -653,12 +812,20 @@ namespace System.ServiceModel.Activation
                 DecrementBusyCount();
             }
 
-            protected override IAsyncResult OnBeginAbandon(TimeSpan timeout, AsyncCallback callback, object state)
+            protected override IAsyncResult OnBeginAbandon(
+                TimeSpan timeout,
+                AsyncCallback callback,
+                object state
+            )
             {
                 return this.wrappedContext.BeginAbandon(timeout, callback, state);
             }
 
-            protected override IAsyncResult OnBeginComplete(TimeSpan timeout, AsyncCallback callback, object state)
+            protected override IAsyncResult OnBeginComplete(
+                TimeSpan timeout,
+                AsyncCallback callback,
+                object state
+            )
             {
                 RegisterForTransactionNotification(Transaction.Current);
                 return this.wrappedContext.BeginComplete(timeout, callback, state);
@@ -669,7 +836,6 @@ namespace System.ServiceModel.Activation
                 RegisterForTransactionNotification(Transaction.Current);
                 this.wrappedContext.Complete(timeout);
                 DecrementOnNoAmbientTransaction();
-
             }
 
             protected override void OnEndAbandon(IAsyncResult result)
@@ -712,7 +878,8 @@ namespace System.ServiceModel.Activation
             {
                 if (Transaction.Current != null)
                 {
-                    ReceiveContextEnlistmentNotification notification = new ReceiveContextEnlistmentNotification(this);
+                    ReceiveContextEnlistmentNotification notification =
+                        new ReceiveContextEnlistmentNotification(this);
                     transaction.EnlistVolatile(notification, EnlistmentOptions.None);
                     Interlocked.Increment(ref this.ambientTransactionCount);
                 }
@@ -724,7 +891,6 @@ namespace System.ServiceModel.Activation
                 {
                     DecrementBusyCount();
                 }
-
             }
 
             void DecrementBusyCount()
@@ -743,7 +909,9 @@ namespace System.ServiceModel.Activation
             {
                 ReceiveContextBusyCountWrapper context;
 
-                internal ReceiveContextEnlistmentNotification(ReceiveContextBusyCountWrapper context)
+                internal ReceiveContextEnlistmentNotification(
+                    ReceiveContextBusyCountWrapper context
+                )
                 {
                     this.context = context;
                 }

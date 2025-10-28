@@ -30,9 +30,7 @@ public class NavigationBuilder<TSource, TTarget> : NavigationBuilder
     /// </summary>
     [EntityFrameworkInternal]
     public NavigationBuilder(IMutableNavigationBase navigationOrSkipNavigation)
-        : base(navigationOrSkipNavigation)
-    {
-    }
+        : base(navigationOrSkipNavigation) { }
 
     /// <summary>
     ///     Adds or updates an annotation on the navigation property. If an annotation
@@ -42,8 +40,10 @@ public class NavigationBuilder<TSource, TTarget> : NavigationBuilder
     /// <param name="annotation">The key of the annotation to be added or updated.</param>
     /// <param name="value">The value to be stored in the annotation.</param>
     /// <returns>The same builder instance so that multiple configuration calls can be chained.</returns>
-    public new virtual NavigationBuilder<TSource, TTarget> HasAnnotation(string annotation, object? value)
-        => (NavigationBuilder<TSource, TTarget>)base.HasAnnotation(annotation, value);
+    public new virtual NavigationBuilder<TSource, TTarget> HasAnnotation(
+        string annotation,
+        object? value
+    ) => (NavigationBuilder<TSource, TTarget>)base.HasAnnotation(annotation, value);
 
     /// <summary>
     ///     Sets the <see cref="PropertyAccessMode" /> to use for this property.
@@ -62,24 +62,25 @@ public class NavigationBuilder<TSource, TTarget> : NavigationBuilder
     /// </remarks>
     /// <param name="propertyAccessMode">The <see cref="PropertyAccessMode" /> to use for this property.</param>
     /// <returns>The same builder instance so that multiple configuration calls can be chained.</returns>
-    public new virtual NavigationBuilder<TSource, TTarget> UsePropertyAccessMode(PropertyAccessMode propertyAccessMode)
-        => (NavigationBuilder<TSource, TTarget>)base.UsePropertyAccessMode(propertyAccessMode);
+    public new virtual NavigationBuilder<TSource, TTarget> UsePropertyAccessMode(
+        PropertyAccessMode propertyAccessMode
+    ) => (NavigationBuilder<TSource, TTarget>)base.UsePropertyAccessMode(propertyAccessMode);
 
     /// <summary>
     ///     Sets a backing field to use for this navigation property.
     /// </summary>
     /// <param name="fieldName">The name of the field to use for this navigation property.</param>
     /// <returns>The same builder instance so that multiple configuration calls can be chained.</returns>
-    public new virtual NavigationBuilder<TSource, TTarget> HasField(string? fieldName)
-        => (NavigationBuilder<TSource, TTarget>)base.HasField(fieldName);
+    public new virtual NavigationBuilder<TSource, TTarget> HasField(string? fieldName) =>
+        (NavigationBuilder<TSource, TTarget>)base.HasField(fieldName);
 
     /// <summary>
     ///     Configures whether this navigation should be automatically included in a query.
     /// </summary>
     /// <param name="autoInclude">A value indicating if the navigation should be automatically included.</param>
     /// <returns>The same builder instance so that multiple configuration calls can be chained.</returns>
-    public new virtual NavigationBuilder<TSource, TTarget> AutoInclude(bool autoInclude = true)
-        => (NavigationBuilder<TSource, TTarget>)base.AutoInclude(autoInclude);
+    public new virtual NavigationBuilder<TSource, TTarget> AutoInclude(bool autoInclude = true) =>
+        (NavigationBuilder<TSource, TTarget>)base.AutoInclude(autoInclude);
 
     /// <summary>
     ///     Configures whether this navigation should be enabled for lazy-loading. Note that a property can only be lazy-loaded
@@ -92,16 +93,17 @@ public class NavigationBuilder<TSource, TTarget> : NavigationBuilder
     /// </remarks>
     /// <param name="lazyLoadingEnabled">A value indicating if the navigation should be enabled for lazy-loading.</param>
     /// <returns>The same builder instance so that multiple configuration calls can be chained.</returns>
-    public new virtual NavigationBuilder<TSource, TTarget> EnableLazyLoading(bool lazyLoadingEnabled = true)
-        => (NavigationBuilder<TSource, TTarget>)base.EnableLazyLoading(lazyLoadingEnabled);
+    public new virtual NavigationBuilder<TSource, TTarget> EnableLazyLoading(
+        bool lazyLoadingEnabled = true
+    ) => (NavigationBuilder<TSource, TTarget>)base.EnableLazyLoading(lazyLoadingEnabled);
 
     /// <summary>
     ///     Configures whether this navigation is required.
     /// </summary>
     /// <param name="required">A value indicating whether the navigation should be required.</param>
     /// <returns>The same builder instance so that multiple configuration calls can be chained.</returns>
-    public new virtual NavigationBuilder<TSource, TTarget> IsRequired(bool required = true)
-        => (NavigationBuilder<TSource, TTarget>)base.IsRequired(required);
+    public new virtual NavigationBuilder<TSource, TTarget> IsRequired(bool required = true) =>
+        (NavigationBuilder<TSource, TTarget>)base.IsRequired(required);
 
     #region Hidden System.Object members
 
@@ -110,8 +112,7 @@ public class NavigationBuilder<TSource, TTarget> : NavigationBuilder
     /// </summary>
     /// <returns>A string that represents the current object.</returns>
     [EditorBrowsable(EditorBrowsableState.Never)]
-    public override string? ToString()
-        => base.ToString();
+    public override string? ToString() => base.ToString();
 
     /// <summary>
     ///     Determines whether the specified object is equal to the current object.
@@ -120,8 +121,7 @@ public class NavigationBuilder<TSource, TTarget> : NavigationBuilder
     /// <returns><see langword="true" /> if the specified object is equal to the current object; otherwise, <see langword="false" />.</returns>
     [EditorBrowsable(EditorBrowsableState.Never)]
     // ReSharper disable once BaseObjectEqualsIsObjectEquals
-    public override bool Equals(object? obj)
-        => base.Equals(obj);
+    public override bool Equals(object? obj) => base.Equals(obj);
 
     /// <summary>
     ///     Serves as the default hash function.
@@ -129,8 +129,7 @@ public class NavigationBuilder<TSource, TTarget> : NavigationBuilder
     /// <returns>A hash code for the current object.</returns>
     [EditorBrowsable(EditorBrowsableState.Never)]
     // ReSharper disable once BaseObjectGetHashCodeCallInGetHashCode
-    public override int GetHashCode()
-        => base.GetHashCode();
+    public override int GetHashCode() => base.GetHashCode();
 
     #endregion
 }

@@ -4,11 +4,11 @@
 
 namespace System.IdentityModel
 {
+    using System.IdentityModel.Tokens;
     using System.IO;
     using System.Security.Cryptography;
-    using System.IdentityModel.Tokens;
-    using System.Xml;
     using System.Text;
+    using System.Xml;
 
     // for sequential use by one thread
     sealed class SignatureResourcePool
@@ -57,20 +57,23 @@ namespace System.IdentityModel
 
         public HashAlgorithm TakeHashAlgorithm(string algorithm)
         {
-            if ( this.hashAlgorithm == null )
+            if (this.hashAlgorithm == null)
             {
-                if ( string.IsNullOrEmpty( algorithm ) )
+                if (string.IsNullOrEmpty(algorithm))
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument( algorithm, SR.GetString( SR.EmptyOrNullArgumentString, "algorithm" ) );
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
+                        algorithm,
+                        SR.GetString(SR.EmptyOrNullArgumentString, "algorithm")
+                    );
                 }
 
-                this.hashAlgorithm = CryptoHelper.CreateHashAlgorithm( algorithm );
+                this.hashAlgorithm = CryptoHelper.CreateHashAlgorithm(algorithm);
             }
             else
             {
                 this.hashAlgorithm.Initialize();
             }
-           
+
             return this.hashAlgorithm;
         }
 
@@ -91,17 +94,26 @@ namespace System.IdentityModel
         {
             return TakeHashStream(TakeHashAlgorithm(algorithm));
         }
+
 #if NO
         public XmlC14NWriter TakeIntegratedWriter(Stream stream)
         {
             return TakeIntegratedWriter(stream, false, null);
         }
 
-        public XmlC14NWriter TakeIntegratedWriter(Stream stream, bool includeComments, string[] inclusivePrefixes)
+        public XmlC14NWriter TakeIntegratedWriter(
+            Stream stream,
+            bool includeComments,
+            string[] inclusivePrefixes
+        )
         {
             if (this.integratedWriter == null)
             {
-                this.integratedWriter = new XmlC14NWriter(stream, includeComments, inclusivePrefixes);
+                this.integratedWriter = new XmlC14NWriter(
+                    stream,
+                    includeComments,
+                    inclusivePrefixes
+                );
             }
             else
             {
@@ -115,11 +127,19 @@ namespace System.IdentityModel
         {
             if (this.utf8Writer == null)
             {
-                this.utf8Writer = XmlDictionaryWriter.CreateTextWriter(Stream.Null, Encoding.UTF8, false);
+                this.utf8Writer = XmlDictionaryWriter.CreateTextWriter(
+                    Stream.Null,
+                    Encoding.UTF8,
+                    false
+                );
             }
             else
             {
-                ((IXmlTextWriterInitializer) this.utf8Writer).SetOutput(Stream.Null, Encoding.UTF8, false);
+                ((IXmlTextWriterInitializer)this.utf8Writer).SetOutput(
+                    Stream.Null,
+                    Encoding.UTF8,
+                    false
+                );
             }
             return this.utf8Writer;
         }

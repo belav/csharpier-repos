@@ -10,17 +10,25 @@ namespace System.Web.Http.Validation.Providers
 {
     public class DataMemberModelValidatorProviderTest
     {
-        private static DataAnnotationsModelMetadataProvider _metadataProvider = new DataAnnotationsModelMetadataProvider();
+        private static DataAnnotationsModelMetadataProvider _metadataProvider =
+            new DataAnnotationsModelMetadataProvider();
 
         [Fact]
         public void ClassWithoutAttributes_NoValidator()
         {
             // Arrange
             var provider = new DataMemberModelValidatorProvider();
-            var metadata = _metadataProvider.GetMetadataForProperty(() => null, typeof(ClassWithoutAttributes), "TheProperty");
+            var metadata = _metadataProvider.GetMetadataForProperty(
+                () => null,
+                typeof(ClassWithoutAttributes),
+                "TheProperty"
+            );
 
             // Act
-            IEnumerable<ModelValidator> validators = provider.GetValidators(metadata, new[] { provider });
+            IEnumerable<ModelValidator> validators = provider.GetValidators(
+                metadata,
+                new[] { provider }
+            );
 
             // Assert
             Assert.Empty(validators);
@@ -36,10 +44,17 @@ namespace System.Web.Http.Validation.Providers
         {
             // Arrange
             var provider = new DataMemberModelValidatorProvider();
-            var metadata = _metadataProvider.GetMetadataForProperty(() => null, typeof(ClassWithDataMemberIsRequiredTrue), "TheProperty");
+            var metadata = _metadataProvider.GetMetadataForProperty(
+                () => null,
+                typeof(ClassWithDataMemberIsRequiredTrue),
+                "TheProperty"
+            );
 
             // Act
-            IEnumerable<ModelValidator> validators = provider.GetValidators(metadata, new[] { provider });
+            IEnumerable<ModelValidator> validators = provider.GetValidators(
+                metadata,
+                new[] { provider }
+            );
 
             // Assert
             ModelValidator validator = Assert.Single(validators);
@@ -58,10 +73,17 @@ namespace System.Web.Http.Validation.Providers
         {
             // Arrange
             var provider = new DataMemberModelValidatorProvider();
-            var metadata = _metadataProvider.GetMetadataForProperty(() => null, typeof(ClassWithDataMemberIsRequiredFalse), "TheProperty");
+            var metadata = _metadataProvider.GetMetadataForProperty(
+                () => null,
+                typeof(ClassWithDataMemberIsRequiredFalse),
+                "TheProperty"
+            );
 
             // Act
-            IEnumerable<ModelValidator> validators = provider.GetValidators(metadata, new[] { provider });
+            IEnumerable<ModelValidator> validators = provider.GetValidators(
+                metadata,
+                new[] { provider }
+            );
 
             // Assert
             Assert.Empty(validators);
@@ -79,10 +101,17 @@ namespace System.Web.Http.Validation.Providers
         {
             // Arrange
             var provider = new DataMemberModelValidatorProvider();
-            var metadata = _metadataProvider.GetMetadataForProperty(() => null, typeof(ClassWithDataMemberIsRequiredTrueWithoutDataContract), "TheProperty");
+            var metadata = _metadataProvider.GetMetadataForProperty(
+                () => null,
+                typeof(ClassWithDataMemberIsRequiredTrueWithoutDataContract),
+                "TheProperty"
+            );
 
             // Act
-            IEnumerable<ModelValidator> validators = provider.GetValidators(metadata, new[] { provider });
+            IEnumerable<ModelValidator> validators = provider.GetValidators(
+                metadata,
+                new[] { provider }
+            );
 
             // Assert
             Assert.Empty(validators);

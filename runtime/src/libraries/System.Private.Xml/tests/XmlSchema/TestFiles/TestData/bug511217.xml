@@ -1,4 +1,7 @@
-﻿<test xsi:noNamespaceSchemaLocation="XMLSchema1.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+﻿<test
+  xsi:noNamespaceSchemaLocation="XMLSchema1.xsd"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+>
   <listitem>
     <item>
       item

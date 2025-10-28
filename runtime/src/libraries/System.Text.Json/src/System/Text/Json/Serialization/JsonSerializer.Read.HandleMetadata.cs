@@ -22,7 +22,12 @@ namespace System.Text.Json
         private static readonly byte[] s_typePropertyName = "$type"u8.ToArray();
         private static readonly byte[] s_valuesPropertyName = "$values"u8.ToArray();
 
-        internal static bool TryReadMetadata(JsonConverter converter, JsonTypeInfo jsonTypeInfo, ref Utf8JsonReader reader, scoped ref ReadStack state)
+        internal static bool TryReadMetadata(
+            JsonConverter converter,
+            JsonTypeInfo jsonTypeInfo,
+            ref Utf8JsonReader reader,
+            scoped ref ReadStack state
+        )
         {
             Debug.Assert(state.Current.ObjectState == StackFrameObjectState.StartToken);
             Debug.Assert(state.Current.CanContainMetadata);
@@ -54,11 +59,19 @@ namespace System.Text.Json
                     if ((state.Current.MetadataPropertyNames & MetadataPropertyName.Ref) != 0)
                     {
                         // No properties whatsoever should follow a $ref property.
-                        ThrowHelper.ThrowJsonException_MetadataReferenceObjectCannotContainOtherProperties(reader.GetSpan(), ref state);
+                        ThrowHelper.ThrowJsonException_MetadataReferenceObjectCannotContainOtherProperties(
+                            reader.GetSpan(),
+                            ref state
+                        );
                     }
 
                     ReadOnlySpan<byte> propertyName = reader.GetSpan();
-                    switch (state.Current.LatestMetadataPropertyName = GetMetadataPropertyName(propertyName, jsonTypeInfo.PolymorphicTypeResolver))
+                    switch (
+                        state.Current.LatestMetadataPropertyName = GetMetadataPropertyName(
+                            propertyName,
+                            jsonTypeInfo.PolymorphicTypeResolver
+                        )
+                    )
                     {
                         case MetadataPropertyName.Id:
                             state.Current.JsonPropertyName = s_idPropertyName;
@@ -66,17 +79,30 @@ namespace System.Text.Json
                             if (state.ReferenceResolver is null)
                             {
                                 // Found an $id property in a type that doesn't support reference preservation
-                                ThrowHelper.ThrowJsonException_MetadataUnexpectedProperty(propertyName, ref state);
+                                ThrowHelper.ThrowJsonException_MetadataUnexpectedProperty(
+                                    propertyName,
+                                    ref state
+                                );
                             }
-                            if ((state.Current.MetadataPropertyNames & (MetadataPropertyName.Id | MetadataPropertyName.Ref)) != 0)
+                            if (
+                                (
+                                    state.Current.MetadataPropertyNames
+                                    & (MetadataPropertyName.Id | MetadataPropertyName.Ref)
+                                ) != 0
+                            )
                             {
                                 // No $id or $ref properties should precede $id properties.
-                                ThrowHelper.ThrowJsonException_MetadataIdIsNotFirstProperty(propertyName, ref state);
+                                ThrowHelper.ThrowJsonException_MetadataIdIsNotFirstProperty(
+                                    propertyName,
+                                    ref state
+                                );
                             }
                             if (!converter.CanHaveMetadata)
                             {
                                 // Should not be permitted unless the converter is capable of handling metadata.
-                                ThrowHelper.ThrowJsonException_MetadataCannotParsePreservedObjectIntoImmutable(converter.Type!);
+                                ThrowHelper.ThrowJsonException_MetadataCannotParsePreservedObjectIntoImmutable(
+                                    converter.Type!
+                                );
                             }
 
                             break;
@@ -87,28 +113,42 @@ namespace System.Text.Json
                             if (state.ReferenceResolver is null)
                             {
                                 // Found a $ref property in a type that doesn't support reference preservation
-                                ThrowHelper.ThrowJsonException_MetadataUnexpectedProperty(propertyName, ref state);
+                                ThrowHelper.ThrowJsonException_MetadataUnexpectedProperty(
+                                    propertyName,
+                                    ref state
+                                );
                             }
                             if (converter.IsValueType)
                             {
                                 // Should not be permitted if the converter is a struct.
-                                ThrowHelper.ThrowJsonException_MetadataInvalidReferenceToValueType(converter.Type!);
+                                ThrowHelper.ThrowJsonException_MetadataInvalidReferenceToValueType(
+                                    converter.Type!
+                                );
                             }
                             if (state.Current.MetadataPropertyNames != 0)
                             {
                                 // No metadata properties should precede a $ref property.
-                                ThrowHelper.ThrowJsonException_MetadataReferenceObjectCannotContainOtherProperties(reader.GetSpan(), ref state);
+                                ThrowHelper.ThrowJsonException_MetadataReferenceObjectCannotContainOtherProperties(
+                                    reader.GetSpan(),
+                                    ref state
+                                );
                             }
 
                             break;
 
                         case MetadataPropertyName.Type:
-                            state.Current.JsonPropertyName = jsonTypeInfo.PolymorphicTypeResolver?.TypeDiscriminatorPropertyNameUtf8 ?? s_typePropertyName;
+                            state.Current.JsonPropertyName =
+                                jsonTypeInfo
+                                    .PolymorphicTypeResolver
+                                    ?.TypeDiscriminatorPropertyNameUtf8 ?? s_typePropertyName;
 
                             if (jsonTypeInfo.PolymorphicTypeResolver is null)
                             {
                                 // Found a $type property in a type that doesn't support polymorphism
-                                ThrowHelper.ThrowJsonException_MetadataUnexpectedProperty(propertyName, ref state);
+                                ThrowHelper.ThrowJsonException_MetadataUnexpectedProperty(
+                                    propertyName,
+                                    ref state
+                                );
                             }
                             if (state.PolymorphicTypeDiscriminator != null)
                             {
@@ -123,13 +163,19 @@ namespace System.Text.Json
                             if (state.Current.MetadataPropertyNames == MetadataPropertyName.None)
                             {
                                 // Cannot have a $values property unless there are preceding metadata properties.
-                                ThrowHelper.ThrowJsonException_MetadataStandaloneValuesProperty(ref state, propertyName);
+                                ThrowHelper.ThrowJsonException_MetadataStandaloneValuesProperty(
+                                    ref state,
+                                    propertyName
+                                );
                             }
 
                             break;
 
                         default:
-                            Debug.Assert(state.Current.LatestMetadataPropertyName == MetadataPropertyName.None);
+                            Debug.Assert(
+                                state.Current.LatestMetadataPropertyName
+                                    == MetadataPropertyName.None
+                            );
 
                             // Encountered a non-metadata property, exit the reader.
                             return true;
@@ -156,12 +202,18 @@ namespace System.Text.Json
                     case MetadataPropertyName.Id:
                         if (reader.TokenType != JsonTokenType.String)
                         {
-                            ThrowHelper.ThrowJsonException_MetadataValueWasNotString(reader.TokenType);
+                            ThrowHelper.ThrowJsonException_MetadataValueWasNotString(
+                                reader.TokenType
+                            );
                         }
 
                         if (state.ReferenceId != null)
                         {
-                            ThrowHelper.ThrowNotSupportedException_ObjectWithParameterizedCtorRefMetadataNotSupported(s_refPropertyName, ref reader, ref state);
+                            ThrowHelper.ThrowNotSupportedException_ObjectWithParameterizedCtorRefMetadataNotSupported(
+                                s_refPropertyName,
+                                ref reader,
+                                ref state
+                            );
                         }
 
                         state.ReferenceId = reader.GetString();
@@ -170,12 +222,18 @@ namespace System.Text.Json
                     case MetadataPropertyName.Ref:
                         if (reader.TokenType != JsonTokenType.String)
                         {
-                            ThrowHelper.ThrowJsonException_MetadataValueWasNotString(reader.TokenType);
+                            ThrowHelper.ThrowJsonException_MetadataValueWasNotString(
+                                reader.TokenType
+                            );
                         }
 
                         if (state.ReferenceId != null)
                         {
-                            ThrowHelper.ThrowNotSupportedException_ObjectWithParameterizedCtorRefMetadataNotSupported(s_refPropertyName, ref reader, ref state);
+                            ThrowHelper.ThrowNotSupportedException_ObjectWithParameterizedCtorRefMetadataNotSupported(
+                                s_refPropertyName,
+                                ref reader,
+                                ref state
+                            );
                         }
 
                         state.ReferenceId = reader.GetString();
@@ -193,7 +251,9 @@ namespace System.Text.Json
                                 state.PolymorphicTypeDiscriminator = reader.GetInt32();
                                 break;
                             default:
-                                ThrowHelper.ThrowJsonException_MetadataValueWasNotString(reader.TokenType);
+                                ThrowHelper.ThrowJsonException_MetadataValueWasNotString(
+                                    reader.TokenType
+                                );
                                 break;
                         }
 
@@ -203,11 +263,15 @@ namespace System.Text.Json
 
                         if (reader.TokenType != JsonTokenType.StartArray)
                         {
-                            ThrowHelper.ThrowJsonException_MetadataValuesInvalidToken(reader.TokenType);
+                            ThrowHelper.ThrowJsonException_MetadataValuesInvalidToken(
+                                reader.TokenType
+                            );
                         }
 
                         state.Current.PropertyState = StackFramePropertyState.None;
-                        state.Current.MetadataPropertyNames |= state.Current.LatestMetadataPropertyName;
+                        state.Current.MetadataPropertyNames |= state
+                            .Current
+                            .LatestMetadataPropertyName;
                         return true; // "$values" property contains the nested payload, exit the metadata reader now.
 
                     default:
@@ -221,53 +285,67 @@ namespace System.Text.Json
             }
         }
 
-        internal static bool IsMetadataPropertyName(ReadOnlySpan<byte> propertyName, PolymorphicTypeResolver? resolver)
+        internal static bool IsMetadataPropertyName(
+            ReadOnlySpan<byte> propertyName,
+            PolymorphicTypeResolver? resolver
+        )
         {
-            return
-                (propertyName.Length > 0 && propertyName[0] == '$') ||
-                (resolver?.TypeDiscriminatorPropertyNameUtf8?.AsSpan().SequenceEqual(propertyName) == true);
+            return (propertyName.Length > 0 && propertyName[0] == '$')
+                || (
+                    resolver
+                        ?.TypeDiscriminatorPropertyNameUtf8?.AsSpan()
+                        .SequenceEqual(propertyName) == true
+                );
         }
 
-        internal static MetadataPropertyName GetMetadataPropertyName(ReadOnlySpan<byte> propertyName, PolymorphicTypeResolver? resolver)
+        internal static MetadataPropertyName GetMetadataPropertyName(
+            ReadOnlySpan<byte> propertyName,
+            PolymorphicTypeResolver? resolver
+        )
         {
             if (propertyName.Length > 0 && propertyName[0] == '$')
             {
                 switch (propertyName.Length)
                 {
                     case 3:
-                        if (propertyName[1] == 'i' &&
-                            propertyName[2] == 'd')
+                        if (propertyName[1] == 'i' && propertyName[2] == 'd')
                         {
                             return MetadataPropertyName.Id;
                         }
                         break;
 
                     case 4:
-                        if (propertyName[1] == 'r' &&
-                            propertyName[2] == 'e' &&
-                            propertyName[3] == 'f')
+                        if (
+                            propertyName[1] == 'r'
+                            && propertyName[2] == 'e'
+                            && propertyName[3] == 'f'
+                        )
                         {
                             return MetadataPropertyName.Ref;
                         }
                         break;
 
                     case 5 when resolver?.TypeDiscriminatorPropertyNameUtf8 is null:
-                        if (propertyName[1] == 't' &&
-                            propertyName[2] == 'y' &&
-                            propertyName[3] == 'p' &&
-                            propertyName[4] == 'e')
+                        if (
+                            propertyName[1] == 't'
+                            && propertyName[2] == 'y'
+                            && propertyName[3] == 'p'
+                            && propertyName[4] == 'e'
+                        )
                         {
                             return MetadataPropertyName.Type;
                         }
                         break;
 
                     case 7:
-                        if (propertyName[1] == 'v' &&
-                            propertyName[2] == 'a' &&
-                            propertyName[3] == 'l' &&
-                            propertyName[4] == 'u' &&
-                            propertyName[5] == 'e' &&
-                            propertyName[6] == 's')
+                        if (
+                            propertyName[1] == 'v'
+                            && propertyName[2] == 'a'
+                            && propertyName[3] == 'l'
+                            && propertyName[4] == 'u'
+                            && propertyName[5] == 'e'
+                            && propertyName[6] == 's'
+                        )
                         {
                             return MetadataPropertyName.Values;
                         }
@@ -275,8 +353,10 @@ namespace System.Text.Json
                 }
             }
 
-            if (resolver?.TypeDiscriminatorPropertyNameUtf8 is byte[] customTypeDiscriminator &&
-                propertyName.SequenceEqual(customTypeDiscriminator))
+            if (
+                resolver?.TypeDiscriminatorPropertyNameUtf8 is byte[] customTypeDiscriminator
+                && propertyName.SequenceEqual(customTypeDiscriminator)
+            )
             {
                 return MetadataPropertyName.Type;
             }
@@ -288,7 +368,8 @@ namespace System.Text.Json
             ref Utf8JsonReader reader,
             scoped ref ReadStack state,
             JsonElement element,
-            [NotNullWhen(true)] out object? referenceValue)
+            [NotNullWhen(true)] out object? referenceValue
+        )
         {
             bool refMetadataFound = false;
             referenceValue = default;
@@ -308,16 +389,25 @@ namespace System.Text.Json
                     {
                         if (state.ReferenceId != null)
                         {
-                            ThrowHelper.ThrowNotSupportedException_ObjectWithParameterizedCtorRefMetadataNotSupported(s_refPropertyName, ref reader, ref state);
+                            ThrowHelper.ThrowNotSupportedException_ObjectWithParameterizedCtorRefMetadataNotSupported(
+                                s_refPropertyName,
+                                ref reader,
+                                ref state
+                            );
                         }
 
                         if (property.Value.ValueKind != JsonValueKind.String)
                         {
-                            ThrowHelper.ThrowJsonException_MetadataValueWasNotString(property.Value.ValueKind);
+                            ThrowHelper.ThrowJsonException_MetadataValueWasNotString(
+                                property.Value.ValueKind
+                            );
                         }
 
                         object boxedElement = element;
-                        state.ReferenceResolver.AddReference(property.Value.GetString()!, boxedElement);
+                        state.ReferenceResolver.AddReference(
+                            property.Value.GetString()!,
+                            boxedElement
+                        );
                         referenceValue = boxedElement;
                         return true;
                     }
@@ -325,7 +415,11 @@ namespace System.Text.Json
                     {
                         if (state.ReferenceId != null)
                         {
-                            ThrowHelper.ThrowNotSupportedException_ObjectWithParameterizedCtorRefMetadataNotSupported(s_refPropertyName, ref reader, ref state);
+                            ThrowHelper.ThrowNotSupportedException_ObjectWithParameterizedCtorRefMetadataNotSupported(
+                                s_refPropertyName,
+                                ref reader,
+                                ref state
+                            );
                         }
 
                         if (propertyCount > 1)
@@ -336,10 +430,14 @@ namespace System.Text.Json
 
                         if (property.Value.ValueKind != JsonValueKind.String)
                         {
-                            ThrowHelper.ThrowJsonException_MetadataValueWasNotString(property.Value.ValueKind);
+                            ThrowHelper.ThrowJsonException_MetadataValueWasNotString(
+                                property.Value.ValueKind
+                            );
                         }
 
-                        referenceValue = state.ReferenceResolver.ResolveReference(property.Value.GetString()!);
+                        referenceValue = state.ReferenceResolver.ResolveReference(
+                            property.Value.GetString()!
+                        );
                         refMetadataFound = true;
                     }
                 }
@@ -352,7 +450,8 @@ namespace System.Text.Json
             ref Utf8JsonReader reader,
             scoped ref ReadStack state,
             JsonNode? jsonNode,
-            [NotNullWhen(true)] out object? referenceValue)
+            [NotNullWhen(true)] out object? referenceValue
+        )
         {
             bool refMetadataFound = false;
             referenceValue = default;
@@ -372,7 +471,11 @@ namespace System.Text.Json
                     {
                         if (state.ReferenceId != null)
                         {
-                            ThrowHelper.ThrowNotSupportedException_ObjectWithParameterizedCtorRefMetadataNotSupported(s_refPropertyName, ref reader, ref state);
+                            ThrowHelper.ThrowNotSupportedException_ObjectWithParameterizedCtorRefMetadataNotSupported(
+                                s_refPropertyName,
+                                ref reader,
+                                ref state
+                            );
                         }
 
                         string referenceId = ReadAsStringMetadataValue(property.Value);
@@ -384,7 +487,11 @@ namespace System.Text.Json
                     {
                         if (state.ReferenceId != null)
                         {
-                            ThrowHelper.ThrowNotSupportedException_ObjectWithParameterizedCtorRefMetadataNotSupported(s_refPropertyName, ref reader, ref state);
+                            ThrowHelper.ThrowNotSupportedException_ObjectWithParameterizedCtorRefMetadataNotSupported(
+                                s_refPropertyName,
+                                ref reader,
+                                ref state
+                            );
                         }
 
                         if (propertyCount > 1)
@@ -400,9 +507,11 @@ namespace System.Text.Json
 
                     static string ReadAsStringMetadataValue(JsonNode? jsonNode)
                     {
-                        if (jsonNode is JsonValue jsonValue &&
-                            jsonValue.TryGetValue(out string? value) &&
-                            value is not null)
+                        if (
+                            jsonNode is JsonValue jsonValue
+                            && jsonValue.TryGetValue(out string? value)
+                            && value is not null
+                        )
                         {
                             return value;
                         }
@@ -431,30 +540,48 @@ namespace System.Text.Json
             if ((state.Current.MetadataPropertyNames & MetadataPropertyName.Values) != 0)
             {
                 // Object converters do not support $values metadata.
-                ThrowHelper.ThrowJsonException_MetadataUnexpectedProperty(s_valuesPropertyName, ref state);
+                ThrowHelper.ThrowJsonException_MetadataUnexpectedProperty(
+                    s_valuesPropertyName,
+                    ref state
+                );
             }
         }
 
-        internal static void ValidateMetadataForArrayConverter(JsonConverter converter, ref Utf8JsonReader reader, scoped ref ReadStack state)
+        internal static void ValidateMetadataForArrayConverter(
+            JsonConverter converter,
+            ref Utf8JsonReader reader,
+            scoped ref ReadStack state
+        )
         {
             switch (reader.TokenType)
             {
                 case JsonTokenType.StartArray:
-                    Debug.Assert(state.Current.MetadataPropertyNames == MetadataPropertyName.None || state.Current.LatestMetadataPropertyName == MetadataPropertyName.Values);
+                    Debug.Assert(
+                        state.Current.MetadataPropertyNames == MetadataPropertyName.None
+                            || state.Current.LatestMetadataPropertyName
+                                == MetadataPropertyName.Values
+                    );
                     break;
 
                 case JsonTokenType.EndObject:
                     if (state.Current.MetadataPropertyNames != MetadataPropertyName.Ref)
                     {
                         // Read the entire JSON object while parsing for metadata: for collection converters this is only legal for $ref nodes.
-                        ThrowHelper.ThrowJsonException_MetadataPreservedArrayValuesNotFound(ref state, converter.Type!);
+                        ThrowHelper.ThrowJsonException_MetadataPreservedArrayValuesNotFound(
+                            ref state,
+                            converter.Type!
+                        );
                     }
                     break;
 
                 default:
                     Debug.Assert(reader.TokenType == JsonTokenType.PropertyName);
                     // Do not tolerate non-metadata properties in collection converters.
-                    ThrowHelper.ThrowJsonException_MetadataInvalidPropertyInArrayMetadata(ref state, converter.Type!, reader);
+                    ThrowHelper.ThrowJsonException_MetadataInvalidPropertyInArrayMetadata(
+                        ref state,
+                        converter.Type!,
+                        reader
+                    );
                     break;
             }
         }
@@ -475,7 +602,10 @@ namespace System.Text.Json
             catch (InvalidCastException)
             {
                 ThrowHelper.ThrowInvalidOperationException_MetadataReferenceOfTypeCannotBeAssignedToType(
-                    referenceId, value.GetType(), typeof(T));
+                    referenceId,
+                    value.GetType(),
+                    typeof(T)
+                );
                 return default!;
             }
         }

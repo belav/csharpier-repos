@@ -13,37 +13,47 @@ namespace System.Web.Mvc.Html.Test
         {
             // Needs extra URL-escaping due to routing special cases.
             new StringSet("&'\"", "&amp;&#39;&quot;", "&amp;&#39;&quot;", "___", "%26&#39;%22"),
-
             // High ASCII
             new StringSet(" ¡ÿĀ", " ¡ÿĀ", "&#160;&#161;&#255;Ā", "____"),
-
             // Surrogate pair, Ugaritic letter beta, &x10381;
             new StringSet("\xD800\xDF81", "𐎁", "&#66433;", "__"),
-
             new StringSet(
                 "<blink>text</blink>",
                 "&lt;blink>text&lt;/blink>",
                 "&lt;blink&gt;text&lt;/blink&gt;",
-                "_blink_text__blink_"),
-
+                "_blink_text__blink_"
+            ),
             // Remaining examples are only id-sanitized, not attribute- or HTML-encoded.
-            new StringSet("Simple Display Text", "Simple Display Text", "Simple Display Text", "Simple_Display_Text"),
-            new StringSet("Chinese西雅图Chars", "Chinese西雅图Chars", "Chinese西雅图Chars", "Chinese___Chars"), // Seattle
+            new StringSet(
+                "Simple Display Text",
+                "Simple Display Text",
+                "Simple Display Text",
+                "Simple_Display_Text"
+            ),
+            new StringSet(
+                "Chinese西雅图Chars",
+                "Chinese西雅图Chars",
+                "Chinese西雅图Chars",
+                "Chinese___Chars"
+            ), // Seattle
             new StringSet(
                 "Unicode؃Format؃Char", // class Cf
                 "Unicode؃Format؃Char",
                 "Unicode؃Format؃Char",
-                "Unicode_Format_Char"),
+                "Unicode_Format_Char"
+            ),
             new StringSet(
                 "UnicodeῼTitlecaseῼChar", // class Lt
                 "UnicodeῼTitlecaseῼChar",
                 "UnicodeῼTitlecaseῼChar",
-                "Unicode_Titlecase_Char"),
+                "Unicode_Titlecase_Char"
+            ),
             new StringSet(
                 "UnicodeःCombiningःChar", // class Mc
                 "UnicodeःCombiningःChar",
                 "UnicodeःCombiningःChar",
-                "Unicode_Combining_Char"),
+                "Unicode_Combining_Char"
+            ),
         };
 
         public static TheoryDataSet<string, bool, string, string> AttributeAndHtmlEncodedData
@@ -58,12 +68,14 @@ namespace System.Web.Mvc.Html.Test
                         stringSet.Text,
                         false,
                         stringSet.AttributeEncodedText,
-                        stringSet.HtmlEncodedText);
+                        stringSet.HtmlEncodedText
+                    );
                     result.Add(
                         stringSet.Text,
                         true,
                         stringSet.AttributeEncodedText,
-                        stringSet.HtmlEncodedText);
+                        stringSet.HtmlEncodedText
+                    );
                 }
 
                 return result;
@@ -253,17 +265,27 @@ namespace System.Web.Mvc.Html.Test
 
         private class StringSet
         {
-            public StringSet(string text, string attributeEncodedText, string htmlEncodedText, string idEncodedText)
-                : this(text, attributeEncodedText, htmlEncodedText, idEncodedText, Uri.EscapeUriString(text))
-            {
-            }
+            public StringSet(
+                string text,
+                string attributeEncodedText,
+                string htmlEncodedText,
+                string idEncodedText
+            )
+                : this(
+                    text,
+                    attributeEncodedText,
+                    htmlEncodedText,
+                    idEncodedText,
+                    Uri.EscapeUriString(text)
+                ) { }
 
             public StringSet(
                 string text,
                 string attributeEncodedText,
                 string htmlEncodedText,
                 string idEncodedText,
-                string urlEncodedText)
+                string urlEncodedText
+            )
             {
                 Contract.Assert(!String.IsNullOrEmpty(text));
                 Contract.Assert(!String.IsNullOrEmpty(attributeEncodedText));

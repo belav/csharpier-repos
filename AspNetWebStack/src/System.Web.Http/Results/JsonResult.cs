@@ -33,11 +33,18 @@ namespace System.Web.Http.Results
         /// <param name="serializerSettings">The serializer settings.</param>
         /// <param name="encoding">The content encoding.</param>
         /// <param name="request">The request message which led to this result.</param>
-        public JsonResult(T content, JsonSerializerSettings serializerSettings, Encoding encoding,
-            HttpRequestMessage request)
-            : this(content, serializerSettings, encoding, new StatusCodeResult.DirectDependencyProvider(request))
-        {
-        }
+        public JsonResult(
+            T content,
+            JsonSerializerSettings serializerSettings,
+            Encoding encoding,
+            HttpRequestMessage request
+        )
+            : this(
+                content,
+                serializerSettings,
+                encoding,
+                new StatusCodeResult.DirectDependencyProvider(request)
+            ) { }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="JsonResult{T}"/> class with the values provided.
@@ -46,15 +53,25 @@ namespace System.Web.Http.Results
         /// <param name="serializerSettings">The serializer settings.</param>
         /// <param name="encoding">The content encoding.</param>
         /// <param name="controller">The controller from which to obtain the dependencies needed for execution.</param>
-        public JsonResult(T content, JsonSerializerSettings serializerSettings, Encoding encoding,
-            ApiController controller)
-            : this(content, serializerSettings, encoding, new StatusCodeResult.ApiControllerDependencyProvider(
-                controller))
-        {
-        }
+        public JsonResult(
+            T content,
+            JsonSerializerSettings serializerSettings,
+            Encoding encoding,
+            ApiController controller
+        )
+            : this(
+                content,
+                serializerSettings,
+                encoding,
+                new StatusCodeResult.ApiControllerDependencyProvider(controller)
+            ) { }
 
-        private JsonResult(T content, JsonSerializerSettings serializerSettings, Encoding encoding,
-            StatusCodeResult.IDependencyProvider dependencies)
+        private JsonResult(
+            T content,
+            JsonSerializerSettings serializerSettings,
+            Encoding encoding,
+            StatusCodeResult.IDependencyProvider dependencies
+        )
         {
             if (serializerSettings == null)
             {
@@ -111,7 +128,11 @@ namespace System.Web.Http.Results
             try
             {
                 ArraySegment<byte> segment = Serialize();
-                response.Content = new ByteArrayContent(segment.Array, segment.Offset, segment.Count);
+                response.Content = new ByteArrayContent(
+                    segment.Array,
+                    segment.Offset,
+                    segment.Count
+                );
                 MediaTypeHeaderValue contentType = new MediaTypeHeaderValue("application/json");
                 contentType.CharSet = _encoding.WebName;
                 response.Content.Headers.ContentType = contentType;
@@ -126,8 +147,11 @@ namespace System.Web.Http.Results
             return response;
         }
 
-        [SuppressMessage("Microsoft.Usage", "CA2202:Do not dispose objects multiple times", Justification =
-            "False positive; specifying leaveOpen: true and CloseOutput=false prevents this condition.")]
+        [SuppressMessage(
+            "Microsoft.Usage",
+            "CA2202:Do not dispose objects multiple times",
+            Justification = "False positive; specifying leaveOpen: true and CloseOutput=false prevents this condition."
+        )]
         private ArraySegment<byte> Serialize()
         {
             JsonSerializer serializer = JsonSerializer.Create(_serializerSettings);
@@ -135,10 +159,21 @@ namespace System.Web.Http.Results
             using (MemoryStream stream = new MemoryStream())
             {
                 const int DefaultStreamWriterBufferSize = 0x400;
-                using (TextWriter textWriter = new StreamWriter(stream, _encoding,
-                    bufferSize: DefaultStreamWriterBufferSize, leaveOpen: true))
+                using (
+                    TextWriter textWriter = new StreamWriter(
+                        stream,
+                        _encoding,
+                        bufferSize: DefaultStreamWriterBufferSize,
+                        leaveOpen: true
+                    )
+                )
                 {
-                    using (JsonWriter jsonWriter = new JsonTextWriter(textWriter) { CloseOutput = false })
+                    using (
+                        JsonWriter jsonWriter = new JsonTextWriter(textWriter)
+                        {
+                            CloseOutput = false,
+                        }
+                    )
                     {
                         serializer.Serialize(jsonWriter, _content);
                         jsonWriter.Flush();

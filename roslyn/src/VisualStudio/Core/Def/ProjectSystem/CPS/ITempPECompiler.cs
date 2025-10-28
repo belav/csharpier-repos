@@ -27,6 +27,11 @@ namespace Microsoft.VisualStudio.LanguageServices.ProjectSystem
         /// <param name="cancellationToken">The cancellation token</param>
         /// <returns><see langword="true" /> if the compilation was successful</returns>
         /// <exception cref="System.IO.IOException">If the <paramref name="outputFileName"/> could not be written</exception>
-        Task<bool> CompileAsync(IWorkspaceProjectContext context, string outputFileName, ISet<string> filesToInclude, CancellationToken cancellationToken);
+        Task<bool> CompileAsync(
+            IWorkspaceProjectContext context,
+            string outputFileName,
+            ISet<string> filesToInclude,
+            CancellationToken cancellationToken
+        );
     }
 }

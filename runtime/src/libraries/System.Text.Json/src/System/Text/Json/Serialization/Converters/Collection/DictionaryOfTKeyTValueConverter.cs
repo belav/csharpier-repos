@@ -17,7 +17,12 @@ namespace System.Text.Json.Serialization.Converters
     {
         internal override bool CanPopulate => true;
 
-        protected override void Add(TKey key, in TValue value, JsonSerializerOptions options, ref ReadStack state)
+        protected override void Add(
+            TKey key,
+            in TValue value,
+            JsonSerializerOptions options,
+            ref ReadStack state
+        )
         {
             ((TCollection)state.Current.ReturnValue!)[key] = value;
         }
@@ -26,7 +31,8 @@ namespace System.Text.Json.Serialization.Converters
             Utf8JsonWriter writer,
             TCollection value,
             JsonSerializerOptions options,
-            ref WriteStack state)
+            ref WriteStack state
+        )
         {
             Dictionary<TKey, TValue>.Enumerator enumerator;
             if (state.Current.CollectionEnumerator == null)
@@ -40,20 +46,30 @@ namespace System.Text.Json.Serialization.Converters
             }
             else
             {
-                enumerator = (Dictionary<TKey, TValue>.Enumerator)state.Current.CollectionEnumerator;
+                enumerator = (Dictionary<TKey, TValue>.Enumerator)
+                    state.Current.CollectionEnumerator;
             }
 
             JsonTypeInfo typeInfo = state.Current.JsonTypeInfo;
             _keyConverter ??= GetConverter<TKey>(typeInfo.KeyTypeInfo!);
             _valueConverter ??= GetConverter<TValue>(typeInfo.ElementTypeInfo!);
 
-            if (!state.SupportContinuation && _valueConverter.CanUseDirectReadOrWrite && state.Current.NumberHandling == null)
+            if (
+                !state.SupportContinuation
+                && _valueConverter.CanUseDirectReadOrWrite
+                && state.Current.NumberHandling == null
+            )
             {
                 // Fast path that avoids validation and extra indirection.
                 do
                 {
                     TKey key = enumerator.Current.Key;
-                    _keyConverter.WriteAsPropertyNameCore(writer, key, options, state.Current.IsWritingExtensionDataProperty);
+                    _keyConverter.WriteAsPropertyNameCore(
+                        writer,
+                        key,
+                        options,
+                        state.Current.IsWritingExtensionDataProperty
+                    );
                     _valueConverter.Write(writer, enumerator.Current.Value, options);
                 } while (enumerator.MoveNext());
             }
@@ -72,7 +88,12 @@ namespace System.Text.Json.Serialization.Converters
                         state.Current.PropertyState = StackFramePropertyState.Name;
 
                         TKey key = enumerator.Current.Key;
-                        _keyConverter.WriteAsPropertyNameCore(writer, key, options, state.Current.IsWritingExtensionDataProperty);
+                        _keyConverter.WriteAsPropertyNameCore(
+                            writer,
+                            key,
+                            options,
+                            state.Current.IsWritingExtensionDataProperty
+                        );
                     }
 
                     TValue element = enumerator.Current.Value;

@@ -1,1 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?><PropertyTabScope xmlns="http://schemas.datacontract.org/2004/07/System.ComponentModel">Static</PropertyTabScope>
+﻿<?xml version="1.0" encoding="utf-8"?>
+<PropertyTabScope xmlns="http://schemas.datacontract.org/2004/07/System.ComponentModel"
+  >Static</PropertyTabScope
+>

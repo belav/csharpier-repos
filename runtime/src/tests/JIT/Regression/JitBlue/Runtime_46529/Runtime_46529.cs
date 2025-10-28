@@ -22,7 +22,7 @@ public unsafe class Test_Runtime_46529
         }
         else
         {
-            Console.WriteLine("Failed: {0:x}",result);
+            Console.WriteLine("Failed: {0:x}", result);
             return 101;
         }
     }

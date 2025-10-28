@@ -25,21 +25,44 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\..\Compilers\CSharp\csc\AnyCpu\csc.csproj" PrivateAssets="All"/>
-    <ProjectReference Include="..\..\..\Compilers\VisualBasic\vbc\AnyCpu\vbc.csproj" PrivateAssets="All"/>
-    <ProjectReference Include="..\..\..\Interactive\csi\csi.csproj" PrivateAssets="All"/>
-    <ProjectReference Include="..\..\..\Compilers\Core\MSBuildTask\Microsoft.Build.Tasks.CodeAnalysis.csproj" PrivateAssets="All"/>
-    <ProjectReference Include="..\..\..\Compilers\Server\VBCSCompiler\AnyCpu\VBCSCompiler.csproj" PrivateAssets="All"/>
+    <ProjectReference
+      Include="..\..\..\Compilers\CSharp\csc\AnyCpu\csc.csproj"
+      PrivateAssets="All"
+    />
+    <ProjectReference
+      Include="..\..\..\Compilers\VisualBasic\vbc\AnyCpu\vbc.csproj"
+      PrivateAssets="All"
+    />
+    <ProjectReference Include="..\..\..\Interactive\csi\csi.csproj" PrivateAssets="All" />
+    <ProjectReference
+      Include="..\..\..\Compilers\Core\MSBuildTask\Microsoft.Build.Tasks.CodeAnalysis.csproj"
+      PrivateAssets="All"
+    />
+    <ProjectReference
+      Include="..\..\..\Compilers\Server\VBCSCompiler\AnyCpu\VBCSCompiler.csproj"
+      PrivateAssets="All"
+    />
   </ItemGroup>
 
   <Target Name="_GetFilesToPackage" DependsOnTargets="$(_DependsOn)">
     <ItemGroup>
-      <_File Include="@(DesktopCompilerArtifact)" TargetDir="tasks/net472"/>
-      <_File Include="@(DesktopCompilerResourceArtifact)" TargetDir="tasks/net472"/>
-      <_File Include="$(MSBuildProjectDirectory)\build\**\*.*" Condition="'$(TargetFramework)' == 'net472'" TargetDir="build" />
-      <_File Include="$(MSBuildProjectDirectory)\buildMultiTargeting\**\*.*" Condition="'$(TargetFramework)' == 'net472'" TargetDir="buildMultiTargeting" />
-     
-      <TfmSpecificPackageFile Include="@(_File)" PackagePath="%(_File.TargetDir)/%(_File.RecursiveDir)%(_File.FileName)%(_File.Extension)" />
+      <_File Include="@(DesktopCompilerArtifact)" TargetDir="tasks/net472" />
+      <_File Include="@(DesktopCompilerResourceArtifact)" TargetDir="tasks/net472" />
+      <_File
+        Include="$(MSBuildProjectDirectory)\build\**\*.*"
+        Condition="'$(TargetFramework)' == 'net472'"
+        TargetDir="build"
+      />
+      <_File
+        Include="$(MSBuildProjectDirectory)\buildMultiTargeting\**\*.*"
+        Condition="'$(TargetFramework)' == 'net472'"
+        TargetDir="buildMultiTargeting"
+      />
+
+      <TfmSpecificPackageFile
+        Include="@(_File)"
+        PackagePath="%(_File.TargetDir)/%(_File.RecursiveDir)%(_File.FileName)%(_File.Extension)"
+      />
     </ItemGroup>
   </Target>
 

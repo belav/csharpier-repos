@@ -15,10 +15,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -32,15 +32,25 @@ using System.Web.UI.WebControls;
 
 namespace System.Web.UI.Design
 {
-	[Obsolete ("Template editing is supported in ControlDesigner.TemplateGroups with SetViewFlags(ViewFlags.TemplateEditing, true) in 2.0.")]
-	public interface ITemplateEditingService
-	{
-		ITemplateEditingFrame CreateFrame (TemplatedControlDesigner designer, string frameName, string[] templateNames);
-		ITemplateEditingFrame CreateFrame (TemplatedControlDesigner designer, string frameName, string[] templateNames, Style controlStyle, Style[] templateStyles);
-		string GetContainingTemplateName (Control control);
+    [Obsolete(
+        "Template editing is supported in ControlDesigner.TemplateGroups with SetViewFlags(ViewFlags.TemplateEditing, true) in 2.0."
+    )]
+    public interface ITemplateEditingService
+    {
+        ITemplateEditingFrame CreateFrame(
+            TemplatedControlDesigner designer,
+            string frameName,
+            string[] templateNames
+        );
+        ITemplateEditingFrame CreateFrame(
+            TemplatedControlDesigner designer,
+            string frameName,
+            string[] templateNames,
+            Style controlStyle,
+            Style[] templateStyles
+        );
+        string GetContainingTemplateName(Control control);
 
-		bool SupportsNestedTemplateEditing {
-			get;
-		}
-	}
+        bool SupportsNestedTemplateEditing { get; }
+    }
 }

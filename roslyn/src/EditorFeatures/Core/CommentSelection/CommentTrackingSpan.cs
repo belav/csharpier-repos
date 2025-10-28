@@ -30,14 +30,18 @@ namespace Microsoft.CodeAnalysis.CommentSelection
             AmountToAddToTrackingSpanEnd = 0;
         }
 
-        public CommentTrackingSpan(TextSpan trackingTextSpan, int amountToAddToStart, int amountToAddToEnd)
+        public CommentTrackingSpan(
+            TextSpan trackingTextSpan,
+            int amountToAddToStart,
+            int amountToAddToEnd
+        )
         {
             TrackingTextSpan = trackingTextSpan;
             AmountToAddToTrackingSpanStart = amountToAddToStart;
             AmountToAddToTrackingSpanEnd = amountToAddToEnd;
         }
 
-        public bool HasPostApplyChanges()
-            => AmountToAddToTrackingSpanStart != 0 || AmountToAddToTrackingSpanEnd != 0;
+        public bool HasPostApplyChanges() =>
+            AmountToAddToTrackingSpanStart != 0 || AmountToAddToTrackingSpanEnd != 0;
     }
 }

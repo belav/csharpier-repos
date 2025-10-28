@@ -15,29 +15,38 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.GenerateMember.GenerateParameterizedMember
 {
-    internal partial class AbstractGenerateParameterizedMemberService<TService, TSimpleNameSyntax, TExpressionSyntax, TInvocationExpressionSyntax>
+    internal partial class AbstractGenerateParameterizedMemberService<
+        TService,
+        TSimpleNameSyntax,
+        TExpressionSyntax,
+        TInvocationExpressionSyntax
+    >
     {
         internal abstract class AbstractInvocationInfo : SignatureInfo
         {
             protected abstract bool IsIdentifierName();
 
-            protected abstract ImmutableArray<ITypeParameterSymbol> GetCapturedTypeParameters(CancellationToken cancellationToken);
-            protected abstract ImmutableArray<ITypeParameterSymbol> GenerateTypeParameters(CancellationToken cancellationToken);
+            protected abstract ImmutableArray<ITypeParameterSymbol> GetCapturedTypeParameters(
+                CancellationToken cancellationToken
+            );
+            protected abstract ImmutableArray<ITypeParameterSymbol> GenerateTypeParameters(
+                CancellationToken cancellationToken
+            );
 
             protected AbstractInvocationInfo(SemanticDocument document, State state)
-                : base(document, state)
-            {
-            }
+                : base(document, state) { }
 
             protected override ImmutableArray<ITypeParameterSymbol> DetermineTypeParametersWorker(
-                CancellationToken cancellationToken)
+                CancellationToken cancellationToken
+            )
             {
                 var typeParameters = ComputeTypeParameters(cancellationToken);
                 return typeParameters.SelectAsArray(MassageTypeParameter);
             }
 
             private ImmutableArray<ITypeParameterSymbol> ComputeTypeParameters(
-                CancellationToken cancellationToken)
+                CancellationToken cancellationToken
+            )
             {
                 if (IsIdentifierName())
                 {
@@ -45,7 +54,12 @@ namespace Microsoft.CodeAnalysis.GenerateMember.GenerateParameterizedMember
                     // a generic method if the expression 'x' captured any method type variables.
                     var capturedTypeParameters = GetCapturedTypeParameters(cancellationToken);
                     var availableTypeParameters = State.TypeToGenerateIn.GetAllTypeParameters();
-                    var result = capturedTypeParameters.Except<ITypeParameterSymbol>(availableTypeParameters, SymbolEqualityComparer.Default).ToImmutableArray();
+                    var result = capturedTypeParameters
+                        .Except<ITypeParameterSymbol>(
+                            availableTypeParameters,
+                            SymbolEqualityComparer.Default
+                        )
+                        .ToImmutableArray();
                     return result;
                 }
                 else
@@ -54,10 +68,11 @@ namespace Microsoft.CodeAnalysis.GenerateMember.GenerateParameterizedMember
                 }
             }
 
-            private ITypeParameterSymbol MassageTypeParameter(
-                ITypeParameterSymbol typeParameter)
+            private ITypeParameterSymbol MassageTypeParameter(ITypeParameterSymbol typeParameter)
             {
-                var constraints = typeParameter.ConstraintTypes.Where(ts => !ts.IsUnexpressibleTypeParameterConstraint()).ToList();
+                var constraints = typeParameter
+                    .ConstraintTypes.Where(ts => !ts.IsUnexpressibleTypeParameterConstraint())
+                    .ToList();
                 var classTypes = constraints.Where(ts => ts.TypeKind == TypeKind.Class).ToList();
                 var nonClassTypes = constraints.Where(ts => ts.TypeKind != TypeKind.Class).ToList();
 
@@ -77,7 +92,8 @@ namespace Microsoft.CodeAnalysis.GenerateMember.GenerateParameterizedMember
                     hasReferenceConstraint: typeParameter.HasReferenceTypeConstraint,
                     hasValueConstraint: typeParameter.HasValueTypeConstraint,
                     hasUnmanagedConstraint: typeParameter.HasUnmanagedTypeConstraint,
-                    hasNotNullConstraint: typeParameter.HasNotNullConstraint);
+                    hasNotNullConstraint: typeParameter.HasNotNullConstraint
+                );
             }
 
             private List<ITypeSymbol> MergeClassTypes(List<ITypeSymbol> classTypes)
@@ -110,7 +126,11 @@ namespace Microsoft.CodeAnalysis.GenerateMember.GenerateParameterizedMember
                 return classTypes;
             }
 
-            protected abstract bool IsImplicitReferenceConversion(Compilation compilation, ITypeSymbol sourceType, ITypeSymbol targetType);
+            protected abstract bool IsImplicitReferenceConversion(
+                Compilation compilation,
+                ITypeSymbol sourceType,
+                ITypeSymbol targetType
+            );
         }
     }
 }

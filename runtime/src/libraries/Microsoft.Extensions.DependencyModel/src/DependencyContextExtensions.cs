@@ -17,47 +17,84 @@ namespace Microsoft.Extensions.DependencyModel
         {
             ThrowHelper.ThrowIfNull(self);
 
-            return LinqHelpers.SelectMany(self.RuntimeLibraries, static (library, context) => library.GetDefaultNativeAssets(context), self);
+            return LinqHelpers.SelectMany(
+                self.RuntimeLibraries,
+                static (library, context) => library.GetDefaultNativeAssets(context),
+                self
+            );
         }
 
-        public static IEnumerable<RuntimeFile> GetDefaultNativeRuntimeFileAssets(this DependencyContext self)
+        public static IEnumerable<RuntimeFile> GetDefaultNativeRuntimeFileAssets(
+            this DependencyContext self
+        )
         {
             ThrowHelper.ThrowIfNull(self);
 
-            return LinqHelpers.SelectMany(self.RuntimeLibraries, static (library, context) => library.GetDefaultNativeRuntimeFileAssets(context), self);
+            return LinqHelpers.SelectMany(
+                self.RuntimeLibraries,
+                static (library, context) => library.GetDefaultNativeRuntimeFileAssets(context),
+                self
+            );
         }
 
-        public static IEnumerable<string> GetRuntimeNativeAssets(this DependencyContext self, string runtimeIdentifier)
+        public static IEnumerable<string> GetRuntimeNativeAssets(
+            this DependencyContext self,
+            string runtimeIdentifier
+        )
         {
             ThrowHelper.ThrowIfNull(self);
             ThrowHelper.ThrowIfNull(runtimeIdentifier);
 
-            return LinqHelpers.SelectMany(self.RuntimeLibraries, static (library, context, id) => library.GetRuntimeNativeAssets(context, id), self, runtimeIdentifier);
+            return LinqHelpers.SelectMany(
+                self.RuntimeLibraries,
+                static (library, context, id) => library.GetRuntimeNativeAssets(context, id),
+                self,
+                runtimeIdentifier
+            );
         }
 
-        public static IEnumerable<RuntimeFile> GetRuntimeNativeRuntimeFileAssets(this DependencyContext self, string runtimeIdentifier)
+        public static IEnumerable<RuntimeFile> GetRuntimeNativeRuntimeFileAssets(
+            this DependencyContext self,
+            string runtimeIdentifier
+        )
         {
             ThrowHelper.ThrowIfNull(self);
             ThrowHelper.ThrowIfNull(runtimeIdentifier);
 
-            return LinqHelpers.SelectMany(self.RuntimeLibraries, static (library, context, id) => library.GetRuntimeNativeRuntimeFileAssets(context, id), self, runtimeIdentifier);
+            return LinqHelpers.SelectMany(
+                self.RuntimeLibraries,
+                static (library, context, id) =>
+                    library.GetRuntimeNativeRuntimeFileAssets(context, id),
+                self,
+                runtimeIdentifier
+            );
         }
 
-        public static IEnumerable<string> GetDefaultNativeAssets(this RuntimeLibrary self, DependencyContext context)
+        public static IEnumerable<string> GetDefaultNativeAssets(
+            this RuntimeLibrary self,
+            DependencyContext context
+        )
         {
             ThrowHelper.ThrowIfNull(self);
 
             return ResolveAssets(context, string.Empty, self.NativeLibraryGroups);
         }
 
-        public static IEnumerable<RuntimeFile> GetDefaultNativeRuntimeFileAssets(this RuntimeLibrary self, DependencyContext context)
+        public static IEnumerable<RuntimeFile> GetDefaultNativeRuntimeFileAssets(
+            this RuntimeLibrary self,
+            DependencyContext context
+        )
         {
             ThrowHelper.ThrowIfNull(self);
 
             return ResolveRuntimeFiles(context, string.Empty, self.NativeLibraryGroups);
         }
 
-        public static IEnumerable<string> GetRuntimeNativeAssets(this RuntimeLibrary self, DependencyContext context, string runtimeIdentifier)
+        public static IEnumerable<string> GetRuntimeNativeAssets(
+            this RuntimeLibrary self,
+            DependencyContext context,
+            string runtimeIdentifier
+        )
         {
             ThrowHelper.ThrowIfNull(self);
             ThrowHelper.ThrowIfNull(context);
@@ -66,7 +103,11 @@ namespace Microsoft.Extensions.DependencyModel
             return ResolveAssets(context, runtimeIdentifier, self.NativeLibraryGroups);
         }
 
-        public static IEnumerable<RuntimeFile> GetRuntimeNativeRuntimeFileAssets(this RuntimeLibrary self, DependencyContext context, string runtimeIdentifier)
+        public static IEnumerable<RuntimeFile> GetRuntimeNativeRuntimeFileAssets(
+            this RuntimeLibrary self,
+            DependencyContext context,
+            string runtimeIdentifier
+        )
         {
             ThrowHelper.ThrowIfNull(self);
             ThrowHelper.ThrowIfNull(context);
@@ -79,32 +120,53 @@ namespace Microsoft.Extensions.DependencyModel
         {
             ThrowHelper.ThrowIfNull(self);
 
-            return LinqHelpers.SelectMany(self.RuntimeLibraries, static (library, context) => library.GetDefaultAssemblyNames(context), self);
+            return LinqHelpers.SelectMany(
+                self.RuntimeLibraries,
+                static (library, context) => library.GetDefaultAssemblyNames(context),
+                self
+            );
         }
 
-        public static IEnumerable<AssemblyName> GetRuntimeAssemblyNames(this DependencyContext self, string runtimeIdentifier)
+        public static IEnumerable<AssemblyName> GetRuntimeAssemblyNames(
+            this DependencyContext self,
+            string runtimeIdentifier
+        )
         {
             ThrowHelper.ThrowIfNull(self);
             ThrowHelper.ThrowIfNull(runtimeIdentifier);
 
-            return LinqHelpers.SelectMany(self.RuntimeLibraries, static (library, context, id) => library.GetRuntimeAssemblyNames(context, id), self, runtimeIdentifier);
+            return LinqHelpers.SelectMany(
+                self.RuntimeLibraries,
+                static (library, context, id) => library.GetRuntimeAssemblyNames(context, id),
+                self,
+                runtimeIdentifier
+            );
         }
 
-        public static IEnumerable<AssemblyName> GetDefaultAssemblyNames(this RuntimeLibrary self, DependencyContext context)
+        public static IEnumerable<AssemblyName> GetDefaultAssemblyNames(
+            this RuntimeLibrary self,
+            DependencyContext context
+        )
         {
             ThrowHelper.ThrowIfNull(self);
             ThrowHelper.ThrowIfNull(context);
 
-            return ResolveAssets(context, string.Empty, self.RuntimeAssemblyGroups).Select(GetAssemblyName);
+            return ResolveAssets(context, string.Empty, self.RuntimeAssemblyGroups)
+                .Select(GetAssemblyName);
         }
 
-        public static IEnumerable<AssemblyName> GetRuntimeAssemblyNames(this RuntimeLibrary self, DependencyContext context, string runtimeIdentifier)
+        public static IEnumerable<AssemblyName> GetRuntimeAssemblyNames(
+            this RuntimeLibrary self,
+            DependencyContext context,
+            string runtimeIdentifier
+        )
         {
             ThrowHelper.ThrowIfNull(self);
             ThrowHelper.ThrowIfNull(context);
             ThrowHelper.ThrowIfNull(runtimeIdentifier);
 
-            return ResolveAssets(context, runtimeIdentifier, self.RuntimeAssemblyGroups).Select(GetAssemblyName);
+            return ResolveAssets(context, runtimeIdentifier, self.RuntimeAssemblyGroups)
+                .Select(GetAssemblyName);
         }
 
         private static AssemblyName GetAssemblyName(string assetPath)
@@ -112,7 +174,10 @@ namespace Microsoft.Extensions.DependencyModel
             string name = Path.GetFileNameWithoutExtension(assetPath);
             if (name == null)
             {
-                throw new ArgumentException($"Provided path has empty file name '{assetPath}'", nameof(assetPath));
+                throw new ArgumentException(
+                    $"Provided path has empty file name '{assetPath}'",
+                    nameof(assetPath)
+                );
             }
 
             if (name.EndsWith(NativeImageSufix))
@@ -126,24 +191,39 @@ namespace Microsoft.Extensions.DependencyModel
         private static IEnumerable<string> ResolveAssets(
             DependencyContext context,
             string runtimeIdentifier,
-            IEnumerable<RuntimeAssetGroup> assets)
+            IEnumerable<RuntimeAssetGroup> assets
+        )
         {
-            RuntimeFallbacks? fallbacks = context.RuntimeGraph.FirstOrDefault(f => f.Runtime == runtimeIdentifier);
-            IEnumerable<string?> rids = Enumerable.Concat(new[] { runtimeIdentifier }, fallbacks?.Fallbacks ?? Enumerable.Empty<string?>());
+            RuntimeFallbacks? fallbacks = context.RuntimeGraph.FirstOrDefault(f =>
+                f.Runtime == runtimeIdentifier
+            );
+            IEnumerable<string?> rids = Enumerable.Concat(
+                new[] { runtimeIdentifier },
+                fallbacks?.Fallbacks ?? Enumerable.Empty<string?>()
+            );
             return SelectAssets(rids, assets);
         }
 
         private static IEnumerable<RuntimeFile> ResolveRuntimeFiles(
             DependencyContext context,
             string runtimeIdentifier,
-            IEnumerable<RuntimeAssetGroup> assets)
+            IEnumerable<RuntimeAssetGroup> assets
+        )
         {
-            RuntimeFallbacks? fallbacks = context.RuntimeGraph.FirstOrDefault(f => f.Runtime == runtimeIdentifier);
-            IEnumerable<string?> rids = Enumerable.Concat(new[] { runtimeIdentifier }, fallbacks?.Fallbacks ?? Enumerable.Empty<string?>());
+            RuntimeFallbacks? fallbacks = context.RuntimeGraph.FirstOrDefault(f =>
+                f.Runtime == runtimeIdentifier
+            );
+            IEnumerable<string?> rids = Enumerable.Concat(
+                new[] { runtimeIdentifier },
+                fallbacks?.Fallbacks ?? Enumerable.Empty<string?>()
+            );
             return SelectRuntimeFiles(rids, assets);
         }
 
-        private static IEnumerable<string> SelectAssets(IEnumerable<string?> rids, IEnumerable<RuntimeAssetGroup> groups)
+        private static IEnumerable<string> SelectAssets(
+            IEnumerable<string?> rids,
+            IEnumerable<RuntimeAssetGroup> groups
+        )
         {
             foreach (string? rid in rids)
             {
@@ -158,7 +238,10 @@ namespace Microsoft.Extensions.DependencyModel
             return groups.GetDefaultAssets();
         }
 
-        private static IEnumerable<RuntimeFile> SelectRuntimeFiles(IEnumerable<string?> rids, IEnumerable<RuntimeAssetGroup> groups)
+        private static IEnumerable<RuntimeFile> SelectRuntimeFiles(
+            IEnumerable<string?> rids,
+            IEnumerable<RuntimeAssetGroup> groups
+        )
         {
             foreach (string? rid in rids)
             {

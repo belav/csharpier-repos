@@ -28,7 +28,12 @@ namespace System.Web.Mvc.Test
         {
             // Act & assert
             Assert.ThrowsArgumentNull(
-                delegate { new ReflectedControllerDescriptor(null); }, "controllerType");
+                delegate
+                {
+                    new ReflectedControllerDescriptor(null);
+                },
+                "controllerType"
+            );
         }
 
         [Fact]
@@ -44,7 +49,9 @@ namespace System.Web.Mvc.Test
 
             // Assert
             Assert.Equal("NewName", ad.ActionName);
-            ReflectedActionDescriptor actionDescriptor = Assert.IsType<ReflectedActionDescriptor>(ad);
+            ReflectedActionDescriptor actionDescriptor = Assert.IsType<ReflectedActionDescriptor>(
+                ad
+            );
             Assert.Same(targetMethod, actionDescriptor.MethodInfo);
             Assert.Same(cd, ad.ControllerDescriptor);
         }
@@ -72,7 +79,12 @@ namespace System.Web.Mvc.Test
 
             // Act & assert
             Assert.ThrowsArgumentNullOrEmpty(
-                delegate { cd.FindAction(new Mock<ControllerContext>().Object, ""); }, "actionName");
+                delegate
+                {
+                    cd.FindAction(new Mock<ControllerContext>().Object, "");
+                },
+                "actionName"
+            );
         }
 
         [Fact]
@@ -84,7 +96,12 @@ namespace System.Web.Mvc.Test
 
             // Act & assert
             Assert.ThrowsArgumentNullOrEmpty(
-                delegate { cd.FindAction(new Mock<ControllerContext>().Object, null); }, "actionName");
+                delegate
+                {
+                    cd.FindAction(new Mock<ControllerContext>().Object, null);
+                },
+                "actionName"
+            );
         }
 
         [Fact]
@@ -96,7 +113,12 @@ namespace System.Web.Mvc.Test
 
             // Act & assert
             Assert.ThrowsArgumentNull(
-                delegate { cd.FindAction(null, "someName"); }, "controllerContext");
+                delegate
+                {
+                    cd.FindAction(null, "someName");
+                },
+                "controllerContext"
+            );
         }
 
         [Fact]
@@ -152,7 +174,9 @@ namespace System.Web.Mvc.Test
             // Arrange
             object[] expected = new object[0];
             Mock<Type> mockType = new Mock<Type>();
-            mockType.Setup(t => t.GetCustomAttributes(typeof(ObsoleteAttribute), true)).Returns(expected);
+            mockType
+                .Setup(t => t.GetCustomAttributes(typeof(ObsoleteAttribute), true))
+                .Returns(expected);
             ReflectedControllerDescriptor cd = new ReflectedControllerDescriptor(mockType.Object);
 
             // Act
@@ -180,21 +204,13 @@ namespace System.Web.Mvc.Test
         private class MyController : Controller
         {
             [ActionName("NewName")]
-            public void AliasedMethod()
-            {
-            }
+            public void AliasedMethod() { }
 
-            public void NonAliasedMethod()
-            {
-            }
+            public void NonAliasedMethod() { }
 
-            public void GenericMethod<T>()
-            {
-            }
+            public void GenericMethod<T>() { }
 
-            private void PrivateMethod()
-            {
-            }
+            private void PrivateMethod() { }
         }
     }
 }

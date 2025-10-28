@@ -12,13 +12,15 @@ namespace System.Activities.Statements
     using System.Runtime;
     using System.Windows.Markup;
 
-    [SuppressMessage(FxCop.Category.Naming, FxCop.Rule.IdentifiersShouldNotMatchKeywords, Justification = "Optimizing for XAML naming. VB imperative users will [] qualify (e.g. New [If])")]
+    [SuppressMessage(
+        FxCop.Category.Naming,
+        FxCop.Rule.IdentifiersShouldNotMatchKeywords,
+        Justification = "Optimizing for XAML naming. VB imperative users will [] qualify (e.g. New [If])"
+    )]
     public sealed class If : NativeActivity
     {
         public If()
-            : base()
-        {
-        }
+            : base() { }
 
         public If(Expression<Func<ActivityContext, bool>> condition)
             : this()
@@ -55,29 +57,20 @@ namespace System.Activities.Statements
 
         [RequiredArgument]
         [DefaultValue(null)]
-        public InArgument<bool> Condition
-        {
-            get;
-            set;
-        }
+        public InArgument<bool> Condition { get; set; }
 
         [DefaultValue(null)]
         [DependsOn("Condition")]
-        public Activity Then
-        {
-            get;
-            set;
-        }
+        public Activity Then { get; set; }
 
         [DefaultValue(null)]
         [DependsOn("Then")]
-        public Activity Else
-        {
-            get;
-            set;
-        }
+        public Activity Else { get; set; }
 
-        protected override void OnCreateDynamicUpdateMap(DynamicUpdate.NativeActivityUpdateMapMetadata metadata, Activity originalActivity)
+        protected override void OnCreateDynamicUpdateMap(
+            DynamicUpdate.NativeActivityUpdateMapMetadata metadata,
+            Activity originalActivity
+        )
         {
             metadata.AllowUpdateInsideThisActivity();
         }
@@ -99,7 +92,12 @@ namespace System.Activities.Statements
 
         protected override void CacheMetadata(NativeActivityMetadata metadata)
         {
-            RuntimeArgument conditionArgument = new RuntimeArgument("Condition", typeof(bool), ArgumentDirection.In, true);
+            RuntimeArgument conditionArgument = new RuntimeArgument(
+                "Condition",
+                typeof(bool),
+                ArgumentDirection.In,
+                true
+            );
             metadata.Bind(this.Condition, conditionArgument);
             metadata.SetArgumentsCollection(new Collection<RuntimeArgument> { conditionArgument });
 

@@ -5,10 +5,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -29,26 +29,31 @@
 using System.ComponentModel;
 using System.Globalization;
 
-namespace System.Windows.Forms {
-	public class TreeNodeConverter : TypeConverter {
+namespace System.Windows.Forms
+{
+    public class TreeNodeConverter : TypeConverter
+    {
+        #region Public Instance Methods
+        public override bool CanConvertTo(ITypeDescriptorContext context, Type destinationType)
+        {
+            if (destinationType == typeof(string))
+                return true;
+            return base.CanConvertTo(context, destinationType);
+        }
 
-		#region Public Instance Methods
-		public override bool CanConvertTo (ITypeDescriptorContext context, Type destinationType)
-		{
-			if (destinationType == typeof (string))
-				return true;
-			return base.CanConvertTo (context, destinationType);
-		}
+        public override object ConvertTo(
+            ITypeDescriptorContext context,
+            CultureInfo culture,
+            object value,
+            Type destinationType
+        )
+        {
+            // Regardless of the type of object passed in this does a ToString
+            if (destinationType == typeof(string) && value != null)
+                return value.ToString();
+            return base.ConvertTo(context, culture, value, destinationType);
+        }
 
-		public override object ConvertTo (ITypeDescriptorContext context, CultureInfo culture,
-				object value, Type destinationType)
-		{
-			// Regardless of the type of object passed in this does a ToString
-			if (destinationType == typeof (string) && value != null)
-				return value.ToString ();
-			return base.ConvertTo (context, culture, value, destinationType);
-		}
-
-		#endregion	// Public Instance Methods
-	}
+        #endregion	// Public Instance Methods
+    }
 }

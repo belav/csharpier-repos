@@ -14,7 +14,11 @@ namespace System.IO.IsolatedStorage
             {
                 Assert.Null(Helper.GetExistingRandomDirectory(temp.Path));
 
-                string randomPath = Path.Combine(temp.Path, Path.GetRandomFileName(), Path.GetRandomFileName());
+                string randomPath = Path.Combine(
+                    temp.Path,
+                    Path.GetRandomFileName(),
+                    Path.GetRandomFileName()
+                );
                 Directory.CreateDirectory(randomPath);
                 Assert.Equal(randomPath, Helper.GetExistingRandomDirectory(temp.Path));
             }

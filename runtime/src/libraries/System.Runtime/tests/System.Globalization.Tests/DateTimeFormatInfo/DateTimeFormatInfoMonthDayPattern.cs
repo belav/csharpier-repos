@@ -217,9 +217,15 @@ namespace System.Globalization.Tests
             yield return new object[] { new CultureInfo("zh-TW").DateTimeFormat, "M月d日" };
         }
 
-        [ConditionalTheory(typeof(PlatformDetection), nameof(PlatformDetection.IsHybridGlobalizationOnBrowser))]
+        [ConditionalTheory(
+            typeof(PlatformDetection),
+            nameof(PlatformDetection.IsHybridGlobalizationOnBrowser)
+        )]
         [MemberData(nameof(MonthDayPattern_Get_TestData_HybridGlobalization))]
-        public void MonthDayPattern_Get_ReturnsExpected_HybridGlobalization(DateTimeFormatInfo format, string expected)
+        public void MonthDayPattern_Get_ReturnsExpected_HybridGlobalization(
+            DateTimeFormatInfo format,
+            string expected
+        )
         {
             Assert.Equal(expected, format.MonthDayPattern);
         }
@@ -237,13 +243,18 @@ namespace System.Globalization.Tests
         public void MonthDayPattern_SetNull_ThrowsArgumentNullException()
         {
             var format = new DateTimeFormatInfo();
-            AssertExtensions.Throws<ArgumentNullException>("value", () => format.MonthDayPattern = null);
+            AssertExtensions.Throws<ArgumentNullException>(
+                "value",
+                () => format.MonthDayPattern = null
+            );
         }
 
         [Fact]
         public void MonthDayPattern_SetReadOnly_ThrowsInvalidOperationException()
         {
-            Assert.Throws<InvalidOperationException>(() => DateTimeFormatInfo.InvariantInfo.MonthDayPattern = "MMMM dd");
+            Assert.Throws<InvalidOperationException>(() =>
+                DateTimeFormatInfo.InvariantInfo.MonthDayPattern = "MMMM dd"
+            );
         }
     }
 }

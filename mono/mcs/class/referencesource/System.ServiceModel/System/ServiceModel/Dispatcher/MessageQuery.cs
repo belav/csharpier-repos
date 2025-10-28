@@ -17,4 +17,3 @@ namespace System.ServiceModel.Dispatcher
         public abstract TResult Evaluate<TResult>(MessageBuffer buffer);
     }
 }
-

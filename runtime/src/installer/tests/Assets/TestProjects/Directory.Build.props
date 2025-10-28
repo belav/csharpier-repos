@@ -5,5 +5,4 @@
     <RestorePackagesPath>$(TestRestorePackagesPath)</RestorePackagesPath>
     <RestoreNoCache>true</RestoreNoCache>
   </PropertyGroup>
-
 </Project>

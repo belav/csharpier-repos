@@ -1,7 +1,7 @@
 // ==++==
-// 
+//
 //   Copyright (c) Microsoft Corporation.  All rights reserved.
-// 
+//
 // ==--==
 
 using System.Runtime.Serialization;
@@ -20,22 +20,22 @@ namespace System
             SetErrorCode(__HResults.COR_E_TYPEACCESS);
         }
 
-        public TypeAccessException(string message) 
+        public TypeAccessException(string message)
             : base(message)
         {
             SetErrorCode(__HResults.COR_E_TYPEACCESS);
         }
-    
-        public TypeAccessException(string message, Exception inner) 
+
+        public TypeAccessException(string message, Exception inner)
             : base(message, inner)
         {
             SetErrorCode(__HResults.COR_E_TYPEACCESS);
         }
-    
+
         protected TypeAccessException(SerializationInfo info, StreamingContext context)
             : base(info, context)
         {
             SetErrorCode(__HResults.COR_E_TYPEACCESS);
-        }    
+        }
     }
 }

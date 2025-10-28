@@ -10,7 +10,9 @@ namespace System.Net.Http
     {
         public static MediaTypeHeaderValue Clone(this MediaTypeHeaderValue mediaType)
         {
-            Contract.Assert(mediaType != null && mediaType.GetType() == typeof(MediaTypeHeaderValue));
+            Contract.Assert(
+                mediaType != null && mediaType.GetType() == typeof(MediaTypeHeaderValue)
+            );
 
             var result = new MediaTypeHeaderValue(mediaType.MediaType);
             foreach (var parameter in mediaType.Parameters)

@@ -12,14 +12,8 @@ namespace Microsoft.Win32.SystemEventsTests
 
         protected override event EventHandler Event
         {
-            add
-            {
-                SystemEvents.InstalledFontsChanged += value;
-            }
-            remove
-            {
-                SystemEvents.InstalledFontsChanged -= value;
-            }
+            add { SystemEvents.InstalledFontsChanged += value; }
+            remove { SystemEvents.InstalledFontsChanged -= value; }
         }
     }
 }

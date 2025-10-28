@@ -23,9 +23,10 @@ namespace XDocumentTests.SDMSample
 
             XNode[] nodes = new XNode[]
             {
-                new XComment("comment"), new XElement("element"),
+                new XComment("comment"),
+                new XElement("element"),
                 new XProcessingInstruction("target", "data"),
-                new XDocumentType("name", "publicid", "systemid", "internalsubset")
+                new XDocumentType("name", "publicid", "systemid", "internalsubset"),
             };
 
             foreach (XNode node in nodes)
@@ -44,7 +45,7 @@ namespace XDocumentTests.SDMSample
                 new XComment("abcd"),
                 new XElement("nested"),
                 new XProcessingInstruction("target2", "data2"),
-                new XText("text")
+                new XText("text"),
             };
 
             XElement root = new XElement("root");
@@ -73,8 +74,20 @@ namespace XDocumentTests.SDMSample
             Assert.Throws<ArgumentNullException>(() => XNode.ReadFrom(null));
 
             // Valid cases: cdata, comment, element
-            string[] rawXml = new string[] { "text", "<![CDATA[abcd]]>", "<!-- comment -->", "<y>y</y>" };
-            Type[] types = new Type[] { typeof(XText), typeof(XCData), typeof(XComment), typeof(XElement) };
+            string[] rawXml = new string[]
+            {
+                "text",
+                "<![CDATA[abcd]]>",
+                "<!-- comment -->",
+                "<y>y</y>",
+            };
+            Type[] types = new Type[]
+            {
+                typeof(XText),
+                typeof(XCData),
+                typeof(XComment),
+                typeof(XElement),
+            };
 
             int count = rawXml.Length;
             for (int i = 0; i < count; i++)
@@ -173,7 +186,11 @@ namespace XDocumentTests.SDMSample
 
             child.AddAfterSelf(sibling2, sibling3);
 
-            Assert.Equal(new XNode[] { child, sibling2, sibling3, sibling1 }, parent.Nodes(), XNode.EqualityComparer);
+            Assert.Equal(
+                new XNode[] { child, sibling2, sibling3, sibling1 },
+                parent.Nodes(),
+                XNode.EqualityComparer
+            );
         }
 
         /// <summary>
@@ -196,7 +213,11 @@ namespace XDocumentTests.SDMSample
 
             child.AddBeforeSelf(sibling2, sibling3);
 
-            Assert.Equal(new XNode[] { sibling1, sibling2, sibling3, child }, parent.Nodes(), XNode.EqualityComparer);
+            Assert.Equal(
+                new XNode[] { sibling1, sibling2, sibling3, child },
+                parent.Nodes(),
+                XNode.EqualityComparer
+            );
         }
 
         /// <summary>
@@ -214,7 +235,11 @@ namespace XDocumentTests.SDMSample
             parent.Add(child1, child2, child3);
 
             // Sanity check
-            Assert.Equal(parent.Nodes(), new XNode[] { child1, child2, child3 }, XNode.EqualityComparer);
+            Assert.Equal(
+                parent.Nodes(),
+                new XNode[] { child1, child2, child3 },
+                XNode.EqualityComparer
+            );
 
             // Remove the text.
             child1.NextNode.Remove();
@@ -241,8 +266,16 @@ namespace XDocumentTests.SDMSample
 
             XComment comment1 = new XComment("Another comment");
             XComment comment2 = new XComment("Yet another comment");
-            XElement element1 = new XElement("childelement", new XElement("nested"), new XAttribute("foo", "bar"));
-            XElement element2 = new XElement("childelement2", new XElement("nested"), new XAttribute("foo", "bar"));
+            XElement element1 = new XElement(
+                "childelement",
+                new XElement("nested"),
+                new XAttribute("foo", "bar")
+            );
+            XElement element2 = new XElement(
+                "childelement2",
+                new XElement("nested"),
+                new XAttribute("foo", "bar")
+            );
             XAttribute attribute = new XAttribute("attribute", "value");
 
             // If no parent, should not be any content before it.
@@ -278,8 +311,16 @@ namespace XDocumentTests.SDMSample
 
             XComment comment1 = new XComment("Another comment");
             XComment comment2 = new XComment("Yet another comment");
-            XElement element1 = new XElement("childelement", new XElement("nested"), new XAttribute("foo", "bar"));
-            XElement element2 = new XElement("childelement2", new XElement("nested"), new XAttribute("foo", "bar"));
+            XElement element1 = new XElement(
+                "childelement",
+                new XElement("nested"),
+                new XAttribute("foo", "bar")
+            );
+            XElement element2 = new XElement(
+                "childelement2",
+                new XElement("nested"),
+                new XAttribute("foo", "bar")
+            );
             XAttribute attribute = new XAttribute("attribute", "value");
 
             // If no parent, should not be any content after it.
@@ -315,8 +356,16 @@ namespace XDocumentTests.SDMSample
 
             XComment comment1 = new XComment("Another comment");
             XComment comment2 = new XComment("Yet another comment");
-            XElement element1 = new XElement("childelement", new XElement("nested"), new XAttribute("foo", "bar"));
-            XElement element2 = new XElement("childelement2", new XElement("nested"), new XAttribute("foo", "bar"));
+            XElement element1 = new XElement(
+                "childelement",
+                new XElement("nested"),
+                new XAttribute("foo", "bar")
+            );
+            XElement element2 = new XElement(
+                "childelement2",
+                new XElement("nested"),
+                new XAttribute("foo", "bar")
+            );
             XAttribute attribute = new XAttribute("attribute", "value");
 
             // If no parent, should not be any content before it.
@@ -347,8 +396,16 @@ namespace XDocumentTests.SDMSample
 
             XComment comment1 = new XComment("Another comment");
             XComment comment2 = new XComment("Yet another comment");
-            XElement element1 = new XElement("childelement", new XElement("nested"), new XAttribute("foo", "bar"));
-            XElement element2 = new XElement("childelement2", new XElement("nested"), new XAttribute("foo", "bar"));
+            XElement element1 = new XElement(
+                "childelement",
+                new XElement("nested"),
+                new XAttribute("foo", "bar")
+            );
+            XElement element2 = new XElement(
+                "childelement2",
+                new XElement("nested"),
+                new XAttribute("foo", "bar")
+            );
             XAttribute attribute = new XAttribute("attribute", "value");
 
             // If no parent, should not be any content after it.
@@ -391,11 +448,17 @@ namespace XDocumentTests.SDMSample
             parent.Add(comment);
             parent.Add(child2b);
 
-            Assert.Equal(new XElement[] { child1a, child1b, child2a }, comment.ElementsBeforeSelf());
+            Assert.Equal(
+                new XElement[] { child1a, child1b, child2a },
+                comment.ElementsBeforeSelf()
+            );
 
             Assert.Equal(comment.ElementsBeforeSelf("child1"), new XElement[] { child1a, child1b });
 
-            Assert.Equal(new XElement[] { child1a, child1b, child2a }, child2b.ElementsBeforeSelf());
+            Assert.Equal(
+                new XElement[] { child1a, child1b, child2a },
+                child2b.ElementsBeforeSelf()
+            );
 
             Assert.Equal(new XElement[] { child2a }, child2b.ElementsBeforeSelf("child2"));
         }
@@ -445,14 +508,14 @@ namespace XDocumentTests.SDMSample
             {
                 new XComment("comment"),
                 new XElement("element"),
-                new XProcessingInstruction("target", "data")
+                new XProcessingInstruction("target", "data"),
             };
 
             XNode[] nestedNodes = new XNode[]
             {
                 new XText("abcd"),
                 new XElement("nested"),
-                new XProcessingInstruction("target2", "data2")
+                new XProcessingInstruction("target2", "data2"),
             };
 
             // Test top-level cases.

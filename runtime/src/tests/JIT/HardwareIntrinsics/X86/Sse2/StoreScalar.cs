@@ -5,8 +5,8 @@
 using System;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
-using System.Runtime.Intrinsics.X86;
 using System.Runtime.Intrinsics;
+using System.Runtime.Intrinsics.X86;
 using Xunit;
 
 namespace IntelHardwareIntrinsicTest.SSE2
@@ -20,13 +20,24 @@ namespace IntelHardwareIntrinsicTest.SSE2
 
             if (Sse2.IsSupported)
             {
-                using (TestTable<double> doubleTable = new TestTable<double>(new double[2] { 1, -5 }, new double[2]))
+                using (
+                    TestTable<double> doubleTable = new TestTable<double>(
+                        new double[2] { 1, -5 },
+                        new double[2]
+                    )
+                )
                 {
                     var vf = Unsafe.Read<Vector128<double>>(doubleTable.inArrayPtr);
                     Sse2.StoreScalar((double*)(doubleTable.outArrayPtr), vf);
 
-                    if (!doubleTable.CheckResult((x, y) => BitConverter.DoubleToInt64Bits(x[0]) == BitConverter.DoubleToInt64Bits(y[0])
-                                                        && BitConverter.DoubleToInt64Bits(y[1]) == 0))
+                    if (
+                        !doubleTable.CheckResult(
+                            (x, y) =>
+                                BitConverter.DoubleToInt64Bits(x[0])
+                                    == BitConverter.DoubleToInt64Bits(y[0])
+                                && BitConverter.DoubleToInt64Bits(y[1]) == 0
+                        )
+                    )
                     {
                         Console.WriteLine("Sse2 StoreScalar failed on double:");
                         foreach (var item in doubleTable.outArray)
@@ -38,7 +49,12 @@ namespace IntelHardwareIntrinsicTest.SSE2
                     }
                 }
 
-                using (TestTable<long> intTable = new TestTable<long>(new long[2] { 1, -5 }, new long[2]))
+                using (
+                    TestTable<long> intTable = new TestTable<long>(
+                        new long[2] { 1, -5 },
+                        new long[2]
+                    )
+                )
                 {
                     var vf = Unsafe.Read<Vector128<long>>(intTable.inArrayPtr);
                     Sse2.StoreScalar((long*)(intTable.outArrayPtr), vf);
@@ -55,7 +71,12 @@ namespace IntelHardwareIntrinsicTest.SSE2
                     }
                 }
 
-                using (TestTable<ulong> intTable = new TestTable<ulong>(new ulong[2] { 1, 5 }, new ulong[2]))
+                using (
+                    TestTable<ulong> intTable = new TestTable<ulong>(
+                        new ulong[2] { 1, 5 },
+                        new ulong[2]
+                    )
+                )
                 {
                     var vf = Unsafe.Read<Vector128<ulong>>(intTable.inArrayPtr);
                     Sse2.StoreScalar((ulong*)(intTable.outArrayPtr), vf);

@@ -12,7 +12,10 @@ namespace Microsoft.Web.Test
         [Fact]
         public void VerifyMVCVersionChangesAreIntentional()
         {
-            Version mvcVersion = VersionTestHelper.GetVersionFromAssembly("System.Web.Mvc", typeof(Controller));
+            Version mvcVersion = VersionTestHelper.GetVersionFromAssembly(
+                "System.Web.Mvc",
+                typeof(Controller)
+            );
             Assert.Equal(new Version(5, 3, 0, 0), mvcVersion);
         }
     }

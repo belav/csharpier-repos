@@ -7,12 +7,15 @@ namespace System.Linq
 {
     internal static class TypeHelper
     {
-        [UnconditionalSuppressMessage("ReflectionAnalysis", "IL2070:RequiresUnreferencedCode",
-            Justification = "GetInterfaces is only called if 'definition' is interface type. " +
-                "In that case though the interface must be present (otherwise the Type of it could not exist) " +
-                "which also means that the trimmer kept the interface and thus kept it on all types " +
-                "which implement it. It doesn't matter if the GetInterfaces call below returns fewer types" +
-                "as long as it returns the 'definition' as well.")]
+        [UnconditionalSuppressMessage(
+            "ReflectionAnalysis",
+            "IL2070:RequiresUnreferencedCode",
+            Justification = "GetInterfaces is only called if 'definition' is interface type. "
+                + "In that case though the interface must be present (otherwise the Type of it could not exist) "
+                + "which also means that the trimmer kept the interface and thus kept it on all types "
+                + "which implement it. It doesn't matter if the GetInterfaces call below returns fewer types"
+                + "as long as it returns the 'definition' as well."
+        )]
         internal static Type? FindGenericType(Type definition, Type type)
         {
             bool? definitionIsInterface = null;

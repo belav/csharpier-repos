@@ -16,9 +16,7 @@ namespace Microsoft.CodeAnalysis
     {
         public static DocumentationProvider Default { get; } = new NullDocumentationProvider();
 
-        protected DocumentationProvider()
-        {
-        }
+        protected DocumentationProvider() { }
 
         /// <summary>
         /// Fetches a documentation comment for the given member ID.
@@ -32,7 +30,8 @@ namespace Microsoft.CodeAnalysis
         protected internal abstract string? GetDocumentationForSymbol(
             string documentationMemberID,
             CultureInfo preferredCulture,
-            CancellationToken cancellationToken = default);
+            CancellationToken cancellationToken = default
+        );
 
         /// <summary>
         /// DocumentationProviders are compared when determining whether an AssemblySymbol can be reused.

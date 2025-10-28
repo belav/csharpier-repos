@@ -16,7 +16,8 @@ namespace System.Net.Http
             string hostName,
             bool checkCertificateRevocationList,
             out X509Chain chain,
-            out SslPolicyErrors sslPolicyErrors)
+            out SslPolicyErrors sslPolicyErrors
+        )
         {
             chain = null;
             sslPolicyErrors = SslPolicyErrors.None;
@@ -38,15 +39,10 @@ namespace System.Security.Cryptography.X509Certificates
 
         public X509Certificate2Collection Certificates
         {
-            get
-            {
-                return TestControl.CurrentUserCertificateStore;
-            }
+            get { return TestControl.CurrentUserCertificateStore; }
         }
 
-        public void Open(OpenFlags flags)
-        {
-        }
+        public void Open(OpenFlags flags) { }
 
         public void Dispose()
         {

@@ -7,7 +7,16 @@ internal static partial class Interop
 {
     internal static partial class Sys
     {
-        [LibraryImport(Libraries.SystemNative, EntryPoint = "SystemNative_PReadV", SetLastError = true)]
-        internal static unsafe partial long PReadV(SafeHandle fd, IOVector* vectors, int vectorCount, long fileOffset);
+        [LibraryImport(
+            Libraries.SystemNative,
+            EntryPoint = "SystemNative_PReadV",
+            SetLastError = true
+        )]
+        internal static unsafe partial long PReadV(
+            SafeHandle fd,
+            IOVector* vectors,
+            int vectorCount,
+            long fileOffset
+        );
     }
 }

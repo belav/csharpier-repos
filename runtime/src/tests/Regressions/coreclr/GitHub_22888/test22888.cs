@@ -9,15 +9,15 @@ using Xunit;
 
 class TestAssemblyLoadContext : AssemblyLoadContext
 {
-    public TestAssemblyLoadContext() : base(isCollectible: true)
-    {
-    }
+    public TestAssemblyLoadContext()
+        : base(isCollectible: true) { }
 
     protected override Assembly Load(AssemblyName name)
     {
         return null;
     }
 }
+
 public class Test22888
 {
     [MethodImpl(MethodImplOptions.NoInlining)]
@@ -27,7 +27,9 @@ public class Test22888
         alcWeakRef = new WeakReference(alc);
 
         Assembly a = alc.LoadFromAssemblyPath(assemblyPath);
-        Stream resourceStream = a.GetManifestResourceStream($"{Path.GetFileNameWithoutExtension(assemblyPath)}.test22888.resources");
+        Stream resourceStream = a.GetManifestResourceStream(
+            $"{Path.GetFileNameWithoutExtension(assemblyPath)}.test22888.resources"
+        );
         alc.Unload();
 
         return resourceStream;
@@ -52,7 +54,9 @@ public class Test22888
             success = alcWeakRef.IsAlive;
             if (!success)
             {
-                Console.WriteLine("Failed to keep AssemblyLoadContext alive by the resource stream");
+                Console.WriteLine(
+                    "Failed to keep AssemblyLoadContext alive by the resource stream"
+                );
             }
             GC.KeepAlive(s);
         }
@@ -67,8 +71,13 @@ public class Test22888
     [Fact]
     public static int TestEntryPoint()
     {
-        string currentAssemblyDirectory = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
-        string testAssemblyFullPath = Path.Combine(currentAssemblyDirectory, "test22888resources.dll");
+        string currentAssemblyDirectory = Path.GetDirectoryName(
+            Assembly.GetExecutingAssembly().Location
+        );
+        string testAssemblyFullPath = Path.Combine(
+            currentAssemblyDirectory,
+            "test22888resources.dll"
+        );
 
         WeakReference alcWeakRef;
         bool success = LoadAndUnload(testAssemblyFullPath, out alcWeakRef);
@@ -82,7 +91,7 @@ public class Test22888
             }
 
             // Now the ALC should not be alive anymore as the resource stream is gone
-            success =  !alcWeakRef.IsAlive;
+            success = !alcWeakRef.IsAlive;
             if (!success)
             {
                 Console.WriteLine("Failed to unload the test assembly");

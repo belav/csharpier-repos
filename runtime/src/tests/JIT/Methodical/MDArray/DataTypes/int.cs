@@ -8,63 +8,239 @@ using Xunit;
 public struct VT
 {
     public int[,] int2darr;
-    public int[, ,] int3darr;
+    public int[,,] int3darr;
     public int[,] int2darr_b;
-    public int[, ,] int3darr_b;
+    public int[,,] int3darr_b;
     public int[,] int2darr_c;
-    public int[, ,] int3darr_c;
+    public int[,,] int3darr_c;
 }
 
 public class CL
 {
-    public int[,] int2darr = { { 0, -1 }, { 0, 0 } };
-    public int[, ,] int3darr = { { { 0, 0 } }, { { 0, -1 } }, { { 0, 0 } } };
-    public int[,] int2darr_b = { { 0, 1 }, { 0, 0 } };
-    public int[, ,] int3darr_b = { { { 0, 0 } }, { { 0, 1 } }, { { 0, 0 } } };
-    public int[,] int2darr_c = { { 0, 49 }, { 0, 0 } };
-    public int[, ,] int3darr_c = { { { 0, 0 } }, { { 0, 49 } }, { { 0, 0 } } };
+    public int[,] int2darr =
+    {
+        { 0, -1 },
+        { 0, 0 },
+    };
+    public int[,,] int3darr =
+    {
+        {
+            { 0, 0 },
+        },
+        {
+            { 0, -1 },
+        },
+        {
+            { 0, 0 },
+        },
+    };
+    public int[,] int2darr_b =
+    {
+        { 0, 1 },
+        { 0, 0 },
+    };
+    public int[,,] int3darr_b =
+    {
+        {
+            { 0, 0 },
+        },
+        {
+            { 0, 1 },
+        },
+        {
+            { 0, 0 },
+        },
+    };
+    public int[,] int2darr_c =
+    {
+        { 0, 49 },
+        { 0, 0 },
+    };
+    public int[,,] int3darr_c =
+    {
+        {
+            { 0, 0 },
+        },
+        {
+            { 0, 49 },
+        },
+        {
+            { 0, 0 },
+        },
+    };
 }
 
 public class intMDArrTest
 {
-
-    static int[,] int2darr = { { 0, -1 }, { 0, 0 } };
-    static int[, ,] int3darr = { { { 0, 0 } }, { { 0, -1 } }, { { 0, 0 } } };
+    static int[,] int2darr =
+    {
+        { 0, -1 },
+        { 0, 0 },
+    };
+    static int[,,] int3darr =
+    {
+        {
+            { 0, 0 },
+        },
+        {
+            { 0, -1 },
+        },
+        {
+            { 0, 0 },
+        },
+    };
     static int[][,] ja1 = new int[2][,];
-    static int[][, ,] ja2 = new int[2][, ,];
-    static int[,] int2darr_b = { { 0, 1 }, { 0, 0 } };
-    static int[, ,] int3darr_b = { { { 0, 0 } }, { { 0, 1 } }, { { 0, 0 } } };
+    static int[][,,] ja2 = new int[2][,,];
+    static int[,] int2darr_b =
+    {
+        { 0, 1 },
+        { 0, 0 },
+    };
+    static int[,,] int3darr_b =
+    {
+        {
+            { 0, 0 },
+        },
+        {
+            { 0, 1 },
+        },
+        {
+            { 0, 0 },
+        },
+    };
     static int[][,] ja1_b = new int[2][,];
-    static int[][, ,] ja2_b = new int[2][, ,];
-    static int[,] int2darr_c = { { 0, 49 }, { 0, 0 } };
-    static int[, ,] int3darr_c = { { { 0, 0 } }, { { 0, 49 } }, { { 0, 0 } } };
+    static int[][,,] ja2_b = new int[2][,,];
+    static int[,] int2darr_c =
+    {
+        { 0, 49 },
+        { 0, 0 },
+    };
+    static int[,,] int3darr_c =
+    {
+        {
+            { 0, 0 },
+        },
+        {
+            { 0, 49 },
+        },
+        {
+            { 0, 0 },
+        },
+    };
     static int[][,] ja1_c = new int[2][,];
-    static int[][, ,] ja2_c = new int[2][, ,];
-
-
+    static int[][,,] ja2_c = new int[2][,,];
 
     [Fact]
     public static int TestEntryPoint()
     {
-
         bool pass = true;
 
         VT vt1;
-        vt1.int2darr = new int[,] { { 0, -1 }, { 0, 0 } };
-        vt1.int3darr = new int[,,] { { { 0, 0 } }, { { 0, -1 } }, { { 0, 0 } } };
-        vt1.int2darr_b = new int[,] { { 0, 1 }, { 0, 0 } };
-        vt1.int3darr_b = new int[,,] { { { 0, 0 } }, { { 0, 1 } }, { { 0, 0 } } };
-        vt1.int2darr_c = new int[,] { { 0, 49 }, { 0, 0 } };
-        vt1.int3darr_c = new int[,,] { { { 0, 0 } }, { { 0, 49 } }, { { 0, 0 } } };
+        vt1.int2darr = new int[,]
+        {
+            { 0, -1 },
+            { 0, 0 },
+        };
+        vt1.int3darr = new int[,,]
+        {
+            {
+                { 0, 0 },
+            },
+            {
+                { 0, -1 },
+            },
+            {
+                { 0, 0 },
+            },
+        };
+        vt1.int2darr_b = new int[,]
+        {
+            { 0, 1 },
+            { 0, 0 },
+        };
+        vt1.int3darr_b = new int[,,]
+        {
+            {
+                { 0, 0 },
+            },
+            {
+                { 0, 1 },
+            },
+            {
+                { 0, 0 },
+            },
+        };
+        vt1.int2darr_c = new int[,]
+        {
+            { 0, 49 },
+            { 0, 0 },
+        };
+        vt1.int3darr_c = new int[,,]
+        {
+            {
+                { 0, 0 },
+            },
+            {
+                { 0, 49 },
+            },
+            {
+                { 0, 0 },
+            },
+        };
 
         CL cl1 = new CL();
 
-        ja1[0] = new int[,] { { 0, -1 }, { 0, 0 } };
-        ja2[1] = new int[,,] { { { 0, 0 } }, { { 0, -1 } }, { { 0, 0 } } };
-        ja1_b[0] = new int[,] { { 0, 1 }, { 0, 0 } };
-        ja2_b[1] = new int[,,] { { { 0, 0 } }, { { 0, 1 } }, { { 0, 0 } } };
-        ja1_c[0] = new int[,] { { 0, 49 }, { 0, 0 } };
-        ja2_c[1] = new int[,,] { { { 0, 0 } }, { { 0, 49 } }, { { 0, 0 } } };
+        ja1[0] = new int[,]
+        {
+            { 0, -1 },
+            { 0, 0 },
+        };
+        ja2[1] = new int[,,]
+        {
+            {
+                { 0, 0 },
+            },
+            {
+                { 0, -1 },
+            },
+            {
+                { 0, 0 },
+            },
+        };
+        ja1_b[0] = new int[,]
+        {
+            { 0, 1 },
+            { 0, 0 },
+        };
+        ja2_b[1] = new int[,,]
+        {
+            {
+                { 0, 0 },
+            },
+            {
+                { 0, 1 },
+            },
+            {
+                { 0, 0 },
+            },
+        };
+        ja1_c[0] = new int[,]
+        {
+            { 0, 49 },
+            { 0, 0 },
+        };
+        ja2_c[1] = new int[,,]
+        {
+            {
+                { 0, 0 },
+            },
+            {
+                { 0, 49 },
+            },
+            {
+                { 0, 0 },
+            },
+        };
 
         int result = -1;
 
@@ -1180,8 +1356,5 @@ public class intMDArrTest
             Console.WriteLine("PASSED");
             return 100;
         }
-
-
     }
-
 };

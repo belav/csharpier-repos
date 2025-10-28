@@ -22,12 +22,16 @@ namespace Microsoft.CodeAnalysis.CSharp.UseCollectionInitializer
     {
         private static BaseObjectCreationExpressionSyntax CreateObjectInitializerExpression(
             BaseObjectCreationExpressionSyntax objectCreation,
-            ImmutableArray<Match<StatementSyntax>> matches)
+            ImmutableArray<Match<StatementSyntax>> matches
+        )
         {
             var expressions = CreateCollectionInitializerExpressions();
             var withLineBreaks = AddLineBreaks(expressions);
 
-            var newCreation = UseInitializerHelpers.GetNewObjectCreation(objectCreation, withLineBreaks);
+            var newCreation = UseInitializerHelpers.GetNewObjectCreation(
+                objectCreation,
+                withLineBreaks
+            );
             return newCreation.WithAdditionalAnnotations(Formatter.Annotation);
 
             SeparatedSyntaxList<ExpressionSyntax> CreateCollectionInitializerExpressions()
@@ -35,7 +39,11 @@ namespace Microsoft.CodeAnalysis.CSharp.UseCollectionInitializer
                 using var _ = ArrayBuilder<SyntaxNodeOrToken>.GetInstance(out var nodesAndTokens);
 
                 UseInitializerHelpers.AddExistingItems<Match<StatementSyntax>, ExpressionSyntax>(
-                    objectCreation, nodesAndTokens, addTrailingComma: matches.Length > 0, static (_, expression) => expression);
+                    objectCreation,
+                    nodesAndTokens,
+                    addTrailingComma: matches.Length > 0,
+                    static (_, expression) => expression
+                );
 
                 for (var i = 0; i < matches.Length; i++)
                 {
@@ -45,7 +53,9 @@ namespace Microsoft.CodeAnalysis.CSharp.UseCollectionInitializer
                     var trivia = statement.GetLeadingTrivia();
                     var leadingTrivia = i == 0 ? trivia.WithoutLeadingBlankLines() : trivia;
 
-                    var trailingTrivia = statement.SemicolonToken.TrailingTrivia.Contains(static t => t.IsSingleOrMultiLineComment())
+                    var trailingTrivia = statement.SemicolonToken.TrailingTrivia.Contains(
+                        static t => t.IsSingleOrMultiLineComment()
+                    )
                         ? statement.SemicolonToken.TrailingTrivia
                         : default;
 
@@ -56,7 +66,9 @@ namespace Microsoft.CodeAnalysis.CSharp.UseCollectionInitializer
                     if (i < matches.Length - 1)
                     {
                         nodesAndTokens.Add(expression);
-                        nodesAndTokens.Add(Token(SyntaxKind.CommaToken).WithTrailingTrivia(trailingTrivia));
+                        nodesAndTokens.Add(
+                            Token(SyntaxKind.CommaToken).WithTrailingTrivia(trailingTrivia)
+                        );
                     }
                     else
                     {
@@ -76,9 +88,14 @@ namespace Microsoft.CodeAnalysis.CSharp.UseCollectionInitializer
                 foreach (var item in nodeOrTokenList)
                 {
                     var addLineBreak = item.IsToken || item == nodeOrTokenList.Last();
-                    if (addLineBreak && item.GetTrailingTrivia() is not [.., (kind: SyntaxKind.EndOfLineTrivia)])
+                    if (
+                        addLineBreak
+                        && item.GetTrailingTrivia() is not [.., (kind: SyntaxKind.EndOfLineTrivia)]
+                    )
                     {
-                        nodesAndTokens.Add(item.WithAppendedTrailingTrivia(ElasticCarriageReturnLineFeed));
+                        nodesAndTokens.Add(
+                            item.WithAppendedTrailingTrivia(ElasticCarriageReturnLineFeed)
+                        );
                     }
                     else
                     {
@@ -89,8 +106,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UseCollectionInitializer
                 return SeparatedList<TNode>(nodesAndTokens);
             }
 
-            static ExpressionSyntax ConvertExpression(
-                ExpressionSyntax expression)
+            static ExpressionSyntax ConvertExpression(ExpressionSyntax expression)
             {
                 // This must be called from an expression from the original tree.  Not something we're already transforming.
                 // Otherwise, we'll have no idea how to apply the preferredIndentation if present.
@@ -103,11 +119,12 @@ namespace Microsoft.CodeAnalysis.CSharp.UseCollectionInitializer
                 };
             }
 
-            static AssignmentExpressionSyntax ConvertAssignment(AssignmentExpressionSyntax assignment)
+            static AssignmentExpressionSyntax ConvertAssignment(
+                AssignmentExpressionSyntax assignment
+            )
             {
                 var elementAccess = (ElementAccessExpressionSyntax)assignment.Left;
-                return assignment.WithLeft(
-                    ImplicitElementAccess(elementAccess.ArgumentList));
+                return assignment.WithLeft(ImplicitElementAccess(elementAccess.ArgumentList));
             }
 
             static ExpressionSyntax ConvertInvocation(InvocationExpressionSyntax invocation)
@@ -116,7 +133,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UseCollectionInitializer
 
                 if (arguments.Count == 1)
                 {
-                    // Assignment expressions in a collection initializer will cause the compiler to 
+                    // Assignment expressions in a collection initializer will cause the compiler to
                     // report an error.  This is because { a = b } is the form for an object initializer,
                     // and the two forms are not allowed to mix/match.  Parenthesize the assignment to
                     // avoid the ambiguity.
@@ -132,8 +149,10 @@ namespace Microsoft.CodeAnalysis.CSharp.UseCollectionInitializer
                         Token(SyntaxKind.OpenBraceToken).WithoutTrivia(),
                         SeparatedList(
                             arguments.Select(a => a.Expression),
-                            arguments.GetSeparators()),
-                        Token(SyntaxKind.CloseBraceToken).WithoutTrivia());
+                            arguments.GetSeparators()
+                        ),
+                        Token(SyntaxKind.CloseBraceToken).WithoutTrivia()
+                    );
                 }
             }
         }

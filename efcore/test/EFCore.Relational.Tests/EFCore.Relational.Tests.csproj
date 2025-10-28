@@ -1,5 +1,4 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
-
   <PropertyGroup>
     <TargetFramework>$(DefaultNetCoreTargetFramework)</TargetFramework>
     <AssemblyName>Microsoft.EntityFrameworkCore.Relational.Tests</AssemblyName>
@@ -45,12 +44,14 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.Extensions.Configuration" Version="$(MicrosoftExtensionsConfigurationVersion)" />
+    <PackageReference
+      Include="Microsoft.Extensions.Configuration"
+      Version="$(MicrosoftExtensionsConfigurationVersion)"
+    />
   </ItemGroup>
 
   <ItemGroup>
     <Compile Update="TestUtilities\FakeProvider\FakeDbCommand.cs" />
     <Compile Update="TestUtilities\FakeProvider\FakeDbConnection.cs" />
   </ItemGroup>
-
 </Project>

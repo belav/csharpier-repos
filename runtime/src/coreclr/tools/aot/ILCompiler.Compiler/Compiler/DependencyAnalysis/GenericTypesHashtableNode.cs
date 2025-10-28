@@ -2,10 +2,9 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
-
+using Internal.NativeFormat;
 using Internal.Text;
 using Internal.TypeSystem;
-using Internal.NativeFormat;
 
 namespace ILCompiler.DependencyAnalysis
 {
@@ -30,15 +29,25 @@ namespace ILCompiler.DependencyAnalysis
         int INodeWithSize.Size => _size.Value;
         public int Offset => 0;
         public override bool IsShareable => false;
-        public override ObjectNodeSection GetSection(NodeFactory factory) => _externalReferences.GetSection(factory);
+
+        public override ObjectNodeSection GetSection(NodeFactory factory) =>
+            _externalReferences.GetSection(factory);
+
         public override bool StaticDependenciesAreComputed => true;
-        protected override string GetName(NodeFactory factory) => this.GetMangledName(factory.NameMangler);
+
+        protected override string GetName(NodeFactory factory) =>
+            this.GetMangledName(factory.NameMangler);
 
         public override ObjectData GetData(NodeFactory factory, bool relocsOnly = false)
         {
             // This node does not trigger generation of other nodes.
             if (relocsOnly)
-                return new ObjectData(Array.Empty<byte>(), Array.Empty<Relocation>(), 1, new ISymbolDefinitionNode[] { this });
+                return new ObjectData(
+                    Array.Empty<byte>(),
+                    Array.Empty<Relocation>(),
+                    1,
+                    new ISymbolDefinitionNode[] { this }
+                );
 
             NativeWriter nativeWriter = new NativeWriter();
             VertexHashtable hashtable = new VertexHashtable();
@@ -55,7 +64,11 @@ namespace ILCompiler.DependencyAnalysis
             foreach (var type in factory.MetadataManager.GetTypesWithConstructedEETypes())
             {
                 // If this is an instantiated non-canonical generic type, add it to the generic instantiations hashtable
-                if (!type.HasInstantiation || type.IsGenericDefinition || type.IsCanonicalSubtype(CanonicalFormKind.Any))
+                if (
+                    !type.HasInstantiation
+                    || type.IsGenericDefinition
+                    || type.IsCanonicalSubtype(CanonicalFormKind.Any)
+                )
                     continue;
 
                 var typeSymbol = factory.NecessaryTypeSymbol(type);
@@ -69,7 +82,12 @@ namespace ILCompiler.DependencyAnalysis
 
             _size = streamBytes.Length;
 
-            return new ObjectData(streamBytes, Array.Empty<Relocation>(), 1, new ISymbolDefinitionNode[] { this });
+            return new ObjectData(
+                streamBytes,
+                Array.Empty<Relocation>(),
+                1,
+                new ISymbolDefinitionNode[] { this }
+            );
         }
 
         protected internal override int Phase => (int)ObjectNodePhase.Ordered;

@@ -54,6 +54,7 @@ internal static class CSharpSyntaxUtilities
                 return FormatNumber();
         }
 
-        string FormatNumber() => $"({type.FullyQualifiedName})({Convert.ToString(value, CultureInfo.InvariantCulture)})";
+        string FormatNumber() =>
+            $"({type.FullyQualifiedName})({Convert.ToString(value, CultureInfo.InvariantCulture)})";
     }
 }

@@ -14,9 +14,7 @@ namespace System.ServiceModel.Channels
 
         // constructors
         public SequenceRange(Int64 number)
-            : this(number, number)
-        {
-        }
+            : this(number, number) { }
 
         public SequenceRange(Int64 lower, Int64 upper)
         {

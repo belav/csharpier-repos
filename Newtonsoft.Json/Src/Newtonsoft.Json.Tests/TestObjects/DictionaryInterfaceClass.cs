@@ -38,20 +38,9 @@ namespace Newtonsoft.Json.Tests.TestObjects
 
         public DictionaryInterfaceClass()
         {
-            Dictionary = new Dictionary<string, int>
-            {
-                { "existing", 1 }
-            };
-            Collection = new List<int>
-            {
-                1,
-                2,
-                3
-            };
-            Employee = new EmployeeReference
-            {
-                Name = "EmployeeName!"
-            };
+            Dictionary = new Dictionary<string, int> { { "existing", 1 } };
+            Collection = new List<int> { 1, 2, 3 };
+            Employee = new EmployeeReference { Name = "EmployeeName!" };
         }
     }
 }

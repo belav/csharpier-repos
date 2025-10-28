@@ -20,14 +20,20 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.NavigationBar
         IThreadingContext threadingContext,
         [Import(AllowDefault = true)] ITextBufferVisibilityTracker? visibilityTracker,
         IUIThreadOperationExecutor uIThreadOperationExecutor,
-        IAsynchronousOperationListenerProvider listenerProvider) : INavigationBarControllerFactoryService
+        IAsynchronousOperationListenerProvider listenerProvider
+    ) : INavigationBarControllerFactoryService
     {
         private readonly IThreadingContext _threadingContext = threadingContext;
         private readonly ITextBufferVisibilityTracker? _visibilityTracker = visibilityTracker;
-        private readonly IUIThreadOperationExecutor _uIThreadOperationExecutor = uIThreadOperationExecutor;
-        private readonly IAsynchronousOperationListener _asyncListener = listenerProvider.GetListener(FeatureAttribute.NavigationBar);
+        private readonly IUIThreadOperationExecutor _uIThreadOperationExecutor =
+            uIThreadOperationExecutor;
+        private readonly IAsynchronousOperationListener _asyncListener =
+            listenerProvider.GetListener(FeatureAttribute.NavigationBar);
 
-        public IDisposable CreateController(INavigationBarPresenter presenter, ITextBuffer textBuffer)
+        public IDisposable CreateController(
+            INavigationBarPresenter presenter,
+            ITextBuffer textBuffer
+        )
         {
             return new NavigationBarController(
                 _threadingContext,
@@ -35,7 +41,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.NavigationBar
                 textBuffer,
                 _visibilityTracker,
                 _uIThreadOperationExecutor,
-                _asyncListener);
+                _asyncListener
+            );
         }
     }
 }

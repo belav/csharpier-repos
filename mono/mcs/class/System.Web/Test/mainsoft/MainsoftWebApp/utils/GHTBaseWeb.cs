@@ -3,10 +3,10 @@
 //   Rafael Mizrahi   <rafim@mainsoft.com>
 //   Erez Lotan       <erezl@mainsoft.com>
 //   Vladimir Krasnov <vladimirk@mainsoft.com>
-//   
-// 
+//
+//
 // Copyright (c) 2002-2005 Mainsoft Corporation.
-// 
+//
 // Permission is hereby granted, free of charge, to any person obtaining
 // a copy of this software and associated documentation files (the
 // "Software"), to deal in the Software without restriction, including
@@ -14,10 +14,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -33,9 +33,8 @@ using System.Drawing;
 using System.Web;
 using System.Web.SessionState;
 using System.Web.UI;
-using System.Web.UI.WebControls;
 using System.Web.UI.HtmlControls;
-
+using System.Web.UI.WebControls;
 using GHTWebControls;
 
 namespace GHTTests
@@ -65,18 +64,16 @@ namespace GHTTests
         /// <summary>
         /// not implemented yet. use it as a stub
         /// </summary>
-        public void GHTTestEnd()
-        {
-            
-        }
- 
+        public void GHTTestEnd() { }
+
         /// <summary>
-        /// 
+        ///
         /// </summary>
         public void GHTSubTestBegin()
         {
             GHTSubTestBegin("");
         }
+
         public void GHTSubTestBegin(string Description)
         {
             GHTSubTestCreateNew(Description);
@@ -85,91 +82,100 @@ namespace GHTTests
         /// <summary>
         /// not implemented yet. use it as a stub
         /// </summary>
-        public void GHTSubTestEnd()
-        {
-            
-        }
- 
+        public void GHTSubTestEnd() { }
+
         /// <summary>
         /// Add a result to Sub Test.
         /// </summary>
         /// <param name="SubTestControl">The SubTestControl to add the result to.</param>
         /// <param name="TraceText">The text to add.</param>
         /// <param name="asText">Whether to include as plain text, or to interpret special HTML charachters as HTML.</param>
-		public void GHTSubTestAddResult(Control SubTestControl, string TraceText, bool asText)
+        public void GHTSubTestAddResult(Control SubTestControl, string TraceText, bool asText)
         {
-			if (asText)
-			{
-				TraceText = GHTHtmlToText(TraceText);
-			}
-			
-			Label lbl = new Label();
-			lbl.Text = "<br>" + TraceText;
-			SubTestControl.Controls.Add(lbl);
+            if (asText)
+            {
+                TraceText = GHTHtmlToText(TraceText);
+            }
 
-//				TableCell tempCell = new TableCell();
-//				TableRow tempRow = new TableRow();
-//				tempCell.Controls.Add( new LiteralControl(TraceText));
-//				tempRow.Controls.Add(tempCell); 
-//				SubTestControl.Controls.Add(tempRow);
+            Label lbl = new Label();
+            lbl.Text = "<br>" + TraceText;
+            SubTestControl.Controls.Add(lbl);
 
+            //				TableCell tempCell = new TableCell();
+            //				TableRow tempRow = new TableRow();
+            //				tempCell.Controls.Add( new LiteralControl(TraceText));
+            //				tempRow.Controls.Add(tempCell);
+            //				SubTestControl.Controls.Add(tempRow);
         }
-		public void GHTSubTestAddResult(string TraceText)
-		{
-			GHTSubTestAddResult(TraceText, false);
-		}
-		public void GHTSubTestAddResult(string TraceText, bool asText)
-		{
-			GHTSubTestAddResult(GHTActiveSubTest, TraceText, asText);
-		}
-		public void GHTSubTestAddResult(Control SubTestControl, string TraceText)
-		{
-			GHTSubTestAddResult(SubTestControl, TraceText,false);
-		}
-		// Replaces Html special charachters to escape charachters in the returned string:
-		// Orig --> Result
-		//-----		   ------
-		//  <				&lt;
-		//	 >				&gt;
-		//	 "				&quot;
-		// &				&amp;
-		public string GHTHtmlToText(string a_text)
-		{
-			string res = string.Empty;
-			res = a_text.Replace("<", "&lt;");
-			res = res.Replace(">", "&gt;");
-			res = res.Replace("\"", "&quot;");
-			return res;
-		}
 
-		protected void GHTSubTestExpectedExceptionCaught(System.Exception ex)
-		{
-			GHTSubTestAddResult("Test passed. Expected exception was caught.");
-		}
-		protected void GHTSubTestExpectedExceptionNotCaught(string ExceptionName)
-		{
-			GHTSubTestAddResult("Test failed. Expected " + ExceptionName + " exception was not caught.");
-		}
-		protected void GHTSubTestUnexpectedExceptionCaught(System.Exception ex)
-		{
-			string traceText = string.Empty;
-			traceText += "Test Failed. Unxpected ";
-			traceText += ex.GetType().Name;
-			traceText += " exception was caught";
-			traceText += "<br>Stack Trace: ";
-			traceText += ex.ToString();
+        public void GHTSubTestAddResult(string TraceText)
+        {
+            GHTSubTestAddResult(TraceText, false);
+        }
 
-			GHTSubTestAddResult(traceText);
-		}
+        public void GHTSubTestAddResult(string TraceText, bool asText)
+        {
+            GHTSubTestAddResult(GHTActiveSubTest, TraceText, asText);
+        }
 
-		protected void Compare(Object Result, Object ExpectedResult)
-		{
-			if (Result.Equals(ExpectedResult))
-				GHTSubTestAddResult("Test Passed.");
-			else
-				GHTSubTestAddResult("Test Failed. Result:" + GHTNormalizeToString(Result.ToString()) + ". Expected Result:" + GHTNormalizeToString(ExpectedResult.ToString()));
-											 
-		}
+        public void GHTSubTestAddResult(Control SubTestControl, string TraceText)
+        {
+            GHTSubTestAddResult(SubTestControl, TraceText, false);
+        }
+
+        // Replaces Html special charachters to escape charachters in the returned string:
+        // Orig --> Result
+        //-----		   ------
+        //  <				&lt;
+        //	 >				&gt;
+        //	 "				&quot;
+        // &				&amp;
+        public string GHTHtmlToText(string a_text)
+        {
+            string res = string.Empty;
+            res = a_text.Replace("<", "&lt;");
+            res = res.Replace(">", "&gt;");
+            res = res.Replace("\"", "&quot;");
+            return res;
+        }
+
+        protected void GHTSubTestExpectedExceptionCaught(System.Exception ex)
+        {
+            GHTSubTestAddResult("Test passed. Expected exception was caught.");
+        }
+
+        protected void GHTSubTestExpectedExceptionNotCaught(string ExceptionName)
+        {
+            GHTSubTestAddResult(
+                "Test failed. Expected " + ExceptionName + " exception was not caught."
+            );
+        }
+
+        protected void GHTSubTestUnexpectedExceptionCaught(System.Exception ex)
+        {
+            string traceText = string.Empty;
+            traceText += "Test Failed. Unxpected ";
+            traceText += ex.GetType().Name;
+            traceText += " exception was caught";
+            traceText += "<br>Stack Trace: ";
+            traceText += ex.ToString();
+
+            GHTSubTestAddResult(traceText);
+        }
+
+        protected void Compare(Object Result, Object ExpectedResult)
+        {
+            if (Result.Equals(ExpectedResult))
+                GHTSubTestAddResult("Test Passed.");
+            else
+                GHTSubTestAddResult(
+                    "Test Failed. Result:"
+                        + GHTNormalizeToString(Result.ToString())
+                        + ". Expected Result:"
+                        + GHTNormalizeToString(ExpectedResult.ToString())
+                );
+        }
+
         /// <summary>
         /// Create a new SubTest conteiner.
         /// </summary>
@@ -177,32 +183,34 @@ namespace GHTTests
         {
             return GHTSubTestCreateNew("");
         }
+
         protected GHTWebControls.GHTSubTest GHTSubTestCreateNew(string Description)
         {
             return GHTSubTestCreateNew(GHTActiveForm, Description);
         }
+
         protected GHTWebControls.GHTSubTest GHTSubTestCreateNew(Control theForm, string Description)
         {
-			if (GHTActiveSubTestId == 0)
-			{
-				GHTActiveSubTestId++;
-			}
+            if (GHTActiveSubTestId == 0)
+            {
+                GHTActiveSubTestId++;
+            }
 
-			while (theForm.FindControl("GHTSubTest" + GHTActiveSubTestId) != null)
-			{
-				GHTActiveSubTestId++;
-			}
+            while (theForm.FindControl("GHTSubTest" + GHTActiveSubTestId) != null)
+            {
+                GHTActiveSubTestId++;
+            }
 
             GHTActiveForm = theForm;
             GHTWebControls.GHTSubTest subtest = new GHTWebControls.GHTSubTest();
             subtest.ID = "GHTSubTest" + GHTActiveSubTestId;
-			subtest.Description = Description;
-			subtest.Attributes.Add("TestName",Description);
+            subtest.Description = Description;
+            subtest.Attributes.Add("TestName", Description);
             theForm.Controls.Add(subtest);
             GHTActiveSubTest = subtest;
             return subtest;
         }
-        
+
         /// <summary>
         /// Create a new Element (e.g. Control).
         /// </summary>
@@ -221,7 +229,7 @@ namespace GHTTests
             MemberName = MemberName.ToLower();
 
             //AccessKey
-            if (MemberName.CompareTo("AccessKey".ToLower())== 0)
+            if (MemberName.CompareTo("AccessKey".ToLower()) == 0)
             {
                 //Press Alt-Y to get focus here
                 obj.AccessKey = ""; //empty is ok
@@ -242,23 +250,22 @@ namespace GHTTests
                     GHTSubTestAddResult(GHTActiveSubTest, MemberName + " ArgumentException OK");
                 }
                 bExceptionCaught = false;
-                
             }
 
             //Attributes tested at System.Web.UI.AttributeCollection
 
             //BackColor
-            if (MemberName.CompareTo("BackColor".ToLower())== 0)
+            if (MemberName.CompareTo("BackColor".ToLower()) == 0)
             {
                 obj.BackColor = System.Drawing.Color.AliceBlue;
-                
+
                 objNew = (WebControl)GHTElementClone(obj.GetType());
                 objNew.BackColor = System.Drawing.Color.Magenta;
                 GHTActiveSubTest.Controls.Add(objNew);
             }
 
             //BorderColor
-            if (MemberName.CompareTo("BorderColor".ToLower())== 0)
+            if (MemberName.CompareTo("BorderColor".ToLower()) == 0)
             {
                 objNew = (WebControl)GHTElementClone(obj.GetType());
                 objNew.BorderColor = System.Drawing.Color.AliceBlue;
@@ -266,7 +273,7 @@ namespace GHTTests
             }
 
             //BorderStyle
-            if (MemberName.CompareTo("BorderStyle".ToLower())== 0)
+            if (MemberName.CompareTo("BorderStyle".ToLower()) == 0)
             {
                 objNew = (WebControl)GHTElementClone(obj.GetType());
                 objNew.BorderStyle = System.Web.UI.WebControls.BorderStyle.Dotted;
@@ -274,7 +281,7 @@ namespace GHTTests
             }
 
             //BorderWidth
-            if (MemberName.CompareTo("BorderWidth".ToLower())== 0)
+            if (MemberName.CompareTo("BorderWidth".ToLower()) == 0)
             {
                 objNew = (WebControl)GHTElementClone(obj.GetType());
                 objNew.BorderWidth = 10;
@@ -283,9 +290,9 @@ namespace GHTTests
 
             // ControlStyle
             // ControlStyleCreated
-            
+
             //CssClass
-            if (MemberName.CompareTo("CssClass".ToLower())== 0)
+            if (MemberName.CompareTo("CssClass".ToLower()) == 0)
             {
                 objNew = (WebControl)GHTElementClone(obj.GetType());
                 objNew.CssClass = "zoobie";
@@ -293,7 +300,7 @@ namespace GHTTests
             }
 
             //Enabled
-            if (MemberName.CompareTo("Enabled".ToLower())== 0)
+            if (MemberName.CompareTo("Enabled".ToLower()) == 0)
             {
                 objNew = (WebControl)GHTElementClone(obj.GetType());
                 objNew.Enabled = true;
@@ -301,13 +308,13 @@ namespace GHTTests
             }
 
             //Font
-            if (MemberName.CompareTo("Font".ToLower())== 0)
+            if (MemberName.CompareTo("Font".ToLower()) == 0)
             {
                 GHTSubTestAddResult(GHTActiveSubTest, MemberName + " " + obj.Font.ToString());
             }
 
             //ForeColor
-            if (MemberName.CompareTo("ForeColor".ToLower())== 0)
+            if (MemberName.CompareTo("ForeColor".ToLower()) == 0)
             {
                 objNew = (WebControl)GHTElementClone(obj.GetType());
                 objNew.ForeColor = System.Drawing.Color.Cornsilk;
@@ -315,7 +322,7 @@ namespace GHTTests
             }
 
             //Height
-            if (MemberName.CompareTo("Height".ToLower())== 0)
+            if (MemberName.CompareTo("Height".ToLower()) == 0)
             {
                 objNew = (WebControl)GHTElementClone(obj.GetType());
                 objNew.Height = 30;
@@ -323,7 +330,7 @@ namespace GHTTests
             }
 
             //Style
-            if (MemberName.CompareTo("Style".ToLower())== 0)
+            if (MemberName.CompareTo("Style".ToLower()) == 0)
             {
                 GHTSubTestAddResult(GHTActiveSubTest, MemberName + " " + obj.Style.ToString());
             }
@@ -338,7 +345,7 @@ namespace GHTTests
             //            }
 
             //TabIndex
-            if (MemberName.CompareTo("TabIndex".ToLower())== 0)
+            if (MemberName.CompareTo("TabIndex".ToLower()) == 0)
             {
                 objNew = (WebControl)GHTElementClone(obj.GetType());
                 objNew.TabIndex = 2;
@@ -346,7 +353,7 @@ namespace GHTTests
             }
 
             //ToolTip
-            if (MemberName.CompareTo("ToolTip".ToLower())== 0)
+            if (MemberName.CompareTo("ToolTip".ToLower()) == 0)
             {
                 objNew = (WebControl)GHTElementClone(obj.GetType());
                 objNew.ToolTip = "ToolTip";
@@ -354,53 +361,52 @@ namespace GHTTests
             }
 
             //Width
-            if (MemberName.CompareTo("Width".ToLower())== 0)
+            if (MemberName.CompareTo("Width".ToLower()) == 0)
             {
                 objNew = (WebControl)GHTElementClone(obj.GetType());
                 objNew.Width = 60;
                 GHTActiveSubTest.Controls.Add(objNew);
             }
-
         }
 
-		protected void GHTHeader(string text)
-			{
-				Label  header = new Label();
-				header.Text = "<br>" + text + "<br>";
-				header.Font.Bold = true;
-				header.Font.Underline = true;
-				header.Font.Size = new FontUnit(FontSize.Larger);
-				GHTActiveForm.Controls.Add(header);
-			}
+        protected void GHTHeader(string text)
+        {
+            Label header = new Label();
+            header.Text = "<br>" + text + "<br>";
+            header.Font.Bold = true;
+            header.Font.Underline = true;
+            header.Font.Size = new FontUnit(FontSize.Larger);
+            GHTActiveForm.Controls.Add(header);
+        }
 
-		/// <summary>
-		/// Removes tarailing @... and preceding '_' from strings if they are found
-		/// </summary>
-		/// <param name="orig">The original ToString result.</param>
-		/// <returns>Normalized string.</returns>
-		public string GHTNormalizeToString(string a_toNormalize)
-		{
-			//Remove the @ at the end of the tostring.
-			int atIndex = a_toNormalize.LastIndexOf('@');
-			if (atIndex > -1)
-			{
-				a_toNormalize = a_toNormalize.Remove(atIndex, a_toNormalize.Length - atIndex);
-			}
-			//remove the preceding '_'
-			if (a_toNormalize.StartsWith("_") )
-			{
-				a_toNormalize = a_toNormalize.Substring(1);
-			}
-			return a_toNormalize;
-		}
-		/// <summary>
-		/// Returns the normalized to string of this page.
-		/// </summary>
-		/// <returns></returns>
-		public override string ToString()
-		{
-			return GHTNormalizeToString(base.ToString());
-		}
+        /// <summary>
+        /// Removes tarailing @... and preceding '_' from strings if they are found
+        /// </summary>
+        /// <param name="orig">The original ToString result.</param>
+        /// <returns>Normalized string.</returns>
+        public string GHTNormalizeToString(string a_toNormalize)
+        {
+            //Remove the @ at the end of the tostring.
+            int atIndex = a_toNormalize.LastIndexOf('@');
+            if (atIndex > -1)
+            {
+                a_toNormalize = a_toNormalize.Remove(atIndex, a_toNormalize.Length - atIndex);
+            }
+            //remove the preceding '_'
+            if (a_toNormalize.StartsWith("_"))
+            {
+                a_toNormalize = a_toNormalize.Substring(1);
+            }
+            return a_toNormalize;
+        }
+
+        /// <summary>
+        /// Returns the normalized to string of this page.
+        /// </summary>
+        /// <returns></returns>
+        public override string ToString()
+        {
+            return GHTNormalizeToString(base.ToString());
+        }
     }
 }
-

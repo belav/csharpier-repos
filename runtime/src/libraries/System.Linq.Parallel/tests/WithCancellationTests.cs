@@ -16,7 +16,10 @@ namespace System.Linq.Parallel.Tests
         public static void WithCancellation_Multiple_NotCancelable()
         {
             // Multiple not-cancel-able tokens is not an error.
-            ParallelEnumerable.Range(0, 1).WithCancellation(new CancellationToken()).WithCancellation(new CancellationToken());
+            ParallelEnumerable
+                .Range(0, 1)
+                .WithCancellation(new CancellationToken())
+                .WithCancellation(new CancellationToken());
             CancellationToken token = new CancellationToken();
             ParallelEnumerable.Range(0, 1).WithCancellation(token).WithCancellation(token);
         }
@@ -25,8 +28,15 @@ namespace System.Linq.Parallel.Tests
         public static void WithCancellation_Multiple_CancelableToken()
         {
             CancellationToken token = new CancellationTokenSource().Token;
-            Assert.Throws<InvalidOperationException>(() => ParallelEnumerable.Range(0, 1).WithCancellation(token).WithCancellation(token));
-            Assert.Throws<InvalidOperationException>(() => ParallelEnumerable.Range(0, 1).WithCancellation(token).WithCancellation(new CancellationTokenSource().Token));
+            Assert.Throws<InvalidOperationException>(() =>
+                ParallelEnumerable.Range(0, 1).WithCancellation(token).WithCancellation(token)
+            );
+            Assert.Throws<InvalidOperationException>(() =>
+                ParallelEnumerable
+                    .Range(0, 1)
+                    .WithCancellation(token)
+                    .WithCancellation(new CancellationTokenSource().Token)
+            );
         }
 
         [Fact]
@@ -47,8 +57,15 @@ namespace System.Linq.Parallel.Tests
 
         [Theory]
         [MemberData(nameof(Sources.Ranges), new[] { 1024 }, MemberType = typeof(Sources))]
-        [MemberData(nameof(UnorderedSources.Ranges), new[] { 1024 }, MemberType = typeof(UnorderedSources))]
-        public static void WithCancellation_DisposedEnumerator(Labeled<ParallelQuery<int>> labeled, int count)
+        [MemberData(
+            nameof(UnorderedSources.Ranges),
+            new[] { 1024 },
+            MemberType = typeof(UnorderedSources)
+        )]
+        public static void WithCancellation_DisposedEnumerator(
+            Labeled<ParallelQuery<int>> labeled,
+            int count
+        )
         {
             // Disposing an enumerator should throw ODE and not OCE.
             _ = count;
@@ -69,8 +86,10 @@ namespace System.Linq.Parallel.Tests
         {
             // Provide enough elements to ensure all the cores get >64K ints.
             int elements = 64 * 1024 * Environment.ProcessorCount;
-            foreach (object[] data in Sources.Ranges(new[] { elements })) yield return data;
-            foreach (object[] data in UnorderedSources.Ranges(new[] { elements })) yield return data;
+            foreach (object[] data in Sources.Ranges(new[] { elements }))
+                yield return data;
+            foreach (object[] data in UnorderedSources.Ranges(new[] { elements }))
+                yield return data;
         }
 
         // [Regression Test]
@@ -85,7 +104,10 @@ namespace System.Linq.Parallel.Tests
         [Theory]
         [OuterLoop] // explicit timeouts / delays
         [MemberData(nameof(ProducerBlocked_Data))]
-        public static void WithCancellation_DisposedEnumerator_ChannelCancellation_ProducerBlocked(Labeled<ParallelQuery<int>> labeled, int count)
+        public static void WithCancellation_DisposedEnumerator_ChannelCancellation_ProducerBlocked(
+            Labeled<ParallelQuery<int>> labeled,
+            int count
+        )
         {
             // Larger size, delay may cause enumerator.Dispose() to hang
             _ = count;
@@ -101,27 +123,77 @@ namespace System.Linq.Parallel.Tests
         // when the implementation involved disposing and recreating the token on each worker thread
         [Theory]
         [MemberData(nameof(Sources.Ranges), new[] { 1024 * 4 }, MemberType = typeof(Sources))]
-        [MemberData(nameof(UnorderedSources.Ranges), new[] { 1024 * 4 }, MemberType = typeof(UnorderedSources))]
+        [MemberData(
+            nameof(UnorderedSources.Ranges),
+            new[] { 1024 * 4 },
+            MemberType = typeof(UnorderedSources)
+        )]
         public static void WithCancellation_ODEIssue(Labeled<ParallelQuery<int>> labeled, int count)
         {
             //the failure was an ODE coming out due to an ephemeral disposed merged cancellation token source.
             _ = count;
-            ParallelQuery<int> left = labeled.Item.AsUnordered().WithExecutionMode(ParallelExecutionMode.ForceParallelism);
-            ParallelQuery<int> right = Enumerable.Range(0, 1024).Select(x => x).AsParallel().AsUnordered();
-            AssertThrows.Wrapped<OperationCanceledException>(() => left.GroupJoin(right, x => { throw new OperationCanceledException(); }, y => y, (x, e) => x).ForAll(x => { }));
-            AssertThrows.Wrapped<OperationCanceledException>(() => left.Join(right, x => { throw new OperationCanceledException(); }, y => y, (x, e) => x).ForAll(x => { }));
-            AssertThrows.Wrapped<OperationCanceledException>(() => left.Zip<int, int, int>(right, (x, y) => { throw new OperationCanceledException(); }).ForAll(x => { }));
+            ParallelQuery<int> left = labeled
+                .Item.AsUnordered()
+                .WithExecutionMode(ParallelExecutionMode.ForceParallelism);
+            ParallelQuery<int> right = Enumerable
+                .Range(0, 1024)
+                .Select(x => x)
+                .AsParallel()
+                .AsUnordered();
+            AssertThrows.Wrapped<OperationCanceledException>(() =>
+                left.GroupJoin(
+                        right,
+                        x =>
+                        {
+                            throw new OperationCanceledException();
+                        },
+                        y => y,
+                        (x, e) => x
+                    )
+                    .ForAll(x => { })
+            );
+            AssertThrows.Wrapped<OperationCanceledException>(() =>
+                left.Join(
+                        right,
+                        x =>
+                        {
+                            throw new OperationCanceledException();
+                        },
+                        y => y,
+                        (x, e) => x
+                    )
+                    .ForAll(x => { })
+            );
+            AssertThrows.Wrapped<OperationCanceledException>(() =>
+                left.Zip<int, int, int>(
+                        right,
+                        (x, y) =>
+                        {
+                            throw new OperationCanceledException();
+                        }
+                    )
+                    .ForAll(x => { })
+            );
         }
 
         // If a query is canceled and immediately disposed, the dispose should not throw an OCE.
         [Theory]
         [MemberData(nameof(Sources.Ranges), new[] { 16 }, MemberType = typeof(Sources))]
-        [MemberData(nameof(UnorderedSources.Ranges), new[] { 16 }, MemberType = typeof(UnorderedSources))]
-        public static void WithCancellation_CancelThenDispose(Labeled<ParallelQuery<int>> labeled, int count)
+        [MemberData(
+            nameof(UnorderedSources.Ranges),
+            new[] { 16 },
+            MemberType = typeof(UnorderedSources)
+        )]
+        public static void WithCancellation_CancelThenDispose(
+            Labeled<ParallelQuery<int>> labeled,
+            int count
+        )
         {
             _ = count;
             CancellationTokenSource cancel = new CancellationTokenSource();
-            IEnumerator<int> enumerator = labeled.Item.WithCancellation(cancel.Token).GetEnumerator();
+            IEnumerator<int> enumerator = labeled
+                .Item.WithCancellation(cancel.Token)
+                .GetEnumerator();
             enumerator.MoveNext();
 
             cancel.Cancel();
@@ -135,7 +207,8 @@ namespace System.Linq.Parallel.Tests
             IEnumerator<int> enumerator = query.GetEnumerator();
 
             enumerator.MoveNext();
-            if (delay) Task.Delay(10).Wait();
+            if (delay)
+                Task.Delay(10).Wait();
             enumerator.MoveNext();
             enumerator.Dispose();
 

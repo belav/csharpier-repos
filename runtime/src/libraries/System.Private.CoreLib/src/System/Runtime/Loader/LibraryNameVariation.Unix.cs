@@ -15,7 +15,10 @@ namespace System.Runtime.Loader
         private const string LibraryNameSuffix = ".so";
 #endif
 
-        internal static IEnumerable<LibraryNameVariation> DetermineLibraryNameVariations(string libName, bool isRelativePath)
+        internal static IEnumerable<LibraryNameVariation> DetermineLibraryNameVariations(
+            string libName,
+            bool isRelativePath
+        )
         {
             // This is a copy of the logic in DetermineLibNameVariations in dllimport.cpp in CoreCLR
 
@@ -26,11 +29,15 @@ namespace System.Runtime.Loader
             else
             {
                 bool containsSuffix = false;
-                int indexOfSuffix = libName.IndexOf(LibraryNameSuffix, StringComparison.OrdinalIgnoreCase);
+                int indexOfSuffix = libName.IndexOf(
+                    LibraryNameSuffix,
+                    StringComparison.OrdinalIgnoreCase
+                );
                 if (indexOfSuffix >= 0)
                 {
                     indexOfSuffix += LibraryNameSuffix.Length;
-                    containsSuffix = indexOfSuffix == libName.Length || libName[indexOfSuffix] == '.';
+                    containsSuffix =
+                        indexOfSuffix == libName.Length || libName[indexOfSuffix] == '.';
                 }
 
                 bool containsDelim = libName.Contains(Path.DirectorySeparatorChar);

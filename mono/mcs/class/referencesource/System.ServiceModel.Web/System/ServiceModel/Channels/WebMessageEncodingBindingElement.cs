@@ -5,12 +5,15 @@
 namespace System.ServiceModel.Channels
 {
     using System.ServiceModel;
-    using System.Text;
-    using System.Xml;
     using System.ServiceModel.Administration;
     using System.ServiceModel.Description;
+    using System.Text;
+    using System.Xml;
 
-    public sealed class WebMessageEncodingBindingElement : MessageEncodingBindingElement, IWsdlExportExtension, IWmiInstanceProvider
+    public sealed class WebMessageEncodingBindingElement
+        : MessageEncodingBindingElement,
+            IWsdlExportExtension,
+            IWmiInstanceProvider
     {
         WebContentTypeMapper contentTypeMapper;
 
@@ -20,9 +23,7 @@ namespace System.ServiceModel.Channels
         Encoding writeEncoding;
 
         public WebMessageEncodingBindingElement()
-            : this(TextEncoderDefaults.Encoding)
-        {
-        }
+            : this(TextEncoderDefaults.Encoding) { }
 
         public WebMessageEncodingBindingElement(Encoding writeEncoding)
         {
@@ -50,30 +51,27 @@ namespace System.ServiceModel.Channels
             this.contentTypeMapper = elementToBeCloned.contentTypeMapper;
             this.CrossDomainScriptAccessEnabled = elementToBeCloned.CrossDomainScriptAccessEnabled;
         }
+
         public WebContentTypeMapper ContentTypeMapper
         {
-            get
-            {
-                return contentTypeMapper;
-            }
-            set
-            {
-                contentTypeMapper = value;
-            }
+            get { return contentTypeMapper; }
+            set { contentTypeMapper = value; }
         }
 
         public int MaxReadPoolSize
         {
-            get
-            {
-                return this.maxReadPoolSize;
-            }
+            get { return this.maxReadPoolSize; }
             set
             {
                 if (value <= 0)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentOutOfRangeException("value", value,
-                        SR2.GetString(SR2.ValueMustBePositive)));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new ArgumentOutOfRangeException(
+                            "value",
+                            value,
+                            SR2.GetString(SR2.ValueMustBePositive)
+                        )
+                    );
                 }
                 this.maxReadPoolSize = value;
             }
@@ -81,28 +79,26 @@ namespace System.ServiceModel.Channels
 
         public int MaxWritePoolSize
         {
-            get
-            {
-                return this.maxWritePoolSize;
-            }
+            get { return this.maxWritePoolSize; }
             set
             {
                 if (value <= 0)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentOutOfRangeException("value", value,
-                        SR2.GetString(SR2.ValueMustBePositive)));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new ArgumentOutOfRangeException(
+                            "value",
+                            value,
+                            SR2.GetString(SR2.ValueMustBePositive)
+                        )
+                    );
                 }
                 this.maxWritePoolSize = value;
             }
         }
 
-
         public override MessageVersion MessageVersion
         {
-            get
-            {
-                return MessageVersion.None;
-            }
+            get { return MessageVersion.None; }
             set
             {
                 if (value == null)
@@ -112,7 +108,10 @@ namespace System.ServiceModel.Channels
 
                 if (value != MessageVersion.None)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument("value", SR2.GetString(SR2.JsonOnlySupportsMessageVersionNone));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
+                        "value",
+                        SR2.GetString(SR2.JsonOnlySupportsMessageVersionNone)
+                    );
                 }
             }
         }
@@ -124,18 +123,12 @@ namespace System.ServiceModel.Channels
 
         public XmlDictionaryReaderQuotas ReaderQuotas
         {
-            get
-            {
-                return this.readerQuotas;
-            }
+            get { return this.readerQuotas; }
         }
 
         public Encoding WriteEncoding
         {
-            get
-            {
-                return this.writeEncoding;
-            }
+            get { return this.writeEncoding; }
             set
             {
                 if (value == null)
@@ -148,18 +141,18 @@ namespace System.ServiceModel.Channels
             }
         }
 
-        public bool CrossDomainScriptAccessEnabled
-        {
-            get;
-            set;
-        }
+        public bool CrossDomainScriptAccessEnabled { get; set; }
 
-        public override IChannelFactory<TChannel> BuildChannelFactory<TChannel>(BindingContext context)
+        public override IChannelFactory<TChannel> BuildChannelFactory<TChannel>(
+            BindingContext context
+        )
         {
             return InternalBuildChannelFactory<TChannel>(context);
         }
 
-        public override IChannelListener<TChannel> BuildChannelListener<TChannel>(BindingContext context)
+        public override IChannelListener<TChannel> BuildChannelListener<TChannel>(
+            BindingContext context
+        )
         {
             return InternalBuildChannelListener<TChannel>(context);
         }
@@ -176,7 +169,14 @@ namespace System.ServiceModel.Channels
 
         public override MessageEncoderFactory CreateMessageEncoderFactory()
         {
-            return new WebMessageEncoderFactory(this.WriteEncoding, this.MaxReadPoolSize, this.MaxWritePoolSize, this.ReaderQuotas, this.ContentTypeMapper, this.CrossDomainScriptAccessEnabled);
+            return new WebMessageEncoderFactory(
+                this.WriteEncoding,
+                this.MaxReadPoolSize,
+                this.MaxWritePoolSize,
+                this.ReaderQuotas,
+                this.ContentTypeMapper,
+                this.CrossDomainScriptAccessEnabled
+            );
         }
 
         public override T GetProperty<T>(BindingContext context)
@@ -187,7 +187,7 @@ namespace System.ServiceModel.Channels
             }
             if (typeof(T) == typeof(XmlDictionaryReaderQuotas))
             {
-                return (T)(object) this.readerQuotas;
+                return (T)(object)this.readerQuotas;
             }
             else
             {
@@ -197,18 +197,38 @@ namespace System.ServiceModel.Channels
 
         void IWmiInstanceProvider.FillInstance(IWmiInstance wmiInstance)
         {
-            wmiInstance.SetProperty(AdministrationStrings.MessageVersion, this.MessageVersion.ToString());
+            wmiInstance.SetProperty(
+                AdministrationStrings.MessageVersion,
+                this.MessageVersion.ToString()
+            );
             wmiInstance.SetProperty(AdministrationStrings.Encoding, this.writeEncoding.WebName);
             wmiInstance.SetProperty(AdministrationStrings.MaxReadPoolSize, this.maxReadPoolSize);
             wmiInstance.SetProperty(AdministrationStrings.MaxWritePoolSize, this.maxWritePoolSize);
             if (this.ReaderQuotas != null)
             {
-                IWmiInstance readerQuotasInstance = wmiInstance.NewInstance(AdministrationStrings.XmlDictionaryReaderQuotas);
-                readerQuotasInstance.SetProperty(AdministrationStrings.MaxArrayLength, this.readerQuotas.MaxArrayLength);
-                readerQuotasInstance.SetProperty(AdministrationStrings.MaxBytesPerRead, this.readerQuotas.MaxBytesPerRead);
-                readerQuotasInstance.SetProperty(AdministrationStrings.MaxDepth, this.readerQuotas.MaxDepth);
-                readerQuotasInstance.SetProperty(AdministrationStrings.MaxNameTableCharCount, this.readerQuotas.MaxNameTableCharCount);
-                readerQuotasInstance.SetProperty(AdministrationStrings.MaxStringContentLength, this.readerQuotas.MaxStringContentLength);
+                IWmiInstance readerQuotasInstance = wmiInstance.NewInstance(
+                    AdministrationStrings.XmlDictionaryReaderQuotas
+                );
+                readerQuotasInstance.SetProperty(
+                    AdministrationStrings.MaxArrayLength,
+                    this.readerQuotas.MaxArrayLength
+                );
+                readerQuotasInstance.SetProperty(
+                    AdministrationStrings.MaxBytesPerRead,
+                    this.readerQuotas.MaxBytesPerRead
+                );
+                readerQuotasInstance.SetProperty(
+                    AdministrationStrings.MaxDepth,
+                    this.readerQuotas.MaxDepth
+                );
+                readerQuotasInstance.SetProperty(
+                    AdministrationStrings.MaxNameTableCharCount,
+                    this.readerQuotas.MaxNameTableCharCount
+                );
+                readerQuotasInstance.SetProperty(
+                    AdministrationStrings.MaxStringContentLength,
+                    this.readerQuotas.MaxStringContentLength
+                );
                 wmiInstance.SetProperty(AdministrationStrings.ReaderQuotas, readerQuotasInstance);
             }
         }
@@ -218,11 +238,15 @@ namespace System.ServiceModel.Channels
             return typeof(WebMessageEncodingBindingElement).Name;
         }
 
-        void IWsdlExportExtension.ExportContract(WsdlExporter exporter, WsdlContractConversionContext context)
-        {
-        }
+        void IWsdlExportExtension.ExportContract(
+            WsdlExporter exporter,
+            WsdlContractConversionContext context
+        ) { }
 
-        void IWsdlExportExtension.ExportEndpoint(WsdlExporter exporter, WsdlEndpointConversionContext context)
+        void IWsdlExportExtension.ExportEndpoint(
+            WsdlExporter exporter,
+            WsdlEndpointConversionContext context
+        )
         {
             if (context == null)
             {
@@ -259,7 +283,10 @@ namespace System.ServiceModel.Channels
             }
 
             // compare XmlDictionaryReaderQuotas
-            if (this.readerQuotas.MaxStringContentLength != other.ReaderQuotas.MaxStringContentLength)
+            if (
+                this.readerQuotas.MaxStringContentLength
+                != other.ReaderQuotas.MaxStringContentLength
+            )
             {
                 return false;
             }

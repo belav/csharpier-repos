@@ -26,7 +26,7 @@ namespace Microsoft.CodeAnalysis.Interactive
 {
     // This command handler must be invoked after the handlers specified in `Order` attribute
     // (those handlers also implement `ICommandHandler<PasteCommandArgs>`),
-    // because it will intercept the paste command and skip the rest of handlers in chain.  
+    // because it will intercept the paste command and skip the rest of handlers in chain.
     [Export(typeof(ICommandHandler))]
     [ContentType(ContentTypeNames.RoslynContentType)]
     [Name(PredefinedCommandHandlerNames.InteractivePaste)]
@@ -42,7 +42,8 @@ namespace Microsoft.CodeAnalysis.Interactive
         /// A data format used to tag the contents of the clipboard so that it's clear
         /// the data has been put in the clipboard by our editor
         /// </summary>
-        internal const string ClipboardLineBasedCutCopyTag = "VisualStudioEditorOperationsLineCutCopyClipboardTag";
+        internal const string ClipboardLineBasedCutCopyTag =
+            "VisualStudioEditorOperationsLineCutCopyClipboardTag";
 
         /// <summary>
         /// A data format used to tag the contents of the clipboard as a box selection.
@@ -60,7 +61,10 @@ namespace Microsoft.CodeAnalysis.Interactive
 
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public InteractivePasteCommandHandler(IEditorOperationsFactoryService editorOperationsFactoryService, ITextUndoHistoryRegistry textUndoHistoryRegistry)
+        public InteractivePasteCommandHandler(
+            IEditorOperationsFactoryService editorOperationsFactoryService,
+            ITextUndoHistoryRegistry textUndoHistoryRegistry
+        )
         {
             _editorOperationsFactoryService = editorOperationsFactoryService;
             _textUndoHistoryRegistry = textUndoHistoryRegistry;
@@ -70,8 +74,11 @@ namespace Microsoft.CodeAnalysis.Interactive
         public bool ExecuteCommand(PasteCommandArgs args, CommandExecutionContext context)
         {
             // InteractiveWindow handles pasting by itself, which including checks for buffer types, etc.
-            if (!args.TextView.TextBuffer.ContentType.IsOfType(PredefinedInteractiveContentTypes.InteractiveContentTypeName) &&
-                RoslynClipboard.ContainsData(InteractiveClipboardFormat.Tag))
+            if (
+                !args.TextView.TextBuffer.ContentType.IsOfType(
+                    PredefinedInteractiveContentTypes.InteractiveContentTypeName
+                ) && RoslynClipboard.ContainsData(InteractiveClipboardFormat.Tag)
+            )
             {
                 PasteInteractiveFormat(args.TextView);
                 return true;
@@ -82,10 +89,9 @@ namespace Microsoft.CodeAnalysis.Interactive
             }
         }
 
-        public CommandState GetCommandState(PasteCommandArgs args)
-            => CommandState.Unspecified;
+        public CommandState GetCommandState(PasteCommandArgs args) => CommandState.Unspecified;
 
-        [MethodImpl(MethodImplOptions.NoInlining)]  // Avoid loading InteractiveWindow unless necessary
+        [MethodImpl(MethodImplOptions.NoInlining)] // Avoid loading InteractiveWindow unless necessary
         private void PasteInteractiveFormat(ITextView textView)
         {
             var editorOperations = _editorOperationsFactoryService.GetEditorOperations(textView);
@@ -100,14 +106,18 @@ namespace Microsoft.CodeAnalysis.Interactive
             string text;
             try
             {
-                text = InteractiveClipboardFormat.Deserialize(RoslynClipboard.GetData(InteractiveClipboardFormat.Tag));
+                text = InteractiveClipboardFormat.Deserialize(
+                    RoslynClipboard.GetData(InteractiveClipboardFormat.Tag)
+                );
             }
             catch (InvalidDataException)
             {
                 text = "<bad clipboard data>";
             }
 
-            using var transaction = _textUndoHistoryRegistry.GetHistory(textView.TextBuffer).CreateTransaction(EditorFeaturesResources.Paste);
+            using var transaction = _textUndoHistoryRegistry
+                .GetHistory(textView.TextBuffer)
+                .CreateTransaction(EditorFeaturesResources.Paste);
             editorOperations.AddBeforeTextBufferChangePrimitive();
             if (dataHasLineCutCopyTag && textView.Selection.IsEmpty)
             {
@@ -117,10 +127,17 @@ namespace Microsoft.CodeAnalysis.Interactive
             else if (dataHasBoxCutCopyTag)
             {
                 // If the caret is on a blank line, treat this like a normal stream insertion
-                if (textView.Selection.IsEmpty && !HasNonWhiteSpaceCharacter(textView.Caret.Position.BufferPosition.GetContainingLine()))
+                if (
+                    textView.Selection.IsEmpty
+                    && !HasNonWhiteSpaceCharacter(
+                        textView.Caret.Position.BufferPosition.GetContainingLine()
+                    )
+                )
                 {
                     // trim the last newline before paste
-                    var trimmed = text.Remove(text.LastIndexOf(textView.Options.GetNewLineCharacter()));
+                    var trimmed = text.Remove(
+                        text.LastIndexOf(textView.Options.GetNewLineCharacter())
+                    );
                     editorOperations.InsertText(trimmed);
                 }
                 else
@@ -153,7 +170,7 @@ namespace Microsoft.CodeAnalysis.Interactive
             return false;
         }
 
-        // The mock clipboard used in tests will implement this interface 
+        // The mock clipboard used in tests will implement this interface
         internal interface IRoslynClipboard
         {
             bool ContainsData(string format);
@@ -165,14 +182,11 @@ namespace Microsoft.CodeAnalysis.Interactive
         // Maybe at some point we can elevate this class and interface so they could be shared among Roslyn code base.
         private class SystemClipboardWrapper : IRoslynClipboard
         {
-            public bool ContainsData(string format)
-                => Clipboard.ContainsData(format);
+            public bool ContainsData(string format) => Clipboard.ContainsData(format);
 
-            public object GetData(string format)
-                => Clipboard.GetData(format);
+            public object GetData(string format) => Clipboard.GetData(format);
 
-            public IDataObject GetDataObject()
-                => Clipboard.GetDataObject();
+            public IDataObject GetDataObject() => Clipboard.GetDataObject();
         }
     }
 }

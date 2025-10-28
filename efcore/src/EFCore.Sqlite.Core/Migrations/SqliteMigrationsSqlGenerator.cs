@@ -32,10 +32,9 @@ public class SqliteMigrationsSqlGenerator : MigrationsSqlGenerator
     /// <param name="migrationsAnnotations">Provider-specific Migrations annotations to use.</param>
     public SqliteMigrationsSqlGenerator(
         MigrationsSqlGeneratorDependencies dependencies,
-        IRelationalAnnotationProvider migrationsAnnotations)
-        : base(dependencies)
-    {
-    }
+        IRelationalAnnotationProvider migrationsAnnotations
+    )
+        : base(dependencies) { }
 
     /// <summary>
     ///     Generates commands from a list of operations.
@@ -47,22 +46,25 @@ public class SqliteMigrationsSqlGenerator : MigrationsSqlGenerator
     public override IReadOnlyList<MigrationCommand> Generate(
         IReadOnlyList<MigrationOperation> operations,
         IModel? model = null,
-        MigrationsSqlGenerationOptions options = MigrationsSqlGenerationOptions.Default)
-        => base.Generate(RewriteOperations(operations, model), model, options);
+        MigrationsSqlGenerationOptions options = MigrationsSqlGenerationOptions.Default
+    ) => base.Generate(RewriteOperations(operations, model), model, options);
 
-    private bool IsSpatialiteColumn(AddColumnOperation operation, IModel? model)
-        => SqliteTypeMappingSource.IsSpatialiteType(
+    private bool IsSpatialiteColumn(AddColumnOperation operation, IModel? model) =>
+        SqliteTypeMappingSource.IsSpatialiteType(
             operation.ColumnType
-            ?? GetColumnType(
-                operation.Schema,
-                operation.Table,
-                operation.Name,
-                operation,
-                model)!);
+                ?? GetColumnType(
+                    operation.Schema,
+                    operation.Table,
+                    operation.Name,
+                    operation,
+                    model
+                )!
+        );
 
     private IReadOnlyList<MigrationOperation> RewriteOperations(
         IReadOnlyList<MigrationOperation> migrationOperations,
-        IModel? model)
+        IModel? model
+    )
     {
         var operations = new List<MigrationOperation>();
         var rebuilds = new Dictionary<(string Table, string? Schema), RebuildContext>();
@@ -80,7 +82,9 @@ public class SqliteMigrationsSqlGenerator : MigrationsSqlGenerator
                 case DropUniqueConstraintOperation:
                 {
                     var tableOperation = (ITableMigrationOperation)operation;
-                    var rebuild = rebuilds.GetOrAddNew((tableOperation.Table, tableOperation.Schema));
+                    var rebuild = rebuilds.GetOrAddNew(
+                        (tableOperation.Table, tableOperation.Schema)
+                    );
                     rebuild.OperationsToReplace.Add(operation);
 
                     operations.Add(operation);
@@ -90,7 +94,9 @@ public class SqliteMigrationsSqlGenerator : MigrationsSqlGenerator
 
                 case DropColumnOperation dropColumnOperation:
                 {
-                    var rebuild = rebuilds.GetOrAddNew((dropColumnOperation.Table, dropColumnOperation.Schema));
+                    var rebuild = rebuilds.GetOrAddNew(
+                        (dropColumnOperation.Table, dropColumnOperation.Schema)
+                    );
                     rebuild.OperationsToReplace.Add(dropColumnOperation);
                     rebuild.DropColumnsDeferred.Add(dropColumnOperation.Name);
 
@@ -111,7 +117,9 @@ public class SqliteMigrationsSqlGenerator : MigrationsSqlGenerator
                     }
                     else
                     {
-                        var rebuild = rebuilds.GetOrAddNew((foreignKeyOperation.Table, foreignKeyOperation.Schema));
+                        var rebuild = rebuilds.GetOrAddNew(
+                            (foreignKeyOperation.Table, foreignKeyOperation.Schema)
+                        );
                         rebuild.OperationsToReplace.Add(foreignKeyOperation);
 
                         operations.Add(foreignKeyOperation);
@@ -122,9 +130,14 @@ public class SqliteMigrationsSqlGenerator : MigrationsSqlGenerator
 
                 case AlterColumnOperation alterColumnOperation:
                 {
-                    var rebuild = rebuilds.GetOrAddNew((alterColumnOperation.Table, alterColumnOperation.Schema));
+                    var rebuild = rebuilds.GetOrAddNew(
+                        (alterColumnOperation.Table, alterColumnOperation.Schema)
+                    );
                     rebuild.OperationsToReplace.Add(alterColumnOperation);
-                    rebuild.AlterColumnsDeferred.Add(alterColumnOperation.Name, alterColumnOperation);
+                    rebuild.AlterColumnsDeferred.Add(
+                        alterColumnOperation.Name,
+                        alterColumnOperation
+                    );
 
                     operations.Add(alterColumnOperation);
 
@@ -133,9 +146,20 @@ public class SqliteMigrationsSqlGenerator : MigrationsSqlGenerator
 
                 case CreateIndexOperation createIndexOperation:
                 {
-                    if (rebuilds.TryGetValue((createIndexOperation.Table, createIndexOperation.Schema), out var rebuild)
-                        && (rebuild.AddColumnsDeferred.Keys.Intersect(createIndexOperation.Columns).Any()
-                            || rebuild.RenameColumnsDeferred.Keys.Intersect(createIndexOperation.Columns).Any()))
+                    if (
+                        rebuilds.TryGetValue(
+                            (createIndexOperation.Table, createIndexOperation.Schema),
+                            out var rebuild
+                        )
+                        && (
+                            rebuild
+                                .AddColumnsDeferred.Keys.Intersect(createIndexOperation.Columns)
+                                .Any()
+                            || rebuild
+                                .RenameColumnsDeferred.Keys.Intersect(createIndexOperation.Columns)
+                                .Any()
+                        )
+                    )
                     {
                         rebuild.OperationsToReplace.Add(createIndexOperation);
                         rebuild.CreateIndexesDeferred.Add(createIndexOperation.Name);
@@ -148,10 +172,15 @@ public class SqliteMigrationsSqlGenerator : MigrationsSqlGenerator
 
                 case RenameIndexOperation renameIndexOperation:
                 {
-                    var index = renameIndexOperation.Table != null
-                        ? model?.GetRelationalModel().FindTable(renameIndexOperation.Table, renameIndexOperation.Schema)
-                            ?.Indexes.FirstOrDefault(i => i.Name == renameIndexOperation.NewName)
-                        : null;
+                    var index =
+                        renameIndexOperation.Table != null
+                            ? model
+                                ?.GetRelationalModel()
+                                .FindTable(renameIndexOperation.Table, renameIndexOperation.Schema)
+                                ?.Indexes.FirstOrDefault(i =>
+                                    i.Name == renameIndexOperation.NewName
+                                )
+                            : null;
                     if (index != null)
                     {
                         operations.Add(
@@ -159,8 +188,9 @@ public class SqliteMigrationsSqlGenerator : MigrationsSqlGenerator
                             {
                                 Table = renameIndexOperation.Table,
                                 Schema = renameIndexOperation.Schema,
-                                Name = renameIndexOperation.Name
-                            });
+                                Name = renameIndexOperation.Name,
+                            }
+                        );
 
                         operations.Add(CreateIndexOperation.CreateFrom(index));
                     }
@@ -174,8 +204,12 @@ public class SqliteMigrationsSqlGenerator : MigrationsSqlGenerator
 
                 case AddColumnOperation addColumnOperation:
                 {
-                    if (rebuilds.TryGetValue((addColumnOperation.Table, addColumnOperation.Schema), out var rebuild)
-                        && rebuild.DropColumnsDeferred.Contains(addColumnOperation.Name))
+                    if (
+                        rebuilds.TryGetValue(
+                            (addColumnOperation.Table, addColumnOperation.Schema),
+                            out var rebuild
+                        ) && rebuild.DropColumnsDeferred.Contains(addColumnOperation.Name)
+                    )
                     {
                         rebuild.OperationsToReplace.Add(addColumnOperation);
                         rebuild.AddColumnsDeferred.Add(addColumnOperation.Name, addColumnOperation);
@@ -192,13 +226,21 @@ public class SqliteMigrationsSqlGenerator : MigrationsSqlGenerator
 
                 case RenameColumnOperation renameColumnOperation:
                 {
-                    if (rebuilds.TryGetValue((renameColumnOperation.Table, renameColumnOperation.Schema), out var rebuild))
+                    if (
+                        rebuilds.TryGetValue(
+                            (renameColumnOperation.Table, renameColumnOperation.Schema),
+                            out var rebuild
+                        )
+                    )
                     {
                         if (rebuild.DropColumnsDeferred.Contains(renameColumnOperation.NewName))
                         {
                             rebuild.OperationsToReplace.Add(renameColumnOperation);
                             rebuild.DropColumnsDeferred.Add(renameColumnOperation.Name);
-                            rebuild.RenameColumnsDeferred.Add(renameColumnOperation.NewName, renameColumnOperation);
+                            rebuild.RenameColumnsDeferred.Add(
+                                renameColumnOperation.NewName,
+                                renameColumnOperation
+                            );
                         }
                     }
 
@@ -209,10 +251,20 @@ public class SqliteMigrationsSqlGenerator : MigrationsSqlGenerator
 
                 case RenameTableOperation renameTableOperation:
                 {
-                    if (rebuilds.Remove((renameTableOperation.Name, renameTableOperation.Schema), out var rebuild))
+                    if (
+                        rebuilds.Remove(
+                            (renameTableOperation.Name, renameTableOperation.Schema),
+                            out var rebuild
+                        )
+                    )
                     {
                         rebuilds.Add(
-                            (renameTableOperation.NewName ?? renameTableOperation.Name, renameTableOperation.NewSchema), rebuild);
+                            (
+                                renameTableOperation.NewName ?? renameTableOperation.Name,
+                                renameTableOperation.NewSchema
+                            ),
+                            rebuild
+                        );
                     }
 
                     operations.Add(renameTableOperation);
@@ -241,7 +293,12 @@ public class SqliteMigrationsSqlGenerator : MigrationsSqlGenerator
                 case UpdateDataOperation:
                 {
                     var tableOperation = (ITableMigrationOperation)operation;
-                    if (rebuilds.TryGetValue((tableOperation.Table, tableOperation.Schema), out var rebuild))
+                    if (
+                        rebuilds.TryGetValue(
+                            (tableOperation.Table, tableOperation.Schema),
+                            out var rebuild
+                        )
+                    )
                     {
                         rebuild.OperationsToWarnFor.Add(operation);
                     }
@@ -281,7 +338,10 @@ public class SqliteMigrationsSqlGenerator : MigrationsSqlGenerator
             {
                 // TODO: Consider warning once per table--list all operation types we're warning for
                 // TODO: Consider listing which operations required a rebuild
-                Dependencies.MigrationsLogger.TableRebuildPendingWarning(operationToWarnFor.GetType(), table.Name);
+                Dependencies.MigrationsLogger.TableRebuildPendingWarning(
+                    operationToWarnFor.GetType(),
+                    table.Name
+                );
             }
 
             foreach (var operationToReplace in rebuildContext.OperationsToReplace)
@@ -293,7 +353,7 @@ public class SqliteMigrationsSqlGenerator : MigrationsSqlGenerator
             {
                 Name = "ef_temp_" + table.Name,
                 Schema = table.Schema,
-                Comment = table.Comment
+                Comment = table.Comment,
             };
 
             var primaryKey = table.PrimaryKey;
@@ -302,8 +362,12 @@ public class SqliteMigrationsSqlGenerator : MigrationsSqlGenerator
                 createTableOperation.PrimaryKey = AddPrimaryKeyOperation.CreateFrom(primaryKey);
             }
 
-            foreach (var column in table.Columns.Where(c => c.Order.HasValue).OrderBy(c => c.Order!.Value)
-                         .Concat(table.Columns.Where(c => !c.Order.HasValue)))
+            foreach (
+                var column in table
+                    .Columns.Where(c => c.Order.HasValue)
+                    .OrderBy(c => c.Order!.Value)
+                    .Concat(table.Columns.Where(c => !c.Order.HasValue))
+            )
             {
                 if (!column.TryGetDefaultValue(out var defaultValue))
                 {
@@ -315,8 +379,11 @@ public class SqliteMigrationsSqlGenerator : MigrationsSqlGenerator
                     Name = column.Name,
                     ColumnType = column.StoreType,
                     IsNullable = column.IsNullable,
-                    DefaultValue = rebuildContext.AddColumnsDeferred.TryGetValue(column.Name, out var originalOperation)
-                        && !originalOperation.IsNullable
+                    DefaultValue =
+                        rebuildContext.AddColumnsDeferred.TryGetValue(
+                            column.Name,
+                            out var originalOperation
+                        ) && !originalOperation.IsNullable
                             ? originalOperation.DefaultValue
                             : defaultValue,
                     DefaultValueSql = column.DefaultValueSql,
@@ -324,7 +391,7 @@ public class SqliteMigrationsSqlGenerator : MigrationsSqlGenerator
                     IsStored = column.IsStored,
                     Comment = column.Comment,
                     Collation = column.Collation,
-                    Table = createTableOperation.Name
+                    Table = createTableOperation.Name,
                 };
                 addColumnOperation.AddAnnotations(column.GetAnnotations());
                 createTableOperation.Columns.Add(addColumnOperation);
@@ -335,14 +402,20 @@ public class SqliteMigrationsSqlGenerator : MigrationsSqlGenerator
                 createTableOperation.ForeignKeys.Add(AddForeignKeyOperation.CreateFrom(foreignKey));
             }
 
-            foreach (var uniqueConstraint in table.UniqueConstraints.Where(c => !c.GetIsPrimaryKey()))
+            foreach (
+                var uniqueConstraint in table.UniqueConstraints.Where(c => !c.GetIsPrimaryKey())
+            )
             {
-                createTableOperation.UniqueConstraints.Add(AddUniqueConstraintOperation.CreateFrom(uniqueConstraint));
+                createTableOperation.UniqueConstraints.Add(
+                    AddUniqueConstraintOperation.CreateFrom(uniqueConstraint)
+                );
             }
 
             foreach (var checkConstraint in table.CheckConstraints)
             {
-                createTableOperation.CheckConstraints.Add(AddCheckConstraintOperation.CreateFrom(checkConstraint));
+                createTableOperation.CheckConstraints.Add(
+                    AddCheckConstraintOperation.CreateFrom(checkConstraint)
+                );
             }
 
             createTableOperation.AddAnnotations(table.GetAnnotations());
@@ -367,8 +440,10 @@ public class SqliteMigrationsSqlGenerator : MigrationsSqlGenerator
             var first = true;
             foreach (var column in table.Columns)
             {
-                if (column.ComputedColumnSql != null
-                    || rebuildContext.AddColumnsDeferred.ContainsKey(column.Name))
+                if (
+                    column.ComputedColumnSql != null
+                    || rebuildContext.AddColumnsDeferred.ContainsKey(column.Name)
+                )
                 {
                     continue;
                 }
@@ -385,8 +460,11 @@ public class SqliteMigrationsSqlGenerator : MigrationsSqlGenerator
 
                 intoBuilder.Append(Dependencies.SqlGenerationHelper.DelimitIdentifier(column.Name));
 
-                var defaultValue = rebuildContext.AlterColumnsDeferred.TryGetValue(column.Name, out var alterColumnOperation)
-                    && alterColumnOperation is { IsNullable: false, OldColumn.IsNullable: true }
+                var defaultValue =
+                    rebuildContext.AlterColumnsDeferred.TryGetValue(
+                        column.Name,
+                        out var alterColumnOperation
+                    ) && alterColumnOperation is { IsNullable: false, OldColumn.IsNullable: true }
                         ? alterColumnOperation.DefaultValue
                         : null;
                 if (defaultValue != null)
@@ -396,16 +474,26 @@ public class SqliteMigrationsSqlGenerator : MigrationsSqlGenerator
 
                 selectBuilder.Append(
                     Dependencies.SqlGenerationHelper.DelimitIdentifier(
-                        rebuildContext.RenameColumnsDeferred.TryGetValue(column.Name, out var renameColumnOperation)
+                        rebuildContext.RenameColumnsDeferred.TryGetValue(
+                            column.Name,
+                            out var renameColumnOperation
+                        )
                             ? renameColumnOperation.Name
-                            : column.Name));
+                            : column.Name
+                    )
+                );
 
                 if (defaultValue != null)
                 {
-                    var defaultValueTypeMapping = (column.StoreType == null
-                            ? null
-                            : Dependencies.TypeMappingSource.FindMapping(defaultValue.GetType(), column.StoreType))
-                        ?? Dependencies.TypeMappingSource.GetMappingForValue(defaultValue);
+                    var defaultValueTypeMapping =
+                        (
+                            column.StoreType == null
+                                ? null
+                                : Dependencies.TypeMappingSource.FindMapping(
+                                    defaultValue.GetType(),
+                                    column.StoreType
+                                )
+                        ) ?? Dependencies.TypeMappingSource.GetMappingForValue(defaultValue);
 
                     selectBuilder
                         .Append(", ")
@@ -419,7 +507,11 @@ public class SqliteMigrationsSqlGenerator : MigrationsSqlGenerator
                 {
                     Sql = new StringBuilder()
                         .Append("INSERT INTO ")
-                        .Append(Dependencies.SqlGenerationHelper.DelimitIdentifier(createTableOperation.Name))
+                        .Append(
+                            Dependencies.SqlGenerationHelper.DelimitIdentifier(
+                                createTableOperation.Name
+                            )
+                        )
                         .Append(" (")
                         .Append(intoBuilder)
                         .AppendLine(")")
@@ -429,8 +521,9 @@ public class SqliteMigrationsSqlGenerator : MigrationsSqlGenerator
                         .Append("FROM ")
                         .Append(Dependencies.SqlGenerationHelper.DelimitIdentifier(table.Name))
                         .Append(Dependencies.SqlGenerationHelper.StatementTerminator)
-                        .ToString()
-                });
+                        .ToString(),
+                }
+            );
         }
 
         foreach (var skippedRebuild in skippedRebuilds)
@@ -441,27 +534,29 @@ public class SqliteMigrationsSqlGenerator : MigrationsSqlGenerator
         if (rebuilds.Any())
         {
             operations.Add(
-                new SqlOperation { Sql = "PRAGMA foreign_keys = 0;", SuppressTransaction = true });
+                new SqlOperation { Sql = "PRAGMA foreign_keys = 0;", SuppressTransaction = true }
+            );
         }
 
         foreach (var ((table, schema), _) in rebuilds)
         {
-            operations.Add(
-                new DropTableOperation { Name = table, Schema = schema });
+            operations.Add(new DropTableOperation { Name = table, Schema = schema });
             operations.Add(
                 new RenameTableOperation
                 {
                     Name = "ef_temp_" + table,
                     Schema = schema,
                     NewName = table,
-                    NewSchema = schema
-                });
+                    NewSchema = schema,
+                }
+            );
         }
 
         if (rebuilds.Any())
         {
             operations.Add(
-                new SqlOperation { Sql = "PRAGMA foreign_keys = 1;", SuppressTransaction = true });
+                new SqlOperation { Sql = "PRAGMA foreign_keys = 1;", SuppressTransaction = true }
+            );
         }
 
         foreach (var index in indexesToRebuild)
@@ -479,10 +574,16 @@ public class SqliteMigrationsSqlGenerator : MigrationsSqlGenerator
     /// <param name="operation">The operation.</param>
     /// <param name="model">The target model which may be <see langword="null" /> if the operations exist without a model.</param>
     /// <param name="builder">The command builder to use to build the commands.</param>
-    protected override void Generate(AlterDatabaseOperation operation, IModel? model, MigrationCommandListBuilder builder)
+    protected override void Generate(
+        AlterDatabaseOperation operation,
+        IModel? model,
+        MigrationCommandListBuilder builder
+    )
     {
-        if (operation[SqliteAnnotationNames.InitSpatialMetaData] as bool? != true
-            || operation.OldDatabase[SqliteAnnotationNames.InitSpatialMetaData] as bool? == true)
+        if (
+            operation[SqliteAnnotationNames.InitSpatialMetaData] as bool? != true
+            || operation.OldDatabase[SqliteAnnotationNames.InitSpatialMetaData] as bool? == true
+        )
         {
             return;
         }
@@ -501,7 +602,12 @@ public class SqliteMigrationsSqlGenerator : MigrationsSqlGenerator
     /// <param name="model">The target model which may be <see langword="null" /> if the operations exist without a model.</param>
     /// <param name="builder">The command builder to use to build the commands.</param>
     /// <param name="terminate">Indicates whether or not to terminate the command after generating SQL for the operation.</param>
-    protected override void Generate(AddColumnOperation operation, IModel? model, MigrationCommandListBuilder builder, bool terminate)
+    protected override void Generate(
+        AddColumnOperation operation,
+        IModel? model,
+        MigrationCommandListBuilder builder,
+        bool terminate
+    )
     {
         if (!IsSpatialiteColumn(operation, model))
         {
@@ -515,13 +621,9 @@ public class SqliteMigrationsSqlGenerator : MigrationsSqlGenerator
 
         var srid = operation[SqliteAnnotationNames.Srid] as int? ?? 0;
 
-        var geometryType = operation.ColumnType
-            ?? GetColumnType(
-                operation.Schema,
-                operation.Table,
-                operation.Name,
-                operation,
-                model);
+        var geometryType =
+            operation.ColumnType
+            ?? GetColumnType(operation.Schema, operation.Table, operation.Name, operation, model);
 
         builder
             .Append("SELECT AddGeometryColumn(")
@@ -559,7 +661,8 @@ public class SqliteMigrationsSqlGenerator : MigrationsSqlGenerator
         DropIndexOperation operation,
         IModel? model,
         MigrationCommandListBuilder builder,
-        bool terminate)
+        bool terminate
+    )
     {
         builder
             .Append("DROP INDEX ")
@@ -567,9 +670,7 @@ public class SqliteMigrationsSqlGenerator : MigrationsSqlGenerator
 
         if (terminate)
         {
-            builder
-                .AppendLine(Dependencies.SqlGenerationHelper.StatementTerminator)
-                .EndCommand();
+            builder.AppendLine(Dependencies.SqlGenerationHelper.StatementTerminator).EndCommand();
         }
     }
 
@@ -580,9 +681,14 @@ public class SqliteMigrationsSqlGenerator : MigrationsSqlGenerator
     /// <param name="operation">The operation.</param>
     /// <param name="model">The target model which may be <see langword="null" /> if the operations exist without a model.</param>
     /// <param name="builder">The command builder to use to build the commands.</param>
-    protected override void Generate(RenameIndexOperation operation, IModel? model, MigrationCommandListBuilder builder)
-        => throw new NotSupportedException(
-            SqliteStrings.InvalidMigrationOperation(operation.GetType().ShortDisplayName()));
+    protected override void Generate(
+        RenameIndexOperation operation,
+        IModel? model,
+        MigrationCommandListBuilder builder
+    ) =>
+        throw new NotSupportedException(
+            SqliteStrings.InvalidMigrationOperation(operation.GetType().ShortDisplayName())
+        );
 
     /// <summary>
     ///     Builds commands for the given <see cref="RenameTableOperation" />
@@ -591,10 +697,13 @@ public class SqliteMigrationsSqlGenerator : MigrationsSqlGenerator
     /// <param name="operation">The operation.</param>
     /// <param name="model">The target model which may be <see langword="null" /> if the operations exist without a model.</param>
     /// <param name="builder">The command builder to use to build the commands.</param>
-    protected override void Generate(RenameTableOperation operation, IModel? model, MigrationCommandListBuilder builder)
+    protected override void Generate(
+        RenameTableOperation operation,
+        IModel? model,
+        MigrationCommandListBuilder builder
+    )
     {
-        if (operation.NewName != null
-            && operation.NewName != operation.Name)
+        if (operation.NewName != null && operation.NewName != operation.Name)
         {
             builder
                 .Append("ALTER TABLE ")
@@ -613,8 +722,12 @@ public class SqliteMigrationsSqlGenerator : MigrationsSqlGenerator
     /// <param name="operation">The operation.</param>
     /// <param name="model">The target model which may be <see langword="null" /> if the operations exist without a model.</param>
     /// <param name="builder">The command builder to use to build the commands.</param>
-    protected override void Generate(RenameColumnOperation operation, IModel? model, MigrationCommandListBuilder builder)
-        => builder
+    protected override void Generate(
+        RenameColumnOperation operation,
+        IModel? model,
+        MigrationCommandListBuilder builder
+    ) =>
+        builder
             .Append("ALTER TABLE ")
             .Append(Dependencies.SqlGenerationHelper.DelimitIdentifier(operation.Table))
             .Append(" RENAME COLUMN ")
@@ -636,7 +749,8 @@ public class SqliteMigrationsSqlGenerator : MigrationsSqlGenerator
         CreateTableOperation operation,
         IModel? model,
         MigrationCommandListBuilder builder,
-        bool terminate = true)
+        bool terminate = true
+    )
     {
         var spatialiteColumns = new Stack<AddColumnOperation>();
         for (var i = operation.Columns.Count - 1; i >= 0; i--)
@@ -654,13 +768,18 @@ public class SqliteMigrationsSqlGenerator : MigrationsSqlGenerator
         // This handles the quirks of creating integer primary keys using autoincrement, not default rowid behavior.
         if (operation.PrimaryKey?.Columns.Length == 1)
         {
-            var columnOp = operation.Columns.FirstOrDefault(o => o.Name == operation.PrimaryKey.Columns[0]);
+            var columnOp = operation.Columns.FirstOrDefault(o =>
+                o.Name == operation.PrimaryKey.Columns[0]
+            );
             if (columnOp != null)
             {
                 columnOp.AddAnnotation(SqliteAnnotationNames.InlinePrimaryKey, true);
                 if (!string.IsNullOrEmpty(operation.PrimaryKey.Name))
                 {
-                    columnOp.AddAnnotation(SqliteAnnotationNames.InlinePrimaryKeyName, operation.PrimaryKey.Name);
+                    columnOp.AddAnnotation(
+                        SqliteAnnotationNames.InlinePrimaryKeyName,
+                        operation.PrimaryKey.Name
+                    );
                 }
 
                 operation.PrimaryKey = null;
@@ -669,7 +788,9 @@ public class SqliteMigrationsSqlGenerator : MigrationsSqlGenerator
 
         builder
             .Append("CREATE TABLE ")
-            .Append(Dependencies.SqlGenerationHelper.DelimitIdentifier(operation.Name, operation.Schema))
+            .Append(
+                Dependencies.SqlGenerationHelper.DelimitIdentifier(operation.Name, operation.Schema)
+            )
             .AppendLine(" (");
 
         using (builder.Indent())
@@ -677,7 +798,9 @@ public class SqliteMigrationsSqlGenerator : MigrationsSqlGenerator
             if (!string.IsNullOrEmpty(operation.Comment))
             {
                 builder
-                    .AppendLines(Dependencies.SqlGenerationHelper.GenerateComment(operation.Comment))
+                    .AppendLines(
+                        Dependencies.SqlGenerationHelper.GenerateComment(operation.Comment)
+                    )
                     .AppendLine();
             }
 
@@ -713,7 +836,8 @@ public class SqliteMigrationsSqlGenerator : MigrationsSqlGenerator
     protected override void CreateTableColumns(
         CreateTableOperation operation,
         IModel? model,
-        MigrationCommandListBuilder builder)
+        MigrationCommandListBuilder builder
+    )
     {
         if (operation.Columns.All(c => string.IsNullOrEmpty(c.Comment)))
         {
@@ -728,7 +852,8 @@ public class SqliteMigrationsSqlGenerator : MigrationsSqlGenerator
     private void CreateTableColumnsWithComments(
         CreateTableOperation operation,
         IModel? model,
-        MigrationCommandListBuilder builder)
+        MigrationCommandListBuilder builder
+    )
     {
         for (var i = 0; i < operation.Columns.Count; i++)
         {
@@ -741,7 +866,9 @@ public class SqliteMigrationsSqlGenerator : MigrationsSqlGenerator
 
             if (!string.IsNullOrEmpty(column.Comment))
             {
-                builder.AppendLines(Dependencies.SqlGenerationHelper.GenerateComment(column.Comment));
+                builder.AppendLines(
+                    Dependencies.SqlGenerationHelper.GenerateComment(column.Comment)
+                );
             }
 
             ColumnDefinition(column, model, builder);
@@ -768,15 +895,15 @@ public class SqliteMigrationsSqlGenerator : MigrationsSqlGenerator
         string name,
         ColumnOperation operation,
         IModel? model,
-        MigrationCommandListBuilder builder)
+        MigrationCommandListBuilder builder
+    )
     {
         base.ColumnDefinition(schema, table, name, operation, model, builder);
 
         var inlinePk = operation[SqliteAnnotationNames.InlinePrimaryKey] as bool?;
         if (inlinePk == true)
         {
-            var inlinePkName = operation[
-                SqliteAnnotationNames.InlinePrimaryKeyName] as string;
+            var inlinePkName = operation[SqliteAnnotationNames.InlinePrimaryKeyName] as string;
             if (!string.IsNullOrEmpty(inlinePkName))
             {
                 builder
@@ -785,7 +912,8 @@ public class SqliteMigrationsSqlGenerator : MigrationsSqlGenerator
             }
 
             builder.Append(" PRIMARY KEY");
-            var autoincrement = operation[SqliteAnnotationNames.Autoincrement] as bool?
+            var autoincrement =
+                operation[SqliteAnnotationNames.Autoincrement] as bool?
                 // NB: Migrations scaffolded with version 1.0.0 don't have the prefix. See #6461
                 ?? operation[SqliteAnnotationNames.LegacyAutoincrement] as bool?;
             if (autoincrement == true)
@@ -809,9 +937,11 @@ public class SqliteMigrationsSqlGenerator : MigrationsSqlGenerator
         AddForeignKeyOperation operation,
         IModel? model,
         MigrationCommandListBuilder builder,
-        bool terminate = true)
-        => throw new NotSupportedException(
-            SqliteStrings.InvalidMigrationOperation(operation.GetType().ShortDisplayName()));
+        bool terminate = true
+    ) =>
+        throw new NotSupportedException(
+            SqliteStrings.InvalidMigrationOperation(operation.GetType().ShortDisplayName())
+        );
 
     /// <summary>
     ///     Throws <see cref="NotSupportedException" /> since this operation requires table rebuilds, which
@@ -825,9 +955,11 @@ public class SqliteMigrationsSqlGenerator : MigrationsSqlGenerator
         AddPrimaryKeyOperation operation,
         IModel? model,
         MigrationCommandListBuilder builder,
-        bool terminate = true)
-        => throw new NotSupportedException(
-            SqliteStrings.InvalidMigrationOperation(operation.GetType().ShortDisplayName()));
+        bool terminate = true
+    ) =>
+        throw new NotSupportedException(
+            SqliteStrings.InvalidMigrationOperation(operation.GetType().ShortDisplayName())
+        );
 
     /// <summary>
     ///     Throws <see cref="NotSupportedException" /> since this operation requires table rebuilds, which
@@ -836,9 +968,14 @@ public class SqliteMigrationsSqlGenerator : MigrationsSqlGenerator
     /// <param name="operation">The operation.</param>
     /// <param name="model">The target model which may be <see langword="null" /> if the operations exist without a model.</param>
     /// <param name="builder">The command builder to use to build the commands.</param>
-    protected override void Generate(AddUniqueConstraintOperation operation, IModel? model, MigrationCommandListBuilder builder)
-        => throw new NotSupportedException(
-            SqliteStrings.InvalidMigrationOperation(operation.GetType().ShortDisplayName()));
+    protected override void Generate(
+        AddUniqueConstraintOperation operation,
+        IModel? model,
+        MigrationCommandListBuilder builder
+    ) =>
+        throw new NotSupportedException(
+            SqliteStrings.InvalidMigrationOperation(operation.GetType().ShortDisplayName())
+        );
 
     /// <summary>
     ///     Throws <see cref="NotSupportedException" /> since this operation requires table rebuilds, which
@@ -847,9 +984,14 @@ public class SqliteMigrationsSqlGenerator : MigrationsSqlGenerator
     /// <param name="operation">The operation.</param>
     /// <param name="model">The target model which may be <see langword="null" /> if the operations exist without a model.</param>
     /// <param name="builder">The command builder to use to build the commands.</param>
-    protected override void Generate(AddCheckConstraintOperation operation, IModel? model, MigrationCommandListBuilder builder)
-        => throw new NotSupportedException(
-            SqliteStrings.InvalidMigrationOperation(operation.GetType().ShortDisplayName()));
+    protected override void Generate(
+        AddCheckConstraintOperation operation,
+        IModel? model,
+        MigrationCommandListBuilder builder
+    ) =>
+        throw new NotSupportedException(
+            SqliteStrings.InvalidMigrationOperation(operation.GetType().ShortDisplayName())
+        );
 
     /// <summary>
     ///     Throws <see cref="NotSupportedException" /> since this operation requires table rebuilds, which
@@ -863,9 +1005,11 @@ public class SqliteMigrationsSqlGenerator : MigrationsSqlGenerator
         DropColumnOperation operation,
         IModel? model,
         MigrationCommandListBuilder builder,
-        bool terminate = true)
-        => throw new NotSupportedException(
-            SqliteStrings.InvalidMigrationOperation(operation.GetType().ShortDisplayName()));
+        bool terminate = true
+    ) =>
+        throw new NotSupportedException(
+            SqliteStrings.InvalidMigrationOperation(operation.GetType().ShortDisplayName())
+        );
 
     /// <summary>
     ///     Throws <see cref="NotSupportedException" /> since this operation requires table rebuilds, which
@@ -879,9 +1023,11 @@ public class SqliteMigrationsSqlGenerator : MigrationsSqlGenerator
         DropForeignKeyOperation operation,
         IModel? model,
         MigrationCommandListBuilder builder,
-        bool terminate = true)
-        => throw new NotSupportedException(
-            SqliteStrings.InvalidMigrationOperation(operation.GetType().ShortDisplayName()));
+        bool terminate = true
+    ) =>
+        throw new NotSupportedException(
+            SqliteStrings.InvalidMigrationOperation(operation.GetType().ShortDisplayName())
+        );
 
     /// <summary>
     ///     Throws <see cref="NotSupportedException" /> since this operation requires table rebuilds, which
@@ -895,9 +1041,11 @@ public class SqliteMigrationsSqlGenerator : MigrationsSqlGenerator
         DropPrimaryKeyOperation operation,
         IModel? model,
         MigrationCommandListBuilder builder,
-        bool terminate = true)
-        => throw new NotSupportedException(
-            SqliteStrings.InvalidMigrationOperation(operation.GetType().ShortDisplayName()));
+        bool terminate = true
+    ) =>
+        throw new NotSupportedException(
+            SqliteStrings.InvalidMigrationOperation(operation.GetType().ShortDisplayName())
+        );
 
     /// <summary>
     ///     Throws <see cref="NotSupportedException" /> since this operation requires table rebuilds, which
@@ -906,9 +1054,14 @@ public class SqliteMigrationsSqlGenerator : MigrationsSqlGenerator
     /// <param name="operation">The operation.</param>
     /// <param name="model">The target model which may be <see langword="null" /> if the operations exist without a model.</param>
     /// <param name="builder">The command builder to use to build the commands.</param>
-    protected override void Generate(DropUniqueConstraintOperation operation, IModel? model, MigrationCommandListBuilder builder)
-        => throw new NotSupportedException(
-            SqliteStrings.InvalidMigrationOperation(operation.GetType().ShortDisplayName()));
+    protected override void Generate(
+        DropUniqueConstraintOperation operation,
+        IModel? model,
+        MigrationCommandListBuilder builder
+    ) =>
+        throw new NotSupportedException(
+            SqliteStrings.InvalidMigrationOperation(operation.GetType().ShortDisplayName())
+        );
 
     /// <summary>
     ///     Throws <see cref="NotSupportedException" /> since this operation requires table rebuilds, which
@@ -917,9 +1070,14 @@ public class SqliteMigrationsSqlGenerator : MigrationsSqlGenerator
     /// <param name="operation">The operation.</param>
     /// <param name="model">The target model which may be <see langword="null" /> if the operations exist without a model.</param>
     /// <param name="builder">The command builder to use to build the commands.</param>
-    protected override void Generate(DropCheckConstraintOperation operation, IModel? model, MigrationCommandListBuilder builder)
-        => throw new NotSupportedException(
-            SqliteStrings.InvalidMigrationOperation(operation.GetType().ShortDisplayName()));
+    protected override void Generate(
+        DropCheckConstraintOperation operation,
+        IModel? model,
+        MigrationCommandListBuilder builder
+    ) =>
+        throw new NotSupportedException(
+            SqliteStrings.InvalidMigrationOperation(operation.GetType().ShortDisplayName())
+        );
 
     /// <summary>
     ///     Throws <see cref="NotSupportedException" /> since this operation requires table rebuilds, which
@@ -928,9 +1086,14 @@ public class SqliteMigrationsSqlGenerator : MigrationsSqlGenerator
     /// <param name="operation">The operation.</param>
     /// <param name="model">The target model which may be <see langword="null" /> if the operations exist without a model.</param>
     /// <param name="builder">The command builder to use to build the commands.</param>
-    protected override void Generate(AlterColumnOperation operation, IModel? model, MigrationCommandListBuilder builder)
-        => throw new NotSupportedException(
-            SqliteStrings.InvalidMigrationOperation(operation.GetType().ShortDisplayName()));
+    protected override void Generate(
+        AlterColumnOperation operation,
+        IModel? model,
+        MigrationCommandListBuilder builder
+    ) =>
+        throw new NotSupportedException(
+            SqliteStrings.InvalidMigrationOperation(operation.GetType().ShortDisplayName())
+        );
 
     /// <summary>
     ///     Generates a SQL fragment for a computed column definition for the given column metadata.
@@ -947,14 +1110,12 @@ public class SqliteMigrationsSqlGenerator : MigrationsSqlGenerator
         string name,
         ColumnOperation operation,
         IModel? model,
-        MigrationCommandListBuilder builder)
+        MigrationCommandListBuilder builder
+    )
     {
         builder.Append(Dependencies.SqlGenerationHelper.DelimitIdentifier(name));
 
-        builder
-            .Append(" AS (")
-            .Append(operation.ComputedColumnSql!)
-            .Append(")");
+        builder.Append(" AS (").Append(operation.ComputedColumnSql!).Append(")");
 
         if (operation.IsStored == true)
         {
@@ -963,9 +1124,7 @@ public class SqliteMigrationsSqlGenerator : MigrationsSqlGenerator
 
         if (operation.Collation != null)
         {
-            builder
-                .Append(" COLLATE ")
-                .Append(operation.Collation);
+            builder.Append(" COLLATE ").Append(operation.Collation);
         }
     }
 
@@ -979,9 +1138,11 @@ public class SqliteMigrationsSqlGenerator : MigrationsSqlGenerator
     /// <param name="operation">The operation.</param>
     /// <param name="model">The target model which may be <see langword="null" /> if the operations exist without a model.</param>
     /// <param name="builder">The command builder to use to build the commands.</param>
-    protected override void Generate(EnsureSchemaOperation operation, IModel? model, MigrationCommandListBuilder builder)
-    {
-    }
+    protected override void Generate(
+        EnsureSchemaOperation operation,
+        IModel? model,
+        MigrationCommandListBuilder builder
+    ) { }
 
     /// <summary>
     ///     Ignored, since schemas are not supported by SQLite and are silently ignored to improve testing compatibility.
@@ -989,9 +1150,11 @@ public class SqliteMigrationsSqlGenerator : MigrationsSqlGenerator
     /// <param name="operation">The operation.</param>
     /// <param name="model">The target model which may be <see langword="null" /> if the operations exist without a model.</param>
     /// <param name="builder">The command builder to use to build the commands.</param>
-    protected override void Generate(DropSchemaOperation operation, IModel? model, MigrationCommandListBuilder builder)
-    {
-    }
+    protected override void Generate(
+        DropSchemaOperation operation,
+        IModel? model,
+        MigrationCommandListBuilder builder
+    ) { }
 
     #endregion
 
@@ -1003,8 +1166,11 @@ public class SqliteMigrationsSqlGenerator : MigrationsSqlGenerator
     /// <param name="operation">The operation.</param>
     /// <param name="model">The target model which may be <see langword="null" /> if the operations exist without a model.</param>
     /// <param name="builder">The command builder to use to build the commands.</param>
-    protected override void Generate(RestartSequenceOperation operation, IModel? model, MigrationCommandListBuilder builder)
-        => throw new NotSupportedException(SqliteStrings.SequencesNotSupported);
+    protected override void Generate(
+        RestartSequenceOperation operation,
+        IModel? model,
+        MigrationCommandListBuilder builder
+    ) => throw new NotSupportedException(SqliteStrings.SequencesNotSupported);
 
     /// <summary>
     ///     Throws <see cref="NotSupportedException" /> since SQLite does not support sequences.
@@ -1012,8 +1178,11 @@ public class SqliteMigrationsSqlGenerator : MigrationsSqlGenerator
     /// <param name="operation">The operation.</param>
     /// <param name="model">The target model which may be <see langword="null" /> if the operations exist without a model.</param>
     /// <param name="builder">The command builder to use to build the commands.</param>
-    protected override void Generate(CreateSequenceOperation operation, IModel? model, MigrationCommandListBuilder builder)
-        => throw new NotSupportedException(SqliteStrings.SequencesNotSupported);
+    protected override void Generate(
+        CreateSequenceOperation operation,
+        IModel? model,
+        MigrationCommandListBuilder builder
+    ) => throw new NotSupportedException(SqliteStrings.SequencesNotSupported);
 
     /// <summary>
     ///     Throws <see cref="NotSupportedException" /> since SQLite does not support sequences.
@@ -1021,8 +1190,11 @@ public class SqliteMigrationsSqlGenerator : MigrationsSqlGenerator
     /// <param name="operation">The operation.</param>
     /// <param name="model">The target model which may be <see langword="null" /> if the operations exist without a model.</param>
     /// <param name="builder">The command builder to use to build the commands.</param>
-    protected override void Generate(RenameSequenceOperation operation, IModel? model, MigrationCommandListBuilder builder)
-        => throw new NotSupportedException(SqliteStrings.SequencesNotSupported);
+    protected override void Generate(
+        RenameSequenceOperation operation,
+        IModel? model,
+        MigrationCommandListBuilder builder
+    ) => throw new NotSupportedException(SqliteStrings.SequencesNotSupported);
 
     /// <summary>
     ///     Throws <see cref="NotSupportedException" /> since SQLite does not support sequences.
@@ -1030,8 +1202,11 @@ public class SqliteMigrationsSqlGenerator : MigrationsSqlGenerator
     /// <param name="operation">The operation.</param>
     /// <param name="model">The target model which may be <see langword="null" /> if the operations exist without a model.</param>
     /// <param name="builder">The command builder to use to build the commands.</param>
-    protected override void Generate(AlterSequenceOperation operation, IModel? model, MigrationCommandListBuilder builder)
-        => throw new NotSupportedException(SqliteStrings.SequencesNotSupported);
+    protected override void Generate(
+        AlterSequenceOperation operation,
+        IModel? model,
+        MigrationCommandListBuilder builder
+    ) => throw new NotSupportedException(SqliteStrings.SequencesNotSupported);
 
     /// <summary>
     ///     Throws <see cref="NotSupportedException" /> since SQLite does not support sequences.
@@ -1039,22 +1214,29 @@ public class SqliteMigrationsSqlGenerator : MigrationsSqlGenerator
     /// <param name="operation">The operation.</param>
     /// <param name="model">The target model which may be <see langword="null" /> if the operations exist without a model.</param>
     /// <param name="builder">The command builder to use to build the commands.</param>
-    protected override void Generate(DropSequenceOperation operation, IModel? model, MigrationCommandListBuilder builder)
-        => throw new NotSupportedException(SqliteStrings.SequencesNotSupported);
+    protected override void Generate(
+        DropSequenceOperation operation,
+        IModel? model,
+        MigrationCommandListBuilder builder
+    ) => throw new NotSupportedException(SqliteStrings.SequencesNotSupported);
 
     #endregion
 
     private sealed class RebuildContext
     {
-        public ICollection<MigrationOperation> OperationsToReplace { get; } = new List<MigrationOperation>();
-        public IDictionary<string, AddColumnOperation> AddColumnsDeferred { get; } = new Dictionary<string, AddColumnOperation>();
+        public ICollection<MigrationOperation> OperationsToReplace { get; } =
+            new List<MigrationOperation>();
+        public IDictionary<string, AddColumnOperation> AddColumnsDeferred { get; } =
+            new Dictionary<string, AddColumnOperation>();
         public ICollection<string> DropColumnsDeferred { get; } = new HashSet<string>();
-        public readonly IDictionary<string, AlterColumnOperation> AlterColumnsDeferred = new Dictionary<string, AlterColumnOperation>();
+        public readonly IDictionary<string, AlterColumnOperation> AlterColumnsDeferred =
+            new Dictionary<string, AlterColumnOperation>();
 
         public readonly IDictionary<string, RenameColumnOperation> RenameColumnsDeferred =
             new Dictionary<string, RenameColumnOperation>();
 
         public ICollection<string> CreateIndexesDeferred { get; } = new HashSet<string>();
-        public ICollection<MigrationOperation> OperationsToWarnFor { get; } = new List<MigrationOperation>();
+        public ICollection<MigrationOperation> OperationsToWarnFor { get; } =
+            new List<MigrationOperation>();
     }
 }

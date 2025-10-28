@@ -70,18 +70,12 @@ namespace System.Linq.Parallel.Tests
 
             public KeyValuePair<int, bool> Current
             {
-                get
-                {
-                    return new KeyValuePair<int, bool>(_start + _current, _values[_current]);
-                }
+                get { return new KeyValuePair<int, bool>(_start + _current, _values[_current]); }
             }
 
             object IEnumerator.Current
             {
-                get
-                {
-                    return Current;
-                }
+                get { return Current; }
             }
 
             public void Dispose()
@@ -127,7 +121,9 @@ namespace System.Linq.Parallel.Tests
 
         public IEnumerator<KeyValuePair<int, int>> GetEnumerator()
         {
-            return _seen.Select((v, index) => new KeyValuePair<int, int>(index + _start, v)).GetEnumerator();
+            return _seen
+                .Select((v, index) => new KeyValuePair<int, int>(index + _start, v))
+                .GetEnumerator();
         }
 
         IEnumerator IEnumerable.GetEnumerator()

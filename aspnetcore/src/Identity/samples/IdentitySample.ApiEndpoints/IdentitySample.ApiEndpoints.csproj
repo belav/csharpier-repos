@@ -1,5 +1,4 @@
 <Project Sdk="Microsoft.NET.Sdk.Web">
-
   <PropertyGroup>
     <Description>Identity sample application on ASP.NET Core using endpoint routing</Description>
     <TargetFramework>$(DefaultNetCoreTargetFramework)</TargetFramework>
@@ -11,5 +10,4 @@
     <Reference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" />
     <Reference Include="Microsoft.EntityFrameworkCore.Sqlite" />
   </ItemGroup>
-
 </Project>

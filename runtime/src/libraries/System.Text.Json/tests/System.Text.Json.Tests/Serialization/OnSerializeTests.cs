@@ -8,11 +8,11 @@ namespace System.Text.Json.Serialization.Tests
 {
     public static partial class OnSerializeTests
     {
-        private class MyClass :
-            IJsonOnDeserializing,
-            IJsonOnDeserialized,
-            IJsonOnSerializing,
-            IJsonOnSerialized
+        private class MyClass
+            : IJsonOnDeserializing,
+                IJsonOnDeserialized,
+                IJsonOnSerializing,
+                IJsonOnSerialized
         {
             public int MyInt { get; set; }
 
@@ -74,11 +74,11 @@ namespace System.Text.Json.Serialization.Tests
             Assert.Equal(1, obj._onDeserializedCount);
         }
 
-        private struct MyStruct :
-            IJsonOnDeserializing,
-            IJsonOnDeserialized,
-            IJsonOnSerializing,
-            IJsonOnSerialized
+        private struct MyStruct
+            : IJsonOnDeserializing,
+                IJsonOnDeserialized,
+                IJsonOnSerializing,
+                IJsonOnSerialized
         {
             public int MyInt { get; set; }
 
@@ -98,7 +98,7 @@ namespace System.Text.Json.Serialization.Tests
             {
                 Assert.Equal(1, _onSerializingCount);
                 _onSerializedCount++;
-                MyInt++;    // should not affect serialization
+                MyInt++; // should not affect serialization
             }
 
             public void OnDeserializing()
@@ -115,7 +115,6 @@ namespace System.Text.Json.Serialization.Tests
                 _onDeserializedCount++;
             }
         }
-
 
         [Fact]
         public static void Test_MyStruct()
@@ -141,11 +140,11 @@ namespace System.Text.Json.Serialization.Tests
             Assert.Equal(1, obj._onDeserializedCount);
         }
 
-        private class MyClassWithSmallConstructor :
-            IJsonOnDeserializing,
-            IJsonOnDeserialized,
-            IJsonOnSerializing,
-            IJsonOnSerialized
+        private class MyClassWithSmallConstructor
+            : IJsonOnDeserializing,
+                IJsonOnDeserialized,
+                IJsonOnSerializing,
+                IJsonOnSerialized
         {
             public int MyInt { get; set; }
 
@@ -216,11 +215,11 @@ namespace System.Text.Json.Serialization.Tests
             Assert.Equal(1, obj._onDeserializedCount);
         }
 
-        private class MyClassWithLargeConstructor :
-            IJsonOnDeserializing,
-            IJsonOnDeserialized,
-            IJsonOnSerializing,
-            IJsonOnSerialized
+        private class MyClassWithLargeConstructor
+            : IJsonOnDeserializing,
+                IJsonOnDeserialized,
+                IJsonOnSerializing,
+                IJsonOnSerialized
         {
             public int MyInt1 { get; set; }
             public int MyInt2 { get; set; }
@@ -228,7 +227,13 @@ namespace System.Text.Json.Serialization.Tests
             public int MyInt4 { get; set; }
             public int MyInt5 { get; set; }
 
-            public MyClassWithLargeConstructor(int myInt1, int myInt2, int myInt3, int myInt4, int myInt5)
+            public MyClassWithLargeConstructor(
+                int myInt1,
+                int myInt2,
+                int myInt3,
+                int myInt4,
+                int myInt5
+            )
             {
                 MyInt1 = myInt1;
                 MyInt2 = myInt2;
@@ -278,7 +283,8 @@ namespace System.Text.Json.Serialization.Tests
         [Fact]
         public static void Test_MyClassWithLargeConstructor()
         {
-            const string Json = "{\"MyInt1\":1,\"MyInt2\":2,\"MyInt3\":3,\"MyInt4\":4,\"MyInt5\":5}";
+            const string Json =
+                "{\"MyInt1\":1,\"MyInt2\":2,\"MyInt3\":3,\"MyInt4\":4,\"MyInt5\":5}";
 
             MyClassWithLargeConstructor obj = new(1, 2, 3, 4, 5);
             Assert.Equal(1, obj.MyInt1);
@@ -305,11 +311,11 @@ namespace System.Text.Json.Serialization.Tests
             Assert.Equal(1, obj._onDeserializedCount);
         }
 
-        private class MyCyclicClass :
-            IJsonOnDeserializing,
-            IJsonOnDeserialized,
-            IJsonOnSerializing,
-            IJsonOnSerialized
+        private class MyCyclicClass
+            : IJsonOnDeserializing,
+                IJsonOnDeserialized,
+                IJsonOnSerializing,
+                IJsonOnSerialized
         {
             public int MyInt { get; set; }
             public MyCyclicClass Cycle { get; set; }
@@ -378,39 +384,54 @@ namespace System.Text.Json.Serialization.Tests
             Assert.Equal(1, obj._onDeserializedCount);
         }
 
-        private class MyCollection : List<int>,
-            IJsonOnDeserializing,
-            IJsonOnDeserialized,
-            IJsonOnSerializing,
-            IJsonOnSerialized
+        private class MyCollection
+            : List<int>,
+                IJsonOnDeserializing,
+                IJsonOnDeserialized,
+                IJsonOnSerializing,
+                IJsonOnSerialized
         {
             public void OnDeserialized() => Assert.Fail("Not expected");
+
             public void OnDeserializing() => Assert.Fail("Not expected");
+
             public void OnSerialized() => Assert.Fail("Not expected");
+
             public void OnSerializing() => Assert.Fail("Not expected");
         }
 
         [JsonConverter(converterType: typeof(MyValueConverter))]
-        private class MyValue :
-            IJsonOnDeserializing,
-            IJsonOnDeserialized,
-            IJsonOnSerializing,
-            IJsonOnSerialized
+        private class MyValue
+            : IJsonOnDeserializing,
+                IJsonOnDeserialized,
+                IJsonOnSerializing,
+                IJsonOnSerialized
         {
             public void OnDeserialized() => Assert.Fail("Not expected");
+
             public void OnDeserializing() => Assert.Fail("Not expected");
+
             public void OnSerialized() => Assert.Fail("Not expected");
+
             public void OnSerializing() => Assert.Fail("Not expected");
         }
 
         private class MyValueConverter : JsonConverter<MyValue>
         {
-            public override MyValue? Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+            public override MyValue? Read(
+                ref Utf8JsonReader reader,
+                Type typeToConvert,
+                JsonSerializerOptions options
+            )
             {
                 return new MyValue();
             }
 
-            public override void Write(Utf8JsonWriter writer, MyValue value, JsonSerializerOptions options)
+            public override void Write(
+                Utf8JsonWriter writer,
+                MyValue value,
+                JsonSerializerOptions options
+            )
             {
                 writer.WriteStringValue("dummy");
             }

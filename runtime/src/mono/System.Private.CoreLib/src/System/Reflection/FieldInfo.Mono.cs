@@ -9,7 +9,10 @@ namespace System.Reflection
     public partial class FieldInfo
     {
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        private static extern FieldInfo internal_from_handle_type(IntPtr field_handle, IntPtr type_handle);
+        private static extern FieldInfo internal_from_handle_type(
+            IntPtr field_handle,
+            IntPtr type_handle
+        );
 
         public static FieldInfo GetFieldFromHandle(RuntimeFieldHandle handle)
         {
@@ -18,13 +21,18 @@ namespace System.Reflection
             return internal_from_handle_type(handle.Value, IntPtr.Zero);
         }
 
-        public static FieldInfo GetFieldFromHandle(RuntimeFieldHandle handle, RuntimeTypeHandle declaringType)
+        public static FieldInfo GetFieldFromHandle(
+            RuntimeFieldHandle handle,
+            RuntimeTypeHandle declaringType
+        )
         {
             if (handle.IsNullHandle())
                 throw new ArgumentException(SR.Argument_InvalidHandle);
             FieldInfo fi = internal_from_handle_type(handle.Value, declaringType.Value);
             if (fi == null)
-                throw new ArgumentException(SR.Argument_FieldPropertyEventAndTypeHandleIncompatibility);
+                throw new ArgumentException(
+                    SR.Argument_FieldPropertyEventAndTypeHandleIncompatibility
+                );
             return fi;
         }
 
@@ -92,24 +100,34 @@ namespace System.Reflection
 
 #pragma warning disable SYSLIB0050 // FieldInfo.IsNotSerialized is obsolete
             if (IsNotSerialized)
-                attrsData[count++] = new RuntimeCustomAttributeData((typeof(NonSerializedAttribute)).GetConstructor(Type.EmptyTypes)!);
+                attrsData[count++] = new RuntimeCustomAttributeData(
+                    (typeof(NonSerializedAttribute)).GetConstructor(Type.EmptyTypes)!
+                );
 #pragma warning restore SYSLIB0050
             if (DeclaringType.IsExplicitLayout)
             {
-                var ctorArgs = new CustomAttributeTypedArgument[] { new CustomAttributeTypedArgument(typeof(int), GetFieldOffset()) };
+                var ctorArgs = new CustomAttributeTypedArgument[]
+                {
+                    new CustomAttributeTypedArgument(typeof(int), GetFieldOffset()),
+                };
                 attrsData[count++] = new RuntimeCustomAttributeData(
                     (typeof(FieldOffsetAttribute)).GetConstructor(new[] { typeof(int) })!,
                     ctorArgs,
-                    Array.Empty<CustomAttributeNamedArgument>());
+                    Array.Empty<CustomAttributeNamedArgument>()
+                );
             }
 
             if (marshalAs != null)
             {
-                var ctorArgs = new CustomAttributeTypedArgument[] { new CustomAttributeTypedArgument(typeof(UnmanagedType), marshalAs.Value) };
+                var ctorArgs = new CustomAttributeTypedArgument[]
+                {
+                    new CustomAttributeTypedArgument(typeof(UnmanagedType), marshalAs.Value),
+                };
                 attrsData[count++] = new RuntimeCustomAttributeData(
                     (typeof(MarshalAsAttribute)).GetConstructor(new[] { typeof(UnmanagedType) })!,
                     ctorArgs,
-                    Array.Empty<CustomAttributeNamedArgument>());//FIXME Get named params
+                    Array.Empty<CustomAttributeNamedArgument>()
+                ); //FIXME Get named params
             }
 
             return attrsData;

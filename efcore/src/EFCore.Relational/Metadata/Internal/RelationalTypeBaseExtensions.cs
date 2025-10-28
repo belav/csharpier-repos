@@ -17,9 +17,9 @@ public static class RelationalTypeBaseExtensions
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public static IEnumerable<ITableMappingBase> GetViewOrTableMappings(this ITypeBase typeBase)
-        => (IEnumerable<ITableMappingBase>?)(typeBase.FindRuntimeAnnotationValue(
-                    RelationalAnnotationNames.ViewMappings)
-                ?? typeBase.FindRuntimeAnnotationValue(RelationalAnnotationNames.TableMappings))
-            ?? Enumerable.Empty<ITableMappingBase>();
+    public static IEnumerable<ITableMappingBase> GetViewOrTableMappings(this ITypeBase typeBase) =>
+        (IEnumerable<ITableMappingBase>?)(
+            typeBase.FindRuntimeAnnotationValue(RelationalAnnotationNames.ViewMappings)
+            ?? typeBase.FindRuntimeAnnotationValue(RelationalAnnotationNames.TableMappings)
+        ) ?? Enumerable.Empty<ITableMappingBase>();
 }

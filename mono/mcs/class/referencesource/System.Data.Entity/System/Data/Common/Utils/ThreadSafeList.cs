@@ -9,9 +9,9 @@
 
 using System.Collections.Generic;
 using System.Threading;
+
 namespace System.Data.Common.Utils
 {
-
     internal sealed class ThreadSafeList<T> : IList<T>
     {
         private readonly ReaderWriterLockSlim _lock;
@@ -31,7 +31,7 @@ namespace System.Data.Common.Utils
                 int count;
                 try
                 {
-                     count = _list.Count;
+                    count = _list.Count;
                 }
                 finally
                 {
@@ -87,10 +87,7 @@ namespace System.Data.Common.Utils
 
         public bool IsReadOnly
         {
-            get
-            {
-                return false; 
-            }
+            get { return false; }
         }
 
         public int IndexOf(T item)
@@ -211,7 +208,4 @@ namespace System.Data.Common.Utils
             return this.GetEnumerator();
         }
     }
-
-
-  
 }

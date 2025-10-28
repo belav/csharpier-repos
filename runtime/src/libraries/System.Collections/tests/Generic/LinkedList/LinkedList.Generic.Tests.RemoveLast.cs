@@ -17,8 +17,11 @@ namespace System.Collections.Tests
             LinkedList<T> linkedList = new LinkedList<T>();
             int arraySize = 16;
             int seed = 21543;
-            T[] headItems, tailItems;
-            LinkedListNode<T> tempNode1, tempNode2, tempNode3;
+            T[] headItems,
+                tailItems;
+            LinkedListNode<T> tempNode1,
+                tempNode2,
+                tempNode3;
 
             headItems = new T[arraySize];
             tailItems = new T[arraySize];

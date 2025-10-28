@@ -3,7 +3,7 @@
 //
 // Author:
 //   Atsushi Enomoto <atsushi@xamarin.com>
-// 
+//
 // (C) 2013 Xamarin Inc.
 //
 // Permission is hereby granted, free of charge, to any person obtaining
@@ -25,49 +25,53 @@
 // OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-
 using System;
 
 namespace Microsoft.Build.Framework
 {
-	[Serializable]		
-	public class LazyFormattedBuildEventArgs : BuildEventArgs {
+    [Serializable]
+    public class LazyFormattedBuildEventArgs : BuildEventArgs
+    {
+        string message,
+            format;
+        object[] args;
 
-		string message, format;
-		object[] args;
+        protected LazyFormattedBuildEventArgs() { }
 
-		protected LazyFormattedBuildEventArgs ()
-		{
-		}
+        public LazyFormattedBuildEventArgs(string message, string helpKeyword, string senderName)
+            : base(message, helpKeyword, senderName)
+        {
+            this.message = message;
+        }
 
-		public LazyFormattedBuildEventArgs (string message,
-				string helpKeyword, string senderName)
-			: base (message, helpKeyword, senderName)
+        public LazyFormattedBuildEventArgs(
+            string message,
+            string helpKeyword,
+            string senderName,
+            DateTime eventTimestamp,
+            params object[] messageArgs
+        )
+            : base(message, helpKeyword, senderName, eventTimestamp)
+        {
+            if (messageArgs != null && messageArgs.Length > 0)
+            {
+                args = messageArgs;
+                format = message;
+            }
+            else
+            {
+                this.message = message;
+            }
+        }
 
-		{
-			this.message = message;
-		}
-
-		public LazyFormattedBuildEventArgs (string message,
-				string helpKeyword, string senderName,
-				DateTime eventTimestamp, params object[] messageArgs)
-			: base (message, helpKeyword, senderName, eventTimestamp)
-		{
-			if (messageArgs != null && messageArgs.Length > 0) {
-				args = messageArgs;
-				format = message;
-			} else {
-				this.message = message;
-			}
-		}
-
-		public override string Message {
-			get {
-				if (message == null && format != null)
-					message = string.Format (format, args);
-				return message;
-			}
-		}
-	}
+        public override string Message
+        {
+            get
+            {
+                if (message == null && format != null)
+                    message = string.Format(format, args);
+                return message;
+            }
+        }
+    }
 }
-

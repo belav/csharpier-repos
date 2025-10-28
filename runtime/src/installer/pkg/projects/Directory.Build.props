@@ -11,7 +11,9 @@
     <BuildRuntimePackages Condition="'$(BuildRuntimePackages)' == ''">true</BuildRuntimePackages>
     <BuildLineupPackage Condition="'$(BuildLineupPackage)' == ''">true</BuildLineupPackage>
 
-    <PackProjectDependencies Condition="'$(PackProjectDependencies)' == ''">true</PackProjectDependencies>
+    <PackProjectDependencies Condition="'$(PackProjectDependencies)' == ''"
+      >true</PackProjectDependencies
+    >
 
     <CopyLocalLockFileAssemblies>true</CopyLocalLockFileAssemblies>
 
@@ -35,7 +37,10 @@
     <DisableRarCache>true</DisableRarCache>
 
     <!-- During a build from source, only current-RID assets are available from upstream repos. -->
-    <RestoreAllBuildRids Condition="'$(RestoreAllBuildRids)' == '' and '$(DotNetBuildFromSource)' == 'true'">false</RestoreAllBuildRids>
+    <RestoreAllBuildRids
+      Condition="'$(RestoreAllBuildRids)' == '' and '$(DotNetBuildFromSource)' == 'true'"
+      >false</RestoreAllBuildRids
+    >
     <!--
       Normally, it is necessary to restore all RIDs so that assets are available to inspect. For
       example, the platform manifest includes data from all RIDs.
@@ -60,12 +65,16 @@
   </PropertyGroup>
 
   <PropertyGroup>
-    <TargetFramework Condition="'$(TargetFramework)' == ''">$(PackageTargetFramework)</TargetFramework>
+    <TargetFramework Condition="'$(TargetFramework)' == ''"
+      >$(PackageTargetFramework)</TargetFramework
+    >
     <TargetFramework Condition="'$(TargetFramework)' == ''">$(NetCoreAppCurrent)</TargetFramework>
   </PropertyGroup>
 
   <PropertyGroup>
-    <RIDPropsFile Condition="'$(RIDPropsFile)' == ''">$(MSBuildThisFileDirectory)\netcoreappRIDs.props</RIDPropsFile>
+    <RIDPropsFile Condition="'$(RIDPropsFile)' == ''"
+      >$(MSBuildThisFileDirectory)\netcoreappRIDs.props</RIDPropsFile
+    >
   </PropertyGroup>
 
   <Import Project="$(RIDPropsFile)" />
@@ -75,12 +84,12 @@
       <Platform>$(Platform)</Platform>
     </_buildingOnRID>
     <!-- Ensure we have a RID-specific package for the current build, even if it isn't in our official set -->
-    <BuildRID Include="@(OfficialBuildRID)" Exclude="@(_buildingOnRID)"/>
+    <BuildRID Include="@(OfficialBuildRID)" Exclude="@(_buildingOnRID)" />
     <!-- Include Unofficial Build RIDs in runtime.json's but do not include in the platform manifest -->
     <BuildRID Include="@(UnofficialBuildRID)" Exclude="@(_buildingOnRID)">
       <ExcludeFromPlatformManifest>true</ExcludeFromPlatformManifest>
     </BuildRID>
-    <BuildRID Include="@(_buildingOnRID)"/>
+    <BuildRID Include="@(_buildingOnRID)" />
 
     <RestoreBuildRID Include="@(BuildRID)" Exclude="@(UnofficialBuildRID)" />
   </ItemGroup>
@@ -90,7 +99,9 @@
       By default, lineup and runtime packages are built by the same project. Allow overriding so
       a project can depend on another to produce runtime packages with a different base ID.
     -->
-    <RuntimeProjectFile Condition="'$(RuntimeProjectFile)' == ''">$(MSBuildProjectFullPath)</RuntimeProjectFile>
+    <RuntimeProjectFile Condition="'$(RuntimeProjectFile)' == ''"
+      >$(MSBuildProjectFullPath)</RuntimeProjectFile
+    >
   </PropertyGroup>
 
   <ItemGroup Condition="'$(HasRuntimePackages)' != 'false'">
@@ -115,17 +126,25 @@
     <RidSpecificPackProject
       Include="@(_project->'$(RuntimeProjectFile)')"
       BaseId="$(MSBuildProjectName).%(BuildRID)"
-      AdditionalProperties="%(AdditionalProperties);BaseId=%(BaseId);IdPrefix=" />
+      AdditionalProperties="%(AdditionalProperties);BaseId=%(BaseId);IdPrefix="
+    />
   </ItemGroup>
 
   <PropertyGroup>
     <!-- During NuGet restore, grab assets for all applicable RIDs. -->
-    <RuntimeIdentifiers Condition="'$(RestoreAllBuildRids)' == 'true'">@(RestoreBuildRID)</RuntimeIdentifiers>
+    <RuntimeIdentifiers Condition="'$(RestoreAllBuildRids)' == 'true'"
+      >@(RestoreBuildRID)</RuntimeIdentifiers
+    >
     <!-- When resolving assets to pack, use the target runtime (if any). -->
     <RuntimeIdentifier>$(OutputRID)</RuntimeIdentifier>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.DotNet.Build.Tasks.Packaging" Version="$(MicrosoftDotNetBuildTasksPackagingVersion)" PrivateAssets="all" IsImplicitlyDefined="true" />
+    <PackageReference
+      Include="Microsoft.DotNet.Build.Tasks.Packaging"
+      Version="$(MicrosoftDotNetBuildTasksPackagingVersion)"
+      PrivateAssets="all"
+      IsImplicitlyDefined="true"
+    />
   </ItemGroup>
 </Project>

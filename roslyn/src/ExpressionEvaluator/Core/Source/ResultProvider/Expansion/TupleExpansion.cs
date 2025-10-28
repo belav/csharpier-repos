@@ -4,13 +4,13 @@
 
 #nullable disable
 
+using System;
+using System.Collections.ObjectModel;
+using System.Diagnostics;
 using Microsoft.VisualStudio.Debugger.Clr;
 using Microsoft.VisualStudio.Debugger.ComponentInterfaces;
 using Microsoft.VisualStudio.Debugger.Evaluation;
 using Microsoft.VisualStudio.Debugger.Evaluation.ClrCompilation;
-using System;
-using System.Collections.ObjectModel;
-using System.Diagnostics;
 using FieldInfo = Microsoft.VisualStudio.Debugger.Metadata.FieldInfo;
 using Type = Microsoft.VisualStudio.Debugger.Metadata.Type;
 
@@ -22,7 +22,8 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
             DkmInspectionContext inspectionContext,
             TypeAndCustomInfo declaredTypeAndInfo,
             DkmClrValue value,
-            int cardinality)
+            int cardinality
+        )
         {
             if (value.IsNull)
             {
@@ -30,8 +31,13 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
                 return null;
             }
 
-            bool useRawView = (inspectionContext.EvaluationFlags & DkmEvaluationFlags.ShowValueRaw) != 0;
-            return new TupleExpansion(new TypeAndCustomInfo(value.Type, declaredTypeAndInfo.Info), cardinality, useRawView);
+            bool useRawView =
+                (inspectionContext.EvaluationFlags & DkmEvaluationFlags.ShowValueRaw) != 0;
+            return new TupleExpansion(
+                new TypeAndCustomInfo(value.Type, declaredTypeAndInfo.Info),
+                cardinality,
+                useRawView
+            );
         }
 
         private readonly TypeAndCustomInfo _typeAndInfo;
@@ -55,19 +61,34 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
             int startIndex,
             int count,
             bool visitAll,
-            ref int index)
+            ref int index
+        )
         {
             var fields = GetFields();
             var defaultView = fields.DefaultView;
 
             int startIndex2;
             int count2;
-            GetIntersection(startIndex, count, index, defaultView.Count, out startIndex2, out count2);
+            GetIntersection(
+                startIndex,
+                count,
+                index,
+                defaultView.Count,
+                out startIndex2,
+                out count2
+            );
 
             int offset = startIndex2 - index;
             for (int i = 0; i < count2; i++)
             {
-                var row = GetMemberRow(resultProvider, inspectionContext, value, defaultView[i + offset], parent, _cardinality);
+                var row = GetMemberRow(
+                    resultProvider,
+                    inspectionContext,
+                    value,
+                    defaultView[i + offset],
+                    parent,
+                    _cardinality
+                );
                 rows.Add(row);
             }
 
@@ -90,7 +111,8 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
             DkmClrValue value,
             Field field,
             EvalResultDataItem parent,
-            int cardinality)
+            int cardinality
+        )
         {
             var fullNameProvider = resultProvider.FullNameProvider;
             var parentFullName = parent.ChildFullNamePrefix;
@@ -108,7 +130,8 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
                         parentFullName,
                         parentRuntimeType,
                         customTypeInfo: null,
-                        castExpressionOptions: DkmClrCastExpressionOptions.ParenthesizeEntireExpression);
+                        castExpressionOptions: DkmClrCastExpressionOptions.ParenthesizeEntireExpression
+                    );
                 }
             }
 
@@ -122,7 +145,8 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
                 value,
                 field,
                 parentFullName,
-                out fullName);
+                out fullName
+            );
             var name = field.Name;
             var typeDeclaringMemberAndInfo = default(TypeAndCustomInfo);
             var declaredTypeAndInfo = field.FieldTypeAndInfo;
@@ -131,14 +155,22 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
 
             if (field.IsRest)
             {
-                var displayValue = fieldValue.GetValueString(inspectionContext, Formatter.NoFormatSpecifiers);
+                var displayValue = fieldValue.GetValueString(
+                    inspectionContext,
+                    Formatter.NoFormatSpecifiers
+                );
                 var displayType = ResultProvider.GetTypeName(
                     inspectionContext,
                     fieldValue,
                     declaredTypeAndInfo.ClrType,
                     declaredTypeAndInfo.Info,
-                    isPointerDereference: false);
-                var expansion = new TupleExpansion(declaredTypeAndInfo, cardinality - (TypeHelpers.TupleFieldRestPosition - 1), useRawView: true);
+                    isPointerDereference: false
+                );
+                var expansion = new TupleExpansion(
+                    declaredTypeAndInfo,
+                    cardinality - (TypeHelpers.TupleFieldRestPosition - 1),
+                    useRawView: true
+                );
                 return new EvalResult(
                     ExpansionKind.Explicit,
                     name,
@@ -150,14 +182,17 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
                     expansion: expansion,
                     childShouldParenthesize: false,
                     fullName: fullName,
-                    childFullNamePrefixOpt: flags.Includes(DkmEvaluationResultFlags.ExceptionThrown) ? null : fullName,
+                    childFullNamePrefixOpt: flags.Includes(DkmEvaluationResultFlags.ExceptionThrown)
+                        ? null
+                        : fullName,
                     formatSpecifiers: Formatter.AddFormatSpecifier(formatSpecifiers, "raw"),
                     category: DkmEvaluationResultCategory.Other,
                     flags: flags,
                     editableValue: null,
                     inspectionContext: inspectionContext,
                     displayName: name,
-                    displayType: displayType);
+                    displayType: displayType
+                );
             }
 
             return resultProvider.CreateDataItem(
@@ -176,7 +211,8 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
                 evalFlags: DkmEvaluationFlags.None,
                 canFavorite: false,
                 isFavorite: false,
-                supportsFavorites: true);
+                supportsFavorites: true
+            );
         }
 
         private static DkmClrValue GetValueAndFullName(
@@ -185,7 +221,8 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
             DkmClrValue value,
             Field field,
             string parentFullName,
-            out string fullName)
+            out string fullName
+        )
         {
             var parent = field.Parent;
             if (parent != null)
@@ -196,19 +233,22 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
                     value,
                     parent,
                     parentFullName,
-                    out parentFullName);
+                    out parentFullName
+                );
             }
             var fieldName = field.FieldInfo.Name;
-            fullName = (parentFullName == null)
-                ? null
-                : fullNameProvider.GetClrMemberName(
-                    inspectionContext,
-                    parentFullName,
-                    clrType: field.DeclaringTypeAndInfo.ClrType,
-                    customTypeInfo: null,
-                    memberName: fieldName,
-                    requiresExplicitCast: false,
-                    isStatic: false);
+            fullName =
+                (parentFullName == null)
+                    ? null
+                    : fullNameProvider.GetClrMemberName(
+                        inspectionContext,
+                        parentFullName,
+                        clrType: field.DeclaringTypeAndInfo.ClrType,
+                        customTypeInfo: null,
+                        memberName: fieldName,
+                        requiresExplicitCast: false,
+                        isStatic: false
+                    );
             return value.GetFieldValue(fieldName, inspectionContext);
         }
 
@@ -227,7 +267,8 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
                 FieldInfo fieldInfo,
                 string name,
                 Field parent,
-                bool isRest)
+                bool isRest
+            )
             {
                 Debug.Assert(declaringTypeAndInfo.ClrType != null);
                 Debug.Assert(fieldTypeAndInfo.ClrType != null);
@@ -235,7 +276,9 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
                 Debug.Assert(name != null);
                 Debug.Assert(declaringTypeAndInfo.Type.Equals(fieldInfo.DeclaringType));
                 Debug.Assert(fieldTypeAndInfo.Type.Equals(fieldInfo.FieldType));
-                Debug.Assert(parent == null || parent.FieldInfo.FieldType.Equals(fieldInfo.DeclaringType));
+                Debug.Assert(
+                    parent == null || parent.FieldInfo.FieldType.Equals(fieldInfo.DeclaringType)
+                );
 
                 DeclaringTypeAndInfo = declaringTypeAndInfo;
                 FieldTypeAndInfo = fieldTypeAndInfo;
@@ -264,7 +307,11 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
             return _lazyFields;
         }
 
-        private static Fields GetFields(TypeAndCustomInfo declaringTypeAndInfo, int cardinality, bool useRawView)
+        private static Fields GetFields(
+            TypeAndCustomInfo declaringTypeAndInfo,
+            int cardinality,
+            bool useRawView
+        )
         {
             Debug.Assert(declaringTypeAndInfo.Type.GetTupleCardinalityIfAny() == cardinality);
 
@@ -291,25 +338,46 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
                         continue;
                     }
 
-                    var fieldTypeAndInfo = GetTupleFieldTypeAndInfo(appDomain, field, customTypeInfoMap);
+                    var fieldTypeAndInfo = GetTupleFieldTypeAndInfo(
+                        appDomain,
+                        field,
+                        customTypeInfoMap
+                    );
                     if (!useRawView)
                     {
-                        var name = CustomTypeInfo.GetTupleElementNameIfAny(tupleElementNames, offset + index);
+                        var name = CustomTypeInfo.GetTupleElementNameIfAny(
+                            tupleElementNames,
+                            offset + index
+                        );
                         if (name != null)
                         {
                             includeRawView = true;
-                            builder.Add(new Field(declaringTypeAndInfo, fieldTypeAndInfo, field, name, parent, isRest: false));
+                            builder.Add(
+                                new Field(
+                                    declaringTypeAndInfo,
+                                    fieldTypeAndInfo,
+                                    field,
+                                    name,
+                                    parent,
+                                    isRest: false
+                                )
+                            );
                             continue;
                         }
                     }
 
-                    builder.Add(new Field(
-                        declaringTypeAndInfo,
-                        fieldTypeAndInfo,
-                        field,
-                        (offset == 0) ? fieldName : TypeHelpers.GetTupleFieldName(offset + index),
-                        parent,
-                        isRest: false));
+                    builder.Add(
+                        new Field(
+                            declaringTypeAndInfo,
+                            fieldTypeAndInfo,
+                            field,
+                            (offset == 0)
+                                ? fieldName
+                                : TypeHelpers.GetTupleFieldName(offset + index),
+                            parent,
+                            isRest: false
+                        )
+                    );
                 }
 
                 cardinality -= n;
@@ -326,7 +394,14 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
                 }
 
                 var restTypeAndInfo = GetTupleFieldTypeAndInfo(appDomain, rest, customTypeInfoMap);
-                var restField = new Field(declaringTypeAndInfo, restTypeAndInfo, rest, TypeHelpers.TupleFieldRestName, parent, isRest: true);
+                var restField = new Field(
+                    declaringTypeAndInfo,
+                    restTypeAndInfo,
+                    rest,
+                    TypeHelpers.TupleFieldRestName,
+                    parent,
+                    isRest: true
+                );
 
                 if (useRawView)
                 {
@@ -346,28 +421,37 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
         private static TypeAndCustomInfo GetTupleFieldTypeAndInfo(
             DkmClrAppDomain appDomain,
             FieldInfo field,
-            CustomTypeInfoTypeArgumentMap customTypeInfoMap)
+            CustomTypeInfoTypeArgumentMap customTypeInfoMap
+        )
         {
             var declaringTypeDef = field.DeclaringType.GetGenericTypeDefinition();
             var fieldDef = declaringTypeDef.GetTupleField(field.Name);
             var fieldType = DkmClrType.Create(appDomain, field.FieldType);
-            var fieldTypeInfo = customTypeInfoMap.SubstituteCustomTypeInfo(fieldDef.FieldType, null);
+            var fieldTypeInfo = customTypeInfoMap.SubstituteCustomTypeInfo(
+                fieldDef.FieldType,
+                null
+            );
             return new TypeAndCustomInfo(fieldType, fieldTypeInfo);
         }
 
         private EvalResult CreateRawViewRow(
             DkmInspectionContext inspectionContext,
             EvalResultDataItem parent,
-            DkmClrValue value)
+            DkmClrValue value
+        )
         {
             var displayName = Resources.RawView;
-            var displayValue = value.GetValueString(inspectionContext, Formatter.NoFormatSpecifiers);
+            var displayValue = value.GetValueString(
+                inspectionContext,
+                Formatter.NoFormatSpecifiers
+            );
             var displayType = ResultProvider.GetTypeName(
                 inspectionContext,
                 value,
                 _typeAndInfo.ClrType,
                 _typeAndInfo.Info,
-                isPointerDereference: false);
+                isPointerDereference: false
+            );
             var expansion = new TupleExpansion(_typeAndInfo, _cardinality, useRawView: true);
             return new EvalResult(
                 ExpansionKind.Explicit,
@@ -387,7 +471,8 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
                 editableValue: null,
                 inspectionContext: inspectionContext,
                 displayName: displayName,
-                displayType: displayType);
+                displayType: displayType
+            );
         }
     }
 }

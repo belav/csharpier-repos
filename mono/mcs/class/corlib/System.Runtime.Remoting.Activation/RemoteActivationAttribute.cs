@@ -16,10 +16,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -30,43 +30,41 @@
 //
 
 using System;
+using System.Collections;
 using System.Runtime.Remoting.Activation;
 using System.Runtime.Remoting.Contexts;
-using System.Collections;
 
 namespace System.Runtime.Remoting.Activation
 {
-	internal class RemoteActivationAttribute: Attribute, IContextAttribute
-	{
-		// This activation attribute is used when creating a client activated
-		// CBO in the server. This attribute will enforce the creation of
-		// a new context, and will provide the context properties collected in
-		// the client.
+    internal class RemoteActivationAttribute : Attribute, IContextAttribute
+    {
+        // This activation attribute is used when creating a client activated
+        // CBO in the server. This attribute will enforce the creation of
+        // a new context, and will provide the context properties collected in
+        // the client.
 
-		IList _contextProperties;
+        IList _contextProperties;
 
-		public RemoteActivationAttribute ()
-		{
-		}
+        public RemoteActivationAttribute() { }
 
-		public RemoteActivationAttribute(IList contextProperties)
-		{
-			_contextProperties = contextProperties;
-		}
+        public RemoteActivationAttribute(IList contextProperties)
+        {
+            _contextProperties = contextProperties;
+        }
 
-		public bool IsContextOK(Context ctx, IConstructionCallMessage ctor)
-		{
-			// CBOs remotely activated allways need a new context
-			return false;
-		}
+        public bool IsContextOK(Context ctx, IConstructionCallMessage ctor)
+        {
+            // CBOs remotely activated allways need a new context
+            return false;
+        }
 
-		public void GetPropertiesForNewContext(IConstructionCallMessage ctor)
-		{
-			if (_contextProperties != null)
-			{
-				foreach (object prop in _contextProperties)
-					ctor.ContextProperties.Add (prop);
-			}
-		}
-	}
+        public void GetPropertiesForNewContext(IConstructionCallMessage ctor)
+        {
+            if (_contextProperties != null)
+            {
+                foreach (object prop in _contextProperties)
+                    ctor.ContextProperties.Add(prop);
+            }
+        }
+    }
 }

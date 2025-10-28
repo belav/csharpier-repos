@@ -24,7 +24,11 @@ namespace System.Net.Http.Handlers
             ProgressMessageHandler progressHandler = new ProgressMessageHandler();
 
             // Act
-            ProgressContent progressContent = new ProgressContent(innerContent, progressHandler, request);
+            ProgressContent progressContent = new ProgressContent(
+                innerContent,
+                progressHandler,
+                request
+            );
 
             // Assert
             ValidateContentHeader(progressContent);
@@ -40,8 +44,16 @@ namespace System.Net.Http.Handlers
             request.Content = new StringContent("HelloWorld!");
 
             MockProgressEventHandler progressEventHandler = new MockProgressEventHandler();
-            ProgressMessageHandler progressHandler = MockProgressEventHandler.CreateProgressMessageHandler(out progressEventHandler, sendProgress: true);
-            ProgressContent progressContent = new ProgressContent(request.Content, progressHandler, request);
+            ProgressMessageHandler progressHandler =
+                MockProgressEventHandler.CreateProgressMessageHandler(
+                    out progressEventHandler,
+                    sendProgress: true
+                );
+            ProgressContent progressContent = new ProgressContent(
+                request.Content,
+                progressHandler,
+                request
+            );
             MemoryStream memStream = new MemoryStream();
 
             // Act
@@ -50,7 +62,10 @@ namespace System.Net.Http.Handlers
             // Assert
             Assert.True(progressEventHandler.WasInvoked);
             Assert.Equal(request, progressEventHandler.Sender);
-            Assert.Equal(request.Content.Headers.ContentLength, progressEventHandler.EventArgs.TotalBytes);
+            Assert.Equal(
+                request.Content.Headers.ContentLength,
+                progressEventHandler.EventArgs.TotalBytes
+            );
         }
 
         [Fact]
@@ -60,13 +75,20 @@ namespace System.Net.Http.Handlers
             StringContent innerContent = new StringContent("HelloWorld!");
             HttpRequestMessage request = new HttpRequestMessage();
             ProgressMessageHandler progressHandler = new ProgressMessageHandler();
-            ProgressContent progressContent = new ProgressContent(innerContent, progressHandler, request);
+            ProgressContent progressContent = new ProgressContent(
+                innerContent,
+                progressHandler,
+                request
+            );
 
             // Act
             progressContent.Dispose();
 
             // Assert
-            Assert.ThrowsObjectDisposed(() => innerContent.LoadIntoBufferAsync(), typeof(StringContent).FullName);
+            Assert.ThrowsObjectDisposed(
+                () => innerContent.LoadIntoBufferAsync(),
+                typeof(StringContent).FullName
+            );
         }
 
         private static void ValidateContentHeader(HttpContent content)

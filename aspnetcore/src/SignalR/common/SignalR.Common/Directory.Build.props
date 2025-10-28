@@ -4,5 +4,4 @@
   <PropertyGroup>
     <NoWarn>$(NoWarn);CS3021</NoWarn>
   </PropertyGroup>
-
 </Project>

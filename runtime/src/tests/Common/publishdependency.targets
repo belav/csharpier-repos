@@ -26,9 +26,10 @@
   </PropertyGroup>
 
   <Target Name="CopyDependencyToCoreRoot">
-    <MSBuild Projects="@(CoreRootProjectFiles)"
-             Targets="CopyDependencyToCoreRoot"
-             Properties="Language=C#;RuntimeIdentifier=$(OutputRID);CORE_ROOT=$(CORE_ROOT);EnableNativeSanitizers=$(EnableNativeSanitizers)" />
-
+    <MSBuild
+      Projects="@(CoreRootProjectFiles)"
+      Targets="CopyDependencyToCoreRoot"
+      Properties="Language=C#;RuntimeIdentifier=$(OutputRID);CORE_ROOT=$(CORE_ROOT);EnableNativeSanitizers=$(EnableNativeSanitizers)"
+    />
   </Target>
 </Project>

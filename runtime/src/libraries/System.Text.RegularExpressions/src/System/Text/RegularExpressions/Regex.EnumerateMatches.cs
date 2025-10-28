@@ -22,8 +22,10 @@ namespace System.Text.RegularExpressions
         /// <returns>A <see cref="ValueMatchEnumerator"/> to iterate over the matches.</returns>
         /// <exception cref="ArgumentNullException"><paramref name="pattern"/> is null.</exception>
         /// <exception cref="RegexParseException">A regular expression parsing error occurred.</exception>
-        public static ValueMatchEnumerator EnumerateMatches(ReadOnlySpan<char> input, [StringSyntax(StringSyntaxAttribute.Regex)] string pattern) =>
-            RegexCache.GetOrAdd(pattern).EnumerateMatches(input);
+        public static ValueMatchEnumerator EnumerateMatches(
+            ReadOnlySpan<char> input,
+            [StringSyntax(StringSyntaxAttribute.Regex)] string pattern
+        ) => RegexCache.GetOrAdd(pattern).EnumerateMatches(input);
 
         /// <summary>
         /// Searches an input span for all occurrences of a regular expression and returns a <see cref="ValueMatchEnumerator"/> to iterate over the matches.
@@ -41,8 +43,11 @@ namespace System.Text.RegularExpressions
         /// <exception cref="ArgumentNullException"><paramref name="pattern"/> is null.</exception>
         /// <exception cref="ArgumentOutOfRangeException"><paramref name="options"/> is not a valid bitwise combination of RegexOptions values.</exception>
         /// <exception cref="RegexParseException">A regular expression parsing error occurred.</exception>
-        public static ValueMatchEnumerator EnumerateMatches(ReadOnlySpan<char> input, [StringSyntax(StringSyntaxAttribute.Regex, nameof(options))] string pattern, RegexOptions options) =>
-            RegexCache.GetOrAdd(pattern, options, s_defaultMatchTimeout).EnumerateMatches(input);
+        public static ValueMatchEnumerator EnumerateMatches(
+            ReadOnlySpan<char> input,
+            [StringSyntax(StringSyntaxAttribute.Regex, nameof(options))] string pattern,
+            RegexOptions options
+        ) => RegexCache.GetOrAdd(pattern, options, s_defaultMatchTimeout).EnumerateMatches(input);
 
         /// <summary>
         /// Searches an input span for all occurrences of a regular expression and returns a <see cref="ValueMatchEnumerator"/> to iterate over the matches.
@@ -61,8 +66,12 @@ namespace System.Text.RegularExpressions
         /// <exception cref="ArgumentNullException"><paramref name="pattern"/> is null.</exception>
         /// <exception cref="ArgumentOutOfRangeException"><paramref name="options"/> is not a valid bitwise combination of RegexOptions values, or <paramref name="matchTimeout"/> is negative, zero, or greater than approximately 24 days.</exception>
         /// <exception cref="RegexParseException">A regular expression parsing error occurred.</exception>
-        public static ValueMatchEnumerator EnumerateMatches(ReadOnlySpan<char> input, [StringSyntax(StringSyntaxAttribute.Regex, nameof(options))] string pattern, RegexOptions options, TimeSpan matchTimeout) =>
-            RegexCache.GetOrAdd(pattern, options, matchTimeout).EnumerateMatches(input);
+        public static ValueMatchEnumerator EnumerateMatches(
+            ReadOnlySpan<char> input,
+            [StringSyntax(StringSyntaxAttribute.Regex, nameof(options))] string pattern,
+            RegexOptions options,
+            TimeSpan matchTimeout
+        ) => RegexCache.GetOrAdd(pattern, options, matchTimeout).EnumerateMatches(input);
 
         /// <summary>
         /// Searches an input span for all occurrences of a regular expression and returns a <see cref="ValueMatchEnumerator"/> to iterate over the matches.
@@ -141,7 +150,13 @@ namespace System.Text.RegularExpressions
             /// </returns>
             public bool MoveNext()
             {
-                (bool Success, int Index, int Length, int TextPosition) match = _regex.RunSingleMatch(RegexRunnerMode.BoundsRequired, _prevLen, _input, _startAt);
+                (bool Success, int Index, int Length, int TextPosition) match =
+                    _regex.RunSingleMatch(
+                        RegexRunnerMode.BoundsRequired,
+                        _prevLen,
+                        _input,
+                        _startAt
+                    );
                 if (match.Success)
                 {
                     _current = new ValueMatch(match.Index, match.Length);

@@ -34,17 +34,19 @@ using Microsoft.Build.Tasks;
 using Microsoft.Build.Utilities;
 using NUnit.Framework;
 
-namespace MonoTests.Microsoft.Build.Tasks {
+namespace MonoTests.Microsoft.Build.Tasks
+{
+    [TestFixture]
+    public class GetFrameworkPathTest
+    {
+        [Test]
+        public void TestExecution1()
+        {
+            Engine engine;
+            Project project;
 
-	[TestFixture]
-	public class GetFrameworkPathTest {
-		[Test]
-		public void TestExecution1 ()
-		{
-			Engine engine;
-			Project project;
-
-			string documentString = @"
+            string documentString =
+                @"
                                 <Project xmlns=""http://schemas.microsoft.com/developer/msbuild/2003"">
 					<Target Name='1'>
 						<GetFrameworkPath>
@@ -57,13 +59,13 @@ namespace MonoTests.Microsoft.Build.Tasks {
 				</Project>
 			";
 
-			engine = new Engine (Consts.BinPath);
-			project = engine.CreateNewProject ();
-			project.LoadXml (documentString);
-			Assert.IsTrue (project.Build ("1"), "A1");
+            engine = new Engine(Consts.BinPath);
+            project = engine.CreateNewProject();
+            project.LoadXml(documentString);
+            Assert.IsTrue(project.Build("1"), "A1");
 
-			Assert.IsNotNull (project.EvaluatedProperties ["Path"], "A2");
-			Assert.IsTrue (String.Empty != project.EvaluatedProperties ["Path"].FinalValue, "A3");
-		}
-	}
+            Assert.IsNotNull(project.EvaluatedProperties["Path"], "A2");
+            Assert.IsTrue(String.Empty != project.EvaluatedProperties["Path"].FinalValue, "A3");
+        }
+    }
 }

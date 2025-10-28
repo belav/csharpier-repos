@@ -129,14 +129,16 @@ namespace System.Security.Cryptography
             ReadOnlySpan<byte> passwordBytes,
             PbeParameters pbeParameters,
             Span<byte> destination,
-            out int bytesWritten)
+            out int bytesWritten
+        )
         {
             ArgumentNullException.ThrowIfNull(pbeParameters);
 
             PasswordBasedEncryption.ValidatePbeParameters(
                 pbeParameters,
                 ReadOnlySpan<char>.Empty,
-                passwordBytes);
+                passwordBytes
+            );
 
             ECParameters ecParameters = ExportParameters(true);
 
@@ -144,12 +146,15 @@ namespace System.Security.Cryptography
             {
                 try
                 {
-                    AsnWriter pkcs8PrivateKey = EccKeyFormatHelper.WritePkcs8PrivateKey(ecParameters);
+                    AsnWriter pkcs8PrivateKey = EccKeyFormatHelper.WritePkcs8PrivateKey(
+                        ecParameters
+                    );
 
                     AsnWriter writer = KeyFormatHelper.WriteEncryptedPkcs8(
                         passwordBytes,
                         pkcs8PrivateKey,
-                        pbeParameters);
+                        pbeParameters
+                    );
 
                     return writer.TryEncode(destination, out bytesWritten);
                 }
@@ -201,14 +206,16 @@ namespace System.Security.Cryptography
             ReadOnlySpan<char> password,
             PbeParameters pbeParameters,
             Span<byte> destination,
-            out int bytesWritten)
+            out int bytesWritten
+        )
         {
             ArgumentNullException.ThrowIfNull(pbeParameters);
 
             PasswordBasedEncryption.ValidatePbeParameters(
                 pbeParameters,
                 password,
-                ReadOnlySpan<byte>.Empty);
+                ReadOnlySpan<byte>.Empty
+            );
 
             ECParameters ecParameters = ExportParameters(true);
 
@@ -216,12 +223,15 @@ namespace System.Security.Cryptography
             {
                 try
                 {
-                    AsnWriter pkcs8PrivateKey = EccKeyFormatHelper.WritePkcs8PrivateKey(ecParameters);
+                    AsnWriter pkcs8PrivateKey = EccKeyFormatHelper.WritePkcs8PrivateKey(
+                        ecParameters
+                    );
 
                     AsnWriter writer = KeyFormatHelper.WriteEncryptedPkcs8(
                         password,
                         pkcs8PrivateKey,
-                        pbeParameters);
+                        pbeParameters
+                    );
 
                     return writer.TryEncode(destination, out bytesWritten);
                 }
@@ -254,7 +264,8 @@ namespace System.Security.Cryptography
         /// </exception>
         public override unsafe bool TryExportPkcs8PrivateKey(
             Span<byte> destination,
-            out int bytesWritten)
+            out int bytesWritten
+        )
         {
             ECParameters ecParameters = ExportParameters(true);
 
@@ -294,7 +305,8 @@ namespace System.Security.Cryptography
         /// </exception>
         public override bool TryExportSubjectPublicKeyInfo(
             Span<byte> destination,
-            out int bytesWritten)
+            out int bytesWritten
+        )
         {
             ECParameters ecParameters = ExportParameters(false);
 
@@ -360,7 +372,8 @@ namespace System.Security.Cryptography
         public override unsafe void ImportEncryptedPkcs8PrivateKey(
             ReadOnlySpan<byte> passwordBytes,
             ReadOnlySpan<byte> source,
-            out int bytesRead)
+            out int bytesRead
+        )
         {
             KeyFormatHelper.ReadEncryptedPkcs8<ECParameters>(
                 s_validOids,
@@ -368,7 +381,8 @@ namespace System.Security.Cryptography
                 passwordBytes,
                 EccKeyFormatHelper.FromECPrivateKey,
                 out int localRead,
-                out ECParameters ret);
+                out ECParameters ret
+            );
 
             fixed (byte* privPin = ret.D)
             {
@@ -434,7 +448,8 @@ namespace System.Security.Cryptography
         public override unsafe void ImportEncryptedPkcs8PrivateKey(
             ReadOnlySpan<char> password,
             ReadOnlySpan<byte> source,
-            out int bytesRead)
+            out int bytesRead
+        )
         {
             KeyFormatHelper.ReadEncryptedPkcs8<ECParameters>(
                 s_validOids,
@@ -442,7 +457,8 @@ namespace System.Security.Cryptography
                 password,
                 EccKeyFormatHelper.FromECPrivateKey,
                 out int localRead,
-                out ECParameters ret);
+                out ECParameters ret
+            );
 
             fixed (byte* privPin = ret.D)
             {
@@ -494,14 +510,16 @@ namespace System.Security.Cryptography
         /// </remarks>
         public override unsafe void ImportPkcs8PrivateKey(
             ReadOnlySpan<byte> source,
-            out int bytesRead)
+            out int bytesRead
+        )
         {
             KeyFormatHelper.ReadPkcs8<ECParameters>(
                 s_validOids,
                 source,
                 EccKeyFormatHelper.FromECPrivateKey,
                 out int localRead,
-                out ECParameters key);
+                out ECParameters key
+            );
 
             fixed (byte* privPin = key.D)
             {
@@ -553,14 +571,16 @@ namespace System.Security.Cryptography
         /// </remarks>
         public override void ImportSubjectPublicKeyInfo(
             ReadOnlySpan<byte> source,
-            out int bytesRead)
+            out int bytesRead
+        )
         {
             KeyFormatHelper.ReadSubjectPublicKeyInfo<ECParameters>(
                 s_validOids,
                 source,
                 EccKeyFormatHelper.FromECPublicKey,
                 out int localRead,
-                out ECParameters key);
+                out ECParameters key
+            );
 
             ImportParameters(key);
             bytesRead = localRead;
@@ -593,7 +613,10 @@ namespace System.Security.Cryptography
         /// </remarks>
         public virtual unsafe void ImportECPrivateKey(ReadOnlySpan<byte> source, out int bytesRead)
         {
-            ECParameters ecParameters = EccKeyFormatHelper.FromECPrivateKey(source, out int localRead);
+            ECParameters ecParameters = EccKeyFormatHelper.FromECPrivateKey(
+                source,
+                out int localRead
+            );
 
             fixed (byte* privPin = ecParameters.D)
             {
@@ -648,7 +671,10 @@ namespace System.Security.Cryptography
         /// <exception cref="NotSupportedException">
         /// A derived class has not provided an implementation for <see cref="ExportParameters" />.
         /// </exception>
-        public virtual unsafe bool TryExportECPrivateKey(Span<byte> destination, out int bytesWritten)
+        public virtual unsafe bool TryExportECPrivateKey(
+            Span<byte> destination,
+            out int bytesWritten
+        )
         {
             ECParameters ecParameters = ExportParameters(true);
 
@@ -704,14 +730,17 @@ namespace System.Security.Cryptography
         /// </remarks>
         public override void ImportFromPem(ReadOnlySpan<char> input)
         {
-            PemKeyHelpers.ImportPem(input, label =>
-                label switch
-                {
-                    PemLabels.Pkcs8PrivateKey => ImportPkcs8PrivateKey,
-                    PemLabels.SpkiPublicKey => ImportSubjectPublicKeyInfo,
-                    PemLabels.EcPrivateKey => ImportECPrivateKey,
-                    _ => null,
-                });
+            PemKeyHelpers.ImportPem(
+                input,
+                label =>
+                    label switch
+                    {
+                        PemLabels.Pkcs8PrivateKey => ImportPkcs8PrivateKey,
+                        PemLabels.SpkiPublicKey => ImportSubjectPublicKeyInfo,
+                        PemLabels.EcPrivateKey => ImportECPrivateKey,
+                        _ => null,
+                    }
+            );
         }
 
         /// <summary>
@@ -778,7 +807,10 @@ namespace System.Security.Cryptography
         ///   </para>
         ///   <para>This method supports the <c>ENCRYPTED PRIVATE KEY</c> PEM label.</para>
         /// </remarks>
-        public override void ImportFromEncryptedPem(ReadOnlySpan<char> input, ReadOnlySpan<char> password)
+        public override void ImportFromEncryptedPem(
+            ReadOnlySpan<char> input,
+            ReadOnlySpan<char> password
+        )
         {
             // Implementation has been pushed down to AsymmetricAlgorithm. The
             // override remains for compatibility.
@@ -850,7 +882,10 @@ namespace System.Security.Cryptography
         ///   </para>
         ///   <para>This method supports the <c>ENCRYPTED PRIVATE KEY</c> PEM label.</para>
         /// </remarks>
-        public override void ImportFromEncryptedPem(ReadOnlySpan<char> input, ReadOnlySpan<byte> passwordBytes)
+        public override void ImportFromEncryptedPem(
+            ReadOnlySpan<char> input,
+            ReadOnlySpan<byte> passwordBytes
+        )
         {
             // Implementation has been pushed down to AsymmetricAlgorithm. The
             // override remains for compatibility.
@@ -936,7 +971,8 @@ namespace System.Security.Cryptography
                 PemLabels.EcPrivateKey,
                 Export,
                 destination,
-                out charsWritten);
+                out charsWritten
+            );
         }
     }
 }

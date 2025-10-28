@@ -30,10 +30,7 @@ namespace System.Web.Mvc.Routing
 #if ROUTE_DEBUGGING
         public override string LiteralText
         {
-            get
-            {
-                return "{" + (IsCatchAll ? "*" : String.Empty) + ParameterName + "}";
-            }
+            get { return "{" + (IsCatchAll ? "*" : String.Empty) + ParameterName + "}"; }
         }
 
         public override string ToString()

@@ -15,8 +15,13 @@ namespace System.Activities
         Exception exception;
         ActivityInstanceReference source;
 
-        internal NativeActivityFaultContext(ActivityInstance executingActivityInstance,
-            ActivityExecutor executor, BookmarkManager bookmarkManager, Exception exception, ActivityInstanceReference source)
+        internal NativeActivityFaultContext(
+            ActivityInstance executingActivityInstance,
+            ActivityExecutor executor,
+            BookmarkManager bookmarkManager,
+            Exception exception,
+            ActivityInstanceReference source
+        )
             : base(executingActivityInstance, executor, bookmarkManager)
         {
             Fx.Assert(exception != null, "There must be an exception.");
@@ -28,10 +33,7 @@ namespace System.Activities
 
         internal bool IsFaultHandled
         {
-            get
-            {
-                return this.isFaultHandled;
-            }
+            get { return this.isFaultHandled; }
         }
 
         public void HandleFault()

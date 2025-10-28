@@ -43,7 +43,10 @@ namespace System.Xml.Xsl.XsltOld
         public override void ReplaceNamespaceAlias(Compiler compiler)
         {
 #if DEBUG
-            Debug.Assert(!_replaceNSAliasesDone, "Second attempt to replace NS aliases!. This bad.");
+            Debug.Assert(
+                !_replaceNSAliasesDone,
+                "Second attempt to replace NS aliases!. This bad."
+            );
             _replaceNSAliasesDone = true;
 #endif
             if (_nodeType == XPathNodeType.Attribute && _namespaceUri.Length == 0)
@@ -63,7 +66,15 @@ namespace System.Xml.Xsl.XsltOld
 
         public override bool Output(Processor processor, ActionFrame frame)
         {
-            return processor.BeginEvent(_nodeType, _prefix, _name, _namespaceUri, _empty, _htmlProps, false);
+            return processor.BeginEvent(
+                _nodeType,
+                _prefix,
+                _name,
+                _namespaceUri,
+                _empty,
+                _htmlProps,
+                false
+            );
         }
     }
 }

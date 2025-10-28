@@ -1,5 +1,4 @@
 <Project Sdk="Microsoft.NET.Sdk">
-
   <PropertyGroup>
     <AssemblyVersion>4.0.0.0</AssemblyVersion>
     <StrongNameKeyId>MicrosoftShared</StrongNameKeyId>
@@ -8,8 +7,13 @@
   <ItemGroup>
     <ProjectReference Include="$(LibrariesProjectRoot)System.ObjectModel\src\System.ObjectModel.csproj" />
     <ProjectReference Include="$(LibrariesProjectRoot)System.Runtime\src\System.Runtime.csproj" />
-    <ProjectReference Include="$(LibrariesProjectRoot)shims\stubs\System.IO.Packaging.csproj" PrivateAssets="all" />
-    <ProjectReference Include="$(LibrariesProjectRoot)shims\stubs\System.Security.Permissions.csproj" PrivateAssets="all" />
+    <ProjectReference
+      Include="$(LibrariesProjectRoot)shims\stubs\System.IO.Packaging.csproj"
+      PrivateAssets="all"
+    />
+    <ProjectReference
+      Include="$(LibrariesProjectRoot)shims\stubs\System.Security.Permissions.csproj"
+      PrivateAssets="all"
+    />
   </ItemGroup>
-
 </Project>

@@ -25,7 +25,15 @@ namespace Microsoft.Apple.Build
             platformName = GetPlatformName(targetOS);
             devRoot = GetXCodeDevRoot();
 
-            sdkDir = Path.Combine(devRoot, "Contents", "Developer", "Platforms", $"{platformName}.platform", "Developer", "SDKs");
+            sdkDir = Path.Combine(
+                devRoot,
+                "Contents",
+                "Developer",
+                "Platforms",
+                $"{platformName}.platform",
+                "Developer",
+                "SDKs"
+            );
             sdkRoot = GetSdkRoot(sdkDir, platformName);
         }
 
@@ -90,19 +98,23 @@ namespace Microsoft.Apple.Build
             string path = "";
             string output;
 
-            if (!File.Exists ("/usr/bin/xcode-select"))
+            if (!File.Exists("/usr/bin/xcode-select"))
             {
-                throw new Exception("Unable to locate XCode via xcode-select. Please make sure Xcode is properly installed");
+                throw new Exception(
+                    "Unable to locate XCode via xcode-select. Please make sure Xcode is properly installed"
+                );
             }
 
             try
             {
-                (int exitCode, output) = Utils.TryRunProcess(logger,
-                                                                "/usr/bin/xcode-select",
-                                                                "--print-path",
-                                                                silent: true,
-                                                                debugMessageImportance: MessageImportance.Low,
-                                                                label: "xcode-select");
+                (int exitCode, output) = Utils.TryRunProcess(
+                    logger,
+                    "/usr/bin/xcode-select",
+                    "--print-path",
+                    silent: true,
+                    debugMessageImportance: MessageImportance.Low,
+                    label: "xcode-select"
+                );
 
                 output.Trim();
                 if (Directory.Exists(output))
@@ -116,7 +128,9 @@ namespace Microsoft.Apple.Build
 
                     if (string.IsNullOrEmpty(path))
                     {
-                        throw new ArgumentException("Could not find the path to Xcode via xcode-select. Please make sure Xcode is properly installed.");
+                        throw new ArgumentException(
+                            "Could not find the path to Xcode via xcode-select. Please make sure Xcode is properly installed."
+                        );
                     }
                 }
             }
@@ -136,7 +150,7 @@ namespace Microsoft.Apple.Build
                 "tvos" => "AppleTVOS",
                 "tvos-simulator" => "AppleTVSimulator",
                 "maccatalyst" => "MacOSX",
-                _ => throw new ArgumentException($"{targetOS} does not have a valid platform name")
+                _ => throw new ArgumentException($"{targetOS} does not have a valid platform name"),
             };
     }
 }

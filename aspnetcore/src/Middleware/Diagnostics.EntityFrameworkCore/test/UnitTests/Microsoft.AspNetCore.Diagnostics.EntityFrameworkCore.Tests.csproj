@@ -1,5 +1,4 @@
 <Project Sdk="Microsoft.NET.Sdk">
-
   <PropertyGroup>
     <TargetFramework>$(DefaultNetCoreTargetFramework)</TargetFramework>
   </PropertyGroup>
@@ -9,6 +8,4 @@
     <Reference Include="Microsoft.AspNetCore.Http" />
     <Reference Include="Microsoft.EntityFrameworkCore.InMemory" />
   </ItemGroup>
-
-
 </Project>

@@ -19,7 +19,11 @@ namespace Microsoft.CodeAnalysis.Syntax.InternalSyntax
                 this.InitializeChildren();
             }
 
-            internal WithManyChildrenBase(DiagnosticInfo[]? diagnostics, SyntaxAnnotation[]? annotations, ArrayElement<GreenNode>[] children)
+            internal WithManyChildrenBase(
+                DiagnosticInfo[]? diagnostics,
+                SyntaxAnnotation[]? annotations,
+                ArrayElement<GreenNode>[] children
+            )
                 : base(diagnostics, annotations)
             {
                 this.children = children;
@@ -65,14 +69,20 @@ namespace Microsoft.CodeAnalysis.Syntax.InternalSyntax
                 if (parent != null && parent.ShouldCreateWeakList())
                 {
                     return separated
-                        ? new Syntax.SyntaxList.SeparatedWithManyWeakChildren(this, parent, position)
-                        : (SyntaxNode)new Syntax.SyntaxList.WithManyWeakChildren(this, parent, position);
+                        ? new Syntax.SyntaxList.SeparatedWithManyWeakChildren(
+                            this,
+                            parent,
+                            position
+                        )
+                        : (SyntaxNode)
+                            new Syntax.SyntaxList.WithManyWeakChildren(this, parent, position);
                 }
                 else
                 {
                     return separated
                         ? new Syntax.SyntaxList.SeparatedWithManyChildren(this, parent, position)
-                        : (SyntaxNode)new Syntax.SyntaxList.WithManyChildren(this, parent, position);
+                        : (SyntaxNode)
+                            new Syntax.SyntaxList.WithManyChildren(this, parent, position);
                 }
             }
 
@@ -94,14 +104,14 @@ namespace Microsoft.CodeAnalysis.Syntax.InternalSyntax
         internal sealed class WithManyChildren : WithManyChildrenBase
         {
             internal WithManyChildren(ArrayElement<GreenNode>[] children)
-                : base(children)
-            {
-            }
+                : base(children) { }
 
-            internal WithManyChildren(DiagnosticInfo[]? diagnostics, SyntaxAnnotation[]? annotations, ArrayElement<GreenNode>[] children)
-                : base(diagnostics, annotations, children)
-            {
-            }
+            internal WithManyChildren(
+                DiagnosticInfo[]? diagnostics,
+                SyntaxAnnotation[]? annotations,
+                ArrayElement<GreenNode>[] children
+            )
+                : base(diagnostics, annotations, children) { }
 
             internal override GreenNode SetDiagnostics(DiagnosticInfo[]? errors)
             {

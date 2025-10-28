@@ -11,6 +11,6 @@ namespace System.Runtime.Serialization.Json
         EndElement,
         QuotedText,
         StandaloneText,
-        Collection
+        Collection,
     }
 }

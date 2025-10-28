@@ -2,7 +2,6 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System.Net.Http.Headers;
-
 using Xunit;
 
 namespace System.Net.Http.Tests
@@ -12,7 +11,8 @@ namespace System.Net.Http.Tests
         [Fact]
         public void Properties_ReadValues_MatchExpectation()
         {
-            HttpHeaderParser parser = GenericHeaderParser.MultipleValueNameValueWithParametersParser;
+            HttpHeaderParser parser =
+                GenericHeaderParser.MultipleValueNameValueWithParametersParser;
             Assert.True(parser.SupportsMultipleValues);
             Assert.Null(parser.Comparer);
 
@@ -25,12 +25,17 @@ namespace System.Net.Http.Tests
         public void Parse_ValidValue_ReturnsNameValueWithParametersHeaderValue()
         {
             // This test verifies that Parse() correctly calls TryParse().
-            HttpHeaderParser parser = GenericHeaderParser.MultipleValueNameValueWithParametersParser;
+            HttpHeaderParser parser =
+                GenericHeaderParser.MultipleValueNameValueWithParametersParser;
             int index = 2;
 
-            NameValueWithParametersHeaderValue expected = new NameValueWithParametersHeaderValue("custom");
+            NameValueWithParametersHeaderValue expected = new NameValueWithParametersHeaderValue(
+                "custom"
+            );
             expected.Parameters.Add(new NameValueHeaderValue("name", "value"));
-            Assert.True(expected.Equals(parser.ParseValue("   custom ; name = value ", null, ref index)));
+            Assert.True(
+                expected.Equals(parser.ParseValue("   custom ; name = value ", null, ref index))
+            );
             Assert.Equal(25, index);
         }
 
@@ -38,16 +43,22 @@ namespace System.Net.Http.Tests
         public void Parse_InvalidValue_Throw()
         {
             // This test verifies that Parse() correctly calls TryParse().
-            HttpHeaderParser parser = GenericHeaderParser.MultipleValueNameValueWithParametersParser;
+            HttpHeaderParser parser =
+                GenericHeaderParser.MultipleValueNameValueWithParametersParser;
             int index = 0;
 
-            Assert.Throws<FormatException>(() => { parser.ParseValue("custom;=value", null, ref index); });
+            Assert.Throws<FormatException>(() =>
+            {
+                parser.ParseValue("custom;=value", null, ref index);
+            });
         }
 
         [Fact]
         public void TryParse_SetOfValidValueStrings_ParsedCorrectly()
         {
-            NameValueWithParametersHeaderValue expected = new NameValueWithParametersHeaderValue("custom");
+            NameValueWithParametersHeaderValue expected = new NameValueWithParametersHeaderValue(
+                "custom"
+            );
             CheckValidParsedValue(" custom  ", 0, expected, 9);
             CheckValidParsedValue("custom", 0, expected, 6);
             CheckValidParsedValue(",, , custom  , chunked", 0, expected, 15);
@@ -87,24 +98,38 @@ namespace System.Net.Http.Tests
 
         #region Helper methods
 
-        private void CheckValidParsedValue(string input, int startIndex,
-            NameValueWithParametersHeaderValue expectedResult, int expectedIndex)
+        private void CheckValidParsedValue(
+            string input,
+            int startIndex,
+            NameValueWithParametersHeaderValue expectedResult,
+            int expectedIndex
+        )
         {
-            HttpHeaderParser parser = GenericHeaderParser.MultipleValueNameValueWithParametersParser;
+            HttpHeaderParser parser =
+                GenericHeaderParser.MultipleValueNameValueWithParametersParser;
             object result = null;
-            Assert.True(parser.TryParseValue(input, null, ref startIndex, out result),
-                string.Format("TryParse returned false. Input: '{0}', Index: {1}", input, startIndex));
+            Assert.True(
+                parser.TryParseValue(input, null, ref startIndex, out result),
+                string.Format(
+                    "TryParse returned false. Input: '{0}', Index: {1}",
+                    input,
+                    startIndex
+                )
+            );
             Assert.Equal(expectedIndex, startIndex);
             Assert.Equal(result, expectedResult);
         }
 
         private void CheckInvalidParsedValue(string input, int startIndex)
         {
-            HttpHeaderParser parser = GenericHeaderParser.MultipleValueNameValueWithParametersParser;
+            HttpHeaderParser parser =
+                GenericHeaderParser.MultipleValueNameValueWithParametersParser;
             object result = null;
             int newIndex = startIndex;
-            Assert.False(parser.TryParseValue(input, null, ref newIndex, out result),
-                string.Format("TryParse returned true. Input: '{0}', Index: {1}", input, startIndex));
+            Assert.False(
+                parser.TryParseValue(input, null, ref newIndex, out result),
+                string.Format("TryParse returned true. Input: '{0}', Index: {1}", input, startIndex)
+            );
             Assert.Null(result);
             Assert.Equal(startIndex, newIndex);
         }

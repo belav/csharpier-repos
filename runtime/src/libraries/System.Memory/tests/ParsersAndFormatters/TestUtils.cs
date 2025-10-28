@@ -1,9 +1,9 @@
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
-using System.Text;
-using System.Numerics;
 using System.Globalization;
+using System.Numerics;
+using System.Text;
 
 namespace System.Buffers.Text.Tests
 {
@@ -12,7 +12,13 @@ namespace System.Buffers.Text.Tests
         public static MutableDecimal ToMutableDecimal(this decimal d)
         {
             int[] bits = decimal.GetBits(d);
-            return new MutableDecimal() { High = (uint)bits[0], Low = (uint)bits[1], Mid = (uint)bits[2], Flags = (uint)bits[3] };
+            return new MutableDecimal()
+            {
+                High = (uint)bits[0],
+                Low = (uint)bits[1],
+                Mid = (uint)bits[2],
+                Flags = (uint)bits[3],
+            };
         }
 
         public static decimal ToDecimal(this MutableDecimal md)
@@ -42,7 +48,11 @@ namespace System.Buffers.Text.Tests
             }
             else if (value is DateTime dateTime)
             {
-                return "[" + dateTime.ToString("O", CultureInfo.InvariantCulture) + ", Kind=" + dateTime.Kind + "]";
+                return "["
+                    + dateTime.ToString("O", CultureInfo.InvariantCulture)
+                    + ", Kind="
+                    + dateTime.Kind
+                    + "]";
             }
             else if (value is DateTimeOffset dateTimeOffset)
             {
@@ -61,7 +71,12 @@ namespace System.Buffers.Text.Tests
 
                 string sign = isNegative ? "-" : "+";
 
-                return "[" + sign + dec.ToString("G", CultureInfo.InvariantCulture) + ", scale=" + scale + "]";
+                return "["
+                    + sign
+                    + dec.ToString("G", CultureInfo.InvariantCulture)
+                    + ", scale="
+                    + scale
+                    + "]";
             }
             else if (value is TimeSpan timeSpan)
             {
@@ -168,6 +183,8 @@ namespace System.Buffers.Text.Tests
         }
 
         public static ReadOnlySpan<byte> ToUtf8Span(this string s) => Encoding.UTF8.GetBytes(s);
-        public static string ToUtf16String(this Span<byte> span) => Encoding.UTF8.GetString(span.ToArray());
+
+        public static string ToUtf16String(this Span<byte> span) =>
+            Encoding.UTF8.GetString(span.ToArray());
     }
 }

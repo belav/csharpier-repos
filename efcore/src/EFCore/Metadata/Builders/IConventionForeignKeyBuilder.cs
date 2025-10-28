@@ -32,7 +32,11 @@ public interface IConventionForeignKeyBuilder : IConventionAnnotatableBuilder
     /// <returns>
     ///     An <see cref="IConventionForeignKeyBuilder" /> to continue configuration if the annotation was set, <see langword="null" /> otherwise.
     /// </returns>
-    new IConventionForeignKeyBuilder? HasAnnotation(string name, object? value, bool fromDataAnnotation = false);
+    new IConventionForeignKeyBuilder? HasAnnotation(
+        string name,
+        object? value,
+        bool fromDataAnnotation = false
+    );
 
     /// <summary>
     ///     Sets the annotation stored under the given name. Overwrites the existing annotation if an
@@ -49,7 +53,8 @@ public interface IConventionForeignKeyBuilder : IConventionAnnotatableBuilder
     new IConventionForeignKeyBuilder? HasNonNullAnnotation(
         string name,
         object? value,
-        bool fromDataAnnotation = false);
+        bool fromDataAnnotation = false
+    );
 
     /// <summary>
     ///     Removes the annotation with the given name from this object.
@@ -76,7 +81,8 @@ public interface IConventionForeignKeyBuilder : IConventionAnnotatableBuilder
     IConventionForeignKeyBuilder? HasEntityTypes(
         IConventionEntityType principalEntityType,
         IConventionEntityType dependentEntityType,
-        bool fromDataAnnotation = false);
+        bool fromDataAnnotation = false
+    );
 
     /// <summary>
     ///     Returns a value indicating whether the principal and dependent types can be switched or the relationship could
@@ -92,7 +98,8 @@ public interface IConventionForeignKeyBuilder : IConventionAnnotatableBuilder
     bool CanSetEntityTypes(
         IConventionEntityType principalEntityType,
         IConventionEntityType dependentEntityType,
-        bool fromDataAnnotation = false);
+        bool fromDataAnnotation = false
+    );
 
     /// <summary>
     ///     Returns a value indicating whether the principal and dependent entity types can be switched
@@ -105,7 +112,8 @@ public interface IConventionForeignKeyBuilder : IConventionAnnotatableBuilder
     /// <returns><see langword="true" /> if the principal and dependent entity types can be switched.</returns>
     bool CanInvert(
         IReadOnlyList<IConventionProperty>? newForeignKeyProperties,
-        bool fromDataAnnotation = false);
+        bool fromDataAnnotation = false
+    );
 
     /// <summary>
     ///     Configures the properties to use as the foreign key for this relationship.
@@ -118,7 +126,8 @@ public interface IConventionForeignKeyBuilder : IConventionAnnotatableBuilder
     /// </returns>
     IConventionForeignKeyBuilder? HasForeignKey(
         IReadOnlyList<string>? propertyNames,
-        bool fromDataAnnotation = false);
+        bool fromDataAnnotation = false
+    );
 
     /// <summary>
     ///     Configures the properties to use as the foreign key for this relationship.
@@ -131,7 +140,8 @@ public interface IConventionForeignKeyBuilder : IConventionAnnotatableBuilder
     /// </returns>
     IConventionForeignKeyBuilder? HasForeignKey(
         IReadOnlyList<IConventionProperty>? properties,
-        bool fromDataAnnotation = false);
+        bool fromDataAnnotation = false
+    );
 
     /// <summary>
     ///     Returns a value indicating whether the given properties can be set as the foreign key for this relationship
@@ -149,7 +159,10 @@ public interface IConventionForeignKeyBuilder : IConventionAnnotatableBuilder
     /// <param name="properties">The properties to use as the foreign key for this relationship.</param>
     /// <param name="fromDataAnnotation">Indicates whether the configuration was specified using a data annotation.</param>
     /// <returns><see langword="true" /> if the given properties can be set as the foreign key.</returns>
-    bool CanSetForeignKey(IReadOnlyList<IConventionProperty>? properties, bool fromDataAnnotation = false);
+    bool CanSetForeignKey(
+        IReadOnlyList<IConventionProperty>? properties,
+        bool fromDataAnnotation = false
+    );
 
     /// <summary>
     ///     Configures the properties that this relationship targets.
@@ -162,7 +175,8 @@ public interface IConventionForeignKeyBuilder : IConventionAnnotatableBuilder
     /// </returns>
     IConventionForeignKeyBuilder? HasPrincipalKey(
         IReadOnlyList<string>? propertyNames,
-        bool fromDataAnnotation = false);
+        bool fromDataAnnotation = false
+    );
 
     /// <summary>
     ///     Configures the properties that this relationship targets.
@@ -175,7 +189,8 @@ public interface IConventionForeignKeyBuilder : IConventionAnnotatableBuilder
     /// </returns>
     IConventionForeignKeyBuilder? HasPrincipalKey(
         IReadOnlyList<IConventionProperty>? properties,
-        bool fromDataAnnotation = false);
+        bool fromDataAnnotation = false
+    );
 
     /// <summary>
     ///     Returns a value indicating whether the given properties can be set as the target for this relationship
@@ -193,7 +208,10 @@ public interface IConventionForeignKeyBuilder : IConventionAnnotatableBuilder
     /// <param name="properties">The properties for this relationship to target.</param>
     /// <param name="fromDataAnnotation">Indicates whether the configuration was specified using a data annotation.</param>
     /// <returns><see langword="true" /> if the given properties can be set as the target.</returns>
-    bool CanSetPrincipalKey(IReadOnlyList<IConventionProperty>? properties, bool fromDataAnnotation = false);
+    bool CanSetPrincipalKey(
+        IReadOnlyList<IConventionProperty>? properties,
+        bool fromDataAnnotation = false
+    );
 
     /// <summary>
     ///     Configures the property with the given name as a navigation property used by this relationship.
@@ -210,7 +228,8 @@ public interface IConventionForeignKeyBuilder : IConventionAnnotatableBuilder
     IConventionForeignKeyBuilder? HasNavigation(
         string? name,
         bool pointsToPrincipal,
-        bool fromDataAnnotation = false);
+        bool fromDataAnnotation = false
+    );
 
     /// <summary>
     ///     Configures the given property as a navigation property used by this relationship.
@@ -227,7 +246,8 @@ public interface IConventionForeignKeyBuilder : IConventionAnnotatableBuilder
     IConventionForeignKeyBuilder? HasNavigation(
         MemberInfo? property,
         bool pointsToPrincipal,
-        bool fromDataAnnotation = false);
+        bool fromDataAnnotation = false
+    );
 
     /// <summary>
     ///     Configures the properties with the given names as the navigation properties used by this relationship.
@@ -248,7 +268,8 @@ public interface IConventionForeignKeyBuilder : IConventionAnnotatableBuilder
     IConventionForeignKeyBuilder? HasNavigations(
         string? navigationToPrincipalName,
         string? navigationToDependentName,
-        bool fromDataAnnotation = false);
+        bool fromDataAnnotation = false
+    );
 
     /// <summary>
     ///     Configures the given properties as the navigation properties used by this relationship.
@@ -269,7 +290,8 @@ public interface IConventionForeignKeyBuilder : IConventionAnnotatableBuilder
     IConventionForeignKeyBuilder? HasNavigations(
         MemberInfo? navigationToPrincipal,
         MemberInfo? navigationToDependent,
-        bool fromDataAnnotation = false);
+        bool fromDataAnnotation = false
+    );
 
     /// <summary>
     ///     Returns a value indicating whether the property with the given name can be used as a navigation for this relationship
@@ -281,10 +303,7 @@ public interface IConventionForeignKeyBuilder : IConventionAnnotatableBuilder
     /// </param>
     /// <param name="fromDataAnnotation">Indicates whether the configuration was specified using a data annotation.</param>
     /// <returns><see langword="true" /> if the given property can be used as a navigation.</returns>
-    bool CanSetNavigation(
-        string? name,
-        bool pointsToPrincipal,
-        bool fromDataAnnotation = false);
+    bool CanSetNavigation(string? name, bool pointsToPrincipal, bool fromDataAnnotation = false);
 
     /// <summary>
     ///     Returns a value indicating whether the given property can be used as a navigation for this relationship
@@ -299,7 +318,8 @@ public interface IConventionForeignKeyBuilder : IConventionAnnotatableBuilder
     bool CanSetNavigation(
         MemberInfo? property,
         bool pointsToPrincipal,
-        bool fromDataAnnotation = false);
+        bool fromDataAnnotation = false
+    );
 
     /// <summary>
     ///     Returns a value indicating whether the properties with the given names can be used as
@@ -318,7 +338,8 @@ public interface IConventionForeignKeyBuilder : IConventionAnnotatableBuilder
     bool CanSetNavigations(
         string? navigationToPrincipalName,
         string? navigationToDependentName,
-        bool fromDataAnnotation = false);
+        bool fromDataAnnotation = false
+    );
 
     /// <summary>
     ///     Returns a value indicating whether the given properties can be used as
@@ -337,7 +358,8 @@ public interface IConventionForeignKeyBuilder : IConventionAnnotatableBuilder
     bool CanSetNavigations(
         MemberInfo? navigationToPrincipal,
         MemberInfo? navigationToDependent,
-        bool fromDataAnnotation = false);
+        bool fromDataAnnotation = false
+    );
 
     /// <summary>
     ///     Configures whether this is a required relationship (i.e. whether none of the foreign key properties can
@@ -379,7 +401,10 @@ public interface IConventionForeignKeyBuilder : IConventionAnnotatableBuilder
     ///     The same builder instance if the dependent end requiredness was configured,
     ///     <see langword="null" /> otherwise.
     /// </returns>
-    IConventionForeignKeyBuilder? IsRequiredDependent(bool? required, bool fromDataAnnotation = false);
+    IConventionForeignKeyBuilder? IsRequiredDependent(
+        bool? required,
+        bool fromDataAnnotation = false
+    );
 
     /// <summary>
     ///     Returns a value indicating whether the dependent end requiredness can be configured
@@ -460,7 +485,10 @@ public interface IConventionForeignKeyBuilder : IConventionAnnotatableBuilder
     ///     The same builder instance if the delete operation was configured,
     ///     <see langword="null" /> otherwise.
     /// </returns>
-    IConventionForeignKeyBuilder? OnDelete(DeleteBehavior? deleteBehavior, bool fromDataAnnotation = false);
+    IConventionForeignKeyBuilder? OnDelete(
+        DeleteBehavior? deleteBehavior,
+        bool fromDataAnnotation = false
+    );
 
     /// <summary>
     ///     Returns a value indicating whether the operation on principal deletion can be configured

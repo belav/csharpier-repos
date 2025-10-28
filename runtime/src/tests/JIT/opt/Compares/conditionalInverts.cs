@@ -9,7 +9,6 @@ using Xunit;
 
 public class ConditionalInvertTest
 {
-
     [Theory]
     [InlineData(72, 13, 13)]
     [InlineData(32, 13, 223)]
@@ -18,7 +17,7 @@ public class ConditionalInvertTest
     {
         //ARM64-FULL-LINE: cmp {{w[0-9]+}}, #42
         //ARM64-FULL-LINE-NEXT: csinv {{w[0-9]+}}, {{w[0-9]+}}, {{w[0-9]+}}, {{gt|le}}
-        byte result = (byte) (op1 > 42 ? op2: ~op1);
+        byte result = (byte)(op1 > 42 ? op2 : ~op1);
         Assert.Equal(expected, result);
     }
 
@@ -30,7 +29,7 @@ public class ConditionalInvertTest
     {
         //ARM64-FULL-LINE: cmp {{w[0-9]+}}, #43
         //ARM64-FULL-LINE-NEXT: csinv {{w[0-9]+}}, {{w[0-9]+}}, {{w[0-9]+}}, {{gt|le}}
-        short result = (short) (op1 <= 43 ? ~op2 : op1);
+        short result = (short)(op1 <= 43 ? ~op2 : op1);
         Assert.Equal(expected, result);
     }
 
@@ -42,7 +41,7 @@ public class ConditionalInvertTest
     {
         //ARM64-FULL-LINE: cmp {{w[0-9]+}}, #44
         //ARM64-FULL-LINE-NEXT: csel {{w[0-9]+}}, {{w[0-9]+}}, {{w[0-9]+}}, {{gt|le}}
-        short result = (short) (op1 > 44 ? ~short.MaxValue : short.MaxValue);
+        short result = (short)(op1 > 44 ? ~short.MaxValue : short.MaxValue);
         Assert.Equal(expected, result);
     }
 
@@ -117,7 +116,6 @@ public class ConditionalInvertTest
         int result = op1 > 50 ? op2 : ~(op1 >> 2);
         Assert.Equal(expected, result);
     }
-
 
     [Theory]
     [InlineData(81, 21, -21)]

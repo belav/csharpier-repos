@@ -19,8 +19,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
     [Trait(Traits.Feature, Traits.Features.Completion)]
     public class SuggestionModeCompletionProviderTests : AbstractCSharpCompletionProviderTests
     {
-        internal override Type GetCompletionProviderType()
-            => typeof(CSharpSuggestionModeCompletionProvider);
+        internal override Type GetCompletionProviderType() =>
+            typeof(CSharpSuggestionModeCompletionProvider);
 
         [Fact]
         public async Task AfterFirstExplicitArgument()
@@ -92,8 +92,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
         }
 
         [Fact]
-        public async Task DelegateTypeExpected2()
-            => await VerifyBuilderAsync(AddUsingDirectives("using System;", AddInsideMethod(@"Func<int, int, int> f = $$")));
+        public async Task DelegateTypeExpected2() =>
+            await VerifyBuilderAsync(
+                AddUsingDirectives("using System;", AddInsideMethod(@"Func<int, int, int> f = $$"))
+            );
 
         [Fact]
         public async Task ObjectInitializerDelegateType()
@@ -1409,7 +1411,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
         [Theory, WorkItem("https://github.com/dotnet/roslyn/issues/46927"), CombinatorialData]
         public async Task FirstArgumentOfInvocation_NoParameter(bool hasTypedChar)
         {
-            var markup = $@"
+            var markup =
+                $@"
 using System;
 interface Foo
 {{
@@ -1426,13 +1429,17 @@ class P
         }
 
         [Theory, WorkItem("https://github.com/dotnet/roslyn/issues/46927"), CombinatorialData]
-        public async Task FirstArgumentOfInvocation_PossibleLambdaExpression(bool isLambda, bool hasTypedChar)
+        public async Task FirstArgumentOfInvocation_PossibleLambdaExpression(
+            bool isLambda,
+            bool hasTypedChar
+        )
         {
             var overload = isLambda
                 ? "bool Bar(Func<int, bool> predicate) => true;"
                 : "bool Bar(int x) => true;";
 
-            var markup = $@"
+            var markup =
+                $@"
 using System;
 interface Foo
 {{
@@ -1460,9 +1467,12 @@ class P
         [InlineData("string x = null, string y = null")]
         [InlineData("string x = null, string y = null, params string[] z")]
         [Theory, WorkItem("https://github.com/dotnet/roslyn/issues/49656")]
-        public async Task FirstArgumentOfInvocation_WithOverloadAcceptEmptyArgumentList(string overloadParameterList)
+        public async Task FirstArgumentOfInvocation_WithOverloadAcceptEmptyArgumentList(
+            string overloadParameterList
+        )
         {
-            var markup = $@"
+            var markup =
+                $@"
 using System;
 interface Foo
 {{
@@ -1479,11 +1489,11 @@ class P
             await VerifyBuilderAsync(markup);
         }
 
-        private async Task VerifyNotBuilderAsync(string markup)
-            => await VerifyWorkerAsync(markup, isBuilder: false);
+        private async Task VerifyNotBuilderAsync(string markup) =>
+            await VerifyWorkerAsync(markup, isBuilder: false);
 
-        private async Task VerifyBuilderAsync(string markup)
-            => await VerifyWorkerAsync(markup, isBuilder: true);
+        private async Task VerifyBuilderAsync(string markup) =>
+            await VerifyWorkerAsync(markup, isBuilder: true);
 
         private async Task VerifyWorkerAsync(string markup, bool isBuilder)
         {
@@ -1497,7 +1507,11 @@ class P
 
                 if (await CanUseSpeculativeSemanticModelAsync(document1, position))
                 {
-                    var document2 = workspaceFixture.UpdateDocument(code, SourceCodeKind.Regular, cleanBeforeUpdate: false);
+                    var document2 = workspaceFixture.UpdateDocument(
+                        code,
+                        SourceCodeKind.Regular,
+                        cleanBeforeUpdate: false
+                    );
                     await CheckResultsAsync(document2, position, isBuilder);
                 }
             }
@@ -1511,24 +1525,46 @@ class P
             triggerInfos.Add(CompletionTrigger.CreateDeletionTrigger('z'));
 
             var service = GetCompletionService(document.Project);
-            var provider = Assert.Single(service.GetTestAccessor().GetImportedAndBuiltInProviders(ImmutableHashSet<string>.Empty));
+            var provider = Assert.Single(
+                service
+                    .GetTestAccessor()
+                    .GetImportedAndBuiltInProviders(ImmutableHashSet<string>.Empty)
+            );
 
             foreach (var triggerInfo in triggerInfos)
             {
-                var completionList = await service.GetTestAccessor().GetContextAsync(
-                    provider, document, position, triggerInfo,
-                    options: CompletionOptions.Default, cancellationToken: CancellationToken.None);
+                var completionList = await service
+                    .GetTestAccessor()
+                    .GetContextAsync(
+                        provider,
+                        document,
+                        position,
+                        triggerInfo,
+                        options: CompletionOptions.Default,
+                        cancellationToken: CancellationToken.None
+                    );
 
                 if (isBuilder)
                 {
                     Assert.NotNull(completionList);
-                    Assert.True(completionList.SuggestionModeItem != null, "Expecting a suggestion mode, but none was present");
+                    Assert.True(
+                        completionList.SuggestionModeItem != null,
+                        "Expecting a suggestion mode, but none was present"
+                    );
                 }
                 else
                 {
                     if (completionList != null)
                     {
-                        Assert.True(completionList.SuggestionModeItem == null, "group.Builder == " + (completionList.SuggestionModeItem != null ? completionList.SuggestionModeItem.DisplayText : "null"));
+                        Assert.True(
+                            completionList.SuggestionModeItem == null,
+                            "group.Builder == "
+                                + (
+                                    completionList.SuggestionModeItem != null
+                                        ? completionList.SuggestionModeItem.DisplayText
+                                        : "null"
+                                )
+                        );
                     }
                 }
             }

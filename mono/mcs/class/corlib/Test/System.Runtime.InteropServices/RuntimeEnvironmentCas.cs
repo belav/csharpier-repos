@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -31,83 +31,82 @@ using System.Reflection;
 using System.Runtime.InteropServices;
 using System.Security;
 using System.Security.Permissions;
-
 using NUnit.Framework;
 
-namespace MonoCasTests.System.Runtime.InteropServices {
+namespace MonoCasTests.System.Runtime.InteropServices
+{
+    [TestFixture]
+    [Category("CAS")]
+    public class RuntimeEnvironmentCas
+    {
+        [SetUp]
+        public void SetUp()
+        {
+            if (!SecurityManager.SecurityEnabled)
+                Assert.Ignore("SecurityManager isn't enabled");
+        }
 
-	[TestFixture]
-	[Category ("CAS")]
-	public class RuntimeEnvironmentCas {
+        // Partial Trust Tests - i.e. call "normal" unit with reduced privileges
 
-		[SetUp]
-		public void SetUp ()
-		{
-			if (!SecurityManager.SecurityEnabled)
-				Assert.Ignore ("SecurityManager isn't enabled");
-		}
+        [Test]
+        [PermissionSet(SecurityAction.Deny, Unrestricted = true)]
+        public void PartialTrust_DenyUnrestricted_Success()
+        {
+            Assembly corlib = typeof(int).Assembly;
+            Assert.IsTrue(RuntimeEnvironment.FromGlobalAccessCache(corlib), "corlib");
+            Assembly corlib_test = Assembly.GetExecutingAssembly();
+            Assert.IsFalse(RuntimeEnvironment.FromGlobalAccessCache(corlib_test), "corlib_test");
+        }
 
-		// Partial Trust Tests - i.e. call "normal" unit with reduced privileges
+        // test Demand by denying the caller of the required privileges
+        // (note: is should only be PathDiscovery but that's not easy to test)
 
-		[Test]
-		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-		public void PartialTrust_DenyUnrestricted_Success ()
-		{
-			Assembly corlib = typeof (int).Assembly;
-			Assert.IsTrue (RuntimeEnvironment.FromGlobalAccessCache (corlib), "corlib");
-			Assembly corlib_test = Assembly.GetExecutingAssembly ();
-			Assert.IsFalse (RuntimeEnvironment.FromGlobalAccessCache (corlib_test), "corlib_test");
-		}
+        [Test]
+        [FileIOPermission(SecurityAction.Deny, Unrestricted = true)]
+        [ExpectedException(typeof(SecurityException))]
+        public void Deny_GetRuntimeDirectory()
+        {
+            Assert.IsNotNull(RuntimeEnvironment.GetRuntimeDirectory());
+        }
 
-		// test Demand by denying the caller of the required privileges
-		// (note: is should only be PathDiscovery but that's not easy to test)
+        [Test]
+        [FileIOPermission(SecurityAction.Deny, Unrestricted = true)]
+        [ExpectedException(typeof(SecurityException))]
+        public void Deny_SystemConfigurationFile()
+        {
+            Assert.IsNotNull(RuntimeEnvironment.SystemConfigurationFile);
+        }
 
-		[Test]
-		[FileIOPermission (SecurityAction.Deny, Unrestricted = true)]
-		[ExpectedException (typeof (SecurityException))]
-		public void Deny_GetRuntimeDirectory ()
-		{
-			Assert.IsNotNull (RuntimeEnvironment.GetRuntimeDirectory ());
-		}
+        [Test]
+        [SecurityPermission(SecurityAction.Deny, UnmanagedCode = true)]
+        [ExpectedException(typeof(SecurityException))]
+        public void Deny_GetSystemVersion()
+        {
+            Assert.IsNotNull(RuntimeEnvironment.GetSystemVersion());
+        }
 
-		[Test]
-		[FileIOPermission (SecurityAction.Deny, Unrestricted = true)]
-		[ExpectedException (typeof (SecurityException))]
-		public void Deny_SystemConfigurationFile ()
-		{
-			Assert.IsNotNull (RuntimeEnvironment.SystemConfigurationFile);
-		}
+        // test Demand by permiting only the required privileges
+        // (note: is should only be PathDiscovery but that's not easy to test)
 
-		[Test]
-		[SecurityPermission (SecurityAction.Deny, UnmanagedCode = true)]
-		[ExpectedException (typeof (SecurityException))]
-		public void Deny_GetSystemVersion ()
-		{
-			Assert.IsNotNull (RuntimeEnvironment.GetSystemVersion ());
-		}
+        [Test]
+        [FileIOPermission(SecurityAction.PermitOnly, Unrestricted = true)]
+        public void PermitOnly_GetRuntimeDirectory()
+        {
+            RuntimeEnvironment.GetRuntimeDirectory();
+        }
 
-		// test Demand by permiting only the required privileges
-		// (note: is should only be PathDiscovery but that's not easy to test)
+        [Test]
+        [FileIOPermission(SecurityAction.PermitOnly, Unrestricted = true)]
+        public void PermitOnly_SystemConfigurationFile()
+        {
+            Assert.IsNotNull(RuntimeEnvironment.SystemConfigurationFile);
+        }
 
-		[Test]
-		[FileIOPermission (SecurityAction.PermitOnly, Unrestricted = true)]
-		public void PermitOnly_GetRuntimeDirectory ()
-		{
-			RuntimeEnvironment.GetRuntimeDirectory ();
-		}
-
-		[Test]
-		[FileIOPermission (SecurityAction.PermitOnly, Unrestricted = true)]
-		public void PermitOnly_SystemConfigurationFile ()
-		{
-			Assert.IsNotNull (RuntimeEnvironment.SystemConfigurationFile);
-		}
-
-		[Test]
-		[SecurityPermission (SecurityAction.PermitOnly, UnmanagedCode = true)]
-		public void PermitOnly_GetSystemVersion ()
-		{
-			Assert.IsNotNull (RuntimeEnvironment.GetSystemVersion ());
-		}
-	}
+        [Test]
+        [SecurityPermission(SecurityAction.PermitOnly, UnmanagedCode = true)]
+        public void PermitOnly_GetSystemVersion()
+        {
+            Assert.IsNotNull(RuntimeEnvironment.GetSystemVersion());
+        }
+    }
 }

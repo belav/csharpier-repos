@@ -8,7 +8,12 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.DotNet.Build.Tasks.Templating" PrivateAssets="All" Version="$(MicrosoftDotNetBuildTasksTemplatingVersion)" IsImplicitlyDefined="true" />
+    <PackageReference
+      Include="Microsoft.DotNet.Build.Tasks.Templating"
+      PrivateAssets="All"
+      Version="$(MicrosoftDotNetBuildTasksTemplatingVersion)"
+      IsImplicitlyDefined="true"
+    />
   </ItemGroup>
 
   <!-- Update artifacts/bin/GenerateFiles/Directory.Build.* files. -->
@@ -33,19 +38,34 @@
 
     <MakeDir Directories="$(BaseOutputPath)" />
 
-    <Message Importance="High" Text="$(MSBuildProjectName) -&gt; $(BaseOutputPath)Directory.Build.props" />
-    <GenerateFileFromTemplate TemplateFile="$(MSBuildThisFileDirectory)Directory.Build.props.in"
+    <Message
+      Importance="High"
+      Text="$(MSBuildProjectName) -&gt; $(BaseOutputPath)Directory.Build.props"
+    />
+    <GenerateFileFromTemplate
+      TemplateFile="$(MSBuildThisFileDirectory)Directory.Build.props.in"
       Properties="$(_TemplateProperties)"
-      OutputPath="$(BaseOutputPath)Directory.Build.props" />
+      OutputPath="$(BaseOutputPath)Directory.Build.props"
+    />
 
-    <Message Importance="High" Text="$(MSBuildProjectName) -&gt; $(BaseOutputPath)Directory.Build.targets" />
-    <GenerateFileFromTemplate TemplateFile="$(MSBuildThisFileDirectory)Directory.Build.targets.in"
+    <Message
+      Importance="High"
+      Text="$(MSBuildProjectName) -&gt; $(BaseOutputPath)Directory.Build.targets"
+    />
+    <GenerateFileFromTemplate
+      TemplateFile="$(MSBuildThisFileDirectory)Directory.Build.targets.in"
       Properties="$(_TemplateProperties)"
-      OutputPath="$(BaseOutputPath)Directory.Build.targets" />
+      OutputPath="$(BaseOutputPath)Directory.Build.targets"
+    />
 
-    <Message Importance="High" Text="$(MSBuildProjectName) -&gt; $(ConfigDirectory)dotnet-tools.json" />
-    <GenerateFileFromTemplate TemplateFile="$(MSBuildThisFileDirectory)dotnet-tools.json.in"
+    <Message
+      Importance="High"
+      Text="$(MSBuildProjectName) -&gt; $(ConfigDirectory)dotnet-tools.json"
+    />
+    <GenerateFileFromTemplate
+      TemplateFile="$(MSBuildThisFileDirectory)dotnet-tools.json.in"
       Properties="$(_TemplateProperties)"
-      OutputPath="$(ConfigDirectory)dotnet-tools.json" />
+      OutputPath="$(ConfigDirectory)dotnet-tools.json"
+    />
   </Target>
 </Project>

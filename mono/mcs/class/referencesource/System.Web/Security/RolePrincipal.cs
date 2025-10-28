@@ -10,7 +10,8 @@
  * Copyright (c) 2002 Microsoft Corporation
  */
 
-namespace System.Web.Security {
+namespace System.Web.Security
+{
     using System.Collections.Specialized;
     using System.Configuration;
     using System.Configuration.Provider;
@@ -31,7 +32,7 @@ namespace System.Web.Security {
     using System.Web.Util;
 
     [Serializable]
-    public class RolePrincipal : ClaimsPrincipal, ISerializable    
+    public class RolePrincipal : ClaimsPrincipal, ISerializable
     {
         [NonSerialized]
         static Type s_type;
@@ -39,10 +40,10 @@ namespace System.Web.Security {
         public RolePrincipal(IIdentity identity, string encryptedTicket)
         {
             if (identity == null)
-                throw new ArgumentNullException( "identity" );
+                throw new ArgumentNullException("identity");
 
             if (encryptedTicket == null)
-                throw new ArgumentNullException( "encryptedTicket" );
+                throw new ArgumentNullException("encryptedTicket");
             _Identity = identity;
             _ProviderName = Roles.Provider.Name;
             if (identity.IsAuthenticated)
@@ -54,41 +55,53 @@ namespace System.Web.Security {
         public RolePrincipal(IIdentity identity)
         {
             if (identity == null)
-                throw new ArgumentNullException( "identity" );
+                throw new ArgumentNullException("identity");
             _Identity = identity;
             Init();
         }
 
-        public RolePrincipal(string providerName, IIdentity identity )
+        public RolePrincipal(string providerName, IIdentity identity)
         {
             if (identity == null)
-                throw new ArgumentNullException( "identity" );
+                throw new ArgumentNullException("identity");
 
-            if( providerName == null)
-                throw new ArgumentException( SR.GetString(SR.Role_provider_name_invalid) , "providerName" );
+            if (providerName == null)
+                throw new ArgumentException(
+                    SR.GetString(SR.Role_provider_name_invalid),
+                    "providerName"
+                );
 
             _ProviderName = providerName;
             if (Roles.Providers[providerName] == null)
-                throw new ArgumentException(SR.GetString(SR.Role_provider_name_invalid), "providerName");
+                throw new ArgumentException(
+                    SR.GetString(SR.Role_provider_name_invalid),
+                    "providerName"
+                );
 
             _Identity = identity;
             Init();
         }
 
-        public RolePrincipal(string providerName, IIdentity identity, string encryptedTicket )
+        public RolePrincipal(string providerName, IIdentity identity, string encryptedTicket)
         {
             if (identity == null)
-                throw new ArgumentNullException( "identity" );
+                throw new ArgumentNullException("identity");
 
             if (encryptedTicket == null)
-                throw new ArgumentNullException( "encryptedTicket" );
+                throw new ArgumentNullException("encryptedTicket");
 
-            if( providerName == null)
-                throw new ArgumentException( SR.GetString(SR.Role_provider_name_invalid) , "providerName" );
+            if (providerName == null)
+                throw new ArgumentException(
+                    SR.GetString(SR.Role_provider_name_invalid),
+                    "providerName"
+                );
 
             _ProviderName = providerName;
             if (Roles.Providers[_ProviderName] == null)
-                throw new ArgumentException(SR.GetString(SR.Role_provider_name_invalid), "providerName");
+                throw new ArgumentException(
+                    SR.GetString(SR.Role_provider_name_invalid),
+                    "providerName"
+                );
             _Identity = identity;
             if (identity.IsAuthenticated)
                 InitFromEncryptedTicket(encryptedTicket);
@@ -96,25 +109,36 @@ namespace System.Web.Security {
                 Init();
         }
 
-        private void InitFromEncryptedTicket( string encryptedTicket )
+        private void InitFromEncryptedTicket(string encryptedTicket)
         {
-            if (HostingEnvironment.IsHosted && EtwTrace.IsTraceEnabled(EtwTraceLevel.Information, EtwTraceFlags.AppSvc) && HttpContext.Current != null)
+            if (
+                HostingEnvironment.IsHosted
+                && EtwTrace.IsTraceEnabled(EtwTraceLevel.Information, EtwTraceFlags.AppSvc)
+                && HttpContext.Current != null
+            )
                 EtwTrace.Trace(EtwTraceType.ETW_TYPE_ROLE_BEGIN, HttpContext.Current.WorkerRequest);
 
             if (string.IsNullOrEmpty(encryptedTicket))
                 goto Exit;
 
-            byte[] bTicket = CookieProtectionHelper.Decode(Roles.CookieProtectionValue, encryptedTicket, Purpose.RolePrincipal_Ticket);
+            byte[] bTicket = CookieProtectionHelper.Decode(
+                Roles.CookieProtectionValue,
+                encryptedTicket,
+                Purpose.RolePrincipal_Ticket
+            );
             if (bTicket == null)
                 goto Exit;
 
-            RolePrincipal   rp = null;
-            MemoryStream    ms = null;
-            try{
+            RolePrincipal rp = null;
+            MemoryStream ms = null;
+            try
+            {
                 ms = new System.IO.MemoryStream(bTicket);
                 rp = (new BinaryFormatter()).Deserialize(ms) as RolePrincipal;
-            } catch {
-            } finally {
+            }
+            catch { }
+            finally
+            {
                 ms.Close();
             }
             if (rp == null)
@@ -134,21 +158,37 @@ namespace System.Web.Security {
             _Username = rp._Username;
             _Roles = rp._Roles;
 
-
-
             // will it be the case that _Identity.Name != _Username?
 
             RenewIfOld();
 
-            if (HostingEnvironment.IsHosted && EtwTrace.IsTraceEnabled(EtwTraceLevel.Information, EtwTraceFlags.AppSvc) && HttpContext.Current != null)
-                EtwTrace.Trace( EtwTraceType.ETW_TYPE_ROLE_END, HttpContext.Current.WorkerRequest, "RolePrincipal", _Identity.Name);
+            if (
+                HostingEnvironment.IsHosted
+                && EtwTrace.IsTraceEnabled(EtwTraceLevel.Information, EtwTraceFlags.AppSvc)
+                && HttpContext.Current != null
+            )
+                EtwTrace.Trace(
+                    EtwTraceType.ETW_TYPE_ROLE_END,
+                    HttpContext.Current.WorkerRequest,
+                    "RolePrincipal",
+                    _Identity.Name
+                );
 
             return;
-        Exit:
+            Exit:
             Init();
             _CachedListChanged = true;
-            if (HostingEnvironment.IsHosted && EtwTrace.IsTraceEnabled(EtwTraceLevel.Information, EtwTraceFlags.AppSvc) && HttpContext.Current != null)
-                EtwTrace.Trace(EtwTraceType.ETW_TYPE_ROLE_END, HttpContext.Current.WorkerRequest, "RolePrincipal", _Identity.Name);
+            if (
+                HostingEnvironment.IsHosted
+                && EtwTrace.IsTraceEnabled(EtwTraceLevel.Information, EtwTraceFlags.AppSvc)
+                && HttpContext.Current != null
+            )
+                EtwTrace.Trace(
+                    EtwTraceType.ETW_TYPE_ROLE_END,
+                    HttpContext.Current.WorkerRequest,
+                    "RolePrincipal",
+                    _Identity.Name
+                );
             return;
         }
 
@@ -156,7 +196,8 @@ namespace System.Web.Security {
         ////////////////////////////////////////////////////////////
         ////////////////////////////////////////////////////////////
 
-        private void Init() {
+        private void Init()
+        {
             _Version = 1;
             _IssueDate = DateTime.UtcNow;
             _ExpireDate = DateTime.UtcNow.AddMinutes(Roles.CookieTimeout);
@@ -204,25 +245,59 @@ namespace System.Web.Security {
                 s_type = typeof(DynamicRoleClaimProvider);
             }
 
-            s_type.InvokeMember("AddDynamicRoleClaims", BindingFlags.InvokeMethod | BindingFlags.Public | BindingFlags.Static, null, null, new object[] { claimsIdentity, claimProvider.Claims }, CultureInfo.InvariantCulture);
+            s_type.InvokeMember(
+                "AddDynamicRoleClaims",
+                BindingFlags.InvokeMethod | BindingFlags.Public | BindingFlags.Static,
+                null,
+                null,
+                new object[] { claimsIdentity, claimProvider.Claims },
+                CultureInfo.InvariantCulture
+            );
         }
-
 
         ////////////////////////////////////////////////////////////
         // Public properties
 
-        public int       Version           { get { return _Version;}}
-        public DateTime  ExpireDate        { get { return _ExpireDate.ToLocalTime();}}
-        public DateTime  IssueDate         { get { return _IssueDate.ToLocalTime();}}
+        public int Version
+        {
+            get { return _Version; }
+        }
+        public DateTime ExpireDate
+        {
+            get { return _ExpireDate.ToLocalTime(); }
+        }
+        public DateTime IssueDate
+        {
+            get { return _IssueDate.ToLocalTime(); }
+        }
+
         // DevDiv Bugs: 9446
         // Expired should check against DateTime.UtcNow instead of DateTime.Now because
         // _ExpireData is a Utc DateTime.
-        public bool      Expired           { get { return _ExpireDate < DateTime.UtcNow;}}
-        public String    CookiePath        { get { return Roles.CookiePath;}} //
-        public override  IIdentity Identity          { get { return _Identity; }}
-        public bool      IsRoleListCached  { get { return _IsRoleListCached; }}
-        public bool      CachedListChanged { get { return _CachedListChanged; }}
-        public string    ProviderName      { get { return _ProviderName; } }
+        public bool Expired
+        {
+            get { return _ExpireDate < DateTime.UtcNow; }
+        }
+        public String CookiePath
+        {
+            get { return Roles.CookiePath; }
+        } //
+        public override IIdentity Identity
+        {
+            get { return _Identity; }
+        }
+        public bool IsRoleListCached
+        {
+            get { return _IsRoleListCached; }
+        }
+        public bool CachedListChanged
+        {
+            get { return _CachedListChanged; }
+        }
+        public string ProviderName
+        {
+            get { return _ProviderName; }
+        }
 
         ////////////////////////////////////////////////////////////
         ////////////////////////////////////////////////////////////
@@ -230,7 +305,10 @@ namespace System.Web.Security {
         ////////////////////////////////////////////////////////////
         // Public functions
 
-        [SecurityPermission(SecurityAction.Assert, Flags = SecurityPermissionFlag.SerializationFormatter)]
+        [SecurityPermission(
+            SecurityAction.Assert,
+            Flags = SecurityPermissionFlag.SerializationFormatter
+        )]
         public string ToEncryptedTicket()
         {
             if (!Roles.Enabled)
@@ -245,11 +323,13 @@ namespace System.Web.Security {
             MemoryStream ms = new System.IO.MemoryStream();
             byte[] buf = null;
             IIdentity id = _Identity;
-            try {
+            try
+            {
                 _Identity = null;
                 BinaryFormatter bf = new BinaryFormatter();
                 bool originalSerializingForCookieValue = _serializingForCookie;
-                try {
+                try
+                {
                     // DevDiv 481327: ClaimsPrincipal is an expensive type to serialize and deserialize. If the developer is using
                     // role management, then he is going to be querying regular ASP.NET membership roles rather than claims, so
                     // we can cut back on the number of bytes sent across the wire by ignoring any claims in the underlying
@@ -257,27 +337,35 @@ namespace System.Web.Security {
                     _serializingForCookie = true;
                     bf.Serialize(ms, this);
                 }
-                finally {
+                finally
+                {
                     _serializingForCookie = originalSerializingForCookieValue;
                 }
                 buf = ms.ToArray();
-            } finally {
+            }
+            finally
+            {
                 ms.Close();
                 _Identity = id;
             }
 
-            return CookieProtectionHelper.Encode(Roles.CookieProtectionValue, buf, Purpose.RolePrincipal_Ticket);
+            return CookieProtectionHelper.Encode(
+                Roles.CookieProtectionValue,
+                buf,
+                Purpose.RolePrincipal_Ticket
+            );
         }
 
         ////////////////////////////////////////////////////////////
         ////////////////////////////////////////////////////////////
         ////////////////////////////////////////////////////////////
-        private void RenewIfOld() {
+        private void RenewIfOld()
+        {
             if (!Roles.CookieSlidingExpiration)
                 return;
             DateTime dtN = DateTime.UtcNow;
-            TimeSpan t1  = dtN - _IssueDate;
-            TimeSpan t2  = _ExpireDate - dtN;
+            TimeSpan t1 = dtN - _IssueDate;
+            TimeSpan t2 = _ExpireDate - dtN;
 
             if (t2 > t1)
                 return;
@@ -298,7 +386,8 @@ namespace System.Web.Security {
                 return new string[0];
             string[] roles;
 
-            if (!_IsRoleListCached || !_GetRolesCalled) {
+            if (!_IsRoleListCached || !_GetRolesCalled)
+            {
                 _Roles.Clear();
                 roles = Roles.Providers[_ProviderName].GetRolesForUser(Identity.Name);
                 foreach (string role in roles)
@@ -308,7 +397,9 @@ namespace System.Web.Security {
                 _CachedListChanged = true;
                 _GetRolesCalled = true;
                 return roles;
-            } else {
+            }
+            else
+            {
                 roles = new string[_Roles.Count];
                 int index = 0;
                 foreach (string role in _Roles.Keys)
@@ -329,10 +420,11 @@ namespace System.Web.Security {
             if (!_Identity.IsAuthenticated || role == null)
                 return false;
             role = role.Trim();
-            if (!IsRoleListCached) {
+            if (!IsRoleListCached)
+            {
                 _Roles.Clear();
                 string[] roles = Roles.Providers[_ProviderName].GetRolesForUser(Identity.Name);
-                foreach(string roleTemp in roles)
+                foreach (string roleTemp in roles)
                     if (_Roles[roleTemp] == null)
                         _Roles.Add(roleTemp, String.Empty);
 
@@ -342,7 +434,7 @@ namespace System.Web.Security {
             if (_Roles[role] != null)
                 return true;
 
-            // 
+            //
             return base.IsInRole(role);
         }
 
@@ -352,28 +444,30 @@ namespace System.Web.Security {
             _CachedListChanged = true;
         }
 
-
         protected RolePrincipal(SerializationInfo info, StreamingContext context)
-            :base(info, context)
+            : base(info, context)
         {
             _Version = info.GetInt32("_Version");
             _ExpireDate = info.GetDateTime("_ExpireDate");
             _IssueDate = info.GetDateTime("_IssueDate");
-            try {
+            try
+            {
                 _Identity = info.GetValue("_Identity", typeof(IIdentity)) as IIdentity;
-            } catch { } // Ignore Exceptions
+            }
+            catch { } // Ignore Exceptions
             _ProviderName = info.GetString("_ProviderName");
             _Username = info.GetString("_Username");
             _IsRoleListCached = info.GetBoolean("_IsRoleListCached");
             _Roles = new HybridDictionary(true);
             string allRoles = info.GetString("_AllRoles");
-            if (allRoles != null) {
-                foreach(string role in allRoles.Split(new char[] {','}))
+            if (allRoles != null)
+            {
+                foreach (string role in allRoles.Split(new char[] { ',' }))
                     if (_Roles[role] == null)
                         _Roles.Add(role, String.Empty);
             }
 
-            // attach ourselves to the first valid claimsIdentity.  
+            // attach ourselves to the first valid claimsIdentity.
             bool found = false;
             foreach (var claimsIdentity in base.Identities)
             {
@@ -398,7 +492,8 @@ namespace System.Web.Security {
 
         protected override void GetObjectData(SerializationInfo info, StreamingContext context)
         {
-            if (!_serializingForCookie) {
+            if (!_serializingForCookie)
+            {
                 base.GetObjectData(info, context);
             }
 
@@ -406,45 +501,50 @@ namespace System.Web.Security {
 
             info.AddValue("_ExpireDate", _ExpireDate);
             info.AddValue("_IssueDate", _IssueDate);
-            try {
+            try
+            {
                 info.AddValue("_Identity", _Identity);
-            } catch { } // Ignore Exceptions
+            }
+            catch { } // Ignore Exceptions
             info.AddValue("_ProviderName", _ProviderName);
             info.AddValue("_Username", _Identity == null ? _Username : _Identity.Name);
             info.AddValue("_IsRoleListCached", _IsRoleListCached);
-            if (_Roles.Count > 0) {
+            if (_Roles.Count > 0)
+            {
                 StringBuilder sb = new StringBuilder(_Roles.Count * 10);
-                foreach(object role in _Roles.Keys)
+                foreach (object role in _Roles.Keys)
                     sb.Append(((string)role) + ",");
                 string allRoles = sb.ToString();
                 info.AddValue("_AllRoles", allRoles.Substring(0, allRoles.Length - 1));
-            } else {
+            }
+            else
+            {
                 info.AddValue("_AllRoles", String.Empty);
             }
-
         }
 
         ////////////////////////////////////////////////////////////
         ////////////////////////////////////////////////////////////
         ////////////////////////////////////////////////////////////
-        private int         _Version;
-        private DateTime    _ExpireDate;
-        private DateTime    _IssueDate;
-        private IIdentity   _Identity;
-        private string      _ProviderName;
-        private string      _Username;
-        private bool        _IsRoleListCached;
-        private bool        _CachedListChanged;
+        private int _Version;
+        private DateTime _ExpireDate;
+        private DateTime _IssueDate;
+        private IIdentity _Identity;
+        private string _ProviderName;
+        private string _Username;
+        private bool _IsRoleListCached;
+        private bool _CachedListChanged;
 
         [ThreadStatic]
         private static bool _serializingForCookie;
 
         [NonSerialized]
         private HybridDictionary _Roles = null;
+
         [NonSerialized]
         private bool _GetRolesCalled;
         ////////////////////////////////////////////////////////////
         ////////////////////////////////////////////////////////////
         ////////////////////////////////////////////////////////////
-     }
+    }
 }

@@ -3,7 +3,6 @@ namespace System.Workflow.Activities
     using System;
     using System.Diagnostics;
 
-
     internal static class WorkflowActivityTrace
     {
         static TraceSource activity;
@@ -21,7 +20,7 @@ namespace System.Workflow.Activities
 
         /// <summary>
         /// Statically set up trace sources
-        /// 
+        ///
         /// To enable logging to a file, add lines like the following to your app config file.
         /*
             <system.diagnostics>
@@ -42,10 +41,16 @@ namespace System.Workflow.Activities
         static WorkflowActivityTrace()
         {
             activity = new TraceSource("System.Workflow.Activities");
-            activity.Switch = new SourceSwitch("System.Workflow.Activities", SourceLevels.Off.ToString());
+            activity.Switch = new SourceSwitch(
+                "System.Workflow.Activities",
+                SourceLevels.Off.ToString()
+            );
 
             rules = new TraceSource("System.Workflow.Activities.Rules");
-            rules.Switch = new SourceSwitch("System.Workflow.Activities.Rules", SourceLevels.Off.ToString());
+            rules.Switch = new SourceSwitch(
+                "System.Workflow.Activities.Rules",
+                SourceLevels.Off.ToString()
+            );
 
             foreach (TraceListener listener in Trace.Listeners)
             {

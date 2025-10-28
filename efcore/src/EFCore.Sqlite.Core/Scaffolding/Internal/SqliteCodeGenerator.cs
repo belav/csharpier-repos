@@ -11,19 +11,23 @@ namespace Microsoft.EntityFrameworkCore.Sqlite.Scaffolding.Internal;
 /// </summary>
 public class SqliteCodeGenerator : ProviderCodeGenerator
 {
-    private static readonly MethodInfo UseSqliteMethodInfo
-        = typeof(SqliteDbContextOptionsBuilderExtensions).GetRuntimeMethod(
+    private static readonly MethodInfo UseSqliteMethodInfo =
+        typeof(SqliteDbContextOptionsBuilderExtensions).GetRuntimeMethod(
             nameof(SqliteDbContextOptionsBuilderExtensions.UseSqlite),
-            new[] { typeof(DbContextOptionsBuilder), typeof(string), typeof(Action<SqliteDbContextOptionsBuilder>) })!;
+            new[]
+            {
+                typeof(DbContextOptionsBuilder),
+                typeof(string),
+                typeof(Action<SqliteDbContextOptionsBuilder>),
+            }
+        )!;
 
     /// <summary>
     ///     Initializes a new instance of the <see cref="SqliteCodeGenerator" /> class.
     /// </summary>
     /// <param name="dependencies">The dependencies.</param>
     public SqliteCodeGenerator(ProviderCodeGeneratorDependencies dependencies)
-        : base(dependencies)
-    {
-    }
+        : base(dependencies) { }
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -33,10 +37,16 @@ public class SqliteCodeGenerator : ProviderCodeGenerator
     /// </summary>
     public override MethodCallCodeFragment GenerateUseProvider(
         string connectionString,
-        MethodCallCodeFragment? providerOptions)
-        => new(
+        MethodCallCodeFragment? providerOptions
+    ) =>
+        new(
             UseSqliteMethodInfo,
             providerOptions == null
                 ? new object[] { connectionString }
-                : new object[] { connectionString, new NestedClosureCodeFragment("x", providerOptions) });
+                : new object[]
+                {
+                    connectionString,
+                    new NestedClosureCodeFragment("x", providerOptions),
+                }
+        );
 }

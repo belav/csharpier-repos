@@ -12,27 +12,30 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.CSharp.EditAndContinue;
 
-internal sealed class OrdinaryInstanceConstructorWithExplicitInitializerDeclarationBody(ConstructorDeclarationSyntax constructor)
-    : OrdinaryInstanceConstructorDeclarationBody(constructor)
+internal sealed class OrdinaryInstanceConstructorWithExplicitInitializerDeclarationBody(
+    ConstructorDeclarationSyntax constructor
+) : OrdinaryInstanceConstructorDeclarationBody(constructor)
 {
-    private ConstructorInitializerSyntax Initializer
-        => Constructor.Initializer!;
+    private ConstructorInitializerSyntax Initializer => Constructor.Initializer!;
 
-    public override bool HasExplicitInitializer
-        => true;
+    public override bool HasExplicitInitializer => true;
 
-    public override SyntaxNode InitializerActiveStatement
-        => Initializer;
+    public override SyntaxNode InitializerActiveStatement => Initializer;
 
-    public override TextSpan InitializerActiveStatementSpan
-        => BreakpointSpans.CreateSpanForExplicitConstructorInitializer(Initializer);
+    public override TextSpan InitializerActiveStatementSpan =>
+        BreakpointSpans.CreateSpanForExplicitConstructorInitializer(Initializer);
 
-    public override ImmutableArray<ISymbol> GetCapturedVariables(SemanticModel model)
-        => model.AnalyzeDataFlow(Initializer)!.CapturedInside.AddRange(model.AnalyzeDataFlow(Body).CapturedInside).Distinct();
+    public override ImmutableArray<ISymbol> GetCapturedVariables(SemanticModel model) =>
+        model
+            .AnalyzeDataFlow(Initializer)!
+            .CapturedInside.AddRange(model.AnalyzeDataFlow(Body).CapturedInside)
+            .Distinct();
 
-    public override TextSpan Envelope
-        => TextSpan.FromBounds(InitializerActiveStatementSpan.Start, Body.Span.End);
+    public override TextSpan Envelope =>
+        TextSpan.FromBounds(InitializerActiveStatementSpan.Start, Body.Span.End);
 
-    public override IEnumerable<SyntaxToken> GetActiveTokens()
-        => BreakpointSpans.GetActiveTokensForExplicitConstructorInitializer(Initializer).Concat(Body.DescendantTokens());
+    public override IEnumerable<SyntaxToken> GetActiveTokens() =>
+        BreakpointSpans
+            .GetActiveTokensForExplicitConstructorInitializer(Initializer)
+            .Concat(Body.DescendantTokens());
 }

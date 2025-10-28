@@ -20,12 +20,17 @@ namespace Microsoft.CodeAnalysis.Remote
         /// the set of document text changes necessary to convert <paramref name="oldSolution"/> to <paramref
         /// name="newSolution"/>.
         /// </summary>
-        public static async ValueTask<ImmutableArray<(DocumentId, ImmutableArray<TextChange>)>> GetDocumentTextChangesAsync(
+        public static async ValueTask<
+            ImmutableArray<(DocumentId, ImmutableArray<TextChange>)>
+        > GetDocumentTextChangesAsync(
             Solution oldSolution,
             Solution newSolution,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
-            using var _ = ArrayBuilder<(DocumentId, ImmutableArray<TextChange>)>.GetInstance(out var builder);
+            using var _ = ArrayBuilder<(DocumentId, ImmutableArray<TextChange>)>.GetInstance(
+                out var builder
+            );
 
             var solutionChanges = newSolution.GetChanges(oldSolution);
             foreach (var projectChange in solutionChanges.GetProjectChanges())
@@ -34,7 +39,9 @@ namespace Microsoft.CodeAnalysis.Remote
                 {
                     var oldDoc = oldSolution.GetDocument(docId);
                     var newDoc = newSolution.GetDocument(docId);
-                    var textChanges = await newDoc.GetTextChangesAsync(oldDoc, cancellationToken).ConfigureAwait(false);
+                    var textChanges = await newDoc
+                        .GetTextChangesAsync(oldDoc, cancellationToken)
+                        .ConfigureAwait(false);
                     builder.Add((docId, textChanges.ToImmutableArray()));
                 }
             }
@@ -47,13 +54,22 @@ namespace Microsoft.CodeAnalysis.Remote
         /// a solution textually equivalent to the <c>newSolution</c> passed to <see cref="GetDocumentTextChangesAsync"/>.
         /// </summary>
         public static async Task<Solution> UpdateSolutionAsync(
-            Solution oldSolution, ImmutableArray<(DocumentId, ImmutableArray<TextChange>)> documentTextChanges, CancellationToken cancellationToken)
+            Solution oldSolution,
+            ImmutableArray<(DocumentId, ImmutableArray<TextChange>)> documentTextChanges,
+            CancellationToken cancellationToken
+        )
         {
             var currentSolution = oldSolution;
             foreach (var (docId, textChanges) in documentTextChanges)
             {
-                var text = await oldSolution.GetDocument(docId).GetValueTextAsync(cancellationToken).ConfigureAwait(false);
-                currentSolution = currentSolution.WithDocumentText(docId, text.WithChanges(textChanges));
+                var text = await oldSolution
+                    .GetDocument(docId)
+                    .GetValueTextAsync(cancellationToken)
+                    .ConfigureAwait(false);
+                currentSolution = currentSolution.WithDocumentText(
+                    docId,
+                    text.WithChanges(textChanges)
+                );
             }
 
             return currentSolution;

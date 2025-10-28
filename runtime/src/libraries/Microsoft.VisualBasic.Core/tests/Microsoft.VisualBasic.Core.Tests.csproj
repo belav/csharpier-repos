@@ -4,7 +4,10 @@
     <TargetFrameworks>$(NetCoreAppCurrent);$(NetFrameworkCurrent)</TargetFrameworks>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="$(CoreLibSharedDir)System\Runtime\CompilerServices\IsExternalInit.cs" Link="Common\System\Runtime\CompilerServices\IsExternalInit.cs" />
+    <Compile
+      Include="$(CoreLibSharedDir)System\Runtime\CompilerServices\IsExternalInit.cs"
+      Link="Common\System\Runtime\CompilerServices\IsExternalInit.cs"
+    />
     <Compile Include="AssemblyAttributes.cs" />
     <Compile Include="ByteTypeTests.cs" />
     <Compile Include="CharTypeTests.cs" />

@@ -1,10 +1,15 @@
-<Type Name="RfcAuthenticationChoice" FullName="Novell.Directory.Ldap.Rfc2251.RfcAuthenticationChoice">
-  <TypeSignature Language="C#" Value="public class RfcAuthenticationChoice : Novell.Directory.Ldap.Asn1.Asn1Choice, System.Runtime.Serialization.ISerializable" />
+<Type
+  Name="RfcAuthenticationChoice"
+  FullName="Novell.Directory.Ldap.Rfc2251.RfcAuthenticationChoice"
+>
+  <TypeSignature
+    Language="C#"
+    Value="public class RfcAuthenticationChoice : Novell.Directory.Ldap.Asn1.Asn1Choice, System.Runtime.Serialization.ISerializable"
+  />
   <AssemblyInfo>
     <AssemblyName>Novell.Directory.Ldap</AssemblyName>
     <AssemblyVersion>1.0.5000.0</AssemblyVersion>
-    <AssemblyCulture>
-    </AssemblyCulture>
+    <AssemblyCulture></AssemblyCulture>
     <Attributes>
       <Attribute>
         <AttributeName>System.Reflection.AssemblyKeyFile(KeyFile="../mono.pub")</AttributeName>
@@ -51,7 +56,10 @@
   </Interfaces>
   <Members>
     <Member MemberName=".ctor">
-      <MemberSignature Language="C#" Value="public RfcAuthenticationChoice(Novell.Directory.Ldap.Asn1.Asn1Tagged choice)" />
+      <MemberSignature
+        Language="C#"
+        Value="public RfcAuthenticationChoice(Novell.Directory.Ldap.Asn1.Asn1Tagged choice)"
+      />
       <MemberType>Constructor</MemberType>
       <Parameters>
         <Parameter Name="choice" Type="Novell.Directory.Ldap.Asn1.Asn1Tagged" />
@@ -63,7 +71,10 @@
       </Docs>
     </Member>
     <Member MemberName=".ctor">
-      <MemberSignature Language="C#" Value="public RfcAuthenticationChoice(string mechanism, sbyte[] credentials)" />
+      <MemberSignature
+        Language="C#"
+        Value="public RfcAuthenticationChoice(string mechanism, sbyte[] credentials)"
+      />
       <MemberType>Constructor</MemberType>
       <Attributes>
         <Attribute>

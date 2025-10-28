@@ -15,6 +15,7 @@ namespace System
         {
             _compliant = isCompliant;
         }
+
         public bool IsCompliant => _compliant;
     }
 }

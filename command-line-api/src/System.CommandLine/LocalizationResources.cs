@@ -16,8 +16,12 @@ namespace System.CommandLine
         /// <summary>
         ///   Interpolates values into a localized string similar to Command &apos;{0}&apos; expects a single argument but {1} were provided.
         /// </summary>
-        internal static string ExpectsOneArgument(OptionResult optionResult)
-            => GetResourceString(Properties.Resources.OptionExpectsOneArgument, GetOptionName(optionResult), optionResult.Tokens.Count);
+        internal static string ExpectsOneArgument(OptionResult optionResult) =>
+            GetResourceString(
+                Properties.Resources.OptionExpectsOneArgument,
+                GetOptionName(optionResult),
+                optionResult.Tokens.Count
+            );
 
         /// <summary>
         ///   Interpolates values into a localized string similar to Directory does not exist: {0}.
@@ -54,14 +58,20 @@ namespace System.CommandLine
         /// </summary>
         internal static string RequiredArgumentMissing(ArgumentResult argumentResult) =>
             argumentResult.Parent is CommandResult commandResult
-                ? GetResourceString(Properties.Resources.CommandRequiredArgumentMissing, commandResult.IdentifierToken.Value)
+                ? GetResourceString(
+                    Properties.Resources.CommandRequiredArgumentMissing,
+                    commandResult.IdentifierToken.Value
+                )
                 : RequiredArgumentMissing((OptionResult)argumentResult.Parent!);
 
         /// <summary>
         ///   Interpolates values into a localized string similar to Required argument missing for option: {0}.
         /// </summary>
         internal static string RequiredArgumentMissing(OptionResult optionResult) =>
-            GetResourceString(Properties.Resources.OptionRequiredArgumentMissing, GetOptionName(optionResult));
+            GetResourceString(
+                Properties.Resources.OptionRequiredArgumentMissing,
+                GetOptionName(optionResult)
+            );
 
         /// <summary>
         ///   Interpolates values into a localized string similar to Required command was not provided.
@@ -73,13 +83,23 @@ namespace System.CommandLine
         ///   Interpolates values into a localized string similar to Option '{0}' is required.
         /// </summary>
         internal static string RequiredOptionWasNotProvided(string longestAliasWithPrefix) =>
-            GetResourceString(Properties.Resources.RequiredOptionWasNotProvided, longestAliasWithPrefix);
+            GetResourceString(
+                Properties.Resources.RequiredOptionWasNotProvided,
+                longestAliasWithPrefix
+            );
 
         /// <summary>
         ///   Interpolates values into a localized string similar to Argument &apos;{0}&apos; not recognized. Must be one of:{1}.
         /// </summary>
-        internal static string UnrecognizedArgument(string unrecognizedArg, IReadOnlyCollection<string> allowedValues) =>
-            GetResourceString(Properties.Resources.UnrecognizedArgument, unrecognizedArg, $"\n\t{string.Join("\n\t", allowedValues.Select(v => $"'{v}'"))}");
+        internal static string UnrecognizedArgument(
+            string unrecognizedArg,
+            IReadOnlyCollection<string> allowedValues
+        ) =>
+            GetResourceString(
+                Properties.Resources.UnrecognizedArgument,
+                unrecognizedArg,
+                $"\n\t{string.Join("\n\t", allowedValues.Select(v => $"'{v}'"))}"
+            );
 
         /// <summary>
         ///   Interpolates values into a localized string similar to Unrecognized command or argument &apos;{0}&apos;.
@@ -180,58 +200,105 @@ namespace System.CommandLine
         /// <summary>
         ///   Interpolates values into a localized string similar to &apos;{0}&apos; was not matched. Did you mean one of the following?.
         /// </summary>
-        internal static string SuggestionsTokenNotMatched(string token)
-            => GetResourceString(Properties.Resources.SuggestionsTokenNotMatched, token);
+        internal static string SuggestionsTokenNotMatched(string token) =>
+            GetResourceString(Properties.Resources.SuggestionsTokenNotMatched, token);
 
         /// <summary>
         ///   Interpolates values into a localized string similar to Show version information.
         /// </summary>
-        internal static string VersionOptionDescription()
-            => GetResourceString(Properties.Resources.VersionOptionDescription);
+        internal static string VersionOptionDescription() =>
+            GetResourceString(Properties.Resources.VersionOptionDescription);
 
         /// <summary>
         ///   Interpolates values into a localized string similar to {0} option cannot be combined with other arguments..
         /// </summary>
-        internal static string VersionOptionCannotBeCombinedWithOtherArguments(string optionAlias)
-            => GetResourceString(Properties.Resources.VersionOptionCannotBeCombinedWithOtherArguments, optionAlias);
+        internal static string VersionOptionCannotBeCombinedWithOtherArguments(
+            string optionAlias
+        ) =>
+            GetResourceString(
+                Properties.Resources.VersionOptionCannotBeCombinedWithOtherArguments,
+                optionAlias
+            );
 
         /// <summary>
         ///   Interpolates values into a localized string similar to Unhandled exception: .
         /// </summary>
-        internal static string ExceptionHandlerHeader()
-            => GetResourceString(Properties.Resources.ExceptionHandlerHeader);
+        internal static string ExceptionHandlerHeader() =>
+            GetResourceString(Properties.Resources.ExceptionHandlerHeader);
 
         /// <summary>
         ///   Interpolates values into a localized string similar to Cannot parse argument &apos;{0}&apos; as expected type {1}..
         /// </summary>
-        internal static string ArgumentConversionCannotParse(string value, Type expectedType)
-            => GetResourceString(Properties.Resources.ArgumentConversionCannotParse, value, expectedType);
+        internal static string ArgumentConversionCannotParse(string value, Type expectedType) =>
+            GetResourceString(
+                Properties.Resources.ArgumentConversionCannotParse,
+                value,
+                expectedType
+            );
 
         /// <summary>
         ///   Interpolates values into a localized string similar to Cannot parse argument &apos;{0}&apos; for command &apos;{1}&apos; as expected type {2}..
         /// </summary>
-        internal static string ArgumentConversionCannotParseForCommand(string value, string commandAlias, Type expectedType)
-            => GetResourceString(Properties.Resources.ArgumentConversionCannotParseForCommand, value, commandAlias, expectedType);
+        internal static string ArgumentConversionCannotParseForCommand(
+            string value,
+            string commandAlias,
+            Type expectedType
+        ) =>
+            GetResourceString(
+                Properties.Resources.ArgumentConversionCannotParseForCommand,
+                value,
+                commandAlias,
+                expectedType
+            );
 
         /// <summary>
         ///   Interpolates values into a localized string similar to Cannot parse argument &apos;{0}&apos; for command &apos;{1}&apos; as expected type {2}..
         /// </summary>
-        internal static string ArgumentConversionCannotParseForCommand(string value, string commandAlias, Type expectedType, IEnumerable<string> completions)
-            => GetResourceString(Properties.Resources.ArgumentConversionCannotParseForCommand_Completions,
-                value, commandAlias, expectedType, Environment.NewLine + string.Join(Environment.NewLine, completions));
+        internal static string ArgumentConversionCannotParseForCommand(
+            string value,
+            string commandAlias,
+            Type expectedType,
+            IEnumerable<string> completions
+        ) =>
+            GetResourceString(
+                Properties.Resources.ArgumentConversionCannotParseForCommand_Completions,
+                value,
+                commandAlias,
+                expectedType,
+                Environment.NewLine + string.Join(Environment.NewLine, completions)
+            );
 
         /// <summary>
         ///   Interpolates values into a localized string similar to Cannot parse argument &apos;{0}&apos; for option &apos;{1}&apos; as expected type {2}..
         /// </summary>
-        internal static string ArgumentConversionCannotParseForOption(string value, string optionAlias, Type expectedType)
-            => GetResourceString(Properties.Resources.ArgumentConversionCannotParseForOption, value, optionAlias, expectedType);
+        internal static string ArgumentConversionCannotParseForOption(
+            string value,
+            string optionAlias,
+            Type expectedType
+        ) =>
+            GetResourceString(
+                Properties.Resources.ArgumentConversionCannotParseForOption,
+                value,
+                optionAlias,
+                expectedType
+            );
 
         /// <summary>
         ///   Interpolates values into a localized string similar to Cannot parse argument &apos;{0}&apos; for option &apos;{1}&apos; as expected type {2}..
         /// </summary>
-        internal static string ArgumentConversionCannotParseForOption(string value, string optionAlias, Type expectedType, IEnumerable<string> completions)
-            => GetResourceString(Properties.Resources.ArgumentConversionCannotParseForOption_Completions,
-                value, optionAlias, expectedType, Environment.NewLine + string.Join(Environment.NewLine, completions));
+        internal static string ArgumentConversionCannotParseForOption(
+            string value,
+            string optionAlias,
+            Type expectedType,
+            IEnumerable<string> completions
+        ) =>
+            GetResourceString(
+                Properties.Resources.ArgumentConversionCannotParseForOption_Completions,
+                value,
+                optionAlias,
+                expectedType,
+                Environment.NewLine + string.Join(Environment.NewLine, completions)
+            );
 
         /// <summary>
         /// Interpolates values into a localized string.
@@ -239,7 +306,10 @@ namespace System.CommandLine
         /// <param name="resourceString">The string template into which values will be interpolated.</param>
         /// <param name="formatArguments">The values to interpolate.</param>
         /// <returns>The final string after interpolation.</returns>
-        private static string GetResourceString(string resourceString, params object[] formatArguments)
+        private static string GetResourceString(
+            string resourceString,
+            params object[] formatArguments
+        )
         {
             if (resourceString is null)
             {
@@ -252,6 +322,7 @@ namespace System.CommandLine
             return resourceString;
         }
 
-        private static string GetOptionName(OptionResult optionResult) => optionResult.IdentifierToken?.Value ?? optionResult.Option.Name;
+        private static string GetOptionName(OptionResult optionResult) =>
+            optionResult.IdentifierToken?.Value ?? optionResult.Option.Name;
     }
 }

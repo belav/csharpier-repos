@@ -3,6 +3,8 @@
 
 using System.Collections.Generic;
 using System.Linq.Expressions;
+using Microsoft.TestCommon;
+using Moq;
 #if ASPNETWEBAPI
 using System.Net.Http;
 using System.Web.Http.Routing.Constraints;
@@ -10,8 +12,6 @@ using System.Web.Http.Routing.Constraints;
 using System.Web.Mvc.Routing.Constraints;
 using System.Web.Routing;
 #endif
-using Microsoft.TestCommon;
-using Moq;
 
 #if ASPNETWEBAPI
 namespace System.Web.Http.Routing
@@ -133,7 +133,11 @@ namespace System.Web.Mvc.Routing
         [Theory]
         [InlineData(3, "123", true)]
         [InlineData(3, "1234", false)]
-        public void LengthRouteConstraint_ExactLength_Tests(int length, string parameterValue, bool expected)
+        public void LengthRouteConstraint_ExactLength_Tests(
+            int length,
+            string parameterValue,
+            bool expected
+        )
         {
             var constraint = new LengthRouteConstraint(length);
             var actual = TestValue(constraint, parameterValue);
@@ -146,7 +150,12 @@ namespace System.Web.Mvc.Routing
         [InlineData(3, 5, "1234", true)]
         [InlineData(3, 5, "12345", true)]
         [InlineData(3, 5, "123456", false)]
-        public void LengthRouteConstraint_Range_Tests(int min, int max, string parameterValue, bool expected)
+        public void LengthRouteConstraint_Range_Tests(
+            int min,
+            int max,
+            string parameterValue,
+            bool expected
+        )
         {
             var constraint = new LengthRouteConstraint(min, max);
             var actual = TestValue(constraint, parameterValue);
@@ -159,7 +168,11 @@ namespace System.Web.Mvc.Routing
         [InlineData("12345678901234567890123456789012", false, true)]
         [InlineData("not-parseable-as-guid", false, false)]
         [InlineData(12, false, false)]
-        public void GuidRouteConstraintTests(object parameterValue, bool parseBeforeTest, bool expected)
+        public void GuidRouteConstraintTests(
+            object parameterValue,
+            bool parseBeforeTest,
+            bool expected
+        )
         {
             if (parseBeforeTest)
             {
@@ -241,7 +254,11 @@ namespace System.Web.Mvc.Routing
         [InlineData(null, false, true)]
         [InlineData("pass", true, true)]
         [InlineData("fail", true, false)]
-        public void OptionalRouteConstraintTests(object parameterValue, bool shouldCallInner, bool expected)
+        public void OptionalRouteConstraintTests(
+            object parameterValue,
+            bool shouldCallInner,
+            bool expected
+        )
         {
             // Arrange
             var inner = MockConstraintWithResult((string)parameterValue != "fail");
@@ -253,17 +270,19 @@ namespace System.Web.Mvc.Routing
 #else
             var optionalParameter = UrlParameter.Optional;
 #endif
-            var actual = TestValue(constraint, parameterValue ?? optionalParameter, route =>
-            {
-                route.Defaults.Add("fake", optionalParameter);
-            });
+            var actual = TestValue(
+                constraint,
+                parameterValue ?? optionalParameter,
+                route =>
+                {
+                    route.Defaults.Add("fake", optionalParameter);
+                }
+            );
 
             // Assert
             Assert.Equal(expected, actual);
 
-            var timeMatchShouldHaveBeenCalled = shouldCallInner
-                ? Times.Once()
-                : Times.Never();
+            var timeMatchShouldHaveBeenCalled = shouldCallInner ? Times.Once() : Times.Never();
 
             AssertMatchWasCalled(inner, timeMatchShouldHaveBeenCalled);
         }
@@ -273,7 +292,11 @@ namespace System.Web.Mvc.Routing
         [InlineData(true, false, false)]
         [InlineData(false, true, false)]
         [InlineData(false, false, false)]
-        public void CompoundRouteConstraintTests(bool inner1Result, bool inner2Result, bool expected)
+        public void CompoundRouteConstraintTests(
+            bool inner1Result,
+            bool inner2Result,
+            bool expected
+        )
         {
             // Arrange
             var inner1 = MockConstraintWithResult(inner1Result);
@@ -289,15 +312,19 @@ namespace System.Web.Mvc.Routing
         }
 
 #if ASPNETWEBAPI
-        static Expression<Func<IHttpRouteConstraint, bool>> ConstraintMatchMethodExpression =
-            c => c.Match(It.IsAny<HttpRequestMessage>(), It.IsAny<IHttpRoute>(), It.IsAny<string>(), It.IsAny<IDictionary<string, object>>(), It.IsAny<HttpRouteDirection>());
+        static Expression<Func<IHttpRouteConstraint, bool>> ConstraintMatchMethodExpression = c =>
+            c.Match(
+                It.IsAny<HttpRequestMessage>(),
+                It.IsAny<IHttpRoute>(),
+                It.IsAny<string>(),
+                It.IsAny<IDictionary<string, object>>(),
+                It.IsAny<HttpRouteDirection>()
+            );
 
         private static Mock<IHttpRouteConstraint> MockConstraintWithResult(bool result)
         {
             var mock = new Mock<IHttpRouteConstraint>();
-            mock.Setup(ConstraintMatchMethodExpression)
-                 .Returns(result)
-                 .Verifiable();
+            mock.Setup(ConstraintMatchMethodExpression).Returns(result).Verifiable();
             return mock;
         }
 
@@ -306,7 +333,11 @@ namespace System.Web.Mvc.Routing
             mock.Verify(ConstraintMatchMethodExpression, times);
         }
 
-        private static bool TestValue(IHttpRouteConstraint constraint, object value, Action<IHttpRoute> routeConfig = null)
+        private static bool TestValue(
+            IHttpRouteConstraint constraint,
+            object value,
+            Action<IHttpRoute> routeConfig = null
+        )
         {
             HttpRequestMessage httpRequestMessage = new HttpRequestMessage();
 
@@ -316,21 +347,34 @@ namespace System.Web.Mvc.Routing
                 routeConfig(httpRoute);
             }
             const string parameterName = "fake";
-            HttpRouteValueDictionary values = new HttpRouteValueDictionary { { parameterName, value } };
+            HttpRouteValueDictionary values = new HttpRouteValueDictionary
+            {
+                { parameterName, value },
+            };
             const HttpRouteDirection httpRouteDirection = HttpRouteDirection.UriResolution;
 
-            return constraint.Match(httpRequestMessage, httpRoute, parameterName, values, httpRouteDirection);
+            return constraint.Match(
+                httpRequestMessage,
+                httpRoute,
+                parameterName,
+                values,
+                httpRouteDirection
+            );
         }
 #else
-        static Expression<Func<IRouteConstraint, bool>> ConstraintMatchMethodExpression =
-            c => c.Match(It.IsAny<HttpContextBase>(), It.IsAny<Route>(), It.IsAny<string>(), It.IsAny<RouteValueDictionary>(), It.IsAny<RouteDirection>());
+        static Expression<Func<IRouteConstraint, bool>> ConstraintMatchMethodExpression = c =>
+            c.Match(
+                It.IsAny<HttpContextBase>(),
+                It.IsAny<Route>(),
+                It.IsAny<string>(),
+                It.IsAny<RouteValueDictionary>(),
+                It.IsAny<RouteDirection>()
+            );
 
         private static Mock<IRouteConstraint> MockConstraintWithResult(bool result)
         {
             var mock = new Mock<IRouteConstraint>();
-            mock.Setup(ConstraintMatchMethodExpression)
-                 .Returns(result)
-                 .Verifiable();
+            mock.Setup(ConstraintMatchMethodExpression).Returns(result).Verifiable();
             return mock;
         }
 
@@ -339,7 +383,11 @@ namespace System.Web.Mvc.Routing
             mock.Verify(ConstraintMatchMethodExpression, times);
         }
 
-        private static bool TestValue(IRouteConstraint constraint, object value, Action<Route> routeConfig = null)
+        private static bool TestValue(
+            IRouteConstraint constraint,
+            object value,
+            Action<Route> routeConfig = null
+        )
         {
             var context = new Mock<HttpContextBase>();
 
@@ -357,6 +405,5 @@ namespace System.Web.Mvc.Routing
             return constraint.Match(context.Object, route, parameterName, values, routeDirection);
         }
 #endif
-
     }
 }

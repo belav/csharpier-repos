@@ -11,7 +11,7 @@ namespace System.Activities.Debugger
 
     // A virtual callstack frame for the interpretter.
     // This is created by calls to EnterState and LeaveState.
-    // This is explictly not named "StackFrame" so that it's not confused with 
+    // This is explictly not named "StackFrame" so that it's not confused with
     // System.Diagnostics.StackFrame.
     [DebuggerNonUserCode]
     [Fx.Tag.XamlVisible(false)]

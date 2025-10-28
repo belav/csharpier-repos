@@ -14,16 +14,18 @@ namespace System.CommandLine.Tests
 {
     public class VersionOptionTests
     {
-        private static readonly string version = (Assembly.GetEntryAssembly() ?? Assembly.GetExecutingAssembly())
-                                                         .GetCustomAttribute<AssemblyInformationalVersionAttribute>()
-                                                         .InformationalVersion;
+        private static readonly string version = (
+            Assembly.GetEntryAssembly() ?? Assembly.GetExecutingAssembly()
+        )
+            .GetCustomAttribute<AssemblyInformationalVersionAttribute>()
+            .InformationalVersion;
 
         [Fact]
         public async Task When_the_version_option_is_specified_then_the_version_is_written_to_standard_out()
         {
             CliConfiguration configuration = new(new CliRootCommand())
             {
-                Output = new StringWriter()
+                Output = new StringWriter(),
             };
 
             await configuration.InvokeAsync("--version");
@@ -38,10 +40,7 @@ namespace System.CommandLine.Tests
             var rootCommand = new CliRootCommand();
             rootCommand.SetAction((_) => wasCalled = true);
 
-            CliConfiguration configuration = new(rootCommand)
-            {
-                Output = new StringWriter()
-            };
+            CliConfiguration configuration = new(rootCommand) { Output = new StringWriter() };
 
             await configuration.InvokeAsync("--version");
 
@@ -53,15 +52,15 @@ namespace System.CommandLine.Tests
         {
             CliConfiguration configuration = new(new CliRootCommand())
             {
-                Output = new StringWriter()
+                Output = new StringWriter(),
             };
 
             await configuration.InvokeAsync("--help");
 
-            configuration.Output
-                   .ToString()
-                   .Should()
-                   .Match("*Options:*--version*Show version information*");
+            configuration
+                .Output.ToString()
+                .Should()
+                .Match("*Options:*--version*Show version information*");
         }
 
         [Fact]
@@ -69,17 +68,11 @@ namespace System.CommandLine.Tests
         {
             var rootCommand = new CliRootCommand
             {
-                new CliOption<bool>("-x")
-                {
-                    DefaultValueFactory = (_) => true
-                },
+                new CliOption<bool>("-x") { DefaultValueFactory = (_) => true },
             };
             rootCommand.SetAction((_) => { });
 
-            CliConfiguration configuration = new(rootCommand)
-            {
-                Output = new StringWriter()
-            };
+            CliConfiguration configuration = new(rootCommand) { Output = new StringWriter() };
 
             await configuration.InvokeAsync("--version");
 
@@ -89,16 +82,13 @@ namespace System.CommandLine.Tests
         [Fact]
         public async Task When_the_version_option_is_specified_and_there_are_default_arguments_then_the_version_is_written_to_standard_out()
         {
-            CliRootCommand rootCommand = new ()
+            CliRootCommand rootCommand = new()
             {
-                new CliArgument<bool>("x") { DefaultValueFactory =(_) => true },
+                new CliArgument<bool>("x") { DefaultValueFactory = (_) => true },
             };
             rootCommand.SetAction((_) => { });
 
-            CliConfiguration configuration = new(rootCommand)
-            {
-                Output = new StringWriter()
-            };
+            CliConfiguration configuration = new(rootCommand) { Output = new StringWriter() };
 
             await configuration.InvokeAsync("--version");
 
@@ -112,47 +102,35 @@ namespace System.CommandLine.Tests
         {
             var subcommand = new CliCommand("subcommand");
             subcommand.SetAction(_ => { });
-            var rootCommand = new CliRootCommand
-            {
-                subcommand,
-                new CliOption<bool>("-x")
-            };
+            var rootCommand = new CliRootCommand { subcommand, new CliOption<bool>("-x") };
             rootCommand.SetAction(_ => { });
 
-            CliConfiguration configuration = new(rootCommand)
-            {
-                Output = new StringWriter()
-            };
+            CliConfiguration configuration = new(rootCommand) { Output = new StringWriter() };
 
             var result = rootCommand.Parse(commandLine, configuration);
 
-            result.Errors.Should().Contain(e => e.Message == "--version option cannot be combined with other arguments.");
+            result
+                .Errors.Should()
+                .Contain(e =>
+                    e.Message == "--version option cannot be combined with other arguments."
+                );
         }
-        
+
         [Fact]
         public void Version_option_is_not_added_to_subcommands()
         {
             var childCommand = new CliCommand("subcommand");
             childCommand.SetAction(_ => { });
 
-            var rootCommand = new CliRootCommand
-            {
-                childCommand
-            };
+            var rootCommand = new CliRootCommand { childCommand };
             rootCommand.SetAction(_ => { });
 
-            CliConfiguration configuration = new(rootCommand)
-            {
-                Output = new StringWriter()
-            };
+            CliConfiguration configuration = new(rootCommand) { Output = new StringWriter() };
 
             configuration
-                  .RootCommand
-                  .Subcommands
-                  .Single(c => c.Name == "subcommand")
-                  .Options
-                  .Should()
-                  .BeEmpty();
+                .RootCommand.Subcommands.Single(c => c.Name == "subcommand")
+                .Options.Should()
+                .BeEmpty();
         }
 
         [Fact]
@@ -166,10 +144,7 @@ namespace System.CommandLine.Tests
                     rootCommand.Options[i] = new VersionOption("-v", "-version");
             }
 
-            CliConfiguration configuration = new(rootCommand)
-            {
-                Output = new StringWriter()
-            };
+            CliConfiguration configuration = new(rootCommand) { Output = new StringWriter() };
 
             await configuration.InvokeAsync("-v");
             configuration.Output.ToString().Should().Be($"{version}{NewLine}");
@@ -184,23 +159,21 @@ namespace System.CommandLine.Tests
         {
             var childCommand = new CliCommand("subcommand");
             childCommand.SetAction((_) => { });
-            var rootCommand = new CliRootCommand
-            {
-                childCommand
-            };
+            var rootCommand = new CliRootCommand { childCommand };
 
             rootCommand.Options[1] = new VersionOption("-v");
 
             rootCommand.SetAction((_) => { });
 
-            CliConfiguration configuration = new(rootCommand)
-            {
-                Output = new StringWriter()
-            };
+            CliConfiguration configuration = new(rootCommand) { Output = new StringWriter() };
 
             var result = rootCommand.Parse("-v subcommand", configuration);
 
-            result.Errors.Should().ContainSingle(e => e.Message == "-v option cannot be combined with other arguments.");
+            result
+                .Errors.Should()
+                .ContainSingle(e =>
+                    e.Message == "-v option cannot be combined with other arguments."
+                );
         }
     }
 }

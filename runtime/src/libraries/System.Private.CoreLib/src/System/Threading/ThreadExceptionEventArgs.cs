@@ -14,10 +14,7 @@ namespace System.Threading
 
         public Exception Exception
         {
-            get
-            {
-                return m_exception;
-            }
+            get { return m_exception; }
         }
     }
 

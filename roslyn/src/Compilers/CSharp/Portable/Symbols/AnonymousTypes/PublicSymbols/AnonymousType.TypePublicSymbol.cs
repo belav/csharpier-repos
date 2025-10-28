@@ -26,15 +26,22 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             internal readonly ImmutableArray<AnonymousTypePropertySymbol> Properties;
 
             /// <summary> Maps member names to symbol(s) </summary>
-            private readonly MultiDictionary<string, Symbol> _nameToSymbols = new MultiDictionary<string, Symbol>();
+            private readonly MultiDictionary<string, Symbol> _nameToSymbols =
+                new MultiDictionary<string, Symbol>();
 
-            internal AnonymousTypePublicSymbol(AnonymousTypeManager manager, AnonymousTypeDescriptor typeDescr) :
-                base(manager, typeDescr)
+            internal AnonymousTypePublicSymbol(
+                AnonymousTypeManager manager,
+                AnonymousTypeDescriptor typeDescr
+            )
+                : base(manager, typeDescr)
             {
                 typeDescr.AssertIsGood();
 
                 var fields = typeDescr.Fields;
-                var properties = fields.SelectAsArray((field, i, type) => new AnonymousTypePropertySymbol(type, field, i), this);
+                var properties = fields.SelectAsArray(
+                    (field, i, type) => new AnonymousTypePropertySymbol(type, field, i),
+                    this
+                );
 
                 //  members
                 int membersCount = fields.Length * 2 + 1;
@@ -66,13 +73,18 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 return Manager.ConstructAnonymousTypeImplementationSymbol(this);
             }
 
-            internal override AnonymousTypeOrDelegatePublicSymbol SubstituteTypes(AbstractTypeMap map)
+            internal override AnonymousTypeOrDelegatePublicSymbol SubstituteTypes(
+                AbstractTypeMap map
+            )
             {
                 var oldFieldTypes = TypeDescriptor.Fields.SelectAsArray(f => f.TypeWithAnnotations);
                 var newFieldTypes = map.SubstituteTypes(oldFieldTypes);
-                return (oldFieldTypes == newFieldTypes) ?
-                    this :
-                    new AnonymousTypePublicSymbol(Manager, TypeDescriptor.WithNewFieldsTypes(newFieldTypes));
+                return (oldFieldTypes == newFieldTypes)
+                    ? this
+                    : new AnonymousTypePublicSymbol(
+                        Manager,
+                        TypeDescriptor.WithNewFieldsTypes(newFieldTypes)
+                    );
             }
 
             public override TypeKind TypeKind
@@ -113,7 +125,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             {
                 get
                 {
-                    return GetDeclaringSyntaxReferenceHelper<AnonymousObjectCreationExpressionSyntax>(this.Locations);
+                    return GetDeclaringSyntaxReferenceHelper<AnonymousObjectCreationExpressionSyntax>(
+                        this.Locations
+                    );
                 }
             }
 

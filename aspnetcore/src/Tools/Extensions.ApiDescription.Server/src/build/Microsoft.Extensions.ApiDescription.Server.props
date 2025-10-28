@@ -29,7 +29,8 @@
       Where to place OpenAPI documents generated from the application. Value is interpreted relative to the project
       folder, unless already an absolute path.
     -->
-    <OpenApiDocumentsDirectory
-        Condition=" '$(OpenApiDocumentsDirectory)' == '' ">$(BaseIntermediateOutputPath)</OpenApiDocumentsDirectory>
+    <OpenApiDocumentsDirectory Condition=" '$(OpenApiDocumentsDirectory)' == '' "
+      >$(BaseIntermediateOutputPath)</OpenApiDocumentsDirectory
+    >
   </PropertyGroup>
 </Project>

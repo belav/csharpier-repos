@@ -2,7 +2,7 @@
 // Authors:
 // Jonathan Pobst (monkey@jpobst.com)
 //
-// Copyright (C) 2009 Novell, Inc (http://www.novell.com) 
+// Copyright (C) 2009 Novell, Inc (http://www.novell.com)
 //
 // Permission is hereby granted, free of charge, to any person obtaining
 // a copy of this software and associated documentation files (the
@@ -11,10 +11,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -29,64 +29,62 @@ using System.Drawing;
 
 namespace System.Windows.Forms.DataVisualization.Charting
 {
-	public class Margins
-	{
-		#region Constructors
-		public Margins ()
-		{
-		}
+    public class Margins
+    {
+        #region Constructors
+        public Margins() { }
 
-		public Margins (int top, int bottom, int left, int right)
-		{
-			Bottom = bottom;
-			Left = left;
-			Right = right;
-			Top = top;
-		}
-		#endregion
+        public Margins(int top, int bottom, int left, int right)
+        {
+            Bottom = bottom;
+            Left = left;
+            Right = right;
+            Top = top;
+        }
+        #endregion
 
-		#region Public Properties
-		[DefaultValue (0)]
-		public int Bottom { get; set; }
+        #region Public Properties
+        [DefaultValue(0)]
+        public int Bottom { get; set; }
 
-		[DefaultValue (0)]
-		public int Left { get; set; }
+        [DefaultValue(0)]
+        public int Left { get; set; }
 
-		[DefaultValue (0)]
-		public int Right { get; set; }
+        [DefaultValue(0)]
+        public int Right { get; set; }
 
-		[DefaultValue (0)]
-		public int Top { get; set; }
-		#endregion
+        [DefaultValue(0)]
+        public int Top { get; set; }
+        #endregion
 
-		#region Public Methods
-		public override bool Equals (object obj)
-		{
-			Margins a = (Margins)obj;
-			return a.Bottom == Bottom && a.Left == Left && a.Right == Right && a.Top == Top;
-		}
+        #region Public Methods
+        public override bool Equals(object obj)
+        {
+            Margins a = (Margins)obj;
+            return a.Bottom == Bottom && a.Left == Left && a.Right == Right && a.Top == Top;
+        }
 
-		[MonoTODO ()]
-		public override int GetHashCode ()
-		{
-			return base.GetHashCode ();
-		}
+        [MonoTODO()]
+        public override int GetHashCode()
+        {
+            return base.GetHashCode();
+        }
 
-		public bool IsEmpty ()
-		{
-			return Bottom == 0 && Left == 0 && Right == 0 && Top == 0;
-		}
+        public bool IsEmpty()
+        {
+            return Bottom == 0 && Left == 0 && Right == 0 && Top == 0;
+        }
 
-		public RectangleF ToRectangleF ()
-		{
-			return new RectangleF (Left, Top, Right, Bottom);
-		}
+        public RectangleF ToRectangleF()
+        {
+            return new RectangleF(Left, Top, Right, Bottom);
+        }
 
-		[MonoTODO ()]
-		public override string ToString ()
-		{
-			return base.ToString ();
-		}
-		#endregion
-	}
+        [MonoTODO()]
+        public override string ToString()
+        {
+            return base.ToString();
+        }
+        #endregion
+    }
 }

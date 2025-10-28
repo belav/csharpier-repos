@@ -1,9 +1,9 @@
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
-using System.Linq;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using Xunit;
 
 namespace System.Security.Cryptography.Tests
@@ -84,7 +84,7 @@ namespace System.Security.Cryptography.Tests
         {
             AsnEncodedDataCollection c = new AsnEncodedDataCollection();
             AsnEncodedData a0 = new AsnEncodedData("1.0", Array.Empty<byte>());
-            c.Remove(a0);  // You can "remove" items that aren't in the collection - this is defined as a NOP.
+            c.Remove(a0); // You can "remove" items that aren't in the collection - this is defined as a NOP.
         }
 
         [Fact]
@@ -119,17 +119,24 @@ namespace System.Security.Cryptography.Tests
             AsnEncodedData[] a = new AsnEncodedData[3];
             Assert.Throws<ArgumentOutOfRangeException>(() => c.CopyTo(a, -1));
             Assert.Throws<ArgumentOutOfRangeException>(() => c.CopyTo(a, 3));
-            AssertExtensions.Throws<ArgumentException>("destinationArray", null, () => c.CopyTo(a, 1));
+            AssertExtensions.Throws<ArgumentException>(
+                "destinationArray",
+                null,
+                () => c.CopyTo(a, 1)
+            );
 
             if (PlatformDetection.IsNonZeroLowerBoundArraySupported)
             {
                 // Array has non-zero lower bound
                 ICollection ic = c;
-                Array array = Array.CreateInstance(typeof(object), new int[] { 10 }, new int[] { 10 });
+                Array array = Array.CreateInstance(
+                    typeof(object),
+                    new int[] { 10 },
+                    new int[] { 10 }
+                );
                 Assert.Throws<IndexOutOfRangeException>(() => ic.CopyTo(array, 0));
             }
         }
-
 
         private static void AssertEquals(AsnEncodedDataCollection c, IList<AsnEncodedData> expected)
         {
@@ -158,7 +165,10 @@ namespace System.Security.Cryptography.Tests
             Assert.Equal<AsnEncodedData>(expected, dumped.Skip(2).Take(c.Count));
         }
 
-        private static void ValidateEnumerator(IEnumerator enumerator, IList<AsnEncodedData> expected)
+        private static void ValidateEnumerator(
+            IEnumerator enumerator,
+            IList<AsnEncodedData> expected
+        )
         {
             foreach (AsnEncodedData e in expected)
             {

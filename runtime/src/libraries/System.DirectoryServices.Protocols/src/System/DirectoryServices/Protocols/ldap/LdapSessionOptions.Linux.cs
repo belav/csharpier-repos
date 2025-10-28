@@ -15,12 +15,14 @@ namespace System.DirectoryServices.Protocols
         {
             get
             {
-                if (_connection._disposed) throw new ObjectDisposedException(GetType().Name);
+                if (_connection._disposed)
+                    throw new ObjectDisposedException(GetType().Name);
                 return _secureSocketLayer;
             }
             set
             {
-                if (_connection._disposed) throw new ObjectDisposedException(GetType().Name);
+                if (_connection._disposed)
+                    throw new ObjectDisposedException(GetType().Name);
                 _secureSocketLayer = value;
             }
         }
@@ -35,26 +37,36 @@ namespace System.DirectoryServices.Protocols
         {
             get
             {
-                return GetBoolValueHelper(LdapOption.LDAP_OPT_REFERRALS) ? ReferralChasingOptions.All : ReferralChasingOptions.None;
+                return GetBoolValueHelper(LdapOption.LDAP_OPT_REFERRALS)
+                    ? ReferralChasingOptions.All
+                    : ReferralChasingOptions.None;
             }
             set
             {
                 if (((value) & (~ReferralChasingOptions.All)) != 0)
                 {
-                    throw new InvalidEnumArgumentException(nameof(value), (int)value, typeof(ReferralChasingOptions));
+                    throw new InvalidEnumArgumentException(
+                        nameof(value),
+                        (int)value,
+                        typeof(ReferralChasingOptions)
+                    );
                 }
                 if (value != ReferralChasingOptions.None && value != ReferralChasingOptions.All)
                 {
                     throw new PlatformNotSupportedException(SR.ReferralChasingOptionsNotSupported);
                 }
 
-                SetBoolValueHelper(LdapOption.LDAP_OPT_REFERRALS, value == ReferralChasingOptions.All);
+                SetBoolValueHelper(
+                    LdapOption.LDAP_OPT_REFERRALS,
+                    value == ReferralChasingOptions.All
+                );
             }
         }
 
         private bool GetBoolValueHelper(LdapOption option)
         {
-            if (_connection._disposed) throw new ObjectDisposedException(GetType().Name);
+            if (_connection._disposed)
+                throw new ObjectDisposedException(GetType().Name);
 
             bool outValue = false;
             int error = LdapPal.GetBoolOption(_connection._ldapHandle, option, ref outValue);
@@ -65,7 +77,8 @@ namespace System.DirectoryServices.Protocols
 
         private void SetBoolValueHelper(LdapOption option, bool value)
         {
-            if (_connection._disposed) throw new ObjectDisposedException(GetType().Name);
+            if (_connection._disposed)
+                throw new ObjectDisposedException(GetType().Name);
 
             int error = LdapPal.SetBoolOption(_connection._ldapHandle, option, value);
 

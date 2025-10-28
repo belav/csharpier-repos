@@ -31,78 +31,75 @@ namespace Tests.Integration
         [Fact]
         public void APrerequisiteDependsOnBPrerequisite_ShouldThrowComposition()
         {
-            AssertCycle(typeof(APrerequisiteDependsOnBPrerequisite),
-                        typeof(BPrerequisiteDependsOnAPrerequisite));
+            AssertCycle(
+                typeof(APrerequisiteDependsOnBPrerequisite),
+                typeof(BPrerequisiteDependsOnAPrerequisite)
+            );
         }
 
         [Fact]
         public void APrerequisiteDependsOnBPost_ShouldThrowComposition()
         {
-            AssertCycle(typeof(APrerequisiteDependsOnBPost),
-                        typeof(BPostDependsOnAPrerequisite));
+            AssertCycle(typeof(APrerequisiteDependsOnBPost), typeof(BPostDependsOnAPrerequisite));
         }
 
         [Fact]
         [ActiveIssue("https://github.com/dotnet/runtime/issues/24240")]
         public void APrerequisiteDependsOnBNone_ShouldNotThrow()
         {
-            AssertNotCycle(typeof(APrerequisiteDependsOnBNone),
-                           typeof(BNone));
+            AssertNotCycle(typeof(APrerequisiteDependsOnBNone), typeof(BNone));
         }
 
         [Fact]
         public void APostDependsOnBPrerequisite_ShouldThrowComposition()
         {
-            AssertCycle(typeof(APostDependsOnBPrerequisite),
-                        typeof(BPrerequisiteDependsOnAPost));
+            AssertCycle(typeof(APostDependsOnBPrerequisite), typeof(BPrerequisiteDependsOnAPost));
         }
 
         [Fact]
         [ActiveIssue("https://github.com/dotnet/runtime/issues/24240")]
         public void APostDependsOnBPost_ShouldNotThrow()
         {
-            AssertNotCycle(typeof(APostDependsOnBPost),
-                           typeof(BPostDependsOnAPost));
+            AssertNotCycle(typeof(APostDependsOnBPost), typeof(BPostDependsOnAPost));
         }
 
         [Fact]
         [ActiveIssue("https://github.com/dotnet/runtime/issues/24240")]
         public void APostDependsOnBNone_ShouldNotThrow()
         {
-            AssertNotCycle(typeof(APostDependsOnBNone),
-                           typeof(BNone));
+            AssertNotCycle(typeof(APostDependsOnBNone), typeof(BNone));
         }
 
         [Fact]
         [ActiveIssue("https://github.com/dotnet/runtime/issues/24240")]
         public void BPrerequisiteDependsOnANone_ShouldNotThrow()
         {
-            AssertNotCycle(typeof(ANone),
-                           typeof(BPrerequisiteDependsOnANone));
+            AssertNotCycle(typeof(ANone), typeof(BPrerequisiteDependsOnANone));
         }
 
         [Fact]
         [ActiveIssue("https://github.com/dotnet/runtime/issues/24240")]
         public void BPostDependsOnANone_ShouldNotThrow()
         {
-            AssertNotCycle(typeof(ANone),
-                           typeof(BPostDependsOnANone));
+            AssertNotCycle(typeof(ANone), typeof(BPostDependsOnANone));
         }
 
         [Fact]
         [ActiveIssue("https://github.com/dotnet/runtime/issues/24240")]
         public void ANoneWithBNone_ShouldNotThrow()
         {
-            AssertNotCycle(typeof(ANone),
-                           typeof(BNone));
+            AssertNotCycle(typeof(ANone), typeof(BNone));
         }
 
         [Fact]
         [ActiveIssue("https://github.com/dotnet/runtime/issues/24240")]
         public void PartWithHasPrerequisteImportThatIsInAPostCycle_ShouldNotThrow()
         {
-            AssertNotCycle(typeof(PartWithHasPrerequisteImportThatIsInAPostCycle)
-                , typeof(APostDependsOnBPost), typeof(BPostDependsOnAPost));
+            AssertNotCycle(
+                typeof(PartWithHasPrerequisteImportThatIsInAPostCycle),
+                typeof(APostDependsOnBPost),
+                typeof(BPostDependsOnAPost)
+            );
         }
 
         private static void AssertCycle(params Type[] types)
@@ -111,10 +108,13 @@ namespace Tests.Integration
             {
                 var export = GetExport(type, types);
 
-                CompositionAssert.ThrowsError(ErrorId.ImportEngine_PartCannotGetExportedValue, () =>
-                {
-                    var value = export.Value;
-                });
+                CompositionAssert.ThrowsError(
+                    ErrorId.ImportEngine_PartCannotGetExportedValue,
+                    () =>
+                    {
+                        var value = export.Value;
+                    }
+                );
             }
         }
 
@@ -139,139 +139,97 @@ namespace Tests.Integration
         public class APrerequisiteDependsOnBPrerequisite
         {
             [ImportingConstructor]
-            public APrerequisiteDependsOnBPrerequisite(BPrerequisiteDependsOnAPrerequisite b)
-            {
-            }
+            public APrerequisiteDependsOnBPrerequisite(BPrerequisiteDependsOnAPrerequisite b) { }
         }
 
         [Export]
         public class BPrerequisiteDependsOnAPrerequisite
         {
             [ImportingConstructor]
-            public BPrerequisiteDependsOnAPrerequisite(APrerequisiteDependsOnBPrerequisite a)
-            {
-            }
+            public BPrerequisiteDependsOnAPrerequisite(APrerequisiteDependsOnBPrerequisite a) { }
         }
 
         [Export]
         public class APrerequisiteDependsOnBPost
         {
             [ImportingConstructor]
-            public APrerequisiteDependsOnBPost(BPostDependsOnAPrerequisite b)
-            {
-            }
+            public APrerequisiteDependsOnBPost(BPostDependsOnAPrerequisite b) { }
         }
 
         [Export]
         public class BPostDependsOnAPrerequisite
         {
             [Import]
-            public APrerequisiteDependsOnBPost A
-            {
-                get;
-                set;
-            }
+            public APrerequisiteDependsOnBPost A { get; set; }
         }
 
         [Export]
         public class APrerequisiteDependsOnBNone
         {
             [ImportingConstructor]
-            public APrerequisiteDependsOnBNone(BNone b)
-            {
-            }
+            public APrerequisiteDependsOnBNone(BNone b) { }
         }
 
         [Export]
-        public class BNone
-        {
-        }
+        public class BNone { }
 
         [Export]
-        public class ANone
-        {
-        }
+        public class ANone { }
 
         [Export]
         public class APostDependsOnBPrerequisite
         {
             [Import]
-            public BPrerequisiteDependsOnAPost B
-            {
-                get;
-                set;
-            }
+            public BPrerequisiteDependsOnAPost B { get; set; }
         }
 
         [Export]
         public class BPrerequisiteDependsOnAPost
         {
             [ImportingConstructor]
-            public BPrerequisiteDependsOnAPost(APostDependsOnBPrerequisite a)
-            {
-            }
+            public BPrerequisiteDependsOnAPost(APostDependsOnBPrerequisite a) { }
         }
 
         [Export]
         public class APostDependsOnBPost
         {
             [Import]
-            public BPostDependsOnAPost B
-            {
-                get;
-                set;
-            }
+            public BPostDependsOnAPost B { get; set; }
         }
 
         [Export]
         public class BPostDependsOnAPost
         {
             [Import]
-            public APostDependsOnBPost A
-            {
-                get;
-                set;
-            }
+            public APostDependsOnBPost A { get; set; }
         }
 
         [Export]
         public class APostDependsOnBNone
         {
             [Import]
-            public BNone B
-            {
-                get;
-                set;
-            }
+            public BNone B { get; set; }
         }
 
         [Export]
         public class BPrerequisiteDependsOnANone
         {
             [ImportingConstructor]
-            public BPrerequisiteDependsOnANone(ANone a)
-            {
-            }
+            public BPrerequisiteDependsOnANone(ANone a) { }
         }
 
         [Export]
         public class BPostDependsOnANone
         {
             [Import]
-            public ANone A
-            {
-                get;
-                set;
-            }
+            public ANone A { get; set; }
         }
 
         [Export]
         public class PartWithHasPrerequisteImportThatIsInAPostCycle
         {
             [ImportingConstructor]
-            public PartWithHasPrerequisteImportThatIsInAPostCycle(APostDependsOnBPost a)
-            {
-            }
+            public PartWithHasPrerequisteImportThatIsInAPostCycle(APostDependsOnBPost a) { }
         }
     }
 }

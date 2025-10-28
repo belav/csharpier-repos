@@ -5,7 +5,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Tests;
 using System.Text;
-
 using Xunit;
 
 namespace System.PrivateUri.Tests
@@ -22,7 +21,7 @@ namespace System.PrivateUri.Tests
             "zh-cn",
             "de-ch",
             "de-lu",
-            "ja-jp"
+            "ja-jp",
         };
 
         private const int MaxUriLength = 0xFFF0 - 1; // 65519
@@ -30,11 +29,12 @@ namespace System.PrivateUri.Tests
         [Fact]
         public void Iri_Validate_LongUriWithQuery()
         {
-            string uriString = "http://www.contos.com/abcde?fghijklm=noprstuvx&ab=CDEFG#hi=jk&lmn=o&p="
-                              + "%F4%80%80%9C%F4%80%80%99&cp=18&pf=p&sclient=psy&site=webhp&source=hp&rlz=1R2ADRA_enUS"
-                              + "435&aq=f&aqi=&aql=&oq=%F4%80%80%BA%F4%80%80%94%F4%80%80%93%F4%80%80%94%F4%80%80%95%F4"
-                              + "%80%80%97%F4%80%80%93%F4%80%80%9C%F4%80%80%99&pbx=1&bav=on.2,or.r_gc.r_pw.&fp=fb838c8"
-                              + "df90b57b2&biw=1600&bih=718";
+            string uriString =
+                "http://www.contos.com/abcde?fghijklm=noprstuvx&ab=CDEFG#hi=jk&lmn=o&p="
+                + "%F4%80%80%9C%F4%80%80%99&cp=18&pf=p&sclient=psy&site=webhp&source=hp&rlz=1R2ADRA_enUS"
+                + "435&aq=f&aqi=&aql=&oq=%F4%80%80%BA%F4%80%80%94%F4%80%80%93%F4%80%80%94%F4%80%80%95%F4"
+                + "%80%80%97%F4%80%80%93%F4%80%80%9C%F4%80%80%99&pbx=1&bav=on.2,or.r_gc.r_pw.&fp=fb838c8"
+                + "df90b57b2&biw=1600&bih=718";
 
             new Uri(uriString);
 
@@ -73,9 +73,7 @@ namespace System.PrivateUri.Tests
             Uri u1 = new Uri(@"http://test.com/%2c");
             Uri u2 = new Uri(@"http://test.com/,");
 
-            Assert.NotEqual(
-                u1.ToString(),
-                u2.ToString());
+            Assert.NotEqual(u1.ToString(), u2.ToString());
         }
 
         [Fact]
@@ -104,24 +102,27 @@ namespace System.PrivateUri.Tests
             Assert.Equal(
                 "http://con.tosoco.ntosoc.com/abcdefghi/jk" + "%C8%F3%B7%A2%B7%BF%B2%FA",
                 resultUri.ToString(),
-                StringComparer.OrdinalIgnoreCase);
+                StringComparer.OrdinalIgnoreCase
+            );
 
             string u4 = "http://co.ntsosocon.com/abcd/" + "%A2%F3%BD%CB%FC%FB%D5%E9%F3%B7%AA%B5";
             new Uri(u4);
             Uri.TryCreate(
                 "http://co.ntsosocon.com/abcd/" + "%A2%F3%BD%CB%FC%FB%D5%E9%F3%B7%AA%B5",
                 UriKind.Absolute,
-                out resultUri);
+                out resultUri
+            );
             Assert.Equal(u4, resultUri.ToString());
 
-            string[] sctiTeamReproUris = new string[] {
+            string[] sctiTeamReproUris = new string[]
+            {
                 "http://con.toso.com/abc/defg.html?n=12345678&ab="
                     + "%BF%E4%C1%F2%B3%AF%BE%BE%B4%F5%BF%EE%C0%CC%C0%AF",
                 "http://contos.com/abcdef_ghijklm/" + "%8E%E8%90%F4%82%A2%8A%ED/?abcdefgh=0123",
                 "http://www.conto.com/abcd/" + "%D7%F3%B1%A6%B9%F3",
                 "http://c.ontoso.co.mc/abcdefg/" + "%C6%F3%B8%AB%B1%CD%CD%FD%BB%D2",
                 "http://www.conto.com/abcd/" + "%D6%E2%BA%F3%B1%B8%BC%B1%B7%BD",
-                "http://www.conto.com/abcd/" + "%A1%B6%B4%F3%BA%BD%BA%A3%A1%B7"
+                "http://www.conto.com/abcd/" + "%A1%B6%B4%F3%BA%BD%BA%A3%A1%B7",
             };
 
             foreach (string uristring in sctiTeamReproUris)
@@ -130,12 +131,15 @@ namespace System.PrivateUri.Tests
                 Assert.Equal(uristring, u.AbsoluteUri);
             }
 
-            Uri uri5 = new Uri("http://contos.com/abcdef_ghijklm/"
-                    + "%90H%8A%ED%90%F4%82%A2%8B%40+%90%98%82%A6%92u%82%AB/?abcdefgh=0002%5F0042");
+            Uri uri5 = new Uri(
+                "http://contos.com/abcdef_ghijklm/"
+                    + "%90H%8A%ED%90%F4%82%A2%8B%40+%90%98%82%A6%92u%82%AB/?abcdefgh=0002%5F0042"
+            );
             Assert.Equal(
                 "http://contos.com/abcdef_ghijklm/"
-                + "%90H%8A%ED%90%F4%82%A2%8B%40+%90%98%82%A6%92u%82%AB/?abcdefgh=0002_0042",
-                uri5.ToString());
+                    + "%90H%8A%ED%90%F4%82%A2%8B%40+%90%98%82%A6%92u%82%AB/?abcdefgh=0002_0042",
+                uri5.ToString()
+            );
         }
 
         [Fact]
@@ -341,37 +345,44 @@ namespace System.PrivateUri.Tests
                 case UriComponents.Fragment:
                     uriString = string.Format(
                         "http://userInfo@server:80/path/resource.ext?query=qvalue#{0}",
-                        uriInput);
+                        uriInput
+                    );
                     break;
                 case UriComponents.Host:
                     uriString = string.Format(
                         "http://userInfo@{0}:80/path/resource.ext?query=qvalue#fragment",
-                        uriInput);
+                        uriInput
+                    );
                     break;
                 case UriComponents.Path:
                     uriString = string.Format(
                         "http://userInfo@server:80/{0}/{0}/resource.ext?query=qvalue#fragment",
-                        uriInput);
+                        uriInput
+                    );
                     break;
                 case UriComponents.Port:
                     uriString = string.Format(
                         "http://userInfo@server:{0}/path/resource.ext?query=qvalue#fragment",
-                        uriInput);
+                        uriInput
+                    );
                     break;
                 case UriComponents.Query:
                     uriString = string.Format(
                         "http://userInfo@server:80/path/resource.ext?query{0}=qvalue{0}#fragment",
-                        uriInput);
+                        uriInput
+                    );
                     break;
                 case UriComponents.Scheme:
                     uriString = string.Format(
                         "{0}://userInfo@server:80/path/resource.ext?query=qvalue#fragment",
-                        uriInput);
+                        uriInput
+                    );
                     break;
                 case UriComponents.UserInfo:
                     uriString = string.Format(
                         "http://{0}@server:80/path/resource.ext?query=qvalue#fragment",
-                        uriInput);
+                        uriInput
+                    );
                     break;
                 default:
                     Assert.Fail("Unknown Uri component: " + component.ToString());
@@ -403,42 +414,74 @@ namespace System.PrivateUri.Tests
         private static readonly string[,] s_checkIsReservedEscapingStrings =
         {
             // : [ ] in host.
-            {"http://user@ser%3Aver.srv:123/path/path/resource.ext?query=expression#fragment", null},
-            {"http://user@server.srv%3A999/path/path/resource.ext?query=expression#fragment", null},
-            {"http://user@server.%5Bsrv:123/path/path/resource.ext?query=expression#fragment", null},
-            {"http://user@ser%5Dver.srv:123/path/path/resource.ext?query=expression#fragment", null},
-
+            {
+                "http://user@ser%3Aver.srv:123/path/path/resource.ext?query=expression#fragment",
+                null,
+            },
+            {
+                "http://user@server.srv%3A999/path/path/resource.ext?query=expression#fragment",
+                null,
+            },
+            {
+                "http://user@server.%5Bsrv:123/path/path/resource.ext?query=expression#fragment",
+                null,
+            },
+            {
+                "http://user@ser%5Dver.srv:123/path/path/resource.ext?query=expression#fragment",
+                null,
+            },
             // [ ] in userinfo.
-            {"http://us%5Ber@server.srv:123/path/path/resource.ext?query=expression#fragment",
-                "http://us%5Ber@server.srv:123/path/path/resource.ext?query=expression#fragment"},
-            {"http://u%5Dser@server.srv:123/path/path/resource.ext?query=expression#fragment",
-                "http://u%5Dser@server.srv:123/path/path/resource.ext?query=expression#fragment"},
-            {"http://us%5B%5Der@server.srv:123/path/path/resource.ext?query=expression#fragment",
-                "http://us%5B%5Der@server.srv:123/path/path/resource.ext?query=expression#fragment"},
-
+            {
+                "http://us%5Ber@server.srv:123/path/path/resource.ext?query=expression#fragment",
+                "http://us%5Ber@server.srv:123/path/path/resource.ext?query=expression#fragment",
+            },
+            {
+                "http://u%5Dser@server.srv:123/path/path/resource.ext?query=expression#fragment",
+                "http://u%5Dser@server.srv:123/path/path/resource.ext?query=expression#fragment",
+            },
+            {
+                "http://us%5B%5Der@server.srv:123/path/path/resource.ext?query=expression#fragment",
+                "http://us%5B%5Der@server.srv:123/path/path/resource.ext?query=expression#fragment",
+            },
             // [ ] : ' in path.
-            {"http://user@server.srv:123/path/pa%5B%3A%27th/resource.ext?query=expression#fragment",
-                "http://user@server.srv:123/path/pa%5B%3A%27th/resource.ext?query=expression#fragment"},
-            {"http://user@server.srv:123/pa%5D%3A%27th/path%5D%3A%27/resource.ext?query=expression#fragment",
-                "http://user@server.srv:123/pa%5D%3A%27th/path%5D%3A%27/resource.ext?query=expression#fragment"},
-            {"http://user@server.srv:123/path/p%5B%3A%27a%5D%3A%27th/resource.ext?query=expression#fragment",
-                "http://user@server.srv:123/path/p%5B%3A%27a%5D%3A%27th/resource.ext?query=expression#fragment"},
-
+            {
+                "http://user@server.srv:123/path/pa%5B%3A%27th/resource.ext?query=expression#fragment",
+                "http://user@server.srv:123/path/pa%5B%3A%27th/resource.ext?query=expression#fragment",
+            },
+            {
+                "http://user@server.srv:123/pa%5D%3A%27th/path%5D%3A%27/resource.ext?query=expression#fragment",
+                "http://user@server.srv:123/pa%5D%3A%27th/path%5D%3A%27/resource.ext?query=expression#fragment",
+            },
+            {
+                "http://user@server.srv:123/path/p%5B%3A%27a%5D%3A%27th/resource.ext?query=expression#fragment",
+                "http://user@server.srv:123/path/p%5B%3A%27a%5D%3A%27th/resource.ext?query=expression#fragment",
+            },
             // [ ] : ' in query.
-            {"http://user@server.srv:123/path/path/resource.ext?que%5B%3A%27ry=expression#fragment",
-                "http://user@server.srv:123/path/path/resource.ext?que%5B%3A%27ry=expression#fragment"},
-            {"http://user@server.srv:123/path/path/resource.ext?query=exp%5D%3A%27ression#fragment",
-                "http://user@server.srv:123/path/path/resource.ext?query=exp%5D%3A%27ression#fragment"},
-            {"http://user@server.srv:123/path/path/resource.ext?que%5B%3A%27ry=exp%5D%3A%27ression#fragment",
-                "http://user@server.srv:123/path/path/resource.ext?que%5B%3A%27ry=exp%5D%3A%27ression#fragment"},
-
+            {
+                "http://user@server.srv:123/path/path/resource.ext?que%5B%3A%27ry=expression#fragment",
+                "http://user@server.srv:123/path/path/resource.ext?que%5B%3A%27ry=expression#fragment",
+            },
+            {
+                "http://user@server.srv:123/path/path/resource.ext?query=exp%5D%3A%27ression#fragment",
+                "http://user@server.srv:123/path/path/resource.ext?query=exp%5D%3A%27ression#fragment",
+            },
+            {
+                "http://user@server.srv:123/path/path/resource.ext?que%5B%3A%27ry=exp%5D%3A%27ression#fragment",
+                "http://user@server.srv:123/path/path/resource.ext?que%5B%3A%27ry=exp%5D%3A%27ression#fragment",
+            },
             // [ ] : ' in fragment.
-            {"http://user@server.srv:123/path/path/resource.ext?query=expression#fr%5B%3A%27agment",
-                "http://user@server.srv:123/path/path/resource.ext?query=expression#fr%5B%3A%27agment"},
-            {"http://user@server.srv:123/path/path/resource.ext?query=expression#fragment%5D%3A%27",
-                "http://user@server.srv:123/path/path/resource.ext?query=expression#fragment%5D%3A%27"},
-            {"http://user@server.srv:123/path/path/resource.ext?query=expression#fr%5B%3A%27agment%5D%3A%27",
-                "http://user@server.srv:123/path/path/resource.ext?query=expression#fr%5B%3A%27agment%5D%3A%27"}
+            {
+                "http://user@server.srv:123/path/path/resource.ext?query=expression#fr%5B%3A%27agment",
+                "http://user@server.srv:123/path/path/resource.ext?query=expression#fr%5B%3A%27agment",
+            },
+            {
+                "http://user@server.srv:123/path/path/resource.ext?query=expression#fragment%5D%3A%27",
+                "http://user@server.srv:123/path/path/resource.ext?query=expression#fragment%5D%3A%27",
+            },
+            {
+                "http://user@server.srv:123/path/path/resource.ext?query=expression#fr%5B%3A%27agment%5D%3A%27",
+                "http://user@server.srv:123/path/path/resource.ext?query=expression#fr%5B%3A%27agment%5D%3A%27",
+            },
         };
 
         /// <summary>
@@ -458,8 +501,7 @@ namespace System.PrivateUri.Tests
                     Assert.Equal(uriInput, uri.AbsoluteUri); //"Unexpected URI normalization behavior."
                     Assert.Equal(expectedToString, uri.ToString()); //"Unexpected URI normalization behavior."
                 }
-                catch (FormatException)
-                { }
+                catch (FormatException) { }
             }
         }
 
@@ -468,7 +510,12 @@ namespace System.PrivateUri.Tests
         {
             string validUriStart = "http://host/q=";
 
-            string bigString1 = GetUnicodeString(0x1000, 0x1001, 1, MaxUriLength - validUriStart.Length);
+            string bigString1 = GetUnicodeString(
+                0x1000,
+                0x1001,
+                1,
+                MaxUriLength - validUriStart.Length
+            );
             string test = validUriStart + bigString1;
             Assert.True(test.Length == MaxUriLength);
 
@@ -481,8 +528,7 @@ namespace System.PrivateUri.Tests
                 Uri u = new Uri(bigString2);
                 Assert.Fail("Expected UriFormatException: Uri too large");
             }
-            catch (FormatException)
-            { }
+            catch (FormatException) { }
         }
 
         [Theory]
@@ -542,12 +588,18 @@ namespace System.PrivateUri.Tests
         }
 
         public static IEnumerable<object[]> AllForbiddenDecompositions() =>
-            from host in new[] { "canada.c\u2100.microsoft.com", // Unicode U+2100 'Account Of' decomposes to 'a/c'
-                                 "canada.c\u2488.microsoft.com", // Unicode U+2488 'Digit One Full Stop" decomposes to '1.'
-                                 "canada.c\u2048.microsoft.com", // Unicode U+2048 'Question Exclamation Mark" decomposes to '?!'
-                                 "canada.c\uD83C\uDD00.microsoft.com" } // Unicode U+2488 'Digit Zero Full Stop" decomposes to '0.'
-            from scheme in new[] { "http", // Known scheme.
-                                   "test" } // Unknown scheme.
+            from host in new[]
+            {
+                "canada.c\u2100.microsoft.com", // Unicode U+2100 'Account Of' decomposes to 'a/c'
+                "canada.c\u2488.microsoft.com", // Unicode U+2488 'Digit One Full Stop" decomposes to '1.'
+                "canada.c\u2048.microsoft.com", // Unicode U+2048 'Question Exclamation Mark" decomposes to '?!'
+                "canada.c\uD83C\uDD00.microsoft.com",
+            } // Unicode U+2488 'Digit Zero Full Stop" decomposes to '0.'
+            from scheme in new[]
+            {
+                "http", // Known scheme.
+                "test",
+            } // Unknown scheme.
             select new object[] { scheme, host };
 
         [Theory]
@@ -593,10 +645,22 @@ namespace System.PrivateUri.Tests
                 // The total of len + const parts (15) + expanded unicode (2 * 9) after expansion should be
                 // just larger than ExpandedLengthLimit.
                 int len = ExpandedLengthLimit - 15 - (2 * 9) + 1;
-                yield return new object[] { @"test://" + new string('a', len) + new string('\uD800', 2) + "@8.8.8.8" }; // Userinfo
-                yield return new object[] { @"test://8.8.8.8?" + new string('a', len) + new string('\uD800', 2) }; // Query
-                yield return new object[] { @"test://8.8.8.8#" + new string('a', len) + new string('\uD800', 2) }; // Fragment
-                yield return new object[] { @"test://8.8.8.8/" + new string('a', len) + new string('\uD800', 2) }; // Path
+                yield return new object[]
+                {
+                    @"test://" + new string('a', len) + new string('\uD800', 2) + "@8.8.8.8",
+                }; // Userinfo
+                yield return new object[]
+                {
+                    @"test://8.8.8.8?" + new string('a', len) + new string('\uD800', 2),
+                }; // Query
+                yield return new object[]
+                {
+                    @"test://8.8.8.8#" + new string('a', len) + new string('\uD800', 2),
+                }; // Fragment
+                yield return new object[]
+                {
+                    @"test://8.8.8.8/" + new string('a', len) + new string('\uD800', 2),
+                }; // Path
 
                 // Generate a string whose total length is just less than InitialLengthLimit
                 // but whose content expands to be dramatically larger than ExpandedLengthLimit.
@@ -632,10 +696,22 @@ namespace System.PrivateUri.Tests
                 // The total of len + const parts (15) + expanded unicode (2 * 9) after expansion should be
                 // exactly the ExpandedLengthLimit.
                 int len = ExpandedLengthLimit - 15 - (2 * 9);
-                yield return new object[] { @"test://" + new string('a', len) + new string('\uD800', 2) + "@8.8.8.8" }; // Userinfo
-                yield return new object[] { @"test://8.8.8.8?" + new string('a', len) + new string('\uD800', 2) }; // Query
-                yield return new object[] { @"test://8.8.8.8#" + new string('a', len) + new string('\uD800', 2) }; // Fragment
-                yield return new object[] { @"test://8.8.8.8/" + new string('a', len) + new string('\uD800', 2) }; // Path
+                yield return new object[]
+                {
+                    @"test://" + new string('a', len) + new string('\uD800', 2) + "@8.8.8.8",
+                }; // Userinfo
+                yield return new object[]
+                {
+                    @"test://8.8.8.8?" + new string('a', len) + new string('\uD800', 2),
+                }; // Query
+                yield return new object[]
+                {
+                    @"test://8.8.8.8#" + new string('a', len) + new string('\uD800', 2),
+                }; // Fragment
+                yield return new object[]
+                {
+                    @"test://8.8.8.8/" + new string('a', len) + new string('\uD800', 2),
+                }; // Path
 
                 // Validate the same behavior, but maximize the amount of expansion.
                 len = (ExpandedLengthLimit - 15) / 9;

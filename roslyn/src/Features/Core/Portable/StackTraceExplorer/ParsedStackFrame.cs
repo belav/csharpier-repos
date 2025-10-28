@@ -20,8 +20,7 @@ namespace Microsoft.CodeAnalysis.StackTraceExplorer
     /// A line from <see cref="StackTraceAnalyzer.Parse(string, CancellationToken)"/> that
     /// was parsed by <see cref="StackFrameParser"/>
     /// </summary>
-    internal sealed class ParsedStackFrame(
-        StackFrameTree tree) : ParsedFrame
+    internal sealed class ParsedStackFrame(StackFrameTree tree) : ParsedFrame
     {
         public readonly StackFrameTree Tree = tree;
 

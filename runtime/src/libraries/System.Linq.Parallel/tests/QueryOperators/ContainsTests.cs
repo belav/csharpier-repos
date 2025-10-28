@@ -31,7 +31,11 @@ namespace System.Linq.Parallel.Tests
         {
             Assert.False(ParallelEnumerable.Range(0, count).Contains(count));
             Assert.False(ParallelEnumerable.Range(0, count).Contains(count, null));
-            Assert.False(ParallelEnumerable.Range(0, count).Contains(count, EqualityComparer<int>.Create((l, r) => false)));
+            Assert.False(
+                ParallelEnumerable
+                    .Range(0, count)
+                    .Contains(count, EqualityComparer<int>.Create((l, r) => false))
+            );
         }
 
         [Fact]
@@ -45,7 +49,11 @@ namespace System.Linq.Parallel.Tests
         [InlineData(16)]
         public static void Contains_MultipleMatching(int count)
         {
-            Assert.True(ParallelEnumerable.Range(0, count).Contains(count, EqualityComparer<int>.Create((l, r) => (l % 2) == (r % 2))));
+            Assert.True(
+                ParallelEnumerable
+                    .Range(0, count)
+                    .Contains(count, EqualityComparer<int>.Create((l, r) => (l % 2) == (r % 2)))
+            );
         }
 
         [Fact]
@@ -61,12 +69,24 @@ namespace System.Linq.Parallel.Tests
         {
             Assert.True(ParallelEnumerable.Range(0, count).Contains(position));
             Assert.True(ParallelEnumerable.Range(0, count).Contains(position, null));
-            Assert.True(ParallelEnumerable.Range(0, count).Contains(position, EqualityComparer<int>.Create((l, r) => l == position && r == position)));
+            Assert.True(
+                ParallelEnumerable
+                    .Range(0, count)
+                    .Contains(
+                        position,
+                        EqualityComparer<int>.Create((l, r) => l == position && r == position)
+                    )
+            );
         }
 
         [Theory]
         [OuterLoop]
-        [MemberData(nameof(OnlyOneData), new int[] { /* Sources.OuterLoopCount */ })]
+        [MemberData(
+            nameof(OnlyOneData),
+            new int[]
+            { /* Sources.OuterLoopCount */
+            }
+        )]
         public static void Contains_OneMatching_Longrunning(int count, int position)
         {
             Contains_OneMatching(count, position);
@@ -75,34 +95,53 @@ namespace System.Linq.Parallel.Tests
         [Fact]
         public static void Contains_OperationCanceledException()
         {
-            AssertThrows.EventuallyCanceled((source, canceler) => source.Contains(-1, new CancelingEqualityComparer<int>(canceler)));
+            AssertThrows.EventuallyCanceled(
+                (source, canceler) =>
+                    source.Contains(-1, new CancelingEqualityComparer<int>(canceler))
+            );
         }
 
         [Fact]
         public static void Contains_AggregateException_Wraps_OperationCanceledException()
         {
-            AssertThrows.OtherTokenCanceled((source, canceler) => source.Contains(-1, new CancelingEqualityComparer<int>(canceler)));
-            AssertThrows.SameTokenNotCanceled((source, canceler) => source.Contains(-1, new CancelingEqualityComparer<int>(canceler)));
+            AssertThrows.OtherTokenCanceled(
+                (source, canceler) =>
+                    source.Contains(-1, new CancelingEqualityComparer<int>(canceler))
+            );
+            AssertThrows.SameTokenNotCanceled(
+                (source, canceler) =>
+                    source.Contains(-1, new CancelingEqualityComparer<int>(canceler))
+            );
         }
 
         [Fact]
         public static void Contains_OperationCanceledException_PreCanceled()
         {
             AssertThrows.AlreadyCanceled(source => source.Contains(0));
-            AssertThrows.AlreadyCanceled(source => source.Contains(0, EqualityComparer<int>.Default));
+            AssertThrows.AlreadyCanceled(source =>
+                source.Contains(0, EqualityComparer<int>.Default)
+            );
         }
 
         [Fact]
         public static void Contains_AggregateException()
         {
-            AssertThrows.Wrapped<DeliberateTestException>(() => ParallelEnumerable.Range(0, 1).Contains(1, new FailingEqualityComparer<int>()));
+            AssertThrows.Wrapped<DeliberateTestException>(() =>
+                ParallelEnumerable.Range(0, 1).Contains(1, new FailingEqualityComparer<int>())
+            );
         }
 
         [Fact]
         public static void Contains_ArgumentNullException()
         {
-            AssertExtensions.Throws<ArgumentNullException>("source", () => ((ParallelQuery<bool>)null).Contains(false));
-            AssertExtensions.Throws<ArgumentNullException>("source", () => ((ParallelQuery<bool>)null).Contains(false, EqualityComparer<bool>.Default));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "source",
+                () => ((ParallelQuery<bool>)null).Contains(false)
+            );
+            AssertExtensions.Throws<ArgumentNullException>(
+                "source",
+                () => ((ParallelQuery<bool>)null).Contains(false, EqualityComparer<bool>.Default)
+            );
         }
     }
 }

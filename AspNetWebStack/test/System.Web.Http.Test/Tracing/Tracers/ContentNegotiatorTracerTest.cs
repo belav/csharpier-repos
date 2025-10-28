@@ -27,13 +27,22 @@ namespace System.Web.Http.Tracing.Tracers
         public void Negotiate_Calls_Inner_Negotiate()
         {
             // Act
-            ((IContentNegotiator)_tracer).Negotiate(typeof(int), _request, new MediaTypeFormatter[0]);
+            ((IContentNegotiator)_tracer).Negotiate(
+                typeof(int),
+                _request,
+                new MediaTypeFormatter[0]
+            );
 
             // Assert
             _mockNegotiator.Verify(
                 n =>
-                n.Negotiate(It.IsAny<Type>(), It.IsAny<HttpRequestMessage>(),
-                            It.IsAny<IEnumerable<MediaTypeFormatter>>()), Times.Once());
+                    n.Negotiate(
+                        It.IsAny<Type>(),
+                        It.IsAny<HttpRequestMessage>(),
+                        It.IsAny<IEnumerable<MediaTypeFormatter>>()
+                    ),
+                Times.Once()
+            );
         }
 
         [Fact]
@@ -41,14 +50,24 @@ namespace System.Web.Http.Tracing.Tracers
         {
             // Arrange
             MediaTypeHeaderValue expectedMediaType = new MediaTypeHeaderValue("application/xml");
-            _mockNegotiator.Setup(
-                n =>
-                n.Negotiate(It.IsAny<Type>(), It.IsAny<HttpRequestMessage>(),
-                            It.IsAny<IEnumerable<MediaTypeFormatter>>())).Returns(
-                                new ContentNegotiationResult(new JsonMediaTypeFormatter(), expectedMediaType));
+            _mockNegotiator
+                .Setup(n =>
+                    n.Negotiate(
+                        It.IsAny<Type>(),
+                        It.IsAny<HttpRequestMessage>(),
+                        It.IsAny<IEnumerable<MediaTypeFormatter>>()
+                    )
+                )
+                .Returns(
+                    new ContentNegotiationResult(new JsonMediaTypeFormatter(), expectedMediaType)
+                );
 
             // Act
-            var result = ((IContentNegotiator)_tracer).Negotiate(typeof(int), _request, new MediaTypeFormatter[0]);
+            var result = ((IContentNegotiator)_tracer).Negotiate(
+                typeof(int),
+                _request,
+                new MediaTypeFormatter[0]
+            );
 
             // Assert
             Assert.Same(expectedMediaType, result.MediaType);
@@ -59,14 +78,22 @@ namespace System.Web.Http.Tracing.Tracers
         {
             // Arrange
             MediaTypeFormatter expectedFormatter = new XmlMediaTypeFormatter();
-            _mockNegotiator.Setup(
-                n =>
-                n.Negotiate(It.IsAny<Type>(), It.IsAny<HttpRequestMessage>(),
-                            It.IsAny<IEnumerable<MediaTypeFormatter>>())).Returns(
-                                new ContentNegotiationResult(expectedFormatter, null));
+            _mockNegotiator
+                .Setup(n =>
+                    n.Negotiate(
+                        It.IsAny<Type>(),
+                        It.IsAny<HttpRequestMessage>(),
+                        It.IsAny<IEnumerable<MediaTypeFormatter>>()
+                    )
+                )
+                .Returns(new ContentNegotiationResult(expectedFormatter, null));
 
             // Act
-            var result = ((IContentNegotiator)_tracer).Negotiate(typeof(int), _request, new MediaTypeFormatter[0]);
+            var result = ((IContentNegotiator)_tracer).Negotiate(
+                typeof(int),
+                _request,
+                new MediaTypeFormatter[0]
+            );
 
             // Assert
             Assert.IsType<XmlMediaTypeFormatterTracer>(result.Formatter);
@@ -77,14 +104,22 @@ namespace System.Web.Http.Tracing.Tracers
         {
             // Arrange
             MediaTypeFormatter expectedFormatter = new JsonMediaTypeFormatter();
-            _mockNegotiator.Setup(
-                n =>
-                n.Negotiate(It.IsAny<Type>(), It.IsAny<HttpRequestMessage>(),
-                            It.IsAny<IEnumerable<MediaTypeFormatter>>())).Returns(
-                                new ContentNegotiationResult(expectedFormatter, null));
+            _mockNegotiator
+                .Setup(n =>
+                    n.Negotiate(
+                        It.IsAny<Type>(),
+                        It.IsAny<HttpRequestMessage>(),
+                        It.IsAny<IEnumerable<MediaTypeFormatter>>()
+                    )
+                )
+                .Returns(new ContentNegotiationResult(expectedFormatter, null));
 
             // Act
-            var result = ((IContentNegotiator)_tracer).Negotiate(typeof(int), _request, new MediaTypeFormatter[0]);
+            var result = ((IContentNegotiator)_tracer).Negotiate(
+                typeof(int),
+                _request,
+                new MediaTypeFormatter[0]
+            );
 
             // Assert
             Assert.IsType<JsonMediaTypeFormatterTracer>(result.Formatter);
@@ -95,14 +130,22 @@ namespace System.Web.Http.Tracing.Tracers
         {
             // Arrange
             MediaTypeFormatter expectedFormatter = new FormUrlEncodedMediaTypeFormatter();
-            _mockNegotiator.Setup(
-                n =>
-                n.Negotiate(It.IsAny<Type>(), It.IsAny<HttpRequestMessage>(),
-                            It.IsAny<IEnumerable<MediaTypeFormatter>>())).Returns(
-                                new ContentNegotiationResult(expectedFormatter, null));
+            _mockNegotiator
+                .Setup(n =>
+                    n.Negotiate(
+                        It.IsAny<Type>(),
+                        It.IsAny<HttpRequestMessage>(),
+                        It.IsAny<IEnumerable<MediaTypeFormatter>>()
+                    )
+                )
+                .Returns(new ContentNegotiationResult(expectedFormatter, null));
 
             // Act
-            var result = ((IContentNegotiator)_tracer).Negotiate(typeof(int), _request, new MediaTypeFormatter[0]);
+            var result = ((IContentNegotiator)_tracer).Negotiate(
+                typeof(int),
+                _request,
+                new MediaTypeFormatter[0]
+            );
 
             // Assert
             Assert.IsType<FormUrlEncodedMediaTypeFormatterTracer>(result.Formatter);
@@ -112,14 +155,22 @@ namespace System.Web.Http.Tracing.Tracers
         public void Negotiate_Returns_Null_Inner_Formatter()
         {
             // Arrange
-            _mockNegotiator.Setup(
-                n =>
-                n.Negotiate(It.IsAny<Type>(), It.IsAny<HttpRequestMessage>(),
-                            It.IsAny<IEnumerable<MediaTypeFormatter>>())).Returns(
-                                value: null);
+            _mockNegotiator
+                .Setup(n =>
+                    n.Negotiate(
+                        It.IsAny<Type>(),
+                        It.IsAny<HttpRequestMessage>(),
+                        It.IsAny<IEnumerable<MediaTypeFormatter>>()
+                    )
+                )
+                .Returns(value: null);
 
             // Act
-            var result = ((IContentNegotiator)_tracer).Negotiate(typeof(int), _request, new MediaTypeFormatter[0]);
+            var result = ((IContentNegotiator)_tracer).Negotiate(
+                typeof(int),
+                _request,
+                new MediaTypeFormatter[0]
+            );
 
             // Assert
             Assert.Null(result);
@@ -130,22 +181,40 @@ namespace System.Web.Http.Tracing.Tracers
         {
             // Arrange
             MediaTypeFormatter expectedFormatter = new XmlMediaTypeFormatter();
-            _mockNegotiator.Setup(
-                n =>
-                n.Negotiate(It.IsAny<Type>(), It.IsAny<HttpRequestMessage>(),
-                            It.IsAny<IEnumerable<MediaTypeFormatter>>())).Returns(
-                                new ContentNegotiationResult(expectedFormatter, null));
+            _mockNegotiator
+                .Setup(n =>
+                    n.Negotiate(
+                        It.IsAny<Type>(),
+                        It.IsAny<HttpRequestMessage>(),
+                        It.IsAny<IEnumerable<MediaTypeFormatter>>()
+                    )
+                )
+                .Returns(new ContentNegotiationResult(expectedFormatter, null));
             TraceRecord[] expectedTraces = new TraceRecord[]
             {
-                new TraceRecord(_request, TraceCategories.FormattingCategory, TraceLevel.Info) { Kind = TraceKind.Begin },
-                new TraceRecord(_request, TraceCategories.FormattingCategory, TraceLevel.Info) { Kind = TraceKind.End }
+                new TraceRecord(_request, TraceCategories.FormattingCategory, TraceLevel.Info)
+                {
+                    Kind = TraceKind.Begin,
+                },
+                new TraceRecord(_request, TraceCategories.FormattingCategory, TraceLevel.Info)
+                {
+                    Kind = TraceKind.End,
+                },
             };
 
             // Act
-            ((IContentNegotiator)_tracer).Negotiate(typeof(int), _request, new MediaTypeFormatter[0]);
+            ((IContentNegotiator)_tracer).Negotiate(
+                typeof(int),
+                _request,
+                new MediaTypeFormatter[0]
+            );
 
             // Assert
-            Assert.Equal<TraceRecord>(expectedTraces, _traceWriter.Traces, new TraceRecordComparer());
+            Assert.Equal<TraceRecord>(
+                expectedTraces,
+                _traceWriter.Traces,
+                new TraceRecordComparer()
+            );
         }
 
         [Fact]
@@ -154,13 +223,25 @@ namespace System.Web.Http.Tracing.Tracers
             // Arrange
             MediaTypeFormatter expectedFormatter = new XmlMediaTypeFormatter();
             InvalidOperationException expectedException = new InvalidOperationException("test");
-            _mockNegotiator.Setup(
-                n =>
-                n.Negotiate(It.IsAny<Type>(), It.IsAny<HttpRequestMessage>(),
-                            It.IsAny<IEnumerable<MediaTypeFormatter>>())).Throws(expectedException);
+            _mockNegotiator
+                .Setup(n =>
+                    n.Negotiate(
+                        It.IsAny<Type>(),
+                        It.IsAny<HttpRequestMessage>(),
+                        It.IsAny<IEnumerable<MediaTypeFormatter>>()
+                    )
+                )
+                .Throws(expectedException);
 
             // Act & Assert
-            InvalidOperationException actualException = Assert.Throws<InvalidOperationException>(() => ((IContentNegotiator)_tracer).Negotiate(typeof(int), _request, new MediaTypeFormatter[0]));
+            InvalidOperationException actualException = Assert.Throws<InvalidOperationException>(
+                () =>
+                    ((IContentNegotiator)_tracer).Negotiate(
+                        typeof(int),
+                        _request,
+                        new MediaTypeFormatter[0]
+                    )
+            );
 
             // Assert
             Assert.Same(expectedException, actualException);
@@ -172,21 +253,42 @@ namespace System.Web.Http.Tracing.Tracers
             // Arrange
             MediaTypeFormatter expectedFormatter = new XmlMediaTypeFormatter();
             InvalidOperationException expectedException = new InvalidOperationException("test");
-            _mockNegotiator.Setup(
-                n =>
-                n.Negotiate(It.IsAny<Type>(), It.IsAny<HttpRequestMessage>(),
-                            It.IsAny<IEnumerable<MediaTypeFormatter>>())).Throws(expectedException);
+            _mockNegotiator
+                .Setup(n =>
+                    n.Negotiate(
+                        It.IsAny<Type>(),
+                        It.IsAny<HttpRequestMessage>(),
+                        It.IsAny<IEnumerable<MediaTypeFormatter>>()
+                    )
+                )
+                .Throws(expectedException);
             TraceRecord[] expectedTraces = new TraceRecord[]
             {
-                new TraceRecord(_request, TraceCategories.FormattingCategory, TraceLevel.Info) { Kind = TraceKind.Begin },
-                new TraceRecord(_request, TraceCategories.FormattingCategory, TraceLevel.Error) { Kind = TraceKind.End }
+                new TraceRecord(_request, TraceCategories.FormattingCategory, TraceLevel.Info)
+                {
+                    Kind = TraceKind.Begin,
+                },
+                new TraceRecord(_request, TraceCategories.FormattingCategory, TraceLevel.Error)
+                {
+                    Kind = TraceKind.End,
+                },
             };
 
             // Act & Assert
-            Assert.Throws<InvalidOperationException>(() => ((IContentNegotiator)_tracer).Negotiate(typeof(int), _request, new MediaTypeFormatter[0]));
+            Assert.Throws<InvalidOperationException>(() =>
+                ((IContentNegotiator)_tracer).Negotiate(
+                    typeof(int),
+                    _request,
+                    new MediaTypeFormatter[0]
+                )
+            );
 
             // Assert
-            Assert.Equal<TraceRecord>(expectedTraces, _traceWriter.Traces, new TraceRecordComparer());
+            Assert.Equal<TraceRecord>(
+                expectedTraces,
+                _traceWriter.Traces,
+                new TraceRecordComparer()
+            );
             Assert.Same(expectedException, _traceWriter.Traces[1].Exception);
         }
 
@@ -195,7 +297,10 @@ namespace System.Web.Http.Tracing.Tracers
         {
             // Arrange
             IContentNegotiator expectedInner = new Mock<IContentNegotiator>().Object;
-            ContentNegotiatorTracer productUnderTest = new ContentNegotiatorTracer(expectedInner, new TestTraceWriter());
+            ContentNegotiatorTracer productUnderTest = new ContentNegotiatorTracer(
+                expectedInner,
+                new TestTraceWriter()
+            );
 
             // Act
             IContentNegotiator actualInner = productUnderTest.Inner;
@@ -209,10 +314,15 @@ namespace System.Web.Http.Tracing.Tracers
         {
             // Arrange
             IContentNegotiator expectedInner = new Mock<IContentNegotiator>().Object;
-            ContentNegotiatorTracer productUnderTest = new ContentNegotiatorTracer(expectedInner, new TestTraceWriter());
+            ContentNegotiatorTracer productUnderTest = new ContentNegotiatorTracer(
+                expectedInner,
+                new TestTraceWriter()
+            );
 
             // Act
-            IContentNegotiator actualInner = Decorator.GetInner(productUnderTest as IContentNegotiator);
+            IContentNegotiator actualInner = Decorator.GetInner(
+                productUnderTest as IContentNegotiator
+            );
 
             // Assert
             Assert.Same(expectedInner, actualInner);

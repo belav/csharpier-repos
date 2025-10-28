@@ -5,10 +5,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -28,55 +28,56 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Threading;
 
-namespace System.Windows.Threading {
+namespace System.Windows.Threading
+{
+    public sealed class DispatcherHooks
+    {
+        Dispatcher owner;
 
-	public sealed class DispatcherHooks {
-		Dispatcher owner;
+        internal DispatcherHooks(Dispatcher owner)
+        {
+            this.owner = owner;
+        }
 
-		internal DispatcherHooks (Dispatcher owner)
-		{
-			this.owner = owner;
-		}
-		
-		public event EventHandler DispatcherInactive;
-		public event DispatcherHookEventHandler OperationAborted;
-		public event DispatcherHookEventHandler OperationCompleted;
-		public event DispatcherHookEventHandler OperationPosted;
-		public event DispatcherHookEventHandler OperationPriorityChanged;
+        public event EventHandler DispatcherInactive;
+        public event DispatcherHookEventHandler OperationAborted;
+        public event DispatcherHookEventHandler OperationCompleted;
+        public event DispatcherHookEventHandler OperationPosted;
+        public event DispatcherHookEventHandler OperationPriorityChanged;
 
-		internal void EmitOperationPosted (DispatcherOperation op)
-		{
-			DispatcherHookEventHandler posted = OperationPosted;
-			if (posted != null)
-				posted (owner, new DispatcherHookEventArgs (op));
-		}
+        internal void EmitOperationPosted(DispatcherOperation op)
+        {
+            DispatcherHookEventHandler posted = OperationPosted;
+            if (posted != null)
+                posted(owner, new DispatcherHookEventArgs(op));
+        }
 
-		internal void EmitOperationCompleted (DispatcherOperation op)
-		{
-			DispatcherHookEventHandler completed = OperationCompleted;
-			if (completed != null)
-				completed (owner, new DispatcherHookEventArgs (op));
-		}
+        internal void EmitOperationCompleted(DispatcherOperation op)
+        {
+            DispatcherHookEventHandler completed = OperationCompleted;
+            if (completed != null)
+                completed(owner, new DispatcherHookEventArgs(op));
+        }
 
-		internal void EmitOperationAborted (DispatcherOperation op)
-		{
-			DispatcherHookEventHandler aborted = OperationAborted;
-			if (aborted != null)
-				aborted (owner, new DispatcherHookEventArgs (op));
-		}
+        internal void EmitOperationAborted(DispatcherOperation op)
+        {
+            DispatcherHookEventHandler aborted = OperationAborted;
+            if (aborted != null)
+                aborted(owner, new DispatcherHookEventArgs(op));
+        }
 
-		internal void EmitOperationPriorityChanged (DispatcherOperation op)
-		{
-			DispatcherHookEventHandler prio = OperationPriorityChanged;
-			if (prio != null)
-				prio (owner, new DispatcherHookEventArgs (op));
-		}
+        internal void EmitOperationPriorityChanged(DispatcherOperation op)
+        {
+            DispatcherHookEventHandler prio = OperationPriorityChanged;
+            if (prio != null)
+                prio(owner, new DispatcherHookEventArgs(op));
+        }
 
-		internal void EmitInactive ()
-		{
-			EventHandler inactive = DispatcherInactive;
-			if (inactive != null)
-				inactive (owner, EventArgs.Empty);
-		}
-	}
+        internal void EmitInactive()
+        {
+            EventHandler inactive = DispatcherInactive;
+            if (inactive != null)
+                inactive(owner, EventArgs.Empty);
+        }
+    }
 }

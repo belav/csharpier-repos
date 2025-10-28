@@ -17,14 +17,8 @@ namespace System.Activities
 
         public bool PersistExceptions
         {
-            get
-            {
-                return this.persistExceptions;
-            }
-            set
-            {
-                this.persistExceptions = value;
-            }
+            get { return this.persistExceptions; }
+            set { this.persistExceptions = value; }
         }
     }
 }

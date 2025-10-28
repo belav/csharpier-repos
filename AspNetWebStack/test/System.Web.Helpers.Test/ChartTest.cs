@@ -24,47 +24,74 @@ namespace System.Web.Helpers.Test
         public void BuildChartAddsDefaultArea()
         {
             var chart = new Chart(GetContext(), GetVirtualPathProvider(), 100, 100);
-            AssertBuiltChartAction(chart, c =>
-            {
-                ChartArea chartArea = Assert.Single(c.ChartAreas);
-                Assert.Equal("Default", chartArea.Name);
-            });
+            AssertBuiltChartAction(
+                chart,
+                c =>
+                {
+                    ChartArea chartArea = Assert.Single(c.ChartAreas);
+                    Assert.Equal("Default", chartArea.Name);
+                }
+            );
         }
 
         [Fact]
         public void XAxisOverrides()
         {
-            var chart = new Chart(GetContext(), GetVirtualPathProvider(), 100, 100)
-                .SetXAxis("AxisX", 1, 100);
-            AssertBuiltChartAction(chart, c =>
-            {
-                ChartArea chartArea = Assert.Single(c.ChartAreas);
-                Assert.Equal("AxisX", chartArea.AxisX.Title);
-                Assert.Equal(1, chartArea.AxisX.Minimum);
-                Assert.Equal(100, chartArea.AxisX.Maximum);
-            });
+            var chart = new Chart(GetContext(), GetVirtualPathProvider(), 100, 100).SetXAxis(
+                "AxisX",
+                1,
+                100
+            );
+            AssertBuiltChartAction(
+                chart,
+                c =>
+                {
+                    ChartArea chartArea = Assert.Single(c.ChartAreas);
+                    Assert.Equal("AxisX", chartArea.AxisX.Title);
+                    Assert.Equal(1, chartArea.AxisX.Minimum);
+                    Assert.Equal(100, chartArea.AxisX.Maximum);
+                }
+            );
         }
 
         [Fact]
         public void YAxisOverrides()
         {
-            var chart = new Chart(GetContext(), GetVirtualPathProvider(), 100, 100)
-                .SetYAxis("AxisY", 1, 100);
-            AssertBuiltChartAction(chart, c =>
-            {
-                ChartArea chartArea = Assert.Single(c.ChartAreas);
-                Assert.Equal("AxisY", chartArea.AxisY.Title);
-                Assert.Equal(1, chartArea.AxisY.Minimum);
-                Assert.Equal(100, chartArea.AxisY.Maximum);
-            });
+            var chart = new Chart(GetContext(), GetVirtualPathProvider(), 100, 100).SetYAxis(
+                "AxisY",
+                1,
+                100
+            );
+            AssertBuiltChartAction(
+                chart,
+                c =>
+                {
+                    ChartArea chartArea = Assert.Single(c.ChartAreas);
+                    Assert.Equal("AxisY", chartArea.AxisY.Title);
+                    Assert.Equal(1, chartArea.AxisY.Minimum);
+                    Assert.Equal(100, chartArea.AxisY.Maximum);
+                }
+            );
         }
 
         [Fact]
         public void ConstructorLoadsTemplate()
         {
             var template = WriteTemplate(@"<Chart BorderWidth=""2""></Chart>");
-            var chart = new Chart(GetContext(), GetVirtualPathProvider(), 100, 100, themePath: template);
-            AssertBuiltChartAction(chart, c => { Assert.Equal(2, c.BorderWidth); });
+            var chart = new Chart(
+                GetContext(),
+                GetVirtualPathProvider(),
+                100,
+                100,
+                themePath: template
+            );
+            AssertBuiltChartAction(
+                chart,
+                c =>
+                {
+                    Assert.Equal(2, c.BorderWidth);
+                }
+            );
         }
 
         [Fact]
@@ -87,15 +114,24 @@ namespace System.Web.Helpers.Test
                 </ChartAreas>
                 </Chart>
              */
-            var chart = new Chart(GetContext(), GetVirtualPathProvider(), 100, 100, theme: ChartTheme.Vanilla);
-            AssertBuiltChartAction(chart, c =>
-            {
-                Assert.Equal(ChartColorPalette.SemiTransparent, c.Palette);
-                Assert.Equal(c.BorderColor, Color.FromArgb(0, Color.Black));
-                ChartArea chartArea = Assert.Single(c.ChartAreas);
-                Assert.False(chartArea.AxisX.MajorGrid.Enabled);
-                Assert.False(chartArea.AxisY.MinorGrid.Enabled);
-            });
+            var chart = new Chart(
+                GetContext(),
+                GetVirtualPathProvider(),
+                100,
+                100,
+                theme: ChartTheme.Vanilla
+            );
+            AssertBuiltChartAction(
+                chart,
+                c =>
+                {
+                    Assert.Equal(ChartColorPalette.SemiTransparent, c.Palette);
+                    Assert.Equal(c.BorderColor, Color.FromArgb(0, Color.Black));
+                    ChartArea chartArea = Assert.Single(c.ChartAreas);
+                    Assert.False(chartArea.AxisX.MajorGrid.Enabled);
+                    Assert.False(chartArea.AxisY.MinorGrid.Enabled);
+                }
+            );
         }
 
         [Fact]
@@ -118,19 +154,31 @@ namespace System.Web.Helpers.Test
                 </ChartAreas>
                 </Chart>
              */
-            var template = WriteTemplate(@"<Chart BorderlineDashStyle=""DashDot""><Legends><Legend BackColor=""Red"" /></Legends></Chart>");
-            var chart = new Chart(GetContext(), GetVirtualPathProvider(), 100, 100, theme: ChartTheme.Vanilla, themePath: template);
-            AssertBuiltChartAction(chart, c =>
-            {
-                Assert.Equal(ChartColorPalette.SemiTransparent, c.Palette);
-                Assert.Equal(c.BorderColor, Color.FromArgb(0, Color.Black));
-                Assert.Equal(ChartDashStyle.DashDot, c.BorderlineDashStyle);
-                Legend legend = Assert.Single(c.Legends);
-                Assert.Equal(legend.BackColor, Color.Red);
-                ChartArea chartArea = Assert.Single(c.ChartAreas);
-                Assert.False(chartArea.AxisX.MajorGrid.Enabled);
-                Assert.False(chartArea.AxisY.MinorGrid.Enabled);
-            });
+            var template = WriteTemplate(
+                @"<Chart BorderlineDashStyle=""DashDot""><Legends><Legend BackColor=""Red"" /></Legends></Chart>"
+            );
+            var chart = new Chart(
+                GetContext(),
+                GetVirtualPathProvider(),
+                100,
+                100,
+                theme: ChartTheme.Vanilla,
+                themePath: template
+            );
+            AssertBuiltChartAction(
+                chart,
+                c =>
+                {
+                    Assert.Equal(ChartColorPalette.SemiTransparent, c.Palette);
+                    Assert.Equal(c.BorderColor, Color.FromArgb(0, Color.Black));
+                    Assert.Equal(ChartDashStyle.DashDot, c.BorderlineDashStyle);
+                    Legend legend = Assert.Single(c.Legends);
+                    Assert.Equal(legend.BackColor, Color.Red);
+                    ChartArea chartArea = Assert.Single(c.ChartAreas);
+                    Assert.False(chartArea.AxisX.MajorGrid.Enabled);
+                    Assert.False(chartArea.AxisY.MinorGrid.Enabled);
+                }
+            );
         }
 
         [Fact]
@@ -138,32 +186,47 @@ namespace System.Web.Helpers.Test
         {
             // Arrange
             // Vanilla theme, as in ConstructorLoadsThemeAndTemplate()
-            string template = WriteTemplate(@"<Chart BorderlineDashStyle=""DashDot""><Legends><Legend BackColor=""Red"" /></Legends></Chart>");
+            string template = WriteTemplate(
+                @"<Chart BorderlineDashStyle=""DashDot""><Legends><Legend BackColor=""Red"" /></Legends></Chart>"
+            );
             HttpContextBase context = GetContext();
-            string templatePath = VirtualPathUtility.Combine(context.Request.AppRelativeCurrentExecutionFilePath, template);
+            string templatePath = VirtualPathUtility.Combine(
+                context.Request.AppRelativeCurrentExecutionFilePath,
+                template
+            );
 
             MockVirtualPathProvider provider1 = new MockVirtualPathProvider();
             MockVirtualPathProvider provider2 = new MockVirtualPathProvider();
             VirtualPathProvider provider = provider1;
 
             // Act; use one provider in constructor and another in ExecuteChartAction()
-            Chart chart = new Chart(context, () => provider, 100, 100, theme: ChartTheme.Vanilla, themePath: template);
+            Chart chart = new Chart(
+                context,
+                () => provider,
+                100,
+                100,
+                theme: ChartTheme.Vanilla,
+                themePath: template
+            );
 
             // The moral equivalent of HostingEnvironment.RegisterVirtualPathProvider(provider2)
             provider = provider2;
 
             // Assert
-            AssertBuiltChartAction(chart, c =>
-            {
-                Assert.Equal(ChartColorPalette.SemiTransparent, c.Palette);
-                Assert.Equal(c.BorderColor, Color.FromArgb(0, Color.Black));
-                Assert.Equal(ChartDashStyle.DashDot, c.BorderlineDashStyle);
-                Legend legend = Assert.Single(c.Legends);
-                Assert.Equal(legend.BackColor, Color.Red);
-                ChartArea chartArea = Assert.Single(c.ChartAreas);
-                Assert.False(chartArea.AxisX.MajorGrid.Enabled);
-                Assert.False(chartArea.AxisY.MinorGrid.Enabled);
-            });
+            AssertBuiltChartAction(
+                chart,
+                c =>
+                {
+                    Assert.Equal(ChartColorPalette.SemiTransparent, c.Palette);
+                    Assert.Equal(c.BorderColor, Color.FromArgb(0, Color.Black));
+                    Assert.Equal(ChartDashStyle.DashDot, c.BorderlineDashStyle);
+                    Legend legend = Assert.Single(c.Legends);
+                    Assert.Equal(legend.BackColor, Color.Red);
+                    ChartArea chartArea = Assert.Single(c.ChartAreas);
+                    Assert.False(chartArea.AxisX.MajorGrid.Enabled);
+                    Assert.False(chartArea.AxisY.MinorGrid.Enabled);
+                }
+            );
 
             Assert.Equal(1, provider1.FileExistsCalls);
             Assert.Equal(0, provider1.GetFileCalls);
@@ -177,32 +240,66 @@ namespace System.Web.Helpers.Test
             var chart = new Chart(GetContext(), GetVirtualPathProvider(), 101, 102);
             Assert.Equal(101, chart.Width);
             Assert.Equal(102, chart.Height);
-            AssertBuiltChartAction(chart, c =>
-            {
-                Assert.Equal(101, c.Width);
-                Assert.Equal(102, c.Height);
-            });
+            AssertBuiltChartAction(
+                chart,
+                c =>
+                {
+                    Assert.Equal(101, c.Width);
+                    Assert.Equal(102, c.Height);
+                }
+            );
         }
 
         [Fact]
         public void ConstructorThrowsWhenHeightIsLessThanZero()
         {
-            Assert.ThrowsArgumentOutOfRange(() => { new Chart(GetContext(), GetVirtualPathProvider(), 100, -1); }, "height", "Value must be greater than or equal to 0.");
+            Assert.ThrowsArgumentOutOfRange(
+                () =>
+                {
+                    new Chart(GetContext(), GetVirtualPathProvider(), 100, -1);
+                },
+                "height",
+                "Value must be greater than or equal to 0."
+            );
         }
 
         [Fact]
         public void ConstructorThrowsWhenTemplateNotFound()
         {
             var templateFile = @"FileNotFound.xml";
-            Assert.ThrowsArgument(() => { new Chart(GetContext(), GetVirtualPathProvider(), 100, 100, themePath: templateFile); },
-                                                    "themePath",
-                                                    String.Format("The theme file \"{0}\" could not be found.", VirtualPathUtility.Combine(GetContext().Request.AppRelativeCurrentExecutionFilePath, templateFile)));
+            Assert.ThrowsArgument(
+                () =>
+                {
+                    new Chart(
+                        GetContext(),
+                        GetVirtualPathProvider(),
+                        100,
+                        100,
+                        themePath: templateFile
+                    );
+                },
+                "themePath",
+                String.Format(
+                    "The theme file \"{0}\" could not be found.",
+                    VirtualPathUtility.Combine(
+                        GetContext().Request.AppRelativeCurrentExecutionFilePath,
+                        templateFile
+                    )
+                )
+            );
         }
 
         [Fact]
         public void ConstructorThrowsWhenWidthIsLessThanZero()
         {
-            Assert.ThrowsArgumentOutOfRange(() => { new Chart(GetContext(), GetVirtualPathProvider(), -1, 100); }, "width", "Value must be greater than or equal to 0.");
+            Assert.ThrowsArgumentOutOfRange(
+                () =>
+                {
+                    new Chart(GetContext(), GetVirtualPathProvider(), -1, 100);
+                },
+                "width",
+                "Value must be greater than or equal to 0."
+            );
         }
 
         [Fact]
@@ -212,59 +309,108 @@ namespace System.Web.Helpers.Test
             {
                 new { GroupBy = "1", YValue = 1 },
                 new { GroupBy = "1", YValue = 2 },
-                new { GroupBy = "2", YValue = 1 }
+                new { GroupBy = "2", YValue = 1 },
             };
-            var chart = new Chart(GetContext(), GetVirtualPathProvider(), 100, 100)
-                .DataBindCrossTable(data, "GroupBy", xField: null, yFields: "YValue");
+            var chart = new Chart(
+                GetContext(),
+                GetVirtualPathProvider(),
+                100,
+                100
+            ).DataBindCrossTable(data, "GroupBy", xField: null, yFields: "YValue");
             // todo - anything else to verify here?
-            AssertBuiltChartAction(chart, c =>
-            {
-                Assert.Equal(2, c.Series.Count);
-                Assert.Equal(2, c.Series[0].Points.Count);
-                Assert.Single(c.Series[1].Points);
-            });
+            AssertBuiltChartAction(
+                chart,
+                c =>
+                {
+                    Assert.Equal(2, c.Series.Count);
+                    Assert.Equal(2, c.Series[0].Points.Count);
+                    Assert.Single(c.Series[1].Points);
+                }
+            );
         }
 
         [Fact]
         public void DataBindCrossTableThrowsWhenDataSourceIsNull()
         {
             var chart = new Chart(GetContext(), GetVirtualPathProvider(), 100, 100);
-            Assert.ThrowsArgumentNull(() => { chart.DataBindCrossTable(null, "GroupBy", xField: null, yFields: "yFields"); }, "dataSource");
+            Assert.ThrowsArgumentNull(
+                () =>
+                {
+                    chart.DataBindCrossTable(null, "GroupBy", xField: null, yFields: "yFields");
+                },
+                "dataSource"
+            );
         }
 
         [Fact]
         public void DataBindCrossTableThrowsWhenDataSourceIsString()
         {
             var chart = new Chart(GetContext(), GetVirtualPathProvider(), 100, 100);
-            Assert.ThrowsArgument(() => { chart.DataBindCrossTable("DataSource", "GroupBy", xField: null, yFields: "yFields"); }, "dataSource", "A series cannot be data-bound to a string object.");
+            Assert.ThrowsArgument(
+                () =>
+                {
+                    chart.DataBindCrossTable(
+                        "DataSource",
+                        "GroupBy",
+                        xField: null,
+                        yFields: "yFields"
+                    );
+                },
+                "dataSource",
+                "A series cannot be data-bound to a string object."
+            );
         }
 
         [Fact]
         public void DataBindCrossTableThrowsWhenGroupByIsNull()
         {
             var chart = new Chart(GetContext(), GetVirtualPathProvider(), 100, 100);
-            Assert.ThrowsArgumentNullOrEmptyString(() => { chart.DataBindCrossTable(new object[0], null, xField: null, yFields: "yFields"); }, "groupByField");
+            Assert.ThrowsArgumentNullOrEmptyString(
+                () =>
+                {
+                    chart.DataBindCrossTable(new object[0], null, xField: null, yFields: "yFields");
+                },
+                "groupByField"
+            );
         }
 
         [Fact]
         public void DataBindCrossTableThrowsWhenGroupByIsEmpty()
         {
             var chart = new Chart(GetContext(), GetVirtualPathProvider(), 100, 100);
-            Assert.ThrowsArgumentNullOrEmptyString(() => { chart.DataBindCrossTable(new object[0], "", xField: null, yFields: "yFields"); }, "groupByField");
+            Assert.ThrowsArgumentNullOrEmptyString(
+                () =>
+                {
+                    chart.DataBindCrossTable(new object[0], "", xField: null, yFields: "yFields");
+                },
+                "groupByField"
+            );
         }
 
         [Fact]
         public void DataBindCrossTableThrowsWhenYFieldsIsNull()
         {
             var chart = new Chart(GetContext(), GetVirtualPathProvider(), 100, 100);
-            Assert.ThrowsArgumentNullOrEmptyString(() => { chart.DataBindCrossTable(new object[0], "GroupBy", xField: null, yFields: null); }, "yFields");
+            Assert.ThrowsArgumentNullOrEmptyString(
+                () =>
+                {
+                    chart.DataBindCrossTable(new object[0], "GroupBy", xField: null, yFields: null);
+                },
+                "yFields"
+            );
         }
 
         [Fact]
         public void DataBindCrossTableThrowsWhenYFieldsIsEmpty()
         {
             var chart = new Chart(GetContext(), GetVirtualPathProvider(), 100, 100);
-            Assert.ThrowsArgumentNullOrEmptyString(() => { chart.DataBindCrossTable(new object[0], "GroupBy", xField: null, yFields: ""); }, "yFields");
+            Assert.ThrowsArgumentNullOrEmptyString(
+                () =>
+                {
+                    chart.DataBindCrossTable(new object[0], "GroupBy", xField: null, yFields: "");
+                },
+                "yFields"
+            );
         }
 
         [Fact]
@@ -274,49 +420,67 @@ namespace System.Web.Helpers.Test
             {
                 new { XValue = "1", YValue = 1 },
                 new { XValue = "2", YValue = 2 },
-                new { XValue = "3", YValue = 3 }
+                new { XValue = "3", YValue = 3 },
             };
-            var chart = new Chart(GetContext(), GetVirtualPathProvider(), 100, 100)
-                .DataBindTable(data, xField: "XValue");
+            var chart = new Chart(GetContext(), GetVirtualPathProvider(), 100, 100).DataBindTable(
+                data,
+                xField: "XValue"
+            );
             // todo - anything else to verify here?
-            AssertBuiltChartAction(chart, c =>
-            {
-                var series = Assert.Single(c.Series);
-                Assert.Equal(3, series.Points.Count);
-            });
+            AssertBuiltChartAction(
+                chart,
+                c =>
+                {
+                    var series = Assert.Single(c.Series);
+                    Assert.Equal(3, series.Points.Count);
+                }
+            );
         }
 
         [Fact]
         public void DataBindTableWhenXFieldIsNull()
         {
-            var data = new[]
-            {
-                new { YValue = 1 },
-                new { YValue = 2 },
-                new { YValue = 3 }
-            };
-            var chart = new Chart(GetContext(), GetVirtualPathProvider(), 100, 100)
-                .DataBindTable(data, xField: null);
+            var data = new[] { new { YValue = 1 }, new { YValue = 2 }, new { YValue = 3 } };
+            var chart = new Chart(GetContext(), GetVirtualPathProvider(), 100, 100).DataBindTable(
+                data,
+                xField: null
+            );
             // todo - anything else to verify here?
-            AssertBuiltChartAction(chart, c =>
-            {
-                var series = Assert.Single(c.Series);
-                Assert.Equal(3, series.Points.Count);
-            });
+            AssertBuiltChartAction(
+                chart,
+                c =>
+                {
+                    var series = Assert.Single(c.Series);
+                    Assert.Equal(3, series.Points.Count);
+                }
+            );
         }
 
         [Fact]
         public void DataBindTableThrowsWhenDataSourceIsNull()
         {
             var chart = new Chart(GetContext(), GetVirtualPathProvider(), 100, 100);
-            Assert.ThrowsArgumentNull(() => { chart.DataBindTable(null); }, "dataSource");
+            Assert.ThrowsArgumentNull(
+                () =>
+                {
+                    chart.DataBindTable(null);
+                },
+                "dataSource"
+            );
         }
 
         [Fact]
         public void DataBindTableThrowsWhenDataSourceIsString()
         {
             var chart = new Chart(GetContext(), GetVirtualPathProvider(), 100, 100);
-            Assert.ThrowsArgument(() => { chart.DataBindTable(""); }, "dataSource", "A series cannot be data-bound to a string object.");
+            Assert.ThrowsArgument(
+                () =>
+                {
+                    chart.DataBindTable("");
+                },
+                "dataSource",
+                "A series cannot be data-bound to a string object."
+            );
         }
 
         [Fact]
@@ -330,48 +494,74 @@ namespace System.Web.Helpers.Test
         public void GetBytesThrowsWhenFormatIsEmpty()
         {
             var chart = new Chart(GetContext(), GetVirtualPathProvider(), 100, 100);
-            Assert.ThrowsArgumentNullOrEmptyString(() => { chart.GetBytes(format: String.Empty); }, "format");
+            Assert.ThrowsArgumentNullOrEmptyString(
+                () =>
+                {
+                    chart.GetBytes(format: String.Empty);
+                },
+                "format"
+            );
         }
 
         [Fact]
         public void GetBytesThrowsWhenFormatIsInvalid()
         {
             var chart = new Chart(GetContext(), GetVirtualPathProvider(), 100, 100);
-            Assert.ThrowsArgument(() => { chart.GetBytes(format: "foo"); }, "format", "\"foo\" is invalid image format. Valid values are image format names like: \"JPEG\", \"BMP\", \"GIF\", \"PNG\", etc.");
+            Assert.ThrowsArgument(
+                () =>
+                {
+                    chart.GetBytes(format: "foo");
+                },
+                "format",
+                "\"foo\" is invalid image format. Valid values are image format names like: \"JPEG\", \"BMP\", \"GIF\", \"PNG\", etc."
+            );
         }
 
         [Fact]
         public void GetBytesThrowsWhenFormatIsNull()
         {
             var chart = new Chart(GetContext(), GetVirtualPathProvider(), 100, 100);
-            Assert.ThrowsArgumentNullOrEmptyString(() => { chart.GetBytes(format: null); }, "format");
+            Assert.ThrowsArgumentNullOrEmptyString(
+                () =>
+                {
+                    chart.GetBytes(format: null);
+                },
+                "format"
+            );
         }
 
         [Fact]
         public void LegendDefaults()
         {
             var chart = new Chart(GetContext(), GetVirtualPathProvider(), 100, 100).AddLegend();
-            AssertBuiltChartAction(chart, c =>
-            {
-                Legend legend = Assert.Single(c.Legends);
-                // NOTE: Chart.Legends.Add will create default name
-                Assert.Equal("Legend1", legend.Name);
-                Assert.Equal(1, legend.BorderWidth);
-            });
+            AssertBuiltChartAction(
+                chart,
+                c =>
+                {
+                    Legend legend = Assert.Single(c.Legends);
+                    // NOTE: Chart.Legends.Add will create default name
+                    Assert.Equal("Legend1", legend.Name);
+                    Assert.Equal(1, legend.BorderWidth);
+                }
+            );
         }
 
         [Fact]
         public void LegendOverrides()
         {
-            var chart = new Chart(GetContext(), GetVirtualPathProvider(), 100, 100).AddLegend("Legend1")
+            var chart = new Chart(GetContext(), GetVirtualPathProvider(), 100, 100)
+                .AddLegend("Legend1")
                 .AddLegend("Legend2", "Legend2Name");
-            AssertBuiltChartAction(chart, c =>
-            {
-                Assert.Equal(2, c.Legends.Count);
-                Assert.Equal("Legend1", c.Legends[0].Name);
-                Assert.Equal("Legend2", c.Legends[1].Title);
-                Assert.Equal("Legend2Name", c.Legends[1].Name);
-            });
+            AssertBuiltChartAction(
+                chart,
+                c =>
+                {
+                    Assert.Equal(2, c.Legends.Count);
+                    Assert.Equal("Legend1", c.Legends[0].Name);
+                    Assert.Equal("Legend2", c.Legends[1].Title);
+                    Assert.Equal("Legend2Name", c.Legends[1].Name);
+                }
+            );
         }
 
         [Fact]
@@ -396,7 +586,13 @@ namespace System.Web.Helpers.Test
         public void SaveThrowsWhenFormatIsEmpty()
         {
             var chart = new Chart(GetContext(), GetVirtualPathProvider(), 100, 100);
-            Assert.ThrowsArgumentNullOrEmptyString(() => { chart.Save(GetContext(), "chartPath", format: String.Empty); }, "format");
+            Assert.ThrowsArgumentNullOrEmptyString(
+                () =>
+                {
+                    chart.Save(GetContext(), "chartPath", format: String.Empty);
+                },
+                "format"
+            );
         }
 
         [Fact]
@@ -419,28 +615,53 @@ namespace System.Web.Helpers.Test
         public void SaveThrowsWhenFormatIsInvalid()
         {
             var chart = new Chart(GetContext(), GetVirtualPathProvider(), 100, 100);
-            Assert.ThrowsArgument(() => { chart.Save(GetContext(), "chartPath", format: "foo"); }, "format", "\"foo\" is invalid image format. Valid values are image format names like: \"JPEG\", \"BMP\", \"GIF\", \"PNG\", etc.");
+            Assert.ThrowsArgument(
+                () =>
+                {
+                    chart.Save(GetContext(), "chartPath", format: "foo");
+                },
+                "format",
+                "\"foo\" is invalid image format. Valid values are image format names like: \"JPEG\", \"BMP\", \"GIF\", \"PNG\", etc."
+            );
         }
 
         [Fact]
         public void SaveThrowsWhenFormatIsNull()
         {
             var chart = new Chart(GetContext(), GetVirtualPathProvider(), 100, 100);
-            Assert.ThrowsArgumentNullOrEmptyString(() => { chart.Save(GetContext(), "chartPath", format: null); }, "format");
+            Assert.ThrowsArgumentNullOrEmptyString(
+                () =>
+                {
+                    chart.Save(GetContext(), "chartPath", format: null);
+                },
+                "format"
+            );
         }
 
         [Fact]
         public void SaveThrowsWhenPathIsEmpty()
         {
             var chart = new Chart(GetContext(), GetVirtualPathProvider(), 100, 100);
-            Assert.ThrowsArgumentNullOrEmptyString(() => { chart.Save(GetContext(), path: String.Empty, format: "jpeg"); }, "path");
+            Assert.ThrowsArgumentNullOrEmptyString(
+                () =>
+                {
+                    chart.Save(GetContext(), path: String.Empty, format: "jpeg");
+                },
+                "path"
+            );
         }
 
         [Fact]
         public void SaveThrowsWhenPathIsNull()
         {
             var chart = new Chart(GetContext(), GetVirtualPathProvider(), 100, 100);
-            Assert.ThrowsArgumentNullOrEmptyString(() => { chart.Save(GetContext(), path: null, format: "jpeg"); }, "path");
+            Assert.ThrowsArgumentNullOrEmptyString(
+                () =>
+                {
+                    chart.Save(GetContext(), path: null, format: "jpeg");
+                },
+                "path"
+            );
         }
 
         [Fact]
@@ -456,21 +677,39 @@ namespace System.Web.Helpers.Test
         public void SaveXmlThrowsWhenPathIsEmpty()
         {
             var chart = new Chart(GetContext(), GetVirtualPathProvider(), 100, 100);
-            Assert.ThrowsArgumentNullOrEmptyString(() => { chart.SaveXml(GetContext(), String.Empty); }, "path");
+            Assert.ThrowsArgumentNullOrEmptyString(
+                () =>
+                {
+                    chart.SaveXml(GetContext(), String.Empty);
+                },
+                "path"
+            );
         }
 
         [Fact]
         public void SaveXmlThrowsWhenPathIsNull()
         {
             var chart = new Chart(GetContext(), GetVirtualPathProvider(), 100, 100);
-            Assert.ThrowsArgumentNullOrEmptyString(() => { chart.SaveXml(GetContext(), null); }, "path");
+            Assert.ThrowsArgumentNullOrEmptyString(
+                () =>
+                {
+                    chart.SaveXml(GetContext(), null);
+                },
+                "path"
+            );
         }
 
         [Fact]
         public void SaveXmlWritesToFile()
         {
             var template = WriteTemplate(@"<Chart BorderWidth=""2""></Chart>");
-            var chart = new Chart(GetContext(), GetVirtualPathProvider(), 100, 100, themePath: template);
+            var chart = new Chart(
+                GetContext(),
+                GetVirtualPathProvider(),
+                100,
+                100,
+                themePath: template
+            );
             chart.SaveXml(GetContext(), "SaveXmlWritesToFile.xml");
             Assert.True(File.Exists("SaveXmlWritesToFile.xml"));
             string result = File.ReadAllText("SaveXmlWritesToFile.xml");
@@ -480,8 +719,16 @@ namespace System.Web.Helpers.Test
         [Fact]
         public void TemplateWithCommentsDoesNotThrow()
         {
-            var template = WriteTemplate(@"<Chart BorderWidth=""2""><!-- This is a XML comment.  --> </Chart>");
-            var chart = new Chart(GetContext(), GetVirtualPathProvider(), 100, 100, themePath: template);
+            var template = WriteTemplate(
+                @"<Chart BorderWidth=""2""><!-- This is a XML comment.  --> </Chart>"
+            );
+            var chart = new Chart(
+                GetContext(),
+                GetVirtualPathProvider(),
+                100,
+                100,
+                themePath: template
+            );
             Assert.NotNull(chart.ToWebImage());
         }
 
@@ -489,9 +736,17 @@ namespace System.Web.Helpers.Test
         public void TemplateWithIncorrectPropertiesThrows()
         {
             var template = WriteTemplate(@"<Chart borderWidth=""2""><fjkjkgjklfg /></Chart>");
-            var chart = new Chart(GetContext(), GetVirtualPathProvider(), 100, 100, themePath: template);
-            Assert.Throws<InvalidOperationException>(() => chart.ToWebImage(),
-                                                              "Cannot deserialize property. Unknown property name 'borderWidth' in object \" System.Web.UI.DataVisualization.Charting.Chart");
+            var chart = new Chart(
+                GetContext(),
+                GetVirtualPathProvider(),
+                100,
+                100,
+                themePath: template
+            );
+            Assert.Throws<InvalidOperationException>(
+                () => chart.ToWebImage(),
+                "Cannot deserialize property. Unknown property name 'borderWidth' in object \" System.Web.UI.DataVisualization.Charting.Chart"
+            );
         }
 
         [Fact]
@@ -520,62 +775,88 @@ namespace System.Web.Helpers.Test
         public void WriteThrowsWithInvalidFormat()
         {
             var chart = new Chart(GetContext(), GetVirtualPathProvider(), 100, 100);
-            Assert.ThrowsArgument(() => chart.Write("foo"),
-                                                    "format", "\"foo\" is invalid image format. Valid values are image format names like: \"JPEG\", \"BMP\", \"GIF\", \"PNG\", etc.");
+            Assert.ThrowsArgument(
+                () => chart.Write("foo"),
+                "format",
+                "\"foo\" is invalid image format. Valid values are image format names like: \"JPEG\", \"BMP\", \"GIF\", \"PNG\", etc."
+            );
         }
 
         [Fact]
         public void SeriesOverrides()
         {
-            var chart = new Chart(GetContext(), GetVirtualPathProvider(), 100, 100)
-                .AddSeries(chartType: "Bar");
-            AssertBuiltChartAction(chart, c =>
-            {
-                var series = Assert.Single(c.Series);
-                Assert.Equal(SeriesChartType.Bar, series.ChartType);
-            });
+            var chart = new Chart(GetContext(), GetVirtualPathProvider(), 100, 100).AddSeries(
+                chartType: "Bar"
+            );
+            AssertBuiltChartAction(
+                chart,
+                c =>
+                {
+                    var series = Assert.Single(c.Series);
+                    Assert.Equal(SeriesChartType.Bar, series.ChartType);
+                }
+            );
         }
 
         [Fact]
         public void SeriesThrowsWhenChartTypeIsEmpty()
         {
             var chart = new Chart(GetContext(), GetVirtualPathProvider(), 100, 100);
-            Assert.ThrowsArgumentNullOrEmptyString(() => { chart.AddSeries(chartType: ""); }, "chartType");
+            Assert.ThrowsArgumentNullOrEmptyString(
+                () =>
+                {
+                    chart.AddSeries(chartType: "");
+                },
+                "chartType"
+            );
         }
 
         [Fact]
         public void SeriesThrowsWhenChartTypeIsNull()
         {
             var chart = new Chart(GetContext(), GetVirtualPathProvider(), 100, 100);
-            Assert.ThrowsArgumentNullOrEmptyString(() => { chart.AddSeries(chartType: null); }, "chartType");
+            Assert.ThrowsArgumentNullOrEmptyString(
+                () =>
+                {
+                    chart.AddSeries(chartType: null);
+                },
+                "chartType"
+            );
         }
 
         [Fact]
         public void TitleDefaults()
         {
             var chart = new Chart(GetContext(), GetVirtualPathProvider(), 100, 100).AddTitle();
-            AssertBuiltChartAction(chart, c =>
-            {
-                var title = Assert.Single(c.Titles);
-                // NOTE: Chart.Titles.Add will create default name
-                Assert.Equal("Title1", title.Name);
-                Assert.Equal(String.Empty, title.Text);
-                Assert.Equal(1, title.BorderWidth);
-            });
+            AssertBuiltChartAction(
+                chart,
+                c =>
+                {
+                    var title = Assert.Single(c.Titles);
+                    // NOTE: Chart.Titles.Add will create default name
+                    Assert.Equal("Title1", title.Name);
+                    Assert.Equal(String.Empty, title.Text);
+                    Assert.Equal(1, title.BorderWidth);
+                }
+            );
         }
 
         [Fact]
         public void TitleOverrides()
         {
-            var chart = new Chart(GetContext(), GetVirtualPathProvider(), 100, 100).AddTitle(name: "Title1")
+            var chart = new Chart(GetContext(), GetVirtualPathProvider(), 100, 100)
+                .AddTitle(name: "Title1")
                 .AddTitle("Title2Text", name: "Title2");
-            AssertBuiltChartAction(chart, c =>
-            {
-                Assert.Equal(2, c.Titles.Count);
-                Assert.Equal("Title1", c.Titles[0].Name);
-                Assert.Equal("Title2", c.Titles[1].Name);
-                Assert.Equal("Title2Text", c.Titles[1].Text);
-            });
+            AssertBuiltChartAction(
+                chart,
+                c =>
+                {
+                    Assert.Equal(2, c.Titles.Count);
+                    Assert.Equal("Title1", c.Titles[0].Name);
+                    Assert.Equal("Title2", c.Titles[1].Name);
+                    Assert.Equal("Title2Text", c.Titles[1].Text);
+                }
+            );
         }
 
         [Fact]
@@ -615,7 +896,10 @@ namespace System.Web.Helpers.Test
             Assert.True((_writeData != null) && (_writeData.Length > 0));
         }
 
-        private static void AssertBuiltChartAction(Chart chart, Action<UI.DataVisualization.Charting.Chart> action)
+        private static void AssertBuiltChartAction(
+            Chart chart,
+            Action<UI.DataVisualization.Charting.Chart> action
+        )
         {
             bool actionCalled = false;
             chart.ExecuteChartAction(c =>
@@ -637,7 +921,9 @@ namespace System.Web.Helpers.Test
             Mock<HttpResponseBase> response = new Mock<HttpResponseBase>();
             response.SetupProperty(r => r.ContentType);
             response.SetupProperty(r => r.Charset);
-            response.Setup(r => r.BinaryWrite(It.IsAny<byte[]>())).Callback((byte[] data) => _writeData = data);
+            response
+                .Setup(r => r.BinaryWrite(It.IsAny<byte[]>()))
+                .Callback((byte[] data) => _writeData = data);
 
             Mock<HttpServerUtilityBase> server = new Mock<HttpServerUtilityBase>();
             server.Setup(s => s.MapPath(It.IsAny<string>())).Returns((string s) => s);
@@ -673,9 +959,7 @@ namespace System.Web.Helpers.Test
             class MockVirtualFile : VirtualFile
             {
                 public MockVirtualFile(string virtualPath)
-                    : base(virtualPath)
-                {
-                }
+                    : base(virtualPath) { }
 
                 public override Stream Open()
                 {

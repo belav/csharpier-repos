@@ -11,7 +11,6 @@ namespace Test
     // See the comment in Setting<T>.HasValue for details.
     public class Program
     {
-
         [Fact]
         public static int TestEntryPoint()
         {
@@ -41,9 +40,7 @@ namespace Test
 
     public class Setting<T>
     {
-        Setting()
-        {
-        }
+        Setting() { }
 
         public Setting(T value)
         {

@@ -11,12 +11,17 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Library.ObjectB
     internal abstract class SymbolListItem<TSymbol> : SymbolListItem
         where TSymbol : ISymbol
     {
-        protected SymbolListItem(ProjectId projectId, TSymbol symbol, string displayText, string fullNameText, string searchText, bool isHidden)
-           : base(projectId, symbol, displayText, fullNameText, searchText, isHidden)
-        {
-        }
+        protected SymbolListItem(
+            ProjectId projectId,
+            TSymbol symbol,
+            string displayText,
+            string fullNameText,
+            string searchText,
+            bool isHidden
+        )
+            : base(projectId, symbol, displayText, fullNameText, searchText, isHidden) { }
 
-        public TSymbol ResolveTypedSymbol(Compilation compilation)
-            => (TSymbol)ResolveSymbol(compilation);
+        public TSymbol ResolveTypedSymbol(Compilation compilation) =>
+            (TSymbol)ResolveSymbol(compilation);
     }
 }

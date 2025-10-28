@@ -14,10 +14,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -29,65 +29,72 @@
 
 namespace System.Data.OracleClient
 {
-	using System.Data;
-	using System.Data.Common;
-	using System.Security;
-	using System.Security.Permissions;
+    using System.Data;
+    using System.Data.Common;
+    using System.Security;
+    using System.Security.Permissions;
 
-	public sealed class OracleClientFactory : DbProviderFactory
-	{
-		#region Fields
-		public static readonly OracleClientFactory Instance = new OracleClientFactory();
-		#endregion //Fields
+    public sealed class OracleClientFactory : DbProviderFactory
+    {
+        #region Fields
+        public static readonly OracleClientFactory Instance = new OracleClientFactory();
+        #endregion //Fields
 
-		#region Constructors
+        #region Constructors
 
-		private OracleClientFactory () {
+        private OracleClientFactory() { }
 
-		}
+        #endregion //Constructors
 
-		#endregion //Constructors
+        [MonoTODO]
+        public override bool CanCreateDataSourceEnumerator
+        {
+            get { throw new NotImplementedException(); }
+        }
 
-		[MonoTODO]
-		public override bool CanCreateDataSourceEnumerator {
-			get { throw new NotImplementedException (); }
-		}
+        #region public overrides
+        public override DbCommand CreateCommand()
+        {
+            return new OracleCommand();
+        }
 
-		#region public overrides
-		public override DbCommand CreateCommand () {
-			return new OracleCommand ();
-		}
+        public override DbCommandBuilder CreateCommandBuilder()
+        {
+            return new OracleCommandBuilder();
+        }
 
-		public override DbCommandBuilder CreateCommandBuilder () {
-			return new OracleCommandBuilder ();
-		}
+        public override DbConnection CreateConnection()
+        {
+            return new OracleConnection();
+        }
 
-		public override DbConnection CreateConnection () {
-			return new OracleConnection ();
-		}
+        public override DbConnectionStringBuilder CreateConnectionStringBuilder()
+        {
+            return new OracleConnectionStringBuilder();
+        }
 
-		public override DbConnectionStringBuilder CreateConnectionStringBuilder () {
-			return new OracleConnectionStringBuilder ();
-		}
+        public override CodeAccessPermission CreatePermission(PermissionState state)
+        {
+            return new OraclePermission(state);
+        }
 
-		public override CodeAccessPermission CreatePermission (PermissionState state) {
-			return new OraclePermission (state);
-		}
+        public override DbDataAdapter CreateDataAdapter()
+        {
+            return new OracleDataAdapter();
+        }
 
-		public override DbDataAdapter CreateDataAdapter () {
-			return new OracleDataAdapter ();
-		}
+        public override DbDataSourceEnumerator CreateDataSourceEnumerator()
+        {
+            // Note: there is no OracleDataSourceEnumerator.
+            // .net 2.0 returns a null here instead of an exception
+            return null;
+        }
 
-		public override DbDataSourceEnumerator CreateDataSourceEnumerator () {
-			// Note: there is no OracleDataSourceEnumerator.  
-			// .net 2.0 returns a null here instead of an exception
-			return null;
-		}
+        public override DbParameter CreateParameter()
+        {
+            return new OracleParameter();
+        }
 
-		public override DbParameter CreateParameter () {
-			return new OracleParameter ();
-		}
-
-		#endregion // public overrides
-	}
+        #endregion // public overrides
+    }
 }

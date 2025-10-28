@@ -18,11 +18,23 @@ public abstract partial class LoadTestBase<TFixture>
     [InlineData(EntityState.Modified, QueryTrackingBehavior.NoTracking, false)]
     [InlineData(EntityState.Deleted, QueryTrackingBehavior.NoTracking, false)]
     [InlineData(EntityState.Detached, QueryTrackingBehavior.NoTracking, false)]
-    [InlineData(EntityState.Unchanged, QueryTrackingBehavior.NoTrackingWithIdentityResolution, false)]
+    [InlineData(
+        EntityState.Unchanged,
+        QueryTrackingBehavior.NoTrackingWithIdentityResolution,
+        false
+    )]
     [InlineData(EntityState.Added, QueryTrackingBehavior.NoTrackingWithIdentityResolution, false)]
-    [InlineData(EntityState.Modified, QueryTrackingBehavior.NoTrackingWithIdentityResolution, false)]
+    [InlineData(
+        EntityState.Modified,
+        QueryTrackingBehavior.NoTrackingWithIdentityResolution,
+        false
+    )]
     [InlineData(EntityState.Deleted, QueryTrackingBehavior.NoTrackingWithIdentityResolution, false)]
-    [InlineData(EntityState.Detached, QueryTrackingBehavior.NoTrackingWithIdentityResolution, false)]
+    [InlineData(
+        EntityState.Detached,
+        QueryTrackingBehavior.NoTrackingWithIdentityResolution,
+        false
+    )]
     [InlineData(EntityState.Unchanged, QueryTrackingBehavior.TrackAll, true)]
     [InlineData(EntityState.Added, QueryTrackingBehavior.TrackAll, true)]
     [InlineData(EntityState.Modified, QueryTrackingBehavior.TrackAll, true)]
@@ -33,12 +45,20 @@ public abstract partial class LoadTestBase<TFixture>
     [InlineData(EntityState.Modified, QueryTrackingBehavior.NoTracking, true)]
     [InlineData(EntityState.Deleted, QueryTrackingBehavior.NoTracking, true)]
     [InlineData(EntityState.Detached, QueryTrackingBehavior.NoTracking, true)]
-    [InlineData(EntityState.Unchanged, QueryTrackingBehavior.NoTrackingWithIdentityResolution, true)]
+    [InlineData(
+        EntityState.Unchanged,
+        QueryTrackingBehavior.NoTrackingWithIdentityResolution,
+        true
+    )]
     [InlineData(EntityState.Added, QueryTrackingBehavior.NoTrackingWithIdentityResolution, true)]
     [InlineData(EntityState.Modified, QueryTrackingBehavior.NoTrackingWithIdentityResolution, true)]
     [InlineData(EntityState.Deleted, QueryTrackingBehavior.NoTrackingWithIdentityResolution, true)]
     [InlineData(EntityState.Detached, QueryTrackingBehavior.NoTrackingWithIdentityResolution, true)]
-    public virtual async Task Lazy_load_collection(EntityState state, QueryTrackingBehavior queryTrackingBehavior, bool async)
+    public virtual async Task Lazy_load_collection(
+        EntityState state,
+        QueryTrackingBehavior queryTrackingBehavior,
+        bool async
+    )
     {
         using var context = CreateContext(lazyLoadingEnabled: true);
         context.ChangeTracker.QueryTrackingBehavior = queryTrackingBehavior;
@@ -56,7 +76,13 @@ public abstract partial class LoadTestBase<TFixture>
 
         changeDetector.DetectChangesCalled = false;
 
-        if (!LazyLoadingEnabled || (state == EntityState.Detached && queryTrackingBehavior == QueryTrackingBehavior.TrackAll))
+        if (
+            !LazyLoadingEnabled
+            || (
+                state == EntityState.Detached
+                && queryTrackingBehavior == QueryTrackingBehavior.TrackAll
+            )
+        )
         {
             Assert.Null(await parent.LazyLoadChildren(async)); // Explicitly detached
         }
@@ -75,7 +101,10 @@ public abstract partial class LoadTestBase<TFixture>
 
             Assert.Equal(2, parent.Children.Count());
 
-            Assert.Equal(state == EntityState.Detached ? 0 : 3, context.ChangeTracker.Entries().Count());
+            Assert.Equal(
+                state == EntityState.Detached ? 0 : 3,
+                context.ChangeTracker.Entries().Count()
+            );
         }
     }
 
@@ -90,11 +119,23 @@ public abstract partial class LoadTestBase<TFixture>
     [InlineData(EntityState.Modified, QueryTrackingBehavior.NoTracking, false)]
     [InlineData(EntityState.Deleted, QueryTrackingBehavior.NoTracking, false)]
     [InlineData(EntityState.Detached, QueryTrackingBehavior.NoTracking, false)]
-    [InlineData(EntityState.Unchanged, QueryTrackingBehavior.NoTrackingWithIdentityResolution, false)]
+    [InlineData(
+        EntityState.Unchanged,
+        QueryTrackingBehavior.NoTrackingWithIdentityResolution,
+        false
+    )]
     [InlineData(EntityState.Added, QueryTrackingBehavior.NoTrackingWithIdentityResolution, false)]
-    [InlineData(EntityState.Modified, QueryTrackingBehavior.NoTrackingWithIdentityResolution, false)]
+    [InlineData(
+        EntityState.Modified,
+        QueryTrackingBehavior.NoTrackingWithIdentityResolution,
+        false
+    )]
     [InlineData(EntityState.Deleted, QueryTrackingBehavior.NoTrackingWithIdentityResolution, false)]
-    [InlineData(EntityState.Detached, QueryTrackingBehavior.NoTrackingWithIdentityResolution, false)]
+    [InlineData(
+        EntityState.Detached,
+        QueryTrackingBehavior.NoTrackingWithIdentityResolution,
+        false
+    )]
     [InlineData(EntityState.Unchanged, QueryTrackingBehavior.TrackAll, true)]
     [InlineData(EntityState.Added, QueryTrackingBehavior.TrackAll, true)]
     [InlineData(EntityState.Modified, QueryTrackingBehavior.TrackAll, true)]
@@ -105,7 +146,11 @@ public abstract partial class LoadTestBase<TFixture>
     [InlineData(EntityState.Modified, QueryTrackingBehavior.NoTracking, true)]
     [InlineData(EntityState.Deleted, QueryTrackingBehavior.NoTracking, true)]
     [InlineData(EntityState.Detached, QueryTrackingBehavior.NoTracking, true)]
-    [InlineData(EntityState.Unchanged, QueryTrackingBehavior.NoTrackingWithIdentityResolution, true)]
+    [InlineData(
+        EntityState.Unchanged,
+        QueryTrackingBehavior.NoTrackingWithIdentityResolution,
+        true
+    )]
     [InlineData(EntityState.Added, QueryTrackingBehavior.NoTrackingWithIdentityResolution, true)]
     [InlineData(EntityState.Modified, QueryTrackingBehavior.NoTrackingWithIdentityResolution, true)]
     [InlineData(EntityState.Deleted, QueryTrackingBehavior.NoTrackingWithIdentityResolution, true)]
@@ -113,7 +158,8 @@ public abstract partial class LoadTestBase<TFixture>
     public virtual async Task Lazy_load_many_to_one_reference_to_principal(
         EntityState state,
         QueryTrackingBehavior queryTrackingBehavior,
-        bool async)
+        bool async
+    )
     {
         using var context = CreateContext(lazyLoadingEnabled: true);
         context.ChangeTracker.QueryTrackingBehavior = queryTrackingBehavior;
@@ -133,7 +179,10 @@ public abstract partial class LoadTestBase<TFixture>
 
         if (LazyLoadingEnabled)
         {
-            if (state == EntityState.Detached && queryTrackingBehavior == QueryTrackingBehavior.TrackAll)
+            if (
+                state == EntityState.Detached
+                && queryTrackingBehavior == QueryTrackingBehavior.TrackAll
+            )
             {
                 Assert.Null(await child.LazyLoadParent(async)); // Explicitly detached
             }
@@ -155,7 +204,10 @@ public abstract partial class LoadTestBase<TFixture>
                 RecordLog();
                 context.ChangeTracker.LazyLoadingEnabled = false;
 
-                Assert.Equal(state == EntityState.Detached ? 0 : 2, context.ChangeTracker.Entries().Count());
+                Assert.Equal(
+                    state == EntityState.Detached ? 0 : 2,
+                    context.ChangeTracker.Entries().Count()
+                );
 
                 if (state != EntityState.Deleted)
                 {
@@ -197,11 +249,23 @@ public abstract partial class LoadTestBase<TFixture>
     [InlineData(EntityState.Modified, QueryTrackingBehavior.NoTracking, false)]
     [InlineData(EntityState.Deleted, QueryTrackingBehavior.NoTracking, false)]
     [InlineData(EntityState.Detached, QueryTrackingBehavior.NoTracking, false)]
-    [InlineData(EntityState.Unchanged, QueryTrackingBehavior.NoTrackingWithIdentityResolution, false)]
+    [InlineData(
+        EntityState.Unchanged,
+        QueryTrackingBehavior.NoTrackingWithIdentityResolution,
+        false
+    )]
     [InlineData(EntityState.Added, QueryTrackingBehavior.NoTrackingWithIdentityResolution, false)]
-    [InlineData(EntityState.Modified, QueryTrackingBehavior.NoTrackingWithIdentityResolution, false)]
+    [InlineData(
+        EntityState.Modified,
+        QueryTrackingBehavior.NoTrackingWithIdentityResolution,
+        false
+    )]
     [InlineData(EntityState.Deleted, QueryTrackingBehavior.NoTrackingWithIdentityResolution, false)]
-    [InlineData(EntityState.Detached, QueryTrackingBehavior.NoTrackingWithIdentityResolution, false)]
+    [InlineData(
+        EntityState.Detached,
+        QueryTrackingBehavior.NoTrackingWithIdentityResolution,
+        false
+    )]
     [InlineData(EntityState.Unchanged, QueryTrackingBehavior.TrackAll, true)]
     [InlineData(EntityState.Added, QueryTrackingBehavior.TrackAll, true)]
     [InlineData(EntityState.Modified, QueryTrackingBehavior.TrackAll, true)]
@@ -212,7 +276,11 @@ public abstract partial class LoadTestBase<TFixture>
     [InlineData(EntityState.Modified, QueryTrackingBehavior.NoTracking, true)]
     [InlineData(EntityState.Deleted, QueryTrackingBehavior.NoTracking, true)]
     [InlineData(EntityState.Detached, QueryTrackingBehavior.NoTracking, true)]
-    [InlineData(EntityState.Unchanged, QueryTrackingBehavior.NoTrackingWithIdentityResolution, true)]
+    [InlineData(
+        EntityState.Unchanged,
+        QueryTrackingBehavior.NoTrackingWithIdentityResolution,
+        true
+    )]
     [InlineData(EntityState.Added, QueryTrackingBehavior.NoTrackingWithIdentityResolution, true)]
     [InlineData(EntityState.Modified, QueryTrackingBehavior.NoTrackingWithIdentityResolution, true)]
     [InlineData(EntityState.Deleted, QueryTrackingBehavior.NoTrackingWithIdentityResolution, true)]
@@ -220,7 +288,8 @@ public abstract partial class LoadTestBase<TFixture>
     public virtual async Task Lazy_load_one_to_one_reference_to_principal(
         EntityState state,
         QueryTrackingBehavior queryTrackingBehavior,
-        bool async)
+        bool async
+    )
     {
         using var context = CreateContext(lazyLoadingEnabled: true);
         context.ChangeTracker.QueryTrackingBehavior = queryTrackingBehavior;
@@ -240,7 +309,10 @@ public abstract partial class LoadTestBase<TFixture>
 
         if (LazyLoadingEnabled)
         {
-            if (state == EntityState.Detached && queryTrackingBehavior == QueryTrackingBehavior.TrackAll)
+            if (
+                state == EntityState.Detached
+                && queryTrackingBehavior == QueryTrackingBehavior.TrackAll
+            )
             {
                 Assert.Null(await single.LazyLoadParent(async)); // Explicitly detached
             }
@@ -262,7 +334,10 @@ public abstract partial class LoadTestBase<TFixture>
                 RecordLog();
                 context.ChangeTracker.LazyLoadingEnabled = false;
 
-                Assert.Equal(state == EntityState.Detached ? 0 : 2, context.ChangeTracker.Entries().Count());
+                Assert.Equal(
+                    state == EntityState.Detached ? 0 : 2,
+                    context.ChangeTracker.Entries().Count()
+                );
 
                 if (state != EntityState.Deleted)
                 {
@@ -304,11 +379,23 @@ public abstract partial class LoadTestBase<TFixture>
     [InlineData(EntityState.Modified, QueryTrackingBehavior.NoTracking, false)]
     [InlineData(EntityState.Deleted, QueryTrackingBehavior.NoTracking, false)]
     [InlineData(EntityState.Detached, QueryTrackingBehavior.NoTracking, false)]
-    [InlineData(EntityState.Unchanged, QueryTrackingBehavior.NoTrackingWithIdentityResolution, false)]
+    [InlineData(
+        EntityState.Unchanged,
+        QueryTrackingBehavior.NoTrackingWithIdentityResolution,
+        false
+    )]
     [InlineData(EntityState.Added, QueryTrackingBehavior.NoTrackingWithIdentityResolution, false)]
-    [InlineData(EntityState.Modified, QueryTrackingBehavior.NoTrackingWithIdentityResolution, false)]
+    [InlineData(
+        EntityState.Modified,
+        QueryTrackingBehavior.NoTrackingWithIdentityResolution,
+        false
+    )]
     [InlineData(EntityState.Deleted, QueryTrackingBehavior.NoTrackingWithIdentityResolution, false)]
-    [InlineData(EntityState.Detached, QueryTrackingBehavior.NoTrackingWithIdentityResolution, false)]
+    [InlineData(
+        EntityState.Detached,
+        QueryTrackingBehavior.NoTrackingWithIdentityResolution,
+        false
+    )]
     [InlineData(EntityState.Unchanged, QueryTrackingBehavior.TrackAll, true)]
     [InlineData(EntityState.Added, QueryTrackingBehavior.TrackAll, true)]
     [InlineData(EntityState.Modified, QueryTrackingBehavior.TrackAll, true)]
@@ -319,7 +406,11 @@ public abstract partial class LoadTestBase<TFixture>
     [InlineData(EntityState.Modified, QueryTrackingBehavior.NoTracking, true)]
     [InlineData(EntityState.Deleted, QueryTrackingBehavior.NoTracking, true)]
     [InlineData(EntityState.Detached, QueryTrackingBehavior.NoTracking, true)]
-    [InlineData(EntityState.Unchanged, QueryTrackingBehavior.NoTrackingWithIdentityResolution, true)]
+    [InlineData(
+        EntityState.Unchanged,
+        QueryTrackingBehavior.NoTrackingWithIdentityResolution,
+        true
+    )]
     [InlineData(EntityState.Added, QueryTrackingBehavior.NoTrackingWithIdentityResolution, true)]
     [InlineData(EntityState.Modified, QueryTrackingBehavior.NoTrackingWithIdentityResolution, true)]
     [InlineData(EntityState.Deleted, QueryTrackingBehavior.NoTrackingWithIdentityResolution, true)]
@@ -327,7 +418,8 @@ public abstract partial class LoadTestBase<TFixture>
     public virtual async Task Lazy_load_one_to_one_reference_to_dependent(
         EntityState state,
         QueryTrackingBehavior queryTrackingBehavior,
-        bool async)
+        bool async
+    )
     {
         using var context = CreateContext(lazyLoadingEnabled: true);
         context.ChangeTracker.QueryTrackingBehavior = queryTrackingBehavior;
@@ -347,7 +439,10 @@ public abstract partial class LoadTestBase<TFixture>
 
         if (LazyLoadingEnabled)
         {
-            if (state == EntityState.Detached && queryTrackingBehavior == QueryTrackingBehavior.TrackAll)
+            if (
+                state == EntityState.Detached
+                && queryTrackingBehavior == QueryTrackingBehavior.TrackAll
+            )
             {
                 Assert.Null(await parent.LazyLoadSingle(async)); // Explicitly detached
             }
@@ -362,7 +457,10 @@ public abstract partial class LoadTestBase<TFixture>
                 RecordLog();
                 context.ChangeTracker.LazyLoadingEnabled = false;
 
-                Assert.Equal(state == EntityState.Detached ? 0 : 2, context.ChangeTracker.Entries().Count());
+                Assert.Equal(
+                    state == EntityState.Detached ? 0 : 2,
+                    context.ChangeTracker.Entries().Count()
+                );
 
                 if (state != EntityState.Deleted)
                 {
@@ -401,7 +499,10 @@ public abstract partial class LoadTestBase<TFixture>
     [InlineData(EntityState.Modified, QueryTrackingBehavior.NoTrackingWithIdentityResolution)]
     [InlineData(EntityState.Deleted, QueryTrackingBehavior.NoTrackingWithIdentityResolution)]
     [InlineData(EntityState.Detached, QueryTrackingBehavior.NoTrackingWithIdentityResolution)]
-    public virtual void Lazy_load_one_to_one_PK_to_PK_reference_to_principal(EntityState state, QueryTrackingBehavior queryTrackingBehavior)
+    public virtual void Lazy_load_one_to_one_PK_to_PK_reference_to_principal(
+        EntityState state,
+        QueryTrackingBehavior queryTrackingBehavior
+    )
     {
         using var context = CreateContext(lazyLoadingEnabled: true);
         context.ChangeTracker.QueryTrackingBehavior = queryTrackingBehavior;
@@ -421,7 +522,10 @@ public abstract partial class LoadTestBase<TFixture>
 
         if (LazyLoadingEnabled)
         {
-            if (state == EntityState.Detached && queryTrackingBehavior == QueryTrackingBehavior.TrackAll)
+            if (
+                state == EntityState.Detached
+                && queryTrackingBehavior == QueryTrackingBehavior.TrackAll
+            )
             {
                 Assert.Null(single.Parent); // Explicitly detached
             }
@@ -443,7 +547,10 @@ public abstract partial class LoadTestBase<TFixture>
                 RecordLog();
                 context.ChangeTracker.LazyLoadingEnabled = false;
 
-                Assert.Equal(state == EntityState.Detached ? 0 : 2, context.ChangeTracker.Entries().Count());
+                Assert.Equal(
+                    state == EntityState.Detached ? 0 : 2,
+                    context.ChangeTracker.Entries().Count()
+                );
 
                 if (state != EntityState.Deleted)
                 {
@@ -490,7 +597,10 @@ public abstract partial class LoadTestBase<TFixture>
     [InlineData(EntityState.Modified, QueryTrackingBehavior.NoTrackingWithIdentityResolution)]
     [InlineData(EntityState.Deleted, QueryTrackingBehavior.NoTrackingWithIdentityResolution)]
     [InlineData(EntityState.Detached, QueryTrackingBehavior.NoTrackingWithIdentityResolution)]
-    public virtual void Lazy_load_one_to_one_PK_to_PK_reference_to_dependent(EntityState state, QueryTrackingBehavior queryTrackingBehavior)
+    public virtual void Lazy_load_one_to_one_PK_to_PK_reference_to_dependent(
+        EntityState state,
+        QueryTrackingBehavior queryTrackingBehavior
+    )
     {
         using var context = CreateContext(lazyLoadingEnabled: true);
         context.ChangeTracker.QueryTrackingBehavior = queryTrackingBehavior;
@@ -510,7 +620,10 @@ public abstract partial class LoadTestBase<TFixture>
 
         if (LazyLoadingEnabled)
         {
-            if (state == EntityState.Detached && queryTrackingBehavior == QueryTrackingBehavior.TrackAll)
+            if (
+                state == EntityState.Detached
+                && queryTrackingBehavior == QueryTrackingBehavior.TrackAll
+            )
             {
                 Assert.Null(parent.SinglePkToPk); // Explicitly detached
             }
@@ -525,7 +638,10 @@ public abstract partial class LoadTestBase<TFixture>
                 RecordLog();
                 context.ChangeTracker.LazyLoadingEnabled = false;
 
-                Assert.Equal(state == EntityState.Detached ? 0 : 2, context.ChangeTracker.Entries().Count());
+                Assert.Equal(
+                    state == EntityState.Detached ? 0 : 2,
+                    context.ChangeTracker.Entries().Count()
+                );
 
                 Assert.Same(parent, parent.SinglePkToPk.Parent);
 
@@ -556,11 +672,23 @@ public abstract partial class LoadTestBase<TFixture>
     [InlineData(EntityState.Modified, QueryTrackingBehavior.NoTracking, false)]
     [InlineData(EntityState.Deleted, QueryTrackingBehavior.NoTracking, false)]
     [InlineData(EntityState.Detached, QueryTrackingBehavior.NoTracking, false)]
-    [InlineData(EntityState.Unchanged, QueryTrackingBehavior.NoTrackingWithIdentityResolution, false)]
+    [InlineData(
+        EntityState.Unchanged,
+        QueryTrackingBehavior.NoTrackingWithIdentityResolution,
+        false
+    )]
     [InlineData(EntityState.Added, QueryTrackingBehavior.NoTrackingWithIdentityResolution, false)]
-    [InlineData(EntityState.Modified, QueryTrackingBehavior.NoTrackingWithIdentityResolution, false)]
+    [InlineData(
+        EntityState.Modified,
+        QueryTrackingBehavior.NoTrackingWithIdentityResolution,
+        false
+    )]
     [InlineData(EntityState.Deleted, QueryTrackingBehavior.NoTrackingWithIdentityResolution, false)]
-    [InlineData(EntityState.Detached, QueryTrackingBehavior.NoTrackingWithIdentityResolution, false)]
+    [InlineData(
+        EntityState.Detached,
+        QueryTrackingBehavior.NoTrackingWithIdentityResolution,
+        false
+    )]
     [InlineData(EntityState.Unchanged, QueryTrackingBehavior.TrackAll, true)]
     [InlineData(EntityState.Added, QueryTrackingBehavior.TrackAll, true)]
     [InlineData(EntityState.Modified, QueryTrackingBehavior.TrackAll, true)]
@@ -571,7 +699,11 @@ public abstract partial class LoadTestBase<TFixture>
     [InlineData(EntityState.Modified, QueryTrackingBehavior.NoTracking, true)]
     [InlineData(EntityState.Deleted, QueryTrackingBehavior.NoTracking, true)]
     [InlineData(EntityState.Detached, QueryTrackingBehavior.NoTracking, true)]
-    [InlineData(EntityState.Unchanged, QueryTrackingBehavior.NoTrackingWithIdentityResolution, true)]
+    [InlineData(
+        EntityState.Unchanged,
+        QueryTrackingBehavior.NoTrackingWithIdentityResolution,
+        true
+    )]
     [InlineData(EntityState.Added, QueryTrackingBehavior.NoTrackingWithIdentityResolution, true)]
     [InlineData(EntityState.Modified, QueryTrackingBehavior.NoTrackingWithIdentityResolution, true)]
     [InlineData(EntityState.Deleted, QueryTrackingBehavior.NoTrackingWithIdentityResolution, true)]
@@ -579,7 +711,8 @@ public abstract partial class LoadTestBase<TFixture>
     public virtual async Task Lazy_load_many_to_one_reference_to_principal_null_FK(
         EntityState state,
         QueryTrackingBehavior queryTrackingBehavior,
-        bool async)
+        bool async
+    )
     {
         using var context = CreateContext(lazyLoadingEnabled: true);
         context.ChangeTracker.QueryTrackingBehavior = queryTrackingBehavior;
@@ -608,7 +741,10 @@ public abstract partial class LoadTestBase<TFixture>
             RecordLog();
             context.ChangeTracker.LazyLoadingEnabled = false;
 
-            Assert.Equal(state == EntityState.Detached ? 0 : 1, context.ChangeTracker.Entries().Count());
+            Assert.Equal(
+                state == EntityState.Detached ? 0 : 1,
+                context.ChangeTracker.Entries().Count()
+            );
             Assert.Null(child.Parent);
         }
         else
@@ -629,11 +765,23 @@ public abstract partial class LoadTestBase<TFixture>
     [InlineData(EntityState.Modified, QueryTrackingBehavior.NoTracking, false)]
     [InlineData(EntityState.Deleted, QueryTrackingBehavior.NoTracking, false)]
     [InlineData(EntityState.Detached, QueryTrackingBehavior.NoTracking, false)]
-    [InlineData(EntityState.Unchanged, QueryTrackingBehavior.NoTrackingWithIdentityResolution, false)]
+    [InlineData(
+        EntityState.Unchanged,
+        QueryTrackingBehavior.NoTrackingWithIdentityResolution,
+        false
+    )]
     [InlineData(EntityState.Added, QueryTrackingBehavior.NoTrackingWithIdentityResolution, false)]
-    [InlineData(EntityState.Modified, QueryTrackingBehavior.NoTrackingWithIdentityResolution, false)]
+    [InlineData(
+        EntityState.Modified,
+        QueryTrackingBehavior.NoTrackingWithIdentityResolution,
+        false
+    )]
     [InlineData(EntityState.Deleted, QueryTrackingBehavior.NoTrackingWithIdentityResolution, false)]
-    [InlineData(EntityState.Detached, QueryTrackingBehavior.NoTrackingWithIdentityResolution, false)]
+    [InlineData(
+        EntityState.Detached,
+        QueryTrackingBehavior.NoTrackingWithIdentityResolution,
+        false
+    )]
     [InlineData(EntityState.Unchanged, QueryTrackingBehavior.TrackAll, true)]
     [InlineData(EntityState.Added, QueryTrackingBehavior.TrackAll, true)]
     [InlineData(EntityState.Modified, QueryTrackingBehavior.TrackAll, true)]
@@ -644,7 +792,11 @@ public abstract partial class LoadTestBase<TFixture>
     [InlineData(EntityState.Modified, QueryTrackingBehavior.NoTracking, true)]
     [InlineData(EntityState.Deleted, QueryTrackingBehavior.NoTracking, true)]
     [InlineData(EntityState.Detached, QueryTrackingBehavior.NoTracking, true)]
-    [InlineData(EntityState.Unchanged, QueryTrackingBehavior.NoTrackingWithIdentityResolution, true)]
+    [InlineData(
+        EntityState.Unchanged,
+        QueryTrackingBehavior.NoTrackingWithIdentityResolution,
+        true
+    )]
     [InlineData(EntityState.Added, QueryTrackingBehavior.NoTrackingWithIdentityResolution, true)]
     [InlineData(EntityState.Modified, QueryTrackingBehavior.NoTrackingWithIdentityResolution, true)]
     [InlineData(EntityState.Deleted, QueryTrackingBehavior.NoTrackingWithIdentityResolution, true)]
@@ -652,7 +804,8 @@ public abstract partial class LoadTestBase<TFixture>
     public virtual async Task Lazy_load_one_to_one_reference_to_principal_null_FK(
         EntityState state,
         QueryTrackingBehavior queryTrackingBehavior,
-        bool async)
+        bool async
+    )
     {
         using var context = CreateContext(lazyLoadingEnabled: true);
         context.ChangeTracker.QueryTrackingBehavior = queryTrackingBehavior;
@@ -681,7 +834,10 @@ public abstract partial class LoadTestBase<TFixture>
             RecordLog();
             context.ChangeTracker.LazyLoadingEnabled = false;
 
-            Assert.Equal(state == EntityState.Detached ? 0 : 1, context.ChangeTracker.Entries().Count());
+            Assert.Equal(
+                state == EntityState.Detached ? 0 : 1,
+                context.ChangeTracker.Entries().Count()
+            );
 
             Assert.Null(single.Parent);
         }
@@ -703,11 +859,23 @@ public abstract partial class LoadTestBase<TFixture>
     [InlineData(EntityState.Modified, QueryTrackingBehavior.NoTracking, false)]
     [InlineData(EntityState.Deleted, QueryTrackingBehavior.NoTracking, false)]
     [InlineData(EntityState.Detached, QueryTrackingBehavior.NoTracking, false)]
-    [InlineData(EntityState.Unchanged, QueryTrackingBehavior.NoTrackingWithIdentityResolution, false)]
+    [InlineData(
+        EntityState.Unchanged,
+        QueryTrackingBehavior.NoTrackingWithIdentityResolution,
+        false
+    )]
     [InlineData(EntityState.Added, QueryTrackingBehavior.NoTrackingWithIdentityResolution, false)]
-    [InlineData(EntityState.Modified, QueryTrackingBehavior.NoTrackingWithIdentityResolution, false)]
+    [InlineData(
+        EntityState.Modified,
+        QueryTrackingBehavior.NoTrackingWithIdentityResolution,
+        false
+    )]
     [InlineData(EntityState.Deleted, QueryTrackingBehavior.NoTrackingWithIdentityResolution, false)]
-    [InlineData(EntityState.Detached, QueryTrackingBehavior.NoTrackingWithIdentityResolution, false)]
+    [InlineData(
+        EntityState.Detached,
+        QueryTrackingBehavior.NoTrackingWithIdentityResolution,
+        false
+    )]
     [InlineData(EntityState.Unchanged, QueryTrackingBehavior.TrackAll, true)]
     [InlineData(EntityState.Added, QueryTrackingBehavior.TrackAll, true)]
     [InlineData(EntityState.Modified, QueryTrackingBehavior.TrackAll, true)]
@@ -718,12 +886,20 @@ public abstract partial class LoadTestBase<TFixture>
     [InlineData(EntityState.Modified, QueryTrackingBehavior.NoTracking, true)]
     [InlineData(EntityState.Deleted, QueryTrackingBehavior.NoTracking, true)]
     [InlineData(EntityState.Detached, QueryTrackingBehavior.NoTracking, true)]
-    [InlineData(EntityState.Unchanged, QueryTrackingBehavior.NoTrackingWithIdentityResolution, true)]
+    [InlineData(
+        EntityState.Unchanged,
+        QueryTrackingBehavior.NoTrackingWithIdentityResolution,
+        true
+    )]
     [InlineData(EntityState.Added, QueryTrackingBehavior.NoTrackingWithIdentityResolution, true)]
     [InlineData(EntityState.Modified, QueryTrackingBehavior.NoTrackingWithIdentityResolution, true)]
     [InlineData(EntityState.Deleted, QueryTrackingBehavior.NoTrackingWithIdentityResolution, true)]
     [InlineData(EntityState.Detached, QueryTrackingBehavior.NoTrackingWithIdentityResolution, true)]
-    public virtual async Task Lazy_load_collection_not_found(EntityState state, QueryTrackingBehavior queryTrackingBehavior, bool async)
+    public virtual async Task Lazy_load_collection_not_found(
+        EntityState state,
+        QueryTrackingBehavior queryTrackingBehavior,
+        bool async
+    )
     {
         using var context = CreateContext(lazyLoadingEnabled: true);
         context.ChangeTracker.QueryTrackingBehavior = queryTrackingBehavior;
@@ -777,11 +953,23 @@ public abstract partial class LoadTestBase<TFixture>
     [InlineData(EntityState.Modified, QueryTrackingBehavior.NoTracking, false)]
     [InlineData(EntityState.Deleted, QueryTrackingBehavior.NoTracking, false)]
     [InlineData(EntityState.Detached, QueryTrackingBehavior.NoTracking, false)]
-    [InlineData(EntityState.Unchanged, QueryTrackingBehavior.NoTrackingWithIdentityResolution, false)]
+    [InlineData(
+        EntityState.Unchanged,
+        QueryTrackingBehavior.NoTrackingWithIdentityResolution,
+        false
+    )]
     [InlineData(EntityState.Added, QueryTrackingBehavior.NoTrackingWithIdentityResolution, false)]
-    [InlineData(EntityState.Modified, QueryTrackingBehavior.NoTrackingWithIdentityResolution, false)]
+    [InlineData(
+        EntityState.Modified,
+        QueryTrackingBehavior.NoTrackingWithIdentityResolution,
+        false
+    )]
     [InlineData(EntityState.Deleted, QueryTrackingBehavior.NoTrackingWithIdentityResolution, false)]
-    [InlineData(EntityState.Detached, QueryTrackingBehavior.NoTrackingWithIdentityResolution, false)]
+    [InlineData(
+        EntityState.Detached,
+        QueryTrackingBehavior.NoTrackingWithIdentityResolution,
+        false
+    )]
     [InlineData(EntityState.Unchanged, QueryTrackingBehavior.TrackAll, true)]
     [InlineData(EntityState.Added, QueryTrackingBehavior.TrackAll, true)]
     [InlineData(EntityState.Modified, QueryTrackingBehavior.TrackAll, true)]
@@ -792,7 +980,11 @@ public abstract partial class LoadTestBase<TFixture>
     [InlineData(EntityState.Modified, QueryTrackingBehavior.NoTracking, true)]
     [InlineData(EntityState.Deleted, QueryTrackingBehavior.NoTracking, true)]
     [InlineData(EntityState.Detached, QueryTrackingBehavior.NoTracking, true)]
-    [InlineData(EntityState.Unchanged, QueryTrackingBehavior.NoTrackingWithIdentityResolution, true)]
+    [InlineData(
+        EntityState.Unchanged,
+        QueryTrackingBehavior.NoTrackingWithIdentityResolution,
+        true
+    )]
     [InlineData(EntityState.Added, QueryTrackingBehavior.NoTrackingWithIdentityResolution, true)]
     [InlineData(EntityState.Modified, QueryTrackingBehavior.NoTrackingWithIdentityResolution, true)]
     [InlineData(EntityState.Deleted, QueryTrackingBehavior.NoTrackingWithIdentityResolution, true)]
@@ -800,7 +992,8 @@ public abstract partial class LoadTestBase<TFixture>
     public virtual async Task Lazy_load_many_to_one_reference_to_principal_not_found(
         EntityState state,
         QueryTrackingBehavior queryTrackingBehavior,
-        bool async)
+        bool async
+    )
     {
         using var context = CreateContext(lazyLoadingEnabled: true);
         context.ChangeTracker.QueryTrackingBehavior = queryTrackingBehavior;
@@ -829,7 +1022,10 @@ public abstract partial class LoadTestBase<TFixture>
             RecordLog();
             context.ChangeTracker.LazyLoadingEnabled = false;
 
-            Assert.Equal(state == EntityState.Detached ? 0 : 1, context.ChangeTracker.Entries().Count());
+            Assert.Equal(
+                state == EntityState.Detached ? 0 : 1,
+                context.ChangeTracker.Entries().Count()
+            );
             Assert.Null(child.Parent);
         }
         else
@@ -850,11 +1046,23 @@ public abstract partial class LoadTestBase<TFixture>
     [InlineData(EntityState.Modified, QueryTrackingBehavior.NoTracking, false)]
     [InlineData(EntityState.Deleted, QueryTrackingBehavior.NoTracking, false)]
     [InlineData(EntityState.Detached, QueryTrackingBehavior.NoTracking, false)]
-    [InlineData(EntityState.Unchanged, QueryTrackingBehavior.NoTrackingWithIdentityResolution, false)]
+    [InlineData(
+        EntityState.Unchanged,
+        QueryTrackingBehavior.NoTrackingWithIdentityResolution,
+        false
+    )]
     [InlineData(EntityState.Added, QueryTrackingBehavior.NoTrackingWithIdentityResolution, false)]
-    [InlineData(EntityState.Modified, QueryTrackingBehavior.NoTrackingWithIdentityResolution, false)]
+    [InlineData(
+        EntityState.Modified,
+        QueryTrackingBehavior.NoTrackingWithIdentityResolution,
+        false
+    )]
     [InlineData(EntityState.Deleted, QueryTrackingBehavior.NoTrackingWithIdentityResolution, false)]
-    [InlineData(EntityState.Detached, QueryTrackingBehavior.NoTrackingWithIdentityResolution, false)]
+    [InlineData(
+        EntityState.Detached,
+        QueryTrackingBehavior.NoTrackingWithIdentityResolution,
+        false
+    )]
     [InlineData(EntityState.Unchanged, QueryTrackingBehavior.TrackAll, true)]
     [InlineData(EntityState.Added, QueryTrackingBehavior.TrackAll, true)]
     [InlineData(EntityState.Modified, QueryTrackingBehavior.TrackAll, true)]
@@ -865,7 +1073,11 @@ public abstract partial class LoadTestBase<TFixture>
     [InlineData(EntityState.Modified, QueryTrackingBehavior.NoTracking, true)]
     [InlineData(EntityState.Deleted, QueryTrackingBehavior.NoTracking, true)]
     [InlineData(EntityState.Detached, QueryTrackingBehavior.NoTracking, true)]
-    [InlineData(EntityState.Unchanged, QueryTrackingBehavior.NoTrackingWithIdentityResolution, true)]
+    [InlineData(
+        EntityState.Unchanged,
+        QueryTrackingBehavior.NoTrackingWithIdentityResolution,
+        true
+    )]
     [InlineData(EntityState.Added, QueryTrackingBehavior.NoTrackingWithIdentityResolution, true)]
     [InlineData(EntityState.Modified, QueryTrackingBehavior.NoTrackingWithIdentityResolution, true)]
     [InlineData(EntityState.Deleted, QueryTrackingBehavior.NoTrackingWithIdentityResolution, true)]
@@ -873,7 +1085,8 @@ public abstract partial class LoadTestBase<TFixture>
     public virtual async Task Lazy_load_one_to_one_reference_to_principal_not_found(
         EntityState state,
         QueryTrackingBehavior queryTrackingBehavior,
-        bool async)
+        bool async
+    )
     {
         using var context = CreateContext(lazyLoadingEnabled: true);
         context.ChangeTracker.QueryTrackingBehavior = queryTrackingBehavior;
@@ -902,7 +1115,10 @@ public abstract partial class LoadTestBase<TFixture>
             RecordLog();
             context.ChangeTracker.LazyLoadingEnabled = false;
 
-            Assert.Equal(state == EntityState.Detached ? 0 : 1, context.ChangeTracker.Entries().Count());
+            Assert.Equal(
+                state == EntityState.Detached ? 0 : 1,
+                context.ChangeTracker.Entries().Count()
+            );
 
             Assert.Null(single.Parent);
         }
@@ -924,11 +1140,23 @@ public abstract partial class LoadTestBase<TFixture>
     [InlineData(EntityState.Modified, QueryTrackingBehavior.NoTracking, false)]
     [InlineData(EntityState.Deleted, QueryTrackingBehavior.NoTracking, false)]
     [InlineData(EntityState.Detached, QueryTrackingBehavior.NoTracking, false)]
-    [InlineData(EntityState.Unchanged, QueryTrackingBehavior.NoTrackingWithIdentityResolution, false)]
+    [InlineData(
+        EntityState.Unchanged,
+        QueryTrackingBehavior.NoTrackingWithIdentityResolution,
+        false
+    )]
     [InlineData(EntityState.Added, QueryTrackingBehavior.NoTrackingWithIdentityResolution, false)]
-    [InlineData(EntityState.Modified, QueryTrackingBehavior.NoTrackingWithIdentityResolution, false)]
+    [InlineData(
+        EntityState.Modified,
+        QueryTrackingBehavior.NoTrackingWithIdentityResolution,
+        false
+    )]
     [InlineData(EntityState.Deleted, QueryTrackingBehavior.NoTrackingWithIdentityResolution, false)]
-    [InlineData(EntityState.Detached, QueryTrackingBehavior.NoTrackingWithIdentityResolution, false)]
+    [InlineData(
+        EntityState.Detached,
+        QueryTrackingBehavior.NoTrackingWithIdentityResolution,
+        false
+    )]
     [InlineData(EntityState.Unchanged, QueryTrackingBehavior.TrackAll, true)]
     [InlineData(EntityState.Added, QueryTrackingBehavior.TrackAll, true)]
     [InlineData(EntityState.Modified, QueryTrackingBehavior.TrackAll, true)]
@@ -939,7 +1167,11 @@ public abstract partial class LoadTestBase<TFixture>
     [InlineData(EntityState.Modified, QueryTrackingBehavior.NoTracking, true)]
     [InlineData(EntityState.Deleted, QueryTrackingBehavior.NoTracking, true)]
     [InlineData(EntityState.Detached, QueryTrackingBehavior.NoTracking, true)]
-    [InlineData(EntityState.Unchanged, QueryTrackingBehavior.NoTrackingWithIdentityResolution, true)]
+    [InlineData(
+        EntityState.Unchanged,
+        QueryTrackingBehavior.NoTrackingWithIdentityResolution,
+        true
+    )]
     [InlineData(EntityState.Added, QueryTrackingBehavior.NoTrackingWithIdentityResolution, true)]
     [InlineData(EntityState.Modified, QueryTrackingBehavior.NoTrackingWithIdentityResolution, true)]
     [InlineData(EntityState.Deleted, QueryTrackingBehavior.NoTrackingWithIdentityResolution, true)]
@@ -947,7 +1179,8 @@ public abstract partial class LoadTestBase<TFixture>
     public virtual async Task Lazy_load_one_to_one_reference_to_dependent_not_found(
         EntityState state,
         QueryTrackingBehavior queryTrackingBehavior,
-        bool async)
+        bool async
+    )
     {
         using var context = CreateContext(lazyLoadingEnabled: true);
         context.ChangeTracker.QueryTrackingBehavior = queryTrackingBehavior;
@@ -978,7 +1211,10 @@ public abstract partial class LoadTestBase<TFixture>
 
             Assert.Null(parent.Single);
 
-            Assert.Equal(state == EntityState.Detached ? 0 : 1, context.ChangeTracker.Entries().Count());
+            Assert.Equal(
+                state == EntityState.Detached ? 0 : 1,
+                context.ChangeTracker.Entries().Count()
+            );
         }
         else
         {
@@ -988,71 +1224,352 @@ public abstract partial class LoadTestBase<TFixture>
     }
 
     [ConditionalTheory]
-    [InlineData(EntityState.Unchanged, CascadeTiming.Immediate, QueryTrackingBehavior.TrackAll, false)]
+    [InlineData(
+        EntityState.Unchanged,
+        CascadeTiming.Immediate,
+        QueryTrackingBehavior.TrackAll,
+        false
+    )]
     [InlineData(EntityState.Added, CascadeTiming.Immediate, QueryTrackingBehavior.TrackAll, false)]
-    [InlineData(EntityState.Modified, CascadeTiming.Immediate, QueryTrackingBehavior.TrackAll, false)]
-    [InlineData(EntityState.Deleted, CascadeTiming.Immediate, QueryTrackingBehavior.TrackAll, false)]
-    [InlineData(EntityState.Detached, CascadeTiming.Immediate, QueryTrackingBehavior.TrackAll, false)]
-    [InlineData(EntityState.Unchanged, CascadeTiming.OnSaveChanges, QueryTrackingBehavior.TrackAll, false)]
-    [InlineData(EntityState.Added, CascadeTiming.OnSaveChanges, QueryTrackingBehavior.TrackAll, false)]
-    [InlineData(EntityState.Modified, CascadeTiming.OnSaveChanges, QueryTrackingBehavior.TrackAll, false)]
-    [InlineData(EntityState.Deleted, CascadeTiming.OnSaveChanges, QueryTrackingBehavior.TrackAll, false)]
-    [InlineData(EntityState.Detached, CascadeTiming.OnSaveChanges, QueryTrackingBehavior.TrackAll, false)]
-    [InlineData(EntityState.Unchanged, CascadeTiming.Immediate, QueryTrackingBehavior.NoTracking, false)]
-    [InlineData(EntityState.Added, CascadeTiming.Immediate, QueryTrackingBehavior.NoTracking, false)]
-    [InlineData(EntityState.Modified, CascadeTiming.Immediate, QueryTrackingBehavior.NoTracking, false)]
-    [InlineData(EntityState.Deleted, CascadeTiming.Immediate, QueryTrackingBehavior.NoTracking, false)]
-    [InlineData(EntityState.Detached, CascadeTiming.Immediate, QueryTrackingBehavior.NoTracking, false)]
-    [InlineData(EntityState.Unchanged, CascadeTiming.OnSaveChanges, QueryTrackingBehavior.NoTracking, false)]
-    [InlineData(EntityState.Added, CascadeTiming.OnSaveChanges, QueryTrackingBehavior.NoTracking, false)]
-    [InlineData(EntityState.Modified, CascadeTiming.OnSaveChanges, QueryTrackingBehavior.NoTracking, false)]
-    [InlineData(EntityState.Deleted, CascadeTiming.OnSaveChanges, QueryTrackingBehavior.NoTracking, false)]
-    [InlineData(EntityState.Detached, CascadeTiming.OnSaveChanges, QueryTrackingBehavior.NoTracking, false)]
-    [InlineData(EntityState.Unchanged, CascadeTiming.Immediate, QueryTrackingBehavior.NoTrackingWithIdentityResolution, false)]
-    [InlineData(EntityState.Added, CascadeTiming.Immediate, QueryTrackingBehavior.NoTrackingWithIdentityResolution, false)]
-    [InlineData(EntityState.Modified, CascadeTiming.Immediate, QueryTrackingBehavior.NoTrackingWithIdentityResolution, false)]
-    [InlineData(EntityState.Deleted, CascadeTiming.Immediate, QueryTrackingBehavior.NoTrackingWithIdentityResolution, false)]
-    [InlineData(EntityState.Detached, CascadeTiming.Immediate, QueryTrackingBehavior.NoTrackingWithIdentityResolution, false)]
-    [InlineData(EntityState.Unchanged, CascadeTiming.OnSaveChanges, QueryTrackingBehavior.NoTrackingWithIdentityResolution, false)]
-    [InlineData(EntityState.Added, CascadeTiming.OnSaveChanges, QueryTrackingBehavior.NoTrackingWithIdentityResolution, false)]
-    [InlineData(EntityState.Modified, CascadeTiming.OnSaveChanges, QueryTrackingBehavior.NoTrackingWithIdentityResolution, false)]
-    [InlineData(EntityState.Deleted, CascadeTiming.OnSaveChanges, QueryTrackingBehavior.NoTrackingWithIdentityResolution, false)]
-    [InlineData(EntityState.Detached, CascadeTiming.OnSaveChanges, QueryTrackingBehavior.NoTrackingWithIdentityResolution, false)]
-    [InlineData(EntityState.Unchanged, CascadeTiming.Immediate, QueryTrackingBehavior.TrackAll, true)]
+    [InlineData(
+        EntityState.Modified,
+        CascadeTiming.Immediate,
+        QueryTrackingBehavior.TrackAll,
+        false
+    )]
+    [InlineData(
+        EntityState.Deleted,
+        CascadeTiming.Immediate,
+        QueryTrackingBehavior.TrackAll,
+        false
+    )]
+    [InlineData(
+        EntityState.Detached,
+        CascadeTiming.Immediate,
+        QueryTrackingBehavior.TrackAll,
+        false
+    )]
+    [InlineData(
+        EntityState.Unchanged,
+        CascadeTiming.OnSaveChanges,
+        QueryTrackingBehavior.TrackAll,
+        false
+    )]
+    [InlineData(
+        EntityState.Added,
+        CascadeTiming.OnSaveChanges,
+        QueryTrackingBehavior.TrackAll,
+        false
+    )]
+    [InlineData(
+        EntityState.Modified,
+        CascadeTiming.OnSaveChanges,
+        QueryTrackingBehavior.TrackAll,
+        false
+    )]
+    [InlineData(
+        EntityState.Deleted,
+        CascadeTiming.OnSaveChanges,
+        QueryTrackingBehavior.TrackAll,
+        false
+    )]
+    [InlineData(
+        EntityState.Detached,
+        CascadeTiming.OnSaveChanges,
+        QueryTrackingBehavior.TrackAll,
+        false
+    )]
+    [InlineData(
+        EntityState.Unchanged,
+        CascadeTiming.Immediate,
+        QueryTrackingBehavior.NoTracking,
+        false
+    )]
+    [InlineData(
+        EntityState.Added,
+        CascadeTiming.Immediate,
+        QueryTrackingBehavior.NoTracking,
+        false
+    )]
+    [InlineData(
+        EntityState.Modified,
+        CascadeTiming.Immediate,
+        QueryTrackingBehavior.NoTracking,
+        false
+    )]
+    [InlineData(
+        EntityState.Deleted,
+        CascadeTiming.Immediate,
+        QueryTrackingBehavior.NoTracking,
+        false
+    )]
+    [InlineData(
+        EntityState.Detached,
+        CascadeTiming.Immediate,
+        QueryTrackingBehavior.NoTracking,
+        false
+    )]
+    [InlineData(
+        EntityState.Unchanged,
+        CascadeTiming.OnSaveChanges,
+        QueryTrackingBehavior.NoTracking,
+        false
+    )]
+    [InlineData(
+        EntityState.Added,
+        CascadeTiming.OnSaveChanges,
+        QueryTrackingBehavior.NoTracking,
+        false
+    )]
+    [InlineData(
+        EntityState.Modified,
+        CascadeTiming.OnSaveChanges,
+        QueryTrackingBehavior.NoTracking,
+        false
+    )]
+    [InlineData(
+        EntityState.Deleted,
+        CascadeTiming.OnSaveChanges,
+        QueryTrackingBehavior.NoTracking,
+        false
+    )]
+    [InlineData(
+        EntityState.Detached,
+        CascadeTiming.OnSaveChanges,
+        QueryTrackingBehavior.NoTracking,
+        false
+    )]
+    [InlineData(
+        EntityState.Unchanged,
+        CascadeTiming.Immediate,
+        QueryTrackingBehavior.NoTrackingWithIdentityResolution,
+        false
+    )]
+    [InlineData(
+        EntityState.Added,
+        CascadeTiming.Immediate,
+        QueryTrackingBehavior.NoTrackingWithIdentityResolution,
+        false
+    )]
+    [InlineData(
+        EntityState.Modified,
+        CascadeTiming.Immediate,
+        QueryTrackingBehavior.NoTrackingWithIdentityResolution,
+        false
+    )]
+    [InlineData(
+        EntityState.Deleted,
+        CascadeTiming.Immediate,
+        QueryTrackingBehavior.NoTrackingWithIdentityResolution,
+        false
+    )]
+    [InlineData(
+        EntityState.Detached,
+        CascadeTiming.Immediate,
+        QueryTrackingBehavior.NoTrackingWithIdentityResolution,
+        false
+    )]
+    [InlineData(
+        EntityState.Unchanged,
+        CascadeTiming.OnSaveChanges,
+        QueryTrackingBehavior.NoTrackingWithIdentityResolution,
+        false
+    )]
+    [InlineData(
+        EntityState.Added,
+        CascadeTiming.OnSaveChanges,
+        QueryTrackingBehavior.NoTrackingWithIdentityResolution,
+        false
+    )]
+    [InlineData(
+        EntityState.Modified,
+        CascadeTiming.OnSaveChanges,
+        QueryTrackingBehavior.NoTrackingWithIdentityResolution,
+        false
+    )]
+    [InlineData(
+        EntityState.Deleted,
+        CascadeTiming.OnSaveChanges,
+        QueryTrackingBehavior.NoTrackingWithIdentityResolution,
+        false
+    )]
+    [InlineData(
+        EntityState.Detached,
+        CascadeTiming.OnSaveChanges,
+        QueryTrackingBehavior.NoTrackingWithIdentityResolution,
+        false
+    )]
+    [InlineData(
+        EntityState.Unchanged,
+        CascadeTiming.Immediate,
+        QueryTrackingBehavior.TrackAll,
+        true
+    )]
     [InlineData(EntityState.Added, CascadeTiming.Immediate, QueryTrackingBehavior.TrackAll, true)]
-    [InlineData(EntityState.Modified, CascadeTiming.Immediate, QueryTrackingBehavior.TrackAll, true)]
+    [InlineData(
+        EntityState.Modified,
+        CascadeTiming.Immediate,
+        QueryTrackingBehavior.TrackAll,
+        true
+    )]
     [InlineData(EntityState.Deleted, CascadeTiming.Immediate, QueryTrackingBehavior.TrackAll, true)]
-    [InlineData(EntityState.Detached, CascadeTiming.Immediate, QueryTrackingBehavior.TrackAll, true)]
-    [InlineData(EntityState.Unchanged, CascadeTiming.OnSaveChanges, QueryTrackingBehavior.TrackAll, true)]
-    [InlineData(EntityState.Added, CascadeTiming.OnSaveChanges, QueryTrackingBehavior.TrackAll, true)]
-    [InlineData(EntityState.Modified, CascadeTiming.OnSaveChanges, QueryTrackingBehavior.TrackAll, true)]
-    [InlineData(EntityState.Deleted, CascadeTiming.OnSaveChanges, QueryTrackingBehavior.TrackAll, true)]
-    [InlineData(EntityState.Detached, CascadeTiming.OnSaveChanges, QueryTrackingBehavior.TrackAll, true)]
-    [InlineData(EntityState.Unchanged, CascadeTiming.Immediate, QueryTrackingBehavior.NoTracking, true)]
+    [InlineData(
+        EntityState.Detached,
+        CascadeTiming.Immediate,
+        QueryTrackingBehavior.TrackAll,
+        true
+    )]
+    [InlineData(
+        EntityState.Unchanged,
+        CascadeTiming.OnSaveChanges,
+        QueryTrackingBehavior.TrackAll,
+        true
+    )]
+    [InlineData(
+        EntityState.Added,
+        CascadeTiming.OnSaveChanges,
+        QueryTrackingBehavior.TrackAll,
+        true
+    )]
+    [InlineData(
+        EntityState.Modified,
+        CascadeTiming.OnSaveChanges,
+        QueryTrackingBehavior.TrackAll,
+        true
+    )]
+    [InlineData(
+        EntityState.Deleted,
+        CascadeTiming.OnSaveChanges,
+        QueryTrackingBehavior.TrackAll,
+        true
+    )]
+    [InlineData(
+        EntityState.Detached,
+        CascadeTiming.OnSaveChanges,
+        QueryTrackingBehavior.TrackAll,
+        true
+    )]
+    [InlineData(
+        EntityState.Unchanged,
+        CascadeTiming.Immediate,
+        QueryTrackingBehavior.NoTracking,
+        true
+    )]
     [InlineData(EntityState.Added, CascadeTiming.Immediate, QueryTrackingBehavior.NoTracking, true)]
-    [InlineData(EntityState.Modified, CascadeTiming.Immediate, QueryTrackingBehavior.NoTracking, true)]
-    [InlineData(EntityState.Deleted, CascadeTiming.Immediate, QueryTrackingBehavior.NoTracking, true)]
-    [InlineData(EntityState.Detached, CascadeTiming.Immediate, QueryTrackingBehavior.NoTracking, true)]
-    [InlineData(EntityState.Unchanged, CascadeTiming.OnSaveChanges, QueryTrackingBehavior.NoTracking, true)]
-    [InlineData(EntityState.Added, CascadeTiming.OnSaveChanges, QueryTrackingBehavior.NoTracking, true)]
-    [InlineData(EntityState.Modified, CascadeTiming.OnSaveChanges, QueryTrackingBehavior.NoTracking, true)]
-    [InlineData(EntityState.Deleted, CascadeTiming.OnSaveChanges, QueryTrackingBehavior.NoTracking, true)]
-    [InlineData(EntityState.Detached, CascadeTiming.OnSaveChanges, QueryTrackingBehavior.NoTracking, true)]
-    [InlineData(EntityState.Unchanged, CascadeTiming.Immediate, QueryTrackingBehavior.NoTrackingWithIdentityResolution, true)]
-    [InlineData(EntityState.Added, CascadeTiming.Immediate, QueryTrackingBehavior.NoTrackingWithIdentityResolution, true)]
-    [InlineData(EntityState.Modified, CascadeTiming.Immediate, QueryTrackingBehavior.NoTrackingWithIdentityResolution, true)]
-    [InlineData(EntityState.Deleted, CascadeTiming.Immediate, QueryTrackingBehavior.NoTrackingWithIdentityResolution, true)]
-    [InlineData(EntityState.Detached, CascadeTiming.Immediate, QueryTrackingBehavior.NoTrackingWithIdentityResolution, true)]
-    [InlineData(EntityState.Unchanged, CascadeTiming.OnSaveChanges, QueryTrackingBehavior.NoTrackingWithIdentityResolution, true)]
-    [InlineData(EntityState.Added, CascadeTiming.OnSaveChanges, QueryTrackingBehavior.NoTrackingWithIdentityResolution, true)]
-    [InlineData(EntityState.Modified, CascadeTiming.OnSaveChanges, QueryTrackingBehavior.NoTrackingWithIdentityResolution, true)]
-    [InlineData(EntityState.Deleted, CascadeTiming.OnSaveChanges, QueryTrackingBehavior.NoTrackingWithIdentityResolution, true)]
-    [InlineData(EntityState.Detached, CascadeTiming.OnSaveChanges, QueryTrackingBehavior.NoTrackingWithIdentityResolution, true)]
+    [InlineData(
+        EntityState.Modified,
+        CascadeTiming.Immediate,
+        QueryTrackingBehavior.NoTracking,
+        true
+    )]
+    [InlineData(
+        EntityState.Deleted,
+        CascadeTiming.Immediate,
+        QueryTrackingBehavior.NoTracking,
+        true
+    )]
+    [InlineData(
+        EntityState.Detached,
+        CascadeTiming.Immediate,
+        QueryTrackingBehavior.NoTracking,
+        true
+    )]
+    [InlineData(
+        EntityState.Unchanged,
+        CascadeTiming.OnSaveChanges,
+        QueryTrackingBehavior.NoTracking,
+        true
+    )]
+    [InlineData(
+        EntityState.Added,
+        CascadeTiming.OnSaveChanges,
+        QueryTrackingBehavior.NoTracking,
+        true
+    )]
+    [InlineData(
+        EntityState.Modified,
+        CascadeTiming.OnSaveChanges,
+        QueryTrackingBehavior.NoTracking,
+        true
+    )]
+    [InlineData(
+        EntityState.Deleted,
+        CascadeTiming.OnSaveChanges,
+        QueryTrackingBehavior.NoTracking,
+        true
+    )]
+    [InlineData(
+        EntityState.Detached,
+        CascadeTiming.OnSaveChanges,
+        QueryTrackingBehavior.NoTracking,
+        true
+    )]
+    [InlineData(
+        EntityState.Unchanged,
+        CascadeTiming.Immediate,
+        QueryTrackingBehavior.NoTrackingWithIdentityResolution,
+        true
+    )]
+    [InlineData(
+        EntityState.Added,
+        CascadeTiming.Immediate,
+        QueryTrackingBehavior.NoTrackingWithIdentityResolution,
+        true
+    )]
+    [InlineData(
+        EntityState.Modified,
+        CascadeTiming.Immediate,
+        QueryTrackingBehavior.NoTrackingWithIdentityResolution,
+        true
+    )]
+    [InlineData(
+        EntityState.Deleted,
+        CascadeTiming.Immediate,
+        QueryTrackingBehavior.NoTrackingWithIdentityResolution,
+        true
+    )]
+    [InlineData(
+        EntityState.Detached,
+        CascadeTiming.Immediate,
+        QueryTrackingBehavior.NoTrackingWithIdentityResolution,
+        true
+    )]
+    [InlineData(
+        EntityState.Unchanged,
+        CascadeTiming.OnSaveChanges,
+        QueryTrackingBehavior.NoTrackingWithIdentityResolution,
+        true
+    )]
+    [InlineData(
+        EntityState.Added,
+        CascadeTiming.OnSaveChanges,
+        QueryTrackingBehavior.NoTrackingWithIdentityResolution,
+        true
+    )]
+    [InlineData(
+        EntityState.Modified,
+        CascadeTiming.OnSaveChanges,
+        QueryTrackingBehavior.NoTrackingWithIdentityResolution,
+        true
+    )]
+    [InlineData(
+        EntityState.Deleted,
+        CascadeTiming.OnSaveChanges,
+        QueryTrackingBehavior.NoTrackingWithIdentityResolution,
+        true
+    )]
+    [InlineData(
+        EntityState.Detached,
+        CascadeTiming.OnSaveChanges,
+        QueryTrackingBehavior.NoTrackingWithIdentityResolution,
+        true
+    )]
     public virtual async Task Lazy_load_collection_already_loaded(
         EntityState state,
         CascadeTiming deleteOrphansTiming,
         QueryTrackingBehavior queryTrackingBehavior,
-        bool async)
+        bool async
+    )
     {
         using var context = CreateContext(lazyLoadingEnabled: true);
         context.ChangeTracker.QueryTrackingBehavior = queryTrackingBehavior;
@@ -1083,9 +1600,11 @@ public abstract partial class LoadTestBase<TFixture>
 
         Assert.Equal(2, parent.Children.Count());
 
-        if (queryTrackingBehavior == QueryTrackingBehavior.TrackAll
+        if (
+            queryTrackingBehavior == QueryTrackingBehavior.TrackAll
             && state == EntityState.Deleted
-            && deleteOrphansTiming != CascadeTiming.Never)
+            && deleteOrphansTiming != CascadeTiming.Never
+        )
         {
             Assert.All(parent.Children.Select(e => e.Parent), c => Assert.Null(c));
         }
@@ -1104,10 +1623,22 @@ public abstract partial class LoadTestBase<TFixture>
     [InlineData(EntityState.Added, QueryTrackingBehavior.NoTracking, false)]
     [InlineData(EntityState.Modified, QueryTrackingBehavior.NoTracking, false)]
     [InlineData(EntityState.Detached, QueryTrackingBehavior.NoTracking, false)]
-    [InlineData(EntityState.Unchanged, QueryTrackingBehavior.NoTrackingWithIdentityResolution, false)]
+    [InlineData(
+        EntityState.Unchanged,
+        QueryTrackingBehavior.NoTrackingWithIdentityResolution,
+        false
+    )]
     [InlineData(EntityState.Added, QueryTrackingBehavior.NoTrackingWithIdentityResolution, false)]
-    [InlineData(EntityState.Modified, QueryTrackingBehavior.NoTrackingWithIdentityResolution, false)]
-    [InlineData(EntityState.Detached, QueryTrackingBehavior.NoTrackingWithIdentityResolution, false)]
+    [InlineData(
+        EntityState.Modified,
+        QueryTrackingBehavior.NoTrackingWithIdentityResolution,
+        false
+    )]
+    [InlineData(
+        EntityState.Detached,
+        QueryTrackingBehavior.NoTrackingWithIdentityResolution,
+        false
+    )]
     [InlineData(EntityState.Unchanged, QueryTrackingBehavior.TrackAll, true)]
     [InlineData(EntityState.Added, QueryTrackingBehavior.TrackAll, true)]
     [InlineData(EntityState.Modified, QueryTrackingBehavior.TrackAll, true)]
@@ -1116,14 +1647,19 @@ public abstract partial class LoadTestBase<TFixture>
     [InlineData(EntityState.Added, QueryTrackingBehavior.NoTracking, true)]
     [InlineData(EntityState.Modified, QueryTrackingBehavior.NoTracking, true)]
     [InlineData(EntityState.Detached, QueryTrackingBehavior.NoTracking, true)]
-    [InlineData(EntityState.Unchanged, QueryTrackingBehavior.NoTrackingWithIdentityResolution, true)]
+    [InlineData(
+        EntityState.Unchanged,
+        QueryTrackingBehavior.NoTrackingWithIdentityResolution,
+        true
+    )]
     [InlineData(EntityState.Added, QueryTrackingBehavior.NoTrackingWithIdentityResolution, true)]
     [InlineData(EntityState.Modified, QueryTrackingBehavior.NoTrackingWithIdentityResolution, true)]
     [InlineData(EntityState.Detached, QueryTrackingBehavior.NoTrackingWithIdentityResolution, true)]
     public virtual async Task Lazy_load_collection_already_partially_loaded(
         EntityState state,
         QueryTrackingBehavior queryTrackingBehavior,
-        bool async)
+        bool async
+    )
     {
         using var context = CreateContext(lazyLoadingEnabled: true);
         context.ChangeTracker.QueryTrackingBehavior = queryTrackingBehavior;
@@ -1159,7 +1695,13 @@ public abstract partial class LoadTestBase<TFixture>
 
         RecordLog();
 
-        if (!LazyLoadingEnabled || (state == EntityState.Detached && queryTrackingBehavior == QueryTrackingBehavior.TrackAll))
+        if (
+            !LazyLoadingEnabled
+            || (
+                state == EntityState.Detached
+                && queryTrackingBehavior == QueryTrackingBehavior.TrackAll
+            )
+        )
         {
             Assert.False(collectionEntry.IsLoaded); // Explicitly detached
             Assert.Equal(1, parent.Children.Count());
@@ -1174,9 +1716,12 @@ public abstract partial class LoadTestBase<TFixture>
 
             // Note that when detached there is no identity resolution, so loading results in duplicates
             Assert.Equal(
-                state == EntityState.Detached && queryTrackingBehavior != QueryTrackingBehavior.NoTrackingWithIdentityResolution
+                state == EntityState.Detached
+                && queryTrackingBehavior != QueryTrackingBehavior.NoTrackingWithIdentityResolution
                     ? 3
-                    : 2, parent.Children.Count());
+                    : 2,
+                parent.Children.Count()
+            );
 
             Assert.All(parent.Children.Select(e => e.Parent), p => Assert.Same(parent, p));
         }
@@ -1193,11 +1738,23 @@ public abstract partial class LoadTestBase<TFixture>
     [InlineData(EntityState.Modified, QueryTrackingBehavior.NoTracking, false)]
     [InlineData(EntityState.Deleted, QueryTrackingBehavior.NoTracking, false)]
     [InlineData(EntityState.Detached, QueryTrackingBehavior.NoTracking, false)]
-    [InlineData(EntityState.Unchanged, QueryTrackingBehavior.NoTrackingWithIdentityResolution, false)]
+    [InlineData(
+        EntityState.Unchanged,
+        QueryTrackingBehavior.NoTrackingWithIdentityResolution,
+        false
+    )]
     [InlineData(EntityState.Added, QueryTrackingBehavior.NoTrackingWithIdentityResolution, false)]
-    [InlineData(EntityState.Modified, QueryTrackingBehavior.NoTrackingWithIdentityResolution, false)]
+    [InlineData(
+        EntityState.Modified,
+        QueryTrackingBehavior.NoTrackingWithIdentityResolution,
+        false
+    )]
     [InlineData(EntityState.Deleted, QueryTrackingBehavior.NoTrackingWithIdentityResolution, false)]
-    [InlineData(EntityState.Detached, QueryTrackingBehavior.NoTrackingWithIdentityResolution, false)]
+    [InlineData(
+        EntityState.Detached,
+        QueryTrackingBehavior.NoTrackingWithIdentityResolution,
+        false
+    )]
     [InlineData(EntityState.Unchanged, QueryTrackingBehavior.TrackAll, true)]
     [InlineData(EntityState.Added, QueryTrackingBehavior.TrackAll, true)]
     [InlineData(EntityState.Modified, QueryTrackingBehavior.TrackAll, true)]
@@ -1208,7 +1765,11 @@ public abstract partial class LoadTestBase<TFixture>
     [InlineData(EntityState.Modified, QueryTrackingBehavior.NoTracking, true)]
     [InlineData(EntityState.Deleted, QueryTrackingBehavior.NoTracking, true)]
     [InlineData(EntityState.Detached, QueryTrackingBehavior.NoTracking, true)]
-    [InlineData(EntityState.Unchanged, QueryTrackingBehavior.NoTrackingWithIdentityResolution, true)]
+    [InlineData(
+        EntityState.Unchanged,
+        QueryTrackingBehavior.NoTrackingWithIdentityResolution,
+        true
+    )]
     [InlineData(EntityState.Added, QueryTrackingBehavior.NoTrackingWithIdentityResolution, true)]
     [InlineData(EntityState.Modified, QueryTrackingBehavior.NoTrackingWithIdentityResolution, true)]
     [InlineData(EntityState.Deleted, QueryTrackingBehavior.NoTrackingWithIdentityResolution, true)]
@@ -1216,7 +1777,8 @@ public abstract partial class LoadTestBase<TFixture>
     public virtual async Task Lazy_load_many_to_one_reference_to_principal_already_loaded(
         EntityState state,
         QueryTrackingBehavior queryTrackingBehavior,
-        bool async)
+        bool async
+    )
     {
         using var context = CreateContext(lazyLoadingEnabled: true);
         context.ChangeTracker.QueryTrackingBehavior = queryTrackingBehavior;
@@ -1251,7 +1813,10 @@ public abstract partial class LoadTestBase<TFixture>
             RecordLog();
             context.ChangeTracker.LazyLoadingEnabled = false;
 
-            Assert.Equal(state == EntityState.Detached ? 0 : 2, context.ChangeTracker.Entries().Count());
+            Assert.Equal(
+                state == EntityState.Detached ? 0 : 2,
+                context.ChangeTracker.Entries().Count()
+            );
 
             Assert.Same(child, child.Parent.Children.Single());
 
@@ -1276,11 +1841,23 @@ public abstract partial class LoadTestBase<TFixture>
     [InlineData(EntityState.Modified, QueryTrackingBehavior.NoTracking, false)]
     [InlineData(EntityState.Deleted, QueryTrackingBehavior.NoTracking, false)]
     [InlineData(EntityState.Detached, QueryTrackingBehavior.NoTracking, false)]
-    [InlineData(EntityState.Unchanged, QueryTrackingBehavior.NoTrackingWithIdentityResolution, false)]
+    [InlineData(
+        EntityState.Unchanged,
+        QueryTrackingBehavior.NoTrackingWithIdentityResolution,
+        false
+    )]
     [InlineData(EntityState.Added, QueryTrackingBehavior.NoTrackingWithIdentityResolution, false)]
-    [InlineData(EntityState.Modified, QueryTrackingBehavior.NoTrackingWithIdentityResolution, false)]
+    [InlineData(
+        EntityState.Modified,
+        QueryTrackingBehavior.NoTrackingWithIdentityResolution,
+        false
+    )]
     [InlineData(EntityState.Deleted, QueryTrackingBehavior.NoTrackingWithIdentityResolution, false)]
-    [InlineData(EntityState.Detached, QueryTrackingBehavior.NoTrackingWithIdentityResolution, false)]
+    [InlineData(
+        EntityState.Detached,
+        QueryTrackingBehavior.NoTrackingWithIdentityResolution,
+        false
+    )]
     [InlineData(EntityState.Unchanged, QueryTrackingBehavior.TrackAll, true)]
     [InlineData(EntityState.Added, QueryTrackingBehavior.TrackAll, true)]
     [InlineData(EntityState.Modified, QueryTrackingBehavior.TrackAll, true)]
@@ -1291,7 +1868,11 @@ public abstract partial class LoadTestBase<TFixture>
     [InlineData(EntityState.Modified, QueryTrackingBehavior.NoTracking, true)]
     [InlineData(EntityState.Deleted, QueryTrackingBehavior.NoTracking, true)]
     [InlineData(EntityState.Detached, QueryTrackingBehavior.NoTracking, true)]
-    [InlineData(EntityState.Unchanged, QueryTrackingBehavior.NoTrackingWithIdentityResolution, true)]
+    [InlineData(
+        EntityState.Unchanged,
+        QueryTrackingBehavior.NoTrackingWithIdentityResolution,
+        true
+    )]
     [InlineData(EntityState.Added, QueryTrackingBehavior.NoTrackingWithIdentityResolution, true)]
     [InlineData(EntityState.Modified, QueryTrackingBehavior.NoTrackingWithIdentityResolution, true)]
     [InlineData(EntityState.Deleted, QueryTrackingBehavior.NoTrackingWithIdentityResolution, true)]
@@ -1299,7 +1880,8 @@ public abstract partial class LoadTestBase<TFixture>
     public virtual async Task Lazy_load_one_to_one_reference_to_principal_already_loaded(
         EntityState state,
         QueryTrackingBehavior queryTrackingBehavior,
-        bool async)
+        bool async
+    )
     {
         using var context = CreateContext(lazyLoadingEnabled: true);
         context.ChangeTracker.QueryTrackingBehavior = queryTrackingBehavior;
@@ -1334,7 +1916,10 @@ public abstract partial class LoadTestBase<TFixture>
             RecordLog();
             context.ChangeTracker.LazyLoadingEnabled = false;
 
-            Assert.Equal(state == EntityState.Detached ? 0 : 2, context.ChangeTracker.Entries().Count());
+            Assert.Equal(
+                state == EntityState.Detached ? 0 : 2,
+                context.ChangeTracker.Entries().Count()
+            );
 
             Assert.Same(single, single.Parent.Single);
 
@@ -1349,71 +1934,352 @@ public abstract partial class LoadTestBase<TFixture>
     }
 
     [ConditionalTheory]
-    [InlineData(EntityState.Unchanged, CascadeTiming.Immediate, QueryTrackingBehavior.TrackAll, false)]
+    [InlineData(
+        EntityState.Unchanged,
+        CascadeTiming.Immediate,
+        QueryTrackingBehavior.TrackAll,
+        false
+    )]
     [InlineData(EntityState.Added, CascadeTiming.Immediate, QueryTrackingBehavior.TrackAll, false)]
-    [InlineData(EntityState.Modified, CascadeTiming.Immediate, QueryTrackingBehavior.TrackAll, false)]
-    [InlineData(EntityState.Deleted, CascadeTiming.Immediate, QueryTrackingBehavior.TrackAll, false)]
-    [InlineData(EntityState.Detached, CascadeTiming.Immediate, QueryTrackingBehavior.TrackAll, false)]
-    [InlineData(EntityState.Unchanged, CascadeTiming.OnSaveChanges, QueryTrackingBehavior.TrackAll, false)]
-    [InlineData(EntityState.Added, CascadeTiming.OnSaveChanges, QueryTrackingBehavior.TrackAll, false)]
-    [InlineData(EntityState.Modified, CascadeTiming.OnSaveChanges, QueryTrackingBehavior.TrackAll, false)]
-    [InlineData(EntityState.Deleted, CascadeTiming.OnSaveChanges, QueryTrackingBehavior.TrackAll, false)]
-    [InlineData(EntityState.Detached, CascadeTiming.OnSaveChanges, QueryTrackingBehavior.TrackAll, false)]
-    [InlineData(EntityState.Unchanged, CascadeTiming.Immediate, QueryTrackingBehavior.NoTracking, false)]
-    [InlineData(EntityState.Added, CascadeTiming.Immediate, QueryTrackingBehavior.NoTracking, false)]
-    [InlineData(EntityState.Modified, CascadeTiming.Immediate, QueryTrackingBehavior.NoTracking, false)]
-    [InlineData(EntityState.Deleted, CascadeTiming.Immediate, QueryTrackingBehavior.NoTracking, false)]
-    [InlineData(EntityState.Detached, CascadeTiming.Immediate, QueryTrackingBehavior.NoTracking, false)]
-    [InlineData(EntityState.Unchanged, CascadeTiming.OnSaveChanges, QueryTrackingBehavior.NoTracking, false)]
-    [InlineData(EntityState.Added, CascadeTiming.OnSaveChanges, QueryTrackingBehavior.NoTracking, false)]
-    [InlineData(EntityState.Modified, CascadeTiming.OnSaveChanges, QueryTrackingBehavior.NoTracking, false)]
-    [InlineData(EntityState.Deleted, CascadeTiming.OnSaveChanges, QueryTrackingBehavior.NoTracking, false)]
-    [InlineData(EntityState.Detached, CascadeTiming.OnSaveChanges, QueryTrackingBehavior.NoTracking, false)]
-    [InlineData(EntityState.Unchanged, CascadeTiming.Immediate, QueryTrackingBehavior.NoTrackingWithIdentityResolution, false)]
-    [InlineData(EntityState.Added, CascadeTiming.Immediate, QueryTrackingBehavior.NoTrackingWithIdentityResolution, false)]
-    [InlineData(EntityState.Modified, CascadeTiming.Immediate, QueryTrackingBehavior.NoTrackingWithIdentityResolution, false)]
-    [InlineData(EntityState.Deleted, CascadeTiming.Immediate, QueryTrackingBehavior.NoTrackingWithIdentityResolution, false)]
-    [InlineData(EntityState.Detached, CascadeTiming.Immediate, QueryTrackingBehavior.NoTrackingWithIdentityResolution, false)]
-    [InlineData(EntityState.Unchanged, CascadeTiming.OnSaveChanges, QueryTrackingBehavior.NoTrackingWithIdentityResolution, false)]
-    [InlineData(EntityState.Added, CascadeTiming.OnSaveChanges, QueryTrackingBehavior.NoTrackingWithIdentityResolution, false)]
-    [InlineData(EntityState.Modified, CascadeTiming.OnSaveChanges, QueryTrackingBehavior.NoTrackingWithIdentityResolution, false)]
-    [InlineData(EntityState.Deleted, CascadeTiming.OnSaveChanges, QueryTrackingBehavior.NoTrackingWithIdentityResolution, false)]
-    [InlineData(EntityState.Detached, CascadeTiming.OnSaveChanges, QueryTrackingBehavior.NoTrackingWithIdentityResolution, false)]
-    [InlineData(EntityState.Unchanged, CascadeTiming.Immediate, QueryTrackingBehavior.TrackAll, true)]
+    [InlineData(
+        EntityState.Modified,
+        CascadeTiming.Immediate,
+        QueryTrackingBehavior.TrackAll,
+        false
+    )]
+    [InlineData(
+        EntityState.Deleted,
+        CascadeTiming.Immediate,
+        QueryTrackingBehavior.TrackAll,
+        false
+    )]
+    [InlineData(
+        EntityState.Detached,
+        CascadeTiming.Immediate,
+        QueryTrackingBehavior.TrackAll,
+        false
+    )]
+    [InlineData(
+        EntityState.Unchanged,
+        CascadeTiming.OnSaveChanges,
+        QueryTrackingBehavior.TrackAll,
+        false
+    )]
+    [InlineData(
+        EntityState.Added,
+        CascadeTiming.OnSaveChanges,
+        QueryTrackingBehavior.TrackAll,
+        false
+    )]
+    [InlineData(
+        EntityState.Modified,
+        CascadeTiming.OnSaveChanges,
+        QueryTrackingBehavior.TrackAll,
+        false
+    )]
+    [InlineData(
+        EntityState.Deleted,
+        CascadeTiming.OnSaveChanges,
+        QueryTrackingBehavior.TrackAll,
+        false
+    )]
+    [InlineData(
+        EntityState.Detached,
+        CascadeTiming.OnSaveChanges,
+        QueryTrackingBehavior.TrackAll,
+        false
+    )]
+    [InlineData(
+        EntityState.Unchanged,
+        CascadeTiming.Immediate,
+        QueryTrackingBehavior.NoTracking,
+        false
+    )]
+    [InlineData(
+        EntityState.Added,
+        CascadeTiming.Immediate,
+        QueryTrackingBehavior.NoTracking,
+        false
+    )]
+    [InlineData(
+        EntityState.Modified,
+        CascadeTiming.Immediate,
+        QueryTrackingBehavior.NoTracking,
+        false
+    )]
+    [InlineData(
+        EntityState.Deleted,
+        CascadeTiming.Immediate,
+        QueryTrackingBehavior.NoTracking,
+        false
+    )]
+    [InlineData(
+        EntityState.Detached,
+        CascadeTiming.Immediate,
+        QueryTrackingBehavior.NoTracking,
+        false
+    )]
+    [InlineData(
+        EntityState.Unchanged,
+        CascadeTiming.OnSaveChanges,
+        QueryTrackingBehavior.NoTracking,
+        false
+    )]
+    [InlineData(
+        EntityState.Added,
+        CascadeTiming.OnSaveChanges,
+        QueryTrackingBehavior.NoTracking,
+        false
+    )]
+    [InlineData(
+        EntityState.Modified,
+        CascadeTiming.OnSaveChanges,
+        QueryTrackingBehavior.NoTracking,
+        false
+    )]
+    [InlineData(
+        EntityState.Deleted,
+        CascadeTiming.OnSaveChanges,
+        QueryTrackingBehavior.NoTracking,
+        false
+    )]
+    [InlineData(
+        EntityState.Detached,
+        CascadeTiming.OnSaveChanges,
+        QueryTrackingBehavior.NoTracking,
+        false
+    )]
+    [InlineData(
+        EntityState.Unchanged,
+        CascadeTiming.Immediate,
+        QueryTrackingBehavior.NoTrackingWithIdentityResolution,
+        false
+    )]
+    [InlineData(
+        EntityState.Added,
+        CascadeTiming.Immediate,
+        QueryTrackingBehavior.NoTrackingWithIdentityResolution,
+        false
+    )]
+    [InlineData(
+        EntityState.Modified,
+        CascadeTiming.Immediate,
+        QueryTrackingBehavior.NoTrackingWithIdentityResolution,
+        false
+    )]
+    [InlineData(
+        EntityState.Deleted,
+        CascadeTiming.Immediate,
+        QueryTrackingBehavior.NoTrackingWithIdentityResolution,
+        false
+    )]
+    [InlineData(
+        EntityState.Detached,
+        CascadeTiming.Immediate,
+        QueryTrackingBehavior.NoTrackingWithIdentityResolution,
+        false
+    )]
+    [InlineData(
+        EntityState.Unchanged,
+        CascadeTiming.OnSaveChanges,
+        QueryTrackingBehavior.NoTrackingWithIdentityResolution,
+        false
+    )]
+    [InlineData(
+        EntityState.Added,
+        CascadeTiming.OnSaveChanges,
+        QueryTrackingBehavior.NoTrackingWithIdentityResolution,
+        false
+    )]
+    [InlineData(
+        EntityState.Modified,
+        CascadeTiming.OnSaveChanges,
+        QueryTrackingBehavior.NoTrackingWithIdentityResolution,
+        false
+    )]
+    [InlineData(
+        EntityState.Deleted,
+        CascadeTiming.OnSaveChanges,
+        QueryTrackingBehavior.NoTrackingWithIdentityResolution,
+        false
+    )]
+    [InlineData(
+        EntityState.Detached,
+        CascadeTiming.OnSaveChanges,
+        QueryTrackingBehavior.NoTrackingWithIdentityResolution,
+        false
+    )]
+    [InlineData(
+        EntityState.Unchanged,
+        CascadeTiming.Immediate,
+        QueryTrackingBehavior.TrackAll,
+        true
+    )]
     [InlineData(EntityState.Added, CascadeTiming.Immediate, QueryTrackingBehavior.TrackAll, true)]
-    [InlineData(EntityState.Modified, CascadeTiming.Immediate, QueryTrackingBehavior.TrackAll, true)]
+    [InlineData(
+        EntityState.Modified,
+        CascadeTiming.Immediate,
+        QueryTrackingBehavior.TrackAll,
+        true
+    )]
     [InlineData(EntityState.Deleted, CascadeTiming.Immediate, QueryTrackingBehavior.TrackAll, true)]
-    [InlineData(EntityState.Detached, CascadeTiming.Immediate, QueryTrackingBehavior.TrackAll, true)]
-    [InlineData(EntityState.Unchanged, CascadeTiming.OnSaveChanges, QueryTrackingBehavior.TrackAll, true)]
-    [InlineData(EntityState.Added, CascadeTiming.OnSaveChanges, QueryTrackingBehavior.TrackAll, true)]
-    [InlineData(EntityState.Modified, CascadeTiming.OnSaveChanges, QueryTrackingBehavior.TrackAll, true)]
-    [InlineData(EntityState.Deleted, CascadeTiming.OnSaveChanges, QueryTrackingBehavior.TrackAll, true)]
-    [InlineData(EntityState.Detached, CascadeTiming.OnSaveChanges, QueryTrackingBehavior.TrackAll, true)]
-    [InlineData(EntityState.Unchanged, CascadeTiming.Immediate, QueryTrackingBehavior.NoTracking, true)]
+    [InlineData(
+        EntityState.Detached,
+        CascadeTiming.Immediate,
+        QueryTrackingBehavior.TrackAll,
+        true
+    )]
+    [InlineData(
+        EntityState.Unchanged,
+        CascadeTiming.OnSaveChanges,
+        QueryTrackingBehavior.TrackAll,
+        true
+    )]
+    [InlineData(
+        EntityState.Added,
+        CascadeTiming.OnSaveChanges,
+        QueryTrackingBehavior.TrackAll,
+        true
+    )]
+    [InlineData(
+        EntityState.Modified,
+        CascadeTiming.OnSaveChanges,
+        QueryTrackingBehavior.TrackAll,
+        true
+    )]
+    [InlineData(
+        EntityState.Deleted,
+        CascadeTiming.OnSaveChanges,
+        QueryTrackingBehavior.TrackAll,
+        true
+    )]
+    [InlineData(
+        EntityState.Detached,
+        CascadeTiming.OnSaveChanges,
+        QueryTrackingBehavior.TrackAll,
+        true
+    )]
+    [InlineData(
+        EntityState.Unchanged,
+        CascadeTiming.Immediate,
+        QueryTrackingBehavior.NoTracking,
+        true
+    )]
     [InlineData(EntityState.Added, CascadeTiming.Immediate, QueryTrackingBehavior.NoTracking, true)]
-    [InlineData(EntityState.Modified, CascadeTiming.Immediate, QueryTrackingBehavior.NoTracking, true)]
-    [InlineData(EntityState.Deleted, CascadeTiming.Immediate, QueryTrackingBehavior.NoTracking, true)]
-    [InlineData(EntityState.Detached, CascadeTiming.Immediate, QueryTrackingBehavior.NoTracking, true)]
-    [InlineData(EntityState.Unchanged, CascadeTiming.OnSaveChanges, QueryTrackingBehavior.NoTracking, true)]
-    [InlineData(EntityState.Added, CascadeTiming.OnSaveChanges, QueryTrackingBehavior.NoTracking, true)]
-    [InlineData(EntityState.Modified, CascadeTiming.OnSaveChanges, QueryTrackingBehavior.NoTracking, true)]
-    [InlineData(EntityState.Deleted, CascadeTiming.OnSaveChanges, QueryTrackingBehavior.NoTracking, true)]
-    [InlineData(EntityState.Detached, CascadeTiming.OnSaveChanges, QueryTrackingBehavior.NoTracking, true)]
-    [InlineData(EntityState.Unchanged, CascadeTiming.Immediate, QueryTrackingBehavior.NoTrackingWithIdentityResolution, true)]
-    [InlineData(EntityState.Added, CascadeTiming.Immediate, QueryTrackingBehavior.NoTrackingWithIdentityResolution, true)]
-    [InlineData(EntityState.Modified, CascadeTiming.Immediate, QueryTrackingBehavior.NoTrackingWithIdentityResolution, true)]
-    [InlineData(EntityState.Deleted, CascadeTiming.Immediate, QueryTrackingBehavior.NoTrackingWithIdentityResolution, true)]
-    [InlineData(EntityState.Detached, CascadeTiming.Immediate, QueryTrackingBehavior.NoTrackingWithIdentityResolution, true)]
-    [InlineData(EntityState.Unchanged, CascadeTiming.OnSaveChanges, QueryTrackingBehavior.NoTrackingWithIdentityResolution, true)]
-    [InlineData(EntityState.Added, CascadeTiming.OnSaveChanges, QueryTrackingBehavior.NoTrackingWithIdentityResolution, true)]
-    [InlineData(EntityState.Modified, CascadeTiming.OnSaveChanges, QueryTrackingBehavior.NoTrackingWithIdentityResolution, true)]
-    [InlineData(EntityState.Deleted, CascadeTiming.OnSaveChanges, QueryTrackingBehavior.NoTrackingWithIdentityResolution, true)]
-    [InlineData(EntityState.Detached, CascadeTiming.OnSaveChanges, QueryTrackingBehavior.NoTrackingWithIdentityResolution, true)]
+    [InlineData(
+        EntityState.Modified,
+        CascadeTiming.Immediate,
+        QueryTrackingBehavior.NoTracking,
+        true
+    )]
+    [InlineData(
+        EntityState.Deleted,
+        CascadeTiming.Immediate,
+        QueryTrackingBehavior.NoTracking,
+        true
+    )]
+    [InlineData(
+        EntityState.Detached,
+        CascadeTiming.Immediate,
+        QueryTrackingBehavior.NoTracking,
+        true
+    )]
+    [InlineData(
+        EntityState.Unchanged,
+        CascadeTiming.OnSaveChanges,
+        QueryTrackingBehavior.NoTracking,
+        true
+    )]
+    [InlineData(
+        EntityState.Added,
+        CascadeTiming.OnSaveChanges,
+        QueryTrackingBehavior.NoTracking,
+        true
+    )]
+    [InlineData(
+        EntityState.Modified,
+        CascadeTiming.OnSaveChanges,
+        QueryTrackingBehavior.NoTracking,
+        true
+    )]
+    [InlineData(
+        EntityState.Deleted,
+        CascadeTiming.OnSaveChanges,
+        QueryTrackingBehavior.NoTracking,
+        true
+    )]
+    [InlineData(
+        EntityState.Detached,
+        CascadeTiming.OnSaveChanges,
+        QueryTrackingBehavior.NoTracking,
+        true
+    )]
+    [InlineData(
+        EntityState.Unchanged,
+        CascadeTiming.Immediate,
+        QueryTrackingBehavior.NoTrackingWithIdentityResolution,
+        true
+    )]
+    [InlineData(
+        EntityState.Added,
+        CascadeTiming.Immediate,
+        QueryTrackingBehavior.NoTrackingWithIdentityResolution,
+        true
+    )]
+    [InlineData(
+        EntityState.Modified,
+        CascadeTiming.Immediate,
+        QueryTrackingBehavior.NoTrackingWithIdentityResolution,
+        true
+    )]
+    [InlineData(
+        EntityState.Deleted,
+        CascadeTiming.Immediate,
+        QueryTrackingBehavior.NoTrackingWithIdentityResolution,
+        true
+    )]
+    [InlineData(
+        EntityState.Detached,
+        CascadeTiming.Immediate,
+        QueryTrackingBehavior.NoTrackingWithIdentityResolution,
+        true
+    )]
+    [InlineData(
+        EntityState.Unchanged,
+        CascadeTiming.OnSaveChanges,
+        QueryTrackingBehavior.NoTrackingWithIdentityResolution,
+        true
+    )]
+    [InlineData(
+        EntityState.Added,
+        CascadeTiming.OnSaveChanges,
+        QueryTrackingBehavior.NoTrackingWithIdentityResolution,
+        true
+    )]
+    [InlineData(
+        EntityState.Modified,
+        CascadeTiming.OnSaveChanges,
+        QueryTrackingBehavior.NoTrackingWithIdentityResolution,
+        true
+    )]
+    [InlineData(
+        EntityState.Deleted,
+        CascadeTiming.OnSaveChanges,
+        QueryTrackingBehavior.NoTrackingWithIdentityResolution,
+        true
+    )]
+    [InlineData(
+        EntityState.Detached,
+        CascadeTiming.OnSaveChanges,
+        QueryTrackingBehavior.NoTrackingWithIdentityResolution,
+        true
+    )]
     public virtual async Task Lazy_load_one_to_one_reference_to_dependent_already_loaded(
         EntityState state,
         CascadeTiming deleteOrphansTiming,
         QueryTrackingBehavior queryTrackingBehavior,
-        bool async)
+        bool async
+    )
     {
         using var context = CreateContext(lazyLoadingEnabled: true);
         context.ChangeTracker.QueryTrackingBehavior = queryTrackingBehavior;
@@ -1443,10 +2309,12 @@ public abstract partial class LoadTestBase<TFixture>
         RecordLog();
         context.ChangeTracker.LazyLoadingEnabled = false;
 
-        Assert.Equal(state == EntityState.Detached ? 0 : 2, context.ChangeTracker.Entries().Count());
+        Assert.Equal(
+            state == EntityState.Detached ? 0 : 2,
+            context.ChangeTracker.Entries().Count()
+        );
 
-        if (state == EntityState.Deleted
-            && deleteOrphansTiming != CascadeTiming.Never)
+        if (state == EntityState.Deleted && deleteOrphansTiming != CascadeTiming.Never)
         {
             Assert.Same(parent, parent.Single.Parent);
         }
@@ -1478,7 +2346,8 @@ public abstract partial class LoadTestBase<TFixture>
     [InlineData(EntityState.Detached, QueryTrackingBehavior.NoTrackingWithIdentityResolution)]
     public virtual void Lazy_load_one_to_one_PK_to_PK_reference_to_principal_already_loaded(
         EntityState state,
-        QueryTrackingBehavior queryTrackingBehavior)
+        QueryTrackingBehavior queryTrackingBehavior
+    )
     {
         using var context = CreateContext(lazyLoadingEnabled: true);
         context.ChangeTracker.QueryTrackingBehavior = queryTrackingBehavior;
@@ -1506,7 +2375,10 @@ public abstract partial class LoadTestBase<TFixture>
         RecordLog();
         context.ChangeTracker.LazyLoadingEnabled = false;
 
-        Assert.Equal(state == EntityState.Detached ? 0 : 2, context.ChangeTracker.Entries().Count());
+        Assert.Equal(
+            state == EntityState.Detached ? 0 : 2,
+            context.ChangeTracker.Entries().Count()
+        );
 
         Assert.Same(single, single.Parent.SinglePkToPk);
 
@@ -1537,7 +2409,8 @@ public abstract partial class LoadTestBase<TFixture>
     [InlineData(EntityState.Detached, QueryTrackingBehavior.NoTrackingWithIdentityResolution)]
     public virtual void Lazy_load_one_to_one_PK_to_PK_reference_to_dependent_already_loaded(
         EntityState state,
-        QueryTrackingBehavior queryTrackingBehavior)
+        QueryTrackingBehavior queryTrackingBehavior
+    )
     {
         using var context = CreateContext(lazyLoadingEnabled: true);
         context.ChangeTracker.QueryTrackingBehavior = queryTrackingBehavior;
@@ -1565,7 +2438,10 @@ public abstract partial class LoadTestBase<TFixture>
         RecordLog();
         context.ChangeTracker.LazyLoadingEnabled = false;
 
-        Assert.Equal(state == EntityState.Detached ? 0 : 2, context.ChangeTracker.Entries().Count());
+        Assert.Equal(
+            state == EntityState.Detached ? 0 : 2,
+            context.ChangeTracker.Entries().Count()
+        );
 
         Assert.Same(parent, parent.SinglePkToPk.Parent);
 
@@ -1596,7 +2472,8 @@ public abstract partial class LoadTestBase<TFixture>
     [InlineData(EntityState.Detached, QueryTrackingBehavior.NoTrackingWithIdentityResolution)]
     public virtual void Lazy_load_many_to_one_reference_to_principal_alternate_key(
         EntityState state,
-        QueryTrackingBehavior queryTrackingBehavior)
+        QueryTrackingBehavior queryTrackingBehavior
+    )
     {
         using var context = CreateContext(lazyLoadingEnabled: true);
         context.ChangeTracker.QueryTrackingBehavior = queryTrackingBehavior;
@@ -1612,7 +2489,10 @@ public abstract partial class LoadTestBase<TFixture>
 
         if (LazyLoadingEnabled)
         {
-            if (state == EntityState.Detached && queryTrackingBehavior == QueryTrackingBehavior.TrackAll)
+            if (
+                state == EntityState.Detached
+                && queryTrackingBehavior == QueryTrackingBehavior.TrackAll
+            )
             {
                 Assert.Null(child.Parent); // Explicitly detached
             }
@@ -1632,7 +2512,10 @@ public abstract partial class LoadTestBase<TFixture>
                 RecordLog();
                 context.ChangeTracker.LazyLoadingEnabled = false;
 
-                Assert.Equal(state == EntityState.Detached ? 0 : 2, context.ChangeTracker.Entries().Count());
+                Assert.Equal(
+                    state == EntityState.Detached ? 0 : 2,
+                    context.ChangeTracker.Entries().Count()
+                );
 
                 if (state != EntityState.Deleted)
                 {
@@ -1681,7 +2564,8 @@ public abstract partial class LoadTestBase<TFixture>
     [InlineData(EntityState.Detached, QueryTrackingBehavior.NoTrackingWithIdentityResolution)]
     public virtual void Lazy_load_one_to_one_reference_to_principal_alternate_key(
         EntityState state,
-        QueryTrackingBehavior queryTrackingBehavior)
+        QueryTrackingBehavior queryTrackingBehavior
+    )
     {
         using var context = CreateContext(lazyLoadingEnabled: true);
         context.ChangeTracker.QueryTrackingBehavior = queryTrackingBehavior;
@@ -1697,7 +2581,10 @@ public abstract partial class LoadTestBase<TFixture>
 
         if (LazyLoadingEnabled)
         {
-            if (state == EntityState.Detached && queryTrackingBehavior == QueryTrackingBehavior.TrackAll)
+            if (
+                state == EntityState.Detached
+                && queryTrackingBehavior == QueryTrackingBehavior.TrackAll
+            )
             {
                 Assert.Null(single.Parent); // Explicitly detached
             }
@@ -1717,7 +2604,10 @@ public abstract partial class LoadTestBase<TFixture>
                 RecordLog();
                 context.ChangeTracker.LazyLoadingEnabled = false;
 
-                Assert.Equal(state == EntityState.Detached ? 0 : 2, context.ChangeTracker.Entries().Count());
+                Assert.Equal(
+                    state == EntityState.Detached ? 0 : 2,
+                    context.ChangeTracker.Entries().Count()
+                );
 
                 if (state != EntityState.Deleted)
                 {
@@ -1766,7 +2656,8 @@ public abstract partial class LoadTestBase<TFixture>
     [InlineData(EntityState.Detached, QueryTrackingBehavior.NoTrackingWithIdentityResolution)]
     public virtual void Lazy_load_one_to_one_reference_to_dependent_alternate_key(
         EntityState state,
-        QueryTrackingBehavior queryTrackingBehavior)
+        QueryTrackingBehavior queryTrackingBehavior
+    )
     {
         using var context = CreateContext(lazyLoadingEnabled: true);
         context.ChangeTracker.QueryTrackingBehavior = queryTrackingBehavior;
@@ -1782,7 +2673,10 @@ public abstract partial class LoadTestBase<TFixture>
 
         if (LazyLoadingEnabled)
         {
-            if (state == EntityState.Detached && queryTrackingBehavior == QueryTrackingBehavior.TrackAll)
+            if (
+                state == EntityState.Detached
+                && queryTrackingBehavior == QueryTrackingBehavior.TrackAll
+            )
             {
                 Assert.Null(parent.SingleAk); // Explicitly detached
             }
@@ -1795,7 +2689,10 @@ public abstract partial class LoadTestBase<TFixture>
                 RecordLog();
                 context.ChangeTracker.LazyLoadingEnabled = false;
 
-                Assert.Equal(state == EntityState.Detached ? 0 : 2, context.ChangeTracker.Entries().Count());
+                Assert.Equal(
+                    state == EntityState.Detached ? 0 : 2,
+                    context.ChangeTracker.Entries().Count()
+                );
 
                 Assert.Same(parent, parent.SingleAk.Parent);
 
@@ -1833,7 +2730,8 @@ public abstract partial class LoadTestBase<TFixture>
     [InlineData(EntityState.Detached, QueryTrackingBehavior.NoTrackingWithIdentityResolution)]
     public virtual void Lazy_load_many_to_one_reference_to_principal_null_FK_alternate_key(
         EntityState state,
-        QueryTrackingBehavior queryTrackingBehavior)
+        QueryTrackingBehavior queryTrackingBehavior
+    )
     {
         using var context = CreateContext(lazyLoadingEnabled: true);
         context.ChangeTracker.QueryTrackingBehavior = queryTrackingBehavior;
@@ -1856,7 +2754,10 @@ public abstract partial class LoadTestBase<TFixture>
             RecordLog();
             context.ChangeTracker.LazyLoadingEnabled = false;
 
-            Assert.Equal(state == EntityState.Detached ? 0 : 1, context.ChangeTracker.Entries().Count());
+            Assert.Equal(
+                state == EntityState.Detached ? 0 : 1,
+                context.ChangeTracker.Entries().Count()
+            );
             Assert.Null(child.Parent);
         }
         else
@@ -1884,7 +2785,8 @@ public abstract partial class LoadTestBase<TFixture>
     [InlineData(EntityState.Detached, QueryTrackingBehavior.NoTrackingWithIdentityResolution)]
     public virtual void Lazy_load_one_to_one_reference_to_principal_null_FK_alternate_key(
         EntityState state,
-        QueryTrackingBehavior queryTrackingBehavior)
+        QueryTrackingBehavior queryTrackingBehavior
+    )
     {
         using var context = CreateContext(lazyLoadingEnabled: true);
         context.ChangeTracker.QueryTrackingBehavior = queryTrackingBehavior;
@@ -1907,7 +2809,10 @@ public abstract partial class LoadTestBase<TFixture>
             RecordLog();
             context.ChangeTracker.LazyLoadingEnabled = false;
 
-            Assert.Equal(state == EntityState.Detached ? 0 : 1, context.ChangeTracker.Entries().Count());
+            Assert.Equal(
+                state == EntityState.Detached ? 0 : 1,
+                context.ChangeTracker.Entries().Count()
+            );
 
             Assert.Null(single.Parent);
         }
@@ -1934,7 +2839,10 @@ public abstract partial class LoadTestBase<TFixture>
     [InlineData(EntityState.Modified, QueryTrackingBehavior.NoTrackingWithIdentityResolution)]
     [InlineData(EntityState.Deleted, QueryTrackingBehavior.NoTrackingWithIdentityResolution)]
     [InlineData(EntityState.Detached, QueryTrackingBehavior.NoTrackingWithIdentityResolution)]
-    public virtual void Lazy_load_collection_shadow_fk(EntityState state, QueryTrackingBehavior queryTrackingBehavior)
+    public virtual void Lazy_load_collection_shadow_fk(
+        EntityState state,
+        QueryTrackingBehavior queryTrackingBehavior
+    )
     {
         using var context = CreateContext(lazyLoadingEnabled: true);
         context.ChangeTracker.QueryTrackingBehavior = queryTrackingBehavior;
@@ -1950,7 +2858,10 @@ public abstract partial class LoadTestBase<TFixture>
 
         if (LazyLoadingEnabled)
         {
-            if (state == EntityState.Detached && queryTrackingBehavior == QueryTrackingBehavior.TrackAll)
+            if (
+                state == EntityState.Detached
+                && queryTrackingBehavior == QueryTrackingBehavior.TrackAll
+            )
             {
                 Assert.Null(parent.ChildrenShadowFk); // Explicitly detached
             }
@@ -1964,10 +2875,16 @@ public abstract partial class LoadTestBase<TFixture>
                 context.ChangeTracker.LazyLoadingEnabled = false;
 
                 Assert.Equal(2, parent.ChildrenShadowFk.Count());
-                Assert.All(parent.ChildrenShadowFk.Select(e => e.Parent), p => Assert.Same(parent, p));
+                Assert.All(
+                    parent.ChildrenShadowFk.Select(e => e.Parent),
+                    p => Assert.Same(parent, p)
+                );
             }
 
-            Assert.Equal(state == EntityState.Detached ? 0 : 3, context.ChangeTracker.Entries().Count());
+            Assert.Equal(
+                state == EntityState.Detached ? 0 : 3,
+                context.ChangeTracker.Entries().Count()
+            );
         }
         else
         {
@@ -1994,7 +2911,8 @@ public abstract partial class LoadTestBase<TFixture>
     [InlineData(EntityState.Detached, QueryTrackingBehavior.NoTrackingWithIdentityResolution)]
     public virtual void Lazy_load_many_to_one_reference_to_principal_shadow_fk(
         EntityState state,
-        QueryTrackingBehavior queryTrackingBehavior)
+        QueryTrackingBehavior queryTrackingBehavior
+    )
     {
         using var context = CreateContext(lazyLoadingEnabled: true);
         context.ChangeTracker.QueryTrackingBehavior = queryTrackingBehavior;
@@ -2006,16 +2924,24 @@ public abstract partial class LoadTestBase<TFixture>
 
         if (LazyLoadingEnabled)
         {
-            if (state == EntityState.Detached && queryTrackingBehavior == QueryTrackingBehavior.TrackAll
-                || state == EntityState.Added && queryTrackingBehavior != QueryTrackingBehavior.TrackAll)
+            if (
+                state == EntityState.Detached
+                    && queryTrackingBehavior == QueryTrackingBehavior.TrackAll
+                || state == EntityState.Added
+                    && queryTrackingBehavior != QueryTrackingBehavior.TrackAll
+            )
             {
                 Assert.Null(child.Parent); // Explicitly detached
             }
-            else if (state == EntityState.Detached || queryTrackingBehavior != QueryTrackingBehavior.TrackAll)
+            else if (
+                state == EntityState.Detached
+                || queryTrackingBehavior != QueryTrackingBehavior.TrackAll
+            )
             {
                 Assert.Equal(
                     CoreStrings.CannotLoadDetachedShadow("Parent", "ChildShadowFk"),
-                    Assert.Throws<InvalidOperationException>(() => child.Parent).Message);
+                    Assert.Throws<InvalidOperationException>(() => child.Parent).Message
+                );
             }
             else
             {
@@ -2083,7 +3009,8 @@ public abstract partial class LoadTestBase<TFixture>
     [InlineData(EntityState.Detached, QueryTrackingBehavior.NoTrackingWithIdentityResolution)]
     public virtual void Lazy_load_one_to_one_reference_to_principal_shadow_fk(
         EntityState state,
-        QueryTrackingBehavior queryTrackingBehavior)
+        QueryTrackingBehavior queryTrackingBehavior
+    )
     {
         using var context = CreateContext(lazyLoadingEnabled: true);
         context.ChangeTracker.QueryTrackingBehavior = queryTrackingBehavior;
@@ -2095,16 +3022,24 @@ public abstract partial class LoadTestBase<TFixture>
 
         if (LazyLoadingEnabled)
         {
-            if (state == EntityState.Detached && queryTrackingBehavior == QueryTrackingBehavior.TrackAll
-                || state == EntityState.Added && queryTrackingBehavior != QueryTrackingBehavior.TrackAll)
+            if (
+                state == EntityState.Detached
+                    && queryTrackingBehavior == QueryTrackingBehavior.TrackAll
+                || state == EntityState.Added
+                    && queryTrackingBehavior != QueryTrackingBehavior.TrackAll
+            )
             {
                 Assert.Null(single.Parent); // Explicitly detached
             }
-            else if (state == EntityState.Detached || queryTrackingBehavior != QueryTrackingBehavior.TrackAll)
+            else if (
+                state == EntityState.Detached
+                || queryTrackingBehavior != QueryTrackingBehavior.TrackAll
+            )
             {
                 Assert.Equal(
                     CoreStrings.CannotLoadDetachedShadow("Parent", "SingleShadowFk"),
-                    Assert.Throws<InvalidOperationException>(() => single.Parent).Message);
+                    Assert.Throws<InvalidOperationException>(() => single.Parent).Message
+                );
             }
             else
             {
@@ -2172,7 +3107,8 @@ public abstract partial class LoadTestBase<TFixture>
     [InlineData(EntityState.Detached, QueryTrackingBehavior.NoTrackingWithIdentityResolution)]
     public virtual void Lazy_load_one_to_one_reference_to_dependent_shadow_fk(
         EntityState state,
-        QueryTrackingBehavior queryTrackingBehavior)
+        QueryTrackingBehavior queryTrackingBehavior
+    )
     {
         using var context = CreateContext(lazyLoadingEnabled: true);
         context.ChangeTracker.QueryTrackingBehavior = queryTrackingBehavior;
@@ -2188,7 +3124,10 @@ public abstract partial class LoadTestBase<TFixture>
 
         if (LazyLoadingEnabled)
         {
-            if (state == EntityState.Detached && queryTrackingBehavior == QueryTrackingBehavior.TrackAll)
+            if (
+                state == EntityState.Detached
+                && queryTrackingBehavior == QueryTrackingBehavior.TrackAll
+            )
             {
                 Assert.Null(parent.SingleShadowFk); // Explicitly detached
             }
@@ -2201,7 +3140,10 @@ public abstract partial class LoadTestBase<TFixture>
                 RecordLog();
                 context.ChangeTracker.LazyLoadingEnabled = false;
 
-                Assert.Equal(state == EntityState.Detached ? 0 : 2, context.ChangeTracker.Entries().Count());
+                Assert.Equal(
+                    state == EntityState.Detached ? 0 : 2,
+                    context.ChangeTracker.Entries().Count()
+                );
 
                 Assert.Same(parent, parent.SingleShadowFk.Parent);
 
@@ -2239,7 +3181,8 @@ public abstract partial class LoadTestBase<TFixture>
     [InlineData(EntityState.Detached, QueryTrackingBehavior.NoTrackingWithIdentityResolution)]
     public virtual void Lazy_load_many_to_one_reference_to_principal_null_FK_shadow_fk(
         EntityState state,
-        QueryTrackingBehavior queryTrackingBehavior)
+        QueryTrackingBehavior queryTrackingBehavior
+    )
     {
         using var context = CreateContext(lazyLoadingEnabled: true);
         context.ChangeTracker.QueryTrackingBehavior = queryTrackingBehavior;
@@ -2260,12 +3203,15 @@ public abstract partial class LoadTestBase<TFixture>
             {
                 Assert.Null(child.Parent); // Explicitly detached
             }
-            else if (queryTrackingBehavior != QueryTrackingBehavior.TrackAll
-                     && state != EntityState.Added)
+            else if (
+                queryTrackingBehavior != QueryTrackingBehavior.TrackAll
+                && state != EntityState.Added
+            )
             {
                 Assert.Equal(
                     CoreStrings.CannotLoadDetachedShadow("Parent", "ChildShadowFk"),
-                    Assert.Throws<InvalidOperationException>(() => child.Parent).Message);
+                    Assert.Throws<InvalidOperationException>(() => child.Parent).Message
+                );
             }
             else
             {
@@ -2309,7 +3255,8 @@ public abstract partial class LoadTestBase<TFixture>
     [InlineData(EntityState.Detached, QueryTrackingBehavior.NoTrackingWithIdentityResolution)]
     public virtual void Lazy_load_one_to_one_reference_to_principal_null_FK_shadow_fk(
         EntityState state,
-        QueryTrackingBehavior queryTrackingBehavior)
+        QueryTrackingBehavior queryTrackingBehavior
+    )
     {
         using var context = CreateContext(lazyLoadingEnabled: true);
         context.ChangeTracker.QueryTrackingBehavior = queryTrackingBehavior;
@@ -2330,12 +3277,15 @@ public abstract partial class LoadTestBase<TFixture>
             {
                 Assert.Null(single.Parent);
             }
-            else if (queryTrackingBehavior != QueryTrackingBehavior.TrackAll
-                     && state != EntityState.Added)
+            else if (
+                queryTrackingBehavior != QueryTrackingBehavior.TrackAll
+                && state != EntityState.Added
+            )
             {
                 Assert.Equal(
                     CoreStrings.CannotLoadDetachedShadow("Parent", "SingleShadowFk"),
-                    Assert.Throws<InvalidOperationException>(() => single.Parent).Message);
+                    Assert.Throws<InvalidOperationException>(() => single.Parent).Message
+                );
             }
             else
             {
@@ -2378,7 +3328,10 @@ public abstract partial class LoadTestBase<TFixture>
     [InlineData(EntityState.Modified, QueryTrackingBehavior.NoTrackingWithIdentityResolution)]
     [InlineData(EntityState.Deleted, QueryTrackingBehavior.NoTrackingWithIdentityResolution)]
     [InlineData(EntityState.Detached, QueryTrackingBehavior.NoTrackingWithIdentityResolution)]
-    public virtual void Lazy_load_collection_composite_key(EntityState state, QueryTrackingBehavior queryTrackingBehavior)
+    public virtual void Lazy_load_collection_composite_key(
+        EntityState state,
+        QueryTrackingBehavior queryTrackingBehavior
+    )
     {
         using var context = CreateContext(lazyLoadingEnabled: true);
         context.ChangeTracker.QueryTrackingBehavior = queryTrackingBehavior;
@@ -2394,7 +3347,10 @@ public abstract partial class LoadTestBase<TFixture>
 
         if (LazyLoadingEnabled)
         {
-            if (state == EntityState.Detached && queryTrackingBehavior == QueryTrackingBehavior.TrackAll)
+            if (
+                state == EntityState.Detached
+                && queryTrackingBehavior == QueryTrackingBehavior.TrackAll
+            )
             {
                 Assert.Null(parent.ChildrenCompositeKey); // Explicitly detached
             }
@@ -2408,10 +3364,16 @@ public abstract partial class LoadTestBase<TFixture>
                 context.ChangeTracker.LazyLoadingEnabled = false;
 
                 Assert.Equal(2, parent.ChildrenCompositeKey.Count());
-                Assert.All(parent.ChildrenCompositeKey.Select(e => e.Parent), p => Assert.Same(parent, p));
+                Assert.All(
+                    parent.ChildrenCompositeKey.Select(e => e.Parent),
+                    p => Assert.Same(parent, p)
+                );
             }
 
-            Assert.Equal(state == EntityState.Detached ? 0 : 3, context.ChangeTracker.Entries().Count());
+            Assert.Equal(
+                state == EntityState.Detached ? 0 : 3,
+                context.ChangeTracker.Entries().Count()
+            );
         }
         else
         {
@@ -2438,7 +3400,8 @@ public abstract partial class LoadTestBase<TFixture>
     [InlineData(EntityState.Detached, QueryTrackingBehavior.NoTrackingWithIdentityResolution)]
     public virtual void Lazy_load_many_to_one_reference_to_principal_composite_key(
         EntityState state,
-        QueryTrackingBehavior queryTrackingBehavior)
+        QueryTrackingBehavior queryTrackingBehavior
+    )
     {
         using var context = CreateContext(lazyLoadingEnabled: true);
         context.ChangeTracker.QueryTrackingBehavior = queryTrackingBehavior;
@@ -2454,7 +3417,10 @@ public abstract partial class LoadTestBase<TFixture>
 
         if (LazyLoadingEnabled)
         {
-            if (state == EntityState.Detached && queryTrackingBehavior == QueryTrackingBehavior.TrackAll)
+            if (
+                state == EntityState.Detached
+                && queryTrackingBehavior == QueryTrackingBehavior.TrackAll
+            )
             {
                 Assert.Null(child.Parent); // Explicitly detached
             }
@@ -2474,7 +3440,10 @@ public abstract partial class LoadTestBase<TFixture>
                 RecordLog();
                 context.ChangeTracker.LazyLoadingEnabled = false;
 
-                Assert.Equal(state == EntityState.Detached ? 0 : 2, context.ChangeTracker.Entries().Count());
+                Assert.Equal(
+                    state == EntityState.Detached ? 0 : 2,
+                    context.ChangeTracker.Entries().Count()
+                );
 
                 if (state != EntityState.Deleted)
                 {
@@ -2523,7 +3492,8 @@ public abstract partial class LoadTestBase<TFixture>
     [InlineData(EntityState.Detached, QueryTrackingBehavior.NoTrackingWithIdentityResolution)]
     public virtual void Lazy_load_one_to_one_reference_to_principal_composite_key(
         EntityState state,
-        QueryTrackingBehavior queryTrackingBehavior)
+        QueryTrackingBehavior queryTrackingBehavior
+    )
     {
         using var context = CreateContext(lazyLoadingEnabled: true);
         context.ChangeTracker.QueryTrackingBehavior = queryTrackingBehavior;
@@ -2539,7 +3509,10 @@ public abstract partial class LoadTestBase<TFixture>
 
         if (LazyLoadingEnabled)
         {
-            if (state == EntityState.Detached && queryTrackingBehavior == QueryTrackingBehavior.TrackAll)
+            if (
+                state == EntityState.Detached
+                && queryTrackingBehavior == QueryTrackingBehavior.TrackAll
+            )
             {
                 Assert.Null(single.Parent); // Explicitly detached
             }
@@ -2559,7 +3532,10 @@ public abstract partial class LoadTestBase<TFixture>
                 RecordLog();
                 context.ChangeTracker.LazyLoadingEnabled = false;
 
-                Assert.Equal(state == EntityState.Detached ? 0 : 2, context.ChangeTracker.Entries().Count());
+                Assert.Equal(
+                    state == EntityState.Detached ? 0 : 2,
+                    context.ChangeTracker.Entries().Count()
+                );
 
                 if (state != EntityState.Deleted)
                 {
@@ -2608,7 +3584,8 @@ public abstract partial class LoadTestBase<TFixture>
     [InlineData(EntityState.Detached, QueryTrackingBehavior.NoTrackingWithIdentityResolution)]
     public virtual void Lazy_load_one_to_one_reference_to_dependent_composite_key(
         EntityState state,
-        QueryTrackingBehavior queryTrackingBehavior)
+        QueryTrackingBehavior queryTrackingBehavior
+    )
     {
         using var context = CreateContext(lazyLoadingEnabled: true);
         context.ChangeTracker.QueryTrackingBehavior = queryTrackingBehavior;
@@ -2624,7 +3601,10 @@ public abstract partial class LoadTestBase<TFixture>
 
         if (LazyLoadingEnabled)
         {
-            if (state == EntityState.Detached && queryTrackingBehavior == QueryTrackingBehavior.TrackAll)
+            if (
+                state == EntityState.Detached
+                && queryTrackingBehavior == QueryTrackingBehavior.TrackAll
+            )
             {
                 Assert.Null(parent.SingleCompositeKey); // Explicitly detached
             }
@@ -2637,13 +3617,19 @@ public abstract partial class LoadTestBase<TFixture>
                 RecordLog();
                 context.ChangeTracker.LazyLoadingEnabled = false;
 
-                Assert.Equal(state == EntityState.Detached ? 0 : 2, context.ChangeTracker.Entries().Count());
+                Assert.Equal(
+                    state == EntityState.Detached ? 0 : 2,
+                    context.ChangeTracker.Entries().Count()
+                );
 
                 Assert.Same(parent, parent.SingleCompositeKey.Parent);
 
                 if (state != EntityState.Detached)
                 {
-                    var single = context.ChangeTracker.Entries<SingleCompositeKey>().Single().Entity;
+                    var single = context
+                        .ChangeTracker.Entries<SingleCompositeKey>()
+                        .Single()
+                        .Entity;
 
                     Assert.Same(single, parent.SingleCompositeKey);
                     Assert.Same(parent, single.Parent);
@@ -2675,7 +3661,8 @@ public abstract partial class LoadTestBase<TFixture>
     [InlineData(EntityState.Detached, QueryTrackingBehavior.NoTrackingWithIdentityResolution)]
     public virtual void Lazy_load_many_to_one_reference_to_principal_null_FK_composite_key(
         EntityState state,
-        QueryTrackingBehavior queryTrackingBehavior)
+        QueryTrackingBehavior queryTrackingBehavior
+    )
     {
         using var context = CreateContext(lazyLoadingEnabled: true);
         context.ChangeTracker.QueryTrackingBehavior = queryTrackingBehavior;
@@ -2698,7 +3685,10 @@ public abstract partial class LoadTestBase<TFixture>
             RecordLog();
             context.ChangeTracker.LazyLoadingEnabled = false;
 
-            Assert.Equal(state == EntityState.Detached ? 0 : 1, context.ChangeTracker.Entries().Count());
+            Assert.Equal(
+                state == EntityState.Detached ? 0 : 1,
+                context.ChangeTracker.Entries().Count()
+            );
             Assert.Null(child.Parent);
         }
         else
@@ -2726,11 +3716,14 @@ public abstract partial class LoadTestBase<TFixture>
     [InlineData(EntityState.Detached, QueryTrackingBehavior.NoTrackingWithIdentityResolution)]
     public virtual void Lazy_load_one_to_one_reference_to_principal_null_FK_composite_key(
         EntityState state,
-        QueryTrackingBehavior queryTrackingBehavior)
+        QueryTrackingBehavior queryTrackingBehavior
+    )
     {
         using var context = CreateContext(lazyLoadingEnabled: true);
         context.ChangeTracker.QueryTrackingBehavior = queryTrackingBehavior;
-        var single = context.Attach(new SingleCompositeKey { Id = 767, ParentAlternateId = "Boot" }).Entity;
+        var single = context
+            .Attach(new SingleCompositeKey { Id = 767, ParentAlternateId = "Boot" })
+            .Entity;
 
         ClearLog();
 
@@ -2749,7 +3742,10 @@ public abstract partial class LoadTestBase<TFixture>
             RecordLog();
             context.ChangeTracker.LazyLoadingEnabled = false;
 
-            Assert.Equal(state == EntityState.Detached ? 0 : 1, context.ChangeTracker.Entries().Count());
+            Assert.Equal(
+                state == EntityState.Detached ? 0 : 1,
+                context.ChangeTracker.Entries().Count()
+            );
 
             Assert.Null(single.Parent);
         }
@@ -2771,11 +3767,23 @@ public abstract partial class LoadTestBase<TFixture>
     [InlineData(EntityState.Modified, QueryTrackingBehavior.NoTracking, false)]
     [InlineData(EntityState.Deleted, QueryTrackingBehavior.NoTracking, false)]
     [InlineData(EntityState.Detached, QueryTrackingBehavior.NoTracking, false)]
-    [InlineData(EntityState.Unchanged, QueryTrackingBehavior.NoTrackingWithIdentityResolution, false)]
+    [InlineData(
+        EntityState.Unchanged,
+        QueryTrackingBehavior.NoTrackingWithIdentityResolution,
+        false
+    )]
     [InlineData(EntityState.Added, QueryTrackingBehavior.NoTrackingWithIdentityResolution, false)]
-    [InlineData(EntityState.Modified, QueryTrackingBehavior.NoTrackingWithIdentityResolution, false)]
+    [InlineData(
+        EntityState.Modified,
+        QueryTrackingBehavior.NoTrackingWithIdentityResolution,
+        false
+    )]
     [InlineData(EntityState.Deleted, QueryTrackingBehavior.NoTrackingWithIdentityResolution, false)]
-    [InlineData(EntityState.Detached, QueryTrackingBehavior.NoTrackingWithIdentityResolution, false)]
+    [InlineData(
+        EntityState.Detached,
+        QueryTrackingBehavior.NoTrackingWithIdentityResolution,
+        false
+    )]
     [InlineData(EntityState.Unchanged, QueryTrackingBehavior.TrackAll, true)]
     [InlineData(EntityState.Added, QueryTrackingBehavior.TrackAll, true)]
     [InlineData(EntityState.Modified, QueryTrackingBehavior.TrackAll, true)]
@@ -2786,7 +3794,11 @@ public abstract partial class LoadTestBase<TFixture>
     [InlineData(EntityState.Modified, QueryTrackingBehavior.NoTracking, true)]
     [InlineData(EntityState.Deleted, QueryTrackingBehavior.NoTracking, true)]
     [InlineData(EntityState.Detached, QueryTrackingBehavior.NoTracking, true)]
-    [InlineData(EntityState.Unchanged, QueryTrackingBehavior.NoTrackingWithIdentityResolution, true)]
+    [InlineData(
+        EntityState.Unchanged,
+        QueryTrackingBehavior.NoTrackingWithIdentityResolution,
+        true
+    )]
     [InlineData(EntityState.Added, QueryTrackingBehavior.NoTrackingWithIdentityResolution, true)]
     [InlineData(EntityState.Modified, QueryTrackingBehavior.NoTrackingWithIdentityResolution, true)]
     [InlineData(EntityState.Deleted, QueryTrackingBehavior.NoTrackingWithIdentityResolution, true)]
@@ -2794,7 +3806,8 @@ public abstract partial class LoadTestBase<TFixture>
     public virtual async Task Lazy_load_collection_full_loader_constructor_injection(
         EntityState state,
         QueryTrackingBehavior queryTrackingBehavior,
-        bool async)
+        bool async
+    )
     {
         using var context = CreateContext(lazyLoadingEnabled: true);
         context.ChangeTracker.QueryTrackingBehavior = queryTrackingBehavior;
@@ -2814,7 +3827,10 @@ public abstract partial class LoadTestBase<TFixture>
 
         if (LazyLoadingEnabled)
         {
-            if (state == EntityState.Detached && queryTrackingBehavior == QueryTrackingBehavior.TrackAll)
+            if (
+                state == EntityState.Detached
+                && queryTrackingBehavior == QueryTrackingBehavior.TrackAll
+            )
             {
                 Assert.Null(await parent.LazyLoadChildren(async)); // Explicitly detached
             }
@@ -2834,7 +3850,10 @@ public abstract partial class LoadTestBase<TFixture>
                 Assert.Equal(2, parent.Children.Count());
             }
 
-            Assert.Equal(state == EntityState.Detached ? 0 : 3, context.ChangeTracker.Entries().Count());
+            Assert.Equal(
+                state == EntityState.Detached ? 0 : 3,
+                context.ChangeTracker.Entries().Count()
+            );
         }
         else
         {
@@ -2854,11 +3873,23 @@ public abstract partial class LoadTestBase<TFixture>
     [InlineData(EntityState.Modified, QueryTrackingBehavior.NoTracking, false)]
     [InlineData(EntityState.Deleted, QueryTrackingBehavior.NoTracking, false)]
     [InlineData(EntityState.Detached, QueryTrackingBehavior.NoTracking, false)]
-    [InlineData(EntityState.Unchanged, QueryTrackingBehavior.NoTrackingWithIdentityResolution, false)]
+    [InlineData(
+        EntityState.Unchanged,
+        QueryTrackingBehavior.NoTrackingWithIdentityResolution,
+        false
+    )]
     [InlineData(EntityState.Added, QueryTrackingBehavior.NoTrackingWithIdentityResolution, false)]
-    [InlineData(EntityState.Modified, QueryTrackingBehavior.NoTrackingWithIdentityResolution, false)]
+    [InlineData(
+        EntityState.Modified,
+        QueryTrackingBehavior.NoTrackingWithIdentityResolution,
+        false
+    )]
     [InlineData(EntityState.Deleted, QueryTrackingBehavior.NoTrackingWithIdentityResolution, false)]
-    [InlineData(EntityState.Detached, QueryTrackingBehavior.NoTrackingWithIdentityResolution, false)]
+    [InlineData(
+        EntityState.Detached,
+        QueryTrackingBehavior.NoTrackingWithIdentityResolution,
+        false
+    )]
     [InlineData(EntityState.Unchanged, QueryTrackingBehavior.TrackAll, true)]
     [InlineData(EntityState.Added, QueryTrackingBehavior.TrackAll, true)]
     [InlineData(EntityState.Modified, QueryTrackingBehavior.TrackAll, true)]
@@ -2869,7 +3900,11 @@ public abstract partial class LoadTestBase<TFixture>
     [InlineData(EntityState.Modified, QueryTrackingBehavior.NoTracking, true)]
     [InlineData(EntityState.Deleted, QueryTrackingBehavior.NoTracking, true)]
     [InlineData(EntityState.Detached, QueryTrackingBehavior.NoTracking, true)]
-    [InlineData(EntityState.Unchanged, QueryTrackingBehavior.NoTrackingWithIdentityResolution, true)]
+    [InlineData(
+        EntityState.Unchanged,
+        QueryTrackingBehavior.NoTrackingWithIdentityResolution,
+        true
+    )]
     [InlineData(EntityState.Added, QueryTrackingBehavior.NoTrackingWithIdentityResolution, true)]
     [InlineData(EntityState.Modified, QueryTrackingBehavior.NoTrackingWithIdentityResolution, true)]
     [InlineData(EntityState.Deleted, QueryTrackingBehavior.NoTrackingWithIdentityResolution, true)]
@@ -2877,7 +3912,8 @@ public abstract partial class LoadTestBase<TFixture>
     public virtual async Task Lazy_load_many_to_one_reference_to_principal_full_loader_constructor_injection(
         EntityState state,
         QueryTrackingBehavior queryTrackingBehavior,
-        bool async)
+        bool async
+    )
     {
         using var context = CreateContext(lazyLoadingEnabled: true);
         context.ChangeTracker.QueryTrackingBehavior = queryTrackingBehavior;
@@ -2897,7 +3933,10 @@ public abstract partial class LoadTestBase<TFixture>
 
         if (LazyLoadingEnabled)
         {
-            if (state == EntityState.Detached && queryTrackingBehavior == QueryTrackingBehavior.TrackAll)
+            if (
+                state == EntityState.Detached
+                && queryTrackingBehavior == QueryTrackingBehavior.TrackAll
+            )
             {
                 Assert.Null(await child.LazyLoadParent(async)); // Explicitly detached
             }
@@ -2919,7 +3958,10 @@ public abstract partial class LoadTestBase<TFixture>
                 RecordLog();
                 context.ChangeTracker.LazyLoadingEnabled = false;
 
-                Assert.Equal(state == EntityState.Detached ? 0 : 2, context.ChangeTracker.Entries().Count());
+                Assert.Equal(
+                    state == EntityState.Detached ? 0 : 2,
+                    context.ChangeTracker.Entries().Count()
+                );
 
                 if (state != EntityState.Deleted)
                 {
@@ -2928,7 +3970,10 @@ public abstract partial class LoadTestBase<TFixture>
 
                 if (state != EntityState.Detached)
                 {
-                    var parent = context.ChangeTracker.Entries<ParentFullLoaderByConstructor>().Single().Entity;
+                    var parent = context
+                        .ChangeTracker.Entries<ParentFullLoaderByConstructor>()
+                        .Single()
+                        .Entity;
 
                     if (state == EntityState.Deleted)
                     {
@@ -2961,11 +4006,23 @@ public abstract partial class LoadTestBase<TFixture>
     [InlineData(EntityState.Modified, QueryTrackingBehavior.NoTracking, false)]
     [InlineData(EntityState.Deleted, QueryTrackingBehavior.NoTracking, false)]
     [InlineData(EntityState.Detached, QueryTrackingBehavior.NoTracking, false)]
-    [InlineData(EntityState.Unchanged, QueryTrackingBehavior.NoTrackingWithIdentityResolution, false)]
+    [InlineData(
+        EntityState.Unchanged,
+        QueryTrackingBehavior.NoTrackingWithIdentityResolution,
+        false
+    )]
     [InlineData(EntityState.Added, QueryTrackingBehavior.NoTrackingWithIdentityResolution, false)]
-    [InlineData(EntityState.Modified, QueryTrackingBehavior.NoTrackingWithIdentityResolution, false)]
+    [InlineData(
+        EntityState.Modified,
+        QueryTrackingBehavior.NoTrackingWithIdentityResolution,
+        false
+    )]
     [InlineData(EntityState.Deleted, QueryTrackingBehavior.NoTrackingWithIdentityResolution, false)]
-    [InlineData(EntityState.Detached, QueryTrackingBehavior.NoTrackingWithIdentityResolution, false)]
+    [InlineData(
+        EntityState.Detached,
+        QueryTrackingBehavior.NoTrackingWithIdentityResolution,
+        false
+    )]
     [InlineData(EntityState.Unchanged, QueryTrackingBehavior.TrackAll, true)]
     [InlineData(EntityState.Added, QueryTrackingBehavior.TrackAll, true)]
     [InlineData(EntityState.Modified, QueryTrackingBehavior.TrackAll, true)]
@@ -2976,7 +4033,11 @@ public abstract partial class LoadTestBase<TFixture>
     [InlineData(EntityState.Modified, QueryTrackingBehavior.NoTracking, true)]
     [InlineData(EntityState.Deleted, QueryTrackingBehavior.NoTracking, true)]
     [InlineData(EntityState.Detached, QueryTrackingBehavior.NoTracking, true)]
-    [InlineData(EntityState.Unchanged, QueryTrackingBehavior.NoTrackingWithIdentityResolution, true)]
+    [InlineData(
+        EntityState.Unchanged,
+        QueryTrackingBehavior.NoTrackingWithIdentityResolution,
+        true
+    )]
     [InlineData(EntityState.Added, QueryTrackingBehavior.NoTrackingWithIdentityResolution, true)]
     [InlineData(EntityState.Modified, QueryTrackingBehavior.NoTrackingWithIdentityResolution, true)]
     [InlineData(EntityState.Deleted, QueryTrackingBehavior.NoTrackingWithIdentityResolution, true)]
@@ -2984,7 +4045,8 @@ public abstract partial class LoadTestBase<TFixture>
     public virtual async Task Lazy_load_one_to_one_reference_to_principal_full_loader_constructor_injection(
         EntityState state,
         QueryTrackingBehavior queryTrackingBehavior,
-        bool async)
+        bool async
+    )
     {
         using var context = CreateContext(lazyLoadingEnabled: true);
         context.ChangeTracker.QueryTrackingBehavior = queryTrackingBehavior;
@@ -3004,7 +4066,10 @@ public abstract partial class LoadTestBase<TFixture>
 
         if (LazyLoadingEnabled)
         {
-            if (state == EntityState.Detached && queryTrackingBehavior == QueryTrackingBehavior.TrackAll)
+            if (
+                state == EntityState.Detached
+                && queryTrackingBehavior == QueryTrackingBehavior.TrackAll
+            )
             {
                 Assert.Null(await single.LazyLoadParent(async)); // Explicitly detached
             }
@@ -3026,7 +4091,10 @@ public abstract partial class LoadTestBase<TFixture>
                 RecordLog();
                 context.ChangeTracker.LazyLoadingEnabled = false;
 
-                Assert.Equal(state == EntityState.Detached ? 0 : 2, context.ChangeTracker.Entries().Count());
+                Assert.Equal(
+                    state == EntityState.Detached ? 0 : 2,
+                    context.ChangeTracker.Entries().Count()
+                );
 
                 if (state != EntityState.Deleted)
                 {
@@ -3035,7 +4103,10 @@ public abstract partial class LoadTestBase<TFixture>
 
                 if (state != EntityState.Detached)
                 {
-                    var parent = context.ChangeTracker.Entries<ParentFullLoaderByConstructor>().Single().Entity;
+                    var parent = context
+                        .ChangeTracker.Entries<ParentFullLoaderByConstructor>()
+                        .Single()
+                        .Entity;
 
                     if (state == EntityState.Deleted)
                     {
@@ -3068,11 +4139,23 @@ public abstract partial class LoadTestBase<TFixture>
     [InlineData(EntityState.Modified, QueryTrackingBehavior.NoTracking, false)]
     [InlineData(EntityState.Deleted, QueryTrackingBehavior.NoTracking, false)]
     [InlineData(EntityState.Detached, QueryTrackingBehavior.NoTracking, false)]
-    [InlineData(EntityState.Unchanged, QueryTrackingBehavior.NoTrackingWithIdentityResolution, false)]
+    [InlineData(
+        EntityState.Unchanged,
+        QueryTrackingBehavior.NoTrackingWithIdentityResolution,
+        false
+    )]
     [InlineData(EntityState.Added, QueryTrackingBehavior.NoTrackingWithIdentityResolution, false)]
-    [InlineData(EntityState.Modified, QueryTrackingBehavior.NoTrackingWithIdentityResolution, false)]
+    [InlineData(
+        EntityState.Modified,
+        QueryTrackingBehavior.NoTrackingWithIdentityResolution,
+        false
+    )]
     [InlineData(EntityState.Deleted, QueryTrackingBehavior.NoTrackingWithIdentityResolution, false)]
-    [InlineData(EntityState.Detached, QueryTrackingBehavior.NoTrackingWithIdentityResolution, false)]
+    [InlineData(
+        EntityState.Detached,
+        QueryTrackingBehavior.NoTrackingWithIdentityResolution,
+        false
+    )]
     [InlineData(EntityState.Unchanged, QueryTrackingBehavior.TrackAll, true)]
     [InlineData(EntityState.Added, QueryTrackingBehavior.TrackAll, true)]
     [InlineData(EntityState.Modified, QueryTrackingBehavior.TrackAll, true)]
@@ -3083,7 +4166,11 @@ public abstract partial class LoadTestBase<TFixture>
     [InlineData(EntityState.Modified, QueryTrackingBehavior.NoTracking, true)]
     [InlineData(EntityState.Deleted, QueryTrackingBehavior.NoTracking, true)]
     [InlineData(EntityState.Detached, QueryTrackingBehavior.NoTracking, true)]
-    [InlineData(EntityState.Unchanged, QueryTrackingBehavior.NoTrackingWithIdentityResolution, true)]
+    [InlineData(
+        EntityState.Unchanged,
+        QueryTrackingBehavior.NoTrackingWithIdentityResolution,
+        true
+    )]
     [InlineData(EntityState.Added, QueryTrackingBehavior.NoTrackingWithIdentityResolution, true)]
     [InlineData(EntityState.Modified, QueryTrackingBehavior.NoTrackingWithIdentityResolution, true)]
     [InlineData(EntityState.Deleted, QueryTrackingBehavior.NoTrackingWithIdentityResolution, true)]
@@ -3091,7 +4178,8 @@ public abstract partial class LoadTestBase<TFixture>
     public virtual async Task Lazy_load_one_to_one_reference_to_dependent_full_loader_constructor_injection(
         EntityState state,
         QueryTrackingBehavior queryTrackingBehavior,
-        bool async)
+        bool async
+    )
     {
         using var context = CreateContext(lazyLoadingEnabled: true);
         context.ChangeTracker.QueryTrackingBehavior = queryTrackingBehavior;
@@ -3111,7 +4199,10 @@ public abstract partial class LoadTestBase<TFixture>
 
         if (LazyLoadingEnabled)
         {
-            if (state == EntityState.Detached && queryTrackingBehavior == QueryTrackingBehavior.TrackAll)
+            if (
+                state == EntityState.Detached
+                && queryTrackingBehavior == QueryTrackingBehavior.TrackAll
+            )
             {
                 Assert.Null(await parent.LazyLoadSingle(async)); // Explicitly detached
             }
@@ -3126,7 +4217,10 @@ public abstract partial class LoadTestBase<TFixture>
                 RecordLog();
                 context.ChangeTracker.LazyLoadingEnabled = false;
 
-                Assert.Equal(state == EntityState.Detached ? 0 : 2, context.ChangeTracker.Entries().Count());
+                Assert.Equal(
+                    state == EntityState.Detached ? 0 : 2,
+                    context.ChangeTracker.Entries().Count()
+                );
 
                 if (state != EntityState.Deleted)
                 {
@@ -3135,7 +4229,10 @@ public abstract partial class LoadTestBase<TFixture>
 
                 if (state != EntityState.Detached)
                 {
-                    var single = context.ChangeTracker.Entries<SingleFullLoaderByConstructor>().Single().Entity;
+                    var single = context
+                        .ChangeTracker.Entries<SingleFullLoaderByConstructor>()
+                        .Single()
+                        .Entity;
 
                     Assert.Same(single, parent.Single);
                     Assert.Same(parent, single.Parent);
@@ -3160,11 +4257,23 @@ public abstract partial class LoadTestBase<TFixture>
     [InlineData(EntityState.Modified, QueryTrackingBehavior.NoTracking, false)]
     [InlineData(EntityState.Deleted, QueryTrackingBehavior.NoTracking, false)]
     [InlineData(EntityState.Detached, QueryTrackingBehavior.NoTracking, false)]
-    [InlineData(EntityState.Unchanged, QueryTrackingBehavior.NoTrackingWithIdentityResolution, false)]
+    [InlineData(
+        EntityState.Unchanged,
+        QueryTrackingBehavior.NoTrackingWithIdentityResolution,
+        false
+    )]
     [InlineData(EntityState.Added, QueryTrackingBehavior.NoTrackingWithIdentityResolution, false)]
-    [InlineData(EntityState.Modified, QueryTrackingBehavior.NoTrackingWithIdentityResolution, false)]
+    [InlineData(
+        EntityState.Modified,
+        QueryTrackingBehavior.NoTrackingWithIdentityResolution,
+        false
+    )]
     [InlineData(EntityState.Deleted, QueryTrackingBehavior.NoTrackingWithIdentityResolution, false)]
-    [InlineData(EntityState.Detached, QueryTrackingBehavior.NoTrackingWithIdentityResolution, false)]
+    [InlineData(
+        EntityState.Detached,
+        QueryTrackingBehavior.NoTrackingWithIdentityResolution,
+        false
+    )]
     [InlineData(EntityState.Unchanged, QueryTrackingBehavior.TrackAll, true)]
     [InlineData(EntityState.Added, QueryTrackingBehavior.TrackAll, true)]
     [InlineData(EntityState.Modified, QueryTrackingBehavior.TrackAll, true)]
@@ -3175,7 +4284,11 @@ public abstract partial class LoadTestBase<TFixture>
     [InlineData(EntityState.Modified, QueryTrackingBehavior.NoTracking, true)]
     [InlineData(EntityState.Deleted, QueryTrackingBehavior.NoTracking, true)]
     [InlineData(EntityState.Detached, QueryTrackingBehavior.NoTracking, true)]
-    [InlineData(EntityState.Unchanged, QueryTrackingBehavior.NoTrackingWithIdentityResolution, true)]
+    [InlineData(
+        EntityState.Unchanged,
+        QueryTrackingBehavior.NoTrackingWithIdentityResolution,
+        true
+    )]
     [InlineData(EntityState.Added, QueryTrackingBehavior.NoTrackingWithIdentityResolution, true)]
     [InlineData(EntityState.Modified, QueryTrackingBehavior.NoTrackingWithIdentityResolution, true)]
     [InlineData(EntityState.Deleted, QueryTrackingBehavior.NoTrackingWithIdentityResolution, true)]
@@ -3183,13 +4296,16 @@ public abstract partial class LoadTestBase<TFixture>
     public virtual async Task Lazy_load_many_to_one_reference_to_principal_null_FK_full_loader_constructor_injection(
         EntityState state,
         QueryTrackingBehavior queryTrackingBehavior,
-        bool async)
+        bool async
+    )
     {
         using var context = CreateContext(lazyLoadingEnabled: true);
         context.ChangeTracker.QueryTrackingBehavior = queryTrackingBehavior;
         var changeDetector = (ChangeDetectorProxy)context.GetService<IChangeDetector>();
 
-        var child = context.Attach(new ChildFullLoaderByConstructor { Id = 767, ParentId = null }).Entity;
+        var child = context
+            .Attach(new ChildFullLoaderByConstructor { Id = 767, ParentId = null })
+            .Entity;
 
         ClearLog();
 
@@ -3212,7 +4328,10 @@ public abstract partial class LoadTestBase<TFixture>
             RecordLog();
             context.ChangeTracker.LazyLoadingEnabled = false;
 
-            Assert.Equal(state == EntityState.Detached ? 0 : 1, context.ChangeTracker.Entries().Count());
+            Assert.Equal(
+                state == EntityState.Detached ? 0 : 1,
+                context.ChangeTracker.Entries().Count()
+            );
             Assert.Null(child.Parent);
         }
         else
@@ -3233,11 +4352,23 @@ public abstract partial class LoadTestBase<TFixture>
     [InlineData(EntityState.Modified, QueryTrackingBehavior.NoTracking, false)]
     [InlineData(EntityState.Deleted, QueryTrackingBehavior.NoTracking, false)]
     [InlineData(EntityState.Detached, QueryTrackingBehavior.NoTracking, false)]
-    [InlineData(EntityState.Unchanged, QueryTrackingBehavior.NoTrackingWithIdentityResolution, false)]
+    [InlineData(
+        EntityState.Unchanged,
+        QueryTrackingBehavior.NoTrackingWithIdentityResolution,
+        false
+    )]
     [InlineData(EntityState.Added, QueryTrackingBehavior.NoTrackingWithIdentityResolution, false)]
-    [InlineData(EntityState.Modified, QueryTrackingBehavior.NoTrackingWithIdentityResolution, false)]
+    [InlineData(
+        EntityState.Modified,
+        QueryTrackingBehavior.NoTrackingWithIdentityResolution,
+        false
+    )]
     [InlineData(EntityState.Deleted, QueryTrackingBehavior.NoTrackingWithIdentityResolution, false)]
-    [InlineData(EntityState.Detached, QueryTrackingBehavior.NoTrackingWithIdentityResolution, false)]
+    [InlineData(
+        EntityState.Detached,
+        QueryTrackingBehavior.NoTrackingWithIdentityResolution,
+        false
+    )]
     [InlineData(EntityState.Unchanged, QueryTrackingBehavior.TrackAll, true)]
     [InlineData(EntityState.Added, QueryTrackingBehavior.TrackAll, true)]
     [InlineData(EntityState.Modified, QueryTrackingBehavior.TrackAll, true)]
@@ -3248,7 +4379,11 @@ public abstract partial class LoadTestBase<TFixture>
     [InlineData(EntityState.Modified, QueryTrackingBehavior.NoTracking, true)]
     [InlineData(EntityState.Deleted, QueryTrackingBehavior.NoTracking, true)]
     [InlineData(EntityState.Detached, QueryTrackingBehavior.NoTracking, true)]
-    [InlineData(EntityState.Unchanged, QueryTrackingBehavior.NoTrackingWithIdentityResolution, true)]
+    [InlineData(
+        EntityState.Unchanged,
+        QueryTrackingBehavior.NoTrackingWithIdentityResolution,
+        true
+    )]
     [InlineData(EntityState.Added, QueryTrackingBehavior.NoTrackingWithIdentityResolution, true)]
     [InlineData(EntityState.Modified, QueryTrackingBehavior.NoTrackingWithIdentityResolution, true)]
     [InlineData(EntityState.Deleted, QueryTrackingBehavior.NoTrackingWithIdentityResolution, true)]
@@ -3256,13 +4391,16 @@ public abstract partial class LoadTestBase<TFixture>
     public virtual async Task Lazy_load_one_to_one_reference_to_principal_null_FK_full_loader_constructor_injection(
         EntityState state,
         QueryTrackingBehavior queryTrackingBehavior,
-        bool async)
+        bool async
+    )
     {
         using var context = CreateContext(lazyLoadingEnabled: true);
         context.ChangeTracker.QueryTrackingBehavior = queryTrackingBehavior;
         var changeDetector = (ChangeDetectorProxy)context.GetService<IChangeDetector>();
 
-        var single = context.Attach(new SingleFullLoaderByConstructor { Id = 767, ParentId = null }).Entity;
+        var single = context
+            .Attach(new SingleFullLoaderByConstructor { Id = 767, ParentId = null })
+            .Entity;
 
         ClearLog();
 
@@ -3285,7 +4423,10 @@ public abstract partial class LoadTestBase<TFixture>
             RecordLog();
             context.ChangeTracker.LazyLoadingEnabled = false;
 
-            Assert.Equal(state == EntityState.Detached ? 0 : 1, context.ChangeTracker.Entries().Count());
+            Assert.Equal(
+                state == EntityState.Detached ? 0 : 1,
+                context.ChangeTracker.Entries().Count()
+            );
 
             Assert.Null(single.Parent);
         }
@@ -3307,11 +4448,23 @@ public abstract partial class LoadTestBase<TFixture>
     [InlineData(EntityState.Modified, QueryTrackingBehavior.NoTracking, false)]
     [InlineData(EntityState.Deleted, QueryTrackingBehavior.NoTracking, false)]
     [InlineData(EntityState.Detached, QueryTrackingBehavior.NoTracking, false)]
-    [InlineData(EntityState.Unchanged, QueryTrackingBehavior.NoTrackingWithIdentityResolution, false)]
+    [InlineData(
+        EntityState.Unchanged,
+        QueryTrackingBehavior.NoTrackingWithIdentityResolution,
+        false
+    )]
     [InlineData(EntityState.Added, QueryTrackingBehavior.NoTrackingWithIdentityResolution, false)]
-    [InlineData(EntityState.Modified, QueryTrackingBehavior.NoTrackingWithIdentityResolution, false)]
+    [InlineData(
+        EntityState.Modified,
+        QueryTrackingBehavior.NoTrackingWithIdentityResolution,
+        false
+    )]
     [InlineData(EntityState.Deleted, QueryTrackingBehavior.NoTrackingWithIdentityResolution, false)]
-    [InlineData(EntityState.Detached, QueryTrackingBehavior.NoTrackingWithIdentityResolution, false)]
+    [InlineData(
+        EntityState.Detached,
+        QueryTrackingBehavior.NoTrackingWithIdentityResolution,
+        false
+    )]
     [InlineData(EntityState.Unchanged, QueryTrackingBehavior.TrackAll, true)]
     [InlineData(EntityState.Added, QueryTrackingBehavior.TrackAll, true)]
     [InlineData(EntityState.Modified, QueryTrackingBehavior.TrackAll, true)]
@@ -3322,7 +4475,11 @@ public abstract partial class LoadTestBase<TFixture>
     [InlineData(EntityState.Modified, QueryTrackingBehavior.NoTracking, true)]
     [InlineData(EntityState.Deleted, QueryTrackingBehavior.NoTracking, true)]
     [InlineData(EntityState.Detached, QueryTrackingBehavior.NoTracking, true)]
-    [InlineData(EntityState.Unchanged, QueryTrackingBehavior.NoTrackingWithIdentityResolution, true)]
+    [InlineData(
+        EntityState.Unchanged,
+        QueryTrackingBehavior.NoTrackingWithIdentityResolution,
+        true
+    )]
     [InlineData(EntityState.Added, QueryTrackingBehavior.NoTrackingWithIdentityResolution, true)]
     [InlineData(EntityState.Modified, QueryTrackingBehavior.NoTrackingWithIdentityResolution, true)]
     [InlineData(EntityState.Deleted, QueryTrackingBehavior.NoTrackingWithIdentityResolution, true)]
@@ -3330,7 +4487,8 @@ public abstract partial class LoadTestBase<TFixture>
     public virtual async Task Lazy_load_collection_not_found_full_loader_constructor_injection(
         EntityState state,
         QueryTrackingBehavior queryTrackingBehavior,
-        bool async)
+        bool async
+    )
     {
         using var context = CreateContext(lazyLoadingEnabled: true);
         context.ChangeTracker.QueryTrackingBehavior = queryTrackingBehavior;
@@ -3384,11 +4542,23 @@ public abstract partial class LoadTestBase<TFixture>
     [InlineData(EntityState.Modified, QueryTrackingBehavior.NoTracking, false)]
     [InlineData(EntityState.Deleted, QueryTrackingBehavior.NoTracking, false)]
     [InlineData(EntityState.Detached, QueryTrackingBehavior.NoTracking, false)]
-    [InlineData(EntityState.Unchanged, QueryTrackingBehavior.NoTrackingWithIdentityResolution, false)]
+    [InlineData(
+        EntityState.Unchanged,
+        QueryTrackingBehavior.NoTrackingWithIdentityResolution,
+        false
+    )]
     [InlineData(EntityState.Added, QueryTrackingBehavior.NoTrackingWithIdentityResolution, false)]
-    [InlineData(EntityState.Modified, QueryTrackingBehavior.NoTrackingWithIdentityResolution, false)]
+    [InlineData(
+        EntityState.Modified,
+        QueryTrackingBehavior.NoTrackingWithIdentityResolution,
+        false
+    )]
     [InlineData(EntityState.Deleted, QueryTrackingBehavior.NoTrackingWithIdentityResolution, false)]
-    [InlineData(EntityState.Detached, QueryTrackingBehavior.NoTrackingWithIdentityResolution, false)]
+    [InlineData(
+        EntityState.Detached,
+        QueryTrackingBehavior.NoTrackingWithIdentityResolution,
+        false
+    )]
     [InlineData(EntityState.Unchanged, QueryTrackingBehavior.TrackAll, true)]
     [InlineData(EntityState.Added, QueryTrackingBehavior.TrackAll, true)]
     [InlineData(EntityState.Modified, QueryTrackingBehavior.TrackAll, true)]
@@ -3399,7 +4569,11 @@ public abstract partial class LoadTestBase<TFixture>
     [InlineData(EntityState.Modified, QueryTrackingBehavior.NoTracking, true)]
     [InlineData(EntityState.Deleted, QueryTrackingBehavior.NoTracking, true)]
     [InlineData(EntityState.Detached, QueryTrackingBehavior.NoTracking, true)]
-    [InlineData(EntityState.Unchanged, QueryTrackingBehavior.NoTrackingWithIdentityResolution, true)]
+    [InlineData(
+        EntityState.Unchanged,
+        QueryTrackingBehavior.NoTrackingWithIdentityResolution,
+        true
+    )]
     [InlineData(EntityState.Added, QueryTrackingBehavior.NoTrackingWithIdentityResolution, true)]
     [InlineData(EntityState.Modified, QueryTrackingBehavior.NoTrackingWithIdentityResolution, true)]
     [InlineData(EntityState.Deleted, QueryTrackingBehavior.NoTrackingWithIdentityResolution, true)]
@@ -3407,13 +4581,16 @@ public abstract partial class LoadTestBase<TFixture>
     public virtual async Task Lazy_load_many_to_one_reference_to_principal_not_found_full_loader_constructor_injection(
         EntityState state,
         QueryTrackingBehavior queryTrackingBehavior,
-        bool async)
+        bool async
+    )
     {
         using var context = CreateContext(lazyLoadingEnabled: true);
         context.ChangeTracker.QueryTrackingBehavior = queryTrackingBehavior;
         var changeDetector = (ChangeDetectorProxy)context.GetService<IChangeDetector>();
 
-        var child = context.Attach(new ChildFullLoaderByConstructor { Id = 767, ParentId = 787 }).Entity;
+        var child = context
+            .Attach(new ChildFullLoaderByConstructor { Id = 767, ParentId = 787 })
+            .Entity;
 
         ClearLog();
 
@@ -3436,7 +4613,10 @@ public abstract partial class LoadTestBase<TFixture>
             RecordLog();
             context.ChangeTracker.LazyLoadingEnabled = false;
 
-            Assert.Equal(state == EntityState.Detached ? 0 : 1, context.ChangeTracker.Entries().Count());
+            Assert.Equal(
+                state == EntityState.Detached ? 0 : 1,
+                context.ChangeTracker.Entries().Count()
+            );
             Assert.Null(child.Parent);
         }
         else
@@ -3457,11 +4637,23 @@ public abstract partial class LoadTestBase<TFixture>
     [InlineData(EntityState.Modified, QueryTrackingBehavior.NoTracking, false)]
     [InlineData(EntityState.Deleted, QueryTrackingBehavior.NoTracking, false)]
     [InlineData(EntityState.Detached, QueryTrackingBehavior.NoTracking, false)]
-    [InlineData(EntityState.Unchanged, QueryTrackingBehavior.NoTrackingWithIdentityResolution, false)]
+    [InlineData(
+        EntityState.Unchanged,
+        QueryTrackingBehavior.NoTrackingWithIdentityResolution,
+        false
+    )]
     [InlineData(EntityState.Added, QueryTrackingBehavior.NoTrackingWithIdentityResolution, false)]
-    [InlineData(EntityState.Modified, QueryTrackingBehavior.NoTrackingWithIdentityResolution, false)]
+    [InlineData(
+        EntityState.Modified,
+        QueryTrackingBehavior.NoTrackingWithIdentityResolution,
+        false
+    )]
     [InlineData(EntityState.Deleted, QueryTrackingBehavior.NoTrackingWithIdentityResolution, false)]
-    [InlineData(EntityState.Detached, QueryTrackingBehavior.NoTrackingWithIdentityResolution, false)]
+    [InlineData(
+        EntityState.Detached,
+        QueryTrackingBehavior.NoTrackingWithIdentityResolution,
+        false
+    )]
     [InlineData(EntityState.Unchanged, QueryTrackingBehavior.TrackAll, true)]
     [InlineData(EntityState.Added, QueryTrackingBehavior.TrackAll, true)]
     [InlineData(EntityState.Modified, QueryTrackingBehavior.TrackAll, true)]
@@ -3472,7 +4664,11 @@ public abstract partial class LoadTestBase<TFixture>
     [InlineData(EntityState.Modified, QueryTrackingBehavior.NoTracking, true)]
     [InlineData(EntityState.Deleted, QueryTrackingBehavior.NoTracking, true)]
     [InlineData(EntityState.Detached, QueryTrackingBehavior.NoTracking, true)]
-    [InlineData(EntityState.Unchanged, QueryTrackingBehavior.NoTrackingWithIdentityResolution, true)]
+    [InlineData(
+        EntityState.Unchanged,
+        QueryTrackingBehavior.NoTrackingWithIdentityResolution,
+        true
+    )]
     [InlineData(EntityState.Added, QueryTrackingBehavior.NoTrackingWithIdentityResolution, true)]
     [InlineData(EntityState.Modified, QueryTrackingBehavior.NoTrackingWithIdentityResolution, true)]
     [InlineData(EntityState.Deleted, QueryTrackingBehavior.NoTrackingWithIdentityResolution, true)]
@@ -3480,13 +4676,16 @@ public abstract partial class LoadTestBase<TFixture>
     public virtual async Task Lazy_load_one_to_one_reference_to_principal_not_found_full_loader_constructor_injection(
         EntityState state,
         QueryTrackingBehavior queryTrackingBehavior,
-        bool async)
+        bool async
+    )
     {
         using var context = CreateContext(lazyLoadingEnabled: true);
         context.ChangeTracker.QueryTrackingBehavior = queryTrackingBehavior;
         var changeDetector = (ChangeDetectorProxy)context.GetService<IChangeDetector>();
 
-        var single = context.Attach(new SingleFullLoaderByConstructor { Id = 767, ParentId = 787 }).Entity;
+        var single = context
+            .Attach(new SingleFullLoaderByConstructor { Id = 767, ParentId = 787 })
+            .Entity;
 
         ClearLog();
 
@@ -3509,7 +4708,10 @@ public abstract partial class LoadTestBase<TFixture>
             RecordLog();
             context.ChangeTracker.LazyLoadingEnabled = false;
 
-            Assert.Equal(state == EntityState.Detached ? 0 : 1, context.ChangeTracker.Entries().Count());
+            Assert.Equal(
+                state == EntityState.Detached ? 0 : 1,
+                context.ChangeTracker.Entries().Count()
+            );
 
             Assert.Null(single.Parent);
         }
@@ -3531,11 +4733,23 @@ public abstract partial class LoadTestBase<TFixture>
     [InlineData(EntityState.Modified, QueryTrackingBehavior.NoTracking, false)]
     [InlineData(EntityState.Deleted, QueryTrackingBehavior.NoTracking, false)]
     [InlineData(EntityState.Detached, QueryTrackingBehavior.NoTracking, false)]
-    [InlineData(EntityState.Unchanged, QueryTrackingBehavior.NoTrackingWithIdentityResolution, false)]
+    [InlineData(
+        EntityState.Unchanged,
+        QueryTrackingBehavior.NoTrackingWithIdentityResolution,
+        false
+    )]
     [InlineData(EntityState.Added, QueryTrackingBehavior.NoTrackingWithIdentityResolution, false)]
-    [InlineData(EntityState.Modified, QueryTrackingBehavior.NoTrackingWithIdentityResolution, false)]
+    [InlineData(
+        EntityState.Modified,
+        QueryTrackingBehavior.NoTrackingWithIdentityResolution,
+        false
+    )]
     [InlineData(EntityState.Deleted, QueryTrackingBehavior.NoTrackingWithIdentityResolution, false)]
-    [InlineData(EntityState.Detached, QueryTrackingBehavior.NoTrackingWithIdentityResolution, false)]
+    [InlineData(
+        EntityState.Detached,
+        QueryTrackingBehavior.NoTrackingWithIdentityResolution,
+        false
+    )]
     [InlineData(EntityState.Unchanged, QueryTrackingBehavior.TrackAll, true)]
     [InlineData(EntityState.Added, QueryTrackingBehavior.TrackAll, true)]
     [InlineData(EntityState.Modified, QueryTrackingBehavior.TrackAll, true)]
@@ -3546,7 +4760,11 @@ public abstract partial class LoadTestBase<TFixture>
     [InlineData(EntityState.Modified, QueryTrackingBehavior.NoTracking, true)]
     [InlineData(EntityState.Deleted, QueryTrackingBehavior.NoTracking, true)]
     [InlineData(EntityState.Detached, QueryTrackingBehavior.NoTracking, true)]
-    [InlineData(EntityState.Unchanged, QueryTrackingBehavior.NoTrackingWithIdentityResolution, true)]
+    [InlineData(
+        EntityState.Unchanged,
+        QueryTrackingBehavior.NoTrackingWithIdentityResolution,
+        true
+    )]
     [InlineData(EntityState.Added, QueryTrackingBehavior.NoTrackingWithIdentityResolution, true)]
     [InlineData(EntityState.Modified, QueryTrackingBehavior.NoTrackingWithIdentityResolution, true)]
     [InlineData(EntityState.Deleted, QueryTrackingBehavior.NoTrackingWithIdentityResolution, true)]
@@ -3554,7 +4772,8 @@ public abstract partial class LoadTestBase<TFixture>
     public virtual async Task Lazy_load_one_to_one_reference_to_dependent_not_found_full_loader_constructor_injection(
         EntityState state,
         QueryTrackingBehavior queryTrackingBehavior,
-        bool async)
+        bool async
+    )
     {
         using var context = CreateContext(lazyLoadingEnabled: true);
         context.ChangeTracker.QueryTrackingBehavior = queryTrackingBehavior;
@@ -3585,7 +4804,10 @@ public abstract partial class LoadTestBase<TFixture>
 
             Assert.Null(parent.Single);
 
-            Assert.Equal(state == EntityState.Detached ? 0 : 1, context.ChangeTracker.Entries().Count());
+            Assert.Equal(
+                state == EntityState.Detached ? 0 : 1,
+                context.ChangeTracker.Entries().Count()
+            );
         }
         else
         {
@@ -3595,71 +4817,352 @@ public abstract partial class LoadTestBase<TFixture>
     }
 
     [ConditionalTheory]
-    [InlineData(EntityState.Unchanged, CascadeTiming.Immediate, QueryTrackingBehavior.TrackAll, false)]
+    [InlineData(
+        EntityState.Unchanged,
+        CascadeTiming.Immediate,
+        QueryTrackingBehavior.TrackAll,
+        false
+    )]
     [InlineData(EntityState.Added, CascadeTiming.Immediate, QueryTrackingBehavior.TrackAll, false)]
-    [InlineData(EntityState.Modified, CascadeTiming.Immediate, QueryTrackingBehavior.TrackAll, false)]
-    [InlineData(EntityState.Deleted, CascadeTiming.Immediate, QueryTrackingBehavior.TrackAll, false)]
-    [InlineData(EntityState.Detached, CascadeTiming.Immediate, QueryTrackingBehavior.TrackAll, false)]
-    [InlineData(EntityState.Unchanged, CascadeTiming.OnSaveChanges, QueryTrackingBehavior.TrackAll, false)]
-    [InlineData(EntityState.Added, CascadeTiming.OnSaveChanges, QueryTrackingBehavior.TrackAll, false)]
-    [InlineData(EntityState.Modified, CascadeTiming.OnSaveChanges, QueryTrackingBehavior.TrackAll, false)]
-    [InlineData(EntityState.Deleted, CascadeTiming.OnSaveChanges, QueryTrackingBehavior.TrackAll, false)]
-    [InlineData(EntityState.Detached, CascadeTiming.OnSaveChanges, QueryTrackingBehavior.TrackAll, false)]
-    [InlineData(EntityState.Unchanged, CascadeTiming.Immediate, QueryTrackingBehavior.NoTracking, false)]
-    [InlineData(EntityState.Added, CascadeTiming.Immediate, QueryTrackingBehavior.NoTracking, false)]
-    [InlineData(EntityState.Modified, CascadeTiming.Immediate, QueryTrackingBehavior.NoTracking, false)]
-    [InlineData(EntityState.Deleted, CascadeTiming.Immediate, QueryTrackingBehavior.NoTracking, false)]
-    [InlineData(EntityState.Detached, CascadeTiming.Immediate, QueryTrackingBehavior.NoTracking, false)]
-    [InlineData(EntityState.Unchanged, CascadeTiming.OnSaveChanges, QueryTrackingBehavior.NoTracking, false)]
-    [InlineData(EntityState.Added, CascadeTiming.OnSaveChanges, QueryTrackingBehavior.NoTracking, false)]
-    [InlineData(EntityState.Modified, CascadeTiming.OnSaveChanges, QueryTrackingBehavior.NoTracking, false)]
-    [InlineData(EntityState.Deleted, CascadeTiming.OnSaveChanges, QueryTrackingBehavior.NoTracking, false)]
-    [InlineData(EntityState.Detached, CascadeTiming.OnSaveChanges, QueryTrackingBehavior.NoTracking, false)]
-    [InlineData(EntityState.Unchanged, CascadeTiming.Immediate, QueryTrackingBehavior.NoTrackingWithIdentityResolution, false)]
-    [InlineData(EntityState.Added, CascadeTiming.Immediate, QueryTrackingBehavior.NoTrackingWithIdentityResolution, false)]
-    [InlineData(EntityState.Modified, CascadeTiming.Immediate, QueryTrackingBehavior.NoTrackingWithIdentityResolution, false)]
-    [InlineData(EntityState.Deleted, CascadeTiming.Immediate, QueryTrackingBehavior.NoTrackingWithIdentityResolution, false)]
-    [InlineData(EntityState.Detached, CascadeTiming.Immediate, QueryTrackingBehavior.NoTrackingWithIdentityResolution, false)]
-    [InlineData(EntityState.Unchanged, CascadeTiming.OnSaveChanges, QueryTrackingBehavior.NoTrackingWithIdentityResolution, false)]
-    [InlineData(EntityState.Added, CascadeTiming.OnSaveChanges, QueryTrackingBehavior.NoTrackingWithIdentityResolution, false)]
-    [InlineData(EntityState.Modified, CascadeTiming.OnSaveChanges, QueryTrackingBehavior.NoTrackingWithIdentityResolution, false)]
-    [InlineData(EntityState.Deleted, CascadeTiming.OnSaveChanges, QueryTrackingBehavior.NoTrackingWithIdentityResolution, false)]
-    [InlineData(EntityState.Detached, CascadeTiming.OnSaveChanges, QueryTrackingBehavior.NoTrackingWithIdentityResolution, false)]
-    [InlineData(EntityState.Unchanged, CascadeTiming.Immediate, QueryTrackingBehavior.TrackAll, true)]
+    [InlineData(
+        EntityState.Modified,
+        CascadeTiming.Immediate,
+        QueryTrackingBehavior.TrackAll,
+        false
+    )]
+    [InlineData(
+        EntityState.Deleted,
+        CascadeTiming.Immediate,
+        QueryTrackingBehavior.TrackAll,
+        false
+    )]
+    [InlineData(
+        EntityState.Detached,
+        CascadeTiming.Immediate,
+        QueryTrackingBehavior.TrackAll,
+        false
+    )]
+    [InlineData(
+        EntityState.Unchanged,
+        CascadeTiming.OnSaveChanges,
+        QueryTrackingBehavior.TrackAll,
+        false
+    )]
+    [InlineData(
+        EntityState.Added,
+        CascadeTiming.OnSaveChanges,
+        QueryTrackingBehavior.TrackAll,
+        false
+    )]
+    [InlineData(
+        EntityState.Modified,
+        CascadeTiming.OnSaveChanges,
+        QueryTrackingBehavior.TrackAll,
+        false
+    )]
+    [InlineData(
+        EntityState.Deleted,
+        CascadeTiming.OnSaveChanges,
+        QueryTrackingBehavior.TrackAll,
+        false
+    )]
+    [InlineData(
+        EntityState.Detached,
+        CascadeTiming.OnSaveChanges,
+        QueryTrackingBehavior.TrackAll,
+        false
+    )]
+    [InlineData(
+        EntityState.Unchanged,
+        CascadeTiming.Immediate,
+        QueryTrackingBehavior.NoTracking,
+        false
+    )]
+    [InlineData(
+        EntityState.Added,
+        CascadeTiming.Immediate,
+        QueryTrackingBehavior.NoTracking,
+        false
+    )]
+    [InlineData(
+        EntityState.Modified,
+        CascadeTiming.Immediate,
+        QueryTrackingBehavior.NoTracking,
+        false
+    )]
+    [InlineData(
+        EntityState.Deleted,
+        CascadeTiming.Immediate,
+        QueryTrackingBehavior.NoTracking,
+        false
+    )]
+    [InlineData(
+        EntityState.Detached,
+        CascadeTiming.Immediate,
+        QueryTrackingBehavior.NoTracking,
+        false
+    )]
+    [InlineData(
+        EntityState.Unchanged,
+        CascadeTiming.OnSaveChanges,
+        QueryTrackingBehavior.NoTracking,
+        false
+    )]
+    [InlineData(
+        EntityState.Added,
+        CascadeTiming.OnSaveChanges,
+        QueryTrackingBehavior.NoTracking,
+        false
+    )]
+    [InlineData(
+        EntityState.Modified,
+        CascadeTiming.OnSaveChanges,
+        QueryTrackingBehavior.NoTracking,
+        false
+    )]
+    [InlineData(
+        EntityState.Deleted,
+        CascadeTiming.OnSaveChanges,
+        QueryTrackingBehavior.NoTracking,
+        false
+    )]
+    [InlineData(
+        EntityState.Detached,
+        CascadeTiming.OnSaveChanges,
+        QueryTrackingBehavior.NoTracking,
+        false
+    )]
+    [InlineData(
+        EntityState.Unchanged,
+        CascadeTiming.Immediate,
+        QueryTrackingBehavior.NoTrackingWithIdentityResolution,
+        false
+    )]
+    [InlineData(
+        EntityState.Added,
+        CascadeTiming.Immediate,
+        QueryTrackingBehavior.NoTrackingWithIdentityResolution,
+        false
+    )]
+    [InlineData(
+        EntityState.Modified,
+        CascadeTiming.Immediate,
+        QueryTrackingBehavior.NoTrackingWithIdentityResolution,
+        false
+    )]
+    [InlineData(
+        EntityState.Deleted,
+        CascadeTiming.Immediate,
+        QueryTrackingBehavior.NoTrackingWithIdentityResolution,
+        false
+    )]
+    [InlineData(
+        EntityState.Detached,
+        CascadeTiming.Immediate,
+        QueryTrackingBehavior.NoTrackingWithIdentityResolution,
+        false
+    )]
+    [InlineData(
+        EntityState.Unchanged,
+        CascadeTiming.OnSaveChanges,
+        QueryTrackingBehavior.NoTrackingWithIdentityResolution,
+        false
+    )]
+    [InlineData(
+        EntityState.Added,
+        CascadeTiming.OnSaveChanges,
+        QueryTrackingBehavior.NoTrackingWithIdentityResolution,
+        false
+    )]
+    [InlineData(
+        EntityState.Modified,
+        CascadeTiming.OnSaveChanges,
+        QueryTrackingBehavior.NoTrackingWithIdentityResolution,
+        false
+    )]
+    [InlineData(
+        EntityState.Deleted,
+        CascadeTiming.OnSaveChanges,
+        QueryTrackingBehavior.NoTrackingWithIdentityResolution,
+        false
+    )]
+    [InlineData(
+        EntityState.Detached,
+        CascadeTiming.OnSaveChanges,
+        QueryTrackingBehavior.NoTrackingWithIdentityResolution,
+        false
+    )]
+    [InlineData(
+        EntityState.Unchanged,
+        CascadeTiming.Immediate,
+        QueryTrackingBehavior.TrackAll,
+        true
+    )]
     [InlineData(EntityState.Added, CascadeTiming.Immediate, QueryTrackingBehavior.TrackAll, true)]
-    [InlineData(EntityState.Modified, CascadeTiming.Immediate, QueryTrackingBehavior.TrackAll, true)]
+    [InlineData(
+        EntityState.Modified,
+        CascadeTiming.Immediate,
+        QueryTrackingBehavior.TrackAll,
+        true
+    )]
     [InlineData(EntityState.Deleted, CascadeTiming.Immediate, QueryTrackingBehavior.TrackAll, true)]
-    [InlineData(EntityState.Detached, CascadeTiming.Immediate, QueryTrackingBehavior.TrackAll, true)]
-    [InlineData(EntityState.Unchanged, CascadeTiming.OnSaveChanges, QueryTrackingBehavior.TrackAll, true)]
-    [InlineData(EntityState.Added, CascadeTiming.OnSaveChanges, QueryTrackingBehavior.TrackAll, true)]
-    [InlineData(EntityState.Modified, CascadeTiming.OnSaveChanges, QueryTrackingBehavior.TrackAll, true)]
-    [InlineData(EntityState.Deleted, CascadeTiming.OnSaveChanges, QueryTrackingBehavior.TrackAll, true)]
-    [InlineData(EntityState.Detached, CascadeTiming.OnSaveChanges, QueryTrackingBehavior.TrackAll, true)]
-    [InlineData(EntityState.Unchanged, CascadeTiming.Immediate, QueryTrackingBehavior.NoTracking, true)]
+    [InlineData(
+        EntityState.Detached,
+        CascadeTiming.Immediate,
+        QueryTrackingBehavior.TrackAll,
+        true
+    )]
+    [InlineData(
+        EntityState.Unchanged,
+        CascadeTiming.OnSaveChanges,
+        QueryTrackingBehavior.TrackAll,
+        true
+    )]
+    [InlineData(
+        EntityState.Added,
+        CascadeTiming.OnSaveChanges,
+        QueryTrackingBehavior.TrackAll,
+        true
+    )]
+    [InlineData(
+        EntityState.Modified,
+        CascadeTiming.OnSaveChanges,
+        QueryTrackingBehavior.TrackAll,
+        true
+    )]
+    [InlineData(
+        EntityState.Deleted,
+        CascadeTiming.OnSaveChanges,
+        QueryTrackingBehavior.TrackAll,
+        true
+    )]
+    [InlineData(
+        EntityState.Detached,
+        CascadeTiming.OnSaveChanges,
+        QueryTrackingBehavior.TrackAll,
+        true
+    )]
+    [InlineData(
+        EntityState.Unchanged,
+        CascadeTiming.Immediate,
+        QueryTrackingBehavior.NoTracking,
+        true
+    )]
     [InlineData(EntityState.Added, CascadeTiming.Immediate, QueryTrackingBehavior.NoTracking, true)]
-    [InlineData(EntityState.Modified, CascadeTiming.Immediate, QueryTrackingBehavior.NoTracking, true)]
-    [InlineData(EntityState.Deleted, CascadeTiming.Immediate, QueryTrackingBehavior.NoTracking, true)]
-    [InlineData(EntityState.Detached, CascadeTiming.Immediate, QueryTrackingBehavior.NoTracking, true)]
-    [InlineData(EntityState.Unchanged, CascadeTiming.OnSaveChanges, QueryTrackingBehavior.NoTracking, true)]
-    [InlineData(EntityState.Added, CascadeTiming.OnSaveChanges, QueryTrackingBehavior.NoTracking, true)]
-    [InlineData(EntityState.Modified, CascadeTiming.OnSaveChanges, QueryTrackingBehavior.NoTracking, true)]
-    [InlineData(EntityState.Deleted, CascadeTiming.OnSaveChanges, QueryTrackingBehavior.NoTracking, true)]
-    [InlineData(EntityState.Detached, CascadeTiming.OnSaveChanges, QueryTrackingBehavior.NoTracking, true)]
-    [InlineData(EntityState.Unchanged, CascadeTiming.Immediate, QueryTrackingBehavior.NoTrackingWithIdentityResolution, true)]
-    [InlineData(EntityState.Added, CascadeTiming.Immediate, QueryTrackingBehavior.NoTrackingWithIdentityResolution, true)]
-    [InlineData(EntityState.Modified, CascadeTiming.Immediate, QueryTrackingBehavior.NoTrackingWithIdentityResolution, true)]
-    [InlineData(EntityState.Deleted, CascadeTiming.Immediate, QueryTrackingBehavior.NoTrackingWithIdentityResolution, true)]
-    [InlineData(EntityState.Detached, CascadeTiming.Immediate, QueryTrackingBehavior.NoTrackingWithIdentityResolution, true)]
-    [InlineData(EntityState.Unchanged, CascadeTiming.OnSaveChanges, QueryTrackingBehavior.NoTrackingWithIdentityResolution, true)]
-    [InlineData(EntityState.Added, CascadeTiming.OnSaveChanges, QueryTrackingBehavior.NoTrackingWithIdentityResolution, true)]
-    [InlineData(EntityState.Modified, CascadeTiming.OnSaveChanges, QueryTrackingBehavior.NoTrackingWithIdentityResolution, true)]
-    [InlineData(EntityState.Deleted, CascadeTiming.OnSaveChanges, QueryTrackingBehavior.NoTrackingWithIdentityResolution, true)]
-    [InlineData(EntityState.Detached, CascadeTiming.OnSaveChanges, QueryTrackingBehavior.NoTrackingWithIdentityResolution, true)]
+    [InlineData(
+        EntityState.Modified,
+        CascadeTiming.Immediate,
+        QueryTrackingBehavior.NoTracking,
+        true
+    )]
+    [InlineData(
+        EntityState.Deleted,
+        CascadeTiming.Immediate,
+        QueryTrackingBehavior.NoTracking,
+        true
+    )]
+    [InlineData(
+        EntityState.Detached,
+        CascadeTiming.Immediate,
+        QueryTrackingBehavior.NoTracking,
+        true
+    )]
+    [InlineData(
+        EntityState.Unchanged,
+        CascadeTiming.OnSaveChanges,
+        QueryTrackingBehavior.NoTracking,
+        true
+    )]
+    [InlineData(
+        EntityState.Added,
+        CascadeTiming.OnSaveChanges,
+        QueryTrackingBehavior.NoTracking,
+        true
+    )]
+    [InlineData(
+        EntityState.Modified,
+        CascadeTiming.OnSaveChanges,
+        QueryTrackingBehavior.NoTracking,
+        true
+    )]
+    [InlineData(
+        EntityState.Deleted,
+        CascadeTiming.OnSaveChanges,
+        QueryTrackingBehavior.NoTracking,
+        true
+    )]
+    [InlineData(
+        EntityState.Detached,
+        CascadeTiming.OnSaveChanges,
+        QueryTrackingBehavior.NoTracking,
+        true
+    )]
+    [InlineData(
+        EntityState.Unchanged,
+        CascadeTiming.Immediate,
+        QueryTrackingBehavior.NoTrackingWithIdentityResolution,
+        true
+    )]
+    [InlineData(
+        EntityState.Added,
+        CascadeTiming.Immediate,
+        QueryTrackingBehavior.NoTrackingWithIdentityResolution,
+        true
+    )]
+    [InlineData(
+        EntityState.Modified,
+        CascadeTiming.Immediate,
+        QueryTrackingBehavior.NoTrackingWithIdentityResolution,
+        true
+    )]
+    [InlineData(
+        EntityState.Deleted,
+        CascadeTiming.Immediate,
+        QueryTrackingBehavior.NoTrackingWithIdentityResolution,
+        true
+    )]
+    [InlineData(
+        EntityState.Detached,
+        CascadeTiming.Immediate,
+        QueryTrackingBehavior.NoTrackingWithIdentityResolution,
+        true
+    )]
+    [InlineData(
+        EntityState.Unchanged,
+        CascadeTiming.OnSaveChanges,
+        QueryTrackingBehavior.NoTrackingWithIdentityResolution,
+        true
+    )]
+    [InlineData(
+        EntityState.Added,
+        CascadeTiming.OnSaveChanges,
+        QueryTrackingBehavior.NoTrackingWithIdentityResolution,
+        true
+    )]
+    [InlineData(
+        EntityState.Modified,
+        CascadeTiming.OnSaveChanges,
+        QueryTrackingBehavior.NoTrackingWithIdentityResolution,
+        true
+    )]
+    [InlineData(
+        EntityState.Deleted,
+        CascadeTiming.OnSaveChanges,
+        QueryTrackingBehavior.NoTrackingWithIdentityResolution,
+        true
+    )]
+    [InlineData(
+        EntityState.Detached,
+        CascadeTiming.OnSaveChanges,
+        QueryTrackingBehavior.NoTrackingWithIdentityResolution,
+        true
+    )]
     public virtual async Task Lazy_load_collection_already_loaded_full_loader_constructor_injection(
         EntityState state,
         CascadeTiming deleteOrphansTiming,
         QueryTrackingBehavior queryTrackingBehavior,
-        bool async)
+        bool async
+    )
     {
         using var context = CreateContext(lazyLoadingEnabled: true);
         context.ChangeTracker.QueryTrackingBehavior = queryTrackingBehavior;
@@ -3690,9 +5193,11 @@ public abstract partial class LoadTestBase<TFixture>
 
         Assert.Equal(2, parent.Children.Count());
 
-        if (queryTrackingBehavior == QueryTrackingBehavior.TrackAll
+        if (
+            queryTrackingBehavior == QueryTrackingBehavior.TrackAll
             && state == EntityState.Deleted
-            && deleteOrphansTiming != CascadeTiming.Never)
+            && deleteOrphansTiming != CascadeTiming.Never
+        )
         {
             Assert.All(parent.Children.Select(e => e.Parent), c => Assert.Null(c));
         }
@@ -3713,11 +5218,23 @@ public abstract partial class LoadTestBase<TFixture>
     [InlineData(EntityState.Modified, QueryTrackingBehavior.NoTracking, false)]
     [InlineData(EntityState.Deleted, QueryTrackingBehavior.NoTracking, false)]
     [InlineData(EntityState.Detached, QueryTrackingBehavior.NoTracking, false)]
-    [InlineData(EntityState.Unchanged, QueryTrackingBehavior.NoTrackingWithIdentityResolution, false)]
+    [InlineData(
+        EntityState.Unchanged,
+        QueryTrackingBehavior.NoTrackingWithIdentityResolution,
+        false
+    )]
     [InlineData(EntityState.Added, QueryTrackingBehavior.NoTrackingWithIdentityResolution, false)]
-    [InlineData(EntityState.Modified, QueryTrackingBehavior.NoTrackingWithIdentityResolution, false)]
+    [InlineData(
+        EntityState.Modified,
+        QueryTrackingBehavior.NoTrackingWithIdentityResolution,
+        false
+    )]
     [InlineData(EntityState.Deleted, QueryTrackingBehavior.NoTrackingWithIdentityResolution, false)]
-    [InlineData(EntityState.Detached, QueryTrackingBehavior.NoTrackingWithIdentityResolution, false)]
+    [InlineData(
+        EntityState.Detached,
+        QueryTrackingBehavior.NoTrackingWithIdentityResolution,
+        false
+    )]
     [InlineData(EntityState.Unchanged, QueryTrackingBehavior.TrackAll, true)]
     [InlineData(EntityState.Added, QueryTrackingBehavior.TrackAll, true)]
     [InlineData(EntityState.Modified, QueryTrackingBehavior.TrackAll, true)]
@@ -3728,7 +5245,11 @@ public abstract partial class LoadTestBase<TFixture>
     [InlineData(EntityState.Modified, QueryTrackingBehavior.NoTracking, true)]
     [InlineData(EntityState.Deleted, QueryTrackingBehavior.NoTracking, true)]
     [InlineData(EntityState.Detached, QueryTrackingBehavior.NoTracking, true)]
-    [InlineData(EntityState.Unchanged, QueryTrackingBehavior.NoTrackingWithIdentityResolution, true)]
+    [InlineData(
+        EntityState.Unchanged,
+        QueryTrackingBehavior.NoTrackingWithIdentityResolution,
+        true
+    )]
     [InlineData(EntityState.Added, QueryTrackingBehavior.NoTrackingWithIdentityResolution, true)]
     [InlineData(EntityState.Modified, QueryTrackingBehavior.NoTrackingWithIdentityResolution, true)]
     [InlineData(EntityState.Deleted, QueryTrackingBehavior.NoTrackingWithIdentityResolution, true)]
@@ -3736,13 +5257,17 @@ public abstract partial class LoadTestBase<TFixture>
     public virtual async Task Lazy_load_many_to_one_reference_to_principal_already_loaded_full_loader_constructor_injection(
         EntityState state,
         QueryTrackingBehavior queryTrackingBehavior,
-        bool async)
+        bool async
+    )
     {
         using var context = CreateContext(lazyLoadingEnabled: true);
         context.ChangeTracker.QueryTrackingBehavior = queryTrackingBehavior;
         var changeDetector = (ChangeDetectorProxy)context.GetService<IChangeDetector>();
 
-        var child = context.Set<ChildFullLoaderByConstructor>().Include(e => e.Parent).Single(e => e.Id == 12);
+        var child = context
+            .Set<ChildFullLoaderByConstructor>()
+            .Include(e => e.Parent)
+            .Single(e => e.Id == 12);
 
         ClearLog();
 
@@ -3771,13 +5296,19 @@ public abstract partial class LoadTestBase<TFixture>
             RecordLog();
             context.ChangeTracker.LazyLoadingEnabled = false;
 
-            Assert.Equal(state == EntityState.Detached ? 0 : 2, context.ChangeTracker.Entries().Count());
+            Assert.Equal(
+                state == EntityState.Detached ? 0 : 2,
+                context.ChangeTracker.Entries().Count()
+            );
 
             Assert.Same(child, child.Parent.Children.Single());
 
             if (state != EntityState.Detached)
             {
-                var parent = context.ChangeTracker.Entries<ParentFullLoaderByConstructor>().Single().Entity;
+                var parent = context
+                    .ChangeTracker.Entries<ParentFullLoaderByConstructor>()
+                    .Single()
+                    .Entity;
 
                 Assert.Same(parent, child.Parent);
                 Assert.Same(child, parent.Children.Single());
@@ -3796,11 +5327,23 @@ public abstract partial class LoadTestBase<TFixture>
     [InlineData(EntityState.Modified, QueryTrackingBehavior.NoTracking, false)]
     [InlineData(EntityState.Deleted, QueryTrackingBehavior.NoTracking, false)]
     [InlineData(EntityState.Detached, QueryTrackingBehavior.NoTracking, false)]
-    [InlineData(EntityState.Unchanged, QueryTrackingBehavior.NoTrackingWithIdentityResolution, false)]
+    [InlineData(
+        EntityState.Unchanged,
+        QueryTrackingBehavior.NoTrackingWithIdentityResolution,
+        false
+    )]
     [InlineData(EntityState.Added, QueryTrackingBehavior.NoTrackingWithIdentityResolution, false)]
-    [InlineData(EntityState.Modified, QueryTrackingBehavior.NoTrackingWithIdentityResolution, false)]
+    [InlineData(
+        EntityState.Modified,
+        QueryTrackingBehavior.NoTrackingWithIdentityResolution,
+        false
+    )]
     [InlineData(EntityState.Deleted, QueryTrackingBehavior.NoTrackingWithIdentityResolution, false)]
-    [InlineData(EntityState.Detached, QueryTrackingBehavior.NoTrackingWithIdentityResolution, false)]
+    [InlineData(
+        EntityState.Detached,
+        QueryTrackingBehavior.NoTrackingWithIdentityResolution,
+        false
+    )]
     [InlineData(EntityState.Unchanged, QueryTrackingBehavior.TrackAll, true)]
     [InlineData(EntityState.Added, QueryTrackingBehavior.TrackAll, true)]
     [InlineData(EntityState.Modified, QueryTrackingBehavior.TrackAll, true)]
@@ -3811,7 +5354,11 @@ public abstract partial class LoadTestBase<TFixture>
     [InlineData(EntityState.Modified, QueryTrackingBehavior.NoTracking, true)]
     [InlineData(EntityState.Deleted, QueryTrackingBehavior.NoTracking, true)]
     [InlineData(EntityState.Detached, QueryTrackingBehavior.NoTracking, true)]
-    [InlineData(EntityState.Unchanged, QueryTrackingBehavior.NoTrackingWithIdentityResolution, true)]
+    [InlineData(
+        EntityState.Unchanged,
+        QueryTrackingBehavior.NoTrackingWithIdentityResolution,
+        true
+    )]
     [InlineData(EntityState.Added, QueryTrackingBehavior.NoTrackingWithIdentityResolution, true)]
     [InlineData(EntityState.Modified, QueryTrackingBehavior.NoTrackingWithIdentityResolution, true)]
     [InlineData(EntityState.Deleted, QueryTrackingBehavior.NoTrackingWithIdentityResolution, true)]
@@ -3819,7 +5366,8 @@ public abstract partial class LoadTestBase<TFixture>
     public virtual async Task Lazy_load_one_to_one_reference_to_principal_already_loaded_full_loader_constructor_injection(
         EntityState state,
         QueryTrackingBehavior queryTrackingBehavior,
-        bool async)
+        bool async
+    )
     {
         using var context = CreateContext(lazyLoadingEnabled: true);
         context.ChangeTracker.QueryTrackingBehavior = queryTrackingBehavior;
@@ -3854,13 +5402,19 @@ public abstract partial class LoadTestBase<TFixture>
             RecordLog();
             context.ChangeTracker.LazyLoadingEnabled = false;
 
-            Assert.Equal(state == EntityState.Detached ? 0 : 2, context.ChangeTracker.Entries().Count());
+            Assert.Equal(
+                state == EntityState.Detached ? 0 : 2,
+                context.ChangeTracker.Entries().Count()
+            );
 
             Assert.Same(single, single.Parent.Single);
 
             if (state != EntityState.Detached)
             {
-                var parent = context.ChangeTracker.Entries<ParentFullLoaderByConstructor>().Single().Entity;
+                var parent = context
+                    .ChangeTracker.Entries<ParentFullLoaderByConstructor>()
+                    .Single()
+                    .Entity;
 
                 Assert.Same(parent, single.Parent);
                 Assert.Same(single, parent.Single);
@@ -3869,71 +5423,352 @@ public abstract partial class LoadTestBase<TFixture>
     }
 
     [ConditionalTheory]
-    [InlineData(EntityState.Unchanged, CascadeTiming.Immediate, QueryTrackingBehavior.TrackAll, true)]
+    [InlineData(
+        EntityState.Unchanged,
+        CascadeTiming.Immediate,
+        QueryTrackingBehavior.TrackAll,
+        true
+    )]
     [InlineData(EntityState.Added, CascadeTiming.Immediate, QueryTrackingBehavior.TrackAll, true)]
-    [InlineData(EntityState.Modified, CascadeTiming.Immediate, QueryTrackingBehavior.TrackAll, true)]
+    [InlineData(
+        EntityState.Modified,
+        CascadeTiming.Immediate,
+        QueryTrackingBehavior.TrackAll,
+        true
+    )]
     [InlineData(EntityState.Deleted, CascadeTiming.Immediate, QueryTrackingBehavior.TrackAll, true)]
-    [InlineData(EntityState.Detached, CascadeTiming.Immediate, QueryTrackingBehavior.TrackAll, true)]
-    [InlineData(EntityState.Unchanged, CascadeTiming.OnSaveChanges, QueryTrackingBehavior.TrackAll, true)]
-    [InlineData(EntityState.Added, CascadeTiming.OnSaveChanges, QueryTrackingBehavior.TrackAll, true)]
-    [InlineData(EntityState.Modified, CascadeTiming.OnSaveChanges, QueryTrackingBehavior.TrackAll, true)]
-    [InlineData(EntityState.Deleted, CascadeTiming.OnSaveChanges, QueryTrackingBehavior.TrackAll, true)]
-    [InlineData(EntityState.Detached, CascadeTiming.OnSaveChanges, QueryTrackingBehavior.TrackAll, true)]
-    [InlineData(EntityState.Unchanged, CascadeTiming.Immediate, QueryTrackingBehavior.NoTracking, true)]
+    [InlineData(
+        EntityState.Detached,
+        CascadeTiming.Immediate,
+        QueryTrackingBehavior.TrackAll,
+        true
+    )]
+    [InlineData(
+        EntityState.Unchanged,
+        CascadeTiming.OnSaveChanges,
+        QueryTrackingBehavior.TrackAll,
+        true
+    )]
+    [InlineData(
+        EntityState.Added,
+        CascadeTiming.OnSaveChanges,
+        QueryTrackingBehavior.TrackAll,
+        true
+    )]
+    [InlineData(
+        EntityState.Modified,
+        CascadeTiming.OnSaveChanges,
+        QueryTrackingBehavior.TrackAll,
+        true
+    )]
+    [InlineData(
+        EntityState.Deleted,
+        CascadeTiming.OnSaveChanges,
+        QueryTrackingBehavior.TrackAll,
+        true
+    )]
+    [InlineData(
+        EntityState.Detached,
+        CascadeTiming.OnSaveChanges,
+        QueryTrackingBehavior.TrackAll,
+        true
+    )]
+    [InlineData(
+        EntityState.Unchanged,
+        CascadeTiming.Immediate,
+        QueryTrackingBehavior.NoTracking,
+        true
+    )]
     [InlineData(EntityState.Added, CascadeTiming.Immediate, QueryTrackingBehavior.NoTracking, true)]
-    [InlineData(EntityState.Modified, CascadeTiming.Immediate, QueryTrackingBehavior.NoTracking, true)]
-    [InlineData(EntityState.Deleted, CascadeTiming.Immediate, QueryTrackingBehavior.NoTracking, true)]
-    [InlineData(EntityState.Detached, CascadeTiming.Immediate, QueryTrackingBehavior.NoTracking, true)]
-    [InlineData(EntityState.Unchanged, CascadeTiming.OnSaveChanges, QueryTrackingBehavior.NoTracking, true)]
-    [InlineData(EntityState.Added, CascadeTiming.OnSaveChanges, QueryTrackingBehavior.NoTracking, true)]
-    [InlineData(EntityState.Modified, CascadeTiming.OnSaveChanges, QueryTrackingBehavior.NoTracking, true)]
-    [InlineData(EntityState.Deleted, CascadeTiming.OnSaveChanges, QueryTrackingBehavior.NoTracking, true)]
-    [InlineData(EntityState.Detached, CascadeTiming.OnSaveChanges, QueryTrackingBehavior.NoTracking, true)]
-    [InlineData(EntityState.Unchanged, CascadeTiming.Immediate, QueryTrackingBehavior.NoTrackingWithIdentityResolution, true)]
-    [InlineData(EntityState.Added, CascadeTiming.Immediate, QueryTrackingBehavior.NoTrackingWithIdentityResolution, true)]
-    [InlineData(EntityState.Modified, CascadeTiming.Immediate, QueryTrackingBehavior.NoTrackingWithIdentityResolution, true)]
-    [InlineData(EntityState.Deleted, CascadeTiming.Immediate, QueryTrackingBehavior.NoTrackingWithIdentityResolution, true)]
-    [InlineData(EntityState.Detached, CascadeTiming.Immediate, QueryTrackingBehavior.NoTrackingWithIdentityResolution, true)]
-    [InlineData(EntityState.Unchanged, CascadeTiming.OnSaveChanges, QueryTrackingBehavior.NoTrackingWithIdentityResolution, true)]
-    [InlineData(EntityState.Added, CascadeTiming.OnSaveChanges, QueryTrackingBehavior.NoTrackingWithIdentityResolution, true)]
-    [InlineData(EntityState.Modified, CascadeTiming.OnSaveChanges, QueryTrackingBehavior.NoTrackingWithIdentityResolution, true)]
-    [InlineData(EntityState.Deleted, CascadeTiming.OnSaveChanges, QueryTrackingBehavior.NoTrackingWithIdentityResolution, true)]
-    [InlineData(EntityState.Detached, CascadeTiming.OnSaveChanges, QueryTrackingBehavior.NoTrackingWithIdentityResolution, true)]
-    [InlineData(EntityState.Unchanged, CascadeTiming.Immediate, QueryTrackingBehavior.TrackAll, false)]
+    [InlineData(
+        EntityState.Modified,
+        CascadeTiming.Immediate,
+        QueryTrackingBehavior.NoTracking,
+        true
+    )]
+    [InlineData(
+        EntityState.Deleted,
+        CascadeTiming.Immediate,
+        QueryTrackingBehavior.NoTracking,
+        true
+    )]
+    [InlineData(
+        EntityState.Detached,
+        CascadeTiming.Immediate,
+        QueryTrackingBehavior.NoTracking,
+        true
+    )]
+    [InlineData(
+        EntityState.Unchanged,
+        CascadeTiming.OnSaveChanges,
+        QueryTrackingBehavior.NoTracking,
+        true
+    )]
+    [InlineData(
+        EntityState.Added,
+        CascadeTiming.OnSaveChanges,
+        QueryTrackingBehavior.NoTracking,
+        true
+    )]
+    [InlineData(
+        EntityState.Modified,
+        CascadeTiming.OnSaveChanges,
+        QueryTrackingBehavior.NoTracking,
+        true
+    )]
+    [InlineData(
+        EntityState.Deleted,
+        CascadeTiming.OnSaveChanges,
+        QueryTrackingBehavior.NoTracking,
+        true
+    )]
+    [InlineData(
+        EntityState.Detached,
+        CascadeTiming.OnSaveChanges,
+        QueryTrackingBehavior.NoTracking,
+        true
+    )]
+    [InlineData(
+        EntityState.Unchanged,
+        CascadeTiming.Immediate,
+        QueryTrackingBehavior.NoTrackingWithIdentityResolution,
+        true
+    )]
+    [InlineData(
+        EntityState.Added,
+        CascadeTiming.Immediate,
+        QueryTrackingBehavior.NoTrackingWithIdentityResolution,
+        true
+    )]
+    [InlineData(
+        EntityState.Modified,
+        CascadeTiming.Immediate,
+        QueryTrackingBehavior.NoTrackingWithIdentityResolution,
+        true
+    )]
+    [InlineData(
+        EntityState.Deleted,
+        CascadeTiming.Immediate,
+        QueryTrackingBehavior.NoTrackingWithIdentityResolution,
+        true
+    )]
+    [InlineData(
+        EntityState.Detached,
+        CascadeTiming.Immediate,
+        QueryTrackingBehavior.NoTrackingWithIdentityResolution,
+        true
+    )]
+    [InlineData(
+        EntityState.Unchanged,
+        CascadeTiming.OnSaveChanges,
+        QueryTrackingBehavior.NoTrackingWithIdentityResolution,
+        true
+    )]
+    [InlineData(
+        EntityState.Added,
+        CascadeTiming.OnSaveChanges,
+        QueryTrackingBehavior.NoTrackingWithIdentityResolution,
+        true
+    )]
+    [InlineData(
+        EntityState.Modified,
+        CascadeTiming.OnSaveChanges,
+        QueryTrackingBehavior.NoTrackingWithIdentityResolution,
+        true
+    )]
+    [InlineData(
+        EntityState.Deleted,
+        CascadeTiming.OnSaveChanges,
+        QueryTrackingBehavior.NoTrackingWithIdentityResolution,
+        true
+    )]
+    [InlineData(
+        EntityState.Detached,
+        CascadeTiming.OnSaveChanges,
+        QueryTrackingBehavior.NoTrackingWithIdentityResolution,
+        true
+    )]
+    [InlineData(
+        EntityState.Unchanged,
+        CascadeTiming.Immediate,
+        QueryTrackingBehavior.TrackAll,
+        false
+    )]
     [InlineData(EntityState.Added, CascadeTiming.Immediate, QueryTrackingBehavior.TrackAll, false)]
-    [InlineData(EntityState.Modified, CascadeTiming.Immediate, QueryTrackingBehavior.TrackAll, false)]
-    [InlineData(EntityState.Deleted, CascadeTiming.Immediate, QueryTrackingBehavior.TrackAll, false)]
-    [InlineData(EntityState.Detached, CascadeTiming.Immediate, QueryTrackingBehavior.TrackAll, false)]
-    [InlineData(EntityState.Unchanged, CascadeTiming.OnSaveChanges, QueryTrackingBehavior.TrackAll, false)]
-    [InlineData(EntityState.Added, CascadeTiming.OnSaveChanges, QueryTrackingBehavior.TrackAll, false)]
-    [InlineData(EntityState.Modified, CascadeTiming.OnSaveChanges, QueryTrackingBehavior.TrackAll, false)]
-    [InlineData(EntityState.Deleted, CascadeTiming.OnSaveChanges, QueryTrackingBehavior.TrackAll, false)]
-    [InlineData(EntityState.Detached, CascadeTiming.OnSaveChanges, QueryTrackingBehavior.TrackAll, false)]
-    [InlineData(EntityState.Unchanged, CascadeTiming.Immediate, QueryTrackingBehavior.NoTracking, false)]
-    [InlineData(EntityState.Added, CascadeTiming.Immediate, QueryTrackingBehavior.NoTracking, false)]
-    [InlineData(EntityState.Modified, CascadeTiming.Immediate, QueryTrackingBehavior.NoTracking, false)]
-    [InlineData(EntityState.Deleted, CascadeTiming.Immediate, QueryTrackingBehavior.NoTracking, false)]
-    [InlineData(EntityState.Detached, CascadeTiming.Immediate, QueryTrackingBehavior.NoTracking, false)]
-    [InlineData(EntityState.Unchanged, CascadeTiming.OnSaveChanges, QueryTrackingBehavior.NoTracking, false)]
-    [InlineData(EntityState.Added, CascadeTiming.OnSaveChanges, QueryTrackingBehavior.NoTracking, false)]
-    [InlineData(EntityState.Modified, CascadeTiming.OnSaveChanges, QueryTrackingBehavior.NoTracking, false)]
-    [InlineData(EntityState.Deleted, CascadeTiming.OnSaveChanges, QueryTrackingBehavior.NoTracking, false)]
-    [InlineData(EntityState.Detached, CascadeTiming.OnSaveChanges, QueryTrackingBehavior.NoTracking, false)]
-    [InlineData(EntityState.Unchanged, CascadeTiming.Immediate, QueryTrackingBehavior.NoTrackingWithIdentityResolution, false)]
-    [InlineData(EntityState.Added, CascadeTiming.Immediate, QueryTrackingBehavior.NoTrackingWithIdentityResolution, false)]
-    [InlineData(EntityState.Modified, CascadeTiming.Immediate, QueryTrackingBehavior.NoTrackingWithIdentityResolution, false)]
-    [InlineData(EntityState.Deleted, CascadeTiming.Immediate, QueryTrackingBehavior.NoTrackingWithIdentityResolution, false)]
-    [InlineData(EntityState.Detached, CascadeTiming.Immediate, QueryTrackingBehavior.NoTrackingWithIdentityResolution, false)]
-    [InlineData(EntityState.Unchanged, CascadeTiming.OnSaveChanges, QueryTrackingBehavior.NoTrackingWithIdentityResolution, false)]
-    [InlineData(EntityState.Added, CascadeTiming.OnSaveChanges, QueryTrackingBehavior.NoTrackingWithIdentityResolution, false)]
-    [InlineData(EntityState.Modified, CascadeTiming.OnSaveChanges, QueryTrackingBehavior.NoTrackingWithIdentityResolution, false)]
-    [InlineData(EntityState.Deleted, CascadeTiming.OnSaveChanges, QueryTrackingBehavior.NoTrackingWithIdentityResolution, false)]
-    [InlineData(EntityState.Detached, CascadeTiming.OnSaveChanges, QueryTrackingBehavior.NoTrackingWithIdentityResolution, false)]
+    [InlineData(
+        EntityState.Modified,
+        CascadeTiming.Immediate,
+        QueryTrackingBehavior.TrackAll,
+        false
+    )]
+    [InlineData(
+        EntityState.Deleted,
+        CascadeTiming.Immediate,
+        QueryTrackingBehavior.TrackAll,
+        false
+    )]
+    [InlineData(
+        EntityState.Detached,
+        CascadeTiming.Immediate,
+        QueryTrackingBehavior.TrackAll,
+        false
+    )]
+    [InlineData(
+        EntityState.Unchanged,
+        CascadeTiming.OnSaveChanges,
+        QueryTrackingBehavior.TrackAll,
+        false
+    )]
+    [InlineData(
+        EntityState.Added,
+        CascadeTiming.OnSaveChanges,
+        QueryTrackingBehavior.TrackAll,
+        false
+    )]
+    [InlineData(
+        EntityState.Modified,
+        CascadeTiming.OnSaveChanges,
+        QueryTrackingBehavior.TrackAll,
+        false
+    )]
+    [InlineData(
+        EntityState.Deleted,
+        CascadeTiming.OnSaveChanges,
+        QueryTrackingBehavior.TrackAll,
+        false
+    )]
+    [InlineData(
+        EntityState.Detached,
+        CascadeTiming.OnSaveChanges,
+        QueryTrackingBehavior.TrackAll,
+        false
+    )]
+    [InlineData(
+        EntityState.Unchanged,
+        CascadeTiming.Immediate,
+        QueryTrackingBehavior.NoTracking,
+        false
+    )]
+    [InlineData(
+        EntityState.Added,
+        CascadeTiming.Immediate,
+        QueryTrackingBehavior.NoTracking,
+        false
+    )]
+    [InlineData(
+        EntityState.Modified,
+        CascadeTiming.Immediate,
+        QueryTrackingBehavior.NoTracking,
+        false
+    )]
+    [InlineData(
+        EntityState.Deleted,
+        CascadeTiming.Immediate,
+        QueryTrackingBehavior.NoTracking,
+        false
+    )]
+    [InlineData(
+        EntityState.Detached,
+        CascadeTiming.Immediate,
+        QueryTrackingBehavior.NoTracking,
+        false
+    )]
+    [InlineData(
+        EntityState.Unchanged,
+        CascadeTiming.OnSaveChanges,
+        QueryTrackingBehavior.NoTracking,
+        false
+    )]
+    [InlineData(
+        EntityState.Added,
+        CascadeTiming.OnSaveChanges,
+        QueryTrackingBehavior.NoTracking,
+        false
+    )]
+    [InlineData(
+        EntityState.Modified,
+        CascadeTiming.OnSaveChanges,
+        QueryTrackingBehavior.NoTracking,
+        false
+    )]
+    [InlineData(
+        EntityState.Deleted,
+        CascadeTiming.OnSaveChanges,
+        QueryTrackingBehavior.NoTracking,
+        false
+    )]
+    [InlineData(
+        EntityState.Detached,
+        CascadeTiming.OnSaveChanges,
+        QueryTrackingBehavior.NoTracking,
+        false
+    )]
+    [InlineData(
+        EntityState.Unchanged,
+        CascadeTiming.Immediate,
+        QueryTrackingBehavior.NoTrackingWithIdentityResolution,
+        false
+    )]
+    [InlineData(
+        EntityState.Added,
+        CascadeTiming.Immediate,
+        QueryTrackingBehavior.NoTrackingWithIdentityResolution,
+        false
+    )]
+    [InlineData(
+        EntityState.Modified,
+        CascadeTiming.Immediate,
+        QueryTrackingBehavior.NoTrackingWithIdentityResolution,
+        false
+    )]
+    [InlineData(
+        EntityState.Deleted,
+        CascadeTiming.Immediate,
+        QueryTrackingBehavior.NoTrackingWithIdentityResolution,
+        false
+    )]
+    [InlineData(
+        EntityState.Detached,
+        CascadeTiming.Immediate,
+        QueryTrackingBehavior.NoTrackingWithIdentityResolution,
+        false
+    )]
+    [InlineData(
+        EntityState.Unchanged,
+        CascadeTiming.OnSaveChanges,
+        QueryTrackingBehavior.NoTrackingWithIdentityResolution,
+        false
+    )]
+    [InlineData(
+        EntityState.Added,
+        CascadeTiming.OnSaveChanges,
+        QueryTrackingBehavior.NoTrackingWithIdentityResolution,
+        false
+    )]
+    [InlineData(
+        EntityState.Modified,
+        CascadeTiming.OnSaveChanges,
+        QueryTrackingBehavior.NoTrackingWithIdentityResolution,
+        false
+    )]
+    [InlineData(
+        EntityState.Deleted,
+        CascadeTiming.OnSaveChanges,
+        QueryTrackingBehavior.NoTrackingWithIdentityResolution,
+        false
+    )]
+    [InlineData(
+        EntityState.Detached,
+        CascadeTiming.OnSaveChanges,
+        QueryTrackingBehavior.NoTrackingWithIdentityResolution,
+        false
+    )]
     public virtual async Task Lazy_load_one_to_one_reference_to_dependent_already_loaded_full_loader_constructor_injection(
         EntityState state,
         CascadeTiming deleteOrphansTiming,
         QueryTrackingBehavior queryTrackingBehavior,
-        bool async)
+        bool async
+    )
     {
         using var context = CreateContext(lazyLoadingEnabled: true);
         context.ChangeTracker.QueryTrackingBehavior = queryTrackingBehavior;
@@ -3963,17 +5798,22 @@ public abstract partial class LoadTestBase<TFixture>
         RecordLog();
         context.ChangeTracker.LazyLoadingEnabled = false;
 
-        Assert.Equal(state == EntityState.Detached ? 0 : 2, context.ChangeTracker.Entries().Count());
+        Assert.Equal(
+            state == EntityState.Detached ? 0 : 2,
+            context.ChangeTracker.Entries().Count()
+        );
 
-        if (state == EntityState.Deleted
-            && deleteOrphansTiming != CascadeTiming.Never)
+        if (state == EntityState.Deleted && deleteOrphansTiming != CascadeTiming.Never)
         {
             Assert.Same(parent, parent.Single.Parent);
         }
 
         if (state != EntityState.Detached)
         {
-            var single = context.ChangeTracker.Entries<SingleFullLoaderByConstructor>().Single().Entity;
+            var single = context
+                .ChangeTracker.Entries<SingleFullLoaderByConstructor>()
+                .Single()
+                .Entity;
 
             Assert.Same(single, parent.Single);
             Assert.Same(parent, single.Parent);
@@ -3995,7 +5835,8 @@ public abstract partial class LoadTestBase<TFixture>
     [InlineData(EntityState.Detached, QueryTrackingBehavior.NoTrackingWithIdentityResolution)]
     public virtual void Lazy_load_collection_already_partially_loaded_full_loader_constructor_injection(
         EntityState state,
-        QueryTrackingBehavior queryTrackingBehavior)
+        QueryTrackingBehavior queryTrackingBehavior
+    )
     {
         using var context = CreateContext(lazyLoadingEnabled: true);
         context.ChangeTracker.QueryTrackingBehavior = queryTrackingBehavior;
@@ -4033,7 +5874,10 @@ public abstract partial class LoadTestBase<TFixture>
 
         if (LazyLoadingEnabled)
         {
-            if (state == EntityState.Detached && queryTrackingBehavior == QueryTrackingBehavior.TrackAll)
+            if (
+                state == EntityState.Detached
+                && queryTrackingBehavior == QueryTrackingBehavior.TrackAll
+            )
             {
                 Assert.False(collectionEntry.IsLoaded); // Explicitly detached
                 Assert.Equal(1, parent.Children.Count());
@@ -4048,9 +5892,13 @@ public abstract partial class LoadTestBase<TFixture>
 
                 // Note that when detached there is no identity resolution, so loading results in duplicates
                 Assert.Equal(
-                    state == EntityState.Detached && queryTrackingBehavior != QueryTrackingBehavior.NoTrackingWithIdentityResolution
+                    state == EntityState.Detached
+                    && queryTrackingBehavior
+                        != QueryTrackingBehavior.NoTrackingWithIdentityResolution
                         ? 3
-                        : 2, parent.Children.Count());
+                        : 2,
+                    parent.Children.Count()
+                );
 
                 Assert.All(parent.Children.Select(e => e.Parent), p => Assert.Same(parent, p));
             }
@@ -4080,7 +5928,8 @@ public abstract partial class LoadTestBase<TFixture>
     [InlineData(EntityState.Detached, QueryTrackingBehavior.NoTrackingWithIdentityResolution)]
     public virtual void Lazy_load_collection_delegate_loader_constructor_injection(
         EntityState state,
-        QueryTrackingBehavior queryTrackingBehavior)
+        QueryTrackingBehavior queryTrackingBehavior
+    )
     {
         using var context = CreateContext(lazyLoadingEnabled: true);
         context.ChangeTracker.QueryTrackingBehavior = queryTrackingBehavior;
@@ -4113,7 +5962,10 @@ public abstract partial class LoadTestBase<TFixture>
 
             Assert.Equal(2, parent.Children.Count());
 
-            Assert.Equal(state == EntityState.Detached ? 0 : 3, context.ChangeTracker.Entries().Count());
+            Assert.Equal(
+                state == EntityState.Detached ? 0 : 3,
+                context.ChangeTracker.Entries().Count()
+            );
         }
         else
         {
@@ -4140,7 +5992,8 @@ public abstract partial class LoadTestBase<TFixture>
     [InlineData(EntityState.Detached, QueryTrackingBehavior.NoTrackingWithIdentityResolution)]
     public virtual void Lazy_load_many_to_one_reference_to_principal_delegate_loader_constructor_injection(
         EntityState state,
-        QueryTrackingBehavior queryTrackingBehavior)
+        QueryTrackingBehavior queryTrackingBehavior
+    )
     {
         using var context = CreateContext(lazyLoadingEnabled: true);
         context.ChangeTracker.QueryTrackingBehavior = queryTrackingBehavior;
@@ -4176,7 +6029,10 @@ public abstract partial class LoadTestBase<TFixture>
             RecordLog();
             context.ChangeTracker.LazyLoadingEnabled = false;
 
-            Assert.Equal(state == EntityState.Detached ? 0 : 2, context.ChangeTracker.Entries().Count());
+            Assert.Equal(
+                state == EntityState.Detached ? 0 : 2,
+                context.ChangeTracker.Entries().Count()
+            );
 
             if (state != EntityState.Deleted)
             {
@@ -4185,7 +6041,10 @@ public abstract partial class LoadTestBase<TFixture>
 
             if (state != EntityState.Detached)
             {
-                var parent = context.ChangeTracker.Entries<ParentDelegateLoaderByConstructor>().Single().Entity;
+                var parent = context
+                    .ChangeTracker.Entries<ParentDelegateLoaderByConstructor>()
+                    .Single()
+                    .Entity;
 
                 if (state == EntityState.Deleted)
                 {
@@ -4224,7 +6083,8 @@ public abstract partial class LoadTestBase<TFixture>
     [InlineData(EntityState.Detached, QueryTrackingBehavior.NoTrackingWithIdentityResolution)]
     public virtual void Lazy_load_one_to_one_reference_to_principal_delegate_loader_constructor_injection(
         EntityState state,
-        QueryTrackingBehavior queryTrackingBehavior)
+        QueryTrackingBehavior queryTrackingBehavior
+    )
     {
         using var context = CreateContext(lazyLoadingEnabled: true);
         context.ChangeTracker.QueryTrackingBehavior = queryTrackingBehavior;
@@ -4260,7 +6120,10 @@ public abstract partial class LoadTestBase<TFixture>
             RecordLog();
             context.ChangeTracker.LazyLoadingEnabled = false;
 
-            Assert.Equal(state == EntityState.Detached ? 0 : 2, context.ChangeTracker.Entries().Count());
+            Assert.Equal(
+                state == EntityState.Detached ? 0 : 2,
+                context.ChangeTracker.Entries().Count()
+            );
 
             if (state != EntityState.Deleted)
             {
@@ -4269,7 +6132,10 @@ public abstract partial class LoadTestBase<TFixture>
 
             if (state != EntityState.Detached)
             {
-                var parent = context.ChangeTracker.Entries<ParentDelegateLoaderByConstructor>().Single().Entity;
+                var parent = context
+                    .ChangeTracker.Entries<ParentDelegateLoaderByConstructor>()
+                    .Single()
+                    .Entity;
 
                 if (state == EntityState.Deleted)
                 {
@@ -4308,7 +6174,8 @@ public abstract partial class LoadTestBase<TFixture>
     [InlineData(EntityState.Detached, QueryTrackingBehavior.NoTrackingWithIdentityResolution)]
     public virtual void Lazy_load_one_to_one_reference_to_dependent_delegate_loader_constructor_injection(
         EntityState state,
-        QueryTrackingBehavior queryTrackingBehavior)
+        QueryTrackingBehavior queryTrackingBehavior
+    )
     {
         using var context = CreateContext(lazyLoadingEnabled: true);
         context.ChangeTracker.QueryTrackingBehavior = queryTrackingBehavior;
@@ -4337,7 +6204,10 @@ public abstract partial class LoadTestBase<TFixture>
             RecordLog();
             context.ChangeTracker.LazyLoadingEnabled = false;
 
-            Assert.Equal(state == EntityState.Detached ? 0 : 2, context.ChangeTracker.Entries().Count());
+            Assert.Equal(
+                state == EntityState.Detached ? 0 : 2,
+                context.ChangeTracker.Entries().Count()
+            );
 
             if (state != EntityState.Deleted)
             {
@@ -4346,7 +6216,10 @@ public abstract partial class LoadTestBase<TFixture>
 
             if (state != EntityState.Detached)
             {
-                var single = context.ChangeTracker.Entries<SingleDelegateLoaderByConstructor>().Single().Entity;
+                var single = context
+                    .ChangeTracker.Entries<SingleDelegateLoaderByConstructor>()
+                    .Single()
+                    .Entity;
 
                 Assert.Same(single, parent.Single);
                 Assert.Same(parent, single.Parent);
@@ -4377,13 +6250,16 @@ public abstract partial class LoadTestBase<TFixture>
     [InlineData(EntityState.Detached, QueryTrackingBehavior.NoTrackingWithIdentityResolution)]
     public virtual void Lazy_load_many_to_one_reference_to_principal_null_FK_delegate_loader_constructor_injection(
         EntityState state,
-        QueryTrackingBehavior queryTrackingBehavior)
+        QueryTrackingBehavior queryTrackingBehavior
+    )
     {
         using var context = CreateContext(lazyLoadingEnabled: true);
         context.ChangeTracker.QueryTrackingBehavior = queryTrackingBehavior;
         var changeDetector = (ChangeDetectorProxy)context.GetService<IChangeDetector>();
 
-        var child = context.Attach(new ChildDelegateLoaderByConstructor { Id = 767, ParentId = null }).Entity;
+        var child = context
+            .Attach(new ChildDelegateLoaderByConstructor { Id = 767, ParentId = null })
+            .Entity;
 
         ClearLog();
 
@@ -4404,7 +6280,10 @@ public abstract partial class LoadTestBase<TFixture>
         RecordLog();
         context.ChangeTracker.LazyLoadingEnabled = false;
 
-        Assert.Equal(state == EntityState.Detached ? 0 : 1, context.ChangeTracker.Entries().Count());
+        Assert.Equal(
+            state == EntityState.Detached ? 0 : 1,
+            context.ChangeTracker.Entries().Count()
+        );
         Assert.Null(child.Parent);
     }
 
@@ -4426,13 +6305,16 @@ public abstract partial class LoadTestBase<TFixture>
     [InlineData(EntityState.Detached, QueryTrackingBehavior.NoTrackingWithIdentityResolution)]
     public virtual void Lazy_load_one_to_one_reference_to_principal_null_FK_delegate_loader_constructor_injection(
         EntityState state,
-        QueryTrackingBehavior queryTrackingBehavior)
+        QueryTrackingBehavior queryTrackingBehavior
+    )
     {
         using var context = CreateContext(lazyLoadingEnabled: true);
         context.ChangeTracker.QueryTrackingBehavior = queryTrackingBehavior;
         var changeDetector = (ChangeDetectorProxy)context.GetService<IChangeDetector>();
 
-        var single = context.Attach(new SingleDelegateLoaderByConstructor { Id = 767, ParentId = null }).Entity;
+        var single = context
+            .Attach(new SingleDelegateLoaderByConstructor { Id = 767, ParentId = null })
+            .Entity;
 
         ClearLog();
 
@@ -4453,7 +6335,10 @@ public abstract partial class LoadTestBase<TFixture>
         RecordLog();
         context.ChangeTracker.LazyLoadingEnabled = false;
 
-        Assert.Equal(state == EntityState.Detached ? 0 : 1, context.ChangeTracker.Entries().Count());
+        Assert.Equal(
+            state == EntityState.Detached ? 0 : 1,
+            context.ChangeTracker.Entries().Count()
+        );
 
         Assert.Null(single.Parent);
     }
@@ -4476,7 +6361,8 @@ public abstract partial class LoadTestBase<TFixture>
     [InlineData(EntityState.Detached, QueryTrackingBehavior.NoTrackingWithIdentityResolution)]
     public virtual void Lazy_load_collection_not_found_delegate_loader_constructor_injection(
         EntityState state,
-        QueryTrackingBehavior queryTrackingBehavior)
+        QueryTrackingBehavior queryTrackingBehavior
+    )
     {
         using var context = CreateContext(lazyLoadingEnabled: true);
         context.ChangeTracker.QueryTrackingBehavior = queryTrackingBehavior;
@@ -4502,7 +6388,10 @@ public abstract partial class LoadTestBase<TFixture>
         RecordLog();
         context.ChangeTracker.LazyLoadingEnabled = false;
 
-        Assert.Equal(state == EntityState.Detached ? 0 : 1, context.ChangeTracker.Entries().Count());
+        Assert.Equal(
+            state == EntityState.Detached ? 0 : 1,
+            context.ChangeTracker.Entries().Count()
+        );
     }
 
     [ConditionalTheory]
@@ -4523,13 +6412,16 @@ public abstract partial class LoadTestBase<TFixture>
     [InlineData(EntityState.Detached, QueryTrackingBehavior.NoTrackingWithIdentityResolution)]
     public virtual void Lazy_load_many_to_one_reference_to_principal_not_found_delegate_loader_constructor_injection(
         EntityState state,
-        QueryTrackingBehavior queryTrackingBehavior)
+        QueryTrackingBehavior queryTrackingBehavior
+    )
     {
         using var context = CreateContext(lazyLoadingEnabled: true);
         context.ChangeTracker.QueryTrackingBehavior = queryTrackingBehavior;
         var changeDetector = (ChangeDetectorProxy)context.GetService<IChangeDetector>();
 
-        var child = context.Attach(new ChildDelegateLoaderByConstructor { Id = 767, ParentId = 787 }).Entity;
+        var child = context
+            .Attach(new ChildDelegateLoaderByConstructor { Id = 767, ParentId = 787 })
+            .Entity;
 
         ClearLog();
 
@@ -4550,7 +6442,10 @@ public abstract partial class LoadTestBase<TFixture>
         RecordLog();
         context.ChangeTracker.LazyLoadingEnabled = false;
 
-        Assert.Equal(state == EntityState.Detached ? 0 : 1, context.ChangeTracker.Entries().Count());
+        Assert.Equal(
+            state == EntityState.Detached ? 0 : 1,
+            context.ChangeTracker.Entries().Count()
+        );
         Assert.Null(child.Parent);
     }
 
@@ -4572,13 +6467,16 @@ public abstract partial class LoadTestBase<TFixture>
     [InlineData(EntityState.Detached, QueryTrackingBehavior.NoTrackingWithIdentityResolution)]
     public virtual void Lazy_load_one_to_one_reference_to_principal_not_found_delegate_loader_constructor_injection(
         EntityState state,
-        QueryTrackingBehavior queryTrackingBehavior)
+        QueryTrackingBehavior queryTrackingBehavior
+    )
     {
         using var context = CreateContext(lazyLoadingEnabled: true);
         context.ChangeTracker.QueryTrackingBehavior = queryTrackingBehavior;
         var changeDetector = (ChangeDetectorProxy)context.GetService<IChangeDetector>();
 
-        var single = context.Attach(new SingleDelegateLoaderByConstructor { Id = 767, ParentId = 787 }).Entity;
+        var single = context
+            .Attach(new SingleDelegateLoaderByConstructor { Id = 767, ParentId = 787 })
+            .Entity;
 
         ClearLog();
 
@@ -4599,7 +6497,10 @@ public abstract partial class LoadTestBase<TFixture>
         RecordLog();
         context.ChangeTracker.LazyLoadingEnabled = false;
 
-        Assert.Equal(state == EntityState.Detached ? 0 : 1, context.ChangeTracker.Entries().Count());
+        Assert.Equal(
+            state == EntityState.Detached ? 0 : 1,
+            context.ChangeTracker.Entries().Count()
+        );
 
         Assert.Null(single.Parent);
     }
@@ -4622,7 +6523,8 @@ public abstract partial class LoadTestBase<TFixture>
     [InlineData(EntityState.Detached, QueryTrackingBehavior.NoTrackingWithIdentityResolution)]
     public virtual void Lazy_load_one_to_one_reference_to_dependent_not_found_delegate_loader_constructor_injection(
         EntityState state,
-        QueryTrackingBehavior queryTrackingBehavior)
+        QueryTrackingBehavior queryTrackingBehavior
+    )
     {
         using var context = CreateContext(lazyLoadingEnabled: true);
         context.ChangeTracker.QueryTrackingBehavior = queryTrackingBehavior;
@@ -4651,7 +6553,10 @@ public abstract partial class LoadTestBase<TFixture>
 
         Assert.Null(parent.Single);
 
-        Assert.Equal(state == EntityState.Detached ? 0 : 1, context.ChangeTracker.Entries().Count());
+        Assert.Equal(
+            state == EntityState.Detached ? 0 : 1,
+            context.ChangeTracker.Entries().Count()
+        );
     }
 
     [ConditionalTheory]
@@ -4670,25 +6575,78 @@ public abstract partial class LoadTestBase<TFixture>
     [InlineData(EntityState.Modified, CascadeTiming.Immediate, QueryTrackingBehavior.NoTracking)]
     [InlineData(EntityState.Deleted, CascadeTiming.Immediate, QueryTrackingBehavior.NoTracking)]
     [InlineData(EntityState.Detached, CascadeTiming.Immediate, QueryTrackingBehavior.NoTracking)]
-    [InlineData(EntityState.Unchanged, CascadeTiming.OnSaveChanges, QueryTrackingBehavior.NoTracking)]
+    [InlineData(
+        EntityState.Unchanged,
+        CascadeTiming.OnSaveChanges,
+        QueryTrackingBehavior.NoTracking
+    )]
     [InlineData(EntityState.Added, CascadeTiming.OnSaveChanges, QueryTrackingBehavior.NoTracking)]
-    [InlineData(EntityState.Modified, CascadeTiming.OnSaveChanges, QueryTrackingBehavior.NoTracking)]
+    [InlineData(
+        EntityState.Modified,
+        CascadeTiming.OnSaveChanges,
+        QueryTrackingBehavior.NoTracking
+    )]
     [InlineData(EntityState.Deleted, CascadeTiming.OnSaveChanges, QueryTrackingBehavior.NoTracking)]
-    [InlineData(EntityState.Detached, CascadeTiming.OnSaveChanges, QueryTrackingBehavior.NoTracking)]
-    [InlineData(EntityState.Unchanged, CascadeTiming.Immediate, QueryTrackingBehavior.NoTrackingWithIdentityResolution)]
-    [InlineData(EntityState.Added, CascadeTiming.Immediate, QueryTrackingBehavior.NoTrackingWithIdentityResolution)]
-    [InlineData(EntityState.Modified, CascadeTiming.Immediate, QueryTrackingBehavior.NoTrackingWithIdentityResolution)]
-    [InlineData(EntityState.Deleted, CascadeTiming.Immediate, QueryTrackingBehavior.NoTrackingWithIdentityResolution)]
-    [InlineData(EntityState.Detached, CascadeTiming.Immediate, QueryTrackingBehavior.NoTrackingWithIdentityResolution)]
-    [InlineData(EntityState.Unchanged, CascadeTiming.OnSaveChanges, QueryTrackingBehavior.NoTrackingWithIdentityResolution)]
-    [InlineData(EntityState.Added, CascadeTiming.OnSaveChanges, QueryTrackingBehavior.NoTrackingWithIdentityResolution)]
-    [InlineData(EntityState.Modified, CascadeTiming.OnSaveChanges, QueryTrackingBehavior.NoTrackingWithIdentityResolution)]
-    [InlineData(EntityState.Deleted, CascadeTiming.OnSaveChanges, QueryTrackingBehavior.NoTrackingWithIdentityResolution)]
-    [InlineData(EntityState.Detached, CascadeTiming.OnSaveChanges, QueryTrackingBehavior.NoTrackingWithIdentityResolution)]
+    [InlineData(
+        EntityState.Detached,
+        CascadeTiming.OnSaveChanges,
+        QueryTrackingBehavior.NoTracking
+    )]
+    [InlineData(
+        EntityState.Unchanged,
+        CascadeTiming.Immediate,
+        QueryTrackingBehavior.NoTrackingWithIdentityResolution
+    )]
+    [InlineData(
+        EntityState.Added,
+        CascadeTiming.Immediate,
+        QueryTrackingBehavior.NoTrackingWithIdentityResolution
+    )]
+    [InlineData(
+        EntityState.Modified,
+        CascadeTiming.Immediate,
+        QueryTrackingBehavior.NoTrackingWithIdentityResolution
+    )]
+    [InlineData(
+        EntityState.Deleted,
+        CascadeTiming.Immediate,
+        QueryTrackingBehavior.NoTrackingWithIdentityResolution
+    )]
+    [InlineData(
+        EntityState.Detached,
+        CascadeTiming.Immediate,
+        QueryTrackingBehavior.NoTrackingWithIdentityResolution
+    )]
+    [InlineData(
+        EntityState.Unchanged,
+        CascadeTiming.OnSaveChanges,
+        QueryTrackingBehavior.NoTrackingWithIdentityResolution
+    )]
+    [InlineData(
+        EntityState.Added,
+        CascadeTiming.OnSaveChanges,
+        QueryTrackingBehavior.NoTrackingWithIdentityResolution
+    )]
+    [InlineData(
+        EntityState.Modified,
+        CascadeTiming.OnSaveChanges,
+        QueryTrackingBehavior.NoTrackingWithIdentityResolution
+    )]
+    [InlineData(
+        EntityState.Deleted,
+        CascadeTiming.OnSaveChanges,
+        QueryTrackingBehavior.NoTrackingWithIdentityResolution
+    )]
+    [InlineData(
+        EntityState.Detached,
+        CascadeTiming.OnSaveChanges,
+        QueryTrackingBehavior.NoTrackingWithIdentityResolution
+    )]
     public virtual void Lazy_load_collection_already_loaded_delegate_loader_constructor_injection(
         EntityState state,
         CascadeTiming deleteOrphansTiming,
-        QueryTrackingBehavior queryTrackingBehavior)
+        QueryTrackingBehavior queryTrackingBehavior
+    )
     {
         using var context = CreateContext(lazyLoadingEnabled: true);
         context.ChangeTracker.QueryTrackingBehavior = queryTrackingBehavior;
@@ -4696,7 +6654,10 @@ public abstract partial class LoadTestBase<TFixture>
 
         var changeDetector = (ChangeDetectorProxy)context.GetService<IChangeDetector>();
 
-        var parent = context.Set<ParentDelegateLoaderByConstructor>().Include(e => e.Children).Single();
+        var parent = context
+            .Set<ParentDelegateLoaderByConstructor>()
+            .Include(e => e.Children)
+            .Single();
 
         ClearLog();
 
@@ -4713,7 +6674,11 @@ public abstract partial class LoadTestBase<TFixture>
 
         var collectionEntry = context.Entry(parent).Collection(e => e.Children);
 
-        Assert.Equal(queryTrackingBehavior == QueryTrackingBehavior.TrackAll && state != EntityState.Detached, collectionEntry.IsLoaded);
+        Assert.Equal(
+            queryTrackingBehavior == QueryTrackingBehavior.TrackAll
+                && state != EntityState.Detached,
+            collectionEntry.IsLoaded
+        );
 
         changeDetector.DetectChangesCalled = false;
 
@@ -4732,9 +6697,12 @@ public abstract partial class LoadTestBase<TFixture>
 
             // Note that when detached there is no identity resolution, so loading results in duplicates
             Assert.Equal(
-                state == EntityState.Detached && queryTrackingBehavior != QueryTrackingBehavior.NoTrackingWithIdentityResolution
+                state == EntityState.Detached
+                && queryTrackingBehavior != QueryTrackingBehavior.NoTrackingWithIdentityResolution
                     ? 4
-                    : 2, parent.Children.Count());
+                    : 2,
+                parent.Children.Count()
+            );
 
             Assert.All(parent.Children.Select(e => e.Parent), p => Assert.Same(parent, p));
         }
@@ -4762,13 +6730,17 @@ public abstract partial class LoadTestBase<TFixture>
     [InlineData(EntityState.Detached, QueryTrackingBehavior.NoTrackingWithIdentityResolution)]
     public virtual void Lazy_load_many_to_one_reference_to_principal_already_loaded_delegate_loader_constructor_injection(
         EntityState state,
-        QueryTrackingBehavior queryTrackingBehavior)
+        QueryTrackingBehavior queryTrackingBehavior
+    )
     {
         using var context = CreateContext(lazyLoadingEnabled: true);
         context.ChangeTracker.QueryTrackingBehavior = queryTrackingBehavior;
         var changeDetector = (ChangeDetectorProxy)context.GetService<IChangeDetector>();
 
-        var child = context.Set<ChildDelegateLoaderByConstructor>().Include(e => e.Parent).Single(e => e.Id == 12);
+        var child = context
+            .Set<ChildDelegateLoaderByConstructor>()
+            .Include(e => e.Parent)
+            .Single(e => e.Id == 12);
 
         ClearLog();
 
@@ -4785,7 +6757,11 @@ public abstract partial class LoadTestBase<TFixture>
         else
         {
             // Delegate loader cannot influence IsLoader flag
-            Assert.Equal(queryTrackingBehavior == QueryTrackingBehavior.TrackAll && state != EntityState.Detached, referenceEntry.IsLoaded);
+            Assert.Equal(
+                queryTrackingBehavior == QueryTrackingBehavior.TrackAll
+                    && state != EntityState.Detached,
+                referenceEntry.IsLoaded
+            );
 
             changeDetector.DetectChangesCalled = false;
 
@@ -4794,18 +6770,28 @@ public abstract partial class LoadTestBase<TFixture>
             Assert.False(changeDetector.DetectChangesCalled);
 
             // Delegate loader cannot influence IsLoader flag
-            Assert.Equal(queryTrackingBehavior == QueryTrackingBehavior.TrackAll && state != EntityState.Detached, referenceEntry.IsLoaded);
+            Assert.Equal(
+                queryTrackingBehavior == QueryTrackingBehavior.TrackAll
+                    && state != EntityState.Detached,
+                referenceEntry.IsLoaded
+            );
 
             RecordLog();
             context.ChangeTracker.LazyLoadingEnabled = false;
 
-            Assert.Equal(state == EntityState.Detached ? 0 : 2, context.ChangeTracker.Entries().Count());
+            Assert.Equal(
+                state == EntityState.Detached ? 0 : 2,
+                context.ChangeTracker.Entries().Count()
+            );
 
             Assert.Same(child, child.Parent.Children.Single());
 
             if (state != EntityState.Detached)
             {
-                var parent = context.ChangeTracker.Entries<ParentDelegateLoaderByConstructor>().Single().Entity;
+                var parent = context
+                    .ChangeTracker.Entries<ParentDelegateLoaderByConstructor>()
+                    .Single()
+                    .Entity;
 
                 Assert.Same(parent, child.Parent);
                 Assert.Same(child, parent.Children.Single());
@@ -4831,13 +6817,17 @@ public abstract partial class LoadTestBase<TFixture>
     [InlineData(EntityState.Detached, QueryTrackingBehavior.NoTrackingWithIdentityResolution)]
     public virtual void Lazy_load_one_to_one_reference_to_principal_already_loaded_delegate_loader_constructor_injection(
         EntityState state,
-        QueryTrackingBehavior queryTrackingBehavior)
+        QueryTrackingBehavior queryTrackingBehavior
+    )
     {
         using var context = CreateContext(lazyLoadingEnabled: true);
         context.ChangeTracker.QueryTrackingBehavior = queryTrackingBehavior;
         var changeDetector = (ChangeDetectorProxy)context.GetService<IChangeDetector>();
 
-        var single = context.Set<SingleDelegateLoaderByConstructor>().Include(e => e.Parent).Single();
+        var single = context
+            .Set<SingleDelegateLoaderByConstructor>()
+            .Include(e => e.Parent)
+            .Single();
 
         ClearLog();
 
@@ -4853,7 +6843,11 @@ public abstract partial class LoadTestBase<TFixture>
         }
         else
         {
-            Assert.Equal(queryTrackingBehavior == QueryTrackingBehavior.TrackAll && state != EntityState.Detached, referenceEntry.IsLoaded);
+            Assert.Equal(
+                queryTrackingBehavior == QueryTrackingBehavior.TrackAll
+                    && state != EntityState.Detached,
+                referenceEntry.IsLoaded
+            );
 
             changeDetector.DetectChangesCalled = false;
 
@@ -4861,18 +6855,28 @@ public abstract partial class LoadTestBase<TFixture>
 
             Assert.False(changeDetector.DetectChangesCalled);
 
-            Assert.Equal(queryTrackingBehavior == QueryTrackingBehavior.TrackAll && state != EntityState.Detached, referenceEntry.IsLoaded);
+            Assert.Equal(
+                queryTrackingBehavior == QueryTrackingBehavior.TrackAll
+                    && state != EntityState.Detached,
+                referenceEntry.IsLoaded
+            );
 
             RecordLog();
             context.ChangeTracker.LazyLoadingEnabled = false;
 
-            Assert.Equal(state == EntityState.Detached ? 0 : 2, context.ChangeTracker.Entries().Count());
+            Assert.Equal(
+                state == EntityState.Detached ? 0 : 2,
+                context.ChangeTracker.Entries().Count()
+            );
 
             Assert.Same(single, single.Parent.Single);
 
             if (state != EntityState.Detached)
             {
-                var parent = context.ChangeTracker.Entries<ParentDelegateLoaderByConstructor>().Single().Entity;
+                var parent = context
+                    .ChangeTracker.Entries<ParentDelegateLoaderByConstructor>()
+                    .Single()
+                    .Entity;
 
                 Assert.Same(parent, single.Parent);
                 Assert.Same(single, parent.Single);
@@ -4896,25 +6900,78 @@ public abstract partial class LoadTestBase<TFixture>
     [InlineData(EntityState.Modified, CascadeTiming.Immediate, QueryTrackingBehavior.NoTracking)]
     [InlineData(EntityState.Deleted, CascadeTiming.Immediate, QueryTrackingBehavior.NoTracking)]
     [InlineData(EntityState.Detached, CascadeTiming.Immediate, QueryTrackingBehavior.NoTracking)]
-    [InlineData(EntityState.Unchanged, CascadeTiming.OnSaveChanges, QueryTrackingBehavior.NoTracking)]
+    [InlineData(
+        EntityState.Unchanged,
+        CascadeTiming.OnSaveChanges,
+        QueryTrackingBehavior.NoTracking
+    )]
     [InlineData(EntityState.Added, CascadeTiming.OnSaveChanges, QueryTrackingBehavior.NoTracking)]
-    [InlineData(EntityState.Modified, CascadeTiming.OnSaveChanges, QueryTrackingBehavior.NoTracking)]
+    [InlineData(
+        EntityState.Modified,
+        CascadeTiming.OnSaveChanges,
+        QueryTrackingBehavior.NoTracking
+    )]
     [InlineData(EntityState.Deleted, CascadeTiming.OnSaveChanges, QueryTrackingBehavior.NoTracking)]
-    [InlineData(EntityState.Detached, CascadeTiming.OnSaveChanges, QueryTrackingBehavior.NoTracking)]
-    [InlineData(EntityState.Unchanged, CascadeTiming.Immediate, QueryTrackingBehavior.NoTrackingWithIdentityResolution)]
-    [InlineData(EntityState.Added, CascadeTiming.Immediate, QueryTrackingBehavior.NoTrackingWithIdentityResolution)]
-    [InlineData(EntityState.Modified, CascadeTiming.Immediate, QueryTrackingBehavior.NoTrackingWithIdentityResolution)]
-    [InlineData(EntityState.Deleted, CascadeTiming.Immediate, QueryTrackingBehavior.NoTrackingWithIdentityResolution)]
-    [InlineData(EntityState.Detached, CascadeTiming.Immediate, QueryTrackingBehavior.NoTrackingWithIdentityResolution)]
-    [InlineData(EntityState.Unchanged, CascadeTiming.OnSaveChanges, QueryTrackingBehavior.NoTrackingWithIdentityResolution)]
-    [InlineData(EntityState.Added, CascadeTiming.OnSaveChanges, QueryTrackingBehavior.NoTrackingWithIdentityResolution)]
-    [InlineData(EntityState.Modified, CascadeTiming.OnSaveChanges, QueryTrackingBehavior.NoTrackingWithIdentityResolution)]
-    [InlineData(EntityState.Deleted, CascadeTiming.OnSaveChanges, QueryTrackingBehavior.NoTrackingWithIdentityResolution)]
-    [InlineData(EntityState.Detached, CascadeTiming.OnSaveChanges, QueryTrackingBehavior.NoTrackingWithIdentityResolution)]
+    [InlineData(
+        EntityState.Detached,
+        CascadeTiming.OnSaveChanges,
+        QueryTrackingBehavior.NoTracking
+    )]
+    [InlineData(
+        EntityState.Unchanged,
+        CascadeTiming.Immediate,
+        QueryTrackingBehavior.NoTrackingWithIdentityResolution
+    )]
+    [InlineData(
+        EntityState.Added,
+        CascadeTiming.Immediate,
+        QueryTrackingBehavior.NoTrackingWithIdentityResolution
+    )]
+    [InlineData(
+        EntityState.Modified,
+        CascadeTiming.Immediate,
+        QueryTrackingBehavior.NoTrackingWithIdentityResolution
+    )]
+    [InlineData(
+        EntityState.Deleted,
+        CascadeTiming.Immediate,
+        QueryTrackingBehavior.NoTrackingWithIdentityResolution
+    )]
+    [InlineData(
+        EntityState.Detached,
+        CascadeTiming.Immediate,
+        QueryTrackingBehavior.NoTrackingWithIdentityResolution
+    )]
+    [InlineData(
+        EntityState.Unchanged,
+        CascadeTiming.OnSaveChanges,
+        QueryTrackingBehavior.NoTrackingWithIdentityResolution
+    )]
+    [InlineData(
+        EntityState.Added,
+        CascadeTiming.OnSaveChanges,
+        QueryTrackingBehavior.NoTrackingWithIdentityResolution
+    )]
+    [InlineData(
+        EntityState.Modified,
+        CascadeTiming.OnSaveChanges,
+        QueryTrackingBehavior.NoTrackingWithIdentityResolution
+    )]
+    [InlineData(
+        EntityState.Deleted,
+        CascadeTiming.OnSaveChanges,
+        QueryTrackingBehavior.NoTrackingWithIdentityResolution
+    )]
+    [InlineData(
+        EntityState.Detached,
+        CascadeTiming.OnSaveChanges,
+        QueryTrackingBehavior.NoTrackingWithIdentityResolution
+    )]
     public virtual void Lazy_load_one_to_one_reference_to_dependent_already_loaded_delegate_loader_constructor_injection(
         EntityState state,
         CascadeTiming deleteOrphansTiming,
-        QueryTrackingBehavior queryTrackingBehavior)
+        QueryTrackingBehavior queryTrackingBehavior
+    )
     {
         using var context = CreateContext(lazyLoadingEnabled: true);
         context.ChangeTracker.QueryTrackingBehavior = queryTrackingBehavior;
@@ -4922,7 +6979,10 @@ public abstract partial class LoadTestBase<TFixture>
 
         var changeDetector = (ChangeDetectorProxy)context.GetService<IChangeDetector>();
 
-        var parent = context.Set<ParentDelegateLoaderByConstructor>().Include(e => e.Single).Single();
+        var parent = context
+            .Set<ParentDelegateLoaderByConstructor>()
+            .Include(e => e.Single)
+            .Single();
 
         ClearLog();
 
@@ -4931,7 +6991,11 @@ public abstract partial class LoadTestBase<TFixture>
 
         var referenceEntry = context.Entry(parent).Reference(e => e.Single);
 
-        Assert.Equal(queryTrackingBehavior == QueryTrackingBehavior.TrackAll && state != EntityState.Detached, referenceEntry.IsLoaded);
+        Assert.Equal(
+            queryTrackingBehavior == QueryTrackingBehavior.TrackAll
+                && state != EntityState.Detached,
+            referenceEntry.IsLoaded
+        );
 
         changeDetector.DetectChangesCalled = false;
 
@@ -4939,22 +7003,31 @@ public abstract partial class LoadTestBase<TFixture>
 
         Assert.False(changeDetector.DetectChangesCalled);
 
-        Assert.Equal(queryTrackingBehavior == QueryTrackingBehavior.TrackAll && state != EntityState.Detached, referenceEntry.IsLoaded);
+        Assert.Equal(
+            queryTrackingBehavior == QueryTrackingBehavior.TrackAll
+                && state != EntityState.Detached,
+            referenceEntry.IsLoaded
+        );
 
         RecordLog();
         context.ChangeTracker.LazyLoadingEnabled = false;
 
-        Assert.Equal(state == EntityState.Detached ? 0 : 2, context.ChangeTracker.Entries().Count());
+        Assert.Equal(
+            state == EntityState.Detached ? 0 : 2,
+            context.ChangeTracker.Entries().Count()
+        );
 
-        if (state == EntityState.Deleted
-            && deleteOrphansTiming != CascadeTiming.Never)
+        if (state == EntityState.Deleted && deleteOrphansTiming != CascadeTiming.Never)
         {
             Assert.Same(parent, parent.Single.Parent);
         }
 
         if (state != EntityState.Detached)
         {
-            var single = context.ChangeTracker.Entries<SingleDelegateLoaderByConstructor>().Single().Entity;
+            var single = context
+                .ChangeTracker.Entries<SingleDelegateLoaderByConstructor>()
+                .Single()
+                .Entity;
 
             Assert.Same(single, parent.Single);
             Assert.Same(parent, single.Parent);
@@ -4976,7 +7049,8 @@ public abstract partial class LoadTestBase<TFixture>
     [InlineData(EntityState.Detached, QueryTrackingBehavior.NoTrackingWithIdentityResolution)]
     public virtual void Lazy_load_collection_already_partially_loaded_delegate_loader_constructor_injection(
         EntityState state,
-        QueryTrackingBehavior queryTrackingBehavior)
+        QueryTrackingBehavior queryTrackingBehavior
+    )
     {
         using var context = CreateContext(lazyLoadingEnabled: true);
         context.ChangeTracker.QueryTrackingBehavior = queryTrackingBehavior;
@@ -5020,9 +7094,12 @@ public abstract partial class LoadTestBase<TFixture>
 
             // Note that when detached there is no identity resolution, so loading results in duplicates
             Assert.Equal(
-                state == EntityState.Detached && queryTrackingBehavior != QueryTrackingBehavior.NoTrackingWithIdentityResolution
+                state == EntityState.Detached
+                && queryTrackingBehavior != QueryTrackingBehavior.NoTrackingWithIdentityResolution
                     ? 3
-                    : 2, parent.Children.Count());
+                    : 2,
+                parent.Children.Count()
+            );
 
             Assert.All(parent.Children.Select(e => e.Parent), p => Assert.Same(parent, p));
         }
@@ -5051,7 +7128,8 @@ public abstract partial class LoadTestBase<TFixture>
     [InlineData(EntityState.Detached, QueryTrackingBehavior.NoTrackingWithIdentityResolution)]
     public virtual void Lazy_load_collection_delegate_loader_property_injection(
         EntityState state,
-        QueryTrackingBehavior queryTrackingBehavior)
+        QueryTrackingBehavior queryTrackingBehavior
+    )
     {
         using var context = CreateContext(lazyLoadingEnabled: true);
         context.ChangeTracker.QueryTrackingBehavior = queryTrackingBehavior;
@@ -5071,7 +7149,10 @@ public abstract partial class LoadTestBase<TFixture>
 
         if (LazyLoadingEnabled)
         {
-            if (state == EntityState.Detached && queryTrackingBehavior == QueryTrackingBehavior.TrackAll)
+            if (
+                state == EntityState.Detached
+                && queryTrackingBehavior == QueryTrackingBehavior.TrackAll
+            )
             {
                 Assert.Null(parent.Children); // Explicitly detached
             }
@@ -5091,7 +7172,10 @@ public abstract partial class LoadTestBase<TFixture>
                 Assert.Equal(2, parent.Children.Count());
             }
 
-            Assert.Equal(state == EntityState.Detached ? 0 : 3, context.ChangeTracker.Entries().Count());
+            Assert.Equal(
+                state == EntityState.Detached ? 0 : 3,
+                context.ChangeTracker.Entries().Count()
+            );
         }
         else
         {
@@ -5118,7 +7202,8 @@ public abstract partial class LoadTestBase<TFixture>
     [InlineData(EntityState.Detached, QueryTrackingBehavior.NoTrackingWithIdentityResolution)]
     public virtual void Lazy_load_many_to_one_reference_to_principal_delegate_loader_property_injection(
         EntityState state,
-        QueryTrackingBehavior queryTrackingBehavior)
+        QueryTrackingBehavior queryTrackingBehavior
+    )
     {
         using var context = CreateContext(lazyLoadingEnabled: true);
         context.ChangeTracker.QueryTrackingBehavior = queryTrackingBehavior;
@@ -5138,7 +7223,10 @@ public abstract partial class LoadTestBase<TFixture>
 
         if (LazyLoadingEnabled)
         {
-            if (state == EntityState.Detached && queryTrackingBehavior == QueryTrackingBehavior.TrackAll)
+            if (
+                state == EntityState.Detached
+                && queryTrackingBehavior == QueryTrackingBehavior.TrackAll
+            )
             {
                 Assert.Null(child.Parent); // Explicitly detached
             }
@@ -5160,7 +7248,10 @@ public abstract partial class LoadTestBase<TFixture>
                 RecordLog();
                 context.ChangeTracker.LazyLoadingEnabled = false;
 
-                Assert.Equal(state == EntityState.Detached ? 0 : 2, context.ChangeTracker.Entries().Count());
+                Assert.Equal(
+                    state == EntityState.Detached ? 0 : 2,
+                    context.ChangeTracker.Entries().Count()
+                );
 
                 if (state != EntityState.Deleted)
                 {
@@ -5169,7 +7260,10 @@ public abstract partial class LoadTestBase<TFixture>
 
                 if (state != EntityState.Detached)
                 {
-                    var parent = context.ChangeTracker.Entries<ParentDelegateLoaderByProperty>().Single().Entity;
+                    var parent = context
+                        .ChangeTracker.Entries<ParentDelegateLoaderByProperty>()
+                        .Single()
+                        .Entity;
 
                     if (state == EntityState.Deleted)
                     {
@@ -5209,7 +7303,8 @@ public abstract partial class LoadTestBase<TFixture>
     [InlineData(EntityState.Detached, QueryTrackingBehavior.NoTrackingWithIdentityResolution)]
     public virtual void Lazy_load_one_to_one_reference_to_principal_delegate_loader_property_injection(
         EntityState state,
-        QueryTrackingBehavior queryTrackingBehavior)
+        QueryTrackingBehavior queryTrackingBehavior
+    )
     {
         using var context = CreateContext(lazyLoadingEnabled: true);
         context.ChangeTracker.QueryTrackingBehavior = queryTrackingBehavior;
@@ -5229,7 +7324,10 @@ public abstract partial class LoadTestBase<TFixture>
 
         if (LazyLoadingEnabled)
         {
-            if (state == EntityState.Detached && queryTrackingBehavior == QueryTrackingBehavior.TrackAll)
+            if (
+                state == EntityState.Detached
+                && queryTrackingBehavior == QueryTrackingBehavior.TrackAll
+            )
             {
                 Assert.Null(single.Parent); // Explicitly detached
             }
@@ -5251,7 +7349,10 @@ public abstract partial class LoadTestBase<TFixture>
                 RecordLog();
                 context.ChangeTracker.LazyLoadingEnabled = false;
 
-                Assert.Equal(state == EntityState.Detached ? 0 : 2, context.ChangeTracker.Entries().Count());
+                Assert.Equal(
+                    state == EntityState.Detached ? 0 : 2,
+                    context.ChangeTracker.Entries().Count()
+                );
 
                 if (state != EntityState.Deleted)
                 {
@@ -5260,7 +7361,10 @@ public abstract partial class LoadTestBase<TFixture>
 
                 if (state != EntityState.Detached)
                 {
-                    var parent = context.ChangeTracker.Entries<ParentDelegateLoaderByProperty>().Single().Entity;
+                    var parent = context
+                        .ChangeTracker.Entries<ParentDelegateLoaderByProperty>()
+                        .Single()
+                        .Entity;
 
                     if (state == EntityState.Deleted)
                     {
@@ -5300,7 +7404,8 @@ public abstract partial class LoadTestBase<TFixture>
     [InlineData(EntityState.Detached, QueryTrackingBehavior.NoTrackingWithIdentityResolution)]
     public virtual void Lazy_load_one_to_one_reference_to_dependent_delegate_loader_property_injection(
         EntityState state,
-        QueryTrackingBehavior queryTrackingBehavior)
+        QueryTrackingBehavior queryTrackingBehavior
+    )
     {
         using var context = CreateContext(lazyLoadingEnabled: true);
         context.ChangeTracker.QueryTrackingBehavior = queryTrackingBehavior;
@@ -5320,7 +7425,10 @@ public abstract partial class LoadTestBase<TFixture>
 
         if (LazyLoadingEnabled)
         {
-            if (state == EntityState.Detached && queryTrackingBehavior == QueryTrackingBehavior.TrackAll)
+            if (
+                state == EntityState.Detached
+                && queryTrackingBehavior == QueryTrackingBehavior.TrackAll
+            )
             {
                 Assert.Null(parent.Single); // Explicitly detached
             }
@@ -5335,7 +7443,10 @@ public abstract partial class LoadTestBase<TFixture>
                 RecordLog();
                 context.ChangeTracker.LazyLoadingEnabled = false;
 
-                Assert.Equal(state == EntityState.Detached ? 0 : 2, context.ChangeTracker.Entries().Count());
+                Assert.Equal(
+                    state == EntityState.Detached ? 0 : 2,
+                    context.ChangeTracker.Entries().Count()
+                );
 
                 if (state != EntityState.Deleted)
                 {
@@ -5344,7 +7455,10 @@ public abstract partial class LoadTestBase<TFixture>
 
                 if (state != EntityState.Detached)
                 {
-                    var single = context.ChangeTracker.Entries<SingleDelegateLoaderByProperty>().Single().Entity;
+                    var single = context
+                        .ChangeTracker.Entries<SingleDelegateLoaderByProperty>()
+                        .Single()
+                        .Entity;
 
                     Assert.Same(single, parent.Single);
                     Assert.Same(parent, single.Parent);
@@ -5376,13 +7490,16 @@ public abstract partial class LoadTestBase<TFixture>
     [InlineData(EntityState.Detached, QueryTrackingBehavior.NoTrackingWithIdentityResolution)]
     public virtual void Lazy_load_many_to_one_reference_to_principal_null_FK_delegate_loader_property_injection(
         EntityState state,
-        QueryTrackingBehavior queryTrackingBehavior)
+        QueryTrackingBehavior queryTrackingBehavior
+    )
     {
         using var context = CreateContext(lazyLoadingEnabled: true);
         context.ChangeTracker.QueryTrackingBehavior = queryTrackingBehavior;
         var changeDetector = (ChangeDetectorProxy)context.GetService<IChangeDetector>();
 
-        var child = context.Attach(new ChildDelegateLoaderByProperty { Id = 767, ParentId = null }).Entity;
+        var child = context
+            .Attach(new ChildDelegateLoaderByProperty { Id = 767, ParentId = null })
+            .Entity;
 
         ClearLog();
 
@@ -5405,7 +7522,10 @@ public abstract partial class LoadTestBase<TFixture>
             RecordLog();
             context.ChangeTracker.LazyLoadingEnabled = false;
 
-            Assert.Equal(state == EntityState.Detached ? 0 : 1, context.ChangeTracker.Entries().Count());
+            Assert.Equal(
+                state == EntityState.Detached ? 0 : 1,
+                context.ChangeTracker.Entries().Count()
+            );
             Assert.Null(child.Parent);
         }
         else
@@ -5433,13 +7553,16 @@ public abstract partial class LoadTestBase<TFixture>
     [InlineData(EntityState.Detached, QueryTrackingBehavior.NoTrackingWithIdentityResolution)]
     public virtual void Lazy_load_one_to_one_reference_to_principal_null_FK_delegate_loader_property_injection(
         EntityState state,
-        QueryTrackingBehavior queryTrackingBehavior)
+        QueryTrackingBehavior queryTrackingBehavior
+    )
     {
         using var context = CreateContext(lazyLoadingEnabled: true);
         context.ChangeTracker.QueryTrackingBehavior = queryTrackingBehavior;
         var changeDetector = (ChangeDetectorProxy)context.GetService<IChangeDetector>();
 
-        var single = context.Attach(new SingleDelegateLoaderByProperty { Id = 767, ParentId = null }).Entity;
+        var single = context
+            .Attach(new SingleDelegateLoaderByProperty { Id = 767, ParentId = null })
+            .Entity;
 
         ClearLog();
 
@@ -5462,7 +7585,10 @@ public abstract partial class LoadTestBase<TFixture>
             RecordLog();
             context.ChangeTracker.LazyLoadingEnabled = false;
 
-            Assert.Equal(state == EntityState.Detached ? 0 : 1, context.ChangeTracker.Entries().Count());
+            Assert.Equal(
+                state == EntityState.Detached ? 0 : 1,
+                context.ChangeTracker.Entries().Count()
+            );
 
             Assert.Null(single.Parent);
         }
@@ -5491,7 +7617,8 @@ public abstract partial class LoadTestBase<TFixture>
     [InlineData(EntityState.Detached, QueryTrackingBehavior.NoTrackingWithIdentityResolution)]
     public virtual void Lazy_load_collection_not_found_delegate_loader_property_injection(
         EntityState state,
-        QueryTrackingBehavior queryTrackingBehavior)
+        QueryTrackingBehavior queryTrackingBehavior
+    )
     {
         using var context = CreateContext(lazyLoadingEnabled: true);
         context.ChangeTracker.QueryTrackingBehavior = queryTrackingBehavior;
@@ -5552,13 +7679,16 @@ public abstract partial class LoadTestBase<TFixture>
     [InlineData(EntityState.Detached, QueryTrackingBehavior.NoTrackingWithIdentityResolution)]
     public virtual void Lazy_load_many_to_one_reference_to_principal_not_found_delegate_loader_property_injection(
         EntityState state,
-        QueryTrackingBehavior queryTrackingBehavior)
+        QueryTrackingBehavior queryTrackingBehavior
+    )
     {
         using var context = CreateContext(lazyLoadingEnabled: true);
         context.ChangeTracker.QueryTrackingBehavior = queryTrackingBehavior;
         var changeDetector = (ChangeDetectorProxy)context.GetService<IChangeDetector>();
 
-        var child = context.Attach(new ChildDelegateLoaderByProperty { Id = 767, ParentId = 787 }).Entity;
+        var child = context
+            .Attach(new ChildDelegateLoaderByProperty { Id = 767, ParentId = 787 })
+            .Entity;
 
         ClearLog();
 
@@ -5581,7 +7711,10 @@ public abstract partial class LoadTestBase<TFixture>
             RecordLog();
             context.ChangeTracker.LazyLoadingEnabled = false;
 
-            Assert.Equal(state == EntityState.Detached ? 0 : 1, context.ChangeTracker.Entries().Count());
+            Assert.Equal(
+                state == EntityState.Detached ? 0 : 1,
+                context.ChangeTracker.Entries().Count()
+            );
             Assert.Null(child.Parent);
         }
         else
@@ -5609,13 +7742,16 @@ public abstract partial class LoadTestBase<TFixture>
     [InlineData(EntityState.Detached, QueryTrackingBehavior.NoTrackingWithIdentityResolution)]
     public virtual void Lazy_load_one_to_one_reference_to_principal_not_found_delegate_loader_property_injection(
         EntityState state,
-        QueryTrackingBehavior queryTrackingBehavior)
+        QueryTrackingBehavior queryTrackingBehavior
+    )
     {
         using var context = CreateContext(lazyLoadingEnabled: true);
         context.ChangeTracker.QueryTrackingBehavior = queryTrackingBehavior;
         var changeDetector = (ChangeDetectorProxy)context.GetService<IChangeDetector>();
 
-        var single = context.Attach(new SingleDelegateLoaderByProperty { Id = 767, ParentId = 787 }).Entity;
+        var single = context
+            .Attach(new SingleDelegateLoaderByProperty { Id = 767, ParentId = 787 })
+            .Entity;
 
         ClearLog();
 
@@ -5638,7 +7774,10 @@ public abstract partial class LoadTestBase<TFixture>
             RecordLog();
             context.ChangeTracker.LazyLoadingEnabled = false;
 
-            Assert.Equal(state == EntityState.Detached ? 0 : 1, context.ChangeTracker.Entries().Count());
+            Assert.Equal(
+                state == EntityState.Detached ? 0 : 1,
+                context.ChangeTracker.Entries().Count()
+            );
 
             Assert.Null(single.Parent);
         }
@@ -5667,7 +7806,8 @@ public abstract partial class LoadTestBase<TFixture>
     [InlineData(EntityState.Detached, QueryTrackingBehavior.NoTrackingWithIdentityResolution)]
     public virtual void Lazy_load_one_to_one_reference_to_dependent_not_found_delegate_loader_property_injection(
         EntityState state,
-        QueryTrackingBehavior queryTrackingBehavior)
+        QueryTrackingBehavior queryTrackingBehavior
+    )
     {
         using var context = CreateContext(lazyLoadingEnabled: true);
         context.ChangeTracker.QueryTrackingBehavior = queryTrackingBehavior;
@@ -5698,7 +7838,10 @@ public abstract partial class LoadTestBase<TFixture>
 
             Assert.Null(parent.Single);
 
-            Assert.Equal(state == EntityState.Detached ? 0 : 1, context.ChangeTracker.Entries().Count());
+            Assert.Equal(
+                state == EntityState.Detached ? 0 : 1,
+                context.ChangeTracker.Entries().Count()
+            );
         }
         else
         {
@@ -5723,25 +7866,78 @@ public abstract partial class LoadTestBase<TFixture>
     [InlineData(EntityState.Modified, CascadeTiming.Immediate, QueryTrackingBehavior.NoTracking)]
     [InlineData(EntityState.Deleted, CascadeTiming.Immediate, QueryTrackingBehavior.NoTracking)]
     [InlineData(EntityState.Detached, CascadeTiming.Immediate, QueryTrackingBehavior.NoTracking)]
-    [InlineData(EntityState.Unchanged, CascadeTiming.OnSaveChanges, QueryTrackingBehavior.NoTracking)]
+    [InlineData(
+        EntityState.Unchanged,
+        CascadeTiming.OnSaveChanges,
+        QueryTrackingBehavior.NoTracking
+    )]
     [InlineData(EntityState.Added, CascadeTiming.OnSaveChanges, QueryTrackingBehavior.NoTracking)]
-    [InlineData(EntityState.Modified, CascadeTiming.OnSaveChanges, QueryTrackingBehavior.NoTracking)]
+    [InlineData(
+        EntityState.Modified,
+        CascadeTiming.OnSaveChanges,
+        QueryTrackingBehavior.NoTracking
+    )]
     [InlineData(EntityState.Deleted, CascadeTiming.OnSaveChanges, QueryTrackingBehavior.NoTracking)]
-    [InlineData(EntityState.Detached, CascadeTiming.OnSaveChanges, QueryTrackingBehavior.NoTracking)]
-    [InlineData(EntityState.Unchanged, CascadeTiming.Immediate, QueryTrackingBehavior.NoTrackingWithIdentityResolution)]
-    [InlineData(EntityState.Added, CascadeTiming.Immediate, QueryTrackingBehavior.NoTrackingWithIdentityResolution)]
-    [InlineData(EntityState.Modified, CascadeTiming.Immediate, QueryTrackingBehavior.NoTrackingWithIdentityResolution)]
-    [InlineData(EntityState.Deleted, CascadeTiming.Immediate, QueryTrackingBehavior.NoTrackingWithIdentityResolution)]
-    [InlineData(EntityState.Detached, CascadeTiming.Immediate, QueryTrackingBehavior.NoTrackingWithIdentityResolution)]
-    [InlineData(EntityState.Unchanged, CascadeTiming.OnSaveChanges, QueryTrackingBehavior.NoTrackingWithIdentityResolution)]
-    [InlineData(EntityState.Added, CascadeTiming.OnSaveChanges, QueryTrackingBehavior.NoTrackingWithIdentityResolution)]
-    [InlineData(EntityState.Modified, CascadeTiming.OnSaveChanges, QueryTrackingBehavior.NoTrackingWithIdentityResolution)]
-    [InlineData(EntityState.Deleted, CascadeTiming.OnSaveChanges, QueryTrackingBehavior.NoTrackingWithIdentityResolution)]
-    [InlineData(EntityState.Detached, CascadeTiming.OnSaveChanges, QueryTrackingBehavior.NoTrackingWithIdentityResolution)]
+    [InlineData(
+        EntityState.Detached,
+        CascadeTiming.OnSaveChanges,
+        QueryTrackingBehavior.NoTracking
+    )]
+    [InlineData(
+        EntityState.Unchanged,
+        CascadeTiming.Immediate,
+        QueryTrackingBehavior.NoTrackingWithIdentityResolution
+    )]
+    [InlineData(
+        EntityState.Added,
+        CascadeTiming.Immediate,
+        QueryTrackingBehavior.NoTrackingWithIdentityResolution
+    )]
+    [InlineData(
+        EntityState.Modified,
+        CascadeTiming.Immediate,
+        QueryTrackingBehavior.NoTrackingWithIdentityResolution
+    )]
+    [InlineData(
+        EntityState.Deleted,
+        CascadeTiming.Immediate,
+        QueryTrackingBehavior.NoTrackingWithIdentityResolution
+    )]
+    [InlineData(
+        EntityState.Detached,
+        CascadeTiming.Immediate,
+        QueryTrackingBehavior.NoTrackingWithIdentityResolution
+    )]
+    [InlineData(
+        EntityState.Unchanged,
+        CascadeTiming.OnSaveChanges,
+        QueryTrackingBehavior.NoTrackingWithIdentityResolution
+    )]
+    [InlineData(
+        EntityState.Added,
+        CascadeTiming.OnSaveChanges,
+        QueryTrackingBehavior.NoTrackingWithIdentityResolution
+    )]
+    [InlineData(
+        EntityState.Modified,
+        CascadeTiming.OnSaveChanges,
+        QueryTrackingBehavior.NoTrackingWithIdentityResolution
+    )]
+    [InlineData(
+        EntityState.Deleted,
+        CascadeTiming.OnSaveChanges,
+        QueryTrackingBehavior.NoTrackingWithIdentityResolution
+    )]
+    [InlineData(
+        EntityState.Detached,
+        CascadeTiming.OnSaveChanges,
+        QueryTrackingBehavior.NoTrackingWithIdentityResolution
+    )]
     public virtual void Lazy_load_collection_already_loaded_delegate_loader_property_injection(
         EntityState state,
         CascadeTiming deleteOrphansTiming,
-        QueryTrackingBehavior queryTrackingBehavior)
+        QueryTrackingBehavior queryTrackingBehavior
+    )
     {
         using var context = CreateContext(lazyLoadingEnabled: true);
         context.ChangeTracker.QueryTrackingBehavior = queryTrackingBehavior;
@@ -5749,7 +7945,10 @@ public abstract partial class LoadTestBase<TFixture>
 
         var changeDetector = (ChangeDetectorProxy)context.GetService<IChangeDetector>();
 
-        var parent = context.Set<ParentDelegateLoaderByProperty>().Include(e => e.Children).Single();
+        var parent = context
+            .Set<ParentDelegateLoaderByProperty>()
+            .Include(e => e.Children)
+            .Single();
 
         ClearLog();
 
@@ -5767,7 +7966,11 @@ public abstract partial class LoadTestBase<TFixture>
         var collectionEntry = context.Entry(parent).Collection(e => e.Children);
 
         // Loader delegate has no way of recording loader state for untracked queries or detached entities
-        Assert.Equal(queryTrackingBehavior == QueryTrackingBehavior.TrackAll && state != EntityState.Detached, collectionEntry.IsLoaded);
+        Assert.Equal(
+            queryTrackingBehavior == QueryTrackingBehavior.TrackAll
+                && state != EntityState.Detached,
+            collectionEntry.IsLoaded
+        );
 
         changeDetector.DetectChangesCalled = false;
 
@@ -5779,7 +7982,10 @@ public abstract partial class LoadTestBase<TFixture>
 
         if (LazyLoadingEnabled)
         {
-            if (state == EntityState.Detached && queryTrackingBehavior == QueryTrackingBehavior.TrackAll)
+            if (
+                state == EntityState.Detached
+                && queryTrackingBehavior == QueryTrackingBehavior.TrackAll
+            )
             {
                 Assert.False(collectionEntry.IsLoaded); // Explicitly detached
                 Assert.Equal(2, parent.Children.Count());
@@ -5793,9 +7999,13 @@ public abstract partial class LoadTestBase<TFixture>
 
                 // Note that when detached there is no identity resolution, so loading results in duplicates
                 Assert.Equal(
-                    state == EntityState.Detached && queryTrackingBehavior != QueryTrackingBehavior.NoTrackingWithIdentityResolution
+                    state == EntityState.Detached
+                    && queryTrackingBehavior
+                        != QueryTrackingBehavior.NoTrackingWithIdentityResolution
                         ? 4
-                        : 2, parent.Children.Count());
+                        : 2,
+                    parent.Children.Count()
+                );
             }
 
             Assert.All(parent.Children.Select(e => e.Parent), p => Assert.Same(parent, p));
@@ -5824,13 +8034,17 @@ public abstract partial class LoadTestBase<TFixture>
     [InlineData(EntityState.Detached, QueryTrackingBehavior.NoTrackingWithIdentityResolution)]
     public virtual void Lazy_load_many_to_one_reference_to_principal_already_loaded_delegate_loader_property_injection(
         EntityState state,
-        QueryTrackingBehavior queryTrackingBehavior)
+        QueryTrackingBehavior queryTrackingBehavior
+    )
     {
         using var context = CreateContext(lazyLoadingEnabled: true);
         context.ChangeTracker.QueryTrackingBehavior = queryTrackingBehavior;
         var changeDetector = (ChangeDetectorProxy)context.GetService<IChangeDetector>();
 
-        var child = context.Set<ChildDelegateLoaderByProperty>().Include(e => e.Parent).Single(e => e.Id == 12);
+        var child = context
+            .Set<ChildDelegateLoaderByProperty>()
+            .Include(e => e.Parent)
+            .Single(e => e.Id == 12);
 
         ClearLog();
 
@@ -5846,7 +8060,11 @@ public abstract partial class LoadTestBase<TFixture>
         }
         else
         {
-            Assert.Equal(queryTrackingBehavior == QueryTrackingBehavior.TrackAll && state != EntityState.Detached, referenceEntry.IsLoaded);
+            Assert.Equal(
+                queryTrackingBehavior == QueryTrackingBehavior.TrackAll
+                    && state != EntityState.Detached,
+                referenceEntry.IsLoaded
+            );
 
             changeDetector.DetectChangesCalled = false;
 
@@ -5854,18 +8072,28 @@ public abstract partial class LoadTestBase<TFixture>
 
             Assert.False(changeDetector.DetectChangesCalled);
 
-            Assert.Equal(queryTrackingBehavior == QueryTrackingBehavior.TrackAll && state != EntityState.Detached, referenceEntry.IsLoaded);
+            Assert.Equal(
+                queryTrackingBehavior == QueryTrackingBehavior.TrackAll
+                    && state != EntityState.Detached,
+                referenceEntry.IsLoaded
+            );
 
             RecordLog();
             context.ChangeTracker.LazyLoadingEnabled = false;
 
-            Assert.Equal(state == EntityState.Detached ? 0 : 2, context.ChangeTracker.Entries().Count());
+            Assert.Equal(
+                state == EntityState.Detached ? 0 : 2,
+                context.ChangeTracker.Entries().Count()
+            );
 
             Assert.Same(child, child.Parent.Children.Single());
 
             if (state != EntityState.Detached)
             {
-                var parent = context.ChangeTracker.Entries<ParentDelegateLoaderByProperty>().Single().Entity;
+                var parent = context
+                    .ChangeTracker.Entries<ParentDelegateLoaderByProperty>()
+                    .Single()
+                    .Entity;
 
                 Assert.Same(parent, child.Parent);
                 Assert.Same(child, parent.Children.Single());
@@ -5891,7 +8119,8 @@ public abstract partial class LoadTestBase<TFixture>
     [InlineData(EntityState.Detached, QueryTrackingBehavior.NoTrackingWithIdentityResolution)]
     public virtual void Lazy_load_one_to_one_reference_to_principal_already_loaded_delegate_loader_property_injection(
         EntityState state,
-        QueryTrackingBehavior queryTrackingBehavior)
+        QueryTrackingBehavior queryTrackingBehavior
+    )
     {
         using var context = CreateContext(lazyLoadingEnabled: true);
         context.ChangeTracker.QueryTrackingBehavior = queryTrackingBehavior;
@@ -5913,7 +8142,11 @@ public abstract partial class LoadTestBase<TFixture>
         }
         else
         {
-            Assert.Equal(queryTrackingBehavior == QueryTrackingBehavior.TrackAll && state != EntityState.Detached, referenceEntry.IsLoaded);
+            Assert.Equal(
+                queryTrackingBehavior == QueryTrackingBehavior.TrackAll
+                    && state != EntityState.Detached,
+                referenceEntry.IsLoaded
+            );
 
             changeDetector.DetectChangesCalled = false;
 
@@ -5921,18 +8154,28 @@ public abstract partial class LoadTestBase<TFixture>
 
             Assert.False(changeDetector.DetectChangesCalled);
 
-            Assert.Equal(queryTrackingBehavior == QueryTrackingBehavior.TrackAll && state != EntityState.Detached, referenceEntry.IsLoaded);
+            Assert.Equal(
+                queryTrackingBehavior == QueryTrackingBehavior.TrackAll
+                    && state != EntityState.Detached,
+                referenceEntry.IsLoaded
+            );
 
             RecordLog();
             context.ChangeTracker.LazyLoadingEnabled = false;
 
-            Assert.Equal(state == EntityState.Detached ? 0 : 2, context.ChangeTracker.Entries().Count());
+            Assert.Equal(
+                state == EntityState.Detached ? 0 : 2,
+                context.ChangeTracker.Entries().Count()
+            );
 
             Assert.Same(single, single.Parent.Single);
 
             if (state != EntityState.Detached)
             {
-                var parent = context.ChangeTracker.Entries<ParentDelegateLoaderByProperty>().Single().Entity;
+                var parent = context
+                    .ChangeTracker.Entries<ParentDelegateLoaderByProperty>()
+                    .Single()
+                    .Entity;
 
                 Assert.Same(parent, single.Parent);
                 Assert.Same(single, parent.Single);
@@ -5956,25 +8199,78 @@ public abstract partial class LoadTestBase<TFixture>
     [InlineData(EntityState.Modified, CascadeTiming.Immediate, QueryTrackingBehavior.NoTracking)]
     [InlineData(EntityState.Deleted, CascadeTiming.Immediate, QueryTrackingBehavior.NoTracking)]
     [InlineData(EntityState.Detached, CascadeTiming.Immediate, QueryTrackingBehavior.NoTracking)]
-    [InlineData(EntityState.Unchanged, CascadeTiming.OnSaveChanges, QueryTrackingBehavior.NoTracking)]
+    [InlineData(
+        EntityState.Unchanged,
+        CascadeTiming.OnSaveChanges,
+        QueryTrackingBehavior.NoTracking
+    )]
     [InlineData(EntityState.Added, CascadeTiming.OnSaveChanges, QueryTrackingBehavior.NoTracking)]
-    [InlineData(EntityState.Modified, CascadeTiming.OnSaveChanges, QueryTrackingBehavior.NoTracking)]
+    [InlineData(
+        EntityState.Modified,
+        CascadeTiming.OnSaveChanges,
+        QueryTrackingBehavior.NoTracking
+    )]
     [InlineData(EntityState.Deleted, CascadeTiming.OnSaveChanges, QueryTrackingBehavior.NoTracking)]
-    [InlineData(EntityState.Detached, CascadeTiming.OnSaveChanges, QueryTrackingBehavior.NoTracking)]
-    [InlineData(EntityState.Unchanged, CascadeTiming.Immediate, QueryTrackingBehavior.NoTrackingWithIdentityResolution)]
-    [InlineData(EntityState.Added, CascadeTiming.Immediate, QueryTrackingBehavior.NoTrackingWithIdentityResolution)]
-    [InlineData(EntityState.Modified, CascadeTiming.Immediate, QueryTrackingBehavior.NoTrackingWithIdentityResolution)]
-    [InlineData(EntityState.Deleted, CascadeTiming.Immediate, QueryTrackingBehavior.NoTrackingWithIdentityResolution)]
-    [InlineData(EntityState.Detached, CascadeTiming.Immediate, QueryTrackingBehavior.NoTrackingWithIdentityResolution)]
-    [InlineData(EntityState.Unchanged, CascadeTiming.OnSaveChanges, QueryTrackingBehavior.NoTrackingWithIdentityResolution)]
-    [InlineData(EntityState.Added, CascadeTiming.OnSaveChanges, QueryTrackingBehavior.NoTrackingWithIdentityResolution)]
-    [InlineData(EntityState.Modified, CascadeTiming.OnSaveChanges, QueryTrackingBehavior.NoTrackingWithIdentityResolution)]
-    [InlineData(EntityState.Deleted, CascadeTiming.OnSaveChanges, QueryTrackingBehavior.NoTrackingWithIdentityResolution)]
-    [InlineData(EntityState.Detached, CascadeTiming.OnSaveChanges, QueryTrackingBehavior.NoTrackingWithIdentityResolution)]
+    [InlineData(
+        EntityState.Detached,
+        CascadeTiming.OnSaveChanges,
+        QueryTrackingBehavior.NoTracking
+    )]
+    [InlineData(
+        EntityState.Unchanged,
+        CascadeTiming.Immediate,
+        QueryTrackingBehavior.NoTrackingWithIdentityResolution
+    )]
+    [InlineData(
+        EntityState.Added,
+        CascadeTiming.Immediate,
+        QueryTrackingBehavior.NoTrackingWithIdentityResolution
+    )]
+    [InlineData(
+        EntityState.Modified,
+        CascadeTiming.Immediate,
+        QueryTrackingBehavior.NoTrackingWithIdentityResolution
+    )]
+    [InlineData(
+        EntityState.Deleted,
+        CascadeTiming.Immediate,
+        QueryTrackingBehavior.NoTrackingWithIdentityResolution
+    )]
+    [InlineData(
+        EntityState.Detached,
+        CascadeTiming.Immediate,
+        QueryTrackingBehavior.NoTrackingWithIdentityResolution
+    )]
+    [InlineData(
+        EntityState.Unchanged,
+        CascadeTiming.OnSaveChanges,
+        QueryTrackingBehavior.NoTrackingWithIdentityResolution
+    )]
+    [InlineData(
+        EntityState.Added,
+        CascadeTiming.OnSaveChanges,
+        QueryTrackingBehavior.NoTrackingWithIdentityResolution
+    )]
+    [InlineData(
+        EntityState.Modified,
+        CascadeTiming.OnSaveChanges,
+        QueryTrackingBehavior.NoTrackingWithIdentityResolution
+    )]
+    [InlineData(
+        EntityState.Deleted,
+        CascadeTiming.OnSaveChanges,
+        QueryTrackingBehavior.NoTrackingWithIdentityResolution
+    )]
+    [InlineData(
+        EntityState.Detached,
+        CascadeTiming.OnSaveChanges,
+        QueryTrackingBehavior.NoTrackingWithIdentityResolution
+    )]
     public virtual void Lazy_load_one_to_one_reference_to_dependent_already_loaded_delegate_loader_property_injection(
         EntityState state,
         CascadeTiming deleteOrphansTiming,
-        QueryTrackingBehavior queryTrackingBehavior)
+        QueryTrackingBehavior queryTrackingBehavior
+    )
     {
         using var context = CreateContext(lazyLoadingEnabled: true);
         context.ChangeTracker.QueryTrackingBehavior = queryTrackingBehavior;
@@ -5991,7 +8287,11 @@ public abstract partial class LoadTestBase<TFixture>
 
         var referenceEntry = context.Entry(parent).Reference(e => e.Single);
 
-        Assert.Equal(queryTrackingBehavior == QueryTrackingBehavior.TrackAll && state != EntityState.Detached, referenceEntry.IsLoaded);
+        Assert.Equal(
+            queryTrackingBehavior == QueryTrackingBehavior.TrackAll
+                && state != EntityState.Detached,
+            referenceEntry.IsLoaded
+        );
 
         changeDetector.DetectChangesCalled = false;
 
@@ -5999,22 +8299,31 @@ public abstract partial class LoadTestBase<TFixture>
 
         Assert.False(changeDetector.DetectChangesCalled);
 
-        Assert.Equal(queryTrackingBehavior == QueryTrackingBehavior.TrackAll && state != EntityState.Detached, referenceEntry.IsLoaded);
+        Assert.Equal(
+            queryTrackingBehavior == QueryTrackingBehavior.TrackAll
+                && state != EntityState.Detached,
+            referenceEntry.IsLoaded
+        );
 
         RecordLog();
         context.ChangeTracker.LazyLoadingEnabled = false;
 
-        Assert.Equal(state == EntityState.Detached ? 0 : 2, context.ChangeTracker.Entries().Count());
+        Assert.Equal(
+            state == EntityState.Detached ? 0 : 2,
+            context.ChangeTracker.Entries().Count()
+        );
 
-        if (state == EntityState.Deleted
-            && deleteOrphansTiming != CascadeTiming.Never)
+        if (state == EntityState.Deleted && deleteOrphansTiming != CascadeTiming.Never)
         {
             Assert.Same(parent, parent.Single.Parent);
         }
 
         if (state != EntityState.Detached)
         {
-            var single = context.ChangeTracker.Entries<SingleDelegateLoaderByProperty>().Single().Entity;
+            var single = context
+                .ChangeTracker.Entries<SingleDelegateLoaderByProperty>()
+                .Single()
+                .Entity;
 
             Assert.Same(single, parent.Single);
             Assert.Same(parent, single.Parent);
@@ -6036,7 +8345,8 @@ public abstract partial class LoadTestBase<TFixture>
     [InlineData(EntityState.Detached, QueryTrackingBehavior.NoTrackingWithIdentityResolution)]
     public virtual void Lazy_load_collection_already_partially_loaded_delegate_loader_property_injection(
         EntityState state,
-        QueryTrackingBehavior queryTrackingBehavior)
+        QueryTrackingBehavior queryTrackingBehavior
+    )
     {
         using var context = CreateContext(lazyLoadingEnabled: true);
         context.ChangeTracker.QueryTrackingBehavior = queryTrackingBehavior;
@@ -6072,7 +8382,13 @@ public abstract partial class LoadTestBase<TFixture>
 
         RecordLog();
 
-        if (!LazyLoadingEnabled || (state == EntityState.Detached && queryTrackingBehavior == QueryTrackingBehavior.TrackAll))
+        if (
+            !LazyLoadingEnabled
+            || (
+                state == EntityState.Detached
+                && queryTrackingBehavior == QueryTrackingBehavior.TrackAll
+            )
+        )
         {
             Assert.False(collectionEntry.IsLoaded); // Explicitly detached
             Assert.Equal(1, parent.Children.Count());
@@ -6087,9 +8403,12 @@ public abstract partial class LoadTestBase<TFixture>
 
             // Note that when detached there is no identity resolution, so loading results in duplicates
             Assert.Equal(
-                state == EntityState.Detached && queryTrackingBehavior != QueryTrackingBehavior.NoTrackingWithIdentityResolution
+                state == EntityState.Detached
+                && queryTrackingBehavior != QueryTrackingBehavior.NoTrackingWithIdentityResolution
                     ? 3
-                    : 2, parent.Children.Count());
+                    : 2,
+                parent.Children.Count()
+            );
 
             Assert.All(parent.Children.Select(e => e.Parent), p => Assert.Same(parent, p));
         }
@@ -6113,7 +8432,8 @@ public abstract partial class LoadTestBase<TFixture>
     [InlineData(EntityState.Detached, QueryTrackingBehavior.NoTrackingWithIdentityResolution)]
     public virtual void Lazy_load_collection_delegate_loader_with_state_property_injection(
         EntityState state,
-        QueryTrackingBehavior queryTrackingBehavior)
+        QueryTrackingBehavior queryTrackingBehavior
+    )
     {
         using var context = CreateContext(lazyLoadingEnabled: true);
         context.ChangeTracker.QueryTrackingBehavior = queryTrackingBehavior;
@@ -6133,7 +8453,10 @@ public abstract partial class LoadTestBase<TFixture>
 
         if (LazyLoadingEnabled)
         {
-            if (state == EntityState.Detached && queryTrackingBehavior == QueryTrackingBehavior.TrackAll)
+            if (
+                state == EntityState.Detached
+                && queryTrackingBehavior == QueryTrackingBehavior.TrackAll
+            )
             {
                 Assert.Null(parent.Children); // Explicitly detached
             }
@@ -6153,7 +8476,10 @@ public abstract partial class LoadTestBase<TFixture>
                 Assert.Equal(2, parent.Children.Count());
             }
 
-            Assert.Equal(state == EntityState.Detached ? 0 : 3, context.ChangeTracker.Entries().Count());
+            Assert.Equal(
+                state == EntityState.Detached ? 0 : 3,
+                context.ChangeTracker.Entries().Count()
+            );
         }
         else
         {
@@ -6180,7 +8506,8 @@ public abstract partial class LoadTestBase<TFixture>
     [InlineData(EntityState.Detached, QueryTrackingBehavior.NoTrackingWithIdentityResolution)]
     public virtual void Lazy_load_many_to_one_reference_to_principal_delegate_loader_with_state_property_injection(
         EntityState state,
-        QueryTrackingBehavior queryTrackingBehavior)
+        QueryTrackingBehavior queryTrackingBehavior
+    )
     {
         using var context = CreateContext(lazyLoadingEnabled: true);
         context.ChangeTracker.QueryTrackingBehavior = queryTrackingBehavior;
@@ -6200,7 +8527,10 @@ public abstract partial class LoadTestBase<TFixture>
 
         if (LazyLoadingEnabled)
         {
-            if (state == EntityState.Detached && queryTrackingBehavior == QueryTrackingBehavior.TrackAll)
+            if (
+                state == EntityState.Detached
+                && queryTrackingBehavior == QueryTrackingBehavior.TrackAll
+            )
             {
                 Assert.Null(child.Parent); // Explicitly detached
             }
@@ -6222,7 +8552,10 @@ public abstract partial class LoadTestBase<TFixture>
                 RecordLog();
                 context.ChangeTracker.LazyLoadingEnabled = false;
 
-                Assert.Equal(state == EntityState.Detached ? 0 : 2, context.ChangeTracker.Entries().Count());
+                Assert.Equal(
+                    state == EntityState.Detached ? 0 : 2,
+                    context.ChangeTracker.Entries().Count()
+                );
 
                 if (state != EntityState.Deleted)
                 {
@@ -6231,7 +8564,10 @@ public abstract partial class LoadTestBase<TFixture>
 
                 if (state != EntityState.Detached)
                 {
-                    var parent = context.ChangeTracker.Entries<ParentDelegateLoaderWithStateByProperty>().Single().Entity;
+                    var parent = context
+                        .ChangeTracker.Entries<ParentDelegateLoaderWithStateByProperty>()
+                        .Single()
+                        .Entity;
 
                     if (state == EntityState.Deleted)
                     {
@@ -6271,7 +8607,8 @@ public abstract partial class LoadTestBase<TFixture>
     [InlineData(EntityState.Detached, QueryTrackingBehavior.NoTrackingWithIdentityResolution)]
     public virtual void Lazy_load_one_to_one_reference_to_principal_delegate_loader_with_state_property_injection(
         EntityState state,
-        QueryTrackingBehavior queryTrackingBehavior)
+        QueryTrackingBehavior queryTrackingBehavior
+    )
     {
         using var context = CreateContext(lazyLoadingEnabled: true);
         context.ChangeTracker.QueryTrackingBehavior = queryTrackingBehavior;
@@ -6291,7 +8628,10 @@ public abstract partial class LoadTestBase<TFixture>
 
         if (LazyLoadingEnabled)
         {
-            if (state == EntityState.Detached && queryTrackingBehavior == QueryTrackingBehavior.TrackAll)
+            if (
+                state == EntityState.Detached
+                && queryTrackingBehavior == QueryTrackingBehavior.TrackAll
+            )
             {
                 Assert.Null(single.Parent); // Explicitly detached
             }
@@ -6313,7 +8653,10 @@ public abstract partial class LoadTestBase<TFixture>
                 RecordLog();
                 context.ChangeTracker.LazyLoadingEnabled = false;
 
-                Assert.Equal(state == EntityState.Detached ? 0 : 2, context.ChangeTracker.Entries().Count());
+                Assert.Equal(
+                    state == EntityState.Detached ? 0 : 2,
+                    context.ChangeTracker.Entries().Count()
+                );
 
                 if (state != EntityState.Deleted)
                 {
@@ -6322,7 +8665,10 @@ public abstract partial class LoadTestBase<TFixture>
 
                 if (state != EntityState.Detached)
                 {
-                    var parent = context.ChangeTracker.Entries<ParentDelegateLoaderWithStateByProperty>().Single().Entity;
+                    var parent = context
+                        .ChangeTracker.Entries<ParentDelegateLoaderWithStateByProperty>()
+                        .Single()
+                        .Entity;
 
                     if (state == EntityState.Deleted)
                     {
@@ -6362,7 +8708,8 @@ public abstract partial class LoadTestBase<TFixture>
     [InlineData(EntityState.Detached, QueryTrackingBehavior.NoTrackingWithIdentityResolution)]
     public virtual void Lazy_load_one_to_one_reference_to_dependent_delegate_loader_with_state_property_injection(
         EntityState state,
-        QueryTrackingBehavior queryTrackingBehavior)
+        QueryTrackingBehavior queryTrackingBehavior
+    )
     {
         using var context = CreateContext(lazyLoadingEnabled: true);
         context.ChangeTracker.QueryTrackingBehavior = queryTrackingBehavior;
@@ -6382,7 +8729,10 @@ public abstract partial class LoadTestBase<TFixture>
 
         if (LazyLoadingEnabled)
         {
-            if (state == EntityState.Detached && queryTrackingBehavior == QueryTrackingBehavior.TrackAll)
+            if (
+                state == EntityState.Detached
+                && queryTrackingBehavior == QueryTrackingBehavior.TrackAll
+            )
             {
                 Assert.Null(parent.Single); // Explicitly detached
             }
@@ -6397,7 +8747,10 @@ public abstract partial class LoadTestBase<TFixture>
                 RecordLog();
                 context.ChangeTracker.LazyLoadingEnabled = false;
 
-                Assert.Equal(state == EntityState.Detached ? 0 : 2, context.ChangeTracker.Entries().Count());
+                Assert.Equal(
+                    state == EntityState.Detached ? 0 : 2,
+                    context.ChangeTracker.Entries().Count()
+                );
 
                 if (state != EntityState.Deleted)
                 {
@@ -6406,7 +8759,10 @@ public abstract partial class LoadTestBase<TFixture>
 
                 if (state != EntityState.Detached)
                 {
-                    var single = context.ChangeTracker.Entries<SingleDelegateLoaderWithStateByProperty>().Single().Entity;
+                    var single = context
+                        .ChangeTracker.Entries<SingleDelegateLoaderWithStateByProperty>()
+                        .Single()
+                        .Entity;
 
                     Assert.Same(single, parent.Single);
                     Assert.Same(parent, single.Parent);
@@ -6438,13 +8794,16 @@ public abstract partial class LoadTestBase<TFixture>
     [InlineData(EntityState.Detached, QueryTrackingBehavior.NoTrackingWithIdentityResolution)]
     public virtual void Lazy_load_many_to_one_reference_to_principal_null_FK_delegate_loader_with_state_property_injection(
         EntityState state,
-        QueryTrackingBehavior queryTrackingBehavior)
+        QueryTrackingBehavior queryTrackingBehavior
+    )
     {
         using var context = CreateContext(lazyLoadingEnabled: true);
         context.ChangeTracker.QueryTrackingBehavior = queryTrackingBehavior;
         var changeDetector = (ChangeDetectorProxy)context.GetService<IChangeDetector>();
 
-        var child = context.Attach(new ChildDelegateLoaderWithStateByProperty { Id = 767, ParentId = null }).Entity;
+        var child = context
+            .Attach(new ChildDelegateLoaderWithStateByProperty { Id = 767, ParentId = null })
+            .Entity;
 
         ClearLog();
 
@@ -6467,7 +8826,10 @@ public abstract partial class LoadTestBase<TFixture>
             RecordLog();
             context.ChangeTracker.LazyLoadingEnabled = false;
 
-            Assert.Equal(state == EntityState.Detached ? 0 : 1, context.ChangeTracker.Entries().Count());
+            Assert.Equal(
+                state == EntityState.Detached ? 0 : 1,
+                context.ChangeTracker.Entries().Count()
+            );
             Assert.Null(child.Parent);
         }
         else
@@ -6495,13 +8857,16 @@ public abstract partial class LoadTestBase<TFixture>
     [InlineData(EntityState.Detached, QueryTrackingBehavior.NoTrackingWithIdentityResolution)]
     public virtual void Lazy_load_one_to_one_reference_to_principal_null_FK_delegate_loader_with_state_property_injection(
         EntityState state,
-        QueryTrackingBehavior queryTrackingBehavior)
+        QueryTrackingBehavior queryTrackingBehavior
+    )
     {
         using var context = CreateContext(lazyLoadingEnabled: true);
         context.ChangeTracker.QueryTrackingBehavior = queryTrackingBehavior;
         var changeDetector = (ChangeDetectorProxy)context.GetService<IChangeDetector>();
 
-        var single = context.Attach(new SingleDelegateLoaderWithStateByProperty { Id = 767, ParentId = null }).Entity;
+        var single = context
+            .Attach(new SingleDelegateLoaderWithStateByProperty { Id = 767, ParentId = null })
+            .Entity;
 
         ClearLog();
 
@@ -6524,7 +8889,10 @@ public abstract partial class LoadTestBase<TFixture>
             RecordLog();
             context.ChangeTracker.LazyLoadingEnabled = false;
 
-            Assert.Equal(state == EntityState.Detached ? 0 : 1, context.ChangeTracker.Entries().Count());
+            Assert.Equal(
+                state == EntityState.Detached ? 0 : 1,
+                context.ChangeTracker.Entries().Count()
+            );
 
             Assert.Null(single.Parent);
         }
@@ -6553,13 +8921,16 @@ public abstract partial class LoadTestBase<TFixture>
     [InlineData(EntityState.Detached, QueryTrackingBehavior.NoTrackingWithIdentityResolution)]
     public virtual void Lazy_load_collection_not_found_delegate_loader_with_state_property_injection(
         EntityState state,
-        QueryTrackingBehavior queryTrackingBehavior)
+        QueryTrackingBehavior queryTrackingBehavior
+    )
     {
         using var context = CreateContext(lazyLoadingEnabled: true);
         context.ChangeTracker.QueryTrackingBehavior = queryTrackingBehavior;
         var changeDetector = (ChangeDetectorProxy)context.GetService<IChangeDetector>();
 
-        var parent = context.Attach(new ParentDelegateLoaderWithStateByProperty { Id = 767 }).Entity;
+        var parent = context
+            .Attach(new ParentDelegateLoaderWithStateByProperty { Id = 767 })
+            .Entity;
 
         ClearLog();
 
@@ -6614,13 +8985,16 @@ public abstract partial class LoadTestBase<TFixture>
     [InlineData(EntityState.Detached, QueryTrackingBehavior.NoTrackingWithIdentityResolution)]
     public virtual void Lazy_load_many_to_one_reference_to_principal_not_found_delegate_loader_with_state_property_injection(
         EntityState state,
-        QueryTrackingBehavior queryTrackingBehavior)
+        QueryTrackingBehavior queryTrackingBehavior
+    )
     {
         using var context = CreateContext(lazyLoadingEnabled: true);
         context.ChangeTracker.QueryTrackingBehavior = queryTrackingBehavior;
         var changeDetector = (ChangeDetectorProxy)context.GetService<IChangeDetector>();
 
-        var child = context.Attach(new ChildDelegateLoaderWithStateByProperty { Id = 767, ParentId = 787 }).Entity;
+        var child = context
+            .Attach(new ChildDelegateLoaderWithStateByProperty { Id = 767, ParentId = 787 })
+            .Entity;
 
         ClearLog();
 
@@ -6643,7 +9017,10 @@ public abstract partial class LoadTestBase<TFixture>
             RecordLog();
             context.ChangeTracker.LazyLoadingEnabled = false;
 
-            Assert.Equal(state == EntityState.Detached ? 0 : 1, context.ChangeTracker.Entries().Count());
+            Assert.Equal(
+                state == EntityState.Detached ? 0 : 1,
+                context.ChangeTracker.Entries().Count()
+            );
             Assert.Null(child.Parent);
         }
         else
@@ -6671,13 +9048,16 @@ public abstract partial class LoadTestBase<TFixture>
     [InlineData(EntityState.Detached, QueryTrackingBehavior.NoTrackingWithIdentityResolution)]
     public virtual void Lazy_load_one_to_one_reference_to_principal_not_found_delegate_loader_with_state_property_injection(
         EntityState state,
-        QueryTrackingBehavior queryTrackingBehavior)
+        QueryTrackingBehavior queryTrackingBehavior
+    )
     {
         using var context = CreateContext(lazyLoadingEnabled: true);
         context.ChangeTracker.QueryTrackingBehavior = queryTrackingBehavior;
         var changeDetector = (ChangeDetectorProxy)context.GetService<IChangeDetector>();
 
-        var single = context.Attach(new SingleDelegateLoaderWithStateByProperty { Id = 767, ParentId = 787 }).Entity;
+        var single = context
+            .Attach(new SingleDelegateLoaderWithStateByProperty { Id = 767, ParentId = 787 })
+            .Entity;
 
         ClearLog();
 
@@ -6700,7 +9080,10 @@ public abstract partial class LoadTestBase<TFixture>
             RecordLog();
             context.ChangeTracker.LazyLoadingEnabled = false;
 
-            Assert.Equal(state == EntityState.Detached ? 0 : 1, context.ChangeTracker.Entries().Count());
+            Assert.Equal(
+                state == EntityState.Detached ? 0 : 1,
+                context.ChangeTracker.Entries().Count()
+            );
 
             Assert.Null(single.Parent);
         }
@@ -6729,13 +9112,16 @@ public abstract partial class LoadTestBase<TFixture>
     [InlineData(EntityState.Detached, QueryTrackingBehavior.NoTrackingWithIdentityResolution)]
     public virtual void Lazy_load_one_to_one_reference_to_dependent_not_found_delegate_loader_with_state_property_injection(
         EntityState state,
-        QueryTrackingBehavior queryTrackingBehavior)
+        QueryTrackingBehavior queryTrackingBehavior
+    )
     {
         using var context = CreateContext(lazyLoadingEnabled: true);
         context.ChangeTracker.QueryTrackingBehavior = queryTrackingBehavior;
         var changeDetector = (ChangeDetectorProxy)context.GetService<IChangeDetector>();
 
-        var parent = context.Attach(new ParentDelegateLoaderWithStateByProperty { Id = 767 }).Entity;
+        var parent = context
+            .Attach(new ParentDelegateLoaderWithStateByProperty { Id = 767 })
+            .Entity;
 
         ClearLog();
 
@@ -6760,7 +9146,10 @@ public abstract partial class LoadTestBase<TFixture>
 
             Assert.Null(parent.Single);
 
-            Assert.Equal(state == EntityState.Detached ? 0 : 1, context.ChangeTracker.Entries().Count());
+            Assert.Equal(
+                state == EntityState.Detached ? 0 : 1,
+                context.ChangeTracker.Entries().Count()
+            );
         }
         else
         {
@@ -6785,25 +9174,78 @@ public abstract partial class LoadTestBase<TFixture>
     [InlineData(EntityState.Modified, CascadeTiming.Immediate, QueryTrackingBehavior.NoTracking)]
     [InlineData(EntityState.Deleted, CascadeTiming.Immediate, QueryTrackingBehavior.NoTracking)]
     [InlineData(EntityState.Detached, CascadeTiming.Immediate, QueryTrackingBehavior.NoTracking)]
-    [InlineData(EntityState.Unchanged, CascadeTiming.OnSaveChanges, QueryTrackingBehavior.NoTracking)]
+    [InlineData(
+        EntityState.Unchanged,
+        CascadeTiming.OnSaveChanges,
+        QueryTrackingBehavior.NoTracking
+    )]
     [InlineData(EntityState.Added, CascadeTiming.OnSaveChanges, QueryTrackingBehavior.NoTracking)]
-    [InlineData(EntityState.Modified, CascadeTiming.OnSaveChanges, QueryTrackingBehavior.NoTracking)]
+    [InlineData(
+        EntityState.Modified,
+        CascadeTiming.OnSaveChanges,
+        QueryTrackingBehavior.NoTracking
+    )]
     [InlineData(EntityState.Deleted, CascadeTiming.OnSaveChanges, QueryTrackingBehavior.NoTracking)]
-    [InlineData(EntityState.Detached, CascadeTiming.OnSaveChanges, QueryTrackingBehavior.NoTracking)]
-    [InlineData(EntityState.Unchanged, CascadeTiming.Immediate, QueryTrackingBehavior.NoTrackingWithIdentityResolution)]
-    [InlineData(EntityState.Added, CascadeTiming.Immediate, QueryTrackingBehavior.NoTrackingWithIdentityResolution)]
-    [InlineData(EntityState.Modified, CascadeTiming.Immediate, QueryTrackingBehavior.NoTrackingWithIdentityResolution)]
-    [InlineData(EntityState.Deleted, CascadeTiming.Immediate, QueryTrackingBehavior.NoTrackingWithIdentityResolution)]
-    [InlineData(EntityState.Detached, CascadeTiming.Immediate, QueryTrackingBehavior.NoTrackingWithIdentityResolution)]
-    [InlineData(EntityState.Unchanged, CascadeTiming.OnSaveChanges, QueryTrackingBehavior.NoTrackingWithIdentityResolution)]
-    [InlineData(EntityState.Added, CascadeTiming.OnSaveChanges, QueryTrackingBehavior.NoTrackingWithIdentityResolution)]
-    [InlineData(EntityState.Modified, CascadeTiming.OnSaveChanges, QueryTrackingBehavior.NoTrackingWithIdentityResolution)]
-    [InlineData(EntityState.Deleted, CascadeTiming.OnSaveChanges, QueryTrackingBehavior.NoTrackingWithIdentityResolution)]
-    [InlineData(EntityState.Detached, CascadeTiming.OnSaveChanges, QueryTrackingBehavior.NoTrackingWithIdentityResolution)]
+    [InlineData(
+        EntityState.Detached,
+        CascadeTiming.OnSaveChanges,
+        QueryTrackingBehavior.NoTracking
+    )]
+    [InlineData(
+        EntityState.Unchanged,
+        CascadeTiming.Immediate,
+        QueryTrackingBehavior.NoTrackingWithIdentityResolution
+    )]
+    [InlineData(
+        EntityState.Added,
+        CascadeTiming.Immediate,
+        QueryTrackingBehavior.NoTrackingWithIdentityResolution
+    )]
+    [InlineData(
+        EntityState.Modified,
+        CascadeTiming.Immediate,
+        QueryTrackingBehavior.NoTrackingWithIdentityResolution
+    )]
+    [InlineData(
+        EntityState.Deleted,
+        CascadeTiming.Immediate,
+        QueryTrackingBehavior.NoTrackingWithIdentityResolution
+    )]
+    [InlineData(
+        EntityState.Detached,
+        CascadeTiming.Immediate,
+        QueryTrackingBehavior.NoTrackingWithIdentityResolution
+    )]
+    [InlineData(
+        EntityState.Unchanged,
+        CascadeTiming.OnSaveChanges,
+        QueryTrackingBehavior.NoTrackingWithIdentityResolution
+    )]
+    [InlineData(
+        EntityState.Added,
+        CascadeTiming.OnSaveChanges,
+        QueryTrackingBehavior.NoTrackingWithIdentityResolution
+    )]
+    [InlineData(
+        EntityState.Modified,
+        CascadeTiming.OnSaveChanges,
+        QueryTrackingBehavior.NoTrackingWithIdentityResolution
+    )]
+    [InlineData(
+        EntityState.Deleted,
+        CascadeTiming.OnSaveChanges,
+        QueryTrackingBehavior.NoTrackingWithIdentityResolution
+    )]
+    [InlineData(
+        EntityState.Detached,
+        CascadeTiming.OnSaveChanges,
+        QueryTrackingBehavior.NoTrackingWithIdentityResolution
+    )]
     public virtual void Lazy_load_collection_already_loaded_delegate_loader_with_state_property_injection(
         EntityState state,
         CascadeTiming deleteOrphansTiming,
-        QueryTrackingBehavior queryTrackingBehavior)
+        QueryTrackingBehavior queryTrackingBehavior
+    )
     {
         using var context = CreateContext(lazyLoadingEnabled: true);
         context.ChangeTracker.QueryTrackingBehavior = queryTrackingBehavior;
@@ -6811,7 +9253,10 @@ public abstract partial class LoadTestBase<TFixture>
 
         var changeDetector = (ChangeDetectorProxy)context.GetService<IChangeDetector>();
 
-        var parent = context.Set<ParentDelegateLoaderWithStateByProperty>().Include(e => e.Children).Single();
+        var parent = context
+            .Set<ParentDelegateLoaderWithStateByProperty>()
+            .Include(e => e.Children)
+            .Single();
 
         ClearLog();
 
@@ -6834,9 +9279,11 @@ public abstract partial class LoadTestBase<TFixture>
 
         Assert.Equal(2, parent.Children.Count());
 
-        if (queryTrackingBehavior == QueryTrackingBehavior.TrackAll
+        if (
+            queryTrackingBehavior == QueryTrackingBehavior.TrackAll
             && state == EntityState.Deleted
-            && deleteOrphansTiming != CascadeTiming.Never)
+            && deleteOrphansTiming != CascadeTiming.Never
+        )
         {
             Assert.All(parent.Children.Select(e => e.Parent), c => Assert.Null(c));
         }
@@ -6864,13 +9311,17 @@ public abstract partial class LoadTestBase<TFixture>
     [InlineData(EntityState.Detached, QueryTrackingBehavior.NoTrackingWithIdentityResolution)]
     public virtual void Lazy_load_many_to_one_reference_to_principal_already_loaded_delegate_loader_with_state_property_injection(
         EntityState state,
-        QueryTrackingBehavior queryTrackingBehavior)
+        QueryTrackingBehavior queryTrackingBehavior
+    )
     {
         using var context = CreateContext(lazyLoadingEnabled: true);
         context.ChangeTracker.QueryTrackingBehavior = queryTrackingBehavior;
         var changeDetector = (ChangeDetectorProxy)context.GetService<IChangeDetector>();
 
-        var child = context.Set<ChildDelegateLoaderWithStateByProperty>().Include(e => e.Parent).Single(e => e.Id == 12);
+        var child = context
+            .Set<ChildDelegateLoaderWithStateByProperty>()
+            .Include(e => e.Parent)
+            .Single(e => e.Id == 12);
 
         ClearLog();
 
@@ -6899,13 +9350,19 @@ public abstract partial class LoadTestBase<TFixture>
             RecordLog();
             context.ChangeTracker.LazyLoadingEnabled = false;
 
-            Assert.Equal(state == EntityState.Detached ? 0 : 2, context.ChangeTracker.Entries().Count());
+            Assert.Equal(
+                state == EntityState.Detached ? 0 : 2,
+                context.ChangeTracker.Entries().Count()
+            );
 
             Assert.Same(child, child.Parent.Children.Single());
 
             if (state != EntityState.Detached)
             {
-                var parent = context.ChangeTracker.Entries<ParentDelegateLoaderWithStateByProperty>().Single().Entity;
+                var parent = context
+                    .ChangeTracker.Entries<ParentDelegateLoaderWithStateByProperty>()
+                    .Single()
+                    .Entity;
 
                 Assert.Same(parent, child.Parent);
                 Assert.Same(child, parent.Children.Single());
@@ -6931,13 +9388,17 @@ public abstract partial class LoadTestBase<TFixture>
     [InlineData(EntityState.Detached, QueryTrackingBehavior.NoTrackingWithIdentityResolution)]
     public virtual void Lazy_load_one_to_one_reference_to_principal_already_loaded_delegate_loader_with_state_property_injection(
         EntityState state,
-        QueryTrackingBehavior queryTrackingBehavior)
+        QueryTrackingBehavior queryTrackingBehavior
+    )
     {
         using var context = CreateContext(lazyLoadingEnabled: true);
         context.ChangeTracker.QueryTrackingBehavior = queryTrackingBehavior;
         var changeDetector = (ChangeDetectorProxy)context.GetService<IChangeDetector>();
 
-        var single = context.Set<SingleDelegateLoaderWithStateByProperty>().Include(e => e.Parent).Single();
+        var single = context
+            .Set<SingleDelegateLoaderWithStateByProperty>()
+            .Include(e => e.Parent)
+            .Single();
 
         ClearLog();
 
@@ -6966,13 +9427,19 @@ public abstract partial class LoadTestBase<TFixture>
             RecordLog();
             context.ChangeTracker.LazyLoadingEnabled = false;
 
-            Assert.Equal(state == EntityState.Detached ? 0 : 2, context.ChangeTracker.Entries().Count());
+            Assert.Equal(
+                state == EntityState.Detached ? 0 : 2,
+                context.ChangeTracker.Entries().Count()
+            );
 
             Assert.Same(single, single.Parent.Single);
 
             if (state != EntityState.Detached)
             {
-                var parent = context.ChangeTracker.Entries<ParentDelegateLoaderWithStateByProperty>().Single().Entity;
+                var parent = context
+                    .ChangeTracker.Entries<ParentDelegateLoaderWithStateByProperty>()
+                    .Single()
+                    .Entity;
 
                 Assert.Same(parent, single.Parent);
                 Assert.Same(single, parent.Single);
@@ -6996,25 +9463,78 @@ public abstract partial class LoadTestBase<TFixture>
     [InlineData(EntityState.Modified, CascadeTiming.Immediate, QueryTrackingBehavior.NoTracking)]
     [InlineData(EntityState.Deleted, CascadeTiming.Immediate, QueryTrackingBehavior.NoTracking)]
     [InlineData(EntityState.Detached, CascadeTiming.Immediate, QueryTrackingBehavior.NoTracking)]
-    [InlineData(EntityState.Unchanged, CascadeTiming.OnSaveChanges, QueryTrackingBehavior.NoTracking)]
+    [InlineData(
+        EntityState.Unchanged,
+        CascadeTiming.OnSaveChanges,
+        QueryTrackingBehavior.NoTracking
+    )]
     [InlineData(EntityState.Added, CascadeTiming.OnSaveChanges, QueryTrackingBehavior.NoTracking)]
-    [InlineData(EntityState.Modified, CascadeTiming.OnSaveChanges, QueryTrackingBehavior.NoTracking)]
+    [InlineData(
+        EntityState.Modified,
+        CascadeTiming.OnSaveChanges,
+        QueryTrackingBehavior.NoTracking
+    )]
     [InlineData(EntityState.Deleted, CascadeTiming.OnSaveChanges, QueryTrackingBehavior.NoTracking)]
-    [InlineData(EntityState.Detached, CascadeTiming.OnSaveChanges, QueryTrackingBehavior.NoTracking)]
-    [InlineData(EntityState.Unchanged, CascadeTiming.Immediate, QueryTrackingBehavior.NoTrackingWithIdentityResolution)]
-    [InlineData(EntityState.Added, CascadeTiming.Immediate, QueryTrackingBehavior.NoTrackingWithIdentityResolution)]
-    [InlineData(EntityState.Modified, CascadeTiming.Immediate, QueryTrackingBehavior.NoTrackingWithIdentityResolution)]
-    [InlineData(EntityState.Deleted, CascadeTiming.Immediate, QueryTrackingBehavior.NoTrackingWithIdentityResolution)]
-    [InlineData(EntityState.Detached, CascadeTiming.Immediate, QueryTrackingBehavior.NoTrackingWithIdentityResolution)]
-    [InlineData(EntityState.Unchanged, CascadeTiming.OnSaveChanges, QueryTrackingBehavior.NoTrackingWithIdentityResolution)]
-    [InlineData(EntityState.Added, CascadeTiming.OnSaveChanges, QueryTrackingBehavior.NoTrackingWithIdentityResolution)]
-    [InlineData(EntityState.Modified, CascadeTiming.OnSaveChanges, QueryTrackingBehavior.NoTrackingWithIdentityResolution)]
-    [InlineData(EntityState.Deleted, CascadeTiming.OnSaveChanges, QueryTrackingBehavior.NoTrackingWithIdentityResolution)]
-    [InlineData(EntityState.Detached, CascadeTiming.OnSaveChanges, QueryTrackingBehavior.NoTrackingWithIdentityResolution)]
+    [InlineData(
+        EntityState.Detached,
+        CascadeTiming.OnSaveChanges,
+        QueryTrackingBehavior.NoTracking
+    )]
+    [InlineData(
+        EntityState.Unchanged,
+        CascadeTiming.Immediate,
+        QueryTrackingBehavior.NoTrackingWithIdentityResolution
+    )]
+    [InlineData(
+        EntityState.Added,
+        CascadeTiming.Immediate,
+        QueryTrackingBehavior.NoTrackingWithIdentityResolution
+    )]
+    [InlineData(
+        EntityState.Modified,
+        CascadeTiming.Immediate,
+        QueryTrackingBehavior.NoTrackingWithIdentityResolution
+    )]
+    [InlineData(
+        EntityState.Deleted,
+        CascadeTiming.Immediate,
+        QueryTrackingBehavior.NoTrackingWithIdentityResolution
+    )]
+    [InlineData(
+        EntityState.Detached,
+        CascadeTiming.Immediate,
+        QueryTrackingBehavior.NoTrackingWithIdentityResolution
+    )]
+    [InlineData(
+        EntityState.Unchanged,
+        CascadeTiming.OnSaveChanges,
+        QueryTrackingBehavior.NoTrackingWithIdentityResolution
+    )]
+    [InlineData(
+        EntityState.Added,
+        CascadeTiming.OnSaveChanges,
+        QueryTrackingBehavior.NoTrackingWithIdentityResolution
+    )]
+    [InlineData(
+        EntityState.Modified,
+        CascadeTiming.OnSaveChanges,
+        QueryTrackingBehavior.NoTrackingWithIdentityResolution
+    )]
+    [InlineData(
+        EntityState.Deleted,
+        CascadeTiming.OnSaveChanges,
+        QueryTrackingBehavior.NoTrackingWithIdentityResolution
+    )]
+    [InlineData(
+        EntityState.Detached,
+        CascadeTiming.OnSaveChanges,
+        QueryTrackingBehavior.NoTrackingWithIdentityResolution
+    )]
     public virtual void Lazy_load_one_to_one_reference_to_dependent_already_loaded_delegate_loader_with_state_property_injection(
         EntityState state,
         CascadeTiming deleteOrphansTiming,
-        QueryTrackingBehavior queryTrackingBehavior)
+        QueryTrackingBehavior queryTrackingBehavior
+    )
     {
         using var context = CreateContext(lazyLoadingEnabled: true);
         context.ChangeTracker.QueryTrackingBehavior = queryTrackingBehavior;
@@ -7022,7 +9542,10 @@ public abstract partial class LoadTestBase<TFixture>
 
         var changeDetector = (ChangeDetectorProxy)context.GetService<IChangeDetector>();
 
-        var parent = context.Set<ParentDelegateLoaderWithStateByProperty>().Include(e => e.Single).Single();
+        var parent = context
+            .Set<ParentDelegateLoaderWithStateByProperty>()
+            .Include(e => e.Single)
+            .Single();
 
         ClearLog();
 
@@ -7044,17 +9567,22 @@ public abstract partial class LoadTestBase<TFixture>
         RecordLog();
         context.ChangeTracker.LazyLoadingEnabled = false;
 
-        Assert.Equal(state == EntityState.Detached ? 0 : 2, context.ChangeTracker.Entries().Count());
+        Assert.Equal(
+            state == EntityState.Detached ? 0 : 2,
+            context.ChangeTracker.Entries().Count()
+        );
 
-        if (state == EntityState.Deleted
-            && deleteOrphansTiming != CascadeTiming.Never)
+        if (state == EntityState.Deleted && deleteOrphansTiming != CascadeTiming.Never)
         {
             Assert.Same(parent, parent.Single.Parent);
         }
 
         if (state != EntityState.Detached)
         {
-            var single = context.ChangeTracker.Entries<SingleDelegateLoaderWithStateByProperty>().Single().Entity;
+            var single = context
+                .ChangeTracker.Entries<SingleDelegateLoaderWithStateByProperty>()
+                .Single()
+                .Entity;
 
             Assert.Same(single, parent.Single);
             Assert.Same(parent, single.Parent);
@@ -7076,7 +9604,8 @@ public abstract partial class LoadTestBase<TFixture>
     [InlineData(EntityState.Detached, QueryTrackingBehavior.NoTrackingWithIdentityResolution)]
     public virtual void Lazy_load_collection_already_partially_loaded_delegate_loader_with_state_property_injection(
         EntityState state,
-        QueryTrackingBehavior queryTrackingBehavior)
+        QueryTrackingBehavior queryTrackingBehavior
+    )
     {
         using var context = CreateContext(lazyLoadingEnabled: true);
         context.ChangeTracker.QueryTrackingBehavior = queryTrackingBehavior;
@@ -7085,7 +9614,10 @@ public abstract partial class LoadTestBase<TFixture>
 
         context.ChangeTracker.LazyLoadingEnabled = false;
 
-        var child = context.Set<ChildDelegateLoaderWithStateByProperty>().OrderBy(e => e.Id).First();
+        var child = context
+            .Set<ChildDelegateLoaderWithStateByProperty>()
+            .OrderBy(e => e.Id)
+            .First();
         var parent = context.Set<ParentDelegateLoaderWithStateByProperty>().Single();
         if (parent.Children == null)
         {
@@ -7114,7 +9646,10 @@ public abstract partial class LoadTestBase<TFixture>
 
         if (LazyLoadingEnabled)
         {
-            if (state == EntityState.Detached && queryTrackingBehavior == QueryTrackingBehavior.TrackAll)
+            if (
+                state == EntityState.Detached
+                && queryTrackingBehavior == QueryTrackingBehavior.TrackAll
+            )
             {
                 Assert.False(collectionEntry.IsLoaded); // Explicitly detached
                 Assert.Equal(1, parent.Children.Count());
@@ -7129,9 +9664,13 @@ public abstract partial class LoadTestBase<TFixture>
 
                 // Note that when detached there is no identity resolution, so loading results in duplicates
                 Assert.Equal(
-                    state == EntityState.Detached && queryTrackingBehavior != QueryTrackingBehavior.NoTrackingWithIdentityResolution
+                    state == EntityState.Detached
+                    && queryTrackingBehavior
+                        != QueryTrackingBehavior.NoTrackingWithIdentityResolution
                         ? 3
-                        : 2, parent.Children.Count());
+                        : 2,
+                    parent.Children.Count()
+                );
 
                 Assert.All(parent.Children.Select(e => e.Parent), p => Assert.Same(parent, p));
             }
@@ -7161,6 +9700,5 @@ public abstract partial class LoadTestBase<TFixture>
         }
     }
 
-    protected virtual bool LazyLoadingEnabled
-        => true;
+    protected virtual bool LazyLoadingEnabled => true;
 }

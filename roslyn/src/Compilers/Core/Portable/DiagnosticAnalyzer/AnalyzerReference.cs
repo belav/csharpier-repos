@@ -11,14 +11,12 @@ namespace Microsoft.CodeAnalysis.Diagnostics
     /// Represents an analyzer assembly reference that contains diagnostic analyzers.
     /// </summary>
     /// <remarks>
-    /// Represents a logical location of the analyzer reference, not the content of the reference. 
+    /// Represents a logical location of the analyzer reference, not the content of the reference.
     /// The content might change in time. A snapshot is taken when the compiler queries the reference for its analyzers.
     /// </remarks>
     public abstract class AnalyzerReference
     {
-        protected AnalyzerReference()
-        {
-        }
+        protected AnalyzerReference() { }
 
         /// <summary>
         /// Full path describing the location of the analyzer reference, or null if the reference has no location.
@@ -64,15 +62,18 @@ namespace Microsoft.CodeAnalysis.Diagnostics
         /// <summary>
         /// Gets all the source generators defined in this assembly reference.
         /// </summary>
-        public virtual ImmutableArray<ISourceGenerator> GetGeneratorsForAllLanguages() => ImmutableArray<ISourceGenerator>.Empty;
+        public virtual ImmutableArray<ISourceGenerator> GetGeneratorsForAllLanguages() =>
+            ImmutableArray<ISourceGenerator>.Empty;
 
         [Obsolete("Use GetGenerators(string language) or GetGeneratorsForAllLanguages()")]
-        public virtual ImmutableArray<ISourceGenerator> GetGenerators() => ImmutableArray<ISourceGenerator>.Empty;
+        public virtual ImmutableArray<ISourceGenerator> GetGenerators() =>
+            ImmutableArray<ISourceGenerator>.Empty;
 
         /// <summary>
         /// Gets all the generators defined in this assembly reference for the given <paramref name="language"/>.
         /// </summary>
         /// <param name="language">Language name.</param>
-        public virtual ImmutableArray<ISourceGenerator> GetGenerators(string language) => ImmutableArray<ISourceGenerator>.Empty;
+        public virtual ImmutableArray<ISourceGenerator> GetGenerators(string language) =>
+            ImmutableArray<ISourceGenerator>.Empty;
     }
 }

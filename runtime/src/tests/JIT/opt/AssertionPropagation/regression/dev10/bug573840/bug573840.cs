@@ -5,13 +5,11 @@ using System;
 using System.Collections.Generic;
 using Xunit;
 
-
 internal struct Position
 {
     public byte X;
     public byte Y;
 }
-
 
 public class Program
 {
@@ -21,7 +19,6 @@ public class Program
         Console.WriteLine("Main called");
 
         int[,] b = new int[5, 5];
-
 
         List<Position> g = new List<Position>();
 

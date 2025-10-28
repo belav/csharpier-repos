@@ -1,16 +1,17 @@
 //------------------------------------------------------------------------------
 // <copyright file="precedingsibling.cs" company="Microsoft">
 //     Copyright (c) Microsoft Corporation.  All rights reserved.
-// </copyright>                                                                
+// </copyright>
 // <owner current="true" primary="true">Microsoft</owner>
 //------------------------------------------------------------------------------
 
-namespace MS.Internal.Xml.XPath {
+namespace MS.Internal.Xml.XPath
+{
     using System;
+    using System.Collections.Generic;
+    using System.Diagnostics;
     using System.Xml;
     using System.Xml.XPath;
-    using System.Diagnostics;
-    using System.Collections.Generic;
 
     // This class can be rewritten much more efficient.
     // Algorithm could be like one for FollowingSibling:
@@ -25,16 +26,22 @@ namespace MS.Internal.Xml.XPath {
     // --- if false, we hold with row #I and apply this algorith starting for row #I+1
     // --- when we done with #I+1 we continue with row #I
 
-    internal class PreSiblingQuery : CacheAxisQuery {
+    internal class PreSiblingQuery : CacheAxisQuery
+    {
+        public PreSiblingQuery(Query qyInput, string name, string prefix, XPathNodeType typeTest)
+            : base(qyInput, name, prefix, typeTest) { }
 
-        public PreSiblingQuery(Query qyInput, string name, string prefix, XPathNodeType typeTest) : base (qyInput, name, prefix, typeTest) {}
-        protected PreSiblingQuery(PreSiblingQuery other) : base(other) {}
+        protected PreSiblingQuery(PreSiblingQuery other)
+            : base(other) { }
 
-        private bool NotVisited(XPathNavigator nav, List<XPathNavigator> parentStk){
+        private bool NotVisited(XPathNavigator nav, List<XPathNavigator> parentStk)
+        {
             XPathNavigator nav1 = nav.Clone();
             nav1.MoveToParent();
-            for (int i = 0; i < parentStk.Count; i++) {
-                if (nav1.IsSamePosition(parentStk[i])) {
+            for (int i = 0; i < parentStk.Count; i++)
+            {
+                if (nav1.IsSamePosition(parentStk[i]))
+                {
                     return false;
                 }
             }
@@ -42,30 +49,45 @@ namespace MS.Internal.Xml.XPath {
             return true;
         }
 
-        public override object Evaluate(XPathNodeIterator context) {
+        public override object Evaluate(XPathNodeIterator context)
+        {
             base.Evaluate(context);
 
             // Fill up base.outputBuffer
             List<XPathNavigator> parentStk = new List<XPathNavigator>();
             Stack<XPathNavigator> inputStk = new Stack<XPathNavigator>();
-            while ((currentNode = qyInput.Advance()) != null) {
+            while ((currentNode = qyInput.Advance()) != null)
+            {
                 inputStk.Push(currentNode.Clone());
             }
-            while (inputStk.Count != 0) {
+            while (inputStk.Count != 0)
+            {
                 XPathNavigator input = inputStk.Pop();
-                if (input.NodeType == XPathNodeType.Attribute || input.NodeType == XPathNodeType.Namespace) {
+                if (
+                    input.NodeType == XPathNodeType.Attribute
+                    || input.NodeType == XPathNodeType.Namespace
+                )
+                {
                     continue;
                 }
-                if (NotVisited(input, parentStk)) {
+                if (NotVisited(input, parentStk))
+                {
                     XPathNavigator prev = input.Clone();
-                    if (prev.MoveToParent()) {
+                    if (prev.MoveToParent())
+                    {
                         bool test = prev.MoveToFirstChild();
-                        Debug.Assert(test, "We just moved to parent, how we can not have first child?");
-                        while (!prev.IsSamePosition(input)) {
-                            if (matches(prev)) {
+                        Debug.Assert(
+                            test,
+                            "We just moved to parent, how we can not have first child?"
+                        );
+                        while (!prev.IsSamePosition(input))
+                        {
+                            if (matches(prev))
+                            {
                                 Insert(outputBuffer, prev);
                             }
-                            if (!prev.MoveToNext()) {
+                            if (!prev.MoveToNext())
+                            {
                                 Debug.Fail("We managed to miss sentinel node (input)");
                                 break;
                             }
@@ -76,7 +98,14 @@ namespace MS.Internal.Xml.XPath {
             return this;
         }
 
-        public override XPathNodeIterator Clone() { return new PreSiblingQuery(this); }
-        public override QueryProps Properties { get { return base.Properties | QueryProps.Reverse; } }
+        public override XPathNodeIterator Clone()
+        {
+            return new PreSiblingQuery(this);
+        }
+
+        public override QueryProps Properties
+        {
+            get { return base.Properties | QueryProps.Reverse; }
+        }
     }
 }

@@ -18,29 +18,40 @@ namespace System.IO.Ports.Tests
         [ConditionalFact(nameof(HasOneSerialPort))]
         public void Position_Open_Close()
         {
-            using (SerialPort com = new SerialPort(TCSupport.LocalMachineSerialInfo.FirstAvailablePortName))
+            using (
+                SerialPort com = new SerialPort(
+                    TCSupport.LocalMachineSerialInfo.FirstAvailablePortName
+                )
+            )
             {
                 com.Open();
                 Stream serialStream = com.BaseStream;
                 com.Close();
 
-                Debug.WriteLine("Verifying Position property throws exception After Open() then Close()");
+                Debug.WriteLine(
+                    "Verifying Position property throws exception After Open() then Close()"
+                );
 
                 VerifyPositionException(serialStream, DEFAULT_VALUE, typeof(NotSupportedException));
             }
         }
 
-
         [ConditionalFact(nameof(HasOneSerialPort))]
         public void Position_Open_BaseStreamClose()
         {
-            using (SerialPort com = new SerialPort(TCSupport.LocalMachineSerialInfo.FirstAvailablePortName))
+            using (
+                SerialPort com = new SerialPort(
+                    TCSupport.LocalMachineSerialInfo.FirstAvailablePortName
+                )
+            )
             {
                 com.Open();
                 Stream serialStream = com.BaseStream;
                 com.BaseStream.Close();
 
-                Debug.WriteLine("Verifying Position property throws exception After Open() then BaseStream.Close()");
+                Debug.WriteLine(
+                    "Verifying Position property throws exception After Open() then BaseStream.Close()"
+                );
 
                 VerifyPositionException(serialStream, DEFAULT_VALUE, typeof(NotSupportedException));
             }
@@ -49,22 +60,38 @@ namespace System.IO.Ports.Tests
         [ConditionalFact(nameof(HasOneSerialPort))]
         public void Position_AfterOpen()
         {
-            using (SerialPort com = new SerialPort(TCSupport.LocalMachineSerialInfo.FirstAvailablePortName))
+            using (
+                SerialPort com = new SerialPort(
+                    TCSupport.LocalMachineSerialInfo.FirstAvailablePortName
+                )
+            )
             {
                 com.Open();
-                Debug.WriteLine("Verifying Position property throws exception after a call to Open()");
+                Debug.WriteLine(
+                    "Verifying Position property throws exception after a call to Open()"
+                );
 
-                VerifyPositionException(com.BaseStream, DEFAULT_VALUE, typeof(NotSupportedException));
+                VerifyPositionException(
+                    com.BaseStream,
+                    DEFAULT_VALUE,
+                    typeof(NotSupportedException)
+                );
             }
         }
 
         [ConditionalFact(nameof(HasOneSerialPort))]
         public void Position_BadValue()
         {
-            using (SerialPort com = new SerialPort(TCSupport.LocalMachineSerialInfo.FirstAvailablePortName))
+            using (
+                SerialPort com = new SerialPort(
+                    TCSupport.LocalMachineSerialInfo.FirstAvailablePortName
+                )
+            )
             {
                 com.Open();
-                Debug.WriteLine("Verifying Position property throws exception with a bad value after a call to Open()");
+                Debug.WriteLine(
+                    "Verifying Position property throws exception with a bad value after a call to Open()"
+                );
 
                 VerifyPositionException(com.BaseStream, BAD_VALUE, typeof(NotSupportedException));
             }
@@ -73,13 +100,20 @@ namespace System.IO.Ports.Tests
         #endregion
 
         #region Verification for Test Cases
-        private void VerifyPositionException(Stream serialStream, long value, Type expectedException)
+        private void VerifyPositionException(
+            Stream serialStream,
+            long value,
+            Type expectedException
+        )
         {
             Assert.Throws(expectedException, () => serialStream.Position = value);
-            Assert.Throws(expectedException, () =>
-            {
-                _ = serialStream.Position;
-            });
+            Assert.Throws(
+                expectedException,
+                () =>
+                {
+                    _ = serialStream.Position;
+                }
+            );
         }
         #endregion
     }

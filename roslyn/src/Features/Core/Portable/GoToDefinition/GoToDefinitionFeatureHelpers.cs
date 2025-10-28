@@ -19,7 +19,10 @@ namespace Microsoft.CodeAnalysis.GoToDefinition
     internal static class GoToDefinitionFeatureHelpers
     {
         public static async Task<ISymbol?> TryGetPreferredSymbolAsync(
-            Solution solution, ISymbol? symbol, CancellationToken cancellationToken)
+            Solution solution,
+            ISymbol? symbol,
+            CancellationToken cancellationToken
+        )
         {
             // VB global import aliases have a synthesized SyntaxTree.
             // We can't go to the definition of the alias, so use the target type.
@@ -37,13 +40,18 @@ namespace Microsoft.CodeAnalysis.GoToDefinition
             if (alias != null)
             {
                 var sourceLocations = NavigableItemFactory.GetPreferredSourceLocations(
-                    solution, symbol, cancellationToken);
+                    solution,
+                    symbol,
+                    cancellationToken
+                );
 
                 if (sourceLocations.All(l => solution.GetDocument(l.SourceTree) == null))
                     symbol = alias.Target;
             }
 
-            var definition = await SymbolFinder.FindSourceDefinitionAsync(symbol, solution, cancellationToken).ConfigureAwait(false);
+            var definition = await SymbolFinder
+                .FindSourceDefinitionAsync(symbol, solution, cancellationToken)
+                .ConfigureAwait(false);
             cancellationToken.ThrowIfCancellationRequested();
 
             symbol = definition ?? symbol;
@@ -60,9 +68,11 @@ namespace Microsoft.CodeAnalysis.GoToDefinition
             ISymbol? symbol,
             Solution solution,
             bool thirdPartyNavigationAllowed,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
-            symbol = await TryGetPreferredSymbolAsync(solution, symbol, cancellationToken).ConfigureAwait(false);
+            symbol = await TryGetPreferredSymbolAsync(solution, symbol, cancellationToken)
+                .ConfigureAwait(false);
             if (symbol is null)
                 return ImmutableArray.Create<DefinitionItem>();
 
@@ -87,14 +97,23 @@ namespace Microsoft.CodeAnalysis.GoToDefinition
             // So, if we only have a single location to go to, this does no unnecessary work.  And,
             // if we do have multiple locations to show, it will just be done in the BG, unblocking
             // this command thread so it can return the user faster.
-            var definitionItem = symbol.ToNonClassifiedDefinitionItem(solution, includeHiddenLocations: true);
+            var definitionItem = symbol.ToNonClassifiedDefinitionItem(
+                solution,
+                includeHiddenLocations: true
+            );
 
             if (thirdPartyNavigationAllowed)
             {
                 var factory = solution.Services.GetService<IDefinitionsAndReferencesFactory>();
                 if (factory != null)
                 {
-                    var thirdPartyItem = await factory.GetThirdPartyDefinitionItemAsync(solution, definitionItem, cancellationToken).ConfigureAwait(false);
+                    var thirdPartyItem = await factory
+                        .GetThirdPartyDefinitionItemAsync(
+                            solution,
+                            definitionItem,
+                            cancellationToken
+                        )
+                        .ConfigureAwait(false);
                     definitions.AddIfNotNull(thirdPartyItem);
                 }
             }

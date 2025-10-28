@@ -1,5 +1,4 @@
 <Project Sdk="Microsoft.NET.Sdk">
-
   <PropertyGroup>
     <TargetFrameworks>$(NetCoreAppCurrent);$(NetCoreAppPrevious);$(NetCoreAppMinimum);netstandard2.0;$(NetFrameworkMinimum)</TargetFrameworks>
     <EnableDefaultItems>true</EnableDefaultItems>
@@ -11,12 +10,15 @@ System.Net.Http.IHttpClientFactory</PackageDescription>
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Include="$(CommonPath)Extensions\NonCapturingTimer\NonCapturingTimer.cs"
-             Link="Common\src\Extensions\NonCapturingTimer\NonCapturingTimer.cs" />
-    <Compile Include="$(CommonPath)Extensions\TypeNameHelper\TypeNameHelper.cs"
-             Link="Common\src\Extensions\TypeNameHelper\TypeNameHelper.cs" />
-    <Compile Include="$(CommonPath)System\ThrowHelper.cs"
-             Link="Common\System\ThrowHelper.cs" />
+    <Compile
+      Include="$(CommonPath)Extensions\NonCapturingTimer\NonCapturingTimer.cs"
+      Link="Common\src\Extensions\NonCapturingTimer\NonCapturingTimer.cs"
+    />
+    <Compile
+      Include="$(CommonPath)Extensions\TypeNameHelper\TypeNameHelper.cs"
+      Link="Common\src\Extensions\TypeNameHelper\TypeNameHelper.cs"
+    />
+    <Compile Include="$(CommonPath)System\ThrowHelper.cs" Link="Common\System\ThrowHelper.cs" />
   </ItemGroup>
 
   <ItemGroup Condition="'$(TargetFrameworkIdentifier)' != '.NETCoreApp'">
@@ -40,5 +42,4 @@ System.Net.Http.IHttpClientFactory</PackageDescription>
   <ItemGroup Condition="'$(TargetFrameworkIdentifier)' == '.NETFramework'">
     <Reference Include="System.Net.Http" />
   </ItemGroup>
-
 </Project>

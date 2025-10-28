@@ -32,18 +32,32 @@ namespace System.ServiceModel.Activities
             this.services.Remove(service.GetType());
         }
 
-        [SuppressMessage(FxCop.Category.Security, FxCop.Rule.AptcaMethodsShouldOnlyCallAptcaMethods, Justification = "APTCA related issues are not relevant because this code path is not supported in partial trust.")]
+        [SuppressMessage(
+            FxCop.Category.Security,
+            FxCop.Rule.AptcaMethodsShouldOnlyCallAptcaMethods,
+            Justification = "APTCA related issues are not relevant because this code path is not supported in partial trust."
+        )]
         public object GetService(Type serviceType)
         {
             object service;
             if (!this.services.TryGetValue(serviceType, out service))
             {
                 object dataExchangeService;
-                if (this.services.TryGetValue(typeof(ExternalDataExchangeService), out dataExchangeService))
+                if (
+                    this.services.TryGetValue(
+                        typeof(ExternalDataExchangeService),
+                        out dataExchangeService
+                    )
+                )
                 {
-                    Fx.Assert(dataExchangeService is ExternalDataExchangeService, "Something went wrong with our housekeeping.");
+                    Fx.Assert(
+                        dataExchangeService is ExternalDataExchangeService,
+                        "Something went wrong with our housekeeping."
+                    );
 
-                    service = ((ExternalDataExchangeService)dataExchangeService).GetService(serviceType);
+                    service = ((ExternalDataExchangeService)dataExchangeService).GetService(
+                        serviceType
+                    );
                 }
             }
 
@@ -63,10 +77,13 @@ namespace System.ServiceModel.Activities
             {
                 host.WorkflowExtensions.Add(service);
 
-                ExternalDataExchangeService dataExchangeService = service as ExternalDataExchangeService;
+                ExternalDataExchangeService dataExchangeService =
+                    service as ExternalDataExchangeService;
                 if (dataExchangeService != null)
                 {
-                    dataExchangeService.SetEnqueueMessageWrapper(new WorkflowClientDeliverMessageWrapper(baseUri));
+                    dataExchangeService.SetEnqueueMessageWrapper(
+                        new WorkflowClientDeliverMessageWrapper(baseUri)
+                    );
 
                     foreach (object innerService in dataExchangeService.GetAllServices())
                     {

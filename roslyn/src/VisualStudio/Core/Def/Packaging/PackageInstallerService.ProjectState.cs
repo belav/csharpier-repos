@@ -11,28 +11,34 @@ namespace Microsoft.VisualStudio.LanguageServices.Packaging
     {
         private readonly struct ProjectState
         {
-            public static readonly ProjectState Disabled = new(isEnabled: false, ImmutableDictionary<string, string>.Empty);
+            public static readonly ProjectState Disabled = new(
+                isEnabled: false,
+                ImmutableDictionary<string, string>.Empty
+            );
 
             public readonly bool IsEnabled;
 
             private readonly ImmutableDictionary<string, string> InstalledPackageToVersion;
 
-            private ProjectState(bool isEnabled, ImmutableDictionary<string, string> installedPackageToVersion)
+            private ProjectState(
+                bool isEnabled,
+                ImmutableDictionary<string, string> installedPackageToVersion
+            )
             {
                 IsEnabled = isEnabled;
                 InstalledPackageToVersion = installedPackageToVersion;
             }
 
             public ProjectState(ImmutableDictionary<string, string> installedPackageToVersion)
-                : this(isEnabled: true, installedPackageToVersion)
-            {
-            }
+                : this(isEnabled: true, installedPackageToVersion) { }
 
-            public bool IsInstalled(string package)
-                => IsEnabled && InstalledPackageToVersion.ContainsKey(package);
+            public bool IsInstalled(string package) =>
+                IsEnabled && InstalledPackageToVersion.ContainsKey(package);
 
-            public bool TryGetInstalledVersion(string packageName, [MaybeNullWhenAttribute(false)] out string version)
-                => InstalledPackageToVersion.TryGetValue(packageName, out version);
+            public bool TryGetInstalledVersion(
+                string packageName,
+                [MaybeNullWhenAttribute(false)] out string version
+            ) => InstalledPackageToVersion.TryGetValue(packageName, out version);
         }
     }
 }

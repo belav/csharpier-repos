@@ -12,7 +12,6 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Runtime.CompilerServices;
-
 #if NETCOREAPP
 using System.Numerics;
 #else
@@ -40,11 +39,20 @@ namespace Microsoft.CodeAnalysis.Collections.Internal
             }
             catch (Exception e)
             {
-                ThrowHelper.ThrowInvalidOperationException(ExceptionResource.InvalidOperation_IComparerFailed, e);
+                ThrowHelper.ThrowInvalidOperationException(
+                    ExceptionResource.InvalidOperation_IComparerFailed,
+                    e
+                );
             }
         }
 
-        public static int BinarySearch(SegmentedArray<T> array, int index, int length, T value, IComparer<T>? comparer)
+        public static int BinarySearch(
+            SegmentedArray<T> array,
+            int index,
+            int length,
+            T value,
+            IComparer<T>? comparer
+        )
         {
             try
             {
@@ -53,7 +61,10 @@ namespace Microsoft.CodeAnalysis.Collections.Internal
             }
             catch (Exception e)
             {
-                ThrowHelper.ThrowInvalidOperationException(ExceptionResource.InvalidOperation_IComparerFailed, e);
+                ThrowHelper.ThrowInvalidOperationException(
+                    ExceptionResource.InvalidOperation_IComparerFailed,
+                    e
+                );
                 return 0;
             }
         }
@@ -73,13 +84,25 @@ namespace Microsoft.CodeAnalysis.Collections.Internal
             }
             catch (Exception e)
             {
-                ThrowHelper.ThrowInvalidOperationException(ExceptionResource.InvalidOperation_IComparerFailed, e);
+                ThrowHelper.ThrowInvalidOperationException(
+                    ExceptionResource.InvalidOperation_IComparerFailed,
+                    e
+                );
             }
         }
 
-        internal static int InternalBinarySearch(SegmentedArray<T> array, int index, int length, T value, IComparer<T> comparer)
+        internal static int InternalBinarySearch(
+            SegmentedArray<T> array,
+            int index,
+            int length,
+            T value,
+            IComparer<T> comparer
+        )
         {
-            Debug.Assert(index >= 0 && length >= 0 && (array.Length - index >= length), "Check the arguments in the caller!");
+            Debug.Assert(
+                index >= 0 && length >= 0 && (array.Length - index >= length),
+                "Check the arguments in the caller!"
+            );
 
             int lo = index;
             int hi = index + length - 1;
@@ -103,7 +126,12 @@ namespace Microsoft.CodeAnalysis.Collections.Internal
             return ~lo;
         }
 
-        private static void SwapIfGreater(SegmentedArraySegment<T> keys, Comparison<T> comparer, int i, int j)
+        private static void SwapIfGreater(
+            SegmentedArraySegment<T> keys,
+            Comparison<T> comparer,
+            int i,
+            int j
+        )
         {
             Debug.Assert(i != j);
 
@@ -125,17 +153,28 @@ namespace Microsoft.CodeAnalysis.Collections.Internal
             a[j] = t;
         }
 
-        internal static void IntrospectiveSort(SegmentedArraySegment<T> keys, Comparison<T> comparer)
+        internal static void IntrospectiveSort(
+            SegmentedArraySegment<T> keys,
+            Comparison<T> comparer
+        )
         {
             Debug.Assert(comparer != null);
 
             if (keys.Length > 1)
             {
-                IntroSort(keys, 2 * (SegmentedArraySortUtils.Log2((uint)keys.Length) + 1), comparer!);
+                IntroSort(
+                    keys,
+                    2 * (SegmentedArraySortUtils.Log2((uint)keys.Length) + 1),
+                    comparer!
+                );
             }
         }
 
-        private static void IntroSort(SegmentedArraySegment<T> keys, int depthLimit, Comparison<T> comparer)
+        private static void IntroSort(
+            SegmentedArraySegment<T> keys,
+            int depthLimit,
+            Comparison<T> comparer
+        )
         {
             Debug.Assert(keys.Length > 0);
             Debug.Assert(depthLimit >= 0);
@@ -146,7 +185,6 @@ namespace Microsoft.CodeAnalysis.Collections.Internal
             {
                 if (partitionSize <= SegmentedArrayHelper.IntrosortSizeThreshold)
                 {
-
                     if (partitionSize == 2)
                     {
                         SwapIfGreater(keys, comparer!, 0, 1);
@@ -180,7 +218,10 @@ namespace Microsoft.CodeAnalysis.Collections.Internal
             }
         }
 
-        private static int PickPivotAndPartition(SegmentedArraySegment<T> keys, Comparison<T> comparer)
+        private static int PickPivotAndPartition(
+            SegmentedArraySegment<T> keys,
+            Comparison<T> comparer
+        )
         {
             Debug.Assert(keys.Length >= SegmentedArrayHelper.IntrosortSizeThreshold);
             Debug.Assert(comparer != null);
@@ -191,13 +232,14 @@ namespace Microsoft.CodeAnalysis.Collections.Internal
             int middle = hi >> 1;
 
             // Sort lo, mid and hi appropriately, then pick mid as the pivot.
-            SwapIfGreater(keys, comparer!, 0, middle);  // swap the low with the mid point
-            SwapIfGreater(keys, comparer!, 0, hi);   // swap the low with the high
+            SwapIfGreater(keys, comparer!, 0, middle); // swap the low with the mid point
+            SwapIfGreater(keys, comparer!, 0, hi); // swap the low with the high
             SwapIfGreater(keys, comparer!, middle, hi); // swap the middle with the high
 
             T pivot = keys[middle];
             Swap(keys, middle, hi - 1);
-            int left = 0, right = hi - 1;  // We already partitioned lo and hi and put the pivot in hi - 1.  And we pre-increment & decrement below.
+            int left = 0,
+                right = hi - 1; // We already partitioned lo and hi and put the pivot in hi - 1.  And we pre-increment & decrement below.
 
             while (left < right)
             {
@@ -243,7 +285,13 @@ namespace Microsoft.CodeAnalysis.Collections.Internal
             }
         }
 
-        private static void DownHeap(SegmentedArraySegment<T> keys, int i, int n, int lo, Comparison<T> comparer)
+        private static void DownHeap(
+            SegmentedArraySegment<T> keys,
+            int i,
+            int n,
+            int lo,
+            Comparison<T> comparer
+        )
         {
             Debug.Assert(comparer != null);
             Debug.Assert(lo >= 0);
@@ -300,14 +348,18 @@ namespace Microsoft.CodeAnalysis.Collections.Internal
                         // For floating-point, do a pre-pass to move all NaNs to the beginning
                         // so that we can do an optimized comparison as part of the actual sort
                         // on the remainder of the values.
-                        if (typeof(T) == typeof(double)
+                        if (
+                            typeof(T) == typeof(double)
                             || typeof(T) == typeof(float)
 #if NET
                             || typeof(T) == typeof(Half)
 #endif
-                            )
+                        )
                         {
-                            int nanLeft = SegmentedArraySortUtils.MoveNansToFront(keys, default(Span<byte>));
+                            int nanLeft = SegmentedArraySortUtils.MoveNansToFront(
+                                keys,
+                                default(Span<byte>)
+                            );
                             if (nanLeft == keys.Length)
                             {
                                 return;
@@ -329,13 +381,25 @@ namespace Microsoft.CodeAnalysis.Collections.Internal
             }
             catch (Exception e)
             {
-                ThrowHelper.ThrowInvalidOperationException(ExceptionResource.InvalidOperation_IComparerFailed, e);
+                ThrowHelper.ThrowInvalidOperationException(
+                    ExceptionResource.InvalidOperation_IComparerFailed,
+                    e
+                );
             }
         }
 
-        public static int BinarySearch(SegmentedArray<T> array, int index, int length, T value, IComparer<T>? comparer)
+        public static int BinarySearch(
+            SegmentedArray<T> array,
+            int index,
+            int length,
+            T value,
+            IComparer<T>? comparer
+        )
         {
-            Debug.Assert(index >= 0 && length >= 0 && (array.Length - index >= length), "Check the arguments in the caller!");
+            Debug.Assert(
+                index >= 0 && length >= 0 && (array.Length - index >= length),
+                "Check the arguments in the caller!"
+            );
 
             try
             {
@@ -345,12 +409,21 @@ namespace Microsoft.CodeAnalysis.Collections.Internal
                 }
                 else
                 {
-                    return SegmentedArraySortHelper<T>.InternalBinarySearch(array, index, length, value, comparer);
+                    return SegmentedArraySortHelper<T>.InternalBinarySearch(
+                        array,
+                        index,
+                        length,
+                        value,
+                        comparer
+                    );
                 }
             }
             catch (Exception e)
             {
-                ThrowHelper.ThrowInvalidOperationException(ExceptionResource.InvalidOperation_IComparerFailed, e);
+                ThrowHelper.ThrowInvalidOperationException(
+                    ExceptionResource.InvalidOperation_IComparerFailed,
+                    e
+                );
                 return 0;
             }
         }
@@ -479,7 +552,8 @@ namespace Microsoft.CodeAnalysis.Collections.Internal
             Swap(ref keys[middleIndex], ref keys[nextToLastIndex]);
 
             // Walk the left and right pointers, swapping elements as necessary, until they cross.
-            int leftIndex = zeroIndex, rightIndex = nextToLastIndex;
+            int leftIndex = zeroIndex,
+                rightIndex = nextToLastIndex;
             while (leftIndex < rightIndex)
             {
                 if (pivot == null)
@@ -496,7 +570,9 @@ namespace Microsoft.CodeAnalysis.Collections.Internal
                 }
                 else
                 {
-                    while (leftIndex < nextToLastIndex && GreaterThan(ref pivot, ref keys[++leftIndex]))
+                    while (
+                        leftIndex < nextToLastIndex && GreaterThan(ref pivot, ref keys[++leftIndex])
+                    )
                     {
                         // Intentionally empty
                     }
@@ -550,7 +626,13 @@ namespace Microsoft.CodeAnalysis.Collections.Internal
             while (i <= n >> 1)
             {
                 int child = 2 * i;
-                if (child < n && (keys[lo + child - 1] == null || LessThan(ref keys[lo + child - 1], ref keys[lo + child])))
+                if (
+                    child < n
+                    && (
+                        keys[lo + child - 1] == null
+                        || LessThan(ref keys[lo + child - 1], ref keys[lo + child])
+                    )
+                )
                 {
                     child++;
                 }
@@ -666,7 +748,11 @@ namespace Microsoft.CodeAnalysis.Collections.Internal
 
     internal static class SegmentedArraySortHelper<TKey, TValue>
     {
-        public static void Sort(SegmentedArraySegment<TKey> keys, Span<TValue> values, IComparer<TKey>? comparer)
+        public static void Sort(
+            SegmentedArraySegment<TKey> keys,
+            Span<TValue> values,
+            IComparer<TKey>? comparer
+        )
         {
             // Add a try block here to detect IComparers (or their
             // underlying IComparables, etc) that are bogus.
@@ -680,11 +766,20 @@ namespace Microsoft.CodeAnalysis.Collections.Internal
             }
             catch (Exception e)
             {
-                ThrowHelper.ThrowInvalidOperationException(ExceptionResource.InvalidOperation_IComparerFailed, e);
+                ThrowHelper.ThrowInvalidOperationException(
+                    ExceptionResource.InvalidOperation_IComparerFailed,
+                    e
+                );
             }
         }
 
-        private static void SwapIfGreaterWithValues(SegmentedArraySegment<TKey> keys, Span<TValue> values, IComparer<TKey> comparer, int i, int j)
+        private static void SwapIfGreaterWithValues(
+            SegmentedArraySegment<TKey> keys,
+            Span<TValue> values,
+            IComparer<TKey> comparer,
+            int i,
+            int j
+        )
         {
             Debug.Assert(comparer != null);
             Debug.Assert(0 <= i && i < keys.Length && i < values.Length);
@@ -704,7 +799,12 @@ namespace Microsoft.CodeAnalysis.Collections.Internal
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        private static void Swap(SegmentedArraySegment<TKey> keys, Span<TValue> values, int i, int j)
+        private static void Swap(
+            SegmentedArraySegment<TKey> keys,
+            Span<TValue> values,
+            int i,
+            int j
+        )
         {
             Debug.Assert(i != j);
 
@@ -717,18 +817,32 @@ namespace Microsoft.CodeAnalysis.Collections.Internal
             values[j] = v;
         }
 
-        internal static void IntrospectiveSort(SegmentedArraySegment<TKey> keys, Span<TValue> values, IComparer<TKey> comparer)
+        internal static void IntrospectiveSort(
+            SegmentedArraySegment<TKey> keys,
+            Span<TValue> values,
+            IComparer<TKey> comparer
+        )
         {
             Debug.Assert(comparer != null);
             Debug.Assert(keys.Length == values.Length);
 
             if (keys.Length > 1)
             {
-                IntroSort(keys, values, 2 * (SegmentedArraySortUtils.Log2((uint)keys.Length) + 1), comparer!);
+                IntroSort(
+                    keys,
+                    values,
+                    2 * (SegmentedArraySortUtils.Log2((uint)keys.Length) + 1),
+                    comparer!
+                );
             }
         }
 
-        private static void IntroSort(SegmentedArraySegment<TKey> keys, Span<TValue> values, int depthLimit, IComparer<TKey> comparer)
+        private static void IntroSort(
+            SegmentedArraySegment<TKey> keys,
+            Span<TValue> values,
+            int depthLimit,
+            IComparer<TKey> comparer
+        )
         {
             Debug.Assert(keys.Length > 0);
             Debug.Assert(values.Length == keys.Length);
@@ -740,7 +854,6 @@ namespace Microsoft.CodeAnalysis.Collections.Internal
             {
                 if (partitionSize <= SegmentedArrayHelper.IntrosortSizeThreshold)
                 {
-
                     if (partitionSize == 2)
                     {
                         SwapIfGreaterWithValues(keys, values, comparer!, 0, 1);
@@ -755,26 +868,47 @@ namespace Microsoft.CodeAnalysis.Collections.Internal
                         return;
                     }
 
-                    InsertionSort(keys.Slice(0, partitionSize), values.Slice(0, partitionSize), comparer!);
+                    InsertionSort(
+                        keys.Slice(0, partitionSize),
+                        values.Slice(0, partitionSize),
+                        comparer!
+                    );
                     return;
                 }
 
                 if (depthLimit == 0)
                 {
-                    HeapSort(keys.Slice(0, partitionSize), values.Slice(0, partitionSize), comparer!);
+                    HeapSort(
+                        keys.Slice(0, partitionSize),
+                        values.Slice(0, partitionSize),
+                        comparer!
+                    );
                     return;
                 }
                 depthLimit--;
 
-                int p = PickPivotAndPartition(keys.Slice(0, partitionSize), values.Slice(0, partitionSize), comparer!);
+                int p = PickPivotAndPartition(
+                    keys.Slice(0, partitionSize),
+                    values.Slice(0, partitionSize),
+                    comparer!
+                );
 
                 // Note we've already partitioned around the pivot and do not have to move the pivot again.
-                IntroSort(keys.Slice(p + 1, partitionSize - (p + 1)), values.Slice(p + 1, partitionSize - (p + 1)), depthLimit, comparer!);
+                IntroSort(
+                    keys.Slice(p + 1, partitionSize - (p + 1)),
+                    values.Slice(p + 1, partitionSize - (p + 1)),
+                    depthLimit,
+                    comparer!
+                );
                 partitionSize = p;
             }
         }
 
-        private static int PickPivotAndPartition(SegmentedArraySegment<TKey> keys, Span<TValue> values, IComparer<TKey> comparer)
+        private static int PickPivotAndPartition(
+            SegmentedArraySegment<TKey> keys,
+            Span<TValue> values,
+            IComparer<TKey> comparer
+        )
         {
             Debug.Assert(keys.Length >= SegmentedArrayHelper.IntrosortSizeThreshold);
             Debug.Assert(comparer != null);
@@ -785,13 +919,14 @@ namespace Microsoft.CodeAnalysis.Collections.Internal
             int middle = hi >> 1;
 
             // Sort lo, mid and hi appropriately, then pick mid as the pivot.
-            SwapIfGreaterWithValues(keys, values, comparer!, 0, middle);  // swap the low with the mid point
-            SwapIfGreaterWithValues(keys, values, comparer!, 0, hi);   // swap the low with the high
+            SwapIfGreaterWithValues(keys, values, comparer!, 0, middle); // swap the low with the mid point
+            SwapIfGreaterWithValues(keys, values, comparer!, 0, hi); // swap the low with the high
             SwapIfGreaterWithValues(keys, values, comparer!, middle, hi); // swap the middle with the high
 
             TKey pivot = keys[middle];
             Swap(keys, values, middle, hi - 1);
-            int left = 0, right = hi - 1;  // We already partitioned lo and hi and put the pivot in hi - 1.  And we pre-increment & decrement below.
+            int left = 0,
+                right = hi - 1; // We already partitioned lo and hi and put the pivot in hi - 1.  And we pre-increment & decrement below.
 
             while (left < right)
             {
@@ -819,7 +954,11 @@ namespace Microsoft.CodeAnalysis.Collections.Internal
             return left;
         }
 
-        private static void HeapSort(SegmentedArraySegment<TKey> keys, Span<TValue> values, IComparer<TKey> comparer)
+        private static void HeapSort(
+            SegmentedArraySegment<TKey> keys,
+            Span<TValue> values,
+            IComparer<TKey> comparer
+        )
         {
             Debug.Assert(comparer != null);
             Debug.Assert(keys.Length > 0);
@@ -837,7 +976,14 @@ namespace Microsoft.CodeAnalysis.Collections.Internal
             }
         }
 
-        private static void DownHeap(SegmentedArraySegment<TKey> keys, Span<TValue> values, int i, int n, int lo, IComparer<TKey> comparer)
+        private static void DownHeap(
+            SegmentedArraySegment<TKey> keys,
+            Span<TValue> values,
+            int i,
+            int n,
+            int lo,
+            IComparer<TKey> comparer
+        )
         {
             Debug.Assert(comparer != null);
             Debug.Assert(lo >= 0);
@@ -866,7 +1012,11 @@ namespace Microsoft.CodeAnalysis.Collections.Internal
             values[lo + i - 1] = dValue;
         }
 
-        private static void InsertionSort(SegmentedArraySegment<TKey> keys, Span<TValue> values, IComparer<TKey> comparer)
+        private static void InsertionSort(
+            SegmentedArraySegment<TKey> keys,
+            Span<TValue> values,
+            IComparer<TKey> comparer
+        )
         {
             Debug.Assert(comparer != null);
 
@@ -892,7 +1042,11 @@ namespace Microsoft.CodeAnalysis.Collections.Internal
     internal static class SegmentedGenericArraySortHelper<TKey, TValue>
         where TKey : IComparable<TKey>
     {
-        public static void Sort(SegmentedArraySegment<TKey> keys, Span<TValue> values, IComparer<TKey>? comparer)
+        public static void Sort(
+            SegmentedArraySegment<TKey> keys,
+            Span<TValue> values,
+            IComparer<TKey>? comparer
+        )
         {
             // Add a try block here to detect IComparers (or their
             // underlying IComparables, etc) that are bogus.
@@ -905,12 +1059,13 @@ namespace Microsoft.CodeAnalysis.Collections.Internal
                         // For floating-point, do a pre-pass to move all NaNs to the beginning
                         // so that we can do an optimized comparison as part of the actual sort
                         // on the remainder of the values.
-                        if (typeof(TKey) == typeof(double)
+                        if (
+                            typeof(TKey) == typeof(double)
                             || typeof(TKey) == typeof(float)
 #if NET
                             || typeof(TKey) == typeof(Half)
 #endif
-                            )
+                        )
                         {
                             int nanLeft = SegmentedArraySortUtils.MoveNansToFront(keys, values);
                             if (nanLeft == keys.Length)
@@ -921,12 +1076,20 @@ namespace Microsoft.CodeAnalysis.Collections.Internal
                             values = values.Slice(nanLeft);
                         }
 
-                        IntroSort(keys, values, 2 * (SegmentedArraySortUtils.Log2((uint)keys.Length) + 1));
+                        IntroSort(
+                            keys,
+                            values,
+                            2 * (SegmentedArraySortUtils.Log2((uint)keys.Length) + 1)
+                        );
                     }
                 }
                 else
                 {
-                    SegmentedArraySortHelper<TKey, TValue>.IntrospectiveSort(keys, values, comparer);
+                    SegmentedArraySortHelper<TKey, TValue>.IntrospectiveSort(
+                        keys,
+                        values,
+                        comparer
+                    );
                 }
             }
             catch (IndexOutOfRangeException)
@@ -935,11 +1098,19 @@ namespace Microsoft.CodeAnalysis.Collections.Internal
             }
             catch (Exception e)
             {
-                ThrowHelper.ThrowInvalidOperationException(ExceptionResource.InvalidOperation_IComparerFailed, e);
+                ThrowHelper.ThrowInvalidOperationException(
+                    ExceptionResource.InvalidOperation_IComparerFailed,
+                    e
+                );
             }
         }
 
-        private static void SwapIfGreaterWithValues(SegmentedArraySegment<TKey> keys, Span<TValue> values, int i, int j)
+        private static void SwapIfGreaterWithValues(
+            SegmentedArraySegment<TKey> keys,
+            Span<TValue> values,
+            int i,
+            int j
+        )
         {
             Debug.Assert(i != j);
 
@@ -957,7 +1128,12 @@ namespace Microsoft.CodeAnalysis.Collections.Internal
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        private static void Swap(SegmentedArraySegment<TKey> keys, Span<TValue> values, int i, int j)
+        private static void Swap(
+            SegmentedArraySegment<TKey> keys,
+            Span<TValue> values,
+            int i,
+            int j
+        )
         {
             Debug.Assert(i != j);
 
@@ -970,7 +1146,11 @@ namespace Microsoft.CodeAnalysis.Collections.Internal
             values[j] = v;
         }
 
-        private static void IntroSort(SegmentedArraySegment<TKey> keys, Span<TValue> values, int depthLimit)
+        private static void IntroSort(
+            SegmentedArraySegment<TKey> keys,
+            Span<TValue> values,
+            int depthLimit
+        )
         {
             Debug.Assert(keys.Length > 0);
             Debug.Assert(values.Length == keys.Length);
@@ -981,7 +1161,6 @@ namespace Microsoft.CodeAnalysis.Collections.Internal
             {
                 if (partitionSize <= SegmentedArrayHelper.IntrosortSizeThreshold)
                 {
-
                     if (partitionSize == 2)
                     {
                         SwapIfGreaterWithValues(keys, values, 0, 1);
@@ -1007,15 +1186,25 @@ namespace Microsoft.CodeAnalysis.Collections.Internal
                 }
                 depthLimit--;
 
-                int p = PickPivotAndPartition(keys.Slice(0, partitionSize), values.Slice(0, partitionSize));
+                int p = PickPivotAndPartition(
+                    keys.Slice(0, partitionSize),
+                    values.Slice(0, partitionSize)
+                );
 
                 // Note we've already partitioned around the pivot and do not have to move the pivot again.
-                IntroSort(keys.Slice(p + 1, partitionSize - (p + 1)), values.Slice(p + 1, partitionSize - (p + 1)), depthLimit);
+                IntroSort(
+                    keys.Slice(p + 1, partitionSize - (p + 1)),
+                    values.Slice(p + 1, partitionSize - (p + 1)),
+                    depthLimit
+                );
                 partitionSize = p;
             }
         }
 
-        private static int PickPivotAndPartition(SegmentedArraySegment<TKey> keys, Span<TValue> values)
+        private static int PickPivotAndPartition(
+            SegmentedArraySegment<TKey> keys,
+            Span<TValue> values
+        )
         {
             Debug.Assert(keys.Length >= SegmentedArrayHelper.IntrosortSizeThreshold);
 
@@ -1025,13 +1214,14 @@ namespace Microsoft.CodeAnalysis.Collections.Internal
             int middle = hi >> 1;
 
             // Sort lo, mid and hi appropriately, then pick mid as the pivot.
-            SwapIfGreaterWithValues(keys, values, 0, middle);  // swap the low with the mid point
-            SwapIfGreaterWithValues(keys, values, 0, hi);   // swap the low with the high
+            SwapIfGreaterWithValues(keys, values, 0, middle); // swap the low with the mid point
+            SwapIfGreaterWithValues(keys, values, 0, hi); // swap the low with the high
             SwapIfGreaterWithValues(keys, values, middle, hi); // swap the middle with the high
 
             TKey pivot = keys[middle];
             Swap(keys, values, middle, hi - 1);
-            int left = 0, right = hi - 1;  // We already partitioned lo and hi and put the pivot in hi - 1.  And we pre-increment & decrement below.
+            int left = 0,
+                right = hi - 1; // We already partitioned lo and hi and put the pivot in hi - 1.  And we pre-increment & decrement below.
 
             while (left < right)
             {
@@ -1091,7 +1281,13 @@ namespace Microsoft.CodeAnalysis.Collections.Internal
             }
         }
 
-        private static void DownHeap(SegmentedArraySegment<TKey> keys, Span<TValue> values, int i, int n, int lo)
+        private static void DownHeap(
+            SegmentedArraySegment<TKey> keys,
+            Span<TValue> values,
+            int i,
+            int n,
+            int lo
+        )
         {
             Debug.Assert(lo >= 0);
             Debug.Assert(lo < keys.Length);
@@ -1102,7 +1298,13 @@ namespace Microsoft.CodeAnalysis.Collections.Internal
             while (i <= n >> 1)
             {
                 int child = 2 * i;
-                if (child < n && (keys[lo + child - 1] == null || LessThan(ref keys[lo + child - 1], ref keys[lo + child])))
+                if (
+                    child < n
+                    && (
+                        keys[lo + child - 1] == null
+                        || LessThan(ref keys[lo + child - 1], ref keys[lo + child])
+                    )
+                )
                 {
                     child++;
                 }
@@ -1223,16 +1425,49 @@ namespace Microsoft.CodeAnalysis.Collections.Internal
     internal static class SegmentedArraySortUtils
     {
 #if !NETCOREAPP
-        private static ReadOnlySpan<byte> Log2DeBruijn => new byte[32]
-        {
-            00, 09, 01, 10, 13, 21, 02, 29,
-            11, 14, 16, 18, 22, 25, 03, 30,
-            08, 12, 20, 28, 15, 17, 24, 07,
-            19, 27, 23, 06, 26, 05, 04, 31,
-        };
+        private static ReadOnlySpan<byte> Log2DeBruijn =>
+            new byte[32]
+            {
+                00,
+                09,
+                01,
+                10,
+                13,
+                21,
+                02,
+                29,
+                11,
+                14,
+                16,
+                18,
+                22,
+                25,
+                03,
+                30,
+                08,
+                12,
+                20,
+                28,
+                15,
+                17,
+                24,
+                07,
+                19,
+                27,
+                23,
+                06,
+                26,
+                05,
+                04,
+                31,
+            };
 #endif
 
-        public static int MoveNansToFront<TKey, TValue>(SegmentedArraySegment<TKey> keys, Span<TValue> values) where TKey : notnull
+        public static int MoveNansToFront<TKey, TValue>(
+            SegmentedArraySegment<TKey> keys,
+            Span<TValue> values
+        )
+            where TKey : notnull
         {
             Debug.Assert(typeof(TKey) == typeof(double) || typeof(TKey) == typeof(float));
 
@@ -1240,12 +1475,13 @@ namespace Microsoft.CodeAnalysis.Collections.Internal
 
             for (int i = 0; i < keys.Length; i++)
             {
-                if ((typeof(TKey) == typeof(double) && double.IsNaN((double)(object)keys[i]))
+                if (
+                    (typeof(TKey) == typeof(double) && double.IsNaN((double)(object)keys[i]))
                     || (typeof(TKey) == typeof(float) && float.IsNaN((float)(object)keys[i]))
 #if NET
                     || (typeof(TKey) == typeof(Half) && Half.IsNaN((Half)(object)keys[i]))
 #endif
-                    )
+                )
                 {
                     TKey temp = keys[left];
                     keys[left] = keys[i];
@@ -1299,7 +1535,8 @@ namespace Microsoft.CodeAnalysis.Collections.Internal
                 // Using deBruijn sequence, k=2, n=5 (2^5=32) : 0b_0000_0111_1100_0100_1010_1100_1101_1101u
                 ref MemoryMarshal.GetReference(Log2DeBruijn),
                 // uint|long -> IntPtr cast on 32-bit platforms does expensive overflow checks not needed here
-                (IntPtr)(int)((value * 0x07C4ACDDu) >> 27));
+                (IntPtr)(int)((value * 0x07C4ACDDu) >> 27)
+            );
         }
 #endif
     }

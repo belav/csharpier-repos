@@ -4,8 +4,8 @@
 // </copyright>
 //------------------------------------------------------------------------------
 
-namespace System.Web.UI.WebControls.WebParts {
-
+namespace System.Web.UI.WebControls.WebParts
+{
     using System;
     using System.Collections;
     using System.ComponentModel;
@@ -14,8 +14,8 @@ namespace System.Web.UI.WebControls.WebParts {
     using System.Web.UI;
     using System.Web.UI.WebControls;
 
-    public sealed class BehaviorEditorPart : EditorPart {
-
+    public sealed class BehaviorEditorPart : EditorPart
+    {
         private CheckBox _allowClose;
         private CheckBox _allowConnect;
         private CheckBox _allowHide;
@@ -51,17 +51,23 @@ namespace System.Web.UI.WebControls.WebParts {
         private const int TextBoxColumns = 30;
 
         [Browsable(false), EditorBrowsable(EditorBrowsableState.Never), Themeable(false)]
-        public override string DefaultButton {
+        public override string DefaultButton
+        {
             get { return base.DefaultButton; }
             set { base.DefaultButton = value; }
         }
 
-        public override bool Display {
-            get {
-                if (WebPartToEdit != null &&
-                    WebPartToEdit.IsShared &&
-                    WebPartManager != null &&
-                    (WebPartManager.Personalization.Scope == PersonalizationScope.User)) {
+        public override bool Display
+        {
+            get
+            {
+                if (
+                    WebPartToEdit != null
+                    && WebPartToEdit.IsShared
+                    && WebPartManager != null
+                    && (WebPartManager.Personalization.Scope == PersonalizationScope.User)
+                )
+                {
                     return false;
                 }
 
@@ -69,178 +75,236 @@ namespace System.Web.UI.WebControls.WebParts {
             }
         }
 
-        private bool HasError {
-            get {
-                return (_allowCloseErrorMessage != null || _allowConnectErrorMessage != null ||
-                        _allowHideErrorMessage != null || _allowMinimizeErrorMessage != null ||
-                        _allowZoneChangeErrorMessage != null || _exportModeErrorMessage != null ||
-                        _helpModeErrorMessage != null || _descriptionErrorMessage != null ||
-                        _titleUrlErrorMessage != null || _titleIconImageUrlErrorMessage != null ||
-                        _catalogIconImageUrlErrorMessage != null || _helpUrlErrorMessage != null ||
-                        _importErrorMessageErrorMessage != null || _authorizationFilterErrorMessage != null ||
-                        _allowEditErrorMessage != null);
+        private bool HasError
+        {
+            get
+            {
+                return (
+                    _allowCloseErrorMessage != null
+                    || _allowConnectErrorMessage != null
+                    || _allowHideErrorMessage != null
+                    || _allowMinimizeErrorMessage != null
+                    || _allowZoneChangeErrorMessage != null
+                    || _exportModeErrorMessage != null
+                    || _helpModeErrorMessage != null
+                    || _descriptionErrorMessage != null
+                    || _titleUrlErrorMessage != null
+                    || _titleIconImageUrlErrorMessage != null
+                    || _catalogIconImageUrlErrorMessage != null
+                    || _helpUrlErrorMessage != null
+                    || _importErrorMessageErrorMessage != null
+                    || _authorizationFilterErrorMessage != null
+                    || _allowEditErrorMessage != null
+                );
             }
         }
 
-        [
-        WebSysDefaultValue(SR.BehaviorEditorPart_PartTitle),
-        ]
-        public override string Title {
-            get {
+        [WebSysDefaultValue(SR.BehaviorEditorPart_PartTitle)]
+        public override string Title
+        {
+            get
+            {
                 string s = (string)ViewState["Title"];
                 return (s != null) ? s : SR.GetString(SR.BehaviorEditorPart_PartTitle);
             }
-            set {
-                ViewState["Title"] = value;
-            }
+            set { ViewState["Title"] = value; }
         }
 
-        public override bool ApplyChanges() {
+        public override bool ApplyChanges()
+        {
             WebPart webPart = WebPartToEdit;
 
             Debug.Assert(webPart != null);
-            if (webPart != null) {
+            if (webPart != null)
+            {
                 EnsureChildControls();
 
                 bool allowLayoutChange = webPart.Zone.AllowLayoutChange;
 
-                if (allowLayoutChange) {
-                    try {
+                if (allowLayoutChange)
+                {
+                    try
+                    {
                         webPart.AllowClose = _allowClose.Checked;
                     }
-                    catch (Exception e) {
+                    catch (Exception e)
+                    {
                         _allowCloseErrorMessage = CreateErrorMessage(e.Message);
                     }
-
                 }
 
-                try {
+                try
+                {
                     webPart.AllowConnect = _allowConnect.Checked;
                 }
-                catch (Exception e) {
+                catch (Exception e)
+                {
                     _allowConnectErrorMessage = CreateErrorMessage(e.Message);
                 }
 
-                if (allowLayoutChange) {
-                    try {
+                if (allowLayoutChange)
+                {
+                    try
+                    {
                         webPart.AllowHide = _allowHide.Checked;
                     }
-                    catch (Exception e) {
+                    catch (Exception e)
+                    {
                         _allowHideErrorMessage = CreateErrorMessage(e.Message);
                     }
                 }
 
-                if (allowLayoutChange) {
-                    try {
+                if (allowLayoutChange)
+                {
+                    try
+                    {
                         webPart.AllowMinimize = _allowMinimize.Checked;
                     }
-                    catch (Exception e) {
+                    catch (Exception e)
+                    {
                         _allowMinimizeErrorMessage = CreateErrorMessage(e.Message);
                     }
                 }
 
-                if (allowLayoutChange) {
-                    try {
+                if (allowLayoutChange)
+                {
+                    try
+                    {
                         webPart.AllowZoneChange = _allowZoneChange.Checked;
                     }
-                    catch (Exception e) {
+                    catch (Exception e)
+                    {
                         _allowZoneChangeErrorMessage = CreateErrorMessage(e.Message);
                     }
                 }
 
-                try {
-                    TypeConverter exportModeConverter = TypeDescriptor.GetConverter(typeof(WebPartExportMode));
-                    webPart.ExportMode = (WebPartExportMode)exportModeConverter.ConvertFromString(_exportMode.SelectedValue);
+                try
+                {
+                    TypeConverter exportModeConverter = TypeDescriptor.GetConverter(
+                        typeof(WebPartExportMode)
+                    );
+                    webPart.ExportMode = (WebPartExportMode)
+                        exportModeConverter.ConvertFromString(_exportMode.SelectedValue);
                 }
-                catch (Exception e) {
+                catch (Exception e)
+                {
                     _exportModeErrorMessage = CreateErrorMessage(e.Message);
                 }
 
-                try {
-                    TypeConverter helpModeConverter = TypeDescriptor.GetConverter(typeof(WebPartHelpMode));
-                    webPart.HelpMode = (WebPartHelpMode)helpModeConverter.ConvertFromString(_helpMode.SelectedValue);
+                try
+                {
+                    TypeConverter helpModeConverter = TypeDescriptor.GetConverter(
+                        typeof(WebPartHelpMode)
+                    );
+                    webPart.HelpMode = (WebPartHelpMode)
+                        helpModeConverter.ConvertFromString(_helpMode.SelectedValue);
                 }
-                catch (Exception e) {
+                catch (Exception e)
+                {
                     _helpModeErrorMessage = CreateErrorMessage(e.Message);
                 }
 
-                try {
+                try
+                {
                     webPart.Description = _description.Text;
                 }
-                catch (Exception e) {
+                catch (Exception e)
+                {
                     _descriptionErrorMessage = CreateErrorMessage(e.Message);
                 }
 
                 string value = _titleUrl.Text;
-                if (CrossSiteScriptingValidation.IsDangerousUrl(value)) {
+                if (CrossSiteScriptingValidation.IsDangerousUrl(value))
+                {
                     _titleUrlErrorMessage = SR.GetString(SR.EditorPart_ErrorBadUrl);
                 }
-                else {
-                    try {
+                else
+                {
+                    try
+                    {
                         webPart.TitleUrl = value;
                     }
-                    catch (Exception e) {
+                    catch (Exception e)
+                    {
                         _titleUrlErrorMessage = CreateErrorMessage(e.Message);
                     }
                 }
 
                 value = _titleIconImageUrl.Text;
-                if (CrossSiteScriptingValidation.IsDangerousUrl(value)) {
+                if (CrossSiteScriptingValidation.IsDangerousUrl(value))
+                {
                     _titleIconImageUrlErrorMessage = SR.GetString(SR.EditorPart_ErrorBadUrl);
                 }
-                else {
-                    try {
+                else
+                {
+                    try
+                    {
                         webPart.TitleIconImageUrl = value;
                     }
-                    catch (Exception e) {
+                    catch (Exception e)
+                    {
                         _titleIconImageUrlErrorMessage = CreateErrorMessage(e.Message);
                     }
                 }
 
                 value = _catalogIconImageUrl.Text;
-                if (CrossSiteScriptingValidation.IsDangerousUrl(value)) {
+                if (CrossSiteScriptingValidation.IsDangerousUrl(value))
+                {
                     _catalogIconImageUrlErrorMessage = SR.GetString(SR.EditorPart_ErrorBadUrl);
                 }
-                else {
-                    try {
+                else
+                {
+                    try
+                    {
                         webPart.CatalogIconImageUrl = value;
                     }
-                    catch (Exception e) {
+                    catch (Exception e)
+                    {
                         _catalogIconImageUrlErrorMessage = CreateErrorMessage(e.Message);
                     }
                 }
 
                 value = _helpUrl.Text;
-                if (CrossSiteScriptingValidation.IsDangerousUrl(value)) {
+                if (CrossSiteScriptingValidation.IsDangerousUrl(value))
+                {
                     _helpUrlErrorMessage = SR.GetString(SR.EditorPart_ErrorBadUrl);
                 }
-                else {
-                    try {
+                else
+                {
+                    try
+                    {
                         webPart.HelpUrl = value;
                     }
-                    catch (Exception e) {
+                    catch (Exception e)
+                    {
                         _helpUrlErrorMessage = CreateErrorMessage(e.Message);
                     }
                 }
 
-                try {
+                try
+                {
                     webPart.ImportErrorMessage = _importErrorMessage.Text;
                 }
-                catch (Exception e) {
+                catch (Exception e)
+                {
                     _importErrorMessageErrorMessage = CreateErrorMessage(e.Message);
                 }
 
-                try {
+                try
+                {
                     webPart.AuthorizationFilter = _authorizationFilter.Text;
                 }
-                catch (Exception e) {
+                catch (Exception e)
+                {
                     _authorizationFilterErrorMessage = CreateErrorMessage(e.Message);
                 }
 
-                try {
+                try
+                {
                     webPart.AllowEdit = _allowEdit.Checked;
                 }
-                catch (Exception e) {
+                catch (Exception e)
+                {
                     _allowEditErrorMessage = CreateErrorMessage(e.Message);
                 }
             }
@@ -248,7 +312,8 @@ namespace System.Web.UI.WebControls.WebParts {
             return !HasError;
         }
 
-        protected internal override void CreateChildControls() {
+        protected internal override void CreateChildControls()
+        {
             ControlCollection controls = Controls;
             controls.Clear();
 
@@ -267,28 +332,48 @@ namespace System.Web.UI.WebControls.WebParts {
             _allowZoneChange = new CheckBox();
             controls.Add(_allowZoneChange);
 
-            TypeConverter exportModeConverter = TypeDescriptor.GetConverter(typeof(WebPartExportMode));
+            TypeConverter exportModeConverter = TypeDescriptor.GetConverter(
+                typeof(WebPartExportMode)
+            );
             _exportMode = new DropDownList();
-            _exportMode.Items.AddRange(new ListItem[] {
-                new ListItem(SR.GetString(SR.BehaviorEditorPart_ExportModeNone),
-                             exportModeConverter.ConvertToString(WebPartExportMode.None)),
-                new ListItem(SR.GetString(SR.BehaviorEditorPart_ExportModeAll),
-                             exportModeConverter.ConvertToString(WebPartExportMode.All)),
-                new ListItem(SR.GetString(SR.BehaviorEditorPart_ExportModeNonSensitiveData),
-                             exportModeConverter.ConvertToString(WebPartExportMode.NonSensitiveData)),
-            });
+            _exportMode.Items.AddRange(
+                new ListItem[]
+                {
+                    new ListItem(
+                        SR.GetString(SR.BehaviorEditorPart_ExportModeNone),
+                        exportModeConverter.ConvertToString(WebPartExportMode.None)
+                    ),
+                    new ListItem(
+                        SR.GetString(SR.BehaviorEditorPart_ExportModeAll),
+                        exportModeConverter.ConvertToString(WebPartExportMode.All)
+                    ),
+                    new ListItem(
+                        SR.GetString(SR.BehaviorEditorPart_ExportModeNonSensitiveData),
+                        exportModeConverter.ConvertToString(WebPartExportMode.NonSensitiveData)
+                    ),
+                }
+            );
             controls.Add(_exportMode);
 
             TypeConverter helpModeConverter = TypeDescriptor.GetConverter(typeof(WebPartHelpMode));
             _helpMode = new DropDownList();
-            _helpMode.Items.AddRange(new ListItem[] {
-                new ListItem(SR.GetString(SR.BehaviorEditorPart_HelpModeModal),
-                             helpModeConverter.ConvertToString(WebPartHelpMode.Modal)),
-                new ListItem(SR.GetString(SR.BehaviorEditorPart_HelpModeModeless),
-                             helpModeConverter.ConvertToString(WebPartHelpMode.Modeless)),
-                new ListItem(SR.GetString(SR.BehaviorEditorPart_HelpModeNavigate),
-                             helpModeConverter.ConvertToString(WebPartHelpMode.Navigate)),
-            });
+            _helpMode.Items.AddRange(
+                new ListItem[]
+                {
+                    new ListItem(
+                        SR.GetString(SR.BehaviorEditorPart_HelpModeModal),
+                        helpModeConverter.ConvertToString(WebPartHelpMode.Modal)
+                    ),
+                    new ListItem(
+                        SR.GetString(SR.BehaviorEditorPart_HelpModeModeless),
+                        helpModeConverter.ConvertToString(WebPartHelpMode.Modeless)
+                    ),
+                    new ListItem(
+                        SR.GetString(SR.BehaviorEditorPart_HelpModeNavigate),
+                        helpModeConverter.ConvertToString(WebPartHelpMode.Navigate)
+                    ),
+                }
+            );
             controls.Add(_helpMode);
 
             _description = new TextBox();
@@ -323,30 +408,36 @@ namespace System.Web.UI.WebControls.WebParts {
             controls.Add(_allowEdit);
 
             // We don't need viewstate enabled on our child controls.  Disable for perf.
-            foreach (Control c in controls) {
+            foreach (Control c in controls)
+            {
                 c.EnableViewState = false;
             }
         }
 
-        protected internal override void OnPreRender(EventArgs e) {
+        protected internal override void OnPreRender(EventArgs e)
+        {
             base.OnPreRender(e);
 
             // We want to synchronize the EditorPart to the state of the WebPart on every page load,
             // so we stay current if the WebPart changes in the background.
-            if (Display && Visible && !HasError) {
+            if (Display && Visible && !HasError)
+            {
                 SyncChanges();
             }
         }
 
-        protected internal override void RenderContents(HtmlTextWriter writer) {
-            if (Page != null) {
+        protected internal override void RenderContents(HtmlTextWriter writer)
+        {
+            if (Page != null)
+            {
                 Page.VerifyRenderingInServerForm(this);
             }
 
             // HACK: Need this for child controls to be created at design-time when control is inside template
             EnsureChildControls();
 
-            string[] propertyDisplayNames = new string[] {
+            string[] propertyDisplayNames = new string[]
+            {
                 SR.GetString(SR.BehaviorEditorPart_Description),
                 SR.GetString(SR.BehaviorEditorPart_TitleLink),
                 SR.GetString(SR.BehaviorEditorPart_TitleIconImageLink),
@@ -364,7 +455,8 @@ namespace System.Web.UI.WebControls.WebParts {
                 SR.GetString(SR.BehaviorEditorPart_AllowZoneChange),
             };
 
-            WebControl[] propertyEditors = new WebControl[] {
+            WebControl[] propertyEditors = new WebControl[]
+            {
                 _description,
                 _titleUrl,
                 _titleIconImageUrl,
@@ -382,7 +474,8 @@ namespace System.Web.UI.WebControls.WebParts {
                 _allowZoneChange,
             };
 
-            string[] errorMessages = new string[] {
+            string[] errorMessages = new string[]
+            {
                 _descriptionErrorMessage,
                 _titleUrlErrorMessage,
                 _titleIconImageUrlErrorMessage,
@@ -400,15 +493,23 @@ namespace System.Web.UI.WebControls.WebParts {
                 _allowZoneChangeErrorMessage,
             };
 
-            RenderPropertyEditors(writer, propertyDisplayNames, null /* propertyDescriptions */,
-                                  propertyEditors, errorMessages);
+            RenderPropertyEditors(
+                writer,
+                propertyDisplayNames,
+                null /* propertyDescriptions */
+                ,
+                propertyEditors,
+                errorMessages
+            );
         }
 
-        public override void SyncChanges() {
+        public override void SyncChanges()
+        {
             WebPart webPart = WebPartToEdit;
 
             Debug.Assert(webPart != null);
-            if (webPart != null) {
+            if (webPart != null)
+            {
                 bool allowLayoutChange = webPart.Zone.AllowLayoutChange;
 
                 EnsureChildControls();
@@ -426,10 +527,14 @@ namespace System.Web.UI.WebControls.WebParts {
                 _allowZoneChange.Checked = webPart.AllowZoneChange;
                 _allowZoneChange.Enabled = allowLayoutChange;
 
-                TypeConverter exportModeConverter = TypeDescriptor.GetConverter(typeof(WebPartExportMode));
+                TypeConverter exportModeConverter = TypeDescriptor.GetConverter(
+                    typeof(WebPartExportMode)
+                );
                 _exportMode.SelectedValue = exportModeConverter.ConvertToString(webPart.ExportMode);
 
-                TypeConverter helpModeConverter = TypeDescriptor.GetConverter(typeof(WebPartHelpMode));
+                TypeConverter helpModeConverter = TypeDescriptor.GetConverter(
+                    typeof(WebPartHelpMode)
+                );
                 _helpMode.SelectedValue = helpModeConverter.ConvertToString(webPart.HelpMode);
 
                 _description.Text = webPart.Description;

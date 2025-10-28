@@ -34,17 +34,47 @@ namespace System.Diagnostics.TextWriterTraceListenerTests
 
         public static IEnumerable<object[]> ConstructorsTestData()
         {
-            yield return new object[] { new XmlWriterTraceListener(new MemoryStream()), string.Empty };
-            yield return new object[] { new XmlWriterTraceListener(new StreamWriter(new MemoryStream())), string.Empty };
-            yield return new object[] { new XmlWriterTraceListener(Path.GetTempFileName()), string.Empty };
-            yield return new object[] { new XmlWriterTraceListener(new MemoryStream(), "MemoryStreamListener"), "MemoryStreamListener" };
-            yield return new object[] { new XmlWriterTraceListener(new StreamWriter(new MemoryStream()), "StreamWriterListener"), "StreamWriterListener" };
-            yield return new object[] { new XmlWriterTraceListener(Path.GetTempFileName(), "FileNameListener"), "FileNameListener" };
+            yield return new object[]
+            {
+                new XmlWriterTraceListener(new MemoryStream()),
+                string.Empty,
+            };
+            yield return new object[]
+            {
+                new XmlWriterTraceListener(new StreamWriter(new MemoryStream())),
+                string.Empty,
+            };
+            yield return new object[]
+            {
+                new XmlWriterTraceListener(Path.GetTempFileName()),
+                string.Empty,
+            };
+            yield return new object[]
+            {
+                new XmlWriterTraceListener(new MemoryStream(), "MemoryStreamListener"),
+                "MemoryStreamListener",
+            };
+            yield return new object[]
+            {
+                new XmlWriterTraceListener(
+                    new StreamWriter(new MemoryStream()),
+                    "StreamWriterListener"
+                ),
+                "StreamWriterListener",
+            };
+            yield return new object[]
+            {
+                new XmlWriterTraceListener(Path.GetTempFileName(), "FileNameListener"),
+                "FileNameListener",
+            };
         }
 
         [Theory]
         [MemberData(nameof(ConstructorsTestData))]
-        public void SingleArgumentConstructorTest(XmlWriterTraceListener listener, string expectedName)
+        public void SingleArgumentConstructorTest(
+            XmlWriterTraceListener listener,
+            string expectedName
+        )
         {
             Assert.Equal(expectedName, listener.Name);
         }
@@ -52,10 +82,22 @@ namespace System.Diagnostics.TextWriterTraceListenerTests
         [Fact]
         public void ConstructorThrows_ArgumentNullException()
         {
-            AssertExtensions.Throws<ArgumentNullException>("stream", () => new XmlWriterTraceListener((Stream)null));
-            AssertExtensions.Throws<ArgumentNullException>("writer", () => new XmlWriterTraceListener((TextWriter)null));
-            AssertExtensions.Throws<ArgumentNullException>("stream", () => new XmlWriterTraceListener((Stream)null, "trace listener name"));
-            AssertExtensions.Throws<ArgumentNullException>("writer", () => new XmlWriterTraceListener((TextWriter)null, "trace listener name"));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "stream",
+                () => new XmlWriterTraceListener((Stream)null)
+            );
+            AssertExtensions.Throws<ArgumentNullException>(
+                "writer",
+                () => new XmlWriterTraceListener((TextWriter)null)
+            );
+            AssertExtensions.Throws<ArgumentNullException>(
+                "stream",
+                () => new XmlWriterTraceListener((Stream)null, "trace listener name")
+            );
+            AssertExtensions.Throws<ArgumentNullException>(
+                "writer",
+                () => new XmlWriterTraceListener((TextWriter)null, "trace listener name")
+            );
         }
 
         [Fact]
@@ -90,10 +132,11 @@ namespace System.Diagnostics.TextWriterTraceListenerTests
         [Fact]
         public void Close_AfterXPathNavigatorTraced()
         {
-            string xml1 = "<Error xmlns=\"http://schemas.microsoft.com/2004/06/E2ETraceEvent\">" +
-            "<Info>Exception thrown</Info>" +
-                   "<Detail>Failed when trying to connect to server</Detail>" +
-                   "</Error>";
+            string xml1 =
+                "<Error xmlns=\"http://schemas.microsoft.com/2004/06/E2ETraceEvent\">"
+                + "<Info>Exception thrown</Info>"
+                + "<Detail>Failed when trying to connect to server</Detail>"
+                + "</Error>";
             XPathNavigator navigator1 = XDocument.Parse(xml1).CreateNavigator();
 
             string file = GetTestFilePath();
@@ -110,7 +153,10 @@ namespace System.Diagnostics.TextWriterTraceListenerTests
         {
             // Ensure we use an arbitrary ID that doesn't match the process ID or thread ID.
             int traceTransferId = 1;
-            while (traceTransferId == Environment.ProcessId || traceTransferId == Environment.CurrentManagedThreadId)
+            while (
+                traceTransferId == Environment.ProcessId
+                || traceTransferId == Environment.CurrentManagedThreadId
+            )
             {
                 traceTransferId++;
             }
@@ -129,9 +175,23 @@ namespace System.Diagnostics.TextWriterTraceListenerTests
                 listener.TraceData(null, "Trace", TraceEventType.Critical, 1, "shouldbehere");
                 listener.TraceData(null, "Trace", TraceEventType.Error, 1, "shouldnotbehere");
                 listener.TraceData(null, "Trace", TraceEventType.Error, 1, "ghost", "not", "here");
-                listener.TraceData(null, "Trace", TraceEventType.Critical, 1, "existent", ".net", "code");
+                listener.TraceData(
+                    null,
+                    "Trace",
+                    TraceEventType.Critical,
+                    1,
+                    "existent",
+                    ".net",
+                    "code"
+                );
 
-                listener.TraceTransfer(null, "Transfer", traceTransferId, "this is a transfer", guid);
+                listener.TraceTransfer(
+                    null,
+                    "Transfer",
+                    traceTransferId,
+                    "this is a transfer",
+                    guid
+                );
             }
 
             string text = File.ReadAllText(file);
@@ -145,11 +205,17 @@ namespace System.Diagnostics.TextWriterTraceListenerTests
             Assert.DoesNotContain("<DataItem>ghost</DataItem>", text);
             Assert.DoesNotContain("<DataItem>not</DataItem>", text);
             Assert.DoesNotContain("<DataItem>here</DataItem>", text);
-            Assert.Contains("<DataItem>existent</DataItem><DataItem>.net</DataItem><DataItem>code</DataItem>", text);
+            Assert.Contains(
+                "<DataItem>existent</DataItem><DataItem>.net</DataItem><DataItem>code</DataItem>",
+                text
+            );
 
             // Desktop has a boolean to turn on filtering in TraceTransfer due to a bug.
             // https://referencesource.microsoft.com/#System/compmod/system/diagnostics/XmlWriterTraceListener.cs,26
-            Assert.DoesNotContain('"' + traceTransferId.ToString(CultureInfo.InvariantCulture) + '"', text);
+            Assert.DoesNotContain(
+                '"' + traceTransferId.ToString(CultureInfo.InvariantCulture) + '"',
+                text
+            );
             Assert.DoesNotContain("this is a transfer", text);
             Assert.DoesNotContain("Transfer", text);
             Assert.DoesNotContain(guid.ToString("B"), text);
@@ -172,7 +238,6 @@ namespace System.Diagnostics.TextWriterTraceListenerTests
                 date = DateTime.Now;
                 listener.Write(message);
             }
-
 
             var document = new XmlDocument();
             document.Load(file);
@@ -212,7 +277,10 @@ namespace System.Diagnostics.TextWriterTraceListenerTests
 
         [Theory]
         [InlineData("This is a format without args", null)]
-        [InlineData("This is my {0} to {1} a trace with {0} {2} format {3}", new object[] { "test", "try", "", 3 })]
+        [InlineData(
+            "This is my {0} to {1} a trace with {0} {2} format {3}",
+            new object[] { "test", "try", "", 3 }
+        )]
         public void TraceEventFormat(string format, object[] args)
         {
             string file = GetTestFilePath();
@@ -225,7 +293,13 @@ namespace System.Diagnostics.TextWriterTraceListenerTests
             var document = new XmlDocument();
             document.Load(file);
 
-            ValidateSystemInfo(document, "1", TraceEventType.Resume, eventCache.DateTime, eventCache);
+            ValidateSystemInfo(
+                document,
+                "1",
+                TraceEventType.Resume,
+                eventCache.DateTime,
+                eventCache
+            );
 
             XmlNode node = document.GetElementsByTagName("ApplicationData")[0];
             string actualMessage = node.InnerText;
@@ -237,15 +311,15 @@ namespace System.Diagnostics.TextWriterTraceListenerTests
         public static IEnumerable<object[]> TraceData_OneObject_Data()
         {
             yield return new object[] { "My string data", (TraceEventType)(-1) };
-            string xml = "<Error xmlns=\"http://schemas.microsoft.com/2004/06/E2ETraceEvent\"> " +
-            "<Info>Exception thrown</Info>" +
-                   "<Detail>Failed when trying to connect to server</Detail>" +
-                   "</Error>";
+            string xml =
+                "<Error xmlns=\"http://schemas.microsoft.com/2004/06/E2ETraceEvent\"> "
+                + "<Info>Exception thrown</Info>"
+                + "<Detail>Failed when trying to connect to server</Detail>"
+                + "</Error>";
 
             XPathNavigator navigator = XDocument.Parse(xml).CreateNavigator();
             yield return new object[] { navigator, TraceEventType.Error };
             yield return new object[] { null, TraceEventType.Critical };
-
         }
 
         [Theory]
@@ -284,8 +358,12 @@ namespace System.Diagnostics.TextWriterTraceListenerTests
                 Assert.Equal(node.InnerXml, doc.OuterXml);
             }
 
-            string expectedString = $"<TraceData xmlns=\"http://schemas.microsoft.com/2004/06/E2ETraceEvent\"><DataItem>{node.InnerXml}</DataItem></TraceData>";
-            Assert.Equal(expectedString, document.GetElementsByTagName("ApplicationData")[0].InnerXml);
+            string expectedString =
+                $"<TraceData xmlns=\"http://schemas.microsoft.com/2004/06/E2ETraceEvent\"><DataItem>{node.InnerXml}</DataItem></TraceData>";
+            Assert.Equal(
+                expectedString,
+                document.GetElementsByTagName("ApplicationData")[0].InnerXml
+            );
         }
 
         [Fact]
@@ -302,7 +380,13 @@ namespace System.Diagnostics.TextWriterTraceListenerTests
             var document = new XmlDocument();
             document.Load(file);
 
-            ValidateSystemInfo(document, "100", TraceEventType.Information, eventCache.DateTime, eventCache);
+            ValidateSystemInfo(
+                document,
+                "100",
+                TraceEventType.Information,
+                eventCache.DateTime,
+                eventCache
+            );
 
             Assert.Equal(0, document.GetElementsByTagName("DataItem").Count);
         }
@@ -315,13 +399,27 @@ namespace System.Diagnostics.TextWriterTraceListenerTests
 
             using (var listener = new XmlWriterTraceListener(file))
             {
-                listener.TraceData(eventCache, "Trace", TraceEventType.Information, 100, null, null, null);
+                listener.TraceData(
+                    eventCache,
+                    "Trace",
+                    TraceEventType.Information,
+                    100,
+                    null,
+                    null,
+                    null
+                );
             }
 
             var document = new XmlDocument();
             document.Load(file);
 
-            ValidateSystemInfo(document, "100", TraceEventType.Information, eventCache.DateTime, eventCache);
+            ValidateSystemInfo(
+                document,
+                "100",
+                TraceEventType.Information,
+                eventCache.DateTime,
+                eventCache
+            );
 
             XmlNodeList nodes = document.GetElementsByTagName("DataItem");
             Assert.Equal(3, nodes.Count);
@@ -331,41 +429,58 @@ namespace System.Diagnostics.TextWriterTraceListenerTests
                 Assert.Equal(string.Empty, node.InnerText);
             }
 
-            Assert.Equal("<TraceData xmlns=\"http://schemas.microsoft.com/2004/06/E2ETraceEvent\"><DataItem></DataItem><DataItem></DataItem><DataItem></DataItem></TraceData>", document.GetElementsByTagName("ApplicationData")[0].InnerXml);
+            Assert.Equal(
+                "<TraceData xmlns=\"http://schemas.microsoft.com/2004/06/E2ETraceEvent\"><DataItem></DataItem><DataItem></DataItem><DataItem></DataItem></TraceData>",
+                document.GetElementsByTagName("ApplicationData")[0].InnerXml
+            );
         }
 
         [Fact]
         public void TraceData_MultipleXPathNavigators()
         {
-            string xml1 = "<Error xmlns=\"http://schemas.microsoft.com/2004/06/E2ETraceEvent\">" +
-            "<Info>Exception thrown</Info>" +
-                   "<Detail>Failed when trying to connect to server</Detail>" +
-                   "</Error>";
+            string xml1 =
+                "<Error xmlns=\"http://schemas.microsoft.com/2004/06/E2ETraceEvent\">"
+                + "<Info>Exception thrown</Info>"
+                + "<Detail>Failed when trying to connect to server</Detail>"
+                + "</Error>";
             XPathNavigator navigator1 = XDocument.Parse(xml1).CreateNavigator();
 
-            string xml2 = "<TestTrace xmlns=\"http://schemas.microsoft.com/2004/06/E2ETraceEvent\">" +
-            "<TraceInformationTest>This is some information</TraceInformationTest>" +
-                   "</TestTrace>";
+            string xml2 =
+                "<TestTrace xmlns=\"http://schemas.microsoft.com/2004/06/E2ETraceEvent\">"
+                + "<TraceInformationTest>This is some information</TraceInformationTest>"
+                + "</TestTrace>";
             XPathNavigator navigator2 = XDocument.Parse(xml2).CreateNavigator();
 
             string file = GetTestFilePath();
             var eventCache = new TraceEventCache();
             using (var listener = new XmlWriterTraceListener(file))
             {
-                listener.TraceData(eventCache, "Trace", TraceEventType.Information, 100, navigator1, navigator2);
+                listener.TraceData(
+                    eventCache,
+                    "Trace",
+                    TraceEventType.Information,
+                    100,
+                    navigator1,
+                    navigator2
+                );
             }
 
             var document = new XmlDocument();
             document.Load(file);
 
-            ValidateSystemInfo(document, "100", TraceEventType.Information, eventCache.DateTime, eventCache);
+            ValidateSystemInfo(
+                document,
+                "100",
+                TraceEventType.Information,
+                eventCache.DateTime,
+                eventCache
+            );
 
             XmlNodeList nodes = document.GetElementsByTagName("DataItem");
             Assert.Equal(2, nodes.Count);
 
             Assert.Equal(xml1, nodes[0].InnerXml);
             Assert.Equal(xml2, nodes[1].InnerXml);
-
         }
 
         [Fact]
@@ -383,10 +498,19 @@ namespace System.Diagnostics.TextWriterTraceListenerTests
             var document = new XmlDocument();
             document.Load(file);
 
-            ValidateSystemInfo(document, "0", TraceEventType.Transfer, eventCache.DateTime, eventCache);
+            ValidateSystemInfo(
+                document,
+                "0",
+                TraceEventType.Transfer,
+                eventCache.DateTime,
+                eventCache
+            );
 
             XmlNode node = document.GetElementsByTagName("Correlation")[0];
-            Assert.Equal(guid.ToString("B"), node.Attributes.GetNamedItem("RelatedActivityID").Value);
+            Assert.Equal(
+                guid.ToString("B"),
+                node.Attributes.GetNamedItem("RelatedActivityID").Value
+            );
 
             Assert.Equal(message, document.GetElementsByTagName("ApplicationData")[0].InnerText);
         }
@@ -409,7 +533,13 @@ namespace System.Diagnostics.TextWriterTraceListenerTests
             var document = new XmlDocument();
             document.Load(file);
 
-            ValidateSystemInfo(document, "1", TraceEventType.Resume, eventCache.DateTime, eventCache);
+            ValidateSystemInfo(
+                document,
+                "1",
+                TraceEventType.Resume,
+                eventCache.DateTime,
+                eventCache
+            );
 
             XmlNodeList nodes = document.GetElementsByTagName("LogicalOperation");
             Assert.Equal(2, nodes.Count);
@@ -423,9 +553,18 @@ namespace System.Diagnostics.TextWriterTraceListenerTests
 
             Trace.CorrelationManager.StopLogicalOperation();
 
-            Assert.StartsWith(message, document.GetElementsByTagName("ApplicationData")[0].InnerText);
-            Assert.Contains("LogicalOperationStack", document.GetElementsByTagName("ApplicationData")[0].InnerXml);
-            Assert.Equal(eventCache.Timestamp.ToString(CultureInfo.InvariantCulture), document.GetElementsByTagName("Timestamp")[0].InnerText);
+            Assert.StartsWith(
+                message,
+                document.GetElementsByTagName("ApplicationData")[0].InnerText
+            );
+            Assert.Contains(
+                "LogicalOperationStack",
+                document.GetElementsByTagName("ApplicationData")[0].InnerXml
+            );
+            Assert.Equal(
+                eventCache.Timestamp.ToString(CultureInfo.InvariantCulture),
+                document.GetElementsByTagName("Timestamp")[0].InnerText
+            );
         }
 
         [Fact]
@@ -445,7 +584,10 @@ namespace System.Diagnostics.TextWriterTraceListenerTests
             document.Load(file);
 
             Assert.Equal(0, document.GetElementsByTagName("LogicalOperation").Count);
-            Assert.Equal(string.Empty, document.GetElementsByTagName("LogicalOperationStack")[0].InnerText);
+            Assert.Equal(
+                string.Empty,
+                document.GetElementsByTagName("LogicalOperationStack")[0].InnerText
+            );
         }
 
         [Fact]
@@ -463,15 +605,39 @@ namespace System.Diagnostics.TextWriterTraceListenerTests
             var document = new XmlDocument();
             document.Load(file);
 
-            ValidateSystemInfo(document, "1", TraceEventType.Resume, eventCache.DateTime, eventCache);
+            ValidateSystemInfo(
+                document,
+                "1",
+                TraceEventType.Resume,
+                eventCache.DateTime,
+                eventCache
+            );
 
-            Assert.Equal(eventCache.Callstack, document.GetElementsByTagName("Callstack")[0].InnerText);
-            Assert.StartsWith(message, document.GetElementsByTagName("ApplicationData")[0].InnerText);
-            Assert.Contains("Callstack", document.GetElementsByTagName("ApplicationData")[0].InnerXml);
-            Assert.Equal(eventCache.Timestamp.ToString(CultureInfo.InvariantCulture), document.GetElementsByTagName("Timestamp")[0].InnerText);
+            Assert.Equal(
+                eventCache.Callstack,
+                document.GetElementsByTagName("Callstack")[0].InnerText
+            );
+            Assert.StartsWith(
+                message,
+                document.GetElementsByTagName("ApplicationData")[0].InnerText
+            );
+            Assert.Contains(
+                "Callstack",
+                document.GetElementsByTagName("ApplicationData")[0].InnerXml
+            );
+            Assert.Equal(
+                eventCache.Timestamp.ToString(CultureInfo.InvariantCulture),
+                document.GetElementsByTagName("Timestamp")[0].InnerText
+            );
         }
 
-        private void ValidateSystemInfo(XmlDocument document, string eventId, TraceEventType eventType, DateTime date, TraceEventCache eventCache)
+        private void ValidateSystemInfo(
+            XmlDocument document,
+            string eventId,
+            TraceEventType eventType,
+            DateTime date,
+            TraceEventCache eventCache
+        )
         {
             // TraceEventCache uses DateTime.UtcNow, whereas XmlWriterTraceListener uses DateTime.Now.
             date = date.ToLocalTime();
@@ -509,7 +675,10 @@ namespace System.Diagnostics.TextWriterTraceListenerTests
             Assert.Equal(_processName, node.Attributes.GetNamedItem("ProcessName").Value);
             if (eventCache != null)
             {
-                Assert.Equal(((uint)eventCache.ProcessId).ToString(CultureInfo.InvariantCulture), node.Attributes.GetNamedItem("ProcessID").Value);
+                Assert.Equal(
+                    ((uint)eventCache.ProcessId).ToString(CultureInfo.InvariantCulture),
+                    node.Attributes.GetNamedItem("ProcessID").Value
+                );
             }
 
             node = document.GetElementsByTagName("Computer")[0];

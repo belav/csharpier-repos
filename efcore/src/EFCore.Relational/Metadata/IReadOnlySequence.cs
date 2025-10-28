@@ -78,20 +78,19 @@ public interface IReadOnlySequence : IReadOnlyAnnotatable
     /// <param name="options">Options for generating the string.</param>
     /// <param name="indent">The number of indent spaces to use before each new line.</param>
     /// <returns>A human-readable representation.</returns>
-    string ToDebugString(MetadataDebugStringOptions options = MetadataDebugStringOptions.ShortDefault, int indent = 0)
+    string ToDebugString(
+        MetadataDebugStringOptions options = MetadataDebugStringOptions.ShortDefault,
+        int indent = 0
+    )
     {
         var builder = new StringBuilder();
         var indentString = new string(' ', indent);
 
-        builder
-            .Append(indentString)
-            .Append("Sequence: ");
+        builder.Append(indentString).Append("Sequence: ");
 
         if (ModelSchema != null)
         {
-            builder
-                .Append(ModelSchema)
-                .Append('.');
+            builder.Append(ModelSchema).Append('.');
         }
 
         builder.Append(Name);
@@ -103,26 +102,22 @@ public interface IReadOnlySequence : IReadOnlyAnnotatable
 
         if (StartValue != 1)
         {
-            builder.Append(" Start: ")
-                .Append(StartValue);
+            builder.Append(" Start: ").Append(StartValue);
         }
 
         if (IncrementBy != 1)
         {
-            builder.Append(" IncrementBy: ")
-                .Append(IncrementBy);
+            builder.Append(" IncrementBy: ").Append(IncrementBy);
         }
 
         if (MinValue != null)
         {
-            builder.Append(" Min: ")
-                .Append(MinValue);
+            builder.Append(" Min: ").Append(MinValue);
         }
 
         if (MaxValue != null)
         {
-            builder.Append(" Max: ")
-                .Append(MaxValue);
+            builder.Append(" Max: ").Append(MaxValue);
         }
 
         if ((options & MetadataDebugStringOptions.SingleLine) == 0)

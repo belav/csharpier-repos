@@ -25,14 +25,19 @@ namespace Microsoft.AspNet.Facebook
                         FacebookConfiguration config = GlobalFacebookConfiguration.Configuration;
                         FacebookClient client = config.ClientProvider.CreateClient();
                         return client.ParseSignedRequest(rawSignedRequest);
-                    });
+                    }
+                );
 
                 if (signedRequest != null)
                 {
                     string userId = signedRequest.user_id;
                     if (!String.IsNullOrEmpty(userId))
                     {
-                        ClaimsPrincipal principal = new ClaimsPrincipal(new ClaimsIdentity(new[] { new Claim(ClaimTypes.NameIdentifier, userId) }));
+                        ClaimsPrincipal principal = new ClaimsPrincipal(
+                            new ClaimsIdentity(
+                                new[] { new Claim(ClaimTypes.NameIdentifier, userId) }
+                            )
+                        );
                         Thread.CurrentPrincipal = principal;
                         httpContext.User = principal;
                     }
@@ -40,8 +45,6 @@ namespace Microsoft.AspNet.Facebook
             };
         }
 
-        public void Dispose()
-        {
-        }
+        public void Dispose() { }
     }
 }

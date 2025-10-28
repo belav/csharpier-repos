@@ -28,44 +28,66 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis
         /// <summary>
         /// Updates the current analysis data for the given basic block.
         /// </summary>
-        public abstract void SetCurrentAnalysisData(BasicBlock basicBlock, TBlockAnalysisData data, CancellationToken cancellationToken);
+        public abstract void SetCurrentAnalysisData(
+            BasicBlock basicBlock,
+            TBlockAnalysisData data,
+            CancellationToken cancellationToken
+        );
 
         /// <summary>
         /// Analyze the given basic block and return the block analysis data at the end of the block for its successors.
         /// </summary>
-        public abstract TBlockAnalysisData AnalyzeBlock(BasicBlock basicBlock, CancellationToken cancellationToken);
+        public abstract TBlockAnalysisData AnalyzeBlock(
+            BasicBlock basicBlock,
+            CancellationToken cancellationToken
+        );
 
         /// <summary>
         /// Analyze the non-conditional fallthrough successor branch for the given basic block
         /// and return the block analysis data for the branch destination.
         /// </summary>
-        public abstract TBlockAnalysisData AnalyzeNonConditionalBranch(BasicBlock basicBlock, TBlockAnalysisData currentAnalysisData, CancellationToken cancellationToken);
+        public abstract TBlockAnalysisData AnalyzeNonConditionalBranch(
+            BasicBlock basicBlock,
+            TBlockAnalysisData currentAnalysisData,
+            CancellationToken cancellationToken
+        );
 
         /// <summary>
         /// Analyze the given conditional branch for the given basic block and return the
         /// block analysis data for the branch destinations for the fallthrough and
         /// conditional successor branches.
         /// </summary>
-        public abstract (TBlockAnalysisData fallThroughSuccessorData, TBlockAnalysisData conditionalSuccessorData) AnalyzeConditionalBranch(
-            BasicBlock basicBlock, TBlockAnalysisData currentAnalysisData, CancellationToken cancellationToken);
+        public abstract (
+            TBlockAnalysisData fallThroughSuccessorData,
+            TBlockAnalysisData conditionalSuccessorData
+        ) AnalyzeConditionalBranch(
+            BasicBlock basicBlock,
+            TBlockAnalysisData currentAnalysisData,
+            CancellationToken cancellationToken
+        );
 
         /// <summary>
         /// Merge the given block analysis data instances to produce the resultant merge data.
         /// </summary>
-        public abstract TBlockAnalysisData Merge(TBlockAnalysisData analysisData1, TBlockAnalysisData analysisData2, CancellationToken cancellationToken);
+        public abstract TBlockAnalysisData Merge(
+            TBlockAnalysisData analysisData1,
+            TBlockAnalysisData analysisData2,
+            CancellationToken cancellationToken
+        );
 
         /// <summary>
         /// Returns true if both the given block analysis data instances should be considered equivalent by analysis.
         /// </summary>
-        public abstract bool IsEqual(TBlockAnalysisData analysisData1, TBlockAnalysisData analysisData2);
+        public abstract bool IsEqual(
+            TBlockAnalysisData analysisData1,
+            TBlockAnalysisData analysisData2
+        );
 
         /// <summary>
         /// Flag indicating if the dataflow analysis should run on unreachable blocks.
         /// </summary>
         public abstract bool AnalyzeUnreachableBlocks { get; }
 
-        public virtual void Dispose()
-        {
-        }
+        public virtual void Dispose() { }
     }
 }

@@ -18,7 +18,8 @@ namespace Microsoft.Extensions.Logging
         private readonly AsyncLocal<Scope?> _currentScope = new AsyncLocal<Scope?>();
         private readonly ActivityTrackingOptions _activityTrackingOption;
 
-        public LoggerFactoryScopeProvider(ActivityTrackingOptions activityTrackingOption) => _activityTrackingOption = activityTrackingOption;
+        public LoggerFactoryScopeProvider(ActivityTrackingOptions activityTrackingOption) =>
+            _activityTrackingOption = activityTrackingOption;
 
         public void ForEachScope<TState>(Action<object?, TState> callback, TState state)
         {
@@ -39,7 +40,8 @@ namespace Microsoft.Extensions.Logging
                 {
                     const string propertyKey = "__ActivityLogScope__";
 
-                    ActivityLogScope? activityLogScope = activity.GetCustomProperty(propertyKey) as ActivityLogScope;
+                    ActivityLogScope? activityLogScope =
+                        activity.GetCustomProperty(propertyKey) as ActivityLogScope;
                     if (activityLogScope == null)
                     {
                         activityLogScope = new ActivityLogScope(activity, _activityTrackingOption);
@@ -49,8 +51,10 @@ namespace Microsoft.Extensions.Logging
                     callback(activityLogScope, state);
 
                     // Tags and baggage are opt-in and thus we assume that most of the time it will not be used.
-                    if ((_activityTrackingOption & ActivityTrackingOptions.Tags) != 0
-                        && activity.TagObjects.GetEnumerator().MoveNext())
+                    if (
+                        (_activityTrackingOption & ActivityTrackingOptions.Tags) != 0
+                        && activity.TagObjects.GetEnumerator().MoveNext()
+                    )
                     {
                         // As TagObjects is a IEnumerable<KeyValuePair<string, object?>> this can be used directly as a scope.
                         // We do this to safe the allocation of a wrapper object.
@@ -65,7 +69,8 @@ namespace Microsoft.Extensions.Logging
                         {
                             // For the baggage a wrapper object is necessary because we need to be able to overwrite ToString().
                             // In contrast to the TagsObject, Baggage doesn't have one underlining type where we can do this overwrite.
-                            ActivityBaggageLogScopeWrapper scope = GetOrCreateActivityBaggageLogScopeWrapper(activity, baggage);
+                            ActivityBaggageLogScopeWrapper scope =
+                                GetOrCreateActivityBaggageLogScopeWrapper(activity, baggage);
                             callback(scope, state);
                         }
                     }
@@ -75,14 +80,22 @@ namespace Microsoft.Extensions.Logging
             Report(_currentScope.Value);
         }
 
-        private static ActivityBaggageLogScopeWrapper GetOrCreateActivityBaggageLogScopeWrapper(Activity activity, IEnumerable<KeyValuePair<string, string?>> items)
+        private static ActivityBaggageLogScopeWrapper GetOrCreateActivityBaggageLogScopeWrapper(
+            Activity activity,
+            IEnumerable<KeyValuePair<string, string?>> items
+        )
         {
             const string additionalItemsBaggagePropertyKey = "__ActivityBaggageItemsLogScope__";
-            var activityBaggageLogScopeWrapper = activity.GetCustomProperty(additionalItemsBaggagePropertyKey) as ActivityBaggageLogScopeWrapper;
+            var activityBaggageLogScopeWrapper =
+                activity.GetCustomProperty(additionalItemsBaggagePropertyKey)
+                as ActivityBaggageLogScopeWrapper;
             if (activityBaggageLogScopeWrapper == null)
             {
                 activityBaggageLogScopeWrapper = new ActivityBaggageLogScopeWrapper(items);
-                activity.SetCustomProperty(additionalItemsBaggagePropertyKey, activityBaggageLogScopeWrapper);
+                activity.SetCustomProperty(
+                    additionalItemsBaggagePropertyKey,
+                    activityBaggageLogScopeWrapper
+                );
             }
 
             return activityBaggageLogScopeWrapper;
@@ -132,9 +145,15 @@ namespace Microsoft.Extensions.Logging
         {
             private string? _cachedToString;
             private const int MaxItems = 5;
-            private readonly KeyValuePair<string, object?>[] _items = new KeyValuePair<string, object?>[MaxItems];
+            private readonly KeyValuePair<string, object?>[] _items = new KeyValuePair<
+                string,
+                object?
+            >[MaxItems];
 
-            public ActivityLogScope(Activity activity, ActivityTrackingOptions activityTrackingOption)
+            public ActivityLogScope(
+                Activity activity,
+                ActivityTrackingOptions activityTrackingOption
+            )
             {
                 Debug.Assert(activity != null);
                 Debug.Assert(activityTrackingOption != ActivityTrackingOptions.None);
@@ -142,27 +161,42 @@ namespace Microsoft.Extensions.Logging
                 int count = 0;
                 if ((activityTrackingOption & ActivityTrackingOptions.SpanId) != 0)
                 {
-                    _items[count++] = new KeyValuePair<string, object?>("SpanId", activity.GetSpanId());
+                    _items[count++] = new KeyValuePair<string, object?>(
+                        "SpanId",
+                        activity.GetSpanId()
+                    );
                 }
 
                 if ((activityTrackingOption & ActivityTrackingOptions.TraceId) != 0)
                 {
-                    _items[count++] = new KeyValuePair<string, object?>("TraceId", activity.GetTraceId());
+                    _items[count++] = new KeyValuePair<string, object?>(
+                        "TraceId",
+                        activity.GetTraceId()
+                    );
                 }
 
                 if ((activityTrackingOption & ActivityTrackingOptions.ParentId) != 0)
                 {
-                    _items[count++] = new KeyValuePair<string, object?>("ParentId", activity.GetParentId());
+                    _items[count++] = new KeyValuePair<string, object?>(
+                        "ParentId",
+                        activity.GetParentId()
+                    );
                 }
 
                 if ((activityTrackingOption & ActivityTrackingOptions.TraceState) != 0)
                 {
-                    _items[count++] = new KeyValuePair<string, object?>("TraceState", activity.TraceStateString);
+                    _items[count++] = new KeyValuePair<string, object?>(
+                        "TraceState",
+                        activity.TraceStateString
+                    );
                 }
 
                 if ((activityTrackingOption & ActivityTrackingOptions.TraceFlags) != 0)
                 {
-                    _items[count++] = new KeyValuePair<string, object?>("TraceFlags", activity.ActivityTraceFlags);
+                    _items[count++] = new KeyValuePair<string, object?>(
+                        "TraceFlags",
+                        activity.ActivityTraceFlags
+                    );
                 }
 
                 Count = count;
@@ -220,7 +254,8 @@ namespace Microsoft.Extensions.Logging
             }
         }
 
-        private sealed class ActivityBaggageLogScopeWrapper : IEnumerable<KeyValuePair<string, object?>>
+        private sealed class ActivityBaggageLogScopeWrapper
+            : IEnumerable<KeyValuePair<string, object?>>
         {
             private readonly IEnumerable<KeyValuePair<string, string?>> _items;
 
@@ -231,9 +266,11 @@ namespace Microsoft.Extensions.Logging
                 _items = items;
             }
 
-            public IEnumerator<KeyValuePair<string, object?>> GetEnumerator() => new BaggageEnumerator(_items.GetEnumerator());
+            public IEnumerator<KeyValuePair<string, object?>> GetEnumerator() =>
+                new BaggageEnumerator(_items.GetEnumerator());
 
-            IEnumerator IEnumerable.GetEnumerator() => new BaggageEnumerator(_items.GetEnumerator());
+            IEnumerator IEnumerable.GetEnumerator() =>
+                new BaggageEnumerator(_items.GetEnumerator());
 
             public override string ToString()
             {
@@ -273,7 +310,11 @@ namespace Microsoft.Extensions.Logging
                     _enumerator = enumerator;
                 }
 
-                public KeyValuePair<string, object?> Current => new KeyValuePair<string, object?>(_enumerator.Current.Key, _enumerator.Current.Value);
+                public KeyValuePair<string, object?> Current =>
+                    new KeyValuePair<string, object?>(
+                        _enumerator.Current.Key,
+                        _enumerator.Current.Value
+                    );
 
                 object? IEnumerator.Current => Current;
 
@@ -291,31 +332,31 @@ namespace Microsoft.Extensions.Logging
         public static string GetSpanId(this Activity activity)
         {
             return activity.IdFormat switch
-            {
-                ActivityIdFormat.Hierarchical => activity.Id,
-                ActivityIdFormat.W3C => activity.SpanId.ToHexString(),
-                _ => null,
-            } ?? string.Empty;
+                {
+                    ActivityIdFormat.Hierarchical => activity.Id,
+                    ActivityIdFormat.W3C => activity.SpanId.ToHexString(),
+                    _ => null,
+                } ?? string.Empty;
         }
 
         public static string GetTraceId(this Activity activity)
         {
             return activity.IdFormat switch
-            {
-                ActivityIdFormat.Hierarchical => activity.RootId,
-                ActivityIdFormat.W3C => activity.TraceId.ToHexString(),
-                _ => null,
-            } ?? string.Empty;
+                {
+                    ActivityIdFormat.Hierarchical => activity.RootId,
+                    ActivityIdFormat.W3C => activity.TraceId.ToHexString(),
+                    _ => null,
+                } ?? string.Empty;
         }
 
         public static string GetParentId(this Activity activity)
         {
             return activity.IdFormat switch
-            {
-                ActivityIdFormat.Hierarchical => activity.ParentId,
-                ActivityIdFormat.W3C => activity.ParentSpanId.ToHexString(),
-                _ => null,
-            } ?? string.Empty;
+                {
+                    ActivityIdFormat.Hierarchical => activity.ParentId,
+                    ActivityIdFormat.W3C => activity.ParentSpanId.ToHexString(),
+                    _ => null,
+                } ?? string.Empty;
         }
     }
 }

@@ -15,14 +15,18 @@ namespace System.ComponentModel.Tests
             {
                 Type destinationType = (Type)data[i, 0];
                 bool result = (bool)data[i, 1];
-                Assert.Equal(result, converter.CanConvertTo(TypeConverterTests.s_context, destinationType));
+                Assert.Equal(
+                    result,
+                    converter.CanConvertTo(TypeConverterTests.s_context, destinationType)
+                );
             }
         }
 
         public static void ConvertTo_WithContext(object[,] data, TypeConverter converter)
         {
-            Assert.Throws<ArgumentNullException>(
-                () => converter.ConvertTo(TypeConverterTests.s_context, null, "", null));
+            Assert.Throws<ArgumentNullException>(() =>
+                converter.ConvertTo(TypeConverterTests.s_context, null, "", null)
+            );
             // This type converter should had thrown ArgumentNullException in ConvertTo, because the destination type is null.");
 
             for (int i = 0; i < data.GetLength(0); i++)
@@ -30,7 +34,15 @@ namespace System.ComponentModel.Tests
                 object source = data[i, 0];
                 object expected = data[i, 1];
                 CultureInfo culture = data[i, 2] as CultureInfo;
-                Assert.Equal(expected, converter.ConvertTo(TypeConverterTests.s_context, culture, source, expected.GetType()));
+                Assert.Equal(
+                    expected,
+                    converter.ConvertTo(
+                        TypeConverterTests.s_context,
+                        culture,
+                        source,
+                        expected.GetType()
+                    )
+                );
             }
         }
 
@@ -40,7 +52,10 @@ namespace System.ComponentModel.Tests
             {
                 Type sourceType = data[i, 0] as Type;
                 bool expected = (bool)data[i, 1];
-                Assert.Equal(expected, converter.CanConvertFrom(TypeConverterTests.s_context, sourceType));
+                Assert.Equal(
+                    expected,
+                    converter.CanConvertFrom(TypeConverterTests.s_context, sourceType)
+                );
             }
         }
 
@@ -51,7 +66,10 @@ namespace System.ComponentModel.Tests
                 object source = data[i, 0];
                 object expected = data[i, 1];
                 CultureInfo culture = data[i, 2] as CultureInfo;
-                Assert.Equal(expected, converter.ConvertFrom(TypeConverterTests.s_context, culture, source));
+                Assert.Equal(
+                    expected,
+                    converter.ConvertFrom(TypeConverterTests.s_context, culture, source)
+                );
             }
         }
     }

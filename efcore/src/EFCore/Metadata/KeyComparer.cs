@@ -21,9 +21,7 @@ namespace Microsoft.EntityFrameworkCore.Metadata;
 /// </remarks>
 public sealed class KeyComparer : IEqualityComparer<IReadOnlyKey>, IComparer<IReadOnlyKey>
 {
-    private KeyComparer()
-    {
-    }
+    private KeyComparer() { }
 
     /// <summary>
     ///     The singleton instance of the comparer to use.
@@ -39,7 +37,9 @@ public sealed class KeyComparer : IEqualityComparer<IReadOnlyKey>, IComparer<IRe
     public int Compare(IReadOnlyKey? x, IReadOnlyKey? y)
     {
         var result = PropertyListComparer.Instance.Compare(x?.Properties, y?.Properties);
-        return result != 0 ? result : TypeBaseNameComparer.Instance.Compare(x?.DeclaringEntityType, y?.DeclaringEntityType);
+        return result != 0
+            ? result
+            : TypeBaseNameComparer.Instance.Compare(x?.DeclaringEntityType, y?.DeclaringEntityType);
     }
 
     /// <summary>
@@ -48,8 +48,7 @@ public sealed class KeyComparer : IEqualityComparer<IReadOnlyKey>, IComparer<IRe
     /// <param name="x">The first object to compare.</param>
     /// <param name="y">The second object to compare.</param>
     /// <returns><see langword="true" /> if the specified objects are equal; otherwise, <see langword="false" />.</returns>
-    public bool Equals(IReadOnlyKey? x, IReadOnlyKey? y)
-        => Compare(x, y) == 0;
+    public bool Equals(IReadOnlyKey? x, IReadOnlyKey? y) => Compare(x, y) == 0;
 
     /// <summary>
     ///     Returns a hash code for the specified object.

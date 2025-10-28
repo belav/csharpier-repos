@@ -52,7 +52,10 @@ namespace System.Configuration.Tests
             Assert.True(ElementOne.Equals(ElementTwo));
         }
 
-        [SkipOnTargetFramework(TargetFrameworkMonikers.NetFramework, ".NET Framework does not have the fix for https://github.com/dotnet/runtime/issues/25369")]
+        [SkipOnTargetFramework(
+            TargetFrameworkMonikers.NetFramework,
+            ".NET Framework does not have the fix for https://github.com/dotnet/runtime/issues/25369"
+        )]
         [Fact]
         public void DefaultConstructorEqualHashCodes()
         {
@@ -66,12 +69,7 @@ namespace System.Configuration.Tests
         {
             var Element = new SettingElement("Test", SettingsSerializeAs.Xml)
             {
-                Value = new SettingValueElement
-                {
-                    ValueXml = new ConfigXmlDocument
-                    {
-                    }
-                }
+                Value = new SettingValueElement { ValueXml = new ConfigXmlDocument { } },
             };
 
             // Validate the getting the hash code doesn't throw

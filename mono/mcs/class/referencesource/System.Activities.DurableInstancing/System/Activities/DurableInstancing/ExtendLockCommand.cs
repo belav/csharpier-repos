@@ -8,9 +8,9 @@ namespace System.Activities.DurableInstancing
 
     sealed class ExtendLockCommand : InstancePersistenceCommand
     {
-        public ExtendLockCommand() :
-            base(SqlWorkflowInstanceStoreConstants.DurableInstancingNamespace.GetName("ExtendLock"))
-        {
-        }
+        public ExtendLockCommand()
+            : base(
+                SqlWorkflowInstanceStoreConstants.DurableInstancingNamespace.GetName("ExtendLock")
+            ) { }
     }
 }

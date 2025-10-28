@@ -11,13 +11,18 @@ namespace System.Web.Helpers.AntiXsrf
 {
     internal sealed class ClaimUidExtractor : IClaimUidExtractor
     {
-        internal const string NameIdentifierClaimType = "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier";
-        internal const string IdentityProviderClaimType = "http://schemas.microsoft.com/accesscontrolservice/2010/07/claims/identityprovider";
+        internal const string NameIdentifierClaimType =
+            "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier";
+        internal const string IdentityProviderClaimType =
+            "http://schemas.microsoft.com/accesscontrolservice/2010/07/claims/identityprovider";
 
         private readonly ClaimsIdentityConverter _claimsIdentityConverter;
         private readonly IAntiForgeryConfig _config;
 
-        internal ClaimUidExtractor(IAntiForgeryConfig config, ClaimsIdentityConverter claimsIdentityConverter)
+        internal ClaimUidExtractor(
+            IAntiForgeryConfig config,
+            ClaimsIdentityConverter claimsIdentityConverter
+        )
         {
             _config = config;
             _claimsIdentityConverter = claimsIdentityConverter;
@@ -25,7 +30,11 @@ namespace System.Web.Helpers.AntiXsrf
 
         public BinaryBlob ExtractClaimUid(IIdentity identity)
         {
-            if (identity == null || !identity.IsAuthenticated || _config.SuppressIdentityHeuristicChecks)
+            if (
+                identity == null
+                || !identity.IsAuthenticated
+                || _config.SuppressIdentityHeuristicChecks
+            )
             {
                 // Skip anonymous users
                 // Skip when claims-based checks are disabled
@@ -39,12 +48,18 @@ namespace System.Web.Helpers.AntiXsrf
                 return null;
             }
 
-            string[] uniqueIdentifierParameters = GetUniqueIdentifierParameters(claimsIdentity, _config.UniqueClaimTypeIdentifier);
+            string[] uniqueIdentifierParameters = GetUniqueIdentifierParameters(
+                claimsIdentity,
+                _config.UniqueClaimTypeIdentifier
+            );
             byte[] claimUidBytes = CryptoUtil.ComputeSHA256(uniqueIdentifierParameters);
             return new BinaryBlob(256, claimUidBytes);
         }
 
-        internal static string[] GetUniqueIdentifierParameters(ClaimsIdentity claimsIdentity, string uniqueClaimTypeIdentifier)
+        internal static string[] GetUniqueIdentifierParameters(
+            ClaimsIdentity claimsIdentity,
+            string uniqueClaimTypeIdentifier
+        )
         {
             var claims = claimsIdentity.GetClaims();
 
@@ -54,17 +69,25 @@ namespace System.Web.Helpers.AntiXsrf
             // claim himself.)
             if (!String.IsNullOrEmpty(uniqueClaimTypeIdentifier))
             {
-                Claim matchingClaim = claims.SingleOrDefault(claim => String.Equals(uniqueClaimTypeIdentifier, claim.ClaimType, StringComparison.Ordinal));
+                Claim matchingClaim = claims.SingleOrDefault(claim =>
+                    String.Equals(
+                        uniqueClaimTypeIdentifier,
+                        claim.ClaimType,
+                        StringComparison.Ordinal
+                    )
+                );
                 if (matchingClaim == null || String.IsNullOrEmpty(matchingClaim.Value))
                 {
-                    throw new InvalidOperationException(String.Format(CultureInfo.CurrentCulture, WebPageResources.ClaimUidExtractor_ClaimNotPresent, uniqueClaimTypeIdentifier));
+                    throw new InvalidOperationException(
+                        String.Format(
+                            CultureInfo.CurrentCulture,
+                            WebPageResources.ClaimUidExtractor_ClaimNotPresent,
+                            uniqueClaimTypeIdentifier
+                        )
+                    );
                 }
 
-                return new string[]
-                {
-                    uniqueClaimTypeIdentifier,
-                    matchingClaim.Value
-                };
+                return new string[] { uniqueClaimTypeIdentifier, matchingClaim.Value };
             }
 
             // By default, we look for 'nameIdentifier' and 'identityProvider' claims.
@@ -74,12 +97,22 @@ namespace System.Web.Helpers.AntiXsrf
             // users within its security realm, and we assume that ACS has been
             // configured so that each identity provider has a unique 'identityProvider'
             // claim.
-            Claim nameIdentifierClaim = claims.SingleOrDefault(claim => String.Equals(NameIdentifierClaimType, claim.ClaimType, StringComparison.Ordinal));
-            Claim identityProviderClaim = claims.SingleOrDefault(claim => String.Equals(IdentityProviderClaimType, claim.ClaimType, StringComparison.Ordinal));
-            if (nameIdentifierClaim == null || String.IsNullOrEmpty(nameIdentifierClaim.Value)
-                || identityProviderClaim == null || String.IsNullOrEmpty(identityProviderClaim.Value))
+            Claim nameIdentifierClaim = claims.SingleOrDefault(claim =>
+                String.Equals(NameIdentifierClaimType, claim.ClaimType, StringComparison.Ordinal)
+            );
+            Claim identityProviderClaim = claims.SingleOrDefault(claim =>
+                String.Equals(IdentityProviderClaimType, claim.ClaimType, StringComparison.Ordinal)
+            );
+            if (
+                nameIdentifierClaim == null
+                || String.IsNullOrEmpty(nameIdentifierClaim.Value)
+                || identityProviderClaim == null
+                || String.IsNullOrEmpty(identityProviderClaim.Value)
+            )
             {
-                throw new InvalidOperationException(WebPageResources.ClaimUidExtractor_DefaultClaimsNotPresent);
+                throw new InvalidOperationException(
+                    WebPageResources.ClaimUidExtractor_DefaultClaimsNotPresent
+                );
             }
 
             return new string[]
@@ -87,7 +120,7 @@ namespace System.Web.Helpers.AntiXsrf
                 NameIdentifierClaimType,
                 nameIdentifierClaim.Value,
                 IdentityProviderClaimType,
-                identityProviderClaim.Value
+                identityProviderClaim.Value,
             };
         }
     }

@@ -36,10 +36,7 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
 
         public override bool CanWrite
         {
-            get
-            {
-                return this.Property.CanWrite;
-            }
+            get { return this.Property.CanWrite; }
         }
 
         public override Type DeclaringType
@@ -84,7 +81,10 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
 
         public override MethodInfo[] GetAccessors(bool nonPublic)
         {
-            return this.Property.GetAccessors(nonPublic).Select(a => new MethodInfoImpl(a)).ToArray();
+            return this
+                .Property.GetAccessors(nonPublic)
+                .Select(a => new MethodInfoImpl(a))
+                .ToArray();
         }
 
         public override object GetConstantValue()
@@ -104,7 +104,10 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
 
         public override IList<CustomAttributeData> GetCustomAttributesData()
         {
-            return this.Property.GetCustomAttributesData().Select(a => new CustomAttributeDataImpl(a)).ToArray();
+            return this
+                .Property.GetCustomAttributesData()
+                .Select(a => new CustomAttributeDataImpl(a))
+                .ToArray();
         }
 
         public override MethodInfo GetGetMethod(bool nonPublic)
@@ -115,7 +118,10 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
 
         public override ParameterInfo[] GetIndexParameters()
         {
-            return this.Property.GetIndexParameters().Select(p => new ParameterInfoImpl(p)).ToArray();
+            return this
+                .Property.GetIndexParameters()
+                .Select(p => new ParameterInfoImpl(p))
+                .ToArray();
         }
 
         public override MethodInfo GetSetMethod(bool nonPublic)
@@ -124,12 +130,24 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
             return (setMethod != null) ? new MethodInfoImpl(setMethod) : null;
         }
 
-        public override object GetValue(object obj, BindingFlags invokeAttr, Binder binder, object[] index, CultureInfo culture)
+        public override object GetValue(
+            object obj,
+            BindingFlags invokeAttr,
+            Binder binder,
+            object[] index,
+            CultureInfo culture
+        )
         {
             Debug.Assert(binder == null, "NYI");
             Debug.Assert(index == null, "NYI");
             Debug.Assert(culture == null, "NYI");
-            return this.Property.GetValue(obj, (System.Reflection.BindingFlags)invokeAttr, null, null, null);
+            return this.Property.GetValue(
+                obj,
+                (System.Reflection.BindingFlags)invokeAttr,
+                null,
+                null,
+                null
+            );
         }
 
         public override bool IsDefined(Type attributeType, bool inherit)
@@ -137,7 +155,14 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
             throw new NotImplementedException();
         }
 
-        public override void SetValue(object obj, object value, BindingFlags invokeAttr, Binder binder, object[] index, CultureInfo culture)
+        public override void SetValue(
+            object obj,
+            object value,
+            BindingFlags invokeAttr,
+            Binder binder,
+            object[] index,
+            CultureInfo culture
+        )
         {
             throw new NotImplementedException();
         }

@@ -27,7 +27,11 @@ public interface IConventionDbFunctionParameterBuilder : IConventionAnnotatableB
     ///     An <see cref="IConventionDbFunctionParameterBuilder" /> to continue configuration if the annotation was set, <see langword="null" />
     ///     otherwise.
     /// </returns>
-    new IConventionDbFunctionParameterBuilder? HasAnnotation(string name, object? value, bool fromDataAnnotation = false);
+    new IConventionDbFunctionParameterBuilder? HasAnnotation(
+        string name,
+        object? value,
+        bool fromDataAnnotation = false
+    );
 
     /// <summary>
     ///     Sets the annotation stored under the given name. Overwrites the existing annotation if an
@@ -44,7 +48,8 @@ public interface IConventionDbFunctionParameterBuilder : IConventionAnnotatableB
     new IConventionDbFunctionParameterBuilder? HasNonNullAnnotation(
         string name,
         object? value,
-        bool fromDataAnnotation = false);
+        bool fromDataAnnotation = false
+    );
 
     /// <summary>
     ///     Removes the annotation with the given name from this object.
@@ -55,7 +60,10 @@ public interface IConventionDbFunctionParameterBuilder : IConventionAnnotatableB
     ///     An <see cref="IConventionDbFunctionParameterBuilder" /> to continue configuration if the annotation was set, <see langword="null" />
     ///     otherwise.
     /// </returns>
-    new IConventionDbFunctionParameterBuilder? HasNoAnnotation(string name, bool fromDataAnnotation = false);
+    new IConventionDbFunctionParameterBuilder? HasNoAnnotation(
+        string name,
+        bool fromDataAnnotation = false
+    );
 
     /// <summary>
     ///     Sets the store type of the function parameter in the database.
@@ -63,7 +71,10 @@ public interface IConventionDbFunctionParameterBuilder : IConventionAnnotatableB
     /// <param name="storeType">The store type of the function parameter in the database.</param>
     /// <param name="fromDataAnnotation">Indicates whether the configuration was specified using a data annotation.</param>
     /// <returns>The same builder instance if the configuration was applied; <see langword="null" /> otherwise.</returns>
-    IConventionDbFunctionParameterBuilder? HasStoreType(string? storeType, bool fromDataAnnotation = false);
+    IConventionDbFunctionParameterBuilder? HasStoreType(
+        string? storeType,
+        bool fromDataAnnotation = false
+    );
 
     /// <summary>
     ///     Returns a value indicating whether the store type can be set for this property
@@ -82,7 +93,8 @@ public interface IConventionDbFunctionParameterBuilder : IConventionAnnotatableB
     /// <returns>The same builder instance if the configuration was applied; <see langword="null" /> otherwise.</returns>
     IConventionDbFunctionParameterBuilder? HasTypeMapping(
         RelationalTypeMapping? typeMapping,
-        bool fromDataAnnotation = false);
+        bool fromDataAnnotation = false
+    );
 
     /// <summary>
     ///     Returns a value indicating whether <see cref="RelationalTypeMapping" /> can be set for this property

@@ -13,7 +13,10 @@ namespace Microsoft.Extensions.Primitives
     /// </summary>
     [DebuggerDisplay("Value = {_value}")]
     [EditorBrowsable(EditorBrowsableState.Never)]
-    [Obsolete("This type is retained only for compatibility. The recommended alternative is string.Create<TState> (int length, TState state, System.Buffers.SpanAction<char,TState> action).", error: true)]
+    [Obsolete(
+        "This type is retained only for compatibility. The recommended alternative is string.Create<TState> (int length, TState state, System.Buffers.SpanAction<char,TState> action).",
+        error: true
+    )]
     public struct InplaceStringBuilder
     {
         private int _offset;
@@ -24,7 +27,8 @@ namespace Microsoft.Extensions.Primitives
         /// Initializes a new instance of the <see cref="InplaceStringBuilder"/> class.
         /// </summary>
         /// <param name="capacity">The suggested starting size of the <see cref="InplaceStringBuilder"/> instance.</param>
-        public InplaceStringBuilder(int capacity) : this()
+        public InplaceStringBuilder(int capacity)
+            : this()
         {
             if (capacity < 0)
             {
@@ -50,7 +54,9 @@ namespace Microsoft.Extensions.Primitives
                 // _offset > 0 indicates writing state
                 if (_offset > 0)
                 {
-                    ThrowHelper.ThrowInvalidOperationException(ExceptionResource.Capacity_CannotChangeAfterWriteStarted);
+                    ThrowHelper.ThrowInvalidOperationException(
+                        ExceptionResource.Capacity_CannotChangeAfterWriteStarted
+                    );
                 }
 
                 _capacity = value;
@@ -91,10 +97,12 @@ namespace Microsoft.Extensions.Primitives
         {
             EnsureValueIsInitialized();
 
-            if (value == null
+            if (
+                value == null
                 || offset < 0
                 || value.Length - offset < count
-                || Capacity - _offset < count)
+                || Capacity - _offset < count
+            )
             {
                 ThrowValidationError(value, offset, count);
             }
@@ -118,7 +126,11 @@ namespace Microsoft.Extensions.Primitives
 
             if (_offset >= Capacity)
             {
-                ThrowHelper.ThrowInvalidOperationException(ExceptionResource.Capacity_NotEnough, 1, Capacity - _offset);
+                ThrowHelper.ThrowInvalidOperationException(
+                    ExceptionResource.Capacity_NotEnough,
+                    1,
+                    Capacity - _offset
+                );
             }
 
             fixed (char* destination = _value)
@@ -135,7 +147,11 @@ namespace Microsoft.Extensions.Primitives
         {
             if (Capacity != _offset)
             {
-                ThrowHelper.ThrowInvalidOperationException(ExceptionResource.Capacity_NotUsedEntirely, Capacity, _offset);
+                ThrowHelper.ThrowInvalidOperationException(
+                    ExceptionResource.Capacity_NotUsedEntirely,
+                    Capacity,
+                    _offset
+                );
             }
 
             return _value;
@@ -160,7 +176,11 @@ namespace Microsoft.Extensions.Primitives
 
             if (Capacity - _offset < count)
             {
-                ThrowHelper.ThrowInvalidOperationException(ExceptionResource.Capacity_NotEnough, value.Length, Capacity - _offset);
+                ThrowHelper.ThrowInvalidOperationException(
+                    ExceptionResource.Capacity_NotEnough,
+                    value.Length,
+                    Capacity - _offset
+                );
             }
         }
     }

@@ -14,27 +14,27 @@
 
 namespace Castle.DynamicProxy.Tests.Interfaces
 {
-	namespace A
-	{
-		public interface ISharedName
-		{
-			void M();
-		}
-	}
+    namespace A
+    {
+        public interface ISharedName
+        {
+            void M();
+        }
+    }
 
-	namespace B
-	{
-		public interface ISharedName
-		{
-			void M();
-		}
-	}
+    namespace B
+    {
+        public interface ISharedName
+        {
+            void M();
+        }
+    }
 
-	namespace C
-	{
-		public interface ISharedName
-		{
-			void M();
-		}
-	}
+    namespace C
+    {
+        public interface ISharedName
+        {
+            void M();
+        }
+    }
 }

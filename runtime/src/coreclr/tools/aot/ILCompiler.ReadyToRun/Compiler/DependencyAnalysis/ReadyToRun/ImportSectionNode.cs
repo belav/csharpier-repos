@@ -3,7 +3,6 @@
 
 using System;
 using System.Collections.Generic;
-
 using Internal.ReadyToRunConstants;
 
 namespace ILCompiler.DependencyAnalysis.ReadyToRun
@@ -12,7 +11,11 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
     {
         private class ImportTable : ArrayOfEmbeddedDataNode<Import>
         {
-            public ImportTable(string symbol) : base(symbol, nodeSorter: new EmbeddedObjectNodeComparer(CompilerComparer.Instance)) {}
+            public ImportTable(string symbol)
+                : base(
+                    symbol,
+                    nodeSorter: new EmbeddedObjectNodeComparer(CompilerComparer.Instance)
+                ) { }
 
             public override bool ShouldSkipEmittingObjectNode(NodeFactory factory) => false;
 
@@ -20,8 +23,10 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
         }
 
         private readonly ImportTable _imports;
+
         // TODO: annoying - today there's no way to put signature RVA's into R/O data section
         private readonly ArrayOfEmbeddedPointersNode<Signature> _signatures;
+
         // TODO: annoying - cannot enumerate the ArrayOfEmbeddedPointersNode so we must keep a copy.
         private readonly List<Signature> _signatureList;
         private readonly GCRefMapNode _gcRefMap;
@@ -35,7 +40,14 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
 
         private bool _materializedSignature;
 
-        public ImportSectionNode(string name, ReadyToRunImportSectionType importType, ReadyToRunImportSectionFlags flags, byte entrySize, bool emitPrecode, bool emitGCRefMap)
+        public ImportSectionNode(
+            string name,
+            ReadyToRunImportSectionType importType,
+            ReadyToRunImportSectionFlags flags,
+            byte entrySize,
+            bool emitPrecode,
+            bool emitGCRefMap
+        )
         {
             _name = name;
             _type = importType;
@@ -45,7 +57,10 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
             _emitGCRefMap = emitGCRefMap;
 
             _imports = new ImportTable(_name + "_ImportBegin");
-            _signatures = new ArrayOfEmbeddedPointersNode<Signature>(_name + "_SigBegin", new EmbeddedObjectNodeComparer(CompilerComparer.Instance));
+            _signatures = new ArrayOfEmbeddedPointersNode<Signature>(
+                _name + "_SigBegin",
+                new EmbeddedObjectNodeComparer(CompilerComparer.Instance)
+            );
             _signatureList = new List<Signature>();
             _gcRefMap = _emitGCRefMap ? new GCRefMapNode(this) : null;
         }
@@ -54,7 +69,9 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
         {
             if (!_materializedSignature)
             {
-                _signatureList.MergeSortAllowDuplicates(new SortableDependencyNode.ObjectNodeComparer(CompilerComparer.Instance));
+                _signatureList.MergeSortAllowDuplicates(
+                    new SortableDependencyNode.ObjectNodeComparer(CompilerComparer.Instance)
+                );
 
                 foreach (Signature signature in _signatureList)
                 {
@@ -97,7 +114,11 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
 
         public override int ClassCode => (int)ObjectNodeOrder.ImportSectionNode;
 
-        public override void EncodeData(ref ObjectDataBuilder dataBuilder, NodeFactory factory, bool relocsOnly)
+        public override void EncodeData(
+            ref ObjectDataBuilder dataBuilder,
+            NodeFactory factory,
+            bool relocsOnly
+        )
         {
             if (!_imports.ShouldSkipEmittingObjectNode(factory))
             {

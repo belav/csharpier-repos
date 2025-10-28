@@ -16,8 +16,6 @@ namespace Microsoft.CodeAnalysis.CSharp.GeneratedCodeRecognition
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public CSharpGeneratedCodeRecognitionService()
-        {
-        }
+        public CSharpGeneratedCodeRecognitionService() { }
     }
 }

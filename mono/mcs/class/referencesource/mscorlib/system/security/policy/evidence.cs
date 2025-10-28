@@ -1,10 +1,10 @@
 // ==++==
-// 
+//
 //   Copyright (c) Microsoft Corporation.  All rights reserved.
-// 
+//
 // ==--==
 // <OWNER>Microsoft</OWNER>
-// 
+//
 
 namespace System.Security.Policy
 {
@@ -18,20 +18,20 @@ namespace System.Security.Policy
     using System.Runtime.CompilerServices;
     using System.Runtime.InteropServices;
     using System.Runtime.Remoting;
-#if FEATURE_SERIALIZATION
-    using System.Runtime.Serialization;
-    using System.Runtime.Serialization.Formatters.Binary;
-#endif // FEATURE_SERIALIZATION
     using System.Security.Permissions;
     using System.Security.Util;
     using System.Threading;
     using Microsoft.Win32.SafeHandles;
+#if FEATURE_SERIALIZATION
+    using System.Runtime.Serialization;
+    using System.Runtime.Serialization.Formatters.Binary;
+#endif // FEATURE_SERIALIZATION
 
     /// <summary>
     ///     The Evidence class keeps track of information that can be used to make security decisions about
     ///     an assembly or an AppDomain.  There are two types of evidence, one is supplied by the CLR or a
     ///     host, the other supplied by the assembly itself.
-    ///     
+    ///
     ///     We keep a dictionary that maps each type of possbile evidence to an EvidenceTypeDescriptor which
     ///     contains the evidence objects themselves if they exist as well as some extra metadata about that
     ///     type of evidence.  This dictionary is fully populated with keys for host evidence at all times and
@@ -39,7 +39,7 @@ namespace System.Security.Policy
     ///     Type key does not exist in the dictionary, then that particular type of evidence will never be
     ///     given to the assembly or AppDomain in question as host evidence.  The only exception is if the
     ///     user later manually adds host evidence via the AddHostEvidence API.
-    ///     
+    ///
     ///     Assembly supplied evidence is created up front, however host supplied evidence may be lazily
     ///     created.  In the lazy creation case, the Type will map to either an EvidenceTypeDescriptor that does
     ///     not contain any evidence data or null.  As requests come in for that evidence, we'll populate the
@@ -49,7 +49,7 @@ namespace System.Security.Policy
     [ComVisible(true)]
     public sealed class Evidence
 #if FEATURE_CAS_POLICY
- : ICollection
+        : ICollection
 #endif // FEATURE_CAS_POLICY
     {
 #if !FEATURE_CORECLR && FEATURE_RWLOCK
@@ -83,7 +83,7 @@ namespace System.Security.Policy
 
         // If this evidence collection is a clone where we may need to backpatch to the original, this will
         // reference the collection it was cloned from.  See
-        // code:System.Security.Policy.Evidence#BackpatchGeneratedEvidence 
+        // code:System.Security.Policy.Evidence#BackpatchGeneratedEvidence
         [NonSerialized]
         private WeakReference m_cloneOrigin;
 
@@ -95,9 +95,9 @@ namespace System.Security.Policy
         /// </summary>
         private enum DuplicateEvidenceAction
         {
-            Throw,                  // Throw an exception
-            Merge,                  // Create a list of all the evidence objects
-            SelectNewObject         // The newly added object wins
+            Throw, // Throw an exception
+            Merge, // Create a list of all the evidence objects
+            SelectNewObject, // The newly added object wins
         }
 
 #if FEATURE_CAS_POLICY
@@ -117,9 +117,19 @@ namespace System.Security.Policy
 
             if (evidence != null)
             {
-                using (EvidenceLockHolder lockHolder = new EvidenceLockHolder(evidence, EvidenceLockHolder.LockType.Reader))
+                using (
+                    EvidenceLockHolder lockHolder = new EvidenceLockHolder(
+                        evidence,
+                        EvidenceLockHolder.LockType.Reader
+                    )
+                )
                 {
-                    foreach (KeyValuePair<Type, EvidenceTypeDescriptor> evidenceType in evidence.m_evidence)
+                    foreach (
+                        KeyValuePair<
+                            Type,
+                            EvidenceTypeDescriptor
+                        > evidenceType in evidence.m_evidence
+                    )
                     {
                         EvidenceTypeDescriptor cloneDescriptor = evidenceType.Value;
                         if (cloneDescriptor != null)
@@ -148,7 +158,9 @@ namespace System.Security.Policy
             m_evidenceLock = new ReaderWriterLock();
         }
 
-        [Obsolete("This constructor is obsolete. Please use the constructor which takes arrays of EvidenceBase instead.")]
+        [Obsolete(
+            "This constructor is obsolete. Please use the constructor which takes arrays of EvidenceBase instead."
+        )]
         public Evidence(object[] hostEvidence, object[] assemblyEvidence)
         {
             m_evidence = new Dictionary<Type, EvidenceTypeDescriptor>();
@@ -185,7 +197,11 @@ namespace System.Security.Policy
             {
                 foreach (EvidenceBase hostEvidenceObject in hostEvidence)
                 {
-                    AddHostEvidence(hostEvidenceObject, GetEvidenceIndexType(hostEvidenceObject), DuplicateEvidenceAction.Throw);
+                    AddHostEvidence(
+                        hostEvidenceObject,
+                        GetEvidenceIndexType(hostEvidenceObject),
+                        DuplicateEvidenceAction.Throw
+                    );
                 }
             }
 
@@ -193,7 +209,11 @@ namespace System.Security.Policy
             {
                 foreach (EvidenceBase assemblyEvidenceObject in assemblyEvidence)
                 {
-                    AddAssemblyEvidence(assemblyEvidenceObject, GetEvidenceIndexType(assemblyEvidenceObject), DuplicateEvidenceAction.Throw);
+                    AddAssemblyEvidence(
+                        assemblyEvidenceObject,
+                        GetEvidenceIndexType(assemblyEvidenceObject),
+                        DuplicateEvidenceAction.Throw
+                    );
                 }
             }
 
@@ -216,7 +236,10 @@ namespace System.Security.Policy
             // Setup the types of evidence that the CLR can generate for a target as keys in the dictionary
             foreach (Type runtimeEvidenceType in RuntimeEvidenceTypes)
             {
-                BCLDebug.Assert(typeof(EvidenceBase).IsAssignableFrom(runtimeEvidenceType), "All runtime evidence types should be EvidenceBases");
+                BCLDebug.Assert(
+                    typeof(EvidenceBase).IsAssignableFrom(runtimeEvidenceType),
+                    "All runtime evidence types should be EvidenceBases"
+                );
                 m_evidence[runtimeEvidenceType] = null;
             }
 
@@ -249,7 +272,7 @@ namespace System.Security.Policy
                         typeof(Site),
                         typeof(StrongName),
                         typeof(Url),
-                        typeof(Zone)
+                        typeof(Zone),
                     };
 
 #if FEATURE_CAS_POLICY
@@ -258,7 +281,7 @@ namespace System.Security.Policy
                     {
 #pragma warning disable 618 // We need to generate PermissionRequestEvidence in compatibility mode
                         int l = runtimeEvidenceTypes.Length;
-                        Array.Resize(ref runtimeEvidenceTypes, l+1);
+                        Array.Resize(ref runtimeEvidenceTypes, l + 1);
                         runtimeEvidenceTypes[l] = typeof(PermissionRequestEvidence);
 #pragma warning restore 618
                     }
@@ -273,7 +296,7 @@ namespace System.Security.Policy
 
         //
         // #EvidenceLock
-        // 
+        //
         // Evidence synchronization locking wrappers. In the case where the lock has not yet been created,
         // we know that we're in the process of constructing the evidence collection and therefore we can
         // act as though the evidence is locked.  If there is a lock in place, then just delegate back to it.
@@ -327,7 +350,9 @@ namespace System.Security.Policy
         private LockCookie UpgradeToWriterLock()
         {
             Contract.Assert(IsReaderLockHeld);
-            return m_evidenceLock != null ? m_evidenceLock.UpgradeToWriterLock(LockTimeout) : new LockCookie();
+            return m_evidenceLock != null
+                ? m_evidenceLock.UpgradeToWriterLock(LockTimeout)
+                : new LockCookie();
         }
 
         private void ReleaseReaderLock()
@@ -357,7 +382,10 @@ namespace System.Security.Policy
             if (id == null)
                 throw new ArgumentNullException("id");
             if (!id.GetType().IsSerializable)
-                throw new ArgumentException(Environment.GetResourceString("Policy_EvidenceMustBeSerializable"), "id");
+                throw new ArgumentException(
+                    Environment.GetResourceString("Policy_EvidenceMustBeSerializable"),
+                    "id"
+                );
             Contract.EndContractBlock();
 
             if (m_locked)
@@ -379,7 +407,10 @@ namespace System.Security.Policy
             if (id == null)
                 throw new ArgumentNullException("id");
             if (!id.GetType().IsSerializable)
-                throw new ArgumentException(Environment.GetResourceString("Policy_EvidenceMustBeSerializable"), "id");
+                throw new ArgumentException(
+                    Environment.GetResourceString("Policy_EvidenceMustBeSerializable"),
+                    "id"
+                );
             Contract.EndContractBlock();
 
             EvidenceBase evidence = WrapLegacyEvidence(id);
@@ -395,7 +426,8 @@ namespace System.Security.Policy
         ///     evidence if there is already evidence of that type in the assembly list.
         /// </summary>
         [ComVisible(false)]
-        public void AddAssemblyEvidence<T>(T evidence) where T : EvidenceBase
+        public void AddAssemblyEvidence<T>(T evidence)
+            where T : EvidenceBase
         {
             if (evidence == null)
                 throw new ArgumentNullException("evidence");
@@ -413,15 +445,28 @@ namespace System.Security.Policy
             AddAssemblyEvidence(evidence, evidenceType, DuplicateEvidenceAction.Throw);
         }
 
-        private void AddAssemblyEvidence(EvidenceBase evidence, Type evidenceType, DuplicateEvidenceAction duplicateAction)
+        private void AddAssemblyEvidence(
+            EvidenceBase evidence,
+            Type evidenceType,
+            DuplicateEvidenceAction duplicateAction
+        )
         {
-            using (EvidenceLockHolder lockHolder = new EvidenceLockHolder(this, EvidenceLockHolder.LockType.Writer))
+            using (
+                EvidenceLockHolder lockHolder = new EvidenceLockHolder(
+                    this,
+                    EvidenceLockHolder.LockType.Writer
+                )
+            )
             {
                 AddAssemblyEvidenceNoLock(evidence, evidenceType, duplicateAction);
             }
         }
 
-        private void AddAssemblyEvidenceNoLock(EvidenceBase evidence, Type evidenceType, DuplicateEvidenceAction duplicateAction)
+        private void AddAssemblyEvidenceNoLock(
+            EvidenceBase evidence,
+            Type evidenceType,
+            DuplicateEvidenceAction duplicateAction
+        )
         {
             Contract.Assert(IsWriterLockHeld);
             Contract.Assert(evidence != null);
@@ -441,9 +486,11 @@ namespace System.Security.Policy
             }
             else
             {
-                descriptor.AssemblyEvidence = HandleDuplicateEvidence(descriptor.AssemblyEvidence,
-                                                                      evidence,
-                                                                      duplicateAction);
+                descriptor.AssemblyEvidence = HandleDuplicateEvidence(
+                    descriptor.AssemblyEvidence,
+                    evidence,
+                    duplicateAction
+                );
             }
         }
 
@@ -452,7 +499,8 @@ namespace System.Security.Policy
         ///     evidence if there is already evidence of that type in the host list.
         /// </summary>
         [ComVisible(false)]
-        public void AddHostEvidence<T>(T evidence) where T : EvidenceBase
+        public void AddHostEvidence<T>(T evidence)
+            where T : EvidenceBase
         {
             if (evidence == null)
                 throw new ArgumentNullException("evidence");
@@ -471,7 +519,11 @@ namespace System.Security.Policy
         }
 
         [SecuritySafeCritical]
-        private void AddHostEvidence(EvidenceBase evidence, Type evidenceType, DuplicateEvidenceAction duplicateAction)
+        private void AddHostEvidence(
+            EvidenceBase evidence,
+            Type evidenceType,
+            DuplicateEvidenceAction duplicateAction
+        )
         {
             Contract.Assert(evidence != null);
             Contract.Assert(evidenceType != null);
@@ -481,7 +533,12 @@ namespace System.Security.Policy
                 new SecurityPermission(SecurityPermissionFlag.ControlEvidence).Demand();
             }
 
-            using (EvidenceLockHolder lockHolder = new EvidenceLockHolder(this, EvidenceLockHolder.LockType.Writer))
+            using (
+                EvidenceLockHolder lockHolder = new EvidenceLockHolder(
+                    this,
+                    EvidenceLockHolder.LockType.Writer
+                )
+            )
             {
                 AddHostEvidenceNoLock(evidence, evidenceType, duplicateAction);
             }
@@ -491,7 +548,11 @@ namespace System.Security.Policy
         ///     Add evidence to the host supplied evidence collection without acquiring the evidence lock or
         ///     checking to make sure that the caller has permission to bypass locked evidence.
         /// </summary>
-        private void AddHostEvidenceNoLock(EvidenceBase evidence, Type evidenceType, DuplicateEvidenceAction duplicateAction)
+        private void AddHostEvidenceNoLock(
+            EvidenceBase evidence,
+            Type evidenceType,
+            DuplicateEvidenceAction duplicateAction
+        )
         {
             Contract.Assert(IsWriterLockHeld);
             Contract.Assert(evidence != null);
@@ -506,15 +567,17 @@ namespace System.Security.Policy
             }
             else
             {
-                descriptor.HostEvidence = HandleDuplicateEvidence(descriptor.HostEvidence,
-                                                                  evidence,
-                                                                  duplicateAction);
+                descriptor.HostEvidence = HandleDuplicateEvidence(
+                    descriptor.HostEvidence,
+                    evidence,
+                    duplicateAction
+                );
             }
         }
 
         /// <summary>
         ///     Ask the host for the types of evidence that it might provide if it is asked.
-        ///     
+        ///
         ///     This should only be called when setting up the Evidence collection to interact with the
         ///     host, and should not be used once that connection is established and the evidence has been
         ///     made available to user code.
@@ -541,13 +604,21 @@ namespace System.Security.Policy
                     // then ask it what types of evidence it might supply.
                     //
 
-                    if (targetAssembly != null &&
-                        (hsm.Flags & HostSecurityManagerOptions.HostAssemblyEvidence) == HostSecurityManagerOptions.HostAssemblyEvidence)
+                    if (
+                        targetAssembly != null
+                        && (hsm.Flags & HostSecurityManagerOptions.HostAssemblyEvidence)
+                            == HostSecurityManagerOptions.HostAssemblyEvidence
+                    )
                     {
-                        hostSuppliedTypes = hsm.GetHostSuppliedAssemblyEvidenceTypes(targetAssembly);
+                        hostSuppliedTypes = hsm.GetHostSuppliedAssemblyEvidenceTypes(
+                            targetAssembly
+                        );
                     }
-                    else if (targetDomain != null &&
-                             (hsm.Flags & HostSecurityManagerOptions.HostAppDomainEvidence) == HostSecurityManagerOptions.HostAppDomainEvidence)
+                    else if (
+                        targetDomain != null
+                        && (hsm.Flags & HostSecurityManagerOptions.HostAppDomainEvidence)
+                            == HostSecurityManagerOptions.HostAppDomainEvidence
+                    )
                     {
                         hostSuppliedTypes = hsm.GetHostSuppliedAppDomainEvidenceTypes();
                     }
@@ -555,13 +626,16 @@ namespace System.Security.Policy
                     //
                     // Finally, mark the descriptor for each of the types that the host can supply to indicate
                     // we should ask the host to generate them if we're asked.
-                    // 
+                    //
 
                     if (hostSuppliedTypes != null)
                     {
                         foreach (Type hostEvidenceType in hostSuppliedTypes)
                         {
-                            EvidenceTypeDescriptor evidenceDescriptor = GetEvidenceTypeDescriptor(hostEvidenceType, true);
+                            EvidenceTypeDescriptor evidenceDescriptor = GetEvidenceTypeDescriptor(
+                                hostEvidenceType,
+                                true
+                            );
                             evidenceDescriptor.HostCanGenerate = true;
                         }
                     }
@@ -579,16 +653,12 @@ namespace System.Security.Policy
         ///     Set or check to see if the evidence is locked.  Locked evidence cannot have its host supplied
         ///     evidence list be modified without a successful demand for ControlEvidence.  Any code can lock
         ///     evidence, but only code with ControlEvidence may unlock it.
-        ///     
+        ///
         ///     This lock is not the same as the synchronization lock that gates access to the evidence collection.
         /// </summary>
         public bool Locked
         {
-            get
-            {
-                return m_locked;
-            }
-
+            get { return m_locked; }
             [SecuritySafeCritical]
             set
             {
@@ -611,27 +681,37 @@ namespace System.Security.Policy
         internal IRuntimeEvidenceFactory Target
         {
             get { return m_target; }
-
             //
             // There are two retargeting scenarios supported:
-            // 
+            //
             //   1. A PEFileEvidenceFactory is being upgraded to an AssemblyEvidenceFactory and we don't want
             //      to throw away any already generated evidence.
             //   2. A detached evidence collection is being applied to an AppDomain and that domain has a
             //      HostSecurityManager. In that case, we want to attach the target to the AppDomain to
             //      allow the HostSecurityManager to get callbacks for delay generated evidence.
-            // 
+            //
 
             [SecurityCritical]
             set
             {
 #if FEATURE_CAS_POLICY
-                Contract.Assert((m_target != null && m_target is PEFileEvidenceFactory && value != null && value is AssemblyEvidenceFactory) ||
-                                (m_target == null && value != null && value is AppDomainEvidenceFactory),
-                                "Evidence retargeting should only be from PEFile -> Assembly or detached -> AppDomain.");
+                Contract.Assert(
+                    (
+                        m_target != null
+                        && m_target is PEFileEvidenceFactory
+                        && value != null
+                        && value is AssemblyEvidenceFactory
+                    ) || (m_target == null && value != null && value is AppDomainEvidenceFactory),
+                    "Evidence retargeting should only be from PEFile -> Assembly or detached -> AppDomain."
+                );
 #endif // FEATURE_CAS_POLICY
 
-                using (EvidenceLockHolder lockHolder = new EvidenceLockHolder(this, EvidenceLockHolder.LockType.Writer))
+                using (
+                    EvidenceLockHolder lockHolder = new EvidenceLockHolder(
+                        this,
+                        EvidenceLockHolder.LockType.Writer
+                    )
+                )
                 {
                     m_target = value;
 
@@ -674,7 +754,10 @@ namespace System.Security.Policy
         ///     accessing the dictionary directly as it will handle the case where a new descriptor needs
         ///     to be created.
         /// </summary>
-        private EvidenceTypeDescriptor GetEvidenceTypeDescriptor(Type evidenceType, bool addIfNotExist)
+        private EvidenceTypeDescriptor GetEvidenceTypeDescriptor(
+            Type evidenceType,
+            bool addIfNotExist
+        )
         {
             Contract.Assert(IsReaderLockHeld || IsWriterLockHeld);
             Contract.Assert(evidenceType != null);
@@ -721,19 +804,29 @@ namespace System.Security.Policy
         ///     type already existed.  We have different strategies depending on compatibility concerns of the
         ///     calling code.
         /// </summary>
-        private static EvidenceBase HandleDuplicateEvidence(EvidenceBase original,
-                                                            EvidenceBase duplicate,
-                                                            DuplicateEvidenceAction action)
+        private static EvidenceBase HandleDuplicateEvidence(
+            EvidenceBase original,
+            EvidenceBase duplicate,
+            DuplicateEvidenceAction action
+        )
         {
             Contract.Assert(original != null);
             Contract.Assert(duplicate != null);
-            Contract.Assert(original.GetType() == duplicate.GetType() || original.GetType() == typeof(LegacyEvidenceList));
+            Contract.Assert(
+                original.GetType() == duplicate.GetType()
+                    || original.GetType() == typeof(LegacyEvidenceList)
+            );
 
             switch (action)
             {
                 // Throw - duplicate evidence is not allowed (Arrowhead behavior), so throw an exception
                 case DuplicateEvidenceAction.Throw:
-                    throw new InvalidOperationException(Environment.GetResourceString("Policy_DuplicateEvidence", duplicate.GetType().FullName));
+                    throw new InvalidOperationException(
+                        Environment.GetResourceString(
+                            "Policy_DuplicateEvidence",
+                            duplicate.GetType().FullName
+                        )
+                    );
 
                 // SelectNewObject - MergeWithNoDuplicates behavior - the duplicate object wins
                 case DuplicateEvidenceAction.SelectNewObject:
@@ -776,7 +869,7 @@ namespace System.Security.Policy
 
         /// <summary>
         ///     Upwrap evidence stored in a legacy adapter.
-        ///     
+        ///
         ///     This is only necessary for the case where multiple objects derived from EvidenceBase is
         ///     are added via the legacy APIs and are then retrieved via GetHostEvidence. This may occur if
         ///     a legacy application adds CLR supplied evidence types via the old APIs and a new application
@@ -801,7 +894,12 @@ namespace System.Security.Policy
                 return;
             }
 
-            using (EvidenceLockHolder lockHolder = new EvidenceLockHolder(this, EvidenceLockHolder.LockType.Writer))
+            using (
+                EvidenceLockHolder lockHolder = new EvidenceLockHolder(
+                    this,
+                    EvidenceLockHolder.LockType.Writer
+                )
+            )
             {
                 bool checkedLock = false;
                 IEnumerator hostEnumerator = evidence.GetHostEnumerator();
@@ -823,9 +921,11 @@ namespace System.Security.Policy
                     }
 
                     EvidenceBase hostEvidence = WrapLegacyEvidence(hostEnumerator.Current);
-                    AddHostEvidenceNoLock(hostEvidence,
-                                          GetEvidenceIndexType(hostEvidence),
-                                          DuplicateEvidenceAction.Merge);
+                    AddHostEvidenceNoLock(
+                        hostEvidence,
+                        GetEvidenceIndexType(hostEvidence),
+                        DuplicateEvidenceAction.Merge
+                    );
                 }
 
                 // Add each piece of assembly evidence. We don't need to deserialize our copy of the
@@ -834,9 +934,11 @@ namespace System.Security.Policy
                 while (assemblyEnumerator.MoveNext())
                 {
                     EvidenceBase assemblyEvidence = WrapLegacyEvidence(assemblyEnumerator.Current);
-                    AddAssemblyEvidenceNoLock(assemblyEvidence,
-                                              GetEvidenceIndexType(assemblyEvidence),
-                                              DuplicateEvidenceAction.Merge);
+                    AddAssemblyEvidenceNoLock(
+                        assemblyEvidence,
+                        GetEvidenceIndexType(assemblyEvidence),
+                        DuplicateEvidenceAction.Merge
+                    );
                 }
             }
         }
@@ -853,24 +955,33 @@ namespace System.Security.Policy
                 return;
             }
 
-            using (EvidenceLockHolder lockHolder = new EvidenceLockHolder(this, EvidenceLockHolder.LockType.Writer))
+            using (
+                EvidenceLockHolder lockHolder = new EvidenceLockHolder(
+                    this,
+                    EvidenceLockHolder.LockType.Writer
+                )
+            )
             {
                 IEnumerator hostEnumerator = evidence.GetHostEnumerator();
                 while (hostEnumerator.MoveNext())
                 {
                     EvidenceBase hostEvidence = WrapLegacyEvidence(hostEnumerator.Current);
-                    AddHostEvidenceNoLock(hostEvidence,
-                                          GetEvidenceIndexType(hostEvidence),
-                                          DuplicateEvidenceAction.SelectNewObject);
+                    AddHostEvidenceNoLock(
+                        hostEvidence,
+                        GetEvidenceIndexType(hostEvidence),
+                        DuplicateEvidenceAction.SelectNewObject
+                    );
                 }
 
                 IEnumerator assemblyEnumerator = evidence.GetAssemblyEnumerator();
                 while (assemblyEnumerator.MoveNext())
                 {
                     EvidenceBase assemblyEvidence = WrapLegacyEvidence(assemblyEnumerator.Current);
-                    AddAssemblyEvidenceNoLock(assemblyEvidence,
-                                              GetEvidenceIndexType(assemblyEvidence),
-                                              DuplicateEvidenceAction.SelectNewObject);
+                    AddAssemblyEvidenceNoLock(
+                        assemblyEvidence,
+                        GetEvidenceIndexType(assemblyEvidence),
+                        DuplicateEvidenceAction.SelectNewObject
+                    );
                 }
             }
         }
@@ -886,7 +997,12 @@ namespace System.Security.Policy
         [PermissionSet(SecurityAction.Assert, Unrestricted = true)]
         private void OnSerializing(StreamingContext context)
         {
-            using (EvidenceLockHolder lockHolder = new EvidenceLockHolder(this, EvidenceLockHolder.LockType.Reader))
+            using (
+                EvidenceLockHolder lockHolder = new EvidenceLockHolder(
+                    this,
+                    EvidenceLockHolder.LockType.Reader
+                )
+            )
             {
                 // First, force all of the host evidence that might be lazily generated to be created
                 foreach (Type evidenceType in new List<Type>(m_evidence.Keys))
@@ -970,7 +1086,7 @@ namespace System.Security.Policy
 
         /// <summary>
         ///     Load any serialized evidence out of the target assembly into our evidence collection.
-        ///     
+        ///
         ///     We allow entry to this method with only a reader lock held, since most of the time we will
         ///     not need to write to the evidence dictionary. If we haven't yet deserialized the target
         ///     evidence, then we will upgrade to a writer lock at that point.
@@ -998,7 +1114,11 @@ namespace System.Security.Policy
 
                     foreach (EvidenceBase targetEvidence in m_target.GetFactorySuppliedEvidence())
                     {
-                        AddAssemblyEvidenceNoLock(targetEvidence, GetEvidenceIndexType(targetEvidence), DuplicateEvidenceAction.Throw);
+                        AddAssemblyEvidenceNoLock(
+                            targetEvidence,
+                            GetEvidenceIndexType(targetEvidence),
+                            DuplicateEvidenceAction.Throw
+                        );
                     }
                 }
                 finally
@@ -1014,7 +1134,7 @@ namespace System.Security.Policy
         /// <summary>
         ///     Serialize out raw evidence objects which have already been generated, ignoring any evidence
         ///     which might be present but has not yet been created for this assembly.
-        ///     
+        ///
         ///     This is used for indexing into the security policy cache, since we know that once policy is
         ///     resolved, the relevent membership conditions will have checked for any applicable evidence
         ///     and therefore after poliyc resolution this evidence collection will contain any evidence
@@ -1025,10 +1145,16 @@ namespace System.Security.Policy
         {
             try
             {
-                using (EvidenceLockHolder lockHolder = new EvidenceLockHolder(this, EvidenceLockHolder.LockType.Reader))
+                using (
+                    EvidenceLockHolder lockHolder = new EvidenceLockHolder(
+                        this,
+                        EvidenceLockHolder.LockType.Reader
+                    )
+                )
                 {
                     // Filter out any evidence which is not yet generated
-                    Dictionary<Type, EvidenceBase> generatedEvidence = new Dictionary<Type, EvidenceBase>();
+                    Dictionary<Type, EvidenceBase> generatedEvidence =
+                        new Dictionary<Type, EvidenceBase>();
                     foreach (KeyValuePair<Type, EvidenceTypeDescriptor> evidenceType in m_evidence)
                     {
                         if (evidenceType.Value != null && evidenceType.Value.HostEvidence != null)
@@ -1058,9 +1184,11 @@ namespace System.Security.Policy
         // ICollection implementation.  All ICollection interface members are potentially much more
         // expensive in Arrowhead then they were downlevel.  They should not be used if the standard Get and
         // Add methods will work instead.
-        // 
+        //
 
-        [Obsolete("Evidence should not be treated as an ICollection. Please use the GetHostEnumerator and GetAssemblyEnumerator methods rather than using CopyTo.")]
+        [Obsolete(
+            "Evidence should not be treated as an ICollection. Please use the GetHostEnumerator and GetAssemblyEnumerator methods rather than using CopyTo."
+        )]
         public void CopyTo(Array array, int index)
         {
             if (array == null)
@@ -1088,7 +1216,12 @@ namespace System.Security.Policy
 
         public IEnumerator GetHostEnumerator()
         {
-            using (EvidenceLockHolder lockHolder = new EvidenceLockHolder(this, EvidenceLockHolder.LockType.Reader))
+            using (
+                EvidenceLockHolder lockHolder = new EvidenceLockHolder(
+                    this,
+                    EvidenceLockHolder.LockType.Reader
+                )
+            )
             {
                 return new EvidenceEnumerator(this, EvidenceEnumerator.Category.Host);
             }
@@ -1096,7 +1229,12 @@ namespace System.Security.Policy
 
         public IEnumerator GetAssemblyEnumerator()
         {
-            using (EvidenceLockHolder lockHolder = new EvidenceLockHolder(this, EvidenceLockHolder.LockType.Reader))
+            using (
+                EvidenceLockHolder lockHolder = new EvidenceLockHolder(
+                    this,
+                    EvidenceLockHolder.LockType.Reader
+                )
+            )
             {
                 DeserializeTargetEvidence();
                 return new EvidenceEnumerator(this, EvidenceEnumerator.Category.Assembly);
@@ -1123,12 +1261,22 @@ namespace System.Security.Policy
             return new RawEvidenceEnumerator(this, new List<Type>(m_evidence.Keys), true);
         }
 
-        [Obsolete("GetEnumerator is obsolete. Please use GetAssemblyEnumerator and GetHostEnumerator instead.")]
+        [Obsolete(
+            "GetEnumerator is obsolete. Please use GetAssemblyEnumerator and GetHostEnumerator instead."
+        )]
         public IEnumerator GetEnumerator()
         {
-            using (EvidenceLockHolder lockHolder = new EvidenceLockHolder(this, EvidenceLockHolder.LockType.Reader))
+            using (
+                EvidenceLockHolder lockHolder = new EvidenceLockHolder(
+                    this,
+                    EvidenceLockHolder.LockType.Reader
+                )
+            )
             {
-                return new EvidenceEnumerator(this, EvidenceEnumerator.Category.Host | EvidenceEnumerator.Category.Assembly);
+                return new EvidenceEnumerator(
+                    this,
+                    EvidenceEnumerator.Category.Host | EvidenceEnumerator.Category.Assembly
+                );
             }
         }
 
@@ -1136,7 +1284,8 @@ namespace System.Security.Policy
         ///     Get a specific type of assembly supplied evidence
         /// </summary>
         [ComVisible(false)]
-        public T GetAssemblyEvidence<T>() where T : EvidenceBase
+        public T GetAssemblyEvidence<T>()
+            where T : EvidenceBase
         {
             return UnwrapEvidence(GetAssemblyEvidence(typeof(T))) as T;
         }
@@ -1145,7 +1294,12 @@ namespace System.Security.Policy
         {
             Contract.Assert(type != null);
 
-            using (EvidenceLockHolder lockHolder = new EvidenceLockHolder(this, EvidenceLockHolder.LockType.Reader))
+            using (
+                EvidenceLockHolder lockHolder = new EvidenceLockHolder(
+                    this,
+                    EvidenceLockHolder.LockType.Reader
+                )
+            )
             {
                 return GetAssemblyEvidenceNoLock(type);
             }
@@ -1170,7 +1324,8 @@ namespace System.Security.Policy
         ///     Get a specific type of host supplied evidence
         /// </summary>
         [ComVisible(false)]
-        public T GetHostEvidence<T>() where T : EvidenceBase
+        public T GetHostEvidence<T>()
+            where T : EvidenceBase
         {
             return UnwrapEvidence(GetHostEvidence(typeof(T))) as T;
         }
@@ -1179,7 +1334,8 @@ namespace System.Security.Policy
         ///     Get a specific type of evidence from the host which may not have been verified yet.  If the
         ///     evidence was not verified, then don't mark it as being used yet.
         /// </summary>
-        internal T GetDelayEvaluatedHostEvidence<T>() where T : EvidenceBase, IDelayEvaluatedEvidence
+        internal T GetDelayEvaluatedHostEvidence<T>()
+            where T : EvidenceBase, IDelayEvaluatedEvidence
         {
             return UnwrapEvidence(GetHostEvidence(typeof(T), false)) as T;
         }
@@ -1196,7 +1352,12 @@ namespace System.Security.Policy
         {
             Contract.Assert(type != null);
 
-            using (EvidenceLockHolder lockHolder = new EvidenceLockHolder(this, EvidenceLockHolder.LockType.Reader))
+            using (
+                EvidenceLockHolder lockHolder = new EvidenceLockHolder(
+                    this,
+                    EvidenceLockHolder.LockType.Reader
+                )
+            )
             {
                 EvidenceBase evidence = GetHostEvidenceNoLock(type);
 
@@ -1217,7 +1378,7 @@ namespace System.Security.Policy
         ///     Get host supplied evidence from the collection
         ///
         ///     We attempt to find host evdience in the following order:
-        ///     
+        ///
         ///       1. Already generated or explicitly supplied evidence
         ///       2. Evidence supplied by the CLR host
         ///       3. Evidence supplied by the CLR itself
@@ -1253,14 +1414,17 @@ namespace System.Security.Policy
                     // generate it now.
                     descriptor.Generated = true;
 
-                    EvidenceBase generatedEvidence = GenerateHostEvidence(type, descriptor.HostCanGenerate);
+                    EvidenceBase generatedEvidence = GenerateHostEvidence(
+                        type,
+                        descriptor.HostCanGenerate
+                    );
                     if (generatedEvidence != null)
                     {
                         descriptor.HostEvidence = generatedEvidence;
 
                         //
                         // #BackpatchGeneratedEvidence
-                        // 
+                        //
                         // If we were cloned from another evidence collection propigate any generated evidence
                         // back to the original collection.  Since Assembly and AppDomain both clone their
                         // evidence before giving it to users, this prevents us from having to regenerate
@@ -1269,22 +1433,31 @@ namespace System.Security.Policy
                         // this type of evidence removed from its collection.
                         //
 
-                        Evidence cloneOrigin = m_cloneOrigin != null ? m_cloneOrigin.Target as Evidence : null;
+                        Evidence cloneOrigin =
+                            m_cloneOrigin != null ? m_cloneOrigin.Target as Evidence : null;
                         if (cloneOrigin != null)
                         {
-                            BCLDebug.Assert(cloneOrigin.Target != null && cloneOrigin.Target == Target,
-                                            "Attempt to backpatch evidence to a collection with a different target.");
+                            BCLDebug.Assert(
+                                cloneOrigin.Target != null && cloneOrigin.Target == Target,
+                                "Attempt to backpatch evidence to a collection with a different target."
+                            );
 
-                            using (EvidenceLockHolder cloneLockHolder = new EvidenceLockHolder(cloneOrigin, EvidenceLockHolder.LockType.Writer))
+                            using (
+                                EvidenceLockHolder cloneLockHolder = new EvidenceLockHolder(
+                                    cloneOrigin,
+                                    EvidenceLockHolder.LockType.Writer
+                                )
+                            )
                             {
-                                EvidenceTypeDescriptor cloneDescriptor = cloneOrigin.GetEvidenceTypeDescriptor(type);
+                                EvidenceTypeDescriptor cloneDescriptor =
+                                    cloneOrigin.GetEvidenceTypeDescriptor(type);
                                 if (cloneDescriptor != null && cloneDescriptor.HostEvidence == null)
                                 {
-                                    cloneDescriptor.HostEvidence = generatedEvidence.Clone() as EvidenceBase;
+                                    cloneDescriptor.HostEvidence =
+                                        generatedEvidence.Clone() as EvidenceBase;
                                 }
                             }
                         }
-
                     }
 
                     return generatedEvidence;
@@ -1314,11 +1487,16 @@ namespace System.Security.Policy
                 EvidenceBase hostEvidence = null;
                 if (targetDomain != null)
                 {
-                    hostEvidence = AppDomain.CurrentDomain.HostSecurityManager.GenerateAppDomainEvidence(type);
+                    hostEvidence =
+                        AppDomain.CurrentDomain.HostSecurityManager.GenerateAppDomainEvidence(type);
                 }
                 else if (targetAssembly != null)
                 {
-                    hostEvidence = AppDomain.CurrentDomain.HostSecurityManager.GenerateAssemblyEvidence(type, targetAssembly);
+                    hostEvidence =
+                        AppDomain.CurrentDomain.HostSecurityManager.GenerateAssemblyEvidence(
+                            type,
+                            targetAssembly
+                        );
                 }
 
                 // If the host generated the evidence, verify that it generated the evidence we expected
@@ -1327,11 +1505,20 @@ namespace System.Security.Policy
                 {
                     if (!type.IsAssignableFrom(hostEvidence.GetType()))
                     {
-                        string hostType = AppDomain.CurrentDomain.HostSecurityManager.GetType().FullName;
+                        string hostType = AppDomain
+                            .CurrentDomain.HostSecurityManager.GetType()
+                            .FullName;
                         string recievedType = hostEvidence.GetType().FullName;
                         string requestedType = type.FullName;
 
-                        throw new InvalidOperationException(Environment.GetResourceString("Policy_IncorrectHostEvidence", hostType, recievedType, requestedType));
+                        throw new InvalidOperationException(
+                            Environment.GetResourceString(
+                                "Policy_IncorrectHostEvidence",
+                                hostType,
+                                recievedType,
+                                requestedType
+                            )
+                        );
                     }
 
                     return hostEvidence;
@@ -1343,7 +1530,9 @@ namespace System.Security.Policy
             return m_target.GenerateEvidence(type);
         }
 
-        [Obsolete("Evidence should not be treated as an ICollection. Please use GetHostEnumerator and GetAssemblyEnumerator to iterate over the evidence to collect a count.")]
+        [Obsolete(
+            "Evidence should not be treated as an ICollection. Please use GetHostEnumerator and GetAssemblyEnumerator to iterate over the evidence to collect a count."
+        )]
         public int Count
         {
             get
@@ -1377,7 +1566,12 @@ namespace System.Security.Policy
             {
                 int count = 0;
 
-                using (EvidenceLockHolder lockHolder = new EvidenceLockHolder(this, EvidenceLockHolder.LockType.Reader))
+                using (
+                    EvidenceLockHolder lockHolder = new EvidenceLockHolder(
+                        this,
+                        EvidenceLockHolder.LockType.Reader
+                    )
+                )
                 {
                     foreach (Type evidenceType in new List<Type>(m_evidence.Keys))
                     {
@@ -1433,7 +1627,12 @@ namespace System.Security.Policy
                 new SecurityPermission(SecurityPermissionFlag.ControlEvidence).Demand();
             }
 
-            using (EvidenceLockHolder lockHolder = new EvidenceLockHolder(this, EvidenceLockHolder.LockType.Writer))
+            using (
+                EvidenceLockHolder lockHolder = new EvidenceLockHolder(
+                    this,
+                    EvidenceLockHolder.LockType.Writer
+                )
+            )
             {
                 ++m_version;
                 m_evidence.Clear();
@@ -1448,14 +1647,19 @@ namespace System.Security.Policy
                 throw new ArgumentNullException("t");
             Contract.EndContractBlock();
 
-            using (EvidenceLockHolder lockHolder = new EvidenceLockHolder(this, EvidenceLockHolder.LockType.Writer))
+            using (
+                EvidenceLockHolder lockHolder = new EvidenceLockHolder(
+                    this,
+                    EvidenceLockHolder.LockType.Writer
+                )
+            )
             {
                 EvidenceTypeDescriptor descriptor = GetEvidenceTypeDescriptor(t);
                 if (descriptor != null)
                 {
                     ++m_version;
 
-                    // If we've locked this evidence collection, we need to do the lock check in the case that 
+                    // If we've locked this evidence collection, we need to do the lock check in the case that
                     // either we have host evidence, or that the host might generate it, since removing the
                     // evidence will cause us to bypass the host's ability to ever generate the evidence.
                     if (Locked && (descriptor.HostEvidence != null || descriptor.HostCanGenerate))
@@ -1474,19 +1678,26 @@ namespace System.Security.Policy
         /// </summary>
         internal void MarkAllEvidenceAsUsed()
         {
-            using (EvidenceLockHolder lockHolder = new EvidenceLockHolder(this, EvidenceLockHolder.LockType.Reader))
+            using (
+                EvidenceLockHolder lockHolder = new EvidenceLockHolder(
+                    this,
+                    EvidenceLockHolder.LockType.Reader
+                )
+            )
             {
                 foreach (KeyValuePair<Type, EvidenceTypeDescriptor> evidenceType in m_evidence)
                 {
                     if (evidenceType.Value != null)
                     {
-                        IDelayEvaluatedEvidence hostEvidence = evidenceType.Value.HostEvidence as IDelayEvaluatedEvidence;
+                        IDelayEvaluatedEvidence hostEvidence =
+                            evidenceType.Value.HostEvidence as IDelayEvaluatedEvidence;
                         if (hostEvidence != null)
                         {
                             hostEvidence.MarkUsed();
                         }
 
-                        IDelayEvaluatedEvidence assemblyEvidence = evidenceType.Value.AssemblyEvidence as IDelayEvaluatedEvidence;
+                        IDelayEvaluatedEvidence assemblyEvidence =
+                            evidenceType.Value.AssemblyEvidence as IDelayEvaluatedEvidence;
                         if (assemblyEvidence != null)
                         {
                             assemblyEvidence.MarkUsed();
@@ -1500,7 +1711,7 @@ namespace System.Security.Policy
         /// <summary>
         ///     Determine if delay evaluated strong name evidence is contained in this collection, and if so
         ///     if it was used during policy evaluation.
-        ///     
+        ///
         ///     This method is called from the VM in SecurityPolicy::WasStrongNameEvidenceUsed
         ///     This class should be used as an adapter layer to allow the public facing EvidenceEnumerator to
         ///     be able to get the evidence values out of an Evidence class.  It is tightly coupled with the
@@ -1508,12 +1719,20 @@ namespace System.Security.Policy
         /// </summary>
         private bool WasStrongNameEvidenceUsed()
         {
-            using (EvidenceLockHolder lockHolder = new EvidenceLockHolder(this, EvidenceLockHolder.LockType.Reader))
+            using (
+                EvidenceLockHolder lockHolder = new EvidenceLockHolder(
+                    this,
+                    EvidenceLockHolder.LockType.Reader
+                )
+            )
             {
-                EvidenceTypeDescriptor snTypeDescriptor = GetEvidenceTypeDescriptor(typeof(StrongName));
+                EvidenceTypeDescriptor snTypeDescriptor = GetEvidenceTypeDescriptor(
+                    typeof(StrongName)
+                );
                 if (snTypeDescriptor != null)
                 {
-                    IDelayEvaluatedEvidence snEvidence = snTypeDescriptor.HostEvidence as IDelayEvaluatedEvidence;
+                    IDelayEvaluatedEvidence snEvidence =
+                        snTypeDescriptor.HostEvidence as IDelayEvaluatedEvidence;
                     return snEvidence != null && snEvidence.WasUsed;
                 }
 
@@ -1533,7 +1752,7 @@ namespace System.Security.Policy
             public enum LockType
             {
                 Reader,
-                Writer
+                Writer,
             }
 
             public EvidenceLockHolder(Evidence target, LockType lockType)
@@ -1597,7 +1816,7 @@ namespace System.Security.Policy
         ///     Enumerator that iterates directly over the evidence type map, returning back the evidence objects
         ///     that are contained in it.  This enumerator will generate any lazy evaluated evidence it finds,
         ///     but it does not attempt to deal with legacy evidence adapters.
-        ///     
+        ///
         ///     This class should be used as an adapter layer to allow the public facing EvidenceEnumerator to
         ///     be able to get the evidence values out of an Evidence class.  It is tightly coupled with the
         ///     internal data structures holding the evidence objects in the Evidence class.
@@ -1605,7 +1824,7 @@ namespace System.Security.Policy
         internal sealed class RawEvidenceEnumerator : IEnumerator<EvidenceBase>
         {
             private Evidence m_evidence;
-            private bool m_hostEnumerator;      // true to enumerate host evidence, false to enumerate assembly evidence
+            private bool m_hostEnumerator; // true to enumerate host evidence, false to enumerate assembly evidence
             private uint m_evidenceVersion;
 
             private Type[] m_evidenceTypes;
@@ -1614,7 +1833,11 @@ namespace System.Security.Policy
 
             private static volatile List<Type> s_expensiveEvidence;
 
-            public RawEvidenceEnumerator(Evidence evidence, IEnumerable<Type> evidenceTypes, bool hostEnumerator)
+            public RawEvidenceEnumerator(
+                Evidence evidence,
+                IEnumerable<Type> evidenceTypes,
+                bool hostEnumerator
+            )
             {
                 Contract.Assert(evidence != null);
                 Contract.Assert(evidenceTypes != null);
@@ -1632,7 +1855,9 @@ namespace System.Security.Policy
                 get
                 {
                     if (m_evidence.m_version != m_evidenceVersion)
-                        throw new InvalidOperationException(Environment.GetResourceString("InvalidOperation_EnumFailedVersion"));
+                        throw new InvalidOperationException(
+                            Environment.GetResourceString("InvalidOperation_EnumFailedVersion")
+                        );
 
                     return m_currentEvidence;
                 }
@@ -1643,7 +1868,9 @@ namespace System.Security.Policy
                 get
                 {
                     if (m_evidence.m_version != m_evidenceVersion)
-                        throw new InvalidOperationException(Environment.GetResourceString("InvalidOperation_EnumFailedVersion"));
+                        throw new InvalidOperationException(
+                            Environment.GetResourceString("InvalidOperation_EnumFailedVersion")
+                        );
 
                     return m_currentEvidence;
                 }
@@ -1669,8 +1896,10 @@ namespace System.Security.Policy
                         List<Type> runtimeTypes = new List<Type>(Evidence.RuntimeEvidenceTypes);
                         foreach (Type expensiveType in s_expensiveEvidence)
                         {
-                            BCLDebug.Assert(runtimeTypes.Contains(expensiveType),
-                                            "Evidence type not generated by the runtime found in expensive evidence type list");
+                            BCLDebug.Assert(
+                                runtimeTypes.Contains(expensiveType),
+                                "Evidence type not generated by the runtime found in expensive evidence type list"
+                            );
                         }
 #endif // _DEBUG
                     }
@@ -1687,9 +1916,11 @@ namespace System.Security.Policy
             /// <summary>
             ///     Generate the array of types of evidence that could have values for
             /// </summary>
-            private static Type[] GenerateEvidenceTypes(Evidence evidence,
-                                                        IEnumerable<Type> evidenceTypes,
-                                                        bool hostEvidence)
+            private static Type[] GenerateEvidenceTypes(
+                Evidence evidence,
+                IEnumerable<Type> evidenceTypes,
+                bool hostEvidence
+            )
             {
                 Contract.Assert(evidence != null);
                 Contract.Assert(evidenceTypes != null);
@@ -1699,7 +1930,7 @@ namespace System.Security.Policy
                 //   1. Evidence which has already been generated
                 //   2. Evidence which is relatively inexpensive to generate
                 //   3. Evidence which is expensive to generate.
-                //   
+                //
                 // This allows us to be as efficient as possible in case the user of the enumerator stops the
                 // enumeration before we step up to the next more expensive category.
                 //
@@ -1713,11 +1944,14 @@ namespace System.Security.Policy
                 // evidenceTypes iterates over.
                 foreach (Type evidenceType in evidenceTypes)
                 {
-                    EvidenceTypeDescriptor descriptor = evidence.GetEvidenceTypeDescriptor(evidenceType);
+                    EvidenceTypeDescriptor descriptor = evidence.GetEvidenceTypeDescriptor(
+                        evidenceType
+                    );
                     BCLDebug.Assert(descriptor != null, "descriptor != null");
 
-                    bool alreadyGenerated = (hostEvidence && descriptor.HostEvidence != null) ||
-                                            (!hostEvidence && descriptor.AssemblyEvidence != null);
+                    bool alreadyGenerated =
+                        (hostEvidence && descriptor.HostEvidence != null)
+                        || (!hostEvidence && descriptor.AssemblyEvidence != null);
 
                     if (alreadyGenerated)
                     {
@@ -1733,10 +1967,15 @@ namespace System.Security.Policy
                     }
                 }
 
-                Type[] enumerationTypes = new Type[alreadyGeneratedList.Count + inexpensiveList.Count + expensiveList.Count];
+                Type[] enumerationTypes = new Type[
+                    alreadyGeneratedList.Count + inexpensiveList.Count + expensiveList.Count
+                ];
                 alreadyGeneratedList.CopyTo(enumerationTypes, 0);
                 inexpensiveList.CopyTo(enumerationTypes, alreadyGeneratedList.Count);
-                expensiveList.CopyTo(enumerationTypes, alreadyGeneratedList.Count + inexpensiveList.Count);
+                expensiveList.CopyTo(
+                    enumerationTypes,
+                    alreadyGeneratedList.Count + inexpensiveList.Count
+                );
 
                 return enumerationTypes;
             }
@@ -1744,10 +1983,17 @@ namespace System.Security.Policy
             [SecuritySafeCritical]
             public bool MoveNext()
             {
-                using (EvidenceLockHolder lockHolder = new EvidenceLockHolder(m_evidence, EvidenceLockHolder.LockType.Reader))
+                using (
+                    EvidenceLockHolder lockHolder = new EvidenceLockHolder(
+                        m_evidence,
+                        EvidenceLockHolder.LockType.Reader
+                    )
+                )
                 {
                     if (m_evidence.m_version != m_evidenceVersion)
-                        throw new InvalidOperationException(Environment.GetResourceString("InvalidOperation_EnumFailedVersion"));
+                        throw new InvalidOperationException(
+                            Environment.GetResourceString("InvalidOperation_EnumFailedVersion")
+                        );
 
                     m_currentEvidence = null;
 
@@ -1761,15 +2007,18 @@ namespace System.Security.Policy
                         {
                             if (m_hostEnumerator)
                             {
-                                m_currentEvidence = m_evidence.GetHostEvidenceNoLock(m_evidenceTypes[m_typeIndex]);
+                                m_currentEvidence = m_evidence.GetHostEvidenceNoLock(
+                                    m_evidenceTypes[m_typeIndex]
+                                );
                             }
                             else
                             {
-                                m_currentEvidence = m_evidence.GetAssemblyEvidenceNoLock(m_evidenceTypes[m_typeIndex]);
+                                m_currentEvidence = m_evidence.GetAssemblyEvidenceNoLock(
+                                    m_evidenceTypes[m_typeIndex]
+                                );
                             }
                         }
-                    }
-                    while (m_typeIndex < m_evidenceTypes.Length && m_currentEvidence == null);
+                    } while (m_typeIndex < m_evidenceTypes.Length && m_currentEvidence == null);
                 }
 
                 return m_currentEvidence != null;
@@ -1778,7 +2027,9 @@ namespace System.Security.Policy
             public void Reset()
             {
                 if (m_evidence.m_version != m_evidenceVersion)
-                    throw new InvalidOperationException(Environment.GetResourceString("InvalidOperation_EnumFailedVersion"));
+                    throw new InvalidOperationException(
+                        Environment.GetResourceString("InvalidOperation_EnumFailedVersion")
+                    );
 
                 m_typeIndex = -1;
                 m_currentEvidence = null;
@@ -1796,8 +2047,8 @@ namespace System.Security.Policy
             [Flags]
             internal enum Category
             {
-                Host = 0x1,     // Enumerate only host supplied evidence
-                Assembly = 0x2      // Enumerate only assembly supplied evidence
+                Host = 0x1, // Enumerate only host supplied evidence
+                Assembly = 0x2, // Enumerate only assembly supplied evidence
             }
 
             internal EvidenceEnumerator(Evidence evidence, Category category)
@@ -1828,9 +2079,10 @@ namespace System.Security.Policy
                     // If we've found an adapter for legacy evidence, we need to unwrap it for it to be the
                     // current enumerator's value.  For wrapped evidence, this is a simple unwrap, for a list of
                     // evidence, we need to make that the current enumerator and get its first value.
-                    // 
+                    //
 
-                    LegacyEvidenceWrapper legacyWrapper = currentEnumerator.Current as LegacyEvidenceWrapper;
+                    LegacyEvidenceWrapper legacyWrapper =
+                        currentEnumerator.Current as LegacyEvidenceWrapper;
                     LegacyEvidenceList legacyList = currentEnumerator.Current as LegacyEvidenceList;
 
                     if (legacyWrapper != null)
@@ -1866,15 +2118,17 @@ namespace System.Security.Policy
 
             private IEnumerator CurrentEnumerator
             {
-                get
-                {
-                    return m_enumerators.Count > 0 ? m_enumerators.Peek() as IEnumerator : null;
-                }
+                get { return m_enumerators.Count > 0 ? m_enumerators.Peek() as IEnumerator : null; }
             }
 
             public void Reset()
             {
-                using (EvidenceLockHolder lockHolder = new EvidenceLockHolder(m_evidence, EvidenceLockHolder.LockType.Reader))
+                using (
+                    EvidenceLockHolder lockHolder = new EvidenceLockHolder(
+                        m_evidence,
+                        EvidenceLockHolder.LockType.Reader
+                    )
+                )
                 {
                     ResetNoLock();
                 }

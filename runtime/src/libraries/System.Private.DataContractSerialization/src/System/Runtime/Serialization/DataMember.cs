@@ -17,9 +17,23 @@ namespace System.Runtime.Serialization.DataContracts
             _helper = new CriticalHelper(memberInfo);
         }
 
-        internal DataMember(DataContract memberTypeContract, string name, bool isNullable, bool isRequired, bool emitDefaultValue, long order)
+        internal DataMember(
+            DataContract memberTypeContract,
+            string name,
+            bool isNullable,
+            bool isRequired,
+            bool emitDefaultValue,
+            long order
+        )
         {
-            _helper = new CriticalHelper(memberTypeContract, name, isNullable, isRequired, emitDefaultValue, order);
+            _helper = new CriticalHelper(
+                memberTypeContract,
+                name,
+                isNullable,
+                isRequired,
+                emitDefaultValue,
+                order
+            );
         }
 
         internal MemberInfo MemberInfo => _helper.MemberInfo;
@@ -89,10 +103,12 @@ namespace System.Runtime.Serialization.DataContracts
         }
 
         private FastInvokerBuilder.Getter? _getter;
-        internal FastInvokerBuilder.Getter Getter => _getter ??= FastInvokerBuilder.CreateGetter(MemberInfo);
+        internal FastInvokerBuilder.Getter Getter =>
+            _getter ??= FastInvokerBuilder.CreateGetter(MemberInfo);
 
         private FastInvokerBuilder.Setter? _setter;
-        internal FastInvokerBuilder.Setter Setter => _setter ??= FastInvokerBuilder.CreateSetter(MemberInfo);
+        internal FastInvokerBuilder.Setter Setter =>
+            _setter ??= FastInvokerBuilder.CreateSetter(MemberInfo);
 
         private sealed class CriticalHelper
         {
@@ -115,7 +131,14 @@ namespace System.Runtime.Serialization.DataContracts
                 _memberPrimitiveContract = PrimitiveDataContract.NullContract;
             }
 
-            internal CriticalHelper(DataContract memberTypeContract, string name, bool isNullable, bool isRequired, bool emitDefaultValue, long order)
+            internal CriticalHelper(
+                DataContract memberTypeContract,
+                string name,
+                bool isNullable,
+                bool isRequired,
+                bool emitDefaultValue,
+                long order
+            )
             {
                 _memberTypeContract = memberTypeContract;
                 _name = name;
@@ -192,7 +215,11 @@ namespace System.Runtime.Serialization.DataContracts
                     {
                         if (IsGetOnlyCollection)
                         {
-                            _memberTypeContract = DataContract.GetGetOnlyCollectionDataContract(DataContract.GetId(MemberType.TypeHandle), MemberType.TypeHandle, MemberType);
+                            _memberTypeContract = DataContract.GetGetOnlyCollectionDataContract(
+                                DataContract.GetId(MemberType.TypeHandle),
+                                MemberType.TypeHandle,
+                                MemberType
+                            );
                         }
                         else
                         {
@@ -202,10 +229,7 @@ namespace System.Runtime.Serialization.DataContracts
 
                     return _memberTypeContract;
                 }
-                set
-                {
-                    _memberTypeContract = value;
-                }
+                set { _memberTypeContract = value; }
             }
 
             internal bool HasConflictingNameAndType
@@ -230,7 +254,9 @@ namespace System.Runtime.Serialization.DataContracts
                 {
                     if (_memberPrimitiveContract == PrimitiveDataContract.NullContract)
                     {
-                        _memberPrimitiveContract = PrimitiveDataContract.GetPrimitiveDataContract(MemberType);
+                        _memberPrimitiveContract = PrimitiveDataContract.GetPrimitiveDataContract(
+                            MemberType
+                        );
                     }
 
                     return _memberPrimitiveContract;
@@ -257,7 +283,8 @@ namespace System.Runtime.Serialization.DataContracts
                 MethodInfo? getMethod = property.GetMethod;
                 if (getMethod != null)
                 {
-                    return DataContract.MethodRequiresMemberAccess(getMethod) || !DataContract.IsTypeVisible(property.PropertyType);
+                    return DataContract.MethodRequiresMemberAccess(getMethod)
+                        || !DataContract.IsTypeVisible(property.PropertyType);
                 }
             }
             return false;
@@ -282,7 +309,8 @@ namespace System.Runtime.Serialization.DataContracts
                 MethodInfo? setMethod = property.SetMethod;
                 if (setMethod != null)
                 {
-                    return DataContract.MethodRequiresMemberAccess(setMethod) || !DataContract.IsTypeVisible(property.PropertyType);
+                    return DataContract.MethodRequiresMemberAccess(setMethod)
+                        || !DataContract.IsTypeVisible(property.PropertyType);
                 }
             }
             return false;
@@ -290,15 +318,23 @@ namespace System.Runtime.Serialization.DataContracts
 
         [RequiresDynamicCode(DataContract.SerializerAOTWarning)]
         [RequiresUnreferencedCode(DataContract.SerializerTrimmerWarning)]
-        internal DataMember BindGenericParameters(DataContract[] paramContracts, Dictionary<DataContract, DataContract>? boundContracts = null)
+        internal DataMember BindGenericParameters(
+            DataContract[] paramContracts,
+            Dictionary<DataContract, DataContract>? boundContracts = null
+        )
         {
-            DataContract memberTypeContract = MemberTypeContract.BindGenericParameters(paramContracts, boundContracts);
-            DataMember boundDataMember = new DataMember(memberTypeContract,
+            DataContract memberTypeContract = MemberTypeContract.BindGenericParameters(
+                paramContracts,
+                boundContracts
+            );
+            DataMember boundDataMember = new DataMember(
+                memberTypeContract,
                 Name,
                 !memberTypeContract.IsValueType,
                 IsRequired,
                 EmitDefaultValue,
-                Order);
+                Order
+            );
             return boundDataMember;
         }
 
@@ -312,13 +348,20 @@ namespace System.Runtime.Serialization.DataContracts
             if (other is DataMember dataMember)
             {
                 // Note: comparison does not use Order hint since it influences element order but does not specify exact order
-                bool thisIsNullable = (MemberTypeContract == null) ? false : !MemberTypeContract.IsValueType;
-                bool dataMemberIsNullable = (dataMember.MemberTypeContract == null) ? false : !dataMember.MemberTypeContract.IsValueType;
-                return (Name == dataMember.Name
-                        && (IsNullable || thisIsNullable) == (dataMember.IsNullable || dataMemberIsNullable)
-                        && IsRequired == dataMember.IsRequired
-                        && EmitDefaultValue == dataMember.EmitDefaultValue
-                        && MemberTypeContract!.Equals(dataMember.MemberTypeContract, checkedContracts));
+                bool thisIsNullable =
+                    (MemberTypeContract == null) ? false : !MemberTypeContract.IsValueType;
+                bool dataMemberIsNullable =
+                    (dataMember.MemberTypeContract == null)
+                        ? false
+                        : !dataMember.MemberTypeContract.IsValueType;
+                return (
+                    Name == dataMember.Name
+                    && (IsNullable || thisIsNullable)
+                        == (dataMember.IsNullable || dataMemberIsNullable)
+                    && IsRequired == dataMember.IsRequired
+                    && EmitDefaultValue == dataMember.EmitDefaultValue
+                    && MemberTypeContract!.Equals(dataMember.MemberTypeContract, checkedContracts)
+                );
             }
             return false;
         }

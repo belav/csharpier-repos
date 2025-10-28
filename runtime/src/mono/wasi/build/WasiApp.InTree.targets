@@ -3,8 +3,7 @@
   <UsingTask TaskName="MonoAOTCompiler" AssemblyFile="$(MonoAOTCompilerTasksAssemblyPath)" />
   <UsingTask TaskName="RuntimeConfigParserTask" AssemblyFile="$(MonoTargetsTasksAssemblyPath)" />
 
-  <!-- TODO: this breaks runtime tests on Helix due to the file not being there for some reason. Once this is fixed we can remove the UpdateRuntimePack target here -->
-  <!--<Import Project="$(RepositoryEngineeringDir)targetingpacks.targets" Condition="'$(TargetingpacksTargetsImported)' != 'true'"/>-->
+  <!-- TODO: this breaks runtime tests on Helix due to the file not being there for some reason. Once this is fixed we can remove the UpdateRuntimePack target here --><!--<Import Project="$(RepositoryEngineeringDir)targetingpacks.targets" Condition="'$(TargetingpacksTargetsImported)' != 'true'"/>-->
   <Import Project="$(MSBuildThisFileDirectory)WasiApp.targets" />
 
   <!-- FIXME: use proper dependency -->
@@ -13,16 +12,19 @@
       <_WasmMainJSFileName>$([System.IO.Path]::GetFileName('$(WasmMainJSPath)'))</_WasmMainJSFileName>
     </PropertyGroup>
     <ItemGroup>
-        <HostConfig Include="v8" Host="v8" js-path="$(_WasmMainJSFileName)" />
-        <HostConfig Include="node" Host="nodejs" js-path="$(_WasmMainJSFileName)" />
-        <HostConfig Include="browser" Host="browser" html-path="index.html" />
+      <HostConfig Include="v8" Host="v8" js-path="$(_WasmMainJSFileName)" />
+      <HostConfig Include="node" Host="nodejs" js-path="$(_WasmMainJSFileName)" />
+      <HostConfig Include="browser" Host="browser" html-path="index.html" />
     </ItemGroup>
   </Target>
 
   <Target Name="UpdateRuntimePackToAddNewRID" BeforeTargets="ProcessFrameworkReferences">
     <Message Text="KnownRuntimePack: %(KnownRuntimePack.Identity), %(KnownRuntimePack.RuntimePackLabels), %(KnownRuntimePack.RuntimePackRuntimeIdentifiers)" />
     <ItemGroup>
-      <KnownRuntimePack Condition="%(RuntimePackLabels) == 'Mono'" RuntimePackRuntimeIdentifiers="%(RuntimePackRuntimeIdentifiers);wasi-wasm" />
+      <KnownRuntimePack
+        Condition="%(RuntimePackLabels) == 'Mono'"
+        RuntimePackRuntimeIdentifiers="%(RuntimePackRuntimeIdentifiers);wasi-wasm"
+      />
     </ItemGroup>
     <Message Text="KnownRuntimePack: %(KnownRuntimePack.Identity), %(KnownRuntimePack.RuntimePackLabels), %(KnownRuntimePack.RuntimePackRuntimeIdentifiers)" />
   </Target>
@@ -33,11 +35,16 @@
       <_LocalMicrosoftNetCoreAppRuntimePackDir>$([MSBuild]::NormalizeDirectory($(ArtifactsBinDir), 'microsoft.netcore.app.runtime.wasi-wasm', $(Configuration)))</_LocalMicrosoftNetCoreAppRuntimePackDir>
     </PropertyGroup>
     <ItemGroup>
-      <ResolvedRuntimePack PackageDirectory="$(_LocalMicrosoftNetCoreAppRuntimePackDir)"
-                           Condition="'$(_LocalMicrosoftNetCoreAppRuntimePackDir)' != '' and
-                                      '%(ResolvedRuntimePack.FrameworkName)' == 'Microsoft.NETCore.App'" />
+      <ResolvedRuntimePack
+        PackageDirectory="$(_LocalMicrosoftNetCoreAppRuntimePackDir)"
+        Condition="'$(_LocalMicrosoftNetCoreAppRuntimePackDir)' != '' and
+                                      '%(ResolvedRuntimePack.FrameworkName)' == 'Microsoft.NETCore.App'"
+      />
     </ItemGroup>
-    <Message Text="Used runtime pack: %(ResolvedRuntimePack.PackageDirectory) for $(MSBuildProjectName)" Importance="normal" />
+    <Message
+      Text="Used runtime pack: %(ResolvedRuntimePack.PackageDirectory) for $(MSBuildProjectName)"
+      Importance="normal"
+    />
   </Target>
 
   <Target Name="RebuildWasiAppBuilder">
@@ -45,23 +52,26 @@
       <WasiAppBuildProject Include="$([MSBuild]::NormalizePath($(RepoTasksDir), 'WasiAppBuilder', 'WasiAppBuilder.csproj'))" />
     </ItemGroup>
 
-    <MSBuild Projects="@(WasiAppBuildProject)"
-         Properties="Configuration=Debug;MSBuildRestoreSessionId=$([System.Guid]::NewGuid())"
-         Targets="Restore"/>
+    <MSBuild
+      Projects="@(WasiAppBuildProject)"
+      Properties="Configuration=Debug;MSBuildRestoreSessionId=$([System.Guid]::NewGuid())"
+      Targets="Restore"
+    />
 
-    <MSBuild Projects="@(WasiAppBuildProject)"
-         Properties="Configuration=Debug"
-         Targets="Build"/>
+    <MSBuild Projects="@(WasiAppBuildProject)" Properties="Configuration=Debug" Targets="Build" />
   </Target>
 
-  <Target Name="CopyAppZipToHelixTestDir"
-          Condition="'$(WasmCopyAppZipToHelixTestDir)' == 'true' and '$(WasmBuildingForNestedPublish)' != 'true'"
-          AfterTargets="Build"
-          DependsOnTargets="WasmTriggerPublishApp">
+  <Target
+    Name="CopyAppZipToHelixTestDir"
+    Condition="'$(WasmCopyAppZipToHelixTestDir)' == 'true' and '$(WasmBuildingForNestedPublish)' != 'true'"
+    AfterTargets="Build"
+    DependsOnTargets="WasmTriggerPublishApp"
+  >
     <PropertyGroup>
-      <WasmHelixTestAppRelativeDir Condition="'$(WasmHelixTestAppRelativeDir)' == ''">$(MSBuildProjectName)</WasmHelixTestAppRelativeDir>
-      <!-- Helix properties -->
-      <!-- AnyCPU as Platform-->
+      <WasmHelixTestAppRelativeDir Condition="'$(WasmHelixTestAppRelativeDir)' == ''"
+        >$(MSBuildProjectName)</WasmHelixTestAppRelativeDir
+      >
+      <!-- Helix properties --><!-- AnyCPU as Platform-->
       <OSPlatformConfig>$(TargetOS).AnyCPU.$(Configuration)</OSPlatformConfig>
       <HelixArchiveRoot>$([MSBuild]::NormalizeDirectory($(ArtifactsDir), 'helix'))</HelixArchiveRoot>
       <HelixArchiveRunOnlyRoot>$([MSBuild]::NormalizeDirectory($(HelixArchiveRoot), 'runonly'))</HelixArchiveRunOnlyRoot>

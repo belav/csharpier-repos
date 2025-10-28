@@ -1,4 +1,4 @@
-// 
+//
 // System.EnterpriseServices.MustRunInClientContextAttribute.cs
 //
 // Author:
@@ -15,10 +15,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -31,37 +31,37 @@
 using System;
 using System.Runtime.InteropServices;
 
-namespace System.EnterpriseServices {
-	[AttributeUsage (AttributeTargets.Class)]
-	[ComVisible(false)]
-	public sealed class MustRunInClientContextAttribute : Attribute {
+namespace System.EnterpriseServices
+{
+    [AttributeUsage(AttributeTargets.Class)]
+    [ComVisible(false)]
+    public sealed class MustRunInClientContextAttribute : Attribute
+    {
+        #region Fields
 
-		#region Fields
+        bool val;
 
-		bool val;
+        #endregion // Fields
 
-		#endregion // Fields
+        #region Constructors
 
-		#region Constructors
+        public MustRunInClientContextAttribute()
+            : this(true) { }
 
-		public MustRunInClientContextAttribute () 
-			: this (true)
-		{
-		}
+        public MustRunInClientContextAttribute(bool val)
+        {
+            this.val = val;
+        }
 
-		public MustRunInClientContextAttribute (bool val)
-		{
-			this.val = val;
-		}
+        #endregion // Constructors
 
-		#endregion // Constructors
+        #region Properties
 
-		#region Properties
+        public bool Value
+        {
+            get { return val; }
+        }
 
-		public bool Value {
-			get { return val; }
-		}
-
-		#endregion // Properties
-	}
+        #endregion // Properties
+    }
 }

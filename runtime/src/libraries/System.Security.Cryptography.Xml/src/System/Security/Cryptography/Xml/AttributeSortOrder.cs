@@ -18,7 +18,8 @@ namespace System.Security.Cryptography.Xml
             if ((nodeA == null) || (nodeB == null))
                 throw new ArgumentException();
             int namespaceCompare = string.CompareOrdinal(nodeA.NamespaceURI, nodeB.NamespaceURI);
-            if (namespaceCompare != 0) return namespaceCompare;
+            if (namespaceCompare != 0)
+                return namespaceCompare;
             return string.CompareOrdinal(nodeA.LocalName, nodeB.LocalName);
         }
     }

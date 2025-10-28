@@ -107,7 +107,9 @@ namespace System.Web.Http.Batch
         [Theory]
         [InlineData(true)]
         [InlineData(false)]
-        public void IncludeErrorDetailGet_ReturnsBatchContextIncludeErrorDetail(bool expectedIncludeErrorDetail)
+        public void IncludeErrorDetailGet_ReturnsBatchContextIncludeErrorDetail(
+            bool expectedIncludeErrorDetail
+        )
         {
             // Arrange
             HttpRequestContext batchContext = CreateContext();
@@ -124,7 +126,9 @@ namespace System.Web.Http.Batch
         [Theory]
         [InlineData(true)]
         [InlineData(false)]
-        public void IncludeErrorDetailSet_UpdatesBatchContextIncludeErrorDetail(bool expectedIncludeErrorDetail)
+        public void IncludeErrorDetailSet_UpdatesBatchContextIncludeErrorDetail(
+            bool expectedIncludeErrorDetail
+        )
         {
             // Arrange
             HttpRequestContext batchContext = CreateContext();
@@ -335,7 +339,9 @@ namespace System.Web.Http.Batch
             return new Mock<UrlHelper>(MockBehavior.Strict).Object;
         }
 
-        private static BatchHttpRequestContext CreateProductUnderTest(HttpRequestContext batchContext)
+        private static BatchHttpRequestContext CreateProductUnderTest(
+            HttpRequestContext batchContext
+        )
         {
             return new BatchHttpRequestContext(batchContext);
         }

@@ -43,7 +43,11 @@ namespace System.DirectoryServices.ActiveDirectory
                     }
                     else if (_sourceDsaDN != null)
                     {
-                        _sourceServer = Utils.GetServerNameFromInvocationID(_sourceDsaDN, SourceServerGuid, _server);
+                        _sourceServer = Utils.GetServerNameFromInvocationID(
+                            _sourceDsaDN,
+                            SourceServerGuid,
+                            _server
+                        );
                         // add it to the hashtable
                         _nameTable.Add(SourceServerGuid, _sourceServer);
                     }

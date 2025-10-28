@@ -6,14 +6,18 @@ using System.Collections.Generic;
 
 namespace Microsoft.CodeAnalysis.Rename.ConflictEngine
 {
-    internal sealed class ConflictingIdentifierTracker(SyntaxToken tokenBeingRenamed, IEqualityComparer<string> identifierComparer)
+    internal sealed class ConflictingIdentifierTracker(
+        SyntaxToken tokenBeingRenamed,
+        IEqualityComparer<string> identifierComparer
+    )
     {
         /// <summary>
         /// The core data structure of the tracker. This is a dictionary of variable name to the
         /// current identifier tokens that are declaring variables. This should only ever be updated
         /// via the AddIdentifier and RemoveIdentifier helpers.
         /// </summary>
-        private readonly Dictionary<string, List<SyntaxToken>> _currentIdentifiersInScope = new Dictionary<string, List<SyntaxToken>>(identifierComparer);
+        private readonly Dictionary<string, List<SyntaxToken>> _currentIdentifiersInScope =
+            new Dictionary<string, List<SyntaxToken>>(identifierComparer);
         private readonly HashSet<SyntaxToken> _conflictingTokensToReport = new();
 
         public IEnumerable<SyntaxToken> ConflictingTokens => _conflictingTokensToReport;

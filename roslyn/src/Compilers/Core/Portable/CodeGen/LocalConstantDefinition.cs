@@ -21,7 +21,8 @@ namespace Microsoft.CodeAnalysis.CodeGen
             Location location,
             MetadataConstant compileTimeValue,
             ImmutableArray<bool> dynamicTransformFlags,
-            ImmutableArray<string> tupleElementNames)
+            ImmutableArray<string> tupleElementNames
+        )
         {
             RoslynDebug.Assert(!RoslynString.IsNullOrEmpty(name));
             RoslynDebug.Assert(compileTimeValue != null);
@@ -43,8 +44,8 @@ namespace Microsoft.CodeAnalysis.CodeGen
 
         public bool IsConstant => true;
 
-        public ImmutableArray<Cci.ICustomModifier> CustomModifiers
-            => ImmutableArray<Cci.ICustomModifier>.Empty;
+        public ImmutableArray<Cci.ICustomModifier> CustomModifiers =>
+            ImmutableArray<Cci.ICustomModifier>.Empty;
 
         public bool IsModified => false;
 
@@ -64,7 +65,7 @@ namespace Microsoft.CodeAnalysis.CodeGen
 
         public byte[]? Signature => null;
 
-        public LocalSlotDebugInfo SlotInfo
-            => new LocalSlotDebugInfo(SynthesizedLocalKind.UserDefined, LocalDebugId.None);
+        public LocalSlotDebugInfo SlotInfo =>
+            new LocalSlotDebugInfo(SynthesizedLocalKind.UserDefined, LocalDebugId.None);
     }
 }

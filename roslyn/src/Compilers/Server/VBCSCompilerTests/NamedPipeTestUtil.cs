@@ -7,15 +7,16 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO.Pipes;
-using System.Reflection;
 using System.Net.Sockets;
+using System.Reflection;
 using Roslyn.Test.Utilities;
+
 namespace Microsoft.CodeAnalysis.CompilerServer.UnitTests
 {
     /// <summary>
-    /// This is a HACK that allows you to get at the underlying Socket for a given NamedPipeServerStream 
+    /// This is a HACK that allows you to get at the underlying Socket for a given NamedPipeServerStream
     /// instance. It is very useful it proactively diagnosing bugs in the server code by letting us inspect
-    /// the socket to see if it's disposed, not available, etc ... vs. experiencing flaky bugs that are 
+    /// the socket to see if it's disposed, not available, etc ... vs. experiencing flaky bugs that are
     /// incredibly difficult to track down.
     ///
     /// Do NOT check this into production, it's a unit test utility only
@@ -25,8 +26,13 @@ namespace Microsoft.CodeAnalysis.CompilerServer.UnitTests
         private static IDictionary GetSharedServersDictionary()
         {
             var sharedServerFullName = typeof(NamedPipeServerStream).FullName + "+SharedServer";
-            var sharedServerType = typeof(NamedPipeServerStream).Assembly.GetType(sharedServerFullName);
-            var serversField = sharedServerType?.GetField("s_servers", BindingFlags.NonPublic | BindingFlags.Static);
+            var sharedServerType = typeof(NamedPipeServerStream).Assembly.GetType(
+                sharedServerFullName
+            );
+            var serversField = sharedServerType?.GetField(
+                "s_servers",
+                BindingFlags.NonPublic | BindingFlags.Static
+            );
             var servers = (IDictionary?)serversField?.GetValue(null);
             if (servers is null)
             {
@@ -38,7 +44,9 @@ namespace Microsoft.CodeAnalysis.CompilerServer.UnitTests
 
         private static Socket GetSocket(object sharedServer)
         {
-            var listeningSocketProperty = sharedServer!.GetType()?.GetProperty("ListeningSocket", BindingFlags.NonPublic | BindingFlags.Instance);
+            var listeningSocketProperty = sharedServer!
+                .GetType()
+                ?.GetProperty("ListeningSocket", BindingFlags.NonPublic | BindingFlags.Instance);
             var socket = (Socket?)listeningSocketProperty?.GetValue(sharedServer, null);
             if (socket is null)
             {
@@ -70,7 +78,8 @@ namespace Microsoft.CodeAnalysis.CompilerServer.UnitTests
             }
         }
 
-        internal static bool IsPipeFullyClosed(string pipeName) => GetSocketForPipeName(pipeName) is null;
+        internal static bool IsPipeFullyClosed(string pipeName) =>
+            GetSocketForPipeName(pipeName) is null;
 
         internal static void DisposeAll()
         {

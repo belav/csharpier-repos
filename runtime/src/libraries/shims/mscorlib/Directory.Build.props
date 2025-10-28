@@ -1,5 +1,4 @@
 <Project>
-
   <Import Project="..\Directory.Build.props" />
 
   <PropertyGroup>
@@ -10,5 +9,4 @@
   <ItemGroup>
     <Compile Include="$(MSBuildThisFileDirectory)..\System.Void.cs" />
   </ItemGroup>
-
 </Project>

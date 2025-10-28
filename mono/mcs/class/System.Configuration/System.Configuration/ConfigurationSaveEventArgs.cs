@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -29,23 +29,28 @@
 
 using System;
 
-namespace System.Configuration 
+namespace System.Configuration
 {
-	class ConfigurationSaveEventArgs : EventArgs
-	{
-		public string StreamPath { get; private set; }
-		public bool Start { get; private set; }
-		public object Context { get; private set; }
-		public bool Failed { get; private set; }
-		public Exception Exception { get; private set; }
-		
-		public ConfigurationSaveEventArgs (string streamPath, bool start, Exception ex, object context)
-		{
-			this.StreamPath = streamPath;
-			this.Start = start;
-			this.Failed = ex != null;
-			this.Exception = ex;
-			this.Context = context;
-		}
-	}
+    class ConfigurationSaveEventArgs : EventArgs
+    {
+        public string StreamPath { get; private set; }
+        public bool Start { get; private set; }
+        public object Context { get; private set; }
+        public bool Failed { get; private set; }
+        public Exception Exception { get; private set; }
+
+        public ConfigurationSaveEventArgs(
+            string streamPath,
+            bool start,
+            Exception ex,
+            object context
+        )
+        {
+            this.StreamPath = streamPath;
+            this.Start = start;
+            this.Failed = ex != null;
+            this.Exception = ex;
+            this.Context = context;
+        }
+    }
 }

@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -29,28 +29,23 @@ using System;
 
 namespace StandAloneRunnerSupport
 {
-	public class TestCaseFailureException : Exception
-	{
-		public string Details {
-			get; set;
-		}
+    public class TestCaseFailureException : Exception
+    {
+        public string Details { get; set; }
 
-		public TestCaseFailureException (string message)
-			: this (message, null, null)
-		{}
+        public TestCaseFailureException(string message)
+            : this(message, null, null) { }
 
-		public TestCaseFailureException (string message, string details)
-			: this (message, details, null)
-		{}
+        public TestCaseFailureException(string message, string details)
+            : this(message, details, null) { }
 
-		public TestCaseFailureException (string message, Exception innerException)
-			: this (message, null, innerException)
-		{}
-		
-		public TestCaseFailureException (string message, string details, Exception innerException)
-			: base (message, innerException)
-		{
-			Details = details;
-		}	
-	}
+        public TestCaseFailureException(string message, Exception innerException)
+            : this(message, null, innerException) { }
+
+        public TestCaseFailureException(string message, string details, Exception innerException)
+            : base(message, innerException)
+        {
+            Details = details;
+        }
+    }
 }

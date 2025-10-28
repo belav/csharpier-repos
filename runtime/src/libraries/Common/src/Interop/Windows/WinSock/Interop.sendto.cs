@@ -16,6 +16,7 @@ internal static partial class Interop
             int len,
             SocketFlags socketFlags,
             ReadOnlySpan<byte> socketAddress,
-            int socketAddressSize);
+            int socketAddressSize
+        );
     }
 }

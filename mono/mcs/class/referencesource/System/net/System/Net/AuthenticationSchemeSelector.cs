@@ -4,7 +4,9 @@
 // </copyright>
 //------------------------------------------------------------------------------
 
-namespace System.Net {
-    public delegate AuthenticationSchemes AuthenticationSchemeSelector(HttpListenerRequest httpRequest);
+namespace System.Net
+{
+    public delegate AuthenticationSchemes AuthenticationSchemeSelector(
+        HttpListenerRequest httpRequest
+    );
 }
-

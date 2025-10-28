@@ -13,19 +13,19 @@ namespace System.Xml.Xsl.XsltOld
 {
     internal sealed class ActionFrame
     {
-        private int _state;         // Action execution state
-        private int _counter;       // Counter, for the use of particular action
-        private object[]? _variables;     // Store for template local variable values
+        private int _state; // Action execution state
+        private int _counter; // Counter, for the use of particular action
+        private object[]? _variables; // Store for template local variable values
         private Hashtable? _withParams;
-        private Action? _action;        // Action currently being executed
-        private ActionFrame? _container;     // Frame of enclosing container action and index within it
+        private Action? _action; // Action currently being executed
+        private ActionFrame? _container; // Frame of enclosing container action and index within it
         private int _currentAction;
-        private XPathNodeIterator? _nodeSet;       // Current node set
-        private XPathNodeIterator? _newNodeSet;    // Node set for processing children or other templates
+        private XPathNodeIterator? _nodeSet; // Current node set
+        private XPathNodeIterator? _newNodeSet; // Node set for processing children or other templates
 
         // Variables to store action data between states:
         private PrefixQName? _calculatedName; // Used in ElementAction and AttributeAction
-        private string? _storedOutput;  // Used in NumberAction, CopyOfAction, ValueOfAction and ProcessingInstructionAction
+        private string? _storedOutput; // Used in NumberAction, CopyOfAction, ValueOfAction and ProcessingInstructionAction
 
         internal PrefixQName? CalculatedName
         {
@@ -110,7 +110,10 @@ namespace System.Xml.Xsl.XsltOld
         internal void SetParameter(XmlQualifiedName name, object value)
         {
             _withParams ??= new Hashtable();
-            Debug.Assert(!_withParams.Contains(name), "We should check duplicate params at compile time");
+            Debug.Assert(
+                !_withParams.Contains(name),
+                "We should check duplicate params at compile time"
+            );
             _withParams[name] = value;
         }
 
@@ -148,18 +151,28 @@ namespace System.Xml.Xsl.XsltOld
                 Sort sort = (Sort)sortarray[i]!;
                 Query expr = proc.GetCompiledQuery(sort.select);
 
-                comparer.AddSort(expr, new XPathComparerHelper(sort.order, sort.caseOrder, sort.lang, sort.dataType));
+                comparer.AddSort(
+                    expr,
+                    new XPathComparerHelper(sort.order, sort.caseOrder, sort.lang, sort.dataType)
+                );
             }
             List<SortKey> results = new List<SortKey>();
 
-            Debug.Assert(proc.ActionStack.Peek() == this, "the trick we are doing with proc.Current will work only if this is topmost frame");
+            Debug.Assert(
+                proc.ActionStack.Peek() == this,
+                "the trick we are doing with proc.Current will work only if this is topmost frame"
+            );
 
             while (NewNextNode(proc))
             {
                 XPathNodeIterator? savedNodeset = _nodeSet;
-                _nodeSet = _newNodeSet;              // trick proc.Current node
+                _nodeSet = _newNodeSet; // trick proc.Current node
 
-                SortKey key = new SortKey(numSorts, /*originalPosition:*/results.Count, _newNodeSet!.Current!.Clone());
+                SortKey key = new SortKey(
+                    numSorts, /*originalPosition:*/
+                    results.Count,
+                    _newNodeSet!.Current!.Clone()
+                );
 
                 for (int j = 0; j < numSorts; j++)
                 {
@@ -167,7 +180,7 @@ namespace System.Xml.Xsl.XsltOld
                 }
                 results.Add(key);
 
-                _nodeSet = savedNodeset;                 // restore proc.Current node
+                _nodeSet = savedNodeset; // restore proc.Current node
             }
             results.Sort(comparer);
             _newNodeSet = new XPathSortArrayIterator(results);
@@ -260,7 +273,7 @@ namespace System.Xml.Xsl.XsltOld
                 return _action == null;
             }
 
-            return false;                       // Do not pop, unless specified otherwise
+            return false; // Do not pop, unless specified otherwise
         }
 
         internal bool NextNode(Processor proc)
@@ -277,10 +290,11 @@ namespace System.Xml.Xsl.XsltOld
                     {
                         nav.MoveTo(_nodeSet.Current);
                         nav.MoveToParent();
-                        flag = !proc.Stylesheet.PreserveWhiteSpace(proc, nav) && (next = _nodeSet.MoveNext());
+                        flag =
+                            !proc.Stylesheet.PreserveWhiteSpace(proc, nav)
+                            && (next = _nodeSet.MoveNext());
                         type = _nodeSet.Current.NodeType;
-                    }
-                    while (flag && (type == XPathNodeType.Whitespace));
+                    } while (flag && (type == XPathNodeType.Whitespace));
                 }
             }
             return next;
@@ -300,10 +314,11 @@ namespace System.Xml.Xsl.XsltOld
                     {
                         nav.MoveTo(_newNodeSet.Current);
                         nav.MoveToParent();
-                        flag = !proc.Stylesheet.PreserveWhiteSpace(proc, nav) && (next = _newNodeSet.MoveNext());
+                        flag =
+                            !proc.Stylesheet.PreserveWhiteSpace(proc, nav)
+                            && (next = _newNodeSet.MoveNext());
                         type = _newNodeSet.Current.NodeType;
-                    }
-                    while (flag && (type == XPathNodeType.Whitespace));
+                    } while (flag && (type == XPathNodeType.Whitespace));
                 }
             }
             return next;
@@ -312,8 +327,11 @@ namespace System.Xml.Xsl.XsltOld
         // special array iterator that iterates over ArrayList of SortKey
         private sealed class XPathSortArrayIterator : XPathArrayIterator
         {
-            public XPathSortArrayIterator(List<SortKey> list) : base(list) { }
-            public XPathSortArrayIterator(XPathSortArrayIterator it) : base(it) { }
+            public XPathSortArrayIterator(List<SortKey> list)
+                : base(list) { }
+
+            public XPathSortArrayIterator(XPathSortArrayIterator it)
+                : base(it) { }
 
             public override XPathNodeIterator Clone()
             {

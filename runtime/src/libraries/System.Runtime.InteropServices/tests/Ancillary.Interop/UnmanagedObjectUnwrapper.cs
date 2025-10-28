@@ -7,7 +7,8 @@ namespace System.Runtime.InteropServices.Marshalling;
 // This type allows the generated code to call a private explicit implementation of IUnmanagedObjectUnwrapper.GetObjectForUnmanagedWrapper
 public unsafe static class UnmanagedObjectUnwrapper
 {
-    public static object GetObjectForUnmanagedWrapper<T>(void* ptr) where T : IUnmanagedObjectUnwrapper
+    public static object GetObjectForUnmanagedWrapper<T>(void* ptr)
+        where T : IUnmanagedObjectUnwrapper
     {
         return T.GetObjectForUnmanagedWrapper(ptr);
     }
@@ -15,6 +16,7 @@ public unsafe static class UnmanagedObjectUnwrapper
     // This type is provided for the unit tests that only confirm the generated code compiles
     public class TestUnwrapper : IUnmanagedObjectUnwrapper
     {
-        public static object GetObjectForUnmanagedWrapper(void* ptr) => throw new NotImplementedException();
+        public static object GetObjectForUnmanagedWrapper(void* ptr) =>
+            throw new NotImplementedException();
     }
 }

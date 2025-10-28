@@ -24,12 +24,17 @@ namespace Microsoft.CodeAnalysis.Shared.Utilities
             public GetHashCodeVisitor(
                 SymbolEquivalenceComparer symbolEquivalenceComparer,
                 bool compareMethodTypeParametersByIndex,
-                bool objectAndDynamicCompareEqually)
+                bool objectAndDynamicCompareEqually
+            )
             {
                 _symbolEquivalenceComparer = symbolEquivalenceComparer;
                 _compareMethodTypeParametersByIndex = compareMethodTypeParametersByIndex;
                 _objectAndDynamicCompareEqually = objectAndDynamicCompareEqually;
-                _parameterAggregator = (acc, sym) => Hash.Combine(symbolEquivalenceComparer.ParameterEquivalenceComparer.GetHashCode(sym), acc);
+                _parameterAggregator = (acc, sym) =>
+                    Hash.Combine(
+                        symbolEquivalenceComparer.ParameterEquivalenceComparer.GetHashCode(sym),
+                        acc
+                    );
                 _symbolAggregator = (acc, sym) => GetHashCode(sym, acc);
             }
 
@@ -44,20 +49,27 @@ namespace Microsoft.CodeAnalysis.Shared.Utilities
                 // and 'dynamic' as the same.  However, since they're different types, we don't
                 // want to bail out using the above check.
 
-                if (x.Kind == SymbolKind.DynamicType ||
-                    (_objectAndDynamicCompareEqually && IsObjectType(x)))
+                if (
+                    x.Kind == SymbolKind.DynamicType
+                    || (_objectAndDynamicCompareEqually && IsObjectType(x))
+                )
                 {
-                    return Hash.Combine(GetNullableAnnotationsHashCode((ITypeSymbol)x), Hash.Combine(typeof(IDynamicTypeSymbol), currentHash));
+                    return Hash.Combine(
+                        GetNullableAnnotationsHashCode((ITypeSymbol)x),
+                        Hash.Combine(typeof(IDynamicTypeSymbol), currentHash)
+                    );
                 }
 
                 return GetHashCodeWorker(x, currentHash);
             }
 
-            private int GetNullableAnnotationsHashCode(ITypeSymbol type)
-                => _symbolEquivalenceComparer._ignoreNullableAnnotations ? 0 : ((int)type.NullableAnnotation).GetHashCode();
+            private int GetNullableAnnotationsHashCode(ITypeSymbol type) =>
+                _symbolEquivalenceComparer._ignoreNullableAnnotations
+                    ? 0
+                    : ((int)type.NullableAnnotation).GetHashCode();
 
-            private int GetHashCodeWorker(ISymbol x, int currentHash)
-                => x.Kind switch
+            private int GetHashCodeWorker(ISymbol x, int currentHash) =>
+                x.Kind switch
                 {
                     SymbolKind.ArrayType => CombineHashCodes((IArrayTypeSymbol)x, currentHash),
                     SymbolKind.Assembly => CombineHashCodes((IAssemblySymbol)x, currentHash),
@@ -72,42 +84,56 @@ namespace Microsoft.CodeAnalysis.Shared.Utilities
                     SymbolKind.Parameter => CombineHashCodes((IParameterSymbol)x, currentHash),
                     SymbolKind.PointerType => CombineHashCodes((IPointerTypeSymbol)x, currentHash),
                     SymbolKind.Property => CombineHashCodes((IPropertySymbol)x, currentHash),
-                    SymbolKind.RangeVariable => CombineHashCodes((IRangeVariableSymbol)x, currentHash),
-                    SymbolKind.TypeParameter => CombineHashCodes((ITypeParameterSymbol)x, currentHash),
-                    SymbolKind.Preprocessing => CombineHashCodes((IPreprocessingSymbol)x, currentHash),
+                    SymbolKind.RangeVariable => CombineHashCodes(
+                        (IRangeVariableSymbol)x,
+                        currentHash
+                    ),
+                    SymbolKind.TypeParameter => CombineHashCodes(
+                        (ITypeParameterSymbol)x,
+                        currentHash
+                    ),
+                    SymbolKind.Preprocessing => CombineHashCodes(
+                        (IPreprocessingSymbol)x,
+                        currentHash
+                    ),
                     _ => -1,
                 };
 
             private int CombineHashCodes(IArrayTypeSymbol x, int currentHash)
             {
-                return
-                    Hash.Combine(GetNullableAnnotationsHashCode(x),
-                    Hash.Combine(x.Rank,
-                    GetHashCode(x.ElementType, currentHash)));
+                return Hash.Combine(
+                    GetNullableAnnotationsHashCode(x),
+                    Hash.Combine(x.Rank, GetHashCode(x.ElementType, currentHash))
+                );
             }
 
-            private int CombineHashCodes(IAssemblySymbol x, int currentHash)
-                => Hash.Combine(_symbolEquivalenceComparer._assemblyComparerOpt?.GetHashCode(x) ?? 0, currentHash);
+            private int CombineHashCodes(IAssemblySymbol x, int currentHash) =>
+                Hash.Combine(
+                    _symbolEquivalenceComparer._assemblyComparerOpt?.GetHashCode(x) ?? 0,
+                    currentHash
+                );
 
             private int CombineHashCodes(IFieldSymbol x, int currentHash)
             {
-                return
-                    Hash.Combine(x.Name,
-                    GetHashCode(x.ContainingSymbol, currentHash));
+                return Hash.Combine(x.Name, GetHashCode(x.ContainingSymbol, currentHash));
             }
 
             private static int CombineHashCodes(ILabelSymbol x, int currentHash)
             {
-                return
-                    Hash.Combine(x.Name,
-                    Hash.Combine(x.Locations.FirstOrDefault(), currentHash));
+                return Hash.Combine(
+                    x.Name,
+                    Hash.Combine(x.Locations.FirstOrDefault(), currentHash)
+                );
             }
 
-            private static int CombineHashCodes(ILocalSymbol x, int currentHash)
-                => Hash.Combine(x.Locations.FirstOrDefault(), currentHash);
+            private static int CombineHashCodes(ILocalSymbol x, int currentHash) =>
+                Hash.Combine(x.Locations.FirstOrDefault(), currentHash);
 
-            private static int CombineHashCodes<T>(ImmutableArray<T> array, int currentHash, Func<int, T, int> func)
-                => array.Aggregate<int, T>(currentHash, func);
+            private static int CombineHashCodes<T>(
+                ImmutableArray<T> array,
+                int currentHash,
+                Func<int, T, int> func
+            ) => array.Aggregate<int, T>(currentHash, func);
 
             private int CombineHashCodes(IMethodSymbol x, int currentHash)
             {
@@ -117,14 +143,25 @@ namespace Microsoft.CodeAnalysis.Shared.Utilities
                     return Hash.Combine(x.Locations.FirstOrDefault(), currentHash);
                 }
 
-                currentHash =
-                    Hash.Combine(IsPartialMethodImplementationPart(x),
-                    Hash.Combine(IsPartialMethodDefinitionPart(x),
-                    Hash.Combine(x.IsDefinition,
-                    Hash.Combine(IsConstructedFromSelf(x),
-                    Hash.Combine(x.Arity,
-                    Hash.Combine(x.Parameters.Length,
-                    Hash.Combine(x.Name, currentHash)))))));
+                currentHash = Hash.Combine(
+                    IsPartialMethodImplementationPart(x),
+                    Hash.Combine(
+                        IsPartialMethodDefinitionPart(x),
+                        Hash.Combine(
+                            x.IsDefinition,
+                            Hash.Combine(
+                                IsConstructedFromSelf(x),
+                                Hash.Combine(
+                                    x.Arity,
+                                    Hash.Combine(
+                                        x.Parameters.Length,
+                                        Hash.Combine(x.Name, currentHash)
+                                    )
+                                )
+                            )
+                        )
+                    )
+                );
 
                 var checkContainingType = CheckContainingType(x);
                 if (checkContainingType)
@@ -132,16 +169,15 @@ namespace Microsoft.CodeAnalysis.Shared.Utilities
                     currentHash = GetHashCode(x.ContainingSymbol, currentHash);
                 }
 
-                currentHash =
-                    CombineHashCodes(x.Parameters, currentHash, _parameterAggregator);
+                currentHash = CombineHashCodes(x.Parameters, currentHash, _parameterAggregator);
 
                 return IsConstructedFromSelf(x)
                     ? currentHash
                     : CombineHashCodes(x.TypeArguments, currentHash, _symbolAggregator);
             }
 
-            private int CombineHashCodes(IModuleSymbol x, int currentHash)
-                => CombineHashCodes(x.ContainingAssembly, Hash.Combine(x.Name, currentHash));
+            private int CombineHashCodes(IModuleSymbol x, int currentHash) =>
+                CombineHashCodes(x.ContainingAssembly, Hash.Combine(x.Name, currentHash));
 
             private int CombineHashCodes(INamedTypeSymbol x, int currentHash)
             {
@@ -170,15 +206,28 @@ namespace Microsoft.CodeAnalysis.Shared.Utilities
 
                 // If we want object and dynamic to be the same, and this is 'object', then return
                 // the same hash we do for 'dynamic'.
-                currentHash =
-                    Hash.Combine((int)GetTypeKind(x),
-                    Hash.Combine(IsConstructedFromSelf(x),
-                    Hash.Combine(x.Arity,
-                    Hash.Combine(x.Name,
-                    Hash.Combine(x.IsAnonymousType,
-                    Hash.Combine(x.IsUnboundGenericType,
-                    Hash.Combine(GetNullableAnnotationsHashCode(x),
-                    GetHashCode(x.ContainingSymbol, currentHash))))))));
+                currentHash = Hash.Combine(
+                    (int)GetTypeKind(x),
+                    Hash.Combine(
+                        IsConstructedFromSelf(x),
+                        Hash.Combine(
+                            x.Arity,
+                            Hash.Combine(
+                                x.Name,
+                                Hash.Combine(
+                                    x.IsAnonymousType,
+                                    Hash.Combine(
+                                        x.IsUnboundGenericType,
+                                        Hash.Combine(
+                                            GetNullableAnnotationsHashCode(x),
+                                            GetHashCode(x.ContainingSymbol, currentHash)
+                                        )
+                                    )
+                                )
+                            )
+                        )
+                    )
+                );
 
                 if (x.IsAnonymousType)
                 {
@@ -200,12 +249,16 @@ namespace Microsoft.CodeAnalysis.Shared.Utilities
                 {
                     var xMembers = x.GetValidAnonymousTypeProperties();
 
-                    return xMembers.Aggregate(currentHash, (a, p) =>
+                    return xMembers.Aggregate(
+                        currentHash,
+                        (a, p) =>
                         {
-                            return Hash.Combine(p.Name,
-                                Hash.Combine(p.IsReadOnly,
-                                GetHashCode(p.Type, a)));
-                        });
+                            return Hash.Combine(
+                                p.Name,
+                                Hash.Combine(p.IsReadOnly, GetHashCode(p.Type, a))
+                            );
+                        }
+                    );
                 }
             }
 
@@ -217,63 +270,83 @@ namespace Microsoft.CodeAnalysis.Shared.Utilities
                     return Hash.Combine(x.Name, currentHash);
                 }
 
-                return
-                    Hash.Combine(x.IsGlobalNamespace,
-                    Hash.Combine(x.Name,
-                    GetHashCode(x.ContainingSymbol, currentHash)));
+                return Hash.Combine(
+                    x.IsGlobalNamespace,
+                    Hash.Combine(x.Name, GetHashCode(x.ContainingSymbol, currentHash))
+                );
             }
 
             private int CombineHashCodes(IParameterSymbol x, int currentHash)
             {
-                return
-                    Hash.Combine(x.IsRefOrOut(),
-                    Hash.Combine(x.Name,
-                    GetHashCode(x.Type,
-                    GetHashCode(x.ContainingSymbol, currentHash))));
+                return Hash.Combine(
+                    x.IsRefOrOut(),
+                    Hash.Combine(
+                        x.Name,
+                        GetHashCode(x.Type, GetHashCode(x.ContainingSymbol, currentHash))
+                    )
+                );
             }
 
             private int CombineHashCodes(IPointerTypeSymbol x, int currentHash)
             {
-                return
-                    Hash.Combine(typeof(IPointerTypeSymbol).GetHashCode(),
-                    GetHashCode(x.PointedAtType, currentHash));
+                return Hash.Combine(
+                    typeof(IPointerTypeSymbol).GetHashCode(),
+                    GetHashCode(x.PointedAtType, currentHash)
+                );
             }
 
             private int CombineHashCodes(IPropertySymbol x, int currentHash)
             {
-                currentHash =
-                    Hash.Combine(x.IsIndexer,
-                    Hash.Combine(x.Name,
-                    Hash.Combine(x.Parameters.Length,
-                    GetHashCode(x.ContainingSymbol, currentHash))));
+                currentHash = Hash.Combine(
+                    x.IsIndexer,
+                    Hash.Combine(
+                        x.Name,
+                        Hash.Combine(
+                            x.Parameters.Length,
+                            GetHashCode(x.ContainingSymbol, currentHash)
+                        )
+                    )
+                );
 
                 return CombineHashCodes(x.Parameters, currentHash, _parameterAggregator);
             }
 
             private int CombineHashCodes(IEventSymbol x, int currentHash)
             {
-                return
-                    Hash.Combine(x.Name,
-                    GetHashCode(x.ContainingSymbol, currentHash));
+                return Hash.Combine(x.Name, GetHashCode(x.ContainingSymbol, currentHash));
             }
 
             public int CombineHashCodes(ITypeParameterSymbol x, int currentHash)
             {
                 Debug.Assert(
-                    (x.TypeParameterKind == TypeParameterKind.Method && IsConstructedFromSelf(x.DeclaringMethod!)) ||
-                    (x.TypeParameterKind == TypeParameterKind.Type && IsConstructedFromSelf(x.ContainingType)) ||
-                    x.TypeParameterKind == TypeParameterKind.Cref);
+                    (
+                        x.TypeParameterKind == TypeParameterKind.Method
+                        && IsConstructedFromSelf(x.DeclaringMethod!)
+                    )
+                        || (
+                            x.TypeParameterKind == TypeParameterKind.Type
+                            && IsConstructedFromSelf(x.ContainingType)
+                        )
+                        || x.TypeParameterKind == TypeParameterKind.Cref
+                );
 
-                currentHash =
-                    Hash.Combine(x.Ordinal,
-                    Hash.Combine((int)x.TypeParameterKind, currentHash));
+                currentHash = Hash.Combine(
+                    x.Ordinal,
+                    Hash.Combine((int)x.TypeParameterKind, currentHash)
+                );
 
-                if (x.TypeParameterKind == TypeParameterKind.Method && _compareMethodTypeParametersByIndex)
+                if (
+                    x.TypeParameterKind == TypeParameterKind.Method
+                    && _compareMethodTypeParametersByIndex
+                )
                 {
                     return currentHash;
                 }
 
-                if (x.TypeParameterKind == TypeParameterKind.Type && x.ContainingType.IsAnonymousType)
+                if (
+                    x.TypeParameterKind == TypeParameterKind.Type
+                    && x.ContainingType.IsAnonymousType
+                )
                 {
                     // Anonymous type type parameters compare by index as well to prevent
                     // recursion.
@@ -285,15 +358,14 @@ namespace Microsoft.CodeAnalysis.Shared.Utilities
                     return currentHash;
                 }
 
-                return
-                    GetHashCode(x.ContainingSymbol, currentHash);
+                return GetHashCode(x.ContainingSymbol, currentHash);
             }
 
-            private static int CombineHashCodes(IRangeVariableSymbol x, int currentHash)
-                => Hash.Combine(x.Locations.FirstOrDefault(), currentHash);
+            private static int CombineHashCodes(IRangeVariableSymbol x, int currentHash) =>
+                Hash.Combine(x.Locations.FirstOrDefault(), currentHash);
 
-            private static int CombineHashCodes(IPreprocessingSymbol x, int currentHash)
-                => Hash.Combine(x.GetHashCode(), currentHash);
+            private static int CombineHashCodes(IPreprocessingSymbol x, int currentHash) =>
+                Hash.Combine(x.GetHashCode(), currentHash);
         }
     }
 }

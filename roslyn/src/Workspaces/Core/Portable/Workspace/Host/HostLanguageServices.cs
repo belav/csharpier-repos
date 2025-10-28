@@ -35,21 +35,28 @@ namespace Microsoft.CodeAnalysis.Host
         }
 
         /// <summary>
-        /// Gets a language specific service provided by the host identified by the service type. 
+        /// Gets a language specific service provided by the host identified by the service type.
         /// If the host does not provide the service, this method returns null.
         /// </summary>
-        public abstract TLanguageService? GetService<TLanguageService>() where TLanguageService : ILanguageService;
+        public abstract TLanguageService? GetService<TLanguageService>()
+            where TLanguageService : ILanguageService;
 
         /// <summary>
-        /// Gets a language specific service provided by the host identified by the service type. 
+        /// Gets a language specific service provided by the host identified by the service type.
         /// If the host does not provide the service, this method returns throws <see cref="InvalidOperationException"/>.
         /// </summary>
-        public TLanguageService GetRequiredService<TLanguageService>() where TLanguageService : ILanguageService
+        public TLanguageService GetRequiredService<TLanguageService>()
+            where TLanguageService : ILanguageService
         {
             var service = GetService<TLanguageService>();
             if (service == null)
             {
-                throw new InvalidOperationException(string.Format(WorkspacesResources.Service_of_type_0_is_required_to_accomplish_the_task_but_is_not_available_from_the_workspace, typeof(TLanguageService)));
+                throw new InvalidOperationException(
+                    string.Format(
+                        WorkspacesResources.Service_of_type_0_is_required_to_accomplish_the_task_but_is_not_available_from_the_workspace,
+                        typeof(TLanguageService)
+                    )
+                );
             }
 
             return service;

@@ -24,103 +24,81 @@ using System.ComponentModel;
 
 namespace System.DirectoryServices
 {
-	public class DirectoryVirtualListView
-	{
-		[DefaultValue(0), DSDescription("DSBeforeCount")]
-		public int BeforeCount {
-			get {
-				throw new NotImplementedException ();
-			}
-			set {
-				throw new NotImplementedException ();
-			}
-		}
+    public class DirectoryVirtualListView
+    {
+        [DefaultValue(0), DSDescription("DSBeforeCount")]
+        public int BeforeCount
+        {
+            get { throw new NotImplementedException(); }
+            set { throw new NotImplementedException(); }
+        }
 
-		[DefaultValue(0), DSDescription("DSAfterCount")]
-		public int AfterCount {
-			get {
-				throw new NotImplementedException ();
-			}
-			set {
-				throw new NotImplementedException ();
-			}
-		}
+        [DefaultValue(0), DSDescription("DSAfterCount")]
+        public int AfterCount
+        {
+            get { throw new NotImplementedException(); }
+            set { throw new NotImplementedException(); }
+        }
 
-		[DefaultValue(0), DSDescription("DSOffset")]
-		public int Offset {
-			get {
-				throw new NotImplementedException ();
-			}
-			set {
-				throw new NotImplementedException ();
-			}
-		}
+        [DefaultValue(0), DSDescription("DSOffset")]
+        public int Offset
+        {
+            get { throw new NotImplementedException(); }
+            set { throw new NotImplementedException(); }
+        }
 
-		[DefaultValue(0), DSDescription("DSTargetPercentage")]
-		public int TargetPercentage {
-			get {
-				throw new NotImplementedException ();
-			}
-			set {
-				throw new NotImplementedException ();
-			}
-		}
+        [DefaultValue(0), DSDescription("DSTargetPercentage")]
+        public int TargetPercentage
+        {
+            get { throw new NotImplementedException(); }
+            set { throw new NotImplementedException(); }
+        }
 
-		[DefaultValue("")]
-		[TypeConverter ("System.Diagnostics.Design.StringValueConverter, " + Consts.AssemblySystem_Design)]
-		[DSDescription("DSTarget")]
-		public string Target {
-			get {
-				throw new NotImplementedException ();
-			}
-			set {
-				throw new NotImplementedException ();
-			}
-		}
+        [DefaultValue("")]
+        [TypeConverter(
+            "System.Diagnostics.Design.StringValueConverter, " + Consts.AssemblySystem_Design
+        )]
+        [DSDescription("DSTarget")]
+        public string Target
+        {
+            get { throw new NotImplementedException(); }
+            set { throw new NotImplementedException(); }
+        }
 
-		[DefaultValue(0), DSDescription("DSApproximateTotal")]
-		public int ApproximateTotal {
-			get {
-				throw new NotImplementedException ();
-			}
-			set {
-				throw new NotImplementedException ();
-			}
-		}
+        [DefaultValue(0), DSDescription("DSApproximateTotal")]
+        public int ApproximateTotal
+        {
+            get { throw new NotImplementedException(); }
+            set { throw new NotImplementedException(); }
+        }
 
-		[DefaultValue(null), DSDescription("DSDirectoryVirtualListViewContext")]
-		public DirectoryVirtualListViewContext DirectoryVirtualListViewContext {
-			get {
-				throw new NotImplementedException ();
-			}
-			set {
-				throw new NotImplementedException ();
-			}
-		}
+        [DefaultValue(null), DSDescription("DSDirectoryVirtualListViewContext")]
+        public DirectoryVirtualListViewContext DirectoryVirtualListViewContext
+        {
+            get { throw new NotImplementedException(); }
+            set { throw new NotImplementedException(); }
+        }
 
-		public DirectoryVirtualListView ()
-		{
-		}
+        public DirectoryVirtualListView() { }
 
-		public DirectoryVirtualListView (int afterCount)
-		{
+        public DirectoryVirtualListView(int afterCount) { }
 
-		}
+        public DirectoryVirtualListView(int beforeCount, int afterCount, int offset) { }
 
-		public DirectoryVirtualListView (int beforeCount, int afterCount, int offset)
-		{
-		}
+        public DirectoryVirtualListView(int beforeCount, int afterCount, string target) { }
 
-		public DirectoryVirtualListView (int beforeCount, int afterCount, string target)
-		{
-		}
+        public DirectoryVirtualListView(
+            int beforeCount,
+            int afterCount,
+            int offset,
+            DirectoryVirtualListViewContext context
+        ) { }
 
-		public DirectoryVirtualListView (int beforeCount, int afterCount, int offset, DirectoryVirtualListViewContext context)
-		{
-		}
-
-		public DirectoryVirtualListView (int beforeCount, int afterCount, string target, DirectoryVirtualListViewContext context)
-		{
-		}
-	}
+        public DirectoryVirtualListView(
+            int beforeCount,
+            int afterCount,
+            string target,
+            DirectoryVirtualListViewContext context
+        ) { }
+    }
 }

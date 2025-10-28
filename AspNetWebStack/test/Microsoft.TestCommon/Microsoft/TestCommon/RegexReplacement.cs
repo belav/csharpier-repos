@@ -24,18 +24,12 @@ namespace Microsoft.TestCommon
 
         public Regex Regex
         {
-            get
-            {
-                return this.regex;
-            }
+            get { return this.regex; }
         }
 
         public string Replacement
         {
-            get
-            {
-                return this.replacement;
-            }
+            get { return this.replacement; }
         }
     }
 }

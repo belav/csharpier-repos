@@ -43,7 +43,10 @@ namespace System.Text.Tests
             return false;
         }
 
-        public override int Remaining { get { return _fallbackCount; } }
+        public override int Remaining
+        {
+            get { return _fallbackCount; }
+        }
 
         public override char GetNextChar()
         {
@@ -65,7 +68,8 @@ namespace System.Text.Tests
             _expectedCharUnknown = expectedCharUnknown;
         }
 
-        public override EncoderFallbackBuffer CreateFallbackBuffer() => new TestEncoderFallbackBuffer(_expectedCharUnknown);
+        public override EncoderFallbackBuffer CreateFallbackBuffer() =>
+            new TestEncoderFallbackBuffer(_expectedCharUnknown);
 
         public override int MaxCharCount => 2;
     }
@@ -75,32 +79,42 @@ namespace System.Text.Tests
         [ConditionalFact(typeof(RemoteExecutor), nameof(RemoteExecutor.IsSupported))]
         public void Test_EncoderFallbackBufferHelper_ValidateFallbackForDataRoundTrips()
         {
-            RemoteExecutor.Invoke(() =>
-            {
-                // Add the code page provider.
-                Encoding.RegisterProvider(CodePagesEncodingProvider.Instance);
+            RemoteExecutor
+                .Invoke(() =>
+                {
+                    // Add the code page provider.
+                    Encoding.RegisterProvider(CodePagesEncodingProvider.Instance);
 
-                // Roundtrip unsupported character.
-                string chInStr = "\u0661";
-                int chAsInt = 1585;
+                    // Roundtrip unsupported character.
+                    string chInStr = "\u0661";
+                    int chAsInt = 1585;
 
-                // Use windows-1252 with a custom fallback that utilizes the EncoderFallbackBufferHelper.
-                Encoding encoding = Encoding.GetEncoding(1252, new TestEncoderFallback(chAsInt), DecoderFallback.ReplacementFallback);
+                    // Use windows-1252 with a custom fallback that utilizes the EncoderFallbackBufferHelper.
+                    Encoding encoding = Encoding.GetEncoding(
+                        1252,
+                        new TestEncoderFallback(chAsInt),
+                        DecoderFallback.ReplacementFallback
+                    );
 
-                byte[] bytes = encoding.GetBytes(chInStr);
-                char[] chars = encoding.GetChars(bytes);
-                Assert.Equal("?", new string(chars));
+                    byte[] bytes = encoding.GetBytes(chInStr);
+                    char[] chars = encoding.GetChars(bytes);
+                    Assert.Equal("?", new string(chars));
 
-                // Roundtrip a high surrogate character.
-                chInStr = "\uD800";
-                chAsInt = 55248;
+                    // Roundtrip a high surrogate character.
+                    chInStr = "\uD800";
+                    chAsInt = 55248;
 
-                encoding = Encoding.GetEncoding(1252, new TestEncoderFallback(chAsInt), DecoderFallback.ReplacementFallback);
+                    encoding = Encoding.GetEncoding(
+                        1252,
+                        new TestEncoderFallback(chAsInt),
+                        DecoderFallback.ReplacementFallback
+                    );
 
-                bytes = encoding.GetBytes(chInStr);
-                chars = encoding.GetChars(bytes);
-                Assert.Equal("?", new string(chars));
-            }).Dispose();
+                    bytes = encoding.GetBytes(chInStr);
+                    chars = encoding.GetChars(bytes);
+                    Assert.Equal("?", new string(chars));
+                })
+                .Dispose();
         }
     }
 }

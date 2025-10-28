@@ -2,7 +2,6 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
-
 using Assembly = System.Reflection.Assembly;
 
 namespace Internal.Runtime.CompilerHelpers

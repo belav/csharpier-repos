@@ -5,5 +5,4 @@
     <!-- Unlike COM, ComWrappers are cross-platform -->
     <CLRTestTargetUnsupported></CLRTestTargetUnsupported>
   </PropertyGroup>
-
 </Project>

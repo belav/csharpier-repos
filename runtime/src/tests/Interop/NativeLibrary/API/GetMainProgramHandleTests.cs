@@ -16,11 +16,17 @@ public class GetMainProgramHandleTests
     public static void CanAccessCoreRunExportFromMainProgramHandle()
     {
         EXPECT(GetSymbolFromMainProgramHandle("HostExecutable", "GetCurrentClrDetails"));
-        EXPECT(GetSymbolFromMainProgramHandle("HostExecutable", "NonExistentCoreRunExport"), TestResult.ReturnFailure);
+        EXPECT(
+            GetSymbolFromMainProgramHandle("HostExecutable", "NonExistentCoreRunExport"),
+            TestResult.ReturnFailure
+        );
     }
 
     [Fact]
-    [SkipOnPlatform(TestPlatforms.OSX | TestPlatforms.iOS | TestPlatforms.tvOS | TestPlatforms.MacCatalyst, "Apple platforms load library symbols globally by default.")]
+    [SkipOnPlatform(
+        TestPlatforms.OSX | TestPlatforms.iOS | TestPlatforms.tvOS | TestPlatforms.MacCatalyst,
+        "Apple platforms load library symbols globally by default."
+    )]
     public static void NativeLibraryLoadDoesNotLoadSymbolsGlobally()
     {
         IntPtr handle = NativeLibrary.Load(NativeLibraryToLoad.GetFullPath());
@@ -28,9 +34,17 @@ public class GetMainProgramHandleTests
         {
             // NativeLibrary does not load symbols globally, so we shouldn't be able to discover symbols from libraries loaded
             // with NativeLibrary.Load.
-            EXPECT(GetSymbolFromMainProgramHandle("LocallyLoadedNativeLib", TestLibrary.Utilities.IsX86 ? "_NativeSum@8" : "NativeSum"),  TestResult.ReturnFailure);
-            EXPECT(GetSymbolFromMainProgramHandle("LocallyLoadedNativeLib", "NonNativeSum"), TestResult.ReturnFailure);
-
+            EXPECT(
+                GetSymbolFromMainProgramHandle(
+                    "LocallyLoadedNativeLib",
+                    TestLibrary.Utilities.IsX86 ? "_NativeSum@8" : "NativeSum"
+                ),
+                TestResult.ReturnFailure
+            );
+            EXPECT(
+                GetSymbolFromMainProgramHandle("LocallyLoadedNativeLib", "NonNativeSum"),
+                TestResult.ReturnFailure
+            );
         }
         finally
         {
@@ -39,13 +53,21 @@ public class GetMainProgramHandleTests
     }
 
     [ConditionalFact(typeof(TestLibrary.Utilities), nameof(TestLibrary.Utilities.IsNotX86))]
-    [SkipOnPlatform(TestPlatforms.Windows, "Windows does not have a concept of globally loaded symbols")]
+    [SkipOnPlatform(
+        TestPlatforms.Windows,
+        "Windows does not have a concept of globally loaded symbols"
+    )]
     public static void GloballyLoadedLibrarySymbolsVisibleFromMainProgramHandle()
     {
         // On non-Windows platforms, symbols from globally loaded shared libraries will also be discoverable.
         // Globally loading symbols is not the .NET default, so we use a call to dlopen in native code
         // with the right flags to test the scenario.
-        IntPtr handle = LoadLibraryGlobally(Path.Combine(NativeLibraryToLoad.GetDirectory(), NativeLibraryToLoad.GetLibraryFileName("GloballyLoadedNativeLibrary")));
+        IntPtr handle = LoadLibraryGlobally(
+            Path.Combine(
+                NativeLibraryToLoad.GetDirectory(),
+                NativeLibraryToLoad.GetLibraryFileName("GloballyLoadedNativeLibrary")
+            )
+        );
 
         try
         {
@@ -58,17 +80,28 @@ public class GetMainProgramHandleTests
     }
 
     [ConditionalFact(typeof(TestLibrary.Utilities), nameof(TestLibrary.Utilities.IsNotX86))]
-    [SkipOnPlatform(TestPlatforms.Windows, "Windows does not have a concept of globally loaded symbols")]
+    [SkipOnPlatform(
+        TestPlatforms.Windows,
+        "Windows does not have a concept of globally loaded symbols"
+    )]
     public static void InvalidSymbolName_Fails()
     {
         // On non-Windows platforms, symbols from globally loaded shared libraries will also be discoverable.
         // Globally loading symbols is not the .NET default, so we use a call to dlopen in native code
         // with the right flags to test the scenario.
-        IntPtr handle = LoadLibraryGlobally(Path.Combine(NativeLibraryToLoad.GetDirectory(), NativeLibraryToLoad.GetLibraryFileName("GloballyLoadedNativeLibrary")));
+        IntPtr handle = LoadLibraryGlobally(
+            Path.Combine(
+                NativeLibraryToLoad.GetDirectory(),
+                NativeLibraryToLoad.GetLibraryFileName("GloballyLoadedNativeLibrary")
+            )
+        );
 
         try
         {
-            EXPECT(GetSymbolFromMainProgramHandle("GloballyLoadedNativeLib", "NonNativeMultiply"), TestResult.ReturnFailure);
+            EXPECT(
+                GetSymbolFromMainProgramHandle("GloballyLoadedNativeLib", "NonNativeMultiply"),
+                TestResult.ReturnFailure
+            );
         }
         finally
         {
@@ -77,13 +110,21 @@ public class GetMainProgramHandleTests
     }
 
     [ConditionalFact(typeof(TestLibrary.Utilities), nameof(TestLibrary.Utilities.IsX86))]
-    [SkipOnPlatform(TestPlatforms.Windows, "Windows does not have a concept of globally loaded symbols")]
+    [SkipOnPlatform(
+        TestPlatforms.Windows,
+        "Windows does not have a concept of globally loaded symbols"
+    )]
     public static void GloballyLoadedLibrarySymbolsVisibleFromMainProgramHandle_Mangling()
     {
         // On non-Windows platforms, symbols from globally loaded shared libraries will also be discoverable.
         // Globally loading symbols is not the .NET default, so we use a call to dlopen in native code
         // with the right flags to test the scenario.
-        IntPtr handle = LoadLibraryGlobally(Path.Combine(NativeLibraryToLoad.GetDirectory(), NativeLibraryToLoad.GetLibraryFileName("GloballyLoadedNativeLibrary")));
+        IntPtr handle = LoadLibraryGlobally(
+            Path.Combine(
+                NativeLibraryToLoad.GetDirectory(),
+                NativeLibraryToLoad.GetLibraryFileName("GloballyLoadedNativeLibrary")
+            )
+        );
 
         try
         {
@@ -102,13 +143,22 @@ public class GetMainProgramHandleTests
         Assert.True(true);
     }
 
-    public static bool IsHostedByCoreRun { get; } = Process.GetCurrentProcess().MainModule.ModuleName is "corerun" or "corerun.exe";
+    public static bool IsHostedByCoreRun { get; } =
+        Process.GetCurrentProcess().MainModule.ModuleName is "corerun" or "corerun.exe";
 
-    static TestResult GetSymbolFromMainProgramHandle(string scenarioName, string symbolToLoadFromHandle)
+    static TestResult GetSymbolFromMainProgramHandle(
+        string scenarioName,
+        string symbolToLoadFromHandle
+    )
     {
-        return Run(() => {
+        return Run(() =>
+        {
             IntPtr moduleHandle = NativeLibrary.GetMainProgramHandle();
-            bool success = NativeLibrary.TryGetExport(moduleHandle, symbolToLoadFromHandle, out IntPtr address);
+            bool success = NativeLibrary.TryGetExport(
+                moduleHandle,
+                symbolToLoadFromHandle,
+                out IntPtr address
+            );
             if (!success)
                 return TestResult.ReturnFailure;
             if (address == IntPtr.Zero)

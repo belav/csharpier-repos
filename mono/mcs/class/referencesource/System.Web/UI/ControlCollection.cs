@@ -4,13 +4,12 @@
 // </copyright>
 //------------------------------------------------------------------------------
 
-namespace System.Web.UI {
-    using System.Runtime.InteropServices;
-
+namespace System.Web.UI
+{
     using System;
     using System.Collections;
+    using System.Runtime.InteropServices;
     using System.Security.Permissions;
-
 
     /// <devdoc>
     ///    <para>
@@ -22,7 +21,8 @@ namespace System.Web.UI {
     ///       ArrayList.cs
     ///    </para>
     /// </devdoc>
-    public class ControlCollection : ICollection {
+    public class ControlCollection : ICollection
+    {
         private Control _owner;
         private Control[] _controls;
         private int _size;
@@ -32,19 +32,22 @@ namespace System.Web.UI {
         private int _defaultCapacity = 5;
         private int _growthFactor = 4;
 
-
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public ControlCollection(Control owner) {
-            if (owner == null) {
+        public ControlCollection(Control owner)
+        {
+            if (owner == null)
+            {
                 throw new ArgumentNullException("owner");
             }
             _owner = owner;
         }
 
-        internal ControlCollection(Control owner, int defaultCapacity, int growthFactor) {
-            if (owner == null) {
+        internal ControlCollection(Control owner, int defaultCapacity, int growthFactor)
+        {
+            if (owner == null)
+            {
                 throw new ArgumentNullException("owner");
             }
             _owner = owner;
@@ -61,23 +64,27 @@ namespace System.Web.UI {
         ///    to the collection. The new control is logically added to the end of an ordinal
         ///    index array.</para>
         /// </devdoc>
-        public virtual void Add(Control child) {
+        public virtual void Add(Control child)
+        {
             // Note: duplication of code with AddAt is deliberate for performance reasons. This is the more common form of the call.
 
             // Check arguments
             if (child == null)
                 throw new ArgumentNullException("child");
 
-            if (_readOnlyErrorMsg != null) {
-                throw new HttpException(SR.GetString(_readOnlyErrorMsg ));
+            if (_readOnlyErrorMsg != null)
+            {
+                throw new HttpException(SR.GetString(_readOnlyErrorMsg));
             }
 
             // Make sure we have room
-            if (_controls == null) {
+            if (_controls == null)
+            {
                 _controls = new Control[_defaultCapacity];
             }
-            else if (_size >= _controls.Length) {
-                Control[] newArray = new Control[_controls.Length * _growthFactor ];
+            else if (_size >= _controls.Length)
+            {
+                Control[] newArray = new Control[_controls.Length * _growthFactor];
                 Array.Copy(_controls, newArray, _controls.Length);
                 _controls = newArray;
             }
@@ -100,43 +107,50 @@ namespace System.Web.UI {
         /// <para>Adds the specified <see cref='System.Web.UI.Control'/> object to the collection. The new control is added
         ///    to the array at the specified index location.</para>
         /// </devdoc>
-        public virtual void AddAt(int index, Control child) {
-
+        public virtual void AddAt(int index, Control child)
+        {
             // For compatability, we must support this.
-            if (index == -1) {
+            if (index == -1)
+            {
                 Add(child);
                 return;
             }
 
             // Check Arguments
-            if (child == null) {
+            if (child == null)
+            {
                 throw new ArgumentNullException("child");
             }
-            if (index < 0 || index > _size) {
+            if (index < 0 || index > _size)
+            {
                 throw new ArgumentOutOfRangeException("index");
             }
 
-            if (_readOnlyErrorMsg != null) {
-                throw new HttpException(SR.GetString(_readOnlyErrorMsg ));
+            if (_readOnlyErrorMsg != null)
+            {
+                throw new HttpException(SR.GetString(_readOnlyErrorMsg));
             }
 
             // Make sure we have room
-            if (_controls == null) {
+            if (_controls == null)
+            {
                 _controls = new Control[_defaultCapacity];
             }
-            else if (_size >= _controls.Length) {
+            else if (_size >= _controls.Length)
+            {
                 //expand
-                Control[] newArray = new Control[_controls.Length * _growthFactor ];
+                Control[] newArray = new Control[_controls.Length * _growthFactor];
                 //copy precedents
                 Array.Copy(_controls, newArray, index);
                 //insert
                 newArray[index] = child;
                 //copy antecedents
-                Array.Copy(_controls, index, newArray, index+1, _size - index);
+                Array.Copy(_controls, index, newArray, index + 1, _size - index);
                 _controls = newArray;
             }
             // Insert the control
-            else if (index < _size) {
+            else if (index < _size)
+            {
                 Array.Copy(_controls, index, _controls, index + 1, _size - index);
             }
             _controls[index] = child;
@@ -146,16 +160,18 @@ namespace System.Web.UI {
             _owner.AddedControl(child, index);
         }
 
-
         /// <devdoc>
         ///    <para>
         ///       Removes all controls in the collection.
         ///    </para>
         /// </devdoc>
-        public virtual void Clear() {
-            if (_controls != null) {
+        public virtual void Clear()
+        {
+            if (_controls != null)
+            {
                 // ASURT 123965: This used to call RemoveAt(0), which was an n^2 operation.  Removing from the end of the array now.
-                for (int i = _size - 1; i >= 0; i--) {
+                for (int i = _size - 1; i >= 0; i--)
+                {
                     RemoveAt(i);
                 }
 
@@ -164,18 +180,20 @@ namespace System.Web.UI {
             }
         }
 
-
         /// <devdoc>
         ///    <para>
         ///       Indicates whether the collection contains a specific object
         ///    </para>
         /// </devdoc>
-        public virtual bool Contains(Control c) {
+        public virtual bool Contains(Control c)
+        {
             if (_controls == null || c == null)
                 return false;
 
-            for (int i = 0; i < _size; i++) {
-                if (Object.ReferenceEquals(c, _controls[i])) {
+            for (int i = 0; i < _size; i++)
+            {
+                if (Object.ReferenceEquals(c, _controls[i]))
+                {
                     return true;
                 }
             }
@@ -190,23 +208,19 @@ namespace System.Web.UI {
         ///    <para>
         ///       Gets the number of child controls in the collection.
         ///    </para>
-        /// </devdoc>        
-        public virtual int Count {
-            get {
-                return _size;
-            }
+        /// </devdoc>
+        public virtual int Count
+        {
+            get { return _size; }
         }
-
 
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        protected Control Owner {
-            get {
-                return _owner;
-            }
+        protected Control Owner
+        {
+            get { return _owner; }
         }
-
 
         /// <devdoc>
         ///    <para>
@@ -215,28 +229,29 @@ namespace System.Web.UI {
         ///       in the collection.
         ///    </para>
         /// </devdoc>
-        public virtual int IndexOf(Control value) {
+        public virtual int IndexOf(Control value)
+        {
             if (_controls == null)
                 return -1;
 
             return Array.IndexOf(_controls, value, 0, _size);
         }
 
-
         /// <devdoc>
         ///    <para>
         ///       Returns an enumerator of all controls in the collection.
         ///    </para>
         /// </devdoc>
-        public virtual IEnumerator GetEnumerator() {
+        public virtual IEnumerator GetEnumerator()
+        {
             return new ControlCollectionEnumerator(this);
         }
-
 
         /// <devdoc>
         ///    <para>Copies the specified child control to a location in the collection.</para>
         /// </devdoc>
-        public virtual void CopyTo(Array array, int index) {
+        public virtual void CopyTo(Array array, int index)
+        {
             if (_controls == null)
                 return;
             if ((array != null) && (array.Rank != 1))
@@ -245,41 +260,40 @@ namespace System.Web.UI {
             Array.Copy(_controls, 0, array, index, _size);
         }
 
-
         /// <devdoc>
         ///    <para>Gets the parent control of the control collection.</para>
         /// </devdoc>
-        public Object SyncRoot {
-            get { return this;}
+        public Object SyncRoot
+        {
+            get { return this; }
         }
-
 
         /// <devdoc>
         ///    <para>Gets a value indicating whether the collection is read-only.</para>
         /// </devdoc>
-        public bool IsReadOnly {
+        public bool IsReadOnly
+        {
             get { return (_readOnlyErrorMsg != null); }
         }
 
         // Setting an error message makes the control collection read only.  If the user tries to modify
         // the collection, we look up the error message in the resources and throw an exception.
         // Set errorMsg to null to make the collection not read only.
-        internal string SetCollectionReadOnly(string errorMsg) {
+        internal string SetCollectionReadOnly(string errorMsg)
+        {
             string olderror = _readOnlyErrorMsg;
             _readOnlyErrorMsg = errorMsg;
             return olderror;
         }
 
-
         /// <devdoc>
         ///    <para> Gets a value indicating whether the collection
         ///       is synchronized.</para>
         /// </devdoc>
-        public bool IsSynchronized {
-            get { return false;}
+        public bool IsSynchronized
+        {
+            get { return false; }
         }
-
-
 
         /// <devdoc>
         ///    <para>
@@ -288,37 +302,38 @@ namespace System.Web.UI {
         /// </devdoc>
         virtual public Control this[int index]
         {
-            get {
-                if (index < 0 || index >= _size) {
+            get
+            {
+                if (index < 0 || index >= _size)
+                {
                     throw new ArgumentOutOfRangeException("index");
                 }
                 return _controls[index];
             }
         }
 
-
         /// <devdoc>
         ///    <para>
         ///       Removes the specified child control from the collection.
         ///    </para>
         /// </devdoc>
-        public virtual void RemoveAt(int index) {
-
-            if (_readOnlyErrorMsg != null) {
-                throw new HttpException(SR.GetString(_readOnlyErrorMsg ));
+        public virtual void RemoveAt(int index)
+        {
+            if (_readOnlyErrorMsg != null)
+            {
+                throw new HttpException(SR.GetString(_readOnlyErrorMsg));
             }
 
             Control child = this[index];
             _size--;
-            if (index < _size) {
+            if (index < _size)
+            {
                 Array.Copy(_controls, index + 1, _controls, index, _size - index);
             }
             _controls[_size] = null;
             _version++;
             _owner.RemovedControl(child);
-
         }
-
 
         /// <devdoc>
         ///    <para>
@@ -326,9 +341,10 @@ namespace System.Web.UI {
         ///       child control object from the collection.
         ///    </para>
         /// </devdoc>
-        public virtual void Remove(Control value) {
+        public virtual void Remove(Control value)
+        {
             int index = IndexOf(value);
-            if (index >=0)
+            if (index >= 0)
                 RemoveAt(index);
         }
 
@@ -340,16 +356,22 @@ namespace System.Web.UI {
             private int version;
             private Control currentElement;
 
-            internal ControlCollectionEnumerator(ControlCollection list) {
+            internal ControlCollectionEnumerator(ControlCollection list)
+            {
                 this.list = list;
                 this.index = -1;
                 version = list._version;
             }
 
-            public bool MoveNext() {
-                if (index < (list.Count-1)) {
-                    if (version != list._version) {
-                        throw new InvalidOperationException(SR.GetString(SR.ListEnumVersionMismatch));
+            public bool MoveNext()
+            {
+                if (index < (list.Count - 1))
+                {
+                    if (version != list._version)
+                    {
+                        throw new InvalidOperationException(
+                            SR.GetString(SR.ListEnumVersionMismatch)
+                        );
                     }
 
                     index++;
@@ -361,29 +383,34 @@ namespace System.Web.UI {
                 return false;
             }
 
-            object IEnumerator.Current {
-                get {
-                    return Current;
-                }
+            object IEnumerator.Current
+            {
+                get { return Current; }
             }
 
-            public Control Current {
-                get {
+            public Control Current
+            {
+                get
+                {
                     if (index == -1)
-                        throw new InvalidOperationException(SR.GetString(SR.ListEnumCurrentOutOfRange));
+                        throw new InvalidOperationException(
+                            SR.GetString(SR.ListEnumCurrentOutOfRange)
+                        );
                     if (index >= list.Count)
-                        throw new InvalidOperationException(SR.GetString(SR.ListEnumCurrentOutOfRange));
+                        throw new InvalidOperationException(
+                            SR.GetString(SR.ListEnumCurrentOutOfRange)
+                        );
                     return currentElement;
                 }
             }
 
-            public void Reset() {
+            public void Reset()
+            {
                 if (version != list._version)
                     throw new InvalidOperationException(SR.GetString(SR.ListEnumVersionMismatch));
                 currentElement = null;
                 index = -1;
             }
         }
-
     }
 }

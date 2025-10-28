@@ -13,7 +13,8 @@ using System.Web.Razor.Tokenizer.Symbols;
 
 namespace System.Web.Razor.Parser
 {
-    public partial class CSharpCodeParser : TokenizerBackedParser<CSharpTokenizer, CSharpSymbol, CSharpSymbolType>
+    public partial class CSharpCodeParser
+        : TokenizerBackedParser<CSharpTokenizer, CSharpSymbol, CSharpSymbolType>
     {
         internal static readonly int UsingKeywordLength = 5; // using
 
@@ -35,11 +36,12 @@ namespace System.Web.Razor.Parser
             "namespace",
             "class",
             "layout",
-            "sessionstate"
+            "sessionstate",
         };
 
         private Dictionary<string, Action> _directiveParsers = new Dictionary<string, Action>();
-        private Dictionary<CSharpKeyword, Action<bool>> _keywordParsers = new Dictionary<CSharpKeyword, Action<bool>>();
+        private Dictionary<CSharpKeyword, Action<bool>> _keywordParsers =
+            new Dictionary<CSharpKeyword, Action<bool>>();
 
         public CSharpCodeParser()
         {
@@ -57,7 +59,11 @@ namespace System.Web.Razor.Parser
             get { return Context.MarkupParser; }
         }
 
-        protected override LanguageCharacteristics<CSharpTokenizer, CSharpSymbol, CSharpSymbolType> Language
+        protected override LanguageCharacteristics<
+            CSharpTokenizer,
+            CSharpSymbol,
+            CSharpSymbolType
+        > Language
         {
             get { return CSharpLanguageCharacteristics.Instance; }
         }
@@ -81,7 +87,11 @@ namespace System.Web.Razor.Parser
             MapKeywords(handler, topLevel: true, keywords: keywords);
         }
 
-        private void MapKeywords(Action<bool> handler, bool topLevel, params CSharpKeyword[] keywords)
+        private void MapKeywords(
+            Action<bool> handler,
+            bool topLevel,
+            params CSharpKeyword[] keywords
+        )
         {
             foreach (CSharpKeyword keyword in keywords)
             {
@@ -93,16 +103,26 @@ namespace System.Web.Razor.Parser
             }
         }
 
-        [SuppressMessage("Microsoft.Performance", "CA1822:MarkMembersAsStatic", Justification = "This only occurs in Release builds, where this method is empty by design")]
+        [SuppressMessage(
+            "Microsoft.Performance",
+            "CA1822:MarkMembersAsStatic",
+            Justification = "This only occurs in Release builds, where this method is empty by design"
+        )]
         [Conditional("DEBUG")]
         internal void Assert(CSharpKeyword expectedKeyword)
         {
-            Debug.Assert(CurrentSymbol.Type == CSharpSymbolType.Keyword && CurrentSymbol.Keyword.HasValue && CurrentSymbol.Keyword.Value == expectedKeyword);
+            Debug.Assert(
+                CurrentSymbol.Type == CSharpSymbolType.Keyword
+                    && CurrentSymbol.Keyword.HasValue
+                    && CurrentSymbol.Keyword.Value == expectedKeyword
+            );
         }
 
         protected internal bool At(CSharpKeyword keyword)
         {
-            return At(CSharpSymbolType.Keyword) && CurrentSymbol.Keyword.HasValue && CurrentSymbol.Keyword.Value == keyword;
+            return At(CSharpSymbolType.Keyword)
+                && CurrentSymbol.Keyword.HasValue
+                && CurrentSymbol.Keyword.Value == keyword;
         }
 
         protected internal bool AcceptIf(CSharpKeyword keyword)
@@ -115,11 +135,15 @@ namespace System.Web.Razor.Parser
             return false;
         }
 
-        protected static Func<CSharpSymbol, bool> IsSpacingToken(bool includeNewLines, bool includeComments)
+        protected static Func<CSharpSymbol, bool> IsSpacingToken(
+            bool includeNewLines,
+            bool includeComments
+        )
         {
-            return sym => sym.Type == CSharpSymbolType.WhiteSpace ||
-                          (includeNewLines && sym.Type == CSharpSymbolType.NewLine) ||
-                          (includeComments && sym.Type == CSharpSymbolType.Comment);
+            return sym =>
+                sym.Type == CSharpSymbolType.WhiteSpace
+                || (includeNewLines && sym.Type == CSharpSymbolType.NewLine)
+                || (includeComments && sym.Type == CSharpSymbolType.Comment);
         }
 
         public override void ParseBlock()
@@ -139,9 +163,17 @@ namespace System.Web.Razor.Parser
                     AcceptWhile(IsSpacingToken(includeNewLines: true, includeComments: true));
 
                     CSharpSymbol current = CurrentSymbol;
-                    if (At(CSharpSymbolType.StringLiteral) && CurrentSymbol.Content.Length > 0 && CurrentSymbol.Content[0] == SyntaxConstants.TransitionCharacter)
+                    if (
+                        At(CSharpSymbolType.StringLiteral)
+                        && CurrentSymbol.Content.Length > 0
+                        && CurrentSymbol.Content[0] == SyntaxConstants.TransitionCharacter
+                    )
                     {
-                        Tuple<CSharpSymbol, CSharpSymbol> split = Language.SplitSymbol(CurrentSymbol, 1, CSharpSymbolType.Transition);
+                        Tuple<CSharpSymbol, CSharpSymbol> split = Language.SplitSymbol(
+                            CurrentSymbol,
+                            1,
+                            CSharpSymbolType.Transition
+                        );
                         current = split.Item1;
                         Context.Source.Position = split.Item2.Start.AbsoluteIndex;
                         NextToken();
@@ -242,21 +274,32 @@ namespace System.Web.Razor.Parser
                     Span.EditHandler = new ImplicitExpressionEditHandler(
                         Language.TokenizeString,
                         DefaultKeywords,
-                        acceptTrailingDot: IsNested)
-                        {
-                            AcceptedCharacters = AcceptedCharacters.NonWhiteSpace
-                        };
+                        acceptTrailingDot: IsNested
+                    )
+                    {
+                        AcceptedCharacters = AcceptedCharacters.NonWhiteSpace,
+                    };
                     if (At(CSharpSymbolType.WhiteSpace) || At(CSharpSymbolType.NewLine))
                     {
-                        Context.OnError(CurrentLocation, RazorResources.ParseError_Unexpected_WhiteSpace_At_Start_Of_CodeBlock_CS);
+                        Context.OnError(
+                            CurrentLocation,
+                            RazorResources.ParseError_Unexpected_WhiteSpace_At_Start_Of_CodeBlock_CS
+                        );
                     }
                     else if (EndOfFile)
                     {
-                        Context.OnError(CurrentLocation, RazorResources.ParseError_Unexpected_EndOfFile_At_Start_Of_CodeBlock);
+                        Context.OnError(
+                            CurrentLocation,
+                            RazorResources.ParseError_Unexpected_EndOfFile_At_Start_Of_CodeBlock
+                        );
                     }
                     else
                     {
-                        Context.OnError(CurrentLocation, RazorResources.ParseError_Unexpected_Character_At_Start_Of_CodeBlock_CS, CurrentSymbol.Content);
+                        Context.OnError(
+                            CurrentLocation,
+                            RazorResources.ParseError_Unexpected_Character_At_Start_Of_CodeBlock_CS,
+                            CurrentSymbol.Content
+                        );
                     }
                 }
                 finally
@@ -279,7 +322,9 @@ namespace System.Web.Razor.Parser
             Output(SpanKind.MetaCode);
 
             // Set up auto-complete and parse the code block
-            AutoCompleteEditHandler editHandler = new AutoCompleteEditHandler(Language.TokenizeString);
+            AutoCompleteEditHandler editHandler = new AutoCompleteEditHandler(
+                Language.TokenizeString
+            );
             Span.EditHandler = editHandler;
             CodeBlock(false, block);
 
@@ -312,12 +357,18 @@ namespace System.Web.Razor.Parser
             Context.CurrentBlock.Type = BlockType.Expression;
             Context.CurrentBlock.CodeGenerator = new ExpressionCodeGenerator();
 
-            using (PushSpanConfig(span =>
-            {
-                span.EditHandler = new ImplicitExpressionEditHandler(Language.TokenizeString, Keywords, acceptTrailingDot: IsNested);
-                span.EditHandler.AcceptedCharacters = AcceptedCharacters.NonWhiteSpace;
-                span.CodeGenerator = new ExpressionCodeGenerator();
-            }))
+            using (
+                PushSpanConfig(span =>
+                {
+                    span.EditHandler = new ImplicitExpressionEditHandler(
+                        Language.TokenizeString,
+                        Keywords,
+                        acceptTrailingDot: IsNested
+                    );
+                    span.EditHandler.AcceptedCharacters = AcceptedCharacters.NonWhiteSpace;
+                    span.CodeGenerator = new ExpressionCodeGenerator();
+                })
+            )
             {
                 do
                 {
@@ -325,8 +376,7 @@ namespace System.Web.Razor.Parser
                     {
                         AcceptAndMoveNext();
                     }
-                }
-                while (MethodCallOrArrayIndex());
+                } while (MethodCallOrArrayIndex());
 
                 PutCurrentBack();
                 Output(SpanKind.Code);
@@ -337,7 +387,10 @@ namespace System.Web.Razor.Parser
         {
             if (!EndOfFile)
             {
-                if (CurrentSymbol.Type == CSharpSymbolType.LeftParenthesis || CurrentSymbol.Type == CSharpSymbolType.LeftBracket)
+                if (
+                    CurrentSymbol.Type == CSharpSymbolType.LeftParenthesis
+                    || CurrentSymbol.Type == CSharpSymbolType.LeftBracket
+                )
                 {
                     // If we end within "(", whitespace is fine
                     Span.EditHandler.AcceptedCharacters = AcceptedCharacters.Any;
@@ -345,14 +398,21 @@ namespace System.Web.Razor.Parser
                     CSharpSymbolType right;
                     bool success;
 
-                    using (PushSpanConfig((span, prev) =>
-                    {
-                        prev(span);
-                        span.EditHandler.AcceptedCharacters = AcceptedCharacters.Any;
-                    }))
+                    using (
+                        PushSpanConfig(
+                            (span, prev) =>
+                            {
+                                prev(span);
+                                span.EditHandler.AcceptedCharacters = AcceptedCharacters.Any;
+                            }
+                        )
+                    )
                     {
                         right = Language.FlipBracket(CurrentSymbol.Type);
-                        success = Balance(BalancingModes.BacktrackOnFailure | BalancingModes.AllowCommentsAndTemplates);
+                        success = Balance(
+                            BalancingModes.BacktrackOnFailure
+                                | BalancingModes.AllowCommentsAndTemplates
+                        );
                     }
 
                     if (!success)
@@ -410,7 +470,10 @@ namespace System.Web.Razor.Parser
 
         private void CompleteBlock(bool insertMarkerIfNecessary)
         {
-            CompleteBlock(insertMarkerIfNecessary, captureWhitespaceToEndOfLine: insertMarkerIfNecessary);
+            CompleteBlock(
+                insertMarkerIfNecessary,
+                captureWhitespaceToEndOfLine: insertMarkerIfNecessary
+            );
         }
 
         private void CompleteBlock(bool insertMarkerIfNecessary, bool captureWhitespaceToEndOfLine)
@@ -424,11 +487,13 @@ namespace System.Web.Razor.Parser
 
             // Read whitespace, but not newlines
             // If we're not inserting a marker span, we don't need to capture whitespace
-            if (!Context.WhiteSpaceIsSignificantToAncestorBlock &&
-                Context.CurrentBlock.Type != BlockType.Expression &&
-                captureWhitespaceToEndOfLine &&
-                !Context.DesignTimeMode &&
-                !IsNested)
+            if (
+                !Context.WhiteSpaceIsSignificantToAncestorBlock
+                && Context.CurrentBlock.Type != BlockType.Expression
+                && captureWhitespaceToEndOfLine
+                && !Context.DesignTimeMode
+                && !IsNested
+            )
             {
                 CaptureWhitespaceAtEndOfCodeOnlyLine();
             }
@@ -440,7 +505,9 @@ namespace System.Web.Razor.Parser
 
         private void CaptureWhitespaceAtEndOfCodeOnlyLine()
         {
-            IEnumerable<CSharpSymbol> ws = ReadWhile(sym => sym.Type == CSharpSymbolType.WhiteSpace);
+            IEnumerable<CSharpSymbol> ws = ReadWhile(sym =>
+                sym.Type == CSharpSymbolType.WhiteSpace
+            );
             if (At(CSharpSymbolType.NewLine))
             {
                 Accept(ws);
@@ -471,21 +538,32 @@ namespace System.Web.Razor.Parser
             using (PushSpanConfig(ConfigureExplicitExpressionSpan))
             {
                 bool success = Balance(
-                    BalancingModes.BacktrackOnFailure | BalancingModes.NoErrorOnFailure | BalancingModes.AllowCommentsAndTemplates,
+                    BalancingModes.BacktrackOnFailure
+                        | BalancingModes.NoErrorOnFailure
+                        | BalancingModes.AllowCommentsAndTemplates,
                     CSharpSymbolType.LeftParenthesis,
                     CSharpSymbolType.RightParenthesis,
-                    block.Start);
+                    block.Start
+                );
 
                 if (!success)
                 {
                     AcceptUntil(CSharpSymbolType.LessThan);
-                    Context.OnError(block.Start, RazorResources.ParseError_Expected_EndOfBlock_Before_EOF, block.Name, ")", "(");
+                    Context.OnError(
+                        block.Start,
+                        RazorResources.ParseError_Expected_EndOfBlock_Before_EOF,
+                        block.Name,
+                        ")",
+                        "("
+                    );
                 }
 
                 // If necessary, put an empty-content marker symbol here
                 if (Span.Symbols.Count == 0)
                 {
-                    Accept(new CSharpSymbol(CurrentLocation, String.Empty, CSharpSymbolType.Unknown));
+                    Accept(
+                        new CSharpSymbol(CurrentLocation, String.Empty, CSharpSymbolType.Unknown)
+                    );
                 }
 
                 // Output the content span and then capture the ")"
@@ -506,7 +584,10 @@ namespace System.Web.Razor.Parser
         {
             if (Context.IsWithin(BlockType.Template))
             {
-                Context.OnError(CurrentLocation, RazorResources.ParseError_InlineMarkup_Blocks_Cannot_Be_Nested);
+                Context.OnError(
+                    CurrentLocation,
+                    RazorResources.ParseError_InlineMarkup_Blocks_Cannot_Be_Nested
+                );
             }
             Output(SpanKind.Code);
             using (Context.StartBlock(BlockType.Template))
@@ -541,13 +622,19 @@ namespace System.Web.Razor.Parser
             NextToken();
         }
 
-        protected override bool IsAtEmbeddedTransition(bool allowTemplatesAndComments, bool allowTransitions)
+        protected override bool IsAtEmbeddedTransition(
+            bool allowTemplatesAndComments,
+            bool allowTransitions
+        )
         {
             // No embedded transitions in C#, so ignore that param
             return allowTemplatesAndComments
-                   && ((Language.IsTransition(CurrentSymbol)
-                        && NextIs(CSharpSymbolType.LessThan, CSharpSymbolType.Colon))
-                       || Language.IsCommentStart(CurrentSymbol));
+                && (
+                    (
+                        Language.IsTransition(CurrentSymbol)
+                        && NextIs(CSharpSymbolType.LessThan, CSharpSymbolType.Colon)
+                    ) || Language.IsCommentStart(CurrentSymbol)
+                );
         }
 
         protected override void HandleEmbeddedTransition()

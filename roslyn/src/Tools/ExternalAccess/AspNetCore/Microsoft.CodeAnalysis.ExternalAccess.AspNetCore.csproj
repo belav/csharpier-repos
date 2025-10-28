@@ -1,6 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project Sdk="Microsoft.NET.Sdk">
-
   <PropertyGroup>
     <RootNamespace>Microsoft.CodeAnalysis.ExternalAccess.AspNetCore</RootNamespace>
     <TargetFramework>netstandard2.0</TargetFramework>
@@ -47,5 +46,4 @@
       <LastGenOutput>ExternalAccessAspNetCoreResources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
   </ItemGroup>
-
 </Project>

@@ -6,6 +6,6 @@
         InvocationContextExitCode,
         FunctionReturnValue,
         AwaitFunction,
-        AwaitFunctionReturnValue
+        AwaitFunctionReturnValue,
     }
 }

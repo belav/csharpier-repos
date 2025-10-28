@@ -15,30 +15,76 @@ namespace System.Diagnostics
         [SupportedOSPlatform("windows")]
         public string? PasswordInClearText
         {
-            get { throw new PlatformNotSupportedException(SR.Format(SR.ProcessStartSingleFeatureNotSupported, nameof(PasswordInClearText))); }
-            set { throw new PlatformNotSupportedException(SR.Format(SR.ProcessStartSingleFeatureNotSupported, nameof(PasswordInClearText))); }
+            get
+            {
+                throw new PlatformNotSupportedException(
+                    SR.Format(SR.ProcessStartSingleFeatureNotSupported, nameof(PasswordInClearText))
+                );
+            }
+            set
+            {
+                throw new PlatformNotSupportedException(
+                    SR.Format(SR.ProcessStartSingleFeatureNotSupported, nameof(PasswordInClearText))
+                );
+            }
         }
 
         [SupportedOSPlatform("windows")]
         [AllowNull]
         public string Domain
         {
-            get { throw new PlatformNotSupportedException(SR.Format(SR.ProcessStartSingleFeatureNotSupported, nameof(Domain))); }
-            set { throw new PlatformNotSupportedException(SR.Format(SR.ProcessStartSingleFeatureNotSupported, nameof(Domain))); }
+            get
+            {
+                throw new PlatformNotSupportedException(
+                    SR.Format(SR.ProcessStartSingleFeatureNotSupported, nameof(Domain))
+                );
+            }
+            set
+            {
+                throw new PlatformNotSupportedException(
+                    SR.Format(SR.ProcessStartSingleFeatureNotSupported, nameof(Domain))
+                );
+            }
         }
 
         [SupportedOSPlatform("windows")]
         public bool LoadUserProfile
         {
-            get { throw new PlatformNotSupportedException(SR.Format(SR.ProcessStartSingleFeatureNotSupported, nameof(LoadUserProfile))); }
-            set { throw new PlatformNotSupportedException(SR.Format(SR.ProcessStartSingleFeatureNotSupported, nameof(LoadUserProfile))); }
+            get
+            {
+                throw new PlatformNotSupportedException(
+                    SR.Format(SR.ProcessStartSingleFeatureNotSupported, nameof(LoadUserProfile))
+                );
+            }
+            set
+            {
+                throw new PlatformNotSupportedException(
+                    SR.Format(SR.ProcessStartSingleFeatureNotSupported, nameof(LoadUserProfile))
+                );
+            }
         }
 
         [SupportedOSPlatform("windows")]
         public bool UseCredentialsForNetworkingOnly
         {
-            get { throw new PlatformNotSupportedException(SR.Format(SR.ProcessStartSingleFeatureNotSupported, nameof(UseCredentialsForNetworkingOnly))); }
-            set { throw new PlatformNotSupportedException(SR.Format(SR.ProcessStartSingleFeatureNotSupported, nameof(UseCredentialsForNetworkingOnly))); }
+            get
+            {
+                throw new PlatformNotSupportedException(
+                    SR.Format(
+                        SR.ProcessStartSingleFeatureNotSupported,
+                        nameof(UseCredentialsForNetworkingOnly)
+                    )
+                );
+            }
+            set
+            {
+                throw new PlatformNotSupportedException(
+                    SR.Format(
+                        SR.ProcessStartSingleFeatureNotSupported,
+                        nameof(UseCredentialsForNetworkingOnly)
+                    )
+                );
+            }
         }
 
         public bool UseShellExecute { get; set; }
@@ -49,8 +95,18 @@ namespace System.Diagnostics
         [SupportedOSPlatform("windows")]
         public SecureString? Password
         {
-            get { throw new PlatformNotSupportedException(SR.Format(SR.ProcessStartSingleFeatureNotSupported, nameof(Password))); }
-            set { throw new PlatformNotSupportedException(SR.Format(SR.ProcessStartSingleFeatureNotSupported, nameof(Password))); }
+            get
+            {
+                throw new PlatformNotSupportedException(
+                    SR.Format(SR.ProcessStartSingleFeatureNotSupported, nameof(Password))
+                );
+            }
+            set
+            {
+                throw new PlatformNotSupportedException(
+                    SR.Format(SR.ProcessStartSingleFeatureNotSupported, nameof(Password))
+                );
+            }
         }
     }
 }

@@ -16,33 +16,15 @@ namespace System.ServiceModel.Activities
         AsyncWaitHandle receivedReplyEvent;
         Exception exceptionOnReply;
 
-        public CorrelationRequestContext()
-        {
-        }
+        public CorrelationRequestContext() { }
 
-        public OperationContext OperationContext
-        {
-            get;
-            set;
-        }
+        public OperationContext OperationContext { get; set; }
 
-        public Message Reply
-        {
-            get;
-            set;
-        }
+        public Message Reply { get; set; }
 
-        public Exception Exception
-        {
-            get;
-            set;
-        }
+        public Exception Exception { get; set; }
 
-        public CorrelationKeyCalculator CorrelationKeyCalculator
-        {
-            get;
-            set;
-        }
+        public CorrelationKeyCalculator CorrelationKeyCalculator { get; set; }
 
         public void EnsureAsyncWaitHandle()
         {
@@ -61,7 +43,10 @@ namespace System.ServiceModel.Activities
 
         public bool WaitForReplyAsync(Action<object, TimeoutException> onReceiveReply, object state)
         {
-            Fx.Assert(this.receivedReplyEvent != null, "AsyncWaitHandle must be initialized before this point!");
+            Fx.Assert(
+                this.receivedReplyEvent != null,
+                "AsyncWaitHandle must be initialized before this point!"
+            );
 
             if (TryGetReply())
             {
@@ -70,7 +55,7 @@ namespace System.ServiceModel.Activities
 
             return this.receivedReplyEvent.WaitAsync(onReceiveReply, state, TimeSpan.MaxValue);
         }
-        
+
         // This is only called on the synchronous code path
         public void ReceiveReply(OperationContext operationContext, Message reply)
         {
@@ -79,14 +64,21 @@ namespace System.ServiceModel.Activities
         }
 
         // This is called on the async code path
-        public void ReceiveAsyncReply(OperationContext operationContext, Message reply, Exception replyException)
+        public void ReceiveAsyncReply(
+            OperationContext operationContext,
+            Message reply,
+            Exception replyException
+        )
         {
-            Fx.Assert(this.receivedReplyEvent != null, "AsyncWaitHandle must be initialized before this point!");
+            Fx.Assert(
+                this.receivedReplyEvent != null,
+                "AsyncWaitHandle must be initialized before this point!"
+            );
 
             this.OperationContext = operationContext;
             this.exceptionOnReply = replyException;
 
-            // NOTE: we make sure that this.Reply is set after the operation context since we 
+            // NOTE: we make sure that this.Reply is set after the operation context since we
             // pivot off of this fact in InternalReceiveMessage to optimize out an AsyncResult
             // allocation. If you have more data to populate in ReceiveAsyncReply, then you need
             // to make those assignments before we populate this.Reply
@@ -97,7 +89,10 @@ namespace System.ServiceModel.Activities
 
         public void Cancel()
         {
-            Fx.Assert(this.receivedReplyEvent != null, "AsyncWaitHandle must be initialized before this point!");
+            Fx.Assert(
+                this.receivedReplyEvent != null,
+                "AsyncWaitHandle must be initialized before this point!"
+            );
 
             this.receivedReplyEvent.Set();
         }

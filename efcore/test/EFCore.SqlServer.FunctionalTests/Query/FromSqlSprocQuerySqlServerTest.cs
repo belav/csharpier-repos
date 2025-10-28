@@ -3,9 +3,12 @@
 
 namespace Microsoft.EntityFrameworkCore.Query;
 
-public class FromSqlSprocQuerySqlServerTest : FromSqlSprocQueryTestBase<NorthwindQuerySqlServerFixture<NoopModelCustomizer>>
+public class FromSqlSprocQuerySqlServerTest
+    : FromSqlSprocQueryTestBase<NorthwindQuerySqlServerFixture<NoopModelCustomizer>>
 {
-    public FromSqlSprocQuerySqlServerTest(NorthwindQuerySqlServerFixture<NoopModelCustomizer> fixture)
+    public FromSqlSprocQuerySqlServerTest(
+        NorthwindQuerySqlServerFixture<NoopModelCustomizer> fixture
+    )
         : base(fixture)
     {
         fixture.TestSqlLoggerFactory.Clear();
@@ -18,7 +21,8 @@ public class FromSqlSprocQuerySqlServerTest : FromSqlSprocQueryTestBase<Northwin
         AssertSql(
             """
 [dbo].[Ten Most Expensive Products]
-""");
+"""
+        );
     }
 
     public override async Task From_sql_queryable_stored_procedure_with_tag(bool async)
@@ -30,7 +34,8 @@ public class FromSqlSprocQuerySqlServerTest : FromSqlSprocQueryTestBase<Northwin
 -- Stored Procedure
 
 [dbo].[Ten Most Expensive Products]
-""");
+"""
+        );
     }
 
     public override async Task From_sql_queryable_stored_procedure_with_tags(bool async)
@@ -44,7 +49,8 @@ public class FromSqlSprocQuerySqlServerTest : FromSqlSprocQueryTestBase<Northwin
 -- Three
 
 [dbo].[Ten Most Expensive Products]
-""");
+"""
+        );
     }
 
     public override async Task From_sql_queryable_stored_procedure_with_caller_info_tag(bool async)
@@ -56,10 +62,13 @@ public class FromSqlSprocQuerySqlServerTest : FromSqlSprocQueryTestBase<Northwin
 -- File: SampleFileName:13
 
 [dbo].[Ten Most Expensive Products]
-""");
+"""
+        );
     }
 
-    public override async Task From_sql_queryable_stored_procedure_with_caller_info_tag_and_other_tags(bool async)
+    public override async Task From_sql_queryable_stored_procedure_with_caller_info_tag_and_other_tags(
+        bool async
+    )
     {
         await base.From_sql_queryable_stored_procedure_with_caller_info_tag_and_other_tags(async);
 
@@ -70,7 +79,8 @@ public class FromSqlSprocQuerySqlServerTest : FromSqlSprocQueryTestBase<Northwin
 -- After
 
 [dbo].[Ten Most Expensive Products]
-""");
+"""
+        );
     }
 
     public override async Task From_sql_queryable_stored_procedure_with_parameter(bool async)
@@ -82,17 +92,21 @@ public class FromSqlSprocQuerySqlServerTest : FromSqlSprocQueryTestBase<Northwin
 p0='ALFKI' (Size = 4000)
 
 [dbo].[CustOrderHist] @CustomerID = @p0
-""");
+"""
+        );
     }
 
-    public override async Task From_sql_queryable_stored_procedure_re_projection_on_client(bool async)
+    public override async Task From_sql_queryable_stored_procedure_re_projection_on_client(
+        bool async
+    )
     {
         await base.From_sql_queryable_stored_procedure_re_projection_on_client(async);
 
         AssertSql(
             """
 [dbo].[Ten Most Expensive Products]
-""");
+"""
+        );
     }
 
     public override async Task From_sql_queryable_stored_procedure_composed_on_client(bool async)
@@ -102,10 +116,13 @@ p0='ALFKI' (Size = 4000)
         AssertSql(
             """
 [dbo].[Ten Most Expensive Products]
-""");
+"""
+        );
     }
 
-    public override async Task From_sql_queryable_stored_procedure_with_parameter_composed_on_client(bool async)
+    public override async Task From_sql_queryable_stored_procedure_with_parameter_composed_on_client(
+        bool async
+    )
     {
         await base.From_sql_queryable_stored_procedure_with_parameter_composed_on_client(async);
 
@@ -114,7 +131,8 @@ p0='ALFKI' (Size = 4000)
 p0='ALFKI' (Size = 4000)
 
 [dbo].[CustOrderHist] @CustomerID = @p0
-""");
+"""
+        );
     }
 
     public override async Task From_sql_queryable_stored_procedure_take_on_client(bool async)
@@ -124,7 +142,8 @@ p0='ALFKI' (Size = 4000)
         AssertSql(
             """
 [dbo].[Ten Most Expensive Products]
-""");
+"""
+        );
     }
 
     public override async Task From_sql_queryable_stored_procedure_min_on_client(bool async)
@@ -134,15 +153,16 @@ p0='ALFKI' (Size = 4000)
         AssertSql(
             """
 [dbo].[Ten Most Expensive Products]
-""");
+"""
+        );
     }
 
-    private void AssertSql(params string[] expected)
-        => Fixture.TestSqlLoggerFactory.AssertBaseline(expected);
+    private void AssertSql(params string[] expected) =>
+        Fixture.TestSqlLoggerFactory.AssertBaseline(expected);
 
-    protected override string TenMostExpensiveProductsSproc
-        => "[dbo].[Ten Most Expensive Products]";
+    protected override string TenMostExpensiveProductsSproc =>
+        "[dbo].[Ten Most Expensive Products]";
 
-    protected override string CustomerOrderHistorySproc
-        => "[dbo].[CustOrderHist] @CustomerID = {0}";
+    protected override string CustomerOrderHistorySproc =>
+        "[dbo].[CustOrderHist] @CustomerID = {0}";
 }

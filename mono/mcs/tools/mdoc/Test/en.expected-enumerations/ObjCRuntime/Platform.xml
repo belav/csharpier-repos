@@ -1,6 +1,9 @@
 <Type Name="Platform" FullName="ObjCRuntime.Platform">
   <TypeSignature Language="C#" Value="public enum Platform" />
-  <TypeSignature Language="ILAsm" Value=".class public auto ansi sealed Platform extends System.Enum" />
+  <TypeSignature
+    Language="ILAsm"
+    Value=".class public auto ansi sealed Platform extends System.Enum"
+  />
   <AssemblyInfo>
     <AssemblyName>DocTest-enumerations</AssemblyName>
     <AssemblyVersion>0.0.0.0</AssemblyVersion>
@@ -20,7 +23,10 @@
   <Members>
     <Member MemberName="iOS_2_0">
       <MemberSignature Language="C#" Value="iOS_2_0" />
-      <MemberSignature Language="ILAsm" Value=".field public static literal valuetype ObjCRuntime.Platform iOS_2_0 = unsigned int64(131072)" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".field public static literal valuetype ObjCRuntime.Platform iOS_2_0 = unsigned int64(131072)"
+      />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>0.0.0.0</AssemblyVersion>
@@ -35,7 +41,10 @@
     </Member>
     <Member MemberName="iOS_2_2">
       <MemberSignature Language="C#" Value="iOS_2_2" />
-      <MemberSignature Language="ILAsm" Value=".field public static literal valuetype ObjCRuntime.Platform iOS_2_2 = unsigned int64(131584)" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".field public static literal valuetype ObjCRuntime.Platform iOS_2_2 = unsigned int64(131584)"
+      />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>0.0.0.0</AssemblyVersion>
@@ -50,7 +59,10 @@
     </Member>
     <Member MemberName="iOS_3_0">
       <MemberSignature Language="C#" Value="iOS_3_0" />
-      <MemberSignature Language="ILAsm" Value=".field public static literal valuetype ObjCRuntime.Platform iOS_3_0 = unsigned int64(196608)" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".field public static literal valuetype ObjCRuntime.Platform iOS_3_0 = unsigned int64(196608)"
+      />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>0.0.0.0</AssemblyVersion>
@@ -65,7 +77,10 @@
     </Member>
     <Member MemberName="iOS_3_1">
       <MemberSignature Language="C#" Value="iOS_3_1" />
-      <MemberSignature Language="ILAsm" Value=".field public static literal valuetype ObjCRuntime.Platform iOS_3_1 = unsigned int64(196864)" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".field public static literal valuetype ObjCRuntime.Platform iOS_3_1 = unsigned int64(196864)"
+      />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>0.0.0.0</AssemblyVersion>
@@ -80,7 +95,10 @@
     </Member>
     <Member MemberName="iOS_3_2">
       <MemberSignature Language="C#" Value="iOS_3_2" />
-      <MemberSignature Language="ILAsm" Value=".field public static literal valuetype ObjCRuntime.Platform iOS_3_2 = unsigned int64(197120)" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".field public static literal valuetype ObjCRuntime.Platform iOS_3_2 = unsigned int64(197120)"
+      />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>0.0.0.0</AssemblyVersion>
@@ -95,7 +113,10 @@
     </Member>
     <Member MemberName="iOS_4_0">
       <MemberSignature Language="C#" Value="iOS_4_0" />
-      <MemberSignature Language="ILAsm" Value=".field public static literal valuetype ObjCRuntime.Platform iOS_4_0 = unsigned int64(262144)" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".field public static literal valuetype ObjCRuntime.Platform iOS_4_0 = unsigned int64(262144)"
+      />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>0.0.0.0</AssemblyVersion>
@@ -110,7 +131,10 @@
     </Member>
     <Member MemberName="iOS_4_1">
       <MemberSignature Language="C#" Value="iOS_4_1" />
-      <MemberSignature Language="ILAsm" Value=".field public static literal valuetype ObjCRuntime.Platform iOS_4_1 = unsigned int64(262400)" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".field public static literal valuetype ObjCRuntime.Platform iOS_4_1 = unsigned int64(262400)"
+      />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>0.0.0.0</AssemblyVersion>
@@ -125,7 +149,10 @@
     </Member>
     <Member MemberName="iOS_4_2">
       <MemberSignature Language="C#" Value="iOS_4_2" />
-      <MemberSignature Language="ILAsm" Value=".field public static literal valuetype ObjCRuntime.Platform iOS_4_2 = unsigned int64(262656)" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".field public static literal valuetype ObjCRuntime.Platform iOS_4_2 = unsigned int64(262656)"
+      />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>0.0.0.0</AssemblyVersion>
@@ -140,7 +167,10 @@
     </Member>
     <Member MemberName="iOS_4_3">
       <MemberSignature Language="C#" Value="iOS_4_3" />
-      <MemberSignature Language="ILAsm" Value=".field public static literal valuetype ObjCRuntime.Platform iOS_4_3 = unsigned int64(262912)" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".field public static literal valuetype ObjCRuntime.Platform iOS_4_3 = unsigned int64(262912)"
+      />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>0.0.0.0</AssemblyVersion>
@@ -155,7 +185,10 @@
     </Member>
     <Member MemberName="iOS_5_0">
       <MemberSignature Language="C#" Value="iOS_5_0" />
-      <MemberSignature Language="ILAsm" Value=".field public static literal valuetype ObjCRuntime.Platform iOS_5_0 = unsigned int64(327680)" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".field public static literal valuetype ObjCRuntime.Platform iOS_5_0 = unsigned int64(327680)"
+      />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>0.0.0.0</AssemblyVersion>
@@ -170,7 +203,10 @@
     </Member>
     <Member MemberName="iOS_5_1">
       <MemberSignature Language="C#" Value="iOS_5_1" />
-      <MemberSignature Language="ILAsm" Value=".field public static literal valuetype ObjCRuntime.Platform iOS_5_1 = unsigned int64(327936)" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".field public static literal valuetype ObjCRuntime.Platform iOS_5_1 = unsigned int64(327936)"
+      />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>0.0.0.0</AssemblyVersion>
@@ -185,7 +221,10 @@
     </Member>
     <Member MemberName="iOS_6_0">
       <MemberSignature Language="C#" Value="iOS_6_0" />
-      <MemberSignature Language="ILAsm" Value=".field public static literal valuetype ObjCRuntime.Platform iOS_6_0 = unsigned int64(393216)" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".field public static literal valuetype ObjCRuntime.Platform iOS_6_0 = unsigned int64(393216)"
+      />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>0.0.0.0</AssemblyVersion>
@@ -200,7 +239,10 @@
     </Member>
     <Member MemberName="iOS_6_1">
       <MemberSignature Language="C#" Value="iOS_6_1" />
-      <MemberSignature Language="ILAsm" Value=".field public static literal valuetype ObjCRuntime.Platform iOS_6_1 = unsigned int64(393472)" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".field public static literal valuetype ObjCRuntime.Platform iOS_6_1 = unsigned int64(393472)"
+      />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>0.0.0.0</AssemblyVersion>
@@ -215,7 +257,10 @@
     </Member>
     <Member MemberName="iOS_7_0">
       <MemberSignature Language="C#" Value="iOS_7_0" />
-      <MemberSignature Language="ILAsm" Value=".field public static literal valuetype ObjCRuntime.Platform iOS_7_0 = unsigned int64(458752)" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".field public static literal valuetype ObjCRuntime.Platform iOS_7_0 = unsigned int64(458752)"
+      />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>0.0.0.0</AssemblyVersion>
@@ -230,7 +275,10 @@
     </Member>
     <Member MemberName="iOS_7_1">
       <MemberSignature Language="C#" Value="iOS_7_1" />
-      <MemberSignature Language="ILAsm" Value=".field public static literal valuetype ObjCRuntime.Platform iOS_7_1 = unsigned int64(459008)" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".field public static literal valuetype ObjCRuntime.Platform iOS_7_1 = unsigned int64(459008)"
+      />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>0.0.0.0</AssemblyVersion>
@@ -245,7 +293,10 @@
     </Member>
     <Member MemberName="iOS_8_0">
       <MemberSignature Language="C#" Value="iOS_8_0" />
-      <MemberSignature Language="ILAsm" Value=".field public static literal valuetype ObjCRuntime.Platform iOS_8_0 = unsigned int64(524288)" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".field public static literal valuetype ObjCRuntime.Platform iOS_8_0 = unsigned int64(524288)"
+      />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>0.0.0.0</AssemblyVersion>
@@ -260,7 +311,10 @@
     </Member>
     <Member MemberName="iOS_8_1">
       <MemberSignature Language="C#" Value="iOS_8_1" />
-      <MemberSignature Language="ILAsm" Value=".field public static literal valuetype ObjCRuntime.Platform iOS_8_1 = unsigned int64(524544)" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".field public static literal valuetype ObjCRuntime.Platform iOS_8_1 = unsigned int64(524544)"
+      />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>0.0.0.0</AssemblyVersion>
@@ -275,7 +329,10 @@
     </Member>
     <Member MemberName="iOS_8_2">
       <MemberSignature Language="C#" Value="iOS_8_2" />
-      <MemberSignature Language="ILAsm" Value=".field public static literal valuetype ObjCRuntime.Platform iOS_8_2 = unsigned int64(524800)" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".field public static literal valuetype ObjCRuntime.Platform iOS_8_2 = unsigned int64(524800)"
+      />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>0.0.0.0</AssemblyVersion>
@@ -290,7 +347,10 @@
     </Member>
     <Member MemberName="iOS_8_3">
       <MemberSignature Language="C#" Value="iOS_8_3" />
-      <MemberSignature Language="ILAsm" Value=".field public static literal valuetype ObjCRuntime.Platform iOS_8_3 = unsigned int64(525056)" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".field public static literal valuetype ObjCRuntime.Platform iOS_8_3 = unsigned int64(525056)"
+      />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>0.0.0.0</AssemblyVersion>
@@ -305,7 +365,10 @@
     </Member>
     <Member MemberName="iOS_Arch">
       <MemberSignature Language="C#" Value="iOS_Arch" />
-      <MemberSignature Language="ILAsm" Value=".field public static literal valuetype ObjCRuntime.Platform iOS_Arch = unsigned int64(4278190080)" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".field public static literal valuetype ObjCRuntime.Platform iOS_Arch = unsigned int64(4278190080)"
+      />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>0.0.0.0</AssemblyVersion>
@@ -320,7 +383,10 @@
     </Member>
     <Member MemberName="iOS_Arch32">
       <MemberSignature Language="C#" Value="iOS_Arch32" />
-      <MemberSignature Language="ILAsm" Value=".field public static literal valuetype ObjCRuntime.Platform iOS_Arch32 = unsigned int64(16777216)" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".field public static literal valuetype ObjCRuntime.Platform iOS_Arch32 = unsigned int64(16777216)"
+      />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>0.0.0.0</AssemblyVersion>
@@ -335,7 +401,10 @@
     </Member>
     <Member MemberName="iOS_Arch64">
       <MemberSignature Language="C#" Value="iOS_Arch64" />
-      <MemberSignature Language="ILAsm" Value=".field public static literal valuetype ObjCRuntime.Platform iOS_Arch64 = unsigned int64(33554432)" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".field public static literal valuetype ObjCRuntime.Platform iOS_Arch64 = unsigned int64(33554432)"
+      />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>0.0.0.0</AssemblyVersion>
@@ -350,7 +419,10 @@
     </Member>
     <Member MemberName="iOS_Version">
       <MemberSignature Language="C#" Value="iOS_Version" />
-      <MemberSignature Language="ILAsm" Value=".field public static literal valuetype ObjCRuntime.Platform iOS_Version = unsigned int64(16777215)" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".field public static literal valuetype ObjCRuntime.Platform iOS_Version = unsigned int64(16777215)"
+      />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>0.0.0.0</AssemblyVersion>
@@ -365,7 +437,10 @@
     </Member>
     <Member MemberName="Mac_10_0">
       <MemberSignature Language="C#" Value="Mac_10_0" />
-      <MemberSignature Language="ILAsm" Value=".field public static literal valuetype ObjCRuntime.Platform Mac_10_0 = unsigned int64(2814749767106560)" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".field public static literal valuetype ObjCRuntime.Platform Mac_10_0 = unsigned int64(2814749767106560)"
+      />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>0.0.0.0</AssemblyVersion>
@@ -380,7 +455,10 @@
     </Member>
     <Member MemberName="Mac_10_1">
       <MemberSignature Language="C#" Value="Mac_10_1" />
-      <MemberSignature Language="ILAsm" Value=".field public static literal valuetype ObjCRuntime.Platform Mac_10_1 = unsigned int64(2815849278734336)" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".field public static literal valuetype ObjCRuntime.Platform Mac_10_1 = unsigned int64(2815849278734336)"
+      />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>0.0.0.0</AssemblyVersion>
@@ -395,7 +473,10 @@
     </Member>
     <Member MemberName="Mac_10_10">
       <MemberSignature Language="C#" Value="Mac_10_10" />
-      <MemberSignature Language="ILAsm" Value=".field public static literal valuetype ObjCRuntime.Platform Mac_10_10 = unsigned int64(2825744883384320)" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".field public static literal valuetype ObjCRuntime.Platform Mac_10_10 = unsigned int64(2825744883384320)"
+      />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>0.0.0.0</AssemblyVersion>
@@ -410,7 +491,10 @@
     </Member>
     <Member MemberName="Mac_10_2">
       <MemberSignature Language="C#" Value="Mac_10_2" />
-      <MemberSignature Language="ILAsm" Value=".field public static literal valuetype ObjCRuntime.Platform Mac_10_2 = unsigned int64(2816948790362112)" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".field public static literal valuetype ObjCRuntime.Platform Mac_10_2 = unsigned int64(2816948790362112)"
+      />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>0.0.0.0</AssemblyVersion>
@@ -425,7 +509,10 @@
     </Member>
     <Member MemberName="Mac_10_3">
       <MemberSignature Language="C#" Value="Mac_10_3" />
-      <MemberSignature Language="ILAsm" Value=".field public static literal valuetype ObjCRuntime.Platform Mac_10_3 = unsigned int64(2818048301989888)" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".field public static literal valuetype ObjCRuntime.Platform Mac_10_3 = unsigned int64(2818048301989888)"
+      />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>0.0.0.0</AssemblyVersion>
@@ -440,7 +527,10 @@
     </Member>
     <Member MemberName="Mac_10_4">
       <MemberSignature Language="C#" Value="Mac_10_4" />
-      <MemberSignature Language="ILAsm" Value=".field public static literal valuetype ObjCRuntime.Platform Mac_10_4 = unsigned int64(2819147813617664)" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".field public static literal valuetype ObjCRuntime.Platform Mac_10_4 = unsigned int64(2819147813617664)"
+      />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>0.0.0.0</AssemblyVersion>
@@ -455,7 +545,10 @@
     </Member>
     <Member MemberName="Mac_10_5">
       <MemberSignature Language="C#" Value="Mac_10_5" />
-      <MemberSignature Language="ILAsm" Value=".field public static literal valuetype ObjCRuntime.Platform Mac_10_5 = unsigned int64(2820247325245440)" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".field public static literal valuetype ObjCRuntime.Platform Mac_10_5 = unsigned int64(2820247325245440)"
+      />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>0.0.0.0</AssemblyVersion>
@@ -470,7 +563,10 @@
     </Member>
     <Member MemberName="Mac_10_6">
       <MemberSignature Language="C#" Value="Mac_10_6" />
-      <MemberSignature Language="ILAsm" Value=".field public static literal valuetype ObjCRuntime.Platform Mac_10_6 = unsigned int64(2821346836873216)" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".field public static literal valuetype ObjCRuntime.Platform Mac_10_6 = unsigned int64(2821346836873216)"
+      />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>0.0.0.0</AssemblyVersion>
@@ -485,7 +581,10 @@
     </Member>
     <Member MemberName="Mac_10_7">
       <MemberSignature Language="C#" Value="Mac_10_7" />
-      <MemberSignature Language="ILAsm" Value=".field public static literal valuetype ObjCRuntime.Platform Mac_10_7 = unsigned int64(2822446348500992)" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".field public static literal valuetype ObjCRuntime.Platform Mac_10_7 = unsigned int64(2822446348500992)"
+      />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>0.0.0.0</AssemblyVersion>
@@ -500,7 +599,10 @@
     </Member>
     <Member MemberName="Mac_10_8">
       <MemberSignature Language="C#" Value="Mac_10_8" />
-      <MemberSignature Language="ILAsm" Value=".field public static literal valuetype ObjCRuntime.Platform Mac_10_8 = unsigned int64(2823545860128768)" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".field public static literal valuetype ObjCRuntime.Platform Mac_10_8 = unsigned int64(2823545860128768)"
+      />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>0.0.0.0</AssemblyVersion>
@@ -515,7 +617,10 @@
     </Member>
     <Member MemberName="Mac_10_9">
       <MemberSignature Language="C#" Value="Mac_10_9" />
-      <MemberSignature Language="ILAsm" Value=".field public static literal valuetype ObjCRuntime.Platform Mac_10_9 = unsigned int64(2824645371756544)" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".field public static literal valuetype ObjCRuntime.Platform Mac_10_9 = unsigned int64(2824645371756544)"
+      />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>0.0.0.0</AssemblyVersion>
@@ -530,7 +635,10 @@
     </Member>
     <Member MemberName="Mac_Arch">
       <MemberSignature Language="C#" Value="Mac_Arch" />
-      <MemberSignature Language="ILAsm" Value=".field public static literal valuetype ObjCRuntime.Platform Mac_Arch = unsigned int64(18374686479671623680)" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".field public static literal valuetype ObjCRuntime.Platform Mac_Arch = unsigned int64(18374686479671623680)"
+      />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>0.0.0.0</AssemblyVersion>
@@ -545,7 +653,10 @@
     </Member>
     <Member MemberName="Mac_Arch32">
       <MemberSignature Language="C#" Value="Mac_Arch32" />
-      <MemberSignature Language="ILAsm" Value=".field public static literal valuetype ObjCRuntime.Platform Mac_Arch32 = unsigned int64(72057594037927936)" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".field public static literal valuetype ObjCRuntime.Platform Mac_Arch32 = unsigned int64(72057594037927936)"
+      />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>0.0.0.0</AssemblyVersion>
@@ -560,7 +671,10 @@
     </Member>
     <Member MemberName="Mac_Arch64">
       <MemberSignature Language="C#" Value="Mac_Arch64" />
-      <MemberSignature Language="ILAsm" Value=".field public static literal valuetype ObjCRuntime.Platform Mac_Arch64 = unsigned int64(144115188075855872)" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".field public static literal valuetype ObjCRuntime.Platform Mac_Arch64 = unsigned int64(144115188075855872)"
+      />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>0.0.0.0</AssemblyVersion>
@@ -575,7 +689,10 @@
     </Member>
     <Member MemberName="Mac_Version">
       <MemberSignature Language="C#" Value="Mac_Version" />
-      <MemberSignature Language="ILAsm" Value=".field public static literal valuetype ObjCRuntime.Platform Mac_Version = unsigned int64(72057589742960640)" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".field public static literal valuetype ObjCRuntime.Platform Mac_Version = unsigned int64(72057589742960640)"
+      />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>0.0.0.0</AssemblyVersion>
@@ -590,7 +707,10 @@
     </Member>
     <Member MemberName="None">
       <MemberSignature Language="C#" Value="None" />
-      <MemberSignature Language="ILAsm" Value=".field public static literal valuetype ObjCRuntime.Platform None = unsigned int64(0)" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".field public static literal valuetype ObjCRuntime.Platform None = unsigned int64(0)"
+      />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>0.0.0.0</AssemblyVersion>

@@ -22,29 +22,27 @@ namespace System.ServiceModel.Routing
             if (TD.RoutingServiceDisplayConfigIsEnabled())
             {
                 TD.RoutingServiceDisplayConfig(
-                    configuration.RouteOnHeadersOnly.ToString(TD.Culture), 
+                    configuration.RouteOnHeadersOnly.ToString(TD.Culture),
                     configuration.SoapProcessingEnabled.ToString(TD.Culture),
-                    configuration.EnsureOrderedDispatch.ToString(TD.Culture));
+                    configuration.EnsureOrderedDispatch.ToString(TD.Culture)
+                );
             }
             this.configuration = configuration;
         }
 
-        [SuppressMessage(FxCop.Category.Performance, FxCop.Rule.AvoidUncalledPrivateCode, Justification = "This gets called in RoutingService..ctor")]
+        [SuppressMessage(
+            FxCop.Category.Performance,
+            FxCop.Rule.AvoidUncalledPrivateCode,
+            Justification = "This gets called in RoutingService..ctor"
+        )]
         internal RoutingConfiguration RoutingConfiguration
         {
-            get
-            {
-                return this.configuration;
-            }
+            get { return this.configuration; }
         }
 
-        void IExtension<ServiceHostBase>.Attach(ServiceHostBase owner)
-        {
-        }
+        void IExtension<ServiceHostBase>.Attach(ServiceHostBase owner) { }
 
-        void IExtension<ServiceHostBase>.Detach(ServiceHostBase owner)
-        {
-        }
+        void IExtension<ServiceHostBase>.Detach(ServiceHostBase owner) { }
 
         public void ApplyConfiguration(RoutingConfiguration routingConfiguration)
         {
@@ -60,9 +58,10 @@ namespace System.ServiceModel.Routing
             if (TD.RoutingServiceDisplayConfigIsEnabled())
             {
                 TD.RoutingServiceDisplayConfig(
-                    routingConfiguration.RouteOnHeadersOnly.ToString(TD.Culture), 
+                    routingConfiguration.RouteOnHeadersOnly.ToString(TD.Culture),
                     routingConfiguration.SoapProcessingEnabled.ToString(TD.Culture),
-                    routingConfiguration.EnsureOrderedDispatch.ToString(TD.Culture));
+                    routingConfiguration.EnsureOrderedDispatch.ToString(TD.Culture)
+                );
             }
 
             this.configuration = routingConfiguration;

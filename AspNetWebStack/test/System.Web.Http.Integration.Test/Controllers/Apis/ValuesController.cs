@@ -23,18 +23,12 @@ namespace System.Web.Http
         }
 
         // POST api/values
-        public void Post(string value = null)
-        {
-        }
+        public void Post(string value = null) { }
 
         // PUT api/values/5
-        public void Put(int id, string value)
-        {
-        }
+        public void Put(int id, string value) { }
 
         // DELETE api/values/5
-        public void Delete(int id)
-        {
-        }
+        public void Delete(int id) { }
     }
 }

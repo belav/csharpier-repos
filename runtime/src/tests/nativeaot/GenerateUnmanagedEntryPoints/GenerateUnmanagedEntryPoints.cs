@@ -10,13 +10,14 @@ namespace GenerateUnmanagedEntryPoints
     unsafe class Program
     {
         [UnmanagedCallersOnly(EntryPoint = "MainAssemblyMethod")]
-        static void MainAssemblyMethod() => Console.WriteLine($"Hello from {nameof(MainAssemblyMethod)}");
+        static void MainAssemblyMethod() =>
+            Console.WriteLine($"Hello from {nameof(MainAssemblyMethod)}");
 
         static int Main()
         {
             IntPtr methodAddress = IntPtr.Zero;
             IntPtr programHandle = IntPtr.Zero;
-            
+
             programHandle = NativeLibrary.GetMainProgramHandle();
             if (programHandle == IntPtr.Zero)
             {
@@ -25,7 +26,7 @@ namespace GenerateUnmanagedEntryPoints
 
             if (NativeLibrary.TryGetExport(programHandle, "MainAssemblyMethod", out methodAddress))
             {
-                var MainAssemblyMethodPtr = (delegate* unmanaged <void>) methodAddress;
+                var MainAssemblyMethodPtr = (delegate* unmanaged<void>)methodAddress;
                 MainAssemblyMethodPtr();
             }
             else
@@ -33,9 +34,15 @@ namespace GenerateUnmanagedEntryPoints
                 return 2;
             }
 
-            if (NativeLibrary.TryGetExport(programHandle, "ReferencedAssembly1Method", out methodAddress))
+            if (
+                NativeLibrary.TryGetExport(
+                    programHandle,
+                    "ReferencedAssembly1Method",
+                    out methodAddress
+                )
+            )
             {
-                var ReferencedAssembly1MethodPtr = (delegate* unmanaged <void>) methodAddress;
+                var ReferencedAssembly1MethodPtr = (delegate* unmanaged<void>)methodAddress;
                 ReferencedAssembly1MethodPtr();
             }
             else
@@ -43,7 +50,13 @@ namespace GenerateUnmanagedEntryPoints
                 return 3;
             }
 
-            if (NativeLibrary.TryGetExport(programHandle, "ReferencedAssembly2Method", out methodAddress))
+            if (
+                NativeLibrary.TryGetExport(
+                    programHandle,
+                    "ReferencedAssembly2Method",
+                    out methodAddress
+                )
+            )
             {
                 // must not be exposed from ReferencedAssembly2 assembly
                 return 4;

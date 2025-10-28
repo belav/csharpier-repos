@@ -5,9 +5,9 @@
 namespace System.Activities.Runtime
 {
     using System;
+    using System.Collections.Generic;
     using System.Runtime;
     using System.Runtime.Serialization;
-    using System.Collections.Generic;
 
     [DataContract]
     class CompletionBookmark
@@ -33,11 +33,17 @@ namespace System.Activities.Runtime
 
         public void CheckForCancelation()
         {
-            Fx.Assert(this.callbackWrapper != null, "We must have a callback wrapper if we are calling this.");
+            Fx.Assert(
+                this.callbackWrapper != null,
+                "We must have a callback wrapper if we are calling this."
+            );
             this.callbackWrapper.CheckForCancelation();
         }
 
-        public WorkItem GenerateWorkItem(ActivityInstance completedInstance, ActivityExecutor executor)
+        public WorkItem GenerateWorkItem(
+            ActivityInstance completedInstance,
+            ActivityExecutor executor
+        )
         {
             if (this.callbackWrapper != null)
             {
@@ -47,12 +53,18 @@ namespace System.Activities.Runtime
             {
                 // Variable defaults and argument expressions always have a parent
                 // and never have a CompletionBookmark
-                if (completedInstance.State != ActivityInstanceState.Closed && completedInstance.Parent.HasNotExecuted)
+                if (
+                    completedInstance.State != ActivityInstanceState.Closed
+                    && completedInstance.Parent.HasNotExecuted
+                )
                 {
                     completedInstance.Parent.SetInitializationIncomplete();
                 }
 
-                return new EmptyWithCancelationCheckWorkItem(completedInstance.Parent, completedInstance);
+                return new EmptyWithCancelationCheckWorkItem(
+                    completedInstance.Parent,
+                    completedInstance
+                );
             }
         }
     }

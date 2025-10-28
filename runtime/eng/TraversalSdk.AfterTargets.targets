@@ -1,5 +1,4 @@
 <Project>
-
   <PropertyGroup>
     <TraversalGlobalProperties>BuildAllProjects=true</TraversalGlobalProperties>
   </PropertyGroup>
@@ -21,9 +20,10 @@
   <ItemGroup Condition="'$(FilterTraversalProjectReferences)' == 'true'">
     <!-- Override the Traversal SDK setting as filtering relies on the TargetFrameworkProperties being fetched
          and don't flow the BuildTargetFramework property down. -->
-    <ProjectReference Update="@(ProjectReference)"
-                      SkipGetTargetFrameworkProperties="false"
-                      UndefineProperties="%(UndefineProperties);BuildTargetFramework"  />
+    <ProjectReference
+      Update="@(ProjectReference)"
+      SkipGetTargetFrameworkProperties="false"
+      UndefineProperties="%(UndefineProperties);BuildTargetFramework"
+    />
   </ItemGroup>
-
 </Project>

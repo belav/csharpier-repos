@@ -7,13 +7,16 @@ namespace System.DirectoryServices.ActiveDirectory
 {
     internal sealed class LsaLogonProcessSafeHandle : SafeHandleZeroOrMinusOneIsInvalid
     {
-        public LsaLogonProcessSafeHandle() : base(true) { }
+        public LsaLogonProcessSafeHandle()
+            : base(true) { }
 
-        internal LsaLogonProcessSafeHandle(IntPtr value) : base(true)
+        internal LsaLogonProcessSafeHandle(IntPtr value)
+            : base(true)
         {
             SetHandle(value);
         }
 
-        protected override bool ReleaseHandle() => NativeMethods.LsaDeregisterLogonProcess(handle) == 0;
+        protected override bool ReleaseHandle() =>
+            NativeMethods.LsaDeregisterLogonProcess(handle) == 0;
     }
 }

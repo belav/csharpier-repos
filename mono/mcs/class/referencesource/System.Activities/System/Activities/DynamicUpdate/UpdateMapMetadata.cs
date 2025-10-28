@@ -16,8 +16,11 @@ namespace System.Activities.DynamicUpdate
         private Activity targetActivity;
         private bool isDisposed;
 
-        internal UpdateMapMetadata(DynamicUpdateMapBuilder.Finalizer finalizer,
-            DynamicUpdateMapBuilder.IDefinitionMatcher matcher, Activity targetActivity)
+        internal UpdateMapMetadata(
+            DynamicUpdateMapBuilder.Finalizer finalizer,
+            DynamicUpdateMapBuilder.IDefinitionMatcher matcher,
+            Activity targetActivity
+        )
         {
             this.finalizer = finalizer;
             this.matcher = matcher;
@@ -73,24 +76,37 @@ namespace System.Activities.DynamicUpdate
                 else if (result != null)
                 {
                     // GetMatch checks that the activities have the same relationship to declaring parent.
-                    // But for referenced children, we also need to check whether they have the same relationship 
+                    // But for referenced children, we also need to check whether they have the same relationship
                     // to referencing parent.
                     // In case of multiple references from the same parent, we'll compare the first one we find.
                     bool updatedIsImport;
-                    bool updatedIsReferenced = IsChild(this.TargetActivity, updatedChild, out updatedIsImport);
+                    bool updatedIsReferenced = IsChild(
+                        this.TargetActivity,
+                        updatedChild,
+                        out updatedIsImport
+                    );
                     bool updatedIsDelegate = updatedChild.HandlerOf != null;
 
                     bool originalIsImport;
-                    bool originalIsReferenced = IsChild(GetMatch(this.TargetActivity), result, out originalIsImport);
+                    bool originalIsReferenced = IsChild(
+                        GetMatch(this.TargetActivity),
+                        result,
+                        out originalIsImport
+                    );
                     bool originalIsDelegate = result.HandlerOf != null;
 
-                    if (updatedIsReferenced && originalIsReferenced && updatedIsImport == originalIsImport && updatedIsDelegate == originalIsDelegate)
+                    if (
+                        updatedIsReferenced
+                        && originalIsReferenced
+                        && updatedIsImport == originalIsImport
+                        && updatedIsDelegate == originalIsDelegate
+                    )
                     {
                         return result;
                     }
                 }
             }
-            
+
             return null;
         }
 
@@ -103,7 +119,7 @@ namespace System.Activities.DynamicUpdate
                 Variable result = this.matcher.GetMatch(updatedVariable);
                 return result;
             }
-            
+
             return null;
         }
 
@@ -116,16 +132,16 @@ namespace System.Activities.DynamicUpdate
                 return false;
             }
 
-            Activity parent = (childActivity.RootActivity == this.TargetActivity.RootActivity) ? this.TargetActivity : GetMatch(this.TargetActivity);
+            Activity parent =
+                (childActivity.RootActivity == this.TargetActivity.RootActivity)
+                    ? this.TargetActivity
+                    : GetMatch(this.TargetActivity);
             return IsReferenceToImportedChild(parent, childActivity);
         }
 
         internal bool IsUpdateExplicitlyAllowedOrDisallowed
         {
-            get
-            {
-                return this.finalizer.AllowUpdateInsideCurrentActivity.HasValue;
-            }
+            get { return this.finalizer.AllowUpdateInsideCurrentActivity.HasValue; }
         }
 
         internal void Dispose()
@@ -152,18 +168,12 @@ namespace System.Activities.DynamicUpdate
 
         internal DynamicUpdateMapBuilder.Finalizer Finalizer
         {
-            get
-            {
-                return this.finalizer;
-            }
+            get { return this.finalizer; }
         }
 
         internal Activity TargetActivity
         {
-            get
-            {
-                return this.targetActivity;
-            }
+            get { return this.targetActivity; }
         }
 
         internal void ThrowIfDisposed()

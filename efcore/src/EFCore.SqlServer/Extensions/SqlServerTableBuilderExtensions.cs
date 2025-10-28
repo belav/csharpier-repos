@@ -24,7 +24,8 @@ public static class SqlServerTableBuilderExtensions
     /// <returns>An object that can be used to configure the temporal table.</returns>
     public static TemporalTableBuilder IsTemporal(
         this TableBuilder tableBuilder,
-        bool temporal = true)
+        bool temporal = true
+    )
     {
         tableBuilder.Metadata.SetIsTemporal(temporal);
 
@@ -43,7 +44,8 @@ public static class SqlServerTableBuilderExtensions
     /// <returns>The same builder instance so that multiple calls can be chained.</returns>
     public static TableBuilder IsTemporal(
         this TableBuilder tableBuilder,
-        Action<TemporalTableBuilder> buildAction)
+        Action<TemporalTableBuilder> buildAction
+    )
     {
         tableBuilder.Metadata.SetIsTemporal(true);
 
@@ -65,12 +67,15 @@ public static class SqlServerTableBuilderExtensions
     /// <returns>An object that can be used to configure the temporal table.</returns>
     public static TemporalTableBuilder<TEntity> IsTemporal<TEntity>(
         this TableBuilder<TEntity> tableBuilder,
-        bool temporal = true)
+        bool temporal = true
+    )
         where TEntity : class
     {
         tableBuilder.Metadata.SetIsTemporal(temporal);
 
-        return new TemporalTableBuilder<TEntity>(tableBuilder.GetInfrastructure<EntityTypeBuilder<TEntity>>());
+        return new TemporalTableBuilder<TEntity>(
+            tableBuilder.GetInfrastructure<EntityTypeBuilder<TEntity>>()
+        );
     }
 
     /// <summary>
@@ -86,11 +91,16 @@ public static class SqlServerTableBuilderExtensions
     /// <returns>The same builder instance so that multiple calls can be chained.</returns>
     public static TableBuilder<TEntity> IsTemporal<TEntity>(
         this TableBuilder<TEntity> tableBuilder,
-        Action<TemporalTableBuilder<TEntity>> buildAction)
+        Action<TemporalTableBuilder<TEntity>> buildAction
+    )
         where TEntity : class
     {
         tableBuilder.Metadata.SetIsTemporal(true);
-        buildAction(new TemporalTableBuilder<TEntity>(tableBuilder.GetInfrastructure<EntityTypeBuilder<TEntity>>()));
+        buildAction(
+            new TemporalTableBuilder<TEntity>(
+                tableBuilder.GetInfrastructure<EntityTypeBuilder<TEntity>>()
+            )
+        );
 
         return tableBuilder;
     }
@@ -107,7 +117,8 @@ public static class SqlServerTableBuilderExtensions
     /// <returns>An object that can be used to configure the temporal table.</returns>
     public static OwnedNavigationTemporalTableBuilder IsTemporal(
         this OwnedNavigationTableBuilder tableBuilder,
-        bool temporal = true)
+        bool temporal = true
+    )
     {
         tableBuilder.Metadata.SetIsTemporal(temporal);
 
@@ -126,7 +137,8 @@ public static class SqlServerTableBuilderExtensions
     /// <returns>The same builder instance so that multiple calls can be chained.</returns>
     public static OwnedNavigationTableBuilder IsTemporal(
         this OwnedNavigationTableBuilder tableBuilder,
-        Action<OwnedNavigationTemporalTableBuilder> buildAction)
+        Action<OwnedNavigationTemporalTableBuilder> buildAction
+    )
     {
         tableBuilder.Metadata.SetIsTemporal(true);
 
@@ -147,16 +159,21 @@ public static class SqlServerTableBuilderExtensions
     /// <param name="tableBuilder">The builder for the table being configured.</param>
     /// <param name="temporal">A value indicating whether the table is temporal.</param>
     /// <returns>An object that can be used to configure the temporal table.</returns>
-    public static OwnedNavigationTemporalTableBuilder<TOwnerEntity, TDependentEntity> IsTemporal<TOwnerEntity, TDependentEntity>(
+    public static OwnedNavigationTemporalTableBuilder<TOwnerEntity, TDependentEntity> IsTemporal<
+        TOwnerEntity,
+        TDependentEntity
+    >(
         this OwnedNavigationTableBuilder<TOwnerEntity, TDependentEntity> tableBuilder,
-        bool temporal = true)
+        bool temporal = true
+    )
         where TOwnerEntity : class
         where TDependentEntity : class
     {
         tableBuilder.Metadata.SetIsTemporal(temporal);
 
         return new OwnedNavigationTemporalTableBuilder<TOwnerEntity, TDependentEntity>(
-            tableBuilder.GetInfrastructure<OwnedNavigationBuilder<TOwnerEntity, TDependentEntity>>());
+            tableBuilder.GetInfrastructure<OwnedNavigationBuilder<TOwnerEntity, TDependentEntity>>()
+        );
     }
 
     /// <summary>
@@ -171,16 +188,24 @@ public static class SqlServerTableBuilderExtensions
     /// <param name="tableBuilder">The builder for the table being configured.</param>
     /// <param name="buildAction">An action that performs configuration of the temporal table.</param>
     /// <returns>The same builder instance so that multiple calls can be chained.</returns>
-    public static OwnedNavigationTableBuilder<TOwnerEntity, TDependentEntity> IsTemporal<TOwnerEntity, TDependentEntity>(
+    public static OwnedNavigationTableBuilder<TOwnerEntity, TDependentEntity> IsTemporal<
+        TOwnerEntity,
+        TDependentEntity
+    >(
         this OwnedNavigationTableBuilder<TOwnerEntity, TDependentEntity> tableBuilder,
-        Action<OwnedNavigationTemporalTableBuilder<TOwnerEntity, TDependentEntity>> buildAction)
+        Action<OwnedNavigationTemporalTableBuilder<TOwnerEntity, TDependentEntity>> buildAction
+    )
         where TOwnerEntity : class
         where TDependentEntity : class
     {
         tableBuilder.Metadata.SetIsTemporal(true);
         buildAction(
             new OwnedNavigationTemporalTableBuilder<TOwnerEntity, TDependentEntity>(
-                tableBuilder.GetInfrastructure<OwnedNavigationBuilder<TOwnerEntity, TDependentEntity>>()));
+                tableBuilder.GetInfrastructure<
+                    OwnedNavigationBuilder<TOwnerEntity, TDependentEntity>
+                >()
+            )
+        );
 
         return tableBuilder;
     }
@@ -201,7 +226,8 @@ public static class SqlServerTableBuilderExtensions
     /// <returns>The same builder instance so that multiple calls can be chained.</returns>
     public static TableBuilder IsMemoryOptimized(
         this TableBuilder tableBuilder,
-        bool memoryOptimized = true)
+        bool memoryOptimized = true
+    )
     {
         tableBuilder.Metadata.SetIsMemoryOptimized(memoryOptimized);
 
@@ -221,7 +247,8 @@ public static class SqlServerTableBuilderExtensions
     /// <returns>The same builder instance so that multiple calls can be chained.</returns>
     public static TableBuilder<TEntity> IsMemoryOptimized<TEntity>(
         this TableBuilder<TEntity> tableBuilder,
-        bool memoryOptimized = true)
+        bool memoryOptimized = true
+    )
         where TEntity : class
     {
         tableBuilder.Metadata.SetIsMemoryOptimized(memoryOptimized);
@@ -241,7 +268,8 @@ public static class SqlServerTableBuilderExtensions
     /// <returns>The same builder instance so that multiple calls can be chained.</returns>
     public static OwnedNavigationTableBuilder IsMemoryOptimized(
         this OwnedNavigationTableBuilder tableBuilder,
-        bool memoryOptimized = true)
+        bool memoryOptimized = true
+    )
     {
         tableBuilder.Metadata.SetIsMemoryOptimized(memoryOptimized);
 
@@ -260,9 +288,13 @@ public static class SqlServerTableBuilderExtensions
     /// <param name="tableBuilder">The builder for the table being configured.</param>
     /// <param name="memoryOptimized">A value indicating whether the table is memory-optimized.</param>
     /// <returns>The same builder instance so that multiple calls can be chained.</returns>
-    public static OwnedNavigationTableBuilder<TOwnerEntity, TDependentEntity> IsMemoryOptimized<TOwnerEntity, TDependentEntity>(
+    public static OwnedNavigationTableBuilder<TOwnerEntity, TDependentEntity> IsMemoryOptimized<
+        TOwnerEntity,
+        TDependentEntity
+    >(
         this OwnedNavigationTableBuilder<TOwnerEntity, TDependentEntity> tableBuilder,
-        bool memoryOptimized = true)
+        bool memoryOptimized = true
+    )
         where TOwnerEntity : class
         where TDependentEntity : class
     {
@@ -288,9 +320,15 @@ public static class SqlServerTableBuilderExtensions
     /// <returns>The same builder instance so that multiple calls can be chained.</returns>
     public static TableBuilder UseSqlOutputClause(
         this TableBuilder tableBuilder,
-        bool useSqlOutputClause = true)
+        bool useSqlOutputClause = true
+    )
     {
-        UseSqlOutputClause(tableBuilder.Metadata, tableBuilder.Name, tableBuilder.Schema, useSqlOutputClause);
+        UseSqlOutputClause(
+            tableBuilder.Metadata,
+            tableBuilder.Name,
+            tableBuilder.Schema,
+            useSqlOutputClause
+        );
 
         return tableBuilder;
     }
@@ -309,9 +347,10 @@ public static class SqlServerTableBuilderExtensions
     /// <returns>The same builder instance so that multiple calls can be chained.</returns>
     public static TableBuilder<TEntity> UseSqlOutputClause<TEntity>(
         this TableBuilder<TEntity> tableBuilder,
-        bool useSqlOutputClause = true)
-        where TEntity : class
-        => (TableBuilder<TEntity>)((TableBuilder)tableBuilder).UseSqlOutputClause(useSqlOutputClause);
+        bool useSqlOutputClause = true
+    )
+        where TEntity : class =>
+        (TableBuilder<TEntity>)((TableBuilder)tableBuilder).UseSqlOutputClause(useSqlOutputClause);
 
     /// <summary>
     ///     Configures whether to use the SQL OUTPUT clause when saving changes to the table.
@@ -326,9 +365,15 @@ public static class SqlServerTableBuilderExtensions
     /// <returns>The same builder instance so that multiple calls can be chained.</returns>
     public static SplitTableBuilder UseSqlOutputClause(
         this SplitTableBuilder tableBuilder,
-        bool useSqlOutputClause = true)
+        bool useSqlOutputClause = true
+    )
     {
-        UseSqlOutputClause(tableBuilder.Metadata, tableBuilder.Name, tableBuilder.Schema, useSqlOutputClause);
+        UseSqlOutputClause(
+            tableBuilder.Metadata,
+            tableBuilder.Name,
+            tableBuilder.Schema,
+            useSqlOutputClause
+        );
 
         return tableBuilder;
     }
@@ -347,9 +392,11 @@ public static class SqlServerTableBuilderExtensions
     /// <returns>The same builder instance so that multiple calls can be chained.</returns>
     public static SplitTableBuilder<TEntity> UseSqlOutputClause<TEntity>(
         this SplitTableBuilder<TEntity> tableBuilder,
-        bool useSqlOutputClause = true)
-        where TEntity : class
-        => (SplitTableBuilder<TEntity>)((SplitTableBuilder)tableBuilder).UseSqlOutputClause(useSqlOutputClause);
+        bool useSqlOutputClause = true
+    )
+        where TEntity : class =>
+        (SplitTableBuilder<TEntity>)
+            ((SplitTableBuilder)tableBuilder).UseSqlOutputClause(useSqlOutputClause);
 
     /// <summary>
     ///     Configures whether to use the SQL OUTPUT clause when saving changes to the table.
@@ -364,9 +411,15 @@ public static class SqlServerTableBuilderExtensions
     /// <returns>The same builder instance so that multiple calls can be chained.</returns>
     public static OwnedNavigationTableBuilder UseSqlOutputClause(
         this OwnedNavigationTableBuilder tableBuilder,
-        bool useSqlOutputClause = true)
+        bool useSqlOutputClause = true
+    )
     {
-        UseSqlOutputClause(tableBuilder.Metadata, tableBuilder.Name, tableBuilder.Schema, useSqlOutputClause);
+        UseSqlOutputClause(
+            tableBuilder.Metadata,
+            tableBuilder.Name,
+            tableBuilder.Schema,
+            useSqlOutputClause
+        );
 
         return tableBuilder;
     }
@@ -384,15 +437,24 @@ public static class SqlServerTableBuilderExtensions
     /// <param name="tableBuilder">The builder for the table being configured.</param>
     /// <param name="useSqlOutputClause">A value indicating whether to use the OUTPUT clause when saving changes to the table.</param>
     /// <returns>The same builder instance so that multiple calls can be chained.</returns>
-    public static OwnedNavigationTableBuilder<TOwnerEntity, TDependentEntity> UseSqlOutputClause<TOwnerEntity, TDependentEntity>(
+    public static OwnedNavigationTableBuilder<TOwnerEntity, TDependentEntity> UseSqlOutputClause<
+        TOwnerEntity,
+        TDependentEntity
+    >(
         this OwnedNavigationTableBuilder<TOwnerEntity, TDependentEntity> tableBuilder,
-        bool useSqlOutputClause = true)
+        bool useSqlOutputClause = true
+    )
         where TOwnerEntity : class
-        where TDependentEntity : class
-        => (OwnedNavigationTableBuilder<TOwnerEntity, TDependentEntity>)
+        where TDependentEntity : class =>
+        (OwnedNavigationTableBuilder<TOwnerEntity, TDependentEntity>)
             ((OwnedNavigationTableBuilder)tableBuilder).UseSqlOutputClause(useSqlOutputClause);
 
-    private static void UseSqlOutputClause(IMutableEntityType entityType, string? tableName, string? tableSchema, bool useSqlOutputClause)
+    private static void UseSqlOutputClause(
+        IMutableEntityType entityType,
+        string? tableName,
+        string? tableSchema,
+        bool useSqlOutputClause
+    )
     {
         if (tableName is null)
         {
@@ -402,7 +464,8 @@ public static class SqlServerTableBuilderExtensions
         {
             entityType.UseSqlOutputClause(
                 useSqlOutputClause,
-                StoreObjectIdentifier.Table(tableName, tableSchema));
+                StoreObjectIdentifier.Table(tableName, tableSchema)
+            );
         }
     }
 

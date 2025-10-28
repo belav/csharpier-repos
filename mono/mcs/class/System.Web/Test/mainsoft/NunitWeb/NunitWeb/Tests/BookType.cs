@@ -7,6 +7,6 @@ namespace Samples.AspNet.CS.Controls
     {
         NotDefined = 0,
         Fiction = 1,
-        NonFiction = 2
+        NonFiction = 2,
     }
 }

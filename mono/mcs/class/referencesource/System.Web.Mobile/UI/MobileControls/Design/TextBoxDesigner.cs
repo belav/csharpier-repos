@@ -1,10 +1,10 @@
 //------------------------------------------------------------------------------
 // <copyright file="TextBoxDesigner.cs" company="Microsoft">
 //     Copyright (c) Microsoft Corporation.  All rights reserved.
-// </copyright>                                                                
+// </copyright>
 //------------------------------------------------------------------------------
 
-namespace System.Web.UI.Design.MobileControls 
+namespace System.Web.UI.Design.MobileControls
 {
     using System;
     using System.ComponentModel;
@@ -12,9 +12,8 @@ namespace System.Web.UI.Design.MobileControls
     using System.IO;
     using System.Web.UI;
     using System.Web.UI.Design;
-
-    using System.Web.UI.MobileControls.Adapters;
     using System.Web.UI.Design.MobileControls.Adapters;
+    using System.Web.UI.MobileControls.Adapters;
 
     /// <summary>
     ///    <para>
@@ -23,11 +22,13 @@ namespace System.Web.UI.Design.MobileControls
     ///    </para>
     /// </summary>
     /// <seealso cref='System.Web.UI.MobileControls.TextBox'/>
-    [
-        System.Security.Permissions.SecurityPermission(System.Security.Permissions.SecurityAction.Demand,
-        Flags=System.Security.Permissions.SecurityPermissionFlag.UnmanagedCode)
-    ]
-    [Obsolete("The System.Web.Mobile.dll assembly has been deprecated and should no longer be used. For information about how to develop ASP.NET mobile applications, see http://go.microsoft.com/fwlink/?LinkId=157231.")]
+    [System.Security.Permissions.SecurityPermission(
+        System.Security.Permissions.SecurityAction.Demand,
+        Flags = System.Security.Permissions.SecurityPermissionFlag.UnmanagedCode
+    )]
+    [Obsolete(
+        "The System.Web.Mobile.dll assembly has been deprecated and should no longer be used. For information about how to develop ASP.NET mobile applications, see http://go.microsoft.com/fwlink/?LinkId=157231."
+    )]
     internal class TextBoxDesigner : MobileControlDesigner
     {
         private System.Web.UI.MobileControls.TextBox _textBox;
@@ -49,9 +50,11 @@ namespace System.Web.UI.Design.MobileControls
         /// <seealso cref='System.ComponentModel.Design.IDesigner'/>
         public override void Initialize(IComponent component)
         {
-            Debug.Assert(component is System.Web.UI.MobileControls.TextBox,
-                         "TextBoxDesigner.Initialize - Invalid TextBox Control");
-            _textBox = (System.Web.UI.MobileControls.TextBox) component;
+            Debug.Assert(
+                component is System.Web.UI.MobileControls.TextBox,
+                "TextBoxDesigner.Initialize - Invalid TextBox Control"
+            );
+            _textBox = (System.Web.UI.MobileControls.TextBox)component;
             base.Initialize(component);
         }
 
@@ -75,4 +78,3 @@ namespace System.Web.UI.Design.MobileControls
         }
     }
 }
-

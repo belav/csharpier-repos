@@ -34,7 +34,10 @@ namespace System.IO
             for (int i = 0; i <= 2; i++)
             {
                 // Prefix with "#" to help spot leaked files
-                TestDirectory = Path.Combine(tempDirectory, "#" + GetType().Name + "_" + Path.GetRandomFileName());
+                TestDirectory = Path.Combine(
+                    tempDirectory,
+                    "#" + GetType().Name + "_" + Path.GetRandomFileName()
+                );
                 try
                 {
                     Directory.CreateDirectory(TestDirectory);
@@ -47,7 +50,10 @@ namespace System.IO
                 }
             }
 
-            Assert.True(Directory.Exists(TestDirectory), $"FileCleanupTestBase failed to create {TestDirectory}. {failure}");
+            Assert.True(
+                Directory.Exists(TestDirectory),
+                $"FileCleanupTestBase failed to create {TestDirectory}. {failure}"
+            );
         }
 
         /// <summary>Delete the associated test directory.</summary>
@@ -75,7 +81,12 @@ namespace System.IO
                 catch (UnauthorizedAccessException)
                 {
                     DirectoryInfo di = new DirectoryInfo(TestDirectory);
-                    foreach (FileSystemInfo fsi in di.EnumerateFileSystemInfos("*", SearchOption.AllDirectories))
+                    foreach (
+                        FileSystemInfo fsi in di.EnumerateFileSystemInfos(
+                            "*",
+                            SearchOption.AllDirectories
+                        )
+                    )
                     {
                         fsi.Attributes = FileAttributes.Normal;
                     }
@@ -83,7 +94,7 @@ namespace System.IO
                     Directory.Delete(TestDirectory, recursive: true);
                 }
             }
-            catch {  } // avoid exceptions escaping Dispose
+            catch { } // avoid exceptions escaping Dispose
         }
 
         /// <summary>
@@ -92,29 +103,59 @@ namespace System.IO
         /// </summary>
         protected string TestDirectory { get; }
 
-        protected string GetRandomFileName([CallerMemberName] string memberName = null, [CallerLineNumber] int lineNumber = 0) => GetTestFileName(index: null, memberName, lineNumber) + ".txt";
-        protected string GetRandomLinkName([CallerMemberName] string memberName = null, [CallerLineNumber] int lineNumber = 0) => GetTestFileName(index: null, memberName, lineNumber) + ".link";
-        protected string GetRandomDirName([CallerMemberName] string memberName = null, [CallerLineNumber] int lineNumber = 0) => GetTestFileName(index: null, memberName, lineNumber) + "_dir";
+        protected string GetRandomFileName(
+            [CallerMemberName] string memberName = null,
+            [CallerLineNumber] int lineNumber = 0
+        ) => GetTestFileName(index: null, memberName, lineNumber) + ".txt";
 
-        protected string GetRandomFilePath([CallerMemberName] string memberName = null, [CallerLineNumber] int lineNumber = 0) => Path.Combine(TestDirectoryActualCasing, GetRandomFileName(memberName, lineNumber));
-        protected string GetRandomLinkPath([CallerMemberName] string memberName = null, [CallerLineNumber] int lineNumber = 0) => Path.Combine(TestDirectoryActualCasing, GetRandomLinkName(memberName, lineNumber));
-        protected string GetRandomDirPath([CallerMemberName] string memberName = null, [CallerLineNumber] int lineNumber = 0)  => Path.Combine(TestDirectoryActualCasing, GetRandomDirName(memberName, lineNumber));
+        protected string GetRandomLinkName(
+            [CallerMemberName] string memberName = null,
+            [CallerLineNumber] int lineNumber = 0
+        ) => GetTestFileName(index: null, memberName, lineNumber) + ".link";
+
+        protected string GetRandomDirName(
+            [CallerMemberName] string memberName = null,
+            [CallerLineNumber] int lineNumber = 0
+        ) => GetTestFileName(index: null, memberName, lineNumber) + "_dir";
+
+        protected string GetRandomFilePath(
+            [CallerMemberName] string memberName = null,
+            [CallerLineNumber] int lineNumber = 0
+        ) => Path.Combine(TestDirectoryActualCasing, GetRandomFileName(memberName, lineNumber));
+
+        protected string GetRandomLinkPath(
+            [CallerMemberName] string memberName = null,
+            [CallerLineNumber] int lineNumber = 0
+        ) => Path.Combine(TestDirectoryActualCasing, GetRandomLinkName(memberName, lineNumber));
+
+        protected string GetRandomDirPath(
+            [CallerMemberName] string memberName = null,
+            [CallerLineNumber] int lineNumber = 0
+        ) => Path.Combine(TestDirectoryActualCasing, GetRandomDirName(memberName, lineNumber));
 
         private string _testDirectoryActualCasing;
-        private string TestDirectoryActualCasing => _testDirectoryActualCasing ??= GetTestDirectoryActualCasing();
+        private string TestDirectoryActualCasing =>
+            _testDirectoryActualCasing ??= GetTestDirectoryActualCasing();
 
         /// <summary>Gets a test file full path that is associated with the call site.</summary>
         /// <param name="index">An optional index value to use as a suffix on the file name.  Typically a loop index.</param>
         /// <param name="memberName">The member name of the function calling this method.</param>
         /// <param name="lineNumber">The line number of the function calling this method.</param>
-        protected virtual string GetTestFilePath(int? index = null, [CallerMemberName] string memberName = null, [CallerLineNumber] int lineNumber = 0) =>
-            Path.Combine(TestDirectory, GetTestFileName(index, memberName, lineNumber));
+        protected virtual string GetTestFilePath(
+            int? index = null,
+            [CallerMemberName] string memberName = null,
+            [CallerLineNumber] int lineNumber = 0
+        ) => Path.Combine(TestDirectory, GetTestFileName(index, memberName, lineNumber));
 
         /// <summary>Gets a test file name that is associated with the call site.</summary>
         /// <param name="index">An optional index value to use as a suffix on the file name.  Typically a loop index.</param>
         /// <param name="memberName">The member name of the function calling this method.</param>
         /// <param name="lineNumber">The line number of the function calling this method.</param>
-        protected string GetTestFileName(int? index = null, [CallerMemberName] string memberName = null, [CallerLineNumber] int lineNumber = 0)
+        protected string GetTestFileName(
+            int? index = null,
+            [CallerMemberName] string memberName = null,
+            [CallerLineNumber] int lineNumber = 0
+        )
         {
             string testFileName = PathGenerator.GenerateTestFileName(index, memberName, lineNumber);
             string testFilePath = Path.Combine(TestDirectory, testFileName);
@@ -132,9 +173,16 @@ namespace System.IO
                     // Take a chunk out of the middle as perhaps it's the least interesting part of the name
                     int halfMemberNameLength = (int)Math.Floor((double)memberName.Length / 2);
                     int halfExcessLength = (int)Math.Ceiling((double)excessLength / 2);
-                    memberName = memberName.Substring(0, halfMemberNameLength - halfExcessLength) + "..." + memberName.Substring(halfMemberNameLength + halfExcessLength);
+                    memberName =
+                        memberName.Substring(0, halfMemberNameLength - halfExcessLength)
+                        + "..."
+                        + memberName.Substring(halfMemberNameLength + halfExcessLength);
 
-                    testFileName = PathGenerator.GenerateTestFileName(index, memberName, lineNumber);
+                    testFileName = PathGenerator.GenerateTestFileName(
+                        index,
+                        memberName,
+                        lineNumber
+                    );
                     testFilePath = Path.Combine(TestDirectory, testFileName);
                 }
                 else
@@ -169,7 +217,10 @@ namespace System.IO
             const int MinAvailableForSufficientRandomness = 5; // we want enough randomness in the name to avoid conflicts between concurrent tests
             string prefix = Path.Combine(Path.GetTempPath(), "CoreFxPipe_");
             int availableLength = MinUdsPathLength - prefix.Length - 1; // 1 - for possible null terminator
-            Assert.True(availableLength >= MinAvailableForSufficientRandomness, $"UDS prefix {prefix} length {prefix.Length} is too long");
+            Assert.True(
+                availableLength >= MinAvailableForSufficientRandomness,
+                $"UDS prefix {prefix} length {prefix.Length} is too long"
+            );
 
             StringBuilder sb = new(availableLength);
             Random random = new Random();
@@ -191,14 +242,13 @@ namespace System.IO
             try
             {
                 using SafeFileHandle handle = Interop.Kernel32.CreateFile(
-                            TestDirectory,
-                            dwDesiredAccess: 0,
-                            dwShareMode: FileShare.ReadWrite | FileShare.Delete,
-                            dwCreationDisposition: FileMode.Open,
-                            dwFlagsAndAttributes:
-                                Interop.Kernel32.FileOperations.OPEN_EXISTING |
-                                Interop.Kernel32.FileOperations.FILE_FLAG_BACKUP_SEMANTICS // Necessary to obtain a handle to a directory
-                            );
+                    TestDirectory,
+                    dwDesiredAccess: 0,
+                    dwShareMode: FileShare.ReadWrite | FileShare.Delete,
+                    dwCreationDisposition: FileMode.Open,
+                    dwFlagsAndAttributes: Interop.Kernel32.FileOperations.OPEN_EXISTING
+                        | Interop.Kernel32.FileOperations.FILE_FLAG_BACKUP_SEMANTICS // Necessary to obtain a handle to a directory
+                );
 
                 if (!handle.IsInvalid)
                 {
@@ -206,7 +256,12 @@ namespace System.IO
                     uint result;
                     fixed (char* bufPtr = buffer)
                     {
-                        result = Interop.Kernel32.GetFinalPathNameByHandle(handle, bufPtr, (uint)buffer.Length, Interop.Kernel32.FILE_NAME_NORMALIZED);
+                        result = Interop.Kernel32.GetFinalPathNameByHandle(
+                            handle,
+                            bufPtr,
+                            (uint)buffer.Length,
+                            Interop.Kernel32.FILE_NAME_NORMALIZED
+                        );
                     }
 
                     if (result == 0)
@@ -247,6 +302,5 @@ namespace System.IO
         }
 
         protected string CreateTestFile() => CreateTestFile(GetTestFilePath());
-
     }
 }

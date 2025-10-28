@@ -1,7 +1,6 @@
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
-
 // catch ret inside try region
 // note: this is NOT the test case
 // after vswhidbey:5875 is fixed, intry will be outside the outer try block
@@ -28,8 +27,9 @@ namespace hello_oponerror_leaves_cs
             // Create and initialize test log object
             testLog = new TestUtil.TestLog(expectedOut);
         }
+
         [Fact]
-        static public int TestEntryPoint()
+        public static int TestEntryPoint()
         {
             //Start recording
             testLog.StartRecording();
@@ -53,14 +53,17 @@ namespace hello_oponerror_leaves_cs
             {
                 try
                 {
-                    if (i == 3) goto intry; // catch ret
-                    if (i >= 0) goto incatch;
-                    if (i < 0) goto begin; // catch ret
-
+                    if (i == 3)
+                        goto intry; // catch ret
+                    if (i >= 0)
+                        goto incatch;
+                    if (i < 0)
+                        goto begin; // catch ret
                 }
                 catch
                 {
-                    if (i != 0) goto incatch;
+                    if (i != 0)
+                        goto incatch;
                     Console.WriteLine("end inner catch");
                 }
                 Console.WriteLine("unreached");
@@ -76,4 +79,3 @@ namespace hello_oponerror_leaves_cs
         }
     }
 }
-

@@ -6,24 +6,26 @@ namespace System.ServiceModel.Discovery
 {
     using System.ServiceModel.Channels;
 
-    class DiscoveryClientDuplexSessionChannel : DiscoveryClientDuplexChannel<IDuplexSessionChannel>, IDuplexSessionChannel
+    class DiscoveryClientDuplexSessionChannel
+        : DiscoveryClientDuplexChannel<IDuplexSessionChannel>,
+            IDuplexSessionChannel
     {
         public DiscoveryClientDuplexSessionChannel(
             ChannelManagerBase channelManagerBase,
             IChannelFactory<IDuplexSessionChannel> innerChannelFactory,
             FindCriteria findCriteria,
-            DiscoveryEndpointProvider discoveryEndpointProvider)
+            DiscoveryEndpointProvider discoveryEndpointProvider
+        )
             : base(channelManagerBase, innerChannelFactory, findCriteria, discoveryEndpointProvider)
-        {
-        }
+        { }
 
         public IDuplexSession Session
         {
-            get 
+            get
             {
                 if (this.InnerChannel == null)
                 {
-                    return null;    
+                    return null;
                 }
 
                 return this.InnerChannel.Session;

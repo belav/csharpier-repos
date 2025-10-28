@@ -23,7 +23,9 @@ namespace Microsoft.CodeAnalysis.Editor.Tagging
             public event EventHandler<SnapshotSpanEventArgs>? TagsChanged;
 
             private void OnTagsChangedForBuffer(
-                ICollection<KeyValuePair<ITextBuffer, DiffResult>> changes, bool highPriority)
+                ICollection<KeyValuePair<ITextBuffer, DiffResult>> changes,
+                bool highPriority
+            )
             {
                 _dataSource.ThreadingContext.ThrowIfNotOnUIThread();
 
@@ -37,13 +39,17 @@ namespace Microsoft.CodeAnalysis.Editor.Tagging
                     _highPriTagsChangedQueue.AddWork(change.Value.Removed);
 
                     // Added tags are run at the requested priority.
-                    var addedTagsQueue = highPriority ? _highPriTagsChangedQueue : _normalPriTagsChangedQueue;
+                    var addedTagsQueue = highPriority
+                        ? _highPriTagsChangedQueue
+                        : _normalPriTagsChangedQueue;
                     addedTagsQueue.AddWork(change.Value.Added);
                 }
             }
 
             private ValueTask ProcessTagsChangedAsync(
-                ImmutableSegmentedList<NormalizedSnapshotSpanCollection> snapshotSpans, CancellationToken cancellationToken)
+                ImmutableSegmentedList<NormalizedSnapshotSpanCollection> snapshotSpans,
+                CancellationToken cancellationToken
+            )
             {
                 var tagsChanged = this.TagsChanged;
                 if (tagsChanged == null)
@@ -57,9 +63,15 @@ namespace Microsoft.CodeAnalysis.Editor.Tagging
                     var snapshot = collection.First().Snapshot;
 
                     // Coalesce the spans if there are a lot of them.
-                    var coalesced = collection.Count > CoalesceDifferenceCount
-                        ? new NormalizedSnapshotSpanCollection(snapshot.GetSpanFromBounds(collection.First().Start, collection.Last().End))
-                        : collection;
+                    var coalesced =
+                        collection.Count > CoalesceDifferenceCount
+                            ? new NormalizedSnapshotSpanCollection(
+                                snapshot.GetSpanFromBounds(
+                                    collection.First().Start,
+                                    collection.Last().End
+                                )
+                            )
+                            : collection;
 
                     _dataSource.BeforeTagsChanged(snapshot);
 

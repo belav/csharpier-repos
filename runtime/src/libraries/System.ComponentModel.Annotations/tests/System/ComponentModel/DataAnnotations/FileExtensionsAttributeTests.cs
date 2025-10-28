@@ -16,16 +16,31 @@ namespace System.ComponentModel.DataAnnotations.Tests
             yield return new TestCase(GetAttribute("jpeg"), "file.jpeg");
             yield return new TestCase(GetAttribute("jpeg,.,png,,jpg"), "file.jpeg");
             yield return new TestCase(GetAttribute("jpeg,.,png,,jpg"), "file.png");
-            yield return new TestCase(GetAttribute("myExt, .otherExt, UPPERCASE_extension"), "myfile.myExt");
-            yield return new TestCase(GetAttribute("myExt, .otherExt, UPPERCASE_extension"), "some.Other.File.otherext");
-            yield return new TestCase(GetAttribute("myExt, .otherExt, UPPERCASE_extension"), "Case.Does.Not.matter.uppercase_EXTENSION");
+            yield return new TestCase(
+                GetAttribute("myExt, .otherExt, UPPERCASE_extension"),
+                "myfile.myExt"
+            );
+            yield return new TestCase(
+                GetAttribute("myExt, .otherExt, UPPERCASE_extension"),
+                "some.Other.File.otherext"
+            );
+            yield return new TestCase(
+                GetAttribute("myExt, .otherExt, UPPERCASE_extension"),
+                "Case.Does.Not.matter.uppercase_EXTENSION"
+            );
         }
 
         protected override IEnumerable<TestCase> InvalidValues()
         {
             yield return new TestCase(GetAttribute("png,jpg,jpeg,gif"), "");
-            yield return new TestCase(GetAttribute("png,jpg,jpeg,gif"), "someFile.nonContainedExtension");
-            yield return new TestCase(GetAttribute("myExt, .otherExt, UPPERCASE_extension"), "someFile.nonContainedExtension");
+            yield return new TestCase(
+                GetAttribute("png,jpg,jpeg,gif"),
+                "someFile.nonContainedExtension"
+            );
+            yield return new TestCase(
+                GetAttribute("myExt, .otherExt, UPPERCASE_extension"),
+                "someFile.nonContainedExtension"
+            );
 
             yield return new TestCase(GetAttribute(" "), "");
             yield return new TestCase(GetAttribute(" "), "a");
@@ -36,13 +51,17 @@ namespace System.ComponentModel.DataAnnotations.Tests
             yield return new TestCase(GetAttribute(" . "), "a");
             yield return new TestCase(GetAttribute("."), "a.");
 
-            yield return new TestCase(GetAttribute("png,jpg,jpeg,gif"), Path.GetInvalidPathChars()[0].ToString());
+            yield return new TestCase(
+                GetAttribute("png,jpg,jpeg,gif"),
+                Path.GetInvalidPathChars()[0].ToString()
+            );
             yield return new TestCase(GetAttribute("png,jpg,jpeg,gif"), "\0<>");
 
             yield return new TestCase(GetAttribute("png,jpg,jpeg,gif"), new object());
         }
 
-        private static FileExtensionsAttribute GetAttribute(string extensions) => new FileExtensionsAttribute() { Extensions = extensions };
+        private static FileExtensionsAttribute GetAttribute(string extensions) =>
+            new FileExtensionsAttribute() { Extensions = extensions };
 
         [Fact]
         public static void Ctor()

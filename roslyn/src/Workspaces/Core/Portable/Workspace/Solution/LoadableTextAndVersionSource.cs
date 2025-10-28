@@ -10,9 +10,13 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis;
 
-internal sealed class LoadableTextAndVersionSource(TextLoader loader, bool cacheResult) : ITextAndVersionSource
+internal sealed class LoadableTextAndVersionSource(TextLoader loader, bool cacheResult)
+    : ITextAndVersionSource
 {
-    private sealed class LazyValueWithOptions(LoadableTextAndVersionSource source, LoadTextOptions options)
+    private sealed class LazyValueWithOptions(
+        LoadableTextAndVersionSource source,
+        LoadTextOptions options
+    )
     {
         public readonly LoadableTextAndVersionSource Source = source;
         public readonly LoadTextOptions Options = options;
@@ -34,11 +38,11 @@ internal sealed class LoadableTextAndVersionSource(TextLoader loader, bool cache
         /// </summary>
         private WeakReference<TextAndVersion>? _weakInstance;
 
-        private Task<TextAndVersion> LoadAsync(CancellationToken cancellationToken)
-            => Source.Loader.LoadTextAsync(Options, cancellationToken);
+        private Task<TextAndVersion> LoadAsync(CancellationToken cancellationToken) =>
+            Source.Loader.LoadTextAsync(Options, cancellationToken);
 
-        private TextAndVersion LoadSynchronously(CancellationToken cancellationToken)
-            => Source.Loader.LoadTextSynchronously(Options, cancellationToken);
+        private TextAndVersion LoadSynchronously(CancellationToken cancellationToken) =>
+            Source.Loader.LoadTextSynchronously(Options, cancellationToken);
 
         public bool TryGetValue([MaybeNullWhen(false)] out TextAndVersion value)
         {
@@ -107,8 +111,7 @@ internal sealed class LoadableTextAndVersionSource(TextLoader loader, bool cache
 
     private LazyValueWithOptions? _lazyValue;
 
-    public bool CanReloadText
-        => Loader.CanReloadText;
+    public bool CanReloadText => Loader.CanReloadText;
 
     private LazyValueWithOptions GetLazyValue(LoadTextOptions options)
     {
@@ -123,14 +126,18 @@ internal sealed class LoadableTextAndVersionSource(TextLoader loader, bool cache
         return lazy;
     }
 
-    public TextAndVersion GetValue(LoadTextOptions options, CancellationToken cancellationToken)
-        => GetLazyValue(options).GetValue(cancellationToken);
+    public TextAndVersion GetValue(LoadTextOptions options, CancellationToken cancellationToken) =>
+        GetLazyValue(options).GetValue(cancellationToken);
 
-    public bool TryGetValue(LoadTextOptions options, [MaybeNullWhen(false)] out TextAndVersion value)
-        => GetLazyValue(options).TryGetValue(out value);
+    public bool TryGetValue(
+        LoadTextOptions options,
+        [MaybeNullWhen(false)] out TextAndVersion value
+    ) => GetLazyValue(options).TryGetValue(out value);
 
-    public Task<TextAndVersion> GetValueAsync(LoadTextOptions options, CancellationToken cancellationToken)
-        => GetLazyValue(options).GetValueAsync(cancellationToken);
+    public Task<TextAndVersion> GetValueAsync(
+        LoadTextOptions options,
+        CancellationToken cancellationToken
+    ) => GetLazyValue(options).GetValueAsync(cancellationToken);
 
     public bool TryGetVersion(LoadTextOptions options, out VersionStamp version)
     {
@@ -144,7 +151,10 @@ internal sealed class LoadableTextAndVersionSource(TextLoader loader, bool cache
         return true;
     }
 
-    public async ValueTask<VersionStamp> GetVersionAsync(LoadTextOptions options, CancellationToken cancellationToken)
+    public async ValueTask<VersionStamp> GetVersionAsync(
+        LoadTextOptions options,
+        CancellationToken cancellationToken
+    )
     {
         var value = await GetValueAsync(options, cancellationToken).ConfigureAwait(false);
         return value.Version;

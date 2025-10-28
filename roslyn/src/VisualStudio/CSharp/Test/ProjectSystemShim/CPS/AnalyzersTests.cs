@@ -23,18 +23,26 @@ namespace Roslyn.VisualStudio.CSharp.UnitTests.ProjectSystemShim.CPS
         [WpfFact]
         public async Task RuleSet_GeneralOption_CPS()
         {
-            var ruleSetFile = Temp.CreateFile().WriteAllText(
-@"<?xml version=""1.0"" encoding=""utf-8""?>
+            var ruleSetFile = Temp.CreateFile()
+                .WriteAllText(
+                    @"<?xml version=""1.0"" encoding=""utf-8""?>
 <RuleSet Name=""Ruleset1"" Description=""Test""  ToolsVersion=""12.0"">
   <IncludeAll Action=""Error"" />
 </RuleSet>
-");
+"
+                );
             using var environment = new TestEnvironment();
-            using var project = await CSharpHelpers.CreateCSharpCPSProjectAsync(environment, "Test");
+            using var project = await CSharpHelpers.CreateCSharpCPSProjectAsync(
+                environment,
+                "Test"
+            );
             var workspaceProject = environment.Workspace.CurrentSolution.Projects.Single();
             var options = (CSharpCompilationOptions)workspaceProject.CompilationOptions;
 
-            Assert.Equal(expected: ReportDiagnostic.Default, actual: options.GeneralDiagnosticOption);
+            Assert.Equal(
+                expected: ReportDiagnostic.Default,
+                actual: options.GeneralDiagnosticOption
+            );
 
             project.SetOptions(ImmutableArray.Create($"/ruleset:{ruleSetFile.Path}"));
 
@@ -47,24 +55,31 @@ namespace Roslyn.VisualStudio.CSharp.UnitTests.ProjectSystemShim.CPS
         [WpfFact]
         public async Task RuleSet_SpecificOptions_CPS()
         {
-            var ruleSetFile = Temp.CreateFile().WriteAllText(
-@"<?xml version=""1.0"" encoding=""utf-8""?>
+            var ruleSetFile = Temp.CreateFile()
+                .WriteAllText(
+                    @"<?xml version=""1.0"" encoding=""utf-8""?>
 <RuleSet Name=""Ruleset1"" Description=""Test""  ToolsVersion=""12.0"">
   <IncludeAll Action=""Warning"" />
   <Rules AnalyzerId=""Microsoft.Analyzers.ManagedCodeAnalysis"" RuleNamespace=""Microsoft.Rules.Managed"">
     <Rule Id=""CA1012"" Action=""Error"" />
   </Rules>
 </RuleSet>
-");
+"
+                );
 
             using var environment = new TestEnvironment();
-            using var project = await CSharpHelpers.CreateCSharpCPSProjectAsync(environment, "Test");
+            using var project = await CSharpHelpers.CreateCSharpCPSProjectAsync(
+                environment,
+                "Test"
+            );
             // Verify SetRuleSetFile updates the ruleset.
             project.SetOptions(ImmutableArray.Create($"/ruleset:{ruleSetFile.Path}"));
 
             // We need to explicitly update the command line arguments so the new ruleset is used to update options.
             project.SetOptions(ImmutableArray.Create($"/ruleset:{ruleSetFile.Path}"));
-            var ca1012DiagnosticOption = environment.Workspace.CurrentSolution.Projects.Single().CompilationOptions.SpecificDiagnosticOptions["CA1012"];
+            var ca1012DiagnosticOption = environment
+                .Workspace.CurrentSolution.Projects.Single()
+                .CompilationOptions.SpecificDiagnosticOptions["CA1012"];
             Assert.Equal(expected: ReportDiagnostic.Error, actual: ca1012DiagnosticOption);
         }
 
@@ -75,13 +90,18 @@ namespace Roslyn.VisualStudio.CSharp.UnitTests.ProjectSystemShim.CPS
             using var environment = new TestEnvironment();
             ProjectId projectId;
 
-            using (var project = await CSharpHelpers.CreateCSharpCPSProjectAsync(environment, "Test"))
+            using (
+                var project = await CSharpHelpers.CreateCSharpCPSProjectAsync(environment, "Test")
+            )
             {
                 project.SetOptions(ImmutableArray.Create($"/ruleset:{ruleSetFile.Path}"));
 
                 projectId = project.Id;
 
-                Assert.Equal(ruleSetFile.Path, environment.Workspace.TryGetRuleSetPathForProject(projectId));
+                Assert.Equal(
+                    ruleSetFile.Path,
+                    environment.Workspace.TryGetRuleSetPathForProject(projectId)
+                );
             }
 
             // Ensure it's still not available after we disposed the project

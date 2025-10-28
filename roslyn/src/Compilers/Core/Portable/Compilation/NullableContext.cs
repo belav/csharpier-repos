@@ -65,8 +65,8 @@ namespace Microsoft.CodeAnalysis
         /// files have nullable off by default, regardless of the project-level
         /// default setting.
         /// </para>
-        /// </summary>        
-        ContextInherited = WarningsContextInherited | AnnotationsContextInherited
+        /// </summary>
+        ContextInherited = WarningsContextInherited | AnnotationsContextInherited,
     }
 
     public static class NullableContextExtensions

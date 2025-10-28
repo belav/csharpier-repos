@@ -3,7 +3,7 @@
 // ==++==
 //
 //   Copyright (c) Microsoft Corporation.  All rights reserved.
-// 
+//
 // ==--==
 // =+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+
 //
@@ -33,7 +33,7 @@ namespace System.Collections.Concurrent
     // although some optimistic concurrency and retry is used, possibly leading to lack of
     // fairness and/or livelock. The stack uses spinning and backoff to add some randomization,
     // in hopes of statistically decreasing the possibility of livelock.
-    // 
+    //
     // Note that we currently allocate a new node on every push. This avoids having to worry
     // about potential ABA issues, since the CLR GC ensures that a memory address cannot be
     // reused before all references to it have died.
@@ -77,7 +77,6 @@ namespace System.Collections.Concurrent
         [NonSerialized]
 #endif //!FEATURE_CORECLR
         private volatile Node m_head; // The stack is a singly linked list, and only remembers the head.
-
 #if !FEATURE_CORECLR
         private T[] m_serializationArray; // Used for custom serialization.
 #endif //!FEATURE_CORECLR
@@ -88,9 +87,7 @@ namespace System.Collections.Concurrent
         /// Initializes a new instance of the <see cref="ConcurrentStack{T}"/>
         /// class.
         /// </summary>
-        public ConcurrentStack()
-        {
-        }
+        public ConcurrentStack() { }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="ConcurrentStack{T}"/>
@@ -170,7 +167,6 @@ namespace System.Collections.Concurrent
         }
 #endif //!FEATURE_CORECLR
 
-
         /// <summary>
         /// Gets a value that indicates whether the <see cref="ConcurrentStack{T}"/> is empty.
         /// </summary>
@@ -224,7 +220,6 @@ namespace System.Collections.Concurrent
             }
         }
 
-
         /// <summary>
         /// Gets a value indicating whether access to the <see cref="T:System.Collections.ICollection"/> is
         /// synchronized with the SyncRoot.
@@ -250,7 +245,9 @@ namespace System.Collections.Concurrent
         {
             get
             {
-                throw new NotSupportedException(Environment.GetResourceString("ConcurrentCollection_SyncRoot_NotSupported"));
+                throw new NotSupportedException(
+                    Environment.GetResourceString("ConcurrentCollection_SyncRoot_NotSupported")
+                );
             }
         }
 
@@ -340,7 +337,6 @@ namespace System.Collections.Concurrent
             ToList().CopyTo(array, index);
         }
 
-
         /// <summary>
         /// Inserts an object at the top of the <see cref="ConcurrentStack{T}"/>.
         /// </summary>
@@ -398,7 +394,7 @@ namespace System.Collections.Concurrent
         /// <exception cref="ArgumentNullException"><paramref name="items"/> is a null reference
         /// (Nothing in Visual Basic).</exception>
         /// <exception cref="ArgumentOutOfRangeException"><paramref name="startIndex"/> or <paramref
-        /// name="count"/> is negative. Or <paramref name="startIndex"/> is greater than or equal to the length 
+        /// name="count"/> is negative. Or <paramref name="startIndex"/> is greater than or equal to the length
         /// of <paramref name="items"/>.</exception>
         /// <exception cref="ArgumentException"><paramref name="startIndex"/> + <paramref name="count"/> is
         /// greater than the length of <paramref name="items"/>.</exception>
@@ -417,8 +413,8 @@ namespace System.Collections.Concurrent
             if (count == 0)
                 return;
 
-
-            Node head, tail;
+            Node head,
+                tail;
             head = tail = new Node(items[startIndex]);
             for (int i = startIndex + 1; i < startIndex + count; i++)
             {
@@ -435,9 +431,7 @@ namespace System.Collections.Concurrent
 
             // If we failed, go to the slow path and loop around until we succeed.
             PushCore(head, tail);
-
         }
-
 
         /// <summary>
         /// Push one or many nodes into the stack, if head and tails are equal then push one node to the stack other wise push the list between head
@@ -455,9 +449,7 @@ namespace System.Collections.Concurrent
                 spin.SpinOnce();
                 // Reread the head and link our new node.
                 tail.m_next = m_head;
-            }
-            while (Interlocked.CompareExchange(
-                ref m_head, head, tail.m_next) != tail.m_next);
+            } while (Interlocked.CompareExchange(ref m_head, head, tail.m_next) != tail.m_next);
 
 #if !FEATURE_PAL && !FEATURE_CORECLR
             if (CDSCollectionETWBCLProvider.Log.IsEnabled())
@@ -478,16 +470,24 @@ namespace System.Collections.Concurrent
             }
             if (count < 0)
             {
-                throw new ArgumentOutOfRangeException("count", Environment.GetResourceString("ConcurrentStack_PushPopRange_CountOutOfRange"));
+                throw new ArgumentOutOfRangeException(
+                    "count",
+                    Environment.GetResourceString("ConcurrentStack_PushPopRange_CountOutOfRange")
+                );
             }
             int length = items.Length;
             if (startIndex >= length || startIndex < 0)
             {
-                throw new ArgumentOutOfRangeException("startIndex", Environment.GetResourceString("ConcurrentStack_PushPopRange_StartOutOfRange"));
+                throw new ArgumentOutOfRangeException(
+                    "startIndex",
+                    Environment.GetResourceString("ConcurrentStack_PushPopRange_StartOutOfRange")
+                );
             }
             if (length - count < startIndex) //instead of (startIndex + count > items.Length) to prevent overflow
             {
-                throw new ArgumentException(Environment.GetResourceString("ConcurrentStack_PushPopRange_InvalidCount"));
+                throw new ArgumentException(
+                    Environment.GetResourceString("ConcurrentStack_PushPopRange_InvalidCount")
+                );
             }
         }
 
@@ -605,12 +605,12 @@ namespace System.Collections.Concurrent
         /// inserting elements from the top of the <see cref="ConcurrentStack{T}"/>.</param>
         /// <param name="count">The number of elements to be popped from top of the <see
         /// cref="ConcurrentStack{T}"/> and inserted into <paramref name="items"/>.</param>
-        /// <returns>The number of objects successfully popped from the top of 
-        /// the <see cref="ConcurrentStack{T}"/> and inserted in <paramref name="items"/>.</returns>        
+        /// <returns>The number of objects successfully popped from the top of
+        /// the <see cref="ConcurrentStack{T}"/> and inserted in <paramref name="items"/>.</returns>
         /// <exception cref="ArgumentNullException"><paramref name="items"/> is a null reference
         /// (Nothing in Visual Basic).</exception>
         /// <exception cref="ArgumentOutOfRangeException"><paramref name="startIndex"/> or <paramref
-        /// name="count"/> is negative. Or <paramref name="startIndex"/> is greater than or equal to the length 
+        /// name="count"/> is negative. Or <paramref name="startIndex"/> is greater than or equal to the length
         /// of <paramref name="items"/>.</exception>
         /// <exception cref="ArgumentException"><paramref name="startIndex"/> + <paramref name="count"/> is
         /// greater than the length of <paramref name="items"/>.</exception>
@@ -634,10 +634,8 @@ namespace System.Collections.Concurrent
             if (nodesCount > 0)
             {
                 CopyRemovedItems(poppedHead, items, startIndex, nodesCount);
-
             }
             return nodesCount;
-
         }
 
         /// <summary>
@@ -657,7 +655,6 @@ namespace System.Collections.Concurrent
 
             result = default(T);
             return false;
-
         }
 
         /// <summary>
@@ -726,7 +723,6 @@ namespace System.Collections.Concurrent
             }
         }
 
-
         /// <summary>
         /// Local helper function to copy the poped elements into a given collection
         /// </summary>
@@ -742,7 +738,6 @@ namespace System.Collections.Concurrent
                 collection[i] = current.m_value;
                 current = current.m_next;
             }
-
         }
 
         /// <summary>
@@ -797,7 +792,7 @@ namespace System.Collections.Concurrent
         /// <returns>An enumerator for the <see cref="ConcurrentStack{T}"/>.</returns>
         /// <remarks>
         /// The enumeration represents a moment-in-time snapshot of the contents
-        /// of the stack.  It does not reflect any updates to the collection after 
+        /// of the stack.  It does not reflect any updates to the collection after
         /// <see cref="GetEnumerator"/> was called.  The enumerator is safe to use
         /// concurrently with reads from and writes to the stack.
         /// </remarks>
@@ -809,7 +804,7 @@ namespace System.Collections.Concurrent
 
             //If we put yield-return here, the iterator will be lazily evaluated. As a result a snapshot of
             //the stack is not taken when GetEnumerator is initialized but when MoveNext() is first called.
-            //This is inconsistent with existing generic collections. In order to prevent it, we capture the 
+            //This is inconsistent with existing generic collections. In order to prevent it, we capture the
             //value of m_head in a buffer and call out to a helper method
             return GetEnumerator(m_head);
         }

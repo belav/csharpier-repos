@@ -50,9 +50,11 @@ namespace Microsoft.CodeAnalysis.CSharp
                 return (short)(value - 1);
             }
 
-            short INumericTC<short>.FromConstantValue(ConstantValue constantValue) => constantValue.IsBad ? (short)0 : constantValue.Int16Value;
+            short INumericTC<short>.FromConstantValue(ConstantValue constantValue) =>
+                constantValue.IsBad ? (short)0 : constantValue.Int16Value;
 
-            ConstantValue INumericTC<short>.ToConstantValue(short value) => ConstantValue.Create(value);
+            ConstantValue INumericTC<short>.ToConstantValue(short value) =>
+                ConstantValue.Create(value);
 
             string INumericTC<short>.ToString(short value) => value.ToString();
 

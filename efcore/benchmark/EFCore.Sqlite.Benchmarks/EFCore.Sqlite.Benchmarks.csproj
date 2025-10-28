@@ -1,5 +1,4 @@
 <Project Sdk="Microsoft.NET.Sdk">
-
   <PropertyGroup>
     <TargetFramework>$(DefaultNetCoreTargetFramework)</TargetFramework>
     <RootNamespace>Microsoft.EntityFrameworkCore.Benchmarks</RootNamespace>
@@ -28,5 +27,4 @@
     </None>
     <None Remove="BenchmarkDotNet.Artifacts\**" />
   </ItemGroup>
-
 </Project>

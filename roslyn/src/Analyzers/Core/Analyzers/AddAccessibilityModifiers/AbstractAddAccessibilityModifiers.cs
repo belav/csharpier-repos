@@ -7,7 +7,8 @@ using Microsoft.CodeAnalysis.LanguageService;
 
 namespace Microsoft.CodeAnalysis.AddAccessibilityModifiers
 {
-    internal abstract class AbstractAddAccessibilityModifiers<TMemberDeclarationSyntax> : IAddAccessibilityModifiers
+    internal abstract class AbstractAddAccessibilityModifiers<TMemberDeclarationSyntax>
+        : IAddAccessibilityModifiers
         where TMemberDeclarationSyntax : SyntaxNode
     {
         public bool ShouldUpdateAccessibilityModifier(
@@ -15,12 +16,19 @@ namespace Microsoft.CodeAnalysis.AddAccessibilityModifiers
             SyntaxNode member,
             AccessibilityModifiersRequired option,
             out SyntaxToken name,
-            out bool modifierAdded)
+            out bool modifierAdded
+        )
         {
             name = default;
             modifierAdded = false;
-            return member is TMemberDeclarationSyntax memberDecl &&
-                ShouldUpdateAccessibilityModifier(accessibilityFacts, memberDecl, option, out name, out modifierAdded);
+            return member is TMemberDeclarationSyntax memberDecl
+                && ShouldUpdateAccessibilityModifier(
+                    accessibilityFacts,
+                    memberDecl,
+                    option,
+                    out name,
+                    out modifierAdded
+                );
         }
 
         public abstract bool ShouldUpdateAccessibilityModifier(
@@ -28,6 +36,7 @@ namespace Microsoft.CodeAnalysis.AddAccessibilityModifiers
             TMemberDeclarationSyntax member,
             AccessibilityModifiersRequired option,
             out SyntaxToken name,
-            out bool modifierAdded);
+            out bool modifierAdded
+        );
     }
 }

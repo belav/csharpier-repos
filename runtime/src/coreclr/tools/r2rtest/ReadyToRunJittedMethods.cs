@@ -2,12 +2,12 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
-using System.IO;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.IO;
 using Microsoft.Diagnostics.Tracing;
-using Microsoft.Diagnostics.Tracing.Parsers.Clr;
 using Microsoft.Diagnostics.Tracing.Parsers;
+using Microsoft.Diagnostics.Tracing.Parsers.Clr;
 using Microsoft.Diagnostics.Tracing.Session;
 
 /// <summary>
@@ -29,9 +29,17 @@ public class ReadyToRunJittedMethods : IDisposable
     private HashSet<string> _testFolderNames;
     private List<long> _testModuleIds = new List<long>();
     private Dictionary<long, string> _testModuleIdToName = new Dictionary<long, string>();
-    private Dictionary<string, HashSet<string>> _methodsJitted = new Dictionary<string, HashSet<string>>(StringComparer.OrdinalIgnoreCase);
+    private Dictionary<string, HashSet<string>> _methodsJitted = new Dictionary<
+        string,
+        HashSet<string>
+    >(StringComparer.OrdinalIgnoreCase);
 
-    public ReadyToRunJittedMethods(TraceEventSession session, List<ProcessInfo> processList, int startIndex, int endIndex)
+    public ReadyToRunJittedMethods(
+        TraceEventSession session,
+        List<ProcessInfo> processList,
+        int startIndex,
+        int endIndex
+    )
     {
         _etwProcesses = new List<Process>();
         _pidToProcess = new Dictionary<int, ProcessInfo>();
@@ -48,7 +56,7 @@ public class ReadyToRunJittedMethods : IDisposable
             }
         }
 
-        session.Source.Clr.LoaderModuleLoad += delegate (ModuleLoadUnloadTraceData data)
+        session.Source.Clr.LoaderModuleLoad += delegate(ModuleLoadUnloadTraceData data)
         {
             if (ShouldMonitorModule(data))
             {
@@ -56,21 +64,29 @@ public class ReadyToRunJittedMethods : IDisposable
                 // it's sometimes useful for debugging purposes.
                 // Console.WriteLine($"Tracking module {data.ModuleILFileName} with Id {data.ModuleID}");
                 _testModuleIds.Add(data.ModuleID);
-                _testModuleIdToName[data.ModuleID] = Path.GetFileNameWithoutExtension(data.ModuleILFileName);
+                _testModuleIdToName[data.ModuleID] = Path.GetFileNameWithoutExtension(
+                    data.ModuleILFileName
+                );
             }
         };
 
-        session.Source.Clr.MethodLoadVerbose += delegate (MethodLoadUnloadVerboseTraceData data)
+        session.Source.Clr.MethodLoadVerbose += delegate(MethodLoadUnloadVerboseTraceData data)
         {
             ProcessInfo processInfo;
-            if (data.IsJitted && _pidToProcess.TryGetValue(data.ProcessID, out processInfo) && _testModuleIds.Contains(data.ModuleID))
+            if (
+                data.IsJitted
+                && _pidToProcess.TryGetValue(data.ProcessID, out processInfo)
+                && _testModuleIds.Contains(data.ModuleID)
+            )
             {
                 // Console.WriteLine($"Method loaded {GetName(data)} - {data}");
                 string methodName = GetName(data);
                 string moduleName = _testModuleIdToName[data.ModuleID];
                 if (processInfo.JittedMethods == null)
                 {
-                    processInfo.JittedMethods = new Dictionary<string, HashSet<string>>(StringComparer.OrdinalIgnoreCase);
+                    processInfo.JittedMethods = new Dictionary<string, HashSet<string>>(
+                        StringComparer.OrdinalIgnoreCase
+                    );
                 }
                 HashSet<string> methodsForModule;
                 if (!processInfo.JittedMethods.TryGetValue(moduleName, out methodsForModule))
@@ -102,10 +118,18 @@ public class ReadyToRunJittedMethods : IDisposable
         if (!_pidToProcess.ContainsKey(data.ProcessID))
             return false;
 
-        if (File.Exists(data.ModuleILPath) && _testFolderNames.Contains(Path.GetDirectoryName(data.ModuleILPath).ToAbsoluteDirectoryPath()))
+        if (
+            File.Exists(data.ModuleILPath)
+            && _testFolderNames.Contains(
+                Path.GetDirectoryName(data.ModuleILPath).ToAbsoluteDirectoryPath()
+            )
+        )
             return true;
 
-        if (_testModuleNames.Contains(data.ModuleILPath) || _testModuleNames.Contains(data.ModuleNativePath))
+        if (
+            _testModuleNames.Contains(data.ModuleILPath)
+            || _testModuleNames.Contains(data.ModuleNativePath)
+        )
             return true;
 
         return false;

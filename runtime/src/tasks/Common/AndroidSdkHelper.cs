@@ -14,13 +14,16 @@ internal sealed class AndroidSdkHelper
     public AndroidSdkHelper(
         string? androidSdkPath,
         string? buildApiLevel,
-        string? buildToolsVersion)
+        string? buildToolsVersion
+    )
     {
         if (string.IsNullOrEmpty(androidSdkPath))
             androidSdkPath = Environment.GetEnvironmentVariable("ANDROID_SDK_ROOT");
 
         if (string.IsNullOrEmpty(androidSdkPath) || !Directory.Exists(androidSdkPath))
-            throw new ArgumentException($"Android SDK='{androidSdkPath}' was not found or empty (can be set via ANDROID_SDK_ROOT envvar).");
+            throw new ArgumentException(
+                $"Android SDK='{androidSdkPath}' was not found or empty (can be set via ANDROID_SDK_ROOT envvar)."
+            );
 
         _androidSdkPath = androidSdkPath;
 
@@ -40,22 +43,27 @@ internal sealed class AndroidSdkHelper
             throw new ArgumentException($"{_buildToolsPath} was not found.");
     }
 
-    public string AndroidJarPath => Path.Combine(_androidSdkPath, "platforms", $"android-{_buildApiLevel}", "android.jar");
+    public string AndroidJarPath =>
+        Path.Combine(_androidSdkPath, "platforms", $"android-{_buildApiLevel}", "android.jar");
 
     public bool HasD8 => File.Exists(D8Path);
     public string D8Path => getToolPath("d8");
     public string DxPath => getToolPath("dx");
 
-    private string getToolPath(string tool)
-        => Path.Combine(_buildToolsPath, tool);
+    private string getToolPath(string tool) => Path.Combine(_buildToolsPath, tool);
 
     /// <summary>
     /// Scan android SDK for api levels (ignore preview versions)
     /// </summary>
     private static string GetLatestApiLevel(string androidSdkDir)
     {
-        return Directory.GetDirectories(Path.Combine(androidSdkDir, "platforms"))
-            .Select(file => int.TryParse(Path.GetFileName(file).Replace("android-", ""), out int apiLevel) ? apiLevel : -1)
+        return Directory
+            .GetDirectories(Path.Combine(androidSdkDir, "platforms"))
+            .Select(file =>
+                int.TryParse(Path.GetFileName(file).Replace("android-", ""), out int apiLevel)
+                    ? apiLevel
+                    : -1
+            )
             .OrderByDescending(v => v)
             .FirstOrDefault()
             .ToString();
@@ -66,15 +74,23 @@ internal sealed class AndroidSdkHelper
     /// </summary>
     private static string GetLatestBuildTools(string androidSdkPath)
     {
-        string? buildTools = Directory.GetDirectories(Path.Combine(androidSdkPath, "build-tools"))
+        string? buildTools = Directory
+            .GetDirectories(Path.Combine(androidSdkPath, "build-tools"))
             .Select(Path.GetFileName)
             .Where(file => !file!.Contains('-'))
-            .Select(file => { Version.TryParse(Path.GetFileName(file), out Version? version); return version; })
+            .Select(file =>
+            {
+                Version.TryParse(Path.GetFileName(file), out Version? version);
+                return version;
+            })
             .OrderByDescending(v => v)
-            .FirstOrDefault()?.ToString();
+            .FirstOrDefault()
+            ?.ToString();
 
         if (string.IsNullOrEmpty(buildTools))
-            throw new ArgumentException($"Android SDK ({androidSdkPath}) doesn't contain build-tools.");
+            throw new ArgumentException(
+                $"Android SDK ({androidSdkPath}) doesn't contain build-tools."
+            );
 
         return buildTools;
     }

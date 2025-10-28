@@ -33,100 +33,110 @@ using Microsoft.Build.Tasks;
 using Microsoft.Build.Utilities;
 using NUnit.Framework;
 
-namespace MonoTests.Microsoft.Build.Tasks {
+namespace MonoTests.Microsoft.Build.Tasks
+{
+    internal class TestWarningLogger : ILogger
+    {
+        IList warnings;
 
-	internal class TestWarningLogger : ILogger {
-		IList warnings;
-		
-		public TestWarningLogger ()
-		{
-			warnings = new ArrayList ();
-		}
-	
-		public LoggerVerbosity Verbosity { get { return LoggerVerbosity.Normal; } set { } }
-		
-		public string Parameters { get { return null; } set { } }
-		
-		public void Initialize (IEventSource eventSource)
-		{
-			eventSource.WarningRaised += new BuildWarningEventHandler (WarningHandler);
-		}
-		
-		public void Shutdown ()
-		{
-		}
-		
-		private void WarningHandler (object sender, BuildWarningEventArgs args)
-		{
-			if (args.Message.StartsWith ("The MSBuild engine") == false)
-				warnings.Add (args);
-		}
-		
-		public int CheckHead (string text, string helpKeyword, string code)
-		{
-			BuildWarningEventArgs actual;
-		
-			if (warnings.Count > 0) {
-				actual = (BuildWarningEventArgs) warnings [0];
-				warnings.RemoveAt (0);
-			} else
-				return 1;
-			
-			if (text == actual.Message && helpKeyword == actual.HelpKeyword && code == actual.Code)
-				return 0;
-			else {
-				Console.WriteLine (actual.Message);
-				return 2;
-			}
-		}
-	}
+        public TestWarningLogger()
+        {
+            warnings = new ArrayList();
+        }
 
-	[TestFixture]
-	public class WarningTest {
-	
-		Engine engine;
-		Project project;
-		TestWarningLogger testLogger;
-		
-		[Test]
-		public void TestAssignment ()
-		{
-			string code = "code";
-			string helpKeyword = "helpKeyword";
-			string text = "text";
-			
-			Warning warning = new Warning ();
-			
-			warning.Code = code;
-			warning.HelpKeyword = helpKeyword;
-			warning.Text = text;
+        public LoggerVerbosity Verbosity
+        {
+            get { return LoggerVerbosity.Normal; }
+            set { }
+        }
 
-			Assert.AreEqual (code, warning.Code, "#1");
-			Assert.AreEqual (helpKeyword, warning.HelpKeyword, "#2");
-			Assert.AreEqual (text, warning.Text, "#3");
-		}
-		
-		[Test]
-		public void TestExecution ()
-		{
-			string documentString = @"
+        public string Parameters
+        {
+            get { return null; }
+            set { }
+        }
+
+        public void Initialize(IEventSource eventSource)
+        {
+            eventSource.WarningRaised += new BuildWarningEventHandler(WarningHandler);
+        }
+
+        public void Shutdown() { }
+
+        private void WarningHandler(object sender, BuildWarningEventArgs args)
+        {
+            if (args.Message.StartsWith("The MSBuild engine") == false)
+                warnings.Add(args);
+        }
+
+        public int CheckHead(string text, string helpKeyword, string code)
+        {
+            BuildWarningEventArgs actual;
+
+            if (warnings.Count > 0)
+            {
+                actual = (BuildWarningEventArgs)warnings[0];
+                warnings.RemoveAt(0);
+            }
+            else
+                return 1;
+
+            if (text == actual.Message && helpKeyword == actual.HelpKeyword && code == actual.Code)
+                return 0;
+            else
+            {
+                Console.WriteLine(actual.Message);
+                return 2;
+            }
+        }
+    }
+
+    [TestFixture]
+    public class WarningTest
+    {
+        Engine engine;
+        Project project;
+        TestWarningLogger testLogger;
+
+        [Test]
+        public void TestAssignment()
+        {
+            string code = "code";
+            string helpKeyword = "helpKeyword";
+            string text = "text";
+
+            Warning warning = new Warning();
+
+            warning.Code = code;
+            warning.HelpKeyword = helpKeyword;
+            warning.Text = text;
+
+            Assert.AreEqual(code, warning.Code, "#1");
+            Assert.AreEqual(helpKeyword, warning.HelpKeyword, "#2");
+            Assert.AreEqual(text, warning.Text, "#3");
+        }
+
+        [Test]
+        public void TestExecution()
+        {
+            string documentString =
+                @"
                                 <Project xmlns=""http://schemas.microsoft.com/developer/msbuild/2003"">
 					<Target Name='1'>
 						<Warning Text='Text' HelpKeyword='HelpKeyword' Code='Code' />
 					</Target>
 				</Project>
 			";
-			
-			engine = new Engine (Consts.BinPath);
-			testLogger = new TestWarningLogger ();
-			engine.RegisterLogger (testLogger);
-			
-			project = engine.CreateNewProject ();
-			project.LoadXml (documentString);
-			project.Build ("1");
-			
-			Assert.AreEqual (0, testLogger.CheckHead ("Text", "HelpKeyword", "Code"), "A1");
-		}
-	}
-}	
 
+            engine = new Engine(Consts.BinPath);
+            testLogger = new TestWarningLogger();
+            engine.RegisterLogger(testLogger);
+
+            project = engine.CreateNewProject();
+            project.LoadXml(documentString);
+            project.Build("1");
+
+            Assert.AreEqual(0, testLogger.CheckHead("Text", "HelpKeyword", "Code"), "A1");
+        }
+    }
+}

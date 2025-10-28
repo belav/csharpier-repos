@@ -21,18 +21,20 @@ namespace System.Drawing
 
         private static Dictionary<string, Color>? s_htmlSysColorTable;
 
-        internal static uint COLORREFToARGB(uint value)
-            => ((value >> COLORREF_RedShift) & 0xFF) << Color.ARGBRedShift
-                | ((value >> COLORREF_GreenShift) & 0xFF) << Color.ARGBGreenShift
-                | ((value >> COLORREF_BlueShift) & 0xFF) << Color.ARGBBlueShift
-                | Color.ARGBAlphaMask; // COLORREF's are always fully opaque
+        internal static uint COLORREFToARGB(uint value) =>
+            ((value >> COLORREF_RedShift) & 0xFF) << Color.ARGBRedShift
+            | ((value >> COLORREF_GreenShift) & 0xFF) << Color.ARGBGreenShift
+            | ((value >> COLORREF_BlueShift) & 0xFF) << Color.ARGBBlueShift
+            | Color.ARGBAlphaMask; // COLORREF's are always fully opaque
 
         /// <summary>
         /// Translates the specified <see cref='Color'/> to a Win32 color.
         /// </summary>
         public static int ToWin32(Color c)
         {
-            return c.R << COLORREF_RedShift | c.G << COLORREF_GreenShift | c.B << COLORREF_BlueShift;
+            return c.R << COLORREF_RedShift
+                | c.G << COLORREF_GreenShift
+                | c.B << COLORREF_BlueShift;
         }
 
         /// <summary>
@@ -224,14 +226,15 @@ namespace System.Drawing
                 return c;
 
             // #RRGGBB or #RGB
-            if ((htmlColor[0] == '#') &&
-                ((htmlColor.Length == 7) || (htmlColor.Length == 4)))
+            if ((htmlColor[0] == '#') && ((htmlColor.Length == 7) || (htmlColor.Length == 4)))
             {
                 if (htmlColor.Length == 7)
                 {
-                    c = Color.FromArgb(Convert.ToInt32(htmlColor.Substring(1, 2), 16),
-                                       Convert.ToInt32(htmlColor.Substring(3, 2), 16),
-                                       Convert.ToInt32(htmlColor.Substring(5, 2), 16));
+                    c = Color.FromArgb(
+                        Convert.ToInt32(htmlColor.Substring(1, 2), 16),
+                        Convert.ToInt32(htmlColor.Substring(3, 2), 16),
+                        Convert.ToInt32(htmlColor.Substring(5, 2), 16)
+                    );
                 }
                 else
                 {
@@ -239,14 +242,19 @@ namespace System.Drawing
                     string g = char.ToString(htmlColor[2]);
                     string b = char.ToString(htmlColor[3]);
 
-                    c = Color.FromArgb(Convert.ToInt32(r + r, 16),
-                                       Convert.ToInt32(g + g, 16),
-                                       Convert.ToInt32(b + b, 16));
+                    c = Color.FromArgb(
+                        Convert.ToInt32(r + r, 16),
+                        Convert.ToInt32(g + g, 16),
+                        Convert.ToInt32(b + b, 16)
+                    );
                 }
             }
 
             // special case. Html requires LightGrey, but .NET uses LightGray
-            if (c.IsEmpty && string.Equals(htmlColor, "LightGrey", StringComparison.OrdinalIgnoreCase))
+            if (
+                c.IsEmpty
+                && string.Equals(htmlColor, "LightGrey", StringComparison.OrdinalIgnoreCase)
+            )
             {
                 c = Color.LightGray;
             }
@@ -267,7 +275,10 @@ namespace System.Drawing
             {
                 try
                 {
-                    c = ColorConverterCommon.ConvertFromString(htmlColor, CultureInfo.CurrentCulture);
+                    c = ColorConverterCommon.ConvertFromString(
+                        htmlColor,
+                        CultureInfo.CurrentCulture
+                    );
                 }
                 catch (Exception ex)
                 {
@@ -422,7 +433,7 @@ namespace System.Drawing
                 ["threedlightshadow"] = Color.FromKnownColor(KnownColor.ControlLightLight),
                 ["window"] = Color.FromKnownColor(KnownColor.Window),
                 ["windowframe"] = Color.FromKnownColor(KnownColor.WindowFrame),
-                ["windowtext"] = Color.FromKnownColor(KnownColor.WindowText)
+                ["windowtext"] = Color.FromKnownColor(KnownColor.WindowText),
             };
         }
     }

@@ -4,7 +4,7 @@
 
 namespace System.ServiceModel.Diagnostics
 {
-    static class DiagnosticsTraceCode 
+    static class DiagnosticsTraceCode
     {
         // Diagnostic trace codes
         public const int Diagnostics = 0X20000;

@@ -20,9 +20,13 @@ using Roslyn.Utilities;
 namespace Microsoft.VisualStudio.LanguageServices.PdbSourceDocument
 {
     [Export(typeof(IPdbSourceDocumentLogger)), Shared]
-    internal sealed class PdbSourceDocumentOutputWindowLogger : IPdbSourceDocumentLogger, IDisposable
+    internal sealed class PdbSourceDocumentOutputWindowLogger
+        : IPdbSourceDocumentLogger,
+            IDisposable
     {
-        private static readonly Guid s_outputPaneGuid = new Guid("f543e896-2e9c-48b8-8fac-d1d5030b4b89");
+        private static readonly Guid s_outputPaneGuid = new Guid(
+            "f543e896-2e9c-48b8-8fac-d1d5030b4b89"
+        );
         private IVsOutputWindowPane? _outputPane;
 
         private readonly IThreadingContext _threadingContext;
@@ -33,21 +37,31 @@ namespace Microsoft.VisualStudio.LanguageServices.PdbSourceDocument
 
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public PdbSourceDocumentOutputWindowLogger(SVsServiceProvider serviceProvider, IThreadingContext threadingContext, IAsynchronousOperationListenerProvider listenerProvider)
+        public PdbSourceDocumentOutputWindowLogger(
+            SVsServiceProvider serviceProvider,
+            IThreadingContext threadingContext,
+            IAsynchronousOperationListenerProvider listenerProvider
+        )
         {
             _serviceProvider = serviceProvider;
             _threadingContext = threadingContext;
 
-            var asyncListener = listenerProvider.GetListener(nameof(PdbSourceDocumentOutputWindowLogger));
+            var asyncListener = listenerProvider.GetListener(
+                nameof(PdbSourceDocumentOutputWindowLogger)
+            );
 
             _logItemsQueue = new AsyncBatchingWorkQueue<string?>(
                 DelayTimeSpan.NearImmediate,
                 ProcessLogMessagesAsync,
                 asyncListener,
-                _cancellationTokenSource.Token);
+                _cancellationTokenSource.Token
+            );
         }
 
-        private async ValueTask ProcessLogMessagesAsync(ImmutableSegmentedList<string?> messages, CancellationToken cancellationToken)
+        private async ValueTask ProcessLogMessagesAsync(
+            ImmutableSegmentedList<string?> messages,
+            CancellationToken cancellationToken
+        )
         {
             await _threadingContext.JoinableTaskFactory.SwitchToMainThreadAsync(cancellationToken);
 
@@ -90,7 +104,8 @@ namespace Microsoft.VisualStudio.LanguageServices.PdbSourceDocument
 
             if (_outputPane == null)
             {
-                var outputWindow = (IVsOutputWindow)_serviceProvider.GetService(typeof(SVsOutputWindow));
+                var outputWindow = (IVsOutputWindow)
+                    _serviceProvider.GetService(typeof(SVsOutputWindow));
 
                 _outputPane = TryCreateOutputPane(outputWindow);
             }
@@ -104,8 +119,16 @@ namespace Microsoft.VisualStudio.LanguageServices.PdbSourceDocument
 
             var paneGuid = s_outputPaneGuid;
 
-            if (ErrorHandler.Succeeded(outputWindow.CreatePane(ref paneGuid, ServicesVSResources.Navigate_to_external_sources, fInitVisible: 1, fClearWithSolution: 1)) &&
-                ErrorHandler.Succeeded(outputWindow.GetPane(ref paneGuid, out var pane)))
+            if (
+                ErrorHandler.Succeeded(
+                    outputWindow.CreatePane(
+                        ref paneGuid,
+                        ServicesVSResources.Navigate_to_external_sources,
+                        fInitVisible: 1,
+                        fClearWithSolution: 1
+                    )
+                ) && ErrorHandler.Succeeded(outputWindow.GetPane(ref paneGuid, out var pane))
+            )
             {
                 return pane;
             }

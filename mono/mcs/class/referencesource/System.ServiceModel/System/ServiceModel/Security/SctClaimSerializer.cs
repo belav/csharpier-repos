@@ -5,30 +5,38 @@
 namespace System.ServiceModel.Security
 {
     using System;
-    using System.ServiceModel;
-    using System.Security.Cryptography;
-    using System.Security.Cryptography.X509Certificates;
-    using System.ServiceModel.Security.Tokens;
-    using System.IO;
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
-    using System.Net.Mail;
-    using System.Xml;
-    using System.Runtime.Serialization;
     using System.IdentityModel.Claims;
     using System.IdentityModel.Policy;
+    using System.IO;
+    using System.Net.Mail;
+    using System.Runtime.Serialization;
+    using System.Security.Cryptography;
+    using System.Security.Cryptography.X509Certificates;
     using System.Security.Principal;
+    using System.ServiceModel;
+    using System.ServiceModel.Security.Tokens;
+    using System.Xml;
 
     static class SctClaimSerializer
     {
-        static void SerializeSid(SecurityIdentifier sid, SctClaimDictionary dictionary, XmlDictionaryWriter writer)
+        static void SerializeSid(
+            SecurityIdentifier sid,
+            SctClaimDictionary dictionary,
+            XmlDictionaryWriter writer
+        )
         {
             byte[] sidBytes = new byte[sid.BinaryLength];
             sid.GetBinaryForm(sidBytes, 0);
             writer.WriteBase64(sidBytes, 0, sidBytes.Length);
         }
 
-        static void WriteRightAttribute(Claim claim, SctClaimDictionary dictionary, XmlDictionaryWriter writer)
+        static void WriteRightAttribute(
+            Claim claim,
+            SctClaimDictionary dictionary,
+            XmlDictionaryWriter writer
+        )
         {
             if (Rights.PossessProperty.Equals(claim.Right))
                 return;
@@ -41,25 +49,47 @@ namespace System.ServiceModel.Security
             return String.IsNullOrEmpty(right) ? Rights.PossessProperty : right;
         }
 
-        static void WriteSidAttribute(SecurityIdentifier sid, SctClaimDictionary dictionary, XmlDictionaryWriter writer)
+        static void WriteSidAttribute(
+            SecurityIdentifier sid,
+            SctClaimDictionary dictionary,
+            XmlDictionaryWriter writer
+        )
         {
             byte[] sidBytes = new byte[sid.BinaryLength];
             sid.GetBinaryForm(sidBytes, 0);
-            writer.WriteAttributeString(dictionary.Sid, dictionary.EmptyString, Convert.ToBase64String(sidBytes));
+            writer.WriteAttributeString(
+                dictionary.Sid,
+                dictionary.EmptyString,
+                Convert.ToBase64String(sidBytes)
+            );
         }
 
-        static SecurityIdentifier ReadSidAttribute(XmlDictionaryReader reader, SctClaimDictionary dictionary)
+        static SecurityIdentifier ReadSidAttribute(
+            XmlDictionaryReader reader,
+            SctClaimDictionary dictionary
+        )
         {
-            byte[] sidBytes = Convert.FromBase64String(reader.GetAttribute(dictionary.Sid, dictionary.EmptyString));
+            byte[] sidBytes = Convert.FromBase64String(
+                reader.GetAttribute(dictionary.Sid, dictionary.EmptyString)
+            );
             return new SecurityIdentifier(sidBytes, 0);
         }
 
-        public static void SerializeClaim(Claim claim, SctClaimDictionary dictionary, XmlDictionaryWriter writer, XmlObjectSerializer serializer)
+        public static void SerializeClaim(
+            Claim claim,
+            SctClaimDictionary dictionary,
+            XmlDictionaryWriter writer,
+            XmlObjectSerializer serializer
+        )
         {
             // the order in which known claim types are checked is optimized for use patterns
             if (claim == null)
             {
-                writer.WriteElementString(dictionary.NullValue, dictionary.EmptyString, string.Empty);
+                writer.WriteElementString(
+                    dictionary.NullValue,
+                    dictionary.EmptyString,
+                    string.Empty
+                );
                 return;
             }
             else if (ClaimTypes.Sid.Equals(claim.ClaimType))
@@ -80,7 +110,10 @@ namespace System.ServiceModel.Security
             }
             else if (ClaimTypes.X500DistinguishedName.Equals(claim.ClaimType))
             {
-                writer.WriteStartElement(dictionary.X500DistinguishedNameClaim, dictionary.EmptyString);
+                writer.WriteStartElement(
+                    dictionary.X500DistinguishedNameClaim,
+                    dictionary.EmptyString
+                );
                 WriteRightAttribute(claim, dictionary, writer);
                 byte[] rawData = ((X500DistinguishedName)claim.Resource).RawData;
                 writer.WriteBase64(rawData, 0, rawData.Length);
@@ -130,7 +163,11 @@ namespace System.ServiceModel.Security
             }
             else if (claim == Claim.System)
             {
-                writer.WriteElementString(dictionary.SystemClaim, dictionary.EmptyString, string.Empty);
+                writer.WriteElementString(
+                    dictionary.SystemClaim,
+                    dictionary.EmptyString,
+                    string.Empty
+                );
                 return;
             }
             else if (ClaimTypes.Hash.Equals(claim.ClaimType))
@@ -173,27 +210,48 @@ namespace System.ServiceModel.Security
             }
         }
 
-        public static void SerializeClaimSet(ClaimSet claimSet, SctClaimDictionary dictionary, XmlDictionaryWriter writer, XmlObjectSerializer serializer, XmlObjectSerializer claimSerializer)
+        public static void SerializeClaimSet(
+            ClaimSet claimSet,
+            SctClaimDictionary dictionary,
+            XmlDictionaryWriter writer,
+            XmlObjectSerializer serializer,
+            XmlObjectSerializer claimSerializer
+        )
         {
             if (claimSet is X509CertificateClaimSet)
             {
                 X509CertificateClaimSet x509ClaimSet = (X509CertificateClaimSet)claimSet;
-                writer.WriteStartElement(dictionary.X509CertificateClaimSet, dictionary.EmptyString);
+                writer.WriteStartElement(
+                    dictionary.X509CertificateClaimSet,
+                    dictionary.EmptyString
+                );
                 byte[] rawData = x509ClaimSet.X509Certificate.RawData;
                 writer.WriteBase64(rawData, 0, rawData.Length);
                 writer.WriteEndElement();
             }
             else if (claimSet == ClaimSet.System)
             {
-                writer.WriteElementString(dictionary.SystemClaimSet, dictionary.EmptyString, String.Empty);
+                writer.WriteElementString(
+                    dictionary.SystemClaimSet,
+                    dictionary.EmptyString,
+                    String.Empty
+                );
             }
             else if (claimSet == ClaimSet.Windows)
             {
-                writer.WriteElementString(dictionary.WindowsClaimSet, dictionary.EmptyString, String.Empty);
+                writer.WriteElementString(
+                    dictionary.WindowsClaimSet,
+                    dictionary.EmptyString,
+                    String.Empty
+                );
             }
             else if (claimSet == ClaimSet.Anonymous)
             {
-                writer.WriteElementString(dictionary.AnonymousClaimSet, dictionary.EmptyString, String.Empty);
+                writer.WriteElementString(
+                    dictionary.AnonymousClaimSet,
+                    dictionary.EmptyString,
+                    String.Empty
+                );
             }
             else if (claimSet is WindowsClaimSet || claimSet is DefaultClaimSet)
             {
@@ -201,11 +259,21 @@ namespace System.ServiceModel.Security
                 writer.WriteStartElement(dictionary.PrimaryIssuer, dictionary.EmptyString);
                 if (claimSet.Issuer == claimSet)
                 {
-                    writer.WriteElementString(dictionary.NullValue, dictionary.EmptyString, string.Empty);
+                    writer.WriteElementString(
+                        dictionary.NullValue,
+                        dictionary.EmptyString,
+                        string.Empty
+                    );
                 }
                 else
                 {
-                    SerializeClaimSet(claimSet.Issuer, dictionary, writer, serializer, claimSerializer);
+                    SerializeClaimSet(
+                        claimSet.Issuer,
+                        dictionary,
+                        writer,
+                        serializer,
+                        claimSerializer
+                    );
                 }
                 writer.WriteEndElement();
 
@@ -223,7 +291,11 @@ namespace System.ServiceModel.Security
             }
         }
 
-        public static Claim DeserializeClaim(XmlDictionaryReader reader, SctClaimDictionary dictionary, XmlObjectSerializer serializer)
+        public static Claim DeserializeClaim(
+            XmlDictionaryReader reader,
+            SctClaimDictionary dictionary,
+            XmlObjectSerializer serializer
+        )
         {
             if (reader.IsStartElement(dictionary.NullValue, dictionary.EmptyString))
             {
@@ -244,15 +316,25 @@ namespace System.ServiceModel.Security
                 reader.ReadStartElement();
                 byte[] sidBytes = reader.ReadContentAsBase64();
                 reader.ReadEndElement();
-                return new Claim(ClaimTypes.DenyOnlySid, new SecurityIdentifier(sidBytes, 0), right);
+                return new Claim(
+                    ClaimTypes.DenyOnlySid,
+                    new SecurityIdentifier(sidBytes, 0),
+                    right
+                );
             }
-            else if (reader.IsStartElement(dictionary.X500DistinguishedNameClaim, dictionary.EmptyString))
+            else if (
+                reader.IsStartElement(dictionary.X500DistinguishedNameClaim, dictionary.EmptyString)
+            )
             {
                 string right = ReadRightAttribute(reader, dictionary);
                 reader.ReadStartElement();
                 byte[] rawData = reader.ReadContentAsBase64();
                 reader.ReadEndElement();
-                return new Claim(ClaimTypes.X500DistinguishedName, new X500DistinguishedName(rawData), right);
+                return new Claim(
+                    ClaimTypes.X500DistinguishedName,
+                    new X500DistinguishedName(rawData),
+                    right
+                );
             }
             else if (reader.IsStartElement(dictionary.X509ThumbprintClaim, dictionary.EmptyString))
             {
@@ -285,7 +367,8 @@ namespace System.ServiceModel.Security
                 string rsaXml = reader.ReadString();
                 reader.ReadEndElement();
 
-                System.Security.Cryptography.RSACryptoServiceProvider rsa = new System.Security.Cryptography.RSACryptoServiceProvider();
+                System.Security.Cryptography.RSACryptoServiceProvider rsa =
+                    new System.Security.Cryptography.RSACryptoServiceProvider();
                 rsa.FromXmlString(rsaXml);
                 return new Claim(ClaimTypes.Rsa, rsa, right);
             }
@@ -340,14 +423,21 @@ namespace System.ServiceModel.Security
             }
         }
 
-        public static ClaimSet DeserializeClaimSet(XmlDictionaryReader reader, SctClaimDictionary dictionary, XmlObjectSerializer serializer, XmlObjectSerializer claimSerializer)
+        public static ClaimSet DeserializeClaimSet(
+            XmlDictionaryReader reader,
+            SctClaimDictionary dictionary,
+            XmlObjectSerializer serializer,
+            XmlObjectSerializer claimSerializer
+        )
         {
             if (reader.IsStartElement(dictionary.NullValue, dictionary.EmptyString))
             {
                 reader.ReadElementString();
                 return null;
             }
-            else if (reader.IsStartElement(dictionary.X509CertificateClaimSet, dictionary.EmptyString))
+            else if (
+                reader.IsStartElement(dictionary.X509CertificateClaimSet, dictionary.EmptyString)
+            )
             {
                 reader.ReadStartElement();
                 byte[] rawData = reader.ReadContentAsBase64();
@@ -390,7 +480,9 @@ namespace System.ServiceModel.Security
                 }
 
                 reader.ReadEndElement();
-                return issuer != null ? new DefaultClaimSet(issuer, claims) : new DefaultClaimSet(claims);
+                return issuer != null
+                    ? new DefaultClaimSet(issuer, claims)
+                    : new DefaultClaimSet(claims);
             }
             else
             {
@@ -398,7 +490,12 @@ namespace System.ServiceModel.Security
             }
         }
 
-        public static void SerializeIdentities(AuthorizationContext authContext, SctClaimDictionary dictionary, XmlDictionaryWriter writer, XmlObjectSerializer serializer)
+        public static void SerializeIdentities(
+            AuthorizationContext authContext,
+            SctClaimDictionary dictionary,
+            XmlDictionaryWriter writer,
+            XmlObjectSerializer serializer
+        )
         {
             object obj;
             IList<IIdentity> identities;
@@ -417,7 +514,12 @@ namespace System.ServiceModel.Security
             }
         }
 
-        static void SerializePrimaryIdentity(IIdentity identity, SctClaimDictionary dictionary, XmlDictionaryWriter writer, XmlObjectSerializer serializer)
+        static void SerializePrimaryIdentity(
+            IIdentity identity,
+            SctClaimDictionary dictionary,
+            XmlDictionaryWriter writer,
+            XmlObjectSerializer serializer
+        )
         {
             if (identity != null && identity != SecurityUtils.AnonymousIdentity)
             {
@@ -433,15 +535,24 @@ namespace System.ServiceModel.Security
                     using (WindowsIdentity self = WindowsIdentity.GetCurrent())
                     {
                         // is owner or admin?  AuthenticationType could throw un-authorized exception
-                        if ((self.User == wid.Owner) || 
-                            (wid.Owner != null && self.Groups.Contains(wid.Owner)) || 
-                            (wid.Owner != SecurityUtils.AdministratorsSid && self.Groups.Contains(SecurityUtils.AdministratorsSid)))
+                        if (
+                            (self.User == wid.Owner)
+                            || (wid.Owner != null && self.Groups.Contains(wid.Owner))
+                            || (
+                                wid.Owner != SecurityUtils.AdministratorsSid
+                                && self.Groups.Contains(SecurityUtils.AdministratorsSid)
+                            )
+                        )
                         {
                             authenticationType = wid.AuthenticationType;
                         }
                     }
                     if (!String.IsNullOrEmpty(authenticationType))
-                        writer.WriteAttributeString(dictionary.AuthenticationType, dictionary.EmptyString, authenticationType);
+                        writer.WriteAttributeString(
+                            dictionary.AuthenticationType,
+                            dictionary.EmptyString,
+                            authenticationType
+                        );
                     writer.WriteString(wid.Name);
                     writer.WriteEndElement();
                 }
@@ -451,7 +562,11 @@ namespace System.ServiceModel.Security
                     writer.WriteStartElement(dictionary.WindowsSidIdentity, dictionary.EmptyString);
                     WriteSidAttribute(wsid.SecurityIdentifier, dictionary, writer);
                     if (!String.IsNullOrEmpty(wsid.AuthenticationType))
-                        writer.WriteAttributeString(dictionary.AuthenticationType, dictionary.EmptyString, wsid.AuthenticationType);
+                        writer.WriteAttributeString(
+                            dictionary.AuthenticationType,
+                            dictionary.EmptyString,
+                            wsid.AuthenticationType
+                        );
                     writer.WriteString(wsid.Name);
                     writer.WriteEndElement();
                 }
@@ -460,7 +575,11 @@ namespace System.ServiceModel.Security
                     GenericIdentity genericIdentity = (GenericIdentity)identity;
                     writer.WriteStartElement(dictionary.GenericIdentity, dictionary.EmptyString);
                     if (!String.IsNullOrEmpty(genericIdentity.AuthenticationType))
-                        writer.WriteAttributeString(dictionary.AuthenticationType, dictionary.EmptyString, genericIdentity.AuthenticationType);
+                        writer.WriteAttributeString(
+                            dictionary.AuthenticationType,
+                            dictionary.EmptyString,
+                            genericIdentity.AuthenticationType
+                        );
                     writer.WriteString(genericIdentity.Name);
                     writer.WriteEndElement();
                 }
@@ -472,7 +591,11 @@ namespace System.ServiceModel.Security
             }
         }
 
-        public static IList<IIdentity> DeserializeIdentities(XmlDictionaryReader reader, SctClaimDictionary dictionary, XmlObjectSerializer serializer)
+        public static IList<IIdentity> DeserializeIdentities(
+            XmlDictionaryReader reader,
+            SctClaimDictionary dictionary,
+            XmlObjectSerializer serializer
+        )
         {
             List<IIdentity> identities = null;
             if (reader.IsStartElement(dictionary.Identities, dictionary.EmptyString))
@@ -492,7 +615,11 @@ namespace System.ServiceModel.Security
             return identities;
         }
 
-        static IIdentity DeserializePrimaryIdentity(XmlDictionaryReader reader, SctClaimDictionary dictionary, XmlObjectSerializer serializer)
+        static IIdentity DeserializePrimaryIdentity(
+            XmlDictionaryReader reader,
+            SctClaimDictionary dictionary,
+            XmlObjectSerializer serializer
+        )
         {
             IIdentity identity = null;
             if (reader.IsStartElement(dictionary.PrimaryIdentity, dictionary.EmptyString))
@@ -501,18 +628,31 @@ namespace System.ServiceModel.Security
                 if (reader.IsStartElement(dictionary.WindowsSidIdentity, dictionary.EmptyString))
                 {
                     SecurityIdentifier sid = ReadSidAttribute(reader, dictionary);
-                    string authenticationType = reader.GetAttribute(dictionary.AuthenticationType, dictionary.EmptyString);
+                    string authenticationType = reader.GetAttribute(
+                        dictionary.AuthenticationType,
+                        dictionary.EmptyString
+                    );
                     reader.ReadStartElement();
                     string name = reader.ReadContentAsString();
-                    identity = new WindowsSidIdentity(sid, name, authenticationType ?? String.Empty);
+                    identity = new WindowsSidIdentity(
+                        sid,
+                        name,
+                        authenticationType ?? String.Empty
+                    );
                     reader.ReadEndElement();
                 }
                 else if (reader.IsStartElement(dictionary.GenericIdentity, dictionary.EmptyString))
                 {
-                    string authenticationType = reader.GetAttribute(dictionary.AuthenticationType, dictionary.EmptyString);
+                    string authenticationType = reader.GetAttribute(
+                        dictionary.AuthenticationType,
+                        dictionary.EmptyString
+                    );
                     reader.ReadStartElement();
                     string name = reader.ReadContentAsString();
-                    identity = SecurityUtils.CreateIdentity(name, authenticationType ?? String.Empty);
+                    identity = SecurityUtils.CreateIdentity(
+                        name,
+                        authenticationType ?? String.Empty
+                    );
                     reader.ReadEndElement();
                 }
                 else

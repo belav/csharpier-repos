@@ -11,6 +11,10 @@ internal partial class Interop
     {
         [LibraryImport(Libraries.Kernel32, EntryPoint = "RaiseFailFastException")]
         [DoesNotReturn]
-        public static unsafe partial void RaiseFailFastException(IntPtr pExceptionRecord, IntPtr pContextRecord, uint dwFlags);
+        public static unsafe partial void RaiseFailFastException(
+            IntPtr pExceptionRecord,
+            IntPtr pContextRecord,
+            uint dwFlags
+        );
     }
 }

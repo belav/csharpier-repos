@@ -16,7 +16,11 @@ namespace System.Globalization.Tests
 
         [Theory]
         [MemberData(nameof(NumberDecimalDigits_TestData))]
-        public void NumberDecimalDigits_Get_ReturnsExpected(NumberFormatInfo format, int expectedNls, int expectedIcu)
+        public void NumberDecimalDigits_Get_ReturnsExpected(
+            NumberFormatInfo format,
+            int expectedNls,
+            int expectedIcu
+        )
         {
             int expected = PlatformDetection.IsNlsGlobalization ? expectedNls : expectedIcu;
             Assert.Equal(expected, format.NumberDecimalDigits);
@@ -39,13 +43,19 @@ namespace System.Globalization.Tests
         public void NumberDecimalDigits_SetInvalid_ThrowsArgumentOutOfRangeException(int value)
         {
             var format = new NumberFormatInfo();
-            AssertExtensions.Throws<ArgumentOutOfRangeException>("value", "NumberDecimalDigits", () => format.NumberDecimalDigits = value);
+            AssertExtensions.Throws<ArgumentOutOfRangeException>(
+                "value",
+                "NumberDecimalDigits",
+                () => format.NumberDecimalDigits = value
+            );
         }
 
         [Fact]
         public void NumberDecimalDigits_SetReadOnly_ThrowsInvalidOperationException()
         {
-            Assert.Throws<InvalidOperationException>(() => NumberFormatInfo.InvariantInfo.NumberDecimalDigits = 1);
+            Assert.Throws<InvalidOperationException>(() =>
+                NumberFormatInfo.InvariantInfo.NumberDecimalDigits = 1
+            );
         }
     }
 }

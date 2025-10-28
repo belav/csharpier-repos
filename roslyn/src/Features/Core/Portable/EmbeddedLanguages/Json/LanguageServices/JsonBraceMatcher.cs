@@ -19,18 +19,20 @@ namespace Microsoft.CodeAnalysis.Features.EmbeddedLanguages.Json.LanguageService
     /// <summary>
     /// Brace matcher impl for embedded json strings.
     /// </summary>
-    [ExportEmbeddedLanguageBraceMatcher(
-        PredefinedEmbeddedLanguageNames.Json,
-        new[] { LanguageNames.CSharp, LanguageNames.VisualBasic },
-        supportsUnannotatedAPIs: true,
-        "Json"), Shared]
+    [
+        ExportEmbeddedLanguageBraceMatcher(
+            PredefinedEmbeddedLanguageNames.Json,
+            new[] { LanguageNames.CSharp, LanguageNames.VisualBasic },
+            supportsUnannotatedAPIs: true,
+            "Json"
+        ),
+        Shared
+    ]
     internal sealed class JsonBraceMatcher : IEmbeddedLanguageBraceMatcher
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public JsonBraceMatcher()
-        {
-        }
+        public JsonBraceMatcher() { }
 
         public BraceMatchingResult? FindBraces(
             Project project,
@@ -38,17 +40,25 @@ namespace Microsoft.CodeAnalysis.Features.EmbeddedLanguages.Json.LanguageService
             SyntaxToken token,
             int position,
             BraceMatchingOptions options,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
             if (!options.HighlightingOptions.HighlightRelatedJsonComponentsUnderCursor)
                 return null;
 
-            var info = project.GetRequiredLanguageService<IEmbeddedLanguagesProvider>().EmbeddedLanguageInfo;
+            var info = project
+                .GetRequiredLanguageService<IEmbeddedLanguagesProvider>()
+                .EmbeddedLanguageInfo;
             var detector = JsonLanguageDetector.GetOrCreate(semanticModel.Compilation, info);
 
             // We do support brace matching in strings that look very likely to be json, even if we aren't 100% certain
             // if it truly is json.
-            var tree = detector.TryParseString(token, semanticModel, includeProbableStrings: true, cancellationToken);
+            var tree = detector.TryParseString(
+                token,
+                semanticModel,
+                includeProbableStrings: true,
+                cancellationToken
+            );
             if (tree == null)
                 return null;
 
@@ -67,8 +77,8 @@ namespace Microsoft.CodeAnalysis.Features.EmbeddedLanguages.Json.LanguageService
                 : null;
         }
 
-        private static BraceMatchingResult? FindBraceHighlights(JsonTree tree, VirtualChar ch)
-            => FindBraceMatchingResult(tree.Root, ch);
+        private static BraceMatchingResult? FindBraceHighlights(JsonTree tree, VirtualChar ch) =>
+            FindBraceMatchingResult(tree.Root, ch);
 
         private static BraceMatchingResult? FindBraceMatchingResult(JsonNode node, VirtualChar ch)
         {
@@ -81,13 +91,15 @@ namespace Microsoft.CodeAnalysis.Features.EmbeddedLanguages.Json.LanguageService
 
             switch (node)
             {
-                case JsonArrayNode array when Matches(array.OpenBracketToken, array.CloseBracketToken, ch):
+                case JsonArrayNode array
+                    when Matches(array.OpenBracketToken, array.CloseBracketToken, ch):
                     return Create(array.OpenBracketToken, array.CloseBracketToken);
 
                 case JsonObjectNode obj when Matches(obj.OpenBraceToken, obj.CloseBraceToken, ch):
                     return Create(obj.OpenBraceToken, obj.CloseBraceToken);
 
-                case JsonConstructorNode cons when Matches(cons.OpenParenToken, cons.CloseParenToken, ch):
+                case JsonConstructorNode cons
+                    when Matches(cons.OpenParenToken, cons.CloseParenToken, ch):
                     return Create(cons.OpenParenToken, cons.CloseParenToken);
             }
 
@@ -104,12 +116,12 @@ namespace Microsoft.CodeAnalysis.Features.EmbeddedLanguages.Json.LanguageService
             return null;
         }
 
-        private static BraceMatchingResult? Create(JsonToken open, JsonToken close)
-           => open.IsMissing || close.IsMissing
-               ? null
-               : new BraceMatchingResult(open.GetSpan(), close.GetSpan());
+        private static BraceMatchingResult? Create(JsonToken open, JsonToken close) =>
+            open.IsMissing || close.IsMissing
+                ? null
+                : new BraceMatchingResult(open.GetSpan(), close.GetSpan());
 
-        private static bool Matches(JsonToken openToken, JsonToken closeToken, VirtualChar ch)
-            => openToken.VirtualChars.Contains(ch) || closeToken.VirtualChars.Contains(ch);
+        private static bool Matches(JsonToken openToken, JsonToken closeToken, VirtualChar ch) =>
+            openToken.VirtualChars.Contains(ch) || closeToken.VirtualChars.Contains(ch);
     }
 }

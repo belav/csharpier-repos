@@ -1,12 +1,12 @@
 // ==++==
-// 
+//
 //   Copyright (c) Microsoft Corporation.  All rights reserved.
-// 
+//
 // ==--==
 /*============================================================
 **
 ** Class:  FileSystemEnumerable
-** 
+**
 ** <OWNER>Microsoft</OWNER>
 **
 **
@@ -17,66 +17,117 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics.Contracts;
+using System.Globalization;
+using System.Runtime.InteropServices;
+using System.Runtime.Versioning;
 using System.Security;
 using System.Security.Permissions;
+using System.Text;
+using System.Threading;
 using Microsoft.Win32;
 using Microsoft.Win32.SafeHandles;
-using System.Text;
-using System.Runtime.InteropServices;
-using System.Globalization;
-using System.Runtime.Versioning;
-using System.Diagnostics.Contracts;
-using System.Threading;
 
 namespace System.IO
 {
-
     // Overview:
     // The key methods instantiate FileSystemEnumerableIterators. These compose the iterator with search result
     // handlers that instantiate the FileInfo, DirectoryInfo, String, etc. The handlers then perform any
-    // additional required permission demands. 
+    // additional required permission demands.
     internal static class FileSystemEnumerableFactory
     {
-        internal static IEnumerable<String> CreateFileNameIterator(String path, String originalUserPath, String searchPattern,
-                                                                    bool includeFiles, bool includeDirs, SearchOption searchOption, bool checkHost)
+        internal static IEnumerable<String> CreateFileNameIterator(
+            String path,
+            String originalUserPath,
+            String searchPattern,
+            bool includeFiles,
+            bool includeDirs,
+            SearchOption searchOption,
+            bool checkHost
+        )
         {
             Contract.Requires(path != null);
             Contract.Requires(originalUserPath != null);
             Contract.Requires(searchPattern != null);
 
-            SearchResultHandler<String> handler = new StringResultHandler(includeFiles, includeDirs);
-            return new FileSystemEnumerableIterator<String>(path, originalUserPath, searchPattern, searchOption, handler, checkHost);
+            SearchResultHandler<String> handler = new StringResultHandler(
+                includeFiles,
+                includeDirs
+            );
+            return new FileSystemEnumerableIterator<String>(
+                path,
+                originalUserPath,
+                searchPattern,
+                searchOption,
+                handler,
+                checkHost
+            );
         }
 
-        internal static IEnumerable<FileInfo> CreateFileInfoIterator(String path, String originalUserPath, String searchPattern, SearchOption searchOption)
+        internal static IEnumerable<FileInfo> CreateFileInfoIterator(
+            String path,
+            String originalUserPath,
+            String searchPattern,
+            SearchOption searchOption
+        )
         {
             Contract.Requires(path != null);
             Contract.Requires(originalUserPath != null);
             Contract.Requires(searchPattern != null);
 
             SearchResultHandler<FileInfo> handler = new FileInfoResultHandler();
-            return new FileSystemEnumerableIterator<FileInfo>(path, originalUserPath, searchPattern, searchOption, handler, true);
+            return new FileSystemEnumerableIterator<FileInfo>(
+                path,
+                originalUserPath,
+                searchPattern,
+                searchOption,
+                handler,
+                true
+            );
         }
 
-        internal static IEnumerable<DirectoryInfo> CreateDirectoryInfoIterator(String path, String originalUserPath, String searchPattern, SearchOption searchOption)
+        internal static IEnumerable<DirectoryInfo> CreateDirectoryInfoIterator(
+            String path,
+            String originalUserPath,
+            String searchPattern,
+            SearchOption searchOption
+        )
         {
-
             Contract.Requires(path != null);
             Contract.Requires(originalUserPath != null);
             Contract.Requires(searchPattern != null);
 
             SearchResultHandler<DirectoryInfo> handler = new DirectoryInfoResultHandler();
-            return new FileSystemEnumerableIterator<DirectoryInfo>(path, originalUserPath, searchPattern, searchOption, handler, true);
+            return new FileSystemEnumerableIterator<DirectoryInfo>(
+                path,
+                originalUserPath,
+                searchPattern,
+                searchOption,
+                handler,
+                true
+            );
         }
 
-        internal static IEnumerable<FileSystemInfo> CreateFileSystemInfoIterator(String path, String originalUserPath, String searchPattern, SearchOption searchOption)
+        internal static IEnumerable<FileSystemInfo> CreateFileSystemInfoIterator(
+            String path,
+            String originalUserPath,
+            String searchPattern,
+            SearchOption searchOption
+        )
         {
             Contract.Requires(path != null);
             Contract.Requires(originalUserPath != null);
             Contract.Requires(searchPattern != null);
 
             SearchResultHandler<FileSystemInfo> handler = new FileSystemInfoResultHandler();
-            return new FileSystemEnumerableIterator<FileSystemInfo>(path, originalUserPath, searchPattern, searchOption, handler, true);
+            return new FileSystemEnumerableIterator<FileSystemInfo>(
+                path,
+                originalUserPath,
+                searchPattern,
+                searchOption,
+                handler,
+                true
+            );
         }
     }
 
@@ -141,26 +192,24 @@ namespace System.IO
         {
             throw new NotSupportedException();
         }
-
     }
 
     // Overview:
     // Enumerates file system entries matching the search parameters. For recursive searches this
     // searches through all the sub dirs and executes the search criteria against every dir.
-    // 
+    //
     // Generic implementation:
-    // FileSystemEnumerableIterator is generic. When it gets a WIN32_FIND_DATA, it calls the 
-    // result handler to create an instance of the generic type. 
-    // 
+    // FileSystemEnumerableIterator is generic. When it gets a WIN32_FIND_DATA, it calls the
+    // result handler to create an instance of the generic type.
+    //
     // Usage:
-    // Use FileSystemEnumerableFactory to obtain FSEnumerables that can enumerate file system 
+    // Use FileSystemEnumerableFactory to obtain FSEnumerables that can enumerate file system
     // entries as String path names, FileInfos, DirectoryInfos, or FileSystemInfos.
-    // 
+    //
     // Security:
     // For all the dirs/files returned, demands path discovery permission for their parent folders
     internal class FileSystemEnumerableIterator<TSource> : Iterator<TSource>
     {
-
         private const int STATE_INIT = 1;
         private const int STATE_SEARCH_NEXT_DIR = 2;
         private const int STATE_FIND_NEXT_FILE = 3;
@@ -170,6 +219,7 @@ namespace System.IO
         private List<Directory.SearchData> searchStack;
         private Directory.SearchData searchData;
         private String searchCriteria;
+
         [System.Security.SecurityCritical]
         SafeFindHandle _hnd = null;
         bool needsParentPathDiscoveryDemand;
@@ -186,18 +236,28 @@ namespace System.IO
         private SearchOption searchOption;
         private String fullPath;
         private String normalizedSearchPath;
-#if !MONO        
+#if !MONO
         private int oldMode;
 #endif
         private bool _checkHost;
 
         [System.Security.SecuritySafeCritical]
-        internal FileSystemEnumerableIterator(String path, String originalUserPath, String searchPattern, SearchOption searchOption, SearchResultHandler<TSource> resultHandler, bool checkHost)
+        internal FileSystemEnumerableIterator(
+            String path,
+            String originalUserPath,
+            String searchPattern,
+            SearchOption searchOption,
+            SearchResultHandler<TSource> resultHandler,
+            bool checkHost
+        )
         {
             Contract.Requires(path != null);
             Contract.Requires(originalUserPath != null);
             Contract.Requires(searchPattern != null);
-            Contract.Requires(searchOption == SearchOption.AllDirectories || searchOption == SearchOption.TopDirectoryOnly);
+            Contract.Requires(
+                searchOption == SearchOption.AllDirectories
+                    || searchOption == SearchOption.TopDirectoryOnly
+            );
             Contract.Requires(resultHandler != null);
 
 #if !MONO  // TODO: check if we need this on Windows
@@ -237,18 +297,34 @@ namespace System.IO
 #if FEATURE_CORECLR
                 if (checkHost)
                 {
-                    FileSecurityState state1 = new FileSecurityState(FileSecurityStateAccess.PathDiscovery, String.Empty, demandPaths[0]);
+                    FileSecurityState state1 = new FileSecurityState(
+                        FileSecurityStateAccess.PathDiscovery,
+                        String.Empty,
+                        demandPaths[0]
+                    );
                     state1.EnsureState();
-                    FileSecurityState state2 = new FileSecurityState(FileSecurityStateAccess.PathDiscovery, String.Empty, demandPaths[1]);
+                    FileSecurityState state2 = new FileSecurityState(
+                        FileSecurityStateAccess.PathDiscovery,
+                        String.Empty,
+                        demandPaths[1]
+                    );
                     state2.EnsureState();
                 }
 #else
-                FileIOPermission.QuickDemand(FileIOPermissionAccess.PathDiscovery, demandPaths, false, false);
+                FileIOPermission.QuickDemand(
+                    FileIOPermissionAccess.PathDiscovery,
+                    demandPaths,
+                    false,
+                    false
+                );
 #endif
 #endif
 
                 // normalize search criteria
-                searchCriteria = GetNormalizedSearchCriteria(fullSearchString, normalizedSearchPath);
+                searchCriteria = GetNormalizedSearchCriteria(
+                    fullSearchString,
+                    normalizedSearchPath
+                );
 
                 // fix up user path
                 String searchPatternDirName = Path.GetDirectoryName(normalizedSearchPattern);
@@ -259,17 +335,23 @@ namespace System.IO
                 }
                 this.userPath = userPathTemp;
 
-                searchData = new Directory.SearchData(normalizedSearchPath, this.userPath, searchOption);
+                searchData = new Directory.SearchData(
+                    normalizedSearchPath,
+                    this.userPath,
+                    searchOption
+                );
 
                 CommonInit();
             }
-
         }
 
         [System.Security.SecurityCritical]
         private void CommonInit()
         {
-            Contract.Assert(searchCriteria != null && searchData != null, "searchCriteria and searchData should be initialized");
+            Contract.Assert(
+                searchCriteria != null && searchData != null,
+                "searchCriteria and searchData should be initialized"
+            );
 
             // Execute searchCriteria against the current directory
             String searchPath = Path.InternalCombine(searchData.fullPath, searchCriteria);
@@ -279,7 +361,14 @@ namespace System.IO
             // Open a Find handle
 #if MONO
             int error;
-            _hnd = new SafeFindHandle (MonoIO.FindFirstFile (searchPath, out data.cFileName, out data.dwFileAttributes, out error));
+            _hnd = new SafeFindHandle(
+                MonoIO.FindFirstFile(
+                    searchPath,
+                    out data.cFileName,
+                    out data.dwFileAttributes,
+                    out error
+                )
+            );
 #else
             _hnd = Win32Native.FindFirstFile(searchPath, data);
 #endif
@@ -302,7 +391,7 @@ namespace System.IO
                     empty = searchData.searchOption == SearchOption.TopDirectoryOnly;
                 }
             }
-            // fast path for TopDirectoryOnly. If we have a result, go ahead and set it to 
+            // fast path for TopDirectoryOnly. If we have a result, go ahead and set it to
             // current. If empty, dispose handle.
             if (searchData.searchOption == SearchOption.TopDirectoryOnly)
             {
@@ -319,7 +408,7 @@ namespace System.IO
                     }
                 }
             }
-            // for AllDirectories, we first recurse into dirs, so cleanup and add searchData 
+            // for AllDirectories, we first recurse into dirs, so cleanup and add searchData
             // to the stack
             else
             {
@@ -329,7 +418,15 @@ namespace System.IO
         }
 
         [System.Security.SecuritySafeCritical]
-        private FileSystemEnumerableIterator(String fullPath, String normalizedSearchPath, String searchCriteria, String userPath, SearchOption searchOption, SearchResultHandler<TSource> resultHandler, bool checkHost)
+        private FileSystemEnumerableIterator(
+            String fullPath,
+            String normalizedSearchPath,
+            String searchCriteria,
+            String userPath,
+            SearchOption searchOption,
+            SearchResultHandler<TSource> resultHandler,
+            bool checkHost
+        )
         {
             this.fullPath = fullPath;
             this.normalizedSearchPath = normalizedSearchPath;
@@ -352,15 +449,28 @@ namespace System.IO
                 demandPaths[1] = Directory.GetDemandDir(normalizedSearchPath, true);
 #if MONO_FEATURE_CAS
 #if FEATURE_CORECLR
-                if (checkHost) 
+                if (checkHost)
                 {
-                    FileSecurityState state1 = new FileSecurityState(FileSecurityStateAccess.PathDiscovery, String.Empty, demandPaths[0]);
+                    FileSecurityState state1 = new FileSecurityState(
+                        FileSecurityStateAccess.PathDiscovery,
+                        String.Empty,
+                        demandPaths[0]
+                    );
                     state1.EnsureState();
-                    FileSecurityState state2 = new FileSecurityState(FileSecurityStateAccess.PathDiscovery, String.Empty, demandPaths[1]);
+                    FileSecurityState state2 = new FileSecurityState(
+                        FileSecurityStateAccess.PathDiscovery,
+                        String.Empty,
+                        demandPaths[1]
+                    );
                     state2.EnsureState();
                 }
 #else
-                FileIOPermission.QuickDemand(FileIOPermissionAccess.PathDiscovery, demandPaths, false, false);
+                FileIOPermission.QuickDemand(
+                    FileIOPermissionAccess.PathDiscovery,
+                    demandPaths,
+                    false,
+                    false
+                );
 #endif
 #endif
                 searchData = new Directory.SearchData(normalizedSearchPath, userPath, searchOption);
@@ -374,7 +484,15 @@ namespace System.IO
 
         protected override Iterator<TSource> Clone()
         {
-            return new FileSystemEnumerableIterator<TSource>(fullPath, normalizedSearchPath, searchCriteria, userPath, searchOption, _resultHandler, _checkHost);
+            return new FileSystemEnumerableIterator<TSource>(
+                fullPath,
+                normalizedSearchPath,
+                searchCriteria,
+                userPath,
+                searchOption,
+                _resultHandler,
+                _checkHost
+            );
         }
 
         [System.Security.SecuritySafeCritical]
@@ -403,69 +521,124 @@ namespace System.IO
             switch (state)
             {
                 case STATE_INIT:
+                {
+                    if (empty)
                     {
-                        if (empty)
+                        state = STATE_FINISH;
+                        goto case STATE_FINISH;
+                    }
+                    if (searchData.searchOption == SearchOption.TopDirectoryOnly)
+                    {
+                        state = STATE_FIND_NEXT_FILE;
+                        if (current != null)
                         {
-                            state = STATE_FINISH;
-                            goto case STATE_FINISH;
-                        }
-                        if (searchData.searchOption == SearchOption.TopDirectoryOnly)
-                        {
-                            state = STATE_FIND_NEXT_FILE;
-                            if (current != null)
-                            {
-                                return true;
-                            }
-                            else
-                            {
-                                goto case STATE_FIND_NEXT_FILE;
-                            }
+                            return true;
                         }
                         else
                         {
-                            state = STATE_SEARCH_NEXT_DIR;
-                            goto case STATE_SEARCH_NEXT_DIR;
+                            goto case STATE_FIND_NEXT_FILE;
                         }
                     }
-                case STATE_SEARCH_NEXT_DIR:
+                    else
                     {
-                        Contract.Assert(searchData.searchOption != SearchOption.TopDirectoryOnly, "should not reach this code path if searchOption == TopDirectoryOnly");
-                        // Traverse directory structure. We need to get '*'
-                        while (searchStack.Count > 0)
+                        state = STATE_SEARCH_NEXT_DIR;
+                        goto case STATE_SEARCH_NEXT_DIR;
+                    }
+                }
+                case STATE_SEARCH_NEXT_DIR:
+                {
+                    Contract.Assert(
+                        searchData.searchOption != SearchOption.TopDirectoryOnly,
+                        "should not reach this code path if searchOption == TopDirectoryOnly"
+                    );
+                    // Traverse directory structure. We need to get '*'
+                    while (searchStack.Count > 0)
+                    {
+                        searchData = searchStack[0];
+                        Contract.Assert((searchData.fullPath != null), "fullpath can't be null!");
+                        searchStack.RemoveAt(0);
+
+                        // Traverse the subdirs
+                        AddSearchableDirsToStack(searchData);
+
+                        // Execute searchCriteria against the current directory
+                        String searchPath = Path.InternalCombine(
+                            searchData.fullPath,
+                            searchCriteria
+                        );
+
+                        // Open a Find handle
+#if MONO
+                        int error;
+                        _hnd = new SafeFindHandle(
+                            MonoIO.FindFirstFile(
+                                searchPath,
+                                out data.cFileName,
+                                out data.dwFileAttributes,
+                                out error
+                            )
+                        );
+#else
+                        _hnd = Win32Native.FindFirstFile(searchPath, data);
+#endif
+                        if (_hnd.IsInvalid)
                         {
-                            searchData = searchStack[0];
-                            Contract.Assert((searchData.fullPath != null), "fullpath can't be null!");
-                            searchStack.RemoveAt(0);
-
-                            // Traverse the subdirs
-                            AddSearchableDirsToStack(searchData);
-
-                            // Execute searchCriteria against the current directory
-                            String searchPath = Path.InternalCombine(searchData.fullPath, searchCriteria);
-
-                            // Open a Find handle
 #if MONO
-                            int error;
-                            _hnd = new SafeFindHandle (MonoIO.FindFirstFile (searchPath, out data.cFileName, out data.dwFileAttributes, out error));
+                            int hr = error;
 #else
-                            _hnd = Win32Native.FindFirstFile(searchPath, data);
+                            int hr = Marshal.GetLastWin32Error();
 #endif
-                            if (_hnd.IsInvalid)
+                            if (
+                                hr == Win32Native.ERROR_FILE_NOT_FOUND
+                                || hr == Win32Native.ERROR_NO_MORE_FILES
+                                || hr == Win32Native.ERROR_PATH_NOT_FOUND
+                            )
+                                continue;
+
+                            _hnd.Dispose();
+                            HandleError(hr, searchData.fullPath);
+                        }
+
+                        state = STATE_FIND_NEXT_FILE;
+                        needsParentPathDiscoveryDemand = true;
+                        SearchResult searchResult = CreateSearchResult(searchData, data);
+                        if (_resultHandler.IsResultIncluded(searchResult))
+                        {
+                            if (needsParentPathDiscoveryDemand)
                             {
-#if MONO
-                                int hr = error;
-#else
-                                int hr = Marshal.GetLastWin32Error();
-#endif
-                                if (hr == Win32Native.ERROR_FILE_NOT_FOUND || hr == Win32Native.ERROR_NO_MORE_FILES || hr == Win32Native.ERROR_PATH_NOT_FOUND)
-                                    continue;
-
-                                _hnd.Dispose();
-                                HandleError(hr, searchData.fullPath);
+                                DoDemand(searchData.fullPath);
+                                needsParentPathDiscoveryDemand = false;
                             }
-
-                            state = STATE_FIND_NEXT_FILE;
-                            needsParentPathDiscoveryDemand = true;
+                            current = _resultHandler.CreateObject(searchResult);
+                            return true;
+                        }
+                        else
+                        {
+                            goto case STATE_FIND_NEXT_FILE;
+                        }
+                    }
+                    state = STATE_FINISH;
+                    goto case STATE_FINISH;
+                }
+                case STATE_FIND_NEXT_FILE:
+                {
+                    if (searchData != null && _hnd != null)
+                    {
+                        // Keep asking for more matching files/dirs, add it to the list
+#if MONO
+                        int error;
+                        while (
+                            MonoIO.FindNextFile(
+                                _hnd.DangerousGetHandle(),
+                                out data.cFileName,
+                                out data.dwFileAttributes,
+                                out error
+                            )
+                        )
+#else
+                        while (Win32Native.FindNextFile(_hnd, data))
+#endif
+                        {
                             SearchResult searchResult = CreateSearchResult(searchData, data);
                             if (_resultHandler.IsResultIncluded(searchResult))
                             {
@@ -477,83 +650,64 @@ namespace System.IO
                                 current = _resultHandler.CreateObject(searchResult);
                                 return true;
                             }
-                            else
-                            {
-                                goto case STATE_FIND_NEXT_FILE;
-                            }
                         }
+
+#if MONO
+                        int hr = error;
+#else
+                        // Make sure we quit with a sensible error.
+                        int hr = Marshal.GetLastWin32Error();
+#endif
+
+                        if (_hnd != null)
+                            _hnd.Dispose();
+
+                        // ERROR_FILE_NOT_FOUND is valid here because if the top level
+                        // dir doen't contain any subdirs and matching files then
+                        // we will get here with this errorcode from the searchStack walk
+                        if (
+                            (hr != 0)
+                            && (hr != Win32Native.ERROR_NO_MORE_FILES)
+                            && (hr != Win32Native.ERROR_FILE_NOT_FOUND)
+                        )
+                        {
+                            HandleError(hr, searchData.fullPath);
+                        }
+                    }
+                    if (searchData.searchOption == SearchOption.TopDirectoryOnly)
+                    {
                         state = STATE_FINISH;
                         goto case STATE_FINISH;
                     }
-                case STATE_FIND_NEXT_FILE:
+                    else
                     {
-                        if (searchData != null && _hnd != null)
-                        {
-                            // Keep asking for more matching files/dirs, add it to the list
-#if MONO
-                            int error;
-                            while (MonoIO.FindNextFile (_hnd.DangerousGetHandle(), out data.cFileName, out data.dwFileAttributes, out error))
-#else
-                            while (Win32Native.FindNextFile(_hnd, data))
-#endif
-                            {
-                                SearchResult searchResult = CreateSearchResult(searchData, data);
-                                if (_resultHandler.IsResultIncluded(searchResult))
-                                {
-                                    if (needsParentPathDiscoveryDemand)
-                                    {
-                                        DoDemand(searchData.fullPath);
-                                        needsParentPathDiscoveryDemand = false;
-                                    }
-                                    current = _resultHandler.CreateObject(searchResult);
-                                    return true;
-                                }
-                            }
-
-#if MONO
-                            int hr = error;
-#else
-                            // Make sure we quit with a sensible error.
-                            int hr = Marshal.GetLastWin32Error();
-#endif
-
-                            if (_hnd != null)
-                                _hnd.Dispose();
-
-                            // ERROR_FILE_NOT_FOUND is valid here because if the top level
-                            // dir doen't contain any subdirs and matching files then 
-                            // we will get here with this errorcode from the searchStack walk
-                            if ((hr != 0) && (hr != Win32Native.ERROR_NO_MORE_FILES)
-                                && (hr != Win32Native.ERROR_FILE_NOT_FOUND))
-                            {
-                                HandleError(hr, searchData.fullPath);
-                            }
-                        }
-                        if (searchData.searchOption == SearchOption.TopDirectoryOnly)
-                        {
-                            state = STATE_FINISH;
-                            goto case STATE_FINISH;
-                        }
-                        else
-                        {
-                            state = STATE_SEARCH_NEXT_DIR;
-                            goto case STATE_SEARCH_NEXT_DIR;
-                        }
+                        state = STATE_SEARCH_NEXT_DIR;
+                        goto case STATE_SEARCH_NEXT_DIR;
                     }
+                }
                 case STATE_FINISH:
-                    {
-                        Dispose();
-                        break;
-                    }
+                {
+                    Dispose();
+                    break;
+                }
             }
             return false;
         }
 
         [System.Security.SecurityCritical]
-        private SearchResult CreateSearchResult(Directory.SearchData localSearchData, Win32Native.WIN32_FIND_DATA findData)
+        private SearchResult CreateSearchResult(
+            Directory.SearchData localSearchData,
+            Win32Native.WIN32_FIND_DATA findData
+        )
         {
-            String userPathFinal = Path.InternalCombine(localSearchData.userPath, findData.cFileName);
-            String fullPathFinal = Path.InternalCombine(localSearchData.fullPath, findData.cFileName);
+            String userPathFinal = Path.InternalCombine(
+                localSearchData.userPath,
+                findData.cFileName
+            );
+            String fullPathFinal = Path.InternalCombine(
+                localSearchData.fullPath,
+                findData.cFileName
+            );
             return new SearchResult(fullPathFinal, userPathFinal, findData);
         }
 
@@ -564,7 +718,7 @@ namespace System.IO
             __Error.WinIOError(hr, path);
         }
 
-        [System.Security.SecurityCritical]  // auto-generated
+        [System.Security.SecurityCritical] // auto-generated
         private void AddSearchableDirsToStack(Directory.SearchData localSearchData)
         {
             Contract.Requires(localSearchData != null);
@@ -577,7 +731,14 @@ namespace System.IO
                 // Get all files and dirs
 #if MONO
                 int error;
-                hnd = new SafeFindHandle (MonoIO.FindFirstFile (searchPath, out data.cFileName, out data.dwFileAttributes, out error));
+                hnd = new SafeFindHandle(
+                    MonoIO.FindFirstFile(
+                        searchPath,
+                        out data.cFileName,
+                        out data.dwFileAttributes,
+                        out error
+                    )
+                );
 #else
                 hnd = Win32Native.FindFirstFile(searchPath, data);
 #endif
@@ -593,7 +754,11 @@ namespace System.IO
                     // This could happen if the dir doesn't contain any files.
                     // Continue with the recursive search though, eventually
                     // searchStack will become empty
-                    if (hr == Win32Native.ERROR_FILE_NOT_FOUND || hr == Win32Native.ERROR_NO_MORE_FILES || hr == Win32Native.ERROR_PATH_NOT_FOUND)
+                    if (
+                        hr == Win32Native.ERROR_FILE_NOT_FOUND
+                        || hr == Win32Native.ERROR_NO_MORE_FILES
+                        || hr == Win32Native.ERROR_PATH_NOT_FOUND
+                    )
                         return;
 
                     HandleError(hr, localSearchData.fullPath);
@@ -605,23 +770,48 @@ namespace System.IO
                 {
                     if (FileSystemEnumerableHelpers.IsDir(data))
                     {
-                        String tempFullPath = Path.InternalCombine(localSearchData.fullPath, data.cFileName);
-                        String tempUserPath = Path.InternalCombine(localSearchData.userPath, data.cFileName);
+                        String tempFullPath = Path.InternalCombine(
+                            localSearchData.fullPath,
+                            data.cFileName
+                        );
+                        String tempUserPath = Path.InternalCombine(
+                            localSearchData.userPath,
+                            data.cFileName
+                        );
 
                         SearchOption option = localSearchData.searchOption;
 
 #if EXCLUDE_REPARSEPOINTS
                         // Traverse reparse points depending on the searchoption specified
-                        if ((searchDataSubDir.searchOption == SearchOption.AllDirectories) && (0 != (data.dwFileAttributes & Win32Native.FILE_ATTRIBUTE_REPARSE_POINT)))
-                            option = SearchOption.TopDirectoryOnly; 
+                        if (
+                            (searchDataSubDir.searchOption == SearchOption.AllDirectories)
+                            && (
+                                0
+                                != (
+                                    data.dwFileAttributes & Win32Native.FILE_ATTRIBUTE_REPARSE_POINT
+                                )
+                            )
+                        )
+                            option = SearchOption.TopDirectoryOnly;
 #endif
                         // Setup search data for the sub directory and push it into the stack
-                        Directory.SearchData searchDataSubDir = new Directory.SearchData(tempFullPath, tempUserPath, option);
+                        Directory.SearchData searchDataSubDir = new Directory.SearchData(
+                            tempFullPath,
+                            tempUserPath,
+                            option
+                        );
 
                         searchStack.Insert(incr++, searchDataSubDir);
                     }
 #if MONO
-                } while (MonoIO.FindNextFile (hnd.DangerousGetHandle(), out data.cFileName, out data.dwFileAttributes, out error));
+                } while (
+                    MonoIO.FindNextFile(
+                        hnd.DangerousGetHandle(),
+                        out data.cFileName,
+                        out data.dwFileAttributes,
+                        out error
+                    )
+                );
 #else
                 } while (Win32Native.FindNextFile(hnd, data));
 #endif
@@ -639,14 +829,24 @@ namespace System.IO
         {
 #if MONO_FEATURE_CAS
 #if FEATURE_CORECLR
-            if(_checkHost) {
+            if (_checkHost)
+            {
                 String demandDir = Directory.GetDemandDir(fullPathToDemand, true);
-                FileSecurityState state = new FileSecurityState(FileSecurityStateAccess.PathDiscovery, String.Empty, demandDir);
+                FileSecurityState state = new FileSecurityState(
+                    FileSecurityStateAccess.PathDiscovery,
+                    String.Empty,
+                    demandDir
+                );
                 state.EnsureState();
             }
 #else
             String demandDir = Directory.GetDemandDir(fullPathToDemand, true);
-            FileIOPermission.QuickDemand(FileIOPermissionAccess.PathDiscovery, demandDir, false, false);
+            FileIOPermission.QuickDemand(
+                FileIOPermissionAccess.PathDiscovery,
+                demandDir,
+                false,
+                false
+            );
 #endif
 #endif
         }
@@ -655,7 +855,7 @@ namespace System.IO
         {
             Contract.Requires(searchPattern != null);
 
-            // Win32 normalization trims only U+0020. 
+            // Win32 normalization trims only U+0020.
             String tempSearchPattern = searchPattern.TrimEnd(Path.TrimEndChars);
 
             // Make this corner case more useful, like dir
@@ -668,7 +868,10 @@ namespace System.IO
             return tempSearchPattern;
         }
 
-        private static String GetNormalizedSearchCriteria(String fullSearchString, String fullPathMod)
+        private static String GetNormalizedSearchCriteria(
+            String fullSearchString,
+            String fullPathMod
+        )
         {
             Contract.Requires(fullSearchString != null);
             Contract.Requires(fullPathMod != null);
@@ -709,13 +912,11 @@ namespace System.IO
 
     internal abstract class SearchResultHandler<TSource>
     {
-
         [System.Security.SecurityCritical]
         internal abstract bool IsResultIncluded(SearchResult result);
 
         [System.Security.SecurityCritical]
         internal abstract TSource CreateObject(SearchResult result);
-
     }
 
     internal class StringResultHandler : SearchResultHandler<String>
@@ -734,7 +935,10 @@ namespace System.IO
         {
             bool includeFile = _includeFiles && FileSystemEnumerableHelpers.IsFile(result.FindData);
             bool includeDir = _includeDirs && FileSystemEnumerableHelpers.IsDir(result.FindData);
-            Contract.Assert(!(includeFile && includeDir), result.FindData.cFileName + ": current item can't be both file and dir!");
+            Contract.Assert(
+                !(includeFile && includeDir),
+                result.FindData.cFileName + ": current item can't be both file and dir!"
+            );
             return (includeFile || includeDir);
         }
 
@@ -759,7 +963,11 @@ namespace System.IO
             String name = result.FullPath;
 #if MONO_FEATURE_CAS
 #if FEATURE_CORECLR
-            FileSecurityState state = new FileSecurityState(FileSecurityStateAccess.Read, String.Empty, name);
+            FileSecurityState state = new FileSecurityState(
+                FileSecurityStateAccess.Read,
+                String.Empty,
+                name
+            );
             state.EnsureState();
 #else
             FileIOPermission.QuickDemand(FileIOPermissionAccess.Read, name, false, false);
@@ -788,13 +996,21 @@ namespace System.IO
             String permissionName = name + "\\.";
 
 #if FEATURE_CORECLR
-            FileSecurityState state = new FileSecurityState(FileSecurityStateAccess.Read, String.Empty, permissionName);
+            FileSecurityState state = new FileSecurityState(
+                FileSecurityStateAccess.Read,
+                String.Empty,
+                permissionName
+            );
             state.EnsureState();
 #else
             FileIOPermission.QuickDemand(FileIOPermissionAccess.Read, permissionName, false, false);
 #endif
 #endif
-            DirectoryInfo di = new DirectoryInfo(Path.GetFileName(name), fullPath: name, isNormalized: true);
+            DirectoryInfo di = new DirectoryInfo(
+                Path.GetFileName(name),
+                fullPath: name,
+                isNormalized: true
+            );
             di.InitializeFrom(result.FindData);
             return di;
         }
@@ -802,13 +1018,15 @@ namespace System.IO
 
     internal class FileSystemInfoResultHandler : SearchResultHandler<FileSystemInfo>
     {
-
         [System.Security.SecurityCritical]
         internal override bool IsResultIncluded(SearchResult result)
         {
             bool includeFile = FileSystemEnumerableHelpers.IsFile(result.FindData);
             bool includeDir = FileSystemEnumerableHelpers.IsDir(result.FindData);
-            Contract.Assert(!(includeFile && includeDir), result.FindData.cFileName + ": current item can't be both file and dir!");
+            Contract.Assert(
+                !(includeFile && includeDir),
+                result.FindData.cFileName + ": current item can't be both file and dir!"
+            );
 
             return (includeDir || includeFile);
         }
@@ -827,13 +1045,26 @@ namespace System.IO
                 String permissionName = name + "\\.";
 
 #if FEATURE_CORECLR
-                FileSecurityState state = new FileSecurityState(FileSecurityStateAccess.Read, String.Empty, permissionName);
+                FileSecurityState state = new FileSecurityState(
+                    FileSecurityStateAccess.Read,
+                    String.Empty,
+                    permissionName
+                );
                 state.EnsureState();
 #else
-                FileIOPermission.QuickDemand(FileIOPermissionAccess.Read, permissionName, false, false);
+                FileIOPermission.QuickDemand(
+                    FileIOPermissionAccess.Read,
+                    permissionName,
+                    false,
+                    false
+                );
 #endif
 #endif
-                DirectoryInfo di = new DirectoryInfo(Path.GetFileName(name), fullPath: name, isNormalized: true);
+                DirectoryInfo di = new DirectoryInfo(
+                    Path.GetFileName(name),
+                    fullPath: name,
+                    isNormalized: true
+                );
                 di.InitializeFrom(result.FindData);
                 return di;
             }
@@ -844,7 +1075,11 @@ namespace System.IO
 
 #if MONO_FEATURE_CAS
 #if FEATURE_CORECLR
-                FileSecurityState state = new FileSecurityState(FileSecurityStateAccess.Read, String.Empty, name);
+                FileSecurityState state = new FileSecurityState(
+                    FileSecurityStateAccess.Read,
+                    String.Empty,
+                    name
+                );
                 state.EnsureState();
 #else
                 FileIOPermission.QuickDemand(FileIOPermissionAccess.Read, name, false, false);
@@ -855,18 +1090,22 @@ namespace System.IO
                 return fi;
             }
         }
-
     }
 
     internal sealed class SearchResult
     {
-        private String fullPath;     // fully-qualifed path
-        private String userPath;     // user-specified path
+        private String fullPath; // fully-qualifed path
+        private String userPath; // user-specified path
+
         [System.Security.SecurityCritical]
         private Win32Native.WIN32_FIND_DATA findData;
 
         [System.Security.SecurityCritical]
-        internal SearchResult(String fullPath, String userPath, Win32Native.WIN32_FIND_DATA findData)
+        internal SearchResult(
+            String fullPath,
+            String userPath,
+            Win32Native.WIN32_FIND_DATA findData
+        )
         {
             Contract.Requires(fullPath != null);
             Contract.Requires(userPath != null);
@@ -891,12 +1130,11 @@ namespace System.IO
             [System.Security.SecurityCritical]
             get { return findData; }
         }
-
     }
 
     internal static class FileSystemEnumerableHelpers
     {
-        [System.Security.SecurityCritical]  // auto-generated
+        [System.Security.SecurityCritical] // auto-generated
         internal static bool IsDir(Win32Native.WIN32_FIND_DATA data)
         {
             // Don't add "." nor ".."
@@ -905,10 +1143,11 @@ namespace System.IO
 #else
             return (0 != (data.dwFileAttributes & Win32Native.FILE_ATTRIBUTE_DIRECTORY))
 #endif
-                                                && !data.cFileName.Equals(".") && !data.cFileName.Equals("..");
+                && !data.cFileName.Equals(".")
+                && !data.cFileName.Equals("..");
         }
 
-        [System.Security.SecurityCritical]  // auto-generated
+        [System.Security.SecurityCritical] // auto-generated
         internal static bool IsFile(Win32Native.WIN32_FIND_DATA data)
         {
 #if MONO
@@ -917,7 +1156,5 @@ namespace System.IO
             return 0 == (data.dwFileAttributes & Win32Native.FILE_ATTRIBUTE_DIRECTORY);
 #endif
         }
-
     }
 }
-

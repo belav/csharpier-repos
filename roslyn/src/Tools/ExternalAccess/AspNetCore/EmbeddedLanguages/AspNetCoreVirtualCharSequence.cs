@@ -34,30 +34,38 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.AspNetCore.EmbeddedLanguages
         public AspNetCoreVirtualChar this[int index] => new(_virtualCharSequence[index]);
 
         /// <inheritdoc cref="VirtualCharSequence.GetSubSequence"/>
-        public AspNetCoreVirtualCharSequence GetSubSequence(TextSpan span) => new(_virtualCharSequence.GetSubSequence(span));
+        public AspNetCoreVirtualCharSequence GetSubSequence(TextSpan span) =>
+            new(_virtualCharSequence.GetSubSequence(span));
 
         /// <inheritdoc cref="VirtualCharSequence.Find"/>
-        public AspNetCoreVirtualChar? Find(int position) => (_virtualCharSequence.Find(position) is VirtualChar c) ? new(c) : null;
+        public AspNetCoreVirtualChar? Find(int position) =>
+            (_virtualCharSequence.Find(position) is VirtualChar c) ? new(c) : null;
 
         /// <inheritdoc cref="VirtualCharSequence.CreateString"/>
         public string CreateString() => _virtualCharSequence.CreateString();
 
         /// <inheritdoc cref="VirtualCharSequence.FromBounds"/>
         public static AspNetCoreVirtualCharSequence FromBounds(
-            AspNetCoreVirtualCharSequence chars1, AspNetCoreVirtualCharSequence chars2)
-            => new(VirtualCharSequence.FromBounds(chars1._virtualCharSequence, chars2._virtualCharSequence));
+            AspNetCoreVirtualCharSequence chars1,
+            AspNetCoreVirtualCharSequence chars2
+        ) =>
+            new(
+                VirtualCharSequence.FromBounds(
+                    chars1._virtualCharSequence,
+                    chars2._virtualCharSequence
+                )
+            );
 
         /// <inheritdoc cref="VirtualCharSequence.IndexOf"/>
-        public int IndexOf(AspNetCoreVirtualChar @char)
-            => _virtualCharSequence.IndexOf(@char.VirtualChar);
+        public int IndexOf(AspNetCoreVirtualChar @char) =>
+            _virtualCharSequence.IndexOf(@char.VirtualChar);
 
         /// <inheritdoc cref="VirtualCharSequence.Contains"/>
-        public bool Contains(AspNetCoreVirtualChar @char)
-            => _virtualCharSequence.Contains(@char.VirtualChar);
+        public bool Contains(AspNetCoreVirtualChar @char) =>
+            _virtualCharSequence.Contains(@char.VirtualChar);
 
         /// <inheritdoc cref="VirtualCharSequence.GetEnumerator"/>
-        public Enumerator GetEnumerator()
-            => new Enumerator(_virtualCharSequence.GetEnumerator());
+        public Enumerator GetEnumerator() => new Enumerator(_virtualCharSequence.GetEnumerator());
 
         /// <inheritdoc cref="VirtualCharSequence.Enumerator"/>
         public struct Enumerator : IEnumerator<AspNetCoreVirtualChar>
@@ -69,20 +77,15 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.AspNetCore.EmbeddedLanguages
                 _enumerator = enumerator;
             }
 
-            public bool MoveNext()
-                => _enumerator.MoveNext();
+            public bool MoveNext() => _enumerator.MoveNext();
 
-            public readonly AspNetCoreVirtualChar Current
-                => new(_enumerator.Current);
+            public readonly AspNetCoreVirtualChar Current => new(_enumerator.Current);
 
-            public void Reset()
-                => _enumerator.Reset();
+            public void Reset() => _enumerator.Reset();
 
-            readonly object IEnumerator.Current
-                => this.Current;
+            readonly object IEnumerator.Current => this.Current;
 
-            public readonly void Dispose()
-                => _enumerator.Dispose();
+            public readonly void Dispose() => _enumerator.Dispose();
         }
     }
 }

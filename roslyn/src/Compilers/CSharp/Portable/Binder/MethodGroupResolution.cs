@@ -13,7 +13,7 @@ using Microsoft.CodeAnalysis.Text;
 namespace Microsoft.CodeAnalysis.CSharp
 {
     /// <summary>
-    /// Packages up the various parts returned when resolving a method group. 
+    /// Packages up the various parts returned when resolving a method group.
     /// </summary>
     internal readonly struct MethodGroupResolution
     {
@@ -24,15 +24,32 @@ namespace Microsoft.CodeAnalysis.CSharp
         public readonly ImmutableBindingDiagnostic<AssemblySymbol> Diagnostics;
         public readonly LookupResultKind ResultKind;
 
-        public MethodGroupResolution(MethodGroup methodGroup, ImmutableBindingDiagnostic<AssemblySymbol> diagnostics)
-            : this(methodGroup, otherSymbol: null, overloadResolutionResult: null, analyzedArguments: null, methodGroup.ResultKind, diagnostics)
-        {
-        }
+        public MethodGroupResolution(
+            MethodGroup methodGroup,
+            ImmutableBindingDiagnostic<AssemblySymbol> diagnostics
+        )
+            : this(
+                methodGroup,
+                otherSymbol: null,
+                overloadResolutionResult: null,
+                analyzedArguments: null,
+                methodGroup.ResultKind,
+                diagnostics
+            ) { }
 
-        public MethodGroupResolution(Symbol otherSymbol, LookupResultKind resultKind, ImmutableBindingDiagnostic<AssemblySymbol> diagnostics)
-            : this(methodGroup: null, otherSymbol, overloadResolutionResult: null, analyzedArguments: null, resultKind, diagnostics)
-        {
-        }
+        public MethodGroupResolution(
+            Symbol otherSymbol,
+            LookupResultKind resultKind,
+            ImmutableBindingDiagnostic<AssemblySymbol> diagnostics
+        )
+            : this(
+                methodGroup: null,
+                otherSymbol,
+                overloadResolutionResult: null,
+                analyzedArguments: null,
+                resultKind,
+                diagnostics
+            ) { }
 
         public MethodGroupResolution(
             MethodGroup methodGroup,
@@ -40,7 +57,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             OverloadResolutionResult<MethodSymbol> overloadResolutionResult,
             AnalyzedArguments analyzedArguments,
             LookupResultKind resultKind,
-            ImmutableBindingDiagnostic<AssemblySymbol> diagnostics)
+            ImmutableBindingDiagnostic<AssemblySymbol> diagnostics
+        )
         {
             Debug.Assert((methodGroup == null) || (methodGroup.Methods.Count > 0));
             Debug.Assert((methodGroup == null) || ((object)otherSymbol == null));
@@ -72,9 +90,12 @@ namespace Microsoft.CodeAnalysis.CSharp
         {
             get
             {
-                return (this.MethodGroup != null) &&
-                    (this.ResultKind == LookupResultKind.Viable) &&
-                    ((this.OverloadResolutionResult == null) || this.OverloadResolutionResult.HasAnyApplicableMember);
+                return (this.MethodGroup != null)
+                    && (this.ResultKind == LookupResultKind.Viable)
+                    && (
+                        (this.OverloadResolutionResult == null)
+                        || this.OverloadResolutionResult.HasAnyApplicableMember
+                    );
             }
         }
 
@@ -84,7 +105,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         }
 
         public bool IsLocalFunctionInvocation =>
-            MethodGroup?.Methods.Count == 1 && // Local functions cannot be overloaded
+            MethodGroup?.Methods.Count == 1
+            && // Local functions cannot be overloaded
             MethodGroup.Methods[0].MethodKind == MethodKind.LocalFunction;
 
         public void Free()

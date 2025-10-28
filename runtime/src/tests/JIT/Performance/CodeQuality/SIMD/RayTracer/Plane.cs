@@ -7,12 +7,18 @@ internal class Plane : SceneObject
     public Vector Norm;
     public double Offset;
 
-    public Plane(Vector norm, double offset, Surface surface) : base(surface) { Norm = norm; Offset = offset; }
+    public Plane(Vector norm, double offset, Surface surface)
+        : base(surface)
+    {
+        Norm = norm;
+        Offset = offset;
+    }
 
     public override ISect Intersect(Ray ray)
     {
         double denom = Vector.Dot(Norm, ray.Dir);
-        if (denom > 0) return ISect.Null;
+        if (denom > 0)
+            return ISect.Null;
         return new ISect(this, ray, (Vector.Dot(Norm, ray.Start) + Offset) / (-denom));
     }
 
@@ -21,4 +27,3 @@ internal class Plane : SceneObject
         return Norm;
     }
 }
-

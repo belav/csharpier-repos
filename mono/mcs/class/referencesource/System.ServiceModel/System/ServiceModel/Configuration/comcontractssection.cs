@@ -10,18 +10,23 @@ namespace System.ServiceModel.Configuration
 
     public sealed partial class ComContractsSection : ConfigurationSection
     {
-        [ConfigurationProperty(ConfigurationStrings.DefaultCollectionName, Options = ConfigurationPropertyOptions.IsDefaultCollection)]
+        [ConfigurationProperty(
+            ConfigurationStrings.DefaultCollectionName,
+            Options = ConfigurationPropertyOptions.IsDefaultCollection
+        )]
         public ComContractElementCollection ComContracts
         {
-            get { return (ComContractElementCollection)base[ConfigurationStrings.DefaultCollectionName]; }
+            get
+            {
+                return (ComContractElementCollection)
+                    base[ConfigurationStrings.DefaultCollectionName];
+            }
         }
 
         internal static ComContractsSection GetSection()
         {
-            return (ComContractsSection)ConfigurationHelpers.GetSection(ConfigurationStrings.ComContractsSectionPath);
+            return (ComContractsSection)
+                ConfigurationHelpers.GetSection(ConfigurationStrings.ComContractsSectionPath);
         }
     }
 }
-
-
-

@@ -19,9 +19,7 @@ namespace Microsoft.CodeAnalysis.CSharp
         private readonly BlockSyntax _block;
 
         public BlockBinder(Binder enclosing, BlockSyntax block)
-            : this(enclosing, block, enclosing.Flags)
-        {
-        }
+            : this(enclosing, block, enclosing.Flags) { }
 
         public BlockBinder(Binder enclosing, BlockSyntax block, BinderFlags additionalFlags)
             : base(enclosing, enclosing.Flags | additionalFlags)
@@ -42,28 +40,26 @@ namespace Microsoft.CodeAnalysis.CSharp
 
         internal override bool IsLocalFunctionsScopeBinder
         {
-            get
-            {
-                return true;
-            }
+            get { return true; }
         }
 
         protected override ImmutableArray<LabelSymbol> BuildLabels()
         {
             ArrayBuilder<LabelSymbol> labels = null;
             base.BuildLabels(_block.Statements, ref labels);
-            return (labels != null) ? labels.ToImmutableAndFree() : ImmutableArray<LabelSymbol>.Empty;
+            return (labels != null)
+                ? labels.ToImmutableAndFree()
+                : ImmutableArray<LabelSymbol>.Empty;
         }
 
         internal override bool IsLabelsScopeBinder
         {
-            get
-            {
-                return true;
-            }
+            get { return true; }
         }
 
-        internal override ImmutableArray<LocalSymbol> GetDeclaredLocalsForScope(SyntaxNode scopeDesignator)
+        internal override ImmutableArray<LocalSymbol> GetDeclaredLocalsForScope(
+            SyntaxNode scopeDesignator
+        )
         {
             if (ScopeDesignator == scopeDesignator)
             {
@@ -75,13 +71,12 @@ namespace Microsoft.CodeAnalysis.CSharp
 
         internal override SyntaxNode ScopeDesignator
         {
-            get
-            {
-                return _block;
-            }
+            get { return _block; }
         }
 
-        internal override ImmutableArray<LocalFunctionSymbol> GetDeclaredLocalFunctionsForScope(CSharpSyntaxNode scopeDesignator)
+        internal override ImmutableArray<LocalFunctionSymbol> GetDeclaredLocalFunctionsForScope(
+            CSharpSyntaxNode scopeDesignator
+        )
         {
             if (ScopeDesignator == scopeDesignator)
             {

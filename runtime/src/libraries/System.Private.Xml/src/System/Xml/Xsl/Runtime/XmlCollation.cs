@@ -35,7 +35,6 @@ namespace System.Xml.Xsl.Runtime
         private Options _options;
         private readonly CompareOptions _compops;
 
-
         /// <summary>
         /// Extends System.Globalization.CompareOptions with additional flags.
         /// </summary>
@@ -95,10 +94,7 @@ namespace System.Xml.Xsl.Runtime
 
             public CompareOptions CompareOptions
             {
-                get
-                {
-                    return (CompareOptions)(_value & ~Mask);
-                }
+                get { return (CompareOptions)(_value & ~Mask); }
                 set
                 {
                     Debug.Assert(((int)value & Mask) == 0);
@@ -111,7 +107,6 @@ namespace System.Xml.Xsl.Runtime
                 return options._value;
             }
         }
-
 
         //-----------------------------------------------
         // Constructors
@@ -127,7 +122,6 @@ namespace System.Xml.Xsl.Runtime
             _compops = options.CompareOptions;
         }
 
-
         //-----------------------------------------------
         // Create
         //-----------------------------------------------
@@ -135,7 +129,10 @@ namespace System.Xml.Xsl.Runtime
         /// <summary>
         /// Singleton collation that sorts according to Unicode code points.
         /// </summary>
-        private static readonly XmlCollation s_cp = new XmlCollation(CultureInfo.InvariantCulture, new Options((int)CompareOptions.Ordinal));
+        private static readonly XmlCollation s_cp = new XmlCollation(
+            CultureInfo.InvariantCulture,
+            new Options((int)CompareOptions.Ordinal)
+        );
 
         internal static XmlCollation CodePointCollation
         {
@@ -175,7 +172,13 @@ namespace System.Xml.Xsl.Runtime
                     return null;
                 }
             }
-            string authority = collationUri.GetComponents(UriComponents.Scheme | UriComponents.UserInfo | UriComponents.Host | UriComponents.Port, UriFormat.UriEscaped);
+            string authority = collationUri.GetComponents(
+                UriComponents.Scheme
+                    | UriComponents.UserInfo
+                    | UriComponents.Host
+                    | UriComponents.Port,
+                UriFormat.UriEscaped
+            );
             if (authority == XmlReservedNs.NsCollationBase)
             {
                 // Language
@@ -194,7 +197,8 @@ namespace System.Xml.Xsl.Runtime
                     }
                     catch (ArgumentException)
                     {
-                        if (!throwOnError) return null;
+                        if (!throwOnError)
+                            return null;
                         throw new XslTransformException(SR.Coll_UnsupportedLanguage, lang);
                     }
                 }
@@ -207,7 +211,8 @@ namespace System.Xml.Xsl.Runtime
             else
             {
                 // Unrecognized collation
-                if (!throwOnError) return null;
+                if (!throwOnError)
+                    return null;
                 throw new XslTransformException(SR.Coll_Unsupported, collationLiteral);
             }
 
@@ -224,7 +229,8 @@ namespace System.Xml.Xsl.Runtime
 
                     if (pair.Length != 2)
                     {
-                        if (!throwOnError) return null;
+                        if (!throwOnError)
+                            return null;
                         throw new XslTransformException(SR.Coll_BadOptFormat, option);
                     }
 
@@ -241,26 +247,54 @@ namespace System.Xml.Xsl.Runtime
 
                         switch (optionName)
                         {
-                            case "IGNORECASE": flag = (int)CompareOptions.IgnoreCase; break;
-                            case "IGNORENONSPACE": flag = (int)CompareOptions.IgnoreNonSpace; break;
-                            case "IGNORESYMBOLS": flag = (int)CompareOptions.IgnoreSymbols; break;
-                            case "IGNOREKANATYPE": flag = (int)CompareOptions.IgnoreKanaType; break;
-                            case "IGNOREWIDTH": flag = (int)CompareOptions.IgnoreWidth; break;
-                            case "UPPERFIRST": flag = Options.FlagUpperFirst; break;
-                            case "EMPTYGREATEST": flag = Options.FlagEmptyGreatest; break;
-                            case "DESCENDINGORDER": flag = Options.FlagDescendingOrder; break;
+                            case "IGNORECASE":
+                                flag = (int)CompareOptions.IgnoreCase;
+                                break;
+                            case "IGNORENONSPACE":
+                                flag = (int)CompareOptions.IgnoreNonSpace;
+                                break;
+                            case "IGNORESYMBOLS":
+                                flag = (int)CompareOptions.IgnoreSymbols;
+                                break;
+                            case "IGNOREKANATYPE":
+                                flag = (int)CompareOptions.IgnoreKanaType;
+                                break;
+                            case "IGNOREWIDTH":
+                                flag = (int)CompareOptions.IgnoreWidth;
+                                break;
+                            case "UPPERFIRST":
+                                flag = Options.FlagUpperFirst;
+                                break;
+                            case "EMPTYGREATEST":
+                                flag = Options.FlagEmptyGreatest;
+                                break;
+                            case "DESCENDINGORDER":
+                                flag = Options.FlagDescendingOrder;
+                                break;
                             default:
-                                if (!throwOnError) return null;
+                                if (!throwOnError)
+                                    return null;
                                 throw new XslTransformException(SR.Coll_UnsupportedOpt, pair[0]);
                         }
 
                         switch (optionValue)
                         {
-                            case "0": case "FALSE": options.SetFlag(flag, false); break;
-                            case "1": case "TRUE": options.SetFlag(flag, true); break;
+                            case "0":
+                            case "FALSE":
+                                options.SetFlag(flag, false);
+                                break;
+                            case "1":
+                            case "TRUE":
+                                options.SetFlag(flag, true);
+                                break;
                             default:
-                                if (!throwOnError) return null;
-                                throw new XslTransformException(SR.Coll_UnsupportedOptVal, pair[0], pair[1]);
+                                if (!throwOnError)
+                                    return null;
+                                throw new XslTransformException(
+                                    SR.Coll_UnsupportedOptVal,
+                                    pair[0],
+                                    pair[1]
+                                );
                         }
                     }
                 }
@@ -290,7 +324,12 @@ namespace System.Xml.Xsl.Runtime
                         }
                         break;
                     case "strk":
-                        if (cultName == zhCN || cultName == zhHK || cultName == zhSG || cultName == zhMO)
+                        if (
+                            cultName == zhCN
+                            || cultName == zhHK
+                            || cultName == zhSG
+                            || cultName == zhMO
+                        )
                         {
                             cultInfo = new CultureInfo(cultName);
                         }
@@ -329,13 +368,13 @@ namespace System.Xml.Xsl.Runtime
                         // Thus I don't handle it differently.
                         break;
                     default:
-                        if (!throwOnError) return null;
+                        if (!throwOnError)
+                            return null;
                         throw new XslTransformException(SR.Coll_UnsupportedSortOpt, sort);
                 }
             }
             return new XmlCollation(cultInfo, options);
         }
-
 
         //-----------------------------------------------
         // Collection Support
@@ -350,9 +389,9 @@ namespace System.Xml.Xsl.Runtime
             }
 
             XmlCollation? that = obj as XmlCollation;
-            return that != null &&
-                _options == that._options &&
-                object.Equals(_cultInfo, that._cultInfo);
+            return that != null
+                && _options == that._options
+                && object.Equals(_cultInfo, that._cultInfo);
         }
 
         public override int GetHashCode()
@@ -365,7 +404,6 @@ namespace System.Xml.Xsl.Runtime
             return hashCode;
         }
 
-
         //-----------------------------------------------
         // Serialization Support
         //-----------------------------------------------
@@ -376,8 +414,10 @@ namespace System.Xml.Xsl.Runtime
         internal void GetObjectData(BinaryWriter writer)
         {
             // NOTE: For CultureInfo we serialize only LCID. It seems to suffice for our purposes.
-            Debug.Assert(_cultInfo == null || _cultInfo.Equals(new CultureInfo(_cultInfo.Name)),
-                "Cannot serialize CultureInfo correctly");
+            Debug.Assert(
+                _cultInfo == null || _cultInfo.Equals(new CultureInfo(_cultInfo.Name)),
+                "Cannot serialize CultureInfo correctly"
+            );
             writer.Write(_cultInfo != null ? _cultInfo.Name : LOCALE_CURRENT);
             writer.Write(_options);
         }
@@ -426,22 +466,32 @@ namespace System.Xml.Xsl.Runtime
         /// Compare two strings with each other.  Return <0 if str1 sorts before str2, 0 if they're equal, and >0
         /// if str1 sorts after str2.
         /// </summary>
-        internal int Compare(string str1, string str2) {
+        internal int Compare(string str1, string str2)
+        {
             CultureInfo cultinfo = Culture;
             int result;
 
-            if (this.options.Ordinal) {
+            if (this.options.Ordinal)
+            {
                 result = string.CompareOrdinal(str1, str2);
-                if (result < 0) result = -1;
-                else if (result > 0) result = 1;
+                if (result < 0)
+                    result = -1;
+                else if (result > 0)
+                    result = 1;
             }
-            else if (UpperFirst) {
+            else if (UpperFirst)
+            {
                 // First compare case-insensitive, then break ties by considering case
-                result = cultinfo.CompareInfo.Compare(str1, str2, this.compops | CompareOptions.IgnoreCase);
+                result = cultinfo.CompareInfo.Compare(
+                    str1,
+                    str2,
+                    this.compops | CompareOptions.IgnoreCase
+                );
                 if (result == 0)
                     result = -cultinfo.CompareInfo.Compare(str1, str2, this.compops);
             }
-            else {
+            else
+            {
                 result = cultinfo.CompareInfo.Compare(str1, str2, this.compops);
             }
 
@@ -454,36 +504,53 @@ namespace System.Xml.Xsl.Runtime
         /// <summary>
         /// Return the index of str1 in str2, or -1 if str1 is not a substring of str2.
         /// </summary>
-        internal int IndexOf(string str1, string str2) {
+        internal int IndexOf(string str1, string str2)
+        {
             return Culture.CompareInfo.IndexOf(str1, str2, this.compops);
         }
 
         /// <summary>
         /// Return true if str1 ends with str2.
         /// </summary>
-        internal bool IsSuffix(string str1, string str2) {
-            if (this.options.Ordinal){
-                if (str1.Length < str2.Length) {
+        internal bool IsSuffix(string str1, string str2)
+        {
+            if (this.options.Ordinal)
+            {
+                if (str1.Length < str2.Length)
+                {
                     return false;
-                } else {
-                    return String.CompareOrdinal(str1, str1.Length - str2.Length, str2, 0, str2.Length) == 0;
+                }
+                else
+                {
+                    return String.CompareOrdinal(
+                            str1,
+                            str1.Length - str2.Length,
+                            str2,
+                            0,
+                            str2.Length
+                        ) == 0;
                 }
             }
-            return Culture.CompareInfo.IsSuffix (str1, str2, this.compops);
+            return Culture.CompareInfo.IsSuffix(str1, str2, this.compops);
         }
 
         /// <summary>
         /// Return true if str1 starts with str2.
         /// </summary>
-        internal bool IsPrefix(string str1, string str2) {
-            if (this.options.Ordinal) {
-                if (str1.Length < str2.Length) {
+        internal bool IsPrefix(string str1, string str2)
+        {
+            if (this.options.Ordinal)
+            {
+                if (str1.Length < str2.Length)
+                {
                     return false;
-                } else {
+                }
+                else
+                {
                     return String.CompareOrdinal(str1, 0, str2, 0, str2.Length) == 0;
                 }
             }
-            return Culture.CompareInfo.IsPrefix (str1, str2, this.compops);
+            return Culture.CompareInfo.IsPrefix(str1, str2, this.compops);
         }
 #endif
     }

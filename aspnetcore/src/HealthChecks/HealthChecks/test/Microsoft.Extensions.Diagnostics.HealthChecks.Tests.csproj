@@ -1,5 +1,4 @@
 <Project Sdk="Microsoft.NET.Sdk">
-
   <PropertyGroup>
     <TargetFrameworks>$(DefaultNetCoreTargetFramework);$(DefaultNetFxTargetFramework)</TargetFrameworks>
     <RootNamespace>Microsoft.Extensions.Diagnostics.HealthChecks</RootNamespace>
@@ -19,7 +18,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Include="$(SharedSourceRoot)test\Shared.Tests\SingleThreadedSynchronizationContext.cs" Link="Shared\SingleThreadedSynchronizationContext.cs"/>
+    <Compile
+      Include="$(SharedSourceRoot)test\Shared.Tests\SingleThreadedSynchronizationContext.cs"
+      Link="Shared\SingleThreadedSynchronizationContext.cs"
+    />
   </ItemGroup>
-
 </Project>

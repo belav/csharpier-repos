@@ -9,41 +9,58 @@ using Xunit;
 
 public class SecurityIdentifierTests
 {
-
     [Fact]
     public void SecurityIdentifierBinaryCtorThrowsOnNull()
     {
-        AssertExtensions.Throws<ArgumentNullException>("binaryForm", () => new SecurityIdentifier(null, 0));
+        AssertExtensions.Throws<ArgumentNullException>(
+            "binaryForm",
+            () => new SecurityIdentifier(null, 0)
+        );
     }
 
     [Fact]
     public void SecurityIdentifierBinaryCtorThrowsOnEmpty()
     {
-        AssertExtensions.Throws<ArgumentOutOfRangeException>("binaryForm", () => new SecurityIdentifier(Array.Empty<byte>(), 0));
+        AssertExtensions.Throws<ArgumentOutOfRangeException>(
+            "binaryForm",
+            () => new SecurityIdentifier(Array.Empty<byte>(), 0)
+        );
     }
 
     [Fact]
     public void SecurityIdentifierBinaryCtorThrowsOnNegativeOffset()
     {
-        AssertExtensions.Throws<ArgumentOutOfRangeException>("offset", () => new SecurityIdentifier(new byte[] { 1, 1, 0, 0, 0, 0, 0, 0 }, -1));
+        AssertExtensions.Throws<ArgumentOutOfRangeException>(
+            "offset",
+            () => new SecurityIdentifier(new byte[] { 1, 1, 0, 0, 0, 0, 0, 0 }, -1)
+        );
     }
 
     [Fact]
     public void SecurityIdentifierBinaryCtorThrowsOnExcessiveOffset()
     {
-        AssertExtensions.Throws<ArgumentOutOfRangeException>("binaryForm", () => new SecurityIdentifier(new byte[] { 1, 1, 0, 0, 0, 0, 0, 0 }, 9));
+        AssertExtensions.Throws<ArgumentOutOfRangeException>(
+            "binaryForm",
+            () => new SecurityIdentifier(new byte[] { 1, 1, 0, 0, 0, 0, 0, 0 }, 9)
+        );
     }
 
     [Fact]
     public void SecurityIdentifierBinaryCtorThrowsOnInvalidRevision()
     {
-        AssertExtensions.Throws<ArgumentException>("binaryForm", () => new SecurityIdentifier(new byte[] { 2, 1, 0, 0, 0, 0, 0, 0 }, 0));
+        AssertExtensions.Throws<ArgumentException>(
+            "binaryForm",
+            () => new SecurityIdentifier(new byte[] { 2, 1, 0, 0, 0, 0, 0, 0 }, 0)
+        );
     }
 
     [Fact]
     public void SecurityIdentifierBinaryCtorThrowsOnTooManySubAuthorities()
     {
-        AssertExtensions.Throws<ArgumentException>("binaryForm", () => new SecurityIdentifier(new byte[] { 1, 100, 0, 0, 0, 0, 0, 0 }, 0));
+        AssertExtensions.Throws<ArgumentException>(
+            "binaryForm",
+            () => new SecurityIdentifier(new byte[] { 1, 100, 0, 0, 0, 0, 0, 0 }, 0)
+        );
     }
 
     [Fact]
@@ -87,7 +104,12 @@ public class SecurityIdentifierTests
     }
 
     // whoami.exe is not on all SKUs
-    [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsNotWindowsNanoServer), nameof(PlatformDetection.IsNotWindowsServerCore), nameof(PlatformDetection.IsNotWindowsIoTCore))]
+    [ConditionalFact(
+        typeof(PlatformDetection),
+        nameof(PlatformDetection.IsNotWindowsNanoServer),
+        nameof(PlatformDetection.IsNotWindowsServerCore),
+        nameof(PlatformDetection.IsNotWindowsIoTCore)
+    )]
     public void ValidateToStringUsingWhoami()
     {
         string librarySid = null;
@@ -130,6 +152,5 @@ public class SecurityIdentifierTests
 
         Assert.NotNull(windowsSid);
         Assert.Equal(windowsSid, librarySid);
-
     }
 }

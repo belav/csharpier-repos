@@ -13,7 +13,6 @@ using static Microsoft.CodeAnalysis.CSharp.SyntaxFactory;
 
 namespace Microsoft.Interop
 {
-
     /// <summary>
     /// Represents a method, its declaring interface, and its index in the interface's vtable.
     /// This type contains all information necessary to generate the corresponding methods in the ComInterfaceGenerator
@@ -29,7 +28,11 @@ namespace Microsoft.Interop
         /// </param>
         /// <param name="MethodInfo">The basic information about the method.</param>
         /// <param name="Index">The vtable index for the method.</param>
-        public sealed record Builder(ComInterfaceContext OriginalDeclaringInterface, ComMethodInfo MethodInfo, int Index);
+        public sealed record Builder(
+            ComInterfaceContext OriginalDeclaringInterface,
+            ComMethodInfo MethodInfo,
+            int Index
+        );
 
         /// <summary>
         /// The fully-constructed immutable state for a <see cref="ComMethodContext"/>.
@@ -38,7 +41,8 @@ namespace Microsoft.Interop
             ComInterfaceContext OriginalDeclaringInterface,
             ComInterfaceContext OwningInterface,
             ComMethodInfo MethodInfo,
-            IncrementalMethodStubGenerationContext GenerationContext);
+            IncrementalMethodStubGenerationContext GenerationContext
+        );
 
         private readonly State _state;
 
@@ -48,9 +52,18 @@ namespace Microsoft.Interop
         /// <param name="builder">The partially constructed context</param>
         /// <param name="owningInterface">The final owning interface of this method context</param>
         /// <param name="generationContext">The generation context for this method</param>
-        public ComMethodContext(Builder builder, ComInterfaceContext owningInterface, IncrementalMethodStubGenerationContext generationContext)
+        public ComMethodContext(
+            Builder builder,
+            ComInterfaceContext owningInterface,
+            IncrementalMethodStubGenerationContext generationContext
+        )
         {
-            _state = new State(builder.OriginalDeclaringInterface, owningInterface, builder.MethodInfo, generationContext);
+            _state = new State(
+                builder.OriginalDeclaringInterface,
+                owningInterface,
+                builder.MethodInfo,
+                generationContext
+            );
         }
 
         public override bool Equals(object obj) => obj is ComMethodContext other && Equals(other);
@@ -71,51 +84,86 @@ namespace Microsoft.Interop
 
         private GeneratedMethodContextBase? _managedToUnmanagedStub;
 
-        public GeneratedMethodContextBase ManagedToUnmanagedStub => _managedToUnmanagedStub ??= CreateManagedToUnmanagedStub();
+        public GeneratedMethodContextBase ManagedToUnmanagedStub =>
+            _managedToUnmanagedStub ??= CreateManagedToUnmanagedStub();
 
         private GeneratedMethodContextBase CreateManagedToUnmanagedStub()
         {
-            if (GenerationContext.VtableIndexData.Direction is not (MarshalDirection.ManagedToUnmanaged or MarshalDirection.Bidirectional))
+            if (
+                GenerationContext.VtableIndexData.Direction
+                is not (MarshalDirection.ManagedToUnmanaged or MarshalDirection.Bidirectional)
+            )
             {
                 return new SkippedStubContext(OriginalDeclaringInterface.Info.Type);
             }
-            var (methodStub, diagnostics) = VirtualMethodPointerStubGenerator.GenerateManagedToNativeStub(GenerationContext, ComInterfaceGeneratorHelpers.GetGeneratorFactory);
-            return new GeneratedStubCodeContext(GenerationContext.TypeKeyOwner, GenerationContext.ContainingSyntaxContext, new(methodStub), new(diagnostics));
+            var (methodStub, diagnostics) =
+                VirtualMethodPointerStubGenerator.GenerateManagedToNativeStub(
+                    GenerationContext,
+                    ComInterfaceGeneratorHelpers.GetGeneratorFactory
+                );
+            return new GeneratedStubCodeContext(
+                GenerationContext.TypeKeyOwner,
+                GenerationContext.ContainingSyntaxContext,
+                new(methodStub),
+                new(diagnostics)
+            );
         }
 
         private GeneratedMethodContextBase? _unmanagedToManagedStub;
 
-        public GeneratedMethodContextBase UnmanagedToManagedStub => _unmanagedToManagedStub ??= CreateUnmanagedToManagedStub();
+        public GeneratedMethodContextBase UnmanagedToManagedStub =>
+            _unmanagedToManagedStub ??= CreateUnmanagedToManagedStub();
 
         private GeneratedMethodContextBase CreateUnmanagedToManagedStub()
         {
-            if (GenerationContext.VtableIndexData.Direction is not (MarshalDirection.UnmanagedToManaged or MarshalDirection.Bidirectional))
+            if (
+                GenerationContext.VtableIndexData.Direction
+                is not (MarshalDirection.UnmanagedToManaged or MarshalDirection.Bidirectional)
+            )
             {
                 return new SkippedStubContext(GenerationContext.OriginalDefiningType);
             }
-            var (methodStub, diagnostics) = VirtualMethodPointerStubGenerator.GenerateNativeToManagedStub(GenerationContext, ComInterfaceGeneratorHelpers.GetGeneratorFactory);
-            return new GeneratedStubCodeContext(GenerationContext.OriginalDefiningType, GenerationContext.ContainingSyntaxContext, new(methodStub), new(diagnostics));
+            var (methodStub, diagnostics) =
+                VirtualMethodPointerStubGenerator.GenerateNativeToManagedStub(
+                    GenerationContext,
+                    ComInterfaceGeneratorHelpers.GetGeneratorFactory
+                );
+            return new GeneratedStubCodeContext(
+                GenerationContext.OriginalDefiningType,
+                GenerationContext.ContainingSyntaxContext,
+                new(methodStub),
+                new(diagnostics)
+            );
         }
 
         private MethodDeclarationSyntax? _unreachableExceptionStub;
 
-        public MethodDeclarationSyntax UnreachableExceptionStub => _unreachableExceptionStub ??= CreateUnreachableExceptionStub();
+        public MethodDeclarationSyntax UnreachableExceptionStub =>
+            _unreachableExceptionStub ??= CreateUnreachableExceptionStub();
 
         private MethodDeclarationSyntax CreateUnreachableExceptionStub()
         {
             // DeclarationCopiedFromBaseDeclaration(<Arguments>) => throw new UnreachableException();
-            return MethodInfo.Syntax
-                .WithReturnType(GenerationContext.SignatureContext.StubReturnType)
+            return MethodInfo
+                .Syntax.WithReturnType(GenerationContext.SignatureContext.StubReturnType)
                 .WithModifiers(TokenList())
                 .WithAttributeLists(List<AttributeListSyntax>())
-                .WithExplicitInterfaceSpecifier(ExplicitInterfaceSpecifier(
-                    ParseName(OriginalDeclaringInterface.Info.Type.FullTypeName)))
-                .WithParameterList(ParameterList(SeparatedList(GenerationContext.SignatureContext.StubParameters)))
-                .WithExpressionBody(ArrowExpressionClause(
-                    ThrowExpression(
-                        ObjectCreationExpression(
-                            TypeSyntaxes.UnreachableException)
-                            .WithArgumentList(ArgumentList()))));
+                .WithExplicitInterfaceSpecifier(
+                    ExplicitInterfaceSpecifier(
+                        ParseName(OriginalDeclaringInterface.Info.Type.FullTypeName)
+                    )
+                )
+                .WithParameterList(
+                    ParameterList(SeparatedList(GenerationContext.SignatureContext.StubParameters))
+                )
+                .WithExpressionBody(
+                    ArrowExpressionClause(
+                        ThrowExpression(
+                            ObjectCreationExpression(TypeSyntaxes.UnreachableException)
+                                .WithArgumentList(ArgumentList())
+                        )
+                    )
+                );
         }
 
         private MethodDeclarationSyntax? _shadow;
@@ -127,20 +175,44 @@ namespace Microsoft.Interop
             // DeclarationCopiedFromBaseDeclaration(<Arguments>)
             //    => ((<baseInterfaceType>)this).<MethodName>(<Arguments>);
             var forwarder = new Forwarder();
-            return MethodDeclaration(GenerationContext.SignatureContext.StubReturnType, MethodInfo.MethodName)
+            return MethodDeclaration(
+                    GenerationContext.SignatureContext.StubReturnType,
+                    MethodInfo.MethodName
+                )
                 .WithModifiers(TokenList(Token(SyntaxKind.NewKeyword)))
-                .WithAttributeLists(List(GenerationContext.SignatureContext.AdditionalAttributes.Concat(MethodInfo.Attributes.Select(a => a.GenerateAttributeList()))))
-                .WithParameterList(ParameterList(SeparatedList(GenerationContext.SignatureContext.StubParameters)))
+                .WithAttributeLists(
+                    List(
+                        GenerationContext.SignatureContext.AdditionalAttributes.Concat(
+                            MethodInfo.Attributes.Select(a => a.GenerateAttributeList())
+                        )
+                    )
+                )
+                .WithParameterList(
+                    ParameterList(SeparatedList(GenerationContext.SignatureContext.StubParameters))
+                )
                 .WithExpressionBody(
                     ArrowExpressionClause(
                         InvocationExpression(
                             MemberAccessExpression(
                                 SyntaxKind.SimpleMemberAccessExpression,
                                 ParenthesizedExpression(
-                                    CastExpression(OriginalDeclaringInterface.Info.Type.Syntax, IdentifierName("this"))),
-                                IdentifierName(MethodInfo.MethodName)),
+                                    CastExpression(
+                                        OriginalDeclaringInterface.Info.Type.Syntax,
+                                        IdentifierName("this")
+                                    )
+                                ),
+                                IdentifierName(MethodInfo.MethodName)
+                            ),
                             ArgumentList(
-                                SeparatedList(GenerationContext.SignatureContext.ManagedParameters.Select(p => forwarder.AsArgument(p, new ManagedStubCodeContext())))))))
+                                SeparatedList(
+                                    GenerationContext.SignatureContext.ManagedParameters.Select(p =>
+                                        forwarder.AsArgument(p, new ManagedStubCodeContext())
+                                    )
+                                )
+                            )
+                        )
+                    )
+                )
                 .WithSemicolonToken(Token(SyntaxKind.SemicolonToken));
         }
 
@@ -148,13 +220,25 @@ namespace Microsoft.Interop
         /// Returns a flat list of <see cref="Builder"/> and its owning interface that represents all declared methods and inherited methods.
         /// Guarantees the output will be sorted by order of interface input order, then by vtable order.
         /// </summary>
-        public static List<(ComInterfaceContext OwningInterface, Builder Method)> CalculateAllMethods(IEnumerable<(ComInterfaceContext, SequenceEqualImmutableArray<ComMethodInfo>)> ifaceAndDeclaredMethods, CancellationToken _)
+        public static List<(
+            ComInterfaceContext OwningInterface,
+            Builder Method
+        )> CalculateAllMethods(
+            IEnumerable<(
+                ComInterfaceContext,
+                SequenceEqualImmutableArray<ComMethodInfo>
+            )> ifaceAndDeclaredMethods,
+            CancellationToken _
+        )
         {
             // Optimization : This step technically only needs a single interface inheritance hierarchy.
             // We can calculate all inheritance chains in a previous step and only pass a single inheritance chain to this method.
             // This way, when a single method changes, we would only need to recalculate this for the inheritance chain in which that method exists.
 
-            var ifaceToDeclaredMethodsMap = ifaceAndDeclaredMethods.ToDictionary(static pair => pair.Item1, static pair => pair.Item2);
+            var ifaceToDeclaredMethodsMap = ifaceAndDeclaredMethods.ToDictionary(
+                static pair => pair.Item1,
+                static pair => pair.Item2
+            );
             var allMethodsCache = new Dictionary<ComInterfaceContext, ImmutableArray<Builder>>();
             var accumulator = new List<(ComInterfaceContext OwningInterface, Builder Method)>();
             foreach (var kvp in ifaceAndDeclaredMethods)
@@ -170,7 +254,10 @@ namespace Microsoft.Interop
             /// <summary>
             /// Adds methods to a cache and returns inherited and declared methods for the interface in vtable order
             /// </summary>
-            ImmutableArray<Builder> AddMethods(ComInterfaceContext iface, IEnumerable<ComMethodInfo> declaredMethods)
+            ImmutableArray<Builder> AddMethods(
+                ComInterfaceContext iface,
+                IEnumerable<ComMethodInfo> declaredMethods
+            )
             {
                 if (allMethodsCache.TryGetValue(iface, out var cachedValue))
                 {
@@ -186,7 +273,10 @@ namespace Microsoft.Interop
                     ImmutableArray<Builder> baseMethods;
                     if (!allMethodsCache.TryGetValue(baseComIface, out var pair))
                     {
-                        baseMethods = AddMethods(baseComIface, ifaceToDeclaredMethodsMap[baseComIface]);
+                        baseMethods = AddMethods(
+                            baseComIface,
+                            ifaceToDeclaredMethodsMap[baseComIface]
+                        );
                     }
                     else
                     {

@@ -25,15 +25,16 @@
 // THE SOFTWARE.
 #if SECURITY_DEP && MONO_FEATURE_BTLS
 using System;
+
 namespace Mono.Btls
 {
-	[Flags]
-	enum MonoBtlsX509VerifyFlags
-	{
-		DEFAULT		= 0,
-		CRL_CHECK	= 1,
-		CRL_CHECK_ALL	= 2,
-		X509_STRIC	= 4
-	}
+    [Flags]
+    enum MonoBtlsX509VerifyFlags
+    {
+        DEFAULT = 0,
+        CRL_CHECK = 1,
+        CRL_CHECK_ALL = 2,
+        X509_STRIC = 4,
+    }
 }
 #endif

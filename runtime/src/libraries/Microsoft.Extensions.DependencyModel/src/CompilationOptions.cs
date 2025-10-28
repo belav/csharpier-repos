@@ -33,21 +33,24 @@ namespace Microsoft.Extensions.DependencyModel
 
         public bool? GenerateXmlDocumentation { get; }
 
-        public static CompilationOptions Default { get; } = new CompilationOptions(
-            defines: Enumerable.Empty<string?>(),
-            languageVersion: null,
-            platform: null,
-            allowUnsafe: null,
-            warningsAsErrors: null,
-            optimize: null,
-            keyFile: null,
-            delaySign: null,
-            publicSign: null,
-            debugType: null,
-            emitEntryPoint: null,
-            generateXmlDocumentation: null);
+        public static CompilationOptions Default { get; } =
+            new CompilationOptions(
+                defines: Enumerable.Empty<string?>(),
+                languageVersion: null,
+                platform: null,
+                allowUnsafe: null,
+                warningsAsErrors: null,
+                optimize: null,
+                keyFile: null,
+                delaySign: null,
+                publicSign: null,
+                debugType: null,
+                emitEntryPoint: null,
+                generateXmlDocumentation: null
+            );
 
-        public CompilationOptions(IEnumerable<string?> defines,
+        public CompilationOptions(
+            IEnumerable<string?> defines,
             string? languageVersion,
             string? platform,
             bool? allowUnsafe,
@@ -58,7 +61,8 @@ namespace Microsoft.Extensions.DependencyModel
             bool? publicSign,
             string? debugType,
             bool? emitEntryPoint,
-            bool? generateXmlDocumentation)
+            bool? generateXmlDocumentation
+        )
         {
             ThrowHelper.ThrowIfNull(defines);
 

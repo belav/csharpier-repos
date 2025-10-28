@@ -3,7 +3,6 @@
 
 #pragma warning disable 0184
 
-
 using System;
 using System.Runtime.InteropServices;
 using Xunit;
@@ -12,7 +11,10 @@ public class Program
 {
     private static void Eval(int testCase, bool b1, bool b2)
     {
-        if (b1 != b2) throw new Exception(string.Format("case {0:000} failed: v1 {1} v2 {2}", testCase, b1, b2));
+        if (b1 != b2)
+            throw new Exception(
+                string.Format("case {0:000} failed: v1 {1} v2 {2}", testCase, b1, b2)
+            );
     }
 
     private static void TestCase0001()
@@ -593,7 +595,8 @@ public class Program
             Eval(0587, o is SealedClass, false);
             Eval(0588, o is SealedClass[], false);
         }
-    }  // end of test case 0001
+    } // end of test case 0001
+
     private static void TestCase0002()
     {
         {
@@ -1172,7 +1175,8 @@ public class Program
             Eval(1175, o is SealedClass, false);
             Eval(1176, o is SealedClass[], false);
         }
-    }  // end of test case 0002
+    } // end of test case 0002
+
     private static void TestCase0003()
     {
         {
@@ -1751,7 +1755,8 @@ public class Program
             Eval(1763, o is SealedClass, false);
             Eval(1764, o is SealedClass[], false);
         }
-    }  // end of test case 0003
+    } // end of test case 0003
+
     private static void TestCase0004()
     {
         {
@@ -2330,7 +2335,8 @@ public class Program
             Eval(2351, o is SealedClass, false);
             Eval(2352, o is SealedClass[], false);
         }
-    }  // end of test case 0004
+    } // end of test case 0004
+
     private static void TestCase0005()
     {
         {
@@ -2718,7 +2724,8 @@ public class Program
             Eval(2744, o is SealedClass[], false);
         }
         {
-            NotEmptyStructConstrainedGen<IntPtr>? v = default(NotEmptyStructConstrainedGen<IntPtr>?);
+            NotEmptyStructConstrainedGen<IntPtr>? v =
+                default(NotEmptyStructConstrainedGen<IntPtr>?);
             ValueType o = v;
             Eval(2745, o is EmptyStruct, false);
             Eval(2746, o is EmptyStruct[], false);
@@ -2909,7 +2916,8 @@ public class Program
             Eval(2939, o is SealedClass, false);
             Eval(2940, o is SealedClass[], false);
         }
-    }  // end of test case 0005
+    } // end of test case 0005
+
     private static void TestCase0006()
     {
         {
@@ -3488,7 +3496,8 @@ public class Program
             Eval(3527, o is SealedClass, false);
             Eval(3528, o is SealedClass[], false);
         }
-    }  // end of test case 0006
+    } // end of test case 0006
+
     private static void TestCase0007()
     {
         {
@@ -4067,7 +4076,8 @@ public class Program
             Eval(4115, o is SealedClass, false);
             Eval(4116, o is SealedClass[], false);
         }
-    }  // end of test case 0007
+    } // end of test case 0007
+
     private static void TestCase0008()
     {
         {
@@ -4646,7 +4656,8 @@ public class Program
             Eval(4703, o is SealedClass, false);
             Eval(4704, o is SealedClass[], false);
         }
-    }  // end of test case 0008
+    } // end of test case 0008
+
     private static void TestCase0011()
     {
         {
@@ -5225,7 +5236,8 @@ public class Program
             Eval(6467, o is SealedClass, false);
             Eval(6468, o is SealedClass[], false);
         }
-    }  // end of test case 0011
+    } // end of test case 0011
+
     private static void TestCase0012()
     {
         {
@@ -5804,7 +5816,8 @@ public class Program
             Eval(7055, o is SealedClass, false);
             Eval(7056, o is SealedClass[], false);
         }
-    }  // end of test case 0012
+    } // end of test case 0012
+
     private static void TestCase0013()
     {
         {
@@ -6383,11 +6396,14 @@ public class Program
             Eval(7643, o is SealedClass, false);
             Eval(7644, o is SealedClass[], false);
         }
-    }  // end of test case 0013
+    } // end of test case 0013
+
     private static void TestCase0014()
     {
         {
-            ImplementOneInterfaceGen<EmptyStructGen<int>> v = default(ImplementOneInterfaceGen<EmptyStructGen<int>>);
+            ImplementOneInterfaceGen<EmptyStructGen<int>> v = default(ImplementOneInterfaceGen<
+                EmptyStructGen<int>
+            >);
             ValueType o = v;
             Eval(7645, o is EmptyStruct, false);
             Eval(7646, o is EmptyStruct[], false);
@@ -6579,7 +6595,9 @@ public class Program
             Eval(7840, o is SealedClass[], false);
         }
         {
-            ImplementOneInterfaceGen<EmptyStructGen<int>>? v = default(ImplementOneInterfaceGen<EmptyStructGen<int>>);
+            ImplementOneInterfaceGen<EmptyStructGen<int>>? v = default(ImplementOneInterfaceGen<
+                EmptyStructGen<int>
+            >);
             ValueType o = v;
             Eval(7841, o is EmptyStruct, false);
             Eval(7842, o is EmptyStruct[], false);
@@ -6771,7 +6789,9 @@ public class Program
             Eval(8036, o is SealedClass[], false);
         }
         {
-            ImplementOneInterfaceGen<EmptyStructGen<int>>? v = default(ImplementOneInterfaceGen<EmptyStructGen<int>>?);
+            ImplementOneInterfaceGen<EmptyStructGen<int>>? v = default(ImplementOneInterfaceGen<
+                EmptyStructGen<int>
+            >?);
             ValueType o = v;
             Eval(8037, o is EmptyStruct, false);
             Eval(8038, o is EmptyStruct[], false);
@@ -6962,7 +6982,8 @@ public class Program
             Eval(8231, o is SealedClass, false);
             Eval(8232, o is SealedClass[], false);
         }
-    }  // end of test case 0014
+    } // end of test case 0014
+
     private static void TestCase0015()
     {
         {
@@ -7541,7 +7562,8 @@ public class Program
             Eval(8819, o is SealedClass, false);
             Eval(8820, o is SealedClass[], false);
         }
-    }  // end of test case 0015
+    } // end of test case 0015
+
     private static void TestCase0016()
     {
         {
@@ -8120,7 +8142,8 @@ public class Program
             Eval(9407, o is SealedClass, false);
             Eval(9408, o is SealedClass[], false);
         }
-    }  // end of test case 0016
+    } // end of test case 0016
+
     private static void TestCase0017()
     {
         {
@@ -8699,7 +8722,8 @@ public class Program
             Eval(9995, o is SealedClass, false);
             Eval(9996, o is SealedClass[], false);
         }
-    }  // end of test case 0017
+    } // end of test case 0017
+
     private static void TestCase0018()
     {
         {
@@ -9278,7 +9302,8 @@ public class Program
             Eval(10583, o is SealedClass, false);
             Eval(10584, o is SealedClass[], false);
         }
-    }  // end of test case 0018
+    } // end of test case 0018
+
     private static void TestCase0019()
     {
         {
@@ -9857,7 +9882,8 @@ public class Program
             Eval(11171, o is SealedClass, false);
             Eval(11172, o is SealedClass[], false);
         }
-    }  // end of test case 0019
+    } // end of test case 0019
+
     private static void TestCase0020()
     {
         {
@@ -10436,7 +10462,8 @@ public class Program
             Eval(11759, o is SealedClass, false);
             Eval(11760, o is SealedClass[], false);
         }
-    }  // end of test case 0020
+    } // end of test case 0020
+
     private static void TestCase0021()
     {
         {
@@ -11015,7 +11042,8 @@ public class Program
             Eval(12347, o is SealedClass, false);
             Eval(12348, o is SealedClass[], false);
         }
-    }  // end of test case 0021
+    } // end of test case 0021
+
     private static void TestCase0022()
     {
         {
@@ -11594,7 +11622,8 @@ public class Program
             Eval(12935, o is SealedClass, false);
             Eval(12936, o is SealedClass[], false);
         }
-    }  // end of test case 0022
+    } // end of test case 0022
+
     private static void TestCase0023()
     {
         {
@@ -12173,7 +12202,8 @@ public class Program
             Eval(13523, o is SealedClass, false);
             Eval(13524, o is SealedClass[], false);
         }
-    }  // end of test case 0023
+    } // end of test case 0023
+
     private static void TestCase0024()
     {
         {
@@ -12752,7 +12782,8 @@ public class Program
             Eval(14111, o is SealedClass, false);
             Eval(14112, o is SealedClass[], false);
         }
-    }  // end of test case 0024
+    } // end of test case 0024
+
     private static void TestCase0025()
     {
         {
@@ -13331,7 +13362,8 @@ public class Program
             Eval(14699, o is SealedClass, false);
             Eval(14700, o is SealedClass[], false);
         }
-    }  // end of test case 0025
+    } // end of test case 0025
+
     private static void TestCase0026()
     {
         {
@@ -13910,7 +13942,8 @@ public class Program
             Eval(15287, o is SealedClass, false);
             Eval(15288, o is SealedClass[], false);
         }
-    }  // end of test case 0026
+    } // end of test case 0026
+
     private static void TestCase0027()
     {
         {
@@ -14489,7 +14522,8 @@ public class Program
             Eval(15875, o is SealedClass, false);
             Eval(15876, o is SealedClass[], false);
         }
-    }  // end of test case 0027
+    } // end of test case 0027
+
     private static void TestCase0028()
     {
         {
@@ -15068,7 +15102,8 @@ public class Program
             Eval(16463, o is SealedClass, false);
             Eval(16464, o is SealedClass[], false);
         }
-    }  // end of test case 0028
+    } // end of test case 0028
+
     private static void TestCase0029()
     {
         {
@@ -15647,7 +15682,8 @@ public class Program
             Eval(17051, o is SealedClass, false);
             Eval(17052, o is SealedClass[], false);
         }
-    }  // end of test case 0029
+    } // end of test case 0029
+
     private static void TestCase0030()
     {
         {
@@ -16226,7 +16262,8 @@ public class Program
             Eval(17639, o is SealedClass, false);
             Eval(17640, o is SealedClass[], false);
         }
-    }  // end of test case 0030
+    } // end of test case 0030
+
     private static void TestCase0031()
     {
         {
@@ -16805,7 +16842,8 @@ public class Program
             Eval(18227, o is SealedClass, false);
             Eval(18228, o is SealedClass[], false);
         }
-    }  // end of test case 0031
+    } // end of test case 0031
+
     private static void TestCase0032()
     {
         {
@@ -17384,7 +17422,8 @@ public class Program
             Eval(18815, o is SealedClass, false);
             Eval(18816, o is SealedClass[], false);
         }
-    }  // end of test case 0032
+    } // end of test case 0032
+
     private static void TestCase0033()
     {
         {
@@ -17963,7 +18002,8 @@ public class Program
             Eval(19403, o is SealedClass, false);
             Eval(19404, o is SealedClass[], false);
         }
-    }  // end of test case 0033
+    } // end of test case 0033
+
     private static void TestCase0034()
     {
         {
@@ -18542,7 +18582,8 @@ public class Program
             Eval(19991, o is SealedClass, false);
             Eval(19992, o is SealedClass[], false);
         }
-    }  // end of test case 0034
+    } // end of test case 0034
+
     private static void TestCase0035()
     {
         {
@@ -19121,7 +19162,8 @@ public class Program
             Eval(20579, o is SealedClass, false);
             Eval(20580, o is SealedClass[], false);
         }
-    }  // end of test case 0035
+    } // end of test case 0035
+
     private static void TestCase0036()
     {
         {
@@ -19700,7 +19742,7 @@ public class Program
             Eval(21167, o is SealedClass, false);
             Eval(21168, o is SealedClass[], false);
         }
-    }  // end of test case 0036
+    } // end of test case 0036
 
     [Fact]
     public static int TestEntryPoint()

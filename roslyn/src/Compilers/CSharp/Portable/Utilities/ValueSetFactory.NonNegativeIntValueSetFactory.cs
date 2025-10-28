@@ -13,11 +13,15 @@ namespace Microsoft.CodeAnalysis.CSharp
     {
         private sealed class NonNegativeIntValueSetFactory : IValueSetFactory<int>
         {
-            public static readonly NonNegativeIntValueSetFactory Instance = new NonNegativeIntValueSetFactory();
+            public static readonly NonNegativeIntValueSetFactory Instance =
+                new NonNegativeIntValueSetFactory();
 
             private NonNegativeIntValueSetFactory() { }
 
-            private readonly IValueSetFactory<int> _underlying = NumericValueSetFactory<int, NonNegativeIntTC>.Instance;
+            private readonly IValueSetFactory<int> _underlying = NumericValueSetFactory<
+                int,
+                NonNegativeIntTC
+            >.Instance;
 
             public IValueSet AllValues => NumericValueSet<int, NonNegativeIntTC>.AllValues;
 
@@ -38,9 +42,15 @@ namespace Microsoft.CodeAnalysis.CSharp
                     case GreaterThan:
                         if (value == int.MaxValue)
                             return NumericValueSet<int, NonNegativeIntTC>.NoValues;
-                        return new NumericValueSet<int, NonNegativeIntTC>(Math.Max(0, value + 1), int.MaxValue);
+                        return new NumericValueSet<int, NonNegativeIntTC>(
+                            Math.Max(0, value + 1),
+                            int.MaxValue
+                        );
                     case GreaterThanOrEqual:
-                        return new NumericValueSet<int, NonNegativeIntTC>(Math.Max(0, value), int.MaxValue);
+                        return new NumericValueSet<int, NonNegativeIntTC>(
+                            Math.Max(0, value),
+                            int.MaxValue
+                        );
                     case Equal:
                         if (value < 0)
                             return NumericValueSet<int, NonNegativeIntTC>.NoValues;
@@ -50,14 +60,22 @@ namespace Microsoft.CodeAnalysis.CSharp
                 }
             }
 
-            IValueSet IValueSetFactory.Random(int expectedSize, Random random) => _underlying.Random(expectedSize, random);
+            IValueSet IValueSetFactory.Random(int expectedSize, Random random) =>
+                _underlying.Random(expectedSize, random);
 
-            ConstantValue IValueSetFactory.RandomValue(Random random) => _underlying.RandomValue(random);
+            ConstantValue IValueSetFactory.RandomValue(Random random) =>
+                _underlying.RandomValue(random);
 
             IValueSet IValueSetFactory.Related(BinaryOperatorKind relation, ConstantValue value) =>
-                value.IsBad ? AllValues : Related(relation, default(NonNegativeIntTC).FromConstantValue(value));
+                value.IsBad
+                    ? AllValues
+                    : Related(relation, default(NonNegativeIntTC).FromConstantValue(value));
 
-            bool IValueSetFactory.Related(BinaryOperatorKind relation, ConstantValue left, ConstantValue right) => _underlying.Related(relation, left, right);
+            bool IValueSetFactory.Related(
+                BinaryOperatorKind relation,
+                ConstantValue left,
+                ConstantValue right
+            ) => _underlying.Related(relation, left, right);
         }
     }
 }

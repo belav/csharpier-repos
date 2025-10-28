@@ -24,9 +24,12 @@ namespace System.Net.Http.Headers
                     HttpOnly = true,
                     MaxAge = TimeSpan.FromDays(1),
                     Path = "path1",
-                    Secure = true
+                    Secure = true,
                 };
-                dataset.Add(header1, "name1=n1=v1&n2=v2&n3=v3; expires=Sun, 06 Nov 1994 08:49:37 GMT; max-age=86400; domain=domain1; path=path1; secure; httponly");
+                dataset.Add(
+                    header1,
+                    "name1=n1=v1&n2=v2&n3=v3; expires=Sun, 06 Nov 1994 08:49:37 GMT; max-age=86400; domain=domain1; path=path1; secure; httponly"
+                );
 
                 CookieHeaderValue header2 = new CookieHeaderValue("name2", "");
                 dataset.Add(header2, "name2=");
@@ -45,7 +48,10 @@ namespace System.Net.Http.Headers
                     Domain = "domain1",
                     Expires = new DateTimeOffset(1994, 11, 6, 8, 49, 37, TimeSpan.Zero),
                 };
-                dataset.Add(header5, "name5=value5; expires=Sun, 06 Nov 1994 08:49:37 GMT; domain=domain1");
+                dataset.Add(
+                    header5,
+                    "name5=value5; expires=Sun, 06 Nov 1994 08:49:37 GMT; domain=domain1"
+                );
 
                 return dataset;
             }

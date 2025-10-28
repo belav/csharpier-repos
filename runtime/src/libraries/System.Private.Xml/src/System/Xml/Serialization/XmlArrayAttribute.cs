@@ -10,7 +10,13 @@ namespace System.Xml.Serialization
     /// <devdoc>
     ///    <para>[To be supplied.]</para>
     /// </devdoc>
-    [AttributeUsage(AttributeTargets.Field | AttributeTargets.Property | AttributeTargets.Parameter | AttributeTargets.ReturnValue, AllowMultiple = false)]
+    [AttributeUsage(
+        AttributeTargets.Field
+            | AttributeTargets.Property
+            | AttributeTargets.Parameter
+            | AttributeTargets.ReturnValue,
+        AllowMultiple = false
+    )]
     public class XmlArrayAttribute : System.Attribute
     {
         private string? _elementName;
@@ -22,9 +28,7 @@ namespace System.Xml.Serialization
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public XmlArrayAttribute()
-        {
-        }
+        public XmlArrayAttribute() { }
 
         /// <devdoc>
         ///    <para>[To be supplied.]</para>

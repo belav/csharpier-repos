@@ -16,7 +16,8 @@ namespace System.Configuration
 
         public ConfigurationCollectionAttribute(Type itemType)
         {
-            if (itemType == null) throw new ArgumentNullException(nameof(itemType));
+            if (itemType == null)
+                throw new ArgumentNullException(nameof(itemType));
 
             ItemType = itemType;
         }
@@ -28,7 +29,8 @@ namespace System.Configuration
             get { return _addItemName ?? ConfigurationElementCollection.DefaultAddItemName; }
             set
             {
-                if (string.IsNullOrEmpty(value)) value = null;
+                if (string.IsNullOrEmpty(value))
+                    value = null;
                 _addItemName = value;
             }
         }
@@ -38,7 +40,8 @@ namespace System.Configuration
             get { return _removeItemName ?? ConfigurationElementCollection.DefaultRemoveItemName; }
             set
             {
-                if (string.IsNullOrEmpty(value)) value = null;
+                if (string.IsNullOrEmpty(value))
+                    value = null;
                 _removeItemName = value;
             }
         }
@@ -48,7 +51,8 @@ namespace System.Configuration
             get { return _clearItemsName ?? ConfigurationElementCollection.DefaultClearItemsName; }
             set
             {
-                if (string.IsNullOrEmpty(value)) value = null;
+                if (string.IsNullOrEmpty(value))
+                    value = null;
                 _clearItemsName = value;
             }
         }

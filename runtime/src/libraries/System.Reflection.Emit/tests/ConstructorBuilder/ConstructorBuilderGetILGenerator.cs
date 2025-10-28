@@ -30,7 +30,11 @@ namespace System.Reflection.Emit.Tests
         public void GetILGenerator_ReturnsNonNull(MethodAttributes attributes)
         {
             TypeBuilder type = Helpers.DynamicType(TypeAttributes.NotPublic);
-            ConstructorBuilder constructor = type.DefineConstructor(attributes, CallingConventions.Standard, new Type[0]);
+            ConstructorBuilder constructor = type.DefineConstructor(
+                attributes,
+                CallingConventions.Standard,
+                new Type[0]
+            );
             Assert.NotNull(constructor.GetILGenerator());
             Assert.NotNull(constructor.GetILGenerator(10));
         }
@@ -39,7 +43,11 @@ namespace System.Reflection.Emit.Tests
         public void GetILGenerator_NoMethodBodyAttribute_ThrowsInvalidOperationException()
         {
             TypeBuilder type = Helpers.DynamicType(TypeAttributes.NotPublic);
-            ConstructorBuilder constructor = type.DefineConstructor(MethodAttributes.PinvokeImpl, CallingConventions.Standard, new Type[0]);
+            ConstructorBuilder constructor = type.DefineConstructor(
+                MethodAttributes.PinvokeImpl,
+                CallingConventions.Standard,
+                new Type[0]
+            );
             Assert.Throws<InvalidOperationException>(() => constructor.GetILGenerator());
             Assert.Throws<InvalidOperationException>(() => constructor.GetILGenerator(10));
         }
@@ -59,7 +67,11 @@ namespace System.Reflection.Emit.Tests
             var builder = Helpers.DynamicModule();
             var type = builder.DefineType("MyProxy", TypeAttributes.Public);
 
-            var constructorBuilder = type.DefineConstructor(MethodAttributes.Public, CallingConventions.Standard, new[] { typeof(Version) });
+            var constructorBuilder = type.DefineConstructor(
+                MethodAttributes.Public,
+                CallingConventions.Standard,
+                new[] { typeof(Version) }
+            );
             var il = constructorBuilder.GetILGenerator();
             il.Emit(OpCodes.Ret);
 
@@ -75,8 +87,16 @@ namespace System.Reflection.Emit.Tests
             var builder = Helpers.DynamicModule();
             var type = builder.DefineType("MyProxy", TypeAttributes.Public);
 
-            var constructorBuilder = type.DefineConstructor(MethodAttributes.Public, CallingConventions.Standard, new[] { typeof(Version) });
-            ParameterBuilder parameter = constructorBuilder.DefineParameter(1, ParameterAttributes.Optional | ParameterAttributes.HasDefault, "param1");
+            var constructorBuilder = type.DefineConstructor(
+                MethodAttributes.Public,
+                CallingConventions.Standard,
+                new[] { typeof(Version) }
+            );
+            ParameterBuilder parameter = constructorBuilder.DefineParameter(
+                1,
+                ParameterAttributes.Optional | ParameterAttributes.HasDefault,
+                "param1"
+            );
             parameter.SetConstant(default(Version));
             var il = constructorBuilder.GetILGenerator();
             il.Emit(OpCodes.Ret);

@@ -5,9 +5,9 @@
 namespace System.ServiceModel.Channels
 {
     using System;
+    using System.Collections.Generic;
     using System.Net;
     using System.Net.Sockets;
-    using System.Collections.Generic;
 
     interface IUdpReceiveHandler
     {
@@ -15,7 +15,11 @@ namespace System.ServiceModel.Channels
         void HandleAsyncException(Exception exception);
 
         //returns false if the message was dropped because the max pending message count was hit.
-        bool HandleDataReceived(ArraySegment<byte> data, EndPoint remoteEndpoint, int interfaceIndex, Action onMessageDequeuedCallback);
+        bool HandleDataReceived(
+            ArraySegment<byte> data,
+            EndPoint remoteEndpoint,
+            int interfaceIndex,
+            Action onMessageDequeuedCallback
+        );
     }
-
 }

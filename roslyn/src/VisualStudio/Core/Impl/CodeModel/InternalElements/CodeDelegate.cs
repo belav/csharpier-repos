@@ -13,13 +13,18 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel.Inter
 {
     [ComVisible(true)]
     [ComDefaultInterface(typeof(EnvDTE80.CodeDelegate2))]
-    public sealed partial class CodeDelegate : AbstractCodeType, ICodeElementContainer<CodeParameter>, EnvDTE.CodeDelegate, EnvDTE80.CodeDelegate2
+    public sealed partial class CodeDelegate
+        : AbstractCodeType,
+            ICodeElementContainer<CodeParameter>,
+            EnvDTE.CodeDelegate,
+            EnvDTE80.CodeDelegate2
     {
         internal static EnvDTE.CodeDelegate Create(
             CodeModelState state,
             FileCodeModel fileCodeModel,
             SyntaxNodeKey nodeKey,
-            int? nodeKind)
+            int? nodeKind
+        )
         {
             var element = new CodeDelegate(state, fileCodeModel, nodeKey, nodeKind);
             var result = (EnvDTE.CodeDelegate)ComAggregate.CreateAggregatedObject(element);
@@ -33,7 +38,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel.Inter
             CodeModelState state,
             FileCodeModel fileCodeModel,
             int nodeKind,
-            string name)
+            string name
+        )
         {
             var element = new CodeDelegate(state, fileCodeModel, nodeKind, name);
             return (EnvDTE.CodeDelegate)ComAggregate.CreateAggregatedObject(element);
@@ -43,22 +49,19 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel.Inter
             CodeModelState state,
             FileCodeModel fileCodeModel,
             SyntaxNodeKey nodeKey,
-            int? nodeKind)
-            : base(state, fileCodeModel, nodeKey, nodeKind)
-        {
-        }
+            int? nodeKind
+        )
+            : base(state, fileCodeModel, nodeKey, nodeKind) { }
 
         private CodeDelegate(
             CodeModelState state,
             FileCodeModel fileCodeModel,
             int nodeKind,
-            string name)
-            : base(state, fileCodeModel, nodeKind, name)
-        {
-        }
+            string name
+        )
+            : base(state, fileCodeModel, nodeKind, name) { }
 
-        EnvDTE.CodeElements ICodeElementContainer<CodeParameter>.GetCollection()
-            => this.Parameters;
+        EnvDTE.CodeElements ICodeElementContainer<CodeParameter>.GetCollection() => this.Parameters;
 
         private IMethodSymbol LookupInvokeMethod()
         {
@@ -66,8 +69,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel.Inter
             return typeSymbol.DelegateInvokeMethod;
         }
 
-        internal override ImmutableArray<SyntaxNode> GetParameters()
-            => ImmutableArray.CreateRange(CodeModelService.GetParameterNodes(LookupNode()));
+        internal override ImmutableArray<SyntaxNode> GetParameters() =>
+            ImmutableArray.CreateRange(CodeModelService.GetParameterNodes(LookupNode()));
 
         public override EnvDTE.vsCMElement Kind
         {
@@ -78,10 +81,13 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel.Inter
         {
             get
             {
-                return (EnvDTE.CodeClass)this.CodeModelService.CreateCodeType(
-                    this.State,
-                    this.FileCodeModel.GetProjectId(),
-                    this.FileCodeModel.GetCompilation().GetSpecialType(SpecialType.System_Delegate));
+                return (EnvDTE.CodeClass)
+                    this.CodeModelService.CreateCodeType(
+                        this.State,
+                        this.FileCodeModel.GetProjectId(),
+                        this.FileCodeModel.GetCompilation()
+                            .GetSpecialType(SpecialType.System_Delegate)
+                    );
             }
         }
 
@@ -89,9 +95,13 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel.Inter
         {
             get
             {
-                return CodeTypeRef.Create(this.State, this, GetProjectId(), LookupInvokeMethod().ReturnType);
+                return CodeTypeRef.Create(
+                    this.State,
+                    this,
+                    GetProjectId(),
+                    LookupInvokeMethod().ReturnType
+                );
             }
-
             set
             {
                 // The type is sometimes part of the node key, so we should be sure to reacquire

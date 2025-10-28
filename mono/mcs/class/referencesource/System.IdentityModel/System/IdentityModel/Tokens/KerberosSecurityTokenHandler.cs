@@ -23,9 +23,7 @@ namespace System.IdentityModel.Tokens
         /// <summary>
         /// Creates an instance of <see cref="KerberosSecurityTokenHandler"/>
         /// </summary>
-        public KerberosSecurityTokenHandler()
-        {
-        }
+        public KerberosSecurityTokenHandler() { }
 
         /// <summary>
         /// Gets the settings that indicate if the handler can validate tokens.
@@ -33,10 +31,7 @@ namespace System.IdentityModel.Tokens
         /// </summary>
         public override bool CanValidateToken
         {
-            get
-            {
-                return true;
-            }
+            get { return true; }
         }
 
         /// <summary>
@@ -64,8 +59,8 @@ namespace System.IdentityModel.Tokens
         /// <returns>A <see cref="ReadOnlyCollection{T}"/> of <see cref="ClaimsIdentity"/> representing the identities contained in the token.</returns>
         /// <exception cref="ArgumentNullException">The parameter 'token' is null.</exception>
         /// <exception cref="ArgumentException">The token is not assignable from <see cref="KerberosReceiverSecurityToken"/>.</exception>
-        /// <exception cref="InvalidOperationException">Configuration <see cref="SecurityTokenHandlerConfiguration"/>is null.</exception>                
-        /// <exception cref="InvalidOperationException">The <see cref="WindowsIdentity"/> of the <see cref="KerberosReceiverSecurityToken"/>is null.</exception>                
+        /// <exception cref="InvalidOperationException">Configuration <see cref="SecurityTokenHandlerConfiguration"/>is null.</exception>
+        /// <exception cref="InvalidOperationException">The <see cref="WindowsIdentity"/> of the <see cref="KerberosReceiverSecurityToken"/>is null.</exception>
         public override ReadOnlyCollection<ClaimsIdentity> ValidateToken(SecurityToken token)
         {
             if (token == null)
@@ -76,7 +71,10 @@ namespace System.IdentityModel.Tokens
             KerberosReceiverSecurityToken kerbToken = token as KerberosReceiverSecurityToken;
             if (kerbToken == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument("token", SR.GetString(SR.ID0018, typeof(KerberosReceiverSecurityToken)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
+                    "token",
+                    SR.GetString(SR.ID0018, typeof(KerberosReceiverSecurityToken))
+                );
             }
 
             if (this.Configuration == null)
@@ -92,11 +90,26 @@ namespace System.IdentityModel.Tokens
                 }
 
                 // KerberosReceiveSecurityToken is disposable, best to make a copy as Dispose() nulls out the WindowsIdentity. The AuthenticationType was set when the kerbToken was created.
-                WindowsIdentity wi = new WindowsIdentity(kerbToken.WindowsIdentity.Token, kerbToken.WindowsIdentity.AuthenticationType);
+                WindowsIdentity wi = new WindowsIdentity(
+                    kerbToken.WindowsIdentity.Token,
+                    kerbToken.WindowsIdentity.AuthenticationType
+                );
 
                 // PARTIAL TRUST: will fail when adding claims, AddClaim is SecurityCritical.
-                wi.AddClaim(new Claim(ClaimTypes.AuthenticationInstant, XmlConvert.ToString(DateTime.UtcNow, DateTimeFormats.Generated), ClaimValueTypes.DateTime));
-                wi.AddClaim(new Claim(ClaimTypes.AuthenticationMethod, AuthenticationMethods.Windows, ClaimValueTypes.String));
+                wi.AddClaim(
+                    new Claim(
+                        ClaimTypes.AuthenticationInstant,
+                        XmlConvert.ToString(DateTime.UtcNow, DateTimeFormats.Generated),
+                        ClaimValueTypes.DateTime
+                    )
+                );
+                wi.AddClaim(
+                    new Claim(
+                        ClaimTypes.AuthenticationMethod,
+                        AuthenticationMethods.Windows,
+                        ClaimValueTypes.String
+                    )
+                );
 
                 if (this.Configuration.SaveBootstrapContext)
                 {

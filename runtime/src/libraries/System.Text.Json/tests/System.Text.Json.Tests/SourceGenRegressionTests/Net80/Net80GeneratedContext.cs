@@ -13,7 +13,7 @@ namespace System.Text.Json.Tests.SourceGenRegressionTests.Net80
     //[JsonSerializable(typeof(WeatherForecastWithPOCOs))]
     //[JsonSerializable(typeof(ClassWithCustomConverter))]
     //[JsonSerializable(typeof(MyLinkedList))]
-    public partial class Net80GeneratedContext : JsonSerializerContext {}
+    public partial class Net80GeneratedContext : JsonSerializerContext { }
 
     public class WeatherForecastWithPOCOs
     {
@@ -51,11 +51,17 @@ namespace System.Text.Json.Tests.SourceGenRegressionTests.Net80
 
         public class CustomConverter : JsonConverter<ClassWithCustomConverter>
         {
-            public override ClassWithCustomConverter? Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
-                => new ClassWithCustomConverter { Value = reader.GetInt32() - 1 };
+            public override ClassWithCustomConverter? Read(
+                ref Utf8JsonReader reader,
+                Type typeToConvert,
+                JsonSerializerOptions options
+            ) => new ClassWithCustomConverter { Value = reader.GetInt32() - 1 };
 
-            public override void Write(Utf8JsonWriter writer, ClassWithCustomConverter value, JsonSerializerOptions options)
-                => writer.WriteNumberValue(value.Value + 1);
+            public override void Write(
+                Utf8JsonWriter writer,
+                ClassWithCustomConverter value,
+                JsonSerializerOptions options
+            ) => writer.WriteNumberValue(value.Value + 1);
         }
     }
 }

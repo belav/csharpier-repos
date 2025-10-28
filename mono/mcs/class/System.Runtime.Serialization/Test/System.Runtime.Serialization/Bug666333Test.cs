@@ -16,19 +16,20 @@ using NUnit.Framework;
 
 namespace MonoTests.System.Runtime.Serialization
 {
-	[TestFixture]
-	public class Bug666333Test
-	{
-		[Test]
-		public void Bug666333 ()
-		{
-			// xml : original xml in the test
-			// xml2 : when it is *appropriately* serialized
-			// xml3 : mixed, d4p1:activeuser comes first
-			// xml4 : mixed, d4p1:activeuser comes second
-			// (Note that d4p1:activeuser is the actual element to be deserialized which takes precedence over urn:foo activeuser.)
-		
-			string xml = @"
+    [TestFixture]
+    public class Bug666333Test
+    {
+        [Test]
+        public void Bug666333()
+        {
+            // xml : original xml in the test
+            // xml2 : when it is *appropriately* serialized
+            // xml3 : mixed, d4p1:activeuser comes first
+            // xml4 : mixed, d4p1:activeuser comes second
+            // (Note that d4p1:activeuser is the actual element to be deserialized which takes precedence over urn:foo activeuser.)
+
+            string xml =
+                @"
 				<CheckLoginResponse xmlns='http://tempuri.org/'>
 					<playeractiveuser>
 						<activeuser>
@@ -46,7 +47,8 @@ namespace MonoTests.System.Runtime.Serialization
 				</CheckLoginResponse>
 				";
 
-			string xml2 = @"
+            string xml2 =
+                @"
 <CheckLoginResponse xmlns='http://tempuri.org/'>
   <playeractiveuser xmlns:d4p1='http://schemas.datacontract.org/2004/07/' xmlns:i='http://www.w3.org/2001/XMLSchema-instance'>
     <d4p1:activeuser>
@@ -63,7 +65,8 @@ namespace MonoTests.System.Runtime.Serialization
   </playeractiveuser>
 </CheckLoginResponse>";
 
-			string xml3 = @"
+            string xml3 =
+                @"
 <CheckLoginResponse xmlns='http://tempuri.org/'>
   <playeractiveuser xmlns:d4p1='http://schemas.datacontract.org/2004/07/' xmlns:i='http://www.w3.org/2001/XMLSchema-instance'>
     <d4p1:activeuser>
@@ -86,7 +89,8 @@ namespace MonoTests.System.Runtime.Serialization
   </playeractiveuser>
 </CheckLoginResponse>";
 
-			string xml4 = @"
+            string xml4 =
+                @"
 <CheckLoginResponse xmlns='http://tempuri.org/'>
   <playeractiveuser xmlns:d4p1='http://schemas.datacontract.org/2004/07/' xmlns:i='http://www.w3.org/2001/XMLSchema-instance'>
     <activeuser xmlns='urn:foo'>
@@ -108,37 +112,61 @@ namespace MonoTests.System.Runtime.Serialization
     </response>
   </playeractiveuser>
 </CheckLoginResponse>";
-			
-			var tm = TypedMessageConverter.Create (typeof (CheckLoginResponse), "urn:foo");
-			var m = Message.CreateMessage (MessageVersion.Default, "urn:foo", XmlReader.Create (new StringReader (xml)));
-			m = Message.CreateMessage (MessageVersion.Default, "urn:foo", XmlReader.Create (new StringReader (xml2)));
-			m = Message.CreateMessage (MessageVersion.Default, "urn:foo", XmlReader.Create (new StringReader (xml3)));
-			var clr = (CheckLoginResponse) tm.FromMessage (m);
-			Assert.IsNotNull (clr.playeractiveuser, "#1");
-			Assert.IsNotNull (clr.playeractiveuser.activeuser, "#2");
-			Assert.AreEqual ("iddd", clr.playeractiveuser.activeuser.id, "#3");
 
-			m = Message.CreateMessage (MessageVersion.Default, "urn:foo", XmlReader.Create (new StringReader (xml4)));
-			Assert.AreEqual ("iddd", clr.playeractiveuser.activeuser.id, "#4");
-	}
+            var tm = TypedMessageConverter.Create(typeof(CheckLoginResponse), "urn:foo");
+            var m = Message.CreateMessage(
+                MessageVersion.Default,
+                "urn:foo",
+                XmlReader.Create(new StringReader(xml))
+            );
+            m = Message.CreateMessage(
+                MessageVersion.Default,
+                "urn:foo",
+                XmlReader.Create(new StringReader(xml2))
+            );
+            m = Message.CreateMessage(
+                MessageVersion.Default,
+                "urn:foo",
+                XmlReader.Create(new StringReader(xml3))
+            );
+            var clr = (CheckLoginResponse)tm.FromMessage(m);
+            Assert.IsNotNull(clr.playeractiveuser, "#1");
+            Assert.IsNotNull(clr.playeractiveuser.activeuser, "#2");
+            Assert.AreEqual("iddd", clr.playeractiveuser.activeuser.id, "#3");
 
-	}
+            m = Message.CreateMessage(
+                MessageVersion.Default,
+                "urn:foo",
+                XmlReader.Create(new StringReader(xml4))
+            );
+            Assert.AreEqual("iddd", clr.playeractiveuser.activeuser.id, "#4");
+        }
+    }
 }
 
 // Generated code
 
-
-[GeneratedCode("System.ServiceModel", "4.0.0.0"), DebuggerStepThrough, EditorBrowsable(EditorBrowsableState.Advanced), MessageContract(WrapperName="CheckLoginResponse", WrapperNamespace="http://tempuri.org/", IsWrapped=true)]
+[
+    GeneratedCode("System.ServiceModel", "4.0.0.0"),
+    DebuggerStepThrough,
+    EditorBrowsable(EditorBrowsableState.Advanced),
+    MessageContract(
+        WrapperName = "CheckLoginResponse",
+        WrapperNamespace = "http://tempuri.org/",
+        IsWrapped = true
+    )
+]
 public class CheckLoginResponse
 {
     // Fields
-    [MessageBodyMember(Namespace="http://tempuri.org/", Order=0), XmlElement(IsNullable=true)]
+    [
+        MessageBodyMember(Namespace = "http://tempuri.org/", Order = 0),
+        XmlElement(IsNullable = true)
+    ]
     public PlayerActiveUser playeractiveuser;
 
     // Methods
-    public CheckLoginResponse()
-    {
-    }
+    public CheckLoginResponse() { }
 
     public CheckLoginResponse(PlayerActiveUser playeractiveuser)
     {
@@ -146,12 +174,16 @@ public class CheckLoginResponse
     }
 }
 
-
-[GeneratedCode("System.Xml", "4.0.30319.1"), DebuggerStepThrough, XmlType(Namespace="http://tempuri.org/")]
+[
+    GeneratedCode("System.Xml", "4.0.30319.1"),
+    DebuggerStepThrough,
+    XmlType(Namespace = "http://tempuri.org/")
+]
 public class PlayerActiveUser : INotifyPropertyChanged
 {
     // Fields
     private ActiveUserReference activeuserField;
+
     //private PropertyChangedEventHandler PropertyChanged;
     private Response responseField;
 
@@ -169,13 +201,10 @@ public class PlayerActiveUser : INotifyPropertyChanged
     }
 
     // Properties
-    [XmlElement(Order=0)]
+    [XmlElement(Order = 0)]
     public ActiveUserReference activeuser
     {
-        get
-        {
-            return this.activeuserField;
-        }
+        get { return this.activeuserField; }
         set
         {
             this.activeuserField = value;
@@ -183,14 +212,10 @@ public class PlayerActiveUser : INotifyPropertyChanged
         }
     }
 
-    [XmlElement(Order=1)]
+    [XmlElement(Order = 1)]
     public Response response
     {
-
-        get
-        {
-            return this.responseField;
-        }
+        get { return this.responseField; }
         set
         {
             this.responseField = value;
@@ -199,12 +224,16 @@ public class PlayerActiveUser : INotifyPropertyChanged
     }
 }
 
-
-[XmlType(Namespace="http://tempuri.org/"), GeneratedCode("System.Xml", "4.0.30319.1"), DebuggerStepThrough]
+[
+    XmlType(Namespace = "http://tempuri.org/"),
+    GeneratedCode("System.Xml", "4.0.30319.1"),
+    DebuggerStepThrough
+]
 public class Response : INotifyPropertyChanged
 {
     // Fields
     private int? langIdField;
+
     //private PropertyChangedEventHandler PropertyChanged;
     private int? responsecodeField;
     private string responsemessageField;
@@ -223,13 +252,10 @@ public class Response : INotifyPropertyChanged
     }
 
     // Properties
-    [XmlElement(IsNullable=true, Order=2)]
+    [XmlElement(IsNullable = true, Order = 2)]
     public int? langId
     {
-        get
-        {
-            return this.langIdField;
-        }
+        get { return this.langIdField; }
         set
         {
             this.langIdField = value;
@@ -237,13 +263,10 @@ public class Response : INotifyPropertyChanged
         }
     }
 
-    [XmlElement(IsNullable=true, Order=1)]
+    [XmlElement(IsNullable = true, Order = 1)]
     public int? responsecode
     {
-        get
-        {
-            return this.responsecodeField;
-        }
+        get { return this.responsecodeField; }
         set
         {
             this.responsecodeField = value;
@@ -251,13 +274,10 @@ public class Response : INotifyPropertyChanged
         }
     }
 
-    [XmlElement(Order=0)]
+    [XmlElement(Order = 0)]
     public string responsemessage
     {
-        get
-        {
-            return this.responsemessageField;
-        }
+        get { return this.responsemessageField; }
         set
         {
             this.responsemessageField = value;
@@ -266,8 +286,11 @@ public class Response : INotifyPropertyChanged
     }
 }
 
-
-[XmlType(Namespace="http://tempuri.org/"), DebuggerStepThrough, GeneratedCode("System.Xml", "4.0.30319.1")]
+[
+    XmlType(Namespace = "http://tempuri.org/"),
+    DebuggerStepThrough,
+    GeneratedCode("System.Xml", "4.0.30319.1")
+]
 public class ActiveUserReference : ESObject
 {
     // Fields
@@ -277,13 +300,10 @@ public class ActiveUserReference : ESObject
     private DateTime? lastcheckField;
 
     // Properties
-    [XmlElement(Order=2)]
+    [XmlElement(Order = 2)]
     public string email
     {
-        get
-        {
-            return this.emailField;
-        }
+        get { return this.emailField; }
         set
         {
             this.emailField = value;
@@ -291,13 +311,10 @@ public class ActiveUserReference : ESObject
         }
     }
 
-    [XmlElement(Order=1)]
+    [XmlElement(Order = 1)]
     public string hkey
     {
-        get
-        {
-            return this.hkeyField;
-        }
+        get { return this.hkeyField; }
         set
         {
             this.hkeyField = value;
@@ -305,13 +322,10 @@ public class ActiveUserReference : ESObject
         }
     }
 
-    [XmlElement(Order=0)]
+    [XmlElement(Order = 0)]
     public string id
     {
-        get
-        {
-            return this.idField;
-        }
+        get { return this.idField; }
         set
         {
             this.idField = value;
@@ -319,13 +333,10 @@ public class ActiveUserReference : ESObject
         }
     }
 
-    [XmlElement(IsNullable=true, Order=3)]
+    [XmlElement(IsNullable = true, Order = 3)]
     public DateTime? lastcheck
     {
-        get
-        {
-            return this.lastcheckField;
-        }
+        get { return this.lastcheckField; }
         set
         {
             this.lastcheckField = value;
@@ -334,8 +345,12 @@ public class ActiveUserReference : ESObject
     }
 }
 
-
-[XmlType(Namespace="http://tempuri.org/"), GeneratedCode("System.Xml", "4.0.30319.1"), XmlInclude(typeof(ActiveUserReference)), DebuggerStepThrough]
+[
+    XmlType(Namespace = "http://tempuri.org/"),
+    GeneratedCode("System.Xml", "4.0.30319.1"),
+    XmlInclude(typeof(ActiveUserReference)),
+    DebuggerStepThrough
+]
 public abstract class ESObject : INotifyPropertyChanged
 {
     // Fields
@@ -345,9 +360,7 @@ public abstract class ESObject : INotifyPropertyChanged
     public event PropertyChangedEventHandler PropertyChanged;
 
     // Methods
-    protected ESObject()
-    {
-    }
+    protected ESObject() { }
 
     protected void RaisePropertyChanged(string propertyName)
     {

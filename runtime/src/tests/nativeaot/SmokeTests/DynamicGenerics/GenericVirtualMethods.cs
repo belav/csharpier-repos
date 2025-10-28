@@ -4,10 +4,10 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using CoreFXTestLibrary;
 using System.Runtime.CompilerServices;
 using System.Threading;
 using System.Threading.Tasks;
+using CoreFXTestLibrary;
 
 public static class GenericVirtualMethods
 {
@@ -15,21 +15,21 @@ public static class GenericVirtualMethods
     {
         string GVM<T>(object o);
     }
-    
+
     class GVMClass : IInterfaceWithGVM
     {
-        public virtual string GVM<T>(object o) 
+        public virtual string GVM<T>(object o)
         {
             if (!(o is T))
                 return "FAIL";
-            else 
-                return "Called GVM<T>"; 
+            else
+                return "Called GVM<T>";
         }
     }
 
     class GVMDerivedClass : GVMClass, IInterfaceWithGVM
     {
-        public override string GVM<T>(object o) 
+        public override string GVM<T>(object o)
         {
             if (o == null)
                 return "FAIL";
@@ -143,15 +143,21 @@ public static class GenericVirtualMethods
             }
         }
     }
+
     [MethodImpl(MethodImplOptions.NoInlining)]
-    public static void TestConstrainedCalls<T> (T t, string intString, string derivedClassString, string stringString) where T:IInterfaceWithGVM
+    public static void TestConstrainedCalls<T>(
+        T t,
+        string intString,
+        string derivedClassString,
+        string stringString
+    )
+        where T : IInterfaceWithGVM
     {
         Assert.AreEqual(intString, t.GVM<int>(54));
         Assert.AreEqual(derivedClassString, t.GVM<GVMDerivedClass>(new GVMDerivedClass()));
         Assert.AreEqual(stringString, t.GVM<string>("testString"));
     }
-    
-     
+
     //TEST:GenericVirtualMethods.TestCalls
     [TestMethod]
     public static void TestCalls()
@@ -164,7 +170,10 @@ public static class GenericVirtualMethods
         Assert.AreEqual("Called Derived.GVM<GVMClass>", testObject.GVM<GVMClass>(testObject));
         Assert.AreEqual("Called Derived.GVM<string>", testObject.GVM<string>("testString"));
         Assert.AreEqual("Called Derived.GVM<int>", igvm.GVM<int>(54));
-        Assert.AreEqual("Called Derived.GVM<GVMDerivedClass>", igvm.GVM<GVMDerivedClass>(testObject));
+        Assert.AreEqual(
+            "Called Derived.GVM<GVMDerivedClass>",
+            igvm.GVM<GVMDerivedClass>(testObject)
+        );
         Assert.AreEqual("Called Derived.GVM<string>", igvm.GVM<string>("testString"));
 
         // Test GVM delegate dispatch
@@ -181,31 +190,87 @@ public static class GenericVirtualMethods
         Assert.AreEqual("Called Derived.GVM<GVMClass>", d(testObject));
         d = igvm.GVM<string>;
         Assert.AreEqual("Called Derived.GVM<string>", d("testString"));
-        TestConstrainedCalls<IInterfaceWithGVM>(igvm, "Called Derived.GVM<int>", "Called Derived.GVM<GVMDerivedClass>", "Called Derived.GVM<string>");
+        TestConstrainedCalls<IInterfaceWithGVM>(
+            igvm,
+            "Called Derived.GVM<int>",
+            "Called Derived.GVM<GVMDerivedClass>",
+            "Called Derived.GVM<string>"
+        );
 
         // GVM on structure
         IInterfaceWithGVM igvmStruct = new GVMStruct();
         Assert.AreEqual("Called GVMStruct.GVM<int>", igvmStruct.GVM<int>(54));
-        Assert.AreEqual("Called GVMStruct.GVM<GVMDerivedClass>", igvmStruct.GVM<GVMDerivedClass>(testObject));
+        Assert.AreEqual(
+            "Called GVMStruct.GVM<GVMDerivedClass>",
+            igvmStruct.GVM<GVMDerivedClass>(testObject)
+        );
         Assert.AreEqual("Called GVMStruct.GVM<string>", igvmStruct.GVM<string>("testString"));
-        TestConstrainedCalls<GVMStruct>(new GVMStruct(), "Called GVMStruct.GVM<int>", "Called GVMStruct.GVM<GVMDerivedClass>", "Called GVMStruct.GVM<string>");
-        TestConstrainedCalls<IInterfaceWithGVM>(new GVMStruct(), "Called GVMStruct.GVM<int>", "Called GVMStruct.GVM<GVMDerivedClass>", "Called GVMStruct.GVM<string>");
+        TestConstrainedCalls<GVMStruct>(
+            new GVMStruct(),
+            "Called GVMStruct.GVM<int>",
+            "Called GVMStruct.GVM<GVMDerivedClass>",
+            "Called GVMStruct.GVM<string>"
+        );
+        TestConstrainedCalls<IInterfaceWithGVM>(
+            new GVMStruct(),
+            "Called GVMStruct.GVM<int>",
+            "Called GVMStruct.GVM<GVMDerivedClass>",
+            "Called GVMStruct.GVM<string>"
+        );
 
         // GVM on Generic Structure (struct instantiated over exact type)
         IInterfaceWithGVM igvmStructGenericOverInt = new GVMStructGeneric<int>();
-        Assert.AreEqual("Called GVMStructGeneric<int>.GVM<int>", igvmStructGenericOverInt.GVM<int>(54));
-        Assert.AreEqual("Called GVMStructGeneric<int>.GVM<GVMDerivedClass>", igvmStructGenericOverInt.GVM<GVMDerivedClass>(testObject));
-        Assert.AreEqual("Called GVMStructGeneric<int>.GVM<string>", igvmStructGenericOverInt.GVM<string>("testString"));
-        TestConstrainedCalls<GVMStructGeneric<int>>(new GVMStructGeneric<int>(), "Called GVMStructGeneric<int>.GVM<int>", "Called GVMStructGeneric<int>.GVM<GVMDerivedClass>", "Called GVMStructGeneric<int>.GVM<string>");
-        TestConstrainedCalls<IInterfaceWithGVM>(new GVMStructGeneric<int>(), "Called GVMStructGeneric<int>.GVM<int>", "Called GVMStructGeneric<int>.GVM<GVMDerivedClass>", "Called GVMStructGeneric<int>.GVM<string>");
+        Assert.AreEqual(
+            "Called GVMStructGeneric<int>.GVM<int>",
+            igvmStructGenericOverInt.GVM<int>(54)
+        );
+        Assert.AreEqual(
+            "Called GVMStructGeneric<int>.GVM<GVMDerivedClass>",
+            igvmStructGenericOverInt.GVM<GVMDerivedClass>(testObject)
+        );
+        Assert.AreEqual(
+            "Called GVMStructGeneric<int>.GVM<string>",
+            igvmStructGenericOverInt.GVM<string>("testString")
+        );
+        TestConstrainedCalls<GVMStructGeneric<int>>(
+            new GVMStructGeneric<int>(),
+            "Called GVMStructGeneric<int>.GVM<int>",
+            "Called GVMStructGeneric<int>.GVM<GVMDerivedClass>",
+            "Called GVMStructGeneric<int>.GVM<string>"
+        );
+        TestConstrainedCalls<IInterfaceWithGVM>(
+            new GVMStructGeneric<int>(),
+            "Called GVMStructGeneric<int>.GVM<int>",
+            "Called GVMStructGeneric<int>.GVM<GVMDerivedClass>",
+            "Called GVMStructGeneric<int>.GVM<string>"
+        );
 
         // GVM on Generic Structure (struct instantiated over reference type)
         IInterfaceWithGVM igvmStructGenericOverObject = new GVMStructGeneric<object>();
-        Assert.AreEqual("Called GVMStructGeneric<object>.GVM<int>", igvmStructGenericOverObject.GVM<int>(54));
-        Assert.AreEqual("Called GVMStructGeneric<object>.GVM<GVMDerivedClass>", igvmStructGenericOverObject.GVM<GVMDerivedClass>(testObject));
-        Assert.AreEqual("Called GVMStructGeneric<object>.GVM<string>", igvmStructGenericOverObject.GVM<string>("testString"));
-        TestConstrainedCalls<GVMStructGeneric<object>>(new GVMStructGeneric<object>(), "Called GVMStructGeneric<object>.GVM<int>", "Called GVMStructGeneric<object>.GVM<GVMDerivedClass>", "Called GVMStructGeneric<object>.GVM<string>");
-        TestConstrainedCalls<IInterfaceWithGVM>(new GVMStructGeneric<object>(), "Called GVMStructGeneric<object>.GVM<int>", "Called GVMStructGeneric<object>.GVM<GVMDerivedClass>", "Called GVMStructGeneric<object>.GVM<string>");
+        Assert.AreEqual(
+            "Called GVMStructGeneric<object>.GVM<int>",
+            igvmStructGenericOverObject.GVM<int>(54)
+        );
+        Assert.AreEqual(
+            "Called GVMStructGeneric<object>.GVM<GVMDerivedClass>",
+            igvmStructGenericOverObject.GVM<GVMDerivedClass>(testObject)
+        );
+        Assert.AreEqual(
+            "Called GVMStructGeneric<object>.GVM<string>",
+            igvmStructGenericOverObject.GVM<string>("testString")
+        );
+        TestConstrainedCalls<GVMStructGeneric<object>>(
+            new GVMStructGeneric<object>(),
+            "Called GVMStructGeneric<object>.GVM<int>",
+            "Called GVMStructGeneric<object>.GVM<GVMDerivedClass>",
+            "Called GVMStructGeneric<object>.GVM<string>"
+        );
+        TestConstrainedCalls<IInterfaceWithGVM>(
+            new GVMStructGeneric<object>(),
+            "Called GVMStructGeneric<object>.GVM<int>",
+            "Called GVMStructGeneric<object>.GVM<GVMDerivedClass>",
+            "Called GVMStructGeneric<object>.GVM<string>"
+        );
     }
 
     static class GenericStaticClass<T>
@@ -241,9 +306,12 @@ public static class GenericVirtualMethods
     [TestMethod]
     public static void TestLdFtnToGetStaticMethodOnGenericType()
     {
-        ClassThatUsesGenericStaticClass<object> testObject1 = new ClassThatUsesGenericStaticClass<object>();
-        ClassThatUsesGenericStaticClass<string> testObject2 = new ClassThatUsesGenericStaticClass<string>();
-        ClassThatUsesGenericStaticClass<Type> testObject3 = new ClassThatUsesGenericStaticClass<Type>();
+        ClassThatUsesGenericStaticClass<object> testObject1 =
+            new ClassThatUsesGenericStaticClass<object>();
+        ClassThatUsesGenericStaticClass<string> testObject2 =
+            new ClassThatUsesGenericStaticClass<string>();
+        ClassThatUsesGenericStaticClass<Type> testObject3 =
+            new ClassThatUsesGenericStaticClass<Type>();
         string result;
 
         result = testObject1.GetTypeName()();
@@ -259,17 +327,11 @@ public static class GenericVirtualMethods
 
     public class GenericTypeWithThreeParameters<X, Y, Z>
     {
-        public GenericTypeWithThreeParameters(int x)
-        {
-        }
+        public GenericTypeWithThreeParameters(int x) { }
 
-        private GenericTypeWithThreeParameters(String s)
-        {
-        }
+        private GenericTypeWithThreeParameters(String s) { }
 
-        public void SimpleMethod()
-        {
-        }
+        public void SimpleMethod() { }
 
         public M SimpleGenericMethod<M, N>(X arg1, N arg2)
         {
@@ -277,7 +339,7 @@ public static class GenericVirtualMethods
         }
     }
 
-    public class GenericTypeWithTwoParametersWhereOnlyTheFirstIsActuallyUsed<T,U>
+    public class GenericTypeWithTwoParametersWhereOnlyTheFirstIsActuallyUsed<T, U>
     {
         public static bool Method(object o)
         {
@@ -295,7 +357,7 @@ public static class GenericVirtualMethods
 
     public class ClassWithGenericMethod
     {
-        public static bool MethodWithTwoGenericParametersWhereOnlyTheFirstIsUsed<T,U>(object o)
+        public static bool MethodWithTwoGenericParametersWhereOnlyTheFirstIsUsed<T, U>(object o)
         {
             return o is T;
         }
@@ -305,13 +367,25 @@ public static class GenericVirtualMethods
     [TestMethod]
     public static void TestLdFtnToInstanceGenericMethod()
     {
-        GenericTypeWithThreeParameters<int, string, object> o = new GenericTypeWithThreeParameters<int, string, object>(123);
-        Func<int, double, float> d = new Func<int, double, float>(o.SimpleGenericMethod<float, double>);
+        GenericTypeWithThreeParameters<int, string, object> o = new GenericTypeWithThreeParameters<
+            int,
+            string,
+            object
+        >(123);
+        Func<int, double, float> d = new Func<int, double, float>(
+            o.SimpleGenericMethod<float, double>
+        );
         Assert.AreEqual(default(float), d(1, 2));
         Assert.IsNotNull(System.Reflection.RuntimeReflectionExtensions.GetMethodInfo(d));
 
-        GenericTypeWithThreeParameters<int, string, Type> o2 = new GenericTypeWithThreeParameters<int, string, Type>(123);
-        Func<int, double, float> d2 = new Func<int, double, float>(o2.SimpleGenericMethod<float, double>);
+        GenericTypeWithThreeParameters<int, string, Type> o2 = new GenericTypeWithThreeParameters<
+            int,
+            string,
+            Type
+        >(123);
+        Func<int, double, float> d2 = new Func<int, double, float>(
+            o2.SimpleGenericMethod<float, double>
+        );
         Assert.AreEqual(default(float), d2(1, 2));
         Assert.IsNotNull(System.Reflection.RuntimeReflectionExtensions.GetMethodInfo(d2));
 
@@ -319,34 +393,58 @@ public static class GenericVirtualMethods
         // the correct equality behavior
 
         // Empty Generic MethodDictionaries
-        Assert.AreNotEqual(System.Reflection.RuntimeReflectionExtensions.GetMethodInfo(d), System.Reflection.RuntimeReflectionExtensions.GetMethodInfo(d2));
+        Assert.AreNotEqual(
+            System.Reflection.RuntimeReflectionExtensions.GetMethodInfo(d),
+            System.Reflection.RuntimeReflectionExtensions.GetMethodInfo(d2)
+        );
 
         // Duplicate Generic Method Dictionaries
-        Func<object, bool> d7 = ClassWithGenericMethod.MethodWithTwoGenericParametersWhereOnlyTheFirstIsUsed<object, string>;
-        Func<object, bool> d8 = ClassWithGenericMethod.MethodWithTwoGenericParametersWhereOnlyTheFirstIsUsed<object, Type>;
+        Func<object, bool> d7 =
+            ClassWithGenericMethod.MethodWithTwoGenericParametersWhereOnlyTheFirstIsUsed<
+                object,
+                string
+            >;
+        Func<object, bool> d8 =
+            ClassWithGenericMethod.MethodWithTwoGenericParametersWhereOnlyTheFirstIsUsed<
+                object,
+                Type
+            >;
         Assert.IsNotNull(System.Reflection.RuntimeReflectionExtensions.GetMethodInfo(d7));
         Assert.IsNotNull(System.Reflection.RuntimeReflectionExtensions.GetMethodInfo(d8));
-        Assert.AreNotEqual(System.Reflection.RuntimeReflectionExtensions.GetMethodInfo(d7), System.Reflection.RuntimeReflectionExtensions.GetMethodInfo(d8));
+        Assert.AreNotEqual(
+            System.Reflection.RuntimeReflectionExtensions.GetMethodInfo(d7),
+            System.Reflection.RuntimeReflectionExtensions.GetMethodInfo(d8)
+        );
 
         // Empty Generic Type Dictionaries
         Func<object, bool> d3 = GenericTypeWhereNoParametersAreUsed<object>.Method;
         Func<object, bool> d4 = GenericTypeWhereNoParametersAreUsed<string>.Method;
         Assert.IsNotNull(System.Reflection.RuntimeReflectionExtensions.GetMethodInfo(d3));
         Assert.IsNotNull(System.Reflection.RuntimeReflectionExtensions.GetMethodInfo(d4));
-        Assert.AreNotEqual(System.Reflection.RuntimeReflectionExtensions.GetMethodInfo(d3), System.Reflection.RuntimeReflectionExtensions.GetMethodInfo(d4));
+        Assert.AreNotEqual(
+            System.Reflection.RuntimeReflectionExtensions.GetMethodInfo(d3),
+            System.Reflection.RuntimeReflectionExtensions.GetMethodInfo(d4)
+        );
 
         // Duplicate Generic Type Dictionary
-        Func<object, bool> d5 = GenericTypeWithTwoParametersWhereOnlyTheFirstIsActuallyUsed<object, string>.Method;
-        Func<object, bool> d6 = GenericTypeWithTwoParametersWhereOnlyTheFirstIsActuallyUsed<object, Type>.Method;
+        Func<object, bool> d5 = GenericTypeWithTwoParametersWhereOnlyTheFirstIsActuallyUsed<
+            object,
+            string
+        >.Method;
+        Func<object, bool> d6 = GenericTypeWithTwoParametersWhereOnlyTheFirstIsActuallyUsed<
+            object,
+            Type
+        >.Method;
         Assert.IsNotNull(System.Reflection.RuntimeReflectionExtensions.GetMethodInfo(d5));
         Assert.IsNotNull(System.Reflection.RuntimeReflectionExtensions.GetMethodInfo(d6));
-        Assert.AreNotEqual(System.Reflection.RuntimeReflectionExtensions.GetMethodInfo(d5), System.Reflection.RuntimeReflectionExtensions.GetMethodInfo(d6));
+        Assert.AreNotEqual(
+            System.Reflection.RuntimeReflectionExtensions.GetMethodInfo(d5),
+            System.Reflection.RuntimeReflectionExtensions.GetMethodInfo(d6)
+        );
     }
 
-    class Exception<T> : Exception
-    {
+    class Exception<T> : Exception { }
 
-    }
     class MyGenericTypeWithExceptionCatchingSupport<T>
     {
         [MethodImpl(MethodImplOptions.NoInlining)]
@@ -371,7 +469,7 @@ public static class GenericVirtualMethods
         public IEnumerable<string> EnumerateStrings(bool b)
         {
             yield return "x";
-            
+
             List<string> strings = new List<string>();
             strings.Add("Hmm");
             try
@@ -391,7 +489,7 @@ public static class GenericVirtualMethods
 
         void ThrowGenericException()
         {
-           throw new Exception<T>();
+            throw new Exception<T>();
         }
 
         Task ThrowGenericExceptionAsync()
@@ -402,7 +500,6 @@ public static class GenericVirtualMethods
 
         public async Task<bool> AsyncMethod(bool b)
         {
-            
             try
             {
                 await ThrowGenericExceptionAsync();
@@ -414,6 +511,7 @@ public static class GenericVirtualMethods
 
             return false;
         }
+
         public bool RunAsyncMethod(bool b)
         {
             Task<bool> t = AsyncMethod(b);
@@ -426,7 +524,8 @@ public static class GenericVirtualMethods
     [TestMethod]
     public static void TestGenericExceptionType()
     {
-        MyGenericTypeWithExceptionCatchingSupport<string> mgt = new MyGenericTypeWithExceptionCatchingSupport<string>(true);
+        MyGenericTypeWithExceptionCatchingSupport<string> mgt =
+            new MyGenericTypeWithExceptionCatchingSupport<string>(true);
 
         bool foundCaught = false;
         foreach (string s in mgt.EnumerateStrings(true))
@@ -439,15 +538,9 @@ public static class GenericVirtualMethods
         Assert.IsTrue(mgt.RunAsyncMethod(true));
     }
 
-    class Base
-    {
+    class Base { }
 
-    }
-
-    class Derived : Base
-    {
-
-    }
+    class Derived : Base { }
 
     interface IInVariant<in T>
     {
@@ -459,12 +552,17 @@ public static class GenericVirtualMethods
         string Func<U>();
     }
 
-    class ClassWithVariantGvms : IInVariant<object>, IInVariant<Base>, IOutVariant<Derived>, IOutVariant<Base>
+    class ClassWithVariantGvms
+        : IInVariant<object>,
+            IInVariant<Base>,
+            IOutVariant<Derived>,
+            IOutVariant<Base>
     {
         string IInVariant<object>.Func<U>(object t)
         {
             return "CallOnObject";
         }
+
         string IInVariant<Base>.Func<U>(Base t)
         {
             return "CallOnBase";
@@ -474,6 +572,7 @@ public static class GenericVirtualMethods
         {
             return "CallOnDerived";
         }
+
         string IOutVariant<Base>.Func<U>()
         {
             return "CallOnBase";
@@ -486,13 +585,21 @@ public static class GenericVirtualMethods
     {
         ClassWithVariantGvms testClass = new ClassWithVariantGvms();
 
-        Assert.AreEqual<string>("CallOnObject"  , ((IInVariant<object>)testClass).Func<object>(new Derived()));
-        Assert.AreEqual<string>("CallOnBase"    , ((IInVariant<Base   >)testClass).Func<object>(new Derived()));
-        Assert.AreEqual<string>("CallOnObject"  , ((IInVariant<Derived>)testClass).Func<object>(new Derived()));
+        Assert.AreEqual<string>(
+            "CallOnObject",
+            ((IInVariant<object>)testClass).Func<object>(new Derived())
+        );
+        Assert.AreEqual<string>(
+            "CallOnBase",
+            ((IInVariant<Base>)testClass).Func<object>(new Derived())
+        );
+        Assert.AreEqual<string>(
+            "CallOnObject",
+            ((IInVariant<Derived>)testClass).Func<object>(new Derived())
+        );
 
-        Assert.AreEqual<string>("CallOnDerived" , ((IOutVariant<object>)testClass).Func<object>());
-        Assert.AreEqual<string>("CallOnBase"    , ((IOutVariant<Base>)testClass).Func<object>());
-        Assert.AreEqual<string>("CallOnDerived" , ((IOutVariant<Derived>)testClass).Func<object>());
+        Assert.AreEqual<string>("CallOnDerived", ((IOutVariant<object>)testClass).Func<object>());
+        Assert.AreEqual<string>("CallOnBase", ((IOutVariant<Base>)testClass).Func<object>());
+        Assert.AreEqual<string>("CallOnDerived", ((IOutVariant<Derived>)testClass).Func<object>());
     }
 }
-

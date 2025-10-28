@@ -17,12 +17,8 @@ public class ContextParameterBinding : ServiceParameterBinding
     /// </summary>
     /// <param name="contextType">The <see cref="DbContext" /> CLR type.</param>
     /// <param name="serviceProperties">The associated <see cref="IServiceProperty" /> objects, or <see langword="null" />.</param>
-    public ContextParameterBinding(
-        Type contextType,
-        params IPropertyBase[]? serviceProperties)
-        : base(contextType, contextType, serviceProperties)
-    {
-    }
+    public ContextParameterBinding(Type contextType, params IPropertyBase[]? serviceProperties)
+        : base(contextType, contextType, serviceProperties) { }
 
     /// <summary>
     ///     Creates an expression tree representing the binding of the value of a property from a
@@ -33,15 +29,16 @@ public class ContextParameterBinding : ServiceParameterBinding
     /// <returns>The expression tree.</returns>
     public override Expression BindToParameter(
         Expression materializationExpression,
-        Expression bindingInfoExpression)
+        Expression bindingInfoExpression
+    )
     {
         Check.NotNull(materializationExpression, nameof(materializationExpression));
         Check.NotNull(bindingInfoExpression, nameof(bindingInfoExpression));
 
-        var propertyExpression
-            = Expression.Property(
-                materializationExpression,
-                MaterializationContext.ContextProperty);
+        var propertyExpression = Expression.Property(
+            materializationExpression,
+            MaterializationContext.ContextProperty
+        );
 
         return ServiceType != typeof(DbContext)
             ? Expression.TypeAs(propertyExpression, ServiceType)
@@ -53,6 +50,6 @@ public class ContextParameterBinding : ServiceParameterBinding
     /// </summary>
     /// <param name="consumedProperties">The new consumed properties.</param>
     /// <returns>A copy with replaced consumed properties.</returns>
-    public override ParameterBinding With(IPropertyBase[] consumedProperties)
-        => new ContextParameterBinding(ParameterType, consumedProperties);
+    public override ParameterBinding With(IPropertyBase[] consumedProperties) =>
+        new ContextParameterBinding(ParameterType, consumedProperties);
 }

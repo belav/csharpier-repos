@@ -12,19 +12,34 @@ using Microsoft.CodeAnalysis.Shared.Extensions;
 
 namespace Microsoft.CodeAnalysis.CSharp.QualifyMemberAccess
 {
-    [ExportCodeFixProvider(LanguageNames.CSharp, Name = PredefinedCodeFixProviderNames.QualifyMemberAccess), Shared]
+    [
+        ExportCodeFixProvider(
+            LanguageNames.CSharp,
+            Name = PredefinedCodeFixProviderNames.QualifyMemberAccess
+        ),
+        Shared
+    ]
     [ExtensionOrder(After = PredefinedCodeFixProviderNames.RemoveUnnecessaryCast)]
-    internal class CSharpQualifyMemberAccessCodeFixProvider : AbstractQualifyMemberAccessCodeFixprovider<SimpleNameSyntax, InvocationExpressionSyntax>
+    internal class CSharpQualifyMemberAccessCodeFixProvider
+        : AbstractQualifyMemberAccessCodeFixprovider<SimpleNameSyntax, InvocationExpressionSyntax>
     {
         [ImportingConstructor]
-        [SuppressMessage("RoslynDiagnosticsReliability", "RS0033:Importing constructor should be [Obsolete]", Justification = "Used in test code: https://github.com/dotnet/roslyn/issues/42814")]
-        public CSharpQualifyMemberAccessCodeFixProvider()
-        {
-        }
+        [SuppressMessage(
+            "RoslynDiagnosticsReliability",
+            "RS0033:Importing constructor should be [Obsolete]",
+            Justification = "Used in test code: https://github.com/dotnet/roslyn/issues/42814"
+        )]
+        public CSharpQualifyMemberAccessCodeFixProvider() { }
 
-        protected override SimpleNameSyntax? GetNode(Diagnostic diagnostic, CancellationToken cancellationToken)
+        protected override SimpleNameSyntax? GetNode(
+            Diagnostic diagnostic,
+            CancellationToken cancellationToken
+        )
         {
-            var node = diagnostic.Location.FindNode(getInnermostNodeForTie: true, cancellationToken);
+            var node = diagnostic.Location.FindNode(
+                getInnermostNodeForTie: true,
+                cancellationToken
+            );
             switch (node)
             {
                 case SimpleNameSyntax simpleNameSyntax:

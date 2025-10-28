@@ -47,7 +47,8 @@ namespace Newtonsoft.Json.Tests.Documentation.Samples.Xml
         public void Example()
         {
             #region Usage
-            string json = @"{
+            string json =
+                @"{
               '@Id': 1,
               'Email': 'james@example.com',
               'Active': true,
@@ -79,7 +80,8 @@ namespace Newtonsoft.Json.Tests.Documentation.Samples.Xml
             // </Root>
             #endregion
 
-            StringAssert.AreEqual(@"<Root Id=""1"">
+            StringAssert.AreEqual(
+                @"<Root Id=""1"">
   <Email>james@example.com</Email>
   <Active>true</Active>
   <CreatedDate>2013-01-20T00:00:00Z</CreatedDate>
@@ -89,7 +91,9 @@ namespace Newtonsoft.Json.Tests.Documentation.Samples.Xml
     <Name>Software Developers</Name>
     <Description>Creators of fine software products and services.</Description>
   </Team>
-</Root>", node.ToString());
+</Root>",
+                node.ToString()
+            );
         }
     }
 }

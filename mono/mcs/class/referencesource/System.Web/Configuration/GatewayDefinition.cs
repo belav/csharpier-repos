@@ -4,11 +4,13 @@
 // </copyright>
 //------------------------------------------------------------------------------
 
-namespace System.Web.Configuration {
+namespace System.Web.Configuration
+{
     using System.Xml;
 
-    internal class GatewayDefinition : BrowserDefinition {
-        internal GatewayDefinition(XmlNode node) : base(node) {
-        }
+    internal class GatewayDefinition : BrowserDefinition
+    {
+        internal GatewayDefinition(XmlNode node)
+            : base(node) { }
     }
 }

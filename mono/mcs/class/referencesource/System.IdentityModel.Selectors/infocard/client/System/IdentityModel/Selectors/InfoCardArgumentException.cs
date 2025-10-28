@@ -10,7 +10,7 @@ namespace Microsoft.InfoCards
 
     //
     // Indicates an incorrect argument was passed to the system.
-    // 
+    //
 
     internal class InfoCardArgumentException : InfoCardBaseException
     {
@@ -20,25 +20,15 @@ namespace Microsoft.InfoCards
         const int HRESULT = (int)EventCode.E_ICARD_ARGUMENT;
 
         public InfoCardArgumentException()
-            : base(HRESULT)
-        {
-        }
-        public InfoCardArgumentException(string message)
-            : base(HRESULT, message)
-        {
-        }
+            : base(HRESULT) { }
 
+        public InfoCardArgumentException(string message)
+            : base(HRESULT, message) { }
 
         public InfoCardArgumentException(string message, Exception inner)
-            : base(HRESULT, message, inner)
-        {
-        }
+            : base(HRESULT, message, inner) { }
 
         protected InfoCardArgumentException(SerializationInfo si, StreamingContext sc)
-            : base(HRESULT, si, sc)
-        {
-        }
-
-
+            : base(HRESULT, si, sc) { }
     }
 }

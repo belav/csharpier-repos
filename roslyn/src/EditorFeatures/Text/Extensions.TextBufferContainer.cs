@@ -30,14 +30,24 @@ namespace Microsoft.CodeAnalysis.Text
                 Contract.ThrowIfNull(editorBuffer);
 
                 _weakEditorBuffer = new WeakReference<ITextBuffer>(editorBuffer);
-                editorBuffer.Properties.TryGetProperty(typeof(ITextBufferCloneService), out _textBufferCloneService);
-                _currentText = SnapshotSourceText.From(_textBufferCloneService, editorBuffer.CurrentSnapshot, this);
+                editorBuffer.Properties.TryGetProperty(
+                    typeof(ITextBufferCloneService),
+                    out _textBufferCloneService
+                );
+                _currentText = SnapshotSourceText.From(
+                    _textBufferCloneService,
+                    editorBuffer.CurrentSnapshot,
+                    this
+                );
             }
 
             /// <summary>
             /// A weak map of all Editor ITextBuffers and their associated SourceTextContainer
             /// </summary>
-            private static readonly ConditionalWeakTable<ITextBuffer, TextBufferContainer> s_textContainerMap = new();
+            private static readonly ConditionalWeakTable<
+                ITextBuffer,
+                TextBufferContainer
+            > s_textContainerMap = new();
 
             public static TextBufferContainer From(ITextBuffer buffer)
             {
@@ -46,11 +56,13 @@ namespace Microsoft.CodeAnalysis.Text
                     throw new ArgumentNullException(nameof(buffer));
                 }
 
-                return s_textContainerMap.GetValue(buffer, static buffer => new TextBufferContainer(buffer));
+                return s_textContainerMap.GetValue(
+                    buffer,
+                    static buffer => new TextBufferContainer(buffer)
+                );
             }
 
-            public ITextBuffer? TryFindEditorTextBuffer()
-                => _weakEditorBuffer.GetTarget();
+            public ITextBuffer? TryFindEditorTextBuffer() => _weakEditorBuffer.GetTarget();
 
             public override SourceText CurrentText
             {
@@ -78,7 +90,6 @@ namespace Microsoft.CodeAnalysis.Text
                         this.EtextChanged += value;
                     }
                 }
-
                 remove
                 {
                     lock (_gate)
@@ -110,7 +121,12 @@ namespace Microsoft.CodeAnalysis.Text
                 var newText = SnapshotSourceText.From(_textBufferCloneService, args.After);
                 _currentText = newText;
 
-                var changes = ImmutableArray.CreateRange(args.Changes.Select(c => new TextChangeRange(new TextSpan(c.OldSpan.Start, c.OldSpan.Length), c.NewLength)));
+                var changes = ImmutableArray.CreateRange(
+                    args.Changes.Select(c => new TextChangeRange(
+                        new TextSpan(c.OldSpan.Start, c.OldSpan.Length),
+                        c.NewLength
+                    ))
+                );
                 var eventArgs = new TextChangeEventArgs(oldText, newText, changes);
 
                 this.LastEventArgs = eventArgs;

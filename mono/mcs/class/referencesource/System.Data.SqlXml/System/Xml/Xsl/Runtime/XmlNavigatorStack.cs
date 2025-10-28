@@ -1,33 +1,34 @@
 //------------------------------------------------------------------------------
 // <copyright file="XmlNavigatorStack.cs" company="Microsoft">
 //     Copyright (c) Microsoft Corporation.  All rights reserved.
-// </copyright>                                                                
+// </copyright>
 // <owner current="true" primary="true">Microsoft</owner>
 //------------------------------------------------------------------------------
 using System;
+using System.Diagnostics;
 using System.Xml;
 using System.Xml.XPath;
-using System.Diagnostics;
 
-namespace System.Xml.Xsl.Runtime {
-
+namespace System.Xml.Xsl.Runtime
+{
     /// <summary>
     /// A dynamic stack of IXmlNavigators.
     /// </summary>
-    internal struct XmlNavigatorStack {
-        private XPathNavigator[] stkNav;    // Stack of XPathNavigators
-        private int sp;                     // Stack pointer (size of stack)
-
-    #if DEBUG
+    internal struct XmlNavigatorStack
+    {
+        private XPathNavigator[] stkNav; // Stack of XPathNavigators
+        private int sp; // Stack pointer (size of stack)
+#if DEBUG
         private const int InitialStackSize = 2;
-    #else
+#else
         private const int InitialStackSize = 8;
-    #endif
+#endif
 
         /// <summary>
         /// Push a navigator onto the stack
         /// </summary>
-        public void Push(XPathNavigator nav) {
+        public void Push(XPathNavigator nav)
+        {
             if (this.stkNav == null)
             {
                 this.stkNav = new XPathNavigator[InitialStackSize];
@@ -49,7 +50,8 @@ namespace System.Xml.Xsl.Runtime {
         /// <summary>
         /// Pop the topmost navigator and return it
         /// </summary>
-        public XPathNavigator Pop() {
+        public XPathNavigator Pop()
+        {
             Debug.Assert(!IsEmpty);
             return this.stkNav[--this.sp];
         }
@@ -57,7 +59,8 @@ namespace System.Xml.Xsl.Runtime {
         /// <summary>
         /// Returns the navigator at the top of the stack without adjusting the stack pointer
         /// </summary>
-        public XPathNavigator Peek() {
+        public XPathNavigator Peek()
+        {
             Debug.Assert(!IsEmpty);
             return this.stkNav[this.sp - 1];
         }
@@ -65,14 +68,16 @@ namespace System.Xml.Xsl.Runtime {
         /// <summary>
         /// Remove all navigators from the stack
         /// </summary>
-        public void Reset() {
+        public void Reset()
+        {
             this.sp = 0;
         }
 
         /// <summary>
         /// Returns true if there are no navigators in the stack
         /// </summary>
-        public bool IsEmpty {
+        public bool IsEmpty
+        {
             get { return this.sp == 0; }
         }
     }

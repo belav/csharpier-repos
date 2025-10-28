@@ -41,7 +41,8 @@ namespace Microsoft.CodeAnalysis.Classification
             ClassificationOptions options,
             IVirtualCharService virtualCharService,
             SegmentedList<ClassifiedSpan> result,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
             SolutionServices = solutionServices;
             Project = project;
@@ -53,7 +54,7 @@ namespace Microsoft.CodeAnalysis.Classification
             CancellationToken = cancellationToken;
         }
 
-        public void AddClassification(string classificationType, TextSpan span)
-            => _result.Add(new ClassifiedSpan(classificationType, span));
+        public void AddClassification(string classificationType, TextSpan span) =>
+            _result.Add(new ClassifiedSpan(classificationType, span));
     }
 }

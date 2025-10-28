@@ -11,10 +11,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -31,21 +31,18 @@ using System.ServiceModel.Channels;
 
 namespace System.ServiceModel.Description
 {
-	[MonoTODO]
-	public class WebScriptEndpoint : WebServiceEndpoint
-	{
-		public WebScriptEndpoint (ContractDescription contract)
-			: this (contract, null)
-		{
-		}
-		
-		public WebScriptEndpoint (ContractDescription contract, EndpointAddress address)
-			: base (contract, address)
-		{
-		}
+    [MonoTODO]
+    public class WebScriptEndpoint : WebServiceEndpoint
+    {
+        public WebScriptEndpoint(ContractDescription contract)
+            : this(contract, null) { }
 
-		protected override Type WebEndpointType {
-			get { throw new NotImplementedException (); }
-		}
-	}
+        public WebScriptEndpoint(ContractDescription contract, EndpointAddress address)
+            : base(contract, address) { }
+
+        protected override Type WebEndpointType
+        {
+            get { throw new NotImplementedException(); }
+        }
+    }
 }

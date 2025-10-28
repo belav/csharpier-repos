@@ -3,8 +3,11 @@
 
 namespace System.Runtime.CompilerServices;
 
-[AttributeUsage(AttributeTargets.Class | AttributeTargets.Struct,
-                AllowMultiple=false, Inherited=false)]
+[AttributeUsage(
+    AttributeTargets.Class | AttributeTargets.Struct,
+    AllowMultiple = false,
+    Inherited = false
+)]
 public class MetadataUpdateOriginalTypeAttribute : Attribute
 {
     /// <summary> This attribute is emitted by Roslyn when a type that is marked with (or derives
@@ -18,6 +21,7 @@ public class MetadataUpdateOriginalTypeAttribute : Attribute
     ///
     /// <param name="originalType">The original type that was updated</param>
     public MetadataUpdateOriginalTypeAttribute(Type originalType) => OriginalType = originalType;
+
     /// Gets the original version of the type that this attribtue is attached to.
     public Type OriginalType { get; }
 }

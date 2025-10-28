@@ -16,19 +16,25 @@ namespace Microsoft.CodeAnalysis.RemoveRedundantEquality
         private readonly ISyntaxFacts _syntaxFacts;
 
         protected AbstractRemoveRedundantEqualityDiagnosticAnalyzer(ISyntaxFacts syntaxFacts)
-            : base(IDEDiagnosticIds.RemoveRedundantEqualityDiagnosticId,
-                   EnforceOnBuildValues.RemoveRedundantEquality,
-                   option: null,
-                   new LocalizableResourceString(nameof(AnalyzersResources.Remove_redundant_equality), AnalyzersResources.ResourceManager, typeof(AnalyzersResources)))
+            : base(
+                IDEDiagnosticIds.RemoveRedundantEqualityDiagnosticId,
+                EnforceOnBuildValues.RemoveRedundantEquality,
+                option: null,
+                new LocalizableResourceString(
+                    nameof(AnalyzersResources.Remove_redundant_equality),
+                    AnalyzersResources.ResourceManager,
+                    typeof(AnalyzersResources)
+                )
+            )
         {
             _syntaxFacts = syntaxFacts;
         }
 
-        public override DiagnosticAnalyzerCategory GetAnalyzerCategory()
-            => DiagnosticAnalyzerCategory.SemanticSpanAnalysis;
+        public override DiagnosticAnalyzerCategory GetAnalyzerCategory() =>
+            DiagnosticAnalyzerCategory.SemanticSpanAnalysis;
 
-        protected override void InitializeWorker(AnalysisContext context)
-            => context.RegisterOperationAction(AnalyzeBinaryOperator, OperationKind.BinaryOperator);
+        protected override void InitializeWorker(AnalysisContext context) =>
+            context.RegisterOperationAction(AnalyzeBinaryOperator, OperationKind.BinaryOperator);
 
         private void AnalyzeBinaryOperator(OperationAnalysisContext context)
         {
@@ -42,7 +48,10 @@ namespace Microsoft.CodeAnalysis.RemoveRedundantEquality
                 return;
             }
 
-            if (operation.OperatorKind is not (BinaryOperatorKind.Equals or BinaryOperatorKind.NotEquals))
+            if (
+                operation.OperatorKind
+                is not (BinaryOperatorKind.Equals or BinaryOperatorKind.NotEquals)
+            )
             {
                 return;
             }
@@ -60,30 +69,47 @@ namespace Microsoft.CodeAnalysis.RemoveRedundantEquality
                 return;
             }
 
-            if (rightOperand.Type.SpecialType != SpecialType.System_Boolean ||
-                leftOperand.Type.SpecialType != SpecialType.System_Boolean)
+            if (
+                rightOperand.Type.SpecialType != SpecialType.System_Boolean
+                || leftOperand.Type.SpecialType != SpecialType.System_Boolean
+            )
             {
                 return;
             }
 
             var isOperatorEquals = operation.OperatorKind == BinaryOperatorKind.Equals;
-            _syntaxFacts.GetPartsOfBinaryExpression(operation.Syntax, out _, out var operatorToken, out _);
+            _syntaxFacts.GetPartsOfBinaryExpression(
+                operation.Syntax,
+                out _,
+                out var operatorToken,
+                out _
+            );
             var properties = ImmutableDictionary.CreateBuilder<string, string?>();
             if (TryGetLiteralValue(rightOperand) == isOperatorEquals)
             {
-                properties.Add(RedundantEqualityConstants.RedundantSide, RedundantEqualityConstants.Right);
+                properties.Add(
+                    RedundantEqualityConstants.RedundantSide,
+                    RedundantEqualityConstants.Right
+                );
             }
             else if (TryGetLiteralValue(leftOperand) == isOperatorEquals)
             {
-                properties.Add(RedundantEqualityConstants.RedundantSide, RedundantEqualityConstants.Left);
+                properties.Add(
+                    RedundantEqualityConstants.RedundantSide,
+                    RedundantEqualityConstants.Left
+                );
             }
 
             if (properties.Count == 1)
             {
-                context.ReportDiagnostic(Diagnostic.Create(Descriptor,
-                    operatorToken.GetLocation(),
-                    additionalLocations: new[] { operation.Syntax.GetLocation() },
-                    properties: properties.ToImmutable()));
+                context.ReportDiagnostic(
+                    Diagnostic.Create(
+                        Descriptor,
+                        operatorToken.GetLocation(),
+                        additionalLocations: new[] { operation.Syntax.GetLocation() },
+                        properties: properties.ToImmutable()
+                    )
+                );
             }
 
             return;
@@ -93,8 +119,11 @@ namespace Microsoft.CodeAnalysis.RemoveRedundantEquality
                 // Make sure we only simplify literals to avoid changing
                 // something like the following example:
                 // const bool Activated = true; ... if (state == Activated)
-                if (operand.ConstantValue.HasValue && operand.Kind == OperationKind.Literal &&
-                    operand.ConstantValue.Value is bool constValue)
+                if (
+                    operand.ConstantValue.HasValue
+                    && operand.Kind == OperationKind.Literal
+                    && operand.ConstantValue.Value is bool constValue
+                )
                 {
                     return constValue;
                 }

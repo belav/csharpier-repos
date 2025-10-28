@@ -27,7 +27,8 @@ namespace Microsoft.CodeAnalysis.Formatting
         public AbstractAggregatedFormattingResult(
             SyntaxNode node,
             IList<AbstractFormattingResult> formattingResults,
-            TextSpanIntervalTree? formattingSpans)
+            TextSpanIntervalTree? formattingSpans
+        )
         {
             Contract.ThrowIfNull(node);
             Contract.ThrowIfNull(formattingResults);
@@ -43,30 +44,33 @@ namespace Microsoft.CodeAnalysis.Formatting
         /// <summary>
         /// rewrite the node with the given trivia information in the map
         /// </summary>
-        protected abstract SyntaxNode Rewriter(Dictionary<ValueTuple<SyntaxToken, SyntaxToken>, TriviaData> changeMap, CancellationToken cancellationToken);
+        protected abstract SyntaxNode Rewriter(
+            Dictionary<ValueTuple<SyntaxToken, SyntaxToken>, TriviaData> changeMap,
+            CancellationToken cancellationToken
+        );
 
-        protected TextSpanIntervalTree GetFormattingSpans()
-            => _formattingSpans ?? new TextSpanIntervalTree(_formattingResults.Select(r => r.FormattedSpan));
+        protected TextSpanIntervalTree GetFormattingSpans() =>
+            _formattingSpans
+            ?? new TextSpanIntervalTree(_formattingResults.Select(r => r.FormattedSpan));
 
         #region IFormattingResult implementation
 
         public bool ContainsChanges
         {
-            get
-            {
-                return this.GetTextChanges(CancellationToken.None).Count > 0;
-            }
+            get { return this.GetTextChanges(CancellationToken.None).Count > 0; }
         }
 
-        public IList<TextChange> GetTextChanges(CancellationToken cancellationToken)
-            => _lazyTextChanges.GetValue(cancellationToken);
+        public IList<TextChange> GetTextChanges(CancellationToken cancellationToken) =>
+            _lazyTextChanges.GetValue(cancellationToken);
 
-        public SyntaxNode GetFormattedRoot(CancellationToken cancellationToken)
-            => _lazyNode.GetValue(cancellationToken);
+        public SyntaxNode GetFormattedRoot(CancellationToken cancellationToken) =>
+            _lazyNode.GetValue(cancellationToken);
 
         private IList<TextChange> CreateTextChanges(CancellationToken cancellationToken)
         {
-            using (Logger.LogBlock(FunctionId.Formatting_AggregateCreateTextChanges, cancellationToken))
+            using (
+                Logger.LogBlock(FunctionId.Formatting_AggregateCreateTextChanges, cancellationToken)
+            )
             {
                 // quick check
                 var changes = CreateTextChangesWorker(cancellationToken);
@@ -74,7 +78,9 @@ namespace Microsoft.CodeAnalysis.Formatting
                 // formatted spans and formatting spans are different, filter returns to formatting span
                 return _formattingSpans == null
                     ? changes
-                    : changes.Where(s => _formattingSpans.HasIntervalThatIntersectsWith(s.Span)).ToList();
+                    : changes
+                        .Where(s => _formattingSpans.HasIntervalThatIntersectsWith(s.Span))
+                        .ToList();
             }
         }
 
@@ -98,12 +104,21 @@ namespace Microsoft.CodeAnalysis.Formatting
 
         private SyntaxNode CreateFormattedRoot(CancellationToken cancellationToken)
         {
-            using (Logger.LogBlock(FunctionId.Formatting_AggregateCreateFormattedRoot, cancellationToken))
+            using (
+                Logger.LogBlock(
+                    FunctionId.Formatting_AggregateCreateFormattedRoot,
+                    cancellationToken
+                )
+            )
             {
                 // create a map
                 var map = new Dictionary<ValueTuple<SyntaxToken, SyntaxToken>, TriviaData>();
 
-                _formattingResults.Do(result => result.GetChanges(cancellationToken).Do(change => map.Add(change.Item1, change.Item2)));
+                _formattingResults.Do(result =>
+                    result
+                        .GetChanges(cancellationToken)
+                        .Do(change => map.Add(change.Item1, change.Item2))
+                );
 
                 return Rewriter(map, cancellationToken);
             }

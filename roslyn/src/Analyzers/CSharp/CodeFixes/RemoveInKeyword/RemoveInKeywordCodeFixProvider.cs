@@ -19,25 +19,32 @@ using Microsoft.CodeAnalysis.Shared.Extensions;
 
 namespace Microsoft.CodeAnalysis.CSharp.RemoveInKeyword
 {
-    [ExportCodeFixProvider(LanguageNames.CSharp, Name = PredefinedCodeFixProviderNames.RemoveIn), Shared]
+    [
+        ExportCodeFixProvider(LanguageNames.CSharp, Name = PredefinedCodeFixProviderNames.RemoveIn),
+        Shared
+    ]
     internal class RemoveInKeywordCodeFixProvider : CodeFixProvider
     {
         private const string CS1615 = nameof(CS1615); // Argument 1 may not be passed with the 'in' keyword
 
         [ImportingConstructor]
-        [SuppressMessage("RoslynDiagnosticsReliability", "RS0033:Importing constructor should be [Obsolete]", Justification = "Used in test code: https://github.com/dotnet/roslyn/issues/42814")]
-        public RemoveInKeywordCodeFixProvider()
-        {
-        }
+        [SuppressMessage(
+            "RoslynDiagnosticsReliability",
+            "RS0033:Importing constructor should be [Obsolete]",
+            Justification = "Used in test code: https://github.com/dotnet/roslyn/issues/42814"
+        )]
+        public RemoveInKeywordCodeFixProvider() { }
 
-        public override FixAllProvider GetFixAllProvider()
-            => WellKnownFixAllProviders.BatchFixer;
+        public override FixAllProvider GetFixAllProvider() => WellKnownFixAllProviders.BatchFixer;
 
-        public override ImmutableArray<string> FixableDiagnosticIds => ImmutableArray.Create(CS1615);
+        public override ImmutableArray<string> FixableDiagnosticIds =>
+            ImmutableArray.Create(CS1615);
 
         public override async Task RegisterCodeFixesAsync(CodeFixContext context)
         {
-            var root = await context.Document.GetRequiredSyntaxRootAsync(context.CancellationToken).ConfigureAwait(false);
+            var root = await context
+                .Document.GetRequiredSyntaxRootAsync(context.CancellationToken)
+                .ConfigureAwait(false);
 
             var diagnostic = context.Diagnostics.First();
             var diagnosticSpan = diagnostic.Location.SourceSpan;
@@ -51,23 +58,32 @@ namespace Microsoft.CodeAnalysis.CSharp.RemoveInKeyword
             context.RegisterCodeFix(
                 CodeAction.Create(
                     CSharpCodeFixesResources.Remove_in_keyword,
-                    cancellationToken => FixAsync(context.Document, argumentSyntax, cancellationToken),
-                    nameof(CSharpCodeFixesResources.Remove_in_keyword)),
-                context.Diagnostics);
+                    cancellationToken =>
+                        FixAsync(context.Document, argumentSyntax, cancellationToken),
+                    nameof(CSharpCodeFixesResources.Remove_in_keyword)
+                ),
+                context.Diagnostics
+            );
         }
 
         private static async Task<Document> FixAsync(
             Document document,
             ArgumentSyntax argumentSyntax,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
-            var root = await document.GetRequiredSyntaxRootAsync(cancellationToken).ConfigureAwait(false);
+            var root = await document
+                .GetRequiredSyntaxRootAsync(cancellationToken)
+                .ConfigureAwait(false);
             var generator = document.GetRequiredLanguageService<SyntaxGenerator>();
             var syntaxFacts = document.GetRequiredLanguageService<ISyntaxFactsService>();
 
-            return document.WithSyntaxRoot(root.ReplaceNode(
-                argumentSyntax,
-                generator.Argument(syntaxFacts.GetExpressionOfArgument(argumentSyntax))));
+            return document.WithSyntaxRoot(
+                root.ReplaceNode(
+                    argumentSyntax,
+                    generator.Argument(syntaxFacts.GetExpressionOfArgument(argumentSyntax))
+                )
+            );
         }
     }
 }

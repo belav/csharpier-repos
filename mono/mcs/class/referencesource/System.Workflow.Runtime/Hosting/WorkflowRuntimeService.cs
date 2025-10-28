@@ -2,33 +2,32 @@
 
 using System;
 using System.Globalization;
-
 using System.Workflow.Runtime;
 
 namespace System.Workflow.Runtime.Hosting
 {
-    [Obsolete("The System.Workflow.* types are deprecated.  Instead, please use the new types from System.Activities.*")]
+    [Obsolete(
+        "The System.Workflow.* types are deprecated.  Instead, please use the new types from System.Activities.*"
+    )]
     public enum WorkflowRuntimeServiceState
     {
         Stopped,
         Starting,
         Started,
-        Stopping
+        Stopping,
     }
 
-    [Obsolete("The System.Workflow.* types are deprecated.  Instead, please use the new types from System.Activities.*")]
-    abstract public class WorkflowRuntimeService
+    [Obsolete(
+        "The System.Workflow.* types are deprecated.  Instead, please use the new types from System.Activities.*"
+    )]
+    public abstract class WorkflowRuntimeService
     {
         private WorkflowRuntime _runtime;
         private WorkflowRuntimeServiceState state = WorkflowRuntimeServiceState.Stopped;
 
         protected WorkflowRuntime Runtime
         {
-            get
-            {
-                return _runtime;
-            }
-
+            get { return _runtime; }
         }
 
         internal void SetRuntime(WorkflowRuntime runtime)
@@ -61,31 +60,53 @@ namespace System.Workflow.Runtime.Hosting
             get { return state; }
         }
 
-        virtual internal protected void Start()
+        protected internal virtual void Start()
         {
             if (_runtime == null)
-                throw new InvalidOperationException(String.Format(CultureInfo.CurrentCulture, ExecutionStringManager.ServiceNotAddedToRuntime, this.GetType().Name));
+                throw new InvalidOperationException(
+                    String.Format(
+                        CultureInfo.CurrentCulture,
+                        ExecutionStringManager.ServiceNotAddedToRuntime,
+                        this.GetType().Name
+                    )
+                );
             if (state.Equals(WorkflowRuntimeServiceState.Started))
-                throw new InvalidOperationException(String.Format(CultureInfo.CurrentCulture, ExecutionStringManager.ServiceAlreadyStarted, this.GetType().Name));
+                throw new InvalidOperationException(
+                    String.Format(
+                        CultureInfo.CurrentCulture,
+                        ExecutionStringManager.ServiceAlreadyStarted,
+                        this.GetType().Name
+                    )
+                );
 
             state = WorkflowRuntimeServiceState.Starting;
         }
 
-        virtual internal protected void Stop()
+        protected internal virtual void Stop()
         {
             if (_runtime == null)
-                throw new InvalidOperationException(String.Format(CultureInfo.CurrentCulture, ExecutionStringManager.ServiceNotAddedToRuntime, this.GetType().Name));
+                throw new InvalidOperationException(
+                    String.Format(
+                        CultureInfo.CurrentCulture,
+                        ExecutionStringManager.ServiceNotAddedToRuntime,
+                        this.GetType().Name
+                    )
+                );
             if (state.Equals(WorkflowRuntimeServiceState.Stopped))
-                throw new InvalidOperationException(String.Format(CultureInfo.CurrentCulture, ExecutionStringManager.ServiceNotStarted, this.GetType().Name));
+                throw new InvalidOperationException(
+                    String.Format(
+                        CultureInfo.CurrentCulture,
+                        ExecutionStringManager.ServiceNotStarted,
+                        this.GetType().Name
+                    )
+                );
 
             state = WorkflowRuntimeServiceState.Stopping;
         }
 
-        virtual protected void OnStarted()
-        { }
+        protected virtual void OnStarted() { }
 
-        virtual protected void OnStopped()
-        { }
+        protected virtual void OnStopped() { }
 
         private void HandleStarted(object source, WorkflowRuntimeEventArgs e)
         {

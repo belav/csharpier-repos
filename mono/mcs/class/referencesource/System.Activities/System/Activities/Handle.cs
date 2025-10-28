@@ -23,18 +23,12 @@ namespace System.Activities
 
         public ActivityInstance Owner
         {
-            get
-            {
-                return this.owner;
-            }
+            get { return this.owner; }
         }
 
         public string ExecutionPropertyName
         {
-            get
-            {
-                return this.GetType().FullName;
-            }
+            get { return this.GetType().FullName; }
         }
 
         [DataMember(EmitDefaultValue = false, Name = "owner")]
@@ -52,23 +46,19 @@ namespace System.Activities
         }
 
         [DataMember(EmitDefaultValue = false)]
-        internal bool CanBeRemovedWithExecutingChildren
-        {
-            get;
-            set;
-        }
+        internal bool CanBeRemovedWithExecutingChildren { get; set; }
 
         internal bool IsInitialized
         {
-            get
-            {
-                return !this.isUninitialized;
-            }
+            get { return !this.isUninitialized; }
         }
 
         internal static string GetPropertyName(Type handleType)
         {
-            Fx.Assert(TypeHelper.AreTypesCompatible(handleType, typeof(Handle)), "must pass in a Handle-based type here");
+            Fx.Assert(
+                TypeHelper.AreTypesCompatible(handleType, typeof(Handle)),
+                "must pass in a Handle-based type here"
+            );
             return handleType.FullName;
         }
 
@@ -91,22 +81,18 @@ namespace System.Activities
             this.isUninitialized = true;
         }
 
-        protected virtual void OnInitialize(HandleInitializationContext context)
-        {
-        }
+        protected virtual void OnInitialize(HandleInitializationContext context) { }
 
-        protected virtual void OnUninitialize(HandleInitializationContext context)
-        {
-        }
+        protected virtual void OnUninitialize(HandleInitializationContext context) { }
 
         protected void ThrowIfUninitialized()
         {
             if (this.isUninitialized)
             {
-                throw FxTrace.Exception.AsError(new InvalidOperationException(SR.HandleNotInitialized));
+                throw FxTrace.Exception.AsError(
+                    new InvalidOperationException(SR.HandleNotInitialized)
+                );
             }
         }
     }
 }
-
-

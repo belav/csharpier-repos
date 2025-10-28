@@ -1,5 +1,4 @@
 <Project Sdk="Microsoft.NET.Sdk">
-
   <PropertyGroup>
     <Description>ASP.NET Core basic middleware for rewriting URLs. Includes:
 * Support for custom URL rewrite rules

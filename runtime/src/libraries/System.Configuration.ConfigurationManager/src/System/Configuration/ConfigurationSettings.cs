@@ -9,16 +9,17 @@ namespace System.Configuration
     {
         internal ConfigurationSettings() { }
 
-        [Obsolete("ConfigurationSettings.AppSettings has been deprecated. Use System.Configuration.ConfigurationManager.AppSettings instead.")]
+        [Obsolete(
+            "ConfigurationSettings.AppSettings has been deprecated. Use System.Configuration.ConfigurationManager.AppSettings instead."
+        )]
         public static NameValueCollection AppSettings
         {
-            get
-            {
-                return ConfigurationManager.AppSettings;
-            }
+            get { return ConfigurationManager.AppSettings; }
         }
 
-        [Obsolete("ConfigurationSettings.GetConfig has been deprecated. Use System.Configuration.ConfigurationManager.GetSection instead.")]
+        [Obsolete(
+            "ConfigurationSettings.GetConfig has been deprecated. Use System.Configuration.ConfigurationManager.GetSection instead."
+        )]
         public static object GetConfig(string sectionName)
         {
             return ConfigurationManager.GetSection(sectionName);

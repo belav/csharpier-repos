@@ -45,7 +45,10 @@ namespace Microsoft.CodeAnalysis.UnitTests
                     throw ExceptionUtilities.Unreachable();
                 }
 
-                Assert.True(false, "Should not get here because an exception should be thrown before this point.");
+                Assert.True(
+                    false,
+                    "Should not get here because an exception should be thrown before this point."
+                );
             }
             catch (OperationCanceledException)
             {

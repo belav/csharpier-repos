@@ -5,19 +5,19 @@
 
 // https://silverlight.svn.codeplex.com/svn/Release/Silverlight4/Source/RiaClient.Tests/System.ComponentModel.DataAnnotations/FilterUIHintAttributeTest.cs
 
-
 using System;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
-
 using NUnit.Framework;
 
 namespace MonoTests.System.ComponentModel.DataAnnotations
 {
     [TestFixture]
-    public class FilterUIHintAttributeTest {
+    public class FilterUIHintAttributeTest
+    {
         [Test]
-        public void FilterUIHintAttribute_Simple_Ctors_Set_Properties() {
+        public void FilterUIHintAttribute_Simple_Ctors_Set_Properties()
+        {
             var attr = new FilterUIHintAttribute(null, null);
             Assert.IsNull(attr.FilterUIHint);
             Assert.IsNull(attr.PresentationLayer);
@@ -40,52 +40,70 @@ namespace MonoTests.System.ComponentModel.DataAnnotations
         }
 
         [Test]
-        public void ConstructorControlParameters() {
-            Assert.AreEqual(2, new FilterUIHintAttribute("", "", "a", 1, "b", 2).ControlParameters.Keys.Count);
+        public void ConstructorControlParameters()
+        {
+            Assert.AreEqual(
+                2,
+                new FilterUIHintAttribute("", "", "a", 1, "b", 2).ControlParameters.Keys.Count
+            );
         }
 
         [Test]
-        public void ConstructorControlParameters_NoParams() {
-            Assert.AreEqual(0, new FilterUIHintAttribute("", "", new object[0]).ControlParameters.Keys.Count);
-            Assert.AreEqual(0, new FilterUIHintAttribute("", "", (object[])null).ControlParameters.Keys.Count);
+        public void ConstructorControlParameters_NoParams()
+        {
+            Assert.AreEqual(
+                0,
+                new FilterUIHintAttribute("", "", new object[0]).ControlParameters.Keys.Count
+            );
+            Assert.AreEqual(
+                0,
+                new FilterUIHintAttribute("", "", (object[])null).ControlParameters.Keys.Count
+            );
             Assert.AreEqual(0, new FilterUIHintAttribute("", "").ControlParameters.Keys.Count);
             Assert.AreEqual(0, new FilterUIHintAttribute("").ControlParameters.Keys.Count);
         }
 
         [Test]
-        [ExpectedException (typeof (InvalidOperationException))]
-        public void ConstructorControlParameters_UnevenNumber() {
+        [ExpectedException(typeof(InvalidOperationException))]
+        public void ConstructorControlParameters_UnevenNumber()
+        {
             var attr = new FilterUIHintAttribute("", "", "");
-                var v = attr.ControlParameters;
+            var v = attr.ControlParameters;
         }
 
         [Test]
-        [ExpectedException (typeof (InvalidOperationException))]
-        public void ConstructorControlParameters_NonStringKey() {
+        [ExpectedException(typeof(InvalidOperationException))]
+        public void ConstructorControlParameters_NonStringKey()
+        {
             var attr = new FilterUIHintAttribute("", "", 1, "value");
-                var v = attr.ControlParameters;
+            var v = attr.ControlParameters;
         }
 
         [Test]
-        [ExpectedException (typeof (InvalidOperationException))]
-        public void ConstructorControlParameters_NullKey() {
+        [ExpectedException(typeof(InvalidOperationException))]
+        public void ConstructorControlParameters_NullKey()
+        {
             var attr = new FilterUIHintAttribute("", "", null, "value");
-                var v = attr.ControlParameters;
+            var v = attr.ControlParameters;
         }
 
         [Test]
-        [ExpectedException (typeof (InvalidOperationException))]
-        public void ConstructorControlParameters_DuplicateKey() {
+        [ExpectedException(typeof(InvalidOperationException))]
+        public void ConstructorControlParameters_DuplicateKey()
+        {
             var attr = new FilterUIHintAttribute("", "", "key", "value1", "key", "value2");
-                var v = attr.ControlParameters;
+            var v = attr.ControlParameters;
         }
 
 #if !SILVERLIGHT
         [Test]
-        public void TypeId_ReturnsDifferentValuesForDifferentInstances() {
-            Assert.AreNotEqual(new FilterUIHintAttribute("foo").TypeId, new FilterUIHintAttribute("bar").TypeId);
+        public void TypeId_ReturnsDifferentValuesForDifferentInstances()
+        {
+            Assert.AreNotEqual(
+                new FilterUIHintAttribute("foo").TypeId,
+                new FilterUIHintAttribute("bar").TypeId
+            );
         }
 #endif
     }
 }
-
