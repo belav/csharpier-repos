@@ -77,9 +77,10 @@ namespace Microsoft.CodeAnalysis.Interactive
         )
         {
             Debug.Assert(
-                languageInfo.InteractiveResponseFileName.IndexOfAny(
-                    [Path.DirectorySeparatorChar, Path.AltDirectorySeparatorChar]
-                ) == -1
+                languageInfo.InteractiveResponseFileName.IndexOfAny([
+                    Path.DirectorySeparatorChar,
+                    Path.AltDirectorySeparatorChar,
+                ]) == -1
             );
 
             _threadingContext = threadingContext;

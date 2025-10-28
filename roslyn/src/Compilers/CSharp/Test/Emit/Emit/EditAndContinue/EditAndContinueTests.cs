@@ -973,27 +973,25 @@ class Bad : Bad
                         """,
                     validator: g =>
                     {
-                        g.VerifyCustomAttributes(
-                            [
-                                new CustomAttributeRow(
-                                    Handle(1, TableIndex.Assembly),
-                                    Handle(1, TableIndex.MemberRef)
-                                ),
-                                new CustomAttributeRow(
-                                    Handle(1, TableIndex.Assembly),
-                                    Handle(2, TableIndex.MemberRef)
-                                ),
-                                new CustomAttributeRow(
-                                    Handle(1, TableIndex.Assembly),
-                                    Handle(3, TableIndex.MemberRef)
-                                ),
-                                // F:
-                                new CustomAttributeRow(
-                                    Handle(7, TableIndex.MethodDef),
-                                    Handle(1, TableIndex.MethodDef)
-                                ),
-                            ]
-                        );
+                        g.VerifyCustomAttributes([
+                            new CustomAttributeRow(
+                                Handle(1, TableIndex.Assembly),
+                                Handle(1, TableIndex.MemberRef)
+                            ),
+                            new CustomAttributeRow(
+                                Handle(1, TableIndex.Assembly),
+                                Handle(2, TableIndex.MemberRef)
+                            ),
+                            new CustomAttributeRow(
+                                Handle(1, TableIndex.Assembly),
+                                Handle(3, TableIndex.MemberRef)
+                            ),
+                            // F:
+                            new CustomAttributeRow(
+                                Handle(7, TableIndex.MethodDef),
+                                Handle(1, TableIndex.MethodDef)
+                            ),
+                        ]);
                     }
                 )
                 .AddGeneration(
@@ -1008,29 +1006,22 @@ class Bad : Bad
                     edits: new[] { Edit(SemanticEditKind.Update, c => c.GetMember("C.F")) },
                     validator: g =>
                     {
-                        g.VerifyEncLogDefinitions(
-                            [
-                                Row(7, TableIndex.MethodDef, EditAndContinueOperation.Default),
-                                Row(
-                                    4,
-                                    TableIndex.CustomAttribute,
-                                    EditAndContinueOperation.Default
-                                ), // Row 4, so updating existing CustomAttribute
-                            ]
-                        );
+                        g.VerifyEncLogDefinitions([
+                            Row(7, TableIndex.MethodDef, EditAndContinueOperation.Default),
+                            Row(4, TableIndex.CustomAttribute, EditAndContinueOperation.Default), // Row 4, so updating existing CustomAttribute
+                        ]);
 
-                        g.VerifyEncMapDefinitions(
-                            [Handle(7, TableIndex.MethodDef), Handle(4, TableIndex.CustomAttribute)]
-                        );
+                        g.VerifyEncMapDefinitions([
+                            Handle(7, TableIndex.MethodDef),
+                            Handle(4, TableIndex.CustomAttribute),
+                        ]);
 
-                        g.VerifyCustomAttributes(
-                            [
-                                new CustomAttributeRow(
-                                    Handle(7, TableIndex.MethodDef),
-                                    Handle(2, TableIndex.MethodDef)
-                                ),
-                            ]
-                        );
+                        g.VerifyCustomAttributes([
+                            new CustomAttributeRow(
+                                Handle(7, TableIndex.MethodDef),
+                                Handle(2, TableIndex.MethodDef)
+                            ),
+                        ]);
                     }
                 )
                 // Add attribute to method, and to class
@@ -1054,54 +1045,36 @@ class Bad : Bad
                         g.VerifyTypeDefNames("C");
                         g.VerifyMethodDefNames("F");
 
-                        g.VerifyEncLogDefinitions(
-                            [
-                                Row(8, TableIndex.TypeDef, EditAndContinueOperation.Default),
-                                Row(7, TableIndex.MethodDef, EditAndContinueOperation.Default),
-                                Row(
-                                    4,
-                                    TableIndex.CustomAttribute,
-                                    EditAndContinueOperation.Default
-                                ), // updating the existing custom attribute
-                                Row(
-                                    5,
-                                    TableIndex.CustomAttribute,
-                                    EditAndContinueOperation.Default
-                                ), // adding a new CustomAttribute for method F
-                                Row(
-                                    6,
-                                    TableIndex.CustomAttribute,
-                                    EditAndContinueOperation.Default
-                                ), // adding a new CustomAttribute for type C
-                            ]
-                        );
+                        g.VerifyEncLogDefinitions([
+                            Row(8, TableIndex.TypeDef, EditAndContinueOperation.Default),
+                            Row(7, TableIndex.MethodDef, EditAndContinueOperation.Default),
+                            Row(4, TableIndex.CustomAttribute, EditAndContinueOperation.Default), // updating the existing custom attribute
+                            Row(5, TableIndex.CustomAttribute, EditAndContinueOperation.Default), // adding a new CustomAttribute for method F
+                            Row(6, TableIndex.CustomAttribute, EditAndContinueOperation.Default), // adding a new CustomAttribute for type C
+                        ]);
 
-                        g.VerifyEncMapDefinitions(
-                            [
-                                Handle(8, TableIndex.TypeDef),
+                        g.VerifyEncMapDefinitions([
+                            Handle(8, TableIndex.TypeDef),
+                            Handle(7, TableIndex.MethodDef),
+                            Handle(4, TableIndex.CustomAttribute),
+                            Handle(5, TableIndex.CustomAttribute),
+                            Handle(6, TableIndex.CustomAttribute),
+                        ]);
+
+                        g.VerifyCustomAttributes([
+                            new CustomAttributeRow(
                                 Handle(7, TableIndex.MethodDef),
-                                Handle(4, TableIndex.CustomAttribute),
-                                Handle(5, TableIndex.CustomAttribute),
-                                Handle(6, TableIndex.CustomAttribute),
-                            ]
-                        );
-
-                        g.VerifyCustomAttributes(
-                            [
-                                new CustomAttributeRow(
-                                    Handle(7, TableIndex.MethodDef),
-                                    Handle(3, TableIndex.MethodDef)
-                                ),
-                                new CustomAttributeRow(
-                                    Handle(7, TableIndex.MethodDef),
-                                    Handle(4, TableIndex.MethodDef)
-                                ),
-                                new CustomAttributeRow(
-                                    Handle(8, TableIndex.TypeDef),
-                                    Handle(5, TableIndex.MethodDef)
-                                ),
-                            ]
-                        );
+                                Handle(3, TableIndex.MethodDef)
+                            ),
+                            new CustomAttributeRow(
+                                Handle(7, TableIndex.MethodDef),
+                                Handle(4, TableIndex.MethodDef)
+                            ),
+                            new CustomAttributeRow(
+                                Handle(8, TableIndex.TypeDef),
+                                Handle(5, TableIndex.MethodDef)
+                            ),
+                        ]);
                     }
                 )
                 // Add attribute before existing attributes
@@ -1118,52 +1091,34 @@ class Bad : Bad
                     edits: new[] { Edit(SemanticEditKind.Update, c => c.GetMember("C.F")) },
                     validator: g =>
                     {
-                        g.VerifyEncLogDefinitions(
-                            [
-                                Row(7, TableIndex.MethodDef, EditAndContinueOperation.Default),
-                                Row(
-                                    4,
-                                    TableIndex.CustomAttribute,
-                                    EditAndContinueOperation.Default
-                                ), // updating the existing custom attribute
-                                Row(
-                                    5,
-                                    TableIndex.CustomAttribute,
-                                    EditAndContinueOperation.Default
-                                ), // updating a row that was new in Generation 2
-                                Row(
-                                    7,
-                                    TableIndex.CustomAttribute,
-                                    EditAndContinueOperation.Default
-                                ), // adding a new CustomAttribute, and skipping row 6 which is not for the method being emitted
-                            ]
-                        );
+                        g.VerifyEncLogDefinitions([
+                            Row(7, TableIndex.MethodDef, EditAndContinueOperation.Default),
+                            Row(4, TableIndex.CustomAttribute, EditAndContinueOperation.Default), // updating the existing custom attribute
+                            Row(5, TableIndex.CustomAttribute, EditAndContinueOperation.Default), // updating a row that was new in Generation 2
+                            Row(7, TableIndex.CustomAttribute, EditAndContinueOperation.Default), // adding a new CustomAttribute, and skipping row 6 which is not for the method being emitted
+                        ]);
 
-                        g.VerifyEncMapDefinitions(
-                            [
+                        g.VerifyEncMapDefinitions([
+                            Handle(7, TableIndex.MethodDef),
+                            Handle(4, TableIndex.CustomAttribute),
+                            Handle(5, TableIndex.CustomAttribute),
+                            Handle(7, TableIndex.CustomAttribute),
+                        ]);
+
+                        g.VerifyCustomAttributes([
+                            new CustomAttributeRow(
                                 Handle(7, TableIndex.MethodDef),
-                                Handle(4, TableIndex.CustomAttribute),
-                                Handle(5, TableIndex.CustomAttribute),
-                                Handle(7, TableIndex.CustomAttribute),
-                            ]
-                        );
-
-                        g.VerifyCustomAttributes(
-                            [
-                                new CustomAttributeRow(
-                                    Handle(7, TableIndex.MethodDef),
-                                    Handle(6, TableIndex.MethodDef)
-                                ),
-                                new CustomAttributeRow(
-                                    Handle(7, TableIndex.MethodDef),
-                                    Handle(3, TableIndex.MethodDef)
-                                ),
-                                new CustomAttributeRow(
-                                    Handle(7, TableIndex.MethodDef),
-                                    Handle(4, TableIndex.MethodDef)
-                                ),
-                            ]
-                        );
+                                Handle(6, TableIndex.MethodDef)
+                            ),
+                            new CustomAttributeRow(
+                                Handle(7, TableIndex.MethodDef),
+                                Handle(3, TableIndex.MethodDef)
+                            ),
+                            new CustomAttributeRow(
+                                Handle(7, TableIndex.MethodDef),
+                                Handle(4, TableIndex.MethodDef)
+                            ),
+                        ]);
                     }
                 )
                 .Verify();
@@ -1205,42 +1160,40 @@ class Bad : Bad
                         """,
                     validator: g =>
                     {
-                        g.VerifyCustomAttributes(
-                            [
-                                new CustomAttributeRow(
-                                    Handle(1, TableIndex.Assembly),
-                                    Handle(1, TableIndex.MemberRef)
-                                ),
-                                new CustomAttributeRow(
-                                    Handle(1, TableIndex.Assembly),
-                                    Handle(2, TableIndex.MemberRef)
-                                ),
-                                new CustomAttributeRow(
-                                    Handle(1, TableIndex.Assembly),
-                                    Handle(3, TableIndex.MemberRef)
-                                ),
-                                // F:
-                                new CustomAttributeRow(
-                                    Handle(8, TableIndex.MethodDef),
-                                    Handle(3, TableIndex.MethodDef)
-                                ),
-                                // C:
-                                new CustomAttributeRow(
-                                    Handle(9, TableIndex.TypeDef),
-                                    Handle(1, TableIndex.MethodDef)
-                                ),
-                                // G:
-                                new CustomAttributeRow(
-                                    Handle(10, TableIndex.MethodDef),
-                                    Handle(4, TableIndex.MethodDef)
-                                ),
-                                // D:
-                                new CustomAttributeRow(
-                                    Handle(10, TableIndex.TypeDef),
-                                    Handle(2, TableIndex.MethodDef)
-                                ),
-                            ]
-                        );
+                        g.VerifyCustomAttributes([
+                            new CustomAttributeRow(
+                                Handle(1, TableIndex.Assembly),
+                                Handle(1, TableIndex.MemberRef)
+                            ),
+                            new CustomAttributeRow(
+                                Handle(1, TableIndex.Assembly),
+                                Handle(2, TableIndex.MemberRef)
+                            ),
+                            new CustomAttributeRow(
+                                Handle(1, TableIndex.Assembly),
+                                Handle(3, TableIndex.MemberRef)
+                            ),
+                            // F:
+                            new CustomAttributeRow(
+                                Handle(8, TableIndex.MethodDef),
+                                Handle(3, TableIndex.MethodDef)
+                            ),
+                            // C:
+                            new CustomAttributeRow(
+                                Handle(9, TableIndex.TypeDef),
+                                Handle(1, TableIndex.MethodDef)
+                            ),
+                            // G:
+                            new CustomAttributeRow(
+                                Handle(10, TableIndex.MethodDef),
+                                Handle(4, TableIndex.MethodDef)
+                            ),
+                            // D:
+                            new CustomAttributeRow(
+                                Handle(10, TableIndex.TypeDef),
+                                Handle(2, TableIndex.MethodDef)
+                            ),
+                        ]);
                     }
                 )
                 .AddGeneration(
@@ -1266,74 +1219,48 @@ class Bad : Bad
                     },
                     validator: g =>
                     {
-                        g.VerifyEncMapDefinitions(
-                            [
+                        g.VerifyEncMapDefinitions([
+                            Handle(8, TableIndex.MethodDef),
+                            Handle(10, TableIndex.MethodDef),
+                            Handle(4, TableIndex.CustomAttribute),
+                            Handle(6, TableIndex.CustomAttribute),
+                            Handle(8, TableIndex.CustomAttribute),
+                            Handle(9, TableIndex.CustomAttribute),
+                            Handle(10, TableIndex.CustomAttribute),
+                        ]);
+
+                        g.VerifyEncLogDefinitions([
+                            Row(8, TableIndex.MethodDef, EditAndContinueOperation.Default),
+                            Row(10, TableIndex.MethodDef, EditAndContinueOperation.Default),
+                            Row(4, TableIndex.CustomAttribute, EditAndContinueOperation.Default), // update existing row
+                            Row(6, TableIndex.CustomAttribute, EditAndContinueOperation.Default), // update existing row
+                            Row(8, TableIndex.CustomAttribute, EditAndContinueOperation.Default), // add new row
+                            Row(9, TableIndex.CustomAttribute, EditAndContinueOperation.Default), // add new row
+                            Row(10, TableIndex.CustomAttribute, EditAndContinueOperation.Default), // add new row
+                        ]);
+
+                        g.VerifyCustomAttributes([
+                            new CustomAttributeRow(
                                 Handle(8, TableIndex.MethodDef),
+                                Handle(3, TableIndex.MethodDef)
+                            ),
+                            new CustomAttributeRow(
                                 Handle(10, TableIndex.MethodDef),
-                                Handle(4, TableIndex.CustomAttribute),
-                                Handle(6, TableIndex.CustomAttribute),
-                                Handle(8, TableIndex.CustomAttribute),
-                                Handle(9, TableIndex.CustomAttribute),
-                                Handle(10, TableIndex.CustomAttribute),
-                            ]
-                        );
-
-                        g.VerifyEncLogDefinitions(
-                            [
-                                Row(8, TableIndex.MethodDef, EditAndContinueOperation.Default),
-                                Row(10, TableIndex.MethodDef, EditAndContinueOperation.Default),
-                                Row(
-                                    4,
-                                    TableIndex.CustomAttribute,
-                                    EditAndContinueOperation.Default
-                                ), // update existing row
-                                Row(
-                                    6,
-                                    TableIndex.CustomAttribute,
-                                    EditAndContinueOperation.Default
-                                ), // update existing row
-                                Row(
-                                    8,
-                                    TableIndex.CustomAttribute,
-                                    EditAndContinueOperation.Default
-                                ), // add new row
-                                Row(
-                                    9,
-                                    TableIndex.CustomAttribute,
-                                    EditAndContinueOperation.Default
-                                ), // add new row
-                                Row(
-                                    10,
-                                    TableIndex.CustomAttribute,
-                                    EditAndContinueOperation.Default
-                                ), // add new row
-                            ]
-                        );
-
-                        g.VerifyCustomAttributes(
-                            [
-                                new CustomAttributeRow(
-                                    Handle(8, TableIndex.MethodDef),
-                                    Handle(3, TableIndex.MethodDef)
-                                ),
-                                new CustomAttributeRow(
-                                    Handle(10, TableIndex.MethodDef),
-                                    Handle(4, TableIndex.MethodDef)
-                                ),
-                                new CustomAttributeRow(
-                                    Handle(8, TableIndex.MethodDef),
-                                    Handle(5, TableIndex.MethodDef)
-                                ),
-                                new CustomAttributeRow(
-                                    Handle(8, TableIndex.MethodDef),
-                                    Handle(6, TableIndex.MethodDef)
-                                ),
-                                new CustomAttributeRow(
-                                    Handle(10, TableIndex.MethodDef),
-                                    Handle(7, TableIndex.MethodDef)
-                                ),
-                            ]
-                        );
+                                Handle(4, TableIndex.MethodDef)
+                            ),
+                            new CustomAttributeRow(
+                                Handle(8, TableIndex.MethodDef),
+                                Handle(5, TableIndex.MethodDef)
+                            ),
+                            new CustomAttributeRow(
+                                Handle(8, TableIndex.MethodDef),
+                                Handle(6, TableIndex.MethodDef)
+                            ),
+                            new CustomAttributeRow(
+                                Handle(10, TableIndex.MethodDef),
+                                Handle(7, TableIndex.MethodDef)
+                            ),
+                        ]);
                     }
                 )
                 .Verify();
@@ -1776,45 +1703,43 @@ class Bad : Bad
                         """,
                     validator: g =>
                     {
-                        g.VerifyCustomAttributes(
-                            [
-                                new CustomAttributeRow(
-                                    Handle(1, TableIndex.Assembly),
-                                    Handle(1, TableIndex.MemberRef)
-                                ),
-                                new CustomAttributeRow(
-                                    Handle(1, TableIndex.Assembly),
-                                    Handle(2, TableIndex.MemberRef)
-                                ),
-                                new CustomAttributeRow(
-                                    Handle(1, TableIndex.Assembly),
-                                    Handle(3, TableIndex.MemberRef)
-                                ),
-                                // F:
-                                new CustomAttributeRow(
-                                    Handle(9, TableIndex.MethodDef),
-                                    Handle(1, TableIndex.MethodDef)
-                                ), // Row 4
-                                new CustomAttributeRow(
-                                    Handle(9, TableIndex.MethodDef),
-                                    Handle(2, TableIndex.MethodDef)
-                                ), // Row 5
-                                // G:
-                                new CustomAttributeRow(
-                                    Handle(10, TableIndex.MethodDef),
-                                    Handle(3, TableIndex.MethodDef)
-                                ), // Row 6
-                                // H:
-                                new CustomAttributeRow(
-                                    Handle(11, TableIndex.MethodDef),
-                                    Handle(5, TableIndex.MethodDef)
-                                ), // Row 7
-                                new CustomAttributeRow(
-                                    Handle(11, TableIndex.MethodDef),
-                                    Handle(6, TableIndex.MethodDef)
-                                ), // Row 8
-                            ]
-                        );
+                        g.VerifyCustomAttributes([
+                            new CustomAttributeRow(
+                                Handle(1, TableIndex.Assembly),
+                                Handle(1, TableIndex.MemberRef)
+                            ),
+                            new CustomAttributeRow(
+                                Handle(1, TableIndex.Assembly),
+                                Handle(2, TableIndex.MemberRef)
+                            ),
+                            new CustomAttributeRow(
+                                Handle(1, TableIndex.Assembly),
+                                Handle(3, TableIndex.MemberRef)
+                            ),
+                            // F:
+                            new CustomAttributeRow(
+                                Handle(9, TableIndex.MethodDef),
+                                Handle(1, TableIndex.MethodDef)
+                            ), // Row 4
+                            new CustomAttributeRow(
+                                Handle(9, TableIndex.MethodDef),
+                                Handle(2, TableIndex.MethodDef)
+                            ), // Row 5
+                            // G:
+                            new CustomAttributeRow(
+                                Handle(10, TableIndex.MethodDef),
+                                Handle(3, TableIndex.MethodDef)
+                            ), // Row 6
+                            // H:
+                            new CustomAttributeRow(
+                                Handle(11, TableIndex.MethodDef),
+                                Handle(5, TableIndex.MethodDef)
+                            ), // Row 7
+                            new CustomAttributeRow(
+                                Handle(11, TableIndex.MethodDef),
+                                Handle(6, TableIndex.MethodDef)
+                            ), // Row 8
+                        ]);
                     }
                 )
                 .AddGeneration(
@@ -1835,86 +1760,56 @@ class Bad : Bad
                     },
                     validator: g =>
                     {
-                        g.VerifyEncLogDefinitions(
-                            [
-                                Row(9, TableIndex.MethodDef, EditAndContinueOperation.Default),
-                                Row(10, TableIndex.MethodDef, EditAndContinueOperation.Default),
-                                Row(11, TableIndex.MethodDef, EditAndContinueOperation.Default),
-                                Row(
-                                    4,
-                                    TableIndex.CustomAttribute,
-                                    EditAndContinueOperation.Default
-                                ),
-                                Row(
-                                    5,
-                                    TableIndex.CustomAttribute,
-                                    EditAndContinueOperation.Default
-                                ),
-                                Row(
-                                    6,
-                                    TableIndex.CustomAttribute,
-                                    EditAndContinueOperation.Default
-                                ),
-                                Row(
-                                    7,
-                                    TableIndex.CustomAttribute,
-                                    EditAndContinueOperation.Default
-                                ),
-                                Row(
-                                    8,
-                                    TableIndex.CustomAttribute,
-                                    EditAndContinueOperation.Default
-                                ),
-                                Row(
-                                    9,
-                                    TableIndex.CustomAttribute,
-                                    EditAndContinueOperation.Default
-                                ),
-                            ]
-                        );
+                        g.VerifyEncLogDefinitions([
+                            Row(9, TableIndex.MethodDef, EditAndContinueOperation.Default),
+                            Row(10, TableIndex.MethodDef, EditAndContinueOperation.Default),
+                            Row(11, TableIndex.MethodDef, EditAndContinueOperation.Default),
+                            Row(4, TableIndex.CustomAttribute, EditAndContinueOperation.Default),
+                            Row(5, TableIndex.CustomAttribute, EditAndContinueOperation.Default),
+                            Row(6, TableIndex.CustomAttribute, EditAndContinueOperation.Default),
+                            Row(7, TableIndex.CustomAttribute, EditAndContinueOperation.Default),
+                            Row(8, TableIndex.CustomAttribute, EditAndContinueOperation.Default),
+                            Row(9, TableIndex.CustomAttribute, EditAndContinueOperation.Default),
+                        ]);
 
-                        g.VerifyEncMapDefinitions(
-                            [
+                        g.VerifyEncMapDefinitions([
+                            Handle(9, TableIndex.MethodDef),
+                            Handle(10, TableIndex.MethodDef),
+                            Handle(11, TableIndex.MethodDef),
+                            Handle(4, TableIndex.CustomAttribute),
+                            Handle(5, TableIndex.CustomAttribute),
+                            Handle(6, TableIndex.CustomAttribute),
+                            Handle(7, TableIndex.CustomAttribute),
+                            Handle(8, TableIndex.CustomAttribute),
+                            Handle(9, TableIndex.CustomAttribute),
+                        ]);
+
+                        g.VerifyCustomAttributes([
+                            new CustomAttributeRow(
                                 Handle(9, TableIndex.MethodDef),
+                                Handle(2, TableIndex.MethodDef)
+                            ), // F [A1] -> [A2]
+                            new CustomAttributeRow(
+                                Handle(0, TableIndex.MethodDef),
+                                Handle(0, TableIndex.MemberRef)
+                            ), // F [A2] delete
+                            new CustomAttributeRow(
                                 Handle(10, TableIndex.MethodDef),
+                                Handle(4, TableIndex.MethodDef)
+                            ), // G [A3] -> [A4]
+                            new CustomAttributeRow(
                                 Handle(11, TableIndex.MethodDef),
-                                Handle(4, TableIndex.CustomAttribute),
-                                Handle(5, TableIndex.CustomAttribute),
-                                Handle(6, TableIndex.CustomAttribute),
-                                Handle(7, TableIndex.CustomAttribute),
-                                Handle(8, TableIndex.CustomAttribute),
-                                Handle(9, TableIndex.CustomAttribute),
-                            ]
-                        );
-
-                        g.VerifyCustomAttributes(
-                            [
-                                new CustomAttributeRow(
-                                    Handle(9, TableIndex.MethodDef),
-                                    Handle(2, TableIndex.MethodDef)
-                                ), // F [A1] -> [A2]
-                                new CustomAttributeRow(
-                                    Handle(0, TableIndex.MethodDef),
-                                    Handle(0, TableIndex.MemberRef)
-                                ), // F [A2] delete
-                                new CustomAttributeRow(
-                                    Handle(10, TableIndex.MethodDef),
-                                    Handle(4, TableIndex.MethodDef)
-                                ), // G [A3] -> [A4]
-                                new CustomAttributeRow(
-                                    Handle(11, TableIndex.MethodDef),
-                                    Handle(7, TableIndex.MethodDef)
-                                ), // H [A6] -> [A7]
-                                new CustomAttributeRow(
-                                    Handle(0, TableIndex.MethodDef),
-                                    Handle(0, TableIndex.MemberRef)
-                                ), // H [A5] delete
-                                new CustomAttributeRow(
-                                    Handle(10, TableIndex.MethodDef),
-                                    Handle(3, TableIndex.MethodDef)
-                                ), // G [A3] add with RowId 9
-                            ]
-                        );
+                                Handle(7, TableIndex.MethodDef)
+                            ), // H [A6] -> [A7]
+                            new CustomAttributeRow(
+                                Handle(0, TableIndex.MethodDef),
+                                Handle(0, TableIndex.MemberRef)
+                            ), // H [A5] delete
+                            new CustomAttributeRow(
+                                Handle(10, TableIndex.MethodDef),
+                                Handle(3, TableIndex.MethodDef)
+                            ), // G [A3] add with RowId 9
+                        ]);
                     }
                 )
                 .AddGeneration(
@@ -1934,84 +1829,54 @@ class Bad : Bad
                     },
                     validator: g =>
                     {
-                        g.VerifyEncLogDefinitions(
-                            [
-                                Row(10, TableIndex.MethodDef, EditAndContinueOperation.Default),
-                                Row(11, TableIndex.MethodDef, EditAndContinueOperation.Default),
-                                Row(
-                                    6,
-                                    TableIndex.CustomAttribute,
-                                    EditAndContinueOperation.Default
-                                ),
-                                Row(
-                                    7,
-                                    TableIndex.CustomAttribute,
-                                    EditAndContinueOperation.Default
-                                ),
-                                Row(
-                                    8,
-                                    TableIndex.CustomAttribute,
-                                    EditAndContinueOperation.Default
-                                ),
-                                Row(
-                                    9,
-                                    TableIndex.CustomAttribute,
-                                    EditAndContinueOperation.Default
-                                ),
-                                Row(
-                                    10,
-                                    TableIndex.CustomAttribute,
-                                    EditAndContinueOperation.Default
-                                ),
-                                Row(
-                                    11,
-                                    TableIndex.CustomAttribute,
-                                    EditAndContinueOperation.Default
-                                ),
-                            ]
-                        );
+                        g.VerifyEncLogDefinitions([
+                            Row(10, TableIndex.MethodDef, EditAndContinueOperation.Default),
+                            Row(11, TableIndex.MethodDef, EditAndContinueOperation.Default),
+                            Row(6, TableIndex.CustomAttribute, EditAndContinueOperation.Default),
+                            Row(7, TableIndex.CustomAttribute, EditAndContinueOperation.Default),
+                            Row(8, TableIndex.CustomAttribute, EditAndContinueOperation.Default),
+                            Row(9, TableIndex.CustomAttribute, EditAndContinueOperation.Default),
+                            Row(10, TableIndex.CustomAttribute, EditAndContinueOperation.Default),
+                            Row(11, TableIndex.CustomAttribute, EditAndContinueOperation.Default),
+                        ]);
 
-                        g.VerifyEncMapDefinitions(
-                            [
-                                Handle(10, TableIndex.MethodDef),
+                        g.VerifyEncMapDefinitions([
+                            Handle(10, TableIndex.MethodDef),
+                            Handle(11, TableIndex.MethodDef),
+                            Handle(6, TableIndex.CustomAttribute),
+                            Handle(7, TableIndex.CustomAttribute),
+                            Handle(8, TableIndex.CustomAttribute),
+                            Handle(9, TableIndex.CustomAttribute),
+                            Handle(10, TableIndex.CustomAttribute),
+                            Handle(11, TableIndex.CustomAttribute),
+                        ]);
+
+                        g.VerifyCustomAttributes([
+                            new CustomAttributeRow(
+                                Handle(0, TableIndex.MethodDef),
+                                Handle(0, TableIndex.MemberRef)
+                            ), // G [A4] delete
+                            new CustomAttributeRow(
                                 Handle(11, TableIndex.MethodDef),
-                                Handle(6, TableIndex.CustomAttribute),
-                                Handle(7, TableIndex.CustomAttribute),
-                                Handle(8, TableIndex.CustomAttribute),
-                                Handle(9, TableIndex.CustomAttribute),
-                                Handle(10, TableIndex.CustomAttribute),
-                                Handle(11, TableIndex.CustomAttribute),
-                            ]
-                        );
-
-                        g.VerifyCustomAttributes(
-                            [
-                                new CustomAttributeRow(
-                                    Handle(0, TableIndex.MethodDef),
-                                    Handle(0, TableIndex.MemberRef)
-                                ), // G [A4] delete
-                                new CustomAttributeRow(
-                                    Handle(11, TableIndex.MethodDef),
-                                    Handle(5, TableIndex.MethodDef)
-                                ), // H [A5]
-                                new CustomAttributeRow(
-                                    Handle(11, TableIndex.MethodDef),
-                                    Handle(6, TableIndex.MethodDef)
-                                ), // H [A6]
-                                new CustomAttributeRow(
-                                    Handle(0, TableIndex.MethodDef),
-                                    Handle(0, TableIndex.MemberRef)
-                                ), // G [A3] delete
-                                new CustomAttributeRow(
-                                    Handle(11, TableIndex.MethodDef),
-                                    Handle(7, TableIndex.MethodDef)
-                                ), // H [A7] add with RowId 10
-                                new CustomAttributeRow(
-                                    Handle(11, TableIndex.MethodDef),
-                                    Handle(8, TableIndex.MethodDef)
-                                ), // H [A8] add with RowId 11
-                            ]
-                        );
+                                Handle(5, TableIndex.MethodDef)
+                            ), // H [A5]
+                            new CustomAttributeRow(
+                                Handle(11, TableIndex.MethodDef),
+                                Handle(6, TableIndex.MethodDef)
+                            ), // H [A6]
+                            new CustomAttributeRow(
+                                Handle(0, TableIndex.MethodDef),
+                                Handle(0, TableIndex.MemberRef)
+                            ), // G [A3] delete
+                            new CustomAttributeRow(
+                                Handle(11, TableIndex.MethodDef),
+                                Handle(7, TableIndex.MethodDef)
+                            ), // H [A7] add with RowId 10
+                            new CustomAttributeRow(
+                                Handle(11, TableIndex.MethodDef),
+                                Handle(8, TableIndex.MethodDef)
+                            ), // H [A8] add with RowId 11
+                        ]);
                     }
                 )
                 .AddGeneration(
@@ -2027,62 +1892,40 @@ class Bad : Bad
                     edits: new[] { Edit(SemanticEditKind.Update, c => c.GetMember("C.H")) },
                     validator: g =>
                     {
-                        g.VerifyEncLogDefinitions(
-                            [
-                                Row(11, TableIndex.MethodDef, EditAndContinueOperation.Default),
-                                Row(
-                                    7,
-                                    TableIndex.CustomAttribute,
-                                    EditAndContinueOperation.Default
-                                ),
-                                Row(
-                                    8,
-                                    TableIndex.CustomAttribute,
-                                    EditAndContinueOperation.Default
-                                ),
-                                Row(
-                                    10,
-                                    TableIndex.CustomAttribute,
-                                    EditAndContinueOperation.Default
-                                ),
-                                Row(
-                                    11,
-                                    TableIndex.CustomAttribute,
-                                    EditAndContinueOperation.Default
-                                ),
-                            ]
-                        );
+                        g.VerifyEncLogDefinitions([
+                            Row(11, TableIndex.MethodDef, EditAndContinueOperation.Default),
+                            Row(7, TableIndex.CustomAttribute, EditAndContinueOperation.Default),
+                            Row(8, TableIndex.CustomAttribute, EditAndContinueOperation.Default),
+                            Row(10, TableIndex.CustomAttribute, EditAndContinueOperation.Default),
+                            Row(11, TableIndex.CustomAttribute, EditAndContinueOperation.Default),
+                        ]);
 
-                        g.VerifyEncMapDefinitions(
-                            [
-                                Handle(11, TableIndex.MethodDef),
-                                Handle(7, TableIndex.CustomAttribute),
-                                Handle(8, TableIndex.CustomAttribute),
-                                Handle(10, TableIndex.CustomAttribute),
-                                Handle(11, TableIndex.CustomAttribute),
-                            ]
-                        );
+                        g.VerifyEncMapDefinitions([
+                            Handle(11, TableIndex.MethodDef),
+                            Handle(7, TableIndex.CustomAttribute),
+                            Handle(8, TableIndex.CustomAttribute),
+                            Handle(10, TableIndex.CustomAttribute),
+                            Handle(11, TableIndex.CustomAttribute),
+                        ]);
 
-                        g.VerifyCustomAttributes(
-                            [
-                                new CustomAttributeRow(
-                                    Handle(0, TableIndex.MethodDef),
-                                    Handle(0, TableIndex.MemberRef)
-                                ), // H [A5] delete
-                                new CustomAttributeRow(
-                                    Handle(0, TableIndex.MethodDef),
-                                    Handle(0, TableIndex.MemberRef)
-                                ), // H [A6] delete
-                                new CustomAttributeRow(
-                                    Handle(0, TableIndex.MethodDef),
-                                    Handle(0, TableIndex.MemberRef)
-                                ), // H [A7] delete
-                                new CustomAttributeRow(
-                                    Handle(0, TableIndex.MethodDef),
-                                    Handle(0, TableIndex.MemberRef)
-                                ), // H [A8] delete
-                            ]
-                        );
+                        g.VerifyCustomAttributes([
+                            new CustomAttributeRow(
+                                Handle(0, TableIndex.MethodDef),
+                                Handle(0, TableIndex.MemberRef)
+                            ), // H [A5] delete
+                            new CustomAttributeRow(
+                                Handle(0, TableIndex.MethodDef),
+                                Handle(0, TableIndex.MemberRef)
+                            ), // H [A6] delete
+                            new CustomAttributeRow(
+                                Handle(0, TableIndex.MethodDef),
+                                Handle(0, TableIndex.MemberRef)
+                            ), // H [A7] delete
+                            new CustomAttributeRow(
+                                Handle(0, TableIndex.MethodDef),
+                                Handle(0, TableIndex.MemberRef)
+                            ), // H [A8] delete
+                        ]);
                     }
                 )
                 .Verify();
@@ -2111,22 +1954,20 @@ class Bad : Bad
                         """,
                     validator: g =>
                     {
-                        g.VerifyCustomAttributes(
-                            [
-                                new CustomAttributeRow(
-                                    Handle(1, TableIndex.Assembly),
-                                    Handle(1, TableIndex.MemberRef)
-                                ),
-                                new CustomAttributeRow(
-                                    Handle(1, TableIndex.Assembly),
-                                    Handle(2, TableIndex.MemberRef)
-                                ),
-                                new CustomAttributeRow(
-                                    Handle(1, TableIndex.Assembly),
-                                    Handle(3, TableIndex.MemberRef)
-                                ),
-                            ]
-                        );
+                        g.VerifyCustomAttributes([
+                            new CustomAttributeRow(
+                                Handle(1, TableIndex.Assembly),
+                                Handle(1, TableIndex.MemberRef)
+                            ),
+                            new CustomAttributeRow(
+                                Handle(1, TableIndex.Assembly),
+                                Handle(2, TableIndex.MemberRef)
+                            ),
+                            new CustomAttributeRow(
+                                Handle(1, TableIndex.Assembly),
+                                Handle(3, TableIndex.MemberRef)
+                            ),
+                        ]);
                     }
                 )
                 .AddGeneration( // add attribute to G
@@ -2141,29 +1982,22 @@ class Bad : Bad
                     edits: new[] { Edit(SemanticEditKind.Update, c => c.GetMember("C.G")) },
                     validator: g =>
                     {
-                        g.VerifyEncLogDefinitions(
-                            [
-                                Row(6, TableIndex.MethodDef, EditAndContinueOperation.Default),
-                                Row(
-                                    4,
-                                    TableIndex.CustomAttribute,
-                                    EditAndContinueOperation.Default
-                                ),
-                            ]
-                        );
+                        g.VerifyEncLogDefinitions([
+                            Row(6, TableIndex.MethodDef, EditAndContinueOperation.Default),
+                            Row(4, TableIndex.CustomAttribute, EditAndContinueOperation.Default),
+                        ]);
 
-                        g.VerifyEncMapDefinitions(
-                            [Handle(6, TableIndex.MethodDef), Handle(4, TableIndex.CustomAttribute)]
-                        );
+                        g.VerifyEncMapDefinitions([
+                            Handle(6, TableIndex.MethodDef),
+                            Handle(4, TableIndex.CustomAttribute),
+                        ]);
 
-                        g.VerifyCustomAttributes(
-                            [
-                                new CustomAttributeRow(
-                                    Handle(6, TableIndex.MethodDef),
-                                    Handle(1, TableIndex.MethodDef)
-                                ), // G: [A1] add RowId 4
-                            ]
-                        );
+                        g.VerifyCustomAttributes([
+                            new CustomAttributeRow(
+                                Handle(6, TableIndex.MethodDef),
+                                Handle(1, TableIndex.MethodDef)
+                            ), // G: [A1] add RowId 4
+                        ]);
                     }
                 )
                 .AddGeneration( // add attribute to F
@@ -2178,29 +2012,22 @@ class Bad : Bad
                     edits: new[] { Edit(SemanticEditKind.Update, c => c.GetMember("C.F")) },
                     validator: g =>
                     {
-                        g.VerifyEncLogDefinitions(
-                            [
-                                Row(5, TableIndex.MethodDef, EditAndContinueOperation.Default),
-                                Row(
-                                    5,
-                                    TableIndex.CustomAttribute,
-                                    EditAndContinueOperation.Default
-                                ),
-                            ]
-                        );
+                        g.VerifyEncLogDefinitions([
+                            Row(5, TableIndex.MethodDef, EditAndContinueOperation.Default),
+                            Row(5, TableIndex.CustomAttribute, EditAndContinueOperation.Default),
+                        ]);
 
-                        g.VerifyEncMapDefinitions(
-                            [Handle(5, TableIndex.MethodDef), Handle(5, TableIndex.CustomAttribute)]
-                        );
+                        g.VerifyEncMapDefinitions([
+                            Handle(5, TableIndex.MethodDef),
+                            Handle(5, TableIndex.CustomAttribute),
+                        ]);
 
-                        g.VerifyCustomAttributes(
-                            [
-                                new CustomAttributeRow(
-                                    Handle(5, TableIndex.MethodDef),
-                                    Handle(1, TableIndex.MethodDef)
-                                ), // F: [A2] add RowId 5
-                            ]
-                        );
+                        g.VerifyCustomAttributes([
+                            new CustomAttributeRow(
+                                Handle(5, TableIndex.MethodDef),
+                                Handle(1, TableIndex.MethodDef)
+                            ), // F: [A2] add RowId 5
+                        ]);
                     }
                 )
                 .AddGeneration( // update attributes of both F and G
@@ -2219,44 +2046,30 @@ class Bad : Bad
                     },
                     validator: g =>
                     {
-                        g.VerifyEncLogDefinitions(
-                            [
-                                Row(5, TableIndex.MethodDef, EditAndContinueOperation.Default),
-                                Row(6, TableIndex.MethodDef, EditAndContinueOperation.Default),
-                                Row(
-                                    4,
-                                    TableIndex.CustomAttribute,
-                                    EditAndContinueOperation.Default
-                                ),
-                                Row(
-                                    5,
-                                    TableIndex.CustomAttribute,
-                                    EditAndContinueOperation.Default
-                                ),
-                            ]
-                        );
+                        g.VerifyEncLogDefinitions([
+                            Row(5, TableIndex.MethodDef, EditAndContinueOperation.Default),
+                            Row(6, TableIndex.MethodDef, EditAndContinueOperation.Default),
+                            Row(4, TableIndex.CustomAttribute, EditAndContinueOperation.Default),
+                            Row(5, TableIndex.CustomAttribute, EditAndContinueOperation.Default),
+                        ]);
 
-                        g.VerifyEncMapDefinitions(
-                            [
-                                Handle(5, TableIndex.MethodDef),
+                        g.VerifyEncMapDefinitions([
+                            Handle(5, TableIndex.MethodDef),
+                            Handle(6, TableIndex.MethodDef),
+                            Handle(4, TableIndex.CustomAttribute),
+                            Handle(5, TableIndex.CustomAttribute),
+                        ]);
+
+                        g.VerifyCustomAttributes([
+                            new CustomAttributeRow(
                                 Handle(6, TableIndex.MethodDef),
-                                Handle(4, TableIndex.CustomAttribute),
-                                Handle(5, TableIndex.CustomAttribute),
-                            ]
-                        );
-
-                        g.VerifyCustomAttributes(
-                            [
-                                new CustomAttributeRow(
-                                    Handle(6, TableIndex.MethodDef),
-                                    Handle(4, TableIndex.MethodDef)
-                                ), // F: [A1] -> [A3]
-                                new CustomAttributeRow(
-                                    Handle(5, TableIndex.MethodDef),
-                                    Handle(3, TableIndex.MethodDef)
-                                ), // G: [A2] -> [A4]
-                            ]
-                        );
+                                Handle(4, TableIndex.MethodDef)
+                            ), // F: [A1] -> [A3]
+                            new CustomAttributeRow(
+                                Handle(5, TableIndex.MethodDef),
+                                Handle(3, TableIndex.MethodDef)
+                            ), // G: [A2] -> [A4]
+                        ]);
                     }
                 )
                 .Verify();
@@ -2283,27 +2096,25 @@ class Bad : Bad
                         """,
                     validator: g =>
                     {
-                        g.VerifyCustomAttributes(
-                            [
-                                new CustomAttributeRow(
-                                    Handle(1, TableIndex.Assembly),
-                                    Handle(1, TableIndex.MemberRef)
-                                ),
-                                new CustomAttributeRow(
-                                    Handle(1, TableIndex.Assembly),
-                                    Handle(2, TableIndex.MemberRef)
-                                ),
-                                new CustomAttributeRow(
-                                    Handle(1, TableIndex.Assembly),
-                                    Handle(3, TableIndex.MemberRef)
-                                ),
-                                // F:
-                                new CustomAttributeRow(
-                                    Handle(4, TableIndex.MethodDef),
-                                    Handle(1, TableIndex.MethodDef)
-                                ), // Row 4
-                            ]
-                        );
+                        g.VerifyCustomAttributes([
+                            new CustomAttributeRow(
+                                Handle(1, TableIndex.Assembly),
+                                Handle(1, TableIndex.MemberRef)
+                            ),
+                            new CustomAttributeRow(
+                                Handle(1, TableIndex.Assembly),
+                                Handle(2, TableIndex.MemberRef)
+                            ),
+                            new CustomAttributeRow(
+                                Handle(1, TableIndex.Assembly),
+                                Handle(3, TableIndex.MemberRef)
+                            ),
+                            // F:
+                            new CustomAttributeRow(
+                                Handle(4, TableIndex.MethodDef),
+                                Handle(1, TableIndex.MethodDef)
+                            ), // Row 4
+                        ]);
                     }
                 )
                 .AddGeneration(
@@ -2317,42 +2128,28 @@ class Bad : Bad
                     edits: new[] { Edit(SemanticEditKind.Update, c => c.GetMember("C.F")) },
                     validator: g =>
                     {
-                        g.VerifyEncLogDefinitions(
-                            [
-                                Row(4, TableIndex.MethodDef, EditAndContinueOperation.Default),
-                                Row(
-                                    4,
-                                    TableIndex.CustomAttribute,
-                                    EditAndContinueOperation.Default
-                                ),
-                                Row(
-                                    5,
-                                    TableIndex.CustomAttribute,
-                                    EditAndContinueOperation.Default
-                                ),
-                            ]
-                        );
+                        g.VerifyEncLogDefinitions([
+                            Row(4, TableIndex.MethodDef, EditAndContinueOperation.Default),
+                            Row(4, TableIndex.CustomAttribute, EditAndContinueOperation.Default),
+                            Row(5, TableIndex.CustomAttribute, EditAndContinueOperation.Default),
+                        ]);
 
-                        g.VerifyEncMapDefinitions(
-                            [
+                        g.VerifyEncMapDefinitions([
+                            Handle(4, TableIndex.MethodDef),
+                            Handle(4, TableIndex.CustomAttribute),
+                            Handle(5, TableIndex.CustomAttribute),
+                        ]);
+
+                        g.VerifyCustomAttributes([
+                            new CustomAttributeRow(
                                 Handle(4, TableIndex.MethodDef),
-                                Handle(4, TableIndex.CustomAttribute),
-                                Handle(5, TableIndex.CustomAttribute),
-                            ]
-                        );
-
-                        g.VerifyCustomAttributes(
-                            [
-                                new CustomAttributeRow(
-                                    Handle(4, TableIndex.MethodDef),
-                                    Handle(2, TableIndex.MethodDef)
-                                ), // F [A1] -> [A2]
-                                new CustomAttributeRow(
-                                    Handle(4, TableIndex.MethodDef),
-                                    Handle(3, TableIndex.MethodDef)
-                                ), // F [A3] add RowId 5
-                            ]
-                        );
+                                Handle(2, TableIndex.MethodDef)
+                            ), // F [A1] -> [A2]
+                            new CustomAttributeRow(
+                                Handle(4, TableIndex.MethodDef),
+                                Handle(3, TableIndex.MethodDef)
+                            ), // F [A3] add RowId 5
+                        ]);
                     }
                 )
                 .AddGeneration(
@@ -2366,42 +2163,28 @@ class Bad : Bad
                     edits: new[] { Edit(SemanticEditKind.Update, c => c.GetMember("C.F")) },
                     validator: g =>
                     {
-                        g.VerifyEncLogDefinitions(
-                            [
-                                Row(4, TableIndex.MethodDef, EditAndContinueOperation.Default),
-                                Row(
-                                    4,
-                                    TableIndex.CustomAttribute,
-                                    EditAndContinueOperation.Default
-                                ),
-                                Row(
-                                    5,
-                                    TableIndex.CustomAttribute,
-                                    EditAndContinueOperation.Default
-                                ),
-                            ]
-                        );
+                        g.VerifyEncLogDefinitions([
+                            Row(4, TableIndex.MethodDef, EditAndContinueOperation.Default),
+                            Row(4, TableIndex.CustomAttribute, EditAndContinueOperation.Default),
+                            Row(5, TableIndex.CustomAttribute, EditAndContinueOperation.Default),
+                        ]);
 
-                        g.VerifyEncMapDefinitions(
-                            [
-                                Handle(4, TableIndex.MethodDef),
-                                Handle(4, TableIndex.CustomAttribute),
-                                Handle(5, TableIndex.CustomAttribute),
-                            ]
-                        );
+                        g.VerifyEncMapDefinitions([
+                            Handle(4, TableIndex.MethodDef),
+                            Handle(4, TableIndex.CustomAttribute),
+                            Handle(5, TableIndex.CustomAttribute),
+                        ]);
 
-                        g.VerifyCustomAttributes(
-                            [
-                                new CustomAttributeRow(
-                                    Handle(0, TableIndex.MethodDef),
-                                    Handle(0, TableIndex.MemberRef)
-                                ), // F [A2] delete
-                                new CustomAttributeRow(
-                                    Handle(0, TableIndex.MethodDef),
-                                    Handle(0, TableIndex.MemberRef)
-                                ), // F [A3] delete
-                            ]
-                        );
+                        g.VerifyCustomAttributes([
+                            new CustomAttributeRow(
+                                Handle(0, TableIndex.MethodDef),
+                                Handle(0, TableIndex.MemberRef)
+                            ), // F [A2] delete
+                            new CustomAttributeRow(
+                                Handle(0, TableIndex.MethodDef),
+                                Handle(0, TableIndex.MemberRef)
+                            ), // F [A3] delete
+                        ]);
                     }
                 )
                 .Verify();
@@ -4077,34 +3860,32 @@ delegate void D([A]int x);
                         """,
                     validator: g =>
                     {
-                        g.VerifyCustomAttributes(
-                            [
-                                new CustomAttributeRow(
-                                    Handle(1, TableIndex.Assembly),
-                                    Handle(1, TableIndex.MemberRef)
-                                ),
-                                new CustomAttributeRow(
-                                    Handle(1, TableIndex.Assembly),
-                                    Handle(2, TableIndex.MemberRef)
-                                ),
-                                new CustomAttributeRow(
-                                    Handle(1, TableIndex.Assembly),
-                                    Handle(3, TableIndex.MemberRef)
-                                ),
-                                new CustomAttributeRow(
-                                    Handle(4, TableIndex.Field),
-                                    Handle(4, TableIndex.MemberRef)
-                                ),
-                                new CustomAttributeRow(
-                                    Handle(4, TableIndex.Field),
-                                    Handle(5, TableIndex.MemberRef)
-                                ),
-                                new CustomAttributeRow(
-                                    Handle(13, TableIndex.MethodDef),
-                                    Handle(4, TableIndex.MemberRef)
-                                ),
-                            ]
-                        );
+                        g.VerifyCustomAttributes([
+                            new CustomAttributeRow(
+                                Handle(1, TableIndex.Assembly),
+                                Handle(1, TableIndex.MemberRef)
+                            ),
+                            new CustomAttributeRow(
+                                Handle(1, TableIndex.Assembly),
+                                Handle(2, TableIndex.MemberRef)
+                            ),
+                            new CustomAttributeRow(
+                                Handle(1, TableIndex.Assembly),
+                                Handle(3, TableIndex.MemberRef)
+                            ),
+                            new CustomAttributeRow(
+                                Handle(4, TableIndex.Field),
+                                Handle(4, TableIndex.MemberRef)
+                            ),
+                            new CustomAttributeRow(
+                                Handle(4, TableIndex.Field),
+                                Handle(5, TableIndex.MemberRef)
+                            ),
+                            new CustomAttributeRow(
+                                Handle(13, TableIndex.MethodDef),
+                                Handle(4, TableIndex.MemberRef)
+                            ),
+                        ]);
                     }
                 )
                 .AddGeneration(
@@ -4144,100 +3925,66 @@ delegate void D([A]int x);
                         g.VerifyTypeDefNames("E", "C", "D");
                         g.VerifyMethodDefNames();
 
-                        g.VerifyCustomAttributes(
-                            [
-                                new CustomAttributeRow(
-                                    Handle(14, TableIndex.TypeDef),
-                                    Handle(1, TableIndex.MethodDef)
-                                ), // E
-                                new CustomAttributeRow(
-                                    Handle(15, TableIndex.TypeDef),
-                                    Handle(3, TableIndex.MethodDef)
-                                ), // C
-                                new CustomAttributeRow(
-                                    Handle(16, TableIndex.TypeDef),
-                                    Handle(6, TableIndex.MethodDef)
-                                ), // D
-                                new CustomAttributeRow(
-                                    Handle(2, TableIndex.Field),
-                                    Handle(2, TableIndex.MethodDef)
-                                ), // E.A
-                                new CustomAttributeRow(
-                                    Handle(3, TableIndex.Field),
-                                    Handle(4, TableIndex.MethodDef)
-                                ), // _x
-                                new CustomAttributeRow(
-                                    Handle(1, TableIndex.Property),
-                                    Handle(5, TableIndex.MethodDef)
-                                ), // X
-                            ]
-                        );
-
-                        g.VerifyEncLogDefinitions(
-                            [
-                                Row(14, TableIndex.TypeDef, EditAndContinueOperation.Default),
-                                Row(15, TableIndex.TypeDef, EditAndContinueOperation.Default),
-                                Row(16, TableIndex.TypeDef, EditAndContinueOperation.Default),
-                                Row(2, TableIndex.Field, EditAndContinueOperation.Default),
-                                Row(3, TableIndex.Field, EditAndContinueOperation.Default),
-                                Row(1, TableIndex.Property, EditAndContinueOperation.Default),
-                                Row(2, TableIndex.Constant, EditAndContinueOperation.Default),
-                                Row(
-                                    7,
-                                    TableIndex.CustomAttribute,
-                                    EditAndContinueOperation.Default
-                                ),
-                                Row(
-                                    8,
-                                    TableIndex.CustomAttribute,
-                                    EditAndContinueOperation.Default
-                                ),
-                                Row(
-                                    9,
-                                    TableIndex.CustomAttribute,
-                                    EditAndContinueOperation.Default
-                                ),
-                                Row(
-                                    10,
-                                    TableIndex.CustomAttribute,
-                                    EditAndContinueOperation.Default
-                                ),
-                                Row(
-                                    11,
-                                    TableIndex.CustomAttribute,
-                                    EditAndContinueOperation.Default
-                                ),
-                                Row(
-                                    12,
-                                    TableIndex.CustomAttribute,
-                                    EditAndContinueOperation.Default
-                                ),
-                                Row(
-                                    2,
-                                    TableIndex.MethodSemantics,
-                                    EditAndContinueOperation.Default
-                                ),
-                            ]
-                        );
-
-                        g.VerifyEncMapDefinitions(
-                            [
+                        g.VerifyCustomAttributes([
+                            new CustomAttributeRow(
                                 Handle(14, TableIndex.TypeDef),
+                                Handle(1, TableIndex.MethodDef)
+                            ), // E
+                            new CustomAttributeRow(
                                 Handle(15, TableIndex.TypeDef),
+                                Handle(3, TableIndex.MethodDef)
+                            ), // C
+                            new CustomAttributeRow(
                                 Handle(16, TableIndex.TypeDef),
+                                Handle(6, TableIndex.MethodDef)
+                            ), // D
+                            new CustomAttributeRow(
                                 Handle(2, TableIndex.Field),
+                                Handle(2, TableIndex.MethodDef)
+                            ), // E.A
+                            new CustomAttributeRow(
                                 Handle(3, TableIndex.Field),
-                                Handle(2, TableIndex.Constant),
-                                Handle(7, TableIndex.CustomAttribute),
-                                Handle(8, TableIndex.CustomAttribute),
-                                Handle(9, TableIndex.CustomAttribute),
-                                Handle(10, TableIndex.CustomAttribute),
-                                Handle(11, TableIndex.CustomAttribute),
-                                Handle(12, TableIndex.CustomAttribute),
+                                Handle(4, TableIndex.MethodDef)
+                            ), // _x
+                            new CustomAttributeRow(
                                 Handle(1, TableIndex.Property),
-                                Handle(2, TableIndex.MethodSemantics),
-                            ]
-                        );
+                                Handle(5, TableIndex.MethodDef)
+                            ), // X
+                        ]);
+
+                        g.VerifyEncLogDefinitions([
+                            Row(14, TableIndex.TypeDef, EditAndContinueOperation.Default),
+                            Row(15, TableIndex.TypeDef, EditAndContinueOperation.Default),
+                            Row(16, TableIndex.TypeDef, EditAndContinueOperation.Default),
+                            Row(2, TableIndex.Field, EditAndContinueOperation.Default),
+                            Row(3, TableIndex.Field, EditAndContinueOperation.Default),
+                            Row(1, TableIndex.Property, EditAndContinueOperation.Default),
+                            Row(2, TableIndex.Constant, EditAndContinueOperation.Default),
+                            Row(7, TableIndex.CustomAttribute, EditAndContinueOperation.Default),
+                            Row(8, TableIndex.CustomAttribute, EditAndContinueOperation.Default),
+                            Row(9, TableIndex.CustomAttribute, EditAndContinueOperation.Default),
+                            Row(10, TableIndex.CustomAttribute, EditAndContinueOperation.Default),
+                            Row(11, TableIndex.CustomAttribute, EditAndContinueOperation.Default),
+                            Row(12, TableIndex.CustomAttribute, EditAndContinueOperation.Default),
+                            Row(2, TableIndex.MethodSemantics, EditAndContinueOperation.Default),
+                        ]);
+
+                        g.VerifyEncMapDefinitions([
+                            Handle(14, TableIndex.TypeDef),
+                            Handle(15, TableIndex.TypeDef),
+                            Handle(16, TableIndex.TypeDef),
+                            Handle(2, TableIndex.Field),
+                            Handle(3, TableIndex.Field),
+                            Handle(2, TableIndex.Constant),
+                            Handle(7, TableIndex.CustomAttribute),
+                            Handle(8, TableIndex.CustomAttribute),
+                            Handle(9, TableIndex.CustomAttribute),
+                            Handle(10, TableIndex.CustomAttribute),
+                            Handle(11, TableIndex.CustomAttribute),
+                            Handle(12, TableIndex.CustomAttribute),
+                            Handle(1, TableIndex.Property),
+                            Handle(2, TableIndex.MethodSemantics),
+                        ]);
                     }
                 )
                 .AddGeneration(
@@ -4276,34 +4023,32 @@ delegate void D([A]int x);
                         g.VerifyTypeDefNames("E", "C", "D");
                         g.VerifyMethodDefNames();
 
-                        g.VerifyCustomAttributes(
-                            [
-                                new CustomAttributeRow(
-                                    Handle(14, TableIndex.TypeDef),
-                                    Handle(7, TableIndex.MethodDef)
-                                ), // E
-                                new CustomAttributeRow(
-                                    Handle(15, TableIndex.TypeDef),
-                                    Handle(9, TableIndex.MethodDef)
-                                ), // C
-                                new CustomAttributeRow(
-                                    Handle(16, TableIndex.TypeDef),
-                                    Handle(12, TableIndex.MethodDef)
-                                ), // D
-                                new CustomAttributeRow(
-                                    Handle(2, TableIndex.Field),
-                                    Handle(8, TableIndex.MethodDef)
-                                ), // E.A
-                                new CustomAttributeRow(
-                                    Handle(3, TableIndex.Field),
-                                    Handle(10, TableIndex.MethodDef)
-                                ), // _x
-                                new CustomAttributeRow(
-                                    Handle(1, TableIndex.Property),
-                                    Handle(11, TableIndex.MethodDef)
-                                ), // X
-                            ]
-                        );
+                        g.VerifyCustomAttributes([
+                            new CustomAttributeRow(
+                                Handle(14, TableIndex.TypeDef),
+                                Handle(7, TableIndex.MethodDef)
+                            ), // E
+                            new CustomAttributeRow(
+                                Handle(15, TableIndex.TypeDef),
+                                Handle(9, TableIndex.MethodDef)
+                            ), // C
+                            new CustomAttributeRow(
+                                Handle(16, TableIndex.TypeDef),
+                                Handle(12, TableIndex.MethodDef)
+                            ), // D
+                            new CustomAttributeRow(
+                                Handle(2, TableIndex.Field),
+                                Handle(8, TableIndex.MethodDef)
+                            ), // E.A
+                            new CustomAttributeRow(
+                                Handle(3, TableIndex.Field),
+                                Handle(10, TableIndex.MethodDef)
+                            ), // _x
+                            new CustomAttributeRow(
+                                Handle(1, TableIndex.Property),
+                                Handle(11, TableIndex.MethodDef)
+                            ), // X
+                        ]);
 
                         g.VerifyEncLogDefinitions(
                             new[]
@@ -21303,13 +21048,11 @@ class C
                     },
                     validator: g =>
                     {
-                        g.VerifySynthesizedMembers(
-                            [
-                                .. synthesized,
-                                "C<T>: {<>c__0}",
-                                "C<T>.<>c__0<S>: {<>9__0_0, <>9__0_1#1, <F>b__0_0, <F>b__0_1#1}",
-                            ]
-                        );
+                        g.VerifySynthesizedMembers([
+                            .. synthesized,
+                            "C<T>: {<>c__0}",
+                            "C<T>.<>c__0<S>: {<>9__0_0, <>9__0_1#1, <F>b__0_0, <F>b__0_1#1}",
+                        ]);
                     }
                 )
                 .AddGeneration(
@@ -21336,13 +21079,11 @@ class C
                     },
                     validator: g =>
                     {
-                        g.VerifySynthesizedMembers(
-                            [
-                                .. synthesized,
-                                "C<T>: {<>c__0}",
-                                "C<T>.<>c__0<S>: {<>9__0_0, <>9__0_1#1, <>9__0_2#2, <F>b__0_0, <F>b__0_1#1, <F>b__0_2#2}",
-                            ]
-                        );
+                        g.VerifySynthesizedMembers([
+                            .. synthesized,
+                            "C<T>: {<>c__0}",
+                            "C<T>.<>c__0<S>: {<>9__0_0, <>9__0_1#1, <>9__0_2#2, <F>b__0_0, <F>b__0_1#1, <F>b__0_2#2}",
+                        ]);
                     }
                 )
                 .AddGeneration(
@@ -21363,13 +21104,11 @@ class C
                         },
                     validator: g =>
                     {
-                        g.VerifySynthesizedMembers(
-                            [
-                                .. synthesized,
-                                "C<T>: {<>c__0}",
-                                "C<T>.<>c__0<S>: {<>9__0_0, <>9__0_1#1, <>9__0_2#2, <F>b__0_0, <F>b__0_1#1, <F>b__0_2#2}",
-                            ]
-                        );
+                        g.VerifySynthesizedMembers([
+                            .. synthesized,
+                            "C<T>: {<>c__0}",
+                            "C<T>.<>c__0<S>: {<>9__0_0, <>9__0_1#1, <>9__0_2#2, <F>b__0_0, <F>b__0_1#1, <F>b__0_2#2}",
+                        ]);
 
                         g.VerifyTypeDefNames();
                         g.VerifyMethodDefNames("F", "<F>b__0_0", "<F>b__0_1#1", "<F>b__0_2#2");
@@ -21425,14 +21164,12 @@ class C
                     edits: new[] { Edit(SemanticEditKind.Insert, c => c.GetMember("C.F")) },
                     validator: g =>
                     {
-                        g.VerifySynthesizedMembers(
-                            [
-                                .. synthesized,
-                                "C<T>: {<>c__0#4, <>c__0}",
-                                "C<T>.<>c__0#4<S>: {<>9__0#4_0#4, <F>b__0#4_0#4}",
-                                "C<T>.<>c__0<S>: {<>9__0_0, <>9__0_1#1, <>9__0_2#2, <F>b__0_0, <F>b__0_1#1, <F>b__0_2#2}",
-                            ]
-                        );
+                        g.VerifySynthesizedMembers([
+                            .. synthesized,
+                            "C<T>: {<>c__0#4, <>c__0}",
+                            "C<T>.<>c__0#4<S>: {<>9__0#4_0#4, <F>b__0#4_0#4}",
+                            "C<T>.<>c__0<S>: {<>9__0_0, <>9__0_1#1, <>9__0_2#2, <F>b__0_0, <F>b__0_1#1, <F>b__0_2#2}",
+                        ]);
 
                         g.VerifyTypeDefNames("<>c__0#4`1");
                         g.VerifyMethodDefNames("F", ".cctor", ".ctor", "<F>b__0#4_0#4");
@@ -21515,14 +21252,12 @@ class C
                         },
                     validator: g =>
                     {
-                        g.VerifySynthesizedMembers(
-                            [
-                                .. synthesized,
-                                "C<T>: {<>c__0#4, <>c__0}",
-                                "C<T>.<>c__0#4<S>: {<>9__0#4_0#4, <F>b__0#4_0#4}",
-                                "C<T>.<>c__0<S>: {<>9__0_0, <>9__0_1#1, <>9__0_2#2, <F>b__0_0, <F>b__0_1#1, <F>b__0_2#2}",
-                            ]
-                        );
+                        g.VerifySynthesizedMembers([
+                            .. synthesized,
+                            "C<T>: {<>c__0#4, <>c__0}",
+                            "C<T>.<>c__0#4<S>: {<>9__0#4_0#4, <F>b__0#4_0#4}",
+                            "C<T>.<>c__0<S>: {<>9__0_0, <>9__0_1#1, <>9__0_2#2, <F>b__0_0, <F>b__0_1#1, <F>b__0_2#2}",
+                        ]);
 
                         g.VerifyTypeDefNames();
 
@@ -21622,9 +21357,10 @@ class C
                     },
                     validator: g =>
                     {
-                        g.VerifySynthesizedMembers(
-                            [.. synthesized, "C<T>: {<F>g__L|0_0, <F>g__M|0_1#1}"]
-                        );
+                        g.VerifySynthesizedMembers([
+                            .. synthesized,
+                            "C<T>: {<F>g__L|0_0, <F>g__M|0_1#1}",
+                        ]);
                     }
                 )
                 .AddGeneration(
@@ -21645,9 +21381,10 @@ class C
                         },
                     validator: g =>
                     {
-                        g.VerifySynthesizedMembers(
-                            [.. synthesized, "C<T>: {<F>g__L|0_0, <F>g__M|0_1#1}"]
-                        );
+                        g.VerifySynthesizedMembers([
+                            .. synthesized,
+                            "C<T>: {<F>g__L|0_0, <F>g__M|0_1#1}",
+                        ]);
 
                         g.VerifyTypeDefNames();
                         g.VerifyMethodDefNames("F", "<F>g__L|0_0", "<F>g__M|0_1#1");
@@ -21705,13 +21442,11 @@ class C
                     edits: new[] { Edit(SemanticEditKind.Insert, c => c.GetMember("C.F")) },
                     validator: g =>
                     {
-                        g.VerifySynthesizedMembers(
-                            [
-                                .. synthesized,
-                                "C<T>: {<F>g__N|0#3_1#3, <>c__DisplayClass0#3_0#3, <F>g__L|0_0, <F>g__M|0_1#1}",
-                                "C<T>.<>c__DisplayClass0#3_0#3: {x, <F>g__O|0#3, <F>b__2#3}",
-                            ]
-                        );
+                        g.VerifySynthesizedMembers([
+                            .. synthesized,
+                            "C<T>: {<F>g__N|0#3_1#3, <>c__DisplayClass0#3_0#3, <F>g__L|0_0, <F>g__M|0_1#1}",
+                            "C<T>.<>c__DisplayClass0#3_0#3: {x, <F>g__O|0#3, <F>b__2#3}",
+                        ]);
 
                         g.VerifyTypeDefNames("<>c__DisplayClass0#3_0#3");
                         g.VerifyMethodDefNames(
@@ -21807,13 +21542,11 @@ class C
                         },
                     validator: g =>
                     {
-                        g.VerifySynthesizedMembers(
-                            [
-                                .. synthesized,
-                                "C<T>: {<F>g__N|0#3_1#3, <>c__DisplayClass0#3_0#3, <F>g__L|0_0, <F>g__M|0_1#1}",
-                                "C<T>.<>c__DisplayClass0#3_0#3: {x, <F>g__O|0#3, <F>b__2#3}",
-                            ]
-                        );
+                        g.VerifySynthesizedMembers([
+                            .. synthesized,
+                            "C<T>: {<F>g__N|0#3_1#3, <>c__DisplayClass0#3_0#3, <F>g__L|0_0, <F>g__M|0_1#1}",
+                            "C<T>.<>c__DisplayClass0#3_0#3: {x, <F>g__O|0#3, <F>b__2#3}",
+                        ]);
 
                         g.VerifyTypeDefNames();
 

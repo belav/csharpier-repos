@@ -9319,9 +9319,9 @@ partial class C
                 "Delete [int b]@101"
             );
 
-            edits.VerifySemantics(
-                [SemanticEdit(SemanticEditKind.Update, c => c.GetMember("C.F2"))]
-            );
+            edits.VerifySemantics([
+                SemanticEdit(SemanticEditKind.Update, c => c.GetMember("C.F2")),
+            ]);
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/51011")]
@@ -15625,22 +15625,20 @@ class C(int x, int y)
 ";
             var edits = GetTopEdits(src1, src2);
 
-            edits.VerifySemanticDiagnostics(
-                [
-                    Diagnostic(
-                        RudeEditKind.CapturingPrimaryConstructorParameter,
-                        "y",
-                        GetResource("class with explicit or sequential layout"),
-                        "y"
-                    ),
-                    Diagnostic(
-                        RudeEditKind.InsertIntoClassWithLayout,
-                        "int y",
-                        GetResource("parameter"),
-                        GetResource("class")
-                    ),
-                ]
-            );
+            edits.VerifySemanticDiagnostics([
+                Diagnostic(
+                    RudeEditKind.CapturingPrimaryConstructorParameter,
+                    "y",
+                    GetResource("class with explicit or sequential layout"),
+                    "y"
+                ),
+                Diagnostic(
+                    RudeEditKind.InsertIntoClassWithLayout,
+                    "int y",
+                    GetResource("parameter"),
+                    GetResource("class")
+                ),
+            ]);
         }
 
         [Fact]
@@ -15670,22 +15668,20 @@ class C(int x, int y)
 ";
             var edits = GetTopEdits(src1, src2);
 
-            edits.VerifySemanticDiagnostics(
-                [
-                    Diagnostic(
-                        RudeEditKind.CapturingPrimaryConstructorParameter,
-                        "y",
-                        GetResource("class with explicit or sequential layout"),
-                        "y"
-                    ),
-                    Diagnostic(
-                        RudeEditKind.InsertIntoClassWithLayout,
-                        "int y",
-                        GetResource("parameter"),
-                        GetResource("class")
-                    ),
-                ]
-            );
+            edits.VerifySemanticDiagnostics([
+                Diagnostic(
+                    RudeEditKind.CapturingPrimaryConstructorParameter,
+                    "y",
+                    GetResource("class with explicit or sequential layout"),
+                    "y"
+                ),
+                Diagnostic(
+                    RudeEditKind.InsertIntoClassWithLayout,
+                    "int y",
+                    GetResource("parameter"),
+                    GetResource("class")
+                ),
+            ]);
         }
 
         [Theory]
@@ -25460,16 +25456,14 @@ struct S
      readonly int P4 { get => 1; set {}}
 }";
             var edits = GetTopEdits(src1, src2);
-            edits.VerifySemantics(
-                [
-                    SemanticEdit(SemanticEditKind.Update, c => c.GetMember("S.get_P1")),
-                    SemanticEdit(SemanticEditKind.Update, c => c.GetMember("S.get_P2")),
-                    SemanticEdit(SemanticEditKind.Update, c => c.GetMember("S.get_P4")),
-                    SemanticEdit(SemanticEditKind.Update, c => c.GetMember("S.set_P2")),
-                    SemanticEdit(SemanticEditKind.Update, c => c.GetMember("S.set_P3")),
-                    SemanticEdit(SemanticEditKind.Update, c => c.GetMember("S.set_P4")),
-                ]
-            );
+            edits.VerifySemantics([
+                SemanticEdit(SemanticEditKind.Update, c => c.GetMember("S.get_P1")),
+                SemanticEdit(SemanticEditKind.Update, c => c.GetMember("S.get_P2")),
+                SemanticEdit(SemanticEditKind.Update, c => c.GetMember("S.get_P4")),
+                SemanticEdit(SemanticEditKind.Update, c => c.GetMember("S.set_P2")),
+                SemanticEdit(SemanticEditKind.Update, c => c.GetMember("S.set_P3")),
+                SemanticEdit(SemanticEditKind.Update, c => c.GetMember("S.set_P4")),
+            ]);
         }
 
         [Fact]
@@ -30073,9 +30067,9 @@ return 1;
 
             var edits = GetTopEdits(src1, src2);
 
-            edits.VerifySemanticDiagnostics(
-                [Diagnostic(RudeEditKind.ChangeImplicitMainReturnType, "await Task.Delay(200);")]
-            );
+            edits.VerifySemanticDiagnostics([
+                Diagnostic(RudeEditKind.ChangeImplicitMainReturnType, "await Task.Delay(200);"),
+            ]);
         }
 
         [Fact]

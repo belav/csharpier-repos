@@ -783,55 +783,29 @@ class C
                     validator: g =>
                     {
                         // notice no TypeDefs, FieldDefs
-                        g.VerifyEncLogDefinitions(
-                            [
-                                Row(7, TableIndex.StandAloneSig, EditAndContinueOperation.Default),
-                                Row(8, TableIndex.StandAloneSig, EditAndContinueOperation.Default),
-                                Row(9, TableIndex.StandAloneSig, EditAndContinueOperation.Default),
-                                Row(10, TableIndex.StandAloneSig, EditAndContinueOperation.Default),
-                                Row(11, TableIndex.StandAloneSig, EditAndContinueOperation.Default),
-                                Row(12, TableIndex.StandAloneSig, EditAndContinueOperation.Default),
-                                Row(1, TableIndex.MethodDef, EditAndContinueOperation.Default),
-                                Row(2, TableIndex.MethodDef, EditAndContinueOperation.Default),
-                                Row(3, TableIndex.MethodDef, EditAndContinueOperation.Default),
-                                Row(6, TableIndex.MethodDef, EditAndContinueOperation.Default),
-                                Row(9, TableIndex.MethodDef, EditAndContinueOperation.Default),
-                                Row(12, TableIndex.MethodDef, EditAndContinueOperation.Default),
-                                Row(1, TableIndex.Param, EditAndContinueOperation.Default),
-                                Row(2, TableIndex.Param, EditAndContinueOperation.Default),
-                                Row(3, TableIndex.Param, EditAndContinueOperation.Default),
-                                Row(
-                                    1,
-                                    TableIndex.CustomAttribute,
-                                    EditAndContinueOperation.Default
-                                ),
-                                Row(
-                                    2,
-                                    TableIndex.CustomAttribute,
-                                    EditAndContinueOperation.Default
-                                ),
-                                Row(
-                                    6,
-                                    TableIndex.CustomAttribute,
-                                    EditAndContinueOperation.Default
-                                ),
-                                Row(
-                                    7,
-                                    TableIndex.CustomAttribute,
-                                    EditAndContinueOperation.Default
-                                ),
-                                Row(
-                                    8,
-                                    TableIndex.CustomAttribute,
-                                    EditAndContinueOperation.Default
-                                ),
-                                Row(
-                                    9,
-                                    TableIndex.CustomAttribute,
-                                    EditAndContinueOperation.Default
-                                ),
-                            ]
-                        );
+                        g.VerifyEncLogDefinitions([
+                            Row(7, TableIndex.StandAloneSig, EditAndContinueOperation.Default),
+                            Row(8, TableIndex.StandAloneSig, EditAndContinueOperation.Default),
+                            Row(9, TableIndex.StandAloneSig, EditAndContinueOperation.Default),
+                            Row(10, TableIndex.StandAloneSig, EditAndContinueOperation.Default),
+                            Row(11, TableIndex.StandAloneSig, EditAndContinueOperation.Default),
+                            Row(12, TableIndex.StandAloneSig, EditAndContinueOperation.Default),
+                            Row(1, TableIndex.MethodDef, EditAndContinueOperation.Default),
+                            Row(2, TableIndex.MethodDef, EditAndContinueOperation.Default),
+                            Row(3, TableIndex.MethodDef, EditAndContinueOperation.Default),
+                            Row(6, TableIndex.MethodDef, EditAndContinueOperation.Default),
+                            Row(9, TableIndex.MethodDef, EditAndContinueOperation.Default),
+                            Row(12, TableIndex.MethodDef, EditAndContinueOperation.Default),
+                            Row(1, TableIndex.Param, EditAndContinueOperation.Default),
+                            Row(2, TableIndex.Param, EditAndContinueOperation.Default),
+                            Row(3, TableIndex.Param, EditAndContinueOperation.Default),
+                            Row(1, TableIndex.CustomAttribute, EditAndContinueOperation.Default),
+                            Row(2, TableIndex.CustomAttribute, EditAndContinueOperation.Default),
+                            Row(6, TableIndex.CustomAttribute, EditAndContinueOperation.Default),
+                            Row(7, TableIndex.CustomAttribute, EditAndContinueOperation.Default),
+                            Row(8, TableIndex.CustomAttribute, EditAndContinueOperation.Default),
+                            Row(9, TableIndex.CustomAttribute, EditAndContinueOperation.Default),
+                        ]);
                     }
                 )
                 .Verify();
@@ -929,24 +903,14 @@ class C
                         // - the kick-off method (might be changed if the method previously wasn't an iterator)
                         // - Finally method
                         // - MoveNext method
-                        g.VerifyEncLogDefinitions(
-                            [
-                                Row(3, TableIndex.StandAloneSig, EditAndContinueOperation.Default),
-                                Row(1, TableIndex.MethodDef, EditAndContinueOperation.Default),
-                                Row(4, TableIndex.MethodDef, EditAndContinueOperation.Default),
-                                Row(5, TableIndex.MethodDef, EditAndContinueOperation.Default),
-                                Row(
-                                    1,
-                                    TableIndex.CustomAttribute,
-                                    EditAndContinueOperation.Default
-                                ),
-                                Row(
-                                    7,
-                                    TableIndex.CustomAttribute,
-                                    EditAndContinueOperation.Default
-                                ),
-                            ]
-                        );
+                        g.VerifyEncLogDefinitions([
+                            Row(3, TableIndex.StandAloneSig, EditAndContinueOperation.Default),
+                            Row(1, TableIndex.MethodDef, EditAndContinueOperation.Default),
+                            Row(4, TableIndex.MethodDef, EditAndContinueOperation.Default),
+                            Row(5, TableIndex.MethodDef, EditAndContinueOperation.Default),
+                            Row(1, TableIndex.CustomAttribute, EditAndContinueOperation.Default),
+                            Row(7, TableIndex.CustomAttribute, EditAndContinueOperation.Default),
+                        ]);
 
                         g.VerifyIL(
                             "C.<F>d__0.System.Collections.IEnumerator.MoveNext",
@@ -1178,24 +1142,14 @@ class C
                         // 2 methods were updated:
                         // - the kick-off method (might be changed if the method previously wasn't async)
                         // - MoveNext method
-                        g.VerifyEncLogDefinitions(
-                            [
-                                Row(3, TableIndex.StandAloneSig, EditAndContinueOperation.Default),
-                                Row(4, TableIndex.StandAloneSig, EditAndContinueOperation.Default),
-                                Row(1, TableIndex.MethodDef, EditAndContinueOperation.Default),
-                                Row(4, TableIndex.MethodDef, EditAndContinueOperation.Default),
-                                Row(
-                                    1,
-                                    TableIndex.CustomAttribute,
-                                    EditAndContinueOperation.Default
-                                ),
-                                Row(
-                                    2,
-                                    TableIndex.CustomAttribute,
-                                    EditAndContinueOperation.Default
-                                ),
-                            ]
-                        );
+                        g.VerifyEncLogDefinitions([
+                            Row(3, TableIndex.StandAloneSig, EditAndContinueOperation.Default),
+                            Row(4, TableIndex.StandAloneSig, EditAndContinueOperation.Default),
+                            Row(1, TableIndex.MethodDef, EditAndContinueOperation.Default),
+                            Row(4, TableIndex.MethodDef, EditAndContinueOperation.Default),
+                            Row(1, TableIndex.CustomAttribute, EditAndContinueOperation.Default),
+                            Row(2, TableIndex.CustomAttribute, EditAndContinueOperation.Default),
+                        ]);
 
                         g.VerifyIL(
                             "C.<F>d__0.System.Runtime.CompilerServices.IAsyncStateMachine.MoveNext",

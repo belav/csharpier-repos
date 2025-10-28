@@ -1631,9 +1631,10 @@ public class EndpointHtmlRendererTest
     [Fact]
     public async Task PrerenderedState_MultipleStoresCorrectly()
     {
-        var declaredRenderModesMetadata = new ConfiguredRenderModesMetadata(
-            [RenderMode.InteractiveServer, RenderMode.InteractiveWebAssembly]
-        );
+        var declaredRenderModesMetadata = new ConfiguredRenderModesMetadata([
+            RenderMode.InteractiveServer,
+            RenderMode.InteractiveWebAssembly,
+        ]);
         var endpoint = new Endpoint(
             (context) => Task.CompletedTask,
             new EndpointMetadataCollection(declaredRenderModesMetadata),
@@ -1664,9 +1665,10 @@ public class EndpointHtmlRendererTest
             _ => throw new InvalidOperationException($"Unexpected render mode: {renderMode}"),
         };
 
-        var declaredRenderModesMetadata = new ConfiguredRenderModesMetadata(
-            [RenderMode.InteractiveServer, RenderMode.InteractiveWebAssembly]
-        );
+        var declaredRenderModesMetadata = new ConfiguredRenderModesMetadata([
+            RenderMode.InteractiveServer,
+            RenderMode.InteractiveWebAssembly,
+        ]);
         var endpoint = new Endpoint(
             (context) => Task.CompletedTask,
             new EndpointMetadataCollection(declaredRenderModesMetadata),
@@ -1771,9 +1773,10 @@ public class EndpointHtmlRendererTest
     [Fact]
     public async Task PrerenderedState_Throws_WhenItCanInfer_CallbackRenderMode_ForMultipleRenderModes()
     {
-        var declaredRenderModesMetadata = new ConfiguredRenderModesMetadata(
-            [RenderMode.InteractiveServer, RenderMode.InteractiveWebAssembly]
-        );
+        var declaredRenderModesMetadata = new ConfiguredRenderModesMetadata([
+            RenderMode.InteractiveServer,
+            RenderMode.InteractiveWebAssembly,
+        ]);
         var endpoint = new Endpoint(
             (context) => Task.CompletedTask,
             new EndpointMetadataCollection(declaredRenderModesMetadata),
@@ -1810,9 +1813,10 @@ public class EndpointHtmlRendererTest
             "auto" => RenderMode.InteractiveAuto,
             _ => throw new InvalidOperationException($"Unexpected render mode: {renderMode}"),
         };
-        var declaredRenderModesMetadata = new ConfiguredRenderModesMetadata(
-            [RenderMode.InteractiveServer, RenderMode.InteractiveWebAssembly]
-        );
+        var declaredRenderModesMetadata = new ConfiguredRenderModesMetadata([
+            RenderMode.InteractiveServer,
+            RenderMode.InteractiveWebAssembly,
+        ]);
         var endpoint = new Endpoint(
             (context) => Task.CompletedTask,
             new EndpointMetadataCollection(declaredRenderModesMetadata),

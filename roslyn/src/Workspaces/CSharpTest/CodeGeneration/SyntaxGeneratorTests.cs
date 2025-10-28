@@ -2433,12 +2433,10 @@ public class MyAttribute : Attribute { public int Value {get; set;} }",
                             SyntaxFactory.Token(SyntaxKind.PlusToken)
                         )
                         .WithModifiers(
-                            SyntaxFactory.TokenList(
-                                [
-                                    SyntaxFactory.Token(SyntaxKind.PublicKeyword),
-                                    SyntaxFactory.Token(SyntaxKind.StaticKeyword),
-                                ]
-                            )
+                            SyntaxFactory.TokenList([
+                                SyntaxFactory.Token(SyntaxKind.PublicKeyword),
+                                SyntaxFactory.Token(SyntaxKind.StaticKeyword),
+                            ])
                         )
                         .WithExplicitInterfaceSpecifier(
                             SyntaxFactory.ExplicitInterfaceSpecifier(
