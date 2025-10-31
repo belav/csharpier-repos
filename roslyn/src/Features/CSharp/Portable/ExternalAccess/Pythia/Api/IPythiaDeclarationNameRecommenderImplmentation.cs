@@ -16,7 +16,10 @@ namespace Microsoft.CodeAnalysis.CSharp.ExternalAccess.Pythia.Api
         /// <summary>
         /// Order of returned recommendation decides the order of those items in completion list
         /// </summary>
-        public Task<ImmutableArray<string>> ProvideRecommendationsAsync(PythiaDeclarationNameContext context, CancellationToken cancellationToken);
+        public Task<ImmutableArray<string>> ProvideRecommendationsAsync(
+            PythiaDeclarationNameContext context,
+            CancellationToken cancellationToken
+        );
     }
 
     internal readonly struct PythiaDeclarationNameContext(CSharpSyntaxContext context)

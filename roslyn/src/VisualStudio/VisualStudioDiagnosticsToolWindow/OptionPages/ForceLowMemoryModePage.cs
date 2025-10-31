@@ -21,15 +21,15 @@ namespace Roslyn.VisualStudio.DiagnosticsWindow.OptionsPages
     [Guid(Guids.RoslynOptionPageFeatureManagerFeaturesIdString)]
     internal class ForceLowMemoryModePage : AbstractOptionPage
     {
-        protected override AbstractOptionPageControl CreateOptionPage(IServiceProvider serviceProvider, OptionStore optionStore)
-            => new Control(optionStore);
+        protected override AbstractOptionPageControl CreateOptionPage(
+            IServiceProvider serviceProvider,
+            OptionStore optionStore
+        ) => new Control(optionStore);
 
         internal sealed class Control : InternalOptionsControl
         {
             public Control(OptionStore optionStore)
-                : base(Array.Empty<IOption2>(), optionStore)
-            {
-            }
+                : base(Array.Empty<IOption2>(), optionStore) { }
 
             protected override void AddOptions(Panel panel)
             {
@@ -44,7 +44,9 @@ namespace Roslyn.VisualStudio.DiagnosticsWindow.OptionsPages
                 BindToOption(textBox, ForceLowMemoryMode.SizeInMegabytes);
                 lowMemoryGroup.Children.Add(textBox);
 
-                lowMemoryGroup.Children.Add(new TextBlock { Text = "megabytes of extra memory in devenv.exe" });
+                lowMemoryGroup.Children.Add(
+                    new TextBlock { Text = "megabytes of extra memory in devenv.exe" }
+                );
 
                 panel.Children.Add(lowMemoryGroup);
             }

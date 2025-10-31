@@ -12,10 +12,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -29,36 +29,37 @@ using System;
 using System.IO;
 using System.Xml;
 
-namespace System.ServiceModel.Channels {
+namespace System.ServiceModel.Channels
+{
+    public abstract class MessageBuffer : IDisposable
+    {
+        protected MessageBuffer() { }
 
-	public abstract class MessageBuffer : IDisposable
-	{
-		protected MessageBuffer () {}
+        public abstract void Close();
+        public abstract Message CreateMessage();
 
-		public abstract void Close ();
-		public abstract Message CreateMessage ();
+        void IDisposable.Dispose()
+        {
+            this.Close();
+        }
 
-		void IDisposable.Dispose ()
-		{
-			this.Close ();
-		}
+        public virtual void WriteMessage(Stream stream)
+        {
+            if (stream == null)
+                throw new ArgumentNullException("stream is null");
 
-		public virtual void WriteMessage (Stream stream)
-		{
-			if (stream == null)
-				throw new ArgumentNullException ("stream is null");
-			
-			XmlDictionaryWriter w = XmlDictionaryWriter.CreateBinaryWriter (stream);
-			Message m = CreateMessage ();
+            XmlDictionaryWriter w = XmlDictionaryWriter.CreateBinaryWriter(stream);
+            Message m = CreateMessage();
 
-			m.WriteMessage (w);
-			w.Close ();
-		}
+            m.WriteMessage(w);
+            w.Close();
+        }
 
-		public abstract int BufferSize { get; }
+        public abstract int BufferSize { get; }
 
-		public virtual string MessageContentType {
-			get { return "application/soap+msbin1"; }
-		}
-	}
+        public virtual string MessageContentType
+        {
+            get { return "application/soap+msbin1"; }
+        }
+    }
 }

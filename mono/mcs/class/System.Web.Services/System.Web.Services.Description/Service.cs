@@ -1,4 +1,4 @@
-// 
+//
 // System.Web.Services.Description.Service.cs
 //
 // Author:
@@ -15,10 +15,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -28,63 +28,62 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
-using System.Xml.Serialization;
 using System.Web.Services.Configuration;
+using System.Xml.Serialization;
 
 namespace System.Web.Services.Description
 {
-	[XmlFormatExtensionPoint ("Extensions")]
-	public sealed class Service :
-		NamedItem
-	{
-		#region Fields
+    [XmlFormatExtensionPoint("Extensions")]
+    public sealed class Service : NamedItem
+    {
+        #region Fields
 
-		ServiceDescriptionFormatExtensionCollection extensions;
-		PortCollection ports;
-		ServiceDescription serviceDescription;
+        ServiceDescriptionFormatExtensionCollection extensions;
+        PortCollection ports;
+        ServiceDescription serviceDescription;
 
-		#endregion // Fields
+        #endregion // Fields
 
-		#region Constructors
-	
-		public Service ()
-		{
-			extensions = new ServiceDescriptionFormatExtensionCollection (this);
-			ports = new PortCollection (this);
-			serviceDescription = null;
-		}
-		
-		#endregion // Constructors
+        #region Constructors
 
-		#region Properties
+        public Service()
+        {
+            extensions = new ServiceDescriptionFormatExtensionCollection(this);
+            ports = new PortCollection(this);
+            serviceDescription = null;
+        }
 
-		[XmlIgnore]
-		public
-		override
-		ServiceDescriptionFormatExtensionCollection Extensions { 	
-			get { return extensions; }
-		}
+        #endregion // Constructors
 
+        #region Properties
 
-		[XmlElement ("port")]	
-		public PortCollection Ports {
-			get { return ports; }
-		}
+        [XmlIgnore]
+        public override ServiceDescriptionFormatExtensionCollection Extensions
+        {
+            get { return extensions; }
+        }
 
-//		[XmlIgnore]
-		public ServiceDescription ServiceDescription {
-			get { return serviceDescription; }
-		}
+        [XmlElement("port")]
+        public PortCollection Ports
+        {
+            get { return ports; }
+        }
 
-		#endregion // Properties
+        //		[XmlIgnore]
+        public ServiceDescription ServiceDescription
+        {
+            get { return serviceDescription; }
+        }
 
-		#region Methods
+        #endregion // Properties
 
-		internal void SetParent (ServiceDescription serviceDescription) 
-		{
-			this.serviceDescription = serviceDescription;
-		}
+        #region Methods
 
-		#endregion // Methods
-	}
+        internal void SetParent(ServiceDescription serviceDescription)
+        {
+            this.serviceDescription = serviceDescription;
+        }
+
+        #endregion // Methods
+    }
 }

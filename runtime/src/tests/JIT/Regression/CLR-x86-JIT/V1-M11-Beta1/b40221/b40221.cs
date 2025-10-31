@@ -3,6 +3,7 @@
 //
 
 using Xunit;
+
 namespace Test
 {
     using System;
@@ -15,6 +16,7 @@ namespace Test
             while (a == 1)
                 throw new Exception();
         }
+
         [Fact]
         public static int TestEntryPoint()
         {
@@ -22,7 +24,10 @@ namespace Test
             {
                 Func();
             }
-            catch (Exception) { return -1; }
+            catch (Exception)
+            {
+                return -1;
+            }
             return 100;
         }
     }

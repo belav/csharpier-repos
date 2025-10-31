@@ -8,7 +8,9 @@ namespace System.Buffers
 {
     internal sealed class Any3ByteSearchValues : SearchValues<byte>
     {
-        private readonly byte _e0, _e1, _e2;
+        private readonly byte _e0,
+            _e1,
+            _e2;
 
         public Any3ByteSearchValues(ReadOnlySpan<byte> values)
         {
@@ -23,8 +25,7 @@ namespace System.Buffers
             value == _e0 || value == _e1 || value == _e2;
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal override int IndexOfAny(ReadOnlySpan<byte> span) =>
-            span.IndexOfAny(_e0, _e1, _e2);
+        internal override int IndexOfAny(ReadOnlySpan<byte> span) => span.IndexOfAny(_e0, _e1, _e2);
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         internal override int IndexOfAnyExcept(ReadOnlySpan<byte> span) =>

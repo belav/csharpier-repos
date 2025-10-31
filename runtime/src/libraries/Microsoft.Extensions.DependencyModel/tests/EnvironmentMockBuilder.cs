@@ -47,7 +47,11 @@ namespace Microsoft.Extensions.DependencyModel.Tests
             private Dictionary<string, object> _appContextData;
             private bool _isWindows;
 
-            public EnvironmentMock(Dictionary<string, string> variables, Dictionary<string, object> appContextData, bool isWindows)
+            public EnvironmentMock(
+                Dictionary<string, string> variables,
+                Dictionary<string, object> appContextData,
+                bool isWindows
+            )
             {
                 _variables = variables;
                 _appContextData = appContextData;

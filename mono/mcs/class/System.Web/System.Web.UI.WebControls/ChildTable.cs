@@ -26,27 +26,27 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 using System;
+using System.ComponentModel;
 using System.Globalization;
 using System.Web;
 using System.Web.UI;
-using System.ComponentModel;
 
 namespace System.Web.UI.WebControls
 {
-	internal class ChildTable : Table
-	{
-		Control parent;
+    internal class ChildTable : Table
+    {
+        Control parent;
 
-		public ChildTable (Control parent)
-		{
-			this.parent = parent;
-		}
+        public ChildTable(Control parent)
+        {
+            this.parent = parent;
+        }
 
-		protected override void AddAttributesToRender (HtmlTextWriter writer)
-		{
-			base.AddAttributesToRender (writer);
-			if (ID == null)
-				writer.AddAttribute ("id", parent.ClientID);
-		}
-	}
+        protected override void AddAttributesToRender(HtmlTextWriter writer)
+        {
+            base.AddAttributesToRender(writer);
+            if (ID == null)
+                writer.AddAttribute("id", parent.ClientID);
+        }
+    }
 }

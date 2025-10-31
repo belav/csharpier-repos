@@ -27,12 +27,16 @@ namespace System.Data.Metadata.Edm
         /// <param name="schema">The db schema</param>
         /// <param name="table">The db table</param>
         /// <param name="definingQuery">The provider specific query that should be used to retrieve the EntitySet</param>
-        /// <param name="relationshipType">The entity type of the entities that this entity set type contains</param> 
+        /// <param name="relationshipType">The entity type of the entities that this entity set type contains</param>
         /// <exception cref="System.ArgumentNullException">Thrown if the argument name or entityType is null</exception>
-        internal RelationshipSet(string name, string schema, string table, string definingQuery, RelationshipType relationshipType)
-            : base(name, schema, table, definingQuery, relationshipType)
-        {
-        }
+        internal RelationshipSet(
+            string name,
+            string schema,
+            string table,
+            string definingQuery,
+            RelationshipType relationshipType
+        )
+            : base(name, schema, table, definingQuery, relationshipType) { }
         #endregion
 
         #region Properties
@@ -41,16 +45,16 @@ namespace System.Data.Metadata.Edm
         /// </summary>
         public new RelationshipType ElementType
         {
-            get
-            {
-                return (RelationshipType)base.ElementType;
-            }
+            get { return (RelationshipType)base.ElementType; }
         }
 
         /// <summary>
         /// Returns the kind of the type
         /// </summary>
-        public override BuiltInTypeKind BuiltInTypeKind { get { return BuiltInTypeKind.RelationshipSet; } }
+        public override BuiltInTypeKind BuiltInTypeKind
+        {
+            get { return BuiltInTypeKind.RelationshipSet; }
+        }
         #endregion
     }
 }

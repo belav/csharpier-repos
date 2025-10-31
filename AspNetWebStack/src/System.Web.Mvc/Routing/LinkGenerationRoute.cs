@@ -18,8 +18,13 @@ namespace System.Web.Mvc.Routing
         private readonly Route _innerRoute;
 
         public LinkGenerationRoute(Route innerRoute)
-            : base(innerRoute.Url, innerRoute.Defaults, innerRoute.Constraints, innerRoute.DataTokens,
-            innerRoute.RouteHandler)
+            : base(
+                innerRoute.Url,
+                innerRoute.Defaults,
+                innerRoute.Constraints,
+                innerRoute.DataTokens,
+                innerRoute.RouteHandler
+            )
         {
             if (innerRoute == null)
             {
@@ -35,7 +40,10 @@ namespace System.Web.Mvc.Routing
             return null;
         }
 
-        public override VirtualPathData GetVirtualPath(RequestContext requestContext, RouteValueDictionary values)
+        public override VirtualPathData GetVirtualPath(
+            RequestContext requestContext,
+            RouteValueDictionary values
+        )
         {
             return _innerRoute.GetVirtualPath(requestContext, values);
         }

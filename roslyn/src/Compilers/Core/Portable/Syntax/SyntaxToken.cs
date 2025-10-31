@@ -20,7 +20,8 @@ namespace Microsoft.CodeAnalysis
     [DebuggerDisplay("{GetDebuggerDisplay(), nq}")]
     public readonly struct SyntaxToken : IEquatable<SyntaxToken>
     {
-        private static readonly Func<DiagnosticInfo, Diagnostic> s_createDiagnosticWithoutLocation = Diagnostic.Create;
+        private static readonly Func<DiagnosticInfo, Diagnostic> s_createDiagnosticWithoutLocation =
+            Diagnostic.Create;
 
         internal static readonly Func<SyntaxToken, bool> NonZeroWidth = t => t.Width > 0;
         internal static readonly Func<SyntaxToken, bool> Any = t => true;
@@ -44,7 +45,11 @@ namespace Microsoft.CodeAnalysis
 
         private string GetDebuggerDisplay()
         {
-            return GetType().Name + " " + (Node != null ? Node.KindText : "None") + " " + ToString();
+            return GetType().Name
+                + " "
+                + (Node != null ? Node.KindText : "None")
+                + " "
+                + ToString();
         }
 
         /// <summary>
@@ -106,7 +111,9 @@ namespace Microsoft.CodeAnalysis
         {
             get
             {
-                return Node != null ? new TextSpan(Position + Node.GetLeadingTriviaWidth(), Node.Width) : default(TextSpan);
+                return Node != null
+                    ? new TextSpan(Position + Node.GetLeadingTriviaWidth(), Node.Width)
+                    : default(TextSpan);
             }
         }
 
@@ -209,7 +216,7 @@ namespace Microsoft.CodeAnalysis
         internal int TrailingWidth => Node?.GetTrailingTriviaWidth() ?? 0;
 
         /// <summary>
-        /// Determines whether this token or any of its descendant trivia have any diagnostics on them. 
+        /// Determines whether this token or any of its descendant trivia have any diagnostics on them.
         /// </summary>
         public bool ContainsDiagnostics => Node?.ContainsDiagnostics ?? false;
 
@@ -267,7 +274,8 @@ namespace Microsoft.CodeAnalysis
         /// </summary>
         public IEnumerable<SyntaxAnnotation> GetAnnotations(string annotationKind)
         {
-            return Node?.GetAnnotations(annotationKind) ?? SpecializedCollections.EmptyEnumerable<SyntaxAnnotation>();
+            return Node?.GetAnnotations(annotationKind)
+                ?? SpecializedCollections.EmptyEnumerable<SyntaxAnnotation>();
         }
 
         /// <summary>
@@ -283,7 +291,8 @@ namespace Microsoft.CodeAnalysis
         /// </summary>
         public IEnumerable<SyntaxAnnotation> GetAnnotations(IEnumerable<string> annotationKinds)
         {
-            return Node?.GetAnnotations(annotationKinds) ?? SpecializedCollections.EmptyEnumerable<SyntaxAnnotation>();
+            return Node?.GetAnnotations(annotationKinds)
+                ?? SpecializedCollections.EmptyEnumerable<SyntaxAnnotation>();
         }
 
         /// <summary>
@@ -312,7 +321,8 @@ namespace Microsoft.CodeAnalysis
                     parent: null,
                     token: Node.WithAdditionalAnnotationsGreen(annotations),
                     position: 0,
-                    index: 0);
+                    index: 0
+                );
             }
 
             return default(SyntaxToken);
@@ -342,7 +352,8 @@ namespace Microsoft.CodeAnalysis
                     parent: null,
                     token: Node.WithoutAnnotationsGreen(annotations),
                     position: 0,
-                    index: 0);
+                    index: 0
+                );
             }
 
             return default(SyntaxToken);
@@ -391,7 +402,8 @@ namespace Microsoft.CodeAnalysis
                     parent: null,
                     token: token.Node.WithAdditionalAnnotationsGreen(annotations),
                     position: 0,
-                    index: 0);
+                    index: 0
+                );
             }
 
             return token;
@@ -439,10 +451,7 @@ namespace Microsoft.CodeAnalysis
                     trailingPosition -= trailingGreen.FullWidth;
                 }
 
-                return new SyntaxTriviaList(this,
-                    trailingGreen,
-                    trailingPosition,
-                    index);
+                return new SyntaxTriviaList(this, trailingGreen, trailingPosition, index);
             }
         }
 
@@ -451,7 +460,8 @@ namespace Microsoft.CodeAnalysis
         /// </summary>
         public SyntaxToken WithTriviaFrom(SyntaxToken token)
         {
-            return this.WithLeadingTrivia(token.LeadingTrivia).WithTrailingTrivia(token.TrailingTrivia);
+            return this.WithLeadingTrivia(token.LeadingTrivia)
+                .WithTrailingTrivia(token.TrailingTrivia);
         }
 
         /// <summary>
@@ -476,7 +486,14 @@ namespace Microsoft.CodeAnalysis
         public SyntaxToken WithLeadingTrivia(IEnumerable<SyntaxTrivia>? trivia)
         {
             return Node != null
-                ? new SyntaxToken(null, Node.WithLeadingTrivia(GreenNode.CreateList(trivia, static t => t.RequiredUnderlyingNode)), position: 0, index: 0)
+                ? new SyntaxToken(
+                    null,
+                    Node.WithLeadingTrivia(
+                        GreenNode.CreateList(trivia, static t => t.RequiredUnderlyingNode)
+                    ),
+                    position: 0,
+                    index: 0
+                )
                 : default(SyntaxToken);
         }
 
@@ -502,7 +519,14 @@ namespace Microsoft.CodeAnalysis
         public SyntaxToken WithTrailingTrivia(IEnumerable<SyntaxTrivia>? trivia)
         {
             return Node != null
-                ? new SyntaxToken(null, Node.WithTrailingTrivia(GreenNode.CreateList(trivia, static t => t.RequiredUnderlyingNode)), position: 0, index: 0)
+                ? new SyntaxToken(
+                    null,
+                    Node.WithTrailingTrivia(
+                        GreenNode.CreateList(trivia, static t => t.RequiredUnderlyingNode)
+                    ),
+                    position: 0,
+                    index: 0
+                )
                 : default(SyntaxToken);
         }
 
@@ -551,10 +575,10 @@ namespace Microsoft.CodeAnalysis
         /// </summary>
         public bool Equals(SyntaxToken other)
         {
-            return Parent == other.Parent &&
-                   Node == other.Node &&
-                   Position == other.Position &&
-                   Index == other.Index;
+            return Parent == other.Parent
+                && Node == other.Node
+                && Position == other.Position
+                && Index == other.Index;
         }
 
         /// <summary>
@@ -578,14 +602,25 @@ namespace Microsoft.CodeAnalysis
         /// Gets the token that follows this token in the syntax tree.
         /// </summary>
         /// <returns>The token that follows this token in the syntax tree.</returns>
-        public SyntaxToken GetNextToken(bool includeZeroWidth = false, bool includeSkipped = false, bool includeDirectives = false, bool includeDocumentationComments = false)
+        public SyntaxToken GetNextToken(
+            bool includeZeroWidth = false,
+            bool includeSkipped = false,
+            bool includeDirectives = false,
+            bool includeDocumentationComments = false
+        )
         {
             if (Node == null)
             {
                 return default(SyntaxToken);
             }
 
-            return SyntaxNavigator.Instance.GetNextToken(this, includeZeroWidth, includeSkipped, includeDirectives, includeDocumentationComments);
+            return SyntaxNavigator.Instance.GetNextToken(
+                this,
+                includeZeroWidth,
+                includeSkipped,
+                includeDirectives,
+                includeDocumentationComments
+            );
         }
 
         /// <summary>
@@ -595,7 +630,10 @@ namespace Microsoft.CodeAnalysis
         /// true.</param>
         /// <param name="stepInto">Delegate applied to trivia.  If this delegate is present then trailing trivia is
         /// included in the search.</param>
-        internal SyntaxToken GetNextToken(Func<SyntaxToken, bool> predicate, Func<SyntaxTrivia, bool>? stepInto = null)
+        internal SyntaxToken GetNextToken(
+            Func<SyntaxToken, bool> predicate,
+            Func<SyntaxTrivia, bool>? stepInto = null
+        )
         {
             if (Node == null)
             {
@@ -609,14 +647,25 @@ namespace Microsoft.CodeAnalysis
         /// Gets the token that precedes this token in the syntax tree.
         /// </summary>
         /// <returns>The previous token that precedes this token in the syntax tree.</returns>
-        public SyntaxToken GetPreviousToken(bool includeZeroWidth = false, bool includeSkipped = false, bool includeDirectives = false, bool includeDocumentationComments = false)
+        public SyntaxToken GetPreviousToken(
+            bool includeZeroWidth = false,
+            bool includeSkipped = false,
+            bool includeDirectives = false,
+            bool includeDocumentationComments = false
+        )
         {
             if (Node == null)
             {
                 return default(SyntaxToken);
             }
 
-            return SyntaxNavigator.Instance.GetPreviousToken(this, includeZeroWidth, includeSkipped, includeDirectives, includeDocumentationComments);
+            return SyntaxNavigator.Instance.GetPreviousToken(
+                this,
+                includeZeroWidth,
+                includeSkipped,
+                includeDirectives,
+                includeDocumentationComments
+            );
         }
 
         /// <summary>
@@ -626,7 +675,10 @@ namespace Microsoft.CodeAnalysis
         /// true.</param>
         /// <param name="stepInto">Delegate applied to trivia.  If this delegate is present then trailing trivia is
         /// included in the search.</param>
-        internal SyntaxToken GetPreviousToken(Func<SyntaxToken, bool> predicate, Func<SyntaxTrivia, bool>? stepInto = null)
+        internal SyntaxToken GetPreviousToken(
+            Func<SyntaxToken, bool> predicate,
+            Func<SyntaxTrivia, bool>? stepInto = null
+        )
         {
             return SyntaxNavigator.Instance.GetPreviousToken(this, predicate, stepInto);
         }
@@ -643,9 +695,7 @@ namespace Microsoft.CodeAnalysis
         {
             var tree = SyntaxTree;
 
-            return tree == null
-                ? Location.None
-                : tree.GetLocation(Span);
+            return tree == null ? Location.None : tree.GetLocation(Span);
         }
 
         /// <summary>
@@ -679,16 +729,15 @@ namespace Microsoft.CodeAnalysis
         /// </summary>
         public bool IsEquivalentTo(SyntaxToken token)
         {
-            return
-                (Node == null && token.Node == null) ||
-                (Node != null && token.Node != null && Node.IsEquivalentTo(token.Node));
+            return (Node == null && token.Node == null)
+                || (Node != null && token.Node != null && Node.IsEquivalentTo(token.Node));
         }
 
         /// <summary>
         /// Returns true if these two tokens are considered "incrementally identical".  An incrementally identical token
         /// occurs when a <see cref="SyntaxTree"/> is incrementally parsed using <see cref="SyntaxTree.WithChangedText"/>
         /// and the incremental parser is able to take the token from the original tree and use it in its entirety in the
-        /// new tree.  In this case, the <see cref="SyntaxToken.ToFullString()"/> of each token will be the same, though 
+        /// new tree.  In this case, the <see cref="SyntaxToken.ToFullString()"/> of each token will be the same, though
         /// they could have different parents, and may occur at different positions in the respective trees.  If two tokens are
         /// incrementally identical, all trivial of each node will be incrementally identical as well.
         /// </summary>
@@ -698,7 +747,7 @@ namespace Microsoft.CodeAnalysis
         /// trees using shared tokens for efficiency.  In all these cases though, it will still remain true that the incrementally
         /// identical tokens could have different parents and may occur at different positions in their respective trees.
         /// </remarks>
-        public bool IsIncrementallyIdenticalTo(SyntaxToken token)
-            => this.Node != null && this.Node == token.Node;
+        public bool IsIncrementallyIdenticalTo(SyntaxToken token) =>
+            this.Node != null && this.Node == token.Node;
     }
 }

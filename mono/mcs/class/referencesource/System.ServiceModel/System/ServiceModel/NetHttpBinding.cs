@@ -22,9 +22,7 @@ namespace System.ServiceModel
         BasicHttpSecurity basicHttpSecurity;
 
         public NetHttpBinding()
-            : this(BasicHttpSecurityMode.None)
-        {
-        }
+            : this(BasicHttpSecurityMode.None) { }
 
         public NetHttpBinding(BasicHttpSecurityMode securityMode)
             : base()
@@ -58,15 +56,11 @@ namespace System.ServiceModel
         {
             get { return this.messageEncoding; }
             set { this.messageEncoding = value; }
-        }        
+        }
 
         public BasicHttpSecurity Security
         {
-            get
-            {
-                return this.basicHttpSecurity;
-            }
-
+            get { return this.basicHttpSecurity; }
             set
             {
                 if (value == null)
@@ -80,11 +74,7 @@ namespace System.ServiceModel
 
         public OptionalReliableSession ReliableSession
         {
-            get
-            {
-                return this.reliableSession;
-            }
-
+            get { return this.reliableSession; }
             set
             {
                 if (value == null)
@@ -98,27 +88,35 @@ namespace System.ServiceModel
 
         public WebSocketTransportSettings WebSocketSettings
         {
-            get
-            {
-                return this.InternalWebSocketSettings;
-            }
+            get { return this.InternalWebSocketSettings; }
         }
 
         internal override BasicHttpSecurity BasicHttpSecurity
         {
-            get
-            {
-                return this.basicHttpSecurity;
-            }
+            get { return this.basicHttpSecurity; }
         }
 
-        public override IChannelFactory<TChannel> BuildChannelFactory<TChannel>(BindingParameterCollection parameters)
+        public override IChannelFactory<TChannel> BuildChannelFactory<TChannel>(
+            BindingParameterCollection parameters
+        )
         {
-            if ((this.BasicHttpSecurity.Mode == BasicHttpSecurityMode.Transport ||
-                this.BasicHttpSecurity.Mode == BasicHttpSecurityMode.TransportCredentialOnly) &&
-                this.BasicHttpSecurity.Transport.ClientCredentialType == HttpClientCredentialType.InheritedFromHost)
+            if (
+                (
+                    this.BasicHttpSecurity.Mode == BasicHttpSecurityMode.Transport
+                    || this.BasicHttpSecurity.Mode == BasicHttpSecurityMode.TransportCredentialOnly
+                )
+                && this.BasicHttpSecurity.Transport.ClientCredentialType
+                    == HttpClientCredentialType.InheritedFromHost
+            )
             {
-                throw FxTrace.Exception.AsError(new InvalidOperationException(SR.GetString(SR.HttpClientCredentialTypeInvalid, this.BasicHttpSecurity.Transport.ClientCredentialType)));
+                throw FxTrace.Exception.AsError(
+                    new InvalidOperationException(
+                        SR.GetString(
+                            SR.HttpClientCredentialTypeInvalid,
+                            this.BasicHttpSecurity.Transport.ClientCredentialType
+                        )
+                    )
+                );
             }
 
             return base.BuildChannelFactory<TChannel>(parameters);
@@ -169,7 +167,8 @@ namespace System.ServiceModel
         public bool ShouldSerializeReliableSession()
         {
             return this.ReliableSession.Ordered != ReliableSessionDefaults.Ordered
-                || this.ReliableSession.InactivityTimeout != ReliableSessionDefaults.InactivityTimeout
+                || this.ReliableSession.InactivityTimeout
+                    != ReliableSessionDefaults.InactivityTimeout
                 || this.ReliableSession.Enabled != ReliableSessionDefaults.Enabled;
         }
 
@@ -217,13 +216,23 @@ namespace System.ServiceModel
                 }
             }
 
-            if (transport == null || transport.WebSocketSettings.TransportUsage != WebSocketTransportUsage.Always)
+            if (
+                transport == null
+                || transport.WebSocketSettings.TransportUsage != WebSocketTransportUsage.Always
+            )
             {
                 return false;
             }
 
             HttpsTransportBindingElement httpsTransport = transport as HttpsTransportBindingElement;
-            if ((securityElement != null) && (httpsTransport != null) && (httpsTransport.RequireClientCertificate != TransportDefaults.RequireClientCertificate))
+            if (
+                (securityElement != null)
+                && (httpsTransport != null)
+                && (
+                    httpsTransport.RequireClientCertificate
+                    != TransportDefaults.RequireClientCertificate
+                )
+            )
             {
                 return false;
             }
@@ -241,7 +250,13 @@ namespace System.ServiceModel
                 return false;
             }
 
-            if (!(encoding is TextMessageEncodingBindingElement || encoding is MtomMessageEncodingBindingElement || encoding is BinaryMessageEncodingBindingElement))
+            if (
+                !(
+                    encoding is TextMessageEncodingBindingElement
+                    || encoding is MtomMessageEncodingBindingElement
+                    || encoding is BinaryMessageEncodingBindingElement
+                )
+            )
             {
                 return false;
             }
@@ -285,18 +300,34 @@ namespace System.ServiceModel
             base.CheckSettings();
 
             // In the Win8 profile, Mtom is not supported.
-            if ((this.MessageEncoding == NetHttpMessageEncoding.Mtom) && UnsafeNativeMethods.IsTailoredApplication.Value)
+            if (
+                (this.MessageEncoding == NetHttpMessageEncoding.Mtom)
+                && UnsafeNativeMethods.IsTailoredApplication.Value
+            )
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new NotSupportedException(SR.GetString(SR.UnsupportedBindingProperty, "MessageEncoding", this.MessageEncoding)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new NotSupportedException(
+                        SR.GetString(
+                            SR.UnsupportedBindingProperty,
+                            "MessageEncoding",
+                            this.MessageEncoding
+                        )
+                    )
+                );
             }
         }
 
         void Initialize()
         {
             this.messageEncoding = NetHttpBindingDefaults.MessageEncoding;
-            this.binaryMessageEncodingBindingElement = new BinaryMessageEncodingBindingElement() { MessageVersion = MessageVersion.Soap12WSAddressing10 };            
-            this.TextMessageEncodingBindingElement.MessageVersion = MessageVersion.Soap12WSAddressing10;
-            this.MtomMessageEncodingBindingElement.MessageVersion = MessageVersion.Soap12WSAddressing10;
+            this.binaryMessageEncodingBindingElement = new BinaryMessageEncodingBindingElement()
+            {
+                MessageVersion = MessageVersion.Soap12WSAddressing10,
+            };
+            this.TextMessageEncodingBindingElement.MessageVersion =
+                MessageVersion.Soap12WSAddressing10;
+            this.MtomMessageEncodingBindingElement.MessageVersion =
+                MessageVersion.Soap12WSAddressing10;
             this.session = new ReliableSessionBindingElement();
             this.reliableSession = new OptionalReliableSession(this.session);
             this.WebSocketSettings.TransportUsage = NetHttpBindingDefaults.TransportUsage;
@@ -304,13 +335,18 @@ namespace System.ServiceModel
             this.basicHttpSecurity = new BasicHttpSecurity();
         }
 
-        void InitializeFrom(HttpTransportBindingElement transport, MessageEncodingBindingElement encoding, ReliableSessionBindingElement session)
+        void InitializeFrom(
+            HttpTransportBindingElement transport,
+            MessageEncodingBindingElement encoding,
+            ReliableSessionBindingElement session
+        )
         {
             this.InitializeFrom(transport, encoding);
             if (encoding is BinaryMessageEncodingBindingElement)
             {
                 this.messageEncoding = NetHttpMessageEncoding.Binary;
-                BinaryMessageEncodingBindingElement binary = (BinaryMessageEncodingBindingElement)encoding;
+                BinaryMessageEncodingBindingElement binary =
+                    (BinaryMessageEncodingBindingElement)encoding;
                 this.ReaderQuotas = binary.ReaderQuotas;
             }
 
@@ -333,14 +369,20 @@ namespace System.ServiceModel
 
         void ApplyConfiguration(string configurationName)
         {
-            NetHttpBindingCollectionElement section = NetHttpBindingCollectionElement.GetBindingCollectionElement();
+            NetHttpBindingCollectionElement section =
+                NetHttpBindingCollectionElement.GetBindingCollectionElement();
             NetHttpBindingElement element = section.Bindings[configurationName];
             if (element == null)
             {
-                throw FxTrace.Exception.AsError(new ConfigurationErrorsException(SR.GetString(
-                                                         SR.ConfigInvalidBindingConfigurationName,
-                                                         configurationName,
-                                                         ConfigurationStrings.NetHttpBindingCollectionElementName)));
+                throw FxTrace.Exception.AsError(
+                    new ConfigurationErrorsException(
+                        SR.GetString(
+                            SR.ConfigInvalidBindingConfigurationName,
+                            configurationName,
+                            ConfigurationStrings.NetHttpBindingCollectionElementName
+                        )
+                    )
+                );
             }
             else
             {
@@ -348,7 +390,11 @@ namespace System.ServiceModel
             }
         }
 
-        bool IsBindingElementsMatch(HttpTransportBindingElement transport, MessageEncodingBindingElement encoding, ReliableSessionBindingElement session)
+        bool IsBindingElementsMatch(
+            HttpTransportBindingElement transport,
+            MessageEncodingBindingElement encoding,
+            ReliableSessionBindingElement session
+        )
         {
             if (this.reliableSession.Enabled)
             {
@@ -378,7 +424,7 @@ namespace System.ServiceModel
                     }
 
                     break;
-                default:    // NetHttpMessageEncoding.Binary
+                default: // NetHttpMessageEncoding.Binary
                     if (!this.binaryMessageEncodingBindingElement.IsMatch(encoding))
                     {
                         return false;

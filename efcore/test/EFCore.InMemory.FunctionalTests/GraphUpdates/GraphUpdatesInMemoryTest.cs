@@ -7,13 +7,10 @@ public class GraphUpdatesInMemoryTest
     : GraphUpdatesInMemoryTestBase<GraphUpdatesInMemoryTest.InMemoryFixture>
 {
     public GraphUpdatesInMemoryTest(InMemoryFixture fixture)
-        : base(fixture)
-    {
-    }
+        : base(fixture) { }
 
     public class InMemoryFixture : GraphUpdatesInMemoryFixtureBase
     {
-        protected override string StoreName
-            => "GraphUpdatesTest";
+        protected override string StoreName => "GraphUpdatesTest";
     }
 }

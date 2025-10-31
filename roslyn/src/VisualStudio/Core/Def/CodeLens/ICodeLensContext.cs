@@ -18,24 +18,40 @@ namespace Microsoft.VisualStudio.LanguageServices.CodeLens
     /// </summary>
     internal interface ICodeLensContext
     {
-        Task<ImmutableDictionary<Guid, string>> GetProjectVersionsAsync(ImmutableArray<Guid> projectGuids, CancellationToken cancellationToken);
+        Task<ImmutableDictionary<Guid, string>> GetProjectVersionsAsync(
+            ImmutableArray<Guid> projectGuids,
+            CancellationToken cancellationToken
+        );
 
         /// <summary>
         /// Get reference count of the given descriptor
         /// </summary>
         Task<ReferenceCount?> GetReferenceCountAsync(
-            CodeLensDescriptor descriptor, CodeLensDescriptorContext descriptorContext, ReferenceCount? previousCount, CancellationToken cancellationToken);
+            CodeLensDescriptor descriptor,
+            CodeLensDescriptorContext descriptorContext,
+            ReferenceCount? previousCount,
+            CancellationToken cancellationToken
+        );
 
         /// <summary>
         /// get reference location descriptor of the given descriptor
         /// </summary>
-        Task<(string projectVersion, ImmutableArray<ReferenceLocationDescriptor> references)?> FindReferenceLocationsAsync(
-            CodeLensDescriptor descriptor, CodeLensDescriptorContext descriptorContext, CancellationToken cancellationToken);
+        Task<(
+            string projectVersion,
+            ImmutableArray<ReferenceLocationDescriptor> references
+        )?> FindReferenceLocationsAsync(
+            CodeLensDescriptor descriptor,
+            CodeLensDescriptorContext descriptorContext,
+            CancellationToken cancellationToken
+        );
 
         /// <summary>
         /// Given a document and syntax node, returns a collection of locations of methods that refer to the located node.
         /// </summary>
         Task<ImmutableArray<ReferenceMethodDescriptor>?> FindReferenceMethodsAsync(
-            CodeLensDescriptor descriptor, CodeLensDescriptorContext descriptorContext, CancellationToken cancellationToken);
+            CodeLensDescriptor descriptor,
+            CodeLensDescriptorContext descriptorContext,
+            CancellationToken cancellationToken
+        );
     }
 }

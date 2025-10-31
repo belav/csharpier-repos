@@ -28,19 +28,29 @@ namespace System.Speech.Internal.Synthesis
 
         internal TTSVoice Voice
         {
-            get
-            {
-                return _ttsVoice;
-            }
+            get { return _ttsVoice; }
         }
 
         #endregion
 
         #region Internal Methods
 
-        internal void SetVoice(string name, CultureInfo culture, VoiceGender gender, VoiceAge age, int variant)
+        internal void SetVoice(
+            string name,
+            CultureInfo culture,
+            VoiceGender gender,
+            VoiceAge age,
+            int variant
+        )
         {
-            TTSVoice ttsVoice = _voiceSynthesis.GetEngine(name, culture, gender, age, variant, false);
+            TTSVoice ttsVoice = _voiceSynthesis.GetEngine(
+                name,
+                culture,
+                gender,
+                age,
+                variant,
+                false
+            );
             if (!ttsVoice.Equals(_ttsVoice))
             {
                 _ttsVoice = ttsVoice;

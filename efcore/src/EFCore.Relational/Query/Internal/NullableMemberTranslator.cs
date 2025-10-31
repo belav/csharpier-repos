@@ -36,10 +36,10 @@ public class NullableMemberTranslator : IMemberTranslator
         SqlExpression? instance,
         MemberInfo member,
         Type returnType,
-        IDiagnosticsLogger<DbLoggerCategory.Query> logger)
+        IDiagnosticsLogger<DbLoggerCategory.Query> logger
+    )
     {
-        if (member.DeclaringType?.IsNullableValueType() == true
-            && instance != null)
+        if (member.DeclaringType?.IsNullableValueType() == true && instance != null)
         {
             switch (member.Name)
             {

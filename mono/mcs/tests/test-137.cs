@@ -3,43 +3,46 @@
 //
 using System;
 
-interface A {
-	void X ();
+interface A
+{
+    void X();
 }
 
-interface B {
-	void X ();
+interface B
+{
+    void X();
 }
 
-class C : A, B {
-	int var;
-	
-	public void X ()
-	{
-		var++;
-	}
+class C : A, B
+{
+    int var;
 
-	public static int Main ()
-	{
-		C c = new C ();
+    public void X()
+    {
+        var++;
+    }
 
-		A a = c;
-		B b = c;
+    public static int Main()
+    {
+        C c = new C();
 
-		if (c.var != 0)
-			return 1;
-		
-		a.X ();
-		if (c.var != 1)
-			return 2;
-		b.X ();
-		if (c.var != 2)
-			return 3;
-		c.X ();
-		if (c.var != 3)
-			return 4;
+        A a = c;
+        B b = c;
 
-		Console.WriteLine ("Test passes");
-		return 0;
-	}
+        if (c.var != 0)
+            return 1;
+
+        a.X();
+        if (c.var != 1)
+            return 2;
+        b.X();
+        if (c.var != 2)
+            return 3;
+        c.X();
+        if (c.var != 3)
+            return 4;
+
+        Console.WriteLine("Test passes");
+        return 0;
+    }
 }

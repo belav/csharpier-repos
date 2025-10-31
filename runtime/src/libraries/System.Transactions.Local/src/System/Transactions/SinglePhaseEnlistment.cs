@@ -5,9 +5,8 @@ namespace System.Transactions
 {
     public class SinglePhaseEnlistment : Enlistment
     {
-        internal SinglePhaseEnlistment(InternalEnlistment enlistment) : base(enlistment)
-        {
-        }
+        internal SinglePhaseEnlistment(InternalEnlistment enlistment)
+            : base(enlistment) { }
 
         public void Aborted()
         {
@@ -49,7 +48,6 @@ namespace System.Transactions
             }
         }
 
-
         public void Committed()
         {
             TransactionsEtwProvider etwLog = TransactionsEtwProvider.Log;
@@ -69,7 +67,6 @@ namespace System.Transactions
                 etwLog.MethodExit(TraceSourceType.TraceSourceLtm, this);
             }
         }
-
 
         public void InDoubt()
         {
@@ -94,7 +91,6 @@ namespace System.Transactions
                 etwLog.MethodExit(TraceSourceType.TraceSourceLtm, this);
             }
         }
-
 
         public void InDoubt(Exception? e)
         {

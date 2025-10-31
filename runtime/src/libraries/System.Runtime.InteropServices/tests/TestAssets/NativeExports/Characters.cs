@@ -27,7 +27,7 @@ namespace NativeExports
         }
 
         [UnmanagedCallersOnly(EntryPoint = "char_reverse_buffer_ref")]
-        public static void ReverseBuffer(ushort *buffer, int len)
+        public static void ReverseBuffer(ushort* buffer, int len)
         {
             var span = new Span<ushort>(buffer, len);
             span.Reverse();

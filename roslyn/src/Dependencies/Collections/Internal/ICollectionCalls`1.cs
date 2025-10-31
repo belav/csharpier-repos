@@ -18,7 +18,6 @@ namespace Microsoft.CodeAnalysis.Collections.Internal
     internal static class ICollectionCalls<T>
     {
         public static bool IsReadOnly<TCollection>(ref TCollection collection)
-            where TCollection : ICollection<T>
-            => collection.IsReadOnly;
+            where TCollection : ICollection<T> => collection.IsReadOnly;
     }
 }

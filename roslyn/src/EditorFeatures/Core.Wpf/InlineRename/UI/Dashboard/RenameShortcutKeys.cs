@@ -40,7 +40,9 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.InlineRename
                 return new string([char.ToUpperInvariant(localizedLabel[underscoreIndex + 1])]);
             }
 
-            Debug.Fail("Could not locate accelerator for " + localizedLabel + " for the rename dashboard");
+            Debug.Fail(
+                "Could not locate accelerator for " + localizedLabel + " for the rename dashboard"
+            );
             return defaultValue;
         }
     }

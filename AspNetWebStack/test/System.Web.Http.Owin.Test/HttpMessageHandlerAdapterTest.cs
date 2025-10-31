@@ -44,8 +44,11 @@ namespace System.Web.Http.Owin
             HttpMessageHandlerOptions options = CreateDummyOptions(messageHandler: null);
 
             // Act & Assert.
-            Assert.ThrowsArgument(() => CreateProductUnderTest(options), "options",
-                "HttpMessageHandlerOptions.MessageHandler must not be null.");
+            Assert.ThrowsArgument(
+                () => CreateProductUnderTest(options),
+                "options",
+                "HttpMessageHandlerOptions.MessageHandler must not be null."
+            );
         }
 
         [Fact]
@@ -58,8 +61,11 @@ namespace System.Web.Http.Owin
                 options.BufferPolicySelector = null;
 
                 // Act & Assert.
-                Assert.ThrowsArgument(() => CreateProductUnderTest(options), "options",
-                    "HttpMessageHandlerOptions.BufferPolicySelector must not be null.");
+                Assert.ThrowsArgument(
+                    () => CreateProductUnderTest(options),
+                    "options",
+                    "HttpMessageHandlerOptions.BufferPolicySelector must not be null."
+                );
             }
         }
 
@@ -73,8 +79,11 @@ namespace System.Web.Http.Owin
                 options.ExceptionLogger = null;
 
                 // Act & Assert.
-                Assert.ThrowsArgument(() => CreateProductUnderTest(options), "options",
-                    "HttpMessageHandlerOptions.ExceptionLogger must not be null.");
+                Assert.ThrowsArgument(
+                    () => CreateProductUnderTest(options),
+                    "options",
+                    "HttpMessageHandlerOptions.ExceptionLogger must not be null."
+                );
             }
         }
 
@@ -88,8 +97,11 @@ namespace System.Web.Http.Owin
                 options.ExceptionHandler = null;
 
                 // Act & Assert.
-                Assert.ThrowsArgument(() => CreateProductUnderTest(options), "options",
-                    "HttpMessageHandlerOptions.ExceptionHandler must not be null.");
+                Assert.ThrowsArgument(
+                    () => CreateProductUnderTest(options),
+                    "options",
+                    "HttpMessageHandlerOptions.ExceptionHandler must not be null."
+                );
             }
         }
 
@@ -102,8 +114,10 @@ namespace System.Web.Http.Owin
 
             // Act & Assert.
 #pragma warning disable 0618
-            Assert.ThrowsArgumentNull(() => new HttpMessageHandlerAdapter(null, messageHandler, bufferPolicySelector),
-                "messageHandler");
+            Assert.ThrowsArgumentNull(
+                () => new HttpMessageHandlerAdapter(null, messageHandler, bufferPolicySelector),
+                "messageHandler"
+            );
 #pragma warning restore 0618
         }
 
@@ -117,8 +131,10 @@ namespace System.Web.Http.Owin
 
                 // Act & Assert.
 #pragma warning disable 0618
-                Assert.ThrowsArgumentNull(() => new HttpMessageHandlerAdapter(null, messageHandler,
-                    bufferPolicySelector), "bufferPolicySelector");
+                Assert.ThrowsArgumentNull(
+                    () => new HttpMessageHandlerAdapter(null, messageHandler, bufferPolicySelector),
+                    "bufferPolicySelector"
+                );
 #pragma warning restore 0618
             }
         }
@@ -148,8 +164,11 @@ namespace System.Web.Http.Owin
             {
                 IHostBufferPolicySelector bufferPolicySelector = CreateDummyBufferPolicy();
 #pragma warning disable 0618
-                HttpMessageHandlerAdapter product = new HttpMessageHandlerAdapter(null, expectedMessageHandler,
-                    bufferPolicySelector);
+                HttpMessageHandlerAdapter product = new HttpMessageHandlerAdapter(
+                    null,
+                    expectedMessageHandler,
+                    bufferPolicySelector
+                );
 #pragma warning restore 0618
 
                 // Act
@@ -187,8 +206,11 @@ namespace System.Web.Http.Owin
             {
                 IHostBufferPolicySelector expectedBufferPolicySelector = CreateDummyBufferPolicy();
 #pragma warning disable 0618
-                HttpMessageHandlerAdapter product = new HttpMessageHandlerAdapter(null, messageHandler,
-                    expectedBufferPolicySelector);
+                HttpMessageHandlerAdapter product = new HttpMessageHandlerAdapter(
+                    null,
+                    messageHandler,
+                    expectedBufferPolicySelector
+                );
 #pragma warning restore 0618
 
                 // Act
@@ -226,8 +248,11 @@ namespace System.Web.Http.Owin
             {
                 IHostBufferPolicySelector bufferPolicySelector = CreateDummyBufferPolicy();
 #pragma warning disable 0618
-                HttpMessageHandlerAdapter product = new HttpMessageHandlerAdapter(null, messageHandler,
-                    bufferPolicySelector);
+                HttpMessageHandlerAdapter product = new HttpMessageHandlerAdapter(
+                    null,
+                    messageHandler,
+                    bufferPolicySelector
+                );
 #pragma warning restore 0618
 
                 // Act
@@ -265,8 +290,11 @@ namespace System.Web.Http.Owin
             {
                 IHostBufferPolicySelector bufferPolicySelector = CreateDummyBufferPolicy();
 #pragma warning disable 0618
-                HttpMessageHandlerAdapter product = new HttpMessageHandlerAdapter(null, messageHandler,
-                    bufferPolicySelector);
+                HttpMessageHandlerAdapter product = new HttpMessageHandlerAdapter(
+                    null,
+                    messageHandler,
+                    bufferPolicySelector
+                );
 #pragma warning restore 0618
 
                 // Act
@@ -305,8 +333,11 @@ namespace System.Web.Http.Owin
             {
                 IHostBufferPolicySelector bufferPolicySelector = CreateDummyBufferPolicy();
 #pragma warning disable 0618
-                HttpMessageHandlerAdapter product = new HttpMessageHandlerAdapter(null, messageHandler,
-                    bufferPolicySelector);
+                HttpMessageHandlerAdapter product = new HttpMessageHandlerAdapter(
+                    null,
+                    messageHandler,
+                    bufferPolicySelector
+                );
 #pragma warning restore 0618
 
                 // Act
@@ -341,7 +372,10 @@ namespace System.Web.Http.Owin
         public async Task Invoke_ThrowsOnNullRequest()
         {
             var handler = CreateOKHandlerStub();
-            var bufferPolicySelector = CreateBufferPolicySelector(bufferInput: false, bufferOutput: false);
+            var bufferPolicySelector = CreateBufferPolicySelector(
+                bufferInput: false,
+                bufferOutput: false
+            );
             var options = CreateValidOptions(handler, bufferPolicySelector);
             var adapter = CreateProductUnderTest(options);
             var mockContext = new Mock<IOwinContext>();
@@ -349,14 +383,18 @@ namespace System.Web.Http.Owin
 
             await Assert.ThrowsAsync<InvalidOperationException>(
                 () => adapter.Invoke(mockContext.Object),
-                "The OWIN context's Request property must not be null.");
+                "The OWIN context's Request property must not be null."
+            );
         }
 
         [Fact]
         public async Task Invoke_ThrowsOnNullResponse()
         {
             var handler = CreateOKHandlerStub();
-            var bufferPolicySelector = CreateBufferPolicySelector(bufferInput: false, bufferOutput: false);
+            var bufferPolicySelector = CreateBufferPolicySelector(
+                bufferInput: false,
+                bufferOutput: false
+            );
             var options = CreateValidOptions(handler, bufferPolicySelector);
             var adapter = CreateProductUnderTest(options);
             var mockContext = new Mock<IOwinContext>();
@@ -364,15 +402,25 @@ namespace System.Web.Http.Owin
 
             await Assert.ThrowsAsync<InvalidOperationException>(
                 () => adapter.Invoke(mockContext.Object),
-                "The OWIN context's Response property must not be null.");
+                "The OWIN context's Response property must not be null."
+            );
         }
 
         [Fact]
         public async Task Invoke_BuildsAppropriateRequestMessage()
         {
             var handler = CreateOKHandlerStub();
-            var bufferPolicySelector = CreateBufferPolicySelector(bufferInput: false, bufferOutput: false);
-            var environment = CreateOwinEnvironment("GET", "http", "localhost", "/vroot", "/api/customers");
+            var bufferPolicySelector = CreateBufferPolicySelector(
+                bufferInput: false,
+                bufferOutput: false
+            );
+            var environment = CreateOwinEnvironment(
+                "GET",
+                "http",
+                "localhost",
+                "/vroot",
+                "/api/customers"
+            );
             var options = CreateValidOptions(handler, bufferPolicySelector);
             var adapter = CreateProductUnderTest(options);
 
@@ -387,30 +435,53 @@ namespace System.Web.Http.Owin
         public async Task Invoke_BuildsUriWithQueryStringIfPresent()
         {
             var handler = CreateOKHandlerStub();
-            var bufferPolicySelector = CreateBufferPolicySelector(bufferInput: false, bufferOutput: false);
-            var environment = CreateOwinEnvironment("GET", "http", "localhost", "/vroot", "/api/customers");
+            var bufferPolicySelector = CreateBufferPolicySelector(
+                bufferInput: false,
+                bufferOutput: false
+            );
+            var environment = CreateOwinEnvironment(
+                "GET",
+                "http",
+                "localhost",
+                "/vroot",
+                "/api/customers"
+            );
             environment["owin.RequestQueryString"] = "id=45";
-            var adapter = CreateProductUnderTest(new HttpMessageHandlerOptions
-            {
-                MessageHandler = handler,
-                BufferPolicySelector = bufferPolicySelector,
-                ExceptionLogger = new EmptyExceptionLogger(),
-                ExceptionHandler = new DefaultExceptionHandler()
-            });
+            var adapter = CreateProductUnderTest(
+                new HttpMessageHandlerOptions
+                {
+                    MessageHandler = handler,
+                    BufferPolicySelector = bufferPolicySelector,
+                    ExceptionLogger = new EmptyExceptionLogger(),
+                    ExceptionHandler = new DefaultExceptionHandler(),
+                }
+            );
 
             await adapter.Invoke(new OwinContext(environment));
 
             var request = handler.Request;
             Assert.Equal(HttpMethod.Get, request.Method);
-            Assert.Equal("http://localhost/vroot/api/customers?id=45", request.RequestUri.AbsoluteUri);
+            Assert.Equal(
+                "http://localhost/vroot/api/customers?id=45",
+                request.RequestUri.AbsoluteUri
+            );
         }
 
         [Fact]
         public async Task Invoke_BuildsUriWithHostAndPort()
         {
             var handler = CreateOKHandlerStub();
-            var bufferPolicySelector = CreateBufferPolicySelector(bufferInput: false, bufferOutput: false);
-            var environment = CreateOwinEnvironment("GET", "http", "localhost:12345", "/vroot", "/api/customers");
+            var bufferPolicySelector = CreateBufferPolicySelector(
+                bufferInput: false,
+                bufferOutput: false
+            );
+            var environment = CreateOwinEnvironment(
+                "GET",
+                "http",
+                "localhost:12345",
+                "/vroot",
+                "/api/customers"
+            );
             var options = CreateValidOptions(handler, bufferPolicySelector);
             var adapter = CreateProductUnderTest(options);
 
@@ -418,7 +489,10 @@ namespace System.Web.Http.Owin
 
             var request = handler.Request;
             Assert.Equal(HttpMethod.Get, request.Method);
-            Assert.Equal("http://localhost:12345/vroot/api/customers", request.RequestUri.AbsoluteUri);
+            Assert.Equal(
+                "http://localhost:12345/vroot/api/customers",
+                request.RequestUri.AbsoluteUri
+            );
         }
 
         [Theory]
@@ -433,8 +507,17 @@ namespace System.Web.Http.Owin
         public async Task Invoke_CreatesUri_ThatGeneratesCorrectlyDecodedStrings(string decodedId)
         {
             var handler = CreateOKHandlerStub();
-            var bufferPolicySelector = CreateBufferPolicySelector(bufferInput: false, bufferOutput: false);
-            var environment = CreateOwinEnvironment("GET", "http", "localhost", "/vroot", "/api/customers/" + decodedId);
+            var bufferPolicySelector = CreateBufferPolicySelector(
+                bufferInput: false,
+                bufferOutput: false
+            );
+            var environment = CreateOwinEnvironment(
+                "GET",
+                "http",
+                "localhost",
+                "/vroot",
+                "/api/customers/" + decodedId
+            );
             var options = CreateValidOptions(handler, bufferPolicySelector);
             var adapter = CreateProductUnderTest(options);
             var route = new HttpRoute("api/customers/{id}");
@@ -451,11 +534,23 @@ namespace System.Web.Http.Owin
         [InlineData("%28%29", "()")]
         [InlineData("%5B%5D", "[]")]
         [InlineData("%7B%7D", "{}")]
-        public async Task Invoke_CreatesUri_ContainingCorrectlyDecodedStrings(string encoded, string decoded)
+        public async Task Invoke_CreatesUri_ContainingCorrectlyDecodedStrings(
+            string encoded,
+            string decoded
+        )
         {
             var handler = CreateOKHandlerStub();
-            var bufferPolicySelector = CreateBufferPolicySelector(bufferInput: false, bufferOutput: false);
-            var environment = CreateOwinEnvironment("GET", "http", "localhost", "/vroot", "/api/customers/" + encoded);
+            var bufferPolicySelector = CreateBufferPolicySelector(
+                bufferInput: false,
+                bufferOutput: false
+            );
+            var environment = CreateOwinEnvironment(
+                "GET",
+                "http",
+                "localhost",
+                "/vroot",
+                "/api/customers/" + encoded
+            );
             var options = CreateValidOptions(handler, bufferPolicySelector);
             var adapter = CreateProductUnderTest(options);
             var route = new HttpRoute("api/customers/{id}");
@@ -471,9 +566,19 @@ namespace System.Web.Http.Owin
         public async Task Invoke_AddsRequestHeadersToRequestMessage()
         {
             var handler = CreateOKHandlerStub();
-            var bufferPolicySelector = CreateBufferPolicySelector(bufferInput: false, bufferOutput: false);
-            var environment = CreateOwinEnvironment("GET", "http", "localhost", "/vroot", "/api/customers");
-            var requestHeaders = environment["owin.RequestHeaders"] as IDictionary<string, string[]>;
+            var bufferPolicySelector = CreateBufferPolicySelector(
+                bufferInput: false,
+                bufferOutput: false
+            );
+            var environment = CreateOwinEnvironment(
+                "GET",
+                "http",
+                "localhost",
+                "/vroot",
+                "/api/customers"
+            );
+            var requestHeaders =
+                environment["owin.RequestHeaders"] as IDictionary<string, string[]>;
             requestHeaders["Accept"] = new string[] { "application/json", "application/xml" };
             requestHeaders["Content-Length"] = new string[] { "45" };
             var options = CreateValidOptions(handler, bufferPolicySelector);
@@ -483,7 +588,10 @@ namespace System.Web.Http.Owin
 
             var request = handler.Request;
             Assert.Equal(2, request.Headers.Count());
-            Assert.Equal(new string[] { "application/json", "application/xml" }, request.Headers.Accept.Select(mediaType => mediaType.ToString()).ToArray());
+            Assert.Equal(
+                new string[] { "application/json", "application/xml" },
+                request.Headers.Accept.Select(mediaType => mediaType.ToString()).ToArray()
+            );
             Assert.Equal("localhost", request.Headers.Host);
             Assert.Single(request.Content.Headers);
             Assert.Equal(45, request.Content.Headers.ContentLength);
@@ -493,16 +601,28 @@ namespace System.Web.Http.Owin
         public async Task Invoke_SetsRequestBodyOnRequestMessage()
         {
             string body = null;
-            Func<HttpRequestMessage, CancellationToken, Task<HttpResponseMessage>> sendAsync = async (r, i) =>
-            {
-                body = await r.Content.ReadAsStringAsync();
-                return new HttpResponseMessage();
-            };
+            Func<HttpRequestMessage, CancellationToken, Task<HttpResponseMessage>> sendAsync =
+                async (r, i) =>
+                {
+                    body = await r.Content.ReadAsStringAsync();
+                    return new HttpResponseMessage();
+                };
             var handler = CreateLambdaMessageHandler(sendAsync);
-            var bufferPolicySelector = CreateBufferPolicySelector(bufferInput: false, bufferOutput: false);
-            var environment = CreateOwinEnvironment("GET", "http", "localhost", "/vroot", "/api/customers");
+            var bufferPolicySelector = CreateBufferPolicySelector(
+                bufferInput: false,
+                bufferOutput: false
+            );
+            var environment = CreateOwinEnvironment(
+                "GET",
+                "http",
+                "localhost",
+                "/vroot",
+                "/api/customers"
+            );
             var expectedBody = "This is the request body.";
-            environment["owin.RequestBody"] = new MemoryStream(Encoding.UTF8.GetBytes(expectedBody));
+            environment["owin.RequestBody"] = new MemoryStream(
+                Encoding.UTF8.GetBytes(expectedBody)
+            );
             var options = CreateValidOptions(handler, bufferPolicySelector);
             var adapter = CreateProductUnderTest(options);
 
@@ -524,15 +644,25 @@ namespace System.Web.Http.Owin
 
             string body = null;
             bool originalStreamDisposed = false;
-            Func<HttpRequestMessage, CancellationToken, Task<HttpResponseMessage>> sendAsync = async (r, i) =>
-            {
-                body = await r.Content.ReadAsStringAsync();
-                originalStreamDisposed = !requestBody.CanRead;
-                return new HttpResponseMessage();
-            };
+            Func<HttpRequestMessage, CancellationToken, Task<HttpResponseMessage>> sendAsync =
+                async (r, i) =>
+                {
+                    body = await r.Content.ReadAsStringAsync();
+                    originalStreamDisposed = !requestBody.CanRead;
+                    return new HttpResponseMessage();
+                };
             var handler = CreateLambdaMessageHandler(sendAsync);
-            var bufferPolicySelector = CreateBufferPolicySelector(bufferInput: bufferInput, bufferOutput: false);
-            var environment = CreateOwinEnvironment("GET", "http", "localhost", "/vroot", "/api/customers");
+            var bufferPolicySelector = CreateBufferPolicySelector(
+                bufferInput: bufferInput,
+                bufferOutput: false
+            );
+            var environment = CreateOwinEnvironment(
+                "GET",
+                "http",
+                "localhost",
+                "/vroot",
+                "/api/customers"
+            );
             environment["owin.RequestBody"] = requestBody;
             var options = CreateValidOptions(handler, bufferPolicySelector);
             var adapter = CreateProductUnderTest(options);
@@ -558,13 +688,18 @@ namespace System.Web.Http.Owin
         public async Task Invoke_IfBufferPolicyDisablesInputBuffering_DisablesRequestBuffering()
         {
             // Arrange
-            IHostBufferPolicySelector bufferPolicySelector = CreateBufferPolicySelector(bufferInput: false,
-                bufferOutput: false);
+            IHostBufferPolicySelector bufferPolicySelector = CreateBufferPolicySelector(
+                bufferInput: false,
+                bufferOutput: false
+            );
 
             using (HttpResponseMessage response = CreateResponse())
             using (HttpMessageHandler messageHandler = CreateStubMessageHandler(response))
-            using (HttpMessageHandlerAdapter product = CreateProductUnderTest(CreateValidOptions(messageHandler,
-                bufferPolicySelector)))
+            using (
+                HttpMessageHandlerAdapter product = CreateProductUnderTest(
+                    CreateValidOptions(messageHandler, bufferPolicySelector)
+                )
+            )
             {
                 bool bufferingDisabled = false;
                 Action disableBuffering = () => bufferingDisabled = true;
@@ -584,13 +719,18 @@ namespace System.Web.Http.Owin
         public async Task Invoke_IfBufferPolicyEnablesInputBuffering_DoesNotDisableRequestBuffering()
         {
             // Arrange
-            IHostBufferPolicySelector bufferPolicySelector = CreateBufferPolicySelector(bufferInput: true,
-                bufferOutput: false);
+            IHostBufferPolicySelector bufferPolicySelector = CreateBufferPolicySelector(
+                bufferInput: true,
+                bufferOutput: false
+            );
 
             using (HttpResponseMessage response = CreateResponse())
             using (HttpMessageHandler messageHandler = CreateStubMessageHandler(response))
-            using (HttpMessageHandlerAdapter product = CreateProductUnderTest(CreateValidOptions(messageHandler,
-                bufferPolicySelector)))
+            using (
+                HttpMessageHandlerAdapter product = CreateProductUnderTest(
+                    CreateValidOptions(messageHandler, bufferPolicySelector)
+                )
+            )
             {
                 bool bufferingDisabled = false;
                 Action disableBuffering = () => bufferingDisabled = true;
@@ -610,8 +750,17 @@ namespace System.Web.Http.Owin
         public async Task Invoke_SetsOwinEnvironment()
         {
             var handler = CreateOKHandlerStub();
-            var bufferPolicySelector = CreateBufferPolicySelector(bufferInput: false, bufferOutput: false);
-            var environment = CreateOwinEnvironment("GET", "http", "localhost", "/vroot", "/api/customers");
+            var bufferPolicySelector = CreateBufferPolicySelector(
+                bufferInput: false,
+                bufferOutput: false
+            );
+            var environment = CreateOwinEnvironment(
+                "GET",
+                "http",
+                "localhost",
+                "/vroot",
+                "/api/customers"
+            );
             var options = CreateValidOptions(handler, bufferPolicySelector);
             var adapter = CreateProductUnderTest(options);
 
@@ -625,21 +774,29 @@ namespace System.Web.Http.Owin
         public async Task Invoke_SetsOwinRequestContext()
         {
             // Arrange
-            IHostBufferPolicySelector bufferPolicySelector = CreateBufferPolicySelector(bufferInput: false,
-                bufferOutput: true);
+            IHostBufferPolicySelector bufferPolicySelector = CreateBufferPolicySelector(
+                bufferInput: false,
+                bufferOutput: true
+            );
 
             using (HttpResponseMessage response = CreateResponse())
             {
                 HttpRequestMessage request = null;
-                Func<HttpRequestMessage, CancellationToken, Task<HttpResponseMessage>> sendAsync = (r, c) =>
+                Func<HttpRequestMessage, CancellationToken, Task<HttpResponseMessage>> sendAsync = (
+                    r,
+                    c
+                ) =>
                 {
                     request = r;
                     return Task.FromResult(response);
                 };
 
                 using (HttpMessageHandler messageHandler = CreateLambdaMessageHandler(sendAsync))
-                using (HttpMessageHandlerAdapter product = CreateProductUnderTest(CreateValidOptions(messageHandler,
-                    bufferPolicySelector)))
+                using (
+                    HttpMessageHandlerAdapter product = CreateProductUnderTest(
+                        CreateValidOptions(messageHandler, bufferPolicySelector)
+                    )
+                )
                 {
                     IOwinRequest owinRequest = CreateFakeOwinRequest();
                     IOwinResponse owinResponse = CreateFakeOwinResponse();
@@ -650,7 +807,9 @@ namespace System.Web.Http.Owin
 
                     // Assert
                     HttpRequestContext requestContext = request.GetRequestContext();
-                    OwinHttpRequestContext typedContext = Assert.IsType<OwinHttpRequestContext>(requestContext);
+                    OwinHttpRequestContext typedContext = Assert.IsType<OwinHttpRequestContext>(
+                        requestContext
+                    );
                     Assert.Same(expectedContext, typedContext.Context);
                     Assert.Same(request, typedContext.Request);
                 }
@@ -661,11 +820,23 @@ namespace System.Web.Http.Owin
         [InlineData(null, false)]
         [InlineData(false, false)]
         [InlineData(true, true)]
-        public async Task Invoke_SetsRequestIsLocalProperty(bool? isLocal, bool expectedRequestLocal)
+        public async Task Invoke_SetsRequestIsLocalProperty(
+            bool? isLocal,
+            bool expectedRequestLocal
+        )
         {
             var handler = CreateOKHandlerStub();
-            var bufferPolicySelector = CreateBufferPolicySelector(bufferInput: false, bufferOutput: false);
-            var environment = CreateOwinEnvironment("GET", "http", "localhost", "/vroot", "/api/customers");
+            var bufferPolicySelector = CreateBufferPolicySelector(
+                bufferInput: false,
+                bufferOutput: false
+            );
+            var environment = CreateOwinEnvironment(
+                "GET",
+                "http",
+                "localhost",
+                "/vroot",
+                "/api/customers"
+            );
             if (isLocal.HasValue)
             {
                 environment["server.IsLocal"] = isLocal.Value;
@@ -683,8 +854,17 @@ namespace System.Web.Http.Owin
         public async Task Invoke_SetsClientCertificate()
         {
             var handler = CreateOKHandlerStub();
-            var bufferPolicySelector = CreateBufferPolicySelector(bufferInput: false, bufferOutput: false);
-            var environment = CreateOwinEnvironment("GET", "http", "localhost", "/vroot", "/api/customers");
+            var bufferPolicySelector = CreateBufferPolicySelector(
+                bufferInput: false,
+                bufferOutput: false
+            );
+            var environment = CreateOwinEnvironment(
+                "GET",
+                "http",
+                "localhost",
+                "/vroot",
+                "/api/customers"
+            );
             var clientCert = new Mock<X509Certificate2>().Object;
             environment["ssl.ClientCertificate"] = clientCert;
             var options = CreateValidOptions(handler, bufferPolicySelector);
@@ -700,8 +880,17 @@ namespace System.Web.Http.Owin
         public async Task Invoke_CallsMessageHandler_WithEnvironmentCancellationToken()
         {
             var handler = CreateOKHandlerStub();
-            var bufferPolicySelector = CreateBufferPolicySelector(bufferInput: false, bufferOutput: false);
-            var environment = CreateOwinEnvironment("GET", "http", "localhost", "/vroot", "/api/customers");
+            var bufferPolicySelector = CreateBufferPolicySelector(
+                bufferInput: false,
+                bufferOutput: false
+            );
+            var environment = CreateOwinEnvironment(
+                "GET",
+                "http",
+                "localhost",
+                "/vroot",
+                "/api/customers"
+            );
             var cancellationToken = new CancellationToken();
             environment["owin.CallCancelled"] = cancellationToken;
             var options = CreateValidOptions(handler, bufferPolicySelector);
@@ -716,8 +905,17 @@ namespace System.Web.Http.Owin
         public async Task Invoke_CallsMessageHandler_WithEnvironmentUser()
         {
             var handler = CreateOKHandlerStub();
-            var bufferPolicySelector = CreateBufferPolicySelector(bufferInput: false, bufferOutput: false);
-            var environment = CreateOwinEnvironment("GET", "http", "localhost", "/vroot", "/api/customers");
+            var bufferPolicySelector = CreateBufferPolicySelector(
+                bufferInput: false,
+                bufferOutput: false
+            );
+            var environment = CreateOwinEnvironment(
+                "GET",
+                "http",
+                "localhost",
+                "/vroot",
+                "/api/customers"
+            );
             var user = new Mock<IPrincipal>().Object;
             environment["server.User"] = user;
             var options = CreateValidOptions(handler, bufferPolicySelector);
@@ -733,14 +931,24 @@ namespace System.Web.Http.Owin
         {
             HttpResponseMessage response = null;
             var handler = new HandlerStub() { Response = response };
-            var bufferPolicySelector = CreateBufferPolicySelector(bufferInput: false, bufferOutput: false);
-            var environment = CreateOwinEnvironment("GET", "http", "localhost", "/vroot", "/api/customers");
+            var bufferPolicySelector = CreateBufferPolicySelector(
+                bufferInput: false,
+                bufferOutput: false
+            );
+            var environment = CreateOwinEnvironment(
+                "GET",
+                "http",
+                "localhost",
+                "/vroot",
+                "/api/customers"
+            );
             var options = CreateValidOptions(handler, bufferPolicySelector);
             var adapter = CreateProductUnderTest(options);
 
             await Assert.ThrowsAsync<InvalidOperationException>(
                 () => adapter.Invoke(new OwinContext(environment)),
-                "The message handler did not return a response message.");
+                "The message handler did not return a response message."
+            );
         }
 
         [Fact]
@@ -749,8 +957,17 @@ namespace System.Web.Http.Owin
             var mockNext = new Mock<OwinMiddleware>(MockBehavior.Strict, null);
             HttpResponseMessage response = new HttpResponseMessage(HttpStatusCode.OK);
             var handler = new HandlerStub() { Response = response, AddNoRouteMatchedKey = true };
-            var bufferPolicySelector = CreateBufferPolicySelector(bufferInput: false, bufferOutput: false);
-            var environment = CreateOwinEnvironment("GET", "http", "localhost", "/vroot", "/api/customers");
+            var bufferPolicySelector = CreateBufferPolicySelector(
+                bufferInput: false,
+                bufferOutput: false
+            );
+            var environment = CreateOwinEnvironment(
+                "GET",
+                "http",
+                "localhost",
+                "/vroot",
+                "/api/customers"
+            );
             var options = CreateValidOptions(handler, bufferPolicySelector);
             var adapter = CreateProductUnderTest(mockNext.Object, options);
 
@@ -764,8 +981,17 @@ namespace System.Web.Http.Owin
             var mockNext = new Mock<OwinMiddleware>(MockBehavior.Strict, null);
             HttpResponseMessage response = new HttpResponseMessage(HttpStatusCode.NotFound);
             var handler = new HandlerStub() { Response = response, AddNoRouteMatchedKey = false };
-            var bufferPolicySelector = CreateBufferPolicySelector(bufferInput: false, bufferOutput: false);
-            var environment = CreateOwinEnvironment("GET", "http", "localhost", "/vroot", "/api/customers");
+            var bufferPolicySelector = CreateBufferPolicySelector(
+                bufferInput: false,
+                bufferOutput: false
+            );
+            var environment = CreateOwinEnvironment(
+                "GET",
+                "http",
+                "localhost",
+                "/vroot",
+                "/api/customers"
+            );
             var options = CreateValidOptions(handler, bufferPolicySelector);
             var adapter = CreateProductUnderTest(mockNext.Object, options);
 
@@ -777,11 +1003,23 @@ namespace System.Web.Http.Owin
         public async Task Invoke_CallsNext_IfMessageHandlerReturns404WithNoRouteMatched()
         {
             var nextMock = new Mock<OwinMiddleware>(null);
-            nextMock.Setup(middleware => middleware.Invoke(It.IsAny<OwinContext>())).Returns(TaskHelpers.Completed()).Verifiable();
+            nextMock
+                .Setup(middleware => middleware.Invoke(It.IsAny<OwinContext>()))
+                .Returns(TaskHelpers.Completed())
+                .Verifiable();
             HttpResponseMessage response = new HttpResponseMessage(HttpStatusCode.NotFound);
             var handler = new HandlerStub() { Response = response, AddNoRouteMatchedKey = true };
-            var bufferPolicySelector = CreateBufferPolicySelector(bufferInput: false, bufferOutput: false);
-            var environment = CreateOwinEnvironment("GET", "http", "localhost", "/vroot", "/api/customers");
+            var bufferPolicySelector = CreateBufferPolicySelector(
+                bufferInput: false,
+                bufferOutput: false
+            );
+            var environment = CreateOwinEnvironment(
+                "GET",
+                "http",
+                "localhost",
+                "/vroot",
+                "/api/customers"
+            );
             var options = CreateValidOptions(handler, bufferPolicySelector);
             var adapter = CreateProductUnderTest(nextMock.Object, options);
 
@@ -794,10 +1032,22 @@ namespace System.Web.Http.Owin
         public async Task Invoke_SetsResponseStatusCodeAndReasonPhrase()
         {
             var expectedReasonPhrase = "OH NO!";
-            var response = new HttpResponseMessage(HttpStatusCode.ServiceUnavailable) { ReasonPhrase = expectedReasonPhrase };
+            var response = new HttpResponseMessage(HttpStatusCode.ServiceUnavailable)
+            {
+                ReasonPhrase = expectedReasonPhrase,
+            };
             var handler = new HandlerStub() { Response = response };
-            var bufferPolicySelector = CreateBufferPolicySelector(bufferInput: false, bufferOutput: false);
-            var environment = CreateOwinEnvironment("GET", "http", "localhost", "/vroot", "/api/customers");
+            var bufferPolicySelector = CreateBufferPolicySelector(
+                bufferInput: false,
+                bufferOutput: false
+            );
+            var environment = CreateOwinEnvironment(
+                "GET",
+                "http",
+                "localhost",
+                "/vroot",
+                "/api/customers"
+            );
             var options = CreateValidOptions(handler, bufferPolicySelector);
             var adapter = CreateProductUnderTest(options);
 
@@ -812,20 +1062,37 @@ namespace System.Web.Http.Owin
         {
             var response = new HttpResponseMessage(HttpStatusCode.OK);
             response.Headers.Location = new Uri("http://www.location.com/");
-            response.Content = new StringContent(@"{""x"":""y""}", Encoding.UTF8, "application/json");
+            response.Content = new StringContent(
+                @"{""x"":""y""}",
+                Encoding.UTF8,
+                "application/json"
+            );
             var handler = new HandlerStub() { Response = response };
-            var bufferPolicySelector = CreateBufferPolicySelector(bufferInput: false, bufferOutput: false);
-            var environment = CreateOwinEnvironment("GET", "http", "localhost", "/vroot", "/api/customers");
+            var bufferPolicySelector = CreateBufferPolicySelector(
+                bufferInput: false,
+                bufferOutput: false
+            );
+            var environment = CreateOwinEnvironment(
+                "GET",
+                "http",
+                "localhost",
+                "/vroot",
+                "/api/customers"
+            );
             var options = CreateValidOptions(handler, bufferPolicySelector);
             var adapter = CreateProductUnderTest(options);
 
             await adapter.Invoke(new OwinContext(environment));
 
-            var responseHeaders = environment["owin.ResponseHeaders"] as IDictionary<string, string[]>;
+            var responseHeaders =
+                environment["owin.ResponseHeaders"] as IDictionary<string, string[]>;
             Assert.Equal(3, responseHeaders.Count);
             Assert.Equal("http://www.location.com/", Assert.Single(responseHeaders["Location"]));
             Assert.Equal("9", Assert.Single(responseHeaders["Content-Length"]));
-            Assert.Equal("application/json; charset=utf-8", Assert.Single(responseHeaders["Content-Type"]));
+            Assert.Equal(
+                "application/json; charset=utf-8",
+                Assert.Single(responseHeaders["Content-Type"])
+            );
         }
 
         [Fact]
@@ -835,8 +1102,17 @@ namespace System.Web.Http.Owin
             var expectedBody = @"{""x"":""y""}";
             response.Content = new StringContent(expectedBody, Encoding.UTF8, "application/json");
             var handler = new HandlerStub() { Response = response };
-            var bufferPolicySelector = CreateBufferPolicySelector(bufferInput: false, bufferOutput: false);
-            var environment = CreateOwinEnvironment("GET", "http", "localhost", "/vroot", "/api/customers");
+            var bufferPolicySelector = CreateBufferPolicySelector(
+                bufferInput: false,
+                bufferOutput: false
+            );
+            var environment = CreateOwinEnvironment(
+                "GET",
+                "http",
+                "localhost",
+                "/vroot",
+                "/api/customers"
+            );
             var responseStream = new MemoryStream();
             environment["owin.ResponseBody"] = responseStream;
             var options = CreateValidOptions(handler, bufferPolicySelector);
@@ -861,14 +1137,24 @@ namespace System.Web.Http.Owin
             var response = new HttpResponseMessage(HttpStatusCode.OK);
             response.Content = new ObjectContent<string>("blue", new JsonMediaTypeFormatter());
             var handler = new HandlerStub() { Response = response };
-            var bufferPolicySelector = CreateBufferPolicySelector(bufferInput: false, bufferOutput: bufferOutput);
-            var environment = CreateOwinEnvironment("GET", "http", "localhost", "/vroot", "/api/customers");
+            var bufferPolicySelector = CreateBufferPolicySelector(
+                bufferInput: false,
+                bufferOutput: bufferOutput
+            );
+            var environment = CreateOwinEnvironment(
+                "GET",
+                "http",
+                "localhost",
+                "/vroot",
+                "/api/customers"
+            );
             var options = CreateValidOptions(handler, bufferPolicySelector);
             var adapter = CreateProductUnderTest(options);
 
             await adapter.Invoke(new OwinContext(environment));
 
-            var responseHeaders = environment["owin.ResponseHeaders"] as IDictionary<string, string[]>;
+            var responseHeaders =
+                environment["owin.ResponseHeaders"] as IDictionary<string, string[]>;
             if (bufferOutput)
             {
                 Assert.True(responseHeaders.ContainsKey("Content-Length"));
@@ -883,13 +1169,18 @@ namespace System.Web.Http.Owin
         public async Task Invoke_IfBufferPolicyDisablesOutputBuffering_DisablesResponseBuffering()
         {
             // Arrange
-            IHostBufferPolicySelector bufferPolicySelector = CreateBufferPolicySelector(bufferInput: false,
-                bufferOutput: false);
+            IHostBufferPolicySelector bufferPolicySelector = CreateBufferPolicySelector(
+                bufferInput: false,
+                bufferOutput: false
+            );
 
             using (HttpResponseMessage response = CreateResponse())
             using (HttpMessageHandler messageHandler = CreateStubMessageHandler(response))
-            using (HttpMessageHandlerAdapter product = CreateProductUnderTest(CreateValidOptions(messageHandler,
-                bufferPolicySelector)))
+            using (
+                HttpMessageHandlerAdapter product = CreateProductUnderTest(
+                    CreateValidOptions(messageHandler, bufferPolicySelector)
+                )
+            )
             {
                 IOwinRequest owinRequest = CreateFakeOwinRequest();
                 bool bufferingDisabled = false;
@@ -909,13 +1200,18 @@ namespace System.Web.Http.Owin
         public async Task Invoke_IfBufferPolicyEnablesOutputBuffering_DoesNotDisableResponseBuffering()
         {
             // Arrange
-            IHostBufferPolicySelector bufferPolicySelector = CreateBufferPolicySelector(bufferInput: false,
-                bufferOutput: true);
+            IHostBufferPolicySelector bufferPolicySelector = CreateBufferPolicySelector(
+                bufferInput: false,
+                bufferOutput: true
+            );
 
             using (HttpResponseMessage response = CreateResponse())
             using (HttpMessageHandler messageHandler = CreateStubMessageHandler(response))
-            using (HttpMessageHandlerAdapter product = CreateProductUnderTest(CreateValidOptions(messageHandler,
-                bufferPolicySelector)))
+            using (
+                HttpMessageHandlerAdapter product = CreateProductUnderTest(
+                    CreateValidOptions(messageHandler, bufferPolicySelector)
+                )
+            )
             {
                 IOwinRequest owinRequest = CreateFakeOwinRequest();
                 bool bufferingDisabled = false;
@@ -936,14 +1232,24 @@ namespace System.Web.Http.Owin
         {
             var response = new HttpResponseMessage(HttpStatusCode.OK);
             var handler = new HandlerStub() { Response = response };
-            var bufferPolicySelector = CreateBufferPolicySelector(bufferInput: false, bufferOutput: false);
-            var environment = CreateOwinEnvironment("GET", "http", "localhost", "/vroot", "/api/customers");
+            var bufferPolicySelector = CreateBufferPolicySelector(
+                bufferInput: false,
+                bufferOutput: false
+            );
+            var environment = CreateOwinEnvironment(
+                "GET",
+                "http",
+                "localhost",
+                "/vroot",
+                "/api/customers"
+            );
             var options = CreateValidOptions(handler, bufferPolicySelector);
             var adapter = CreateProductUnderTest(options);
 
             await adapter.Invoke(new OwinContext(environment));
 
-            var responseHeaders = environment["owin.ResponseHeaders"] as IDictionary<string, string[]>;
+            var responseHeaders =
+                environment["owin.ResponseHeaders"] as IDictionary<string, string[]>;
             Assert.Equal("0", responseHeaders["Content-Length"][0]);
         }
 
@@ -951,17 +1257,29 @@ namespace System.Web.Http.Owin
         public async Task Invoke_IfTransferEncodingChunkedAndContentLengthAreBothSet_IgnoresContentLength()
         {
             var response = new HttpResponseMessage(HttpStatusCode.OK);
-            response.Content = new StreamContent(new MemoryStream(Encoding.UTF8.GetBytes("Hello world")));
+            response.Content = new StreamContent(
+                new MemoryStream(Encoding.UTF8.GetBytes("Hello world"))
+            );
             response.Headers.TransferEncodingChunked = true;
             var handler = new HandlerStub() { Response = response };
-            var bufferPolicySelector = CreateBufferPolicySelector(bufferInput: false, bufferOutput: false);
-            var environment = CreateOwinEnvironment("GET", "http", "localhost", "/vroot", "/api/customers");
+            var bufferPolicySelector = CreateBufferPolicySelector(
+                bufferInput: false,
+                bufferOutput: false
+            );
+            var environment = CreateOwinEnvironment(
+                "GET",
+                "http",
+                "localhost",
+                "/vroot",
+                "/api/customers"
+            );
             var options = CreateValidOptions(handler, bufferPolicySelector);
             var adapter = CreateProductUnderTest(options);
 
             await adapter.Invoke(new OwinContext(environment));
 
-            var responseHeaders = environment["owin.ResponseHeaders"] as IDictionary<string, string[]>;
+            var responseHeaders =
+                environment["owin.ResponseHeaders"] as IDictionary<string, string[]>;
             Assert.False(responseHeaders.ContainsKey("Content-Length"));
         }
 
@@ -969,12 +1287,18 @@ namespace System.Web.Http.Owin
         public async Task Invoke_IfTransferEncodingIsJustChunked_DoesNotCopyHeader()
         {
             // Arrange
-            IHostBufferPolicySelector bufferPolicy = CreateBufferPolicySelector(bufferInput: false, bufferOutput: false);
+            IHostBufferPolicySelector bufferPolicy = CreateBufferPolicySelector(
+                bufferInput: false,
+                bufferOutput: false
+            );
 
             using (HttpResponseMessage response = CreateResponse())
             using (HttpMessageHandler messageHandler = CreateStubMessageHandler(response))
-            using (HttpMessageHandlerAdapter product = CreateProductUnderTest(CreateValidOptions(messageHandler,
-                bufferPolicy)))
+            using (
+                HttpMessageHandlerAdapter product = CreateProductUnderTest(
+                    CreateValidOptions(messageHandler, bufferPolicy)
+                )
+            )
             {
                 response.Headers.TransferEncodingChunked = true;
 
@@ -994,12 +1318,18 @@ namespace System.Web.Http.Owin
         public async Task Invoke_IfTransferEncodingIsIdentity_DoesCopyHeader()
         {
             // Arrange
-            IHostBufferPolicySelector bufferPolicy = CreateBufferPolicySelector(bufferInput: false, bufferOutput: false);
+            IHostBufferPolicySelector bufferPolicy = CreateBufferPolicySelector(
+                bufferInput: false,
+                bufferOutput: false
+            );
 
             using (HttpResponseMessage response = CreateResponse())
             using (HttpMessageHandler messageHandler = CreateStubMessageHandler(response))
-            using (HttpMessageHandlerAdapter product = CreateProductUnderTest(CreateValidOptions(messageHandler,
-                bufferPolicy)))
+            using (
+                HttpMessageHandlerAdapter product = CreateProductUnderTest(
+                    CreateValidOptions(messageHandler, bufferPolicy)
+                )
+            )
             {
                 response.Headers.TransferEncoding.Add(new TransferCodingHeaderValue("identity"));
 
@@ -1020,12 +1350,18 @@ namespace System.Web.Http.Owin
         public async Task Invoke_IfTransferEncodingIsIdentityChunked_DoesCopyHeader()
         {
             // Arrange
-            IHostBufferPolicySelector bufferPolicy = CreateBufferPolicySelector(bufferInput: false, bufferOutput: false);
+            IHostBufferPolicySelector bufferPolicy = CreateBufferPolicySelector(
+                bufferInput: false,
+                bufferOutput: false
+            );
 
             using (HttpResponseMessage response = CreateResponse())
             using (HttpMessageHandler messageHandler = CreateStubMessageHandler(response))
-            using (HttpMessageHandlerAdapter product = CreateProductUnderTest(CreateValidOptions(messageHandler,
-                bufferPolicy)))
+            using (
+                HttpMessageHandlerAdapter product = CreateProductUnderTest(
+                    CreateValidOptions(messageHandler, bufferPolicy)
+                )
+            )
             {
                 response.Headers.TransferEncoding.Add(new TransferCodingHeaderValue("identity"));
                 response.Headers.TransferEncodingChunked = true;
@@ -1048,22 +1384,31 @@ namespace System.Web.Http.Owin
         public async Task Invoke_IfBufferingFaults_DisposesOriginalResponse()
         {
             // Arrange
-            IHostBufferPolicySelector bufferPolicySelector = CreateBufferPolicySelector(bufferInput: false,
-                bufferOutput: true);
+            IHostBufferPolicySelector bufferPolicySelector = CreateBufferPolicySelector(
+                bufferInput: false,
+                bufferOutput: true
+            );
 
             using (HttpContent content = CreateFaultingContent())
             using (SpyDisposeHttpResponseMessage spy = new SpyDisposeHttpResponseMessage(content))
             using (HttpMessageHandler messageHandler = CreateStubMessageHandler(spy))
             {
                 HttpMessageHandlerOptions options = CreateValidOptions(messageHandler);
-                options.BufferPolicySelector = CreateBufferPolicySelector(bufferInput: false, bufferOutput: true);
+                options.BufferPolicySelector = CreateBufferPolicySelector(
+                    bufferInput: false,
+                    bufferOutput: true
+                );
 
                 using (HttpMessageHandlerAdapter product = CreateProductUnderTest(options))
                 using (MemoryStream output = new MemoryStream())
                 {
                     IOwinRequest owinRequest = CreateFakeOwinRequest();
                     IOwinResponse owinResponse = CreateFakeOwinResponse(Stream.Null);
-                    IOwinContext context = CreateStubOwinContext(owinRequest, owinResponse, isLocal: true);
+                    IOwinContext context = CreateStubOwinContext(
+                        owinRequest,
+                        owinResponse,
+                        isLocal: true
+                    );
 
                     // Act
                     await product.Invoke(context);
@@ -1091,7 +1436,10 @@ namespace System.Web.Http.Owin
                 IExceptionHandler exceptionHandler = exceptionHandlerMock.Object;
 
                 HttpMessageHandlerOptions options = CreateValidOptions(messageHandler);
-                options.BufferPolicySelector = CreateBufferPolicySelector(bufferInput: false, bufferOutput: true);
+                options.BufferPolicySelector = CreateBufferPolicySelector(
+                    bufferInput: false,
+                    bufferOutput: true
+                );
                 options.ExceptionLogger = exceptionLogger;
                 options.ExceptionHandler = exceptionHandler;
 
@@ -1102,7 +1450,11 @@ namespace System.Web.Http.Owin
                     IOwinRequest owinRequest = CreateFakeOwinRequest(expectedCancellationToken);
                     IOwinResponse owinResponse = CreateFakeOwinResponse(Stream.Null);
 
-                    IOwinContext context = CreateStubOwinContext(owinRequest, owinResponse, isLocal: true);
+                    IOwinContext context = CreateStubOwinContext(
+                        owinRequest,
+                        owinResponse,
+                        isLocal: true
+                    );
 
                     // Act & Assert
                     await Assert.ThrowsAsync<Exception>(() => product.Invoke(context));
@@ -1110,16 +1462,31 @@ namespace System.Web.Http.Owin
                     Func<ExceptionContext, bool> exceptionContextMatches = (c) =>
                         c != null
                         && c.Exception == expectedException
-                        && c.CatchBlock == OwinExceptionCatchBlocks.HttpMessageHandlerAdapterBufferContent
+                        && c.CatchBlock
+                            == OwinExceptionCatchBlocks.HttpMessageHandlerAdapterBufferContent
                         && c.Request != null
                         && c.Response == expectedResponse;
 
-                    exceptionLoggerMock.Verify(l => l.LogAsync(
-                        It.Is<ExceptionLoggerContext>(c => exceptionContextMatches(c.ExceptionContext)),
-                        expectedCancellationToken), Times.Once());
-                    exceptionHandlerMock.Verify(h => h.HandleAsync(
-                        It.Is<ExceptionHandlerContext>((c) => exceptionContextMatches(c.ExceptionContext)),
-                        expectedCancellationToken), Times.Once());
+                    exceptionLoggerMock.Verify(
+                        l =>
+                            l.LogAsync(
+                                It.Is<ExceptionLoggerContext>(c =>
+                                    exceptionContextMatches(c.ExceptionContext)
+                                ),
+                                expectedCancellationToken
+                            ),
+                        Times.Once()
+                    );
+                    exceptionHandlerMock.Verify(
+                        h =>
+                            h.HandleAsync(
+                                It.Is<ExceptionHandlerContext>(
+                                    (c) => exceptionContextMatches(c.ExceptionContext)
+                                ),
+                                expectedCancellationToken
+                            ),
+                        Times.Once()
+                    );
                 }
             }
         }
@@ -1134,14 +1501,21 @@ namespace System.Web.Http.Owin
             using (HttpResponseMessage expectedResponse = CreateResponse(content))
             using (HttpMessageHandler messageHandler = CreateStubMessageHandler(expectedResponse))
             {
-                Mock<IExceptionLogger> exceptionLoggerMock = new Mock<IExceptionLogger>(MockBehavior.Strict);
+                Mock<IExceptionLogger> exceptionLoggerMock = new Mock<IExceptionLogger>(
+                    MockBehavior.Strict
+                );
                 IExceptionLogger exceptionLogger = exceptionLoggerMock.Object;
 
-                Mock<IExceptionHandler> exceptionHandlerMock = new Mock<IExceptionHandler>(MockBehavior.Strict);
+                Mock<IExceptionHandler> exceptionHandlerMock = new Mock<IExceptionHandler>(
+                    MockBehavior.Strict
+                );
                 IExceptionHandler exceptionHandler = exceptionHandlerMock.Object;
 
                 HttpMessageHandlerOptions options = CreateValidOptions(messageHandler);
-                options.BufferPolicySelector = CreateBufferPolicySelector(bufferInput: false, bufferOutput: true);
+                options.BufferPolicySelector = CreateBufferPolicySelector(
+                    bufferInput: false,
+                    bufferOutput: true
+                );
                 options.ExceptionLogger = exceptionLogger;
                 options.ExceptionHandler = exceptionHandler;
 
@@ -1152,10 +1526,16 @@ namespace System.Web.Http.Owin
                     IOwinRequest owinRequest = CreateFakeOwinRequest(expectedCancellationToken);
                     IOwinResponse owinResponse = CreateFakeOwinResponse(Stream.Null);
 
-                    IOwinContext context = CreateStubOwinContext(owinRequest, owinResponse, isLocal: true);
+                    IOwinContext context = CreateStubOwinContext(
+                        owinRequest,
+                        owinResponse,
+                        isLocal: true
+                    );
 
                     // Act & Assert
-                    await Assert.ThrowsAsync<OperationCanceledException>(() => product.Invoke(context));
+                    await Assert.ThrowsAsync<OperationCanceledException>(() =>
+                        product.Invoke(context)
+                    );
                 }
             }
         }
@@ -1175,7 +1555,10 @@ namespace System.Web.Http.Owin
                 IExceptionHandler exceptionHandler = CreateExceptionHandler(result: null);
 
                 HttpMessageHandlerOptions options = CreateValidOptions(messageHandler);
-                options.BufferPolicySelector = CreateBufferPolicySelector(bufferInput: false, bufferOutput: true);
+                options.BufferPolicySelector = CreateBufferPolicySelector(
+                    bufferInput: false,
+                    bufferOutput: true
+                );
                 options.ExceptionLogger = exceptionLogger;
                 options.ExceptionHandler = exceptionHandler;
 
@@ -1184,10 +1567,16 @@ namespace System.Web.Http.Owin
                     IOwinRequest owinRequest = CreateFakeOwinRequest();
                     IOwinResponse owinResponse = CreateFakeOwinResponse(Stream.Null);
 
-                    IOwinContext context = CreateStubOwinContext(owinRequest, owinResponse, isLocal: true);
+                    IOwinContext context = CreateStubOwinContext(
+                        owinRequest,
+                        owinResponse,
+                        isLocal: true
+                    );
 
                     // Act & Assert
-                    var exception = await Assert.ThrowsAsync<Exception>(() => product.Invoke(context));
+                    var exception = await Assert.ThrowsAsync<Exception>(() =>
+                        product.Invoke(context)
+                    );
                     Assert.Same(expectedException, exception);
                     Assert.NotNull(exception.StackTrace);
                     Assert.StartsWith(expectedStackTrace, exception.StackTrace);
@@ -1213,9 +1602,14 @@ namespace System.Web.Http.Owin
                 errorResponse.Content = errorContent;
 
                 HttpMessageHandlerOptions options = CreateValidOptions(messageHandler);
-                options.BufferPolicySelector = CreateBufferPolicySelector(bufferInput: false, bufferOutput: true);
+                options.BufferPolicySelector = CreateBufferPolicySelector(
+                    bufferInput: false,
+                    bufferOutput: true
+                );
                 options.ExceptionLogger = CreateStubExceptionLogger();
-                options.ExceptionHandler = CreateExceptionHandler(new ResponseMessageResult(errorResponse));
+                options.ExceptionHandler = CreateExceptionHandler(
+                    new ResponseMessageResult(errorResponse)
+                );
 
                 using (HttpMessageHandlerAdapter product = CreateProductUnderTest(options))
                 using (MemoryStream output = new MemoryStream())
@@ -1226,10 +1620,15 @@ namespace System.Web.Http.Owin
                     Mock<IOwinResponse> mock = new Mock<IOwinResponse>();
                     mock.Setup(r => r.Headers).Returns(new Mock<IHeaderDictionary>().Object);
                     mock.SetupGet(r => r.Body).Returns(output);
-                    mock.SetupSet(r => r.StatusCode = It.IsAny<int>()).Callback<int>((v) => statusCode = v);
+                    mock.SetupSet(r => r.StatusCode = It.IsAny<int>())
+                        .Callback<int>((v) => statusCode = v);
                     IOwinResponse owinResponse = mock.Object;
 
-                    IOwinContext context = CreateStubOwinContext(owinRequest, owinResponse, isLocal: true);
+                    IOwinContext context = CreateStubOwinContext(
+                        owinRequest,
+                        owinResponse,
+                        isLocal: true
+                    );
 
                     // Act
                     await product.Invoke(context);
@@ -1238,7 +1637,10 @@ namespace System.Web.Http.Owin
                     Assert.Equal((int)expectedErrorStatusCode, statusCode);
                     using (HttpRequestMessage request = CreateRequest(includeErrorDetail: true))
                     {
-                        Assert.Equal(expectedErrorContents, Encoding.UTF8.GetString(output.ToArray()));
+                        Assert.Equal(
+                            expectedErrorContents,
+                            Encoding.UTF8.GetString(output.ToArray())
+                        );
                     }
                 }
             }
@@ -1249,14 +1651,19 @@ namespace System.Web.Http.Owin
         {
             // Arrange
             Exception expectedException = CreateException();
-            IHostBufferPolicySelector bufferPolicySelector = CreateBufferPolicySelector(bufferInput: false,
-                bufferOutput: true);
+            IHostBufferPolicySelector bufferPolicySelector = CreateBufferPolicySelector(
+                bufferInput: false,
+                bufferOutput: true
+            );
 
             using (HttpContent content = CreateFaultingContent(expectedException))
             using (HttpResponseMessage response = CreateResponse(content))
             using (HttpMessageHandler messageHandler = CreateStubMessageHandler(response))
-            using (HttpMessageHandlerAdapter product = CreateProductUnderTest(CreateValidOptions(messageHandler,
-                bufferPolicySelector)))
+            using (
+                HttpMessageHandlerAdapter product = CreateProductUnderTest(
+                    CreateValidOptions(messageHandler, bufferPolicySelector)
+                )
+            )
             using (MemoryStream output = new MemoryStream())
             {
                 IOwinRequest owinRequest = CreateFakeOwinRequest();
@@ -1265,10 +1672,15 @@ namespace System.Web.Http.Owin
                 Mock<IOwinResponse> mock = new Mock<IOwinResponse>();
                 mock.Setup(r => r.Headers).Returns(new Mock<IHeaderDictionary>().Object);
                 mock.SetupGet(r => r.Body).Returns(output);
-                mock.SetupSet(r => r.StatusCode = It.IsAny<int>()).Callback<int>((v) => statusCode = v);
+                mock.SetupSet(r => r.StatusCode = It.IsAny<int>())
+                    .Callback<int>((v) => statusCode = v);
                 IOwinResponse owinResponse = mock.Object;
 
-                IOwinContext context = CreateStubOwinContext(owinRequest, owinResponse, isLocal: true);
+                IOwinContext context = CreateStubOwinContext(
+                    owinRequest,
+                    owinResponse,
+                    isLocal: true
+                );
 
                 // Act
                 await product.Invoke(context);
@@ -1276,8 +1688,12 @@ namespace System.Web.Http.Owin
                 // Assert
                 Assert.Equal(500, statusCode);
                 using (HttpRequestMessage request = CreateRequest(includeErrorDetail: true))
-                using (HttpResponseMessage expectedResponse = request.CreateErrorResponse(
-                    HttpStatusCode.InternalServerError, expectedException))
+                using (
+                    HttpResponseMessage expectedResponse = request.CreateErrorResponse(
+                        HttpStatusCode.InternalServerError,
+                        expectedException
+                    )
+                )
                 {
                     string expectedContents = await expectedResponse.Content.ReadAsStringAsync();
                     Assert.Equal(expectedContents, Encoding.UTF8.GetString(output.ToArray()));
@@ -1294,13 +1710,22 @@ namespace System.Web.Http.Owin
 
             using (HttpContent content = CreateFaultingContent(expectedOriginalException))
             using (HttpResponseMessage expectedOriginalResponse = CreateResponse(content))
-            using (HttpMessageHandler messageHandler = CreateStubMessageHandler(expectedOriginalResponse))
+            using (
+                HttpMessageHandler messageHandler = CreateStubMessageHandler(
+                    expectedOriginalResponse
+                )
+            )
             using (HttpContent errorContent = CreateFaultingContent(expectedErrorException))
-            using (SpyDisposeHttpResponseMessage spy = new SpyDisposeHttpResponseMessage(errorContent))
+            using (
+                SpyDisposeHttpResponseMessage spy = new SpyDisposeHttpResponseMessage(errorContent)
+            )
             using (CancellationTokenSource tokenSource = CreateCancellationTokenSource())
             {
                 HttpMessageHandlerOptions options = CreateValidOptions(messageHandler);
-                options.BufferPolicySelector = CreateBufferPolicySelector(bufferInput: false, bufferOutput: true);
+                options.BufferPolicySelector = CreateBufferPolicySelector(
+                    bufferInput: false,
+                    bufferOutput: true
+                );
                 options.ExceptionHandler = CreateExceptionHandler(new ResponseMessageResult(spy));
 
                 using (HttpMessageHandlerAdapter product = CreateProductUnderTest(options))
@@ -1309,7 +1734,11 @@ namespace System.Web.Http.Owin
                     IOwinRequest owinRequest = CreateFakeOwinRequest(expectedCancellationToken);
                     IOwinResponse owinResponse = CreateFakeOwinResponse(Stream.Null);
 
-                    IOwinContext context = CreateStubOwinContext(owinRequest, owinResponse, isLocal: true);
+                    IOwinContext context = CreateStubOwinContext(
+                        owinRequest,
+                        owinResponse,
+                        isLocal: true
+                    );
 
                     // Act
                     await product.Invoke(context);
@@ -1329,7 +1758,11 @@ namespace System.Web.Http.Owin
 
             using (HttpContent content = CreateFaultingContent(expectedOriginalException))
             using (HttpResponseMessage expectedOriginalResponse = CreateResponse(content))
-            using (HttpMessageHandler messageHandler = CreateStubMessageHandler(expectedOriginalResponse))
+            using (
+                HttpMessageHandler messageHandler = CreateStubMessageHandler(
+                    expectedOriginalResponse
+                )
+            )
             using (HttpContent errorContent = CreateFaultingContent(expectedErrorException))
             using (HttpResponseMessage expectedErrorResponse = CreateResponse(errorContent))
             using (CancellationTokenSource tokenSource = CreateCancellationTokenSource())
@@ -1338,9 +1771,14 @@ namespace System.Web.Http.Owin
                 IExceptionLogger exceptionLogger = mock.Object;
 
                 HttpMessageHandlerOptions options = CreateValidOptions(messageHandler);
-                options.BufferPolicySelector = CreateBufferPolicySelector(bufferInput: false, bufferOutput: true);
+                options.BufferPolicySelector = CreateBufferPolicySelector(
+                    bufferInput: false,
+                    bufferOutput: true
+                );
                 options.ExceptionLogger = exceptionLogger;
-                options.ExceptionHandler = CreateExceptionHandler(new ResponseMessageResult(expectedErrorResponse));
+                options.ExceptionHandler = CreateExceptionHandler(
+                    new ResponseMessageResult(expectedErrorResponse)
+                );
 
                 using (HttpMessageHandlerAdapter product = CreateProductUnderTest(options))
                 {
@@ -1348,28 +1786,46 @@ namespace System.Web.Http.Owin
                     IOwinRequest owinRequest = CreateFakeOwinRequest(expectedCancellationToken);
                     IOwinResponse owinResponse = CreateFakeOwinResponse(Stream.Null);
 
-                    IOwinContext context = CreateStubOwinContext(owinRequest, owinResponse, isLocal: true);
+                    IOwinContext context = CreateStubOwinContext(
+                        owinRequest,
+                        owinResponse,
+                        isLocal: true
+                    );
 
                     // Act
                     await product.Invoke(context);
 
                     // Assert
-                    mock.Verify(l => l.LogAsync(It.Is<ExceptionLoggerContext>(c =>
-                        c.ExceptionContext != null
-                        && c.ExceptionContext.Exception == expectedOriginalException
-                        && c.ExceptionContext.CatchBlock ==
-                            OwinExceptionCatchBlocks.HttpMessageHandlerAdapterBufferContent
-                        && c.ExceptionContext.Request != null
-                        && c.ExceptionContext.Response == expectedOriginalResponse),
-                        expectedCancellationToken), Times.Once());
-                    mock.Verify(l => l.LogAsync(It.Is<ExceptionLoggerContext>(c =>
-                        c.ExceptionContext != null
-                        && c.ExceptionContext.Exception == expectedErrorException
-                        && c.ExceptionContext.CatchBlock ==
-                            OwinExceptionCatchBlocks.HttpMessageHandlerAdapterBufferError
-                        && c.ExceptionContext.Request != null
-                        && c.ExceptionContext.Response == expectedErrorResponse),
-                        expectedCancellationToken), Times.Once());
+                    mock.Verify(
+                        l =>
+                            l.LogAsync(
+                                It.Is<ExceptionLoggerContext>(c =>
+                                    c.ExceptionContext != null
+                                    && c.ExceptionContext.Exception == expectedOriginalException
+                                    && c.ExceptionContext.CatchBlock
+                                        == OwinExceptionCatchBlocks.HttpMessageHandlerAdapterBufferContent
+                                    && c.ExceptionContext.Request != null
+                                    && c.ExceptionContext.Response == expectedOriginalResponse
+                                ),
+                                expectedCancellationToken
+                            ),
+                        Times.Once()
+                    );
+                    mock.Verify(
+                        l =>
+                            l.LogAsync(
+                                It.Is<ExceptionLoggerContext>(c =>
+                                    c.ExceptionContext != null
+                                    && c.ExceptionContext.Exception == expectedErrorException
+                                    && c.ExceptionContext.CatchBlock
+                                        == OwinExceptionCatchBlocks.HttpMessageHandlerAdapterBufferError
+                                    && c.ExceptionContext.Request != null
+                                    && c.ExceptionContext.Response == expectedErrorResponse
+                                ),
+                                expectedCancellationToken
+                            ),
+                        Times.Once()
+                    );
                 }
             }
         }
@@ -1383,7 +1839,11 @@ namespace System.Web.Http.Owin
 
             using (HttpContent content = CreateFaultingContent(expectedOriginalException))
             using (HttpResponseMessage expectedOriginalResponse = CreateResponse(content))
-            using (HttpMessageHandler messageHandler = CreateStubMessageHandler(expectedOriginalResponse))
+            using (
+                HttpMessageHandler messageHandler = CreateStubMessageHandler(
+                    expectedOriginalResponse
+                )
+            )
             using (HttpContent errorContent = CreateFaultingContent(expectedErrorException))
             using (HttpResponseMessage expectedErrorResponse = CreateResponse(errorContent))
             using (CancellationTokenSource tokenSource = CreateCancellationTokenSource())
@@ -1392,9 +1852,14 @@ namespace System.Web.Http.Owin
                 IExceptionLogger exceptionLogger = mock.Object;
 
                 HttpMessageHandlerOptions options = CreateValidOptions(messageHandler);
-                options.BufferPolicySelector = CreateBufferPolicySelector(bufferInput: false, bufferOutput: true);
+                options.BufferPolicySelector = CreateBufferPolicySelector(
+                    bufferInput: false,
+                    bufferOutput: true
+                );
                 options.ExceptionLogger = exceptionLogger;
-                options.ExceptionHandler = CreateExceptionHandler(new ResponseMessageResult(expectedErrorResponse));
+                options.ExceptionHandler = CreateExceptionHandler(
+                    new ResponseMessageResult(expectedErrorResponse)
+                );
 
                 using (HttpMessageHandlerAdapter product = CreateProductUnderTest(options))
                 {
@@ -1402,30 +1867,50 @@ namespace System.Web.Http.Owin
                     IOwinRequest owinRequest = CreateFakeOwinRequest(expectedCancellationToken);
                     IOwinResponse owinResponse = CreateFakeOwinResponse(Stream.Null);
 
-                    IOwinContext context = CreateStubOwinContext(owinRequest, owinResponse, isLocal: true);
+                    IOwinContext context = CreateStubOwinContext(
+                        owinRequest,
+                        owinResponse,
+                        isLocal: true
+                    );
 
                     // Act & Assert
-                    await Assert.ThrowsAsync<OperationCanceledException>(() => product.Invoke(context));
+                    await Assert.ThrowsAsync<OperationCanceledException>(() =>
+                        product.Invoke(context)
+                    );
 
-                    mock.Verify(l => l.LogAsync(It.Is<ExceptionLoggerContext>(c =>
-                        c.ExceptionContext != null
-                        && c.ExceptionContext.Exception == expectedOriginalException
-                        && c.ExceptionContext.CatchBlock ==
-                            OwinExceptionCatchBlocks.HttpMessageHandlerAdapterBufferContent
-                        && c.ExceptionContext.Request != null
-                        && c.ExceptionContext.Response == expectedOriginalResponse),
-                        expectedCancellationToken), Times.Once());
+                    mock.Verify(
+                        l =>
+                            l.LogAsync(
+                                It.Is<ExceptionLoggerContext>(c =>
+                                    c.ExceptionContext != null
+                                    && c.ExceptionContext.Exception == expectedOriginalException
+                                    && c.ExceptionContext.CatchBlock
+                                        == OwinExceptionCatchBlocks.HttpMessageHandlerAdapterBufferContent
+                                    && c.ExceptionContext.Request != null
+                                    && c.ExceptionContext.Response == expectedOriginalResponse
+                                ),
+                                expectedCancellationToken
+                            ),
+                        Times.Once()
+                    );
 
                     // This shouldn't be called for 'HttpMessageHandlerAdapterBufferError' because that's what's being
                     // cancelled.
-                    mock.Verify(l => l.LogAsync(It.Is<ExceptionLoggerContext>(c =>
-                        c.ExceptionContext != null
-                        && c.ExceptionContext.Exception == expectedErrorException
-                        && c.ExceptionContext.CatchBlock ==
-                            OwinExceptionCatchBlocks.HttpMessageHandlerAdapterBufferError
-                        && c.ExceptionContext.Request != null
-                        && c.ExceptionContext.Response == expectedErrorResponse),
-                        expectedCancellationToken), Times.Never());
+                    mock.Verify(
+                        l =>
+                            l.LogAsync(
+                                It.Is<ExceptionLoggerContext>(c =>
+                                    c.ExceptionContext != null
+                                    && c.ExceptionContext.Exception == expectedErrorException
+                                    && c.ExceptionContext.CatchBlock
+                                        == OwinExceptionCatchBlocks.HttpMessageHandlerAdapterBufferError
+                                    && c.ExceptionContext.Request != null
+                                    && c.ExceptionContext.Response == expectedErrorResponse
+                                ),
+                                expectedCancellationToken
+                            ),
+                        Times.Never()
+                    );
                 }
             }
         }
@@ -1434,8 +1919,10 @@ namespace System.Web.Http.Owin
         public async Task Invoke_IfBufferingErrorFaults_SendsEmptyErrorResponse()
         {
             // Arrange
-            IHostBufferPolicySelector bufferPolicySelector = CreateBufferPolicySelector(bufferInput: false,
-                bufferOutput: true);
+            IHostBufferPolicySelector bufferPolicySelector = CreateBufferPolicySelector(
+                bufferInput: false,
+                bufferOutput: true
+            );
 
             using (HttpContent content = CreateFaultingContent())
             using (HttpResponseMessage response = CreateResponse(content))
@@ -1444,8 +1931,13 @@ namespace System.Web.Http.Owin
             using (HttpMessageHandler messageHandler = CreateStubMessageHandler(response))
             {
                 HttpMessageHandlerOptions options = CreateValidOptions(messageHandler);
-                options.BufferPolicySelector = CreateBufferPolicySelector(bufferInput: false, bufferOutput: true);
-                options.ExceptionHandler = CreateExceptionHandler(new ResponseMessageResult(errorResponse));
+                options.BufferPolicySelector = CreateBufferPolicySelector(
+                    bufferInput: false,
+                    bufferOutput: true
+                );
+                options.ExceptionHandler = CreateExceptionHandler(
+                    new ResponseMessageResult(errorResponse)
+                );
 
                 using (HttpMessageHandlerAdapter product = CreateProductUnderTest(options))
                 using (MemoryStream output = new MemoryStream())
@@ -1456,10 +1948,15 @@ namespace System.Web.Http.Owin
                     Mock<IOwinResponse> mock = new Mock<IOwinResponse>();
                     mock.Setup(r => r.Headers).Returns(new Mock<IHeaderDictionary>().Object);
                     mock.SetupGet(r => r.Body).Returns(output);
-                    mock.SetupSet(r => r.StatusCode = It.IsAny<int>()).Callback<int>((v) => statusCode = v);
+                    mock.SetupSet(r => r.StatusCode = It.IsAny<int>())
+                        .Callback<int>((v) => statusCode = v);
                     IOwinResponse owinResponse = mock.Object;
 
-                    IOwinContext context = CreateStubOwinContext(owinRequest, owinResponse, isLocal: true);
+                    IOwinContext context = CreateStubOwinContext(
+                        owinRequest,
+                        owinResponse,
+                        isLocal: true
+                    );
 
                     // Act
                     await product.Invoke(context);
@@ -1475,14 +1972,19 @@ namespace System.Web.Http.Owin
         public async Task Invoke_IfStreamingFaults_ReturnsCanceledTask()
         {
             // Arrange
-            IHostBufferPolicySelector bufferPolicySelector = CreateBufferPolicySelector(bufferInput: false,
-                bufferOutput: false);
+            IHostBufferPolicySelector bufferPolicySelector = CreateBufferPolicySelector(
+                bufferInput: false,
+                bufferOutput: false
+            );
 
             using (HttpContent content = CreateFaultingContent())
             using (HttpResponseMessage response = CreateResponse(content))
             using (HttpMessageHandler messageHandler = CreateStubMessageHandler(response))
-            using (HttpMessageHandlerAdapter product = CreateProductUnderTest(CreateValidOptions(messageHandler,
-                bufferPolicySelector)))
+            using (
+                HttpMessageHandlerAdapter product = CreateProductUnderTest(
+                    CreateValidOptions(messageHandler, bufferPolicySelector)
+                )
+            )
             {
                 IOwinRequest owinRequest = CreateFakeOwinRequest();
                 IOwinResponse owinResponse = CreateFakeOwinResponse();
@@ -1508,7 +2010,10 @@ namespace System.Web.Http.Owin
                 IExceptionLogger exceptionLogger = mock.Object;
 
                 HttpMessageHandlerOptions options = CreateValidOptions(messageHandler);
-                options.BufferPolicySelector = CreateBufferPolicySelector(bufferInput: false, bufferOutput: false);
+                options.BufferPolicySelector = CreateBufferPolicySelector(
+                    bufferInput: false,
+                    bufferOutput: false
+                );
                 options.ExceptionLogger = exceptionLogger;
 
                 using (HttpMessageHandlerAdapter product = CreateProductUnderTest(options))
@@ -1524,15 +2029,23 @@ namespace System.Web.Http.Owin
                     // Act & Assert
                     await Assert.ThrowsAsync<TaskCanceledException>(() => product.Invoke(context));
 
-                    mock.Verify(l => l.LogAsync(It.Is<ExceptionLoggerContext>((c) =>
-                        c != null
-                        && c.ExceptionContext != null
-                        && c.ExceptionContext.Exception == expectedException
-                        && c.ExceptionContext.CatchBlock ==
-                            OwinExceptionCatchBlocks.HttpMessageHandlerAdapterStreamContent
-                        && c.ExceptionContext.Request != null
-                        && c.ExceptionContext.Response == expectedResponse),
-                        expectedCancellationToken), Times.Once());
+                    mock.Verify(
+                        l =>
+                            l.LogAsync(
+                                It.Is<ExceptionLoggerContext>(
+                                    (c) =>
+                                        c != null
+                                        && c.ExceptionContext != null
+                                        && c.ExceptionContext.Exception == expectedException
+                                        && c.ExceptionContext.CatchBlock
+                                            == OwinExceptionCatchBlocks.HttpMessageHandlerAdapterStreamContent
+                                        && c.ExceptionContext.Request != null
+                                        && c.ExceptionContext.Response == expectedResponse
+                                ),
+                                expectedCancellationToken
+                            ),
+                        Times.Once()
+                    );
                 }
             }
         }
@@ -1551,7 +2064,10 @@ namespace System.Web.Http.Owin
                 IExceptionLogger exceptionLogger = mock.Object;
 
                 HttpMessageHandlerOptions options = CreateValidOptions(messageHandler);
-                options.BufferPolicySelector = CreateBufferPolicySelector(bufferInput: false, bufferOutput: false);
+                options.BufferPolicySelector = CreateBufferPolicySelector(
+                    bufferInput: false,
+                    bufferOutput: false
+                );
                 options.ExceptionLogger = exceptionLogger;
 
                 using (HttpMessageHandlerAdapter product = CreateProductUnderTest(options))
@@ -1565,7 +2081,9 @@ namespace System.Web.Http.Owin
                     IOwinContext context = CreateStubOwinContext(owinRequest, owinResponse);
 
                     // Act
-                    await Assert.ThrowsAsync<OperationCanceledException>(() => product.Invoke(context));
+                    await Assert.ThrowsAsync<OperationCanceledException>(() =>
+                        product.Invoke(context)
+                    );
                 }
             }
         }
@@ -1600,15 +2118,23 @@ namespace System.Web.Http.Owin
                     await product.Invoke(context);
 
                     // Assert
-                    mock.Verify(l => l.LogAsync(It.Is<ExceptionLoggerContext>((c) =>
-                        c != null
-                        && c.ExceptionContext != null
-                        && c.ExceptionContext.Exception == expectedException
-                        && c.ExceptionContext.CatchBlock ==
-                            OwinExceptionCatchBlocks.HttpMessageHandlerAdapterComputeContentLength
-                        && c.ExceptionContext.Request != null
-                        && c.ExceptionContext.Response == expectedResponse),
-                        expectedCancellationToken), Times.Once());
+                    mock.Verify(
+                        l =>
+                            l.LogAsync(
+                                It.Is<ExceptionLoggerContext>(
+                                    (c) =>
+                                        c != null
+                                        && c.ExceptionContext != null
+                                        && c.ExceptionContext.Exception == expectedException
+                                        && c.ExceptionContext.CatchBlock
+                                            == OwinExceptionCatchBlocks.HttpMessageHandlerAdapterComputeContentLength
+                                        && c.ExceptionContext.Request != null
+                                        && c.ExceptionContext.Response == expectedResponse
+                                ),
+                                expectedCancellationToken
+                            ),
+                        Times.Once()
+                    );
                 }
             }
         }
@@ -1629,12 +2155,20 @@ namespace System.Web.Http.Owin
                 {
                     IOwinRequest owinRequest = CreateFakeOwinRequest();
 
-                    Mock<IOwinResponse> owinResponseMock = new Mock<IOwinResponse>(MockBehavior.Strict);
+                    Mock<IOwinResponse> owinResponseMock = new Mock<IOwinResponse>(
+                        MockBehavior.Strict
+                    );
                     int statusCode = 0;
-                    owinResponseMock.SetupGet(r => r.Environment).Returns((IDictionary<string, object>)null);
-                    owinResponseMock.SetupSet(r => r.StatusCode = It.IsAny<int>()).Callback<int>(s => statusCode = s);
+                    owinResponseMock
+                        .SetupGet(r => r.Environment)
+                        .Returns((IDictionary<string, object>)null);
+                    owinResponseMock
+                        .SetupSet(r => r.StatusCode = It.IsAny<int>())
+                        .Callback<int>(s => statusCode = s);
                     int? contentLength = null;
-                    Mock<IHeaderDictionary> headersMock = new Mock<IHeaderDictionary>(MockBehavior.Strict);
+                    Mock<IHeaderDictionary> headersMock = new Mock<IHeaderDictionary>(
+                        MockBehavior.Strict
+                    );
                     headersMock
                         .As<IDictionary<string, string[]>>()
                         .SetupSet(h => h["Content-Length"] = It.IsAny<string[]>())
@@ -1692,11 +2226,15 @@ namespace System.Web.Http.Owin
             }
         }
 
-        private static IHostBufferPolicySelector CreateBufferPolicySelector(bool bufferInput, bool bufferOutput)
+        private static IHostBufferPolicySelector CreateBufferPolicySelector(
+            bool bufferInput,
+            bool bufferOutput
+        )
         {
             var mock = new Mock<IHostBufferPolicySelector>();
             mock.Setup(bps => bps.UseBufferedInputStream(It.IsAny<object>())).Returns(bufferInput);
-            mock.Setup(bps => bps.UseBufferedOutputStream(It.IsAny<HttpResponseMessage>())).Returns(bufferOutput);
+            mock.Setup(bps => bps.UseBufferedOutputStream(It.IsAny<HttpResponseMessage>()))
+                .Returns(bufferOutput);
             return mock.Object;
         }
 
@@ -1727,14 +2265,16 @@ namespace System.Web.Http.Owin
             return mock.Object;
         }
 
-        private static HttpMessageHandlerOptions CreateDummyOptions(HttpMessageHandler messageHandler)
+        private static HttpMessageHandlerOptions CreateDummyOptions(
+            HttpMessageHandler messageHandler
+        )
         {
             return new HttpMessageHandlerOptions
             {
                 MessageHandler = messageHandler,
                 BufferPolicySelector = CreateDummyBufferPolicy(),
                 ExceptionLogger = CreateDummyExceptionLogger(),
-                ExceptionHandler = CreateDummyExceptionHandler()
+                ExceptionHandler = CreateDummyExceptionHandler(),
             };
         }
 
@@ -1746,8 +2286,12 @@ namespace System.Web.Http.Owin
         private static IExceptionHandler CreateExceptionHandler(IHttpActionResult result)
         {
             Mock<IExceptionHandler> mock = new Mock<IExceptionHandler>(MockBehavior.Strict);
-            mock
-                .Setup(h => h.HandleAsync(It.IsAny<ExceptionHandlerContext>(), It.IsAny<CancellationToken>()))
+            mock.Setup(h =>
+                    h.HandleAsync(
+                        It.IsAny<ExceptionHandlerContext>(),
+                        It.IsAny<CancellationToken>()
+                    )
+                )
                 .Callback<ExceptionHandlerContext, CancellationToken>((c, i) => c.Result = result)
                 .Returns(Task.FromResult(0));
             return mock.Object;
@@ -1782,9 +2326,15 @@ namespace System.Web.Http.Owin
 
         private static IOwinRequest CreateFakeOwinRequest(Action disableBuffering)
         {
-            Mock<IDictionary<string, object>> environmentMock = new Mock<IDictionary<string, object>>(MockBehavior.Strict);
+            Mock<IDictionary<string, object>> environmentMock = new Mock<
+                IDictionary<string, object>
+            >(MockBehavior.Strict);
             object disableBufferingValue = disableBuffering;
-            environmentMock.Setup(d => d.TryGetValue("server.DisableRequestBuffering", out disableBufferingValue)).Returns(true);
+            environmentMock
+                .Setup(d =>
+                    d.TryGetValue("server.DisableRequestBuffering", out disableBufferingValue)
+                )
+                .Returns(true);
             IDictionary<string, object> environment = environmentMock.Object;
 
             Mock<IOwinRequest> mock = CreateFakeOwinRequestMock(CancellationToken.None);
@@ -1792,11 +2342,14 @@ namespace System.Web.Http.Owin
             return mock.Object;
         }
 
-        private static Mock<IOwinRequest> CreateFakeOwinRequestMock(CancellationToken cancellationToken)
+        private static Mock<IOwinRequest> CreateFakeOwinRequestMock(
+            CancellationToken cancellationToken
+        )
         {
             Mock<IHeaderDictionary> headersMock = new Mock<IHeaderDictionary>(MockBehavior.Strict);
-            headersMock.Setup(h => h.GetEnumerator()).Returns(
-                new Mock<IEnumerator<KeyValuePair<string, string[]>>>().Object);
+            headersMock
+                .Setup(h => h.GetEnumerator())
+                .Returns(new Mock<IEnumerator<KeyValuePair<string, string[]>>>().Object);
 
             Mock<IOwinRequest> mock = new Mock<IOwinRequest>(MockBehavior.Strict);
             mock.SetupGet(r => r.Method).Returns("GET");
@@ -1823,9 +2376,15 @@ namespace System.Web.Http.Owin
 
         private static IOwinResponse CreateFakeOwinResponse(Action disableBuffering)
         {
-            Mock<IDictionary<string, object>> environmentMock = new Mock<IDictionary<string, object>>(MockBehavior.Strict);
+            Mock<IDictionary<string, object>> environmentMock = new Mock<
+                IDictionary<string, object>
+            >(MockBehavior.Strict);
             object disableBufferingValue = disableBuffering;
-            environmentMock.Setup(d => d.TryGetValue("server.DisableResponseBuffering", out disableBufferingValue)).Returns(true);
+            environmentMock
+                .Setup(d =>
+                    d.TryGetValue("server.DisableResponseBuffering", out disableBufferingValue)
+                )
+                .Returns(true);
             IDictionary<string, object> environment = environmentMock.Object;
 
             Mock<IOwinResponse> mock = CreateFakeOwinResponseMock();
@@ -1869,17 +2428,30 @@ namespace System.Web.Http.Owin
         {
             Mock<MediaTypeFormatter> mock = new Mock<MediaTypeFormatter>();
             mock.Setup(f => f.CanWriteType(It.IsAny<Type>())).Returns(true);
-            mock.Setup(f => f.GetPerRequestFormatterInstance(It.IsAny<Type>(), It.IsAny<HttpRequestMessage>(),
-                It.IsAny<MediaTypeHeaderValue>())).Returns(mock.Object);
-            mock
-                .Setup(f => f.WriteToStreamAsync(It.IsAny<Type>(), It.IsAny<object>(), It.IsAny<Stream>(),
-                    It.IsAny<HttpContent>(), It.IsAny<TransportContext>()))
+            mock.Setup(f =>
+                    f.GetPerRequestFormatterInstance(
+                        It.IsAny<Type>(),
+                        It.IsAny<HttpRequestMessage>(),
+                        It.IsAny<MediaTypeHeaderValue>()
+                    )
+                )
+                .Returns(mock.Object);
+            mock.Setup(f =>
+                    f.WriteToStreamAsync(
+                        It.IsAny<Type>(),
+                        It.IsAny<object>(),
+                        It.IsAny<Stream>(),
+                        It.IsAny<HttpContent>(),
+                        It.IsAny<TransportContext>()
+                    )
+                )
                 .Returns(CreateFaultedTask(exception));
             return mock.Object;
         }
 
         private static HttpMessageHandler CreateLambdaMessageHandler(
-            Func<HttpRequestMessage, CancellationToken, Task<HttpResponseMessage>> sendAsync)
+            Func<HttpRequestMessage, CancellationToken, Task<HttpResponseMessage>> sendAsync
+        )
         {
             return new LambdaHttpMessageHandler(sendAsync);
         }
@@ -1890,28 +2462,46 @@ namespace System.Web.Http.Owin
             return new HandlerStub() { Response = response };
         }
 
-        private static Dictionary<string, object> CreateOwinEnvironment(string method, string scheme, string hostHeaderValue, string pathBase, string path)
+        private static Dictionary<string, object> CreateOwinEnvironment(
+            string method,
+            string scheme,
+            string hostHeaderValue,
+            string pathBase,
+            string path
+        )
         {
             var environment = new Dictionary<string, object>(StringComparer.OrdinalIgnoreCase);
             environment["owin.RequestMethod"] = method;
             environment["owin.RequestScheme"] = scheme;
-            environment["owin.RequestHeaders"] = new Dictionary<string, string[]>(StringComparer.OrdinalIgnoreCase) { { "Host", new string[] { hostHeaderValue } } };
+            environment["owin.RequestHeaders"] = new Dictionary<string, string[]>(
+                StringComparer.OrdinalIgnoreCase
+            )
+            {
+                { "Host", new string[] { hostHeaderValue } },
+            };
             environment["owin.RequestPathBase"] = pathBase;
             environment["owin.RequestPath"] = path;
             environment["owin.RequestQueryString"] = "";
             environment["owin.RequestBody"] = new MemoryStream();
             environment["owin.CallCancelled"] = new CancellationToken();
-            environment["owin.ResponseHeaders"] = new Dictionary<string, string[]>(StringComparer.OrdinalIgnoreCase);
+            environment["owin.ResponseHeaders"] = new Dictionary<string, string[]>(
+                StringComparer.OrdinalIgnoreCase
+            );
             environment["owin.ResponseBody"] = new MemoryStream();
             return environment;
         }
 
-        private static HttpMessageHandlerAdapter CreateProductUnderTest(HttpMessageHandlerOptions options)
+        private static HttpMessageHandlerAdapter CreateProductUnderTest(
+            HttpMessageHandlerOptions options
+        )
         {
             return CreateProductUnderTest(next: null, options: options);
         }
 
-        private static HttpMessageHandlerAdapter CreateProductUnderTest(OwinMiddleware next, HttpMessageHandlerOptions options)
+        private static HttpMessageHandlerAdapter CreateProductUnderTest(
+            OwinMiddleware next,
+            HttpMessageHandlerOptions options
+        )
         {
             return new HttpMessageHandlerAdapter(next, options);
         }
@@ -1924,10 +2514,9 @@ namespace System.Web.Http.Owin
         private static HttpRequestMessage CreateRequest(bool includeErrorDetail)
         {
             HttpRequestMessage request = CreateRequest();
-            request.SetRequestContext(new HttpRequestContext
-            {
-                IncludeErrorDetail = includeErrorDetail
-            });
+            request.SetRequestContext(
+                new HttpRequestContext { IncludeErrorDetail = includeErrorDetail }
+            );
             return request;
         }
 
@@ -1938,17 +2527,18 @@ namespace System.Web.Http.Owin
 
         private static HttpResponseMessage CreateResponse(HttpContent content)
         {
-            return new HttpResponseMessage
-            {
-                Content = content
-            };
+            return new HttpResponseMessage { Content = content };
         }
 
         private static Mock<IExceptionHandler> CreateStubExceptionHandlerMock()
         {
             Mock<IExceptionHandler> mock = new Mock<IExceptionHandler>(MockBehavior.Strict);
-            mock
-                .Setup(h => h.HandleAsync(It.IsAny<ExceptionHandlerContext>(), It.IsAny<CancellationToken>()))
+            mock.Setup(h =>
+                    h.HandleAsync(
+                        It.IsAny<ExceptionHandlerContext>(),
+                        It.IsAny<CancellationToken>()
+                    )
+                )
                 .Returns(Task.FromResult(0));
             return mock;
         }
@@ -1961,8 +2551,9 @@ namespace System.Web.Http.Owin
         private static Mock<IExceptionLogger> CreateStubExceptionLoggerMock()
         {
             Mock<IExceptionLogger> mock = new Mock<IExceptionLogger>(MockBehavior.Strict);
-            mock
-                .Setup(l => l.LogAsync(It.IsAny<ExceptionLoggerContext>(), It.IsAny<CancellationToken>()))
+            mock.Setup(l =>
+                    l.LogAsync(It.IsAny<ExceptionLoggerContext>(), It.IsAny<CancellationToken>())
+                )
                 .Returns(Task.FromResult(0));
             return mock;
         }
@@ -1972,7 +2563,10 @@ namespace System.Web.Http.Owin
             return new LambdaHttpMessageHandler((r, c) => Task.FromResult(response));
         }
 
-        private static IOwinContext CreateStubOwinContext(IOwinRequest request, IOwinResponse response)
+        private static IOwinContext CreateStubOwinContext(
+            IOwinRequest request,
+            IOwinResponse response
+        )
         {
             Mock<IOwinContext> mock = new Mock<IOwinContext>(MockBehavior.Strict);
             mock.Setup(c => c.Request).Returns(request);
@@ -1980,7 +2574,11 @@ namespace System.Web.Http.Owin
             return mock.Object;
         }
 
-        private static IOwinContext CreateStubOwinContext(IOwinRequest request, IOwinResponse response, bool isLocal)
+        private static IOwinContext CreateStubOwinContext(
+            IOwinRequest request,
+            IOwinResponse response,
+            bool isLocal
+        )
         {
             Mock<IOwinContext> mock = new Mock<IOwinContext>(MockBehavior.Strict);
             mock.Setup(c => c.Request).Returns(request);
@@ -1994,22 +2592,28 @@ namespace System.Web.Http.Owin
             return new ThrowingHttpContent(exception);
         }
 
-        private static HttpMessageHandlerOptions CreateValidOptions(HttpMessageHandler messageHandler)
+        private static HttpMessageHandlerOptions CreateValidOptions(
+            HttpMessageHandler messageHandler
+        )
         {
-            IHostBufferPolicySelector bufferPolicy =
-                CreateBufferPolicySelector(bufferInput: false, bufferOutput: false);
+            IHostBufferPolicySelector bufferPolicy = CreateBufferPolicySelector(
+                bufferInput: false,
+                bufferOutput: false
+            );
             return CreateValidOptions(messageHandler, bufferPolicy);
         }
 
-        private static HttpMessageHandlerOptions CreateValidOptions(HttpMessageHandler messageHandler,
-            IHostBufferPolicySelector bufferPolicySelector)
+        private static HttpMessageHandlerOptions CreateValidOptions(
+            HttpMessageHandler messageHandler,
+            IHostBufferPolicySelector bufferPolicySelector
+        )
         {
             return new HttpMessageHandlerOptions
             {
                 MessageHandler = messageHandler,
                 BufferPolicySelector = bufferPolicySelector,
                 ExceptionLogger = new EmptyExceptionLogger(),
-                ExceptionHandler = new DefaultExceptionHandler()
+                ExceptionHandler = new DefaultExceptionHandler(),
             };
         }
 
@@ -2021,7 +2625,10 @@ namespace System.Web.Http.Owin
             public IPrincipal User { get; set; }
             public bool AddNoRouteMatchedKey { get; set; }
 
-            protected override Task<HttpResponseMessage> SendAsync(HttpRequestMessage request, CancellationToken cancellationToken)
+            protected override Task<HttpResponseMessage> SendAsync(
+                HttpRequestMessage request,
+                CancellationToken cancellationToken
+            )
             {
                 Request = request;
                 CancellationToken = cancellationToken;
@@ -2038,16 +2645,23 @@ namespace System.Web.Http.Owin
 
         private class LambdaHttpMessageHandler : HttpMessageHandler
         {
-            private readonly Func<HttpRequestMessage, CancellationToken, Task<HttpResponseMessage>> _sendAsync;
+            private readonly Func<
+                HttpRequestMessage,
+                CancellationToken,
+                Task<HttpResponseMessage>
+            > _sendAsync;
 
             public LambdaHttpMessageHandler(
-                Func<HttpRequestMessage, CancellationToken, Task<HttpResponseMessage>> sendAsync)
+                Func<HttpRequestMessage, CancellationToken, Task<HttpResponseMessage>> sendAsync
+            )
             {
                 _sendAsync = sendAsync;
             }
 
-            protected override Task<HttpResponseMessage> SendAsync(HttpRequestMessage request,
-                CancellationToken cancellationToken)
+            protected override Task<HttpResponseMessage> SendAsync(
+                HttpRequestMessage request,
+                CancellationToken cancellationToken
+            )
             {
                 return _sendAsync.Invoke(request, cancellationToken);
             }
@@ -2107,8 +2721,10 @@ namespace System.Web.Http.Owin
         {
             public bool Disposed { get; private set; }
 
-            protected override Task<HttpResponseMessage> SendAsync(HttpRequestMessage request,
-                CancellationToken cancellationToken)
+            protected override Task<HttpResponseMessage> SendAsync(
+                HttpRequestMessage request,
+                CancellationToken cancellationToken
+            )
             {
                 throw new NotImplementedException();
             }
@@ -2154,9 +2770,7 @@ namespace System.Web.Http.Owin
                 get { return true; }
             }
 
-            public override void Flush()
-            {
-            }
+            public override void Flush() { }
 
             public override long Length
             {
@@ -2165,13 +2779,8 @@ namespace System.Web.Http.Owin
 
             public override long Position
             {
-                get
-                {
-                    return 0;
-                }
-                set
-                {
-                }
+                get { return 0; }
+                set { }
             }
 
             public override int Read(byte[] buffer, int offset, int count)
@@ -2184,13 +2793,9 @@ namespace System.Web.Http.Owin
                 throw new NotSupportedException();
             }
 
-            public override void SetLength(long value)
-            {
-            }
+            public override void SetLength(long value) { }
 
-            public override void Write(byte[] buffer, int offset, int count)
-            {
-            }
+            public override void Write(byte[] buffer, int offset, int count) { }
 
             protected override void Dispose(bool disposing)
             {

@@ -16,7 +16,12 @@ namespace Roslyn.Utilities
         {
             private readonly StringBuilder _stringBuilder;
 
-            public ThrowIfTrueInterpolatedStringHandler(int literalLength, int formattedCount, bool condition, out bool success)
+            public ThrowIfTrueInterpolatedStringHandler(
+                int literalLength,
+                int formattedCount,
+                bool condition,
+                out bool success
+            )
             {
                 _stringBuilder = condition ? new StringBuilder(capacity: literalLength) : null!;
                 success = condition;
@@ -34,7 +39,12 @@ namespace Roslyn.Utilities
         {
             private readonly StringBuilder _stringBuilder;
 
-            public ThrowIfFalseInterpolatedStringHandler(int literalLength, int formattedCount, bool condition, out bool success)
+            public ThrowIfFalseInterpolatedStringHandler(
+                int literalLength,
+                int formattedCount,
+                bool condition,
+                out bool success
+            )
             {
                 _stringBuilder = condition ? null! : new StringBuilder(capacity: literalLength);
                 success = !condition;
@@ -52,7 +62,12 @@ namespace Roslyn.Utilities
         {
             private readonly StringBuilder _stringBuilder;
 
-            public ThrowIfNullInterpolatedStringHandler(int literalLength, int formattedCount, T? value, out bool success)
+            public ThrowIfNullInterpolatedStringHandler(
+                int literalLength,
+                int formattedCount,
+                T? value,
+                out bool success
+            )
             {
                 _stringBuilder = value is null ? new StringBuilder(capacity: literalLength) : null!;
                 success = value is null;

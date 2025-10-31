@@ -16,37 +16,44 @@ namespace System.Configuration
             _thisElement = thisElement;
         }
 
-        public PropertyInformationCollection Properties
-            => _internalProperties ??= new PropertyInformationCollection(_thisElement);
+        public PropertyInformationCollection Properties =>
+            _internalProperties ??= new PropertyInformationCollection(_thisElement);
 
         public bool IsPresent => _thisElement.ElementPresent;
 
-        public bool IsLocked => ((_thisElement.ItemLocked & ConfigurationValueFlags.Locked) != 0) &&
-            ((_thisElement.ItemLocked & ConfigurationValueFlags.Inherited) != 0);
+        public bool IsLocked =>
+            ((_thisElement.ItemLocked & ConfigurationValueFlags.Locked) != 0)
+            && ((_thisElement.ItemLocked & ConfigurationValueFlags.Inherited) != 0);
 
         public bool IsCollection
         {
             get
             {
-                ConfigurationElementCollection collection = _thisElement as ConfigurationElementCollection;
-                if ((collection == null) && (_thisElement.Properties.DefaultCollectionProperty != null))
+                ConfigurationElementCollection collection =
+                    _thisElement as ConfigurationElementCollection;
+                if (
+                    (collection == null)
+                    && (_thisElement.Properties.DefaultCollectionProperty != null)
+                )
                 {
                     // this is not a collection but it may contain a default collection
                     collection =
-                        _thisElement[_thisElement.Properties.DefaultCollectionProperty] as
-                            ConfigurationElementCollection;
+                        _thisElement[_thisElement.Properties.DefaultCollectionProperty]
+                        as ConfigurationElementCollection;
                 }
 
                 return collection != null;
             }
         }
 
-        public string Source => _thisElement.Values.GetSourceInfo(_thisElement.ElementTagName)?.FileName;
+        public string Source =>
+            _thisElement.Values.GetSourceInfo(_thisElement.ElementTagName)?.FileName;
 
         /// <summary>
         /// The line number or 0 if no source.
         /// </summary>
-        public int LineNumber => _thisElement.Values.GetSourceInfo(_thisElement.ElementTagName)?.LineNumber ?? 0;
+        public int LineNumber =>
+            _thisElement.Values.GetSourceInfo(_thisElement.ElementTagName)?.LineNumber ?? 0;
 
         public Type Type => _thisElement.GetType();
 
@@ -75,7 +82,8 @@ namespace System.Configuration
             // Create readonly array
             ConfigurationException[] exceptionList = new ConfigurationException[arrayList.Count];
 
-            if (count != 0) arrayList.CopyTo(exceptionList, 0);
+            if (count != 0)
+                arrayList.CopyTo(exceptionList, 0);
 
             return exceptionList;
         }

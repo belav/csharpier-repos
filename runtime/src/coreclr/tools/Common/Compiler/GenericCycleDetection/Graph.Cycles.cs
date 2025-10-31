@@ -95,7 +95,8 @@ namespace ILCompiler
                     public IEnumerator<Edge> EdgeEnumeratorPosition;
                 }
 
-                private Stack<StrongConnectStackElement> IterativeStrongConnectStack = new Stack<StrongConnectStackElement>();
+                private Stack<StrongConnectStackElement> IterativeStrongConnectStack =
+                    new Stack<StrongConnectStackElement>();
 
                 private void StrongConnectIterative(Vertex vertex)
                 {
@@ -103,7 +104,7 @@ namespace ILCompiler
                     IEnumerator<Edge> currentEdgeEnumerator = null;
 #pragma warning restore IDE0059 // Unnecessary assignment of a value
 
-                StartOfFunctionWithLogicalRecursion:
+                    StartOfFunctionWithLogicalRecursion:
                     vertex.Index = _currentComponentIndex;
                     vertex.LowLink = _currentComponentIndex;
 
@@ -114,15 +115,20 @@ namespace ILCompiler
 
                     currentEdgeEnumerator = vertex.Edges.GetEnumerator();
 
-ReturnFromEndOfRecursiveFunction:
+                    ReturnFromEndOfRecursiveFunction:
                     if (currentEdgeEnumerator == null)
                     {
                         // Return from logically recursive call
-                        StrongConnectStackElement iterativeStackElementOnReturn = IterativeStrongConnectStack.Pop();
+                        StrongConnectStackElement iterativeStackElementOnReturn =
+                            IterativeStrongConnectStack.Pop();
                         vertex = iterativeStackElementOnReturn.Vertex;
-                        currentEdgeEnumerator = iterativeStackElementOnReturn.EdgeEnumeratorPosition;
+                        currentEdgeEnumerator =
+                            iterativeStackElementOnReturn.EdgeEnumeratorPosition;
 
-                        vertex.LowLink = Math.Min(vertex.LowLink, currentEdgeEnumerator.Current.Destination.LowLink);
+                        vertex.LowLink = Math.Min(
+                            vertex.LowLink,
+                            currentEdgeEnumerator.Current.Destination.LowLink
+                        );
                     }
 
                     while (currentEdgeEnumerator.MoveNext())
@@ -132,7 +138,8 @@ ReturnFromEndOfRecursiveFunction:
                         if (edge.Destination.Index == -1)
                         {
                             // Recurse if the destination has not begun processing yet
-                            StrongConnectStackElement iterativeStackElement = default(StrongConnectStackElement);
+                            StrongConnectStackElement iterativeStackElement =
+                                default(StrongConnectStackElement);
                             iterativeStackElement.Vertex = vertex;
                             iterativeStackElement.EdgeEnumeratorPosition = currentEdgeEnumerator;
 
@@ -176,10 +183,7 @@ ReturnFromEndOfRecursiveFunction:
 
                 public IEnumerable<List<Vertex>> Result
                 {
-                    get
-                    {
-                        return _result;
-                    }
+                    get { return _result; }
                 }
             }
 
@@ -193,7 +197,11 @@ ReturnFromEndOfRecursiveFunction:
                 TarjanWorkerClass tarjansResultsRecursive = new TarjanWorkerClass(vertices, false);
 
                 // assert the result of the iterative and recursive versions of the algorithm are EXACTLY the same
-                Debug.Assert(tarjansResultsIterative.Result.SelectMany(x => x).SequenceEqual(tarjansResultsRecursive.Result.SelectMany(x => x)));
+                Debug.Assert(
+                    tarjansResultsIterative
+                        .Result.SelectMany(x => x)
+                        .SequenceEqual(tarjansResultsRecursive.Result.SelectMany(x => x))
+                );
 #endif
                 return tarjansResultsIterative.Result;
             }
@@ -207,7 +215,8 @@ ReturnFromEndOfRecursiveFunction:
                 IEnumerable<List<Vertex>> stronglyConnectedComponents = this.TarjansAlgorithm();
                 foreach (List<Vertex> stronglyConnectedComponent in stronglyConnectedComponents)
                 {
-                    HashSet<Vertex> strongConnectedComponentVertexContainsChecker = new HashSet<Vertex>(stronglyConnectedComponent);
+                    HashSet<Vertex> strongConnectedComponentVertexContainsChecker =
+                        new HashSet<Vertex>(stronglyConnectedComponent);
                     // Detect flags between elements of cycle.
                     // Walk all edges of the strongly connected component.
                     //  - If an edge is not flagged, it can't affect behavior
@@ -219,7 +228,11 @@ ReturnFromEndOfRecursiveFunction:
                         {
                             if (edge.Flagged)
                             {
-                                if (strongConnectedComponentVertexContainsChecker.Contains(edge.Destination))
+                                if (
+                                    strongConnectedComponentVertexContainsChecker.Contains(
+                                        edge.Destination
+                                    )
+                                )
                                 {
                                     flagDetected = true;
                                     break;
@@ -243,7 +256,9 @@ ReturnFromEndOfRecursiveFunction:
                     }
                 }
 
-                IEnumerable<Vertex> verticesInAFlaggedCycleTarjanStyle = _vertexMap.Values.Where(v => v.ProvedToBeInvolvedInAFlaggedCycle);
+                IEnumerable<Vertex> verticesInAFlaggedCycleTarjanStyle = _vertexMap.Values.Where(
+                    v => v.ProvedToBeInvolvedInAFlaggedCycle
+                );
 
 #if RECURSIVE_CYCLE_DETECTION
                 Vertex[] vertices = _vertexMap.Values.ToArray();
@@ -279,12 +294,20 @@ ReturnFromEndOfRecursiveFunction:
                                 // FindCyclesWorker recurses on edges rather than vertices, so we have to invent a fictitious edge leading to the root vertex
                                 // to kick it off.
                                 Edge startingEdge = new Edge(vertex, false);
-                                FindCyclesWorker(startingEdge, new List<Edge>(), ref operationCount, previousAlgorithmTimeoutWatch);
+                                FindCyclesWorker(
+                                    startingEdge,
+                                    new List<Edge>(),
+                                    ref operationCount,
+                                    previousAlgorithmTimeoutWatch
+                                );
                             }
                         }
                     }
 
-                    if (previousAlgorithmTimeoutWatch.ElapsedMilliseconds > s_previousAlgorithmTimeout)
+                    if (
+                        previousAlgorithmTimeoutWatch.ElapsedMilliseconds
+                        > s_previousAlgorithmTimeout
+                    )
                     {
                         abortedDueToTimeout = true;
                         break;
@@ -293,20 +316,27 @@ ReturnFromEndOfRecursiveFunction:
                     int newCount = vertices.Count(v => v.ProvedToBeInvolvedInAFlaggedCycle);
                     if (count == newCount)
                         break;
-
                 }
                 previousAlgorithmTimeoutWatch.Stop();
 
                 if (!abortedDueToTimeout)
                 {
-                    Vertex[] verticesInAFlaggedCyclePreviousAlgorithmStyle = vertices.Where(v => v.ProvedToBeInvolvedInAFlaggedCycle).ToArray();
+                    Vertex[] verticesInAFlaggedCyclePreviousAlgorithmStyle = vertices
+                        .Where(v => v.ProvedToBeInvolvedInAFlaggedCycle)
+                        .ToArray();
 
                     // Generate hashset of preview algorithm style result
-                    Debug.Assert(verticesInAFlaggedCyclePreviousAlgorithmStyle.Length == verticesInAFlaggedCycleTarjanStyle.Count());
-                    HashSet<Vertex> verticesInFlaggedCyclePreviousAlgorithmStyleHashset = new HashSet<Vertex>(verticesInAFlaggedCyclePreviousAlgorithmStyle);
+                    Debug.Assert(
+                        verticesInAFlaggedCyclePreviousAlgorithmStyle.Length
+                            == verticesInAFlaggedCycleTarjanStyle.Count()
+                    );
+                    HashSet<Vertex> verticesInFlaggedCyclePreviousAlgorithmStyleHashset =
+                        new HashSet<Vertex>(verticesInAFlaggedCyclePreviousAlgorithmStyle);
                     foreach (Vertex v in verticesInAFlaggedCycleTarjanStyle)
                     {
-                        Debug.Assert(verticesInFlaggedCyclePreviousAlgorithmStyleHashset.Contains(v));
+                        Debug.Assert(
+                            verticesInFlaggedCyclePreviousAlgorithmStyleHashset.Contains(v)
+                        );
                     }
                 }
 #endif
@@ -321,7 +351,12 @@ ReturnFromEndOfRecursiveFunction:
             /// <remarks>
             /// "alreadySeen" is actually a stack but we use a List&lt;&gt; because Stack&lt;&gt; doesn't support indexing.
             /// </remarks>
-            private static void FindCyclesWorker(Edge edge, List<Edge> alreadySeen, ref int operationCount, Stopwatch previousAlgorithmTimeoutWatch)
+            private static void FindCyclesWorker(
+                Edge edge,
+                List<Edge> alreadySeen,
+                ref int operationCount,
+                Stopwatch previousAlgorithmTimeoutWatch
+            )
             {
                 Vertex vertex = edge.Destination;
 
@@ -330,7 +365,10 @@ ReturnFromEndOfRecursiveFunction:
 
                 if ((operationCount % 10000) == 0)
                 {
-                    if (previousAlgorithmTimeoutWatch.ElapsedMilliseconds > s_previousAlgorithmTimeout)
+                    if (
+                        previousAlgorithmTimeoutWatch.ElapsedMilliseconds
+                        > s_previousAlgorithmTimeout
+                    )
                     {
                         return;
                     }
@@ -343,7 +381,10 @@ ReturnFromEndOfRecursiveFunction:
                 int idx = alreadySeen.Count - 1;
                 while (idx != -1 && !(alreadySeen[idx].Destination == vertex))
                 {
-                    if (alreadySeen[idx].Flagged || alreadySeen[idx].Destination.ProvedToBeInvolvedInAFlaggedCycle)
+                    if (
+                        alreadySeen[idx].Flagged
+                        || alreadySeen[idx].Destination.ProvedToBeInvolvedInAFlaggedCycle
+                    )
                         flagged = true;
                     idx--;
                 }
@@ -375,11 +416,18 @@ ReturnFromEndOfRecursiveFunction:
                 }
 
                 bool allChildrenProvenNotPartOfCycle = true;
-                alreadySeen.Add(edge);  // Push
+                alreadySeen.Add(edge); // Push
                 foreach (Edge newEdge in vertex.Edges)
                 {
-                    FindCyclesWorker(newEdge, alreadySeen, ref operationCount, previousAlgorithmTimeoutWatch);
-                    allChildrenProvenNotPartOfCycle = allChildrenProvenNotPartOfCycle && newEdge.Destination.ProvedToBeNotPartOfAnyCycle;
+                    FindCyclesWorker(
+                        newEdge,
+                        alreadySeen,
+                        ref operationCount,
+                        previousAlgorithmTimeoutWatch
+                    );
+                    allChildrenProvenNotPartOfCycle =
+                        allChildrenProvenNotPartOfCycle
+                        && newEdge.Destination.ProvedToBeNotPartOfAnyCycle;
                 }
                 alreadySeen.RemoveAt(alreadySeen.Count - 1); // Pop
 

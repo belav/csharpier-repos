@@ -10,6 +10,6 @@ namespace System.Activities
     {
         None = 0,
         Unload,
-        Persist
+        Persist,
     }
 }

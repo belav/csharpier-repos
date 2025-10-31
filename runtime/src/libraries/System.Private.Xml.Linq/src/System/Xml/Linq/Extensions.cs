@@ -2,7 +2,6 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System.Collections.Generic;
-
 using IEnumerable = System.Collections.IEnumerable;
 
 namespace System.Xml.Linq
@@ -38,7 +37,10 @@ namespace System.Xml.Linq
         /// Attributes with a matching <see cref="XName"/> for every <see cref="XElement"/> in
         /// the target <see cref="IEnumerable"/> of <see cref="XElement"/>.
         /// </returns>
-        public static IEnumerable<XAttribute> Attributes(this IEnumerable<XElement?> source, XName? name)
+        public static IEnumerable<XAttribute> Attributes(
+            this IEnumerable<XElement?> source,
+            XName? name
+        )
         {
             ArgumentNullException.ThrowIfNull(source);
 
@@ -55,7 +57,8 @@ namespace System.Xml.Linq
         /// and it's parent up to the root) of each of the <see cref="XElement"/>s in this
         /// <see cref="IEnumerable"/> of <see cref="XElement"/>.
         /// </returns>
-        public static IEnumerable<XElement> Ancestors<T>(this IEnumerable<T?> source) where T : XNode
+        public static IEnumerable<XElement> Ancestors<T>(this IEnumerable<T?> source)
+            where T : XNode
         {
             ArgumentNullException.ThrowIfNull(source);
 
@@ -72,7 +75,8 @@ namespace System.Xml.Linq
         /// and it's parent up to the root) that have a matching <see cref="XName"/>.  This is done for each
         /// <see cref="XElement"/> in this <see cref="IEnumerable"/> of <see cref="XElement"/>.
         /// </returns>
-        public static IEnumerable<XElement> Ancestors<T>(this IEnumerable<T?> source, XName? name) where T : XNode
+        public static IEnumerable<XElement> Ancestors<T>(this IEnumerable<T?> source, XName? name)
+            where T : XNode
         {
             ArgumentNullException.ThrowIfNull(source);
 
@@ -110,7 +114,10 @@ namespace System.Xml.Linq
         /// that match the passed in <see cref="XName"/>.  This is done for each
         /// <see cref="XElement"/> in this <see cref="IEnumerable"/> of <see cref="XElement"/>.
         /// </returns>
-        public static IEnumerable<XElement> AncestorsAndSelf(this IEnumerable<XElement?> source, XName? name)
+        public static IEnumerable<XElement> AncestorsAndSelf(
+            this IEnumerable<XElement?> source,
+            XName? name
+        )
         {
             ArgumentNullException.ThrowIfNull(source);
 
@@ -120,14 +127,16 @@ namespace System.Xml.Linq
         /// <summary>
         /// Returns an <see cref="IEnumerable"/> of <see cref="XNode"/> over the content of a set of nodes
         /// </summary>
-        public static IEnumerable<XNode> Nodes<T>(this IEnumerable<T?> source) where T : XContainer
+        public static IEnumerable<XNode> Nodes<T>(this IEnumerable<T?> source)
+            where T : XContainer
         {
             ArgumentNullException.ThrowIfNull(source);
 
             return NodesIterator(source);
         }
 
-        private static IEnumerable<XNode> NodesIterator<T>(IEnumerable<T?> source) where T : XContainer
+        private static IEnumerable<XNode> NodesIterator<T>(IEnumerable<T?> source)
+            where T : XContainer
         {
             foreach (XContainer? root in source)
             {
@@ -149,7 +158,8 @@ namespace System.Xml.Linq
         /// <summary>
         /// Returns an <see cref="IEnumerable"/> of <see cref="XNode"/> over the descendants of a set of nodes
         /// </summary>
-        public static IEnumerable<XNode> DescendantNodes<T>(this IEnumerable<T?> source) where T : XContainer
+        public static IEnumerable<XNode> DescendantNodes<T>(this IEnumerable<T?> source)
+            where T : XContainer
         {
             ArgumentNullException.ThrowIfNull(source);
 
@@ -166,7 +176,8 @@ namespace System.Xml.Linq
         /// and their children down to the leaf level).  This is done for each <see cref="XElement"/> in
         /// this <see cref="IEnumerable"/> of <see cref="XElement"/>.
         /// </returns>
-        public static IEnumerable<XElement> Descendants<T>(this IEnumerable<T?> source) where T : XContainer
+        public static IEnumerable<XElement> Descendants<T>(this IEnumerable<T?> source)
+            where T : XContainer
         {
             ArgumentNullException.ThrowIfNull(source);
 
@@ -183,7 +194,8 @@ namespace System.Xml.Linq
         /// and their children down to the leaf level) that have a matching <see cref="XName"/>.  This is done
         /// for each <see cref="XElement"/> in this <see cref="IEnumerable"/> of <see cref="XElement"/>.
         /// </returns>
-        public static IEnumerable<XElement> Descendants<T>(this IEnumerable<T?> source, XName? name) where T : XContainer
+        public static IEnumerable<XElement> Descendants<T>(this IEnumerable<T?> source, XName? name)
+            where T : XContainer
         {
             ArgumentNullException.ThrowIfNull(source);
 
@@ -240,7 +252,10 @@ namespace System.Xml.Linq
         /// to the leaf nodes) that match the passed in <see cref="XName"/>.  This is done for
         /// each <see cref="XElement"/> in this <see cref="IEnumerable"/> of <see cref="XElement"/>.
         /// </returns>
-        public static IEnumerable<XElement> DescendantsAndSelf(this IEnumerable<XElement?> source, XName? name)
+        public static IEnumerable<XElement> DescendantsAndSelf(
+            this IEnumerable<XElement?> source,
+            XName? name
+        )
         {
             ArgumentNullException.ThrowIfNull(source);
 
@@ -255,7 +270,8 @@ namespace System.Xml.Linq
         /// An <see cref="IEnumerable"/> of <see cref="XElement"/> containing the child elements
         /// for each <see cref="XElement"/> in this <see cref="IEnumerable"/> of <see cref="XElement"/>.
         /// </returns>
-        public static IEnumerable<XElement> Elements<T>(this IEnumerable<T?> source) where T : XContainer
+        public static IEnumerable<XElement> Elements<T>(this IEnumerable<T?> source)
+            where T : XContainer
         {
             ArgumentNullException.ThrowIfNull(source);
 
@@ -270,7 +286,8 @@ namespace System.Xml.Linq
         /// An <see cref="IEnumerable"/> of <see cref="XElement"/> containing the child elements
         /// for each <see cref="XElement"/> in this <see cref="IEnumerable"/> of <see cref="XElement"/>.
         /// </returns>
-        public static IEnumerable<XElement> Elements<T>(this IEnumerable<T?> source, XName? name) where T : XContainer
+        public static IEnumerable<XElement> Elements<T>(this IEnumerable<T?> source, XName? name)
+            where T : XContainer
         {
             ArgumentNullException.ThrowIfNull(source);
 
@@ -286,21 +303,24 @@ namespace System.Xml.Linq
         /// for each <see cref="XElement"/> in this <see cref="IEnumerable"/> of <see cref="XElement"/>.
         /// in document order
         /// </returns>
-        public static IEnumerable<T> InDocumentOrder<T>(this IEnumerable<T> source) where T : XNode?
+        public static IEnumerable<T> InDocumentOrder<T>(this IEnumerable<T> source)
+            where T : XNode?
         {
             ArgumentNullException.ThrowIfNull(source);
 
             return DocumentOrderIterator<T>(source);
         }
 
-        private static IEnumerable<T> DocumentOrderIterator<T>(IEnumerable<T> source) where T : XNode?
+        private static IEnumerable<T> DocumentOrderIterator<T>(IEnumerable<T> source)
+            where T : XNode?
         {
             int count;
             T[] items = EnumerableHelpers.ToArray(source, out count);
             if (count > 0)
             {
                 Array.Sort(items, 0, count, XNode.DocumentOrderComparer);
-                for (int i = 0; i != count; ++i) yield return items[i];
+                for (int i = 0; i != count; ++i)
+                    yield return items[i];
             }
         }
 
@@ -326,7 +346,8 @@ namespace System.Xml.Linq
         /// T which must be a derived from <see cref="XNode"/>.  Note that this method uses snapshot semantics
         /// (copies the <see cref="XNode"/>s to an array before deleting each).
         /// </summary>
-        public static void Remove<T>(this IEnumerable<T?> source) where T : XNode
+        public static void Remove<T>(this IEnumerable<T?> source)
+            where T : XNode
         {
             ArgumentNullException.ThrowIfNull(source);
 
@@ -338,7 +359,10 @@ namespace System.Xml.Linq
             }
         }
 
-        private static IEnumerable<XAttribute> GetAttributes(IEnumerable<XElement?> source, XName? name)
+        private static IEnumerable<XAttribute> GetAttributes(
+            IEnumerable<XElement?> source,
+            XName? name
+        )
         {
             foreach (XElement? e in source)
             {
@@ -350,14 +374,20 @@ namespace System.Xml.Linq
                         do
                         {
                             a = a.next!;
-                            if (name == null || a.name == name) yield return a;
+                            if (name == null || a.name == name)
+                                yield return a;
                         } while (a.parent == e && a != e.lastAttr);
                     }
                 }
             }
         }
 
-        private static IEnumerable<XElement> GetAncestors<T>(IEnumerable<T?> source, XName? name, bool self) where T : XNode
+        private static IEnumerable<XElement> GetAncestors<T>(
+            IEnumerable<T?> source,
+            XName? name,
+            bool self
+        )
+            where T : XNode
         {
             foreach (XNode? node in source)
             {
@@ -366,20 +396,23 @@ namespace System.Xml.Linq
                     XElement? e = (self ? node : node.parent) as XElement;
                     while (e != null)
                     {
-                        if (name == null || e.name == name) yield return e;
+                        if (name == null || e.name == name)
+                            yield return e;
                         e = e.parent as XElement;
                     }
                 }
             }
         }
 
-        private static IEnumerable<XNode> GetDescendantNodes<T>(IEnumerable<T?> source, bool self) where T : XContainer
+        private static IEnumerable<XNode> GetDescendantNodes<T>(IEnumerable<T?> source, bool self)
+            where T : XContainer
         {
             foreach (XContainer? root in source)
             {
                 if (root != null)
                 {
-                    if (self) yield return root;
+                    if (self)
+                        yield return root;
                     XNode? n = root;
                     while (true)
                     {
@@ -391,8 +424,10 @@ namespace System.Xml.Linq
                         }
                         else
                         {
-                            while (n != null && n != root && n == n.parent!.content) n = n.parent;
-                            if (n == null || n == root) break;
+                            while (n != null && n != root && n == n.parent!.content)
+                                n = n.parent;
+                            if (n == null || n == root)
+                                break;
                             n = n.next!;
                         }
                         yield return n;
@@ -401,7 +436,12 @@ namespace System.Xml.Linq
             }
         }
 
-        private static IEnumerable<XElement> GetDescendants<T>(IEnumerable<T?> source, XName? name, bool self) where T : XContainer
+        private static IEnumerable<XElement> GetDescendants<T>(
+            IEnumerable<T?> source,
+            XName? name,
+            bool self
+        )
+            where T : XContainer
         {
             foreach (XContainer? root in source)
             {
@@ -410,7 +450,8 @@ namespace System.Xml.Linq
                     if (self)
                     {
                         XElement e = (XElement)root;
-                        if (name == null || e.name == name) yield return e;
+                        if (name == null || e.name == name)
+                            yield return e;
                     }
                     XNode? n = root;
                     XContainer? c = root;
@@ -422,19 +463,23 @@ namespace System.Xml.Linq
                         }
                         else
                         {
-                            while (n != null && n != root && n == n.parent!.content) n = n.parent;
-                            if (n == null || n == root) break;
+                            while (n != null && n != root && n == n.parent!.content)
+                                n = n.parent;
+                            if (n == null || n == root)
+                                break;
                             n = n.next;
                         }
                         XElement? e = n as XElement;
-                        if (e != null && (name == null || e.name == name)) yield return e;
+                        if (e != null && (name == null || e.name == name))
+                            yield return e;
                         c = e;
                     }
                 }
             }
         }
 
-        private static IEnumerable<XElement> GetElements<T>(IEnumerable<T?> source, XName? name) where T : XContainer
+        private static IEnumerable<XElement> GetElements<T>(IEnumerable<T?> source, XName? name)
+            where T : XContainer
         {
             foreach (XContainer? root in source)
             {
@@ -447,7 +492,8 @@ namespace System.Xml.Linq
                         {
                             n = n.next!;
                             XElement? e = n as XElement;
-                            if (e != null && (name == null || e.name == name)) yield return e;
+                            if (e != null && (name == null || e.name == name))
+                                yield return e;
                         } while (n.parent == root && n != root.content);
                     }
                 }

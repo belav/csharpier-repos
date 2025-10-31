@@ -14,7 +14,11 @@ namespace System.Diagnostics.Tests
         [Fact]
         public static void CounterCreationData_CreateCounterCreationData_SimpleSimpleHelpRawBase()
         {
-            CounterCreationData ccd = new CounterCreationData("Simple", "Simple Help", PerformanceCounterType.RawBase);
+            CounterCreationData ccd = new CounterCreationData(
+                "Simple",
+                "Simple Help",
+                PerformanceCounterType.RawBase
+            );
 
             Assert.Equal("Simple", ccd.CounterName);
             Assert.Equal("Simple Help", ccd.CounterHelp);
@@ -24,8 +28,14 @@ namespace System.Diagnostics.Tests
         [Fact]
         public static void CounterCreationData_SetCounterType_Invalud()
         {
-            CounterCreationData ccd = new CounterCreationData("Simple", "Simple Help", PerformanceCounterType.RawBase);
-            Assert.Throws<InvalidEnumArgumentException>(() => ccd.CounterType = (PerformanceCounterType)int.MaxValue);
+            CounterCreationData ccd = new CounterCreationData(
+                "Simple",
+                "Simple Help",
+                PerformanceCounterType.RawBase
+            );
+            Assert.Throws<InvalidEnumArgumentException>(() =>
+                ccd.CounterType = (PerformanceCounterType)int.MaxValue
+            );
         }
     }
 }

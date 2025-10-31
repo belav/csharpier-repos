@@ -1,21 +1,23 @@
 //------------------------------------------------------------------------------
 // <copyright file="AttributeProviderAttribute.cs" company="Microsoft">
 //     Copyright (c) Microsoft Corporation.  All rights reserved.
-// </copyright>                                                                
+// </copyright>
 //------------------------------------------------------------------------------
 
-namespace System.ComponentModel 
+namespace System.ComponentModel
 {
-
     using System;
     using System.Security.Permissions;
 
     /// <include file='doc\AttributeProviderAttribute.uex' path='docs/doc[@for="AttributeProviderAttribute"]/*' />
     /// <devdoc>
     /// </devdoc>
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance", "CA1813:AvoidUnsealedAttributes")]
+    [System.Diagnostics.CodeAnalysis.SuppressMessage(
+        "Microsoft.Performance",
+        "CA1813:AvoidUnsealedAttributes"
+    )]
     [AttributeUsage(AttributeTargets.Property)]
-    public class AttributeProviderAttribute : Attribute 
+    public class AttributeProviderAttribute : Attribute
     {
         private string _typeName;
         private string _propertyName;
@@ -38,16 +40,19 @@ namespace System.ComponentModel
         /// <devdoc>
         ///     Creates a new AttributeProviderAttribute object.
         /// </devdoc>
-        public AttributeProviderAttribute(string typeName, string propertyName) {
-            if (typeName == null) {
+        public AttributeProviderAttribute(string typeName, string propertyName)
+        {
+            if (typeName == null)
+            {
                 throw new ArgumentNullException("typeName");
             }
-            if (propertyName == null) {
+            if (propertyName == null)
+            {
                 throw new ArgumentNullException("propertyName");
             }
 
             _typeName = typeName;
-			_propertyName = propertyName;
+            _propertyName = propertyName;
         }
 
         /// <include file='doc\AttributeProviderAttribute.uex' path='docs/doc[@for="AttributeProviderAttribute.AttributeProviderAttribute1"]/*' />
@@ -66,26 +71,21 @@ namespace System.ComponentModel
 
         /// <include file='doc\AttributeProviderAttribute.uex' path='docs/doc[@for="AttributeProviderAttribute.TypeName"]/*' />
         /// <devdoc>
-        ///     The TypeName property returns the assembly qualified type name 
+        ///     The TypeName property returns the assembly qualified type name
         ///     passed into the constructor.
         /// </devdoc>
         public string TypeName
         {
-            get
-            {
-                return _typeName;
-            }
+            get { return _typeName; }
         }
 
         /// <include file='doc\AttributeProviderAttribute.uex' path='docs/doc[@for="AttributeProviderAttribute.TypeName"]/*' />
         /// <devdoc>
         ///     The TypeName property returns the property name that will be used to query attributes from.
         /// </devdoc>
-        public string PropertyName {
-            get {
-                return _propertyName;
-            }
+        public string PropertyName
+        {
+            get { return _propertyName; }
         }
     }
 }
-

@@ -19,6 +19,6 @@ namespace System.Xml
         EndOfFile = 3,
 
         // The Close method has been called and the XmlReader is closed.
-        Closed = 4
+        Closed = 4,
     }
 }

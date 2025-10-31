@@ -5,7 +5,8 @@ using Xunit;
 
 namespace System.CodeDom.Tests
 {
-    public class CodeThrowExceptionStatementTests : CodeStatementTestBase<CodeThrowExceptionStatement>
+    public class CodeThrowExceptionStatementTests
+        : CodeStatementTestBase<CodeThrowExceptionStatement>
     {
         [Fact]
         public void Ctor_Default()

@@ -17,7 +17,9 @@ namespace System.Reflection.Metadata.Ecma335
         private const string DefaultMetadataVersionString = "v4.0.30319";
 
         // internal for testing
-        internal static readonly ImmutableArray<int> EmptyRowCounts = ImmutableArray.Create(new int[MetadataTokens.TableCount]);
+        internal static readonly ImmutableArray<int> EmptyRowCounts = ImmutableArray.Create(
+            new int[MetadataTokens.TableCount]
+        );
 
         private readonly MetadataBuilder _tablesAndHeaps;
         private readonly SerializedMetadata _serializedMetadata;
@@ -51,15 +53,25 @@ namespace System.Reflection.Metadata.Ecma335
         /// </param>
         /// <exception cref="ArgumentNullException"><paramref name="tablesAndHeaps"/> is null.</exception>
         /// <exception cref="ArgumentException"><paramref name="metadataVersion"/> is too long (the number of bytes when UTF-8 encoded must be less than 255).</exception>
-        public MetadataRootBuilder(MetadataBuilder tablesAndHeaps, string? metadataVersion = null, bool suppressValidation = false)
+        public MetadataRootBuilder(
+            MetadataBuilder tablesAndHeaps,
+            string? metadataVersion = null,
+            bool suppressValidation = false
+        )
         {
             if (tablesAndHeaps is null)
             {
                 Throw.ArgumentNull(nameof(tablesAndHeaps));
             }
 
-            Debug.Assert(BlobUtilities.GetUTF8ByteCount(DefaultMetadataVersionString) == DefaultMetadataVersionString.Length);
-            int metadataVersionByteCount = metadataVersion != null ? BlobUtilities.GetUTF8ByteCount(metadataVersion) : DefaultMetadataVersionString.Length;
+            Debug.Assert(
+                BlobUtilities.GetUTF8ByteCount(DefaultMetadataVersionString)
+                    == DefaultMetadataVersionString.Length
+            );
+            int metadataVersionByteCount =
+                metadataVersion != null
+                    ? BlobUtilities.GetUTF8ByteCount(metadataVersion)
+                    : DefaultMetadataVersionString.Length;
 
             if (metadataVersionByteCount > MetadataSizes.MaxMetadataVersionByteCount)
             {
@@ -69,7 +81,11 @@ namespace System.Reflection.Metadata.Ecma335
             _tablesAndHeaps = tablesAndHeaps;
             MetadataVersion = metadataVersion ?? DefaultMetadataVersionString;
             SuppressValidation = suppressValidation;
-            _serializedMetadata = tablesAndHeaps.GetSerializedMetadata(EmptyRowCounts, metadataVersionByteCount, isStandaloneDebugMetadata: false);
+            _serializedMetadata = tablesAndHeaps.GetSerializedMetadata(
+                EmptyRowCounts,
+                metadataVersionByteCount,
+                isStandaloneDebugMetadata: false
+            );
         }
 
         /// <summary>
@@ -94,7 +110,11 @@ namespace System.Reflection.Metadata.Ecma335
         /// <exception cref="InvalidOperationException">
         /// A metadata table is not ordered as required by the specification and <see cref="SuppressValidation"/> is false.
         /// </exception>
-        public void Serialize(BlobBuilder builder, int methodBodyStreamRva, int mappedFieldDataStreamRva)
+        public void Serialize(
+            BlobBuilder builder,
+            int methodBodyStreamRva,
+            int mappedFieldDataStreamRva
+        )
         {
             if (builder is null)
             {
@@ -117,10 +137,20 @@ namespace System.Reflection.Metadata.Ecma335
             }
 
             // header:
-            MetadataBuilder.SerializeMetadataHeader(builder, MetadataVersion, _serializedMetadata.Sizes);
+            MetadataBuilder.SerializeMetadataHeader(
+                builder,
+                MetadataVersion,
+                _serializedMetadata.Sizes
+            );
 
             // #~ or #- stream:
-            _tablesAndHeaps.SerializeMetadataTables(builder, _serializedMetadata.Sizes, _serializedMetadata.StringMap, methodBodyStreamRva, mappedFieldDataStreamRva);
+            _tablesAndHeaps.SerializeMetadataTables(
+                builder,
+                _serializedMetadata.Sizes,
+                _serializedMetadata.StringMap,
+                methodBodyStreamRva,
+                mappedFieldDataStreamRva
+            );
 
             // #Strings, #US, #Guid and #Blob streams:
             _tablesAndHeaps.WriteHeapsTo(builder, _serializedMetadata.StringHeap);

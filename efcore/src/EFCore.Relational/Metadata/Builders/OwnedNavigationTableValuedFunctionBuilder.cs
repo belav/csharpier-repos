@@ -6,7 +6,9 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Builders;
 /// <summary>
 ///     Provides a simple API for configuring a <see cref="IMutableDbFunction" /> that an entity type is mapped to.
 /// </summary>
-public class OwnedNavigationTableValuedFunctionBuilder : DbFunctionBuilderBase, IInfrastructure<OwnedNavigationBuilder>
+public class OwnedNavigationTableValuedFunctionBuilder
+    : DbFunctionBuilderBase,
+        IInfrastructure<OwnedNavigationBuilder>
 {
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -17,7 +19,8 @@ public class OwnedNavigationTableValuedFunctionBuilder : DbFunctionBuilderBase, 
     [EntityFrameworkInternal]
     public OwnedNavigationTableValuedFunctionBuilder(
         IMutableDbFunction function,
-        OwnedNavigationBuilder ownedNavigationBuilder)
+        OwnedNavigationBuilder ownedNavigationBuilder
+    )
         : base(function)
     {
         OwnedNavigationBuilder = ownedNavigationBuilder;
@@ -33,8 +36,8 @@ public class OwnedNavigationTableValuedFunctionBuilder : DbFunctionBuilderBase, 
     /// </remarks>
     /// <param name="name">The name of the function in the database.</param>
     /// <returns>The same builder instance so that multiple configuration calls can be chained.</returns>
-    public new virtual OwnedNavigationTableValuedFunctionBuilder HasName(string name)
-        => (OwnedNavigationTableValuedFunctionBuilder)base.HasName(name);
+    public new virtual OwnedNavigationTableValuedFunctionBuilder HasName(string name) =>
+        (OwnedNavigationTableValuedFunctionBuilder)base.HasName(name);
 
     /// <summary>
     ///     Sets the schema of the database function.
@@ -44,8 +47,8 @@ public class OwnedNavigationTableValuedFunctionBuilder : DbFunctionBuilderBase, 
     /// </remarks>
     /// <param name="schema">The schema of the function in the database.</param>
     /// <returns>The same builder instance so that multiple configuration calls can be chained.</returns>
-    public new virtual OwnedNavigationTableValuedFunctionBuilder HasSchema(string? schema)
-        => (OwnedNavigationTableValuedFunctionBuilder)base.HasSchema(schema);
+    public new virtual OwnedNavigationTableValuedFunctionBuilder HasSchema(string? schema) =>
+        (OwnedNavigationTableValuedFunctionBuilder)base.HasSchema(schema);
 
     /// <summary>
     ///     Marks whether the database function is built-in.
@@ -55,8 +58,8 @@ public class OwnedNavigationTableValuedFunctionBuilder : DbFunctionBuilderBase, 
     /// </remarks>
     /// <param name="builtIn">The value indicating whether the database function is built-in.</param>
     /// <returns>The same builder instance so that multiple configuration calls can be chained.</returns>
-    public new virtual OwnedNavigationTableValuedFunctionBuilder IsBuiltIn(bool builtIn = true)
-        => (OwnedNavigationTableValuedFunctionBuilder)base.IsBuiltIn(builtIn);
+    public new virtual OwnedNavigationTableValuedFunctionBuilder IsBuiltIn(bool builtIn = true) =>
+        (OwnedNavigationTableValuedFunctionBuilder)base.IsBuiltIn(builtIn);
 
     /// <summary>
     ///     Returns an object that can be used to configure a parameter with the given name.
@@ -69,8 +72,10 @@ public class OwnedNavigationTableValuedFunctionBuilder : DbFunctionBuilderBase, 
     /// <param name="buildAction">An action that performs configuration of the parameter.</param>
     /// <returns>The builder to use for further parameter configuration.</returns>
     /// <returns>The same builder instance so that multiple configuration calls can be chained.</returns>
-    public new virtual OwnedNavigationTableValuedFunctionBuilder HasParameter(string name, Action<DbFunctionParameterBuilder> buildAction)
-        => (OwnedNavigationTableValuedFunctionBuilder)base.HasParameter(name, buildAction);
+    public new virtual OwnedNavigationTableValuedFunctionBuilder HasParameter(
+        string name,
+        Action<DbFunctionParameterBuilder> buildAction
+    ) => (OwnedNavigationTableValuedFunctionBuilder)base.HasParameter(name, buildAction);
 
     /// <summary>
     ///     Adds or updates an annotation on the database function. If an annotation with the key specified in
@@ -79,7 +84,10 @@ public class OwnedNavigationTableValuedFunctionBuilder : DbFunctionBuilderBase, 
     /// <param name="annotation">The key of the annotation to be added or updated.</param>
     /// <param name="value">The value to be stored in the annotation.</param>
     /// <returns>The same builder instance so that multiple configuration calls can be chained.</returns>
-    public virtual OwnedNavigationTableValuedFunctionBuilder HasAnnotation(string annotation, object? value)
+    public virtual OwnedNavigationTableValuedFunctionBuilder HasAnnotation(
+        string annotation,
+        object? value
+    )
     {
         Check.NotEmpty(annotation, nameof(annotation));
 
@@ -88,6 +96,6 @@ public class OwnedNavigationTableValuedFunctionBuilder : DbFunctionBuilderBase, 
         return this;
     }
 
-    OwnedNavigationBuilder IInfrastructure<OwnedNavigationBuilder>.Instance
-        => OwnedNavigationBuilder;
+    OwnedNavigationBuilder IInfrastructure<OwnedNavigationBuilder>.Instance =>
+        OwnedNavigationBuilder;
 }

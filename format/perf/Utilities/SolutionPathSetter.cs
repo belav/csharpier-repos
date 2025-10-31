@@ -10,7 +10,10 @@ namespace Microsoft.CodeAnalysis.Tools.Perf
     {
         private static int s_registered;
         private static string s_currentDirectory;
-        public static string RepositoryRootDirectory => Directory.GetParent(Environment.CurrentDirectory).Parent.Parent.Parent.Parent.Parent.Parent.Parent.Parent.FullName;
+        public static string RepositoryRootDirectory =>
+            Directory
+                .GetParent(Environment.CurrentDirectory)
+                .Parent.Parent.Parent.Parent.Parent.Parent.Parent.Parent.FullName;
 
         public static void SetCurrentDirectory()
         {

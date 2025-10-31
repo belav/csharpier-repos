@@ -13,6 +13,6 @@ namespace System.Net.Sockets
         SelectWrite = 1,
 
         // Poll the error status of a socket.
-        SelectError = 2
+        SelectError = 2,
     }
 }

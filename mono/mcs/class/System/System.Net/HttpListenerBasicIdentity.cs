@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -26,18 +26,22 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 using System.Security.Principal;
-namespace System.Net {
-	public class HttpListenerBasicIdentity : GenericIdentity {
-		string password;
 
-		public HttpListenerBasicIdentity (string username, string password) : base (username, "Basic")
-		{
-			this.password = password;
-		}
+namespace System.Net
+{
+    public class HttpListenerBasicIdentity : GenericIdentity
+    {
+        string password;
 
-		public virtual string Password {
-			get { return password; }
-		}
-	}
+        public HttpListenerBasicIdentity(string username, string password)
+            : base(username, "Basic")
+        {
+            this.password = password;
+        }
+
+        public virtual string Password
+        {
+            get { return password; }
+        }
+    }
 }
-

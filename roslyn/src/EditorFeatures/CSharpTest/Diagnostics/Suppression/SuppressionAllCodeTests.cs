@@ -23,20 +23,40 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.Suppression
     [Trait(Traits.Feature, Traits.Features.CodeActionsSuppression)]
     public class CSharpSuppressionAllCodeTests : AbstractSuppressionAllCodeTests
     {
-        private static readonly TestComposition s_compositionWithMockDiagnosticUpdateSourceRegistrationService = EditorTestCompositions.EditorFeatures
-            .AddExcludedPartTypes(typeof(IDiagnosticUpdateSourceRegistrationService))
-            .AddParts(typeof(MockDiagnosticUpdateSourceRegistrationService));
+        private static readonly TestComposition s_compositionWithMockDiagnosticUpdateSourceRegistrationService =
+            EditorTestCompositions
+                .EditorFeatures.AddExcludedPartTypes(
+                    typeof(IDiagnosticUpdateSourceRegistrationService)
+                )
+                .AddParts(typeof(MockDiagnosticUpdateSourceRegistrationService));
 
-        protected override TestWorkspace CreateWorkspaceFromFile(string definition, ParseOptions parseOptions)
-            => TestWorkspace.CreateCSharp(definition, (CSharpParseOptions)parseOptions, composition: s_compositionWithMockDiagnosticUpdateSourceRegistrationService);
+        protected override TestWorkspace CreateWorkspaceFromFile(
+            string definition,
+            ParseOptions parseOptions
+        ) =>
+            TestWorkspace.CreateCSharp(
+                definition,
+                (CSharpParseOptions)parseOptions,
+                composition: s_compositionWithMockDiagnosticUpdateSourceRegistrationService
+            );
 
-        internal override Tuple<Analyzer, IConfigurationFixProvider> CreateDiagnosticProviderAndFixer(Workspace workspace)
-            => new Tuple<Analyzer, IConfigurationFixProvider>(new Analyzer(), new CSharpSuppressionCodeFixProvider());
+        internal override Tuple<
+            Analyzer,
+            IConfigurationFixProvider
+        > CreateDiagnosticProviderAndFixer(Workspace workspace) =>
+            new Tuple<Analyzer, IConfigurationFixProvider>(
+                new Analyzer(),
+                new CSharpSuppressionCodeFixProvider()
+            );
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/1007071")]
         [WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/956453")]
-        public async Task TestPragmaWarningOnEveryNodes()
-            => await TestPragmaAsync(TestResource.AllInOneCSharpCode, CSharpParseOptions.Default, verifier: t => t.IndexOf("#pragma warning disable", StringComparison.Ordinal) >= 0);
+        public async Task TestPragmaWarningOnEveryNodes() =>
+            await TestPragmaAsync(
+                TestResource.AllInOneCSharpCode,
+                CSharpParseOptions.Default,
+                verifier: t => t.IndexOf("#pragma warning disable", StringComparison.Ordinal) >= 0
+            );
 
         [Fact]
         public async Task TestSuppressionWithAttributeOnEveryNodes()
@@ -45,7 +65,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.Suppression
                 TestResource.AllInOneCSharpCode,
                 CSharpParseOptions.Default,
                 digInto: n => n is not StatementSyntax or BlockSyntax,
-                verifier: t => t.IndexOf("SuppressMessage", StringComparison.Ordinal) >= 0);
+                verifier: t => t.IndexOf("SuppressMessage", StringComparison.Ordinal) >= 0
+            );
         }
     }
 }

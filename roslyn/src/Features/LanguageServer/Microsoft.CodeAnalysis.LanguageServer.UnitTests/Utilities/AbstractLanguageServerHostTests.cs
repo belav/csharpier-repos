@@ -24,7 +24,11 @@ public abstract class AbstractLanguageServerHostTests
 
     protected Task<TestLspServer> CreateLanguageServerAsync(bool includeDevKitComponents = true)
     {
-        return TestLspServer.CreateAsync(new ClientCapabilities(), TestOutputLogger, includeDevKitComponents);
+        return TestLspServer.CreateAsync(
+            new ClientCapabilities(),
+            TestOutputLogger,
+            includeDevKitComponents
+        );
     }
 
     protected sealed class TestLspServer : IAsyncDisposable
@@ -32,14 +36,32 @@ public abstract class AbstractLanguageServerHostTests
         private readonly Task _languageServerHostCompletionTask;
         private readonly JsonRpc _clientRpc;
 
-        public static async Task<TestLspServer> CreateAsync(ClientCapabilities clientCapabilities, TestOutputLogger logger, bool includeDevKitComponents = true)
+        public static async Task<TestLspServer> CreateAsync(
+            ClientCapabilities clientCapabilities,
+            TestOutputLogger logger,
+            bool includeDevKitComponents = true
+        )
         {
-            var exportProvider = await LanguageServerTestComposition.CreateExportProviderAsync(logger.Factory, includeDevKitComponents);
+            var exportProvider = await LanguageServerTestComposition.CreateExportProviderAsync(
+                logger.Factory,
+                includeDevKitComponents
+            );
             var testLspServer = new TestLspServer(exportProvider, logger);
-            var initializeResponse = await testLspServer.ExecuteRequestAsync<InitializeParams, InitializeResult>(Methods.InitializeName, new InitializeParams { Capabilities = clientCapabilities }, CancellationToken.None);
+            var initializeResponse = await testLspServer.ExecuteRequestAsync<
+                InitializeParams,
+                InitializeResult
+            >(
+                Methods.InitializeName,
+                new InitializeParams { Capabilities = clientCapabilities },
+                CancellationToken.None
+            );
             Assert.NotNull(initializeResponse?.Capabilities);
 
-            await testLspServer.ExecuteRequestAsync<InitializedParams, object>(Methods.InitializedName, new InitializedParams(), CancellationToken.None);
+            await testLspServer.ExecuteRequestAsync<InitializedParams, object>(
+                Methods.InitializedName,
+                new InitializedParams(),
+                CancellationToken.None
+            );
 
             return testLspServer;
         }
@@ -50,9 +72,20 @@ public abstract class AbstractLanguageServerHostTests
         private TestLspServer(ExportProvider exportProvider, ILogger logger)
         {
             var (clientStream, serverStream) = FullDuplexStream.CreatePair();
-            LanguageServerHost = new LanguageServerHost(serverStream, serverStream, exportProvider, logger);
+            LanguageServerHost = new LanguageServerHost(
+                serverStream,
+                serverStream,
+                exportProvider,
+                logger
+            );
 
-            _clientRpc = new JsonRpc(new HeaderDelimitedMessageHandler(clientStream, clientStream, new JsonMessageFormatter()))
+            _clientRpc = new JsonRpc(
+                new HeaderDelimitedMessageHandler(
+                    clientStream,
+                    clientStream,
+                    new JsonMessageFormatter()
+                )
+            )
             {
                 AllowModificationWhileListening = true,
                 ExceptionStrategy = ExceptionProcessing.ISerializable,
@@ -68,9 +101,18 @@ public abstract class AbstractLanguageServerHostTests
             ExportProvider = exportProvider;
         }
 
-        public async Task<TResponseType?> ExecuteRequestAsync<TRequestType, TResponseType>(string methodName, TRequestType request, CancellationToken cancellationToken) where TRequestType : class
+        public async Task<TResponseType?> ExecuteRequestAsync<TRequestType, TResponseType>(
+            string methodName,
+            TRequestType request,
+            CancellationToken cancellationToken
+        )
+            where TRequestType : class
         {
-            var result = await _clientRpc.InvokeWithParameterObjectAsync<TResponseType>(methodName, request, cancellationToken: cancellationToken);
+            var result = await _clientRpc.InvokeWithParameterObjectAsync<TResponseType>(
+                methodName,
+                request,
+                cancellationToken: cancellationToken
+            );
             return result;
         }
 

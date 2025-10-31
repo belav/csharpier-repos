@@ -5,7 +5,10 @@ namespace System.Web.Mvc
 {
     public class HttpPostedFileBaseModelBinder : IModelBinder
     {
-        public object BindModel(ControllerContext controllerContext, ModelBindingContext bindingContext)
+        public object BindModel(
+            ControllerContext controllerContext,
+            ModelBindingContext bindingContext
+        )
         {
             if (controllerContext == null)
             {
@@ -16,7 +19,9 @@ namespace System.Web.Mvc
                 throw new ArgumentNullException("bindingContext");
             }
 
-            HttpPostedFileBase theFile = controllerContext.HttpContext.Request.Files[bindingContext.ModelName];
+            HttpPostedFileBase theFile = controllerContext.HttpContext.Request.Files[
+                bindingContext.ModelName
+            ];
             return ChooseFileOrNull(theFile);
         }
 

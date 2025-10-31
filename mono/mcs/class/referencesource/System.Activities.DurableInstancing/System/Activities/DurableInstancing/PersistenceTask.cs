@@ -19,7 +19,14 @@ namespace System.Activities.DurableInstancing
         bool timerCancelled;
         TimeSpan taskTimeout;
 
-        public PersistenceTask(SqlWorkflowInstanceStore store, SqlWorkflowInstanceStoreLock storeLock, InstancePersistenceCommand instancePersistenceCommand, TimeSpan taskInterval, TimeSpan taskTimeout, bool automaticallyResetTimer)
+        public PersistenceTask(
+            SqlWorkflowInstanceStore store,
+            SqlWorkflowInstanceStoreLock storeLock,
+            InstancePersistenceCommand instancePersistenceCommand,
+            TimeSpan taskInterval,
+            TimeSpan taskTimeout,
+            bool automaticallyResetTimer
+        )
         {
             this.automaticallyResetTimer = automaticallyResetTimer;
             this.commandCompletedCallback = Fx.ThunkCallback(CommandCompletedCallback);
@@ -27,35 +34,20 @@ namespace System.Activities.DurableInstancing
             this.Store = store;
             this.StoreLock = storeLock;
             this.SurrogateLockOwnerId = this.StoreLock.SurrogateLockOwnerId;
-            this.taskInterval = taskInterval;        
+            this.taskInterval = taskInterval;
             this.thisLock = new object();
             this.taskTimeout = taskTimeout;
         }
 
-        protected SqlWorkflowInstanceStore Store
-        {
-            get;
-            set;
-        }
+        protected SqlWorkflowInstanceStore Store { get; set; }
 
-        protected SqlWorkflowInstanceStoreLock StoreLock
-        {
-            get;
-            set;
-        }
+        protected SqlWorkflowInstanceStoreLock StoreLock { get; set; }
 
-        protected long SurrogateLockOwnerId
-        {
-            get;
-            set;
-        }
+        protected long SurrogateLockOwnerId { get; set; }
 
         object ThisLock
         {
-            get
-            {
-                return this.thisLock;
-            }
+            get { return this.thisLock; }
         }
 
         public void CancelTimer()
@@ -93,7 +85,11 @@ namespace System.Activities.DurableInstancing
                 {
                     if (this.taskTimer == null)
                     {
-                        this.taskTimer = new IOThreadTimer(new Action<object>(this.OnTimerFired), null, false);
+                        this.taskTimer = new IOThreadTimer(
+                            new Action<object>(this.OnTimerFired),
+                            null,
+                            false
+                        );
                     }
 
                     this.taskTimer.Set(fireImmediately ? TimeSpan.Zero : timeTillNextPoll);
@@ -105,7 +101,8 @@ namespace System.Activities.DurableInstancing
 
         void CommandCompletedCallback(IAsyncResult result)
         {
-            SqlWorkflowInstanceStoreAsyncResult sqlResult = (SqlWorkflowInstanceStoreAsyncResult) result;
+            SqlWorkflowInstanceStoreAsyncResult sqlResult =
+                (SqlWorkflowInstanceStoreAsyncResult)result;
 
             try
             {
@@ -133,8 +130,13 @@ namespace System.Activities.DurableInstancing
             {
                 try
                 {
-                    this.Store.BeginTryCommandSkipRetry(null, this.instancePersistenceCommand, this.taskTimeout,
-                        this.commandCompletedCallback, null);
+                    this.Store.BeginTryCommandSkipRetry(
+                        null,
+                        this.instancePersistenceCommand,
+                        this.taskTimeout,
+                        this.commandCompletedCallback,
+                        null
+                    );
                 }
                 catch (Exception exception)
                 {

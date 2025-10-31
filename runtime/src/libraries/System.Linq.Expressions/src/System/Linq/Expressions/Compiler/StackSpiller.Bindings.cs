@@ -27,7 +27,11 @@ namespace System.Linq.Expressions.Compiler
             internal abstract MemberBinding AsBinding();
             internal abstract Expression AsExpression(Expression target);
 
-            internal static BindingRewriter Create(MemberBinding binding, StackSpiller spiller, Stack stack)
+            internal static BindingRewriter Create(
+                MemberBinding binding,
+                StackSpiller spiller,
+                Stack stack
+            )
             {
                 switch (binding.BindingType)
                 {
@@ -58,8 +62,12 @@ namespace System.Linq.Expressions.Compiler
             private readonly ReadOnlyCollection<MemberBinding> _bindings;
             private readonly BindingRewriter[] _bindingRewriters;
 
-            internal MemberMemberBindingRewriter(MemberMemberBinding binding, StackSpiller spiller, Stack stack) :
-                base(binding, spiller)
+            internal MemberMemberBindingRewriter(
+                MemberMemberBinding binding,
+                StackSpiller spiller,
+                Stack stack
+            )
+                : base(binding, spiller)
             {
                 _bindings = binding.Bindings;
 
@@ -87,7 +95,10 @@ namespace System.Linq.Expressions.Compiler
                         {
                             newBindings[i] = _bindingRewriters[i].AsBinding();
                         }
-                        return new MemberMemberBinding(_binding.Member, new TrueReadOnlyCollection<MemberBinding>(newBindings));
+                        return new MemberMemberBinding(
+                            _binding.Member,
+                            new TrueReadOnlyCollection<MemberBinding>(newBindings)
+                        );
                 }
                 throw ContractUtils.Unreachable;
             }
@@ -114,7 +125,10 @@ namespace System.Linq.Expressions.Compiler
                 {
                     block[count + 1] = Expression.Block(
                         typeof(void),
-                        new AssignBinaryExpression(MemberExpression.Make(target, _binding.Member), memberTemp)
+                        new AssignBinaryExpression(
+                            MemberExpression.Make(target, _binding.Member),
+                            memberTemp
+                        )
                     );
                 }
                 else
@@ -131,8 +145,12 @@ namespace System.Linq.Expressions.Compiler
             private readonly ReadOnlyCollection<ElementInit> _inits;
             private readonly ChildRewriter[] _childRewriters;
 
-            internal ListBindingRewriter(MemberListBinding binding, StackSpiller spiller, Stack stack) :
-                base(binding, spiller)
+            internal ListBindingRewriter(
+                MemberListBinding binding,
+                StackSpiller spiller,
+                Stack stack
+            )
+                : base(binding, spiller)
             {
                 _inits = binding.Initializers;
 
@@ -169,10 +187,16 @@ namespace System.Linq.Expressions.Compiler
                             }
                             else
                             {
-                                newInits[i] = new ElementInit(_inits[i].AddMethod, new TrueReadOnlyCollection<Expression>(cr[0, -1]!));
+                                newInits[i] = new ElementInit(
+                                    _inits[i].AddMethod,
+                                    new TrueReadOnlyCollection<Expression>(cr[0, -1]!)
+                                );
                             }
                         }
-                        return new MemberListBinding(_binding.Member, new TrueReadOnlyCollection<ElementInit>(newInits));
+                        return new MemberListBinding(
+                            _binding.Member,
+                            new TrueReadOnlyCollection<ElementInit>(newInits)
+                        );
                 }
                 throw ContractUtils.Unreachable;
             }
@@ -191,7 +215,13 @@ namespace System.Linq.Expressions.Compiler
                 for (int i = 0; i < count; i++)
                 {
                     ChildRewriter cr = _childRewriters[i];
-                    Result add = cr.Finish(new InstanceMethodCallExpressionN(_inits[i].AddMethod, memberTemp, cr[0, -1]!));
+                    Result add = cr.Finish(
+                        new InstanceMethodCallExpressionN(
+                            _inits[i].AddMethod,
+                            memberTemp,
+                            cr[0, -1]!
+                        )
+                    );
                     block[i + 1] = add.Node;
                 }
 
@@ -200,7 +230,10 @@ namespace System.Linq.Expressions.Compiler
                 {
                     block[count + 1] = Expression.Block(
                         typeof(void),
-                        new AssignBinaryExpression(MemberExpression.Make(target, _binding.Member), memberTemp)
+                        new AssignBinaryExpression(
+                            MemberExpression.Make(target, _binding.Member),
+                            memberTemp
+                        )
                     );
                 }
                 else
@@ -216,8 +249,12 @@ namespace System.Linq.Expressions.Compiler
         {
             private readonly Expression _rhs;
 
-            internal MemberAssignmentRewriter(MemberAssignment binding, StackSpiller spiller, Stack stack) :
-                base(binding, spiller)
+            internal MemberAssignmentRewriter(
+                MemberAssignment binding,
+                StackSpiller spiller,
+                Stack stack
+            )
+                : base(binding, spiller)
             {
                 Result result = spiller.RewriteExpression(binding.Expression, stack);
                 _action = result.Action;

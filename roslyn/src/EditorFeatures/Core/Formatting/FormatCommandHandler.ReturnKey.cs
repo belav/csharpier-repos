@@ -10,10 +10,20 @@ namespace Microsoft.CodeAnalysis.Formatting
 {
     internal partial class FormatCommandHandler
     {
-        public CommandState GetCommandState(ReturnKeyCommandArgs args, Func<CommandState> nextHandler)
-            => nextHandler();
+        public CommandState GetCommandState(
+            ReturnKeyCommandArgs args,
+            Func<CommandState> nextHandler
+        ) => nextHandler();
 
-        public void ExecuteCommand(ReturnKeyCommandArgs args, Action nextHandler, CommandExecutionContext context)
-            => ExecuteReturnOrTypeCommand(args, nextHandler, context.OperationContext.UserCancellationToken);
+        public void ExecuteCommand(
+            ReturnKeyCommandArgs args,
+            Action nextHandler,
+            CommandExecutionContext context
+        ) =>
+            ExecuteReturnOrTypeCommand(
+                args,
+                nextHandler,
+                context.OperationContext.UserCancellationToken
+            );
     }
 }

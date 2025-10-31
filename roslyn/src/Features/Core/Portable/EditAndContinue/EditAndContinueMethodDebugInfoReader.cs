@@ -28,15 +28,23 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
         internal static bool IgnoreCaseWhenComparingDocumentNames;
 
         public abstract bool IsPortable { get; }
-        public abstract EditAndContinueMethodDebugInformation GetDebugInfo(MethodDefinitionHandle methodHandle);
-        public abstract StandaloneSignatureHandle GetLocalSignature(MethodDefinitionHandle methodHandle);
+        public abstract EditAndContinueMethodDebugInformation GetDebugInfo(
+            MethodDefinitionHandle methodHandle
+        );
+        public abstract StandaloneSignatureHandle GetLocalSignature(
+            MethodDefinitionHandle methodHandle
+        );
 
         /// <summary>
         /// Reads document checksum.
         /// </summary>
         /// <returns>True if a document with given path is listed in the PDB.</returns>
         /// <exception cref="Exception">Error reading debug information from the PDB.</exception>
-        public abstract bool TryGetDocumentChecksum(string documentPath, out ImmutableArray<byte> checksum, out Guid algorithmId);
+        public abstract bool TryGetDocumentChecksum(
+            string documentPath,
+            out ImmutableArray<byte> checksum,
+            out Guid algorithmId
+        );
 
         private sealed class Native : EditAndContinueMethodDebugInfoReader
         {
@@ -54,15 +62,22 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
 
             public override bool IsPortable => false;
 
-            public override StandaloneSignatureHandle GetLocalSignature(MethodDefinitionHandle methodHandle)
+            public override StandaloneSignatureHandle GetLocalSignature(
+                MethodDefinitionHandle methodHandle
+            )
             {
-                var symMethod = (ISymUnmanagedMethod2)_symReader.GetMethodByVersion(MetadataTokens.GetToken(methodHandle), _version);
+                var symMethod = (ISymUnmanagedMethod2)
+                    _symReader.GetMethodByVersion(MetadataTokens.GetToken(methodHandle), _version);
 
                 // Compiler generated methods (e.g. async kick-off methods) might not have debug information.
-                return symMethod == null ? default : MetadataTokens.StandaloneSignatureHandle(symMethod.GetLocalSignatureToken());
+                return symMethod == null
+                    ? default
+                    : MetadataTokens.StandaloneSignatureHandle(symMethod.GetLocalSignatureToken());
             }
 
-            public override EditAndContinueMethodDebugInformation GetDebugInfo(MethodDefinitionHandle methodHandle)
+            public override EditAndContinueMethodDebugInformation GetDebugInfo(
+                MethodDefinitionHandle methodHandle
+            )
             {
                 var methodToken = MetadataTokens.GetToken(methodHandle);
 
@@ -84,19 +99,35 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
 
                 try
                 {
-                    ImmutableArray<byte> localSlots, lambdaMap, stateMachineSuspensionPoints;
+                    ImmutableArray<byte> localSlots,
+                        lambdaMap,
+                        stateMachineSuspensionPoints;
                     if (debugInfo != null)
                     {
-                        localSlots = CustomDebugInfoReader.TryGetCustomDebugInfoRecord(debugInfo, CustomDebugInfoKind.EditAndContinueLocalSlotMap);
-                        lambdaMap = CustomDebugInfoReader.TryGetCustomDebugInfoRecord(debugInfo, CustomDebugInfoKind.EditAndContinueLambdaMap);
-                        stateMachineSuspensionPoints = CustomDebugInfoReader.TryGetCustomDebugInfoRecord(debugInfo, CustomDebugInfoKind.EditAndContinueStateMachineStateMap);
+                        localSlots = CustomDebugInfoReader.TryGetCustomDebugInfoRecord(
+                            debugInfo,
+                            CustomDebugInfoKind.EditAndContinueLocalSlotMap
+                        );
+                        lambdaMap = CustomDebugInfoReader.TryGetCustomDebugInfoRecord(
+                            debugInfo,
+                            CustomDebugInfoKind.EditAndContinueLambdaMap
+                        );
+                        stateMachineSuspensionPoints =
+                            CustomDebugInfoReader.TryGetCustomDebugInfoRecord(
+                                debugInfo,
+                                CustomDebugInfoKind.EditAndContinueStateMachineStateMap
+                            );
                     }
                     else
                     {
                         localSlots = lambdaMap = stateMachineSuspensionPoints = default;
                     }
 
-                    return EditAndContinueMethodDebugInformation.Create(localSlots, lambdaMap, stateMachineSuspensionPoints);
+                    return EditAndContinueMethodDebugInformation.Create(
+                        localSlots,
+                        lambdaMap,
+                        stateMachineSuspensionPoints
+                    );
                 }
                 catch (InvalidOperationException e) when (FatalError.ReportAndCatch(e)) // likely a bug in the compiler/debugger
                 {
@@ -105,31 +136,60 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
                 }
             }
 
-            public override bool TryGetDocumentChecksum(string documentPath, out ImmutableArray<byte> checksum, out Guid algorithmId)
-                => TryGetDocumentChecksum(_symReader, documentPath, out checksum, out algorithmId);
+            public override bool TryGetDocumentChecksum(
+                string documentPath,
+                out ImmutableArray<byte> checksum,
+                out Guid algorithmId
+            ) => TryGetDocumentChecksum(_symReader, documentPath, out checksum, out algorithmId);
         }
 
-        private sealed class Portable(MetadataReader pdbReader) : EditAndContinueMethodDebugInfoReader
+        private sealed class Portable(MetadataReader pdbReader)
+            : EditAndContinueMethodDebugInfoReader
         {
             private readonly MetadataReader _pdbReader = pdbReader;
 
             public override bool IsPortable => true;
 
-            public override StandaloneSignatureHandle GetLocalSignature(MethodDefinitionHandle methodHandle)
-                => _pdbReader.GetMethodDebugInformation(methodHandle.ToDebugInformationHandle()).LocalSignature;
+            public override StandaloneSignatureHandle GetLocalSignature(
+                MethodDefinitionHandle methodHandle
+            ) =>
+                _pdbReader
+                    .GetMethodDebugInformation(methodHandle.ToDebugInformationHandle())
+                    .LocalSignature;
 
-            public override EditAndContinueMethodDebugInformation GetDebugInfo(MethodDefinitionHandle methodHandle)
-                => EditAndContinueMethodDebugInformation.Create(
-                    compressedSlotMap: GetCdiBytes(methodHandle, PortableCustomDebugInfoKinds.EncLocalSlotMap),
-                    compressedLambdaMap: GetCdiBytes(methodHandle, PortableCustomDebugInfoKinds.EncLambdaAndClosureMap),
-                    compressedStateMachineStateMap: GetCdiBytes(methodHandle, PortableCustomDebugInfoKinds.EncStateMachineStateMap));
+            public override EditAndContinueMethodDebugInformation GetDebugInfo(
+                MethodDefinitionHandle methodHandle
+            ) =>
+                EditAndContinueMethodDebugInformation.Create(
+                    compressedSlotMap: GetCdiBytes(
+                        methodHandle,
+                        PortableCustomDebugInfoKinds.EncLocalSlotMap
+                    ),
+                    compressedLambdaMap: GetCdiBytes(
+                        methodHandle,
+                        PortableCustomDebugInfoKinds.EncLambdaAndClosureMap
+                    ),
+                    compressedStateMachineStateMap: GetCdiBytes(
+                        methodHandle,
+                        PortableCustomDebugInfoKinds.EncStateMachineStateMap
+                    )
+                );
 
-            private ImmutableArray<byte> GetCdiBytes(MethodDefinitionHandle methodHandle, Guid kind)
-                => TryGetCustomDebugInformation(_pdbReader, methodHandle, kind, out var cdi) ?
-                    _pdbReader.GetBlobContent(cdi.Value) : default;
+            private ImmutableArray<byte> GetCdiBytes(
+                MethodDefinitionHandle methodHandle,
+                Guid kind
+            ) =>
+                TryGetCustomDebugInformation(_pdbReader, methodHandle, kind, out var cdi)
+                    ? _pdbReader.GetBlobContent(cdi.Value)
+                    : default;
 
             /// <exception cref="BadImageFormatException">Invalid data format.</exception>
-            private static bool TryGetCustomDebugInformation(MetadataReader reader, EntityHandle handle, Guid kind, out CustomDebugInformation customDebugInfo)
+            private static bool TryGetCustomDebugInformation(
+                MetadataReader reader,
+                EntityHandle handle,
+                Guid kind,
+                out CustomDebugInformation customDebugInfo
+            )
             {
                 var foundAny = false;
                 customDebugInfo = default;
@@ -152,13 +212,23 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
                 return foundAny;
             }
 
-            public override bool TryGetDocumentChecksum(string documentPath, out ImmutableArray<byte> checksum, out Guid algorithmId)
+            public override bool TryGetDocumentChecksum(
+                string documentPath,
+                out ImmutableArray<byte> checksum,
+                out Guid algorithmId
+            )
             {
                 foreach (var documentHandle in _pdbReader.Documents)
                 {
                     var document = _pdbReader.GetDocument(documentHandle);
 
-                    if (_pdbReader.StringComparer.Equals(document.Name, documentPath, IgnoreCaseWhenComparingDocumentNames))
+                    if (
+                        _pdbReader.StringComparer.Equals(
+                            document.Name,
+                            documentPath,
+                            IgnoreCaseWhenComparingDocumentNames
+                        )
+                    )
                     {
                         checksum = _pdbReader.GetBlobContent(document.Hash);
                         algorithmId = _pdbReader.GetGuid(document.HashAlgorithm);
@@ -186,7 +256,10 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
         /// <remarks>
         /// Automatically detects the underlying PDB format and returns the appropriate reader.
         /// </remarks>
-        public static unsafe EditAndContinueMethodDebugInfoReader Create(ISymUnmanagedReader5 symReader, int version = 1)
+        public static unsafe EditAndContinueMethodDebugInfoReader Create(
+            ISymUnmanagedReader5 symReader,
+            int version = 1
+        )
         {
             if (symReader == null)
             {
@@ -198,7 +271,11 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
                 throw new ArgumentOutOfRangeException(nameof(version));
             }
 
-            var hr = symReader.GetPortableDebugMetadataByVersion(version, metadata: out var metadata, size: out var size);
+            var hr = symReader.GetPortableDebugMetadataByVersion(
+                version,
+                metadata: out var metadata,
+                size: out var size
+            );
             Marshal.ThrowExceptionForHR(hr);
 
             if (hr == 0)
@@ -219,16 +296,25 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
         /// <returns>
         /// The resulting reader does not take ownership of the <paramref name="pdbReader"/> or the memory it reads.
         /// </returns>
-        public static unsafe EditAndContinueMethodDebugInfoReader Create(MetadataReader pdbReader)
-           => new Portable(pdbReader ?? throw new ArgumentNullException(nameof(pdbReader)));
+        public static unsafe EditAndContinueMethodDebugInfoReader Create(
+            MetadataReader pdbReader
+        ) => new Portable(pdbReader ?? throw new ArgumentNullException(nameof(pdbReader)));
 
-        internal static bool TryGetDocumentChecksum(ISymUnmanagedReader5 symReader, string documentPath, out ImmutableArray<byte> checksum, out Guid algorithmId)
+        internal static bool TryGetDocumentChecksum(
+            ISymUnmanagedReader5 symReader,
+            string documentPath,
+            out ImmutableArray<byte> checksum,
+            out Guid algorithmId
+        )
         {
             var symDocument = symReader.GetDocument(documentPath);
 
             // Make sure the full path matches.
             // Native SymReader allows partial match on the document file name.
-            if (symDocument == null || !StringComparer.Ordinal.Equals(symDocument.GetName(), documentPath))
+            if (
+                symDocument == null
+                || !StringComparer.Ordinal.Equals(symDocument.GetName(), documentPath)
+            )
             {
                 checksum = default;
                 algorithmId = default;

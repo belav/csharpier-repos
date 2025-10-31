@@ -14,6 +14,10 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.FSharp.InlineHints
     interface IFSharpInlineHintsService
     {
         /// <inheritdoc cref="IInlineHintsService.GetInlineHintsAsync"/>
-        Task<ImmutableArray<FSharpInlineHint>> GetInlineHintsAsync(Document document, TextSpan textSpan, CancellationToken cancellationToken);
+        Task<ImmutableArray<FSharpInlineHint>> GetInlineHintsAsync(
+            Document document,
+            TextSpan textSpan,
+            CancellationToken cancellationToken
+        );
     }
 }

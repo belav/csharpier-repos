@@ -61,7 +61,8 @@ internal static partial class Interop
 
             // Replying address.
             private fixed byte _Address[16];
-            internal byte[] Address => MemoryMarshal.CreateReadOnlySpan(ref _Address[0], 16).ToArray();
+            internal byte[] Address =>
+                MemoryMarshal.CreateReadOnlySpan(ref _Address[0], 16).ToArray();
 
             internal uint ScopeID;
         }
@@ -70,17 +71,18 @@ internal static partial class Interop
         internal struct ICMPV6_ECHO_REPLY
         {
             internal IPV6_ADDRESS_EX Address;
+
             // Reply IP_STATUS.
             internal uint Status;
+
             // RTT in milliseconds.
             internal uint RoundTripTime;
         }
 
         internal sealed class SafeCloseIcmpHandle : SafeHandleZeroOrMinusOneIsInvalid
         {
-            public SafeCloseIcmpHandle() : base(true)
-            {
-            }
+            public SafeCloseIcmpHandle()
+                : base(true) { }
 
             protected override bool ReleaseHandle()
             {
@@ -99,11 +101,34 @@ internal static partial class Interop
         internal static partial bool IcmpCloseHandle(IntPtr handle);
 
         [LibraryImport(Interop.Libraries.IpHlpApi, SetLastError = true)]
-        internal static partial uint IcmpSendEcho2(SafeCloseIcmpHandle icmpHandle, SafeWaitHandle Event, IntPtr apcRoutine, IntPtr apcContext,
-            uint ipAddress, SafeLocalAllocHandle data, ushort dataSize, ref IP_OPTION_INFORMATION options, SafeLocalAllocHandle replyBuffer, uint replySize, uint timeout);
+        internal static partial uint IcmpSendEcho2(
+            SafeCloseIcmpHandle icmpHandle,
+            SafeWaitHandle Event,
+            IntPtr apcRoutine,
+            IntPtr apcContext,
+            uint ipAddress,
+            SafeLocalAllocHandle data,
+            ushort dataSize,
+            ref IP_OPTION_INFORMATION options,
+            SafeLocalAllocHandle replyBuffer,
+            uint replySize,
+            uint timeout
+        );
 
         [LibraryImport(Interop.Libraries.IpHlpApi, SetLastError = true)]
-        internal static unsafe partial uint Icmp6SendEcho2(SafeCloseIcmpHandle icmpHandle, SafeWaitHandle Event, IntPtr apcRoutine, IntPtr apcContext,
-            Span<byte> sourceSocketAddress, Span<byte> destSocketAddress, SafeLocalAllocHandle data, ushort dataSize, ref IP_OPTION_INFORMATION options, SafeLocalAllocHandle replyBuffer, uint replySize, uint timeout);
+        internal static unsafe partial uint Icmp6SendEcho2(
+            SafeCloseIcmpHandle icmpHandle,
+            SafeWaitHandle Event,
+            IntPtr apcRoutine,
+            IntPtr apcContext,
+            Span<byte> sourceSocketAddress,
+            Span<byte> destSocketAddress,
+            SafeLocalAllocHandle data,
+            ushort dataSize,
+            ref IP_OPTION_INFORMATION options,
+            SafeLocalAllocHandle replyBuffer,
+            uint replySize,
+            uint timeout
+        );
     }
 }

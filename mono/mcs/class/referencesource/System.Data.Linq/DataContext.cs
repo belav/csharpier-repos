@@ -11,12 +11,13 @@ using System.IO;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Transactions;
 using System.Xml;
-using System.Runtime.CompilerServices;
 
-namespace System.Data.Linq {
+namespace System.Data.Linq
+{
     using System.Data.Linq.Mapping;
     using System.Data.Linq.Provider;
     using System.Diagnostics.CodeAnalysis;
@@ -26,45 +27,51 @@ namespace System.Data.Linq {
     /// or more updates fail due to optimistic concurrency
     /// conflicts.
     /// </summary>
-    public enum ConflictMode {
+    public enum ConflictMode
+    {
         /// <summary>
         /// Fail immediately when the first change conflict is encountered.
         /// </summary>
         FailOnFirstConflict,
+
         /// <summary>
         /// Only fail after all changes have been attempted.
         /// </summary>
-        ContinueOnConflict
+        ContinueOnConflict,
     }
 
     /// <summary>
-    /// Used to specify a value synchronization strategy. 
+    /// Used to specify a value synchronization strategy.
     /// </summary>
-    public enum RefreshMode {
+    public enum RefreshMode
+    {
         /// <summary>
         /// Keep the current values.
         /// </summary>
         KeepCurrentValues,
+
         /// <summary>
         /// Current values that have been changed are not modified, but
         /// any unchanged values are updated with the current database
         /// values.  No changes are lost in this merge.
         /// </summary>
         KeepChanges,
+
         /// <summary>
         /// All current values are overwritten with current database values,
         /// regardless of whether they have been changed.
         /// </summary>
-        OverwriteCurrentValues
+        OverwriteCurrentValues,
     }
 
     /// <summary>
     /// The DataContext is the source of all entities mapped over a database connection.
-    /// It tracks changes made to all retrieved entities and maintains an 'identity cache' 
-    /// that guarantees that entities retrieved more than once are represented using the 
+    /// It tracks changes made to all retrieved entities and maintains an 'identity cache'
+    /// that guarantees that entities retrieved more than once are represented using the
     /// same object instance.
     /// </summary>
-    public class DataContext : IDisposable {
+    public class DataContext : IDisposable
+    {
         CommonDataServices services;
         IProvider provider;
         Dictionary<MetaTable, ITable> tables;
@@ -75,45 +82,56 @@ namespace System.Data.Linq {
         DataLoadOptions loadOptions;
         ChangeConflictCollection conflicts;
 
-        private DataContext() {
-        }
+        private DataContext() { }
 
-        public DataContext(string fileOrServerOrConnection) {
-            if (fileOrServerOrConnection == null) {
+        public DataContext(string fileOrServerOrConnection)
+        {
+            if (fileOrServerOrConnection == null)
+            {
                 throw Error.ArgumentNull("fileOrServerOrConnection");
             }
             this.InitWithDefaultMapping(fileOrServerOrConnection);
         }
 
-        public DataContext(string fileOrServerOrConnection, MappingSource mapping) {
-            if (fileOrServerOrConnection == null) {
+        public DataContext(string fileOrServerOrConnection, MappingSource mapping)
+        {
+            if (fileOrServerOrConnection == null)
+            {
                 throw Error.ArgumentNull("fileOrServerOrConnection");
             }
-            if (mapping == null) {
+            if (mapping == null)
+            {
                 throw Error.ArgumentNull("mapping");
             }
             this.Init(fileOrServerOrConnection, mapping);
         }
 
-        public DataContext(IDbConnection connection) {
-            if (connection == null) {
+        public DataContext(IDbConnection connection)
+        {
+            if (connection == null)
+            {
                 throw Error.ArgumentNull("connection");
             }
             this.InitWithDefaultMapping(connection);
         }
 
-        public DataContext(IDbConnection connection, MappingSource mapping) {
-            if (connection == null) {
+        public DataContext(IDbConnection connection, MappingSource mapping)
+        {
+            if (connection == null)
+            {
                 throw Error.ArgumentNull("connection");
             }
-            if (mapping == null) {
+            if (mapping == null)
+            {
                 throw Error.ArgumentNull("mapping");
             }
             this.Init(connection, mapping);
         }
 
-        internal DataContext(DataContext context) {
-            if (context == null) {
+        internal DataContext(DataContext context)
+        {
+            if (context == null)
+            {
                 throw Error.ArgumentNull("context");
             }
             this.Init(context.Connection, context.Mapping.MappingSource);
@@ -124,7 +142,8 @@ namespace System.Data.Linq {
         }
 
         #region Dispose\Finalize
-        public void Dispose() {            
+        public void Dispose()
+        {
             this.disposed = true;
             Dispose(true);
             // Technically, calling GC.SuppressFinalize is not required because the class does not
@@ -132,15 +151,19 @@ namespace System.Data.Linq {
             // in the future, and prevents an FxCop warning.
             GC.SuppressFinalize(this);
         }
+
         // Not implementing finalizer here because there are no unmanaged resources
         // to release. See http://msdnwiki.microsoft.com/en-us/mtpswiki/12afb1ea-3a17-4a3f-a1f0-fcdb853e2359.aspx
 
         // The bulk of the clean-up code is implemented in Dispose(bool)
-        protected virtual void Dispose(bool disposing) {
+        protected virtual void Dispose(bool disposing)
+        {
             // Implemented but empty so that derived contexts can implement
             // a finalizer that potentially cleans up unmanaged resources.
-            if (disposing) {
-                if (this.provider != null) {
+            if (disposing)
+            {
+                if (this.provider != null)
+                {
                     this.provider.Dispose();
                     this.provider = null;
                 }
@@ -150,38 +173,52 @@ namespace System.Data.Linq {
             }
         }
 
-        internal void CheckDispose() {
-            if (this.disposed) {
+        internal void CheckDispose()
+        {
+            if (this.disposed)
+            {
                 throw Error.DataContextCannotBeUsedAfterDispose();
             }
         }
         #endregion
 
-        private void InitWithDefaultMapping(object connection) {
+        private void InitWithDefaultMapping(object connection)
+        {
             this.Init(connection, new AttributeMappingSource());
         }
 
-        internal object Clone() {
+        internal object Clone()
+        {
             CheckDispose();
-            return Activator.CreateInstance(this.GetType(), new object[] { this.Connection, this.Mapping.MappingSource });
+            return Activator.CreateInstance(
+                this.GetType(),
+                new object[] { this.Connection, this.Mapping.MappingSource }
+            );
         }
 
-        private void Init(object connection, MappingSource mapping) {
+        private void Init(object connection, MappingSource mapping)
+        {
             MetaModel model = mapping.GetModel(this.GetType());
             this.services = new CommonDataServices(this, model);
             this.conflicts = new ChangeConflictCollection();
 
             // determine provider
             Type providerType;
-            if (model.ProviderType != null) {
+            if (model.ProviderType != null)
+            {
                 providerType = model.ProviderType;
             }
-            else {
+            else
+            {
                 throw Error.ProviderTypeNull();
             }
 
-            if (!typeof(IProvider).IsAssignableFrom(providerType)) {
-                throw Error.ProviderDoesNotImplementRequiredInterface(providerType, typeof(IProvider));
+            if (!typeof(IProvider).IsAssignableFrom(providerType))
+            {
+                throw Error.ProviderDoesNotImplementRequiredInterface(
+                    providerType,
+                    typeof(IProvider)
+                );
             }
 
             this.provider = (IProvider)Activator.CreateInstance(providerType);
@@ -191,23 +228,28 @@ namespace System.Data.Linq {
             this.InitTables(this);
         }
 
-        internal void ClearCache() {
+        internal void ClearCache()
+        {
             CheckDispose();
             this.services.ResetServices();
         }
 
-        internal CommonDataServices Services {
-            get { 
+        internal CommonDataServices Services
+        {
+            get
+            {
                 CheckDispose();
-                return this.services; 
+                return this.services;
             }
         }
 
         /// <summary>
         /// The connection object used by this DataContext when executing queries and commands.
         /// </summary>
-        public DbConnection Connection {
-            get {
+        public DbConnection Connection
+        {
+            get
+            {
                 CheckDispose();
                 return this.provider.Connection;
             }
@@ -216,12 +258,15 @@ namespace System.Data.Linq {
         /// <summary>
         /// The transaction object used by this DataContext when executing queries and commands.
         /// </summary>
-        public DbTransaction Transaction {
-            get {
+        public DbTransaction Transaction
+        {
+            get
+            {
                 CheckDispose();
                 return this.provider.Transaction;
             }
-            set {
+            set
+            {
                 CheckDispose();
                 this.provider.Transaction = value;
             }
@@ -230,12 +275,15 @@ namespace System.Data.Linq {
         /// <summary>
         /// The command timeout to use when executing commands.
         /// </summary>
-        public int CommandTimeout {
-            get {
+        public int CommandTimeout
+        {
+            get
+            {
                 CheckDispose();
                 return this.provider.CommandTimeout;
             }
-            set {
+            set
+            {
                 CheckDispose();
                 this.provider.CommandTimeout = value;
             }
@@ -245,12 +293,15 @@ namespace System.Data.Linq {
         /// A text writer used by this DataContext to output information such as query and commands
         /// being executed.
         /// </summary>
-        public TextWriter Log {
-            get {
+        public TextWriter Log
+        {
+            get
+            {
                 CheckDispose();
                 return this.provider.Log;
             }
-            set {
+            set
+            {
                 CheckDispose();
                 this.provider.Log = value;
             }
@@ -258,22 +309,27 @@ namespace System.Data.Linq {
 
         /// <summary>
         /// True if object tracking is enabled, false otherwise.  Object tracking
-        /// includes identity caching and change tracking.  If tracking is turned off, 
+        /// includes identity caching and change tracking.  If tracking is turned off,
         /// SubmitChanges and related functionality is disabled.  DeferredLoading is
         /// also disabled when object tracking is disabled.
         /// </summary>
-        public bool ObjectTrackingEnabled {
-            get {
+        public bool ObjectTrackingEnabled
+        {
+            get
+            {
                 CheckDispose();
                 return objectTrackingEnabled;
             }
-            set {
+            set
+            {
                 CheckDispose();
-                if (Services.HasCachedObjects) {
+                if (Services.HasCachedObjects)
+                {
                     throw Error.OptionsCannotBeModifiedAfterQuery();
                 }
                 objectTrackingEnabled = value;
-                if (!objectTrackingEnabled) {
+                if (!objectTrackingEnabled)
+                {
                     deferredLoadingEnabled = false;
                 }
                 // force reinitialization of cache/tracking objects
@@ -283,21 +339,26 @@ namespace System.Data.Linq {
 
         /// <summary>
         /// True if deferred loading is enabled, false otherwise.  With deferred
-        /// loading disabled, association members return default values and are 
+        /// loading disabled, association members return default values and are
         /// not defer loaded.
         /// </summary>
-        public bool DeferredLoadingEnabled {
-            get {
+        public bool DeferredLoadingEnabled
+        {
+            get
+            {
                 CheckDispose();
                 return deferredLoadingEnabled;
             }
-            set {
+            set
+            {
                 CheckDispose();
-                if (Services.HasCachedObjects) {
+                if (Services.HasCachedObjects)
+                {
                     throw Error.OptionsCannotBeModifiedAfterQuery();
                 }
                 // can't have tracking disabled and deferred loading enabled
-                if (!ObjectTrackingEnabled && value) {
+                if (!ObjectTrackingEnabled && value)
+                {
                     throw Error.DeferredLoadingRequiresObjectTracking();
                 }
                 deferredLoadingEnabled = value;
@@ -307,8 +368,10 @@ namespace System.Data.Linq {
         /// <summary>
         /// The mapping model used to describe the entities
         /// </summary>
-        public MetaModel Mapping {
-            get {
+        public MetaModel Mapping
+        {
+            get
+            {
                 CheckDispose();
                 return this.services.Model;
             }
@@ -318,9 +381,11 @@ namespace System.Data.Linq {
         /// Verify that change tracking is enabled, and throw an exception
         /// if it is not.
         /// </summary>
-        internal void VerifyTrackingEnabled() {
+        internal void VerifyTrackingEnabled()
+        {
             CheckDispose();
-            if (!ObjectTrackingEnabled) {
+            if (!ObjectTrackingEnabled)
+            {
                 throw Error.ObjectTrackingRequired();
             }
         }
@@ -328,9 +393,11 @@ namespace System.Data.Linq {
         /// <summary>
         /// Verify that submit changes is not occurring
         /// </summary>
-        internal void CheckNotInSubmitChanges() {
+        internal void CheckNotInSubmitChanges()
+        {
             CheckDispose();
-            if (this.isInSubmitChanges) {
+            if (this.isInSubmitChanges)
+            {
                 throw Error.CannotPerformOperationDuringSubmitChanges();
             }
         }
@@ -338,93 +405,134 @@ namespace System.Data.Linq {
         /// <summary>
         /// Verify that submit changes is occurring
         /// </summary>
-        internal void CheckInSubmitChanges() {
+        internal void CheckInSubmitChanges()
+        {
             CheckDispose();
-            if (!this.isInSubmitChanges) {
+            if (!this.isInSubmitChanges)
+            {
                 throw Error.CannotPerformOperationOutsideSubmitChanges();
             }
         }
 
         /// <summary>
-        /// Returns the strongly-typed Table object representing a collection of persistent entities.  
+        /// Returns the strongly-typed Table object representing a collection of persistent entities.
         /// Use this collection as the starting point for queries.
         /// </summary>
         /// <typeparam name="TEntity">The type of the entity objects. In case of a persistent hierarchy
         /// the entity specified must be the base type of the hierarchy.</typeparam>
         /// <returns></returns>
-        [SuppressMessage("Microsoft.Design", "CA1004:GenericMethodsShouldProvideTypeParameter", Justification = "Microsoft: Generic parameters are required for strong-typing of the return type.")]
-        public Table<TEntity> GetTable<TEntity>() where TEntity : class {
+        [SuppressMessage(
+            "Microsoft.Design",
+            "CA1004:GenericMethodsShouldProvideTypeParameter",
+            Justification = "Microsoft: Generic parameters are required for strong-typing of the return type."
+        )]
+        public Table<TEntity> GetTable<TEntity>()
+            where TEntity : class
+        {
             CheckDispose();
             MetaTable metaTable = this.services.Model.GetTable(typeof(TEntity));
-            if (metaTable == null) {
+            if (metaTable == null)
+            {
                 throw Error.TypeIsNotMarkedAsTable(typeof(TEntity));
             }
             ITable table = this.GetTable(metaTable);
-            if (table.ElementType != typeof(TEntity)) {
+            if (table.ElementType != typeof(TEntity))
+            {
                 throw Error.CouldNotGetTableForSubtype(typeof(TEntity), metaTable.RowType.Type);
             }
             return (Table<TEntity>)table;
         }
-       
+
         /// <summary>
-        /// Returns the weakly-typed ITable object representing a collection of persistent entities. 
+        /// Returns the weakly-typed ITable object representing a collection of persistent entities.
         /// Use this collection as the starting point for dynamic/runtime-computed queries.
         /// </summary>
         /// <param name="type">The type of the entity objects. In case of a persistent hierarchy
         /// the entity specified must be the base type of the hierarchy.</param>
         /// <returns></returns>
-        public ITable GetTable(Type type) {
+        public ITable GetTable(Type type)
+        {
             CheckDispose();
-            if (type == null) {
+            if (type == null)
+            {
                 throw Error.ArgumentNull("type");
             }
             MetaTable metaTable = this.services.Model.GetTable(type);
-            if (metaTable == null) {
+            if (metaTable == null)
+            {
                 throw Error.TypeIsNotMarkedAsTable(type);
             }
-            if (metaTable.RowType.Type != type) {
+            if (metaTable.RowType.Type != type)
+            {
                 throw Error.CouldNotGetTableForSubtype(type, metaTable.RowType.Type);
             }
             return this.GetTable(metaTable);
         }
 
-        private ITable GetTable(MetaTable metaTable) {
+        private ITable GetTable(MetaTable metaTable)
+        {
             System.Diagnostics.Debug.Assert(metaTable != null);
             ITable tb;
-            if (!this.tables.TryGetValue(metaTable, out tb)) {
+            if (!this.tables.TryGetValue(metaTable, out tb))
+            {
                 ValidateTable(metaTable);
                 Type tbType = typeof(Table<>).MakeGenericType(metaTable.RowType.Type);
-                tb = (ITable)Activator.CreateInstance(tbType, BindingFlags.Instance|BindingFlags.Public|BindingFlags.NonPublic, null, new object[] { this, metaTable }, null);
+                tb = (ITable)
+                    Activator.CreateInstance(
+                        tbType,
+                        BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic,
+                        null,
+                        new object[] { this, metaTable },
+                        null
+                    );
                 this.tables.Add(metaTable, tb);
             }
             return tb;
         }
 
-        private static void ValidateTable(MetaTable metaTable) {
+        private static void ValidateTable(MetaTable metaTable)
+        {
             // Associations can only be between entities - verify both that both ends of all
             // associations are entities.
-            foreach(MetaAssociation assoc in metaTable.RowType.Associations) {
-                if(!assoc.ThisMember.DeclaringType.IsEntity) {
-                    throw Error.NonEntityAssociationMapping(assoc.ThisMember.DeclaringType.Type, assoc.ThisMember.Name, assoc.ThisMember.DeclaringType.Type);
+            foreach (MetaAssociation assoc in metaTable.RowType.Associations)
+            {
+                if (!assoc.ThisMember.DeclaringType.IsEntity)
+                {
+                    throw Error.NonEntityAssociationMapping(
+                        assoc.ThisMember.DeclaringType.Type,
+                        assoc.ThisMember.Name,
+                        assoc.ThisMember.DeclaringType.Type
+                    );
                 }
-                if(!assoc.OtherType.IsEntity) {
-                    throw Error.NonEntityAssociationMapping(assoc.ThisMember.DeclaringType.Type, assoc.ThisMember.Name, assoc.OtherType.Type);
+                if (!assoc.OtherType.IsEntity)
+                {
+                    throw Error.NonEntityAssociationMapping(
+                        assoc.ThisMember.DeclaringType.Type,
+                        assoc.ThisMember.Name,
+                        assoc.OtherType.Type
+                    );
                 }
             }
         }
 
-        private void InitTables(object schema) {
-            FieldInfo[] fields = schema.GetType().GetFields(BindingFlags.Public | BindingFlags.Instance);
-            foreach (FieldInfo fi in fields) {
+        private void InitTables(object schema)
+        {
+            FieldInfo[] fields = schema
+                .GetType()
+                .GetFields(BindingFlags.Public | BindingFlags.Instance);
+            foreach (FieldInfo fi in fields)
+            {
                 Type ft = fi.FieldType;
-                if (ft.IsGenericType && ft.GetGenericTypeDefinition() == typeof(Table<>)) {
+                if (ft.IsGenericType && ft.GetGenericTypeDefinition() == typeof(Table<>))
+                {
                     ITable tb = (ITable)fi.GetValue(schema);
-                    if (tb == null) {
+                    if (tb == null)
+                    {
                         Type rowType = ft.GetGenericArguments()[0];
                         tb = this.GetTable(rowType);
                         fi.SetValue(schema, tb);
                     }
-                }     
+                }
             }
         }
 
@@ -433,10 +541,12 @@ namespace System.Data.Linq {
         /// The IProvider result can then be cast to the actual provider to call debug methods like
         ///   CheckQueries, QueryCount, EnableCacheLookup
         /// </summary>
-        internal IProvider Provider {
-            get { 
+        internal IProvider Provider
+        {
+            get
+            {
                 CheckDispose();
-                return this.provider; 
+                return this.provider;
             }
         }
 
@@ -444,7 +554,8 @@ namespace System.Data.Linq {
         /// Returns true if the database specified by the connection object exists.
         /// </summary>
         /// <returns></returns>
-        public bool DatabaseExists() {
+        public bool DatabaseExists()
+        {
             CheckDispose();
             return this.provider.DatabaseExists();
         }
@@ -453,7 +564,8 @@ namespace System.Data.Linq {
         /// Creates a new database instance (catalog or file) at the location specified by the connection
         /// using the metadata encoded within the entities or mapping file.
         /// </summary>
-        public void CreateDatabase() {
+        public void CreateDatabase()
+        {
             CheckDispose();
             this.provider.CreateDatabase();
         }
@@ -461,7 +573,8 @@ namespace System.Data.Linq {
         /// <summary>
         /// Deletes the database instance at the location specified by the connection.
         /// </summary>
-        public void DeleteDatabase() {
+        public void DeleteDatabase()
+        {
             CheckDispose();
             this.provider.DeleteDatabase();
         }
@@ -471,7 +584,8 @@ namespace System.Data.Linq {
         /// If a transaction is not already specified one will be created for the duration of this operation.
         /// If a change conflict is encountered a ChangeConflictException will be thrown.
         /// </summary>
-        public void SubmitChanges() {
+        public void SubmitChanges()
+        {
             CheckDispose();
             SubmitChanges(ConflictMode.FailOnFirstConflict);
         }
@@ -479,32 +593,47 @@ namespace System.Data.Linq {
         /// <summary>
         /// Submits one or more commands to the database reflecting the changes made to the retreived entities.
         /// If a transaction is not already specified one will be created for the duration of this operation.
-        /// If a change conflict is encountered a ChangeConflictException will be thrown.  
+        /// If a change conflict is encountered a ChangeConflictException will be thrown.
         /// You can override this method to implement common conflict resolution behaviors.
         /// </summary>
         /// <param name="failureMode">Determines how SubmitChanges handles conflicts.</param>
-        [SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes", Justification = "Microsoft: In the middle of attempting to rollback a transaction, outer transaction is thrown.")]
-        public virtual void SubmitChanges(ConflictMode failureMode) {
+        [SuppressMessage(
+            "Microsoft.Design",
+            "CA1031:DoNotCatchGeneralExceptionTypes",
+            Justification = "Microsoft: In the middle of attempting to rollback a transaction, outer transaction is thrown."
+        )]
+        public virtual void SubmitChanges(ConflictMode failureMode)
+        {
             CheckDispose();
             CheckNotInSubmitChanges();
             VerifyTrackingEnabled();
             this.conflicts.Clear();
 
-            try {
+            try
+            {
                 this.isInSubmitChanges = true;
 
-                if (System.Transactions.Transaction.Current == null && this.provider.Transaction == null) {
+                if (
+                    System.Transactions.Transaction.Current == null
+                    && this.provider.Transaction == null
+                )
+                {
                     bool openedConnection = false;
                     DbTransaction transaction = null;
-                    try {
-                        if (this.provider.Connection.State == ConnectionState.Open) {
+                    try
+                    {
+                        if (this.provider.Connection.State == ConnectionState.Open)
+                        {
                             this.provider.ClearConnection();
                         }
-                        if (this.provider.Connection.State == ConnectionState.Closed) {
+                        if (this.provider.Connection.State == ConnectionState.Closed)
+                        {
                             this.provider.Connection.Open();
                             openedConnection = true;
                         }
-                        transaction = this.provider.Connection.BeginTransaction(IsolationLevel.ReadCommitted);
+                        transaction = this.provider.Connection.BeginTransaction(
+                            IsolationLevel.ReadCommitted
+                        );
                         this.provider.Transaction = transaction;
                         new ChangeProcessor(this.services, this).SubmitChanges(failureMode);
                         this.AcceptChanges();
@@ -515,25 +644,31 @@ namespace System.Data.Linq {
 
                         transaction.Commit();
                     }
-                    catch {
-                        if (transaction != null) {
+                    catch
+                    {
+                        if (transaction != null)
+                        {
                             transaction.Rollback();
                         }
                         throw;
                     }
-                    finally {
+                    finally
+                    {
                         this.provider.Transaction = null;
-                        if (openedConnection) {
+                        if (openedConnection)
+                        {
                             this.provider.Connection.Close();
                         }
                     }
                 }
-                else {
+                else
+                {
                     new ChangeProcessor(services, this).SubmitChanges(failureMode);
                     this.AcceptChanges();
                 }
             }
-            finally {
+            finally
+            {
                 this.isInSubmitChanges = false;
             }
         }
@@ -571,7 +706,8 @@ namespace System.Data.Linq {
         {
             CheckDispose(); // code hygeine requirement
 
-            if (entities == null){
+            if (entities == null)
+            {
                 throw Error.ArgumentNull("entities");
             }
 
@@ -591,7 +727,8 @@ namespace System.Data.Linq {
             CheckNotInSubmitChanges();
             VerifyTrackingEnabled();
 
-            if (entities == null) {
+            if (entities == null)
+            {
                 throw Error.ArgumentNull("entities");
             }
 
@@ -603,24 +740,34 @@ namespace System.Data.Linq {
             // create a fresh context to fetch new state from
             DataContext refreshContext = this.CreateRefreshContext();
 
-            foreach (object o in list) {
+            foreach (object o in list)
+            {
                 // verify that each object in the list is an entity
                 MetaType inheritanceRoot = services.Model.GetMetaType(o.GetType()).InheritanceRoot;
                 GetTable(inheritanceRoot.Type);
 
                 TrackedObject trackedObject = this.services.ChangeTracker.GetTrackedObject(o);
-                if (trackedObject == null) {
+                if (trackedObject == null)
+                {
                     throw Error.UnrecognizedRefreshObject();
                 }
 
-                if (trackedObject.IsNew) {
+                if (trackedObject.IsNew)
+                {
                     throw Error.RefreshOfNewObject();
                 }
-                
+
                 // query to get the current database values
-                object[] keyValues = CommonDataServices.GetKeyValues(trackedObject.Type, trackedObject.Original);
-                object freshInstance = refreshContext.Services.GetObjectByKey(trackedObject.Type, keyValues);
-                if (freshInstance == null) {
+                object[] keyValues = CommonDataServices.GetKeyValues(
+                    trackedObject.Type,
+                    trackedObject.Original
+                );
+                object freshInstance = refreshContext.Services.GetObjectByKey(
+                    trackedObject.Type,
+                    keyValues
+                );
+                if (freshInstance == null)
+                {
                     throw Error.RefreshOfDeletedObject();
                 }
 
@@ -630,12 +777,14 @@ namespace System.Data.Linq {
             }
         }
 
-        internal DataContext CreateRefreshContext() {
+        internal DataContext CreateRefreshContext()
+        {
             CheckDispose();
             return new DataContext(this);
         }
 
-        private void AcceptChanges() {
+        private void AcceptChanges()
+        {
             CheckDispose();
             VerifyTrackingEnabled();
             this.services.ChangeTracker.AcceptChanges();
@@ -647,9 +796,11 @@ namespace System.Data.Linq {
         /// </summary>
         /// <param name="query">The query</param>
         /// <returns></returns>
-        internal string GetQueryText(IQueryable query) {
+        internal string GetQueryText(IQueryable query)
+        {
             CheckDispose();
-            if (query == null) {
+            if (query == null)
+            {
                 throw Error.ArgumentNull("query");
             }
             return this.provider.GetQueryText(query.Expression);
@@ -661,9 +812,11 @@ namespace System.Data.Linq {
         /// </summary>
         /// <param name="query"></param>
         /// <returns></returns>
-        public DbCommand GetCommand(IQueryable query) {
+        public DbCommand GetCommand(IQueryable query)
+        {
             CheckDispose();
-            if (query == null) {
+            if (query == null)
+            {
                 throw Error.ArgumentNull("query");
             }
             return this.provider.GetCommand(query.Expression);
@@ -675,7 +828,8 @@ namespace System.Data.Linq {
         /// objects back into the database.
         /// </summary>
         /// <returns></returns>
-        internal string GetChangeText() {
+        internal string GetChangeText()
+        {
             CheckDispose();
             VerifyTrackingEnabled();
             return new ChangeProcessor(services, this).GetChangeText();
@@ -685,9 +839,19 @@ namespace System.Data.Linq {
         /// Computes the un-ordered set of objects that have changed
         /// </summary>
         /// <returns></returns>
-        [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", MessageId = "ChangeSet", Justification="The capitalization was deliberately chosen.")]
-        [SuppressMessage("Microsoft.Design", "CA1024:UsePropertiesWhereAppropriate", Justification = "Non-trivial operations are not suitable for properties.")]
-        public ChangeSet GetChangeSet() {
+        [SuppressMessage(
+            "Microsoft.Naming",
+            "CA1702:CompoundWordsShouldBeCasedCorrectly",
+            MessageId = "ChangeSet",
+            Justification = "The capitalization was deliberately chosen."
+        )]
+        [SuppressMessage(
+            "Microsoft.Design",
+            "CA1024:UsePropertiesWhereAppropriate",
+            Justification = "Non-trivial operations are not suitable for properties."
+        )]
+        public ChangeSet GetChangeSet()
+        {
             CheckDispose();
             return new ChangeProcessor(this.services, this).GetChangeSet();
         }
@@ -699,63 +863,98 @@ namespace System.Data.Linq {
         /// <param name="command">The command specified in the server's native query language.</param>
         /// <param name="parameters">The parameter values to use for the query.</param>
         /// <returns>A single integer return value</returns>
-        public int ExecuteCommand(string command, params object[] parameters) {
+        public int ExecuteCommand(string command, params object[] parameters)
+        {
             CheckDispose();
-            if (command == null) {
+            if (command == null)
+            {
                 throw Error.ArgumentNull("command");
             }
-            if (parameters == null) {
+            if (parameters == null)
+            {
                 throw Error.ArgumentNull("parameters");
             }
-            return (int)this.ExecuteMethodCall(this, (MethodInfo)MethodInfo.GetCurrentMethod(), command, parameters).ReturnValue;
+            return (int)
+                this.ExecuteMethodCall(
+                    this,
+                    (MethodInfo)MethodInfo.GetCurrentMethod(),
+                    command,
+                    parameters
+                ).ReturnValue;
         }
 
         /// <summary>
-        /// Execute the sequence returning query against the database server. 
+        /// Execute the sequence returning query against the database server.
         /// The query is specified using the server's native query language, such as SQL.
         /// </summary>
         /// <typeparam name="TResult">The element type of the result sequence.</typeparam>
         /// <param name="query">The query specified in the server's native query language.</param>
         /// <param name="parameters">The parameter values to use for the query.</param>
         /// <returns>An IEnumerable sequence of objects.</returns>
-        [SuppressMessage("Microsoft.Design", "CA1004:GenericMethodsShouldProvideTypeParameter", Justification = "Microsoft: Generic parameters are required for strong-typing of the return type.")]
-        public IEnumerable<TResult> ExecuteQuery<TResult>(string query, params object[] parameters) {
+        [SuppressMessage(
+            "Microsoft.Design",
+            "CA1004:GenericMethodsShouldProvideTypeParameter",
+            Justification = "Microsoft: Generic parameters are required for strong-typing of the return type."
+        )]
+        public IEnumerable<TResult> ExecuteQuery<TResult>(string query, params object[] parameters)
+        {
             CheckDispose();
-            if (query == null) {
+            if (query == null)
+            {
                 throw Error.ArgumentNull("query");
             }
-            if (parameters == null) {
+            if (parameters == null)
+            {
                 throw Error.ArgumentNull("parameters");
             }
-            return (IEnumerable<TResult>)this.ExecuteMethodCall(this, ((MethodInfo)MethodInfo.GetCurrentMethod()).MakeGenericMethod(typeof(TResult)), query, parameters).ReturnValue;
+            return (IEnumerable<TResult>)
+                this.ExecuteMethodCall(
+                    this,
+                    ((MethodInfo)MethodInfo.GetCurrentMethod()).MakeGenericMethod(typeof(TResult)),
+                    query,
+                    parameters
+                ).ReturnValue;
         }
 
         /// <summary>
-        /// Execute the sequence returning query against the database server. 
+        /// Execute the sequence returning query against the database server.
         /// The query is specified using the server's native query language, such as SQL.
         /// </summary>
         /// <param name="elementType">The element type of the result sequence.</param>
         /// <param name="query">The query specified in the server's native query language.</param>
         /// <param name="parameters">The parameter values to use for the query.</param>
         /// <returns></returns>
-        public IEnumerable ExecuteQuery(Type elementType, string query, params object[] parameters) {
+        public IEnumerable ExecuteQuery(Type elementType, string query, params object[] parameters)
+        {
             CheckDispose();
-            if (elementType == null) {
+            if (elementType == null)
+            {
                 throw Error.ArgumentNull("elementType");
             }
-            if (query == null) {
+            if (query == null)
+            {
                 throw Error.ArgumentNull("query");
             }
-            if (parameters == null) {
+            if (parameters == null)
+            {
                 throw Error.ArgumentNull("parameters");
             }
-            if (_miExecuteQuery == null) {
-                _miExecuteQuery = typeof(DataContext).GetMethods().Single(m => m.Name == "ExecuteQuery" && m.GetParameters().Length == 2);
+            if (_miExecuteQuery == null)
+            {
+                _miExecuteQuery = typeof(DataContext)
+                    .GetMethods()
+                    .Single(m => m.Name == "ExecuteQuery" && m.GetParameters().Length == 2);
             }
-            return (IEnumerable)this.ExecuteMethodCall(this, _miExecuteQuery.MakeGenericMethod(elementType), query, parameters).ReturnValue;
+            return (IEnumerable)
+                this.ExecuteMethodCall(
+                    this,
+                    _miExecuteQuery.MakeGenericMethod(elementType),
+                    query,
+                    parameters
+                ).ReturnValue;
         }
-        private static MethodInfo _miExecuteQuery;
 
+        private static MethodInfo _miExecuteQuery;
 
         /// <summary>
         /// Executes the equivalent of the specified method call on the database server.
@@ -764,15 +963,23 @@ namespace System.Data.Linq {
         /// <param name="methodInfo">The reflection MethodInfo for the method to invoke.</param>
         /// <param name="parameters">The parameters for the method call.</param>
         /// <returns>The result of the method call. Use this type's ReturnValue property to access the actual return value.</returns>
-        internal protected IExecuteResult ExecuteMethodCall(object instance, MethodInfo methodInfo, params object[] parameters) {
+        internal protected IExecuteResult ExecuteMethodCall(
+            object instance,
+            MethodInfo methodInfo,
+            params object[] parameters
+        )
+        {
             CheckDispose();
-            if (instance == null) {
+            if (instance == null)
+            {
                 throw Error.ArgumentNull("instance");
             }
-            if (methodInfo == null) {
+            if (methodInfo == null)
+            {
                 throw Error.ArgumentNull("methodInfo");
             }
-            if (parameters == null) {
+            if (parameters == null)
+            {
                 throw Error.ArgumentNull("parameters");
             }
             return this.provider.Execute(this.GetMethodCall(instance, methodInfo, parameters));
@@ -786,32 +993,56 @@ namespace System.Data.Linq {
         /// <param name="methodInfo">The reflection MethodInfo for the method to invoke.</param>
         /// <param name="parameters">The parameters for the method call.</param>
         /// <returns>The returned query object</returns>
-        [SuppressMessage("Microsoft.Design", "CA1004:GenericMethodsShouldProvideTypeParameter", Justification = "Microsoft: Generic parameters are required for strong-typing of the return type.")]
-        internal protected IQueryable<TResult> CreateMethodCallQuery<TResult>(object instance, MethodInfo methodInfo, params object[] parameters) {
+        [SuppressMessage(
+            "Microsoft.Design",
+            "CA1004:GenericMethodsShouldProvideTypeParameter",
+            Justification = "Microsoft: Generic parameters are required for strong-typing of the return type."
+        )]
+        protected internal IQueryable<TResult> CreateMethodCallQuery<TResult>(
+            object instance,
+            MethodInfo methodInfo,
+            params object[] parameters
+        )
+        {
             CheckDispose();
-            if (instance == null) {
+            if (instance == null)
+            {
                 throw Error.ArgumentNull("instance");
             }
-            if (methodInfo == null) {
+            if (methodInfo == null)
+            {
                 throw Error.ArgumentNull("methodInfo");
             }
-            if (parameters == null) {
+            if (parameters == null)
+            {
                 throw Error.ArgumentNull("parameters");
             }
-            if (!typeof(IQueryable<TResult>).IsAssignableFrom(methodInfo.ReturnType)) {
+            if (!typeof(IQueryable<TResult>).IsAssignableFrom(methodInfo.ReturnType))
+            {
                 throw Error.ExpectedQueryableArgument("methodInfo", typeof(IQueryable<TResult>));
             }
-            return new DataQuery<TResult>(this, this.GetMethodCall(instance, methodInfo, parameters));
+            return new DataQuery<TResult>(
+                this,
+                this.GetMethodCall(instance, methodInfo, parameters)
+            );
         }
 
-        private Expression GetMethodCall(object instance, MethodInfo methodInfo, params object[] parameters) {
+        private Expression GetMethodCall(
+            object instance,
+            MethodInfo methodInfo,
+            params object[] parameters
+        )
+        {
             CheckDispose();
-            if (parameters.Length > 0) {
+            if (parameters.Length > 0)
+            {
                 ParameterInfo[] pis = methodInfo.GetParameters();
                 List<Expression> args = new List<Expression>(parameters.Length);
-                for (int i = 0, n = parameters.Length; i < n; i++) {
+                for (int i = 0, n = parameters.Length; i < n; i++)
+                {
                     Type pType = pis[i].ParameterType;
-                    if (pType.IsByRef) {
+                    if (pType.IsByRef)
+                    {
                         pType = pType.GetElementType();
                     }
                     args.Add(Expression.Constant(parameters[i], pType));
@@ -825,14 +1056,17 @@ namespace System.Data.Linq {
         /// Execute a dynamic insert
         /// </summary>
         /// <param name="entity"></param>
-        internal protected void ExecuteDynamicInsert(object entity) {
+        internal protected void ExecuteDynamicInsert(object entity)
+        {
             CheckDispose();
-            if (entity == null) {
+            if (entity == null)
+            {
                 throw Error.ArgumentNull("entity");
             }
             this.CheckInSubmitChanges();
             TrackedObject tracked = this.services.ChangeTracker.GetTrackedObject(entity);
-            if (tracked == null) {
+            if (tracked == null)
+            {
                 throw Error.CannotPerformOperationForUntrackedObject();
             }
             this.services.ChangeDirector.DynamicInsert(tracked);
@@ -842,18 +1076,22 @@ namespace System.Data.Linq {
         /// Execute a dynamic update
         /// </summary>
         /// <param name="entity"></param>
-        internal protected void ExecuteDynamicUpdate(object entity) {
+        internal protected void ExecuteDynamicUpdate(object entity)
+        {
             CheckDispose();
-            if (entity == null) {
+            if (entity == null)
+            {
                 throw Error.ArgumentNull("entity");
             }
             this.CheckInSubmitChanges();
             TrackedObject tracked = this.services.ChangeTracker.GetTrackedObject(entity);
-            if (tracked == null) {
+            if (tracked == null)
+            {
                 throw Error.CannotPerformOperationForUntrackedObject();
             }
             int result = this.services.ChangeDirector.DynamicUpdate(tracked);
-            if (result == 0) {
+            if (result == 0)
+            {
                 throw new ChangeConflictException();
             }
         }
@@ -862,18 +1100,22 @@ namespace System.Data.Linq {
         /// Execute a dynamic delete
         /// </summary>
         /// <param name="entity"></param>
-        internal protected void ExecuteDynamicDelete(object entity) {
+        internal protected void ExecuteDynamicDelete(object entity)
+        {
             CheckDispose();
-            if (entity == null) {
+            if (entity == null)
+            {
                 throw Error.ArgumentNull("entity");
             }
             this.CheckInSubmitChanges();
             TrackedObject tracked = this.services.ChangeTracker.GetTrackedObject(entity);
-            if (tracked == null) {
+            if (tracked == null)
+            {
                 throw Error.CannotPerformOperationForUntrackedObject();
             }
             int result = this.services.ChangeDirector.DynamicDelete(tracked);
-            if (result == 0) {
+            if (result == 0)
+            {
                 throw new ChangeConflictException();
             }
         }
@@ -884,8 +1126,13 @@ namespace System.Data.Linq {
         /// <typeparam name="TResult">The element type of the resulting sequence</typeparam>
         /// <param name="reader">The DbDataReader to translate</param>
         /// <returns>The translated sequence of objects</returns>
-        [SuppressMessage("Microsoft.Design", "CA1004:GenericMethodsShouldProvideTypeParameter", Justification = "Microsoft: Generic parameters are required for strong-typing of the return type.")]
-        public IEnumerable<TResult> Translate<TResult>(DbDataReader reader) {
+        [SuppressMessage(
+            "Microsoft.Design",
+            "CA1004:GenericMethodsShouldProvideTypeParameter",
+            Justification = "Microsoft: Generic parameters are required for strong-typing of the return type."
+        )]
+        public IEnumerable<TResult> Translate<TResult>(DbDataReader reader)
+        {
             CheckDispose();
             return (IEnumerable<TResult>)this.Translate(typeof(TResult), reader);
         }
@@ -896,12 +1143,15 @@ namespace System.Data.Linq {
         /// <param name="elementType">The element type of the resulting sequence</param>
         /// <param name="reader">The DbDataReader to translate</param>
         /// <returns>The translated sequence of objects</returns>
-        public IEnumerable Translate(Type elementType, DbDataReader reader) {
+        public IEnumerable Translate(Type elementType, DbDataReader reader)
+        {
             CheckDispose();
-            if (elementType == null) {
+            if (elementType == null)
+            {
                 throw Error.ArgumentNull("elementType");
             }
-            if (reader == null) {
+            if (reader == null)
+            {
                 throw Error.ArgumentNull("reader");
             }
             return this.provider.Translate(elementType, reader);
@@ -912,9 +1162,11 @@ namespace System.Data.Linq {
         /// </summary>
         /// <param name="reader">The DbDataReader to translate</param>
         /// <returns>The translated sequence of objects</returns>
-        public IMultipleResults Translate(DbDataReader reader) {
+        public IMultipleResults Translate(DbDataReader reader)
+        {
             CheckDispose();
-            if (reader == null) {
+            if (reader == null)
+            {
                 throw Error.ArgumentNull("reader");
             }
             return this.provider.Translate(reader);
@@ -923,7 +1175,8 @@ namespace System.Data.Linq {
         /// <summary>
         /// Remove all Include\Subquery LoadOptions settings.
         /// </summary>
-        internal void ResetLoadOptions() {
+        internal void ResetLoadOptions()
+        {
             CheckDispose();
             this.loadOptions = null;
         }
@@ -932,17 +1185,22 @@ namespace System.Data.Linq {
         /// The DataLoadOptions used to define prefetch behavior for defer loaded members
         /// and membership of related collections.
         /// </summary>
-        public DataLoadOptions LoadOptions {
-            get {
+        public DataLoadOptions LoadOptions
+        {
+            get
+            {
                 CheckDispose();
                 return this.loadOptions;
             }
-            set {
+            set
+            {
                 CheckDispose();
-                if (this.services.HasCachedObjects && value != this.loadOptions) {
+                if (this.services.HasCachedObjects && value != this.loadOptions)
+                {
                     throw Error.LoadOptionsChangeNotAllowedAfterQuery();
                 }
-                if (value != null) {
+                if (value != null)
+                {
                     value.Freeze();
                 }
                 this.loadOptions = value;
@@ -953,25 +1211,30 @@ namespace System.Data.Linq {
         /// This list of change conflicts produced by the last call to SubmitChanges.  Use this collection
         /// to resolve conflicts after catching a ChangeConflictException and before calling SubmitChanges again.
         /// </summary>
-        public ChangeConflictCollection ChangeConflicts {
-            get {
-                CheckDispose(); 
+        public ChangeConflictCollection ChangeConflicts
+        {
+            get
+            {
+                CheckDispose();
                 return this.conflicts;
             }
         }
     }
-    
+
     /// <summary>
     /// Defines behavior for implementations of IQueryable that allow modifications to the membership of the resulting set.
     /// </summary>
     /// <typeparam name="TEntity">Type of entities returned from the queryable.</typeparam>
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1710:IdentifiersShouldHaveCorrectSuffix")]
+    [System.Diagnostics.CodeAnalysis.SuppressMessage(
+        "Microsoft.Naming",
+        "CA1710:IdentifiersShouldHaveCorrectSuffix"
+    )]
     public interface ITable<TEntity> : IQueryable<TEntity>
         where TEntity : class
     {
         /// <summary>
         /// Notify the set that an object representing a new entity should be added to the set.
-        /// Depending on the implementation, the change to the set may not be visible in an enumeration of the set 
+        /// Depending on the implementation, the change to the set may not be visible in an enumeration of the set
         /// until changes to that set have been persisted in some manner.
         /// </summary>
         /// <param name="entity">Entity object to be added.</param>
@@ -979,7 +1242,7 @@ namespace System.Data.Linq {
 
         /// <summary>
         /// Notify the set that an object representing a new entity should be added to the set.
-        /// Depending on the implementation, the change to the set may not be visible in an enumeration of the set 
+        /// Depending on the implementation, the change to the set may not be visible in an enumeration of the set
         /// until changes to that set have been persisted in some manner.
         /// </summary>
         /// <param name="entity">Entity object to be attached.</param>
@@ -987,7 +1250,7 @@ namespace System.Data.Linq {
 
         /// <summary>
         /// Notify the set that an object representing an entity should be removed from the set.
-        /// Depending on the implementation, the change to the set may not be visible in an enumeration of the set 
+        /// Depending on the implementation, the change to the set may not be visible in an enumeration of the set
         /// until changes to that set have been persisted in some manner.
         /// </summary>
         /// <param name="entity">Entity object to be removed.</param>
@@ -999,12 +1262,18 @@ namespace System.Data.Linq {
     /// ITable is the common interface for DataContext tables. It can be used as the source
     /// of a dynamic/runtime-generated query.
     /// </summary>
-    [SuppressMessage("Microsoft.Naming", "CA1710:IdentifiersShouldHaveCorrectSuffix", Justification="Microsoft: Meant to represent a database table which is delayed loaded and doesn't provide collection semantics.")]
-    public interface ITable : IQueryable {
+    [SuppressMessage(
+        "Microsoft.Naming",
+        "CA1710:IdentifiersShouldHaveCorrectSuffix",
+        Justification = "Microsoft: Meant to represent a database table which is delayed loaded and doesn't provide collection semantics."
+    )]
+    public interface ITable : IQueryable
+    {
         /// <summary>
         /// The DataContext containing this Table.
         /// </summary>
         DataContext Context { get; }
+
         /// <summary>
         /// Adds an entity in a 'pending insert' state to this table.  The added entity will not be observed
         /// in query results from this table until after SubmitChanges has been called. Any untracked
@@ -1012,78 +1281,88 @@ namespace System.Data.Linq {
         /// </summary>
         /// <param name="entity"></param>
         void InsertOnSubmit(object entity);
+
         /// <summary>
         /// Adds all entities of a collection to the DataContext in a 'pending insert' state.
-        /// The added entities will not be observed in query results until after SubmitChanges() 
+        /// The added entities will not be observed in query results until after SubmitChanges()
         /// has been called. Any untracked objects referenced directly or transitively by the
         /// the inserted entities will also be inserted.
         /// </summary>
         /// <param name="entities"></param>
         void InsertAllOnSubmit(IEnumerable entities);
+
         /// <summary>
-        /// Attaches an entity to the DataContext in an unmodified state, similiar to as if it had been 
-        /// retrieved via a query. Other entities accessible from this entity are attached as unmodified 
+        /// Attaches an entity to the DataContext in an unmodified state, similiar to as if it had been
+        /// retrieved via a query. Other entities accessible from this entity are attached as unmodified
         /// but may subsequently be transitioned to other states by performing table operations on them
         /// individually.
         /// </summary>
         /// <param name="entity"></param>
         void Attach(object entity);
+
         /// <summary>
         /// Attaches an entity to the DataContext in either a modified or unmodified state.
-        /// If attaching as modified, the entity must either declare a version member or must 
-        /// not participate in update conflict checking. Other entities accessible from this 
-        /// entity are attached as unmodified but may subsequently be transitioned to other 
+        /// If attaching as modified, the entity must either declare a version member or must
+        /// not participate in update conflict checking. Other entities accessible from this
+        /// entity are attached as unmodified but may subsequently be transitioned to other
         /// states by performing table operations on them individually.
         /// </summary>
         /// <param name="entity"></param>
         /// <param name="asModified"></param>
         void Attach(object entity, bool asModified);
+
         /// <summary>
         /// Attaches an entity to the DataContext in either a modified or unmodified state by specifying both the entity
-        /// and its original state. Other entities accessible from this 
-        /// entity are attached as unmodified but may subsequently be transitioned to other 
+        /// and its original state. Other entities accessible from this
+        /// entity are attached as unmodified but may subsequently be transitioned to other
         /// states by performing table operations on them individually.
         /// </summary>
         /// <param name="entity">The entity to attach.</param>
         /// <param name="original">An instance of the same entity type with data members containing
         /// the original values.</param>
         void Attach(object entity, object original);
+
         /// <summary>
-        /// Attaches all entities of a collection to the DataContext in an unmodified state, 
-        /// similiar to as if each had been retrieved via a query. Other entities accessible from these 
-        /// entities are attached as unmodified but may subsequently be transitioned to other 
+        /// Attaches all entities of a collection to the DataContext in an unmodified state,
+        /// similiar to as if each had been retrieved via a query. Other entities accessible from these
+        /// entities are attached as unmodified but may subsequently be transitioned to other
         /// states by performing table operations on them individually.
         /// </summary>
         /// <param name="entities"></param>
         void AttachAll(IEnumerable entities);
+
         /// <summary>
         /// Attaches all entities of a collection to the DataContext in either a modified or unmodified state.
         /// If attaching as modified, the entity must either declare a version member or must not participate in update conflict checking.
-        /// Other entities accessible from these 
-        /// entities are attached as unmodified but may subsequently be transitioned to other 
+        /// Other entities accessible from these
+        /// entities are attached as unmodified but may subsequently be transitioned to other
         /// states by performing table operations on them individually.
         /// </summary>
         /// <param name="entities">The collection of entities.</param>
         /// <param name="asModified">True if the entities are to be attach as modified.</param>
         void AttachAll(IEnumerable entities, bool asModified);
+
         /// <summary>
         /// Puts an entity from this table into a 'pending delete' state.  The removed entity will not be observed
         /// missing from query results until after SubmitChanges() has been called.
         /// </summary>
         /// <param name="entity">The entity to remove.</param>
         void DeleteOnSubmit(object entity);
+
         /// <summary>
         /// Puts all entities from the collection 'entities' into a 'pending delete' state.  The removed entities will
         /// not be observed missing from the query results until after SubmitChanges() is called.
         /// </summary>
         /// <param name="entities"></param>
         void DeleteAllOnSubmit(IEnumerable entities);
+
         /// <summary>
         /// Returns an instance containing the original state of the entity.
         /// </summary>
         /// <param name="entity"></param>
         /// <returns></returns>
         object GetOriginalEntityState(object entity);
+
         /// <summary>
         /// Returns an array of modified members containing their current and original values
         /// for the entity specified.
@@ -1091,6 +1370,7 @@ namespace System.Data.Linq {
         /// <param name="entity"></param>
         /// <returns></returns>
         ModifiedMemberInfo[] GetModifiedMembers(object entity);
+
         /// <summary>
         /// True if the table is read-only.
         /// </summary>
@@ -1098,17 +1378,31 @@ namespace System.Data.Linq {
     }
 
     /// <summary>
-    /// Table is a collection of persistent entities. It always contains the set of entities currently 
+    /// Table is a collection of persistent entities. It always contains the set of entities currently
     /// persisted in the database. Use it as a source of queries and to add/insert and remove/delete entities.
     /// </summary>
     /// <typeparam name="TEntity"></typeparam>
-    [SuppressMessage("Microsoft.Naming", "CA1710:IdentifiersShouldHaveCorrectSuffix", Justification="Microsoft: Meant to represent a database table which is delayed loaded and doesn't provide collection semantics.")]
-    public sealed class Table<TEntity> : IQueryable<TEntity>, IQueryProvider, IEnumerable<TEntity>, IQueryable, IEnumerable, ITable, IListSource, ITable<TEntity> 
-        where TEntity : class {
+    [SuppressMessage(
+        "Microsoft.Naming",
+        "CA1710:IdentifiersShouldHaveCorrectSuffix",
+        Justification = "Microsoft: Meant to represent a database table which is delayed loaded and doesn't provide collection semantics."
+    )]
+    public sealed class Table<TEntity>
+        : IQueryable<TEntity>,
+            IQueryProvider,
+            IEnumerable<TEntity>,
+            IQueryable,
+            IEnumerable,
+            ITable,
+            IListSource,
+            ITable<TEntity>
+        where TEntity : class
+    {
         DataContext context;
         MetaTable metaTable;
 
-        internal Table(DataContext context, MetaTable metaTable) {
+        internal Table(DataContext context, MetaTable metaTable)
+        {
             System.Diagnostics.Debug.Assert(metaTable != null);
             this.context = context;
             this.metaTable = metaTable;
@@ -1117,92 +1411,126 @@ namespace System.Data.Linq {
         /// <summary>
         /// The DataContext containing this Table.
         /// </summary>
-        public DataContext Context {
+        public DataContext Context
+        {
             get { return this.context; }
         }
 
         /// <summary>
         /// True if the table is read-only.
         /// </summary>
-        public bool IsReadOnly {
+        public bool IsReadOnly
+        {
             get { return !metaTable.RowType.IsEntity; }
         }
 
-        Expression IQueryable.Expression {
+        Expression IQueryable.Expression
+        {
             get { return Expression.Constant(this); }
         }
 
-        Type IQueryable.ElementType {
+        Type IQueryable.ElementType
+        {
             get { return typeof(TEntity); }
         }
 
-        IQueryProvider IQueryable.Provider{
-            get{
-                return (IQueryProvider)this;
-            }
+        IQueryProvider IQueryable.Provider
+        {
+            get { return (IQueryProvider)this; }
         }
 
         [MethodImpl(MethodImplOptions.NoInlining | MethodImplOptions.NoOptimization)]
-        IQueryable IQueryProvider.CreateQuery(Expression expression) {
-            if (expression == null) {
+        IQueryable IQueryProvider.CreateQuery(Expression expression)
+        {
+            if (expression == null)
+            {
                 throw Error.ArgumentNull("expression");
             }
             Type eType = System.Data.Linq.SqlClient.TypeSystem.GetElementType(expression.Type);
             Type qType = typeof(IQueryable<>).MakeGenericType(eType);
-            if (!qType.IsAssignableFrom(expression.Type)) {
+            if (!qType.IsAssignableFrom(expression.Type))
+            {
                 throw Error.ExpectedQueryableArgument("expression", qType);
             }
             Type dqType = typeof(DataQuery<>).MakeGenericType(eType);
-            return (IQueryable)Activator.CreateInstance(dqType, new object[] { this.context, expression });
+            return (IQueryable)
+                Activator.CreateInstance(dqType, new object[] { this.context, expression });
         }
 
-        [SuppressMessage("Microsoft.Design", "CA1004:GenericMethodsShouldProvideTypeParameter", Justification = "Microsoft: Generic parameters are required for strong-typing of the return type.")]
-        IQueryable<TResult> IQueryProvider.CreateQuery<TResult>(Expression expression) {
-            if (expression == null) {
+        [SuppressMessage(
+            "Microsoft.Design",
+            "CA1004:GenericMethodsShouldProvideTypeParameter",
+            Justification = "Microsoft: Generic parameters are required for strong-typing of the return type."
+        )]
+        IQueryable<TResult> IQueryProvider.CreateQuery<TResult>(Expression expression)
+        {
+            if (expression == null)
+            {
                 throw Error.ArgumentNull("expression");
             }
-            if (!typeof(IQueryable<TResult>).IsAssignableFrom(expression.Type)) {
+            if (!typeof(IQueryable<TResult>).IsAssignableFrom(expression.Type))
+            {
                 throw Error.ExpectedQueryableArgument("expression", typeof(IEnumerable<TResult>));
             }
             return new DataQuery<TResult>(this.context, expression);
         }
 
-        object IQueryProvider.Execute(Expression expression) {
+        object IQueryProvider.Execute(Expression expression)
+        {
             return this.context.Provider.Execute(expression).ReturnValue;
         }
 
-        [SuppressMessage("Microsoft.Design", "CA1004:GenericMethodsShouldProvideTypeParameter", Justification = "Microsoft: Generic parameters are required for strong-typing of the return type.")]
-        TResult IQueryProvider.Execute<TResult>(Expression expression) {
+        [SuppressMessage(
+            "Microsoft.Design",
+            "CA1004:GenericMethodsShouldProvideTypeParameter",
+            Justification = "Microsoft: Generic parameters are required for strong-typing of the return type."
+        )]
+        TResult IQueryProvider.Execute<TResult>(Expression expression)
+        {
             return (TResult)this.context.Provider.Execute(expression).ReturnValue;
         }
 
-        IEnumerator IEnumerable.GetEnumerator() {
+        IEnumerator IEnumerable.GetEnumerator()
+        {
             return this.GetEnumerator();
         }
 
-        IEnumerator<TEntity> IEnumerable<TEntity>.GetEnumerator() {
+        IEnumerator<TEntity> IEnumerable<TEntity>.GetEnumerator()
+        {
             return this.GetEnumerator();
         }
 
-        public IEnumerator<TEntity> GetEnumerator() {
-            return ((IEnumerable<TEntity>)this.context.Provider.Execute(Expression.Constant(this)).ReturnValue).GetEnumerator();
+        public IEnumerator<TEntity> GetEnumerator()
+        {
+            return (
+                (IEnumerable<TEntity>)
+                    this.context.Provider.Execute(Expression.Constant(this)).ReturnValue
+            ).GetEnumerator();
         }
 
-        bool IListSource.ContainsListCollection {
+        bool IListSource.ContainsListCollection
+        {
             get { return false; }
         }
 
         private IBindingList cachedList;
 
-        IList IListSource.GetList() {
-            if (cachedList == null) {
+        IList IListSource.GetList()
+        {
+            if (cachedList == null)
+            {
                 cachedList = GetNewBindingList();
             }
             return cachedList;
         }
 
-        [SuppressMessage("Microsoft.Design", "CA1024:UsePropertiesWhereAppropriate", Justification="Method doesn't represent a property of the type.")]
-        public IBindingList GetNewBindingList() {
+        [SuppressMessage(
+            "Microsoft.Design",
+            "CA1024:UsePropertiesWhereAppropriate",
+            Justification = "Method doesn't represent a property of the type."
+        )]
+        public IBindingList GetNewBindingList()
+        {
             return BindingList.Create<TEntity>(this.context, this);
         }
 
@@ -1212,38 +1540,53 @@ namespace System.Data.Linq {
         /// objects referenced directly or transitively by the entity will also be inserted.
         /// </summary>
         /// <param name="entity"></param>
-        public void InsertOnSubmit(TEntity entity) {
-            if (entity == null) {
+        public void InsertOnSubmit(TEntity entity)
+        {
+            if (entity == null)
+            {
                 throw Error.ArgumentNull("entity");
             }
             CheckReadOnly();
             context.CheckNotInSubmitChanges();
             context.VerifyTrackingEnabled();
             MetaType type = this.metaTable.RowType.GetInheritanceType(entity.GetType());
-            if (!IsTrackableType(type)) {
+            if (!IsTrackableType(type))
+            {
                 throw Error.TypeCouldNotBeAdded(type.Type);
             }
             TrackedObject tracked = this.context.Services.ChangeTracker.GetTrackedObject(entity);
-            if (tracked == null) {
+            if (tracked == null)
+            {
                 tracked = this.context.Services.ChangeTracker.Track(entity);
                 tracked.ConvertToNew();
-            } else if (tracked.IsWeaklyTracked) {
+            }
+            else if (tracked.IsWeaklyTracked)
+            {
                 tracked.ConvertToNew();
-            } else if (tracked.IsDeleted) {
+            }
+            else if (tracked.IsDeleted)
+            {
                 tracked.ConvertToPossiblyModified();
-            } else if (tracked.IsRemoved) {
+            }
+            else if (tracked.IsRemoved)
+            {
                 tracked.ConvertToNew();
-            } else if (!tracked.IsNew) {
+            }
+            else if (!tracked.IsNew)
+            {
                 throw Error.CantAddAlreadyExistingItem();
             }
         }
 
-        void ITable.InsertOnSubmit(object entity) {
-            if (entity == null) {
+        void ITable.InsertOnSubmit(object entity)
+        {
+            if (entity == null)
+            {
                 throw Error.ArgumentNull("entity");
             }
             TEntity tEntity = entity as TEntity;
-            if (tEntity == null) {
+            if (tEntity == null)
+            {
                 throw Error.EntityIsTheWrongType();
             }
             this.InsertOnSubmit(tEntity);
@@ -1251,25 +1594,31 @@ namespace System.Data.Linq {
 
         /// <summary>
         /// Adds all entities of a collection to the DataContext in a 'pending insert' state.
-        /// The added entities will not be observed in query results until after SubmitChanges() 
+        /// The added entities will not be observed in query results until after SubmitChanges()
         /// has been called.
         /// </summary>
         /// <param name="entities"></param>
-        public void InsertAllOnSubmit<TSubEntity>(IEnumerable<TSubEntity> entities) where TSubEntity : TEntity {
-            if (entities == null) {
+        public void InsertAllOnSubmit<TSubEntity>(IEnumerable<TSubEntity> entities)
+            where TSubEntity : TEntity
+        {
+            if (entities == null)
+            {
                 throw Error.ArgumentNull("entities");
             }
             CheckReadOnly();
             context.CheckNotInSubmitChanges();
             context.VerifyTrackingEnabled();
             List<TSubEntity> list = entities.ToList();
-            foreach (TEntity entity in list) {
+            foreach (TEntity entity in list)
+            {
                 this.InsertOnSubmit(entity);
             }
         }
 
-        void ITable.InsertAllOnSubmit(IEnumerable entities) {
-            if (entities == null) {
+        void ITable.InsertAllOnSubmit(IEnumerable entities)
+        {
+            if (entities == null)
+            {
                 throw Error.ArgumentNull("entities");
             }
             CheckReadOnly();
@@ -1277,7 +1626,8 @@ namespace System.Data.Linq {
             context.VerifyTrackingEnabled();
             List<object> list = entities.Cast<object>().ToList();
             ITable itable = this;
-            foreach (object entity in list) {
+            foreach (object entity in list)
+            {
                 itable.InsertOnSubmit(entity);
             }
         }
@@ -1286,14 +1636,18 @@ namespace System.Data.Linq {
         /// Returns true if this specific type is mapped into the database.
         /// For example, an abstract type can't be present because it can not be instantiated.
         /// </summary>
-        private static bool IsTrackableType(MetaType type) {
-            if (type == null) {
+        private static bool IsTrackableType(MetaType type)
+        {
+            if (type == null)
+            {
                 return false;
             }
-            if (!type.CanInstantiate) {
+            if (!type.CanInstantiate)
+            {
                 return false;
             }
-            if (type.HasInheritance && !type.HasInheritanceCode) {
+            if (type.HasInheritance && !type.HasInheritanceCode)
+            {
                 return false;
             }
             return true;
@@ -1304,33 +1658,42 @@ namespace System.Data.Linq {
         /// missing from query results until after SubmitChanges() has been called.
         /// </summary>
         /// <param name="item"></param>
-        public void DeleteOnSubmit(TEntity entity) {
-            if (entity == null) {
+        public void DeleteOnSubmit(TEntity entity)
+        {
+            if (entity == null)
+            {
                 throw Error.ArgumentNull("entity");
             }
             CheckReadOnly();
             context.CheckNotInSubmitChanges();
             context.VerifyTrackingEnabled();
             TrackedObject tracked = this.context.Services.ChangeTracker.GetTrackedObject(entity);
-            if (tracked != null) {
-                if (tracked.IsNew) {
+            if (tracked != null)
+            {
+                if (tracked.IsNew)
+                {
                     tracked.ConvertToRemoved();
                 }
-                else if (tracked.IsPossiblyModified || tracked.IsModified) {
+                else if (tracked.IsPossiblyModified || tracked.IsModified)
+                {
                     tracked.ConvertToDeleted();
                 }
             }
-            else {
+            else
+            {
                 throw Error.CannotRemoveUnattachedEntity();
             }
         }
 
-        void ITable.DeleteOnSubmit(object entity) {
-            if (entity == null) {
+        void ITable.DeleteOnSubmit(object entity)
+        {
+            if (entity == null)
+            {
                 throw Error.ArgumentNull("entity");
             }
             TEntity tEntity = entity as TEntity;
-            if (tEntity == null) {
+            if (tEntity == null)
+            {
                 throw Error.EntityIsTheWrongType();
             }
             this.DeleteOnSubmit(tEntity);
@@ -1341,21 +1704,27 @@ namespace System.Data.Linq {
         /// not be observed missing from the query results until after SubmitChanges() is called.
         /// </summary>
         /// <param name="entities"></param>
-        public void DeleteAllOnSubmit<TSubEntity>(IEnumerable<TSubEntity> entities) where TSubEntity : TEntity {
-            if (entities == null) {
+        public void DeleteAllOnSubmit<TSubEntity>(IEnumerable<TSubEntity> entities)
+            where TSubEntity : TEntity
+        {
+            if (entities == null)
+            {
                 throw Error.ArgumentNull("entities");
             }
             CheckReadOnly();
             context.CheckNotInSubmitChanges();
             context.VerifyTrackingEnabled();
             List<TSubEntity> list = entities.ToList();
-            foreach (TEntity entity in list) {
+            foreach (TEntity entity in list)
+            {
                 this.DeleteOnSubmit(entity);
             }
         }
 
-        void ITable.DeleteAllOnSubmit(IEnumerable entities) {
-            if (entities == null) {
+        void ITable.DeleteAllOnSubmit(IEnumerable entities)
+        {
+            if (entities == null)
+            {
                 throw Error.ArgumentNull("entities");
             }
             CheckReadOnly();
@@ -1363,30 +1732,36 @@ namespace System.Data.Linq {
             context.VerifyTrackingEnabled();
             List<object> list = entities.Cast<object>().ToList();
             ITable itable = this;
-            foreach (object entity in list) {
+            foreach (object entity in list)
+            {
                 itable.DeleteOnSubmit(entity);
             }
         }
 
         /// <summary>
-        /// Attaches an entity to the DataContext in an unmodified state, similiar to as if it had been 
+        /// Attaches an entity to the DataContext in an unmodified state, similiar to as if it had been
         /// retrieved via a query. Deferred loading is not enabled. Other entities accessible from this
         /// entity are not automatically attached.
         /// </summary>
         /// <param name="entity"></param>
-        public void Attach(TEntity entity) {
-            if (entity == null) {
+        public void Attach(TEntity entity)
+        {
+            if (entity == null)
+            {
                 throw Error.ArgumentNull("entity");
             }
             this.Attach(entity, false);
         }
 
-        void ITable.Attach(object entity) {
-            if (entity == null) {
+        void ITable.Attach(object entity)
+        {
+            if (entity == null)
+            {
                 throw Error.ArgumentNull("entity");
             }
             TEntity tEntity = entity as TEntity;
-            if (tEntity == null) {
+            if (tEntity == null)
+            {
                 throw Error.EntityIsTheWrongType();
             }
             this.Attach(tEntity, false);
@@ -1399,49 +1774,64 @@ namespace System.Data.Linq {
         /// </summary>
         /// <param name="entity"></param>
         /// <param name="asModified"></param>
-        public void Attach(TEntity entity, bool asModified) {
-            if (entity == null) {
+        public void Attach(TEntity entity, bool asModified)
+        {
+            if (entity == null)
+            {
                 throw Error.ArgumentNull("entity");
             }
             CheckReadOnly();
             context.CheckNotInSubmitChanges();
             context.VerifyTrackingEnabled();
             MetaType type = this.metaTable.RowType.GetInheritanceType(entity.GetType());
-            if (!IsTrackableType(type)) {
+            if (!IsTrackableType(type))
+            {
                 throw Error.TypeCouldNotBeTracked(type.Type);
             }
-            if (asModified) {
+            if (asModified)
+            {
                 bool canAttach = type.VersionMember != null || !type.HasUpdateCheck;
-                if (!canAttach) {
+                if (!canAttach)
+                {
                     throw Error.CannotAttachAsModifiedWithoutOriginalState();
                 }
             }
             TrackedObject tracked = this.Context.Services.ChangeTracker.GetTrackedObject(entity);
-            if (tracked == null || tracked.IsWeaklyTracked) {
-                if (tracked == null) {
+            if (tracked == null || tracked.IsWeaklyTracked)
+            {
+                if (tracked == null)
+                {
                     tracked = this.context.Services.ChangeTracker.Track(entity, true);
                 }
-                if (asModified) {
+                if (asModified)
+                {
                     tracked.ConvertToModified();
-                } else {
+                }
+                else
+                {
                     tracked.ConvertToUnmodified();
                 }
-                if (this.Context.Services.InsertLookupCachedObject(type, entity) != entity) {
+                if (this.Context.Services.InsertLookupCachedObject(type, entity) != entity)
+                {
                     throw new DuplicateKeyException(entity, Strings.CantAddAlreadyExistingKey);
                 }
                 tracked.InitializeDeferredLoaders();
             }
-            else {
+            else
+            {
                 throw Error.CannotAttachAlreadyExistingEntity();
             }
         }
 
-        void ITable.Attach(object entity, bool asModified) {
-            if (entity == null) {
+        void ITable.Attach(object entity, bool asModified)
+        {
+            if (entity == null)
+            {
                 throw Error.ArgumentNull("entity");
             }
             TEntity tEntity = entity as TEntity;
-            if (tEntity == null) {
+            if (tEntity == null)
+            {
                 throw Error.EntityIsTheWrongType();
             }
             this.Attach(tEntity, asModified);
@@ -1454,74 +1844,93 @@ namespace System.Data.Linq {
         /// <param name="entity">The entity to attach.</param>
         /// <param name="original">An instance of the same entity type with data members containing
         /// the original values.</param>
-        public void Attach(TEntity entity, TEntity original) {
-            if (entity == null) {
+        public void Attach(TEntity entity, TEntity original)
+        {
+            if (entity == null)
+            {
                 throw Error.ArgumentNull("entity");
             }
-            if (original == null) {
+            if (original == null)
+            {
                 throw Error.ArgumentNull("original");
             }
-            if (entity.GetType() != original.GetType()) {
+            if (entity.GetType() != original.GetType())
+            {
                 throw Error.OriginalEntityIsWrongType();
             }
             CheckReadOnly();
             context.CheckNotInSubmitChanges();
             context.VerifyTrackingEnabled();
             MetaType type = this.metaTable.RowType.GetInheritanceType(entity.GetType());
-            if (!IsTrackableType(type)) {
+            if (!IsTrackableType(type))
+            {
                 throw Error.TypeCouldNotBeTracked(type.Type);
             }
             TrackedObject tracked = this.context.Services.ChangeTracker.GetTrackedObject(entity);
-            if (tracked == null || tracked.IsWeaklyTracked) {
-                if (tracked == null) {
+            if (tracked == null || tracked.IsWeaklyTracked)
+            {
+                if (tracked == null)
+                {
                     tracked = this.context.Services.ChangeTracker.Track(entity, true);
                 }
                 tracked.ConvertToPossiblyModified(original);
-                if (this.Context.Services.InsertLookupCachedObject(type, entity) != entity) {
+                if (this.Context.Services.InsertLookupCachedObject(type, entity) != entity)
+                {
                     throw new DuplicateKeyException(entity, Strings.CantAddAlreadyExistingKey);
                 }
                 tracked.InitializeDeferredLoaders();
             }
-            else {
+            else
+            {
                 throw Error.CannotAttachAlreadyExistingEntity();
             }
         }
 
-        void ITable.Attach(object entity, object original) {
-            if (entity == null) {
+        void ITable.Attach(object entity, object original)
+        {
+            if (entity == null)
+            {
                 throw Error.ArgumentNull("entity");
             }
-            if (original == null) {
+            if (original == null)
+            {
                 throw Error.ArgumentNull("original");
             }
             CheckReadOnly();
             context.CheckNotInSubmitChanges();
             context.VerifyTrackingEnabled();
             TEntity tEntity = entity as TEntity;
-            if (tEntity == null) {
+            if (tEntity == null)
+            {
                 throw Error.EntityIsTheWrongType();
             }
-            if (entity.GetType() != original.GetType()) {
+            if (entity.GetType() != original.GetType())
+            {
                 throw Error.OriginalEntityIsWrongType();
             }
             this.Attach(tEntity, (TEntity)original);
         }
 
         /// <summary>
-        /// Attaches all entities of a collection to the DataContext in an unmodified state, 
-        /// similiar to as if each had been retrieved via a query. Deferred loading is not enabled. 
+        /// Attaches all entities of a collection to the DataContext in an unmodified state,
+        /// similiar to as if each had been retrieved via a query. Deferred loading is not enabled.
         /// Other entities accessible from these entities are not automatically attached.
         /// </summary>
         /// <param name="entities"></param>
-        public void AttachAll<TSubEntity>(IEnumerable<TSubEntity> entities) where TSubEntity : TEntity {
-            if (entities == null) {
+        public void AttachAll<TSubEntity>(IEnumerable<TSubEntity> entities)
+            where TSubEntity : TEntity
+        {
+            if (entities == null)
+            {
                 throw Error.ArgumentNull("entities");
             }
             this.AttachAll(entities, false);
         }
 
-        void ITable.AttachAll(IEnumerable entities) {
-            if (entities == null) {
+        void ITable.AttachAll(IEnumerable entities)
+        {
+            if (entities == null)
+            {
                 throw Error.ArgumentNull("entities");
             }
             ((ITable)this).AttachAll(entities, false);
@@ -1534,21 +1943,27 @@ namespace System.Data.Linq {
         /// </summary>
         /// <param name="entities">The collection of entities.</param>
         /// <param name="asModified">True if the entities are to be attach as modified.</param>
-        public void AttachAll<TSubEntity>(IEnumerable<TSubEntity> entities, bool asModified) where TSubEntity : TEntity {
-            if (entities == null) {
+        public void AttachAll<TSubEntity>(IEnumerable<TSubEntity> entities, bool asModified)
+            where TSubEntity : TEntity
+        {
+            if (entities == null)
+            {
                 throw Error.ArgumentNull("entities");
             }
             CheckReadOnly();
             context.CheckNotInSubmitChanges();
             context.VerifyTrackingEnabled();
             List<TSubEntity> list = entities.ToList();
-            foreach (TEntity entity in list) {
+            foreach (TEntity entity in list)
+            {
                 this.Attach(entity, asModified);
             }
         }
 
-        void ITable.AttachAll(IEnumerable entities, bool asModified) {
-            if (entities == null) {
+        void ITable.AttachAll(IEnumerable entities, bool asModified)
+        {
+            if (entities == null)
+            {
                 throw Error.ArgumentNull("entities");
             }
             CheckReadOnly();
@@ -1556,7 +1971,8 @@ namespace System.Data.Linq {
             context.VerifyTrackingEnabled();
             List<object> list = entities.Cast<object>().ToList();
             ITable itable = this;
-            foreach (object entity in list) {
+            foreach (object entity in list)
+            {
                 itable.Attach(entity, asModified);
             }
         }
@@ -1566,32 +1982,41 @@ namespace System.Data.Linq {
         /// </summary>
         /// <param name="entity"></param>
         /// <returns></returns>
-        public TEntity GetOriginalEntityState(TEntity entity) {
-            if (entity == null) {
+        public TEntity GetOriginalEntityState(TEntity entity)
+        {
+            if (entity == null)
+            {
                 throw Error.ArgumentNull("entity");
             }
             MetaType type = this.Context.Mapping.GetMetaType(entity.GetType());
-            if (type == null || !type.IsEntity) {
+            if (type == null || !type.IsEntity)
+            {
                 throw Error.EntityIsTheWrongType();
             }
             TrackedObject tracked = this.Context.Services.ChangeTracker.GetTrackedObject(entity);
-            if (tracked != null) {
-                if (tracked.Original != null) {
-                    return (TEntity) tracked.CreateDataCopy(tracked.Original);
+            if (tracked != null)
+            {
+                if (tracked.Original != null)
+                {
+                    return (TEntity)tracked.CreateDataCopy(tracked.Original);
                 }
-                else {
-                    return (TEntity) tracked.CreateDataCopy(tracked.Current);
+                else
+                {
+                    return (TEntity)tracked.CreateDataCopy(tracked.Current);
                 }
             }
             return null;
         }
 
-        object ITable.GetOriginalEntityState(object entity) {
-            if (entity == null) {
+        object ITable.GetOriginalEntityState(object entity)
+        {
+            if (entity == null)
+            {
                 throw Error.ArgumentNull("entity");
             }
             TEntity tEntity = entity as TEntity;
-            if (tEntity == null) {
+            if (tEntity == null)
+            {
                 throw Error.EntityIsTheWrongType();
             }
             return this.GetOriginalEntityState(tEntity);
@@ -1603,45 +2028,61 @@ namespace System.Data.Linq {
         /// </summary>
         /// <param name="entity"></param>
         /// <returns></returns>
-        public ModifiedMemberInfo[] GetModifiedMembers(TEntity entity) {
-            if (entity == null) {
+        public ModifiedMemberInfo[] GetModifiedMembers(TEntity entity)
+        {
+            if (entity == null)
+            {
                 throw Error.ArgumentNull("entity");
             }
             MetaType type = this.Context.Mapping.GetMetaType(entity.GetType());
-            if (type == null || !type.IsEntity) {
+            if (type == null || !type.IsEntity)
+            {
                 throw Error.EntityIsTheWrongType();
             }
             TrackedObject tracked = this.Context.Services.ChangeTracker.GetTrackedObject(entity);
-            if (tracked != null) {
+            if (tracked != null)
+            {
                 return tracked.GetModifiedMembers().ToArray();
             }
             return new ModifiedMemberInfo[] { };
         }
 
-        ModifiedMemberInfo[] ITable.GetModifiedMembers(object entity) {
-            if (entity == null) {
+        ModifiedMemberInfo[] ITable.GetModifiedMembers(object entity)
+        {
+            if (entity == null)
+            {
                 throw Error.ArgumentNull("entity");
             }
             TEntity tEntity = entity as TEntity;
-            if (tEntity == null) {
+            if (tEntity == null)
+            {
                 throw Error.EntityIsTheWrongType();
             }
             return this.GetModifiedMembers(tEntity);
         }
 
-        private void CheckReadOnly() {
-            if (this.IsReadOnly) {
+        private void CheckReadOnly()
+        {
+            if (this.IsReadOnly)
+            {
                 throw Error.CannotPerformCUDOnReadOnlyTable(ToString());
             }
         }
 
-        public override string ToString() {
+        public override string ToString()
+        {
             return "Table(" + typeof(TEntity).Name + ")";
         }
     }
 
-    [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", MessageId = "ChangeSet", Justification="The capitalization was deliberately chosen.")]
-    public sealed class ChangeSet {
+    [SuppressMessage(
+        "Microsoft.Naming",
+        "CA1702:CompoundWordsShouldBeCasedCorrectly",
+        MessageId = "ChangeSet",
+        Justification = "The capitalization was deliberately chosen."
+    )]
+    public sealed class ChangeSet
+    {
         ReadOnlyCollection<object> inserts;
         ReadOnlyCollection<object> deletes;
         ReadOnlyCollection<object> updates;
@@ -1650,57 +2091,72 @@ namespace System.Data.Linq {
             ReadOnlyCollection<object> inserts,
             ReadOnlyCollection<object> deletes,
             ReadOnlyCollection<object> updates
-            ) {
+        )
+        {
             this.inserts = inserts;
             this.deletes = deletes;
             this.updates = updates;
         }
 
-        public IList<object> Inserts {
+        public IList<object> Inserts
+        {
             get { return this.inserts; }
         }
 
-        public IList<object> Deletes {
+        public IList<object> Deletes
+        {
             get { return this.deletes; }
         }
 
-        public IList<object> Updates {
+        public IList<object> Updates
+        {
             get { return this.updates; }
         }
 
-        public override string ToString() {
-            return "{" +
-                string.Format(
+        public override string ToString()
+        {
+            return "{"
+                + string.Format(
                     Globalization.CultureInfo.InvariantCulture,
                     "Inserts: {0}, Deletes: {1}, Updates: {2}",
                     this.Inserts.Count,
                     this.Deletes.Count,
                     this.Updates.Count
-                    ) + "}";
+                )
+                + "}";
         }
     }
 
-    [SuppressMessage("Microsoft.Performance", "CA1815:OverrideEqualsAndOperatorEqualsOnValueTypes", Justification = "Microsoft: Types are never compared to each other.  When comparisons happen it is against the entities that are represented by these constructs.")]
-    public struct ModifiedMemberInfo {
+    [SuppressMessage(
+        "Microsoft.Performance",
+        "CA1815:OverrideEqualsAndOperatorEqualsOnValueTypes",
+        Justification = "Microsoft: Types are never compared to each other.  When comparisons happen it is against the entities that are represented by these constructs."
+    )]
+    public struct ModifiedMemberInfo
+    {
         MemberInfo member;
         object current;
         object original;
 
-        internal ModifiedMemberInfo(MemberInfo member, object current, object original) {
+        internal ModifiedMemberInfo(MemberInfo member, object current, object original)
+        {
             this.member = member;
             this.current = current;
             this.original = original;
         }
 
-        public MemberInfo Member {
+        public MemberInfo Member
+        {
             get { return this.member; }
         }
 
-        public object CurrentValue {
+        public object CurrentValue
+        {
             get { return this.current; }
         }
 
-        public object OriginalValue {
+        public object OriginalValue
+        {
             get { return this.original; }
         }
     }

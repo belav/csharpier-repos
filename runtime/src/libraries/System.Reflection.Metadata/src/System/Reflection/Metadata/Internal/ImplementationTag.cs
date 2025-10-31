@@ -13,16 +13,19 @@ namespace System.Reflection.Metadata.Ecma335
         internal const uint AssemblyRef = 0x00000001;
         internal const uint ExportedType = 0x00000002;
         internal const uint TagMask = 0x00000003;
-        internal const uint TagToTokenTypeByteVector = TokenTypeIds.File >> 24 | TokenTypeIds.AssemblyRef >> 16 | TokenTypeIds.ExportedType >> 8;
+        internal const uint TagToTokenTypeByteVector =
+            TokenTypeIds.File >> 24
+            | TokenTypeIds.AssemblyRef >> 16
+            | TokenTypeIds.ExportedType >> 8;
         internal const TableMask TablesReferenced =
-          TableMask.File
-          | TableMask.AssemblyRef
-          | TableMask.ExportedType;
+            TableMask.File | TableMask.AssemblyRef | TableMask.ExportedType;
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         internal static EntityHandle ConvertToHandle(uint implementation)
         {
-            uint tokenType = (TagToTokenTypeByteVector >> ((int)(implementation & TagMask) << 3)) << TokenTypeIds.RowIdBitCount;
+            uint tokenType =
+                (TagToTokenTypeByteVector >> ((int)(implementation & TagMask) << 3))
+                << TokenTypeIds.RowIdBitCount;
             uint rowId = (implementation >> NumberOfBits);
 
             if (tokenType == 0 || (rowId & ~TokenTypeIds.RIDMask) != 0)

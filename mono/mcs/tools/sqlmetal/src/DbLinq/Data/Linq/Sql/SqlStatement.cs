@@ -1,19 +1,19 @@
 ﻿#region MIT license
-// 
+//
 // MIT license
 //
 // Copyright (c) 2007-2008 Jiri Moudry, Pascal Craponne
-// 
+//
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
 // in the Software without restriction, including without limitation the rights
 // to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
 // copies of the Software, and to permit persons to whom the Software is
 // furnished to do so, subject to the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be included in
 // all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
 // IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
 // FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
@@ -21,7 +21,7 @@
 // LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
-// 
+//
 #endregion
 
 using System.Collections;
@@ -51,7 +51,10 @@ namespace DbLinq.Data.Linq.Sql
         /// <summary>
         /// Returns the number of parts present
         /// </summary>
-        public int Count { get { return parts.Count; } }
+        public int Count
+        {
+            get { return parts.Count; }
+        }
 
         /// <summary>
         /// Enumerates all parts
@@ -96,7 +99,10 @@ namespace DbLinq.Data.Linq.Sql
         /// <param name="sqlStatement"></param>
         /// <param name="sqlStatements"></param>
         /// <returns></returns>
-        public static SqlStatement Join(SqlStatement sqlStatement, IList<SqlStatement> sqlStatements)
+        public static SqlStatement Join(
+            SqlStatement sqlStatement,
+            IList<SqlStatement> sqlStatements
+        )
         {
             // optimization: if we have only one statement to join, we return the statement itself
             if (sqlStatements.Count == 1)
@@ -112,7 +118,10 @@ namespace DbLinq.Data.Linq.Sql
         /// <param name="sqlStatement"></param>
         /// <param name="sqlStatements"></param>
         /// <returns></returns>
-        public static SqlStatement Join(SqlStatement sqlStatement, params SqlStatement[] sqlStatements)
+        public static SqlStatement Join(
+            SqlStatement sqlStatement,
+            params SqlStatement[] sqlStatements
+        )
         {
             return Join(sqlStatement, (IList<SqlStatement>)sqlStatements);
         }
@@ -158,9 +167,7 @@ namespace DbLinq.Data.Linq.Sql
         /// <summary>
         /// Initializes a new instance of the <see cref="SqlStatement"/> class.
         /// </summary>
-        public SqlStatement()
-        {
-        }
+        public SqlStatement() { }
 
         /// <summary>
         /// Builds an SqlStatement by concatenating several statements
@@ -179,18 +186,14 @@ namespace DbLinq.Data.Linq.Sql
         /// </summary>
         /// <param name="sqlStatements"></param>
         public SqlStatement(params SqlStatement[] sqlStatements)
-            : this((IEnumerable<SqlStatement>)sqlStatements)
-        {
-        }
+            : this((IEnumerable<SqlStatement>)sqlStatements) { }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="SqlStatement"/> class.
         /// </summary>
         /// <param name="sqlParts">The SQL parts.</param>
         public SqlStatement(params SqlPart[] sqlParts)
-            : this((IList<SqlPart>)sqlParts)
-        {
-        }
+            : this((IList<SqlPart>)sqlParts) { }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="SqlStatement"/> class.

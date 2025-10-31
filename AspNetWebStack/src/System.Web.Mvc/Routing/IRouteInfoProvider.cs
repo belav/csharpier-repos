@@ -19,6 +19,6 @@ namespace System.Web.Mvc.Routing
         /// <summary>
         /// Gets the route template describing the URI pattern to match against.
         /// </summary>
-        string Template { get; }    
+        string Template { get; }
     }
 }

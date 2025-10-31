@@ -3,8 +3,7 @@
 
 using System.Threading.Tasks;
 using Xunit;
-using VerifyCS = Microsoft.Interop.UnitTests.Verifiers.CSharpAnalyzerVerifier<
-       Microsoft.Interop.Analyzers.ComHostingDoesNotSupportGeneratedComInterfaceAnalyzer>;
+using VerifyCS = Microsoft.Interop.UnitTests.Verifiers.CSharpAnalyzerVerifier<Microsoft.Interop.Analyzers.ComHostingDoesNotSupportGeneratedComInterfaceAnalyzer>;
 
 namespace ComInterfaceGenerator.Unit.Tests
 {
@@ -13,7 +12,9 @@ namespace ComInterfaceGenerator.Unit.Tests
         [InlineData(true)]
         [InlineData(false)]
         [Theory]
-        public async Task ComVisibleType_ComImportInterfacesOnly_DoesNotReportDiagnostic(bool enableComHosting)
+        public async Task ComVisibleType_ComImportInterfacesOnly_DoesNotReportDiagnostic(
+            bool enableComHosting
+        )
         {
             string source = """
                 using System.Runtime.InteropServices;
@@ -39,22 +40,22 @@ namespace ComInterfaceGenerator.Unit.Tests
         public async Task ComVisibleType_GeneratedComInterface_NoHosting_DoesNotReportDiagnostic()
         {
             string source = """
-               using System.Runtime.InteropServices;
-               using System.Runtime.InteropServices.Marshalling;
+                using System.Runtime.InteropServices;
+                using System.Runtime.InteropServices.Marshalling;
 
-               [GeneratedComInterface]
-               [Guid("0B7171CD-04A3-41B6-AD10-FE86D52197DD")]
-               [InterfaceType(ComInterfaceType.InterfaceIsIUnknown)]
-               public interface I
-               {
-               }
+                [GeneratedComInterface]
+                [Guid("0B7171CD-04A3-41B6-AD10-FE86D52197DD")]
+                [InterfaceType(ComInterfaceType.InterfaceIsIUnknown)]
+                public interface I
+                {
+                }
 
-               [ComVisible(true)]
-               public class C : I
-               {
-               }
-       
-               """;
+                [ComVisible(true)]
+                public class C : I
+                {
+                }
+
+                """;
 
             await VerifyAnalyzerAsync(source, enableComHosting: false);
         }
@@ -63,22 +64,22 @@ namespace ComInterfaceGenerator.Unit.Tests
         public async Task ComVisibleType_GeneratedComInterface_EnabledHosting_ReportsDiagnostic()
         {
             string source = """
-               using System.Runtime.InteropServices;
-               using System.Runtime.InteropServices.Marshalling;
+                using System.Runtime.InteropServices;
+                using System.Runtime.InteropServices.Marshalling;
 
-               [GeneratedComInterface]
-               [Guid("0B7171CD-04A3-41B6-AD10-FE86D52197DD")]
-               [InterfaceType(ComInterfaceType.InterfaceIsIUnknown)]
-               public partial interface I
-               {
-               }
+                [GeneratedComInterface]
+                [Guid("0B7171CD-04A3-41B6-AD10-FE86D52197DD")]
+                [InterfaceType(ComInterfaceType.InterfaceIsIUnknown)]
+                public partial interface I
+                {
+                }
 
-               [ComVisible(true)]
-               public class [|C|] : I
-               {
-               }
-       
-               """;
+                [ComVisible(true)]
+                public class [|C|] : I
+                {
+                }
+
+                """;
 
             await VerifyAnalyzerAsync(source, enableComHosting: true);
         }
@@ -87,26 +88,26 @@ namespace ComInterfaceGenerator.Unit.Tests
         public async Task ComVisibleType_GeneratedComInterface_TransitiveInterface_EnabledHosting_ReportsDiagnostic()
         {
             string source = """
-               using System.Runtime.InteropServices;
-               using System.Runtime.InteropServices.Marshalling;
+                using System.Runtime.InteropServices;
+                using System.Runtime.InteropServices.Marshalling;
 
-               [GeneratedComInterface]
-               [Guid("0B7171CD-04A3-41B6-AD10-FE86D52197DD")]
-               [InterfaceType(ComInterfaceType.InterfaceIsIUnknown)]
-               public partial interface I
-               {
-               }
+                [GeneratedComInterface]
+                [Guid("0B7171CD-04A3-41B6-AD10-FE86D52197DD")]
+                [InterfaceType(ComInterfaceType.InterfaceIsIUnknown)]
+                public partial interface I
+                {
+                }
 
-               public interface J : I
-               {
-               }
+                public interface J : I
+                {
+                }
 
-               [ComVisible(true)]
-               public class [|C|] : I
-               {
-               }
-       
-               """;
+                [ComVisible(true)]
+                public class [|C|] : I
+                {
+                }
+
+                """;
 
             await VerifyAnalyzerAsync(source, enableComHosting: true);
         }
@@ -120,12 +121,15 @@ namespace ComInterfaceGenerator.Unit.Tests
                     Sources = { source },
                     AnalyzerConfigFiles =
                     {
-                        ("/.editorconfig", $"""
-                                            is_global = true
-                                            build_property.EnableComHosting = {enableComHosting}
-                                            """)
-                    }
-                }
+                        (
+                            "/.editorconfig",
+                            $"""
+                            is_global = true
+                            build_property.EnableComHosting = {enableComHosting}
+                            """
+                        ),
+                    },
+                },
             };
 
             return test.RunAsync();

@@ -1,7 +1,7 @@
 // ==++==
 //
 //   Copyright (c) Microsoft Corporation.  All rights reserved.
-// 
+//
 // ==--==
 // =+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+
 //
@@ -12,8 +12,8 @@
 // =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
 
 using System.Collections.Generic;
-using System.Threading;
 using System.Diagnostics.Contracts;
+using System.Threading;
 
 namespace System.Linq.Parallel
 {
@@ -27,7 +27,6 @@ namespace System.Linq.Parallel
     /// <typeparam name="TSource"></typeparam>
     internal sealed class SingleQueryOperator<TSource> : UnaryQueryOperator<TSource, TSource>
     {
-
         private readonly Func<TSource, bool> m_predicate; // The optional predicate used during the search.
 
         //---------------------------------------------------------------------------------------
@@ -38,7 +37,7 @@ namespace System.Linq.Parallel
         //
 
         internal SingleQueryOperator(IEnumerable<TSource> child, Func<TSource, bool> predicate)
-            :base(child)
+            : base(child)
         {
             Contract.Assert(child != null, "child data source cannot be null");
             m_predicate = predicate;
@@ -49,24 +48,34 @@ namespace System.Linq.Parallel
         // partitions as needed.
         //
 
-        internal override QueryResults<TSource> Open(
-            QuerySettings settings, bool preferStriping)
+        internal override QueryResults<TSource> Open(QuerySettings settings, bool preferStriping)
         {
             QueryResults<TSource> childQueryResults = Child.Open(settings, false);
             return new UnaryQueryOperatorResults(childQueryResults, this, settings, preferStriping);
         }
 
         internal override void WrapPartitionedStream<TKey>(
-            PartitionedStream<TSource, TKey> inputStream, IPartitionedStreamRecipient<TSource> recipient, bool preferStriping, QuerySettings settings)
+            PartitionedStream<TSource, TKey> inputStream,
+            IPartitionedStreamRecipient<TSource> recipient,
+            bool preferStriping,
+            QuerySettings settings
+        )
         {
             int partitionCount = inputStream.PartitionCount;
             PartitionedStream<TSource, int> outputStream = new PartitionedStream<TSource, int>(
-                partitionCount, Util.GetDefaultComparer<int>(), OrdinalIndexState.Shuffled);
+                partitionCount,
+                Util.GetDefaultComparer<int>(),
+                OrdinalIndexState.Shuffled
+            );
 
             Shared<int> totalElementCount = new Shared<int>(0);
             for (int i = 0; i < partitionCount; i++)
             {
-                outputStream[i] = new SingleQueryOperatorEnumerator<TKey>(inputStream[i], m_predicate, totalElementCount);
+                outputStream[i] = new SingleQueryOperatorEnumerator<TKey>(
+                    inputStream[i],
+                    m_predicate,
+                    totalElementCount
+                );
             }
 
             recipient.Receive(outputStream);
@@ -78,7 +87,10 @@ namespace System.Linq.Parallel
 
         internal override IEnumerable<TSource> AsSequentialQuery(CancellationToken token)
         {
-            Contract.Assert(false, "This method should never be called as it is an ending operator with LimitsParallelism=false.");
+            Contract.Assert(
+                false,
+                "This method should never be called as it is an ending operator with LimitsParallelism=false."
+            );
             throw new NotSupportedException();
         }
 
@@ -98,7 +110,6 @@ namespace System.Linq.Parallel
 
         class SingleQueryOperatorEnumerator<TKey> : QueryOperatorEnumerator<TSource, int>
         {
-
             private QueryOperatorEnumerator<TSource, TKey> m_source; // The data source to enumerate.
             private Func<TSource, bool> m_predicate; // The optional predicate used during the search.
             private bool m_alreadySearched; // Whether we have searched our input already.
@@ -111,8 +122,11 @@ namespace System.Linq.Parallel
             // Instantiates a new enumerator.
             //
 
-            internal SingleQueryOperatorEnumerator(QueryOperatorEnumerator<TSource, TKey> source,
-                                                   Func<TSource, bool> predicate, Shared<int> totalElementCount)
+            internal SingleQueryOperatorEnumerator(
+                QueryOperatorEnumerator<TSource, TKey> source,
+                Func<TSource, bool> predicate,
+                Shared<int> totalElementCount
+            )
             {
                 Contract.Assert(source != null);
                 Contract.Assert(totalElementCount != null);

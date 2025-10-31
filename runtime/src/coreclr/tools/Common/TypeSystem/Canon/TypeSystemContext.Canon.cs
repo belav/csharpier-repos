@@ -11,6 +11,7 @@ namespace Internal.TypeSystem
     public partial class TypeSystemContext
     {
         private CanonType _canonType;
+
         /// <summary>
         /// Instance of System.__Canon for this context
         /// </summary>
@@ -27,6 +28,7 @@ namespace Internal.TypeSystem
         }
 
         private UniversalCanonType _universalCanonType;
+
         /// <summary>
         /// Instance of System.__UniversalCanon for this context
         /// </summary>
@@ -36,7 +38,11 @@ namespace Internal.TypeSystem
             {
                 if (_universalCanonType == null)
                 {
-                    Interlocked.CompareExchange(ref _universalCanonType, new UniversalCanonType(this), null);
+                    Interlocked.CompareExchange(
+                        ref _universalCanonType,
+                        new UniversalCanonType(this),
+                        null
+                    );
                 }
                 return _universalCanonType;
             }
@@ -66,7 +72,10 @@ namespace Internal.TypeSystem
         /// <summary>
         /// Converts an instantiation into its canonical form.
         /// </summary>
-        public Instantiation ConvertInstantiationToCanonForm(Instantiation instantiation, CanonicalFormKind kind)
+        public Instantiation ConvertInstantiationToCanonForm(
+            Instantiation instantiation,
+            CanonicalFormKind kind
+        )
         {
             return ConvertInstantiationToCanonForm(instantiation, kind, out _);
         }
@@ -76,7 +85,11 @@ namespace Internal.TypeSystem
         /// parameter indicates whether the returned canonical instantiation is different from the specific instantiation
         /// passed as the input.
         /// </summary>
-        protected internal virtual Instantiation ConvertInstantiationToCanonForm(Instantiation instantiation, CanonicalFormKind kind, out bool changed)
+        protected internal virtual Instantiation ConvertInstantiationToCanonForm(
+            Instantiation instantiation,
+            CanonicalFormKind kind,
+            out bool changed
+        )
         {
             throw new NotSupportedException();
         }
@@ -85,7 +98,10 @@ namespace Internal.TypeSystem
         /// Converts a constituent of a constructed type to it's canonical form. Note this method is different
         /// from <see cref="TypeDesc.ConvertToCanonForm(CanonicalFormKind)"/>.
         /// </summary>
-        protected internal virtual TypeDesc ConvertToCanon(TypeDesc typeToConvert, CanonicalFormKind kind)
+        protected internal virtual TypeDesc ConvertToCanon(
+            TypeDesc typeToConvert,
+            CanonicalFormKind kind
+        )
         {
             throw new NotSupportedException();
         }

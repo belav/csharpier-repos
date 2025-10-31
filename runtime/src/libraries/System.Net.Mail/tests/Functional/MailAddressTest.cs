@@ -11,18 +11,81 @@ namespace System.Net.Mail.Tests
         public static IEnumerable<object[]> GetValid_Address()
         {
             // inputAddress, address, displayName, host, toString(), user
-            yield return new object[] { " foo@example.com ", "foo@example.com", string.Empty, "example.com", "foo@example.com", "foo" };
-            yield return new object[] { "Mr. Foo Bar <foo@example.com>", "foo@example.com", "Mr. Foo Bar", "example.com", "\"Mr. Foo Bar\" <foo@example.com>", "foo" };
-            yield return new object[] { "FooBar <foo@example.com>", "foo@example.com", "FooBar", "example.com", "\"FooBar\" <foo@example.com>", "foo" };
-            yield return new object[] { "\"FooBar\"foo@example.com   ", "foo@example.com", "FooBar", "example.com", "\"FooBar\" <foo@example.com>", "foo" };
-            yield return new object[] { "\"   FooBar   \"< foo@example.com >", "foo@example.com", "   FooBar   ", "example.com", "\"   FooBar   \" <foo@example.com>", "foo" };
-            yield return new object[] { "<foo@example.com>", "foo@example.com", string.Empty, "example.com", "foo@example.com", "foo" };
-            yield return new object[] { "    <  foo@example.com  >", "foo@example.com", string.Empty, "example.com", "foo@example.com", "foo" };
+            yield return new object[]
+            {
+                " foo@example.com ",
+                "foo@example.com",
+                string.Empty,
+                "example.com",
+                "foo@example.com",
+                "foo",
+            };
+            yield return new object[]
+            {
+                "Mr. Foo Bar <foo@example.com>",
+                "foo@example.com",
+                "Mr. Foo Bar",
+                "example.com",
+                "\"Mr. Foo Bar\" <foo@example.com>",
+                "foo",
+            };
+            yield return new object[]
+            {
+                "FooBar <foo@example.com>",
+                "foo@example.com",
+                "FooBar",
+                "example.com",
+                "\"FooBar\" <foo@example.com>",
+                "foo",
+            };
+            yield return new object[]
+            {
+                "\"FooBar\"foo@example.com   ",
+                "foo@example.com",
+                "FooBar",
+                "example.com",
+                "\"FooBar\" <foo@example.com>",
+                "foo",
+            };
+            yield return new object[]
+            {
+                "\"   FooBar   \"< foo@example.com >",
+                "foo@example.com",
+                "   FooBar   ",
+                "example.com",
+                "\"   FooBar   \" <foo@example.com>",
+                "foo",
+            };
+            yield return new object[]
+            {
+                "<foo@example.com>",
+                "foo@example.com",
+                string.Empty,
+                "example.com",
+                "foo@example.com",
+                "foo",
+            };
+            yield return new object[]
+            {
+                "    <  foo@example.com  >",
+                "foo@example.com",
+                string.Empty,
+                "example.com",
+                "foo@example.com",
+                "foo",
+            };
         }
 
         [Theory]
         [MemberData(nameof(GetValid_Address))]
-        public void TestConstructor_Address(string inputAddress, string address, string displayName, string host, string toString, string user)
+        public void TestConstructor_Address(
+            string inputAddress,
+            string address,
+            string displayName,
+            string host,
+            string toString,
+            string user
+        )
         {
             MailAddress addressInstance = new MailAddress(inputAddress);
             Assert.Equal(address, addressInstance.Address);
@@ -91,7 +154,10 @@ namespace System.Net.Mail.Tests
 
         [Theory]
         [MemberData(nameof(GetInvalid_AddressDisplayName))]
-        public void TestInvalidAddressInConstructor_AddressDisplayName(string invalidAddress, string displayName)
+        public void TestInvalidAddressInConstructor_AddressDisplayName(
+            string invalidAddress,
+            string displayName
+        )
         {
             Assert.Throws<FormatException>(() => new MailAddress(invalidAddress, displayName));
         }
@@ -99,16 +165,69 @@ namespace System.Net.Mail.Tests
         public static IEnumerable<object[]> GetValid_AddressDisplayName()
         {
             // inputAddress, inputDisplayName, address, displayName, host, toString(), user
-            yield return new object[] { " foo@example.com ", null, "foo@example.com", string.Empty, "example.com", "foo@example.com", "foo" };
-            yield return new object[] { "Mr. Far Bar <foo@example.com>", "BarFoo", "foo@example.com", "BarFoo", "example.com", "\"BarFoo\" <foo@example.com>", "foo" };
-            yield return new object[] { "Mr. Far Bar <foo@example.com>  ", string.Empty, "foo@example.com", "Mr. Far Bar", "example.com", "\"Mr. Far Bar\" <foo@example.com>", "foo" };
-            yield return new object[] { "Mr. Far Bar <foo@example.com>", null, "foo@example.com", "Mr. Far Bar", "example.com", "\"Mr. Far Bar\" <foo@example.com>", "foo" };
-            yield return new object[] { "Mr. Far Bar <foo@example.com>   ", " ", "foo@example.com", " ", "example.com", "\" \" <foo@example.com>", "foo" };
+            yield return new object[]
+            {
+                " foo@example.com ",
+                null,
+                "foo@example.com",
+                string.Empty,
+                "example.com",
+                "foo@example.com",
+                "foo",
+            };
+            yield return new object[]
+            {
+                "Mr. Far Bar <foo@example.com>",
+                "BarFoo",
+                "foo@example.com",
+                "BarFoo",
+                "example.com",
+                "\"BarFoo\" <foo@example.com>",
+                "foo",
+            };
+            yield return new object[]
+            {
+                "Mr. Far Bar <foo@example.com>  ",
+                string.Empty,
+                "foo@example.com",
+                "Mr. Far Bar",
+                "example.com",
+                "\"Mr. Far Bar\" <foo@example.com>",
+                "foo",
+            };
+            yield return new object[]
+            {
+                "Mr. Far Bar <foo@example.com>",
+                null,
+                "foo@example.com",
+                "Mr. Far Bar",
+                "example.com",
+                "\"Mr. Far Bar\" <foo@example.com>",
+                "foo",
+            };
+            yield return new object[]
+            {
+                "Mr. Far Bar <foo@example.com>   ",
+                " ",
+                "foo@example.com",
+                " ",
+                "example.com",
+                "\" \" <foo@example.com>",
+                "foo",
+            };
         }
 
         [Theory]
         [MemberData(nameof(GetValid_AddressDisplayName))]
-        public void TestConstructor_AddressDisplayName(string inputAddress, string inputDisplayName, string address, string displayName, string host, string toString, string user)
+        public void TestConstructor_AddressDisplayName(
+            string inputAddress,
+            string inputDisplayName,
+            string address,
+            string displayName,
+            string host,
+            string toString,
+            string user
+        )
         {
             MailAddress addressInstance = new MailAddress(inputAddress, inputDisplayName);
             Assert.Equal(address, addressInstance.Address);
@@ -142,7 +261,11 @@ namespace System.Net.Mail.Tests
 
         [Theory]
         [MemberData(nameof(GetAddressDisplayName_DisplayNamePrecedence))]
-        public void AddressDisplayName_Precedence(string inputAddress, string inputDisplayName, string displayName)
+        public void AddressDisplayName_Precedence(
+            string inputAddress,
+            string inputDisplayName,
+            string displayName
+        )
         {
             var ma = new MailAddress(inputAddress, inputDisplayName);
             Assert.Equal(displayName, ma.DisplayName);
@@ -242,7 +365,14 @@ namespace System.Net.Mail.Tests
 
         [Theory]
         [MemberData(nameof(GetValid_Address))]
-        public void TryCreate_Valid_Address(string inputAddress, string address, string displayName, string host, string toString, string user)
+        public void TryCreate_Valid_Address(
+            string inputAddress,
+            string address,
+            string displayName,
+            string host,
+            string toString,
+            string user
+        )
         {
             Assert.True(MailAddress.TryCreate(inputAddress, out MailAddress addressInstance));
             Assert.Equal(address, addressInstance.Address);
@@ -254,9 +384,23 @@ namespace System.Net.Mail.Tests
 
         [Theory]
         [MemberData(nameof(GetValid_AddressDisplayName))]
-        public void TryCreate_Valid_AddressDisplayName(string inputAddress, string inputDisplayName, string address, string displayName, string host, string toString, string user)
+        public void TryCreate_Valid_AddressDisplayName(
+            string inputAddress,
+            string inputDisplayName,
+            string address,
+            string displayName,
+            string host,
+            string toString,
+            string user
+        )
         {
-            Assert.True(MailAddress.TryCreate(inputAddress, inputDisplayName, out MailAddress addressInstance));
+            Assert.True(
+                MailAddress.TryCreate(
+                    inputAddress,
+                    inputDisplayName,
+                    out MailAddress addressInstance
+                )
+            );
             Assert.Equal(address, addressInstance.Address);
             Assert.Equal(displayName, addressInstance.DisplayName);
             Assert.Equal(host, addressInstance.Host);
@@ -274,9 +418,19 @@ namespace System.Net.Mail.Tests
 
         [Theory]
         [MemberData(nameof(GetAddressDisplayName_DisplayNamePrecedence))]
-        public void TryCreate_AddressDisplayName_Precedence(string inputAddress, string inputDisplayName, string displayName)
+        public void TryCreate_AddressDisplayName_Precedence(
+            string inputAddress,
+            string inputDisplayName,
+            string displayName
+        )
         {
-            Assert.True(MailAddress.TryCreate(inputAddress, inputDisplayName, out MailAddress addressInstance));
+            Assert.True(
+                MailAddress.TryCreate(
+                    inputAddress,
+                    inputDisplayName,
+                    out MailAddress addressInstance
+                )
+            );
             Assert.Equal(displayName, addressInstance.DisplayName);
         }
     }

@@ -12,9 +12,11 @@ namespace System.Configuration
         private readonly ConfigurationSectionGroup _configSectionGroup;
         private MgmtConfigurationRecord _configRecord;
 
-        internal ConfigurationSectionGroupCollection(MgmtConfigurationRecord configRecord,
-            ConfigurationSectionGroup configSectionGroup) :
-            base(StringComparer.Ordinal)
+        internal ConfigurationSectionGroupCollection(
+            MgmtConfigurationRecord configRecord,
+            ConfigurationSectionGroup configSectionGroup
+        )
+            : base(StringComparer.Ordinal)
         {
             _configRecord = configRecord;
             _configSectionGroup = configSectionGroup;
@@ -22,7 +24,8 @@ namespace System.Configuration
             foreach (DictionaryEntry de in _configRecord.SectionGroupFactories)
             {
                 FactoryId factoryId = (FactoryId)de.Value;
-                if (factoryId.Group == _configSectionGroup.SectionGroupName) BaseAdd(factoryId.Name, factoryId.Name);
+                if (factoryId.Group == _configSectionGroup.SectionGroupName)
+                    BaseAdd(factoryId.Name, factoryId.Name);
             }
         }
 
@@ -43,13 +46,19 @@ namespace System.Configuration
         private void VerifyIsAttachedToConfigRecord()
         {
             if (_configRecord == null)
-                throw new InvalidOperationException(SR.Config_cannot_edit_configurationsectiongroup_when_not_attached);
+                throw new InvalidOperationException(
+                    SR.Config_cannot_edit_configurationsectiongroup_when_not_attached
+                );
         }
 
         public void Add(string name, ConfigurationSectionGroup sectionGroup)
         {
             VerifyIsAttachedToConfigRecord();
-            _configRecord.AddConfigurationSectionGroup(_configSectionGroup.SectionGroupName, name, sectionGroup);
+            _configRecord.AddConfigurationSectionGroup(
+                _configSectionGroup.SectionGroupName,
+                name,
+                sectionGroup
+            );
             BaseAdd(name, name);
         }
 
@@ -59,10 +68,12 @@ namespace System.Configuration
 
             // If this is the root section group, do not require the location section to be written
             // to the file.
-            if (_configSectionGroup.IsRoot) _configRecord.RemoveLocationWriteRequirement();
+            if (_configSectionGroup.IsRoot)
+                _configRecord.RemoveLocationWriteRequirement();
 
             string[] allKeys = BaseGetAllKeys();
-            foreach (string key in allKeys) Remove(key);
+            foreach (string key in allKeys)
+                Remove(key);
         }
 
         public void CopyTo(ConfigurationSectionGroup[] array, int index)
@@ -73,9 +84,11 @@ namespace System.Configuration
             }
 
             int c = Count;
-            if (array.Length < c + index) throw new ArgumentOutOfRangeException(nameof(index));
+            if (array.Length < c + index)
+                throw new ArgumentOutOfRangeException(nameof(index));
 
-            for (int i = 0, j = index; i < c; i++, j++) array[j] = Get(i);
+            for (int i = 0, j = index; i < c; i++, j++)
+                array[j] = Get(i);
         }
 
         public ConfigurationSectionGroup Get(int index)
@@ -100,14 +113,18 @@ namespace System.Configuration
                 return null;
 
             // get the section group
-            string configKey = BaseConfigurationRecord.CombineConfigKey(_configSectionGroup.SectionGroupName, name);
+            string configKey = BaseConfigurationRecord.CombineConfigKey(
+                _configSectionGroup.SectionGroupName,
+                name
+            );
             return _configRecord.GetSectionGroup(configKey);
         }
 
         public override IEnumerator GetEnumerator()
         {
             int c = Count;
-            for (int i = 0; i < c; i++) yield return this[i];
+            for (int i = 0; i < c; i++)
+                yield return this[i];
         }
 
         public string GetKey(int index)
@@ -127,11 +144,18 @@ namespace System.Configuration
         {
             VerifyIsAttachedToConfigRecord();
 
-            _configRecord.RemoveConfigurationSectionGroup(_configSectionGroup.SectionGroupName, name);
+            _configRecord.RemoveConfigurationSectionGroup(
+                _configSectionGroup.SectionGroupName,
+                name
+            );
 
             // Remove the section from the collection if it is no longer in the list of all SectionGroupFactories.
-            string configKey = BaseConfigurationRecord.CombineConfigKey(_configSectionGroup.SectionGroupName, name);
-            if (!_configRecord.SectionFactories.Contains(configKey)) BaseRemove(name);
+            string configKey = BaseConfigurationRecord.CombineConfigKey(
+                _configSectionGroup.SectionGroupName,
+                name
+            );
+            if (!_configRecord.SectionFactories.Contains(configKey))
+                BaseRemove(name);
         }
 
         public void RemoveAt(int index)

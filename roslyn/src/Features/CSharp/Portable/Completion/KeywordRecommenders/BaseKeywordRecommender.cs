@@ -13,19 +13,20 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.KeywordRecommenders
     internal class BaseKeywordRecommender : AbstractSyntacticSingleKeywordRecommender
     {
         public BaseKeywordRecommender()
-            : base(SyntaxKind.BaseKeyword)
-        {
-        }
+            : base(SyntaxKind.BaseKeyword) { }
 
-        protected override bool IsValidContext(int position, CSharpSyntaxContext context, CancellationToken cancellationToken)
+        protected override bool IsValidContext(
+            int position,
+            CSharpSyntaxContext context,
+            CancellationToken cancellationToken
+        )
         {
             // We need to at least be in a type declaration context.  This prevents us from showing
             // calls to 'base' in things like top level repl statements and whatnot.
             if (context.ContainingTypeDeclaration != null)
             {
-                return
-                    IsConstructorInitializerContext(context) ||
-                    IsInstanceExpressionOrStatement(context);
+                return IsConstructorInitializerContext(context)
+                    || IsInstanceExpressionOrStatement(context);
             }
 
             return false;
@@ -48,10 +49,14 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.KeywordRecommenders
 
             var token = context.TargetToken;
 
-            if (token.Kind() == SyntaxKind.ColonToken &&
-                token.Parent is ConstructorInitializerSyntax &&
-                token.Parent.IsParentKind(SyntaxKind.ConstructorDeclaration) &&
-                token.Parent.Parent?.Parent is (kind: SyntaxKind.ClassDeclaration or SyntaxKind.RecordDeclaration))
+            if (
+                token.Kind() == SyntaxKind.ColonToken
+                && token.Parent is ConstructorInitializerSyntax
+                && token.Parent.IsParentKind(SyntaxKind.ConstructorDeclaration)
+                && token.Parent.Parent?.Parent
+                    is
+                    (kind: SyntaxKind.ClassDeclaration or SyntaxKind.RecordDeclaration)
+            )
             {
                 var constructor = token.GetRequiredAncestor<ConstructorDeclarationSyntax>();
                 if (constructor.Modifiers.Any(SyntaxKind.StaticKeyword))

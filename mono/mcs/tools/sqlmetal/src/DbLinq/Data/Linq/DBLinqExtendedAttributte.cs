@@ -12,9 +12,6 @@ namespace DbLinq.Data.Linq
     [global::System.AttributeUsage(AttributeTargets.All, Inherited = false, AllowMultiple = true)]
     sealed class DBLinqExtendedAttribute : Attribute
     {
-        public DBLinqExtendedAttribute()
-        {
-
-        }
+        public DBLinqExtendedAttribute() { }
     }
 }

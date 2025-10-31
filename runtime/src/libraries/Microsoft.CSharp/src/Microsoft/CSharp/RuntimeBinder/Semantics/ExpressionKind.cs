@@ -6,6 +6,7 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
     internal enum ExpressionKind
     {
         NoOp,
+
         // Now expressions. Keep BINOP first!
         BinaryOp,
         UnaryOp,
@@ -39,14 +40,15 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
             Ones below here are not used to create actual expr types, only EK_ values.
         ***************************************************************************************************/
         ExpressionKindCount,
-        EqualsParam,       // this is only used as a parameter, no actual exprs are constructed with it
+        EqualsParam, // this is only used as a parameter, no actual exprs are constructed with it
         FirstOp = EqualsParam,
-        Compare,      // this is only used as a parameter, no actual exprs are constructed with it
+        Compare, // this is only used as a parameter, no actual exprs are constructed with it
         True,
         False,
         Inc,
         Dec,
         LogicalNot,
+
         // keep Eq to GreaterThanOrEqual in the same sequence (ILGENREC::genCondBranch)
         Eq,
         RelationalMin = Eq,
@@ -56,6 +58,7 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
         GreaterThan,
         GreaterThanOrEqual,
         RelationalMax = GreaterThanOrEqual,
+
         // keep Add to RightShift in the same sequence (ILGENREC::genBinopExpr)
         Add,
         Subtract,
@@ -70,14 +73,16 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
         BitwiseNot,
         LeftShirt,
         RightShift,
+
         // keep Add to RightShift in the same sequence (ILGENREC::genBinopExpr)
         LogicalAnd,
         LogicalOr,
-        Sequence,     // p1 is side effects, p2 is values
-        Save,         // p1 is expr, p2 is wrap to be saved into...
+        Sequence, // p1 is side effects, p2 is values
+        Save, // p1 is expr, p2 is wrap to be saved into...
         Swap,
         Indir,
         Addr,
+
         // Next we have the predefined operator kinds. We have one EXPRKINDDEF for each of these.
         // So for example, we will have an EK_STRINGCOMPARISON, and an EK_DELEGATEADDITION etc.
         StringEq,
@@ -92,7 +97,8 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
 #if EERANGE
         EK_RANGE,
 #endif
-        MultiOffset,  // This has to be last!!! To deal /w multiops we add this to the op to obtain the ek in the op table
+        MultiOffset, // This has to be last!!! To deal /w multiops we add this to the op to obtain the ek in the op table
+
         // Statements are all before expressions and the first expression is EK_BINOP
         // EK types starting with EK_COUNT do not have associated EXPR structures,
         // and are all binary operators.

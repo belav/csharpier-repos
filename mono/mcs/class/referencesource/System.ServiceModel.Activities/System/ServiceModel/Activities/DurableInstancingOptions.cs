@@ -23,29 +23,21 @@ namespace System.ServiceModel.Activities
 
         public InstanceStore InstanceStore
         {
-            get
-            {
-                return this.instanceManager.InstanceStore;
-            }
-
-            set
-            {
-                this.instanceManager.InstanceStore = value;
-            }
+            get { return this.instanceManager.InstanceStore; }
+            set { this.instanceManager.InstanceStore = value; }
         }
 
-        internal XName ScopeName
-        {
-            set;
-            get;
-        }
+        internal XName ScopeName { set; get; }
 
         void IDurableInstancingOptions.SetScopeName(XName scopeName)
         {
             this.ScopeName = scopeName;
         }
 
-        public void AddInstanceOwnerValues(IDictionary<XName, object> readWriteValues, IDictionary<XName, object> writeOnlyValues)
+        public void AddInstanceOwnerValues(
+            IDictionary<XName, object> readWriteValues,
+            IDictionary<XName, object> writeOnlyValues
+        )
         {
             this.instanceManager.AddInstanceOwnerValues(readWriteValues, writeOnlyValues);
         }

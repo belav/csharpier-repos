@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -29,50 +29,56 @@
 using System.Collections;
 using System.Security.Permissions;
 
-namespace System.Web.UI.WebControls {
+namespace System.Web.UI.WebControls
+{
+    // CAS - no InheritanceDemand here as the class is sealed
+    [AspNetHostingPermission(
+        SecurityAction.LinkDemand,
+        Level = AspNetHostingPermissionLevel.Minimal
+    )]
+    public sealed class DataListItemCollection : ICollection, IEnumerable
+    {
+        ArrayList list;
 
-	// CAS - no InheritanceDemand here as the class is sealed
-	[AspNetHostingPermission (SecurityAction.LinkDemand, Level = AspNetHostingPermissionLevel.Minimal)]
-	public sealed class DataListItemCollection : ICollection, IEnumerable 
-	{
-		ArrayList list;
+        public DataListItemCollection(ArrayList items)
+        {
+            list = items;
+        }
 
-		public DataListItemCollection (ArrayList items)
-		{
-			list = items;
-		}
+        public int Count
+        {
+            get { return list.Count; }
+        }
 
+        // note: LAME as there is no way to add/remove or change any value using this class
+        public bool IsReadOnly
+        {
+            get { return false; } // always (as documented)
+        }
 
-		public int Count {
-			get { return list.Count; }
-		}
+        public bool IsSynchronized
+        {
+            get { return false; } // always (as documented)
+        }
 
-		// note: LAME as there is no way to add/remove or change any value using this class
-		public bool IsReadOnly {
-			get { return false; }	// always (as documented)
-		}
+        public DataListItem this[int index]
+        {
+            get { return (DataListItem)list[index]; }
+        }
 
-		public bool IsSynchronized {
-			get { return false; }	// always (as documented)
-		}
+        public object SyncRoot
+        {
+            get { return this; } // always (as documented)
+        }
 
-		public DataListItem this [int index] {
-			get { return (DataListItem) list [index]; }
-		}
+        public void CopyTo(Array array, int index)
+        {
+            list.CopyTo(array, index);
+        }
 
-		public object SyncRoot {
-			get { return this; }	// always (as documented)
-		}
-
-
-		public void CopyTo (Array array, int index)
-		{
-			list.CopyTo (array, index);
-		}
-
-		public IEnumerator GetEnumerator ()
-		{
-			return list.GetEnumerator ();
-		}
-	}
+        public IEnumerator GetEnumerator()
+        {
+            return list.GetEnumerator();
+        }
+    }
 }

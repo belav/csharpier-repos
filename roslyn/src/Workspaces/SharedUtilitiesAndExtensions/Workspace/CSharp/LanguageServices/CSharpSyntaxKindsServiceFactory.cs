@@ -17,12 +17,10 @@ namespace Microsoft.CodeAnalysis.CSharp.LanguageService
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public CSharpSyntaxKindsServiceFactory()
-        {
-        }
+        public CSharpSyntaxKindsServiceFactory() { }
 
-        public ILanguageService CreateLanguageService(HostLanguageServices languageServices)
-            => CSharpSyntaxKindsService.Instance;
+        public ILanguageService CreateLanguageService(HostLanguageServices languageServices) =>
+            CSharpSyntaxKindsService.Instance;
 
         private sealed class CSharpSyntaxKindsService : CSharpSyntaxKinds, ISyntaxKindsService
         {

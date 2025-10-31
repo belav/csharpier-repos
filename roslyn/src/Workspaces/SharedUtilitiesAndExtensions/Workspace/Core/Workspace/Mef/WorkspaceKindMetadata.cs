@@ -15,11 +15,11 @@ namespace Microsoft.CodeAnalysis.Host.Mef
     {
         public IReadOnlyCollection<string>? WorkspaceKinds { get; }
 
-        public WorkspaceKindMetadata(IDictionary<string, object> data)
-            => this.WorkspaceKinds = (string[]?)data.GetValueOrDefault(nameof(WorkspaceKinds));
+        public WorkspaceKindMetadata(IDictionary<string, object> data) =>
+            this.WorkspaceKinds = (string[]?)data.GetValueOrDefault(nameof(WorkspaceKinds));
 
-        public WorkspaceKindMetadata(params string[] workspaceKinds)
-            => this.WorkspaceKinds = workspaceKinds;
+        public WorkspaceKindMetadata(params string[] workspaceKinds) =>
+            this.WorkspaceKinds = workspaceKinds;
 
         public override bool Equals(object? obj)
         {

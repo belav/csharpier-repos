@@ -28,300 +28,333 @@
 //
 
 using System;
-using System.Reflection;
 using System.Linq;
 using System.Linq.Expressions;
+using System.Reflection;
 using NUnit.Framework;
 
 namespace MonoTests.System.Linq.Expressions
 {
-	public class OpClass
-	{
-		public static OpClass operator + (OpClass a, OpClass b)
-		{
-			return a;
-		}
+    public class OpClass
+    {
+        public static OpClass operator +(OpClass a, OpClass b)
+        {
+            return a;
+        }
 
-		public static OpClass operator - (OpClass a, OpClass b)
-		{
-			return a;
-		}
+        public static OpClass operator -(OpClass a, OpClass b)
+        {
+            return a;
+        }
 
-		public static OpClass operator * (OpClass a, OpClass b)
-		{
-			return a;
-		}
+        public static OpClass operator *(OpClass a, OpClass b)
+        {
+            return a;
+        }
 
-		public static OpClass operator / (OpClass a, OpClass b)
-		{
-			return a;
-		}
+        public static OpClass operator /(OpClass a, OpClass b)
+        {
+            return a;
+        }
 
-		public static OpClass operator % (OpClass a, OpClass b)
-		{
-			return a;
-		}
+        public static OpClass operator %(OpClass a, OpClass b)
+        {
+            return a;
+        }
 
-		public static OpClass operator & (OpClass a, OpClass b)
-		{
-			return a;
-		}
+        public static OpClass operator &(OpClass a, OpClass b)
+        {
+            return a;
+        }
 
-		public static OpClass operator | (OpClass a, OpClass b)
-		{
-			return a;
-		}
+        public static OpClass operator |(OpClass a, OpClass b)
+        {
+            return a;
+        }
 
-		public static OpClass operator ^ (OpClass a, OpClass b)
-		{
-			return a;
-		}
+        public static OpClass operator ^(OpClass a, OpClass b)
+        {
+            return a;
+        }
 
-		public static OpClass operator >> (OpClass a, int b)
-		{
-			return a;
-		}
+        public static OpClass operator >>(OpClass a, int b)
+        {
+            return a;
+        }
 
-		public static OpClass operator << (OpClass a, int b)
-		{
-			return a;
-		}
+        public static OpClass operator <<(OpClass a, int b)
+        {
+            return a;
+        }
 
-		public static bool operator true (OpClass a)
-		{
-			return false;
-		}
+        public static bool operator true(OpClass a)
+        {
+            return false;
+        }
 
-		public static bool operator false (OpClass a)
-		{
-			return false;
-		}
+        public static bool operator false(OpClass a)
+        {
+            return false;
+        }
 
-		public static bool operator > (OpClass a, OpClass b)
-		{
-			return false;
-		}
+        public static bool operator >(OpClass a, OpClass b)
+        {
+            return false;
+        }
 
-		public static bool operator < (OpClass a, OpClass b)
-		{
-			return false;
-		}
+        public static bool operator <(OpClass a, OpClass b)
+        {
+            return false;
+        }
 
-		public static bool operator >= (OpClass a, OpClass b)
-		{
-			return false;
-		}
+        public static bool operator >=(OpClass a, OpClass b)
+        {
+            return false;
+        }
 
-		public static bool operator <= (OpClass a, OpClass b)
-		{
-			return false;
-		}
+        public static bool operator <=(OpClass a, OpClass b)
+        {
+            return false;
+        }
 
-		public static OpClass operator + (OpClass a)
-		{
-			return a;
-		}
+        public static OpClass operator +(OpClass a)
+        {
+            return a;
+        }
 
-		public static OpClass operator - (OpClass a)
-		{
-			return a;
-		}
+        public static OpClass operator -(OpClass a)
+        {
+            return a;
+        }
 
-		public static OpClass operator ! (OpClass a)
-		{
-			return a;
-		}
+        public static OpClass operator !(OpClass a)
+        {
+            return a;
+        }
 
-		public static OpClass operator ~ (OpClass a)
-		{
-			return a;
-		}
+        public static OpClass operator ~(OpClass a)
+        {
+            return a;
+        }
 
-		public static void WrongUnaryReturnVoid (OpClass a)
-		{
-		}
+        public static void WrongUnaryReturnVoid(OpClass a) { }
 
-		public static OpClass WrongUnaryParameterCount (OpClass a, OpClass b)
-		{
-			return a;
-		}
+        public static OpClass WrongUnaryParameterCount(OpClass a, OpClass b)
+        {
+            return a;
+        }
 
-		public OpClass WrongUnaryNotStatic (OpClass a)
-		{
-			return a;
-		}
+        public OpClass WrongUnaryNotStatic(OpClass a)
+        {
+            return a;
+        }
 
-		public static bool operator == (OpClass a, OpClass b)
-		{
-			return ((object) a) == ((object) b);
-		}
+        public static bool operator ==(OpClass a, OpClass b)
+        {
+            return ((object)a) == ((object)b);
+        }
 
-		public static bool operator != (OpClass a, OpClass b)
-		{
-			return ((object) a) != ((object) b);
-		}
+        public static bool operator !=(OpClass a, OpClass b)
+        {
+            return ((object)a) != ((object)b);
+        }
 
-		//
-		// Required when you have == or !=
-		//
-		public override bool Equals (object o)
-		{
-			return ((object)this) == o;
-		}
+        //
+        // Required when you have == or !=
+        //
+        public override bool Equals(object o)
+        {
+            return ((object)this) == o;
+        }
 
-		public override int GetHashCode ()
-		{
-			return 1;
-		}
-	}
+        public override int GetHashCode()
+        {
+            return 1;
+        }
+    }
 
-	public class NoOpClass
-	{
-		// No user-defined operators here (we use this class to test for exceptions.)
-	}
+    public class NoOpClass
+    {
+        // No user-defined operators here (we use this class to test for exceptions.)
+    }
 
-	public class MemberClass
-	{
-		public int TestField1 = 0;
-		public readonly int TestField2 = 1;
-		public int TestProperty1 { get { return TestField1; }}
-		public int TestProperty2 { get { return TestField1; } set { TestField1 = value; }}
-		public int TestMethod (int i) { return TestField1 + i; }
-		public T TestGenericMethod<T> (T arg) { return arg; }
+    public class MemberClass
+    {
+        public int TestField1 = 0;
+        public readonly int TestField2 = 1;
+        public int TestProperty1
+        {
+            get { return TestField1; }
+        }
+        public int TestProperty2
+        {
+            get { return TestField1; }
+            set { TestField1 = value; }
+        }
 
-		public delegate int TestDelegate(int i);
-		public event TestDelegate TestEvent;
+        public int TestMethod(int i)
+        {
+            return TestField1 + i;
+        }
 
-		public void DoNothing ()
-		{
-			// Just to avoid a compiler warning
-			if (TestEvent != null)
-				return;
-		}
+        public T TestGenericMethod<T>(T arg)
+        {
+            return arg;
+        }
 
-		public static int StaticField = 0;
-		public static int StaticProperty { get { return StaticField; } set { StaticField = value; }}
-		public static int StaticMethod (int i) { return 1 + i; }
-		public static T StaticGenericMethod<T> (T arg) { return arg; }
+        public delegate int TestDelegate(int i);
+        public event TestDelegate TestEvent;
 
-		public static MethodInfo GetMethodInfo ()
-		{
-			return typeof (MemberClass).GetMethod ("TestMethod");
-		}
+        public void DoNothing()
+        {
+            // Just to avoid a compiler warning
+            if (TestEvent != null)
+                return;
+        }
 
-		public static FieldInfo GetRoFieldInfo ()
-		{
-			return typeof (MemberClass).GetField ("TestField1");
-		}
+        public static int StaticField = 0;
+        public static int StaticProperty
+        {
+            get { return StaticField; }
+            set { StaticField = value; }
+        }
 
-		public static FieldInfo GetRwFieldInfo ()
-		{
-			return typeof (MemberClass).GetField ("TestField2");
-		}
+        public static int StaticMethod(int i)
+        {
+            return 1 + i;
+        }
 
-		public static PropertyInfo GetRoPropertyInfo ()
-		{
-			return typeof (MemberClass).GetProperty ("TestProperty1");
-		}
+        public static T StaticGenericMethod<T>(T arg)
+        {
+            return arg;
+        }
 
-		public static PropertyInfo GetRwPropertyInfo ()
-		{
-			return typeof (MemberClass).GetProperty ("TestProperty2");
-		}
+        public static MethodInfo GetMethodInfo()
+        {
+            return typeof(MemberClass).GetMethod("TestMethod");
+        }
 
-		public static EventInfo GetEventInfo ()
-		{
-			return typeof (MemberClass).GetEvent ("TestEvent");
-		}
+        public static FieldInfo GetRoFieldInfo()
+        {
+            return typeof(MemberClass).GetField("TestField1");
+        }
 
-		public static FieldInfo GetStaticFieldInfo ()
-		{
-			return typeof (MemberClass).GetField ("StaticField");
-		}
+        public static FieldInfo GetRwFieldInfo()
+        {
+            return typeof(MemberClass).GetField("TestField2");
+        }
 
-		public static PropertyInfo GetStaticPropertyInfo ()
-		{
-			return typeof (MemberClass).GetProperty ("StaticProperty");
-		}
+        public static PropertyInfo GetRoPropertyInfo()
+        {
+            return typeof(MemberClass).GetProperty("TestProperty1");
+        }
 
-	}
+        public static PropertyInfo GetRwPropertyInfo()
+        {
+            return typeof(MemberClass).GetProperty("TestProperty2");
+        }
 
-	public struct OpStruct
-	{
-		public static OpStruct operator + (OpStruct a, OpStruct b)
-		{
-			return a;
-		}
+        public static EventInfo GetEventInfo()
+        {
+            return typeof(MemberClass).GetEvent("TestEvent");
+        }
 
-		public static OpStruct operator - (OpStruct a, OpStruct b)
-		{
-			return a;
-		}
+        public static FieldInfo GetStaticFieldInfo()
+        {
+            return typeof(MemberClass).GetField("StaticField");
+        }
 
-		public static OpStruct operator * (OpStruct a, OpStruct b)
-		{
-			return a;
-		}
+        public static PropertyInfo GetStaticPropertyInfo()
+        {
+            return typeof(MemberClass).GetProperty("StaticProperty");
+        }
+    }
 
-		public static OpStruct operator & (OpStruct a, OpStruct b)
-		{
-			return a;
-		}
-	}
+    public struct OpStruct
+    {
+        public static OpStruct operator +(OpStruct a, OpStruct b)
+        {
+            return a;
+        }
 
-	static class ExpressionExtensions {
+        public static OpStruct operator -(OpStruct a, OpStruct b)
+        {
+            return a;
+        }
 
-		public static ConstantExpression ToConstant<T> (this T t)
-		{
-			return Expression.Constant (t);
-		}
+        public static OpStruct operator *(OpStruct a, OpStruct b)
+        {
+            return a;
+        }
 
-		public static void AssertThrows (this Action action, Type type)
-		{
-			try {
-				action ();
-				Assert.Fail ();
-			} catch (Exception e) {
-				if (e.GetType () != type)
-					Assert.Fail ();
-			}
-		}
-	}
+        public static OpStruct operator &(OpStruct a, OpStruct b)
+        {
+            return a;
+        }
+    }
 
-	class Item<T> {
+    static class ExpressionExtensions
+    {
+        public static ConstantExpression ToConstant<T>(this T t)
+        {
+            return Expression.Constant(t);
+        }
 
-		bool left_called;
-		T left;
+        public static void AssertThrows(this Action action, Type type)
+        {
+            try
+            {
+                action();
+                Assert.Fail();
+            }
+            catch (Exception e)
+            {
+                if (e.GetType() != type)
+                    Assert.Fail();
+            }
+        }
+    }
 
-		public T Left {
-			get {
-				left_called = true;
-				return left;
-			}
-		}
+    class Item<T>
+    {
+        bool left_called;
+        T left;
 
-		public bool LeftCalled {
-			get { return left_called; }
-		}
+        public T Left
+        {
+            get
+            {
+                left_called = true;
+                return left;
+            }
+        }
 
-		bool right_called;
-		T right;
+        public bool LeftCalled
+        {
+            get { return left_called; }
+        }
 
-		public T Right {
-			get {
-				right_called = true;
-				return right;
-			}
-		}
+        bool right_called;
+        T right;
 
-		public bool RightCalled {
-			get { return right_called; }
-		}
+        public T Right
+        {
+            get
+            {
+                right_called = true;
+                return right;
+            }
+        }
 
-		public Item (T left, T right)
-		{
-			this.left = left;
-			this.right = right;
-		}
-	}
+        public bool RightCalled
+        {
+            get { return right_called; }
+        }
+
+        public Item(T left, T right)
+        {
+            this.left = left;
+            this.right = right;
+        }
+    }
 }

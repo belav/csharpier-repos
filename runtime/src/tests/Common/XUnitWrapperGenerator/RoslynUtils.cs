@@ -28,9 +28,11 @@ namespace XUnitWrapperGenerator
         ///   with the auto-generated main, and (2) in libs, they will generate an error for existing
         ///   at all.
         /// </remarks>
-        internal static IEnumerable<IMethodSymbol> GetPossibleEntryPoints(Compilation comp, CancellationToken cancellationToken)
-            => comp
-                .GetSymbolsWithName(WellKnownMemberNames.EntryPointMethodName, SymbolFilter.Member)
+        internal static IEnumerable<IMethodSymbol> GetPossibleEntryPoints(
+            Compilation comp,
+            CancellationToken cancellationToken
+        ) =>
+            comp.GetSymbolsWithName(WellKnownMemberNames.EntryPointMethodName, SymbolFilter.Member)
                 .OfType<IMethodSymbol>()
                 .Where(m => m.IsStatic && !m.IsAbstract && !m.IsVirtual);
     }

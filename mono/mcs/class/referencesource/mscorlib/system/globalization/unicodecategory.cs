@@ -1,23 +1,23 @@
 // ==++==
-// 
+//
 //   Copyright (c) Microsoft Corporation.  All rights reserved.
-// 
+//
 // ==--==
 /*============================================================
 **
 ** Class: UnicodeCategory
 **
 **
-** Purpose: 
+** Purpose:
 **
 **
 ============================================================*/
-namespace System.Globalization {
-
+namespace System.Globalization
+{
     [Serializable]
-[System.Runtime.InteropServices.ComVisible(true)]
-    public enum UnicodeCategory {
-
+    [System.Runtime.InteropServices.ComVisible(true)]
+    public enum UnicodeCategory
+    {
         UppercaseLetter = 0,
 
         LowercaseLetter = 1,

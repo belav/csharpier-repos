@@ -18,11 +18,13 @@ namespace AppHost.Bundle.Tests
                 app.PopulateSelfContained(TestApp.MockedComponent.None);
                 app.CreateSingleFileHost();
 
-                Command.Create(app.AppExe)
+                Command
+                    .Create(app.AppExe)
                     .CaptureStdErr()
                     .CaptureStdOut()
                     .Execute()
-                    .Should().Pass()
+                    .Should()
+                    .Pass()
                     .And.HaveStdOutContaining("Hello World");
             }
         }

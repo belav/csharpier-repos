@@ -18,10 +18,15 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.MetadataAsSource
         [Trait(Traits.Feature, Traits.Features.MetadataAsSource)]
         public class VisualBasic : AbstractMetadataAsSourceTests
         {
-            [Theory, CombinatorialData, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/530123")]
+            [
+                Theory,
+                CombinatorialData,
+                WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/530123")
+            ]
             public async Task TestGenerateTypeInModule(bool signaturesOnly)
             {
-                var metadataSource = @"
+                var metadataSource =
+                    @"
 Module M
     Public Class D
     End Class
@@ -29,7 +34,8 @@ End Module";
 
                 var expected = signaturesOnly switch
                 {
-                    true => $@"#Region ""{FeaturesResources.Assembly} ReferencedAssembly, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null""
+                    true =>
+                        $@"#Region ""{FeaturesResources.Assembly} ReferencedAssembly, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null""
 ' {CodeAnalysisResources.InMemoryAssembly}
 #End Region
 
@@ -38,7 +44,8 @@ Friend Module M
         Public Sub New()
     End Class
 End Module",
-                    false => $@"#region {FeaturesResources.Assembly} ReferencedAssembly, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+                    false =>
+                        $@"#region {FeaturesResources.Assembly} ReferencedAssembly, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
 // {FeaturesResources.location_unknown}
 // Decompiled with ICSharpCode.Decompiler {ICSharpCodeDecompilerVersion}
 #endregion
@@ -65,20 +72,28 @@ internal sealed class M
 #endif",
                 };
 
-                await GenerateAndVerifySourceAsync(metadataSource, "M+D", LanguageNames.VisualBasic, expected, signaturesOnly: signaturesOnly);
+                await GenerateAndVerifySourceAsync(
+                    metadataSource,
+                    "M+D",
+                    LanguageNames.VisualBasic,
+                    expected,
+                    signaturesOnly: signaturesOnly
+                );
             }
 
             [Theory, CombinatorialData, WorkItem("https://github.com/dotnet/roslyn/issues/60253")]
             public async Task TestReferenceAssembly(bool signaturesOnly)
             {
-                var metadataSource = @"
+                var metadataSource =
+                    @"
 <Assembly: System.Runtime.CompilerServices.ReferenceAssembly>
 Module M
     Public Class D
     End Class
 End Module";
 
-                var expected = $@"#Region ""{FeaturesResources.Assembly} ReferencedAssembly, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null""
+                var expected =
+                    $@"#Region ""{FeaturesResources.Assembly} ReferencedAssembly, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null""
 ' {CodeAnalysisResources.InMemoryAssembly}
 #End Region
 
@@ -88,10 +103,16 @@ Friend Module M
     End Class
 End Module";
 
-                await GenerateAndVerifySourceAsync(metadataSource, "M+D", LanguageNames.VisualBasic, expected, signaturesOnly: signaturesOnly);
+                await GenerateAndVerifySourceAsync(
+                    metadataSource,
+                    "M+D",
+                    LanguageNames.VisualBasic,
+                    expected,
+                    signaturesOnly: signaturesOnly
+                );
             }
 
-            // This test depends on the version of mscorlib used by the TestWorkspace and may 
+            // This test depends on the version of mscorlib used by the TestWorkspace and may
             // change in the future
             [Theory, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/530526")]
             [InlineData(false, Skip = "https://github.com/dotnet/roslyn/issues/52415")]
@@ -100,7 +121,8 @@ End Module";
             {
                 var expected = signaturesOnly switch
                 {
-                    true => $@"#Region ""{FeaturesResources.Assembly} mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089""
+                    true =>
+                        $@"#Region ""{FeaturesResources.Assembly} mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089""
 ' mscorlib.v4_6_1038_0.dll
 #End Region
 
@@ -119,7 +141,8 @@ Namespace System
         Public ReadOnly Property IsError As Boolean
     End Class
 End Namespace",
-                    false => $@"#region {FeaturesResources.Assembly} mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089
+                    false =>
+                        $@"#region {FeaturesResources.Assembly} mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089
 // {FeaturesResources.location_unknown}
 // Decompiled with ICSharpCode.Decompiler {ICSharpCodeDecompilerVersion}
 #endregion
@@ -175,21 +198,30 @@ public sealed class [|ObsoleteAttribute|] : Attribute
                 };
 
                 using var context = TestContext.Create(LanguageNames.VisualBasic);
-                await context.GenerateAndVerifySourceAsync("System.ObsoleteAttribute", expected, signaturesOnly: signaturesOnly);
+                await context.GenerateAndVerifySourceAsync(
+                    "System.ObsoleteAttribute",
+                    expected,
+                    signaturesOnly: signaturesOnly
+                );
             }
 
             [Fact]
             public void ExtractXMLFromDocComment()
             {
-                var docCommentText = @"''' <summary>
+                var docCommentText =
+                    @"''' <summary>
 ''' I am the very model of a modern major general.
 ''' </summary>";
 
-                var expectedXMLFragment = @" <summary>
+                var expectedXMLFragment =
+                    @" <summary>
  I am the very model of a modern major general.
  </summary>";
 
-                var extractedXMLFragment = DocumentationCommentUtilities.ExtractXMLFragment(docCommentText, "'''");
+                var extractedXMLFragment = DocumentationCommentUtilities.ExtractXMLFragment(
+                    docCommentText,
+                    "'''"
+                );
 
                 Assert.Equal(expectedXMLFragment, extractedXMLFragment);
             }
@@ -201,7 +233,8 @@ public sealed class [|ObsoleteAttribute|] : Attribute
 
                 var expected = signaturesOnly switch
                 {
-                    true => $@"#Region ""{FeaturesResources.Assembly} System.ValueTuple, Version=4.0.1.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51""
+                    true =>
+                        $@"#Region ""{FeaturesResources.Assembly} System.ValueTuple, Version=4.0.1.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51""
 ' System.ValueTuple.dll
 #End Region
 
@@ -227,7 +260,8 @@ Namespace System
         Public Overrides Function ToString() As String
     End Structure
 End Namespace",
-                    false => $@"#region {FeaturesResources.Assembly} System.ValueTuple, Version=4.0.1.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51
+                    false =>
+                        $@"#region {FeaturesResources.Assembly} System.ValueTuple, Version=4.0.1.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51
 // {FeaturesResources.location_unknown}
 // Decompiled with ICSharpCode.Decompiler {ICSharpCodeDecompilerVersion}
 #endregion
@@ -428,7 +462,11 @@ public struct [|ValueTuple|] : IEquatable<ValueTuple>, IStructuralEquatable, ISt
 #endif",
                 };
 
-                await context.GenerateAndVerifySourceAsync("System.ValueTuple", expected, signaturesOnly: signaturesOnly);
+                await context.GenerateAndVerifySourceAsync(
+                    "System.ValueTuple",
+                    expected,
+                    signaturesOnly: signaturesOnly
+                );
             }
         }
     }

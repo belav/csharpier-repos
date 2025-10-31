@@ -6,12 +6,12 @@ namespace System.ServiceModel.Channels
     using System;
     using System.IO;
     using System.Net.Mime;
-    using System.Runtime.Serialization;
-    using System.Runtime.Diagnostics;
-    using System.ServiceModel.Diagnostics;
     using System.Runtime;
-    using System.Threading;
+    using System.Runtime.Diagnostics;
+    using System.Runtime.Serialization;
+    using System.ServiceModel.Diagnostics;
     using System.ServiceModel.Diagnostics.Application;
+    using System.Threading;
 
     public abstract class MessageEncoder
     {
@@ -23,7 +23,8 @@ namespace System.ServiceModel.Channels
 
         public abstract MessageVersion MessageVersion { get; }
 
-        public virtual T GetProperty<T>() where T : class
+        public virtual T GetProperty<T>()
+            where T : class
         {
             if (typeof(T) == typeof(FaultConverter))
             {
@@ -38,7 +39,11 @@ namespace System.ServiceModel.Channels
             return ReadMessage(stream, maxSizeOfHeaders, null);
         }
 
-        public abstract Message ReadMessage(Stream stream, int maxSizeOfHeaders, string contentType);
+        public abstract Message ReadMessage(
+            Stream stream,
+            int maxSizeOfHeaders,
+            string contentType
+        );
 
         public Message ReadMessage(ArraySegment<byte> buffer, BufferManager bufferManager)
         {
@@ -46,12 +51,22 @@ namespace System.ServiceModel.Channels
             return message;
         }
 
-        public abstract Message ReadMessage(ArraySegment<byte> buffer, BufferManager bufferManager, string contentType);
+        public abstract Message ReadMessage(
+            ArraySegment<byte> buffer,
+            BufferManager bufferManager,
+            string contentType
+        );
 
         // used for buffered streaming
-        internal ArraySegment<byte> BufferMessageStream(Stream stream, BufferManager bufferManager, int maxBufferSize)
+        internal ArraySegment<byte> BufferMessageStream(
+            Stream stream,
+            BufferManager bufferManager,
+            int maxBufferSize
+        )
         {
-            byte[] buffer = bufferManager.TakeBuffer(ConnectionOrientedTransportDefaults.ConnectionBufferSize);
+            byte[] buffer = bufferManager.TakeBuffer(
+                ConnectionOrientedTransportDefaults.ConnectionBufferSize
+            );
             int offset = 0;
             int currentBufferSize = Math.Min(buffer.Length, maxBufferSize);
 
@@ -69,7 +84,11 @@ namespace System.ServiceModel.Channels
                 {
                     if (currentBufferSize >= maxBufferSize)
                     {
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(MaxMessageSizeStream.CreateMaxReceivedMessageSizeExceededException(maxBufferSize));
+                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                            MaxMessageSizeStream.CreateMaxReceivedMessageSizeExceededException(
+                                maxBufferSize
+                            )
+                        );
                     }
 
                     currentBufferSize = Math.Min(currentBufferSize * 2, maxBufferSize);
@@ -84,9 +103,18 @@ namespace System.ServiceModel.Channels
         }
 
         // used for buffered streaming
-        internal virtual Message ReadMessage(Stream stream, BufferManager bufferManager, int maxBufferSize, string contentType)
+        internal virtual Message ReadMessage(
+            Stream stream,
+            BufferManager bufferManager,
+            int maxBufferSize,
+            string contentType
+        )
         {
-            return ReadMessage(BufferMessageStream(stream, bufferManager, maxBufferSize), bufferManager, contentType);
+            return ReadMessage(
+                BufferMessageStream(stream, bufferManager, maxBufferSize),
+                bufferManager,
+                contentType
+            );
         }
 
         public override string ToString()
@@ -96,7 +124,12 @@ namespace System.ServiceModel.Channels
 
         public abstract void WriteMessage(Message message, Stream stream);
 
-        public virtual IAsyncResult BeginWriteMessage(Message message, Stream stream, AsyncCallback callback, object state)
+        public virtual IAsyncResult BeginWriteMessage(
+            Message message,
+            Stream stream,
+            AsyncCallback callback,
+            object state
+        )
         {
             return new WriteMessageAsyncResult(message, stream, this, callback, state);
         }
@@ -106,31 +139,52 @@ namespace System.ServiceModel.Channels
             WriteMessageAsyncResult.End(result);
         }
 
-        public ArraySegment<byte> WriteMessage(Message message, int maxMessageSize, BufferManager bufferManager)
+        public ArraySegment<byte> WriteMessage(
+            Message message,
+            int maxMessageSize,
+            BufferManager bufferManager
+        )
         {
-            ArraySegment<byte> arraySegment = WriteMessage(message, maxMessageSize, bufferManager, 0);
+            ArraySegment<byte> arraySegment = WriteMessage(
+                message,
+                maxMessageSize,
+                bufferManager,
+                0
+            );
             return arraySegment;
         }
 
-        public abstract ArraySegment<byte> WriteMessage(Message message, int maxMessageSize,
-            BufferManager bufferManager, int messageOffset);
+        public abstract ArraySegment<byte> WriteMessage(
+            Message message,
+            int maxMessageSize,
+            BufferManager bufferManager,
+            int messageOffset
+        );
 
         public virtual bool IsContentTypeSupported(string contentType)
         {
             if (contentType == null)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentNullException("contentType"));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new ArgumentNullException("contentType")
+                );
 
             return IsContentTypeSupported(contentType, this.ContentType, this.MediaType);
         }
 
-        internal bool IsContentTypeSupported(string contentType, string supportedContentType, string supportedMediaType)
+        internal bool IsContentTypeSupported(
+            string contentType,
+            string supportedContentType,
+            string supportedMediaType
+        )
         {
             if (supportedContentType == contentType)
                 return true;
 
-            if (contentType.Length > supportedContentType.Length &&
-                contentType.StartsWith(supportedContentType, StringComparison.Ordinal) &&
-                contentType[supportedContentType.Length] == ';')
+            if (
+                contentType.Length > supportedContentType.Length
+                && contentType.StartsWith(supportedContentType, StringComparison.Ordinal)
+                && contentType[supportedContentType.Length] == ';'
+            )
                 return true;
 
             // now check case-insensitively
@@ -153,7 +207,11 @@ namespace System.ServiceModel.Channels
 
                     // Consume the [CRLF]?
                     int i = supportedContentType.Length;
-                    if (ch == '\r' && contentType.Length > supportedContentType.Length + 1 && contentType[i + 1] == '\n')
+                    if (
+                        ch == '\r'
+                        && contentType.Length > supportedContentType.Length + 1
+                        && contentType[i + 1] == '\n'
+                    )
                     {
                         i += 2;
                         ch = contentType[i];
@@ -182,7 +240,13 @@ namespace System.ServiceModel.Channels
             {
                 ContentType parsedContentType = new ContentType(contentType);
 
-                if (supportedMediaType.Length > 0 && !supportedMediaType.Equals(parsedContentType.MediaType, StringComparison.OrdinalIgnoreCase))
+                if (
+                    supportedMediaType.Length > 0
+                    && !supportedMediaType.Equals(
+                        parsedContentType.MediaType,
+                        StringComparison.OrdinalIgnoreCase
+                    )
+                )
                     return false;
 
                 if (!IsCharSetSupported(parsedContentType.CharSet))
@@ -207,8 +271,15 @@ namespace System.ServiceModel.Channels
             if (message.Version != MessageVersion)
             {
                 throw TraceUtility.ThrowHelperError(
-                    new ProtocolException(SR.GetString(SR.EncoderMessageVersionMismatch, message.Version, MessageVersion)),
-                    message);
+                    new ProtocolException(
+                        SR.GetString(
+                            SR.EncoderMessageVersionMismatch,
+                            message.Version,
+                            MessageVersion
+                        )
+                    ),
+                    message
+                );
             }
         }
 
@@ -228,7 +299,13 @@ namespace System.ServiceModel.Channels
             Message message;
             Stream stream;
 
-            public WriteMessageAsyncResult(Message message, Stream stream, MessageEncoder encoder, AsyncCallback callback, object state)
+            public WriteMessageAsyncResult(
+                Message message,
+                Stream stream,
+                MessageEncoder encoder,
+                AsyncCallback callback,
+                object state
+            )
                 : base(callback, state)
             {
                 Fx.Assert(encoder != null, "encoder should never be null");

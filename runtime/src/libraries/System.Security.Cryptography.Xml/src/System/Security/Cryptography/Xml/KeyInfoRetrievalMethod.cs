@@ -53,7 +53,10 @@ namespace System.Security.Cryptography.Xml
         internal override XmlElement GetXml(XmlDocument xmlDocument)
         {
             // Create the actual element
-            XmlElement retrievalMethodElement = xmlDocument.CreateElement("RetrievalMethod", SignedXml.XmlDsigNamespaceUrl);
+            XmlElement retrievalMethodElement = xmlDocument.CreateElement(
+                "RetrievalMethod",
+                SignedXml.XmlDsigNamespaceUrl
+            );
 
             if (!string.IsNullOrEmpty(_uri))
                 retrievalMethodElement.SetAttribute("URI", _uri);

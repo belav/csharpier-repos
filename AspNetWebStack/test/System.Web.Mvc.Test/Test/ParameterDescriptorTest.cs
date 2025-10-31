@@ -19,8 +19,13 @@ namespace System.Web.Mvc.Test
             ParameterBindingInfo bindingInfo = pd.BindingInfo;
 
             // Assert
-            Assert.IsType(typeof(ParameterDescriptor).GetNestedType("EmptyParameterBindingInfo", BindingFlags.NonPublic),
-                          bindingInfo);
+            Assert.IsType(
+                typeof(ParameterDescriptor).GetNestedType(
+                    "EmptyParameterBindingInfo",
+                    BindingFlags.NonPublic
+                ),
+                bindingInfo
+            );
         }
 
         [Fact]
@@ -43,7 +48,8 @@ namespace System.Web.Mvc.Test
             ParameterDescriptor pd = GetParameterDescriptor();
 
             // Act
-            ObsoleteAttribute[] attrs = (ObsoleteAttribute[])pd.GetCustomAttributes(typeof(ObsoleteAttribute), true);
+            ObsoleteAttribute[] attrs = (ObsoleteAttribute[])
+                pd.GetCustomAttributes(typeof(ObsoleteAttribute), true);
 
             // Assert
             Assert.Empty(attrs);
@@ -57,7 +63,16 @@ namespace System.Web.Mvc.Test
 
             // Act & assert
             Assert.ThrowsArgumentNull(
-                delegate { pd.GetCustomAttributes(null /* attributeType */, true); }, "attributeType");
+                delegate
+                {
+                    pd.GetCustomAttributes(
+                        null /* attributeType */
+                        ,
+                        true
+                    );
+                },
+                "attributeType"
+            );
         }
 
         [Fact]
@@ -65,12 +80,19 @@ namespace System.Web.Mvc.Test
         {
             // Arrange
             object[] expected = new object[0];
-            Mock<ParameterDescriptor> mockDescriptor = new Mock<ParameterDescriptor>() { CallBase = true };
-            mockDescriptor.Setup(d => d.GetCustomAttributes(typeof(object), true)).Returns(expected);
+            Mock<ParameterDescriptor> mockDescriptor = new Mock<ParameterDescriptor>()
+            {
+                CallBase = true,
+            };
+            mockDescriptor
+                .Setup(d => d.GetCustomAttributes(typeof(object), true))
+                .Returns(expected);
             ParameterDescriptor pd = mockDescriptor.Object;
 
             // Act
-            object[] returned = pd.GetCustomAttributes(true /* inherit */);
+            object[] returned = pd.GetCustomAttributes(
+                true /* inherit */
+            );
 
             // Assert
             Assert.Same(expected, returned);
@@ -97,7 +119,16 @@ namespace System.Web.Mvc.Test
 
             // Act & assert
             Assert.ThrowsArgumentNull(
-                delegate { pd.IsDefined(null /* attributeType */, true); }, "attributeType");
+                delegate
+                {
+                    pd.IsDefined(
+                        null /* attributeType */
+                        ,
+                        true
+                    );
+                },
+                "attributeType"
+            );
         }
 
         private static ParameterDescriptor GetParameterDescriptor()
@@ -107,7 +138,10 @@ namespace System.Web.Mvc.Test
 
         private static ParameterDescriptor GetParameterDescriptor(Type type, string name)
         {
-            Mock<ParameterDescriptor> mockDescriptor = new Mock<ParameterDescriptor>() { CallBase = true };
+            Mock<ParameterDescriptor> mockDescriptor = new Mock<ParameterDescriptor>()
+            {
+                CallBase = true,
+            };
             mockDescriptor.Setup(d => d.ParameterType).Returns(type);
             mockDescriptor.Setup(d => d.ParameterName).Returns(name);
             return mockDescriptor.Object;

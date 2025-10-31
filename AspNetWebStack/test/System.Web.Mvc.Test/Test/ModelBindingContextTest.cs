@@ -17,11 +17,14 @@ namespace System.Web.Mvc.Test
             ModelBindingContext originalBindingContext = new ModelBindingContext()
             {
                 FallbackToEmptyPrefix = true,
-                ModelMetadata = new EmptyModelMetadataProvider().GetMetadataForType(null, typeof(object)),
+                ModelMetadata = new EmptyModelMetadataProvider().GetMetadataForType(
+                    null,
+                    typeof(object)
+                ),
                 ModelName = "theName",
                 ModelState = new ModelStateDictionary(),
                 PropertyFilter = _ => false,
-                ValueProvider = new SimpleValueProvider()
+                ValueProvider = new SimpleValueProvider(),
             };
 
             // Act
@@ -81,7 +84,11 @@ namespace System.Web.Mvc.Test
             Predicate<string> propertyFilter = _ => true;
 
             // Act & assert
-            MemberHelper.TestPropertyWithDefaultInstance(bindingContext, "PropertyFilter", propertyFilter);
+            MemberHelper.TestPropertyWithDefaultInstance(
+                bindingContext,
+                "PropertyFilter",
+                propertyFilter
+            );
         }
 
         [Fact]
@@ -90,7 +97,10 @@ namespace System.Web.Mvc.Test
             // Act
             ModelBindingContext bindingContext = new ModelBindingContext
             {
-                ModelMetadata = ModelMetadataProviders.Current.GetMetadataForType(() => 42, typeof(int))
+                ModelMetadata = ModelMetadataProviders.Current.GetMetadataForType(
+                    () => 42,
+                    typeof(int)
+                ),
             };
 
             // Assert
@@ -107,7 +117,8 @@ namespace System.Web.Mvc.Test
             // Act & Assert
             Assert.Throws<InvalidOperationException>(
                 () => bindingContext.Model = "foo",
-                "This property setter is obsolete, because its value is derived from ModelMetadata.Model now.");
+                "This property setter is obsolete, because its value is derived from ModelMetadata.Model now."
+            );
         }
 
         [Fact]
@@ -119,7 +130,8 @@ namespace System.Web.Mvc.Test
             // Act & Assert
             Assert.Throws<InvalidOperationException>(
                 () => bindingContext.ModelType = typeof(string),
-                "This property setter is obsolete, because its value is derived from ModelMetadata.Model now.");
+                "This property setter is obsolete, because its value is derived from ModelMetadata.Model now."
+            );
         }
     }
 }

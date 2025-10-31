@@ -73,7 +73,10 @@ public interface IMutableElementType : IReadOnlyElementType, IMutableAnnotatable
     /// <param name="converterType">
     ///     A type that inherits from <see cref="ValueConverter" />, or <see langword="null" /> to remove any previously set converter.
     /// </param>
-    void SetValueConverter([DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicParameterlessConstructor)] Type? converterType);
+    void SetValueConverter(
+        [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicParameterlessConstructor)]
+            Type? converterType
+    );
 
     /// <summary>
     ///     Sets the type that the elements of the collection will be converted to before being sent to the database provider.
@@ -99,7 +102,10 @@ public interface IMutableElementType : IReadOnlyElementType, IMutableAnnotatable
     /// <param name="comparerType">
     ///     A type that inherits from <see cref="ValueComparer" />, or <see langword="null" /> to remove any previously set comparer.
     /// </param>
-    void SetValueComparer([DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicParameterlessConstructor)] Type? comparerType);
+    void SetValueComparer(
+        [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicParameterlessConstructor)]
+            Type? comparerType
+    );
 
     /// <summary>
     ///     Sets the type of <see cref="JsonValueReaderWriter{TValue}" /> to use for elements of the collection.
@@ -111,6 +117,5 @@ public interface IMutableElementType : IReadOnlyElementType, IMutableAnnotatable
     void SetJsonValueReaderWriterType(Type? readerWriterType);
 
     /// <inheritdoc />
-    bool IReadOnlyElementType.IsNullable
-        => IsNullable;
+    bool IReadOnlyElementType.IsNullable => IsNullable;
 }

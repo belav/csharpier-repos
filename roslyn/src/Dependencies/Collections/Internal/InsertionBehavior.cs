@@ -30,6 +30,6 @@ namespace Microsoft.CodeAnalysis.Collections.Internal
         /// <summary>
         /// Specifies that if an existing entry with the same key is encountered, an exception should be thrown.
         /// </summary>
-        ThrowOnExisting = 2
+        ThrowOnExisting = 2,
     }
 }

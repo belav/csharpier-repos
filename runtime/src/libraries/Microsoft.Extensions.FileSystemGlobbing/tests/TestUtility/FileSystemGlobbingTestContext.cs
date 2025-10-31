@@ -27,7 +27,8 @@ namespace Microsoft.Extensions.FileSystemGlobbing.Tests.TestUtility
                 parentDirectory: null,
                 fullName: _basePath,
                 name: ".",
-                paths: new string[0]);
+                paths: new string[0]
+            );
         }
 
         public FileSystemGlobbingTestContext Include(params string[] patterns)
@@ -57,7 +58,8 @@ namespace Microsoft.Extensions.FileSystemGlobbing.Tests.TestUtility
                 _directoryInfo.ParentDirectory,
                 _directoryInfo.FullName,
                 _directoryInfo.Name,
-                _directoryInfo.Paths.Concat(files.Select(file => _basePath + file)).ToArray());
+                _directoryInfo.Paths.Concat(files.Select(file => _basePath + file)).ToArray()
+            );
 
             return this;
         }
@@ -71,7 +73,10 @@ namespace Microsoft.Extensions.FileSystemGlobbing.Tests.TestUtility
 
         public FileSystemGlobbingTestContext AssertExact(params string[] files)
         {
-            Assert.Equal(files.OrderBy(file => file), Result.Files.OrderBy(file => file.Path).Select(file => file.Path));
+            Assert.Equal(
+                files.OrderBy(file => file),
+                Result.Files.OrderBy(file => file.Path).Select(file => file.Path)
+            );
 
             return this;
         }

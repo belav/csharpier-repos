@@ -5,10 +5,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -26,48 +26,49 @@
 
 // COMPLETE
 
-namespace System.Windows.Forms.RTF {
-
+namespace System.Windows.Forms.RTF
+{
 #if RTF_LIB
-	public
+    public
 #else
-	internal
+    internal
 #endif
-	enum Major {
-		// Group class
-		BeginGroup,
-		EndGroup,
+    enum Major
+    {
+        // Group class
+        BeginGroup,
+        EndGroup,
 
-		// Control
-		Version,
-		DefFont,
-		CharSet,
+        // Control
+        Version,
+        DefFont,
+        CharSet,
 
-		Destination,
-		FontFamily,
-		ColorName,
-		SpecialChar,
-		StyleAttr,
-		DocAttr,
-		SectAttr,
-		TblAttr,
-		ParAttr,
-		CharAttr,
-		PictAttr,
-		BookmarkAttr,
-		NeXTGrAttr,
-		FieldAttr,
-		TOCAttr,
-		PosAttr,
-		ObjAttr,
-		FNoteAttr,
-		KeyCodeAttr,
-		ACharAttr,
-		FontAttr,
-		FileAttr,
-		FileSource,
-		DrawAttr,
-		IndexAttr,
-		Unicode		
-	}
+        Destination,
+        FontFamily,
+        ColorName,
+        SpecialChar,
+        StyleAttr,
+        DocAttr,
+        SectAttr,
+        TblAttr,
+        ParAttr,
+        CharAttr,
+        PictAttr,
+        BookmarkAttr,
+        NeXTGrAttr,
+        FieldAttr,
+        TOCAttr,
+        PosAttr,
+        ObjAttr,
+        FNoteAttr,
+        KeyCodeAttr,
+        ACharAttr,
+        FontAttr,
+        FileAttr,
+        FileSource,
+        DrawAttr,
+        IndexAttr,
+        Unicode,
+    }
 }

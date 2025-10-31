@@ -5,18 +5,17 @@ namespace System.IdentityModel.Selectors
 {
     using System;
     using System.ComponentModel;
+    using System.IdentityModel.Tokens;
+    using System.Runtime.CompilerServices;
+    using System.Runtime.ConstrainedExecution;
     using System.Runtime.InteropServices;
     using System.Security.Cryptography;
     using System.Security.Cryptography.Xml;
-    using System.IdentityModel.Tokens;
-    using System.Runtime.ConstrainedExecution;
-    using System.Runtime.CompilerServices;
-    using IDT = Microsoft.InfoCards.Diagnostics.InfoCardTrace;
-
     //
     // For common & resources
     //
     using Microsoft.InfoCards;
+    using IDT = Microsoft.InfoCards.Diagnostics.InfoCardTrace;
 
     //
     // Summary:
@@ -99,11 +98,13 @@ namespace System.IdentityModel.Selectors
 
         // ISymmetricCrypto
 
-        public override byte[] GenerateDerivedKey(string algorithmUri,
-                                          byte[] label,
-                                          byte[] nonce,
-                                          int derivedKeyLength,
-                                          int offset)
+        public override byte[] GenerateDerivedKey(
+            string algorithmUri,
+            byte[] label,
+            byte[] nonce,
+            int derivedKeyLength,
+            int offset
+        )
         {
             IDT.DebugAssert(!String.IsNullOrEmpty(algorithmUri), "null alg uri");
             IDT.DebugAssert(null != label && 0 != label.Length, "null label");
@@ -111,30 +112,37 @@ namespace System.IdentityModel.Selectors
 
             if (!IsSupportedAlgorithm(algorithmUri))
             {
-                throw IDT.ThrowHelperError(new NotSupportedException(SR.GetString(SR.ClientUnsupportedCryptoAlgorithm, algorithmUri)));
+                throw IDT.ThrowHelperError(
+                    new NotSupportedException(
+                        SR.GetString(SR.ClientUnsupportedCryptoAlgorithm, algorithmUri)
+                    )
+                );
             }
             byte[] derivedKey = null;
             using (HGlobalSafeHandle pLabel = HGlobalSafeHandle.Construct(label.Length))
             {
                 using (HGlobalSafeHandle pNonce = HGlobalSafeHandle.Construct(nonce.Length))
                 {
-
                     GlobalAllocSafeHandle pDerivedKey = null;
                     int cbDerivedKey = 0;
 
                     Marshal.Copy(label, 0, pLabel.DangerousGetHandle(), label.Length);
                     Marshal.Copy(nonce, 0, pNonce.DangerousGetHandle(), nonce.Length);
 
-                    int status = CardSpaceSelector.GetShim().m_csShimGenerateDerivedKey(m_cryptoHandle.InternalHandle,
-                                                                   label.Length,
-                                                                   pLabel,
-                                                                   nonce.Length,
-                                                                   pNonce,
-                                                                   derivedKeyLength,
-                                                                   offset,
-                                                                   algorithmUri,
-                                                                   out cbDerivedKey,
-                                                                   out pDerivedKey);
+                    int status = CardSpaceSelector
+                        .GetShim()
+                        .m_csShimGenerateDerivedKey(
+                            m_cryptoHandle.InternalHandle,
+                            label.Length,
+                            pLabel,
+                            nonce.Length,
+                            pNonce,
+                            derivedKeyLength,
+                            offset,
+                            algorithmUri,
+                            out cbDerivedKey,
+                            out pDerivedKey
+                        );
 
                     if (0 != status)
                     {
@@ -144,9 +152,13 @@ namespace System.IdentityModel.Selectors
                     derivedKey = new byte[pDerivedKey.Length];
                     using (pDerivedKey)
                     {
-                        Marshal.Copy(pDerivedKey.DangerousGetHandle(), derivedKey, 0, pDerivedKey.Length);
+                        Marshal.Copy(
+                            pDerivedKey.DangerousGetHandle(),
+                            derivedKey,
+                            0,
+                            pDerivedKey.Length
+                        );
                     }
-
                 }
             }
             return derivedKey;
@@ -168,14 +180,22 @@ namespace System.IdentityModel.Selectors
             switch (algorithmUri)
             {
                 case SecurityAlgorithms.Aes128Encryption:
-                    using (InfoCardSymmetricAlgorithm symAlgo = new InfoCardSymmetricAlgorithm(m_cryptoHandle))
+                    using (
+                        InfoCardSymmetricAlgorithm symAlgo = new InfoCardSymmetricAlgorithm(
+                            m_cryptoHandle
+                        )
+                    )
                     {
                         symAlgo.IV = iv;
                         transform = symAlgo.CreateDecryptor();
                     }
                     break;
                 default:
-                    throw IDT.ThrowHelperError(new NotSupportedException(SR.GetString(SR.ClientUnsupportedCryptoAlgorithm, algorithmUri)));
+                    throw IDT.ThrowHelperError(
+                        new NotSupportedException(
+                            SR.GetString(SR.ClientUnsupportedCryptoAlgorithm, algorithmUri)
+                        )
+                    );
             }
 
             return transform;
@@ -197,14 +217,22 @@ namespace System.IdentityModel.Selectors
             switch (algorithmUri)
             {
                 case SecurityAlgorithms.Aes128Encryption:
-                    using (InfoCardSymmetricAlgorithm symAlgo = new InfoCardSymmetricAlgorithm(m_cryptoHandle))
+                    using (
+                        InfoCardSymmetricAlgorithm symAlgo = new InfoCardSymmetricAlgorithm(
+                            m_cryptoHandle
+                        )
+                    )
                     {
                         symAlgo.IV = iv;
                         transform = symAlgo.CreateEncryptor();
                     }
                     break;
                 default:
-                    throw IDT.ThrowHelperError(new NotSupportedException(SR.GetString(SR.ClientUnsupportedCryptoAlgorithm, algorithmUri)));
+                    throw IDT.ThrowHelperError(
+                        new NotSupportedException(
+                            SR.GetString(SR.ClientUnsupportedCryptoAlgorithm, algorithmUri)
+                        )
+                    );
             }
 
             return transform;
@@ -221,11 +249,16 @@ namespace System.IdentityModel.Selectors
             switch (algorithmUri)
             {
                 case SecurityAlgorithms.Aes128Encryption:
-                    RpcSymmetricCryptoParameters param = (RpcSymmetricCryptoParameters)m_cryptoHandle.Parameters;
+                    RpcSymmetricCryptoParameters param = (RpcSymmetricCryptoParameters)
+                        m_cryptoHandle.Parameters;
                     size = param.blockSize;
                     break;
                 default:
-                    throw IDT.ThrowHelperError(new NotSupportedException(SR.GetString(SR.ClientUnsupportedCryptoAlgorithm, algorithmUri)));
+                    throw IDT.ThrowHelperError(
+                        new NotSupportedException(
+                            SR.GetString(SR.ClientUnsupportedCryptoAlgorithm, algorithmUri)
+                        )
+                    );
             }
 
             return size;
@@ -242,7 +275,11 @@ namespace System.IdentityModel.Selectors
                 case SecurityAlgorithms.HmacSha1Signature:
                     return new InfoCardKeyedHashAlgorithm(m_cryptoHandle);
                 default:
-                    throw IDT.ThrowHelperError(new NotSupportedException(SR.GetString(SR.ClientUnsupportedCryptoAlgorithm, algorithmUri)));
+                    throw IDT.ThrowHelperError(
+                        new NotSupportedException(
+                            SR.GetString(SR.ClientUnsupportedCryptoAlgorithm, algorithmUri)
+                        )
+                    );
             }
         }
 
@@ -259,7 +296,11 @@ namespace System.IdentityModel.Selectors
                     algorithm = new InfoCardSymmetricAlgorithm(m_cryptoHandle);
                     break;
                 default:
-                    throw IDT.ThrowHelperError(new NotSupportedException(SR.GetString(SR.ClientUnsupportedCryptoAlgorithm, algorithmUri)));
+                    throw IDT.ThrowHelperError(
+                        new NotSupportedException(
+                            SR.GetString(SR.ClientUnsupportedCryptoAlgorithm, algorithmUri)
+                        )
+                    );
             }
 
             return algorithm;

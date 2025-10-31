@@ -20,10 +20,12 @@ namespace Microsoft.CodeAnalysis.Text
                 throw new ArgumentNullException(nameof(text));
             }
 
-            if (span.Start < 0
+            if (
+                span.Start < 0
                 || span.Start >= text.Length
                 || span.End < 0
-                || span.End > text.Length)
+                || span.End > text.Length
+            )
             {
                 throw new ArgumentOutOfRangeException(nameof(span));
             }
@@ -77,7 +79,12 @@ namespace Microsoft.CodeAnalysis.Text
             return new SubText(UnderlyingText, GetCompositeSpan(span.Start, span.Length));
         }
 
-        public override void CopyTo(int sourceIndex, char[] destination, int destinationIndex, int count)
+        public override void CopyTo(
+            int sourceIndex,
+            char[] destination,
+            int destinationIndex,
+            int count
+        )
         {
             var span = GetCompositeSpan(sourceIndex, count);
             UnderlyingText.CopyTo(span.Start, destination, destinationIndex, span.Length);

@@ -10,7 +10,8 @@
 /* it needs investigation.
 /********************************************************************/
 
-namespace DefaultNamespace {
+namespace DefaultNamespace
+{
     using System;
 
     internal class GetGeneration
@@ -19,39 +20,35 @@ namespace DefaultNamespace {
         {
             Console.Out.WriteLine("Test should return with ExitCode 100 ...");
             Object o = new int[10];
-            WeakReference wf = new WeakReference( o );
+            WeakReference wf = new WeakReference(o);
             bool result = false;
 
             try
             {
-
-                result = ( GC.GetGeneration( o ) == GC.GetGeneration( wf ));
+                result = (GC.GetGeneration(o) == GC.GetGeneration(wf));
 
                 GC.KeepAlive(o);
-
             }
             catch (ArgumentNullException)
             {
-                Console.Out.WriteLine( "Caught ArgumentNullException!" );
+                Console.Out.WriteLine("Caught ArgumentNullException!");
                 result = false;
             }
             catch (Exception e)
             {
-                Console.Out.WriteLine( "Caught unexpected exception!" );
+                Console.Out.WriteLine("Caught unexpected exception!");
                 Console.Out.WriteLine(e.Message);
                 result = false;
             }
 
-
             if (result)
             {
-                Console.Out.WriteLine( "Test Passed" );
+                Console.Out.WriteLine("Test Passed");
                 return 100;
             }
-            Console.Out.WriteLine( "Test Failed" );
+            Console.Out.WriteLine("Test Failed");
 
             return 1;
-
         }
     }
 }

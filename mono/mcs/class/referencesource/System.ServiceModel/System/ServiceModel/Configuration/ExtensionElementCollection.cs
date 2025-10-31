@@ -7,13 +7,15 @@ namespace System.ServiceModel.Configuration
     using System;
     using System.Configuration;
 
-    [ConfigurationCollection(typeof(ExtensionElement), CollectionType = ConfigurationElementCollectionType.BasicMap)]
-    public class ExtensionElementCollection : ServiceModelConfigurationElementCollection<ExtensionElement>
+    [ConfigurationCollection(
+        typeof(ExtensionElement),
+        CollectionType = ConfigurationElementCollectionType.BasicMap
+    )]
+    public class ExtensionElementCollection
+        : ServiceModelConfigurationElementCollection<ExtensionElement>
     {
         public ExtensionElementCollection()
-            : base(ConfigurationElementCollectionType.BasicMap, ConfigurationStrings.Add)
-        {
-        }
+            : base(ConfigurationElementCollectionType.BasicMap, ConfigurationStrings.Add) { }
 
         protected override void BaseAdd(ConfigurationElement element)
         {
@@ -58,8 +60,10 @@ namespace System.ServiceModel.Configuration
                 {
                     // Is oldElement present in the different level of original config
                     // and name/type matching
-                    if (!oldElement.ElementInformation.IsPresent &&
-                        element.Type.Equals(oldElement.Type, StringComparison.Ordinal))
+                    if (
+                        !oldElement.ElementInformation.IsPresent
+                        && element.Type.Equals(oldElement.Type, StringComparison.Ordinal)
+                    )
                     {
                         return true;
                     }
@@ -75,8 +79,11 @@ namespace System.ServiceModel.Configuration
             {
                 if (element.Name.Equals(extension.Name, StringComparison.Ordinal))
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ConfigurationErrorsException(
-                        SR.GetString(SR.ConfigDuplicateExtensionName, element.Name)));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new ConfigurationErrorsException(
+                            SR.GetString(SR.ConfigDuplicateExtensionName, element.Name)
+                        )
+                    );
                 }
 
                 bool foundDuplicateType = false;
@@ -89,7 +96,10 @@ namespace System.ServiceModel.Configuration
                     // In order to avoid extra assemblies being loaded, we perform type comparison only if the type names
                     // are the same. See bug CSDMain 222573.
                     Type elementType = Type.GetType(element.Type, false);
-                    if (null != elementType && elementType.Equals(Type.GetType(extension.Type, false)))
+                    if (
+                        null != elementType
+                        && elementType.Equals(Type.GetType(extension.Type, false))
+                    )
                     {
                         foundDuplicateType = true;
                     }
@@ -97,18 +107,18 @@ namespace System.ServiceModel.Configuration
 
                 if (foundDuplicateType)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ConfigurationErrorsException(
-                        SR.GetString(SR.ConfigDuplicateExtensionType, element.Type)));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new ConfigurationErrorsException(
+                            SR.GetString(SR.ConfigDuplicateExtensionType, element.Type)
+                        )
+                    );
                 }
             }
         }
 
         protected override bool ThrowOnDuplicate
         {
-            get
-            {
-                return true;
-            }
+            get { return true; }
         }
     }
 }

@@ -3,7 +3,6 @@
 
 using System;
 using System.Diagnostics;
-
 using Internal.Cryptography;
 
 namespace System.Security.Cryptography.Pkcs
@@ -15,9 +14,7 @@ namespace System.Security.Cryptography.Pkcs
         //
 
         public ContentInfo(byte[] content)
-            : this(Oids.Pkcs7DataOid.CopyOid(), content)
-        {
-        }
+            : this(Oids.Pkcs7DataOid.CopyOid(), content) { }
 
         public ContentInfo(Oid contentType, byte[] content)
         {

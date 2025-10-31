@@ -27,16 +27,16 @@ namespace Roslyn.Test.Utilities
 
         public override string ToString()
         {
-            return "EXIT CODE: " +
-                   this.ExitCode +
-                   Environment.NewLine +
-                   "OUTPUT STREAM:" +
-                   Environment.NewLine +
-                   this.Output +
-                   Environment.NewLine +
-                   "ERRORS:" +
-                   Environment.NewLine +
-                   this.Errors;
+            return "EXIT CODE: "
+                + this.ExitCode
+                + Environment.NewLine
+                + "OUTPUT STREAM:"
+                + Environment.NewLine
+                + this.Output
+                + Environment.NewLine
+                + "ERRORS:"
+                + Environment.NewLine
+                + this.Errors;
         }
 
         public bool ContainsErrors

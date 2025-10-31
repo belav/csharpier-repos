@@ -9,13 +9,14 @@
 
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Collections.ObjectModel;
-using System.Text;
 using System.Data.Metadata.Edm;
 using System.Diagnostics;
+using System.Linq;
+using System.Text;
 
-namespace System.Data.Mapping {
+namespace System.Data.Mapping
+{
     /// <summary>
     /// Represents the metadata for mapping fragment.
     /// A set of mapping fragments makes up the Set mappings( EntitySet, AssociationSet or CompositionSet )
@@ -45,7 +46,7 @@ namespace System.Data.Mapping {
     ///               --ScalarProperyMap ( CMemberMetadata-->SMemberMetadata )
     ///               --DiscriminatorProperyMap ( constant value-->SMemberMetadata )
     ///           --ScalarPropertyMap ( CMemberMetadata-->SMemberMetadata )
-    ///     --AssociationSetMapping 
+    ///     --AssociationSetMapping
     ///       --AssociationTypeMapping
     ///         --MappingFragment
     ///           --EndPropertyMap
@@ -53,21 +54,33 @@ namespace System.Data.Mapping {
     ///             --ScalarProperyMap ( CMemberMetadata-->SMemberMetadata )
     ///           --EndPropertyMap
     ///             --ScalarPropertyMap ( CMemberMetadata-->SMemberMetadata )
-    /// This class represents the metadata for all the mapping fragment elements in the 
-    /// above example. Users can access all the top level constructs of 
+    /// This class represents the metadata for all the mapping fragment elements in the
+    /// above example. Users can access all the top level constructs of
     /// MappingFragment element like EntityKey map, Property Maps, Discriminator
     /// property through this mapping fragment class.
     /// </example>
-    internal class StorageMappingFragment {
+    internal class StorageMappingFragment
+    {
         #region Constructors
         /// <summary>
         /// Construct a new Mapping Fragment object
         /// </summary>
         /// <param name="tableExtent"></param>
         /// <param name="typeMapping"></param>
-        internal StorageMappingFragment(EntitySet tableExtent, StorageTypeMapping typeMapping, bool distinctFlag) {
-            Debug.Assert(tableExtent != null, "Table should not be null when constructing a Mapping Fragment");
-            Debug.Assert(typeMapping != null, "TypeMapping should not be null when constructing a Mapping Fragment");
+        internal StorageMappingFragment(
+            EntitySet tableExtent,
+            StorageTypeMapping typeMapping,
+            bool distinctFlag
+        )
+        {
+            Debug.Assert(
+                tableExtent != null,
+                "Table should not be null when constructing a Mapping Fragment"
+            );
+            Debug.Assert(
+                typeMapping != null,
+                "TypeMapping should not be null when constructing a Mapping Fragment"
+            );
             this.m_tableExtent = tableExtent;
             this.m_typeMapping = typeMapping;
             this.m_isSQueryDistinct = distinctFlag;
@@ -79,22 +92,30 @@ namespace System.Data.Mapping {
         /// Table extent from which the properties are mapped under this fragment.
         /// </summary>
         EntitySet m_tableExtent;
+
         /// <summary>
         /// Type mapping under which this mapping fragment exists.
         /// </summary>
         StorageTypeMapping m_typeMapping;
+
         /// <summary>
         /// Condition property mappings for this mapping fragment.
         /// </summary>
-        Dictionary<EdmProperty, StoragePropertyMapping> m_conditionProperties = new Dictionary<EdmProperty, StoragePropertyMapping>(EqualityComparer<EdmProperty>.Default);
+        Dictionary<EdmProperty, StoragePropertyMapping> m_conditionProperties = new Dictionary<
+            EdmProperty,
+            StoragePropertyMapping
+        >(EqualityComparer<EdmProperty>.Default);
+
         /// <summary>
         /// All the other properties .
         /// </summary>
         List<StoragePropertyMapping> m_properties = new List<StoragePropertyMapping>();
+
         /// <summary>
         /// Line Number for MappingFragment element start tag.
         /// </summary>
         int m_startLineNumber;
+
         /// <summary>
         /// Line position for MappingFragment element start tag.
         /// </summary>
@@ -106,10 +127,9 @@ namespace System.Data.Mapping {
         /// <summary>
         /// The table from which the properties are mapped in this fragment
         /// </summary>
-        internal EntitySet TableSet {
-            get {
-                return this.m_tableExtent;
-            }
+        internal EntitySet TableSet
+        {
+            get { return this.m_tableExtent; }
         }
 
         internal bool IsSQueryDistinct
@@ -138,34 +158,25 @@ namespace System.Data.Mapping {
         /// </summary>
         internal ReadOnlyCollection<StoragePropertyMapping> Properties
         {
-            get
-            {
-                return m_properties.AsReadOnly();
-            }
+            get { return m_properties.AsReadOnly(); }
         }
-        
+
         /// <summary>
         /// Line Number in MSL file where the Mapping Fragment Element's Start Tag is present.
         /// </summary>
-        internal int StartLineNumber {
-            get {
-                return m_startLineNumber;
-            }
-            set {
-                m_startLineNumber = value;
-            }
+        internal int StartLineNumber
+        {
+            get { return m_startLineNumber; }
+            set { m_startLineNumber = value; }
         }
 
         /// <summary>
         /// Line Position in MSL file where the Mapping Fragment Element's Start Tag is present.
         /// </summary>
-        internal int StartLinePosition {
-            get {
-                return m_startLinePosition;
-            }
-            set {
-                m_startLinePosition = value;
-            }
+        internal int StartLinePosition
+        {
+            get { return m_startLinePosition; }
+            set { m_startLinePosition = value; }
         }
 
         /// <summary>
@@ -173,11 +184,10 @@ namespace System.Data.Mapping {
         /// </summary>
         //This should not be stored on the Fragment. Probably it should go on schema.
         //But this requires some thinking before we can finally decide where it should go.
-        internal string SourceLocation {
-            get {
-                return this.m_typeMapping.SetMapping.EntityContainerMapping.SourceLocation;
-            }
-        }        
+        internal string SourceLocation
+        {
+            get { return this.m_typeMapping.SetMapping.EntityContainerMapping.SourceLocation; }
+        }
         #endregion
 
         #region Methods
@@ -195,11 +205,17 @@ namespace System.Data.Mapping {
         /// Condition Property Mapping specifies a Condition either on the C side property or S side property.
         /// </summary>
         /// <param name="conditionPropertyMap">The mapping that needs to be added</param>
-        internal void AddConditionProperty(StorageConditionPropertyMapping conditionPropertyMap, Action<EdmMember> duplicateMemberConditionError)
+        internal void AddConditionProperty(
+            StorageConditionPropertyMapping conditionPropertyMap,
+            Action<EdmMember> duplicateMemberConditionError
+        )
         {
-            //Same Member can not have more than one Condition with in the 
+            //Same Member can not have more than one Condition with in the
             //same Mapping Fragment.
-            EdmProperty conditionMember = (conditionPropertyMap.EdmProperty != null) ? conditionPropertyMap.EdmProperty : conditionPropertyMap.ColumnProperty;
+            EdmProperty conditionMember =
+                (conditionPropertyMap.EdmProperty != null)
+                    ? conditionPropertyMap.EdmProperty
+                    : conditionPropertyMap.ColumnProperty;
             Debug.Assert(conditionMember != null);
             if (!m_conditionProperties.ContainsKey(conditionMember))
             {
@@ -216,7 +232,8 @@ namespace System.Data.Mapping {
         /// Will be removed shortly.
         /// </summary>
         /// <param name="index"></param>
-        internal virtual void Print(int index) {
+        internal virtual void Print(int index)
+        {
             StorageEntityContainerMapping.GetPrettyPrintString(ref index);
             StringBuilder sb = new StringBuilder();
             sb.Append("MappingFragment");

@@ -1,7 +1,7 @@
 // ==++==
 //
 //   Copyright (c) Microsoft Corporation.  All rights reserved.
-// 
+//
 // ==--==
 // =+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+
 //
@@ -19,13 +19,12 @@ namespace System.Linq.Parallel
 {
     /// <summary>
     /// The operator type for Select statements. This operator transforms elements as it
-    /// enumerates them through the use of a selector delegate. 
+    /// enumerates them through the use of a selector delegate.
     /// </summary>
     /// <typeparam name="TInput"></typeparam>
     /// <typeparam name="TOutput"></typeparam>
     internal sealed class SelectQueryOperator<TInput, TOutput> : UnaryQueryOperator<TInput, TOutput>
     {
-
         // Selector function. Used to project elements to a transformed view during execution.
         private Func<TInput, TOutput> m_selector;
 
@@ -41,7 +40,7 @@ namespace System.Linq.Parallel
         //
 
         internal SelectQueryOperator(IEnumerable<TInput> child, Func<TInput, TOutput> selector)
-            :base(child)
+            : base(child)
         {
             Contract.Assert(child != null, "child data source cannot be null");
             Contract.Assert(selector != null, "need a selector function");
@@ -51,18 +50,27 @@ namespace System.Linq.Parallel
         }
 
         internal override void WrapPartitionedStream<TKey>(
-            PartitionedStream<TInput, TKey> inputStream, IPartitionedStreamRecipient<TOutput> recipient, bool preferStriping, QuerySettings settings)
+            PartitionedStream<TInput, TKey> inputStream,
+            IPartitionedStreamRecipient<TOutput> recipient,
+            bool preferStriping,
+            QuerySettings settings
+        )
         {
-            PartitionedStream<TOutput, TKey> outputStream =
-                new PartitionedStream<TOutput, TKey>(inputStream.PartitionCount, inputStream.KeyComparer, OrdinalIndexState);
+            PartitionedStream<TOutput, TKey> outputStream = new PartitionedStream<TOutput, TKey>(
+                inputStream.PartitionCount,
+                inputStream.KeyComparer,
+                OrdinalIndexState
+            );
             for (int i = 0; i < inputStream.PartitionCount; i++)
             {
-                outputStream[i] = new SelectQueryOperatorEnumerator<TKey>(inputStream[i], m_selector);
+                outputStream[i] = new SelectQueryOperatorEnumerator<TKey>(
+                    inputStream[i],
+                    m_selector
+                );
             }
 
             recipient.Receive(outputStream);
         }
-
 
         //---------------------------------------------------------------------------------------
         // Just opens the current operator, including opening the child and wrapping it with
@@ -72,7 +80,12 @@ namespace System.Linq.Parallel
         internal override QueryResults<TOutput> Open(QuerySettings settings, bool preferStriping)
         {
             QueryResults<TInput> childQueryResults = Child.Open(settings, preferStriping);
-            return SelectQueryOperatorResults.NewResults(childQueryResults, this, settings, preferStriping);
+            return SelectQueryOperatorResults.NewResults(
+                childQueryResults,
+                this,
+                settings,
+                preferStriping
+            );
         }
 
         internal override IEnumerable<TOutput> AsSequentialQuery(CancellationToken token)
@@ -96,15 +109,17 @@ namespace System.Linq.Parallel
 
         class SelectQueryOperatorEnumerator<TKey> : QueryOperatorEnumerator<TOutput, TKey>
         {
-
             private readonly QueryOperatorEnumerator<TInput, TKey> m_source; // The data source to enumerate.
-            private readonly Func<TInput, TOutput> m_selector;  // The actual select function.
+            private readonly Func<TInput, TOutput> m_selector; // The actual select function.
 
             //---------------------------------------------------------------------------------------
             // Instantiates a new select enumerator.
             //
 
-            internal SelectQueryOperatorEnumerator(QueryOperatorEnumerator<TInput, TKey> source, Func<TInput, TOutput> selector)
+            internal SelectQueryOperatorEnumerator(
+                QueryOperatorEnumerator<TInput, TKey> source,
+                Func<TInput, TOutput> selector
+            )
             {
                 Contract.Assert(source != null);
                 Contract.Assert(selector != null);
@@ -147,22 +162,38 @@ namespace System.Linq.Parallel
             private int m_childCount; // The number of elements in child results
 
             public static QueryResults<TOutput> NewResults(
-                QueryResults<TInput> childQueryResults, SelectQueryOperator<TInput, TOutput> op, 
-                QuerySettings settings, bool preferStriping)
+                QueryResults<TInput> childQueryResults,
+                SelectQueryOperator<TInput, TOutput> op,
+                QuerySettings settings,
+                bool preferStriping
+            )
             {
                 if (childQueryResults.IsIndexible)
                 {
-                    return new SelectQueryOperatorResults(childQueryResults, op, settings, preferStriping);
+                    return new SelectQueryOperatorResults(
+                        childQueryResults,
+                        op,
+                        settings,
+                        preferStriping
+                    );
                 }
                 else
                 {
-                    return new UnaryQueryOperatorResults(childQueryResults, op, settings, preferStriping);
+                    return new UnaryQueryOperatorResults(
+                        childQueryResults,
+                        op,
+                        settings,
+                        preferStriping
+                    );
                 }
             }
 
             private SelectQueryOperatorResults(
-                QueryResults<TInput> childQueryResults, SelectQueryOperator<TInput, TOutput> op,
-                QuerySettings settings, bool preferStriping)
+                QueryResults<TInput> childQueryResults,
+                SelectQueryOperator<TInput, TOutput> op,
+                QuerySettings settings,
+                bool preferStriping
+            )
                 : base(childQueryResults, op, settings, preferStriping)
             {
                 Contract.Assert(op.m_selector != null);

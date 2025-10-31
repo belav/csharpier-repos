@@ -1,7 +1,7 @@
 // ==++==
-// 
+//
 //   Copyright (c) Microsoft Corporation.  All rights reserved.
-// 
+//
 //
 // <OWNER>Microsoft</OWNER>
 //
@@ -16,23 +16,25 @@
 **
 =============================================================================*/
 
-namespace System {
+namespace System
+{
     using System;
-    using System.Runtime.InteropServices;
+    using System.Collections;
+    using System.Diagnostics;
+    using System.Diagnostics.Contracts;
+    using System.Globalization;
+    using System.IO;
+    using System.Reflection;
     using System.Runtime.CompilerServices;
+    using System.Runtime.InteropServices;
     using System.Runtime.Serialization;
     using System.Runtime.Versioning;
-    using System.Diagnostics;
+    using System.Security;
+    using System.Text;
 #if !MONO
     using System.Security.Permissions;
 #endif
-    using System.Security;
-    using System.IO;
-    using System.Text;
-    using System.Reflection;
-    using System.Collections;
-    using System.Globalization;
-    using System.Diagnostics.Contracts;
+
 #if NETCORE
     using __HResults = System.HResults;
 #endif
@@ -44,13 +46,13 @@ namespace System {
     [Serializable]
     [ComVisible(true)]
 #if MONO
-    [StructLayout (LayoutKind.Sequential)]
+    [StructLayout(LayoutKind.Sequential)]
 #endif
     public partial class Exception : ISerializable
 #if !MOBILE && !NETCORE
-        , _Exception
+            , _Exception
 #endif
-{
+    {
         private void Init()
         {
             _message = null;
@@ -59,7 +61,7 @@ namespace System {
             HResult = __HResults.COR_E_EXCEPTION;
 #if !MONO
             _xcode = _COMPlusExceptionCode;
-            _xptrs = (IntPtr) 0;
+            _xptrs = (IntPtr)0;
 
             // Initialize the WatsonBuckets to be null
             _watsonBuckets = null;
@@ -69,56 +71,59 @@ namespace System {
 #endif
 
 #if FEATURE_SERIALIZATION
-             _safeSerializationManager = new SafeSerializationManager();
+            _safeSerializationManager = new SafeSerializationManager();
 #endif // FEATURE_SERIALIZATION
         }
 
-        public Exception() {
+        public Exception()
+        {
             Init();
         }
-    
-        public Exception(String message) {
+
+        public Exception(String message)
+        {
             Init();
             _message = message;
         }
-    
-        // Creates a new Exception.  All derived classes should 
+
+        // Creates a new Exception.  All derived classes should
         // provide this constructor.
-        // Note: the stack trace is not started until the exception 
+        // Note: the stack trace is not started until the exception
         // is thrown
-        // 
-        public Exception (String message, Exception innerException) {
+        //
+        public Exception(String message, Exception innerException)
+        {
             Init();
             _message = message;
             _innerException = innerException;
         }
 
-        [System.Security.SecuritySafeCritical]  // auto-generated
-        protected Exception(SerializationInfo info, StreamingContext context) 
+        [System.Security.SecuritySafeCritical] // auto-generated
+        protected Exception(SerializationInfo info, StreamingContext context)
         {
-            if (info==null)
+            if (info == null)
                 throw new ArgumentNullException("info");
             Contract.EndContractBlock();
-    
+
             _className = info.GetString("ClassName");
             _message = info.GetString("Message");
-            _data = (IDictionary)(info.GetValueNoThrow("Data",typeof(IDictionary)));
-            _innerException = (Exception)(info.GetValue("InnerException",typeof(Exception)));
+            _data = (IDictionary)(info.GetValueNoThrow("Data", typeof(IDictionary)));
+            _innerException = (Exception)(info.GetValue("InnerException", typeof(Exception)));
             _helpURL = info.GetString("HelpURL");
             _stackTraceString = info.GetString("StackTraceString");
             _remoteStackTraceString = info.GetString("RemoteStackTraceString");
             _remoteStackIndex = info.GetInt32("RemoteStackIndex");
 
 #if !MONO
-            _exceptionMethodString = (String)(info.GetValue("ExceptionMethod",typeof(String)));
+            _exceptionMethodString = (String)(info.GetValue("ExceptionMethod", typeof(String)));
 #endif
             HResult = info.GetInt32("HResult");
             _source = info.GetString("Source");
-    
+
 #if !MONO
             // Get the WatsonBuckets that were serialized - this is particularly
             // done to support exceptions going across AD transitions.
-            // 
+            //
             // We use the no throw version since we could be deserializing a pre-V4
             // exception object that may not have this entry. In such a case, we would
             // get null.
@@ -126,22 +131,26 @@ namespace System {
 #endif
 
 #if FEATURE_SERIALIZATION
-            _safeSerializationManager = info.GetValueNoThrow("SafeSerializationManager", typeof(SafeSerializationManager)) as SafeSerializationManager;
+            _safeSerializationManager =
+                info.GetValueNoThrow("SafeSerializationManager", typeof(SafeSerializationManager))
+                as SafeSerializationManager;
 #endif // FEATURE_SERIALIZATION
 
-            if (_className == null || HResult==0)
-                throw new SerializationException(Environment.GetResourceString("Serialization_InsufficientState"));
-            
+            if (_className == null || HResult == 0)
+                throw new SerializationException(
+                    Environment.GetResourceString("Serialization_InsufficientState")
+                );
+
             // If we are constructing a new exception after a cross-appdomain call...
             if (context.State == StreamingContextStates.CrossAppDomain)
             {
-                // ...this new exception may get thrown.  It is logically a re-throw, but 
-                //  physically a brand-new exception.  Since the stack trace is cleared 
-                //  on a new exception, the "_remoteStackTraceString" is provided to 
+                // ...this new exception may get thrown.  It is logically a re-throw, but
+                //  physically a brand-new exception.  Since the stack trace is cleared
+                //  on a new exception, the "_remoteStackTraceString" is provided to
                 //  effectively import a stack trace from a "remote" exception.  So,
                 //  move the _stackTraceString into the _remoteStackTraceString.  Note
-                //  that if there is an existing _remoteStackTraceString, it will be 
-                //  preserved at the head of the new string, so everything works as 
+                //  that if there is an existing _remoteStackTraceString, it will be
+                //  preserved at the head of the new string, so everything works as
                 //  expected.
                 // Even if this exception is NOT thrown, things will still work as expected
                 //  because the StackTrace property returns the concatenation of the
@@ -150,25 +159,33 @@ namespace System {
                 _stackTraceString = null;
             }
         }
-        
-        public virtual String Message {
-               get {  
-                if (_message == null) {
-                    if (_className==null) {
+
+        public virtual String Message
+        {
+            get
+            {
+                if (_message == null)
+                {
+                    if (_className == null)
+                    {
                         _className = GetClassName();
                     }
                     return Environment.GetResourceString("Exception_WasThrown", _className);
-
-                } else {
+                }
+                else
+                {
                     return _message;
                 }
             }
         }
 
-        public virtual IDictionary Data { 
-            [System.Security.SecuritySafeCritical]  // auto-generated
-            get {
-                if (_data == null) {
+        public virtual IDictionary Data
+        {
+            [System.Security.SecuritySafeCritical] // auto-generated
+            get
+            {
+                if (_data == null)
+                {
 #if !MONO
                     if (IsImmutableAgileException(this))
                         _data = new EmptyReadOnlyDictionaryInternal();
@@ -182,9 +199,12 @@ namespace System {
         }
 
 #if MONO
-        private static bool IsImmutableAgileException(Exception e) { return false; }
+        private static bool IsImmutableAgileException(Exception e)
+        {
+            return false;
+        }
 #else
-        [System.Security.SecurityCritical]  // auto-generated
+        [System.Security.SecurityCritical] // auto-generated
         [ResourceExposure(ResourceScope.None)]
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
         private static extern bool IsImmutableAgileException(Exception e);
@@ -193,8 +213,8 @@ namespace System {
 #if FEATURE_COMINTEROP
         //
         // Exception requires anything to be added into Data dictionary is serializable
-        // This wrapper is made serializable to satisfy this requirement but does NOT serialize 
-        // the object and simply ignores it during serialization, because we only need 
+        // This wrapper is made serializable to satisfy this requirement but does NOT serialize
+        // the object and simply ignores it during serialization, because we only need
         // the exception instance in the app to hold the error object alive.
         // Once the exception is serialized to debugger, debugger only needs the error reference string
         //
@@ -207,15 +227,12 @@ namespace System {
 
             internal __RestrictedErrorObject(object errorObject)
             {
-                _realErrorObject = errorObject;    
+                _realErrorObject = errorObject;
             }
 
             public object RealErrorObject
             {
-               get
-               {
-                   return _realErrorObject;
-               }
+                get { return _realErrorObject; }
             }
         }
 
@@ -223,11 +240,12 @@ namespace System {
         [FriendAccessAllowed]
 #endif
         internal void AddExceptionDataForRestrictedErrorInfo(
-            string restrictedError, 
-            string restrictedErrorReference, 
+            string restrictedError,
+            string restrictedErrorReference,
             string restrictedCapabilitySid,
             object restrictedErrorObject,
-            bool hasrestrictedLanguageErrorObject = false)
+            bool hasrestrictedLanguageErrorObject = false
+        )
         {
             IDictionary dict = Data;
             if (dict != null)
@@ -238,7 +256,14 @@ namespace System {
 
                 // Keep the error object alive so that user could retrieve error information
                 // using Data["RestrictedErrorReference"]
-                dict.Add("__RestrictedErrorObject", (restrictedErrorObject == null ? null : new __RestrictedErrorObject(restrictedErrorObject)));
+                dict.Add(
+                    "__RestrictedErrorObject",
+                    (
+                        restrictedErrorObject == null
+                            ? null
+                            : new __RestrictedErrorObject(restrictedErrorObject)
+                    )
+                );
                 dict.Add("__HasRestrictedLanguageErrorObject", hasrestrictedLanguageErrorObject);
             }
         }
@@ -250,7 +275,8 @@ namespace System {
             {
                 if (Data.Contains("__RestrictedErrorObject"))
                 {
-                    __RestrictedErrorObject restrictedObject = Data["__RestrictedErrorObject"] as __RestrictedErrorObject;
+                    __RestrictedErrorObject restrictedObject =
+                        Data["__RestrictedErrorObject"] as __RestrictedErrorObject;
                     if (restrictedObject != null)
                         restrictedErrorObject = restrictedObject.RealErrorObject;
                 }
@@ -269,36 +295,38 @@ namespace System {
 
             return _className;
         }
-    
+
         // Retrieves the lowest exception (inner most) for the given Exception.
         // This will traverse exceptions using the innerException property.
         //
-        public virtual Exception GetBaseException() 
+        public virtual Exception GetBaseException()
         {
             Exception inner = InnerException;
             Exception back = this;
-            
-            while (inner != null) {
+
+            while (inner != null)
+            {
                 back = inner;
                 inner = inner.InnerException;
             }
-            
+
             return back;
         }
-        
+
         // Returns the inner exception contained in this exception
-        // 
-        public Exception InnerException {
+        //
+        public Exception InnerException
+        {
             get { return _innerException; }
         }
 
 #if !MONO
-        [System.Security.SecurityCritical]  // auto-generated
+        [System.Security.SecurityCritical] // auto-generated
         [ResourceExposure(ResourceScope.None)]
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        static extern private IRuntimeMethodInfo GetMethodFromStackTrace(Object stackTrace);
+        private static extern IRuntimeMethodInfo GetMethodFromStackTrace(Object stackTrace);
 
-        [System.Security.SecuritySafeCritical]  // auto-generated
+        [System.Security.SecuritySafeCritical] // auto-generated
         private MethodBase GetExceptionMethodFromStackTrace()
         {
             IRuntimeMethodInfo method = GetMethodFromStackTrace(_stackTrace);
@@ -310,51 +338,59 @@ namespace System {
             return RuntimeType.GetMethodBase(method);
         }
 #endif
-    
-        public MethodBase TargetSite {
-            [System.Security.SecuritySafeCritical]  // auto-generated
-            get {
+
+        public MethodBase TargetSite
+        {
+            [System.Security.SecuritySafeCritical] // auto-generated
+            get
+            {
 #if MONO
-                StackTrace st = new StackTrace (this, true);
+                StackTrace st = new StackTrace(this, true);
                 if (st.FrameCount > 0)
-                    return st.GetFrame (0).GetMethod ();
-                
+                    return st.GetFrame(0).GetMethod();
+
                 return null;
 #else
                 return GetTargetSiteInternal();
 #endif
             }
         }
-    
+
 #if !MONO
         // This, as well as the entire "exception method" mechanism, appear to be linked to security features which Mono does not support.
         // this function is provided as a private helper to avoid the security demand
-        [System.Security.SecurityCritical]  // auto-generated
-        private MethodBase GetTargetSiteInternal() {
-            if (_exceptionMethod!=null) {
+        [System.Security.SecurityCritical] // auto-generated
+        private MethodBase GetTargetSiteInternal()
+        {
+            if (_exceptionMethod != null)
+            {
                 return _exceptionMethod;
             }
-            if (_stackTrace==null) {
+            if (_stackTrace == null)
+            {
                 return null;
             }
 
-            if (_exceptionMethodString!=null) {
+            if (_exceptionMethodString != null)
+            {
                 _exceptionMethod = GetExceptionMethodFromString();
-            } else {
+            }
+            else
+            {
                 _exceptionMethod = GetExceptionMethodFromStackTrace();
             }
             return _exceptionMethod;
         }
 #endif
-    
+
         // Returns the stack trace as a string.  If no stack trace is
         // available, null is returned.
         public virtual String StackTrace
         {
 #if FEATURE_CORECLR
-            [System.Security.SecuritySafeCritical] 
+            [System.Security.SecuritySafeCritical]
 #endif
-            get 
+            get
             {
                 // By default attempt to include file and line number info
                 return GetStackTrace(true);
@@ -366,9 +402,9 @@ namespace System {
         // is true.  Note that this requires FileIOPermission(PathDiscovery), and so
         // will usually fail in CoreCLR.  To avoid the demand and resulting
         // SecurityException we can explicitly not even try to get fileinfo.
-        #if FEATURE_CORECLR
+#if FEATURE_CORECLR
         [System.Security.SecurityCritical] // auto-generated
-        #endif
+#endif
         private string GetStackTrace(bool needFileInfo)
         {
             string stackTraceString = _stackTraceString;
@@ -396,11 +432,11 @@ namespace System {
 
             // Obtain the stack trace string. Note that since Environment.GetStackTrace
             // will add the path to the source file if the PDB is present and a demand
-            // for FileIOPermission(PathDiscovery) succeeds, we need to make sure we 
+            // for FileIOPermission(PathDiscovery) succeeds, we need to make sure we
             // don't store the stack trace string in the _stackTraceString member variable.
             String tempStackTraceString = Environment.GetStackTrace(this, needFileInfo);
             return remoteStackTraceString + tempStackTraceString;
-         }
+        }
 
 #if !MONO
         [FriendAccessAllowed]
@@ -409,39 +445,36 @@ namespace System {
         {
             HResult = hr;
         }
-        
+
         // Sets the help link for this exception.
         // This should be in a URL/URN form, such as:
         // "file:///C:/Applications/Bazzal/help.html#ErrorNum42"
         // Changed to be a read-write String and not return an exception
         public virtual String HelpLink
         {
+            get { return _helpURL; }
+            set { _helpURL = value; }
+        }
+
+        public virtual String Source
+        {
+#if FEATURE_CORECLR
+            [System.Security.SecurityCritical] // auto-generated
+#endif
             get
             {
-                return _helpURL;
-            }
-            set
-            {
-                _helpURL = value;
-            }
-        }
-    
-        public virtual String Source {
-            #if FEATURE_CORECLR
-            [System.Security.SecurityCritical] // auto-generated
-            #endif
-            get { 
                 if (_source == null)
                 {
-                    StackTrace st = new StackTrace(this,true);
-                    if (st.FrameCount>0)
+                    StackTrace st = new StackTrace(this, true);
+                    if (st.FrameCount > 0)
                     {
                         StackFrame sf = st.GetFrame(0);
                         MethodBase method = sf.GetMethod();
 
 #if MONO
-                        if (method != null) { // source can be null
-                            _source = method.DeclaringType.Assembly.GetName ().Name;
+                        if (method != null)
+                        { // source can be null
+                            _source = method.DeclaringType.Assembly.GetName().Name;
                         }
 #else
                         Module module = method.Module;
@@ -450,11 +483,16 @@ namespace System {
 
                         if (rtModule == null)
                         {
-                            System.Reflection.Emit.ModuleBuilder moduleBuilder = module as System.Reflection.Emit.ModuleBuilder;
+                            System.Reflection.Emit.ModuleBuilder moduleBuilder =
+                                module as System.Reflection.Emit.ModuleBuilder;
                             if (moduleBuilder != null)
                                 rtModule = moduleBuilder.InternalModule;
                             else
-                                throw new ArgumentException(Environment.GetResourceString("Argument_MustBeRuntimeReflectionObject"));
+                                throw new ArgumentException(
+                                    Environment.GetResourceString(
+                                        "Argument_MustBeRuntimeReflectionObject"
+                                    )
+                                );
                         }
 
                         _source = rtModule.GetRuntimeAssembly().GetSimpleName();
@@ -464,38 +502,46 @@ namespace System {
 
                 return _source;
             }
-            #if FEATURE_CORECLR
+#if FEATURE_CORECLR
             [System.Security.SecurityCritical] // auto-generated
-            #endif
+#endif
             set { _source = value; }
         }
 
 #if FEATURE_CORECLR
-        [System.Security.SecuritySafeCritical] 
+        [System.Security.SecuritySafeCritical]
 #endif
         public override String ToString()
         {
             return ToString(true, true);
         }
 
-        #if FEATURE_CORECLR
+#if FEATURE_CORECLR
         [System.Security.SecurityCritical] // auto-generated
-        #endif
-        private String ToString(bool needFileLineInfo, bool needMessage) {
+#endif
+        private String ToString(bool needFileLineInfo, bool needMessage)
+        {
             String message = (needMessage ? Message : null);
             String s;
 
-            if (message == null || message.Length <= 0) {
+            if (message == null || message.Length <= 0)
+            {
                 s = GetClassName();
             }
-            else {
+            else
+            {
                 s = GetClassName() + ": " + message;
             }
 
-            if (_innerException!=null) {
-                s = s + " ---> " + _innerException.ToString(needFileLineInfo, needMessage) + Environment.NewLine + 
-                "   " + Environment.GetResourceString("Exception_EndOfInnerExceptionStack");
-
+            if (_innerException != null)
+            {
+                s =
+                    s
+                    + " ---> "
+                    + _innerException.ToString(needFileLineInfo, needMessage)
+                    + Environment.NewLine
+                    + "   "
+                    + Environment.GetResourceString("Exception_EndOfInnerExceptionStack");
             }
 
             string stackTrace = GetStackTrace(needFileLineInfo);
@@ -508,10 +554,12 @@ namespace System {
         }
 
 #if !MONO
-        [System.Security.SecurityCritical]  // auto-generated
-        private String GetExceptionMethodString() {
+        [System.Security.SecurityCritical] // auto-generated
+        private String GetExceptionMethodString()
+        {
             MethodBase methBase = GetTargetSiteInternal();
-            if (methBase==null) {
+            if (methBase == null)
+            {
                 return null;
             }
             if (methBase is System.Reflection.Emit.DynamicMethod.RTDynamicMethod)
@@ -521,17 +569,18 @@ namespace System {
             }
 
             // Note that the newline separator is only a separator, chosen such that
-            //  it won't (generally) occur in a method name.  This string is used 
+            //  it won't (generally) occur in a method name.  This string is used
             //  only for serialization of the Exception Method.
             char separator = '\n';
             StringBuilder result = new StringBuilder();
-            if (methBase is ConstructorInfo) {
+            if (methBase is ConstructorInfo)
+            {
                 RuntimeConstructorInfo rci = (RuntimeConstructorInfo)methBase;
                 Type t = rci.ReflectedType;
                 result.Append((int)MemberTypes.Constructor);
                 result.Append(separator);
                 result.Append(rci.Name);
-                if (t!=null)
+                if (t != null)
                 {
                     result.Append(separator);
                     result.Append(t.Assembly.FullName);
@@ -540,8 +589,13 @@ namespace System {
                 }
                 result.Append(separator);
                 result.Append(rci.ToString());
-            } else {
-                Contract.Assert(methBase is MethodInfo, "[Exception.GetExceptionMethodString]methBase is MethodInfo");
+            }
+            else
+            {
+                Contract.Assert(
+                    methBase is MethodInfo,
+                    "[Exception.GetExceptionMethodString]methBase is MethodInfo"
+                );
                 RuntimeMethodInfo rmi = (RuntimeMethodInfo)methBase;
                 Type t = rmi.DeclaringType;
                 result.Append((int)MemberTypes.Method);
@@ -557,28 +611,40 @@ namespace System {
                 }
                 result.Append(rmi.ToString());
             }
-            
+
             return result.ToString();
         }
 
-        [System.Security.SecurityCritical]  // auto-generated
-        private MethodBase GetExceptionMethodFromString() {
+        [System.Security.SecurityCritical] // auto-generated
+        private MethodBase GetExceptionMethodFromString()
+        {
             Contract.Assert(_exceptionMethodString != null, "Method string cannot be NULL!");
-            String[] args = _exceptionMethodString.Split(new char[]{'\0', '\n'});
-            if (args.Length!=5) {
+            String[] args = _exceptionMethodString.Split(new char[] { '\0', '\n' });
+            if (args.Length != 5)
+            {
                 throw new SerializationException();
             }
-            SerializationInfo si = new SerializationInfo(typeof(MemberInfoSerializationHolder), new FormatterConverter());
-            si.AddValue("MemberType", (int)Int32.Parse(args[0], CultureInfo.InvariantCulture), typeof(Int32));
+            SerializationInfo si = new SerializationInfo(
+                typeof(MemberInfoSerializationHolder),
+                new FormatterConverter()
+            );
+            si.AddValue(
+                "MemberType",
+                (int)Int32.Parse(args[0], CultureInfo.InvariantCulture),
+                typeof(Int32)
+            );
             si.AddValue("Name", args[1], typeof(String));
             si.AddValue("AssemblyName", args[2], typeof(String));
             si.AddValue("ClassName", args[3]);
             si.AddValue("Signature", args[4]);
             MethodBase result;
             StreamingContext sc = new StreamingContext(StreamingContextStates.All);
-            try {
+            try
+            {
                 result = (MethodBase)new MemberInfoSerializationHolder(si, sc).GetRealObject(sc);
-            } catch (SerializationException) {
+            }
+            catch (SerializationException)
+            {
                 result = null;
             }
             return result;
@@ -593,8 +659,8 @@ namespace System {
         }
 #endif // FEATURE_SERIALIZATION
 
-        [System.Security.SecurityCritical]  // auto-generated_required
-        public virtual void GetObjectData(SerializationInfo info, StreamingContext context) 
+        [System.Security.SecurityCritical] // auto-generated_required
+        public virtual void GetObjectData(SerializationInfo info, StreamingContext context)
         {
             if (info == null)
             {
@@ -602,27 +668,27 @@ namespace System {
             }
             Contract.EndContractBlock();
 
-            String tempStackTraceString = _stackTraceString;        
-    
-            if (_stackTrace!=null) 
+            String tempStackTraceString = _stackTraceString;
+
+            if (_stackTrace != null)
             {
-                if (tempStackTraceString==null) 
+                if (tempStackTraceString == null)
                 {
                     tempStackTraceString = Environment.GetStackTrace(this, true);
                 }
 #if !MONO
-                if (_exceptionMethod==null) 
+                if (_exceptionMethod == null)
                 {
                     _exceptionMethod = GetExceptionMethodFromStackTrace();
                 }
 #endif
             }
 
-            if (_source == null) 
+            if (_source == null)
             {
                 _source = Source; // Set the Source information correctly before serialization
             }
-    
+
             info.AddValue("ClassName", GetClassName(), typeof(String));
             info.AddValue("Message", _message, typeof(String));
             info.AddValue("Data", _data, typeof(IDictionary));
@@ -638,7 +704,7 @@ namespace System {
 #endif
             info.AddValue("HResult", HResult);
             info.AddValue("Source", _source, typeof(String));
-            
+
 #if !MONO
             // Serialize the Watson bucket details as well
             info.AddValue("WatsonBuckets", _watsonBuckets, typeof(byte[]));
@@ -647,15 +713,24 @@ namespace System {
 #if FEATURE_SERIALIZATION
             if (_safeSerializationManager != null && _safeSerializationManager.IsActive)
             {
-                info.AddValue("SafeSerializationManager", _safeSerializationManager, typeof(SafeSerializationManager));
+                info.AddValue(
+                    "SafeSerializationManager",
+                    _safeSerializationManager,
+                    typeof(SafeSerializationManager)
+                );
 
                 // User classes derived from Exception must have a valid _safeSerializationManager.
-                // Exceptions defined in mscorlib don't use this field might not have it initalized (since they are 
+                // Exceptions defined in mscorlib don't use this field might not have it initalized (since they are
                 // often created in the VM with AllocateObject instead if the managed construtor)
                 // If you are adding code to use a SafeSerializationManager from an mscorlib exception, update
-                // this assert to ensure that it fails when that exception's _safeSerializationManager is NULL 
-                Contract.Assert(((_safeSerializationManager != null) || (this.GetType().Assembly == typeof(object).Assembly)), 
-                                "User defined exceptions must have a valid _safeSerializationManager");
+                // this assert to ensure that it fails when that exception's _safeSerializationManager is NULL
+                Contract.Assert(
+                    (
+                        (_safeSerializationManager != null)
+                        || (this.GetType().Assembly == typeof(object).Assembly)
+                    ),
+                    "User defined exceptions must have a valid _safeSerializationManager"
+                );
 
                 // Handle serializing any transparent or partial trust subclass data
                 _safeSerializationManager.CompleteSerialization(this, info, context);
@@ -672,16 +747,28 @@ namespace System {
 
             if (_remoteStackIndex == 0)
             {
-                tmp = Environment.NewLine+ "Server stack trace: " + Environment.NewLine
-                    + StackTrace 
-                    + Environment.NewLine + Environment.NewLine 
-                    + "Exception rethrown at ["+_remoteStackIndex+"]: " + Environment.NewLine;
+                tmp =
+                    Environment.NewLine
+                    + "Server stack trace: "
+                    + Environment.NewLine
+                    + StackTrace
+                    + Environment.NewLine
+                    + Environment.NewLine
+                    + "Exception rethrown at ["
+                    + _remoteStackIndex
+                    + "]: "
+                    + Environment.NewLine;
             }
             else
             {
-                tmp = StackTrace 
-                    + Environment.NewLine + Environment.NewLine 
-                    + "Exception rethrown at ["+_remoteStackIndex+"]: " + Environment.NewLine;
+                tmp =
+                    StackTrace
+                    + Environment.NewLine
+                    + Environment.NewLine
+                    + "Exception rethrown at ["
+                    + _remoteStackIndex
+                    + "]: "
+                    + Environment.NewLine;
             }
 
             _remoteStackTraceString = tmp;
@@ -703,7 +790,7 @@ namespace System {
             // Using it across process or an AppDomain could be invalid and result
             // in AV in the runtime.
             //
-            // Hence, we set it to zero when deserialization takes place. 
+            // Hence, we set it to zero when deserialization takes place.
             _ipForWatsonBuckets = UIntPtr.Zero;
 #endif
 
@@ -722,7 +809,7 @@ namespace System {
         // This is used by the runtime when re-throwing a managed exception.  It will
         //  copy the stack trace to _remoteStackTraceString.
 #if FEATURE_CORECLR
-        [System.Security.SecuritySafeCritical] 
+        [System.Security.SecuritySafeCritical]
 #endif
         internal void InternalPreserveStackTrace()
         {
@@ -757,18 +844,18 @@ namespace System {
             {
                 _remoteStackTraceString = tmpStackTraceString + Environment.NewLine;
             }
-            
+
             _stackTrace = null;
             _stackTraceString = null;
         }
 
 #if MONO
         // This is only needed for Watson support
-        private string StripFileInfo(string stackTrace, bool isRemoteStackTrace) {
+        private string StripFileInfo(string stackTrace, bool isRemoteStackTrace)
+        {
             return stackTrace;
         }
 #endif
- 
 #if FEATURE_EXCEPTIONDISPATCHINFO
 
         // This is the object against which a lock will be taken
@@ -783,50 +870,50 @@ namespace System {
 #if !MONO
         internal UIntPtr IPForWatsonBuckets
         {
-            get {
-                return _ipForWatsonBuckets;
-            }        
+            get { return _ipForWatsonBuckets; }
         }
-    
+
         internal object WatsonBuckets
         {
-            get 
-            {
-                return _watsonBuckets;
-            }
+            get { return _watsonBuckets; }
         }
 #endif
 
         internal string RemoteStackTrace
         {
-            get
-            {
-                return _remoteStackTraceString;
-            }
+            get { return _remoteStackTraceString; }
         }
 
 #if !MONO
-        [System.Security.SecurityCritical]  // auto-generated
+        [System.Security.SecurityCritical] // auto-generated
         [ResourceExposure(ResourceScope.None)]
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
         private static extern void PrepareForForeignExceptionRaise();
 
-        [System.Security.SecurityCritical]  // auto-generated
+        [System.Security.SecurityCritical] // auto-generated
         [ResourceExposure(ResourceScope.None)]
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        private static extern void GetStackTracesDeepCopy(Exception exception, out object currentStackTrace, out object dynamicMethodArray);
+        private static extern void GetStackTracesDeepCopy(
+            Exception exception,
+            out object currentStackTrace,
+            out object dynamicMethodArray
+        );
 
-        [System.Security.SecurityCritical]  // auto-generated
+        [System.Security.SecurityCritical] // auto-generated
         [ResourceExposure(ResourceScope.None)]
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        internal static extern void SaveStackTracesFromDeepCopy(Exception exception, object currentStackTrace, object dynamicMethodArray);
+        internal static extern void SaveStackTracesFromDeepCopy(
+            Exception exception,
+            object currentStackTrace,
+            object dynamicMethodArray
+        );
 
-        [System.Security.SecurityCritical]  // auto-generated
+        [System.Security.SecurityCritical] // auto-generated
         [ResourceExposure(ResourceScope.None)]
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
         private static extern object CopyStackTrace(object currentStackTrace);
 
-        [System.Security.SecurityCritical]  // auto-generated
+        [System.Security.SecurityCritical] // auto-generated
         [ResourceExposure(ResourceScope.None)]
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
         private static extern object CopyDynamicMethods(object currentDynamicMethods);
@@ -863,9 +950,12 @@ namespace System {
                 return null;
             }
         }
-        
+
         [SecuritySafeCritical]
-        internal void GetStackTracesDeepCopy(out object currentStackTrace, out object dynamicMethodArray)
+        internal void GetStackTracesDeepCopy(
+            out object currentStackTrace,
+            out object dynamicMethodArray
+        )
         {
             GetStackTracesDeepCopy(this, out currentStackTrace, out dynamicMethodArray);
         }
@@ -874,10 +964,12 @@ namespace System {
         // This is invoked by ExceptionDispatchInfo.Throw to restore the exception stack trace, corresponding to the original throw of the
         // exception, just before the exception is "rethrown".
         [SecuritySafeCritical]
-        internal void RestoreExceptionDispatchInfo(System.Runtime.ExceptionServices.ExceptionDispatchInfo exceptionDispatchInfo)
+        internal void RestoreExceptionDispatchInfo(
+            System.Runtime.ExceptionServices.ExceptionDispatchInfo exceptionDispatchInfo
+        )
         {
 #if MONO
-            captured_traces = (StackTrace[]) exceptionDispatchInfo.BinaryStackTraceArray;
+            captured_traces = (StackTrace[])exceptionDispatchInfo.BinaryStackTraceArray;
             _stackTrace = null;
             _stackTraceString = null;
 #else
@@ -892,7 +984,7 @@ namespace System {
                 // We do this inside a finally clause to ensure ThreadAbort cannot
                 // be injected while we have taken the lock. This is to prevent
                 // unrelated exception restorations from getting blocked due to TAE.
-                try{}
+                try { }
                 finally
                 {
                     // When restoring back the fields, we again create a copy and set reference to them
@@ -901,14 +993,20 @@ namespace System {
                     //
                     // Since deep copying can throw on OOM, try to get the copies
                     // outside the lock.
-                    object _stackTraceCopy = (exceptionDispatchInfo.BinaryStackTraceArray == null)?null:DeepCopyStackTrace(exceptionDispatchInfo.BinaryStackTraceArray);
-                    object _dynamicMethodsCopy = (exceptionDispatchInfo.DynamicMethodArray == null)?null:DeepCopyDynamicMethods(exceptionDispatchInfo.DynamicMethodArray);
-                    
-                    // Finally, restore the information. 
+                    object _stackTraceCopy =
+                        (exceptionDispatchInfo.BinaryStackTraceArray == null)
+                            ? null
+                            : DeepCopyStackTrace(exceptionDispatchInfo.BinaryStackTraceArray);
+                    object _dynamicMethodsCopy =
+                        (exceptionDispatchInfo.DynamicMethodArray == null)
+                            ? null
+                            : DeepCopyDynamicMethods(exceptionDispatchInfo.DynamicMethodArray);
+
+                    // Finally, restore the information.
                     //
                     // Since EDI can be created at various points during exception dispatch (e.g. at various frames on the stack) for the same exception instance,
                     // they can have different data to be restored. Thus, to ensure atomicity of restoration from each EDI, perform the restore under a lock.
-                    lock(Exception.s_EDILock)
+                    lock (Exception.s_EDILock)
                     {
 #if !MONO
                         _watsonBuckets = exceptionDispatchInfo.WatsonBuckets;
@@ -928,11 +1026,11 @@ namespace System {
         }
 #endif // FEATURE_EXCEPTIONDISPATCHINFO
 
-        private String _className;  //Needed for serialization.  
+        private String _className; //Needed for serialization.
 #if !MONO
         // See TargetSite comments
-        private MethodBase _exceptionMethod;  //Needed for serialization.  
-        private String _exceptionMethodString; //Needed for serialization. 
+        private MethodBase _exceptionMethod; //Needed for serialization.
+        private String _exceptionMethodString; //Needed for serialization.
 #endif
         internal String _message;
         private IDictionary _data;
@@ -944,42 +1042,36 @@ namespace System {
         [OptionalField] // This isnt present in pre-V4 exception objects that would be serialized.
         private Object _watsonBuckets;
 #endif
-        private String _stackTraceString; //Needed for serialization.  
+        private String _stackTraceString; //Needed for serialization.
         private String _remoteStackTraceString;
         private int _remoteStackIndex;
-#pragma warning disable 414  // Field is not used from managed.        
+#pragma warning disable 414  // Field is not used from managed.
         // _dynamicMethods is an array of System.Resolver objects, used to keep
         // DynamicMethodDescs alive for the lifetime of the exception. We do this because
         // the _stackTrace field holds MethodDescs, and a DynamicMethodDesc can be destroyed
         // unless a System.Resolver object roots it.
-        private Object _dynamicMethods; 
+        private Object _dynamicMethods;
 #pragma warning restore 414
 
         // @MANAGED: HResult is used from within the EE!  Rename with care - check VM directory
-        internal int _HResult;     // HResult
+        internal int _HResult; // HResult
 
         public int HResult
         {
-            get
-            {
-                return _HResult;
-            }
+            get { return _HResult; }
 #if !NETCORE
             protected
 #endif
-             set
-            {
-                _HResult = value;
-            }
+            set { _HResult = value; }
         }
-        
-        private String _source;         // Mainly used by VB. 
+
+        private String _source; // Mainly used by VB.
 #if !MONO
         // WARNING: Don't delete/rename _xptrs and _xcode - used by functions
         // on Marshal class.  Native functions are in COMUtilNative.cpp & AppDomain
-        private IntPtr _xptrs;             // Internal EE stuff 
+        private IntPtr _xptrs; // Internal EE stuff
 #pragma warning disable 414  // Field is not used from managed.
-        private int _xcode;             // Internal EE stuff 
+        private int _xcode; // Internal EE stuff
 #pragma warning restore 414
         [OptionalField]
         private UIntPtr _ipForWatsonBuckets; // Used to persist the IP for Watson Bucketing
@@ -1000,23 +1092,25 @@ namespace System {
         int caught_in_unmanaged;
 #endif
 
-    // See clr\src\vm\excep.h's EXCEPTION_COMPLUS definition:
-        private const int _COMPlusExceptionCode = unchecked((int)0xe0434352);   // Win32 exception code for COM+ exceptions
+        // See clr\src\vm\excep.h's EXCEPTION_COMPLUS definition:
+        private const int _COMPlusExceptionCode = unchecked((int)0xe0434352); // Win32 exception code for COM+ exceptions
 
-        // InternalToString is called by the runtime to get the exception text 
+        // InternalToString is called by the runtime to get the exception text
         // and create a corresponding CrossAppDomainMarshaledException
-        [System.Security.SecurityCritical]  // auto-generated
+        [System.Security.SecurityCritical] // auto-generated
         internal virtual String InternalToString()
         {
 #if MONO_FEATURE_CAS
-            try 
+            try
             {
 #pragma warning disable 618
-                SecurityPermission sp= new SecurityPermission(SecurityPermissionFlag.ControlEvidence | SecurityPermissionFlag.ControlPolicy);
+                SecurityPermission sp = new SecurityPermission(
+                    SecurityPermissionFlag.ControlEvidence | SecurityPermissionFlag.ControlPolicy
+                );
 #pragma warning restore 618
                 sp.Assert();
             }
-            catch  
+            catch
             {
                 //under normal conditions there should be no exceptions
                 //however if something wrong happens we still can call the usual ToString
@@ -1049,29 +1143,28 @@ namespace System {
 
         internal bool IsTransient
         {
-            [System.Security.SecuritySafeCritical]  // auto-generated
-            get {
-                return nIsTransient(_HResult);
-            }
+            [System.Security.SecuritySafeCritical] // auto-generated
+            get { return nIsTransient(_HResult); }
         }
 
 #if MONO
-        private static bool nIsTransient(int hr) {
-			throw new NotImplementedException ();
-		}
+        private static bool nIsTransient(int hr)
+        {
+            throw new NotImplementedException();
+        }
 #else
-        [System.Security.SecurityCritical]  // auto-generated
+        [System.Security.SecurityCritical] // auto-generated
         [ResourceExposure(ResourceScope.None)]
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        private extern static bool nIsTransient(int hr);
+        private static extern bool nIsTransient(int hr);
 #endif
 
-        // This piece of infrastructure exists to help avoid deadlocks 
-        // between parts of mscorlib that might throw an exception while 
+        // This piece of infrastructure exists to help avoid deadlocks
+        // between parts of mscorlib that might throw an exception while
         // holding a lock that are also used by mscorlib's ResourceManager
         // instance.  As a special case of code that may throw while holding
         // a lock, we also need to fix our asynchronous exceptions to use
-        // Win32 resources as well (assuming we ever call a managed 
+        // Win32 resources as well (assuming we ever call a managed
         // constructor on instances of them).  We should grow this set of
         // exception messages as we discover problems, then move the resources
         // involved to native code.
@@ -1079,21 +1172,22 @@ namespace System {
         {
             ThreadAbort = 1,
             ThreadInterrupted = 2,
-            OutOfMemory = 3
+            OutOfMemory = 3,
         }
 
         // See comment on ExceptionMessageKind
-        [System.Security.SecuritySafeCritical]  // auto-generated
+        [System.Security.SecuritySafeCritical] // auto-generated
         internal static String GetMessageFromNativeResources(ExceptionMessageKind kind)
         {
 #if MONO
-            switch (kind) {
-            case ExceptionMessageKind.ThreadAbort:
-                return "Thread was being aborted.";
-            case ExceptionMessageKind.ThreadInterrupted:
-                return "Thread was interrupted from a waiting state.";
-            case ExceptionMessageKind.OutOfMemory:
-                return "Insufficient memory to continue the execution of the program.";
+            switch (kind)
+            {
+                case ExceptionMessageKind.ThreadAbort:
+                    return "Thread was being aborted.";
+                case ExceptionMessageKind.ThreadInterrupted:
+                    return "Thread was interrupted from a waiting state.";
+                case ExceptionMessageKind.OutOfMemory:
+                    return "Insufficient memory to continue the execution of the program.";
             }
             return "";
 #else
@@ -1104,32 +1198,36 @@ namespace System {
         }
 
 #if !MONO
-        [System.Security.SecurityCritical]  // auto-generated
+        [System.Security.SecurityCritical] // auto-generated
         [ResourceExposure(ResourceScope.None)]
         [DllImport(JitHelpers.QCall, CharSet = CharSet.Unicode)]
         [SuppressUnmanagedCodeSecurity]
-        private static extern void GetMessageFromNativeResources(ExceptionMessageKind kind, StringHandleOnStack retMesg);
+        private static extern void GetMessageFromNativeResources(
+            ExceptionMessageKind kind,
+            StringHandleOnStack retMesg
+        );
 #endif
 
 #if MONO
         // Exposed to support Mono BCL classes
-        internal void SetMessage (string s)
+        internal void SetMessage(string s)
         {
             _message = s;
         }
 
-        internal void SetStackTrace (string s)
+        internal void SetStackTrace(string s)
         {
             _stackTraceString = s;
         }
 
         // Support for a System.Runtime.Remoting.Proxies.RealProxy edge case
-        internal Exception FixRemotingException ()
+        internal Exception FixRemotingException()
         {
-            string message = (0 == _remoteStackIndex) ?
-                "{0}{0}Server stack trace: {0}{1}{0}{0}Exception rethrown at [{2}]: {0}" :
-                "{1}{0}{0}Exception rethrown at [{2}]: {0}";
-            string tmp = String.Format (message, Environment.NewLine, StackTrace, _remoteStackIndex);
+            string message =
+                (0 == _remoteStackIndex)
+                    ? "{0}{0}Server stack trace: {0}{1}{0}{0}Exception rethrown at [{2}]: {0}"
+                    : "{1}{0}{0}Exception rethrown at [{2}]: {0}";
+            string tmp = String.Format(message, Environment.NewLine, StackTrace, _remoteStackIndex);
 
             _remoteStackTraceString = tmp;
             _remoteStackIndex++;
@@ -1141,8 +1239,6 @@ namespace System {
 #endif
     }
 
-
-
 #if FEATURE_CORECLR
 
     //--------------------------------------------------------------------------
@@ -1153,10 +1249,10 @@ namespace System {
     //--------------------------------------------------------------------------
 
     [Serializable]
-    internal sealed class CrossAppDomainMarshaledException : SystemException 
+    internal sealed class CrossAppDomainMarshaledException : SystemException
     {
-        public CrossAppDomainMarshaledException(String message, int errorCode) 
-            : base(message) 
+        public CrossAppDomainMarshaledException(String message, int errorCode)
+            : base(message)
         {
             SetErrorCode(errorCode);
         }
@@ -1164,17 +1260,13 @@ namespace System {
         // Normally, only Telesto's UEF will see these exceptions.
         // This override prints out the original Exception's ToString()
         // output and hides the fact that it is wrapped inside another excepton.
-        #if FEATURE_CORECLR
+#if FEATURE_CORECLR
         [System.Security.SecurityCritical] // auto-generated
-        #endif
+#endif
         internal override String InternalToString()
         {
             return Message;
         }
-    
     }
 #endif
-
-
 }
-

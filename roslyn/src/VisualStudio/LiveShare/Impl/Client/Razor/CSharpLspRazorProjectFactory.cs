@@ -14,7 +14,8 @@ namespace Microsoft.VisualStudio.LanguageServices.LiveShare.Client.Razor
     internal class CSharpLspRazorProjectFactory
     {
         private readonly RemoteLanguageServiceWorkspaceHost _remoteLanguageServiceWorkspaceHost;
-        private readonly Dictionary<string, ProjectId> _projects = new Dictionary<string, ProjectId>();
+        private readonly Dictionary<string, ProjectId> _projects =
+            new Dictionary<string, ProjectId>();
 
         public ProjectId GetProject(string projectName)
         {
@@ -23,7 +24,13 @@ namespace Microsoft.VisualStudio.LanguageServices.LiveShare.Client.Razor
                 return projectId;
             }
 
-            var projectInfo = ProjectInfo.Create(ProjectId.CreateNewId(projectName), VersionStamp.Default, projectName, projectName, LanguageNames.CSharp);
+            var projectInfo = ProjectInfo.Create(
+                ProjectId.CreateNewId(projectName),
+                VersionStamp.Default,
+                projectName,
+                projectName,
+                LanguageNames.CSharp
+            );
 
             _remoteLanguageServiceWorkspaceHost.Workspace.OnProjectAdded(projectInfo);
 
@@ -36,7 +43,11 @@ namespace Microsoft.VisualStudio.LanguageServices.LiveShare.Client.Razor
 
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public CSharpLspRazorProjectFactory(RemoteLanguageServiceWorkspaceHost remoteLanguageServiceWorkspaceHost)
-            => _remoteLanguageServiceWorkspaceHost = remoteLanguageServiceWorkspaceHost ?? throw new ArgumentNullException(nameof(remoteLanguageServiceWorkspaceHost));
+        public CSharpLspRazorProjectFactory(
+            RemoteLanguageServiceWorkspaceHost remoteLanguageServiceWorkspaceHost
+        ) =>
+            _remoteLanguageServiceWorkspaceHost =
+                remoteLanguageServiceWorkspaceHost
+                ?? throw new ArgumentNullException(nameof(remoteLanguageServiceWorkspaceHost));
     }
 }

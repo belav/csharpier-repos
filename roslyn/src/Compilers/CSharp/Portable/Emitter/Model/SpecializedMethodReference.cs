@@ -12,16 +12,14 @@ namespace Microsoft.CodeAnalysis.CSharp.Emit
 {
     /// <summary>
     /// Represents a method of a generic type instantiation.
-    /// e.g. 
+    /// e.g.
     /// A{int}.M()
     /// A.B{int}.C.M()
     /// </summary>
     internal class SpecializedMethodReference : MethodReference, Cci.ISpecializedMethodReference
     {
         public SpecializedMethodReference(MethodSymbol underlyingMethod)
-            : base(underlyingMethod)
-        {
-        }
+            : base(underlyingMethod) { }
 
         public override void Dispatch(Cci.MetadataVisitor visitor)
         {
@@ -30,18 +28,12 @@ namespace Microsoft.CodeAnalysis.CSharp.Emit
 
         Cci.IMethodReference Cci.ISpecializedMethodReference.UnspecializedVersion
         {
-            get
-            {
-                return UnderlyingMethod.OriginalDefinition.GetCciAdapter();
-            }
+            get { return UnderlyingMethod.OriginalDefinition.GetCciAdapter(); }
         }
 
         public override Cci.ISpecializedMethodReference AsSpecializedMethodReference
         {
-            get
-            {
-                return this;
-            }
+            get { return this; }
         }
     }
 }

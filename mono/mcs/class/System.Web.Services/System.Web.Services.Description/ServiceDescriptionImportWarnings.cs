@@ -1,4 +1,4 @@
-// 
+//
 // System.Web.Services.Description.ServiceDescriptionImportWarnings.cs
 //
 // Author:
@@ -15,10 +15,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -28,17 +28,18 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
-namespace System.Web.Services.Description 
+namespace System.Web.Services.Description
 {
-	[Flags]
-	public enum ServiceDescriptionImportWarnings {
-		NoCodeGenerated = 0x1,
-		NoMethodsGenerated = 0x20,
-		OptionalExtensionsIgnored = 0x2,
-		RequiredExtensionsIgnored = 0x4,
-		UnsupportedBindingsIgnored = 0x10,
-		UnsupportedOperationsIgnored = 0x8,
-		SchemaValidation = 0x40,
-		WsiConformance = 0x80
-	}
+    [Flags]
+    public enum ServiceDescriptionImportWarnings
+    {
+        NoCodeGenerated = 0x1,
+        NoMethodsGenerated = 0x20,
+        OptionalExtensionsIgnored = 0x2,
+        RequiredExtensionsIgnored = 0x4,
+        UnsupportedBindingsIgnored = 0x10,
+        UnsupportedOperationsIgnored = 0x8,
+        SchemaValidation = 0x40,
+        WsiConformance = 0x80,
+    }
 }

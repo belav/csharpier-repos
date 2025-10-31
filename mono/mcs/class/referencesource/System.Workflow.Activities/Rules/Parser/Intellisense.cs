@@ -1,8 +1,7 @@
 using System;
-using System.Collections.Generic;
 using System.Collections;
+using System.Collections.Generic;
 using System.Workflow.Activities.Rules;
-
 
 namespace System.Workflow.Activities.Rules
 {
@@ -49,7 +48,11 @@ namespace System.Workflow.Activities.Rules
 
             int endTokenIndex = tokenIndex;
 
-            if (token.TokenID == TokenID.Identifier && ((string)token.Value).Length == 1 && PrevToken().TokenID != TokenID.Dot)
+            if (
+                token.TokenID == TokenID.Identifier
+                && ((string)token.Value).Length == 1
+                && PrevToken().TokenID != TokenID.Dot
+            )
             {
                 // Assume this is the start of a root identifier
                 valid = true;

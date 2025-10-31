@@ -9,7 +9,9 @@ namespace System.Text.Json.Serialization
     /// <summary>
     /// Provides metadata about a set of types that is relevant to JSON serialization.
     /// </summary>
-    public abstract partial class JsonSerializerContext : IJsonTypeInfoResolver, IBuiltInJsonTypeInfoResolver
+    public abstract partial class JsonSerializerContext
+        : IJsonTypeInfoResolver,
+            IBuiltInJsonTypeInfoResolver
     {
         private JsonSerializerOptions? _options;
 
@@ -55,26 +57,30 @@ namespace System.Text.Json.Serialization
 
             JsonSerializerOptions? generatedSerializerOptions = GeneratedSerializerOptions;
 
-            return
-                generatedSerializerOptions is not null &&
+            return generatedSerializerOptions is not null
+                &&
                 // Guard against unsupported features
-                options.Converters.Count == 0 &&
-                options.Encoder is null &&
+                options.Converters.Count == 0
+                && options.Encoder is null
+                &&
                 // Disallow custom number handling we'd need to honor when writing.
                 // AllowReadingFromString and Strict are fine since there's no action to take when writing.
-                !JsonHelpers.RequiresSpecialNumberHandlingOnWrite(options.NumberHandling) &&
-                options.ReferenceHandlingStrategy == ReferenceHandlingStrategy.None &&
+                !JsonHelpers.RequiresSpecialNumberHandlingOnWrite(options.NumberHandling)
+                && options.ReferenceHandlingStrategy == ReferenceHandlingStrategy.None
+                &&
 #pragma warning disable SYSLIB0020
-                !options.IgnoreNullValues && // This property is obsolete.
+                !options.IgnoreNullValues
+                && // This property is obsolete.
 #pragma warning restore SYSLIB0020
 
                 // Ensure options values are consistent with expected defaults.
-                options.DefaultIgnoreCondition == generatedSerializerOptions.DefaultIgnoreCondition &&
-                options.IgnoreReadOnlyFields == generatedSerializerOptions.IgnoreReadOnlyFields &&
-                options.IgnoreReadOnlyProperties == generatedSerializerOptions.IgnoreReadOnlyProperties &&
-                options.IncludeFields == generatedSerializerOptions.IncludeFields &&
-                options.PropertyNamingPolicy == generatedSerializerOptions.PropertyNamingPolicy &&
-                options.DictionaryKeyPolicy is null;
+                options.DefaultIgnoreCondition == generatedSerializerOptions.DefaultIgnoreCondition
+                && options.IgnoreReadOnlyFields == generatedSerializerOptions.IgnoreReadOnlyFields
+                && options.IgnoreReadOnlyProperties
+                    == generatedSerializerOptions.IgnoreReadOnlyProperties
+                && options.IncludeFields == generatedSerializerOptions.IncludeFields
+                && options.PropertyNamingPolicy == generatedSerializerOptions.PropertyNamingPolicy
+                && options.DictionaryKeyPolicy is null;
         }
 
         /// <summary>

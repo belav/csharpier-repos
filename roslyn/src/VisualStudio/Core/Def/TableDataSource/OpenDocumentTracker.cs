@@ -13,8 +13,10 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.TableDataSource
         where TItem : TableItem
     {
         private readonly object _gate = new();
-        private readonly Dictionary<DocumentId, Dictionary<object, WeakReference<AbstractTableEntriesSnapshot<TItem>>>> _map =
-            new();
+        private readonly Dictionary<
+            DocumentId,
+            Dictionary<object, WeakReference<AbstractTableEntriesSnapshot<TItem>>>
+        > _map = new();
 
         private readonly Workspace _workspace;
 
@@ -26,17 +28,28 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.TableDataSource
             _workspace.WorkspaceChanged += OnWorkspaceChanged;
         }
 
-        public void TrackOpenDocument(DocumentId documentId, object id, AbstractTableEntriesSnapshot<TItem> snapshot)
+        public void TrackOpenDocument(
+            DocumentId documentId,
+            object id,
+            AbstractTableEntriesSnapshot<TItem> snapshot
+        )
         {
             lock (_gate)
             {
                 if (!_map.TryGetValue(documentId, out var secondMap))
                 {
-                    secondMap = new Dictionary<object, WeakReference<AbstractTableEntriesSnapshot<TItem>>>();
+                    secondMap =
+                        new Dictionary<
+                            object,
+                            WeakReference<AbstractTableEntriesSnapshot<TItem>>
+                        >();
                     _map.Add(documentId, secondMap);
                 }
 
-                if (secondMap.TryGetValue(id, out var oldWeakSnapshot) && oldWeakSnapshot.TryGetTarget(out var oldSnapshot))
+                if (
+                    secondMap.TryGetValue(id, out var oldWeakSnapshot)
+                    && oldWeakSnapshot.TryGetTarget(out var oldSnapshot)
+                )
                 {
                     oldSnapshot.StopTracking();
                 }
@@ -57,7 +70,11 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.TableDataSource
         {
             lock (_gate)
             {
-                foreach (var documentId in _map.Keys.Where(d => projectId == null ? true : d.ProjectId == projectId).ToList())
+                foreach (
+                    var documentId in _map
+                        .Keys.Where(d => projectId == null ? true : d.ProjectId == projectId)
+                        .ToList()
+                )
                 {
                     if (solution.GetDocument(documentId) != null)
                     {
@@ -112,7 +129,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.TableDataSource
             }
         }
 
-        private void OnDocumentClosed(object sender, DocumentEventArgs e)
-            => StopTracking(e.Document.Id);
+        private void OnDocumentClosed(object sender, DocumentEventArgs e) =>
+            StopTracking(e.Document.Id);
     }
 }

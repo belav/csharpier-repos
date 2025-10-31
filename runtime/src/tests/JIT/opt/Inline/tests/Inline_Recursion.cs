@@ -22,7 +22,6 @@ public class MainApp
         return ret;
     }
 
-
     public static int A(int v)
     {
         int ret = 0;
@@ -54,5 +53,3 @@ public class MainApp
         }
     }
 }
-
-

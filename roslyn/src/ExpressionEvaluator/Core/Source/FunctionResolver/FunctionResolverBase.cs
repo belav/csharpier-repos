@@ -4,10 +4,10 @@
 
 #nullable disable
 
-using Microsoft.VisualStudio.Debugger.Evaluation;
 using System;
 using System.Collections.Generic;
 using System.Reflection.Metadata;
+using Microsoft.VisualStudio.Debugger.Evaluation;
 
 namespace Microsoft.CodeAnalysis.ExpressionEvaluator
 {
@@ -19,7 +19,11 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
         internal abstract bool ShouldEnableFunctionResolver(TProcess process);
         internal abstract IEnumerable<TModule> GetAllModules(TProcess process);
         internal abstract string GetModuleName(TModule module);
-        internal abstract unsafe bool TryGetMetadata(TModule module, out byte* pointer, out int length);
+        internal abstract unsafe bool TryGetMetadata(
+            TModule module,
+            out byte* pointer,
+            out int length
+        );
         internal abstract TRequest[] GetRequests(TProcess process);
         internal abstract string GetRequestModuleName(TRequest request);
         internal abstract RequestSignature GetParsedSignature(TRequest request);
@@ -27,7 +31,11 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
         internal abstract Guid GetLanguageId(TRequest request);
         internal abstract Guid LanguageId { get; }
 
-        internal void EnableResolution(TProcess process, TRequest request, OnFunctionResolvedDelegate<TModule, TRequest> onFunctionResolved)
+        internal void EnableResolution(
+            TProcess process,
+            TRequest request,
+            OnFunctionResolvedDelegate<TModule, TRequest> onFunctionResolved
+        )
         {
             if (!ShouldHandleRequest(request))
             {
@@ -87,7 +95,11 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
             }
         }
 
-        internal void OnModuleLoad(TProcess process, TModule module, OnFunctionResolvedDelegate<TModule, TRequest> onFunctionResolved)
+        internal void OnModuleLoad(
+            TProcess process,
+            TModule module,
+            OnFunctionResolvedDelegate<TModule, TRequest> onFunctionResolved
+        )
         {
             if (!ShouldEnableFunctionResolver(process))
             {
@@ -133,9 +145,15 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
         private MetadataResolver<TProcess, TModule, TRequest> CreateMetadataResolver(
             TModule module,
             MetadataReader reader,
-            OnFunctionResolvedDelegate<TModule, TRequest> onFunctionResolved)
+            OnFunctionResolvedDelegate<TModule, TRequest> onFunctionResolved
+        )
         {
-            return new MetadataResolver<TProcess, TModule, TRequest>(module, reader, IgnoreCase, onFunctionResolved);
+            return new MetadataResolver<TProcess, TModule, TRequest>(
+                module,
+                reader,
+                IgnoreCase,
+                onFunctionResolved
+            );
         }
 
         private bool ShouldHandleRequest(TRequest request)
@@ -143,9 +161,9 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
             var languageId = GetLanguageId(request);
             // Handle requests with no language id, a matching language id,
             // or causality breakpoint requests (debugging web services).
-            return languageId == Guid.Empty ||
-                languageId == LanguageId ||
-                languageId == DkmLanguageId.CausalityBreakpoint;
+            return languageId == Guid.Empty
+                || languageId == LanguageId
+                || languageId == DkmLanguageId.CausalityBreakpoint;
         }
 
         private bool ShouldModuleHandleRequest(TModule module, string moduleName)

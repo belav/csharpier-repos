@@ -1,50 +1,63 @@
-﻿namespace System.Web.Mvc {
+﻿namespace System.Web.Mvc
+{
     using System;
     using System.Collections.Generic;
     using System.Web.Routing;
 
-    public abstract class AreaRegistration {
-
+    public abstract class AreaRegistration
+    {
         private const string _typeCacheName = "MVC-AreaRegistrationTypeCache.xml";
 
-        public abstract string AreaName {
-            get;
-        }
+        public abstract string AreaName { get; }
 
-        internal void CreateContextAndRegister(RouteCollection routes, object state) {
+        internal void CreateContextAndRegister(RouteCollection routes, object state)
+        {
             AreaRegistrationContext context = new AreaRegistrationContext(AreaName, routes, state);
 
             string thisNamespace = GetType().Namespace;
-            if (thisNamespace != null) {
+            if (thisNamespace != null)
+            {
                 context.Namespaces.Add(thisNamespace + ".*");
             }
 
             RegisterArea(context);
         }
 
-        private static bool IsAreaRegistrationType(Type type) {
-            return
-                typeof(AreaRegistration).IsAssignableFrom(type) &&
-                type.GetConstructor(Type.EmptyTypes) != null;
+        private static bool IsAreaRegistrationType(Type type)
+        {
+            return typeof(AreaRegistration).IsAssignableFrom(type)
+                && type.GetConstructor(Type.EmptyTypes) != null;
         }
 
-        public static void RegisterAllAreas() {
+        public static void RegisterAllAreas()
+        {
             RegisterAllAreas(null);
         }
 
-        public static void RegisterAllAreas(object state) {
+        public static void RegisterAllAreas(object state)
+        {
             RegisterAllAreas(RouteTable.Routes, new BuildManagerWrapper(), state);
         }
 
-        internal static void RegisterAllAreas(RouteCollection routes, IBuildManager buildManager, object state) {
-            List<Type> areaRegistrationTypes = TypeCacheUtil.GetFilteredTypesFromAssemblies(_typeCacheName, IsAreaRegistrationType, buildManager);
-            foreach (Type areaRegistrationType in areaRegistrationTypes) {
-                AreaRegistration registration = (AreaRegistration)Activator.CreateInstance(areaRegistrationType);
+        internal static void RegisterAllAreas(
+            RouteCollection routes,
+            IBuildManager buildManager,
+            object state
+        )
+        {
+            List<Type> areaRegistrationTypes = TypeCacheUtil.GetFilteredTypesFromAssemblies(
+                _typeCacheName,
+                IsAreaRegistrationType,
+                buildManager
+            );
+            foreach (Type areaRegistrationType in areaRegistrationTypes)
+            {
+                AreaRegistration registration = (AreaRegistration)
+                    Activator.CreateInstance(areaRegistrationType);
                 registration.CreateContextAndRegister(routes, state);
             }
         }
 
         public abstract void RegisterArea(AreaRegistrationContext context);
-
     }
 }

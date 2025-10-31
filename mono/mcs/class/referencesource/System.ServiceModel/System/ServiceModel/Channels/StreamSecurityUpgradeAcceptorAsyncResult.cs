@@ -6,20 +6,20 @@ namespace System.ServiceModel.Channels
     using System.IO;
     using System.Runtime;
     using System.Security.Authentication;
-    using System.ServiceModel.Security;
     using System.ServiceModel.Diagnostics;
+    using System.ServiceModel.Security;
 
     abstract class StreamSecurityUpgradeAcceptorAsyncResult : TraceAsyncResult
     {
         SecurityMessageProperty remoteSecurity;
         Stream upgradedStream;
 
-        static AsyncCallback onAuthenticateAsServer = Fx.ThunkCallback(new AsyncCallback(OnAuthenticateAsServer));
+        static AsyncCallback onAuthenticateAsServer = Fx.ThunkCallback(
+            new AsyncCallback(OnAuthenticateAsServer)
+        );
 
         protected StreamSecurityUpgradeAcceptorAsyncResult(AsyncCallback callback, object state)
-            : base(callback, state)
-        {
-        }
+            : base(callback, state) { }
 
         public void Begin(Stream stream)
         {
@@ -30,13 +30,18 @@ namespace System.ServiceModel.Channels
             }
             catch (AuthenticationException exception)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new SecurityNegotiationException(exception.Message,
-                    exception));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new SecurityNegotiationException(exception.Message, exception)
+                );
             }
             catch (IOException ioException)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new SecurityNegotiationException(
-                    SR.GetString(SR.NegotiationFailedIO, ioException.Message), ioException));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new SecurityNegotiationException(
+                        SR.GetString(SR.NegotiationFailedIO, ioException.Message),
+                        ioException
+                    )
+                );
             }
 
             if (!result.CompletedSynchronously)
@@ -56,13 +61,18 @@ namespace System.ServiceModel.Channels
             }
             catch (AuthenticationException exception)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new SecurityNegotiationException(exception.Message,
-                    exception));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new SecurityNegotiationException(exception.Message, exception)
+                );
             }
             catch (IOException ioException)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new SecurityNegotiationException(
-                    SR.GetString(SR.NegotiationFailedIO, ioException.Message), ioException));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new SecurityNegotiationException(
+                        SR.GetString(SR.NegotiationFailedIO, ioException.Message),
+                        ioException
+                    )
+                );
             }
 
             this.remoteSecurity = this.ValidateCreateSecurity();
@@ -70,7 +80,8 @@ namespace System.ServiceModel.Channels
 
         public static Stream End(IAsyncResult result, out SecurityMessageProperty remoteSecurity)
         {
-            StreamSecurityUpgradeAcceptorAsyncResult thisPtr = AsyncResult.End<StreamSecurityUpgradeAcceptorAsyncResult>(result);
+            StreamSecurityUpgradeAcceptorAsyncResult thisPtr =
+                AsyncResult.End<StreamSecurityUpgradeAcceptorAsyncResult>(result);
             remoteSecurity = thisPtr.remoteSecurity;
             return thisPtr.upgradedStream;
         }
@@ -106,5 +117,4 @@ namespace System.ServiceModel.Channels
         protected abstract Stream OnCompleteAuthenticateAsServer(IAsyncResult result);
         protected abstract SecurityMessageProperty ValidateCreateSecurity();
     }
-
 }

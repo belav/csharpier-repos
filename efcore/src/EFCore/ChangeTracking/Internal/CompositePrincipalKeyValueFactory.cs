@@ -9,7 +9,9 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal;
 ///     any release. You should only use it directly in your code with extreme caution and knowing that
 ///     doing so can result in application failures when updating to a new Entity Framework Core release.
 /// </summary>
-public class CompositePrincipalKeyValueFactory : CompositeValueFactory, IPrincipalKeyValueFactory<IReadOnlyList<object?>>
+public class CompositePrincipalKeyValueFactory
+    : CompositeValueFactory,
+        IPrincipalKeyValueFactory<IReadOnlyList<object?>>
 {
     private readonly IKey _key;
 
@@ -50,8 +52,8 @@ public class CompositePrincipalKeyValueFactory : CompositeValueFactory, IPrincip
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public virtual object? CreateFromBuffer(ValueBuffer valueBuffer)
-        => TryCreateFromBuffer(valueBuffer, out var values) ? values : null;
+    public virtual object? CreateFromBuffer(ValueBuffer valueBuffer) =>
+        TryCreateFromBuffer(valueBuffer, out var values) ? values : null;
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -80,8 +82,8 @@ public class CompositePrincipalKeyValueFactory : CompositeValueFactory, IPrincip
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public virtual IReadOnlyList<object?> CreateFromCurrentValues(IUpdateEntry entry)
-        => CreateFromEntry(entry, (e, p) => e.GetCurrentValue(p));
+    public virtual IReadOnlyList<object?> CreateFromCurrentValues(IUpdateEntry entry) =>
+        CreateFromEntry(entry, (e, p) => e.GetCurrentValue(p));
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -89,8 +91,8 @@ public class CompositePrincipalKeyValueFactory : CompositeValueFactory, IPrincip
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public virtual IProperty? FindNullPropertyInCurrentValues(IUpdateEntry entry)
-        => Properties.FirstOrDefault(p => entry.GetCurrentValue(p) == null);
+    public virtual IProperty? FindNullPropertyInCurrentValues(IUpdateEntry entry) =>
+        Properties.FirstOrDefault(p => entry.GetCurrentValue(p) == null);
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -98,8 +100,8 @@ public class CompositePrincipalKeyValueFactory : CompositeValueFactory, IPrincip
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public virtual IReadOnlyList<object?> CreateFromOriginalValues(IUpdateEntry entry)
-        => CreateFromEntry(entry, (e, p) => e.GetOriginalValue(p));
+    public virtual IReadOnlyList<object?> CreateFromOriginalValues(IUpdateEntry entry) =>
+        CreateFromEntry(entry, (e, p) => e.GetOriginalValue(p));
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -107,12 +109,13 @@ public class CompositePrincipalKeyValueFactory : CompositeValueFactory, IPrincip
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public virtual IReadOnlyList<object?> CreateFromRelationshipSnapshot(IUpdateEntry entry)
-        => CreateFromEntry(entry, (e, p) => e.GetRelationshipSnapshotValue(p));
+    public virtual IReadOnlyList<object?> CreateFromRelationshipSnapshot(IUpdateEntry entry) =>
+        CreateFromEntry(entry, (e, p) => e.GetRelationshipSnapshotValue(p));
 
     private object[] CreateFromEntry(
         IUpdateEntry entry,
-        Func<IUpdateEntry, IProperty, object?> getValue)
+        Func<IUpdateEntry, IProperty, object?> getValue
+    )
     {
         var values = new object[Properties.Count];
         for (var i = 0; i < values.Length; i++)
@@ -135,11 +138,10 @@ public class CompositePrincipalKeyValueFactory : CompositeValueFactory, IPrincip
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public virtual object CreateEquatableKey(IUpdateEntry entry, bool fromOriginalValues)
-        => new EquatableKeyValue<IReadOnlyList<object?>>(
+    public virtual object CreateEquatableKey(IUpdateEntry entry, bool fromOriginalValues) =>
+        new EquatableKeyValue<IReadOnlyList<object?>>(
             _key,
-            fromOriginalValues
-                ? CreateFromOriginalValues(entry)
-                : CreateFromCurrentValues(entry),
-            EqualityComparer);
+            fromOriginalValues ? CreateFromOriginalValues(entry) : CreateFromCurrentValues(entry),
+            EqualityComparer
+        );
 }

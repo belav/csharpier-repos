@@ -18,10 +18,16 @@ namespace System.Runtime.InteropServices.Marshalling
     [UnsupportedOSPlatform("ios")]
     [UnsupportedOSPlatform("tvos")]
     [CLSCompliant(false)]
-    [CustomMarshaller(typeof(CustomMarshallerAttribute.GenericPlaceholder), MarshalMode.Default, typeof(ComInterfaceMarshaller<>))]
+    [CustomMarshaller(
+        typeof(CustomMarshallerAttribute.GenericPlaceholder),
+        MarshalMode.Default,
+        typeof(ComInterfaceMarshaller<>)
+    )]
     public static unsafe class ComInterfaceMarshaller<T>
     {
-        private static readonly Guid? TargetInterfaceIID = StrategyBasedComWrappers.DefaultIUnknownInterfaceDetailsStrategy.GetIUnknownDerivedDetails(typeof(T).TypeHandle)?.Iid;
+        private static readonly Guid? TargetInterfaceIID = StrategyBasedComWrappers
+            .DefaultIUnknownInterfaceDetailsStrategy.GetIUnknownDerivedDetails(typeof(T).TypeHandle)
+            ?.Iid;
 
         /// <summary>
         /// Convert a managed object to a COM interface pointer for the COM interface represented by <typeparamref name="T"/>.
@@ -36,7 +42,11 @@ namespace System.Runtime.InteropServices.Marshalling
             }
             if (!ComWrappers.TryGetComInstance(managed, out nint unknown))
             {
-                unknown = StrategyBasedComWrappers.DefaultMarshallingInstance.GetOrCreateComInterfaceForObject(managed, CreateComInterfaceFlags.None);
+                unknown =
+                    StrategyBasedComWrappers.DefaultMarshallingInstance.GetOrCreateComInterfaceForObject(
+                        managed,
+                        CreateComInterfaceFlags.None
+                    );
             }
             return CastIUnknownToInterfaceType(unknown);
         }
@@ -54,7 +64,11 @@ namespace System.Runtime.InteropServices.Marshalling
             {
                 return default;
             }
-            return (T)StrategyBasedComWrappers.DefaultMarshallingInstance.GetOrCreateObjectForComInstance((nint)unmanaged, CreateObjectFlags.Unwrap);
+            return (T)
+                StrategyBasedComWrappers.DefaultMarshallingInstance.GetOrCreateObjectForComInstance(
+                    (nint)unmanaged,
+                    CreateObjectFlags.Unwrap
+                );
         }
 
         /// <summary>
@@ -76,10 +90,18 @@ namespace System.Runtime.InteropServices.Marshalling
                 // If the managed type isn't a GeneratedComInterface-attributed type, we'll marshal to an IUnknown*.
                 return (void*)unknown;
             }
-            if (Marshal.QueryInterface(unknown, in Nullable.GetValueRefOrDefaultRef(in TargetInterfaceIID), out nint interfacePointer) != 0)
+            if (
+                Marshal.QueryInterface(
+                    unknown,
+                    in Nullable.GetValueRefOrDefaultRef(in TargetInterfaceIID),
+                    out nint interfacePointer
+                ) != 0
+            )
             {
                 Marshal.Release(unknown);
-                throw new InvalidCastException($"Unable to cast the provided managed object to a COM interface with ID '{TargetInterfaceIID.GetValueOrDefault():B}'");
+                throw new InvalidCastException(
+                    $"Unable to cast the provided managed object to a COM interface with ID '{TargetInterfaceIID.GetValueOrDefault():B}'"
+                );
             }
             Marshal.Release(unknown);
             return (void*)interfacePointer;

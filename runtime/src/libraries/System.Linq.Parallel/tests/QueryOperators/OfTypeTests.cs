@@ -45,7 +45,10 @@ namespace System.Linq.Parallel.Tests
         [Theory]
         [OuterLoop]
         [MemberData(nameof(Sources.OuterLoopRanges), MemberType = typeof(Sources))]
-        public static void OfType_AllValid_Longrunning(Labeled<ParallelQuery<int>> labeled, int count)
+        public static void OfType_AllValid_Longrunning(
+            Labeled<ParallelQuery<int>> labeled,
+            int count
+        )
         {
             OfType_AllValid(labeled, count);
         }
@@ -58,7 +61,10 @@ namespace System.Linq.Parallel.Tests
         public static void OfType_Unordered_AllValid_NotPipelined(int count)
         {
             IntegerRangeSet seen = new IntegerRangeSet(0, count);
-            Assert.All(UnorderedSources.Default(count).Select(x => (object)x).OfType<int>().ToList(), x => seen.Add(x));
+            Assert.All(
+                UnorderedSources.Default(count).Select(x => (object)x).OfType<int>().ToList(),
+                x => seen.Add(x)
+            );
             seen.AssertComplete();
         }
 
@@ -71,25 +77,38 @@ namespace System.Linq.Parallel.Tests
 
         [Theory]
         [MemberData(nameof(Sources.Ranges), new[] { 0, 1, 2, 16 }, MemberType = typeof(Sources))]
-        public static void OfType_AllValid_NotPipelined(Labeled<ParallelQuery<int>> labeled, int count)
+        public static void OfType_AllValid_NotPipelined(
+            Labeled<ParallelQuery<int>> labeled,
+            int count
+        )
         {
             ParallelQuery<int> query = labeled.Item;
             int seen = 0;
-            Assert.All(query.Select(x => (object)x).OfType<int>().ToList(), x => Assert.Equal(seen++, x));
+            Assert.All(
+                query.Select(x => (object)x).OfType<int>().ToList(),
+                x => Assert.Equal(seen++, x)
+            );
             Assert.Equal(count, seen);
         }
 
         [Theory]
         [OuterLoop]
         [MemberData(nameof(Sources.OuterLoopRanges), MemberType = typeof(Sources))]
-        public static void OfType_AllValid_NotPipelined_Longrunning(Labeled<ParallelQuery<int>> labeled, int count)
+        public static void OfType_AllValid_NotPipelined_Longrunning(
+            Labeled<ParallelQuery<int>> labeled,
+            int count
+        )
         {
             OfType_AllValid_NotPipelined(labeled, count);
         }
 
         [Theory]
         [MemberData(nameof(Sources.Ranges), new[] { 0, 1, 2, 16 }, MemberType = typeof(Sources))]
-        [MemberData(nameof(UnorderedSources.Ranges), new[] { 0, 1, 2, 16 }, MemberType = typeof(Sources))]
+        [MemberData(
+            nameof(UnorderedSources.Ranges),
+            new[] { 0, 1, 2, 16 },
+            MemberType = typeof(Sources)
+        )]
         public static void OfType_NoneValid(Labeled<ParallelQuery<int>> labeled, int count)
         {
             _ = count;
@@ -100,16 +119,30 @@ namespace System.Linq.Parallel.Tests
         [Theory]
         [OuterLoop]
         [MemberData(nameof(Sources.Ranges), new[] { 1024 * 64 }, MemberType = typeof(Sources))]
-        [MemberData(nameof(UnorderedSources.Ranges), new[] { 1024 * 64 }, MemberType = typeof(UnorderedSources))]
-        public static void OfType_NoneValid_Longrunning(Labeled<ParallelQuery<int>> labeled, int count)
+        [MemberData(
+            nameof(UnorderedSources.Ranges),
+            new[] { 1024 * 64 },
+            MemberType = typeof(UnorderedSources)
+        )]
+        public static void OfType_NoneValid_Longrunning(
+            Labeled<ParallelQuery<int>> labeled,
+            int count
+        )
         {
             OfType_NoneValid(labeled, count);
         }
 
         [Theory]
         [MemberData(nameof(Sources.Ranges), new[] { 0, 1, 2, 16 }, MemberType = typeof(Sources))]
-        [MemberData(nameof(UnorderedSources.Ranges), new[] { 0, 1, 2, 16 }, MemberType = typeof(Sources))]
-        public static void OfType_NoneValid_NotPipelined(Labeled<ParallelQuery<int>> labeled, int count)
+        [MemberData(
+            nameof(UnorderedSources.Ranges),
+            new[] { 0, 1, 2, 16 },
+            MemberType = typeof(Sources)
+        )]
+        public static void OfType_NoneValid_NotPipelined(
+            Labeled<ParallelQuery<int>> labeled,
+            int count
+        )
         {
             _ = count;
             ParallelQuery<int> query = labeled.Item;
@@ -119,8 +152,15 @@ namespace System.Linq.Parallel.Tests
         [Theory]
         [OuterLoop]
         [MemberData(nameof(Sources.Ranges), new[] { 1024 * 64 }, MemberType = typeof(Sources))]
-        [MemberData(nameof(UnorderedSources.Ranges), new[] { 1024 * 64 }, MemberType = typeof(UnorderedSources))]
-        public static void OfType_NoneValid_NotPipelined_Longrunning(Labeled<ParallelQuery<int>> labeled, int count)
+        [MemberData(
+            nameof(UnorderedSources.Ranges),
+            new[] { 1024 * 64 },
+            MemberType = typeof(UnorderedSources)
+        )]
+        public static void OfType_NoneValid_NotPipelined_Longrunning(
+            Labeled<ParallelQuery<int>> labeled,
+            int count
+        )
         {
             OfType_NoneValid_NotPipelined(labeled, count);
         }
@@ -133,7 +173,12 @@ namespace System.Linq.Parallel.Tests
         public static void OfType_Unordered_SomeValid(int count)
         {
             IntegerRangeSet seen = new IntegerRangeSet(count / 2, (count + 1) / 2);
-            foreach (int i in UnorderedSources.Default(count).Select(x => x >= count / 2 ? (object)x : x.ToString()).OfType<int>())
+            foreach (
+                int i in UnorderedSources
+                    .Default(count)
+                    .Select(x => x >= count / 2 ? (object)x : x.ToString())
+                    .OfType<int>()
+            )
             {
                 seen.Add(i);
             }
@@ -153,7 +198,9 @@ namespace System.Linq.Parallel.Tests
         {
             ParallelQuery<int> query = labeled.Item;
             int seen = count / 2;
-            foreach (int i in query.Select(x => x >= count / 2 ? (object)x : x.ToString()).OfType<int>())
+            foreach (
+                int i in query.Select(x => x >= count / 2 ? (object)x : x.ToString()).OfType<int>()
+            )
             {
                 Assert.Equal(seen++, i);
             }
@@ -163,7 +210,10 @@ namespace System.Linq.Parallel.Tests
         [Theory]
         [OuterLoop]
         [MemberData(nameof(Sources.OuterLoopRanges), MemberType = typeof(Sources))]
-        public static void OfType_SomeValid_Longrunning(Labeled<ParallelQuery<int>> labeled, int count)
+        public static void OfType_SomeValid_Longrunning(
+            Labeled<ParallelQuery<int>> labeled,
+            int count
+        )
         {
             OfType_SomeValid(labeled, count);
         }
@@ -176,7 +226,14 @@ namespace System.Linq.Parallel.Tests
         public static void OfType_Unordered_SomeValid_NotPipelined(int count)
         {
             IntegerRangeSet seen = new IntegerRangeSet(count / 2, (count + 1) / 2);
-            Assert.All(UnorderedSources.Default(count).Select(x => x >= count / 2 ? (object)x : x.ToString()).OfType<int>().ToList(), x => seen.Add(x));
+            Assert.All(
+                UnorderedSources
+                    .Default(count)
+                    .Select(x => x >= count / 2 ? (object)x : x.ToString())
+                    .OfType<int>()
+                    .ToList(),
+                x => seen.Add(x)
+            );
             seen.AssertComplete();
         }
 
@@ -189,18 +246,27 @@ namespace System.Linq.Parallel.Tests
 
         [Theory]
         [MemberData(nameof(Sources.Ranges), new[] { 0, 1, 2, 16 }, MemberType = typeof(Sources))]
-        public static void OfType_SomeValid_NotPipelined(Labeled<ParallelQuery<int>> labeled, int count)
+        public static void OfType_SomeValid_NotPipelined(
+            Labeled<ParallelQuery<int>> labeled,
+            int count
+        )
         {
             ParallelQuery<int> query = labeled.Item;
             int seen = count / 2;
-            Assert.All(query.Select(x => x >= count / 2 ? (object)x : x.ToString()).OfType<int>().ToList(), x => Assert.Equal(seen++, x));
+            Assert.All(
+                query.Select(x => x >= count / 2 ? (object)x : x.ToString()).OfType<int>().ToList(),
+                x => Assert.Equal(seen++, x)
+            );
             Assert.Equal(count, seen);
         }
 
         [Theory]
         [OuterLoop]
         [MemberData(nameof(Sources.OuterLoopRanges), MemberType = typeof(Sources))]
-        public static void OfType_SomeValid_NotPipelined_Longrunning(Labeled<ParallelQuery<int>> labeled, int count)
+        public static void OfType_SomeValid_NotPipelined_Longrunning(
+            Labeled<ParallelQuery<int>> labeled,
+            int count
+        )
         {
             OfType_SomeValid_NotPipelined(labeled, count);
         }
@@ -211,14 +277,20 @@ namespace System.Linq.Parallel.Tests
         {
             ParallelQuery<int> query = labeled.Item;
             int seen = count / 2;
-            Assert.All(query.Select(x => x >= count / 2 ? (object)x : null).OfType<int>(), x => Assert.Equal(seen++, x));
+            Assert.All(
+                query.Select(x => x >= count / 2 ? (object)x : null).OfType<int>(),
+                x => Assert.Equal(seen++, x)
+            );
             Assert.Equal(count, seen);
         }
 
         [Theory]
         [OuterLoop]
         [MemberData(nameof(Sources.OuterLoopRanges), MemberType = typeof(Sources))]
-        public static void OfType_SomeInvalidNull_Longrunning(Labeled<ParallelQuery<int>> labeled, int count)
+        public static void OfType_SomeInvalidNull_Longrunning(
+            Labeled<ParallelQuery<int>> labeled,
+            int count
+        )
         {
             OfType_SomeInvalidNull(labeled, count);
         }
@@ -230,12 +302,18 @@ namespace System.Linq.Parallel.Tests
             ParallelQuery<int> query = labeled.Item;
             int nullCount = 0;
             int seen = count / 2;
-            Assert.All(query.Select(x => x >= count / 2 ? (object)(x.ToString()) : (object)(string)null).OfType<string>(),
+            Assert.All(
+                query
+                    .Select(x => x >= count / 2 ? (object)(x.ToString()) : (object)(string)null)
+                    .OfType<string>(),
                 x =>
                 {
-                    if (string.IsNullOrEmpty(x)) nullCount++;
-                    else Assert.Equal(seen++, int.Parse(x));
-                });
+                    if (string.IsNullOrEmpty(x))
+                        nullCount++;
+                    else
+                        Assert.Equal(seen++, int.Parse(x));
+                }
+            );
             Assert.Equal(count, seen);
             Assert.Equal(0, nullCount);
         }
@@ -243,7 +321,10 @@ namespace System.Linq.Parallel.Tests
         [Theory]
         [OuterLoop]
         [MemberData(nameof(Sources.OuterLoopRanges), MemberType = typeof(Sources))]
-        public static void OfType_SomeValidNull_Longrunning(Labeled<ParallelQuery<int>> labeled, int count)
+        public static void OfType_SomeValidNull_Longrunning(
+            Labeled<ParallelQuery<int>> labeled,
+            int count
+        )
         {
             OfType_SomeValidNull(labeled, count);
         }
@@ -255,12 +336,16 @@ namespace System.Linq.Parallel.Tests
             ParallelQuery<int> query = labeled.Item;
             int nullCount = 0;
             int seen = count / 2;
-            Assert.All(query.Select(x => x >= count / 2 ? (object)(int?)x : (int?)null).OfType<int?>(),
+            Assert.All(
+                query.Select(x => x >= count / 2 ? (object)(int?)x : (int?)null).OfType<int?>(),
                 x =>
                 {
-                    if (!x.HasValue) nullCount++;
-                    else Assert.Equal(seen++, x.Value);
-                });
+                    if (!x.HasValue)
+                        nullCount++;
+                    else
+                        Assert.Equal(seen++, x.Value);
+                }
+            );
             Assert.Equal(count, seen);
             Assert.Equal(0, nullCount);
         }
@@ -268,7 +353,10 @@ namespace System.Linq.Parallel.Tests
         [Theory]
         [OuterLoop]
         [MemberData(nameof(Sources.OuterLoopRanges), MemberType = typeof(Sources))]
-        public static void OfType_SomeNull_Longrunning(Labeled<ParallelQuery<int>> labeled, int count)
+        public static void OfType_SomeNull_Longrunning(
+            Labeled<ParallelQuery<int>> labeled,
+            int count
+        )
         {
             OfType_SomeNull(labeled, count);
         }
@@ -276,7 +364,10 @@ namespace System.Linq.Parallel.Tests
         [Fact]
         public static void OfType_ArgumentNullException()
         {
-            AssertExtensions.Throws<ArgumentNullException>("source", () => ((ParallelQuery<object>)null).OfType<int>());
+            AssertExtensions.Throws<ArgumentNullException>(
+                "source",
+                () => ((ParallelQuery<object>)null).OfType<int>()
+            );
         }
     }
 }

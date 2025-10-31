@@ -32,16 +32,13 @@ namespace System.Buffers
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public readonly bool Contains128(char c) =>
-            c < 128 && ContainsUnchecked(c);
+        public readonly bool Contains128(char c) => c < 128 && ContainsUnchecked(c);
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public readonly bool Contains256(char c) =>
-            c < 256 && ContainsUnchecked(c);
+        public readonly bool Contains256(char c) => c < 256 && ContainsUnchecked(c);
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public readonly bool Contains(byte b) =>
-            ContainsUnchecked(b);
+        public readonly bool Contains(byte b) => ContainsUnchecked(b);
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         private readonly bool ContainsUnchecked(int b)

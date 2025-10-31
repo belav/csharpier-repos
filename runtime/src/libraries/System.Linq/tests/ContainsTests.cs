@@ -11,9 +11,10 @@ namespace System.Linq.Tests
         [Fact]
         public void SameResultsRepeatCallsIntQuery()
         {
-            var q = from x in new[] { 9999, 0, 888, -1, 66, -777, 1, 2, -12345 }
-                    where x > int.MinValue
-                    select x;
+            var q =
+                from x in new[] { 9999, 0, 888, -1, 66, -777, 1, 2, -12345 }
+                where x > int.MinValue
+                select x;
 
             Assert.Equal(q.Contains(-1), q.Contains(-1));
         }
@@ -21,9 +22,10 @@ namespace System.Linq.Tests
         [Fact]
         public void SameResultsRepeatCallsStringQuery()
         {
-            var q = from x in new[] { "!@#$%^", "C", "AAA", "", "Calling Twice", "SoS", string.Empty }
-                    where !string.IsNullOrEmpty(x)
-                    select x;
+            var q =
+                from x in new[] { "!@#$%^", "C", "AAA", "", "Calling Twice", "SoS", string.Empty }
+                where !string.IsNullOrEmpty(x)
+                select x;
 
             Assert.Equal(q.Contains("X"), q.Contains("X"));
         }
@@ -40,7 +42,12 @@ namespace System.Linq.Tests
             yield return new object[] { NumberRangeGuaranteedNotCollectionType(4, 5), 3, false };
             yield return new object[] { NumberRangeGuaranteedNotCollectionType(3, 5), 3, true };
             yield return new object[] { NumberRangeGuaranteedNotCollectionType(3, 5), 7, true };
-            yield return new object[] { RepeatedNumberGuaranteedNotCollectionType(10, 3), 10, true };
+            yield return new object[]
+            {
+                RepeatedNumberGuaranteedNotCollectionType(10, 3),
+                10,
+                true,
+            };
         }
 
         [Theory]
@@ -61,15 +68,44 @@ namespace System.Linq.Tests
         public static IEnumerable<object[]> String_TestData()
         {
             yield return new object[] { new string[] { null }, StringComparer.Ordinal, null, true };
-            yield return new object[] { new string[] { "Bob", "Robert", "Tim" }, null, "trboeR", false };
-            yield return new object[] { new string[] { "Bob", "Robert", "Tim" }, null, "Tim", true };
-            yield return new object[] { new string[] { "Bob", "Robert", "Tim" }, new AnagramEqualityComparer(), "trboeR", true };
-            yield return new object[] { new string[] { "Bob", "Robert", "Tim" }, new AnagramEqualityComparer(), "nevar", false };
+            yield return new object[]
+            {
+                new string[] { "Bob", "Robert", "Tim" },
+                null,
+                "trboeR",
+                false,
+            };
+            yield return new object[]
+            {
+                new string[] { "Bob", "Robert", "Tim" },
+                null,
+                "Tim",
+                true,
+            };
+            yield return new object[]
+            {
+                new string[] { "Bob", "Robert", "Tim" },
+                new AnagramEqualityComparer(),
+                "trboeR",
+                true,
+            };
+            yield return new object[]
+            {
+                new string[] { "Bob", "Robert", "Tim" },
+                new AnagramEqualityComparer(),
+                "nevar",
+                false,
+            };
         }
 
         [Theory]
         [MemberData(nameof(String_TestData))]
-        public void String(IEnumerable<string> source, IEqualityComparer<string> comparer, string value, bool expected)
+        public void String(
+            IEnumerable<string> source,
+            IEqualityComparer<string> comparer,
+            string value,
+            bool expected
+        )
         {
             if (comparer == null)
             {
@@ -79,7 +115,12 @@ namespace System.Linq.Tests
         }
 
         [Theory, MemberData(nameof(String_TestData))]
-        public void StringRunOnce(IEnumerable<string> source, IEqualityComparer<string> comparer, string value, bool expected)
+        public void StringRunOnce(
+            IEnumerable<string> source,
+            IEqualityComparer<string> comparer,
+            string value,
+            bool expected
+        )
         {
             if (comparer == null)
             {
@@ -93,8 +134,18 @@ namespace System.Linq.Tests
             yield return new object[] { new int?[] { 8, 0, 10, 3, 0, -8, 0 }, null, false };
             yield return new object[] { new int?[] { 8, 0, 10, null, 3, 0, -8, 0 }, null, true };
 
-            yield return new object[] { NullableNumberRangeGuaranteedNotCollectionType(3, 4), null, false };
-            yield return new object[] { RepeatedNullableNumberGuaranteedNotCollectionType(null, 5), null, true };
+            yield return new object[]
+            {
+                NullableNumberRangeGuaranteedNotCollectionType(3, 4),
+                null,
+                false,
+            };
+            yield return new object[]
+            {
+                RepeatedNullableNumberGuaranteedNotCollectionType(null, 5),
+                null,
+                true,
+            };
         }
 
         [Theory]
@@ -111,34 +162,46 @@ namespace System.Linq.Tests
             IEnumerable<int> source = null;
 
             AssertExtensions.Throws<ArgumentNullException>("source", () => source.Contains(42));
-            AssertExtensions.Throws<ArgumentNullException>("source", () => source.Contains(42, EqualityComparer<int>.Default));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "source",
+                () => source.Contains(42, EqualityComparer<int>.Default)
+            );
         }
 
         [Fact]
         public void ExplicitNullComparerDoesNotDeferToCollection()
         {
-            IEnumerable<string> source = new HashSet<string>(new AnagramEqualityComparer()) {"ABC"};
+            IEnumerable<string> source = new HashSet<string>(new AnagramEqualityComparer())
+            {
+                "ABC",
+            };
             Assert.False(source.Contains("BAC", null));
         }
 
         [Fact]
         public void ExplicitComparerDoesNotDeferToCollection()
         {
-            IEnumerable<string> source = new HashSet<string> {"ABC"};
+            IEnumerable<string> source = new HashSet<string> { "ABC" };
             Assert.True(source.Contains("abc", StringComparer.OrdinalIgnoreCase));
         }
 
         [Fact]
         public void ExplicitComparerDoestNotDeferToCollectionWithComparer()
         {
-            IEnumerable<string> source = new HashSet<string>(StringComparer.OrdinalIgnoreCase) {"ABC"};
+            IEnumerable<string> source = new HashSet<string>(StringComparer.OrdinalIgnoreCase)
+            {
+                "ABC",
+            };
             Assert.True(source.Contains("BAC", new AnagramEqualityComparer()));
         }
 
         [Fact]
         public void NoComparerDoesDeferToCollection()
         {
-            IEnumerable<string> source = new HashSet<string>(StringComparer.OrdinalIgnoreCase) {"ABC"};
+            IEnumerable<string> source = new HashSet<string>(StringComparer.OrdinalIgnoreCase)
+            {
+                "ABC",
+            };
             Assert.True(source.Contains("abc"));
         }
     }

@@ -32,7 +32,11 @@ internal static class SpanTest
 {
     public static bool Run()
     {
-        DynamicMethod dm = new DynamicMethod("TailCaller", typeof(void), new Type[] { typeof(Span<int>) });
+        DynamicMethod dm = new DynamicMethod(
+            "TailCaller",
+            typeof(void),
+            new Type[] { typeof(Span<int>) }
+        );
         ILGenerator il = dm.GetILGenerator();
         il.Emit(OpCodes.Ldarg_0);
         il.Emit(OpCodes.Ldarg_0);
@@ -40,7 +44,10 @@ internal static class SpanTest
         il.Emit(OpCodes.Ldarg_0);
         il.Emit(OpCodes.Ldarg_0);
         il.Emit(OpCodes.Tailcall);
-        il.Emit(OpCodes.Call, typeof(SpanTest).GetMethod("TailCallee", BindingFlags.Static | BindingFlags.NonPublic));
+        il.Emit(
+            OpCodes.Call,
+            typeof(SpanTest).GetMethod("TailCallee", BindingFlags.Static | BindingFlags.NonPublic)
+        );
         il.Emit(OpCodes.Ret);
 
         var tailCaller = (ActionOfSpanOfInt)dm.CreateDelegate(typeof(ActionOfSpanOfInt));
@@ -77,7 +84,11 @@ internal static class ByRefLikeTest
 {
     public static bool Run()
     {
-        DynamicMethod dm = new DynamicMethod("TailCaller", typeof(void), new Type[] { typeof(TestByRefLike) });
+        DynamicMethod dm = new DynamicMethod(
+            "TailCaller",
+            typeof(void),
+            new Type[] { typeof(TestByRefLike) }
+        );
         ILGenerator il = dm.GetILGenerator();
         il.Emit(OpCodes.Ldarg_0);
         il.Emit(OpCodes.Ldarg_0);
@@ -85,7 +96,13 @@ internal static class ByRefLikeTest
         il.Emit(OpCodes.Ldarg_0);
         il.Emit(OpCodes.Ldarg_0);
         il.Emit(OpCodes.Tailcall);
-        il.Emit(OpCodes.Call, typeof(ByRefLikeTest).GetMethod("TailCallee", BindingFlags.Static | BindingFlags.NonPublic));
+        il.Emit(
+            OpCodes.Call,
+            typeof(ByRefLikeTest).GetMethod(
+                "TailCallee",
+                BindingFlags.Static | BindingFlags.NonPublic
+            )
+        );
         il.Emit(OpCodes.Ret);
 
         var tailCaller = (ActionOfTestByRefLike)dm.CreateDelegate(typeof(ActionOfTestByRefLike));
@@ -106,13 +123,29 @@ internal static class ByRefLikeTest
         return true;
     }
 
-    private static void TailCallee(TestByRefLike a, TestByRefLike b, TestByRefLike c, TestByRefLike d, TestByRefLike e)
+    private static void TailCallee(
+        TestByRefLike a,
+        TestByRefLike b,
+        TestByRefLike c,
+        TestByRefLike d,
+        TestByRefLike e
+    )
     {
         GC.Collect();
         for (int i = 0; i < 10000; i++)
             GC.KeepAlive(new object());
-        if (a.span[0] != 42 || b.span[0] != 42 || c.span[0] != 42 || d.span[0] != 42 || e.span[0] != 42 ||
-            a.span2[0] != 42 || b.span2[0] != 42 || c.span2[0] != 42 || d.span2[0] != 42 || e.span2[0] != 42)
+        if (
+            a.span[0] != 42
+            || b.span[0] != 42
+            || c.span[0] != 42
+            || d.span[0] != 42
+            || e.span[0] != 42
+            || a.span2[0] != 42
+            || b.span2[0] != 42
+            || c.span2[0] != 42
+            || d.span2[0] != 42
+            || e.span2[0] != 42
+        )
         {
             throw new ArgumentException();
         }
@@ -125,12 +158,16 @@ internal static class ByRefLikeTest
     {
         [FieldOffset(8 * 0)]
         private object obj;
+
         [FieldOffset(8 * 0)]
         private object obj2;
+
         [FieldOffset(8 * 1)]
         public Span<int> span;
+
         [FieldOffset(8 * 1)]
         public Span<int> span2;
+
         [FieldOffset(8 * 3)]
         private object obj3;
 

@@ -17,9 +17,16 @@ namespace Internal.Cryptography.Pal.AnyOS
             {
                 using (var manager = new PointerMemoryManager<byte>(pin, encodedMessage.Length))
                 {
-                    AsnValueReader reader = new AsnValueReader(encodedMessage, AsnEncodingRules.BER);
+                    AsnValueReader reader = new AsnValueReader(
+                        encodedMessage,
+                        AsnEncodingRules.BER
+                    );
 
-                    ContentInfoAsn.Decode(ref reader, manager.Memory, out ContentInfoAsn contentInfo);
+                    ContentInfoAsn.Decode(
+                        ref reader,
+                        manager.Memory,
+                        out ContentInfoAsn contentInfo
+                    );
 
                     switch (contentInfo.ContentType)
                     {

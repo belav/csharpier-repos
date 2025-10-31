@@ -4,18 +4,20 @@
 using System;
 using System.Collections.Generic;
 using Internal.Metadata.NativeFormat.Writer;
-
 using Cts = Internal.TypeSystem;
-
 using Debug = System.Diagnostics.Debug;
 
 namespace ILCompiler.Metadata
 {
     internal partial class Transform<TPolicy>
     {
-        private Dictionary<NamespaceKey, NamespaceDefinition> _namespaceDefs = new Dictionary<NamespaceKey, NamespaceDefinition>();
+        private Dictionary<NamespaceKey, NamespaceDefinition> _namespaceDefs =
+            new Dictionary<NamespaceKey, NamespaceDefinition>();
 
-        private NamespaceDefinition HandleNamespaceDefinition(Cts.ModuleDesc parentScope, string namespaceString)
+        private NamespaceDefinition HandleNamespaceDefinition(
+            Cts.ModuleDesc parentScope,
+            string namespaceString
+        )
         {
             Debug.Assert(namespaceString != null);
 
@@ -28,10 +30,7 @@ namespace ILCompiler.Metadata
 
             if (namespaceString.Length == 0)
             {
-                var rootNamespace = new NamespaceDefinition
-                {
-                    Name = null,
-                };
+                var rootNamespace = new NamespaceDefinition { Name = null };
                 _namespaceDefs.Add(key, rootNamespace);
                 ScopeDefinition rootScope = HandleScopeDefinition(parentScope);
                 rootScope.RootNamespaceDefinition = rootNamespace;
@@ -40,7 +39,10 @@ namespace ILCompiler.Metadata
             }
 
             string currentNamespaceName = string.Empty;
-            NamespaceDefinition currentNamespace = HandleNamespaceDefinition(parentScope, currentNamespaceName);
+            NamespaceDefinition currentNamespace = HandleNamespaceDefinition(
+                parentScope,
+                currentNamespaceName
+            );
             foreach (var segment in namespaceString.Split('.'))
             {
                 string nextNamespaceName = currentNamespaceName;
@@ -54,7 +56,7 @@ namespace ILCompiler.Metadata
                     nextNamespace = new NamespaceDefinition
                     {
                         Name = HandleString(segment.Length == 0 ? null : segment),
-                        ParentScopeOrNamespace = currentNamespace
+                        ParentScopeOrNamespace = currentNamespace,
                     };
 
                     _namespaceDefs.Add(key, nextNamespace);
@@ -67,9 +69,13 @@ namespace ILCompiler.Metadata
             return currentNamespace;
         }
 
-        private Dictionary<NamespaceKey, NamespaceReference> _namespaceRefs = new Dictionary<NamespaceKey, NamespaceReference>();
+        private Dictionary<NamespaceKey, NamespaceReference> _namespaceRefs =
+            new Dictionary<NamespaceKey, NamespaceReference>();
 
-        private NamespaceReference HandleNamespaceReference(Cts.ModuleDesc parentScope, string namespaceString)
+        private NamespaceReference HandleNamespaceReference(
+            Cts.ModuleDesc parentScope,
+            string namespaceString
+        )
         {
             // The format represents root namespace as a namespace with null name, in contrast with ECMA-335
             if (namespaceString.Length == 0)
@@ -113,7 +119,7 @@ namespace ILCompiler.Metadata
                     nextNamespace = new NamespaceReference
                     {
                         Name = HandleString(segment.Length == 0 ? null : segment),
-                        ParentScopeOrNamespace = currentNamespace
+                        ParentScopeOrNamespace = currentNamespace,
                     };
 
                     _namespaceRefs.Add(key, nextNamespace);

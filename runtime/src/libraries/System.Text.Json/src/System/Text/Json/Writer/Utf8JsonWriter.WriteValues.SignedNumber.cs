@@ -19,8 +19,7 @@ namespace System.Text.Json
         /// <remarks>
         /// Writes the <see cref="int"/> using the default <see cref="StandardFormat"/> (that is, 'G'), for example: 32767.
         /// </remarks>
-        public void WriteNumberValue(int value)
-            => WriteNumberValue((long)value);
+        public void WriteNumberValue(int value) => WriteNumberValue((long)value);
 
         /// <summary>
         /// Writes the <see cref="long"/> value (as a JSON number) as an element of a JSON array.
@@ -68,7 +67,11 @@ namespace System.Text.Json
                 output[BytesPending++] = JsonConstants.ListSeparator;
             }
 
-            bool result = Utf8Formatter.TryFormat(value, output.Slice(BytesPending), out int bytesWritten);
+            bool result = Utf8Formatter.TryFormat(
+                value,
+                output.Slice(BytesPending),
+                out int bytesWritten
+            );
             Debug.Assert(result);
             BytesPending += bytesWritten;
         }
@@ -102,7 +105,11 @@ namespace System.Text.Json
                 BytesPending += indent;
             }
 
-            bool result = Utf8Formatter.TryFormat(value, output.Slice(BytesPending), out int bytesWritten);
+            bool result = Utf8Formatter.TryFormat(
+                value,
+                output.Slice(BytesPending),
+                out int bytesWritten
+            );
             Debug.Assert(result);
             BytesPending += bytesWritten;
         }

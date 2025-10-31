@@ -12,16 +12,14 @@ namespace System.Text.Json.Serialization.Tests
         {
             var obj = new ObjectWrapperWithProperty
             {
-                Object = new WrittenObject
-                {
-                    Int = 123,
-                    String = "Hello",
-                }
+                Object = new WrittenObject { Int = 123, String = "Hello" },
             };
 
             var json = JsonSerializer.Serialize(obj);
 
-            var ex = Assert.Throws<InvalidCastException>(() => JsonSerializer.Deserialize<ObjectWrapperWithProperty>(json));
+            var ex = Assert.Throws<InvalidCastException>(() =>
+                JsonSerializer.Deserialize<ObjectWrapperWithProperty>(json)
+            );
         }
 
         [Fact]
@@ -30,16 +28,14 @@ namespace System.Text.Json.Serialization.Tests
             var options = new JsonSerializerOptions { IncludeFields = true };
             var obj = new ObjectWrapperWithField
             {
-                Object = new WrittenObject
-                {
-                    Int = 123,
-                    String = "Hello",
-                }
+                Object = new WrittenObject { Int = 123, String = "Hello" },
             };
 
             var json = JsonSerializer.Serialize(obj);
 
-            var ex = Assert.Throws<InvalidCastException>(() => JsonSerializer.Deserialize<ObjectWrapperWithField>(json, options));
+            var ex = Assert.Throws<InvalidCastException>(() =>
+                JsonSerializer.Deserialize<ObjectWrapperWithField>(json, options)
+            );
         }
 
         /// <summary>
@@ -47,16 +43,23 @@ namespace System.Text.Json.Serialization.Tests
         /// </summary>
         public class InvalidCastConverter : JsonConverter<object>
         {
-            public override bool CanConvert(Type typeToConvert)
-                => true;
+            public override bool CanConvert(Type typeToConvert) => true;
 
-            public override object Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+            public override object Read(
+                ref Utf8JsonReader reader,
+                Type typeToConvert,
+                JsonSerializerOptions options
+            )
             {
                 JsonSerializer.Deserialize<WrittenObject>(ref reader, options);
                 return new ReadObject { Double = Math.PI };
             }
 
-            public override void Write(Utf8JsonWriter writer, object value, JsonSerializerOptions options)
+            public override void Write(
+                Utf8JsonWriter writer,
+                object value,
+                JsonSerializerOptions options
+            )
             {
                 JsonSerializer.Serialize<WrittenObject>(writer, (WrittenObject)value, options);
             }
@@ -89,7 +92,10 @@ namespace System.Text.Json.Serialization.Tests
         public static void CastDerivedWorks()
         {
             var options = new JsonSerializerOptions { IncludeFields = true };
-            var obj = JsonSerializer.Deserialize<ObjectWrapperDerived>(@"{""DerivedProperty"":"""",""DerivedField"":""""}", options);
+            var obj = JsonSerializer.Deserialize<ObjectWrapperDerived>(
+                @"{""DerivedProperty"":"""",""DerivedField"":""""}",
+                options
+            );
 
             Assert.IsType<Derived>(obj.DerivedField);
             Assert.IsType<Derived>(obj.DerivedProperty);
@@ -99,7 +105,10 @@ namespace System.Text.Json.Serialization.Tests
         public static void CastBaseWorks()
         {
             var options = new JsonSerializerOptions { IncludeFields = true };
-            var obj = JsonSerializer.Deserialize<ObjectWrapperBase>(@"{""BaseProperty"":"""",""BaseField"":""""}", options);
+            var obj = JsonSerializer.Deserialize<ObjectWrapperBase>(
+                @"{""BaseProperty"":"""",""BaseField"":""""}",
+                options
+            );
 
             Assert.IsType<Derived>(obj.BaseField);
             Assert.IsType<Derived>(obj.BaseProperty);
@@ -109,14 +118,24 @@ namespace System.Text.Json.Serialization.Tests
         public static void CastBasePropertyFails()
         {
             var options = new JsonSerializerOptions { IncludeFields = true };
-            var ex = Assert.Throws<InvalidCastException>(() => JsonSerializer.Deserialize<ObjectWrapperDerivedWithProperty>(@"{""DerivedProperty"":""""}", options));
+            var ex = Assert.Throws<InvalidCastException>(() =>
+                JsonSerializer.Deserialize<ObjectWrapperDerivedWithProperty>(
+                    @"{""DerivedProperty"":""""}",
+                    options
+                )
+            );
         }
 
         [Fact]
         public static void CastBaseFieldFails()
         {
             var options = new JsonSerializerOptions { IncludeFields = true };
-            var ex = Assert.Throws<InvalidCastException>(() => JsonSerializer.Deserialize<ObjectWrapperDerivedWithField>(@"{""DerivedField"":""""}", options));
+            var ex = Assert.Throws<InvalidCastException>(() =>
+                JsonSerializer.Deserialize<ObjectWrapperDerivedWithField>(
+                    @"{""DerivedField"":""""}",
+                    options
+                )
+            );
         }
 
         /// <summary>
@@ -124,16 +143,23 @@ namespace System.Text.Json.Serialization.Tests
         /// </summary>
         private class BaseConverter : JsonConverter<Base>
         {
-            public override bool CanConvert(Type typeToConvert)
-                => true;
+            public override bool CanConvert(Type typeToConvert) => true;
 
-            public override Base Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+            public override Base Read(
+                ref Utf8JsonReader reader,
+                Type typeToConvert,
+                JsonSerializerOptions options
+            )
             {
                 reader.GetString();
                 return new Derived() { String = "Hello", Double = Math.PI };
             }
 
-            public override void Write(Utf8JsonWriter writer, Base value, JsonSerializerOptions options)
+            public override void Write(
+                Utf8JsonWriter writer,
+                Base value,
+                JsonSerializerOptions options
+            )
             {
                 throw new NotImplementedException();
             }
@@ -144,16 +170,23 @@ namespace System.Text.Json.Serialization.Tests
         /// </summary>
         private class DerivedConverter : JsonConverter<Derived>
         {
-            public override bool CanConvert(Type typeToConvert)
-                => true;
+            public override bool CanConvert(Type typeToConvert) => true;
 
-            public override Derived Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+            public override Derived Read(
+                ref Utf8JsonReader reader,
+                Type typeToConvert,
+                JsonSerializerOptions options
+            )
             {
                 reader.GetString();
                 return new Derived() { String = "Hello", Double = Math.PI };
             }
 
-            public override void Write(Utf8JsonWriter writer, Derived value, JsonSerializerOptions options)
+            public override void Write(
+                Utf8JsonWriter writer,
+                Derived value,
+                JsonSerializerOptions options
+            )
             {
                 throw new NotImplementedException();
             }
@@ -164,16 +197,23 @@ namespace System.Text.Json.Serialization.Tests
         /// </summary>
         private class InvalidBaseConverter : JsonConverter<Base>
         {
-            public override bool CanConvert(Type typeToConvert)
-                => true;
+            public override bool CanConvert(Type typeToConvert) => true;
 
-            public override Base Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+            public override Base Read(
+                ref Utf8JsonReader reader,
+                Type typeToConvert,
+                JsonSerializerOptions options
+            )
             {
                 reader.GetString();
                 return new Base() { String = "Hello" };
             }
 
-            public override void Write(Utf8JsonWriter writer, Base value, JsonSerializerOptions options)
+            public override void Write(
+                Utf8JsonWriter writer,
+                Base value,
+                JsonSerializerOptions options
+            )
             {
                 throw new NotImplementedException();
             }
@@ -193,6 +233,7 @@ namespace System.Text.Json.Serialization.Tests
         {
             [JsonConverter(typeof(BaseConverter))]
             public Derived DerivedProperty { get; set; }
+
             [JsonConverter(typeof(BaseConverter))]
 #pragma warning disable 0649
             public Derived DerivedField;
@@ -217,6 +258,7 @@ namespace System.Text.Json.Serialization.Tests
         {
             [JsonConverter(typeof(DerivedConverter))]
             public Base BaseProperty { get; set; }
+
             [JsonConverter(typeof(DerivedConverter))]
 #pragma warning disable 0649
             public Base BaseField;

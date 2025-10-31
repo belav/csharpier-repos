@@ -32,7 +32,10 @@ namespace Microsoft.CSharp.RuntimeBinder.ComInterop
         }
 
         [RequiresUnreferencedCode(Binder.TrimmerWarning)]
-        internal Expression InitializeArgumentVariant(MemberExpression variant, Expression parameter)
+        internal Expression InitializeArgumentVariant(
+            MemberExpression variant,
+            Expression parameter
+        )
         {
             //NOTE: we must remember our variant
             //the reason is that argument order does not map exactly to the order of variants for invoke
@@ -65,24 +68,30 @@ namespace Microsoft.CSharp.RuntimeBinder.ComInterop
             if (_argBuilder is ConvertibleArgBuilder)
             {
                 return Expression.Call(
-                    typeof(DynamicVariantExtensions).GetMethod(nameof(DynamicVariantExtensions.SetAsIConvertible)),
+                    typeof(DynamicVariantExtensions).GetMethod(
+                        nameof(DynamicVariantExtensions.SetAsIConvertible)
+                    ),
                     variant,
                     argument
                 );
             }
 
-            if (_targetComType.IsPrimitiveType() ||
-               (_targetComType == VarEnum.VT_DISPATCH) ||
-               (_targetComType == VarEnum.VT_UNKNOWN) ||
-               (_targetComType == VarEnum.VT_VARIANT) ||
-               (_targetComType == VarEnum.VT_RECORD) ||
-               (_targetComType == VarEnum.VT_ARRAY))
+            if (
+                _targetComType.IsPrimitiveType()
+                || (_targetComType == VarEnum.VT_DISPATCH)
+                || (_targetComType == VarEnum.VT_UNKNOWN)
+                || (_targetComType == VarEnum.VT_VARIANT)
+                || (_targetComType == VarEnum.VT_RECORD)
+                || (_targetComType == VarEnum.VT_ARRAY)
+            )
             {
                 // paramVariants._elementN.AsT = (cast)argN
-                return Expression.Call(null,
+                return Expression.Call(
+                    null,
                     DynamicVariantExtensions.GetSetter(_targetComType),
                     variant,
-                    argument);
+                    argument
+                );
             }
 
             switch (_targetComType)
@@ -92,7 +101,16 @@ namespace Microsoft.CSharp.RuntimeBinder.ComInterop
 
                 case VarEnum.VT_NULL:
                     // paramVariants._elementN = ComVariant.Null;
-                    return Expression.Assign(variant, Expression.Property(null, typeof(ComVariant).GetProperty(nameof(ComVariant.Null), BindingFlags.Public | BindingFlags.Static)));
+                    return Expression.Assign(
+                        variant,
+                        Expression.Property(
+                            null,
+                            typeof(ComVariant).GetProperty(
+                                nameof(ComVariant.Null),
+                                BindingFlags.Public | BindingFlags.Static
+                            )
+                        )
+                    );
 
                 default:
                     Debug.Assert(false, "Unexpected VarEnum");
@@ -102,7 +120,10 @@ namespace Microsoft.CSharp.RuntimeBinder.ComInterop
 
         private static Expression Release(Expression pUnk)
         {
-            return Expression.Call(typeof(UnsafeMethods).GetMethod(nameof(UnsafeMethods.IUnknownReleaseNotZero)), pUnk);
+            return Expression.Call(
+                typeof(UnsafeMethods).GetMethod(nameof(UnsafeMethods.IUnknownReleaseNotZero)),
+                pUnk
+            );
         }
 
         internal Expression Clear()
@@ -112,7 +133,10 @@ namespace Microsoft.CSharp.RuntimeBinder.ComInterop
                 if (_argBuilder is StringArgBuilder)
                 {
                     Debug.Assert(TempVariable != null);
-                    return Expression.Call(typeof(Marshal).GetMethod(nameof(Marshal.FreeBSTR)), TempVariable);
+                    return Expression.Call(
+                        typeof(Marshal).GetMethod(nameof(Marshal.FreeBSTR)),
+                        TempVariable
+                    );
                 }
 
                 if (_argBuilder is DispatchArgBuilder)
@@ -130,7 +154,10 @@ namespace Microsoft.CSharp.RuntimeBinder.ComInterop
                 if (_argBuilder is VariantArgBuilder)
                 {
                     Debug.Assert(TempVariable != null);
-                    return Expression.Call(TempVariable, typeof(ComVariant).GetMethod(nameof(ComVariant.Dispose)));
+                    return Expression.Call(
+                        TempVariable,
+                        typeof(ComVariant).GetMethod(nameof(ComVariant.Dispose))
+                    );
                 }
                 return null;
             }
@@ -148,7 +175,10 @@ namespace Microsoft.CSharp.RuntimeBinder.ComInterop
                 case VarEnum.VT_RECORD:
                 case VarEnum.VT_VARIANT:
                     // paramVariants._elementN.Dispose()
-                    return Expression.Call(_variant, typeof(ComVariant).GetMethod(nameof(ComVariant.Dispose)));
+                    return Expression.Call(
+                        _variant,
+                        typeof(ComVariant).GetMethod(nameof(ComVariant.Dispose))
+                    );
 
                 default:
                     Debug.Assert(_targetComType.IsPrimitiveType(), "Unexpected VarEnum");
@@ -164,10 +194,7 @@ namespace Microsoft.CSharp.RuntimeBinder.ComInterop
             }
             return Expression.Assign(
                 parameter,
-                Helpers.Convert(
-                    _argBuilder.UnmarshalFromRef(TempVariable),
-                    parameter.Type
-                )
+                Helpers.Convert(_argBuilder.UnmarshalFromRef(TempVariable), parameter.Type)
             );
         }
     }

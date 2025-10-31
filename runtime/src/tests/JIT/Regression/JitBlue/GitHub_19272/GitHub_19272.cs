@@ -2,6 +2,7 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using Xunit;
+
 // The test showed an incorrect optimization of (int)(long<<32+) when the const 32+ tree
 // had side effects.
 
@@ -9,7 +10,12 @@ struct S0
 {
     public ulong F0;
     public sbyte F6;
-    public S0(sbyte f6): this() { F6 = f6; }
+
+    public S0(sbyte f6)
+        : this()
+    {
+        F6 = f6;
+    }
 }
 
 public class Program

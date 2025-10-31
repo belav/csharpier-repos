@@ -4,8 +4,8 @@
 // </copyright>
 //------------------------------------------------------------------------------
 
-namespace System.Web.UI {
-
+namespace System.Web.UI
+{
     using System;
     using System.Collections;
     using System.ComponentModel;
@@ -13,22 +13,23 @@ namespace System.Web.UI {
     /// <devdoc>
     /// </devdoc>
     [AttributeUsage(AttributeTargets.Class)]
-    public sealed class NonVisualControlAttribute : Attribute {
-
+    public sealed class NonVisualControlAttribute : Attribute
+    {
+        /// <internalonly/>
+        /// <devdoc>
+        /// <para></para>
+        /// </devdoc>
+        public static readonly NonVisualControlAttribute NonVisual = new NonVisualControlAttribute(
+            true
+        );
 
         /// <internalonly/>
         /// <devdoc>
         /// <para></para>
         /// </devdoc>
-        public static readonly NonVisualControlAttribute NonVisual = new NonVisualControlAttribute(true);
-
-
-        /// <internalonly/>
-        /// <devdoc>
-        /// <para></para>
-        /// </devdoc>
-        public static readonly NonVisualControlAttribute Visual = new NonVisualControlAttribute(false);
-
+        public static readonly NonVisualControlAttribute Visual = new NonVisualControlAttribute(
+            false
+        );
 
         /// <internalonly/>
         /// <devdoc>
@@ -38,33 +39,31 @@ namespace System.Web.UI {
 
         private bool _nonVisual;
 
+        /// <devdoc>
+        /// </devdoc>
+        public NonVisualControlAttribute()
+            : this(true) { }
 
         /// <devdoc>
         /// </devdoc>
-        public NonVisualControlAttribute() : this(true) {
-        }
-
-
-        /// <devdoc>
-        /// </devdoc>
-        public NonVisualControlAttribute(bool nonVisual) {
+        public NonVisualControlAttribute(bool nonVisual)
+        {
             _nonVisual = nonVisual;
         }
-
 
         /// <devdoc>
         ///    <para>Indicates if the control is non-visual.</para>
         /// </devdoc>
-        public bool IsNonVisual {
-            get {
-                return _nonVisual;
-            }
+        public bool IsNonVisual
+        {
+            get { return _nonVisual; }
         }
 
-
         /// <internalonly/>
-        public override bool Equals(object obj) {
-            if (obj == this) {
+        public override bool Equals(object obj)
+        {
+            if (obj == this)
+            {
                 return true;
             }
 
@@ -72,17 +71,16 @@ namespace System.Web.UI {
             return (other != null) && (other.IsNonVisual == IsNonVisual);
         }
 
-
         /// <internalonly/>
-        public override int GetHashCode() {
+        public override int GetHashCode()
+        {
             return _nonVisual.GetHashCode();
         }
 
-
         /// <internalonly/>
-        public override bool IsDefaultAttribute() {
+        public override bool IsDefaultAttribute()
+        {
             return this.Equals(Default);
         }
     }
 }
-

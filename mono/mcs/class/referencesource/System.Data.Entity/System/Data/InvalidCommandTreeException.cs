@@ -28,7 +28,7 @@ namespace System.Data
         /// Constructs a new InvalidCommandTreeException with the specified message.
         /// </summary>
         /// <param name="message">The exception message</param>
-        public InvalidCommandTreeException(string message) 
+        public InvalidCommandTreeException(string message)
             : base(message) { }
 
         /// <summary>
@@ -46,6 +46,5 @@ namespace System.Data
         /// <param name="context"></param>
         private InvalidCommandTreeException(SerializationInfo info, StreamingContext context)
             : base(info, context) { }
-
-     }        
+    }
 }

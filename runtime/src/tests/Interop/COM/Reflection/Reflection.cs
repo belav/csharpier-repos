@@ -3,10 +3,10 @@
 //
 
 using System;
-using System.Text;
-using System.Security;
 using System.Reflection;
 using System.Runtime.InteropServices;
+using System.Security;
+using System.Text;
 using Xunit;
 
 public class Reflection
@@ -73,14 +73,15 @@ public class Reflection
         try
         {
             Console.WriteLine("Scenario: ActivateCOMType");
-            var contextMenu = (NETServer.ContextMenu)Activator.CreateInstance(typeof(NETServer.ContextMenu));
+            var contextMenu = (NETServer.ContextMenu)
+                Activator.CreateInstance(typeof(NETServer.ContextMenu));
 
             // Non-Windows should throw PlatformNotSupportedException
             if (!OperatingSystem.IsWindows())
             {
                 return false;
             }
-            
+
             if (contextMenu == null)
             {
                 Console.WriteLine("ActivateCOMType failed");

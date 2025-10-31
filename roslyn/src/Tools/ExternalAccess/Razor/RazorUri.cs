@@ -10,8 +10,8 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.Razor;
 
 internal static class RazorUri
 {
-    public static Uri CreateAbsoluteUri(string absolutePath)
-        => ProtocolConversions.CreateAbsoluteUri(absolutePath);
+    public static Uri CreateAbsoluteUri(string absolutePath) =>
+        ProtocolConversions.CreateAbsoluteUri(absolutePath);
 
     public static Uri CreateUri(this TextDocument document)
     {

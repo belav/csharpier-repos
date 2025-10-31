@@ -6,7 +6,12 @@ namespace System.ServiceModel.Channels
 {
     static class RedirectionUtility
     {
-        public static bool IsNamespaceAndValueMatch(string value1, string namespace1, string value2, string namespace2)
+        public static bool IsNamespaceAndValueMatch(
+            string value1,
+            string namespace1,
+            string value2,
+            string namespace2
+        )
         {
             bool result = false;
 
@@ -47,7 +52,8 @@ namespace System.ServiceModel.Channels
                 throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("value");
             }
 
-            string hashString = value + value.GetHashCode().ToString(Globalization.CultureInfo.InvariantCulture);
+            string hashString =
+                value + value.GetHashCode().ToString(Globalization.CultureInfo.InvariantCulture);
 
             if (!string.IsNullOrEmpty(ns))
             {
@@ -56,6 +62,5 @@ namespace System.ServiceModel.Channels
 
             return hashString.GetHashCode();
         }
-
     }
 }

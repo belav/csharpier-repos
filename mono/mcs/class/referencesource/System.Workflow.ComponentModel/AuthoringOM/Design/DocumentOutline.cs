@@ -1,20 +1,22 @@
-using System.Windows.Forms;
-using System.Windows.Forms.Design;
-using System.ComponentModel;
-using System.ComponentModel.Design;
-using System.Drawing;
+using System;
 using System.Collections;
 using System.Collections.Generic;
-using System;
+using System.ComponentModel;
+using System.ComponentModel.Design;
 using System.Diagnostics;
+using System.Drawing;
+using System.Windows.Forms;
+using System.Windows.Forms.Design;
 
 namespace System.Workflow.ComponentModel.Design
 {
     /// <summary>
     /// This class renders the document outline of the workflow being designed. It shows hierarchical
-    /// representation of the workflow model. 
+    /// representation of the workflow model.
     /// </summary>
-    [Obsolete("The System.Workflow.* types are deprecated.  Instead, please use the new types from System.Activities.*")]
+    [Obsolete(
+        "The System.Workflow.* types are deprecated.  Instead, please use the new types from System.Activities.*"
+    )]
     public class WorkflowOutline : UserControl
     {
         #region Fields
@@ -35,27 +37,39 @@ namespace System.Workflow.ComponentModel.Design
 
             IDesignerHost designerHost = GetService(typeof(IDesignerHost)) as IDesignerHost;
             if (designerHost == null)
-                throw new InvalidOperationException(SR.GetString(SR.General_MissingService, typeof(IDesignerHost).FullName));
+                throw new InvalidOperationException(
+                    SR.GetString(SR.General_MissingService, typeof(IDesignerHost).FullName)
+                );
 
             // listen for loaded and unloaded events
             DesignSurface surface = GetService(typeof(DesignSurface)) as DesignSurface;
             if (surface == null)
-                throw new InvalidOperationException(SR.GetString(SR.General_MissingService, typeof(DesignSurface).FullName));
+                throw new InvalidOperationException(
+                    SR.GetString(SR.General_MissingService, typeof(DesignSurface).FullName)
+                );
             surface.Loaded += new LoadedEventHandler(OnSurfaceLoaded);
 
-            IComponentChangeService componentChangeService = GetService(typeof(IComponentChangeService)) as IComponentChangeService;
+            IComponentChangeService componentChangeService =
+                GetService(typeof(IComponentChangeService)) as IComponentChangeService;
             if (componentChangeService != null)
             {
-                componentChangeService.ComponentChanged += new ComponentChangedEventHandler(OnComponentChanged);
-                componentChangeService.ComponentRename += new ComponentRenameEventHandler(OnComponentRename);
+                componentChangeService.ComponentChanged += new ComponentChangedEventHandler(
+                    OnComponentChanged
+                );
+                componentChangeService.ComponentRename += new ComponentRenameEventHandler(
+                    OnComponentRename
+                );
             }
 
             WorkflowTheme.ThemeChanged += new EventHandler(OnThemeChanged);
 
             // Get an ISelectionService service
-            ISelectionService selectionService = GetService(typeof(ISelectionService)) as ISelectionService;
+            ISelectionService selectionService =
+                GetService(typeof(ISelectionService)) as ISelectionService;
             if (selectionService != null)
-                selectionService.SelectionChanged += new System.EventHandler(this.OnSelectionChanged);
+                selectionService.SelectionChanged += new System.EventHandler(
+                    this.OnSelectionChanged
+                );
 
             IUIService uiService = GetService(typeof(IUIService)) as IUIService;
             if (uiService != null)
@@ -80,16 +94,24 @@ namespace System.Workflow.ComponentModel.Design
 
                 WorkflowTheme.ThemeChanged -= new EventHandler(OnThemeChanged);
 
-                IComponentChangeService componentChangeService = GetService(typeof(IComponentChangeService)) as IComponentChangeService;
+                IComponentChangeService componentChangeService =
+                    GetService(typeof(IComponentChangeService)) as IComponentChangeService;
                 if (componentChangeService != null)
                 {
-                    componentChangeService.ComponentChanged -= new ComponentChangedEventHandler(OnComponentChanged);
-                    componentChangeService.ComponentRename -= new ComponentRenameEventHandler(OnComponentRename);
+                    componentChangeService.ComponentChanged -= new ComponentChangedEventHandler(
+                        OnComponentChanged
+                    );
+                    componentChangeService.ComponentRename -= new ComponentRenameEventHandler(
+                        OnComponentRename
+                    );
                 }
 
-                ISelectionService selectionService = GetService(typeof(ISelectionService)) as ISelectionService;
+                ISelectionService selectionService =
+                    GetService(typeof(ISelectionService)) as ISelectionService;
                 if (selectionService != null)
-                    selectionService.SelectionChanged -= new System.EventHandler(OnSelectionChanged);
+                    selectionService.SelectionChanged -= new System.EventHandler(
+                        OnSelectionChanged
+                    );
 
                 DesignSurface surface = GetService(typeof(DesignSurface)) as DesignSurface;
                 if (surface != null)
@@ -105,19 +127,13 @@ namespace System.Workflow.ComponentModel.Design
         #region Public Methods
         //completly reloads the document outline tree
         private bool needsExpandAll = true;
-        internal protected bool NeedsExpandAll
+        protected internal bool NeedsExpandAll
         {
-            get
-            {
-                return this.needsExpandAll;
-            }
-            set
-            {
-                this.needsExpandAll = value;
-            }
+            get { return this.needsExpandAll; }
+            set { this.needsExpandAll = value; }
         }
 
-        internal protected TreeNode RootNode
+        protected internal TreeNode RootNode
         {
             get
             {
@@ -138,8 +154,13 @@ namespace System.Workflow.ComponentModel.Design
                 this.treeView.Nodes.Clear();
                 this.activityToNodeMapping.Clear();
 
-                IRootDesigner rootDesigner = ActivityDesigner.GetSafeRootDesigner(this.serviceProvider) as IRootDesigner;
-                if (rootDesigner != null && rootDesigner.Component != null && rootDesigner.Component is Activity)
+                IRootDesigner rootDesigner =
+                    ActivityDesigner.GetSafeRootDesigner(this.serviceProvider) as IRootDesigner;
+                if (
+                    rootDesigner != null
+                    && rootDesigner.Component != null
+                    && rootDesigner.Component is Activity
+                )
                     InsertDocOutlineNode(null, rootDesigner.Component as Activity, 0, true);
 
                 if (NeedsExpandAll)
@@ -152,10 +173,13 @@ namespace System.Workflow.ComponentModel.Design
 
             IsDirty = false;
 
-            ISelectionService selectionService = GetService(typeof(ISelectionService)) as ISelectionService;
+            ISelectionService selectionService =
+                GetService(typeof(ISelectionService)) as ISelectionService;
             if (selectionService != null && selectionService.PrimarySelection != null)
             {
-                this.treeView.SelectedNode = this.activityToNodeMapping[selectionService.PrimarySelection] as WorkflowOutlineNode;
+                this.treeView.SelectedNode =
+                    this.activityToNodeMapping[selectionService.PrimarySelection]
+                    as WorkflowOutlineNode;
                 if (this.treeView.SelectedNode != null)
                     this.treeView.SelectedNode.EnsureVisible();
             }
@@ -180,14 +204,10 @@ namespace System.Workflow.ComponentModel.Design
         }
 
         //gets called when the control is about to update the treeview
-        protected virtual void OnBeginUpdate()
-        {
-        }
+        protected virtual void OnBeginUpdate() { }
 
         //gets called when the control is done updating the treeview
-        protected virtual void OnEndUpdate()
-        {
-        }
+        protected virtual void OnEndUpdate() { }
 
         protected virtual void OnRefreshNode(WorkflowOutlineNode node)
         {
@@ -199,7 +219,10 @@ namespace System.Workflow.ComponentModel.Design
                 return;
 
             //Update the designer image
-            int imageIndex = (this.treeView.ImageList != null) ? this.treeView.ImageList.Images.IndexOfKey(activity.GetType().FullName) : -1;
+            int imageIndex =
+                (this.treeView.ImageList != null)
+                    ? this.treeView.ImageList.Images.IndexOfKey(activity.GetType().FullName)
+                    : -1;
             if (imageIndex == -1)
             {
                 ActivityDesigner activityDesigner = ActivityDesigner.GetDesigner(activity);
@@ -214,7 +237,10 @@ namespace System.Workflow.ComponentModel.Design
                             this.treeView.ImageList.ColorDepth = ColorDepth.Depth32Bit;
                         }
 
-                        this.treeView.ImageList.Images.Add(activity.GetType().FullName, activityImage);
+                        this.treeView.ImageList.Images.Add(
+                            activity.GetType().FullName,
+                            activityImage
+                        );
                         imageIndex = this.treeView.ImageList.Images.Count - 1;
                     }
                 }
@@ -235,25 +261,31 @@ namespace System.Workflow.ComponentModel.Design
         //gets called when user selected a node in the activity tree
         protected virtual void OnNodeSelected(WorkflowOutlineNode node)
         {
-            ISelectionService selectionService = GetService(typeof(ISelectionService)) as ISelectionService;
-            if (selectionService != null && node != null && selectionService.PrimarySelection != node.Activity)
+            ISelectionService selectionService =
+                GetService(typeof(ISelectionService)) as ISelectionService;
+            if (
+                selectionService != null
+                && node != null
+                && selectionService.PrimarySelection != node.Activity
+            )
             {
-                // make the selected shape visible (note - the order is important, EnsureVisible will 
-                // expand appropiate branches and set CAG into edit mode, which is crucial for 
+                // make the selected shape visible (note - the order is important, EnsureVisible will
+                // expand appropiate branches and set CAG into edit mode, which is crucial for
                 // SetSelectedComponents to perform well)
                 WorkflowView workflowView = GetService(typeof(WorkflowView)) as WorkflowView;
                 if (workflowView != null)
                     workflowView.EnsureVisible(node.Activity);
 
                 // select it
-                selectionService.SetSelectedComponents(new object[] { node.Activity }, SelectionTypes.Replace);
+                selectionService.SetSelectedComponents(
+                    new object[] { node.Activity },
+                    SelectionTypes.Replace
+                );
             }
         }
 
         //gets called after adding a new not-null node to the activity tree
-        protected virtual void OnNodeAdded(WorkflowOutlineNode node)
-        {
-        }
+        protected virtual void OnNodeAdded(WorkflowOutlineNode node) { }
 
         //gets a tree node for the given activity
         protected WorkflowOutlineNode GetNode(Activity activity)
@@ -304,32 +336,20 @@ namespace System.Workflow.ComponentModel.Design
         #region Protected Properties
         protected internal TreeView TreeView
         {
-            get
-            {
-                return this.treeView;
-            }
+            get { return this.treeView; }
         }
 
         protected internal event TreeViewCancelEventHandler Expanding
         {
-            add
-            {
-                this.treeView.BeforeExpand += value;
-            }
-            remove
-            {
-                this.treeView.BeforeExpand -= value;
-            }
+            add { this.treeView.BeforeExpand += value; }
+            remove { this.treeView.BeforeExpand -= value; }
         }
         #endregion
 
         #region Private Properties
         private bool IsDirty
         {
-            get
-            {
-                return this.isDirty;
-            }
+            get { return this.isDirty; }
             set
             {
                 if (this.isDirty != value)
@@ -345,7 +365,12 @@ namespace System.Workflow.ComponentModel.Design
         #endregion
 
         #region Private Methods
-        private void InsertDocOutlineNode(WorkflowOutlineNode parentNode, Activity activity, int childIndex, bool addNestedActivities)
+        private void InsertDocOutlineNode(
+            WorkflowOutlineNode parentNode,
+            Activity activity,
+            int childIndex,
+            bool addNestedActivities
+        )
         {
             if (this.activityToNodeMapping.Contains(activity))
                 return;
@@ -360,7 +385,12 @@ namespace System.Workflow.ComponentModel.Design
             if (addNestedActivities && activity is CompositeActivity)
             {
                 foreach (Activity childActivity in ((CompositeActivity)activity).Activities)
-                    InsertDocOutlineNode(newNode, childActivity, newNode.Nodes.Count, addNestedActivities);
+                    InsertDocOutlineNode(
+                        newNode,
+                        childActivity,
+                        newNode.Nodes.Count,
+                        addNestedActivities
+                    );
             }
 
             if (parentNode != null)
@@ -373,15 +403,20 @@ namespace System.Workflow.ComponentModel.Design
 
         private void OnComponentChanged(object sender, ComponentChangedEventArgs e)
         {
-            ActivityCollectionChangeEventArgs changeEventArgs = e.OldValue as ActivityCollectionChangeEventArgs;
+            ActivityCollectionChangeEventArgs changeEventArgs =
+                e.OldValue as ActivityCollectionChangeEventArgs;
             if (changeEventArgs != null)
             {
                 this.IsDirty = true;
             }
             else if (e.Member != null && e.Component is Activity)
             {
-                WorkflowOutlineNode node = this.activityToNodeMapping[e.Component] as WorkflowOutlineNode;
-                if (node != null && string.Equals(e.Member.Name, "Enabled", StringComparison.Ordinal))
+                WorkflowOutlineNode node =
+                    this.activityToNodeMapping[e.Component] as WorkflowOutlineNode;
+                if (
+                    node != null
+                    && string.Equals(e.Member.Name, "Enabled", StringComparison.Ordinal)
+                )
                     RefreshNode(node, true);
             }
         }
@@ -391,7 +426,8 @@ namespace System.Workflow.ComponentModel.Design
             if (e.Component is Activity)
             {
                 //
-                WorkflowOutlineNode node = this.activityToNodeMapping[e.Component] as WorkflowOutlineNode;
+                WorkflowOutlineNode node =
+                    this.activityToNodeMapping[e.Component] as WorkflowOutlineNode;
                 if (node != null)
                     node.OnActivityRename(e.NewName);
             }
@@ -405,10 +441,13 @@ namespace System.Workflow.ComponentModel.Design
 
         private void OnSelectionChanged(object sender, EventArgs e)
         {
-            ISelectionService selectionService = GetService(typeof(ISelectionService)) as ISelectionService;
+            ISelectionService selectionService =
+                GetService(typeof(ISelectionService)) as ISelectionService;
             if (selectionService != null && selectionService.PrimarySelection != null)
             {
-                this.treeView.SelectedNode = this.activityToNodeMapping[selectionService.PrimarySelection] as WorkflowOutlineNode;
+                this.treeView.SelectedNode =
+                    this.activityToNodeMapping[selectionService.PrimarySelection]
+                    as WorkflowOutlineNode;
                 if (this.treeView.SelectedNode != null)
                     this.treeView.SelectedNode.EnsureVisible();
             }
@@ -425,6 +464,7 @@ namespace System.Workflow.ComponentModel.Design
             WorkflowOutlineNode node = e.Node as WorkflowOutlineNode;
             OnNodeSelected(node);
         }
+
         private void OnTreeViewMouseDown(object sender, MouseEventArgs e)
         {
             if (this.treeView.GetNodeAt(e.Location) != null)
@@ -446,7 +486,9 @@ namespace System.Workflow.ComponentModel.Design
     /// <summary>
     /// Class representing the node in document outline
     /// </summary>
-    [Obsolete("The System.Workflow.* types are deprecated.  Instead, please use the new types from System.Activities.*")]
+    [Obsolete(
+        "The System.Workflow.* types are deprecated.  Instead, please use the new types from System.Activities.*"
+    )]
     public class WorkflowOutlineNode : TreeNode
     {
         private Activity activity;
@@ -463,10 +505,7 @@ namespace System.Workflow.ComponentModel.Design
 
         public Activity Activity
         {
-            get
-            {
-                return this.activity;
-            }
+            get { return this.activity; }
         }
 
         //gets called to update node properties (like color, text)
@@ -477,7 +516,10 @@ namespace System.Workflow.ComponentModel.Design
                 return;
 
             //Update the enabled color
-            this.ForeColor = (!activity.Enabled || ActivityDesigner.IsCommentedActivity(activity)) ? WorkflowTheme.CurrentTheme.AmbientTheme.CommentIndicatorColor : SystemColors.WindowText;
+            this.ForeColor =
+                (!activity.Enabled || ActivityDesigner.IsCommentedActivity(activity))
+                    ? WorkflowTheme.CurrentTheme.AmbientTheme.CommentIndicatorColor
+                    : SystemColors.WindowText;
             this.Text = activity.Name;
         }
 
@@ -487,6 +529,4 @@ namespace System.Workflow.ComponentModel.Design
         }
     }
     #endregion
-
 }
-

@@ -18,9 +18,13 @@ namespace Microsoft.CodeAnalysis.Editor.QuickInfo
         /// clone content of <paramref name="sourceText"/> to new <see cref="ITextBuffer"/>
         /// with <see cref="ContentTypeNames.RoslynContentType"/>
         /// </summary>
-        public static ITextBuffer CreateTextBufferWithRoslynContentType(this SourceText sourceText, Workspace workspace)
+        public static ITextBuffer CreateTextBufferWithRoslynContentType(
+            this SourceText sourceText,
+            Workspace workspace
+        )
         {
-            var cloneServices = workspace.Services.SolutionServices.ExportProvider.GetExports<ITextBufferCloneService>();
+            var cloneServices =
+                workspace.Services.SolutionServices.ExportProvider.GetExports<ITextBufferCloneService>();
             foreach (var cloneService in cloneServices)
                 return cloneService.Value.CloneWithRoslynContentType(sourceText);
 
@@ -33,10 +37,12 @@ namespace Microsoft.CodeAnalysis.Editor.QuickInfo
         /// </summary>
         public static ITextBuffer CloneTextBuffer(this Document document, SourceText sourceText)
         {
-            var contentTypeService = document.Project.Services.GetService<IContentTypeLanguageService>();
+            var contentTypeService =
+                document.Project.Services.GetService<IContentTypeLanguageService>();
             var contentType = contentTypeService.GetDefaultContentType();
 
-            var cloneServices = document.Project.Solution.Services.ExportProvider.GetExports<ITextBufferCloneService>();
+            var cloneServices =
+                document.Project.Solution.Services.ExportProvider.GetExports<ITextBufferCloneService>();
             foreach (var cloneService in cloneServices)
                 return cloneService.Value.Clone(sourceText, contentType);
 
@@ -46,9 +52,14 @@ namespace Microsoft.CodeAnalysis.Editor.QuickInfo
         /// <summary>
         /// async version of <see cref="CloneTextBuffer(Document, SourceText)"/>
         /// </summary>
-        public static async Task<ITextBuffer> CloneTextBufferAsync(this Document document, CancellationToken cancellationToken)
+        public static async Task<ITextBuffer> CloneTextBufferAsync(
+            this Document document,
+            CancellationToken cancellationToken
+        )
         {
-            var sourceText = await document.GetValueTextAsync(cancellationToken).ConfigureAwait(false);
+            var sourceText = await document
+                .GetValueTextAsync(cancellationToken)
+                .ConfigureAwait(false);
             return CloneTextBuffer(document, sourceText);
         }
     }

@@ -10,7 +10,8 @@ namespace System.DirectoryServices.Protocols
     {
         internal static IntPtr _dummyPointer = new IntPtr(1);
 
-        internal HGlobalMemHandle(IntPtr value) : base(true)
+        internal HGlobalMemHandle(IntPtr value)
+            : base(true)
         {
             SetHandle(value);
         }

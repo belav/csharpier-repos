@@ -16,15 +16,15 @@ public sealed class JsonTimeOnlyReaderWriter : JsonValueReaderWriter<TimeOnly>
     /// </summary>
     public static JsonTimeOnlyReaderWriter Instance { get; } = new();
 
-    private JsonTimeOnlyReaderWriter()
-    {
-    }
+    private JsonTimeOnlyReaderWriter() { }
 
     /// <inheritdoc />
-    public override TimeOnly FromJsonTyped(ref Utf8JsonReaderManager manager, object? existingObject = null)
-        => TimeOnly.Parse(manager.CurrentReader.GetString()!, CultureInfo.InvariantCulture);
+    public override TimeOnly FromJsonTyped(
+        ref Utf8JsonReaderManager manager,
+        object? existingObject = null
+    ) => TimeOnly.Parse(manager.CurrentReader.GetString()!, CultureInfo.InvariantCulture);
 
     /// <inheritdoc />
-    public override void ToJsonTyped(Utf8JsonWriter writer, TimeOnly value)
-        => writer.WriteStringValue(value.ToString("o", CultureInfo.InvariantCulture));
+    public override void ToJsonTyped(Utf8JsonWriter writer, TimeOnly value) =>
+        writer.WriteStringValue(value.ToString("o", CultureInfo.InvariantCulture));
 }

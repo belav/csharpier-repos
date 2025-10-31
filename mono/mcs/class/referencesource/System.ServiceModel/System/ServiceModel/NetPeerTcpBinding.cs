@@ -4,6 +4,7 @@
 namespace System.ServiceModel
 {
     using System;
+    using System.ComponentModel;
     using System.Configuration;
     using System.Net;
     using System.Runtime;
@@ -11,10 +12,8 @@ namespace System.ServiceModel
     using System.ServiceModel.Configuration;
     using System.ServiceModel.PeerResolvers;
     using System.Xml;
-    using System.ComponentModel;
 
-
-    [ObsoleteAttribute ("PeerChannel feature is obsolete and will be removed in the future.", false)]
+    [ObsoleteAttribute("PeerChannel feature is obsolete and will be removed in the future.", false)]
     public class NetPeerTcpBinding : Binding, IBindingRuntimePreferences
     {
         // private BindingElements
@@ -23,25 +22,27 @@ namespace System.ServiceModel
         BinaryMessageEncodingBindingElement encoding;
         PeerSecuritySettings peerSecurity;
 
-        public NetPeerTcpBinding() { Initialize(); }
-        public NetPeerTcpBinding(string configurationName) : this() { ApplyConfiguration(configurationName); }
-
-        static public bool IsPnrpAvailable
+        public NetPeerTcpBinding()
         {
-            get
-            {
-                return PnrpPeerResolver.IsPnrpAvailable;
-            }
+            Initialize();
+        }
+
+        public NetPeerTcpBinding(string configurationName)
+            : this()
+        {
+            ApplyConfiguration(configurationName);
+        }
+
+        public static bool IsPnrpAvailable
+        {
+            get { return PnrpPeerResolver.IsPnrpAvailable; }
         }
 
         [DefaultValue(TransportDefaults.MaxBufferPoolSize)]
         public long MaxBufferPoolSize
         {
             get { return transport.MaxBufferPoolSize; }
-            set
-            {
-                transport.MaxBufferPoolSize = value;
-            }
+            set { transport.MaxBufferPoolSize = value; }
         }
 
         [DefaultValue(TransportDefaults.MaxReceivedMessageSize)]
@@ -98,7 +99,10 @@ namespace System.ServiceModel
             get { return false; }
         }
 
-        public override string Scheme { get { return transport.Scheme; } }
+        public override string Scheme
+        {
+            get { return transport.Scheme; }
+        }
 
         // Soap version supported by this binding
         public EnvelopeVersion EnvelopeVersion
@@ -114,7 +118,10 @@ namespace System.ServiceModel
             peerSecurity = new PeerSecuritySettings();
         }
 
-        void InitializeFrom(PeerTransportBindingElement transport, BinaryMessageEncodingBindingElement encoding)
+        void InitializeFrom(
+            PeerTransportBindingElement transport,
+            BinaryMessageEncodingBindingElement encoding
+        )
         {
             Fx.Assert(transport != null, "Invalid null transport.");
             Fx.Assert(encoding != null, "Invalid null encoding.");
@@ -127,10 +134,13 @@ namespace System.ServiceModel
             this.ReaderQuotas = encoding.ReaderQuotas;
         }
 
-        // check that properties of the HttpTransportBindingElement and 
-        // MessageEncodingBindingElement not exposed as properties on BasicHttpBinding 
+        // check that properties of the HttpTransportBindingElement and
+        // MessageEncodingBindingElement not exposed as properties on BasicHttpBinding
         // match default values of the binding elements
-        bool IsBindingElementsMatch(PeerTransportBindingElement transport, BinaryMessageEncodingBindingElement encoding)
+        bool IsBindingElementsMatch(
+            PeerTransportBindingElement transport,
+            BinaryMessageEncodingBindingElement encoding
+        )
         {
             if (!this.transport.IsMatch(transport))
                 return false;
@@ -141,15 +151,21 @@ namespace System.ServiceModel
 
         void ApplyConfiguration(string configurationName)
         {
-            NetPeerTcpBindingCollectionElement section = NetPeerTcpBindingCollectionElement.GetBindingCollectionElement();
+            NetPeerTcpBindingCollectionElement section =
+                NetPeerTcpBindingCollectionElement.GetBindingCollectionElement();
             NetPeerTcpBindingElement element = section.Bindings[configurationName];
             this.resolverSettings = new PeerResolverSettings();
             if (element == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ConfigurationErrorsException(
-                    SR.GetString(SR.ConfigInvalidBindingConfigurationName,
-                                 configurationName,
-                                 ConfigurationStrings.NetPeerTcpBindingCollectionElementName)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new ConfigurationErrorsException(
+                        SR.GetString(
+                            SR.ConfigInvalidBindingConfigurationName,
+                            configurationName,
+                            ConfigurationStrings.NetPeerTcpBindingCollectionElementName
+                        )
+                    )
+                );
             }
             else
             {
@@ -166,31 +182,49 @@ namespace System.ServiceModel
                 case PeerResolverMode.Auto:
                     {
                         if (CanUseCustomResolver())
-                            bindingElements.Add(new PeerCustomResolverBindingElement(this.Resolver.Custom));
+                            bindingElements.Add(
+                                new PeerCustomResolverBindingElement(this.Resolver.Custom)
+                            );
                         else if (PeerTransportDefaults.ResolverAvailable)
-                            bindingElements.Add(new PnrpPeerResolverBindingElement(this.Resolver.ReferralPolicy));
+                            bindingElements.Add(
+                                new PnrpPeerResolverBindingElement(this.Resolver.ReferralPolicy)
+                            );
                         else
-                            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(SR.GetString(SR.PeerResolverRequired)));
+                            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                                new InvalidOperationException(SR.GetString(SR.PeerResolverRequired))
+                            );
                     }
                     break;
                 case PeerResolverMode.Custom:
                     {
                         if (CanUseCustomResolver())
-                            bindingElements.Add(new PeerCustomResolverBindingElement(this.Resolver.Custom));
+                            bindingElements.Add(
+                                new PeerCustomResolverBindingElement(this.Resolver.Custom)
+                            );
                         else
-                            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(SR.GetString(SR.PeerResolverSettingsInvalid)));
+                            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                                new InvalidOperationException(
+                                    SR.GetString(SR.PeerResolverSettingsInvalid)
+                                )
+                            );
                     }
                     break;
                 case PeerResolverMode.Pnrp:
                     {
                         if (PeerTransportDefaults.ResolverAvailable)
-                            bindingElements.Add(new PnrpPeerResolverBindingElement(this.Resolver.ReferralPolicy));
+                            bindingElements.Add(
+                                new PnrpPeerResolverBindingElement(this.Resolver.ReferralPolicy)
+                            );
                         else
-                            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(SR.GetString(SR.PeerResolverRequired)));
+                            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                                new InvalidOperationException(SR.GetString(SR.PeerResolverRequired))
+                            );
                     }
                     break;
                 default:
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(SR.GetString(SR.PeerResolverRequired)));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new InvalidOperationException(SR.GetString(SR.PeerResolverRequired))
+                    );
             }
 
             bindingElements.Add(encoding);
@@ -237,7 +271,8 @@ namespace System.ServiceModel
             if (!netPeerTcpBinding.IsBindingElementsMatch(transport, encoding))
                 return false;
 
-            PeerCustomResolverBindingElement customResolver = resolver as PeerCustomResolverBindingElement;
+            PeerCustomResolverBindingElement customResolver =
+                resolver as PeerCustomResolverBindingElement;
             if (customResolver != null)
             {
                 netPeerTcpBinding.Resolver.Custom.Address = customResolver.Address;
@@ -246,7 +281,6 @@ namespace System.ServiceModel
             }
             else if (resolver is PnrpPeerResolverBindingElement)
             {
-
                 if (NetPeerTcpBinding.IsPnrpAvailable)
                     netPeerTcpBinding.Resolver.Mode = PeerResolverMode.Pnrp;
             }
@@ -256,7 +290,10 @@ namespace System.ServiceModel
 
         bool CanUseCustomResolver()
         {
-            return (this.Resolver.Custom.Resolver != null || (this.Resolver.Custom.IsBindingSpecified && this.Resolver.Custom.Address != null));
+            return (
+                this.Resolver.Custom.Resolver != null
+                || (this.Resolver.Custom.IsBindingSpecified && this.Resolver.Custom.Address != null)
+            );
         }
 
         [EditorBrowsable(EditorBrowsableState.Never)]

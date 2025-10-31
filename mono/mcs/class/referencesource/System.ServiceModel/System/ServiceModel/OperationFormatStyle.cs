@@ -12,13 +12,9 @@ namespace System.ServiceModel
 
     static class OperationFormatStyleHelper
     {
-        static public bool IsDefined(OperationFormatStyle x)
+        public static bool IsDefined(OperationFormatStyle x)
         {
-            return
-                x == OperationFormatStyle.Document ||
-                x == OperationFormatStyle.Rpc ||
-                false;
+            return x == OperationFormatStyle.Document || x == OperationFormatStyle.Rpc || false;
         }
     }
-
 }

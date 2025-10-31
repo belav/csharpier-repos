@@ -12,6 +12,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Diagnostics
     /// </summary>
     internal interface IVisualStudioDiagnosticAnalyzerProviderFactory
     {
-        Task<VisualStudioDiagnosticAnalyzerProvider> GetOrCreateProviderAsync(CancellationToken cancellationToken);
+        Task<VisualStudioDiagnosticAnalyzerProvider> GetOrCreateProviderAsync(
+            CancellationToken cancellationToken
+        );
     }
 }

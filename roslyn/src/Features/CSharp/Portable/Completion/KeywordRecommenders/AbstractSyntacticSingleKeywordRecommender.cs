@@ -10,7 +10,8 @@ using Microsoft.CodeAnalysis.CSharp.Extensions.ContextQuery;
 
 namespace Microsoft.CodeAnalysis.CSharp.Completion.KeywordRecommenders
 {
-    internal abstract partial class AbstractSyntacticSingleKeywordRecommender : IKeywordRecommender<CSharpSyntaxContext>
+    internal abstract partial class AbstractSyntacticSingleKeywordRecommender
+        : IKeywordRecommender<CSharpSyntaxContext>
     {
         public readonly SyntaxKind KeywordKind;
         private readonly bool _isValidInPreprocessorContext;
@@ -28,27 +29,39 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.KeywordRecommenders
         protected AbstractSyntacticSingleKeywordRecommender(
             SyntaxKind keywordKind,
             bool isValidInPreprocessorContext = false,
-            bool shouldFormatOnCommit = false)
+            bool shouldFormatOnCommit = false
+        )
         {
             KeywordKind = keywordKind;
             _isValidInPreprocessorContext = isValidInPreprocessorContext;
 
             _keywordPriorityRecommendedKeywords = ImmutableArray.Create(
-                new RecommendedKeyword(SyntaxFacts.GetText(keywordKind),
-                shouldFormatOnCommit: shouldFormatOnCommit,
-                matchPriority: PreselectMatchPriority));
+                new RecommendedKeyword(
+                    SyntaxFacts.GetText(keywordKind),
+                    shouldFormatOnCommit: shouldFormatOnCommit,
+                    matchPriority: PreselectMatchPriority
+                )
+            );
             _defaultPriorityRecommendedKeywords = ImmutableArray.Create(
-                new RecommendedKeyword(SyntaxFacts.GetText(keywordKind),
-                shouldFormatOnCommit: shouldFormatOnCommit,
-                matchPriority: DefaultMatchPriority));
+                new RecommendedKeyword(
+                    SyntaxFacts.GetText(keywordKind),
+                    shouldFormatOnCommit: shouldFormatOnCommit,
+                    matchPriority: DefaultMatchPriority
+                )
+            );
         }
 
-        protected abstract bool IsValidContext(int position, CSharpSyntaxContext context, CancellationToken cancellationToken);
+        protected abstract bool IsValidContext(
+            int position,
+            CSharpSyntaxContext context,
+            CancellationToken cancellationToken
+        );
 
         public ImmutableArray<RecommendedKeyword> RecommendKeywords(
             int position,
             CSharpSyntaxContext context,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
             var syntaxKind = RecommendKeyword(position, context, cancellationToken);
             if (!syntaxKind.HasValue)
@@ -59,14 +72,20 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.KeywordRecommenders
                 : _defaultPriorityRecommendedKeywords;
         }
 
-        protected virtual bool ShouldPreselect(CSharpSyntaxContext context, CancellationToken cancellationToken) => false;
+        protected virtual bool ShouldPreselect(
+            CSharpSyntaxContext context,
+            CancellationToken cancellationToken
+        ) => false;
 
-        private SyntaxKind? RecommendKeyword(int position, CSharpSyntaxContext context, CancellationToken cancellationToken)
+        private SyntaxKind? RecommendKeyword(
+            int position,
+            CSharpSyntaxContext context,
+            CancellationToken cancellationToken
+        )
         {
             // NOTE: The collector ensures that we're not in "NonUserCode" like comments, strings, inactive code
             // for perf reasons.
-            if (!_isValidInPreprocessorContext &&
-                context.IsPreProcessorDirectiveContext)
+            if (!_isValidInPreprocessorContext && context.IsPreProcessorDirectiveContext)
             {
                 return null;
             }
@@ -80,8 +99,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.KeywordRecommenders
         {
             private readonly AbstractSyntacticSingleKeywordRecommender _recommender = recommender;
 
-            public ImmutableArray<RecommendedKeyword> RecommendKeywords(int position, CSharpSyntaxContext context)
-                => _recommender.RecommendKeywords(position, context, CancellationToken.None);
+            public ImmutableArray<RecommendedKeyword> RecommendKeywords(
+                int position,
+                CSharpSyntaxContext context
+            ) => _recommender.RecommendKeywords(position, context, CancellationToken.None);
         }
     }
 }

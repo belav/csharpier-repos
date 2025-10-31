@@ -1,18 +1,22 @@
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 using System;
-using System.Reflection;
 using System.Collections.Generic;
+using System.Reflection;
 using Xunit;
 
 public class Program
 {
     public class ClassA
     {
-        public virtual int PublicInstanceMethod() { return 17; }
+        public virtual int PublicInstanceMethod()
+        {
+            return 17;
+        }
     }
 
     public delegate int Delegate_TC_Int(ClassA tc);
+
     public static MethodInfo GetMethod(Type t, string method)
     {
         TypeInfo typeInfo = t.GetTypeInfo();
@@ -29,6 +33,7 @@ public class Program
         }
         return result;
     }
+
     [Fact]
     public static int TestEntryPoint()
     {
@@ -38,14 +43,11 @@ public class Program
         Delegate dlgt = miPublicInstanceMethod.CreateDelegate(typeof(Delegate_TC_Int));
         Object retValue = ((Delegate_TC_Int)dlgt).DynamicInvoke(new Object[] { TestClass });
 
-        if(retValue.Equals(TestClass.PublicInstanceMethod()))
+        if (retValue.Equals(TestClass.PublicInstanceMethod()))
         {
             return 100;
         }
 
-
         return -1;
-
     }
-
 }

@@ -38,7 +38,12 @@ namespace System.Web.WebPages
             }
         }
 
-        public static string GenerateClientUrl(HttpContextBase httpContext, string basePath, string path, params object[] pathParts)
+        public static string GenerateClientUrl(
+            HttpContextBase httpContext,
+            string basePath,
+            string path,
+            params object[] pathParts
+        )
         {
             if (String.IsNullOrEmpty(path))
             {
@@ -76,7 +81,10 @@ namespace System.Web.WebPages
             }
         }
 
-        private static string GenerateClientUrlInternal(HttpContextBase httpContext, string contentPath)
+        private static string GenerateClientUrlInternal(
+            HttpContextBase httpContext,
+            string contentPath
+        )
         {
             if (String.IsNullOrEmpty(contentPath))
             {
@@ -87,7 +95,10 @@ namespace System.Web.WebPages
             bool isAppRelative = contentPath[0] == '~';
             if (isAppRelative)
             {
-                string absoluteContentPath = VirtualPathUtility.ToAbsolute(contentPath, httpContext.Request.ApplicationPath);
+                string absoluteContentPath = VirtualPathUtility.ToAbsolute(
+                    contentPath,
+                    httpContext.Request.ApplicationPath
+                );
                 return GenerateClientUrlInternal(httpContext, absoluteContentPath);
             }
 
@@ -104,7 +115,10 @@ namespace System.Web.WebPages
             // base it from / instead of /foo, otherwise the user ends up seeing mysite.example.com/foo/bar,
             // which is incorrect.
             string relativeUrlToDestination = MakeRelative(httpContext.Request.Path, contentPath);
-            string absoluteUrlToDestination = MakeAbsolute(httpContext.Request.RawUrl, relativeUrlToDestination);
+            string absoluteUrlToDestination = MakeAbsolute(
+                httpContext.Request.RawUrl,
+                relativeUrlToDestination
+            );
             return absoluteUrlToDestination;
         }
 
@@ -151,10 +165,10 @@ namespace System.Web.WebPages
 
         internal static string BuildUrl(string path, out string query, params object[] pathParts)
         {
-            // Performance senstive 
-            // 
-            // This code branches on the number of path-parts to either favor string.Concat or StringBuilder 
-            // for performance. The most common case (for WebPages) will provide a single int value as a 
+            // Performance senstive
+            //
+            // This code branches on the number of path-parts to either favor string.Concat or StringBuilder
+            // for performance. The most common case (for WebPages) will provide a single int value as a
             // path-part - string.Concat can be more efficient when we know the number of strings to join.
             if (pathParts == null || pathParts.Length == 0)
             {
@@ -166,7 +180,10 @@ namespace System.Web.WebPages
                 object pathPart = pathParts[0];
                 if (IsDisplayableType(pathPart.GetType()))
                 {
-                    string displayablePath = Convert.ToString(pathPart, CultureInfo.InvariantCulture);
+                    string displayablePath = Convert.ToString(
+                        pathPart,
+                        CultureInfo.InvariantCulture
+                    );
                     path = path + "/" + displayablePath;
                     query = String.Empty;
                     return HttpUtility.UrlPathEncode(path);
@@ -190,7 +207,10 @@ namespace System.Web.WebPages
                     object pathPart = pathParts[i];
                     if (IsDisplayableType(pathPart.GetType()))
                     {
-                        var displayablePath = Convert.ToString(pathPart, CultureInfo.InvariantCulture);
+                        var displayablePath = Convert.ToString(
+                            pathPart,
+                            CultureInfo.InvariantCulture
+                        );
                         pathBuilder.Append('/');
                         pathBuilder.Append(displayablePath);
                     }
@@ -208,7 +228,7 @@ namespace System.Web.WebPages
         private static void AppendToQueryString(StringBuilder queryString, object obj)
         {
             // If this method is called, then obj isn't a type that we can put in the path, instead
-            // we want to format it as key-value pairs for the query string. The mostly likely 
+            // we want to format it as key-value pairs for the query string. The mostly likely
             // user scenario for this is an anonymous type.
             IDictionary<string, object> dictionary = TypeHelper.ObjectToDictionary(obj);
 
@@ -225,7 +245,8 @@ namespace System.Web.WebPages
 
                 string stringValue = Convert.ToString(item.Value, CultureInfo.InvariantCulture);
 
-                queryString.Append(HttpUtility.UrlEncode(item.Key))
+                queryString
+                    .Append(HttpUtility.UrlEncode(item.Key))
                     .Append('=')
                     .Append(HttpUtility.UrlEncode(stringValue));
             }
@@ -237,12 +258,12 @@ namespace System.Web.WebPages
         /// <remarks>
         /// If a type is a displayable type, then we format values of that type as part of the Url Path. If not, then
         /// we attempt to create a RouteValueDictionary, and encode the value as key-value pairs in the query string.
-        /// 
+        ///
         /// We determine if a type is displayable by whether or not it implements any interfaces. The built-in simple
-        /// types like Int32 implement IFormattable, which will be used to convert it to a string. 
-        /// 
-        /// Primarily we do this check to allow anonymous types to represent key-value pairs (anonymous types don't 
-        /// implement any interfaces). 
+        /// types like Int32 implement IFormattable, which will be used to convert it to a string.
+        ///
+        /// Primarily we do this check to allow anonymous types to represent key-value pairs (anonymous types don't
+        /// implement any interfaces).
         /// </remarks>
         private static bool IsDisplayableType(Type t)
         {

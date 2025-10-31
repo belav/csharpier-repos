@@ -12,7 +12,11 @@ namespace System.Data
         object this[string name] { get; }
         string GetName(int i);
         string GetDataTypeName(int i);
-        [return: DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicProperties | DynamicallyAccessedMemberTypes.PublicFields)]
+
+        [return: DynamicallyAccessedMembers(
+            DynamicallyAccessedMemberTypes.PublicProperties
+                | DynamicallyAccessedMemberTypes.PublicFields
+        )]
         Type GetFieldType(int i);
         object GetValue(int i);
         int GetValues(object[] values);

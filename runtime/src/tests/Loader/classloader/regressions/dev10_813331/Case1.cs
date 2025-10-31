@@ -2,6 +2,7 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using Xunit;
+
 //Non-generic classes A and B
 
 public class HelloWorld
@@ -9,8 +10,11 @@ public class HelloWorld
     [Fact]
     public static int TestEntryPoint()
     {
-        try { B b = new B(GetName()); }
-        catch (System.Exception) 
+        try
+        {
+            B b = new B(GetName());
+        }
+        catch (System.Exception)
         {
             System.Console.WriteLine("PASS");
             return 100;
@@ -18,13 +22,17 @@ public class HelloWorld
         System.Console.WriteLine("FAIL");
         return -1;
     }
-    public static string GetName() { throw new System.Exception(); }
+
+    public static string GetName()
+    {
+        throw new System.Exception();
+    }
 }
 
 public class B : A
 {
-    public B(string name) 
-    { 
-        System.Console.WriteLine("Creating object B({0})", name); 
+    public B(string name)
+    {
+        System.Console.WriteLine("Creating object B({0})", name);
     }
 }

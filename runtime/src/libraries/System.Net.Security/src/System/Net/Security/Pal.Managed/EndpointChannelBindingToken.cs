@@ -11,12 +11,18 @@ namespace System.Net.Security
     {
         internal static ChannelBinding? Build(SafeDeleteContext securityContext)
         {
-            using (X509Certificate2? cert = CertificateValidationPal.GetRemoteCertificate(securityContext))
+            using (
+                X509Certificate2? cert = CertificateValidationPal.GetRemoteCertificate(
+                    securityContext
+                )
+            )
             {
                 if (cert == null)
                     return null;
 
-                SafeChannelBindingHandle bindingHandle = new SafeChannelBindingHandle(ChannelBindingKind.Endpoint);
+                SafeChannelBindingHandle bindingHandle = new SafeChannelBindingHandle(
+                    ChannelBindingKind.Endpoint
+                );
 
                 byte[] bindingHash = GetHashForChannelBinding(cert);
                 bindingHandle.SetCertHash(bindingHash);

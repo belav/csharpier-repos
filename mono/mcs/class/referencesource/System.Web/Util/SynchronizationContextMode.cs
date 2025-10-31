@@ -4,13 +4,13 @@
 // </copyright>
 //------------------------------------------------------------------------------
 
-namespace System.Web.Util {
+namespace System.Web.Util
+{
     using System;
 
-    internal enum SynchronizationContextMode {
-
+    internal enum SynchronizationContextMode
+    {
         Normal,
-        Legacy
-
+        Legacy,
     }
 }

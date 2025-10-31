@@ -5,9 +5,9 @@ namespace Microsoft.EntityFrameworkCore;
 
 public class SpatialInMemoryFixture : SpatialFixtureBase
 {
-    protected override ITestStoreFactory TestStoreFactory
-        => InMemoryTestStoreFactory.Instance;
+    protected override ITestStoreFactory TestStoreFactory => InMemoryTestStoreFactory.Instance;
 
-    public override DbContextOptionsBuilder AddOptions(DbContextOptionsBuilder builder)
-        => base.AddOptions(builder).ConfigureWarnings(w => w.Log(InMemoryEventId.TransactionIgnoredWarning));
+    public override DbContextOptionsBuilder AddOptions(DbContextOptionsBuilder builder) =>
+        base.AddOptions(builder)
+            .ConfigureWarnings(w => w.Log(InMemoryEventId.TransactionIgnoredWarning));
 }

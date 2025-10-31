@@ -15,7 +15,10 @@ namespace ILVerification.Tests
     public class ILTypeVerificationTester
     {
         [Theory(DisplayName = "")]
-        [MemberData(nameof(TestDataLoader.GetTypesWithValidType), MemberType = typeof(TestDataLoader))]
+        [MemberData(
+            nameof(TestDataLoader.GetTypesWithValidType),
+            MemberType = typeof(TestDataLoader)
+        )]
         [Trait("", "Valid type implementation tests")]
         public static void TestValidTypes(ValidTypeTestCase validType)
         {
@@ -24,7 +27,10 @@ namespace ILVerification.Tests
         }
 
         [Theory(DisplayName = "")]
-        [MemberData(nameof(TestDataLoader.GetTypesWithInvalidType), MemberType = typeof(TestDataLoader))]
+        [MemberData(
+            nameof(TestDataLoader.GetTypesWithInvalidType),
+            MemberType = typeof(TestDataLoader)
+        )]
         [Trait("", "Invalid type implementation tests")]
         public static void TestInvalidTypes(InvalidTypeTestCase invalidType)
         {
@@ -49,7 +55,10 @@ namespace ILVerification.Tests
                 foreach (VerifierError item in invalidType.ExpectedVerifierErrors)
                 {
                     IEnumerable<string> actual = results.Select(e => e.Code.ToString());
-                    Assert.True(results.Where(r => r.Code == item).Count() > 0, $"Actual errors where: {string.Join(",", actual)}");
+                    Assert.True(
+                        results.Where(r => r.Code == item).Count() > 0,
+                        $"Actual errors where: {string.Join(",", actual)}"
+                    );
                 }
             }
         }
@@ -57,13 +66,17 @@ namespace ILVerification.Tests
         private static IEnumerable<VerificationResult> Verify(TestCase testCase)
         {
             EcmaModule module = TestDataLoader.GetModuleForTestAssembly(testCase.ModuleName);
-            var typeHandle = (TypeDefinitionHandle)MetadataTokens.EntityHandle(testCase.MetadataToken);
+            var typeHandle = (TypeDefinitionHandle)
+                MetadataTokens.EntityHandle(testCase.MetadataToken);
             var type = (EcmaType)module.GetType(typeHandle);
-            var verifier = new Verifier((ILVerifyTypeSystemContext)type.Context, new VerifierOptions
-            {
-                IncludeMetadataTokensInErrorMessages = true,
-                SanityChecks = true
-            });
+            var verifier = new Verifier(
+                (ILVerifyTypeSystemContext)type.Context,
+                new VerifierOptions
+                {
+                    IncludeMetadataTokensInErrorMessages = true,
+                    SanityChecks = true,
+                }
+            );
             return verifier.Verify(module.PEReader, typeHandle);
         }
     }

@@ -15,7 +15,12 @@ namespace SslStress
 {
     public static class Program
     {
-        public enum ExitCode { Success = 0, StressError = 1, CliError = 2 };
+        public enum ExitCode
+        {
+            Success = 0,
+            StressError = 1,
+            CliError = 2,
+        };
 
         public static async Task<int> Main(string[] args)
         {
@@ -35,17 +40,30 @@ namespace SslStress
                 return ExitCode.CliError;
             }
 
-            static string GetAssemblyInfo(Assembly assembly) => $"{assembly.Location}, modified {new FileInfo(assembly.Location).LastWriteTime}";
+            static string GetAssemblyInfo(Assembly assembly) =>
+                $"{assembly.Location}, modified {new FileInfo(assembly.Location).LastWriteTime}";
 
             Console.WriteLine("           .NET Core: " + GetAssemblyInfo(typeof(object).Assembly));
-            Console.WriteLine(" System.Net.Security: " + GetAssemblyInfo(typeof(System.Net.Security.SslStream).Assembly));
+            Console.WriteLine(
+                " System.Net.Security: "
+                    + GetAssemblyInfo(typeof(System.Net.Security.SslStream).Assembly)
+            );
             Console.WriteLine("     Server Endpoint: " + config.ServerEndpoint);
             Console.WriteLine("         Concurrency: " + config.MaxConnections);
-            Console.WriteLine("  Max Execution Time: " + ((config.MaxExecutionTime != null) ? config.MaxExecutionTime.Value.ToString() : "infinite"));
+            Console.WriteLine(
+                "  Max Execution Time: "
+                    + (
+                        (config.MaxExecutionTime != null)
+                            ? config.MaxExecutionTime.Value.ToString()
+                            : "infinite"
+                    )
+            );
             Console.WriteLine("  Min Conn. Lifetime: " + config.MinConnectionLifetime);
             Console.WriteLine("  Max Conn. Lifetime: " + config.MaxConnectionLifetime);
             Console.WriteLine("         Random Seed: " + config.RandomSeed);
-            Console.WriteLine("     Cancellation Pb: " + 100 * config.CancellationProbability + "%");
+            Console.WriteLine(
+                "     Cancellation Pb: " + 100 * config.CancellationProbability + "%"
+            );
             Console.WriteLine();
 
             StressServer? server = null;
@@ -74,13 +92,13 @@ namespace SslStress
 
             try
             {
-                if (client != null) 
+                if (client != null)
                 {
                     await client.StopAsync();
                     Console.WriteLine("client stopped");
                 }
 
-                if (server != null) 
+                if (server != null)
                 {
                     await server.StopAsync();
                     Console.WriteLine("server stopped");
@@ -93,36 +111,136 @@ namespace SslStress
 
             return client?.TotalErrorCount == 0 ? ExitCode.Success : ExitCode.StressError;
 
-            static async Task WaitUntilMaxExecutionTimeElapsedOrKeyboardInterrupt(TimeSpan? maxExecutionTime = null)
+            static async Task WaitUntilMaxExecutionTimeElapsedOrKeyboardInterrupt(
+                TimeSpan? maxExecutionTime = null
+            )
             {
                 var tcs = new TaskCompletionSource<bool>();
-                Console.CancelKeyPress += (sender, args) => { Console.Error.WriteLine("Keyboard interrupt"); args.Cancel = true; tcs.TrySetResult(false); };
+                Console.CancelKeyPress += (sender, args) =>
+                {
+                    Console.Error.WriteLine("Keyboard interrupt");
+                    args.Cancel = true;
+                    tcs.TrySetResult(false);
+                };
                 if (maxExecutionTime.HasValue)
                 {
-                    Console.WriteLine($"Running for a total of {maxExecutionTime.Value.TotalMinutes:0.##} minutes");
-                    var cts = new System.Threading.CancellationTokenSource(delay: maxExecutionTime.Value);
-                    cts.Token.Register(() => { Console.WriteLine("Max execution time elapsed"); tcs.TrySetResult(false); });
+                    Console.WriteLine(
+                        $"Running for a total of {maxExecutionTime.Value.TotalMinutes:0.##} minutes"
+                    );
+                    var cts = new System.Threading.CancellationTokenSource(
+                        delay: maxExecutionTime.Value
+                    );
+                    cts.Token.Register(() =>
+                    {
+                        Console.WriteLine("Max execution time elapsed");
+                        tcs.TrySetResult(false);
+                    });
                 }
 
                 await tcs.Task;
             }
         }
 
-        private static bool TryParseCli(string[] args, [NotNullWhen(true)] out Configuration? config)
+        private static bool TryParseCli(
+            string[] args,
+            [NotNullWhen(true)] out Configuration? config
+        )
         {
             var cmd = new RootCommand();
             cmd.AddOption(new Option(new[] { "--help", "-h" }, "Display this help text."));
-            cmd.AddOption(new Option(new[] { "--mode", "-m" }, "Stress suite execution mode. Defaults to 'both'.") { Argument = new Argument<RunMode>("runMode", RunMode.both) });
-            cmd.AddOption(new Option(new[] { "--cancellation-probability", "-p"}, "Cancellation probability 0 <= p <= 1 for a given connection. Defaults to 0.1") { Argument = new Argument<double>("probability", 0.1)});
-            cmd.AddOption(new Option(new[] { "--num-connections", "-n" }, "Max number of connections to open concurrently.") { Argument = new Argument<int>("connections", Environment.ProcessorCount) });
-            cmd.AddOption(new Option(new[] { "--server-endpoint", "-e" }, "Endpoint to bind to if server, endpoint to listen to if client.") { Argument = new Argument<string>("ipEndpoint", "127.0.0.1:5002") });
-            cmd.AddOption(new Option(new[] { "--max-execution-time", "-t" }, "Maximum stress suite execution time, in minutes. Defaults to infinity.") { Argument = new Argument<double?>("minutes", null) });
-            cmd.AddOption(new Option(new[] { "--max-buffer-length", "-b" }, "Maximum buffer length to write on ssl stream. Defaults to 8192.") { Argument = new Argument<int>("bytes", 8192) });
-            cmd.AddOption(new Option(new[] { "--min-connection-lifetime", "-l" }, "Minimum duration for a single connection, in seconds. Defaults to 5 seconds.") { Argument = new Argument<double>("seconds", 5) });
-            cmd.AddOption(new Option(new[] { "--max-connection-lifetime", "-L" }, "Maximum duration for a single connection, in seconds. Defaults to 120 seconds.") { Argument = new Argument<double>("seconds", 120) });
-            cmd.AddOption(new Option(new[] { "--display-interval", "-i" }, "Client stats display interval, in seconds. Defaults to 5 seconds.") { Argument = new Argument<double>("seconds", 5) });
-            cmd.AddOption(new Option(new[] { "--log-server", "-S" }, "Print server logs to stdout."));
-            cmd.AddOption(new Option(new[] { "--seed", "-s" }, "Seed for generating pseudo-random parameters. Also depends on the -n argument.") { Argument = new Argument<int>("seed", (new Random().Next())) });
+            cmd.AddOption(
+                new Option(
+                    new[] { "--mode", "-m" },
+                    "Stress suite execution mode. Defaults to 'both'."
+                )
+                {
+                    Argument = new Argument<RunMode>("runMode", RunMode.both),
+                }
+            );
+            cmd.AddOption(
+                new Option(
+                    new[] { "--cancellation-probability", "-p" },
+                    "Cancellation probability 0 <= p <= 1 for a given connection. Defaults to 0.1"
+                )
+                {
+                    Argument = new Argument<double>("probability", 0.1),
+                }
+            );
+            cmd.AddOption(
+                new Option(
+                    new[] { "--num-connections", "-n" },
+                    "Max number of connections to open concurrently."
+                )
+                {
+                    Argument = new Argument<int>("connections", Environment.ProcessorCount),
+                }
+            );
+            cmd.AddOption(
+                new Option(
+                    new[] { "--server-endpoint", "-e" },
+                    "Endpoint to bind to if server, endpoint to listen to if client."
+                )
+                {
+                    Argument = new Argument<string>("ipEndpoint", "127.0.0.1:5002"),
+                }
+            );
+            cmd.AddOption(
+                new Option(
+                    new[] { "--max-execution-time", "-t" },
+                    "Maximum stress suite execution time, in minutes. Defaults to infinity."
+                )
+                {
+                    Argument = new Argument<double?>("minutes", null),
+                }
+            );
+            cmd.AddOption(
+                new Option(
+                    new[] { "--max-buffer-length", "-b" },
+                    "Maximum buffer length to write on ssl stream. Defaults to 8192."
+                )
+                {
+                    Argument = new Argument<int>("bytes", 8192),
+                }
+            );
+            cmd.AddOption(
+                new Option(
+                    new[] { "--min-connection-lifetime", "-l" },
+                    "Minimum duration for a single connection, in seconds. Defaults to 5 seconds."
+                )
+                {
+                    Argument = new Argument<double>("seconds", 5),
+                }
+            );
+            cmd.AddOption(
+                new Option(
+                    new[] { "--max-connection-lifetime", "-L" },
+                    "Maximum duration for a single connection, in seconds. Defaults to 120 seconds."
+                )
+                {
+                    Argument = new Argument<double>("seconds", 120),
+                }
+            );
+            cmd.AddOption(
+                new Option(
+                    new[] { "--display-interval", "-i" },
+                    "Client stats display interval, in seconds. Defaults to 5 seconds."
+                )
+                {
+                    Argument = new Argument<double>("seconds", 5),
+                }
+            );
+            cmd.AddOption(
+                new Option(new[] { "--log-server", "-S" }, "Print server logs to stdout.")
+            );
+            cmd.AddOption(
+                new Option(
+                    new[] { "--seed", "-s" },
+                    "Seed for generating pseudo-random parameters. Also depends on the -n argument."
+                )
+                {
+                    Argument = new Argument<int>("seed", (new Random().Next())),
+                }
+            );
 
             ParseResult parseResult = cmd.Parse(args);
             if (parseResult.Errors.Count > 0 || parseResult.HasOption("-h"))
@@ -140,12 +258,21 @@ namespace SslStress
             {
                 RunMode = parseResult.ValueForOption<RunMode>("-m"),
                 MaxConnections = parseResult.ValueForOption<int>("-n"),
-                CancellationProbability = Math.Max(0, Math.Min(1, parseResult.ValueForOption<double>("-p"))),
+                CancellationProbability = Math.Max(
+                    0,
+                    Math.Min(1, parseResult.ValueForOption<double>("-p"))
+                ),
                 ServerEndpoint = ParseEndpoint(parseResult.ValueForOption<string>("-e")),
-                MaxExecutionTime = parseResult.ValueForOption<double?>("-t")?.Pipe(TimeSpan.FromMinutes),
+                MaxExecutionTime = parseResult
+                    .ValueForOption<double?>("-t")
+                    ?.Pipe(TimeSpan.FromMinutes),
                 MaxBufferLength = parseResult.ValueForOption<int>("-b"),
-                MinConnectionLifetime = TimeSpan.FromSeconds(parseResult.ValueForOption<double>("-l")),
-                MaxConnectionLifetime = TimeSpan.FromSeconds(parseResult.ValueForOption<double>("-L")),
+                MinConnectionLifetime = TimeSpan.FromSeconds(
+                    parseResult.ValueForOption<double>("-l")
+                ),
+                MaxConnectionLifetime = TimeSpan.FromSeconds(
+                    parseResult.ValueForOption<double>("-L")
+                ),
                 DisplayInterval = TimeSpan.FromSeconds(parseResult.ValueForOption<double>("-i")),
                 LogServer = parseResult.HasOption("-S"),
                 RandomSeed = parseResult.ValueForOption<int>("-s"),
@@ -153,7 +280,9 @@ namespace SslStress
 
             if (config.MaxConnectionLifetime < config.MinConnectionLifetime)
             {
-                Console.WriteLine("Max connection lifetime should be greater than or equal to min connection lifetime");
+                Console.WriteLine(
+                    "Max connection lifetime should be greater than or equal to min connection lifetime"
+                );
                 WriteHelpText();
                 config = null;
                 return false;
@@ -181,7 +310,7 @@ namespace SslStress
                     {
                         string hostname = match.Groups[1].Value;
                         int port = int.Parse(match.Groups[2].Value);
-                        switch(hostname)
+                        switch (hostname)
                         {
                             case "+":
                             case "*":

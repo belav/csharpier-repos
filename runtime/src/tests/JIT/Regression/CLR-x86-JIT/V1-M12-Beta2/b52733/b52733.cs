@@ -2,6 +2,7 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using Xunit;
+
 namespace Test
 {
     using System;
@@ -11,7 +12,10 @@ namespace Test
         private static float[] s_af;
         private static bool s_b;
 
-        private static float[] Method1() { return s_af = new float[5]; }
+        private static float[] Method1()
+        {
+            return s_af = new float[5];
+        }
 
         [Fact]
         public static void TestEntryPoint()

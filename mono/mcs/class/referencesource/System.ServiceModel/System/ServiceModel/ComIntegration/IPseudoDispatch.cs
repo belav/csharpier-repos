@@ -13,20 +13,27 @@ namespace System.ServiceModel.ComIntegration
     [ComImport]
     interface IPseudoDispatch
     {
-        void GetIDsOfNames(UInt32 cNames, // size_is param for rgszNames
-                    [MarshalAs(UnmanagedType.LPArray, ArraySubType = UnmanagedType.LPWStr, SizeParamIndex = 0)] string[] rgszNames,
-                    IntPtr pDispID);
+        void GetIDsOfNames(
+            UInt32 cNames, // size_is param for rgszNames
+            [MarshalAs(
+                UnmanagedType.LPArray,
+                ArraySubType = UnmanagedType.LPWStr,
+                SizeParamIndex = 0
+            )]
+                string[] rgszNames,
+            IntPtr pDispID
+        );
 
         [PreserveSig]
         int Invoke(
-                    UInt32 dispIdMember,
-                    UInt32 cArgs,
-                    UInt32 cNamedArgs,
-                    IntPtr rgvarg,
-                    [MarshalAs(UnmanagedType.LPArray, SizeParamIndex = 2)] UInt32[] rgdispidNamedArgs,
-                    IntPtr pVarResult,
-                    IntPtr pExcepInfo,
-                    out UInt32 pArgErr
-                );
+            UInt32 dispIdMember,
+            UInt32 cArgs,
+            UInt32 cNamedArgs,
+            IntPtr rgvarg,
+            [MarshalAs(UnmanagedType.LPArray, SizeParamIndex = 2)] UInt32[] rgdispidNamedArgs,
+            IntPtr pVarResult,
+            IntPtr pExcepInfo,
+            out UInt32 pArgErr
+        );
     }
 }

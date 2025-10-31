@@ -16,10 +16,14 @@ namespace Microsoft.CodeAnalysis.Editor.Shared.Extensions
         /// <param name="dataContentType">Content type (typically of a text buffer) against which to
         /// match an extension.</param>
         /// <param name="extensionContentTypes">Content types from extension metadata.</param>
-        public static bool MatchesAny(this IContentType dataContentType, IEnumerable<string> extensionContentTypes)
-            => extensionContentTypes.Any(v => dataContentType.IsOfType(v));
+        public static bool MatchesAny(
+            this IContentType dataContentType,
+            IEnumerable<string> extensionContentTypes
+        ) => extensionContentTypes.Any(v => dataContentType.IsOfType(v));
 
-        public static bool MatchesAny(this IContentType dataContentType, params string[] extensionContentTypes)
-            => dataContentType.MatchesAny((IEnumerable<string>)extensionContentTypes);
+        public static bool MatchesAny(
+            this IContentType dataContentType,
+            params string[] extensionContentTypes
+        ) => dataContentType.MatchesAny((IEnumerable<string>)extensionContentTypes);
     }
 }

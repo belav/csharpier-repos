@@ -16,6 +16,7 @@ namespace SharedTypes.ComInterfaces
         void MethodOut(out StatefulType param);
         void MethodRef(ref StatefulType param);
         StatefulType Return();
+
         [PreserveSig]
         StatefulType ReturnPreserveSig();
     }
@@ -24,10 +25,15 @@ namespace SharedTypes.ComInterfaces
     internal partial class StatefulMarshalling : IStatefulMarshalling
     {
         public void Method(StatefulType param) => param.i++;
+
         public void MethodIn(in StatefulType param) => param.i++;
+
         public void MethodOut(out StatefulType param) => param = new StatefulType() { i = 1 };
+
         public void MethodRef(ref StatefulType param) { }
+
         public StatefulType Return() => new StatefulType() { i = 1 };
+
         public StatefulType ReturnPreserveSig() => new StatefulType() { i = 1 };
     }
 
@@ -42,15 +48,41 @@ namespace SharedTypes.ComInterfaces
         public int i;
     }
 
-    [CustomMarshaller(typeof(StatefulType), MarshalMode.ManagedToUnmanagedIn, typeof(ManagedToUnmanaged))]
-    [CustomMarshaller(typeof(StatefulType), MarshalMode.UnmanagedToManagedOut, typeof(ManagedToUnmanaged))]
-    [CustomMarshaller(typeof(StatefulType), MarshalMode.ManagedToUnmanagedOut, typeof(UnmanagedToManaged))]
-    [CustomMarshaller(typeof(StatefulType), MarshalMode.UnmanagedToManagedIn, typeof(UnmanagedToManaged))]
-    [CustomMarshaller(typeof(StatefulType), MarshalMode.UnmanagedToManagedRef, typeof(Bidirectional))]
-    [CustomMarshaller(typeof(StatefulType), MarshalMode.ManagedToUnmanagedRef, typeof(Bidirectional))]
+    [CustomMarshaller(
+        typeof(StatefulType),
+        MarshalMode.ManagedToUnmanagedIn,
+        typeof(ManagedToUnmanaged)
+    )]
+    [CustomMarshaller(
+        typeof(StatefulType),
+        MarshalMode.UnmanagedToManagedOut,
+        typeof(ManagedToUnmanaged)
+    )]
+    [CustomMarshaller(
+        typeof(StatefulType),
+        MarshalMode.ManagedToUnmanagedOut,
+        typeof(UnmanagedToManaged)
+    )]
+    [CustomMarshaller(
+        typeof(StatefulType),
+        MarshalMode.UnmanagedToManagedIn,
+        typeof(UnmanagedToManaged)
+    )]
+    [CustomMarshaller(
+        typeof(StatefulType),
+        MarshalMode.UnmanagedToManagedRef,
+        typeof(Bidirectional)
+    )]
+    [CustomMarshaller(
+        typeof(StatefulType),
+        MarshalMode.ManagedToUnmanagedRef,
+        typeof(Bidirectional)
+    )]
     internal struct StatefulTypeMarshaller
     {
-        public static int FreeCount => Bidirectional.FreeCount + ManagedToUnmanaged.FreeCount + UnmanagedToManaged.FreeCount;
+        public static int FreeCount =>
+            Bidirectional.FreeCount + ManagedToUnmanaged.FreeCount + UnmanagedToManaged.FreeCount;
+
         internal struct Bidirectional
         {
             public static int FreeCount { get; private set; }
@@ -67,7 +99,8 @@ namespace SharedTypes.ComInterfaces
 
             public StatefulNative ToUnmanaged()
             {
-                if (!_hasManaged) throw new InvalidOperationException();
+                if (!_hasManaged)
+                    throw new InvalidOperationException();
                 return new StatefulNative() { i = _managed.i };
             }
 
@@ -103,6 +136,7 @@ namespace SharedTypes.ComInterfaces
             public static int FreeCount { get; private set; }
             StatefulType? _managed;
             bool _hasManaged;
+
             public void FromManaged(StatefulType managed)
             {
                 _hasManaged = true;
@@ -111,7 +145,8 @@ namespace SharedTypes.ComInterfaces
 
             public StatefulNative ToUnmanaged()
             {
-                if (!_hasManaged) throw new InvalidOperationException();
+                if (!_hasManaged)
+                    throw new InvalidOperationException();
                 return new StatefulNative() { i = _managed.i };
             }
 

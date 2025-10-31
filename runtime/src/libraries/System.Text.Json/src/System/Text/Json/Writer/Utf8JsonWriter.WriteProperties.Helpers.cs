@@ -13,15 +13,29 @@ namespace System.Text.Json
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         private void ValidatePropertyNameAndDepth(ReadOnlySpan<char> propertyName)
         {
-            if (propertyName.Length > JsonConstants.MaxCharacterTokenSize || CurrentDepth >= _options.MaxDepth)
-                ThrowHelper.ThrowInvalidOperationOrArgumentException(propertyName, _currentDepth, _options.MaxDepth);
+            if (
+                propertyName.Length > JsonConstants.MaxCharacterTokenSize
+                || CurrentDepth >= _options.MaxDepth
+            )
+                ThrowHelper.ThrowInvalidOperationOrArgumentException(
+                    propertyName,
+                    _currentDepth,
+                    _options.MaxDepth
+                );
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         private void ValidatePropertyNameAndDepth(ReadOnlySpan<byte> utf8PropertyName)
         {
-            if (utf8PropertyName.Length > JsonConstants.MaxUnescapedTokenSize || CurrentDepth >= _options.MaxDepth)
-                ThrowHelper.ThrowInvalidOperationOrArgumentException(utf8PropertyName, _currentDepth, _options.MaxDepth);
+            if (
+                utf8PropertyName.Length > JsonConstants.MaxUnescapedTokenSize
+                || CurrentDepth >= _options.MaxDepth
+            )
+                ThrowHelper.ThrowInvalidOperationOrArgumentException(
+                    utf8PropertyName,
+                    _currentDepth,
+                    _options.MaxDepth
+                );
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -39,7 +53,13 @@ namespace System.Text.Json
                 if (!_inObject || _tokenType == JsonTokenType.PropertyName)
                 {
                     Debug.Assert(_tokenType != JsonTokenType.StartObject);
-                    ThrowHelper.ThrowInvalidOperationException(ExceptionResource.CannotWritePropertyWithinArray, currentDepth: default, maxDepth: _options.MaxDepth, token: default, _tokenType);
+                    ThrowHelper.ThrowInvalidOperationException(
+                        ExceptionResource.CannotWritePropertyWithinArray,
+                        currentDepth: default,
+                        maxDepth: _options.MaxDepth,
+                        token: default,
+                        _tokenType
+                    );
                 }
             }
         }
@@ -52,7 +72,13 @@ namespace System.Text.Json
                 if (!_inObject || _tokenType == JsonTokenType.PropertyName)
                 {
                     Debug.Assert(_tokenType != JsonTokenType.StartObject);
-                    ThrowHelper.ThrowInvalidOperationException(ExceptionResource.CannotWritePropertyWithinArray, currentDepth: default, maxDepth: _options.MaxDepth, token: default, _tokenType);
+                    ThrowHelper.ThrowInvalidOperationException(
+                        ExceptionResource.CannotWritePropertyWithinArray,
+                        currentDepth: default,
+                        maxDepth: _options.MaxDepth,
+                        token: default,
+                        _tokenType
+                    );
                 }
                 UpdateBitStackOnStart(token);
             }
@@ -132,11 +158,15 @@ namespace System.Text.Json
 
         private void WritePropertyNameMinimized(ReadOnlySpan<char> escapedPropertyName, byte token)
         {
-            Debug.Assert(escapedPropertyName.Length < (int.MaxValue / JsonConstants.MaxExpansionFactorWhileTranscoding) - 5);
+            Debug.Assert(
+                escapedPropertyName.Length
+                    < (int.MaxValue / JsonConstants.MaxExpansionFactorWhileTranscoding) - 5
+            );
 
             // All ASCII, 2 quotes, 1 colon, and 1 start token => escapedPropertyName.Length + 4
             // Optionally, 1 list separator, and up to 3x growth when transcoding
-            int maxRequired = (escapedPropertyName.Length * JsonConstants.MaxExpansionFactorWhileTranscoding) + 5;
+            int maxRequired =
+                (escapedPropertyName.Length * JsonConstants.MaxExpansionFactorWhileTranscoding) + 5;
 
             if (_memory.Length - BytesPending < maxRequired)
             {
@@ -163,11 +193,21 @@ namespace System.Text.Json
             int indent = Indentation;
             Debug.Assert(indent <= 2 * _options.MaxDepth);
 
-            Debug.Assert(escapedPropertyName.Length < (int.MaxValue / JsonConstants.MaxExpansionFactorWhileTranscoding) - indent - 6 - s_newLineLength);
+            Debug.Assert(
+                escapedPropertyName.Length
+                    < (int.MaxValue / JsonConstants.MaxExpansionFactorWhileTranscoding)
+                        - indent
+                        - 6
+                        - s_newLineLength
+            );
 
             // All ASCII, 2 quotes, 1 colon, 1 space, and 1 start token => indent + escapedPropertyName.Length + 5
             // Optionally, 1 list separator, 1-2 bytes for new line, and up to 3x growth when transcoding
-            int maxRequired = indent + (escapedPropertyName.Length * JsonConstants.MaxExpansionFactorWhileTranscoding) + 6 + s_newLineLength;
+            int maxRequired =
+                indent
+                + (escapedPropertyName.Length * JsonConstants.MaxExpansionFactorWhileTranscoding)
+                + 6
+                + s_newLineLength;
 
             if (_memory.Length - BytesPending < maxRequired)
             {
@@ -205,7 +245,11 @@ namespace System.Text.Json
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         private void TranscodeAndWrite(ReadOnlySpan<char> escapedPropertyName, Span<byte> output)
         {
-            OperationStatus status = JsonWriterHelper.ToUtf8(escapedPropertyName, output.Slice(BytesPending), out int written);
+            OperationStatus status = JsonWriterHelper.ToUtf8(
+                escapedPropertyName,
+                output.Slice(BytesPending),
+                out int written
+            );
             Debug.Assert(status == OperationStatus.Done);
             BytesPending += written;
         }

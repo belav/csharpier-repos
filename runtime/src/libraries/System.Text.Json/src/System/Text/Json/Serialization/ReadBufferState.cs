@@ -22,7 +22,9 @@ namespace System.Text.Json.Serialization
 
         public ReadBufferState(int initialBufferSize)
         {
-            _buffer = ArrayPool<byte>.Shared.Rent(Math.Max(initialBufferSize, JsonConstants.Utf8Bom.Length));
+            _buffer = ArrayPool<byte>.Shared.Rent(
+                Math.Max(initialBufferSize, JsonConstants.Utf8Bom.Length)
+            );
             _maxCount = _count = _offset = 0;
             _isFirstBlock = true;
             _isFinalBlock = false;
@@ -40,7 +42,8 @@ namespace System.Text.Json.Serialization
         public readonly async ValueTask<ReadBufferState> ReadFromStreamAsync(
             Stream utf8Json,
             CancellationToken cancellationToken,
-            bool fillBuffer = true)
+            bool fillBuffer = true
+        )
         {
             // Since mutable structs don't work well with async state machines,
             // make all updates on a copy which is returned once complete.
@@ -48,13 +51,17 @@ namespace System.Text.Json.Serialization
 
             do
             {
-                int bytesRead = await utf8Json.ReadAsync(
+                int bytesRead = await utf8Json
+                    .ReadAsync(
 #if NETCOREAPP
-                    bufferState._buffer.AsMemory(bufferState._count),
+                        bufferState._buffer.AsMemory(bufferState._count),
 #else
-                    bufferState._buffer, bufferState._count, bufferState._buffer.Length - bufferState._count,
+                        bufferState._buffer,
+                        bufferState._count,
+                        bufferState._buffer.Length - bufferState._count,
 #endif
-                    cancellationToken).ConfigureAwait(false);
+                        cancellationToken)
+                    .ConfigureAwait(false);
 
                 if (bytesRead == 0)
                 {
@@ -63,8 +70,7 @@ namespace System.Text.Json.Serialization
                 }
 
                 bufferState._count += bytesRead;
-            }
-            while (fillBuffer && bufferState._count < bufferState._buffer.Length);
+            } while (fillBuffer && bufferState._count < bufferState._buffer.Length);
 
             bufferState.ProcessReadBytes();
             return bufferState;
@@ -93,8 +99,7 @@ namespace System.Text.Json.Serialization
                 }
 
                 _count += bytesRead;
-            }
-            while (_count < _buffer.Length);
+            } while (_count < _buffer.Length);
 
             ProcessReadBytes();
         }
@@ -105,7 +110,10 @@ namespace System.Text.Json.Serialization
         public void AdvanceBuffer(int bytesConsumed)
         {
             Debug.Assert(bytesConsumed <= _count);
-            Debug.Assert(!_isFinalBlock || _count == bytesConsumed, "The reader should have thrown if we have remaining bytes.");
+            Debug.Assert(
+                !_isFinalBlock || _count == bytesConsumed,
+                "The reader should have thrown if we have remaining bytes."
+            );
 
             _count -= bytesConsumed;
 
@@ -117,7 +125,9 @@ namespace System.Text.Json.Serialization
                     // We have less than half the buffer available, double the buffer size.
                     byte[] oldBuffer = _buffer;
                     int oldMaxCount = _maxCount;
-                    byte[] newBuffer = ArrayPool<byte>.Shared.Rent((_buffer.Length < (int.MaxValue / 2)) ? _buffer.Length * 2 : int.MaxValue);
+                    byte[] newBuffer = ArrayPool<byte>.Shared.Rent(
+                        (_buffer.Length < (int.MaxValue / 2)) ? _buffer.Length * 2 : int.MaxValue
+                    );
 
                     // Copy the unprocessed data to the new buffer while shifting the processed bytes.
                     Buffer.BlockCopy(oldBuffer, _offset + bytesConsumed, newBuffer, 0, _count);

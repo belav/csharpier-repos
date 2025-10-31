@@ -11,15 +11,38 @@ namespace System.IO.Pipes.Tests
     {
         [Fact]
         [PlatformSpecific(TestPlatforms.AnyUnix)]
-        [SkipOnPlatform(TestPlatforms.iOS | TestPlatforms.tvOS, "iOS/tvOS blocks binding to UNIX sockets")]
-        [SkipOnPlatform(TestPlatforms.LinuxBionic, "SElinux blocks UNIX sockets in our CI environment")]
+        [SkipOnPlatform(
+            TestPlatforms.iOS | TestPlatforms.tvOS,
+            "iOS/tvOS blocks binding to UNIX sockets"
+        )]
+        [SkipOnPlatform(
+            TestPlatforms.LinuxBionic,
+            "SElinux blocks UNIX sockets in our CI environment"
+        )]
         public void NamedPipeServer_Connects_With_UnixDomainSocketEndPointClient()
         {
-            string pipeName = Path.Combine(Path.GetTempPath(), "pipe-tests-corefx-" + Path.GetRandomFileName());
+            string pipeName = Path.Combine(
+                Path.GetTempPath(),
+                "pipe-tests-corefx-" + Path.GetRandomFileName()
+            );
             var endPoint = new UnixDomainSocketEndPoint(pipeName);
 
-            using (var pipeServer = new NamedPipeServerStream(pipeName, PipeDirection.InOut, 1, PipeTransmissionMode.Byte, PipeOptions.CurrentUserOnly))
-            using (var sockectClient = new Socket(AddressFamily.Unix, SocketType.Stream, ProtocolType.Unspecified))
+            using (
+                var pipeServer = new NamedPipeServerStream(
+                    pipeName,
+                    PipeDirection.InOut,
+                    1,
+                    PipeTransmissionMode.Byte,
+                    PipeOptions.CurrentUserOnly
+                )
+            )
+            using (
+                var sockectClient = new Socket(
+                    AddressFamily.Unix,
+                    SocketType.Stream,
+                    ProtocolType.Unspecified
+                )
+            )
             {
                 sockectClient.Connect(endPoint);
                 Assert.True(File.Exists(pipeName));
@@ -30,15 +53,37 @@ namespace System.IO.Pipes.Tests
 
         [Fact]
         [PlatformSpecific(TestPlatforms.AnyUnix)]
-        [SkipOnPlatform(TestPlatforms.iOS | TestPlatforms.tvOS, "iOS/tvOS blocks binding to UNIX sockets")]
-        [SkipOnPlatform(TestPlatforms.LinuxBionic, "SElinux blocks UNIX sockets in our CI environment")]
+        [SkipOnPlatform(
+            TestPlatforms.iOS | TestPlatforms.tvOS,
+            "iOS/tvOS blocks binding to UNIX sockets"
+        )]
+        [SkipOnPlatform(
+            TestPlatforms.LinuxBionic,
+            "SElinux blocks UNIX sockets in our CI environment"
+        )]
         public async Task NamedPipeClient_Connects_With_UnixDomainSocketEndPointServer()
         {
-            string pipeName = Path.Combine(Path.GetTempPath(), "pipe-tests-corefx-" + Path.GetRandomFileName());
+            string pipeName = Path.Combine(
+                Path.GetTempPath(),
+                "pipe-tests-corefx-" + Path.GetRandomFileName()
+            );
             var endPoint = new UnixDomainSocketEndPoint(pipeName);
 
-            using (var socketServer = new Socket(AddressFamily.Unix, SocketType.Stream, ProtocolType.Unspecified))
-            using (var pipeClient = new NamedPipeClientStream(".", pipeName, PipeDirection.InOut, PipeOptions.None))
+            using (
+                var socketServer = new Socket(
+                    AddressFamily.Unix,
+                    SocketType.Stream,
+                    ProtocolType.Unspecified
+                )
+            )
+            using (
+                var pipeClient = new NamedPipeClientStream(
+                    ".",
+                    pipeName,
+                    PipeDirection.InOut,
+                    PipeOptions.None
+                )
+            )
             {
                 socketServer.Bind(endPoint);
                 socketServer.Listen(1);

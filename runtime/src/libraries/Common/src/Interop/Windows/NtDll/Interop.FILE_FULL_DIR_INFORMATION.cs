@@ -54,12 +54,15 @@ internal static partial class Interop
             public uint EaSize;
 
             private char _fileName;
-            public unsafe ReadOnlySpan<char> FileName => MemoryMarshal.CreateReadOnlySpan(ref _fileName, (int)FileNameLength / sizeof(char));
+            public unsafe ReadOnlySpan<char> FileName =>
+                MemoryMarshal.CreateReadOnlySpan(ref _fileName, (int)FileNameLength / sizeof(char));
 
             /// <summary>
             /// Gets the next info pointer or null if there are no more.
             /// </summary>
-            public static unsafe FILE_FULL_DIR_INFORMATION* GetNextInfo(FILE_FULL_DIR_INFORMATION* info)
+            public static unsafe FILE_FULL_DIR_INFORMATION* GetNextInfo(
+                FILE_FULL_DIR_INFORMATION* info
+            )
             {
                 if (info == null)
                     return null;

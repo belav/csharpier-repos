@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -30,36 +30,50 @@ using System.Collections.Generic;
 using System.IO;
 using System.Web;
 using System.Web.Hosting;
-
+using NUnit.Framework;
 using StandAloneRunnerSupport;
 using StandAloneTests;
 
-using NUnit.Framework;
-
 namespace StandAloneTests.XmlSiteMapProvider_ReturnsRootNode_Bug684803
 {
-	[TestCase ("XmlSiteMapProvider_ReturnsRootNode_Bug684803", "Tests whether the XmlSiteMapProvider returns the root node when matching an URL to node.")]
-	public sealed class XmlSiteMapProvider_ReturnsRootNode_Bug684803 : ITestCase
-	{
-		public string PhysicalPath {
-			get { return Path.Combine (Consts.BasePhysicalDir, "XmlSiteMapProvider_ReturnsRootNode_Bug684803"); }
-		}
-		
-		public string VirtualPath  {
-			get { return "/"; }
-		}
+    [TestCase(
+        "XmlSiteMapProvider_ReturnsRootNode_Bug684803",
+        "Tests whether the XmlSiteMapProvider returns the root node when matching an URL to node."
+    )]
+    public sealed class XmlSiteMapProvider_ReturnsRootNode_Bug684803 : ITestCase
+    {
+        public string PhysicalPath
+        {
+            get
+            {
+                return Path.Combine(
+                    Consts.BasePhysicalDir,
+                    "XmlSiteMapProvider_ReturnsRootNode_Bug684803"
+                );
+            }
+        }
 
-		public bool SetUp (List <TestRunItem> runItems)
-		{
-			runItems.Add (new TestRunItem ("/default.aspx", Default_Aspx));
-			
-			return true;
-		}
+        public string VirtualPath
+        {
+            get { return "/"; }
+        }
 
-		void Default_Aspx (string result, TestRunItem runItem)
-		{
-			string originalHtml = "<pre id=\"log\">node is <strong>not</strong> null and it is the root node</pre>";
-			Helpers.ExtractAndCompareCodeFromHtml (Helpers.StripWebResourceAxdQuery (result), originalHtml, "#A1");
-		}
-	}
+        public bool SetUp(List<TestRunItem> runItems)
+        {
+            runItems.Add(new TestRunItem("/default.aspx", Default_Aspx));
+
+            return true;
+        }
+
+        void Default_Aspx(string result, TestRunItem runItem)
+        {
+            string originalHtml =
+                "<pre id=\"log\">node is <strong>not</strong> null and it is the root node</pre>";
+            Helpers.ExtractAndCompareCodeFromHtml(
+                Helpers.StripWebResourceAxdQuery(result),
+                originalHtml,
+                "#A1"
+            );
+        }
+    }
 }

@@ -11,7 +11,7 @@ using Roslyn.Utilities;
 namespace Microsoft.CodeAnalysis.CSharp.Symbols
 {
     /// <summary>
-    /// This class represents an event accessor declared in source 
+    /// This class represents an event accessor declared in source
     /// (i.e. not one synthesized for a field-like event).
     /// </summary>
     /// <remarks>
@@ -25,19 +25,32 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             EventSymbol explicitlyImplementedEventOpt,
             string aliasQualifierOpt,
             bool isNullableAnalysisEnabled,
-            BindingDiagnosticBag diagnostics)
-            : base(@event,
-                   syntax.GetReference(),
-                   syntax.Keyword.GetLocation(), explicitlyImplementedEventOpt, aliasQualifierOpt,
-                   isAdder: syntax.Kind() == SyntaxKind.AddAccessorDeclaration,
-                   isIterator: SyntaxFacts.HasYieldOperations(syntax.Body),
-                   isNullableAnalysisEnabled: isNullableAnalysisEnabled,
-                   isExpressionBodied: syntax is { Body: null, ExpressionBody: not null })
+            BindingDiagnosticBag diagnostics
+        )
+            : base(
+                @event,
+                syntax.GetReference(),
+                syntax.Keyword.GetLocation(),
+                explicitlyImplementedEventOpt,
+                aliasQualifierOpt,
+                isAdder: syntax.Kind() == SyntaxKind.AddAccessorDeclaration,
+                isIterator: SyntaxFacts.HasYieldOperations(syntax.Body),
+                isNullableAnalysisEnabled: isNullableAnalysisEnabled,
+                isExpressionBodied: syntax is { Body: null, ExpressionBody: not null }
+            )
         {
             Debug.Assert(syntax != null);
-            Debug.Assert(syntax.Kind() == SyntaxKind.AddAccessorDeclaration || syntax.Kind() == SyntaxKind.RemoveAccessorDeclaration);
+            Debug.Assert(
+                syntax.Kind() == SyntaxKind.AddAccessorDeclaration
+                    || syntax.Kind() == SyntaxKind.RemoveAccessorDeclaration
+            );
 
-            CheckFeatureAvailabilityAndRuntimeSupport(syntax, this.Location, hasBody: true, diagnostics: diagnostics);
+            CheckFeatureAvailabilityAndRuntimeSupport(
+                syntax,
+                this.Location,
+                hasBody: true,
+                diagnostics: diagnostics
+            );
 
             if (syntax.Body != null || syntax.ExpressionBody != null)
             {
@@ -51,11 +64,13 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
             if (syntax.Modifiers.Count > 0)
             {
-                diagnostics.Add(ErrorCode.ERR_NoModifiersOnAccessor, syntax.Modifiers[0].GetLocation());
+                diagnostics.Add(
+                    ErrorCode.ERR_NoModifiersOnAccessor,
+                    syntax.Modifiers[0].GetLocation()
+                );
             }
 
-            CheckForBlockAndExpressionBody(
-                syntax.Body, syntax.ExpressionBody, syntax, diagnostics);
+            CheckForBlockAndExpressionBody(syntax.Body, syntax.ExpressionBody, syntax, diagnostics);
         }
 
         internal AccessorDeclarationSyntax GetSyntax()
@@ -64,17 +79,17 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             return (AccessorDeclarationSyntax)syntaxReferenceOpt.GetSyntax();
         }
 
-        internal override ExecutableCodeBinder TryGetBodyBinder(BinderFactory binderFactoryOpt = null, bool ignoreAccessibility = false)
+        internal override ExecutableCodeBinder TryGetBodyBinder(
+            BinderFactory binderFactoryOpt = null,
+            bool ignoreAccessibility = false
+        )
         {
             return TryGetBodyBinderFromSyntax(binderFactoryOpt, ignoreAccessibility);
         }
 
         public override Accessibility DeclaredAccessibility
         {
-            get
-            {
-                return this.AssociatedSymbol.DeclaredAccessibility;
-            }
+            get { return this.AssociatedSymbol.DeclaredAccessibility; }
         }
 
         internal override OneOrMany<SyntaxList<AttributeListSyntax>> GetAttributeDeclarations()

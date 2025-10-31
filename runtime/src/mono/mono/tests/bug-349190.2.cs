@@ -1,130 +1,186 @@
 using System;
+using System.Collections.Generic;
+using System.IO;
 using System.Reflection;
 using System.Reflection.Emit;
 using System.Threading;
-using System.IO;
-using System.Collections.Generic;
-
 
 public class Driver
 {
-		public static int Main () {
-			if (!TestOneAssembly ())
-				return 1;
-			if (!TestTwoAssemblies ())
-				return 2;
-			return 0;
-		}
+    public static int Main()
+    {
+        if (!TestOneAssembly())
+            return 1;
+        if (!TestTwoAssemblies())
+            return 2;
+        return 0;
+    }
 
-        public static bool TestTwoAssemblies ()
-        {
-			AssemblyBuilder assembly2 = Thread.GetDomain ().DefineDynamicAssembly (new AssemblyName ("res2"), AssemblyBuilderAccess.RunAndSave, Path.GetTempPath ());
-			ModuleBuilder module2 = assembly2.DefineDynamicModule ("res2.dll");
+    public static bool TestTwoAssemblies()
+    {
+        AssemblyBuilder assembly2 = Thread
+            .GetDomain()
+            .DefineDynamicAssembly(
+                new AssemblyName("res2"),
+                AssemblyBuilderAccess.RunAndSave,
+                Path.GetTempPath()
+            );
+        ModuleBuilder module2 = assembly2.DefineDynamicModule("res2.dll");
 
-			TypeBuilder tb2 = module2.DefineType ("ExternalType", TypeAttributes.Public | TypeAttributes.Abstract);
+        TypeBuilder tb2 = module2.DefineType(
+            "ExternalType",
+            TypeAttributes.Public | TypeAttributes.Abstract
+        );
 
-			MethodBuilder m_2 = tb2.DefineMethod ("m_2", MethodAttributes.Public | MethodAttributes.Static);
-			Type[] gparams_m_2 = m_2.DefineGenericParameters ("T");
-			m_2.SetReturnType (gparams_m_2[0]);
-			m_2.SetParameters (gparams_m_2[0]);
-			ILGenerator il = m_2.GetILGenerator ();
-			il.Emit (OpCodes.Ldarg_0);
-			il.Emit (OpCodes.Ret);
+        MethodBuilder m_2 = tb2.DefineMethod(
+            "m_2",
+            MethodAttributes.Public | MethodAttributes.Static
+        );
+        Type[] gparams_m_2 = m_2.DefineGenericParameters("T");
+        m_2.SetReturnType(gparams_m_2[0]);
+        m_2.SetParameters(gparams_m_2[0]);
+        ILGenerator il = m_2.GetILGenerator();
+        il.Emit(OpCodes.Ldarg_0);
+        il.Emit(OpCodes.Ret);
 
+        AssemblyBuilder assembly = Thread
+            .GetDomain()
+            .DefineDynamicAssembly(
+                new AssemblyName("res"),
+                AssemblyBuilderAccess.RunAndSave,
+                Path.GetTempPath()
+            );
+        ModuleBuilder module = assembly.DefineDynamicModule("res.exe");
 
-			AssemblyBuilder assembly = Thread.GetDomain ().DefineDynamicAssembly (new AssemblyName ("res"), AssemblyBuilderAccess.RunAndSave, Path.GetTempPath ());
-			ModuleBuilder module = assembly.DefineDynamicModule ("res.exe");
+        TypeBuilder tb = module.DefineType(
+            "Mono.Rocks.IEnumerable",
+            TypeAttributes.Public | TypeAttributes.Abstract
+        );
 
-			TypeBuilder tb = module.DefineType ("Mono.Rocks.IEnumerable", TypeAttributes.Public | TypeAttributes.Abstract);
+        MethodBuilder mb = tb.DefineMethod(
+            "NaturalSort",
+            MethodAttributes.Public | MethodAttributes.Static
+        );
+        Type[] gparams = mb.DefineGenericParameters("T");
+        mb.SetReturnType(typeof(IEnumerable<>).MakeGenericType(gparams));
+        mb.SetParameters(typeof(IEnumerable<>).MakeGenericType(gparams));
 
-			MethodBuilder mb = tb.DefineMethod ("NaturalSort", MethodAttributes.Public | MethodAttributes.Static);
-			Type[] gparams = mb.DefineGenericParameters ("T");
-			mb.SetReturnType (typeof (IEnumerable<>).MakeGenericType (gparams));
-			mb.SetParameters (typeof (IEnumerable<>).MakeGenericType (gparams));
+        il = mb.GetILGenerator();
+        il.Emit(OpCodes.Ldftn, m_2);
+        il.Emit(OpCodes.Pop);
 
-			il = mb.GetILGenerator ();
-			il.Emit (OpCodes.Ldftn, m_2);
-			il.Emit (OpCodes.Pop);
+        il.Emit(OpCodes.Ldarg_0);
+        il.Emit(OpCodes.Ret);
 
-			il.Emit (OpCodes.Ldarg_0);
-			il.Emit (OpCodes.Ret);
+        TypeBuilder driver = module.DefineType("Driver", TypeAttributes.Public);
+        MethodBuilder main = tb.DefineMethod(
+            "Main",
+            MethodAttributes.Public | MethodAttributes.Static
+        );
+        il = main.GetILGenerator();
+        il.Emit(OpCodes.Ldnull);
+        il.Emit(OpCodes.Call, mb.MakeGenericMethod(typeof(int)));
+        il.Emit(OpCodes.Pop);
+        il.Emit(OpCodes.Ret);
 
-			TypeBuilder driver = module.DefineType ("Driver", TypeAttributes.Public);
-			MethodBuilder main = tb.DefineMethod ("Main", MethodAttributes.Public | MethodAttributes.Static);
-			il = main.GetILGenerator ();
-			il.Emit (OpCodes.Ldnull);
-			il.Emit (OpCodes.Call, mb.MakeGenericMethod (typeof(int)));
-			il.Emit (OpCodes.Pop);
-			il.Emit (OpCodes.Ret);
+        assembly.SetEntryPoint(main);
 
-			assembly.SetEntryPoint (main);
+        Type t = tb.CreateType();
+        tb2.CreateType();
+        driver.CreateType();
 
-			Type t = tb.CreateType ();
-			tb2.CreateType ();
-			driver.CreateType ();
+        assembly2.Save("res2.dll");
+        assembly.Save("res.exe");
 
+        IEnumerable<int> en = new int[] { 1, 2, 3 };
+        bool res =
+            en
+            == t.GetMethod("NaturalSort")
+                .MakeGenericMethod(typeof(int))
+                .Invoke(null, new object[] { en });
 
- 			assembly2.Save ("res2.dll");
-			assembly.Save ("res.exe");
+        Thread
+            .GetDomain()
+            .ExecuteAssembly(Path.GetTempPath() + Path.DirectorySeparatorChar + "res.exe");
+        return res;
+    }
 
-			IEnumerable<int> en = new int[] { 1,2,3 };
-			bool res = en == t.GetMethod ("NaturalSort").MakeGenericMethod (typeof (int)).Invoke (null, new object[] { en });
+    public static bool TestOneAssembly()
+    {
+        AssemblyBuilder assembly = Thread
+            .GetDomain()
+            .DefineDynamicAssembly(
+                new AssemblyName("ALAL"),
+                AssemblyBuilderAccess.RunAndSave,
+                Path.GetTempPath()
+            );
+        ModuleBuilder module = assembly.DefineDynamicModule("res1.exe");
 
-			Thread.GetDomain ().ExecuteAssembly(Path.GetTempPath () + Path.DirectorySeparatorChar +"res.exe");
-			return res;
-       }
+        TypeBuilder tb = module.DefineType(
+            "Mono.Rocks.IEnumerable",
+            TypeAttributes.Public | TypeAttributes.Abstract
+        );
 
+        MethodBuilder m_2 = tb.DefineMethod(
+            "m_2",
+            MethodAttributes.Private | MethodAttributes.Static
+        );
+        Type[] gparams_m_2 = m_2.DefineGenericParameters("T");
+        m_2.SetReturnType(gparams_m_2[0]);
+        m_2.SetParameters(gparams_m_2[0]);
 
+        MethodBuilder mb = tb.DefineMethod(
+            "NaturalSort",
+            MethodAttributes.Public | MethodAttributes.Static
+        );
+        Type[] gparams = mb.DefineGenericParameters("T");
+        mb.SetReturnType(typeof(IEnumerable<>).MakeGenericType(gparams));
+        mb.SetParameters(typeof(IEnumerable<>).MakeGenericType(gparams));
 
-        public static bool TestOneAssembly()
-        {
-			AssemblyBuilder assembly = Thread.GetDomain ().DefineDynamicAssembly (new AssemblyName ("ALAL"), AssemblyBuilderAccess.RunAndSave, Path.GetTempPath ());
-			ModuleBuilder module = assembly.DefineDynamicModule ("res1.exe");
+        ILGenerator il = mb.GetILGenerator();
 
-			TypeBuilder tb = module.DefineType ("Mono.Rocks.IEnumerable", TypeAttributes.Public | TypeAttributes.Abstract);
+        il.Emit(OpCodes.Ldftn, m_2);
+        il.Emit(OpCodes.Pop);
 
-			MethodBuilder m_2 = tb.DefineMethod ("m_2", MethodAttributes.Private | MethodAttributes.Static);
-			Type[] gparams_m_2 = m_2.DefineGenericParameters ("T");
-			m_2.SetReturnType (gparams_m_2[0]);
-			m_2.SetParameters (gparams_m_2[0]);
+        il.Emit(OpCodes.Ldarg_0);
+        il.Emit(OpCodes.Ret);
 
-			MethodBuilder mb = tb.DefineMethod ("NaturalSort", MethodAttributes.Public | MethodAttributes.Static);
-			Type[] gparams = mb.DefineGenericParameters ("T");
-			mb.SetReturnType (typeof (IEnumerable<>).MakeGenericType (gparams));
-			mb.SetParameters (typeof (IEnumerable<>).MakeGenericType (gparams));
+        il = m_2.GetILGenerator();
+        il.Emit(OpCodes.Ldarg_0);
+        il.Emit(OpCodes.Ret);
 
-			ILGenerator il = mb.GetILGenerator ();
+        TypeBuilder driver = module.DefineType("Driver", TypeAttributes.Public);
+        MethodBuilder main = tb.DefineMethod(
+            "Main",
+            MethodAttributes.Public | MethodAttributes.Static
+        );
+        il = main.GetILGenerator();
+        il.Emit(OpCodes.Ldnull);
+        il.Emit(OpCodes.Call, mb.MakeGenericMethod(typeof(int)));
+        il.Emit(OpCodes.Pop);
+        il.Emit(OpCodes.Ret);
 
-			il.Emit (OpCodes.Ldftn, m_2);
-			il.Emit (OpCodes.Pop);
+        assembly.SetEntryPoint(main);
 
-			il.Emit (OpCodes.Ldarg_0);
-			il.Emit (OpCodes.Ret);
+        Type t = tb.CreateType();
+        driver.CreateType();
 
-			il = m_2.GetILGenerator ();
-			il.Emit (OpCodes.Ldarg_0);
-			il.Emit (OpCodes.Ret);
+        IEnumerable<int> en = new int[] { 1, 2, 3 };
+        bool res =
+            en
+            == t.GetMethod("NaturalSort")
+                .MakeGenericMethod(typeof(int))
+                .Invoke(null, new object[] { en });
+        assembly.Save("res1.exe");
+        res &=
+            en
+            == t.GetMethod("NaturalSort")
+                .MakeGenericMethod(typeof(int))
+                .Invoke(null, new object[] { en });
 
-			TypeBuilder driver = module.DefineType ("Driver", TypeAttributes.Public);
-			MethodBuilder main = tb.DefineMethod ("Main", MethodAttributes.Public | MethodAttributes.Static);
-			il = main.GetILGenerator ();
-			il.Emit (OpCodes.Ldnull);
-			il.Emit (OpCodes.Call, mb.MakeGenericMethod (typeof(int)));
-			il.Emit (OpCodes.Pop);
-			il.Emit (OpCodes.Ret);
-
-			assembly.SetEntryPoint (main);
-
-
-			Type t = tb.CreateType ();
-			driver.CreateType ();
-
-			IEnumerable<int> en = new int[] { 1,2,3 };
-			bool res = en == t.GetMethod ("NaturalSort").MakeGenericMethod (typeof (int)).Invoke (null, new object[] {en });
-			assembly.Save ("res1.exe");
- 			res &= en == t.GetMethod ("NaturalSort").MakeGenericMethod (typeof (int)).Invoke (null, new object[] {en });
-
-			Thread.GetDomain ().ExecuteAssembly(Path.GetTempPath () + Path.DirectorySeparatorChar +"res1.exe");
- 			return res;
-       }
+        Thread
+            .GetDomain()
+            .ExecuteAssembly(Path.GetTempPath() + Path.DirectorySeparatorChar + "res1.exe");
+        return res;
+    }
 }

@@ -88,7 +88,7 @@ namespace System.Diagnostics.CodeAnalysis
         /// <summary>
         /// Specifies all members.
         /// </summary>
-        All = ~None
+        All = ~None,
     }
 }
 #endif

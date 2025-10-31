@@ -22,8 +22,12 @@ namespace System.Linq.Expressions.Compiler
         private void EmitAddress(Expression node, Type type, CompilationFlags flags)
         {
             Debug.Assert(node != null);
-            bool emitStart = (flags & CompilationFlags.EmitExpressionStartMask) == CompilationFlags.EmitExpressionStart;
-            CompilationFlags startEmitted = emitStart ? EmitExpressionStart(node) : CompilationFlags.EmitNoExpressionStart;
+            bool emitStart =
+                (flags & CompilationFlags.EmitExpressionStartMask)
+                == CompilationFlags.EmitExpressionStart;
+            CompilationFlags startEmitted = emitStart
+                ? EmitExpressionStart(node)
+                : CompilationFlags.EmitNoExpressionStart;
 
             switch (node.NodeType)
             {
@@ -61,7 +65,6 @@ namespace System.Linq.Expressions.Compiler
                 EmitExpressionEnd(startEmitted);
             }
         }
-
 
         private void AddressOf(BinaryExpression node, Type type)
         {
@@ -107,7 +110,6 @@ namespace System.Linq.Expressions.Compiler
                 }
             }
         }
-
 
         private void AddressOf(MemberExpression node, Type type)
         {
@@ -169,9 +171,11 @@ namespace System.Linq.Expressions.Compiler
             // get the address of a member of a multi-dimensional array, we'll be trying to
             // get the address of a Get method, and it will fail to do so. Instead, detect
             // this situation and replace it with a call to the Address method.
-            if (!node.Method.IsStatic &&
-                node.Object!.Type.IsArray &&
-                node.Method == TypeUtils.GetArrayGetMethod(node.Object.Type))
+            if (
+                !node.Method.IsStatic
+                && node.Object!.Type.IsArray
+                && node.Method == TypeUtils.GetArrayGetMethod(node.Object.Type)
+            )
             {
                 MethodInfo mi = TypeUtils.GetArrayAddressMethod(node.Object.Type);
 
@@ -218,12 +222,14 @@ namespace System.Linq.Expressions.Compiler
         {
             Debug.Assert(TypeUtils.AreReferenceAssignable(type, node.Type));
 
-            EmitExpression(node, CompilationFlags.EmitAsNoTail | CompilationFlags.EmitNoExpressionStart);
+            EmitExpression(
+                node,
+                CompilationFlags.EmitAsNoTail | CompilationFlags.EmitNoExpressionStart
+            );
             LocalBuilder tmp = GetLocal(type);
             _ilg.Emit(OpCodes.Stloc, tmp);
             _ilg.Emit(OpCodes.Ldloca, tmp);
         }
-
 
         // Emits the address of the expression, returning the write back if necessary
         //
@@ -248,7 +254,11 @@ namespace System.Linq.Expressions.Compiler
             }
             if (result == null)
             {
-                EmitAddress(node, type, CompilationFlags.EmitAsNoTail | CompilationFlags.EmitNoExpressionStart);
+                EmitAddress(
+                    node,
+                    type,
+                    CompilationFlags.EmitAsNoTail | CompilationFlags.EmitNoExpressionStart
+                );
             }
 
             EmitExpressionEnd(startEmitted);

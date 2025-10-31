@@ -7,21 +7,15 @@ public class Location
 {
     public class LocationProxy : Location, IF1Proxy
     {
-        public LocationProxy(
-            double latitude,
-            double longitude)
-            : base(latitude, longitude)
-        {
-        }
+        public LocationProxy(double latitude, double longitude)
+            : base(latitude, longitude) { }
 
         public bool CreatedCalled { get; set; }
         public bool InitializingCalled { get; set; }
         public bool InitializedCalled { get; set; }
     }
 
-    public Location()
-    {
-    }
+    public Location() { }
 
     private Location(double latitude, double longitude)
     {

@@ -13,15 +13,30 @@ namespace System.Web.Http.ModelBinding.Binders
     public class CollectionModelBinder<TElement> : IModelBinder
     {
         // Used when the ValueProvider contains the collection to be bound as multiple elements, e.g. foo[0], foo[1].
-        private static List<TElement> BindComplexCollection(HttpActionContext actionContext, ModelBindingContext bindingContext)
+        private static List<TElement> BindComplexCollection(
+            HttpActionContext actionContext,
+            ModelBindingContext bindingContext
+        )
         {
-            string indexPropertyName = ModelBindingHelper.CreatePropertyModelName(bindingContext.ModelName, "index");
-            ValueProviderResult valueProviderResultIndex = bindingContext.ValueProvider.GetValue(indexPropertyName);
-            IEnumerable<string> indexNames = CollectionModelBinderUtil.GetIndexNamesFromValueProviderResult(valueProviderResultIndex);
+            string indexPropertyName = ModelBindingHelper.CreatePropertyModelName(
+                bindingContext.ModelName,
+                "index"
+            );
+            ValueProviderResult valueProviderResultIndex = bindingContext.ValueProvider.GetValue(
+                indexPropertyName
+            );
+            IEnumerable<string> indexNames =
+                CollectionModelBinderUtil.GetIndexNamesFromValueProviderResult(
+                    valueProviderResultIndex
+                );
             return BindComplexCollectionFromIndexes(actionContext, bindingContext, indexNames);
         }
 
-        internal static List<TElement> BindComplexCollectionFromIndexes(HttpActionContext actionContext, ModelBindingContext bindingContext, IEnumerable<string> indexNames)
+        internal static List<TElement> BindComplexCollectionFromIndexes(
+            HttpActionContext actionContext,
+            ModelBindingContext bindingContext,
+            IEnumerable<string> indexNames
+        )
         {
             bool indexNamesIsFinite;
             if (indexNames != null)
@@ -37,23 +52,30 @@ namespace System.Web.Http.ModelBinding.Binders
             List<TElement> boundCollection = new List<TElement>();
             foreach (string indexName in indexNames)
             {
-                string fullChildName = ModelBindingHelper.CreateIndexModelName(bindingContext.ModelName, indexName);
+                string fullChildName = ModelBindingHelper.CreateIndexModelName(
+                    bindingContext.ModelName,
+                    indexName
+                );
                 ModelBindingContext childBindingContext = new ModelBindingContext(bindingContext)
                 {
-                    ModelMetadata = actionContext.GetMetadataProvider().GetMetadataForType(null, typeof(TElement)),
-                    ModelName = fullChildName
+                    ModelMetadata = actionContext
+                        .GetMetadataProvider()
+                        .GetMetadataForType(null, typeof(TElement)),
+                    ModelName = fullChildName,
                 };
 
                 bool didBind = false;
-                object boundValue = null;                
-                if (actionContext.Bind(childBindingContext))                
+                object boundValue = null;
+                if (actionContext.Bind(childBindingContext))
                 {
                     didBind = true;
                     boundValue = childBindingContext.Model;
 
                     // merge validation up
-                    bindingContext.ValidationNode.ChildNodes.Add(childBindingContext.ValidationNode);
-                }                
+                    bindingContext.ValidationNode.ChildNodes.Add(
+                        childBindingContext.ValidationNode
+                    );
+                }
 
                 // infinite size collection stops on first bind failure
                 if (!didBind && !indexNamesIsFinite)
@@ -67,7 +89,10 @@ namespace System.Web.Http.ModelBinding.Binders
             return boundCollection;
         }
 
-        public virtual bool BindModel(HttpActionContext actionContext, ModelBindingContext bindingContext)
+        public virtual bool BindModel(
+            HttpActionContext actionContext,
+            ModelBindingContext bindingContext
+        )
         {
             ModelBindingHelper.ValidateBindingContext(bindingContext);
 
@@ -76,10 +101,18 @@ namespace System.Web.Http.ModelBinding.Binders
                 return false;
             }
 
-            ValueProviderResult valueProviderResult = bindingContext.ValueProvider.GetValue(bindingContext.ModelName);
-            List<TElement> boundCollection = (valueProviderResult != null)
-                                                 ? BindSimpleCollection(actionContext, bindingContext, valueProviderResult.RawValue, valueProviderResult.Culture)
-                                                 : BindComplexCollection(actionContext, bindingContext);
+            ValueProviderResult valueProviderResult = bindingContext.ValueProvider.GetValue(
+                bindingContext.ModelName
+            );
+            List<TElement> boundCollection =
+                (valueProviderResult != null)
+                    ? BindSimpleCollection(
+                        actionContext,
+                        bindingContext,
+                        valueProviderResult.RawValue,
+                        valueProviderResult.Culture
+                    )
+                    : BindComplexCollection(actionContext, bindingContext);
 
             bool retVal = CreateOrReplaceCollection(actionContext, bindingContext, boundCollection);
             return retVal;
@@ -87,7 +120,12 @@ namespace System.Web.Http.ModelBinding.Binders
 
         // Used when the ValueProvider contains the collection to be bound as a single element, e.g. the raw value
         // is [ "1", "2" ] and needs to be converted to an int[].
-        internal static List<TElement> BindSimpleCollection(HttpActionContext actionContext, ModelBindingContext bindingContext, object rawValue, CultureInfo culture)
+        internal static List<TElement> BindSimpleCollection(
+            HttpActionContext actionContext,
+            ModelBindingContext bindingContext,
+            object rawValue,
+            CultureInfo culture
+        )
         {
             if (rawValue == null)
             {
@@ -101,21 +139,29 @@ namespace System.Web.Http.ModelBinding.Binders
             {
                 ModelBindingContext innerBindingContext = new ModelBindingContext(bindingContext)
                 {
-                    ModelMetadata = actionContext.GetMetadataProvider().GetMetadataForType(null, typeof(TElement)),
+                    ModelMetadata = actionContext
+                        .GetMetadataProvider()
+                        .GetMetadataForType(null, typeof(TElement)),
                     ModelName = bindingContext.ModelName,
                     ValueProvider = new CompositeValueProvider
                     {
-                        new ElementalValueProvider(bindingContext.ModelName, rawValueElement, culture), // our temporary provider goes at the front of the list
-                        bindingContext.ValueProvider
-                    }
+                        new ElementalValueProvider(
+                            bindingContext.ModelName,
+                            rawValueElement,
+                            culture
+                        ), // our temporary provider goes at the front of the list
+                        bindingContext.ValueProvider,
+                    },
                 };
 
                 object boundValue = null;
-                if (actionContext.Bind(innerBindingContext))                
+                if (actionContext.Bind(innerBindingContext))
                 {
                     boundValue = innerBindingContext.Model;
-                    bindingContext.ValidationNode.ChildNodes.Add(innerBindingContext.ValidationNode);
-                }                
+                    bindingContext.ValidationNode.ChildNodes.Add(
+                        innerBindingContext.ValidationNode
+                    );
+                }
                 boundCollection.Add(ModelBindingHelper.CastOrDefault<TElement>(boundValue));
             }
 
@@ -124,9 +170,17 @@ namespace System.Web.Http.ModelBinding.Binders
 
         // Extensibility point that allows the bound collection to be manipulated or transformed before
         // being returned from the binder.
-        protected virtual bool CreateOrReplaceCollection(HttpActionContext actionContext, ModelBindingContext bindingContext, IList<TElement> newCollection)
+        protected virtual bool CreateOrReplaceCollection(
+            HttpActionContext actionContext,
+            ModelBindingContext bindingContext,
+            IList<TElement> newCollection
+        )
         {
-            CollectionModelBinderUtil.CreateOrReplaceCollection(bindingContext, newCollection, () => new List<TElement>());
+            CollectionModelBinderUtil.CreateOrReplaceCollection(
+                bindingContext,
+                newCollection,
+                () => new List<TElement>()
+            );
             return true;
         }
     }

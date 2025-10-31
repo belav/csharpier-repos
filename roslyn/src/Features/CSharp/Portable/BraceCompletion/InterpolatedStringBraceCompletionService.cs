@@ -24,36 +24,51 @@ namespace Microsoft.CodeAnalysis.CSharp.BraceCompletion
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public InterpolatedStringBraceCompletionService()
-        {
-        }
+        public InterpolatedStringBraceCompletionService() { }
 
         protected override char OpeningBrace => DoubleQuote.OpenCharacter;
         protected override char ClosingBrace => DoubleQuote.CloseCharacter;
 
-        public override bool AllowOverType(BraceCompletionContext context, CancellationToken cancellationToken)
-            => AllowOverTypeWithValidClosingToken(context);
+        public override bool AllowOverType(
+            BraceCompletionContext context,
+            CancellationToken cancellationToken
+        ) => AllowOverTypeWithValidClosingToken(context);
 
         /// <summary>
         /// Only return this service as valid when we're starting an interpolated string.
         /// Otherwise double quotes should be completed using the <see cref="StringLiteralBraceCompletionService"/>
         /// </summary>
-        public override bool CanProvideBraceCompletion(char brace, int openingPosition, ParsedDocument document, CancellationToken cancellationToken)
-            => OpeningBrace == brace && IsPositionInInterpolatedStringContext(document, openingPosition, cancellationToken);
+        public override bool CanProvideBraceCompletion(
+            char brace,
+            int openingPosition,
+            ParsedDocument document,
+            CancellationToken cancellationToken
+        ) =>
+            OpeningBrace == brace
+            && IsPositionInInterpolatedStringContext(document, openingPosition, cancellationToken);
 
-        protected override bool IsValidOpeningBraceToken(SyntaxToken leftToken)
-            => leftToken.Kind() is SyntaxKind.InterpolatedStringStartToken or SyntaxKind.InterpolatedVerbatimStringStartToken;
+        protected override bool IsValidOpeningBraceToken(SyntaxToken leftToken) =>
+            leftToken.Kind()
+                is SyntaxKind.InterpolatedStringStartToken
+                    or SyntaxKind.InterpolatedVerbatimStringStartToken;
 
-        protected override bool IsValidClosingBraceToken(SyntaxToken rightToken)
-            => rightToken.IsKind(SyntaxKind.InterpolatedStringEndToken);
+        protected override bool IsValidClosingBraceToken(SyntaxToken rightToken) =>
+            rightToken.IsKind(SyntaxKind.InterpolatedStringEndToken);
 
-        protected override bool IsValidOpenBraceTokenAtPosition(SourceText text, SyntaxToken token, int position)
-            => IsValidOpeningBraceToken(token) && token.Span.End - 1 == position;
+        protected override bool IsValidOpenBraceTokenAtPosition(
+            SourceText text,
+            SyntaxToken token,
+            int position
+        ) => IsValidOpeningBraceToken(token) && token.Span.End - 1 == position;
 
         /// <summary>
         /// Returns true when the input position could be starting an interpolated string if opening quotes were typed.
         /// </summary>
-        public static bool IsPositionInInterpolatedStringContext(ParsedDocument document, int position, CancellationToken cancellationToken)
+        public static bool IsPositionInInterpolatedStringContext(
+            ParsedDocument document,
+            int position,
+            CancellationToken cancellationToken
+        )
         {
             var text = document.Text;
 
@@ -74,18 +89,30 @@ namespace Microsoft.CodeAnalysis.CSharp.BraceCompletion
 
             // Verify that we are actually in an location allowed for an interpolated string.
             var token = document.Root.FindToken(start);
-            if (token.Kind() is not SyntaxKind.InterpolatedStringStartToken and
-                                not SyntaxKind.InterpolatedVerbatimStringStartToken and
-                                not SyntaxKind.StringLiteralToken and
-                                not SyntaxKind.IdentifierToken)
+            if (
+                token.Kind()
+                is not SyntaxKind.InterpolatedStringStartToken
+                    and not SyntaxKind.InterpolatedVerbatimStringStartToken
+                    and not SyntaxKind.StringLiteralToken
+                    and not SyntaxKind.IdentifierToken
+            )
             {
                 return false;
             }
 
             var previousToken = token.GetPreviousToken();
 
-            return document.SyntaxTree.IsExpressionContext(token.SpanStart, previousToken, attributes: true, cancellationToken)
-                || document.SyntaxTree.IsStatementContext(token.SpanStart, previousToken, cancellationToken);
+            return document.SyntaxTree.IsExpressionContext(
+                    token.SpanStart,
+                    previousToken,
+                    attributes: true,
+                    cancellationToken
+                )
+                || document.SyntaxTree.IsStatementContext(
+                    token.SpanStart,
+                    previousToken,
+                    cancellationToken
+                );
         }
     }
 }

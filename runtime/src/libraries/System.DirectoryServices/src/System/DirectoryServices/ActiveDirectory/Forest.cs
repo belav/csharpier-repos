@@ -42,7 +42,11 @@ namespace System.DirectoryServices.ActiveDirectory
         private DomainController? _cachedNamingRoleOwner;
 
         #region constructors
-        internal Forest(DirectoryContext context, string forestDnsName, DirectoryEntryManager directoryEntryMgr)
+        internal Forest(
+            DirectoryContext context,
+            string forestDnsName,
+            DirectoryEntryManager directoryEntryMgr
+        )
         {
             _context = context;
             _directoryEntryMgr = directoryEntryMgr;
@@ -50,9 +54,7 @@ namespace System.DirectoryServices.ActiveDirectory
         }
 
         internal Forest(DirectoryContext context, string name)
-            : this(context, name, new DirectoryEntryManager(context))
-        {
-        }
+            : this(context, name, new DirectoryEntryManager(context)) { }
         #endregion constructors
 
         #region IDisposable
@@ -92,15 +94,21 @@ namespace System.DirectoryServices.ActiveDirectory
                 throw new ArgumentNullException(nameof(context));
 
             // contexttype should be Forest or DirectoryServer
-            if ((context.ContextType != DirectoryContextType.Forest) &&
-                (context.ContextType != DirectoryContextType.DirectoryServer))
+            if (
+                (context.ContextType != DirectoryContextType.Forest)
+                && (context.ContextType != DirectoryContextType.DirectoryServer)
+            )
             {
                 throw new ArgumentException(SR.TargetShouldBeServerORForest, nameof(context));
             }
 
             if ((context.Name == null) && (!context.isRootDomain()))
             {
-                throw new ActiveDirectoryObjectNotFoundException(SR.ContextNotAssociatedWithDomain, typeof(Forest), null);
+                throw new ActiveDirectoryObjectNotFoundException(
+                    SR.ContextNotAssociatedWithDomain,
+                    typeof(Forest),
+                    null
+                );
             }
 
             if (context.Name != null)
@@ -110,11 +118,19 @@ namespace System.DirectoryServices.ActiveDirectory
                 {
                     if (context.ContextType == DirectoryContextType.Forest)
                     {
-                        throw new ActiveDirectoryObjectNotFoundException(SR.ForestNotFound, typeof(Forest), context.Name);
+                        throw new ActiveDirectoryObjectNotFoundException(
+                            SR.ForestNotFound,
+                            typeof(Forest),
+                            context.Name
+                        );
                     }
                     else
                     {
-                        throw new ActiveDirectoryObjectNotFoundException(SR.Format(SR.DCNotFound, context.Name), typeof(Forest), null);
+                        throw new ActiveDirectoryObjectNotFoundException(
+                            SR.Format(SR.DCNotFound, context.Name),
+                            typeof(Forest),
+                            null
+                        );
                     }
                 }
             }
@@ -129,11 +145,23 @@ namespace System.DirectoryServices.ActiveDirectory
             try
             {
                 rootDSE = directoryEntryMgr.GetCachedDirectoryEntry(WellKnownDN.RootDSE);
-                if ((context.isServer()) && (!Utils.CheckCapability(rootDSE, Capability.ActiveDirectory)))
+                if (
+                    (context.isServer())
+                    && (!Utils.CheckCapability(rootDSE, Capability.ActiveDirectory))
+                )
                 {
-                    throw new ActiveDirectoryObjectNotFoundException(SR.Format(SR.DCNotFound, context.Name), typeof(Forest), null);
+                    throw new ActiveDirectoryObjectNotFoundException(
+                        SR.Format(SR.DCNotFound, context.Name),
+                        typeof(Forest),
+                        null
+                    );
                 }
-                rootDomainNC = (string)PropertyManager.GetPropertyValue(context, rootDSE, PropertyManager.RootDomainNamingContext)!;
+                rootDomainNC = (string)
+                    PropertyManager.GetPropertyValue(
+                        context,
+                        rootDSE,
+                        PropertyManager.RootDomainNamingContext
+                    )!;
             }
             catch (COMException e)
             {
@@ -143,11 +171,19 @@ namespace System.DirectoryServices.ActiveDirectory
                 {
                     if (context.ContextType == DirectoryContextType.Forest)
                     {
-                        throw new ActiveDirectoryObjectNotFoundException(SR.ForestNotFound, typeof(Forest), context.Name);
+                        throw new ActiveDirectoryObjectNotFoundException(
+                            SR.ForestNotFound,
+                            typeof(Forest),
+                            context.Name
+                        );
                     }
                     else
                     {
-                        throw new ActiveDirectoryObjectNotFoundException(SR.Format(SR.DCNotFound, context.Name), typeof(Forest), null);
+                        throw new ActiveDirectoryObjectNotFoundException(
+                            SR.Format(SR.DCNotFound, context.Name),
+                            typeof(Forest),
+                            null
+                        );
                     }
                 }
                 else
@@ -178,7 +214,10 @@ namespace System.DirectoryServices.ActiveDirectory
             }
 
             // set the forest mode on AD
-            DirectoryEntry partitionsEntry = DirectoryEntryManager.GetDirectoryEntry(_context, _directoryEntryMgr.ExpandWellKnownDN(WellKnownDN.PartitionsContainer));
+            DirectoryEntry partitionsEntry = DirectoryEntryManager.GetDirectoryEntry(
+                _context,
+                _directoryEntryMgr.ExpandWellKnownDN(WellKnownDN.PartitionsContainer)
+            );
             // NOTE:
             // If the domain is a W2K domain (W2K schema) then the msDS-Behavior-Version attribute will not be present.
             // If that is the case, the forest functionality cannot be raised.
@@ -215,7 +254,11 @@ namespace System.DirectoryServices.ActiveDirectory
             // check if forest mode is a valid enum value
             if (forestMode < ForestMode.Windows2000Forest)
             {
-                throw new InvalidEnumArgumentException(nameof(forestMode), (int)forestMode, typeof(ForestMode));
+                throw new InvalidEnumArgumentException(
+                    nameof(forestMode),
+                    (int)forestMode,
+                    typeof(ForestMode)
+                );
             }
 
             if (forestMode <= ForestMode)
@@ -290,7 +333,9 @@ namespace System.DirectoryServices.ActiveDirectory
             long flag = (long)PrivateLocatorFlags.GCRequired;
 
             CheckIfDisposed();
-            return new GlobalCatalogCollection(Locator.EnumerateDomainControllers(_context, Name, null, flag));
+            return new GlobalCatalogCollection(
+                Locator.EnumerateDomainControllers(_context, Name, null, flag)
+            );
         }
 
         public GlobalCatalogCollection FindAllDiscoverableGlobalCatalogs(string siteName)
@@ -309,7 +354,9 @@ namespace System.DirectoryServices.ActiveDirectory
                 throw new ArgumentException(SR.EmptyStringParameter, nameof(siteName));
             }
 
-            return new GlobalCatalogCollection(Locator.EnumerateDomainControllers(_context, Name, siteName, flag));
+            return new GlobalCatalogCollection(
+                Locator.EnumerateDomainControllers(_context, Name, siteName, flag)
+            );
         }
 
         public TrustRelationshipInformationCollection GetAllTrustRelationships()
@@ -338,7 +385,11 @@ namespace System.DirectoryServices.ActiveDirectory
             else
             {
                 // trust relationship does not exist
-                throw new ActiveDirectoryObjectNotFoundException(SR.Format(SR.ForestTrustDoesNotExist, Name, targetForestName), typeof(TrustRelationshipInformation), null);
+                throw new ActiveDirectoryObjectNotFoundException(
+                    SR.Format(SR.ForestTrustDoesNotExist, Name, targetForestName),
+                    typeof(TrustRelationshipInformation),
+                    null
+                );
             }
         }
 
@@ -352,7 +403,13 @@ namespace System.DirectoryServices.ActiveDirectory
             if (targetForestName.Length == 0)
                 throw new ArgumentException(SR.EmptyStringParameter, nameof(targetForestName));
 
-            return TrustHelper.GetTrustedDomainInfoStatus(_context, Name, targetForestName, TRUST_ATTRIBUTE.TRUST_ATTRIBUTE_CROSS_ORGANIZATION, true);
+            return TrustHelper.GetTrustedDomainInfoStatus(
+                _context,
+                Name,
+                targetForestName,
+                TRUST_ATTRIBUTE.TRUST_ATTRIBUTE_CROSS_ORGANIZATION,
+                true
+            );
         }
 
         public void SetSelectiveAuthenticationStatus(string targetForestName, bool enable)
@@ -365,7 +422,14 @@ namespace System.DirectoryServices.ActiveDirectory
             if (targetForestName.Length == 0)
                 throw new ArgumentException(SR.EmptyStringParameter, nameof(targetForestName));
 
-            TrustHelper.SetTrustedDomainInfoStatus(_context, Name, targetForestName, TRUST_ATTRIBUTE.TRUST_ATTRIBUTE_CROSS_ORGANIZATION, enable, true);
+            TrustHelper.SetTrustedDomainInfoStatus(
+                _context,
+                Name,
+                targetForestName,
+                TRUST_ATTRIBUTE.TRUST_ATTRIBUTE_CROSS_ORGANIZATION,
+                enable,
+                true
+            );
         }
 
         public bool GetSidFilteringStatus(string targetForestName)
@@ -378,7 +442,13 @@ namespace System.DirectoryServices.ActiveDirectory
             if (targetForestName.Length == 0)
                 throw new ArgumentException(SR.EmptyStringParameter, nameof(targetForestName));
 
-            return TrustHelper.GetTrustedDomainInfoStatus(_context, Name, targetForestName, TRUST_ATTRIBUTE.TRUST_ATTRIBUTE_TREAT_AS_EXTERNAL, true);
+            return TrustHelper.GetTrustedDomainInfoStatus(
+                _context,
+                Name,
+                targetForestName,
+                TRUST_ATTRIBUTE.TRUST_ATTRIBUTE_TREAT_AS_EXTERNAL,
+                true
+            );
         }
 
         public void SetSidFilteringStatus(string targetForestName, bool enable)
@@ -391,7 +461,14 @@ namespace System.DirectoryServices.ActiveDirectory
             if (targetForestName.Length == 0)
                 throw new ArgumentException(SR.EmptyStringParameter, nameof(targetForestName));
 
-            TrustHelper.SetTrustedDomainInfoStatus(_context, Name, targetForestName, TRUST_ATTRIBUTE.TRUST_ATTRIBUTE_TREAT_AS_EXTERNAL, enable, true);
+            TrustHelper.SetTrustedDomainInfoStatus(
+                _context,
+                Name,
+                targetForestName,
+                TRUST_ATTRIBUTE.TRUST_ATTRIBUTE_TREAT_AS_EXTERNAL,
+                enable,
+                true
+            );
         }
 
         public void DeleteLocalSideOfTrustRelationship(string targetForestName)
@@ -416,7 +493,12 @@ namespace System.DirectoryServices.ActiveDirectory
                 throw new ArgumentNullException(nameof(targetForest));
 
             // first delete the trust on the remote side
-            TrustHelper.DeleteTrust(targetForest.GetDirectoryContext(), targetForest.Name, Name, true);
+            TrustHelper.DeleteTrust(
+                targetForest.GetDirectoryContext(),
+                targetForest.Name,
+                Name,
+                true
+            );
 
             // then delete the local side trust
             TrustHelper.DeleteTrust(_context, Name, targetForest.Name, true);
@@ -432,7 +514,17 @@ namespace System.DirectoryServices.ActiveDirectory
             if (targetForestName.Length == 0)
                 throw new ArgumentException(SR.EmptyStringParameter, nameof(targetForestName));
 
-            TrustHelper.VerifyTrust(_context, Name, targetForestName, true/*forest*/, TrustDirection.Outbound, false /*just TC verification*/, null /* no need to go to specific server*/);
+            TrustHelper.VerifyTrust(
+                _context,
+                Name,
+                targetForestName,
+                true /*forest*/
+                ,
+                TrustDirection.Outbound,
+                false /*just TC verification*/
+                ,
+                null /* no need to go to specific server*/
+            );
         }
 
         public void VerifyTrustRelationship(Forest targetForest, TrustDirection direction)
@@ -443,18 +535,36 @@ namespace System.DirectoryServices.ActiveDirectory
                 throw new ArgumentNullException(nameof(targetForest));
 
             if (direction < TrustDirection.Inbound || direction > TrustDirection.Bidirectional)
-                throw new InvalidEnumArgumentException(nameof(direction), (int)direction, typeof(TrustDirection));
+                throw new InvalidEnumArgumentException(
+                    nameof(direction),
+                    (int)direction,
+                    typeof(TrustDirection)
+                );
 
             // verify outbound trust first
             if ((direction & TrustDirection.Outbound) != 0)
             {
                 try
                 {
-                    TrustHelper.VerifyTrust(_context, Name, targetForest.Name, true/*forest*/, TrustDirection.Outbound, false/*just TC verification*/, null /* no need to go to specific server*/);
+                    TrustHelper.VerifyTrust(
+                        _context,
+                        Name,
+                        targetForest.Name,
+                        true /*forest*/
+                        ,
+                        TrustDirection.Outbound,
+                        false /*just TC verification*/
+                        ,
+                        null /* no need to go to specific server*/
+                    );
                 }
                 catch (ActiveDirectoryObjectNotFoundException)
                 {
-                    throw new ActiveDirectoryObjectNotFoundException(SR.Format(SR.WrongTrustDirection, Name, targetForest.Name, direction), typeof(ForestTrustRelationshipInformation), null);
+                    throw new ActiveDirectoryObjectNotFoundException(
+                        SR.Format(SR.WrongTrustDirection, Name, targetForest.Name, direction),
+                        typeof(ForestTrustRelationshipInformation),
+                        null
+                    );
                 }
             }
 
@@ -463,16 +573,34 @@ namespace System.DirectoryServices.ActiveDirectory
             {
                 try
                 {
-                    TrustHelper.VerifyTrust(targetForest.GetDirectoryContext(), targetForest.Name, Name, true/*forest*/, TrustDirection.Outbound, false/*just TC verification*/, null /* no need to go to specific server*/);
+                    TrustHelper.VerifyTrust(
+                        targetForest.GetDirectoryContext(),
+                        targetForest.Name,
+                        Name,
+                        true /*forest*/
+                        ,
+                        TrustDirection.Outbound,
+                        false /*just TC verification*/
+                        ,
+                        null /* no need to go to specific server*/
+                    );
                 }
                 catch (ActiveDirectoryObjectNotFoundException)
                 {
-                    throw new ActiveDirectoryObjectNotFoundException(SR.Format(SR.WrongTrustDirection, Name, targetForest.Name, direction), typeof(ForestTrustRelationshipInformation), null);
+                    throw new ActiveDirectoryObjectNotFoundException(
+                        SR.Format(SR.WrongTrustDirection, Name, targetForest.Name, direction),
+                        typeof(ForestTrustRelationshipInformation),
+                        null
+                    );
                 }
             }
         }
 
-        public void CreateLocalSideOfTrustRelationship(string targetForestName, TrustDirection direction, string trustPassword)
+        public void CreateLocalSideOfTrustRelationship(
+            string targetForestName,
+            TrustDirection direction,
+            string trustPassword
+        )
         {
             CheckIfDisposed();
 
@@ -483,7 +611,11 @@ namespace System.DirectoryServices.ActiveDirectory
                 throw new ArgumentException(SR.EmptyStringParameter, nameof(targetForestName));
 
             if (direction < TrustDirection.Inbound || direction > TrustDirection.Bidirectional)
-                throw new InvalidEnumArgumentException(nameof(direction), (int)direction, typeof(TrustDirection));
+                throw new InvalidEnumArgumentException(
+                    nameof(direction),
+                    (int)direction,
+                    typeof(TrustDirection)
+                );
 
             if (trustPassword == null)
                 throw new ArgumentNullException(nameof(trustPassword));
@@ -492,11 +624,30 @@ namespace System.DirectoryServices.ActiveDirectory
                 throw new ArgumentException(SR.EmptyStringParameter, nameof(trustPassword));
 
             // verify first that the target forest name is valid
-            Locator.GetDomainControllerInfo(null, targetForestName, null, (long)(PrivateLocatorFlags.DirectoryServicesRequired | PrivateLocatorFlags.GCRequired));
+            Locator.GetDomainControllerInfo(
+                null,
+                targetForestName,
+                null,
+                (long)(
+                    PrivateLocatorFlags.DirectoryServicesRequired | PrivateLocatorFlags.GCRequired
+                )
+            );
 
-            DirectoryContext targetContext = Utils.GetNewDirectoryContext(targetForestName, DirectoryContextType.Forest, _context);
+            DirectoryContext targetContext = Utils.GetNewDirectoryContext(
+                targetForestName,
+                DirectoryContextType.Forest,
+                _context
+            );
 
-            TrustHelper.CreateTrust(_context, Name, targetContext, targetForestName, true, direction, trustPassword);
+            TrustHelper.CreateTrust(
+                _context,
+                Name,
+                targetContext,
+                targetForestName,
+                true,
+                direction,
+                trustPassword
+            );
         }
 
         public void CreateTrustRelationship(Forest targetForest, TrustDirection direction)
@@ -507,12 +658,24 @@ namespace System.DirectoryServices.ActiveDirectory
                 throw new ArgumentNullException(nameof(targetForest));
 
             if (direction < TrustDirection.Inbound || direction > TrustDirection.Bidirectional)
-                throw new InvalidEnumArgumentException(nameof(direction), (int)direction, typeof(TrustDirection));
+                throw new InvalidEnumArgumentException(
+                    nameof(direction),
+                    (int)direction,
+                    typeof(TrustDirection)
+                );
 
             string password = TrustHelper.CreateTrustPassword();
 
             // first create trust on local side
-            TrustHelper.CreateTrust(_context, Name, targetForest.GetDirectoryContext(), targetForest.Name, true, direction, password);
+            TrustHelper.CreateTrust(
+                _context,
+                Name,
+                targetForest.GetDirectoryContext(),
+                targetForest.Name,
+                true,
+                direction,
+                password
+            );
 
             // then create trust on remote side
             int reverseDirection = 0;
@@ -521,10 +684,21 @@ namespace System.DirectoryServices.ActiveDirectory
             if ((direction & TrustDirection.Outbound) != 0)
                 reverseDirection |= (int)TrustDirection.Inbound;
 
-            TrustHelper.CreateTrust(targetForest.GetDirectoryContext(), targetForest.Name, _context, Name, true, (TrustDirection)reverseDirection, password);
+            TrustHelper.CreateTrust(
+                targetForest.GetDirectoryContext(),
+                targetForest.Name,
+                _context,
+                Name,
+                true,
+                (TrustDirection)reverseDirection,
+                password
+            );
         }
 
-        public void UpdateLocalSideOfTrustRelationship(string targetForestName, string newTrustPassword)
+        public void UpdateLocalSideOfTrustRelationship(
+            string targetForestName,
+            string newTrustPassword
+        )
         {
             CheckIfDisposed();
 
@@ -543,7 +717,11 @@ namespace System.DirectoryServices.ActiveDirectory
             TrustHelper.UpdateTrust(_context, Name, targetForestName, newTrustPassword, true);
         }
 
-        public void UpdateLocalSideOfTrustRelationship(string targetForestName, TrustDirection newTrustDirection, string newTrustPassword)
+        public void UpdateLocalSideOfTrustRelationship(
+            string targetForestName,
+            TrustDirection newTrustDirection,
+            string newTrustPassword
+        )
         {
             CheckIfDisposed();
 
@@ -553,8 +731,15 @@ namespace System.DirectoryServices.ActiveDirectory
             if (targetForestName.Length == 0)
                 throw new ArgumentException(SR.EmptyStringParameter, nameof(targetForestName));
 
-            if (newTrustDirection < TrustDirection.Inbound || newTrustDirection > TrustDirection.Bidirectional)
-                throw new InvalidEnumArgumentException(nameof(newTrustDirection), (int)newTrustDirection, typeof(TrustDirection));
+            if (
+                newTrustDirection < TrustDirection.Inbound
+                || newTrustDirection > TrustDirection.Bidirectional
+            )
+                throw new InvalidEnumArgumentException(
+                    nameof(newTrustDirection),
+                    (int)newTrustDirection,
+                    typeof(TrustDirection)
+                );
 
             if (newTrustPassword == null)
                 throw new ArgumentNullException(nameof(newTrustPassword));
@@ -562,7 +747,15 @@ namespace System.DirectoryServices.ActiveDirectory
             if (newTrustPassword.Length == 0)
                 throw new ArgumentException(SR.EmptyStringParameter, nameof(newTrustPassword));
 
-            TrustHelper.UpdateTrustDirection(_context, Name, targetForestName, newTrustPassword, true /*is forest*/, newTrustDirection);
+            TrustHelper.UpdateTrustDirection(
+                _context,
+                Name,
+                targetForestName,
+                newTrustPassword,
+                true /*is forest*/
+                ,
+                newTrustDirection
+            );
         }
 
         public void UpdateTrustRelationship(Forest targetForest, TrustDirection newTrustDirection)
@@ -572,13 +765,28 @@ namespace System.DirectoryServices.ActiveDirectory
             if (targetForest == null)
                 throw new ArgumentNullException(nameof(targetForest));
 
-            if (newTrustDirection < TrustDirection.Inbound || newTrustDirection > TrustDirection.Bidirectional)
-                throw new InvalidEnumArgumentException(nameof(newTrustDirection), (int)newTrustDirection, typeof(TrustDirection));
+            if (
+                newTrustDirection < TrustDirection.Inbound
+                || newTrustDirection > TrustDirection.Bidirectional
+            )
+                throw new InvalidEnumArgumentException(
+                    nameof(newTrustDirection),
+                    (int)newTrustDirection,
+                    typeof(TrustDirection)
+                );
 
             // no we generate trust password
             string password = TrustHelper.CreateTrustPassword();
 
-            TrustHelper.UpdateTrustDirection(_context, Name, targetForest.Name, password, true /*is forest*/, newTrustDirection);
+            TrustHelper.UpdateTrustDirection(
+                _context,
+                Name,
+                targetForest.Name,
+                password,
+                true /*is forest*/
+                ,
+                newTrustDirection
+            );
 
             // then create trust on remote side
             TrustDirection reverseDirection = 0;
@@ -587,7 +795,15 @@ namespace System.DirectoryServices.ActiveDirectory
             if ((newTrustDirection & TrustDirection.Outbound) != 0)
                 reverseDirection |= TrustDirection.Inbound;
 
-            TrustHelper.UpdateTrustDirection(targetForest.GetDirectoryContext(), targetForest.Name, Name, password, true /*is forest*/, reverseDirection);
+            TrustHelper.UpdateTrustDirection(
+                targetForest.GetDirectoryContext(),
+                targetForest.Name,
+                Name,
+                password,
+                true /*is forest*/
+                ,
+                reverseDirection
+            );
         }
 
         public void RepairTrustRelationship(Forest targetForest)
@@ -606,13 +822,33 @@ namespace System.DirectoryServices.ActiveDirectory
                 // verify outbound trust first
                 if ((direction & TrustDirection.Outbound) != 0)
                 {
-                    TrustHelper.VerifyTrust(_context, Name, targetForest.Name, true /*is forest*/, TrustDirection.Outbound, true/*reset secure channel*/, null /* no need to go to specific server*/);
+                    TrustHelper.VerifyTrust(
+                        _context,
+                        Name,
+                        targetForest.Name,
+                        true /*is forest*/
+                        ,
+                        TrustDirection.Outbound,
+                        true /*reset secure channel*/
+                        ,
+                        null /* no need to go to specific server*/
+                    );
                 }
 
                 // verify inbound trust
                 if ((direction & TrustDirection.Inbound) != 0)
                 {
-                    TrustHelper.VerifyTrust(targetForest.GetDirectoryContext(), targetForest.Name, Name, true/*is forest*/, TrustDirection.Outbound, true/*reset secure channel*/, null /* no need to go to specific server*/);
+                    TrustHelper.VerifyTrust(
+                        targetForest.GetDirectoryContext(),
+                        targetForest.Name,
+                        Name,
+                        true /*is forest*/
+                        ,
+                        TrustDirection.Outbound,
+                        true /*reset secure channel*/
+                        ,
+                        null /* no need to go to specific server*/
+                    );
                 }
             }
             catch (ActiveDirectoryOperationException)
@@ -625,11 +861,16 @@ namespace System.DirectoryServices.ActiveDirectory
             }
             catch (ActiveDirectoryObjectNotFoundException)
             {
-                throw new ActiveDirectoryObjectNotFoundException(SR.Format(SR.WrongTrustDirection, Name, targetForest.Name, direction), typeof(ForestTrustRelationshipInformation), null);
+                throw new ActiveDirectoryObjectNotFoundException(
+                    SR.Format(SR.WrongTrustDirection, Name, targetForest.Name, direction),
+                    typeof(ForestTrustRelationshipInformation),
+                    null
+                );
             }
         }
 
-        public static Forest GetCurrentForest() => GetForest(new DirectoryContext(DirectoryContextType.Forest));
+        public static Forest GetCurrentForest() =>
+            GetForest(new DirectoryContext(DirectoryContextType.Forest));
 
         #endregion public methods
 
@@ -676,7 +917,9 @@ namespace System.DirectoryServices.ActiveDirectory
             get
             {
                 CheckIfDisposed();
-                return _cachedApplicationPartitions ??= new ApplicationPartitionCollection(GetApplicationPartitions());
+                return _cachedApplicationPartitions ??= new ApplicationPartitionCollection(
+                    GetApplicationPartitions()
+                );
             }
         }
 
@@ -717,7 +960,11 @@ namespace System.DirectoryServices.ActiveDirectory
                 {
                     // Domain context is created by passing the name of the forest
                     // (since the root domain and the forest have the same name)
-                    DirectoryContext domainContext = Utils.GetNewDirectoryContext(Name, DirectoryContextType.Domain, _context);
+                    DirectoryContext domainContext = Utils.GetNewDirectoryContext(
+                        Name,
+                        DirectoryContextType.Domain,
+                        _context
+                    );
                     _cachedRootDomain = new Domain(domainContext, Name);
                 }
                 return _cachedRootDomain;
@@ -733,7 +980,10 @@ namespace System.DirectoryServices.ActiveDirectory
                 {
                     try
                     {
-                        _cachedSchema = new ActiveDirectorySchema(_context, _directoryEntryMgr.ExpandWellKnownDN(WellKnownDN.SchemaNamingContext));
+                        _cachedSchema = new ActiveDirectorySchema(
+                            _context,
+                            _directoryEntryMgr.ExpandWellKnownDN(WellKnownDN.SchemaNamingContext)
+                        );
                     }
                     catch (COMException e)
                     {
@@ -771,7 +1021,10 @@ namespace System.DirectoryServices.ActiveDirectory
         private int GetForestModeLevel()
         {
             int forestModeValue = -1;
-            DirectoryEntry rootDSE = DirectoryEntryManager.GetDirectoryEntry(_context, WellKnownDN.RootDSE);
+            DirectoryEntry rootDSE = DirectoryEntryManager.GetDirectoryEntry(
+                _context,
+                WellKnownDN.RootDSE
+            );
             try
             {
                 if (!rootDSE.Properties.Contains(PropertyManager.ForestFunctionality))
@@ -781,7 +1034,10 @@ namespace System.DirectoryServices.ActiveDirectory
                 }
                 else
                 {
-                    forestModeValue = int.Parse((string)rootDSE.Properties[PropertyManager.ForestFunctionality].Value!, NumberFormatInfo.InvariantInfo);
+                    forestModeValue = int.Parse(
+                        (string)rootDSE.Properties[PropertyManager.ForestFunctionality].Value!,
+                        NumberFormatInfo.InvariantInfo
+                    );
                 }
             }
             catch (COMException e)
@@ -808,16 +1064,22 @@ namespace System.DirectoryServices.ActiveDirectory
                 switch (role)
                 {
                     case ActiveDirectoryRole.SchemaRole:
-                        {
-                            entry = DirectoryEntryManager.GetDirectoryEntry(_context, _directoryEntryMgr.ExpandWellKnownDN(WellKnownDN.SchemaNamingContext));
-                            break;
-                        }
+                    {
+                        entry = DirectoryEntryManager.GetDirectoryEntry(
+                            _context,
+                            _directoryEntryMgr.ExpandWellKnownDN(WellKnownDN.SchemaNamingContext)
+                        );
+                        break;
+                    }
 
                     case ActiveDirectoryRole.NamingRole:
-                        {
-                            entry = DirectoryEntryManager.GetDirectoryEntry(_context, _directoryEntryMgr.ExpandWellKnownDN(WellKnownDN.PartitionsContainer));
-                            break;
-                        }
+                    {
+                        entry = DirectoryEntryManager.GetDirectoryEntry(
+                            _context,
+                            _directoryEntryMgr.ExpandWellKnownDN(WellKnownDN.PartitionsContainer)
+                        );
+                        break;
+                    }
 
                     default:
                         // should not happen since we are calling this only internally
@@ -825,7 +1087,15 @@ namespace System.DirectoryServices.ActiveDirectory
                         break;
                 }
 
-                dcName = Utils.GetDnsHostNameFromNTDSA(_context, (string)PropertyManager.GetPropertyValue(_context, entry, PropertyManager.FsmoRoleOwner)!);
+                dcName = Utils.GetDnsHostNameFromNTDSA(
+                    _context,
+                    (string)
+                        PropertyManager.GetPropertyValue(
+                            _context,
+                            entry,
+                            PropertyManager.FsmoRoleOwner
+                        )!
+                );
             }
             catch (COMException e)
             {
@@ -838,7 +1108,11 @@ namespace System.DirectoryServices.ActiveDirectory
 
             // create a new context object for the domain controller passing on  the
             // credentials from the forest context
-            DirectoryContext dcContext = Utils.GetNewDirectoryContext(dcName, DirectoryContextType.DirectoryServer, _context);
+            DirectoryContext dcContext = Utils.GetNewDirectoryContext(
+                dcName,
+                DirectoryContextType.DirectoryServer,
+                _context
+            );
             return new DomainController(dcContext, dcName);
         }
 
@@ -861,7 +1135,11 @@ namespace System.DirectoryServices.ActiveDirectory
                     HANDLE hDs,
                     PDS_NAME_RESULT* ppSites
                     );*/
-                var dsListSites = (delegate* unmanaged<IntPtr, IntPtr*, int>)global::Interop.Kernel32.GetProcAddress(DirectoryContext.ADHandle, "DsListSitesW");
+                var dsListSites = (delegate* unmanaged<IntPtr, IntPtr*, int>)
+                    global::Interop.Kernel32.GetProcAddress(
+                        DirectoryContext.ADHandle,
+                        "DsListSitesW"
+                    );
                 if (dsListSites == null)
                 {
                     throw ExceptionHelper.GetExceptionFromErrorCode(Marshal.GetLastPInvokeError());
@@ -883,7 +1161,9 @@ namespace System.DirectoryServices.ActiveDirectory
                             Marshal.PtrToStructure(currentItem, dsNameResultItem);
                             if (dsNameResultItem.status == NativeMethods.DsNameNoError)
                             {
-                                string siteName = Utils.GetDNComponents(dsNameResultItem.name!)[0].Value!;
+                                string siteName = Utils
+                                    .GetDNComponents(dsNameResultItem.name!)[0]
+                                    .Value!;
                                 // an existing site
                                 sites.Add(new ActiveDirectorySite(_context, siteName, true));
                             }
@@ -897,10 +1177,16 @@ namespace System.DirectoryServices.ActiveDirectory
                         if (sitesPtr != IntPtr.Zero)
                         {
                             // call DsFreeNameResultW
-                            var dsFreeNameResultW = (delegate* unmanaged<IntPtr, void>)global::Interop.Kernel32.GetProcAddress(DirectoryContext.ADHandle, "DsFreeNameResultW");
+                            var dsFreeNameResultW = (delegate* unmanaged<IntPtr, void>)
+                                global::Interop.Kernel32.GetProcAddress(
+                                    DirectoryContext.ADHandle,
+                                    "DsFreeNameResultW"
+                                );
                             if (dsFreeNameResultW == null)
                             {
-                                throw ExceptionHelper.GetExceptionFromErrorCode(Marshal.GetLastPInvokeError());
+                                throw ExceptionHelper.GetExceptionFromErrorCode(
+                                    Marshal.GetLastPInvokeError()
+                                );
                             }
                             dsFreeNameResultW(sitesPtr);
                         }
@@ -908,7 +1194,10 @@ namespace System.DirectoryServices.ActiveDirectory
                 }
                 else
                 {
-                    throw ExceptionHelper.GetExceptionFromErrorCode(result, _context.GetServerName());
+                    throw ExceptionHelper.GetExceptionFromErrorCode(
+                        result,
+                        _context.GetServerName()
+                    );
                 }
             }
             finally
@@ -933,7 +1222,10 @@ namespace System.DirectoryServices.ActiveDirectory
         {
             ArrayList appNCs = new ArrayList();
 
-            DirectoryEntry partitionsEntry = DirectoryEntryManager.GetDirectoryEntry(_context, _directoryEntryMgr.ExpandWellKnownDN(WellKnownDN.PartitionsContainer));
+            DirectoryEntry partitionsEntry = DirectoryEntryManager.GetDirectoryEntry(
+                _context,
+                _directoryEntryMgr.ExpandWellKnownDN(WellKnownDN.PartitionsContainer)
+            );
 
             // search for all the "crossRef" objects that have the
             // ADS_SYSTEMFLAG_CR_NTDS_NC set and the SYSTEMFLAG_CR_NTDS_DOMAIN flag not set
@@ -960,28 +1252,60 @@ namespace System.DirectoryServices.ActiveDirectory
             propertiesToLoad[0] = PropertyManager.DnsRoot;
             propertiesToLoad[1] = PropertyManager.NCName;
 
-            ADSearcher searcher = new ADSearcher(partitionsEntry, filter, propertiesToLoad, SearchScope.OneLevel);
+            ADSearcher searcher = new ADSearcher(
+                partitionsEntry,
+                filter,
+                propertiesToLoad,
+                SearchScope.OneLevel
+            );
             SearchResultCollection? resCol = null;
             try
             {
                 resCol = searcher.FindAll();
 
-                string schemaNamingContext = _directoryEntryMgr.ExpandWellKnownDN(WellKnownDN.SchemaNamingContext);
-                string configurationNamingContext = _directoryEntryMgr.ExpandWellKnownDN(WellKnownDN.ConfigurationNamingContext);
+                string schemaNamingContext = _directoryEntryMgr.ExpandWellKnownDN(
+                    WellKnownDN.SchemaNamingContext
+                );
+                string configurationNamingContext = _directoryEntryMgr.ExpandWellKnownDN(
+                    WellKnownDN.ConfigurationNamingContext
+                );
 
                 foreach (SearchResult res in resCol)
                 {
                     // add the name of the appNC only if it is not
                     // the Schema or Configuration partition
-                    string nCName = (string)PropertyManager.GetSearchResultPropertyValue(res, PropertyManager.NCName)!;
-                    if ((!(nCName.Equals(schemaNamingContext)))
-                        && (!(nCName.Equals(configurationNamingContext))))
+                    string nCName = (string)
+                        PropertyManager.GetSearchResultPropertyValue(res, PropertyManager.NCName)!;
+                    if (
+                        (!(nCName.Equals(schemaNamingContext)))
+                        && (!(nCName.Equals(configurationNamingContext)))
+                    )
                     {
                         // create a new context to be passed on to the appNC object
                         // (pass the dns name of the appliction partition as the target)
-                        string dnsName = (string)PropertyManager.GetSearchResultPropertyValue(res, PropertyManager.DnsRoot)!;
-                        DirectoryContext appNCContext = Utils.GetNewDirectoryContext(dnsName, DirectoryContextType.ApplicationPartition, _context);
-                        appNCs.Add(new ApplicationPartition(appNCContext, nCName, (string)PropertyManager.GetSearchResultPropertyValue(res, PropertyManager.DnsRoot)!, ApplicationPartitionType.ADApplicationPartition, new DirectoryEntryManager(appNCContext)));
+                        string dnsName = (string)
+                            PropertyManager.GetSearchResultPropertyValue(
+                                res,
+                                PropertyManager.DnsRoot
+                            )!;
+                        DirectoryContext appNCContext = Utils.GetNewDirectoryContext(
+                            dnsName,
+                            DirectoryContextType.ApplicationPartition,
+                            _context
+                        );
+                        appNCs.Add(
+                            new ApplicationPartition(
+                                appNCContext,
+                                nCName,
+                                (string)
+                                    PropertyManager.GetSearchResultPropertyValue(
+                                        res,
+                                        PropertyManager.DnsRoot
+                                    )!,
+                                ApplicationPartitionType.ADApplicationPartition,
+                                new DirectoryEntryManager(appNCContext)
+                            )
+                        );
                     }
                 }
             }
@@ -1000,7 +1324,10 @@ namespace System.DirectoryServices.ActiveDirectory
         private ArrayList GetDomains()
         {
             ArrayList domains = new ArrayList();
-            DirectoryEntry partitionsEntry = DirectoryEntryManager.GetDirectoryEntry(_context, _directoryEntryMgr.ExpandWellKnownDN(WellKnownDN.PartitionsContainer));
+            DirectoryEntry partitionsEntry = DirectoryEntryManager.GetDirectoryEntry(
+                _context,
+                _directoryEntryMgr.ExpandWellKnownDN(WellKnownDN.PartitionsContainer)
+            );
 
             // search for all the "crossRef" objects that have the
             // ADS_SYSTEMFLAG_CR_NTDS_NC and SYSTEMFLAG_CR_NTDS_DOMAIN flags set
@@ -1026,7 +1353,12 @@ namespace System.DirectoryServices.ActiveDirectory
             string[] propertiesToLoad = new string[1];
             propertiesToLoad[0] = PropertyManager.DnsRoot;
 
-            ADSearcher searcher = new ADSearcher(partitionsEntry, filter, propertiesToLoad, SearchScope.OneLevel);
+            ADSearcher searcher = new ADSearcher(
+                partitionsEntry,
+                filter,
+                propertiesToLoad,
+                SearchScope.OneLevel
+            );
             SearchResultCollection? resCol = null;
             try
             {
@@ -1034,8 +1366,13 @@ namespace System.DirectoryServices.ActiveDirectory
 
                 foreach (SearchResult res in resCol)
                 {
-                    string domainName = (string)PropertyManager.GetSearchResultPropertyValue(res, PropertyManager.DnsRoot)!;
-                    DirectoryContext domainContext = Utils.GetNewDirectoryContext(domainName, DirectoryContextType.Domain, _context);
+                    string domainName = (string)
+                        PropertyManager.GetSearchResultPropertyValue(res, PropertyManager.DnsRoot)!;
+                    DirectoryContext domainContext = Utils.GetNewDirectoryContext(
+                        domainName,
+                        DirectoryContextType.Domain,
+                        _context
+                    );
                     domains.Add(new Domain(domainContext, domainName));
                 }
             }
@@ -1058,11 +1395,21 @@ namespace System.DirectoryServices.ActiveDirectory
             // DsBind
             if (_context.ContextType == DirectoryContextType.DirectoryServer)
             {
-                dsHandle = Utils.GetDSHandle(_context.GetServerName(), null, authIdentity, DirectoryContext.ADHandle);
+                dsHandle = Utils.GetDSHandle(
+                    _context.GetServerName(),
+                    null,
+                    authIdentity,
+                    DirectoryContext.ADHandle
+                );
             }
             else
             {
-                dsHandle = Utils.GetDSHandle(null, _context.GetServerName(), authIdentity, DirectoryContext.ADHandle);
+                dsHandle = Utils.GetDSHandle(
+                    null,
+                    _context.GetServerName(),
+                    authIdentity,
+                    DirectoryContext.ADHandle
+                );
             }
         }
 
@@ -1079,7 +1426,8 @@ namespace System.DirectoryServices.ActiveDirectory
             string? serverName = null;
             IntPtr domains = (IntPtr)0;
             int count = 0;
-            TrustRelationshipInformationCollection collection = new TrustRelationshipInformationCollection();
+            TrustRelationshipInformationCollection collection =
+                new TrustRelationshipInformationCollection();
             bool impersonated = false;
             int error = 0;
 
@@ -1094,7 +1442,14 @@ namespace System.DirectoryServices.ActiveDirectory
             {
                 try
                 {
-                    error = UnsafeNativeMethods.DsEnumerateDomainTrustsW(serverName, (int)DS_DOMAINTRUST_FLAG.DS_DOMAIN_PRIMARY | (int)DS_DOMAINTRUST_FLAG.DS_DOMAIN_DIRECT_OUTBOUND | (int)DS_DOMAINTRUST_FLAG.DS_DOMAIN_DIRECT_INBOUND, out domains, out count);
+                    error = UnsafeNativeMethods.DsEnumerateDomainTrustsW(
+                        serverName,
+                        (int)DS_DOMAINTRUST_FLAG.DS_DOMAIN_PRIMARY
+                            | (int)DS_DOMAINTRUST_FLAG.DS_DOMAIN_DIRECT_OUTBOUND
+                            | (int)DS_DOMAINTRUST_FLAG.DS_DOMAIN_DIRECT_INBOUND,
+                        out domains,
+                        out count
+                    );
                 }
                 finally
                 {
@@ -1102,7 +1457,10 @@ namespace System.DirectoryServices.ActiveDirectory
                         Utils.Revert();
                 }
             }
-            catch { throw; }
+            catch
+            {
+                throw;
+            }
 
             // check the result
             if (error != 0)
@@ -1130,12 +1488,20 @@ namespace System.DirectoryServices.ActiveDirectory
                             if (unmanagedTrust.DnsDomainName != (IntPtr)0)
                                 tmpDNSName = Marshal.PtrToStringUni(unmanagedTrust.DnsDomainName);
                             if (unmanagedTrust.NetbiosDomainName != (IntPtr)0)
-                                tmpNetBIOSName = Marshal.PtrToStringUni(unmanagedTrust.NetbiosDomainName);
+                                tmpNetBIOSName = Marshal.PtrToStringUni(
+                                    unmanagedTrust.NetbiosDomainName
+                                );
 
                             // check whether it is the same target
-                            if (tmpDNSName != null && Utils.Compare(targetForestName, tmpDNSName) == 0)
+                            if (
+                                tmpDNSName != null
+                                && Utils.Compare(targetForestName, tmpDNSName) == 0
+                            )
                                 sameTarget = true;
-                            else if (tmpNetBIOSName != null && Utils.Compare(targetForestName, tmpNetBIOSName) == 0)
+                            else if (
+                                tmpNetBIOSName != null
+                                && Utils.Compare(targetForestName, tmpNetBIOSName) == 0
+                            )
                                 sameTarget = true;
 
                             if (!sameTarget)
@@ -1143,13 +1509,30 @@ namespace System.DirectoryServices.ActiveDirectory
                         }
 
                         // if it is up level trust and forest attribute is set
-                        if (unmanagedTrust.TrustType == TrustHelper.TRUST_TYPE_UPLEVEL && ((unmanagedTrust.TrustAttributes & (int)TRUST_ATTRIBUTE.TRUST_ATTRIBUTE_FOREST_TRANSITIVE) != 0))
+                        if (
+                            unmanagedTrust.TrustType == TrustHelper.TRUST_TYPE_UPLEVEL
+                            && (
+                                (
+                                    unmanagedTrust.TrustAttributes
+                                    & (int)TRUST_ATTRIBUTE.TRUST_ATTRIBUTE_FOREST_TRANSITIVE
+                                ) != 0
+                            )
+                        )
                         {
                             // we don't want to include self
-                            if ((unmanagedTrust.Flags & (int)DS_DOMAINTRUST_FLAG.DS_DOMAIN_PRIMARY) != 0)
+                            if (
+                                (unmanagedTrust.Flags & (int)DS_DOMAINTRUST_FLAG.DS_DOMAIN_PRIMARY)
+                                != 0
+                            )
                                 continue;
 
-                            TrustRelationshipInformation trust = new ForestTrustRelationshipInformation(_context, Name, unmanagedTrust, TrustType.Forest);
+                            TrustRelationshipInformation trust =
+                                new ForestTrustRelationshipInformation(
+                                    _context,
+                                    Name,
+                                    unmanagedTrust,
+                                    TrustType.Forest
+                                );
                             collection.Add(trust);
                         }
                     }
@@ -1169,10 +1552,22 @@ namespace System.DirectoryServices.ActiveDirectory
             string password = TrustHelper.CreateTrustPassword();
 
             // first reset trust password on remote side
-            string targetServerName = TrustHelper.UpdateTrust(targetForest.GetDirectoryContext(), targetForest.Name, Name, password, true /*is forest*/);
+            string targetServerName = TrustHelper.UpdateTrust(
+                targetForest.GetDirectoryContext(),
+                targetForest.Name,
+                Name,
+                password,
+                true /*is forest*/
+            );
 
             // then reset trust password on local side
-            string sourceServerName = TrustHelper.UpdateTrust(_context, Name, targetForest.Name, password, true /*is forest*/);
+            string sourceServerName = TrustHelper.UpdateTrust(
+                _context,
+                Name,
+                targetForest.Name,
+                password,
+                true /*is forest*/
+            );
 
             // last we reset the secure channel again to make sure info is replicated and trust is indeed ready now
 
@@ -1181,11 +1576,25 @@ namespace System.DirectoryServices.ActiveDirectory
             {
                 try
                 {
-                    TrustHelper.VerifyTrust(_context, Name, targetForest.Name, true /*is forest*/, TrustDirection.Outbound, true/*reset secure channel*/, targetServerName /* need to specify which target server */);
+                    TrustHelper.VerifyTrust(
+                        _context,
+                        Name,
+                        targetForest.Name,
+                        true /*is forest*/
+                        ,
+                        TrustDirection.Outbound,
+                        true /*reset secure channel*/
+                        ,
+                        targetServerName /* need to specify which target server */
+                    );
                 }
                 catch (ActiveDirectoryObjectNotFoundException)
                 {
-                    throw new ActiveDirectoryObjectNotFoundException(SR.Format(SR.WrongTrustDirection, Name, targetForest.Name, direction), typeof(ForestTrustRelationshipInformation), null);
+                    throw new ActiveDirectoryObjectNotFoundException(
+                        SR.Format(SR.WrongTrustDirection, Name, targetForest.Name, direction),
+                        typeof(ForestTrustRelationshipInformation),
+                        null
+                    );
                 }
             }
 
@@ -1194,11 +1603,25 @@ namespace System.DirectoryServices.ActiveDirectory
             {
                 try
                 {
-                    TrustHelper.VerifyTrust(targetForest.GetDirectoryContext(), targetForest.Name, Name, true/*is forest*/, TrustDirection.Outbound, true/*reset secure channel*/, sourceServerName /* need to specify which target server */);
+                    TrustHelper.VerifyTrust(
+                        targetForest.GetDirectoryContext(),
+                        targetForest.Name,
+                        Name,
+                        true /*is forest*/
+                        ,
+                        TrustDirection.Outbound,
+                        true /*reset secure channel*/
+                        ,
+                        sourceServerName /* need to specify which target server */
+                    );
                 }
                 catch (ActiveDirectoryObjectNotFoundException)
                 {
-                    throw new ActiveDirectoryObjectNotFoundException(SR.Format(SR.WrongTrustDirection, Name, targetForest.Name, direction), typeof(ForestTrustRelationshipInformation), null);
+                    throw new ActiveDirectoryObjectNotFoundException(
+                        SR.Format(SR.WrongTrustDirection, Name, targetForest.Name, direction),
+                        typeof(ForestTrustRelationshipInformation),
+                        null
+                    );
                 }
             }
         }

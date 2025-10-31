@@ -4,9 +4,9 @@
 
 namespace System.ServiceModel.Activation
 {
-    using System.ServiceModel.Channels;
     using System.Collections.Generic;
     using System.Diagnostics;
+    using System.ServiceModel.Channels;
 
     class HostedTcpTransportManager : SharedTcpTransportManager
     {
@@ -55,7 +55,11 @@ namespace System.ServiceModel.Activation
 
         void OnVia(Uri address)
         {
-            Debug.Print("HostedTcpTransportManager.OnVia() address: " + address + " calling EnsureServiceAvailable()");
+            Debug.Print(
+                "HostedTcpTransportManager.OnVia() address: "
+                    + address
+                    + " calling EnsureServiceAvailable()"
+            );
             ServiceHostingEnvironment.EnsureServiceAvailable(address.LocalPath);
         }
 

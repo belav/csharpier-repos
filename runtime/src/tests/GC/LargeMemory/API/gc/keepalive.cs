@@ -3,17 +3,19 @@
 
 using System;
 
-public sealed class KeepAliveTest {
-
+public sealed class KeepAliveTest
+{
     private uint size = 0;
 
-    public KeepAliveTest(uint size) {
+    public KeepAliveTest(uint size)
+    {
         this.size = size;
     }
 
-    public bool RunTests() {
-
-       try {
+    public bool RunTests()
+    {
+        try
+        {
             LargeObject lo = new LargeObject(size);
 
             GC.Collect();
@@ -23,11 +25,14 @@ public sealed class KeepAliveTest {
             if (lo == null)
                 return false;
             GC.KeepAlive(lo);
-
-        } catch (OutOfMemoryException) {
+        }
+        catch (OutOfMemoryException)
+        {
             Console.WriteLine("Large Memory Machine required");
             return true;
-        } catch (Exception e) {
+        }
+        catch (Exception e)
+        {
             Console.WriteLine("Unexpected Exception:");
             Console.WriteLine(e);
             return false;
@@ -36,11 +41,12 @@ public sealed class KeepAliveTest {
         return true;
     }
 
-
-    public static int Main(string[] args) {
+    public static int Main(string[] args)
+    {
         KeepAliveTest test = new KeepAliveTest(MemCheck.ParseSizeMBAndLimitByAvailableMem(args));
 
-        if (test.RunTests()) {
+        if (test.RunTests())
+        {
             Console.WriteLine("Test passed");
             return 100;
         }

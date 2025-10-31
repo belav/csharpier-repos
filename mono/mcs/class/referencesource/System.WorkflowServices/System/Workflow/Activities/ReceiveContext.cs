@@ -11,8 +11,8 @@ namespace System.Workflow.Activities
     using System.ComponentModel;
     using System.Diagnostics.CodeAnalysis;
     using System.ServiceModel;
-    using System.Xml;
     using System.ServiceModel.Dispatcher;
+    using System.Xml;
 
     [Serializable]
     internal sealed class ReceiveContext
@@ -35,28 +35,19 @@ namespace System.Workflow.Activities
         [Browsable(false)]
         public bool Initialized
         {
-            get
-            {
-                return this.initialized;
-            }
+            get { return this.initialized; }
         }
 
         [Browsable(false)]
         public string Name
         {
-            get
-            {
-                return this.name;
-            }
+            get { return this.name; }
         }
 
         [Browsable(false)]
         internal SerializableReadOnlyDictionary<string, string> Properties
         {
-            get
-            {
-                return this.properties;
-            }
+            get { return this.properties; }
         }
 
         public void EnsureInitialized(Guid contextId)
@@ -74,15 +65,25 @@ namespace System.Workflow.Activities
 
             if (!isRootContext)
             {
-                this.properties =
-                    new SerializableReadOnlyDictionary<string, string>(
-                    new KeyValuePair<string, string>(WellKnownContextProperties.InstanceId, workflowId),
-                    new KeyValuePair<string, string>(WellKnownContextProperties.ConversationId, Guid.NewGuid().ToString()));
+                this.properties = new SerializableReadOnlyDictionary<string, string>(
+                    new KeyValuePair<string, string>(
+                        WellKnownContextProperties.InstanceId,
+                        workflowId
+                    ),
+                    new KeyValuePair<string, string>(
+                        WellKnownContextProperties.ConversationId,
+                        Guid.NewGuid().ToString()
+                    )
+                );
             }
             else
             {
                 this.properties = new SerializableReadOnlyDictionary<string, string>(
-                    new KeyValuePair<string, string>(WellKnownContextProperties.InstanceId, workflowId));
+                    new KeyValuePair<string, string>(
+                        WellKnownContextProperties.InstanceId,
+                        workflowId
+                    )
+                );
             }
 
             this.initialized = true;

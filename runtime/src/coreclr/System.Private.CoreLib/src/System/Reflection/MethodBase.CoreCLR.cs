@@ -19,19 +19,29 @@ namespace System.Reflection
 
             Type? declaringType = m?.DeclaringType;
             if (declaringType != null && declaringType.IsGenericType)
-                throw new ArgumentException(SR.Format(
-                    SR.Argument_MethodDeclaringTypeGeneric,
-                    m, declaringType.GetGenericTypeDefinition()));
+                throw new ArgumentException(
+                    SR.Format(
+                        SR.Argument_MethodDeclaringTypeGeneric,
+                        m,
+                        declaringType.GetGenericTypeDefinition()
+                    )
+                );
 
             return m;
         }
 
-        public static MethodBase? GetMethodFromHandle(RuntimeMethodHandle handle, RuntimeTypeHandle declaringType)
+        public static MethodBase? GetMethodFromHandle(
+            RuntimeMethodHandle handle,
+            RuntimeTypeHandle declaringType
+        )
         {
             if (handle.IsNullHandle())
                 throw new ArgumentException(SR.Argument_InvalidHandle);
 
-            return RuntimeType.GetMethodBase(declaringType.GetRuntimeType(), handle.GetMethodInfo());
+            return RuntimeType.GetMethodBase(
+                declaringType.GetRuntimeType(),
+                handle.GetMethodInfo()
+            );
         }
 
         [RequiresUnreferencedCode("Metadata for the method might be incomplete or removed")]
@@ -45,9 +55,15 @@ namespace System.Reflection
 
         #region Internal Members
         // used by EE
-        private IntPtr GetMethodDesc() { return MethodHandle.Value; }
+        private IntPtr GetMethodDesc()
+        {
+            return MethodHandle.Value;
+        }
 
-        internal virtual ReadOnlySpan<ParameterInfo> GetParametersAsSpan() { return GetParameters(); }
+        internal virtual ReadOnlySpan<ParameterInfo> GetParametersAsSpan()
+        {
+            return GetParameters();
+        }
         #endregion
     }
 }

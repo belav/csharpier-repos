@@ -21,10 +21,9 @@ public class NullableKeyIdentityMap<TKey> : IdentityMap<TKey>
     public NullableKeyIdentityMap(
         IKey key,
         IPrincipalKeyValueFactory<TKey> principalKeyValueFactory,
-        bool sensitiveLoggingEnabled)
-        : base(key, principalKeyValueFactory, sensitiveLoggingEnabled)
-    {
-    }
+        bool sensitiveLoggingEnabled
+    )
+        : base(key, principalKeyValueFactory, sensitiveLoggingEnabled) { }
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -43,13 +42,17 @@ public class NullableKeyIdentityMap<TKey> : IdentityMap<TKey>
                 throw new InvalidOperationException(
                     CoreStrings.InvalidKeyValue(
                         entry.EntityType.DisplayName(),
-                        PrincipalKeyValueFactory.FindNullPropertyInCurrentValues(entry)!.Name));
+                        PrincipalKeyValueFactory.FindNullPropertyInCurrentValues(entry)!.Name
+                    )
+                );
             }
 
             throw new InvalidOperationException(
                 CoreStrings.InvalidAlternateKeyValue(
                     entry.EntityType.DisplayName(),
-                    PrincipalKeyValueFactory.FindNullPropertyInCurrentValues(entry)!.Name));
+                    PrincipalKeyValueFactory.FindNullPropertyInCurrentValues(entry)!.Name
+                )
+            );
         }
 
         Add(key, entry);

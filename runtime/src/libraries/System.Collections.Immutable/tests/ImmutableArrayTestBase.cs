@@ -3,7 +3,5 @@
 
 namespace System.Collections.Immutable.Tests
 {
-    public abstract class ImmutableArrayTestBase : SimpleElementImmutablesTestBase
-    {
-    }
+    public abstract class ImmutableArrayTestBase : SimpleElementImmutablesTestBase { }
 }

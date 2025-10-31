@@ -6,7 +6,12 @@ namespace System.ServiceModel
     using System;
     using System.Runtime.Serialization;
 
-    [AttributeUsage(ServiceModelAttributeTargets.ServiceContract | ServiceModelAttributeTargets.OperationContract, Inherited = false, AllowMultiple = false)]
+    [AttributeUsage(
+        ServiceModelAttributeTargets.ServiceContract
+            | ServiceModelAttributeTargets.OperationContract,
+        Inherited = false,
+        AllowMultiple = false
+    )]
     public sealed class DataContractFormatAttribute : Attribute
     {
         OperationFormatStyle style;
@@ -19,6 +24,5 @@ namespace System.ServiceModel
                 style = value;
             }
         }
-
     }
 }

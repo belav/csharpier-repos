@@ -6,12 +6,11 @@ using System;
 using System.Numerics;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
-using System.Runtime.Intrinsics.X86;
 using System.Runtime.Intrinsics;
+using System.Runtime.Intrinsics.X86;
 
 namespace JIT.HardwareIntrinsics.X86
 {
-
     public static class Avx512Verify
     {
         public static bool ValidateFixup(double actual, double x, double y, long z)
@@ -85,7 +84,8 @@ namespace JIT.HardwareIntrinsics.X86
         public static TFloat Reduce<TFloat>(TFloat x, int m)
             where TFloat : IFloatingPointIeee754<TFloat>
         {
-            return x - TFloat.Round(TFloat.ScaleB(TFloat.One, m) * x) * TFloat.ScaleB(TFloat.One, -m);
+            return x
+                - TFloat.Round(TFloat.ScaleB(TFloat.One, m) * x) * TFloat.ScaleB(TFloat.One, -m);
         }
 
         public static T Shuffle2x128<T>(T[] left, T[] right, byte control, int i)
@@ -122,7 +122,12 @@ namespace JIT.HardwareIntrinsics.X86
             }
         }
 
-        public static ushort SumAbsoluteDifferencesInBlock32(byte[] left, byte[] right, byte control, int i)
+        public static ushort SumAbsoluteDifferencesInBlock32(
+            byte[] left,
+            byte[] right,
+            byte control,
+            int i
+        )
         {
             int a = i % 4;
             int b = (a < 2) ? 0 : 4;
@@ -155,7 +160,7 @@ namespace JIT.HardwareIntrinsics.X86
         {
             // Tests expect true on error
 
-            TFloat expected = TFloat.One/ TFloat.Sqrt(value);
+            TFloat expected = TFloat.One / TFloat.Sqrt(value);
             TFloat relativeError = RelativeError(expected, actual);
 
             return relativeError >= (TFloat.One / TFloat.CreateSaturating(16384)); // 2^-14
@@ -169,23 +174,42 @@ namespace JIT.HardwareIntrinsics.X86
 
             switch (tokenResponse)
             {
-                case 0: return x;
-                case 1: return y;
-                case 2: return TFloat.NaN;
-                case 3: return TFloat.NaN;
-                case 4: return TFloat.NegativeInfinity;
-                case 5: return TFloat.PositiveInfinity;
-                case 6: return TFloat.CopySign(TFloat.PositiveInfinity, y);
-                case 7: return TFloat.NegativeZero;
-                case 8: return TFloat.Zero;
-                case 9: return -TFloat.One;
-                case 10: return TFloat.One;
-                case 11: return TFloat.CreateSaturating(0.5);
-                case 12: return TFloat.CreateSaturating(90);
-                case 13: return TFloat.Pi / TFloat.CreateSaturating(2);
-                case 14: return TFloat.MaxValue;
-                case 15: return TFloat.MinValue;
-                default: throw new Exception($"Unexpected tokenResponse ({tokenResponse}) for ({x}, {y}, {z})");
+                case 0:
+                    return x;
+                case 1:
+                    return y;
+                case 2:
+                    return TFloat.NaN;
+                case 3:
+                    return TFloat.NaN;
+                case 4:
+                    return TFloat.NegativeInfinity;
+                case 5:
+                    return TFloat.PositiveInfinity;
+                case 6:
+                    return TFloat.CopySign(TFloat.PositiveInfinity, y);
+                case 7:
+                    return TFloat.NegativeZero;
+                case 8:
+                    return TFloat.Zero;
+                case 9:
+                    return -TFloat.One;
+                case 10:
+                    return TFloat.One;
+                case 11:
+                    return TFloat.CreateSaturating(0.5);
+                case 12:
+                    return TFloat.CreateSaturating(90);
+                case 13:
+                    return TFloat.Pi / TFloat.CreateSaturating(2);
+                case 14:
+                    return TFloat.MaxValue;
+                case 15:
+                    return TFloat.MinValue;
+                default:
+                    throw new Exception(
+                        $"Unexpected tokenResponse ({tokenResponse}) for ({x}, {y}, {z})"
+                    );
             }
         }
 

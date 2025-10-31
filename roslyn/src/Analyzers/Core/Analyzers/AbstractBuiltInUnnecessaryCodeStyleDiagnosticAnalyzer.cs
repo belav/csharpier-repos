@@ -13,7 +13,8 @@ namespace Microsoft.CodeAnalysis.CodeStyle
     /// <summary>
     /// Code style analyzer that reports at least one 'unnecessary' code diagnostic.
     /// </summary>
-    internal abstract class AbstractBuiltInUnnecessaryCodeStyleDiagnosticAnalyzer : AbstractBuiltInCodeStyleDiagnosticAnalyzer
+    internal abstract class AbstractBuiltInUnnecessaryCodeStyleDiagnosticAnalyzer
+        : AbstractBuiltInCodeStyleDiagnosticAnalyzer
     {
         /// <summary>
         /// Constructor for an unnecessary code style analyzer with a single diagnostic descriptor and
@@ -42,8 +43,17 @@ namespace Microsoft.CodeAnalysis.CodeStyle
             PerLanguageOption2<bool>? fadingOption,
             LocalizableString title,
             LocalizableString? messageFormat = null,
-            bool configurable = true)
-            : base(diagnosticId, enforceOnBuild, option, title, messageFormat, isUnnecessary: true, configurable)
+            bool configurable = true
+        )
+            : base(
+                diagnosticId,
+                enforceOnBuild,
+                option,
+                title,
+                messageFormat,
+                isUnnecessary: true,
+                configurable
+            )
         {
             AddDiagnosticIdToFadingOptionMapping(diagnosticId, fadingOption);
         }
@@ -74,8 +84,17 @@ namespace Microsoft.CodeAnalysis.CodeStyle
             PerLanguageOption2<bool>? fadingOption,
             LocalizableString title,
             LocalizableString? messageFormat = null,
-            bool configurable = true)
-            : base(diagnosticId, enforceOnBuild, options, title, messageFormat, isUnnecessary: true, configurable)
+            bool configurable = true
+        )
+            : base(
+                diagnosticId,
+                enforceOnBuild,
+                options,
+                title,
+                messageFormat,
+                isUnnecessary: true,
+                configurable
+            )
         {
             AddDiagnosticIdToFadingOptionMapping(diagnosticId, fadingOption);
         }
@@ -85,7 +104,10 @@ namespace Microsoft.CodeAnalysis.CodeStyle
         /// </summary>
         /// <param name="descriptors">Descriptors supported by this analyzer</param>
         /// <param name="fadingOption">The fading option used to control descriptors that are unnecessary.</param>
-        protected AbstractBuiltInUnnecessaryCodeStyleDiagnosticAnalyzer(ImmutableArray<DiagnosticDescriptor> descriptors, PerLanguageOption2<bool> fadingOption)
+        protected AbstractBuiltInUnnecessaryCodeStyleDiagnosticAnalyzer(
+            ImmutableArray<DiagnosticDescriptor> descriptors,
+            PerLanguageOption2<bool> fadingOption
+        )
             : base(descriptors)
         {
             foreach (var descriptor in descriptors)
@@ -100,7 +122,10 @@ namespace Microsoft.CodeAnalysis.CodeStyle
         /// <summary>
         /// Constructor for a code style analyzer with a multiple diagnostic descriptors with a code style options that can be used to configure each descriptor.
         /// </summary>
-        protected AbstractBuiltInUnnecessaryCodeStyleDiagnosticAnalyzer(ImmutableDictionary<DiagnosticDescriptor, IOption2> supportedDiagnosticsWithOptions, PerLanguageOption2<bool>? fadingOption)
+        protected AbstractBuiltInUnnecessaryCodeStyleDiagnosticAnalyzer(
+            ImmutableDictionary<DiagnosticDescriptor, IOption2> supportedDiagnosticsWithOptions,
+            PerLanguageOption2<bool>? fadingOption
+        )
             : base(supportedDiagnosticsWithOptions)
         {
             AddDescriptorsToFadingOptionMapping(supportedDiagnosticsWithOptions.Keys, fadingOption);
@@ -109,21 +134,36 @@ namespace Microsoft.CodeAnalysis.CodeStyle
         /// <summary>
         /// Constructor for a code style analyzer with multiple diagnostic descriptors with zero or more code style options that can be used to configure each descriptor.
         /// </summary>
-        protected AbstractBuiltInUnnecessaryCodeStyleDiagnosticAnalyzer(ImmutableDictionary<DiagnosticDescriptor, ImmutableHashSet<IOption2>> supportedDiagnosticsWithOptions, PerLanguageOption2<bool>? fadingOption)
+        protected AbstractBuiltInUnnecessaryCodeStyleDiagnosticAnalyzer(
+            ImmutableDictionary<
+                DiagnosticDescriptor,
+                ImmutableHashSet<IOption2>
+            > supportedDiagnosticsWithOptions,
+            PerLanguageOption2<bool>? fadingOption
+        )
             : base(supportedDiagnosticsWithOptions)
         {
             AddDescriptorsToFadingOptionMapping(supportedDiagnosticsWithOptions.Keys, fadingOption);
         }
 
-        private static void AddDiagnosticIdToFadingOptionMapping(string diagnosticId, PerLanguageOption2<bool>? fadingOption)
+        private static void AddDiagnosticIdToFadingOptionMapping(
+            string diagnosticId,
+            PerLanguageOption2<bool>? fadingOption
+        )
         {
             if (fadingOption != null)
             {
-                IDEDiagnosticIdToOptionMappingHelper.AddFadingOptionMapping(diagnosticId, fadingOption);
+                IDEDiagnosticIdToOptionMappingHelper.AddFadingOptionMapping(
+                    diagnosticId,
+                    fadingOption
+                );
             }
         }
 
-        private static void AddDescriptorsToFadingOptionMapping(IEnumerable<DiagnosticDescriptor> descriptors, PerLanguageOption2<bool>? fadingOption)
+        private static void AddDescriptorsToFadingOptionMapping(
+            IEnumerable<DiagnosticDescriptor> descriptors,
+            PerLanguageOption2<bool>? fadingOption
+        )
         {
             if (fadingOption != null)
             {
@@ -131,7 +171,10 @@ namespace Microsoft.CodeAnalysis.CodeStyle
                 {
                     if (descriptor.CustomTags.Any(t => t == WellKnownDiagnosticTags.Unnecessary))
                     {
-                        IDEDiagnosticIdToOptionMappingHelper.AddFadingOptionMapping(descriptor.Id, fadingOption);
+                        IDEDiagnosticIdToOptionMappingHelper.AddFadingOptionMapping(
+                            descriptor.Id,
+                            fadingOption
+                        );
                     }
                 }
             }

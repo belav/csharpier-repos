@@ -1,5 +1,5 @@
 //
-// Tests for System.Web.UI.WebControls.Repeater.cs 
+// Tests for System.Web.UI.WebControls.Repeater.cs
 //
 // Author:
 //	Chris Toshok (toshok@novell.com)
@@ -15,10 +15,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -28,269 +28,274 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
-using NUnit.Framework;
 using System;
-using System.IO;
+using System.Collections;
 using System.Globalization;
+using System.IO;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using MonoTests.SystemWeb.Framework;
-using System.Collections;
+using NUnit.Framework;
 
 namespace MonoTests.System.Web.UI.WebControls
 {
-	[TestFixture]	
-	public class RepeaterTest {	
-		class Poker : Repeater {
-			
-			public void TrackState () 
-			{
-				TrackViewState ();
-			}
-			
-			public object SaveState ()
-			{
-				return SaveViewState ();
-			}
-			
-			public void LoadState (object o)
-			{
-				LoadViewState (o);
-			}
+    [TestFixture]
+    public class RepeaterTest
+    {
+        class Poker : Repeater
+        {
+            public void TrackState()
+            {
+                TrackViewState();
+            }
 
-			public DataSourceSelectArguments GetSelectArguments()
-			{
-				return SelectArguments;
-			}
+            public object SaveState()
+            {
+                return SaveViewState();
+            }
 
-			public DataSourceSelectArguments DoCreateDataSourceSelectArguments ()
-			{
-				return base.CreateDataSourceSelectArguments();
-			}
+            public void LoadState(object o)
+            {
+                LoadViewState(o);
+            }
 
-			public new void EnsureDataBound ()
-			{
-				base.EnsureDataBound ();
-			}
+            public DataSourceSelectArguments GetSelectArguments()
+            {
+                return SelectArguments;
+            }
 
-			public global::System.Collections.IEnumerable DoGetData ()
-			{
-				return base.GetData ();
-			}
+            public DataSourceSelectArguments DoCreateDataSourceSelectArguments()
+            {
+                return base.CreateDataSourceSelectArguments();
+            }
 
-			public new bool Initialized
-			{
-				get { return base.Initialized; }
-			}
+            public new void EnsureDataBound()
+            {
+                base.EnsureDataBound();
+            }
 
-			public new bool IsBoundUsingDataSourceID
-			{
-				get { return base.IsBoundUsingDataSourceID; }
-			}
+            public global::System.Collections.IEnumerable DoGetData()
+            {
+                return base.GetData();
+            }
 
-			protected override void OnDataPropertyChanged ()
-			{
-				eventChecker = true;
-				base.OnDataPropertyChanged ();
-			}
+            public new bool Initialized
+            {
+                get { return base.Initialized; }
+            }
 
-			public void DoOnDataSourceViewChanged (object sender, EventArgs e)
-			{
-				base.OnDataSourceViewChanged (sender, e);
-			}
+            public new bool IsBoundUsingDataSourceID
+            {
+                get { return base.IsBoundUsingDataSourceID; }
+            }
 
-			public new bool RequiresDataBinding
-			{
-				get { return base.RequiresDataBinding; }
-				set { base.RequiresDataBinding = value; }
-			}
+            protected override void OnDataPropertyChanged()
+            {
+                eventChecker = true;
+                base.OnDataPropertyChanged();
+            }
 
-			bool eventChecker;
-			public bool EventChecker
-			{
-				get { return eventChecker; }
-				set { throw new NotImplementedException (); }
-			}
+            public void DoOnDataSourceViewChanged(object sender, EventArgs e)
+            {
+                base.OnDataSourceViewChanged(sender, e);
+            }
 
-			public void clearEvents ()
-			{
-				eventChecker = false;
-			}
-		}
+            public new bool RequiresDataBinding
+            {
+                get { return base.RequiresDataBinding; }
+                set { base.RequiresDataBinding = value; }
+            }
 
-		[Test]
-		public void Repeater_DefaultsSelectArguments ()
-		{
-			Poker p = new Poker ();
-			DataSourceSelectArguments args, args2;
+            bool eventChecker;
+            public bool EventChecker
+            {
+                get { return eventChecker; }
+                set { throw new NotImplementedException(); }
+            }
 
-			args = p.GetSelectArguments();
-			args2 = p.DoCreateDataSourceSelectArguments();
+            public void clearEvents()
+            {
+                eventChecker = false;
+            }
+        }
 
-			Assert.AreEqual (args, args2, "call == prop");
+        [Test]
+        public void Repeater_DefaultsSelectArguments()
+        {
+            Poker p = new Poker();
+            DataSourceSelectArguments args,
+                args2;
 
-			Assert.IsNotNull (args, "property null check");
-			Assert.IsTrue    (args != DataSourceSelectArguments.Empty, "property != Empty check");
-			Assert.IsTrue    (args.Equals (DataSourceSelectArguments.Empty), "property but they are empty check");
+            args = p.GetSelectArguments();
+            args2 = p.DoCreateDataSourceSelectArguments();
 
-			Assert.IsNotNull (args2, "method null check");
-			Assert.IsTrue    (args2 != DataSourceSelectArguments.Empty, "method != Empty check");
-			Assert.IsTrue    (args2.Equals (DataSourceSelectArguments.Empty), "method but they are empty check");
+            Assert.AreEqual(args, args2, "call == prop");
 
-			/* check to see whether multiple calls give us different refs */
-			args = p.DoCreateDataSourceSelectArguments();
-			
-			Assert.AreEqual (args, args2, "multiple calls, same ref");
-			Assert.AreEqual (string.Empty, p.DataSourceID, "DataSourceID");
-			Assert.AreEqual (false, p.RequiresDataBinding, "RequiresDataBinding");
-		}
+            Assert.IsNotNull(args, "property null check");
+            Assert.IsTrue(args != DataSourceSelectArguments.Empty, "property != Empty check");
+            Assert.IsTrue(
+                args.Equals(DataSourceSelectArguments.Empty),
+                "property but they are empty check"
+            );
 
-		[Test]
-		public void Repeater_Defaults ()
-		{
-			Poker p = new Poker ();
-			Assert.AreEqual (true, p.EnableTheming, "EnableTheming");
-		}
+            Assert.IsNotNull(args2, "method null check");
+            Assert.IsTrue(args2 != DataSourceSelectArguments.Empty, "method != Empty check");
+            Assert.IsTrue(
+                args2.Equals(DataSourceSelectArguments.Empty),
+                "method but they are empty check"
+            );
 
+            /* check to see whether multiple calls give us different refs */
+            args = p.DoCreateDataSourceSelectArguments();
 
-		
-		[Test]
-		[Category("NunitWeb")]
-		[ExpectedException(typeof(HttpException))]
-		public void  EnsureDataBound ()
-		{
-			WebTest t = new WebTest (PageInvoker.CreateOnInit (EnsureDataBound_Init));
-			string html = t.Run ();
-		}
+            Assert.AreEqual(args, args2, "multiple calls, same ref");
+            Assert.AreEqual(string.Empty, p.DataSourceID, "DataSourceID");
+            Assert.AreEqual(false, p.RequiresDataBinding, "RequiresDataBinding");
+        }
 
-		public static void EnsureDataBound_Init (Page p)
-		{
-			Poker r = new Poker ();
-			r.DataSourceID = "Fake";
-			p.Form.Controls.Add (r);
-			r.EnsureDataBound ();
-		}
+        [Test]
+        public void Repeater_Defaults()
+        {
+            Poker p = new Poker();
+            Assert.AreEqual(true, p.EnableTheming, "EnableTheming");
+        }
 
-		[Test]
-		public void GetData ()
-		{
-			Poker p = new Poker ();
-			p.DataSource = Databound ();
-			ArrayList data = (ArrayList)p.DoGetData ();
-			Assert.AreEqual (3, data.Count, "GetData#1");
-			Assert.AreEqual (1, data[0], "GetData#2");
-		}
+        [Test]
+        [Category("NunitWeb")]
+        [ExpectedException(typeof(HttpException))]
+        public void EnsureDataBound()
+        {
+            WebTest t = new WebTest(PageInvoker.CreateOnInit(EnsureDataBound_Init));
+            string html = t.Run();
+        }
 
-		#region help_class
-		static ArrayList Databound ()
-		{
-			ArrayList list = new ArrayList ();
-			list.Add (1);
-			list.Add (2);
-			list.Add (3);
-			return list;
-		}
-		#endregion
+        public static void EnsureDataBound_Init(Page p)
+        {
+            Poker r = new Poker();
+            r.DataSourceID = "Fake";
+            p.Form.Controls.Add(r);
+            r.EnsureDataBound();
+        }
 
-		[Test]
-		[Category ("NunitWeb")]
-		public void Initialized ()
-		{
-			WebTest t = new WebTest ();
-			PageDelegates pd = new PageDelegates ();
-			pd.Init = new PageDelegate (Initialized_Init);
-			pd.Load = new PageDelegate (Initialized_Load);
-			t.Invoker = new PageInvoker (pd);
-			string html = t.Run ();
-		}
+        [Test]
+        public void GetData()
+        {
+            Poker p = new Poker();
+            p.DataSource = Databound();
+            ArrayList data = (ArrayList)p.DoGetData();
+            Assert.AreEqual(3, data.Count, "GetData#1");
+            Assert.AreEqual(1, data[0], "GetData#2");
+        }
 
-		public static void Initialized_Init (Page p)
-		{
-			Poker r = new Poker ();
-			r.ID = "Rep";
-			Assert.AreEqual (false, r.Initialized, "Initialized#1");
-			r.DataSource = Databound ();
-			p.Form.Controls.Add (r);
-		}
+        #region help_class
+        static ArrayList Databound()
+        {
+            ArrayList list = new ArrayList();
+            list.Add(1);
+            list.Add(2);
+            list.Add(3);
+            return list;
+        }
+        #endregion
 
-		public static void Initialized_Load (Page p)
-		{
-			Poker r = p.FindControl ("Rep") as Poker; 
-			Assert.AreEqual (true, r.Initialized, "Initialized#2");
-		}
+        [Test]
+        [Category("NunitWeb")]
+        public void Initialized()
+        {
+            WebTest t = new WebTest();
+            PageDelegates pd = new PageDelegates();
+            pd.Init = new PageDelegate(Initialized_Init);
+            pd.Load = new PageDelegate(Initialized_Load);
+            t.Invoker = new PageInvoker(pd);
+            string html = t.Run();
+        }
 
-		[Test]
-		public void IsBoundUsingDataSourceID ()
-		{
-			Poker p = new Poker ();
-			Assert.AreEqual (false, p.IsBoundUsingDataSourceID, "IsBoundUsingDataSourceID#1");
-			p.DataSourceID = "Fake";
-			Assert.AreEqual (true, p.IsBoundUsingDataSourceID, "IsBoundUsingDataSourceID#2");
-		}
+        public static void Initialized_Init(Page p)
+        {
+            Poker r = new Poker();
+            r.ID = "Rep";
+            Assert.AreEqual(false, r.Initialized, "Initialized#1");
+            r.DataSource = Databound();
+            p.Form.Controls.Add(r);
+        }
 
-		[Test]
-		public void OnDataPropertyChanged ()
-		{
-			Poker p = new Poker ();
-			p.clearEvents ();
-			p.DataSourceID = "Fake";
-			Assert.AreEqual (true, p.EventChecker, "OnDataPropertyChanged#1");
-		}
+        public static void Initialized_Load(Page p)
+        {
+            Poker r = p.FindControl("Rep") as Poker;
+            Assert.AreEqual(true, r.Initialized, "Initialized#2");
+        }
 
-		[Test]
-		public void OnDataSourceViewChanged ()
-		{
-			Poker p = new Poker ();
-			Assert.AreEqual (false, p.RequiresDataBinding, "OnDataSourceViewChanged#1");
-			p.DoOnDataSourceViewChanged (p, new EventArgs ());
-			Assert.AreEqual (true, p.RequiresDataBinding, "OnDataSourceViewChanged#2");
-		}
+        [Test]
+        public void IsBoundUsingDataSourceID()
+        {
+            Poker p = new Poker();
+            Assert.AreEqual(false, p.IsBoundUsingDataSourceID, "IsBoundUsingDataSourceID#1");
+            p.DataSourceID = "Fake";
+            Assert.AreEqual(true, p.IsBoundUsingDataSourceID, "IsBoundUsingDataSourceID#2");
+        }
 
-		#region help_class_for_select_args
-		class PokerS : Repeater
-		{
+        [Test]
+        public void OnDataPropertyChanged()
+        {
+            Poker p = new Poker();
+            p.clearEvents();
+            p.DataSourceID = "Fake";
+            Assert.AreEqual(true, p.EventChecker, "OnDataPropertyChanged#1");
+        }
 
-			public void TrackState ()
-			{
-				TrackViewState ();
-			}
+        [Test]
+        public void OnDataSourceViewChanged()
+        {
+            Poker p = new Poker();
+            Assert.AreEqual(false, p.RequiresDataBinding, "OnDataSourceViewChanged#1");
+            p.DoOnDataSourceViewChanged(p, new EventArgs());
+            Assert.AreEqual(true, p.RequiresDataBinding, "OnDataSourceViewChanged#2");
+        }
 
-			public object SaveState ()
-			{
-				return SaveViewState ();
-			}
+        #region help_class_for_select_args
+        class PokerS : Repeater
+        {
+            public void TrackState()
+            {
+                TrackViewState();
+            }
 
-			public void LoadState (object o)
-			{
-				LoadViewState (o);
-			}
+            public object SaveState()
+            {
+                return SaveViewState();
+            }
 
-			public DataSourceSelectArguments GetSelectArguments ()
-			{
-				return SelectArguments;
-			}
+            public void LoadState(object o)
+            {
+                LoadViewState(o);
+            }
 
-			protected override DataSourceSelectArguments CreateDataSourceSelectArguments ()
-			{
-				DataSourceSelectArguments arg = new DataSourceSelectArguments ("SortExp");
-				return arg;
-			}
-		}
-		#endregion
+            public DataSourceSelectArguments GetSelectArguments()
+            {
+                return SelectArguments;
+            }
 
-		[Test]
-		public void GetSelectArguments ()
-		{
-			PokerS p = new PokerS ();
-			DataSourceSelectArguments arg = p.GetSelectArguments ();
-			Assert.AreEqual ("SortExp", arg.SortExpression, "GetSelectArguments");
-		}
+            protected override DataSourceSelectArguments CreateDataSourceSelectArguments()
+            {
+                DataSourceSelectArguments arg = new DataSourceSelectArguments("SortExp");
+                return arg;
+            }
+        }
+        #endregion
 
-		[TestFixtureTearDown]
-		public void TearDown ()
-		{
-			WebTest.Unload ();
-		}
-	}
+        [Test]
+        public void GetSelectArguments()
+        {
+            PokerS p = new PokerS();
+            DataSourceSelectArguments arg = p.GetSelectArguments();
+            Assert.AreEqual("SortExp", arg.SortExpression, "GetSelectArguments");
+        }
+
+        [TestFixtureTearDown]
+        public void TearDown()
+        {
+            WebTest.Unload();
+        }
+    }
 }

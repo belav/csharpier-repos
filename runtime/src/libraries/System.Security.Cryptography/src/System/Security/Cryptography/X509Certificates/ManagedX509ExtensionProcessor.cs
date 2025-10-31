@@ -16,8 +16,8 @@ namespace System.Security.Cryptography.X509Certificates
             // ushort it will line up with the flags in the spec. We flip bit order of each byte to get
             // the KeyUsageFlagsAsn order expected by AsnWriter.
             KeyUsageFlagsAsn keyUsagesAsn =
-                (KeyUsageFlagsAsn)ReverseBitOrder((byte)keyUsages) |
-                (KeyUsageFlagsAsn)(ReverseBitOrder((byte)(((ushort)keyUsages >> 8))) << 8);
+                (KeyUsageFlagsAsn)ReverseBitOrder((byte)keyUsages)
+                | (KeyUsageFlagsAsn)(ReverseBitOrder((byte)(((ushort)keyUsages >> 8))) << 8);
 
             // The expected output of this method isn't the SEQUENCE value, but just the payload bytes.
             AsnWriter writer = new AsnWriter(AsnEncodingRules.DER);
@@ -25,7 +25,10 @@ namespace System.Security.Cryptography.X509Certificates
             return writer.Encode();
         }
 
-        public virtual void DecodeX509KeyUsageExtension(byte[] encoded, out X509KeyUsageFlags keyUsages)
+        public virtual void DecodeX509KeyUsageExtension(
+            byte[] encoded,
+            out X509KeyUsageFlags keyUsages
+        )
         {
             KeyUsageFlagsAsn keyUsagesAsn;
 
@@ -64,14 +67,15 @@ namespace System.Security.Cryptography.X509Certificates
             // line up with the existing X509KeyUsageFlags.
 
             keyUsages =
-                (X509KeyUsageFlags)ReverseBitOrder((byte)keyUsagesAsn) |
-                (X509KeyUsageFlags)(ReverseBitOrder((byte)(((ushort)keyUsagesAsn >> 8))) << 8);
+                (X509KeyUsageFlags)ReverseBitOrder((byte)keyUsagesAsn)
+                | (X509KeyUsageFlags)(ReverseBitOrder((byte)(((ushort)keyUsagesAsn >> 8))) << 8);
         }
 
         public virtual byte[] EncodeX509BasicConstraints2Extension(
             bool certificateAuthority,
             bool hasPathLengthConstraint,
-            int pathLengthConstraint)
+            int pathLengthConstraint
+        )
         {
             BasicConstraintsAsn constraints = default;
 
@@ -90,7 +94,8 @@ namespace System.Security.Cryptography.X509Certificates
             byte[] encoded,
             out bool certificateAuthority,
             out bool hasPathLengthConstraint,
-            out int pathLengthConstraint)
+            out int pathLengthConstraint
+        )
         {
             // No RFC nor ITU document describes the layout of the 2.5.29.10 structure,
             // and OpenSSL doesn't have a decoder for it, either.
@@ -101,12 +106,16 @@ namespace System.Security.Cryptography.X509Certificates
         }
 
         public virtual void DecodeX509BasicConstraints2Extension(
-                byte[] encoded,
-                out bool certificateAuthority,
-                out bool hasPathLengthConstraint,
-                out int pathLengthConstraint)
+            byte[] encoded,
+            out bool certificateAuthority,
+            out bool hasPathLengthConstraint,
+            out int pathLengthConstraint
+        )
         {
-            BasicConstraintsAsn constraints = BasicConstraintsAsn.Decode(encoded, AsnEncodingRules.BER);
+            BasicConstraintsAsn constraints = BasicConstraintsAsn.Decode(
+                encoded,
+                AsnEncodingRules.BER
+            );
             certificateAuthority = constraints.CA;
             hasPathLengthConstraint = constraints.PathLengthConstraint.HasValue;
             pathLengthConstraint = constraints.PathLengthConstraint.GetValueOrDefault();
@@ -136,7 +145,10 @@ namespace System.Security.Cryptography.X509Certificates
             return writer.Encode();
         }
 
-        public virtual void DecodeX509EnhancedKeyUsageExtension(byte[] encoded, out OidCollection usages)
+        public virtual void DecodeX509EnhancedKeyUsageExtension(
+            byte[] encoded,
+            out OidCollection usages
+        )
         {
             // https://tools.ietf.org/html/rfc5924#section-4.1
             //
@@ -162,7 +174,9 @@ namespace System.Security.Cryptography.X509Certificates
             }
         }
 
-        public virtual byte[] EncodeX509SubjectKeyIdentifierExtension(ReadOnlySpan<byte> subjectKeyIdentifier)
+        public virtual byte[] EncodeX509SubjectKeyIdentifierExtension(
+            ReadOnlySpan<byte> subjectKeyIdentifier
+        )
         {
             // https://tools.ietf.org/html/rfc5280#section-4.2.1.2
             //
@@ -180,7 +194,10 @@ namespace System.Security.Cryptography.X509Certificates
             return writer.Encode();
         }
 
-        public virtual void DecodeX509SubjectKeyIdentifierExtension(byte[] encoded, out byte[] subjectKeyIdentifier)
+        public virtual void DecodeX509SubjectKeyIdentifierExtension(
+            byte[] encoded,
+            out byte[] subjectKeyIdentifier
+        )
         {
             subjectKeyIdentifier = DecodeX509SubjectKeyIdentifierExtension(encoded);
         }
@@ -195,7 +212,8 @@ namespace System.Security.Cryptography.X509Certificates
                     encoded,
                     AsnEncodingRules.BER,
                     out contents,
-                    out int consumed);
+                    out int consumed
+                );
 
                 if (!gotContents || consumed != encoded.Length)
                 {
@@ -210,14 +228,22 @@ namespace System.Security.Cryptography.X509Certificates
             return contents.ToArray();
         }
 
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Security", "CA5350", Justification = "SHA1 is required for Compat")]
+        [System.Diagnostics.CodeAnalysis.SuppressMessage(
+            "Microsoft.Security",
+            "CA5350",
+            Justification = "SHA1 is required for Compat"
+        )]
         public virtual byte[] ComputeCapiSha1OfPublicKey(PublicKey key)
         {
             // The CapiSha1 value is the SHA-1 of the SubjectPublicKeyInfo field, inclusive
             // of the DER structural bytes.
 
             SubjectPublicKeyInfoAsn spki = default;
-            spki.Algorithm = new AlgorithmIdentifierAsn { Algorithm = key.Oid!.Value!, Parameters = key.EncodedParameters.RawData };
+            spki.Algorithm = new AlgorithmIdentifierAsn
+            {
+                Algorithm = key.Oid!.Value!,
+                Parameters = key.EncodedParameters.RawData,
+            };
             spki.SubjectPublicKey = key.EncodedKeyValue.RawData;
 
             AsnWriter writer = new AsnWriter(AsnEncodingRules.DER);

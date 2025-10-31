@@ -26,7 +26,8 @@ public interface IMigrationsCodeGenerator : ILanguageBasedService
         Type contextType,
         string migrationName,
         string migrationId,
-        IModel targetModel);
+        IModel targetModel
+    );
 
     /// <summary>
     ///     Generates the migration code.
@@ -40,7 +41,8 @@ public interface IMigrationsCodeGenerator : ILanguageBasedService
         string? migrationNamespace,
         string migrationName,
         IReadOnlyList<MigrationOperation> upOperations,
-        IReadOnlyList<MigrationOperation> downOperations);
+        IReadOnlyList<MigrationOperation> downOperations
+    );
 
     /// <summary>
     ///     Generates the model snapshot code.
@@ -54,7 +56,8 @@ public interface IMigrationsCodeGenerator : ILanguageBasedService
         string? modelSnapshotNamespace,
         Type contextType,
         string modelSnapshotName,
-        IModel model);
+        IModel model
+    );
 
     /// <summary>
     ///     Gets the file extension code files should use.

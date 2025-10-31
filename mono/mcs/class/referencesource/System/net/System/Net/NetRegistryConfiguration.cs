@@ -6,21 +6,21 @@
 
 namespace System.Net
 {
-    using Microsoft.Win32;
     using System.ComponentModel;
     using System.Diagnostics;
     using System.Globalization;
     using System.IO;
     using System.Security;
     using System.Security.Permissions;
+    using Microsoft.Win32;
 
     /// <summary>
     /// Reads configuration from registry.
-    /// 
+    ///
     /// Settings convention:
     ///     * Global (all apps): HKLM\SOFTWARE\Microsoft\.NETFramework\vdotNetVersion
     ///                          configName         REG_DWORD | REG_SZ     value
-    ///                          
+    ///
     ///     * App specific: HKLM\SOFTWARE\Microsoft\.NETFramework\vdotNetVersion\configName
     ///                          fullAppExePath     REG_DWORD | REG_SZ     value
     /// </summary>
@@ -29,7 +29,7 @@ namespace System.Net
         private const string netFrameworkPath = @"SOFTWARE\Microsoft\.NETFramework";
         private const string netFrameworkVersionedPath = netFrameworkPath + @"\v{0}";
         private const string netFrameworkFullPath = @"HKEY_LOCAL_MACHINE\" + netFrameworkPath;
-               
+
         /// <summary>
         /// Reads global configuration (REG_DWORD) from registry.
         /// </summary>
@@ -39,7 +39,11 @@ namespace System.Net
         [RegistryPermission(SecurityAction.Assert, Read = netFrameworkFullPath)]
         public static int GlobalConfigReadInt(string configVariable, int defaultValue)
         {
-            object value = ReadConfig(GetNetFrameworkVersionedPath(), configVariable, RegistryValueKind.DWord);
+            object value = ReadConfig(
+                GetNetFrameworkVersionedPath(),
+                configVariable,
+                RegistryValueKind.DWord
+            );
             if (value != null)
             {
                 return (int)value;
@@ -57,7 +61,11 @@ namespace System.Net
         [RegistryPermission(SecurityAction.Assert, Read = netFrameworkFullPath)]
         public static string GlobalConfigReadString(string configVariable, string defaultValue)
         {
-            object value = ReadConfig(GetNetFrameworkVersionedPath(), configVariable, RegistryValueKind.String);
+            object value = ReadConfig(
+                GetNetFrameworkVersionedPath(),
+                configVariable,
+                RegistryValueKind.String
+            );
             if (value != null)
             {
                 return (string)value;
@@ -77,7 +85,11 @@ namespace System.Net
         [RegistryPermission(SecurityAction.Assert, Read = netFrameworkFullPath)]
         public static int AppConfigReadInt(string configVariable, int defaultValue)
         {
-            object value = ReadConfig(GetAppConfigPath(configVariable), GetAppConfigValueName(), RegistryValueKind.DWord);
+            object value = ReadConfig(
+                GetAppConfigPath(configVariable),
+                GetAppConfigValueName(),
+                RegistryValueKind.DWord
+            );
             if (value != null)
             {
                 return (int)value;
@@ -97,7 +109,11 @@ namespace System.Net
         [RegistryPermission(SecurityAction.Assert, Read = netFrameworkFullPath)]
         public static string AppConfigReadString(string configVariable, string defaultValue)
         {
-            object value = ReadConfig(GetAppConfigPath(configVariable), GetAppConfigValueName(), RegistryValueKind.String);
+            object value = ReadConfig(
+                GetAppConfigPath(configVariable),
+                GetAppConfigValueName(),
+                RegistryValueKind.String
+            );
             if (value != null)
             {
                 return (string)value;
@@ -141,15 +157,19 @@ namespace System.Net
 
             return ret;
         }
-        
+
         private static string GetNetFrameworkVersionedPath()
         {
             string versionedKeyPath = String.Format(
                 CultureInfo.InvariantCulture,
                 netFrameworkVersionedPath,
-                Environment.Version.ToString(3));
+                Environment.Version.ToString(3)
+            );
 
-            Debug.Assert(!String.IsNullOrEmpty(versionedKeyPath), ".Net Version should not be null.");
+            Debug.Assert(
+                !String.IsNullOrEmpty(versionedKeyPath),
+                ".Net Version should not be null."
+            );
 
             return versionedKeyPath;
         }
@@ -157,7 +177,12 @@ namespace System.Net
         private static string GetAppConfigPath(string valueName)
         {
             Debug.Assert(!String.IsNullOrEmpty(valueName), "valueName should not be null.");
-            return String.Format(CultureInfo.InvariantCulture, @"{0}\{1}", GetNetFrameworkVersionedPath(), valueName);
+            return String.Format(
+                CultureInfo.InvariantCulture,
+                @"{0}\{1}",
+                GetNetFrameworkVersionedPath(),
+                valueName
+            );
         }
 
         [SecurityPermission(SecurityAction.Assert, UnmanagedCode = true)]

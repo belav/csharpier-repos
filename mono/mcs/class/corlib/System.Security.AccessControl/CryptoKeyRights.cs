@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -26,26 +26,26 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
-namespace System.Security.AccessControl {
-
-	[Flags]
-	public enum CryptoKeyRights {
-		ReadData		= 0x00000001,
-		WriteData		= 0x00000002,
-		ReadExtendedAttributes	= 0x00000008,
-		WriteExtendedAttributes	= 0x00000010,
-		ReadAttributes		= 0x00000080,
-		WriteAttributes		= 0x00000100,
-		Delete			= 0x00010000,
-		ReadPermissions		= 0x00020000,
-		ChangePermissions	= 0x00040000,
-		TakeOwnership		= 0x00080000,
-		Synchronize		= 0x00100000,
-		FullControl		= 0x001F019B,
-		GenericAll		= 0x10000000,
-		GenericExecute		= 0x20000000,
-		GenericWrite		= 0x40000000,
-		GenericRead		= unchecked((int)0x80000000),	/* overflow */
-	}
+namespace System.Security.AccessControl
+{
+    [Flags]
+    public enum CryptoKeyRights
+    {
+        ReadData = 0x00000001,
+        WriteData = 0x00000002,
+        ReadExtendedAttributes = 0x00000008,
+        WriteExtendedAttributes = 0x00000010,
+        ReadAttributes = 0x00000080,
+        WriteAttributes = 0x00000100,
+        Delete = 0x00010000,
+        ReadPermissions = 0x00020000,
+        ChangePermissions = 0x00040000,
+        TakeOwnership = 0x00080000,
+        Synchronize = 0x00100000,
+        FullControl = 0x001F019B,
+        GenericAll = 0x10000000,
+        GenericExecute = 0x20000000,
+        GenericWrite = 0x40000000,
+        GenericRead = unchecked((int)0x80000000), /* overflow */
+    }
 }
-

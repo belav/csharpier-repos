@@ -4,16 +4,16 @@
 
 #nullable disable
 
+using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics;
+using System.Linq;
 using Microsoft.CodeAnalysis.CSharp.Symbols;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.CSharp.Test.Utilities;
 using Microsoft.CodeAnalysis.Test.Utilities;
 using Roslyn.Test.Utilities;
 using Xunit;
-using System.Linq;
-using System.Diagnostics;
-using System.Collections;
 
 namespace Microsoft.CodeAnalysis.CSharp.UnitTests
 {
@@ -23,14 +23,36 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
     /// </summary>
     public class BetterCandidates : CompilingTestBase
     {
-        private CSharpCompilation CreateCompilationWithoutBetterCandidates(string source, CSharpCompilationOptions options = null, MetadataReference[] references = null)
+        private CSharpCompilation CreateCompilationWithoutBetterCandidates(
+            string source,
+            CSharpCompilationOptions options = null,
+            MetadataReference[] references = null
+        )
         {
-            return CreateCompilation(source, options: options, references: references, parseOptions: TestOptions.WithoutImprovedOverloadCandidates);
+            return CreateCompilation(
+                source,
+                options: options,
+                references: references,
+                parseOptions: TestOptions.WithoutImprovedOverloadCandidates
+            );
         }
-        private CSharpCompilation CreateCompilationWithBetterCandidates(string source, CSharpCompilationOptions options = null, MetadataReference[] references = null)
+
+        private CSharpCompilation CreateCompilationWithBetterCandidates(
+            string source,
+            CSharpCompilationOptions options = null,
+            MetadataReference[] references = null
+        )
         {
-            Debug.Assert(TestOptions.Regular.LanguageVersion >= MessageID.IDS_FeatureImprovedOverloadCandidates.RequiredVersion());
-            return CreateCompilation(source, options: options, references: references, parseOptions: TestOptions.Regular);
+            Debug.Assert(
+                TestOptions.Regular.LanguageVersion
+                    >= MessageID.IDS_FeatureImprovedOverloadCandidates.RequiredVersion()
+            );
+            return CreateCompilation(
+                source,
+                options: options,
+                references: references,
+                parseOptions: TestOptions.Regular
+            );
         }
 
         //When a method group contains both instance and static members, we discard the instance members if invoked with a static receiver.
@@ -38,7 +60,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         public void TestStaticReceiver01()
         {
             var source =
-@"class Program
+                @"class Program
 {
     public static void Main()
     {
@@ -50,12 +72,19 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
 class A {}
 class B {}
 ";
-            CreateCompilationWithoutBetterCandidates(source, options: TestOptions.ReleaseExe).VerifyDiagnostics(
-                // (5,17): error CS0121: The call is ambiguous between the following methods or properties: 'Program.M(A)' and 'Program.M(B)'
-                //         Program.M(null);
-                Diagnostic(ErrorCode.ERR_AmbigCall, "M").WithArguments("Program.M(A)", "Program.M(B)").WithLocation(5, 17)
+            CreateCompilationWithoutBetterCandidates(source, options: TestOptions.ReleaseExe)
+                .VerifyDiagnostics(
+                    // (5,17): error CS0121: The call is ambiguous between the following methods or properties: 'Program.M(A)' and 'Program.M(B)'
+                    //         Program.M(null);
+                    Diagnostic(ErrorCode.ERR_AmbigCall, "M")
+                        .WithArguments("Program.M(A)", "Program.M(B)")
+                        .WithLocation(5, 17)
                 );
-            var compilation = CreateCompilationWithBetterCandidates(source, options: TestOptions.ReleaseExe).VerifyDiagnostics();
+            var compilation = CreateCompilationWithBetterCandidates(
+                    source,
+                    options: TestOptions.ReleaseExe
+                )
+                .VerifyDiagnostics();
             CompileAndVerify(compilation, expectedOutput: "1");
         }
 
@@ -64,7 +93,7 @@ class B {}
         public void TestInstanceReceiver01()
         {
             var source =
-@"class Program
+                @"class Program
 {
     public static void Main()
     {
@@ -77,12 +106,19 @@ class B {}
 class A {}
 class B {}
 ";
-            CreateCompilationWithoutBetterCandidates(source, options: TestOptions.ReleaseExe).VerifyDiagnostics(
-                // (6,11): error CS0121: The call is ambiguous between the following methods or properties: 'Program.M(A)' and 'Program.M(B)'
-                //         p.M(null);
-                Diagnostic(ErrorCode.ERR_AmbigCall, "M").WithArguments("Program.M(A)", "Program.M(B)").WithLocation(6, 11)
+            CreateCompilationWithoutBetterCandidates(source, options: TestOptions.ReleaseExe)
+                .VerifyDiagnostics(
+                    // (6,11): error CS0121: The call is ambiguous between the following methods or properties: 'Program.M(A)' and 'Program.M(B)'
+                    //         p.M(null);
+                    Diagnostic(ErrorCode.ERR_AmbigCall, "M")
+                        .WithArguments("Program.M(A)", "Program.M(B)")
+                        .WithLocation(6, 11)
                 );
-            var compilation = CreateCompilationWithBetterCandidates(source, options: TestOptions.ReleaseExe).VerifyDiagnostics();
+            var compilation = CreateCompilationWithBetterCandidates(
+                    source,
+                    options: TestOptions.ReleaseExe
+                )
+                .VerifyDiagnostics();
             CompileAndVerify(compilation, expectedOutput: "2");
         }
 
@@ -91,7 +127,7 @@ class B {}
         public void TestInstanceReceiver02()
         {
             var source =
-@"class Program
+                @"class Program
 {
     public static void Main()
     {
@@ -108,12 +144,19 @@ class B {}
 class A {}
 class B {}
 ";
-            CreateCompilationWithoutBetterCandidates(source, options: TestOptions.ReleaseExe).VerifyDiagnostics(
-                // (10,14): error CS0121: The call is ambiguous between the following methods or properties: 'Program.M(A)' and 'Program.M(B)'
-                //         this.M(null);
-                Diagnostic(ErrorCode.ERR_AmbigCall, "M").WithArguments("Program.M(A)", "Program.M(B)").WithLocation(10, 14)
+            CreateCompilationWithoutBetterCandidates(source, options: TestOptions.ReleaseExe)
+                .VerifyDiagnostics(
+                    // (10,14): error CS0121: The call is ambiguous between the following methods or properties: 'Program.M(A)' and 'Program.M(B)'
+                    //         this.M(null);
+                    Diagnostic(ErrorCode.ERR_AmbigCall, "M")
+                        .WithArguments("Program.M(A)", "Program.M(B)")
+                        .WithLocation(10, 14)
                 );
-            var compilation = CreateCompilationWithBetterCandidates(source, options: TestOptions.ReleaseExe).VerifyDiagnostics();
+            var compilation = CreateCompilationWithBetterCandidates(
+                    source,
+                    options: TestOptions.ReleaseExe
+                )
+                .VerifyDiagnostics();
             CompileAndVerify(compilation, expectedOutput: "2");
         }
 
@@ -122,7 +165,7 @@ class B {}
         public void TestInstanceReceiver02b()
         {
             var source =
-@"class Program
+                @"class Program
 {
     public static void Main()
     {
@@ -142,12 +185,19 @@ class D : Program
 class A {}
 class B {}
 ";
-            CreateCompilationWithoutBetterCandidates(source, options: TestOptions.ReleaseExe).VerifyDiagnostics(
-                // (15,14): error CS0121: The call is ambiguous between the following methods or properties: 'Program.M(A)' and 'Program.M(B)'
-                //         base.M(null);
-                Diagnostic(ErrorCode.ERR_AmbigCall, "M").WithArguments("Program.M(A)", "Program.M(B)").WithLocation(15, 14)
+            CreateCompilationWithoutBetterCandidates(source, options: TestOptions.ReleaseExe)
+                .VerifyDiagnostics(
+                    // (15,14): error CS0121: The call is ambiguous between the following methods or properties: 'Program.M(A)' and 'Program.M(B)'
+                    //         base.M(null);
+                    Diagnostic(ErrorCode.ERR_AmbigCall, "M")
+                        .WithArguments("Program.M(A)", "Program.M(B)")
+                        .WithLocation(15, 14)
                 );
-            var compilation = CreateCompilationWithBetterCandidates(source, options: TestOptions.ReleaseExe).VerifyDiagnostics();
+            var compilation = CreateCompilationWithBetterCandidates(
+                    source,
+                    options: TestOptions.ReleaseExe
+                )
+                .VerifyDiagnostics();
             CompileAndVerify(compilation, expectedOutput: "2");
         }
 
@@ -156,7 +206,7 @@ class B {}
         public void TestInstanceReceiver03()
         {
             var source =
-@"class Program
+                @"class Program
 {
     public static void Main()
     {
@@ -175,12 +225,19 @@ class MyCollection : System.Collections.IEnumerable
     }
 }
 ";
-            CreateCompilationWithoutBetterCandidates(source, options: TestOptions.ReleaseExe).VerifyDiagnostics(
-                // (5,28): error CS0121: The call is ambiguous between the following methods or properties: 'MyCollection.Add(A)' and 'MyCollection.Add(B)'
-                //         new MyCollection { null };
-                Diagnostic(ErrorCode.ERR_AmbigCall, "null").WithArguments("MyCollection.Add(A)", "MyCollection.Add(B)").WithLocation(5, 28)
+            CreateCompilationWithoutBetterCandidates(source, options: TestOptions.ReleaseExe)
+                .VerifyDiagnostics(
+                    // (5,28): error CS0121: The call is ambiguous between the following methods or properties: 'MyCollection.Add(A)' and 'MyCollection.Add(B)'
+                    //         new MyCollection { null };
+                    Diagnostic(ErrorCode.ERR_AmbigCall, "null")
+                        .WithArguments("MyCollection.Add(A)", "MyCollection.Add(B)")
+                        .WithLocation(5, 28)
                 );
-            var compilation = CreateCompilationWithBetterCandidates(source, options: TestOptions.ReleaseExe).VerifyDiagnostics();
+            var compilation = CreateCompilationWithBetterCandidates(
+                    source,
+                    options: TestOptions.ReleaseExe
+                )
+                .VerifyDiagnostics();
             CompileAndVerify(compilation, expectedOutput: "2");
         }
 
@@ -189,7 +246,7 @@ class MyCollection : System.Collections.IEnumerable
         public void TestInstanceReceiver04()
         {
             var source =
-@"class Program
+                @"class Program
 {
     public static void Main()
     {
@@ -222,12 +279,19 @@ class MyEnumerator : System.Collections.IEnumerator
     void System.Collections.IEnumerator.Reset() => throw null;
 }
 ";
-            CreateCompilationWithoutBetterCandidates(source, options: TestOptions.ReleaseExe).VerifyDiagnostics(
-                // (6,27): warning CS0279: 'MyCollection' does not implement the 'collection' pattern. 'MyCollection.GetEnumerator()' is not a public instance or extension method.
-                //         foreach (var q in c) { }
-                Diagnostic(ErrorCode.WRN_PatternNotPublicOrNotInstance, "c").WithArguments("MyCollection", "collection", "MyCollection.GetEnumerator()").WithLocation(6, 27)
+            CreateCompilationWithoutBetterCandidates(source, options: TestOptions.ReleaseExe)
+                .VerifyDiagnostics(
+                    // (6,27): warning CS0279: 'MyCollection' does not implement the 'collection' pattern. 'MyCollection.GetEnumerator()' is not a public instance or extension method.
+                    //         foreach (var q in c) { }
+                    Diagnostic(ErrorCode.WRN_PatternNotPublicOrNotInstance, "c")
+                        .WithArguments("MyCollection", "collection", "MyCollection.GetEnumerator()")
+                        .WithLocation(6, 27)
                 );
-            var compilation = CreateCompilationWithBetterCandidates(source, options: TestOptions.ReleaseExe).VerifyDiagnostics();
+            var compilation = CreateCompilationWithBetterCandidates(
+                    source,
+                    options: TestOptions.ReleaseExe
+                )
+                .VerifyDiagnostics();
             CompileAndVerify(compilation, expectedOutput: "12");
         }
 
@@ -236,7 +300,7 @@ class MyEnumerator : System.Collections.IEnumerator
         public void TestInstanceReceiver05()
         {
             var source =
-@"class Program
+                @"class Program
 {
     public static void Main()
     {
@@ -264,18 +328,29 @@ class MyEnumerator
     public static bool MoveNext() => throw null;
 }
 ";
-            CreateCompilationWithoutBetterCandidates(source, options: TestOptions.ReleaseExe).VerifyDiagnostics(
-                // (26,24): error CS0111: Type 'MyEnumerator' already defines a member called 'MoveNext' with the same parameter types
-                //     public static bool MoveNext() => throw null;
-                Diagnostic(ErrorCode.ERR_MemberAlreadyExists, "MoveNext").WithArguments("MoveNext", "MyEnumerator").WithLocation(26, 24),
-                // (6,27): error CS0202: foreach requires that the return type 'MyEnumerator' of 'MyCollection.GetEnumerator()' must have a suitable public 'MoveNext' method and public 'Current' property
-                //         foreach (var q in c) { }
-                Diagnostic(ErrorCode.ERR_BadGetEnumerator, "c").WithArguments("MyEnumerator", "MyCollection.GetEnumerator()").WithLocation(6, 27)
+            CreateCompilationWithoutBetterCandidates(source, options: TestOptions.ReleaseExe)
+                .VerifyDiagnostics(
+                    // (26,24): error CS0111: Type 'MyEnumerator' already defines a member called 'MoveNext' with the same parameter types
+                    //     public static bool MoveNext() => throw null;
+                    Diagnostic(ErrorCode.ERR_MemberAlreadyExists, "MoveNext")
+                        .WithArguments("MoveNext", "MyEnumerator")
+                        .WithLocation(26, 24),
+                    // (6,27): error CS0202: foreach requires that the return type 'MyEnumerator' of 'MyCollection.GetEnumerator()' must have a suitable public 'MoveNext' method and public 'Current' property
+                    //         foreach (var q in c) { }
+                    Diagnostic(ErrorCode.ERR_BadGetEnumerator, "c")
+                        .WithArguments("MyEnumerator", "MyCollection.GetEnumerator()")
+                        .WithLocation(6, 27)
                 );
-            var compilation = CreateCompilationWithBetterCandidates(source, options: TestOptions.ReleaseExe).VerifyDiagnostics(
-                // (26,24): error CS0111: Type 'MyEnumerator' already defines a member called 'MoveNext' with the same parameter types
-                //     public static bool MoveNext() => throw null;
-                Diagnostic(ErrorCode.ERR_MemberAlreadyExists, "MoveNext").WithArguments("MoveNext", "MyEnumerator").WithLocation(26, 24)
+            var compilation = CreateCompilationWithBetterCandidates(
+                    source,
+                    options: TestOptions.ReleaseExe
+                )
+                .VerifyDiagnostics(
+                    // (26,24): error CS0111: Type 'MyEnumerator' already defines a member called 'MoveNext' with the same parameter types
+                    //     public static bool MoveNext() => throw null;
+                    Diagnostic(ErrorCode.ERR_MemberAlreadyExists, "MoveNext")
+                        .WithArguments("MoveNext", "MyEnumerator")
+                        .WithLocation(26, 24)
                 );
         }
 
@@ -284,7 +359,7 @@ class MyEnumerator
         public void TestInstanceReceiver06()
         {
             var source =
-@"class Program
+                @"class Program
 {
     public static void Main()
     {
@@ -299,19 +374,38 @@ class MyDeconstructable
     public static void Deconstruct(out long a, out long b) => (a, b) = (3, 4);
 }
 ";
-            CreateCompilationWithoutBetterCandidates(source, options: TestOptions.ReleaseExe).VerifyDiagnostics(
-                // (6,26): error CS0121: The call is ambiguous between the following methods or properties: 'MyDeconstructable.Deconstruct(out int, out int)' and 'MyDeconstructable.Deconstruct(out long, out long)'
-                //         (var a, var b) = o;
-                Diagnostic(ErrorCode.ERR_AmbigCall, "o").WithArguments("MyDeconstructable.Deconstruct(out int, out int)", "MyDeconstructable.Deconstruct(out long, out long)").WithLocation(6, 26),
-                // (6,14): error CS8130: Cannot infer the type of implicitly-typed deconstruction variable 'a'.
-                //         (var a, var b) = o;
-                Diagnostic(ErrorCode.ERR_TypeInferenceFailedForImplicitlyTypedDeconstructionVariable, "a").WithArguments("a").WithLocation(6, 14),
-                // (6,21): error CS8130: Cannot infer the type of implicitly-typed deconstruction variable 'b'.
-                //         (var a, var b) = o;
-                Diagnostic(ErrorCode.ERR_TypeInferenceFailedForImplicitlyTypedDeconstructionVariable, "b").WithArguments("b").WithLocation(6, 21)
+            CreateCompilationWithoutBetterCandidates(source, options: TestOptions.ReleaseExe)
+                .VerifyDiagnostics(
+                    // (6,26): error CS0121: The call is ambiguous between the following methods or properties: 'MyDeconstructable.Deconstruct(out int, out int)' and 'MyDeconstructable.Deconstruct(out long, out long)'
+                    //         (var a, var b) = o;
+                    Diagnostic(ErrorCode.ERR_AmbigCall, "o")
+                        .WithArguments(
+                            "MyDeconstructable.Deconstruct(out int, out int)",
+                            "MyDeconstructable.Deconstruct(out long, out long)"
+                        )
+                        .WithLocation(6, 26),
+                    // (6,14): error CS8130: Cannot infer the type of implicitly-typed deconstruction variable 'a'.
+                    //         (var a, var b) = o;
+                    Diagnostic(
+                            ErrorCode.ERR_TypeInferenceFailedForImplicitlyTypedDeconstructionVariable,
+                            "a"
+                        )
+                        .WithArguments("a")
+                        .WithLocation(6, 14),
+                    // (6,21): error CS8130: Cannot infer the type of implicitly-typed deconstruction variable 'b'.
+                    //         (var a, var b) = o;
+                    Diagnostic(
+                            ErrorCode.ERR_TypeInferenceFailedForImplicitlyTypedDeconstructionVariable,
+                            "b"
+                        )
+                        .WithArguments("b")
+                        .WithLocation(6, 21)
                 );
-            var compilation = CreateCompilationWithBetterCandidates(source, options: TestOptions.ReleaseExe).VerifyDiagnostics(
-                );
+            var compilation = CreateCompilationWithBetterCandidates(
+                    source,
+                    options: TestOptions.ReleaseExe
+                )
+                .VerifyDiagnostics();
             CompileAndVerify(compilation, expectedOutput: "1");
         }
 
@@ -320,7 +414,7 @@ class MyDeconstructable
         public void TestInstanceReceiver07()
         {
             var source =
-@"class Program
+                @"class Program
 {
     public static void Main()
     {
@@ -354,15 +448,24 @@ public class MyTaskAwaiter<TResult> : System.Runtime.CompilerServices.INotifyCom
     public void OnCompleted(System.Action continuation) => throw null;
 }
 ";
-            CreateCompilationWithoutBetterCandidates(source, options: TestOptions.ReleaseExe).VerifyDiagnostics(
-                // (9,17): error CS1986: 'await' requires that the type MyTask<int> have a suitable GetAwaiter method
-                //         var z = await x;
-                Diagnostic(ErrorCode.ERR_BadAwaitArg, "await x").WithArguments("MyTask<int>").WithLocation(9, 17)
+            CreateCompilationWithoutBetterCandidates(source, options: TestOptions.ReleaseExe)
+                .VerifyDiagnostics(
+                    // (9,17): error CS1986: 'await' requires that the type MyTask<int> have a suitable GetAwaiter method
+                    //         var z = await x;
+                    Diagnostic(ErrorCode.ERR_BadAwaitArg, "await x")
+                        .WithArguments("MyTask<int>")
+                        .WithLocation(9, 17)
                 );
-            var compilation = CreateCompilationWithBetterCandidates(source, options: TestOptions.ReleaseExe).VerifyDiagnostics(
-                // (9,17): error CS1986: 'await' requires that the type MyTask<int> have a suitable GetAwaiter method
-                //         var z = await x;
-                Diagnostic(ErrorCode.ERR_BadAwaitArg, "await x").WithArguments("MyTask<int>").WithLocation(9, 17)
+            var compilation = CreateCompilationWithBetterCandidates(
+                    source,
+                    options: TestOptions.ReleaseExe
+                )
+                .VerifyDiagnostics(
+                    // (9,17): error CS1986: 'await' requires that the type MyTask<int> have a suitable GetAwaiter method
+                    //         var z = await x;
+                    Diagnostic(ErrorCode.ERR_BadAwaitArg, "await x")
+                        .WithArguments("MyTask<int>")
+                        .WithLocation(9, 17)
                 );
         }
 
@@ -371,7 +474,7 @@ public class MyTaskAwaiter<TResult> : System.Runtime.CompilerServices.INotifyCom
         public void TestInstanceReceiver08()
         {
             var source =
-@"class Program
+                @"class Program
 {
     public static void Main()
     {
@@ -405,15 +508,24 @@ public struct MyTaskAwaiter<TResult> : System.Runtime.CompilerServices.INotifyCo
     public void OnCompleted(System.Action continuation) => throw null;
 }
 ";
-            CreateCompilationWithoutBetterCandidates(source, options: TestOptions.ReleaseExe).VerifyDiagnostics(
-                // (9,17): error CS0176: Member 'MyTaskAwaiter<int>.GetResult()' cannot be accessed with an instance reference; qualify it with a type name instead
-                //         var z = await x;
-                Diagnostic(ErrorCode.ERR_ObjectProhibited, "await x").WithArguments("MyTaskAwaiter<int>.GetResult()").WithLocation(9, 17)
+            CreateCompilationWithoutBetterCandidates(source, options: TestOptions.ReleaseExe)
+                .VerifyDiagnostics(
+                    // (9,17): error CS0176: Member 'MyTaskAwaiter<int>.GetResult()' cannot be accessed with an instance reference; qualify it with a type name instead
+                    //         var z = await x;
+                    Diagnostic(ErrorCode.ERR_ObjectProhibited, "await x")
+                        .WithArguments("MyTaskAwaiter<int>.GetResult()")
+                        .WithLocation(9, 17)
                 );
-            var compilation = CreateCompilationWithBetterCandidates(source, options: TestOptions.ReleaseExe).VerifyDiagnostics(
-                // (9,17): error CS0176: Member 'MyTaskAwaiter<int>.GetResult()' cannot be accessed with an instance reference; qualify it with a type name instead
-                //         var z = await x;
-                Diagnostic(ErrorCode.ERR_ObjectProhibited, "await x").WithArguments("MyTaskAwaiter<int>.GetResult()").WithLocation(9, 17)
+            var compilation = CreateCompilationWithBetterCandidates(
+                    source,
+                    options: TestOptions.ReleaseExe
+                )
+                .VerifyDiagnostics(
+                    // (9,17): error CS0176: Member 'MyTaskAwaiter<int>.GetResult()' cannot be accessed with an instance reference; qualify it with a type name instead
+                    //         var z = await x;
+                    Diagnostic(ErrorCode.ERR_ObjectProhibited, "await x")
+                        .WithArguments("MyTaskAwaiter<int>.GetResult()")
+                        .WithLocation(9, 17)
                 );
         }
 
@@ -422,7 +534,7 @@ public struct MyTaskAwaiter<TResult> : System.Runtime.CompilerServices.INotifyCo
         public void TestInstanceReceiver09()
         {
             var source =
-@"using System;
+                @"using System;
 class Program
 {
     static void Main()
@@ -446,13 +558,19 @@ class Q
 class A {}
 class B {}
 ";
-            CreateCompilationWithoutBetterCandidates(source, options: TestOptions.ReleaseExe).VerifyDiagnostics(
-                // (6,35): error CS1940: Multiple implementations of the query pattern were found for source type 'Q'.  Ambiguous call to 'Select'.
-                //         var q = from x in new Q() select x;
-                Diagnostic(ErrorCode.ERR_QueryMultipleProviders, "select x").WithArguments("Q", "Select").WithLocation(6, 35)
+            CreateCompilationWithoutBetterCandidates(source, options: TestOptions.ReleaseExe)
+                .VerifyDiagnostics(
+                    // (6,35): error CS1940: Multiple implementations of the query pattern were found for source type 'Q'.  Ambiguous call to 'Select'.
+                    //         var q = from x in new Q() select x;
+                    Diagnostic(ErrorCode.ERR_QueryMultipleProviders, "select x")
+                        .WithArguments("Q", "Select")
+                        .WithLocation(6, 35)
                 );
-            var compilation = CreateCompilationWithBetterCandidates(source, options: TestOptions.ReleaseExe).VerifyDiagnostics(
-                );
+            var compilation = CreateCompilationWithBetterCandidates(
+                    source,
+                    options: TestOptions.ReleaseExe
+                )
+                .VerifyDiagnostics();
             CompileAndVerify(compilation, expectedOutput: "2");
         }
 
@@ -462,7 +580,7 @@ class B {}
         public void TestStaticContext01()
         {
             var source =
-@"class Program
+                @"class Program
 {
     public static void Main()
     {
@@ -474,13 +592,19 @@ class B {}
 class A {}
 class B {}
 ";
-            CreateCompilationWithoutBetterCandidates(source, options: TestOptions.ReleaseExe).VerifyDiagnostics(
-                // (5,9): error CS0121: The call is ambiguous between the following methods or properties: 'Program.M(A)' and 'Program.M(B)'
-                //         M(null);
-                Diagnostic(ErrorCode.ERR_AmbigCall, "M").WithArguments("Program.M(A)", "Program.M(B)").WithLocation(5, 9)
+            CreateCompilationWithoutBetterCandidates(source, options: TestOptions.ReleaseExe)
+                .VerifyDiagnostics(
+                    // (5,9): error CS0121: The call is ambiguous between the following methods or properties: 'Program.M(A)' and 'Program.M(B)'
+                    //         M(null);
+                    Diagnostic(ErrorCode.ERR_AmbigCall, "M")
+                        .WithArguments("Program.M(A)", "Program.M(B)")
+                        .WithLocation(5, 9)
                 );
-            var compilation = CreateCompilationWithBetterCandidates(source, options: TestOptions.ReleaseExe).VerifyDiagnostics(
-                );
+            var compilation = CreateCompilationWithBetterCandidates(
+                    source,
+                    options: TestOptions.ReleaseExe
+                )
+                .VerifyDiagnostics();
             CompileAndVerify(compilation, expectedOutput: "1");
         }
 
@@ -490,7 +614,7 @@ class B {}
         public void TestStaticContext02()
         {
             var source =
-@"class Program
+                @"class Program
 {
     public static void Main()
     {
@@ -503,13 +627,19 @@ class B {}
 class A {}
 class B {}
 ";
-            CreateCompilationWithoutBetterCandidates(source, options: TestOptions.ReleaseExe).VerifyDiagnostics(
-                // (9,13): error CS0121: The call is ambiguous between the following methods or properties: 'Program.M(A)' and 'Program.M(B)'
-                //     int X = M(null);
-                Diagnostic(ErrorCode.ERR_AmbigCall, "M").WithArguments("Program.M(A)", "Program.M(B)").WithLocation(9, 13)
+            CreateCompilationWithoutBetterCandidates(source, options: TestOptions.ReleaseExe)
+                .VerifyDiagnostics(
+                    // (9,13): error CS0121: The call is ambiguous between the following methods or properties: 'Program.M(A)' and 'Program.M(B)'
+                    //     int X = M(null);
+                    Diagnostic(ErrorCode.ERR_AmbigCall, "M")
+                        .WithArguments("Program.M(A)", "Program.M(B)")
+                        .WithLocation(9, 13)
                 );
-            var compilation = CreateCompilationWithBetterCandidates(source, options: TestOptions.ReleaseExe).VerifyDiagnostics(
-                );
+            var compilation = CreateCompilationWithBetterCandidates(
+                    source,
+                    options: TestOptions.ReleaseExe
+                )
+                .VerifyDiagnostics();
             CompileAndVerify(compilation, expectedOutput: "1");
         }
 
@@ -519,7 +649,7 @@ class B {}
         public void TestStaticContext04()
         {
             var source =
-@"class Program
+                @"class Program
 {
     public static void Main()
     {
@@ -533,13 +663,19 @@ class B {}
 class A {}
 class B {}
 ";
-            CreateCompilationWithoutBetterCandidates(source, options: TestOptions.ReleaseExe).VerifyDiagnostics(
-                // (7,29): error CS0121: The call is ambiguous between the following methods or properties: 'Program.M(A)' and 'Program.M(B)'
-                //     public Program() : this(M(null)) {}
-                Diagnostic(ErrorCode.ERR_AmbigCall, "M").WithArguments("Program.M(A)", "Program.M(B)").WithLocation(7, 29)
+            CreateCompilationWithoutBetterCandidates(source, options: TestOptions.ReleaseExe)
+                .VerifyDiagnostics(
+                    // (7,29): error CS0121: The call is ambiguous between the following methods or properties: 'Program.M(A)' and 'Program.M(B)'
+                    //     public Program() : this(M(null)) {}
+                    Diagnostic(ErrorCode.ERR_AmbigCall, "M")
+                        .WithArguments("Program.M(A)", "Program.M(B)")
+                        .WithLocation(7, 29)
                 );
-            var compilation = CreateCompilationWithBetterCandidates(source, options: TestOptions.ReleaseExe).VerifyDiagnostics(
-                );
+            var compilation = CreateCompilationWithBetterCandidates(
+                    source,
+                    options: TestOptions.ReleaseExe
+                )
+                .VerifyDiagnostics();
             CompileAndVerify(compilation, expectedOutput: "1");
         }
 
@@ -549,7 +685,7 @@ class B {}
         public void TestStaticContext05()
         {
             var source =
-@"public class Program
+                @"public class Program
 {
     public static int M(A a) { System.Console.WriteLine(1); return 1; }
     public int M(B b) { System.Console.WriteLine(2); return 2; }
@@ -564,15 +700,19 @@ public class MyAttribute : System.Attribute
     public MyAttribute(int value) {}
 }
 ";
-            CreateCompilationWithoutBetterCandidates(source, options: TestOptions.ReleaseDll).VerifyDiagnostics(
-                // (6,9): error CS0121: The call is ambiguous between the following methods or properties: 'Program.M(A)' and 'Program.M(B)'
-                //     [My(M(null))]
-                Diagnostic(ErrorCode.ERR_AmbigCall, "M").WithArguments("Program.M(A)", "Program.M(B)").WithLocation(6, 9)
+            CreateCompilationWithoutBetterCandidates(source, options: TestOptions.ReleaseDll)
+                .VerifyDiagnostics(
+                    // (6,9): error CS0121: The call is ambiguous between the following methods or properties: 'Program.M(A)' and 'Program.M(B)'
+                    //     [My(M(null))]
+                    Diagnostic(ErrorCode.ERR_AmbigCall, "M")
+                        .WithArguments("Program.M(A)", "Program.M(B)")
+                        .WithLocation(6, 9)
                 );
-            CreateCompilationWithBetterCandidates(source, options: TestOptions.ReleaseDll).VerifyDiagnostics(
-                // (6,9): error CS0182: An attribute argument must be a constant expression, typeof expression or array creation expression of an attribute parameter type
-                //     [My(M(null))]
-                Diagnostic(ErrorCode.ERR_BadAttributeArgument, "M(null)").WithLocation(6, 9)
+            CreateCompilationWithBetterCandidates(source, options: TestOptions.ReleaseDll)
+                .VerifyDiagnostics(
+                    // (6,9): error CS0182: An attribute argument must be a constant expression, typeof expression or array creation expression of an attribute parameter type
+                    //     [My(M(null))]
+                    Diagnostic(ErrorCode.ERR_BadAttributeArgument, "M(null)").WithLocation(6, 9)
                 );
         }
 
@@ -582,7 +722,7 @@ public class MyAttribute : System.Attribute
         public void TestStaticContext06()
         {
             var source =
-@"public class Program
+                @"public class Program
 {
     public static int M(A a) { System.Console.WriteLine(1); return 1; }
     public int M(B b) { System.Console.WriteLine(2); return 2; }
@@ -593,15 +733,21 @@ public class MyAttribute : System.Attribute
 public class A {}
 public class B {}
 ";
-            CreateCompilationWithoutBetterCandidates(source, options: TestOptions.ReleaseDll).VerifyDiagnostics(
-                // (5,27): error CS0121: The call is ambiguous between the following methods or properties: 'Program.M(A)' and 'Program.M(B)'
-                //     public void Q(int x = M(null))
-                Diagnostic(ErrorCode.ERR_AmbigCall, "M").WithArguments("Program.M(A)", "Program.M(B)").WithLocation(5, 27)
+            CreateCompilationWithoutBetterCandidates(source, options: TestOptions.ReleaseDll)
+                .VerifyDiagnostics(
+                    // (5,27): error CS0121: The call is ambiguous between the following methods or properties: 'Program.M(A)' and 'Program.M(B)'
+                    //     public void Q(int x = M(null))
+                    Diagnostic(ErrorCode.ERR_AmbigCall, "M")
+                        .WithArguments("Program.M(A)", "Program.M(B)")
+                        .WithLocation(5, 27)
                 );
-            CreateCompilationWithBetterCandidates(source, options: TestOptions.ReleaseDll).VerifyDiagnostics(
-                // (5,27): error CS0121: The call is ambiguous between the following methods or properties: 'Program.M(A)' and 'Program.M(B)'
-                //     public void Q(int x = M(null))
-                Diagnostic(ErrorCode.ERR_AmbigCall, "M").WithArguments("Program.M(A)", "Program.M(B)").WithLocation(5, 27)
+            CreateCompilationWithBetterCandidates(source, options: TestOptions.ReleaseDll)
+                .VerifyDiagnostics(
+                    // (5,27): error CS0121: The call is ambiguous between the following methods or properties: 'Program.M(A)' and 'Program.M(B)'
+                    //     public void Q(int x = M(null))
+                    Diagnostic(ErrorCode.ERR_AmbigCall, "M")
+                        .WithArguments("Program.M(A)", "Program.M(B)")
+                        .WithLocation(5, 27)
                 );
         }
 
@@ -610,7 +756,7 @@ public class B {}
         public void TestInstanceContext01()
         {
             var source =
-@"public class Program
+                @"public class Program
 {
     public void M()
     {
@@ -623,15 +769,21 @@ public class B {}
 public class A {}
 public class B {}
 ";
-            CreateCompilationWithoutBetterCandidates(source, options: TestOptions.ReleaseDll).VerifyDiagnostics(
-                // (5,9): error CS0121: The call is ambiguous between the following methods or properties: 'Program.M(A)' and 'Program.M(B)'
-                //         M(null);
-                Diagnostic(ErrorCode.ERR_AmbigCall, "M").WithArguments("Program.M(A)", "Program.M(B)").WithLocation(5, 9)
+            CreateCompilationWithoutBetterCandidates(source, options: TestOptions.ReleaseDll)
+                .VerifyDiagnostics(
+                    // (5,9): error CS0121: The call is ambiguous between the following methods or properties: 'Program.M(A)' and 'Program.M(B)'
+                    //         M(null);
+                    Diagnostic(ErrorCode.ERR_AmbigCall, "M")
+                        .WithArguments("Program.M(A)", "Program.M(B)")
+                        .WithLocation(5, 9)
                 );
-            CreateCompilationWithBetterCandidates(source, options: TestOptions.ReleaseDll).VerifyDiagnostics(
-                // (5,9): error CS0121: The call is ambiguous between the following methods or properties: 'Program.M(A)' and 'Program.M(B)'
-                //         M(null);
-                Diagnostic(ErrorCode.ERR_AmbigCall, "M").WithArguments("Program.M(A)", "Program.M(B)").WithLocation(5, 9)
+            CreateCompilationWithBetterCandidates(source, options: TestOptions.ReleaseDll)
+                .VerifyDiagnostics(
+                    // (5,9): error CS0121: The call is ambiguous between the following methods or properties: 'Program.M(A)' and 'Program.M(B)'
+                    //         M(null);
+                    Diagnostic(ErrorCode.ERR_AmbigCall, "M")
+                        .WithArguments("Program.M(A)", "Program.M(B)")
+                        .WithLocation(5, 9)
                 );
         }
 
@@ -640,7 +792,7 @@ public class B {}
         public void TestAmbiguousContext01()
         {
             var source =
-@"public class Color
+                @"public class Color
 {
     public void M()
     {
@@ -654,15 +806,21 @@ public class B {}
 public class A {}
 public class B {}
 ";
-            CreateCompilationWithoutBetterCandidates(source, options: TestOptions.ReleaseDll).VerifyDiagnostics(
-                // (6,15): error CS0121: The call is ambiguous between the following methods or properties: 'Color.M(A)' and 'Color.M(B)'
-                //         Color.M(null);
-                Diagnostic(ErrorCode.ERR_AmbigCall, "M").WithArguments("Color.M(A)", "Color.M(B)").WithLocation(6, 15)
+            CreateCompilationWithoutBetterCandidates(source, options: TestOptions.ReleaseDll)
+                .VerifyDiagnostics(
+                    // (6,15): error CS0121: The call is ambiguous between the following methods or properties: 'Color.M(A)' and 'Color.M(B)'
+                    //         Color.M(null);
+                    Diagnostic(ErrorCode.ERR_AmbigCall, "M")
+                        .WithArguments("Color.M(A)", "Color.M(B)")
+                        .WithLocation(6, 15)
                 );
-            CreateCompilationWithBetterCandidates(source, options: TestOptions.ReleaseDll).VerifyDiagnostics(
-                // (6,15): error CS0121: The call is ambiguous between the following methods or properties: 'Color.M(A)' and 'Color.M(B)'
-                //         Color.M(null);
-                Diagnostic(ErrorCode.ERR_AmbigCall, "M").WithArguments("Color.M(A)", "Color.M(B)").WithLocation(6, 15)
+            CreateCompilationWithBetterCandidates(source, options: TestOptions.ReleaseDll)
+                .VerifyDiagnostics(
+                    // (6,15): error CS0121: The call is ambiguous between the following methods or properties: 'Color.M(A)' and 'Color.M(B)'
+                    //         Color.M(null);
+                    Diagnostic(ErrorCode.ERR_AmbigCall, "M")
+                        .WithArguments("Color.M(A)", "Color.M(B)")
+                        .WithLocation(6, 15)
                 );
         }
 
@@ -671,7 +829,7 @@ public class B {}
         public void TestConstraintFailed01()
         {
             var source =
-@"public class Program
+                @"public class Program
 {
     static void Main()
     {
@@ -684,13 +842,19 @@ public class B {}
 public class A {}
 public class B {}
 ";
-            CreateCompilationWithoutBetterCandidates(source, options: TestOptions.ReleaseExe).VerifyDiagnostics(
-                // (5,9): error CS0311: The type 'A' cannot be used as type parameter 'T' in the generic type or method 'Program.M<T>(T, int)'. There is no implicit reference conversion from 'A' to 'B'.
-                //         M(new A(), 0);
-                Diagnostic(ErrorCode.ERR_GenericConstraintNotSatisfiedRefType, "M").WithArguments("Program.M<T>(T, int)", "B", "T", "A").WithLocation(5, 9)
+            CreateCompilationWithoutBetterCandidates(source, options: TestOptions.ReleaseExe)
+                .VerifyDiagnostics(
+                    // (5,9): error CS0311: The type 'A' cannot be used as type parameter 'T' in the generic type or method 'Program.M<T>(T, int)'. There is no implicit reference conversion from 'A' to 'B'.
+                    //         M(new A(), 0);
+                    Diagnostic(ErrorCode.ERR_GenericConstraintNotSatisfiedRefType, "M")
+                        .WithArguments("Program.M<T>(T, int)", "B", "T", "A")
+                        .WithLocation(5, 9)
                 );
-            var compilation = CreateCompilationWithBetterCandidates(source, options: TestOptions.ReleaseExe).VerifyDiagnostics(
-                );
+            var compilation = CreateCompilationWithBetterCandidates(
+                    source,
+                    options: TestOptions.ReleaseExe
+                )
+                .VerifyDiagnostics();
             CompileAndVerify(compilation, expectedOutput: "2");
         }
 
@@ -700,7 +864,7 @@ public class B {}
         public void TestConstraintFailed02()
         {
             var source =
-@"public class Program
+                @"public class Program
 {
     static void Main()
     {
@@ -715,16 +879,24 @@ public struct A {}
 public class B {}
 public class X {}
 ";
-            CreateCompilationWithoutBetterCandidates(source, options: TestOptions.ReleaseExe).VerifyDiagnostics(
-                // (5,9): error CS0121: The call is ambiguous between the following methods or properties: 'Program.M<T>(T, B)' and 'Program.M<T>(T, X)'
-                //         M(new A(), null);
-                Diagnostic(ErrorCode.ERR_AmbigCall, "M").WithArguments("Program.M<T>(T, B)", "Program.M<T>(T, X)").WithLocation(5, 9),
-                // (6,9): error CS0121: The call is ambiguous between the following methods or properties: 'Program.M<T>(T, B)' and 'Program.M<T>(T, X)'
-                //         M(new B(), null);
-                Diagnostic(ErrorCode.ERR_AmbigCall, "M").WithArguments("Program.M<T>(T, B)", "Program.M<T>(T, X)").WithLocation(6, 9)
+            CreateCompilationWithoutBetterCandidates(source, options: TestOptions.ReleaseExe)
+                .VerifyDiagnostics(
+                    // (5,9): error CS0121: The call is ambiguous between the following methods or properties: 'Program.M<T>(T, B)' and 'Program.M<T>(T, X)'
+                    //         M(new A(), null);
+                    Diagnostic(ErrorCode.ERR_AmbigCall, "M")
+                        .WithArguments("Program.M<T>(T, B)", "Program.M<T>(T, X)")
+                        .WithLocation(5, 9),
+                    // (6,9): error CS0121: The call is ambiguous between the following methods or properties: 'Program.M<T>(T, B)' and 'Program.M<T>(T, X)'
+                    //         M(new B(), null);
+                    Diagnostic(ErrorCode.ERR_AmbigCall, "M")
+                        .WithArguments("Program.M<T>(T, B)", "Program.M<T>(T, X)")
+                        .WithLocation(6, 9)
                 );
-            var compilation = CreateCompilationWithBetterCandidates(source, options: TestOptions.ReleaseExe).VerifyDiagnostics(
-                );
+            var compilation = CreateCompilationWithBetterCandidates(
+                    source,
+                    options: TestOptions.ReleaseExe
+                )
+                .VerifyDiagnostics();
             CompileAndVerify(compilation, expectedOutput: "struct class ");
         }
 
@@ -733,7 +905,7 @@ public class X {}
         public void TestReturnTypeMismatch01()
         {
             var source =
-@"public class Program
+                @"public class Program
 {
     static void Main()
     {
@@ -752,13 +924,19 @@ delegate void D2(B b);
 class A {}
 class B {}
 ";
-            CreateCompilationWithoutBetterCandidates(source, options: TestOptions.ReleaseExe).VerifyDiagnostics(
-                // (5,9): error CS0121: The call is ambiguous between the following methods or properties: 'Program.M(D1)' and 'Program.M(D2)'
-                //         M(Q);
-                Diagnostic(ErrorCode.ERR_AmbigCall, "M").WithArguments("Program.M(D1)", "Program.M(D2)").WithLocation(5, 9)
+            CreateCompilationWithoutBetterCandidates(source, options: TestOptions.ReleaseExe)
+                .VerifyDiagnostics(
+                    // (5,9): error CS0121: The call is ambiguous between the following methods or properties: 'Program.M(D1)' and 'Program.M(D2)'
+                    //         M(Q);
+                    Diagnostic(ErrorCode.ERR_AmbigCall, "M")
+                        .WithArguments("Program.M(D1)", "Program.M(D2)")
+                        .WithLocation(5, 9)
                 );
-            var compilation = CreateCompilationWithBetterCandidates(source, options: TestOptions.ReleaseExe).VerifyDiagnostics(
-                );
+            var compilation = CreateCompilationWithBetterCandidates(
+                    source,
+                    options: TestOptions.ReleaseExe
+                )
+                .VerifyDiagnostics();
             CompileAndVerify(compilation, expectedOutput: "2");
         }
 
@@ -767,7 +945,7 @@ class B {}
         public void TestReturnRefMismatch01()
         {
             var source =
-@"public class Program
+                @"public class Program
 {
     static int tmp;
     static void Main()
@@ -783,13 +961,19 @@ class B {}
 delegate int D1();
 delegate ref int D2();
 ";
-            CreateCompilationWithoutBetterCandidates(source, options: TestOptions.ReleaseExe).VerifyDiagnostics(
-                // (6,9): error CS0121: The call is ambiguous between the following methods or properties: 'Program.M(D1)' and 'Program.M(D2)'
-                //         M(Q);
-                Diagnostic(ErrorCode.ERR_AmbigCall, "M").WithArguments("Program.M(D1)", "Program.M(D2)").WithLocation(6, 9)
+            CreateCompilationWithoutBetterCandidates(source, options: TestOptions.ReleaseExe)
+                .VerifyDiagnostics(
+                    // (6,9): error CS0121: The call is ambiguous between the following methods or properties: 'Program.M(D1)' and 'Program.M(D2)'
+                    //         M(Q);
+                    Diagnostic(ErrorCode.ERR_AmbigCall, "M")
+                        .WithArguments("Program.M(D1)", "Program.M(D2)")
+                        .WithLocation(6, 9)
                 );
-            var compilation = CreateCompilationWithBetterCandidates(source, options: TestOptions.ReleaseExe).VerifyDiagnostics(
-                );
+            var compilation = CreateCompilationWithBetterCandidates(
+                    source,
+                    options: TestOptions.ReleaseExe
+                )
+                .VerifyDiagnostics();
             CompileAndVerify(compilation, expectedOutput: "2");
         }
 
@@ -798,7 +982,7 @@ delegate ref int D2();
         public void TestReturnRefMismatch02()
         {
             var source =
-@"public class Program
+                @"public class Program
 {
     static int tmp = 2;
     static void Main()
@@ -814,13 +998,19 @@ delegate ref int D2();
 delegate int D1();
 delegate ref int D2();
 ";
-            CreateCompilationWithoutBetterCandidates(source, options: TestOptions.ReleaseExe).VerifyDiagnostics(
-                // (6,9): error CS0121: The call is ambiguous between the following methods or properties: 'Program.M(D1)' and 'Program.M(D2)'
-                //         M(Q);
-                Diagnostic(ErrorCode.ERR_AmbigCall, "M").WithArguments("Program.M(D1)", "Program.M(D2)").WithLocation(6, 9)
+            CreateCompilationWithoutBetterCandidates(source, options: TestOptions.ReleaseExe)
+                .VerifyDiagnostics(
+                    // (6,9): error CS0121: The call is ambiguous between the following methods or properties: 'Program.M(D1)' and 'Program.M(D2)'
+                    //         M(Q);
+                    Diagnostic(ErrorCode.ERR_AmbigCall, "M")
+                        .WithArguments("Program.M(D1)", "Program.M(D2)")
+                        .WithLocation(6, 9)
                 );
-            var compilation = CreateCompilationWithBetterCandidates(source, options: TestOptions.ReleaseExe).VerifyDiagnostics(
-                );
+            var compilation = CreateCompilationWithBetterCandidates(
+                    source,
+                    options: TestOptions.ReleaseExe
+                )
+                .VerifyDiagnostics();
             CompileAndVerify(compilation, expectedOutput: "1");
         }
 
@@ -829,7 +1019,7 @@ delegate ref int D2();
         public void TestReturnTypeMismatch02()
         {
             var source =
-@"public class Program
+                @"public class Program
 {
     static void Main()
     {
@@ -855,13 +1045,19 @@ namespace System.Runtime.CompilerServices
     public class ExtensionAttribute : System.Attribute {}
 }
 ";
-            CreateCompilationWithoutBetterCandidates(source, options: TestOptions.ReleaseExe).VerifyDiagnostics(
-                // (5,9): error CS0121: The call is ambiguous between the following methods or properties: 'Program.M(D1)' and 'Program.M(D2)'
-                //         M(new Z().Q);
-                Diagnostic(ErrorCode.ERR_AmbigCall, "M").WithArguments("Program.M(D1)", "Program.M(D2)").WithLocation(5, 9)
+            CreateCompilationWithoutBetterCandidates(source, options: TestOptions.ReleaseExe)
+                .VerifyDiagnostics(
+                    // (5,9): error CS0121: The call is ambiguous between the following methods or properties: 'Program.M(D1)' and 'Program.M(D2)'
+                    //         M(new Z().Q);
+                    Diagnostic(ErrorCode.ERR_AmbigCall, "M")
+                        .WithArguments("Program.M(D1)", "Program.M(D2)")
+                        .WithLocation(5, 9)
                 );
-            var compilation = CreateCompilationWithBetterCandidates(source, options: TestOptions.ReleaseExe).VerifyDiagnostics(
-                );
+            var compilation = CreateCompilationWithBetterCandidates(
+                    source,
+                    options: TestOptions.ReleaseExe
+                )
+                .VerifyDiagnostics();
             // ILVerify: Unrecognized arguments for delegate .ctor.
             CompileAndVerify(compilation, verify: Verification.FailsILVerify, expectedOutput: "2");
         }
@@ -872,7 +1068,7 @@ namespace System.Runtime.CompilerServices
         public void TestConstraintFailed03()
         {
             var source =
-@"public class Program
+                @"public class Program
 {
     static void Main()
     {
@@ -886,13 +1082,19 @@ public class A {}
 public class B {}
 public class C { public static implicit operator C(A a) => null; }
 ";
-            CreateCompilationWithoutBetterCandidates(source, options: TestOptions.ReleaseExe).VerifyDiagnostics(
-                // (5,9): error CS0311: The type 'A' cannot be used as type parameter 'T' in the generic type or method 'Program.M<T>(T, int)'. There is no implicit reference conversion from 'A' to 'B'.
-                //         M(new A(), 0);
-                Diagnostic(ErrorCode.ERR_GenericConstraintNotSatisfiedRefType, "M").WithArguments("Program.M<T>(T, int)", "B", "T", "A").WithLocation(5, 9)
+            CreateCompilationWithoutBetterCandidates(source, options: TestOptions.ReleaseExe)
+                .VerifyDiagnostics(
+                    // (5,9): error CS0311: The type 'A' cannot be used as type parameter 'T' in the generic type or method 'Program.M<T>(T, int)'. There is no implicit reference conversion from 'A' to 'B'.
+                    //         M(new A(), 0);
+                    Diagnostic(ErrorCode.ERR_GenericConstraintNotSatisfiedRefType, "M")
+                        .WithArguments("Program.M<T>(T, int)", "B", "T", "A")
+                        .WithLocation(5, 9)
                 );
-            var compilation = CreateCompilationWithBetterCandidates(source, options: TestOptions.ReleaseExe).VerifyDiagnostics(
-                );
+            var compilation = CreateCompilationWithBetterCandidates(
+                    source,
+                    options: TestOptions.ReleaseExe
+                )
+                .VerifyDiagnostics();
             CompileAndVerify(compilation, expectedOutput: "2");
         }
 
@@ -902,7 +1104,7 @@ public class C { public static implicit operator C(A a) => null; }
         public void TestConstraintFailed04()
         {
             var source =
-@"public class Program
+                @"public class Program
 {
     static void Main()
     {
@@ -915,13 +1117,19 @@ public class C { public static implicit operator C(A a) => null; }
 public ref struct A {}
 public class C { public static implicit operator C(A a) => null; }
 ";
-            CreateCompilationWithoutBetterCandidates(source, options: TestOptions.ReleaseExe).VerifyDiagnostics(
-                // (5,9): error CS0306: The type 'A' may not be used as a type argument
-                //         M(new A(), 0);
-                Diagnostic(ErrorCode.ERR_BadTypeArgument, "M").WithArguments("A").WithLocation(5, 9)
+            CreateCompilationWithoutBetterCandidates(source, options: TestOptions.ReleaseExe)
+                .VerifyDiagnostics(
+                    // (5,9): error CS0306: The type 'A' may not be used as a type argument
+                    //         M(new A(), 0);
+                    Diagnostic(ErrorCode.ERR_BadTypeArgument, "M")
+                        .WithArguments("A")
+                        .WithLocation(5, 9)
                 );
-            var compilation = CreateCompilationWithBetterCandidates(source, options: TestOptions.ReleaseExe).VerifyDiagnostics(
-                );
+            var compilation = CreateCompilationWithBetterCandidates(
+                    source,
+                    options: TestOptions.ReleaseExe
+                )
+                .VerifyDiagnostics();
             CompileAndVerify(compilation, expectedOutput: "2");
         }
 
@@ -931,7 +1139,7 @@ public class C { public static implicit operator C(A a) => null; }
         public void TestConstraintFailed05()
         {
             var source =
-@"public class Program
+                @"public class Program
 {
     static unsafe void Main()
     {
@@ -944,13 +1152,22 @@ public class C { public static implicit operator C(A a) => null; }
 }
 public class C { public static unsafe implicit operator C(int* p) => null; }
 ";
-            CreateCompilationWithoutBetterCandidates(source, options: TestOptions.ReleaseExe.WithAllowUnsafe(true)).VerifyDiagnostics(
-                // (6,9): error CS0306: The type 'int*' may not be used as a type argument
-                //         M(p, 0);
-                Diagnostic(ErrorCode.ERR_BadTypeArgument, "M").WithArguments("int*").WithLocation(6, 9)
+            CreateCompilationWithoutBetterCandidates(
+                    source,
+                    options: TestOptions.ReleaseExe.WithAllowUnsafe(true)
+                )
+                .VerifyDiagnostics(
+                    // (6,9): error CS0306: The type 'int*' may not be used as a type argument
+                    //         M(p, 0);
+                    Diagnostic(ErrorCode.ERR_BadTypeArgument, "M")
+                        .WithArguments("int*")
+                        .WithLocation(6, 9)
                 );
-            var compilation = CreateCompilationWithBetterCandidates(source, options: TestOptions.ReleaseExe.WithAllowUnsafe(true)).VerifyDiagnostics(
-                );
+            var compilation = CreateCompilationWithBetterCandidates(
+                    source,
+                    options: TestOptions.ReleaseExe.WithAllowUnsafe(true)
+                )
+                .VerifyDiagnostics();
             CompileAndVerify(compilation, expectedOutput: "2", verify: Verification.Skipped);
         }
 
@@ -958,7 +1175,7 @@ public class C { public static unsafe implicit operator C(int* p) => null; }
         public void IndexedPropertyTest01()
         {
             var source1 =
-@"Imports System
+                @"Imports System
 Imports System.Runtime.InteropServices
 <Assembly: PrimaryInteropAssembly(0, 0)>
 <Assembly: Guid(""165F752D-E9C4-4F7E-B0D0-CDFD7A36E210"")>
@@ -985,9 +1202,12 @@ End Class
 Public Class B
 End Class
 ";
-            var reference1 = BasicCompilationUtils.CompileToMetadata(source1, verify: Verification.Passes);
+            var reference1 = BasicCompilationUtils.CompileToMetadata(
+                source1,
+                verify: Verification.Passes
+            );
             var source2 =
-@"class D : C
+                @"class D : C
 {
     static void Main()
     {
@@ -1003,21 +1223,39 @@ End Class
         D.P[null] = o;   // C# does not support static indexed properties
     }
 }";
-            CreateCompilationWithoutBetterCandidates(source2, references: new[] { reference1 }, options: TestOptions.ReleaseExe.WithAllowUnsafe(true)).VerifyDiagnostics(
-                // (13,13): error CS0120: An object reference is required for the non-static field, method, or property 'C.P[A]'
-                //         o = D.P[null];
-                Diagnostic(ErrorCode.ERR_ObjectRequired, "D.P[null]").WithArguments("C.P[A]").WithLocation(13, 13),
-                // (14,9): error CS0120: An object reference is required for the non-static field, method, or property 'C.P[A]'
-                //         D.P[null] = o;
-                Diagnostic(ErrorCode.ERR_ObjectRequired, "D.P[null]").WithArguments("C.P[A]").WithLocation(14, 9)
+            CreateCompilationWithoutBetterCandidates(
+                    source2,
+                    references: new[] { reference1 },
+                    options: TestOptions.ReleaseExe.WithAllowUnsafe(true)
+                )
+                .VerifyDiagnostics(
+                    // (13,13): error CS0120: An object reference is required for the non-static field, method, or property 'C.P[A]'
+                    //         o = D.P[null];
+                    Diagnostic(ErrorCode.ERR_ObjectRequired, "D.P[null]")
+                        .WithArguments("C.P[A]")
+                        .WithLocation(13, 13),
+                    // (14,9): error CS0120: An object reference is required for the non-static field, method, or property 'C.P[A]'
+                    //         D.P[null] = o;
+                    Diagnostic(ErrorCode.ERR_ObjectRequired, "D.P[null]")
+                        .WithArguments("C.P[A]")
+                        .WithLocation(14, 9)
                 );
-            CreateCompilationWithBetterCandidates(source2, references: new[] { reference1 }, options: TestOptions.ReleaseExe.WithAllowUnsafe(true)).VerifyDiagnostics(
-                // (13,13): error CS0120: An object reference is required for the non-static field, method, or property 'C.P[A]'
-                //         o = D.P[null];
-                Diagnostic(ErrorCode.ERR_ObjectRequired, "D.P[null]").WithArguments("C.P[A]").WithLocation(13, 13),
-                // (14,9): error CS0120: An object reference is required for the non-static field, method, or property 'C.P[A]'
-                //         D.P[null] = o;
-                Diagnostic(ErrorCode.ERR_ObjectRequired, "D.P[null]").WithArguments("C.P[A]").WithLocation(14, 9)
+            CreateCompilationWithBetterCandidates(
+                    source2,
+                    references: new[] { reference1 },
+                    options: TestOptions.ReleaseExe.WithAllowUnsafe(true)
+                )
+                .VerifyDiagnostics(
+                    // (13,13): error CS0120: An object reference is required for the non-static field, method, or property 'C.P[A]'
+                    //         o = D.P[null];
+                    Diagnostic(ErrorCode.ERR_ObjectRequired, "D.P[null]")
+                        .WithArguments("C.P[A]")
+                        .WithLocation(13, 13),
+                    // (14,9): error CS0120: An object reference is required for the non-static field, method, or property 'C.P[A]'
+                    //         D.P[null] = o;
+                    Diagnostic(ErrorCode.ERR_ObjectRequired, "D.P[null]")
+                        .WithArguments("C.P[A]")
+                        .WithLocation(14, 9)
                 );
         }
 
@@ -1026,7 +1264,7 @@ End Class
         {
             // test semantic model in the face of ambiguities even when there are static/instance violations
             var source =
-@"class Program
+                @"class Program
 {
     public static void Main()
     {
@@ -1051,83 +1289,173 @@ class B {}
 class C {}
 class D {}
 ";
-            CreateCompilationWithoutBetterCandidates(source, options: TestOptions.ReleaseExe).VerifyDiagnostics(
-                // (6,17): error CS0121: The call is ambiguous between the following methods or properties: 'Program.M(A)' and 'Program.M(B)'
-                //         Program.M(null); // two static candidates
-                Diagnostic(ErrorCode.ERR_AmbigCall, "M").WithArguments("Program.M(A)", "Program.M(B)").WithLocation(6, 17),
-                // (7,11): error CS0121: The call is ambiguous between the following methods or properties: 'Program.M(A)' and 'Program.M(B)'
-                //         p.M(null);       // two instance candidates
-                Diagnostic(ErrorCode.ERR_AmbigCall, "M").WithArguments("Program.M(A)", "Program.M(B)").WithLocation(7, 11),
-                // (8,9): error CS0121: The call is ambiguous between the following methods or properties: 'Program.M(A)' and 'Program.M(B)'
-                //         M(null);         // two static candidates
-                Diagnostic(ErrorCode.ERR_AmbigCall, "M").WithArguments("Program.M(A)", "Program.M(B)").WithLocation(8, 9),
-                // (13,9): error CS0121: The call is ambiguous between the following methods or properties: 'Program.M(A)' and 'Program.M(B)'
-                //         M(null);         // four candidates
-                Diagnostic(ErrorCode.ERR_AmbigCall, "M").WithArguments("Program.M(A)", "Program.M(B)").WithLocation(13, 9),
-                // (14,17): error CS0121: The call is ambiguous between the following methods or properties: 'Program.M(A)' and 'Program.M(B)'
-                //         Program.M(null); // four candidates
-                Diagnostic(ErrorCode.ERR_AmbigCall, "M").WithArguments("Program.M(A)", "Program.M(B)").WithLocation(14, 17)
+            CreateCompilationWithoutBetterCandidates(source, options: TestOptions.ReleaseExe)
+                .VerifyDiagnostics(
+                    // (6,17): error CS0121: The call is ambiguous between the following methods or properties: 'Program.M(A)' and 'Program.M(B)'
+                    //         Program.M(null); // two static candidates
+                    Diagnostic(ErrorCode.ERR_AmbigCall, "M")
+                        .WithArguments("Program.M(A)", "Program.M(B)")
+                        .WithLocation(6, 17),
+                    // (7,11): error CS0121: The call is ambiguous between the following methods or properties: 'Program.M(A)' and 'Program.M(B)'
+                    //         p.M(null);       // two instance candidates
+                    Diagnostic(ErrorCode.ERR_AmbigCall, "M")
+                        .WithArguments("Program.M(A)", "Program.M(B)")
+                        .WithLocation(7, 11),
+                    // (8,9): error CS0121: The call is ambiguous between the following methods or properties: 'Program.M(A)' and 'Program.M(B)'
+                    //         M(null);         // two static candidates
+                    Diagnostic(ErrorCode.ERR_AmbigCall, "M")
+                        .WithArguments("Program.M(A)", "Program.M(B)")
+                        .WithLocation(8, 9),
+                    // (13,9): error CS0121: The call is ambiguous between the following methods or properties: 'Program.M(A)' and 'Program.M(B)'
+                    //         M(null);         // four candidates
+                    Diagnostic(ErrorCode.ERR_AmbigCall, "M")
+                        .WithArguments("Program.M(A)", "Program.M(B)")
+                        .WithLocation(13, 9),
+                    // (14,17): error CS0121: The call is ambiguous between the following methods or properties: 'Program.M(A)' and 'Program.M(B)'
+                    //         Program.M(null); // four candidates
+                    Diagnostic(ErrorCode.ERR_AmbigCall, "M")
+                        .WithArguments("Program.M(A)", "Program.M(B)")
+                        .WithLocation(14, 17)
                 );
-            var compilation = CreateCompilationWithBetterCandidates(source, options: TestOptions.ReleaseExe).VerifyDiagnostics(
-                // (6,17): error CS0121: The call is ambiguous between the following methods or properties: 'Program.M(A)' and 'Program.M(C)'
-                //         Program.M(null); // two static candidates
-                Diagnostic(ErrorCode.ERR_AmbigCall, "M").WithArguments("Program.M(A)", "Program.M(C)").WithLocation(6, 17),
-                // (7,11): error CS0121: The call is ambiguous between the following methods or properties: 'Program.M(B)' and 'Program.M(D)'
-                //         p.M(null);       // two instance candidates
-                Diagnostic(ErrorCode.ERR_AmbigCall, "M").WithArguments("Program.M(B)", "Program.M(D)").WithLocation(7, 11),
-                // (8,9): error CS0121: The call is ambiguous between the following methods or properties: 'Program.M(A)' and 'Program.M(C)'
-                //         M(null);         // two static candidates
-                Diagnostic(ErrorCode.ERR_AmbigCall, "M").WithArguments("Program.M(A)", "Program.M(C)").WithLocation(8, 9),
-                // (13,9): error CS0121: The call is ambiguous between the following methods or properties: 'Program.M(A)' and 'Program.M(B)'
-                //         M(null);         // four candidates
-                Diagnostic(ErrorCode.ERR_AmbigCall, "M").WithArguments("Program.M(A)", "Program.M(B)").WithLocation(13, 9),
-                // (14,17): error CS0121: The call is ambiguous between the following methods or properties: 'Program.M(A)' and 'Program.M(B)'
-                //         Program.M(null); // four candidates
-                Diagnostic(ErrorCode.ERR_AmbigCall, "M").WithArguments("Program.M(A)", "Program.M(B)").WithLocation(14, 17)
+            var compilation = CreateCompilationWithBetterCandidates(
+                    source,
+                    options: TestOptions.ReleaseExe
+                )
+                .VerifyDiagnostics(
+                    // (6,17): error CS0121: The call is ambiguous between the following methods or properties: 'Program.M(A)' and 'Program.M(C)'
+                    //         Program.M(null); // two static candidates
+                    Diagnostic(ErrorCode.ERR_AmbigCall, "M")
+                        .WithArguments("Program.M(A)", "Program.M(C)")
+                        .WithLocation(6, 17),
+                    // (7,11): error CS0121: The call is ambiguous between the following methods or properties: 'Program.M(B)' and 'Program.M(D)'
+                    //         p.M(null);       // two instance candidates
+                    Diagnostic(ErrorCode.ERR_AmbigCall, "M")
+                        .WithArguments("Program.M(B)", "Program.M(D)")
+                        .WithLocation(7, 11),
+                    // (8,9): error CS0121: The call is ambiguous between the following methods or properties: 'Program.M(A)' and 'Program.M(C)'
+                    //         M(null);         // two static candidates
+                    Diagnostic(ErrorCode.ERR_AmbigCall, "M")
+                        .WithArguments("Program.M(A)", "Program.M(C)")
+                        .WithLocation(8, 9),
+                    // (13,9): error CS0121: The call is ambiguous between the following methods or properties: 'Program.M(A)' and 'Program.M(B)'
+                    //         M(null);         // four candidates
+                    Diagnostic(ErrorCode.ERR_AmbigCall, "M")
+                        .WithArguments("Program.M(A)", "Program.M(B)")
+                        .WithLocation(13, 9),
+                    // (14,17): error CS0121: The call is ambiguous between the following methods or properties: 'Program.M(A)' and 'Program.M(B)'
+                    //         Program.M(null); // four candidates
+                    Diagnostic(ErrorCode.ERR_AmbigCall, "M")
+                        .WithArguments("Program.M(A)", "Program.M(B)")
+                        .WithLocation(14, 17)
                 );
             var model = compilation.GetSemanticModel(compilation.SyntaxTrees[0]);
-            var invocations = compilation.SyntaxTrees[0].GetRoot().DescendantNodes().OfType<InvocationExpressionSyntax>().ToArray();
+            var invocations = compilation
+                .SyntaxTrees[0]
+                .GetRoot()
+                .DescendantNodes()
+                .OfType<InvocationExpressionSyntax>()
+                .ToArray();
             Assert.Equal(5, invocations.Length);
 
             var symbolInfo = model.GetSymbolInfo(invocations[0].Expression);
             Assert.Equal(CandidateReason.OverloadResolutionFailure, symbolInfo.CandidateReason);
             Assert.Equal(4, symbolInfo.CandidateSymbols.Length);
-            Assert.Equal("void Program.M(A a)", symbolInfo.CandidateSymbols[0].ToTestDisplayString());
-            Assert.Equal("void Program.M(B b)", symbolInfo.CandidateSymbols[1].ToTestDisplayString());
-            Assert.Equal("void Program.M(C c)", symbolInfo.CandidateSymbols[2].ToTestDisplayString());
-            Assert.Equal("void Program.M(D d)", symbolInfo.CandidateSymbols[3].ToTestDisplayString());
+            Assert.Equal(
+                "void Program.M(A a)",
+                symbolInfo.CandidateSymbols[0].ToTestDisplayString()
+            );
+            Assert.Equal(
+                "void Program.M(B b)",
+                symbolInfo.CandidateSymbols[1].ToTestDisplayString()
+            );
+            Assert.Equal(
+                "void Program.M(C c)",
+                symbolInfo.CandidateSymbols[2].ToTestDisplayString()
+            );
+            Assert.Equal(
+                "void Program.M(D d)",
+                symbolInfo.CandidateSymbols[3].ToTestDisplayString()
+            );
 
             symbolInfo = model.GetSymbolInfo(invocations[1].Expression);
             Assert.Equal(CandidateReason.OverloadResolutionFailure, symbolInfo.CandidateReason);
             Assert.Equal(4, symbolInfo.CandidateSymbols.Length);
-            Assert.Equal("void Program.M(A a)", symbolInfo.CandidateSymbols[0].ToTestDisplayString());
-            Assert.Equal("void Program.M(B b)", symbolInfo.CandidateSymbols[1].ToTestDisplayString());
-            Assert.Equal("void Program.M(C c)", symbolInfo.CandidateSymbols[2].ToTestDisplayString());
-            Assert.Equal("void Program.M(D d)", symbolInfo.CandidateSymbols[3].ToTestDisplayString());
+            Assert.Equal(
+                "void Program.M(A a)",
+                symbolInfo.CandidateSymbols[0].ToTestDisplayString()
+            );
+            Assert.Equal(
+                "void Program.M(B b)",
+                symbolInfo.CandidateSymbols[1].ToTestDisplayString()
+            );
+            Assert.Equal(
+                "void Program.M(C c)",
+                symbolInfo.CandidateSymbols[2].ToTestDisplayString()
+            );
+            Assert.Equal(
+                "void Program.M(D d)",
+                symbolInfo.CandidateSymbols[3].ToTestDisplayString()
+            );
 
             symbolInfo = model.GetSymbolInfo(invocations[2].Expression);
             Assert.Equal(CandidateReason.OverloadResolutionFailure, symbolInfo.CandidateReason);
             Assert.Equal(4, symbolInfo.CandidateSymbols.Length);
-            Assert.Equal("void Program.M(A a)", symbolInfo.CandidateSymbols[0].ToTestDisplayString());
-            Assert.Equal("void Program.M(B b)", symbolInfo.CandidateSymbols[1].ToTestDisplayString());
-            Assert.Equal("void Program.M(C c)", symbolInfo.CandidateSymbols[2].ToTestDisplayString());
-            Assert.Equal("void Program.M(D d)", symbolInfo.CandidateSymbols[3].ToTestDisplayString());
+            Assert.Equal(
+                "void Program.M(A a)",
+                symbolInfo.CandidateSymbols[0].ToTestDisplayString()
+            );
+            Assert.Equal(
+                "void Program.M(B b)",
+                symbolInfo.CandidateSymbols[1].ToTestDisplayString()
+            );
+            Assert.Equal(
+                "void Program.M(C c)",
+                symbolInfo.CandidateSymbols[2].ToTestDisplayString()
+            );
+            Assert.Equal(
+                "void Program.M(D d)",
+                symbolInfo.CandidateSymbols[3].ToTestDisplayString()
+            );
 
             symbolInfo = model.GetSymbolInfo(invocations[3].Expression);
             Assert.Equal(CandidateReason.OverloadResolutionFailure, symbolInfo.CandidateReason);
             Assert.Equal(4, symbolInfo.CandidateSymbols.Length);
-            Assert.Equal("void Program.M(A a)", symbolInfo.CandidateSymbols[0].ToTestDisplayString());
-            Assert.Equal("void Program.M(B b)", symbolInfo.CandidateSymbols[1].ToTestDisplayString());
-            Assert.Equal("void Program.M(C c)", symbolInfo.CandidateSymbols[2].ToTestDisplayString());
-            Assert.Equal("void Program.M(D d)", symbolInfo.CandidateSymbols[3].ToTestDisplayString());
+            Assert.Equal(
+                "void Program.M(A a)",
+                symbolInfo.CandidateSymbols[0].ToTestDisplayString()
+            );
+            Assert.Equal(
+                "void Program.M(B b)",
+                symbolInfo.CandidateSymbols[1].ToTestDisplayString()
+            );
+            Assert.Equal(
+                "void Program.M(C c)",
+                symbolInfo.CandidateSymbols[2].ToTestDisplayString()
+            );
+            Assert.Equal(
+                "void Program.M(D d)",
+                symbolInfo.CandidateSymbols[3].ToTestDisplayString()
+            );
 
             symbolInfo = model.GetSymbolInfo(invocations[4].Expression);
             Assert.Equal(CandidateReason.OverloadResolutionFailure, symbolInfo.CandidateReason);
             Assert.Equal(4, symbolInfo.CandidateSymbols.Length);
-            Assert.Equal("void Program.M(A a)", symbolInfo.CandidateSymbols[0].ToTestDisplayString());
-            Assert.Equal("void Program.M(B b)", symbolInfo.CandidateSymbols[1].ToTestDisplayString());
-            Assert.Equal("void Program.M(C c)", symbolInfo.CandidateSymbols[2].ToTestDisplayString());
-            Assert.Equal("void Program.M(D d)", symbolInfo.CandidateSymbols[3].ToTestDisplayString());
+            Assert.Equal(
+                "void Program.M(A a)",
+                symbolInfo.CandidateSymbols[0].ToTestDisplayString()
+            );
+            Assert.Equal(
+                "void Program.M(B b)",
+                symbolInfo.CandidateSymbols[1].ToTestDisplayString()
+            );
+            Assert.Equal(
+                "void Program.M(C c)",
+                symbolInfo.CandidateSymbols[2].ToTestDisplayString()
+            );
+            Assert.Equal(
+                "void Program.M(D d)",
+                symbolInfo.CandidateSymbols[3].ToTestDisplayString()
+            );
         }
 
         [Fact]
@@ -1135,7 +1463,7 @@ class D {}
         {
             // test semantic model in the face of ambiguities even when there are constraint violations
             var source =
-@"class Program
+                @"class Program
 {
     public static void Main()
     {
@@ -1152,27 +1480,53 @@ class C {}
 class D {}
 class Constraint {}
 ";
-            CreateCompilationWithoutBetterCandidates(source, options: TestOptions.ReleaseExe).VerifyDiagnostics(
-                // (5,9): error CS0121: The call is ambiguous between the following methods or properties: 'Program.M<T>(T, A)' and 'Program.M<T>(T, B)'
-                //         M(1, null);
-                Diagnostic(ErrorCode.ERR_AmbigCall, "M").WithArguments("Program.M<T>(T, A)", "Program.M<T>(T, B)").WithLocation(5, 9)
+            CreateCompilationWithoutBetterCandidates(source, options: TestOptions.ReleaseExe)
+                .VerifyDiagnostics(
+                    // (5,9): error CS0121: The call is ambiguous between the following methods or properties: 'Program.M<T>(T, A)' and 'Program.M<T>(T, B)'
+                    //         M(1, null);
+                    Diagnostic(ErrorCode.ERR_AmbigCall, "M")
+                        .WithArguments("Program.M<T>(T, A)", "Program.M<T>(T, B)")
+                        .WithLocation(5, 9)
                 );
-            var compilation = CreateCompilationWithBetterCandidates(source, options: TestOptions.ReleaseExe).VerifyDiagnostics(
-                // (5,9): error CS0121: The call is ambiguous between the following methods or properties: 'Program.M<T>(T, B)' and 'Program.M<T>(T, D)'
-                //         M(1, null);
-                Diagnostic(ErrorCode.ERR_AmbigCall, "M").WithArguments("Program.M<T>(T, B)", "Program.M<T>(T, D)").WithLocation(5, 9)
+            var compilation = CreateCompilationWithBetterCandidates(
+                    source,
+                    options: TestOptions.ReleaseExe
+                )
+                .VerifyDiagnostics(
+                    // (5,9): error CS0121: The call is ambiguous between the following methods or properties: 'Program.M<T>(T, B)' and 'Program.M<T>(T, D)'
+                    //         M(1, null);
+                    Diagnostic(ErrorCode.ERR_AmbigCall, "M")
+                        .WithArguments("Program.M<T>(T, B)", "Program.M<T>(T, D)")
+                        .WithLocation(5, 9)
                 );
             var model = compilation.GetSemanticModel(compilation.SyntaxTrees[0]);
-            var invocations = compilation.SyntaxTrees[0].GetRoot().DescendantNodes().OfType<InvocationExpressionSyntax>().ToArray();
+            var invocations = compilation
+                .SyntaxTrees[0]
+                .GetRoot()
+                .DescendantNodes()
+                .OfType<InvocationExpressionSyntax>()
+                .ToArray();
             Assert.Equal(1, invocations.Length);
 
             var symbolInfo = model.GetSymbolInfo(invocations[0].Expression);
             Assert.Equal(CandidateReason.OverloadResolutionFailure, symbolInfo.CandidateReason);
             Assert.Equal(4, symbolInfo.CandidateSymbols.Length);
-            Assert.Equal("void Program.M<System.Int32>(System.Int32 t, A a)", symbolInfo.CandidateSymbols[0].ToTestDisplayString());
-            Assert.Equal("void Program.M<System.Int32>(System.Int32 t, B b)", symbolInfo.CandidateSymbols[1].ToTestDisplayString());
-            Assert.Equal("void Program.M<System.Int32>(System.Int32 t, C c)", symbolInfo.CandidateSymbols[2].ToTestDisplayString());
-            Assert.Equal("void Program.M<System.Int32>(System.Int32 t, D d)", symbolInfo.CandidateSymbols[3].ToTestDisplayString());
+            Assert.Equal(
+                "void Program.M<System.Int32>(System.Int32 t, A a)",
+                symbolInfo.CandidateSymbols[0].ToTestDisplayString()
+            );
+            Assert.Equal(
+                "void Program.M<System.Int32>(System.Int32 t, B b)",
+                symbolInfo.CandidateSymbols[1].ToTestDisplayString()
+            );
+            Assert.Equal(
+                "void Program.M<System.Int32>(System.Int32 t, C c)",
+                symbolInfo.CandidateSymbols[2].ToTestDisplayString()
+            );
+            Assert.Equal(
+                "void Program.M<System.Int32>(System.Int32 t, D d)",
+                symbolInfo.CandidateSymbols[3].ToTestDisplayString()
+            );
         }
 
         [Fact]
@@ -1180,7 +1534,7 @@ class Constraint {}
         {
             // test semantic model in the face of ambiguities even when there are constraint violations
             var source =
-@"class Program
+                @"class Program
 {
     public static void Main()
     {
@@ -1200,27 +1554,53 @@ public static class Extensions
     public static void M<T>(this T t, D d) => throw null;
 }
 ";
-            CreateCompilationWithoutBetterCandidates(source, options: TestOptions.ReleaseExe).VerifyDiagnostics(
-                // (5,11): error CS0121: The call is ambiguous between the following methods or properties: 'Extensions.M<T>(T, A)' and 'Extensions.M<T>(T, B)'
-                //         1.M(null);
-                Diagnostic(ErrorCode.ERR_AmbigCall, "M").WithArguments("Extensions.M<T>(T, A)", "Extensions.M<T>(T, B)").WithLocation(5, 11)
+            CreateCompilationWithoutBetterCandidates(source, options: TestOptions.ReleaseExe)
+                .VerifyDiagnostics(
+                    // (5,11): error CS0121: The call is ambiguous between the following methods or properties: 'Extensions.M<T>(T, A)' and 'Extensions.M<T>(T, B)'
+                    //         1.M(null);
+                    Diagnostic(ErrorCode.ERR_AmbigCall, "M")
+                        .WithArguments("Extensions.M<T>(T, A)", "Extensions.M<T>(T, B)")
+                        .WithLocation(5, 11)
                 );
-            var compilation = CreateCompilationWithBetterCandidates(source, options: TestOptions.ReleaseExe).VerifyDiagnostics(
-                // (5,11): error CS0121: The call is ambiguous between the following methods or properties: 'Extensions.M<T>(T, B)' and 'Extensions.M<T>(T, D)'
-                //         1.M(null);
-                Diagnostic(ErrorCode.ERR_AmbigCall, "M").WithArguments("Extensions.M<T>(T, B)", "Extensions.M<T>(T, D)").WithLocation(5, 11)
+            var compilation = CreateCompilationWithBetterCandidates(
+                    source,
+                    options: TestOptions.ReleaseExe
+                )
+                .VerifyDiagnostics(
+                    // (5,11): error CS0121: The call is ambiguous between the following methods or properties: 'Extensions.M<T>(T, B)' and 'Extensions.M<T>(T, D)'
+                    //         1.M(null);
+                    Diagnostic(ErrorCode.ERR_AmbigCall, "M")
+                        .WithArguments("Extensions.M<T>(T, B)", "Extensions.M<T>(T, D)")
+                        .WithLocation(5, 11)
                 );
             var model = compilation.GetSemanticModel(compilation.SyntaxTrees[0]);
-            var invocations = compilation.SyntaxTrees[0].GetRoot().DescendantNodes().OfType<InvocationExpressionSyntax>().ToArray();
+            var invocations = compilation
+                .SyntaxTrees[0]
+                .GetRoot()
+                .DescendantNodes()
+                .OfType<InvocationExpressionSyntax>()
+                .ToArray();
             Assert.Equal(1, invocations.Length);
 
             var symbolInfo = model.GetSymbolInfo(invocations[0].Expression);
             Assert.Equal(CandidateReason.OverloadResolutionFailure, symbolInfo.CandidateReason);
             Assert.Equal(4, symbolInfo.CandidateSymbols.Length);
-            Assert.Equal("void System.Int32.M<System.Int32>(A a)", symbolInfo.CandidateSymbols[0].ToTestDisplayString());
-            Assert.Equal("void System.Int32.M<System.Int32>(B b)", symbolInfo.CandidateSymbols[1].ToTestDisplayString());
-            Assert.Equal("void System.Int32.M<System.Int32>(C c)", symbolInfo.CandidateSymbols[2].ToTestDisplayString());
-            Assert.Equal("void System.Int32.M<System.Int32>(D d)", symbolInfo.CandidateSymbols[3].ToTestDisplayString());
+            Assert.Equal(
+                "void System.Int32.M<System.Int32>(A a)",
+                symbolInfo.CandidateSymbols[0].ToTestDisplayString()
+            );
+            Assert.Equal(
+                "void System.Int32.M<System.Int32>(B b)",
+                symbolInfo.CandidateSymbols[1].ToTestDisplayString()
+            );
+            Assert.Equal(
+                "void System.Int32.M<System.Int32>(C c)",
+                symbolInfo.CandidateSymbols[2].ToTestDisplayString()
+            );
+            Assert.Equal(
+                "void System.Int32.M<System.Int32>(D d)",
+                symbolInfo.CandidateSymbols[3].ToTestDisplayString()
+            );
         }
 
         [Fact]
@@ -1228,7 +1608,7 @@ public static class Extensions
         {
             // test semantic model in the face of ambiguities even when there are return type mismatches
             var source =
-@"class Program
+                @"class Program
 {
     public static void Main()
     {
@@ -1253,27 +1633,55 @@ interface IX {}
 interface IY {}
 interface IZ: IQ, IW, IX, IY {}
 ";
-            CreateCompilationWithoutBetterCandidates(source, options: TestOptions.ReleaseExe).VerifyDiagnostics(
-                // (5,17): error CS0121: The call is ambiguous between the following methods or properties: 'Program.Argument(IQ)' and 'Program.Argument(IW)'
-                //         Invoked(Argument);
-                Diagnostic(ErrorCode.ERR_AmbigCall, "Argument").WithArguments("Program.Argument(IQ)", "Program.Argument(IW)").WithLocation(5, 17)
+            CreateCompilationWithoutBetterCandidates(source, options: TestOptions.ReleaseExe)
+                .VerifyDiagnostics(
+                    // (5,17): error CS0121: The call is ambiguous between the following methods or properties: 'Program.Argument(IQ)' and 'Program.Argument(IW)'
+                    //         Invoked(Argument);
+                    Diagnostic(ErrorCode.ERR_AmbigCall, "Argument")
+                        .WithArguments("Program.Argument(IQ)", "Program.Argument(IW)")
+                        .WithLocation(5, 17)
                 );
-            var compilation = CreateCompilationWithBetterCandidates(source, options: TestOptions.ReleaseExe).VerifyDiagnostics(
-                // (5,17): error CS0121: The call is ambiguous between the following methods or properties: 'Program.Argument(IQ)' and 'Program.Argument(IX)'
-                //         Invoked(Argument);
-                Diagnostic(ErrorCode.ERR_AmbigCall, "Argument").WithArguments("Program.Argument(IQ)", "Program.Argument(IX)").WithLocation(5, 17)
+            var compilation = CreateCompilationWithBetterCandidates(
+                    source,
+                    options: TestOptions.ReleaseExe
+                )
+                .VerifyDiagnostics(
+                    // (5,17): error CS0121: The call is ambiguous between the following methods or properties: 'Program.Argument(IQ)' and 'Program.Argument(IX)'
+                    //         Invoked(Argument);
+                    Diagnostic(ErrorCode.ERR_AmbigCall, "Argument")
+                        .WithArguments("Program.Argument(IQ)", "Program.Argument(IX)")
+                        .WithLocation(5, 17)
                 );
             var model = compilation.GetSemanticModel(compilation.SyntaxTrees[0]);
-            var invocations = compilation.SyntaxTrees[0].GetRoot().DescendantNodes().OfType<InvocationExpressionSyntax>().ToArray();
+            var invocations = compilation
+                .SyntaxTrees[0]
+                .GetRoot()
+                .DescendantNodes()
+                .OfType<InvocationExpressionSyntax>()
+                .ToArray();
             Assert.Equal(1, invocations.Length);
 
-            var symbolInfo = model.GetSymbolInfo(invocations[0].ArgumentList.Arguments[0].Expression);
+            var symbolInfo = model.GetSymbolInfo(
+                invocations[0].ArgumentList.Arguments[0].Expression
+            );
             Assert.Equal(CandidateReason.OverloadResolutionFailure, symbolInfo.CandidateReason);
             Assert.Equal(4, symbolInfo.CandidateSymbols.Length);
-            Assert.Equal("B Program.Argument(IQ x)", symbolInfo.CandidateSymbols[0].ToTestDisplayString());
-            Assert.Equal("D Program.Argument(IW x)", symbolInfo.CandidateSymbols[1].ToTestDisplayString());
-            Assert.Equal("C Program.Argument(IX x)", symbolInfo.CandidateSymbols[2].ToTestDisplayString());
-            Assert.Equal("D Program.Argument(IY x)", symbolInfo.CandidateSymbols[3].ToTestDisplayString());
+            Assert.Equal(
+                "B Program.Argument(IQ x)",
+                symbolInfo.CandidateSymbols[0].ToTestDisplayString()
+            );
+            Assert.Equal(
+                "D Program.Argument(IW x)",
+                symbolInfo.CandidateSymbols[1].ToTestDisplayString()
+            );
+            Assert.Equal(
+                "C Program.Argument(IX x)",
+                symbolInfo.CandidateSymbols[2].ToTestDisplayString()
+            );
+            Assert.Equal(
+                "D Program.Argument(IY x)",
+                symbolInfo.CandidateSymbols[3].ToTestDisplayString()
+            );
         }
     }
 }

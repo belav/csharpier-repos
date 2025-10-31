@@ -11,7 +11,7 @@ namespace System.Tests
         {
             if (!BitConverter.IsLittleEndian)
             {
-                array = (byte[]) array.Clone();
+                array = (byte[])array.Clone();
                 Array.Reverse(array, index, length);
             }
             return array;

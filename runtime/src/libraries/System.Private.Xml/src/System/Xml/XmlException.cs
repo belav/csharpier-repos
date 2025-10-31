@@ -17,7 +17,9 @@ namespace System.Xml
     ///       number, line number, character position, and a text description.</para>
     /// </devdoc>
     [Serializable]
-    [System.Runtime.CompilerServices.TypeForwardedFrom("System.Xml, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089")]
+    [System.Runtime.CompilerServices.TypeForwardedFrom(
+        "System.Xml, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+    )]
     public class XmlException : SystemException
     {
         private readonly string _res;
@@ -31,9 +33,14 @@ namespace System.Xml
         // message == null for V2 or higher exceptions; the exception message is stored on the base class (Exception._message)
         private readonly string? _message;
 
-        [Obsolete(Obsoletions.LegacyFormatterImplMessage, DiagnosticId = Obsoletions.LegacyFormatterImplDiagId, UrlFormat = Obsoletions.SharedUrlFormat)]
+        [Obsolete(
+            Obsoletions.LegacyFormatterImplMessage,
+            DiagnosticId = Obsoletions.LegacyFormatterImplDiagId,
+            UrlFormat = Obsoletions.SharedUrlFormat
+        )]
         [EditorBrowsable(EditorBrowsableState.Never)]
-        protected XmlException(SerializationInfo info, StreamingContext context) : base(info, context)
+        protected XmlException(SerializationInfo info, StreamingContext context)
+            : base(info, context)
         {
             _res = (string)info.GetValue("res", typeof(string))!;
             _args = (string?[])info.GetValue("args", typeof(string[]))!;
@@ -68,7 +75,11 @@ namespace System.Xml
             }
         }
 
-        [Obsolete(Obsoletions.LegacyFormatterImplMessage, DiagnosticId = Obsoletions.LegacyFormatterImplDiagId, UrlFormat = Obsoletions.SharedUrlFormat)]
+        [Obsolete(
+            Obsoletions.LegacyFormatterImplMessage,
+            DiagnosticId = Obsoletions.LegacyFormatterImplDiagId,
+            UrlFormat = Obsoletions.SharedUrlFormat
+        )]
         [EditorBrowsable(EditorBrowsableState.Never)]
         public override void GetObjectData(SerializationInfo info, StreamingContext context)
         {
@@ -82,29 +93,40 @@ namespace System.Xml
         }
 
         //provided to meet the ECMA standards
-        public XmlException() : this(null)
-        {
-        }
+        public XmlException()
+            : this(null) { }
 
         //provided to meet the ECMA standards
-        public XmlException(string? message) : this(message, ((Exception?)null), 0, 0)
+        public XmlException(string? message)
+            : this(message, ((Exception?)null), 0, 0)
         {
-            Debug.Assert(message == null || !message.StartsWith("Xml_", StringComparison.Ordinal), "Do not pass a resource here!");
+            Debug.Assert(
+                message == null || !message.StartsWith("Xml_", StringComparison.Ordinal),
+                "Do not pass a resource here!"
+            );
         }
 
         //provided to meet ECMA standards
-        public XmlException(string? message, Exception? innerException) : this(message, innerException, 0, 0)
-        {
-        }
+        public XmlException(string? message, Exception? innerException)
+            : this(message, innerException, 0, 0) { }
 
         //provided to meet ECMA standards
-        public XmlException(string? message, Exception? innerException, int lineNumber, int linePosition) :
-            this(message, innerException, lineNumber, linePosition, null)
-        {
-        }
+        public XmlException(
+            string? message,
+            Exception? innerException,
+            int lineNumber,
+            int linePosition
+        )
+            : this(message, innerException, lineNumber, linePosition, null) { }
 
-        internal XmlException(string? message, Exception? innerException, int lineNumber, int linePosition, string? sourceUri) :
-            base(FormatUserMessage(message, lineNumber, linePosition), innerException)
+        internal XmlException(
+            string? message,
+            Exception? innerException,
+            int lineNumber,
+            int linePosition,
+            string? sourceUri
+        )
+            : base(FormatUserMessage(message, lineNumber, linePosition), innerException)
         {
             HResult = HResults.Xml;
             _res = (message == null ? SR.Xml_DefaultException : SR.Xml_UserException);
@@ -114,57 +136,93 @@ namespace System.Xml
             _linePosition = linePosition;
         }
 
-        internal XmlException(string res, string?[]? args) :
-            this(res, args, null, 0, 0, null)
-        { }
+        internal XmlException(string res, string?[]? args)
+            : this(res, args, null, 0, 0, null) { }
 
-        internal XmlException(string res, string? arg) :
-            this(res, new string?[] { arg }, null, 0, 0, null)
-        { }
+        internal XmlException(string res, string? arg)
+            : this(res, new string?[] { arg }, null, 0, 0, null) { }
 
-        internal XmlException(string res, string? arg, string? sourceUri) :
-            this(res, new string?[] { arg }, null, 0, 0, sourceUri)
-        { }
+        internal XmlException(string res, string? arg, string? sourceUri)
+            : this(res, new string?[] { arg }, null, 0, 0, sourceUri) { }
 
-        internal XmlException(string res, string? arg, IXmlLineInfo? lineInfo) :
-            this(res, new string?[] { arg }, lineInfo, null)
-        { }
+        internal XmlException(string res, string? arg, IXmlLineInfo? lineInfo)
+            : this(res, new string?[] { arg }, lineInfo, null) { }
 
-        internal XmlException(string res, string? arg, Exception? innerException, IXmlLineInfo? lineInfo) :
-            this(res, new string?[] { arg }, innerException, (lineInfo == null ? 0 : lineInfo.LineNumber), (lineInfo == null ? 0 : lineInfo.LinePosition), null)
-        { }
+        internal XmlException(
+            string res,
+            string? arg,
+            Exception? innerException,
+            IXmlLineInfo? lineInfo
+        )
+            : this(
+                res,
+                new string?[] { arg },
+                innerException,
+                (lineInfo == null ? 0 : lineInfo.LineNumber),
+                (lineInfo == null ? 0 : lineInfo.LinePosition),
+                null
+            ) { }
 
-        internal XmlException(string res, string?[]? args, IXmlLineInfo? lineInfo) :
-            this(res, args, lineInfo, null)
-        { }
+        internal XmlException(string res, string?[]? args, IXmlLineInfo? lineInfo)
+            : this(res, args, lineInfo, null) { }
 
-        internal XmlException(string res, string?[]? args, IXmlLineInfo? lineInfo, string? sourceUri) :
-            this(res, args, null, (lineInfo == null ? 0 : lineInfo.LineNumber), (lineInfo == null ? 0 : lineInfo.LinePosition), sourceUri)
-        {
-        }
+        internal XmlException(
+            string res,
+            string?[]? args,
+            IXmlLineInfo? lineInfo,
+            string? sourceUri
+        )
+            : this(
+                res,
+                args,
+                null,
+                (lineInfo == null ? 0 : lineInfo.LineNumber),
+                (lineInfo == null ? 0 : lineInfo.LinePosition),
+                sourceUri
+            ) { }
 
-        internal XmlException(string res, string? arg, int lineNumber, int linePosition) :
-            this(res, new string?[] { arg }, null, lineNumber, linePosition, null)
-        { }
+        internal XmlException(string res, string? arg, int lineNumber, int linePosition)
+            : this(res, new string?[] { arg }, null, lineNumber, linePosition, null) { }
 
-        internal XmlException(string res, string? arg, int lineNumber, int linePosition, string? sourceUri) :
-            this(res, new string?[] { arg }, null, lineNumber, linePosition, sourceUri)
-        { }
+        internal XmlException(
+            string res,
+            string? arg,
+            int lineNumber,
+            int linePosition,
+            string? sourceUri
+        )
+            : this(res, new string?[] { arg }, null, lineNumber, linePosition, sourceUri) { }
 
-        internal XmlException(string res, string?[]? args, int lineNumber, int linePosition) :
-            this(res, args, null, lineNumber, linePosition, null)
-        { }
+        internal XmlException(string res, string?[]? args, int lineNumber, int linePosition)
+            : this(res, args, null, lineNumber, linePosition, null) { }
 
-        internal XmlException(string res, string?[]? args, int lineNumber, int linePosition, string? sourceUri) :
-            this(res, args, null, lineNumber, linePosition, sourceUri)
-        { }
+        internal XmlException(
+            string res,
+            string?[]? args,
+            int lineNumber,
+            int linePosition,
+            string? sourceUri
+        )
+            : this(res, args, null, lineNumber, linePosition, sourceUri) { }
 
-        internal XmlException(string res, string?[]? args, Exception? innerException, int lineNumber, int linePosition) :
-            this(res, args, innerException, lineNumber, linePosition, null)
-        { }
+        internal XmlException(
+            string res,
+            string?[]? args,
+            Exception? innerException,
+            int lineNumber,
+            int linePosition
+        )
+            : this(res, args, innerException, lineNumber, linePosition, null) { }
 
-        internal XmlException(string res, string?[]? args, Exception? innerException, int lineNumber, int linePosition, string? sourceUri) :
-            base(CreateMessage(res, args, lineNumber, linePosition), innerException)
+        internal XmlException(
+            string res,
+            string?[]? args,
+            Exception? innerException,
+            int lineNumber,
+            int linePosition,
+            string? sourceUri
+        )
+            : base(CreateMessage(res, args, lineNumber, linePosition), innerException)
         {
             HResult = HResults.Xml;
             _res = res;
@@ -190,12 +248,22 @@ namespace System.Xml
                 else
                 {
                     // add line information
-                    return CreateMessage(SR.Xml_UserException, new string[] { message }, lineNumber, linePosition);
+                    return CreateMessage(
+                        SR.Xml_UserException,
+                        new string[] { message },
+                        lineNumber,
+                        linePosition
+                    );
                 }
             }
         }
 
-        private static string CreateMessage(string res, string?[]? args, int lineNumber, int linePosition)
+        private static string CreateMessage(
+            string res,
+            string?[]? args,
+            int lineNumber,
+            int linePosition
+        )
         {
             try
             {
@@ -207,7 +275,10 @@ namespace System.Xml
                     string lineNumberStr = lineNumber.ToString(CultureInfo.InvariantCulture);
                     string linePositionStr = linePosition.ToString(CultureInfo.InvariantCulture);
 
-                    message = SR.Format(SR.Xml_MessageWithErrorPosition, new string[] { message, lineNumberStr, linePositionStr });
+                    message = SR.Format(
+                        SR.Xml_MessageWithErrorPosition,
+                        new string[] { message, lineNumberStr, linePositionStr }
+                    );
                 }
                 return message;
             }
@@ -219,7 +290,10 @@ namespace System.Xml
 
         internal static string[] BuildCharExceptionArgs(string data, int invCharIndex)
         {
-            return BuildCharExceptionArgs(data[invCharIndex], invCharIndex + 1 < data.Length ? data[invCharIndex + 1] : '\0');
+            return BuildCharExceptionArgs(
+                data[invCharIndex],
+                invCharIndex + 1 < data.Length ? data[invCharIndex + 1] : '\0'
+            );
         }
 
         internal static string[] BuildCharExceptionArgs(char[] data, int length, int invCharIndex)
@@ -228,7 +302,10 @@ namespace System.Xml
             Debug.Assert(invCharIndex < length);
             Debug.Assert(length <= data.Length);
 
-            return BuildCharExceptionArgs(data[invCharIndex], invCharIndex + 1 < length ? data[invCharIndex + 1] : '\0');
+            return BuildCharExceptionArgs(
+                data[invCharIndex],
+                invCharIndex + 1 < length ? data[invCharIndex + 1] : '\0'
+            );
         }
 
         internal static string[] BuildCharExceptionArgs(char invChar, char nextChar)
@@ -275,27 +352,18 @@ namespace System.Xml
 
         public override string Message
         {
-            get
-            {
-                return _message ?? base.Message;
-            }
+            get { return _message ?? base.Message; }
         }
 
         internal string ResString
         {
-            get
-            {
-                return _res;
-            }
+            get { return _res; }
         }
 
         internal static bool IsCatchableException(Exception e)
         {
             Debug.Assert(e != null, "Unexpected null exception");
-            return !(
-                e is OutOfMemoryException ||
-                e is NullReferenceException
-            );
+            return !(e is OutOfMemoryException || e is NullReferenceException);
         }
     };
 }

@@ -18,9 +18,9 @@ namespace System.Web.Http.SelfHost.Channels
         /// <returns><c>true</c> if <paramref name="value"/> is a valid <see cref="HttpBindingSecurityMode"/> value; otherwise<c> false</c>.</returns>
         public static bool IsDefined(HttpBindingSecurityMode value)
         {
-            return value == HttpBindingSecurityMode.None ||
-                   value == HttpBindingSecurityMode.Transport ||
-                   value == HttpBindingSecurityMode.TransportCredentialOnly;
+            return value == HttpBindingSecurityMode.None
+                || value == HttpBindingSecurityMode.Transport
+                || value == HttpBindingSecurityMode.TransportCredentialOnly;
         }
 
         /// <summary>
@@ -33,7 +33,11 @@ namespace System.Web.Http.SelfHost.Channels
         {
             if (!IsDefined(value))
             {
-                throw Error.InvalidEnumArgument(parameterName, (int)value, typeof(HttpBindingSecurityMode));
+                throw Error.InvalidEnumArgument(
+                    parameterName,
+                    (int)value,
+                    typeof(HttpBindingSecurityMode)
+                );
             }
         }
     }

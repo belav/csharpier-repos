@@ -13,6 +13,7 @@ namespace System.Security.Cryptography
         private string? _algName;
 
         public RSAPKCS1SignatureDeformatter() { }
+
         public RSAPKCS1SignatureDeformatter(AsymmetricAlgorithm key)
         {
             ArgumentNullException.ThrowIfNull(key);
@@ -48,11 +49,20 @@ namespace System.Security.Cryptography
             ArgumentNullException.ThrowIfNull(rgbSignature);
 
             if (_algName == null)
-                throw new CryptographicUnexpectedOperationException(SR.Cryptography_FormatterMissingAlgorithm);
+                throw new CryptographicUnexpectedOperationException(
+                    SR.Cryptography_FormatterMissingAlgorithm
+                );
             if (_rsaKey == null)
-                throw new CryptographicUnexpectedOperationException(SR.Cryptography_FormatterMissingKey);
+                throw new CryptographicUnexpectedOperationException(
+                    SR.Cryptography_FormatterMissingKey
+                );
 
-            return _rsaKey.VerifyHash(rgbHash, rgbSignature, new HashAlgorithmName(_algName), RSASignaturePadding.Pkcs1);
+            return _rsaKey.VerifyHash(
+                rgbHash,
+                rgbSignature,
+                new HashAlgorithmName(_algName),
+                RSASignaturePadding.Pkcs1
+            );
         }
     }
 }

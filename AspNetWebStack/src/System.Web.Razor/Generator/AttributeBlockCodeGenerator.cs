@@ -10,7 +10,11 @@ namespace System.Web.Razor.Generator
 {
     public class AttributeBlockCodeGenerator : BlockCodeGenerator
     {
-        public AttributeBlockCodeGenerator(string name, LocationTagged<string> prefix, LocationTagged<string> suffix)
+        public AttributeBlockCodeGenerator(
+            string name,
+            LocationTagged<string> prefix,
+            LocationTagged<string> suffix
+        )
         {
             Name = name;
             Prefix = prefix;
@@ -28,27 +32,33 @@ namespace System.Web.Razor.Generator
                 return; // Don't generate anything!
             }
             context.FlushBufferedStatement();
-            context.AddStatement(context.BuildCodeString(cw =>
-            {
-                if (!String.IsNullOrEmpty(context.TargetWriterName))
+            context.AddStatement(
+                context.BuildCodeString(cw =>
                 {
-                    cw.WriteStartMethodInvoke(context.Host.GeneratedClassContext.WriteAttributeToMethodName);
-                    cw.WriteSnippet(context.TargetWriterName);
+                    if (!String.IsNullOrEmpty(context.TargetWriterName))
+                    {
+                        cw.WriteStartMethodInvoke(
+                            context.Host.GeneratedClassContext.WriteAttributeToMethodName
+                        );
+                        cw.WriteSnippet(context.TargetWriterName);
+                        cw.WriteParameterSeparator();
+                    }
+                    else
+                    {
+                        cw.WriteStartMethodInvoke(
+                            context.Host.GeneratedClassContext.WriteAttributeMethodName
+                        );
+                    }
+                    cw.WriteStringLiteral(Name);
                     cw.WriteParameterSeparator();
-                }
-                else
-                {
-                    cw.WriteStartMethodInvoke(context.Host.GeneratedClassContext.WriteAttributeMethodName);
-                }
-                cw.WriteStringLiteral(Name);
-                cw.WriteParameterSeparator();
-                cw.WriteLocationTaggedString(Prefix);
-                cw.WriteParameterSeparator();
-                cw.WriteLocationTaggedString(Suffix);
+                    cw.WriteLocationTaggedString(Prefix);
+                    cw.WriteParameterSeparator();
+                    cw.WriteLocationTaggedString(Suffix);
 
-                // In VB, we need a line continuation
-                cw.WriteLineContinuation();
-            }));
+                    // In VB, we need a line continuation
+                    cw.WriteLineContinuation();
+                })
+            );
         }
 
         public override void GenerateEndBlockCode(Block target, CodeGeneratorContext context)
@@ -58,34 +68,38 @@ namespace System.Web.Razor.Generator
                 return; // Don't generate anything!
             }
             context.FlushBufferedStatement();
-            context.AddStatement(context.BuildCodeString(cw =>
-            {
-                cw.WriteEndMethodInvoke();
-                cw.WriteEndStatement();
-            }));
+            context.AddStatement(
+                context.BuildCodeString(cw =>
+                {
+                    cw.WriteEndMethodInvoke();
+                    cw.WriteEndStatement();
+                })
+            );
         }
 
         public override string ToString()
         {
-            return String.Format(CultureInfo.CurrentCulture, "Attr:{0},{1:F},{2:F}", Name, Prefix, Suffix);
+            return String.Format(
+                CultureInfo.CurrentCulture,
+                "Attr:{0},{1:F},{2:F}",
+                Name,
+                Prefix,
+                Suffix
+            );
         }
 
         public override bool Equals(object obj)
         {
             AttributeBlockCodeGenerator other = obj as AttributeBlockCodeGenerator;
-            return other != null &&
-                   String.Equals(other.Name, Name, StringComparison.Ordinal) &&
-                   Equals(other.Prefix, Prefix) &&
-                   Equals(other.Suffix, Suffix);
+            return other != null
+                && String.Equals(other.Name, Name, StringComparison.Ordinal)
+                && Equals(other.Prefix, Prefix)
+                && Equals(other.Suffix, Suffix);
         }
 
         public override int GetHashCode()
         {
-            return HashCodeCombiner.Start()
-                .Add(Name)
-                .Add(Prefix)
-                .Add(Suffix)
-                .CombinedHash;
+            return HashCodeCombiner.Start().Add(Name).Add(Prefix).Add(Suffix).CombinedHash;
         }
     }
 }

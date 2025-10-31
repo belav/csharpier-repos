@@ -19,7 +19,12 @@ namespace System.Configuration
             _enumType = typeEnum;
         }
 
-        public override object ConvertTo(ITypeDescriptorContext ctx, CultureInfo ci, object value, Type type)
+        public override object ConvertTo(
+            ITypeDescriptorContext ctx,
+            CultureInfo ci,
+            object value,
+            Type type
+        )
         {
             return value.ToString();
         }
@@ -30,8 +35,13 @@ namespace System.Configuration
             if ((data is string value) && (value.Length > 0))
             {
                 // Disallow numeric values and whitespace at start and end.
-                if ((!char.IsDigit(value[0])) && (value[0] != '-') && (value[0] != '+') &&
-                    (!char.IsWhiteSpace(value[0])) && (!char.IsWhiteSpace(value[value.Length - 1])))
+                if (
+                    (!char.IsDigit(value[0]))
+                    && (value[0] != '-')
+                    && (value[0] != '+')
+                    && (!char.IsWhiteSpace(value[0]))
+                    && (!char.IsWhiteSpace(value[value.Length - 1]))
+                )
                 {
                     try
                     {

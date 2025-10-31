@@ -17,7 +17,10 @@ namespace System.Composition.TypedParts.ActivationFeatures
             _pi = pi;
         }
 
-        public PropertyInfo Property { get { return _pi; } }
+        public PropertyInfo Property
+        {
+            get { return _pi; }
+        }
 
         public override string ToString()
         {

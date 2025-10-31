@@ -6,7 +6,9 @@ namespace Microsoft.EntityFrameworkCore.Metadata;
 /// <summary>
 ///     Represents a stored procedure result column.
 /// </summary>
-public interface IMutableStoredProcedureResultColumn : IReadOnlyStoredProcedureResultColumn, IMutableAnnotatable
+public interface IMutableStoredProcedureResultColumn
+    : IReadOnlyStoredProcedureResultColumn,
+        IMutableAnnotatable
 {
     /// <summary>
     ///     Gets the stored procedure to which this result column belongs.

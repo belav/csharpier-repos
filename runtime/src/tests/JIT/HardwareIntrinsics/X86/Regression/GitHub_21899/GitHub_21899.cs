@@ -1,7 +1,7 @@
 using System;
-using System.Runtime.Intrinsics.X86;
-using System.Runtime.Intrinsics;
 using System.Runtime.CompilerServices;
+using System.Runtime.Intrinsics;
+using System.Runtime.Intrinsics.X86;
 using Xunit;
 
 namespace GitHub_21899
@@ -50,12 +50,14 @@ namespace GitHub_21899
 
         static bool test1()
         {
-            return !Bmi2.X64.IsSupported || (MultiplyNoFlags1(1111111111111UL, 1111111111111UL) == 1107357235536201905UL);
+            return !Bmi2.X64.IsSupported
+                || (MultiplyNoFlags1(1111111111111UL, 1111111111111UL) == 1107357235536201905UL);
         }
 
         static bool test2()
         {
-            return !Bmi2.X64.IsSupported || (MultiplyNoFlags2(1111111111111UL, 1111111111111UL) == 66926UL);
+            return !Bmi2.X64.IsSupported
+                || (MultiplyNoFlags2(1111111111111UL, 1111111111111UL) == 66926UL);
         }
 
         static bool test3()

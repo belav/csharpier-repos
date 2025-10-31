@@ -5,16 +5,16 @@ using Microsoft.EntityFrameworkCore.TestModels.Northwind;
 
 namespace Microsoft.EntityFrameworkCore.Query;
 
-public abstract class NorthwindQueryFixtureBase<TModelCustomizer> : SharedStoreFixtureBase<NorthwindContext>, IFilteredQueryFixtureBase
+public abstract class NorthwindQueryFixtureBase<TModelCustomizer>
+    : SharedStoreFixtureBase<NorthwindContext>,
+        IFilteredQueryFixtureBase
     where TModelCustomizer : IModelCustomizer, new()
 {
-    public Func<DbContext> GetContextCreator()
-        => () => CreateContext();
+    public Func<DbContext> GetContextCreator() => () => CreateContext();
 
     private readonly Dictionary<(bool, string, string), ISetSource> _expectedDataCache = new();
 
-    public virtual ISetSource GetExpectedData()
-        => NorthwindData.Instance;
+    public virtual ISetSource GetExpectedData() => NorthwindData.Instance;
 
     public virtual ISetSource GetFilteredExpectedData(DbContext context)
     {
@@ -22,7 +22,12 @@ public abstract class NorthwindQueryFixtureBase<TModelCustomizer> : SharedStoreF
         var tenantPrefix = applyFilters ? ((NorthwindContext)context).TenantPrefix : null;
         var searchTerm = applyFilters ? ((NorthwindContext)context).SearchTerm : null;
 
-        if (_expectedDataCache.TryGetValue((applyFilters, tenantPrefix, searchTerm), out var cachedResult))
+        if (
+            _expectedDataCache.TryGetValue(
+                (applyFilters, tenantPrefix, searchTerm),
+                out var cachedResult
+            )
+        )
         {
             return cachedResult;
         }
@@ -30,14 +35,22 @@ public abstract class NorthwindQueryFixtureBase<TModelCustomizer> : SharedStoreF
         var expectedData = new NorthwindData();
         if (applyFilters)
         {
-            var customers = expectedData.Customers.Where(c => c.CompanyName.StartsWith(tenantPrefix)).ToArray();
-            var customerQueriesWithQueryFilter = expectedData.CustomerQueriesWithQueryFilter
-                .Where(cq => cq.CompanyName.StartsWith(searchTerm)).ToArray();
+            var customers = expectedData
+                .Customers.Where(c => c.CompanyName.StartsWith(tenantPrefix))
+                .ToArray();
+            var customerQueriesWithQueryFilter = expectedData
+                .CustomerQueriesWithQueryFilter.Where(cq => cq.CompanyName.StartsWith(searchTerm))
+                .ToArray();
             var employees = expectedData.Employees.Where(e => e.Address.StartsWith("A")).ToArray();
             var products = expectedData.Products.Where(p => p.Discontinued).ToArray();
-            var orders = expectedData.Orders.Where(o => o.Customer.CompanyName.StartsWith(tenantPrefix)).ToArray();
-            var orderDetails = expectedData.OrderDetails
-                .Where(od => od.Order.Customer.CompanyName.StartsWith(tenantPrefix) && od.Quantity > 50).ToArray();
+            var orders = expectedData
+                .Orders.Where(o => o.Customer.CompanyName.StartsWith(tenantPrefix))
+                .ToArray();
+            var orderDetails = expectedData
+                .OrderDetails.Where(od =>
+                    od.Order.Customer.CompanyName.StartsWith(tenantPrefix) && od.Quantity > 50
+                )
+                .ToArray();
 
             foreach (var product in products)
             {
@@ -51,7 +64,9 @@ public abstract class NorthwindQueryFixtureBase<TModelCustomizer> : SharedStoreF
 
             foreach (var orderDetail in orderDetails)
             {
-                orderDetail.Order = orderDetail.Order.Customer.CompanyName.StartsWith(tenantPrefix) ? orderDetail.Order : null;
+                orderDetail.Order = orderDetail.Order.Customer.CompanyName.StartsWith(tenantPrefix)
+                    ? orderDetail.Order
+                    : null;
                 orderDetail.Product = orderDetail.Product.Discontinued ? orderDetail.Product : null;
             }
 
@@ -63,7 +78,8 @@ public abstract class NorthwindQueryFixtureBase<TModelCustomizer> : SharedStoreF
                 products,
                 expectedData.ProductQueries,
                 orders,
-                orderDetails);
+                orderDetails
+            );
         }
 
         _expectedDataCache[(applyFilters, tenantPrefix, searchTerm)] = expectedData;
@@ -71,218 +87,233 @@ public abstract class NorthwindQueryFixtureBase<TModelCustomizer> : SharedStoreF
         return expectedData;
     }
 
-    public IReadOnlyDictionary<Type, object> EntitySorters { get; } = new Dictionary<Type, Func<object, object>>
-    {
-        { typeof(Customer), e => ((Customer)e)?.CustomerID },
-        { typeof(CustomerQuery), e => ((CustomerQuery)e)?.CompanyName },
-        { typeof(CustomerQueryWithQueryFilter), e => ((CustomerQueryWithQueryFilter)e)?.CompanyName },
-        { typeof(Order), e => ((Order)e)?.OrderID },
-        { typeof(OrderQuery), e => ((OrderQuery)e)?.CustomerID },
-        { typeof(Employee), e => ((Employee)e)?.EmployeeID },
-        { typeof(Product), e => ((Product)e)?.ProductID },
-        { typeof(ProductQuery), e => ((ProductQuery)e)?.ProductID },
-        { typeof(ProductView), e => ((ProductView)e)?.ProductID },
-        { typeof(OrderDetail), e => (((OrderDetail)e)?.OrderID.ToString(), ((OrderDetail)e)?.ProductID.ToString()) }
-    }.ToDictionary(e => e.Key, e => (object)e.Value);
-
-    public IReadOnlyDictionary<Type, object> EntityAsserters { get; } = new Dictionary<Type, Action<object, object>>
-    {
+    public IReadOnlyDictionary<Type, object> EntitySorters { get; } =
+        new Dictionary<Type, Func<object, object>>
         {
-            typeof(Customer), (e, a) =>
+            { typeof(Customer), e => ((Customer)e)?.CustomerID },
+            { typeof(CustomerQuery), e => ((CustomerQuery)e)?.CompanyName },
             {
-                Assert.Equal(e == null, a == null);
+                typeof(CustomerQueryWithQueryFilter),
+                e => ((CustomerQueryWithQueryFilter)e)?.CompanyName
+            },
+            { typeof(Order), e => ((Order)e)?.OrderID },
+            { typeof(OrderQuery), e => ((OrderQuery)e)?.CustomerID },
+            { typeof(Employee), e => ((Employee)e)?.EmployeeID },
+            { typeof(Product), e => ((Product)e)?.ProductID },
+            { typeof(ProductQuery), e => ((ProductQuery)e)?.ProductID },
+            { typeof(ProductView), e => ((ProductView)e)?.ProductID },
+            {
+                typeof(OrderDetail),
+                e => (((OrderDetail)e)?.OrderID.ToString(), ((OrderDetail)e)?.ProductID.ToString())
+            },
+        }.ToDictionary(e => e.Key, e => (object)e.Value);
 
-                if (a != null)
-                {
-                    var ee = (Customer)e;
-                    var aa = (Customer)a;
-
-                    Assert.Equal(ee.CustomerID, aa.CustomerID);
-                    Assert.Equal(ee.Address, aa.Address);
-                    Assert.Equal(ee.CompanyName, aa.CompanyName);
-                    Assert.Equal(ee.ContactName, aa.ContactName);
-                    Assert.Equal(ee.ContactTitle, aa.ContactTitle);
-                    Assert.Equal(ee.Country, aa.Country);
-                    Assert.Equal(ee.Fax, aa.Fax);
-                    Assert.Equal(ee.Phone, aa.Phone);
-                    Assert.Equal(ee.PostalCode, aa.PostalCode);
-                }
-            }
-        },
+    public IReadOnlyDictionary<Type, object> EntityAsserters { get; } =
+        new Dictionary<Type, Action<object, object>>
         {
-            typeof(CustomerQuery), (e, a) =>
             {
-                Assert.Equal(e == null, a == null);
-
-                if (a != null)
+                typeof(Customer),
+                (e, a) =>
                 {
-                    var ee = (CustomerQuery)e;
-                    var aa = (CustomerQuery)a;
+                    Assert.Equal(e == null, a == null);
 
-                    Assert.Equal(ee.CompanyName, aa.CompanyName);
-                    Assert.Equal(ee.Address, aa.Address);
-                    Assert.Equal(ee.City, aa.City);
-                    Assert.Equal(ee.ContactName, aa.ContactName);
-                    Assert.Equal(ee.ContactTitle, aa.ContactTitle);
+                    if (a != null)
+                    {
+                        var ee = (Customer)e;
+                        var aa = (Customer)a;
+
+                        Assert.Equal(ee.CustomerID, aa.CustomerID);
+                        Assert.Equal(ee.Address, aa.Address);
+                        Assert.Equal(ee.CompanyName, aa.CompanyName);
+                        Assert.Equal(ee.ContactName, aa.ContactName);
+                        Assert.Equal(ee.ContactTitle, aa.ContactTitle);
+                        Assert.Equal(ee.Country, aa.Country);
+                        Assert.Equal(ee.Fax, aa.Fax);
+                        Assert.Equal(ee.Phone, aa.Phone);
+                        Assert.Equal(ee.PostalCode, aa.PostalCode);
+                    }
                 }
-            }
-        },
-        {
-            typeof(CustomerQueryWithQueryFilter), (e, a) =>
+            },
             {
-                Assert.Equal(e == null, a == null);
-
-                if (a != null)
+                typeof(CustomerQuery),
+                (e, a) =>
                 {
-                    var ee = (CustomerQueryWithQueryFilter)e;
-                    var aa = (CustomerQueryWithQueryFilter)a;
+                    Assert.Equal(e == null, a == null);
 
-                    Assert.Equal(ee.CompanyName, aa.CompanyName);
-                    Assert.Equal(ee.SearchTerm, aa.SearchTerm);
-                    Assert.Equal(ee.OrderCount, aa.OrderCount);
+                    if (a != null)
+                    {
+                        var ee = (CustomerQuery)e;
+                        var aa = (CustomerQuery)a;
+
+                        Assert.Equal(ee.CompanyName, aa.CompanyName);
+                        Assert.Equal(ee.Address, aa.Address);
+                        Assert.Equal(ee.City, aa.City);
+                        Assert.Equal(ee.ContactName, aa.ContactName);
+                        Assert.Equal(ee.ContactTitle, aa.ContactTitle);
+                    }
                 }
-            }
-        },
-        {
-            typeof(Order), (e, a) =>
+            },
             {
-                Assert.Equal(e == null, a == null);
-
-                if (a != null)
+                typeof(CustomerQueryWithQueryFilter),
+                (e, a) =>
                 {
-                    var ee = (Order)e;
-                    var aa = (Order)a;
+                    Assert.Equal(e == null, a == null);
 
-                    Assert.Equal(ee.OrderID, aa.OrderID);
-                    Assert.Equal(ee.CustomerID, aa.CustomerID);
-                    Assert.Equal(ee.EmployeeID, aa.EmployeeID);
-                    Assert.Equal(ee.OrderDate, aa.OrderDate);
+                    if (a != null)
+                    {
+                        var ee = (CustomerQueryWithQueryFilter)e;
+                        var aa = (CustomerQueryWithQueryFilter)a;
+
+                        Assert.Equal(ee.CompanyName, aa.CompanyName);
+                        Assert.Equal(ee.SearchTerm, aa.SearchTerm);
+                        Assert.Equal(ee.OrderCount, aa.OrderCount);
+                    }
                 }
-            }
-        },
-        {
-            typeof(OrderQuery), (e, a) =>
+            },
             {
-                Assert.Equal(e == null, a == null);
-
-                if (a != null)
+                typeof(Order),
+                (e, a) =>
                 {
-                    var ee = (OrderQuery)e;
-                    var aa = (OrderQuery)a;
+                    Assert.Equal(e == null, a == null);
 
-                    Assert.Equal(ee.CustomerID, aa.CustomerID);
+                    if (a != null)
+                    {
+                        var ee = (Order)e;
+                        var aa = (Order)a;
+
+                        Assert.Equal(ee.OrderID, aa.OrderID);
+                        Assert.Equal(ee.CustomerID, aa.CustomerID);
+                        Assert.Equal(ee.EmployeeID, aa.EmployeeID);
+                        Assert.Equal(ee.OrderDate, aa.OrderDate);
+                    }
                 }
-            }
-        },
-        {
-            typeof(Employee), (e, a) =>
+            },
             {
-                Assert.Equal(e == null, a == null);
-
-                if (a != null)
+                typeof(OrderQuery),
+                (e, a) =>
                 {
-                    var ee = (Employee)e;
-                    var aa = (Employee)a;
+                    Assert.Equal(e == null, a == null);
 
-                    Assert.Equal(ee.EmployeeID, aa.EmployeeID);
-                    Assert.Equal(ee.Title, aa.Title);
-                    Assert.Equal(ee.City, aa.City);
-                    Assert.Equal(ee.Country, aa.Country);
-                    Assert.Equal(ee.FirstName, aa.FirstName);
+                    if (a != null)
+                    {
+                        var ee = (OrderQuery)e;
+                        var aa = (OrderQuery)a;
+
+                        Assert.Equal(ee.CustomerID, aa.CustomerID);
+                    }
                 }
-            }
-        },
-        {
-            typeof(Product), (e, a) =>
+            },
             {
-                Assert.Equal(e == null, a == null);
-
-                if (a != null)
+                typeof(Employee),
+                (e, a) =>
                 {
-                    var ee = (Product)e;
-                    var aa = (Product)a;
+                    Assert.Equal(e == null, a == null);
 
-                    Assert.Equal(ee.ProductID, aa.ProductID);
-                    Assert.Equal(ee.ProductName, aa.ProductName);
-                    Assert.Equal(ee.SupplierID, aa.SupplierID);
-                    Assert.Equal(ee.UnitPrice, aa.UnitPrice);
-                    Assert.Equal(ee.UnitsInStock, aa.UnitsInStock);
+                    if (a != null)
+                    {
+                        var ee = (Employee)e;
+                        var aa = (Employee)a;
+
+                        Assert.Equal(ee.EmployeeID, aa.EmployeeID);
+                        Assert.Equal(ee.Title, aa.Title);
+                        Assert.Equal(ee.City, aa.City);
+                        Assert.Equal(ee.Country, aa.Country);
+                        Assert.Equal(ee.FirstName, aa.FirstName);
+                    }
                 }
-            }
-        },
-        {
-            typeof(ProductQuery), (e, a) =>
+            },
             {
-                Assert.Equal(e == null, a == null);
-
-                if (a != null)
+                typeof(Product),
+                (e, a) =>
                 {
-                    var ee = (ProductQuery)e;
-                    var aa = (ProductQuery)a;
+                    Assert.Equal(e == null, a == null);
 
-                    Assert.Equal(ee.ProductID, aa.ProductID);
-                    Assert.Equal(ee.CategoryName, aa.CategoryName);
-                    Assert.Equal(ee.ProductName, aa.ProductName);
+                    if (a != null)
+                    {
+                        var ee = (Product)e;
+                        var aa = (Product)a;
+
+                        Assert.Equal(ee.ProductID, aa.ProductID);
+                        Assert.Equal(ee.ProductName, aa.ProductName);
+                        Assert.Equal(ee.SupplierID, aa.SupplierID);
+                        Assert.Equal(ee.UnitPrice, aa.UnitPrice);
+                        Assert.Equal(ee.UnitsInStock, aa.UnitsInStock);
+                    }
                 }
-            }
-        },
-        {
-            typeof(ProductView), (e, a) =>
+            },
             {
-                Assert.Equal(e == null, a == null);
-
-                if (a != null)
+                typeof(ProductQuery),
+                (e, a) =>
                 {
-                    var ee = (ProductView)e;
-                    var aa = (ProductView)a;
+                    Assert.Equal(e == null, a == null);
 
-                    Assert.Equal(ee.ProductID, aa.ProductID);
-                    Assert.Equal(ee.CategoryName, aa.CategoryName);
-                    Assert.Equal(ee.ProductName, aa.ProductName);
+                    if (a != null)
+                    {
+                        var ee = (ProductQuery)e;
+                        var aa = (ProductQuery)a;
+
+                        Assert.Equal(ee.ProductID, aa.ProductID);
+                        Assert.Equal(ee.CategoryName, aa.CategoryName);
+                        Assert.Equal(ee.ProductName, aa.ProductName);
+                    }
                 }
-            }
-        },
-        {
-            typeof(OrderDetail), (e, a) =>
+            },
             {
-                Assert.Equal(e == null, a == null);
-
-                if (a != null)
+                typeof(ProductView),
+                (e, a) =>
                 {
-                    var ee = (OrderDetail)e;
-                    var aa = (OrderDetail)a;
+                    Assert.Equal(e == null, a == null);
 
-                    Assert.Equal(ee.OrderID, aa.OrderID);
-                    Assert.Equal(ee.ProductID, aa.ProductID);
-                    Assert.Equal(ee.Quantity, aa.Quantity);
-                    Assert.Equal(ee.UnitPrice, aa.UnitPrice);
-                    Assert.Equal(ee.Discount, aa.Discount);
+                    if (a != null)
+                    {
+                        var ee = (ProductView)e;
+                        var aa = (ProductView)a;
+
+                        Assert.Equal(ee.ProductID, aa.ProductID);
+                        Assert.Equal(ee.CategoryName, aa.CategoryName);
+                        Assert.Equal(ee.ProductName, aa.ProductName);
+                    }
                 }
-            }
-        },
-    }.ToDictionary(e => e.Key, e => (object)e.Value);
+            },
+            {
+                typeof(OrderDetail),
+                (e, a) =>
+                {
+                    Assert.Equal(e == null, a == null);
 
-    protected override string StoreName
-        => "Northwind";
+                    if (a != null)
+                    {
+                        var ee = (OrderDetail)e;
+                        var aa = (OrderDetail)a;
 
-    protected override bool UsePooling
-        => typeof(TModelCustomizer) == typeof(NoopModelCustomizer);
+                        Assert.Equal(ee.OrderID, aa.OrderID);
+                        Assert.Equal(ee.ProductID, aa.ProductID);
+                        Assert.Equal(ee.Quantity, aa.Quantity);
+                        Assert.Equal(ee.UnitPrice, aa.UnitPrice);
+                        Assert.Equal(ee.Discount, aa.Discount);
+                    }
+                }
+            },
+        }.ToDictionary(e => e.Key, e => (object)e.Value);
 
-    protected override void OnModelCreating(ModelBuilder modelBuilder, DbContext context)
-        => new TModelCustomizer().Customize(modelBuilder, context);
+    protected override string StoreName => "Northwind";
 
-    protected override void Seed(NorthwindContext context)
-        => NorthwindData.Seed(context);
+    protected override bool UsePooling => typeof(TModelCustomizer) == typeof(NoopModelCustomizer);
 
-    protected override Task SeedAsync(NorthwindContext context)
-        => NorthwindData.SeedAsync(context);
+    protected override void OnModelCreating(ModelBuilder modelBuilder, DbContext context) =>
+        new TModelCustomizer().Customize(modelBuilder, context);
 
-    public override DbContextOptionsBuilder AddOptions(DbContextOptionsBuilder builder)
-        => base.AddOptions(builder).ConfigureWarnings(
-            c => c
-                .Log(CoreEventId.RowLimitingOperationWithoutOrderByWarning)
-                .Log(CoreEventId.FirstWithoutOrderByAndFilterWarning)
-                .Log(CoreEventId.DistinctAfterOrderByWithoutRowLimitingOperatorWarning)
-                .Log(CoreEventId.PossibleUnintendedCollectionNavigationNullComparisonWarning)
-                .Log(CoreEventId.PossibleUnintendedReferenceComparisonWarning));
+    protected override void Seed(NorthwindContext context) => NorthwindData.Seed(context);
+
+    protected override Task SeedAsync(NorthwindContext context) => NorthwindData.SeedAsync(context);
+
+    public override DbContextOptionsBuilder AddOptions(DbContextOptionsBuilder builder) =>
+        base.AddOptions(builder)
+            .ConfigureWarnings(c =>
+                c.Log(CoreEventId.RowLimitingOperationWithoutOrderByWarning)
+                    .Log(CoreEventId.FirstWithoutOrderByAndFilterWarning)
+                    .Log(CoreEventId.DistinctAfterOrderByWithoutRowLimitingOperatorWarning)
+                    .Log(CoreEventId.PossibleUnintendedCollectionNavigationNullComparisonWarning)
+                    .Log(CoreEventId.PossibleUnintendedReferenceComparisonWarning)
+            );
 }

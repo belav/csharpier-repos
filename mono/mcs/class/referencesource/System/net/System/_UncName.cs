@@ -6,24 +6,23 @@
 //------------------------------------------------------------------------------
 using System.Globalization;
 
-namespace System {
-
+namespace System
+{
     // The class designed as to keep minimal the working set of Uri class.
     // The idea is to stay with static helper methods and strings
-    internal class UncNameHelper {
-
-    // fields
+    internal class UncNameHelper
+    {
+        // fields
 
         internal const int MaximumInternetNameLength = 256;
 
-        private UncNameHelper() {
-        }
+        private UncNameHelper() { }
 
+        // properties
 
-    // properties
-
-    // methods
-        internal static string ParseCanonicalName(string str, int start, int end, ref bool loopback) {
+        // methods
+        internal static string ParseCanonicalName(string str, int start, int end, ref bool loopback)
+        {
             return DomainNameHelper.ParseCanonicalName(str, start, end, ref loopback);
         }
 
@@ -49,10 +48,16 @@ namespace System {
         //
         // Assumption is the caller will check on the resulting name length
         // Remarks:  MUST NOT be used unless all input indexes are are verified and trusted.
-        internal unsafe static bool IsValid(char* name, ushort start, ref int returnedEnd, bool notImplicitFile) {
-            ushort end = (ushort) returnedEnd;
+        internal unsafe static bool IsValid(
+            char* name,
+            ushort start,
+            ref int returnedEnd,
+            bool notImplicitFile
+        )
+        {
+            ushort end = (ushort)returnedEnd;
 
-            if (start==end)
+            if (start == end)
                 return false;
 
             //
@@ -62,7 +67,11 @@ namespace System {
             ushort i = start;
             for (; i < end; ++i)
             {
-                if (name[i] == '/' || name[i] == '\\' || (notImplicitFile && (name[i] == ':' || name[i] == '?' || name[i] == '#')))
+                if (
+                    name[i] == '/'
+                    || name[i] == '\\'
+                    || (notImplicitFile && (name[i] == ':' || name[i] == '?' || name[i] == '#'))
+                )
                 {
                     end = i;
                     break;
@@ -89,14 +98,18 @@ namespace System {
 
             for (; i < end; ++i)
             {
-                if (name[i] == '/' || name[i] == '\\' || (notImplicitFile && (name[i] == ':' || name[i] == '?' || name[i] == '#')))
+                if (
+                    name[i] == '/'
+                    || name[i] == '\\'
+                    || (notImplicitFile && (name[i] == ':' || name[i] == '?' || name[i] == '#'))
+                )
                 {
                     end = i;
                     break;
                 }
                 else if (name[i] == '.')
                 {
-                    if (!validShortName || ((i-1) >= start && name[i-1] == '.'))
+                    if (!validShortName || ((i - 1) >= start && name[i - 1] == '.'))
                         return false;
 
                     validShortName = false;
@@ -116,7 +129,7 @@ namespace System {
             }
 
             // last segment can end with the dot
-            if (((i-1) >= start && name[i-1] == '.'))
+            if (((i - 1) >= start && name[i - 1] == '.'))
                 validShortName = true;
 
             if (!validShortName)

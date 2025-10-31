@@ -3,14 +3,18 @@
 
 using System;
 using System.Reflection;
-using System.Text;
-using Xunit;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
+using System.Text;
+using Xunit;
 
 unsafe class ThisCallNative
 {
-    [DllImport(nameof(ThisCallNative), CallingConvention = CallingConvention.ThisCall, EntryPoint = "GetWidthAsLongFromManaged")]
+    [DllImport(
+        nameof(ThisCallNative),
+        CallingConvention = CallingConvention.ThisCall,
+        EntryPoint = "GetWidthAsLongFromManaged"
+    )]
     public static extern int ThisCallWithEmptySignature();
 }
 
@@ -45,7 +49,7 @@ public unsafe class EmptyThisCallTest
         return 100;
     }
 
-    [UnmanagedCallersOnly(CallConvs = new [] {typeof(CallConvThiscall)})]
+    [UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvThiscall) })]
     private static int Foo(void* a)
     {
         return 0;

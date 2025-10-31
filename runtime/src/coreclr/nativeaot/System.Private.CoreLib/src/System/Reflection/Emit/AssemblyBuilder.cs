@@ -10,14 +10,21 @@ namespace System.Reflection.Emit
     public partial class AssemblyBuilder : Assembly
     {
         [RequiresDynamicCode("Defining a dynamic assembly requires dynamic code.")]
-        public static AssemblyBuilder DefineDynamicAssembly(AssemblyName name, AssemblyBuilderAccess access)
+        public static AssemblyBuilder DefineDynamicAssembly(
+            AssemblyName name,
+            AssemblyBuilderAccess access
+        )
         {
             ReflectionEmitThrower.ThrowPlatformNotSupportedException();
             return default;
         }
 
         [RequiresDynamicCode("Defining a dynamic assembly requires dynamic code.")]
-        public static AssemblyBuilder DefineDynamicAssembly(AssemblyName name, AssemblyBuilderAccess access, IEnumerable<CustomAttributeBuilder> assemblyAttributes)
+        public static AssemblyBuilder DefineDynamicAssembly(
+            AssemblyName name,
+            AssemblyBuilderAccess access,
+            IEnumerable<CustomAttributeBuilder> assemblyAttributes
+        )
         {
             ReflectionEmitThrower.ThrowPlatformNotSupportedException();
             return default;

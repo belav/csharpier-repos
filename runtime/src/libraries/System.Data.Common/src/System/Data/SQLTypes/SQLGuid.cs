@@ -19,8 +19,15 @@ namespace System.Data.SqlTypes
     /// </summary>
     [Serializable]
     [XmlSchemaProvider("GetXsdType")]
-    [System.Runtime.CompilerServices.TypeForwardedFrom("System.Data, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089")]
-    public struct SqlGuid : INullable, IComparable, ISerializable, IXmlSerializable, IEquatable<SqlGuid>
+    [System.Runtime.CompilerServices.TypeForwardedFrom(
+        "System.Data, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+    )]
+    public struct SqlGuid
+        : INullable,
+            IComparable,
+            ISerializable,
+            IXmlSerializable,
+            IEquatable<SqlGuid>
     {
         private const int SizeOfGuid = 16; // sizeof(Guid)
 
@@ -46,10 +53,20 @@ namespace System.Data.SqlTypes
             _value = g;
         }
 
-        public SqlGuid(int a, short b, short c, byte d, byte e, byte f, byte g, byte h, byte i, byte j, byte k)
-            : this(new Guid(a, b, c, d, e, f, g, h, i, j, k))
-        {
-        }
+        public SqlGuid(
+            int a,
+            short b,
+            short c,
+            byte d,
+            byte e,
+            byte f,
+            byte g,
+            byte h,
+            byte i,
+            byte j,
+            byte k
+        )
+            : this(new Guid(a, b, c, d, e, f, g, h, i, j, k)) { }
 
         // Maintains backwards-compatible binary serialization for the `private byte[] m_value` field
         // see src/libraries/System.Runtime.Serialization.Formatters/tests/BinaryFormatterTestData.cs
@@ -113,7 +130,25 @@ namespace System.Data.SqlTypes
         private static EComparison Compare(SqlGuid x, SqlGuid y)
         {
             // Comparison orders.
-            ReadOnlySpan<byte> rgiGuidOrder = [10, 11, 12, 13, 14, 15, 8, 9, 6, 7, 4, 5, 0, 1, 2, 3];
+            ReadOnlySpan<byte> rgiGuidOrder =
+            [
+                10,
+                11,
+                12,
+                13,
+                14,
+                15,
+                8,
+                9,
+                6,
+                7,
+                4,
+                5,
+                0,
+                1,
+                2,
+                3,
+            ];
 
             Debug.Assert(!x.IsNull);
             Debug.Assert(!y.IsNull);
@@ -159,8 +194,9 @@ namespace System.Data.SqlTypes
         // Overloading comparison operators
         public static SqlBoolean operator ==(SqlGuid x, SqlGuid y)
         {
-            return (x.IsNull || y.IsNull) ? SqlBoolean.Null :
-                    new SqlBoolean(x._value.GetValueOrDefault() == y._value.GetValueOrDefault());
+            return (x.IsNull || y.IsNull)
+                ? SqlBoolean.Null
+                : new SqlBoolean(x._value.GetValueOrDefault() == y._value.GetValueOrDefault());
         }
 
         public static SqlBoolean operator !=(SqlGuid x, SqlGuid y)
@@ -170,12 +206,16 @@ namespace System.Data.SqlTypes
 
         public static SqlBoolean operator <(SqlGuid x, SqlGuid y)
         {
-            return (x.IsNull || y.IsNull) ? SqlBoolean.Null : new SqlBoolean(Compare(x, y) == EComparison.LT);
+            return (x.IsNull || y.IsNull)
+                ? SqlBoolean.Null
+                : new SqlBoolean(Compare(x, y) == EComparison.LT);
         }
 
         public static SqlBoolean operator >(SqlGuid x, SqlGuid y)
         {
-            return (x.IsNull || y.IsNull) ? SqlBoolean.Null : new SqlBoolean(Compare(x, y) == EComparison.GT);
+            return (x.IsNull || y.IsNull)
+                ? SqlBoolean.Null
+                : new SqlBoolean(Compare(x, y) == EComparison.GT);
         }
 
         public static SqlBoolean operator <=(SqlGuid x, SqlGuid y)
@@ -273,8 +313,10 @@ namespace System.Data.SqlTypes
             else if (value.IsNull)
                 return 1;
 
-            if (this < value) return -1;
-            if (this > value) return 1;
+            if (this < value)
+                return -1;
+            if (this > value)
+                return 1;
             return 0;
         }
 
@@ -290,7 +332,10 @@ namespace System.Data.SqlTypes
         // For hashing purpose
         public override int GetHashCode() => _value.GetHashCode();
 
-        XmlSchema? IXmlSerializable.GetSchema() { return null; }
+        XmlSchema? IXmlSerializable.GetSchema()
+        {
+            return null;
+        }
 
         void IXmlSerializable.ReadXml(XmlReader reader)
         {

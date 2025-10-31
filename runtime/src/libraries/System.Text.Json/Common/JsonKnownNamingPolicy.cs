@@ -36,6 +36,6 @@ namespace System.Text.Json.Serialization
         /// <summary>
         /// Specifies that the built-in <see cref="Json.JsonNamingPolicy.KebabCaseUpper"/> be used to convert JSON property names.
         /// </summary>
-        KebabCaseUpper = 5
+        KebabCaseUpper = 5,
     }
 }

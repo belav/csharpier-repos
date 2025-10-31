@@ -3,7 +3,8 @@
 
 namespace System.Buffers
 {
-    internal sealed unsafe class PointerMemoryManager<T> : MemoryManager<T> where T : struct
+    internal sealed unsafe class PointerMemoryManager<T> : MemoryManager<T>
+        where T : struct
     {
         private readonly void* _pointer;
         private readonly int _length;
@@ -14,9 +15,7 @@ namespace System.Buffers
             _length = length;
         }
 
-        protected override void Dispose(bool disposing)
-        {
-        }
+        protected override void Dispose(bool disposing) { }
 
         public override Span<T> GetSpan()
         {
@@ -28,8 +27,6 @@ namespace System.Buffers
             throw new NotSupportedException();
         }
 
-        public override void Unpin()
-        {
-        }
+        public override void Unpin() { }
     }
 }

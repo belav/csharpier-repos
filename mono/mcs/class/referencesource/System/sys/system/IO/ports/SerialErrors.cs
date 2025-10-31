@@ -1,7 +1,7 @@
 // ==++==
-// 
+//
 //   Copyright (c) Microsoft Corporation.  All rights reserved.
-// 
+//
 // ==--==
 /*============================================================
 **
@@ -18,26 +18,32 @@ using Microsoft.Win32;
 
 namespace System.IO.Ports
 {
-    public enum SerialError {
+    public enum SerialError
+    {
         TXFull = NativeMethods.CE_TXFULL,
         RXOver = NativeMethods.CE_RXOVER,
-        Overrun = NativeMethods.CE_OVERRUN, 
+        Overrun = NativeMethods.CE_OVERRUN,
         RXParity = NativeMethods.CE_PARITY,
-        Frame = NativeMethods.CE_FRAME, 
+        Frame = NativeMethods.CE_FRAME,
     }
 
-    public class SerialErrorReceivedEventArgs : EventArgs {
+    public class SerialErrorReceivedEventArgs : EventArgs
+    {
         private SerialError errorType;
-        
-        internal SerialErrorReceivedEventArgs(SerialError eventCode) {
+
+        internal SerialErrorReceivedEventArgs(SerialError eventCode)
+        {
             errorType = eventCode;
         }
 
-        public SerialError EventType { 
+        public SerialError EventType
+        {
             get { return errorType; }
         }
     }
 
-    public delegate void SerialErrorReceivedEventHandler(object sender, SerialErrorReceivedEventArgs e);
+    public delegate void SerialErrorReceivedEventHandler(
+        object sender,
+        SerialErrorReceivedEventArgs e
+    );
 }
-

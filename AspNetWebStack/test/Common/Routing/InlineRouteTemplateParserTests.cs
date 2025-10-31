@@ -2,13 +2,13 @@
 // Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
 
 using System.Linq;
+using Microsoft.TestCommon;
 #if ASPNETWEBAPI
 using System.Web.Http.Routing.Constraints;
 #else
 using System.Web.Mvc.Routing.Constraints;
 using System.Web.Routing;
 #endif
-using Microsoft.TestCommon;
 
 #if ASPNETWEBAPI
 namespace System.Web.Http.Routing
@@ -41,7 +41,9 @@ namespace System.Web.Mvc.Routing
 
             Assert.Equal("hello/{param}", result.RouteUrl);
             Assert.Equal("111111", result.Defaults["param"]);
-            var regexRouteConstraint = Assert.IsType<RegexRouteConstraint>(result.Constraints["param"]);
+            var regexRouteConstraint = Assert.IsType<RegexRouteConstraint>(
+                result.Constraints["param"]
+            );
             Assert.Equal(@"\d+", regexRouteConstraint.Pattern);
         }
 
@@ -68,7 +70,10 @@ namespace System.Web.Mvc.Routing
             Assert.Equal(OptionalParameter, result.Defaults["param"]);
 
             var constraint = Assert.IsType<OptionalRouteConstraint>(result.Constraints["param"]);
-            Assert.Equal(@"\d+", Assert.IsType<RegexRouteConstraint>(constraint.InnerConstraint).Pattern);
+            Assert.Equal(
+                @"\d+",
+                Assert.IsType<RegexRouteConstraint>(constraint.InnerConstraint).Pattern
+            );
         }
 
         [Fact]
@@ -78,9 +83,17 @@ namespace System.Web.Mvc.Routing
 
             Assert.Equal("hello/{param}", result.RouteUrl);
 
-            CompoundRouteConstraint constraint = Assert.IsType<CompoundRouteConstraint>(result.Constraints["param"]);
-            Assert.Equal(@"\d+", Assert.IsType<RegexRouteConstraint>(constraint.Constraints.ElementAt(0)).Pattern);
-            Assert.Equal(@"\w+", Assert.IsType<RegexRouteConstraint>(constraint.Constraints.ElementAt(1)).Pattern);
+            CompoundRouteConstraint constraint = Assert.IsType<CompoundRouteConstraint>(
+                result.Constraints["param"]
+            );
+            Assert.Equal(
+                @"\d+",
+                Assert.IsType<RegexRouteConstraint>(constraint.Constraints.ElementAt(0)).Pattern
+            );
+            Assert.Equal(
+                @"\w+",
+                Assert.IsType<RegexRouteConstraint>(constraint.Constraints.ElementAt(1)).Pattern
+            );
         }
 
         [Fact]
@@ -105,7 +118,9 @@ namespace System.Web.Mvc.Routing
             Assert.Equal("abc", result.Defaults["p2"]);
             Assert.Equal(OptionalParameter, result.Defaults["p3"]);
 
-            CompoundRouteConstraint constraint = Assert.IsType<CompoundRouteConstraint>(result.Constraints["p1"]);
+            CompoundRouteConstraint constraint = Assert.IsType<CompoundRouteConstraint>(
+                result.Constraints["p1"]
+            );
             Assert.IsType<AlphaRouteConstraint>(constraint.Constraints.ElementAt(0));
             Assert.IsType<LengthRouteConstraint>(constraint.Constraints.ElementAt(1));
         }
@@ -221,25 +236,29 @@ namespace System.Web.Mvc.Routing
             Assert.Equal(@"\?", constraint.Pattern);
         }
 
-
         private ParseResult Act(string template)
         {
             var result = new ParseResult();
- #if ASPNETWEBAPI
+#if ASPNETWEBAPI
             result.Constraints = new HttpRouteValueDictionary();
             result.Defaults = new HttpRouteValueDictionary();
 #else
             result.Constraints = new RouteValueDictionary();
             result.Defaults = new RouteValueDictionary();
 #endif
-            result.RouteUrl = InlineRouteTemplateParser.ParseRouteTemplate(template, result.Defaults, result.Constraints, new DefaultInlineConstraintResolver());
+            result.RouteUrl = InlineRouteTemplateParser.ParseRouteTemplate(
+                template,
+                result.Defaults,
+                result.Constraints,
+                new DefaultInlineConstraintResolver()
+            );
             return result;
         }
 
         struct ParseResult
         {
             public string RouteUrl;
- #if ASPNETWEBAPI
+#if ASPNETWEBAPI
             public HttpRouteValueDictionary Defaults;
             public HttpRouteValueDictionary Constraints;
 #else

@@ -13,7 +13,9 @@ namespace System.Net
         private readonly Interop.HttpApi.HTTP_DATA_CHUNK[]? _dataChunks;
         internal bool _sentHeaders;
 
-        private static readonly IOCompletionCallback s_IOCallback = new IOCompletionCallback(Callback);
+        private static readonly IOCompletionCallback s_IOCallback = new IOCompletionCallback(
+            Callback
+        );
 
         internal ushort dataChunkCount
         {
@@ -40,14 +42,19 @@ namespace System.Net
                 }
                 else
                 {
-                    return (Interop.HttpApi.HTTP_DATA_CHUNK*)(Marshal.UnsafeAddrOfPinnedArrayElement(_dataChunks, 0));
+                    return (Interop.HttpApi.HTTP_DATA_CHUNK*)(
+                        Marshal.UnsafeAddrOfPinnedArrayElement(_dataChunks, 0)
+                    );
                 }
             }
         }
 
-        internal HttpResponseStreamAsyncResult(object asyncObject, object? userState, AsyncCallback? callback) : base(asyncObject, userState, callback)
-        {
-        }
+        internal HttpResponseStreamAsyncResult(
+            object asyncObject,
+            object? userState,
+            AsyncCallback? callback
+        )
+            : base(asyncObject, userState, callback) { }
 
         private static byte[] GetChunkHeader(int size, out int offset)
         {
@@ -109,7 +116,18 @@ namespace System.Net
 
         private static readonly byte[] s_CRLFArray = "\r\n"u8.ToArray();
 
-        internal HttpResponseStreamAsyncResult(object asyncObject, object? userState, AsyncCallback? callback, byte[] buffer, int offset, int size, bool chunked, bool sentHeaders, ThreadPoolBoundHandle boundHandle) : base(asyncObject, userState, callback)
+        internal HttpResponseStreamAsyncResult(
+            object asyncObject,
+            object? userState,
+            AsyncCallback? callback,
+            byte[] buffer,
+            int offset,
+            int size,
+            bool chunked,
+            bool sentHeaders,
+            ThreadPoolBoundHandle boundHandle
+        )
+            : base(asyncObject, userState, callback)
         {
             _boundHandle = boundHandle;
             _sentHeaders = sentHeaders;
@@ -117,17 +135,21 @@ namespace System.Net
             if (size == 0)
             {
                 _dataChunks = null;
-                _pOverlapped = boundHandle.AllocateNativeOverlapped(s_IOCallback, state: this, pinData: null);
+                _pOverlapped = boundHandle.AllocateNativeOverlapped(
+                    s_IOCallback,
+                    state: this,
+                    pinData: null
+                );
             }
             else
             {
                 _dataChunks = new Interop.HttpApi.HTTP_DATA_CHUNK[chunked ? 3 : 1];
 
-                if (NetEventSource.Log.IsEnabled()) NetEventSource.Info(this, $"m_pOverlapped:0x{(IntPtr)_pOverlapped:x8}");
+                if (NetEventSource.Log.IsEnabled())
+                    NetEventSource.Info(this, $"m_pOverlapped:0x{(IntPtr)_pOverlapped:x8}");
 
                 object[] objectsToPin = new object[1 + _dataChunks.Length];
                 objectsToPin[_dataChunks.Length] = _dataChunks;
-
 
                 int chunkHeaderOffset = 0;
                 byte[]? chunkHeaderBuffer = null;
@@ -136,19 +158,30 @@ namespace System.Net
                     chunkHeaderBuffer = GetChunkHeader(size, out chunkHeaderOffset);
 
                     _dataChunks[0] = default;
-                    _dataChunks[0].DataChunkType = Interop.HttpApi.HTTP_DATA_CHUNK_TYPE.HttpDataChunkFromMemory;
-                    _dataChunks[0].BufferLength = (uint)(chunkHeaderBuffer.Length - chunkHeaderOffset);
+                    _dataChunks[0].DataChunkType = Interop
+                        .HttpApi
+                        .HTTP_DATA_CHUNK_TYPE
+                        .HttpDataChunkFromMemory;
+                    _dataChunks[0].BufferLength = (uint)(
+                        chunkHeaderBuffer.Length - chunkHeaderOffset
+                    );
 
                     objectsToPin[0] = chunkHeaderBuffer;
 
                     _dataChunks[1] = default;
-                    _dataChunks[1].DataChunkType = Interop.HttpApi.HTTP_DATA_CHUNK_TYPE.HttpDataChunkFromMemory;
+                    _dataChunks[1].DataChunkType = Interop
+                        .HttpApi
+                        .HTTP_DATA_CHUNK_TYPE
+                        .HttpDataChunkFromMemory;
                     _dataChunks[1].BufferLength = (uint)size;
 
                     objectsToPin[1] = buffer;
 
                     _dataChunks[2] = default;
-                    _dataChunks[2].DataChunkType = Interop.HttpApi.HTTP_DATA_CHUNK_TYPE.HttpDataChunkFromMemory;
+                    _dataChunks[2].DataChunkType = Interop
+                        .HttpApi
+                        .HTTP_DATA_CHUNK_TYPE
+                        .HttpDataChunkFromMemory;
                     _dataChunks[2].BufferLength = (uint)s_CRLFArray.Length;
 
                     objectsToPin[2] = s_CRLFArray;
@@ -156,24 +189,42 @@ namespace System.Net
                 else
                 {
                     _dataChunks[0] = default;
-                    _dataChunks[0].DataChunkType = Interop.HttpApi.HTTP_DATA_CHUNK_TYPE.HttpDataChunkFromMemory;
+                    _dataChunks[0].DataChunkType = Interop
+                        .HttpApi
+                        .HTTP_DATA_CHUNK_TYPE
+                        .HttpDataChunkFromMemory;
                     _dataChunks[0].BufferLength = (uint)size;
 
                     objectsToPin[0] = buffer;
                 }
 
                 // This call will pin needed memory
-                _pOverlapped = boundHandle.AllocateNativeOverlapped(s_IOCallback, state: this, pinData: objectsToPin);
+                _pOverlapped = boundHandle.AllocateNativeOverlapped(
+                    s_IOCallback,
+                    state: this,
+                    pinData: objectsToPin
+                );
 
                 if (chunked)
                 {
-                    _dataChunks[0].pBuffer = (byte*)(Marshal.UnsafeAddrOfPinnedArrayElement(chunkHeaderBuffer!, chunkHeaderOffset));
-                    _dataChunks[1].pBuffer = (byte*)(Marshal.UnsafeAddrOfPinnedArrayElement(buffer, offset));
-                    _dataChunks[2].pBuffer = (byte*)(Marshal.UnsafeAddrOfPinnedArrayElement(s_CRLFArray, 0));
+                    _dataChunks[0].pBuffer = (byte*)(
+                        Marshal.UnsafeAddrOfPinnedArrayElement(
+                            chunkHeaderBuffer!,
+                            chunkHeaderOffset
+                        )
+                    );
+                    _dataChunks[1].pBuffer = (byte*)(
+                        Marshal.UnsafeAddrOfPinnedArrayElement(buffer, offset)
+                    );
+                    _dataChunks[2].pBuffer = (byte*)(
+                        Marshal.UnsafeAddrOfPinnedArrayElement(s_CRLFArray, 0)
+                    );
                 }
                 else
                 {
-                    _dataChunks[0].pBuffer = (byte*)(Marshal.UnsafeAddrOfPinnedArrayElement(buffer, offset));
+                    _dataChunks[0].pBuffer = (byte*)(
+                        Marshal.UnsafeAddrOfPinnedArrayElement(buffer, offset)
+                    );
                 }
             }
         }
@@ -183,13 +234,21 @@ namespace System.Net
             IOCompleted(this, errorCode, numBytes);
         }
 
-        private static void IOCompleted(HttpResponseStreamAsyncResult asyncResult, uint errorCode, uint numBytes)
+        private static void IOCompleted(
+            HttpResponseStreamAsyncResult asyncResult,
+            uint errorCode,
+            uint numBytes
+        )
         {
-            if (NetEventSource.Log.IsEnabled()) NetEventSource.Info(null, $"errorCode:0x{errorCode:x8} numBytes: {numBytes}");
+            if (NetEventSource.Log.IsEnabled())
+                NetEventSource.Info(null, $"errorCode:0x{errorCode:x8} numBytes: {numBytes}");
             object? result;
             try
             {
-                if (errorCode != Interop.HttpApi.ERROR_SUCCESS && errorCode != Interop.HttpApi.ERROR_HANDLE_EOF)
+                if (
+                    errorCode != Interop.HttpApi.ERROR_SUCCESS
+                    && errorCode != Interop.HttpApi.ERROR_HANDLE_EOF
+                )
                 {
                     asyncResult.ErrorCode = (int)errorCode;
                     result = new HttpListenerException((int)errorCode);
@@ -200,21 +259,31 @@ namespace System.Net
                     if (asyncResult._dataChunks == null)
                     {
                         result = (uint)0;
-                        if (NetEventSource.Log.IsEnabled()) NetEventSource.DumpBuffer(null, Array.Empty<byte>());
+                        if (NetEventSource.Log.IsEnabled())
+                            NetEventSource.DumpBuffer(null, Array.Empty<byte>());
                     }
                     else
                     {
-                        result = asyncResult._dataChunks.Length == 1 ? asyncResult._dataChunks[0].BufferLength : 0;
+                        result =
+                            asyncResult._dataChunks.Length == 1
+                                ? asyncResult._dataChunks[0].BufferLength
+                                : 0;
                         if (NetEventSource.Log.IsEnabled())
                         {
-                            foreach (Interop.HttpApi.HTTP_DATA_CHUNK chunk in asyncResult._dataChunks)
+                            foreach (
+                                Interop.HttpApi.HTTP_DATA_CHUNK chunk in asyncResult._dataChunks
+                            )
                             {
-                                NetEventSource.DumpBuffer(null, new ReadOnlySpan<byte>(chunk.pBuffer, (int)chunk.BufferLength));
+                                NetEventSource.DumpBuffer(
+                                    null,
+                                    new ReadOnlySpan<byte>(chunk.pBuffer, (int)chunk.BufferLength)
+                                );
                             }
                         }
                     }
                 }
-                if (NetEventSource.Log.IsEnabled()) NetEventSource.Info(null, "Calling Complete()");
+                if (NetEventSource.Log.IsEnabled())
+                    NetEventSource.Info(null, "Calling Complete()");
             }
             catch (Exception e)
             {
@@ -223,11 +292,19 @@ namespace System.Net
             asyncResult.InvokeCallback(result);
         }
 
-        private static unsafe void Callback(uint errorCode, uint numBytes, NativeOverlapped* nativeOverlapped)
+        private static unsafe void Callback(
+            uint errorCode,
+            uint numBytes,
+            NativeOverlapped* nativeOverlapped
+        )
         {
             object state = ThreadPoolBoundHandle.GetNativeOverlappedState(nativeOverlapped)!;
             HttpResponseStreamAsyncResult asyncResult = (state as HttpResponseStreamAsyncResult)!;
-            if (NetEventSource.Log.IsEnabled()) NetEventSource.Info(null, $"errorCode:0x{errorCode:x8} numBytes:{numBytes} nativeOverlapped:0x{(IntPtr)nativeOverlapped:x8}");
+            if (NetEventSource.Log.IsEnabled())
+                NetEventSource.Info(
+                    null,
+                    $"errorCode:0x{errorCode:x8} numBytes:{numBytes} nativeOverlapped:0x{(IntPtr)nativeOverlapped:x8}"
+                );
 
             IOCompleted(asyncResult, errorCode, numBytes);
         }

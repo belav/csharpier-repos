@@ -7,7 +7,8 @@ using System.Linq;
 
 namespace Microsoft.TestCommon
 {
-    public class ValueTypeTestData<T> : TestData<T> where T : struct
+    public class ValueTypeTestData<T> : TestData<T>
+        where T : struct
     {
         private static readonly Type OpenNullableType = typeof(Nullable<>);
         private T[] testData;
@@ -18,8 +19,16 @@ namespace Microsoft.TestCommon
             this.testData = testData;
 
             Type[] typeParams = new Type[] { this.Type };
-            this.RegisterTestDataVariation(TestDataVariations.WithNull, OpenNullableType.MakeGenericType(typeParams), GetNullTestData);
-            this.RegisterTestDataVariation(TestDataVariations.AsNullable, OpenNullableType.MakeGenericType(typeParams), GetTestDataAsNullable);
+            this.RegisterTestDataVariation(
+                TestDataVariations.WithNull,
+                OpenNullableType.MakeGenericType(typeParams),
+                GetNullTestData
+            );
+            this.RegisterTestDataVariation(
+                TestDataVariations.AsNullable,
+                OpenNullableType.MakeGenericType(typeParams),
+                GetTestDataAsNullable
+            );
         }
 
         public object GetNullTestData()

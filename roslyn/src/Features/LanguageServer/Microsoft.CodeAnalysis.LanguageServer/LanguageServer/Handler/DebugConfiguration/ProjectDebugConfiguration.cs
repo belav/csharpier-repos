@@ -10,7 +10,14 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler.DebugConfiguration;
 [DataContract]
 internal class ProjectDebugConfiguration
 {
-    public ProjectDebugConfiguration(string projectPath, string outputPath, string projectName, bool targetsDotnetCore, bool isExe, string? solutionPath)
+    public ProjectDebugConfiguration(
+        string projectPath,
+        string outputPath,
+        string projectName,
+        bool targetsDotnetCore,
+        bool isExe,
+        string? solutionPath
+    )
     {
         ProjectPath = projectPath;
         OutputPath = outputPath;

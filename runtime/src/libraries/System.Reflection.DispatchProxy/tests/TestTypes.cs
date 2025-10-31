@@ -10,7 +10,6 @@ using System.Runtime.InteropServices;
 using System.Text;
 using DispatchProxyTestDependency;
 
-
 // Test types used to make proxies.
 public interface TestType_IHelloService
 {
@@ -24,8 +23,8 @@ public interface TestType_IOut_Ref
     void Ref(ref string message);
     void InAttribute([In] string message);
     void OutAttribute([Out] string message);
-    void InAttribute_OutAttribute([In][Out] string message);
-    void InAttribute_OutAttribute_Ref([In][Out] ref string message);
+    void InAttribute_OutAttribute([In] [Out] string message);
+    void InAttribute_OutAttribute_Ref([In] [Out] ref string message);
     void InAttribute_Ref([In] ref string message);
 }
 
@@ -35,9 +34,9 @@ public interface TestType_IGoodbyeService
 }
 
 // Demonstrates interface implementing multiple other interfaces
-public interface TestType_IHelloAndGoodbyeService : TestType_IHelloService, TestType_IGoodbyeService
-{
-}
+public interface TestType_IHelloAndGoodbyeService
+    : TestType_IHelloService,
+        TestType_IGoodbyeService { }
 
 // Deliberately contains method with same signature of TestType_IHelloService (see TestType_IHelloService1And2).
 public interface TestType_IHelloService2
@@ -46,9 +45,7 @@ public interface TestType_IHelloService2
 }
 
 // Demonstrates 2 interfaces containing same method name dispatches to the right one
-public interface TestType_IHelloService1And2 : TestType_IHelloService, TestType_IHelloService2
-{
-}
+public interface TestType_IHelloService1And2 : TestType_IHelloService, TestType_IHelloService2 { }
 
 // Demonstrates methods taking multiple parameters as well as a params parameter
 public interface TestType_IMultipleParameterService
@@ -88,12 +85,14 @@ internal interface TestType_InternalInterfaceService
 }
 
 // Demonstrates proxies can be made for public types implementing internal interfaces
-internal interface TestType_PublicInterfaceService_Implements_Internal : TestType_InternalInterfaceService
+internal interface TestType_PublicInterfaceService_Implements_Internal
+    : TestType_InternalInterfaceService
 {
     string Echo2(string message);
 }
 
-internal interface TestType_InternalInterfaceImplementsNonPublicExternalType : TestType_IExternalNonPublicHiService
+internal interface TestType_InternalInterfaceImplementsNonPublicExternalType
+    : TestType_IExternalNonPublicHiService
 {
     string Hi2(string message);
 }
@@ -103,9 +102,8 @@ internal interface TestType_ServiceWithGenericArgument<T>
     T GetInnerService();
 }
 
-internal interface TestType_InternalInterfaceWithNonPublicExternalGenericArgument : TestType_ServiceWithGenericArgument<TestType_IExternalNonPublicHiService>
-{
-}
+internal interface TestType_InternalInterfaceWithNonPublicExternalGenericArgument
+    : TestType_ServiceWithGenericArgument<TestType_IExternalNonPublicHiService> { }
 
 public interface TypeType_GenericMethod
 {
@@ -115,10 +113,14 @@ public interface TypeType_GenericMethod
 // Negative -- demonstrates trying to use a class for the interface type for the proxy
 public class TestType_ConcreteClass
 {
-    public string Echo(string s) { return null; }
+    public string Echo(string s)
+    {
+        return null;
+    }
 }
 
-class TestType_DipatchProxyGenericConstraint<T> where T : DispatchProxy { }
+class TestType_DipatchProxyGenericConstraint<T>
+    where T : DispatchProxy { }
 
 // Negative -- demonstrates base type that is sealed and should generate exception
 public sealed class Sealed_TestDispatchProxy : DispatchProxy
@@ -139,13 +141,15 @@ public class TestType_PrivateProxy
     }
 }
 
-internal class TestType_InternalProxyInternalBaseType : TestType_ExternalNonPublicBaseClassForProxy
-{
-}
+internal class TestType_InternalProxyInternalBaseType
+    : TestType_ExternalNonPublicBaseClassForProxy { }
 
-internal class TestType_InternalProxyImplementingInterfaceWithGenericArgumentBeingNonPublicExternalType : DispatchProxy, TestType_InternalInterfaceWithNonPublicExternalGenericArgument
+internal class TestType_InternalProxyImplementingInterfaceWithGenericArgumentBeingNonPublicExternalType
+    : DispatchProxy,
+        TestType_InternalInterfaceWithNonPublicExternalGenericArgument
 {
-    public TestType_IExternalNonPublicHiService GetInnerService() => throw new InvalidOperationException();
+    public TestType_IExternalNonPublicHiService GetInnerService() =>
+        throw new InvalidOperationException();
 
     protected override object Invoke(MethodInfo targetMethod, object[] args)
     {
@@ -178,9 +182,7 @@ public class TestDispatchProxy : DispatchProxy
     }
 }
 
-public class TestDispatchProxy2 : TestDispatchProxy
-{
-}
+public class TestDispatchProxy2 : TestDispatchProxy { }
 
 // Negative test -- demonstrates base type that is abstract
 public abstract class Abstract_TestDispatchProxy : DispatchProxy
@@ -196,9 +198,8 @@ abstract class Abstract_GenericDispatchProxy<T> : DispatchProxy { }
 // Negative -- demonstrates base type that has no public default ctor
 public class NoDefaultCtor_TestDispatchProxy : DispatchProxy
 {
-    private NoDefaultCtor_TestDispatchProxy()
-    {
-    }
+    private NoDefaultCtor_TestDispatchProxy() { }
+
     protected override object Invoke(MethodInfo targetMethod, object[] args)
     {
         throw new InvalidOperationException();

@@ -26,28 +26,34 @@ public class ModelBindingCommandHandler : BindingHandler
     internal ModelBindingCommandHandler(
         MethodInfo handlerMethodInfo,
         IMethodDescriptor methodDescriptor,
-        object? invocationTarget)
+        object? invocationTarget
+    )
     {
-        _handlerMethodInfo = handlerMethodInfo ?? throw new ArgumentNullException(nameof(handlerMethodInfo));
+        _handlerMethodInfo =
+            handlerMethodInfo ?? throw new ArgumentNullException(nameof(handlerMethodInfo));
         _invocationTargetBinder = _handlerMethodInfo.IsStatic
-                                      ? null
-                                      : new ModelBinder(_handlerMethodInfo.ReflectedType!);
-        _methodDescriptor = methodDescriptor ?? throw new ArgumentNullException(nameof(methodDescriptor));
+            ? null
+            : new ModelBinder(_handlerMethodInfo.ReflectedType!);
+        _methodDescriptor =
+            methodDescriptor ?? throw new ArgumentNullException(nameof(methodDescriptor));
         _invocationTarget = invocationTarget;
     }
 
     internal ModelBindingCommandHandler(
         MethodInfo handlerMethodInfo,
-        IMethodDescriptor methodDescriptor)
-        : this(handlerMethodInfo, methodDescriptor, null)
-    { }
+        IMethodDescriptor methodDescriptor
+    )
+        : this(handlerMethodInfo, methodDescriptor, null) { }
 
     internal ModelBindingCommandHandler(
         Delegate handlerDelegate,
-        IMethodDescriptor methodDescriptor)
+        IMethodDescriptor methodDescriptor
+    )
     {
-        _handlerDelegate = handlerDelegate ?? throw new ArgumentNullException(nameof(handlerDelegate));
-        _methodDescriptor = methodDescriptor ?? throw new ArgumentNullException(nameof(methodDescriptor));
+        _handlerDelegate =
+            handlerDelegate ?? throw new ArgumentNullException(nameof(handlerDelegate));
+        _methodDescriptor =
+            methodDescriptor ?? throw new ArgumentNullException(nameof(methodDescriptor));
     }
 
     /// <summary>
@@ -56,7 +62,10 @@ public class ModelBindingCommandHandler : BindingHandler
     /// <param name="parseResult">The current parse result.</param>
     /// <param name="cancellationToken">A token that can be used to cancel the invocation.</param>
     /// <returns>A task whose value can be used to set the process exit code.</returns>
-    public override async Task<int> InvokeAsync(ParseResult parseResult, CancellationToken cancellationToken = default)
+    public override async Task<int> InvokeAsync(
+        ParseResult parseResult,
+        CancellationToken cancellationToken = default
+    )
     {
         var bindingContext = GetBindingContext(parseResult);
 
@@ -64,18 +73,17 @@ public class ModelBindingCommandHandler : BindingHandler
             _invokeArgumentBindingSources,
             bindingContext,
             _methodDescriptor.ParameterDescriptors,
-            false);
+            false
+        );
 
-        var invocationArguments = boundValues
-                                  .Select(x => x.Value)
-                                  .ToArray();
+        var invocationArguments = boundValues.Select(x => x.Value).ToArray();
 
         object? result;
         if (_handlerDelegate is null)
         {
-            var invocationTarget = _invocationTarget ?? 
-                                   bindingContext.GetService(_handlerMethodInfo!.ReflectedType!);
-            if(invocationTarget is { })
+            var invocationTarget =
+                _invocationTarget ?? bindingContext.GetService(_handlerMethodInfo!.ReflectedType!);
+            if (invocationTarget is { })
             {
                 _invocationTargetBinder?.UpdateInstance(invocationTarget, bindingContext);
             }
@@ -98,7 +106,8 @@ public class ModelBindingCommandHandler : BindingHandler
     /// <param name="argument">The argument whose parsed result will be the source of the bound value.</param>
     public void BindParameter(ParameterInfo param, CliArgument argument)
     {
-        var _ = argument ?? throw new InvalidOperationException("You must specify an argument to bind");
+        var _ =
+            argument ?? throw new InvalidOperationException("You must specify an argument to bind");
         BindValueSource(param, new SpecificSymbolValueSource(argument));
     }
 
@@ -123,10 +132,10 @@ public class ModelBindingCommandHandler : BindingHandler
         _invokeArgumentBindingSources.Add(paramDesc, valueSource);
     }
 
-    private ParameterDescriptor? FindParameterDescriptor(ParameterInfo? param)
-        => param is null
-               ? null
-               : _methodDescriptor.ParameterDescriptors
-                                  .FirstOrDefault(x => x.ValueName == param.Name &&
-                                                       x.ValueType == param.ParameterType);
+    private ParameterDescriptor? FindParameterDescriptor(ParameterInfo? param) =>
+        param is null
+            ? null
+            : _methodDescriptor.ParameterDescriptors.FirstOrDefault(x =>
+                x.ValueName == param.Name && x.ValueType == param.ParameterType
+            );
 }

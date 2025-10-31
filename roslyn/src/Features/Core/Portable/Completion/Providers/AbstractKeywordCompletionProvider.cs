@@ -16,35 +16,64 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.Completion.Providers
 {
-    internal abstract partial class AbstractKeywordCompletionProvider<TContext> : LSPCompletionProvider
+    internal abstract partial class AbstractKeywordCompletionProvider<TContext>
+        : LSPCompletionProvider
         where TContext : SyntaxContext
     {
         private static readonly Comparer s_comparer = new();
 
         private readonly ImmutableArray<IKeywordRecommender<TContext>> _keywordRecommenders;
 
-        protected AbstractKeywordCompletionProvider(ImmutableArray<IKeywordRecommender<TContext>> keywordRecommenders)
-            => _keywordRecommenders = keywordRecommenders;
+        protected AbstractKeywordCompletionProvider(
+            ImmutableArray<IKeywordRecommender<TContext>> keywordRecommenders
+        ) => _keywordRecommenders = keywordRecommenders;
 
-        protected abstract CompletionItem CreateItem(RecommendedKeyword keyword, TContext context, CancellationToken cancellationToken);
+        protected abstract CompletionItem CreateItem(
+            RecommendedKeyword keyword,
+            TContext context,
+            CancellationToken cancellationToken
+        );
 
         public override async Task ProvideCompletionsAsync(CompletionContext context)
         {
             var cancellationToken = context.CancellationToken;
 
-            using (Logger.LogBlock(FunctionId.Completion_KeywordCompletionProvider_GetItemsWorker, cancellationToken))
+            using (
+                Logger.LogBlock(
+                    FunctionId.Completion_KeywordCompletionProvider_GetItemsWorker,
+                    cancellationToken
+                )
+            )
             {
-                context.AddItems(await context.Document.GetUnionItemsFromDocumentAndLinkedDocumentsAsync(
-                    s_comparer,
-                    d => RecommendCompletionItemsAsync(d, context, cancellationToken)).ConfigureAwait(false));
+                context.AddItems(
+                    await context
+                        .Document.GetUnionItemsFromDocumentAndLinkedDocumentsAsync(
+                            s_comparer,
+                            d => RecommendCompletionItemsAsync(d, context, cancellationToken)
+                        )
+                        .ConfigureAwait(false)
+                );
             }
         }
 
-        private async Task<ImmutableArray<CompletionItem>> RecommendCompletionItemsAsync(Document document, CompletionContext context, CancellationToken cancellationToken)
+        private async Task<ImmutableArray<CompletionItem>> RecommendCompletionItemsAsync(
+            Document document,
+            CompletionContext context,
+            CancellationToken cancellationToken
+        )
         {
             var position = context.Position;
-            var syntaxContext = (TContext)await context.GetSyntaxContextWithExistingSpeculativeModelAsync(document, cancellationToken).ConfigureAwait(false);
-            var keywords = await RecommendKeywordsAsync(document, position, syntaxContext, cancellationToken).ConfigureAwait(false);
+            var syntaxContext = (TContext)
+                await context
+                    .GetSyntaxContextWithExistingSpeculativeModelAsync(document, cancellationToken)
+                    .ConfigureAwait(false);
+            var keywords = await RecommendKeywordsAsync(
+                    document,
+                    position,
+                    syntaxContext,
+                    cancellationToken
+                )
+                .ConfigureAwait(false);
             return keywords.SelectAsArray(k => CreateItem(k, syntaxContext, cancellationToken));
         }
 
@@ -52,9 +81,12 @@ namespace Microsoft.CodeAnalysis.Completion.Providers
             Document document,
             int position,
             TContext context,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
-            var syntaxTree = await document.GetSyntaxTreeAsync(cancellationToken).ConfigureAwait(false);
+            var syntaxTree = await document
+                .GetSyntaxTreeAsync(cancellationToken)
+                .ConfigureAwait(false);
             var syntaxFacts = document.GetRequiredLanguageService<ISyntaxFactsService>();
             if (syntaxFacts.IsInNonUserCode(syntaxTree, position, cancellationToken))
                 return ImmutableArray<RecommendedKeyword>.Empty;
@@ -70,16 +102,20 @@ namespace Microsoft.CodeAnalysis.Completion.Providers
             return result.ToImmutable();
         }
 
-        public sealed override Task<TextChange?> GetTextChangeAsync(Document document, CompletionItem item, char? ch, CancellationToken cancellationToken)
-            => Task.FromResult((TextChange?)new TextChange(item.Span, item.DisplayText));
+        public sealed override Task<TextChange?> GetTextChangeAsync(
+            Document document,
+            CompletionItem item,
+            char? ch,
+            CancellationToken cancellationToken
+        ) => Task.FromResult((TextChange?)new TextChange(item.Span, item.DisplayText));
 
         private class Comparer : IEqualityComparer<CompletionItem>
         {
-            public bool Equals(CompletionItem? x, CompletionItem? y)
-                => x?.DisplayText == y?.DisplayText;
+            public bool Equals(CompletionItem? x, CompletionItem? y) =>
+                x?.DisplayText == y?.DisplayText;
 
-            public int GetHashCode(CompletionItem obj)
-                => Hash.Combine(obj.DisplayText.GetHashCode(), obj.DisplayText.GetHashCode());
+            public int GetHashCode(CompletionItem obj) =>
+                Hash.Combine(obj.DisplayText.GetHashCode(), obj.DisplayText.GetHashCode());
         }
     }
 }

@@ -2,16 +2,16 @@
 // Copyright (c) Microsoft Corporation.  All rights reserved.
 // -----------------------------------------------------------------------
 using System;
-using System.Collections.ObjectModel;
+using System.Collections;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel.Composition.Primitives;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading;
-using System.Diagnostics;
 using Microsoft.Internal;
 using Microsoft.Internal.Collections;
-using System.Collections;
 using Lock = Microsoft.Internal.Lock;
 
 namespace System.ComponentModel.Composition.Hosting
@@ -22,7 +22,10 @@ namespace System.ComponentModel.Composition.Hosting
     ///     It is threadsafe, notifications are not marshalled using a SynchronizationContext.
     ///     It is Disposable.
     /// </summary>
-    internal class ComposablePartCatalogCollection : ICollection<ComposablePartCatalog>, INotifyComposablePartCatalogChanged, IDisposable
+    internal class ComposablePartCatalogCollection
+        : ICollection<ComposablePartCatalog>,
+            INotifyComposablePartCatalogChanged,
+            IDisposable
     {
         private readonly Lock _lock = new Lock();
         private Action<ComposablePartCatalogChangeEventArgs> _onChanged;
@@ -35,7 +38,8 @@ namespace System.ComponentModel.Composition.Hosting
         public ComposablePartCatalogCollection(
             IEnumerable<ComposablePartCatalog> catalogs,
             Action<ComposablePartCatalogChangeEventArgs> onChanged,
-            Action<ComposablePartCatalogChangeEventArgs> onChanging)
+            Action<ComposablePartCatalogChangeEventArgs> onChanging
+        )
         {
             catalogs = catalogs ?? Enumerable.Empty<ComposablePartCatalog>();
             this._catalogs = new List<ComposablePartCatalog>(catalogs);
@@ -51,12 +55,15 @@ namespace System.ComponentModel.Composition.Hosting
 
             this.ThrowIfDisposed();
 
-            var addedParts = new Lazy<IEnumerable<ComposablePartDefinition>>(() => item.ToArray(), LazyThreadSafetyMode.PublicationOnly);
+            var addedParts = new Lazy<IEnumerable<ComposablePartDefinition>>(
+                () => item.ToArray(),
+                LazyThreadSafetyMode.PublicationOnly
+            );
 
             using (var atomicComposition = new AtomicComposition())
             {
                 this.RaiseChangingEvent(addedParts, null, atomicComposition);
- 
+
                 using (new WriteLock(this._lock))
                 {
                     if (this._isCopyNeeded)
@@ -67,7 +74,7 @@ namespace System.ComponentModel.Composition.Hosting
                     this._hasChanged = true;
                     this._catalogs.Add(item);
                 }
-                
+
                 this.SubscribeToCatalogNotifications(item);
 
                 // Complete after the catalog changes are written
@@ -107,10 +114,13 @@ namespace System.ComponentModel.Composition.Hosting
             // suspect to begin with.  When would that ever result in a meaningful composition?
 
             // We are doing this outside of the lock, so it's possible that the catalog will continute propagating events from things
-            // we are about to unsubscribe from. Given the non-specificity of our event, in the worst case scenario we would simply fire 
+            // we are about to unsubscribe from. Given the non-specificity of our event, in the worst case scenario we would simply fire
             // unnecessary events.
 
-            var removedParts = new Lazy<IEnumerable<ComposablePartDefinition>>(() => catalogs.SelectMany(catalog => catalog).ToArray(), LazyThreadSafetyMode.PublicationOnly);
+            var removedParts = new Lazy<IEnumerable<ComposablePartDefinition>>(
+                () => catalogs.SelectMany(catalog => catalog).ToArray(),
+                LazyThreadSafetyMode.PublicationOnly
+            );
 
             // Validate the changes before applying them
             using (var atomicComposition = new AtomicComposition())
@@ -157,7 +167,7 @@ namespace System.ComponentModel.Composition.Hosting
 
         public int Count
         {
-            get 
+            get
             {
                 this.ThrowIfDisposed();
 
@@ -194,7 +204,10 @@ namespace System.ComponentModel.Composition.Hosting
 
             bool isSuccessfulRemoval = false;
 
-            var removedParts = new Lazy<IEnumerable<ComposablePartDefinition>>(() => item.ToArray(), LazyThreadSafetyMode.PublicationOnly);
+            var removedParts = new Lazy<IEnumerable<ComposablePartDefinition>>(
+                () => item.ToArray(),
+                LazyThreadSafetyMode.PublicationOnly
+            );
             using (var atomicComposition = new AtomicComposition())
             {
                 this.RaiseChangingEvent(null, removedParts, atomicComposition);
@@ -303,15 +316,24 @@ namespace System.ComponentModel.Composition.Hosting
 
         private void RaiseChangedEvent(
             Lazy<IEnumerable<ComposablePartDefinition>> addedDefinitions,
-            Lazy<IEnumerable<ComposablePartDefinition>> removedDefinitions)
+            Lazy<IEnumerable<ComposablePartDefinition>> removedDefinitions
+        )
         {
             if (this._onChanged == null || this.Changed == null)
             {
                 return;
             }
 
-            var added = (addedDefinitions == null ? Enumerable.Empty<ComposablePartDefinition>() : addedDefinitions.Value);
-            var removed = (removedDefinitions == null ? Enumerable.Empty<ComposablePartDefinition>() : removedDefinitions.Value);
+            var added = (
+                addedDefinitions == null
+                    ? Enumerable.Empty<ComposablePartDefinition>()
+                    : addedDefinitions.Value
+            );
+            var removed = (
+                removedDefinitions == null
+                    ? Enumerable.Empty<ComposablePartDefinition>()
+                    : removedDefinitions.Value
+            );
 
             this._onChanged.Invoke(new ComposablePartCatalogChangeEventArgs(added, removed, null));
         }
@@ -326,18 +348,29 @@ namespace System.ComponentModel.Composition.Hosting
         }
 
         private void RaiseChangingEvent(
-           Lazy<IEnumerable<ComposablePartDefinition>> addedDefinitions,
-           Lazy<IEnumerable<ComposablePartDefinition>> removedDefinitions,
-           AtomicComposition atomicComposition)
+            Lazy<IEnumerable<ComposablePartDefinition>> addedDefinitions,
+            Lazy<IEnumerable<ComposablePartDefinition>> removedDefinitions,
+            AtomicComposition atomicComposition
+        )
         {
             if (this._onChanging == null || this.Changing == null)
             {
                 return;
             }
-            var added = (addedDefinitions == null ? Enumerable.Empty<ComposablePartDefinition>() : addedDefinitions.Value);
-            var removed = (removedDefinitions == null ? Enumerable.Empty<ComposablePartDefinition>() : removedDefinitions.Value);
+            var added = (
+                addedDefinitions == null
+                    ? Enumerable.Empty<ComposablePartDefinition>()
+                    : addedDefinitions.Value
+            );
+            var removed = (
+                removedDefinitions == null
+                    ? Enumerable.Empty<ComposablePartDefinition>()
+                    : removedDefinitions.Value
+            );
 
-            this._onChanging.Invoke(new ComposablePartCatalogChangeEventArgs(added, removed, atomicComposition));
+            this._onChanging.Invoke(
+                new ComposablePartCatalogChangeEventArgs(added, removed, atomicComposition)
+            );
         }
 
         public void OnChanging(object sender, ComposablePartCatalogChangeEventArgs e)
@@ -349,7 +382,10 @@ namespace System.ComponentModel.Composition.Hosting
             }
         }
 
-        private void OnContainedCatalogChanged(object sender, ComposablePartCatalogChangeEventArgs e)
+        private void OnContainedCatalogChanged(
+            object sender,
+            ComposablePartCatalogChangeEventArgs e
+        )
         {
             if (this._onChanged == null || this.Changed == null)
             {
@@ -359,7 +395,10 @@ namespace System.ComponentModel.Composition.Hosting
             this._onChanged.Invoke(e);
         }
 
-        private void OnContainedCatalogChanging(object sender, ComposablePartCatalogChangeEventArgs e)
+        private void OnContainedCatalogChanging(
+            object sender,
+            ComposablePartCatalogChangeEventArgs e
+        )
         {
             if (this._onChanging == null || this.Changing == null)
             {
@@ -371,7 +410,8 @@ namespace System.ComponentModel.Composition.Hosting
 
         private void SubscribeToCatalogNotifications(ComposablePartCatalog catalog)
         {
-            INotifyComposablePartCatalogChanged notifyCatalog = catalog as INotifyComposablePartCatalogChanged;
+            INotifyComposablePartCatalogChanged notifyCatalog =
+                catalog as INotifyComposablePartCatalogChanged;
             if (notifyCatalog != null)
             {
                 notifyCatalog.Changed += this.OnContainedCatalogChanged;
@@ -389,7 +429,8 @@ namespace System.ComponentModel.Composition.Hosting
 
         private void UnsubscribeFromCatalogNotifications(ComposablePartCatalog catalog)
         {
-            INotifyComposablePartCatalogChanged notifyCatalog = catalog as INotifyComposablePartCatalogChanged;
+            INotifyComposablePartCatalogChanged notifyCatalog =
+                catalog as INotifyComposablePartCatalogChanged;
             if (notifyCatalog != null)
             {
                 notifyCatalog.Changed -= this.OnContainedCatalogChanged;
@@ -397,7 +438,9 @@ namespace System.ComponentModel.Composition.Hosting
             }
         }
 
-        private void UnsubscribeFromCatalogNotifications(IEnumerable<ComposablePartCatalog> catalogs)
+        private void UnsubscribeFromCatalogNotifications(
+            IEnumerable<ComposablePartCatalog> catalogs
+        )
         {
             foreach (var catalog in catalogs)
             {

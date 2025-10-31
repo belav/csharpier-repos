@@ -1,4 +1,5 @@
 ﻿namespace AutoMapper.UnitTests.Projection;
+
 public class ExplicitValues : AutoMapperSpecBase
 {
     private List<Dest> _dests;
@@ -13,11 +14,12 @@ public class ExplicitValues : AutoMapperSpecBase
         public int Value { get; set; }
     }
 
-    protected override MapperConfiguration CreateConfiguration() => new(cfg =>
-    {
-        cfg.CreateProjection<Source, Dest>()
-            .ForMember(dest => dest.Value, opt => opt.MapFrom(src => 5));
-    });
+    protected override MapperConfiguration CreateConfiguration() =>
+        new(cfg =>
+        {
+            cfg.CreateProjection<Source, Dest>()
+                .ForMember(dest => dest.Value, opt => opt.MapFrom(src => 5));
+        });
 
     protected override void Because_of()
     {

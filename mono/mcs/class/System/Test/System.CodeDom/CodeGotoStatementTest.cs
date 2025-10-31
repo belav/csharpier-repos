@@ -14,10 +14,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -27,100 +27,101 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
-using NUnit.Framework;
-
 using System;
 using System.CodeDom;
 using System.Collections.Specialized;
+using NUnit.Framework;
 
 namespace MonoTests.System.CodeDom
 {
-	[TestFixture]
-	public class CodeGotoStatementTest
-	{
-		[Test]
-		public void Constructor0 ()
-		{
-			CodeGotoStatement cgs = new CodeGotoStatement ();
-			Assert.IsNull (cgs.Label, "#1");
+    [TestFixture]
+    public class CodeGotoStatementTest
+    {
+        [Test]
+        public void Constructor0()
+        {
+            CodeGotoStatement cgs = new CodeGotoStatement();
+            Assert.IsNull(cgs.Label, "#1");
 
-			Assert.IsNotNull (cgs.StartDirectives, "#2");
-			Assert.AreEqual (0, cgs.StartDirectives.Count, "#3");
+            Assert.IsNotNull(cgs.StartDirectives, "#2");
+            Assert.AreEqual(0, cgs.StartDirectives.Count, "#3");
 
-			Assert.IsNotNull (cgs.EndDirectives, "#4");
-			Assert.AreEqual (0, cgs.EndDirectives.Count, "#5");
+            Assert.IsNotNull(cgs.EndDirectives, "#4");
+            Assert.AreEqual(0, cgs.EndDirectives.Count, "#5");
 
-			Assert.IsNotNull (cgs.UserData, "#6");
-			Assert.AreEqual (typeof(ListDictionary), cgs.UserData.GetType (), "#7");
-			Assert.AreEqual (0, cgs.UserData.Count, "#8");
+            Assert.IsNotNull(cgs.UserData, "#6");
+            Assert.AreEqual(typeof(ListDictionary), cgs.UserData.GetType(), "#7");
+            Assert.AreEqual(0, cgs.UserData.Count, "#8");
 
-			Assert.IsNull (cgs.LinePragma, "#9");
+            Assert.IsNull(cgs.LinePragma, "#9");
 
-			CodeLinePragma clp = new CodeLinePragma ("mono", 10);
-			cgs.LinePragma = clp;
-			Assert.IsNotNull (cgs.LinePragma, "#10");
-			Assert.AreSame (clp, cgs.LinePragma, "#11");
+            CodeLinePragma clp = new CodeLinePragma("mono", 10);
+            cgs.LinePragma = clp;
+            Assert.IsNotNull(cgs.LinePragma, "#10");
+            Assert.AreSame(clp, cgs.LinePragma, "#11");
 
-			cgs.LinePragma = null;
-			Assert.IsNull (cgs.LinePragma, "#12");
+            cgs.LinePragma = null;
+            Assert.IsNull(cgs.LinePragma, "#12");
 
-			string label = "mono";
-			cgs.Label = label;
-			Assert.AreSame (label, cgs.Label, "#13");
-		}
+            string label = "mono";
+            cgs.Label = label;
+            Assert.AreSame(label, cgs.Label, "#13");
+        }
 
-		[Test]
-		public void Constructor1 ()
-		{
-			string label1 = "mono1";
+        [Test]
+        public void Constructor1()
+        {
+            string label1 = "mono1";
 
-			CodeGotoStatement cgs = new CodeGotoStatement (label1);
-			Assert.IsNotNull (cgs.Label, "#1");
-			Assert.AreSame (label1, cgs.Label, "#2");
+            CodeGotoStatement cgs = new CodeGotoStatement(label1);
+            Assert.IsNotNull(cgs.Label, "#1");
+            Assert.AreSame(label1, cgs.Label, "#2");
 
-			Assert.IsNotNull (cgs.StartDirectives, "#3");
-			Assert.AreEqual (0, cgs.StartDirectives.Count, "#4");
+            Assert.IsNotNull(cgs.StartDirectives, "#3");
+            Assert.AreEqual(0, cgs.StartDirectives.Count, "#4");
 
-			Assert.IsNotNull (cgs.EndDirectives, "#5");
-			Assert.AreEqual (0, cgs.EndDirectives.Count, "#6");
+            Assert.IsNotNull(cgs.EndDirectives, "#5");
+            Assert.AreEqual(0, cgs.EndDirectives.Count, "#6");
 
-			Assert.IsNotNull (cgs.UserData, "#7");
-			Assert.AreEqual (typeof(ListDictionary), cgs.UserData.GetType (), "#8");
-			Assert.AreEqual (0, cgs.UserData.Count, "#9");
+            Assert.IsNotNull(cgs.UserData, "#7");
+            Assert.AreEqual(typeof(ListDictionary), cgs.UserData.GetType(), "#8");
+            Assert.AreEqual(0, cgs.UserData.Count, "#9");
 
-			Assert.IsNull (cgs.LinePragma, "#10");
+            Assert.IsNull(cgs.LinePragma, "#10");
 
-			string label2 = "mono2";
-			cgs.Label = label2;
-			Assert.AreSame (label2, cgs.Label, "#11");
-		}
+            string label2 = "mono2";
+            cgs.Label = label2;
+            Assert.AreSame(label2, cgs.Label, "#11");
+        }
 
-		[Test]
-		[ExpectedException (typeof (ArgumentNullException))]
-		public void Constructor1_NullLabel ()
-		{
-			CodeGotoStatement cgs = new CodeGotoStatement ((string) null);
-		}
+        [Test]
+        [ExpectedException(typeof(ArgumentNullException))]
+        public void Constructor1_NullLabel()
+        {
+            CodeGotoStatement cgs = new CodeGotoStatement((string)null);
+        }
 
-		[Test]
-		[ExpectedException (typeof (ArgumentNullException))]
-		public void Constructor1_EmptyLabel () {
-			CodeGotoStatement cgs = new CodeGotoStatement (string.Empty);
-		}
+        [Test]
+        [ExpectedException(typeof(ArgumentNullException))]
+        public void Constructor1_EmptyLabel()
+        {
+            CodeGotoStatement cgs = new CodeGotoStatement(string.Empty);
+        }
 
-		[Test]
-		[ExpectedException (typeof (ArgumentNullException))]
-		public void Label_Null ()
-		{
-			CodeGotoStatement cgs = new CodeGotoStatement ("mono");
-			cgs.Label = null;
-		}
+        [Test]
+        [ExpectedException(typeof(ArgumentNullException))]
+        public void Label_Null()
+        {
+            CodeGotoStatement cgs = new CodeGotoStatement("mono");
+            cgs.Label = null;
+        }
 
-		[Test]
-		[ExpectedException (typeof (ArgumentNullException))]
-		public void Label_Empty () {
-			CodeGotoStatement cgs = new CodeGotoStatement ("mono");
-			cgs.Label = string.Empty;
-		}
-	}
+        [Test]
+        [ExpectedException(typeof(ArgumentNullException))]
+        public void Label_Empty()
+        {
+            CodeGotoStatement cgs = new CodeGotoStatement("mono");
+            cgs.Label = string.Empty;
+        }
+    }
 }

@@ -2,12 +2,12 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
-using System.Text;
 using System.Collections.Generic;
+using System.Composition.Convention;
 using System.Composition.Hosting;
 using System.Composition.Hosting.Providers;
-using System.Composition.Convention;
 using System.Reflection;
+using System.Text;
 using Xunit;
 
 namespace System.Composition.UnitTests
@@ -16,12 +16,13 @@ namespace System.Composition.UnitTests
     {
         protected static CompositionContext CreateContainer(params Type[] types)
         {
-            return new ContainerConfiguration()
-                .WithParts(types)
-                .CreateContainer();
+            return new ContainerConfiguration().WithParts(types).CreateContainer();
         }
 
-        protected static CompositionContext CreateContainer(ConventionBuilder rb, params Type[] types)
+        protected static CompositionContext CreateContainer(
+            ConventionBuilder rb,
+            params Type[] types
+        )
         {
             return new ContainerConfiguration()
                 .WithParts(types)

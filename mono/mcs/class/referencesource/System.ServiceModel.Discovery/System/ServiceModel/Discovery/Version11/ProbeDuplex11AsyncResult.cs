@@ -6,16 +6,18 @@ namespace System.ServiceModel.Discovery.Version11
 {
     using System.Runtime;
 
-    sealed class ProbeDuplex11AsyncResult : ProbeDuplexAsyncResult<ProbeMessage11, IDiscoveryResponseContract11>
+    sealed class ProbeDuplex11AsyncResult
+        : ProbeDuplexAsyncResult<ProbeMessage11, IDiscoveryResponseContract11>
     {
-        internal ProbeDuplex11AsyncResult(ProbeMessage11 probeMessage,
+        internal ProbeDuplex11AsyncResult(
+            ProbeMessage11 probeMessage,
             IDiscoveryServiceImplementation discoveryServiceImpl,
             IMulticastSuppressionImplementation multicastSuppressionImpl,
             AsyncCallback callback,
-            object state)
+            object state
+        )
             : base(probeMessage, discoveryServiceImpl, multicastSuppressionImpl, callback, state)
-        {
-        }
+        { }
 
         public static void End(IAsyncResult result)
         {
@@ -46,17 +48,20 @@ namespace System.ServiceModel.Discovery.Version11
             DiscoveryMessageSequence discoveryMessageSequence,
             EndpointDiscoveryMetadata matchingEndpoint,
             AsyncCallback callback,
-            object state)
+            object state
+        )
         {
             return responseChannel.BeginProbeMatchOperation(
-                ProbeMatchesMessage11.Create(
-                discoveryMessageSequence,
-                matchingEndpoint), 
-                callback, 
-                state);
+                ProbeMatchesMessage11.Create(discoveryMessageSequence, matchingEndpoint),
+                callback,
+                state
+            );
         }
 
-        protected override void EndSendFindResponse(IDiscoveryResponseContract11 responseChannel, IAsyncResult result)
+        protected override void EndSendFindResponse(
+            IDiscoveryResponseContract11 responseChannel,
+            IAsyncResult result
+        )
         {
             responseChannel.EndProbeMatchOperation(result);
         }
@@ -66,17 +71,20 @@ namespace System.ServiceModel.Discovery.Version11
             DiscoveryMessageSequence discoveryMessageSequence,
             EndpointDiscoveryMetadata proxyEndpointDiscoveryMetadata,
             AsyncCallback callback,
-            object state)
+            object state
+        )
         {
             return responseChannel.BeginHelloOperation(
-                HelloMessage11.Create(
-                discoveryMessageSequence,
-                proxyEndpointDiscoveryMetadata),
-                callback, 
-                state);
+                HelloMessage11.Create(discoveryMessageSequence, proxyEndpointDiscoveryMetadata),
+                callback,
+                state
+            );
         }
 
-        protected override void EndSendProxyAnnouncement(IDiscoveryResponseContract11 responseChannel, IAsyncResult result)
+        protected override void EndSendProxyAnnouncement(
+            IDiscoveryResponseContract11 responseChannel,
+            IAsyncResult result
+        )
         {
             responseChannel.EndHelloOperation(result);
         }

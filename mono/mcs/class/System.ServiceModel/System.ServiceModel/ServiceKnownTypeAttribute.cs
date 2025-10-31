@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -29,62 +29,81 @@ using System;
 using System.Collections.Generic;
 using System.Reflection;
 
-namespace System.ServiceModel {
+namespace System.ServiceModel
+{
+    [AttributeUsage(
+        AttributeTargets.Class | AttributeTargets.Method | AttributeTargets.Interface,
+        AllowMultiple = true,
+        Inherited = true
+    )]
+    public sealed class ServiceKnownTypeAttribute : Attribute
+    {
+        public ServiceKnownTypeAttribute(string methodName)
+            : this(methodName, null) { }
 
-	[AttributeUsage (AttributeTargets.Class | AttributeTargets.Method | AttributeTargets.Interface, AllowMultiple = true, Inherited = true)] 
-	public sealed class ServiceKnownTypeAttribute : Attribute
-	{
-		public ServiceKnownTypeAttribute (string methodName)
-			: this (methodName, null)
-		{
-		}
+        public ServiceKnownTypeAttribute(Type type)
+        {
+            this.type = type;
+        }
 
-		public ServiceKnownTypeAttribute (Type type)
-		{
-			this.type = type;
-		}
+        public ServiceKnownTypeAttribute(string methodName, Type declaringType)
+        {
+            this.declaring_type = declaringType;
+            this.method = methodName;
+        }
 
-		public ServiceKnownTypeAttribute (string methodName, Type declaringType)
-		{
-			this.declaring_type = declaringType;
-			this.method = methodName;
-		}
+        string method;
+        Type declaring_type,
+            type;
+        MethodInfo method_cached;
 
-		string method;
-		Type declaring_type, type;
-		MethodInfo method_cached;
+        public string MethodName
+        {
+            get { return method; }
+        }
 
-		public string MethodName {
-			get { return method; }
-		}
+        public Type DeclaringType
+        {
+            get { return declaring_type; }
+        }
 
-		public Type DeclaringType {
-			get { return declaring_type; }
-		}
+        public Type Type
+        {
+            get { return type; }
+        }
 
-		public Type Type {
-			get { return type; }
-		}
-		
-		BindingFlags flags = BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Static;
-		static readonly Type [] get_types = new Type [] { typeof (ICustomAttributeProvider) };
+        BindingFlags flags = BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Static;
+        static readonly Type[] get_types = new Type[] { typeof(ICustomAttributeProvider) };
 
-		internal IEnumerable<Type> GetTypes (ICustomAttributeProvider provider)
-		{
-			if (method_cached != null)
-				return (IEnumerable<Type>) method_cached.Invoke (null, new object [] {provider});
-			if (type != null)
-				return new Type [] {type};
-			else if (declaring_type == null || method == null)
-				return Type.EmptyTypes;
+        internal IEnumerable<Type> GetTypes(ICustomAttributeProvider provider)
+        {
+            if (method_cached != null)
+                return (IEnumerable<Type>)method_cached.Invoke(null, new object[] { provider });
+            if (type != null)
+                return new Type[] { type };
+            else if (declaring_type == null || method == null)
+                return Type.EmptyTypes;
 
-			var mi = declaring_type.GetMethod (method, flags, null, get_types, null);
-			if (mi == null)
-				throw new InvalidOperationException (String.Format ("ServiceKnownTypeAttribute specifies method {0} in type {1} which does not exist. The method must be static and takes one parameter of type ICustomAttributeProvider", method, declaring_type));
-			if (!typeof (IEnumerable<Type>).IsAssignableFrom (mi.ReturnType))
-				throw new InvalidOperationException (String.Format ("ServiceKnownTypeAttribute specifies method {0} in type {1} which returns {2} object. This attribute expects the method to have IEnumerable<Type> as its return type", method, declaring_type, mi.ReturnType));
-			method_cached = mi;
-			return GetTypes (provider); // goto top
-		}
-	}
+            var mi = declaring_type.GetMethod(method, flags, null, get_types, null);
+            if (mi == null)
+                throw new InvalidOperationException(
+                    String.Format(
+                        "ServiceKnownTypeAttribute specifies method {0} in type {1} which does not exist. The method must be static and takes one parameter of type ICustomAttributeProvider",
+                        method,
+                        declaring_type
+                    )
+                );
+            if (!typeof(IEnumerable<Type>).IsAssignableFrom(mi.ReturnType))
+                throw new InvalidOperationException(
+                    String.Format(
+                        "ServiceKnownTypeAttribute specifies method {0} in type {1} which returns {2} object. This attribute expects the method to have IEnumerable<Type> as its return type",
+                        method,
+                        declaring_type,
+                        mi.ReturnType
+                    )
+                );
+            method_cached = mi;
+            return GetTypes(provider); // goto top
+        }
+    }
 }

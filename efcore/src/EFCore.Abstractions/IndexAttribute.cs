@@ -84,12 +84,19 @@ public sealed class IndexAttribute : Attribute
                 if (value.Length != PropertyNames.Count)
                 {
                     throw new ArgumentException(
-                        AbstractionsStrings.InvalidNumberOfIndexSortOrderValues(value.Length, PropertyNames.Count), nameof(IsDescending));
+                        AbstractionsStrings.InvalidNumberOfIndexSortOrderValues(
+                            value.Length,
+                            PropertyNames.Count
+                        ),
+                        nameof(IsDescending)
+                    );
                 }
 
                 if (_allDescending)
                 {
-                    throw new ArgumentException(AbstractionsStrings.CannotSpecifyBothIsDescendingAndAllDescending);
+                    throw new ArgumentException(
+                        AbstractionsStrings.CannotSpecifyBothIsDescendingAndAllDescending
+                    );
                 }
             }
 
@@ -107,7 +114,9 @@ public sealed class IndexAttribute : Attribute
         {
             if (IsDescending is not null)
             {
-                throw new ArgumentException(AbstractionsStrings.CannotSpecifyBothIsDescendingAndAllDescending);
+                throw new ArgumentException(
+                    AbstractionsStrings.CannotSpecifyBothIsDescendingAndAllDescending
+                );
             }
 
             _allDescending = value;
@@ -117,6 +126,5 @@ public sealed class IndexAttribute : Attribute
     /// <summary>
     ///     Checks whether <see cref="IsUnique" /> has been explicitly set to a value.
     /// </summary>
-    public bool IsUniqueHasValue
-        => _isUnique.HasValue;
+    public bool IsUniqueHasValue => _isUnique.HasValue;
 }

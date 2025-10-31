@@ -50,7 +50,10 @@ namespace System.Tests
         //
 
         [Theory]
-        [MemberData(nameof(StringTests_GenericMath.Parse_Valid_TestData), MemberType = typeof(StringTests_GenericMath))]
+        [MemberData(
+            nameof(StringTests_GenericMath.Parse_Valid_TestData),
+            MemberType = typeof(StringTests_GenericMath)
+        )]
         public static void ParseValidStringTest(string value)
         {
             string result;
@@ -62,13 +65,25 @@ namespace System.Tests
             Assert.Equal(expected, ParsableHelper<string>.Parse(value, provider: null));
 
             // Current Culture
-            Assert.True(ParsableHelper<string>.TryParse(value, provider: CultureInfo.CurrentCulture, out result));
+            Assert.True(
+                ParsableHelper<string>.TryParse(
+                    value,
+                    provider: CultureInfo.CurrentCulture,
+                    out result
+                )
+            );
             Assert.Equal(expected, result);
-            Assert.Equal(expected, ParsableHelper<string>.Parse(value, provider: CultureInfo.CurrentCulture));
+            Assert.Equal(
+                expected,
+                ParsableHelper<string>.Parse(value, provider: CultureInfo.CurrentCulture)
+            );
         }
 
         [Theory]
-        [MemberData(nameof(StringTests_GenericMath.Parse_Invalid_TestData), MemberType = typeof(StringTests_GenericMath))]
+        [MemberData(
+            nameof(StringTests_GenericMath.Parse_Invalid_TestData),
+            MemberType = typeof(StringTests_GenericMath)
+        )]
         public static void ParseInvalidStringTest(string value, Type exceptionType)
         {
             string result;
@@ -79,30 +94,66 @@ namespace System.Tests
             Assert.Throws(exceptionType, () => ParsableHelper<string>.Parse(value, provider: null));
 
             // Current Culture
-            Assert.False(ParsableHelper<string>.TryParse(value, provider: CultureInfo.CurrentCulture, out result));
+            Assert.False(
+                ParsableHelper<string>.TryParse(
+                    value,
+                    provider: CultureInfo.CurrentCulture,
+                    out result
+                )
+            );
             Assert.Equal(default(string), result);
-            Assert.Throws(exceptionType, () => ParsableHelper<string>.Parse(value, provider: CultureInfo.CurrentCulture));
+            Assert.Throws(
+                exceptionType,
+                () => ParsableHelper<string>.Parse(value, provider: CultureInfo.CurrentCulture)
+            );
         }
 
         [Theory]
-        [MemberData(nameof(StringTests_GenericMath.Parse_ValidWithOffsetCount_TestData), MemberType = typeof(StringTests_GenericMath))]
+        [MemberData(
+            nameof(StringTests_GenericMath.Parse_ValidWithOffsetCount_TestData),
+            MemberType = typeof(StringTests_GenericMath)
+        )]
         public static void ParseValidSpanTest(string value, int offset, int count, string expected)
         {
             string result;
 
             // Default
-            Assert.True(SpanParsableHelper<string>.TryParse(value.AsSpan(offset, count), provider: null, out result));
+            Assert.True(
+                SpanParsableHelper<string>.TryParse(
+                    value.AsSpan(offset, count),
+                    provider: null,
+                    out result
+                )
+            );
             Assert.Equal(expected, result);
-            Assert.Equal(expected, SpanParsableHelper<string>.Parse(value.AsSpan(offset, count), provider: null));
+            Assert.Equal(
+                expected,
+                SpanParsableHelper<string>.Parse(value.AsSpan(offset, count), provider: null)
+            );
 
             // Current Culture
-            Assert.True(SpanParsableHelper<string>.TryParse(value.AsSpan(offset, count), provider: CultureInfo.CurrentCulture, out result));
+            Assert.True(
+                SpanParsableHelper<string>.TryParse(
+                    value.AsSpan(offset, count),
+                    provider: CultureInfo.CurrentCulture,
+                    out result
+                )
+            );
             Assert.Equal(expected, result);
-            Assert.Equal(expected, SpanParsableHelper<string>.Parse(value.AsSpan(offset, count), provider: CultureInfo.CurrentCulture));
+            Assert.Equal(
+                expected,
+                SpanParsableHelper<string>.Parse(
+                    value.AsSpan(offset, count),
+                    provider: CultureInfo.CurrentCulture
+                )
+            );
         }
 
         [Theory]
-        [MemberData(nameof(StringTests_GenericMath.Parse_Invalid_TestData), MemberType = typeof(StringTests_GenericMath))]
+        [MemberData(
+            nameof(StringTests_GenericMath.Parse_Invalid_TestData),
+            MemberType = typeof(StringTests_GenericMath)
+        )]
         public static void ParseInvalidSpanTest(string value, Type exceptionType)
         {
             if (value is null)
@@ -114,14 +165,32 @@ namespace System.Tests
             string result;
 
             // Default
-            Assert.False(SpanParsableHelper<string>.TryParse(value.AsSpan(), provider: null, out result));
+            Assert.False(
+                SpanParsableHelper<string>.TryParse(value.AsSpan(), provider: null, out result)
+            );
             Assert.Equal(default(string), result);
-            Assert.Throws(exceptionType, () => SpanParsableHelper<string>.Parse(value.AsSpan(), provider: null));
+            Assert.Throws(
+                exceptionType,
+                () => SpanParsableHelper<string>.Parse(value.AsSpan(), provider: null)
+            );
 
             // Current Culture
-            Assert.False(SpanParsableHelper<string>.TryParse(value.AsSpan(), provider: CultureInfo.CurrentCulture, out result));
+            Assert.False(
+                SpanParsableHelper<string>.TryParse(
+                    value.AsSpan(),
+                    provider: CultureInfo.CurrentCulture,
+                    out result
+                )
+            );
             Assert.Equal(default(string), result);
-            Assert.Throws(exceptionType, () => SpanParsableHelper<string>.Parse(value.AsSpan(), provider: CultureInfo.CurrentCulture));
+            Assert.Throws(
+                exceptionType,
+                () =>
+                    SpanParsableHelper<string>.Parse(
+                        value.AsSpan(),
+                        provider: CultureInfo.CurrentCulture
+                    )
+            );
         }
     }
 }

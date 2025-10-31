@@ -37,17 +37,21 @@ namespace System.CommandLine.Help
         /// <inheritdoc />
         public bool Equals(TwoColumnHelpRow? other)
         {
-            return other is not null &&
-                   FirstColumnText == other.FirstColumnText &&
-                   SecondColumnText == other.SecondColumnText;
+            return other is not null
+                && FirstColumnText == other.FirstColumnText
+                && SecondColumnText == other.SecondColumnText;
         }
 
         /// <inheritdoc />
         public override int GetHashCode()
         {
             int hashCode = -244751520;
-            hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(FirstColumnText);
-            hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(SecondColumnText);
+            hashCode =
+                hashCode * -1521134295
+                + EqualityComparer<string>.Default.GetHashCode(FirstColumnText);
+            hashCode =
+                hashCode * -1521134295
+                + EqualityComparer<string>.Default.GetHashCode(SecondColumnText);
             return hashCode;
         }
     }

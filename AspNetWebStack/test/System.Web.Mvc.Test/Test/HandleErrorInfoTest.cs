@@ -29,35 +29,74 @@ namespace System.Web.Mvc.Test
         public void ConstructorWithEmptyActionThrows()
         {
             Assert.ThrowsArgumentNullOrEmpty(
-                delegate { new HandleErrorInfo(new Exception(), "SomeController", String.Empty); }, "actionName");
+                delegate
+                {
+                    new HandleErrorInfo(new Exception(), "SomeController", String.Empty);
+                },
+                "actionName"
+            );
         }
 
         [Fact]
         public void ConstructorWithEmptyControllerThrows()
         {
             Assert.ThrowsArgumentNullOrEmpty(
-                delegate { new HandleErrorInfo(new Exception(), String.Empty, "SomeAction"); }, "controllerName");
+                delegate
+                {
+                    new HandleErrorInfo(new Exception(), String.Empty, "SomeAction");
+                },
+                "controllerName"
+            );
         }
 
         [Fact]
         public void ConstructorWithNullActionThrows()
         {
             Assert.ThrowsArgumentNullOrEmpty(
-                delegate { new HandleErrorInfo(new Exception(), "SomeController", null /* action */); }, "actionName");
+                delegate
+                {
+                    new HandleErrorInfo(
+                        new Exception(),
+                        "SomeController",
+                        null /* action */
+                    );
+                },
+                "actionName"
+            );
         }
 
         [Fact]
         public void ConstructorWithNullControllerThrows()
         {
             Assert.ThrowsArgumentNullOrEmpty(
-                delegate { new HandleErrorInfo(new Exception(), null /* controller */, "SomeAction"); }, "controllerName");
+                delegate
+                {
+                    new HandleErrorInfo(
+                        new Exception(),
+                        null /* controller */
+                        ,
+                        "SomeAction"
+                    );
+                },
+                "controllerName"
+            );
         }
 
         [Fact]
         public void ConstructorWithNullExceptionThrows()
         {
             Assert.ThrowsArgumentNull(
-                delegate { new HandleErrorInfo(null /* exception */, "SomeController", "SomeAction"); }, "exception");
+                delegate
+                {
+                    new HandleErrorInfo(
+                        null /* exception */
+                        ,
+                        "SomeController",
+                        "SomeAction"
+                    );
+                },
+                "exception"
+            );
         }
 
         [Fact]

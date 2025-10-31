@@ -72,10 +72,7 @@ namespace JitTest_han3_ctor_cs
         [Fact]
         public static int TestEntryPoint()
         {
-            return move(new Column(17, 17),
-                        new Column(17, 0),
-                        new Column(17, 0),
-                        17) - 130971;
+            return move(new Column(17, 17), new Column(17, 0), new Column(17, 0), 17) - 130971;
         }
     }
 }

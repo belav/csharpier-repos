@@ -20,15 +20,15 @@ namespace System.Runtime
     //   of time to wait for additional timers to be set.
     // - Timers are stored in an array-based priority queue to reduce the amount of time spent in updates, and
     //   to always provide O(1) access to the minimum timer (the first one that will expire).
-    // - The standard textbook priority queue data structure is extended to allow efficient Delete in addition to 
+    // - The standard textbook priority queue data structure is extended to allow efficient Delete in addition to
     //   DeleteMin for efficient handling of canceled timers.
-    // - Timers that are typically set, then immediately canceled (such as a retry timer, 
-    //   or a flush timer), are tracked separately from more stable timers, to avoid having 
-    //   to update the waitable timer in the typical case when a timer is canceled.  Whether 
+    // - Timers that are typically set, then immediately canceled (such as a retry timer,
+    //   or a flush timer), are tracked separately from more stable timers, to avoid having
+    //   to update the waitable timer in the typical case when a timer is canceled.  Whether
     //   a timer instance follows this pattern is specified when the timer is constructed.
     // - Extending a timer by a configurable time delta (maxSkew) does not involve updating the
     //   waitable timer, or taking a lock.
-    // - Timer instances are relatively cheap.  They share "heavy" resources like the waiter thread and 
+    // - Timer instances are relatively cheap.  They share "heavy" resources like the waiter thread and
     //   waitable timer handle.
     // - Setting or canceling a timer does not typically involve any allocations.
 
@@ -44,18 +44,33 @@ namespace System.Runtime
         long maxSkew;
         TimerGroup timerGroup;
 
-        public IOThreadTimer(Action<object> callback, object callbackState, bool isTypicallyCanceledShortlyAfterBeingSet)
-            : this(callback, callbackState, isTypicallyCanceledShortlyAfterBeingSet, maxSkewInMillisecondsDefault)
-        {
-        }
+        public IOThreadTimer(
+            Action<object> callback,
+            object callbackState,
+            bool isTypicallyCanceledShortlyAfterBeingSet
+        )
+            : this(
+                callback,
+                callbackState,
+                isTypicallyCanceledShortlyAfterBeingSet,
+                maxSkewInMillisecondsDefault
+            ) { }
 
-        public IOThreadTimer(Action<object> callback, object callbackState, bool isTypicallyCanceledShortlyAfterBeingSet, int maxSkewInMilliseconds)
+        public IOThreadTimer(
+            Action<object> callback,
+            object callbackState,
+            bool isTypicallyCanceledShortlyAfterBeingSet,
+            int maxSkewInMilliseconds
+        )
         {
             this.callback = callback;
             this.callbackState = callbackState;
             this.maxSkew = Ticks.FromMilliseconds(maxSkewInMilliseconds);
-            this.timerGroup =
-                (isTypicallyCanceledShortlyAfterBeingSet ? TimerManager.Value.VolatileTimerGroup : TimerManager.Value.StableTimerGroup);
+            this.timerGroup = (
+                isTypicallyCanceledShortlyAfterBeingSet
+                    ? TimerManager.Value.VolatileTimerGroup
+                    : TimerManager.Value.StableTimerGroup
+            );
         }
 
         public static long SystemTimeResolutionTicks
@@ -70,7 +85,10 @@ namespace System.Runtime
             }
         }
 
-        [Fx.Tag.SecurityNote(Critical = "Calls critical method GetSystemTimeAdjustment", Safe = "method is a SafeNativeMethod")]
+        [Fx.Tag.SecurityNote(
+            Critical = "Calls critical method GetSystemTimeAdjustment",
+            Safe = "method is a SafeNativeMethod"
+        )]
         [SecuritySafeCritical]
         static long GetSystemTimeResolution()
         {
@@ -78,7 +96,13 @@ namespace System.Runtime
             uint increment;
             uint dummyAdjustmentDisabled;
 
-            if (UnsafeNativeMethods.GetSystemTimeAdjustment(out dummyAdjustment, out increment, out dummyAdjustmentDisabled) != 0)
+            if (
+                UnsafeNativeMethods.GetSystemTimeAdjustment(
+                    out dummyAdjustment,
+                    out increment,
+                    out dummyAdjustmentDisabled
+                ) != 0
+            )
             {
                 return (long)increment;
             }
@@ -115,12 +139,17 @@ namespace System.Runtime
         {
             const long maxTimeToWaitForMoreTimers = 1000 * TimeSpan.TicksPerMillisecond;
 
-            [Fx.Tag.Queue(typeof(IOThreadTimer), Scope = Fx.Tag.Strings.AppDomain, StaleElementsRemovedImmediately = true)]
+            [Fx.Tag.Queue(
+                typeof(IOThreadTimer),
+                Scope = Fx.Tag.Strings.AppDomain,
+                StaleElementsRemovedImmediately = true
+            )]
             static TimerManager value = new TimerManager();
 
             Action<object> onWaitCallback;
             TimerGroup stableTimerGroup;
             TimerGroup volatileTimerGroup;
+
             [Fx.Tag.SynchronizationObject(Blocking = false)]
             WaitableTimer[] waitableTimers;
 
@@ -131,7 +160,11 @@ namespace System.Runtime
                 this.onWaitCallback = new Action<object>(OnWaitCallback);
                 this.stableTimerGroup = new TimerGroup();
                 this.volatileTimerGroup = new TimerGroup();
-                this.waitableTimers = new WaitableTimer[] { this.stableTimerGroup.WaitableTimer, this.volatileTimerGroup.WaitableTimer };
+                this.waitableTimers = new WaitableTimer[]
+                {
+                    this.stableTimerGroup.WaitableTimer,
+                    this.volatileTimerGroup.WaitableTimer,
+                };
             }
 
             object ThisLock
@@ -141,25 +174,16 @@ namespace System.Runtime
 
             public static TimerManager Value
             {
-                get
-                {
-                    return TimerManager.value;
-                }
+                get { return TimerManager.value; }
             }
 
             public TimerGroup StableTimerGroup
             {
-                get
-                {
-                    return this.stableTimerGroup;
-                }
+                get { return this.stableTimerGroup; }
             }
             public TimerGroup VolatileTimerGroup
             {
-                get
-                {
-                    return this.volatileTimerGroup;
-                }
+                get { return this.volatileTimerGroup; }
             }
 
             public void Set(IOThreadTimer timer, long dueTime)
@@ -221,12 +245,18 @@ namespace System.Runtime
                             if (otherTimerGroup.TimerQueue.Count == 0)
                             {
                                 long now = Ticks.Now;
-                                long thisGroupRemainingTime = timerGroup.WaitableTimer.DueTime - now;
-                                long otherGroupRemainingTime = otherTimerGroup.WaitableTimer.DueTime - now;
-                                if (thisGroupRemainingTime > maxTimeToWaitForMoreTimers &&
-                                    otherGroupRemainingTime > maxTimeToWaitForMoreTimers)
+                                long thisGroupRemainingTime =
+                                    timerGroup.WaitableTimer.DueTime - now;
+                                long otherGroupRemainingTime =
+                                    otherTimerGroup.WaitableTimer.DueTime - now;
+                                if (
+                                    thisGroupRemainingTime > maxTimeToWaitForMoreTimers
+                                    && otherGroupRemainingTime > maxTimeToWaitForMoreTimers
+                                )
                                 {
-                                    timerGroup.WaitableTimer.Set(Ticks.Add(now, maxTimeToWaitForMoreTimers));
+                                    timerGroup.WaitableTimer.Set(
+                                        Ticks.Add(now, maxTimeToWaitForMoreTimers)
+                                    );
                                 }
                             }
                         }
@@ -326,8 +356,10 @@ namespace System.Runtime
 
             void ScheduleWaitIfAnyTimersLeft()
             {
-                if (this.stableTimerGroup.TimerQueue.Count > 0 ||
-                    this.volatileTimerGroup.TimerQueue.Count > 0)
+                if (
+                    this.stableTimerGroup.TimerQueue.Count > 0
+                    || this.volatileTimerGroup.TimerQueue.Count > 0
+                )
                 {
                     ScheduleWait();
                 }
@@ -363,17 +395,11 @@ namespace System.Runtime
 
             public TimerQueue TimerQueue
             {
-                get
-                {
-                    return this.timerQueue;
-                }
+                get { return this.timerQueue; }
             }
             public WaitableTimer WaitableTimer
             {
-                get
-                {
-                    return this.waitableTimer;
-                }
+                get { return this.waitableTimer; }
             }
         }
 
@@ -400,6 +426,7 @@ namespace System.Runtime
                     return timers[1];
                 }
             }
+
             public void DeleteMinTimer()
             {
                 IOThreadTimer minTimer = this.MinTimer;
@@ -407,6 +434,7 @@ namespace System.Runtime
                 minTimer.index = 0;
                 minTimer.dueTime = 0;
             }
+
             public void DeleteTimer(IOThreadTimer timer)
             {
                 int index = timer.index;
@@ -416,7 +444,7 @@ namespace System.Runtime
 
                 IOThreadTimer[] timers = this.timers;
 
-                for (;;)
+                for (; ; )
                 {
                     int parentIndex = index / 2;
 
@@ -459,7 +487,7 @@ namespace System.Runtime
 
                 if (index > 1)
                 {
-                    for (;;)
+                    for (; ; )
                     {
                         int parentIndex = index / 2;
 
@@ -488,6 +516,7 @@ namespace System.Runtime
                 timer.dueTime = dueTime;
                 return index == 1;
             }
+
             public bool UpdateTimer(IOThreadTimer timer, long dueTime)
             {
                 int index = timer.index;
@@ -499,16 +528,13 @@ namespace System.Runtime
                 Fx.Assert(index <= count, "");
 
                 int parentIndex = index / 2;
-                if (parentIndex == 0 ||
-                    timers[parentIndex].dueTime <= dueTime)
+                if (parentIndex == 0 || timers[parentIndex].dueTime <= dueTime)
                 {
                     int leftChildIndex = index * 2;
-                    if (leftChildIndex > count ||
-                        timers[leftChildIndex].dueTime >= dueTime)
+                    if (leftChildIndex > count || timers[leftChildIndex].dueTime >= dueTime)
                     {
                         int rightChildIndex = leftChildIndex + 1;
-                        if (rightChildIndex > count ||
-                            timers[rightChildIndex].dueTime >= dueTime)
+                        if (rightChildIndex > count || timers[rightChildIndex].dueTime >= dueTime)
                         {
                             timer.dueTime = dueTime;
                             return index == 1;
@@ -537,7 +563,7 @@ namespace System.Runtime
                     this.count = --count;
 
                     int index = 1;
-                    for (;;)
+                    for (; ; )
                     {
                         int leftChildIndex = index * 2;
 
@@ -600,11 +626,12 @@ namespace System.Runtime
         [Fx.Tag.SynchronizationPrimitive(Fx.Tag.BlocksUsing.NonBlocking)]
         class WaitableTimer : WaitHandle
         {
-
             long dueTime;
 
-            [Fx.Tag.SecurityNote(Critical = "Call the critical CreateWaitableTimer method in TimerHelper",
-                Safe = "Doesn't leak information or resources")]
+            [Fx.Tag.SecurityNote(
+                Critical = "Call the critical CreateWaitableTimer method in TimerHelper",
+                Safe = "Doesn't leak information or resources"
+            )]
             [SecuritySafeCritical]
             public WaitableTimer()
             {
@@ -616,20 +643,29 @@ namespace System.Runtime
                 get { return this.dueTime; }
             }
 
-            [Fx.Tag.SecurityNote(Critical = "Call the critical Set method in TimerHelper",
-                Safe = "Doesn't leak information or resources")]
+            [Fx.Tag.SecurityNote(
+                Critical = "Call the critical Set method in TimerHelper",
+                Safe = "Doesn't leak information or resources"
+            )]
             [SecuritySafeCritical]
             public void Set(long dueTime)
             {
                 this.dueTime = TimerHelper.Set(this.SafeWaitHandle, dueTime);
             }
-            [Fx.Tag.SecurityNote(Critical = "Provides a set of unsafe methods used to work with the WaitableTimer")]
+
+            [Fx.Tag.SecurityNote(
+                Critical = "Provides a set of unsafe methods used to work with the WaitableTimer"
+            )]
             [SecurityCritical]
             static class TimerHelper
             {
                 public static unsafe SafeWaitHandle CreateWaitableTimer()
                 {
-                    SafeWaitHandle handle = UnsafeNativeMethods.CreateWaitableTimer(IntPtr.Zero, false, null);
+                    SafeWaitHandle handle = UnsafeNativeMethods.CreateWaitableTimer(
+                        IntPtr.Zero,
+                        false,
+                        null
+                    );
                     if (handle.IsInvalid)
                     {
                         Exception exception = new Win32Exception();
@@ -638,9 +674,19 @@ namespace System.Runtime
                     }
                     return handle;
                 }
+
                 public static unsafe long Set(SafeWaitHandle timer, long dueTime)
                 {
-                    if (!UnsafeNativeMethods.SetWaitableTimer(timer, ref dueTime, 0, IntPtr.Zero, IntPtr.Zero, false))
+                    if (
+                        !UnsafeNativeMethods.SetWaitableTimer(
+                            timer,
+                            ref dueTime,
+                            0,
+                            IntPtr.Zero,
+                            IntPtr.Zero,
+                            false
+                        )
+                    )
                     {
                         throw Fx.Exception.AsError(new Win32Exception());
                     }
@@ -650,5 +696,3 @@ namespace System.Runtime
         }
     }
 }
-
-

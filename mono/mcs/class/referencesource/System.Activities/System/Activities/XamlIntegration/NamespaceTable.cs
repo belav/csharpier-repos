@@ -92,7 +92,8 @@ namespace System.Activities.XamlIntegration
 
         void ConstructNamespaceCache()
         {
-            Dictionary<string, NamespaceDeclaration> localNamespaces = new Dictionary<string, NamespaceDeclaration>();
+            Dictionary<string, NamespaceDeclaration> localNamespaces =
+                new Dictionary<string, NamespaceDeclaration>();
             if (this.tempNamespaceList != null && this.tempNamespaceList.Count > 0)
             {
                 foreach (NamespaceDeclaration tempNamespace in tempNamespaceList)

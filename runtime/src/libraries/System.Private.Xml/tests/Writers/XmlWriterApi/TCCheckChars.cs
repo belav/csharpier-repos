@@ -13,21 +13,52 @@ namespace System.Xml.XmlWriterApiTests
         [XmlWriterInlineData(WriterType.AllButCustom & ~WriterType.CharCheckingWriter, "String")]
         [XmlWriterInlineData(WriterType.AllButCustom & ~WriterType.CharCheckingWriter, "CData")]
         [XmlWriterInlineData(WriterType.AllButCustom & ~WriterType.CharCheckingWriter, "Comment")]
-        [XmlWriterInlineData(WriterType.AllButCustom & ~WriterType.CharCheckingWriter, "CharEntity")]
+        [XmlWriterInlineData(
+            WriterType.AllButCustom & ~WriterType.CharCheckingWriter,
+            "CharEntity"
+        )]
         [XmlWriterInlineData(WriterType.AllButCustom & ~WriterType.CharCheckingWriter, "EntityRef")]
-        [XmlWriterInlineData(WriterType.AllButCustom & ~WriterType.CharCheckingWriter, "SurrogateCharEntity")]
+        [XmlWriterInlineData(
+            WriterType.AllButCustom & ~WriterType.CharCheckingWriter,
+            "SurrogateCharEntity"
+        )]
         [XmlWriterInlineData(WriterType.AllButCustom & ~WriterType.CharCheckingWriter, "PI")]
-        [XmlWriterInlineData(WriterType.AllButCustom & ~WriterType.CharCheckingWriter, "Whitespace")]
+        [XmlWriterInlineData(
+            WriterType.AllButCustom & ~WriterType.CharCheckingWriter,
+            "Whitespace"
+        )]
         [XmlWriterInlineData(WriterType.AllButCustom & ~WriterType.CharCheckingWriter, "Chars")]
         [XmlWriterInlineData(WriterType.AllButCustom & ~WriterType.CharCheckingWriter, "RawString")]
         [XmlWriterInlineData(WriterType.AllButCustom & ~WriterType.CharCheckingWriter, "RawChars")]
-        [XmlWriterInlineData(WriterType.AllButCustom & ~WriterType.CharCheckingWriter, "WriteValue")]
-        [XmlWriterInlineData(WriterType.AllButCustom & ~WriterType.CharCheckingWriter, "WriteDocTypeName")]
-        [XmlWriterInlineData(WriterType.AllButCustom & ~WriterType.CharCheckingWriter, "WriteDocTypeSysid")]
-        [XmlWriterInlineData(WriterType.AllButCustom & ~WriterType.CharCheckingWriter, "WriteDocTypePubid")]
+        [XmlWriterInlineData(
+            WriterType.AllButCustom & ~WriterType.CharCheckingWriter,
+            "WriteValue"
+        )]
+        [XmlWriterInlineData(
+            WriterType.AllButCustom & ~WriterType.CharCheckingWriter,
+            "WriteDocTypeName"
+        )]
+        [XmlWriterInlineData(
+            WriterType.AllButCustom & ~WriterType.CharCheckingWriter,
+            "WriteDocTypeSysid"
+        )]
+        [XmlWriterInlineData(
+            WriterType.AllButCustom & ~WriterType.CharCheckingWriter,
+            "WriteDocTypePubid"
+        )]
         public void checkChars_1(XmlWriterUtils utils, string tokenType)
         {
-            char[] invalidXML = { '\u0000', '\u0008', '\u000B', '\u000C', '\u000E', '\u001F', '\uFFFE', '\uFFFF' };
+            char[] invalidXML =
+            {
+                '\u0000',
+                '\u0008',
+                '\u000B',
+                '\u000C',
+                '\u000E',
+                '\u001F',
+                '\uFFFE',
+                '\uFFFF',
+            };
 
             XmlWriter w = utils.CreateWriter(ConformanceLevel.Auto);
 
@@ -121,12 +152,28 @@ namespace System.Xml.XmlWriterApiTests
 
         [Theory]
         [XmlWriterInlineData(WriterType.AllButCustom & ~WriterType.CharCheckingWriter, "String")]
-        [XmlWriterInlineData(WriterType.AllButCustom & ~WriterType.CharCheckingWriter, "CharEntity")]
+        [XmlWriterInlineData(
+            WriterType.AllButCustom & ~WriterType.CharCheckingWriter,
+            "CharEntity"
+        )]
         [XmlWriterInlineData(WriterType.AllButCustom & ~WriterType.CharCheckingWriter, "Chars")]
-        [XmlWriterInlineData(WriterType.AllButCustom & ~WriterType.CharCheckingWriter, "WriteValue")]
+        [XmlWriterInlineData(
+            WriterType.AllButCustom & ~WriterType.CharCheckingWriter,
+            "WriteValue"
+        )]
         public void checkChars_2(XmlWriterUtils utils, string tokenType)
         {
-            char[] invalidXML = { '\u0000', '\u0008', '\u000B', '\u000C', '\u000E', '\u001F', '\uFFFE', '\uFFFF' };
+            char[] invalidXML =
+            {
+                '\u0000',
+                '\u0008',
+                '\u000B',
+                '\u000C',
+                '\u000E',
+                '\u001F',
+                '\uFFFE',
+                '\uFFFF',
+            };
 
             XmlWriterSettings wSettings = new XmlWriterSettings();
             wSettings.OmitXmlDeclaration = true;
@@ -189,7 +236,17 @@ namespace System.Xml.XmlWriterApiTests
         [XmlWriterInlineData(WriterType.AllButCustom & ~WriterType.CharCheckingWriter, "RawChars")]
         public void checkChars_3(XmlWriterUtils utils, string tokenType)
         {
-            char[] invalidXML = { '\u0000', '\u0008', '\u000B', '\u000C', '\u000E', '\u001F', '\uFFFE', '\uFFFF' };
+            char[] invalidXML =
+            {
+                '\u0000',
+                '\u0008',
+                '\u000B',
+                '\u000C',
+                '\u000E',
+                '\u001F',
+                '\uFFFE',
+                '\uFFFF',
+            };
 
             XmlWriterSettings wSettings = new XmlWriterSettings();
             wSettings.OmitXmlDeclaration = true;
@@ -205,14 +262,26 @@ namespace System.Xml.XmlWriterApiTests
                     w.WriteComment(invalidXML[2].ToString());
                     w.WriteEndElement();
                     w.Dispose();
-                    string exp = utils.IsIndent() ? "<Root>" + Environment.NewLine + "  <!--\u000B-->" + Environment.NewLine + "</Root>" : "<Root><!--\u000B--></Root>";
+                    string exp = utils.IsIndent()
+                        ? "<Root>"
+                            + Environment.NewLine
+                            + "  <!--\u000B-->"
+                            + Environment.NewLine
+                            + "</Root>"
+                        : "<Root><!--\u000B--></Root>";
                     Assert.True(utils.CompareString(exp));
                     break;
                 case "PI":
                     w.WriteProcessingInstruction("pi", invalidXML[6].ToString());
                     w.WriteEndElement();
                     w.Dispose();
-                    exp = utils.IsIndent() ? "<Root>" + Environment.NewLine + "  <?pi \uFFFE?>" + Environment.NewLine + "</Root>" : "<Root><?pi \uFFFE?></Root>";
+                    exp = utils.IsIndent()
+                        ? "<Root>"
+                            + Environment.NewLine
+                            + "  <?pi \uFFFE?>"
+                            + Environment.NewLine
+                            + "</Root>"
+                        : "<Root><?pi \uFFFE?></Root>";
                     Assert.True(utils.CompareString(exp));
                     break;
                 case "RawString":
@@ -241,18 +310,66 @@ namespace System.Xml.XmlWriterApiTests
         }
 
         [Theory]
-        [XmlWriterInlineData(WriterType.AllButCustom & ~WriterType.CharCheckingWriter, "Whitespace", false)]
-        [XmlWriterInlineData(WriterType.AllButCustom & ~WriterType.CharCheckingWriter, "Surrogate", false)]
-        [XmlWriterInlineData(WriterType.AllButCustom & ~WriterType.CharCheckingWriter, "EntityRef", false)]
-        [XmlWriterInlineData(WriterType.AllButCustom & ~WriterType.CharCheckingWriter, "Name", false)]
-        [XmlWriterInlineData(WriterType.AllButCustom & ~WriterType.CharCheckingWriter, "NmToken", false)]
-        [XmlWriterInlineData(WriterType.AllButCustom & ~WriterType.CharCheckingWriter, "QName", false)]
-        [XmlWriterInlineData(WriterType.AllButCustom & ~WriterType.CharCheckingWriter, "Whitespace", true)]
-        [XmlWriterInlineData(WriterType.AllButCustom & ~WriterType.CharCheckingWriter, "Surrogate", true)]
-        [XmlWriterInlineData(WriterType.AllButCustom & ~WriterType.CharCheckingWriter, "EntityRef", true)]
-        [XmlWriterInlineData(WriterType.AllButCustom & ~WriterType.CharCheckingWriter, "Name", true)]
-        [XmlWriterInlineData(WriterType.AllButCustom & ~WriterType.CharCheckingWriter, "NmToken", true)]
-        [XmlWriterInlineData(WriterType.AllButCustom & ~WriterType.CharCheckingWriter, "QName", true)]
+        [XmlWriterInlineData(
+            WriterType.AllButCustom & ~WriterType.CharCheckingWriter,
+            "Whitespace",
+            false
+        )]
+        [XmlWriterInlineData(
+            WriterType.AllButCustom & ~WriterType.CharCheckingWriter,
+            "Surrogate",
+            false
+        )]
+        [XmlWriterInlineData(
+            WriterType.AllButCustom & ~WriterType.CharCheckingWriter,
+            "EntityRef",
+            false
+        )]
+        [XmlWriterInlineData(
+            WriterType.AllButCustom & ~WriterType.CharCheckingWriter,
+            "Name",
+            false
+        )]
+        [XmlWriterInlineData(
+            WriterType.AllButCustom & ~WriterType.CharCheckingWriter,
+            "NmToken",
+            false
+        )]
+        [XmlWriterInlineData(
+            WriterType.AllButCustom & ~WriterType.CharCheckingWriter,
+            "QName",
+            false
+        )]
+        [XmlWriterInlineData(
+            WriterType.AllButCustom & ~WriterType.CharCheckingWriter,
+            "Whitespace",
+            true
+        )]
+        [XmlWriterInlineData(
+            WriterType.AllButCustom & ~WriterType.CharCheckingWriter,
+            "Surrogate",
+            true
+        )]
+        [XmlWriterInlineData(
+            WriterType.AllButCustom & ~WriterType.CharCheckingWriter,
+            "EntityRef",
+            true
+        )]
+        [XmlWriterInlineData(
+            WriterType.AllButCustom & ~WriterType.CharCheckingWriter,
+            "Name",
+            true
+        )]
+        [XmlWriterInlineData(
+            WriterType.AllButCustom & ~WriterType.CharCheckingWriter,
+            "NmToken",
+            true
+        )]
+        [XmlWriterInlineData(
+            WriterType.AllButCustom & ~WriterType.CharCheckingWriter,
+            "QName",
+            true
+        )]
         public void checkChars_4(XmlWriterUtils utils, string tokenType, bool checkCharacters)
         {
             XmlWriterSettings wSettings = new XmlWriterSettings();
@@ -260,7 +377,17 @@ namespace System.Xml.XmlWriterApiTests
             wSettings.CheckCharacters = checkCharacters;
             wSettings.CloseOutput = true;
 
-            char[] invalidXML = { '\u0000', '\u0008', '\u000B', '\u000C', '\u000E', '\u001F', '\uFFFE', '\uFFFF' };
+            char[] invalidXML =
+            {
+                '\u0000',
+                '\u0008',
+                '\u000B',
+                '\u000C',
+                '\u000E',
+                '\u001F',
+                '\uFFFE',
+                '\uFFFF',
+            };
             XmlWriter w = utils.CreateWriter(wSettings);
             try
             {
@@ -294,10 +421,20 @@ namespace System.Xml.XmlWriterApiTests
             {
                 CError.WriteLineIgnore("Exception: " + e.ToString());
                 //By design
-                if ((utils.WriterType == WriterType.UTF8Writer || utils.WriterType == WriterType.UnicodeWriter || utils.WriterType == WriterType.WrappedWriter || utils.IsIndent()) &&
-                    (tokenType == "Name" || tokenType == "NmToken"))
+                if (
+                    (
+                        utils.WriterType == WriterType.UTF8Writer
+                        || utils.WriterType == WriterType.UnicodeWriter
+                        || utils.WriterType == WriterType.WrappedWriter
+                        || utils.IsIndent()
+                    ) && (tokenType == "Name" || tokenType == "NmToken")
+                )
                 {
-                    CError.Compare(w.WriteState, WriteState.Element, "WriteState should be Element");
+                    CError.Compare(
+                        w.WriteState,
+                        WriteState.Element,
+                        "WriteState should be Element"
+                    );
                 }
                 else
                 {
@@ -338,7 +475,12 @@ namespace System.Xml.XmlWriterApiTests
             XmlWriter w = null;
             try
             {
-                w = WriterHelper.Create("writer.out", wSettings, overrideAsync: true, async: utils.Async);
+                w = WriterHelper.Create(
+                    "writer.out",
+                    wSettings,
+                    overrideAsync: true,
+                    async: utils.Async
+                );
             }
             catch (ArgumentException e)
             {
@@ -372,7 +514,12 @@ namespace System.Xml.XmlWriterApiTests
             XmlWriter w = null;
             try
             {
-                w = WriterHelper.Create("writer.out", wSettings, overrideAsync: true, async: utils.Async);
+                w = WriterHelper.Create(
+                    "writer.out",
+                    wSettings,
+                    overrideAsync: true,
+                    async: utils.Async
+                );
             }
             catch (ArgumentException e)
             {
@@ -404,7 +551,12 @@ namespace System.Xml.XmlWriterApiTests
             XmlWriter w = null;
             try
             {
-                w = WriterHelper.Create("writer.out", wSettings, overrideAsync: true, async: utils.Async);
+                w = WriterHelper.Create(
+                    "writer.out",
+                    wSettings,
+                    overrideAsync: true,
+                    async: utils.Async
+                );
             }
             catch (ArgumentException e)
             {

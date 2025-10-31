@@ -13,9 +13,7 @@ namespace System.Xml.Serialization
         private string? _ns;
         private Type? _type;
 
-        public XmlSerializerVersionAttribute()
-        {
-        }
+        public XmlSerializerVersionAttribute() { }
 
         public XmlSerializerVersionAttribute(Type? type)
         {
@@ -33,7 +31,6 @@ namespace System.Xml.Serialization
             get { return _serializerVersion; }
             set { _serializerVersion = value; }
         }
-
 
         public string? Namespace
         {

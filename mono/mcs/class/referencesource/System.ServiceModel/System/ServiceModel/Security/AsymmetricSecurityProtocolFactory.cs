@@ -19,14 +19,12 @@ namespace System.ServiceModel.Security
 
         SecurityTokenProvider recipientAsymmetricTokenProvider;
         ReadOnlyCollection<SecurityTokenResolver> recipientOutOfBandTokenResolverList;
-        SecurityTokenAuthenticator recipientCryptoTokenAuthenticator;        
+        SecurityTokenAuthenticator recipientCryptoTokenAuthenticator;
 
         bool allowSerializedSigningTokenOnReply;
-        
+
         public AsymmetricSecurityProtocolFactory()
-            : base()
-        {
-        }
+            : base() { }
 
         internal AsymmetricSecurityProtocolFactory(AsymmetricSecurityProtocolFactory factory)
             : base(factory)
@@ -36,10 +34,7 @@ namespace System.ServiceModel.Security
 
         public bool AllowSerializedSigningTokenOnReply
         {
-            get
-            {
-                return this.allowSerializedSigningTokenOnReply;
-            }
+            get { return this.allowSerializedSigningTokenOnReply; }
             set
             {
                 ThrowIfImmutable();
@@ -49,10 +44,7 @@ namespace System.ServiceModel.Security
 
         public SecurityTokenParameters AsymmetricTokenParameters
         {
-            get
-            {
-                return this.asymmetricTokenParameters;
-            }
+            get { return this.asymmetricTokenParameters; }
             set
             {
                 ThrowIfImmutable();
@@ -68,7 +60,7 @@ namespace System.ServiceModel.Security
                 return this.recipientAsymmetricTokenProvider;
             }
         }
-        
+
         public SecurityTokenAuthenticator RecipientCryptoTokenAuthenticator
         {
             get
@@ -87,13 +79,9 @@ namespace System.ServiceModel.Security
             }
         }
 
-
         public SecurityTokenParameters CryptoTokenParameters
         {
-            get
-            {
-                return this.cryptoTokenParameters;
-            }
+            get { return this.cryptoTokenParameters; }
             set
             {
                 ThrowIfImmutable();
@@ -105,7 +93,10 @@ namespace System.ServiceModel.Security
         {
             get
             {
-                return ((this.ActAsInitiator && this.ApplyConfidentiality) || (!this.ActAsInitiator && this.RequireConfidentiality));
+                return (
+                    (this.ActAsInitiator && this.ApplyConfidentiality)
+                    || (!this.ActAsInitiator && this.RequireConfidentiality)
+                );
             }
         }
 
@@ -113,17 +104,25 @@ namespace System.ServiceModel.Security
         {
             get
             {
-                return ((this.ActAsInitiator && this.RequireIntegrity) || (!this.ActAsInitiator && this.ApplyIntegrity));
+                return (
+                    (this.ActAsInitiator && this.RequireIntegrity)
+                    || (!this.ActAsInitiator && this.ApplyIntegrity)
+                );
             }
         }
 
         public override EndpointIdentity GetIdentityOfSelf()
         {
-            if (this.SecurityTokenManager is IEndpointIdentityProvider && this.AsymmetricTokenParameters != null)
+            if (
+                this.SecurityTokenManager is IEndpointIdentityProvider
+                && this.AsymmetricTokenParameters != null
+            )
             {
                 SecurityTokenRequirement requirement = CreateRecipientSecurityTokenRequirement();
                 this.AsymmetricTokenParameters.InitializeSecurityTokenRequirement(requirement);
-                return ((IEndpointIdentityProvider)this.SecurityTokenManager).GetIdentityOfSelf(requirement);
+                return ((IEndpointIdentityProvider)this.SecurityTokenManager).GetIdentityOfSelf(
+                    requirement
+                );
             }
             else
             {
@@ -135,12 +134,22 @@ namespace System.ServiceModel.Security
         {
             if (typeof(T) == typeof(Collection<ISecurityContextSecurityTokenCache>))
             {
-                Collection<ISecurityContextSecurityTokenCache> result = base.GetProperty<Collection<ISecurityContextSecurityTokenCache>>();
-                if (this.recipientCryptoTokenAuthenticator is ISecurityContextSecurityTokenCacheProvider)
+                Collection<ISecurityContextSecurityTokenCache> result = base.GetProperty<
+                    Collection<ISecurityContextSecurityTokenCache>
+                >();
+                if (
+                    this.recipientCryptoTokenAuthenticator
+                    is ISecurityContextSecurityTokenCacheProvider
+                )
                 {
-                    result.Add(((ISecurityContextSecurityTokenCacheProvider)this.recipientCryptoTokenAuthenticator).TokenCache);
+                    result.Add(
+                        (
+                            (ISecurityContextSecurityTokenCacheProvider)
+                                this.recipientCryptoTokenAuthenticator
+                        ).TokenCache
+                    );
                 }
-                return (T) (object) (result);
+                return (T)(object)(result);
             }
             else
             {
@@ -155,11 +164,17 @@ namespace System.ServiceModel.Security
             {
                 if (this.recipientAsymmetricTokenProvider != null)
                 {
-                    SecurityUtils.CloseTokenProviderIfRequired(this.recipientAsymmetricTokenProvider, timeoutHelper.RemainingTime());
+                    SecurityUtils.CloseTokenProviderIfRequired(
+                        this.recipientAsymmetricTokenProvider,
+                        timeoutHelper.RemainingTime()
+                    );
                 }
                 if (this.recipientCryptoTokenAuthenticator != null)
                 {
-                    SecurityUtils.CloseTokenAuthenticatorIfRequired(this.recipientCryptoTokenAuthenticator, timeoutHelper.RemainingTime());
+                    SecurityUtils.CloseTokenAuthenticatorIfRequired(
+                        this.recipientCryptoTokenAuthenticator,
+                        timeoutHelper.RemainingTime()
+                    );
                 }
             }
             base.OnClose(timeoutHelper.RemainingTime());
@@ -171,17 +186,26 @@ namespace System.ServiceModel.Security
             {
                 if (this.recipientAsymmetricTokenProvider != null)
                 {
-                    SecurityUtils.AbortTokenProviderIfRequired(this.recipientAsymmetricTokenProvider);
+                    SecurityUtils.AbortTokenProviderIfRequired(
+                        this.recipientAsymmetricTokenProvider
+                    );
                 }
                 if (this.recipientCryptoTokenAuthenticator != null)
                 {
-                    SecurityUtils.AbortTokenAuthenticatorIfRequired(this.recipientCryptoTokenAuthenticator);
+                    SecurityUtils.AbortTokenAuthenticatorIfRequired(
+                        this.recipientCryptoTokenAuthenticator
+                    );
                 }
             }
             base.OnAbort();
         }
 
-        protected override SecurityProtocol OnCreateSecurityProtocol(EndpointAddress target, Uri via, object listenerSecurityState, TimeSpan timeout)
+        protected override SecurityProtocol OnCreateSecurityProtocol(
+            EndpointAddress target,
+            Uri via,
+            object listenerSecurityState,
+            TimeSpan timeout
+        )
         {
             return new AsymmetricSecurityProtocol(this, target, via);
         }
@@ -219,30 +243,50 @@ namespace System.ServiceModel.Security
                 SecurityTokenResolver resolver = null;
                 if (this.RequireIntegrity)
                 {
-                    RecipientServiceModelSecurityTokenRequirement requirement = CreateRecipientSecurityTokenRequirement();
+                    RecipientServiceModelSecurityTokenRequirement requirement =
+                        CreateRecipientSecurityTokenRequirement();
                     this.CryptoTokenParameters.InitializeSecurityTokenRequirement(requirement);
                     requirement.KeyUsage = SecurityKeyUsage.Signature;
-                    requirement.Properties[ServiceModelSecurityTokenRequirement.MessageDirectionProperty] = MessageDirection.Input;
-                    this.recipientCryptoTokenAuthenticator = this.SecurityTokenManager.CreateSecurityTokenAuthenticator(requirement, out resolver);
-                     Open("RecipientCryptoTokenAuthenticator", true, this.recipientCryptoTokenAuthenticator, timeoutHelper.RemainingTime());
+                    requirement.Properties[
+                        ServiceModelSecurityTokenRequirement.MessageDirectionProperty
+                    ] = MessageDirection.Input;
+                    this.recipientCryptoTokenAuthenticator =
+                        this.SecurityTokenManager.CreateSecurityTokenAuthenticator(
+                            requirement,
+                            out resolver
+                        );
+                    Open(
+                        "RecipientCryptoTokenAuthenticator",
+                        true,
+                        this.recipientCryptoTokenAuthenticator,
+                        timeoutHelper.RemainingTime()
+                    );
                 }
                 if (resolver != null)
                 {
                     Collection<SecurityTokenResolver> tmp = new Collection<SecurityTokenResolver>();
                     tmp.Add(resolver);
-                    this.recipientOutOfBandTokenResolverList = new ReadOnlyCollection<SecurityTokenResolver>(tmp);
+                    this.recipientOutOfBandTokenResolverList =
+                        new ReadOnlyCollection<SecurityTokenResolver>(tmp);
                 }
                 else
                 {
-                    this.recipientOutOfBandTokenResolverList = EmptyReadOnlyCollection<SecurityTokenResolver>.Instance;
+                    this.recipientOutOfBandTokenResolverList =
+                        EmptyReadOnlyCollection<SecurityTokenResolver>.Instance;
                 }
             }
 
-            if (this.RequiresAsymmetricTokenProviderForForwardDirection || this.RequiresAsymmetricTokenProviderForReturnDirection)
+            if (
+                this.RequiresAsymmetricTokenProviderForForwardDirection
+                || this.RequiresAsymmetricTokenProviderForReturnDirection
+            )
             {
                 if (this.AsymmetricTokenParameters == null)
                 {
-                    OnPropertySettingsError("AsymmetricTokenParameters", this.RequiresAsymmetricTokenProviderForForwardDirection);
+                    OnPropertySettingsError(
+                        "AsymmetricTokenParameters",
+                        this.RequiresAsymmetricTokenProviderForForwardDirection
+                    );
                 }
                 else if (this.AsymmetricTokenParameters.RequireDerivedKeys)
                 {
@@ -250,16 +294,35 @@ namespace System.ServiceModel.Security
                 }
                 if (!this.ActAsInitiator)
                 {
-                    RecipientServiceModelSecurityTokenRequirement requirement = CreateRecipientSecurityTokenRequirement();
+                    RecipientServiceModelSecurityTokenRequirement requirement =
+                        CreateRecipientSecurityTokenRequirement();
                     this.AsymmetricTokenParameters.InitializeSecurityTokenRequirement(requirement);
-                    requirement.KeyUsage = (this.RequiresAsymmetricTokenProviderForForwardDirection) ? SecurityKeyUsage.Exchange : SecurityKeyUsage.Signature;
-                    requirement.Properties[ServiceModelSecurityTokenRequirement.MessageDirectionProperty] = (this.RequiresAsymmetricTokenProviderForForwardDirection) ? MessageDirection.Input : MessageDirection.Output;
-                    this.recipientAsymmetricTokenProvider = this.SecurityTokenManager.CreateSecurityTokenProvider(requirement);
-                    Open("RecipientAsymmetricTokenProvider", this.RequiresAsymmetricTokenProviderForForwardDirection, this.recipientAsymmetricTokenProvider, timeoutHelper.RemainingTime());
+                    requirement.KeyUsage =
+                        (this.RequiresAsymmetricTokenProviderForForwardDirection)
+                            ? SecurityKeyUsage.Exchange
+                            : SecurityKeyUsage.Signature;
+                    requirement.Properties[
+                        ServiceModelSecurityTokenRequirement.MessageDirectionProperty
+                    ] =
+                        (this.RequiresAsymmetricTokenProviderForForwardDirection)
+                            ? MessageDirection.Input
+                            : MessageDirection.Output;
+                    this.recipientAsymmetricTokenProvider =
+                        this.SecurityTokenManager.CreateSecurityTokenProvider(requirement);
+                    Open(
+                        "RecipientAsymmetricTokenProvider",
+                        this.RequiresAsymmetricTokenProviderForForwardDirection,
+                        this.recipientAsymmetricTokenProvider,
+                        timeoutHelper.RemainingTime()
+                    );
                 }
             }
 
-            if (this.ActAsInitiator && this.AllowSerializedSigningTokenOnReply && this.IdentityVerifier == null)
+            if (
+                this.ActAsInitiator
+                && this.AllowSerializedSigningTokenOnReply
+                && this.IdentityVerifier == null
+            )
             {
                 OnPropertySettingsError("IdentityVerifier", false);
             }

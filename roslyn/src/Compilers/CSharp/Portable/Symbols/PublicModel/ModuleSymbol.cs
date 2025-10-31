@@ -23,10 +23,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.PublicModel
 
         INamespaceSymbol IModuleSymbol.GlobalNamespace
         {
-            get
-            {
-                return _underlying.GlobalNamespace.GetPublicSymbol();
-            }
+            get { return _underlying.GlobalNamespace.GetPublicSymbol(); }
         }
 
         INamespaceSymbol IModuleSymbol.GetModuleNamespace(INamespaceSymbol namespaceSymbol)
@@ -36,13 +33,11 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.PublicModel
 
         ImmutableArray<IAssemblySymbol> IModuleSymbol.ReferencedAssemblySymbols
         {
-            get
-            {
-                return _underlying.ReferencedAssemblySymbols.GetPublicSymbols();
-            }
+            get { return _underlying.ReferencedAssemblySymbols.GetPublicSymbols(); }
         }
 
-        ImmutableArray<AssemblyIdentity> IModuleSymbol.ReferencedAssemblies => _underlying.ReferencedAssemblies;
+        ImmutableArray<AssemblyIdentity> IModuleSymbol.ReferencedAssemblies =>
+            _underlying.ReferencedAssemblies;
 
         ModuleMetadata IModuleSymbol.GetMetadata() => _underlying.GetMetadata();
 
@@ -58,7 +53,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.PublicModel
             return visitor.VisitModule(this);
         }
 
-        protected override TResult Accept<TArgument, TResult>(SymbolVisitor<TArgument, TResult> visitor, TArgument argument)
+        protected override TResult Accept<TArgument, TResult>(
+            SymbolVisitor<TArgument, TResult> visitor,
+            TArgument argument
+        )
         {
             return visitor.VisitModule(this, argument);
         }

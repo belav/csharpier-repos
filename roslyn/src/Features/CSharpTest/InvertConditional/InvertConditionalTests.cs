@@ -17,8 +17,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InvertConditional
     [Trait(Traits.Feature, Traits.Features.CodeActionsInvertConditional)]
     public class InvertConditionalTests : AbstractCSharpCodeActionTest
     {
-        protected override CodeRefactoringProvider CreateCodeRefactoringProvider(Workspace workspace, TestParameters parameters)
-            => new CSharpInvertConditionalCodeRefactoringProvider();
+        protected override CodeRefactoringProvider CreateCodeRefactoringProvider(
+            Workspace workspace,
+            TestParameters parameters
+        ) => new CSharpInvertConditionalCodeRefactoringProvider();
 
         [Fact]
         public async Task InvertConditional1()
@@ -41,7 +43,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InvertConditional
                         var c = !x ? b : a;
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -65,7 +68,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InvertConditional
                         var c = x ? b : a;
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -93,7 +97,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InvertConditional
                             : a;
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -121,7 +126,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InvertConditional
                             a;
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -152,7 +158,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InvertConditional
                             : a /*trivia2*/;
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -176,7 +183,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InvertConditional
                         var c = !x ? b : a;
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/35525")]
@@ -200,7 +208,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InvertConditional
                         var c = !x ? b : a;
                     }
                 }
-                """);
+                """
+            );
         }
     }
 }

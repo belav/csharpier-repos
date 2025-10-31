@@ -11,6 +11,6 @@ namespace System.Net.NetworkInformation
         Unknown,
         Dormant,
         NotPresent,
-        LowerLayerDown
+        LowerLayerDown,
     }
 }

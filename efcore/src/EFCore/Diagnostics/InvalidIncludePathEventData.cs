@@ -20,7 +20,8 @@ public class InvalidIncludePathEventData : EventData
         EventDefinitionBase eventDefinition,
         Func<EventDefinitionBase, EventData, string> messageGenerator,
         string navigationChain,
-        string navigationName)
+        string navigationName
+    )
         : base(eventDefinition, messageGenerator)
     {
         NavigationChain = navigationChain;

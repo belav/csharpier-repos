@@ -4,118 +4,119 @@
 //
 using System;
 
-public struct FancyInt {
-	public int value;
+public struct FancyInt
+{
+    public int value;
 
-	public FancyInt (int v)
-	{
-		value = v;
-	}
-	
+    public FancyInt(int v)
+    {
+        value = v;
+    }
 }
 
-public class Blah {
-	static int got;
-	
-	public static void Foo (ref int i, ref int j)
-	{
-		got = 1;
-	}
+public class Blah
+{
+    static int got;
 
-	public static int Bar (int j, params int [] args)
-	{
-		got = 2;
-		int total = 0;
-		
-		foreach (int i in args){
-			Console.WriteLine ("My argument: " + i);
-			total += i;
-		}
+    public static void Foo(ref int i, ref int j)
+    {
+        got = 1;
+    }
 
-		return total;
-	}
+    public static int Bar(int j, params int[] args)
+    {
+        got = 2;
+        int total = 0;
 
-	public static void Foo (int i, int j)
-	{
-		got = 3;
-	}
+        foreach (int i in args)
+        {
+            Console.WriteLine("My argument: " + i);
+            total += i;
+        }
 
-	static void In (ref int a)
-	{
-		a++;
-	}
+        return total;
+    }
 
-	static void Out (ref int a)
-	{
-		In (ref a);
-	}
+    public static void Foo(int i, int j)
+    {
+        got = 3;
+    }
 
-	static int AddArray (params int [] valores)
-	{
-		int total = 0;
-		
-		for (int i = 0; i < valores.Length; i++)
-			total += valores [i];
+    static void In(ref int a)
+    {
+        a++;
+    }
 
-		return total;
-	}
+    static void Out(ref int a)
+    {
+        In(ref a);
+    }
 
-	static int AddFancy (params FancyInt [] vals)
-	{
-		int total = 0;
-		
-		for (int i = 0; i < vals.Length; i++)
-			total += vals [i].value;
+    static int AddArray(params int[] valores)
+    {
+        int total = 0;
 
-		return total;
-	}
-	
-	
-	public static int Main ()
-	{
-		int i = 1;
-		int j = 2;
+        for (int i = 0; i < valores.Length; i++)
+            total += valores[i];
 
-		int [] arr = new int [2] { 0, 1 };
+        return total;
+    }
 
-		Foo (i, j);
-		if (got != 3)
-			return 1;
-		
-		Foo (ref i, ref j);
-		if (got != 1)
-			return 2;
+    static int AddFancy(params FancyInt[] vals)
+    {
+        int total = 0;
 
-		if (Bar (i, j, 5, 4, 3, 3, 2) != 19)
-			return 4;
+        for (int i = 0; i < vals.Length; i++)
+            total += vals[i].value;
 
-		//if (Bar (1, arr) != 1)
-		//	return 5;
-		
-		if (got != 2)
-			return 3;
+        return total;
+    }
 
-		int k = 10;
+    public static int Main()
+    {
+        int i = 1;
+        int j = 2;
 
-		Out (ref k);
-		if (k != 11)
-			return 10;
+        int[] arr = new int[2] { 0, 1 };
 
-		int [] arr2 = new int [2] {1, 2};
+        Foo(i, j);
+        if (got != 3)
+            return 1;
 
-		if (AddArray (arr2) != 3)
-			return 11;
+        Foo(ref i, ref j);
+        if (got != 1)
+            return 2;
 
-		FancyInt f_one = new FancyInt (1);
-		FancyInt f_two = new FancyInt (2);
+        if (Bar(i, j, 5, 4, 3, 3, 2) != 19)
+            return 4;
 
-		if (AddFancy (f_one) != 1)
-			return 12;
+        //if (Bar (1, arr) != 1)
+        //	return 5;
 
-		if (AddFancy (f_one, f_two) != 3)
-			return 13;
+        if (got != 2)
+            return 3;
 
-		Console.WriteLine ("Test passes");
-		return  0;
-	}
+        int k = 10;
+
+        Out(ref k);
+        if (k != 11)
+            return 10;
+
+        int[] arr2 = new int[2] { 1, 2 };
+
+        if (AddArray(arr2) != 3)
+            return 11;
+
+        FancyInt f_one = new FancyInt(1);
+        FancyInt f_two = new FancyInt(2);
+
+        if (AddFancy(f_one) != 1)
+            return 12;
+
+        if (AddFancy(f_one, f_two) != 3)
+            return 13;
+
+        Console.WriteLine("Test passes");
+        return 0;
+    }
 }

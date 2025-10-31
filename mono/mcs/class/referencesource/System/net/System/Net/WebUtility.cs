@@ -5,15 +5,13 @@
 //------------------------------------------------------------------------------
 
 // Don't entity encode high chars (160 to 256), to fix bugs VSWhidbey 85857/111927
-// 
+//
 #define ENTITY_ENCODE_HIGH_ASCII_CHARS
 
-namespace System.Net {
+namespace System.Net
+{
     using System;
     using System.Collections.Generic;
-#if !FEATURE_NETCORE
-    using System.Configuration;
-#endif
     using System.Diagnostics;
     using System.Diagnostics.CodeAnalysis;
     using System.Globalization;
@@ -21,6 +19,10 @@ namespace System.Net {
     using System.Net.Configuration;
     using System.Runtime.Versioning;
     using System.Text;
+#if !FEATURE_NETCORE
+    using System.Configuration;
+#endif
+
 #if FEATURE_NETCORE
     using System.Security;
 #endif
@@ -39,19 +41,24 @@ namespace System.Net {
 
         private static readonly char[] _htmlEntityEndingChars = new char[] { ';', '&' };
 
-        private static volatile UnicodeDecodingConformance _htmlDecodeConformance = UnicodeDecodingConformance.Auto;
-        private static volatile UnicodeEncodingConformance _htmlEncodeConformance = UnicodeEncodingConformance.Auto;
+        private static volatile UnicodeDecodingConformance _htmlDecodeConformance =
+            UnicodeDecodingConformance.Auto;
+        private static volatile UnicodeEncodingConformance _htmlEncodeConformance =
+            UnicodeEncodingConformance.Auto;
 
         #region HtmlEncode / HtmlDecode methods
 
-        public static string HtmlEncode(string value) {
-            if (String.IsNullOrEmpty(value)) {
+        public static string HtmlEncode(string value)
+        {
+            if (String.IsNullOrEmpty(value))
+            {
                 return value;
             }
 
             // Don't create string writer if we don't have nothing to encode
             int index = IndexOfHtmlEncodingChars(value, 0);
-            if (index == -1) {
+            if (index == -1)
+            {
                 return value;
             }
 
@@ -63,34 +70,46 @@ namespace System.Net {
 #if FEATURE_NETCORE
         [SecuritySafeCritical]
 #endif
-        public static unsafe void HtmlEncode(string value, TextWriter output) {
-            if (value == null) {
+        public static unsafe void HtmlEncode(string value, TextWriter output)
+        {
+            if (value == null)
+            {
                 return;
             }
-            if (output == null) {
+            if (output == null)
+            {
                 throw new ArgumentNullException("output");
             }
 
             int index = IndexOfHtmlEncodingChars(value, 0);
-            if (index == -1) {
+            if (index == -1)
+            {
                 output.Write(value);
                 return;
             }
 
-            Debug.Assert(0 <= index && index <= value.Length, "0 <= index && index <= value.Length");
+            Debug.Assert(
+                0 <= index && index <= value.Length,
+                "0 <= index && index <= value.Length"
+            );
 
             UnicodeEncodingConformance encodeConformance = HtmlEncodeConformance;
             int cch = value.Length - index;
-            fixed (char* str = value) {
+            fixed (char* str = value)
+            {
                 char* pch = str;
-                while (index-- > 0) {
+                while (index-- > 0)
+                {
                     output.Write(*pch++);
                 }
 
-                for (; cch > 0; cch--, pch++) {
+                for (; cch > 0; cch--, pch++)
+                {
                     char ch = *pch;
-                    if (ch <= '>') {
-                        switch (ch) {
+                    if (ch <= '>')
+                    {
+                        switch (ch)
+                        {
                             case '<':
                                 output.Write("&lt;");
                                 break;
@@ -111,43 +130,57 @@ namespace System.Net {
                                 break;
                         }
                     }
-                    else {
+                    else
+                    {
                         int valueToEncode = -1; // set to >= 0 if needs to be encoded
-
 #if ENTITY_ENCODE_HIGH_ASCII_CHARS
 
 #if MONO
                         // MS starts encoding with &# from 160 and stops at 255.
                         // We don't do that. One reason is the 65308/65310 unicode
                         // characters that look like '<' and '>'.
-                        if (ch >= 160 && !char.IsSurrogate (ch)) {
+                        if (ch >= 160 && !char.IsSurrogate(ch))
+                        {
                             valueToEncode = ch;
 #else
-                        if (ch >= 160 && ch < 256) {
+                        if (ch >= 160 && ch < 256)
+                        {
                             // The seemingly arbitrary 160 comes from RFC
                             valueToEncode = ch;
 #endif
-                        } else
+                        }
+                        else
 #endif // ENTITY_ENCODE_HIGH_ASCII_CHARS
-                        if (encodeConformance == UnicodeEncodingConformance.Strict && Char.IsSurrogate(ch)) {
-                            int scalarValue = GetNextUnicodeScalarValueFromUtf16Surrogate(ref pch, ref cch);
-                            if (scalarValue >= UNICODE_PLANE01_START) {
+                        if (
+                            encodeConformance == UnicodeEncodingConformance.Strict
+                            && Char.IsSurrogate(ch)
+                        )
+                        {
+                            int scalarValue = GetNextUnicodeScalarValueFromUtf16Surrogate(
+                                ref pch,
+                                ref cch
+                            );
+                            if (scalarValue >= UNICODE_PLANE01_START)
+                            {
                                 valueToEncode = scalarValue;
                             }
-                            else {
+                            else
+                            {
                                 // Don't encode BMP characters (like U+FFFD) since they wouldn't have
                                 // been encoded if explicitly present in the string anyway.
                                 ch = (char)scalarValue;
                             }
                         }
 
-                        if (valueToEncode >= 0) {
+                        if (valueToEncode >= 0)
+                        {
                             // value needs to be encoded
                             output.Write("&#");
                             output.Write(valueToEncode.ToString(NumberFormatInfo.InvariantInfo));
                             output.Write(';');
                         }
-                        else {
+                        else
+                        {
                             // write out the character directly
                             output.Write(ch);
                         }
@@ -156,13 +189,16 @@ namespace System.Net {
             }
         }
 
-        public static string HtmlDecode(string value) {
-            if (String.IsNullOrEmpty(value)) {
+        public static string HtmlDecode(string value)
+        {
+            if (String.IsNullOrEmpty(value))
+            {
                 return value;
             }
 
             // Don't create string writer if we don't have nothing to encode
-            if (!StringRequiresHtmlDecoding(value)) {
+            if (!StringRequiresHtmlDecoding(value))
+            {
                 return value;
             }
 
@@ -171,34 +207,47 @@ namespace System.Net {
             return writer.ToString();
         }
 
-        [SuppressMessage("Microsoft.Usage", "CA1806:DoNotIgnoreMethodResults", MessageId = "System.UInt16.TryParse(System.String,System.Globalization.NumberStyles,System.IFormatProvider,System.UInt16@)", Justification="UInt16.TryParse guarantees that result is zero if the parse fails.")]
-        public static void HtmlDecode(string value, TextWriter output) {
-            if (value == null) {
+        [SuppressMessage(
+            "Microsoft.Usage",
+            "CA1806:DoNotIgnoreMethodResults",
+            MessageId = "System.UInt16.TryParse(System.String,System.Globalization.NumberStyles,System.IFormatProvider,System.UInt16@)",
+            Justification = "UInt16.TryParse guarantees that result is zero if the parse fails."
+        )]
+        public static void HtmlDecode(string value, TextWriter output)
+        {
+            if (value == null)
+            {
                 return;
             }
-            if (output == null) {
+            if (output == null)
+            {
                 throw new ArgumentNullException("output");
             }
 
-            if (!StringRequiresHtmlDecoding(value)) {
-                output.Write(value);        // good as is
+            if (!StringRequiresHtmlDecoding(value))
+            {
+                output.Write(value); // good as is
                 return;
             }
 
             UnicodeDecodingConformance decodeConformance = HtmlDecodeConformance;
             int l = value.Length;
-            for (int i = 0; i < l; i++) {
+            for (int i = 0; i < l; i++)
+            {
                 char ch = value[i];
 
-                if (ch == '&') {
+                if (ch == '&')
+                {
                     // We found a '&'. Now look for the next ';' or '&'. The idea is that
                     // if we find another '&' before finding a ';', then this is not an entity,
                     // and the next '&' might start a real entity (VSWhidbey 275184)
                     int index = value.IndexOfAny(_htmlEntityEndingChars, i + 1);
-                    if (index > 0 && value[index] == ';') {
+                    if (index > 0 && value[index] == ';')
+                    {
                         string entity = value.Substring(i + 1, index - i - 1);
 
-                        if (entity.Length > 1 && entity[0] == '#') {
+                        if (entity.Length > 1 && entity[0] == '#')
+                        {
                             // The # syntax can be in decimal or hex, e.g.
                             //      &#229;  --> decimal
                             //      &#xE5;  --> same char in hex
@@ -206,24 +255,46 @@ namespace System.Net {
 
                             bool parsedSuccessfully;
                             uint parsedValue;
-                            if (entity[1] == 'x' || entity[1] == 'X') {
-                                parsedSuccessfully = UInt32.TryParse(entity.Substring(2), NumberStyles.AllowHexSpecifier, NumberFormatInfo.InvariantInfo, out parsedValue);
+                            if (entity[1] == 'x' || entity[1] == 'X')
+                            {
+                                parsedSuccessfully = UInt32.TryParse(
+                                    entity.Substring(2),
+                                    NumberStyles.AllowHexSpecifier,
+                                    NumberFormatInfo.InvariantInfo,
+                                    out parsedValue
+                                );
                             }
-                            else {
-                                parsedSuccessfully = UInt32.TryParse(entity.Substring(1), NumberStyles.Integer, NumberFormatInfo.InvariantInfo, out parsedValue);
+                            else
+                            {
+                                parsedSuccessfully = UInt32.TryParse(
+                                    entity.Substring(1),
+                                    NumberStyles.Integer,
+                                    NumberFormatInfo.InvariantInfo,
+                                    out parsedValue
+                                );
                             }
 
-                            if (parsedSuccessfully) {
-                                switch (decodeConformance) {
+                            if (parsedSuccessfully)
+                            {
+                                switch (decodeConformance)
+                                {
                                     case UnicodeDecodingConformance.Strict:
                                         // decoded character must be U+0000 .. U+10FFFF, excluding surrogates
-                                        parsedSuccessfully = ((parsedValue < HIGH_SURROGATE_START) || (LOW_SURROGATE_END < parsedValue && parsedValue <= UNICODE_PLANE16_END));
+                                        parsedSuccessfully = (
+                                            (parsedValue < HIGH_SURROGATE_START)
+                                            || (
+                                                LOW_SURROGATE_END < parsedValue
+                                                && parsedValue <= UNICODE_PLANE16_END
+                                            )
+                                        );
                                         break;
 
                                     case UnicodeDecodingConformance.Compat:
                                         // decoded character must be U+0001 .. U+FFFF
                                         // null chars disallowed for compat with 4.0
-                                        parsedSuccessfully = (0 < parsedValue && parsedValue <= UNICODE_PLANE00_END);
+                                        parsedSuccessfully = (
+                                            0 < parsedValue && parsedValue <= UNICODE_PLANE00_END
+                                        );
                                         break;
 
                                     case UnicodeDecodingConformance.Loose:
@@ -238,38 +309,48 @@ namespace System.Net {
                                 }
                             }
 
-                            if (parsedSuccessfully) {
-                                if (parsedValue <= UNICODE_PLANE00_END) {
+                            if (parsedSuccessfully)
+                            {
+                                if (parsedValue <= UNICODE_PLANE00_END)
+                                {
                                     // single character
                                     output.Write((char)parsedValue);
                                 }
-                                else {
+                                else
+                                {
                                     // multi-character
-                                    char leadingSurrogate, trailingSurrogate;
-                                    ConvertSmpToUtf16(parsedValue, out leadingSurrogate, out trailingSurrogate);
+                                    char leadingSurrogate,
+                                        trailingSurrogate;
+                                    ConvertSmpToUtf16(
+                                        parsedValue,
+                                        out leadingSurrogate,
+                                        out trailingSurrogate
+                                    );
                                     output.Write(leadingSurrogate);
                                     output.Write(trailingSurrogate);
                                 }
-                                
+
                                 i = index; // already looked at everything until semicolon
                                 continue;
                             }
                         }
-                        else {
+                        else
+                        {
                             i = index; // already looked at everything until semicolon
 
                             char entityChar = HtmlEntities.Lookup(entity);
-                            if (entityChar != (char)0) {
+                            if (entityChar != (char)0)
+                            {
                                 ch = entityChar;
                             }
-                            else {
+                            else
+                            {
                                 output.Write('&');
                                 output.Write(entity);
                                 output.Write(';');
                                 continue;
                             }
                         }
-
                     }
                 }
 
@@ -280,16 +361,24 @@ namespace System.Net {
 #if FEATURE_NETCORE
         [SecuritySafeCritical]
 #endif
-        private static unsafe int IndexOfHtmlEncodingChars(string s, int startPos) {
-            Debug.Assert(0 <= startPos && startPos <= s.Length, "0 <= startPos && startPos <= s.Length");
+        private static unsafe int IndexOfHtmlEncodingChars(string s, int startPos)
+        {
+            Debug.Assert(
+                0 <= startPos && startPos <= s.Length,
+                "0 <= startPos && startPos <= s.Length"
+            );
 
             UnicodeEncodingConformance encodeConformance = HtmlEncodeConformance;
             int cch = s.Length - startPos;
-            fixed (char* str = s) {
-                for (char* pch = &str[startPos]; cch > 0; pch++, cch--) {
+            fixed (char* str = s)
+            {
+                for (char* pch = &str[startPos]; cch > 0; pch++, cch--)
+                {
                     char ch = *pch;
-                    if (ch <= '>') {
-                        switch (ch) {
+                    if (ch <= '>')
+                    {
+                        switch (ch)
+                        {
                             case '<':
                             case '>':
                             case '"':
@@ -299,15 +388,20 @@ namespace System.Net {
                         }
                     }
 #if ENTITY_ENCODE_HIGH_ASCII_CHARS
-                    else if (ch >= 160 
+                    else if (ch >= 160
 #if !MONO
-						&& ch < 256
+                        && ch < 256
 #endif
-					) {
+                    )
+                    {
                         return s.Length - cch;
                     }
 #endif // ENTITY_ENCODE_HIGH_ASCII_CHARS
-                    else if (encodeConformance == UnicodeEncodingConformance.Strict && Char.IsSurrogate(ch)) {
+                    else if (
+                        encodeConformance == UnicodeEncodingConformance.Strict
+                        && Char.IsSurrogate(ch)
+                    )
+                    {
                         return s.Length - cch;
                     }
                 }
@@ -316,31 +410,46 @@ namespace System.Net {
             return -1;
         }
 
-        private static UnicodeDecodingConformance HtmlDecodeConformance {
-            get {
-                if (_htmlDecodeConformance != UnicodeDecodingConformance.Auto) {
+        private static UnicodeDecodingConformance HtmlDecodeConformance
+        {
+            get
+            {
+                if (_htmlDecodeConformance != UnicodeDecodingConformance.Auto)
+                {
                     return _htmlDecodeConformance;
                 }
-    
-                UnicodeDecodingConformance defaultDecodeConformance = (BinaryCompatibility.TargetsAtLeast_Desktop_V4_5) ? UnicodeDecodingConformance.Strict : UnicodeDecodingConformance.Compat;
+
+                UnicodeDecodingConformance defaultDecodeConformance =
+                    (BinaryCompatibility.TargetsAtLeast_Desktop_V4_5)
+                        ? UnicodeDecodingConformance.Strict
+                        : UnicodeDecodingConformance.Compat;
                 UnicodeDecodingConformance decodingConformance = defaultDecodeConformance;
 
 #if !FEATURE_NETCORE && !MOBILE
-                try {
+                try
+                {
                     // Read from config
-                    decodingConformance = SettingsSectionInternal.Section.WebUtilityUnicodeDecodingConformance;
+                    decodingConformance = SettingsSectionInternal
+                        .Section
+                        .WebUtilityUnicodeDecodingConformance;
                     // Normalize conformance settings (turn 'Auto' into the actual setting)
-                    if (decodingConformance <= UnicodeDecodingConformance.Auto || decodingConformance > UnicodeDecodingConformance.Loose) {
+                    if (
+                        decodingConformance <= UnicodeDecodingConformance.Auto
+                        || decodingConformance > UnicodeDecodingConformance.Loose
+                    )
+                    {
                         decodingConformance = defaultDecodeConformance;
                     }
                 }
-                catch (ConfigurationException) {
+                catch (ConfigurationException)
+                {
                     // Continue with default values
                     // HtmlDecode and related methods can still be called and format the error page intended for the client
                     // No need to retry again to initialize from the config in case of config errors
                     decodingConformance = defaultDecodeConformance;
                 }
-                catch {
+                catch
+                {
                     // DevDiv: 642025
                     // ASP.NET uses own ConfigurationManager which can throw in more situations than config errors (i.e. BadRequest)
                     // It's ok to swallow the exception here and continue using the default value
@@ -354,32 +463,47 @@ namespace System.Net {
             }
         }
 
-        private static UnicodeEncodingConformance HtmlEncodeConformance {
-            get {
-                if (_htmlEncodeConformance != UnicodeEncodingConformance.Auto) {
+        private static UnicodeEncodingConformance HtmlEncodeConformance
+        {
+            get
+            {
+                if (_htmlEncodeConformance != UnicodeEncodingConformance.Auto)
+                {
                     return _htmlEncodeConformance;
                 }
-    
-                UnicodeEncodingConformance defaultEncodeConformance = (BinaryCompatibility.TargetsAtLeast_Desktop_V4_5) ? UnicodeEncodingConformance.Strict : UnicodeEncodingConformance.Compat;
+
+                UnicodeEncodingConformance defaultEncodeConformance =
+                    (BinaryCompatibility.TargetsAtLeast_Desktop_V4_5)
+                        ? UnicodeEncodingConformance.Strict
+                        : UnicodeEncodingConformance.Compat;
                 UnicodeEncodingConformance encodingConformance = defaultEncodeConformance;
 
 #if !FEATURE_NETCORE && !MOBILE
-                try {
+                try
+                {
                     // Read from config
-                    encodingConformance = SettingsSectionInternal.Section.WebUtilityUnicodeEncodingConformance;
+                    encodingConformance = SettingsSectionInternal
+                        .Section
+                        .WebUtilityUnicodeEncodingConformance;
 
                     // Normalize conformance settings (turn 'Auto' into the actual setting)
-                    if (encodingConformance <= UnicodeEncodingConformance.Auto || encodingConformance > UnicodeEncodingConformance.Compat) {
+                    if (
+                        encodingConformance <= UnicodeEncodingConformance.Auto
+                        || encodingConformance > UnicodeEncodingConformance.Compat
+                    )
+                    {
                         encodingConformance = defaultEncodeConformance;
                     }
                 }
-                catch (ConfigurationException) {
+                catch (ConfigurationException)
+                {
                     // Continue with default values
                     // HtmlEncode and related methods can still be called and format the error page intended for the client
                     // No need to retry again to initialize from the config in case of config errors
                     encodingConformance = defaultEncodeConformance;
                 }
-                catch {
+                catch
+                {
                     // DevDiv: 642025
                     // ASP.NET uses own ConfigurationManager which can throw in more situations than config errors (i.e. BadRequest)
                     // It's ok to swallow the exception here and continue using the default value
@@ -400,7 +524,12 @@ namespace System.Net {
         // *** Source: alm/tfs_core/Framework/Common/UriUtility/HttpUtility.cs
         // This specific code was copied from above ASP.NET codebase.
 
-        private static byte[] UrlEncode(byte[] bytes, int offset, int count, bool alwaysCreateNewReturnValue)
+        private static byte[] UrlEncode(
+            byte[] bytes,
+            int offset,
+            int count,
+            bool alwaysCreateNewReturnValue
+        )
         {
             byte[] encoded = UrlEncode(bytes, offset, count);
 
@@ -431,12 +560,15 @@ namespace System.Net {
             }
 
             // nothing to expand?
-            if (cSpaces == 0 && cUnsafe == 0) {
+            if (cSpaces == 0 && cUnsafe == 0)
+            {
                 // DevDiv 912606: respect "offset" and "count"
-                if (0 == offset && bytes.Length == count) {
+                if (0 == offset && bytes.Length == count)
+                {
                     return bytes;
                 }
-                else {
+                else
+                {
                     var subarray = new byte[count];
                     Buffer.BlockCopy(bytes, offset, subarray, 0, count);
                     return subarray;
@@ -475,19 +607,35 @@ namespace System.Net {
 
         #region UrlEncode public methods
 
-        [SuppressMessage("Microsoft.Design", "CA1055:UriReturnValuesShouldNotBeStrings", Justification="Already shipped public API; code moved here as part of API consolidation")]
+        [SuppressMessage(
+            "Microsoft.Design",
+            "CA1055:UriReturnValuesShouldNotBeStrings",
+            Justification = "Already shipped public API; code moved here as part of API consolidation"
+        )]
         public static string UrlEncode(string value)
         {
             if (value == null)
                 return null;
 
             byte[] bytes = Encoding.UTF8.GetBytes(value);
-            return Encoding.UTF8.GetString(UrlEncode(bytes, 0, bytes.Length, false /* alwaysCreateNewReturnValue */));
+            return Encoding.UTF8.GetString(
+                UrlEncode(
+                    bytes,
+                    0,
+                    bytes.Length,
+                    false /* alwaysCreateNewReturnValue */
+                )
+            );
         }
 
         public static byte[] UrlEncodeToBytes(byte[] value, int offset, int count)
         {
-            return UrlEncode(value, offset, count, true /* alwaysCreateNewReturnValue */);
+            return UrlEncode(
+                value,
+                offset,
+                count,
+                true /* alwaysCreateNewReturnValue */
+            );
         }
 
         #endregion
@@ -526,7 +674,7 @@ namespace System.Net {
                     int h2 = HexToInt(value[pos + 2]);
 
                     if (h1 >= 0 && h2 >= 0)
-                    {     // valid 2 hex chars
+                    { // valid 2 hex chars
                         byte b = (byte)((h1 << 4) | h2);
                         pos += 2;
 
@@ -570,7 +718,7 @@ namespace System.Net {
                     int h2 = HexToInt((char)bytes[pos + 2]);
 
                     if (h1 >= 0 && h2 >= 0)
-                    {     // valid 2 hex chars
+                    { // valid 2 hex chars
                         b = (byte)((h1 << 4) | h2);
                         i += 2;
                     }
@@ -594,7 +742,11 @@ namespace System.Net {
         #region UrlDecode public methods
 
 
-        [SuppressMessage("Microsoft.Design", "CA1055:UriReturnValuesShouldNotBeStrings", Justification="Already shipped public API; code moved here as part of API consolidation")]
+        [SuppressMessage(
+            "Microsoft.Design",
+            "CA1055:UriReturnValuesShouldNotBeStrings",
+            Justification = "Already shipped public API; code moved here as part of API consolidation"
+        )]
         public static string UrlDecode(string encodedValue)
         {
             if (encodedValue == null)
@@ -614,7 +766,12 @@ namespace System.Net {
 
         // similar to Char.ConvertFromUtf32, but doesn't check arguments or generate strings
         // input is assumed to be an SMP character
-        private static void ConvertSmpToUtf16(uint smpChar, out char leadingSurrogate, out char trailingSurrogate) {
+        private static void ConvertSmpToUtf16(
+            uint smpChar,
+            out char leadingSurrogate,
+            out char trailingSurrogate
+        )
+        {
             Debug.Assert(UNICODE_PLANE01_START <= smpChar && smpChar <= UNICODE_PLANE16_END);
 
             int utf32 = (int)(smpChar - UNICODE_PLANE01_START);
@@ -625,12 +782,17 @@ namespace System.Net {
 #if FEATURE_NETCORE
         [SecuritySafeCritical]
 #endif
-        private static unsafe int GetNextUnicodeScalarValueFromUtf16Surrogate(ref char* pch, ref int charsRemaining) {
+        private static unsafe int GetNextUnicodeScalarValueFromUtf16Surrogate(
+            ref char* pch,
+            ref int charsRemaining
+        )
+        {
             // invariants
             Debug.Assert(charsRemaining >= 1);
             Debug.Assert(Char.IsSurrogate(*pch));
 
-            if (charsRemaining <= 1) {
+            if (charsRemaining <= 1)
+            {
                 // not enough characters remaining to resurrect the original scalar value
                 return UnicodeReplacementChar;
             }
@@ -638,15 +800,21 @@ namespace System.Net {
             char leadingSurrogate = pch[0];
             char trailingSurrogate = pch[1];
 
-            if (Char.IsSurrogatePair(leadingSurrogate, trailingSurrogate)) {
+            if (Char.IsSurrogatePair(leadingSurrogate, trailingSurrogate))
+            {
                 // we're going to consume an extra char
                 pch++;
                 charsRemaining--;
 
                 // below code is from Char.ConvertToUtf32, but without the checks (since we just performed them)
-                return (((leadingSurrogate - HIGH_SURROGATE_START) * 0x400) + (trailingSurrogate - LOW_SURROGATE_START) + UNICODE_PLANE01_START);
+                return (
+                    ((leadingSurrogate - HIGH_SURROGATE_START) * 0x400)
+                    + (trailingSurrogate - LOW_SURROGATE_START)
+                    + UNICODE_PLANE01_START
+                );
             }
-            else {
+            else
+            {
                 // unmatched surrogate
                 return UnicodeReplacementChar;
             }
@@ -654,10 +822,10 @@ namespace System.Net {
 
         private static int HexToInt(char h)
         {
-            return (h >= '0' && h <= '9') ? h - '0' :
-            (h >= 'a' && h <= 'f') ? h - 'a' + 10 :
-            (h >= 'A' && h <= 'F') ? h - 'A' + 10 :
-            -1;
+            return (h >= '0' && h <= '9') ? h - '0'
+                : (h >= 'a' && h <= 'f') ? h - 'a' + 10
+                : (h >= 'A' && h <= 'F') ? h - 'A' + 10
+                : -1;
         }
 
         private static char IntToHex(int n)
@@ -711,16 +879,21 @@ namespace System.Net {
             return true;
         }
 
-        private static bool StringRequiresHtmlDecoding(string s) {
-            if (HtmlDecodeConformance == UnicodeDecodingConformance.Compat) {
+        private static bool StringRequiresHtmlDecoding(string s)
+        {
+            if (HtmlDecodeConformance == UnicodeDecodingConformance.Compat)
+            {
                 // this string requires html decoding only if it contains '&'
                 return (s.IndexOf('&') >= 0);
             }
-            else {
+            else
+            {
                 // this string requires html decoding if it contains '&' or a surrogate character
-                for (int i = 0; i < s.Length; i++) {
+                for (int i = 0; i < s.Length; i++)
+                {
                     char c = s[i];
-                    if (c == '&' || Char.IsSurrogate(c)) {
+                    if (c == '&' || Char.IsSurrogate(c))
+                    {
                         return true;
                     }
                 }
@@ -755,7 +928,13 @@ namespace System.Net {
             {
                 if (_numBytes > 0)
                 {
-                    _numChars += _encoding.GetChars(_byteBuffer, 0, _numBytes, _charBuffer, _numChars);
+                    _numChars += _encoding.GetChars(
+                        _byteBuffer,
+                        0,
+                        _numBytes,
+                        _charBuffer,
+                        _numChars
+                    );
                     _numBytes = 0;
                 }
             }
@@ -802,31 +981,34 @@ namespace System.Net {
         #region HtmlEntities nested class
 
         // helper class for lookup of HTML encoding entities
-        private static class HtmlEntities {
-
+        private static class HtmlEntities
+        {
 #if MONO
-            public static char Lookup (string entity)
+            public static char Lookup(string entity)
             {
-                var token = CalculateKeyValue (entity);
-                if (token == 0) {
+                var token = CalculateKeyValue(entity);
+                if (token == 0)
+                {
                     return '\0';
                 }
 
-                var idx = Array.BinarySearch (entities, token);
-                if (idx < 0) {
+                var idx = Array.BinarySearch(entities, token);
+                if (idx < 0)
+                {
                     return '\0';
                 }
 
-                return entities_values [idx];
+                return entities_values[idx];
             }
 
-            static long CalculateKeyValue (string s)
+            static long CalculateKeyValue(string s)
             {
                 if (s.Length > 8)
                     return 0;
 
                 long key = 0;
-                for (int i = 0; i < s.Length; ++i) {
+                for (int i = 0; i < s.Length; ++i)
+                {
                     long ch = s[i];
                     if (ch > 'z' || ch < '0')
                         return 0;
@@ -838,225 +1020,798 @@ namespace System.Net {
             }
 
             // Must be sorted
-            static readonly long[] entities = new long[] {
-                (long)'A' << 56 | (long)'E' << 48 | (long)'l' << 40 | (long)'i' << 32 | (long)'g' << 24,
-                (long)'A' << 56 | (long)'a' << 48 | (long)'c' << 40 | (long)'u' << 32 | (long)'t' << 24 | (long)'e' << 16,
-                (long)'A' << 56 | (long)'c' << 48 | (long)'i' << 40 | (long)'r' << 32 | (long)'c' << 24,
-                (long)'A' << 56 | (long)'g' << 48 | (long)'r' << 40 | (long)'a' << 32 | (long)'v' << 24 | (long)'e' << 16,
-                (long)'A' << 56 | (long)'l' << 48 | (long)'p' << 40 | (long)'h' << 32 | (long)'a' << 24,
-                (long)'A' << 56 | (long)'r' << 48 | (long)'i' << 40 | (long)'n' << 32 | (long)'g' << 24,
-                (long)'A' << 56 | (long)'t' << 48 | (long)'i' << 40 | (long)'l' << 32 | (long)'d' << 24 | (long)'e' << 16,
+            static readonly long[] entities = new long[]
+            {
+                (long)'A' << 56
+                    | (long)'E' << 48
+                    | (long)'l' << 40
+                    | (long)'i' << 32
+                    | (long)'g' << 24,
+                (long)'A' << 56
+                    | (long)'a' << 48
+                    | (long)'c' << 40
+                    | (long)'u' << 32
+                    | (long)'t' << 24
+                    | (long)'e' << 16,
+                (long)'A' << 56
+                    | (long)'c' << 48
+                    | (long)'i' << 40
+                    | (long)'r' << 32
+                    | (long)'c' << 24,
+                (long)'A' << 56
+                    | (long)'g' << 48
+                    | (long)'r' << 40
+                    | (long)'a' << 32
+                    | (long)'v' << 24
+                    | (long)'e' << 16,
+                (long)'A' << 56
+                    | (long)'l' << 48
+                    | (long)'p' << 40
+                    | (long)'h' << 32
+                    | (long)'a' << 24,
+                (long)'A' << 56
+                    | (long)'r' << 48
+                    | (long)'i' << 40
+                    | (long)'n' << 32
+                    | (long)'g' << 24,
+                (long)'A' << 56
+                    | (long)'t' << 48
+                    | (long)'i' << 40
+                    | (long)'l' << 32
+                    | (long)'d' << 24
+                    | (long)'e' << 16,
                 (long)'A' << 56 | (long)'u' << 48 | (long)'m' << 40 | (long)'l' << 32,
                 (long)'B' << 56 | (long)'e' << 48 | (long)'t' << 40 | (long)'a' << 32,
-                (long)'C' << 56 | (long)'c' << 48 | (long)'e' << 40 | (long)'d' << 32 | (long)'i' << 24 | (long)'l' << 16,
+                (long)'C' << 56
+                    | (long)'c' << 48
+                    | (long)'e' << 40
+                    | (long)'d' << 32
+                    | (long)'i' << 24
+                    | (long)'l' << 16,
                 (long)'C' << 56 | (long)'h' << 48 | (long)'i' << 40,
-                (long)'D' << 56 | (long)'a' << 48 | (long)'g' << 40 | (long)'g' << 32 | (long)'e' << 24 | (long)'r' << 16,
-                (long)'D' << 56 | (long)'e' << 48 | (long)'l' << 40 | (long)'t' << 32 | (long)'a' << 24,
+                (long)'D' << 56
+                    | (long)'a' << 48
+                    | (long)'g' << 40
+                    | (long)'g' << 32
+                    | (long)'e' << 24
+                    | (long)'r' << 16,
+                (long)'D' << 56
+                    | (long)'e' << 48
+                    | (long)'l' << 40
+                    | (long)'t' << 32
+                    | (long)'a' << 24,
                 (long)'E' << 56 | (long)'T' << 48 | (long)'H' << 40,
-                (long)'E' << 56 | (long)'a' << 48 | (long)'c' << 40 | (long)'u' << 32 | (long)'t' << 24 | (long)'e' << 16,
-                (long)'E' << 56 | (long)'c' << 48 | (long)'i' << 40 | (long)'r' << 32 | (long)'c' << 24,
-                (long)'E' << 56 | (long)'g' << 48 | (long)'r' << 40 | (long)'a' << 32 | (long)'v' << 24 | (long)'e' << 16,
-                (long)'E' << 56 | (long)'p' << 48 | (long)'s' << 40 | (long)'i' << 32 | (long)'l' << 24 | (long)'o' << 16 | (long)'n' << 8,
+                (long)'E' << 56
+                    | (long)'a' << 48
+                    | (long)'c' << 40
+                    | (long)'u' << 32
+                    | (long)'t' << 24
+                    | (long)'e' << 16,
+                (long)'E' << 56
+                    | (long)'c' << 48
+                    | (long)'i' << 40
+                    | (long)'r' << 32
+                    | (long)'c' << 24,
+                (long)'E' << 56
+                    | (long)'g' << 48
+                    | (long)'r' << 40
+                    | (long)'a' << 32
+                    | (long)'v' << 24
+                    | (long)'e' << 16,
+                (long)'E' << 56
+                    | (long)'p' << 48
+                    | (long)'s' << 40
+                    | (long)'i' << 32
+                    | (long)'l' << 24
+                    | (long)'o' << 16
+                    | (long)'n' << 8,
                 (long)'E' << 56 | (long)'t' << 48 | (long)'a' << 40,
                 (long)'E' << 56 | (long)'u' << 48 | (long)'m' << 40 | (long)'l' << 32,
-                (long)'G' << 56 | (long)'a' << 48 | (long)'m' << 40 | (long)'m' << 32 | (long)'a' << 24,
-                (long)'I' << 56 | (long)'a' << 48 | (long)'c' << 40 | (long)'u' << 32 | (long)'t' << 24 | (long)'e' << 16,
-                (long)'I' << 56 | (long)'c' << 48 | (long)'i' << 40 | (long)'r' << 32 | (long)'c' << 24,
-                (long)'I' << 56 | (long)'g' << 48 | (long)'r' << 40 | (long)'a' << 32 | (long)'v' << 24 | (long)'e' << 16,
+                (long)'G' << 56
+                    | (long)'a' << 48
+                    | (long)'m' << 40
+                    | (long)'m' << 32
+                    | (long)'a' << 24,
+                (long)'I' << 56
+                    | (long)'a' << 48
+                    | (long)'c' << 40
+                    | (long)'u' << 32
+                    | (long)'t' << 24
+                    | (long)'e' << 16,
+                (long)'I' << 56
+                    | (long)'c' << 48
+                    | (long)'i' << 40
+                    | (long)'r' << 32
+                    | (long)'c' << 24,
+                (long)'I' << 56
+                    | (long)'g' << 48
+                    | (long)'r' << 40
+                    | (long)'a' << 32
+                    | (long)'v' << 24
+                    | (long)'e' << 16,
                 (long)'I' << 56 | (long)'o' << 48 | (long)'t' << 40 | (long)'a' << 32,
                 (long)'I' << 56 | (long)'u' << 48 | (long)'m' << 40 | (long)'l' << 32,
-                (long)'K' << 56 | (long)'a' << 48 | (long)'p' << 40 | (long)'p' << 32 | (long)'a' << 24,
-                (long)'L' << 56 | (long)'a' << 48 | (long)'m' << 40 | (long)'b' << 32 | (long)'d' << 24 | (long)'a' << 16,
+                (long)'K' << 56
+                    | (long)'a' << 48
+                    | (long)'p' << 40
+                    | (long)'p' << 32
+                    | (long)'a' << 24,
+                (long)'L' << 56
+                    | (long)'a' << 48
+                    | (long)'m' << 40
+                    | (long)'b' << 32
+                    | (long)'d' << 24
+                    | (long)'a' << 16,
                 (long)'M' << 56 | (long)'u' << 48,
-                (long)'N' << 56 | (long)'t' << 48 | (long)'i' << 40 | (long)'l' << 32 | (long)'d' << 24 | (long)'e' << 16,
+                (long)'N' << 56
+                    | (long)'t' << 48
+                    | (long)'i' << 40
+                    | (long)'l' << 32
+                    | (long)'d' << 24
+                    | (long)'e' << 16,
                 (long)'N' << 56 | (long)'u' << 48,
-                (long)'O' << 56 | (long)'E' << 48 | (long)'l' << 40 | (long)'i' << 32 | (long)'g' << 24,
-                (long)'O' << 56 | (long)'a' << 48 | (long)'c' << 40 | (long)'u' << 32 | (long)'t' << 24 | (long)'e' << 16,
-                (long)'O' << 56 | (long)'c' << 48 | (long)'i' << 40 | (long)'r' << 32 | (long)'c' << 24,
-                (long)'O' << 56 | (long)'g' << 48 | (long)'r' << 40 | (long)'a' << 32 | (long)'v' << 24 | (long)'e' << 16,
-                (long)'O' << 56 | (long)'m' << 48 | (long)'e' << 40 | (long)'g' << 32 | (long)'a' << 24,
-                (long)'O' << 56 | (long)'m' << 48 | (long)'i' << 40 | (long)'c' << 32 | (long)'r' << 24 | (long)'o' << 16 | (long)'n' << 8,
-                (long)'O' << 56 | (long)'s' << 48 | (long)'l' << 40 | (long)'a' << 32 | (long)'s' << 24 | (long)'h' << 16,
-                (long)'O' << 56 | (long)'t' << 48 | (long)'i' << 40 | (long)'l' << 32 | (long)'d' << 24 | (long)'e' << 16,
+                (long)'O' << 56
+                    | (long)'E' << 48
+                    | (long)'l' << 40
+                    | (long)'i' << 32
+                    | (long)'g' << 24,
+                (long)'O' << 56
+                    | (long)'a' << 48
+                    | (long)'c' << 40
+                    | (long)'u' << 32
+                    | (long)'t' << 24
+                    | (long)'e' << 16,
+                (long)'O' << 56
+                    | (long)'c' << 48
+                    | (long)'i' << 40
+                    | (long)'r' << 32
+                    | (long)'c' << 24,
+                (long)'O' << 56
+                    | (long)'g' << 48
+                    | (long)'r' << 40
+                    | (long)'a' << 32
+                    | (long)'v' << 24
+                    | (long)'e' << 16,
+                (long)'O' << 56
+                    | (long)'m' << 48
+                    | (long)'e' << 40
+                    | (long)'g' << 32
+                    | (long)'a' << 24,
+                (long)'O' << 56
+                    | (long)'m' << 48
+                    | (long)'i' << 40
+                    | (long)'c' << 32
+                    | (long)'r' << 24
+                    | (long)'o' << 16
+                    | (long)'n' << 8,
+                (long)'O' << 56
+                    | (long)'s' << 48
+                    | (long)'l' << 40
+                    | (long)'a' << 32
+                    | (long)'s' << 24
+                    | (long)'h' << 16,
+                (long)'O' << 56
+                    | (long)'t' << 48
+                    | (long)'i' << 40
+                    | (long)'l' << 32
+                    | (long)'d' << 24
+                    | (long)'e' << 16,
                 (long)'O' << 56 | (long)'u' << 48 | (long)'m' << 40 | (long)'l' << 32,
                 (long)'P' << 56 | (long)'h' << 48 | (long)'i' << 40,
                 (long)'P' << 56 | (long)'i' << 48,
-                (long)'P' << 56 | (long)'r' << 48 | (long)'i' << 40 | (long)'m' << 32 | (long)'e' << 24,
+                (long)'P' << 56
+                    | (long)'r' << 48
+                    | (long)'i' << 40
+                    | (long)'m' << 32
+                    | (long)'e' << 24,
                 (long)'P' << 56 | (long)'s' << 48 | (long)'i' << 40,
                 (long)'R' << 56 | (long)'h' << 48 | (long)'o' << 40,
-                (long)'S' << 56 | (long)'c' << 48 | (long)'a' << 40 | (long)'r' << 32 | (long)'o' << 24 | (long)'n' << 16,
-                (long)'S' << 56 | (long)'i' << 48 | (long)'g' << 40 | (long)'m' << 32 | (long)'a' << 24,
-                (long)'T' << 56 | (long)'H' << 48 | (long)'O' << 40 | (long)'R' << 32 | (long)'N' << 24,
+                (long)'S' << 56
+                    | (long)'c' << 48
+                    | (long)'a' << 40
+                    | (long)'r' << 32
+                    | (long)'o' << 24
+                    | (long)'n' << 16,
+                (long)'S' << 56
+                    | (long)'i' << 48
+                    | (long)'g' << 40
+                    | (long)'m' << 32
+                    | (long)'a' << 24,
+                (long)'T' << 56
+                    | (long)'H' << 48
+                    | (long)'O' << 40
+                    | (long)'R' << 32
+                    | (long)'N' << 24,
                 (long)'T' << 56 | (long)'a' << 48 | (long)'u' << 40,
-                (long)'T' << 56 | (long)'h' << 48 | (long)'e' << 40 | (long)'t' << 32 | (long)'a' << 24,
-                (long)'U' << 56 | (long)'a' << 48 | (long)'c' << 40 | (long)'u' << 32 | (long)'t' << 24 | (long)'e' << 16,
-                (long)'U' << 56 | (long)'c' << 48 | (long)'i' << 40 | (long)'r' << 32 | (long)'c' << 24,
-                (long)'U' << 56 | (long)'g' << 48 | (long)'r' << 40 | (long)'a' << 32 | (long)'v' << 24 | (long)'e' << 16,
-                (long)'U' << 56 | (long)'p' << 48 | (long)'s' << 40 | (long)'i' << 32 | (long)'l' << 24 | (long)'o' << 16 | (long)'n' << 8,
+                (long)'T' << 56
+                    | (long)'h' << 48
+                    | (long)'e' << 40
+                    | (long)'t' << 32
+                    | (long)'a' << 24,
+                (long)'U' << 56
+                    | (long)'a' << 48
+                    | (long)'c' << 40
+                    | (long)'u' << 32
+                    | (long)'t' << 24
+                    | (long)'e' << 16,
+                (long)'U' << 56
+                    | (long)'c' << 48
+                    | (long)'i' << 40
+                    | (long)'r' << 32
+                    | (long)'c' << 24,
+                (long)'U' << 56
+                    | (long)'g' << 48
+                    | (long)'r' << 40
+                    | (long)'a' << 32
+                    | (long)'v' << 24
+                    | (long)'e' << 16,
+                (long)'U' << 56
+                    | (long)'p' << 48
+                    | (long)'s' << 40
+                    | (long)'i' << 32
+                    | (long)'l' << 24
+                    | (long)'o' << 16
+                    | (long)'n' << 8,
                 (long)'U' << 56 | (long)'u' << 48 | (long)'m' << 40 | (long)'l' << 32,
                 (long)'X' << 56 | (long)'i' << 48,
-                (long)'Y' << 56 | (long)'a' << 48 | (long)'c' << 40 | (long)'u' << 32 | (long)'t' << 24 | (long)'e' << 16,
+                (long)'Y' << 56
+                    | (long)'a' << 48
+                    | (long)'c' << 40
+                    | (long)'u' << 32
+                    | (long)'t' << 24
+                    | (long)'e' << 16,
                 (long)'Y' << 56 | (long)'u' << 48 | (long)'m' << 40 | (long)'l' << 32,
                 (long)'Z' << 56 | (long)'e' << 48 | (long)'t' << 40 | (long)'a' << 32,
-                (long)'a' << 56 | (long)'a' << 48 | (long)'c' << 40 | (long)'u' << 32 | (long)'t' << 24 | (long)'e' << 16,
-                (long)'a' << 56 | (long)'c' << 48 | (long)'i' << 40 | (long)'r' << 32 | (long)'c' << 24,
-                (long)'a' << 56 | (long)'c' << 48 | (long)'u' << 40 | (long)'t' << 32 | (long)'e' << 24,
-                (long)'a' << 56 | (long)'e' << 48 | (long)'l' << 40 | (long)'i' << 32 | (long)'g' << 24,
-                (long)'a' << 56 | (long)'g' << 48 | (long)'r' << 40 | (long)'a' << 32 | (long)'v' << 24 | (long)'e' << 16,
-                (long)'a' << 56 | (long)'l' << 48 | (long)'e' << 40 | (long)'f' << 32 | (long)'s' << 24 | (long)'y' << 16 | (long)'m' << 8,
-                (long)'a' << 56 | (long)'l' << 48 | (long)'p' << 40 | (long)'h' << 32 | (long)'a' << 24,
+                (long)'a' << 56
+                    | (long)'a' << 48
+                    | (long)'c' << 40
+                    | (long)'u' << 32
+                    | (long)'t' << 24
+                    | (long)'e' << 16,
+                (long)'a' << 56
+                    | (long)'c' << 48
+                    | (long)'i' << 40
+                    | (long)'r' << 32
+                    | (long)'c' << 24,
+                (long)'a' << 56
+                    | (long)'c' << 48
+                    | (long)'u' << 40
+                    | (long)'t' << 32
+                    | (long)'e' << 24,
+                (long)'a' << 56
+                    | (long)'e' << 48
+                    | (long)'l' << 40
+                    | (long)'i' << 32
+                    | (long)'g' << 24,
+                (long)'a' << 56
+                    | (long)'g' << 48
+                    | (long)'r' << 40
+                    | (long)'a' << 32
+                    | (long)'v' << 24
+                    | (long)'e' << 16,
+                (long)'a' << 56
+                    | (long)'l' << 48
+                    | (long)'e' << 40
+                    | (long)'f' << 32
+                    | (long)'s' << 24
+                    | (long)'y' << 16
+                    | (long)'m' << 8,
+                (long)'a' << 56
+                    | (long)'l' << 48
+                    | (long)'p' << 40
+                    | (long)'h' << 32
+                    | (long)'a' << 24,
                 (long)'a' << 56 | (long)'m' << 48 | (long)'p' << 40,
                 (long)'a' << 56 | (long)'n' << 48 | (long)'d' << 40,
                 (long)'a' << 56 | (long)'n' << 48 | (long)'g' << 40,
                 (long)'a' << 56 | (long)'p' << 48 | (long)'o' << 40 | (long)'s' << 32,
-                (long)'a' << 56 | (long)'r' << 48 | (long)'i' << 40 | (long)'n' << 32 | (long)'g' << 24,
-                (long)'a' << 56 | (long)'s' << 48 | (long)'y' << 40 | (long)'m' << 32 | (long)'p' << 24,
-                (long)'a' << 56 | (long)'t' << 48 | (long)'i' << 40 | (long)'l' << 32 | (long)'d' << 24 | (long)'e' << 16,
+                (long)'a' << 56
+                    | (long)'r' << 48
+                    | (long)'i' << 40
+                    | (long)'n' << 32
+                    | (long)'g' << 24,
+                (long)'a' << 56
+                    | (long)'s' << 48
+                    | (long)'y' << 40
+                    | (long)'m' << 32
+                    | (long)'p' << 24,
+                (long)'a' << 56
+                    | (long)'t' << 48
+                    | (long)'i' << 40
+                    | (long)'l' << 32
+                    | (long)'d' << 24
+                    | (long)'e' << 16,
                 (long)'a' << 56 | (long)'u' << 48 | (long)'m' << 40 | (long)'l' << 32,
-                (long)'b' << 56 | (long)'d' << 48 | (long)'q' << 40 | (long)'u' << 32 | (long)'o' << 24,
+                (long)'b' << 56
+                    | (long)'d' << 48
+                    | (long)'q' << 40
+                    | (long)'u' << 32
+                    | (long)'o' << 24,
                 (long)'b' << 56 | (long)'e' << 48 | (long)'t' << 40 | (long)'a' << 32,
-                (long)'b' << 56 | (long)'r' << 48 | (long)'v' << 40 | (long)'b' << 32 | (long)'a' << 24 | (long)'r' << 16,
+                (long)'b' << 56
+                    | (long)'r' << 48
+                    | (long)'v' << 40
+                    | (long)'b' << 32
+                    | (long)'a' << 24
+                    | (long)'r' << 16,
                 (long)'b' << 56 | (long)'u' << 48 | (long)'l' << 40 | (long)'l' << 32,
                 (long)'c' << 56 | (long)'a' << 48 | (long)'p' << 40,
-                (long)'c' << 56 | (long)'c' << 48 | (long)'e' << 40 | (long)'d' << 32 | (long)'i' << 24 | (long)'l' << 16,
-                (long)'c' << 56 | (long)'e' << 48 | (long)'d' << 40 | (long)'i' << 32 | (long)'l' << 24,
+                (long)'c' << 56
+                    | (long)'c' << 48
+                    | (long)'e' << 40
+                    | (long)'d' << 32
+                    | (long)'i' << 24
+                    | (long)'l' << 16,
+                (long)'c' << 56
+                    | (long)'e' << 48
+                    | (long)'d' << 40
+                    | (long)'i' << 32
+                    | (long)'l' << 24,
                 (long)'c' << 56 | (long)'e' << 48 | (long)'n' << 40 | (long)'t' << 32,
                 (long)'c' << 56 | (long)'h' << 48 | (long)'i' << 40,
                 (long)'c' << 56 | (long)'i' << 48 | (long)'r' << 40 | (long)'c' << 32,
-                (long)'c' << 56 | (long)'l' << 48 | (long)'u' << 40 | (long)'b' << 32 | (long)'s' << 24,
+                (long)'c' << 56
+                    | (long)'l' << 48
+                    | (long)'u' << 40
+                    | (long)'b' << 32
+                    | (long)'s' << 24,
                 (long)'c' << 56 | (long)'o' << 48 | (long)'n' << 40 | (long)'g' << 32,
                 (long)'c' << 56 | (long)'o' << 48 | (long)'p' << 40 | (long)'y' << 32,
-                (long)'c' << 56 | (long)'r' << 48 | (long)'a' << 40 | (long)'r' << 32 | (long)'r' << 24,
+                (long)'c' << 56
+                    | (long)'r' << 48
+                    | (long)'a' << 40
+                    | (long)'r' << 32
+                    | (long)'r' << 24,
                 (long)'c' << 56 | (long)'u' << 48 | (long)'p' << 40,
-                (long)'c' << 56 | (long)'u' << 48 | (long)'r' << 40 | (long)'r' << 32 | (long)'e' << 24 | (long)'n' << 16,
+                (long)'c' << 56
+                    | (long)'u' << 48
+                    | (long)'r' << 40
+                    | (long)'r' << 32
+                    | (long)'e' << 24
+                    | (long)'n' << 16,
                 (long)'d' << 56 | (long)'A' << 48 | (long)'r' << 40 | (long)'r' << 32,
-                (long)'d' << 56 | (long)'a' << 48 | (long)'g' << 40 | (long)'g' << 32 | (long)'e' << 24 | (long)'r' << 16,
+                (long)'d' << 56
+                    | (long)'a' << 48
+                    | (long)'g' << 40
+                    | (long)'g' << 32
+                    | (long)'e' << 24
+                    | (long)'r' << 16,
                 (long)'d' << 56 | (long)'a' << 48 | (long)'r' << 40 | (long)'r' << 32,
                 (long)'d' << 56 | (long)'e' << 48 | (long)'g' << 40,
-                (long)'d' << 56 | (long)'e' << 48 | (long)'l' << 40 | (long)'t' << 32 | (long)'a' << 24,
-                (long)'d' << 56 | (long)'i' << 48 | (long)'a' << 40 | (long)'m' << 32 | (long)'s' << 24,
-                (long)'d' << 56 | (long)'i' << 48 | (long)'v' << 40 | (long)'i' << 32 | (long)'d' << 24 | (long)'e' << 16,
-                (long)'e' << 56 | (long)'a' << 48 | (long)'c' << 40 | (long)'u' << 32 | (long)'t' << 24 | (long)'e' << 16,
-                (long)'e' << 56 | (long)'c' << 48 | (long)'i' << 40 | (long)'r' << 32 | (long)'c' << 24,
-                (long)'e' << 56 | (long)'g' << 48 | (long)'r' << 40 | (long)'a' << 32 | (long)'v' << 24 | (long)'e' << 16,
-                (long)'e' << 56 | (long)'m' << 48 | (long)'p' << 40 | (long)'t' << 32 | (long)'y' << 24,
+                (long)'d' << 56
+                    | (long)'e' << 48
+                    | (long)'l' << 40
+                    | (long)'t' << 32
+                    | (long)'a' << 24,
+                (long)'d' << 56
+                    | (long)'i' << 48
+                    | (long)'a' << 40
+                    | (long)'m' << 32
+                    | (long)'s' << 24,
+                (long)'d' << 56
+                    | (long)'i' << 48
+                    | (long)'v' << 40
+                    | (long)'i' << 32
+                    | (long)'d' << 24
+                    | (long)'e' << 16,
+                (long)'e' << 56
+                    | (long)'a' << 48
+                    | (long)'c' << 40
+                    | (long)'u' << 32
+                    | (long)'t' << 24
+                    | (long)'e' << 16,
+                (long)'e' << 56
+                    | (long)'c' << 48
+                    | (long)'i' << 40
+                    | (long)'r' << 32
+                    | (long)'c' << 24,
+                (long)'e' << 56
+                    | (long)'g' << 48
+                    | (long)'r' << 40
+                    | (long)'a' << 32
+                    | (long)'v' << 24
+                    | (long)'e' << 16,
+                (long)'e' << 56
+                    | (long)'m' << 48
+                    | (long)'p' << 40
+                    | (long)'t' << 32
+                    | (long)'y' << 24,
                 (long)'e' << 56 | (long)'m' << 48 | (long)'s' << 40 | (long)'p' << 32,
                 (long)'e' << 56 | (long)'n' << 48 | (long)'s' << 40 | (long)'p' << 32,
-                (long)'e' << 56 | (long)'p' << 48 | (long)'s' << 40 | (long)'i' << 32 | (long)'l' << 24 | (long)'o' << 16 | (long)'n' << 8,
-                (long)'e' << 56 | (long)'q' << 48 | (long)'u' << 40 | (long)'i' << 32 | (long)'v' << 24,
+                (long)'e' << 56
+                    | (long)'p' << 48
+                    | (long)'s' << 40
+                    | (long)'i' << 32
+                    | (long)'l' << 24
+                    | (long)'o' << 16
+                    | (long)'n' << 8,
+                (long)'e' << 56
+                    | (long)'q' << 48
+                    | (long)'u' << 40
+                    | (long)'i' << 32
+                    | (long)'v' << 24,
                 (long)'e' << 56 | (long)'t' << 48 | (long)'a' << 40,
                 (long)'e' << 56 | (long)'t' << 48 | (long)'h' << 40,
                 (long)'e' << 56 | (long)'u' << 48 | (long)'m' << 40 | (long)'l' << 32,
                 (long)'e' << 56 | (long)'u' << 48 | (long)'r' << 40 | (long)'o' << 32,
-                (long)'e' << 56 | (long)'x' << 48 | (long)'i' << 40 | (long)'s' << 32 | (long)'t' << 24,
+                (long)'e' << 56
+                    | (long)'x' << 48
+                    | (long)'i' << 40
+                    | (long)'s' << 32
+                    | (long)'t' << 24,
                 (long)'f' << 56 | (long)'n' << 48 | (long)'o' << 40 | (long)'f' << 32,
-                (long)'f' << 56 | (long)'o' << 48 | (long)'r' << 40 | (long)'a' << 32 | (long)'l' << 24 | (long)'l' << 16,
-                (long)'f' << 56 | (long)'r' << 48 | (long)'a' << 40 | (long)'c' << 32 | (long)'1' << 24 | (long)'2' << 16,
-                (long)'f' << 56 | (long)'r' << 48 | (long)'a' << 40 | (long)'c' << 32 | (long)'1' << 24 | (long)'4' << 16,
-                (long)'f' << 56 | (long)'r' << 48 | (long)'a' << 40 | (long)'c' << 32 | (long)'3' << 24 | (long)'4' << 16,
-                (long)'f' << 56 | (long)'r' << 48 | (long)'a' << 40 | (long)'s' << 32 | (long)'l' << 24,
-                (long)'g' << 56 | (long)'a' << 48 | (long)'m' << 40 | (long)'m' << 32 | (long)'a' << 24,
+                (long)'f' << 56
+                    | (long)'o' << 48
+                    | (long)'r' << 40
+                    | (long)'a' << 32
+                    | (long)'l' << 24
+                    | (long)'l' << 16,
+                (long)'f' << 56
+                    | (long)'r' << 48
+                    | (long)'a' << 40
+                    | (long)'c' << 32
+                    | (long)'1' << 24
+                    | (long)'2' << 16,
+                (long)'f' << 56
+                    | (long)'r' << 48
+                    | (long)'a' << 40
+                    | (long)'c' << 32
+                    | (long)'1' << 24
+                    | (long)'4' << 16,
+                (long)'f' << 56
+                    | (long)'r' << 48
+                    | (long)'a' << 40
+                    | (long)'c' << 32
+                    | (long)'3' << 24
+                    | (long)'4' << 16,
+                (long)'f' << 56
+                    | (long)'r' << 48
+                    | (long)'a' << 40
+                    | (long)'s' << 32
+                    | (long)'l' << 24,
+                (long)'g' << 56
+                    | (long)'a' << 48
+                    | (long)'m' << 40
+                    | (long)'m' << 32
+                    | (long)'a' << 24,
                 (long)'g' << 56 | (long)'e' << 48,
                 (long)'g' << 56 | (long)'t' << 48,
                 (long)'h' << 56 | (long)'A' << 48 | (long)'r' << 40 | (long)'r' << 32,
                 (long)'h' << 56 | (long)'a' << 48 | (long)'r' << 40 | (long)'r' << 32,
-                (long)'h' << 56 | (long)'e' << 48 | (long)'a' << 40 | (long)'r' << 32 | (long)'t' << 24 | (long)'s' << 16,
-                (long)'h' << 56 | (long)'e' << 48 | (long)'l' << 40 | (long)'l' << 32 | (long)'i' << 24 | (long)'p' << 16,
-                (long)'i' << 56 | (long)'a' << 48 | (long)'c' << 40 | (long)'u' << 32 | (long)'t' << 24 | (long)'e' << 16,
-                (long)'i' << 56 | (long)'c' << 48 | (long)'i' << 40 | (long)'r' << 32 | (long)'c' << 24,
-                (long)'i' << 56 | (long)'e' << 48 | (long)'x' << 40 | (long)'c' << 32 | (long)'l' << 24,
-                (long)'i' << 56 | (long)'g' << 48 | (long)'r' << 40 | (long)'a' << 32 | (long)'v' << 24 | (long)'e' << 16,
-                (long)'i' << 56 | (long)'m' << 48 | (long)'a' << 40 | (long)'g' << 32 | (long)'e' << 24,
-                (long)'i' << 56 | (long)'n' << 48 | (long)'f' << 40 | (long)'i' << 32 | (long)'n' << 24,
+                (long)'h' << 56
+                    | (long)'e' << 48
+                    | (long)'a' << 40
+                    | (long)'r' << 32
+                    | (long)'t' << 24
+                    | (long)'s' << 16,
+                (long)'h' << 56
+                    | (long)'e' << 48
+                    | (long)'l' << 40
+                    | (long)'l' << 32
+                    | (long)'i' << 24
+                    | (long)'p' << 16,
+                (long)'i' << 56
+                    | (long)'a' << 48
+                    | (long)'c' << 40
+                    | (long)'u' << 32
+                    | (long)'t' << 24
+                    | (long)'e' << 16,
+                (long)'i' << 56
+                    | (long)'c' << 48
+                    | (long)'i' << 40
+                    | (long)'r' << 32
+                    | (long)'c' << 24,
+                (long)'i' << 56
+                    | (long)'e' << 48
+                    | (long)'x' << 40
+                    | (long)'c' << 32
+                    | (long)'l' << 24,
+                (long)'i' << 56
+                    | (long)'g' << 48
+                    | (long)'r' << 40
+                    | (long)'a' << 32
+                    | (long)'v' << 24
+                    | (long)'e' << 16,
+                (long)'i' << 56
+                    | (long)'m' << 48
+                    | (long)'a' << 40
+                    | (long)'g' << 32
+                    | (long)'e' << 24,
+                (long)'i' << 56
+                    | (long)'n' << 48
+                    | (long)'f' << 40
+                    | (long)'i' << 32
+                    | (long)'n' << 24,
                 (long)'i' << 56 | (long)'n' << 48 | (long)'t' << 40,
                 (long)'i' << 56 | (long)'o' << 48 | (long)'t' << 40 | (long)'a' << 32,
-                (long)'i' << 56 | (long)'q' << 48 | (long)'u' << 40 | (long)'e' << 32 | (long)'s' << 24 | (long)'t' << 16,
+                (long)'i' << 56
+                    | (long)'q' << 48
+                    | (long)'u' << 40
+                    | (long)'e' << 32
+                    | (long)'s' << 24
+                    | (long)'t' << 16,
                 (long)'i' << 56 | (long)'s' << 48 | (long)'i' << 40 | (long)'n' << 32,
                 (long)'i' << 56 | (long)'u' << 48 | (long)'m' << 40 | (long)'l' << 32,
-                (long)'k' << 56 | (long)'a' << 48 | (long)'p' << 40 | (long)'p' << 32 | (long)'a' << 24,
+                (long)'k' << 56
+                    | (long)'a' << 48
+                    | (long)'p' << 40
+                    | (long)'p' << 32
+                    | (long)'a' << 24,
                 (long)'l' << 56 | (long)'A' << 48 | (long)'r' << 40 | (long)'r' << 32,
-                (long)'l' << 56 | (long)'a' << 48 | (long)'m' << 40 | (long)'b' << 32 | (long)'d' << 24 | (long)'a' << 16,
+                (long)'l' << 56
+                    | (long)'a' << 48
+                    | (long)'m' << 40
+                    | (long)'b' << 32
+                    | (long)'d' << 24
+                    | (long)'a' << 16,
                 (long)'l' << 56 | (long)'a' << 48 | (long)'n' << 40 | (long)'g' << 32,
-                (long)'l' << 56 | (long)'a' << 48 | (long)'q' << 40 | (long)'u' << 32 | (long)'o' << 24,
+                (long)'l' << 56
+                    | (long)'a' << 48
+                    | (long)'q' << 40
+                    | (long)'u' << 32
+                    | (long)'o' << 24,
                 (long)'l' << 56 | (long)'a' << 48 | (long)'r' << 40 | (long)'r' << 32,
-                (long)'l' << 56 | (long)'c' << 48 | (long)'e' << 40 | (long)'i' << 32 | (long)'l' << 24,
-                (long)'l' << 56 | (long)'d' << 48 | (long)'q' << 40 | (long)'u' << 32 | (long)'o' << 24,
+                (long)'l' << 56
+                    | (long)'c' << 48
+                    | (long)'e' << 40
+                    | (long)'i' << 32
+                    | (long)'l' << 24,
+                (long)'l' << 56
+                    | (long)'d' << 48
+                    | (long)'q' << 40
+                    | (long)'u' << 32
+                    | (long)'o' << 24,
                 (long)'l' << 56 | (long)'e' << 48,
-                (long)'l' << 56 | (long)'f' << 48 | (long)'l' << 40 | (long)'o' << 32 | (long)'o' << 24 | (long)'r' << 16,
-                (long)'l' << 56 | (long)'o' << 48 | (long)'w' << 40 | (long)'a' << 32 | (long)'s' << 24 | (long)'t' << 16,
+                (long)'l' << 56
+                    | (long)'f' << 48
+                    | (long)'l' << 40
+                    | (long)'o' << 32
+                    | (long)'o' << 24
+                    | (long)'r' << 16,
+                (long)'l' << 56
+                    | (long)'o' << 48
+                    | (long)'w' << 40
+                    | (long)'a' << 32
+                    | (long)'s' << 24
+                    | (long)'t' << 16,
                 (long)'l' << 56 | (long)'o' << 48 | (long)'z' << 40,
                 (long)'l' << 56 | (long)'r' << 48 | (long)'m' << 40,
-                (long)'l' << 56 | (long)'s' << 48 | (long)'a' << 40 | (long)'q' << 32 | (long)'u' << 24 | (long)'o' << 16,
-                (long)'l' << 56 | (long)'s' << 48 | (long)'q' << 40 | (long)'u' << 32 | (long)'o' << 24,
+                (long)'l' << 56
+                    | (long)'s' << 48
+                    | (long)'a' << 40
+                    | (long)'q' << 32
+                    | (long)'u' << 24
+                    | (long)'o' << 16,
+                (long)'l' << 56
+                    | (long)'s' << 48
+                    | (long)'q' << 40
+                    | (long)'u' << 32
+                    | (long)'o' << 24,
                 (long)'l' << 56 | (long)'t' << 48,
                 (long)'m' << 56 | (long)'a' << 48 | (long)'c' << 40 | (long)'r' << 32,
-                (long)'m' << 56 | (long)'d' << 48 | (long)'a' << 40 | (long)'s' << 32 | (long)'h' << 24,
-                (long)'m' << 56 | (long)'i' << 48 | (long)'c' << 40 | (long)'r' << 32 | (long)'o' << 24,
-                (long)'m' << 56 | (long)'i' << 48 | (long)'d' << 40 | (long)'d' << 32 | (long)'o' << 24 | (long)'t' << 16,
-                (long)'m' << 56 | (long)'i' << 48 | (long)'n' << 40 | (long)'u' << 32 | (long)'s' << 24,
+                (long)'m' << 56
+                    | (long)'d' << 48
+                    | (long)'a' << 40
+                    | (long)'s' << 32
+                    | (long)'h' << 24,
+                (long)'m' << 56
+                    | (long)'i' << 48
+                    | (long)'c' << 40
+                    | (long)'r' << 32
+                    | (long)'o' << 24,
+                (long)'m' << 56
+                    | (long)'i' << 48
+                    | (long)'d' << 40
+                    | (long)'d' << 32
+                    | (long)'o' << 24
+                    | (long)'t' << 16,
+                (long)'m' << 56
+                    | (long)'i' << 48
+                    | (long)'n' << 40
+                    | (long)'u' << 32
+                    | (long)'s' << 24,
                 (long)'m' << 56 | (long)'u' << 48,
-                (long)'n' << 56 | (long)'a' << 48 | (long)'b' << 40 | (long)'l' << 32 | (long)'a' << 24,
+                (long)'n' << 56
+                    | (long)'a' << 48
+                    | (long)'b' << 40
+                    | (long)'l' << 32
+                    | (long)'a' << 24,
                 (long)'n' << 56 | (long)'b' << 48 | (long)'s' << 40 | (long)'p' << 32,
-                (long)'n' << 56 | (long)'d' << 48 | (long)'a' << 40 | (long)'s' << 32 | (long)'h' << 24,
+                (long)'n' << 56
+                    | (long)'d' << 48
+                    | (long)'a' << 40
+                    | (long)'s' << 32
+                    | (long)'h' << 24,
                 (long)'n' << 56 | (long)'e' << 48,
                 (long)'n' << 56 | (long)'i' << 48,
                 (long)'n' << 56 | (long)'o' << 48 | (long)'t' << 40,
-                (long)'n' << 56 | (long)'o' << 48 | (long)'t' << 40 | (long)'i' << 32 | (long)'n' << 24,
+                (long)'n' << 56
+                    | (long)'o' << 48
+                    | (long)'t' << 40
+                    | (long)'i' << 32
+                    | (long)'n' << 24,
                 (long)'n' << 56 | (long)'s' << 48 | (long)'u' << 40 | (long)'b' << 32,
-                (long)'n' << 56 | (long)'t' << 48 | (long)'i' << 40 | (long)'l' << 32 | (long)'d' << 24 | (long)'e' << 16,
+                (long)'n' << 56
+                    | (long)'t' << 48
+                    | (long)'i' << 40
+                    | (long)'l' << 32
+                    | (long)'d' << 24
+                    | (long)'e' << 16,
                 (long)'n' << 56 | (long)'u' << 48,
-                (long)'o' << 56 | (long)'a' << 48 | (long)'c' << 40 | (long)'u' << 32 | (long)'t' << 24 | (long)'e' << 16,
-                (long)'o' << 56 | (long)'c' << 48 | (long)'i' << 40 | (long)'r' << 32 | (long)'c' << 24,
-                (long)'o' << 56 | (long)'e' << 48 | (long)'l' << 40 | (long)'i' << 32 | (long)'g' << 24,
-                (long)'o' << 56 | (long)'g' << 48 | (long)'r' << 40 | (long)'a' << 32 | (long)'v' << 24 | (long)'e' << 16,
-                (long)'o' << 56 | (long)'l' << 48 | (long)'i' << 40 | (long)'n' << 32 | (long)'e' << 24,
-                (long)'o' << 56 | (long)'m' << 48 | (long)'e' << 40 | (long)'g' << 32 | (long)'a' << 24,
-                (long)'o' << 56 | (long)'m' << 48 | (long)'i' << 40 | (long)'c' << 32 | (long)'r' << 24 | (long)'o' << 16 | (long)'n' << 8,
-                (long)'o' << 56 | (long)'p' << 48 | (long)'l' << 40 | (long)'u' << 32 | (long)'s' << 24,
+                (long)'o' << 56
+                    | (long)'a' << 48
+                    | (long)'c' << 40
+                    | (long)'u' << 32
+                    | (long)'t' << 24
+                    | (long)'e' << 16,
+                (long)'o' << 56
+                    | (long)'c' << 48
+                    | (long)'i' << 40
+                    | (long)'r' << 32
+                    | (long)'c' << 24,
+                (long)'o' << 56
+                    | (long)'e' << 48
+                    | (long)'l' << 40
+                    | (long)'i' << 32
+                    | (long)'g' << 24,
+                (long)'o' << 56
+                    | (long)'g' << 48
+                    | (long)'r' << 40
+                    | (long)'a' << 32
+                    | (long)'v' << 24
+                    | (long)'e' << 16,
+                (long)'o' << 56
+                    | (long)'l' << 48
+                    | (long)'i' << 40
+                    | (long)'n' << 32
+                    | (long)'e' << 24,
+                (long)'o' << 56
+                    | (long)'m' << 48
+                    | (long)'e' << 40
+                    | (long)'g' << 32
+                    | (long)'a' << 24,
+                (long)'o' << 56
+                    | (long)'m' << 48
+                    | (long)'i' << 40
+                    | (long)'c' << 32
+                    | (long)'r' << 24
+                    | (long)'o' << 16
+                    | (long)'n' << 8,
+                (long)'o' << 56
+                    | (long)'p' << 48
+                    | (long)'l' << 40
+                    | (long)'u' << 32
+                    | (long)'s' << 24,
                 (long)'o' << 56 | (long)'r' << 48,
                 (long)'o' << 56 | (long)'r' << 48 | (long)'d' << 40 | (long)'f' << 32,
                 (long)'o' << 56 | (long)'r' << 48 | (long)'d' << 40 | (long)'m' << 32,
-                (long)'o' << 56 | (long)'s' << 48 | (long)'l' << 40 | (long)'a' << 32 | (long)'s' << 24 | (long)'h' << 16,
-                (long)'o' << 56 | (long)'t' << 48 | (long)'i' << 40 | (long)'l' << 32 | (long)'d' << 24 | (long)'e' << 16,
-                (long)'o' << 56 | (long)'t' << 48 | (long)'i' << 40 | (long)'m' << 32 | (long)'e' << 24 | (long)'s' << 16,
+                (long)'o' << 56
+                    | (long)'s' << 48
+                    | (long)'l' << 40
+                    | (long)'a' << 32
+                    | (long)'s' << 24
+                    | (long)'h' << 16,
+                (long)'o' << 56
+                    | (long)'t' << 48
+                    | (long)'i' << 40
+                    | (long)'l' << 32
+                    | (long)'d' << 24
+                    | (long)'e' << 16,
+                (long)'o' << 56
+                    | (long)'t' << 48
+                    | (long)'i' << 40
+                    | (long)'m' << 32
+                    | (long)'e' << 24
+                    | (long)'s' << 16,
                 (long)'o' << 56 | (long)'u' << 48 | (long)'m' << 40 | (long)'l' << 32,
                 (long)'p' << 56 | (long)'a' << 48 | (long)'r' << 40 | (long)'a' << 32,
                 (long)'p' << 56 | (long)'a' << 48 | (long)'r' << 40 | (long)'t' << 32,
-                (long)'p' << 56 | (long)'e' << 48 | (long)'r' << 40 | (long)'m' << 32 | (long)'i' << 24 | (long)'l' << 16,
+                (long)'p' << 56
+                    | (long)'e' << 48
+                    | (long)'r' << 40
+                    | (long)'m' << 32
+                    | (long)'i' << 24
+                    | (long)'l' << 16,
                 (long)'p' << 56 | (long)'e' << 48 | (long)'r' << 40 | (long)'p' << 32,
                 (long)'p' << 56 | (long)'h' << 48 | (long)'i' << 40,
                 (long)'p' << 56 | (long)'i' << 48,
                 (long)'p' << 56 | (long)'i' << 48 | (long)'v' << 40,
-                (long)'p' << 56 | (long)'l' << 48 | (long)'u' << 40 | (long)'s' << 32 | (long)'m' << 24 | (long)'n' << 16,
-                (long)'p' << 56 | (long)'o' << 48 | (long)'u' << 40 | (long)'n' << 32 | (long)'d' << 24,
-                (long)'p' << 56 | (long)'r' << 48 | (long)'i' << 40 | (long)'m' << 32 | (long)'e' << 24,
+                (long)'p' << 56
+                    | (long)'l' << 48
+                    | (long)'u' << 40
+                    | (long)'s' << 32
+                    | (long)'m' << 24
+                    | (long)'n' << 16,
+                (long)'p' << 56
+                    | (long)'o' << 48
+                    | (long)'u' << 40
+                    | (long)'n' << 32
+                    | (long)'d' << 24,
+                (long)'p' << 56
+                    | (long)'r' << 48
+                    | (long)'i' << 40
+                    | (long)'m' << 32
+                    | (long)'e' << 24,
                 (long)'p' << 56 | (long)'r' << 48 | (long)'o' << 40 | (long)'d' << 32,
                 (long)'p' << 56 | (long)'r' << 48 | (long)'o' << 40 | (long)'p' << 32,
                 (long)'p' << 56 | (long)'s' << 48 | (long)'i' << 40,
                 (long)'q' << 56 | (long)'u' << 48 | (long)'o' << 40 | (long)'t' << 32,
                 (long)'r' << 56 | (long)'A' << 48 | (long)'r' << 40 | (long)'r' << 32,
-                (long)'r' << 56 | (long)'a' << 48 | (long)'d' << 40 | (long)'i' << 32 | (long)'c' << 24,
+                (long)'r' << 56
+                    | (long)'a' << 48
+                    | (long)'d' << 40
+                    | (long)'i' << 32
+                    | (long)'c' << 24,
                 (long)'r' << 56 | (long)'a' << 48 | (long)'n' << 40 | (long)'g' << 32,
-                (long)'r' << 56 | (long)'a' << 48 | (long)'q' << 40 | (long)'u' << 32 | (long)'o' << 24,
+                (long)'r' << 56
+                    | (long)'a' << 48
+                    | (long)'q' << 40
+                    | (long)'u' << 32
+                    | (long)'o' << 24,
                 (long)'r' << 56 | (long)'a' << 48 | (long)'r' << 40 | (long)'r' << 32,
-                (long)'r' << 56 | (long)'c' << 48 | (long)'e' << 40 | (long)'i' << 32 | (long)'l' << 24,
-                (long)'r' << 56 | (long)'d' << 48 | (long)'q' << 40 | (long)'u' << 32 | (long)'o' << 24,
+                (long)'r' << 56
+                    | (long)'c' << 48
+                    | (long)'e' << 40
+                    | (long)'i' << 32
+                    | (long)'l' << 24,
+                (long)'r' << 56
+                    | (long)'d' << 48
+                    | (long)'q' << 40
+                    | (long)'u' << 32
+                    | (long)'o' << 24,
                 (long)'r' << 56 | (long)'e' << 48 | (long)'a' << 40 | (long)'l' << 32,
                 (long)'r' << 56 | (long)'e' << 48 | (long)'g' << 40,
-                (long)'r' << 56 | (long)'f' << 48 | (long)'l' << 40 | (long)'o' << 32 | (long)'o' << 24 | (long)'r' << 16,
+                (long)'r' << 56
+                    | (long)'f' << 48
+                    | (long)'l' << 40
+                    | (long)'o' << 32
+                    | (long)'o' << 24
+                    | (long)'r' << 16,
                 (long)'r' << 56 | (long)'h' << 48 | (long)'o' << 40,
                 (long)'r' << 56 | (long)'l' << 48 | (long)'m' << 40,
-                (long)'r' << 56 | (long)'s' << 48 | (long)'a' << 40 | (long)'q' << 32 | (long)'u' << 24 | (long)'o' << 16,
-                (long)'r' << 56 | (long)'s' << 48 | (long)'q' << 40 | (long)'u' << 32 | (long)'o' << 24,
-                (long)'s' << 56 | (long)'b' << 48 | (long)'q' << 40 | (long)'u' << 32 | (long)'o' << 24,
-                (long)'s' << 56 | (long)'c' << 48 | (long)'a' << 40 | (long)'r' << 32 | (long)'o' << 24 | (long)'n' << 16,
+                (long)'r' << 56
+                    | (long)'s' << 48
+                    | (long)'a' << 40
+                    | (long)'q' << 32
+                    | (long)'u' << 24
+                    | (long)'o' << 16,
+                (long)'r' << 56
+                    | (long)'s' << 48
+                    | (long)'q' << 40
+                    | (long)'u' << 32
+                    | (long)'o' << 24,
+                (long)'s' << 56
+                    | (long)'b' << 48
+                    | (long)'q' << 40
+                    | (long)'u' << 32
+                    | (long)'o' << 24,
+                (long)'s' << 56
+                    | (long)'c' << 48
+                    | (long)'a' << 40
+                    | (long)'r' << 32
+                    | (long)'o' << 24
+                    | (long)'n' << 16,
                 (long)'s' << 56 | (long)'d' << 48 | (long)'o' << 40 | (long)'t' << 32,
                 (long)'s' << 56 | (long)'e' << 48 | (long)'c' << 40 | (long)'t' << 32,
                 (long)'s' << 56 | (long)'h' << 48 | (long)'y' << 40,
-                (long)'s' << 56 | (long)'i' << 48 | (long)'g' << 40 | (long)'m' << 32 | (long)'a' << 24,
-                (long)'s' << 56 | (long)'i' << 48 | (long)'g' << 40 | (long)'m' << 32 | (long)'a' << 24 | (long)'f' << 16,
+                (long)'s' << 56
+                    | (long)'i' << 48
+                    | (long)'g' << 40
+                    | (long)'m' << 32
+                    | (long)'a' << 24,
+                (long)'s' << 56
+                    | (long)'i' << 48
+                    | (long)'g' << 40
+                    | (long)'m' << 32
+                    | (long)'a' << 24
+                    | (long)'f' << 16,
                 (long)'s' << 56 | (long)'i' << 48 | (long)'m' << 40,
-                (long)'s' << 56 | (long)'p' << 48 | (long)'a' << 40 | (long)'d' << 32 | (long)'e' << 24 | (long)'s' << 16,
+                (long)'s' << 56
+                    | (long)'p' << 48
+                    | (long)'a' << 40
+                    | (long)'d' << 32
+                    | (long)'e' << 24
+                    | (long)'s' << 16,
                 (long)'s' << 56 | (long)'u' << 48 | (long)'b' << 40,
                 (long)'s' << 56 | (long)'u' << 48 | (long)'b' << 40 | (long)'e' << 32,
                 (long)'s' << 56 | (long)'u' << 48 | (long)'m' << 40,
@@ -1065,36 +1820,112 @@ namespace System.Net {
                 (long)'s' << 56 | (long)'u' << 48 | (long)'p' << 40 | (long)'2' << 32,
                 (long)'s' << 56 | (long)'u' << 48 | (long)'p' << 40 | (long)'3' << 32,
                 (long)'s' << 56 | (long)'u' << 48 | (long)'p' << 40 | (long)'e' << 32,
-                (long)'s' << 56 | (long)'z' << 48 | (long)'l' << 40 | (long)'i' << 32 | (long)'g' << 24,
+                (long)'s' << 56
+                    | (long)'z' << 48
+                    | (long)'l' << 40
+                    | (long)'i' << 32
+                    | (long)'g' << 24,
                 (long)'t' << 56 | (long)'a' << 48 | (long)'u' << 40,
-                (long)'t' << 56 | (long)'h' << 48 | (long)'e' << 40 | (long)'r' << 32 | (long)'e' << 24 | (long)'4' << 16,
-                (long)'t' << 56 | (long)'h' << 48 | (long)'e' << 40 | (long)'t' << 32 | (long)'a' << 24,
-                (long)'t' << 56 | (long)'h' << 48 | (long)'e' << 40 | (long)'t' << 32 | (long)'a' << 24 | (long)'s' << 16 | (long)'y' << 8 | (long)'m' << 0,
-                (long)'t' << 56 | (long)'h' << 48 | (long)'i' << 40 | (long)'n' << 32 | (long)'s' << 24 | (long)'p' << 16,
-                (long)'t' << 56 | (long)'h' << 48 | (long)'o' << 40 | (long)'r' << 32 | (long)'n' << 24,
-                (long)'t' << 56 | (long)'i' << 48 | (long)'l' << 40 | (long)'d' << 32 | (long)'e' << 24,
-                (long)'t' << 56 | (long)'i' << 48 | (long)'m' << 40 | (long)'e' << 32 | (long)'s' << 24,
-                (long)'t' << 56 | (long)'r' << 48 | (long)'a' << 40 | (long)'d' << 32 | (long)'e' << 24,
+                (long)'t' << 56
+                    | (long)'h' << 48
+                    | (long)'e' << 40
+                    | (long)'r' << 32
+                    | (long)'e' << 24
+                    | (long)'4' << 16,
+                (long)'t' << 56
+                    | (long)'h' << 48
+                    | (long)'e' << 40
+                    | (long)'t' << 32
+                    | (long)'a' << 24,
+                (long)'t' << 56
+                    | (long)'h' << 48
+                    | (long)'e' << 40
+                    | (long)'t' << 32
+                    | (long)'a' << 24
+                    | (long)'s' << 16
+                    | (long)'y' << 8
+                    | (long)'m' << 0,
+                (long)'t' << 56
+                    | (long)'h' << 48
+                    | (long)'i' << 40
+                    | (long)'n' << 32
+                    | (long)'s' << 24
+                    | (long)'p' << 16,
+                (long)'t' << 56
+                    | (long)'h' << 48
+                    | (long)'o' << 40
+                    | (long)'r' << 32
+                    | (long)'n' << 24,
+                (long)'t' << 56
+                    | (long)'i' << 48
+                    | (long)'l' << 40
+                    | (long)'d' << 32
+                    | (long)'e' << 24,
+                (long)'t' << 56
+                    | (long)'i' << 48
+                    | (long)'m' << 40
+                    | (long)'e' << 32
+                    | (long)'s' << 24,
+                (long)'t' << 56
+                    | (long)'r' << 48
+                    | (long)'a' << 40
+                    | (long)'d' << 32
+                    | (long)'e' << 24,
                 (long)'u' << 56 | (long)'A' << 48 | (long)'r' << 40 | (long)'r' << 32,
-                (long)'u' << 56 | (long)'a' << 48 | (long)'c' << 40 | (long)'u' << 32 | (long)'t' << 24 | (long)'e' << 16,
+                (long)'u' << 56
+                    | (long)'a' << 48
+                    | (long)'c' << 40
+                    | (long)'u' << 32
+                    | (long)'t' << 24
+                    | (long)'e' << 16,
                 (long)'u' << 56 | (long)'a' << 48 | (long)'r' << 40 | (long)'r' << 32,
-                (long)'u' << 56 | (long)'c' << 48 | (long)'i' << 40 | (long)'r' << 32 | (long)'c' << 24,
-                (long)'u' << 56 | (long)'g' << 48 | (long)'r' << 40 | (long)'a' << 32 | (long)'v' << 24 | (long)'e' << 16,
+                (long)'u' << 56
+                    | (long)'c' << 48
+                    | (long)'i' << 40
+                    | (long)'r' << 32
+                    | (long)'c' << 24,
+                (long)'u' << 56
+                    | (long)'g' << 48
+                    | (long)'r' << 40
+                    | (long)'a' << 32
+                    | (long)'v' << 24
+                    | (long)'e' << 16,
                 (long)'u' << 56 | (long)'m' << 48 | (long)'l' << 40,
-                (long)'u' << 56 | (long)'p' << 48 | (long)'s' << 40 | (long)'i' << 32 | (long)'h' << 24,
-                (long)'u' << 56 | (long)'p' << 48 | (long)'s' << 40 | (long)'i' << 32 | (long)'l' << 24 | (long)'o' << 16 | (long)'n' << 8,
+                (long)'u' << 56
+                    | (long)'p' << 48
+                    | (long)'s' << 40
+                    | (long)'i' << 32
+                    | (long)'h' << 24,
+                (long)'u' << 56
+                    | (long)'p' << 48
+                    | (long)'s' << 40
+                    | (long)'i' << 32
+                    | (long)'l' << 24
+                    | (long)'o' << 16
+                    | (long)'n' << 8,
                 (long)'u' << 56 | (long)'u' << 48 | (long)'m' << 40 | (long)'l' << 32,
-                (long)'w' << 56 | (long)'e' << 48 | (long)'i' << 40 | (long)'e' << 32 | (long)'r' << 24 | (long)'p' << 16,
+                (long)'w' << 56
+                    | (long)'e' << 48
+                    | (long)'i' << 40
+                    | (long)'e' << 32
+                    | (long)'r' << 24
+                    | (long)'p' << 16,
                 (long)'x' << 56 | (long)'i' << 48,
-                (long)'y' << 56 | (long)'a' << 48 | (long)'c' << 40 | (long)'u' << 32 | (long)'t' << 24 | (long)'e' << 16,
+                (long)'y' << 56
+                    | (long)'a' << 48
+                    | (long)'c' << 40
+                    | (long)'u' << 32
+                    | (long)'t' << 24
+                    | (long)'e' << 16,
                 (long)'y' << 56 | (long)'e' << 48 | (long)'n' << 40,
                 (long)'y' << 56 | (long)'u' << 48 | (long)'m' << 40 | (long)'l' << 32,
                 (long)'z' << 56 | (long)'e' << 48 | (long)'t' << 40 | (long)'a' << 32,
                 (long)'z' << 56 | (long)'w' << 48 | (long)'j' << 40,
-                (long)'z' << 56 | (long)'w' << 48 | (long)'n' << 40 | (long)'j' << 32
+                (long)'z' << 56 | (long)'w' << 48 | (long)'n' << 40 | (long)'j' << 32,
             };
 
-            static readonly char[] entities_values = new char[] {
+            static readonly char[] entities_values = new char[]
+            {
                 '\u00C6',
                 '\u00C1',
                 '\u00C2',
@@ -1347,13 +2178,14 @@ namespace System.Net {
                 '\u00FF',
                 '\u03B6',
                 '\u200D',
-                '\u200C'
+                '\u200C',
             };
 #else
             // The list is from http://www.w3.org/TR/REC-html40/sgml/entities.html, except for &apos;, which
             // is defined in http://www.w3.org/TR/2008/REC-xml-20081126/#sec-predefined-ent.
 
-            private static String[] _entitiesList = new String[] {
+            private static String[] _entitiesList = new String[]
+            {
                 "\x0022-quot",
                 "\x0026-amp",
                 "\x0027-apos",
@@ -1611,18 +2443,23 @@ namespace System.Net {
 
             private static Dictionary<string, char> _lookupTable = GenerateLookupTable();
 
-            private static Dictionary<string, char> GenerateLookupTable() {
+            private static Dictionary<string, char> GenerateLookupTable()
+            {
                 // e[0] is unicode char, e[1] is '-', e[2+] is entity string
 
-                Dictionary<string, char> lookupTable = new Dictionary<string, char>(StringComparer.Ordinal);
-                foreach (string e in _entitiesList) {
+                Dictionary<string, char> lookupTable = new Dictionary<string, char>(
+                    StringComparer.Ordinal
+                );
+                foreach (string e in _entitiesList)
+                {
                     lookupTable.Add(e.Substring(2), e[0]);
                 }
 
                 return lookupTable;
             }
 
-            public static char Lookup(string entity) {
+            public static char Lookup(string entity)
+            {
                 char theChar;
                 _lookupTable.TryGetValue(entity, out theChar);
                 return theChar;

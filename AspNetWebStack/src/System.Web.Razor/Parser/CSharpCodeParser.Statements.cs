@@ -17,7 +17,14 @@ namespace System.Web.Razor.Parser
     {
         private void SetUpKeywords()
         {
-            MapKeywords(ConditionalBlock, CSharpKeyword.For, CSharpKeyword.Foreach, CSharpKeyword.While, CSharpKeyword.Switch, CSharpKeyword.Lock);
+            MapKeywords(
+                ConditionalBlock,
+                CSharpKeyword.For,
+                CSharpKeyword.Foreach,
+                CSharpKeyword.While,
+                CSharpKeyword.Switch,
+                CSharpKeyword.Lock
+            );
             MapKeywords(CaseStatement, false, CSharpKeyword.Case, CSharpKeyword.Default);
             MapKeywords(IfStatement, CSharpKeyword.If);
             MapKeywords(TryStatement, CSharpKeyword.Try);
@@ -28,7 +35,14 @@ namespace System.Web.Razor.Parser
 
         protected virtual void ReservedDirective(bool topLevel)
         {
-            Context.OnError(CurrentLocation, String.Format(CultureInfo.CurrentCulture, RazorResources.ParseError_ReservedWord, CurrentSymbol.Content));
+            Context.OnError(
+                CurrentLocation,
+                String.Format(
+                    CultureInfo.CurrentCulture,
+                    RazorResources.ParseError_ReservedWord,
+                    CurrentSymbol.Content
+                )
+            );
             AcceptAndMoveNext();
             Span.EditHandler.AcceptedCharacters = AcceptedCharacters.None;
             Span.CodeGenerator = SpanCodeGenerator.Null;
@@ -39,20 +53,27 @@ namespace System.Web.Razor.Parser
 
         private void KeywordBlock(bool topLevel)
         {
-            HandleKeyword(topLevel, () =>
-            {
-                Context.CurrentBlock.Type = BlockType.Expression;
-                Context.CurrentBlock.CodeGenerator = new ExpressionCodeGenerator();
-                ImplicitExpression();
-            });
+            HandleKeyword(
+                topLevel,
+                () =>
+                {
+                    Context.CurrentBlock.Type = BlockType.Expression;
+                    Context.CurrentBlock.CodeGenerator = new ExpressionCodeGenerator();
+                    ImplicitExpression();
+                }
+            );
         }
 
         private void CaseStatement(bool topLevel)
         {
             Assert(CSharpSymbolType.Keyword);
-            Debug.Assert(CurrentSymbol.Keyword != null &&
-                         (CurrentSymbol.Keyword.Value == CSharpKeyword.Case ||
-                          CurrentSymbol.Keyword.Value == CSharpKeyword.Default));
+            Debug.Assert(
+                CurrentSymbol.Keyword != null
+                    && (
+                        CurrentSymbol.Keyword.Value == CSharpKeyword.Case
+                        || CurrentSymbol.Keyword.Value == CSharpKeyword.Default
+                    )
+            );
             AcceptUntil(CSharpSymbolType.Colon);
             Optional(CSharpSymbolType.Colon);
         }
@@ -108,7 +129,10 @@ namespace System.Web.Razor.Parser
                 // using Identifier ==> Using Declaration
                 if (!topLevel)
                 {
-                    Context.OnError(block.Start, RazorResources.ParseError_NamespaceImportAndTypeAlias_Cannot_Exist_Within_CodeBlock);
+                    Context.OnError(
+                        block.Start,
+                        RazorResources.ParseError_NamespaceImportAndTypeAlias_Cannot_Exist_Within_CodeBlock
+                    );
                     StandardStatement();
                 }
                 else
@@ -131,7 +155,9 @@ namespace System.Web.Razor.Parser
             // Parse a type name
             Assert(CSharpSymbolType.Identifier);
             NamespaceOrTypeName();
-            IEnumerable<CSharpSymbol> ws = ReadWhile(IsSpacingToken(includeNewLines: true, includeComments: true));
+            IEnumerable<CSharpSymbol> ws = ReadWhile(
+                IsSpacingToken(includeNewLines: true, includeComments: true)
+            );
             if (At(CSharpSymbolType.Assign))
             {
                 // Alias
@@ -153,7 +179,8 @@ namespace System.Web.Razor.Parser
             Span.EditHandler.AcceptedCharacters = AcceptedCharacters.AnyExceptNewline;
             Span.CodeGenerator = new AddImportCodeGenerator(
                 Span.GetContent(syms => syms.Skip(1)), // Skip "using"
-                SyntaxConstants.CSharp.UsingKeywordLength);
+                SyntaxConstants.CSharp.UsingKeywordLength
+            );
 
             // Optional ";"
             if (EnsureCurrent())
@@ -318,10 +345,12 @@ namespace System.Web.Razor.Parser
                 // Check for "{" to make sure we're at a block
                 if (!At(CSharpSymbolType.LeftBrace))
                 {
-                    Context.OnError(CurrentLocation,
-                                    RazorResources.ParseError_SingleLine_ControlFlowStatements_Not_Allowed,
-                                    Language.GetSample(CSharpSymbolType.LeftBrace),
-                                    CurrentSymbol.Content);
+                    Context.OnError(
+                        CurrentLocation,
+                        RazorResources.ParseError_SingleLine_ControlFlowStatements_Not_Allowed,
+                        Language.GetSample(CSharpSymbolType.LeftBrace),
+                        CurrentSymbol.Content
+                    );
                 }
 
                 // Parse the statement and then we're done
@@ -366,7 +395,9 @@ namespace System.Web.Razor.Parser
         {
             if (At(CSharpSymbolType.LeftParenthesis))
             {
-                bool complete = Balance(BalancingModes.BacktrackOnFailure | BalancingModes.AllowCommentsAndTemplates);
+                bool complete = Balance(
+                    BalancingModes.BacktrackOnFailure | BalancingModes.AllowCommentsAndTemplates
+                );
                 if (!complete)
                 {
                     AcceptUntil(CSharpSymbolType.NewLine);
@@ -391,7 +422,13 @@ namespace System.Web.Razor.Parser
 
             // Accept whitespace but always keep the last whitespace node so we can put it back if necessary
             CSharpSymbol lastWs = AcceptWhiteSpaceInLines();
-            Debug.Assert(lastWs == null || (lastWs.Start.AbsoluteIndex + lastWs.Content.Length == CurrentLocation.AbsoluteIndex));
+            Debug.Assert(
+                lastWs == null
+                    || (
+                        lastWs.Start.AbsoluteIndex + lastWs.Content.Length
+                        == CurrentLocation.AbsoluteIndex
+                    )
+            );
 
             if (EndOfFile)
             {
@@ -405,10 +442,12 @@ namespace System.Web.Razor.Parser
             CSharpSymbolType type = CurrentSymbol.Type;
             SourceLocation loc = CurrentLocation;
 
-            bool isSingleLineMarkup = type == CSharpSymbolType.Transition && NextIs(CSharpSymbolType.Colon);
-            bool isMarkup = isSingleLineMarkup ||
-                            type == CSharpSymbolType.LessThan ||
-                            (type == CSharpSymbolType.Transition && NextIs(CSharpSymbolType.LessThan));
+            bool isSingleLineMarkup =
+                type == CSharpSymbolType.Transition && NextIs(CSharpSymbolType.Colon);
+            bool isMarkup =
+                isSingleLineMarkup
+                || type == CSharpSymbolType.LessThan
+                || (type == CSharpSymbolType.Transition && NextIs(CSharpSymbolType.LessThan));
 
             if (Context.DesignTimeMode || !isMarkup)
             {
@@ -429,12 +468,22 @@ namespace System.Web.Razor.Parser
             {
                 if (type == CSharpSymbolType.Transition && !isSingleLineMarkup)
                 {
-                    Context.OnError(loc, RazorResources.ParseError_AtInCode_Must_Be_Followed_By_Colon_Paren_Or_Identifier_Start);
+                    Context.OnError(
+                        loc,
+                        RazorResources.ParseError_AtInCode_Must_Be_Followed_By_Colon_Paren_Or_Identifier_Start
+                    );
                 }
 
                 // Markup block
                 Output(SpanKind.Code);
-                if (Context.DesignTimeMode && CurrentSymbol != null && (CurrentSymbol.Type == CSharpSymbolType.LessThan || CurrentSymbol.Type == CSharpSymbolType.Transition))
+                if (
+                    Context.DesignTimeMode
+                    && CurrentSymbol != null
+                    && (
+                        CurrentSymbol.Type == CSharpSymbolType.LessThan
+                        || CurrentSymbol.Type == CSharpSymbolType.Transition
+                    )
+                )
                 {
                     PutCurrentBack();
                 }
@@ -509,13 +558,18 @@ namespace System.Web.Razor.Parser
                 // Throw errors as necessary, but continue parsing
                 if (At(CSharpSymbolType.Keyword))
                 {
-                    Context.OnError(CurrentLocation,
-                                    RazorResources.ParseError_Unexpected_Keyword_After_At,
-                                    CSharpLanguageCharacteristics.GetKeyword(CurrentSymbol.Keyword.Value));
+                    Context.OnError(
+                        CurrentLocation,
+                        RazorResources.ParseError_Unexpected_Keyword_After_At,
+                        CSharpLanguageCharacteristics.GetKeyword(CurrentSymbol.Keyword.Value)
+                    );
                 }
                 else if (At(CSharpSymbolType.LeftBrace))
                 {
-                    Context.OnError(CurrentLocation, RazorResources.ParseError_Unexpected_Nested_CodeBlock);
+                    Context.OnError(
+                        CurrentLocation,
+                        RazorResources.ParseError_Unexpected_Nested_CodeBlock
+                    );
                 }
 
                 // @( or @foo - Nested expression, parse a child block
@@ -534,17 +588,28 @@ namespace System.Web.Razor.Parser
             while (!EndOfFile)
             {
                 int bookmark = CurrentLocation.AbsoluteIndex;
-                IEnumerable<CSharpSymbol> read = ReadWhile(sym => sym.Type != CSharpSymbolType.Semicolon &&
-                                                                  sym.Type != CSharpSymbolType.RazorCommentTransition &&
-                                                                  sym.Type != CSharpSymbolType.Transition &&
-                                                                  sym.Type != CSharpSymbolType.LeftBrace &&
-                                                                  sym.Type != CSharpSymbolType.LeftParenthesis &&
-                                                                  sym.Type != CSharpSymbolType.LeftBracket &&
-                                                                  sym.Type != CSharpSymbolType.RightBrace);
-                if (At(CSharpSymbolType.LeftBrace) || At(CSharpSymbolType.LeftParenthesis) || At(CSharpSymbolType.LeftBracket))
+                IEnumerable<CSharpSymbol> read = ReadWhile(sym =>
+                    sym.Type != CSharpSymbolType.Semicolon
+                    && sym.Type != CSharpSymbolType.RazorCommentTransition
+                    && sym.Type != CSharpSymbolType.Transition
+                    && sym.Type != CSharpSymbolType.LeftBrace
+                    && sym.Type != CSharpSymbolType.LeftParenthesis
+                    && sym.Type != CSharpSymbolType.LeftBracket
+                    && sym.Type != CSharpSymbolType.RightBrace
+                );
+                if (
+                    At(CSharpSymbolType.LeftBrace)
+                    || At(CSharpSymbolType.LeftParenthesis)
+                    || At(CSharpSymbolType.LeftBracket)
+                )
                 {
                     Accept(read);
-                    if (Balance(BalancingModes.AllowCommentsAndTemplates | BalancingModes.BacktrackOnFailure))
+                    if (
+                        Balance(
+                            BalancingModes.AllowCommentsAndTemplates
+                                | BalancingModes.BacktrackOnFailure
+                        )
+                    )
                     {
                         Optional(CSharpSymbolType.RightBrace);
                     }
@@ -555,7 +620,10 @@ namespace System.Web.Razor.Parser
                         return;
                     }
                 }
-                else if (At(CSharpSymbolType.Transition) && (NextIs(CSharpSymbolType.LessThan, CSharpSymbolType.Colon)))
+                else if (
+                    At(CSharpSymbolType.Transition)
+                    && (NextIs(CSharpSymbolType.LessThan, CSharpSymbolType.Colon))
+                )
                 {
                     Accept(read);
                     Output(SpanKind.Code);
@@ -604,7 +672,13 @@ namespace System.Web.Razor.Parser
 
             if (EndOfFile)
             {
-                Context.OnError(block.Start, RazorResources.ParseError_Expected_EndOfBlock_Before_EOF, block.Name, '}', '{');
+                Context.OnError(
+                    block.Start,
+                    RazorResources.ParseError_Expected_EndOfBlock_Before_EOF,
+                    block.Name,
+                    '}',
+                    '{'
+                );
             }
             else if (acceptTerminatingBrace)
             {
@@ -616,7 +690,9 @@ namespace System.Web.Razor.Parser
 
         private void HandleKeyword(bool topLevel, Action fallback)
         {
-            Debug.Assert(CurrentSymbol.Type == CSharpSymbolType.Keyword && CurrentSymbol.Keyword != null);
+            Debug.Assert(
+                CurrentSymbol.Type == CSharpSymbolType.Keyword && CurrentSymbol.Keyword != null
+            );
             Action<bool> handler;
             if (_keywordParsers.TryGetValue(CurrentSymbol.Keyword.Value, out handler))
             {
@@ -632,7 +708,9 @@ namespace System.Web.Razor.Parser
         {
             while (!EndOfFile)
             {
-                IEnumerable<CSharpSymbol> ws = ReadWhile(IsSpacingToken(includeNewLines: true, includeComments: true));
+                IEnumerable<CSharpSymbol> ws = ReadWhile(
+                    IsSpacingToken(includeNewLines: true, includeComments: true)
+                );
                 if (At(CSharpSymbolType.RazorCommentTransition))
                 {
                     Accept(ws);
@@ -663,9 +741,7 @@ namespace System.Web.Razor.Parser
             }
 
             public Block(CSharpSymbol symbol)
-                : this(GetName(symbol), symbol.Start)
-            {
-            }
+                : this(GetName(symbol), symbol.Start) { }
 
             public string Name { get; set; }
             public SourceLocation Start { get; set; }

@@ -2,9 +2,9 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
-using System.Threading;
 using System.Globalization;
 using System.Resources;
+using System.Threading;
 
 namespace LocalizedApp
 {
@@ -12,7 +12,7 @@ namespace LocalizedApp
     {
         static void Main()
         {
-            string [] cultures = { "kn-IN", "ta-IN", "en-US" };
+            string[] cultures = { "kn-IN", "ta-IN", "en-US" };
             string greeting = "";
             foreach (var culture in cultures)
             {

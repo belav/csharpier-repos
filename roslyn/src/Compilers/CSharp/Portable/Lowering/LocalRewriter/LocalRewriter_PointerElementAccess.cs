@@ -11,7 +11,9 @@ namespace Microsoft.CodeAnalysis.CSharp
     {
         public override BoundNode VisitPointerElementAccess(BoundPointerElementAccess node)
         {
-            BoundExpression rewrittenExpression = LowerReceiverOfPointerElementAccess(node.Expression);
+            BoundExpression rewrittenExpression = LowerReceiverOfPointerElementAccess(
+                node.Expression
+            );
             BoundExpression rewrittenIndex = VisitExpression(node.Index);
 
             return RewritePointerElementAccess(node, rewrittenExpression, rewrittenIndex);
@@ -19,17 +21,35 @@ namespace Microsoft.CodeAnalysis.CSharp
 
         private BoundExpression LowerReceiverOfPointerElementAccess(BoundExpression receiver)
         {
-            if (receiver is BoundFieldAccess fieldAccess && fieldAccess.FieldSymbol.IsFixedSizeBuffer)
+            if (
+                receiver is BoundFieldAccess fieldAccess
+                && fieldAccess.FieldSymbol.IsFixedSizeBuffer
+            )
             {
                 var loweredFieldReceiver = VisitExpression(fieldAccess.ReceiverOpt);
-                fieldAccess = fieldAccess.Update(loweredFieldReceiver, fieldAccess.FieldSymbol, fieldAccess.ConstantValueOpt, fieldAccess.ResultKind, fieldAccess.Type);
-                return new BoundAddressOfOperator(receiver.Syntax, fieldAccess, isManaged: true, fieldAccess.Type);
+                fieldAccess = fieldAccess.Update(
+                    loweredFieldReceiver,
+                    fieldAccess.FieldSymbol,
+                    fieldAccess.ConstantValueOpt,
+                    fieldAccess.ResultKind,
+                    fieldAccess.Type
+                );
+                return new BoundAddressOfOperator(
+                    receiver.Syntax,
+                    fieldAccess,
+                    isManaged: true,
+                    fieldAccess.Type
+                );
             }
 
             return VisitExpression(receiver);
         }
 
-        private BoundExpression RewritePointerElementAccess(BoundPointerElementAccess node, BoundExpression rewrittenExpression, BoundExpression rewrittenIndex)
+        private BoundExpression RewritePointerElementAccess(
+            BoundPointerElementAccess node,
+            BoundExpression rewrittenExpression,
+            BoundExpression rewrittenIndex
+        )
         {
             // Optimization: p[0] == *p
             if (rewrittenIndex.IsDefaultValue())
@@ -38,7 +58,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                     node.Syntax,
                     rewrittenExpression,
                     node.RefersToLocation,
-                    node.Type);
+                    node.Type
+                );
             }
 
             BinaryOperatorKind additionKind = BinaryOperatorKind.Addition;
@@ -78,9 +99,11 @@ namespace Microsoft.CodeAnalysis.CSharp
                     rewrittenExpression.Type,
                     method: null,
                     constrainedToTypeOpt: null,
-                    isPointerElementAccess: true), //see RewriterPointerNumericOperator
+                    isPointerElementAccess: true
+                ), //see RewriterPointerNumericOperator
                 node.RefersToLocation,
-                node.Type);
+                node.Type
+            );
         }
     }
 }

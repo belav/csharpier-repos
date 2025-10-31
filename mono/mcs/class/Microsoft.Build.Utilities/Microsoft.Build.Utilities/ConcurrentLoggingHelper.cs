@@ -25,88 +25,70 @@
 // OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-
 using System;
 using System.IO;
 using Microsoft.Build.Framework;
 
 namespace Microsoft.Build.Utilities
 {
-	public class ConcurrentLoggingHelper
-	{
-		bool			hasLoggedErrors;
-		MessageImportance	messageImportance;
-		StreamReader		messageStream;
-		TaskLoggingHelper	taskLog;
-		
-		public ConcurrentLoggingHelper ()
-			: this (null, null, MessageImportance.Normal)
-		{
-		}
-		
-		public ConcurrentLoggingHelper (TaskLoggingHelper taskLog,
-						StreamReader messageStream,
-						MessageImportance messageImportance)
-		{
-			this.taskLog = taskLog;
-			this.messageStream = messageStream;
-			this.messageImportance = messageImportance;
-			this.hasLoggedErrors = false;
-		}
-		
-		[MonoTODO]
-		public void AbortLogging ()
-		{
-		}
-		
-		[MonoTODO]
-		public void StartLogging ()
-		{
-		}
-		
-		[MonoTODO]
-		public void StopLogging ()
-		{
-		}
-		
-		[MonoTODO]
-		public bool StopLogging (TimeSpan timeout)
-		{
-			return true;
-		}
-		
-		public bool HasLoggedErrors {
-			get {
-				return hasLoggedErrors;
-			}
-		}
-		
-		public MessageImportance MessageImportance {
-			get {
-				return messageImportance;
-			}
-			set {
-				messageImportance = value;
-			}
-		}
-		
-		public StreamReader MessageStream {
-			get {
-				return messageStream;
-			}
-			set {
-				messageStream = value;
-			}
-		}
-		
-		public TaskLoggingHelper TaskLog {
-			get {
-				return taskLog;
-			}
-			set {
-				taskLog = value;
-			}
-		}
-	}
-}
+    public class ConcurrentLoggingHelper
+    {
+        bool hasLoggedErrors;
+        MessageImportance messageImportance;
+        StreamReader messageStream;
+        TaskLoggingHelper taskLog;
 
+        public ConcurrentLoggingHelper()
+            : this(null, null, MessageImportance.Normal) { }
+
+        public ConcurrentLoggingHelper(
+            TaskLoggingHelper taskLog,
+            StreamReader messageStream,
+            MessageImportance messageImportance
+        )
+        {
+            this.taskLog = taskLog;
+            this.messageStream = messageStream;
+            this.messageImportance = messageImportance;
+            this.hasLoggedErrors = false;
+        }
+
+        [MonoTODO]
+        public void AbortLogging() { }
+
+        [MonoTODO]
+        public void StartLogging() { }
+
+        [MonoTODO]
+        public void StopLogging() { }
+
+        [MonoTODO]
+        public bool StopLogging(TimeSpan timeout)
+        {
+            return true;
+        }
+
+        public bool HasLoggedErrors
+        {
+            get { return hasLoggedErrors; }
+        }
+
+        public MessageImportance MessageImportance
+        {
+            get { return messageImportance; }
+            set { messageImportance = value; }
+        }
+
+        public StreamReader MessageStream
+        {
+            get { return messageStream; }
+            set { messageStream = value; }
+        }
+
+        public TaskLoggingHelper TaskLog
+        {
+            get { return taskLog; }
+            set { taskLog = value; }
+        }
+    }
+}

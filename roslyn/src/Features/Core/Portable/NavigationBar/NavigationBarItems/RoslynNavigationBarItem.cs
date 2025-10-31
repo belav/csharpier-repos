@@ -29,7 +29,8 @@ namespace Microsoft.CodeAnalysis.NavigationBar
             bool bolded,
             bool grayed,
             int indent,
-            ImmutableArray<RoslynNavigationBarItem> childItems)
+            ImmutableArray<RoslynNavigationBarItem> childItems
+        )
         {
             Kind = kind;
             Text = text;
@@ -47,14 +48,14 @@ namespace Microsoft.CodeAnalysis.NavigationBar
 
         public bool Equals(RoslynNavigationBarItem? other)
         {
-            return other != null &&
-                   Kind == other.Kind &&
-                   Text == other.Text &&
-                   Glyph == other.Glyph &&
-                   Bolded == other.Bolded &&
-                   Grayed == other.Grayed &&
-                   Indent == other.Indent &&
-                   ChildItems.SequenceEqual(other.ChildItems);
+            return other != null
+                && Kind == other.Kind
+                && Text == other.Text
+                && Glyph == other.Glyph
+                && Bolded == other.Bolded
+                && Grayed == other.Grayed
+                && Indent == other.Indent
+                && ChildItems.SequenceEqual(other.ChildItems);
         }
     }
 }

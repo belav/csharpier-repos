@@ -25,11 +25,16 @@ namespace Microsoft.CodeAnalysis.Editing
         /// <summary>
         /// Gets the <see cref="DocumentEditor"/> for the corresponding <see cref="DocumentId"/>.
         /// </summary>
-        public async Task<DocumentEditor> GetDocumentEditorAsync(DocumentId id, CancellationToken cancellationToken = default)
+        public async Task<DocumentEditor> GetDocumentEditorAsync(
+            DocumentId id,
+            CancellationToken cancellationToken = default
+        )
         {
             if (!_documentEditors.TryGetValue(id, out var editor))
             {
-                editor = await DocumentEditor.CreateAsync(solution.GetDocument(id), cancellationToken).ConfigureAwait(false);
+                editor = await DocumentEditor
+                    .CreateAsync(solution.GetDocument(id), cancellationToken)
+                    .ConfigureAwait(false);
                 _documentEditors.Add(id, editor);
             }
 

@@ -10,21 +10,27 @@ using System.ServiceModel.Dispatcher;
 
 namespace System.ServiceModel.Routing.Configuration
 {
-	public class SoapProcessingExtensionElement : BehaviorExtensionElement
-	{
-		public override Type BehaviorType {
-			get { return typeof (SoapProcessingBehavior); }
-		}
+    public class SoapProcessingExtensionElement : BehaviorExtensionElement
+    {
+        public override Type BehaviorType
+        {
+            get { return typeof(SoapProcessingBehavior); }
+        }
 
-		[ConfigurationProperty ("processMessages", DefaultValue = true, Options = ConfigurationPropertyOptions.None)]
-		public bool ProcessMessages {
-			get { return (bool) base ["processMessages"]; }
-			set { base ["processMessages"] = value; }
-		}
+        [ConfigurationProperty(
+            "processMessages",
+            DefaultValue = true,
+            Options = ConfigurationPropertyOptions.None
+        )]
+        public bool ProcessMessages
+        {
+            get { return (bool)base["processMessages"]; }
+            set { base["processMessages"] = value; }
+        }
 
-		protected internal override object CreateBehavior ()
-		{
-			return new SoapProcessingBehavior () { ProcessMessages = this.ProcessMessages };
-		}
-	}
+        protected internal override object CreateBehavior()
+        {
+            return new SoapProcessingBehavior() { ProcessMessages = this.ProcessMessages };
+        }
+    }
 }

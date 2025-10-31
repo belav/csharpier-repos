@@ -4,17 +4,18 @@
 
 namespace System.ServiceModel.Channels
 {
-    using System.Xml;
-    using System.ServiceModel.Description;
     using System.Collections;
+    using System.ServiceModel.Description;
+    using System.Xml;
 
     public class CompositeDuplexBindingElementImporter : IPolicyImportExtension
     {
-        public CompositeDuplexBindingElementImporter()
-        {
-        }
+        public CompositeDuplexBindingElementImporter() { }
 
-        void IPolicyImportExtension.ImportPolicy(MetadataImporter importer, PolicyConversionContext context)
+        void IPolicyImportExtension.ImportPolicy(
+            MetadataImporter importer,
+            PolicyConversionContext context
+        )
         {
             if (importer == null)
             {
@@ -26,11 +27,20 @@ namespace System.ServiceModel.Channels
                 throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("context");
             }
 
-            XmlElement compositeDuplexAssertion = PolicyConversionContext.FindAssertion(context.GetBindingAssertions(),
-                TransportPolicyConstants.CompositeDuplex, TransportPolicyConstants.CompositeDuplexNamespace, true);
+            XmlElement compositeDuplexAssertion = PolicyConversionContext.FindAssertion(
+                context.GetBindingAssertions(),
+                TransportPolicyConstants.CompositeDuplex,
+                TransportPolicyConstants.CompositeDuplexNamespace,
+                true
+            );
 
-            if (compositeDuplexAssertion != null
-                || WsdlImporter.WSAddressingHelper.DetermineSupportedAddressingMode(importer, context) == SupportedAddressingMode.NonAnonymous)
+            if (
+                compositeDuplexAssertion != null
+                || WsdlImporter.WSAddressingHelper.DetermineSupportedAddressingMode(
+                    importer,
+                    context
+                ) == SupportedAddressingMode.NonAnonymous
+            )
             {
                 context.BindingElements.Add(new CompositeDuplexBindingElement());
             }

@@ -4,8 +4,8 @@
 
 #nullable disable
 
-using Microsoft.CodeAnalysis.Test.Utilities;
 using Microsoft.CodeAnalysis.CSharp.Test.Utilities;
+using Microsoft.CodeAnalysis.Test.Utilities;
 using Xunit;
 
 namespace Microsoft.CodeAnalysis.CSharp.UnitTests
@@ -19,7 +19,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         [Fact]
         public void WRN_NubExprIsConstBool2()
         {
-            var source = @"
+            var source =
+                @"
 class Program
 {
     public static void M(S s)
@@ -40,22 +41,37 @@ struct S
             {
                 // (6,13): warning CS8073: The result of the expression is always 'false' since a value of type 'S' is never equal to 'null' of type 'S?'
                 //         if (s == null) { }
-                Diagnostic(ErrorCode.WRN_NubExprIsConstBool2, "s == null").WithArguments("false", "S", "S?").WithLocation(6, 13),
+                Diagnostic(ErrorCode.WRN_NubExprIsConstBool2, "s == null")
+                    .WithArguments("false", "S", "S?")
+                    .WithLocation(6, 13),
                 // (7,13): warning CS8073: The result of the expression is always 'true' since a value of type 'S' is never equal to 'null' of type 'S?'
                 //         if (s != null) { }
-                Diagnostic(ErrorCode.WRN_NubExprIsConstBool2, "s != null").WithArguments("true", "S", "S?").WithLocation(7, 13)
+                Diagnostic(ErrorCode.WRN_NubExprIsConstBool2, "s != null")
+                    .WithArguments("true", "S", "S?")
+                    .WithLocation(7, 13),
             };
-            CreateCompilation(source, options: TestOptions.ReleaseDll.WithWarningLevel(CodeAnalysis.Diagnostic.DefaultWarningLevel)).VerifyDiagnostics();
-            CreateCompilation(source, options: TestOptions.ReleaseDll.WithWarningLevel(3)).VerifyDiagnostics();
-            CreateCompilation(source, options: TestOptions.ReleaseDll.WithWarningLevel(4)).VerifyDiagnostics();
-            CreateCompilation(source, options: TestOptions.ReleaseDll.WithWarningLevel(5)).VerifyDiagnostics(whenWave5);
-            CreateCompilation(source, options: TestOptions.ReleaseDll.WithWarningLevel(6)).VerifyDiagnostics(whenWave5);
+            CreateCompilation(
+                    source,
+                    options: TestOptions.ReleaseDll.WithWarningLevel(
+                        CodeAnalysis.Diagnostic.DefaultWarningLevel
+                    )
+                )
+                .VerifyDiagnostics();
+            CreateCompilation(source, options: TestOptions.ReleaseDll.WithWarningLevel(3))
+                .VerifyDiagnostics();
+            CreateCompilation(source, options: TestOptions.ReleaseDll.WithWarningLevel(4))
+                .VerifyDiagnostics();
+            CreateCompilation(source, options: TestOptions.ReleaseDll.WithWarningLevel(5))
+                .VerifyDiagnostics(whenWave5);
+            CreateCompilation(source, options: TestOptions.ReleaseDll.WithWarningLevel(6))
+                .VerifyDiagnostics(whenWave5);
         }
 
         [Fact]
         public void WRN_StaticInAsOrIs()
         {
-            var source = @"
+            var source =
+                @"
 class Program
 {
     public static void M(object o)
@@ -70,20 +86,33 @@ static class SC { }
             {
                 // (6,13): warning CS7023: The second operand of an 'is' or 'as' operator may not be static type 'SC'
                 //         if (o is SC)
-                Diagnostic(ErrorCode.WRN_StaticInAsOrIs, "o is SC").WithArguments("SC").WithLocation(6, 13),
+                Diagnostic(ErrorCode.WRN_StaticInAsOrIs, "o is SC")
+                    .WithArguments("SC")
+                    .WithLocation(6, 13),
                 // (7,17): warning CS7023: The second operand of an 'is' or 'as' operator may not be static type 'SC'
                 //             _ = o as SC;
-                Diagnostic(ErrorCode.WRN_StaticInAsOrIs, "o as SC").WithArguments("SC").WithLocation(7, 17)
+                Diagnostic(ErrorCode.WRN_StaticInAsOrIs, "o as SC")
+                    .WithArguments("SC")
+                    .WithLocation(7, 17),
             };
-            CreateCompilation(source, options: TestOptions.ReleaseDll.WithWarningLevel(CodeAnalysis.Diagnostic.DefaultWarningLevel)).VerifyDiagnostics();
-            CreateCompilation(source, options: TestOptions.ReleaseDll.WithWarningLevel(4)).VerifyDiagnostics();
-            CreateCompilation(source, options: TestOptions.ReleaseDll.WithWarningLevel(5)).VerifyDiagnostics(whenWave5);
+            CreateCompilation(
+                    source,
+                    options: TestOptions.ReleaseDll.WithWarningLevel(
+                        CodeAnalysis.Diagnostic.DefaultWarningLevel
+                    )
+                )
+                .VerifyDiagnostics();
+            CreateCompilation(source, options: TestOptions.ReleaseDll.WithWarningLevel(4))
+                .VerifyDiagnostics();
+            CreateCompilation(source, options: TestOptions.ReleaseDll.WithWarningLevel(5))
+                .VerifyDiagnostics(whenWave5);
         }
 
         [Fact]
         public void WRN_PrecedenceInversion()
         {
-            var source = @"
+            var source =
+                @"
 using System;
 
 class X
@@ -109,20 +138,33 @@ class P
             {
                 // (15,26): warning CS8848: Operator 'from' cannot be used here due to precedence. Use parentheses to disambiguate.
                 //         var b = false && from x in src select x;
-                Diagnostic(ErrorCode.WRN_PrecedenceInversion, "from x in src").WithArguments("from").WithLocation(15, 26),
+                Diagnostic(ErrorCode.WRN_PrecedenceInversion, "from x in src")
+                    .WithArguments("from")
+                    .WithLocation(15, 26),
                 // (20,24): warning CS8848: Operator '+' cannot be used here due to precedence. Use parentheses to disambiguate.
                 //         var i = ()=>{} + x;
-                Diagnostic(ErrorCode.WRN_PrecedenceInversion, "+").WithArguments("+").WithLocation(20, 24)
+                Diagnostic(ErrorCode.WRN_PrecedenceInversion, "+")
+                    .WithArguments("+")
+                    .WithLocation(20, 24),
             };
-            CreateCompilation(source, options: TestOptions.ReleaseDll.WithWarningLevel(CodeAnalysis.Diagnostic.DefaultWarningLevel)).VerifyDiagnostics();
-            CreateCompilation(source, options: TestOptions.ReleaseDll.WithWarningLevel(4)).VerifyDiagnostics();
-            CreateCompilation(source, options: TestOptions.ReleaseDll.WithWarningLevel(5)).VerifyDiagnostics(whenWave5);
+            CreateCompilation(
+                    source,
+                    options: TestOptions.ReleaseDll.WithWarningLevel(
+                        CodeAnalysis.Diagnostic.DefaultWarningLevel
+                    )
+                )
+                .VerifyDiagnostics();
+            CreateCompilation(source, options: TestOptions.ReleaseDll.WithWarningLevel(4))
+                .VerifyDiagnostics();
+            CreateCompilation(source, options: TestOptions.ReleaseDll.WithWarningLevel(5))
+                .VerifyDiagnostics(whenWave5);
         }
 
         [Fact]
         public void WRN_UnassignedThisAutoProperty()
         {
-            var source = @"
+            var source =
+                @"
 public struct Struct
 {
     private string data;
@@ -132,14 +174,15 @@ public struct Struct
             var moduleReference = new[] { comp1.EmitToImageReference() };
 
             var source2 =
-@"public struct Program
+                @"public struct Program
 {
     public Struct Property { get; }
     public Program(int dummy)
     {
     }
 }";
-            var expectedIL = @"
+            var expectedIL =
+                @"
 {
   // Code size       14 (0xe)
   .maxstack  1
@@ -154,9 +197,12 @@ public struct Struct
             var verifier = CompileAndVerify(
                 source2,
                 references: moduleReference,
-                options: TestOptions.DebugDll.WithWarningLevel(CodeAnalysis.Diagnostic.DefaultWarningLevel),
+                options: TestOptions.DebugDll.WithWarningLevel(
+                    CodeAnalysis.Diagnostic.DefaultWarningLevel
+                ),
                 parseOptions: TestOptions.Regular10,
-                verify: Verification.Skipped);
+                verify: Verification.Skipped
+            );
             verifier.VerifyDiagnostics();
             verifier.VerifyIL("Program..ctor", expectedIL);
 
@@ -165,11 +211,15 @@ public struct Struct
                 references: moduleReference,
                 options: TestOptions.DebugDll.WithWarningLevel(5),
                 parseOptions: TestOptions.Regular10,
-                verify: Verification.Skipped);
+                verify: Verification.Skipped
+            );
             verifier.VerifyDiagnostics(
                 // (4,12): warning CS8880: Auto-implemented property 'Program.Property' must be fully assigned before control is returned to the caller. Consider updating to language version '11.0' to auto-default the property.
                 //     public Program(int dummy)
-                Diagnostic(ErrorCode.WRN_UnassignedThisAutoPropertyUnsupportedVersion, "Program").WithArguments("Program.Property", "11.0").WithLocation(4, 12));
+                Diagnostic(ErrorCode.WRN_UnassignedThisAutoPropertyUnsupportedVersion, "Program")
+                    .WithArguments("Program.Property", "11.0")
+                    .WithLocation(4, 12)
+            );
             verifier.VerifyIL("Program..ctor", expectedIL);
 
             // C# 11+
@@ -178,29 +228,35 @@ public struct Struct
                 references: moduleReference,
                 options: TestOptions.DebugDll.WithWarningLevel(5),
                 parseOptions: TestOptions.Regular11,
-                verify: Verification.Skipped);
+                verify: Verification.Skipped
+            );
             verifier.VerifyDiagnostics();
             verifier.VerifyIL("Program..ctor", expectedIL);
 
             verifier = CompileAndVerify(
                 source2,
                 references: moduleReference,
-                options: TestOptions.DebugDll
-                    .WithWarningLevel(5)
+                options: TestOptions
+                    .DebugDll.WithWarningLevel(5)
                     .WithSpecificDiagnosticOptions(ReportStructInitializationWarnings),
                 parseOptions: TestOptions.Regular11,
-                verify: Verification.Skipped);
+                verify: Verification.Skipped
+            );
             verifier.VerifyDiagnostics(
                 // (4,12): warning CS9020: Control is returned to caller before auto-implemented property 'Program.Property' is explicitly assigned, causing a preceding implicit assignment of 'default'.
                 //     public Program(int dummy)
-                Diagnostic(ErrorCode.WRN_UnassignedThisAutoPropertySupportedVersion, "Program").WithArguments("Program.Property").WithLocation(4, 12));
+                Diagnostic(ErrorCode.WRN_UnassignedThisAutoPropertySupportedVersion, "Program")
+                    .WithArguments("Program.Property")
+                    .WithLocation(4, 12)
+            );
             verifier.VerifyIL("Program..ctor", expectedIL);
         }
 
         [Fact]
         public void WRN_UnassignedThis()
         {
-            var source = @"
+            var source =
+                @"
 public struct Struct
 {
     private string data;
@@ -210,14 +266,15 @@ public struct Struct
             var moduleReference = new[] { comp1.EmitToImageReference() };
 
             var source2 =
-@"public struct Program
+                @"public struct Program
 {
     public Struct Field;
     public Program(int dummy)
     {
     }
 }";
-            var expectedIL = @"
+            var expectedIL =
+                @"
 {
   // Code size       14 (0xe)
   .maxstack  1
@@ -232,9 +289,12 @@ public struct Struct
             var verifier = CompileAndVerify(
                 source2,
                 references: moduleReference,
-                options: TestOptions.DebugDll.WithWarningLevel(CodeAnalysis.Diagnostic.DefaultWarningLevel),
+                options: TestOptions.DebugDll.WithWarningLevel(
+                    CodeAnalysis.Diagnostic.DefaultWarningLevel
+                ),
                 parseOptions: TestOptions.Regular10,
-                verify: Verification.Skipped);
+                verify: Verification.Skipped
+            );
             verifier.VerifyDiagnostics();
             verifier.VerifyIL("Program..ctor", expectedIL);
 
@@ -243,43 +303,52 @@ public struct Struct
                 references: moduleReference,
                 options: TestOptions.DebugDll.WithWarningLevel(5),
                 parseOptions: TestOptions.Regular10,
-                verify: Verification.Skipped);
+                verify: Verification.Skipped
+            );
             verifier.VerifyDiagnostics(
                 // (4,12): warning CS8881: Field 'Program.Field' must be fully assigned before control is returned to the caller. Consider updating to language version '11.0' to auto-default the field.
                 //     public Program(int dummy)
-                Diagnostic(ErrorCode.WRN_UnassignedThisUnsupportedVersion, "Program").WithArguments("Program.Field", "11.0").WithLocation(4, 12));
+                Diagnostic(ErrorCode.WRN_UnassignedThisUnsupportedVersion, "Program")
+                    .WithArguments("Program.Field", "11.0")
+                    .WithLocation(4, 12)
+            );
             verifier.VerifyIL("Program..ctor", expectedIL);
 
             // C# 11+
             verifier = CompileAndVerify(
                 source2,
                 references: moduleReference,
-                options: TestOptions.DebugDll
-                    .WithWarningLevel(5),
+                options: TestOptions.DebugDll.WithWarningLevel(5),
                 parseOptions: TestOptions.Regular11,
-                verify: Verification.Skipped);
+                verify: Verification.Skipped
+            );
             verifier.VerifyDiagnostics();
             verifier.VerifyIL("Program..ctor", expectedIL);
 
             verifier = CompileAndVerify(
                 source2,
                 references: moduleReference,
-                options: TestOptions.DebugDll
-                    .WithWarningLevel(5)
+                options: TestOptions
+                    .DebugDll.WithWarningLevel(5)
                     .WithSpecificDiagnosticOptions(ReportStructInitializationWarnings),
                 parseOptions: TestOptions.Regular11,
-                verify: Verification.Skipped);
+                verify: Verification.Skipped
+            );
             verifier.VerifyDiagnostics(
                 // (4,12): warning CS9021: Control is returned to caller before field 'Program.Field' is explicitly assigned, causing a preceding implicit assignment of 'default'.
                 //     public Program(int dummy)
-                Diagnostic(ErrorCode.WRN_UnassignedThisSupportedVersion, "Program").WithArguments("Program.Field").WithLocation(4, 12));
+                Diagnostic(ErrorCode.WRN_UnassignedThisSupportedVersion, "Program")
+                    .WithArguments("Program.Field")
+                    .WithLocation(4, 12)
+            );
             verifier.VerifyIL("Program..ctor", expectedIL);
         }
 
         [Fact]
         public void UnassignedThisField_And_UnassignedLocal()
         {
-            var source = @"
+            var source =
+                @"
 public struct Struct
 {
     private string data;
@@ -289,7 +358,7 @@ public struct Struct
             var moduleReference = new[] { comp1.EmitToImageReference() };
 
             var source2 =
-@"public struct Program
+                @"public struct Program
 {
     public Struct Field;
     public Program(int dummy)
@@ -298,7 +367,8 @@ public struct Struct
         s.ToString();
     }
 }";
-            var expectedIL = @"
+            var expectedIL =
+                @"
 {
   // Code size       28 (0x1c)
   .maxstack  1
@@ -318,9 +388,12 @@ public struct Struct
             var verifier = CompileAndVerify(
                 source2,
                 references: moduleReference,
-                options: TestOptions.DebugDll.WithWarningLevel(CodeAnalysis.Diagnostic.DefaultWarningLevel),
+                options: TestOptions.DebugDll.WithWarningLevel(
+                    CodeAnalysis.Diagnostic.DefaultWarningLevel
+                ),
                 parseOptions: TestOptions.Regular10,
-                verify: Verification.Skipped);
+                verify: Verification.Skipped
+            );
             verifier.VerifyDiagnostics();
             verifier.VerifyIL("Program..ctor", expectedIL);
 
@@ -329,14 +402,20 @@ public struct Struct
                 references: moduleReference,
                 options: TestOptions.DebugDll.WithWarningLevel(5),
                 parseOptions: TestOptions.Regular10,
-                verify: Verification.Skipped);
+                verify: Verification.Skipped
+            );
             verifier.VerifyDiagnostics(
                 // (4,12): warning CS8881: Field 'Program.Field' must be fully assigned before control is returned to the caller. Consider updating to language version '11.0' to auto-default the field.
                 //     public Program(int dummy)
-                Diagnostic(ErrorCode.WRN_UnassignedThisUnsupportedVersion, "Program").WithArguments("Program.Field", "11.0").WithLocation(4, 12),
+                Diagnostic(ErrorCode.WRN_UnassignedThisUnsupportedVersion, "Program")
+                    .WithArguments("Program.Field", "11.0")
+                    .WithLocation(4, 12),
                 // (7,9): warning CS8887: Use of unassigned local variable 's'
                 //         s.ToString();
-                Diagnostic(ErrorCode.WRN_UseDefViolation, "s").WithArguments("s").WithLocation(7, 9));
+                Diagnostic(ErrorCode.WRN_UseDefViolation, "s")
+                    .WithArguments("s")
+                    .WithLocation(7, 9)
+            );
             verifier.VerifyIL("Program..ctor", expectedIL);
 
             // C# 11+
@@ -345,35 +424,46 @@ public struct Struct
                 references: moduleReference,
                 options: TestOptions.DebugDll.WithWarningLevel(5),
                 parseOptions: TestOptions.Regular11,
-                verify: Verification.Skipped);
+                verify: Verification.Skipped
+            );
             verifier.VerifyDiagnostics(
                 // (7,9): warning CS8887: Use of unassigned local variable 's'
                 //         s.ToString();
-                Diagnostic(ErrorCode.WRN_UseDefViolation, "s").WithArguments("s").WithLocation(7, 9));
+                Diagnostic(ErrorCode.WRN_UseDefViolation, "s")
+                    .WithArguments("s")
+                    .WithLocation(7, 9)
+            );
             verifier.VerifyIL("Program..ctor", expectedIL);
 
             verifier = CompileAndVerify(
                 source2,
                 references: moduleReference,
-                options: TestOptions.DebugDll
-                    .WithWarningLevel(5)
+                options: TestOptions
+                    .DebugDll.WithWarningLevel(5)
                     .WithSpecificDiagnosticOptions(ReportStructInitializationWarnings),
                 parseOptions: TestOptions.Regular11,
-                verify: Verification.Skipped);
+                verify: Verification.Skipped
+            );
             verifier.VerifyDiagnostics(
                 // (4,12): warning CS9021: Control is returned to caller before field 'Program.Field' is explicitly assigned, causing a preceding implicit assignment of 'default'.
                 //     public Program(int dummy)
-                Diagnostic(ErrorCode.WRN_UnassignedThisSupportedVersion, "Program").WithArguments("Program.Field").WithLocation(4, 12),
+                Diagnostic(ErrorCode.WRN_UnassignedThisSupportedVersion, "Program")
+                    .WithArguments("Program.Field")
+                    .WithLocation(4, 12),
                 // (7,9): warning CS8887: Use of unassigned local variable 's'
                 //         s.ToString();
-                Diagnostic(ErrorCode.WRN_UseDefViolation, "s").WithArguments("s").WithLocation(7, 9));
+                Diagnostic(ErrorCode.WRN_UseDefViolation, "s")
+                    .WithArguments("s")
+                    .WithLocation(7, 9)
+            );
             verifier.VerifyIL("Program..ctor", expectedIL);
         }
 
         [Fact]
         public void WRN_ParamUnassigned()
         {
-            var source = @"
+            var source =
+                @"
 public struct Struct
 {
     private string data;
@@ -383,25 +473,39 @@ public struct Struct
             var moduleReference = comp1.EmitToImageReference();
 
             var source2 =
-@"public class Program
+                @"public class Program
 {
     void M(out Struct param)
     {
     }
 }";
-            CreateCompilation(source2, references: new MetadataReference[] { moduleReference }, options: TestOptions.ReleaseDll.WithWarningLevel(CodeAnalysis.Diagnostic.DefaultWarningLevel)).VerifyDiagnostics(
-                );
-            CreateCompilation(source2, references: new MetadataReference[] { moduleReference }, options: TestOptions.ReleaseDll.WithWarningLevel(5)).VerifyDiagnostics(
-                // (3,10): warning CS8824: The out parameter 'param' must be assigned to before control leaves the current method
-                //     void M(out Struct param)
-                Diagnostic(ErrorCode.WRN_ParamUnassigned, "M").WithArguments("param").WithLocation(3, 10)
+            CreateCompilation(
+                    source2,
+                    references: new MetadataReference[] { moduleReference },
+                    options: TestOptions.ReleaseDll.WithWarningLevel(
+                        CodeAnalysis.Diagnostic.DefaultWarningLevel
+                    )
+                )
+                .VerifyDiagnostics();
+            CreateCompilation(
+                    source2,
+                    references: new MetadataReference[] { moduleReference },
+                    options: TestOptions.ReleaseDll.WithWarningLevel(5)
+                )
+                .VerifyDiagnostics(
+                    // (3,10): warning CS8824: The out parameter 'param' must be assigned to before control leaves the current method
+                    //     void M(out Struct param)
+                    Diagnostic(ErrorCode.WRN_ParamUnassigned, "M")
+                        .WithArguments("param")
+                        .WithLocation(3, 10)
                 );
         }
 
         [Fact]
         public void WRN_UseDefViolationProperty()
         {
-            var source = @"
+            var source =
+                @"
 public struct Struct
 {
     private string data;
@@ -411,7 +515,7 @@ public struct Struct
             var moduleReference = new[] { comp1.EmitToImageReference() };
 
             var source2 =
-@"public struct Program
+                @"public struct Program
 {
     public Struct Property { get; }
     Program(int dummy)
@@ -420,7 +524,8 @@ public struct Struct
         Property = default;
     }
 }";
-            var expectedIL = @"
+            var expectedIL =
+                @"
 {
   // Code size       33 (0x21)
   .maxstack  1
@@ -442,9 +547,12 @@ public struct Struct
             var verifier = CompileAndVerify(
                 source2,
                 references: moduleReference,
-                options: TestOptions.DebugDll.WithWarningLevel(CodeAnalysis.Diagnostic.DefaultWarningLevel),
+                options: TestOptions.DebugDll.WithWarningLevel(
+                    CodeAnalysis.Diagnostic.DefaultWarningLevel
+                ),
                 parseOptions: TestOptions.Regular10,
-                verify: Verification.Skipped);
+                verify: Verification.Skipped
+            );
             verifier.VerifyDiagnostics();
             verifier.VerifyIL("Program..ctor", expectedIL);
 
@@ -453,11 +561,15 @@ public struct Struct
                 references: moduleReference,
                 options: TestOptions.DebugDll.WithWarningLevel(5),
                 parseOptions: TestOptions.Regular10,
-                verify: Verification.Skipped);
+                verify: Verification.Skipped
+            );
             verifier.VerifyDiagnostics(
                 // (6,21): warning CS9016: Use of possibly unassigned auto-implemented property 'Property'. Consider updating to language version '11.0' to auto-default the property.
                 //         Struct v2 = Property;
-                Diagnostic(ErrorCode.WRN_UseDefViolationPropertyUnsupportedVersion, "Property").WithArguments("Property", "11.0").WithLocation(6, 21));
+                Diagnostic(ErrorCode.WRN_UseDefViolationPropertyUnsupportedVersion, "Property")
+                    .WithArguments("Property", "11.0")
+                    .WithLocation(6, 21)
+            );
             verifier.VerifyIL("Program..ctor", expectedIL);
 
             // C# 11+
@@ -466,29 +578,35 @@ public struct Struct
                 references: moduleReference,
                 options: TestOptions.DebugDll.WithWarningLevel(5),
                 parseOptions: TestOptions.Regular11,
-                verify: Verification.Skipped);
+                verify: Verification.Skipped
+            );
             verifier.VerifyDiagnostics();
             verifier.VerifyIL("Program..ctor", expectedIL);
 
             verifier = CompileAndVerify(
                 source2,
                 references: moduleReference,
-                options: TestOptions.DebugDll
-                    .WithWarningLevel(5)
+                options: TestOptions
+                    .DebugDll.WithWarningLevel(5)
                     .WithSpecificDiagnosticOptions(ReportStructInitializationWarnings),
                 parseOptions: TestOptions.Regular11,
-                verify: Verification.Skipped);
+                verify: Verification.Skipped
+            );
             verifier.VerifyDiagnostics(
                 // (6,21): warning CS9014: Use of possibly unassigned auto-implemented property 'Property'
                 //         Struct v2 = Property;
-                Diagnostic(ErrorCode.WRN_UseDefViolationPropertySupportedVersion, "Property").WithArguments("Property").WithLocation(6, 21));
+                Diagnostic(ErrorCode.WRN_UseDefViolationPropertySupportedVersion, "Property")
+                    .WithArguments("Property")
+                    .WithLocation(6, 21)
+            );
             verifier.VerifyIL("Program..ctor", expectedIL);
         }
 
         [Fact]
         public void WRN_UseDefViolationField()
         {
-            var source = @"
+            var source =
+                @"
 public struct Struct
 {
     private string data;
@@ -498,7 +616,7 @@ public struct Struct
             var moduleReference = new[] { comp1.EmitToImageReference() };
 
             var source2 =
-@"public struct Program
+                @"public struct Program
 {
     public Struct Field;
     Program(int dummy)
@@ -507,7 +625,8 @@ public struct Struct
         Field = default;
     }
 }";
-            var expectedIL = @"
+            var expectedIL =
+                @"
 {
   // Code size       33 (0x21)
   .maxstack  1
@@ -529,9 +648,12 @@ public struct Struct
             var verifier = CompileAndVerify(
                 source2,
                 references: moduleReference,
-                options: TestOptions.DebugDll.WithWarningLevel(CodeAnalysis.Diagnostic.DefaultWarningLevel),
+                options: TestOptions.DebugDll.WithWarningLevel(
+                    CodeAnalysis.Diagnostic.DefaultWarningLevel
+                ),
                 parseOptions: TestOptions.Regular10,
-                verify: Verification.Skipped);
+                verify: Verification.Skipped
+            );
             verifier.VerifyDiagnostics();
             verifier.VerifyIL("Program..ctor", expectedIL);
 
@@ -540,11 +662,15 @@ public struct Struct
                 references: moduleReference,
                 options: TestOptions.DebugDll.WithWarningLevel(5),
                 parseOptions: TestOptions.Regular10,
-                verify: Verification.Skipped);
+                verify: Verification.Skipped
+            );
             verifier.VerifyDiagnostics(
                 // (6,21): warning CS9017: Use of possibly unassigned field 'Field'. Consider updating to language version '11.0' to auto-default the field.
                 //         Struct v2 = Field;
-                Diagnostic(ErrorCode.WRN_UseDefViolationFieldUnsupportedVersion, "Field").WithArguments("Field", "11.0").WithLocation(6, 21));
+                Diagnostic(ErrorCode.WRN_UseDefViolationFieldUnsupportedVersion, "Field")
+                    .WithArguments("Field", "11.0")
+                    .WithLocation(6, 21)
+            );
             verifier.VerifyIL("Program..ctor", expectedIL);
 
             // C# 11+
@@ -553,29 +679,35 @@ public struct Struct
                 references: moduleReference,
                 options: TestOptions.DebugDll.WithWarningLevel(5),
                 parseOptions: TestOptions.Regular11,
-                verify: Verification.Skipped);
+                verify: Verification.Skipped
+            );
             verifier.VerifyDiagnostics();
 
             verifier.VerifyIL("Program..ctor", expectedIL);
             verifier = CompileAndVerify(
                 source2,
                 references: moduleReference,
-                options: TestOptions.DebugDll
-                    .WithWarningLevel(5)
+                options: TestOptions
+                    .DebugDll.WithWarningLevel(5)
                     .WithSpecificDiagnosticOptions(ReportStructInitializationWarnings),
                 parseOptions: TestOptions.Regular11,
-                verify: Verification.Skipped);
+                verify: Verification.Skipped
+            );
             verifier.VerifyDiagnostics(
                 // (6,21): warning CS9014: Use of possibly unassigned field 'Field'
                 //         Struct v2 = Field;
-                Diagnostic(ErrorCode.WRN_UseDefViolationFieldSupportedVersion, "Field").WithArguments("Field").WithLocation(6, 21));
+                Diagnostic(ErrorCode.WRN_UseDefViolationFieldSupportedVersion, "Field")
+                    .WithArguments("Field")
+                    .WithLocation(6, 21)
+            );
             verifier.VerifyIL("Program..ctor", expectedIL);
         }
 
         [Fact]
         public void WRN_UseDefViolationThis()
         {
-            var source = @"
+            var source =
+                @"
 public struct Struct
 {
     private string data;
@@ -585,7 +717,7 @@ public struct Struct
             var moduleReference = new[] { comp1.EmitToImageReference() };
 
             var source2 =
-@"public struct Program
+                @"public struct Program
 {
     public Struct Field;
     Program(int dummy)
@@ -594,7 +726,8 @@ public struct Struct
         this.Field = default;
     }
 }";
-            var expectedIL = @"
+            var expectedIL =
+                @"
 {
   // Code size       33 (0x21)
   .maxstack  1
@@ -616,9 +749,12 @@ public struct Struct
             var verifier = CompileAndVerify(
                 source2,
                 references: moduleReference,
-                options: TestOptions.DebugDll.WithWarningLevel(CodeAnalysis.Diagnostic.DefaultWarningLevel),
+                options: TestOptions.DebugDll.WithWarningLevel(
+                    CodeAnalysis.Diagnostic.DefaultWarningLevel
+                ),
                 parseOptions: TestOptions.Regular10,
-                verify: Verification.Skipped);
+                verify: Verification.Skipped
+            );
             verifier.VerifyDiagnostics();
             verifier.VerifyIL("Program..ctor", expectedIL);
 
@@ -627,11 +763,15 @@ public struct Struct
                 references: moduleReference,
                 options: TestOptions.DebugDll.WithWarningLevel(5),
                 parseOptions: TestOptions.Regular10,
-                verify: Verification.Skipped);
+                verify: Verification.Skipped
+            );
             verifier.VerifyDiagnostics(
                 // (6,22): warning CS8885: The 'this' object cannot be used before all of its fields have been assigned. Consider updating to language version '11.0' to auto-default the unassigned fields.
                 //         Program p2 = this;
-                Diagnostic(ErrorCode.WRN_UseDefViolationThisUnsupportedVersion, "this").WithArguments("11.0").WithLocation(6, 22));
+                Diagnostic(ErrorCode.WRN_UseDefViolationThisUnsupportedVersion, "this")
+                    .WithArguments("11.0")
+                    .WithLocation(6, 22)
+            );
             verifier.VerifyIL("Program..ctor", expectedIL);
 
             // C# 11+
@@ -640,29 +780,34 @@ public struct Struct
                 references: moduleReference,
                 options: TestOptions.DebugDll.WithWarningLevel(5),
                 parseOptions: TestOptions.Regular11,
-                verify: Verification.Skipped);
+                verify: Verification.Skipped
+            );
             verifier.VerifyDiagnostics();
             verifier.VerifyIL("Program..ctor", expectedIL);
 
             verifier = CompileAndVerify(
                 source2,
                 references: moduleReference,
-                options: TestOptions.DebugDll
-                    .WithWarningLevel(5)
+                options: TestOptions
+                    .DebugDll.WithWarningLevel(5)
                     .WithSpecificDiagnosticOptions(ReportStructInitializationWarnings),
                 parseOptions: TestOptions.Regular11,
-                verify: Verification.Skipped);
+                verify: Verification.Skipped
+            );
             verifier.VerifyDiagnostics(
                 // (6,22): warning CS9020: The 'this' object is read before all of its fields have been assigned, causing preceding implicit assignments of 'default' to non-explicitly assigned fields.
                 //         Program p2 = this;
-                Diagnostic(ErrorCode.WRN_UseDefViolationThisSupportedVersion, "this").WithLocation(6, 22));
+                Diagnostic(ErrorCode.WRN_UseDefViolationThisSupportedVersion, "this")
+                    .WithLocation(6, 22)
+            );
             verifier.VerifyIL("Program..ctor", expectedIL);
         }
 
         [Fact]
         public void WRN_UseDefViolationOut()
         {
-            var source = @"
+            var source =
+                @"
 public struct Struct
 {
     private string data;
@@ -672,7 +817,7 @@ public struct Struct
             var moduleReference = comp1.EmitToImageReference();
 
             var source2 =
-@"class Program
+                @"class Program
 {
     public static void M(out Struct r1)
     {
@@ -680,19 +825,33 @@ public struct Struct
         r1 = default;
     }
 }";
-            CreateCompilation(source2, references: new MetadataReference[] { moduleReference }, options: TestOptions.ReleaseDll.WithWarningLevel(CodeAnalysis.Diagnostic.DefaultWarningLevel)).VerifyDiagnostics(
-                );
-            CreateCompilation(source2, references: new MetadataReference[] { moduleReference }, options: TestOptions.ReleaseDll.WithWarningLevel(5)).VerifyDiagnostics(
-                // (5,18): warning CS8828: Use of unassigned out parameter 'r1'
-                //         var r2 = r1;
-                Diagnostic(ErrorCode.WRN_UseDefViolationOut, "r1").WithArguments("r1").WithLocation(5, 18)
+            CreateCompilation(
+                    source2,
+                    references: new MetadataReference[] { moduleReference },
+                    options: TestOptions.ReleaseDll.WithWarningLevel(
+                        CodeAnalysis.Diagnostic.DefaultWarningLevel
+                    )
+                )
+                .VerifyDiagnostics();
+            CreateCompilation(
+                    source2,
+                    references: new MetadataReference[] { moduleReference },
+                    options: TestOptions.ReleaseDll.WithWarningLevel(5)
+                )
+                .VerifyDiagnostics(
+                    // (5,18): warning CS8828: Use of unassigned out parameter 'r1'
+                    //         var r2 = r1;
+                    Diagnostic(ErrorCode.WRN_UseDefViolationOut, "r1")
+                        .WithArguments("r1")
+                        .WithLocation(5, 18)
                 );
         }
 
         [Fact]
         public void WRN_UseDefViolation()
         {
-            var source = @"
+            var source =
+                @"
 public struct Struct
 {
     private string data;
@@ -702,7 +861,7 @@ public struct Struct
             var moduleReference = comp1.EmitToImageReference();
 
             var source2 =
-@"class Program
+                @"class Program
 {
     public static void Main()
     {
@@ -710,12 +869,25 @@ public struct Struct
         var r2 = r1;
     }
 }";
-            CreateCompilation(source2, references: new MetadataReference[] { moduleReference }, options: TestOptions.ReleaseDll.WithWarningLevel(CodeAnalysis.Diagnostic.DefaultWarningLevel)).VerifyDiagnostics(
-                );
-            CreateCompilation(source2, references: new MetadataReference[] { moduleReference }, options: TestOptions.ReleaseDll.WithWarningLevel(5)).VerifyDiagnostics(
-                // (6,18): warning CS8829: Use of unassigned local variable 'r1'
-                //         var r2 = r1;
-                Diagnostic(ErrorCode.WRN_UseDefViolation, "r1").WithArguments("r1").WithLocation(6, 18)
+            CreateCompilation(
+                    source2,
+                    references: new MetadataReference[] { moduleReference },
+                    options: TestOptions.ReleaseDll.WithWarningLevel(
+                        CodeAnalysis.Diagnostic.DefaultWarningLevel
+                    )
+                )
+                .VerifyDiagnostics();
+            CreateCompilation(
+                    source2,
+                    references: new MetadataReference[] { moduleReference },
+                    options: TestOptions.ReleaseDll.WithWarningLevel(5)
+                )
+                .VerifyDiagnostics(
+                    // (6,18): warning CS8829: Use of unassigned local variable 'r1'
+                    //         var r2 = r1;
+                    Diagnostic(ErrorCode.WRN_UseDefViolation, "r1")
+                        .WithArguments("r1")
+                        .WithLocation(6, 18)
                 );
         }
     }

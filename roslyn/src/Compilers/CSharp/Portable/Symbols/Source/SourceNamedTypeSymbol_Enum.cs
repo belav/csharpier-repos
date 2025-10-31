@@ -28,8 +28,14 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 if (ReferenceEquals(_lazyEnumUnderlyingType, ErrorTypeSymbol.UnknownResultType))
                 {
                     BindingDiagnosticBag diagnostics = BindingDiagnosticBag.GetInstance();
-                    if ((object)Interlocked.CompareExchange(ref _lazyEnumUnderlyingType, this.GetEnumUnderlyingType(diagnostics), ErrorTypeSymbol.UnknownResultType) ==
-                        (object)ErrorTypeSymbol.UnknownResultType)
+                    if (
+                        (object)
+                            Interlocked.CompareExchange(
+                                ref _lazyEnumUnderlyingType,
+                                this.GetEnumUnderlyingType(diagnostics),
+                                ErrorTypeSymbol.UnknownResultType
+                            ) == (object)ErrorTypeSymbol.UnknownResultType
+                    )
                     {
                         AddDeclarationDiagnostics(diagnostics);
                         this.state.NotePartComplete(CompletionPart.EnumUnderlyingType);
@@ -73,7 +79,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 }
             }
 
-            NamedTypeSymbol defaultUnderlyingType = compilation.GetSpecialType(SpecialType.System_Int32);
+            NamedTypeSymbol defaultUnderlyingType = compilation.GetSpecialType(
+                SpecialType.System_Int32
+            );
             Binder.ReportUseSite(defaultUnderlyingType, diagnostics, this.GetFirstLocation());
             return defaultUnderlyingType;
         }
@@ -94,7 +102,11 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 if ((object)_lazyEnumValueField == null)
                 {
                     Debug.Assert((object)this.EnumUnderlyingType != null);
-                    Interlocked.CompareExchange(ref _lazyEnumValueField, new SynthesizedEnumValueFieldSymbol(this), null);
+                    Interlocked.CompareExchange(
+                        ref _lazyEnumValueField,
+                        new SynthesizedEnumValueFieldSymbol(this),
+                        null
+                    );
                 }
 
                 return _lazyEnumValueField;

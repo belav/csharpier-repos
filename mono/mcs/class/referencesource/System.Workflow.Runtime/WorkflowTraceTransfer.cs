@@ -1,7 +1,7 @@
 using System;
+using System.Diagnostics;
 using System.IO;
 using System.Threading;
-using System.Diagnostics;
 
 /// <summary>
 /// Summary description for Class1
@@ -19,11 +19,7 @@ namespace System.Workflow.Runtime
 
             if (!this.oldGuid.Equals(instanceId)) //Avoid redundant transfers.
             {
-                WorkflowTrace.Runtime.TraceTransfer(
-                    0,
-                    null,
-                    instanceId
-                    );
+                WorkflowTrace.Runtime.TraceTransfer(0, null, instanceId);
                 Trace.CorrelationManager.ActivityId = instanceId;
                 WorkflowTrace.Runtime.TraceEvent(TraceEventType.Start, 0, "Workflow Trace");
                 this.transferBackAtClose = true;
@@ -36,11 +32,7 @@ namespace System.Workflow.Runtime
         {
             if (this.transferBackAtClose)
             {
-                WorkflowTrace.Runtime.TraceTransfer(
-                     0,
-                     null,
-                     oldGuid
-                     );
+                WorkflowTrace.Runtime.TraceTransfer(0, null, oldGuid);
                 WorkflowTrace.Runtime.TraceEvent(TraceEventType.Stop, 0, "Workflow Trace");
                 Trace.CorrelationManager.ActivityId = oldGuid;
             }

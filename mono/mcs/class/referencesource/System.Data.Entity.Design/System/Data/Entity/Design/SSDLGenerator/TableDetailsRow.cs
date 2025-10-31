@@ -7,10 +7,10 @@
 // @backupOwner Microsoft
 //---------------------------------------------------------------------
 using System.Collections.Generic;
-using System.Xml;
+using System.Data;
 using System.Data.Entity.Design.Common;
 using System.Globalization;
-using System.Data;
+using System.Xml;
 
 namespace System.Data.Entity.Design.SsdlGenerator
 {
@@ -19,13 +19,11 @@ namespace System.Data.Entity.Design.SsdlGenerator
     /// </summary>
     internal sealed class TableDetailsRow : System.Data.DataRow
     {
-
         private TableDetailsCollection _tableTableDetails;
 
         [System.Diagnostics.DebuggerNonUserCodeAttribute()]
         internal TableDetailsRow(System.Data.DataRowBuilder rb)
-            :
-                base(rb)
+            : base(rb)
         {
             this._tableTableDetails = ((TableDetailsCollection)(base.Table));
         }
@@ -35,10 +33,7 @@ namespace System.Data.Entity.Design.SsdlGenerator
         /// </summary>
         public new TableDetailsCollection Table
         {
-            get
-            {
-                return _tableTableDetails;
-            }
+            get { return _tableTableDetails; }
         }
 
         /// <summary>
@@ -54,13 +49,14 @@ namespace System.Data.Entity.Design.SsdlGenerator
                 }
                 catch (System.InvalidCastException e)
                 {
-                    throw EDesignUtil.StonglyTypedAccessToNullValue(_tableTableDetails.CatalogColumn.ColumnName, _tableTableDetails.TableName, e);
+                    throw EDesignUtil.StonglyTypedAccessToNullValue(
+                        _tableTableDetails.CatalogColumn.ColumnName,
+                        _tableTableDetails.TableName,
+                        e
+                    );
                 }
             }
-            set
-            {
-                this[this._tableTableDetails.CatalogColumn] = value;
-            }
+            set { this[this._tableTableDetails.CatalogColumn] = value; }
         }
 
         /// <summary>
@@ -76,13 +72,14 @@ namespace System.Data.Entity.Design.SsdlGenerator
                 }
                 catch (System.InvalidCastException e)
                 {
-                    throw EDesignUtil.StonglyTypedAccessToNullValue(_tableTableDetails.SchemaColumn.ColumnName, _tableTableDetails.TableName, e);
+                    throw EDesignUtil.StonglyTypedAccessToNullValue(
+                        _tableTableDetails.SchemaColumn.ColumnName,
+                        _tableTableDetails.TableName,
+                        e
+                    );
                 }
             }
-            set
-            {
-                this[this._tableTableDetails.SchemaColumn] = value;
-            }
+            set { this[this._tableTableDetails.SchemaColumn] = value; }
         }
 
         /// <summary>
@@ -98,13 +95,14 @@ namespace System.Data.Entity.Design.SsdlGenerator
                 }
                 catch (System.InvalidCastException e)
                 {
-                    throw EDesignUtil.StonglyTypedAccessToNullValue(_tableTableDetails.TableNameColumn.ColumnName, _tableTableDetails.TableName, e);
+                    throw EDesignUtil.StonglyTypedAccessToNullValue(
+                        _tableTableDetails.TableNameColumn.ColumnName,
+                        _tableTableDetails.TableName,
+                        e
+                    );
                 }
             }
-            set
-            {
-                this[this._tableTableDetails.TableNameColumn] = value;
-            }
+            set { this[this._tableTableDetails.TableNameColumn] = value; }
         }
 
         /// <summary>
@@ -120,14 +118,15 @@ namespace System.Data.Entity.Design.SsdlGenerator
                 }
                 catch (System.InvalidCastException e)
                 {
-                    throw EDesignUtil.StonglyTypedAccessToNullValue(_tableTableDetails.ColumnNameColumn.ColumnName, _tableTableDetails.TableName, e);
+                    throw EDesignUtil.StonglyTypedAccessToNullValue(
+                        _tableTableDetails.ColumnNameColumn.ColumnName,
+                        _tableTableDetails.TableName,
+                        e
+                    );
                 }
             }
-            set
-            {
-                this[this._tableTableDetails.ColumnNameColumn] = value;
-            }
-        } 
+            set { this[this._tableTableDetails.ColumnNameColumn] = value; }
+        }
 
         /// <summary>
         /// Gets the IsNullable column value
@@ -142,13 +141,14 @@ namespace System.Data.Entity.Design.SsdlGenerator
                 }
                 catch (System.InvalidCastException e)
                 {
-                    throw EDesignUtil.StonglyTypedAccessToNullValue(_tableTableDetails.IsNullableColumn.ColumnName, _tableTableDetails.TableName, e);
+                    throw EDesignUtil.StonglyTypedAccessToNullValue(
+                        _tableTableDetails.IsNullableColumn.ColumnName,
+                        _tableTableDetails.TableName,
+                        e
+                    );
                 }
             }
-            set
-            {
-                this[this._tableTableDetails.IsNullableColumn] = value;
-            }
+            set { this[this._tableTableDetails.IsNullableColumn] = value; }
         }
 
         /// <summary>
@@ -164,13 +164,14 @@ namespace System.Data.Entity.Design.SsdlGenerator
                 }
                 catch (System.InvalidCastException e)
                 {
-                    throw EDesignUtil.StonglyTypedAccessToNullValue(_tableTableDetails.DataTypeColumn.ColumnName, _tableTableDetails.TableName, e);
+                    throw EDesignUtil.StonglyTypedAccessToNullValue(
+                        _tableTableDetails.DataTypeColumn.ColumnName,
+                        _tableTableDetails.TableName,
+                        e
+                    );
                 }
             }
-            set
-            {
-                this[this._tableTableDetails.DataTypeColumn] = value;
-            }
+            set { this[this._tableTableDetails.DataTypeColumn] = value; }
         }
 
         /// <summary>
@@ -186,13 +187,14 @@ namespace System.Data.Entity.Design.SsdlGenerator
                 }
                 catch (System.InvalidCastException e)
                 {
-                    throw EDesignUtil.StonglyTypedAccessToNullValue(_tableTableDetails.MaximumLengthColumn.ColumnName, _tableTableDetails.TableName, e);
+                    throw EDesignUtil.StonglyTypedAccessToNullValue(
+                        _tableTableDetails.MaximumLengthColumn.ColumnName,
+                        _tableTableDetails.TableName,
+                        e
+                    );
                 }
             }
-            set
-            {
-                this[this._tableTableDetails.MaximumLengthColumn] = value;
-            }
+            set { this[this._tableTableDetails.MaximumLengthColumn] = value; }
         }
 
         /// <summary>
@@ -208,15 +210,15 @@ namespace System.Data.Entity.Design.SsdlGenerator
                 }
                 catch (System.InvalidCastException e)
                 {
-                    throw EDesignUtil.StonglyTypedAccessToNullValue(_tableTableDetails.DateTimePrecisionColumn.ColumnName, _tableTableDetails.TableName, e);
+                    throw EDesignUtil.StonglyTypedAccessToNullValue(
+                        _tableTableDetails.DateTimePrecisionColumn.ColumnName,
+                        _tableTableDetails.TableName,
+                        e
+                    );
                 }
             }
-            set
-            {
-                this[this._tableTableDetails.DateTimePrecisionColumn] = value;
-            }
+            set { this[this._tableTableDetails.DateTimePrecisionColumn] = value; }
         }
-
 
         /// <summary>
         /// Gets the Precision column value
@@ -231,13 +233,14 @@ namespace System.Data.Entity.Design.SsdlGenerator
                 }
                 catch (System.InvalidCastException e)
                 {
-                    throw EDesignUtil.StonglyTypedAccessToNullValue(_tableTableDetails.PrecisionColumn.ColumnName, _tableTableDetails.TableName, e);
+                    throw EDesignUtil.StonglyTypedAccessToNullValue(
+                        _tableTableDetails.PrecisionColumn.ColumnName,
+                        _tableTableDetails.TableName,
+                        e
+                    );
                 }
             }
-            set
-            {
-                this[this._tableTableDetails.PrecisionColumn] = value;
-            }
+            set { this[this._tableTableDetails.PrecisionColumn] = value; }
         }
 
         /// <summary>
@@ -253,13 +256,14 @@ namespace System.Data.Entity.Design.SsdlGenerator
                 }
                 catch (System.InvalidCastException e)
                 {
-                    throw EDesignUtil.StonglyTypedAccessToNullValue(_tableTableDetails.ScaleColumn.ColumnName, _tableTableDetails.TableName, e);
+                    throw EDesignUtil.StonglyTypedAccessToNullValue(
+                        _tableTableDetails.ScaleColumn.ColumnName,
+                        _tableTableDetails.TableName,
+                        e
+                    );
                 }
             }
-            set
-            {
-                this[this._tableTableDetails.ScaleColumn] = value;
-            }
+            set { this[this._tableTableDetails.ScaleColumn] = value; }
         }
 
         /// <summary>
@@ -275,13 +279,14 @@ namespace System.Data.Entity.Design.SsdlGenerator
                 }
                 catch (System.InvalidCastException e)
                 {
-                    throw EDesignUtil.StonglyTypedAccessToNullValue(_tableTableDetails.IsIdentityColumn.ColumnName, _tableTableDetails.TableName, e);
+                    throw EDesignUtil.StonglyTypedAccessToNullValue(
+                        _tableTableDetails.IsIdentityColumn.ColumnName,
+                        _tableTableDetails.TableName,
+                        e
+                    );
                 }
             }
-            set
-            {
-                this[this._tableTableDetails.IsIdentityColumn] = value;
-            }
+            set { this[this._tableTableDetails.IsIdentityColumn] = value; }
         }
 
         /// <summary>
@@ -297,13 +302,14 @@ namespace System.Data.Entity.Design.SsdlGenerator
                 }
                 catch (System.InvalidCastException e)
                 {
-                    throw EDesignUtil.StonglyTypedAccessToNullValue(_tableTableDetails.IsServerGeneratedColumn.ColumnName, _tableTableDetails.TableName, e);
+                    throw EDesignUtil.StonglyTypedAccessToNullValue(
+                        _tableTableDetails.IsServerGeneratedColumn.ColumnName,
+                        _tableTableDetails.TableName,
+                        e
+                    );
                 }
             }
-            set
-            {
-                this[this._tableTableDetails.IsServerGeneratedColumn] = value;
-            }
+            set { this[this._tableTableDetails.IsServerGeneratedColumn] = value; }
         }
 
         /// <summary>
@@ -319,13 +325,14 @@ namespace System.Data.Entity.Design.SsdlGenerator
                 }
                 catch (System.InvalidCastException e)
                 {
-                    throw EDesignUtil.StonglyTypedAccessToNullValue(_tableTableDetails.IsPrimaryKeyColumn.ColumnName, _tableTableDetails.TableName, e);
+                    throw EDesignUtil.StonglyTypedAccessToNullValue(
+                        _tableTableDetails.IsPrimaryKeyColumn.ColumnName,
+                        _tableTableDetails.TableName,
+                        e
+                    );
                 }
             }
-            set
-            {
-                this[this._tableTableDetails.IsPrimaryKeyColumn] = value;
-            }
+            set { this[this._tableTableDetails.IsPrimaryKeyColumn] = value; }
         }
 
         /// <summary>
@@ -382,7 +389,6 @@ namespace System.Data.Entity.Design.SsdlGenerator
             return this.IsNull(this._tableTableDetails.DateTimePrecisionColumn);
         }
 
-
         /// <summary>
         /// Determines if the Scale column value is null
         /// </summary>
@@ -438,13 +444,16 @@ namespace System.Data.Entity.Design.SsdlGenerator
             return name;
         }
 
-        public EntityStoreSchemaGenerator.DbObjectKey CreateDbObjectKey(EntityStoreSchemaGenerator.DbObjectType objectType)
+        public EntityStoreSchemaGenerator.DbObjectKey CreateDbObjectKey(
+            EntityStoreSchemaGenerator.DbObjectType objectType
+        )
         {
             return new EntityStoreSchemaGenerator.DbObjectKey(
-                this[this._tableTableDetails.CatalogColumn], 
+                this[this._tableTableDetails.CatalogColumn],
                 this[this._tableTableDetails.SchemaColumn],
                 this[this._tableTableDetails.TableNameColumn],
-                objectType);
+                objectType
+            );
         }
     }
 }

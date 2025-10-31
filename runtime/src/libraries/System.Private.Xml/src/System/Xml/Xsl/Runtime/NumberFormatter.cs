@@ -31,52 +31,57 @@ namespace System.Xml.Xsl.Runtime
     {
         Nil = -1,
         FirstDecimal,
-        Arabic = FirstDecimal,      // 0x0031 -- 1, 2, 3, 4, ...
-        DArabic,                    // 0xff11 -- Combines DbChar w/ Arabic
-        Hindi3,                     // 0x0967 -- Hindi numbers
-        Thai2,                      // 0x0e51 -- Thai numbers
-        FEDecimal,                  // 0x4e00 -- FE numbering style (decimal numbers)
-        KorDbNum1,                  // 0xc77c -- Korea (decimal)
+        Arabic = FirstDecimal, // 0x0031 -- 1, 2, 3, 4, ...
+        DArabic, // 0xff11 -- Combines DbChar w/ Arabic
+        Hindi3, // 0x0967 -- Hindi numbers
+        Thai2, // 0x0e51 -- Thai numbers
+        FEDecimal, // 0x4e00 -- FE numbering style (decimal numbers)
+        KorDbNum1, // 0xc77c -- Korea (decimal)
         LastNum = KorDbNum1,
 
         // Alphabetic numbering sequences (do not change order unless you also change _rgnfcToLab's order)
         FirstAlpha,
-        UCLetter = FirstAlpha,      // 0x0041 -- A, B, C, D, ...
-        LCLetter,                   // 0x0061 -- a, b, c, d, ...
-        UCRus,                      // 0x0410 -- Upper case Russian alphabet
-        LCRus,                      // 0x0430 -- Lower case Russian alphabet
-        Thai1,                      // 0x0e01 -- Thai letters
-        Hindi1,                     // 0x0915 -- Hindi vowels
-        Hindi2,                     // 0x0905 -- Hindi consonants
-        Aiueo,                      // 0xff71 -- Japan numbering style (SbChar)
-        DAiueo,                     // 0x30a2 -- Japan - Combines DbChar w/ Aiueo
-        Iroha,                      // 0xff72 -- Japan numbering style (SbChar)
-        DIroha,                     // 0x30a4 -- Japan - Combines DbChar w/ Iroha//  New defines for 97...
-        DChosung,                   // 0x3131 -- Korea Chosung (DbChar)
-        Ganada,                     // 0xac00 -- Korea
-        ArabicScript,               // 0x0623 -- BIDI AraAlpha for Arabic/Persian/Urdu
+        UCLetter = FirstAlpha, // 0x0041 -- A, B, C, D, ...
+        LCLetter, // 0x0061 -- a, b, c, d, ...
+        UCRus, // 0x0410 -- Upper case Russian alphabet
+        LCRus, // 0x0430 -- Lower case Russian alphabet
+        Thai1, // 0x0e01 -- Thai letters
+        Hindi1, // 0x0915 -- Hindi vowels
+        Hindi2, // 0x0905 -- Hindi consonants
+        Aiueo, // 0xff71 -- Japan numbering style (SbChar)
+        DAiueo, // 0x30a2 -- Japan - Combines DbChar w/ Aiueo
+        Iroha, // 0xff72 -- Japan numbering style (SbChar)
+        DIroha, // 0x30a4 -- Japan - Combines DbChar w/ Iroha//  New defines for 97...
+        DChosung, // 0x3131 -- Korea Chosung (DbChar)
+        Ganada, // 0xac00 -- Korea
+        ArabicScript, // 0x0623 -- BIDI AraAlpha for Arabic/Persian/Urdu
         LastAlpha = ArabicScript,
 
         // Special numbering sequences (includes peculiar alphabetic and numeric sequences)
         FirstSpecial,
-        UCRoman = FirstSpecial,     // 0x0049 -- I, II, III, IV, ...
-        LCRoman,                    // 0x0069 -- i, ii, iii, iv, ...
-        Hebrew,                     // 0x05d0 -- BIDI Heb1 for Hebrew
-        DbNum3,                     // 0x58f1 -- FE numbering style (similar to China2, some different characters)
-        ChnCmplx,                   // 0x58f9 -- China (complex, traditional chinese, spell out numbers)
-        KorDbNum3,                  // 0xd558 -- Korea (1-99)
-        Zodiac1,                    // 0x7532 -- CJK-heavenly-stem (10 numbers)
-        Zodiac2,                    // 0x5b50 -- CJK-earthly-branch (12 numbers)
-        Zodiac3,                    // 0x7532 -- (Zodiac1 + Zodiac2 Combination)
+        UCRoman = FirstSpecial, // 0x0049 -- I, II, III, IV, ...
+        LCRoman, // 0x0069 -- i, ii, iii, iv, ...
+        Hebrew, // 0x05d0 -- BIDI Heb1 for Hebrew
+        DbNum3, // 0x58f1 -- FE numbering style (similar to China2, some different characters)
+        ChnCmplx, // 0x58f9 -- China (complex, traditional chinese, spell out numbers)
+        KorDbNum3, // 0xd558 -- Korea (1-99)
+        Zodiac1, // 0x7532 -- CJK-heavenly-stem (10 numbers)
+        Zodiac2, // 0x5b50 -- CJK-earthly-branch (12 numbers)
+        Zodiac3, // 0x7532 -- (Zodiac1 + Zodiac2 Combination)
         LastSpecial = Zodiac3,
     }
 
     internal abstract class NumberFormatterBase
     {
-        protected const int MaxAlphabeticValue = int.MaxValue;     // Maximum value that can be represented
-        private const int MaxAlphabeticLength = 7;                // Number of letters needed to represent the maximum value
+        protected const int MaxAlphabeticValue = int.MaxValue; // Maximum value that can be represented
+        private const int MaxAlphabeticLength = 7; // Number of letters needed to represent the maximum value
 
-        public static void ConvertToAlphabetic(StringBuilder sb, double val, char firstChar, int totalChars)
+        public static void ConvertToAlphabetic(
+            StringBuilder sb,
+            double val,
+            char firstChar,
+            int totalChars
+        )
         {
             Debug.Assert(1 <= val && val <= MaxAlphabeticValue);
             Debug.Assert(Math.Pow(totalChars, MaxAlphabeticLength) >= MaxAlphabeticValue);
@@ -107,9 +112,24 @@ namespace System.Xml.Xsl.Runtime
             string digits = upperCase ? RomanDigitsUC : RomanDigitsLC;
 
             //                RomanDigit      ={ I IV  V IX   X  XL   L  XC    C   CD    D   CM     M }
-            ReadOnlySpan<int> RomanDigitValue = [1, 4, 5, 9, 10, 40, 50, 90, 100, 400, 500, 900, 1000];
+            ReadOnlySpan<int> RomanDigitValue =
+            [
+                1,
+                4,
+                5,
+                9,
+                10,
+                40,
+                50,
+                90,
+                100,
+                400,
+                500,
+                900,
+                1000,
+            ];
 
-            for (int idx = RomanDigitValue.Length; idx-- != 0;)
+            for (int idx = RomanDigitValue.Length; idx-- != 0; )
             {
                 while (number >= RomanDigitValue[idx])
                 {

@@ -18,7 +18,11 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator
         private readonly SourceAssemblySymbol _sourceAssembly;
         private readonly PEMethodSymbol _method;
 
-        public CSharpEESymbolProvider(SourceAssemblySymbol sourceAssembly, PEModuleSymbol module, PEMethodSymbol method)
+        public CSharpEESymbolProvider(
+            SourceAssemblySymbol sourceAssembly,
+            PEModuleSymbol module,
+            PEMethodSymbol method
+        )
         {
             _metadataDecoder = new MetadataDecoder(module, method);
             _sourceAssembly = sourceAssembly;
@@ -30,7 +34,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator
             int slotIndex,
             LocalInfo<TypeSymbol> info,
             ImmutableArray<bool> dynamicFlagsOpt,
-            ImmutableArray<string?> tupleElementNamesOpt)
+            ImmutableArray<string?> tupleElementNamesOpt
+        )
         {
             var isPinned = info.IsPinned;
 
@@ -53,8 +58,24 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator
             // Custom modifiers can be dropped since binding ignores custom
             // modifiers from locals and since we only need to preserve
             // the type of the original local in the generated method.
-            type = IncludeDynamicAndTupleElementNamesIfAny(type, refKind, dynamicFlagsOpt, tupleElementNamesOpt);
-            return new EELocalSymbol(_method, EELocalSymbol.NoLocations, name, slotIndex, kind, type, refKind, isPinned, isCompilerGenerated: false, canScheduleToStack: false);
+            type = IncludeDynamicAndTupleElementNamesIfAny(
+                type,
+                refKind,
+                dynamicFlagsOpt,
+                tupleElementNamesOpt
+            );
+            return new EELocalSymbol(
+                _method,
+                EELocalSymbol.NoLocations,
+                name,
+                slotIndex,
+                kind,
+                type,
+                refKind,
+                isPinned,
+                isCompilerGenerated: false,
+                canScheduleToStack: false
+            );
         }
 
         public override LocalSymbol GetLocalConstant(
@@ -62,9 +83,15 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator
             TypeSymbol type,
             ConstantValue value,
             ImmutableArray<bool> dynamicFlagsOpt,
-            ImmutableArray<string?> tupleElementNamesOpt)
+            ImmutableArray<string?> tupleElementNamesOpt
+        )
         {
-            type = IncludeDynamicAndTupleElementNamesIfAny(type, RefKind.None, dynamicFlagsOpt, tupleElementNamesOpt);
+            type = IncludeDynamicAndTupleElementNamesIfAny(
+                type,
+                RefKind.None,
+                dynamicFlagsOpt,
+                tupleElementNamesOpt
+            );
             return new EELocalConstantSymbol(_method, name, type, value);
         }
 
@@ -82,13 +109,19 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator
 
         /// <exception cref="BadImageFormatException"></exception>
         /// <exception cref="UnsupportedSignatureContent"></exception>
-        public override void DecodeLocalConstant(ref BlobReader reader, out TypeSymbol type, out ConstantValue value)
+        public override void DecodeLocalConstant(
+            ref BlobReader reader,
+            out TypeSymbol type,
+            out ConstantValue value
+        )
         {
             _metadataDecoder.DecodeLocalConstantBlobOrThrow(ref reader, out type, out value);
         }
 
         /// <exception cref="BadImageFormatException"></exception>
-        public override IAssemblySymbolInternal GetReferencedAssembly(AssemblyReferenceHandle handle)
+        public override IAssemblySymbolInternal GetReferencedAssembly(
+            AssemblyReferenceHandle handle
+        )
         {
             int index = _metadataDecoder.Module.GetAssemblyReferenceIndexOrThrow(handle);
             var assembly = _metadataDecoder.ModuleSymbol.GetReferencedAssemblySymbol(index);
@@ -103,18 +136,30 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator
         public override TypeSymbol GetType(EntityHandle handle)
         {
             bool isNoPiaLocalType;
-            return _metadataDecoder.GetSymbolForTypeHandleOrThrow(handle, out isNoPiaLocalType, allowTypeSpec: true, requireShortForm: false);
+            return _metadataDecoder.GetSymbolForTypeHandleOrThrow(
+                handle,
+                out isNoPiaLocalType,
+                allowTypeSpec: true,
+                requireShortForm: false
+            );
         }
 
         private TypeSymbol IncludeDynamicAndTupleElementNamesIfAny(
             TypeSymbol type,
             RefKind refKind,
             ImmutableArray<bool> dynamicFlagsOpt,
-            ImmutableArray<string?> tupleElementNamesOpt)
+            ImmutableArray<string?> tupleElementNamesOpt
+        )
         {
             if (!dynamicFlagsOpt.IsDefault)
             {
-                type = DynamicTypeDecoder.TransformTypeWithoutCustomModifierFlags(type, _sourceAssembly, refKind, dynamicFlagsOpt, checkLength: false);
+                type = DynamicTypeDecoder.TransformTypeWithoutCustomModifierFlags(
+                    type,
+                    _sourceAssembly,
+                    refKind,
+                    dynamicFlagsOpt,
+                    checkLength: false
+                );
             }
             return TupleTypeDecoder.DecodeTupleTypesIfApplicable(type, tupleElementNamesOpt);
         }

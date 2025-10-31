@@ -84,7 +84,13 @@ namespace System.Xml
         {
             if (_leftOverBytesCount > 0)
             {
-                int leftOverChars = Convert.ToBase64CharArray(_leftOverBytes!, 0, _leftOverBytesCount, _charsLine, 0);
+                int leftOverChars = Convert.ToBase64CharArray(
+                    _leftOverBytes!,
+                    0,
+                    _leftOverBytesCount,
+                    _charsLine,
+                    0
+                );
                 WriteChars(_charsLine, 0, leftOverChars);
                 _leftOverBytesCount = 0;
             }

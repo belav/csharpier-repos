@@ -17,7 +17,9 @@ namespace Roslyn.VisualStudio.IntegrationTests.InProcess
     [TestService]
     internal partial class TelemetryInProcess
     {
-        internal async Task<TelemetryVerifier> EnableTestTelemetryChannelAsync(CancellationToken cancellationToken)
+        internal async Task<TelemetryVerifier> EnableTestTelemetryChannelAsync(
+            CancellationToken cancellationToken
+        )
         {
             await JoinableTaskFactory.SwitchToMainThreadAsync(cancellationToken);
 
@@ -39,8 +41,10 @@ namespace Roslyn.VisualStudio.IntegrationTests.InProcess
             LoggerTestChannel.Instance.Clear();
         }
 
-        public async Task<bool> TryWaitForTelemetryEventsAsync(string[] names, CancellationToken cancellationToken)
-            => await LoggerTestChannel.Instance.TryWaitForEventsAsync(names, cancellationToken);
+        public async Task<bool> TryWaitForTelemetryEventsAsync(
+            string[] names,
+            CancellationToken cancellationToken
+        ) => await LoggerTestChannel.Instance.TryWaitForEventsAsync(names, cancellationToken);
 
         public class TelemetryVerifier : IAsyncDisposable
         {
@@ -51,18 +55,32 @@ namespace Roslyn.VisualStudio.IntegrationTests.InProcess
                 _testServices = testServices;
             }
 
-            public async ValueTask DisposeAsync()
-                => await _testServices.Telemetry.DisableTestTelemetryChannelAsync(CancellationToken.None);
+            public async ValueTask DisposeAsync() =>
+                await _testServices.Telemetry.DisableTestTelemetryChannelAsync(
+                    CancellationToken.None
+                );
 
             /// <summary>
             /// Asserts that a telemetry event of the given name was fired. Does not
             /// do any additional validation (of performance numbers, etc).
             /// </summary>
             /// <param name="expectedEventNames"></param>
-            public async Task VerifyFiredAsync(string[] expectedEventNames, CancellationToken cancellationToken)
+            public async Task VerifyFiredAsync(
+                string[] expectedEventNames,
+                CancellationToken cancellationToken
+            )
             {
-                var telemetryEnabled = await _testServices.Telemetry.TryWaitForTelemetryEventsAsync(expectedEventNames, cancellationToken);
-                if (string.Equals(Environment.GetEnvironmentVariable("ROSLYN_TEST_CI"), "true", StringComparison.OrdinalIgnoreCase))
+                var telemetryEnabled = await _testServices.Telemetry.TryWaitForTelemetryEventsAsync(
+                    expectedEventNames,
+                    cancellationToken
+                );
+                if (
+                    string.Equals(
+                        Environment.GetEnvironmentVariable("ROSLYN_TEST_CI"),
+                        "true",
+                        StringComparison.OrdinalIgnoreCase
+                    )
+                )
                 {
                     // Telemetry verification is optional for developer machines, but required for CI.
                     Assert.True(telemetryEnabled);
@@ -80,7 +98,10 @@ namespace Roslyn.VisualStudio.IntegrationTests.InProcess
             /// Waits for one or more events with the specified names
             /// </summary>
             /// <param name="events"></param>
-            public async Task<bool> TryWaitForEventsAsync(string[] events, CancellationToken cancellationToken)
+            public async Task<bool> TryWaitForEventsAsync(
+                string[] events,
+                CancellationToken cancellationToken
+            )
             {
                 if (!TelemetryService.DefaultSession.IsOptedIn)
                     return false;

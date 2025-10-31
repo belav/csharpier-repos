@@ -10,7 +10,7 @@ public class Program
         }
         catch (Exception ex)
         {
-          var t = ex.StackTrace;
+            var t = ex.StackTrace;
         }
     }
 }

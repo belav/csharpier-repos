@@ -19,14 +19,18 @@ namespace Microsoft.CodeAnalysis.CSharp.GoToBase
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public CSharpGoToBaseService()
-        {
-        }
+        public CSharpGoToBaseService() { }
 
         protected override async Task<IMethodSymbol?> FindNextConstructorInChainAsync(
-            Solution solution, IMethodSymbol constructor, CancellationToken cancellationToken)
+            Solution solution,
+            IMethodSymbol constructor,
+            CancellationToken cancellationToken
+        )
         {
-            if (constructor.DeclaringSyntaxReferences.FirstOrDefault()?.GetSyntax(cancellationToken) is not ConstructorDeclarationSyntax constructorDeclaration)
+            if (
+                constructor.DeclaringSyntaxReferences.FirstOrDefault()?.GetSyntax(cancellationToken)
+                is not ConstructorDeclarationSyntax constructorDeclaration
+            )
                 return null;
 
             var document = solution.GetDocument(constructorDeclaration.SyntaxTree);
@@ -37,8 +41,12 @@ namespace Microsoft.CodeAnalysis.CSharp.GoToBase
             if (constructorDeclaration.Initializer is null)
                 return FindBaseNoArgConstructor(constructor);
 
-            var semanticModel = await document.GetSemanticModelAsync(cancellationToken).ConfigureAwait(false);
-            return semanticModel.GetSymbolInfo(constructorDeclaration.Initializer, cancellationToken).GetAnySymbol() as IMethodSymbol;
+            var semanticModel = await document
+                .GetSemanticModelAsync(cancellationToken)
+                .ConfigureAwait(false);
+            return semanticModel
+                    .GetSymbolInfo(constructorDeclaration.Initializer, cancellationToken)
+                    .GetAnySymbol() as IMethodSymbol;
         }
     }
 }

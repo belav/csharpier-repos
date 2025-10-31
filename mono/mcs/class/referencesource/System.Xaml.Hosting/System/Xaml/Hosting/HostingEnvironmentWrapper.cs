@@ -5,10 +5,10 @@
 namespace System.Xaml.Hosting
 {
     using System;
+    using System.Runtime;
+    using System.Security;
     using System.Web;
     using System.Web.Hosting;
-    using System.Security;
-    using System.Runtime;
 
     static class HostingEnvironmentWrapper
     {
@@ -18,7 +18,3 @@ namespace System.Xaml.Hosting
         }
     }
 }
-
-
-
-

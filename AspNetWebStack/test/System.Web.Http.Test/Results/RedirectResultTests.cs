@@ -20,7 +20,13 @@ namespace System.Web.Http.Results
             using (HttpRequestMessage request = CreateRequest())
             {
                 // Act & Assert
-                Assert.ThrowsArgumentNull(() => { CreateProductUnderTest(location, request); }, "location");
+                Assert.ThrowsArgumentNull(
+                    () =>
+                    {
+                        CreateProductUnderTest(location, request);
+                    },
+                    "location"
+                );
             }
         }
 
@@ -32,7 +38,13 @@ namespace System.Web.Http.Results
             HttpRequestMessage request = null;
 
             // Act & Assert
-            Assert.ThrowsArgumentNull(() => { CreateProductUnderTest(location, request); }, "request");
+            Assert.ThrowsArgumentNull(
+                () =>
+                {
+                    CreateProductUnderTest(location, request);
+                },
+                "request"
+            );
         }
 
         [Fact]
@@ -79,7 +91,10 @@ namespace System.Web.Http.Results
 
             using (HttpRequestMessage expectedRequest = CreateRequest())
             {
-                IHttpActionResult result = CreateProductUnderTest(expectedLocation, expectedRequest);
+                IHttpActionResult result = CreateProductUnderTest(
+                    expectedLocation,
+                    expectedRequest
+                );
 
                 // Act
                 Task<HttpResponseMessage> task = result.ExecuteAsync(CancellationToken.None);
@@ -105,7 +120,13 @@ namespace System.Web.Http.Results
             ApiController controller = null;
 
             // Act & Assert
-            Assert.ThrowsArgumentNull(() => { CreateProductUnderTest(location, controller); }, "controller");
+            Assert.ThrowsArgumentNull(
+                () =>
+                {
+                    CreateProductUnderTest(location, controller);
+                },
+                "controller"
+            );
         }
 
         [Fact]
@@ -193,8 +214,13 @@ namespace System.Web.Http.Results
             RedirectResult result = CreateProductUnderTest(location, controller);
 
             // Act & Assert
-            InvalidOperationException exception = Assert.Throws<InvalidOperationException>(() =>
-                { HttpRequestMessage ignore = result.Request; }, "ApiController.Request must not be null.");
+            InvalidOperationException exception = Assert.Throws<InvalidOperationException>(
+                () =>
+                {
+                    HttpRequestMessage ignore = result.Request;
+                },
+                "ApiController.Request must not be null."
+            );
         }
 
         [Fact]
@@ -226,7 +252,13 @@ namespace System.Web.Http.Results
             ApiController controller = CreateController();
 
             // Act & Assert
-            Assert.ThrowsArgumentNull(() => { controller.Redirect(location); }, "location");
+            Assert.ThrowsArgumentNull(
+                () =>
+                {
+                    controller.Redirect(location);
+                },
+                "location"
+            );
         }
 
         [Fact]
@@ -260,7 +292,10 @@ namespace System.Web.Http.Results
             return new Uri("aa://b");
         }
 
-        private static RedirectResult CreateProductUnderTest(Uri location, HttpRequestMessage request)
+        private static RedirectResult CreateProductUnderTest(
+            Uri location,
+            HttpRequestMessage request
+        )
         {
             return new RedirectResult(location, request);
         }
@@ -275,8 +310,6 @@ namespace System.Web.Http.Results
             return new HttpRequestMessage();
         }
 
-        private class FakeController : ApiController
-        {
-        }
+        private class FakeController : ApiController { }
     }
 }

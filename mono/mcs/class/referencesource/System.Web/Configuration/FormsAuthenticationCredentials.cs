@@ -76,68 +76,71 @@
 
     ******************************************************************************/
 
-namespace System.Web.Configuration {
+namespace System.Web.Configuration
+{
     using System;
-    using System.Xml;
-    using System.Configuration;
-    using System.Collections.Specialized;
     using System.Collections;
+    using System.Collections.Specialized;
+    using System.ComponentModel;
+    using System.Configuration;
     using System.Globalization;
     using System.IO;
+    using System.Security.Permissions;
     using System.Text;
     using System.Web.Util;
-    using System.ComponentModel;
-    using System.Security.Permissions;
+    using System.Xml;
 
     // class AuthenticationSection
 
-    public sealed class FormsAuthenticationCredentials : ConfigurationElement {
+    public sealed class FormsAuthenticationCredentials : ConfigurationElement
+    {
         private static ConfigurationPropertyCollection _properties;
 
-        private static readonly ConfigurationProperty _propUsers =
-            new ConfigurationProperty(null, 
-                        typeof(FormsAuthenticationUserCollection), 
-                        null, 
-                        ConfigurationPropertyOptions.IsDefaultCollection);
+        private static readonly ConfigurationProperty _propUsers = new ConfigurationProperty(
+            null,
+            typeof(FormsAuthenticationUserCollection),
+            null,
+            ConfigurationPropertyOptions.IsDefaultCollection
+        );
 
         private static readonly ConfigurationProperty _propPasswordFormat =
-            new ConfigurationProperty("passwordFormat", 
-                        typeof(FormsAuthPasswordFormat), 
-                        FormsAuthPasswordFormat.SHA1, 
-                        ConfigurationPropertyOptions.None);
+            new ConfigurationProperty(
+                "passwordFormat",
+                typeof(FormsAuthPasswordFormat),
+                FormsAuthPasswordFormat.SHA1,
+                ConfigurationPropertyOptions.None
+            );
 
-        static FormsAuthenticationCredentials() {
+        static FormsAuthenticationCredentials()
+        {
             // Property initialization
             _properties = new ConfigurationPropertyCollection();
             _properties.Add(_propUsers);
             _properties.Add(_propPasswordFormat);
         }
 
-        public FormsAuthenticationCredentials() {
+        public FormsAuthenticationCredentials() { }
+
+        protected override ConfigurationPropertyCollection Properties
+        {
+            get { return _properties; }
         }
 
-        protected override ConfigurationPropertyCollection Properties {
-            get {
-                return _properties;
-            }
-        }
-
-        [ConfigurationProperty("", IsDefaultCollection = true, Options = ConfigurationPropertyOptions.IsDefaultCollection)]
-        public FormsAuthenticationUserCollection Users {
-            get {
-                return (FormsAuthenticationUserCollection)base[_propUsers];
-            }
+        [ConfigurationProperty(
+            "",
+            IsDefaultCollection = true,
+            Options = ConfigurationPropertyOptions.IsDefaultCollection
+        )]
+        public FormsAuthenticationUserCollection Users
+        {
+            get { return (FormsAuthenticationUserCollection)base[_propUsers]; }
         }
 
         [ConfigurationProperty("passwordFormat", DefaultValue = FormsAuthPasswordFormat.SHA1)]
-        public FormsAuthPasswordFormat PasswordFormat {
-            get {
-                return (FormsAuthPasswordFormat)base[_propPasswordFormat];
-            }
-            set {
-                base[_propPasswordFormat] = value;
-            }
+        public FormsAuthPasswordFormat PasswordFormat
+        {
+            get { return (FormsAuthPasswordFormat)base[_propPasswordFormat]; }
+            set { base[_propPasswordFormat] = value; }
         }
-
     } // class FormsAuthenticationCredentials
 }

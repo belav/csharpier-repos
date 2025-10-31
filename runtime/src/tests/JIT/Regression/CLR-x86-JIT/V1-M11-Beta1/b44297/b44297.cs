@@ -3,6 +3,7 @@
 //
 
 using Xunit;
+
 namespace Test
 {
     using System;
@@ -22,11 +23,11 @@ namespace Test
 #pragma warning disable 1718
                 while ((bool)(object)(AA.m_bStatic1 != AA.m_bStatic1))
 #pragma warning restore
-                {
-                }
+                { }
             }
             return 0;
         }
+
         [Fact]
         public static void TestEntryPoint()
         {

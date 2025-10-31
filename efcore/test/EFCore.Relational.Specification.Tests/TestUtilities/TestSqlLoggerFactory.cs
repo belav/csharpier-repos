@@ -13,18 +13,20 @@ public class TestSqlLoggerFactory : ListLoggerFactory
 {
     private readonly bool _proceduralQueryGeneration = false;
 
-    private const string FileNewLine = @"
+    private const string FileNewLine =
+        @"
 ";
 
     private static readonly string _eol = Environment.NewLine;
 
     private static readonly object _queryBaselineFileLock = new();
-    private static readonly ConcurrentDictionary<string, QueryBaselineRewritingFileInfo> _queryBaselineRewritingFileInfos = new();
+    private static readonly ConcurrentDictionary<
+        string,
+        QueryBaselineRewritingFileInfo
+    > _queryBaselineRewritingFileInfos = new();
 
     public TestSqlLoggerFactory()
-        : this(_ => true)
-    {
-    }
+        : this(_ => true) { }
 
     public TestSqlLoggerFactory(Func<string, bool> shouldLogCategory)
         : base(c => shouldLogCategory(c) || c == DbLoggerCategory.Database.Command.Name)
@@ -32,14 +34,11 @@ public class TestSqlLoggerFactory : ListLoggerFactory
         Logger = new TestSqlLogger(shouldLogCategory(DbLoggerCategory.Database.Command.Name));
     }
 
-    public IReadOnlyList<string> SqlStatements
-        => ((TestSqlLogger)Logger).SqlStatements;
+    public IReadOnlyList<string> SqlStatements => ((TestSqlLogger)Logger).SqlStatements;
 
-    public IReadOnlyList<string> Parameters
-        => ((TestSqlLogger)Logger).Parameters;
+    public IReadOnlyList<string> Parameters => ((TestSqlLogger)Logger).Parameters;
 
-    public string Sql
-        => string.Join(_eol + _eol, SqlStatements);
+    public string Sql => string.Join(_eol + _eol, SqlStatements);
 
     public void AssertBaseline(string[] expected, bool assertOrder = true, bool forUpdate = false)
     {
@@ -56,7 +55,11 @@ public class TestSqlLoggerFactory : ListLoggerFactory
             {
                 for (var i = 0; i < expected.Length; i++)
                 {
-                    Assert.Equal(expected[i], SqlStatements[i + offset], ignoreLineEndingDifferences: true);
+                    Assert.Equal(
+                        expected[i],
+                        SqlStatements[i + offset],
+                        ignoreLineEndingDifferences: true
+                    );
                 }
 
                 Assert.Empty(SqlStatements.Skip(expected.Length + offset + offset));
@@ -66,9 +69,7 @@ public class TestSqlLoggerFactory : ListLoggerFactory
                 foreach (var expectedFragment in expected)
                 {
                     var normalizedExpectedFragment = NormalizeLineEndings(expectedFragment);
-                    Assert.Contains(
-                        normalizedExpectedFragment,
-                        SqlStatements);
+                    Assert.Contains(normalizedExpectedFragment, SqlStatements);
                 }
             }
         }
@@ -76,36 +77,48 @@ public class TestSqlLoggerFactory : ListLoggerFactory
         {
             var methodCallLine = Environment.StackTrace.Split(
                 new[] { _eol },
-                StringSplitOptions.RemoveEmptyEntries)[3][6..];
+                StringSplitOptions.RemoveEmptyEntries
+            )[3][6..];
 
             var indexMethodEnding = methodCallLine.IndexOf(')') + 1;
             var testName = methodCallLine.Substring(0, indexMethodEnding);
-            var parts = methodCallLine[indexMethodEnding..].Split(" ", StringSplitOptions.RemoveEmptyEntries);
+            var parts = methodCallLine[indexMethodEnding..]
+                .Split(" ", StringSplitOptions.RemoveEmptyEntries);
             var fileName = parts[1][..^5];
             var lineNumber = int.Parse(parts[2]);
 
             var currentDirectory = Directory.GetCurrentDirectory();
-            var logFile = currentDirectory.Substring(
+            var logFile =
+                currentDirectory.Substring(
                     0,
                     currentDirectory.LastIndexOf(
                         $"{Path.DirectorySeparatorChar}artifacts{Path.DirectorySeparatorChar}",
-                        StringComparison.Ordinal)
-                    + 1)
-                + "QueryBaseline.txt";
+                        StringComparison.Ordinal
+                    ) + 1
+                ) + "QueryBaseline.txt";
 
             var testInfo = testName + " : " + lineNumber + FileNewLine;
             const string indent = FileNewLine + "                ";
 
-            if (Environment.GetEnvironmentVariable("EF_TEST_REWRITE_BASELINES")?.ToUpper() is "1" or "TRUE")
+            if (
+                Environment.GetEnvironmentVariable("EF_TEST_REWRITE_BASELINES")?.ToUpper()
+                is "1"
+                    or "TRUE"
+            )
             {
                 RewriteSourceWithNewBaseline(fileName, lineNumber);
             }
 
             var sql = string.Join(
                 "," + indent + "//" + indent,
-                SqlStatements.Skip(offset).Take(count).Select(sql => "\"\"\"" + FileNewLine + sql + FileNewLine + "\"\"\""));
+                SqlStatements
+                    .Skip(offset)
+                    .Take(count)
+                    .Select(sql => "\"\"\"" + FileNewLine + sql + FileNewLine + "\"\"\"")
+            );
 
-            var newBaseLine = $@"        Assert{(forUpdate ? "ExecuteUpdate" : "")}Sql(
+            var newBaseLine =
+                $@"        Assert{(forUpdate ? "ExecuteUpdate" : "")}Sql(
 {sql});
 
 ";
@@ -115,10 +128,13 @@ public class TestSqlLoggerFactory : ListLoggerFactory
                 newBaseLine += "Output truncated.";
             }
 
-            Logger.TestOutputHelper?.WriteLine("---- New Baseline -------------------------------------------------------------------");
+            Logger.TestOutputHelper?.WriteLine(
+                "---- New Baseline -------------------------------------------------------------------"
+            );
             Logger.TestOutputHelper?.WriteLine(newBaseLine);
 
-            var contents = testInfo + newBaseLine + FileNewLine + "--------------------" + FileNewLine;
+            var contents =
+                testInfo + newBaseLine + FileNewLine + "--------------------" + FileNewLine;
 
             lock (_queryBaselineFileLock)
             {
@@ -130,7 +146,10 @@ public class TestSqlLoggerFactory : ListLoggerFactory
 
         void RewriteSourceWithNewBaseline(string fileName, int lineNumber)
         {
-            var fileInfo = _queryBaselineRewritingFileInfos.GetOrAdd(fileName, _ => new QueryBaselineRewritingFileInfo());
+            var fileInfo = _queryBaselineRewritingFileInfos.GetOrAdd(
+                fileName,
+                _ => new QueryBaselineRewritingFileInfo()
+            );
             lock (fileInfo.Lock)
             {
                 // First, adjust our lineNumber to take into account any baseline rewriting that already occurred in this file
@@ -161,7 +180,13 @@ public class TestSqlLoggerFactory : ListLoggerFactory
                     // Read through the source file, copying contents to a temp file (with the baseline change)
                     using (var inputFileStream = File.OpenRead(fileName))
                     using (var inputStream = new BufferedStream(inputFileStream))
-                    using (var outputFileStream = File.Open(fileName + ".tmp", FileMode.Create, FileAccess.Write))
+                    using (
+                        var outputFileStream = File.Open(
+                            fileName + ".tmp",
+                            FileMode.Create,
+                            FileAccess.Write
+                        )
+                    )
                     using (var outputStream = new BufferedStream(outputFileStream))
                     {
                         // Detect whether a byte-order mark (BOM) exists, to write out the same
@@ -169,10 +194,15 @@ public class TestSqlLoggerFactory : ListLoggerFactory
                         inputStream.Read(buffer, 0, 3);
                         inputStream.Position = 0;
 
-                        var hasUtf8ByteOrderMark = (buffer[0] == 0xEF && buffer[1] == 0xBB && buffer[2] == 0xBF);
+                        var hasUtf8ByteOrderMark = (
+                            buffer[0] == 0xEF && buffer[1] == 0xBB && buffer[2] == 0xBF
+                        );
 
                         using var reader = new StreamReader(inputStream);
-                        using var writer = new StreamWriter(outputStream, new UTF8Encoding(hasUtf8ByteOrderMark));
+                        using var writer = new StreamWriter(
+                            outputStream,
+                            new UTF8Encoding(hasUtf8ByteOrderMark)
+                        );
 
                         // First find the char position where our line starts.
 
@@ -241,7 +271,13 @@ public class TestSqlLoggerFactory : ListLoggerFactory
                         var node = syntaxTree.GetRoot().FindNode(TextSpan.FromBounds(pos, pos));
 
                         // Node should be pointing at the AssertSql identifier. Go up and find the text span for the entire method invocation.
-                        if (node is not IdentifierNameSyntax { Parent: InvocationExpressionSyntax invocation })
+                        if (
+                            node
+                            is not IdentifierNameSyntax
+                            {
+                                Parent: InvocationExpressionSyntax invocation
+                            }
+                        )
                         {
                             return;
                         }
@@ -253,7 +289,8 @@ public class TestSqlLoggerFactory : ListLoggerFactory
 
                         indentBuilder.Append("    ");
                         var indent = indentBuilder.ToString();
-                        var newBaseLine = $@"Assert{(forUpdate ? "ExecuteUpdate" : "")}Sql(
+                        var newBaseLine =
+                            $@"Assert{(forUpdate ? "ExecuteUpdate" : "")}Sql(
 {string.Join("," + Environment.NewLine + indent + "//" + Environment.NewLine, SqlStatements.Skip(offset).Take(count).Select(sql => "\"\"\"" + Environment.NewLine + sql + Environment.NewLine + "\"\"\""))})";
                         var numNewlinesInRewritten = newBaseLine.Count(c => c is '\n' or '\r');
 
@@ -313,25 +350,38 @@ public class TestSqlLoggerFactory : ListLoggerFactory
             EventId eventId,
             string message,
             TState state,
-            Exception exception)
+            Exception exception
+        )
         {
-            if ((eventId.Id == RelationalEventId.CommandExecuted.Id
+            if (
+                (
+                    eventId.Id == RelationalEventId.CommandExecuted.Id
                     || eventId.Id == RelationalEventId.CommandError.Id
-                    || eventId.Id == RelationalEventId.CommandExecuting.Id))
+                    || eventId.Id == RelationalEventId.CommandExecuting.Id
+                )
+            )
             {
                 if (_shouldLogCommands)
                 {
                     base.UnsafeLog(logLevel, eventId, message, state, exception);
                 }
 
-                if (!IsRecordingSuspended
+                if (
+                    !IsRecordingSuspended
                     && message != null
-                    && eventId.Id != RelationalEventId.CommandExecuting.Id)
+                    && eventId.Id != RelationalEventId.CommandExecuting.Id
+                )
                 {
                     var structure = (IReadOnlyList<KeyValuePair<string, object>>)state;
 
-                    var parameters = structure.Where(i => i.Key == "parameters").Select(i => (string)i.Value).First();
-                    var commandText = structure.Where(i => i.Key == "commandText").Select(i => (string)i.Value).First();
+                    var parameters = structure
+                        .Where(i => i.Key == "parameters")
+                        .Select(i => (string)i.Value)
+                        .First();
+                    var commandText = structure
+                        .Where(i => i.Key == "commandText")
+                        .Select(i => (string)i.Value)
+                        .First();
 
                     if (!string.IsNullOrWhiteSpace(parameters))
                     {

@@ -5,7 +5,6 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Reflection;
-
 using Debug = System.Diagnostics.Debug;
 
 namespace Internal.Reflection.Execution
@@ -23,12 +22,18 @@ namespace Internal.Reflection.Execution
     // This is not a general purpose type comparison facility. It is limited to what constraint validation needs.
     internal static partial class ConstraintValidator
     {
-        [UnconditionalSuppressMessage("ReflectionAnalysis", "IL2070:UnrecognizedReflectionPattern",
-            Justification = "Looking at interface list is safe because we wouldn't remove reflection-visible interface from a reflection-visible type")]
+        [UnconditionalSuppressMessage(
+            "ReflectionAnalysis",
+            "IL2070:UnrecognizedReflectionPattern",
+            Justification = "Looking at interface list is safe because we wouldn't remove reflection-visible interface from a reflection-visible type"
+        )]
         private static bool ImplementsInterface(Type pObjType, Type pTargetType)
         {
             Debug.Assert(!pTargetType.IsArray, "did not expect array type");
-            Debug.Assert(pTargetType.IsInterface, "IsInstanceOfInterface called with non-interface MethodTable");
+            Debug.Assert(
+                pTargetType.IsInterface,
+                "IsInstanceOfInterface called with non-interface MethodTable"
+            );
 
             foreach (var pInterfaceType in pObjType.GetInterfaces())
             {
@@ -80,22 +85,36 @@ namespace Internal.Reflection.Execution
                     }
 
                     // Compare the instantiations to see if they're compatible taking variance into account.
-                    if (TypeParametersAreCompatible(pInterfaceInstantiation,
-                                                    pTargetInstantiation,
-                                                    pTargetGenericInstantiation,
-                                                    fArrayCovariance))
+                    if (
+                        TypeParametersAreCompatible(
+                            pInterfaceInstantiation,
+                            pTargetInstantiation,
+                            pTargetGenericInstantiation,
+                            fArrayCovariance
+                        )
+                    )
                         return true;
 
                     if (fArrayCovariance)
                     {
-                        Debug.Assert(pInterfaceInstantiation.Length == 1, "arity mismatch for array generic interface");
-                        Debug.Assert(pTargetInstantiation.Length == 1, "arity mismatch for array generic interface");
+                        Debug.Assert(
+                            pInterfaceInstantiation.Length == 1,
+                            "arity mismatch for array generic interface"
+                        );
+                        Debug.Assert(
+                            pTargetInstantiation.Length == 1,
+                            "arity mismatch for array generic interface"
+                        );
 
                         // Special case for generic interfaces on arrays. Arrays of integral types (including enums)
                         // can be cast to generic interfaces over the integral types of the same size. For example
                         // int[] . IList<uint>.
-                        if (ArePrimitiveTypesEquivalentSize(pInterfaceInstantiation[0],
-                                                           pTargetInstantiation[0]))
+                        if (
+                            ArePrimitiveTypesEquivalentSize(
+                                pInterfaceInstantiation[0],
+                                pTargetInstantiation[0]
+                            )
+                        )
                         {
                             // We have checked that the interface type definition matches above. The checks are ordered differently
                             // here compared with rtm\system\runtime\typecast.cs version because of TypeInfo does not let us do
@@ -119,10 +138,14 @@ namespace Internal.Reflection.Execution
             if (pTargetGenericType.Equals(pSourceGenericType))
             {
                 // Compare the instantiations to see if they're compatible taking variance into account.
-                if (TypeParametersAreCompatible(pSourceType.GetGenericArguments(),
-                                                pTargetType.GetGenericArguments(),
-                                                pTargetGenericType.GetGenericArguments(),
-                                                false))
+                if (
+                    TypeParametersAreCompatible(
+                        pSourceType.GetGenericArguments(),
+                        pTargetType.GetGenericArguments(),
+                        pTargetGenericType.GetGenericArguments(),
+                        false
+                    )
+                )
                 {
                     return true;
                 }
@@ -136,16 +159,24 @@ namespace Internal.Reflection.Execution
         // implies their arities are the same as well). The fForceCovariance argument tells the method to
         // override the defined variance of each parameter and instead assume it is covariant. This is used to
         // implement covariant array interfaces.
-        private static bool TypeParametersAreCompatible(Type[] pSourceInstantiation,
-                                                        Type[] pTargetInstantiation,
-                                                        Type[] pVarianceInfo,
-                                                        bool fForceCovariance)
+        private static bool TypeParametersAreCompatible(
+            Type[] pSourceInstantiation,
+            Type[] pTargetInstantiation,
+            Type[] pVarianceInfo,
+            bool fForceCovariance
+        )
         {
             // The types represent different instantiations of the same generic type. The
             // arity of both had better be the same.
-            Debug.Assert(pSourceInstantiation.Length == pTargetInstantiation.Length, "arity mismatch between generic instantiations");
+            Debug.Assert(
+                pSourceInstantiation.Length == pTargetInstantiation.Length,
+                "arity mismatch between generic instantiations"
+            );
 
-            Debug.Assert(fForceCovariance || pTargetInstantiation.Length == pVarianceInfo.Length, "arity mismatch between generic instantiations");
+            Debug.Assert(
+                fForceCovariance || pTargetInstantiation.Length == pVarianceInfo.Length,
+                "arity mismatch between generic instantiations"
+            );
 
             // Walk through the instantiations comparing the cast compatibility of each pair
             // of type args.
@@ -158,7 +189,9 @@ namespace Internal.Reflection.Execution
                 if (fForceCovariance)
                     varType = GenericParameterAttributes.Covariant;
                 else
-                    varType = pVarianceInfo[i].GenericParameterAttributes & GenericParameterAttributes.VarianceMask;
+                    varType =
+                        pVarianceInfo[i].GenericParameterAttributes
+                        & GenericParameterAttributes.VarianceMask;
 
                 switch (varType)
                 {
@@ -180,7 +213,14 @@ namespace Internal.Reflection.Execution
                         //   class Foo : ICovariant<Bar> is ICovariant<IBar>
                         //   class Foo : ICovariant<IBar> is ICovariant<Object>
 
-                        if (!AreTypesAssignableInternal(pSourceArgType, pTargetArgType, false, false))
+                        if (
+                            !AreTypesAssignableInternal(
+                                pSourceArgType,
+                                pTargetArgType,
+                                false,
+                                false
+                            )
+                        )
                             return false;
 
                         break;
@@ -195,7 +235,14 @@ namespace Internal.Reflection.Execution
                         //   class Foo : IContravariant<IBar> is IContravariant<Bar>
                         //   class Foo : IContravariant<Object> is IContravariant<IBar>
 
-                        if (!AreTypesAssignableInternal(pTargetArgType, pSourceArgType, false, false))
+                        if (
+                            !AreTypesAssignableInternal(
+                                pTargetArgType,
+                                pSourceArgType,
+                                false,
+                                false
+                            )
+                        )
                             return false;
 
                         break;
@@ -235,7 +282,12 @@ namespace Internal.Reflection.Execution
         //                            compatible with Object, ValueType and Enum (if applicable)
         //  fAllowSizeEquivalence   : allow identically sized integral types and enums to be considered
         //                            equivalent (currently used only for array element types)
-        private static bool AreTypesAssignableInternal(Type pSourceType, Type pTargetType, bool fBoxedSource, bool fAllowSizeEquivalence)
+        private static bool AreTypesAssignableInternal(
+            Type pSourceType,
+            Type pTargetType,
+            bool fBoxedSource,
+            bool fAllowSizeEquivalence
+        )
         {
             //
             // Are the types identical?
@@ -288,7 +340,12 @@ namespace Internal.Reflection.Execution
                         // Source type is also a pointer. Are the element types compatible? Note that using
                         // AreTypesAssignableInternal here handles array covariance as well as IFoo[] . Foo[]
                         // etc. Pass false for fBoxedSource since int[] is not assignable to object[].
-                        return AreTypesAssignableInternal(pSourceType.GetElementType(), pTargetType.GetElementType(), false, true);
+                        return AreTypesAssignableInternal(
+                            pSourceType.GetElementType(),
+                            pTargetType.GetElementType(),
+                            false,
+                            true
+                        );
                     }
                 }
 
@@ -321,7 +378,12 @@ namespace Internal.Reflection.Execution
                         // Source type is also a pointer. Are the element types compatible? Note that using
                         // AreTypesAssignableInternal here handles array covariance as well as IFoo[] . Foo[]
                         // etc. Pass false for fBoxedSource since int[] is not assignable to object[].
-                        return AreTypesAssignableInternal(pSourceType.GetElementType(), pTargetType.GetElementType(), false, true);
+                        return AreTypesAssignableInternal(
+                            pSourceType.GetElementType(),
+                            pTargetType.GetElementType(),
+                            false,
+                            true
+                        );
                     }
                 }
 
@@ -382,7 +444,7 @@ namespace Internal.Reflection.Execution
         {
             Debug.Assert(!pBaseType.IsInterface, "did not expect interface type");
 
-            for (;;)
+            for (; ; )
             {
                 if (AreTypesEquivalentInternal(pDerivedType, pBaseType))
                     return true;

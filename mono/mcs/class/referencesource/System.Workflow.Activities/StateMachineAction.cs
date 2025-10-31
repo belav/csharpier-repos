@@ -4,8 +4,8 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Collections.Specialized;
-using System.Reflection;
 using System.Diagnostics;
+using System.Reflection;
 using System.Runtime.Remoting.Messaging;
 using System.Workflow.ComponentModel;
 using System.Workflow.ComponentModel.Design;
@@ -20,8 +20,10 @@ namespace System.Workflow.Activities
     internal class StateMachineAction
     {
         private string _stateName;
+
         [NonSerialized]
         private StateActivity _state;
+
         [NonSerialized]
         private StateActivity _currentState;
         private StateMachineExecutionState _executionState;
@@ -29,42 +31,27 @@ namespace System.Workflow.Activities
 
         internal string StateName
         {
-            get
-            {
-                return _stateName;
-            }
+            get { return _stateName; }
         }
 
         protected StateActivity State
         {
-            get
-            {
-                return _state;
-            }
+            get { return _state; }
         }
 
         protected StateActivity CurrentState
         {
-            get
-            {
-                return _currentState;
-            }
+            get { return _currentState; }
         }
 
         protected StateMachineExecutionState ExecutionState
         {
-            get
-            {
-                return _executionState;
-            }
+            get { return _executionState; }
         }
 
         protected StateMachineSubscriptionManager SubscriptionManager
         {
-            get
-            {
-                return _subscriptionManager;
-            }
+            get { return _subscriptionManager; }
         }
 
         internal StateMachineAction(string stateName)
@@ -88,11 +75,8 @@ namespace System.Workflow.Activities
     [Serializable]
     internal class CloseStateAction : StateMachineAction
     {
-
         internal CloseStateAction(string stateName)
-            : base(stateName)
-        {
-        }
+            : base(stateName) { }
 
         internal override void Execute(ActivityExecutionContext context)
         {
@@ -114,10 +98,7 @@ namespace System.Workflow.Activities
 
         internal string ChildStateName
         {
-            get
-            {
-                return _childStateName;
-            }
+            get { return _childStateName; }
         }
 
         internal override void Execute(ActivityExecutionContext context)
@@ -142,16 +123,14 @@ namespace System.Workflow.Activities
 
         internal string EventDrivenName
         {
-            get
-            {
-                return _eventDrivenName;
-            }
+            get { return _eventDrivenName; }
         }
 
         internal override void Execute(ActivityExecutionContext context)
         {
             base.Execute(context);
-            EventDrivenActivity eventDriven = (EventDrivenActivity)this.State.Activities[this.EventDrivenName];
+            EventDrivenActivity eventDriven = (EventDrivenActivity)
+                this.State.Activities[this.EventDrivenName];
             Debug.Assert(eventDriven.Enabled);
             this.SubscriptionManager.SubscribeEventDriven(context, eventDriven);
         }
@@ -170,16 +149,14 @@ namespace System.Workflow.Activities
 
         internal string EventDrivenName
         {
-            get
-            {
-                return _eventDrivenName;
-            }
+            get { return _eventDrivenName; }
         }
 
         internal override void Execute(ActivityExecutionContext context)
         {
             base.Execute(context);
-            EventDrivenActivity eventDriven = (EventDrivenActivity)this.State.Activities[this.EventDrivenName];
+            EventDrivenActivity eventDriven = (EventDrivenActivity)
+                this.State.Activities[this.EventDrivenName];
             Debug.Assert(eventDriven.Enabled);
             this.SubscriptionManager.UnsubscribeEventDriven(context, eventDriven);
         }
@@ -198,16 +175,14 @@ namespace System.Workflow.Activities
 
         internal string EventDrivenName
         {
-            get
-            {
-                return _eventDrivenName;
-            }
+            get { return _eventDrivenName; }
         }
 
         internal override void Execute(ActivityExecutionContext context)
         {
             base.Execute(context);
-            EventDrivenActivity eventDriven = (EventDrivenActivity)this.State.Activities[this.EventDrivenName];
+            EventDrivenActivity eventDriven = (EventDrivenActivity)
+                this.State.Activities[this.EventDrivenName];
             Debug.Assert(eventDriven.Enabled);
             StateActivity.ExecuteEventDriven(context, eventDriven);
         }
@@ -217,6 +192,7 @@ namespace System.Workflow.Activities
     internal class SetStateAction : StateMachineAction
     {
         private string _targetStateName;
+
         internal SetStateAction(string stateName, string targetStateName)
             : base(stateName)
         {
@@ -225,10 +201,7 @@ namespace System.Workflow.Activities
 
         internal string TargetStateName
         {
-            get
-            {
-                return _targetStateName;
-            }
+            get { return _targetStateName; }
         }
 
         internal override void Execute(ActivityExecutionContext context)
@@ -242,9 +215,7 @@ namespace System.Workflow.Activities
     internal class DisableQueuesAction : StateMachineAction
     {
         internal DisableQueuesAction(string stateName)
-            : base(stateName)
-        {
-        }
+            : base(stateName) { }
 
         internal override void Execute(ActivityExecutionContext context)
         {
@@ -262,13 +233,20 @@ namespace System.Workflow.Activities
                     EventDrivenActivity eventDriven = activity as EventDrivenActivity;
                     if (eventDriven != null)
                     {
-                        IEventActivity eventActivity = StateMachineHelpers.GetEventActivity(eventDriven);
+                        IEventActivity eventActivity = StateMachineHelpers.GetEventActivity(
+                            eventDriven
+                        );
                         IComparable queueName = eventActivity.QueueName;
                         if (queueName != null)
                         {
-                            WorkflowQueue queue = StateMachineSubscriptionManager.GetWorkflowQueue(context, queueName);
+                            WorkflowQueue queue = StateMachineSubscriptionManager.GetWorkflowQueue(
+                                context,
+                                queueName
+                            );
                             if (queue != null)
-                                queue.Enabled = this.SubscriptionManager.Subscriptions.ContainsKey(queueName);
+                                queue.Enabled = this.SubscriptionManager.Subscriptions.ContainsKey(
+                                    queueName
+                                );
                         }
                     }
                     else
@@ -282,19 +260,19 @@ namespace System.Workflow.Activities
         }
     }
 
-
     [Serializable]
     internal class EnteringStateAction : StateMachineAction
     {
         internal EnteringStateAction(string stateName)
-            : base(stateName)
-        {
-        }
+            : base(stateName) { }
 
         internal override void Execute(ActivityExecutionContext context)
         {
             base.Execute(context);
-            context.TrackData(StateActivity.StateChangeTrackingDataKey, this.CurrentState.QualifiedName);
+            context.TrackData(
+                StateActivity.StateChangeTrackingDataKey,
+                this.CurrentState.QualifiedName
+            );
         }
     }
 }

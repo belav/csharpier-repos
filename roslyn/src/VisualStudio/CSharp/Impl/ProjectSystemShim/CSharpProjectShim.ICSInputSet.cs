@@ -13,8 +13,7 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.ProjectSystemShim
 {
     internal partial class CSharpProjectShim : ICSInputSet
     {
-        public ICSCompiler GetCompiler()
-            => throw new NotImplementedException();
+        public ICSCompiler GetCompiler() => throw new NotImplementedException();
 
         public void AddSourceFile(string filename)
         {
@@ -26,14 +25,13 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.ProjectSystemShim
             // Nothing to do here. We watch addition/removal of source files via the ICSharpProjectSite methods.
         }
 
-        public void RemoveAllSourceFiles()
-            => throw new NotImplementedException();
+        public void RemoveAllSourceFiles() => throw new NotImplementedException();
 
-        public void AddResourceFile(string filename, string ident, bool embed, bool vis)
-            => throw new NotImplementedException();
+        public void AddResourceFile(string filename, string ident, bool embed, bool vis) =>
+            throw new NotImplementedException();
 
-        public void RemoveResourceFile(string filename, string ident, bool embed, bool vis)
-            => throw new NotImplementedException();
+        public void RemoveResourceFile(string filename, string ident, bool embed, bool vis) =>
+            throw new NotImplementedException();
 
         public void SetWin32Resource(string filename)
         {
@@ -56,16 +54,16 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.ProjectSystemShim
             RefreshBinOutputPath();
         }
 
-        public void SetOutputFileType(OutputFileType fileType)
-            => ProjectSystemProjectOptionsProcessor.SetOutputFileType(fileType);
+        public void SetOutputFileType(OutputFileType fileType) =>
+            ProjectSystemProjectOptionsProcessor.SetOutputFileType(fileType);
 
         public void SetImageBase(uint imageBase)
         {
             // This option is used only during emit. Since we no longer use our in-proc workspace to emit, we can ignore this value.
         }
 
-        public void SetMainClass(string fullyQualifiedClassName)
-            => ProjectSystemProjectOptionsProcessor.SetMainTypeName(fullyQualifiedClassName);
+        public void SetMainClass(string fullyQualifiedClassName) =>
+            ProjectSystemProjectOptionsProcessor.SetMainTypeName(fullyQualifiedClassName);
 
         public void SetWin32Icon(string iconFileName)
         {
@@ -87,8 +85,7 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.ProjectSystemShim
             // This option is used only during emit. Since we no longer use our in-proc workspace to emit, we can ignore this value.
         }
 
-        public string GetWin32Resource()
-            => throw new NotImplementedException();
+        public string GetWin32Resource() => throw new NotImplementedException();
 
         public void SetWin32Manifest(string manifestFileName)
         {

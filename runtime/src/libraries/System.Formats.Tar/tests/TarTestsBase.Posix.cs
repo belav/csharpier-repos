@@ -135,7 +135,9 @@ namespace System.Formats.Tar.Tests
 
         protected void VerifyUnsupportedDeviceProperties(PosixTarEntry entry)
         {
-            Assert.True(entry.EntryType is not TarEntryType.CharacterDevice and not TarEntryType.BlockDevice);
+            Assert.True(
+                entry.EntryType is not TarEntryType.CharacterDevice and not TarEntryType.BlockDevice
+            );
             Assert.Equal(0, entry.DeviceMajor);
             Assert.Throws<InvalidOperationException>(() => entry.DeviceMajor = 5);
             Assert.Equal(0, entry.DeviceMajor); // No change

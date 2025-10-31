@@ -10,7 +10,30 @@ namespace System.SpanTests
         [Fact]
         public static void LastIndexOfSequenceMatchAtStart_Char()
         {
-            Span<char> span = new Span<char>(new char[] { '5', '1', '7', '2', '3', '7', '7', '4', '5', '7', '7', '7', '8', '6', '6', '7', '7', '8', '9' });
+            Span<char> span = new Span<char>(
+                new char[]
+                {
+                    '5',
+                    '1',
+                    '7',
+                    '2',
+                    '3',
+                    '7',
+                    '7',
+                    '4',
+                    '5',
+                    '7',
+                    '7',
+                    '7',
+                    '8',
+                    '6',
+                    '6',
+                    '7',
+                    '7',
+                    '8',
+                    '9',
+                }
+            );
             Span<char> value = new Span<char>(new char[] { '5', '1', '7' });
             int index = span.LastIndexOf(value);
             Assert.Equal(0, index);
@@ -19,7 +42,9 @@ namespace System.SpanTests
         [Fact]
         public static void LastIndexOfSequenceMultipleMatch_Char()
         {
-            Span<char> span = new Span<char>(new char[] { '1', '2', '3', '1', '2', '3', '1', '2', '3', '1' });
+            Span<char> span = new Span<char>(
+                new char[] { '1', '2', '3', '1', '2', '3', '1', '2', '3', '1' }
+            );
             Span<char> value = new Span<char>(new char[] { '2', '3' });
             int index = span.LastIndexOf(value);
             Assert.Equal(7, index);
@@ -28,7 +53,33 @@ namespace System.SpanTests
         [Fact]
         public static void LastIndexOfSequenceRestart_Char()
         {
-            Span<char> span = new Span<char>(new char[] { '5', '1', '7', '2', '3', '7', '7', '4', '5', '7', '7', '7', '8', '6', '6', '7', '7', '6', '9', '7', '0', '1' });
+            Span<char> span = new Span<char>(
+                new char[]
+                {
+                    '5',
+                    '1',
+                    '7',
+                    '2',
+                    '3',
+                    '7',
+                    '7',
+                    '4',
+                    '5',
+                    '7',
+                    '7',
+                    '7',
+                    '8',
+                    '6',
+                    '6',
+                    '7',
+                    '7',
+                    '6',
+                    '9',
+                    '7',
+                    '0',
+                    '1',
+                }
+            );
             Span<char> value = new Span<char>(new char[] { '7', '7', '8' });
             int index = span.LastIndexOf(value);
             Assert.Equal(10, index);
@@ -37,7 +88,30 @@ namespace System.SpanTests
         [Fact]
         public static void LastIndexOfSequenceNoMatch_Char()
         {
-            Span<char> span = new Span<char>(new char[] { '0', '1', '7', '2', '3', '7', '7', '4', '5', '7', '7', '7', '8', '6', '6', '7', '7', '8', '9' });
+            Span<char> span = new Span<char>(
+                new char[]
+                {
+                    '0',
+                    '1',
+                    '7',
+                    '2',
+                    '3',
+                    '7',
+                    '7',
+                    '4',
+                    '5',
+                    '7',
+                    '7',
+                    '7',
+                    '8',
+                    '6',
+                    '6',
+                    '7',
+                    '7',
+                    '8',
+                    '9',
+                }
+            );
             Span<char> value = new Span<char>(new char[] { '7', '7', '8', 'X' });
             int index = span.LastIndexOf(value);
             Assert.Equal(-1, index);
@@ -46,7 +120,30 @@ namespace System.SpanTests
         [Fact]
         public static void LastIndexOfSequenceNotEvenAHeadMatch_Char()
         {
-            Span<char> span = new Span<char>(new char[] { '0', '1', '7', '2', '3', '7', '7', '4', '5', '7', '7', '7', '8', '6', '6', '7', '7', '8', '9' });
+            Span<char> span = new Span<char>(
+                new char[]
+                {
+                    '0',
+                    '1',
+                    '7',
+                    '2',
+                    '3',
+                    '7',
+                    '7',
+                    '4',
+                    '5',
+                    '7',
+                    '7',
+                    '7',
+                    '8',
+                    '6',
+                    '6',
+                    '7',
+                    '7',
+                    '8',
+                    '9',
+                }
+            );
             Span<char> value = new Span<char>(new char[] { 'X', '7', '8', '9' });
             int index = span.LastIndexOf(value);
             Assert.Equal(-1, index);
@@ -74,7 +171,30 @@ namespace System.SpanTests
         public static void LastIndexOfSequenceZeroLengthValue_Char()
         {
             // A zero-length value is always "found" at the end of the span.
-            Span<char> span = new Span<char>(new char[] { '0', '1', '7', '2', '3', '7', '7', '4', '5', '7', '7', '7', '8', '6', '6', '7', '7', '8', '9' });
+            Span<char> span = new Span<char>(
+                new char[]
+                {
+                    '0',
+                    '1',
+                    '7',
+                    '2',
+                    '3',
+                    '7',
+                    '7',
+                    '4',
+                    '5',
+                    '7',
+                    '7',
+                    '7',
+                    '8',
+                    '6',
+                    '6',
+                    '7',
+                    '7',
+                    '8',
+                    '9',
+                }
+            );
             Span<char> value = new Span<char>(Array.Empty<char>());
             int index = span.LastIndexOf(value);
             Assert.Equal(span.Length, index);

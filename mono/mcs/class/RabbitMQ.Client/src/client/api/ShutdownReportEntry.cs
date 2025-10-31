@@ -65,25 +65,30 @@ namespace RabbitMQ.Client
     {
         public string m_description;
         public Exception m_ex;
-        
+
         public ShutdownReportEntry(string description, Exception ex)
         {
             m_description = description;
             m_ex = ex;
         }
-        
+
         ///<summary>Description provided in the error</summary>
-        public string Description { get { return m_description; } }
-        
+        public string Description
+        {
+            get { return m_description; }
+        }
+
         ///<summary>Exception object that occured during shutdown, or null
         ///if unspecified</summary>
-        public Exception Exception { get { return m_ex; } }
-        
+        public Exception Exception
+        {
+            get { return m_ex; }
+        }
+
         public override string ToString()
         {
             string output = "Message: " + Description;
-            return (Exception != null) ? output + " Exception: " + Exception :
-                                         output;
+            return (Exception != null) ? output + " Exception: " + Exception : output;
         }
     }
 }

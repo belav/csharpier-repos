@@ -4,6 +4,12 @@
 // Changes to this file must follow the https://aka.ms/api-review process.
 // ------------------------------------------------------------------------------
 
-[assembly: System.Runtime.CompilerServices.TypeForwardedTo(typeof(System.Security.AccessControl.RegistryAccessRule))]
-[assembly: System.Runtime.CompilerServices.TypeForwardedTo(typeof(System.Security.AccessControl.RegistryAuditRule))]
-[assembly: System.Runtime.CompilerServices.TypeForwardedTo(typeof(System.Security.AccessControl.RegistrySecurity))]
+[assembly: System.Runtime.CompilerServices.TypeForwardedTo(
+    typeof(System.Security.AccessControl.RegistryAccessRule)
+)]
+[assembly: System.Runtime.CompilerServices.TypeForwardedTo(
+    typeof(System.Security.AccessControl.RegistryAuditRule)
+)]
+[assembly: System.Runtime.CompilerServices.TypeForwardedTo(
+    typeof(System.Security.AccessControl.RegistrySecurity)
+)]

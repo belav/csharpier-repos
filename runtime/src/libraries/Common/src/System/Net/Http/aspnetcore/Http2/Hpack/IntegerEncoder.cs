@@ -20,7 +20,12 @@ namespace System.Net.Http.HPack
         /// <param name="destination">The destination span to encode <paramref name="value"/> to.</param>
         /// <param name="bytesWritten">The number of bytes used to encode <paramref name="value"/>.</param>
         /// <returns>If <paramref name="destination"/> had enough storage to encode <paramref name="value"/>, true. Otherwise, false.</returns>
-        public static bool Encode(int value, int numBits, Span<byte> destination, out int bytesWritten)
+        public static bool Encode(
+            int value,
+            int numBits,
+            Span<byte> destination,
+            out int bytesWritten
+        )
         {
             Debug.Assert(value >= 0);
             Debug.Assert(numBits >= 1 && numBits <= 8);

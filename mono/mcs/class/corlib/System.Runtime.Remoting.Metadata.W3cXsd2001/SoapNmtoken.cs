@@ -18,10 +18,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -33,45 +33,45 @@
 
 using System;
 
-namespace System.Runtime.Remoting.Metadata.W3cXsd2001 
+namespace System.Runtime.Remoting.Metadata.W3cXsd2001
 {
-	[Serializable]
-	[System.Runtime.InteropServices.ComVisible (true)]
-	public sealed class SoapNmtoken : ISoapXsd
-	{
-		string _value;
-		
-		public SoapNmtoken()
-		{
-		}
-		
-		public SoapNmtoken (string value)
-		{
-			_value = SoapHelper.Normalize (value);
-		}
-		
-		public string Value {
-			get { return _value; } 
-			set { _value = value; }
-		}
+    [Serializable]
+    [System.Runtime.InteropServices.ComVisible(true)]
+    public sealed class SoapNmtoken : ISoapXsd
+    {
+        string _value;
 
-		public static string XsdType {
-			get { return "NMTOKEN"; }
-		}
+        public SoapNmtoken() { }
 
-		public string GetXsdType()
-		{
-			return XsdType;
-		}
-		
-		public static SoapNmtoken Parse (string value)
-		{
-			return new SoapNmtoken (value);
-		}
+        public SoapNmtoken(string value)
+        {
+            _value = SoapHelper.Normalize(value);
+        }
 
-		public override string ToString()
-		{
-			return _value;
-		}
-	}
+        public string Value
+        {
+            get { return _value; }
+            set { _value = value; }
+        }
+
+        public static string XsdType
+        {
+            get { return "NMTOKEN"; }
+        }
+
+        public string GetXsdType()
+        {
+            return XsdType;
+        }
+
+        public static SoapNmtoken Parse(string value)
+        {
+            return new SoapNmtoken(value);
+        }
+
+        public override string ToString()
+        {
+            return _value;
+        }
+    }
 }

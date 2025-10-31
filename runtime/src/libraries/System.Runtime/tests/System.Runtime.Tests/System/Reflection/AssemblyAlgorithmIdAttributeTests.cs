@@ -9,13 +9,19 @@ namespace System.Reflection.Tests
     public class AssemblyAlgorithmIdAttributeTests
     {
         [Theory]
-        [InlineData((Configuration.Assemblies.AssemblyHashAlgorithm)(Configuration.Assemblies.AssemblyHashAlgorithm.None - 1))]
+        [InlineData(
+            (Configuration.Assemblies.AssemblyHashAlgorithm)(
+                Configuration.Assemblies.AssemblyHashAlgorithm.None - 1
+            )
+        )]
         [InlineData(Configuration.Assemblies.AssemblyHashAlgorithm.MD5)]
         [InlineData(Configuration.Assemblies.AssemblyHashAlgorithm.SHA1)]
         [InlineData(Configuration.Assemblies.AssemblyHashAlgorithm.SHA256)]
         [InlineData(Configuration.Assemblies.AssemblyHashAlgorithm.SHA384)]
         [InlineData(Configuration.Assemblies.AssemblyHashAlgorithm.SHA512)]
-        public void Ctor_AssemblyHashAlgorithm(Configuration.Assemblies.AssemblyHashAlgorithm algorithmId)
+        public void Ctor_AssemblyHashAlgorithm(
+            Configuration.Assemblies.AssemblyHashAlgorithm algorithmId
+        )
         {
             var attribute = new AssemblyAlgorithmIdAttribute(algorithmId);
             Assert.Equal((uint)algorithmId, attribute.AlgorithmId);

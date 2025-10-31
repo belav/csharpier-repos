@@ -7,7 +7,10 @@ using Xunit;
 
 namespace System.DirectoryServices.Protocols.Tests
 {
-    [ConditionalClass(typeof(DirectoryServicesTestHelpers), nameof(DirectoryServicesTestHelpers.IsWindowsOrLibLdapIsInstalled))]
+    [ConditionalClass(
+        typeof(DirectoryServicesTestHelpers),
+        nameof(DirectoryServicesTestHelpers.IsWindowsOrLibLdapIsInstalled)
+    )]
     public class SecurityDescriptorFlagControlTests
     {
         [Fact]
@@ -19,14 +22,29 @@ namespace System.DirectoryServices.Protocols.Tests
             Assert.True(control.ServerSide);
             Assert.Equal("1.2.840.113556.1.4.801", control.Type);
 
-            var expected = (RuntimeInformation.IsOSPlatform(OSPlatform.Windows)) ? new byte[] { 48, 132, 0, 0, 0, 3, 2, 1, 0 } : new byte[] { 48, 3, 2, 1, 0 };
+            var expected =
+                (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
+                    ? new byte[] { 48, 132, 0, 0, 0, 3, 2, 1, 0 }
+                    : new byte[] { 48, 3, 2, 1, 0 };
             Assert.Equal(expected, control.GetValue());
         }
 
         public static IEnumerable<object[]> Ctor_Flags_Data()
         {
-            yield return new object[] { SecurityMasks.Group, (RuntimeInformation.IsOSPlatform(OSPlatform.Windows)) ? new byte[] { 48, 132, 0, 0, 0, 3, 2, 1, 2 } : new byte[] { 48, 3, 2, 1, 2 } };
-            yield return new object[] { SecurityMasks.None - 1, (RuntimeInformation.IsOSPlatform(OSPlatform.Windows)) ? new byte[] { 48, 132, 0, 0, 0, 6, 2, 4, 255, 255, 255, 255 } : new byte[] { 48, 3, 2, 1, 255 } };
+            yield return new object[]
+            {
+                SecurityMasks.Group,
+                (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
+                    ? new byte[] { 48, 132, 0, 0, 0, 3, 2, 1, 2 }
+                    : new byte[] { 48, 3, 2, 1, 2 },
+            };
+            yield return new object[]
+            {
+                SecurityMasks.None - 1,
+                (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
+                    ? new byte[] { 48, 132, 0, 0, 0, 6, 2, 4, 255, 255, 255, 255 }
+                    : new byte[] { 48, 3, 2, 1, 255 },
+            };
         }
 
         [Theory]

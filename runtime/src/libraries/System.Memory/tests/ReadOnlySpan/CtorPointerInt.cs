@@ -1,9 +1,9 @@
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
-using Xunit;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
+using Xunit;
 
 namespace System.SpanTests
 {
@@ -19,7 +19,12 @@ namespace System.SpanTests
                 {
                     ReadOnlySpan<int> span = new ReadOnlySpan<int>(pa, 3);
                     span.Validate(90, 91, 92);
-                    Assert.True(Unsafe.AreSame(ref Unsafe.AsRef<int>(pa), ref Unsafe.AsRef(in MemoryMarshal.GetReference(span))));
+                    Assert.True(
+                        Unsafe.AreSame(
+                            ref Unsafe.AsRef<int>(pa),
+                            ref Unsafe.AsRef(in MemoryMarshal.GetReference(span))
+                        )
+                    );
                 }
             }
         }
@@ -31,7 +36,12 @@ namespace System.SpanTests
             {
                 ReadOnlySpan<int> span = new ReadOnlySpan<int>((void*)null, 0);
                 span.Validate();
-                Assert.True(Unsafe.AreSame(ref Unsafe.AsRef<int>((void*)null), ref Unsafe.AsRef(in MemoryMarshal.GetReference(span))));
+                Assert.True(
+                    Unsafe.AreSame(
+                        ref Unsafe.AsRef<int>((void*)null),
+                        ref Unsafe.AsRef(in MemoryMarshal.GetReference(span))
+                    )
+                );
             }
         }
 
@@ -41,11 +51,12 @@ namespace System.SpanTests
             unsafe
             {
                 Assert.Throws<ArgumentOutOfRangeException>(
-                    delegate ()
+                    delegate()
                     {
                         int i = 42;
                         ReadOnlySpan<int> span = new ReadOnlySpan<int>(&i, -1);
-                    });
+                    }
+                );
             }
         }
 
@@ -56,8 +67,15 @@ namespace System.SpanTests
             {
                 new ReadOnlySpan<int>((void*)null, 0);
                 new ReadOnlySpan<int?>((void*)null, 0);
-                AssertExtensions.Throws<ArgumentException>(null, () => new ReadOnlySpan<object>((void*)null, 0).DontBox());
-                AssertExtensions.Throws<ArgumentException>(null, () => new ReadOnlySpan<TestHelpers.StructWithReferences>((void*)null, 0).DontBox());
+                AssertExtensions.Throws<ArgumentException>(
+                    null,
+                    () => new ReadOnlySpan<object>((void*)null, 0).DontBox()
+                );
+                AssertExtensions.Throws<ArgumentException>(
+                    null,
+                    () =>
+                        new ReadOnlySpan<TestHelpers.StructWithReferences>((void*)null, 0).DontBox()
+                );
             }
         }
     }

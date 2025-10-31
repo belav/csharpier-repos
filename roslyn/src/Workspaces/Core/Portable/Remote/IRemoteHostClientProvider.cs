@@ -9,7 +9,7 @@ using Microsoft.CodeAnalysis.Host;
 namespace Microsoft.CodeAnalysis.Remote
 {
     /// <summary>
-    /// Returns a <see cref="RemoteHostClient"/> that a user can use to communicate with a remote host (i.e. ServiceHub) 
+    /// Returns a <see cref="RemoteHostClient"/> that a user can use to communicate with a remote host (i.e. ServiceHub)
     /// </summary>
     internal interface IRemoteHostClientProvider : IWorkspaceService
     {

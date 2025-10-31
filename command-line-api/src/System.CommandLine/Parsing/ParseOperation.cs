@@ -26,7 +26,8 @@ namespace System.CommandLine.Parsing
             List<CliToken> tokens,
             CliConfiguration configuration,
             List<string>? tokenizeErrors,
-            string? rawInput)
+            string? rawInput
+        )
         {
             _tokens = tokens;
             _configuration = configuration;
@@ -35,7 +36,8 @@ namespace System.CommandLine.Parsing
             _innermostCommandResult = _rootCommandResult = new CommandResult(
                 _configuration.RootCommand,
                 CurrentToken,
-                _symbolResultTree);
+                _symbolResultTree
+            );
             _symbolResultTree.Add(_configuration.RootCommand, _rootCommandResult);
 
             Advance();
@@ -71,7 +73,7 @@ namespace System.CommandLine.Parsing
                 }
             }
 
-            return new (
+            return new(
                 _configuration,
                 _rootCommandResult,
                 _innermostCommandResult,
@@ -80,7 +82,8 @@ namespace System.CommandLine.Parsing
                 _symbolResultTree.Errors,
                 _rawInput,
                 _primaryAction,
-                _preActions);
+                _preActions
+            );
         }
 
         private void ParseSubcommand()
@@ -91,7 +94,8 @@ namespace System.CommandLine.Parsing
                 command,
                 CurrentToken,
                 _symbolResultTree,
-                _innermostCommandResult);
+                _innermostCommandResult
+            );
 
             _symbolResultTree.Add(command, _innermostCommandResult);
 
@@ -127,13 +131,23 @@ namespace System.CommandLine.Parsing
             }
         }
 
-        private void ParseCommandArguments(ref int currentArgumentCount, ref int currentArgumentIndex)
+        private void ParseCommandArguments(
+            ref int currentArgumentCount,
+            ref int currentArgumentIndex
+        )
         {
-            while (More(out CliTokenType currentTokenType) && currentTokenType == CliTokenType.Argument)
+            while (
+                More(out CliTokenType currentTokenType) && currentTokenType == CliTokenType.Argument
+            )
             {
-                while (_innermostCommandResult.Command.HasArguments && currentArgumentIndex < _innermostCommandResult.Command.Arguments.Count)
+                while (
+                    _innermostCommandResult.Command.HasArguments
+                    && currentArgumentIndex < _innermostCommandResult.Command.Arguments.Count
+                )
                 {
-                    CliArgument argument = _innermostCommandResult.Command.Arguments[currentArgumentIndex];
+                    CliArgument argument = _innermostCommandResult.Command.Arguments[
+                        currentArgumentIndex
+                    ];
 
                     if (currentArgumentCount < argument.Arity.MaximumNumberOfValues)
                     {
@@ -143,14 +157,18 @@ namespace System.CommandLine.Parsing
                             CurrentToken.Symbol = argument;
                         }
 
-                        if (!(_symbolResultTree.TryGetValue(argument, out var symbolResult)
-                            && symbolResult is ArgumentResult argumentResult))
+                        if (
+                            !(
+                                _symbolResultTree.TryGetValue(argument, out var symbolResult)
+                                && symbolResult is ArgumentResult argumentResult
+                            )
+                        )
                         {
-                            argumentResult =
-                                new ArgumentResult(
-                                    argument,
-                                    _symbolResultTree,
-                                    _innermostCommandResult);
+                            argumentResult = new ArgumentResult(
+                                argument,
+                                _symbolResultTree,
+                                _innermostCommandResult
+                            );
 
                             _symbolResultTree.Add(argument, argumentResult);
                         }
@@ -211,7 +229,8 @@ namespace System.CommandLine.Parsing
                     option,
                     _symbolResultTree,
                     CurrentToken,
-                    _innermostCommandResult);
+                    _innermostCommandResult
+                );
 
                 _symbolResultTree.Add(option, optionResult);
             }
@@ -234,7 +253,9 @@ namespace System.CommandLine.Parsing
             var contiguousTokens = 0;
             int argumentCount = 0;
 
-            while (More(out CliTokenType currentTokenType) && currentTokenType == CliTokenType.Argument)
+            while (
+                More(out CliTokenType currentTokenType) && currentTokenType == CliTokenType.Argument
+            )
             {
                 if (argumentCount >= argument.Arity.MaximumNumberOfValues)
                 {
@@ -254,13 +275,14 @@ namespace System.CommandLine.Parsing
                     break;
                 }
 
-                if (!(_symbolResultTree.TryGetValue(argument, out SymbolResult? symbolResult)
-                    && symbolResult is ArgumentResult argumentResult))
+                if (
+                    !(
+                        _symbolResultTree.TryGetValue(argument, out SymbolResult? symbolResult)
+                        && symbolResult is ArgumentResult argumentResult
+                    )
+                )
                 {
-                    argumentResult = new ArgumentResult(
-                            argument,
-                            _symbolResultTree,
-                            optionResult);
+                    argumentResult = new ArgumentResult(argument, _symbolResultTree, optionResult);
 
                     _symbolResultTree.Add(argument, argumentResult);
                 }
@@ -284,7 +306,11 @@ namespace System.CommandLine.Parsing
             {
                 if (!_symbolResultTree.ContainsKey(argument))
                 {
-                    var argumentResult = new ArgumentResult(argument, _symbolResultTree, optionResult);
+                    var argumentResult = new ArgumentResult(
+                        argument,
+                        _symbolResultTree,
+                        optionResult
+                    );
                     _symbolResultTree.Add(argument, argumentResult);
                 }
             }
@@ -292,7 +318,10 @@ namespace System.CommandLine.Parsing
 
         private void ParseDirectives()
         {
-            while (More(out CliTokenType currentTokenType) && currentTokenType == CliTokenType.Directive)
+            while (
+                More(out CliTokenType currentTokenType)
+                && currentTokenType == CliTokenType.Directive
+            )
             {
                 if (_configuration.HasDirectives)
                 {
@@ -320,7 +349,7 @@ namespace System.CommandLine.Parsing
                 }
                 else
                 {
-                    result = new (directive, token, _symbolResultTree);
+                    result = new(directive, token, _symbolResultTree);
                     _symbolResultTree.Add(directive, result);
                 }
 
@@ -363,7 +392,11 @@ namespace System.CommandLine.Parsing
                 return;
             }
 
-            _symbolResultTree.AddUnmatchedToken(CurrentToken, _innermostCommandResult, _rootCommandResult);
+            _symbolResultTree.AddUnmatchedToken(
+                CurrentToken,
+                _innermostCommandResult,
+                _rootCommandResult
+            );
         }
 
         private void Validate()

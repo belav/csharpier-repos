@@ -28,34 +28,37 @@
 extern alias MonoSecurity;
 #endif
 
-using System;
-using System.IO;
+using System;using System.IO;
 using System.Net.Security;
 using System.Security.Authentication;
 using System.Security.Cryptography.X509Certificates;
-
 #if MONO_SECURITY_ALIAS
+
 using MonoSecurity::Mono.Security.Interface;
+using MNS = Mono.Net.Security;
 #else
 using Mono.Security.Interface;
 #endif
 
-using MNS = Mono.Net.Security;
-
 namespace Mono.Btls
 {
-	class MonoBtlsStream : MNS.MobileAuthenticatedStream
-	{
-		public MonoBtlsStream (Stream innerStream, bool leaveInnerStreamOpen, SslStream owner,
-		                       MonoTlsSettings settings, MNS.MobileTlsProvider provider)
-			: base (innerStream, leaveInnerStreamOpen, owner, settings, provider)
-		{
-		}
+    class MonoBtlsStream : MNS.MobileAuthenticatedStream
+    {
+        public MonoBtlsStream(
+            Stream innerStream,
+            bool leaveInnerStreamOpen,
+            SslStream owner,
+            MonoTlsSettings settings,
+            MNS.MobileTlsProvider provider
+        )
+            : base(innerStream, leaveInnerStreamOpen, owner, settings, provider) { }
 
-		protected override MNS.MobileTlsContext CreateContext (MNS.MonoSslAuthenticationOptions options)
-		{
-			return new MonoBtlsContext (this, options);
-		}
-	}
+        protected override MNS.MobileTlsContext CreateContext(
+            MNS.MonoSslAuthenticationOptions options
+        )
+        {
+            return new MonoBtlsContext(this, options);
+        }
+    }
 }
 #endif

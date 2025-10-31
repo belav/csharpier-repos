@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -30,28 +30,22 @@ using System.Runtime.Serialization;
 
 namespace System.IdentityModel.Selectors
 {
-	[Serializable]
-	public class UnsupportedPolicyOptionsException : Exception
-	{
-		public UnsupportedPolicyOptionsException ()
-			: this ("UnsupportedPolicyOptions exception.")
-		{
-		}
+    [Serializable]
+    public class UnsupportedPolicyOptionsException : Exception
+    {
+        public UnsupportedPolicyOptionsException()
+            : this("UnsupportedPolicyOptions exception.") { }
 
-		public UnsupportedPolicyOptionsException (string message)
-			: this (message, null)
-		{
-		}
+        public UnsupportedPolicyOptionsException(string message)
+            : this(message, null) { }
 
-		protected UnsupportedPolicyOptionsException (SerializationInfo info,
-			StreamingContext context)
-			: base (info, context)
-		{
-		}
+        protected UnsupportedPolicyOptionsException(
+            SerializationInfo info,
+            StreamingContext context
+        )
+            : base(info, context) { }
 
-		public UnsupportedPolicyOptionsException (string message, Exception innerException)
-			: base (message, innerException)
-		{
-		}
-	}
+        public UnsupportedPolicyOptionsException(string message, Exception innerException)
+            : base(message, innerException) { }
+    }
 }

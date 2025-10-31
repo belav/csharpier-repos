@@ -3,14 +3,14 @@
 // See the LICENSE file in the project root for more information.
 
 using System;
+using System.Collections.Immutable;
 using System.Linq;
 using Microsoft.Build.Framework;
 using Microsoft.CodeAnalysis.BuildTasks;
-using Xunit;
+using Microsoft.CodeAnalysis.CSharp;
 using Moq;
 using Roslyn.Test.Utilities;
-using Microsoft.CodeAnalysis.CSharp;
-using System.Collections.Immutable;
+using Xunit;
 
 namespace Microsoft.CodeAnalysis.BuildTasks.UnitTests
 {
@@ -28,9 +28,9 @@ namespace Microsoft.CodeAnalysis.BuildTasks.UnitTests
             foreach (var name in assembly.GetReferencedAssemblies())
             {
                 var isBadRef =
-                    name.Name == typeof(Compilation).Assembly.GetName().Name ||
-                    name.Name == typeof(CSharpCompilation).Assembly.GetName().Name ||
-                    name.Name == typeof(ImmutableArray<string>).Assembly.GetName().Name;
+                    name.Name == typeof(Compilation).Assembly.GetName().Name
+                    || name.Name == typeof(CSharpCompilation).Assembly.GetName().Name
+                    || name.Name == typeof(ImmutableArray<string>).Assembly.GetName().Name;
                 Assert.False(isBadRef);
             }
         }

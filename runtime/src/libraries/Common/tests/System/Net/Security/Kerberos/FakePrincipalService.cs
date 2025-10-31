@@ -18,7 +18,9 @@ class FakePrincipalService : IPrincipalService
     public FakePrincipalService(string realm)
     {
         _realm = realm;
-        _principals = new Dictionary<string, IKerberosPrincipal>(StringComparer.InvariantCultureIgnoreCase);
+        _principals = new Dictionary<string, IKerberosPrincipal>(
+            StringComparer.InvariantCultureIgnoreCase
+        );
     }
 
     public void Add(string name, IKerberosPrincipal principal)

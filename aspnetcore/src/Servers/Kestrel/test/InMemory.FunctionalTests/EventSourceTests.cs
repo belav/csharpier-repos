@@ -353,8 +353,8 @@ public class EventSourceTests : LoggedTest
             };
 
             using var handshakeCts = new CancellationTokenSource(TestConstants.DefaultTimeout);
-            await Assert.ThrowsAnyAsync<Exception>(
-                () => sslStream.AuthenticateAsClientAsync(clientAuthOptions, handshakeCts.Token)
+            await Assert.ThrowsAnyAsync<Exception>(() =>
+                sslStream.AuthenticateAsClientAsync(clientAuthOptions, handshakeCts.Token)
             );
         }
 

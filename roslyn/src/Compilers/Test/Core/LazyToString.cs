@@ -12,10 +12,9 @@ namespace Roslyn.Test.Utilities
     {
         private readonly Func<object> _evaluator;
 
-        public LazyToString(Func<object> evaluator)
-            => _evaluator = evaluator ?? throw new ArgumentNullException(nameof(evaluator));
+        public LazyToString(Func<object> evaluator) =>
+            _evaluator = evaluator ?? throw new ArgumentNullException(nameof(evaluator));
 
-        public override string ToString()
-            => _evaluator().ToString();
+        public override string ToString() => _evaluator().ToString();
     }
 }

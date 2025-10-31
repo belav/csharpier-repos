@@ -10,8 +10,9 @@ public abstract class ServiceProviderFixtureBase : FixtureBase
 
     private ListLoggerFactory _listLoggerFactory;
 
-    public ListLoggerFactory ListLoggerFactory
-        => _listLoggerFactory ??= (ListLoggerFactory)ServiceProvider.GetRequiredService<ILoggerFactory>();
+    public ListLoggerFactory ListLoggerFactory =>
+        _listLoggerFactory ??= (ListLoggerFactory)
+            ServiceProvider.GetRequiredService<ILoggerFactory>();
 
     protected ServiceProviderFixtureBase()
     {
@@ -19,23 +20,25 @@ public abstract class ServiceProviderFixtureBase : FixtureBase
             .BuildServiceProvider(validateScopes: true);
     }
 
-    public DbContextOptions CreateOptions(TestStore testStore)
-        => AddOptions(testStore.AddProviderOptions(new DbContextOptionsBuilder()))
+    public DbContextOptions CreateOptions(TestStore testStore) =>
+        AddOptions(testStore.AddProviderOptions(new DbContextOptionsBuilder()))
             .EnableDetailedErrors()
             .UseInternalServiceProvider(ServiceProvider)
             .EnableServiceProviderCaching(false)
             .Options;
 
-    protected override IServiceCollection AddServices(IServiceCollection serviceCollection)
-        => base.AddServices(serviceCollection)
-            .AddSingleton<ILoggerFactory>(TestStoreFactory.CreateListLoggerFactory(ShouldLogCategory))
-            .AddSingleton<IModelCacheKeyFactory>(new FuncCacheKeyFactory(GetAdditionalModelCacheKey));
+    protected override IServiceCollection AddServices(IServiceCollection serviceCollection) =>
+        base.AddServices(serviceCollection)
+            .AddSingleton<ILoggerFactory>(
+                TestStoreFactory.CreateListLoggerFactory(ShouldLogCategory)
+            )
+            .AddSingleton<IModelCacheKeyFactory>(
+                new FuncCacheKeyFactory(GetAdditionalModelCacheKey)
+            );
 
-    protected virtual bool ShouldLogCategory(string logCategory)
-        => false;
+    protected virtual bool ShouldLogCategory(string logCategory) => false;
 
-    protected virtual object GetAdditionalModelCacheKey(DbContext context)
-        => null;
+    protected virtual object GetAdditionalModelCacheKey(DbContext context) => null;
 
     private class FuncCacheKeyFactory : IModelCacheKeyFactory
     {
@@ -46,10 +49,10 @@ public abstract class ServiceProviderFixtureBase : FixtureBase
             _getAdditionalKey = getAdditionalKey;
         }
 
-        public object Create(DbContext context)
-            => Tuple.Create(context.GetType(), _getAdditionalKey(context));
+        public object Create(DbContext context) =>
+            Tuple.Create(context.GetType(), _getAdditionalKey(context));
 
-        public object Create(DbContext context, bool designTime)
-            => Tuple.Create(context.GetType(), _getAdditionalKey(context), designTime);
+        public object Create(DbContext context, bool designTime) =>
+            Tuple.Create(context.GetType(), _getAdditionalKey(context), designTime);
     }
 }

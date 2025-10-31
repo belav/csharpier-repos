@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -26,58 +26,56 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
-using NUnit.Framework;
-
 using System;
 using System.Reflection;
 using System.Security;
 using System.Security.Permissions;
 using Microsoft.Win32;
-
 using MonoTests.System;
+using NUnit.Framework;
 
-namespace MonoCasTests.System {
+namespace MonoCasTests.System
+{
+    [TestFixture]
+    [Category("CAS")]
+    public class UriBuilderCas
+    {
+        [SetUp]
+        public virtual void SetUp()
+        {
+            if (!SecurityManager.SecurityEnabled)
+                Assert.Ignore("SecurityManager.SecurityEnabled is OFF");
+        }
 
-	[TestFixture]
-	[Category ("CAS")]
-	public class UriBuilderCas {
+        [Test]
+        [PermissionSet(SecurityAction.Deny, Unrestricted = true)]
+        public void UnitTestReuse()
+        {
+            UriBuilderTest unit = new UriBuilderTest();
+            unit.Constructor_Empty();
+            unit.Constructor_5();
+            unit.Equals();
+            unit.EmptyQuery();
 
-		[SetUp]
-		public virtual void SetUp ()
-		{
-			if (!SecurityManager.SecurityEnabled)
-				Assert.Ignore ("SecurityManager.SecurityEnabled is OFF");
-		}
+            unit.GetReady();
+            unit.Path();
+            unit.Query();
+            unit.Fragment();
+            unit.Scheme();
 
-		[Test]
-		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-		public void UnitTestReuse ()
-		{
-			UriBuilderTest unit = new UriBuilderTest ();
-			unit.Constructor_Empty ();
-			unit.Constructor_5 ();
-			unit.Equals ();
-			unit.EmptyQuery ();
+            unit.GetReady();
+            unit.ToStringTest();
+            unit.GetReady();
+            unit.DefaultPort();
+        }
 
-			unit.GetReady ();
-			unit.Path ();
-			unit.Query ();
-			unit.Fragment ();
-			unit.Scheme ();
-
-			unit.GetReady ();
-			unit.ToStringTest ();
-			unit.GetReady ();
-			unit.DefaultPort ();
-		}
-
-		[Test]
-		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-		public void LinkDemand_Deny_Unrestricted ()
-		{
-			ConstructorInfo ci = typeof (UriBuilder).GetConstructor (new Type [0]);
-			Assert.IsNotNull (ci, "default .ctor");
-			Assert.IsNotNull (ci.Invoke (null), "invoke");
-		}
-	}
+        [Test]
+        [PermissionSet(SecurityAction.Deny, Unrestricted = true)]
+        public void LinkDemand_Deny_Unrestricted()
+        {
+            ConstructorInfo ci = typeof(UriBuilder).GetConstructor(new Type[0]);
+            Assert.IsNotNull(ci, "default .ctor");
+            Assert.IsNotNull(ci.Invoke(null), "invoke");
+        }
+    }
 }

@@ -8,10 +8,8 @@ namespace System.CommandLine.Rendering
     [DebuggerDisplay("{" + nameof(Name) + "}")]
     public class CursorControlSpan : ControlSpan
     {
-        public CursorControlSpan(string name, AnsiControlCode ansiControlCode) :
-            base(name, ansiControlCode)
-        {
-        }
+        public CursorControlSpan(string name, AnsiControlCode ansiControlCode)
+            : base(name, ansiControlCode) { }
 
         public override int ContentLength => 0;
 

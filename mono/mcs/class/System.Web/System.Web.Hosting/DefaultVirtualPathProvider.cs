@@ -14,10 +14,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -32,84 +32,81 @@ using System.IO;
 using System.Web.Caching;
 using System.Web.Util;
 
-namespace System.Web.Hosting {
-	sealed class DefaultVirtualPathProvider : VirtualPathProvider {
+namespace System.Web.Hosting
+{
+    sealed class DefaultVirtualPathProvider : VirtualPathProvider
+    {
+        internal DefaultVirtualPathProvider() { }
 
-		internal DefaultVirtualPathProvider ()
-		{
-		}
+        protected override void Initialize() { }
 
-		protected override void Initialize ()
-		{
-		}
+        /*
+         * No need to override this, it seems
+        public override string CombineVirtualPaths (string basePath, string relativePath)
+        {
+            return VirtualPathUtility.Combine (basePath, relativePath);
+        }
+        */
 
-		/*
-		 * No need to override this, it seems
-		public override string CombineVirtualPaths (string basePath, string relativePath)
-		{
-			return VirtualPathUtility.Combine (basePath, relativePath);
-		}
-		*/
+        public override bool DirectoryExists(string virtualDir)
+        {
+            if (String.IsNullOrEmpty(virtualDir))
+                throw new ArgumentNullException("virtualDir");
 
-		public override bool DirectoryExists (string virtualDir)
-		{
-			if (String.IsNullOrEmpty (virtualDir))
-				throw new ArgumentNullException ("virtualDir");
+            string phys_path = HostingEnvironment.MapPath(virtualDir);
+            return Directory.Exists(phys_path);
+        }
 
-			string phys_path = HostingEnvironment.MapPath (virtualDir);
-			return Directory.Exists (phys_path);
-		}
+        public override bool FileExists(string virtualPath)
+        {
+            if (String.IsNullOrEmpty(virtualPath))
+                throw new ArgumentNullException("virtualPath");
 
-		public override bool FileExists (string virtualPath)
-		{
-			if (String.IsNullOrEmpty (virtualPath))
-				throw new ArgumentNullException ("virtualPath");
+            string phys_path = HostingEnvironment.MapPath(virtualPath);
+            return File.Exists(phys_path);
+        }
 
-			string phys_path = HostingEnvironment.MapPath (virtualPath);
-			return File.Exists (phys_path);
-		}
+        public override CacheDependency GetCacheDependency(
+            string virtualPath,
+            IEnumerable virtualPathDependencies,
+            DateTime utcStart
+        )
+        {
+            return null;
+        }
 
-		public override CacheDependency GetCacheDependency (string virtualPath,
-								IEnumerable virtualPathDependencies,
-								DateTime utcStart)
-		{
-			return null;
-		}
+        public override string GetCacheKey(string virtualPath)
+        {
+            return null; // Always
+        }
 
-		public override string GetCacheKey (string virtualPath)
-		{
-			return null; // Always
-		}
+        public override VirtualDirectory GetDirectory(string virtualDir)
+        {
+            if (String.IsNullOrEmpty(virtualDir))
+                throw new ArgumentNullException("virtualDir");
 
-		public override VirtualDirectory GetDirectory (string virtualDir)
-		{
-			if (String.IsNullOrEmpty (virtualDir))
-				throw new ArgumentNullException ("virtualDir");
+            return new DefaultVirtualDirectory(virtualDir);
+        }
 
-			return new DefaultVirtualDirectory (virtualDir);
-		}
+        public override VirtualFile GetFile(string virtualPath)
+        {
+            if (String.IsNullOrEmpty(virtualPath))
+                throw new ArgumentNullException("virtualPath");
 
-		public override VirtualFile GetFile (string virtualPath)
-		{
-			if (String.IsNullOrEmpty (virtualPath))
-				throw new ArgumentNullException ("virtualPath");
+            return new DefaultVirtualFile(virtualPath);
+        }
 
-			return new DefaultVirtualFile (virtualPath);
-		}
+        public override string GetFileHash(string virtualPath, IEnumerable virtualPathDependencies)
+        {
+            if (virtualPath == null || virtualPathDependencies == null)
+                throw new NullReferenceException();
 
-		public override string GetFileHash (string virtualPath, IEnumerable virtualPathDependencies)
-		{
-			if (virtualPath == null || virtualPathDependencies == null)
-				throw new NullReferenceException ();
-
-			// No deps -> 1505
-			// Non-existing virtual deps -> 1505
-			// Relative virtual deps -> exception
-			// virtualPath does not matter at all (?)
-			// The number varies accross xsp executions
-			return virtualPath;
-		}
-	}
+            // No deps -> 1505
+            // Non-existing virtual deps -> 1505
+            // Relative virtual deps -> exception
+            // virtualPath does not matter at all (?)
+            // The number varies accross xsp executions
+            return virtualPath;
+        }
+    }
 }
-
-

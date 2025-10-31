@@ -44,6 +44,7 @@ public class Runtime_86498
 
     private struct Foo
     {
-        public short X, Y;
+        public short X,
+            Y;
     }
 }

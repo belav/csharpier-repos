@@ -62,8 +62,8 @@ public class AsciiDecodingTests
                 var byteRange = Enumerable.Range(1, length).Select(x => (byte)x).ToArray();
                 byteRange[position] = b;
 
-                Assert.Throws<InvalidOperationException>(
-                    () => new Span<byte>(byteRange).GetAsciiStringNonNullCharacters()
+                Assert.Throws<InvalidOperationException>(() =>
+                    new Span<byte>(byteRange).GetAsciiStringNonNullCharacters()
                 );
             }
         }

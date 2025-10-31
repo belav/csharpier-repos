@@ -17,34 +17,33 @@ namespace System.Xml.ReaderSettingsTests
                 this.AddChild(new CVariation(v1) { Attribute = new Variation("Null Input") });
             }
 
-
             // for function v2
             {
                 this.AddChild(new CVariation(v2) { Attribute = new Variation("Valid Input") });
             }
-
 
             // for function v3
             {
                 this.AddChild(new CVariation(v3) { Attribute = new Variation("Null Settings") });
             }
 
-
             // for function v5
             {
-                this.AddChild(new CVariation(v5) { Attribute = new Variation("Null ParserContext") });
+                this.AddChild(
+                    new CVariation(v5) { Attribute = new Variation("Null ParserContext") }
+                );
             }
-
 
             // for function v6
             {
                 this.AddChild(new CVariation(v6) { Attribute = new Variation("Valid Settings") });
             }
 
-
             // for function v7
             {
-                this.AddChild(new CVariation(v7) { Attribute = new Variation("Valid ParserContext") });
+                this.AddChild(
+                    new CVariation(v7) { Attribute = new Variation("Valid ParserContext") }
+                );
             }
         }
     }

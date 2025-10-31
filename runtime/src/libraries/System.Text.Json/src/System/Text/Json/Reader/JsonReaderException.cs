@@ -9,15 +9,17 @@ namespace System.Text.Json
     [Serializable]
     internal sealed class JsonReaderException : JsonException
     {
-        public JsonReaderException(string message, long lineNumber, long bytePositionInLine) : base(message, path: null, lineNumber, bytePositionInLine)
-        {
-        }
+        public JsonReaderException(string message, long lineNumber, long bytePositionInLine)
+            : base(message, path: null, lineNumber, bytePositionInLine) { }
 
 #if NET8_0_OR_GREATER
-        [Obsolete(Obsoletions.LegacyFormatterImplMessage, DiagnosticId = Obsoletions.LegacyFormatterImplDiagId, UrlFormat = Obsoletions.SharedUrlFormat)]
+        [Obsolete(
+            Obsoletions.LegacyFormatterImplMessage,
+            DiagnosticId = Obsoletions.LegacyFormatterImplDiagId,
+            UrlFormat = Obsoletions.SharedUrlFormat
+        )]
 #endif
-        private JsonReaderException(SerializationInfo info, StreamingContext context) : base(info, context)
-        {
-        }
+        private JsonReaderException(SerializationInfo info, StreamingContext context)
+            : base(info, context) { }
     }
 }

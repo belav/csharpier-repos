@@ -4,30 +4,38 @@
 
 #nullable disable
 
+using System.Diagnostics;
 using Microsoft.CodeAnalysis.CSharp.Symbols;
 using Microsoft.CodeAnalysis.Emit;
-using System.Diagnostics;
 
 namespace Microsoft.CodeAnalysis.CSharp.Emit
 {
     /// <summary>
     /// Represents a reference to a type nested in an instantiation of a generic type.
-    /// e.g. 
+    /// e.g.
     /// A{int}.B
     /// A.B{int}.C.D
     /// </summary>
-    internal class SpecializedNestedTypeReference : NamedTypeReference, Cci.ISpecializedNestedTypeReference
+    internal class SpecializedNestedTypeReference
+        : NamedTypeReference,
+            Cci.ISpecializedNestedTypeReference
     {
         public SpecializedNestedTypeReference(NamedTypeSymbol underlyingNamedType)
-            : base(underlyingNamedType)
-        {
-        }
+            : base(underlyingNamedType) { }
 
-        Cci.INestedTypeReference Cci.ISpecializedNestedTypeReference.GetUnspecializedVersion(EmitContext context)
+        Cci.INestedTypeReference Cci.ISpecializedNestedTypeReference.GetUnspecializedVersion(
+            EmitContext context
+        )
         {
             Debug.Assert(UnderlyingNamedType.OriginalDefinition.IsDefinition);
-            var result = ((PEModuleBuilder)context.Module).Translate(this.UnderlyingNamedType.OriginalDefinition,
-                                          (CSharpSyntaxNode)context.SyntaxNode, context.Diagnostics, needDeclaration: true).AsNestedTypeReference;
+            var result = ((PEModuleBuilder)context.Module)
+                .Translate(
+                    this.UnderlyingNamedType.OriginalDefinition,
+                    (CSharpSyntaxNode)context.SyntaxNode,
+                    context.Diagnostics,
+                    needDeclaration: true
+                )
+                .AsNestedTypeReference;
 
             Debug.Assert(result != null);
             return result;
@@ -40,7 +48,11 @@ namespace Microsoft.CodeAnalysis.CSharp.Emit
 
         Cci.ITypeReference Cci.ITypeMemberReference.GetContainingType(EmitContext context)
         {
-            return ((PEModuleBuilder)context.Module).Translate(UnderlyingNamedType.ContainingType, (CSharpSyntaxNode)context.SyntaxNode, context.Diagnostics);
+            return ((PEModuleBuilder)context.Module).Translate(
+                UnderlyingNamedType.ContainingType,
+                (CSharpSyntaxNode)context.SyntaxNode,
+                context.Diagnostics
+            );
         }
 
         public override Cci.IGenericTypeInstanceReference AsGenericTypeInstanceReference

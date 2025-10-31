@@ -32,7 +32,10 @@ namespace Microsoft.VisualStudio.Debugger.Evaluation
         private readonly Dispatcher<IDkmClrFormatter> _formatters;
         private readonly Dispatcher<IDkmClrResultProvider> _resultProviders;
 
-        internal DkmInspectionSession(ImmutableArray<IDkmClrFormatter> formatters, ImmutableArray<IDkmClrResultProvider> resultProviders)
+        internal DkmInspectionSession(
+            ImmutableArray<IDkmClrFormatter> formatters,
+            ImmutableArray<IDkmClrResultProvider> resultProviders
+        )
         {
             _formatters = new Dispatcher<IDkmClrFormatter>(formatters);
             _resultProviders = new Dispatcher<IDkmClrResultProvider>(resultProviders);
@@ -43,7 +46,11 @@ namespace Microsoft.VisualStudio.Debugger.Evaluation
             return _formatters.Invoke(instance, method, f);
         }
 
-        internal T InvokeResultProvider<T>(object instance, MethodId method, Func<IDkmClrResultProvider, T> f)
+        internal T InvokeResultProvider<T>(
+            object instance,
+            MethodId method,
+            Func<IDkmClrResultProvider, T> f
+        )
         {
             return _resultProviders.Invoke(instance, method, f);
         }
@@ -57,8 +64,10 @@ namespace Microsoft.VisualStudio.Debugger.Evaluation
                     Instance = instance;
                     Method = method;
                 }
+
                 internal readonly object Instance;
                 internal readonly MethodId Method;
+
                 internal bool Equals(InstanceAndMethod other)
                 {
                     return Instance == other.Instance && Method == other.Method;
@@ -74,7 +83,11 @@ namespace Microsoft.VisualStudio.Debugger.Evaluation
                 _calls = new ArrayBuilder<InstanceAndMethod>();
             }
 
-            internal TResult Invoke<TResult>(object instance, MethodId method, Func<TInterface, TResult> f)
+            internal TResult Invoke<TResult>(
+                object instance,
+                MethodId method,
+                Func<TInterface, TResult> f
+            )
             {
                 // If the last n - 1 calls are to the same method,
                 // call the n-th implementation.

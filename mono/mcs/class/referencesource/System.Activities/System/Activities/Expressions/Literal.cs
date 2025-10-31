@@ -18,7 +18,10 @@ namespace System.Activities.Expressions
 
     [DebuggerStepThrough]
     [ContentProperty("Value")]
-    public sealed class Literal<T> : CodeActivity<T>, IExpressionContainer, IValueSerializableExpression
+    public sealed class Literal<T>
+        : CodeActivity<T>,
+            IExpressionContainer,
+            IValueSerializableExpression
     {
         static Regex ExpressionEscapeRegex = new Regex(@"^(%*\[)");
 
@@ -33,11 +36,7 @@ namespace System.Activities.Expressions
             this.Value = value;
         }
 
-        public T Value
-        {
-            get;
-            set;
-        }
+        public T Value { get; set; }
 
         protected override void CacheMetadata(CodeActivityMetadata metadata)
         {
@@ -45,7 +44,9 @@ namespace System.Activities.Expressions
 
             if (!literalType.IsValueType && literalType != TypeHelper.StringType)
             {
-                metadata.AddValidationError(SR.LiteralsMustBeValueTypesOrImmutableTypes(TypeHelper.StringType, literalType));
+                metadata.AddValidationError(
+                    SR.LiteralsMustBeValueTypesOrImmutableTypes(TypeHelper.StringType, literalType)
+                );
             }
         }
 
@@ -69,7 +70,7 @@ namespace System.Activities.Expressions
             {
                 return true;
             }
-            
+
             typeArgument = typeof(T);
             valueType = this.Value.GetType();
 
@@ -80,14 +81,16 @@ namespace System.Activities.Expressions
                 {
                     return false;
                 }
-            }          
+            }
 
             converter = TypeDescriptor.GetConverter(typeArgument);
-            if (typeArgument == valueType &&
-                converter != null && 
-                converter.CanConvertTo(TypeHelper.StringType) && 
-                converter.CanConvertFrom(TypeHelper.StringType))
-            {               
+            if (
+                typeArgument == valueType
+                && converter != null
+                && converter.CanConvertTo(TypeHelper.StringType)
+                && converter.CanConvertFrom(TypeHelper.StringType)
+            )
+            {
                 if (valueType == typeof(DateTime))
                 {
                     DateTime literalValue = (DateTime)(object)this.Value;
@@ -108,7 +111,11 @@ namespace System.Activities.Expressions
 
         static bool IsShortTimeFormattingSafe(DateTime literalValue)
         {
-            if (literalValue.Second == 0 && literalValue.Millisecond == 0 && literalValue.Kind == DateTimeKind.Unspecified)
+            if (
+                literalValue.Second == 0
+                && literalValue.Millisecond == 0
+                && literalValue.Kind == DateTimeKind.Unspecified
+            )
             {
                 // Dev10's DateTime's string conversion lost seconds, milliseconds, the remaining ticks and DateTimeKind data.
                 // In Dev11, DateTime is special-cased, and is expanded to the property element syntax under a certain condition,
@@ -122,7 +129,8 @@ namespace System.Activities.Expressions
                     literalValue.Minute,
                     literalValue.Second,
                     literalValue.Millisecond,
-                    literalValue.Kind);
+                    literalValue.Kind
+                );
 
                 if (literalValue.Ticks == noLeftOverTicksDateTime.Ticks)
                 {
@@ -139,9 +147,12 @@ namespace System.Activities.Expressions
             // DateTimeOffset is similar to DateTime in how its Dev10 string conversion did not preserve seconds, milliseconds, the remaining ticks and DateTimeKind data.
             return IsShortTimeFormattingSafe(literalValue.DateTime);
         }
-        
-        [SuppressMessage(FxCop.Category.Globalization, FxCop.Rule.SpecifyIFormatProvider,
-            Justification = "we really do want the string as-is")]
+
+        [SuppressMessage(
+            FxCop.Category.Globalization,
+            FxCop.Rule.SpecifyIFormatProvider,
+            Justification = "we really do want the string as-is"
+        )]
         public string ConvertToString(IValueSerializerContext context)
         {
             Type typeArgument;
@@ -156,18 +167,23 @@ namespace System.Activities.Expressions
             typeArgument = typeof(T);
             valueType = this.Value.GetType();
             converter = TypeDescriptor.GetConverter(typeArgument);
-            
-            Fx.Assert(typeArgument == valueType &&
-                converter != null &&
-                converter.CanConvertTo(TypeHelper.StringType) &&
-                converter.CanConvertFrom(TypeHelper.StringType),
-                "Literal target type T and the return type mismatch or something wrong with its typeConverter!");
+
+            Fx.Assert(
+                typeArgument == valueType
+                    && converter != null
+                    && converter.CanConvertTo(TypeHelper.StringType)
+                    && converter.CanConvertFrom(TypeHelper.StringType),
+                "Literal target type T and the return type mismatch or something wrong with its typeConverter!"
+            );
 
             // handle a Literal<string> of "[...]" by inserting escape chararcter '%' at the front
             if (typeArgument == TypeHelper.StringType)
             {
                 string originalString = Convert.ToString(this.Value);
-                if (originalString.EndsWith("]", StringComparison.Ordinal) && ExpressionEscapeRegex.IsMatch(originalString))
+                if (
+                    originalString.EndsWith("]", StringComparison.Ordinal)
+                    && ExpressionEscapeRegex.IsMatch(originalString)
+                )
                 {
                     return "%" + originalString;
                 }

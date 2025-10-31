@@ -8,17 +8,20 @@ using System.Linq;
 
 namespace System.Web.Http.ValueProviders.Providers
 {
-    [SuppressMessage("Microsoft.Naming", "CA1710:IdentifiersShouldHaveCorrectSuffix", Justification = "It is more fundamentally a value provider than a collection")]
-    public class CompositeValueProvider : Collection<IValueProvider>, IValueProvider, IEnumerableValueProvider
+    [SuppressMessage(
+        "Microsoft.Naming",
+        "CA1710:IdentifiersShouldHaveCorrectSuffix",
+        Justification = "It is more fundamentally a value provider than a collection"
+    )]
+    public class CompositeValueProvider
+        : Collection<IValueProvider>,
+            IValueProvider,
+            IEnumerableValueProvider
     {
-        public CompositeValueProvider()
-        {
-        }
+        public CompositeValueProvider() { }
 
         public CompositeValueProvider(IList<IValueProvider> list)
-            : base(list)
-        {
-        }
+            : base(list) { }
 
         public virtual bool ContainsPrefix(string prefix)
         {
@@ -62,10 +65,15 @@ namespace System.Web.Http.ValueProviders.Providers
             return new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
         }
 
-        internal static IDictionary<string, string> GetKeysFromPrefixFromProvider(IValueProvider provider, string prefix)
+        internal static IDictionary<string, string> GetKeysFromPrefixFromProvider(
+            IValueProvider provider,
+            string prefix
+        )
         {
             IEnumerableValueProvider enumeratedProvider = provider as IEnumerableValueProvider;
-            return (enumeratedProvider != null) ? enumeratedProvider.GetKeysFromPrefix(prefix) : null;
+            return (enumeratedProvider != null)
+                ? enumeratedProvider.GetKeysFromPrefix(prefix)
+                : null;
         }
 
         protected override void InsertItem(int index, IValueProvider item)

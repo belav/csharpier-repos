@@ -22,7 +22,11 @@ namespace System.Buffers
         /// <remarks>
         /// The newly-allocated memory will be populated with random data.
         /// </remarks>
-        public static BoundedMemory<T> Allocate<T>(int elementCount, PoisonPagePlacement placement = PoisonPagePlacement.After) where T : unmanaged
+        public static BoundedMemory<T> Allocate<T>(
+            int elementCount,
+            PoisonPagePlacement placement = PoisonPagePlacement.After
+        )
+            where T : unmanaged
         {
             if (elementCount < 0)
             {
@@ -42,7 +46,11 @@ namespace System.Buffers
         /// Similar to <see cref="Allocate(int, PoisonPagePlacement)"/>, but populates the allocated
         /// native memory block from existing data rather than using random data.
         /// </summary>
-        public static BoundedMemory<T> AllocateFromExistingData<T>(ReadOnlySpan<T> data, PoisonPagePlacement placement = PoisonPagePlacement.After) where T : unmanaged
+        public static BoundedMemory<T> AllocateFromExistingData<T>(
+            ReadOnlySpan<T> data,
+            PoisonPagePlacement placement = PoisonPagePlacement.After
+        )
+            where T : unmanaged
         {
             if (placement != PoisonPagePlacement.Before && placement != PoisonPagePlacement.After)
             {
@@ -58,7 +66,11 @@ namespace System.Buffers
         /// Similar to <see cref="Allocate(int, PoisonPagePlacement)"/>, but populates the allocated
         /// native memory block from existing data rather than using random data.
         /// </summary>
-        public static BoundedMemory<T> AllocateFromExistingData<T>(T[] data, PoisonPagePlacement placement = PoisonPagePlacement.After) where T : unmanaged
+        public static BoundedMemory<T> AllocateFromExistingData<T>(
+            T[] data,
+            PoisonPagePlacement placement = PoisonPagePlacement.After
+        )
+            where T : unmanaged
         {
             return AllocateFromExistingData(new ReadOnlySpan<T>(data), placement);
         }
@@ -76,7 +88,11 @@ namespace System.Buffers
             }
         }
 
-        private static BoundedMemory<T> AllocateWithoutDataPopulation<T>(int elementCount, PoisonPagePlacement placement) where T : unmanaged
+        private static BoundedMemory<T> AllocateWithoutDataPopulation<T>(
+            int elementCount,
+            PoisonPagePlacement placement
+        )
+            where T : unmanaged
         {
             if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
             {

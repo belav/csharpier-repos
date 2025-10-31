@@ -37,7 +37,10 @@ namespace System.Text.Json.Serialization.Tests
             return myDynamic;
         }
 
-        [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsReflectionEmitSupported))]
+        [ConditionalFact(
+            typeof(PlatformDetection),
+            nameof(PlatformDetection.IsReflectionEmitSupported)
+        )]
         public static void DynamicKeyword()
         {
             dynamic myDynamic = GetExpandoObject();
@@ -86,12 +89,16 @@ namespace System.Text.Json.Serialization.Tests
 
             void VerifyObject()
             {
-                Assert.Equal("World", elem.GetProperty("MyObject").GetProperty("MyString").GetString());
+                Assert.Equal(
+                    "World",
+                    elem.GetProperty("MyObject").GetProperty("MyString").GetString()
+                );
             }
 
             void VerifyArray()
             {
-                JsonElement.ArrayEnumerator enumerator = elem.GetProperty("MyArray").EnumerateArray();
+                JsonElement.ArrayEnumerator enumerator = elem.GetProperty("MyArray")
+                    .EnumerateArray();
                 Assert.Equal(2, enumerator.Count());
                 enumerator.MoveNext();
                 Assert.Equal(1, enumerator.Current.GetInt32());
@@ -100,7 +107,10 @@ namespace System.Text.Json.Serialization.Tests
             }
         }
 
-        [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsReflectionEmitSupported))]
+        [ConditionalFact(
+            typeof(PlatformDetection),
+            nameof(PlatformDetection.IsReflectionEmitSupported)
+        )]
         public static void ExpandoObject()
         {
             ExpandoObject expando = JsonSerializer.Deserialize<ExpandoObject>(Json);

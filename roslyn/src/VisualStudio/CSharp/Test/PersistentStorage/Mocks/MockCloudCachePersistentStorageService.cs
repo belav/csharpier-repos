@@ -15,23 +15,30 @@ using Microsoft.VisualStudio.RpcContracts.Caching;
 
 namespace Microsoft.CodeAnalysis.UnitTests.WorkspaceServices.Mocks
 {
-    internal class MockCloudCachePersistentStorageService : AbstractCloudCachePersistentStorageService
+    internal class MockCloudCachePersistentStorageService
+        : AbstractCloudCachePersistentStorageService
     {
         private readonly string _relativePathBase;
 
         public MockCloudCachePersistentStorageService(
             IPersistentStorageConfiguration configuration,
-            string relativePathBase)
+            string relativePathBase
+        )
             : base(configuration)
         {
             _relativePathBase = relativePathBase;
         }
 
-        protected override async ValueTask<ICacheService> CreateCacheServiceAsync(string solutionFolder, CancellationToken cancellationToken)
+        protected override async ValueTask<ICacheService> CreateCacheServiceAsync(
+            string solutionFolder,
+            CancellationToken cancellationToken
+        )
         {
             // Directly access VS' CacheService through their library and not as a brokered service. Then create our
             // wrapper CloudCacheService directly on that instance.
-            var authorizationServiceClient = new AuthorizationServiceClient(new AuthorizationServiceMock());
+            var authorizationServiceClient = new AuthorizationServiceClient(
+                new AuthorizationServiceMock()
+            );
             var solutionService = new SolutionServiceMock();
             var fileSystem = new FileSystemServiceMock();
             var serviceBroker = new ServiceBrokerMock()
@@ -47,7 +54,12 @@ namespace Microsoft.CodeAnalysis.UnitTests.WorkspaceServices.Mocks
             var someContext = new CacheContext { RelativePathBase = _relativePathBase };
             var pool = new SqliteConnectionPool();
             var activeContext = await pool.ActivateContextAsync(someContext, default);
-            var cacheService = new CacheService(activeContext, serviceBroker, authorizationServiceClient, pool);
+            var cacheService = new CacheService(
+                activeContext,
+                serviceBroker,
+                authorizationServiceClient,
+                pool
+            );
             return cacheService;
         }
     }

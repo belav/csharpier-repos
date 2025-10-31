@@ -8,14 +8,20 @@ namespace Internal.TypeSystem
     {
         protected internal override int ClassCode => 351938209;
 
-        protected internal sealed override int CompareToImpl(TypeDesc other, TypeSystemComparer comparer)
+        protected internal sealed override int CompareToImpl(
+            TypeDesc other,
+            TypeSystemComparer comparer
+        )
         {
             var otherType = (RuntimeDeterminedType)other;
             int result = comparer.Compare(_rawCanonType, otherType._rawCanonType);
             if (result != 0)
                 return result;
 
-            return comparer.Compare(_runtimeDeterminedDetailsType, otherType._runtimeDeterminedDetailsType);
+            return comparer.Compare(
+                _runtimeDeterminedDetailsType,
+                otherType._runtimeDeterminedDetailsType
+            );
         }
     }
 }

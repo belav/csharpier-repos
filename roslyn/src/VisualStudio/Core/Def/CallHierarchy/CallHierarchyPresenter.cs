@@ -23,12 +23,13 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CallHierarchy
 
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public CallHierarchyPresenter(SVsServiceProvider serviceProvider)
-            => _serviceProvider = serviceProvider;
+        public CallHierarchyPresenter(SVsServiceProvider serviceProvider) =>
+            _serviceProvider = serviceProvider;
 
         public void PresentRoot(CallHierarchyItem root)
         {
-            var callHierarchy = _serviceProvider.GetService(typeof(SCallHierarchy)) as ICallHierarchy;
+            var callHierarchy =
+                _serviceProvider.GetService(typeof(SCallHierarchy)) as ICallHierarchy;
             callHierarchy.ShowToolWindow();
             callHierarchy.AddRootItem(root);
         }

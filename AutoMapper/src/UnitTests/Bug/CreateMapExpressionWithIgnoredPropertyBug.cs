@@ -1,4 +1,5 @@
 ﻿namespace AutoMapper.UnitTests.Bug;
+
 public class CreateMapExpressionWithIgnoredPropertyBug
 {
     [Fact]
@@ -6,11 +7,12 @@ public class CreateMapExpressionWithIgnoredPropertyBug
     {
         var config = new MapperConfiguration(cfg =>
         {
-            cfg.CreateProjection<Person, Person>()
-                .ForMember(x => x.Name, x => x.Ignore());
+            cfg.CreateProjection<Person, Person>().ForMember(x => x.Name, x => x.Ignore());
         });
 
-        IQueryable<Person> collection = (new List<Person> { new Person { Name = "Person1" } }).AsQueryable();
+        IQueryable<Person> collection = (
+            new List<Person> { new Person { Name = "Person1" } }
+        ).AsQueryable();
 
         List<Person> result = collection.ProjectTo<Person>(config).ToList();
 

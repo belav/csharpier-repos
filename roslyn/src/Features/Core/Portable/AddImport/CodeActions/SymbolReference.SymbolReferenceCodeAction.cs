@@ -25,14 +25,19 @@ namespace Microsoft.CodeAnalysis.AddImport
             protected SymbolReferenceCodeAction(
                 Document originalDocument,
                 AddImportFixData fixData,
-                ImmutableArray<string> additionalTags)
-                : base(originalDocument, fixData, additionalTags)
-            {
-            }
+                ImmutableArray<string> additionalTags
+            )
+                : base(originalDocument, fixData, additionalTags) { }
 
-            protected override async Task<IEnumerable<CodeActionOperation>> ComputePreviewOperationsAsync(CancellationToken cancellationToken)
+            protected override async Task<
+                IEnumerable<CodeActionOperation>
+            > ComputePreviewOperationsAsync(CancellationToken cancellationToken)
             {
-                var operation = await GetChangeSolutionOperationAsync(isPreview: true, cancellationToken).ConfigureAwait(false);
+                var operation = await GetChangeSolutionOperationAsync(
+                        isPreview: true,
+                        cancellationToken
+                    )
+                    .ConfigureAwait(false);
                 if (operation is null)
                 {
                     return Array.Empty<CodeActionOperation>();
@@ -41,10 +46,18 @@ namespace Microsoft.CodeAnalysis.AddImport
                 return SpecializedCollections.SingletonEnumerable(operation);
             }
 
-            protected override async Task<ImmutableArray<CodeActionOperation>> ComputeOperationsAsync(
-                IProgress<CodeAnalysisProgress> progress, CancellationToken cancellationToken)
+            protected override async Task<
+                ImmutableArray<CodeActionOperation>
+            > ComputeOperationsAsync(
+                IProgress<CodeAnalysisProgress> progress,
+                CancellationToken cancellationToken
+            )
             {
-                var operation = await GetChangeSolutionOperationAsync(isPreview: false, cancellationToken).ConfigureAwait(false);
+                var operation = await GetChangeSolutionOperationAsync(
+                        isPreview: false,
+                        cancellationToken
+                    )
+                    .ConfigureAwait(false);
                 if (operation is null)
                 {
                     return ImmutableArray<CodeActionOperation>.Empty;
@@ -53,18 +66,32 @@ namespace Microsoft.CodeAnalysis.AddImport
                 return ImmutableArray.Create(operation);
             }
 
-            private async Task<CodeActionOperation?> GetChangeSolutionOperationAsync(bool isPreview, CancellationToken cancellationToken)
+            private async Task<CodeActionOperation?> GetChangeSolutionOperationAsync(
+                bool isPreview,
+                CancellationToken cancellationToken
+            )
             {
-                var updatedDocument = await GetUpdatedDocumentAsync(cancellationToken).ConfigureAwait(false);
+                var updatedDocument = await GetUpdatedDocumentAsync(cancellationToken)
+                    .ConfigureAwait(false);
 
                 // Defer to subtype to add any p2p or metadata refs as appropriate. If no changes to project references
                 // are necessary, the call to 'UpdateProjectAsync' will return null, in which case we fall back to just
                 // returning the updated document with its text changes.
-                var updatedProject = await UpdateProjectAsync(updatedDocument.Project, isPreview, cancellationToken).ConfigureAwait(false);
-                return updatedProject ?? new ApplyChangesOperation(updatedDocument.Project.Solution);
+                var updatedProject = await UpdateProjectAsync(
+                        updatedDocument.Project,
+                        isPreview,
+                        cancellationToken
+                    )
+                    .ConfigureAwait(false);
+                return updatedProject
+                    ?? new ApplyChangesOperation(updatedDocument.Project.Solution);
             }
 
-            protected abstract Task<CodeActionOperation?> UpdateProjectAsync(Project project, bool isPreview, CancellationToken cancellationToken);
+            protected abstract Task<CodeActionOperation?> UpdateProjectAsync(
+                Project project,
+                bool isPreview,
+                CancellationToken cancellationToken
+            );
         }
     }
 }

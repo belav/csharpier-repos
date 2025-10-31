@@ -32,7 +32,11 @@ namespace System.Diagnostics
             if (!string.IsNullOrEmpty(startInfo.UserName) || startInfo.Password != null)
                 throw new InvalidOperationException(SR.CantStartAsUser);
 
-            if (startInfo.RedirectStandardInput || startInfo.RedirectStandardOutput || startInfo.RedirectStandardError)
+            if (
+                startInfo.RedirectStandardInput
+                || startInfo.RedirectStandardOutput
+                || startInfo.RedirectStandardError
+            )
                 throw new InvalidOperationException(SR.CantRedirectStreams);
 
             if (startInfo.StandardInputEncoding != null)
@@ -52,17 +56,23 @@ namespace System.Diagnostics
             fixed (char* fileName = startInfo.FileName.Length > 0 ? startInfo.FileName : null)
             fixed (char* verb = startInfo.Verb.Length > 0 ? startInfo.Verb : null)
             fixed (char* parameters = arguments.Length > 0 ? arguments : null)
-            fixed (char* directory = startInfo.WorkingDirectory.Length > 0 ? startInfo.WorkingDirectory : null)
+            fixed (
+                char* directory =
+                    startInfo.WorkingDirectory.Length > 0 ? startInfo.WorkingDirectory : null
+            )
             {
-                Interop.Shell32.SHELLEXECUTEINFO shellExecuteInfo = new Interop.Shell32.SHELLEXECUTEINFO()
-                {
-                    cbSize = (uint)sizeof(Interop.Shell32.SHELLEXECUTEINFO),
-                    lpFile = fileName,
-                    lpVerb = verb,
-                    lpParameters = parameters,
-                    lpDirectory = directory,
-                    fMask = Interop.Shell32.SEE_MASK_NOCLOSEPROCESS | Interop.Shell32.SEE_MASK_FLAG_DDEWAIT
-                };
+                Interop.Shell32.SHELLEXECUTEINFO shellExecuteInfo =
+                    new Interop.Shell32.SHELLEXECUTEINFO()
+                    {
+                        cbSize = (uint)sizeof(Interop.Shell32.SHELLEXECUTEINFO),
+                        lpFile = fileName,
+                        lpVerb = verb,
+                        lpParameters = parameters,
+                        lpDirectory = directory,
+                        fMask =
+                            Interop.Shell32.SEE_MASK_NOCLOSEPROCESS
+                            | Interop.Shell32.SEE_MASK_FLAG_DDEWAIT,
+                    };
 
                 if (startInfo.ErrorDialog)
                     shellExecuteInfo.hwnd = startInfo.ErrorDialogParentHandle;
@@ -85,11 +95,18 @@ namespace System.Diagnostics
                             // This happens on Windows Nano
                             throw new PlatformNotSupportedException(SR.UseShellExecuteNotSupported);
                         default:
-                            string nativeErrorMessage = errorCode == Interop.Errors.ERROR_BAD_EXE_FORMAT || errorCode == Interop.Errors.ERROR_EXE_MACHINE_TYPE_MISMATCH
-                                ? SR.InvalidApplication
-                                : GetErrorMessage(errorCode);
+                            string nativeErrorMessage =
+                                errorCode == Interop.Errors.ERROR_BAD_EXE_FORMAT
+                                || errorCode == Interop.Errors.ERROR_EXE_MACHINE_TYPE_MISMATCH
+                                    ? SR.InvalidApplication
+                                    : GetErrorMessage(errorCode);
 
-                            throw CreateExceptionForErrorStartingProcess(nativeErrorMessage, errorCode, startInfo.FileName, startInfo.WorkingDirectory);
+                            throw CreateExceptionForErrorStartingProcess(
+                                nativeErrorMessage,
+                                errorCode,
+                                startInfo.FileName,
+                                startInfo.WorkingDirectory
+                            );
                     }
                 }
 
@@ -103,13 +120,14 @@ namespace System.Diagnostics
             return false;
         }
 
-        private static int GetShowWindowFromWindowStyle(ProcessWindowStyle windowStyle) => windowStyle switch
-        {
-            ProcessWindowStyle.Hidden => Interop.Shell32.SW_HIDE,
-            ProcessWindowStyle.Minimized => Interop.Shell32.SW_SHOWMINIMIZED,
-            ProcessWindowStyle.Maximized => Interop.Shell32.SW_SHOWMAXIMIZED,
-            _ => Interop.Shell32.SW_SHOWNORMAL,
-        };
+        private static int GetShowWindowFromWindowStyle(ProcessWindowStyle windowStyle) =>
+            windowStyle switch
+            {
+                ProcessWindowStyle.Hidden => Interop.Shell32.SW_HIDE,
+                ProcessWindowStyle.Minimized => Interop.Shell32.SW_SHOWMINIMIZED,
+                ProcessWindowStyle.Maximized => Interop.Shell32.SW_SHOWMAXIMIZED,
+                _ => Interop.Shell32.SW_SHOWNORMAL,
+            };
 
         private static int GetShellError(IntPtr error)
         {
@@ -172,7 +190,7 @@ namespace System.Diagnostics
                     Thread executionThread = new Thread(threadStart)
                     {
                         IsBackground = true,
-                        Name = ".NET Process STA"
+                        Name = ".NET Process STA",
                     };
                     executionThread.SetApartmentState(ApartmentState.STA);
                     executionThread.Start();
@@ -205,7 +223,10 @@ namespace System.Diagnostics
 #if DEBUG
                 // We never used to throw here, want to surface possible mistakes on our part
                 int error = Marshal.GetLastWin32Error();
-                Debug.Assert(error == 0, $"Failed GetWindowTextLengthW(): { Marshal.GetPInvokeErrorMessage(error) }");
+                Debug.Assert(
+                    error == 0,
+                    $"Failed GetWindowTextLengthW(): {Marshal.GetPInvokeErrorMessage(error)}"
+                );
 #endif
                 return string.Empty;
             }
@@ -224,7 +245,10 @@ namespace System.Diagnostics
             {
                 // We never used to throw here, want to surface possible mistakes on our part
                 int error = Marshal.GetLastWin32Error();
-                Debug.Assert(error == 0, $"Failed GetWindowTextW(): { Marshal.GetPInvokeErrorMessage(error) }");
+                Debug.Assert(
+                    error == 0,
+                    $"Failed GetWindowTextW(): {Marshal.GetPInvokeErrorMessage(error)}"
+                );
             }
 #endif
             return title.Slice(0, length).ToString();
@@ -283,7 +307,15 @@ namespace System.Diagnostics
             IntPtr result;
             unsafe
             {
-                return Interop.User32.SendMessageTimeout(mainWindow, WM_NULL, IntPtr.Zero, IntPtr.Zero, SMTO_ABORTIFHUNG, 5000, &result) != (IntPtr)0;
+                return Interop.User32.SendMessageTimeout(
+                        mainWindow,
+                        WM_NULL,
+                        IntPtr.Zero,
+                        IntPtr.Zero,
+                        SMTO_ABORTIFHUNG,
+                        5000,
+                        &result
+                    ) != (IntPtr)0;
             }
         }
 
@@ -304,7 +336,12 @@ namespace System.Diagnostics
         private bool WaitForInputIdleCore(int milliseconds)
         {
             bool idle;
-            using (SafeProcessHandle handle = GetProcessHandle(Interop.Advapi32.ProcessOptions.SYNCHRONIZE | Interop.Advapi32.ProcessOptions.PROCESS_QUERY_INFORMATION))
+            using (
+                SafeProcessHandle handle = GetProcessHandle(
+                    Interop.Advapi32.ProcessOptions.SYNCHRONIZE
+                        | Interop.Advapi32.ProcessOptions.PROCESS_QUERY_INFORMATION
+                )
+            )
             {
                 int ret = Interop.User32.WaitForInputIdle(handle, milliseconds);
                 switch (ret)
@@ -345,11 +382,23 @@ namespace System.Diagnostics
         {
             get
             {
-                using (SafeProcessHandle handle = GetProcessHandle(Interop.Advapi32.ProcessOptions.PROCESS_QUERY_INFORMATION))
+                using (
+                    SafeProcessHandle handle = GetProcessHandle(
+                        Interop.Advapi32.ProcessOptions.PROCESS_QUERY_INFORMATION
+                    )
+                )
                 {
                     Interop.NtDll.PROCESS_BASIC_INFORMATION info;
 
-                    if (Interop.NtDll.NtQueryInformationProcess(handle, Interop.NtDll.ProcessBasicInformation, &info, (uint)sizeof(Interop.NtDll.PROCESS_BASIC_INFORMATION), out _) != 0)
+                    if (
+                        Interop.NtDll.NtQueryInformationProcess(
+                            handle,
+                            Interop.NtDll.ProcessBasicInformation,
+                            &info,
+                            (uint)sizeof(Interop.NtDll.PROCESS_BASIC_INFORMATION),
+                            out _
+                        ) != 0
+                    )
                         throw new Win32Exception(SR.ProcessInformationUnavailable);
 
                     return (int)info.InheritedFromUniqueProcessId;
@@ -373,7 +422,12 @@ namespace System.Diagnostics
         {
             // The process's structures will be preserved as long as a handle is held pointing to them, even if the process exits or
             // is terminated. A handle is held here to ensure a stable reference to the process during execution.
-            using (SafeProcessHandle handle = GetProcessHandle(Interop.Advapi32.ProcessOptions.PROCESS_QUERY_LIMITED_INFORMATION, throwIfExited: false))
+            using (
+                SafeProcessHandle handle = GetProcessHandle(
+                    Interop.Advapi32.ProcessOptions.PROCESS_QUERY_LIMITED_INFORMATION,
+                    throwIfExited: false
+                )
+            )
             {
                 // If the process has exited, the handle is invalid.
                 if (handle.IsInvalid)
@@ -401,7 +455,9 @@ namespace System.Diagnostics
                 (exceptions ??= new List<Exception>()).Add(e);
             }
 
-            List<(Process Process, SafeProcessHandle Handle)> children = GetProcessHandlePairs((thisProcess, otherProcess) => thisProcess.IsParentOf(otherProcess));
+            List<(Process Process, SafeProcessHandle Handle)> children = GetProcessHandlePairs(
+                (thisProcess, otherProcess) => thisProcess.IsParentOf(otherProcess)
+            );
             try
             {
                 foreach ((Process Process, SafeProcessHandle Handle) child in children)
@@ -425,7 +481,9 @@ namespace System.Diagnostics
             return exceptions;
         }
 
-        private List<(Process Process, SafeProcessHandle Handle)> GetProcessHandlePairs(Func<Process, Process, bool> predicate)
+        private List<(Process Process, SafeProcessHandle Handle)> GetProcessHandlePairs(
+            Func<Process, Process, bool> predicate
+        )
         {
             var results = new List<(Process Process, SafeProcessHandle Handle)>();
 
@@ -449,7 +507,10 @@ namespace System.Diagnostics
             {
                 try
                 {
-                    return process.GetProcessHandle(Interop.Advapi32.ProcessOptions.PROCESS_QUERY_LIMITED_INFORMATION, false);
+                    return process.GetProcessHandle(
+                        Interop.Advapi32.ProcessOptions.PROCESS_QUERY_LIMITED_INFORMATION,
+                        false
+                    );
                 }
                 catch (Win32Exception)
                 {

@@ -7,25 +7,28 @@ namespace System.Reflection
 {
     public partial class MethodInvoker
     {
-        private unsafe MethodInvoker(RuntimeMethodInfo method) : this(method, method.ArgumentTypes)
+        private unsafe MethodInvoker(RuntimeMethodInfo method)
+            : this(method, method.ArgumentTypes)
         {
             _invokeFunc_RefArgs = InterpretedInvoke_Method;
             _invocationFlags = method.ComputeAndUpdateInvocationFlags();
         }
 
-        private unsafe MethodInvoker(DynamicMethod method) : this(method.GetRuntimeMethodInfo(), method.ArgumentTypes)
+        private unsafe MethodInvoker(DynamicMethod method)
+            : this(method.GetRuntimeMethodInfo(), method.ArgumentTypes)
         {
             _invokeFunc_RefArgs = InterpretedInvoke_Method;
             // No _invocationFlags for DynamicMethod.
         }
 
-        private unsafe MethodInvoker(RuntimeConstructorInfo constructor) : this(constructor, constructor.ArgumentTypes)
+        private unsafe MethodInvoker(RuntimeConstructorInfo constructor)
+            : this(constructor, constructor.ArgumentTypes)
         {
             _invokeFunc_RefArgs = InterpretedInvoke_Constructor;
             _invocationFlags = constructor.ComputeAndUpdateInvocationFlags();
         }
 
-        private unsafe object? InterpretedInvoke_Method(object? obj, IntPtr *args)
+        private unsafe object? InterpretedInvoke_Method(object? obj, IntPtr* args)
         {
             object? o = ((RuntimeMethodInfo)_method).InternalInvoke(obj, args, out Exception? exc);
 
@@ -35,9 +38,13 @@ namespace System.Reflection
             return o;
         }
 
-        private unsafe object? InterpretedInvoke_Constructor(object? obj, IntPtr *args)
+        private unsafe object? InterpretedInvoke_Constructor(object? obj, IntPtr* args)
         {
-            object? o = ((RuntimeConstructorInfo)_method).InternalInvoke(obj, args, out Exception? exc);
+            object? o = ((RuntimeConstructorInfo)_method).InternalInvoke(
+                obj,
+                args,
+                out Exception? exc
+            );
 
             if (exc != null)
                 throw exc;

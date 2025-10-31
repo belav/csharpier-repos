@@ -10,7 +10,14 @@ namespace System.Runtime.Serialization.Formatters.Binary
     internal static class BinaryTypeConverter
     {
         // From the type create the BinaryTypeEnum and typeInformation which describes the type on the wire
-        internal static BinaryTypeEnum GetBinaryTypeInfo(Type type, WriteObjectInfo? objectInfo, string? typeName, ObjectWriter objectWriter, out object? typeInformation, out int assemId)
+        internal static BinaryTypeEnum GetBinaryTypeInfo(
+            Type type,
+            WriteObjectInfo? objectInfo,
+            string? typeName,
+            ObjectWriter objectWriter,
+            out object? typeInformation,
+            out int assemId
+        )
         {
             BinaryTypeEnum binaryTypeEnum;
 
@@ -21,7 +28,10 @@ namespace System.Runtime.Serialization.Formatters.Binary
             {
                 binaryTypeEnum = BinaryTypeEnum.String;
             }
-            else if (((objectInfo == null) || ((objectInfo != null) && !objectInfo._isSi)) && (ReferenceEquals(type, Converter.s_typeofObject)))
+            else if (
+                ((objectInfo == null) || ((objectInfo != null) && !objectInfo._isSi))
+                && (ReferenceEquals(type, Converter.s_typeofObject))
+            )
             {
                 // If objectInfo.Si then can be a surrogate which will change the type
                 binaryTypeEnum = BinaryTypeEnum.Object;
@@ -57,7 +67,10 @@ namespace System.Runtime.Serialization.Formatters.Binary
                         }
 
                         Debug.Assert(assembly != null);
-                        if (assembly.Equals(Converter.s_urtAssemblyString) || assembly.Equals(Converter.s_urtAlternativeAssemblyString))
+                        if (
+                            assembly.Equals(Converter.s_urtAssemblyString)
+                            || assembly.Equals(Converter.s_urtAlternativeAssemblyString)
+                        )
                         {
                             binaryTypeEnum = BinaryTypeEnum.ObjectUrt;
                             assemId = 0;
@@ -65,11 +78,16 @@ namespace System.Runtime.Serialization.Formatters.Binary
                         else
                         {
                             binaryTypeEnum = BinaryTypeEnum.ObjectUser;
-                            Debug.Assert(objectInfo != null, "[BinaryConverter.GetBinaryTypeInfo]objectInfo null for user object");
+                            Debug.Assert(
+                                objectInfo != null,
+                                "[BinaryConverter.GetBinaryTypeInfo]objectInfo null for user object"
+                            );
                             assemId = (int)objectInfo._assemId;
                             if (assemId == 0)
                             {
-                                throw new SerializationException(SR.Format(SR.Serialization_AssemblyId, typeInformation));
+                                throw new SerializationException(
+                                    SR.Format(SR.Serialization_AssemblyId, typeInformation)
+                                );
                             }
                         }
                         break;
@@ -84,7 +102,10 @@ namespace System.Runtime.Serialization.Formatters.Binary
         }
 
         // Used for non Si types when Parsing
-        internal static BinaryTypeEnum GetParserBinaryTypeInfo(Type type, out object? typeInformation)
+        internal static BinaryTypeEnum GetParserBinaryTypeInfo(
+            Type type,
+            out object? typeInformation
+        )
         {
             BinaryTypeEnum binaryTypeEnum;
             typeInformation = null;
@@ -115,9 +136,10 @@ namespace System.Runtime.Serialization.Formatters.Binary
                 switch (primitiveTypeEnum)
                 {
                     case InternalPrimitiveTypeE.Invalid:
-                        binaryTypeEnum = type.Assembly == Converter.s_urtAssembly ?
-                            BinaryTypeEnum.ObjectUrt :
-                            BinaryTypeEnum.ObjectUser;
+                        binaryTypeEnum =
+                            type.Assembly == Converter.s_urtAssembly
+                                ? BinaryTypeEnum.ObjectUrt
+                                : BinaryTypeEnum.ObjectUser;
                         typeInformation = type.FullName;
                         break;
                     default:
@@ -131,13 +153,21 @@ namespace System.Runtime.Serialization.Formatters.Binary
         }
 
         // Writes the type information on the wire
-        internal static void WriteTypeInfo(BinaryTypeEnum binaryTypeEnum, object? typeInformation, int assemId, BinaryFormatterWriter output)
+        internal static void WriteTypeInfo(
+            BinaryTypeEnum binaryTypeEnum,
+            object? typeInformation,
+            int assemId,
+            BinaryFormatterWriter output
+        )
         {
             switch (binaryTypeEnum)
             {
                 case BinaryTypeEnum.Primitive:
                 case BinaryTypeEnum.PrimitiveArray:
-                    Debug.Assert(typeInformation != null, "[BinaryConverter.WriteTypeInfo]typeInformation!=null");
+                    Debug.Assert(
+                        typeInformation != null,
+                        "[BinaryConverter.WriteTypeInfo]typeInformation!=null"
+                    );
                     output.WriteByte((byte)((InternalPrimitiveTypeE)typeInformation));
                     break;
                 case BinaryTypeEnum.String:
@@ -146,21 +176,33 @@ namespace System.Runtime.Serialization.Formatters.Binary
                 case BinaryTypeEnum.ObjectArray:
                     break;
                 case BinaryTypeEnum.ObjectUrt:
-                    Debug.Assert(typeInformation != null, "[BinaryConverter.WriteTypeInfo]typeInformation!=null");
+                    Debug.Assert(
+                        typeInformation != null,
+                        "[BinaryConverter.WriteTypeInfo]typeInformation!=null"
+                    );
                     output.WriteString(typeInformation.ToString()!);
                     break;
                 case BinaryTypeEnum.ObjectUser:
-                    Debug.Assert(typeInformation != null, "[BinaryConverter.WriteTypeInfo]typeInformation!=null");
+                    Debug.Assert(
+                        typeInformation != null,
+                        "[BinaryConverter.WriteTypeInfo]typeInformation!=null"
+                    );
                     output.WriteString(typeInformation.ToString()!);
                     output.WriteInt32(assemId);
                     break;
                 default:
-                    throw new SerializationException(SR.Format(SR.Serialization_TypeWrite, binaryTypeEnum.ToString()));
+                    throw new SerializationException(
+                        SR.Format(SR.Serialization_TypeWrite, binaryTypeEnum.ToString())
+                    );
             }
         }
 
         // Reads the type information from the wire
-        internal static object ReadTypeInfo(BinaryTypeEnum binaryTypeEnum, BinaryParser input, out int assemId)
+        internal static object ReadTypeInfo(
+            BinaryTypeEnum binaryTypeEnum,
+            BinaryParser input,
+            out int assemId
+        )
         {
             object var = null!;
             int readAssemId = 0;
@@ -184,7 +226,9 @@ namespace System.Runtime.Serialization.Formatters.Binary
                     readAssemId = input.ReadInt32();
                     break;
                 default:
-                    throw new SerializationException(SR.Format(SR.Serialization_TypeRead, binaryTypeEnum.ToString()));
+                    throw new SerializationException(
+                        SR.Format(SR.Serialization_TypeRead, binaryTypeEnum.ToString())
+                    );
             }
             assemId = readAssemId;
             return var;
@@ -192,14 +236,16 @@ namespace System.Runtime.Serialization.Formatters.Binary
 
         // Given the wire type information, returns the actual type and additional information
         [RequiresUnreferencedCode("Types might be removed")]
-        internal static void TypeFromInfo(BinaryTypeEnum binaryTypeEnum,
-                                          object? typeInformation,
-                                          ObjectReader objectReader,
-                                          BinaryAssemblyInfo? assemblyInfo,
-                                          out InternalPrimitiveTypeE primitiveTypeEnum,
-                                          out string? typeString,
-                                          out Type? type,
-                                          out bool isVariant)
+        internal static void TypeFromInfo(
+            BinaryTypeEnum binaryTypeEnum,
+            object? typeInformation,
+            ObjectReader objectReader,
+            BinaryAssemblyInfo? assemblyInfo,
+            out InternalPrimitiveTypeE primitiveTypeEnum,
+            out string? typeString,
+            out Type? type,
+            out bool isVariant
+        )
         {
             isVariant = false;
             primitiveTypeEnum = InternalPrimitiveTypeE.Invalid;
@@ -243,7 +289,9 @@ namespace System.Runtime.Serialization.Formatters.Binary
                     }
                     break;
                 default:
-                    throw new SerializationException(SR.Format(SR.Serialization_TypeRead, binaryTypeEnum.ToString()));
+                    throw new SerializationException(
+                        SR.Format(SR.Serialization_TypeRead, binaryTypeEnum.ToString())
+                    );
             }
         }
     }

@@ -14,6 +14,7 @@ namespace Microsoft.Interop
     {
         public UnreachableException() { }
 
-        public UnreachableException(string message) : base(message) { }
+        public UnreachableException(string message)
+            : base(message) { }
     }
 }

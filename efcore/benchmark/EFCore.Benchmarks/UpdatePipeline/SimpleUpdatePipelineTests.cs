@@ -11,6 +11,7 @@ using Xunit;
 #pragma warning disable CA1034 // Nested types should not be visible
 
 namespace Microsoft.EntityFrameworkCore.Benchmarks.UpdatePipeline;
+
 #pragma warning disable CA1052 // Static holder types should be Static or NotInheritable
 public class SimpleUpdatePipelineTests
 #pragma warning restore CA1052 // Static holder types should be Static or NotInheritable
@@ -38,8 +39,8 @@ public class SimpleUpdatePipelineTests
             _context = _fixture.CreateContext(disableBatching: Batching);
         }
 
-        public virtual void InitializeContext()
-            => _transaction = _context.Database.BeginTransaction();
+        public virtual void InitializeContext() =>
+            _transaction = _context.Database.BeginTransaction();
 
         [IterationCleanup]
         public virtual void CleanupContext()
@@ -54,10 +55,8 @@ public class SimpleUpdatePipelineTests
         }
 
         [Benchmark]
-        public virtual async Task UpdatePipeline()
-            => _recordsAffected = Async
-                ? await _context.SaveChangesAsync()
-                : _context.SaveChanges();
+        public virtual async Task UpdatePipeline() =>
+            _recordsAffected = Async ? await _context.SaveChangesAsync() : _context.SaveChanges();
     }
 
     public abstract class InsertBase : UpdatePipelineBase

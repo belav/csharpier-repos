@@ -15,7 +15,8 @@ namespace System.Xml.XmlSchemaValidatorApiTests
         private ITestOutputHelper _output;
         private ExceptionVerifier _exVerifier;
 
-        public TCValidateText_String(ITestOutputHelper output): base(output)
+        public TCValidateText_String(ITestOutputHelper output)
+            : base(output)
         {
             _output = output;
             _exVerifier = new ExceptionVerifier("System.Xml", _output);
@@ -139,9 +140,15 @@ namespace System.Xml.XmlSchemaValidatorApiTests
             }
             catch (XmlSchemaValidationException e)
             {
-                _exVerifier.IsExceptionOk(e, new object[] { "Sch_InvalidTextInElementExpecting",
-                    new object[] { "Sch_ElementName", "ElementOnlyElement" },
-                    new object[] { "Sch_ElementName", "child" } });
+                _exVerifier.IsExceptionOk(
+                    e,
+                    new object[]
+                    {
+                        "Sch_InvalidTextInElementExpecting",
+                        new object[] { "Sch_ElementName", "ElementOnlyElement" },
+                        new object[] { "Sch_ElementName", "child" },
+                    }
+                );
                 return;
             }
 

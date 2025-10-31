@@ -12,9 +12,10 @@ namespace System.Linq.Tests
         [Fact]
         public void SameResultsRepeatCallsIntQuery()
         {
-            var q = from x in new[] { 9999, 0, 888, -1, 66, -777, 1, 2, -12345 }
-                    where x > int.MinValue
-                    select x;
+            var q =
+                from x in new[] { 9999, 0, 888, -1, 66, -777, 1, 2, -12345 }
+                where x > int.MinValue
+                select x;
 
             Assert.Equal(q.OfType<int>(), q.OfType<int>());
         }
@@ -22,9 +23,10 @@ namespace System.Linq.Tests
         [Fact]
         public void SameResultsRepeatCallsStringQuery()
         {
-            var q = from x in new[] { "!@#$%^", "C", "AAA", "", "Calling Twice", "SoS", string.Empty }
-                    where string.IsNullOrEmpty(x)
-                    select x;
+            var q =
+                from x in new[] { "!@#$%^", "C", "AAA", "", "Calling Twice", "SoS", string.Empty }
+                where string.IsNullOrEmpty(x)
+                select x;
 
             Assert.Equal(q.OfType<int>(), q.OfType<int>());
         }
@@ -41,7 +43,6 @@ namespace System.Linq.Tests
         {
             int[] source = { 99, 45, 81 };
             Assert.Empty(source.OfType<long>());
-
         }
 
         [Fact]
@@ -122,7 +123,10 @@ namespace System.Linq.Tests
         [Fact]
         public void NullSource()
         {
-            AssertExtensions.Throws<ArgumentNullException>("source", () => ((IEnumerable<object>)null).OfType<string>());
+            AssertExtensions.Throws<ArgumentNullException>(
+                "source",
+                () => ((IEnumerable<object>)null).OfType<string>()
+            );
         }
 
         [Fact]

@@ -23,19 +23,27 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertToRecord
     internal static class ConvertToRecordEngine
     {
         private const SyntaxRemoveOptions RemovalOptions =
-            SyntaxRemoveOptions.KeepExteriorTrivia |
-            SyntaxRemoveOptions.KeepDirectives |
-            SyntaxRemoveOptions.AddElasticMarker;
+            SyntaxRemoveOptions.KeepExteriorTrivia
+            | SyntaxRemoveOptions.KeepDirectives
+            | SyntaxRemoveOptions.AddElasticMarker;
 
         public static async Task<CodeAction?> GetCodeActionAsync(
-            Document document, TypeDeclarationSyntax typeDeclaration, CodeActionOptionsProvider fallbackOptions, CancellationToken cancellationToken)
+            Document document,
+            TypeDeclarationSyntax typeDeclaration,
+            CodeActionOptionsProvider fallbackOptions,
+            CancellationToken cancellationToken
+        )
         {
             // any type declared partial requires complex movement, don't offer refactoring
             if (typeDeclaration.Modifiers.Any(SyntaxKind.PartialKeyword))
                 return null;
 
-            var semanticModel = await document.GetRequiredSemanticModelAsync(cancellationToken).ConfigureAwait(false);
-            if (semanticModel.GetDeclaredSymbol(typeDeclaration, cancellationToken) is not INamedTypeSymbol
+            var semanticModel = await document
+                .GetRequiredSemanticModelAsync(cancellationToken)
+                .ConfigureAwait(false);
+            if (
+                semanticModel.GetDeclaredSymbol(typeDeclaration, cancellationToken)
+                is not INamedTypeSymbol
                 {
                     // if type is an interface we don't want to refactor
                     TypeKind: TypeKind.Class or TypeKind.Struct,
@@ -43,18 +51,19 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertToRecord
                     IsRecord: false,
                     // records can't be static and so if the class is static we probably shouldn't convert it
                     IsStatic: false,
-                } type)
+                } type
+            )
             {
                 return null;
             }
 
-            var positionalParameterInfos = PositionalParameterInfo.GetPropertiesForPositionalParameters(
-                typeDeclaration.Members
-                    .OfType<PropertyDeclarationSyntax>()
-                    .AsImmutable(),
-                type,
-                semanticModel,
-                cancellationToken);
+            var positionalParameterInfos =
+                PositionalParameterInfo.GetPropertiesForPositionalParameters(
+                    typeDeclaration.Members.OfType<PropertyDeclarationSyntax>().AsImmutable(),
+                    type,
+                    semanticModel,
+                    cancellationToken
+                );
             if (positionalParameterInfos.IsEmpty)
                 return null;
 
@@ -62,14 +71,17 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertToRecord
 
             var positional = CodeAction.Create(
                 positionalTitle,
-                cancellationToken => ConvertToPositionalRecordAsync(
-                    document,
-                    type,
-                    positionalParameterInfos,
-                    typeDeclaration,
-                    fallbackOptions,
-                    cancellationToken),
-                nameof(CSharpCodeFixesResources.Convert_to_positional_record));
+                cancellationToken =>
+                    ConvertToPositionalRecordAsync(
+                        document,
+                        type,
+                        positionalParameterInfos,
+                        typeDeclaration,
+                        fallbackOptions,
+                        cancellationToken
+                    ),
+                nameof(CSharpCodeFixesResources.Convert_to_positional_record)
+            );
             // note: when adding nested actions, use string.Format(CSharpFeaturesResources.Convert_0_to_record, type.Name) as title string
             return positional;
         }
@@ -80,52 +92,68 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertToRecord
             ImmutableArray<PositionalParameterInfo> positionalParameterInfos,
             TypeDeclarationSyntax typeDeclaration,
             CodeActionOptionsProvider fallbackOptions,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
-            var semanticModel = await document.GetRequiredSemanticModelAsync(cancellationToken).ConfigureAwait(false);
+            var semanticModel = await document
+                .GetRequiredSemanticModelAsync(cancellationToken)
+                .ConfigureAwait(false);
 
             // first see if we need to re-order our primary constructor parameters.
             var propertiesToAssign = positionalParameterInfos.SelectAsArray(info => info.Symbol);
-            var primaryConstructor = typeDeclaration.Members
-                .OfType<ConstructorDeclarationSyntax>()
+            var primaryConstructor = typeDeclaration
+                .Members.OfType<ConstructorDeclarationSyntax>()
                 .FirstOrDefault(constructor =>
                 {
-                    var constructorSymbol = (IMethodSymbol)semanticModel
-                        .GetRequiredDeclaredSymbol(constructor, cancellationToken);
-                    var constructorOperation = (IConstructorBodyOperation)semanticModel
-                        .GetRequiredOperation(constructor, cancellationToken);
+                    var constructorSymbol = (IMethodSymbol)
+                        semanticModel.GetRequiredDeclaredSymbol(constructor, cancellationToken);
+                    var constructorOperation = (IConstructorBodyOperation)
+                        semanticModel.GetRequiredOperation(constructor, cancellationToken);
                     // We want to make sure that each type in the parameter list corresponds
                     // to exactly one positional parameter type, but they don't need to be in the same order.
                     // We can't use something like set equality because some parameter types may be duplicate.
                     // So, we order the types in a consistent way (by name) and then compare the lists of types.
-                    return constructorSymbol.Parameters.SelectAsArray(parameter => parameter.Type)
-                                    .OrderBy(type => type.Name)
-                            .SequenceEqual(propertiesToAssign.SelectAsArray(s => s.Type)
+                    return constructorSymbol
+                            .Parameters.SelectAsArray(parameter => parameter.Type)
+                            .OrderBy(type => type.Name)
+                            .SequenceEqual(
+                                propertiesToAssign
+                                    .SelectAsArray(s => s.Type)
                                     .OrderBy(type => type.Name),
-                                SymbolEqualityComparer.Default) &&
+                                SymbolEqualityComparer.Default
+                            )
+                        &&
                         // make sure that we do all the correct assignments. There may be multiple constructors
                         // that meet the parameter condition but only one actually assigns all properties.
                         // If successful, we set propertiesToAssign in the order of the parameters.
                         ConvertToRecordHelpers.IsSimplePrimaryConstructor(
-                            constructorOperation, ref propertiesToAssign, constructorSymbol.Parameters);
+                            constructorOperation,
+                            ref propertiesToAssign,
+                            constructorSymbol.Parameters
+                        );
                 });
 
             var solutionEditor = new SolutionEditor(document.Project.Solution);
             // we must refactor usages first because usages can appear within the class definition and
             // individual members, and changing a parent first invalidates the tracking done on the child
-            await RefactorInitializersAsync(type, solutionEditor, propertiesToAssign, cancellationToken)
+            await RefactorInitializersAsync(
+                    type,
+                    solutionEditor,
+                    propertiesToAssign,
+                    cancellationToken
+                )
                 .ConfigureAwait(false);
 
             var documentEditor = await solutionEditor
-                .GetDocumentEditorAsync(document.Id, cancellationToken).ConfigureAwait(false);
+                .GetDocumentEditorAsync(document.Id, cancellationToken)
+                .ConfigureAwait(false);
 
             // generated hashcode and equals methods compare all instance fields
             // including underlying fields accessed from properties
             // copy constructor generation also uses all fields when copying
             // so we track all the fields to make sure the methods we consider deleting
             // would actually perform the same action as an autogenerated one
-            var expectedFields = type
-                .GetMembers()
+            var expectedFields = type.GetMembers()
                 .OfType<IFieldSymbol>()
                 .Where(field => !field.IsConst && !field.IsStatic)
                 .AsImmutable();
@@ -145,10 +173,18 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertToRecord
                 if (result.KeepAsOverride)
                 {
                     // add an initializer that links the property to the primary constructor parameter
-                    documentEditor.ReplaceNode(property, property
-                        .WithInitializer(
-                            SyntaxFactory.EqualsValueClause(SyntaxFactory.IdentifierName(property.Identifier.WithoutTrivia())))
-                        .WithSemicolonToken(SyntaxFactory.Token(SyntaxKind.SemicolonToken)));
+                    documentEditor.ReplaceNode(
+                        property,
+                        property
+                            .WithInitializer(
+                                SyntaxFactory.EqualsValueClause(
+                                    SyntaxFactory.IdentifierName(
+                                        property.Identifier.WithoutTrivia()
+                                    )
+                                )
+                            )
+                            .WithSemicolonToken(SyntaxFactory.Token(SyntaxKind.SemicolonToken))
+                    );
                 }
                 else
                 {
@@ -157,34 +193,47 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertToRecord
             }
 
             // We will fill in defaults when we see the primary constructor again if we saw it in the first place
-            var defaults = positionalParameterInfos.SelectAsArray(info => (EqualsValueClauseSyntax?)null);
+            var defaults = positionalParameterInfos.SelectAsArray(info =>
+                (EqualsValueClauseSyntax?)null
+            );
 
-            foreach (var constructor in typeDeclaration.Members.OfType<ConstructorDeclarationSyntax>())
+            foreach (
+                var constructor in typeDeclaration.Members.OfType<ConstructorDeclarationSyntax>()
+            )
             {
                 // we already did the work to find the primary constructor
                 if (constructor.Equals(primaryConstructor))
                 {
                     // grab parameter defaults and reorder positional param info
                     // to be in order of primary constructor params
-                    positionalParameterInfos = propertiesToAssign
-                        .SelectAsArray(symbol => positionalParameterInfos
-                            .First(info => info.Symbol.Equals(symbol)));
-                    defaults = constructor.ParameterList.Parameters.SelectAsArray(param => param.Default);
+                    positionalParameterInfos = propertiesToAssign.SelectAsArray(symbol =>
+                        positionalParameterInfos.First(info => info.Symbol.Equals(symbol))
+                    );
+                    defaults = constructor.ParameterList.Parameters.SelectAsArray(param =>
+                        param.Default
+                    );
                     documentEditor.RemoveNode(constructor);
                 }
                 else
                 {
-                    var constructorSymbol = (IMethodSymbol)semanticModel
-                        .GetRequiredDeclaredSymbol(constructor, cancellationToken);
-                    var constructorOperation = (IConstructorBodyOperation)semanticModel
-                        .GetRequiredOperation(constructor, cancellationToken);
+                    var constructorSymbol = (IMethodSymbol)
+                        semanticModel.GetRequiredDeclaredSymbol(constructor, cancellationToken);
+                    var constructorOperation = (IConstructorBodyOperation)
+                        semanticModel.GetRequiredOperation(constructor, cancellationToken);
 
                     // check for copy constructor
-                    if (constructorSymbol.Parameters.Length == 1 &&
-                        constructorSymbol.Parameters[0].Type.Equals(type))
+                    if (
+                        constructorSymbol.Parameters.Length == 1
+                        && constructorSymbol.Parameters[0].Type.Equals(type)
+                    )
                     {
-                        if (ConvertToRecordHelpers.IsSimpleCopyConstructor(
-                            constructorOperation, expectedFields, constructorSymbol.Parameters.First()))
+                        if (
+                            ConvertToRecordHelpers.IsSimpleCopyConstructor(
+                                constructorOperation,
+                                expectedFields,
+                                constructorSymbol.Parameters.First()
+                            )
+                        )
                         {
                             documentEditor.RemoveNode(constructor);
                         }
@@ -192,27 +241,41 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertToRecord
                     // ignore any constructor that has the same signature as the primary constructor.
                     // If it wasn't already processed as the primary, it's too complex, and will
                     // already produce an error as the signatures conflict. Better to leave as is and show errors.
-                    else if (!constructorSymbol.Parameters.Select(parameter => parameter.Type)
-                        .SequenceEqual(propertiesToAssign.Select(property => property.Type)))
+                    else if (
+                        !constructorSymbol
+                            .Parameters.Select(parameter => parameter.Type)
+                            .SequenceEqual(propertiesToAssign.Select(property => property.Type))
+                    )
                     {
                         // non-primary, non-copy constructor, add ": this(...)" initializers to each
                         // and try to use assignments in the body to determine the values, otherwise default or null
-                        var expressions = ConvertToRecordHelpers
-                            .GetAssignmentValuesForNonPrimaryConstructor(constructorOperation, propertiesToAssign);
+                        var expressions =
+                            ConvertToRecordHelpers.GetAssignmentValuesForNonPrimaryConstructor(
+                                constructorOperation,
+                                propertiesToAssign
+                            );
 
                         // go up to the ExpressionStatementSyntax so we take the semicolon and not just the assignment
                         var expressionStatementsToRemove = expressions
                             .Select(expression =>
-                                (expression.Parent as AssignmentExpressionSyntax)?.Parent as ExpressionStatementSyntax)
+                                (expression.Parent as AssignmentExpressionSyntax)?.Parent
+                                as ExpressionStatementSyntax
+                            )
                             .WhereNotNull()
                             .AsImmutable();
 
                         var modifiedConstructor = constructor
                             .RemoveNodes(expressionStatementsToRemove, RemovalOptions)!
-                            .WithInitializer(SyntaxFactory.ConstructorInitializer(
+                            .WithInitializer(
+                                SyntaxFactory.ConstructorInitializer(
                                     SyntaxKind.ThisConstructorInitializer,
-                                    SyntaxFactory.ArgumentList(SyntaxFactory.SeparatedList(
-                                    expressions.Select(SyntaxFactory.Argument)))));
+                                    SyntaxFactory.ArgumentList(
+                                        SyntaxFactory.SeparatedList(
+                                            expressions.Select(SyntaxFactory.Argument)
+                                        )
+                                    )
+                                )
+                            );
 
                         documentEditor.ReplaceNode(constructor, modifiedConstructor);
                     }
@@ -220,18 +283,32 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertToRecord
             }
 
             // get equality operators and potentially remove them
-            var equalsOp = (OperatorDeclarationSyntax?)typeDeclaration.Members.FirstOrDefault(member
-                => member is OperatorDeclarationSyntax { OperatorToken.RawKind: (int)SyntaxKind.EqualsEqualsToken });
-            var notEqualsOp = (OperatorDeclarationSyntax?)typeDeclaration.Members.FirstOrDefault(member
-                => member is OperatorDeclarationSyntax { OperatorToken.RawKind: (int)SyntaxKind.ExclamationEqualsToken });
+            var equalsOp = (OperatorDeclarationSyntax?)
+                typeDeclaration.Members.FirstOrDefault(member =>
+                    member
+                        is OperatorDeclarationSyntax
+                        {
+                            OperatorToken.RawKind: (int)SyntaxKind.EqualsEqualsToken
+                        }
+                );
+            var notEqualsOp = (OperatorDeclarationSyntax?)
+                typeDeclaration.Members.FirstOrDefault(member =>
+                    member
+                        is OperatorDeclarationSyntax
+                        {
+                            OperatorToken.RawKind: (int)SyntaxKind.ExclamationEqualsToken
+                        }
+                );
             if (equalsOp != null && notEqualsOp != null)
             {
-                var equalsBodyOperation = (IMethodBodyOperation)semanticModel
-                    .GetRequiredOperation(equalsOp, cancellationToken);
-                var notEqualsBodyOperation = (IMethodBodyOperation)semanticModel
-                    .GetRequiredOperation(notEqualsOp, cancellationToken);
-                if (ConvertToRecordHelpers.IsDefaultEqualsOperator(equalsBodyOperation) &&
-                    ConvertToRecordHelpers.IsDefaultNotEqualsOperator(notEqualsBodyOperation))
+                var equalsBodyOperation = (IMethodBodyOperation)
+                    semanticModel.GetRequiredOperation(equalsOp, cancellationToken);
+                var notEqualsBodyOperation = (IMethodBodyOperation)
+                    semanticModel.GetRequiredOperation(notEqualsOp, cancellationToken);
+                if (
+                    ConvertToRecordHelpers.IsDefaultEqualsOperator(equalsBodyOperation)
+                    && ConvertToRecordHelpers.IsDefaultNotEqualsOperator(notEqualsBodyOperation)
+                )
                 {
                     // they both evaluate to what would be the generated implementation
                     documentEditor.RemoveNode(equalsOp);
@@ -241,64 +318,92 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertToRecord
 
             foreach (var method in typeDeclaration.Members.OfType<MethodDeclarationSyntax>())
             {
-                var methodSymbol = (IMethodSymbol)semanticModel.GetRequiredDeclaredSymbol(method, cancellationToken);
-                var operation = (IMethodBodyOperation)semanticModel.GetRequiredOperation(method, cancellationToken);
+                var methodSymbol = (IMethodSymbol)
+                    semanticModel.GetRequiredDeclaredSymbol(method, cancellationToken);
+                var operation = (IMethodBodyOperation)
+                    semanticModel.GetRequiredOperation(method, cancellationToken);
 
                 if (methodSymbol.Name == "Clone")
                 {
                     // remove clone method as clone is a reserved method name in records
                     documentEditor.RemoveNode(method);
                 }
-                else if (ConvertToRecordHelpers.IsSimpleHashCodeMethod(
-                    semanticModel.Compilation, methodSymbol, operation, expectedFields))
+                else if (
+                    ConvertToRecordHelpers.IsSimpleHashCodeMethod(
+                        semanticModel.Compilation,
+                        methodSymbol,
+                        operation,
+                        expectedFields
+                    )
+                )
                 {
                     documentEditor.RemoveNode(method);
                 }
-                else if (ConvertToRecordHelpers.IsSimpleEqualsMethod(
-                    semanticModel.Compilation, methodSymbol, operation, expectedFields))
+                else if (
+                    ConvertToRecordHelpers.IsSimpleEqualsMethod(
+                        semanticModel.Compilation,
+                        methodSymbol,
+                        operation,
+                        expectedFields
+                    )
+                )
                 {
                     // the Equals method implementation is fundamentally equivalent to the generated one
                     documentEditor.RemoveNode(method);
                 }
             }
 
-            var optionsProvider = await document.GetCodeFixOptionsAsync(fallbackOptions, cancellationToken).ConfigureAwait(false);
+            var optionsProvider = await document
+                .GetCodeFixOptionsAsync(fallbackOptions, cancellationToken)
+                .ConfigureAwait(false);
             var lineFormattingOptions = optionsProvider.GetLineFormattingOptions();
 
             var modifiedClassTrivia = GetModifiedClassTrivia(
-                positionalParameterInfos, typeDeclaration, lineFormattingOptions);
+                positionalParameterInfos,
+                typeDeclaration,
+                lineFormattingOptions
+            );
 
-            var propertiesToAddAsParams = positionalParameterInfos.Zip(defaults, (result, @default) =>
-            {
-                // if inherited we generate nodes and tokens for the type and identifier
-                var type = result.IsInherited
-                    ? result.Symbol.Type.GenerateTypeSyntax()
-                    : result.Declaration.Type;
-                var identifier = result.IsInherited
-                    ? SyntaxFactory.Identifier(result.Symbol.Name)
-                    : result.Declaration.Identifier;
+            var propertiesToAddAsParams = positionalParameterInfos.Zip(
+                defaults,
+                (result, @default) =>
+                {
+                    // if inherited we generate nodes and tokens for the type and identifier
+                    var type = result.IsInherited
+                        ? result.Symbol.Type.GenerateTypeSyntax()
+                        : result.Declaration.Type;
+                    var identifier = result.IsInherited
+                        ? SyntaxFactory.Identifier(result.Symbol.Name)
+                        : result.Declaration.Identifier;
 
-                return SyntaxFactory.Parameter(
-                    GetModifiedAttributeListsForProperty(result),
-                    modifiers: default,
-                    type,
-                    identifier,
-                    @default: @default);
-            });
+                    return SyntaxFactory.Parameter(
+                        GetModifiedAttributeListsForProperty(result),
+                        modifiers: default,
+                        type,
+                        identifier,
+                        @default: @default
+                    );
+                }
+            );
 
             // if we have a class, move trivia from class keyword to record keyword
             // if struct, split trivia and leading goes to record keyword, trailing goes to struct keyword
             var recordKeyword = SyntaxFactory.Token(SyntaxKind.RecordKeyword);
-            recordKeyword = type.TypeKind == TypeKind.Class
-                ? recordKeyword.WithTriviaFrom(typeDeclaration.Keyword)
-                : recordKeyword.WithLeadingTrivia(typeDeclaration.Keyword.LeadingTrivia);
+            recordKeyword =
+                type.TypeKind == TypeKind.Class
+                    ? recordKeyword.WithTriviaFrom(typeDeclaration.Keyword)
+                    : recordKeyword.WithLeadingTrivia(typeDeclaration.Keyword.LeadingTrivia);
 
             // use the trailing trivia of the last item before the constructor parameter list as the param list trivia
-            var constructorTrivia = typeDeclaration.TypeParameterList?.GetTrailingTrivia() ??
-                typeDeclaration.Identifier.TrailingTrivia;
+            var constructorTrivia =
+                typeDeclaration.TypeParameterList?.GetTrailingTrivia()
+                ?? typeDeclaration.Identifier.TrailingTrivia;
 
             // delete IEquatable if it's explicit because it is implicit on records
-            var iEquatable = ConvertToRecordHelpers.GetIEquatableType(semanticModel.Compilation, type);
+            var iEquatable = ConvertToRecordHelpers.GetIEquatableType(
+                semanticModel.Compilation,
+                type
+            );
             var baseList = typeDeclaration.BaseList;
             if (baseList != null)
             {
@@ -306,8 +411,11 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertToRecord
 
                 if (iEquatable != null)
                 {
-                    var iEquatableItem = typeList.FirstOrDefault(baseItem
-                        => iEquatable.Equals(semanticModel.GetTypeInfo(baseItem.Type, cancellationToken).Type));
+                    var iEquatableItem = typeList.FirstOrDefault(baseItem =>
+                        iEquatable.Equals(
+                            semanticModel.GetTypeInfo(baseItem.Type, cancellationToken).Type
+                        )
+                    );
                     if (iEquatableItem != null)
                     {
                         typeList = typeList.Remove(iEquatableItem);
@@ -336,21 +444,39 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertToRecord
                         var inheritedPositionalParams = PositionalParameterInfo
                             .GetInheritedPositionalParams(type, cancellationToken)
                             .SelectAsArray(prop =>
-                                SyntaxFactory.Argument(SyntaxFactory.IdentifierName(prop.Name)));
+                                SyntaxFactory.Argument(SyntaxFactory.IdentifierName(prop.Name))
+                            );
 
-                        typeList = typeList.Replace(baseRecord,
-                            SyntaxFactory.PrimaryConstructorBaseType(baseRecord.Type.WithoutTrailingTrivia(),
-                                SyntaxFactory.ArgumentList(SyntaxFactory.SeparatedList(inheritedPositionalParams))
-                                .WithTrailingTrivia(baseTrailingTrivia)));
+                        typeList = typeList.Replace(
+                            baseRecord,
+                            SyntaxFactory.PrimaryConstructorBaseType(
+                                baseRecord.Type.WithoutTrailingTrivia(),
+                                SyntaxFactory
+                                    .ArgumentList(
+                                        SyntaxFactory.SeparatedList(inheritedPositionalParams)
+                                    )
+                                    .WithTrailingTrivia(baseTrailingTrivia)
+                            )
+                        );
                     }
 
                     baseList = baseList.WithTypes(typeList);
                 }
             }
 
-            documentEditor.ReplaceNode(typeDeclaration, (declaration, _) =>
-                CreateRecordDeclaration(type, (TypeDeclarationSyntax)declaration, modifiedClassTrivia,
-                    propertiesToAddAsParams, recordKeyword, constructorTrivia, baseList));
+            documentEditor.ReplaceNode(
+                typeDeclaration,
+                (declaration, _) =>
+                    CreateRecordDeclaration(
+                        type,
+                        (TypeDeclarationSyntax)declaration,
+                        modifiedClassTrivia,
+                        propertiesToAddAsParams,
+                        recordKeyword,
+                        constructorTrivia,
+                        baseList
+                    )
+            );
 
             return solutionEditor.GetChangedSolution();
         }
@@ -362,62 +488,77 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertToRecord
             IEnumerable<ParameterSyntax> propertiesToAddAsParams,
             SyntaxToken recordKeyword,
             SyntaxTriviaList constructorTrivia,
-            BaseListSyntax? baseList)
+            BaseListSyntax? baseList
+        )
         {
             // if we have no members, use semicolon instead of braces
             // use default if we don't want it, otherwise use the original token if it exists or a generated one
-            SyntaxToken openBrace, closeBrace, semicolon;
+            SyntaxToken openBrace,
+                closeBrace,
+                semicolon;
             if (typeDeclaration.Members.IsEmpty())
             {
                 openBrace = default;
                 closeBrace = default;
-                semicolon = typeDeclaration.SemicolonToken == default
-                    ? SyntaxFactory.Token(SyntaxKind.SemicolonToken)
-                    : typeDeclaration.SemicolonToken;
+                semicolon =
+                    typeDeclaration.SemicolonToken == default
+                        ? SyntaxFactory.Token(SyntaxKind.SemicolonToken)
+                        : typeDeclaration.SemicolonToken;
             }
             else
             {
-                openBrace = typeDeclaration.OpenBraceToken == default
-                    ? SyntaxFactory.Token(SyntaxKind.OpenBraceToken)
-                    : typeDeclaration.OpenBraceToken;
-                closeBrace = typeDeclaration.CloseBraceToken == default
-                    ? SyntaxFactory.Token(SyntaxKind.CloseBraceToken)
-                    : typeDeclaration.CloseBraceToken;
+                openBrace =
+                    typeDeclaration.OpenBraceToken == default
+                        ? SyntaxFactory.Token(SyntaxKind.OpenBraceToken)
+                        : typeDeclaration.OpenBraceToken;
+                closeBrace =
+                    typeDeclaration.CloseBraceToken == default
+                        ? SyntaxFactory.Token(SyntaxKind.CloseBraceToken)
+                        : typeDeclaration.CloseBraceToken;
                 semicolon = default;
 
                 // remove any potential leading blank lines right after the class declaration, as we could have
                 // something like a method which was spaced out from the previous properties, but now shouldn't
                 // have that leading space
                 typeDeclaration = typeDeclaration.ReplaceNode(
-                    typeDeclaration.Members[0], typeDeclaration.Members[0].GetNodeWithoutLeadingBlankLines());
+                    typeDeclaration.Members[0],
+                    typeDeclaration.Members[0].GetNodeWithoutLeadingBlankLines()
+                );
             }
 
-            return SyntaxFactory.RecordDeclaration(
-                type.TypeKind == TypeKind.Class
-                    ? SyntaxKind.RecordDeclaration
-                    : SyntaxKind.RecordStructDeclaration,
-                typeDeclaration.AttributeLists,
-                typeDeclaration.Modifiers,
-                recordKeyword,
-                type.TypeKind == TypeKind.Class
-                    ? default
-                    : typeDeclaration.Keyword.WithTrailingTrivia(SyntaxFactory.ElasticMarker),
-                // remove trailing trivia from places where we would want to insert the parameter list before a line break
-                typeDeclaration.Identifier.WithTrailingTrivia(SyntaxFactory.ElasticMarker),
-                typeDeclaration.TypeParameterList?.WithTrailingTrivia(SyntaxFactory.ElasticMarker),
-                SyntaxFactory.ParameterList(SyntaxFactory.SeparatedList(propertiesToAddAsParams))
-                    .WithAppendedTrailingTrivia(constructorTrivia),
-                baseList,
-                typeDeclaration.ConstraintClauses,
-                openBrace,
-                typeDeclaration.Members,
-                closeBrace,
-                semicolon)
+            return SyntaxFactory
+                .RecordDeclaration(
+                    type.TypeKind == TypeKind.Class
+                        ? SyntaxKind.RecordDeclaration
+                        : SyntaxKind.RecordStructDeclaration,
+                    typeDeclaration.AttributeLists,
+                    typeDeclaration.Modifiers,
+                    recordKeyword,
+                    type.TypeKind == TypeKind.Class
+                        ? default
+                        : typeDeclaration.Keyword.WithTrailingTrivia(SyntaxFactory.ElasticMarker),
+                    // remove trailing trivia from places where we would want to insert the parameter list before a line break
+                    typeDeclaration.Identifier.WithTrailingTrivia(SyntaxFactory.ElasticMarker),
+                    typeDeclaration.TypeParameterList?.WithTrailingTrivia(
+                        SyntaxFactory.ElasticMarker
+                    ),
+                    SyntaxFactory
+                        .ParameterList(SyntaxFactory.SeparatedList(propertiesToAddAsParams))
+                        .WithAppendedTrailingTrivia(constructorTrivia),
+                    baseList,
+                    typeDeclaration.ConstraintClauses,
+                    openBrace,
+                    typeDeclaration.Members,
+                    closeBrace,
+                    semicolon
+                )
                 .WithLeadingTrivia(modifiedClassTrivia)
                 .WithAdditionalAnnotations(Formatter.Annotation);
         }
 
-        private static SyntaxList<AttributeListSyntax> GetModifiedAttributeListsForProperty(PositionalParameterInfo result)
+        private static SyntaxList<AttributeListSyntax> GetModifiedAttributeListsForProperty(
+            PositionalParameterInfo result
+        )
         {
             if (result.IsInherited || result.KeepAsOverride)
             {
@@ -434,36 +575,45 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertToRecord
                 return SyntaxFactory.List<AttributeListSyntax>();
             }
 
-            return SyntaxFactory.List(result.Declaration.AttributeLists.SelectAsArray(attributeList =>
-            {
-                if (attributeList.Target == null)
+            return SyntaxFactory.List(
+                result.Declaration.AttributeLists.SelectAsArray(attributeList =>
                 {
-                    // convert attributes attached to the property with no target into "property :" targeted attributes
-                    return attributeList
-                        .WithTarget(SyntaxFactory.AttributeTargetSpecifier(SyntaxFactory.Token(SyntaxKind.PropertyKeyword)))
-                        .WithoutTrivia();
-                }
-                else
-                {
-                    return attributeList.WithoutTrivia();
-                }
-            }));
+                    if (attributeList.Target == null)
+                    {
+                        // convert attributes attached to the property with no target into "property :" targeted attributes
+                        return attributeList
+                            .WithTarget(
+                                SyntaxFactory.AttributeTargetSpecifier(
+                                    SyntaxFactory.Token(SyntaxKind.PropertyKeyword)
+                                )
+                            )
+                            .WithoutTrivia();
+                    }
+                    else
+                    {
+                        return attributeList.WithoutTrivia();
+                    }
+                })
+            );
         }
 
         private static async Task RefactorInitializersAsync(
             INamedTypeSymbol type,
             SolutionEditor solutionEditor,
             ImmutableArray<IPropertySymbol> positionalParameters,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
             var symbolReferences = await SymbolFinder
-                .FindReferencesAsync(type, solutionEditor.OriginalSolution, cancellationToken).ConfigureAwait(false);
+                .FindReferencesAsync(type, solutionEditor.OriginalSolution, cancellationToken)
+                .ConfigureAwait(false);
             var referenceLocations = symbolReferences.SelectMany(reference => reference.Locations);
             var documentLookup = referenceLocations.ToLookup(refLoc => refLoc.Document.Id);
             foreach (var (documentID, documentLocations) in documentLookup)
             {
                 var documentEditor = await solutionEditor
-                        .GetDocumentEditorAsync(documentID, cancellationToken).ConfigureAwait(false);
+                    .GetDocumentEditorAsync(documentID, cancellationToken)
+                    .ConfigureAwait(false);
                 if (documentEditor.OriginalDocument.Project.Language != LanguageNames.CSharp)
                 {
                     // since this is a CSharp-dependent file, we need to have specific VB support.
@@ -474,18 +624,25 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertToRecord
 
                 var objectCreationExpressions = documentLocations
                     // we should find the identifier node of an object creation expression
-                    .Select(referenceLocations => referenceLocations.Location.FindNode(cancellationToken).Parent)
+                    .Select(referenceLocations =>
+                        referenceLocations.Location.FindNode(cancellationToken).Parent
+                    )
                     .OfType<ObjectCreationExpressionSyntax>()
                     // order by smaller spans first so in the nested case we don't overwrite our previous changes
                     .OrderBy(node => (node.FullWidth(), node.SpanStart));
 
                 foreach (var objectCreationExpression in objectCreationExpressions)
                 {
-                    var objectCreationOperation = (IObjectCreationOperation)documentEditor.SemanticModel
-                        .GetRequiredOperation(objectCreationExpression, cancellationToken);
+                    var objectCreationOperation = (IObjectCreationOperation)
+                        documentEditor.SemanticModel.GetRequiredOperation(
+                            objectCreationExpression,
+                            cancellationToken
+                        );
 
                     var expressions = ConvertToRecordHelpers.GetAssignmentValuesFromObjectCreation(
-                        objectCreationOperation, positionalParameters);
+                        objectCreationOperation,
+                        positionalParameters
+                    );
                     if (expressions.IsEmpty)
                     {
                         continue;
@@ -494,52 +651,70 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertToRecord
                     var expressionIndices = expressions.SelectAsArray(
                         // if initializer was null we wouldn't have found expressions
                         // any constructed nodes (default/null) should give -1 because parent is null
-                        expression => objectCreationExpression.Initializer!.Expressions.IndexOf(expression.Parent));
+                        expression =>
+                        objectCreationExpression.Initializer!.Expressions.IndexOf(expression.Parent)
+                    );
 
-                    documentEditor.ReplaceNode(objectCreationExpression, (node, generator) =>
-                    {
-                        var updatedObjectCreation = (ObjectCreationExpressionSyntax)node;
-                        var newInitializer = (InitializerExpressionSyntax)generator
-                            .RemoveNodes(updatedObjectCreation.Initializer!,
-                                expressionIndices
-                                    .Where(i => i != -1)
-                                    .Select(i => updatedObjectCreation.Initializer!.Expressions[i]));
-
-                        // if there are no more assignments other than the ones that
-                        // could go in the primary constructor, we can remove the block entirely
-                        if (newInitializer.Expressions.IsEmpty())
+                    documentEditor.ReplaceNode(
+                        objectCreationExpression,
+                        (node, generator) =>
                         {
-                            newInitializer = null;
+                            var updatedObjectCreation = (ObjectCreationExpressionSyntax)node;
+                            var newInitializer = (InitializerExpressionSyntax)
+                                generator.RemoveNodes(
+                                    updatedObjectCreation.Initializer!,
+                                    expressionIndices
+                                        .Where(i => i != -1)
+                                        .Select(i =>
+                                            updatedObjectCreation.Initializer!.Expressions[i]
+                                        )
+                                );
+
+                            // if there are no more assignments other than the ones that
+                            // could go in the primary constructor, we can remove the block entirely
+                            if (newInitializer.Expressions.IsEmpty())
+                            {
+                                newInitializer = null;
+                            }
+
+                            // note: index here is the position in the initializer assignment list of the expression
+                            // if it was found at all. The expressions are actually in order of how they should be
+                            // supplied as arguments for the primary constructor.
+                            var updatedExpressions = expressions.Zip(
+                                expressionIndices,
+                                (expression, index) =>
+                                {
+                                    if (index == -1)
+                                    {
+                                        // default/null constructed expression
+                                        return expression;
+                                    }
+                                    else
+                                    {
+                                        // corresponds to a real node, need to get the updated one
+                                        var assignmentExpression = (AssignmentExpressionSyntax)
+                                            updatedObjectCreation.Initializer!.Expressions[index];
+                                        return assignmentExpression.Right;
+                                    }
+                                }
+                            );
+
+                            // replace: new C { Foo = 0; Bar = false; };
+                            // with: new C(0, false);
+                            return SyntaxFactory.ObjectCreationExpression(
+                                updatedObjectCreation.NewKeyword,
+                                updatedObjectCreation.Type.WithoutTrailingTrivia(),
+                                SyntaxFactory.ArgumentList(
+                                    SyntaxFactory.SeparatedList(
+                                        updatedExpressions.Select(expression =>
+                                            SyntaxFactory.Argument(expression.WithoutTrivia())
+                                        )
+                                    )
+                                ),
+                                newInitializer
+                            );
                         }
-
-                        // note: index here is the position in the initializer assignment list of the expression
-                        // if it was found at all. The expressions are actually in order of how they should be
-                        // supplied as arguments for the primary constructor. 
-                        var updatedExpressions = expressions.Zip(expressionIndices, (expression, index) =>
-                        {
-                            if (index == -1)
-                            {
-                                // default/null constructed expression
-                                return expression;
-                            }
-                            else
-                            {
-                                // corresponds to a real node, need to get the updated one
-                                var assignmentExpression = (AssignmentExpressionSyntax)
-                                    updatedObjectCreation.Initializer!.Expressions[index];
-                                return assignmentExpression.Right;
-                            }
-                        });
-
-                        // replace: new C { Foo = 0; Bar = false; };
-                        // with: new C(0, false);
-                        return SyntaxFactory.ObjectCreationExpression(
-                            updatedObjectCreation.NewKeyword,
-                            updatedObjectCreation.Type.WithoutTrailingTrivia(),
-                            SyntaxFactory.ArgumentList(SyntaxFactory.SeparatedList(updatedExpressions
-                                .Select(expression => SyntaxFactory.Argument(expression.WithoutTrivia())))),
-                            newInitializer);
-                    });
+                    );
                 }
             }
         }
@@ -554,9 +729,13 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertToRecord
         private static SyntaxTriviaList GetModifiedClassTrivia(
             ImmutableArray<PositionalParameterInfo> propertyResults,
             TypeDeclarationSyntax typeDeclaration,
-            LineFormattingOptions lineFormattingOptions)
+            LineFormattingOptions lineFormattingOptions
+        )
         {
-            var classTrivia = typeDeclaration.GetLeadingTrivia().Where(trivia => !trivia.IsWhitespace()).AsImmutable();
+            var classTrivia = typeDeclaration
+                .GetLeadingTrivia()
+                .Where(trivia => !trivia.IsWhitespace())
+                .AsImmutable();
 
             var propertyNonDocComments = propertyResults
                 .SelectMany(result =>
@@ -575,9 +754,11 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertToRecord
                     {
                         // get the leading trivia of the node/token right after
                         // the attribute lists (either modifier or type of property)
-                        leadingPropTrivia = leadingPropTrivia.Concat(p.Modifiers.IsEmpty()
-                            ? p.Type.GetLeadingTrivia()
-                            : p.Modifiers.First().LeadingTrivia);
+                        leadingPropTrivia = leadingPropTrivia.Concat(
+                            p.Modifiers.IsEmpty()
+                                ? p.Type.GetLeadingTrivia()
+                                : p.Modifiers.First().LeadingTrivia
+                        );
                     }
                     return leadingPropTrivia;
                 })
@@ -587,43 +768,65 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertToRecord
             // if the class one isn't found, then we find the first property with a doc comment
             // this variable doubles as a flag to see if we need to generate doc comments at all, as
             // if it is still null, we found no meaningful doc comments anywhere
-            var exteriorTrivia = GetExteriorTrivia(typeDeclaration) ??
-                propertyResults
-                .Where(result => !result.IsInherited)
-                .Select(result => GetExteriorTrivia(result.Declaration!))
-                .FirstOrDefault(trivia => trivia != null);
+            var exteriorTrivia =
+                GetExteriorTrivia(typeDeclaration)
+                ?? propertyResults
+                    .Where(result => !result.IsInherited)
+                    .Select(result => GetExteriorTrivia(result.Declaration!))
+                    .FirstOrDefault(trivia => trivia != null);
 
             if (exteriorTrivia == null)
             {
                 // we didn't find any substantive doc comments, just give the current non-doc comments
-                return SyntaxFactory.TriviaList(classTrivia.Concat(propertyNonDocComments).Select(trivia => trivia.AsElastic()));
+                return SyntaxFactory.TriviaList(
+                    classTrivia.Concat(propertyNonDocComments).Select(trivia => trivia.AsElastic())
+                );
             }
 
-            var propertyParamComments = CreateParamComments(propertyResults, exteriorTrivia!.Value, lineFormattingOptions);
+            var propertyParamComments = CreateParamComments(
+                propertyResults,
+                exteriorTrivia!.Value,
+                lineFormattingOptions
+            );
             var classDocComment = classTrivia.FirstOrNull(trivia => trivia.IsDocComment());
             DocumentationCommentTriviaSyntax newClassDocComment;
 
-            if (classDocComment?.GetStructure() is DocumentationCommentTriviaSyntax originalClassDoc)
+            if (
+                classDocComment?.GetStructure() is DocumentationCommentTriviaSyntax originalClassDoc
+            )
             {
                 // insert parameters after summary node and the extra newline or at start if no summary
                 var summaryIndex = originalClassDoc.Content.IndexOf(node =>
-                    node is XmlElementSyntax element &&
-                    element.StartTag?.Name.LocalName.ValueText == DocumentationCommentXmlNames.SummaryElementName);
+                    node is XmlElementSyntax element
+                    && element.StartTag?.Name.LocalName.ValueText
+                        == DocumentationCommentXmlNames.SummaryElementName
+                );
 
                 // if not found, summaryIndex + 1 = -1 + 1 = 0, so our params go to the start
-                newClassDocComment = originalClassDoc.WithContent(originalClassDoc.Content
-                    .Replace(originalClassDoc.Content[0], originalClassDoc.Content[0])
-                    .InsertRange(summaryIndex + 1, propertyParamComments));
+                newClassDocComment = originalClassDoc.WithContent(
+                    originalClassDoc
+                        .Content.Replace(originalClassDoc.Content[0], originalClassDoc.Content[0])
+                        .InsertRange(summaryIndex + 1, propertyParamComments)
+                );
             }
             else
             {
                 // no class doc comment, if we have non-single line parameter comments we need a start and end
                 // we must have had at least one property with a doc comment
-                if (propertyResults
-                        .SelectAsArray(result => !result.IsInherited,
-                            result => result.Declaration!.GetLeadingTrivia().FirstOrNull(trivia => trivia.IsDocComment()))
-                        .FirstOrDefault(t => t != null)?.GetStructure() is DocumentationCommentTriviaSyntax propDoc &&
-                    propDoc.IsMultilineDocComment())
+                if (
+                    propertyResults
+                        .SelectAsArray(
+                            result => !result.IsInherited,
+                            result =>
+                                result
+                                    .Declaration!.GetLeadingTrivia()
+                                    .FirstOrNull(trivia => trivia.IsDocComment())
+                        )
+                        .FirstOrDefault(t => t != null)
+                        ?.GetStructure()
+                        is DocumentationCommentTriviaSyntax propDoc
+                    && propDoc.IsMultilineDocComment()
+                )
                 {
                     // add /** and */
                     newClassDocComment = SyntaxFactory.DocumentationCommentTrivia(
@@ -631,22 +834,58 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertToRecord
                         // Our parameter method gives a newline (without leading trivia) to start
                         // because we assume we're following some other comment, we replace that newline to add
                         // the start of comment leading trivia as well since we're not following another comment
-                        SyntaxFactory.List(propertyParamComments.Skip(1)
-                            .Prepend(SyntaxFactory.XmlText(SyntaxFactory.XmlTextNewLine(lineFormattingOptions.NewLine, continueXmlDocumentationComment: false)
-                                .WithLeadingTrivia(SyntaxFactory.DocumentationCommentExterior("/**"))
-                                .WithTrailingTrivia(exteriorTrivia)))
-                            .Append(SyntaxFactory.XmlText(SyntaxFactory.XmlTextNewLine(lineFormattingOptions.NewLine, continueXmlDocumentationComment: false)))),
-                            SyntaxFactory.Token(SyntaxKind.EndOfDocumentationCommentToken)
-                                .WithTrailingTrivia(SyntaxFactory.DocumentationCommentExterior("*/"), SyntaxFactory.ElasticCarriageReturnLineFeed));
+                        SyntaxFactory.List(
+                            propertyParamComments
+                                .Skip(1)
+                                .Prepend(
+                                    SyntaxFactory.XmlText(
+                                        SyntaxFactory
+                                            .XmlTextNewLine(
+                                                lineFormattingOptions.NewLine,
+                                                continueXmlDocumentationComment: false
+                                            )
+                                            .WithLeadingTrivia(
+                                                SyntaxFactory.DocumentationCommentExterior("/**")
+                                            )
+                                            .WithTrailingTrivia(exteriorTrivia)
+                                    )
+                                )
+                                .Append(
+                                    SyntaxFactory.XmlText(
+                                        SyntaxFactory.XmlTextNewLine(
+                                            lineFormattingOptions.NewLine,
+                                            continueXmlDocumentationComment: false
+                                        )
+                                    )
+                                )
+                        ),
+                        SyntaxFactory
+                            .Token(SyntaxKind.EndOfDocumentationCommentToken)
+                            .WithTrailingTrivia(
+                                SyntaxFactory.DocumentationCommentExterior("*/"),
+                                SyntaxFactory.ElasticCarriageReturnLineFeed
+                            )
+                    );
                 }
                 else
                 {
                     // add extra line at end to end doc comment
                     // also skip first newline and replace with non-newline
-                    newClassDocComment = SyntaxFactory.DocumentationCommentTrivia(
-                        SyntaxKind.MultiLineDocumentationCommentTrivia,
-                        SyntaxFactory.List(propertyParamComments.Skip(1)
-                            .Prepend(SyntaxFactory.XmlText(SyntaxFactory.XmlTextLiteral(" ").WithLeadingTrivia(exteriorTrivia)))))
+                    newClassDocComment = SyntaxFactory
+                        .DocumentationCommentTrivia(
+                            SyntaxKind.MultiLineDocumentationCommentTrivia,
+                            SyntaxFactory.List(
+                                propertyParamComments
+                                    .Skip(1)
+                                    .Prepend(
+                                        SyntaxFactory.XmlText(
+                                            SyntaxFactory
+                                                .XmlTextLiteral(" ")
+                                                .WithLeadingTrivia(exteriorTrivia)
+                                        )
+                                    )
+                            )
+                        )
                         .WithAppendedTrailingTrivia(SyntaxFactory.ElasticCarriageReturnLineFeed);
                 }
             }
@@ -655,25 +894,31 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertToRecord
             if (classDocComment == null || lastComment == classDocComment)
             {
                 // doc comment was last non-whitespace/newline trivia or there was no class doc comment originally
-                return SyntaxFactory.TriviaList(classTrivia
-                    .Where(trivia => !trivia.IsDocComment())
-                    .Concat(propertyNonDocComments)
-                    .Append(SyntaxFactory.Trivia(newClassDocComment))
-                    .Select(trivia => trivia.AsElastic()));
+                return SyntaxFactory.TriviaList(
+                    classTrivia
+                        .Where(trivia => !trivia.IsDocComment())
+                        .Concat(propertyNonDocComments)
+                        .Append(SyntaxFactory.Trivia(newClassDocComment))
+                        .Select(trivia => trivia.AsElastic())
+                );
             }
             else
             {
                 // there were comments after doc comment
-                return SyntaxFactory.TriviaList(classTrivia
-                    .Replace(classDocComment.Value, SyntaxFactory.Trivia(newClassDocComment))
-                    .Concat(propertyNonDocComments)
-                    .Select(trivia => trivia.AsElastic()));
+                return SyntaxFactory.TriviaList(
+                    classTrivia
+                        .Replace(classDocComment.Value, SyntaxFactory.Trivia(newClassDocComment))
+                        .Concat(propertyNonDocComments)
+                        .Select(trivia => trivia.AsElastic())
+                );
             }
         }
 
         private static SyntaxTriviaList? GetExteriorTrivia(SyntaxNode declaration)
         {
-            var potentialDocComment = declaration.GetLeadingTrivia().FirstOrNull(trivia => trivia.IsDocComment());
+            var potentialDocComment = declaration
+                .GetLeadingTrivia()
+                .FirstOrNull(trivia => trivia.IsDocComment());
 
             if (potentialDocComment?.GetStructure() is DocumentationCommentTriviaSyntax docComment)
             {
@@ -730,7 +975,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertToRecord
         private static IEnumerable<XmlNodeSyntax> CreateParamComments(
             ImmutableArray<PositionalParameterInfo> propertyResults,
             SyntaxTriviaList exteriorTrivia,
-            LineFormattingOptions lineFormattingOptions)
+            LineFormattingOptions lineFormattingOptions
+        )
         {
             foreach (var result in propertyResults)
             {
@@ -738,70 +984,127 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertToRecord
                 // param goes on a new line with the continuation trivia
                 // when adding a new line, the continue flag adds a single line documentation trivia, but we don't necessarily want that
                 yield return SyntaxFactory.XmlText(
-                    SyntaxFactory.XmlTextNewLine(lineFormattingOptions.NewLine, continueXmlDocumentationComment: false),
-                    SyntaxFactory.XmlTextLiteral(" ").WithLeadingTrivia(exteriorTrivia));
+                    SyntaxFactory.XmlTextNewLine(
+                        lineFormattingOptions.NewLine,
+                        continueXmlDocumentationComment: false
+                    ),
+                    SyntaxFactory.XmlTextLiteral(" ").WithLeadingTrivia(exteriorTrivia)
+                );
 
                 if (result.IsInherited)
                 {
                     // generate a param comment with an inherited doc
-                    yield return SyntaxFactory.XmlParamElement(result.Symbol.Name, SyntaxFactory.XmlEmptyElement(
-                            SyntaxFactory.XmlName(DocumentationCommentXmlNames.InheritdocElementName)));
+                    yield return SyntaxFactory.XmlParamElement(
+                        result.Symbol.Name,
+                        SyntaxFactory.XmlEmptyElement(
+                            SyntaxFactory.XmlName(
+                                DocumentationCommentXmlNames.InheritdocElementName
+                            )
+                        )
+                    );
                 }
                 else
                 {
                     // get the documentation comment
-                    var potentialDocComment = result.Declaration.GetLeadingTrivia().FirstOrNull(trivia => trivia.IsDocComment());
+                    var potentialDocComment = result
+                        .Declaration.GetLeadingTrivia()
+                        .FirstOrNull(trivia => trivia.IsDocComment());
                     var paramContent = ImmutableArray<XmlNodeSyntax>.Empty;
-                    if (potentialDocComment?.GetStructure() is DocumentationCommentTriviaSyntax docComment)
+                    if (
+                        potentialDocComment?.GetStructure()
+                        is DocumentationCommentTriviaSyntax docComment
+                    )
                     {
                         // get the summary node if there is one
                         var summaryNode = docComment.Content.FirstOrDefault(node =>
-                            node is XmlElementSyntax element &&
-                            element.StartTag?.Name.LocalName.ValueText == DocumentationCommentXmlNames.SummaryElementName);
+                            node is XmlElementSyntax element
+                            && element.StartTag?.Name.LocalName.ValueText
+                                == DocumentationCommentXmlNames.SummaryElementName
+                        );
 
                         if (summaryNode != null)
                         {
                             // construct a parameter element from the contents of the property summary
                             // right now we throw away all other documentation parts of the property, because we don't really know where they should go
                             var summaryContent = ((XmlElementSyntax)summaryNode).Content;
-                            paramContent = summaryContent.Select((node, index) =>
-                            {
-                                if (node is XmlTextSyntax text)
-                                {
-                                    // any text token that is not on it's own line should have replaced trivia
-                                    var tokens = text.TextTokens.SelectAsArray(token =>
-                                        token.IsKind(SyntaxKind.XmlTextLiteralToken)
-                                            ? token.WithLeadingTrivia(exteriorTrivia)
-                                            : token);
-
-                                    if (index == 0 &&
-                                        tokens is [(kind: SyntaxKind.XmlTextLiteralNewLineToken), _, ..])
+                            paramContent = summaryContent
+                                .Select(
+                                    (node, index) =>
                                     {
-                                        // remove the starting line and trivia from the first line
-                                        tokens = tokens.RemoveAt(0);
+                                        if (node is XmlTextSyntax text)
+                                        {
+                                            // any text token that is not on it's own line should have replaced trivia
+                                            var tokens = text.TextTokens.SelectAsArray(token =>
+                                                token.IsKind(SyntaxKind.XmlTextLiteralToken)
+                                                    ? token.WithLeadingTrivia(exteriorTrivia)
+                                                    : token
+                                            );
+
+                                            if (
+                                                index == 0
+                                                && tokens
+                                                    is [
+
+                                                        (
+                                                            kind: SyntaxKind.XmlTextLiteralNewLineToken
+                                                        ),
+                                                        _,
+                                                        ..,
+                                                    ]
+                                            )
+                                            {
+                                                // remove the starting line and trivia from the first line
+                                                tokens = tokens.RemoveAt(0);
+                                            }
+
+                                            // remove trivia from first statement because it should never be on a separate line
+                                            tokens = tokens.Replace(
+                                                tokens[0],
+                                                tokens[0].WithoutLeadingTrivia()
+                                            );
+
+                                            if (
+                                                index == summaryContent.Count - 1
+                                                && tokens
+                                                    is [
+                                                        ..,
+
+                                                        (
+                                                            kind: SyntaxKind.XmlTextLiteralNewLineToken
+                                                        ),
+
+                                                        (
+                                                            kind: SyntaxKind.XmlTextLiteralToken
+                                                        ) textLiteral,
+                                                    ]
+                                                && textLiteral.Text.GetFirstNonWhitespaceIndexInString()
+                                                    == -1
+                                            )
+                                            {
+                                                // the last text token contains a new line, then a whitespace only text (which would start the closing tag)
+                                                // remove the new line and the trivia from the extra text
+                                                tokens = tokens.RemoveAt(tokens.Length - 2);
+                                                tokens = tokens.Replace(
+                                                    tokens[^1],
+                                                    tokens[^1].WithoutLeadingTrivia()
+                                                );
+                                            }
+
+                                            return text.WithTextTokens(
+                                                SyntaxFactory.TokenList(tokens)
+                                            );
+                                        }
+                                        return node;
                                     }
-
-                                    // remove trivia from first statement because it should never be on a separate line
-                                    tokens = tokens.Replace(tokens[0], tokens[0].WithoutLeadingTrivia());
-
-                                    if (index == summaryContent.Count - 1 &&
-                                        tokens is [.., (kind: SyntaxKind.XmlTextLiteralNewLineToken), (kind: SyntaxKind.XmlTextLiteralToken) textLiteral] &&
-                                        textLiteral.Text.GetFirstNonWhitespaceIndexInString() == -1)
-                                    {
-                                        // the last text token contains a new line, then a whitespace only text (which would start the closing tag)
-                                        // remove the new line and the trivia from the extra text
-                                        tokens = tokens.RemoveAt(tokens.Length - 2);
-                                        tokens = tokens.Replace(tokens[^1], tokens[^1].WithoutLeadingTrivia());
-                                    }
-
-                                    return text.WithTextTokens(SyntaxFactory.TokenList(tokens));
-                                }
-                                return node;
-                            }).AsImmutable();
+                                )
+                                .AsImmutable();
                         }
                     }
 
-                    yield return SyntaxFactory.XmlParamElement(result.Declaration.Identifier.ValueText, paramContent.AsArray());
+                    yield return SyntaxFactory.XmlParamElement(
+                        result.Declaration.Identifier.ValueText,
+                        paramContent.AsArray()
+                    );
                 }
             }
         }

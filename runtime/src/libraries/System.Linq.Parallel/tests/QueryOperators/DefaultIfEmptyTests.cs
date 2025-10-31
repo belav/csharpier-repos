@@ -18,9 +18,21 @@ namespace System.Linq.Parallel.Tests
             {
                 yield return new object[] { query[0], 1 };
             }
-            yield return new object[] { Labeled.Label("Empty-Int", ParallelEnumerable.Empty<int>()), 1 };
-            yield return new object[] { Labeled.Label("Empty-Decimal", ParallelEnumerable.Empty<decimal>()), 1.5M };
-            yield return new object[] { Labeled.Label("Empty-String", ParallelEnumerable.Empty<string>()), "default" };
+            yield return new object[]
+            {
+                Labeled.Label("Empty-Int", ParallelEnumerable.Empty<int>()),
+                1,
+            };
+            yield return new object[]
+            {
+                Labeled.Label("Empty-Decimal", ParallelEnumerable.Empty<decimal>()),
+                1.5M,
+            };
+            yield return new object[]
+            {
+                Labeled.Label("Empty-String", ParallelEnumerable.Empty<string>()),
+                "default",
+            };
         }
 
         //
@@ -63,7 +75,10 @@ namespace System.Linq.Parallel.Tests
         [Theory]
         [OuterLoop]
         [MemberData(nameof(Sources.OuterLoopRanges), MemberType = typeof(Sources))]
-        public static void DefaultIfEmpty_NotEmpty_Longrunning(Labeled<ParallelQuery<int>> labeled, int count)
+        public static void DefaultIfEmpty_NotEmpty_Longrunning(
+            Labeled<ParallelQuery<int>> labeled,
+            int count
+        )
         {
             DefaultIfEmpty_NotEmpty(labeled, count);
         }
@@ -88,7 +103,10 @@ namespace System.Linq.Parallel.Tests
 
         [Theory]
         [MemberData(nameof(Sources.Ranges), new[] { 1, 2, 16 }, MemberType = typeof(Sources))]
-        public static void DefaultIfEmpty_NotEmpty_NotPipelined(Labeled<ParallelQuery<int>> labeled, int count)
+        public static void DefaultIfEmpty_NotEmpty_NotPipelined(
+            Labeled<ParallelQuery<int>> labeled,
+            int count
+        )
         {
             ParallelQuery<int> query = labeled.Item;
             int seen = 0;
@@ -102,7 +120,10 @@ namespace System.Linq.Parallel.Tests
         [Theory]
         [OuterLoop]
         [MemberData(nameof(Sources.OuterLoopRanges), MemberType = typeof(Sources))]
-        public static void DefaultIfEmpty_NotEmpty_NotPipelined_Longrunning(Labeled<ParallelQuery<int>> labeled, int count)
+        public static void DefaultIfEmpty_NotEmpty_NotPipelined_Longrunning(
+            Labeled<ParallelQuery<int>> labeled,
+            int count
+        )
         {
             DefaultIfEmpty_NotEmpty_NotPipelined(labeled, count);
         }
@@ -124,7 +145,10 @@ namespace System.Linq.Parallel.Tests
 
         [Theory]
         [MemberData(nameof(EmptyData))]
-        public static void DefaultIfEmpty_Empty_NotPipelined<T>(Labeled<ParallelQuery<T>> labeled, T def)
+        public static void DefaultIfEmpty_Empty_NotPipelined<T>(
+            Labeled<ParallelQuery<T>> labeled,
+            T def
+        )
         {
             IList<T> notEmpty = labeled.Item.DefaultIfEmpty().ToList();
             Assert.NotEmpty(notEmpty);
@@ -140,7 +164,10 @@ namespace System.Linq.Parallel.Tests
         [Fact]
         public static void DefaultIfEmpty_ArgumentNullException()
         {
-            AssertExtensions.Throws<ArgumentNullException>("source", () => ((ParallelQuery<bool>)null).DefaultIfEmpty());
+            AssertExtensions.Throws<ArgumentNullException>(
+                "source",
+                () => ((ParallelQuery<bool>)null).DefaultIfEmpty()
+            );
         }
     }
 }

@@ -1,21 +1,21 @@
 //------------------------------------------------------------------------------
 // <copyright file="ErrorFormatterPage.cs" company="Microsoft">
 //     Copyright (c) Microsoft Corporation.  All rights reserved.
-// </copyright>                                                                
+// </copyright>
 //------------------------------------------------------------------------------
 
 using System;
 using System.ComponentModel;
-using System.Web.UI;
-using System.Web.Mobile;
 using System.Security.Permissions;
+using System.Web.Mobile;
+using System.Web.UI;
 
 namespace System.Web.UI.MobileControls
 {
     /*
      * Error Formatter page class.
      * This is essentially a precompiled Mobile page, that formats error messages
-     * for other devices. 
+     * for other devices.
      *
      * NOTE: While there is nothing in the framework to let the developer override
      * this page, it has been written so the developer can do so.
@@ -24,12 +24,18 @@ namespace System.Web.UI.MobileControls
      */
 
     /// <include file='doc\ErrorFormatterPage.uex' path='docs/doc[@for="ErrorFormatterPage"]/*' />
-    [
-        ToolboxItem(false)
-    ]
-    [AspNetHostingPermission(SecurityAction.LinkDemand, Level=AspNetHostingPermissionLevel.Minimal)]
-    [AspNetHostingPermission(SecurityAction.InheritanceDemand, Level=AspNetHostingPermissionLevel.Minimal)]
-    [Obsolete("The System.Web.Mobile.dll assembly has been deprecated and should no longer be used. For information about how to develop ASP.NET mobile applications, see http://go.microsoft.com/fwlink/?LinkId=157231.")]
+    [ToolboxItem(false)]
+    [AspNetHostingPermission(
+        SecurityAction.LinkDemand,
+        Level = AspNetHostingPermissionLevel.Minimal
+    )]
+    [AspNetHostingPermission(
+        SecurityAction.InheritanceDemand,
+        Level = AspNetHostingPermissionLevel.Minimal
+    )]
+    [Obsolete(
+        "The System.Web.Mobile.dll assembly has been deprecated and should no longer be used. For information about how to develop ASP.NET mobile applications, see http://go.microsoft.com/fwlink/?LinkId=157231."
+    )]
     public class ErrorFormatterPage : MobilePage
     {
         private MobileErrorInfo _errorInfo;
@@ -37,16 +43,13 @@ namespace System.Web.UI.MobileControls
         /// <include file='doc\ErrorFormatterPage.uex' path='docs/doc[@for="ErrorFormatterPage.ErrorInfo"]/*' />
         protected MobileErrorInfo ErrorInfo
         {
-            get
-            {
-                return _errorInfo;
-            }
+            get { return _errorInfo; }
         }
 
         /// <include file='doc\ErrorFormatterPage.uex' path='docs/doc[@for="ErrorFormatterPage.OnInit"]/*' />
         protected override void OnInit(EventArgs e)
         {
-            base.OnInit (e);
+            base.OnInit(e);
 
             EnableViewState = false;
             _errorInfo = Context.Items[MobileErrorInfo.ContextKey] as MobileErrorInfo;
@@ -54,10 +57,10 @@ namespace System.Web.UI.MobileControls
             {
                 // Don't care what kind of exception, since it'll be handled
                 // quietly by the error handler module.
-                throw new Exception ();
+                throw new Exception();
             }
 
-            InitContent ();
+            InitContent();
         }
 
         private MobileControl CreateControlForText(String text)
@@ -85,11 +88,13 @@ namespace System.Web.UI.MobileControls
             // Error form.
 
             form = new Form();
-            form.Title = SR.GetString(SR.ErrorFormatterPage_ServerError,
-                                      HttpRuntime.AppDomainAppVirtualPath);
+            form.Title = SR.GetString(
+                SR.ErrorFormatterPage_ServerError,
+                HttpRuntime.AppDomainAppVirtualPath
+            );
             form.Wrapping = Wrapping.Wrap;
             IParserAccessor formAdd = (IParserAccessor)form;
-             
+
             // Error title.
 
             ctl = CreateControlForText(ErrorInfo.Type);
@@ -107,9 +112,13 @@ namespace System.Web.UI.MobileControls
 
             if (ErrorInfo.MiscTitle.Length > 0)
             {
-                ctl = CreateControlForText(SR.GetString(SR.ErrorFormatterPage_MiscErrorMessage,
-                                                        ErrorInfo.MiscTitle,
-                                                        ErrorInfo.MiscText));
+                ctl = CreateControlForText(
+                    SR.GetString(
+                        SR.ErrorFormatterPage_MiscErrorMessage,
+                        ErrorInfo.MiscTitle,
+                        ErrorInfo.MiscText
+                    )
+                );
                 formAdd.AddParsedSubObject(ctl);
             }
 
@@ -144,5 +153,4 @@ namespace System.Web.UI.MobileControls
             return null;
         }
     }
-
 }

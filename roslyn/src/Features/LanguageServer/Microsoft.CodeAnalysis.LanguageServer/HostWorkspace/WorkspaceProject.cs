@@ -17,14 +17,21 @@ internal class WorkspaceProject : IWorkspaceProject
     private readonly ProjectSystemProjectOptionsProcessor _optionsProcessor;
     private readonly ProjectTargetFrameworkManager _targetFrameworkManager;
 
-    public WorkspaceProject(ProjectSystemProject project, SolutionServices solutionServices, ProjectTargetFrameworkManager targetFrameworkManager)
+    public WorkspaceProject(
+        ProjectSystemProject project,
+        SolutionServices solutionServices,
+        ProjectTargetFrameworkManager targetFrameworkManager
+    )
     {
         _project = project;
         _optionsProcessor = new ProjectSystemProjectOptionsProcessor(_project, solutionServices);
         _targetFrameworkManager = targetFrameworkManager;
     }
 
-    public async Task AddAdditionalFilesAsync(IReadOnlyList<string> additionalFilePaths, CancellationToken _)
+    public async Task AddAdditionalFilesAsync(
+        IReadOnlyList<string> additionalFilePaths,
+        CancellationToken _
+    )
     {
         await using var batchScope = _project.CreateBatchScope();
 
@@ -32,7 +39,10 @@ internal class WorkspaceProject : IWorkspaceProject
             _project.AddAdditionalFile(additionalFilePath);
     }
 
-    public async Task AddAnalyzerConfigFilesAsync(IReadOnlyList<string> analyzerConfigPaths, CancellationToken _)
+    public async Task AddAnalyzerConfigFilesAsync(
+        IReadOnlyList<string> analyzerConfigPaths,
+        CancellationToken _
+    )
     {
         await using var batchScope = _project.CreateBatchScope();
 
@@ -40,7 +50,10 @@ internal class WorkspaceProject : IWorkspaceProject
             _project.AddAnalyzerConfigFile(analyzerConfigPath);
     }
 
-    public async Task AddAnalyzerReferencesAsync(IReadOnlyList<string> analyzerPaths, CancellationToken _)
+    public async Task AddAnalyzerReferencesAsync(
+        IReadOnlyList<string> analyzerPaths,
+        CancellationToken _
+    )
     {
         await using var batchScope = _project.CreateBatchScope();
 
@@ -48,7 +61,10 @@ internal class WorkspaceProject : IWorkspaceProject
             _project.AddAnalyzerReference(analyzerPath);
     }
 
-    public async Task AddDynamicFilesAsync(IReadOnlyList<string> dynamicFilePaths, CancellationToken _)
+    public async Task AddDynamicFilesAsync(
+        IReadOnlyList<string> dynamicFilePaths,
+        CancellationToken _
+    )
     {
         await using var batchScope = _project.CreateBatchScope();
 
@@ -56,20 +72,32 @@ internal class WorkspaceProject : IWorkspaceProject
             _project.AddDynamicSourceFile(dynamicFilePath, folders: ImmutableArray<string>.Empty);
     }
 
-    public async Task AddMetadataReferencesAsync(IReadOnlyList<MetadataReferenceInfo> metadataReferences, CancellationToken _)
+    public async Task AddMetadataReferencesAsync(
+        IReadOnlyList<MetadataReferenceInfo> metadataReferences,
+        CancellationToken _
+    )
     {
         await using var batchScope = _project.CreateBatchScope();
 
         foreach (var metadataReference in metadataReferences)
-            _project.AddMetadataReference(metadataReference.FilePath, metadataReference.CreateProperties());
+            _project.AddMetadataReference(
+                metadataReference.FilePath,
+                metadataReference.CreateProperties()
+            );
     }
 
-    public async Task AddSourceFilesAsync(IReadOnlyList<SourceFileInfo> sourceFiles, CancellationToken _)
+    public async Task AddSourceFilesAsync(
+        IReadOnlyList<SourceFileInfo> sourceFiles,
+        CancellationToken _
+    )
     {
         await using var batchScope = _project.CreateBatchScope();
 
         foreach (var sourceFile in sourceFiles)
-            _project.AddSourceFile(sourceFile.FilePath, folders: sourceFile.FolderNames.ToImmutableArray());
+            _project.AddSourceFile(
+                sourceFile.FilePath,
+                folders: sourceFile.FolderNames.ToImmutableArray()
+            );
     }
 
     public void Dispose()
@@ -77,7 +105,10 @@ internal class WorkspaceProject : IWorkspaceProject
         _project.RemoveFromWorkspace();
     }
 
-    public async Task RemoveAdditionalFilesAsync(IReadOnlyList<string> additionalFilePaths, CancellationToken _)
+    public async Task RemoveAdditionalFilesAsync(
+        IReadOnlyList<string> additionalFilePaths,
+        CancellationToken _
+    )
     {
         await using var batchScope = _project.CreateBatchScope();
 
@@ -85,7 +116,10 @@ internal class WorkspaceProject : IWorkspaceProject
             _project.RemoveAdditionalFile(additionalFilePath);
     }
 
-    public async Task RemoveAnalyzerConfigFilesAsync(IReadOnlyList<string> analyzerConfigPaths, CancellationToken _)
+    public async Task RemoveAnalyzerConfigFilesAsync(
+        IReadOnlyList<string> analyzerConfigPaths,
+        CancellationToken _
+    )
     {
         await using var batchScope = _project.CreateBatchScope();
 
@@ -93,7 +127,10 @@ internal class WorkspaceProject : IWorkspaceProject
             _project.RemoveAnalyzerConfigFile(analyzerConfigPath);
     }
 
-    public async Task RemoveAnalyzerReferencesAsync(IReadOnlyList<string> analyzerPaths, CancellationToken _)
+    public async Task RemoveAnalyzerReferencesAsync(
+        IReadOnlyList<string> analyzerPaths,
+        CancellationToken _
+    )
     {
         await using var batchScope = _project.CreateBatchScope();
 
@@ -101,7 +138,10 @@ internal class WorkspaceProject : IWorkspaceProject
             _project.RemoveAnalyzerReference(analyzerPath);
     }
 
-    public async Task RemoveDynamicFilesAsync(IReadOnlyList<string> dynamicFilePaths, CancellationToken _)
+    public async Task RemoveDynamicFilesAsync(
+        IReadOnlyList<string> dynamicFilePaths,
+        CancellationToken _
+    )
     {
         await using var batchScope = _project.CreateBatchScope();
 
@@ -109,12 +149,18 @@ internal class WorkspaceProject : IWorkspaceProject
             _project.RemoveDynamicSourceFile(dynamicFilePath);
     }
 
-    public async Task RemoveMetadataReferencesAsync(IReadOnlyList<MetadataReferenceInfo> metadataReferences, CancellationToken _)
+    public async Task RemoveMetadataReferencesAsync(
+        IReadOnlyList<MetadataReferenceInfo> metadataReferences,
+        CancellationToken _
+    )
     {
         await using var batchScope = _project.CreateBatchScope();
 
         foreach (var metadataReference in metadataReferences)
-            _project.RemoveMetadataReference(metadataReference.FilePath, metadataReference.CreateProperties());
+            _project.RemoveMetadataReference(
+                metadataReference.FilePath,
+                metadataReference.CreateProperties()
+            );
     }
 
     public async Task RemoveSourceFilesAsync(IReadOnlyList<string> sourceFiles, CancellationToken _)
@@ -125,7 +171,10 @@ internal class WorkspaceProject : IWorkspaceProject
             _project.RemoveSourceFile(sourceFile);
     }
 
-    public async Task SetBuildSystemPropertiesAsync(IReadOnlyDictionary<string, string> properties, CancellationToken _)
+    public async Task SetBuildSystemPropertiesAsync(
+        IReadOnlyDictionary<string, string> properties,
+        CancellationToken _
+    )
     {
         // Create a batch scope, just so we have asynchronous closing and application of the batch.
         await using var batchScope = _project.CreateBatchScope();
@@ -136,14 +185,32 @@ internal class WorkspaceProject : IWorkspaceProject
 
             switch (name)
             {
-                case "AssemblyName": _project.AssemblyName = value; break;
-                case "MaxSupportedLangVersion": _project.MaxLangVersion = value; break;
-                case "RootNamespace": _project.DefaultNamespace = valueOrNull; break;
-                case "RunAnalyzers": _project.RunAnalyzers = bool.Parse(valueOrNull ?? bool.TrueString); break;
-                case "RunAnalyzersDuringLiveAnalysis": _project.RunAnalyzersDuringLiveAnalysis = bool.Parse(valueOrNull ?? bool.TrueString); break;
-                case "TargetPath": _project.OutputFilePath = GetFullyQualifiedPath(valueOrNull); break;
-                case "TargetRefPath": _project.OutputRefFilePath = GetFullyQualifiedPath(valueOrNull); break;
-                case "TargetFrameworkIdentifier": _targetFrameworkManager.UpdateIdentifierForProject(_project.Id, valueOrNull); break;
+                case "AssemblyName":
+                    _project.AssemblyName = value;
+                    break;
+                case "MaxSupportedLangVersion":
+                    _project.MaxLangVersion = value;
+                    break;
+                case "RootNamespace":
+                    _project.DefaultNamespace = valueOrNull;
+                    break;
+                case "RunAnalyzers":
+                    _project.RunAnalyzers = bool.Parse(valueOrNull ?? bool.TrueString);
+                    break;
+                case "RunAnalyzersDuringLiveAnalysis":
+                    _project.RunAnalyzersDuringLiveAnalysis = bool.Parse(
+                        valueOrNull ?? bool.TrueString
+                    );
+                    break;
+                case "TargetPath":
+                    _project.OutputFilePath = GetFullyQualifiedPath(valueOrNull);
+                    break;
+                case "TargetRefPath":
+                    _project.OutputRefFilePath = GetFullyQualifiedPath(valueOrNull);
+                    break;
+                case "TargetFrameworkIdentifier":
+                    _targetFrameworkManager.UpdateIdentifierForProject(_project.Id, valueOrNull);
+                    break;
             }
         }
 
@@ -161,7 +228,10 @@ internal class WorkspaceProject : IWorkspaceProject
         }
     }
 
-    public async Task SetCommandLineArgumentsAsync(IReadOnlyList<string> arguments, CancellationToken _)
+    public async Task SetCommandLineArgumentsAsync(
+        IReadOnlyList<string> arguments,
+        CancellationToken _
+    )
     {
         // Create a batch scope, just so we have asynchronous closing and application of the batch.
         await using var batchScope = _project.CreateBatchScope();
@@ -184,7 +254,9 @@ internal class WorkspaceProject : IWorkspaceProject
 
     public Task<IWorkspaceProjectBatch> StartBatchAsync(CancellationToken cancellationToken)
     {
-        return Task.FromResult<IWorkspaceProjectBatch>(new WorkspaceProjectBatch(_project.CreateBatchScope()));
+        return Task.FromResult<IWorkspaceProjectBatch>(
+            new WorkspaceProjectBatch(_project.CreateBatchScope())
+        );
     }
 
     private class WorkspaceProjectBatch : IWorkspaceProjectBatch
@@ -205,8 +277,6 @@ internal class WorkspaceProject : IWorkspaceProject
             _batch = null;
         }
 
-        public void Dispose()
-        {
-        }
+        public void Dispose() { }
     }
 }

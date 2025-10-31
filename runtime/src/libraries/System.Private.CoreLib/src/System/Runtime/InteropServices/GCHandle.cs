@@ -131,11 +131,15 @@ namespace System.Runtime.InteropServices
                 {
                     if (target.GetType() == typeof(string))
                     {
-                        return (IntPtr)Unsafe.AsPointer(ref Unsafe.As<string>(target).GetRawStringData());
+                        return (IntPtr)
+                            Unsafe.AsPointer(ref Unsafe.As<string>(target).GetRawStringData());
                     }
 
                     Debug.Assert(target is Array);
-                    return (IntPtr)Unsafe.AsPointer(ref MemoryMarshal.GetArrayDataReference(Unsafe.As<Array>(target)));
+                    return (IntPtr)
+                        Unsafe.AsPointer(
+                            ref MemoryMarshal.GetArrayDataReference(Unsafe.As<Array>(target))
+                        );
                 }
 
                 return (IntPtr)Unsafe.AsPointer(ref target.GetRawData());
@@ -164,7 +168,8 @@ namespace System.Runtime.InteropServices
 
         public override readonly int GetHashCode() => _handle.GetHashCode();
 
-        public override readonly bool Equals([NotNullWhen(true)] object? o) => o is GCHandle other && Equals(other);
+        public override readonly bool Equals([NotNullWhen(true)] object? o) =>
+            o is GCHandle other && Equals(other);
 
         /// <summary>Indicates whether the current instance is equal to another instance of the same type.</summary>
         /// <param name="other">An instance to compare with this instance.</param>

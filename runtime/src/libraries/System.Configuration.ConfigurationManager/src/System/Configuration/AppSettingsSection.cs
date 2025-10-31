@@ -20,13 +20,15 @@ namespace System.Configuration
             EnsureStaticPropertyBag();
         }
 
-        protected internal override ConfigurationPropertyCollection Properties => EnsureStaticPropertyBag();
+        protected internal override ConfigurationPropertyCollection Properties =>
+            EnsureStaticPropertyBag();
 
-        internal NameValueCollection InternalSettings
-            => _keyValueCollection ??= new KeyValueInternalCollection(this);
+        internal NameValueCollection InternalSettings =>
+            _keyValueCollection ??= new KeyValueInternalCollection(this);
 
         [ConfigurationProperty("", IsDefaultCollection = true)]
-        public KeyValueConfigurationCollection Settings => (KeyValueConfigurationCollection)base[s_propAppSettings];
+        public KeyValueConfigurationCollection Settings =>
+            (KeyValueConfigurationCollection)base[s_propAppSettings];
 
         [ConfigurationProperty("file", DefaultValue = "")]
         public string File
@@ -41,24 +43,27 @@ namespace System.Configuration
 
         private static ConfigurationPropertyCollection EnsureStaticPropertyBag()
         {
-            if (s_properties != null) return s_properties;
+            if (s_properties != null)
+                return s_properties;
 
             ConfigurationProperty propAppSettings = new ConfigurationProperty(
                 name: null,
                 type: typeof(KeyValueConfigurationCollection),
                 defaultValue: null,
-                options: ConfigurationPropertyOptions.IsDefaultCollection);
+                options: ConfigurationPropertyOptions.IsDefaultCollection
+            );
 
             ConfigurationProperty propFile = new ConfigurationProperty(
                 name: "file",
                 type: typeof(string),
                 defaultValue: string.Empty,
-                options: ConfigurationPropertyOptions.None);
+                options: ConfigurationPropertyOptions.None
+            );
 
             ConfigurationPropertyCollection properties = new ConfigurationPropertyCollection
             {
                 propAppSettings,
-                propFile
+                propFile,
             };
 
             s_propAppSettings = propAppSettings;
@@ -85,12 +90,16 @@ namespace System.Configuration
             }
         }
 
-        protected internal override void DeserializeElement(XmlReader reader, bool serializeCollectionKey)
+        protected internal override void DeserializeElement(
+            XmlReader reader,
+            bool serializeCollectionKey
+        )
         {
             string elementName = reader.Name;
 
             base.DeserializeElement(reader, serializeCollectionKey);
-            if (!(File?.Length > 0)) return;
+            if (!(File?.Length > 0))
+                return;
 
             string sourceFileFullPath;
 
@@ -101,17 +110,26 @@ namespace System.Configuration
                 ? File
                 : Path.Combine(Path.GetDirectoryName(configFile), File);
 
-            if (!IO.File.Exists(sourceFileFullPath)) return;
+            if (!IO.File.Exists(sourceFileFullPath))
+                return;
             int lineOffset;
             string rawXml;
 
-            using (Stream sourceFileStream = new FileStream(sourceFileFullPath, FileMode.Open, FileAccess.Read, FileShare.Read))
+            using (
+                Stream sourceFileStream = new FileStream(
+                    sourceFileFullPath,
+                    FileMode.Open,
+                    FileAccess.Read,
+                    FileShare.Read
+                )
+            )
             using (XmlUtil xmlUtil = new XmlUtil(sourceFileStream, sourceFileFullPath, true))
             {
                 if (xmlUtil.Reader.Name != elementName)
                     throw new ConfigurationErrorsException(
                         SR.Format(SR.Config_name_value_file_section_file_invalid_root, elementName),
-                        xmlUtil);
+                        xmlUtil
+                    );
 
                 lineOffset = xmlUtil.Reader.LineNumber;
                 rawXml = xmlUtil.CopySection();
@@ -121,19 +139,27 @@ namespace System.Configuration
                 {
                     XmlNodeType t = xmlUtil.Reader.NodeType;
                     if (t != XmlNodeType.Comment)
-                        throw new ConfigurationErrorsException(SR.Config_source_file_format, xmlUtil);
+                        throw new ConfigurationErrorsException(
+                            SR.Config_source_file_format,
+                            xmlUtil
+                        );
 
                     xmlUtil.Reader.Read();
                 }
             }
 
-            ConfigXmlReader internalReader = new ConfigXmlReader(rawXml, sourceFileFullPath, lineOffset);
+            ConfigXmlReader internalReader = new ConfigXmlReader(
+                rawXml,
+                sourceFileFullPath,
+                lineOffset
+            );
             internalReader.Read();
 
             if (internalReader.MoveToNextAttribute())
                 throw new ConfigurationErrorsException(
                     SR.Format(SR.Config_base_unrecognized_attribute, internalReader.Name),
-                    (XmlReader)internalReader);
+                    (XmlReader)internalReader
+                );
 
             internalReader.MoveToElement();
 

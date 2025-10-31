@@ -30,103 +30,101 @@
 using System;
 using System.Web;
 using System.Web.UI;
-using System.Web.UI.WebControls;
 using System.Web.UI.HtmlControls;
+using System.Web.UI.WebControls;
 using GHTTests;
 using GHTWebControls;
 
 namespace GHTTests.System_Web_dll.System_Web_UI_WebControls
 {
-	public class BaseDataList_CellPadding
-		: GHTDataListBase
-	{
-		protected System.Web.UI.WebControls.DataGrid DataGrid1;
-		protected GHTWebControls.GHTSubTest GHTSubTest1;
-		protected System.Web.UI.WebControls.DataGrid DataGrid2;
-		protected GHTWebControls.GHTSubTest GHTSubTest2;
-		protected System.Web.UI.WebControls.DataGrid DataGrid3;
-		protected GHTWebControls.GHTSubTest GHTSubTest3;
-		protected System.Web.UI.WebControls.DataGrid DataGrid4;
-		protected GHTWebControls.GHTSubTest GHTSubTest4;
-		protected System.Web.UI.WebControls.DataList DataList1;
-		protected GHTWebControls.GHTSubTest GHTSubTest5;
-		protected System.Web.UI.WebControls.DataList DataList2;
-		protected GHTWebControls.GHTSubTest GHTSubTest6;
-		protected System.Web.UI.WebControls.DataList DataList3;
-		protected GHTWebControls.GHTSubTest GHTSubTest7;
-		protected System.Web.UI.WebControls.DataList DataList4;
-		protected GHTWebControls.GHTSubTest GHTSubTest8;
-		#region Web Form Designer generated code
-		override protected void OnInit(EventArgs e) 
-		{
-			//
-			// CODEGEN: This call is required by the ASP.NET Web Form Designer.
-			//
-			InitializeComponent();
-			base.OnInit(e);
-		}
-		
-		/// <summary>
-		/// Required method for Designer support - do not modify
-		/// the contents of this method with the code editor.
-		/// </summary>
-		private void InitializeComponent() 
-		{    
-			this.Load += new System.EventHandler(this.Page_Load);
+    public class BaseDataList_CellPadding : GHTDataListBase
+    {
+        protected System.Web.UI.WebControls.DataGrid DataGrid1;
+        protected GHTWebControls.GHTSubTest GHTSubTest1;
+        protected System.Web.UI.WebControls.DataGrid DataGrid2;
+        protected GHTWebControls.GHTSubTest GHTSubTest2;
+        protected System.Web.UI.WebControls.DataGrid DataGrid3;
+        protected GHTWebControls.GHTSubTest GHTSubTest3;
+        protected System.Web.UI.WebControls.DataGrid DataGrid4;
+        protected GHTWebControls.GHTSubTest GHTSubTest4;
+        protected System.Web.UI.WebControls.DataList DataList1;
+        protected GHTWebControls.GHTSubTest GHTSubTest5;
+        protected System.Web.UI.WebControls.DataList DataList2;
+        protected GHTWebControls.GHTSubTest GHTSubTest6;
+        protected System.Web.UI.WebControls.DataList DataList3;
+        protected GHTWebControls.GHTSubTest GHTSubTest7;
+        protected System.Web.UI.WebControls.DataList DataList4;
+        protected GHTWebControls.GHTSubTest GHTSubTest8;
 
-		}
-		#endregion
+        #region Web Form Designer generated code
+        override protected void OnInit(EventArgs e)
+        {
+            //
+            // CODEGEN: This call is required by the ASP.NET Web Form Designer.
+            //
+            InitializeComponent();
+            base.OnInit(e);
+        }
 
-		private void Page_Load(object sender, System.EventArgs e) 
-		{
-			HtmlForm frm  = (HtmlForm)FindControl("Form1");
-			GHTTestBegin(frm);
-			TestCellPadding(DataGrid1, GHTSubTest1, -1);
-			TestCellPadding(DataGrid2, GHTSubTest2, 0);
-			TestCellPadding(DataGrid3, GHTSubTest3, 2);
-			TestCellPaddingError(DataGrid4, GHTSubTest4, -2);
-			TestCellPadding(DataList2, GHTSubTest6, 0);
-			TestCellPadding(DataList1, GHTSubTest5, -1);
-			TestCellPadding(DataList3, GHTSubTest7, 2);
-			TestCellPaddingError(DataList4, GHTSubTest8, -2);
+        /// <summary>
+        /// Required method for Designer support - do not modify
+        /// the contents of this method with the code editor.
+        /// </summary>
+        private void InitializeComponent()
+        {
+            this.Load += new System.EventHandler(this.Page_Load);
+        }
+        #endregion
 
+        private void Page_Load(object sender, System.EventArgs e)
+        {
+            HtmlForm frm = (HtmlForm)FindControl("Form1");
+            GHTTestBegin(frm);
+            TestCellPadding(DataGrid1, GHTSubTest1, -1);
+            TestCellPadding(DataGrid2, GHTSubTest2, 0);
+            TestCellPadding(DataGrid3, GHTSubTest3, 2);
+            TestCellPaddingError(DataGrid4, GHTSubTest4, -2);
+            TestCellPadding(DataList2, GHTSubTest6, 0);
+            TestCellPadding(DataList1, GHTSubTest5, -1);
+            TestCellPadding(DataList3, GHTSubTest7, 2);
+            TestCellPaddingError(DataList4, GHTSubTest8, -2);
 
-			GHTTestEnd();
-		}
-		private void TestCellPadding(BaseDataList ctl, GHTSubTest SubTest, int CellPadding)
-		{
-			try
-			{
-				base.GHTActiveSubTest = SubTest;
-				ctl.DataSource = GHTDataListBase.GHTGetSampleDataSource();
-				ctl.DataBind();
-				ctl.CellPadding = CellPadding;
-			}
-			catch (Exception exception2)
-			{
-				this.GHTSubTestUnexpectedExceptionCaught(exception2);
-			}
-		}
- 
-		private void TestCellPaddingError(BaseDataList ctl, GHTSubTest SubTest, int CellPadding)
-		{
-			try
-			{
-				base.GHTActiveSubTest = SubTest;
-				ctl.DataBind();
-				ctl.DataSource = GHTDataListBase.GHTGetSampleDataSource();
-				ctl.CellPadding = CellPadding;
-				this.GHTSubTestExpectedExceptionNotCaught("ArgumentException");
-			}
-			catch (ArgumentException exception3)
-			{
-				this.GHTSubTestExpectedExceptionCaught(exception3);
-			}
-			catch (Exception exception4)
-			{
-				this.GHTSubTestUnexpectedExceptionCaught(exception4);
-			}
-		}
- 
-	}
+            GHTTestEnd();
+        }
+
+        private void TestCellPadding(BaseDataList ctl, GHTSubTest SubTest, int CellPadding)
+        {
+            try
+            {
+                base.GHTActiveSubTest = SubTest;
+                ctl.DataSource = GHTDataListBase.GHTGetSampleDataSource();
+                ctl.DataBind();
+                ctl.CellPadding = CellPadding;
+            }
+            catch (Exception exception2)
+            {
+                this.GHTSubTestUnexpectedExceptionCaught(exception2);
+            }
+        }
+
+        private void TestCellPaddingError(BaseDataList ctl, GHTSubTest SubTest, int CellPadding)
+        {
+            try
+            {
+                base.GHTActiveSubTest = SubTest;
+                ctl.DataBind();
+                ctl.DataSource = GHTDataListBase.GHTGetSampleDataSource();
+                ctl.CellPadding = CellPadding;
+                this.GHTSubTestExpectedExceptionNotCaught("ArgumentException");
+            }
+            catch (ArgumentException exception3)
+            {
+                this.GHTSubTestExpectedExceptionCaught(exception3);
+            }
+            catch (Exception exception4)
+            {
+                this.GHTSubTestUnexpectedExceptionCaught(exception4);
+            }
+        }
+    }
 }

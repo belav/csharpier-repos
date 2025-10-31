@@ -9,7 +9,10 @@ namespace Microsoft.CodeAnalysis.Diagnostics
 {
     internal static partial class DiagnosticSeverityExtensions
     {
-        public static NotificationOption2 ToNotificationOption(this DiagnosticSeverity severity, bool isOverridenSeverity)
+        public static NotificationOption2 ToNotificationOption(
+            this DiagnosticSeverity severity,
+            bool isOverridenSeverity
+        )
         {
             var notificationOption = severity switch
             {

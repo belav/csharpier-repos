@@ -11,8 +11,10 @@ namespace System.Runtime.InteropServices
 
 #pragma warning disable IDE0060
         [DynamicDependency("#ctor")] // Prevent the private ctor and the IDisposable implementation from getting linked away
-        private static PosixSignalRegistration Register(PosixSignal signal, Action<PosixSignalContext> handler) =>
-            throw new PlatformNotSupportedException();
+        private static PosixSignalRegistration Register(
+            PosixSignal signal,
+            Action<PosixSignalContext> handler
+        ) => throw new PlatformNotSupportedException();
 #pragma warning restore IDE0060
 
         partial void Unregister();

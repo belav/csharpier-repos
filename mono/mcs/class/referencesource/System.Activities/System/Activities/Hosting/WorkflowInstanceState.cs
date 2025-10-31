@@ -11,6 +11,6 @@ namespace System.Activities.Hosting
         Idle,
         Runnable,
         Complete,
-        Aborted // only Abort is valid
+        Aborted, // only Abort is valid
     }
 }

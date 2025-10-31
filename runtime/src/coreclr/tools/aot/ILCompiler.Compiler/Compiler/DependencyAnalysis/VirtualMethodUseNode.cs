@@ -3,11 +3,8 @@
 
 using System;
 using System.Collections.Generic;
-
 using ILCompiler.DependencyAnalysisFramework;
-
 using Internal.TypeSystem;
-
 using Debug = System.Diagnostics.Debug;
 
 namespace ILCompiler.DependencyAnalysis
@@ -32,7 +29,9 @@ namespace ILCompiler.DependencyAnalysis
             // Virtual method use always represents the slot defining method of the virtual.
             // Places that might see virtual methods being used through an override need to normalize
             // to the slot defining method.
-            Debug.Assert(MetadataVirtualMethodAlgorithm.FindSlotDefiningMethodForVirtualMethod(decl) == decl);
+            Debug.Assert(
+                MetadataVirtualMethodAlgorithm.FindSlotDefiningMethodForVirtualMethod(decl) == decl
+            );
 
             // Generic virtual methods are tracked by an orthogonal mechanism.
             Debug.Assert(!decl.HasInstantiation);
@@ -50,7 +49,10 @@ namespace ILCompiler.DependencyAnalysis
             lazyVTableSlice?.AddEntry(_decl);
         }
 
-        public override bool HasConditionalStaticDependencies => _decl.Context.SupportsUniversalCanon && _decl.OwningType.HasInstantiation && !_decl.OwningType.IsInterface;
+        public override bool HasConditionalStaticDependencies =>
+            _decl.Context.SupportsUniversalCanon
+            && _decl.OwningType.HasInstantiation
+            && !_decl.OwningType.IsInterface;
         public override bool HasDynamicDependencies => false;
         public override bool InterestingForDynamicDependencyAnalysis => false;
 
@@ -68,32 +70,48 @@ namespace ILCompiler.DependencyAnalysis
 
             // Do not report things like Foo<object, __Canon>.Frob().
             if (!_decl.IsCanonicalMethod(CanonicalFormKind.Any) || canonDecl == _decl)
-                factory.MetadataManager.GetDependenciesDueToVirtualMethodReflectability(ref dependencies, factory, _decl);
+                factory.MetadataManager.GetDependenciesDueToVirtualMethodReflectability(
+                    ref dependencies,
+                    factory,
+                    _decl
+                );
 
             if (VariantInterfaceMethodUseNode.IsVariantMethodCall(factory, _decl))
-                dependencies.Add(factory.VariantInterfaceMethodUse(_decl.GetTypicalMethodDefinition()), "Variant interface call");
+                dependencies.Add(
+                    factory.VariantInterfaceMethodUse(_decl.GetTypicalMethodDefinition()),
+                    "Variant interface call"
+                );
 
             return dependencies;
         }
 
-        public override IEnumerable<CombinedDependencyListEntry> GetConditionalStaticDependencies(NodeFactory factory)
+        public override IEnumerable<CombinedDependencyListEntry> GetConditionalStaticDependencies(
+            NodeFactory factory
+        )
         {
             Debug.Assert(_decl.OwningType.HasInstantiation);
             Debug.Assert(!_decl.OwningType.IsInterface);
             Debug.Assert(factory.TypeSystemContext.SupportsUniversalCanon);
 
-            DefType universalCanonicalOwningType = (DefType)_decl.OwningType.ConvertToCanonForm(CanonicalFormKind.Universal);
-            Debug.Assert(universalCanonicalOwningType.IsCanonicalSubtype(CanonicalFormKind.Universal));
+            DefType universalCanonicalOwningType = (DefType)
+                _decl.OwningType.ConvertToCanonForm(CanonicalFormKind.Universal);
+            Debug.Assert(
+                universalCanonicalOwningType.IsCanonicalSubtype(CanonicalFormKind.Universal)
+            );
 
             if (!factory.VTable(universalCanonicalOwningType).HasFixedSlots)
             {
                 // This code ensures that in cases where we don't structurally force all universal canonical instantiations
                 // to have full vtables, that we ensure that all vtables are equivalently shaped between universal and non-universal types
-                return new CombinedDependencyListEntry[] {
+                return new CombinedDependencyListEntry[]
+                {
                     new CombinedDependencyListEntry(
-                        factory.VirtualMethodUse(_decl.GetCanonMethodTarget(CanonicalFormKind.Universal)),
+                        factory.VirtualMethodUse(
+                            _decl.GetCanonMethodTarget(CanonicalFormKind.Universal)
+                        ),
                         factory.NativeLayout.TemplateTypeLayout(universalCanonicalOwningType),
-                        "If universal canon instantiation of method exists, ensure that the universal canonical type has the right set of dependencies")
+                        "If universal canon instantiation of method exists, ensure that the universal canonical type has the right set of dependencies"
+                    ),
                 };
             }
             else
@@ -102,6 +120,10 @@ namespace ILCompiler.DependencyAnalysis
             }
         }
 
-        public override IEnumerable<CombinedDependencyListEntry> SearchDynamicDependencies(List<DependencyNodeCore<NodeFactory>> markedNodes, int firstNode, NodeFactory factory) => null;
+        public override IEnumerable<CombinedDependencyListEntry> SearchDynamicDependencies(
+            List<DependencyNodeCore<NodeFactory>> markedNodes,
+            int firstNode,
+            NodeFactory factory
+        ) => null;
     }
 }

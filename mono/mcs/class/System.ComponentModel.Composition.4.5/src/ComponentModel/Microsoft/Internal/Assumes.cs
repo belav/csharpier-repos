@@ -56,7 +56,7 @@ namespace Microsoft.Internal
         }
 
         [DebuggerStepThrough]
-        internal static void IsTrue(bool condition, [Localizable(false)]string message)
+        internal static void IsTrue(bool condition, [Localizable(false)] string message)
         {
             if (!condition)
             {
@@ -71,9 +71,9 @@ namespace Microsoft.Internal
         }
 
         [DebuggerStepThrough]
-        private static Exception UncatchableException([Localizable(false)]string message)
+        private static Exception UncatchableException([Localizable(false)] string message)
         {
             return new InternalErrorException(message);
         }
-    } 
+    }
 }

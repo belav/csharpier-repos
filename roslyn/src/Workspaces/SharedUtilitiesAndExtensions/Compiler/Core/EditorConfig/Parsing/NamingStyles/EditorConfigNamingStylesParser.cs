@@ -14,8 +14,10 @@ namespace Microsoft.CodeAnalysis.EditorConfig.Parsing.NamingStyles
         /// <param name="editorConfigText">The text contents of the editorconfig file.</param>
         /// <param name="pathToEditorConfigFile">The full path to the editorconfig file on disk.</param>
         /// <returns>A type that represents all discovered naming style options in the given string.</returns>
-        public static EditorConfigNamingStyles Parse(string editorConfigText, string? pathToEditorConfigFile = null)
-            => Parse(SourceText.From(editorConfigText), pathToEditorConfigFile);
+        public static EditorConfigNamingStyles Parse(
+            string editorConfigText,
+            string? pathToEditorConfigFile = null
+        ) => Parse(SourceText.From(editorConfigText), pathToEditorConfigFile);
 
         /// <summary>
         /// Parses a <see cref="SourceText"/> and returns all discovered naming style options and their locations
@@ -23,7 +25,14 @@ namespace Microsoft.CodeAnalysis.EditorConfig.Parsing.NamingStyles
         /// <param name="editorConfigText">The <see cref="SourceText"/> contents of the editorconfig file.</param>
         /// <param name="pathToEditorConfigFile">The full path to the editorconfig file on disk.</param>
         /// <returns>A type that represents all discovered naming style options in the given <see cref="SourceText"/>.</returns>
-        public static EditorConfigNamingStyles Parse(SourceText editorConfigText, string? pathToEditorConfigFile = null)
-            => EditorConfigParser.Parse<EditorConfigNamingStyles, NamingStyleOption, NamingStyleOptionAccumulator>(editorConfigText, pathToEditorConfigFile, new NamingStyleOptionAccumulator());
+        public static EditorConfigNamingStyles Parse(
+            SourceText editorConfigText,
+            string? pathToEditorConfigFile = null
+        ) =>
+            EditorConfigParser.Parse<
+                EditorConfigNamingStyles,
+                NamingStyleOption,
+                NamingStyleOptionAccumulator
+            >(editorConfigText, pathToEditorConfigFile, new NamingStyleOptionAccumulator());
     }
 }

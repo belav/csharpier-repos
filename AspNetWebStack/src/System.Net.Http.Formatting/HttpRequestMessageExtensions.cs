@@ -20,8 +20,15 @@ namespace System.Net.Http
         /// <param name="request">The HTTP request.</param>
         /// <param name="statusCode">The HTTP status code.</param>
         /// <returns>An initialized <see cref="HttpResponseMessage"/>.</returns>
-        [SuppressMessage("Microsoft.Reliability", "CA2000:Dispose objects before losing scope", Justification = "Caller will dispose")]
-        public static HttpResponseMessage CreateResponse(this HttpRequestMessage request, HttpStatusCode statusCode)
+        [SuppressMessage(
+            "Microsoft.Reliability",
+            "CA2000:Dispose objects before losing scope",
+            Justification = "Caller will dispose"
+        )]
+        public static HttpResponseMessage CreateResponse(
+            this HttpRequestMessage request,
+            HttpStatusCode statusCode
+        )
         {
             if (request == null)
             {
@@ -32,7 +39,7 @@ namespace System.Net.Http
             {
                 Content = new StreamContent(Stream.Null),
                 StatusCode = statusCode,
-                RequestMessage = request
+                RequestMessage = request,
             };
         }
 
@@ -41,7 +48,11 @@ namespace System.Net.Http
         /// </summary>
         /// <param name="request">The HTTP request.</param>
         /// <returns>An initialized <see cref="HttpResponseMessage"/>.</returns>
-        [SuppressMessage("Microsoft.Reliability", "CA2000:Dispose objects before losing scope", Justification = "Caller will dispose")]
+        [SuppressMessage(
+            "Microsoft.Reliability",
+            "CA2000:Dispose objects before losing scope",
+            Justification = "Caller will dispose"
+        )]
         public static HttpResponseMessage CreateResponse(this HttpRequestMessage request)
         {
             if (request == null)
@@ -52,7 +63,7 @@ namespace System.Net.Http
             return new HttpResponseMessage
             {
                 Content = new StreamContent(Stream.Null),
-                RequestMessage = request
+                RequestMessage = request,
             };
         }
     }

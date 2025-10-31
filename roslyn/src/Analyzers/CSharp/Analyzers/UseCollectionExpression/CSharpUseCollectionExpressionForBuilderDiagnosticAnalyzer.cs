@@ -26,13 +26,16 @@ internal sealed partial class CSharpUseCollectionExpressionForBuilderDiagnosticA
     private const string GetInstanceName = nameof(ArrayBuilder<int>.GetInstance);
 
     public CSharpUseCollectionExpressionForBuilderDiagnosticAnalyzer()
-        : base(IDEDiagnosticIds.UseCollectionExpressionForBuilderDiagnosticId,
-               EnforceOnBuildValues.UseCollectionExpressionForBuilder)
-    {
-    }
+        : base(
+            IDEDiagnosticIds.UseCollectionExpressionForBuilderDiagnosticId,
+            EnforceOnBuildValues.UseCollectionExpressionForBuilder
+        ) { }
 
-    protected override void InitializeWorker(CodeBlockStartAnalysisContext<SyntaxKind> context)
-        => context.RegisterSyntaxNodeAction(AnalyzeInvocationExpression, SyntaxKind.InvocationExpression);
+    protected override void InitializeWorker(CodeBlockStartAnalysisContext<SyntaxKind> context) =>
+        context.RegisterSyntaxNodeAction(
+            AnalyzeInvocationExpression,
+            SyntaxKind.InvocationExpression
+        );
 
     private void AnalyzeInvocationExpression(SyntaxNodeAnalysisContext context)
     {
@@ -45,79 +48,114 @@ internal sealed partial class CSharpUseCollectionExpressionForBuilderDiagnosticA
         if (!option.Value || ShouldSkipAnalysis(context, option.Notification))
             return;
 
-        if (AnalyzeInvocation(semanticModel, invocationExpression, cancellationToken) is not { } analysisResult)
+        if (
+            AnalyzeInvocation(semanticModel, invocationExpression, cancellationToken)
+            is not { } analysisResult
+        )
             return;
 
         var locations = ImmutableArray.Create(invocationExpression.GetLocation());
-        context.ReportDiagnostic(DiagnosticHelper.Create(
-            Descriptor,
-            analysisResult.DiagnosticLocation,
-            option.Notification,
-            additionalLocations: locations,
-            properties: null));
+        context.ReportDiagnostic(
+            DiagnosticHelper.Create(
+                Descriptor,
+                analysisResult.DiagnosticLocation,
+                option.Notification,
+                additionalLocations: locations,
+                properties: null
+            )
+        );
 
         FadeOutCode(context, analysisResult, locations);
     }
 
-    private void FadeOutCode(SyntaxNodeAnalysisContext context, AnalysisResult analysisResult, ImmutableArray<Location> locations)
+    private void FadeOutCode(
+        SyntaxNodeAnalysisContext context,
+        AnalysisResult analysisResult,
+        ImmutableArray<Location> locations
+    )
     {
         var additionalUnnecessaryLocations = ImmutableArray.Create(
-            analysisResult.LocalDeclarationStatement.GetLocation());
+            analysisResult.LocalDeclarationStatement.GetLocation()
+        );
 
-        context.ReportDiagnostic(DiagnosticHelper.CreateWithLocationTags(
-            UnnecessaryCodeDescriptor,
-            additionalUnnecessaryLocations[0],
-            NotificationOption2.ForSeverity(UnnecessaryCodeDescriptor.DefaultSeverity),
-            additionalLocations: locations,
-            additionalUnnecessaryLocations: additionalUnnecessaryLocations,
-            properties: null));
-
-        foreach (var statementMatch in analysisResult.Matches)
-        {
-            additionalUnnecessaryLocations = UseCollectionInitializerHelpers.GetLocationsToFade(
-                CSharpSyntaxFacts.Instance, statementMatch);
-            if (additionalUnnecessaryLocations.IsDefaultOrEmpty)
-                continue;
-
-            // Report the diagnostic at the first unnecessary location. This is the location where the code fix
-            // will be offered.
-            context.ReportDiagnostic(DiagnosticHelper.CreateWithLocationTags(
+        context.ReportDiagnostic(
+            DiagnosticHelper.CreateWithLocationTags(
                 UnnecessaryCodeDescriptor,
                 additionalUnnecessaryLocations[0],
                 NotificationOption2.ForSeverity(UnnecessaryCodeDescriptor.DefaultSeverity),
                 additionalLocations: locations,
                 additionalUnnecessaryLocations: additionalUnnecessaryLocations,
-                properties: null));
+                properties: null
+            )
+        );
+
+        foreach (var statementMatch in analysisResult.Matches)
+        {
+            additionalUnnecessaryLocations = UseCollectionInitializerHelpers.GetLocationsToFade(
+                CSharpSyntaxFacts.Instance,
+                statementMatch
+            );
+            if (additionalUnnecessaryLocations.IsDefaultOrEmpty)
+                continue;
+
+            // Report the diagnostic at the first unnecessary location. This is the location where the code fix
+            // will be offered.
+            context.ReportDiagnostic(
+                DiagnosticHelper.CreateWithLocationTags(
+                    UnnecessaryCodeDescriptor,
+                    additionalUnnecessaryLocations[0],
+                    NotificationOption2.ForSeverity(UnnecessaryCodeDescriptor.DefaultSeverity),
+                    additionalLocations: locations,
+                    additionalUnnecessaryLocations: additionalUnnecessaryLocations,
+                    properties: null
+                )
+            );
         }
     }
 
     public static AnalysisResult? AnalyzeInvocation(
         SemanticModel semanticModel,
         InvocationExpressionSyntax invocationExpression,
-        CancellationToken cancellationToken)
+        CancellationToken cancellationToken
+    )
     {
         // Looking for `XXX.CreateBuilder(...)`
         // Or `ArrayBuilder<>.GetInstance`
-        if (invocationExpression.Expression is not MemberAccessExpressionSyntax(SyntaxKind.SimpleMemberAccessExpression) memberAccessExpression ||
-            memberAccessExpression.Expression is not SimpleNameSyntax)
+        if (
+            invocationExpression.Expression
+                is not MemberAccessExpressionSyntax
+                (SyntaxKind.SimpleMemberAccessExpression) memberAccessExpression
+            || memberAccessExpression.Expression is not SimpleNameSyntax
+        )
         {
             return null;
         }
 
-        if (memberAccessExpression.Name.Identifier.ValueText is not CreateBuilderName and not GetInstanceName)
+        if (
+            memberAccessExpression.Name.Identifier.ValueText
+            is not CreateBuilderName
+                and not GetInstanceName
+        )
             return null;
 
-        if (memberAccessExpression.Name.Identifier.ValueText == GetInstanceName &&
-            memberAccessExpression.Expression is not GenericNameSyntax { Identifier.ValueText: nameof(ArrayBuilder<int>) })
+        if (
+            memberAccessExpression.Name.Identifier.ValueText == GetInstanceName
+            && memberAccessExpression.Expression
+                is not GenericNameSyntax { Identifier.ValueText: nameof(ArrayBuilder<int>) }
+        )
         {
             return null;
         }
 
-        var createSymbol = semanticModel.GetSymbolInfo(memberAccessExpression, cancellationToken).Symbol;
+        var createSymbol = semanticModel
+            .GetSymbolInfo(memberAccessExpression, cancellationToken)
+            .Symbol;
         if (createSymbol is not IMethodSymbol { IsStatic: true } createMethod)
             return null;
 
-        var factoryType = semanticModel.GetSymbolInfo(memberAccessExpression.Expression, cancellationToken).Symbol as INamedTypeSymbol;
+        var factoryType =
+            semanticModel.GetSymbolInfo(memberAccessExpression.Expression, cancellationToken).Symbol
+            as INamedTypeSymbol;
         if (factoryType is null)
             return null;
 
@@ -125,7 +163,19 @@ internal sealed partial class CSharpUseCollectionExpressionForBuilderDiagnosticA
         //
         //      `Builder b = XXX.CreateBuilder();` or
         //      `var _ = XXX.CreateBuilder(out var builder);`
-        if (invocationExpression.Parent is not EqualsValueClauseSyntax { Parent: VariableDeclaratorSyntax { Parent: VariableDeclarationSyntax { Parent: LocalDeclarationStatementSyntax localDeclarationStatement } } declarator })
+        if (
+            invocationExpression.Parent
+            is not EqualsValueClauseSyntax
+            {
+                Parent: VariableDeclaratorSyntax
+                {
+                    Parent: VariableDeclarationSyntax
+                    {
+                        Parent: LocalDeclarationStatementSyntax localDeclarationStatement
+                    }
+                } declarator
+            }
+        )
             return null;
 
         var arguments = invocationExpression.ArgumentList.Arguments;
@@ -137,10 +187,18 @@ internal sealed partial class CSharpUseCollectionExpressionForBuilderDiagnosticA
         // for usages of 'x'.  However, if it's `var x = XXX.CreateBuilder(out var y)` or `var x =
         // XXX.CreateBuilder(capacity, out var y)` then we're looking for usages of 'y'.
         var identifier =
-            argumentIndex == arguments.Count ? declarator.Identifier :
-            argumentIndex == arguments.Count - 1 && arguments[argumentIndex] is { RefKindKeyword.RawKind: (int)SyntaxKind.OutKeyword, Expression: DeclarationExpressionSyntax { Designation: SingleVariableDesignationSyntax singleVariable } }
+            argumentIndex == arguments.Count ? declarator.Identifier
+            : argumentIndex == arguments.Count - 1
+            && arguments[argumentIndex]
+                is {
+                    RefKindKeyword.RawKind: (int)SyntaxKind.OutKeyword,
+                    Expression: DeclarationExpressionSyntax
+                    {
+                        Designation: SingleVariableDesignationSyntax singleVariable
+                    }
+                }
                 ? singleVariable.Identifier
-                : default;
+            : default;
         if (identifier == default)
             return null;
 
@@ -149,7 +207,8 @@ internal sealed partial class CSharpUseCollectionExpressionForBuilderDiagnosticA
             CSharpSyntaxFacts.Instance,
             invocationExpression,
             identifier,
-            initializedSymbol: semanticModel.GetDeclaredSymbol(declarator, cancellationToken));
+            initializedSymbol: semanticModel.GetDeclaredSymbol(declarator, cancellationToken)
+        );
 
         using var _ = ArrayBuilder<Match<StatementSyntax>>.GetInstance(out var matches);
 
@@ -161,7 +220,10 @@ internal sealed partial class CSharpUseCollectionExpressionForBuilderDiagnosticA
 
             // See if it's one of the statement forms that can become a collection expression element.
             var match = state.TryAnalyzeStatementForCollectionExpression(
-                CSharpUpdateExpressionSyntaxHelper.Instance, subseqeuntStatement, cancellationToken);
+                CSharpUpdateExpressionSyntaxHelper.Instance,
+                subseqeuntStatement,
+                cancellationToken
+            );
             if (match != null)
             {
                 matches.Add(match.Value);
@@ -182,40 +244,71 @@ internal sealed partial class CSharpUseCollectionExpressionForBuilderDiagnosticA
             // remove the builder entirely.
             while (enumerator.MoveNext())
             {
-                if (state.NodeContainsValuePatternOrReferencesInitializedSymbol(enumerator.Current, cancellationToken))
+                if (
+                    state.NodeContainsValuePatternOrReferencesInitializedSymbol(
+                        enumerator.Current,
+                        cancellationToken
+                    )
+                )
                     return null;
             }
 
             // Make sure we can actually use a collection expression in place of the created collection.
-            if (!UseCollectionExpressionHelpers.CanReplaceWithCollectionExpression(
-                    semanticModel, creationExpression, skipVerificationForReplacedNode: true, cancellationToken))
+            if (
+                !UseCollectionExpressionHelpers.CanReplaceWithCollectionExpression(
+                    semanticModel,
+                    creationExpression,
+                    skipVerificationForReplacedNode: true,
+                    cancellationToken
+                )
+            )
             {
                 return null;
             }
 
             // Looks good.  We can convert this.
-            return new(memberAccessExpression.Name.Identifier.GetLocation(), localDeclarationStatement, creationExpression, matches.ToImmutable());
+            return new(
+                memberAccessExpression.Name.Identifier.GetLocation(),
+                localDeclarationStatement,
+                creationExpression,
+                matches.ToImmutable()
+            );
         }
 
         return null;
 
-        static InvocationExpressionSyntax? TryFindCreationExpression(SyntaxToken identifier, StatementSyntax statement)
+        static InvocationExpressionSyntax? TryFindCreationExpression(
+            SyntaxToken identifier,
+            StatementSyntax statement
+        )
         {
             // Look for code like `builder.ToImmutable()` in this statement.
-            foreach (var identifierName in statement.DescendantNodesAndSelf().OfType<IdentifierNameSyntax>())
+            foreach (
+                var identifierName in statement
+                    .DescendantNodesAndSelf()
+                    .OfType<IdentifierNameSyntax>()
+            )
             {
-                if (identifierName.Identifier.ValueText == identifier.ValueText &&
-                    identifierName.Parent is MemberAccessExpressionSyntax(SyntaxKind.SimpleMemberAccessExpression) memberAccess &&
-                    memberAccess.Expression == identifierName &&
-                    memberAccess.Parent is InvocationExpressionSyntax { ArgumentList.Arguments.Count: 0 } invocationExpression &&
-                    memberAccess.Name.Identifier.ValueText
+                if (
+                    identifierName.Identifier.ValueText == identifier.ValueText
+                    && identifierName.Parent
+                        is MemberAccessExpressionSyntax
+                        (SyntaxKind.SimpleMemberAccessExpression) memberAccess
+                    && memberAccess.Expression == identifierName
+                    && memberAccess.Parent
+                        is InvocationExpressionSyntax
+                        {
+                            ArgumentList.Arguments.Count: 0
+                        } invocationExpression
+                    && memberAccess.Name.Identifier.ValueText
                         is nameof(ImmutableArray<int>.Builder.ToImmutable)
-                        or nameof(ImmutableArray<int>.Builder.MoveToImmutable)
-                        or nameof(ImmutableArray<int>.Builder.ToArray)
-                        or nameof(ArrayBuilder<int>.ToImmutableAndClear)
-                        or nameof(ArrayBuilder<int>.ToImmutableAndFree)
-                        or nameof(ArrayBuilder<int>.ToArrayAndFree)
-                        or nameof(Enumerable.ToList))
+                            or nameof(ImmutableArray<int>.Builder.MoveToImmutable)
+                            or nameof(ImmutableArray<int>.Builder.ToArray)
+                            or nameof(ArrayBuilder<int>.ToImmutableAndClear)
+                            or nameof(ArrayBuilder<int>.ToImmutableAndFree)
+                            or nameof(ArrayBuilder<int>.ToArrayAndFree)
+                            or nameof(Enumerable.ToList)
+                )
                 {
                     return invocationExpression;
                 }
@@ -241,5 +334,6 @@ internal sealed partial class CSharpUseCollectionExpressionForBuilderDiagnosticA
         Location DiagnosticLocation,
         LocalDeclarationStatementSyntax LocalDeclarationStatement,
         InvocationExpressionSyntax CreationExpression,
-        ImmutableArray<Match<StatementSyntax>> Matches);
+        ImmutableArray<Match<StatementSyntax>> Matches
+    );
 }

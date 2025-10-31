@@ -21,7 +21,12 @@ namespace System.IdentityModel.Selectors
             this.certificate = new X509Certificate2(certificate);
         }
 
-        public X509SecurityTokenProvider(StoreLocation storeLocation, StoreName storeName, X509FindType findType, object findValue)
+        public X509SecurityTokenProvider(
+            StoreLocation storeLocation,
+            StoreName storeName,
+            X509FindType findType,
+            object findValue
+        )
         {
             if (findValue == null)
             {
@@ -36,11 +41,31 @@ namespace System.IdentityModel.Selectors
                 certificates = store.Find(findType, findValue, false);
                 if (certificates.Count < 1)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new SecurityTokenException(SR.GetString(SR.CannotFindCert, storeName, storeLocation, findType, findValue)));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new SecurityTokenException(
+                            SR.GetString(
+                                SR.CannotFindCert,
+                                storeName,
+                                storeLocation,
+                                findType,
+                                findValue
+                            )
+                        )
+                    );
                 }
                 if (certificates.Count > 1)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new SecurityTokenException(SR.GetString(SR.FoundMultipleCerts, storeName, storeLocation, findType, findValue)));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new SecurityTokenException(
+                            SR.GetString(
+                                SR.FoundMultipleCerts,
+                                storeName,
+                                storeLocation,
+                                findType,
+                                findValue
+                            )
+                        )
+                    );
                 }
 
                 this.certificate = new X509Certificate2(certificates[0]);

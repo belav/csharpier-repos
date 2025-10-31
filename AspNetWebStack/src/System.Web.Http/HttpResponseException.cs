@@ -12,20 +12,34 @@ namespace System.Web.Http
     /// An exception that allows for a given <see cref="HttpResponseMessage"/>
     /// to be returned to the client.
     /// </summary>
-    [SuppressMessage("Microsoft.Usage", "CA2237:MarkISerializableTypesWithSerializable", Justification = "This type is not meant to be serialized")]
-    [SuppressMessage("Microsoft.Usage", "CA2240:Implement ISerializable correctly", Justification = "This type has no serializable state")]
-    [SuppressMessage("Microsoft.Design", "CA1032:ImplementStandardExceptionConstructors", Justification = "HttpResponseException is not a real exception and is just an easy way to return HttpResponseMessage")]
+    [SuppressMessage(
+        "Microsoft.Usage",
+        "CA2237:MarkISerializableTypesWithSerializable",
+        Justification = "This type is not meant to be serialized"
+    )]
+    [SuppressMessage(
+        "Microsoft.Usage",
+        "CA2240:Implement ISerializable correctly",
+        Justification = "This type has no serializable state"
+    )]
+    [SuppressMessage(
+        "Microsoft.Design",
+        "CA1032:ImplementStandardExceptionConstructors",
+        Justification = "HttpResponseException is not a real exception and is just an easy way to return HttpResponseMessage"
+    )]
     public class HttpResponseException : Exception
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="HttpResponseException"/> class.
         /// </summary>
         /// <param name="statusCode">The status code of the response.</param>
-        [SuppressMessage("Microsoft.Reliability", "CA2000:Dispose objects before losing scope", Justification = "Instance is disposed elsewhere")]
+        [SuppressMessage(
+            "Microsoft.Reliability",
+            "CA2000:Dispose objects before losing scope",
+            Justification = "Instance is disposed elsewhere"
+        )]
         public HttpResponseException(HttpStatusCode statusCode)
-            : this(new HttpResponseMessage(statusCode))
-        {
-        }
+            : this(new HttpResponseMessage(statusCode)) { }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="HttpResponseException"/> class.

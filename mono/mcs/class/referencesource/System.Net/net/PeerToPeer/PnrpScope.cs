@@ -32,6 +32,6 @@ namespace System.Net.PeerToPeer
         /// <summary>
         /// Represents Link Local cloud
         /// </summary>
-        LinkLocal = 3
+        LinkLocal = 3,
     }
 }

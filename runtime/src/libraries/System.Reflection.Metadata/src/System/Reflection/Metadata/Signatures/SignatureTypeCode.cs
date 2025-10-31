@@ -91,25 +91,26 @@ namespace System.Reflection.Metadata
         /// Represents a unmanaged pointers in signatures.
         /// It is followed in the blob by the signature encoding of the underlying type.
         /// </summary>
-        Pointer = CorElementType.ELEMENT_TYPE_PTR,                    // PTR <type>
+        Pointer = CorElementType.ELEMENT_TYPE_PTR, // PTR <type>
 
         /// <summary>
         /// Represents managed pointers (byref return values and parameters) in signatures.
         /// It is followed in the blob by the signature encoding of the underlying type.
         /// </summary>
-        ByReference = CorElementType.ELEMENT_TYPE_BYREF,              // BYREF <type>
+        ByReference = CorElementType.ELEMENT_TYPE_BYREF, // BYREF <type>
 
         // ELEMENT_TYPE_VALUETYPE (0x11) and ELEMENT_TYPE_CLASS (0x12) are unified to ELEMENT_TYPE_HANDLE.
 
         /// <summary>
         /// Represents a generic type parameter used within a signature.
         /// </summary>
-        GenericTypeParameter = CorElementType.ELEMENT_TYPE_VAR,        // a class type variable VAR <U1>
+        GenericTypeParameter = CorElementType.ELEMENT_TYPE_VAR, // a class type variable VAR <U1>
 
         /// <summary>
         /// Represents a generalized <see cref="System.Array"/> in signatures.
         /// </summary>
-        Array = CorElementType.ELEMENT_TYPE_ARRAY,                     // MDARRAY <type> <rank> <bcount> <bound1> ... <lbcount> <lb1> ...
+        Array = CorElementType.ELEMENT_TYPE_ARRAY, // MDARRAY <type> <rank> <bcount> <bound1> ... <lbcount> <lb1> ...
+
         /// <summary>
         /// Represents the instantiation of a generic type in signatures.
         /// </summary>
@@ -119,7 +120,7 @@ namespace System.Reflection.Metadata
         /// <summary>
         /// Represents a System.TypedReference in signatures.
         /// </summary>
-        TypedReference = CorElementType.ELEMENT_TYPE_TYPEDBYREF,       // TYPEDREF  (it takes no args) a typed reference to some other type
+        TypedReference = CorElementType.ELEMENT_TYPE_TYPEDBYREF, // TYPEDREF  (it takes no args) a typed reference to some other type
 
         /// <summary>
         /// Represents a <see cref="System.IntPtr"/> in signatures.
@@ -134,7 +135,7 @@ namespace System.Reflection.Metadata
         /// <summary>
         /// Represents function pointer types in signatures.
         /// </summary>
-        FunctionPointer = CorElementType.ELEMENT_TYPE_FNPTR,           // FNPTR <complete sig for the function including calling convention>
+        FunctionPointer = CorElementType.ELEMENT_TYPE_FNPTR, // FNPTR <complete sig for the function including calling convention>
 
         /// <summary>
         /// Represents <see cref="object"/>
@@ -151,18 +152,18 @@ namespace System.Reflection.Metadata
         /// <summary>
         /// Represents a generic method parameter used within a signature.
         /// </summary>
-        GenericMethodParameter = CorElementType.ELEMENT_TYPE_MVAR,     // a method type variable MVAR <U1>
+        GenericMethodParameter = CorElementType.ELEMENT_TYPE_MVAR, // a method type variable MVAR <U1>
 
         // This is only for binding
         /// <summary>
         /// Represents a custom modifier applied to a type within a signature that the caller must understand.
         /// </summary>
-        RequiredModifier = CorElementType.ELEMENT_TYPE_CMOD_REQD,      // required C modifier : E_T_CMOD_REQD <mdTypeRef/mdTypeDef>
+        RequiredModifier = CorElementType.ELEMENT_TYPE_CMOD_REQD, // required C modifier : E_T_CMOD_REQD <mdTypeRef/mdTypeDef>
 
         /// <summary>
         /// Represents a custom modifier applied to a type within a signature that the caller can ignore.
         /// </summary>
-        OptionalModifier = CorElementType.ELEMENT_TYPE_CMOD_OPT,       // optional C modifier : E_T_CMOD_OPT <mdTypeRef/mdTypeDef>
+        OptionalModifier = CorElementType.ELEMENT_TYPE_CMOD_OPT, // optional C modifier : E_T_CMOD_OPT <mdTypeRef/mdTypeDef>
 
         /// <summary>
         /// Precedes a type <see cref="EntityHandle"/> in signatures.
@@ -173,7 +174,7 @@ namespace System.Reflection.Metadata
         /// code because Windows Runtime projections can project from class to value type or vice-versa
         /// and the raw code is misleading in those cases.
         /// </remarks>
-        TypeHandle = CorElementType.ELEMENT_TYPE_HANDLE,               // CLASS | VALUETYPE <class Token>
+        TypeHandle = CorElementType.ELEMENT_TYPE_HANDLE, // CLASS | VALUETYPE <class Token>
 
         /// <summary>
         /// Represents a marker to indicate the end of fixed arguments and the beginning of variable arguments.

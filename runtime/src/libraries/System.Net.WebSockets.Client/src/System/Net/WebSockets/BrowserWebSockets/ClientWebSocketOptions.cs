@@ -14,8 +14,7 @@ namespace System.Net.WebSockets
         private bool _isReadOnly; // After ConnectAsync is called the options cannot be modified.
         private List<string>? _requestedSubProtocols;
 
-        internal ClientWebSocketOptions()
-        { }
+        internal ClientWebSocketOptions() { }
 
         #region HTTP Settings
 
@@ -107,13 +106,17 @@ namespace System.Net.WebSockets
             {
                 if (string.Equals(item, subProtocol, StringComparison.OrdinalIgnoreCase))
                 {
-                    throw new ArgumentException(SR.Format(SR.net_WebSockets_NoDuplicateProtocol, subProtocol), nameof(subProtocol));
+                    throw new ArgumentException(
+                        SR.Format(SR.net_WebSockets_NoDuplicateProtocol, subProtocol),
+                        nameof(subProtocol)
+                    );
                 }
             }
             subprotocols.Add(subProtocol);
         }
 
-        internal List<string> RequestedSubProtocols => _requestedSubProtocols ??= new List<string>();
+        internal List<string> RequestedSubProtocols =>
+            _requestedSubProtocols ??= new List<string>();
 
         [UnsupportedOSPlatform("browser")]
         public TimeSpan KeepAliveInterval

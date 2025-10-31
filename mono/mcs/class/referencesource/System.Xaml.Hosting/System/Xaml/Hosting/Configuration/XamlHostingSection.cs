@@ -14,11 +14,7 @@ namespace System.Xaml.Hosting.Configuration
         [ConfigurationProperty(XamlHostingConfiguration.CollectionName, IsDefaultCollection = true)]
         public HandlerElementCollection Handlers
         {
-            get
-            {
-                return (HandlerElementCollection)base[XamlHostingConfiguration.CollectionName];
-            }
+            get { return (HandlerElementCollection)base[XamlHostingConfiguration.CollectionName]; }
         }
     }
 }
-

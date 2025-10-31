@@ -25,21 +25,27 @@ internal sealed class BrowserArguments
         ParseJsonProperties(CommonConfig.HostConfig.Properties);
     }
 
-    private OptionSet GetOptions() => new OptionSet
-    {
-        { "forward-console", "Forward JS console output", v => ForwardConsoleOutput = true }
-    };
+    private OptionSet GetOptions() =>
+        new OptionSet
+        {
+            { "forward-console", "Forward JS console output", v => ForwardConsoleOutput = true },
+        };
 
     public void ParseJsonProperties(IDictionary<string, JsonElement>? properties)
     {
         if (properties?.TryGetValue("html-path", out JsonElement htmlPathElement) == true)
             HTMLPath = htmlPathElement.GetString();
-        if (properties?.TryGetValue("forward-console", out JsonElement forwardConsoleElement) == true)
+        if (
+            properties?.TryGetValue("forward-console", out JsonElement forwardConsoleElement)
+            == true
+        )
             ForwardConsoleOutput = forwardConsoleElement.GetBoolean();
     }
 
-    [SuppressMessage("Performance", "CA1822:Mark members as static", Justification = "Needs to validate instance members")]
-    public void Validate()
-    {
-    }
+    [SuppressMessage(
+        "Performance",
+        "CA1822:Mark members as static",
+        Justification = "Needs to validate instance members"
+    )]
+    public void Validate() { }
 }

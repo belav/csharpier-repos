@@ -20,37 +20,98 @@ namespace Microsoft.CodeAnalysis.LanguageService
             LanguageServices = services;
         }
 
-        protected abstract AbstractSymbolDescriptionBuilder CreateDescriptionBuilder(SemanticModel semanticModel, int position, SymbolDescriptionOptions options, CancellationToken cancellationToken);
+        protected abstract AbstractSymbolDescriptionBuilder CreateDescriptionBuilder(
+            SemanticModel semanticModel,
+            int position,
+            SymbolDescriptionOptions options,
+            CancellationToken cancellationToken
+        );
 
-        public Task<string> ToDescriptionStringAsync(SemanticModel semanticModel, int position, ISymbol symbol, SymbolDescriptionOptions options, SymbolDescriptionGroups groups, CancellationToken cancellationToken)
-            => ToDescriptionStringAsync(semanticModel, position, ImmutableArray.Create(symbol), options, groups, cancellationToken);
+        public Task<string> ToDescriptionStringAsync(
+            SemanticModel semanticModel,
+            int position,
+            ISymbol symbol,
+            SymbolDescriptionOptions options,
+            SymbolDescriptionGroups groups,
+            CancellationToken cancellationToken
+        ) =>
+            ToDescriptionStringAsync(
+                semanticModel,
+                position,
+                ImmutableArray.Create(symbol),
+                options,
+                groups,
+                cancellationToken
+            );
 
-        public async Task<string> ToDescriptionStringAsync(SemanticModel semanticModel, int position, ImmutableArray<ISymbol> symbols, SymbolDescriptionOptions options, SymbolDescriptionGroups groups, CancellationToken cancellationToken)
+        public async Task<string> ToDescriptionStringAsync(
+            SemanticModel semanticModel,
+            int position,
+            ImmutableArray<ISymbol> symbols,
+            SymbolDescriptionOptions options,
+            SymbolDescriptionGroups groups,
+            CancellationToken cancellationToken
+        )
         {
-            var parts = await ToDescriptionPartsAsync(semanticModel, position, symbols, options, groups, cancellationToken).ConfigureAwait(false);
+            var parts = await ToDescriptionPartsAsync(
+                    semanticModel,
+                    position,
+                    symbols,
+                    options,
+                    groups,
+                    cancellationToken
+                )
+                .ConfigureAwait(false);
             return parts.ToDisplayString();
         }
 
-        public async Task<ImmutableArray<SymbolDisplayPart>> ToDescriptionPartsAsync(SemanticModel semanticModel, int position, ImmutableArray<ISymbol> symbols, SymbolDescriptionOptions options, SymbolDescriptionGroups groups, CancellationToken cancellationToken)
+        public async Task<ImmutableArray<SymbolDisplayPart>> ToDescriptionPartsAsync(
+            SemanticModel semanticModel,
+            int position,
+            ImmutableArray<ISymbol> symbols,
+            SymbolDescriptionOptions options,
+            SymbolDescriptionGroups groups,
+            CancellationToken cancellationToken
+        )
         {
             if (symbols.Length == 0)
             {
                 return ImmutableArray.Create<SymbolDisplayPart>();
             }
 
-            var builder = CreateDescriptionBuilder(semanticModel, position, options, cancellationToken);
+            var builder = CreateDescriptionBuilder(
+                semanticModel,
+                position,
+                options,
+                cancellationToken
+            );
             return await builder.BuildDescriptionAsync(symbols, groups).ConfigureAwait(false);
         }
 
-        public async Task<IDictionary<SymbolDescriptionGroups, ImmutableArray<TaggedText>>> ToDescriptionGroupsAsync(
-            SemanticModel semanticModel, int position, ImmutableArray<ISymbol> symbols, SymbolDescriptionOptions options, CancellationToken cancellationToken)
+        public async Task<
+            IDictionary<SymbolDescriptionGroups, ImmutableArray<TaggedText>>
+        > ToDescriptionGroupsAsync(
+            SemanticModel semanticModel,
+            int position,
+            ImmutableArray<ISymbol> symbols,
+            SymbolDescriptionOptions options,
+            CancellationToken cancellationToken
+        )
         {
             if (symbols.Length == 0)
             {
-                return SpecializedCollections.EmptyDictionary<SymbolDescriptionGroups, ImmutableArray<TaggedText>>();
+                return SpecializedCollections.EmptyDictionary<
+                    SymbolDescriptionGroups,
+                    ImmutableArray<TaggedText>
+                >();
             }
 
-            var builder = CreateDescriptionBuilder(semanticModel, position, options, cancellationToken);
+            var builder = CreateDescriptionBuilder(
+                semanticModel,
+                position,
+                options,
+                cancellationToken
+            );
             return await builder.BuildDescriptionSectionsAsync(symbols).ConfigureAwait(false);
         }
     }

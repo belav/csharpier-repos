@@ -43,7 +43,8 @@ public abstract class NonNullableConventionBase : IModelFinalizingConvention
     protected virtual bool TryGetNullabilityInfo(
         IConventionModelBuilder modelBuilder,
         MemberInfo memberInfo,
-        [NotNullWhen(true)] out NullabilityInfo? nullabilityInfo)
+        [NotNullWhen(true)] out NullabilityInfo? nullabilityInfo
+    )
     {
         if (memberInfo.GetMemberType().IsValueType)
         {
@@ -53,7 +54,10 @@ public abstract class NonNullableConventionBase : IModelFinalizingConvention
 
         var annotation =
             modelBuilder.Metadata.FindAnnotation(StateAnnotationName)
-            ?? modelBuilder.Metadata.AddAnnotation(StateAnnotationName, new NullabilityInfoContext());
+            ?? modelBuilder.Metadata.AddAnnotation(
+                StateAnnotationName,
+                new NullabilityInfoContext()
+            );
 
         var nullabilityInfoContext = (NullabilityInfoContext)annotation.Value!;
 
@@ -61,7 +65,7 @@ public abstract class NonNullableConventionBase : IModelFinalizingConvention
         {
             PropertyInfo propertyInfo => nullabilityInfoContext.Create(propertyInfo),
             FieldInfo fieldInfo => nullabilityInfoContext.Create(fieldInfo),
-            _ => null
+            _ => null,
         };
 
         return nullabilityInfo is not null;
@@ -70,6 +74,6 @@ public abstract class NonNullableConventionBase : IModelFinalizingConvention
     /// <inheritdoc />
     public virtual void ProcessModelFinalizing(
         IConventionModelBuilder modelBuilder,
-        IConventionContext<IConventionModelBuilder> context)
-        => modelBuilder.Metadata.RemoveAnnotation(StateAnnotationName);
+        IConventionContext<IConventionModelBuilder> context
+    ) => modelBuilder.Metadata.RemoveAnnotation(StateAnnotationName);
 }

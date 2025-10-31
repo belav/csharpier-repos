@@ -16,10 +16,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -30,45 +30,52 @@
 //
 
 using System;
+using System.Runtime.InteropServices;
 using System.Runtime.Remoting;
 using System.Runtime.Remoting.Activation;
-using System.Runtime.Remoting.Contexts;
 using System.Runtime.Remoting.Channels;
+using System.Runtime.Remoting.Contexts;
 
-using System.Runtime.InteropServices;
+namespace System.Runtime.Remoting.Proxies
+{
+    [AttributeUsage(AttributeTargets.Class)]
+    [ComVisible(true)]
+    public class ProxyAttribute : Attribute, IContextAttribute
+    {
+        public ProxyAttribute() { }
 
-namespace System.Runtime.Remoting.Proxies {
+        public virtual MarshalByRefObject CreateInstance(Type serverType)
+        {
+            RemotingProxy proxy = new RemotingProxy(
+                serverType,
+                ChannelServices.CrossContextUrl,
+                null
+            );
+            return (MarshalByRefObject)proxy.GetTransparentProxy();
+        }
 
-	[AttributeUsage (AttributeTargets.Class)]
-	[ComVisible (true)]
-	public class ProxyAttribute : Attribute, IContextAttribute
-	{
-		public ProxyAttribute ()
-		{
-		}
+        public virtual RealProxy CreateProxy(
+            ObjRef objRef,
+            Type serverType,
+            object serverObject,
+            Context serverContext
+        )
+        {
+            return RemotingServices.GetRealProxy(
+                RemotingServices.GetProxyForRemoteObject(objRef, serverType)
+            );
+        }
 
-		public virtual MarshalByRefObject CreateInstance (Type serverType)
-		{
-			RemotingProxy proxy = new RemotingProxy (serverType, ChannelServices.CrossContextUrl, null);
-			return (MarshalByRefObject) proxy.GetTransparentProxy();
-		}
+        [ComVisible(true)]
+        public void GetPropertiesForNewContext(IConstructionCallMessage msg)
+        {
+            // Nothing to add
+        }
 
-		public virtual RealProxy CreateProxy (ObjRef objRef, Type serverType, object serverObject, Context serverContext)
-		{
-			return RemotingServices.GetRealProxy (RemotingServices.GetProxyForRemoteObject (objRef, serverType));
-		}
-
-		[ComVisible (true)]
-		public void GetPropertiesForNewContext (IConstructionCallMessage msg)
-		{
-			// Nothing to add
-		}
-
-		[ComVisible (true)]
-		public bool IsContextOK (Context ctx, IConstructionCallMessage msg)
-		{
-			return true;
-		}
-	}
+        [ComVisible(true)]
+        public bool IsContextOK(Context ctx, IConstructionCallMessage msg)
+        {
+            return true;
+        }
+    }
 }
-

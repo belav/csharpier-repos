@@ -11,13 +11,10 @@ namespace Roslyn.Utilities
     /// </summary>
     internal readonly struct VoidResult : IEquatable<VoidResult>
     {
-        public override bool Equals(object? obj)
-            => obj is VoidResult;
+        public override bool Equals(object? obj) => obj is VoidResult;
 
-        public override int GetHashCode()
-            => 0;
+        public override int GetHashCode() => 0;
 
-        public bool Equals(VoidResult other)
-            => true;
+        public bool Equals(VoidResult other) => true;
     }
 }

@@ -14,7 +14,13 @@ namespace System.Xml.XmlConvertTests
         {
             for (int i = 0; i < _byte_Digit.Length; i = i + 2)
             {
-                AddVariation(new CVariation(this, "EncodeName-DecodeName : " + _Expbyte_Digit[i / 2], XmlEncodeName3));
+                AddVariation(
+                    new CVariation(
+                        this,
+                        "EncodeName-DecodeName : " + _Expbyte_Digit[i / 2],
+                        XmlEncodeName3
+                    )
+                );
             }
         }
 
@@ -29,7 +35,8 @@ namespace System.Xml.XmlConvertTests
             string strEnVal = string.Empty;
             string strVal = string.Empty;
 
-            char c = (char)BinaryPrimitives.ReadUInt16LittleEndian(new Span<byte>(_byte_Digit, i, 2));
+            char c = (char)
+                BinaryPrimitives.ReadUInt16LittleEndian(new Span<byte>(_byte_Digit, i, 2));
             strVal = c.ToString();
             strEnVal = XmlConvert.EncodeName(strVal);
             CError.Compare(strEnVal, _Expbyte_Digit[i / 2], "Encode Comparison failed at " + i);

@@ -53,7 +53,9 @@ namespace System.Linq
                 return listProv.GetCount(onlyIfCheap);
             }
 
-            return !onlyIfCheap || _source is ICollection<TElement> || _source is ICollection ? _source.Count() : -1;
+            return !onlyIfCheap || _source is ICollection<TElement> || _source is ICollection
+                ? _source.Count()
+                : -1;
         }
 
         internal TElement[] ToArray(int minIdx, int maxIdx)
@@ -72,7 +74,10 @@ namespace System.Linq
 
             if (minIdx == maxIdx)
             {
-                return new TElement[] { GetEnumerableSorter().ElementAt(buffer._items, count, minIdx) };
+                return new TElement[]
+                {
+                    GetEnumerableSorter().ElementAt(buffer._items, count, minIdx),
+                };
             }
 
             TElement[] array = new TElement[maxIdx - minIdx + 1];
@@ -98,7 +103,10 @@ namespace System.Linq
 
             if (minIdx == maxIdx)
             {
-                return new List<TElement>(1) { GetEnumerableSorter().ElementAt(buffer._items, count, minIdx) };
+                return new List<TElement>(1)
+                {
+                    GetEnumerableSorter().ElementAt(buffer._items, count, minIdx),
+                };
             }
 
             List<TElement> list = new List<TElement>(maxIdx - minIdx + 1);
@@ -106,7 +114,12 @@ namespace System.Linq
             return list;
         }
 
-        private void Fill(int minIdx, int maxIdx, Buffer<TElement> buffer, Span<TElement> destination)
+        private void Fill(
+            int minIdx,
+            int maxIdx,
+            Buffer<TElement> buffer,
+            Span<TElement> destination
+        )
         {
             int[] map = SortedMap(buffer, minIdx, maxIdx);
             int idx = 0;
@@ -134,9 +147,11 @@ namespace System.Linq
             return (count <= maxIdx ? count : maxIdx + 1) - minIdx;
         }
 
-        public IPartition<TElement> Skip(int count) => new OrderedPartition<TElement>(this, count, int.MaxValue);
+        public IPartition<TElement> Skip(int count) =>
+            new OrderedPartition<TElement>(this, count, int.MaxValue);
 
-        public IPartition<TElement> Take(int count) => new OrderedPartition<TElement>(this, 0, count - 1);
+        public IPartition<TElement> Take(int count) =>
+            new OrderedPartition<TElement>(this, 0, count - 1);
 
         public TElement? TryGetElementAt(int index, out bool found)
         {
@@ -225,7 +240,9 @@ namespace System.Linq
             }
 
             found = true;
-            return (maxIdx < count - 1) ? GetEnumerableSorter().ElementAt(buffer._items, count, maxIdx) : Last(buffer);
+            return (maxIdx < count - 1)
+                ? GetEnumerableSorter().ElementAt(buffer._items, count, maxIdx)
+                : Last(buffer);
         }
 
         private TElement Last(Buffer<TElement> buffer)
@@ -248,7 +265,8 @@ namespace System.Linq
         }
     }
 
-    internal sealed partial class OrderedImplicitlyStableEnumerable<TElement> : OrderedEnumerable<TElement>
+    internal sealed partial class OrderedImplicitlyStableEnumerable<TElement>
+        : OrderedEnumerable<TElement>
     {
         public override TElement[] ToArray()
         {

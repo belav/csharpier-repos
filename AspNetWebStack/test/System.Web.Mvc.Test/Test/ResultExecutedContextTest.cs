@@ -19,7 +19,12 @@ namespace System.Web.Mvc.Test
 
             // Act & assert
             Assert.ThrowsArgumentNull(
-                delegate { new ResultExecutedContext(controllerContext, result, canceled, exception); }, "controllerContext");
+                delegate
+                {
+                    new ResultExecutedContext(controllerContext, result, canceled, exception);
+                },
+                "controllerContext"
+            );
         }
 
         [Fact]
@@ -33,7 +38,12 @@ namespace System.Web.Mvc.Test
 
             // Act & assert
             Assert.ThrowsArgumentNull(
-                delegate { new ResultExecutedContext(controllerContext, result, canceled, exception); }, "result");
+                delegate
+                {
+                    new ResultExecutedContext(controllerContext, result, canceled, exception);
+                },
+                "result"
+            );
         }
 
         [Fact]
@@ -46,7 +56,12 @@ namespace System.Web.Mvc.Test
             Exception exception = new Exception();
 
             // Act
-            ResultExecutedContext resultExecutedContext = new ResultExecutedContext(controllerContext, result, canceled, exception);
+            ResultExecutedContext resultExecutedContext = new ResultExecutedContext(
+                controllerContext,
+                result,
+                canceled,
+                exception
+            );
 
             // Assert
             Assert.Equal(result, resultExecutedContext.Result);

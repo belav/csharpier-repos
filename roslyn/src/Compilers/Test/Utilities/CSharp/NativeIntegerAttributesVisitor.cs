@@ -22,21 +22,26 @@ namespace Microsoft.CodeAnalysis.CSharp.Test.Utilities
             return builder.ToString();
         }
 
-        private NativeIntegerAttributesVisitor(StringBuilder builder) : base(builder)
-        {
-        }
+        private NativeIntegerAttributesVisitor(StringBuilder builder)
+            : base(builder) { }
 
-        protected override SymbolDisplayFormat DisplayFormat => SymbolDisplayFormat.TestFormatWithConstraints.
-            WithMemberOptions(
-                SymbolDisplayMemberOptions.IncludeParameters |
-                SymbolDisplayMemberOptions.IncludeType |
-                SymbolDisplayMemberOptions.IncludeRef |
-                SymbolDisplayMemberOptions.IncludeExplicitInterface).
-            WithCompilerInternalOptions(SymbolDisplayCompilerInternalOptions.UseNativeIntegerUnderlyingType);
+        protected override SymbolDisplayFormat DisplayFormat =>
+            SymbolDisplayFormat
+                .TestFormatWithConstraints.WithMemberOptions(
+                    SymbolDisplayMemberOptions.IncludeParameters
+                        | SymbolDisplayMemberOptions.IncludeType
+                        | SymbolDisplayMemberOptions.IncludeRef
+                        | SymbolDisplayMemberOptions.IncludeExplicitInterface
+                )
+                .WithCompilerInternalOptions(
+                    SymbolDisplayCompilerInternalOptions.UseNativeIntegerUnderlyingType
+                );
 
-        protected override bool TypeRequiresAttribute(TypeSymbol? type) => type?.ContainsNativeIntegerWrapperType() == true;
+        protected override bool TypeRequiresAttribute(TypeSymbol? type) =>
+            type?.ContainsNativeIntegerWrapperType() == true;
 
-        protected override CSharpAttributeData? GetTargetAttribute(ImmutableArray<CSharpAttributeData> attributes) =>
-            GetAttribute(attributes, "System.Runtime.CompilerServices", "NativeIntegerAttribute");
+        protected override CSharpAttributeData? GetTargetAttribute(
+            ImmutableArray<CSharpAttributeData> attributes
+        ) => GetAttribute(attributes, "System.Runtime.CompilerServices", "NativeIntegerAttribute");
     }
 }

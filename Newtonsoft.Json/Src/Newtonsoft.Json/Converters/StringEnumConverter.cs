@@ -30,8 +30,8 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Reflection;
 using System.Runtime.Serialization;
-using Newtonsoft.Json.Utilities;
 using Newtonsoft.Json.Serialization;
+using Newtonsoft.Json.Utilities;
 #if !HAVE_LINQ
 using Newtonsoft.Json.Utilities.LinqBridge;
 #else
@@ -51,7 +51,9 @@ namespace Newtonsoft.Json.Converters
         /// The default value is <c>false</c>.
         /// </summary>
         /// <value><c>true</c> if the written enum text will be camel case; otherwise, <c>false</c>.</value>
-        [Obsolete("StringEnumConverter.CamelCaseText is obsolete. Set StringEnumConverter.NamingStrategy with CamelCaseNamingStrategy instead.")]
+        [Obsolete(
+            "StringEnumConverter.CamelCaseText is obsolete. Set StringEnumConverter.NamingStrategy with CamelCaseNamingStrategy instead."
+        )]
         public bool CamelCaseText
         {
             get => NamingStrategy is CamelCaseNamingStrategy ? true : false;
@@ -94,15 +96,15 @@ namespace Newtonsoft.Json.Converters
         /// <summary>
         /// Initializes a new instance of the <see cref="StringEnumConverter"/> class.
         /// </summary>
-        public StringEnumConverter()
-        {
-        }
+        public StringEnumConverter() { }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="StringEnumConverter"/> class.
         /// </summary>
         /// <param name="camelCaseText"><c>true</c> if the written enum text will be camel case; otherwise, <c>false</c>.</param>
-        [Obsolete("StringEnumConverter(bool) is obsolete. Create a converter with StringEnumConverter(NamingStrategy, bool) instead.")]
+        [Obsolete(
+            "StringEnumConverter(bool) is obsolete. Create a converter with StringEnumConverter(NamingStrategy, bool) instead."
+        )]
         public StringEnumConverter(bool camelCaseText)
         {
             if (camelCaseText)
@@ -130,7 +132,10 @@ namespace Newtonsoft.Json.Converters
         {
             ValidationUtils.ArgumentNotNull(namingStrategyType, nameof(namingStrategyType));
 
-            NamingStrategy = JsonTypeReflector.CreateNamingStrategyInstance(namingStrategyType, null);
+            NamingStrategy = JsonTypeReflector.CreateNamingStrategyInstance(
+                namingStrategyType,
+                null
+            );
         }
 
         /// <summary>
@@ -147,7 +152,10 @@ namespace Newtonsoft.Json.Converters
         {
             ValidationUtils.ArgumentNotNull(namingStrategyType, nameof(namingStrategyType));
 
-            NamingStrategy = JsonTypeReflector.CreateNamingStrategyInstance(namingStrategyType, namingStrategyParameters);
+            NamingStrategy = JsonTypeReflector.CreateNamingStrategyInstance(
+                namingStrategyType,
+                namingStrategyParameters
+            );
         }
 
         /// <summary>
@@ -161,11 +169,18 @@ namespace Newtonsoft.Json.Converters
         /// order, and type of these parameters.
         /// </param>
         /// <param name="allowIntegerValues"><c>true</c> if integers are allowed when serializing and deserializing; otherwise, <c>false</c>.</param>
-        public StringEnumConverter(Type namingStrategyType, object[] namingStrategyParameters, bool allowIntegerValues)
+        public StringEnumConverter(
+            Type namingStrategyType,
+            object[] namingStrategyParameters,
+            bool allowIntegerValues
+        )
         {
             ValidationUtils.ArgumentNotNull(namingStrategyType, nameof(namingStrategyType));
 
-            NamingStrategy = JsonTypeReflector.CreateNamingStrategyInstance(namingStrategyType, namingStrategyParameters);
+            NamingStrategy = JsonTypeReflector.CreateNamingStrategyInstance(
+                namingStrategyType,
+                namingStrategyParameters
+            );
             AllowIntegerValues = allowIntegerValues;
         }
 
@@ -189,7 +204,15 @@ namespace Newtonsoft.Json.Converters
             {
                 if (!AllowIntegerValues)
                 {
-                    throw JsonSerializationException.Create(null, writer.ContainerPath, "Integer value {0} is not allowed.".FormatWith(CultureInfo.InvariantCulture, e.ToString("D")), null);
+                    throw JsonSerializationException.Create(
+                        null,
+                        writer.ContainerPath,
+                        "Integer value {0} is not allowed.".FormatWith(
+                            CultureInfo.InvariantCulture,
+                            e.ToString("D")
+                        ),
+                        null
+                    );
                 }
 
                 // enum value has no name so write number
@@ -209,13 +232,24 @@ namespace Newtonsoft.Json.Converters
         /// <param name="existingValue">The existing value of object being read.</param>
         /// <param name="serializer">The calling serializer.</param>
         /// <returns>The object value.</returns>
-        public override object? ReadJson(JsonReader reader, Type objectType, object? existingValue, JsonSerializer serializer)
+        public override object? ReadJson(
+            JsonReader reader,
+            Type objectType,
+            object? existingValue,
+            JsonSerializer serializer
+        )
         {
             if (reader.TokenType == JsonToken.Null)
             {
                 if (!ReflectionUtils.IsNullableType(objectType))
                 {
-                    throw JsonSerializationException.Create(reader, "Cannot convert null value to {0}.".FormatWith(CultureInfo.InvariantCulture, objectType));
+                    throw JsonSerializationException.Create(
+                        reader,
+                        "Cannot convert null value to {0}.".FormatWith(
+                            CultureInfo.InvariantCulture,
+                            objectType
+                        )
+                    );
                 }
 
                 return null;
@@ -242,19 +276,43 @@ namespace Newtonsoft.Json.Converters
                 {
                     if (!AllowIntegerValues)
                     {
-                        throw JsonSerializationException.Create(reader, "Integer value {0} is not allowed.".FormatWith(CultureInfo.InvariantCulture, reader.Value));
+                        throw JsonSerializationException.Create(
+                            reader,
+                            "Integer value {0} is not allowed.".FormatWith(
+                                CultureInfo.InvariantCulture,
+                                reader.Value
+                            )
+                        );
                     }
 
-                    return ConvertUtils.ConvertOrCast(reader.Value, CultureInfo.InvariantCulture, t);
+                    return ConvertUtils.ConvertOrCast(
+                        reader.Value,
+                        CultureInfo.InvariantCulture,
+                        t
+                    );
                 }
             }
             catch (Exception ex)
             {
-                throw JsonSerializationException.Create(reader, "Error converting value {0} to type '{1}'.".FormatWith(CultureInfo.InvariantCulture, MiscellaneousUtils.ToString(reader.Value), objectType), ex);
+                throw JsonSerializationException.Create(
+                    reader,
+                    "Error converting value {0} to type '{1}'.".FormatWith(
+                        CultureInfo.InvariantCulture,
+                        MiscellaneousUtils.ToString(reader.Value),
+                        objectType
+                    ),
+                    ex
+                );
             }
 
             // we don't actually expect to get here.
-            throw JsonSerializationException.Create(reader, "Unexpected token {0} when parsing enum.".FormatWith(CultureInfo.InvariantCulture, reader.TokenType));
+            throw JsonSerializationException.Create(
+                reader,
+                "Unexpected token {0} when parsing enum.".FormatWith(
+                    CultureInfo.InvariantCulture,
+                    reader.TokenType
+                )
+            );
         }
 
         /// <summary>
@@ -266,9 +324,10 @@ namespace Newtonsoft.Json.Converters
         /// </returns>
         public override bool CanConvert(Type objectType)
         {
-            Type t = (ReflectionUtils.IsNullableType(objectType))
-                ? Nullable.GetUnderlyingType(objectType)!
-                : objectType;
+            Type t =
+                (ReflectionUtils.IsNullableType(objectType))
+                    ? Nullable.GetUnderlyingType(objectType)!
+                    : objectType;
 
             return t.IsEnum();
         }

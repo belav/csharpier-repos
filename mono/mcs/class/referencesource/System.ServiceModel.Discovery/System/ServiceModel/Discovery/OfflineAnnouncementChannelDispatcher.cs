@@ -5,54 +5,51 @@ namespace System.ServiceModel.Discovery
 {
     using System;
     using System.Collections.ObjectModel;
-    using System.ServiceModel.Channels;
-    using System.Runtime;
-    using System.ServiceModel.Dispatcher;
     using System.Globalization;
+    using System.Runtime;
+    using System.ServiceModel.Channels;
+    using System.ServiceModel.Dispatcher;
 
     sealed class OfflineAnnouncementChannelDispatcher : ChannelDispatcherBase
     {
         ServiceHostBase serviceHostBase;
         IChannelListener closeListener;
 
-        internal OfflineAnnouncementChannelDispatcher(ServiceHostBase serviceHostBase, Collection<AnnouncementEndpoint> announcementEndpoints, Collection<EndpointDiscoveryMetadata> publishedEndpoints, DiscoveryMessageSequenceGenerator discoveryMessageSequenceGenerator)
+        internal OfflineAnnouncementChannelDispatcher(
+            ServiceHostBase serviceHostBase,
+            Collection<AnnouncementEndpoint> announcementEndpoints,
+            Collection<EndpointDiscoveryMetadata> publishedEndpoints,
+            DiscoveryMessageSequenceGenerator discoveryMessageSequenceGenerator
+        )
         {
             Fx.Assert(serviceHostBase != null, "The serviceHostBase must be non null.");
 
             this.serviceHostBase = serviceHostBase;
-            this.closeListener = new CloseListener(announcementEndpoints, publishedEndpoints, discoveryMessageSequenceGenerator);
+            this.closeListener = new CloseListener(
+                announcementEndpoints,
+                publishedEndpoints,
+                discoveryMessageSequenceGenerator
+            );
         }
 
         public override ServiceHostBase Host
         {
-            get
-            {
-                return this.serviceHostBase;
-            }
+            get { return this.serviceHostBase; }
         }
 
         public override IChannelListener Listener
         {
-            get
-            {
-                return this.closeListener;
-            }
+            get { return this.closeListener; }
         }
 
         protected override TimeSpan DefaultCloseTimeout
         {
-            get
-            {
-                return TimeSpan.FromMinutes(1);
-            }
+            get { return TimeSpan.FromMinutes(1); }
         }
 
         protected override TimeSpan DefaultOpenTimeout
         {
-            get
-            {
-                return TimeSpan.FromMinutes(1);
-            }
+            get { return TimeSpan.FromMinutes(1); }
         }
 
         protected override void OnAbort()
@@ -60,7 +57,11 @@ namespace System.ServiceModel.Discovery
             this.closeListener.Abort();
         }
 
-        protected override IAsyncResult OnBeginClose(TimeSpan timeout, AsyncCallback callback, object state)
+        protected override IAsyncResult OnBeginClose(
+            TimeSpan timeout,
+            AsyncCallback callback,
+            object state
+        )
         {
             return this.closeListener.BeginClose(timeout, callback, state);
         }
@@ -75,7 +76,11 @@ namespace System.ServiceModel.Discovery
             this.closeListener.Close(timeout);
         }
 
-        protected override IAsyncResult OnBeginOpen(TimeSpan timeout, AsyncCallback callback, object state)
+        protected override IAsyncResult OnBeginOpen(
+            TimeSpan timeout,
+            AsyncCallback callback,
+            object state
+        )
         {
             return this.closeListener.BeginOpen(timeout, callback, state);
         }
@@ -98,11 +103,24 @@ namespace System.ServiceModel.Discovery
             DiscoveryMessageSequenceGenerator discoveryMessageSequenceGenerator;
             bool abortAnnouncement;
 
-            public CloseListener(Collection<AnnouncementEndpoint> announcementEndpoints, Collection<EndpointDiscoveryMetadata> publishedEndpoints, DiscoveryMessageSequenceGenerator discoveryMessageSequenceGenerator)
+            public CloseListener(
+                Collection<AnnouncementEndpoint> announcementEndpoints,
+                Collection<EndpointDiscoveryMetadata> publishedEndpoints,
+                DiscoveryMessageSequenceGenerator discoveryMessageSequenceGenerator
+            )
             {
-                Fx.Assert(announcementEndpoints != null && announcementEndpoints.Count > 0, "The Announcement Endpoints collection must be non null and not empty.");
-                Fx.Assert(publishedEndpoints != null, "The Published Endpoints collection must be non null.");
-                Fx.Assert(discoveryMessageSequenceGenerator != null, "The discoveryMessageSequenceGenerator must be non null.");
+                Fx.Assert(
+                    announcementEndpoints != null && announcementEndpoints.Count > 0,
+                    "The Announcement Endpoints collection must be non null and not empty."
+                );
+                Fx.Assert(
+                    publishedEndpoints != null,
+                    "The Published Endpoints collection must be non null."
+                );
+                Fx.Assert(
+                    discoveryMessageSequenceGenerator != null,
+                    "The discoveryMessageSequenceGenerator must be non null."
+                );
 
                 this.announcementEndpoints = announcementEndpoints;
                 this.publishedEndpoints = publishedEndpoints;
@@ -112,26 +130,17 @@ namespace System.ServiceModel.Discovery
 
             public Uri Uri
             {
-                get
-                {
-                    return new Uri(ProtocolStrings.VersionInternal.AdhocAddress);                    
-                }
+                get { return new Uri(ProtocolStrings.VersionInternal.AdhocAddress); }
             }
 
             protected override TimeSpan DefaultCloseTimeout
             {
-                get
-                {
-                    return TimeSpan.FromMinutes(1);
-                }
+                get { return TimeSpan.FromMinutes(1); }
             }
 
             protected override TimeSpan DefaultOpenTimeout
             {
-                get
-                {
-                    return TimeSpan.FromMinutes(1);
-                }
+                get { return TimeSpan.FromMinutes(1); }
             }
 
             protected override void OnAbort()
@@ -148,9 +157,20 @@ namespace System.ServiceModel.Discovery
                 OnEndClose(OnBeginClose(timeout, null, null));
             }
 
-            protected override IAsyncResult OnBeginClose(TimeSpan timeout, AsyncCallback callback, object state)
+            protected override IAsyncResult OnBeginClose(
+                TimeSpan timeout,
+                AsyncCallback callback,
+                object state
+            )
             {
-                this.announceOfflineAsyncResult = new AnnouncementDispatcherAsyncResult(this.announcementEndpoints, this.publishedEndpoints, this.discoveryMessageSequenceGenerator, false, callback, state);
+                this.announceOfflineAsyncResult = new AnnouncementDispatcherAsyncResult(
+                    this.announcementEndpoints,
+                    this.publishedEndpoints,
+                    this.discoveryMessageSequenceGenerator,
+                    false,
+                    callback,
+                    state
+                );
                 if (this.abortAnnouncement)
                 {
                     // Fixes the ---- when OnAbort is called after OnBeginClose but before this.announceOnlineAsyncResult is created
@@ -168,7 +188,11 @@ namespace System.ServiceModel.Discovery
                 AnnouncementDispatcherAsyncResult.End(result);
             }
 
-            protected override IAsyncResult OnBeginOpen(TimeSpan timeout, AsyncCallback callback, object state)
+            protected override IAsyncResult OnBeginOpen(
+                TimeSpan timeout,
+                AsyncCallback callback,
+                object state
+            )
             {
                 return new CompletedAsyncResult(callback, state);
             }
@@ -178,11 +202,13 @@ namespace System.ServiceModel.Discovery
                 CompletedAsyncResult.End(result);
             }
 
-            protected override void OnOpen(TimeSpan timeout)
-            {
-            }
+            protected override void OnOpen(TimeSpan timeout) { }
 
-            public IAsyncResult BeginWaitForChannel(TimeSpan timeout, AsyncCallback callback, object state)
+            public IAsyncResult BeginWaitForChannel(
+                TimeSpan timeout,
+                AsyncCallback callback,
+                object state
+            )
             {
                 return new CompletedAsyncResult<bool>(true, callback, state);
             }

@@ -32,58 +32,59 @@ using System.Text;
 
 namespace System.Net.Http
 {
-	public class FormUrlEncodedContent : ByteArrayContent
-	{
-		public FormUrlEncodedContent (IEnumerable<KeyValuePair<string, string>> nameValueCollection)
-			: base (EncodeContent (nameValueCollection))
-		{
-			Headers.ContentType = new MediaTypeHeaderValue ("application/x-www-form-urlencoded");
-		}
+    public class FormUrlEncodedContent : ByteArrayContent
+    {
+        public FormUrlEncodedContent(IEnumerable<KeyValuePair<string, string>> nameValueCollection)
+            : base(EncodeContent(nameValueCollection))
+        {
+            Headers.ContentType = new MediaTypeHeaderValue("application/x-www-form-urlencoded");
+        }
 
-		static byte[] EncodeContent (IEnumerable<KeyValuePair<string, string>> nameValueCollection)
-		{
-			if (nameValueCollection == null)
-				throw new ArgumentNullException ("nameValueCollection");
+        static byte[] EncodeContent(IEnumerable<KeyValuePair<string, string>> nameValueCollection)
+        {
+            if (nameValueCollection == null)
+                throw new ArgumentNullException("nameValueCollection");
 
-			//
-			// Serialization as application/x-www-form-urlencoded
-			//
-			// Element nodes selected for inclusion are encoded as EltName=value{sep}, where = is a literal
-			// character, {sep} is the separator character from the separator attribute on submission,
-			// EltName represents the element local name, and value represents the contents of the text node.
-			//
-			// The encoding of EltName and value are as follows: space characters are replaced by +, and then
-			// non-ASCII and reserved characters (as defined by [RFC 2396] as amended by subsequent documents
-			// in the IETF track) are escaped by replacing the character with one or more octets of the UTF-8
-			// representation of the character, with each octet in turn replaced by %HH, where HH represents
-			// the uppercase hexadecimal notation for the octet value and % is a literal character. Line breaks
-			// are represented as "CR LF" pairs (i.e., %0D%0A).
-			//
-			var sb = new List<byte> ();
-			foreach (var item in nameValueCollection) {
-				if (sb.Count != 0)
-					sb.Add ((byte) '&');
+            //
+            // Serialization as application/x-www-form-urlencoded
+            //
+            // Element nodes selected for inclusion are encoded as EltName=value{sep}, where = is a literal
+            // character, {sep} is the separator character from the separator attribute on submission,
+            // EltName represents the element local name, and value represents the contents of the text node.
+            //
+            // The encoding of EltName and value are as follows: space characters are replaced by +, and then
+            // non-ASCII and reserved characters (as defined by [RFC 2396] as amended by subsequent documents
+            // in the IETF track) are escaped by replacing the character with one or more octets of the UTF-8
+            // representation of the character, with each octet in turn replaced by %HH, where HH represents
+            // the uppercase hexadecimal notation for the octet value and % is a literal character. Line breaks
+            // are represented as "CR LF" pairs (i.e., %0D%0A).
+            //
+            var sb = new List<byte>();
+            foreach (var item in nameValueCollection)
+            {
+                if (sb.Count != 0)
+                    sb.Add((byte)'&');
 
-				var data = SerializeValue (item.Key);
-				if (data != null)
-					sb.AddRange (data);
-				sb.Add ((byte) '=');
+                var data = SerializeValue(item.Key);
+                if (data != null)
+                    sb.AddRange(data);
+                sb.Add((byte)'=');
 
-				data = SerializeValue (item.Value);
-				if (data != null)
-					sb.AddRange (data);
-			}
+                data = SerializeValue(item.Value);
+                if (data != null)
+                    sb.AddRange(data);
+            }
 
-			return sb.ToArray ();
-		}
+            return sb.ToArray();
+        }
 
-		static byte[] SerializeValue (string value)
-		{
-			if (value == null)
-				return null;
+        static byte[] SerializeValue(string value)
+        {
+            if (value == null)
+                return null;
 
-			value = Uri.EscapeDataString (value).Replace ("%20", "+");
-			return Encoding.ASCII.GetBytes (value);
-		}
-	}
+            value = Uri.EscapeDataString(value).Replace("%20", "+");
+            return Encoding.ASCII.GetBytes(value);
+        }
+    }
 }

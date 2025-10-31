@@ -20,7 +20,11 @@ namespace BuildValidator
         internal ImmutableArray<SourceLinkEntry> SourceLinkEntries { get; }
         internal ILogger Logger { get; }
 
-        public LocalSourceResolver(Options options, ImmutableArray<SourceLinkEntry> sourceLinkEntries, ILogger logger)
+        public LocalSourceResolver(
+            Options options,
+            ImmutableArray<SourceLinkEntry> sourceLinkEntries,
+            ILogger logger
+        )
         {
             Options = options;
             SourceLinkEntries = sourceLinkEntries;
@@ -33,9 +37,19 @@ namespace BuildValidator
             string? onDiskPath = null;
             foreach (var link in SourceLinkEntries)
             {
-                if (originalFilePath.StartsWith(link.Prefix, FileNameEqualityComparer.StringComparison))
+                if (
+                    originalFilePath.StartsWith(
+                        link.Prefix,
+                        FileNameEqualityComparer.StringComparison
+                    )
+                )
                 {
-                    onDiskPath = Path.GetFullPath(Path.Combine(Options.SourcePath, originalFilePath.Substring(link.Prefix.Length)));
+                    onDiskPath = Path.GetFullPath(
+                        Path.Combine(
+                            Options.SourcePath,
+                            originalFilePath.Substring(link.Prefix.Length)
+                        )
+                    );
                     if (File.Exists(onDiskPath))
                     {
                         break;
@@ -48,7 +62,12 @@ namespace BuildValidator
             onDiskPath ??= originalFilePath;
 
             using var fileStream = File.OpenRead(onDiskPath);
-            var sourceText = SourceText.From(fileStream, encoding: sourceTextInfo.SourceTextEncoding, checksumAlgorithm: sourceTextInfo.HashAlgorithm, canBeEmbedded: false);
+            var sourceText = SourceText.From(
+                fileStream,
+                encoding: sourceTextInfo.SourceTextEncoding,
+                checksumAlgorithm: sourceTextInfo.HashAlgorithm,
+                canBeEmbedded: false
+            );
             if (!sourceText.GetChecksum().SequenceEqual(sourceTextInfo.Hash))
             {
                 throw new Exception($@"File ""{onDiskPath}"" has incorrect hash");

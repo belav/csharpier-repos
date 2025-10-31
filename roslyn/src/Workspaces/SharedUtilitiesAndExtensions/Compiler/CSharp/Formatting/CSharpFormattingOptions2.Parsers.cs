@@ -14,7 +14,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Formatting
             Func<string, int> map,
             string? noneToken = null,
             string? allToken = null,
-            int allValue = -1)
+            int allValue = -1
+        )
         {
             var flags = 0;
 
@@ -66,42 +67,82 @@ namespace Microsoft.CodeAnalysis.CSharp.Formatting
             return builder.ToString();
         }
 
-        internal static SpacePlacementWithinParentheses ParseSpacingWithinParenthesesList(string list)
-            => (SpacePlacementWithinParentheses)ParseEditorConfigFlags(list, static s => s_spacingWithinParenthesisOptionsEditorConfigMap.TryGetValue(s, out var v) ? (int)v : 0);
+        internal static SpacePlacementWithinParentheses ParseSpacingWithinParenthesesList(
+            string list
+        ) =>
+            (SpacePlacementWithinParentheses)ParseEditorConfigFlags(
+                list,
+                static s =>
+                    s_spacingWithinParenthesisOptionsEditorConfigMap.TryGetValue(s, out var v)
+                        ? (int)v
+                        : 0
+            );
 
-        internal static string ToEditorConfigValue(SpacePlacementWithinParentheses value)
-            => (value == SpacePlacementWithinParentheses.None) ? "false" :
-               ToEditorConfigFlagList((int)value, static v => s_spacingWithinParenthesisOptionsEditorConfigMap[(SpacePlacementWithinParentheses)v]);
+        internal static string ToEditorConfigValue(SpacePlacementWithinParentheses value) =>
+            (value == SpacePlacementWithinParentheses.None)
+                ? "false"
+                : ToEditorConfigFlagList(
+                    (int)value,
+                    static v =>
+                        s_spacingWithinParenthesisOptionsEditorConfigMap[
+                            (SpacePlacementWithinParentheses)v
+                        ]
+                );
 
-        internal static NewLineBeforeOpenBracePlacement ParseNewLineBeforeOpenBracePlacementList(string list)
-            => (NewLineBeforeOpenBracePlacement)ParseEditorConfigFlags(
-               list,
-               static s => s_newLineOptionsEditorConfigMap.TryGetValue(s, out var v) ? (int)v : s_legacyNewLineOptionsEditorConfigMap.TryGetValue(s, out v) ? (int)v : 0,
-               noneToken: "none",
-               allToken: "all",
-               allValue: (int)NewLineBeforeOpenBracePlacement.All);
+        internal static NewLineBeforeOpenBracePlacement ParseNewLineBeforeOpenBracePlacementList(
+            string list
+        ) =>
+            (NewLineBeforeOpenBracePlacement)ParseEditorConfigFlags(
+                list,
+                static s =>
+                    s_newLineOptionsEditorConfigMap.TryGetValue(s, out var v) ? (int)v
+                    : s_legacyNewLineOptionsEditorConfigMap.TryGetValue(s, out v) ? (int)v
+                    : 0,
+                noneToken: "none",
+                allToken: "all",
+                allValue: (int)NewLineBeforeOpenBracePlacement.All
+            );
 
-        internal static string ToEditorConfigValue(NewLineBeforeOpenBracePlacement value)
-            => value switch
+        internal static string ToEditorConfigValue(NewLineBeforeOpenBracePlacement value) =>
+            value switch
             {
                 NewLineBeforeOpenBracePlacement.None => "none",
                 NewLineBeforeOpenBracePlacement.All => "all",
-                _ => ToEditorConfigFlagList((int)value, static v => s_newLineOptionsEditorConfigMap[(NewLineBeforeOpenBracePlacement)v])
+                _ => ToEditorConfigFlagList(
+                    (int)value,
+                    static v => s_newLineOptionsEditorConfigMap[(NewLineBeforeOpenBracePlacement)v]
+                ),
             };
 
-        internal static BinaryOperatorSpacingOptions ParseEditorConfigSpacingAroundBinaryOperator(string binaryOperatorSpacingValue)
-            => s_binaryOperatorSpacingOptionsEditorConfigMap.TryGetValue(binaryOperatorSpacingValue.Trim(), out var value) ? value : BinaryOperatorSpacingOptions.Single;
+        internal static BinaryOperatorSpacingOptions ParseEditorConfigSpacingAroundBinaryOperator(
+            string binaryOperatorSpacingValue
+        ) =>
+            s_binaryOperatorSpacingOptionsEditorConfigMap.TryGetValue(
+                binaryOperatorSpacingValue.Trim(),
+                out var value
+            )
+                ? value
+                : BinaryOperatorSpacingOptions.Single;
 
-        private static string GetSpacingAroundBinaryOperatorEditorConfigString(BinaryOperatorSpacingOptions value)
-            => s_binaryOperatorSpacingOptionsEditorConfigMap.TryGetKey(value, out var key) ? key : "";
+        private static string GetSpacingAroundBinaryOperatorEditorConfigString(
+            BinaryOperatorSpacingOptions value
+        ) => s_binaryOperatorSpacingOptionsEditorConfigMap.TryGetKey(value, out var key) ? key : "";
 
-        internal static LabelPositionOptions ParseEditorConfigLabelPositioning(string labelIndentationValue)
-            => s_labelPositionOptionsEditorConfigMap.TryGetValue(labelIndentationValue.Trim(), out var value) ? value : LabelPositionOptions.NoIndent;
+        internal static LabelPositionOptions ParseEditorConfigLabelPositioning(
+            string labelIndentationValue
+        ) =>
+            s_labelPositionOptionsEditorConfigMap.TryGetValue(
+                labelIndentationValue.Trim(),
+                out var value
+            )
+                ? value
+                : LabelPositionOptions.NoIndent;
 
-        private static string GetLabelPositionOptionEditorConfigString(LabelPositionOptions value)
-            => s_labelPositionOptionsEditorConfigMap.TryGetKey(value, out var key) ? key : "";
+        private static string GetLabelPositionOptionEditorConfigString(
+            LabelPositionOptions value
+        ) => s_labelPositionOptionsEditorConfigMap.TryGetKey(value, out var key) ? key : "";
 
-        internal static bool DetermineIfIgnoreSpacesAroundVariableDeclarationIsSet(string value)
-            => value.Trim() == "ignore";
+        internal static bool DetermineIfIgnoreSpacesAroundVariableDeclarationIsSet(string value) =>
+            value.Trim() == "ignore";
     }
 }

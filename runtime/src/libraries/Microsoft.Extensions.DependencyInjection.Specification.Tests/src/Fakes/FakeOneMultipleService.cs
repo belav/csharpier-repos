@@ -3,7 +3,5 @@
 
 namespace Microsoft.Extensions.DependencyInjection.Specification.Fakes
 {
-    public class FakeOneMultipleService : IFakeMultipleService
-    {
-    }
+    public class FakeOneMultipleService : IFakeMultipleService { }
 }

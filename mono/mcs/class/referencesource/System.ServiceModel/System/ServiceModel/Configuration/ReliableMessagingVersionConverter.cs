@@ -29,7 +29,11 @@ namespace System.ServiceModel.Configuration
             return base.CanConvertTo(context, destinationType);
         }
 
-        public override object ConvertFrom(ITypeDescriptorContext context, CultureInfo culture, object value)
+        public override object ConvertFrom(
+            ITypeDescriptorContext context,
+            CultureInfo culture,
+            object value
+        )
         {
             string version = value as string;
 #pragma warning suppress 56507 // Microsoft, Really checking for null (meaning value was not a string) versus String.Empty
@@ -44,18 +48,25 @@ namespace System.ServiceModel.Configuration
                     case ConfigurationStrings.WSReliableMessagingFebruary2005:
                         return ReliableMessagingVersion.WSReliableMessagingFebruary2005;
                     default:
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(SR.GetString(SR.ConfigInvalidReliableMessagingVersionValue, version));
+                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
+                            SR.GetString(SR.ConfigInvalidReliableMessagingVersionValue, version)
+                        );
                 }
             }
             return base.ConvertFrom(context, culture, value);
         }
 
-        public override object ConvertTo(ITypeDescriptorContext context, CultureInfo culture, object value, Type destinationType)
+        public override object ConvertTo(
+            ITypeDescriptorContext context,
+            CultureInfo culture,
+            object value,
+            Type destinationType
+        )
         {
             if (typeof(string) == destinationType && value is ReliableMessagingVersion)
             {
                 ReliableMessagingVersion version = (ReliableMessagingVersion)value;
-                
+
                 if (version == ReliableMessagingVersion.Default)
                 {
                     return ConfigurationStrings.Default;
@@ -70,8 +81,15 @@ namespace System.ServiceModel.Configuration
                 }
                 else
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentOutOfRangeException("value",
-                        SR.GetString(SR.ConfigInvalidClassInstanceValue, typeof(ReliableMessagingVersion).FullName)));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new ArgumentOutOfRangeException(
+                            "value",
+                            SR.GetString(
+                                SR.ConfigInvalidClassInstanceValue,
+                                typeof(ReliableMessagingVersion).FullName
+                            )
+                        )
+                    );
                 }
             }
             return base.ConvertTo(context, culture, value, destinationType);

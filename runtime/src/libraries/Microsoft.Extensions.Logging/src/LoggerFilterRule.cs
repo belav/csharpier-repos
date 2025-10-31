@@ -17,7 +17,12 @@ namespace Microsoft.Extensions.Logging
         /// <param name="categoryName">The category name to use in this filter rule.</param>
         /// <param name="logLevel">The <see cref="LogLevel"/> to use in this filter rule.</param>
         /// <param name="filter">The filter to apply.</param>
-        public LoggerFilterRule(string? providerName, string? categoryName, LogLevel? logLevel, Func<string?, string?, LogLevel, bool>? filter)
+        public LoggerFilterRule(
+            string? providerName,
+            string? categoryName,
+            LogLevel? logLevel,
+            Func<string?, string?, LogLevel, bool>? filter
+        )
         {
             ProviderName = providerName;
             CategoryName = categoryName;

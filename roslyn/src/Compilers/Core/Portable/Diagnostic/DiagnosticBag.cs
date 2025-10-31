@@ -3,9 +3,9 @@
 // See the LICENSE file in the project root for more information.
 
 using System;
+using System.Collections;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
-using System.Collections;
 using System.Collections.Immutable;
 using System.Diagnostics;
 using System.Text;
@@ -20,7 +20,7 @@ namespace Microsoft.CodeAnalysis
     /// and also get all the diagnostics out of the bag (the bag implements
     /// IEnumerable&lt;Diagnostics&gt;. Once added, diagnostics cannot be removed, and no ordering
     /// is guaranteed.
-    /// 
+    ///
     /// It is ok to Add diagnostics to the same bag concurrently on multiple threads.
     /// It is NOT ok to Add concurrently with Clear or Free operations.
     /// </summary>
@@ -58,7 +58,7 @@ namespace Microsoft.CodeAnalysis
         /// </summary>
         /// <remarks>
         /// Resolves any lazy diagnostics in the bag.
-        /// 
+        ///
         /// Generally, this should only be called by the creator (modulo pooling) of the bag (i.e. don't use bags to communicate -
         /// if you need more info, pass more info).
         /// </remarks>
@@ -86,7 +86,7 @@ namespace Microsoft.CodeAnalysis
         /// </summary>
         /// <remarks>
         /// Does not resolve any lazy diagnostics in the bag.
-        /// 
+        ///
         /// Generally, this should only be called by the creator (modulo pooling) of the bag (i.e. don't use bags to communicate -
         /// if you need more info, pass more info).
         /// </remarks>
@@ -99,7 +99,10 @@ namespace Microsoft.CodeAnalysis
 
             foreach (Diagnostic diagnostic in Bag)
             {
-                if ((diagnostic as DiagnosticWithInfo)?.HasLazyInfo != true && diagnostic.DefaultSeverity == DiagnosticSeverity.Error)
+                if (
+                    (diagnostic as DiagnosticWithInfo)?.HasLazyInfo != true
+                    && diagnostic.DefaultSeverity == DiagnosticSeverity.Error
+                )
                 {
                     return true;
                 }
@@ -120,7 +123,8 @@ namespace Microsoft.CodeAnalysis
         /// <summary>
         /// Add multiple diagnostics to the bag.
         /// </summary>
-        public void AddRange<T>(ImmutableArray<T> diagnostics) where T : Diagnostic
+        public void AddRange<T>(ImmutableArray<T> diagnostics)
+            where T : Diagnostic
         {
             if (!diagnostics.IsDefaultOrEmpty)
             {
@@ -167,7 +171,8 @@ namespace Microsoft.CodeAnalysis
         /// Seal the bag so no further errors can be added, while clearing it and returning the old set of errors.
         /// Return the bag to the pool.
         /// </summary>
-        public ImmutableArray<TDiagnostic> ToReadOnlyAndFree<TDiagnostic>() where TDiagnostic : Diagnostic
+        public ImmutableArray<TDiagnostic> ToReadOnlyAndFree<TDiagnostic>()
+            where TDiagnostic : Diagnostic
         {
             ConcurrentQueue<Diagnostic>? oldBag = _lazyBag;
             Free();
@@ -180,7 +185,8 @@ namespace Microsoft.CodeAnalysis
             return ToReadOnlyAndFree<Diagnostic>();
         }
 
-        public ImmutableArray<TDiagnostic> ToReadOnly<TDiagnostic>() where TDiagnostic : Diagnostic
+        public ImmutableArray<TDiagnostic> ToReadOnly<TDiagnostic>()
+            where TDiagnostic : Diagnostic
         {
             ConcurrentQueue<Diagnostic>? oldBag = _lazyBag;
             return ToReadOnlyCore<TDiagnostic>(oldBag);
@@ -191,7 +197,10 @@ namespace Microsoft.CodeAnalysis
             return ToReadOnly<Diagnostic>();
         }
 
-        private static ImmutableArray<TDiagnostic> ToReadOnlyCore<TDiagnostic>(ConcurrentQueue<Diagnostic>? oldBag) where TDiagnostic : Diagnostic
+        private static ImmutableArray<TDiagnostic> ToReadOnlyCore<TDiagnostic>(
+            ConcurrentQueue<Diagnostic>? oldBag
+        )
+            where TDiagnostic : Diagnostic
         {
             if (oldBag == null)
             {
@@ -231,9 +240,7 @@ namespace Microsoft.CodeAnalysis
                 }
             }
 
-            return foundVoid
-                ? AsEnumerableFiltered()
-                : bag;
+            return foundVoid ? AsEnumerableFiltered() : bag;
         }
 
         /// <remarks>
@@ -281,7 +288,7 @@ namespace Microsoft.CodeAnalysis
         /// <summary>
         /// Get the underlying concurrent storage, creating it on demand if needed.
         /// NOTE: Concurrent Adding to the bag is supported, but concurrent Clearing is not.
-        ///       If one thread adds to the bug while another clears it, the scenario is 
+        ///       If one thread adds to the bug while another clears it, the scenario is
         ///       broken and we cannot do anything about it here.
         /// </summary>
         private ConcurrentQueue<Diagnostic> Bag
@@ -301,7 +308,7 @@ namespace Microsoft.CodeAnalysis
 
         // clears the bag.
         /// NOTE: Concurrent Adding to the bag is supported, but concurrent Clearing is not.
-        ///       If one thread adds to the bug while another clears it, the scenario is 
+        ///       If one thread adds to the bug while another clears it, the scenario is
         ///       broken and we cannot do anything about it here.
         internal void Clear()
         {
@@ -327,6 +334,7 @@ namespace Microsoft.CodeAnalysis
         }
 
         private static readonly ObjectPool<DiagnosticBag> s_poolInstance = CreatePool(128);
+
         private static ObjectPool<DiagnosticBag> CreatePool(int size)
         {
             return new ObjectPool<DiagnosticBag>(() => new DiagnosticBag(), size);

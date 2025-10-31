@@ -18,10 +18,11 @@ using Xunit;
 namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionProviders
 {
     [Trait(Traits.Feature, Traits.Features.Completion)]
-    public class XmlDocumentationCommentCompletionProviderTests : AbstractCSharpCompletionProviderTests
+    public class XmlDocumentationCommentCompletionProviderTests
+        : AbstractCSharpCompletionProviderTests
     {
-        internal override Type GetCompletionProviderType()
-            => typeof(XmlDocCommentCompletionProvider);
+        internal override Type GetCompletionProviderType() =>
+            typeof(XmlDocCommentCompletionProvider);
 
         private async Task VerifyItemsExistAsync(string markup, params string[] items)
         {
@@ -40,139 +41,262 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
         }
 
         private protected override async Task VerifyWorkerAsync(
-            string code, int position, string expectedItemOrNull, string expectedDescriptionOrNull,
-            SourceCodeKind sourceCodeKind, bool usePreviousCharAsTrigger, bool checkForAbsence,
-            int? glyph, int? matchPriority, bool? hasSuggestionItem, string displayTextSuffix,
-            string displayTextPrefix, string inlineDescription = null, bool? isComplexTextEdit = null,
-            List<CompletionFilter> matchingFilters = null, CompletionItemFlags? flags = null, CompletionOptions options = null, bool skipSpeculation = false)
+            string code,
+            int position,
+            string expectedItemOrNull,
+            string expectedDescriptionOrNull,
+            SourceCodeKind sourceCodeKind,
+            bool usePreviousCharAsTrigger,
+            bool checkForAbsence,
+            int? glyph,
+            int? matchPriority,
+            bool? hasSuggestionItem,
+            string displayTextSuffix,
+            string displayTextPrefix,
+            string inlineDescription = null,
+            bool? isComplexTextEdit = null,
+            List<CompletionFilter> matchingFilters = null,
+            CompletionItemFlags? flags = null,
+            CompletionOptions options = null,
+            bool skipSpeculation = false
+        )
         {
             // We don't need to try writing comments in from of items in doc comments.
             await VerifyAtPositionAsync(
-                code, position, usePreviousCharAsTrigger, expectedItemOrNull, expectedDescriptionOrNull, sourceCodeKind,
-                checkForAbsence, glyph, matchPriority, hasSuggestionItem, displayTextSuffix, displayTextPrefix, inlineDescription,
-                isComplexTextEdit, matchingFilters, flags, options);
+                code,
+                position,
+                usePreviousCharAsTrigger,
+                expectedItemOrNull,
+                expectedDescriptionOrNull,
+                sourceCodeKind,
+                checkForAbsence,
+                glyph,
+                matchPriority,
+                hasSuggestionItem,
+                displayTextSuffix,
+                displayTextPrefix,
+                inlineDescription,
+                isComplexTextEdit,
+                matchingFilters,
+                flags,
+                options
+            );
 
             await VerifyAtEndOfFileAsync(
-                code, position, usePreviousCharAsTrigger, expectedItemOrNull, expectedDescriptionOrNull, sourceCodeKind,
-                checkForAbsence, glyph, matchPriority, hasSuggestionItem, displayTextSuffix, displayTextPrefix, inlineDescription,
-                isComplexTextEdit, matchingFilters, flags, options);
+                code,
+                position,
+                usePreviousCharAsTrigger,
+                expectedItemOrNull,
+                expectedDescriptionOrNull,
+                sourceCodeKind,
+                checkForAbsence,
+                glyph,
+                matchPriority,
+                hasSuggestionItem,
+                displayTextSuffix,
+                displayTextPrefix,
+                inlineDescription,
+                isComplexTextEdit,
+                matchingFilters,
+                flags,
+                options
+            );
 
             // Items cannot be partially written if we're checking for their absence,
             // or if we're verifying that the list will show up (without specifying an actual item)
             if (!checkForAbsence && expectedItemOrNull != null)
             {
                 await VerifyAtPosition_ItemPartiallyWrittenAsync(
-                    code, position, usePreviousCharAsTrigger, expectedItemOrNull, expectedDescriptionOrNull,
-                    sourceCodeKind, checkForAbsence, glyph, matchPriority, hasSuggestionItem, displayTextSuffix,
-                    displayTextPrefix, inlineDescription, isComplexTextEdit, matchingFilters, flags, options);
+                    code,
+                    position,
+                    usePreviousCharAsTrigger,
+                    expectedItemOrNull,
+                    expectedDescriptionOrNull,
+                    sourceCodeKind,
+                    checkForAbsence,
+                    glyph,
+                    matchPriority,
+                    hasSuggestionItem,
+                    displayTextSuffix,
+                    displayTextPrefix,
+                    inlineDescription,
+                    isComplexTextEdit,
+                    matchingFilters,
+                    flags,
+                    options
+                );
 
                 await VerifyAtEndOfFile_ItemPartiallyWrittenAsync(
-                    code, position, usePreviousCharAsTrigger, expectedItemOrNull, expectedDescriptionOrNull,
-                    sourceCodeKind, checkForAbsence, glyph, matchPriority, hasSuggestionItem, displayTextSuffix,
-                    displayTextPrefix, inlineDescription, isComplexTextEdit, matchingFilters, flags, options);
+                    code,
+                    position,
+                    usePreviousCharAsTrigger,
+                    expectedItemOrNull,
+                    expectedDescriptionOrNull,
+                    sourceCodeKind,
+                    checkForAbsence,
+                    glyph,
+                    matchPriority,
+                    hasSuggestionItem,
+                    displayTextSuffix,
+                    displayTextPrefix,
+                    inlineDescription,
+                    isComplexTextEdit,
+                    matchingFilters,
+                    flags,
+                    options
+                );
             }
         }
 
         [Fact]
         public async Task AlwaysVisibleAtAnyLevelItems1()
         {
-            await VerifyItemsExistAsync("""
+            await VerifyItemsExistAsync(
+                """
                 public class goo
                 {
                     /// $$
                     public void bar() { }
                 }
-                """, "inheritdoc", "see", "seealso", "![CDATA[", "!--");
+                """,
+                "inheritdoc",
+                "see",
+                "seealso",
+                "![CDATA[",
+                "!--"
+            );
         }
 
         [Fact]
         public async Task AlwaysVisibleAtAnyLevelItems2()
         {
-            await VerifyItemsExistAsync("""
+            await VerifyItemsExistAsync(
+                """
                 public class goo
                 {
                     /// <summary> $$ </summary>
                     public void bar() { }
                 }
-                """, "inheritdoc", "see", "seealso", "![CDATA[", "!--");
+                """,
+                "inheritdoc",
+                "see",
+                "seealso",
+                "![CDATA[",
+                "!--"
+            );
         }
 
         [Fact]
         public async Task AlwaysVisibleNotTopLevelItems1()
         {
-            await VerifyItemsExistAsync("""
+            await VerifyItemsExistAsync(
+                """
                 public class goo
                 {
                     /// <summary> $$ </summary>
                     public void bar() { }
                 }
-                """, "c", "code", "list", "para");
+                """,
+                "c",
+                "code",
+                "list",
+                "para"
+            );
         }
 
         [Fact]
         public async Task AlwaysVisibleNotTopLevelItems2()
         {
-            await VerifyItemsAbsentAsync("""
+            await VerifyItemsAbsentAsync(
+                """
                 public class goo
                 {
                     /// $$ 
                     public void bar() { }
                 }
-                """, "c", "code", "list", "para", "paramref", "typeparamref");
+                """,
+                "c",
+                "code",
+                "list",
+                "para",
+                "paramref",
+                "typeparamref"
+            );
         }
 
         [Fact]
         public async Task AlwaysVisibleTopLevelOnlyItems1()
         {
-            await VerifyItemsExistAsync("""
+            await VerifyItemsExistAsync(
+                """
                 public class goo
                 {
                     /// $$ 
                     public void bar() { }
                 }
-                """, "exception", "include", "permission");
+                """,
+                "exception",
+                "include",
+                "permission"
+            );
         }
 
         [Fact]
         public async Task AlwaysVisibleTopLevelOnlyItems2()
         {
-            await VerifyItemsAbsentAsync("""
+            await VerifyItemsAbsentAsync(
+                """
                 public class goo
                 {
                     /// <summary> $$ </summary>
                     public void bar() { }
                 }
-                """, "exception", "include", "permission");
+                """,
+                "exception",
+                "include",
+                "permission"
+            );
         }
 
         [Fact]
         public async Task TopLevelSingleUseItems1()
         {
-            await VerifyItemsExistAsync("""
+            await VerifyItemsExistAsync(
+                """
                 public class goo
                 {
                     ///  $$
                     public void bar() { }
                 }
-                """, "example", "remarks", "summary");
+                """,
+                "example",
+                "remarks",
+                "summary"
+            );
         }
 
         [Fact]
         public async Task TopLevelSingleUseItems2()
         {
-            await VerifyItemsAbsentAsync("""
+            await VerifyItemsAbsentAsync(
+                """
                 public class goo
                 {
                     ///  <summary> $$ </summary>
                     public void bar() { }
                 }
-                """, "example", "remarks", "summary");
+                """,
+                "example",
+                "remarks",
+                "summary"
+            );
         }
 
         [Fact]
         public async Task TopLevelSingleUseItems3()
         {
-            await VerifyItemsAbsentAsync("""
+            await VerifyItemsAbsentAsync(
+                """
                 public class goo
                 {
                     ///  <summary> $$ </summary>
@@ -181,13 +305,18 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
 
                     public void bar() { }
                 }
-                """, "example", "remarks", "summary");
+                """,
+                "example",
+                "remarks",
+                "summary"
+            );
         }
 
         [Fact]
         public async Task OnlyInListItems()
         {
-            await VerifyItemsAbsentAsync("""
+            await VerifyItemsAbsentAsync(
+                """
                 public class goo
                 {
                     ///  <summary> $$ </summary>
@@ -196,52 +325,76 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
 
                     public void bar() { }
                 }
-                """, "listheader", "item", "term", "description");
+                """,
+                "listheader",
+                "item",
+                "term",
+                "description"
+            );
         }
 
         [Fact]
         public async Task OnlyInListItems2()
         {
-            await VerifyItemsAbsentAsync("""
+            await VerifyItemsAbsentAsync(
+                """
                 public class goo
                 {
                     ///   $$ 
 
                     public void bar() { }
                 }
-                """, "listheader", "item", "term", "description");
+                """,
+                "listheader",
+                "item",
+                "term",
+                "description"
+            );
         }
 
         [Fact]
         public async Task OnlyInListItems3()
         {
-            await VerifyItemsExistAsync("""
+            await VerifyItemsExistAsync(
+                """
                 public class goo
                 {
                     ///   <list>$$</list>
 
                     public void bar() { }
                 }
-                """, "listheader", "item", "term", "description");
+                """,
+                "listheader",
+                "item",
+                "term",
+                "description"
+            );
         }
 
         [Fact]
         public async Task OnlyInListItems4()
         {
-            await VerifyItemsExistAsync("""
+            await VerifyItemsExistAsync(
+                """
                 public class goo
                 {
                     ///   <list><$$</list>
 
                     public void bar() { }
                 }
-                """, "listheader", "item", "term", "description");
+                """,
+                "listheader",
+                "item",
+                "term",
+                "description"
+            );
         }
 
         [Fact]
         public async Task ListHeaderItems()
         {
-            await VerifyItemsExistAsync("""
+            await VerifyItemsExistAsync(
+                """
                 public class goo
                 {
                     ///  <summary>
@@ -252,111 +405,138 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
 
                     public void bar() { }
                 }
-                """, "term", "description");
+                """,
+                "term",
+                "description"
+            );
         }
 
         [Fact]
         public async Task VoidMethodDeclarationItems()
         {
-            await VerifyItemIsAbsentAsync("""
+            await VerifyItemIsAbsentAsync(
+                """
                 public class goo
                 {
 
                     /// $$
                     public void bar() { }
                 }
-                """, "returns");
+                """,
+                "returns"
+            );
         }
 
         [Fact]
         public async Task MethodReturns()
         {
-            await VerifyItemExistsAsync("""
+            await VerifyItemExistsAsync(
+                """
                 public class goo
                 {
 
                     /// $$
                     public int bar() { }
                 }
-                """, "returns");
+                """,
+                "returns"
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/8627")]
         public async Task ReadWritePropertyNoReturns()
         {
-            await VerifyItemIsAbsentAsync("""
+            await VerifyItemIsAbsentAsync(
+                """
                 public class goo
                 {
 
                     /// $$
                     public int bar { get; set; }
                 }
-                """, "returns");
+                """,
+                "returns"
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/8627")]
         public async Task ReadWritePropertyValue()
         {
-            await VerifyItemExistsAsync("""
+            await VerifyItemExistsAsync(
+                """
                 public class goo
                 {
 
                     /// $$
                     public int bar { get; set; }
                 }
-                """, "value");
+                """,
+                "value"
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/8627")]
         public async Task ReadOnlyPropertyNoReturns()
         {
-            await VerifyItemIsAbsentAsync("""
+            await VerifyItemIsAbsentAsync(
+                """
                 public class goo
                 {
 
                     /// $$
                     public int bar { get; }
                 }
-                """, "returns");
+                """,
+                "returns"
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/8627")]
         public async Task ReadOnlyPropertyValue()
         {
-            await VerifyItemExistsAsync("""
+            await VerifyItemExistsAsync(
+                """
                 public class goo
                 {
 
                     /// $$
                     public int bar { get; }
                 }
-                """, "value");
+                """,
+                "value"
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/8627")]
         public async Task WriteOnlyPropertyNoReturns()
         {
-            await VerifyItemIsAbsentAsync("""
+            await VerifyItemIsAbsentAsync(
+                """
                 public class goo
                 {
 
                     /// $$
                     public int bar { set; }
                 }
-                """, "returns");
+                """,
+                "returns"
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/8627")]
         public async Task WriteOnlyPropertyValue()
         {
-            await VerifyItemExistsAsync("""
+            await VerifyItemExistsAsync(
+                """
                 public class goo
                 {
 
                     /// $$
                     public int bar { set; }
                 }
-                """, "value");
+                """,
+                "value"
+            );
         }
 
         [Fact]
@@ -371,29 +551,39 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
                 }
                 """;
 
-            await VerifyItemsExistAsync(text, """
+            await VerifyItemsExistAsync(
+                text,
+                """
                 typeparam name="TBar"
-                """, """
+                """,
+                """
                 param name="green"
-                """);
-            await VerifyItemsAbsentAsync(text, """
+                """
+            );
+            await VerifyItemsAbsentAsync(
+                text,
+                """
                 typeparam name="TGoo"
-                """);
+                """
+            );
         }
 
         [Fact]
         public async Task IndexerParamTypeParam()
         {
-            await VerifyItemsExistAsync("""
+            await VerifyItemsExistAsync(
+                """
                 public class goo<T>
                 {
 
                     /// $$
                     public int this[T green] { get { } set { } }
                 }
-                """, """
+                """,
+                """
                 param name="green"
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/17872")]
@@ -424,13 +614,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
                 """,
                 """
                 paramref name="green"
-                """);
+                """
+            );
         }
 
         [Fact]
         public async Task ClassTypeParamRefName()
         {
-            await VerifyItemsExistAsync("""
+            await VerifyItemsExistAsync(
+                """
                 /// <summary>
                 /// $$
                 /// </summary>
@@ -438,23 +630,28 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
                 {
                     public int bar<T>(T green) { }
                 }
-                """, """
+                """,
+                """
                 typeparamref name="T"
-                """);
+                """
+            );
         }
 
         [Fact]
         public async Task ClassTypeParam()
         {
-            await VerifyItemsExistAsync("""
+            await VerifyItemsExistAsync(
+                """
                 /// $$
                 public class goo<T>
                 {
                     public int bar<T>(T green) { }
                 }
-                """, """
+                """,
+                """
                 typeparam name="T"
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/638802")]
@@ -467,7 +664,18 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
                 /// </summary>
                 """;
 
-            await VerifyItemsExistAsync(text, "!--", "![CDATA[", "c", "code", "inheritdoc", "list", "para", "seealso", "see");
+            await VerifyItemsExistAsync(
+                text,
+                "!--",
+                "![CDATA[",
+                "c",
+                "code",
+                "inheritdoc",
+                "list",
+                "para",
+                "seealso",
+                "see"
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/734825")]
@@ -490,12 +698,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/954679")]
         public async Task CompletionList()
         {
-            await VerifyItemExistsAsync("""
+            await VerifyItemExistsAsync(
+                """
                 /// $$
                 public class goo
                 {
                 }
-                """, "completionlist");
+                """,
+                "completionlist"
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/44423")]
@@ -503,62 +714,81 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
         public async Task ParamRefNames()
         {
             // Local functions do not support documentation comments
-            await VerifyItemIsAbsentAsync("""
+            await VerifyItemIsAbsentAsync(
+                """
                 /// <summary>
                 /// <paramref name="$$"/>
                 /// </summary>
                 static void Main(string[] args)
                 {
                 }
-                """, "args", sourceCodeKind: SourceCodeKind.Regular);
+                """,
+                "args",
+                sourceCodeKind: SourceCodeKind.Regular
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/44423")]
         [WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/775091")]
         public async Task ParamRefNames_Interactive()
         {
-            await VerifyItemExistsAsync("""
+            await VerifyItemExistsAsync(
+                """
                 /// <summary>
                 /// <paramref name="$$"/>
                 /// </summary>
                 static void Main(string[] args)
                 {
                 }
-                """, "args", sourceCodeKind: SourceCodeKind.Script);
+                """,
+                "args",
+                sourceCodeKind: SourceCodeKind.Script
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/44423")]
         public async Task ParamNamesInEmptyAttribute()
         {
             // Local functions do not support documentation comments
-            await VerifyItemIsAbsentAsync("""
+            await VerifyItemIsAbsentAsync(
+                """
                 /// <param name="$$"/>
                 static void Goo(string str)
                 {
                 }
-                """, "str", sourceCodeKind: SourceCodeKind.Regular);
+                """,
+                "str",
+                sourceCodeKind: SourceCodeKind.Regular
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/44423")]
         public async Task ParamNamesInEmptyAttribute_Interactive()
         {
-            await VerifyItemExistsAsync("""
+            await VerifyItemExistsAsync(
+                """
                 /// <param name="$$"/>
                 static void Goo(string str)
                 {
                 }
-                """, "str", sourceCodeKind: SourceCodeKind.Script);
+                """,
+                "str",
+                sourceCodeKind: SourceCodeKind.Script
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/26713")]
         public async Task DelegateParams()
         {
-            await VerifyItemExistsAsync("""
+            await VerifyItemExistsAsync(
+                """
                 /// $$
                 delegate void D(object o);
-                """, """
+                """,
+                """
                 param name="o"
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/17872")]
@@ -658,19 +888,34 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/8322")]
         public async Task PartialTagCompletion()
         {
-            await VerifyItemsExistAsync("""
+            await VerifyItemsExistAsync(
+                """
                 public class goo
                 {
                     /// <r$$
                     public void bar() { }
                 }
-                """, "!--", "![CDATA[", "completionlist", "example", "exception", "include", "inheritdoc", "permission", "remarks", "see", "seealso", "summary");
+                """,
+                "!--",
+                "![CDATA[",
+                "completionlist",
+                "example",
+                "exception",
+                "include",
+                "inheritdoc",
+                "permission",
+                "remarks",
+                "see",
+                "seealso",
+                "summary"
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/8322")]
         public async Task PartialTagCompletionNestedTags()
         {
-            await VerifyItemsExistAsync("""
+            await VerifyItemsExistAsync(
+                """
                 public class goo
                 {
                     /// <summary>
@@ -678,43 +923,60 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
                     /// </summary>
                     public void bar() { }
                 }
-                """, "!--", "![CDATA[", "c", "code", "inheritdoc", "list", "para", "see", "seealso");
+                """,
+                "!--",
+                "![CDATA[",
+                "c",
+                "code",
+                "inheritdoc",
+                "list",
+                "para",
+                "see",
+                "seealso"
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/11487")]
         public async Task TypeParamAtTopLevelOnly()
         {
-            await VerifyItemsAbsentAsync("""
+            await VerifyItemsAbsentAsync(
+                """
                 /// <summary>
                 /// $$
                 /// </summary>
                 public class Goo<T>
                 {
                 }
-                """, """
+                """,
+                """
                 typeparam name="T"
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/11487")]
         public async Task ParamAtTopLevelOnly()
         {
-            await VerifyItemsAbsentAsync("""
+            await VerifyItemsAbsentAsync(
+                """
                 /// <summary>
                 /// $$
                 /// </summary>
                 static void Goo(string str)
                 {
                 }
-                """, """
+                """,
+                """
                 param name="str"
-                """);
+                """
+            );
         }
 
         [Fact]
         public async Task ListAttributeNames()
         {
-            await VerifyItemsExistAsync("""
+            await VerifyItemsExistAsync(
+                """
                 class C
                 {
                     /// <summary>
@@ -724,13 +986,16 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
                     {
                     }
                 }
-                """, "type");
+                """,
+                "type"
+            );
         }
 
         [Fact]
         public async Task ListTypeAttributeValue()
         {
-            await VerifyItemsExistAsync("""
+            await VerifyItemsExistAsync(
+                """
                 class C
                 {
                     /// <summary>
@@ -740,14 +1005,19 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
                     {
                     }
                 }
-                """, "bullet", "number", "table");
+                """,
+                "bullet",
+                "number",
+                "table"
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/37504")]
         [WorkItem(11489, "https://github.com/dotnet/roslyn/issues/11490")]
         public async Task SeeAttributeNames()
         {
-            await VerifyItemsExistAsync("""
+            await VerifyItemsExistAsync(
+                """
                 class C
                 {
                     /// <summary>
@@ -757,13 +1027,18 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
                     {
                     }
                 }
-                """, "cref", "langword", "href");
+                """,
+                "cref",
+                "langword",
+                "href"
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/37504")]
         public async Task SeeAlsoAttributeNames()
         {
-            await VerifyItemsExistAsync("""
+            await VerifyItemsExistAsync(
+                """
                 class C
                 {
                     /// <summary>
@@ -773,13 +1048,17 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
                     {
                     }
                 }
-                """, "cref", "href");
+                """,
+                "cref",
+                "href"
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/22789")]
         public async Task LangwordCompletionInPlainText()
         {
-            await VerifyItemsExistAsync("""
+            await VerifyItemsExistAsync(
+                """
                 class C
                 {
                     /// <summary>
@@ -789,13 +1068,20 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
                     {
                     }
                 }
-                """, "null", "sealed", "true", "false", "await");
+                """,
+                "null",
+                "sealed",
+                "true",
+                "false",
+                "await"
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/22789")]
         public async Task LangwordCompletionAfterAngleBracket1()
         {
-            await VerifyItemsAbsentAsync("""
+            await VerifyItemsAbsentAsync(
+                """
                 class C
                 {
                     /// <summary>
@@ -805,13 +1091,20 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
                     {
                     }
                 }
-                """, "null", "sealed", "true", "false", "await");
+                """,
+                "null",
+                "sealed",
+                "true",
+                "false",
+                "await"
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/22789")]
         public async Task LangwordCompletionAfterAngleBracket2()
         {
-            await VerifyItemsAbsentAsync("""
+            await VerifyItemsAbsentAsync(
+                """
                 class C
                 {
                     /// <summary>
@@ -821,13 +1114,20 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
                     {
                     }
                 }
-                """, "null", "sealed", "true", "false", "await");
+                """,
+                "null",
+                "sealed",
+                "true",
+                "false",
+                "await"
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/22789")]
         public async Task LangwordCompletionAfterAngleBracket3()
         {
-            await VerifyItemsExistAsync("""
+            await VerifyItemsExistAsync(
+                """
                 class C
                 {
                     /// <summary>
@@ -837,13 +1137,20 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
                     {
                     }
                 }
-                """, "null", "sealed", "true", "false", "await");
+                """,
+                "null",
+                "sealed",
+                "true",
+                "false",
+                "await"
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/11490")]
         public async Task SeeLangwordAttributeValue()
         {
-            await VerifyItemsExistAsync("""
+            await VerifyItemsExistAsync(
+                """
                 class C
                 {
                     /// <summary>
@@ -853,13 +1160,19 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
                     {
                     }
                 }
-                """, "null", "true", "false", "await");
+                """,
+                "null",
+                "true",
+                "false",
+                "await"
+            );
         }
 
         [Fact]
         public async Task InheritdocAttributes1()
         {
-            await VerifyItemsExistAsync("""
+            await VerifyItemsExistAsync(
+                """
                 class C
                 {
                     /// <summary>
@@ -869,13 +1182,17 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
                     {
                     }
                 }
-                """, "cref", "path");
+                """,
+                "cref",
+                "path"
+            );
         }
 
         [Fact]
         public async Task InheritdocAttributes2()
         {
-            await VerifyItemsExistAsync("""
+            await VerifyItemsExistAsync(
+                """
                 class C
                 {
                     /// <inheritdoc $$/>
@@ -883,7 +1200,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
                     {
                     }
                 }
-                """, "cref", "path");
+                """,
+                "cref",
+                "path"
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/11489")]
@@ -1057,101 +1377,129 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/52738")]
         public async Task RecordParam()
         {
-            await VerifyItemsExistAsync("""
+            await VerifyItemsExistAsync(
+                """
                 /// $$
                 public record Goo<T>(string MyParameter);
-                """, """
+                """,
+                """
                 param name="MyParameter"
-                """, """
+                """,
+                """
                 typeparam name="T"
-                """);
+                """
+            );
         }
 
         [Fact]
         public async Task PrimaryConstructor_Class_Param()
         {
-            await VerifyItemsExistAsync("""
+            await VerifyItemsExistAsync(
+                """
                 /// $$
                 public class Goo<T>(string MyParameter);
-                """, """
+                """,
+                """
                 param name="MyParameter"
-                """, """
+                """,
+                """
                 typeparam name="T"
-                """);
+                """
+            );
         }
 
         [Fact]
         public async Task PrimaryConstructor_Struct_Param()
         {
-            await VerifyItemsExistAsync("""
+            await VerifyItemsExistAsync(
+                """
                 /// $$
                 public struct Goo<T>(string MyParameter);
-                """, """
+                """,
+                """
                 param name="MyParameter"
-                """, """
+                """,
+                """
                 typeparam name="T"
-                """);
+                """
+            );
         }
 
         [Fact]
         [WorkItem("https://github.com/dotnet/roslyn/issues/69293")]
         public async Task DelegateParamRef()
         {
-            await VerifyItemsExistAsync("""
+            await VerifyItemsExistAsync(
+                """
                 /// <summary>
                 /// $$
                 /// <summary>
                 public delegate void Goo<T>(string myParameter);
-                """, """
+                """,
+                """
                 paramref name="myParameter"
-                """, """
+                """,
+                """
                 typeparamref name="T"
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/52738")]
         public async Task RecordParamRef()
         {
-            await VerifyItemsExistAsync("""
+            await VerifyItemsExistAsync(
+                """
                 /// <summary>
                 /// $$
                 /// <summary>
                 public record Goo<T>(string MyParameter);
-                """, """
+                """,
+                """
                 paramref name="MyParameter"
-                """, """
+                """,
+                """
                 typeparamref name="T"
-                """);
+                """
+            );
         }
 
         [Fact]
         public async Task PrimaryConstructor_Class_ParamRef()
         {
-            await VerifyItemsExistAsync("""
+            await VerifyItemsExistAsync(
+                """
                 /// <summary>
                 /// $$
                 /// <summary>
                 public class Goo<T>(string MyParameter);
-                """, """
+                """,
+                """
                 paramref name="MyParameter"
-                """, """
+                """,
+                """
                 typeparamref name="T"
-                """);
+                """
+            );
         }
 
         [Fact]
         public async Task PrimaryConstructor_Struct_ParamRef()
         {
-            await VerifyItemsExistAsync("""
+            await VerifyItemsExistAsync(
+                """
                 /// <summary>
                 /// $$
                 /// <summary>
                 public struct Goo<T>(string MyParameter);
-                """, """
+                """,
+                """
                 paramref name="MyParameter"
-                """, """
+                """,
+                """
                 typeparamref name="T"
-                """);
+                """
+            );
         }
     }
 }

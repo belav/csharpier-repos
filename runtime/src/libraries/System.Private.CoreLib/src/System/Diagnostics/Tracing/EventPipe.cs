@@ -45,7 +45,8 @@ namespace System.Diagnostics.Tracing
             string providerName,
             ulong keywords,
             uint loggingLevel,
-            string? filterData)
+            string? filterData
+        )
         {
             ArgumentException.ThrowIfNullOrEmpty(providerName);
             ArgumentOutOfRangeException.ThrowIfGreaterThan(loggingLevel, 5u); // 5 == Verbose, the highest value in EventPipeLoggingLevel.
@@ -76,12 +77,10 @@ namespace System.Diagnostics.Tracing
     internal enum EventPipeSerializationFormat
     {
         NetPerf,
-        NetTrace
+        NetTrace,
     }
 
-    internal sealed class EventPipeWaitHandle : WaitHandle
-    {
-    }
+    internal sealed class EventPipeWaitHandle : WaitHandle { }
 
     internal static partial class EventPipeInternal
     {
@@ -92,7 +91,10 @@ namespace System.Diagnostics.Tracing
             private uint m_loggingLevel;
             private char* m_pFilterData;
 
-            internal static void MarshalToNative(EventPipeProviderConfiguration managed, ref EventPipeProviderConfigurationNative native)
+            internal static void MarshalToNative(
+                EventPipeProviderConfiguration managed,
+                ref EventPipeProviderConfigurationNative native
+            )
             {
                 native.m_pProviderName = (char*)Marshal.StringToCoTaskMemUni(managed.ProviderName);
                 native.m_keywords = managed.Keywords;
@@ -117,22 +119,41 @@ namespace System.Diagnostics.Tracing
             string? outputFile,
             EventPipeSerializationFormat format,
             uint circularBufferSizeInMB,
-            EventPipeProviderConfiguration[] providers)
+            EventPipeProviderConfiguration[] providers
+        )
         {
-            Span<EventPipeProviderConfigurationNative> providersNative = new Span<EventPipeProviderConfigurationNative>((void*)Marshal.AllocCoTaskMem(sizeof(EventPipeProviderConfigurationNative) * providers.Length), providers.Length);
+            Span<EventPipeProviderConfigurationNative> providersNative =
+                new Span<EventPipeProviderConfigurationNative>(
+                    (void*)
+                        Marshal.AllocCoTaskMem(
+                            sizeof(EventPipeProviderConfigurationNative) * providers.Length
+                        ),
+                    providers.Length
+                );
             providersNative.Clear();
 
             try
             {
                 for (int i = 0; i < providers.Length; i++)
                 {
-                    EventPipeProviderConfigurationNative.MarshalToNative(providers[i], ref providersNative[i]);
+                    EventPipeProviderConfigurationNative.MarshalToNative(
+                        providers[i],
+                        ref providersNative[i]
+                    );
                 }
 
                 fixed (char* outputFilePath = outputFile)
-                fixed (EventPipeProviderConfigurationNative* providersNativePointer = providersNative)
+                fixed (
+                    EventPipeProviderConfigurationNative* providersNativePointer = providersNative
+                )
                 {
-                    return Enable(outputFilePath, format, circularBufferSizeInMB, providersNativePointer, (uint)providersNative.Length);
+                    return Enable(
+                        outputFilePath,
+                        format,
+                        circularBufferSizeInMB,
+                        providersNativePointer,
+                        (uint)providersNative.Length
+                    );
                 }
             }
             finally
@@ -142,7 +163,9 @@ namespace System.Diagnostics.Tracing
                     providersNative[i].Release();
                 }
 
-                fixed (EventPipeProviderConfigurationNative* providersNativePointer = providersNative)
+                fixed (
+                    EventPipeProviderConfigurationNative* providersNativePointer = providersNative
+                )
                 {
                     Marshal.FreeCoTaskMem((IntPtr)providersNativePointer);
                 }

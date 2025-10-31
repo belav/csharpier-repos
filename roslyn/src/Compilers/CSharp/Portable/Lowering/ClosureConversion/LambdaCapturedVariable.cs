@@ -5,10 +5,10 @@
 #nullable disable
 
 using System;
+using System.Collections.Immutable;
 using System.Diagnostics;
 using Microsoft.CodeAnalysis.CSharp.Symbols;
 using Roslyn.Utilities;
-using System.Collections.Immutable;
 
 namespace Microsoft.CodeAnalysis.CSharp
 {
@@ -20,28 +20,38 @@ namespace Microsoft.CodeAnalysis.CSharp
         private readonly TypeWithAnnotations _type;
         private readonly bool _isThis;
 
-        private LambdaCapturedVariable(SynthesizedContainer frame, TypeWithAnnotations type, string fieldName, bool isThisParameter)
-            : base(frame,
-                   fieldName,
-                   isPublic: true,
-                   isReadOnly: false,
-                   isStatic: false)
+        private LambdaCapturedVariable(
+            SynthesizedContainer frame,
+            TypeWithAnnotations type,
+            string fieldName,
+            bool isThisParameter
+        )
+            : base(frame, fieldName, isPublic: true, isReadOnly: false, isStatic: false)
         {
             Debug.Assert(type.HasType);
 
-            // lifted fields do not need to have the CompilerGeneratedAttribute attached to it, the closure is already 
+            // lifted fields do not need to have the CompilerGeneratedAttribute attached to it, the closure is already
             // marked as being compiler generated.
             _type = type;
             _isThis = isThisParameter;
         }
 
-        public static LambdaCapturedVariable Create(SynthesizedClosureEnvironment frame, Symbol captured, ref int uniqueId)
+        public static LambdaCapturedVariable Create(
+            SynthesizedClosureEnvironment frame,
+            Symbol captured,
+            ref int uniqueId
+        )
         {
             Debug.Assert(captured is LocalSymbol || captured is ParameterSymbol);
 
             string fieldName = GetCapturedVariableFieldName(captured, ref uniqueId);
             TypeSymbol type = GetCapturedVariableFieldType(frame, captured);
-            return new LambdaCapturedVariable(frame, TypeWithAnnotations.Create(type), fieldName, IsThis(captured));
+            return new LambdaCapturedVariable(
+                frame,
+                TypeWithAnnotations.Create(type),
+                fieldName,
+                IsThis(captured)
+            );
         }
 
         private static bool IsThis(Symbol captured)
@@ -66,23 +76,36 @@ namespace Microsoft.CodeAnalysis.CSharp
                     case SynthesizedLocalKind.ExceptionFilterAwaitHoistedExceptionLocal:
                     case SynthesizedLocalKind.TryAwaitPendingException:
                     case SynthesizedLocalKind.TryAwaitPendingCaughtException:
-                        return GeneratedNames.MakeHoistedLocalFieldName(local.SynthesizedKind, uniqueId++);
+                        return GeneratedNames.MakeHoistedLocalFieldName(
+                            local.SynthesizedKind,
+                            uniqueId++
+                        );
                     case SynthesizedLocalKind.InstrumentationPayload:
-                        return GeneratedNames.MakeSynthesizedInstrumentationPayloadLocalFieldName(uniqueId++);
+                        return GeneratedNames.MakeSynthesizedInstrumentationPayloadLocalFieldName(
+                            uniqueId++
+                        );
                 }
 
                 // should never be captured:
                 Debug.Assert(local.SynthesizedKind != SynthesizedLocalKind.LocalStoreTracker);
 
-                if (local.SynthesizedKind == SynthesizedLocalKind.UserDefined &&
-                    (local.ScopeDesignatorOpt?.Kind() == SyntaxKind.SwitchSection ||
-                     local.ScopeDesignatorOpt?.Kind() == SyntaxKind.SwitchExpressionArm))
+                if (
+                    local.SynthesizedKind == SynthesizedLocalKind.UserDefined
+                    && (
+                        local.ScopeDesignatorOpt?.Kind() == SyntaxKind.SwitchSection
+                        || local.ScopeDesignatorOpt?.Kind() == SyntaxKind.SwitchExpressionArm
+                    )
+                )
                 {
                     // The programmer can use the same identifier for pattern variables in different
                     // sections of a switch statement, but they are all hoisted into
                     // the same frame for the enclosing switch statement and must be given
                     // unique field names.
-                    return GeneratedNames.MakeHoistedLocalFieldName(local.SynthesizedKind, uniqueId++, local.Name);
+                    return GeneratedNames.MakeHoistedLocalFieldName(
+                        local.SynthesizedKind,
+                        uniqueId++,
+                        local.Name
+                    );
                 }
             }
 
@@ -90,7 +113,10 @@ namespace Microsoft.CodeAnalysis.CSharp
             return variable.Name;
         }
 
-        private static TypeSymbol GetCapturedVariableFieldType(SynthesizedContainer frame, Symbol variable)
+        private static TypeSymbol GetCapturedVariableFieldType(
+            SynthesizedContainer frame,
+            Symbol variable
+        )
         {
             var local = variable as LocalSymbol;
             if ((object)local != null)
@@ -110,12 +136,21 @@ namespace Microsoft.CodeAnalysis.CSharp
                 }
             }
 
-            return frame.TypeMap.SubstituteType(((object)local != null ? local.TypeWithAnnotations : ((ParameterSymbol)variable).TypeWithAnnotations).Type).Type;
+            return frame
+                .TypeMap.SubstituteType(
+                    (
+                        (object)local != null
+                            ? local.TypeWithAnnotations
+                            : ((ParameterSymbol)variable).TypeWithAnnotations
+                    ).Type
+                )
+                .Type;
         }
 
         public override RefKind RefKind => RefKind.None;
 
-        public override ImmutableArray<CustomModifier> RefCustomModifiers => ImmutableArray<CustomModifier>.Empty;
+        public override ImmutableArray<CustomModifier> RefCustomModifiers =>
+            ImmutableArray<CustomModifier>.Empty;
 
         internal override TypeWithAnnotations GetFieldType(ConsList<FieldSymbol> fieldsBeingBound)
         {
@@ -124,18 +159,12 @@ namespace Microsoft.CodeAnalysis.CSharp
 
         internal override bool IsCapturedFrame
         {
-            get
-            {
-                return _isThis;
-            }
+            get { return _isThis; }
         }
 
         internal override bool SuppressDynamicAttribute
         {
-            get
-            {
-                return false;
-            }
+            get { return false; }
         }
     }
 }

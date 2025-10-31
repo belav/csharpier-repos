@@ -26,86 +26,100 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
-using NUnit.Framework;
 using System;
-using System.Text;
-using System.IO;
 using System.Data;
+using System.IO;
+using System.Text;
 using MonoTests.System.Data.Utils;
+using NUnit.Framework;
 
 namespace MonoTests.System.Data
 {
-	[TestFixture] public class ReadOnlyExceptionTest
-	{
-		[Test] public void Generate()
-		{
-			Exception tmpEx = new Exception() ;
+    [TestFixture]
+    public class ReadOnlyExceptionTest
+    {
+        [Test]
+        public void Generate()
+        {
+            Exception tmpEx = new Exception();
 
-			DataTable tbl = DataProvider.CreateParentDataTable();
-			tbl.Columns[0].ReadOnly = true;
+            DataTable tbl = DataProvider.CreateParentDataTable();
+            tbl.Columns[0].ReadOnly = true;
 
-			//chaeck for int column
-			// ReadOnlyException - EndEdit
-			//tbl.Rows[0].BeginEdit();   // this throw an exception but according to MSDN it shouldn't !!!
-			//tbl.Rows[0][0] = 99 ;
-			try 
-			{
-				tbl.Rows[0][0] = 99 ;
-				//tbl.Rows[0].EndEdit();
-				Assert.Fail("ROE1: Rows Indexer failed to raise ReadOnlyException.");
-			}
-			catch (ReadOnlyException) {}
-			catch (AssertionException) { throw; }
-			catch (Exception exc)
-			{
-				Assert.Fail("ROE2: Rows Indexer wrong exception type. Got: " + exc);
-			}
+            //chaeck for int column
+            // ReadOnlyException - EndEdit
+            //tbl.Rows[0].BeginEdit();   // this throw an exception but according to MSDN it shouldn't !!!
+            //tbl.Rows[0][0] = 99 ;
+            try
+            {
+                tbl.Rows[0][0] = 99;
+                //tbl.Rows[0].EndEdit();
+                Assert.Fail("ROE1: Rows Indexer failed to raise ReadOnlyException.");
+            }
+            catch (ReadOnlyException) { }
+            catch (AssertionException)
+            {
+                throw;
+            }
+            catch (Exception exc)
+            {
+                Assert.Fail("ROE2: Rows Indexer wrong exception type. Got: " + exc);
+            }
 
-			// ReadOnlyException - ItemArray
-			try 
-			{
-				tbl.Rows[0].ItemArray = new object[] {99,"value","value"};
-				Assert.Fail("ROE3: Rows[0].ItemArray failed to raise ReadOnlyException.");
-			}
-			catch (ReadOnlyException) {}
-			catch (AssertionException) { throw; }
-			catch (Exception exc)
-			{
-				Assert.Fail("ROE4: Rows[0].ItemArray wrong exception type. Got: " + exc);
-			}
+            // ReadOnlyException - ItemArray
+            try
+            {
+                tbl.Rows[0].ItemArray = new object[] { 99, "value", "value" };
+                Assert.Fail("ROE3: Rows[0].ItemArray failed to raise ReadOnlyException.");
+            }
+            catch (ReadOnlyException) { }
+            catch (AssertionException)
+            {
+                throw;
+            }
+            catch (Exception exc)
+            {
+                Assert.Fail("ROE4: Rows[0].ItemArray wrong exception type. Got: " + exc);
+            }
 
-			//chaeck for string column
-			tbl.Columns[0].ReadOnly = false;
-			tbl.Columns[1].ReadOnly = true;
+            //chaeck for string column
+            tbl.Columns[0].ReadOnly = false;
+            tbl.Columns[1].ReadOnly = true;
 
-			// ReadOnlyException - EndEdit
-			//tbl.Rows[0].BeginEdit();   // this throw an exception but according to MSDN it shouldn't !!!
-			//tbl.Rows[0][0] = 99 ;
-			try 
-			{
-				tbl.Rows[0][1] = "NewValue" ;
-				//tbl.Rows[0].EndEdit();
-				Assert.Fail("ROE5: Rows Indexer failed to raise ReadOnlyException.");
-			}
-			catch (ReadOnlyException) {}
-			catch (AssertionException) { throw; }
-			catch (Exception exc)
-			{
-				Assert.Fail("ROE6: Rows Indexer wrong exception type. Got: " + exc);
-			}
+            // ReadOnlyException - EndEdit
+            //tbl.Rows[0].BeginEdit();   // this throw an exception but according to MSDN it shouldn't !!!
+            //tbl.Rows[0][0] = 99 ;
+            try
+            {
+                tbl.Rows[0][1] = "NewValue";
+                //tbl.Rows[0].EndEdit();
+                Assert.Fail("ROE5: Rows Indexer failed to raise ReadOnlyException.");
+            }
+            catch (ReadOnlyException) { }
+            catch (AssertionException)
+            {
+                throw;
+            }
+            catch (Exception exc)
+            {
+                Assert.Fail("ROE6: Rows Indexer wrong exception type. Got: " + exc);
+            }
 
-			// ReadOnlyException - ItemArray
-			try 
-			{
-				tbl.Rows[0].ItemArray = new object[] {99,"value","value"};
-				Assert.Fail("ROE7: Rows[0].ItemArray failed to raise ReadOnlyException.");
-			}
-			catch (ReadOnlyException) {}
-			catch (AssertionException) { throw; }
-			catch (Exception exc)
-			{
-				Assert.Fail("ROE8: Rows[0].ItemArray wrong exception type. Got: " + exc);
-			}
-		}
-	}
+            // ReadOnlyException - ItemArray
+            try
+            {
+                tbl.Rows[0].ItemArray = new object[] { 99, "value", "value" };
+                Assert.Fail("ROE7: Rows[0].ItemArray failed to raise ReadOnlyException.");
+            }
+            catch (ReadOnlyException) { }
+            catch (AssertionException)
+            {
+                throw;
+            }
+            catch (Exception exc)
+            {
+                Assert.Fail("ROE8: Rows[0].ItemArray wrong exception type. Got: " + exc);
+            }
+        }
+    }
 }

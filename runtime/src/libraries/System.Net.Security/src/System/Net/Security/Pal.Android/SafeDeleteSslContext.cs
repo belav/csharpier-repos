@@ -9,7 +9,6 @@ using System.Security.Authentication;
 using System.Security.Cryptography;
 using System.Security.Cryptography.X509Certificates;
 using Microsoft.Win32.SafeHandles;
-
 using PAL_KeyAlgorithm = Interop.AndroidCrypto.PAL_KeyAlgorithm;
 using PAL_SSLStreamStatus = Interop.AndroidCrypto.PAL_SSLStreamStatus;
 
@@ -27,7 +26,9 @@ namespace System.Net
             SslProtocols.Tls12,
             SslProtocols.Tls13,
         };
-        private static readonly Lazy<SslProtocols> s_supportedSslProtocols = new Lazy<SslProtocols>(Interop.AndroidCrypto.SSLGetSupportedProtocols);
+        private static readonly Lazy<SslProtocols> s_supportedSslProtocols = new Lazy<SslProtocols>(
+            Interop.AndroidCrypto.SSLGetSupportedProtocols
+        );
 
         private readonly SafeSslHandle _sslContext;
 
@@ -41,7 +42,8 @@ namespace System.Net
         public SafeDeleteSslContext(SslAuthenticationOptions authOptions)
             : base(IntPtr.Zero)
         {
-            SslStreamProxy = authOptions.SslStreamProxy
+            SslStreamProxy =
+                authOptions.SslStreamProxy
                 ?? throw new ArgumentNullException(nameof(authOptions.SslStreamProxy));
 
             try
@@ -77,7 +79,8 @@ namespace System.Net
         [UnmanagedCallersOnly]
         private static unsafe void WriteToConnection(IntPtr connection, byte* data, int dataLength)
         {
-            SafeDeleteSslContext? context = (SafeDeleteSslContext?)GCHandle.FromIntPtr(connection).Target;
+            SafeDeleteSslContext? context = (SafeDeleteSslContext?)
+                GCHandle.FromIntPtr(connection).Target;
             Debug.Assert(context != null);
 
             var inputBuffer = new ReadOnlySpan<byte>(data, dataLength);
@@ -88,9 +91,14 @@ namespace System.Net
         }
 
         [UnmanagedCallersOnly]
-        private static unsafe PAL_SSLStreamStatus ReadFromConnection(IntPtr connection, byte* data, int* dataLength)
+        private static unsafe PAL_SSLStreamStatus ReadFromConnection(
+            IntPtr connection,
+            byte* data,
+            int* dataLength
+        )
         {
-            SafeDeleteSslContext? context = (SafeDeleteSslContext?)GCHandle.FromIntPtr(connection).Target;
+            SafeDeleteSslContext? context = (SafeDeleteSslContext?)
+                GCHandle.FromIntPtr(connection).Target;
             Debug.Assert(context != null);
 
             int toRead = *dataLength;
@@ -149,7 +157,10 @@ namespace System.Net
             return limit;
         }
 
-        private static SafeSslHandle CreateSslContext(SslStream.JavaProxy sslStreamProxy, SslAuthenticationOptions authOptions)
+        private static SafeSslHandle CreateSslContext(
+            SslStream.JavaProxy sslStreamProxy,
+            SslAuthenticationOptions authOptions
+        )
         {
             if (authOptions.CertificateContext == null)
             {
@@ -173,10 +184,18 @@ namespace System.Net
                 ptrs[i + 1] = context.IntermediateCertificates[i].Handle;
             }
 
-            return Interop.AndroidCrypto.SSLStreamCreateWithCertificates(sslStreamProxy, keyBytes, algorithm, ptrs);
+            return Interop.AndroidCrypto.SSLStreamCreateWithCertificates(
+                sslStreamProxy,
+                keyBytes,
+                algorithm,
+                ptrs
+            );
         }
 
-        private static AsymmetricAlgorithm GetPrivateKeyAlgorithm(X509Certificate2 cert, out PAL_KeyAlgorithm algorithm)
+        private static AsymmetricAlgorithm GetPrivateKeyAlgorithm(
+            X509Certificate2 cert,
+            out PAL_KeyAlgorithm algorithm
+        )
         {
             AsymmetricAlgorithm? key = cert.GetRSAPrivateKey();
             if (key != null)
@@ -201,7 +220,8 @@ namespace System.Net
 
         private unsafe void InitializeSslContext(
             SafeSslHandle handle,
-            SslAuthenticationOptions authOptions)
+            SslAuthenticationOptions authOptions
+        )
         {
             switch (authOptions.EncryptionPolicy)
             {
@@ -211,7 +231,12 @@ namespace System.Net
                     break;
 #pragma warning restore SYSLIB0040
                 default:
-                    throw new PlatformNotSupportedException(SR.Format(SR.net_encryptionpolicy_notsupported, authOptions.EncryptionPolicy));
+                    throw new PlatformNotSupportedException(
+                        SR.Format(
+                            SR.net_encryptionpolicy_notsupported,
+                            authOptions.EncryptionPolicy
+                        )
+                    );
             }
 
             bool isServer = authOptions.IsServer;
@@ -224,27 +249,57 @@ namespace System.Net
 
             // Make sure the class instance is associated to the session and is provided
             // in the Read/Write callback connection parameter
-            IntPtr managedContextHandle = GCHandle.ToIntPtr(GCHandle.Alloc(this, GCHandleType.Weak));
-            string? peerHost = !isServer && !string.IsNullOrEmpty(authOptions.TargetHost) ? authOptions.TargetHost : null;
-            Interop.AndroidCrypto.SSLStreamInitialize(handle, isServer, managedContextHandle, &ReadFromConnection, &WriteToConnection, InitialBufferSize, peerHost);
+            IntPtr managedContextHandle = GCHandle.ToIntPtr(
+                GCHandle.Alloc(this, GCHandleType.Weak)
+            );
+            string? peerHost =
+                !isServer && !string.IsNullOrEmpty(authOptions.TargetHost)
+                    ? authOptions.TargetHost
+                    : null;
+            Interop.AndroidCrypto.SSLStreamInitialize(
+                handle,
+                isServer,
+                managedContextHandle,
+                &ReadFromConnection,
+                &WriteToConnection,
+                InitialBufferSize,
+                peerHost
+            );
 
             if (authOptions.EnabledSslProtocols != SslProtocols.None)
             {
-                SslProtocols protocolsToEnable = authOptions.EnabledSslProtocols & s_supportedSslProtocols.Value;
+                SslProtocols protocolsToEnable =
+                    authOptions.EnabledSslProtocols & s_supportedSslProtocols.Value;
                 if (protocolsToEnable == 0)
                 {
-                    throw new PlatformNotSupportedException(SR.Format(SR.net_security_sslprotocol_notsupported, authOptions.EnabledSslProtocols));
+                    throw new PlatformNotSupportedException(
+                        SR.Format(
+                            SR.net_security_sslprotocol_notsupported,
+                            authOptions.EnabledSslProtocols
+                        )
+                    );
                 }
 
-                (int minIndex, int maxIndex) = protocolsToEnable.ValidateContiguous(s_orderedSslProtocols);
-                Interop.AndroidCrypto.SSLStreamSetEnabledProtocols(handle, s_orderedSslProtocols.AsSpan(minIndex, maxIndex - minIndex + 1));
+                (int minIndex, int maxIndex) = protocolsToEnable.ValidateContiguous(
+                    s_orderedSslProtocols
+                );
+                Interop.AndroidCrypto.SSLStreamSetEnabledProtocols(
+                    handle,
+                    s_orderedSslProtocols.AsSpan(minIndex, maxIndex - minIndex + 1)
+                );
             }
 
-            if (authOptions.ApplicationProtocols != null && authOptions.ApplicationProtocols.Count != 0
-                && Interop.AndroidCrypto.SSLSupportsApplicationProtocolsConfiguration())
+            if (
+                authOptions.ApplicationProtocols != null
+                && authOptions.ApplicationProtocols.Count != 0
+                && Interop.AndroidCrypto.SSLSupportsApplicationProtocolsConfiguration()
+            )
             {
                 // Set application protocols if the platform supports it. Otherwise, we will silently ignore the option.
-                Interop.AndroidCrypto.SSLStreamSetApplicationProtocols(handle, authOptions.ApplicationProtocols);
+                Interop.AndroidCrypto.SSLStreamSetApplicationProtocols(
+                    handle,
+                    authOptions.ApplicationProtocols
+                );
             }
 
             if (isServer && authOptions.RemoteCertRequired)
@@ -252,7 +307,11 @@ namespace System.Net
                 Interop.AndroidCrypto.SSLStreamRequestClientAuthentication(handle);
             }
 
-            if (!isServer && !string.IsNullOrEmpty(authOptions.TargetHost) && !TargetHostNameHelper.IsValidAddress(authOptions.TargetHost))
+            if (
+                !isServer
+                && !string.IsNullOrEmpty(authOptions.TargetHost)
+                && !TargetHostNameHelper.IsValidAddress(authOptions.TargetHost)
+            )
             {
                 Interop.AndroidCrypto.SSLStreamSetTargetHost(handle, authOptions.TargetHost);
             }

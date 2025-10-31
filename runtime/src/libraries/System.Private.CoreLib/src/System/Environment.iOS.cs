@@ -18,11 +18,18 @@ namespace System
 
         private static Dictionary<SpecialFolder, string>? s_specialFolders;
 
-        private static string GetFolderPathCore(SpecialFolder folder, SpecialFolderOption _ /*option*/)
+        private static string GetFolderPathCore(
+            SpecialFolder folder,
+            SpecialFolderOption _ /*option*/
+        )
         {
             if (s_specialFolders == null)
             {
-                Interlocked.CompareExchange(ref s_specialFolders, new Dictionary<SpecialFolder, string>(), null);
+                Interlocked.CompareExchange(
+                    ref s_specialFolders,
+                    new Dictionary<SpecialFolder, string>(),
+                    null
+                );
             }
 
             string? path;
@@ -55,19 +62,31 @@ namespace System
 
                 case SpecialFolder.Desktop:
                 case SpecialFolder.DesktopDirectory:
-                    return Path.Combine(GetFolderPathCore(SpecialFolder.Personal, SpecialFolderOption.None), "Desktop");
+                    return Path.Combine(
+                        GetFolderPathCore(SpecialFolder.Personal, SpecialFolderOption.None),
+                        "Desktop"
+                    );
 
                 case SpecialFolder.MyMusic:
-                    return Path.Combine(GetFolderPathCore(SpecialFolder.Personal, SpecialFolderOption.None), "Music");
+                    return Path.Combine(
+                        GetFolderPathCore(SpecialFolder.Personal, SpecialFolderOption.None),
+                        "Music"
+                    );
 
                 case SpecialFolder.MyPictures:
-                    return Path.Combine(GetFolderPathCore(SpecialFolder.Personal, SpecialFolderOption.None), "Pictures");
+                    return Path.Combine(
+                        GetFolderPathCore(SpecialFolder.Personal, SpecialFolderOption.None),
+                        "Pictures"
+                    );
 
                 case SpecialFolder.Templates:
                     return CombineDocumentDirectory("Templates");
 
                 case SpecialFolder.MyVideos:
-                    return Path.Combine(GetFolderPathCore(SpecialFolder.Personal, SpecialFolderOption.None), "Videos");
+                    return Path.Combine(
+                        GetFolderPathCore(SpecialFolder.Personal, SpecialFolderOption.None),
+                        "Videos"
+                    );
 
                 case SpecialFolder.CommonTemplates:
                     return "/usr/share/templates";
@@ -97,15 +116,16 @@ namespace System
             static string CombineSearchPath(NSSearchPathDirectory searchPath, string subdirectory)
             {
                 string? path = Interop.Sys.SearchPath(searchPath);
-                return path != null ?
-                    Path.Combine(path, subdirectory) :
-                    string.Empty;
+                return path != null ? Path.Combine(path, subdirectory) : string.Empty;
             }
 
             static string CombineDocumentDirectory(string subdirectory)
             {
 #if TARGET_TVOS
-                string? path = CombineSearchPath(NSSearchPathDirectory.NSLibraryDirectory, Path.Combine("Caches", "Documents"));
+                string? path = CombineSearchPath(
+                    NSSearchPathDirectory.NSLibraryDirectory,
+                    Path.Combine("Caches", "Documents")
+                );
                 // Special version of CombineSearchPath which creates the path if needed.
                 // This isn't needed for "real" search paths which always exist, but on tvOS
                 // the base path is really a subdirectory we define rather than an OS directory.
@@ -115,7 +135,10 @@ namespace System
                     Directory.CreateDirectory(path);
                 path = Path.Combine(path, subdirectory);
 #else
-                string? path = CombineSearchPath(NSSearchPathDirectory.NSDocumentDirectory, subdirectory);
+                string? path = CombineSearchPath(
+                    NSSearchPathDirectory.NSDocumentDirectory,
+                    subdirectory
+                );
 #endif
                 return path;
             }

@@ -7,8 +7,8 @@
 using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Diagnostics.CodeAnalysis;
-using Microsoft.CodeAnalysis.PooledObjects;
 using Microsoft.CodeAnalysis;
+using Microsoft.CodeAnalysis.PooledObjects;
 using Microsoft.CodeAnalysis.Shared.Extensions;
 using Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel.Collections;
 using Microsoft.VisualStudio.LanguageServices.Implementation.Utilities;
@@ -17,18 +17,20 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel.Exter
 {
     public abstract class AbstractExternalCodeType : AbstractExternalCodeElement, EnvDTE.CodeType
     {
-        internal AbstractExternalCodeType(CodeModelState state, ProjectId projectId, ITypeSymbol symbol)
-            : base(state, projectId, symbol)
-        {
-        }
+        internal AbstractExternalCodeType(
+            CodeModelState state,
+            ProjectId projectId,
+            ITypeSymbol symbol
+        )
+            : base(state, projectId, symbol) { }
 
         protected internal ITypeSymbol TypeSymbol
         {
             get { return (ITypeSymbol)LookupSymbol(); }
         }
 
-        protected override object GetExtenderNames()
-            => CodeModelService.GetExternalTypeExtenderNames();
+        protected override object GetExtenderNames() =>
+            CodeModelService.GetExternalTypeExtenderNames();
 
         protected override object GetExtender(string name)
         {
@@ -45,7 +47,10 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel.Exter
             }
 
             var compilation = GetCompilation();
-            if (compilation.GetMetadataReference(assembly) is not PortableExecutableReference metadataReference)
+            if (
+                compilation.GetMetadataReference(assembly)
+                is not PortableExecutableReference metadataReference
+            )
             {
                 return string.Empty;
             }
@@ -69,8 +74,12 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel.Exter
                     builder.Add(typeSymbol.BaseType);
                 }
 
-                return ExternalTypeCollection.Create(this.State, this, this.ProjectId,
-                    builder.ToImmutableAndFree());
+                return ExternalTypeCollection.Create(
+                    this.State,
+                    this,
+                    this.ProjectId,
+                    builder.ToImmutableAndFree()
+                );
             }
         }
 
@@ -101,12 +110,27 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel.Exter
 
         public EnvDTE.CodeElements Members
         {
-            get { return ExternalMemberCollection.Create(this.State, this, this.ProjectId, this.TypeSymbol); }
+            get
+            {
+                return ExternalMemberCollection.Create(
+                    this.State,
+                    this,
+                    this.ProjectId,
+                    this.TypeSymbol
+                );
+            }
         }
 
         public EnvDTE.CodeNamespace Namespace
         {
-            get { return ExternalCodeNamespace.Create(this.State, this.ProjectId, this.TypeSymbol.ContainingNamespace); }
+            get
+            {
+                return ExternalCodeNamespace.Create(
+                    this.State,
+                    this.ProjectId,
+                    this.TypeSymbol.ContainingNamespace
+                );
+            }
         }
 
         public bool get_IsDerivedFrom(string fullName)
@@ -126,13 +150,11 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel.Exter
             return currentType.InheritsFromOrEquals(baseType);
         }
 
-        public EnvDTE.CodeElement AddBase(object @base, object position)
-            => throw Exceptions.ThrowEFail();
+        public EnvDTE.CodeElement AddBase(object @base, object position) =>
+            throw Exceptions.ThrowEFail();
 
-        public void RemoveBase(object element)
-            => throw Exceptions.ThrowEFail();
+        public void RemoveBase(object element) => throw Exceptions.ThrowEFail();
 
-        public void RemoveMember(object element)
-            => throw Exceptions.ThrowEFail();
+        public void RemoveMember(object element) => throw Exceptions.ThrowEFail();
     }
 }

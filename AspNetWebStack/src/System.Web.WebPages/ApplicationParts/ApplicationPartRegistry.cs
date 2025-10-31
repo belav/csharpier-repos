@@ -21,7 +21,9 @@ namespace System.Web.WebPages.ApplicationParts
         public ApplicationPartRegistry(DictionaryBasedVirtualPathFactory pathFactory)
         {
             _applicationParts = new ConcurrentDictionary<IResourceAssembly, ApplicationPart>();
-            _registeredVirtualPaths = new ConcurrentDictionary<string, bool>(StringComparer.OrdinalIgnoreCase);
+            _registeredVirtualPaths = new ConcurrentDictionary<string, bool>(
+                StringComparer.OrdinalIgnoreCase
+            );
             _virtualPathFactory = pathFactory;
         }
 
@@ -32,7 +34,12 @@ namespace System.Web.WebPages.ApplicationParts
 
         public ApplicationPart this[string name]
         {
-            get { return _applicationParts.Values.FirstOrDefault(appPart => appPart.Name.Equals(name, StringComparison.OrdinalIgnoreCase)); }
+            get
+            {
+                return _applicationParts.Values.FirstOrDefault(appPart =>
+                    appPart.Name.Equals(name, StringComparison.OrdinalIgnoreCase)
+                );
+            }
         }
 
         public ApplicationPart this[IResourceAssembly assembly]
@@ -63,16 +70,24 @@ namespace System.Web.WebPages.ApplicationParts
             if (_applicationParts.ContainsKey(applicationPart.Assembly))
             {
                 throw new InvalidOperationException(
-                    String.Format(CultureInfo.CurrentCulture,
-                                  WebPageResources.ApplicationPart_ModuleAlreadyRegistered, applicationPart.Assembly));
+                    String.Format(
+                        CultureInfo.CurrentCulture,
+                        WebPageResources.ApplicationPart_ModuleAlreadyRegistered,
+                        applicationPart.Assembly
+                    )
+                );
             }
 
             // Throw if the virtual path is already in use
             if (_registeredVirtualPaths.ContainsKey(applicationPart.RootVirtualPath))
             {
                 throw new InvalidOperationException(
-                    String.Format(CultureInfo.CurrentCulture,
-                                  WebPageResources.ApplicationPart_ModuleAlreadyRegisteredForVirtualPath, applicationPart.RootVirtualPath));
+                    String.Format(
+                        CultureInfo.CurrentCulture,
+                        WebPageResources.ApplicationPart_ModuleAlreadyRegisteredForVirtualPath,
+                        applicationPart.RootVirtualPath
+                    )
+                );
             }
 
             // REVIEW: Should we register the app-part after we scan the assembly for webpages?
@@ -83,9 +98,10 @@ namespace System.Web.WebPages.ApplicationParts
                 _registeredVirtualPaths.TryAdd(applicationPart.RootVirtualPath, true);
 
                 // Get all of the web page types
-                var webPageTypes = from type in applicationPart.Assembly.GetTypes()
-                                   where type.IsSubclassOf(_webPageType)
-                                   select type;
+                var webPageTypes =
+                    from type in applicationPart.Assembly.GetTypes()
+                    where type.IsSubclassOf(_webPageType)
+                    select type;
 
                 // Register each of page with the plan9
                 foreach (Type webPageType in webPageTypes)
@@ -95,9 +111,14 @@ namespace System.Web.WebPages.ApplicationParts
             }
         }
 
-        private void RegisterWebPage(ApplicationPart module, Type webPageType, Func<object> registerPageAction)
+        private void RegisterWebPage(
+            ApplicationPart module,
+            Type webPageType,
+            Func<object> registerPageAction
+        )
         {
-            var virtualPathAttribute = webPageType.GetCustomAttributes(typeof(PageVirtualPathAttribute), false)
+            var virtualPathAttribute = webPageType
+                .GetCustomAttributes(typeof(PageVirtualPathAttribute), false)
                 .Cast<PageVirtualPathAttribute>()
                 .SingleOrDefault();
 
@@ -108,7 +129,10 @@ namespace System.Web.WebPages.ApplicationParts
             }
 
             // Get the path of the page relative to the module root
-            string virtualPath = GetRootRelativeVirtualPath(module.RootVirtualPath, virtualPathAttribute.VirtualPath);
+            string virtualPath = GetRootRelativeVirtualPath(
+                module.RootVirtualPath,
+                virtualPathAttribute.VirtualPath
+            );
 
             // Create a factory for the page type
             Func<object> pageFactory = registerPageAction ?? NewTypeInstance(webPageType);
@@ -122,7 +146,10 @@ namespace System.Web.WebPages.ApplicationParts
             return Expression.Lambda<Func<object>>(Expression.New(type)).Compile();
         }
 
-        internal static string GetRootRelativeVirtualPath(string rootVirtualPath, string pageVirtualPath)
+        internal static string GetRootRelativeVirtualPath(
+            string rootVirtualPath,
+            string pageVirtualPath
+        )
         {
             string virtualPath = pageVirtualPath;
 

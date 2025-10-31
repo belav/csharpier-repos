@@ -21,21 +21,26 @@ namespace System.Net.Http.Formatting
         /// <param name="formatter">The <see cref="MediaTypeFormatter"/> to receive the new <see cref="QueryStringMapping"/> item.</param>
         /// <param name="queryStringParameterName">The name of the query parameter.</param>
         /// <param name="queryStringParameterValue">The value assigned to that query parameter.</param>
-        /// <param name="mediaType">The <see cref="MediaTypeHeaderValue"/> to associate 
-        /// with a <see cref="Uri"/> containing a query string matching <paramref name="queryStringParameterName"/> 
+        /// <param name="mediaType">The <see cref="MediaTypeHeaderValue"/> to associate
+        /// with a <see cref="Uri"/> containing a query string matching <paramref name="queryStringParameterName"/>
         /// and <paramref name="queryStringParameterValue"/>.</param>
         public static void AddQueryStringMapping(
             this MediaTypeFormatter formatter,
             string queryStringParameterName,
             string queryStringParameterValue,
-            MediaTypeHeaderValue mediaType)
+            MediaTypeHeaderValue mediaType
+        )
         {
             if (formatter == null)
             {
                 throw Error.ArgumentNull("formatter");
             }
 
-            QueryStringMapping mapping = new QueryStringMapping(queryStringParameterName, queryStringParameterValue, mediaType);
+            QueryStringMapping mapping = new QueryStringMapping(
+                queryStringParameterName,
+                queryStringParameterValue,
+                mediaType
+            );
             formatter.MediaTypeMappings.Add(mapping);
         }
 
@@ -47,21 +52,26 @@ namespace System.Net.Http.Formatting
         /// <param name="formatter">The <see cref="MediaTypeFormatter"/> to receive the new <see cref="QueryStringMapping"/> item.</param>
         /// <param name="queryStringParameterName">The name of the query parameter.</param>
         /// <param name="queryStringParameterValue">The value assigned to that query parameter.</param>
-        /// <param name="mediaType">The media type to associate 
+        /// <param name="mediaType">The media type to associate
         /// with a <see cref="Uri"/> containing a query string matching <paramref name="queryStringParameterName"/>
         /// and <paramref name="queryStringParameterValue"/>.</param>
         public static void AddQueryStringMapping(
             this MediaTypeFormatter formatter,
             string queryStringParameterName,
             string queryStringParameterValue,
-            string mediaType)
+            string mediaType
+        )
         {
             if (formatter == null)
             {
                 throw Error.ArgumentNull("formatter");
             }
 
-            QueryStringMapping mapping = new QueryStringMapping(queryStringParameterName, queryStringParameterValue, mediaType);
+            QueryStringMapping mapping = new QueryStringMapping(
+                queryStringParameterName,
+                queryStringParameterValue,
+                mediaType
+            );
             formatter.MediaTypeMappings.Add(mapping);
         }
 
@@ -76,9 +86,9 @@ namespace System.Net.Http.Formatting
         /// <param name="headerName">Name of the header to match.</param>
         /// <param name="headerValue">The header value to match.</param>
         /// <param name="valueComparison">The <see cref="StringComparison"/> to use when matching <paramref name="headerValue"/>.</param>
-        /// <param name="isValueSubstring">if set to <c>true</c> then <paramref name="headerValue"/> is 
+        /// <param name="isValueSubstring">if set to <c>true</c> then <paramref name="headerValue"/> is
         /// considered a match if it matches a substring of the actual header value.</param>
-        /// <param name="mediaType">The <see cref="MediaTypeHeaderValue"/> to associate 
+        /// <param name="mediaType">The <see cref="MediaTypeHeaderValue"/> to associate
         /// with a <see cref="M:HttpRequestMessage.Header"/> entry with a name matching <paramref name="headerName"/>
         /// and a value matching <paramref name="headerValue"/>.</param>
         public static void AddRequestHeaderMapping(
@@ -87,14 +97,21 @@ namespace System.Net.Http.Formatting
             string headerValue,
             StringComparison valueComparison,
             bool isValueSubstring,
-            MediaTypeHeaderValue mediaType)
+            MediaTypeHeaderValue mediaType
+        )
         {
             if (formatter == null)
             {
                 throw Error.ArgumentNull("formatter");
             }
 
-            RequestHeaderMapping mapping = new RequestHeaderMapping(headerName, headerValue, valueComparison, isValueSubstring, mediaType);
+            RequestHeaderMapping mapping = new RequestHeaderMapping(
+                headerName,
+                headerValue,
+                valueComparison,
+                isValueSubstring,
+                mediaType
+            );
             formatter.MediaTypeMappings.Add(mapping);
         }
 
@@ -109,9 +126,9 @@ namespace System.Net.Http.Formatting
         /// <param name="headerName">Name of the header to match.</param>
         /// <param name="headerValue">The header value to match.</param>
         /// <param name="valueComparison">The <see cref="StringComparison"/> to use when matching <paramref name="headerValue"/>.</param>
-        /// <param name="isValueSubstring">if set to <c>true</c> then <paramref name="headerValue"/> is 
+        /// <param name="isValueSubstring">if set to <c>true</c> then <paramref name="headerValue"/> is
         /// considered a match if it matches a substring of the actual header value.</param>
-        /// <param name="mediaType">The media type to associate 
+        /// <param name="mediaType">The media type to associate
         /// with a <see cref="M:HttpRequestMessage.Header"/> entry with a name matching <paramref name="headerName"/>
         /// and a value matching <paramref name="headerValue"/>.</param>
         public static void AddRequestHeaderMapping(
@@ -120,14 +137,21 @@ namespace System.Net.Http.Formatting
             string headerValue,
             StringComparison valueComparison,
             bool isValueSubstring,
-            string mediaType)
+            string mediaType
+        )
         {
             if (formatter == null)
             {
                 throw Error.ArgumentNull("formatter");
             }
 
-            RequestHeaderMapping mapping = new RequestHeaderMapping(headerName, headerValue, valueComparison, isValueSubstring, mediaType);
+            RequestHeaderMapping mapping = new RequestHeaderMapping(
+                headerName,
+                headerValue,
+                valueComparison,
+                isValueSubstring,
+                mediaType
+            );
             formatter.MediaTypeMappings.Add(mapping);
         }
     }

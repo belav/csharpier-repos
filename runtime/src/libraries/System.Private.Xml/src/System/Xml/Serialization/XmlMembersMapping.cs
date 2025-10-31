@@ -15,7 +15,12 @@ namespace System.Xml.Serialization
     {
         private readonly XmlMemberMapping[] _mappings;
 
-        internal XmlMembersMapping(TypeScope scope, ElementAccessor accessor, XmlMappingAccess access) : base(scope, accessor, access)
+        internal XmlMembersMapping(
+            TypeScope scope,
+            ElementAccessor accessor,
+            XmlMappingAccess access
+        )
+            : base(scope, accessor, access)
         {
             MembersMapping mapping = (MembersMapping)accessor.Mapping!;
             StringBuilder key = new StringBuilder();

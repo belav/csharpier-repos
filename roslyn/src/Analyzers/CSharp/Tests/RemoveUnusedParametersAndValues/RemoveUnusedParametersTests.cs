@@ -21,31 +21,81 @@ using static Roslyn.Test.Utilities.TestHelpers;
 namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnusedParametersAndValues
 {
     [Trait(Traits.Feature, Traits.Features.CodeActionsRemoveUnusedParameters)]
-    public class RemoveUnusedParametersTests : AbstractCSharpDiagnosticProviderBasedUserDiagnosticTest
+    public class RemoveUnusedParametersTests
+        : AbstractCSharpDiagnosticProviderBasedUserDiagnosticTest
     {
         public RemoveUnusedParametersTests(ITestOutputHelper logger)
-          : base(logger)
-        {
-        }
+            : base(logger) { }
 
-        internal override (DiagnosticAnalyzer, CodeFixProvider) CreateDiagnosticProviderAndFixer(Workspace workspace)
-            => (new CSharpRemoveUnusedParametersAndValuesDiagnosticAnalyzer(), new CSharpRemoveUnusedValuesCodeFixProvider());
+        internal override (DiagnosticAnalyzer, CodeFixProvider) CreateDiagnosticProviderAndFixer(
+            Workspace workspace
+        ) =>
+            (
+                new CSharpRemoveUnusedParametersAndValuesDiagnosticAnalyzer(),
+                new CSharpRemoveUnusedValuesCodeFixProvider()
+            );
 
-        private OptionsCollection NonPublicMethodsOnly
-            => Option(CodeStyleOptions2.UnusedParameters,
-                new CodeStyleOption2<UnusedParametersPreference>(UnusedParametersPreference.NonPublicMethods, NotificationOption2.Suggestion));
+        private OptionsCollection NonPublicMethodsOnly =>
+            Option(
+                CodeStyleOptions2.UnusedParameters,
+                new CodeStyleOption2<UnusedParametersPreference>(
+                    UnusedParametersPreference.NonPublicMethods,
+                    NotificationOption2.Suggestion
+                )
+            );
 
         // Ensure that we explicitly test missing UnusedParameterDiagnosticId, which has no corresponding code fix (non-fixable diagnostic).
-        private Task TestDiagnosticMissingAsync(string initialMarkup, ParseOptions? parseOptions = null)
-            => TestDiagnosticMissingAsync(initialMarkup, options: null, parseOptions);
-        private Task TestDiagnosticsAsync(string initialMarkup, params DiagnosticDescription[] expectedDiagnostics)
-            => TestDiagnosticsAsync(initialMarkup, options: null, parseOptions: null, expectedDiagnostics);
-        private Task TestDiagnosticMissingAsync(string initialMarkup, OptionsCollection? options, ParseOptions? parseOptions = null)
-            => TestDiagnosticMissingAsync(initialMarkup, new TestParameters(parseOptions, options: options, retainNonFixableDiagnostics: true));
-        private Task TestDiagnosticsAsync(string initialMarkup, OptionsCollection options, params DiagnosticDescription[] expectedDiagnostics)
-            => TestDiagnosticsAsync(initialMarkup, options, parseOptions: null, expectedDiagnostics);
-        private Task TestDiagnosticsAsync(string initialMarkup, OptionsCollection? options, ParseOptions? parseOptions, params DiagnosticDescription[] expectedDiagnostics)
-            => TestDiagnosticsAsync(initialMarkup, new TestParameters(parseOptions, options: options, retainNonFixableDiagnostics: true), expectedDiagnostics);
+        private Task TestDiagnosticMissingAsync(
+            string initialMarkup,
+            ParseOptions? parseOptions = null
+        ) => TestDiagnosticMissingAsync(initialMarkup, options: null, parseOptions);
+
+        private Task TestDiagnosticsAsync(
+            string initialMarkup,
+            params DiagnosticDescription[] expectedDiagnostics
+        ) =>
+            TestDiagnosticsAsync(
+                initialMarkup,
+                options: null,
+                parseOptions: null,
+                expectedDiagnostics
+            );
+
+        private Task TestDiagnosticMissingAsync(
+            string initialMarkup,
+            OptionsCollection? options,
+            ParseOptions? parseOptions = null
+        ) =>
+            TestDiagnosticMissingAsync(
+                initialMarkup,
+                new TestParameters(
+                    parseOptions,
+                    options: options,
+                    retainNonFixableDiagnostics: true
+                )
+            );
+
+        private Task TestDiagnosticsAsync(
+            string initialMarkup,
+            OptionsCollection options,
+            params DiagnosticDescription[] expectedDiagnostics
+        ) => TestDiagnosticsAsync(initialMarkup, options, parseOptions: null, expectedDiagnostics);
+
+        private Task TestDiagnosticsAsync(
+            string initialMarkup,
+            OptionsCollection? options,
+            ParseOptions? parseOptions,
+            params DiagnosticDescription[] expectedDiagnostics
+        ) =>
+            TestDiagnosticsAsync(
+                initialMarkup,
+                new TestParameters(
+                    parseOptions,
+                    options: options,
+                    retainNonFixableDiagnostics: true
+                ),
+                expectedDiagnostics
+            );
 
         [Fact]
         public async Task Parameter_Used()
@@ -59,7 +109,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnusedParametersA
                         var x = p;
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -74,21 +125,27 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnusedParametersA
                     }
                 }
                 """,
-    Diagnostic(IDEDiagnosticIds.UnusedParameterDiagnosticId));
+                Diagnostic(IDEDiagnosticIds.UnusedParameterDiagnosticId)
+            );
         }
 
         [Theory]
         [InlineData("public", "public")]
         [InlineData("public", "protected")]
-        public async Task Parameter_Unused_NonPrivate_NotApplicable(string typeAccessibility, string methodAccessibility)
+        public async Task Parameter_Unused_NonPrivate_NotApplicable(
+            string typeAccessibility,
+            string methodAccessibility
+        )
         {
             await TestDiagnosticMissingAsync(
-$@"{typeAccessibility} class C
+                $@"{typeAccessibility} class C
 {{
     {methodAccessibility} void M(int [|p|])
     {{
     }}
-}}", NonPublicMethodsOnly);
+}}",
+                NonPublicMethodsOnly
+            );
         }
 
         [Theory]
@@ -98,23 +155,33 @@ $@"{typeAccessibility} class C
         [InlineData("internal", "public")]
         [InlineData("internal", "internal")]
         [InlineData("internal", "protected")]
-        public async Task Parameter_Unused_NonPublicMethod(string typeAccessibility, string methodAccessibility)
+        public async Task Parameter_Unused_NonPublicMethod(
+            string typeAccessibility,
+            string methodAccessibility
+        )
         {
             await TestDiagnosticsAsync(
-$@"{typeAccessibility} class C
+                $@"{typeAccessibility} class C
 {{
     {methodAccessibility} void M(int [|p|])
     {{
     }}
-}}", NonPublicMethodsOnly,
-    Diagnostic(IDEDiagnosticIds.UnusedParameterDiagnosticId));
+}}",
+                NonPublicMethodsOnly,
+                Diagnostic(IDEDiagnosticIds.UnusedParameterDiagnosticId)
+            );
         }
 
         [Fact]
         public async Task Parameter_Unused_UnusedExpressionAssignment_PreferNone()
         {
-            var unusedValueAssignmentOptionSuppressed = Option(CSharpCodeStyleOptions.UnusedValueAssignment,
-                new CodeStyleOption2<UnusedValuePreference>(UnusedValuePreference.DiscardVariable, NotificationOption2.None));
+            var unusedValueAssignmentOptionSuppressed = Option(
+                CSharpCodeStyleOptions.UnusedValueAssignment,
+                new CodeStyleOption2<UnusedValuePreference>(
+                    UnusedValuePreference.DiscardVariable,
+                    NotificationOption2.None
+                )
+            );
 
             await TestDiagnosticMissingAsync(
                 """
@@ -125,7 +192,9 @@ $@"{typeAccessibility} class C
                         var x = p;
                     }
                 }
-                """, options: unusedValueAssignmentOptionSuppressed);
+                """,
+                options: unusedValueAssignmentOptionSuppressed
+            );
         }
 
         [Fact]
@@ -141,7 +210,8 @@ $@"{typeAccessibility} class C
                     }
                 }
                 """,
-    Diagnostic(IDEDiagnosticIds.UnusedParameterDiagnosticId));
+                Diagnostic(IDEDiagnosticIds.UnusedParameterDiagnosticId)
+            );
         }
 
         [Fact]
@@ -158,7 +228,8 @@ $@"{typeAccessibility} class C
                     }
                 }
                 """,
-    Diagnostic(IDEDiagnosticIds.UnusedParameterDiagnosticId));
+                Diagnostic(IDEDiagnosticIds.UnusedParameterDiagnosticId)
+            );
         }
 
         [Fact]
@@ -183,7 +254,8 @@ $@"{typeAccessibility} class C
                     }
                 }
                 """,
-    Diagnostic(IDEDiagnosticIds.UnusedParameterDiagnosticId));
+                Diagnostic(IDEDiagnosticIds.UnusedParameterDiagnosticId)
+            );
         }
 
         [Fact]
@@ -210,7 +282,8 @@ $@"{typeAccessibility} class C
                         var x = p;
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -225,7 +298,8 @@ $@"{typeAccessibility} class C
                     }
                 }
                 """,
-    Diagnostic(IDEDiagnosticIds.UnusedParameterDiagnosticId));
+                Diagnostic(IDEDiagnosticIds.UnusedParameterDiagnosticId)
+            );
         }
 
         [Fact]
@@ -245,7 +319,8 @@ $@"{typeAccessibility} class C
                     {
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -266,7 +341,8 @@ $@"{typeAccessibility} class C
                         var x = p;
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -287,7 +363,8 @@ $@"{typeAccessibility} class C
                         var x = p;
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -306,7 +383,8 @@ $@"{typeAccessibility} class C
                     }
                 }
                 """,
-    Diagnostic(IDEDiagnosticIds.UnusedParameterDiagnosticId));
+                Diagnostic(IDEDiagnosticIds.UnusedParameterDiagnosticId)
+            );
         }
 
         [Fact]
@@ -325,7 +403,8 @@ $@"{typeAccessibility} class C
                     }
                 }
                 """,
-    Diagnostic(IDEDiagnosticIds.UnusedParameterDiagnosticId));
+                Diagnostic(IDEDiagnosticIds.UnusedParameterDiagnosticId)
+            );
         }
 
         [Fact]
@@ -343,7 +422,8 @@ $@"{typeAccessibility} class C
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -365,7 +445,8 @@ $@"{typeAccessibility} class C
 
                     void M2(Action<int> a) => a(0);
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -383,7 +464,8 @@ $@"{typeAccessibility} class C
                         return d => { myDelegate(p); };
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -403,7 +485,8 @@ $@"{typeAccessibility} class C
                     }
                 }
                 """,
-    Diagnostic(IDEDiagnosticIds.UnusedParameterDiagnosticId));
+                Diagnostic(IDEDiagnosticIds.UnusedParameterDiagnosticId)
+            );
         }
 
         [Fact]
@@ -425,7 +508,8 @@ $@"{typeAccessibility} class C
                     private static void M2(Action a) { }
                 }
                 """,
-    Diagnostic(IDEDiagnosticIds.UnusedParameterDiagnosticId));
+                Diagnostic(IDEDiagnosticIds.UnusedParameterDiagnosticId)
+            );
         }
 
         [Fact]
@@ -446,7 +530,8 @@ $@"{typeAccessibility} class C
 
                     private static void M3(object o) { }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -467,7 +552,8 @@ $@"{typeAccessibility} class C
 
                     private static void M3(out object o) { o = null; }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/31744")]
@@ -489,7 +575,8 @@ $@"{typeAccessibility} class C
                     private int M3() { return 0; }
                 }
                 """,
-    Diagnostic(IDEDiagnosticIds.UnusedParameterDiagnosticId));
+                Diagnostic(IDEDiagnosticIds.UnusedParameterDiagnosticId)
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/31744")]
@@ -510,7 +597,8 @@ $@"{typeAccessibility} class C
                     private static C M2(Expression<Func<C, int>> a) { return null; }
                     private int M3(object o) { return 0; }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/31744")]
@@ -531,7 +619,8 @@ $@"{typeAccessibility} class C
                     private static C M2(Expression<Func<C, int>> a) { return null; }
                     private int M3(out object o) { o = null; return 0; }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -551,7 +640,8 @@ $@"{typeAccessibility} class C
                         _field = () => { Console.WriteLine(p); };
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -579,7 +669,8 @@ $@"{typeAccessibility} class C
 
                     private void M2(object p) { }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -600,7 +691,8 @@ $@"{typeAccessibility} class C
                         myLambda(y);
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -621,7 +713,8 @@ $@"{typeAccessibility} class C
                         myLambda(y);
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -642,7 +735,8 @@ $@"{typeAccessibility} class C
                         myLambda(y, y);
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -663,7 +757,8 @@ $@"{typeAccessibility} class C
                         local(y, y);
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -684,7 +779,8 @@ $@"{typeAccessibility} class C
                         M(y, y);
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -703,7 +799,8 @@ $@"{typeAccessibility} class C
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -725,7 +822,8 @@ $@"{typeAccessibility} class C
                         myLambda(y);
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -740,7 +838,8 @@ $@"{typeAccessibility} class C
                         var x = p;
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -755,7 +854,8 @@ $@"{typeAccessibility} class C
                     }
                 }
                 """,
-    Diagnostic(IDEDiagnosticIds.UnusedParameterDiagnosticId));
+                Diagnostic(IDEDiagnosticIds.UnusedParameterDiagnosticId)
+            );
         }
 
         [Fact]
@@ -770,7 +870,8 @@ $@"{typeAccessibility} class C
                     }
                 }
                 """,
-    Diagnostic(IDEDiagnosticIds.UnusedParameterDiagnosticId));
+                Diagnostic(IDEDiagnosticIds.UnusedParameterDiagnosticId)
+            );
         }
 
         [Fact]
@@ -785,7 +886,8 @@ $@"{typeAccessibility} class C
                         p = 0;
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -800,7 +902,8 @@ $@"{typeAccessibility} class C
                         var x = p;
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -816,7 +919,8 @@ $@"{typeAccessibility} class C
                         p = 1;
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -832,7 +936,8 @@ $@"{typeAccessibility} class C
                         var x = p;
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -848,7 +953,8 @@ $@"{typeAccessibility} class C
                         p = 1;
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -863,7 +969,8 @@ $@"{typeAccessibility} class C
                     }
                 }
                 """,
-    Diagnostic(IDEDiagnosticIds.UnusedParameterDiagnosticId));
+                Diagnostic(IDEDiagnosticIds.UnusedParameterDiagnosticId)
+            );
         }
 
         [Fact]
@@ -878,7 +985,8 @@ $@"{typeAccessibility} class C
                         p = 0;
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -894,7 +1002,8 @@ $@"{typeAccessibility} class C
                         var x = p;
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -910,7 +1019,8 @@ $@"{typeAccessibility} class C
                         p = 1;
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -923,7 +1033,8 @@ $@"{typeAccessibility} class C
                     [System.Runtime.InteropServices.DllImport(nameof(M))]
                     static extern void M(int [|p|]);
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -935,7 +1046,8 @@ $@"{typeAccessibility} class C
                 {
                     protected abstract void M(int [|p|]);
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -949,7 +1061,8 @@ $@"{typeAccessibility} class C
                     {
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -971,7 +1084,8 @@ $@"{typeAccessibility} class C
                     {
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -989,7 +1103,8 @@ $@"{typeAccessibility} class C
                     {
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -1007,7 +1122,8 @@ $@"{typeAccessibility} class C
                     {
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -1022,7 +1138,8 @@ $@"{typeAccessibility} class C
                         get { return 0; }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -1039,7 +1156,8 @@ $@"{typeAccessibility} class C
                 #endif
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -1053,7 +1171,8 @@ $@"{typeAccessibility} class C
                     {
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -1067,7 +1186,8 @@ $@"{typeAccessibility} class C
                     {
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -1092,7 +1212,8 @@ $@"{typeAccessibility} class C
                     {
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -1110,7 +1231,8 @@ $@"{typeAccessibility} class C
                     {
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Theory]
@@ -1123,22 +1245,26 @@ $@"{typeAccessibility} class C
         public async Task Parameter_MethodsWithSpecialAttributes(string attribute)
         {
             await TestDiagnosticMissingAsync(
-$@"class C
+                $@"class C
 {{
     {attribute}
     void M(int [|p|])
     {{
     }}
-}}");
+}}"
+            );
         }
 
         [Theory]
         [InlineData("System.Composition", "ImportingConstructorAttribute")]
         [InlineData("System.ComponentModel.Composition", "ImportingConstructorAttribute")]
-        public async Task Parameter_ConstructorsWithSpecialAttributes(string attributeNamespace, string attributeName)
+        public async Task Parameter_ConstructorsWithSpecialAttributes(
+            string attributeNamespace,
+            string attributeName
+        )
         {
             await TestDiagnosticMissingAsync(
-$@"
+                $@"
 namespace {attributeNamespace}
 {{
     public class {attributeName} : System.Attribute {{ }}
@@ -1150,7 +1276,8 @@ class C
     public C(int [|p|])
     {{
     }}
-}}");
+}}"
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/32133")]
@@ -1183,14 +1310,14 @@ class C
                         info.AddValue("KEY", _nonSerializable.Value);
                     }
                 }
-                """);
+                """
+            );
         }
 
         [ConditionalFact(typeof(IsEnglishLocal))]
         public async Task Parameter_DiagnosticMessages()
         {
-            var source =
-                """
+            var source = """
                 public class C
                 {
                     // p1 is unused.
@@ -1217,20 +1344,34 @@ class C
                 """;
             var testParameters = new TestParameters(retainNonFixableDiagnostics: true);
             using var workspace = CreateWorkspaceFromOptions(source, testParameters);
-            var diagnostics = await GetDiagnosticsAsync(workspace, testParameters).ConfigureAwait(false);
+            var diagnostics = await GetDiagnosticsAsync(workspace, testParameters)
+                .ConfigureAwait(false);
             diagnostics.Verify(
                 Diagnostic(IDEDiagnosticIds.UnusedParameterDiagnosticId, "p1").WithLocation(5, 15),
                 Diagnostic(IDEDiagnosticIds.UnusedParameterDiagnosticId, "p2").WithLocation(5, 23),
                 Diagnostic(IDEDiagnosticIds.UnusedParameterDiagnosticId, "p3").WithLocation(13, 23),
                 Diagnostic(IDEDiagnosticIds.UnusedParameterDiagnosticId, "p4").WithLocation(13, 31),
-                Diagnostic(IDEDiagnosticIds.UnusedParameterDiagnosticId, "p5").WithLocation(19, 17));
+                Diagnostic(IDEDiagnosticIds.UnusedParameterDiagnosticId, "p5").WithLocation(19, 17)
+            );
             var sortedDiagnostics = diagnostics.OrderBy(d => d.Location.SourceSpan.Start).ToArray();
 
             Assert.Equal("Remove unused parameter 'p1'", sortedDiagnostics[0].GetMessage());
-            Assert.Equal("Parameter 'p2' can be removed; its initial value is never used", sortedDiagnostics[1].GetMessage());
-            Assert.Equal("Remove unused parameter 'p3' if it is not part of a shipped public API", sortedDiagnostics[2].GetMessage());
-            Assert.Equal("Parameter 'p4' can be removed if it is not part of a shipped public API; its initial value is never used", sortedDiagnostics[3].GetMessage());
-            Assert.Equal("Parameter 'p5' can be removed; its initial value is never used", sortedDiagnostics[4].GetMessage());
+            Assert.Equal(
+                "Parameter 'p2' can be removed; its initial value is never used",
+                sortedDiagnostics[1].GetMessage()
+            );
+            Assert.Equal(
+                "Remove unused parameter 'p3' if it is not part of a shipped public API",
+                sortedDiagnostics[2].GetMessage()
+            );
+            Assert.Equal(
+                "Parameter 'p4' can be removed if it is not part of a shipped public API; its initial value is never used",
+                sortedDiagnostics[3].GetMessage()
+            );
+            Assert.Equal(
+                "Parameter 'p5' can be removed; its initial value is never used",
+                sortedDiagnostics[4].GetMessage()
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/32287")]
@@ -1247,7 +1388,8 @@ class C
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/32851")]
@@ -1261,7 +1403,8 @@ class C
                     {
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/32851")]
@@ -1279,7 +1422,8 @@ class C
                         T Invoke<T>(Func<T> a) { return a(); }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/32851")]
@@ -1298,7 +1442,8 @@ class C
                     }
                 }
                 """,
-    Diagnostic(IDEDiagnosticIds.UnusedParameterDiagnosticId));
+                Diagnostic(IDEDiagnosticIds.UnusedParameterDiagnosticId)
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/32973")]
@@ -1319,7 +1464,8 @@ class C
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/32973")]
@@ -1340,7 +1486,8 @@ class C
                     }
                 }
                 """,
-    Diagnostic(IDEDiagnosticIds.UnusedParameterDiagnosticId));
+                Diagnostic(IDEDiagnosticIds.UnusedParameterDiagnosticId)
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/32973")]
@@ -1361,7 +1508,8 @@ class C
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/33299")]
@@ -1376,7 +1524,9 @@ class C
                         x ??= new C();
                     }
                 }
-                """, parseOptions: new CSharpParseOptions(LanguageVersion.CSharp8));
+                """,
+                parseOptions: new CSharpParseOptions(LanguageVersion.CSharp8)
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/34301")]
@@ -1396,7 +1546,8 @@ class C
                     }
                 }
                 """,
-    Diagnostic(IDEDiagnosticIds.UnusedParameterDiagnosticId));
+                Diagnostic(IDEDiagnosticIds.UnusedParameterDiagnosticId)
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/36715")]
@@ -1428,7 +1579,8 @@ class C
                     }
                 }
                 """,
-    Diagnostic(IDEDiagnosticIds.UnusedParameterDiagnosticId));
+                Diagnostic(IDEDiagnosticIds.UnusedParameterDiagnosticId)
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/36715")]
@@ -1461,14 +1613,20 @@ class C
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/34830")]
         public async Task RegressionTest_ShouldReportUnusedParameter()
         {
-            var options = Option(CodeStyleOptions2.UnusedParameters,
-                new CodeStyleOption2<UnusedParametersPreference>(default, NotificationOption2.Suggestion));
+            var options = Option(
+                CodeStyleOptions2.UnusedParameters,
+                new CodeStyleOption2<UnusedParametersPreference>(
+                    default,
+                    NotificationOption2.Suggestion
+                )
+            );
 
             await TestDiagnosticMissingAsync(
                 """
@@ -1491,17 +1649,27 @@ class C
 
                     public void Dispose() => task.Result.MyAction -= myAction;
                 }
-                """, options);
+                """,
+                options
+            );
         }
 
 #if !CODE_STYLE // Below test is not applicable for CodeStyle layer as attempting to fetch an editorconfig string representation for this invalid option fails.
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/37326")]
         public async Task RegressionTest_ShouldReportUnusedParameter_02()
         {
-            var options = Option(CodeStyleOptions2.UnusedParameters,
-                new CodeStyleOption2<UnusedParametersPreference>((UnusedParametersPreference)2, NotificationOption2.Suggestion));
+            var options = Option(
+                CodeStyleOptions2.UnusedParameters,
+                new CodeStyleOption2<UnusedParametersPreference>(
+                    (UnusedParametersPreference)2,
+                    NotificationOption2.Suggestion
+                )
+            );
 
-            var parameters = new TestParameters(globalOptions: options, retainNonFixableDiagnostics: true);
+            var parameters = new TestParameters(
+                globalOptions: options,
+                retainNonFixableDiagnostics: true
+            );
 
             await TestDiagnosticMissingAsync(
                 """
@@ -1524,7 +1692,9 @@ class C
 
                     public void Dispose() => task.Result.MyAction -= myAction;
                 }
-                """, parameters);
+                """,
+                parameters
+            );
         }
 #endif
 
@@ -1550,7 +1720,8 @@ class C
                         a = M;
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/37483")]
@@ -1565,7 +1736,8 @@ class C
                     {
                     }
                 }
-                """);
+                """
+            );
         }
 
         [WorkItem("https://github.com/dotnet/roslyn/issues/57814")]
@@ -1585,7 +1757,8 @@ class C
                     {
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsRemoveUnusedParameters)]
@@ -1597,7 +1770,8 @@ class C
                 {
                     public partial void M(int [|x|]);
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/36817")]
@@ -1611,7 +1785,8 @@ class C
                     {
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/41236")]
@@ -1628,7 +1803,8 @@ class C
                         throw new NotImplementedException();
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/41236")]
@@ -1643,7 +1819,8 @@ class C
                     private void Goo(int [|i|])
                         => throw new NotImplementedException();
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/41236")]
@@ -1658,7 +1835,8 @@ class C
                     public C(int [|i|])
                         => throw new NotImplementedException();
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/56317")]
@@ -1673,7 +1851,8 @@ class C
                     private int Goo(int [|i|])
                         => throw new NotImplementedException();
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/56317")]
@@ -1690,7 +1869,8 @@ class C
                         throw new NotImplementedException();
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/41236")]
@@ -1709,7 +1889,8 @@ class C
                     }
                 }
                 """,
-    Diagnostic(IDEDiagnosticIds.UnusedParameterDiagnosticId));
+                Diagnostic(IDEDiagnosticIds.UnusedParameterDiagnosticId)
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/41236")]
@@ -1728,14 +1909,14 @@ class C
                     }
                 }
                 """,
-    Diagnostic(IDEDiagnosticIds.UnusedParameterDiagnosticId));
+                Diagnostic(IDEDiagnosticIds.UnusedParameterDiagnosticId)
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/47142")]
         public async Task Record_PrimaryConstructorParameter()
         {
-            await TestMissingAsync(
-                @"record A(int [|X|]);");
+            await TestMissingAsync(@"record A(int [|X|]);");
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/47142")]
@@ -1750,7 +1931,8 @@ class C
                     }
                 }
                 """,
-    Diagnostic(IDEDiagnosticIds.UnusedParameterDiagnosticId));
+                Diagnostic(IDEDiagnosticIds.UnusedParameterDiagnosticId)
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/47142")]
@@ -1760,7 +1942,8 @@ class C
                 """
                 record A(int X);
                 record B(int X, int [|Y|]) : A(X);
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/47174")]
@@ -1770,13 +1953,15 @@ class C
                 """
                 public record Base(int I) { }
                 public record Derived(string [|S|]) : Base(42) { }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/45743")]
         public async Task RequiredGetInstanceMethodByICustomMarshaler()
         {
-            await TestDiagnosticMissingAsync("""
+            await TestDiagnosticMissingAsync(
+                """
                 using System;
                 using System.Runtime.InteropServices;
 
@@ -1801,7 +1986,8 @@ class C
                     public static ICustomMarshaler GetInstance(string [|s|])
                         => null;
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/65275")]
@@ -1813,7 +1999,8 @@ class C
                 {
                     public void Method(int [|x|]) => throw new System.Exception();
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/65275")]
@@ -1828,7 +2015,8 @@ class C
                         throw new System.Exception();
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/65275")]
@@ -1843,7 +2031,8 @@ class C
                         throw new System.Exception();
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/65275")]
@@ -1855,7 +2044,8 @@ class C
                 {
                     public Class(int [|x|]) => throw new System.Exception();
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/65275")]
@@ -1870,36 +2060,40 @@ class C
                         void LocalMethod(int [|x|]) => throw new System.Exception();
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem(67013, "https://github.com/dotnet/roslyn/issues/67013")]
         public async Task Test_PrimaryConstructor1()
         {
             await TestDiagnosticMissingAsync(
-@"using System;
+                @"using System;
 
 class C(int [|a100|])
 {
-}");
+}"
+            );
         }
 
         [Fact, WorkItem(67013, "https://github.com/dotnet/roslyn/issues/67013")]
         public async Task Test_PrimaryConstructor2()
         {
             await TestDiagnosticMissingAsync(
-@"using System;
+                @"using System;
 
 class C(int [|a100|]) : Object()
 {
     int M1() => a100;
-}");
+}"
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/70276")]
         public async Task TestMethodWithNameOf()
         {
-            await TestDiagnosticsAsync("""
+            await TestDiagnosticsAsync(
+                """
                 class C
                 {
                     void M(int [|x|])
@@ -1907,7 +2101,9 @@ class C(int [|a100|]) : Object()
                         const string y = nameof(C);
                     }
                 }
-                """, Diagnostic(IDEDiagnosticIds.UnusedParameterDiagnosticId));
+                """,
+                Diagnostic(IDEDiagnosticIds.UnusedParameterDiagnosticId)
+            );
         }
     }
 }

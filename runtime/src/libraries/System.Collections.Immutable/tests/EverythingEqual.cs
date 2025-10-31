@@ -17,10 +17,7 @@ namespace System.Collections.Immutable.Tests
 
         internal static EverythingEqual<T> Default
         {
-            get
-            {
-                return s_singleton;
-            }
+            get { return s_singleton; }
         }
 
         public bool Equals(T x, T y)

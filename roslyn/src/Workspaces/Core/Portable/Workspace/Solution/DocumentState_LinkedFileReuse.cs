@@ -19,7 +19,10 @@ namespace Microsoft.CodeAnalysis
         /// name="siblingTextSource"/> if possible, or which will incrementally parse the current tree to bring it up to
         /// date with <paramref name="siblingTextSource"/> otherwise.
         /// </summary>
-        public DocumentState UpdateTextAndTreeContents(ITextAndVersionSource siblingTextSource, AsyncLazy<TreeAndVersion>? siblingTreeSource)
+        public DocumentState UpdateTextAndTreeContents(
+            ITextAndVersionSource siblingTextSource,
+            AsyncLazy<TreeAndVersion>? siblingTreeSource
+        )
         {
             if (!SupportsSyntaxTree)
             {
@@ -30,7 +33,8 @@ namespace Microsoft.CodeAnalysis
                     _options,
                     siblingTextSource,
                     LoadTextOptions,
-                    treeSource: null);
+                    treeSource: null
+                );
             }
 
             Contract.ThrowIfNull(siblingTreeSource);
@@ -53,7 +57,14 @@ namespace Microsoft.CodeAnalysis
             var treeSource = this.TreeSource;
 
             var newTreeSource = GetReuseTreeSource(
-                filePath, languageServices, loadTextOptions, parseOptions, treeSource, siblingTextSource, siblingTreeSource);
+                filePath,
+                languageServices,
+                loadTextOptions,
+                parseOptions,
+                treeSource,
+                siblingTextSource,
+                siblingTreeSource
+            );
 
             return new DocumentState(
                 languageServices,
@@ -62,7 +73,8 @@ namespace Microsoft.CodeAnalysis
                 _options,
                 siblingTextSource,
                 LoadTextOptions,
-                newTreeSource);
+                newTreeSource
+            );
 
             static AsyncLazy<TreeAndVersion> GetReuseTreeSource(
                 string filePath,
@@ -71,11 +83,33 @@ namespace Microsoft.CodeAnalysis
                 ParseOptions parseOptions,
                 AsyncLazy<TreeAndVersion> treeSource,
                 ITextAndVersionSource siblingTextSource,
-                AsyncLazy<TreeAndVersion> siblingTreeSource)
+                AsyncLazy<TreeAndVersion> siblingTreeSource
+            )
             {
                 return new AsyncLazy<TreeAndVersion>(
-                    cancellationToken => TryReuseSiblingTreeAsync(filePath, languageServices, loadTextOptions, parseOptions, treeSource, siblingTextSource, siblingTreeSource, cancellationToken),
-                    cancellationToken => TryReuseSiblingTree(filePath, languageServices, loadTextOptions, parseOptions, treeSource, siblingTextSource, siblingTreeSource, cancellationToken));
+                    cancellationToken =>
+                        TryReuseSiblingTreeAsync(
+                            filePath,
+                            languageServices,
+                            loadTextOptions,
+                            parseOptions,
+                            treeSource,
+                            siblingTextSource,
+                            siblingTreeSource,
+                            cancellationToken
+                        ),
+                    cancellationToken =>
+                        TryReuseSiblingTree(
+                            filePath,
+                            languageServices,
+                            loadTextOptions,
+                            parseOptions,
+                            treeSource,
+                            siblingTextSource,
+                            siblingTreeSource,
+                            cancellationToken
+                        )
+                );
             }
 
             static bool TryReuseSiblingRoot(
@@ -85,7 +119,8 @@ namespace Microsoft.CodeAnalysis
                 ParseOptions parseOptions,
                 SyntaxNode siblingRoot,
                 VersionStamp siblingVersion,
-                [NotNullWhen(true)] out TreeAndVersion? newTreeAndVersion)
+                [NotNullWhen(true)] out TreeAndVersion? newTreeAndVersion
+            )
             {
                 var siblingTree = siblingRoot.SyntaxTree;
 
@@ -107,7 +142,8 @@ namespace Microsoft.CodeAnalysis
                     parseOptions,
                     siblingTree.Encoding,
                     loadTextOptions.ChecksumAlgorithm,
-                    siblingRoot);
+                    siblingRoot
+                );
 
                 newTreeAndVersion = new TreeAndVersion(newTree, siblingVersion);
                 return true;
@@ -179,18 +215,39 @@ namespace Microsoft.CodeAnalysis
                 AsyncLazy<TreeAndVersion> treeSource,
                 ITextAndVersionSource siblingTextSource,
                 AsyncLazy<TreeAndVersion> siblingTreeSource,
-                CancellationToken cancellationToken)
+                CancellationToken cancellationToken
+            )
             {
-                var siblingTreeAndVersion = await siblingTreeSource.GetValueAsync(cancellationToken).ConfigureAwait(false);
+                var siblingTreeAndVersion = await siblingTreeSource
+                    .GetValueAsync(cancellationToken)
+                    .ConfigureAwait(false);
                 var siblingTree = siblingTreeAndVersion.Tree;
 
-                var siblingRoot = await siblingTree.GetRootAsync(cancellationToken).ConfigureAwait(false);
+                var siblingRoot = await siblingTree
+                    .GetRootAsync(cancellationToken)
+                    .ConfigureAwait(false);
 
-                if (TryReuseSiblingRoot(filePath, languageServices, loadTextOptions, parseOptions, siblingRoot, siblingTreeAndVersion.Version, out var newTreeAndVersion))
+                if (
+                    TryReuseSiblingRoot(
+                        filePath,
+                        languageServices,
+                        loadTextOptions,
+                        parseOptions,
+                        siblingRoot,
+                        siblingTreeAndVersion.Version,
+                        out var newTreeAndVersion
+                    )
+                )
                     return newTreeAndVersion;
 
                 // Couldn't use the sibling file to get the tree contents.  Instead, incrementally parse our tree to the text passed in.
-                return await IncrementallyParseTreeAsync(treeSource, siblingTextSource, loadTextOptions, cancellationToken).ConfigureAwait(false);
+                return await IncrementallyParseTreeAsync(
+                        treeSource,
+                        siblingTextSource,
+                        loadTextOptions,
+                        cancellationToken
+                    )
+                    .ConfigureAwait(false);
             }
 
             static TreeAndVersion TryReuseSiblingTree(
@@ -201,18 +258,34 @@ namespace Microsoft.CodeAnalysis
                 AsyncLazy<TreeAndVersion> treeSource,
                 ITextAndVersionSource siblingTextSource,
                 AsyncLazy<TreeAndVersion> siblingTreeSource,
-                CancellationToken cancellationToken)
+                CancellationToken cancellationToken
+            )
             {
                 var siblingTreeAndVersion = siblingTreeSource.GetValue(cancellationToken);
                 var siblingTree = siblingTreeAndVersion.Tree;
 
                 var siblingRoot = siblingTree.GetRoot(cancellationToken);
 
-                if (TryReuseSiblingRoot(filePath, languageServices, loadTextOptions, parseOptions, siblingRoot, siblingTreeAndVersion.Version, out var newTreeAndVersion))
+                if (
+                    TryReuseSiblingRoot(
+                        filePath,
+                        languageServices,
+                        loadTextOptions,
+                        parseOptions,
+                        siblingRoot,
+                        siblingTreeAndVersion.Version,
+                        out var newTreeAndVersion
+                    )
+                )
                     return newTreeAndVersion;
 
                 // Couldn't use the sibling file to get the tree contents.  Instead, incrementally parse our tree to the text passed in.
-                return IncrementallyParseTree(treeSource, siblingTextSource, loadTextOptions, cancellationToken);
+                return IncrementallyParseTree(
+                    treeSource,
+                    siblingTextSource,
+                    loadTextOptions,
+                    cancellationToken
+                );
             }
         }
 
@@ -229,7 +302,8 @@ namespace Microsoft.CodeAnalysis
             public static int CouldNotReuse => s_couldNotReuse;
             public static int CouldReuseBecauseOfEqualPPNames => s_couldReuseBecauseOfEqualPPNames;
             public static int CouldReuseBecauseOfNoDirectives => s_couldReuseBecauseOfNoDirectives;
-            public static int CouldReuseBecauseOfNoPPDirectives => s_couldReuseBecauseOfNoPPDirectives;
+            public static int CouldReuseBecauseOfNoPPDirectives =>
+                s_couldReuseBecauseOfNoPPDirectives;
         }
     }
 }

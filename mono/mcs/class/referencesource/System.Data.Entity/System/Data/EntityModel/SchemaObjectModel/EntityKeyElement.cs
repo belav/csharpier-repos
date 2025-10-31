@@ -27,10 +27,8 @@ namespace System.Data.EntityModel.SchemaObjectModel
         /// Constructs an EntityContainerAssociationSetEnd
         /// </summary>
         /// <param name="parentElement">Reference to the schema element.</param>
-        public EntityKeyElement( SchemaEntityType parentElement )
-            : base( parentElement )
-        {
-        }
+        public EntityKeyElement(SchemaEntityType parentElement)
+            : base(parentElement) { }
 
         public IList<PropertyRefElement> KeyProperties
         {
@@ -65,7 +63,7 @@ namespace System.Data.EntityModel.SchemaObjectModel
         }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="reader"></param>
         private void HandlePropertyRefElement(XmlReader reader)
@@ -80,12 +78,22 @@ namespace System.Data.EntityModel.SchemaObjectModel
         /// </summary>
         internal override void ResolveTopLevelNames()
         {
-            Debug.Assert(_keyProperties != null, "xsd should have verified that there should be atleast one property ref element");
+            Debug.Assert(
+                _keyProperties != null,
+                "xsd should have verified that there should be atleast one property ref element"
+            );
             foreach (PropertyRefElement property in _keyProperties)
             {
                 if (!property.ResolveNames((SchemaEntityType)this.ParentElement))
                 {
-                    AddError(ErrorCode.InvalidKey, EdmSchemaErrorSeverity.Error, System.Data.Entity.Strings.InvalidKeyNoProperty(this.ParentElement.FQName, property.Name));
+                    AddError(
+                        ErrorCode.InvalidKey,
+                        EdmSchemaErrorSeverity.Error,
+                        System.Data.Entity.Strings.InvalidKeyNoProperty(
+                            this.ParentElement.FQName,
+                            property.Name
+                        )
+                    );
                 }
             }
         }
@@ -95,18 +103,33 @@ namespace System.Data.EntityModel.SchemaObjectModel
         /// </summary>
         internal override void Validate()
         {
-            Debug.Assert(_keyProperties != null, "xsd should have verified that there should be atleast one property ref element");
-            Dictionary<string, PropertyRefElement> propertyLookUp = new Dictionary<string, PropertyRefElement>(StringComparer.Ordinal);
+            Debug.Assert(
+                _keyProperties != null,
+                "xsd should have verified that there should be atleast one property ref element"
+            );
+            Dictionary<string, PropertyRefElement> propertyLookUp = new Dictionary<
+                string,
+                PropertyRefElement
+            >(StringComparer.Ordinal);
 
             foreach (PropertyRefElement keyProperty in _keyProperties)
             {
                 StructuredProperty property = keyProperty.Property;
-                Debug.Assert(property != null, "This should never be null, since if we were not able to resolve, we should have never reached to this point");
+                Debug.Assert(
+                    property != null,
+                    "This should never be null, since if we were not able to resolve, we should have never reached to this point"
+                );
 
                 if (propertyLookUp.ContainsKey(property.Name))
                 {
-                    AddError(ErrorCode.DuplicatePropertySpecifiedInEntityKey, EdmSchemaErrorSeverity.Error,
-                        System.Data.Entity.Strings.DuplicatePropertyNameSpecifiedInEntityKey(this.ParentElement.FQName, property.Name));
+                    AddError(
+                        ErrorCode.DuplicatePropertySpecifiedInEntityKey,
+                        EdmSchemaErrorSeverity.Error,
+                        System.Data.Entity.Strings.DuplicatePropertyNameSpecifiedInEntityKey(
+                            this.ParentElement.FQName,
+                            property.Name
+                        )
+                    );
                     continue;
                 }
 
@@ -114,48 +137,89 @@ namespace System.Data.EntityModel.SchemaObjectModel
 
                 if (property.Nullable)
                 {
-                    AddError(ErrorCode.InvalidKey, EdmSchemaErrorSeverity.Error,
-                        System.Data.Entity.Strings.InvalidKeyNullablePart(property.Name, this.ParentElement.Name));
+                    AddError(
+                        ErrorCode.InvalidKey,
+                        EdmSchemaErrorSeverity.Error,
+                        System.Data.Entity.Strings.InvalidKeyNullablePart(
+                            property.Name,
+                            this.ParentElement.Name
+                        )
+                    );
                 }
 
                 // currently we only support key properties of scalar type
-                if (!(property.Type is ScalarType || property.Type is SchemaEnumType) || (property.CollectionKind != CollectionKind.None))
+                if (
+                    !(property.Type is ScalarType || property.Type is SchemaEnumType)
+                    || (property.CollectionKind != CollectionKind.None)
+                )
                 {
-                    AddError(ErrorCode.EntityKeyMustBeScalar,
-                             EdmSchemaErrorSeverity.Error,
-                             System.Data.Entity.Strings.EntityKeyMustBeScalar(property.Name, this.ParentElement.Name));
+                    AddError(
+                        ErrorCode.EntityKeyMustBeScalar,
+                        EdmSchemaErrorSeverity.Error,
+                        System.Data.Entity.Strings.EntityKeyMustBeScalar(
+                            property.Name,
+                            this.ParentElement.Name
+                        )
+                    );
                     continue;
                 }
 
                 // Enum properties are never backed by binary or spatial type so we can skip the checks here
                 if (!(property.Type is SchemaEnumType))
                 {
-                    Debug.Assert(property.TypeUsage != null, "For scalar type, typeusage must be initialized");
+                    Debug.Assert(
+                        property.TypeUsage != null,
+                        "For scalar type, typeusage must be initialized"
+                    );
 
                     PrimitiveType primitivePropertyType = (PrimitiveType)property.TypeUsage.EdmType;
                     if (Schema.DataModel == SchemaDataModelOption.EntityDataModel)
                     {
                         // Binary keys are only supported for V2.0 CSDL, Spatial keys are not supported.
-                        if ((primitivePropertyType.PrimitiveTypeKind == PrimitiveTypeKind.Binary && Schema.SchemaVersion < XmlConstants.EdmVersionForV2) ||
-                            Helper.IsSpatialType(primitivePropertyType))
+                        if (
+                            (
+                                primitivePropertyType.PrimitiveTypeKind == PrimitiveTypeKind.Binary
+                                && Schema.SchemaVersion < XmlConstants.EdmVersionForV2
+                            ) || Helper.IsSpatialType(primitivePropertyType)
+                        )
                         {
-                            AddError(ErrorCode.EntityKeyTypeCurrentlyNotSupported,
-                                        EdmSchemaErrorSeverity.Error,
-                                        Strings.EntityKeyTypeCurrentlyNotSupported(property.Name, this.ParentElement.FQName, primitivePropertyType.PrimitiveTypeKind));
+                            AddError(
+                                ErrorCode.EntityKeyTypeCurrentlyNotSupported,
+                                EdmSchemaErrorSeverity.Error,
+                                Strings.EntityKeyTypeCurrentlyNotSupported(
+                                    property.Name,
+                                    this.ParentElement.FQName,
+                                    primitivePropertyType.PrimitiveTypeKind
+                                )
+                            );
                         }
                     }
                     else
                     {
-                        Debug.Assert(SchemaDataModelOption.ProviderDataModel == Schema.DataModel, "Invalid DataModel encountered");
+                        Debug.Assert(
+                            SchemaDataModelOption.ProviderDataModel == Schema.DataModel,
+                            "Invalid DataModel encountered"
+                        );
 
                         // Binary keys are only supported for V2.0 SSDL, Spatial keys are not supported.
-                        if ((primitivePropertyType.PrimitiveTypeKind == PrimitiveTypeKind.Binary && Schema.SchemaVersion < XmlConstants.StoreVersionForV2) ||
-                            Helper.IsSpatialType(primitivePropertyType))
+                        if (
+                            (
+                                primitivePropertyType.PrimitiveTypeKind == PrimitiveTypeKind.Binary
+                                && Schema.SchemaVersion < XmlConstants.StoreVersionForV2
+                            ) || Helper.IsSpatialType(primitivePropertyType)
+                        )
                         {
-                            AddError(ErrorCode.EntityKeyTypeCurrentlyNotSupported,
-                                         EdmSchemaErrorSeverity.Error,
-                                         Strings.EntityKeyTypeCurrentlyNotSupportedInSSDL(property.Name, this.ParentElement.FQName,
-                                            property.TypeUsage.EdmType.Name, property.TypeUsage.EdmType.BaseType.FullName, primitivePropertyType.PrimitiveTypeKind));
+                            AddError(
+                                ErrorCode.EntityKeyTypeCurrentlyNotSupported,
+                                EdmSchemaErrorSeverity.Error,
+                                Strings.EntityKeyTypeCurrentlyNotSupportedInSSDL(
+                                    property.Name,
+                                    this.ParentElement.FQName,
+                                    property.TypeUsage.EdmType.Name,
+                                    property.TypeUsage.EdmType.BaseType.FullName,
+                                    primitivePropertyType.PrimitiveTypeKind
+                                )
+                            );
                         }
                     }
                 }

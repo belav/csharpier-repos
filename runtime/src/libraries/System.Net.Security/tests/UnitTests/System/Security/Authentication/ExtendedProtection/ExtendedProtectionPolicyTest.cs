@@ -3,7 +3,6 @@
 
 using System.Collections.Generic;
 using System.Security.Authentication.ExtendedProtection;
-
 using Xunit;
 
 namespace System.Net.Security.Tests
@@ -13,27 +12,49 @@ namespace System.Net.Security.Tests
         [Fact]
         public void Constructor_PolicyEnforcement_NeverParam()
         {
-            AssertExtensions.Throws<ArgumentException>("policyEnforcement", () => new ExtendedProtectionPolicy(PolicyEnforcement.Never, ProtectionScenario.TransportSelected, null));
+            AssertExtensions.Throws<ArgumentException>(
+                "policyEnforcement",
+                () =>
+                    new ExtendedProtectionPolicy(
+                        PolicyEnforcement.Never,
+                        ProtectionScenario.TransportSelected,
+                        null
+                    )
+            );
         }
 
         [Fact]
         public void Constructor_ServiceNameCollection_ZeroElementsParam()
         {
             var paramValue = new ServiceNameCollection(new List<string>());
-            AssertExtensions.Throws<ArgumentException>("customServiceNames", () => new ExtendedProtectionPolicy(PolicyEnforcement.Always, ProtectionScenario.TransportSelected, paramValue));
+            AssertExtensions.Throws<ArgumentException>(
+                "customServiceNames",
+                () =>
+                    new ExtendedProtectionPolicy(
+                        PolicyEnforcement.Always,
+                        ProtectionScenario.TransportSelected,
+                        paramValue
+                    )
+            );
         }
 
         [Fact]
         public void Constructor_PolicyEnforcementChannelBinding_NeverParam()
         {
             var customChannelBinding = new MockCustomChannelBinding();
-            AssertExtensions.Throws<ArgumentException>("policyEnforcement", () => new ExtendedProtectionPolicy(PolicyEnforcement.Never, customChannelBinding));
+            AssertExtensions.Throws<ArgumentException>(
+                "policyEnforcement",
+                () => new ExtendedProtectionPolicy(PolicyEnforcement.Never, customChannelBinding)
+            );
         }
 
         [Fact]
         public void Constructor_ChannelBinding_NullParam()
         {
-            AssertExtensions.Throws<ArgumentNullException>("customChannelBinding", () => new ExtendedProtectionPolicy(PolicyEnforcement.Always, null));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "customChannelBinding",
+                () => new ExtendedProtectionPolicy(PolicyEnforcement.Always, null)
+            );
         }
 
         [Fact]
@@ -41,10 +62,17 @@ namespace System.Net.Security.Tests
         {
             var paramValue = new List<string> { "Test1", "Test2" };
             var expectedServiceNameCollection = new ServiceNameCollection(paramValue);
-            var extendedProtectionPolicy = new ExtendedProtectionPolicy(PolicyEnforcement.Always, ProtectionScenario.TransportSelected, paramValue);
+            var extendedProtectionPolicy = new ExtendedProtectionPolicy(
+                PolicyEnforcement.Always,
+                ProtectionScenario.TransportSelected,
+                paramValue
+            );
 
             Assert.Equal(2, extendedProtectionPolicy.CustomServiceNames.Count);
-            Assert.Equal(expectedServiceNameCollection, extendedProtectionPolicy.CustomServiceNames);
+            Assert.Equal(
+                expectedServiceNameCollection,
+                extendedProtectionPolicy.CustomServiceNames
+            );
         }
 
         [Fact]
@@ -53,7 +81,10 @@ namespace System.Net.Security.Tests
             var extendedProtectionPolicy = new ExtendedProtectionPolicy(PolicyEnforcement.Never);
 
             Assert.Equal(PolicyEnforcement.Never, extendedProtectionPolicy.PolicyEnforcement);
-            Assert.Equal(ProtectionScenario.TransportSelected, extendedProtectionPolicy.ProtectionScenario);
+            Assert.Equal(
+                ProtectionScenario.TransportSelected,
+                extendedProtectionPolicy.ProtectionScenario
+            );
         }
 
         [Fact]
@@ -75,11 +106,17 @@ namespace System.Net.Security.Tests
         {
             var customChannelBindingParam = new MockCustomChannelBinding();
 
-            var extendedProtectionPolicy = new ExtendedProtectionPolicy(PolicyEnforcement.Always, customChannelBindingParam);
+            var extendedProtectionPolicy = new ExtendedProtectionPolicy(
+                PolicyEnforcement.Always,
+                customChannelBindingParam
+            );
 
             Assert.Null(extendedProtectionPolicy.CustomServiceNames);
             Assert.Equal(PolicyEnforcement.Always, extendedProtectionPolicy.PolicyEnforcement);
-            Assert.Equal(ProtectionScenario.TransportSelected, extendedProtectionPolicy.ProtectionScenario);
+            Assert.Equal(
+                ProtectionScenario.TransportSelected,
+                extendedProtectionPolicy.ProtectionScenario
+            );
             Assert.Equal(customChannelBindingParam, extendedProtectionPolicy.CustomChannelBinding);
         }
 
@@ -88,9 +125,16 @@ namespace System.Net.Security.Tests
         {
             string serviceName1 = "Test1";
             string serviceName2 = "Test2";
-            var serviceNameCollectionParam = new ServiceNameCollection(new List<string> { serviceName1, serviceName2 });
-            var extendedProtectionPolicy = new ExtendedProtectionPolicy(PolicyEnforcement.Always, ProtectionScenario.TransportSelected, serviceNameCollectionParam);
-            string expectedResult = $"ProtectionScenario={ProtectionScenario.TransportSelected}; PolicyEnforcement={PolicyEnforcement.Always}; CustomChannelBinding=<null>; ServiceNames={serviceName1}, {serviceName2}";
+            var serviceNameCollectionParam = new ServiceNameCollection(
+                new List<string> { serviceName1, serviceName2 }
+            );
+            var extendedProtectionPolicy = new ExtendedProtectionPolicy(
+                PolicyEnforcement.Always,
+                ProtectionScenario.TransportSelected,
+                serviceNameCollectionParam
+            );
+            string expectedResult =
+                $"ProtectionScenario={ProtectionScenario.TransportSelected}; PolicyEnforcement={PolicyEnforcement.Always}; CustomChannelBinding=<null>; ServiceNames={serviceName1}, {serviceName2}";
 
             string result = extendedProtectionPolicy.ToString();
 
@@ -101,7 +145,8 @@ namespace System.Net.Security.Tests
         public void ExtendedProtectionPolicy_NoCustomServiceNamesAndNoCustomChannelBinding_ToString()
         {
             var extendedProtectionPolicy = new ExtendedProtectionPolicy(PolicyEnforcement.Always);
-            string expectedResult = $"ProtectionScenario={extendedProtectionPolicy.ProtectionScenario}; PolicyEnforcement={PolicyEnforcement.Always}; CustomChannelBinding=<null>; ServiceNames=<null>";
+            string expectedResult =
+                $"ProtectionScenario={extendedProtectionPolicy.ProtectionScenario}; PolicyEnforcement={PolicyEnforcement.Always}; CustomChannelBinding=<null>; ServiceNames=<null>";
 
             string result = extendedProtectionPolicy.ToString();
 
@@ -112,8 +157,12 @@ namespace System.Net.Security.Tests
         public void ExtendedProtectionPolicy_NoCustomServiceNames_ToString()
         {
             var channelBinding = new MockCustomChannelBinding();
-            var extendedProtectionPolicy = new ExtendedProtectionPolicy(PolicyEnforcement.Always, channelBinding);
-            string expectedResult = $"ProtectionScenario={extendedProtectionPolicy.ProtectionScenario}; PolicyEnforcement={PolicyEnforcement.Always}; CustomChannelBinding={channelBinding.ToString()}; ServiceNames=<null>";
+            var extendedProtectionPolicy = new ExtendedProtectionPolicy(
+                PolicyEnforcement.Always,
+                channelBinding
+            );
+            string expectedResult =
+                $"ProtectionScenario={extendedProtectionPolicy.ProtectionScenario}; PolicyEnforcement={PolicyEnforcement.Always}; CustomChannelBinding={channelBinding.ToString()}; ServiceNames=<null>";
 
             string result = extendedProtectionPolicy.ToString();
 

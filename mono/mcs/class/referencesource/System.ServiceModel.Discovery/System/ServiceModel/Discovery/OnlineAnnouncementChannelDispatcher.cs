@@ -5,8 +5,8 @@ namespace System.ServiceModel.Discovery
 {
     using System;
     using System.Collections.ObjectModel;
-    using System.ServiceModel.Channels;
     using System.Runtime;
+    using System.ServiceModel.Channels;
     using System.ServiceModel.Dispatcher;
 
     class OnlineAnnouncementChannelDispatcher : ChannelDispatcherBase
@@ -22,13 +22,26 @@ namespace System.ServiceModel.Discovery
         ServiceHostBase serviceHostBase;
         TimeoutHelper asyncOpenTimeoutHelper;
 
-
-        internal OnlineAnnouncementChannelDispatcher(ServiceHostBase serviceHostBase, Collection<AnnouncementEndpoint> announcementEndpoints, Collection<EndpointDiscoveryMetadata> publishedEndpoints, DiscoveryMessageSequenceGenerator discoveryMessageSequenceGenerator)
+        internal OnlineAnnouncementChannelDispatcher(
+            ServiceHostBase serviceHostBase,
+            Collection<AnnouncementEndpoint> announcementEndpoints,
+            Collection<EndpointDiscoveryMetadata> publishedEndpoints,
+            DiscoveryMessageSequenceGenerator discoveryMessageSequenceGenerator
+        )
         {
             Fx.Assert(serviceHostBase != null, "The serviceHostBase must be non null.");
-            Fx.Assert(announcementEndpoints != null && announcementEndpoints.Count > 0, "The Announcement Endpoints collection must be non null and not empty.");
-            Fx.Assert(publishedEndpoints != null, "The Published Endpoints collection must be non null.");
-            Fx.Assert(discoveryMessageSequenceGenerator != null, "The discoveryMessageSequenceGenerator must be non null.");
+            Fx.Assert(
+                announcementEndpoints != null && announcementEndpoints.Count > 0,
+                "The Announcement Endpoints collection must be non null and not empty."
+            );
+            Fx.Assert(
+                publishedEndpoints != null,
+                "The Published Endpoints collection must be non null."
+            );
+            Fx.Assert(
+                discoveryMessageSequenceGenerator != null,
+                "The discoveryMessageSequenceGenerator must be non null."
+            );
 
             this.serviceHostBase = serviceHostBase;
             this.announcementEndpoints = announcementEndpoints;
@@ -40,35 +53,22 @@ namespace System.ServiceModel.Discovery
 
         public override ServiceHostBase Host
         {
-            get
-            {
-                return this.serviceHostBase;
-            }
+            get { return this.serviceHostBase; }
         }
 
         public override IChannelListener Listener
         {
-            get
-            {
-                return null;
-            }
-
+            get { return null; }
         }
 
         protected override TimeSpan DefaultCloseTimeout
         {
-            get
-            {
-                return TimeSpan.FromMinutes(1);
-            }
+            get { return TimeSpan.FromMinutes(1); }
         }
 
         protected override TimeSpan DefaultOpenTimeout
         {
-            get
-            {
-                return TimeSpan.FromMinutes(1);
-            }
+            get { return TimeSpan.FromMinutes(1); }
         }
 
         void OnChannelDispatcherOpened(object sender, EventArgs e)
@@ -87,7 +87,10 @@ namespace System.ServiceModel.Discovery
             }
             if (startAnnouncements)
             {
-                this.announceOnlineAsyncResult.Start(this.asyncOpenTimeoutHelper.RemainingTime(), false);
+                this.announceOnlineAsyncResult.Start(
+                    this.asyncOpenTimeoutHelper.RemainingTime(),
+                    false
+                );
             }
         }
 
@@ -109,12 +112,23 @@ namespace System.ServiceModel.Discovery
             }
         }
 
-        protected override IAsyncResult OnBeginOpen(TimeSpan timeout, AsyncCallback callback, object state)
+        protected override IAsyncResult OnBeginOpen(
+            TimeSpan timeout,
+            AsyncCallback callback,
+            object state
+        )
         {
             bool startAnnouncements = false;
             this.asyncOpenTimeoutHelper = new TimeoutHelper(timeout);
             this.asyncOpenTimeoutHelper.RemainingTime();
-            this.announceOnlineAsyncResult = new AnnouncementDispatcherAsyncResult(this.announcementEndpoints, this.publishedEndpoints, this.discoveryMessageSequenceGenerator, true, callback, state);
+            this.announceOnlineAsyncResult = new AnnouncementDispatcherAsyncResult(
+                this.announcementEndpoints,
+                this.publishedEndpoints,
+                this.discoveryMessageSequenceGenerator,
+                true,
+                callback,
+                state
+            );
             lock (this.thisLock)
             {
                 if (this.dispatchersToWait == 0)
@@ -130,7 +144,10 @@ namespace System.ServiceModel.Discovery
             }
             else if (startAnnouncements)
             {
-                this.announceOnlineAsyncResult.Start(this.asyncOpenTimeoutHelper.RemainingTime(), true);
+                this.announceOnlineAsyncResult.Start(
+                    this.asyncOpenTimeoutHelper.RemainingTime(),
+                    true
+                );
             }
             return this.announceOnlineAsyncResult;
         }
@@ -142,7 +159,14 @@ namespace System.ServiceModel.Discovery
 
         protected override void OnOpen(TimeSpan timeout)
         {
-            this.announceOnlineAsyncResult = new AnnouncementDispatcherAsyncResult(this.announcementEndpoints, this.publishedEndpoints, this.discoveryMessageSequenceGenerator, true, null, null);
+            this.announceOnlineAsyncResult = new AnnouncementDispatcherAsyncResult(
+                this.announcementEndpoints,
+                this.publishedEndpoints,
+                this.discoveryMessageSequenceGenerator,
+                true,
+                null,
+                null
+            );
             if (this.State != CommunicationState.Opening)
             {
                 // Fixes the ---- when OnAbort is called after OnOpen but before this.announceOnlineAsyncResult is created
@@ -155,7 +179,11 @@ namespace System.ServiceModel.Discovery
             AnnouncementDispatcherAsyncResult.End(this.announceOnlineAsyncResult);
         }
 
-        protected override IAsyncResult OnBeginClose(TimeSpan timeout, AsyncCallback callback, object state)
+        protected override IAsyncResult OnBeginClose(
+            TimeSpan timeout,
+            AsyncCallback callback,
+            object state
+        )
         {
             return new CompletedAsyncResult(callback, state);
         }
@@ -165,8 +193,6 @@ namespace System.ServiceModel.Discovery
             CompletedAsyncResult.End(result);
         }
 
-        protected override void OnClose(TimeSpan timeout)
-        {
-        }
+        protected override void OnClose(TimeSpan timeout) { }
     }
 }

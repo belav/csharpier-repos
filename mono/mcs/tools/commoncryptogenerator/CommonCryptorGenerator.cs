@@ -10,13 +10,24 @@
 using System;
 using System.IO;
 
-namespace Xamarin {
-
-	public static class CommonCryptor {
-		
-		static public void Generate (string namespaceName, string typeName, string baseTypeName, string ccAlgorithmName, string feedbackSize = "8", string ctorInitializers = null, string decryptorInitializers = null, string encryptorInitializers = null, string properties = null)
-		{
-			string template = @"// Generated file to bind CommonCrypto cipher algorithms - DO NOT EDIT
+namespace Xamarin
+{
+    public static class CommonCryptor
+    {
+        public static void Generate(
+            string namespaceName,
+            string typeName,
+            string baseTypeName,
+            string ccAlgorithmName,
+            string feedbackSize = "8",
+            string ctorInitializers = null,
+            string decryptorInitializers = null,
+            string encryptorInitializers = null,
+            string properties = null
+        )
+        {
+            string template =
+                @"// Generated file to bind CommonCrypto cipher algorithms - DO NOT EDIT
 //
 // Authors:
 //	Sebastien Pouliot  <sebastien@xamarin.com>
@@ -101,13 +112,20 @@ namespace %NAMESPACE% {
 		}
 	}
 }";
-			
-			File.WriteAllText (typeName + ".g.cs", template.Replace ("%NAMESPACE%", namespaceName).
-				Replace ("%TYPE%", typeName).Replace ("%BASE%", baseTypeName).Replace("%FEEDBACKSIZE%", feedbackSize).Replace ("%CTOR_INIT%", ctorInitializers).
-				Replace ("%CREATEDECRYPTOR_INIT%", decryptorInitializers).
-				Replace ("%CREATEENCRYPTOR_INIT%", encryptorInitializers).
-				Replace ("%PROPERTIES%", properties).
-				Replace ("%CCALGORITHM%", ccAlgorithmName.ToString ()));
-		}
-	}
+
+            File.WriteAllText(
+                typeName + ".g.cs",
+                template
+                    .Replace("%NAMESPACE%", namespaceName)
+                    .Replace("%TYPE%", typeName)
+                    .Replace("%BASE%", baseTypeName)
+                    .Replace("%FEEDBACKSIZE%", feedbackSize)
+                    .Replace("%CTOR_INIT%", ctorInitializers)
+                    .Replace("%CREATEDECRYPTOR_INIT%", decryptorInitializers)
+                    .Replace("%CREATEENCRYPTOR_INIT%", encryptorInitializers)
+                    .Replace("%PROPERTIES%", properties)
+                    .Replace("%CCALGORITHM%", ccAlgorithmName.ToString())
+            );
+        }
+    }
 }

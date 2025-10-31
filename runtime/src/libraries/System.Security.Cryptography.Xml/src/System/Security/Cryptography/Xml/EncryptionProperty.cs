@@ -23,7 +23,10 @@ namespace System.Security.Cryptography.Xml
                 throw new ArgumentNullException(nameof(elementProperty));
             }
 
-            if (elementProperty.LocalName != "EncryptionProperty" || elementProperty.NamespaceURI != EncryptedXml.XmlEncNamespaceUrl)
+            if (
+                elementProperty.LocalName != "EncryptionProperty"
+                || elementProperty.NamespaceURI != EncryptedXml.XmlEncNamespaceUrl
+            )
                 throw new CryptographicException(SR.Cryptography_Xml_InvalidEncryptionProperty);
 
             _elemProp = elementProperty;
@@ -48,7 +51,10 @@ namespace System.Security.Cryptography.Xml
             {
                 if (value == null)
                     throw new ArgumentNullException(nameof(value));
-                if (value.LocalName != "EncryptionProperty" || value.NamespaceURI != EncryptedXml.XmlEncNamespaceUrl)
+                if (
+                    value.LocalName != "EncryptionProperty"
+                    || value.NamespaceURI != EncryptedXml.XmlEncNamespaceUrl
+                )
                     throw new CryptographicException(SR.Cryptography_Xml_InvalidEncryptionProperty);
 
                 _elemProp = value;
@@ -59,15 +65,13 @@ namespace System.Security.Cryptography.Xml
         [MemberNotNullWhen(true, nameof(_cachedXml))]
         private bool CacheValid
         {
-            get
-            {
-                return (_cachedXml != null);
-            }
+            get { return (_cachedXml != null); }
         }
 
         public XmlElement GetXml()
         {
-            if (CacheValid) return _cachedXml;
+            if (CacheValid)
+                return _cachedXml;
 
             XmlDocument document = new XmlDocument();
             document.PreserveWhitespace = true;
@@ -86,7 +90,10 @@ namespace System.Security.Cryptography.Xml
                 throw new ArgumentNullException(nameof(value));
             }
 
-            if (value.LocalName != "EncryptionProperty" || value.NamespaceURI != EncryptedXml.XmlEncNamespaceUrl)
+            if (
+                value.LocalName != "EncryptionProperty"
+                || value.NamespaceURI != EncryptedXml.XmlEncNamespaceUrl
+            )
                 throw new CryptographicException(SR.Cryptography_Xml_InvalidEncryptionProperty);
 
             // cache the Xml

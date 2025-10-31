@@ -19,114 +19,66 @@ namespace System.Net
 
         protected bool UsingSecureStream
         {
-            get
-            {
-                return (_networkStream is TlsStream);
-            }
+            get { return (_networkStream is TlsStream); }
         }
 
         internal IPAddress ServerAddress
         {
-            get
-            {
-                return ((IPEndPoint)Socket.RemoteEndPoint!).Address;
-            }
+            get { return ((IPEndPoint)Socket.RemoteEndPoint!).Address; }
         }
 
         internal Socket Socket
         {
-            get
-            {
-                return _networkStream.Socket;
-            }
+            get { return _networkStream.Socket; }
         }
 
         internal NetworkStream NetworkStream
         {
-            get
-            {
-                return _networkStream;
-            }
-            set
-            {
-                _networkStream = value;
-            }
+            get { return _networkStream; }
+            set { _networkStream = value; }
         }
 
         public override bool CanRead
         {
-            get
-            {
-                return _networkStream.CanRead;
-            }
+            get { return _networkStream.CanRead; }
         }
 
         public override bool CanSeek
         {
-            get
-            {
-                return _networkStream.CanSeek;
-            }
+            get { return _networkStream.CanSeek; }
         }
 
         public override bool CanWrite
         {
-            get
-            {
-                return _networkStream.CanWrite;
-            }
+            get { return _networkStream.CanWrite; }
         }
 
         public override bool CanTimeout
         {
-            get
-            {
-                return _networkStream.CanTimeout;
-            }
+            get { return _networkStream.CanTimeout; }
         }
 
         public override int ReadTimeout
         {
-            get
-            {
-                return _networkStream.ReadTimeout;
-            }
-            set
-            {
-                _networkStream.ReadTimeout = value;
-            }
+            get { return _networkStream.ReadTimeout; }
+            set { _networkStream.ReadTimeout = value; }
         }
 
         public override int WriteTimeout
         {
-            get
-            {
-                return _networkStream.WriteTimeout;
-            }
-            set
-            {
-                _networkStream.WriteTimeout = value;
-            }
+            get { return _networkStream.WriteTimeout; }
+            set { _networkStream.WriteTimeout = value; }
         }
 
         public override long Length
         {
-            get
-            {
-                return _networkStream.Length;
-            }
+            get { return _networkStream.Length; }
         }
 
         public override long Position
         {
-            get
-            {
-                return _networkStream.Position;
-            }
-            set
-            {
-                _networkStream.Position = value;
-            }
+            get { return _networkStream.Position; }
+            set { _networkStream.Position = value; }
         }
 
         public override long Seek(long offset, SeekOrigin origin)
@@ -170,7 +122,13 @@ namespace System.Net
             _networkStream.Close(timeout);
         }
 
-        public override IAsyncResult BeginRead(byte[] buffer, int offset, int size, AsyncCallback? callback, object? state)
+        public override IAsyncResult BeginRead(
+            byte[] buffer,
+            int offset,
+            int size,
+            AsyncCallback? callback,
+            object? state
+        )
         {
             return _networkStream.BeginRead(buffer, offset, size, callback, state);
         }
@@ -180,17 +138,31 @@ namespace System.Net
             return _networkStream.EndRead(asyncResult);
         }
 
-        public override Task<int> ReadAsync(byte[] buffer, int offset, int count, CancellationToken cancellationToken)
+        public override Task<int> ReadAsync(
+            byte[] buffer,
+            int offset,
+            int count,
+            CancellationToken cancellationToken
+        )
         {
             return _networkStream.ReadAsync(buffer, offset, count, cancellationToken);
         }
 
-        public override ValueTask<int> ReadAsync(Memory<byte> buffer, CancellationToken cancellationToken = default)
+        public override ValueTask<int> ReadAsync(
+            Memory<byte> buffer,
+            CancellationToken cancellationToken = default
+        )
         {
             return _networkStream.ReadAsync(buffer, cancellationToken);
         }
 
-        public override IAsyncResult BeginWrite(byte[] buffer, int offset, int size, AsyncCallback? callback, object? state)
+        public override IAsyncResult BeginWrite(
+            byte[] buffer,
+            int offset,
+            int size,
+            AsyncCallback? callback,
+            object? state
+        )
         {
             return _networkStream.BeginWrite(buffer, offset, size, callback, state);
         }
@@ -200,12 +172,20 @@ namespace System.Net
             _networkStream.EndWrite(asyncResult);
         }
 
-        public override Task WriteAsync(byte[] buffer, int offset, int count, CancellationToken cancellationToken)
+        public override Task WriteAsync(
+            byte[] buffer,
+            int offset,
+            int count,
+            CancellationToken cancellationToken
+        )
         {
             return _networkStream.WriteAsync(buffer, offset, count, cancellationToken);
         }
 
-        public override ValueTask WriteAsync(ReadOnlyMemory<byte> buffer, CancellationToken cancellationToken = default)
+        public override ValueTask WriteAsync(
+            ReadOnlyMemory<byte> buffer,
+            CancellationToken cancellationToken = default
+        )
         {
             return _networkStream.WriteAsync(buffer, cancellationToken);
         }

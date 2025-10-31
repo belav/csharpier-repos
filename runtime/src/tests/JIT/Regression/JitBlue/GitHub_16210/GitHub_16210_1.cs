@@ -19,16 +19,22 @@ public struct float4
     public float y;
     public float z;
     public float w;
-    
+
     public unsafe float this[int index]
     {
         get
         {
-            fixed (float* array = &x) { return array[index]; }
+            fixed (float* array = &x)
+            {
+                return array[index];
+            }
         }
         set
         {
-            fixed (float* array = &x) { array[index] = value; }
+            fixed (float* array = &x)
+            {
+                array[index] = value;
+            }
         }
     }
 }

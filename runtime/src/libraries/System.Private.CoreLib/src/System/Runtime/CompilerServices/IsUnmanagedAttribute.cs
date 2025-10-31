@@ -14,8 +14,6 @@ namespace System.Runtime.CompilerServices
     public sealed class IsUnmanagedAttribute : Attribute
     {
         /// <summary>Initializes the attribute.</summary>
-        public IsUnmanagedAttribute()
-        {
-        }
+        public IsUnmanagedAttribute() { }
     }
 }

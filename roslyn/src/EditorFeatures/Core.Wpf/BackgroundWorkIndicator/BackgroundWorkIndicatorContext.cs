@@ -64,7 +64,8 @@ internal partial class WpfBackgroundWorkIndicatorFactory
         /// Set of scopes we have.  We always start with one (the one created by the initial call to create the work
         /// indicator). However, the client of the background indicator can add more.
         /// </summary>
-        private ImmutableArray<BackgroundWorkIndicatorScope> _scopes = ImmutableArray<BackgroundWorkIndicatorScope>.Empty;
+        private ImmutableArray<BackgroundWorkIndicatorScope> _scopes =
+            ImmutableArray<BackgroundWorkIndicatorScope>.Empty;
 
         /// <summary>
         /// If we've been dismissed or not.  Once dismissed, we will close the tool-tip showing information.  This
@@ -87,7 +88,8 @@ internal partial class WpfBackgroundWorkIndicatorFactory
             SnapshotSpan applicableToSpan,
             string firstDescription,
             bool cancelOnEdit,
-            bool cancelOnFocusLost)
+            bool cancelOnFocusLost
+        )
         {
             _factory = factory;
             _textView = textView;
@@ -98,12 +100,16 @@ internal partial class WpfBackgroundWorkIndicatorFactory
 
             // Create a tool-tip at the requested position.  Turn off all default behavior for it.  We'll be
             // controlling everything ourselves.
-            _toolTipPresenter = factory._toolTipPresenterFactory.Create(textView, new ToolTipParameters(
-                trackMouse: false,
-                ignoreBufferChange: true,
-                keepOpenFunc: null,
-                ignoreCaretPositionChange: true,
-                dismissWhenOffscreen: false));
+            _toolTipPresenter = factory._toolTipPresenterFactory.Create(
+                textView,
+                new ToolTipParameters(
+                    trackMouse: false,
+                    ignoreBufferChange: true,
+                    keepOpenFunc: null,
+                    ignoreCaretPositionChange: true,
+                    dismissWhenOffscreen: false
+                )
+            );
 
             _trackingSpan = applicableToSpan.CreateTrackingSpan(SpanTrackingMode.EdgeInclusive);
 
@@ -114,28 +120,26 @@ internal partial class WpfBackgroundWorkIndicatorFactory
                 UpdateUIAsync,
                 EqualityComparer<UIUpdateRequest>.Default,
                 factory._listener,
-                this.ThreadingContext.DisposalToken);
+                this.ThreadingContext.DisposalToken
+            );
 
             _toolTipPresenter.Dismissed += OnToolTipPresenterDismissed;
             _subjectBuffer.Changed += OnTextBufferChanged;
             textView.LostAggregateFocus += OnTextViewLostAggregateFocus;
         }
 
-        public void Dispose()
-            => _uiUpdateQueue.AddWork(UIUpdateRequest.DismissTooltip);
+        public void Dispose() => _uiUpdateQueue.AddWork(UIUpdateRequest.DismissTooltip);
 
         /// <summary>
         /// Called after anyone consuming us makes a change that should be reflected in the UI.
         /// </summary>
-        internal void EnqueueUIUpdate()
-            => _uiUpdateQueue.AddWork(UIUpdateRequest.UpdateTooltip);
+        internal void EnqueueUIUpdate() => _uiUpdateQueue.AddWork(UIUpdateRequest.UpdateTooltip);
 
         /// <summary>
         /// The same as Dispose.  Anyone taking ownership of this context wants to show their own UI, so we can just
         /// close ours.
         /// </summary>
-        public void TakeOwnership()
-            => this.Dispose();
+        public void TakeOwnership() => this.Dispose();
 
         private void OnTextBufferChanged(object? sender, TextContentChangedEventArgs e)
         {
@@ -149,8 +153,7 @@ internal partial class WpfBackgroundWorkIndicatorFactory
                 CancelAndDispose();
         }
 
-        private void OnToolTipPresenterDismissed(object sender, EventArgs e)
-            => CancelAndDispose();
+        private void OnToolTipPresenterDismissed(object sender, EventArgs e) => CancelAndDispose();
 
         public void CancelAndDispose()
         {
@@ -165,7 +168,6 @@ internal partial class WpfBackgroundWorkIndicatorFactory
                 lock (Gate)
                     return _cancelOnEdit_DoNotAccessDirectly;
             }
-
             set
             {
                 lock (Gate)
@@ -180,7 +182,6 @@ internal partial class WpfBackgroundWorkIndicatorFactory
                 lock (Gate)
                     return _cancelOnFocusLost_DoNotAccessDirectly;
             }
-
             set
             {
                 lock (Gate)
@@ -188,13 +189,24 @@ internal partial class WpfBackgroundWorkIndicatorFactory
             }
         }
 
-        private ValueTask UpdateUIAsync(ImmutableSegmentedList<UIUpdateRequest> requests, CancellationToken cancellationToken)
+        private ValueTask UpdateUIAsync(
+            ImmutableSegmentedList<UIUpdateRequest> requests,
+            CancellationToken cancellationToken
+        )
         {
-            Contract.ThrowIfTrue(requests.IsDefault || requests.IsEmpty, "We must have gotten an actual request to process.");
-            Contract.ThrowIfTrue(requests.Count > 2, "At most we can have two requests in the queue (one to update, one to dismiss).");
+            Contract.ThrowIfTrue(
+                requests.IsDefault || requests.IsEmpty,
+                "We must have gotten an actual request to process."
+            );
+            Contract.ThrowIfTrue(
+                requests.Count > 2,
+                "At most we can have two requests in the queue (one to update, one to dismiss)."
+            );
             Contract.ThrowIfFalse(
-                requests.Contains(UIUpdateRequest.DismissTooltip) || requests.Contains(UIUpdateRequest.UpdateTooltip),
-                "We didn't get an actual event we know about.");
+                requests.Contains(UIUpdateRequest.DismissTooltip)
+                    || requests.Contains(UIUpdateRequest.UpdateTooltip),
+                "We didn't get an actual event we know about."
+            );
 
             return requests.Contains(UIUpdateRequest.DismissTooltip)
                 ? DismissUIAsync()
@@ -202,7 +214,9 @@ internal partial class WpfBackgroundWorkIndicatorFactory
 
             async ValueTask DismissUIAsync()
             {
-                await this.ThreadingContext.JoinableTaskFactory.SwitchToMainThreadAsync(cancellationToken);
+                await this.ThreadingContext.JoinableTaskFactory.SwitchToMainThreadAsync(
+                    cancellationToken
+                );
 
                 // Ensure we only dismiss once.
                 if (_dismissed)
@@ -231,7 +245,9 @@ internal partial class WpfBackgroundWorkIndicatorFactory
                 // tool-tip with it.
                 var data = this.BuildData();
 
-                await this.ThreadingContext.JoinableTaskFactory.SwitchToMainThreadAsync(cancellationToken);
+                await this.ThreadingContext.JoinableTaskFactory.SwitchToMainThreadAsync(
+                    cancellationToken
+                );
 
                 // If we've been dismissed already, then no point in continuing.
                 if (_dismissed)
@@ -240,7 +256,12 @@ internal partial class WpfBackgroundWorkIndicatorFactory
                 // Todo: build a richer tool-tip that makes use of things like the progress reported, and perhaps has a
                 // close button.
                 _toolTipPresenter.StartOrUpdate(
-                    _trackingSpan, new[] { string.Format(EditorFeaturesResources._0_Esc_to_cancel, data.description) });
+                    _trackingSpan,
+                    new[]
+                    {
+                        string.Format(EditorFeaturesResources._0_Esc_to_cancel, data.description),
+                    }
+                );
             }
         }
 
@@ -287,7 +308,8 @@ internal partial class WpfBackgroundWorkIndicatorFactory
                     var scopeProgressInfo = scopeData.progressInfo;
                     progressInfo = new ProgressInfo(
                         progressInfo.CompletedItems + scopeProgressInfo.CompletedItems,
-                        progressInfo.TotalItems + scopeProgressInfo.TotalItems);
+                        progressInfo.TotalItems + scopeProgressInfo.TotalItems
+                    );
                 }
 
                 return (description, progressInfo);

@@ -30,7 +30,7 @@ namespace Internal.TypeSystem
         /// The generic type parameter is contravariant. A contravariant type parameter can
         /// appear as a parameter type in method signatures.
         /// </summary>
-        Contravariant = 2
+        Contravariant = 2,
     }
 
     /// <summary>
@@ -71,10 +71,7 @@ namespace Internal.TypeSystem
         /// </summary>
         public virtual string Name
         {
-            get
-            {
-                return string.Concat("T", Index.ToStringInvariant());
-            }
+            get { return string.Concat("T", Index.ToStringInvariant()); }
         }
 
         /// <summary>
@@ -97,10 +94,7 @@ namespace Internal.TypeSystem
         /// </summary>
         public virtual GenericVariance Variance
         {
-            get
-            {
-                return GenericVariance.None;
-            }
+            get { return GenericVariance.None; }
         }
 
         /// <summary>
@@ -108,10 +102,7 @@ namespace Internal.TypeSystem
         /// </summary>
         public virtual GenericConstraints Constraints
         {
-            get
-            {
-                return GenericConstraints.None;
-            }
+            get { return GenericConstraints.None; }
         }
 
         /// <summary>
@@ -119,10 +110,7 @@ namespace Internal.TypeSystem
         /// </summary>
         public virtual IEnumerable<TypeDesc> TypeConstraints
         {
-            get
-            {
-                return EmptyTypes;
-            }
+            get { return EmptyTypes; }
         }
 
         /// <summary>
@@ -130,10 +118,7 @@ namespace Internal.TypeSystem
         /// </summary>
         public bool HasNotNullableValueTypeConstraint
         {
-            get
-            {
-                return (Constraints & GenericConstraints.NotNullableValueTypeConstraint) != 0;
-            }
+            get { return (Constraints & GenericConstraints.NotNullableValueTypeConstraint) != 0; }
         }
 
         /// <summary>
@@ -141,10 +126,7 @@ namespace Internal.TypeSystem
         /// </summary>
         public bool HasReferenceTypeConstraint
         {
-            get
-            {
-                return (Constraints & GenericConstraints.ReferenceTypeConstraint) != 0;
-            }
+            get { return (Constraints & GenericConstraints.ReferenceTypeConstraint) != 0; }
         }
 
         /// <summary>
@@ -152,10 +134,7 @@ namespace Internal.TypeSystem
         /// </summary>
         public bool HasDefaultConstructorConstraint
         {
-            get
-            {
-                return (Constraints & GenericConstraints.DefaultConstructorConstraint) != 0;
-            }
+            get { return (Constraints & GenericConstraints.DefaultConstructorConstraint) != 0; }
         }
 
         /// <summary>
@@ -163,10 +142,7 @@ namespace Internal.TypeSystem
         /// </summary>
         public bool HasAcceptByRefLikeConstraint
         {
-            get
-            {
-                return (Constraints & GenericConstraints.AcceptByRefLike) != 0;
-            }
+            get { return (Constraints & GenericConstraints.AcceptByRefLike) != 0; }
         }
 
         /// <summary>
@@ -174,10 +150,7 @@ namespace Internal.TypeSystem
         /// </summary>
         public bool IsCovariant
         {
-            get
-            {
-                return (Variance & GenericVariance.Covariant) != 0;
-            }
+            get { return (Variance & GenericVariance.Covariant) != 0; }
         }
 
         /// <summary>
@@ -185,10 +158,7 @@ namespace Internal.TypeSystem
         /// </summary>
         public bool IsContravariant
         {
-            get
-            {
-                return (Variance & GenericVariance.Contravariant) != 0;
-            }
+            get { return (Variance & GenericVariance.Contravariant) != 0; }
         }
 
         protected sealed override TypeFlags ComputeTypeFlags(TypeFlags mask)
@@ -208,7 +178,10 @@ namespace Internal.TypeSystem
         {
             // TODO: Determine what a the right hash function should be. Use stable hashcode based on the type name?
             // For now, use the same hash as a SignatureVariable type.
-            return Internal.NativeFormat.TypeHashingAlgorithms.ComputeSignatureVariableHashCode(Index, Kind == GenericParameterKind.Method);
+            return Internal.NativeFormat.TypeHashingAlgorithms.ComputeSignatureVariableHashCode(
+                Index,
+                Kind == GenericParameterKind.Method
+            );
         }
     }
 }

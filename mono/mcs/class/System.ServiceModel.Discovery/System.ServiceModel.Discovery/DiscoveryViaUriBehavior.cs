@@ -10,10 +10,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -33,61 +33,61 @@ using System.ServiceModel.Dispatcher;
 
 namespace System.ServiceModel.Discovery
 {
-	internal class DiscoveryViaUriBehavior : IEndpointBehavior
-	{
-		public DiscoveryViaUriBehavior (DiscoveryVersion version, Uri via)
-		{
-			this.version = version;
-			this.via = via;
-		}
-		
-		DiscoveryVersion version;
+    internal class DiscoveryViaUriBehavior : IEndpointBehavior
+    {
+        public DiscoveryViaUriBehavior(DiscoveryVersion version, Uri via)
+        {
+            this.version = version;
+            this.via = via;
+        }
 
-		Uri via;
-		
-		public void AddBindingParameters (ServiceEndpoint endpoint, BindingParameterCollection bindingParameters)
-		{
-		}
-		
-		public void ApplyClientBehavior (ServiceEndpoint endpoint, ClientRuntime clientRuntime)
-		{
-			if (endpoint == null)
-				throw new ArgumentNullException ("endpoint");
-			if (clientRuntime == null)
-				throw new ArgumentNullException ("clientRuntime");
+        DiscoveryVersion version;
 
-			clientRuntime.Via = via;
-			clientRuntime.MessageInspectors.Add (new ClientMessageInspector (version));
-		}
+        Uri via;
 
-		class ClientMessageInspector : IClientMessageInspector
-		{
-			public ClientMessageInspector (DiscoveryVersion version)
-			{
-				this.version = version;
-			}
-			
-			DiscoveryVersion version;
-			
-			public object BeforeSendRequest (ref Message request, IClientChannel channel)
-			{
-				// overwrite To header with version-specific URN.
-				request.Headers.To = version.AdhocAddress;
-				return null;
-			}
+        public void AddBindingParameters(
+            ServiceEndpoint endpoint,
+            BindingParameterCollection bindingParameters
+        ) { }
 
-			public void AfterReceiveReply (ref Message reply, object correlationState)
-			{
-				// do nothing
-			}
-		}
+        public void ApplyClientBehavior(ServiceEndpoint endpoint, ClientRuntime clientRuntime)
+        {
+            if (endpoint == null)
+                throw new ArgumentNullException("endpoint");
+            if (clientRuntime == null)
+                throw new ArgumentNullException("clientRuntime");
 
-		public void ApplyDispatchBehavior (ServiceEndpoint endpoint, EndpointDispatcher endpointDispatcher)
-		{
-		}
-		
-		public void Validate (ServiceEndpoint endpoint)
-		{
-		}
-	}
+            clientRuntime.Via = via;
+            clientRuntime.MessageInspectors.Add(new ClientMessageInspector(version));
+        }
+
+        class ClientMessageInspector : IClientMessageInspector
+        {
+            public ClientMessageInspector(DiscoveryVersion version)
+            {
+                this.version = version;
+            }
+
+            DiscoveryVersion version;
+
+            public object BeforeSendRequest(ref Message request, IClientChannel channel)
+            {
+                // overwrite To header with version-specific URN.
+                request.Headers.To = version.AdhocAddress;
+                return null;
+            }
+
+            public void AfterReceiveReply(ref Message reply, object correlationState)
+            {
+                // do nothing
+            }
+        }
+
+        public void ApplyDispatchBehavior(
+            ServiceEndpoint endpoint,
+            EndpointDispatcher endpointDispatcher
+        ) { }
+
+        public void Validate(ServiceEndpoint endpoint) { }
+    }
 }

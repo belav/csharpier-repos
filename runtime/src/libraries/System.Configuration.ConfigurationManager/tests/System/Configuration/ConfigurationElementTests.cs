@@ -61,7 +61,10 @@ namespace System.ConfigurationTests
             Assert.Same(foo, new SimpleElement().TestGetTransformedAssemblyString(foo));
         }
 
-        private static PropertyInfo LockType = typeof(ConfigurationLockCollection).GetProperty("LockType", BindingFlags.NonPublic | BindingFlags.Instance);
+        private static PropertyInfo LockType = typeof(ConfigurationLockCollection).GetProperty(
+            "LockType",
+            BindingFlags.NonPublic | BindingFlags.Instance
+        );
 
         [Fact]
         public void LockAttributesCollectionIsCorrectType()
@@ -92,7 +95,10 @@ namespace System.ConfigurationTests
         {
             var lockCollection = new SimpleElement().LockAllElementsExcept;
             Assert.Equal(0, lockCollection.Count);
-            Assert.Equal("LockedElementsExceptionList", LockType.GetValue(lockCollection).ToString());
+            Assert.Equal(
+                "LockedElementsExceptionList",
+                LockType.GetValue(lockCollection).ToString()
+            );
         }
 
         [Fact]
@@ -149,10 +155,20 @@ namespace System.ConfigurationTests
         {
             public ContextInformation TestEvaluationContext => EvaluationContext;
             public bool TestHasContext => HasContext;
-            public string TestGetTransformedTypeString(string typeName) => GetTransformedTypeString(typeName);
-            public string TestGetTransformedAssemblyString(string assemblyName) => GetTransformedAssemblyString(assemblyName);
-            public bool TestOnDeserializeUnrecognizedAttribute(string name, string value) => OnDeserializeUnrecognizedAttribute(name, value);
-            public bool TestOnDeserializeUnrecognizedElement(string elementName, XmlReader reader) => OnDeserializeUnrecognizedElement(elementName, reader);
+
+            public string TestGetTransformedTypeString(string typeName) =>
+                GetTransformedTypeString(typeName);
+
+            public string TestGetTransformedAssemblyString(string assemblyName) =>
+                GetTransformedAssemblyString(assemblyName);
+
+            public bool TestOnDeserializeUnrecognizedAttribute(string name, string value) =>
+                OnDeserializeUnrecognizedAttribute(name, value);
+
+            public bool TestOnDeserializeUnrecognizedElement(
+                string elementName,
+                XmlReader reader
+            ) => OnDeserializeUnrecognizedElement(elementName, reader);
         }
     }
 }

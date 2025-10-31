@@ -21,7 +21,11 @@ namespace Microsoft.WebAssembly.AppHost;
 
 public class WebServer
 {
-    internal static async Task<(ServerURLs, IWebHost)> StartAsync(WebServerOptions options, ILogger logger, CancellationToken token)
+    internal static async Task<(ServerURLs, IWebHost)> StartAsync(
+        WebServerOptions options,
+        ILogger logger,
+        CancellationToken token
+    )
     {
         TaskCompletionSource<ServerURLs> realUrlsAvailableTcs = new();
 
@@ -32,23 +36,31 @@ public class WebServer
             {
                 logging.AddConsole().AddFilter(null, LogLevel.Warning);
             })
-            .ConfigureServices((ctx, services) =>
-            {
-                if (options.WebServerUseCors)
+            .ConfigureServices(
+                (ctx, services) =>
                 {
-                    services.AddCors(o => o.AddPolicy("AnyCors", builder =>
-                        {
-                            builder.AllowAnyOrigin()
-                                .AllowAnyMethod()
-                                .AllowAnyHeader()
-                                .WithExposedHeaders("*");
-                        }));
+                    if (options.WebServerUseCors)
+                    {
+                        services.AddCors(o =>
+                            o.AddPolicy(
+                                "AnyCors",
+                                builder =>
+                                {
+                                    builder
+                                        .AllowAnyOrigin()
+                                        .AllowAnyMethod()
+                                        .AllowAnyHeader()
+                                        .WithExposedHeaders("*");
+                                }
+                            )
+                        );
+                    }
+                    services.AddSingleton(logger);
+                    services.AddSingleton(Options.Create(options));
+                    services.AddSingleton(realUrlsAvailableTcs);
+                    services.AddRouting();
                 }
-                services.AddSingleton(logger);
-                services.AddSingleton(Options.Create(options));
-                services.AddSingleton(realUrlsAvailableTcs);
-                services.AddRouting();
-            })
+            )
             .UseUrls(options.Urls);
 
         if (options.ContentRootPath != null)
@@ -63,7 +75,6 @@ public class WebServer
         ServerURLs serverUrls = await realUrlsAvailableTcs.Task;
         return (serverUrls, host);
     }
-
 }
 
 // FIXME: can be simplified to string[]
@@ -71,14 +82,22 @@ public record ServerURLs(string Http, string? Https, string? DebugPath = null);
 
 public static class ServerURLsProvider
 {
-    public static void ResolveServerUrlsOnApplicationStarted(IApplicationBuilder app, ILogger logger, IHostApplicationLifetime applicationLifetime, TaskCompletionSource<ServerURLs> realUrlsAvailableTcs, string? debugPath = null)
+    public static void ResolveServerUrlsOnApplicationStarted(
+        IApplicationBuilder app,
+        ILogger logger,
+        IHostApplicationLifetime applicationLifetime,
+        TaskCompletionSource<ServerURLs> realUrlsAvailableTcs,
+        string? debugPath = null
+    )
     {
         applicationLifetime.ApplicationStarted.Register(() =>
         {
             TaskCompletionSource<ServerURLs> tcs = realUrlsAvailableTcs;
             try
             {
-                ICollection<string>? addresses = app.ServerFeatures.Get<IServerAddressesFeature>()?.Addresses;
+                ICollection<string>? addresses = app
+                    .ServerFeatures.Get<IServerAddressesFeature>()
+                    ?.Addresses;
 
                 string? ipAddress = null;
                 string? ipAddressSecure = null;
@@ -89,7 +108,11 @@ public static class ServerURLsProvider
                 }
 
                 if (ipAddress == null)
-                    tcs.SetException(new InvalidOperationException("Failed to determine web server's IP address or port"));
+                    tcs.SetException(
+                        new InvalidOperationException(
+                            "Failed to determine web server's IP address or port"
+                        )
+                    );
                 else
                     tcs.SetResult(new ServerURLs(ipAddress, ipAddressSecure, debugPath));
             }
@@ -100,11 +123,17 @@ public static class ServerURLsProvider
                 throw;
             }
 
-            static string? GetHttpServerAddress(ICollection<string> addresses, bool secure) => addresses?
-                .Where(a => a.StartsWith(secure ? "https:" : "http:", StringComparison.InvariantCultureIgnoreCase))
-                .Select(a => new Uri(a))
-                .Select(uri => uri.ToString())
-                .FirstOrDefault();
+            static string? GetHttpServerAddress(ICollection<string> addresses, bool secure) =>
+                addresses
+                    ?.Where(a =>
+                        a.StartsWith(
+                            secure ? "https:" : "http:",
+                            StringComparison.InvariantCultureIgnoreCase
+                        )
+                    )
+                    .Select(a => new Uri(a))
+                    .Select(uri => uri.ToString())
+                    .FirstOrDefault();
         });
     }
 }

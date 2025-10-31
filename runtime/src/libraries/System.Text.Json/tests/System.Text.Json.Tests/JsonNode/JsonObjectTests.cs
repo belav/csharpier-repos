@@ -117,7 +117,9 @@ namespace System.Text.Json.Nodes.Tests
             Assert.Contains("propertyName", ex.ToString());
 
             var iDictionary = (IDictionary<string, JsonNode?>)jObject;
-            ex = Assert.Throws<ArgumentNullException>(() => iDictionary.TryGetValue(null, out JsonNode _));
+            ex = Assert.Throws<ArgumentNullException>(() =>
+                iDictionary.TryGetValue(null, out JsonNode _)
+            );
             Assert.Contains("propertyName", ex.ToString());
         }
 
@@ -239,7 +241,10 @@ namespace System.Text.Json.Nodes.Tests
         public static void CaseSensitive_Remove()
         {
             var options = new JsonSerializerOptions() { PropertyNameCaseInsensitive = false };
-            JsonObject obj = JsonSerializer.Deserialize<JsonObject>("{\"MYPROPERTY\":42,\"myproperty\":43}", options);
+            JsonObject obj = JsonSerializer.Deserialize<JsonObject>(
+                "{\"MYPROPERTY\":42,\"myproperty\":43}",
+                options
+            );
 
             Assert.False(obj.ContainsKey("MyProperty"));
             Assert.True(obj.ContainsKey("MYPROPERTY"));
@@ -321,7 +326,9 @@ namespace System.Text.Json.Nodes.Tests
         {
             using (JsonDocument document = JsonDocument.Parse(json))
             {
-                Assert.Throws<InvalidOperationException>(() => JsonObject.Create(document.RootElement));
+                Assert.Throws<InvalidOperationException>(() =>
+                    JsonObject.Create(document.RootElement)
+                );
             }
         }
 
@@ -456,8 +463,7 @@ namespace System.Text.Json.Nodes.Tests
                 ["MyBoolean"] = JsonValue.Create(false),
 
                 // Nested array
-                ["MyArray"] = new JsonArray
-                (
+                ["MyArray"] = new JsonArray(
                     JsonValue.Create(2),
                     JsonValue.Create(3),
                     JsonValue.Create(42)
@@ -469,15 +475,9 @@ namespace System.Text.Json.Nodes.Tests
                 ["MyGuid"] = JsonValue.Create(new Guid("ed957609-cdfe-412f-88c1-02daca1b4f51")),
 
                 // Nested objects
-                ["MyObject"] = new JsonObject
-                {
-                    ["MyString"] = JsonValue.Create("Hello!!")
-                },
+                ["MyObject"] = new JsonObject { ["MyString"] = JsonValue.Create("Hello!!") },
 
-                ["Child"] = new JsonObject
-                {
-                    ["ChildProp"] = JsonValue.Create(1)
-                }
+                ["Child"] = new JsonObject { ["ChildProp"] = JsonValue.Create(1) },
             };
 
             string json = jObj.ToJsonString();
@@ -503,15 +503,9 @@ namespace System.Text.Json.Nodes.Tests
                 ["MyGuid"] = new Guid("ed957609-cdfe-412f-88c1-02daca1b4f51"),
 
                 // Nested objects
-                ["MyObject"] = new JsonObject
-                {
-                    ["MyString"] = "Hello!!"
-                },
+                ["MyObject"] = new JsonObject { ["MyString"] = "Hello!!" },
 
-                ["Child"] = new JsonObject()
-                {
-                    ["ChildProp"] = 1
-                }
+                ["Child"] = new JsonObject() { ["ChildProp"] = 1 },
             };
 
             string json = jObj.ToJsonString();
@@ -564,7 +558,9 @@ namespace System.Text.Json.Nodes.Tests
 
             var jObject = new JsonObject();
             jObject.Add("Prop", jValue);
-            ArgumentException ex = Assert.Throws<ArgumentException>(() => jObject.Add("Prop", jValue));
+            ArgumentException ex = Assert.Throws<ArgumentException>(() =>
+                jObject.Add("Prop", jValue)
+            );
             Assert.Contains("Prop", ex.ToString());
         }
 
@@ -591,8 +587,12 @@ namespace System.Text.Json.Nodes.Tests
         [Fact]
         public static void DynamicObject_LINQ_Query()
         {
-            JsonArray allOrders = JsonSerializer.Deserialize<JsonArray>(JsonNodeTests.Linq_Query_Json);
-            IEnumerable<JsonNode> orders = allOrders.Where(o => o["Customer"]["City"].GetValue<string>() == "Fargo");
+            JsonArray allOrders = JsonSerializer.Deserialize<JsonArray>(
+                JsonNodeTests.Linq_Query_Json
+            );
+            IEnumerable<JsonNode> orders = allOrders.Where(o =>
+                o["Customer"]["City"].GetValue<string>() == "Fargo"
+            );
 
             Assert.Equal(2, orders.Count());
             Assert.Equal(100, orders.ElementAt(0)["OrderId"].GetValue<int>());
@@ -613,7 +613,8 @@ namespace System.Text.Json.Nodes.Tests
         [Fact]
         public static void DynamicObject_LINQ_Convert()
         {
-            string json = @"
+            string json =
+                @"
             [
               {
                 ""Title"": ""TITLE."",
@@ -632,15 +633,17 @@ namespace System.Text.Json.Nodes.Tests
 
             // Convert nested JSON to a flat POCO.
             IList<BlogPost> blogPosts = arr.Select(p => new BlogPost
-            {
-                Title = p["Title"].GetValue<string>(),
-                AuthorName = p["Author"]["Name"].GetValue<string>(),
-                AuthorTwitter = p["Author"]["Mail"].GetValue<string>(),
-                PostedDate = p["Date"].GetValue<DateTime>(),
-                Body = p["BodyHtml"].GetValue<string>()
-            }).ToList();
+                {
+                    Title = p["Title"].GetValue<string>(),
+                    AuthorName = p["Author"]["Name"].GetValue<string>(),
+                    AuthorTwitter = p["Author"]["Mail"].GetValue<string>(),
+                    PostedDate = p["Date"].GetValue<DateTime>(),
+                    Body = p["BodyHtml"].GetValue<string>(),
+                })
+                .ToList();
 
-            const string expected = "[{\"Title\":\"TITLE.\",\"AuthorName\":\"NAME.\",\"AuthorTwitter\":\"MAIL.\",\"Body\":\"Content.\",\"PostedDate\":\"2021-01-20T19:30:00\"}]";
+            const string expected =
+                "[{\"Title\":\"TITLE.\",\"AuthorName\":\"NAME.\",\"AuthorTwitter\":\"MAIL.\",\"Body\":\"Content.\",\"PostedDate\":\"2021-01-20T19:30:00\"}]";
 
             string json_out = JsonSerializer.Serialize(blogPosts);
             Assert.Equal(expected, json_out);
@@ -648,7 +651,6 @@ namespace System.Text.Json.Nodes.Tests
 
         [Theory]
         [MemberData(nameof(JObjectCollectionData))]
-
         public static void ListToDictionaryConversions(JsonObject jObject, int count)
         {
             Assert.Equal(count, jObject.Count);
@@ -701,12 +703,16 @@ namespace System.Text.Json.Nodes.Tests
                 string key = i.ToString();
 
                 // Contains does a reference comparison on JsonNode so it needs to be done before modifying.
-                Assert.True(jObject.Contains(new KeyValuePair<string, JsonNode?>(key, jObject[key])));
+                Assert.True(
+                    jObject.Contains(new KeyValuePair<string, JsonNode?>(key, jObject[key]))
+                );
 
                 jObject[key] = JsonValue.Create(i);
                 jObject[key] = jObject[key]; // Should have no effect.
 
-                Assert.False(jObject.Contains(new KeyValuePair<string, JsonNode?>("MISSING", jObject[key])));
+                Assert.False(
+                    jObject.Contains(new KeyValuePair<string, JsonNode?>("MISSING", jObject[key]))
+                );
                 Assert.True(jObject.ContainsKey(key));
 
                 // Remove() should not affect result when missing.
@@ -811,7 +817,7 @@ namespace System.Text.Json.Nodes.Tests
             // Exception string sample: "Collection was modified; enumeration operation may not execute"
             Assert.Throws<InvalidOperationException>(() =>
             {
-                foreach(KeyValuePair<string, JsonNode?> node in jObject)
+                foreach (KeyValuePair<string, JsonNode?> node in jObject)
                 {
                     index++;
                     jObject.Add("New_A", index);
@@ -925,21 +931,20 @@ namespace System.Text.Json.Nodes.Tests
         [Fact]
         public static void TestJsonNodeOptionsSet()
         {
-	        var options = new JsonNodeOptions()
-	        {
-	            PropertyNameCaseInsensitive = true
-	        };
+            var options = new JsonNodeOptions() { PropertyNameCaseInsensitive = true };
 
             // Ctor that takes just options
             var obj1 = new JsonObject(options);
             obj1["Hello"] = "World";
 
             // Ctor that takes props IEnumerable + options
-            IEnumerable<KeyValuePair<string, JsonNode?>> props = new List<KeyValuePair<string, JsonNode?>>
+            IEnumerable<KeyValuePair<string, JsonNode?>> props = new List<
+                KeyValuePair<string, JsonNode?>
+            >
             {
-                new KeyValuePair<string, JsonNode?>("Hello", "World")
+                new KeyValuePair<string, JsonNode?>("Hello", "World"),
             };
-	        var obj2 = new JsonObject(props, options);
+            var obj2 = new JsonObject(props, options);
 
             // Create method
             using JsonDocument doc = JsonDocument.Parse(@"{""Hello"":""World""}");
@@ -963,11 +968,15 @@ namespace System.Text.Json.Nodes.Tests
         {
             string arrayText = "{\"prop0\":0,\"prop1\":1}";
             JsonObject jObj = Assert.IsType<JsonObject>(JsonNode.Parse(arrayText));
-            Parallel.For(0, 128, i =>
-            {
-                Assert.Equal(0, (int)jObj["prop0"]);
-                Assert.Equal(1, (int)jObj["prop1"]);
-            });
+            Parallel.For(
+                0,
+                128,
+                i =>
+                {
+                    Assert.Equal(0, (int)jObj["prop0"]);
+                    Assert.Equal(1, (int)jObj["prop1"]);
+                }
+            );
         }
 
         [Fact]
@@ -976,11 +985,7 @@ namespace System.Text.Json.Nodes.Tests
             var array = new JsonArray();
             array.Add(5);
             array.Add(7);
-            var nestedJsonObj = new JsonObject()
-            {
-                { "Ten", 10 },
-                { "Name", "xyz"}
-            };
+            var nestedJsonObj = new JsonObject() { { "Ten", 10 }, { "Name", "xyz" } };
 
             var jObject = new JsonObject();
             jObject["One"] = 1;
@@ -1070,11 +1075,7 @@ namespace System.Text.Json.Nodes.Tests
             {
                 Id = 1,
                 Name = "First",
-                NestedObject = new SimpleClass()
-                {
-                    Id = 2,
-                    Name = "Last",
-                }
+                NestedObject = new SimpleClass() { Id = 2, Name = "Last" },
             };
 
             JsonNodeTests.AssertDeepEqual(jObject, JsonValue.Create(poco));
@@ -1083,11 +1084,7 @@ namespace System.Text.Json.Nodes.Tests
             {
                 Id = 1,
                 Name = "First",
-                NestedObject = new SimpleClass()
-                {
-                    Id = 3,
-                    Name = "Last",
-                }
+                NestedObject = new SimpleClass() { Id = 3, Name = "Last" },
             };
 
             JsonNodeTests.AssertNotDeepEqual(jObject, JsonValue.Create(diffPoco));
@@ -1105,7 +1102,7 @@ namespace System.Text.Json.Nodes.Tests
             {
                 { "One", 1 },
                 { "array", new string[] { "a", "b" } },
-                { "obj", new { } }
+                { "obj", new { } },
             };
 
             JsonNodeTests.AssertDeepEqual(jObject, JsonValue.Create(dictionary));
@@ -1114,7 +1111,7 @@ namespace System.Text.Json.Nodes.Tests
             {
                 { "One", 1 },
                 { "array", new string[] { "a", "d" } },
-                { "obj", new { } }
+                { "obj", new { } },
             };
 
             JsonNodeTests.AssertNotDeepEqual(jObject, JsonValue.Create(diffDictionary));
@@ -1135,7 +1132,9 @@ namespace System.Text.Json.Nodes.Tests
             using JsonDocument document = JsonDocument.Parse("{\"One\": 1, \"String\": \"abc\"}");
             JsonObject jObject = JsonObject.Create(document.RootElement);
 
-            using JsonDocument document2 = JsonDocument.Parse("{\"One\":     1, \"String\":     \"abc\"}   ");
+            using JsonDocument document2 = JsonDocument.Parse(
+                "{\"One\":     1, \"String\":     \"abc\"}   "
+            );
             JsonObject jObject2 = JsonObject.Create(document2.RootElement);
             JsonNodeTests.AssertDeepEqual(jObject, jObject2);
 
@@ -1143,7 +1142,9 @@ namespace System.Text.Json.Nodes.Tests
             JsonObject jObject3 = JsonObject.Create(document3.RootElement);
             JsonNodeTests.AssertNotDeepEqual(jObject, jObject3);
 
-            using JsonDocument document4 = JsonDocument.Parse("{\"One\":     1, \"String\":     \"abc2\"}   ");
+            using JsonDocument document4 = JsonDocument.Parse(
+                "{\"One\":     1, \"String\":     \"abc2\"}   "
+            );
             JsonObject jObject4 = JsonObject.Create(document4.RootElement);
             JsonNodeTests.AssertNotDeepEqual(jObject, jObject4);
         }

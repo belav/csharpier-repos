@@ -76,80 +76,76 @@
 
     ******************************************************************************/
 
-namespace System.Web.Configuration {
+namespace System.Web.Configuration
+{
     using System;
-    using System.Xml;
-    using System.Configuration;
-    using System.Collections.Specialized;
     using System.Collections;
+    using System.Collections.Specialized;
+    using System.ComponentModel;
+    using System.Configuration;
     using System.Globalization;
     using System.IO;
+    using System.Security.Permissions;
     using System.Text;
     using System.Web.Util;
-    using System.ComponentModel;
-    using System.Security.Permissions;
+    using System.Xml;
 
-    public sealed class FormsAuthenticationUser : ConfigurationElement {
+    public sealed class FormsAuthenticationUser : ConfigurationElement
+    {
         private static ConfigurationPropertyCollection _properties;
-        private static readonly ConfigurationProperty _propName =
-            new ConfigurationProperty("name",
-                                        typeof(string),
-                                        "",
-                                        new LowerCaseStringConverter(),
-                                        null,
-                                        ConfigurationPropertyOptions.IsRequired | 
-                                        ConfigurationPropertyOptions.IsKey);
-        
-        private static readonly ConfigurationProperty _propPassword =
-            new ConfigurationProperty("password", 
-                                        typeof(string), 
-                                        "", 
-                                        ConfigurationPropertyOptions.IsRequired);
+        private static readonly ConfigurationProperty _propName = new ConfigurationProperty(
+            "name",
+            typeof(string),
+            "",
+            new LowerCaseStringConverter(),
+            null,
+            ConfigurationPropertyOptions.IsRequired | ConfigurationPropertyOptions.IsKey
+        );
 
-        static FormsAuthenticationUser() {
+        private static readonly ConfigurationProperty _propPassword = new ConfigurationProperty(
+            "password",
+            typeof(string),
+            "",
+            ConfigurationPropertyOptions.IsRequired
+        );
+
+        static FormsAuthenticationUser()
+        {
             // Property initialization
             _properties = new ConfigurationPropertyCollection();
             _properties.Add(_propName);
             _properties.Add(_propPassword);
         }
 
-        internal FormsAuthenticationUser() {
-        }
+        internal FormsAuthenticationUser() { }
 
         public FormsAuthenticationUser(String name, String password)
-            : this() {
+            : this()
+        {
             Name = name.ToLower(CultureInfo.InvariantCulture);
             Password = password;
         }
 
-        protected override ConfigurationPropertyCollection Properties {
-            get {
-                return _properties;
-            }
+        protected override ConfigurationPropertyCollection Properties
+        {
+            get { return _properties; }
         }
 
         [ConfigurationProperty("name", IsRequired = true, IsKey = true, DefaultValue = "")]
         [TypeConverter(typeof(LowerCaseStringConverter))]
         [StringValidator()]
-        public string Name {
-            get {
-                return (string)base[_propName];
-            }
-            set {
-                base[_propName] = value;
-            }
+        public string Name
+        {
+            get { return (string)base[_propName]; }
+            set { base[_propName] = value; }
         }
 
         [ConfigurationProperty("password", IsRequired = true, DefaultValue = "")]
         [StringValidator()]
-        public string Password {
-            get {
-                return (string)base[_propPassword];
-            }
-            set {
-                base[_propPassword] = value;
-            }
+        public string Password
+        {
+            get { return (string)base[_propPassword]; }
+            set { base[_propPassword] = value; }
         }
-
     } // class FormsAuthenticationUser
 }

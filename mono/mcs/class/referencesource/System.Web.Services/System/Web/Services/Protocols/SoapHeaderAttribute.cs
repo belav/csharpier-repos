@@ -1,25 +1,27 @@
 //------------------------------------------------------------------------------
 // <copyright file="SoapHeaderAttribute.cs" company="Microsoft">
 //     Copyright (c) Microsoft Corporation.  All rights reserved.
-// </copyright>                                                                
+// </copyright>
 //------------------------------------------------------------------------------
 
-namespace System.Web.Services.Protocols {
-    using System.Web.Services;
-    using System.Xml.Serialization;
+namespace System.Web.Services.Protocols
+{
     using System;
-    using System.Reflection;
-    using System.Xml;
     using System.Collections;
-    using System.IO;
     using System.ComponentModel;
+    using System.IO;
+    using System.Reflection;
+    using System.Web.Services;
+    using System.Xml;
+    using System.Xml.Serialization;
 
     /// <include file='doc\SoapHeaderAttribute.uex' path='docs/doc[@for="SoapHeaderAttribute"]/*' />
     /// <devdoc>
     ///    <para>[To be supplied.]</para>
     /// </devdoc>
     [AttributeUsage(AttributeTargets.Method, AllowMultiple = true)]
-    public sealed class SoapHeaderAttribute : System.Attribute {
+    public sealed class SoapHeaderAttribute : System.Attribute
+    {
         string memberName;
         SoapHeaderDirection direction = SoapHeaderDirection.In;
         bool required = true;
@@ -28,7 +30,8 @@ namespace System.Web.Services.Protocols {
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public SoapHeaderAttribute(string memberName) {
+        public SoapHeaderAttribute(string memberName)
+        {
             this.memberName = memberName;
         }
 
@@ -36,7 +39,8 @@ namespace System.Web.Services.Protocols {
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public string MemberName {
+        public string MemberName
+        {
             get { return memberName == null ? string.Empty : memberName; }
             set { memberName = value; }
         }
@@ -45,7 +49,8 @@ namespace System.Web.Services.Protocols {
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public SoapHeaderDirection Direction {
+        public SoapHeaderDirection Direction
+        {
             get { return direction; }
             set { direction = value; }
         }
@@ -54,8 +59,12 @@ namespace System.Web.Services.Protocols {
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        [Obsolete("This property will be removed from a future version. The presence of a particular header in a SOAP message is no longer enforced", false)]
-        public bool Required {
+        [Obsolete(
+            "This property will be removed from a future version. The presence of a particular header in a SOAP message is no longer enforced",
+            false
+        )]
+        public bool Required
+        {
             get { return required; }
             set { required = value; }
         }

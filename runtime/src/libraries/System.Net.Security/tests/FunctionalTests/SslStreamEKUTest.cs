@@ -6,7 +6,6 @@ using System.Net.Test.Common;
 using System.Security.Authentication;
 using System.Security.Cryptography.X509Certificates;
 using System.Threading.Tasks;
-
 using Xunit;
 
 namespace System.Net.Security.Tests
@@ -15,18 +14,25 @@ namespace System.Net.Security.Tests
 
     public class SslStreamEKUTest
     {
-        public static bool IsRootCertificateInstalled => Capability.IsTrustedRootCertificateInstalled();
+        public static bool IsRootCertificateInstalled =>
+            Capability.IsTrustedRootCertificateInstalled();
         public static bool DoesNotSendCAListByDefault => !PlatformDetection.SendsCAListByDefault;
 
         public const int TestTimeoutMilliseconds = 15 * 1000;
 
-        public static readonly X509Certificate2 serverCertificateServerEku = Configuration.Certificates.GetServerCertificate();
-        public static readonly X509Certificate2 serverCertificateNoEku = Configuration.Certificates.GetNoEKUCertificate();
-        public static readonly X509Certificate2 serverCertificateWrongEku = Configuration.Certificates.GetClientCertificate();
+        public static readonly X509Certificate2 serverCertificateServerEku =
+            Configuration.Certificates.GetServerCertificate();
+        public static readonly X509Certificate2 serverCertificateNoEku =
+            Configuration.Certificates.GetNoEKUCertificate();
+        public static readonly X509Certificate2 serverCertificateWrongEku =
+            Configuration.Certificates.GetClientCertificate();
 
-        public static readonly X509Certificate2 clientCertificateWrongEku = Configuration.Certificates.GetServerCertificate();
-        public static readonly X509Certificate2 clientCertificateNoEku = Configuration.Certificates.GetNoEKUCertificate();
-        public static readonly X509Certificate2 clientCertificateClientEku = Configuration.Certificates.GetClientCertificate();
+        public static readonly X509Certificate2 clientCertificateWrongEku =
+            Configuration.Certificates.GetServerCertificate();
+        public static readonly X509Certificate2 clientCertificateNoEku =
+            Configuration.Certificates.GetNoEKUCertificate();
+        public static readonly X509Certificate2 clientCertificateClientEku =
+            Configuration.Certificates.GetClientCertificate();
 
         [ConditionalFact(nameof(IsRootCertificateInstalled))]
         public async Task SslStream_NoEKUServerAuth_Ok()
@@ -38,8 +44,13 @@ namespace System.Net.Security.Tests
             {
                 server.Start();
 
-                var clientOptions = new HttpsTestClient.Options(new IPEndPoint(IPAddress.Loopback, server.Port));
-                clientOptions.ServerName = serverOptions.ServerCertificate.GetNameInfo(X509NameType.SimpleName, false);
+                var clientOptions = new HttpsTestClient.Options(
+                    new IPEndPoint(IPAddress.Loopback, server.Port)
+                );
+                clientOptions.ServerName = serverOptions.ServerCertificate.GetNameInfo(
+                    X509NameType.SimpleName,
+                    false
+                );
 
                 using var client = new HttpsTestClient(clientOptions);
 
@@ -47,7 +58,8 @@ namespace System.Net.Security.Tests
                 tasks[0] = server.AcceptHttpsClientAsync();
                 tasks[1] = client.HttpsRequestAsync();
 
-                await Task.WhenAll(tasks).WaitAsync(TimeSpan.FromMilliseconds(TestTimeoutMilliseconds));
+                await Task.WhenAll(tasks)
+                    .WaitAsync(TimeSpan.FromMilliseconds(TestTimeoutMilliseconds));
             }
         }
 
@@ -61,8 +73,13 @@ namespace System.Net.Security.Tests
             {
                 server.Start();
 
-                var clientOptions = new HttpsTestClient.Options(new IPEndPoint(IPAddress.Loopback, server.Port));
-                clientOptions.ServerName = serverOptions.ServerCertificate.GetNameInfo(X509NameType.SimpleName, false);
+                var clientOptions = new HttpsTestClient.Options(
+                    new IPEndPoint(IPAddress.Loopback, server.Port)
+                );
+                clientOptions.ServerName = serverOptions.ServerCertificate.GetNameInfo(
+                    X509NameType.SimpleName,
+                    false
+                );
 
                 using var client = new HttpsTestClient(clientOptions);
 
@@ -85,8 +102,13 @@ namespace System.Net.Security.Tests
             {
                 server.Start();
 
-                var clientOptions = new HttpsTestClient.Options(new IPEndPoint(IPAddress.Loopback, server.Port));
-                clientOptions.ServerName = serverOptions.ServerCertificate.GetNameInfo(X509NameType.SimpleName, false);
+                var clientOptions = new HttpsTestClient.Options(
+                    new IPEndPoint(IPAddress.Loopback, server.Port)
+                );
+                clientOptions.ServerName = serverOptions.ServerCertificate.GetNameInfo(
+                    X509NameType.SimpleName,
+                    false
+                );
                 clientOptions.ClientCertificate = clientCertificateNoEku;
 
                 using var client = new HttpsTestClient(clientOptions);
@@ -95,7 +117,8 @@ namespace System.Net.Security.Tests
                 tasks[0] = server.AcceptHttpsClientAsync();
                 tasks[1] = client.HttpsRequestAsync();
 
-                await Task.WhenAll(tasks).WaitAsync(TimeSpan.FromMilliseconds(TestTimeoutMilliseconds));
+                await Task.WhenAll(tasks)
+                    .WaitAsync(TimeSpan.FromMilliseconds(TestTimeoutMilliseconds));
             }
         }
 
@@ -110,8 +133,13 @@ namespace System.Net.Security.Tests
             {
                 server.Start();
 
-                var clientOptions = new HttpsTestClient.Options(new IPEndPoint(IPAddress.Loopback, server.Port));
-                clientOptions.ServerName = serverOptions.ServerCertificate.GetNameInfo(X509NameType.SimpleName, false);
+                var clientOptions = new HttpsTestClient.Options(
+                    new IPEndPoint(IPAddress.Loopback, server.Port)
+                );
+                clientOptions.ServerName = serverOptions.ServerCertificate.GetNameInfo(
+                    X509NameType.SimpleName,
+                    false
+                );
                 clientOptions.ClientCertificate = clientCertificateWrongEku;
 
                 using var client = new HttpsTestClient(clientOptions);
@@ -143,13 +171,21 @@ namespace System.Net.Security.Tests
             serverOptions.RequireClientAuthentication = true;
             serverOptions.IgnoreSslPolicyErrors = SslPolicyErrors.RemoteCertificateChainErrors;
 
-            using (X509Certificate2 clientCert = Configuration.Certificates.GetSelfSignedClientCertificate())
+            using (
+                X509Certificate2 clientCert =
+                    Configuration.Certificates.GetSelfSignedClientCertificate()
+            )
             using (var server = new HttpsTestServer(serverOptions))
             {
                 server.Start();
 
-                var clientOptions = new HttpsTestClient.Options(new IPEndPoint(IPAddress.Loopback, server.Port));
-                clientOptions.ServerName = serverOptions.ServerCertificate.GetNameInfo(X509NameType.SimpleName, false);
+                var clientOptions = new HttpsTestClient.Options(
+                    new IPEndPoint(IPAddress.Loopback, server.Port)
+                );
+                clientOptions.ServerName = serverOptions.ServerCertificate.GetNameInfo(
+                    X509NameType.SimpleName,
+                    false
+                );
                 clientOptions.ClientCertificate = clientCert;
 
                 using var client = new HttpsTestClient(clientOptions);
@@ -158,7 +194,8 @@ namespace System.Net.Security.Tests
                 tasks[0] = server.AcceptHttpsClientAsync();
                 tasks[1] = client.HttpsRequestAsync();
 
-                await Task.WhenAll(tasks).WaitAsync(TimeSpan.FromMilliseconds(TestTimeoutMilliseconds));
+                await Task.WhenAll(tasks)
+                    .WaitAsync(TimeSpan.FromMilliseconds(TestTimeoutMilliseconds));
             }
         }
     }

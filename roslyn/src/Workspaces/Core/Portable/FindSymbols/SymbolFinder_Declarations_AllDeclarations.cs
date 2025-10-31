@@ -14,11 +14,21 @@ namespace Microsoft.CodeAnalysis.FindSymbols
         /// Find the declared symbols from either source, referenced projects or metadata assemblies with the specified name.
         /// </summary>
         public static async Task<IEnumerable<ISymbol>> FindDeclarationsAsync(
-            Project project, string name, bool ignoreCase, CancellationToken cancellationToken = default)
+            Project project,
+            string name,
+            bool ignoreCase,
+            CancellationToken cancellationToken = default
+        )
         {
             using var query = SearchQuery.Create(name, ignoreCase);
-            var declarations = await DeclarationFinder.FindAllDeclarationsWithNormalQueryAsync(
-                project, query, SymbolFilter.All, cancellationToken).ConfigureAwait(false);
+            var declarations = await DeclarationFinder
+                .FindAllDeclarationsWithNormalQueryAsync(
+                    project,
+                    query,
+                    SymbolFilter.All,
+                    cancellationToken
+                )
+                .ConfigureAwait(false);
             return declarations;
         }
 
@@ -26,11 +36,17 @@ namespace Microsoft.CodeAnalysis.FindSymbols
         /// Find the declared symbols from either source, referenced projects or metadata assemblies with the specified name.
         /// </summary>
         public static async Task<IEnumerable<ISymbol>> FindDeclarationsAsync(
-            Project project, string name, bool ignoreCase, SymbolFilter filter, CancellationToken cancellationToken = default)
+            Project project,
+            string name,
+            bool ignoreCase,
+            SymbolFilter filter,
+            CancellationToken cancellationToken = default
+        )
         {
             using var query = SearchQuery.Create(name, ignoreCase);
-            var declarations = await DeclarationFinder.FindAllDeclarationsWithNormalQueryAsync(
-                project, query, filter, cancellationToken).ConfigureAwait(false);
+            var declarations = await DeclarationFinder
+                .FindAllDeclarationsWithNormalQueryAsync(project, query, filter, cancellationToken)
+                .ConfigureAwait(false);
             return declarations;
         }
     }

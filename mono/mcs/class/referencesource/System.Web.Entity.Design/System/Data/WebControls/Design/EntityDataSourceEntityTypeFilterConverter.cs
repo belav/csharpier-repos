@@ -18,27 +18,32 @@ namespace System.Web.UI.Design.WebControls
     internal class EntityDataSourceEntityTypeFilterConverter : StringConverter
     {
         public EntityDataSourceEntityTypeFilterConverter()
-            : base()
-        {
-        }
+            : base() { }
 
         public override StandardValuesCollection GetStandardValues(ITypeDescriptorContext context)
         {
             // We can only get a list of possible EntityTypeFilter values if we have:
             //    (1) Connection string so we can load metadata
             //    (2) DefaultContainerName to give scope to the lookup
-            //    (3) EntitySetName that exists in DefaultContainerName so we can get its type and derived types 
+            //    (3) EntitySetName that exists in DefaultContainerName so we can get its type and derived types
             // Even if these values are set, it may not be possible to actually find them in metadata, but at least we can try the lookup if requested
 
             EntityDataSource entityDataSource = context.Instance as EntityDataSource;
-            if (entityDataSource != null &&
-                !String.IsNullOrEmpty(entityDataSource.ConnectionString) &&
-                !String.IsNullOrEmpty(entityDataSource.DefaultContainerName) &&
-                !String.IsNullOrEmpty(entityDataSource.EntitySetName))
+            if (
+                entityDataSource != null
+                && !String.IsNullOrEmpty(entityDataSource.ConnectionString)
+                && !String.IsNullOrEmpty(entityDataSource.DefaultContainerName)
+                && !String.IsNullOrEmpty(entityDataSource.EntitySetName)
+            )
             {
                 List<EntityDataSourceEntityTypeFilterItem> entityTypeFilterItems =
-                    new EntityDataSourceDesignerHelper(entityDataSource, false /*interactiveMode*/).GetEntityTypeFilters(
-                        entityDataSource.DefaultContainerName, entityDataSource.EntitySetName);
+                    new EntityDataSourceDesignerHelper(
+                        entityDataSource,
+                        false /*interactiveMode*/
+                    ).GetEntityTypeFilters(
+                        entityDataSource.DefaultContainerName,
+                        entityDataSource.EntitySetName
+                    );
 
                 string[] entityTypeFilters = new string[entityTypeFilterItems.Count];
                 for (int i = 0; i < entityTypeFilterItems.Count; i++)

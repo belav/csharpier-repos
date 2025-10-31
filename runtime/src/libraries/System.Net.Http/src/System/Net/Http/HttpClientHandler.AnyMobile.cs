@@ -45,13 +45,24 @@ namespace System.Net.Http
 
                         if (DiagnosticsHandler.IsGloballyEnabled())
                         {
-                            handler = new DiagnosticsHandler(handler, DistributedContextPropagator.Current);
+                            handler = new DiagnosticsHandler(
+                                handler,
+                                DistributedContextPropagator.Current
+                            );
                         }
 
-                        MetricsHandler metricsHandler = new MetricsHandler(handler, _nativeMeterFactory, out _);
+                        MetricsHandler metricsHandler = new MetricsHandler(
+                            handler,
+                            _nativeMeterFactory,
+                            out _
+                        );
 
                         // Ensure a single handler is used for all requests.
-                        Interlocked.CompareExchange(ref _nativeMetricsHandler, metricsHandler, null);
+                        Interlocked.CompareExchange(
+                            ref _nativeMetricsHandler,
+                            metricsHandler,
+                            null
+                        );
                     }
 
                     return _nativeMetricsHandler;
@@ -280,7 +291,6 @@ namespace System.Net.Http
                 {
                     return _socketHandler!.Credentials;
                 }
-
             }
             set
             {
@@ -360,16 +370,21 @@ namespace System.Net.Http
             {
                 return 0; // Returning zero is appropriate since in .NET Framework it means no limit.
             }
-
             set
             {
                 ArgumentOutOfRangeException.ThrowIfNegative(value);
 
                 if (value > HttpContent.MaxBufferSize)
                 {
-                    throw new ArgumentOutOfRangeException(nameof(value), value,
-                        SR.Format(CultureInfo.InvariantCulture, SR.net_http_content_buffersize_limit,
-                        HttpContent.MaxBufferSize));
+                    throw new ArgumentOutOfRangeException(
+                        nameof(value),
+                        value,
+                        SR.Format(
+                            CultureInfo.InvariantCulture,
+                            SR.net_http_content_buffersize_limit,
+                            HttpContent.MaxBufferSize
+                        )
+                    );
                 }
 
                 ObjectDisposedException.ThrowIf(_disposed, this);
@@ -431,13 +446,26 @@ namespace System.Net.Http
                         case ClientCertificateOption.Manual:
                             ThrowForModifiedManagedSslOptionsIfStarted();
                             _clientCertificateOptions = value;
-                            _socketHandler!.SslOptions.LocalCertificateSelectionCallback = (sender, targetHost, localCertificates, remoteCertificate, acceptableIssuers) => CertificateHelper.GetEligibleClientCertificate(ClientCertificates)!;
+                            _socketHandler!.SslOptions.LocalCertificateSelectionCallback = (
+                                sender,
+                                targetHost,
+                                localCertificates,
+                                remoteCertificate,
+                                acceptableIssuers
+                            ) =>
+                                CertificateHelper.GetEligibleClientCertificate(ClientCertificates)!;
                             break;
 
                         case ClientCertificateOption.Automatic:
                             ThrowForModifiedManagedSslOptionsIfStarted();
                             _clientCertificateOptions = value;
-                            _socketHandler!.SslOptions.LocalCertificateSelectionCallback = (sender, targetHost, localCertificates, remoteCertificate, acceptableIssuers) => CertificateHelper.GetEligibleClientCertificate()!;
+                            _socketHandler!.SslOptions.LocalCertificateSelectionCallback = (
+                                sender,
+                                targetHost,
+                                localCertificates,
+                                remoteCertificate,
+                                acceptableIssuers
+                            ) => CertificateHelper.GetEligibleClientCertificate()!;
                             break;
 
                         default:
@@ -460,17 +488,32 @@ namespace System.Net.Http
                 {
                     if (ClientCertificateOptions != ClientCertificateOption.Manual)
                     {
-                        throw new InvalidOperationException(SR.Format(SR.net_http_invalid_enable_first, nameof(ClientCertificateOptions), nameof(ClientCertificateOption.Manual)));
+                        throw new InvalidOperationException(
+                            SR.Format(
+                                SR.net_http_invalid_enable_first,
+                                nameof(ClientCertificateOptions),
+                                nameof(ClientCertificateOption.Manual)
+                            )
+                        );
                     }
 
-                    return _socketHandler!.SslOptions.ClientCertificates ??
-                        (_socketHandler!.SslOptions.ClientCertificates = new X509CertificateCollection());
+                    return _socketHandler!.SslOptions.ClientCertificates
+                        ?? (
+                            _socketHandler!.SslOptions.ClientCertificates =
+                                new X509CertificateCollection()
+                        );
                 }
             }
         }
 
         [UnsupportedOSPlatform("browser")]
-        public Func<HttpRequestMessage, X509Certificate2?, X509Chain?, SslPolicyErrors, bool>? ServerCertificateCustomValidationCallback
+        public Func<
+            HttpRequestMessage,
+            X509Certificate2?,
+            X509Chain?,
+            SslPolicyErrors,
+            bool
+        >? ServerCertificateCustomValidationCallback
         {
             get
             {
@@ -480,7 +523,10 @@ namespace System.Net.Http
                 }
                 else
                 {
-                    return (_socketHandler!.SslOptions.RemoteCertificateValidationCallback?.Target as ConnectHelper.CertificateCallbackMapper)?.FromHttpClientHandler;
+                    return (
+                        _socketHandler!.SslOptions.RemoteCertificateValidationCallback?.Target
+                        as ConnectHelper.CertificateCallbackMapper
+                    )?.FromHttpClientHandler;
                 }
             }
             set
@@ -492,9 +538,12 @@ namespace System.Net.Http
                 else
                 {
                     ThrowForModifiedManagedSslOptionsIfStarted();
-                    _socketHandler!.SslOptions.RemoteCertificateValidationCallback = value != null ?
-                        new ConnectHelper.CertificateCallbackMapper(value).ForSocketsHttpHandler :
-                        null;
+                    _socketHandler!.SslOptions.RemoteCertificateValidationCallback =
+                        value != null
+                            ? new ConnectHelper.CertificateCallbackMapper(
+                                value
+                            ).ForSocketsHttpHandler
+                            : null;
                 }
             }
         }
@@ -510,7 +559,8 @@ namespace System.Net.Http
                 }
                 else
                 {
-                    return _socketHandler!.SslOptions.CertificateRevocationCheckMode == X509RevocationMode.Online;
+                    return _socketHandler!.SslOptions.CertificateRevocationCheckMode
+                        == X509RevocationMode.Online;
                 }
             }
             set
@@ -522,7 +572,9 @@ namespace System.Net.Http
                 else
                 {
                     ThrowForModifiedManagedSslOptionsIfStarted();
-                    _socketHandler!.SslOptions.CertificateRevocationCheckMode = value ? X509RevocationMode.Online : X509RevocationMode.NoCheck;
+                    _socketHandler!.SslOptions.CertificateRevocationCheckMode = value
+                        ? X509RevocationMode.Online
+                        : X509RevocationMode.NoCheck;
                 }
             }
         }
@@ -760,29 +812,53 @@ namespace System.Net.Http
         [UnsupportedOSPlatform("browser")]
         //[UnsupportedOSPlatform("ios")]
         //[UnsupportedOSPlatform("tvos")]
-        protected internal override HttpResponseMessage Send(HttpRequestMessage request,
-            CancellationToken cancellationToken)
+        protected internal override HttpResponseMessage Send(
+            HttpRequestMessage request,
+            CancellationToken cancellationToken
+        )
         {
             throw new PlatformNotSupportedException();
         }
 
-        protected internal override Task<HttpResponseMessage> SendAsync(HttpRequestMessage request,
-            CancellationToken cancellationToken)
+        protected internal override Task<HttpResponseMessage> SendAsync(
+            HttpRequestMessage request,
+            CancellationToken cancellationToken
+        )
         {
             ArgumentNullException.ThrowIfNull(request);
             return Handler.SendAsync(request, cancellationToken);
         }
 
         // lazy-load the validator func so it can be trimmed by the ILLinker if it isn't used.
-        private static Func<HttpRequestMessage, X509Certificate2?, X509Chain?, SslPolicyErrors, bool>? s_dangerousAcceptAnyServerCertificateValidator;
+        private static Func<
+            HttpRequestMessage,
+            X509Certificate2?,
+            X509Chain?,
+            SslPolicyErrors,
+            bool
+        >? s_dangerousAcceptAnyServerCertificateValidator;
+
         [UnsupportedOSPlatform("browser")]
-        public static Func<HttpRequestMessage, X509Certificate2?, X509Chain?, SslPolicyErrors, bool> DangerousAcceptAnyServerCertificateValidator
+        public static Func<
+            HttpRequestMessage,
+            X509Certificate2?,
+            X509Chain?,
+            SslPolicyErrors,
+            bool
+        > DangerousAcceptAnyServerCertificateValidator
         {
             get
             {
-                return Volatile.Read(ref s_dangerousAcceptAnyServerCertificateValidator) ??
-                Interlocked.CompareExchange(ref s_dangerousAcceptAnyServerCertificateValidator, delegate { return true; }, null) ??
-                s_dangerousAcceptAnyServerCertificateValidator;
+                return Volatile.Read(ref s_dangerousAcceptAnyServerCertificateValidator)
+                    ?? Interlocked.CompareExchange(
+                        ref s_dangerousAcceptAnyServerCertificateValidator,
+                        delegate
+                        {
+                            return true;
+                        },
+                        null
+                    )
+                    ?? s_dangerousAcceptAnyServerCertificateValidator;
             }
         }
 
@@ -793,8 +869,10 @@ namespace System.Net.Http
             _socketHandler!.SslOptions = _socketHandler!.SslOptions;
         }
 
-        private static bool IsNativeHandlerEnabled => RuntimeSettingParser.QueryRuntimeSettingSwitch(
+        private static bool IsNativeHandlerEnabled =>
+            RuntimeSettingParser.QueryRuntimeSettingSwitch(
                 "System.Net.Http.UseNativeHttpHandler",
-                false);
+                false
+            );
     }
 }

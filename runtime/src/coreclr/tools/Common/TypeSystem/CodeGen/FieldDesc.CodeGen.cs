@@ -12,10 +12,7 @@ namespace Internal.TypeSystem
         /// </summary>
         public virtual bool IsIntrinsic
         {
-            get
-            {
-                return false;
-            }
+            get { return false; }
         }
     }
 
@@ -23,10 +20,7 @@ namespace Internal.TypeSystem
     {
         public override bool IsIntrinsic
         {
-            get
-            {
-                return _fieldDef.IsIntrinsic;
-            }
+            get { return _fieldDef.IsIntrinsic; }
         }
     }
 }

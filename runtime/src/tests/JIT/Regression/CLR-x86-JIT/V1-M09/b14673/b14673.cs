@@ -3,6 +3,7 @@
 //
 
 using Xunit;
+
 namespace DefaultNamespace
 {
     using System;
@@ -19,6 +20,7 @@ namespace DefaultNamespace
             else
                 Console.WriteLine("Test FAiLED");
         }
+
         [Fact]
         public static void TestEntryPoint()
         {

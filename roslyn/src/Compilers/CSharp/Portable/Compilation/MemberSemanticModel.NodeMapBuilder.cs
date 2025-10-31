@@ -6,13 +6,13 @@
 
 using System.Collections.Generic;
 using System.Collections.Immutable;
+using System.Diagnostics;
+using System.Linq;
 using Microsoft.CodeAnalysis.Collections;
+using Microsoft.CodeAnalysis.CSharp.Symbols;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.PooledObjects;
 using Roslyn.Utilities;
-using System.Diagnostics;
-using System.Linq;
-using Microsoft.CodeAnalysis.CSharp.Symbols;
 
 namespace Microsoft.CodeAnalysis.CSharp
 {
@@ -20,7 +20,11 @@ namespace Microsoft.CodeAnalysis.CSharp
     {
         protected sealed class NodeMapBuilder : BoundTreeWalkerWithStackGuard
         {
-            private NodeMapBuilder(OrderPreservingMultiDictionary<SyntaxNode, BoundNode> map, SyntaxTree tree, SyntaxNode thisSyntaxNodeOnly)
+            private NodeMapBuilder(
+                OrderPreservingMultiDictionary<SyntaxNode, BoundNode> map,
+                SyntaxTree tree,
+                SyntaxNode thisSyntaxNodeOnly
+            )
             {
                 _map = map;
                 _tree = tree;
@@ -38,9 +42,17 @@ namespace Microsoft.CodeAnalysis.CSharp
             /// <param name="root">The root of the bound tree.</param>
             /// <param name="map">The cache.</param>
             /// <param name="node">The syntax node where to add bound nodes for.</param>
-            public static void AddToMap(BoundNode root, Dictionary<SyntaxNode, OneOrMany<BoundNode>> map, SyntaxTree tree, SyntaxNode node = null)
+            public static void AddToMap(
+                BoundNode root,
+                Dictionary<SyntaxNode, OneOrMany<BoundNode>> map,
+                SyntaxTree tree,
+                SyntaxNode node = null
+            )
             {
-                Debug.Assert(node == null || root == null || !(root.Syntax is StatementSyntax), "individually added nodes are not supposed to be statements.");
+                Debug.Assert(
+                    node == null || root == null || !(root.Syntax is StatementSyntax),
+                    "individually added nodes are not supposed to be statements."
+                );
 
                 if (root == null || map.ContainsKey(root.Syntax))
                 {
@@ -48,7 +60,10 @@ namespace Microsoft.CodeAnalysis.CSharp
                     return;
                 }
 
-                var additionMap = OrderPreservingMultiDictionary<SyntaxNode, BoundNode>.GetInstance();
+                var additionMap = OrderPreservingMultiDictionary<
+                    SyntaxNode,
+                    BoundNode
+                >.GetInstance();
                 var builder = new NodeMapBuilder(additionMap, tree, node);
                 builder.Visit(root);
 
@@ -74,7 +89,10 @@ namespace Microsoft.CodeAnalysis.CSharp
 
                         var existing = map[key];
                         var added = additionMap[key];
-                        Debug.Assert(existing.Count == added.Length, "existing.Count == added.Length");
+                        Debug.Assert(
+                            existing.Count == added.Length,
+                            "existing.Count == added.Length"
+                        );
                         for (int i = 0; i < existing.Count; i++)
                         {
                             // TODO: it would be great if we could check !ReferenceEquals(existing[i], added[i]) (DevDiv #11584).
@@ -84,28 +102,54 @@ namespace Microsoft.CodeAnalysis.CSharp
                             //      since nothing is cached for the statement syntax.
                             if (existing[i].Kind != added[i].Kind)
                             {
-                                Debug.Assert(!(key is StatementSyntax), "!(key is StatementSyntax)");
+                                Debug.Assert(
+                                    !(key is StatementSyntax),
+                                    "!(key is StatementSyntax)"
+                                );
 
                                 // This also seems to be happening when we get equivalent BoundTypeExpression and BoundTypeOrValueExpression nodes.
-                                if (existing[i].Kind == BoundKind.TypeExpression && added[i].Kind == BoundKind.TypeOrValueExpression)
+                                if (
+                                    existing[i].Kind == BoundKind.TypeExpression
+                                    && added[i].Kind == BoundKind.TypeOrValueExpression
+                                )
                                 {
                                     Debug.Assert(
-                                        TypeSymbol.Equals(((BoundTypeExpression)existing[i]).Type, ((BoundTypeOrValueExpression)added[i]).Type, TypeCompareKind.ConsiderEverything2),
+                                        TypeSymbol.Equals(
+                                            ((BoundTypeExpression)existing[i]).Type,
+                                            ((BoundTypeOrValueExpression)added[i]).Type,
+                                            TypeCompareKind.ConsiderEverything2
+                                        ),
                                         string.Format(
                                             System.Globalization.CultureInfo.InvariantCulture,
-                                            "((BoundTypeExpression)existing[{0}]).Type == ((BoundTypeOrValueExpression)added[{0}]).Type", i));
+                                            "((BoundTypeExpression)existing[{0}]).Type == ((BoundTypeOrValueExpression)added[{0}]).Type",
+                                            i
+                                        )
+                                    );
                                 }
-                                else if (existing[i].Kind == BoundKind.TypeOrValueExpression && added[i].Kind == BoundKind.TypeExpression)
+                                else if (
+                                    existing[i].Kind == BoundKind.TypeOrValueExpression
+                                    && added[i].Kind == BoundKind.TypeExpression
+                                )
                                 {
                                     Debug.Assert(
-                                        TypeSymbol.Equals(((BoundTypeOrValueExpression)existing[i]).Type, ((BoundTypeExpression)added[i]).Type, TypeCompareKind.ConsiderEverything2),
+                                        TypeSymbol.Equals(
+                                            ((BoundTypeOrValueExpression)existing[i]).Type,
+                                            ((BoundTypeExpression)added[i]).Type,
+                                            TypeCompareKind.ConsiderEverything2
+                                        ),
                                         string.Format(
                                             System.Globalization.CultureInfo.InvariantCulture,
-                                            "((BoundTypeOrValueExpression)existing[{0}]).Type == ((BoundTypeExpression)added[{0}]).Type", i));
+                                            "((BoundTypeOrValueExpression)existing[{0}]).Type == ((BoundTypeExpression)added[{0}]).Type",
+                                            i
+                                        )
+                                    );
                                 }
                                 else
                                 {
-                                    Debug.Assert(false, "New bound node does not match existing bound node");
+                                    Debug.Assert(
+                                        false,
+                                        "New bound node does not match existing bound node"
+                                    );
                                 }
                             }
                             else
@@ -114,7 +158,10 @@ namespace Microsoft.CodeAnalysis.CSharp
                                     (object)existing[i] == added[i] || !(key is StatementSyntax),
                                     string.Format(
                                         System.Globalization.CultureInfo.InvariantCulture,
-                                        "(object)existing[{0}] == added[{0}] || !(key is StatementSyntax)", i));
+                                        "(object)existing[{0}] == added[{0}] || !(key is StatementSyntax)",
+                                        i
+                                    )
+                                );
                             }
                         }
 #endif
@@ -130,11 +177,11 @@ namespace Microsoft.CodeAnalysis.CSharp
 
             public override BoundNode Visit(BoundNode node)
             {
-                // Do not cache bound nodes associated with a different syntax tree. We can get nodes like that 
+                // Do not cache bound nodes associated with a different syntax tree. We can get nodes like that
                 // when semantic model binds complete simple program body. Semantic model is never asked about
                 // information for nodes associated with a different syntax tree, therefore, there is no advantage
                 // in putting the bound nodes in the map. SimpleProgramBodySemanticModelMergedBoundNodeCache facilitates
-                // reuse of bound nodes from other trees. 
+                // reuse of bound nodes from other trees.
                 if (node == null || node.SyntaxTree != _tree)
                 {
                     return null;
@@ -146,7 +193,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                 // turned into a bound lambda. For example, if you have something like:
                 //
                 // object x = (int y)=>M(y);
-                // 
+                //
                 // then no conversion to a valid delegate type was performed and the "bound" tree
                 // contains an "unbound" lambda with no body. Or, similarly, we could have something
                 // like:
@@ -164,7 +211,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                 // and replace them with bound lambdas. However at this time that is a fairly complex
                 // change and it is not clear where the most efficient place to put the rewriter is
                 // in the IDE scenario. Until we figure that out, I'm going to detect that situation
-                // here, when building the map. If we encounter an unbound lambda in the tree, 
+                // here, when building the map. If we encounter an unbound lambda in the tree,
                 // we'll just bind it right now. The unbound lambda will cache the result, and we'll
                 // keep on trucking just as though there had been a bound lambda here all along.
                 if (node.Kind == BoundKind.UnboundLambda)
@@ -177,11 +224,11 @@ namespace Microsoft.CodeAnalysis.CSharp
                 //
                 // byte b = 3;
                 //
-                // there is a bound node for the implicit conversion to byte and a bound node for the 
+                // there is a bound node for the implicit conversion to byte and a bound node for the
                 // literal, an int. Sometimes we want the inner one (to state the type of the expression)
                 // and sometimes we want the "parent's" view of things (for extract method, for instance.)
                 //
-                // We want to add all bound nodes associated with the same syntax node to the cache, so we first add the 
+                // We want to add all bound nodes associated with the same syntax node to the cache, so we first add the
                 // bound node, then we dive deeper into the bound tree.
                 if (ShouldAddNode(current))
                 {

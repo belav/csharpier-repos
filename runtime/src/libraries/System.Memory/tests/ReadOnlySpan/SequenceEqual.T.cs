@@ -65,12 +65,14 @@ namespace System.SpanTests
                 ReadOnlySpan<TInt> firstSpan = new ReadOnlySpan<TInt>(first);
                 ReadOnlySpan<TInt> secondSpan = new ReadOnlySpan<TInt>(second);
 
-                Assert.True(mode switch
-                {
-                    0 => firstSpan.SequenceEqual(secondSpan),
-                    1 => firstSpan.SequenceEqual(secondSpan, null),
-                    _ => firstSpan.SequenceEqual(secondSpan, EqualityComparer<TInt>.Default)
-                });
+                Assert.True(
+                    mode switch
+                    {
+                        0 => firstSpan.SequenceEqual(secondSpan),
+                        1 => firstSpan.SequenceEqual(secondSpan, null),
+                        _ => firstSpan.SequenceEqual(secondSpan, EqualityComparer<TInt>.Default),
+                    }
+                );
 
                 // Make sure each element of the array was compared once. (Strictly speaking, it would not be illegal for
                 // SequenceEqual to compare an element more than once but that would be a non-optimal implementation and
@@ -79,7 +81,10 @@ namespace System.SpanTests
                 foreach (TInt elem in first)
                 {
                     int numCompares = log.CountCompares(elem.Value, elem.Value);
-                    Assert.True(numCompares == 1, $"Expected {numCompares} == 1 for element {elem.Value}.");
+                    Assert.True(
+                        numCompares == 1,
+                        $"Expected {numCompares} == 1 for element {elem.Value}."
+                    );
                 }
             }
         }
@@ -108,14 +113,22 @@ namespace System.SpanTests
                     ReadOnlySpan<TInt> firstSpan = new ReadOnlySpan<TInt>(first);
                     ReadOnlySpan<TInt> secondSpan = new ReadOnlySpan<TInt>(second);
 
-                    Assert.False(mode switch
-                    {
-                        0 => firstSpan.SequenceEqual(secondSpan),
-                        1 => firstSpan.SequenceEqual(secondSpan, null),
-                        _ => firstSpan.SequenceEqual(secondSpan, EqualityComparer<TInt>.Default)
-                    });
+                    Assert.False(
+                        mode switch
+                        {
+                            0 => firstSpan.SequenceEqual(secondSpan),
+                            1 => firstSpan.SequenceEqual(secondSpan, null),
+                            _ => firstSpan.SequenceEqual(
+                                secondSpan,
+                                EqualityComparer<TInt>.Default
+                            ),
+                        }
+                    );
 
-                    Assert.Equal(1, log.CountCompares(first[mismatchIndex].Value, second[mismatchIndex].Value));
+                    Assert.Equal(
+                        1,
+                        log.CountCompares(first[mismatchIndex].Value, second[mismatchIndex].Value)
+                    );
                 }
             }
         }
@@ -126,12 +139,11 @@ namespace System.SpanTests
             const int GuardValue = 77777;
             const int GuardLength = 50;
 
-            Action<int, int> checkForOutOfRangeAccess =
-                delegate (int x, int y)
-                {
-                    if (x == GuardValue || y == GuardValue)
-                        throw new Exception("Detected out of range access in IndexOf()");
-                };
+            Action<int, int> checkForOutOfRangeAccess = delegate(int x, int y)
+            {
+                if (x == GuardValue || y == GuardValue)
+                    throw new Exception("Detected out of range access in IndexOf()");
+            };
 
             for (int length = 0; length < 100; length++)
             {
@@ -144,7 +156,10 @@ namespace System.SpanTests
 
                 for (int i = 0; i < length; i++)
                 {
-                    first[GuardLength + i] = second[GuardLength + i] = new TInt(10 * (i + 1), checkForOutOfRangeAccess);
+                    first[GuardLength + i] = second[GuardLength + i] = new TInt(
+                        10 * (i + 1),
+                        checkForOutOfRangeAccess
+                    );
                 }
 
                 ReadOnlySpan<TInt> firstSpan = new ReadOnlySpan<TInt>(first, GuardLength, length);
@@ -158,31 +173,58 @@ namespace System.SpanTests
 
         [Theory]
         [MemberData(nameof(TestHelpers.SequenceEqualsNullData), MemberType = typeof(TestHelpers))]
-        public static void SequenceEqualsNullData_String(string[] firstInput, string[] secondInput, bool expected)
+        public static void SequenceEqualsNullData_String(
+            string[] firstInput,
+            string[] secondInput,
+            bool expected
+        )
         {
             ReadOnlySpan<string> theStrings = firstInput;
 
             Assert.Equal(expected, theStrings.SequenceEqual(secondInput));
             Assert.Equal(expected, theStrings.SequenceEqual(secondInput, null));
-            Assert.Equal(expected, theStrings.SequenceEqual(secondInput, EqualityComparer<string>.Default));
+            Assert.Equal(
+                expected,
+                theStrings.SequenceEqual(secondInput, EqualityComparer<string>.Default)
+            );
         }
 
         [Fact]
         public static void SequenceEqual_AlwaysTrueComparer()
         {
             EqualityComparer<int> alwaysTrueComparer = EqualityComparer<int>.Create((x, y) => true);
-            Assert.False(((ReadOnlySpan<int>)new int[1]).SequenceEqual(new int[2], alwaysTrueComparer));
-            Assert.True(((ReadOnlySpan<int>)new int[2]).SequenceEqual(new int[2], alwaysTrueComparer));
-            Assert.True(((ReadOnlySpan<int>)new int[2] { 1, 3 }).SequenceEqual(new int[2] { 2, 4 }, alwaysTrueComparer));
+            Assert.False(
+                ((ReadOnlySpan<int>)new int[1]).SequenceEqual(new int[2], alwaysTrueComparer)
+            );
+            Assert.True(
+                ((ReadOnlySpan<int>)new int[2]).SequenceEqual(new int[2], alwaysTrueComparer)
+            );
+            Assert.True(
+                ((ReadOnlySpan<int>)new int[2] { 1, 3 }).SequenceEqual(
+                    new int[2] { 2, 4 },
+                    alwaysTrueComparer
+                )
+            );
         }
 
         [Fact]
         public static void SequenceEqual_AlwaysFalseComparer()
         {
-            EqualityComparer<int> alwaysFalseComparer = EqualityComparer<int>.Create((x, y) => false);
-            Assert.False(((ReadOnlySpan<int>)new int[1]).SequenceEqual(new int[2], alwaysFalseComparer));
-            Assert.False(((ReadOnlySpan<int>)new int[1]).SequenceEqual(new int[2], alwaysFalseComparer));
-            Assert.False(((ReadOnlySpan<int>)new int[2] { 1, 3 }).SequenceEqual(new int[2] { 2, 4 }, alwaysFalseComparer));
+            EqualityComparer<int> alwaysFalseComparer = EqualityComparer<int>.Create(
+                (x, y) => false
+            );
+            Assert.False(
+                ((ReadOnlySpan<int>)new int[1]).SequenceEqual(new int[2], alwaysFalseComparer)
+            );
+            Assert.False(
+                ((ReadOnlySpan<int>)new int[1]).SequenceEqual(new int[2], alwaysFalseComparer)
+            );
+            Assert.False(
+                ((ReadOnlySpan<int>)new int[2] { 1, 3 }).SequenceEqual(
+                    new int[2] { 2, 4 },
+                    alwaysFalseComparer
+                )
+            );
         }
 
         [Fact]
@@ -196,12 +238,23 @@ namespace System.SpanTests
             Assert.False(((ReadOnlySpan<string>)lower).SequenceEqual(upper));
             Assert.True(((ReadOnlySpan<string>)upper).SequenceEqual(upper));
 
-            Assert.True(((ReadOnlySpan<string>)lower).SequenceEqual(lower, StringComparer.OrdinalIgnoreCase));
-            Assert.True(((ReadOnlySpan<string>)lower).SequenceEqual(upper, StringComparer.OrdinalIgnoreCase));
-            Assert.True(((ReadOnlySpan<string>)upper).SequenceEqual(upper, StringComparer.OrdinalIgnoreCase));
+            Assert.True(
+                ((ReadOnlySpan<string>)lower).SequenceEqual(lower, StringComparer.OrdinalIgnoreCase)
+            );
+            Assert.True(
+                ((ReadOnlySpan<string>)lower).SequenceEqual(upper, StringComparer.OrdinalIgnoreCase)
+            );
+            Assert.True(
+                ((ReadOnlySpan<string>)upper).SequenceEqual(upper, StringComparer.OrdinalIgnoreCase)
+            );
 
             Assert.False(((ReadOnlySpan<string>)lower).SequenceEqual(different));
-            Assert.False(((ReadOnlySpan<string>)lower).SequenceEqual(different, StringComparer.OrdinalIgnoreCase));
+            Assert.False(
+                ((ReadOnlySpan<string>)lower).SequenceEqual(
+                    different,
+                    StringComparer.OrdinalIgnoreCase
+                )
+            );
         }
     }
 }

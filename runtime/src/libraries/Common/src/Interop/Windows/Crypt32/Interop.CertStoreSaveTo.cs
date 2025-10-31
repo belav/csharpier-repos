@@ -7,7 +7,7 @@ internal static partial class Interop
     {
         internal enum CertStoreSaveTo : int
         {
-            CERT_STORE_SAVE_TO_MEMORY = 2
+            CERT_STORE_SAVE_TO_MEMORY = 2,
         }
     }
 }

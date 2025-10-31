@@ -10,15 +10,15 @@
  * Copyright (c) 2000 Microsoft Corporation
  */
 
-namespace System.Web.UI.HtmlControls {
-    using System.ComponentModel;
+namespace System.Web.UI.HtmlControls
+{
     using System;
     using System.Collections;
+    using System.ComponentModel;
+    using System.Security.Permissions;
     using System.Web;
     using System.Web.UI;
     using System.Web.Util;
-    using System.Security.Permissions;
-
 
     /// <devdoc>
     /// <para>The <see langword='HtmlAnchor'/>
@@ -29,12 +29,9 @@ namespace System.Web.UI.HtmlControls {
     /// allows programmatic access to the
     /// HTML &lt;a&gt; element on the server.</para>
     /// </devdoc>
-    [
-    DefaultEvent("ServerClick"),
-    SupportsEventValidation,
-    ]
-    public class HtmlAnchor : HtmlContainerControl, IPostBackEventHandler {
-
+    [DefaultEvent("ServerClick"), SupportsEventValidation]
+    public class HtmlAnchor : HtmlContainerControl, IPostBackEventHandler
+    {
         private static readonly object EventServerClick = new object();
 
         /*
@@ -44,21 +41,18 @@ namespace System.Web.UI.HtmlControls {
         /// <devdoc>
         /// <para>Initializes a new instance of the <see cref='System.Web.UI.HtmlControls.HtmlAnchor'/> class.</para>
         /// </devdoc>
-        public HtmlAnchor() : base("a") {
-        }
+        public HtmlAnchor()
+            : base("a") { }
 
-        [
-        WebCategory("Behavior"),
-        DefaultValue(true),
-        ]
-        public virtual bool CausesValidation {
-            get {
+        [WebCategory("Behavior"), DefaultValue(true)]
+        public virtual bool CausesValidation
+        {
+            get
+            {
                 object b = ViewState["CausesValidation"];
-                return((b == null) ? true : (bool)b);
+                return ((b == null) ? true : (bool)b);
             }
-            set {
-                ViewState["CausesValidation"] = value;
-            }
+            set { ViewState["CausesValidation"] = value; }
         }
 
         /*
@@ -71,19 +65,19 @@ namespace System.Web.UI.HtmlControls {
         ///    server control.</para>
         /// </devdoc>
         [
-        WebCategory("Navigation"),
-        DefaultValue(""),
-        DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden),
-        UrlProperty()
+            WebCategory("Navigation"),
+            DefaultValue(""),
+            DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden),
+            UrlProperty()
         ]
-        public string HRef {
-            get {
+        public string HRef
+        {
+            get
+            {
                 string s = Attributes["href"];
-                return((s != null) ? s : String.Empty);
+                return ((s != null) ? s : String.Empty);
             }
-            set {
-                Attributes["href"] = MapStringAttributeToString(value);
-            }
+            set { Attributes["href"] = MapStringAttributeToString(value); }
         }
 
         /*
@@ -96,18 +90,18 @@ namespace System.Web.UI.HtmlControls {
         /// control.</para>
         /// </devdoc>
         [
-        WebCategory("Navigation"),
-        DefaultValue(""),
-        DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)
+            WebCategory("Navigation"),
+            DefaultValue(""),
+            DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)
         ]
-        public string Name {
-            get {
+        public string Name
+        {
+            get
+            {
                 string s = Attributes["name"];
-                return((s != null) ? s : String.Empty);
+                return ((s != null) ? s : String.Empty);
             }
-            set {
-                Attributes["name"] = MapStringAttributeToString(value);
-            }
+            set { Attributes["name"] = MapStringAttributeToString(value); }
         }
 
         /*
@@ -122,18 +116,18 @@ namespace System.Web.UI.HtmlControls {
         ///    </para>
         /// </devdoc>
         [
-        WebCategory("Navigation"),
-        DefaultValue(""),
-        DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)
+            WebCategory("Navigation"),
+            DefaultValue(""),
+            DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)
         ]
-        public string Target {
-            get {
+        public string Target
+        {
+            get
+            {
                 string s = Attributes["target"];
-                return((s != null) ? s : String.Empty);
+                return ((s != null) ? s : String.Empty);
             }
-            set {
-                Attributes["target"] = MapStringAttributeToString(value);
-            }
+            set { Attributes["target"] = MapStringAttributeToString(value); }
         }
 
         /*
@@ -145,58 +139,54 @@ namespace System.Web.UI.HtmlControls {
         ///       the browser displays when identifying linked content.</para>
         /// </devdoc>
         [
-        WebCategory("Appearance"),
-        Localizable(true),
-        DefaultValue(""),
-        DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)
+            WebCategory("Appearance"),
+            Localizable(true),
+            DefaultValue(""),
+            DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)
         ]
-        public string Title {
-            get {
+        public string Title
+        {
+            get
+            {
                 string s = Attributes["title"];
-                return((s != null) ? s : String.Empty);
+                return ((s != null) ? s : String.Empty);
             }
-            set {
-                Attributes["title"] = MapStringAttributeToString(value);
-            }
+            set { Attributes["title"] = MapStringAttributeToString(value); }
         }
 
         [
-        WebCategory("Behavior"),
-        DefaultValue(""),
-        WebSysDescription(SR.PostBackControl_ValidationGroup)
+            WebCategory("Behavior"),
+            DefaultValue(""),
+            WebSysDescription(SR.PostBackControl_ValidationGroup)
         ]
-        public virtual string ValidationGroup {
-            get {
+        public virtual string ValidationGroup
+        {
+            get
+            {
                 string s = (string)ViewState["ValidationGroup"];
-                return((s == null) ? string.Empty : s);
+                return ((s == null) ? string.Empty : s);
             }
-            set {
-                ViewState["ValidationGroup"] = value;
-            }
+            set { ViewState["ValidationGroup"] = value; }
         }
 
         /// <devdoc>
         /// <para>Occurs on the server when a user clicks the <see cref='System.Web.UI.HtmlControls.HtmlAnchor'/> control on the
         ///    browser.</para>
         /// </devdoc>
-        [
-        WebCategory("Action"),
-        WebSysDescription(SR.HtmlControl_OnServerClick)
-        ]
-        public event EventHandler ServerClick {
-            add {
-                Events.AddHandler(EventServerClick, value);
-            }
-            remove {
-                Events.RemoveHandler(EventServerClick, value);
-            }
+        [WebCategory("Action"), WebSysDescription(SR.HtmlControl_OnServerClick)]
+        public event EventHandler ServerClick
+        {
+            add { Events.AddHandler(EventServerClick, value); }
+            remove { Events.RemoveHandler(EventServerClick, value); }
         }
 
-        private PostBackOptions GetPostBackOptions() {
+        private PostBackOptions GetPostBackOptions()
+        {
             PostBackOptions options = new PostBackOptions(this, string.Empty);
             options.RequiresJavaScriptProtocol = true;
 
-            if (CausesValidation && Page.GetValidators(ValidationGroup).Count > 0) {
+            if (CausesValidation && Page.GetValidators(ValidationGroup).Count > 0)
+            {
                 options.PerformValidation = true;
                 options.ValidationGroup = ValidationGroup;
             }
@@ -205,13 +195,16 @@ namespace System.Web.UI.HtmlControls {
         }
 
         /// <internalonly/>
-        protected internal override void OnPreRender(EventArgs e) {
+        protected internal override void OnPreRender(EventArgs e)
+        {
             base.OnPreRender(e);
-            if (Page != null && Events[EventServerClick] != null) {
+            if (Page != null && Events[EventServerClick] != null)
+            {
                 Page.RegisterPostBackScript();
 
                 // VSWhidbey 489577
-                if (CausesValidation && Page.GetValidators(ValidationGroup).Count > 0) {
+                if (CausesValidation && Page.GetValidators(ValidationGroup).Count > 0)
+                {
                     Page.RegisterWebFormsScript();
                 }
             }
@@ -224,19 +217,25 @@ namespace System.Web.UI.HtmlControls {
         /// <internalonly/>
         /// <devdoc>
         /// </devdoc>
-        protected override void RenderAttributes(HtmlTextWriter writer) {
-            if (Events[EventServerClick] != null) {
+        protected override void RenderAttributes(HtmlTextWriter writer)
+        {
+            if (Events[EventServerClick] != null)
+            {
                 Attributes.Remove("href");
                 base.RenderAttributes(writer);
 
                 PostBackOptions options = GetPostBackOptions();
                 Debug.Assert(options != null);
-                string postBackEventReference = Page.ClientScript.GetPostBackEventReference(options, true);
+                string postBackEventReference = Page.ClientScript.GetPostBackEventReference(
+                    options,
+                    true
+                );
 
                 Debug.Assert(!string.IsNullOrEmpty(postBackEventReference));
                 writer.WriteAttribute("href", postBackEventReference, true);
             }
-            else {
+            else
+            {
                 PreProcessRelativeReferenceAttribute(writer, "href");
                 base.RenderAttributes(writer);
             }
@@ -250,9 +249,11 @@ namespace System.Web.UI.HtmlControls {
         /// <para>Raises the <see langword='ServerClick'/>
         /// event.</para>
         /// </devdoc>
-        protected virtual void OnServerClick(EventArgs e) {
+        protected virtual void OnServerClick(EventArgs e)
+        {
             EventHandler handler = (EventHandler)Events[EventServerClick];
-            if (handler != null) handler(this, e);
+            if (handler != null)
+                handler(this, e);
         }
 
         /*
@@ -263,18 +264,20 @@ namespace System.Web.UI.HtmlControls {
         /// <internalonly/>
         /// <devdoc>
         /// </devdoc>
-        void IPostBackEventHandler.RaisePostBackEvent(string eventArgument) {
+        void IPostBackEventHandler.RaisePostBackEvent(string eventArgument)
+        {
             RaisePostBackEvent(eventArgument);
         }
-
 
         /// <internalonly/>
         /// <devdoc>
         /// </devdoc>
-        protected virtual void RaisePostBackEvent(string eventArgument) {
+        protected virtual void RaisePostBackEvent(string eventArgument)
+        {
             ValidateEvent(UniqueID, eventArgument);
 
-            if (CausesValidation) {
+            if (CausesValidation)
+            {
                 Page.Validate(ValidationGroup);
             }
             OnServerClick(EventArgs.Empty);

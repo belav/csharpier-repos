@@ -1,7 +1,7 @@
 // ==++==
-// 
+//
 //   Copyright (c) Microsoft Corporation.  All rights reserved.
-// 
+//
 // ==--==
 //
 // <OWNER>Microsoft</OWNER>
@@ -14,8 +14,8 @@ using System.Diagnostics.Contracts;
 using System.Reflection;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
-using System.Threading;
 using System.Security;
+using System.Threading;
 
 namespace System.Runtime.InteropServices.WindowsRuntime
 {
@@ -28,9 +28,11 @@ namespace System.Runtime.InteropServices.WindowsRuntime
         // later.  Note that the dictionary is indexed by the remove method that will be used for RemoveEventHandler
         // so the removeMethod given here must match the remove method supplied there exactly.
         [SecurityCritical]
-        public static void AddEventHandler<T>(Func<T, EventRegistrationToken> addMethod,
-                                              Action<EventRegistrationToken> removeMethod,
-                                              T handler)
+        public static void AddEventHandler<T>(
+            Func<T, EventRegistrationToken> addMethod,
+            Action<EventRegistrationToken> removeMethod,
+            T handler
+        )
         {
             if (addMethod == null)
                 throw new ArgumentNullException("addMethod");
@@ -51,7 +53,11 @@ namespace System.Runtime.InteropServices.WindowsRuntime
             // it would be more confusing and less-performant if we were to merge them together
             object target = removeMethod.Target;
             if (target == null || Marshal.IsComObject(target))
-                NativeOrStaticEventRegistrationImpl.AddEventHandler<T>(addMethod, removeMethod, handler);
+                NativeOrStaticEventRegistrationImpl.AddEventHandler<T>(
+                    addMethod,
+                    removeMethod,
+                    handler
+                );
             else
                 ManagedEventRegistrationImpl.AddEventHandler<T>(addMethod, removeMethod, handler);
         }
@@ -59,7 +65,10 @@ namespace System.Runtime.InteropServices.WindowsRuntime
         // Remove the delegate handler from the Windows Runtime style event registration by looking for
         // its token, previously stored via AddEventHandler<T>
         [SecurityCritical]
-        public static void RemoveEventHandler<T>(Action<EventRegistrationToken> removeMethod, T handler)
+        public static void RemoveEventHandler<T>(
+            Action<EventRegistrationToken> removeMethod,
+            T handler
+        )
         {
             if (removeMethod == null)
                 throw new ArgumentNullException("removeMethod");
@@ -80,9 +89,9 @@ namespace System.Runtime.InteropServices.WindowsRuntime
             if (target == null || Marshal.IsComObject(target))
                 NativeOrStaticEventRegistrationImpl.RemoveEventHandler<T>(removeMethod, handler);
             else
-                ManagedEventRegistrationImpl.RemoveEventHandler<T>(removeMethod, handler);            
+                ManagedEventRegistrationImpl.RemoveEventHandler<T>(removeMethod, handler);
         }
-        
+
         [SecurityCritical]
         public static void RemoveAllEventHandlers(Action<EventRegistrationToken> removeMethod)
         {
@@ -114,7 +123,7 @@ namespace System.Runtime.InteropServices.WindowsRuntime
                     count += ManagedEventRegistrationImpl.s_eventRegistrations.Keys.Count;
                 }
             }
-            
+
             if (NativeOrStaticEventRegistrationImpl.s_eventRegistrations != null)
             {
                 lock (NativeOrStaticEventRegistrationImpl.s_eventRegistrations)
@@ -122,7 +131,7 @@ namespace System.Runtime.InteropServices.WindowsRuntime
                     count += NativeOrStaticEventRegistrationImpl.s_eventRegistrations.Count;
                 }
             }
-            
+
             return count;
         }
 
@@ -130,11 +139,11 @@ namespace System.Runtime.InteropServices.WindowsRuntime
         // Optimized version of List of EventRegistrationToken
         // It is made a struct to reduce overhead
         //
-        internal struct EventRegistrationTokenList 
+        internal struct EventRegistrationTokenList
         {
-            private EventRegistrationToken          firstToken;     // Optimization for common case where there is only one token
-            private List<EventRegistrationToken>    restTokens;     // Rest of the tokens
-            
+            private EventRegistrationToken firstToken; // Optimization for common case where there is only one token
+            private List<EventRegistrationToken> restTokens; // Rest of the tokens
+
             internal EventRegistrationTokenList(EventRegistrationToken token)
             {
                 firstToken = token;
@@ -148,23 +157,23 @@ namespace System.Runtime.InteropServices.WindowsRuntime
             }
 
             // Push a new token into this list
-            // Returns true if you need to copy back this list into the dictionary (so that you 
+            // Returns true if you need to copy back this list into the dictionary (so that you
             // don't lose change outside the dictionary). false otherwise.
             public bool Push(EventRegistrationToken token)
             {
                 bool needCopy = false;
-                
+
                 if (restTokens == null)
                 {
                     restTokens = new List<EventRegistrationToken>();
                     needCopy = true;
                 }
-                
+
                 restTokens.Add(token);
 
                 return needCopy;
             }
-        
+
             // Pops the last token
             // Returns false if no more tokens left, true otherwise
             public bool Pop(out EventRegistrationToken token)
@@ -175,14 +184,14 @@ namespace System.Runtime.InteropServices.WindowsRuntime
                     token = firstToken;
                     return false;
                 }
-        
+
                 int last = restTokens.Count - 1;
                 token = restTokens[last];
                 restTokens.RemoveAt(last);
-                
+
                 return true;
             }
-        
+
             public void CopyTo(List<EventRegistrationToken> tokens)
             {
                 tokens.Add(firstToken);
@@ -195,46 +204,54 @@ namespace System.Runtime.InteropServices.WindowsRuntime
         // Event registration support for managed objects events & static events
         //
         internal static class ManagedEventRegistrationImpl
-        {            
+        {
             // Mappings of delegates registered for events -> their registration tokens.
             // These mappings are stored indexed by the remove method which can be used to undo the registrations.
             //
             // The full structure of this table is:
             //   object the event is being registered on ->
-            //      Table [RemoveMethod] -> 
+            //      Table [RemoveMethod] ->
             //        Table [Handler] -> Token
             //
             // Note: There are a couple of optimizations I didn't do here because they don't make sense for managed events:
             // 1.  Flatten the event cache (see EventCacheKey in native WinRT event implementation below)
             //
-            //     This is because managed events use ConditionalWeakTable to hold Objects->(Event->(Handler->Tokens)), 
-            //     and when object goes away everything else will be nicely cleaned up. If I flatten it like native WinRT events, 
-            //     I'll have to use Dictionary (as ConditionalWeakTable won't work - nobody will hold the new key alive anymore) 
-            //     instead, and that means I'll have to add more code from native WinRT events into managed WinRT event to support 
-            //     self-cleanup in the finalization, as well as reader/writer lock to protect against ----s in the finalization, 
+            //     This is because managed events use ConditionalWeakTable to hold Objects->(Event->(Handler->Tokens)),
+            //     and when object goes away everything else will be nicely cleaned up. If I flatten it like native WinRT events,
+            //     I'll have to use Dictionary (as ConditionalWeakTable won't work - nobody will hold the new key alive anymore)
+            //     instead, and that means I'll have to add more code from native WinRT events into managed WinRT event to support
+            //     self-cleanup in the finalization, as well as reader/writer lock to protect against ----s in the finalization,
             //     which adds a lot more complexity and doesn't really worth it.
-            // 
-            // 2.  Use conditionalWeakTable to hold Handler->Tokens. 
-            // 
-            //     The reason is very simple - managed object use dictionary (see EventRegistrationTokenTable) to hold delegates alive. 
-            //     If the delegates aren't alive, it means either they have been unsubscribed, or the object itself is gone, 
+            //
+            // 2.  Use conditionalWeakTable to hold Handler->Tokens.
+            //
+            //     The reason is very simple - managed object use dictionary (see EventRegistrationTokenTable) to hold delegates alive.
+            //     If the delegates aren't alive, it means either they have been unsubscribed, or the object itself is gone,
             //     and in either case, they've been already taken care of.
-            // 
-            internal volatile static 
-                ConditionalWeakTable<object, Dictionary<MethodInfo, Dictionary<object, EventRegistrationTokenList>>> s_eventRegistrations = 
-                    new ConditionalWeakTable<object, Dictionary<MethodInfo, Dictionary<object, EventRegistrationTokenList>>>();
-    
+            //
+            internal volatile static ConditionalWeakTable<
+                object,
+                Dictionary<MethodInfo, Dictionary<object, EventRegistrationTokenList>>
+            > s_eventRegistrations =
+                new ConditionalWeakTable<
+                    object,
+                    Dictionary<MethodInfo, Dictionary<object, EventRegistrationTokenList>>
+                >();
+
             [SecurityCritical]
-            internal static void AddEventHandler<T>(Func<T, EventRegistrationToken> addMethod,
-                                                  Action<EventRegistrationToken> removeMethod,
-                                                  T handler)
+            internal static void AddEventHandler<T>(
+                Func<T, EventRegistrationToken> addMethod,
+                Action<EventRegistrationToken> removeMethod,
+                T handler
+            )
             {
                 Contract.Requires(addMethod != null);
                 Contract.Requires(removeMethod != null);
 
                 // Add the method, and make a note of the token -> delegate mapping.
                 object instance = removeMethod.Target;
-                Dictionary<object, EventRegistrationTokenList> registrationTokens = GetEventRegistrationTokenTable(instance, removeMethod);
+                Dictionary<object, EventRegistrationTokenList> registrationTokens =
+                    GetEventRegistrationTokenTable(instance, removeMethod);
                 EventRegistrationToken token = addMethod(handler);
                 lock (registrationTokens)
                 {
@@ -252,67 +269,98 @@ namespace System.Runtime.InteropServices.WindowsRuntime
                         if (needCopy)
                             registrationTokens[handler] = tokens;
                     }
-                    
-                    BCLDebug.Log("INTEROP", "[WinRT_Eventing] Event subscribed for managed instance = " + instance + ", handler = " + handler + "\n");
+
+                    BCLDebug.Log(
+                        "INTEROP",
+                        "[WinRT_Eventing] Event subscribed for managed instance = "
+                            + instance
+                            + ", handler = "
+                            + handler
+                            + "\n"
+                    );
                 }
             }
-    
+
             // Get the event registration token table for an event.  These are indexed by the remove method of the event.
-            private static Dictionary<object, EventRegistrationTokenList> GetEventRegistrationTokenTable(object instance, Action<EventRegistrationToken> removeMethod)
+            private static Dictionary<
+                object,
+                EventRegistrationTokenList
+            > GetEventRegistrationTokenTable(
+                object instance,
+                Action<EventRegistrationToken> removeMethod
+            )
             {
                 Contract.Requires(instance != null);
                 Contract.Requires(removeMethod != null);
-                Contract.Requires(s_eventRegistrations != null);    
-    
+                Contract.Requires(s_eventRegistrations != null);
+
                 lock (s_eventRegistrations)
                 {
-                    Dictionary<MethodInfo, Dictionary<object, EventRegistrationTokenList>> instanceMap = null;
+                    Dictionary<
+                        MethodInfo,
+                        Dictionary<object, EventRegistrationTokenList>
+                    > instanceMap = null;
                     if (!s_eventRegistrations.TryGetValue(instance, out instanceMap))
                     {
-                        instanceMap = new Dictionary<MethodInfo, Dictionary<object, EventRegistrationTokenList>>();
+                        instanceMap =
+                            new Dictionary<
+                                MethodInfo,
+                                Dictionary<object, EventRegistrationTokenList>
+                            >();
                         s_eventRegistrations.Add(instance, instanceMap);
                     }
-    
+
                     Dictionary<object, EventRegistrationTokenList> tokens = null;
                     if (!instanceMap.TryGetValue(removeMethod.Method, out tokens))
                     {
                         tokens = new Dictionary<object, EventRegistrationTokenList>();
                         instanceMap.Add(removeMethod.Method, tokens);
                     }
-    
+
                     return tokens;
                 }
             }
 
             [SecurityCritical]
-            internal static void RemoveEventHandler<T>(Action<EventRegistrationToken> removeMethod, T handler)
+            internal static void RemoveEventHandler<T>(
+                Action<EventRegistrationToken> removeMethod,
+                T handler
+            )
             {
                 Contract.Requires(removeMethod != null);
 
                 object instance = removeMethod.Target;
-                Dictionary<object, EventRegistrationTokenList> registrationTokens = GetEventRegistrationTokenTable(instance, removeMethod);
+                Dictionary<object, EventRegistrationTokenList> registrationTokens =
+                    GetEventRegistrationTokenTable(instance, removeMethod);
                 EventRegistrationToken token;
-    
+
                 lock (registrationTokens)
                 {
                     EventRegistrationTokenList tokens;
-    
+
                     // Failure to find a registration for a token is not an error - it's simply a no-op.
                     if (!registrationTokens.TryGetValue(handler, out tokens))
                     {
-                        BCLDebug.Log("INTEROP", "[WinRT_Eventing] no registrationTokens found for instance=" + instance + ", handler= " + handler + "\n"); 
-                        
+                        BCLDebug.Log(
+                            "INTEROP",
+                            "[WinRT_Eventing] no registrationTokens found for instance="
+                                + instance
+                                + ", handler= "
+                                + handler
+                                + "\n"
+                        );
+
                         return;
                     }
-    
+
                     // Select a registration token to unregister
                     // We don't care which one but I'm returning the last registered token to be consistent
-                    // with native event registration implementation                    
+                    // with native event registration implementation
                     bool moreItems = tokens.Pop(out token);
                     if (!moreItems)
                     {
                         // Remove it from cache if this list become empty
-                        // This must be done because EventRegistrationTokenList now becomes invalid 
+                        // This must be done because EventRegistrationTokenList now becomes invalid
                         // (mostly because there is no safe default value for EventRegistrationToken to express 'no token')
                         // NOTE: We should try to remove registrationTokens itself from cache if it is empty, otherwise
                         // we could run into a race condition where one thread removes it from cache and another thread adds
@@ -320,24 +368,34 @@ namespace System.Runtime.InteropServices.WindowsRuntime
                         registrationTokens.Remove(handler);
                     }
                 }
-    
+
                 removeMethod(token);
 
-                BCLDebug.Log("INTEROP", "[WinRT_Eventing] Event unsubscribed for managed instance = " + instance + ", handler = " + handler + ", token = " + token.m_value + "\n");                
+                BCLDebug.Log(
+                    "INTEROP",
+                    "[WinRT_Eventing] Event unsubscribed for managed instance = "
+                        + instance
+                        + ", handler = "
+                        + handler
+                        + ", token = "
+                        + token.m_value
+                        + "\n"
+                );
             }
 
             [SecurityCritical]
             internal static void RemoveAllEventHandlers(Action<EventRegistrationToken> removeMethod)
             {
-                Contract.Requires(removeMethod != null);                                        
+                Contract.Requires(removeMethod != null);
 
                 object instance = removeMethod.Target;
-                Dictionary<object, EventRegistrationTokenList> registrationTokens = GetEventRegistrationTokenTable(instance, removeMethod);
+                Dictionary<object, EventRegistrationTokenList> registrationTokens =
+                    GetEventRegistrationTokenTable(instance, removeMethod);
 
                 List<EventRegistrationToken> tokensToRemove = new List<EventRegistrationToken>();
-                
+
                 lock (registrationTokens)
-                {                
+                {
                     // Copy all tokens to tokensToRemove array which later we'll call removeMethod on
                     // outside this lock
                     foreach (EventRegistrationTokenList tokens in registrationTokens.Values)
@@ -348,15 +406,26 @@ namespace System.Runtime.InteropServices.WindowsRuntime
                     // Clear the dictionary - at this point all event handlers are no longer in the cache
                     // but they are not removed yet
                     registrationTokens.Clear();
-                    BCLDebug.Log("INTEROP", "[WinRT_Eventing] Cache cleared for managed instance = " + instance + "\n");
+                    BCLDebug.Log(
+                        "INTEROP",
+                        "[WinRT_Eventing] Cache cleared for managed instance = " + instance + "\n"
+                    );
                 }
 
                 //
                 // Remove all handlers outside the lock
                 //
-                BCLDebug.Log("INTEROP", "[WinRT_Eventing] Start removing all events for instance = " + instance + "\n");                    
+                BCLDebug.Log(
+                    "INTEROP",
+                    "[WinRT_Eventing] Start removing all events for instance = " + instance + "\n"
+                );
                 CallRemoveMethods(removeMethod, tokensToRemove);
-                BCLDebug.Log("INTEROP", "[WinRT_Eventing] Finished removing all events for instance = " + instance + "\n");                    
+                BCLDebug.Log(
+                    "INTEROP",
+                    "[WinRT_Eventing] Finished removing all events for instance = "
+                        + instance
+                        + "\n"
+                );
             }
         }
 
@@ -364,15 +433,15 @@ namespace System.Runtime.InteropServices.WindowsRuntime
         // WinRT event registration implementation code
         //
         internal static class NativeOrStaticEventRegistrationImpl
-        {     
+        {
             //
             // Key = (target object, event)
             // We use a key of object+event to save an extra dictionary
             //
             internal struct EventCacheKey
             {
-                internal object      target;
-                internal MethodInfo  method;
+                internal object target;
+                internal MethodInfo method;
 
                 public override string ToString()
                 {
@@ -384,7 +453,10 @@ namespace System.Runtime.InteropServices.WindowsRuntime
             {
                 public bool Equals(EventCacheKey lhs, EventCacheKey rhs)
                 {
-                    return (Object.Equals(lhs.target, rhs.target) && Object.Equals(lhs.method, rhs.method));
+                    return (
+                        Object.Equals(lhs.target, rhs.target)
+                        && Object.Equals(lhs.method, rhs.method)
+                    );
                 }
 
                 public int GetHashCode(EventCacheKey key)
@@ -392,53 +464,61 @@ namespace System.Runtime.InteropServices.WindowsRuntime
                     return key.target.GetHashCode() ^ key.method.GetHashCode();
                 }
             }
-            
+
             //
             // EventRegistrationTokenListWithCount
-            // 
+            //
             // A list of EventRegistrationTokens that maintains a count
             //
             // The reason this needs to be a separate class is that we need a finalizer for this class
-            // If the delegate is collected, it will take this list away with it (due to dependent handles), 
+            // If the delegate is collected, it will take this list away with it (due to dependent handles),
             // and we need to remove the PerInstancEntry from cache
             // See ~EventRegistrationTokenListWithCount for more details
             //
             internal class EventRegistrationTokenListWithCount
             {
-                private TokenListCount          _tokenListCount;
-                EventRegistrationTokenList      _tokenList;
-                
-                internal EventRegistrationTokenListWithCount(TokenListCount tokenListCount, EventRegistrationToken token)
+                private TokenListCount _tokenListCount;
+                EventRegistrationTokenList _tokenList;
+
+                internal EventRegistrationTokenListWithCount(
+                    TokenListCount tokenListCount,
+                    EventRegistrationToken token
+                )
                 {
                     _tokenListCount = tokenListCount;
                     _tokenListCount.Inc();
 
                     _tokenList = new EventRegistrationTokenList(token);
                 }
-                
+
                 ~EventRegistrationTokenListWithCount()
-                {   
+                {
                     // Decrement token list count
                     // This is need to correctly keep trace of number of tokens for EventCacheKey
                     // and remove it from cache when the token count drop to 0
                     // we don't need to take locks for decrement the count - we only need to take a global
                     // lock when we decide to destroy cache for the IUnknown */type instance
-                    BCLDebug.Log("INTEROP", "[WinRT_Eventing] Finalizing EventRegistrationTokenList for " + _tokenListCount.Key + "\n");                
+                    BCLDebug.Log(
+                        "INTEROP",
+                        "[WinRT_Eventing] Finalizing EventRegistrationTokenList for "
+                            + _tokenListCount.Key
+                            + "\n"
+                    );
                     _tokenListCount.Dec();
                 }
-                
+
                 public void Push(EventRegistrationToken token)
                 {
                     // Since EventRegistrationTokenListWithCount is a reference type, there is no need
                     // to copy back. Ignore the return value
                     _tokenList.Push(token);
                 }
-            
+
                 public bool Pop(out EventRegistrationToken token)
                 {
                     return _tokenList.Pop(out token);
                 }
-            
+
                 public void CopyTo(List<EventRegistrationToken> tokens)
                 {
                     _tokenList.CopyTo(tokens);
@@ -453,8 +533,8 @@ namespace System.Runtime.InteropServices.WindowsRuntime
             //
             internal class TokenListCount
             {
-                private int             _count;
-                private EventCacheKey   _key;
+                private int _count;
+                private EventCacheKey _key;
 
                 internal TokenListCount(EventCacheKey key)
                 {
@@ -463,14 +543,20 @@ namespace System.Runtime.InteropServices.WindowsRuntime
 
                 internal EventCacheKey Key
                 {
-
                     get { return _key; }
                 }
-                
+
                 internal void Inc()
                 {
                     int newCount = Interlocked.Increment(ref _count);
-                    BCLDebug.Log("INTEROP", "[WinRT_Eventing] Incremented TokenListCount for " + _key + ", Value = " + newCount + "\n");           
+                    BCLDebug.Log(
+                        "INTEROP",
+                        "[WinRT_Eventing] Incremented TokenListCount for "
+                            + _key
+                            + ", Value = "
+                            + newCount
+                            + "\n"
+                    );
                 }
 
                 internal void Dec()
@@ -481,7 +567,14 @@ namespace System.Runtime.InteropServices.WindowsRuntime
                     try
                     {
                         int newCount = Interlocked.Decrement(ref _count);
-                        BCLDebug.Log("INTEROP", "[WinRT_Eventing] Decremented TokenListCount for " + _key + ", Value = " + newCount + "\n");                           
+                        BCLDebug.Log(
+                            "INTEROP",
+                            "[WinRT_Eventing] Decremented TokenListCount for "
+                                + _key
+                                + ", Value = "
+                                + newCount
+                                + "\n"
+                        );
                         if (newCount == 0)
                             CleanupCache();
                     }
@@ -497,16 +590,27 @@ namespace System.Runtime.InteropServices.WindowsRuntime
                     // because the total token list count has dropped to 0 and we don't have any events subscribed
                     Contract.Requires(s_eventRegistrations != null);
 
-                    BCLDebug.Log("INTEROP", "[WinRT_Eventing] Removing " + _key + " from cache" + "\n");                
+                    BCLDebug.Log(
+                        "INTEROP",
+                        "[WinRT_Eventing] Removing " + _key + " from cache" + "\n"
+                    );
                     s_eventRegistrations.Remove(_key);
-                    BCLDebug.Log("INTEROP", "[WinRT_Eventing] s_eventRegistrations size = " + s_eventRegistrations.Count + "\n");
+                    BCLDebug.Log(
+                        "INTEROP",
+                        "[WinRT_Eventing] s_eventRegistrations size = "
+                            + s_eventRegistrations.Count
+                            + "\n"
+                    );
                 }
             }
 
             internal struct EventCacheEntry
             {
                 // [Handler] -> Token
-                internal ConditionalWeakTable<object, EventRegistrationTokenListWithCount> registrationTable;
+                internal ConditionalWeakTable<
+                    object,
+                    EventRegistrationTokenListWithCount
+                > registrationTable;
 
                 // Maintains current total count for the EventRegistrationTokenListWithCount for this event cache key
                 internal TokenListCount tokenListCount;
@@ -517,7 +621,7 @@ namespace System.Runtime.InteropServices.WindowsRuntime
             //
             // The full structure of this table is:
             //   EventCacheKey (instanceKey, eventMethod) -> EventCacheEntry (Handler->tokens)
-            //   
+            //
             // A InstanceKey is the IUnknown * or static type instance
             //
             // Couple of things to note:
@@ -525,55 +629,65 @@ namespace System.Runtime.InteropServices.WindowsRuntime
             // based on the same COM object. For example:
             //    m_canvas.GetAt(0).Event += Func;
             //    m_canvas.GetAt(0).Event -= Func;  // GetAt(0) might create a new RCW
-            // 
+            //
             // 2. Handler->Token is a ConditionalWeakTable because we don't want to keep the delegate alive
-            // and we want EventRegistrationTokenListWithCount to be finalized after the delegate is no longer alive 
+            // and we want EventRegistrationTokenListWithCount to be finalized after the delegate is no longer alive
             // 3. It is possible another COM object is created at the same address
-            // before the entry in cache is destroyed. More specifically, 
-            //   a. The same delegate is being unsubscribed. In this case we'll give them a 
+            // before the entry in cache is destroyed. More specifically,
+            //   a. The same delegate is being unsubscribed. In this case we'll give them a
             //   stale token - unlikely to be a problem
             //   b. The same delegate is subscribed then unsubscribed. We need to make sure give
             //   them the latest token in this case. This is guaranteed by always giving the last token and always use equality to
             //   add/remove event handlers
-            internal volatile static Dictionary<EventCacheKey, EventCacheEntry> s_eventRegistrations = 
-                new Dictionary<EventCacheKey, EventCacheEntry>(new EventCacheKeyEqualityComparer());
+            internal volatile static Dictionary<
+                EventCacheKey,
+                EventCacheEntry
+            > s_eventRegistrations = new Dictionary<EventCacheKey, EventCacheEntry>(
+                new EventCacheKeyEqualityComparer()
+            );
 
             // Prevent add/remove handler code to run at the same with with cache cleanup code
-            private volatile static MyReaderWriterLock s_eventCacheRWLock = new MyReaderWriterLock();
+            private volatile static MyReaderWriterLock s_eventCacheRWLock =
+                new MyReaderWriterLock();
 
             // Get InstanceKey to use in the cache
             [SecuritySafeCritical]
             private static object GetInstanceKey(Action<EventRegistrationToken> removeMethod)
             {
                 object target = removeMethod.Target;
-                Contract.Assert(target == null || Marshal.IsComObject(target), "Must be null or a RCW");
+                Contract.Assert(
+                    target == null || Marshal.IsComObject(target),
+                    "Must be null or a RCW"
+                );
                 if (target == null)
                     return removeMethod.Method.DeclaringType;
-                
+
                 // Need the "Raw" IUnknown pointer for the RCW that is not bound to the current context
-                return (object) Marshal.GetRawIUnknownForComObjectNoAddRef(target);
+                return (object)Marshal.GetRawIUnknownForComObjectNoAddRef(target);
             }
-            
+
             [SecurityCritical]
-            internal static void AddEventHandler<T>(Func<T, EventRegistrationToken> addMethod,
-                                                  Action<EventRegistrationToken> removeMethod,
-                                                  T handler)
+            internal static void AddEventHandler<T>(
+                Func<T, EventRegistrationToken> addMethod,
+                Action<EventRegistrationToken> removeMethod,
+                T handler
+            )
             {
                 // The instanceKey will be IUnknown * of the target object
                 object instanceKey = GetInstanceKey(removeMethod);
 
                 // Call addMethod outside of RW lock
-                // At this point we don't need to worry about race conditions and we can avoid deadlocks 
+                // At this point we don't need to worry about race conditions and we can avoid deadlocks
                 // if addMethod waits on finalizer thread
                 // If we later throw we need to remove the method
                 EventRegistrationToken token = addMethod(handler);
 
                 bool tokenAdded = false;
-                
+
                 try
                 {
                     EventRegistrationTokenListWithCount tokens;
-                    
+
                     //
                     // The whole add/remove code has to be protected by a reader/writer lock
                     // Add/Remove cannot run at the same time with cache cleanup but Add/Remove can run at the same time
@@ -583,13 +697,20 @@ namespace System.Runtime.InteropServices.WindowsRuntime
                     {
                         // Add the method, and make a note of the delegate -> token mapping.
                         TokenListCount tokenListCount;
-                        ConditionalWeakTable<object, EventRegistrationTokenListWithCount> registrationTokens = GetOrCreateEventRegistrationTokenTable(instanceKey, removeMethod, out tokenListCount);
+                        ConditionalWeakTable<
+                            object,
+                            EventRegistrationTokenListWithCount
+                        > registrationTokens = GetOrCreateEventRegistrationTokenTable(
+                            instanceKey,
+                            removeMethod,
+                            out tokenListCount
+                        );
                         lock (registrationTokens)
                         {
                             //
                             // We need to find the key that equals to this handler
                             // Suppose we have 3 handlers A, B, C that are equal (refer to the same object and method),
-                            // the first handler (let's say A) will be used as the key and holds all the tokens. 
+                            // the first handler (let's say A) will be used as the key and holds all the tokens.
                             // We don't need to hold onto B and C, because the COM object itself will keep them alive,
                             // and they won't die anyway unless the COM object dies or they get unsubscribed.
                             // It may appear that it is fine to hold A, B, C, and add them and their corresponding tokens
@@ -599,18 +720,24 @@ namespace System.Runtime.InteropServices.WindowsRuntime
                             // will be added into B's token list, but once we unsubscribe B, we might end up removing
                             // the last token in C, and that may lead to crash.
                             //
-                            object key = registrationTokens.FindEquivalentKeyUnsafe(handler, out tokens);
+                            object key = registrationTokens.FindEquivalentKeyUnsafe(
+                                handler,
+                                out tokens
+                            );
                             if (key == null)
                             {
-                                tokens = new EventRegistrationTokenListWithCount(tokenListCount, token);
+                                tokens = new EventRegistrationTokenListWithCount(
+                                    tokenListCount,
+                                    token
+                                );
                                 registrationTokens.Add(handler, tokens);
                             }
                             else
                             {
                                 tokens.Push(token);
                             }
-                            
-                            tokenAdded = true;                            
+
+                            tokenAdded = true;
                         }
                     }
                     finally
@@ -618,10 +745,17 @@ namespace System.Runtime.InteropServices.WindowsRuntime
                         s_eventCacheRWLock.ReleaseReaderLock();
                     }
 
-                    BCLDebug.Log("INTEROP", "[WinRT_Eventing] Event subscribed for instance = " + instanceKey + ", handler = " + handler + "\n");                    
+                    BCLDebug.Log(
+                        "INTEROP",
+                        "[WinRT_Eventing] Event subscribed for instance = "
+                            + instanceKey
+                            + ", handler = "
+                            + handler
+                            + "\n"
+                    );
                 }
-                catch(Exception)
-                {   
+                catch (Exception)
+                {
                     // If we've already added the token and go there, we don't need to "UNDO" anything
                     if (!tokenAdded)
                     {
@@ -630,38 +764,69 @@ namespace System.Runtime.InteropServices.WindowsRuntime
                         removeMethod(token);
                     }
 
-                
-                    throw;                    
+                    throw;
                 }
             }
 
-            private static ConditionalWeakTable<object, EventRegistrationTokenListWithCount> GetEventRegistrationTokenTableNoCreate(object instance, Action<EventRegistrationToken> removeMethod, out TokenListCount tokenListCount)
+            private static ConditionalWeakTable<
+                object,
+                EventRegistrationTokenListWithCount
+            > GetEventRegistrationTokenTableNoCreate(
+                object instance,
+                Action<EventRegistrationToken> removeMethod,
+                out TokenListCount tokenListCount
+            )
             {
                 Contract.Requires(instance != null);
                 Contract.Requires(removeMethod != null);
 
-                return GetEventRegistrationTokenTableInternal(instance, removeMethod, out tokenListCount, /* createIfNotFound = */ false);
+                return GetEventRegistrationTokenTableInternal(
+                    instance,
+                    removeMethod,
+                    out tokenListCount, /* createIfNotFound = */
+                    false
+                );
             }
 
-            private static ConditionalWeakTable<object, EventRegistrationTokenListWithCount> GetOrCreateEventRegistrationTokenTable(object instance, Action<EventRegistrationToken> removeMethod, out TokenListCount tokenListCount)
+            private static ConditionalWeakTable<
+                object,
+                EventRegistrationTokenListWithCount
+            > GetOrCreateEventRegistrationTokenTable(
+                object instance,
+                Action<EventRegistrationToken> removeMethod,
+                out TokenListCount tokenListCount
+            )
             {
                 Contract.Requires(instance != null);
                 Contract.Requires(removeMethod != null);
 
-                return GetEventRegistrationTokenTableInternal(instance, removeMethod, out tokenListCount, /* createIfNotFound = */ true);
+                return GetEventRegistrationTokenTableInternal(
+                    instance,
+                    removeMethod,
+                    out tokenListCount, /* createIfNotFound = */
+                    true
+                );
             }
-            
+
             // Get the event registration token table for an event.  These are indexed by the remove method of the event.
-            private static ConditionalWeakTable<object, EventRegistrationTokenListWithCount> GetEventRegistrationTokenTableInternal(object instance, Action<EventRegistrationToken> removeMethod, out TokenListCount tokenListCount, bool createIfNotFound)
+            private static ConditionalWeakTable<
+                object,
+                EventRegistrationTokenListWithCount
+            > GetEventRegistrationTokenTableInternal(
+                object instance,
+                Action<EventRegistrationToken> removeMethod,
+                out TokenListCount tokenListCount,
+                bool createIfNotFound
+            )
             {
                 Contract.Requires(instance != null);
                 Contract.Requires(removeMethod != null);
-                Contract.Requires(s_eventRegistrations != null);    
+                Contract.Requires(s_eventRegistrations != null);
 
                 EventCacheKey eventCacheKey;
                 eventCacheKey.target = instance;
                 eventCacheKey.method = removeMethod.Method;
-                
+
                 lock (s_eventRegistrations)
                 {
                     EventCacheEntry eventCacheEntry;
@@ -673,29 +838,41 @@ namespace System.Runtime.InteropServices.WindowsRuntime
                             tokenListCount = null;
                             return null;
                         }
-                        
-                        BCLDebug.Log("INTEROP", "[WinRT_Eventing] Adding (" + instance + "," + removeMethod.Method + ") into cache" + "\n");
-                    
+
+                        BCLDebug.Log(
+                            "INTEROP",
+                            "[WinRT_Eventing] Adding ("
+                                + instance
+                                + ","
+                                + removeMethod.Method
+                                + ") into cache"
+                                + "\n"
+                        );
+
                         eventCacheEntry = new EventCacheEntry();
-                        eventCacheEntry.registrationTable = new ConditionalWeakTable<object, EventRegistrationTokenListWithCount>();
+                        eventCacheEntry.registrationTable =
+                            new ConditionalWeakTable<object, EventRegistrationTokenListWithCount>();
                         eventCacheEntry.tokenListCount = new TokenListCount(eventCacheKey);
-                        
+
                         s_eventRegistrations.Add(eventCacheKey, eventCacheEntry);
                     }
-                    
+
                     tokenListCount = eventCacheEntry.tokenListCount;
-                    
+
                     return eventCacheEntry.registrationTable;
                 }
             }
 
             [SecurityCritical]
-            internal static void RemoveEventHandler<T>(Action<EventRegistrationToken> removeMethod, T handler)
+            internal static void RemoveEventHandler<T>(
+                Action<EventRegistrationToken> removeMethod,
+                T handler
+            )
             {
                 object instanceKey = GetInstanceKey(removeMethod);
 
                 EventRegistrationToken token;
-                
+
                 //
                 // The whole add/remove code has to be protected by a reader/writer lock
                 // Add/Remove cannot run at the same time with cache cleanup but Add/Remove can run at the same time
@@ -704,15 +881,29 @@ namespace System.Runtime.InteropServices.WindowsRuntime
                 try
                 {
                     TokenListCount tokenListCount;
-                    ConditionalWeakTable<object, EventRegistrationTokenListWithCount> registrationTokens = GetEventRegistrationTokenTableNoCreate(instanceKey, removeMethod, out tokenListCount);
+                    ConditionalWeakTable<
+                        object,
+                        EventRegistrationTokenListWithCount
+                    > registrationTokens = GetEventRegistrationTokenTableNoCreate(
+                        instanceKey,
+                        removeMethod,
+                        out tokenListCount
+                    );
                     if (registrationTokens == null)
                     {
                         // We have no information regarding this particular instance (IUnknown*/type) - just return
                         // This is necessary to avoid leaking empty dictionary/conditionalWeakTables for this instance
-                        BCLDebug.Log("INTEROP", "[WinRT_Eventing] no registrationTokens found for instance=" + instanceKey + ", handler= " + handler + "\n"); 
+                        BCLDebug.Log(
+                            "INTEROP",
+                            "[WinRT_Eventing] no registrationTokens found for instance="
+                                + instanceKey
+                                + ", handler= "
+                                + handler
+                                + "\n"
+                        );
                         return;
                     }
-                    
+
                     lock (registrationTokens)
                     {
                         EventRegistrationTokenListWithCount tokens;
@@ -722,15 +913,27 @@ namespace System.Runtime.InteropServices.WindowsRuntime
                         // (but with the same object/method), so we need to find the first delegate that matches
                         // and unsubscribe it
                         // It actually doesn't matter which delegate - as long as it matches
-                        // Note that inside TryGetValueWithValueEquality we assumes that any delegate 
+                        // Note that inside TryGetValueWithValueEquality we assumes that any delegate
                         // with the same value equality would have the same hash code
-                        object key = registrationTokens.FindEquivalentKeyUnsafe(handler, out tokens);
-                        Contract.Assert((key != null && tokens != null) || (key == null && tokens == null), 
-                                        "key and tokens must be both null or non-null");
+                        object key = registrationTokens.FindEquivalentKeyUnsafe(
+                            handler,
+                            out tokens
+                        );
+                        Contract.Assert(
+                            (key != null && tokens != null) || (key == null && tokens == null),
+                            "key and tokens must be both null or non-null"
+                        );
                         if (tokens == null)
                         {
                             // Failure to find a registration for a token is not an error - it's simply a no-op.
-                            BCLDebug.Log("INTEROP", "[WinRT_Eventing] no token list found for instance=" + instanceKey + ", handler= " + handler + "\n"); 
+                            BCLDebug.Log(
+                                "INTEROP",
+                                "[WinRT_Eventing] no token list found for instance="
+                                    + instanceKey
+                                    + ", handler= "
+                                    + handler
+                                    + "\n"
+                            );
                             return;
                         }
 
@@ -739,7 +942,7 @@ namespace System.Runtime.InteropServices.WindowsRuntime
                         // is created at the same address before the entry for the old one goes away.
                         // See comments above s_eventRegistrations for more details
                         bool moreItems = tokens.Pop(out token);
-                        
+
                         // If the last token is removed from token list, we need to remove it from the cache
                         // otherwise FindEquivalentKeyUnsafe may found this empty token list even though there could be other
                         // equivalent keys in there with non-0 token list
@@ -747,12 +950,21 @@ namespace System.Runtime.InteropServices.WindowsRuntime
                         {
                             // Remove it from (handler)->(tokens)
                             // NOTE: We should not check whether registrationTokens has 0 entries and remove it from the cache
-                            // (just like managed event implementation), because this might ---- with the finalizer of 
+                            // (just like managed event implementation), because this might ---- with the finalizer of
                             // EventRegistrationTokenList
                             registrationTokens.Remove(key);
                         }
-                        
-                        BCLDebug.Log("INTEROP", "[WinRT_Eventing] Event unsubscribed for managed instance = " + instanceKey + ", handler = " + handler + ", token = " + token.m_value + "\n");                
+
+                        BCLDebug.Log(
+                            "INTEROP",
+                            "[WinRT_Eventing] Event unsubscribed for managed instance = "
+                                + instanceKey
+                                + ", handler = "
+                                + handler
+                                + ", token = "
+                                + token.m_value
+                                + "\n"
+                        );
                     }
                 }
                 finally
@@ -761,9 +973,9 @@ namespace System.Runtime.InteropServices.WindowsRuntime
                 }
 
                 // Call removeMethod outside of RW lock
-                // At this point we don't need to worry about race conditions and we can avoid deadlocks 
+                // At this point we don't need to worry about race conditions and we can avoid deadlocks
                 // if removeMethod waits on finalizer thread
-                removeMethod(token);            
+                removeMethod(token);
             }
 
             [SecurityCritical]
@@ -772,7 +984,7 @@ namespace System.Runtime.InteropServices.WindowsRuntime
                 object instanceKey = GetInstanceKey(removeMethod);
 
                 List<EventRegistrationToken> tokensToRemove = new List<EventRegistrationToken>();
-                
+
                 //
                 // The whole add/remove code has to be protected by a reader/writer lock
                 // Add/Remove cannot run at the same time with cache cleanup but Add/Remove can run at the same time
@@ -781,19 +993,28 @@ namespace System.Runtime.InteropServices.WindowsRuntime
                 try
                 {
                     TokenListCount tokenListCount;
-                    ConditionalWeakTable<object, EventRegistrationTokenListWithCount> registrationTokens = GetEventRegistrationTokenTableNoCreate(instanceKey, removeMethod, out tokenListCount);
+                    ConditionalWeakTable<
+                        object,
+                        EventRegistrationTokenListWithCount
+                    > registrationTokens = GetEventRegistrationTokenTableNoCreate(
+                        instanceKey,
+                        removeMethod,
+                        out tokenListCount
+                    );
                     if (registrationTokens == null)
                     {
                         // We have no information regarding this particular instance (IUnknown*/type) - just return
                         // This is necessary to avoid leaking empty dictionary/conditionalWeakTables for this instance
                         return;
                     }
-                    
+
                     lock (registrationTokens)
                     {
                         // Copy all tokens to tokensToRemove array which later we'll call removeMethod on
                         // outside this lock
-                        foreach (EventRegistrationTokenListWithCount tokens in registrationTokens.Values)
+                        foreach (
+                            EventRegistrationTokenListWithCount tokens in registrationTokens.Values
+                        )
                         {
                             tokens.CopyTo(tokensToRemove);
                         }
@@ -801,7 +1022,12 @@ namespace System.Runtime.InteropServices.WindowsRuntime
                         // Clear the table - at this point all event handlers are no longer in the cache
                         // but they are not removed yet
                         registrationTokens.Clear();
-                        BCLDebug.Log("INTEROP", "[WinRT_Eventing] Cache cleared for managed instance = " + instanceKey + "\n");                    
+                        BCLDebug.Log(
+                            "INTEROP",
+                            "[WinRT_Eventing] Cache cleared for managed instance = "
+                                + instanceKey
+                                + "\n"
+                        );
                     }
                 }
                 finally
@@ -812,28 +1038,35 @@ namespace System.Runtime.InteropServices.WindowsRuntime
                 //
                 // Remove all handlers outside the lock
                 //
-                BCLDebug.Log("INTEROP", "[WinRT_Eventing] Start removing all events for instance = " + instanceKey + "\n");                    
+                BCLDebug.Log(
+                    "INTEROP",
+                    "[WinRT_Eventing] Start removing all events for instance = "
+                        + instanceKey
+                        + "\n"
+                );
                 CallRemoveMethods(removeMethod, tokensToRemove);
-                BCLDebug.Log("INTEROP", "[WinRT_Eventing] Finished removing all events for instance = " + instanceKey + "\n");                    
+                BCLDebug.Log(
+                    "INTEROP",
+                    "[WinRT_Eventing] Finished removing all events for instance = "
+                        + instanceKey
+                        + "\n"
+                );
             }
-            
 
-            internal class ReaderWriterLockTimedOutException : ApplicationException
-            {
-            }
+            internal class ReaderWriterLockTimedOutException : ApplicationException { }
 
             /// I borrowed Vance's reader writer lock implementation from his blog as ReaderWriterLockSlim is
             /// available in System.Core.dll!
             ///
             /// <summary>
             /// A reader-writer lock implementation that is intended to be simple, yet very
-            /// efficient.  In particular only 1 interlocked operation is taken for any lock 
+            /// efficient.  In particular only 1 interlocked operation is taken for any lock
             /// operation (we use spin locks to achieve this).  The spin lock is never held
             /// for more than a few instructions (in particular, we never call event APIs
-            /// or in fact any non-trivial API while holding the spin lock).   
-            /// 
-            /// Currently this ReaderWriterLock does not support recurision, however it is 
-            /// not hard to add 
+            /// or in fact any non-trivial API while holding the spin lock).
+            ///
+            /// Currently this ReaderWriterLock does not support recurision, however it is
+            /// not hard to add
             /// </summary>
             internal class MyReaderWriterLock
             {
@@ -843,20 +1076,20 @@ namespace System.Runtime.InteropServices.WindowsRuntime
                 int myLock;
 
                 // Who owns the lock owners > 0 => readers
-                // owners = -1 means there is one writer.  Owners must be >= -1.  
+                // owners = -1 means there is one writer.  Owners must be >= -1.
                 int owners;
 
-                // These variables allow use to avoid Setting events (which is expensive) if we don't have to. 
-                uint numWriteWaiters;        // maximum number of threads that can be doing a WaitOne on the writeEvent 
-                uint numReadWaiters;         // maximum number of threads that can be doing a WaitOne on the readEvent
+                // These variables allow use to avoid Setting events (which is expensive) if we don't have to.
+                uint numWriteWaiters; // maximum number of threads that can be doing a WaitOne on the writeEvent
+                uint numReadWaiters; // maximum number of threads that can be doing a WaitOne on the readEvent
 
-                // conditions we wait on. 
-                EventWaitHandle writeEvent;    // threads waiting to aquire a write lock go here.
-                EventWaitHandle readEvent;     // threads waiting to aquire a read lock go here (will be released in bulk)
+                // conditions we wait on.
+                EventWaitHandle writeEvent; // threads waiting to aquire a write lock go here.
+                EventWaitHandle readEvent; // threads waiting to aquire a read lock go here (will be released in bulk)
 
                 internal MyReaderWriterLock()
                 {
-                    // All state can start out zeroed. 
+                    // All state can start out zeroed.
                 }
 
                 internal void AcquireReaderLock(int millisecondsTimeout)
@@ -865,19 +1098,19 @@ namespace System.Runtime.InteropServices.WindowsRuntime
                     for (; ; )
                     {
                         // We can enter a read lock if there are only read-locks have been given out
-                        // and a writer is not trying to get in.  
+                        // and a writer is not trying to get in.
                         if (owners >= 0 && numWriteWaiters == 0)
                         {
                             // Good case, there is no contention, we are basically done
-                            owners++;       // Indicate we have another reader
+                            owners++; // Indicate we have another reader
                             break;
                         }
 
-                        // Drat, we need to wait.  Mark that we have waiters and wait.  
-                        if (readEvent == null)      // Create the needed event 
+                        // Drat, we need to wait.  Mark that we have waiters and wait.
+                        if (readEvent == null) // Create the needed event
                         {
                             LazyCreateEvent(ref readEvent, false);
-                            continue;   // since we left the lock, start over. 
+                            continue; // since we left the lock, start over.
                         }
 
                         WaitOnEvent(readEvent, ref numReadWaiters, millisecondsTimeout);
@@ -893,15 +1126,15 @@ namespace System.Runtime.InteropServices.WindowsRuntime
                         if (owners == 0)
                         {
                             // Good case, there is no contention, we are basically done
-                            owners = -1;    // indicate we have a writer.
+                            owners = -1; // indicate we have a writer.
                             break;
                         }
 
                         // Drat, we need to wait.  Mark that we have waiters and wait.
-                        if (writeEvent == null)     // create the needed event.
+                        if (writeEvent == null) // create the needed event.
                         {
                             LazyCreateEvent(ref writeEvent, true);
-                            continue;   // since we left the lock, start over. 
+                            continue; // since we left the lock, start over.
                         }
 
                         WaitOnEvent(writeEvent, ref numWriteWaiters, millisecondsTimeout);
@@ -912,7 +1145,10 @@ namespace System.Runtime.InteropServices.WindowsRuntime
                 internal void ReleaseReaderLock()
                 {
                     EnterMyLock();
-                    Contract.Assert(owners > 0, "ReleasingReaderLock: releasing lock and no read lock taken");
+                    Contract.Assert(
+                        owners > 0,
+                        "ReleasingReaderLock: releasing lock and no read lock taken"
+                    );
                     --owners;
                     ExitAndWakeUpAppropriateWaiters();
                 }
@@ -920,7 +1156,10 @@ namespace System.Runtime.InteropServices.WindowsRuntime
                 internal void ReleaseWriterLock()
                 {
                     EnterMyLock();
-                    Contract.Assert(owners == -1, "Calling ReleaseWriterLock when no write lock is held");
+                    Contract.Assert(
+                        owners == -1,
+                        "Calling ReleaseWriterLock when no write lock is held"
+                    );
                     owners++;
                     ExitAndWakeUpAppropriateWaiters();
                 }
@@ -929,28 +1168,33 @@ namespace System.Runtime.InteropServices.WindowsRuntime
                 /// A routine for lazily creating a event outside the lock (so if errors
                 /// happen they are outside the lock and that we don't do much work
                 /// while holding a spin lock).  If all goes well, reenter the lock and
-                /// set 'waitEvent' 
+                /// set 'waitEvent'
                 /// </summary>
-                private void LazyCreateEvent(ref EventWaitHandle waitEvent, bool makeAutoResetEvent) {
+                private void LazyCreateEvent(ref EventWaitHandle waitEvent, bool makeAutoResetEvent)
+                {
                     Contract.Assert(myLock != 0, "Lock must be held");
                     Contract.Assert(waitEvent == null, "Wait event must be null");
 
                     ExitMyLock();
                     EventWaitHandle newEvent;
-                    if (makeAutoResetEvent) 
+                    if (makeAutoResetEvent)
                         newEvent = new AutoResetEvent(false);
-                    else 
+                    else
                         newEvent = new ManualResetEvent(false);
                     EnterMyLock();
-                    if (waitEvent == null)          // maybe someone snuck in. 
+                    if (waitEvent == null) // maybe someone snuck in.
                         waitEvent = newEvent;
                 }
 
                 /// <summary>
-                /// Waits on 'waitEvent' with a timeout of 'millisceondsTimeout.  
+                /// Waits on 'waitEvent' with a timeout of 'millisceondsTimeout.
                 /// Before the wait 'numWaiters' is incremented and is restored before leaving this routine.
                 /// </summary>
-                private void WaitOnEvent(EventWaitHandle waitEvent, ref uint numWaiters, int millisecondsTimeout)
+                private void WaitOnEvent(
+                    EventWaitHandle waitEvent,
+                    ref uint numWaiters,
+                    int millisecondsTimeout
+                )
                 {
                     Contract.Assert(myLock != 0, "Lock must be held");
 
@@ -958,25 +1202,25 @@ namespace System.Runtime.InteropServices.WindowsRuntime
                     numWaiters++;
 
                     bool waitSuccessful = false;
-                    ExitMyLock();      // Do the wait outside of any lock 
+                    ExitMyLock(); // Do the wait outside of any lock
                     try
                     {
                         if (!waitEvent.WaitOne(millisecondsTimeout, false))
                             throw new ReaderWriterLockTimedOutException();
-                        
+
                         waitSuccessful = true;
                     }
                     finally
                     {
                         EnterMyLock();
                         --numWaiters;
-                        if (!waitSuccessful)        // We are going to throw for some reason.  Exit myLock. 
+                        if (!waitSuccessful) // We are going to throw for some reason.  Exit myLock.
                             ExitMyLock();
                     }
                 }
 
                 /// <summary>
-                /// Determines the appropriate events to set, leaves the locks, and sets the events. 
+                /// Determines the appropriate events to set, leaves the locks, and sets the events.
                 /// </summary>
                 private void ExitAndWakeUpAppropriateWaiters()
                 {
@@ -984,70 +1228,77 @@ namespace System.Runtime.InteropServices.WindowsRuntime
 
                     if (owners == 0 && numWriteWaiters > 0)
                     {
-                        ExitMyLock();      // Exit before signaling to improve efficiency (wakee will need the lock)
-                        writeEvent.Set();   // release one writer. 
+                        ExitMyLock(); // Exit before signaling to improve efficiency (wakee will need the lock)
+                        writeEvent.Set(); // release one writer.
                     }
                     else if (owners >= 0 && numReadWaiters != 0)
                     {
-                        ExitMyLock();    // Exit before signaling to improve efficiency (wakee will need the lock)
-                        readEvent.Set();  // release all readers. 
+                        ExitMyLock(); // Exit before signaling to improve efficiency (wakee will need the lock)
+                        readEvent.Set(); // release all readers.
                     }
                     else
                         ExitMyLock();
                 }
 
-                private void EnterMyLock() {
+                private void EnterMyLock()
+                {
                     if (Interlocked.CompareExchange(ref myLock, 1, 0) != 0)
                         EnterMyLockSpin();
                 }
 
                 private void EnterMyLockSpin()
                 {
-                    for (int i = 0; ;i++)
+                    for (int i = 0; ; i++)
                     {
                         if (i < 3 && Environment.ProcessorCount > 1)
-                            Thread.SpinWait(20);    // Wait a few dozen instructions to let another processor release lock. 
-                        else 
-                            Thread.Sleep(0);        // Give up my quantum.  
+                            Thread.SpinWait(20); // Wait a few dozen instructions to let another processor release lock.
+                        else
+                            Thread.Sleep(0); // Give up my quantum.
 
                         if (Interlocked.CompareExchange(ref myLock, 1, 0) == 0)
                             return;
                     }
                 }
+
                 private void ExitMyLock()
                 {
                     Contract.Assert(myLock != 0, "Exiting spin lock that is not held");
                     myLock = 0;
                 }
-            };            
+            };
         }
 
         //
         // Call removeMethod on each token and aggregate all exceptions thrown from removeMethod into one in case of failure
         //
-        internal static void CallRemoveMethods(Action<EventRegistrationToken> removeMethod, List<EventRegistrationToken> tokensToRemove)
+        internal static void CallRemoveMethods(
+            Action<EventRegistrationToken> removeMethod,
+            List<EventRegistrationToken> tokensToRemove
+        )
         {
-
             List<Exception> exceptions = new List<Exception>();
-        
+
             foreach (EventRegistrationToken token in tokensToRemove)
             {
                 try
                 {
                     removeMethod(token);
                 }
-                catch(Exception ex)
+                catch (Exception ex)
                 {
                     exceptions.Add(ex);
                 }
-                
-                BCLDebug.Log("INTEROP", "[WinRT_Eventing] Event unsubscribed for token = " + token.m_value + "\n");
-            }        
+
+                BCLDebug.Log(
+                    "INTEROP",
+                    "[WinRT_Eventing] Event unsubscribed for token = " + token.m_value + "\n"
+                );
+            }
 
             if (exceptions.Count > 0)
                 throw new AggregateException(exceptions.ToArray());
         }
-        
+
         [SecurityCritical]
         internal static unsafe string HStringToString(IntPtr hstring)
         {
@@ -1067,7 +1318,11 @@ namespace System.Runtime.InteropServices.WindowsRuntime
             }
         }
 
-        internal static Exception GetExceptionForHR(int hresult, Exception innerException, string messageResource)
+        internal static Exception GetExceptionForHR(
+            int hresult,
+            Exception innerException,
+            string messageResource
+        )
         {
             Exception e = null;
             if (innerException != null)
@@ -1081,7 +1336,9 @@ namespace System.Runtime.InteropServices.WindowsRuntime
             }
             else
             {
-                string message = (messageResource != null ? Environment.GetResourceString(messageResource) : null);
+                string message = (
+                    messageResource != null ? Environment.GetResourceString(messageResource) : null
+                );
                 e = new Exception(message);
             }
 
@@ -1097,13 +1354,21 @@ namespace System.Runtime.InteropServices.WindowsRuntime
         private static bool s_haveBlueErrorApis = true;
 
         [SecurityCritical]
-        private static bool RoOriginateLanguageException(int error, string message, IntPtr languageException)
+        private static bool RoOriginateLanguageException(
+            int error,
+            string message,
+            IntPtr languageException
+        )
         {
             if (s_haveBlueErrorApis)
             {
                 try
                 {
-                    return UnsafeNativeMethods.RoOriginateLanguageException(error, message, languageException);
+                    return UnsafeNativeMethods.RoOriginateLanguageException(
+                        error,
+                        message,
+                        languageException
+                    );
                 }
                 catch (EntryPointNotFoundException)
                 {
@@ -1130,8 +1395,20 @@ namespace System.Runtime.InteropServices.WindowsRuntime
             }
         }
 
-        private static Guid s_iidIErrorInfo = new Guid(0x1CF2B120, 0x547D, 0x101B, 0x8E, 0x65, 0x08, 0x00, 0x2B, 0x2B, 0xD1, 0x19);
-        
+        private static Guid s_iidIErrorInfo = new Guid(
+            0x1CF2B120,
+            0x547D,
+            0x101B,
+            0x8E,
+            0x65,
+            0x08,
+            0x00,
+            0x2B,
+            0x2B,
+            0xD1,
+            0x19
+        );
+
         /// <summary>
         /// Report that an exception has occured which went user unhandled.  This allows the global error handler
         /// for the application to be invoked to process the error.
@@ -1169,12 +1446,23 @@ namespace System.Runtime.InteropServices.WindowsRuntime
                     exceptionIUnknown = Marshal.GetIUnknownForObject(e);
                     if (exceptionIUnknown != IntPtr.Zero)
                     {
-                        Marshal.QueryInterface(exceptionIUnknown, ref s_iidIErrorInfo, out exceptionIErrorInfo);
+                        Marshal.QueryInterface(
+                            exceptionIUnknown,
+                            ref s_iidIErrorInfo,
+                            out exceptionIErrorInfo
+                        );
                         if (exceptionIErrorInfo != IntPtr.Zero)
                         {
-                            if (RoOriginateLanguageException(Marshal.GetHRForException_WinRT(e), e.Message, exceptionIErrorInfo))
+                            if (
+                                RoOriginateLanguageException(
+                                    Marshal.GetHRForException_WinRT(e),
+                                    e.Message,
+                                    exceptionIErrorInfo
+                                )
+                            )
                             {
-                                IRestrictedErrorInfo restrictedError = UnsafeNativeMethods.GetRestrictedErrorInfo();
+                                IRestrictedErrorInfo restrictedError =
+                                    UnsafeNativeMethods.GetRestrictedErrorInfo();
                                 if (restrictedError != null)
                                 {
                                     RoReportUnhandledError(restrictedError);
@@ -1207,15 +1495,15 @@ namespace System.Runtime.InteropServices.WindowsRuntime
         [SecurityCritical]
         internal static IntPtr GetActivationFactoryForType(Type type)
         {
-            ManagedActivationFactory activationFactory = GetManagedActivationFactory(type); 
+            ManagedActivationFactory activationFactory = GetManagedActivationFactory(type);
             return Marshal.GetComInterfaceForObject(activationFactory, typeof(IActivationFactory));
-        }        
+        }
 
         [SecurityCritical]
         internal static ManagedActivationFactory GetManagedActivationFactory(Type type)
         {
             ManagedActivationFactory activationFactory = new ManagedActivationFactory(type);
-            
+
             // If the type has any associated factory interfaces (i.e. supports non-default activation
             // or has statics), the CCW for this instance of ManagedActivationFactory must support them.
             Marshal.InitializeManagedWinRTFactoryObject(activationFactory, (RuntimeType)type);
@@ -1233,16 +1521,24 @@ namespace System.Runtime.InteropServices.WindowsRuntime
         {
             if (s_pClassActivator == IntPtr.Zero)
             {
-                AppDomainSetup hostDomainSetup = new AppDomainSetup()
-                {
-                    ApplicationBase = appBase,
-                };
+                AppDomainSetup hostDomainSetup = new AppDomainSetup() { ApplicationBase = appBase };
 
-                AppDomain hostDomain = AppDomain.CreateDomain(Environment.GetResourceString("WinRTHostDomainName", appBase), null, hostDomainSetup);
-                WinRTClassActivator activator = (WinRTClassActivator)hostDomain.CreateInstanceAndUnwrap(typeof(WinRTClassActivator).Assembly.FullName, typeof(WinRTClassActivator).FullName);
+                AppDomain hostDomain = AppDomain.CreateDomain(
+                    Environment.GetResourceString("WinRTHostDomainName", appBase),
+                    null,
+                    hostDomainSetup
+                );
+                WinRTClassActivator activator = (WinRTClassActivator)
+                    hostDomain.CreateInstanceAndUnwrap(
+                        typeof(WinRTClassActivator).Assembly.FullName,
+                        typeof(WinRTClassActivator).FullName
+                    );
                 IntPtr pActivator = activator.GetIWinRTClassActivator();
 
-                if (Interlocked.CompareExchange(ref s_pClassActivator, pActivator, IntPtr.Zero) != IntPtr.Zero)
+                if (
+                    Interlocked.CompareExchange(ref s_pClassActivator, pActivator, IntPtr.Zero)
+                    != IntPtr.Zero
+                )
                 {
                     Marshal.Release(pActivator);
                     activator = null;
@@ -1265,8 +1561,8 @@ namespace System.Runtime.InteropServices.WindowsRuntime
         //
         // Get activation factory object for a specified WinRT type
         // If the WinRT type is a native type, we'll always create a unique RCW for it,
-        // This is necessary because WinRT factories are often implemented as a singleton, 
-        // and getting back a RCW for such WinRT factory would usually get back a RCW from 
+        // This is necessary because WinRT factories are often implemented as a singleton,
+        // and getting back a RCW for such WinRT factory would usually get back a RCW from
         // another apartment, even if the interface pointe returned from GetActivationFactory
         // is a raw pointer. As a result, user would randomly get back RCWs for activation
         // factories from other apartments and make transiton to those apartments and cause
@@ -1288,7 +1584,7 @@ namespace System.Runtime.InteropServices.WindowsRuntime
             {
 #if FEATURE_COMINTEROP_WINRT_MANAGED_ACTIVATION
                 return GetManagedActivationFactory(type);
-#else 
+#else
                 // Managed factories are not supported so as to minimize public surface (and test effort)
                 throw new NotSupportedException();
 #endif
@@ -1301,7 +1597,9 @@ namespace System.Runtime.InteropServices.WindowsRuntime
         public static IntPtr StringToHString(String s)
         {
             if (!Environment.IsWinRTSupported)
-                throw new PlatformNotSupportedException(Environment.GetResourceString("PlatformNotSupported_WinRT"));
+                throw new PlatformNotSupportedException(
+                    Environment.GetResourceString("PlatformNotSupported_WinRT")
+                );
 
             if (s == null)
                 throw new ArgumentNullException("s");
@@ -1320,7 +1618,9 @@ namespace System.Runtime.InteropServices.WindowsRuntime
         {
             if (!Environment.IsWinRTSupported)
             {
-                throw new PlatformNotSupportedException(Environment.GetResourceString("PlatformNotSupported_WinRT"));
+                throw new PlatformNotSupportedException(
+                    Environment.GetResourceString("PlatformNotSupported_WinRT")
+                );
             }
 
             return HStringToString(ptr);
@@ -1330,7 +1630,9 @@ namespace System.Runtime.InteropServices.WindowsRuntime
         public static void FreeHString(IntPtr ptr)
         {
             if (!Environment.IsWinRTSupported)
-                throw new PlatformNotSupportedException(Environment.GetResourceString("PlatformNotSupported_WinRT"));
+                throw new PlatformNotSupportedException(
+                    Environment.GetResourceString("PlatformNotSupported_WinRT")
+                );
 
             if (ptr != IntPtr.Zero)
             {

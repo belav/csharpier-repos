@@ -35,7 +35,8 @@ namespace System.ServiceModel.Syndication
         public const string SelfTag = "self";
         public const string SourceFeedTag = "source";
         public const string SourceTag = "src";
-        public const string SpecificationLink = "http://atompub.org/2005/08/17/draft-ietf-atompub-format-11.html";
+        public const string SpecificationLink =
+            "http://atompub.org/2005/08/17/draft-ietf-atompub-format-11.html";
         public const string SubtitleTag = "subtitle";
         public const string SummaryTag = "summary";
         public const string TermTag = "term";

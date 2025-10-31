@@ -18,7 +18,9 @@ namespace System
     // three fields from an ArraySegment may not see the same ArraySegment from one call to another
     // (ie, users could assign a new value to the old location).
     [Serializable]
-    [TypeForwardedFrom("mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089")]
+    [TypeForwardedFrom(
+        "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+    )]
     [DebuggerTypeProxy(typeof(ICollectionDebugView<>))]
     [DebuggerDisplay("Count = {Count}")]
 #pragma warning disable CA1066 // adding IEquatable<T> implementation could change semantics of code like that in xunit that queries for IEquatable vs enumerating contents
@@ -56,7 +58,11 @@ namespace System
             // Validate arguments, check is minimal instructions with reduced branching for inlinable fast-path
             // Negative values discovered though conversion to high values when converted to unsigned
             // Failure should be rare and location determination and message is delegated to failure functions
-            if (array == null || (uint)offset > (uint)array.Length || (uint)count > (uint)(array.Length - offset))
+            if (
+                array == null
+                || (uint)offset > (uint)array.Length
+                || (uint)count > (uint)(array.Length - offset)
+            )
                 ThrowHelper.ThrowArraySegmentCtorValidationFailedExceptions(array, offset, count);
 
             _array = array;
@@ -170,7 +176,8 @@ namespace System
 
         public static bool operator !=(ArraySegment<T> a, ArraySegment<T> b) => !(a == b);
 
-        public static implicit operator ArraySegment<T>(T[] array) => array != null ? new ArraySegment<T>(array) : default;
+        public static implicit operator ArraySegment<T>(T[] array) =>
+            array != null ? new ArraySegment<T>(array) : default;
 
         #region IList<T>
         T IList<T>.this[int index]
@@ -183,7 +190,6 @@ namespace System
 
                 return _array![_offset + index];
             }
-
             set
             {
                 ThrowInvalidOperationIfDefault();
@@ -200,8 +206,7 @@ namespace System
 
             int index = System.Array.IndexOf(_array!, item, _offset, _count);
 
-            Debug.Assert(index < 0 ||
-                            (index >= _offset && index < _offset + _count));
+            Debug.Assert(index < 0 || (index >= _offset && index < _offset + _count));
 
             return index >= 0 ? index - _offset : -1;
         }
@@ -241,8 +246,7 @@ namespace System
 
             int index = System.Array.IndexOf(_array!, item, _offset, _count);
 
-            Debug.Assert(index < 0 ||
-                            (index >= _offset && index < _offset + _count));
+            Debug.Assert(index < 0 || (index >= _offset && index < _offset + _count));
 
             return index >= 0;
         }
@@ -259,9 +263,7 @@ namespace System
         IEnumerator<T> IEnumerable<T>.GetEnumerator()
         {
             ThrowInvalidOperationIfDefault();
-            return
-                Count == 0 ? SZGenericArrayEnumerator<T>.Empty :
-                new Enumerator(this);
+            return Count == 0 ? SZGenericArrayEnumerator<T>.Empty : new Enumerator(this);
         }
         #endregion
 
@@ -274,7 +276,9 @@ namespace System
         {
             if (_array == null)
             {
-                ThrowHelper.ThrowInvalidOperationException(ExceptionResource.InvalidOperation_NullArray);
+                ThrowHelper.ThrowInvalidOperationException(
+                    ExceptionResource.InvalidOperation_NullArray
+                );
             }
         }
 
@@ -327,9 +331,7 @@ namespace System
                 _current = _start - 1;
             }
 
-            public void Dispose()
-            {
-            }
+            public void Dispose() { }
         }
     }
 }

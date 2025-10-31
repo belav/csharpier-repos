@@ -36,8 +36,11 @@ namespace System.Data.Metadata.Edm
         /// <param name="elementType">The element type that this collection type contains</param>
         /// <exception cref="System.ArgumentNullException">Thrown if the argument elementType is null</exception>
         internal CollectionType(TypeUsage elementType)
-            : base(GetIdentity(EntityUtil.GenericCheckArgumentNull(elementType, "elementType")), 
-                    EdmConstants.TransientNamespace, elementType.EdmType.DataSpace)
+            : base(
+                GetIdentity(EntityUtil.GenericCheckArgumentNull(elementType, "elementType")),
+                EdmConstants.TransientNamespace,
+                elementType.EdmType.DataSpace
+            )
         {
             _typeUsage = elementType;
             SetReadOnly();
@@ -52,7 +55,10 @@ namespace System.Data.Metadata.Edm
         /// <summary>
         /// Returns the kind of the type
         /// </summary>
-        public override BuiltInTypeKind BuiltInTypeKind { get { return BuiltInTypeKind.CollectionType; } }
+        public override BuiltInTypeKind BuiltInTypeKind
+        {
+            get { return BuiltInTypeKind.CollectionType; }
+        }
 
         /// <summary>
         /// The type of the element that this collection type contains
@@ -60,10 +66,7 @@ namespace System.Data.Metadata.Edm
         [MetadataProperty(BuiltInTypeKind.TypeUsage, false)]
         public TypeUsage TypeUsage
         {
-            get
-            {
-                return _typeUsage;
-            }
+            get { return _typeUsage; }
         }
         #endregion
 
@@ -90,10 +93,16 @@ namespace System.Data.Metadata.Edm
         internal override bool EdmEquals(MetadataItem item)
         {
             // short-circuit if this and other are reference equivalent
-            if (Object.ReferenceEquals(this, item)) { return true; }
+            if (Object.ReferenceEquals(this, item))
+            {
+                return true;
+            }
 
             // check type of item
-            if (null == item || BuiltInTypeKind.CollectionType != item.BuiltInTypeKind) { return false; }
+            if (null == item || BuiltInTypeKind.CollectionType != item.BuiltInTypeKind)
+            {
+                return false;
+            }
             CollectionType other = (CollectionType)item;
 
             // compare type usage

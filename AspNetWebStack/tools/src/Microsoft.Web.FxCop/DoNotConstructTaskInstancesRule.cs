@@ -8,9 +8,7 @@ namespace Microsoft.Web.FxCop
     public class DoNotConstructTaskInstancesRule : IntrospectionRule
     {
         public DoNotConstructTaskInstancesRule()
-            : base("DoNotConstructTaskInstances")
-        {
-        }
+            : base("DoNotConstructTaskInstances") { }
 
         public override ProblemCollection Check(Member member)
         {
@@ -27,9 +25,11 @@ namespace Microsoft.Web.FxCop
         {
             var memberBinding = construct.Constructor as MemberBinding;
 
-            if (memberBinding != null
+            if (
+                memberBinding != null
                 && memberBinding.BoundMember.Name.Name == ".ctor"
-                && memberBinding.BoundMember.DeclaringType.IsTask())
+                && memberBinding.BoundMember.DeclaringType.IsTask()
+            )
             {
                 Problems.Add(new Problem(GetResolution(), construct.UniqueKey.ToString()));
             }

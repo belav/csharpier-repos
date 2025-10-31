@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -26,52 +26,53 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
-using System.ComponentModel;
 using System.Collections;
+using System.ComponentModel;
 using System.Security.Permissions;
 using System.Web.UI.WebControls;
 
 namespace System.Web.UI.HtmlControls
 {
-	[ControlBuilder (typeof (HtmlEmptyTagControlBuilder))]
-	public class HtmlLink: HtmlControl
-	{
-		public HtmlLink () : base ("link")
-		{
-		}
+    [ControlBuilder(typeof(HtmlEmptyTagControlBuilder))]
+    public class HtmlLink : HtmlControl
+    {
+        public HtmlLink()
+            : base("link") { }
 
-		[DefaultValue ("")]
-		[UrlProperty]
-		[DesignerSerializationVisibility (DesignerSerializationVisibility.Hidden)]
-		public virtual string Href {
-			get {
-				string s = Attributes["href"];
-				if (s == null)
-					return "";
-				return s;
-			}
-			set {
-				if (value == null)
-					Attributes.Remove ("href");
-				else
-					Attributes["href"] = value;
-			}
-		}
+        [DefaultValue("")]
+        [UrlProperty]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        public virtual string Href
+        {
+            get
+            {
+                string s = Attributes["href"];
+                if (s == null)
+                    return "";
+                return s;
+            }
+            set
+            {
+                if (value == null)
+                    Attributes.Remove("href");
+                else
+                    Attributes["href"] = value;
+            }
+        }
 
-		protected internal override void Render (HtmlTextWriter writer)
-		{
-			writer.WriteBeginTag (TagName);
-			RenderAttributes (writer);
-			writer.Write (" />");
-		}
+        protected internal override void Render(HtmlTextWriter writer)
+        {
+            writer.WriteBeginTag(TagName);
+            RenderAttributes(writer);
+            writer.Write(" />");
+        }
 
-		[MonoTODO ("why override?")]
-		protected override void RenderAttributes (HtmlTextWriter writer)
-		{
-			if (Href.Length > 0)
-				Href = ResolveClientUrl (Href);
-			base.RenderAttributes (writer);
-		}
-	}
+        [MonoTODO("why override?")]
+        protected override void RenderAttributes(HtmlTextWriter writer)
+        {
+            if (Href.Length > 0)
+                Href = ResolveClientUrl(Href);
+            base.RenderAttributes(writer);
+        }
+    }
 }
-

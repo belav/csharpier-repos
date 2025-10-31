@@ -6,8 +6,8 @@
 // <owner current="true" primary="false">Microsoft</owner>
 //------------------------------------------------------------------------------
 
-namespace System.Data.Common {
-
+namespace System.Data.Common
+{
     using System;
     using System.Collections;
     using System.ComponentModel;
@@ -17,8 +17,10 @@ namespace System.Data.Common {
     using System.Text;
     using System.Text.RegularExpressions;
 
-    public abstract class DbCommandBuilder : Component { // V1.2.3300
-        private class ParameterNames {
+    public abstract class DbCommandBuilder : Component
+    { // V1.2.3300
+        private class ParameterNames
+        {
             private const string DefaultOriginalPrefix = "Original_";
             private const string DefaultIsNullPrefix = "IsNull_";
 
@@ -41,14 +43,18 @@ namespace System.Data.Common {
             private int _genericParameterCount;
             private int _adjustedParameterNameMaxLength;
 
-            internal ParameterNames(DbCommandBuilder dbCommandBuilder, DbSchemaRow[] schemaRows) {
+            internal ParameterNames(DbCommandBuilder dbCommandBuilder, DbSchemaRow[] schemaRows)
+            {
                 _dbCommandBuilder = dbCommandBuilder;
                 _baseParameterNames = new string[schemaRows.Length];
                 _originalParameterNames = new string[schemaRows.Length];
                 _nullParameterNames = new string[schemaRows.Length];
                 _isMutatedName = new bool[schemaRows.Length];
                 _count = schemaRows.Length;
-                _parameterNameParser = new Regex(_dbCommandBuilder.ParameterNamePattern, RegexOptions.ExplicitCapture | RegexOptions.Singleline);
+                _parameterNameParser = new Regex(
+                    _dbCommandBuilder.ParameterNamePattern,
+                    RegexOptions.ExplicitCapture | RegexOptions.Singleline
+                );
 
                 SetAndValidateNamePrefixes();
                 _adjustedParameterNameMaxLength = GetAdjustedParameterNameMaxLength();
@@ -58,38 +64,54 @@ namespace System.Data.Common {
                 // name conflict after mutation.
                 // All null values will be replaced with generic parameter names
                 //
-                for (int i = 0; i < schemaRows.Length; i++) {
-                    if (null == schemaRows[i]) {
+                for (int i = 0; i < schemaRows.Length; i++)
+                {
+                    if (null == schemaRows[i])
+                    {
                         continue;
                     }
                     bool isMutatedName = false;
                     string columnName = schemaRows[i].ColumnName;
 
                     // all names that start with original- or isNullPrefix are invalid
-                    if (null != _originalPrefix) {
-                        if (columnName.StartsWith(_originalPrefix, StringComparison.OrdinalIgnoreCase)) {
+                    if (null != _originalPrefix)
+                    {
+                        if (
+                            columnName.StartsWith(
+                                _originalPrefix,
+                                StringComparison.OrdinalIgnoreCase
+                            )
+                        )
+                        {
                             continue;
                         }
                     }
-                    if (null != _isNullPrefix) {
-                        if (columnName.StartsWith(_isNullPrefix, StringComparison.OrdinalIgnoreCase)) {
+                    if (null != _isNullPrefix)
+                    {
+                        if (
+                            columnName.StartsWith(_isNullPrefix, StringComparison.OrdinalIgnoreCase)
+                        )
+                        {
                             continue;
                         }
                     }
 
                     // Mutate name if it contains space(s)
-                    if (columnName.IndexOf(' ') >= 0) {
+                    if (columnName.IndexOf(' ') >= 0)
+                    {
                         columnName = columnName.Replace(' ', '_');
                         isMutatedName = true;
                     }
 
                     // Validate name against regular expression
-                    if (!_parameterNameParser.IsMatch(columnName)) {
+                    if (!_parameterNameParser.IsMatch(columnName))
+                    {
                         continue;
                     }
 
                     // Validate name against adjusted max parametername length
-                    if (columnName.Length > _adjustedParameterNameMaxLength) {
+                    if (columnName.Length > _adjustedParameterNameMaxLength)
+                    {
                         continue;
                     }
 
@@ -101,14 +123,19 @@ namespace System.Data.Common {
 
                 // Generate names for original- and isNullparameters
                 // no names will be generated if the prefix failed parametername validation
-                for (int i = 0; i < schemaRows.Length; i++) {
-                    if (null != _baseParameterNames[i]) {
-                        if (null != _originalPrefix) {
+                for (int i = 0; i < schemaRows.Length; i++)
+                {
+                    if (null != _baseParameterNames[i])
+                    {
+                        if (null != _originalPrefix)
+                        {
                             _originalParameterNames[i] = _originalPrefix + _baseParameterNames[i];
                         }
-                        if (null != _isNullPrefix) {
+                        if (null != _isNullPrefix)
+                        {
                             // don't bother generating an 'IsNull' name if it's not used
-                            if (schemaRows[i].AllowDBNull) {
+                            if (schemaRows[i].AllowDBNull)
+                            {
                                 _nullParameterNames[i] = _isNullPrefix + _baseParameterNames[i];
                             }
                         }
@@ -118,62 +145,92 @@ namespace System.Data.Common {
                 GenerateMissingNames(schemaRows);
             }
 
-            private void SetAndValidateNamePrefixes() {
-                if (_parameterNameParser.IsMatch(DefaultIsNullPrefix)) {
+            private void SetAndValidateNamePrefixes()
+            {
+                if (_parameterNameParser.IsMatch(DefaultIsNullPrefix))
+                {
                     _isNullPrefix = DefaultIsNullPrefix;
                 }
-                else if (_parameterNameParser.IsMatch(AlternativeIsNullPrefix)) {
+                else if (_parameterNameParser.IsMatch(AlternativeIsNullPrefix))
+                {
                     _isNullPrefix = AlternativeIsNullPrefix;
                 }
-                else if (_parameterNameParser.IsMatch(AlternativeIsNullPrefix2)) {
+                else if (_parameterNameParser.IsMatch(AlternativeIsNullPrefix2))
+                {
                     _isNullPrefix = AlternativeIsNullPrefix2;
                 }
-                else {
+                else
+                {
                     _isNullPrefix = null;
                 }
-                if (_parameterNameParser.IsMatch(DefaultOriginalPrefix)) {
+                if (_parameterNameParser.IsMatch(DefaultOriginalPrefix))
+                {
                     _originalPrefix = DefaultOriginalPrefix;
                 }
-                else if (_parameterNameParser.IsMatch(AlternativeOriginalPrefix)) {
+                else if (_parameterNameParser.IsMatch(AlternativeOriginalPrefix))
+                {
                     _originalPrefix = AlternativeOriginalPrefix;
                 }
-                else if (_parameterNameParser.IsMatch(AlternativeOriginalPrefix2)) {
+                else if (_parameterNameParser.IsMatch(AlternativeOriginalPrefix2))
+                {
                     _originalPrefix = AlternativeOriginalPrefix2;
                 }
-                else {
+                else
+                {
                     _originalPrefix = null;
                 }
             }
 
-            private void ApplyProviderSpecificFormat() {
-                for (int i = 0; i < _baseParameterNames.Length; i++) {
-                    if (null != _baseParameterNames[i]) {
-                        _baseParameterNames[i] = _dbCommandBuilder.GetParameterName(_baseParameterNames[i]);
+            private void ApplyProviderSpecificFormat()
+            {
+                for (int i = 0; i < _baseParameterNames.Length; i++)
+                {
+                    if (null != _baseParameterNames[i])
+                    {
+                        _baseParameterNames[i] = _dbCommandBuilder.GetParameterName(
+                            _baseParameterNames[i]
+                        );
                     }
-                    if (null != _originalParameterNames[i]) {
-                        _originalParameterNames[i] = _dbCommandBuilder.GetParameterName(_originalParameterNames[i]);
+                    if (null != _originalParameterNames[i])
+                    {
+                        _originalParameterNames[i] = _dbCommandBuilder.GetParameterName(
+                            _originalParameterNames[i]
+                        );
                     }
-                    if (null != _nullParameterNames[i]) {
-                        _nullParameterNames[i] = _dbCommandBuilder.GetParameterName(_nullParameterNames[i]);
+                    if (null != _nullParameterNames[i])
+                    {
+                        _nullParameterNames[i] = _dbCommandBuilder.GetParameterName(
+                            _nullParameterNames[i]
+                        );
                     }
                 }
             }
 
-            private void EliminateConflictingNames() {
-                // 
+            private void EliminateConflictingNames()
+            {
+                //
 
-
-
-                for (int i = 0; i < _count - 1; i++) {
+                for (int i = 0; i < _count - 1; i++)
+                {
                     string name = _baseParameterNames[i];
-                    if (null != name) {
-                        for (int j = i + 1; j < _count; j++) {
-                            if (ADP.CompareInsensitiveInvariant(name, _baseParameterNames[j])) {
+                    if (null != name)
+                    {
+                        for (int j = i + 1; j < _count; j++)
+                        {
+                            if (ADP.CompareInsensitiveInvariant(name, _baseParameterNames[j]))
+                            {
                                 // found duplicate name
                                 // the name unchanged name wins
                                 int iMutatedName = _isMutatedName[j] ? j : i;
-                                Debug.Assert(_isMutatedName[iMutatedName], String.Format(CultureInfo.InvariantCulture, "{0} expected to be a mutated name", _baseParameterNames[iMutatedName]));
-                                _baseParameterNames[iMutatedName] = null;   // null out the culprit
+                                Debug.Assert(
+                                    _isMutatedName[iMutatedName],
+                                    String.Format(
+                                        CultureInfo.InvariantCulture,
+                                        "{0} expected to be a mutated name",
+                                        _baseParameterNames[iMutatedName]
+                                    )
+                                );
+                                _baseParameterNames[iMutatedName] = null; // null out the culprit
                             }
                         }
                     }
@@ -181,7 +238,8 @@ namespace System.Data.Common {
             }
 
             // Generates parameternames that couldn't be generated from columnname
-            internal void GenerateMissingNames(DbSchemaRow[] schemaRows) {
+            internal void GenerateMissingNames(DbSchemaRow[] schemaRows)
+            {
                 // foreach name in base names
                 // if base name is null
                 //  for base, original and nullnames (null names only if nullable)
@@ -193,36 +251,45 @@ namespace System.Data.Common {
                 //  end for
                 // end foreach
                 string name;
-                for (int i = 0; i < _baseParameterNames.Length; i++) {
+                for (int i = 0; i < _baseParameterNames.Length; i++)
+                {
                     name = _baseParameterNames[i];
-                    if (null == name) {
+                    if (null == name)
+                    {
                         _baseParameterNames[i] = GetNextGenericParameterName();
                         _originalParameterNames[i] = GetNextGenericParameterName();
                         // don't bother generating an 'IsNull' name if it's not used
-                        if ((null != schemaRows[i]) && schemaRows[i].AllowDBNull) {
+                        if ((null != schemaRows[i]) && schemaRows[i].AllowDBNull)
+                        {
                             _nullParameterNames[i] = GetNextGenericParameterName();
                         }
                     }
                 }
             }
 
-            private int GetAdjustedParameterNameMaxLength() {
-                int maxPrefixLength = Math.Max(
-                    (null != _isNullPrefix ? _isNullPrefix.Length : 0),
-                    (null != _originalPrefix ? _originalPrefix.Length : 0)
+            private int GetAdjustedParameterNameMaxLength()
+            {
+                int maxPrefixLength =
+                    Math.Max(
+                        (null != _isNullPrefix ? _isNullPrefix.Length : 0),
+                        (null != _originalPrefix ? _originalPrefix.Length : 0)
                     ) + _dbCommandBuilder.GetParameterName("").Length;
                 return _dbCommandBuilder.ParameterNameMaxLength - maxPrefixLength;
             }
 
-            private string GetNextGenericParameterName() {
+            private string GetNextGenericParameterName()
+            {
                 string name;
                 bool nameExist;
-                do {
+                do
+                {
                     nameExist = false;
                     _genericParameterCount++;
                     name = _dbCommandBuilder.GetParameterName(_genericParameterCount);
-                    for (int i = 0; i < _baseParameterNames.Length; i++) {
-                        if (ADP.CompareInsensitiveInvariant(_baseParameterNames[i], name)) {
+                    for (int i = 0; i < _baseParameterNames.Length; i++)
+                    {
+                        if (ADP.CompareInsensitiveInvariant(_baseParameterNames[i], name))
+                        {
                             nameExist = true;
                             break;
                         }
@@ -231,39 +298,44 @@ namespace System.Data.Common {
                 return name;
             }
 
-            internal string GetBaseParameterName(int index) {
+            internal string GetBaseParameterName(int index)
+            {
                 return (_baseParameterNames[index]);
             }
-            internal string GetOriginalParameterName(int index) {
+
+            internal string GetOriginalParameterName(int index)
+            {
                 return (_originalParameterNames[index]);
             }
-            internal string GetNullParameterName(int index) {
+
+            internal string GetNullParameterName(int index)
+            {
                 return (_nullParameterNames[index]);
             }
         }
 
-        private const string DeleteFrom          = "DELETE FROM ";
+        private const string DeleteFrom = "DELETE FROM ";
 
-        private const string InsertInto          = "INSERT INTO ";
-        private const string DefaultValues       = " DEFAULT VALUES";
-        private const string Values              = " VALUES ";
+        private const string InsertInto = "INSERT INTO ";
+        private const string DefaultValues = " DEFAULT VALUES";
+        private const string Values = " VALUES ";
 
-        private const string Update              = "UPDATE ";
+        private const string Update = "UPDATE ";
 
-        private const string Set                 = " SET ";
-        private const string Where               = " WHERE ";
+        private const string Set = " SET ";
+        private const string Where = " WHERE ";
         private const string SpaceLeftParenthesis = " (";
 
-        private const string Comma               = ", ";
-        private const string Equal               = " = ";
-        private const string LeftParenthesis     = "(";
-        private const string RightParenthesis    = ")";
-        private const string NameSeparator       = ".";
+        private const string Comma = ", ";
+        private const string Equal = " = ";
+        private const string LeftParenthesis = "(";
+        private const string RightParenthesis = ")";
+        private const string NameSeparator = ".";
 
-        private const string IsNull              = " IS NULL";
-        private const string EqualOne            = " = 1";
-        private const string And                 = " AND ";
-        private const string Or                  = " OR ";
+        private const string IsNull = " IS NULL";
+        private const string EqualOne = " = 1";
+        private const string And = " AND ";
+        private const string Or = " OR ";
 
         private DbDataAdapter _dataAdapter;
 
@@ -292,69 +364,82 @@ namespace System.Data.Common {
         private string _quoteSuffix = "";
         private string _parameterNamePattern = null;
         private string _parameterMarkerFormat = null;
-        private int    _parameterNameMaxLength = 0;
+        private int _parameterNameMaxLength = 0;
 
-        protected DbCommandBuilder() : base() { // V1.2.3300
+        protected DbCommandBuilder()
+            : base()
+        { // V1.2.3300
         }
 
         [
-        DefaultValueAttribute(ConflictOption.CompareAllSearchableValues),
-        ResCategoryAttribute(Res.DataCategory_Update),
-        ResDescriptionAttribute(Res.DbCommandBuilder_ConflictOption),
+            DefaultValueAttribute(ConflictOption.CompareAllSearchableValues),
+            ResCategoryAttribute(Res.DataCategory_Update),
+            ResDescriptionAttribute(Res.DbCommandBuilder_ConflictOption),
         ]
-        virtual public ConflictOption ConflictOption { // V1.2.3300
-            get {
-                return _conflictDetection;
-            }
-            set {
-                switch(value) {
-                case ConflictOption.CompareAllSearchableValues:
-                case ConflictOption.CompareRowVersion:
-                case ConflictOption.OverwriteChanges:
-                    _conflictDetection = value;
-                    break;
-                default:
-                    throw ADP.InvalidConflictOptions(value);
+        public virtual ConflictOption ConflictOption
+        { // V1.2.3300
+            get { return _conflictDetection; }
+            set
+            {
+                switch (value)
+                {
+                    case ConflictOption.CompareAllSearchableValues:
+                    case ConflictOption.CompareRowVersion:
+                    case ConflictOption.OverwriteChanges:
+                        _conflictDetection = value;
+                        break;
+                    default:
+                        throw ADP.InvalidConflictOptions(value);
                 }
             }
         }
 
         [
-        DefaultValueAttribute(CatalogLocation.Start),
-        ResCategoryAttribute(Res.DataCategory_Schema),
-        ResDescriptionAttribute(Res.DbCommandBuilder_CatalogLocation),
+            DefaultValueAttribute(CatalogLocation.Start),
+            ResCategoryAttribute(Res.DataCategory_Schema),
+            ResDescriptionAttribute(Res.DbCommandBuilder_CatalogLocation),
         ]
-        virtual public CatalogLocation CatalogLocation { // V1.2.3300, MDAC 79449
-            get {
-                return _catalogLocation;
-            }
-            set {
-                if (null != _dbSchemaTable) {
+        public virtual CatalogLocation CatalogLocation
+        { // V1.2.3300, MDAC 79449
+            get { return _catalogLocation; }
+            set
+            {
+                if (null != _dbSchemaTable)
+                {
                     throw ADP.NoQuoteChange();
                 }
-                switch(value) {
-                case CatalogLocation.Start:
-                case CatalogLocation.End:
-                    _catalogLocation = value;
-                    break;
-                default:
-                    throw ADP.InvalidCatalogLocation(value);
+                switch (value)
+                {
+                    case CatalogLocation.Start:
+                    case CatalogLocation.End:
+                        _catalogLocation = value;
+                        break;
+                    default:
+                        throw ADP.InvalidCatalogLocation(value);
                 }
             }
         }
 
         [
-        DefaultValueAttribute(DbCommandBuilder.NameSeparator),
-        ResCategoryAttribute(Res.DataCategory_Schema),
-        ResDescriptionAttribute(Res.DbCommandBuilder_CatalogSeparator),
+            DefaultValueAttribute(DbCommandBuilder.NameSeparator),
+            ResCategoryAttribute(Res.DataCategory_Schema),
+            ResDescriptionAttribute(Res.DbCommandBuilder_CatalogSeparator),
         ]
-        virtual public string CatalogSeparator { // V1.2.3300,  MDAC 79449
-            get {
+        public virtual string CatalogSeparator
+        { // V1.2.3300,  MDAC 79449
+            get
+            {
                 string catalogSeparator = _catalogSeparator;
-                return (((null != catalogSeparator) && (0 < catalogSeparator.Length)) ? catalogSeparator : NameSeparator);
+                return (
+                    ((null != catalogSeparator) && (0 < catalogSeparator.Length))
+                        ? catalogSeparator
+                        : NameSeparator
+                );
             }
-            set {
-                if (null != _dbSchemaTable) {
+            set
+            {
+                if (null != _dbSchemaTable)
+                {
                     throw ADP.NoQuoteChange();
                 }
                 _catalogSeparator = value;
@@ -362,24 +447,27 @@ namespace System.Data.Common {
         }
 
         [
-        Browsable(false),
-        DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden),
-        ResDescriptionAttribute(Res.DbCommandBuilder_DataAdapter),
+            Browsable(false),
+            DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden),
+            ResDescriptionAttribute(Res.DbCommandBuilder_DataAdapter),
         ]
-        public DbDataAdapter DataAdapter { // V1.2.3300
-            get {
-                return _dataAdapter;
-            }
-            set {
-                if (_dataAdapter != value) {
+        public DbDataAdapter DataAdapter
+        { // V1.2.3300
+            get { return _dataAdapter; }
+            set
+            {
+                if (_dataAdapter != value)
+                {
                     RefreshSchema();
 
-                    if (null != _dataAdapter) {
+                    if (null != _dataAdapter)
+                    {
                         // derived should remove event handler from old adapter
                         SetRowUpdatingHandler(_dataAdapter);
                         _dataAdapter = null;
                     }
-                    if (null != value) {
+                    if (null != value)
+                    {
                         // derived should add event handler to new adapter
                         SetRowUpdatingHandler(value);
                         _dataAdapter = value;
@@ -388,36 +476,37 @@ namespace System.Data.Common {
             }
         }
 
-        internal int ParameterNameMaxLength {
-            get {
-                return _parameterNameMaxLength;
-            }
+        internal int ParameterNameMaxLength
+        {
+            get { return _parameterNameMaxLength; }
         }
 
-        internal string ParameterNamePattern {
-            get {
-                return _parameterNamePattern;
-            }
+        internal string ParameterNamePattern
+        {
+            get { return _parameterNamePattern; }
         }
 
-        private string QuotedBaseTableName {
-            get {
-                return _quotedBaseTableName;
-            }
+        private string QuotedBaseTableName
+        {
+            get { return _quotedBaseTableName; }
         }
 
         [
-        DefaultValueAttribute(""),
-        ResCategoryAttribute(Res.DataCategory_Schema),
-        ResDescriptionAttribute(Res.DbCommandBuilder_QuotePrefix),
+            DefaultValueAttribute(""),
+            ResCategoryAttribute(Res.DataCategory_Schema),
+            ResDescriptionAttribute(Res.DbCommandBuilder_QuotePrefix),
         ]
-        virtual public string QuotePrefix { // V1.2.3300, XXXCommandBuilder V1.0.3300
-            get {
+        public virtual string QuotePrefix
+        { // V1.2.3300, XXXCommandBuilder V1.0.3300
+            get
+            {
                 string quotePrefix = _quotePrefix;
                 return ((null != quotePrefix) ? quotePrefix : ADP.StrEmpty);
             }
-            set {
-                if (null != _dbSchemaTable) {
+            set
+            {
+                if (null != _dbSchemaTable)
+                {
                     throw ADP.NoQuoteChange();
                 }
                 _quotePrefix = value;
@@ -425,36 +514,47 @@ namespace System.Data.Common {
         }
 
         [
-        DefaultValueAttribute(""),
-        ResCategoryAttribute(Res.DataCategory_Schema),
-        ResDescriptionAttribute(Res.DbCommandBuilder_QuoteSuffix),
+            DefaultValueAttribute(""),
+            ResCategoryAttribute(Res.DataCategory_Schema),
+            ResDescriptionAttribute(Res.DbCommandBuilder_QuoteSuffix),
         ]
-        virtual public string QuoteSuffix { // V1.2.3300, XXXCommandBuilder V1.0.3300
-            get {
+        public virtual string QuoteSuffix
+        { // V1.2.3300, XXXCommandBuilder V1.0.3300
+            get
+            {
                 string quoteSuffix = _quoteSuffix;
                 return ((null != quoteSuffix) ? quoteSuffix : ADP.StrEmpty);
             }
-            set {
-                if (null != _dbSchemaTable) {
+            set
+            {
+                if (null != _dbSchemaTable)
+                {
                     throw ADP.NoQuoteChange();
                 }
                 _quoteSuffix = value;
             }
         }
 
-
         [
-        DefaultValueAttribute(DbCommandBuilder.NameSeparator),
-        ResCategoryAttribute(Res.DataCategory_Schema),
-        ResDescriptionAttribute(Res.DbCommandBuilder_SchemaSeparator),
+            DefaultValueAttribute(DbCommandBuilder.NameSeparator),
+            ResCategoryAttribute(Res.DataCategory_Schema),
+            ResDescriptionAttribute(Res.DbCommandBuilder_SchemaSeparator),
         ]
-        virtual public string SchemaSeparator { // V1.2.3300, MDAC 79449
-            get {
+        public virtual string SchemaSeparator
+        { // V1.2.3300, MDAC 79449
+            get
+            {
                 string schemaSeparator = _schemaSeparator;
-                return (((null != schemaSeparator) && (0 < schemaSeparator.Length)) ? schemaSeparator : NameSeparator);
+                return (
+                    ((null != schemaSeparator) && (0 < schemaSeparator.Length))
+                        ? schemaSeparator
+                        : NameSeparator
+                );
             }
-            set {
-                if (null != _dbSchemaTable) {
+            set
+            {
+                if (null != _dbSchemaTable)
+                {
                     throw ADP.NoQuoteChange();
                 }
                 _schemaSeparator = value;
@@ -462,96 +562,116 @@ namespace System.Data.Common {
         }
 
         [
-        DefaultValueAttribute(false),
-        ResCategoryAttribute(Res.DataCategory_Schema),
-        ResDescriptionAttribute(Res.DbCommandBuilder_SetAllValues),
+            DefaultValueAttribute(false),
+            ResCategoryAttribute(Res.DataCategory_Schema),
+            ResDescriptionAttribute(Res.DbCommandBuilder_SetAllValues),
         ]
-        public bool SetAllValues {
-            get {
-                return _setAllValues;
-            }
-            set {
-                _setAllValues = value;
-            }
+        public bool SetAllValues
+        {
+            get { return _setAllValues; }
+            set { _setAllValues = value; }
         }
 
-        private DbCommand InsertCommand {
-            get {
-                return _insertCommand;
-            }
-            set {
-                _insertCommand = value;
-            }
+        private DbCommand InsertCommand
+        {
+            get { return _insertCommand; }
+            set { _insertCommand = value; }
         }
 
-        private DbCommand UpdateCommand {
-            get {
-                return _updateCommand;
-            }
-            set {
-                _updateCommand = value;
-            }
+        private DbCommand UpdateCommand
+        {
+            get { return _updateCommand; }
+            set { _updateCommand = value; }
         }
 
-        private DbCommand DeleteCommand {
-            get {
-                return _deleteCommand;
-            }
-            set {
-                _deleteCommand = value;
-            }
+        private DbCommand DeleteCommand
+        {
+            get { return _deleteCommand; }
+            set { _deleteCommand = value; }
         }
 
-        private void BuildCache(bool closeConnection, DataRow dataRow, bool useColumnsForParameterNames) { // V1.2.3300
+        private void BuildCache(
+            bool closeConnection,
+            DataRow dataRow,
+            bool useColumnsForParameterNames
+        )
+        { // V1.2.3300
             // Don't bother building the cache if it's done already; wait for
             // the user to call RefreshSchema first.
-            if ((null != _dbSchemaTable) && (!useColumnsForParameterNames || (null != _parameterNames))) {
+            if (
+                (null != _dbSchemaTable)
+                && (!useColumnsForParameterNames || (null != _parameterNames))
+            )
+            {
                 return;
             }
             DataTable schemaTable = null;
 
             DbCommand srcCommand = GetSelectCommand();
             DbConnection connection = srcCommand.Connection;
-            if (null == connection) {
+            if (null == connection)
+            {
                 throw ADP.MissingSourceCommandConnection();
             }
 
-            try {
-                if (0 == (ConnectionState.Open & connection.State)) {
+            try
+            {
+                if (0 == (ConnectionState.Open & connection.State))
+                {
                     connection.Open();
                 }
-                else {
+                else
+                {
                     closeConnection = false;
                 }
 
-                if (useColumnsForParameterNames) {
-                    DataTable dataTable = connection.GetSchema(DbMetaDataCollectionNames.DataSourceInformation);
-                    if (dataTable.Rows.Count == 1) {
-                        _parameterNamePattern = dataTable.Rows[0][DbMetaDataColumnNames.ParameterNamePattern] as string;
-                        _parameterMarkerFormat = dataTable.Rows[0][DbMetaDataColumnNames.ParameterMarkerFormat] as string;
+                if (useColumnsForParameterNames)
+                {
+                    DataTable dataTable = connection.GetSchema(
+                        DbMetaDataCollectionNames.DataSourceInformation
+                    );
+                    if (dataTable.Rows.Count == 1)
+                    {
+                        _parameterNamePattern =
+                            dataTable.Rows[0][DbMetaDataColumnNames.ParameterNamePattern] as string;
+                        _parameterMarkerFormat =
+                            dataTable.Rows[0][DbMetaDataColumnNames.ParameterMarkerFormat]
+                            as string;
 
-                        object oParameterNameMaxLength = dataTable.Rows[0][DbMetaDataColumnNames.ParameterNameMaxLength];
-                        _parameterNameMaxLength = (oParameterNameMaxLength is int) ? (int)oParameterNameMaxLength : 0;
+                        object oParameterNameMaxLength = dataTable.Rows[0][
+                            DbMetaDataColumnNames.ParameterNameMaxLength
+                        ];
+                        _parameterNameMaxLength =
+                            (oParameterNameMaxLength is int) ? (int)oParameterNameMaxLength : 0;
 
                         // note that we protect against errors in the xml file!
-                        if (0 == _parameterNameMaxLength || null == _parameterNamePattern || null == _parameterMarkerFormat) {
+                        if (
+                            0 == _parameterNameMaxLength
+                            || null == _parameterNamePattern
+                            || null == _parameterMarkerFormat
+                        )
+                        {
                             useColumnsForParameterNames = false;
                         }
                     }
-                    else {
+                    else
+                    {
                         Debug.Assert(false, "Rowcount expected to be 1");
                         useColumnsForParameterNames = false;
                     }
                 }
                 schemaTable = GetSchemaTable(srcCommand);
             }
-            finally {
-                if (closeConnection) {
+            finally
+            {
+                if (closeConnection)
+                {
                     connection.Close();
                 }
             }
 
-            if (null == schemaTable) {
+            if (null == schemaTable)
+            {
                 throw ADP.DynamicSQLNoTableInfo();
             }
 #if DEBUG
@@ -565,27 +685,38 @@ namespace System.Data.Common {
 
             DbSchemaRow[] schemaRows = _dbSchemaRows;
             string[] srcColumnNames = new string[schemaRows.Length];
-            for (int i = 0; i < schemaRows.Length; ++i) {
-                if (null != schemaRows[i]) {
+            for (int i = 0; i < schemaRows.Length; ++i)
+            {
+                if (null != schemaRows[i])
+                {
                     srcColumnNames[i] = schemaRows[i].ColumnName;
                 }
             }
             _sourceColumnNames = srcColumnNames;
-            if (useColumnsForParameterNames) {
+            if (useColumnsForParameterNames)
+            {
                 _parameterNames = new ParameterNames(this, schemaRows);
             }
             ADP.BuildSchemaTableInfoTableNames(srcColumnNames);
         }
 
-        virtual protected DataTable GetSchemaTable (DbCommand sourceCommand) {
-            using (IDataReader dataReader = sourceCommand.ExecuteReader(CommandBehavior.SchemaOnly | CommandBehavior.KeyInfo)){
+        protected virtual DataTable GetSchemaTable(DbCommand sourceCommand)
+        {
+            using (
+                IDataReader dataReader = sourceCommand.ExecuteReader(
+                    CommandBehavior.SchemaOnly | CommandBehavior.KeyInfo
+                )
+            )
+            {
                 return dataReader.GetSchemaTable();
             }
         }
 
-        private void BuildInformation(DataTable schemaTable) {
+        private void BuildInformation(DataTable schemaTable)
+        {
             DbSchemaRow[] rows = DbSchemaRow.GetSortedSchemaRows(schemaTable, false); // MDAC 60609
-            if ((null == rows) || (0 == rows.Length)) {
+            if ((null == rows) || (0 == rows.Length))
+            {
                 throw ADP.DynamicSQLNoTableInfo();
             }
 
@@ -594,10 +725,12 @@ namespace System.Data.Common {
             string baseSchemaName = "";
             string baseTableName = null;
 
-            for (int i = 0; i < rows.Length; ++i) {
+            for (int i = 0; i < rows.Length; ++i)
+            {
                 DbSchemaRow row = rows[i];
                 string tableName = row.BaseTableName;
-                if ((null == tableName) || (0 == tableName.Length)) {
+                if ((null == tableName) || (0 == tableName.Length))
+                {
                     rows[i] = null;
                     continue;
                 }
@@ -605,41 +738,52 @@ namespace System.Data.Common {
                 string serverName = row.BaseServerName;
                 string catalogName = row.BaseCatalogName;
                 string schemaName = row.BaseSchemaName;
-                if (null == serverName) {
+                if (null == serverName)
+                {
                     serverName = "";
                 }
-                if (null == catalogName) {
+                if (null == catalogName)
+                {
                     catalogName = "";
                 }
-                if (null == schemaName) {
+                if (null == schemaName)
+                {
                     schemaName = "";
                 }
-                if (null == baseTableName) {
+                if (null == baseTableName)
+                {
                     baseServerName = serverName;
                     baseCatalogName = catalogName;
                     baseSchemaName = schemaName;
                     baseTableName = tableName;
                 }
-                else if (  (0 != ADP.SrcCompare(baseTableName, tableName))
+                else if (
+                    (0 != ADP.SrcCompare(baseTableName, tableName))
                     || (0 != ADP.SrcCompare(baseSchemaName, schemaName))
                     || (0 != ADP.SrcCompare(baseCatalogName, catalogName))
-                    || (0 != ADP.SrcCompare(baseServerName, serverName))) {
+                    || (0 != ADP.SrcCompare(baseServerName, serverName))
+                )
+                {
                     throw ADP.DynamicSQLJoinUnsupported();
                 }
             }
-            if (0 == baseServerName.Length) {
+            if (0 == baseServerName.Length)
+            {
                 baseServerName = null;
             }
-            if (0 == baseCatalogName.Length) {
+            if (0 == baseCatalogName.Length)
+            {
                 baseServerName = null;
                 baseCatalogName = null;
             }
-            if (0 == baseSchemaName.Length) {
+            if (0 == baseSchemaName.Length)
+            {
                 baseServerName = null;
                 baseCatalogName = null;
                 baseSchemaName = null;
             }
-            if ((null == baseTableName) || (0 == baseTableName.Length)) {
+            if ((null == baseTableName) || (0 == baseTableName.Length))
+            {
                 throw ADP.DynamicSQLNoTableInfo();
             }
 
@@ -650,49 +794,76 @@ namespace System.Data.Common {
             string quotePrefix = QuotePrefix;
             string quoteSuffix = QuoteSuffix;
 
-            if (!ADP.IsEmpty(quotePrefix) && (-1 != baseTableName.IndexOf(quotePrefix, StringComparison.Ordinal))) {
+            if (
+                !ADP.IsEmpty(quotePrefix)
+                && (-1 != baseTableName.IndexOf(quotePrefix, StringComparison.Ordinal))
+            )
+            {
                 throw ADP.DynamicSQLNestedQuote(baseTableName, quotePrefix);
             }
-            if (!ADP.IsEmpty(quoteSuffix) && (-1 != baseTableName.IndexOf(quoteSuffix, StringComparison.Ordinal))) {
+            if (
+                !ADP.IsEmpty(quoteSuffix)
+                && (-1 != baseTableName.IndexOf(quoteSuffix, StringComparison.Ordinal))
+            )
+            {
                 throw ADP.DynamicSQLNestedQuote(baseTableName, quoteSuffix);
             }
 
             System.Text.StringBuilder builder = new System.Text.StringBuilder();
-            if (CatalogLocation.Start == location) {
+            if (CatalogLocation.Start == location)
+            {
                 // MDAC 79449
-                if (null != baseServerName) {
+                if (null != baseServerName)
+                {
                     builder.Append(ADP.BuildQuotedString(quotePrefix, quoteSuffix, baseServerName));
                     builder.Append(catalogSeparator);
                 }
-                if (null != baseCatalogName) {
-                    builder.Append(ADP.BuildQuotedString(quotePrefix, quoteSuffix, baseCatalogName));
+                if (null != baseCatalogName)
+                {
+                    builder.Append(
+                        ADP.BuildQuotedString(quotePrefix, quoteSuffix, baseCatalogName)
+                    );
                     builder.Append(catalogSeparator);
                 }
-                // 
+                //
             }
-            if (null != baseSchemaName) {
+            if (null != baseSchemaName)
+            {
                 builder.Append(ADP.BuildQuotedString(quotePrefix, quoteSuffix, baseSchemaName));
                 builder.Append(schemaSeparator);
             }
-            // 
+            //
             builder.Append(ADP.BuildQuotedString(quotePrefix, quoteSuffix, baseTableName));
 
-            if (CatalogLocation.End == location) {
+            if (CatalogLocation.End == location)
+            {
                 // MDAC 79449
-                if (null != baseServerName) {
+                if (null != baseServerName)
+                {
                     builder.Append(catalogSeparator);
                     builder.Append(ADP.BuildQuotedString(quotePrefix, quoteSuffix, baseServerName));
                 }
-                if (null != baseCatalogName) {
+                if (null != baseCatalogName)
+                {
                     builder.Append(catalogSeparator);
-                    builder.Append(ADP.BuildQuotedString(quotePrefix, quoteSuffix, baseCatalogName));
+                    builder.Append(
+                        ADP.BuildQuotedString(quotePrefix, quoteSuffix, baseCatalogName)
+                    );
                 }
             }
             _quotedBaseTableName = builder.ToString();
 
             _hasPartialPrimaryKey = false;
-            foreach(DbSchemaRow row in rows) {
-                if ((null != row) && (row.IsKey || row.IsUnique) && !row.IsLong && !row.IsRowVersion && row.IsHidden) {
+            foreach (DbSchemaRow row in rows)
+            {
+                if (
+                    (null != row)
+                    && (row.IsKey || row.IsUnique)
+                    && !row.IsLong
+                    && !row.IsRowVersion
+                    && row.IsHidden
+                )
+                {
                     _hasPartialPrimaryKey = true;
                     break;
                 }
@@ -700,17 +871,25 @@ namespace System.Data.Common {
             _dbSchemaRows = rows;
         }
 
-        private DbCommand BuildDeleteCommand(DataTableMapping mappings, DataRow dataRow) {
+        private DbCommand BuildDeleteCommand(DataTableMapping mappings, DataRow dataRow)
+        {
             DbCommand command = InitializeCommand(DeleteCommand);
             StringBuilder builder = new StringBuilder();
-            int parameterCount  = 0;
+            int parameterCount = 0;
 
-            Debug.Assert (!ADP.IsEmpty(_quotedBaseTableName), "no table name");
+            Debug.Assert(!ADP.IsEmpty(_quotedBaseTableName), "no table name");
 
             builder.Append(DeleteFrom);
             builder.Append(QuotedBaseTableName);
 
-            parameterCount = BuildWhereClause(mappings, dataRow, builder, command, parameterCount, false);
+            parameterCount = BuildWhereClause(
+                mappings,
+                dataRow,
+                builder,
+                command,
+                parameterCount,
+                false
+            );
 
             command.CommandText = builder.ToString();
 
@@ -719,13 +898,14 @@ namespace System.Data.Common {
             return command;
         }
 
-        private DbCommand BuildInsertCommand(DataTableMapping mappings, DataRow dataRow) {
+        private DbCommand BuildInsertCommand(DataTableMapping mappings, DataRow dataRow)
+        {
             DbCommand command = InitializeCommand(InsertCommand);
             StringBuilder builder = new StringBuilder();
-            int             parameterCount  = 0;
-            string          nextSeparator   = SpaceLeftParenthesis;
+            int parameterCount = 0;
+            string nextSeparator = SpaceLeftParenthesis;
 
-            Debug.Assert (!ADP.IsEmpty(_quotedBaseTableName), "no table name");
+            Debug.Assert(!ADP.IsEmpty(_quotedBaseTableName), "no table name");
 
             builder.Append(InsertInto);
             builder.Append(QuotedBaseTableName);
@@ -734,10 +914,15 @@ namespace System.Data.Common {
             DbSchemaRow[] schemaRows = _dbSchemaRows;
 
             string[] parameterName = new string[schemaRows.Length];
-            for (int i = 0; i < schemaRows.Length; ++i) {
+            for (int i = 0; i < schemaRows.Length; ++i)
+            {
                 DbSchemaRow row = schemaRows[i];
 
-                if ( (null == row) || (0 == row.BaseColumnName.Length) || !IncludeInInsertValues(row) )
+                if (
+                    (null == row)
+                    || (0 == row.BaseColumnName.Length)
+                    || !IncludeInInsertValues(row)
+                )
                     continue;
 
                 object currentValue = null;
@@ -746,7 +931,8 @@ namespace System.Data.Common {
                 // If we're building a statement for a specific row, then check the
                 // values to see whether the column should be included in the insert
                 // statement or not
-                if ((null != mappings) && (null != dataRow)) {
+                if ((null != mappings) && (null != dataRow))
+                {
                     DataColumn dataColumn = GetDataColumn(sourceColumn, mappings, dataRow);
 
                     if (null == dataColumn)
@@ -762,7 +948,9 @@ namespace System.Data.Common {
                     // If the value is null, and the column doesn't support nulls, then
                     // the user is requesting the server-specified default value, so don't
                     // include it in the set-list.
-                    if ( !row.AllowDBNull && (null == currentValue || Convert.IsDBNull(currentValue)) )
+                    if (
+                        !row.AllowDBNull && (null == currentValue || Convert.IsDBNull(currentValue))
+                    )
                         continue;
                 }
 
@@ -777,20 +965,24 @@ namespace System.Data.Common {
                     DataRowVersion.Current,
                     parameterCount,
                     currentValue,
-                    row, StatementType.Insert, false
-                    );
+                    row,
+                    StatementType.Insert,
+                    false
+                );
                 parameterCount++;
             }
 
             if (0 == parameterCount)
                 builder.Append(DefaultValues);
-            else {
+            else
+            {
                 builder.Append(RightParenthesis);
                 builder.Append(Values);
                 builder.Append(LeftParenthesis);
 
                 builder.Append(parameterName[0]);
-                for (int i = 1; i < parameterCount; ++i) {
+                for (int i = 1; i < parameterCount; ++i)
+                {
                     builder.Append(Comma);
                     builder.Append(parameterName[i]);
                 }
@@ -805,20 +997,22 @@ namespace System.Data.Common {
             return command;
         }
 
-        private DbCommand BuildUpdateCommand(DataTableMapping mappings, DataRow dataRow) {
+        private DbCommand BuildUpdateCommand(DataTableMapping mappings, DataRow dataRow)
+        {
             DbCommand command = InitializeCommand(UpdateCommand);
             StringBuilder builder = new StringBuilder();
             string nextSeparator = Set;
-            int parameterCount  = 0;
+            int parameterCount = 0;
 
-            Debug.Assert (!ADP.IsEmpty(_quotedBaseTableName), "no table name");
+            Debug.Assert(!ADP.IsEmpty(_quotedBaseTableName), "no table name");
 
             builder.Append(Update);
             builder.Append(QuotedBaseTableName);
 
             // search for the columns in that base table, to build the set clause
             DbSchemaRow[] schemaRows = _dbSchemaRows;
-            for (int i = 0; i < schemaRows.Length; ++i) {
+            for (int i = 0; i < schemaRows.Length; ++i)
+            {
                 DbSchemaRow row = schemaRows[i];
 
                 if ((null == row) || (0 == row.BaseColumnName.Length) || !IncludeInUpdateSet(row))
@@ -830,8 +1024,9 @@ namespace System.Data.Common {
                 // If we're building a statement for a specific row, then check the
                 // values to see whether the column should be included in the update
                 // statement or not
-                if ((null != mappings) && (null != dataRow)) {
-                    DataColumn  dataColumn = GetDataColumn(sourceColumn, mappings, dataRow);
+                if ((null != mappings) && (null != dataRow))
+                {
+                    DataColumn dataColumn = GetDataColumn(sourceColumn, mappings, dataRow);
 
                     if (null == dataColumn)
                         continue;
@@ -846,11 +1041,19 @@ namespace System.Data.Common {
                     // whether the value has changed locally, before we send it up.
                     currentValue = GetColumnValue(dataRow, dataColumn, DataRowVersion.Current);
 
-                    if (!SetAllValues) {
-                        object originalValue = GetColumnValue(dataRow, dataColumn, DataRowVersion.Original);
+                    if (!SetAllValues)
+                    {
+                        object originalValue = GetColumnValue(
+                            dataRow,
+                            dataColumn,
+                            DataRowVersion.Original
+                        );
 
-                        if ((originalValue == currentValue)
-                            || ((null != originalValue) && originalValue.Equals(currentValue))) {
+                        if (
+                            (originalValue == currentValue)
+                            || ((null != originalValue) && originalValue.Equals(currentValue))
+                        )
+                        {
                             continue;
                         }
                     }
@@ -869,7 +1072,9 @@ namespace System.Data.Common {
                         DataRowVersion.Current,
                         parameterCount,
                         currentValue,
-                        row, StatementType.Update, false
+                        row,
+                        StatementType.Update,
+                        false
                     )
                 );
                 parameterCount++;
@@ -878,7 +1083,14 @@ namespace System.Data.Common {
             // It is an error to attempt an update when there's nothing to update;
             bool skipRow = (0 == parameterCount);
 
-            parameterCount = BuildWhereClause(mappings, dataRow, builder, command, parameterCount, true);
+            parameterCount = BuildWhereClause(
+                mappings,
+                dataRow,
+                builder,
+                command,
+                parameterCount,
+                true
+            );
 
             command.CommandText = builder.ToString();
 
@@ -889,23 +1101,30 @@ namespace System.Data.Common {
 
         private int BuildWhereClause(
             DataTableMapping mappings,
-            DataRow          dataRow,
-            StringBuilder    builder,
-            DbCommand        command,
-            int              parameterCount,
-            bool             isUpdate
-            ) {
-            string  beginNewCondition = string.Empty;
-            int     whereCount = 0;
+            DataRow dataRow,
+            StringBuilder builder,
+            DbCommand command,
+            int parameterCount,
+            bool isUpdate
+        )
+        {
+            string beginNewCondition = string.Empty;
+            int whereCount = 0;
 
             builder.Append(Where);
             builder.Append(LeftParenthesis);
 
             DbSchemaRow[] schemaRows = _dbSchemaRows;
-            for (int i = 0; i < schemaRows.Length; ++i) {
+            for (int i = 0; i < schemaRows.Length; ++i)
+            {
                 DbSchemaRow row = schemaRows[i];
 
-                if ((null == row) || (0 == row.BaseColumnName.Length) || !IncludeInWhereClause(row, isUpdate)) {
+                if (
+                    (null == row)
+                    || (0 == row.BaseColumnName.Length)
+                    || !IncludeInWhereClause(row, isUpdate)
+                )
+                {
                     continue;
                 }
                 builder.Append(beginNewCondition);
@@ -916,9 +1135,15 @@ namespace System.Data.Common {
                 string baseColumnName = QuotedColumn(row.BaseColumnName);
 
                 if ((null != mappings) && (null != dataRow))
-                    value = GetColumnValue(dataRow, sourceColumn, mappings, DataRowVersion.Original);
+                    value = GetColumnValue(
+                        dataRow,
+                        sourceColumn,
+                        mappings,
+                        DataRowVersion.Original
+                    );
 
-                if (!row.AllowDBNull) {
+                if (!row.AllowDBNull)
+                {
                     //  (<baseColumnName> = ?)
                     builder.Append(LeftParenthesis);
                     builder.Append(baseColumnName);
@@ -931,13 +1156,16 @@ namespace System.Data.Common {
                             DataRowVersion.Original,
                             parameterCount,
                             value,
-                            row, (isUpdate ? StatementType.Update : StatementType.Delete), true
+                            row,
+                            (isUpdate ? StatementType.Update : StatementType.Delete),
+                            true
                         )
                     );
                     parameterCount++;
                     builder.Append(RightParenthesis);
                 }
-                else {
+                else
+                {
                     //  ((? = 1 AND <baseColumnName> IS NULL) OR (<baseColumnName> = ?))
                     builder.Append(LeftParenthesis);
 
@@ -950,7 +1178,9 @@ namespace System.Data.Common {
                             DataRowVersion.Original,
                             parameterCount,
                             value,
-                            row, (isUpdate ? StatementType.Update : StatementType.Delete), true
+                            row,
+                            (isUpdate ? StatementType.Update : StatementType.Delete),
+                            true
                         )
                     );
                     parameterCount++;
@@ -973,7 +1203,9 @@ namespace System.Data.Common {
                             DataRowVersion.Original,
                             parameterCount,
                             value,
-                            row, (isUpdate ? StatementType.Update : StatementType.Delete), true
+                            row,
+                            (isUpdate ? StatementType.Update : StatementType.Delete),
+                            true
                         )
                     );
                     parameterCount++;
@@ -982,22 +1214,28 @@ namespace System.Data.Common {
                     builder.Append(RightParenthesis);
                 }
 
-                if (IncrementWhereCount(row)) {
+                if (IncrementWhereCount(row))
+                {
                     whereCount++;
                 }
             }
 
             builder.Append(RightParenthesis);
 
-            if (0 == whereCount) {
-                if (isUpdate) {
-                    if (ConflictOption.CompareRowVersion == ConflictOption) {
+            if (0 == whereCount)
+            {
+                if (isUpdate)
+                {
+                    if (ConflictOption.CompareRowVersion == ConflictOption)
+                    {
                         throw ADP.DynamicSQLNoKeyInfoRowVersionUpdate();
                     }
                     throw ADP.DynamicSQLNoKeyInfoUpdate();
                 }
-                else {
-                    if (ConflictOption.CompareRowVersion == ConflictOption) {
+                else
+                {
+                    if (ConflictOption.CompareRowVersion == ConflictOption)
+                    {
                         throw ADP.DynamicSQLNoKeyInfoRowVersionDelete();
                     }
                     throw ADP.DynamicSQLNoKeyInfoDelete();
@@ -1007,98 +1245,134 @@ namespace System.Data.Common {
         }
 
         private string CreateParameterForNullTest(
-            DbCommand       command,
-            string          parameterName,
-            string          sourceColumn,
-            DataRowVersion  version,
-            int             parameterCount,
-            object          value,
-            DbSchemaRow     row,
-            StatementType   statementType,
-            bool            whereClause
-            ) {
+            DbCommand command,
+            string parameterName,
+            string sourceColumn,
+            DataRowVersion version,
+            int parameterCount,
+            object value,
+            DbSchemaRow row,
+            StatementType statementType,
+            bool whereClause
+        )
+        {
             DbParameter p = GetNextParameter(command, parameterCount);
 
             Debug.Assert(!ADP.IsEmpty(sourceColumn), "empty source column");
-            if (null == parameterName) {
+            if (null == parameterName)
+            {
                 p.ParameterName = GetParameterName(1 + parameterCount);
             }
-            else {
+            else
+            {
                 p.ParameterName = parameterName;
             }
-            p.Direction     = ParameterDirection.Input;
-            p.SourceColumn  = sourceColumn;
+            p.Direction = ParameterDirection.Input;
+            p.SourceColumn = sourceColumn;
             p.SourceVersion = version;
             p.SourceColumnNullMapping = true;
-            p.Value         = value;
-            p.Size          = 0; // don't specify parameter.Size so that we don't silently truncate to the metadata size
+            p.Value = value;
+            p.Size = 0; // don't specify parameter.Size so that we don't silently truncate to the metadata size
 
             ApplyParameterInfo(p, row.DataRow, statementType, whereClause);
 
-            p.DbType        = DbType.Int32;
-            p.Value         = ADP.IsNull(value) ? DbDataAdapter.ParameterValueNullValue : DbDataAdapter.ParameterValueNonNullValue;
+            p.DbType = DbType.Int32;
+            p.Value = ADP.IsNull(value)
+                ? DbDataAdapter.ParameterValueNullValue
+                : DbDataAdapter.ParameterValueNonNullValue;
 
-            if (!command.Parameters.Contains(p)) {
+            if (!command.Parameters.Contains(p))
+            {
                 command.Parameters.Add(p);
             }
 
-            if (null == parameterName) {
+            if (null == parameterName)
+            {
                 return GetParameterPlaceholder(1 + parameterCount);
             }
-            else {
-                Debug.Assert(null != _parameterNames, "How can we have a parameterName without a _parameterNames collection?");
-                Debug.Assert(null != _parameterMarkerFormat, "How can we have a _parameterNames collection but no _parameterMarkerFormat?");
+            else
+            {
+                Debug.Assert(
+                    null != _parameterNames,
+                    "How can we have a parameterName without a _parameterNames collection?"
+                );
+                Debug.Assert(
+                    null != _parameterMarkerFormat,
+                    "How can we have a _parameterNames collection but no _parameterMarkerFormat?"
+                );
 
-                return String.Format(CultureInfo.InvariantCulture, _parameterMarkerFormat, parameterName);
+                return String.Format(
+                    CultureInfo.InvariantCulture,
+                    _parameterMarkerFormat,
+                    parameterName
+                );
             }
         }
 
         private string CreateParameterForValue(
-            DbCommand       command,
-            string          parameterName,
-            string          sourceColumn,
-            DataRowVersion  version,
-            int             parameterCount,
-            object          value,
-            DbSchemaRow     row,
-            StatementType   statementType,
-            bool            whereClause
-            ) {
+            DbCommand command,
+            string parameterName,
+            string sourceColumn,
+            DataRowVersion version,
+            int parameterCount,
+            object value,
+            DbSchemaRow row,
+            StatementType statementType,
+            bool whereClause
+        )
+        {
             DbParameter p = GetNextParameter(command, parameterCount);
 
-            if (null == parameterName) {
+            if (null == parameterName)
+            {
                 p.ParameterName = GetParameterName(1 + parameterCount);
             }
-            else {
+            else
+            {
                 p.ParameterName = parameterName;
             }
-            p.Direction     = ParameterDirection.Input;
-            p.SourceColumn  = sourceColumn;
+            p.Direction = ParameterDirection.Input;
+            p.SourceColumn = sourceColumn;
             p.SourceVersion = version;
             p.SourceColumnNullMapping = false;
-            p.Value         = value;
-            p.Size          = 0; // don't specify parameter.Size so that we don't silently truncate to the metadata size
+            p.Value = value;
+            p.Size = 0; // don't specify parameter.Size so that we don't silently truncate to the metadata size
 
             ApplyParameterInfo(p, row.DataRow, statementType, whereClause);
 
-            if (!command.Parameters.Contains(p)) {
+            if (!command.Parameters.Contains(p))
+            {
                 command.Parameters.Add(p);
             }
 
-            if (null == parameterName) {
+            if (null == parameterName)
+            {
                 return GetParameterPlaceholder(1 + parameterCount);
             }
-            else {
-                Debug.Assert(null != _parameterNames, "How can we have a parameterName without a _parameterNames collection?");
-                Debug.Assert(null != _parameterMarkerFormat, "How can we have a _parameterNames collection but no _parameterMarkerFormat?");
+            else
+            {
+                Debug.Assert(
+                    null != _parameterNames,
+                    "How can we have a parameterName without a _parameterNames collection?"
+                );
+                Debug.Assert(
+                    null != _parameterMarkerFormat,
+                    "How can we have a _parameterNames collection but no _parameterMarkerFormat?"
+                );
 
-                return String.Format(CultureInfo.InvariantCulture, _parameterMarkerFormat, parameterName);
+                return String.Format(
+                    CultureInfo.InvariantCulture,
+                    _parameterMarkerFormat,
+                    parameterName
+                );
             }
         }
 
-        override protected void Dispose(bool disposing) { // V1.2.3300, XXXCommandBuilder V1.0.3300
+        protected override void Dispose(bool disposing)
+        { // V1.2.3300, XXXCommandBuilder V1.0.3300
             // MDAC 65459
-            if (disposing) {
+            if (disposing)
+            {
                 // release mananged objects
                 DataAdapter = null;
             }
@@ -1107,16 +1381,21 @@ namespace System.Data.Common {
             base.Dispose(disposing); // notify base classes
         }
 
-        private DataTableMapping GetTableMapping(DataRow dataRow ) {
+        private DataTableMapping GetTableMapping(DataRow dataRow)
+        {
             DataTableMapping tableMapping = null;
-            if (null != dataRow) {
+            if (null != dataRow)
+            {
                 DataTable dataTable = dataRow.Table;
-                if (null != dataTable) {
+                if (null != dataTable)
+                {
                     DbDataAdapter adapter = DataAdapter;
-                    if (null != adapter) {
+                    if (null != adapter)
+                    {
                         tableMapping = adapter.GetTableMapping(dataTable);
                     }
-                    else {
+                    else
+                    {
                         string tableName = dataTable.TableName;
                         tableMapping = new DataTableMapping(tableName, tableName);
                     }
@@ -1125,53 +1404,71 @@ namespace System.Data.Common {
             return tableMapping;
         }
 
-        private string GetBaseParameterName(int index) {
-            if (null != _parameterNames) {
+        private string GetBaseParameterName(int index)
+        {
+            if (null != _parameterNames)
+            {
                 return (_parameterNames.GetBaseParameterName(index));
             }
-            else {
-                return null;
-            }
-        }
-        private string GetOriginalParameterName(int index) {
-            if (null != _parameterNames) {
-                return (_parameterNames.GetOriginalParameterName(index));
-            }
-            else {
-                return null;
-            }
-        }
-        private string GetNullParameterName(int index) {
-            if (null != _parameterNames) {
-                return (_parameterNames.GetNullParameterName(index));
-            }
-            else {
+            else
+            {
                 return null;
             }
         }
 
-        private DbCommand GetSelectCommand() { // V1.2.3300
+        private string GetOriginalParameterName(int index)
+        {
+            if (null != _parameterNames)
+            {
+                return (_parameterNames.GetOriginalParameterName(index));
+            }
+            else
+            {
+                return null;
+            }
+        }
+
+        private string GetNullParameterName(int index)
+        {
+            if (null != _parameterNames)
+            {
+                return (_parameterNames.GetNullParameterName(index));
+            }
+            else
+            {
+                return null;
+            }
+        }
+
+        private DbCommand GetSelectCommand()
+        { // V1.2.3300
             DbCommand select = null;
             DbDataAdapter adapter = DataAdapter;
-            if (null != adapter) {
-                if (0 == _missingMappingAction) {
+            if (null != adapter)
+            {
+                if (0 == _missingMappingAction)
+                {
                     _missingMappingAction = adapter.MissingMappingAction;
                 }
                 select = (DbCommand)adapter.SelectCommand;
             }
-            if (null == select) {
+            if (null == select)
+            {
                 throw ADP.MissingSourceCommand();
             }
             return select;
         }
 
-        // open connection is required by OleDb/OdbcCommandBuilder.QuoteIdentifier and UnquoteIdentifier 
+        // open connection is required by OleDb/OdbcCommandBuilder.QuoteIdentifier and UnquoteIdentifier
         // to get literals quotes from the driver
-        internal DbConnection GetConnection() {
+        internal DbConnection GetConnection()
+        {
             DbDataAdapter adapter = DataAdapter;
-            if (adapter != null) {
+            if (adapter != null)
+            {
                 DbCommand select = (DbCommand)adapter.SelectCommand;
-                if (select != null) {
+                if (select != null)
+                {
                     return select.Connection;
                 }
             }
@@ -1179,174 +1476,240 @@ namespace System.Data.Common {
             return null;
         }
 
-        public DbCommand GetInsertCommand() { // V1.2.3300, XXXCommandBuilder V1.0.3300
+        public DbCommand GetInsertCommand()
+        { // V1.2.3300, XXXCommandBuilder V1.0.3300
             return GetInsertCommand((DataRow)null, false);
         }
 
-        public DbCommand GetInsertCommand(bool useColumnsForParameterNames) {
+        public DbCommand GetInsertCommand(bool useColumnsForParameterNames)
+        {
             return GetInsertCommand((DataRow)null, useColumnsForParameterNames);
         }
-        internal DbCommand GetInsertCommand(DataRow dataRow, bool useColumnsForParameterNames) {
+
+        internal DbCommand GetInsertCommand(DataRow dataRow, bool useColumnsForParameterNames)
+        {
             BuildCache(true, dataRow, useColumnsForParameterNames);
             BuildInsertCommand(GetTableMapping(dataRow), dataRow);
             return InsertCommand;
         }
 
-        public DbCommand GetUpdateCommand() { // V1.2.3300, XXXCommandBuilder V1.0.3300
+        public DbCommand GetUpdateCommand()
+        { // V1.2.3300, XXXCommandBuilder V1.0.3300
             return GetUpdateCommand((DataRow)null, false);
         }
-        public DbCommand GetUpdateCommand(bool useColumnsForParameterNames) {
+
+        public DbCommand GetUpdateCommand(bool useColumnsForParameterNames)
+        {
             return GetUpdateCommand((DataRow)null, useColumnsForParameterNames);
         }
-        internal DbCommand GetUpdateCommand(DataRow dataRow, bool useColumnsForParameterNames) {
+
+        internal DbCommand GetUpdateCommand(DataRow dataRow, bool useColumnsForParameterNames)
+        {
             BuildCache(true, dataRow, useColumnsForParameterNames);
             BuildUpdateCommand(GetTableMapping(dataRow), dataRow);
             return UpdateCommand;
         }
 
-        public DbCommand GetDeleteCommand() { // V1.2.3300, XXXCommandBuilder V1.0.3300
+        public DbCommand GetDeleteCommand()
+        { // V1.2.3300, XXXCommandBuilder V1.0.3300
             return GetDeleteCommand((DataRow)null, false);
         }
-        public DbCommand GetDeleteCommand(bool useColumnsForParameterNames) {
+
+        public DbCommand GetDeleteCommand(bool useColumnsForParameterNames)
+        {
             return GetDeleteCommand((DataRow)null, useColumnsForParameterNames);
         }
-        internal DbCommand GetDeleteCommand(DataRow dataRow, bool useColumnsForParameterNames) {
+
+        internal DbCommand GetDeleteCommand(DataRow dataRow, bool useColumnsForParameterNames)
+        {
             BuildCache(true, dataRow, useColumnsForParameterNames);
             BuildDeleteCommand(GetTableMapping(dataRow), dataRow);
             return DeleteCommand;
         }
 
-        private object GetColumnValue(DataRow row, String columnName, DataTableMapping mappings, DataRowVersion version) {
-           return GetColumnValue(row, GetDataColumn(columnName, mappings, row), version);
+        private object GetColumnValue(
+            DataRow row,
+            String columnName,
+            DataTableMapping mappings,
+            DataRowVersion version
+        )
+        {
+            return GetColumnValue(row, GetDataColumn(columnName, mappings, row), version);
         }
 
-        private object GetColumnValue(DataRow row, DataColumn column, DataRowVersion  version) {
+        private object GetColumnValue(DataRow row, DataColumn column, DataRowVersion version)
+        {
             object value = null;
-            if (null != column) {
+            if (null != column)
+            {
                 value = row[column, version];
             }
             return value;
         }
 
-        private DataColumn GetDataColumn(string columnName, DataTableMapping tablemapping, DataRow row) {
+        private DataColumn GetDataColumn(
+            string columnName,
+            DataTableMapping tablemapping,
+            DataRow row
+        )
+        {
             DataColumn column = null;
-            if (!ADP.IsEmpty(columnName)) {
-                column = tablemapping.GetDataColumn(columnName, null, row.Table, _missingMappingAction, MissingSchemaAction.Error);
+            if (!ADP.IsEmpty(columnName))
+            {
+                column = tablemapping.GetDataColumn(
+                    columnName,
+                    null,
+                    row.Table,
+                    _missingMappingAction,
+                    MissingSchemaAction.Error
+                );
             }
             return column;
         }
 
-        static private DbParameter GetNextParameter(DbCommand command, int pcount) {
+        private static DbParameter GetNextParameter(DbCommand command, int pcount)
+        {
             DbParameter p;
-            if (pcount < command.Parameters.Count) {
+            if (pcount < command.Parameters.Count)
+            {
                 p = command.Parameters[pcount];
             }
-            else {
+            else
+            {
                 p = command.CreateParameter();
                 /*if (null == p) {
-                    // 
+                    //
 */
             }
             Debug.Assert(null != p, "null CreateParameter");
             return p;
         }
 
-        private bool IncludeInInsertValues(DbSchemaRow row) {
-            // 
+        private bool IncludeInInsertValues(DbSchemaRow row)
+        {
+            //
 
-            return (!row.IsAutoIncrement && !row.IsHidden && !row.IsExpression && !row.IsRowVersion && !row.IsReadOnly);
+            return (
+                !row.IsAutoIncrement
+                && !row.IsHidden
+                && !row.IsExpression
+                && !row.IsRowVersion
+                && !row.IsReadOnly
+            );
         }
 
-        private bool IncludeInUpdateSet(DbSchemaRow row) {
-            // 
+        private bool IncludeInUpdateSet(DbSchemaRow row)
+        {
+            //
 
             return (!row.IsAutoIncrement && !row.IsRowVersion && !row.IsHidden && !row.IsReadOnly);
         }
 
-        private bool IncludeInWhereClause(DbSchemaRow row, bool isUpdate) {
+        private bool IncludeInWhereClause(DbSchemaRow row, bool isUpdate)
+        {
             bool flag = IncrementWhereCount(row);
-            if (flag && row.IsHidden) { // MDAC 52564
-                if (ConflictOption.CompareRowVersion == ConflictOption) {
+            if (flag && row.IsHidden)
+            { // MDAC 52564
+                if (ConflictOption.CompareRowVersion == ConflictOption)
+                {
                     throw ADP.DynamicSQLNoKeyInfoRowVersionUpdate();
                 }
                 throw ADP.DynamicSQLNoKeyInfoUpdate();
             }
-            if (!flag && (ConflictOption.CompareAllSearchableValues == ConflictOption)) {
+            if (!flag && (ConflictOption.CompareAllSearchableValues == ConflictOption))
+            {
                 // include other searchable values
                 flag = !row.IsLong && !row.IsRowVersion && !row.IsHidden;
             }
             return flag;
         }
 
-        private bool IncrementWhereCount(DbSchemaRow row) {
+        private bool IncrementWhereCount(DbSchemaRow row)
+        {
             ConflictOption value = ConflictOption;
-            switch(value) {
-            case ConflictOption.CompareAllSearchableValues:
-            case ConflictOption.OverwriteChanges:
-                // find the primary key
-                return (row.IsKey || row.IsUnique) && !row.IsLong && !row.IsRowVersion;
-            case ConflictOption.CompareRowVersion:
-                // or the row version
-                return (((row.IsKey || row.IsUnique) && !_hasPartialPrimaryKey) || row.IsRowVersion) && !row.IsLong;
-            default:
-                throw ADP.InvalidConflictOptions(value);                    
+            switch (value)
+            {
+                case ConflictOption.CompareAllSearchableValues:
+                case ConflictOption.OverwriteChanges:
+                    // find the primary key
+                    return (row.IsKey || row.IsUnique) && !row.IsLong && !row.IsRowVersion;
+                case ConflictOption.CompareRowVersion:
+                    // or the row version
+                    return (
+                            ((row.IsKey || row.IsUnique) && !_hasPartialPrimaryKey)
+                            || row.IsRowVersion
+                        ) && !row.IsLong;
+                default:
+                    throw ADP.InvalidConflictOptions(value);
             }
         }
 
-        virtual protected DbCommand InitializeCommand(DbCommand command) { // V1.2.3300
-            if (null == command) {
+        protected virtual DbCommand InitializeCommand(DbCommand command)
+        { // V1.2.3300
+            if (null == command)
+            {
                 DbCommand select = GetSelectCommand();
                 command = select.Connection.CreateCommand();
                 /*if (null == command) {
-                    // 
+                    //
 */
 
                 // the following properties are only initialized when the object is created
                 // all other properites are reinitialized on every row
-                /*command.Connection = select.Connection;*/ // initialized by CreateCommand
+                /*command.Connection = select.Connection;*/
+                // initialized by CreateCommand
                 command.CommandTimeout = select.CommandTimeout;
                 command.Transaction = select.Transaction;
             }
-            command.CommandType      = CommandType.Text;
+            command.CommandType = CommandType.Text;
             command.UpdatedRowSource = UpdateRowSource.None; // no select or output parameters expected
             return command;
         }
 
-        private string QuotedColumn(string column) {
+        private string QuotedColumn(string column)
+        {
             return ADP.BuildQuotedString(QuotePrefix, QuoteSuffix, column);
         }
 
-        public virtual string QuoteIdentifier(string unquotedIdentifier ) {
-
-        throw ADP.NotSupported();
+        public virtual string QuoteIdentifier(string unquotedIdentifier)
+        {
+            throw ADP.NotSupported();
         }
 
-        virtual public void RefreshSchema() { // V1.2.3300, XXXCommandBuilder V1.0.3300
+        public virtual void RefreshSchema()
+        { // V1.2.3300, XXXCommandBuilder V1.0.3300
             _dbSchemaTable = null;
             _dbSchemaRows = null;
             _sourceColumnNames = null;
             _quotedBaseTableName = null;
 
             DbDataAdapter adapter = DataAdapter;
-            if (null != adapter) { // MDAC 66016
-                if (InsertCommand == adapter.InsertCommand) {
+            if (null != adapter)
+            { // MDAC 66016
+                if (InsertCommand == adapter.InsertCommand)
+                {
                     adapter.InsertCommand = null;
                 }
-                if (UpdateCommand == adapter.UpdateCommand) {
+                if (UpdateCommand == adapter.UpdateCommand)
+                {
                     adapter.UpdateCommand = null;
                 }
-                if (DeleteCommand == adapter.DeleteCommand) {
+                if (DeleteCommand == adapter.DeleteCommand)
+                {
                     adapter.DeleteCommand = null;
                 }
             }
             DbCommand command;
-            if (null != (command = InsertCommand)) {
+            if (null != (command = InsertCommand))
+            {
                 command.Dispose();
             }
-            if (null != (command = UpdateCommand)) {
+            if (null != (command = UpdateCommand))
+            {
                 command.Dispose();
             }
-            if (null != (command = DeleteCommand)) {
+            if (null != (command = DeleteCommand))
+            {
                 command.Dispose();
             }
             InsertCommand = null;
@@ -1354,61 +1717,77 @@ namespace System.Data.Common {
             DeleteCommand = null;
         }
 
-        static private void RemoveExtraParameters(DbCommand command, int usedParameterCount) {
-            for (int i = command.Parameters.Count-1; i >= usedParameterCount; --i) {
+        private static void RemoveExtraParameters(DbCommand command, int usedParameterCount)
+        {
+            for (int i = command.Parameters.Count - 1; i >= usedParameterCount; --i)
+            {
                 command.Parameters.RemoveAt(i);
             }
         }
 
-        protected void RowUpdatingHandler(RowUpdatingEventArgs rowUpdatingEvent) {
-            if (null == rowUpdatingEvent) {
+        protected void RowUpdatingHandler(RowUpdatingEventArgs rowUpdatingEvent)
+        {
+            if (null == rowUpdatingEvent)
+            {
                 throw ADP.ArgumentNull("rowUpdatingEvent");
             }
-            try {
-                if (UpdateStatus.Continue == rowUpdatingEvent.Status) {
+            try
+            {
+                if (UpdateStatus.Continue == rowUpdatingEvent.Status)
+                {
                     StatementType stmtType = rowUpdatingEvent.StatementType;
                     DbCommand command = (DbCommand)rowUpdatingEvent.Command;
 
-                    if (null != command) {
-                        switch(stmtType) {
-                        case StatementType.Select:
-                            Debug.Assert(false, "how did we get here?");
-                            return; // don't mess with it
-                        case StatementType.Insert:
-                            command = InsertCommand;
-                            break;
-                        case StatementType.Update:
-                            command = UpdateCommand;
-                            break;
-                        case StatementType.Delete:
-                            command = DeleteCommand;
-                            break;
-                        default:
-                            throw ADP.InvalidStatementType(stmtType);
+                    if (null != command)
+                    {
+                        switch (stmtType)
+                        {
+                            case StatementType.Select:
+                                Debug.Assert(false, "how did we get here?");
+                                return; // don't mess with it
+                            case StatementType.Insert:
+                                command = InsertCommand;
+                                break;
+                            case StatementType.Update:
+                                command = UpdateCommand;
+                                break;
+                            case StatementType.Delete:
+                                command = DeleteCommand;
+                                break;
+                            default:
+                                throw ADP.InvalidStatementType(stmtType);
                         }
 
-                        if (command != rowUpdatingEvent.Command) {
+                        if (command != rowUpdatingEvent.Command)
+                        {
                             command = (DbCommand)rowUpdatingEvent.Command;
-                            if ((null != command) && (null == command.Connection)) { // MDAC 87649
+                            if ((null != command) && (null == command.Connection))
+                            { // MDAC 87649
                                 DbDataAdapter adapter = DataAdapter;
-                                DbCommand select = ((null != adapter) ? ((DbCommand)adapter.SelectCommand) : null);
-                                if (null != select) {
+                                DbCommand select = (
+                                    (null != adapter) ? ((DbCommand)adapter.SelectCommand) : null
+                                );
+                                if (null != select)
+                                {
                                     command.Connection = (DbConnection)select.Connection;
-
                                 }
                             }
                             // user command, not a command builder command
                         }
-                        else command = null;
+                        else
+                            command = null;
                     }
-                    if (null == command) {
+                    if (null == command)
+                    {
                         RowUpdatingHandlerBuilder(rowUpdatingEvent);
                     }
-                 }
+                }
             }
-            catch(Exception e) {
-                // 
-                if (!ADP.IsCatchableExceptionType(e)) {
+            catch (Exception e)
+            {
+                //
+                if (!ADP.IsCatchableExceptionType(e))
+                {
                     throw;
                 }
 
@@ -1419,33 +1798,37 @@ namespace System.Data.Common {
             }
         }
 
-        private void RowUpdatingHandlerBuilder(RowUpdatingEventArgs rowUpdatingEvent) {
+        private void RowUpdatingHandlerBuilder(RowUpdatingEventArgs rowUpdatingEvent)
+        {
             // MDAC 58710 - unable to tell Update method that Event opened connection and Update needs to close when done
             // HackFix - the Update method will close the connection if command was null and returned command.Connection is same as SelectCommand.Connection
             DataRow datarow = rowUpdatingEvent.Row;
             BuildCache(false, datarow, false);
 
             DbCommand command;
-            switch(rowUpdatingEvent.StatementType) {
-            case StatementType.Insert:
-                command = BuildInsertCommand(rowUpdatingEvent.TableMapping, datarow);
-                break;
-            case StatementType.Update:
-                command = BuildUpdateCommand(rowUpdatingEvent.TableMapping, datarow);
-                break;
-            case StatementType.Delete:
-                command = BuildDeleteCommand(rowUpdatingEvent.TableMapping, datarow);
-                break;
+            switch (rowUpdatingEvent.StatementType)
+            {
+                case StatementType.Insert:
+                    command = BuildInsertCommand(rowUpdatingEvent.TableMapping, datarow);
+                    break;
+                case StatementType.Update:
+                    command = BuildUpdateCommand(rowUpdatingEvent.TableMapping, datarow);
+                    break;
+                case StatementType.Delete:
+                    command = BuildDeleteCommand(rowUpdatingEvent.TableMapping, datarow);
+                    break;
 #if DEBUG
-            case StatementType.Select:
-                Debug.Assert(false, "how did we get here?");
-                goto default;
+                case StatementType.Select:
+                    Debug.Assert(false, "how did we get here?");
+                    goto default;
 #endif
-            default:
-                throw ADP.InvalidStatementType(rowUpdatingEvent.StatementType);
+                default:
+                    throw ADP.InvalidStatementType(rowUpdatingEvent.StatementType);
             }
-            if (null == command) {
-                if (null != datarow) {
+            if (null == command)
+            {
+                if (null != datarow)
+                {
                     datarow.AcceptChanges();
                 }
                 rowUpdatingEvent.Status = UpdateStatus.SkipCurrentRow;
@@ -1453,22 +1836,30 @@ namespace System.Data.Common {
             rowUpdatingEvent.Command = command;
         }
 
-         public virtual string UnquoteIdentifier(string quotedIdentifier ) {
+        public virtual string UnquoteIdentifier(string quotedIdentifier)
+        {
             throw ADP.NotSupported();
         }
 
-        abstract protected void ApplyParameterInfo(DbParameter parameter, DataRow row, StatementType statementType, bool whereClause); // V1.2.3300
-        abstract protected string GetParameterName(int parameterOrdinal); // V1.2.3300
-        abstract protected string GetParameterName(string parameterName);
-        abstract protected string GetParameterPlaceholder(int parameterOrdinal); // V1.2.3300
-        abstract protected void SetRowUpdatingHandler(DbDataAdapter adapter); // V1.2.3300
+        protected abstract void ApplyParameterInfo(
+            DbParameter parameter,
+            DataRow row,
+            StatementType statementType,
+            bool whereClause
+        ); // V1.2.3300
+        protected abstract string GetParameterName(int parameterOrdinal); // V1.2.3300
+        protected abstract string GetParameterName(string parameterName);
+        protected abstract string GetParameterPlaceholder(int parameterOrdinal); // V1.2.3300
+        protected abstract void SetRowUpdatingHandler(DbDataAdapter adapter); // V1.2.3300
 
+        //
 
-        // 
-
-
-
-        static internal string[] ParseProcedureName(string name, string quotePrefix, string quoteSuffix) {
+        static internal string[] ParseProcedureName(
+            string name,
+            string quotePrefix,
+            string quoteSuffix
+        )
+        {
             // Procedure may consist of up to four parts:
             // 0) Server
             // 1) Catalog
@@ -1481,34 +1872,67 @@ namespace System.Data.Common {
             const string Separator = ".";
 
             string[] qualifiers = new string[4];
-            if (!ADP.IsEmpty(name)) {
+            if (!ADP.IsEmpty(name))
+            {
                 bool useQuotes = !ADP.IsEmpty(quotePrefix) && !ADP.IsEmpty(quoteSuffix);
 
-                int currentPos = 0, parts;
-                for(parts = 0; (parts < qualifiers.Length) && (currentPos < name.Length); ++parts) {
+                int currentPos = 0,
+                    parts;
+                for (parts = 0; (parts < qualifiers.Length) && (currentPos < name.Length); ++parts)
+                {
                     int startPos = currentPos;
 
                     // does the part begin with a quotePrefix?
-                    if (useQuotes && (name.IndexOf(quotePrefix, currentPos, quotePrefix.Length, StringComparison.Ordinal) == currentPos)) {
+                    if (
+                        useQuotes
+                        && (
+                            name.IndexOf(
+                                quotePrefix,
+                                currentPos,
+                                quotePrefix.Length,
+                                StringComparison.Ordinal
+                            ) == currentPos
+                        )
+                    )
+                    {
                         currentPos += quotePrefix.Length; // move past the quotePrefix
 
                         // search for the quoteSuffix (or end of string)
-                        while (currentPos < name.Length) {
-                            currentPos = name.IndexOf(quoteSuffix, currentPos, StringComparison.Ordinal);
-                            if (currentPos < 0) {
+                        while (currentPos < name.Length)
+                        {
+                            currentPos = name.IndexOf(
+                                quoteSuffix,
+                                currentPos,
+                                StringComparison.Ordinal
+                            );
+                            if (currentPos < 0)
+                            {
                                 // error condition, no quoteSuffix
                                 currentPos = name.Length;
                                 break;
                             }
-                            else {
+                            else
+                            {
                                 currentPos += quoteSuffix.Length; // move past the quoteSuffix
 
                                 // is this a double quoteSuffix?
-                                if ((currentPos < name.Length) && (name.IndexOf(quoteSuffix, currentPos, quoteSuffix.Length, StringComparison.Ordinal) == currentPos)) {
+                                if (
+                                    (currentPos < name.Length)
+                                    && (
+                                        name.IndexOf(
+                                            quoteSuffix,
+                                            currentPos,
+                                            quoteSuffix.Length,
+                                            StringComparison.Ordinal
+                                        ) == currentPos
+                                    )
+                                )
+                                {
                                     // a second quoteSuffix, continue search for terminating quoteSuffix
                                     currentPos += quoteSuffix.Length; // move past the second quoteSuffix
                                 }
-                                else {
+                                else
+                                {
                                     // found the terminating quoteSuffix
                                     break;
                                 }
@@ -1517,20 +1941,23 @@ namespace System.Data.Common {
                     }
 
                     // search for separator (either no quotePrefix or already past quoteSuffix)
-                    if (currentPos < name.Length) {
+                    if (currentPos < name.Length)
+                    {
                         currentPos = name.IndexOf(Separator, currentPos, StringComparison.Ordinal);
-                        if ((currentPos < 0) || (parts == qualifiers.Length-1)) {
+                        if ((currentPos < 0) || (parts == qualifiers.Length - 1))
+                        {
                             // last part that can be found
                             currentPos = name.Length;
                         }
                     }
 
-                    qualifiers[parts] = name.Substring(startPos, currentPos-startPos);
+                    qualifiers[parts] = name.Substring(startPos, currentPos - startPos);
                     currentPos += Separator.Length;
                 }
 
                 // allign the qualifiers if we had less than MaxQualifiers
-                for(int j = qualifiers.Length-1; 0 <= j; --j) {
+                for (int j = qualifiers.Length - 1; 0 <= j; --j)
+                {
                     qualifiers[j] = ((0 < parts) ? qualifiers[--parts] : null);
                 }
             }
@@ -1538,4 +1965,3 @@ namespace System.Data.Common {
         }
     }
 }
-

@@ -6,7 +6,9 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal;
 /// <summary>
 ///     Represents a stored procedure result column.
 /// </summary>
-public class RuntimeStoredProcedureResultColumn : AnnotatableBase, IRuntimeStoredProcedureResultColumn
+public class RuntimeStoredProcedureResultColumn
+    : AnnotatableBase,
+        IRuntimeStoredProcedureResultColumn
 {
     private IStoreStoredProcedureResultColumn? _storeResultColumn;
     private readonly string? _propertyName;
@@ -24,7 +26,8 @@ public class RuntimeStoredProcedureResultColumn : AnnotatableBase, IRuntimeStore
         RuntimeStoredProcedure storedProcedure,
         string name,
         bool forRowsAffected,
-        string? propertyName)
+        string? propertyName
+    )
     {
         StoredProcedure = storedProcedure;
         _propertyName = propertyName;
@@ -43,8 +46,10 @@ public class RuntimeStoredProcedureResultColumn : AnnotatableBase, IRuntimeStore
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public override string ToString()
-        => ((IStoredProcedureResultColumn)this).ToDebugString(MetadataDebugStringOptions.SingleLineDefault);
+    public override string ToString() =>
+        ((IStoredProcedureResultColumn)this).ToDebugString(
+            MetadataDebugStringOptions.SingleLineDefault
+        );
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -53,10 +58,14 @@ public class RuntimeStoredProcedureResultColumn : AnnotatableBase, IRuntimeStore
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
     [EntityFrameworkInternal]
-    public virtual DebugView DebugView
-        => new(
+    public virtual DebugView DebugView =>
+        new(
             () => ((IStoredProcedureResultColumn)this).ToDebugString(),
-            () => ((IStoredProcedureResultColumn)this).ToDebugString(MetadataDebugStringOptions.LongDefault));
+            () =>
+                ((IStoredProcedureResultColumn)this).ToDebugString(
+                    MetadataDebugStringOptions.LongDefault
+                )
+        );
 
     /// <inheritdoc />
     IReadOnlyStoredProcedure IReadOnlyStoredProcedureResultColumn.StoredProcedure

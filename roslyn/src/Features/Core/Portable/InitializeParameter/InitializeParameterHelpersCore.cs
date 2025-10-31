@@ -12,9 +12,14 @@ namespace Microsoft.CodeAnalysis.InitializeParameter
 {
     internal static class InitializeParameterHelpersCore
     {
-        public static ImmutableArray<(IParameterSymbol parameter, bool before)> GetSiblingParameters(IParameterSymbol parameter)
+        public static ImmutableArray<(
+            IParameterSymbol parameter,
+            bool before
+        )> GetSiblingParameters(IParameterSymbol parameter)
         {
-            using var _ = ArrayBuilder<(IParameterSymbol, bool before)>.GetInstance(out var siblings);
+            using var _ = ArrayBuilder<(IParameterSymbol, bool before)>.GetInstance(
+                out var siblings
+            );
 
             if (parameter.ContainingSymbol is IMethodSymbol method)
             {
@@ -34,12 +39,17 @@ namespace Microsoft.CodeAnalysis.InitializeParameter
             return siblings.ToImmutable();
         }
 
-        public static bool IsParameterReference(IOperation? operation, IParameterSymbol parameter)
-            => operation.UnwrapImplicitConversion() is IParameterReferenceOperation parameterReference &&
-               parameter.Equals(parameterReference.Parameter);
+        public static bool IsParameterReference(
+            IOperation? operation,
+            IParameterSymbol parameter
+        ) =>
+            operation.UnwrapImplicitConversion() is IParameterReferenceOperation parameterReference
+            && parameter.Equals(parameterReference.Parameter);
 
         public static bool IsParameterReferenceOrCoalesceOfParameterReference(
-           IOperation? value, IParameterSymbol parameter)
+            IOperation? value,
+            IParameterSymbol parameter
+        )
         {
             if (IsParameterReference(value, parameter))
             {
@@ -48,8 +58,10 @@ namespace Microsoft.CodeAnalysis.InitializeParameter
                 return true;
             }
 
-            if (value.UnwrapImplicitConversion() is ICoalesceOperation coalesceExpression &&
-                IsParameterReference(coalesceExpression.Value, parameter))
+            if (
+                value.UnwrapImplicitConversion() is ICoalesceOperation coalesceExpression
+                && IsParameterReference(coalesceExpression.Value, parameter)
+            )
             {
                 // We already have a member initialized with this parameter like:
                 //      this.field = parameter ?? ...
@@ -59,7 +71,11 @@ namespace Microsoft.CodeAnalysis.InitializeParameter
             return false;
         }
 
-        public static string GenerateUniqueName(IParameterSymbol parameter, ImmutableArray<string> parameterNameParts, NamingRule rule)
+        public static string GenerateUniqueName(
+            IParameterSymbol parameter,
+            ImmutableArray<string> parameterNameParts,
+            NamingRule rule
+        )
         {
             // Determine an appropriate name to call the new field.
             var containingType = parameter.ContainingType;
@@ -68,7 +84,9 @@ namespace Microsoft.CodeAnalysis.InitializeParameter
             // Ensure that the name is unique in the containing type so we
             // don't stomp on an existing member.
             var uniqueName = NameGenerator.GenerateUniqueName(
-                baseName, n => containingType.GetMembers(n).IsEmpty);
+                baseName,
+                n => containingType.GetMembers(n).IsEmpty
+            );
             return uniqueName;
         }
     }

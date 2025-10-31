@@ -29,10 +29,19 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Options
             AbstractOptionPreviewViewModel info,
             OptionStore optionStore,
             StrongBox<TOptionValue> valueStorage,
-            Conversions<TOptionValue, int> conversions)
-            : this(option, flag, description, preview, preview, info, optionStore, valueStorage, conversions)
-        {
-        }
+            Conversions<TOptionValue, int> conversions
+        )
+            : this(
+                option,
+                flag,
+                description,
+                preview,
+                preview,
+                info,
+                optionStore,
+                valueStorage,
+                conversions
+            ) { }
 
         public CheckBoxEnumFlagsOptionViewModel(
             IOption2 option,
@@ -43,14 +52,18 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Options
             AbstractOptionPreviewViewModel info,
             OptionStore optionStore,
             StrongBox<TOptionValue> valueStorage,
-            Conversions<TOptionValue, int> conversions)
+            Conversions<TOptionValue, int> conversions
+        )
             : base(option, description, truePreview, falsePreview, info)
         {
             _valueStorage = valueStorage;
             _flag = flag;
             _conversions = conversions;
 
-            var flags = optionStore.GetOption<TOptionValue>(option, option.IsPerLanguage ? info.Language : null);
+            var flags = optionStore.GetOption<TOptionValue>(
+                option,
+                option.IsPerLanguage ? info.Language : null
+            );
             _valueStorage.Value = flags;
 
             SetProperty(ref _isChecked, (conversions.To(flags) & flag) == flag);
@@ -58,11 +71,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Options
 
         public override bool IsChecked
         {
-            get
-            {
-                return _isChecked;
-            }
-
+            get { return _isChecked; }
             set
             {
                 SetProperty(ref _isChecked, value);

@@ -1,7 +1,7 @@
 ﻿// ==++==
 //
 //   Copyright (c) Microsoft Corporation.  All rights reserved.
-// 
+//
 // ==--==
 // =+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+
 //
@@ -9,9 +9,9 @@
 //
 // <OWNER>Microsoft</OWNER>
 //
-// A helper class for firing ETW events related to the Coordination Data Structure 
-// sync primitives. This provider is used by CDS sync primitives in both mscorlib.dll 
-// and system.dll. The purpose of sharing the provider class is to be able to enable 
+// A helper class for firing ETW events related to the Coordination Data Structure
+// sync primitives. This provider is used by CDS sync primitives in both mscorlib.dll
+// and system.dll. The purpose of sharing the provider class is to be able to enable
 // ETW tracing on all CDS sync types with a single ETW provider GUID, and to minimize
 // the number of providers in use.
 //
@@ -19,8 +19,8 @@
 
 using System;
 using System.Collections.Generic;
-using System.Text;
 using System.Security;
+using System.Text;
 
 namespace System.Threading
 {
@@ -31,8 +31,9 @@ namespace System.Threading
     [System.Runtime.CompilerServices.FriendAccessAllowed]
     [EventSource(
         Name = "System.Threading.SynchronizationEventSource",
-        Guid = "EC631D38-466B-4290-9306-834971BA0217", 
-        LocalizationResources = "mscorlib")]
+        Guid = "EC631D38-466B-4290-9306-834971BA0217",
+        LocalizationResources = "mscorlib"
+    )]
     internal sealed class CdsSyncEtwBCLProvider : EventSource
     {
         /// <summary>
@@ -40,6 +41,7 @@ namespace System.Threading
         /// The CDS Sync Event provider GUID is {EC631D38-466B-4290-9306-834971BA0217}.
         /// </summary>
         public static CdsSyncEtwBCLProvider Log = new CdsSyncEtwBCLProvider();
+
         /// <summary>Prevent external instantiation.  All logging should go through the Log instance.</summary>
         private CdsSyncEtwBCLProvider() { }
 
@@ -47,7 +49,7 @@ namespace System.Threading
         private const EventKeywords ALL_KEYWORDS = (EventKeywords)(-1);
 
         //-----------------------------------------------------------------------------------
-        //        
+        //
         // CDS Synchronization Event IDs (must be unique)
         //
 
@@ -83,7 +85,6 @@ namespace System.Threading
             }
         }
 
-
         //
         // Events below this point are used by the CDS types in System.dll
         //
@@ -94,7 +95,7 @@ namespace System.Threading
         //
 
         [SecuritySafeCritical]
-        [Event(BARRIER_PHASEFINISHED_ID, Level = EventLevel.Verbose, Version=1)]
+        [Event(BARRIER_PHASEFINISHED_ID, Level = EventLevel.Verbose, Version = 1)]
         public void Barrier_PhaseFinished(bool currentSense, long phaseNum)
         {
             if (IsEnabled(EventLevel.Verbose, ALL_KEYWORDS))
@@ -102,9 +103,9 @@ namespace System.Threading
                 // WriteEvent(BARRIER_PHASEFINISHED_ID, currentSense, phaseNum);
 
                 // There is no explicit WriteEvent() overload matching this event's bool+long fields.
-                // Therefore calling WriteEvent() would hit the "params" overload, which leads to an 
-                // object allocation every time this event is fired. To prevent that problem we will 
-                // call WriteEventCore(), which works with a stack based EventData array populated with 
+                // Therefore calling WriteEvent() would hit the "params" overload, which leads to an
+                // object allocation every time this event is fired. To prevent that problem we will
+                // call WriteEventCore(), which works with a stack based EventData array populated with
                 // the event fields.
                 unsafe
                 {
@@ -120,7 +121,6 @@ namespace System.Threading
                 }
             }
         }
-
     }
 #endif // !FEATURE_PAL
 }

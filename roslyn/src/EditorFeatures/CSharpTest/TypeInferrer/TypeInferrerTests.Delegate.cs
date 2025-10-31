@@ -29,7 +29,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.TypeInferrer
             var node = FindExpressionSyntaxFromSpan(root, textSpan);
 
             var typeInference = document.GetLanguageService<ITypeInferenceService>();
-            var delegateType = typeInference.InferDelegateType(await document.GetSemanticModelAsync(), node, CancellationToken.None);
+            var delegateType = typeInference.InferDelegateType(
+                await document.GetSemanticModelAsync(),
+                node,
+                CancellationToken.None
+            );
 
             Assert.NotNull(delegateType);
             Assert.Equal(expectedType, delegateType.ToNameDisplayString());
@@ -38,8 +42,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.TypeInferrer
         [Fact]
         public async Task TestDeclaration1()
         {
-            var text =
-                """
+            var text = """
                 using System;
                 class C
                 {
@@ -56,8 +59,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.TypeInferrer
         [Fact]
         public async Task TestAssignment1()
         {
-            var text =
-                """
+            var text = """
                 using System;
                 class C
                 {
@@ -75,8 +77,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.TypeInferrer
         [Fact]
         public async Task TestArgument1()
         {
-            var text =
-                """
+            var text = """
                 using System;
                 class C
                 {
@@ -95,8 +96,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.TypeInferrer
         [Fact]
         public async Task TestConstructor1()
         {
-            var text =
-                """
+            var text = """
                 using System;
                 class C
                 {
@@ -115,8 +115,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.TypeInferrer
         [Fact]
         public async Task TestDelegateConstructor1()
         {
-            var text =
-                """
+            var text = """
                 using System;
                 class C
                 {
@@ -133,8 +132,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.TypeInferrer
         [Fact]
         public async Task TestCastExpression1()
         {
-            var text =
-                """
+            var text = """
                 using System;
                 class C
                 {
@@ -151,8 +149,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.TypeInferrer
         [Fact]
         public async Task TestCastExpression2()
         {
-            var text =
-                """
+            var text = """
                 using System;
                 class C
                 {
@@ -169,8 +166,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.TypeInferrer
         [Fact]
         public async Task TestReturnFromMethod()
         {
-            var text =
-                """
+            var text = """
                 using System;
                 class C
                 {
@@ -187,8 +183,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.TypeInferrer
         [Fact]
         public async Task TestInsideLambda1()
         {
-            var text =
-                """
+            var text = """
                 using System;
                 class C
                 {

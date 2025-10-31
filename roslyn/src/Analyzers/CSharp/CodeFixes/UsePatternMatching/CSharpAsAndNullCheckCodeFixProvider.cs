@@ -19,33 +19,53 @@ using Microsoft.CodeAnalysis.Shared.Extensions;
 
 namespace Microsoft.CodeAnalysis.CSharp.UsePatternMatching
 {
-    [ExportCodeFixProvider(LanguageNames.CSharp, Name = PredefinedCodeFixProviderNames.UsePatternMatchingAsAndNullCheck), Shared]
+    [
+        ExportCodeFixProvider(
+            LanguageNames.CSharp,
+            Name = PredefinedCodeFixProviderNames.UsePatternMatchingAsAndNullCheck
+        ),
+        Shared
+    ]
     internal partial class CSharpAsAndNullCheckCodeFixProvider : SyntaxEditorBasedCodeFixProvider
     {
         [ImportingConstructor]
-        [SuppressMessage("RoslynDiagnosticsReliability", "RS0033:Importing constructor should be [Obsolete]", Justification = "Used in test code: https://github.com/dotnet/roslyn/issues/42814")]
-        public CSharpAsAndNullCheckCodeFixProvider()
-        {
-        }
+        [SuppressMessage(
+            "RoslynDiagnosticsReliability",
+            "RS0033:Importing constructor should be [Obsolete]",
+            Justification = "Used in test code: https://github.com/dotnet/roslyn/issues/42814"
+        )]
+        public CSharpAsAndNullCheckCodeFixProvider() { }
 
-        public override ImmutableArray<string> FixableDiagnosticIds
-            => ImmutableArray.Create(IDEDiagnosticIds.InlineAsTypeCheckId);
+        public override ImmutableArray<string> FixableDiagnosticIds =>
+            ImmutableArray.Create(IDEDiagnosticIds.InlineAsTypeCheckId);
 
         public override Task RegisterCodeFixesAsync(CodeFixContext context)
         {
-            RegisterCodeFix(context, CSharpAnalyzersResources.Use_pattern_matching, nameof(CSharpAnalyzersResources.Use_pattern_matching));
+            RegisterCodeFix(
+                context,
+                CSharpAnalyzersResources.Use_pattern_matching,
+                nameof(CSharpAnalyzersResources.Use_pattern_matching)
+            );
             return Task.CompletedTask;
         }
 
         protected override async Task FixAllAsync(
-            Document document, ImmutableArray<Diagnostic> diagnostics,
-            SyntaxEditor editor, CodeActionOptionsProvider fallbackOptions, CancellationToken cancellationToken)
+            Document document,
+            ImmutableArray<Diagnostic> diagnostics,
+            SyntaxEditor editor,
+            CodeActionOptionsProvider fallbackOptions,
+            CancellationToken cancellationToken
+        )
         {
             using var _1 = PooledHashSet<Location>.GetInstance(out var declaratorLocations);
             using var _2 = PooledHashSet<SyntaxNode>.GetInstance(out var statementParentScopes);
 
-            var tree = await document.GetRequiredSyntaxTreeAsync(cancellationToken).ConfigureAwait(false);
-            var semanticModel = await document.GetRequiredSemanticModelAsync(cancellationToken).ConfigureAwait(false);
+            var tree = await document
+                .GetRequiredSyntaxTreeAsync(cancellationToken)
+                .ConfigureAwait(false);
+            var semanticModel = await document
+                .GetRequiredSemanticModelAsync(cancellationToken)
+                .ConfigureAwait(false);
 
             var languageVersion = tree.Options.LanguageVersion();
 
@@ -54,18 +74,33 @@ namespace Microsoft.CodeAnalysis.CSharp.UsePatternMatching
                 cancellationToken.ThrowIfCancellationRequested();
 
                 if (declaratorLocations.Add(diagnostic.AdditionalLocations[0]))
-                    AddEdits(editor, semanticModel, diagnostic, languageVersion, RemoveStatement, cancellationToken);
+                    AddEdits(
+                        editor,
+                        semanticModel,
+                        diagnostic,
+                        languageVersion,
+                        RemoveStatement,
+                        cancellationToken
+                    );
             }
 
             foreach (var parentScope in statementParentScopes)
             {
-                editor.ReplaceNode(parentScope, (newParentScope, syntaxGenerator) =>
-                {
-                    var firstStatement = newParentScope is BlockSyntax
-                        ? ((BlockSyntax)newParentScope).Statements.First()
-                        : ((SwitchSectionSyntax)newParentScope).Statements.First();
-                    return syntaxGenerator.ReplaceNode(newParentScope, firstStatement, firstStatement.WithoutLeadingBlankLinesInTrivia());
-                });
+                editor.ReplaceNode(
+                    parentScope,
+                    (newParentScope, syntaxGenerator) =>
+                    {
+                        var firstStatement =
+                            newParentScope is BlockSyntax
+                                ? ((BlockSyntax)newParentScope).Statements.First()
+                                : ((SwitchSectionSyntax)newParentScope).Statements.First();
+                        return syntaxGenerator.ReplaceNode(
+                            newParentScope,
+                            firstStatement,
+                            firstStatement.WithoutLeadingBlankLinesInTrivia()
+                        );
+                    }
+                );
             }
 
             return;
@@ -86,38 +121,51 @@ namespace Microsoft.CodeAnalysis.CSharp.UsePatternMatching
             Diagnostic diagnostic,
             LanguageVersion languageVersion,
             Action<StatementSyntax> removeStatement,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
             var declaratorLocation = diagnostic.AdditionalLocations[0];
             var comparisonLocation = diagnostic.AdditionalLocations[1];
             var asExpressionLocation = diagnostic.AdditionalLocations[2];
 
-            var declarator = (VariableDeclaratorSyntax)declaratorLocation.FindNode(cancellationToken);
+            var declarator = (VariableDeclaratorSyntax)
+                declaratorLocation.FindNode(cancellationToken);
             var comparison = (ExpressionSyntax)comparisonLocation.FindNode(cancellationToken);
-            var asExpression = (BinaryExpressionSyntax)asExpressionLocation.FindNode(cancellationToken);
+            var asExpression = (BinaryExpressionSyntax)
+                asExpressionLocation.FindNode(cancellationToken);
 
             var rightSideOfComparison = comparison is BinaryExpressionSyntax binaryExpression
                 ? (SyntaxNode)binaryExpression.Right
                 : ((IsPatternExpressionSyntax)comparison).Pattern;
-            var newIdentifier = declarator.Identifier
-                .WithoutTrivia().WithTrailingTrivia(rightSideOfComparison.GetTrailingTrivia());
+            var newIdentifier = declarator
+                .Identifier.WithoutTrivia()
+                .WithTrailingTrivia(rightSideOfComparison.GetTrailingTrivia());
 
             var declarationPattern = SyntaxFactory.DeclarationPattern(
                 GetPatternType().WithoutTrivia().WithTrailingTrivia(SyntaxFactory.ElasticMarker),
-                SyntaxFactory.SingleVariableDesignation(newIdentifier));
+                SyntaxFactory.SingleVariableDesignation(newIdentifier)
+            );
 
-            var condition = GetCondition(languageVersion, comparison, asExpression, declarationPattern);
+            var condition = GetCondition(
+                languageVersion,
+                comparison,
+                asExpression,
+                declarationPattern
+            );
 
-            if (declarator.Parent is VariableDeclarationSyntax declaration &&
-                declaration.Parent is LocalDeclarationStatementSyntax localDeclaration &&
-                declaration.Variables.Count == 1)
+            if (
+                declarator.Parent is VariableDeclarationSyntax declaration
+                && declaration.Parent is LocalDeclarationStatementSyntax localDeclaration
+                && declaration.Variables.Count == 1
+            )
             {
                 // Trivia on the local declaration will move to the next statement.
                 // use the callback form as the next statement may be the place where we're
                 // inlining the declaration, and thus need to see the effects of that change.
                 editor.ReplaceNode(
                     localDeclaration.GetNextStatement()!,
-                    (s, g) => s.WithPrependedNonIndentationTriviaFrom(localDeclaration));
+                    (s, g) => s.WithPrependedNonIndentationTriviaFrom(localDeclaration)
+                );
 
                 removeStatement(localDeclaration);
             }
@@ -135,18 +183,30 @@ namespace Microsoft.CodeAnalysis.CSharp.UsePatternMatching
                 // Complex case: object?[]? arr = obj as object[];
                 //
                 // Because of array variance, the above is legal.  We want the `object?[]` from the LHS here.
-                if (semanticModel.GetDeclaredSymbol(declarator, cancellationToken) is ILocalSymbol local)
+                if (
+                    semanticModel.GetDeclaredSymbol(declarator, cancellationToken)
+                    is ILocalSymbol local
+                )
                 {
-                    var asExpressionTypeInfo = semanticModel.GetTypeInfo(asExpression, cancellationToken);
+                    var asExpressionTypeInfo = semanticModel.GetTypeInfo(
+                        asExpression,
+                        cancellationToken
+                    );
                     if (asExpressionTypeInfo.Type != null)
                     {
                         // Strip off the outer ? if present.  But the inner ? will still be there.
-                        var localType = local.Type.WithNullableAnnotation(NullableAnnotation.NotAnnotated);
-                        var asType = asExpressionTypeInfo.Type.WithNullableAnnotation(NullableAnnotation.NotAnnotated);
+                        var localType = local.Type.WithNullableAnnotation(
+                            NullableAnnotation.NotAnnotated
+                        );
+                        var asType = asExpressionTypeInfo.Type.WithNullableAnnotation(
+                            NullableAnnotation.NotAnnotated
+                        );
 
                         // If they're the same types, except for the inner ?, then use the local's type here.
-                        if (SymbolEqualityComparer.Default.Equals(localType, asType) &&
-                            !SymbolEqualityComparer.IncludeNullability.Equals(localType, asType))
+                        if (
+                            SymbolEqualityComparer.Default.Equals(localType, asType)
+                            && !SymbolEqualityComparer.IncludeNullability.Equals(localType, asType)
+                        )
                         {
                             return localType.GenerateTypeSyntax(allowVar: false);
                         }
@@ -161,23 +221,37 @@ namespace Microsoft.CodeAnalysis.CSharp.UsePatternMatching
             LanguageVersion languageVersion,
             ExpressionSyntax comparison,
             BinaryExpressionSyntax asExpression,
-            DeclarationPatternSyntax declarationPattern)
+            DeclarationPatternSyntax declarationPattern
+        )
         {
-            var isPatternExpression = SyntaxFactory.IsPatternExpression(asExpression.Left, declarationPattern);
+            var isPatternExpression = SyntaxFactory.IsPatternExpression(
+                asExpression.Left,
+                declarationPattern
+            );
 
             // We should negate the is-expression if we have something like "x == null" or "x is null"
-            if (comparison.Kind() is not (SyntaxKind.EqualsExpression or SyntaxKind.IsPatternExpression))
+            if (
+                comparison.Kind()
+                is not (SyntaxKind.EqualsExpression or SyntaxKind.IsPatternExpression)
+            )
                 return isPatternExpression;
 
             if (languageVersion >= LanguageVersion.CSharp9)
             {
                 // In C# 9 and higher, convert to `x is not string s`.
                 return isPatternExpression.WithPattern(
-                    SyntaxFactory.UnaryPattern(SyntaxFactory.Token(SyntaxKind.NotKeyword), isPatternExpression.Pattern));
+                    SyntaxFactory.UnaryPattern(
+                        SyntaxFactory.Token(SyntaxKind.NotKeyword),
+                        isPatternExpression.Pattern
+                    )
+                );
             }
 
             // In C# 8 and lower, convert to `!(x is string s)`
-            return SyntaxFactory.PrefixUnaryExpression(SyntaxKind.LogicalNotExpression, isPatternExpression.Parenthesize());
+            return SyntaxFactory.PrefixUnaryExpression(
+                SyntaxKind.LogicalNotExpression,
+                isPatternExpression.Parenthesize()
+            );
         }
     }
 }

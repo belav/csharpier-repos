@@ -16,6 +16,7 @@ internal static partial class Interop
             CryptMsgType dwMsgType,
             CMSG_ENVELOPED_ENCODE_INFO* pvMsgEncodeInfo,
             [MarshalAs(UnmanagedType.LPStr)] string pszInnerContentObjID,
-            IntPtr pStreamInfo);
+            IntPtr pStreamInfo
+        );
     }
 }

@@ -26,15 +26,13 @@ namespace Microsoft.CodeAnalysis
         /// </summary>
         public string FilePath
         {
-            get
-            {
-                return _path;
-            }
+            get { return _path; }
         }
 
         public override bool Equals(object? obj)
         {
-            return obj is CommandLineAnalyzerReference && base.Equals((CommandLineAnalyzerReference)obj);
+            return obj is CommandLineAnalyzerReference
+                && base.Equals((CommandLineAnalyzerReference)obj);
         }
 
         public bool Equals(CommandLineAnalyzerReference other)

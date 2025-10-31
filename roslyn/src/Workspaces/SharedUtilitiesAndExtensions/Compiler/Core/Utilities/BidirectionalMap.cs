@@ -14,8 +14,10 @@ namespace Roslyn.Utilities
         where TKey : notnull
         where TValue : notnull
     {
-        public static readonly IBidirectionalMap<TKey, TValue> Empty =
-            new BidirectionalMap<TKey, TValue>(ImmutableDictionary.Create<TKey, TValue>(), ImmutableDictionary.Create<TValue, TKey>());
+        public static readonly IBidirectionalMap<TKey, TValue> Empty = new BidirectionalMap<
+            TKey,
+            TValue
+        >(ImmutableDictionary.Create<TKey, TValue>(), ImmutableDictionary.Create<TValue, TKey>());
 
         private readonly ImmutableDictionary<TKey, TValue> _forwardMap;
         private readonly ImmutableDictionary<TValue, TKey> _backwardMap;
@@ -23,26 +25,29 @@ namespace Roslyn.Utilities
         public BidirectionalMap(IEnumerable<KeyValuePair<TKey, TValue>> pairs)
         {
             _forwardMap = ImmutableDictionary.CreateRange<TKey, TValue>(pairs);
-            _backwardMap = ImmutableDictionary.CreateRange<TValue, TKey>(pairs.Select(p => KeyValuePairUtil.Create(p.Value, p.Key)));
+            _backwardMap = ImmutableDictionary.CreateRange<TValue, TKey>(
+                pairs.Select(p => KeyValuePairUtil.Create(p.Value, p.Key))
+            );
         }
 
-        private BidirectionalMap(ImmutableDictionary<TKey, TValue> forwardMap, ImmutableDictionary<TValue, TKey> backwardMap)
+        private BidirectionalMap(
+            ImmutableDictionary<TKey, TValue> forwardMap,
+            ImmutableDictionary<TValue, TKey> backwardMap
+        )
         {
             _forwardMap = forwardMap;
             _backwardMap = backwardMap;
         }
 
-        public bool TryGetValue(TKey key, [NotNullWhen(true)] out TValue? value)
-            => _forwardMap.TryGetValue(key, out value);
+        public bool TryGetValue(TKey key, [NotNullWhen(true)] out TValue? value) =>
+            _forwardMap.TryGetValue(key, out value);
 
-        public bool TryGetKey(TValue value, [NotNullWhen(true)] out TKey? key)
-            => _backwardMap.TryGetValue(value, out key);
+        public bool TryGetKey(TValue value, [NotNullWhen(true)] out TKey? key) =>
+            _backwardMap.TryGetValue(value, out key);
 
-        public bool ContainsKey(TKey key)
-            => _forwardMap.ContainsKey(key);
+        public bool ContainsKey(TKey key) => _forwardMap.ContainsKey(key);
 
-        public bool ContainsValue(TValue value)
-            => _backwardMap.ContainsKey(value);
+        public bool ContainsValue(TValue value) => _backwardMap.ContainsKey(value);
 
         public IBidirectionalMap<TKey, TValue> RemoveKey(TKey key)
         {
@@ -53,7 +58,8 @@ namespace Roslyn.Utilities
 
             return new BidirectionalMap<TKey, TValue>(
                 _forwardMap.Remove(key),
-                _backwardMap.Remove(value));
+                _backwardMap.Remove(value)
+            );
         }
 
         public IBidirectionalMap<TKey, TValue> RemoveValue(TValue value)
@@ -65,14 +71,16 @@ namespace Roslyn.Utilities
 
             return new BidirectionalMap<TKey, TValue>(
                 _forwardMap.Remove(key),
-                _backwardMap.Remove(value));
+                _backwardMap.Remove(value)
+            );
         }
 
         public IBidirectionalMap<TKey, TValue> Add(TKey key, TValue value)
         {
             return new BidirectionalMap<TKey, TValue>(
                 _forwardMap.Add(key, value),
-                _backwardMap.Add(value, key));
+                _backwardMap.Add(value, key)
+            );
         }
 
         public IEnumerable<TKey> Keys => _forwardMap.Keys;
@@ -81,10 +89,7 @@ namespace Roslyn.Utilities
 
         public bool IsEmpty
         {
-            get
-            {
-                return _backwardMap.Count == 0;
-            }
+            get { return _backwardMap.Count == 0; }
         }
 
         public int Count

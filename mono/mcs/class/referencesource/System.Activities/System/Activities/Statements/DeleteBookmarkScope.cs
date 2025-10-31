@@ -12,22 +12,22 @@ namespace System.Activities.Statements
 
     public sealed class DeleteBookmarkScope : NativeActivity
     {
-        public DeleteBookmarkScope()
-        {
-        }
+        public DeleteBookmarkScope() { }
 
-        public InArgument<BookmarkScope> Scope
-        {
-            get;
-            set;
-        }
+        public InArgument<BookmarkScope> Scope { get; set; }
 
         protected override void CacheMetadata(NativeActivityMetadata metadata)
         {
-            RuntimeArgument subInstanceArgument = new RuntimeArgument("Scope", typeof(BookmarkScope), ArgumentDirection.In);
+            RuntimeArgument subInstanceArgument = new RuntimeArgument(
+                "Scope",
+                typeof(BookmarkScope),
+                ArgumentDirection.In
+            );
             metadata.Bind(this.Scope, subInstanceArgument);
 
-            metadata.SetArgumentsCollection(new Collection<RuntimeArgument> { subInstanceArgument });
+            metadata.SetArgumentsCollection(
+                new Collection<RuntimeArgument> { subInstanceArgument }
+            );
         }
 
         protected override void Execute(NativeActivityContext context)
@@ -36,12 +36,16 @@ namespace System.Activities.Statements
 
             if (toUnregister == null)
             {
-                throw SA.FxTrace.Exception.AsError(new InvalidOperationException(SA.SR.CannotUnregisterNullBookmarkScope));
+                throw SA.FxTrace.Exception.AsError(
+                    new InvalidOperationException(SA.SR.CannotUnregisterNullBookmarkScope)
+                );
             }
 
             if (toUnregister.Equals(context.DefaultBookmarkScope))
             {
-                throw SA.FxTrace.Exception.AsError(new InvalidOperationException(SA.SR.CannotUnregisterDefaultBookmarkScope));
+                throw SA.FxTrace.Exception.AsError(
+                    new InvalidOperationException(SA.SR.CannotUnregisterDefaultBookmarkScope)
+                );
             }
 
             context.UnregisterBookmarkScope(toUnregister);

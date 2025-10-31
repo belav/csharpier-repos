@@ -17,6 +17,6 @@ namespace System.Xml.Schema
         Lax,
 
         [XmlEnum("strict")]
-        Strict
+        Strict,
     }
 }

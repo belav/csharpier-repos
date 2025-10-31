@@ -46,7 +46,8 @@ namespace Microsoft.CodeAnalysis
         public static Diagnostic Create(
             DiagnosticDescriptor descriptor,
             Location? location,
-            params object?[]? messageArgs)
+            params object?[]? messageArgs
+        )
         {
             return Create(descriptor, location, null, null, messageArgs);
         }
@@ -67,7 +68,8 @@ namespace Microsoft.CodeAnalysis
             DiagnosticDescriptor descriptor,
             Location? location,
             ImmutableDictionary<string, string?>? properties,
-            params object?[]? messageArgs)
+            params object?[]? messageArgs
+        )
         {
             return Create(descriptor, location, null, properties, messageArgs);
         }
@@ -88,9 +90,16 @@ namespace Microsoft.CodeAnalysis
             DiagnosticDescriptor descriptor,
             Location? location,
             IEnumerable<Location>? additionalLocations,
-            params object?[]? messageArgs)
+            params object?[]? messageArgs
+        )
         {
-            return Create(descriptor, location, additionalLocations, properties: null, messageArgs: messageArgs);
+            return Create(
+                descriptor,
+                location,
+                additionalLocations,
+                properties: null,
+                messageArgs: messageArgs
+            );
         }
 
         /// <summary>
@@ -115,9 +124,17 @@ namespace Microsoft.CodeAnalysis
             Location? location,
             IEnumerable<Location>? additionalLocations,
             ImmutableDictionary<string, string?>? properties,
-            params object?[]? messageArgs)
+            params object?[]? messageArgs
+        )
         {
-            return Create(descriptor, location, effectiveSeverity: descriptor.DefaultSeverity, additionalLocations, properties, messageArgs);
+            return Create(
+                descriptor,
+                location,
+                effectiveSeverity: descriptor.DefaultSeverity,
+                additionalLocations,
+                properties,
+                messageArgs
+            );
         }
 
         /// <summary>
@@ -144,7 +161,8 @@ namespace Microsoft.CodeAnalysis
             DiagnosticSeverity effectiveSeverity,
             IEnumerable<Location>? additionalLocations,
             ImmutableDictionary<string, string?>? properties,
-            params object?[]? messageArgs)
+            params object?[]? messageArgs
+        )
         {
             if (descriptor == null)
             {
@@ -159,7 +177,8 @@ namespace Microsoft.CodeAnalysis
                 location: location ?? Location.None,
                 additionalLocations: additionalLocations,
                 messageArgs: messageArgs,
-                properties: properties);
+                properties: properties
+            );
         }
 
         /// <summary>
@@ -205,10 +224,26 @@ namespace Microsoft.CodeAnalysis
             Location? location = null,
             IEnumerable<Location>? additionalLocations = null,
             IEnumerable<string>? customTags = null,
-            ImmutableDictionary<string, string?>? properties = null)
+            ImmutableDictionary<string, string?>? properties = null
+        )
         {
-            return Create(id, category, message, severity, defaultSeverity, isEnabledByDefault, warningLevel, false,
-                title, description, helpLink, location, additionalLocations, customTags, properties);
+            return Create(
+                id,
+                category,
+                message,
+                severity,
+                defaultSeverity,
+                isEnabledByDefault,
+                warningLevel,
+                false,
+                title,
+                description,
+                helpLink,
+                location,
+                additionalLocations,
+                customTags,
+                properties
+            );
         }
 
         /// <summary>
@@ -256,7 +291,8 @@ namespace Microsoft.CodeAnalysis
             Location? location = null,
             IEnumerable<Location>? additionalLocations = null,
             IEnumerable<string>? customTags = null,
-            ImmutableDictionary<string, string?>? properties = null)
+            ImmutableDictionary<string, string?>? properties = null
+        )
         {
             if (id == null)
             {
@@ -273,8 +309,23 @@ namespace Microsoft.CodeAnalysis
                 throw new ArgumentNullException(nameof(message));
             }
 
-            return SimpleDiagnostic.Create(id, title ?? string.Empty, category, message, description ?? string.Empty, helpLink ?? string.Empty,
-                severity, defaultSeverity, isEnabledByDefault, warningLevel, location ?? Location.None, additionalLocations, customTags, properties, isSuppressed);
+            return SimpleDiagnostic.Create(
+                id,
+                title ?? string.Empty,
+                category,
+                message,
+                description ?? string.Empty,
+                helpLink ?? string.Empty,
+                severity,
+                defaultSeverity,
+                isEnabledByDefault,
+                warningLevel,
+                location ?? Location.None,
+                additionalLocations,
+                customTags,
+                properties,
+                isSuppressed
+            );
         }
 
         internal static Diagnostic Create(CommonMessageProvider messageProvider, int errorCode)
@@ -282,7 +333,11 @@ namespace Microsoft.CodeAnalysis
             return Create(new DiagnosticInfo(messageProvider, errorCode));
         }
 
-        internal static Diagnostic Create(CommonMessageProvider messageProvider, int errorCode, params object[] arguments)
+        internal static Diagnostic Create(
+            CommonMessageProvider messageProvider,
+            int errorCode,
+            params object[] arguments
+        )
         {
             return Create(new DiagnosticInfo(messageProvider, errorCode, arguments));
         }
@@ -305,7 +360,10 @@ namespace Microsoft.CodeAnalysis
         /// <summary>
         /// Gets the category of diagnostic. For diagnostics generated by the compiler, the category will be "Compiler".
         /// </summary>
-        internal virtual string Category { get { return this.Descriptor.Category; } }
+        internal virtual string Category
+        {
+            get { return this.Descriptor.Category; }
+        }
 
         /// <summary>
         /// Get the culture specific text of the message.
@@ -318,7 +376,10 @@ namespace Microsoft.CodeAnalysis
         /// <remarks>
         /// To get the effective severity of the diagnostic, use <see cref="Severity"/>.
         /// </remarks>
-        public virtual DiagnosticSeverity DefaultSeverity { get { return this.Descriptor.DefaultSeverity; } }
+        public virtual DiagnosticSeverity DefaultSeverity
+        {
+            get { return this.Descriptor.DefaultSeverity; }
+        }
 
         /// <summary>
         /// Gets the effective <see cref="DiagnosticSeverity"/> of the diagnostic.
@@ -353,9 +414,7 @@ namespace Microsoft.CodeAnalysis
 
             AttributeData? attribute;
             var suppressMessageState = new SuppressMessageAttributeState(compilation);
-            if (!suppressMessageState.IsDiagnosticSuppressed(
-                    this,
-                    out attribute))
+            if (!suppressMessageState.IsDiagnosticSuppressed(this, out attribute))
             {
                 attribute = null;
             }
@@ -366,7 +425,10 @@ namespace Microsoft.CodeAnalysis
         /// <summary>
         /// Returns true if this diagnostic is enabled by default by the author of the diagnostic.
         /// </summary>
-        internal virtual bool IsEnabledByDefault { get { return this.Descriptor.IsEnabledByDefault; } }
+        internal virtual bool IsEnabledByDefault
+        {
+            get { return this.Descriptor.IsEnabledByDefault; }
+        }
 
         /// <summary>
         /// Returns true if this is a warning treated as an error; otherwise false.
@@ -379,8 +441,8 @@ namespace Microsoft.CodeAnalysis
         {
             get
             {
-                return this.DefaultSeverity == DiagnosticSeverity.Warning &&
-                    this.Severity == DiagnosticSeverity.Error;
+                return this.DefaultSeverity == DiagnosticSeverity.Warning
+                    && this.Severity == DiagnosticSeverity.Error;
             }
         }
 
@@ -398,15 +460,18 @@ namespace Microsoft.CodeAnalysis
         /// <summary>
         /// Gets custom tags for the diagnostic.
         /// </summary>
-        internal virtual ImmutableArray<string> CustomTags { get { return this.Descriptor.ImmutableCustomTags; } }
+        internal virtual ImmutableArray<string> CustomTags
+        {
+            get { return this.Descriptor.ImmutableCustomTags; }
+        }
 
         /// <summary>
-        /// Gets property bag for the diagnostic. it will return <see cref="ImmutableDictionary{TKey, TValue}.Empty"/> 
-        /// if there is no entry. This can be used to put diagnostic specific information you want 
+        /// Gets property bag for the diagnostic. it will return <see cref="ImmutableDictionary{TKey, TValue}.Empty"/>
+        /// if there is no entry. This can be used to put diagnostic specific information you want
         /// to pass around. for example, to corresponding fixer.
         /// </summary>
-        public virtual ImmutableDictionary<string, string?> Properties
-            => ImmutableDictionary<string, string?>.Empty;
+        public virtual ImmutableDictionary<string, string?> Properties =>
+            ImmutableDictionary<string, string?>.Empty;
 
         string IFormattable.ToString(string? ignored, IFormatProvider? formatProvider)
         {
@@ -418,8 +483,8 @@ namespace Microsoft.CodeAnalysis
             return DiagnosticFormatter.Instance.Format(this, CultureInfo.CurrentUICulture);
         }
 
-        public sealed override bool Equals(object? obj)
-            => obj is Diagnostic diagnostic && Equals(diagnostic);
+        public sealed override bool Equals(object? obj) =>
+            obj is Diagnostic diagnostic && Equals(diagnostic);
 
         public abstract override int GetHashCode();
 
@@ -463,7 +528,9 @@ namespace Microsoft.CodeAnalysis
         /// <summary>
         /// Create a new instance of this diagnostic with the given programmatic suppression info.
         /// </summary>
-        internal Diagnostic WithProgrammaticSuppression(ProgrammaticSuppressionInfo programmaticSuppressionInfo)
+        internal Diagnostic WithProgrammaticSuppression(
+            ProgrammaticSuppressionInfo programmaticSuppressionInfo
+        )
         {
             RoslynDebug.Assert(this.ProgrammaticSuppressionInfo == null);
             RoslynDebug.Assert(programmaticSuppressionInfo != null);
@@ -471,10 +538,16 @@ namespace Microsoft.CodeAnalysis
             return new DiagnosticWithProgrammaticSuppression(this, programmaticSuppressionInfo);
         }
 
-        internal virtual ProgrammaticSuppressionInfo? ProgrammaticSuppressionInfo { get { return null; } }
+        internal virtual ProgrammaticSuppressionInfo? ProgrammaticSuppressionInfo
+        {
+            get { return null; }
+        }
 
         // compatibility
-        internal virtual int Code { get { return 0; } }
+        internal virtual int Code
+        {
+            get { return 0; }
+        }
 
         internal virtual IReadOnlyList<object?> Arguments
         {
@@ -487,8 +560,12 @@ namespace Microsoft.CodeAnalysis
         [PerformanceSensitive(
             "https://github.com/dotnet/roslyn/issues/26778",
             Constraint = "In most cases, AdditionalLocations is empty.",
-            AllowCaptures = false)]
-        internal bool HasIntersectingLocation(SyntaxTree tree, TextSpan? filterSpanWithinTree = null)
+            AllowCaptures = false
+        )]
+        internal bool HasIntersectingLocation(
+            SyntaxTree tree,
+            TextSpan? filterSpanWithinTree = null
+        )
         {
             if (isLocationWithinSpan(Location, tree, filterSpanWithinTree))
             {
@@ -511,14 +588,19 @@ namespace Microsoft.CodeAnalysis
 
             return false;
 
-            static bool isLocationWithinSpan(Location location, SyntaxTree tree, TextSpan? filterSpan)
+            static bool isLocationWithinSpan(
+                Location location,
+                SyntaxTree tree,
+                TextSpan? filterSpan
+            )
             {
                 if (location.SourceTree != tree)
                 {
                     return false;
                 }
 
-                return !filterSpan.HasValue || filterSpan.GetValueOrDefault().IntersectsWith(location.SourceSpan);
+                return !filterSpan.HasValue
+                    || filterSpan.GetValueOrDefault().IntersectsWith(location.SourceSpan);
             }
         }
 
@@ -584,14 +666,13 @@ namespace Microsoft.CodeAnalysis
         /// Only diagnostics which have default severity error and are tagged as NotConfigurable fall in this bucket.
         /// This includes all compiler error diagnostics and specific analyzer error diagnostics that are marked as not configurable by the analyzer author.
         /// </summary>
-        internal bool IsUnsuppressableError()
-            => DefaultSeverity == DiagnosticSeverity.Error && IsNotConfigurable();
+        internal bool IsUnsuppressableError() =>
+            DefaultSeverity == DiagnosticSeverity.Error && IsNotConfigurable();
 
         /// <summary>
         /// Returns true if this is a unsuppressed diagnostic with an effective error severity.
         /// </summary>
-        internal bool IsUnsuppressedError
-            => Severity == DiagnosticSeverity.Error && !IsSuppressed;
+        internal bool IsUnsuppressedError => Severity == DiagnosticSeverity.Error && !IsSuppressed;
     }
 
     /// <summary>

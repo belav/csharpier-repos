@@ -19,8 +19,8 @@ namespace System.Data.Metadata.Edm
 
     /// <summary>
     /// Helper Class for EDM Metadata - this class contains all the helper methods
-    /// which only accesses public methods/properties. The other partial class contains all 
-    /// helper methods which just uses internal methods/properties. The reason why we 
+    /// which only accesses public methods/properties. The other partial class contains all
+    /// helper methods which just uses internal methods/properties. The reason why we
     /// did this for allowing view gen to happen at compile time - all the helper
     /// methods that view gen or mapping uses are in this class. Rest of the
     /// methods are in this class
@@ -35,10 +35,10 @@ namespace System.Data.Metadata.Edm
         #region Methods
         /// <summary>
         /// The method wraps the GetAttribute method on XPathNavigator.
-        /// The problem with using the method directly is that the 
+        /// The problem with using the method directly is that the
         /// Get Attribute method does not differentiate the absence of an attribute and
         /// having an attribute with Empty string value. In both cases the value returned is an empty string.
-        /// So in case of optional attributes, it becomes hard to distinguish the case whether the 
+        /// So in case of optional attributes, it becomes hard to distinguish the case whether the
         /// xml contains the attribute with empty string or doesn't contain the attribute
         /// This method will return null if the attribute is not present and otherwise will return the
         /// attribute value.
@@ -46,8 +46,7 @@ namespace System.Data.Metadata.Edm
         /// <param name="nav"></param>
         /// <param name="attributeName">name of the attribute</param>
         /// <returns></returns>
-        static internal string GetAttributeValue(XPathNavigator nav, 
-                                                 string attributeName)
+        static internal string GetAttributeValue(XPathNavigator nav, string attributeName)
         {
             //Clone the navigator so that there wont be any sideeffects on the passed in Navigator
             nav = nav.Clone();
@@ -67,9 +66,11 @@ namespace System.Data.Metadata.Edm
         /// <param name="attributeName"></param>
         /// <param name="clrType"></param>
         /// <returns></returns>
-        internal static object GetTypedAttributeValue(XPathNavigator nav, 
-                                                     string attributeName,
-                                                     Type clrType) 
+        internal static object GetTypedAttributeValue(
+            XPathNavigator nav,
+            string attributeName,
+            Type clrType
+        )
         {
             //Clone the navigator so that there wont be any sideeffects on the passed in Navigator
             nav = nav.Clone();
@@ -80,14 +81,17 @@ namespace System.Data.Metadata.Edm
             }
             return attributeValue;
         }
-        
+
         /// <summary>
-        /// Searches for Facet Description with the name specified. 
+        /// Searches for Facet Description with the name specified.
         /// </summary>
         /// <param name="facetCollection">Collection of facet description</param>
         /// <param name="facetName">name of the facet</param>
         /// <returns></returns>
-        internal static FacetDescription GetFacet(IEnumerable<FacetDescription> facetCollection, string facetName)
+        internal static FacetDescription GetFacet(
+            IEnumerable<FacetDescription> facetCollection,
+            string facetName
+        )
         {
             foreach (FacetDescription facetDescription in facetCollection)
             {
@@ -113,7 +117,7 @@ namespace System.Data.Metadata.Edm
         }
 
         // requires: firstType is not null
-        // effects: if otherType is among the base types, return true, 
+        // effects: if otherType is among the base types, return true,
         // otherwise returns false.
         // when othertype is same as the current type, return false.
         internal static bool IsSubtypeOf(EdmType firstType, EdmType secondType)
@@ -150,28 +154,44 @@ namespace System.Data.Metadata.Edm
             }
         }
 
-        internal static AssociationEndMember GetEndThatShouldBeMappedToKey(AssociationType associationType)
+        internal static AssociationEndMember GetEndThatShouldBeMappedToKey(
+            AssociationType associationType
+        )
         {
-            //For 1:* and 1:0..1 associations, the end other than 1 i.e. either * or 0..1 ends need to be 
+            //For 1:* and 1:0..1 associations, the end other than 1 i.e. either * or 0..1 ends need to be
             //mapped to key columns
-            if (associationType.AssociationEndMembers.Any( it =>
-                it.RelationshipMultiplicity.Equals(RelationshipMultiplicity.One)))
+            if (
+                associationType.AssociationEndMembers.Any(it =>
+                    it.RelationshipMultiplicity.Equals(RelationshipMultiplicity.One)
+                )
+            )
             {
                 {
                     return associationType.AssociationEndMembers.SingleOrDefault(it =>
-                        ((it.RelationshipMultiplicity.Equals(RelationshipMultiplicity.Many))
-                         || (it.RelationshipMultiplicity.Equals(RelationshipMultiplicity.ZeroOrOne))));
+                        (
+                            (it.RelationshipMultiplicity.Equals(RelationshipMultiplicity.Many))
+                            || (
+                                it.RelationshipMultiplicity.Equals(
+                                    RelationshipMultiplicity.ZeroOrOne
+                                )
+                            )
+                        )
+                    );
                 }
             }
             //For 0..1:* associations, * end must be mapped to key.
-            else if (associationType.AssociationEndMembers.Any(it => 
-                (it.RelationshipMultiplicity.Equals(RelationshipMultiplicity.ZeroOrOne))))
+            else if (
+                associationType.AssociationEndMembers.Any(it =>
+                    (it.RelationshipMultiplicity.Equals(RelationshipMultiplicity.ZeroOrOne))
+                )
+            )
             {
                 {
                     return associationType.AssociationEndMembers.SingleOrDefault(it =>
-                        ((it.RelationshipMultiplicity.Equals(RelationshipMultiplicity.Many))));
+                        ((it.RelationshipMultiplicity.Equals(RelationshipMultiplicity.Many)))
+                    );
                 }
-            }                
+            }
             return null;
         }
 
@@ -182,7 +202,7 @@ namespace System.Data.Metadata.Edm
         /// <returns></returns>
         internal static String GetCommaDelimitedString(IEnumerable<string> stringList)
         {
-            Debug.Assert(stringList != null , "Expecting a non null list");
+            Debug.Assert(stringList != null, "Expecting a non null list");
             StringBuilder sb = new StringBuilder();
             bool first = true;
             foreach (string part in stringList)
@@ -195,13 +215,12 @@ namespace System.Data.Metadata.Edm
                 {
                     first = false;
                 }
-                
+
                 sb.Append(part);
             }
             return sb.ToString();
         }
 
-        
         // effects: concatenates all given enumerations
         internal static IEnumerable<T> Concat<T>(params IEnumerable<T>[] sources)
         {
@@ -230,7 +249,12 @@ namespace System.Data.Metadata.Edm
         #region IsXXXType Methods
         internal static bool IsStructuralType(EdmType type)
         {
-            return (IsComplexType(type) || IsEntityType(type) || IsRelationshipType(type) || IsRowType(type));
+            return (
+                IsComplexType(type)
+                || IsEntityType(type)
+                || IsRelationshipType(type)
+                || IsRowType(type)
+            );
         }
 
         internal static bool IsCollectionType(GlobalItem item)
@@ -295,15 +319,14 @@ namespace System.Data.Metadata.Edm
 
         internal static bool IsEntityTypeBase(EdmType edmType)
         {
-            return Helper.IsEntityType(edmType) ||
-                   Helper.IsRelationshipType(edmType);
+            return Helper.IsEntityType(edmType) || Helper.IsRelationshipType(edmType);
         }
 
         internal static bool IsTransientType(EdmType edmType)
         {
-            return Helper.IsCollectionType(edmType) ||
-                   Helper.IsRefType(edmType) ||
-                   Helper.IsRowType(edmType);
+            return Helper.IsCollectionType(edmType)
+                || Helper.IsRefType(edmType)
+                || Helper.IsRowType(edmType);
         }
 
         internal static bool IsEntitySet(EntitySetBase entitySetBase)
@@ -325,18 +348,18 @@ namespace System.Data.Metadata.Edm
         {
             return BuiltInTypeKind.EdmFunction == item.BuiltInTypeKind;
         }
-               
+
         internal static string GetFileNameFromUri(Uri uri)
         {
-            if ( uri == null )
+            if (uri == null)
                 throw new ArgumentNullException("uri");
-            if ( uri.IsFile )
+            if (uri.IsFile)
                 return uri.LocalPath;
 
-            if ( uri.IsAbsoluteUri )
+            if (uri.IsAbsoluteUri)
                 return uri.AbsolutePath;
 
-            throw new ArgumentException(System.Data.Entity.Strings.UnacceptableUri(uri),"uri");
+            throw new ArgumentException(System.Data.Entity.Strings.UnacceptableUri(uri), "uri");
         }
 
         internal static bool IsEnumType(EdmType edmType)
@@ -385,16 +408,25 @@ namespace System.Data.Metadata.Edm
             return IsGeographicTypeKind(type.PrimitiveTypeKind);
         }
 
-        internal static bool AreSameSpatialUnionType(PrimitiveType firstType, PrimitiveType secondType)
+        internal static bool AreSameSpatialUnionType(
+            PrimitiveType firstType,
+            PrimitiveType secondType
+        )
         {
             // for the purposes of type checking all geographic types should be treated as if they were the Geography union type.
-            if (Helper.IsGeographicTypeKind(firstType.PrimitiveTypeKind) && Helper.IsGeographicTypeKind(secondType.PrimitiveTypeKind))
+            if (
+                Helper.IsGeographicTypeKind(firstType.PrimitiveTypeKind)
+                && Helper.IsGeographicTypeKind(secondType.PrimitiveTypeKind)
+            )
             {
                 return true;
             }
 
             // for the purposes of type checking all geometric types should be treated as if they were the Geometry union type.
-            if (Helper.IsGeometricTypeKind(firstType.PrimitiveTypeKind) && Helper.IsGeometricTypeKind(secondType.PrimitiveTypeKind))
+            if (
+                Helper.IsGeometricTypeKind(firstType.PrimitiveTypeKind)
+                && Helper.IsGeometricTypeKind(secondType.PrimitiveTypeKind)
+            )
             {
                 return true;
             }
@@ -424,17 +456,22 @@ namespace System.Data.Metadata.Edm
 
         static bool IsStrongGeometricTypeKind(PrimitiveTypeKind kind)
         {
-            return kind >= PrimitiveTypeKind.GeometryPoint && kind <= PrimitiveTypeKind.GeometryCollection;
+            return kind >= PrimitiveTypeKind.GeometryPoint
+                && kind <= PrimitiveTypeKind.GeometryCollection;
         }
 
         static bool IsStrongGeographicTypeKind(PrimitiveTypeKind kind)
         {
-            return kind >= PrimitiveTypeKind.GeographyPoint && kind <= PrimitiveTypeKind.GeographyCollection;
+            return kind >= PrimitiveTypeKind.GeographyPoint
+                && kind <= PrimitiveTypeKind.GeographyCollection;
         }
 
         internal static bool IsSpatialType(TypeUsage type)
         {
-            return (type.EdmType.BuiltInTypeKind == BuiltInTypeKind.PrimitiveType && IsSpatialType((PrimitiveType)type.EdmType));
+            return (
+                type.EdmType.BuiltInTypeKind == BuiltInTypeKind.PrimitiveType
+                && IsSpatialType((PrimitiveType)type.EdmType)
+            );
         }
 
         internal static bool IsSpatialType(TypeUsage type, out PrimitiveTypeKind spatialType)
@@ -442,7 +479,10 @@ namespace System.Data.Metadata.Edm
             if (type.EdmType.BuiltInTypeKind == BuiltInTypeKind.PrimitiveType)
             {
                 PrimitiveType primitiveType = (PrimitiveType)type.EdmType;
-                if (IsGeographicTypeKind(primitiveType.PrimitiveTypeKind) || IsGeometricTypeKind(primitiveType.PrimitiveTypeKind))
+                if (
+                    IsGeographicTypeKind(primitiveType.PrimitiveTypeKind)
+                    || IsGeometricTypeKind(primitiveType.PrimitiveTypeKind)
+                )
                 {
                     spatialType = primitiveType.PrimitiveTypeKind;
                     return true;
@@ -504,17 +544,17 @@ namespace System.Data.Metadata.Edm
         /// </returns>
         internal static bool IsSupportedEnumUnderlyingType(PrimitiveTypeKind typeKind)
         {
-            return typeKind == PrimitiveTypeKind.Byte ||
-                   typeKind == PrimitiveTypeKind.SByte ||
-                   typeKind == PrimitiveTypeKind.Int16 ||
-                   typeKind == PrimitiveTypeKind.Int32 ||
-                   typeKind == PrimitiveTypeKind.Int64;
+            return typeKind == PrimitiveTypeKind.Byte
+                || typeKind == PrimitiveTypeKind.SByte
+                || typeKind == PrimitiveTypeKind.Int16
+                || typeKind == PrimitiveTypeKind.Int32
+                || typeKind == PrimitiveTypeKind.Int64;
         }
 
         private static readonly Dictionary<PrimitiveTypeKind, long[]> _enumUnderlyingTypeRanges =
             new Dictionary<PrimitiveTypeKind, long[]>
             {
-                { PrimitiveTypeKind.Byte,  new long[] { Byte.MinValue,  Byte.MaxValue  } },
+                { PrimitiveTypeKind.Byte, new long[] { Byte.MinValue, Byte.MaxValue } },
                 { PrimitiveTypeKind.SByte, new long[] { SByte.MinValue, SByte.MaxValue } },
                 { PrimitiveTypeKind.Int16, new long[] { Int16.MinValue, Int16.MaxValue } },
                 { PrimitiveTypeKind.Int32, new long[] { Int32.MinValue, Int32.MaxValue } },
@@ -529,15 +569,22 @@ namespace System.Data.Metadata.Edm
         /// <returns>
         /// <c>true</c> if the <paramref name="value"/> is in range of the <paramref name="underlyingTypeKind"/>. <c>false</c> otherwise.
         /// </returns>
-        internal static bool IsEnumMemberValueInRange(PrimitiveTypeKind underlyingTypeKind, long value)
+        internal static bool IsEnumMemberValueInRange(
+            PrimitiveTypeKind underlyingTypeKind,
+            long value
+        )
         {
-            Debug.Assert(IsSupportedEnumUnderlyingType(underlyingTypeKind), "Unsupported underlying type.");
+            Debug.Assert(
+                IsSupportedEnumUnderlyingType(underlyingTypeKind),
+                "Unsupported underlying type."
+            );
 
-            return value >= _enumUnderlyingTypeRanges[underlyingTypeKind][0] && value <= _enumUnderlyingTypeRanges[underlyingTypeKind][1];
+            return value >= _enumUnderlyingTypeRanges[underlyingTypeKind][0]
+                && value <= _enumUnderlyingTypeRanges[underlyingTypeKind][1];
         }
 
         /// <summary>
-        /// Checks whether the <paramref name="type"/> is enum type and if this is the case returns its underlying type. Otherwise 
+        /// Checks whether the <paramref name="type"/> is enum type and if this is the case returns its underlying type. Otherwise
         /// returns <paramref name="type"/> after casting it to PrimitiveType.
         /// </summary>
         /// <param name="type">Type to convert to primitive type.</param>
@@ -546,11 +593,14 @@ namespace System.Data.Metadata.Edm
         internal static PrimitiveType AsPrimitive(EdmType type)
         {
             Debug.Assert(type != null, "type != null");
-            Debug.Assert(IsScalarType(type), "This method must not be called for types that are neither primitive nor enums.");
+            Debug.Assert(
+                IsScalarType(type),
+                "This method must not be called for types that are neither primitive nor enums."
+            );
 
-            return Helper.IsEnumType(type) ?
-                GetUnderlyingEdmTypeForEnumType(type) : 
-                (PrimitiveType)type;
+            return Helper.IsEnumType(type)
+                ? GetUnderlyingEdmTypeForEnumType(type)
+                : (PrimitiveType)type;
         }
 
         /// <summary>
@@ -572,15 +622,21 @@ namespace System.Data.Metadata.Edm
             Debug.Assert(IsPrimitiveType(type), "This method can be called only for enums.");
             PrimitiveType primitiveType = (PrimitiveType)type;
 
-            if (IsGeographicType(primitiveType) && primitiveType.PrimitiveTypeKind != PrimitiveTypeKind.Geography)
+            if (
+                IsGeographicType(primitiveType)
+                && primitiveType.PrimitiveTypeKind != PrimitiveTypeKind.Geography
+            )
             {
                 return PrimitiveType.GetEdmPrimitiveType(PrimitiveTypeKind.Geography);
             }
-            else if (IsGeometricType(primitiveType) && primitiveType.PrimitiveTypeKind != PrimitiveTypeKind.Geometry)
+            else if (
+                IsGeometricType(primitiveType)
+                && primitiveType.PrimitiveTypeKind != PrimitiveTypeKind.Geometry
+            )
             {
                 return PrimitiveType.GetEdmPrimitiveType(PrimitiveTypeKind.Geometry);
             }
-            else 
+            else
             {
                 return primitiveType;
             }

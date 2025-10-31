@@ -12,10 +12,14 @@ internal static partial class Interop
         {
             None = 0,
             SIGKILL = 9,
-            SIGSTOP = 19
+            SIGSTOP = 19,
         }
 
-        [LibraryImport(Libraries.SystemNative, EntryPoint = "SystemNative_Kill", SetLastError = true)]
+        [LibraryImport(
+            Libraries.SystemNative,
+            EntryPoint = "SystemNative_Kill",
+            SetLastError = true
+        )]
         internal static partial int Kill(int pid, Signals signal);
     }
 }

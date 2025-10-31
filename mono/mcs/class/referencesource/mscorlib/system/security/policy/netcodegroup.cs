@@ -4,47 +4,48 @@
 //
 // ==--==
 //  NetCodeGroup.cs
-// 
+//
 // <OWNER>Microsoft</OWNER>
 //
 //  Representation for code groups used for the policy mechanism
 //
 
-namespace System.Security.Policy {
-
+namespace System.Security.Policy
+{
     using System;
-    using System.Security.Util;
-    using System.Security;
     using System.Collections;
-    using System.Reflection;
+    using System.Diagnostics.Contracts;
     using System.Globalization;
+    using System.Reflection;
     using System.Runtime.Serialization;
     using System.Runtime.Versioning;
-    using System.Diagnostics.Contracts;
+    using System.Security;
+    using System.Security.Util;
 
     //
     //This is a simple property bag used to describe connect back access.
     //
     [Serializable]
     [System.Runtime.InteropServices.ComVisible(true)]
-    public class CodeConnectAccess {
+    public class CodeConnectAccess
+    {
         private string _LowerCaseScheme;
         private string _LowerCasePort;
-        private int    _IntPort;
+        private int _IntPort;
 
-        private const  string  DefaultStr = "$default";     //must remain in lower case
-        private const  string  OriginStr  = "$origin";  //must remain in lower case
+        private const string DefaultStr = "$default"; //must remain in lower case
+        private const string OriginStr = "$origin"; //must remain in lower case
 
-        internal const  int     NoPort  = -1;
-        internal const  int     AnyPort = -2; // This safely excludes -1 (if we decide to support "any" port later)
+        internal const int NoPort = -1;
+        internal const int AnyPort = -2; // This safely excludes -1 (if we decide to support "any" port later)
 
         //
         // public helper fields to deal with special scheme and port values.
         //
-        public static readonly int     DefaultPort   = -3;
-        public static readonly int     OriginPort    = -4;
-        public static readonly string  OriginScheme  = OriginStr;
-        public static readonly string  AnyScheme     = "*";
+        public static readonly int DefaultPort = -3;
+        public static readonly int OriginPort = -4;
+        public static readonly string OriginScheme = OriginStr;
+        public static readonly string AnyScheme = "*";
 
         //
         // A set of public static class factories
@@ -56,6 +57,7 @@ namespace System.Security.Policy {
 
             SetCodeConnectAccess(allowScheme.ToLower(CultureInfo.InvariantCulture), allowPort);
         }
+
         //
         public static CodeConnectAccess CreateOriginSchemeAccess(int allowPort)
         {
@@ -63,6 +65,7 @@ namespace System.Security.Policy {
             access.SetCodeConnectAccess(OriginScheme, allowPort);
             return access;
         }
+
         //
         public static CodeConnectAccess CreateAnySchemeAccess(int allowPort)
         {
@@ -70,10 +73,10 @@ namespace System.Security.Policy {
             access.SetCodeConnectAccess(AnyScheme, allowPort);
             return access;
         }
+
         //
-        private CodeConnectAccess()
-        {
-        }
+        private CodeConnectAccess() { }
+
         //
         private void SetCodeConnectAccess(string lowerCaseScheme, int allowPort)
         {
@@ -93,14 +96,19 @@ namespace System.Security.Policy {
 
             _IntPort = allowPort;
         }
+
         //
-        public String   Scheme {
-            get {return _LowerCaseScheme;}
+        public String Scheme
+        {
+            get { return _LowerCaseScheme; }
         }
+
         //
-        public int      Port {
-            get {return _IntPort;}
+        public int Port
+        {
+            get { return _IntPort; }
         }
+
         //
         public override bool Equals(object o)
         {
@@ -114,11 +122,13 @@ namespace System.Security.Policy {
 
             return this.Scheme == that.Scheme && this.Port == that.Port;
         }
+
         //
         public override int GetHashCode()
         {
             return Scheme.GetHashCode() + Port.GetHashCode();
         }
+
         //
         // internal stuff
         //
@@ -160,28 +170,39 @@ namespace System.Security.Policy {
                 _LowerCasePort = _IntPort.ToString(CultureInfo.InvariantCulture);
             }
         }
+
         //
-        internal bool     IsOriginScheme {
-            get {return (object)_LowerCaseScheme == (object)OriginScheme;}
+        internal bool IsOriginScheme
+        {
+            get { return (object)_LowerCaseScheme == (object)OriginScheme; }
         }
+
         //
-        internal bool     IsAnyScheme {
-            get {return (object)_LowerCaseScheme == (object)AnyScheme;}
+        internal bool IsAnyScheme
+        {
+            get { return (object)_LowerCaseScheme == (object)AnyScheme; }
         }
+
         //
-        internal bool     IsDefaultPort {
-            get {return Port == DefaultPort;}
+        internal bool IsDefaultPort
+        {
+            get { return Port == DefaultPort; }
         }
+
         //
-        internal bool     IsOriginPort {
-            get {return Port == OriginPort;}
+        internal bool IsOriginPort
+        {
+            get { return Port == OriginPort; }
         }
+
         //
         // More Internal stuff
         //
-        internal string  StrPort {
-            get { return _LowerCasePort;}
+        internal string StrPort
+        {
+            get { return _LowerCasePort; }
         }
+
         //
         [Pure]
         internal static bool IsValidScheme(string scheme)
@@ -189,34 +210,45 @@ namespace System.Security.Policy {
             if (((object)scheme == null) || (scheme.Length == 0) || !IsAsciiLetter(scheme[0]))
                 return false;
 
-            for (int i = scheme.Length - 1; i > 0; --i) {
-                if (!(IsAsciiLetterOrDigit(scheme[i]) || (scheme[i] == '+') || (scheme[i] == '-') || (scheme[i] == '.')))
+            for (int i = scheme.Length - 1; i > 0; --i)
+            {
+                if (
+                    !(
+                        IsAsciiLetterOrDigit(scheme[i])
+                        || (scheme[i] == '+')
+                        || (scheme[i] == '-')
+                        || (scheme[i] == '.')
+                    )
+                )
                     return false;
             }
             return true;
         }
+
         //
         [Pure]
-        private static bool IsAsciiLetterOrDigit(char character) {
+        private static bool IsAsciiLetterOrDigit(char character)
+        {
             return IsAsciiLetter(character) || (character >= '0' && character <= '9');
         }
+
         //
         [Pure]
-        private static bool IsAsciiLetter(char character) {
-            return (character >= 'a' && character <= 'z') ||
-                   (character >= 'A' && character <= 'Z');
+        private static bool IsAsciiLetter(char character)
+        {
+            return (character >= 'a' && character <= 'z') || (character >= 'A' && character <= 'Z');
         }
     }
 
     [Serializable]
-[System.Runtime.InteropServices.ComVisible(true)]
-    sealed public class NetCodeGroup : CodeGroup, IUnionSemanticCodeGroup
+    [System.Runtime.InteropServices.ComVisible(true)]
+    public sealed class NetCodeGroup : CodeGroup, IUnionSemanticCodeGroup
     {
-        [System.Security.SecurityCritical]  // auto-generated
-        [System.Diagnostics.Conditional( "_DEBUG" )]
+        [System.Security.SecurityCritical] // auto-generated
+        [System.Diagnostics.Conditional("_DEBUG")]
         [ResourceExposure(ResourceScope.None)]
         [ResourceConsumption(ResourceScope.Process, ResourceScope.Process)]
-        private static void DEBUG_OUT( String str )
+        private static void DEBUG_OUT(String str)
         {
 #if _DEBUG
             if (debug)
@@ -224,14 +256,14 @@ namespace System.Security.Policy {
                 if (to_file)
                 {
                     System.Text.StringBuilder sb = new System.Text.StringBuilder();
-                    sb.Append( str );
-                    sb.Append ((char)13) ;
-                    sb.Append ((char)10) ;
-                    PolicyManager.DebugOut( file, sb.ToString() );
+                    sb.Append(str);
+                    sb.Append((char)13);
+                    sb.Append((char)10);
+                    PolicyManager.DebugOut(file, sb.ToString());
                 }
                 else
-                    Console.WriteLine( str );
-             }
+                    Console.WriteLine(str);
+            }
 #endif
         }
 
@@ -242,28 +274,41 @@ namespace System.Security.Policy {
 #endif
 
         [OptionalField(VersionAdded = 2)]
-        private ArrayList           m_schemesList;
+        private ArrayList m_schemesList;
+
         [OptionalField(VersionAdded = 2)]
-        private ArrayList           m_accessList;
+        private ArrayList m_accessList;
 
         [OnDeserializing]
         private void OnDeserializing(StreamingContext ctx)
         {
             m_schemesList = null;
             m_accessList = null;
-            
-            
         }
-        
 
         private const string c_IgnoreUserInfo = ""; // don't need anymore since WebPermission will ignore userinfo anyway. was: @"([^\\/?#]*@)?";
+
         // not exactly correct syntax but should work fine assuming System.Uri will not accept bogus Uri schemes
         private const string c_AnyScheme = @"([0-9a-z+\-\.]+)://";
 
-        private static readonly char[] c_SomeRegexChars = new char[] {'.', '-', '+', '[', ']', /* rest are unc-only*/ '{', '$', '^', '#', ')', '(', ' '};
+        private static readonly char[] c_SomeRegexChars = new char[]
+        {
+            '.',
+            '-',
+            '+',
+            '[',
+            ']', /* rest are unc-only*/
+            '{',
+            '$',
+            '^',
+            '#',
+            ')',
+            '(',
+            ' ',
+        };
 
-        public static readonly string  AnyOtherOriginScheme= CodeConnectAccess.AnyScheme;
-        public static readonly string  AbsentOriginScheme  = string.Empty;
+        public static readonly string AnyOtherOriginScheme = CodeConnectAccess.AnyScheme;
+        public static readonly string AbsentOriginScheme = string.Empty;
 
         internal NetCodeGroup()
             : base()
@@ -271,8 +316,8 @@ namespace System.Security.Policy {
             SetDefaults();
         }
 
-        public NetCodeGroup( IMembershipCondition membershipCondition )
-            : base( membershipCondition, (PolicyStatement)null )
+        public NetCodeGroup(IMembershipCondition membershipCondition)
+            : base(membershipCondition, (PolicyStatement)null)
         {
             SetDefaults();
         }
@@ -286,6 +331,7 @@ namespace System.Security.Policy {
             m_schemesList = null;
             m_accessList = null;
         }
+
         //
         // Added public stuff for programmatic support of the talkback access
         // The connectAccess can be null means an empty access (no access) is added
@@ -296,7 +342,11 @@ namespace System.Security.Policy {
                 throw new ArgumentNullException("originScheme");
             Contract.EndContractBlock();
 
-            if (originScheme != AbsentOriginScheme && originScheme != AnyOtherOriginScheme && !CodeConnectAccess.IsValidScheme(originScheme))
+            if (
+                originScheme != AbsentOriginScheme
+                && originScheme != AnyOtherOriginScheme
+                && !CodeConnectAccess.IsValidScheme(originScheme)
+            )
                 throw new ArgumentOutOfRangeException("originScheme");
 
             if (originScheme == AbsentOriginScheme && connectAccess.IsOriginScheme)
@@ -310,7 +360,7 @@ namespace System.Security.Policy {
 
             originScheme = originScheme.ToLower(CultureInfo.InvariantCulture);
 
-            for (int i=0; i < m_schemesList.Count; ++i)
+            for (int i = 0; i < m_schemesList.Count; ++i)
             {
                 if ((string)m_schemesList[i] == originScheme)
                 {
@@ -337,8 +387,8 @@ namespace System.Security.Policy {
             // we may want to keep it empty.
             if (connectAccess != null)
                 newOriginSchemeList.Add(connectAccess);
-
         }
+
         //
         // Each DictionaryEntry will contain
         // Key=originScheme and Value=CodeConnectAccess[] array
@@ -357,24 +407,29 @@ namespace System.Security.Policy {
             return result;
         }
 
-        [System.Security.SecuritySafeCritical]  // auto-generated
-        public override PolicyStatement Resolve( Evidence evidence )
+        [System.Security.SecuritySafeCritical] // auto-generated
+        public override PolicyStatement Resolve(Evidence evidence)
         {
             if (evidence == null)
                 throw new ArgumentNullException("evidence");
             Contract.EndContractBlock();
 
             object usedEvidence = null;
-            if (PolicyManager.CheckMembershipCondition(MembershipCondition,
-                                                       evidence,
-                                                       out usedEvidence))
+            if (
+                PolicyManager.CheckMembershipCondition(
+                    MembershipCondition,
+                    evidence,
+                    out usedEvidence
+                )
+            )
             {
-                PolicyStatement thisPolicy = CalculateAssemblyPolicy( evidence );
+                PolicyStatement thisPolicy = CalculateAssemblyPolicy(evidence);
 
                 // If any delay-evidence was used to generate this grant set, then we need to keep track of
                 // that for potentially later forcing it to be verified.
                 IDelayEvaluatedEvidence delayEvidence = usedEvidence as IDelayEvaluatedEvidence;
-                bool delayEvidenceNeedsVerification = delayEvidence != null && !delayEvidence.IsVerified;
+                bool delayEvidenceNeedsVerification =
+                    delayEvidence != null && !delayEvidence.IsVerified;
                 if (delayEvidenceNeedsVerification)
                 {
                     thisPolicy.AddDependentEvidence(delayEvidence);
@@ -384,13 +439,18 @@ namespace System.Security.Policy {
                 IEnumerator enumerator = this.Children.GetEnumerator();
                 while (enumerator.MoveNext() && !foundExclusiveChild)
                 {
-                    PolicyStatement childPolicy = PolicyManager.ResolveCodeGroup(enumerator.Current as CodeGroup,
-                                                                                 evidence);
+                    PolicyStatement childPolicy = PolicyManager.ResolveCodeGroup(
+                        enumerator.Current as CodeGroup,
+                        evidence
+                    );
                     if (childPolicy != null)
                     {
                         thisPolicy.InplaceUnion(childPolicy);
 
-                        if ((childPolicy.Attributes & PolicyStatementAttribute.Exclusive) == PolicyStatementAttribute.Exclusive)
+                        if (
+                            (childPolicy.Attributes & PolicyStatementAttribute.Exclusive)
+                            == PolicyStatementAttribute.Exclusive
+                        )
                         {
                             foundExclusiveChild = true;
                         }
@@ -406,28 +466,28 @@ namespace System.Security.Policy {
         }
 
         /// <internalonly/>
-        PolicyStatement IUnionSemanticCodeGroup.InternalResolve( Evidence evidence )
+        PolicyStatement IUnionSemanticCodeGroup.InternalResolve(Evidence evidence)
         {
             if (evidence == null)
                 throw new ArgumentNullException("evidence");
 
             Contract.EndContractBlock();
 
-            if (this.MembershipCondition.Check( evidence ))
+            if (this.MembershipCondition.Check(evidence))
             {
-                return CalculateAssemblyPolicy( evidence );
+                return CalculateAssemblyPolicy(evidence);
             }
 
             return null;
         }
 
-        public override CodeGroup ResolveMatchingCodeGroups( Evidence evidence )
+        public override CodeGroup ResolveMatchingCodeGroups(Evidence evidence)
         {
             if (evidence == null)
                 throw new ArgumentNullException("evidence");
             Contract.EndContractBlock();
 
-            if (this.MembershipCondition.Check( evidence ))
+            if (this.MembershipCondition.Check(evidence))
             {
                 CodeGroup retGroup = this.Copy();
 
@@ -437,26 +497,28 @@ namespace System.Security.Policy {
 
                 while (enumerator.MoveNext())
                 {
-                    CodeGroup matchingGroups = ((CodeGroup)enumerator.Current).ResolveMatchingCodeGroups( evidence );
+                    CodeGroup matchingGroups = (
+                        (CodeGroup)enumerator.Current
+                    ).ResolveMatchingCodeGroups(evidence);
 
                     // If the child has a policy, we are done.
 
                     if (matchingGroups != null)
                     {
-                        retGroup.AddChild( matchingGroups );
+                        retGroup.AddChild(matchingGroups);
                     }
                 }
 
                 return retGroup;
-
             }
             else
             {
                 return null;
             }
         }
+
         //
-        private string EscapeStringForRegex( string str )
+        private string EscapeStringForRegex(string str)
         {
             int start = 0;
             int idx;
@@ -464,9 +526,10 @@ namespace System.Security.Policy {
 
             while (start < str.Length && (idx = str.IndexOfAny(c_SomeRegexChars, start)) != -1)
             {
-                if (sb == null) sb = new System.Text.StringBuilder(str.Length*2);
+                if (sb == null)
+                    sb = new System.Text.StringBuilder(str.Length * 2);
                 sb.Append(str, start, idx - start).Append('\\').Append(str[idx]);
-                start = idx+1;
+                start = idx + 1;
             }
             if (sb == null)
                 return str;
@@ -477,11 +540,12 @@ namespace System.Security.Policy {
             return sb.ToString();
         }
 
-
-        internal SecurityElement CreateWebPermission(string host,
-                                                     string scheme,
-                                                     string port,
-                                                     string assemblyOverride)
+        internal SecurityElement CreateWebPermission(
+            string host,
+            string scheme,
+            string port,
+            string assemblyOverride
+        )
         {
             if (scheme == null)
                 scheme = string.Empty;
@@ -495,7 +559,7 @@ namespace System.Security.Policy {
 
             int intPort = CodeConnectAccess.NoPort;
             if (port != null && port.Length != 0)
-                intPort = Int32.Parse(port, CultureInfo.InvariantCulture );
+                intPort = Int32.Parse(port, CultureInfo.InvariantCulture);
             else
                 port = string.Empty;
 
@@ -503,19 +567,23 @@ namespace System.Security.Policy {
             if (access == null || access.Length == 0)
                 return null;
 
-            SecurityElement root = new SecurityElement( "IPermission" );
+            SecurityElement root = new SecurityElement("IPermission");
 
             // If we were given a specific assembly to find the WebPermission type in use that, otherwise use
             // the current version of System.dll.  This enables us to build WebPermissions targeting older
             // runtimes for ClickOnce trust decisions that need to target the older runtime.
-            string permissionAssembly = assemblyOverride == null ?
-                "System, Version=" + ThisAssembly.Version + ", Culture=neutral, PublicKeyToken=" + AssemblyRef.EcmaPublicKeyToken :
-                assemblyOverride;
+            string permissionAssembly =
+                assemblyOverride == null
+                    ? "System, Version="
+                        + ThisAssembly.Version
+                        + ", Culture=neutral, PublicKeyToken="
+                        + AssemblyRef.EcmaPublicKeyToken
+                    : assemblyOverride;
 
-            root.AddAttribute( "class", "System.Net.WebPermission, " + permissionAssembly);
-            root.AddAttribute( "version", "1" );
+            root.AddAttribute("class", "System.Net.WebPermission, " + permissionAssembly);
+            root.AddAttribute("version", "1");
 
-            SecurityElement connectAccess = new SecurityElement( "ConnectAccess" );
+            SecurityElement connectAccess = new SecurityElement("ConnectAccess");
 
             host = EscapeStringForRegex(host);
             scheme = EscapeStringForRegex(scheme);
@@ -523,9 +591,9 @@ namespace System.Security.Policy {
 
             if (uriStr != null)
             {
-                SecurityElement uri = new SecurityElement( "URI" );
-                uri.AddAttribute( "uri", uriStr );
-                connectAccess.AddChild( uri );
+                SecurityElement uri = new SecurityElement("URI");
+                uri.AddAttribute("uri", uriStr);
+                connectAccess.AddChild(uri);
             }
             else
             {
@@ -535,15 +603,16 @@ namespace System.Security.Policy {
                 for (int i = 0; i < access.Length; ++i)
                 {
                     uriStr = GetPermissionAccessElementString(access[i], scheme, host, port);
-                    SecurityElement uri = new SecurityElement( "URI" );
-                    uri.AddAttribute( "uri", uriStr );
-                    connectAccess.AddChild( uri );
+                    SecurityElement uri = new SecurityElement("URI");
+                    uri.AddAttribute("uri", uriStr);
+                    connectAccess.AddChild(uri);
                 }
             }
 
-            root.AddChild( connectAccess );
+            root.AddChild(connectAccess);
             return root;
         }
+
         //
         //
         //
@@ -556,22 +625,31 @@ namespace System.Security.Policy {
             if (i == -1)
             {
                 // Trying default rule but only if the passed string is not about "no scheme case"
-                if (lowerCaseScheme == AbsentOriginScheme || (i = m_schemesList.IndexOf(AnyOtherOriginScheme)) == -1)
+                if (
+                    lowerCaseScheme == AbsentOriginScheme
+                    || (i = m_schemesList.IndexOf(AnyOtherOriginScheme)) == -1
+                )
                     return null;
             }
 
             ArrayList accessList = (ArrayList)m_accessList[i];
             return (CodeConnectAccess[])accessList.ToArray(typeof(CodeConnectAccess));
         }
+
         //
         // This is an attempt to optimize resulting regex if the rules can be combined into one expression string
         //
-        private string TryPermissionAsOneString(CodeConnectAccess[] access, string escapedScheme, string escapedHost, int intPort)
+        private string TryPermissionAsOneString(
+            CodeConnectAccess[] access,
+            string escapedScheme,
+            string escapedHost,
+            int intPort
+        )
         {
             bool noPort = true;
             bool originPort = true;
             bool anyScheme = false;
-            int  sameCustomPort = CodeConnectAccess.AnyPort;
+            int sameCustomPort = CodeConnectAccess.AnyPort;
 
             //
             // We can compact rules in one regex if the destination port is the same for all granted accesses.
@@ -582,12 +660,14 @@ namespace System.Security.Policy {
             //
             for (int i = 0; i < access.Length; ++i)
             {
-                noPort    &= (access[i].IsDefaultPort || (access[i].IsOriginPort && intPort == CodeConnectAccess.NoPort));
-                originPort&= (access[i].IsOriginPort  || access[i].Port == intPort);
+                noPort &= (
+                    access[i].IsDefaultPort
+                    || (access[i].IsOriginPort && intPort == CodeConnectAccess.NoPort)
+                );
+                originPort &= (access[i].IsOriginPort || access[i].Port == intPort);
 
                 if (access[i].Port >= 0)
                 {
-
                     if (sameCustomPort == CodeConnectAccess.AnyPort)
                     {
                         sameCustomPort = access[i].Port;
@@ -612,7 +692,11 @@ namespace System.Security.Policy {
                 return null;
 
             // We can produce the resulting expression as one string
-            System.Text.StringBuilder sb = new System.Text.StringBuilder(c_AnyScheme.Length * access.Length + c_IgnoreUserInfo.Length*2 + escapedHost.Length);
+            System.Text.StringBuilder sb = new System.Text.StringBuilder(
+                c_AnyScheme.Length * access.Length
+                    + c_IgnoreUserInfo.Length * 2
+                    + escapedHost.Length
+            );
             if (anyScheme)
                 sb.Append(c_AnyScheme);
             else
@@ -632,28 +716,46 @@ namespace System.Security.Policy {
                     {
                         if (i != 0)
                             sb.Append('|');
-                        sb.Append(access[i].IsOriginScheme? escapedScheme: EscapeStringForRegex(access[i].Scheme));
+                        sb.Append(
+                            access[i].IsOriginScheme
+                                ? escapedScheme
+                                : EscapeStringForRegex(access[i].Scheme)
+                        );
                     }
                 }
-                sb.Append(")://");;
+                sb.Append(")://");
+                ;
             }
 
             sb.Append(c_IgnoreUserInfo).Append(escapedHost);
 
-            if (noPort) {;}
-            else if (originPort) sb.Append(':').Append(intPort);
-            else sb.Append(':').Append(sameCustomPort);
+            if (noPort)
+            {
+                ;
+            }
+            else if (originPort)
+                sb.Append(':').Append(intPort);
+            else
+                sb.Append(':').Append(sameCustomPort);
 
             sb.Append("/.*");
             return sb.ToString();
         }
+
         //
         // This tries to return a single element to be added into resulting WebPermission
         // Returns Null if there is nothing to add.
         //
-        private string GetPermissionAccessElementString(CodeConnectAccess access, string escapedScheme, string escapedHost, string strPort)
+        private string GetPermissionAccessElementString(
+            CodeConnectAccess access,
+            string escapedScheme,
+            string escapedHost,
+            string strPort
+        )
         {
-            System.Text.StringBuilder sb = new System.Text.StringBuilder(c_AnyScheme.Length*2 + c_IgnoreUserInfo.Length + escapedHost.Length);
+            System.Text.StringBuilder sb = new System.Text.StringBuilder(
+                c_AnyScheme.Length * 2 + c_IgnoreUserInfo.Length + escapedHost.Length
+            );
 
             if (access.IsAnyScheme)
                 sb.Append(c_AnyScheme);
@@ -664,43 +766,50 @@ namespace System.Security.Policy {
 
             sb.Append(c_IgnoreUserInfo).Append(escapedHost);
 
-            if (access.IsDefaultPort) {;}
+            if (access.IsDefaultPort)
+            {
+                ;
+            }
             else if (access.IsOriginPort)
-                 sb.Append(strPort);
-            else sb.Append(':').Append(access.StrPort);
+                sb.Append(strPort);
+            else
+                sb.Append(':').Append(access.StrPort);
 
             sb.Append("/.*");
             return sb.ToString();
         }
 
-        internal PolicyStatement CalculatePolicy( String host, String scheme, String port )
+        internal PolicyStatement CalculatePolicy(String host, String scheme, String port)
         {
-            SecurityElement webPerm = CreateWebPermission( host, scheme, port, null );
+            SecurityElement webPerm = CreateWebPermission(host, scheme, port, null);
 
-            SecurityElement root = new SecurityElement( "PolicyStatement" );
-            SecurityElement permSet = new SecurityElement( "PermissionSet" );
-            permSet.AddAttribute( "class", "System.Security.PermissionSet" );
-            permSet.AddAttribute( "version", "1" );
+            SecurityElement root = new SecurityElement("PolicyStatement");
+            SecurityElement permSet = new SecurityElement("PermissionSet");
+            permSet.AddAttribute("class", "System.Security.PermissionSet");
+            permSet.AddAttribute("version", "1");
 
             if (webPerm != null)
-                permSet.AddChild( webPerm );
+                permSet.AddChild(webPerm);
 
-            root.AddChild( permSet );
+            root.AddChild(permSet);
 
             PolicyStatement policy = new PolicyStatement();
-            policy.FromXml( root );
+            policy.FromXml(root);
             return policy;
         }
 
-        private PolicyStatement CalculateAssemblyPolicy( Evidence evidence )
+        private PolicyStatement CalculateAssemblyPolicy(Evidence evidence)
         {
-
             PolicyStatement thisPolicy = null;
 
             Url url = evidence.GetHostEvidence<Url>();
             if (url != null)
             {
-                thisPolicy = CalculatePolicy( url.GetURLString().Host, url.GetURLString().Scheme, url.GetURLString().Port );
+                thisPolicy = CalculatePolicy(
+                    url.GetURLString().Host,
+                    url.GetURLString().Scheme,
+                    url.GetURLString().Port
+                );
             }
 
             if (thisPolicy == null)
@@ -713,14 +822,17 @@ namespace System.Security.Policy {
             }
 
             if (thisPolicy == null)
-                thisPolicy = new PolicyStatement( new PermissionSet( false ), PolicyStatementAttribute.Nothing );
+                thisPolicy = new PolicyStatement(
+                    new PermissionSet(false),
+                    PolicyStatementAttribute.Nothing
+                );
 
             return thisPolicy;
         }
 
         public override CodeGroup Copy()
         {
-            NetCodeGroup group = new NetCodeGroup( this.MembershipCondition );
+            NetCodeGroup group = new NetCodeGroup(this.MembershipCondition);
 
             group.Name = this.Name;
             group.Description = this.Description;
@@ -736,39 +848,29 @@ namespace System.Security.Policy {
 
             while (enumerator.MoveNext())
             {
-                group.AddChild( (CodeGroup)enumerator.Current );
+                group.AddChild((CodeGroup)enumerator.Current);
             }
-
 
             return group;
         }
 
         public override String MergeLogic
         {
-            get
-            {
-                return Environment.GetResourceString( "MergeLogic_Union" );
-            }
+            get { return Environment.GetResourceString("MergeLogic_Union"); }
         }
 
         public override String PermissionSetName
         {
-            get
-            {
-                return Environment.GetResourceString( "NetCodeGroup_PermissionSet" );
-            }
+            get { return Environment.GetResourceString("NetCodeGroup_PermissionSet"); }
         }
-
 
         public override String AttributeString
         {
-            get
-            {
-                return null;
-            }
+            get { return null; }
         }
+
         //
-        public override bool Equals( Object o)
+        public override bool Equals(Object o)
         {
             if ((object)this == (object)o)
                 return true;
@@ -786,7 +888,6 @@ namespace System.Security.Policy {
 
             if (this.m_schemesList.Count != that.m_schemesList.Count)
                 return false;
-
 
             for (int i = 0; i < this.m_schemesList.Count; ++i)
             {
@@ -808,29 +909,32 @@ namespace System.Security.Policy {
 
             return true;
         }
+
         //
         //
         public override int GetHashCode()
         {
             return base.GetHashCode() + GetRulesHashCode();
         }
+
         private int GetRulesHashCode()
         {
             if (m_schemesList == null)
                 return 0;
 
             int result = 0;
-            for(int i = 0; i < m_schemesList.Count; ++i)
+            for (int i = 0; i < m_schemesList.Count; ++i)
                 result += ((string)m_schemesList[i]).GetHashCode();
 
             foreach (ArrayList accessList in m_accessList)
-                for(int i = 0; i < accessList.Count; ++i)
+                for (int i = 0; i < accessList.Count; ++i)
                     result += ((CodeConnectAccess)accessList[i]).GetHashCode();
 
             return result;
         }
+
         //
-        protected override void CreateXml( SecurityElement element, PolicyLevel level )
+        protected override void CreateXml(SecurityElement element, PolicyLevel level)
         {
             DictionaryEntry[] rules = GetConnectAccessRules();
             if (rules == null)
@@ -841,7 +945,7 @@ namespace System.Security.Policy {
             foreach (DictionaryEntry rule in rules)
             {
                 SecurityElement codeOriginElement = new SecurityElement("codeOrigin");
-                codeOriginElement.AddAttribute("scheme", (string) rule.Key);
+                codeOriginElement.AddAttribute("scheme", (string)rule.Key);
                 foreach (CodeConnectAccess access in (CodeConnectAccess[])rule.Value)
                 {
                     SecurityElement accessElem = new SecurityElement("connectAccess");
@@ -854,7 +958,7 @@ namespace System.Security.Policy {
             element.AddChild(rulesElement);
         }
 
-        protected override void ParseXml( SecurityElement e, PolicyLevel level )
+        protected override void ParseXml(SecurityElement e, PolicyLevel level)
         {
             //Reset the exiting content
             ResetConnectAccess();
@@ -868,7 +972,7 @@ namespace System.Security.Policy {
                 return;
             }
 
-            foreach(SecurityElement codeOriginElem in et.Children)
+            foreach (SecurityElement codeOriginElem in et.Children)
             {
                 if (codeOriginElem.Tag.Equals("codeOrigin"))
                 {
@@ -877,16 +981,20 @@ namespace System.Security.Policy {
 
                     if (codeOriginElem.Children != null)
                     {
-                        foreach(SecurityElement accessElem in codeOriginElem.Children)
+                        foreach (SecurityElement accessElem in codeOriginElem.Children)
                         {
                             if (accessElem.Tag.Equals("connectAccess"))
                             {
                                 string connectScheme = accessElem.Attribute("scheme");
-                                string connectPort   = accessElem.Attribute("port");
-                                AddConnectAccess(originScheme, new CodeConnectAccess(connectScheme, connectPort));
+                                string connectPort = accessElem.Attribute("port");
+                                AddConnectAccess(
+                                    originScheme,
+                                    new CodeConnectAccess(connectScheme, connectPort)
+                                );
                                 oneAdded = true;
                             }
-                            else {
+                            else
+                            {
                                 // improper tag found, just ignore
                             }
                         }
@@ -897,9 +1005,9 @@ namespace System.Security.Policy {
                         //special case as to no talkback access for a given scheme
                         AddConnectAccess(originScheme, null);
                     }
-
                 }
-                else {
+                else
+                {
                     // improper tag found, just ignore
                 }
             }
@@ -909,6 +1017,7 @@ namespace System.Security.Policy {
         {
             return "System.Security.Policy.NetCodeGroup";
         }
+
         //
         // This method is called at the ctor time to populate default accesses (V1.1 compat)
         //
@@ -920,7 +1029,7 @@ namespace System.Security.Policy {
             // access fot http://
             AddConnectAccess("http", new CodeConnectAccess("http", CodeConnectAccess.OriginPort));
             AddConnectAccess("http", new CodeConnectAccess("https", CodeConnectAccess.OriginPort));
-            /* 
+            /*
 
 
 
@@ -928,13 +1037,12 @@ namespace System.Security.Policy {
 
             // access fot https://
             AddConnectAccess("https", new CodeConnectAccess("https", CodeConnectAccess.OriginPort));
-            /* 
+            /*
 
 */
 
-
             // access fot ftp://
-            /* 
+            /*
 
 
 
@@ -942,10 +1050,14 @@ namespace System.Security.Policy {
 */
 
             // access for no scheme and for any other scheme
-            AddConnectAccess(NetCodeGroup.AbsentOriginScheme, CodeConnectAccess.CreateAnySchemeAccess(CodeConnectAccess.OriginPort));
-            AddConnectAccess(NetCodeGroup.AnyOtherOriginScheme, CodeConnectAccess.CreateOriginSchemeAccess(CodeConnectAccess.OriginPort));
+            AddConnectAccess(
+                NetCodeGroup.AbsentOriginScheme,
+                CodeConnectAccess.CreateAnySchemeAccess(CodeConnectAccess.OriginPort)
+            );
+            AddConnectAccess(
+                NetCodeGroup.AnyOtherOriginScheme,
+                CodeConnectAccess.CreateOriginSchemeAccess(CodeConnectAccess.OriginPort)
+            );
         }
-
     }
-
 }

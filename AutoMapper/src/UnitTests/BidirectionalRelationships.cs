@@ -4,12 +4,13 @@ public class RecursiveMappingWithStruct : AutoMapperSpecBase
 {
     private ParentDto _dto;
 
-    protected override MapperConfiguration CreateConfiguration() => new(cfg => 
-    {
-        cfg.CreateMap<ParentModel, ParentDto>();
-        cfg.CreateMap<ChildModel, ChildDto>();
-        cfg.CreateMap<ChildrenStructModel, ChildrenStructDto>();
-    });
+    protected override MapperConfiguration CreateConfiguration() =>
+        new(cfg =>
+        {
+            cfg.CreateMap<ParentModel, ParentDto>();
+            cfg.CreateMap<ChildModel, ChildDto>();
+            cfg.CreateMap<ChildrenStructModel, ChildrenStructDto>();
+        });
 
     [Fact]
     public void Should_work()
@@ -70,15 +71,17 @@ public class RecursiveMappingWithStruct : AutoMapperSpecBase
     }
 }
 
-public class When_mapping_to_a_destination_with_a_bidirectional_parent_one_to_many_child_relationship : AutoMapperSpecBase
+public class When_mapping_to_a_destination_with_a_bidirectional_parent_one_to_many_child_relationship
+    : AutoMapperSpecBase
 {
     private ParentDto _dto;
 
-    protected override MapperConfiguration CreateConfiguration() => new(cfg =>
-    {
-        cfg.CreateMap<ParentModel, ParentDto>().PreserveReferences();
-        cfg.CreateMap<ChildModel, ChildDto>();
-    });
+    protected override MapperConfiguration CreateConfiguration() =>
+        new(cfg =>
+        {
+            cfg.CreateMap<ParentModel, ParentDto>().PreserveReferences();
+            cfg.CreateMap<ChildModel, ChildDto>();
+        });
 
     protected override void Because_of()
     {
@@ -139,11 +142,12 @@ public class RecursiveDynamicMapping : AutoMapperSpecBase
 {
     private ParentDto<int> _dto;
 
-    protected override MapperConfiguration CreateConfiguration() => new(cfg =>
-    {
-        cfg.CreateMap(typeof(ParentModel<>), typeof(ParentDto<>));
-        cfg.CreateMap(typeof(ChildModel<>), typeof(ChildDto<>));
-    });
+    protected override MapperConfiguration CreateConfiguration() =>
+        new(cfg =>
+        {
+            cfg.CreateMap(typeof(ParentModel<>), typeof(ParentDto<>));
+            cfg.CreateMap(typeof(ChildModel<>), typeof(ChildDto<>));
+        });
 
     protected override void Because_of()
     {
@@ -200,37 +204,36 @@ public class RecursiveDynamicMapping : AutoMapperSpecBase
     }
 }
 
-public class When_mapping_to_a_destination_with_a_bidirectional_parent_one_to_many_child_relationship_using_CustomMapper_with_context : AutoMapperSpecBase
+public class When_mapping_to_a_destination_with_a_bidirectional_parent_one_to_many_child_relationship_using_CustomMapper_with_context
+    : AutoMapperSpecBase
 {
     private ParentDto _dto;
     private static ParentModel _parent;
 
-    protected override MapperConfiguration CreateConfiguration() => new(cfg =>
-    {
-        _parent = new ParentModel
+    protected override MapperConfiguration CreateConfiguration() =>
+        new(cfg =>
         {
-            ID = 2
-        };
+            _parent = new ParentModel { ID = 2 };
 
-        List<ChildModel> childModels = new List<ChildModel>
-        {
-            new ChildModel
+            List<ChildModel> childModels = new List<ChildModel>
             {
-                ID = 1,
-                Parent = _parent
-            }
-        };
+                new ChildModel { ID = 1, Parent = _parent },
+            };
 
-        Dictionary<int, ParentModel> parents = childModels.ToDictionary(x => x.ID, x => x.Parent);
+            Dictionary<int, ParentModel> parents = childModels.ToDictionary(
+                x => x.ID,
+                x => x.Parent
+            );
 
-        cfg.CreateMap<int, ParentDto>().ConvertUsing(new ChildIdToParentDtoConverter(parents));
-        cfg.CreateMap<int, List<ChildDto>>().ConvertUsing(new ParentIdToChildDtoListConverter(childModels));
+            cfg.CreateMap<int, ParentDto>().ConvertUsing(new ChildIdToParentDtoConverter(parents));
+            cfg.CreateMap<int, List<ChildDto>>()
+                .ConvertUsing(new ParentIdToChildDtoListConverter(childModels));
 
-        cfg.CreateMap<ParentModel, ParentDto>()
-            .PreserveReferences()
-            .ForMember(dest => dest.Children, opt => opt.MapFrom(src => src.ID));
-        cfg.CreateMap<ChildModel, ChildDto>();
-    });
+            cfg.CreateMap<ParentModel, ParentDto>()
+                .PreserveReferences()
+                .ForMember(dest => dest.Children, opt => opt.MapFrom(src => src.ID));
+            cfg.CreateMap<ChildModel, ChildDto>();
+        });
 
     protected override void Because_of()
     {
@@ -252,10 +255,20 @@ public class When_mapping_to_a_destination_with_a_bidirectional_parent_one_to_ma
             _parentModels = parentModels;
         }
 
-        public ParentDto Convert(int source, ParentDto destination, ResolutionContext resolutionContext)
+        public ParentDto Convert(
+            int source,
+            ParentDto destination,
+            ResolutionContext resolutionContext
+        )
         {
             ParentModel parentModel = _parentModels[source];
-            return (ParentDto) resolutionContext.Mapper.Map(parentModel, destination, typeof(ParentModel), typeof(ParentDto));
+            return (ParentDto)
+                resolutionContext.Mapper.Map(
+                    parentModel,
+                    destination,
+                    typeof(ParentModel),
+                    typeof(ParentDto)
+                );
         }
     }
 
@@ -268,10 +281,20 @@ public class When_mapping_to_a_destination_with_a_bidirectional_parent_one_to_ma
             _childModels = childModels;
         }
 
-        public List<ChildDto> Convert(int source, List<ChildDto> destination, ResolutionContext resolutionContext)
+        public List<ChildDto> Convert(
+            int source,
+            List<ChildDto> destination,
+            ResolutionContext resolutionContext
+        )
         {
             List<ChildModel> childModels = _childModels.Where(x => x.Parent.ID == source).ToList();
-            return (List<ChildDto>)resolutionContext.Mapper.Map(childModels, destination, typeof(List<ChildModel>), typeof(List<ChildDto>));
+            return (List<ChildDto>)
+                resolutionContext.Mapper.Map(
+                    childModels,
+                    destination,
+                    typeof(List<ChildModel>),
+                    typeof(List<ChildDto>)
+                );
         }
     }
 
@@ -299,25 +322,21 @@ public class When_mapping_to_a_destination_with_a_bidirectional_parent_one_to_ma
     }
 }
 
-public class When_mapping_to_a_destination_with_a_bidirectional_parent_one_to_one_child_relationship : AutoMapperSpecBase
+public class When_mapping_to_a_destination_with_a_bidirectional_parent_one_to_one_child_relationship
+    : AutoMapperSpecBase
 {
     private FooDto _dto;
 
-    protected override MapperConfiguration CreateConfiguration() => new(cfg =>
-    {
-        cfg.CreateMap<Foo, FooDto>().PreserveReferences();
-        cfg.CreateMap<Bar, BarDto>();
-    });
+    protected override MapperConfiguration CreateConfiguration() =>
+        new(cfg =>
+        {
+            cfg.CreateMap<Foo, FooDto>().PreserveReferences();
+            cfg.CreateMap<Bar, BarDto>();
+        });
 
     protected override void Because_of()
     {
-        var foo = new Foo
-            {
-                Bar = new Bar
-                    {
-                        Value = "something"
-                    }
-            };
+        var foo = new Foo { Bar = new Bar { Value = "something" } };
         foo.Bar.Foo = foo;
         _dto = Mapper.Map<Foo, FooDto>(foo);
     }
@@ -351,19 +370,21 @@ public class When_mapping_to_a_destination_with_a_bidirectional_parent_one_to_on
     }
 }
 
-public class When_mapping_to_a_destination_containing_two_dtos_mapped_from_the_same_source : AutoMapperSpecBase
+public class When_mapping_to_a_destination_containing_two_dtos_mapped_from_the_same_source
+    : AutoMapperSpecBase
 {
     private FooContainerModel _dto;
 
-    protected override MapperConfiguration CreateConfiguration() => new(cfg =>
-    {
-        cfg.CreateMap<FooModel, FooScreenModel>();
-        cfg.CreateMap<FooModel, FooInputModel>();
-        cfg.CreateMap<FooModel, FooContainerModel>()
-            .PreserveReferences()
-            .ForMember(dest => dest.Input, opt => opt.MapFrom(src => src))
-            .ForMember(dest => dest.Screen, opt => opt.MapFrom(src => src));
-    });
+    protected override MapperConfiguration CreateConfiguration() =>
+        new(cfg =>
+        {
+            cfg.CreateMap<FooModel, FooScreenModel>();
+            cfg.CreateMap<FooModel, FooInputModel>();
+            cfg.CreateMap<FooModel, FooContainerModel>()
+                .PreserveReferences()
+                .ForMember(dest => dest.Input, opt => opt.MapFrom(src => src))
+                .ForMember(dest => dest.Screen, opt => opt.MapFrom(src => src));
+        });
 
     protected override void Because_of()
     {
@@ -403,17 +424,17 @@ public class When_mapping_to_a_destination_containing_two_dtos_mapped_from_the_s
     }
 }
 
-public class When_mapping_with_a_bidirectional_relationship_that_includes_arrays : AutoMapperSpecBase
-
+public class When_mapping_with_a_bidirectional_relationship_that_includes_arrays
+    : AutoMapperSpecBase
 {
     private ParentDto _dtoParent;
 
-    protected override MapperConfiguration CreateConfiguration() => new(cfg =>
-    {
-        cfg.CreateMap<Parent, ParentDto>().PreserveReferences();
-        cfg.CreateMap<Child, ChildDto>();
-
-    });
+    protected override MapperConfiguration CreateConfiguration() =>
+        new(cfg =>
+        {
+            cfg.CreateMap<Parent, ParentDto>().PreserveReferences();
+            cfg.CreateMap<Child, ChildDto>();
+        });
 
     protected override void Because_of()
     {
@@ -448,17 +469,22 @@ public class When_mapping_with_a_bidirectional_relationship_that_includes_arrays
 
         public bool Equals(Parent other)
         {
-            if (ReferenceEquals(null, other)) return false;
-            if (ReferenceEquals(this, other)) return true;
+            if (ReferenceEquals(null, other))
+                return false;
+            if (ReferenceEquals(this, other))
+                return true;
             return other.Id.Equals(Id);
         }
 
         public override bool Equals(object obj)
         {
-            if (ReferenceEquals(null, obj)) return false;
-            if (ReferenceEquals(this, obj)) return true;
-            if (obj.GetType() != typeof (Parent)) return false;
-            return Equals((Parent) obj);
+            if (ReferenceEquals(null, obj))
+                return false;
+            if (ReferenceEquals(this, obj))
+                return true;
+            if (obj.GetType() != typeof(Parent))
+                return false;
+            return Equals((Parent)obj);
         }
 
         public override int GetHashCode()
@@ -483,17 +509,22 @@ public class When_mapping_with_a_bidirectional_relationship_that_includes_arrays
 
         public bool Equals(Child other)
         {
-            if (ReferenceEquals(null, other)) return false;
-            if (ReferenceEquals(this, other)) return true;
+            if (ReferenceEquals(null, other))
+                return false;
+            if (ReferenceEquals(this, other))
+                return true;
             return other.Id.Equals(Id);
         }
 
         public override bool Equals(object obj)
         {
-            if (ReferenceEquals(null, obj)) return false;
-            if (ReferenceEquals(this, obj)) return true;
-            if (obj.GetType() != typeof (Child)) return false;
-            return Equals((Child) obj);
+            if (ReferenceEquals(null, obj))
+                return false;
+            if (ReferenceEquals(this, obj))
+                return true;
+            if (obj.GetType() != typeof(Child))
+                return false;
+            return Equals((Child)obj);
         }
 
         public override int GetHashCode()

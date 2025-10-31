@@ -20,9 +20,7 @@ public class SqlServerHistoryRepository : HistoryRepository
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
     public SqlServerHistoryRepository(HistoryRepositoryDependencies dependencies)
-        : base(dependencies)
-    {
-    }
+        : base(dependencies) { }
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -38,7 +36,8 @@ public class SqlServerHistoryRepository : HistoryRepository
 
             return "SELECT OBJECT_ID("
                 + stringTypeMapping.GenerateSqlLiteral(
-                    SqlGenerationHelper.DelimitIdentifier(TableName, TableSchema))
+                    SqlGenerationHelper.DelimitIdentifier(TableName, TableSchema)
+                )
                 + ")"
                 + SqlGenerationHelper.StatementTerminator;
         }
@@ -50,8 +49,7 @@ public class SqlServerHistoryRepository : HistoryRepository
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    protected override bool InterpretExistsResult(object? value)
-        => value != DBNull.Value;
+    protected override bool InterpretExistsResult(object? value) => value != DBNull.Value;
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -67,7 +65,9 @@ public class SqlServerHistoryRepository : HistoryRepository
             .Append("IF OBJECT_ID(")
             .Append(
                 stringTypeMapping.GenerateSqlLiteral(
-                    SqlGenerationHelper.DelimitIdentifier(TableName, TableSchema)))
+                    SqlGenerationHelper.DelimitIdentifier(TableName, TableSchema)
+                )
+            )
             .AppendLine(") IS NULL")
             .AppendLine("BEGIN");
 
@@ -88,17 +88,12 @@ public class SqlServerHistoryRepository : HistoryRepository
 
                 if (line.Length != 0)
                 {
-                    builder
-                        .Append("    ")
-                        .Append(line);
+                    builder.Append("    ").Append(line);
                 }
             }
         }
 
-        builder
-            .AppendLine()
-            .Append("END")
-            .AppendLine(SqlGenerationHelper.StatementTerminator);
+        builder.AppendLine().Append("END").AppendLine(SqlGenerationHelper.StatementTerminator);
 
         return builder.ToString();
     }
@@ -119,7 +114,8 @@ public class SqlServerHistoryRepository : HistoryRepository
             .AppendLine(SqlGenerationHelper.DelimitIdentifier(TableName, TableSchema))
             .Append("    WHERE ")
             .Append(SqlGenerationHelper.DelimitIdentifier(MigrationIdColumnName))
-            .Append(" = ").AppendLine(stringTypeMapping.GenerateSqlLiteral(migrationId))
+            .Append(" = ")
+            .AppendLine(stringTypeMapping.GenerateSqlLiteral(migrationId))
             .AppendLine(")")
             .Append("BEGIN")
             .ToString();
@@ -154,8 +150,8 @@ public class SqlServerHistoryRepository : HistoryRepository
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public override string GetEndIfScript()
-        => new StringBuilder()
+    public override string GetEndIfScript() =>
+        new StringBuilder()
             .Append("END")
             .AppendLine(SqlGenerationHelper.StatementTerminator)
             .ToString();

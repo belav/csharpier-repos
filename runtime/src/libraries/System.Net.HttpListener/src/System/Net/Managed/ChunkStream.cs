@@ -48,7 +48,7 @@ namespace System.Net
             PartialSize,
             Body,
             BodyFinished,
-            Trailer
+            Trailer,
         }
 
         private sealed class Chunk
@@ -274,7 +274,11 @@ namespace System.Net
                 {
                     if (_saved.Length > 0)
                     {
-                        _chunkSize = int.Parse(RemoveChunkExtension(_saved.ToString()), NumberStyles.HexNumber, CultureInfo.InvariantCulture);
+                        _chunkSize = int.Parse(
+                            RemoveChunkExtension(_saved.ToString()),
+                            NumberStyles.HexNumber,
+                            CultureInfo.InvariantCulture
+                        );
                     }
                 }
                 catch (Exception)
@@ -288,7 +292,11 @@ namespace System.Net
             _chunkRead = 0;
             try
             {
-                _chunkSize = int.Parse(RemoveChunkExtension(_saved.ToString()), NumberStyles.HexNumber, CultureInfo.InvariantCulture);
+                _chunkSize = int.Parse(
+                    RemoveChunkExtension(_saved.ToString()),
+                    NumberStyles.HexNumber,
+                    CultureInfo.InvariantCulture
+                );
             }
             catch (Exception)
             {
@@ -389,7 +397,12 @@ namespace System.Net
 
         private static void ThrowProtocolViolation(string message)
         {
-            WebException we = new WebException(message, null, WebExceptionStatus.ServerProtocolViolation, null);
+            WebException we = new WebException(
+                message,
+                null,
+                WebExceptionStatus.ServerProtocolViolation,
+                null
+            );
             throw we;
         }
     }

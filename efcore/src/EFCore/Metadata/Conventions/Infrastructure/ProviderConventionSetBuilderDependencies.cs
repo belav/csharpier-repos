@@ -63,7 +63,8 @@ public sealed record ProviderConventionSetBuilderDependencies
         IDiagnosticsLogger<DbLoggerCategory.Model> logger,
         IDiagnosticsLogger<DbLoggerCategory.Model.Validation> validationLogger,
         IDbSetFinder setFinder,
-        ICurrentDbContext currentContext)
+        ICurrentDbContext currentContext
+    )
     {
         TypeMappingSource = typeMappingSource;
         ConstructorBindingFactory = constructorBindingFactory;
@@ -114,16 +115,15 @@ public sealed record ProviderConventionSetBuilderDependencies
     /// <summary>
     ///     The current context instance.
     /// </summary>
-    public Type ContextType
-        => _currentContext.Context.GetType();
+    public Type ContextType => _currentContext.Context.GetType();
 
     /// <summary>
     ///     Clones this dependency parameter object with one service replaced.
     /// </summary>
     /// <param name="currentContext">A replacement for the current dependency of this type.</param>
     /// <returns>A new parameter object with the given service replaced.</returns>
-    public ProviderConventionSetBuilderDependencies With(ICurrentDbContext currentContext)
-        => new(
+    public ProviderConventionSetBuilderDependencies With(ICurrentDbContext currentContext) =>
+        new(
             TypeMappingSource,
             ConstructorBindingFactory,
             ParameterBindingFactories,
@@ -131,5 +131,6 @@ public sealed record ProviderConventionSetBuilderDependencies
             Logger,
             ValidationLogger,
             SetFinder,
-            currentContext);
+            currentContext
+        );
 }

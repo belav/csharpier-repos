@@ -6,10 +6,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -28,55 +28,55 @@ using System.Reflection.Emit;
 
 namespace Mono.CodeGeneration
 {
-	public class CodeVariableReference: CodeValueReference
-	{
-		LocalBuilder localBuilder;
-		Type type;
-		string name;
-		
-		public CodeVariableReference (Type type, string name)
-		{
-			this.type = type;
-			this.name = name;		
-		}
-		
-		public Type Type
-		{
-			get { return type; }
-		}
-		
-		public string Name
-		{
-			get { return name; }
-		}
-		
-		internal LocalBuilder LocalBuilder
-		{
-			get { return localBuilder; }
-			set { localBuilder = value; }
-		}
-		
-		public override void Generate (ILGenerator gen)
-		{
-			gen.Emit (OpCodes.Ldloc, localBuilder);
-		}
-		
-		public override void GenerateSet (ILGenerator gen, CodeExpression value)
-		{
-			value.Generate (gen);
-			CodeGenerationHelper.GenerateSafeConversion (gen, type, value.GetResultType ());
-			gen.Emit (OpCodes.Stloc, localBuilder);
-		}
-		
-		public override void PrintCode (CodeWriter cp)
-		{
-			cp.Write (name);
-		}
-		
-		public override Type GetResultType ()
-		{
-			return type;
-		}
-	}
+    public class CodeVariableReference : CodeValueReference
+    {
+        LocalBuilder localBuilder;
+        Type type;
+        string name;
+
+        public CodeVariableReference(Type type, string name)
+        {
+            this.type = type;
+            this.name = name;
+        }
+
+        public Type Type
+        {
+            get { return type; }
+        }
+
+        public string Name
+        {
+            get { return name; }
+        }
+
+        internal LocalBuilder LocalBuilder
+        {
+            get { return localBuilder; }
+            set { localBuilder = value; }
+        }
+
+        public override void Generate(ILGenerator gen)
+        {
+            gen.Emit(OpCodes.Ldloc, localBuilder);
+        }
+
+        public override void GenerateSet(ILGenerator gen, CodeExpression value)
+        {
+            value.Generate(gen);
+            CodeGenerationHelper.GenerateSafeConversion(gen, type, value.GetResultType());
+            gen.Emit(OpCodes.Stloc, localBuilder);
+        }
+
+        public override void PrintCode(CodeWriter cp)
+        {
+            cp.Write(name);
+        }
+
+        public override Type GetResultType()
+        {
+            return type;
+        }
+    }
 }
 #endif

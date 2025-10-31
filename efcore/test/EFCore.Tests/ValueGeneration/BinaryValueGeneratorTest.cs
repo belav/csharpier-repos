@@ -22,6 +22,6 @@ public class BinaryValueGeneratorTest
     }
 
     [ConditionalFact]
-    public void Generates_non_temp_values()
-        => Assert.False(new BinaryValueGenerator().GeneratesTemporaryValues);
+    public void Generates_non_temp_values() =>
+        Assert.False(new BinaryValueGenerator().GeneratesTemporaryValues);
 }

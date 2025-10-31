@@ -12,6 +12,7 @@ namespace System.Xml.Xsl.XsltOld
 #if DEBUG
         private readonly XmlNameTable _NameTable;
 #endif
+
         internal OutKeywords(XmlNameTable nameTable)
         {
             Debug.Assert(nameTable != null);
@@ -94,7 +95,7 @@ namespace System.Xml.Xsl.XsltOld
             get
             {
                 CheckKeyword(_AtomXmlNamespace);
-                return _AtomXmlNamespace;       // http://www.w3.org/XML/1998/namespace
+                return _AtomXmlNamespace; // http://www.w3.org/XML/1998/namespace
             }
         }
 
@@ -103,7 +104,7 @@ namespace System.Xml.Xsl.XsltOld
             get
             {
                 CheckKeyword(_AtomXmlnsNamespace);
-                return _AtomXmlnsNamespace;               // http://www.w3.org/XML/2000/xmlns
+                return _AtomXmlnsNamespace; // http://www.w3.org/XML/2000/xmlns
             }
         }
 

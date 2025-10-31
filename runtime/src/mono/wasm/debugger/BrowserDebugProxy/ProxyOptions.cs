@@ -19,10 +19,7 @@ public class ProxyOptions
         get => DevToolsUrl.Port;
         set
         {
-            var builder = new UriBuilder(DevToolsUrl)
-            {
-                Port = value
-            };
+            var builder = new UriBuilder(DevToolsUrl) { Port = value };
             DevToolsUrl = builder.Uri;
         }
     }

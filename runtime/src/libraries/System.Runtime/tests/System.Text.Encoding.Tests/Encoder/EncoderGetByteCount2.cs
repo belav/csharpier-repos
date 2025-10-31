@@ -80,27 +80,53 @@ namespace System.Text.Tests
         [Fact]
         public void PosTest3()
         {
-            char[] chars = "abcdefghijklmnopqrstuvwxyz1234567890!@#$%^&*()_+-=\\|/?<>  ,.`~".ToCharArray();
+            char[] chars =
+                "abcdefghijklmnopqrstuvwxyz1234567890!@#$%^&*()_+-=\\|/?<>  ,.`~".ToCharArray();
             Encoder encoder = Encoding.UTF8.GetEncoder();
 
             VerificationHelper(encoder, chars, 0, chars.Length, true, chars.Length, "003.1");
             VerificationHelper(encoder, chars, 0, chars.Length, false, chars.Length, "003.2");
 
-            VerificationHelper(encoder, chars, 1, chars.Length - 1, true, chars.Length - 1, "003.3");
-            VerificationHelper(encoder, chars, 1, chars.Length - 1, false, chars.Length - 1, "003.4");
+            VerificationHelper(
+                encoder,
+                chars,
+                1,
+                chars.Length - 1,
+                true,
+                chars.Length - 1,
+                "003.3"
+            );
+            VerificationHelper(
+                encoder,
+                chars,
+                1,
+                chars.Length - 1,
+                false,
+                chars.Length - 1,
+                "003.4"
+            );
         }
 
         // PosTest4: Call GetByteCount to get byte count of an ASCII character array by using Unicode encoder
         [Fact]
         public void PosTest4()
         {
-            char[] chars = "abcdefghijklmnopqrstuvwxyz1234567890!@#$%^&*()_+-=\\|/?<>  ,.`~".ToCharArray();
+            char[] chars =
+                "abcdefghijklmnopqrstuvwxyz1234567890!@#$%^&*()_+-=\\|/?<>  ,.`~".ToCharArray();
             Encoder encoder = Encoding.Unicode.GetEncoder();
 
             VerificationHelper(encoder, chars, 0, chars.Length, true, chars.Length * 2, "004.1");
             VerificationHelper(encoder, chars, 0, chars.Length, false, chars.Length * 2, "004.2");
 
-            VerificationHelper(encoder, chars, 1, chars.Length - 1, true, (chars.Length - 1) * 2, "004.3");
+            VerificationHelper(
+                encoder,
+                chars,
+                1,
+                chars.Length - 1,
+                true,
+                (chars.Length - 1) * 2,
+                "004.3"
+            );
             VerificationHelper(encoder, chars, chars.Length - 1, 1, false, 2, "004.4");
         }
 
@@ -113,12 +139,28 @@ namespace System.Text.Tests
             VerificationHelper(encoder, chars, 0, chars.Length, true, chars.Length * 2, "005.1");
             VerificationHelper(encoder, chars, 0, chars.Length, false, chars.Length * 2, "005.2");
 
-            VerificationHelper(encoder, chars, 1, chars.Length - 1, true, (chars.Length - 1) * 2, "005.3");
+            VerificationHelper(
+                encoder,
+                chars,
+                1,
+                chars.Length - 1,
+                true,
+                (chars.Length - 1) * 2,
+                "005.3"
+            );
             VerificationHelper(encoder, chars, chars.Length - 1, 1, false, 2, "005.4");
         }
         #endregion
 
-        private void VerificationHelper(Encoder encoder, char[] chars, int index, int count, bool flush, int expected, string errorno)
+        private void VerificationHelper(
+            Encoder encoder,
+            char[] chars,
+            int index,
+            int count,
+            bool flush,
+            int expected,
+            string errorno
+        )
         {
             int ret = encoder.GetByteCount(chars, index, count, flush);
             Assert.Equal(expected, ret);

@@ -10,7 +10,7 @@ internal static partial class Interop
     {
         public enum StockObject : int
         {
-            DEFAULT_GUI_FONT = 17
+            DEFAULT_GUI_FONT = 17,
         }
 
         [LibraryImport(Libraries.Gdi32)]

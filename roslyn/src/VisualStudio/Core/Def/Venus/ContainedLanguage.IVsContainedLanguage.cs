@@ -29,7 +29,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Venus
         public int GetTextViewFilter(
             IVsIntellisenseHost intellisenseHost,
             IOleCommandTarget nextCmdTarget,
-            out IVsTextViewFilter textViewFilter)
+            out IVsTextViewFilter textViewFilter
+        )
         {
             var wpfTextView = GetViewFromIVsIntellisenseHost(intellisenseHost);
 
@@ -39,7 +40,12 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Venus
                 return VSConstants.E_FAIL;
             }
 
-            textViewFilter = new VenusCommandFilter(wpfTextView, SubjectBuffer, nextCmdTarget, ComponentModel);
+            textViewFilter = new VenusCommandFilter(
+                wpfTextView,
+                SubjectBuffer,
+                nextCmdTarget,
+                ComponentModel
+            );
 
             return VSConstants.S_OK;
         }
@@ -51,7 +57,13 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Venus
             // The only alternative way to do this is to do very complicated watching of ITextView and IVsTextView
             // lifetimes to correlate them, but that requires running code in those code paths for all views which
             // seems a bit overkill for our needs.
-            var field = intellisenseHost.GetType().GetField("_simpleTextViewWindow", System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance);
+            var field = intellisenseHost
+                .GetType()
+                .GetField(
+                    "_simpleTextViewWindow",
+                    System.Reflection.BindingFlags.NonPublic
+                        | System.Reflection.BindingFlags.Instance
+                );
             if (field == null)
             {
                 return null;
@@ -65,8 +77,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Venus
             return _editorAdaptersFactoryService.GetWpfTextView(view);
         }
 
-        public int Refresh(uint refreshMode)
-            => VSConstants.S_OK;
+        public int Refresh(uint refreshMode) => VSConstants.S_OK;
 
         public int SetBufferCoordinator(IVsTextBufferCoordinator pBC)
         {
@@ -92,7 +103,6 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Venus
             return VSConstants.S_OK;
         }
 
-        public int WaitForReadyState()
-            => VSConstants.S_OK;
+        public int WaitForReadyState() => VSConstants.S_OK;
     }
 }

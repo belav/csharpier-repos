@@ -221,12 +221,11 @@ public class CookieChunkingTests
             "TestCookieC7=STUVWXYZ",
         };
 
-        Assert.Throws<FormatException>(
-            () =>
-                new ChunkingCookieManager() { ThrowForPartialCookies = true }.GetRequestCookie(
-                    context,
-                    "TestCookie"
-                )
+        Assert.Throws<FormatException>(() =>
+            new ChunkingCookieManager() { ThrowForPartialCookies = true }.GetRequestCookie(
+                context,
+                "TestCookie"
+            )
         );
     }
 

@@ -1,21 +1,19 @@
 namespace System.Workflow.ComponentModel.Design
 {
     using System;
-    using System.Text;
-    using System.Reflection;
-    using System.Collections;
     using System.CodeDom;
+    using System.Collections;
     using System.ComponentModel;
     using System.ComponentModel.Design;
     using System.Drawing;
     using System.Drawing.Drawing2D;
+    using System.Reflection;
+    using System.Text;
     using System.Workflow.ComponentModel.Design;
 
     #region Class SuspendDesigner
     [ActivityDesignerTheme(typeof(SuspendDesignerTheme))]
-    internal sealed class SuspendDesigner : ActivityDesigner
-    {
-    }
+    internal sealed class SuspendDesigner : ActivityDesigner { }
     #endregion
 
     #region SuspendDesignerTheme

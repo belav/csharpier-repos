@@ -12,29 +12,52 @@ namespace Microsoft.CodeAnalysis.CSharp
     {
         internal class UncommonData
         {
-            public static UncommonData UnconvertedInterpolatedStringAddition(ConstantValue? constantValue) =>
+            public static UncommonData UnconvertedInterpolatedStringAddition(
+                ConstantValue? constantValue
+            ) =>
                 new UncommonData(
                     constantValue,
                     method: null,
                     constrainedToType: null,
                     originalUserDefinedOperatorsOpt: default,
                     isUnconvertedInterpolatedStringAddition: true,
-                    interpolatedStringHandlerData: null);
+                    interpolatedStringHandlerData: null
+                );
 
-            public static UncommonData InterpolatedStringHandlerAddition(InterpolatedStringHandlerData data)
-                => new UncommonData(
+            public static UncommonData InterpolatedStringHandlerAddition(
+                InterpolatedStringHandlerData data
+            ) =>
+                new UncommonData(
                     constantValue: null,
                     method: null,
                     constrainedToType: null,
                     originalUserDefinedOperatorsOpt: default,
                     isUnconvertedInterpolatedStringAddition: false,
-                    data);
+                    data
+                );
 
-            public static UncommonData? CreateIfNeeded(ConstantValue? constantValue, MethodSymbol? method, TypeSymbol? constrainedToType, ImmutableArray<MethodSymbol> originalUserDefinedOperatorsOpt)
+            public static UncommonData? CreateIfNeeded(
+                ConstantValue? constantValue,
+                MethodSymbol? method,
+                TypeSymbol? constrainedToType,
+                ImmutableArray<MethodSymbol> originalUserDefinedOperatorsOpt
+            )
             {
-                if (constantValue != null || method is not null || constrainedToType is not null || !originalUserDefinedOperatorsOpt.IsDefault)
+                if (
+                    constantValue != null
+                    || method is not null
+                    || constrainedToType is not null
+                    || !originalUserDefinedOperatorsOpt.IsDefault
+                )
                 {
-                    return new UncommonData(constantValue, method, constrainedToType, originalUserDefinedOperatorsOpt, isUnconvertedInterpolatedStringAddition: false, interpolatedStringHandlerData: null);
+                    return new UncommonData(
+                        constantValue,
+                        method,
+                        constrainedToType,
+                        originalUserDefinedOperatorsOpt,
+                        isUnconvertedInterpolatedStringAddition: false,
+                        interpolatedStringHandlerData: null
+                    );
                 }
 
                 return null;
@@ -51,9 +74,19 @@ namespace Microsoft.CodeAnalysis.CSharp
             // was unable to choose a best method.
             public readonly ImmutableArray<MethodSymbol> OriginalUserDefinedOperatorsOpt;
 
-            private UncommonData(ConstantValue? constantValue, MethodSymbol? method, TypeSymbol? constrainedToType, ImmutableArray<MethodSymbol> originalUserDefinedOperatorsOpt, bool isUnconvertedInterpolatedStringAddition, InterpolatedStringHandlerData? interpolatedStringHandlerData)
+            private UncommonData(
+                ConstantValue? constantValue,
+                MethodSymbol? method,
+                TypeSymbol? constrainedToType,
+                ImmutableArray<MethodSymbol> originalUserDefinedOperatorsOpt,
+                bool isUnconvertedInterpolatedStringAddition,
+                InterpolatedStringHandlerData? interpolatedStringHandlerData
+            )
             {
-                Debug.Assert(interpolatedStringHandlerData is null || !isUnconvertedInterpolatedStringAddition);
+                Debug.Assert(
+                    interpolatedStringHandlerData is null
+                        || !isUnconvertedInterpolatedStringAddition
+                );
                 ConstantValue = constantValue;
                 Method = method;
                 ConstrainedToType = constrainedToType;
@@ -69,7 +102,14 @@ namespace Microsoft.CodeAnalysis.CSharp
                     return this;
                 }
 
-                return new UncommonData(ConstantValue, method, ConstrainedToType, OriginalUserDefinedOperatorsOpt, IsUnconvertedInterpolatedStringAddition, InterpolatedStringHandlerData);
+                return new UncommonData(
+                    ConstantValue,
+                    method,
+                    ConstrainedToType,
+                    OriginalUserDefinedOperatorsOpt,
+                    IsUnconvertedInterpolatedStringAddition,
+                    InterpolatedStringHandlerData
+                );
             }
         }
     }

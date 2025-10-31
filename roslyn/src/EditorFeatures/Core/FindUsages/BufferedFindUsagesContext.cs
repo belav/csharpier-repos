@@ -13,11 +13,13 @@ using Roslyn.Utilities;
 namespace Microsoft.CodeAnalysis.FindUsages;
 
 /// <summary>
-/// An impl of <see cref="IFindUsagesContext"/> that will buffer results internally to either be shown to the 
-/// user immediately if the find command completes quickly, or which will be pushed into the streaming presenter 
+/// An impl of <see cref="IFindUsagesContext"/> that will buffer results internally to either be shown to the
+/// user immediately if the find command completes quickly, or which will be pushed into the streaming presenter
 /// if the search is taking too long.
 /// </summary>
-internal sealed class BufferedFindUsagesContext(IGlobalOptionService globalOptions) : IFindUsagesContext, IStreamingProgressTracker
+internal sealed class BufferedFindUsagesContext(IGlobalOptionService globalOptions)
+    : IFindUsagesContext,
+        IStreamingProgressTracker
 {
     private class State
     {
@@ -26,7 +28,8 @@ internal sealed class BufferedFindUsagesContext(IGlobalOptionService globalOptio
         public string? Message;
         public string? InformationalMessage;
         public string? SearchTitle;
-        public ImmutableArray<DefinitionItem>.Builder Definitions = ImmutableArray.CreateBuilder<DefinitionItem>();
+        public ImmutableArray<DefinitionItem>.Builder Definitions =
+            ImmutableArray.CreateBuilder<DefinitionItem>();
     }
 
     private readonly IGlobalOptionService _globalOptions = globalOptions;
@@ -37,7 +40,7 @@ internal sealed class BufferedFindUsagesContext(IGlobalOptionService globalOptio
     private readonly SemaphoreSlim _gate = new(initialCount: 1);
 
     /// <summary>
-    /// The underlying presenter context to forward messages to once the presenter is opened.  Prior to having 
+    /// The underlying presenter context to forward messages to once the presenter is opened.  Prior to having
     /// this, we will buffer the results within ourselves.
     /// </summary>
     private IFindUsagesContext? _streamingPresenterContext;
@@ -45,7 +48,7 @@ internal sealed class BufferedFindUsagesContext(IGlobalOptionService globalOptio
     /// <summary>
     /// Values we buffer inside ourselves until <see cref="_streamingPresenterContext"/> is non-null.  Once non-null,
     /// we'll push the values into it and forward all future calls from that point to it.
-    /// </summary> 
+    /// </summary>
     private State? _state = new();
 
     [MemberNotNullWhen(true, nameof(_streamingPresenterContext))]
@@ -62,52 +65,81 @@ internal sealed class BufferedFindUsagesContext(IGlobalOptionService globalOptio
     public async Task<string?> GetMessageAsync(CancellationToken cancellationToken)
     {
         using var _ = await _gate.DisposableWaitAsync(cancellationToken).ConfigureAwait(false);
-        Contract.ThrowIfTrue(IsSwapped, "Should not be called if we've switched over to the streaming presenter");
+        Contract.ThrowIfTrue(
+            IsSwapped,
+            "Should not be called if we've switched over to the streaming presenter"
+        );
         return _state.Message;
     }
 
     public async Task<string?> GetInformationalMessageAsync(CancellationToken cancellationToken)
     {
         using var _ = await _gate.DisposableWaitAsync(cancellationToken).ConfigureAwait(false);
-        Contract.ThrowIfTrue(IsSwapped, "Should not be called if we've switched over to the streaming presenter");
+        Contract.ThrowIfTrue(
+            IsSwapped,
+            "Should not be called if we've switched over to the streaming presenter"
+        );
         return _state.InformationalMessage;
     }
 
     public async Task<string?> GetSearchTitleAsync(CancellationToken cancellationToken)
     {
         using var _ = await _gate.DisposableWaitAsync(cancellationToken).ConfigureAwait(false);
-        Contract.ThrowIfTrue(IsSwapped, "Should not be called if we've switched over to the streaming presenter");
+        Contract.ThrowIfTrue(
+            IsSwapped,
+            "Should not be called if we've switched over to the streaming presenter"
+        );
         return _state.SearchTitle;
     }
 
-    public async Task<ImmutableArray<DefinitionItem>> GetDefinitionsAsync(CancellationToken cancellationToken)
+    public async Task<ImmutableArray<DefinitionItem>> GetDefinitionsAsync(
+        CancellationToken cancellationToken
+    )
     {
         using var _ = await _gate.DisposableWaitAsync(cancellationToken).ConfigureAwait(false);
-        Contract.ThrowIfTrue(IsSwapped, "Should not be called if we've switched over to the streaming presenter");
+        Contract.ThrowIfTrue(
+            IsSwapped,
+            "Should not be called if we've switched over to the streaming presenter"
+        );
         return _state.Definitions.ToImmutable();
     }
 
-    public async Task AttachToStreamingPresenterAsync(IFindUsagesContext presenterContext, CancellationToken cancellationToken)
+    public async Task AttachToStreamingPresenterAsync(
+        IFindUsagesContext presenterContext,
+        CancellationToken cancellationToken
+    )
     {
         using var _ = await _gate.DisposableWaitAsync(cancellationToken).ConfigureAwait(false);
         Contract.ThrowIfTrue(IsSwapped, "Trying to set the presenter multiple times.");
 
         // Push all values we've buffered into the new presenter context.
 
-        await presenterContext.ProgressTracker.AddItemsAsync(_state.TotalItemCount, cancellationToken).ConfigureAwait(false);
-        await presenterContext.ProgressTracker.ItemsCompletedAsync(_state.ItemsCompleted, cancellationToken).ConfigureAwait(false);
+        await presenterContext
+            .ProgressTracker.AddItemsAsync(_state.TotalItemCount, cancellationToken)
+            .ConfigureAwait(false);
+        await presenterContext
+            .ProgressTracker.ItemsCompletedAsync(_state.ItemsCompleted, cancellationToken)
+            .ConfigureAwait(false);
 
         if (_state.SearchTitle != null)
-            await presenterContext.SetSearchTitleAsync(_state.SearchTitle, cancellationToken).ConfigureAwait(false);
+            await presenterContext
+                .SetSearchTitleAsync(_state.SearchTitle, cancellationToken)
+                .ConfigureAwait(false);
 
         if (_state.Message != null)
-            await presenterContext.ReportMessageAsync(_state.Message, cancellationToken).ConfigureAwait(false);
+            await presenterContext
+                .ReportMessageAsync(_state.Message, cancellationToken)
+                .ConfigureAwait(false);
 
         if (_state.InformationalMessage != null)
-            await presenterContext.ReportInformationalMessageAsync(_state.InformationalMessage, cancellationToken).ConfigureAwait(false);
+            await presenterContext
+                .ReportInformationalMessageAsync(_state.InformationalMessage, cancellationToken)
+                .ConfigureAwait(false);
 
         foreach (var definition in _state.Definitions)
-            await presenterContext.OnDefinitionFoundAsync(definition, cancellationToken).ConfigureAwait(false);
+            await presenterContext
+                .OnDefinitionFoundAsync(definition, cancellationToken)
+                .ConfigureAwait(false);
 
         // Now swap over to the presenter being the sink for all future callbacks, and clear any buffered data.
         _streamingPresenterContext = presenterContext;
@@ -118,12 +150,17 @@ internal sealed class BufferedFindUsagesContext(IGlobalOptionService globalOptio
 
     IStreamingProgressTracker IFindUsagesContext.ProgressTracker => this;
 
-    async ValueTask IStreamingProgressTracker.AddItemsAsync(int count, CancellationToken cancellationToken)
+    async ValueTask IStreamingProgressTracker.AddItemsAsync(
+        int count,
+        CancellationToken cancellationToken
+    )
     {
         using var _ = await _gate.DisposableWaitAsync(cancellationToken).ConfigureAwait(false);
         if (IsSwapped)
         {
-            await _streamingPresenterContext.ProgressTracker.AddItemsAsync(count, cancellationToken).ConfigureAwait(false);
+            await _streamingPresenterContext
+                .ProgressTracker.AddItemsAsync(count, cancellationToken)
+                .ConfigureAwait(false);
         }
         else
         {
@@ -131,12 +168,17 @@ internal sealed class BufferedFindUsagesContext(IGlobalOptionService globalOptio
         }
     }
 
-    async ValueTask IStreamingProgressTracker.ItemsCompletedAsync(int count, CancellationToken cancellationToken)
+    async ValueTask IStreamingProgressTracker.ItemsCompletedAsync(
+        int count,
+        CancellationToken cancellationToken
+    )
     {
         using var _ = await _gate.DisposableWaitAsync(cancellationToken).ConfigureAwait(false);
         if (IsSwapped)
         {
-            await _streamingPresenterContext.ProgressTracker.ItemsCompletedAsync(count, cancellationToken).ConfigureAwait(false);
+            await _streamingPresenterContext
+                .ProgressTracker.ItemsCompletedAsync(count, cancellationToken)
+                .ConfigureAwait(false);
         }
         else
         {
@@ -148,15 +190,22 @@ internal sealed class BufferedFindUsagesContext(IGlobalOptionService globalOptio
 
     #region IFindUsagesContext
 
-    ValueTask<FindUsagesOptions> IFindUsagesContext.GetOptionsAsync(string language, CancellationToken cancellationToken)
-        => ValueTaskFactory.FromResult(_globalOptions.GetFindUsagesOptions(language));
+    ValueTask<FindUsagesOptions> IFindUsagesContext.GetOptionsAsync(
+        string language,
+        CancellationToken cancellationToken
+    ) => ValueTaskFactory.FromResult(_globalOptions.GetFindUsagesOptions(language));
 
-    async ValueTask IFindUsagesContext.ReportMessageAsync(string message, CancellationToken cancellationToken)
+    async ValueTask IFindUsagesContext.ReportMessageAsync(
+        string message,
+        CancellationToken cancellationToken
+    )
     {
         using var _ = await _gate.DisposableWaitAsync(cancellationToken).ConfigureAwait(false);
         if (IsSwapped)
         {
-            await _streamingPresenterContext.ReportMessageAsync(message, cancellationToken).ConfigureAwait(false);
+            await _streamingPresenterContext
+                .ReportMessageAsync(message, cancellationToken)
+                .ConfigureAwait(false);
         }
         else
         {
@@ -164,12 +213,17 @@ internal sealed class BufferedFindUsagesContext(IGlobalOptionService globalOptio
         }
     }
 
-    async ValueTask IFindUsagesContext.ReportInformationalMessageAsync(string message, CancellationToken cancellationToken)
+    async ValueTask IFindUsagesContext.ReportInformationalMessageAsync(
+        string message,
+        CancellationToken cancellationToken
+    )
     {
         using var _ = await _gate.DisposableWaitAsync(cancellationToken).ConfigureAwait(false);
         if (IsSwapped)
         {
-            await _streamingPresenterContext.ReportInformationalMessageAsync(message, cancellationToken).ConfigureAwait(false);
+            await _streamingPresenterContext
+                .ReportInformationalMessageAsync(message, cancellationToken)
+                .ConfigureAwait(false);
         }
         else
         {
@@ -177,12 +231,17 @@ internal sealed class BufferedFindUsagesContext(IGlobalOptionService globalOptio
         }
     }
 
-    async ValueTask IFindUsagesContext.SetSearchTitleAsync(string title, CancellationToken cancellationToken)
+    async ValueTask IFindUsagesContext.SetSearchTitleAsync(
+        string title,
+        CancellationToken cancellationToken
+    )
     {
         using var _ = await _gate.DisposableWaitAsync(cancellationToken).ConfigureAwait(false);
         if (IsSwapped)
         {
-            await _streamingPresenterContext.SetSearchTitleAsync(title, cancellationToken).ConfigureAwait(false);
+            await _streamingPresenterContext
+                .SetSearchTitleAsync(title, cancellationToken)
+                .ConfigureAwait(false);
         }
         else
         {
@@ -190,12 +249,17 @@ internal sealed class BufferedFindUsagesContext(IGlobalOptionService globalOptio
         }
     }
 
-    async ValueTask IFindUsagesContext.OnDefinitionFoundAsync(DefinitionItem definition, CancellationToken cancellationToken)
+    async ValueTask IFindUsagesContext.OnDefinitionFoundAsync(
+        DefinitionItem definition,
+        CancellationToken cancellationToken
+    )
     {
         using var _ = await _gate.DisposableWaitAsync(cancellationToken).ConfigureAwait(false);
         if (IsSwapped)
         {
-            await _streamingPresenterContext.OnDefinitionFoundAsync(definition, cancellationToken).ConfigureAwait(false);
+            await _streamingPresenterContext
+                .OnDefinitionFoundAsync(definition, cancellationToken)
+                .ConfigureAwait(false);
         }
         else
         {
@@ -203,7 +267,10 @@ internal sealed class BufferedFindUsagesContext(IGlobalOptionService globalOptio
         }
     }
 
-    ValueTask IFindUsagesContext.OnReferenceFoundAsync(SourceReferenceItem reference, CancellationToken cancellationToken)
+    ValueTask IFindUsagesContext.OnReferenceFoundAsync(
+        SourceReferenceItem reference,
+        CancellationToken cancellationToken
+    )
     {
         // Entirely ignored.  These features do not show references.
         Contract.Fail("GoToImpl/Base should never report a reference.");

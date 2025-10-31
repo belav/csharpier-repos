@@ -6,7 +6,6 @@ using Microsoft.CodeAnalysis.Editor.UnitTests.Workspaces;
 
 namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.ArgumentProviders
 {
-    public abstract class AbstractCSharpArgumentProviderTests : AbstractCSharpArgumentProviderTests<CSharpTestWorkspaceFixture>
-    {
-    }
+    public abstract class AbstractCSharpArgumentProviderTests
+        : AbstractCSharpArgumentProviderTests<CSharpTestWorkspaceFixture> { }
 }

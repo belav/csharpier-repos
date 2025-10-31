@@ -64,7 +64,7 @@ namespace Microsoft.CodeAnalysis.Text
         /// The position to check.
         /// </param>
         /// <returns>
-        /// <c>true</c> if the position is greater than or equal to Start and strictly less 
+        /// <c>true</c> if the position is greater than or equal to Start and strictly less
         /// than End, otherwise <c>false</c>.
         /// </returns>
         public bool Contains(int position)
@@ -87,8 +87,8 @@ namespace Microsoft.CodeAnalysis.Text
         }
 
         /// <summary>
-        /// Determines whether <paramref name="span"/> overlaps this span. Two spans are considered to overlap 
-        /// if they have positions in common and neither is empty. Empty spans do not overlap with any 
+        /// Determines whether <paramref name="span"/> overlaps this span. Two spans are considered to overlap
+        /// if they have positions in common and neither is empty. Empty spans do not overlap with any
         /// other span.
         /// </summary>
         /// <param name="span">
@@ -125,8 +125,8 @@ namespace Microsoft.CodeAnalysis.Text
         }
 
         /// <summary>
-        /// Determines whether <paramref name="span"/> intersects this span. Two spans are considered to 
-        /// intersect if they have positions in common or the end of one span 
+        /// Determines whether <paramref name="span"/> intersects this span. Two spans are considered to
+        /// intersect if they have positions in common or the end of one span
         /// coincides with the start of the other span.
         /// </summary>
         /// <param name="span">
@@ -141,7 +141,7 @@ namespace Microsoft.CodeAnalysis.Text
         }
 
         /// <summary>
-        /// Determines whether <paramref name="position"/> intersects this span. 
+        /// Determines whether <paramref name="position"/> intersects this span.
         /// A position is considered to intersect if it is between the start and
         /// end positions (inclusive) of this span.
         /// </summary>
@@ -178,20 +178,26 @@ namespace Microsoft.CodeAnalysis.Text
         /// <summary>
         /// Creates a new <see cref="TextSpan"/> from <paramref name="start" /> and <paramref
         /// name="end"/> positions as opposed to a position and length.
-        /// 
-        /// The returned TextSpan contains the range with <paramref name="start"/> inclusive, 
+        ///
+        /// The returned TextSpan contains the range with <paramref name="start"/> inclusive,
         /// and <paramref name="end"/> exclusive.
         /// </summary>
         public static TextSpan FromBounds(int start, int end)
         {
             if (start < 0)
             {
-                throw new ArgumentOutOfRangeException(nameof(start), CodeAnalysisResources.StartMustNotBeNegative);
+                throw new ArgumentOutOfRangeException(
+                    nameof(start),
+                    CodeAnalysisResources.StartMustNotBeNegative
+                );
             }
 
             if (end < start)
             {
-                throw new ArgumentOutOfRangeException(nameof(end), string.Format(CodeAnalysisResources.EndMustNotBeLessThanStart, start, end));
+                throw new ArgumentOutOfRangeException(
+                    nameof(end),
+                    string.Format(CodeAnalysisResources.EndMustNotBeLessThanStart, start, end)
+                );
             }
 
             return new TextSpan(start, end - start);
@@ -224,8 +230,7 @@ namespace Microsoft.CodeAnalysis.Text
         /// <summary>
         /// Determines if current instance of <see cref="TextSpan"/> is equal to another.
         /// </summary>
-        public override bool Equals(object? obj)
-            => obj is TextSpan span && Equals(span);
+        public override bool Equals(object? obj) => obj is TextSpan span && Equals(span);
 
         /// <summary>
         /// Produces a hash code for <see cref="TextSpan"/>.

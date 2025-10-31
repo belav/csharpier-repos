@@ -24,7 +24,8 @@ public class CollectionResultExpression : Expression, IPrintableExpression
     public CollectionResultExpression(
         ProjectionBindingExpression projectionBindingExpression,
         INavigationBase? navigation,
-        Type elementType)
+        Type elementType
+    )
     {
         ProjectionBindingExpression = projectionBindingExpression;
         Navigation = navigation;
@@ -47,17 +48,16 @@ public class CollectionResultExpression : Expression, IPrintableExpression
     public virtual Type ElementType { get; }
 
     /// <inheritdoc />
-    public override Type Type
-        => ProjectionBindingExpression.Type;
+    public override Type Type => ProjectionBindingExpression.Type;
 
     /// <inheritdoc />
-    public override ExpressionType NodeType
-        => ExpressionType.Extension;
+    public override ExpressionType NodeType => ExpressionType.Extension;
 
     /// <inheritdoc />
     protected override Expression VisitChildren(ExpressionVisitor visitor)
     {
-        var projectionBindingExpression = (ProjectionBindingExpression)visitor.Visit(ProjectionBindingExpression);
+        var projectionBindingExpression = (ProjectionBindingExpression)
+            visitor.Visit(ProjectionBindingExpression);
 
         return Update(projectionBindingExpression);
     }
@@ -68,8 +68,10 @@ public class CollectionResultExpression : Expression, IPrintableExpression
     /// </summary>
     /// <param name="projectionBindingExpression">The <see cref="ProjectionBindingExpression" /> property of the result.</param>
     /// <returns>This expression if no children changed, or an expression with the updated children.</returns>
-    public virtual CollectionResultExpression Update(ProjectionBindingExpression projectionBindingExpression)
-        => projectionBindingExpression != ProjectionBindingExpression
+    public virtual CollectionResultExpression Update(
+        ProjectionBindingExpression projectionBindingExpression
+    ) =>
+        projectionBindingExpression != ProjectionBindingExpression
             ? new CollectionResultExpression(projectionBindingExpression, Navigation, ElementType)
             : this;
 

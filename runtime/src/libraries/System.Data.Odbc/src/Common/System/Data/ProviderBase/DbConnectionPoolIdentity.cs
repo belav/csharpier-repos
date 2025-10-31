@@ -5,7 +5,11 @@ namespace System.Data.ProviderBase
 {
     internal sealed partial class DbConnectionPoolIdentity
     {
-        public static readonly DbConnectionPoolIdentity NoIdentity = new DbConnectionPoolIdentity(string.Empty, false, true);
+        public static readonly DbConnectionPoolIdentity NoIdentity = new DbConnectionPoolIdentity(
+            string.Empty,
+            false,
+            true
+        );
 
         private readonly string _sidString;
         private readonly bool _isRestricted;
@@ -36,7 +40,11 @@ namespace System.Data.ProviderBase
             if (!result && (null != value))
             {
                 DbConnectionPoolIdentity that = ((DbConnectionPoolIdentity)value);
-                result = ((_sidString == that._sidString) && (_isRestricted == that._isRestricted) && (_isNetwork == that._isNetwork));
+                result = (
+                    (_sidString == that._sidString)
+                    && (_isRestricted == that._isRestricted)
+                    && (_isNetwork == that._isNetwork)
+                );
             }
             return result;
         }

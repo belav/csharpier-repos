@@ -28,7 +28,11 @@ namespace Microsoft.CodeAnalysis.CSharp
             _parameters = parameters;
         }
 
-        internal override void AddLookupSymbolsInfoInSingleBinder(LookupSymbolsInfo result, LookupOptions options, Binder originalBinder)
+        internal override void AddLookupSymbolsInfoInSingleBinder(
+            LookupSymbolsInfo result,
+            LookupOptions options,
+            Binder originalBinder
+        )
         {
             if (options.CanConsiderLocals())
             {
@@ -43,9 +47,22 @@ namespace Microsoft.CodeAnalysis.CSharp
         }
 
         internal override void LookupSymbolsInSingleBinder(
-            LookupResult result, string name, int arity, ConsList<TypeSymbol> basesBeingResolved, LookupOptions options, Binder originalBinder, bool diagnose, ref CompoundUseSiteInfo<AssemblySymbol> useSiteInfo)
+            LookupResult result,
+            string name,
+            int arity,
+            ConsList<TypeSymbol> basesBeingResolved,
+            LookupOptions options,
+            Binder originalBinder,
+            bool diagnose,
+            ref CompoundUseSiteInfo<AssemblySymbol> useSiteInfo
+        )
         {
-            if ((options & (LookupOptions.NamespaceAliasesOnly | LookupOptions.MustBeInvocableIfMember)) != 0)
+            if (
+                (
+                    options
+                    & (LookupOptions.NamespaceAliasesOnly | LookupOptions.MustBeInvocableIfMember)
+                ) != 0
+            )
             {
                 return;
             }
@@ -56,7 +73,16 @@ namespace Microsoft.CodeAnalysis.CSharp
             {
                 if (parameter.Name == name)
                 {
-                    result.MergeEqual(originalBinder.CheckViability(parameter, arity, options, null, diagnose, ref useSiteInfo));
+                    result.MergeEqual(
+                        originalBinder.CheckViability(
+                            parameter,
+                            arity,
+                            options,
+                            null,
+                            diagnose,
+                            ref useSiteInfo
+                        )
+                    );
                 }
             }
         }

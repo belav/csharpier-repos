@@ -6,14 +6,20 @@ using System.Web.Mvc.Properties;
 
 namespace System.Web.Mvc
 {
-    [SuppressMessage("Microsoft.Performance", "CA1813:AvoidUnsealedAttributes", Justification = "Unsealed because type contains virtual extensibility points.")]
-    [AttributeUsage(AttributeTargets.Class | AttributeTargets.Method, Inherited = true, AllowMultiple = false)]
+    [SuppressMessage(
+        "Microsoft.Performance",
+        "CA1813:AvoidUnsealedAttributes",
+        Justification = "Unsealed because type contains virtual extensibility points."
+    )]
+    [AttributeUsage(
+        AttributeTargets.Class | AttributeTargets.Method,
+        Inherited = true,
+        AllowMultiple = false
+    )]
     public class RequireHttpsAttribute : FilterAttribute, IAuthorizationFilter
     {
         public RequireHttpsAttribute()
-            : this(permanent: false)
-        {
-        }
+            : this(permanent: false) { }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="RequireHttpsAttribute"/> class.
@@ -47,13 +53,22 @@ namespace System.Web.Mvc
             // only redirect for GET requests, otherwise the browser might not propagate the verb and request
             // body correctly.
 
-            if (!String.Equals(filterContext.HttpContext.Request.HttpMethod, "GET", StringComparison.OrdinalIgnoreCase))
+            if (
+                !String.Equals(
+                    filterContext.HttpContext.Request.HttpMethod,
+                    "GET",
+                    StringComparison.OrdinalIgnoreCase
+                )
+            )
             {
                 throw new InvalidOperationException(MvcResources.RequireHttpsAttribute_MustUseSsl);
             }
 
             // redirect to HTTPS version of page
-            string url = "https://" + filterContext.HttpContext.Request.Url.Host + filterContext.HttpContext.Request.RawUrl;
+            string url =
+                "https://"
+                + filterContext.HttpContext.Request.Url.Host
+                + filterContext.HttpContext.Request.RawUrl;
             filterContext.Result = new RedirectResult(url, this.Permanent);
         }
     }

@@ -9,19 +9,22 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.HtmlControls;
 
-namespace System.Web.UI.WebControls {
+namespace System.Web.UI.WebControls
+{
     /// <summary>
     /// Summary description for ListViewTableRow
     /// </summary>
-    internal class ListViewTableRow : HtmlTableRow {
-        public ListViewTableRow() {
-        }
+    internal class ListViewTableRow : HtmlTableRow
+    {
+        public ListViewTableRow() { }
 
-        protected override ControlCollection CreateControlCollection() {
+        protected override ControlCollection CreateControlCollection()
+        {
             return new ControlCollection(this);
         }
 
-        protected internal override void Render(HtmlTextWriter writer) {
+        protected internal override void Render(HtmlTextWriter writer)
+        {
             RenderChildren(writer);
         }
     }

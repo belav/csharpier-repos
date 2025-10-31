@@ -4,8 +4,8 @@
 
 using System;
 using System.Collections.Generic;
-using System.Diagnostics.CodeAnalysis;
 using System.Diagnostics;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
@@ -23,17 +23,29 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
     {
         /// <paramref name="nameSyntax"><see langword="true"/> if only normal name-syntax nodes should be returned.
         /// <see langword="false"/> if special nodes (like predefined types) can be used.</paramref>
-        public static ExpressionSyntax GenerateExpressionSyntax(this ITypeSymbol typeSymbol, bool nameSyntax = false)
-            => typeSymbol.Accept(ExpressionSyntaxGeneratorVisitor.Create(nameSyntax))!.WithAdditionalAnnotations(Simplifier.Annotation);
+        public static ExpressionSyntax GenerateExpressionSyntax(
+            this ITypeSymbol typeSymbol,
+            bool nameSyntax = false
+        ) =>
+            typeSymbol
+                .Accept(ExpressionSyntaxGeneratorVisitor.Create(nameSyntax))!
+                .WithAdditionalAnnotations(Simplifier.Annotation);
 
-        public static NameSyntax GenerateNameSyntax(this INamespaceOrTypeSymbol symbol, bool allowVar = true)
-            => (NameSyntax)GenerateTypeSyntax(symbol, nameSyntax: true, allowVar: allowVar);
+        public static NameSyntax GenerateNameSyntax(
+            this INamespaceOrTypeSymbol symbol,
+            bool allowVar = true
+        ) => (NameSyntax)GenerateTypeSyntax(symbol, nameSyntax: true, allowVar: allowVar);
 
-        public static TypeSyntax GenerateTypeSyntax(this INamespaceOrTypeSymbol symbol, bool allowVar = true)
-            => GenerateTypeSyntax(symbol, nameSyntax: false, allowVar: allowVar);
+        public static TypeSyntax GenerateTypeSyntax(
+            this INamespaceOrTypeSymbol symbol,
+            bool allowVar = true
+        ) => GenerateTypeSyntax(symbol, nameSyntax: false, allowVar: allowVar);
 
         private static TypeSyntax GenerateTypeSyntax(
-            INamespaceOrTypeSymbol symbol, bool nameSyntax, bool allowVar = true)
+            INamespaceOrTypeSymbol symbol,
+            bool nameSyntax,
+            bool allowVar = true
+        )
         {
             var type = symbol as ITypeSymbol;
             var containsAnonymousType = type != null && type.ContainsAnonymousType();
@@ -47,8 +59,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
 
             var syntax = containsAnonymousType
                 ? TypeSyntaxGeneratorVisitor.CreateSystemObject()
-                : symbol.Accept(TypeSyntaxGeneratorVisitor.Create(nameSyntax))!
-                        .WithAdditionalAnnotations(Simplifier.Annotation);
+                : symbol
+                    .Accept(TypeSyntaxGeneratorVisitor.Create(nameSyntax))!
+                    .WithAdditionalAnnotations(Simplifier.Annotation);
 
             if (!allowVar)
                 syntax = syntax.WithAdditionalAnnotations(DoNotAllowVarAnnotation.Annotation);
@@ -58,8 +71,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
                 var additionalAnnotation = type.NullableAnnotation switch
                 {
                     NullableAnnotation.None => NullableSyntaxAnnotationEx.Oblivious,
-                    NullableAnnotation.Annotated => NullableSyntaxAnnotationEx.AnnotatedOrNotAnnotated,
-                    NullableAnnotation.NotAnnotated => NullableSyntaxAnnotationEx.AnnotatedOrNotAnnotated,
+                    NullableAnnotation.Annotated =>
+                        NullableSyntaxAnnotationEx.AnnotatedOrNotAnnotated,
+                    NullableAnnotation.NotAnnotated =>
+                        NullableSyntaxAnnotationEx.AnnotatedOrNotAnnotated,
                     _ => throw ExceptionUtilities.UnexpectedValue(type.NullableAnnotation),
                 };
 
@@ -70,8 +85,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
             return syntax;
         }
 
-        public static TypeSyntax GenerateRefTypeSyntax(
-            this INamespaceOrTypeSymbol symbol)
+        public static TypeSyntax GenerateRefTypeSyntax(this INamespaceOrTypeSymbol symbol)
         {
             var underlyingType = GenerateTypeSyntax(symbol)
                 .WithPrependedLeadingTrivia(SyntaxFactory.ElasticMarker)
@@ -80,8 +94,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
             return SyntaxFactory.RefType(refKeyword, underlyingType);
         }
 
-        public static TypeSyntax GenerateRefReadOnlyTypeSyntax(
-            this INamespaceOrTypeSymbol symbol)
+        public static TypeSyntax GenerateRefReadOnlyTypeSyntax(this INamespaceOrTypeSymbol symbol)
         {
             var underlyingType = GenerateTypeSyntax(symbol)
                 .WithPrependedLeadingTrivia(SyntaxFactory.ElasticMarker)
@@ -97,19 +110,28 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
             {
                 foreach (var reference in containingType.DeclaringSyntaxReferences)
                 {
-                    if (reference.GetSyntax().ChildTokens().Any(t => t.IsKind(SyntaxKind.UnsafeKeyword)))
+                    if (
+                        reference
+                            .GetSyntax()
+                            .ChildTokens()
+                            .Any(t => t.IsKind(SyntaxKind.UnsafeKeyword))
+                    )
                     {
                         return true;
                     }
                 }
 
                 containingType = containingType.ContainingType;
-            }
-            while (containingType != null);
+            } while (containingType != null);
             return false;
         }
 
-        public static async Task<ISymbol?> FindApplicableAliasAsync(this ITypeSymbol type, int position, SemanticModel semanticModel, CancellationToken cancellationToken)
+        public static async Task<ISymbol?> FindApplicableAliasAsync(
+            this ITypeSymbol type,
+            int position,
+            SemanticModel semanticModel,
+            CancellationToken cancellationToken
+        )
         {
             try
             {
@@ -119,12 +141,16 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
                     semanticModel = semanticModel.ParentModel;
                 }
 
-                var root = await semanticModel.SyntaxTree.GetRootAsync(cancellationToken).ConfigureAwait(false);
+                var root = await semanticModel
+                    .SyntaxTree.GetRootAsync(cancellationToken)
+                    .ConfigureAwait(false);
 
                 var applicableUsings = GetApplicableUsings(position, (CompilationUnitSyntax)root);
                 foreach (var applicableUsing in applicableUsings)
                 {
-                    var alias = semanticModel.GetOriginalSemanticModel().GetDeclaredSymbol(applicableUsing, cancellationToken);
+                    var alias = semanticModel
+                        .GetOriginalSemanticModel()
+                        .GetDeclaredSymbol(applicableUsing, cancellationToken);
                     if (alias != null && Equals(alias.Target, type))
                     {
                         return alias;
@@ -133,15 +159,26 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
 
                 return null;
             }
-            catch (Exception e) when (FatalError.ReportAndPropagateUnlessCanceled(e, cancellationToken, ErrorSeverity.General))
+            catch (Exception e)
+                when (FatalError.ReportAndPropagateUnlessCanceled(
+                        e,
+                        cancellationToken,
+                        ErrorSeverity.General
+                    )
+                )
             {
                 throw ExceptionUtilities.Unreachable();
             }
         }
 
-        private static IEnumerable<UsingDirectiveSyntax> GetApplicableUsings(int position, SyntaxNode root)
+        private static IEnumerable<UsingDirectiveSyntax> GetApplicableUsings(
+            int position,
+            SyntaxNode root
+        )
         {
-            var namespaceUsings = root.FindToken(position).Parent!.GetAncestors<BaseNamespaceDeclarationSyntax>().SelectMany(n => n.Usings);
+            var namespaceUsings = root.FindToken(position)
+                .Parent!.GetAncestors<BaseNamespaceDeclarationSyntax>()
+                .SelectMany(n => n.Usings);
             var allUsings = root is CompilationUnitSyntax compilationUnit
                 ? compilationUnit.Usings.Concat(namespaceUsings)
                 : namespaceUsings;

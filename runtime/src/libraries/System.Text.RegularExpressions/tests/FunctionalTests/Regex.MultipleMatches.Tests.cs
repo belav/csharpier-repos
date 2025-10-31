@@ -2,17 +2,20 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System.Collections.Generic;
-using System.Threading.Tasks;
-using Xunit;
 using System.Linq;
 using System.Runtime.CompilerServices;
+using System.Threading.Tasks;
+using Xunit;
 
 namespace System.Text.RegularExpressions.Tests
 {
     public partial class RegexMultipleMatchTests
     {
         [Theory]
-        [MemberData(nameof(RegexHelpers.AvailableEngines_MemberData), MemberType = typeof(RegexHelpers))]
+        [MemberData(
+            nameof(RegexHelpers.AvailableEngines_MemberData),
+            MemberType = typeof(RegexHelpers)
+        )]
         public async Task Matches_MultipleCapturingGroups(RegexEngine engine)
         {
             string[] expectedGroupValues = { "abracadabra", "abra", "cad" };
@@ -37,7 +40,10 @@ namespace System.Text.RegularExpressions.Tests
                             Assert.Equal(2, match.Groups[i].Captures.Count);
                             for (int j = 0; j < match.Groups[i].Captures.Count; j++)
                             {
-                                RegexAssert.Equal(expectedGroupCaptureValues[j], match.Groups[i].Captures[j]);
+                                RegexAssert.Equal(
+                                    expectedGroupCaptureValues[j],
+                                    match.Groups[i].Captures[j]
+                                );
                             }
                         }
                         else if (i == 2)
@@ -60,7 +66,9 @@ namespace System.Text.RegularExpressions.Tests
                 yield return new object[]
                 {
                     engine,
-                    "[0-9]", "12345asdfasdfasdfljkhsda67890", RegexOptions.None,
+                    "[0-9]",
+                    "12345asdfasdfasdfljkhsda67890",
+                    RegexOptions.None,
                     new CaptureData[]
                     {
                         new CaptureData("1", 0, 1),
@@ -73,36 +81,42 @@ namespace System.Text.RegularExpressions.Tests
                         new CaptureData("8", 26, 1),
                         new CaptureData("9", 27, 1),
                         new CaptureData("0", 28, 1),
-                    }
+                    },
                 };
 
                 yield return new object[]
                 {
                     engine,
-                    "[a-z0-9]+", "[token1]? GARBAGEtoken2GARBAGE ;token3!", RegexOptions.None,
+                    "[a-z0-9]+",
+                    "[token1]? GARBAGEtoken2GARBAGE ;token3!",
+                    RegexOptions.None,
                     new CaptureData[]
                     {
                         new CaptureData("token1", 1, 6),
                         new CaptureData("token2", 17, 6),
-                        new CaptureData("token3", 32, 6)
-                    }
+                        new CaptureData("token3", 32, 6),
+                    },
                 };
 
                 yield return new object[]
                 {
                     engine,
-                    "(abc){2}", " !abcabcasl  dkfjasiduf 12343214-//asdfjzpiouxoifzuoxpicvql23r\\` #$3245,2345278 :asdfas & 100% @daeeffga (ryyy27343) poiweurwabcabcasdfalksdhfaiuyoiruqwer{234}/[(132387 + x)]'aaa''?", RegexOptions.None,
+                    "(abc){2}",
+                    " !abcabcasl  dkfjasiduf 12343214-//asdfjzpiouxoifzuoxpicvql23r\\` #$3245,2345278 :asdfas & 100% @daeeffga (ryyy27343) poiweurwabcabcasdfalksdhfaiuyoiruqwer{234}/[(132387 + x)]'aaa''?",
+                    RegexOptions.None,
                     new CaptureData[]
                     {
                         new CaptureData("abcabc", 2, 6),
-                        new CaptureData("abcabc", 125, 6)
-                    }
+                        new CaptureData("abcabc", 125, 6),
+                    },
                 };
 
                 yield return new object[]
                 {
                     engine,
-                    @"\b\w*\b", "handling words of various lengths", RegexOptions.None,
+                    @"\b\w*\b",
+                    "handling words of various lengths",
+                    RegexOptions.None,
                     new CaptureData[]
                     {
                         new CaptureData("handling", 0, 8),
@@ -115,57 +129,61 @@ namespace System.Text.RegularExpressions.Tests
                         new CaptureData("", 25, 0),
                         new CaptureData("lengths", 26, 7),
                         new CaptureData("", 33, 0),
-                    }
+                    },
                 };
 
                 yield return new object[]
                 {
                     engine,
-                    @"\b\w{2}\b", "handling words of various lengths", RegexOptions.None,
-                    new CaptureData[]
-                    {
-                        new CaptureData("of", 15, 2),
-                    }
+                    @"\b\w{2}\b",
+                    "handling words of various lengths",
+                    RegexOptions.None,
+                    new CaptureData[] { new CaptureData("of", 15, 2) },
                 };
 
                 yield return new object[]
                 {
                     engine,
-                    @"\w{6,}", "handling words of various lengths", RegexOptions.None,
+                    @"\w{6,}",
+                    "handling words of various lengths",
+                    RegexOptions.None,
                     new CaptureData[]
                     {
                         new CaptureData("handling", 0, 8),
                         new CaptureData("various", 18, 7),
                         new CaptureData("lengths", 26, 7),
-                    }
+                    },
                 };
 
                 yield return new object[]
                 {
                     engine,
-                    "[a-z]", "a", RegexOptions.None,
-                    new CaptureData[]
-                    {
-                        new CaptureData("a", 0, 1)
-                    }
+                    "[a-z]",
+                    "a",
+                    RegexOptions.None,
+                    new CaptureData[] { new CaptureData("a", 0, 1) },
                 };
 
                 yield return new object[]
                 {
                     engine,
-                    "[a-z]", "a1bc", RegexOptions.None,
+                    "[a-z]",
+                    "a1bc",
+                    RegexOptions.None,
                     new CaptureData[]
                     {
                         new CaptureData("a", 0, 1),
                         new CaptureData("b", 2, 1),
-                        new CaptureData("c", 3, 1)
-                    }
+                        new CaptureData("c", 3, 1),
+                    },
                 };
 
                 yield return new object[]
                 {
                     engine,
-                    "(?:ab|cd|ef|gh|i)j", "abj    cdj  efj           ghjij", RegexOptions.None,
+                    "(?:ab|cd|ef|gh|i)j",
+                    "abj    cdj  efj           ghjij",
+                    RegexOptions.None,
                     new CaptureData[]
                     {
                         new CaptureData("abj", 0, 3),
@@ -173,56 +191,63 @@ namespace System.Text.RegularExpressions.Tests
                         new CaptureData("efj", 12, 3),
                         new CaptureData("ghj", 26, 3),
                         new CaptureData("ij", 29, 2),
-                    }
+                    },
                 };
 
                 // Using ^ and $ with multiline
                 yield return new object[]
                 {
                     engine,
-                    "^", "", RegexOptions.Multiline,
-                    new[] { new CaptureData("", 0, 0) }
+                    "^",
+                    "",
+                    RegexOptions.Multiline,
+                    new[] { new CaptureData("", 0, 0) },
                 };
 
                 yield return new object[]
                 {
                     engine,
-                    "^", "\n\n\n", RegexOptions.Multiline,
+                    "^",
+                    "\n\n\n",
+                    RegexOptions.Multiline,
                     new[]
                     {
                         new CaptureData("", 0, 0),
                         new CaptureData("", 1, 0),
                         new CaptureData("", 2, 0),
-                        new CaptureData("", 3, 0)
-                    }
+                        new CaptureData("", 3, 0),
+                    },
                 };
 
                 yield return new object[]
                 {
                     engine,
-                    "^abc", "abc\nabc \ndef abc \nab\nabc", RegexOptions.Multiline,
+                    "^abc",
+                    "abc\nabc \ndef abc \nab\nabc",
+                    RegexOptions.Multiline,
                     new[]
                     {
                         new CaptureData("abc", 0, 3),
                         new CaptureData("abc", 4, 3),
                         new CaptureData("abc", 21, 3),
-                    }
+                    },
                 };
 
                 yield return new object[]
                 {
                     engine,
-                    @"^\w{5}", "abc\ndefg\n\nhijkl\n", RegexOptions.Multiline,
-                    new[]
-                    {
-                        new CaptureData("hijkl", 10, 5),
-                    }
+                    @"^\w{5}",
+                    "abc\ndefg\n\nhijkl\n",
+                    RegexOptions.Multiline,
+                    new[] { new CaptureData("hijkl", 10, 5) },
                 };
 
                 yield return new object[]
                 {
                     engine,
-                    @"^.*$", "abc\ndefg\n\nhijkl\n", RegexOptions.Multiline,
+                    @"^.*$",
+                    "abc\ndefg\n\nhijkl\n",
+                    RegexOptions.Multiline,
                     new[]
                     {
                         new CaptureData("abc", 0, 3),
@@ -230,56 +255,51 @@ namespace System.Text.RegularExpressions.Tests
                         new CaptureData("", 9, 0),
                         new CaptureData("hijkl", 10, 5),
                         new CaptureData("", 16, 0),
-                    }
+                    },
                 };
 
                 yield return new object[]
                 {
                     engine,
-                    ".*", "abc", RegexOptions.None,
-                    new[]
-                    {
-                        new CaptureData("abc", 0, 3),
-                        new CaptureData("", 3, 0)
-                    }
+                    ".*",
+                    "abc",
+                    RegexOptions.None,
+                    new[] { new CaptureData("abc", 0, 3), new CaptureData("", 3, 0) },
                 };
 
                 yield return new object[]
                 {
                     engine,
-                     @"^[^a]a", "bar\n", RegexOptions.Multiline,
-                     new[]
-                     {
-                         new CaptureData("ba", 0, 2)
-                     }
+                    @"^[^a]a",
+                    "bar\n",
+                    RegexOptions.Multiline,
+                    new[] { new CaptureData("ba", 0, 2) },
                 };
 
                 yield return new object[]
                 {
                     engine,
-                     @"^[^a]a", "car\nbar\n", RegexOptions.Multiline,
-                     new[]
-                     {
-                         new CaptureData("ca", 0, 2),
-                         new CaptureData("ba", 4, 2)
-                     }
+                    @"^[^a]a",
+                    "car\nbar\n",
+                    RegexOptions.Multiline,
+                    new[] { new CaptureData("ca", 0, 2), new CaptureData("ba", 4, 2) },
                 };
 
                 yield return new object[]
                 {
                     engine,
-                     @"[0-9]cat$", "1cat\n2cat", RegexOptions.Multiline,
-                     new[]
-                     {
-                         new CaptureData("1cat", 0, 4),
-                         new CaptureData("2cat", 5, 4)
-                     }
+                    @"[0-9]cat$",
+                    "1cat\n2cat",
+                    RegexOptions.Multiline,
+                    new[] { new CaptureData("1cat", 0, 4), new CaptureData("2cat", 5, 4) },
                 };
 
                 yield return new object[]
                 {
                     engine,
-                    @"\w*\b\w+", "abc def ghij kl m nop qrstuv", RegexOptions.None,
+                    @"\w*\b\w+",
+                    "abc def ghij kl m nop qrstuv",
+                    RegexOptions.None,
                     new[]
                     {
                         new CaptureData("abc", 0, 3),
@@ -289,10 +309,12 @@ namespace System.Text.RegularExpressions.Tests
                         new CaptureData("m", 16, 1),
                         new CaptureData("nop", 18, 3),
                         new CaptureData("qrstuv", 22, 6),
-                    }
+                    },
                 };
 
-                foreach (RegexOptions options in new[] { RegexOptions.None, RegexOptions.ECMAScript })
+                foreach (
+                    RegexOptions options in new[] { RegexOptions.None, RegexOptions.ECMAScript }
+                )
                 {
                     if (RegexHelpers.IsNonBacktracking(engine))
                     {
@@ -302,12 +324,10 @@ namespace System.Text.RegularExpressions.Tests
                     yield return new object[]
                     {
                         engine,
-                        @"a?\b", "ac", options,
-                        new[]
-                        {
-                            new CaptureData("", 0, 0),
-                            new CaptureData("", 2, 0),
-                        }
+                        @"a?\b",
+                        "ac",
+                        options,
+                        new[] { new CaptureData("", 0, 0), new CaptureData("", 2, 0) },
                     };
                 }
 
@@ -317,13 +337,15 @@ namespace System.Text.RegularExpressions.Tests
                     yield return new object[]
                     {
                         engine,
-                        @"[a -\-\b]", "a #.", RegexOptions.None,
+                        @"[a -\-\b]",
+                        "a #.",
+                        RegexOptions.None,
                         new CaptureData[]
                         {
                             new CaptureData("a", 0, 1),
                             new CaptureData(" ", 1, 1),
                             new CaptureData("#", 2, 1),
-                        }
+                        },
                     };
                 }
 
@@ -332,7 +354,9 @@ namespace System.Text.RegularExpressions.Tests
                     yield return new object[]
                     {
                         engine,
-                        @"(\b(?!ab|nop)\w*\b)\w+", "abc def ghij kl m nop qrstuv", RegexOptions.None,
+                        @"(\b(?!ab|nop)\w*\b)\w+",
+                        "abc def ghij kl m nop qrstuv",
+                        RegexOptions.None,
                         new[]
                         {
                             new CaptureData("def", 4, 3),
@@ -340,51 +364,59 @@ namespace System.Text.RegularExpressions.Tests
                             new CaptureData("kl", 13, 2),
                             new CaptureData("m", 16, 1),
                             new CaptureData("qrstuv", 22, 6),
-                        }
+                        },
                     };
 
                     yield return new object[]
                     {
                         engine,
-                        @"foo\d+", "0123456789foo4567890foo1foo  0987", RegexOptions.RightToLeft,
+                        @"foo\d+",
+                        "0123456789foo4567890foo1foo  0987",
+                        RegexOptions.RightToLeft,
                         new CaptureData[]
                         {
                             new CaptureData("foo1", 20, 4),
                             new CaptureData("foo4567890", 10, 10),
-                        }
+                        },
                     };
 
                     yield return new object[]
                     {
                         engine,
-                        "(?(A)A123|C789)", "A123 B456 C789", RegexOptions.None,
+                        "(?(A)A123|C789)",
+                        "A123 B456 C789",
+                        RegexOptions.None,
                         new CaptureData[]
                         {
                             new CaptureData("A123", 0, 4),
                             new CaptureData("C789", 10, 4),
-                        }
+                        },
                     };
 
                     yield return new object[]
                     {
                         engine,
-                        "(?(A)A123|C789)", "A123 B456 C789", RegexOptions.None,
+                        "(?(A)A123|C789)",
+                        "A123 B456 C789",
+                        RegexOptions.None,
                         new CaptureData[]
                         {
                             new CaptureData("A123", 0, 4),
                             new CaptureData("C789", 10, 4),
-                        }
+                        },
                     };
 
                     yield return new object[]
                     {
-                            engine,
-                            @"(?(\w+)\w+|)", "abcd", RegexOptions.None,
-                            new CaptureData[]
-                            {
-                                new CaptureData("abcd", 0, 4),
-                                new CaptureData("", 4, 0),
-                            }
+                        engine,
+                        @"(?(\w+)\w+|)",
+                        "abcd",
+                        RegexOptions.None,
+                        new CaptureData[]
+                        {
+                            new CaptureData("abcd", 0, 4),
+                            new CaptureData("", 4, 0),
+                        },
                     };
 
                     if (!PlatformDetection.IsNetFramework)
@@ -393,19 +425,23 @@ namespace System.Text.RegularExpressions.Tests
                         yield return new object[]
                         {
                             engine,
-                            @"(?(\w+)\w+)", "abcd", RegexOptions.None,
+                            @"(?(\w+)\w+)",
+                            "abcd",
+                            RegexOptions.None,
                             new CaptureData[]
                             {
                                 new CaptureData("abcd", 0, 4),
                                 new CaptureData("", 4, 0),
-                            }
+                            },
                         };
                     }
 
                     yield return new object[]
                     {
                         engine,
-                        @"^.*$", "abc\ndefg\n\nhijkl\n", RegexOptions.Multiline | RegexOptions.RightToLeft,
+                        @"^.*$",
+                        "abc\ndefg\n\nhijkl\n",
+                        RegexOptions.Multiline | RegexOptions.RightToLeft,
                         new[]
                         {
                             new CaptureData("", 16, 0),
@@ -413,7 +449,7 @@ namespace System.Text.RegularExpressions.Tests
                             new CaptureData("", 9, 0),
                             new CaptureData("defg", 4, 4),
                             new CaptureData("abc", 0, 3),
-                        }
+                        },
                     };
 
                     if (!PlatformDetection.IsNetFramework)
@@ -422,7 +458,9 @@ namespace System.Text.RegularExpressions.Tests
                         yield return new object[]
                         {
                             engine,
-                            "[^]", "every", RegexOptions.ECMAScript,
+                            "[^]",
+                            "every",
+                            RegexOptions.ECMAScript,
                             new CaptureData[]
                             {
                                 new CaptureData("e", 0, 1),
@@ -430,43 +468,48 @@ namespace System.Text.RegularExpressions.Tests
                                 new CaptureData("e", 2, 1),
                                 new CaptureData("r", 3, 1),
                                 new CaptureData("y", 4, 1),
-                            }
+                            },
                         };
                     }
                 }
 
 #if !NETFRAMEWORK // these tests currently fail on .NET Framework, and we need to check IsDynamicCodeCompiled but that doesn't exist on .NET Framework
-                
+
                 yield return new object[]
                 {
-                    engine, "@(a*)+?", "@", RegexOptions.None, new[]
-                    {
-                        new CaptureData("@", 0, 1)
-                    }
+                    engine,
+                    "@(a*)+?",
+                    "@",
+                    RegexOptions.None,
+                    new[] { new CaptureData("@", 0, 1) },
                 };
 
                 if (!RegexHelpers.IsNonBacktracking(engine)) // atomic subexpressions aren't supported
                 {
                     yield return new object[]
                     {
-                        engine, @"()(?>\1+?).\b", "xxxx", RegexOptions.None, new[]
-                        {
-                            new CaptureData("x", 3, 1),
-                        }
+                        engine,
+                        @"()(?>\1+?).\b",
+                        "xxxx",
+                        RegexOptions.None,
+                        new[] { new CaptureData("x", 3, 1) },
                     };
                 }
 
-                if (engine != RegexEngine.Interpreter && // these tests currently fail with RegexInterpreter
-                    RuntimeFeature.IsDynamicCodeCompiled) // if dynamic code isn't compiled, RegexOptions.Compiled falls back to the interpreter, for which these tests currently fail
+                if (
+                    engine != RegexEngine.Interpreter
+                    && // these tests currently fail with RegexInterpreter
+                    RuntimeFeature.IsDynamicCodeCompiled
+                ) // if dynamic code isn't compiled, RegexOptions.Compiled falls back to the interpreter, for which these tests currently fail
                 {
                     // Fails on interpreter and .NET Framework: [ActiveIssue("https://github.com/dotnet/runtime/issues/62094")]
                     yield return new object[]
                     {
-                        engine, @"(?:){93}", "x", RegexOptions.None, new[]
-                        {
-                            new CaptureData("", 0, 0),
-                            new CaptureData("", 1, 0)
-                        }
+                        engine,
+                        @"(?:){93}",
+                        "x",
+                        RegexOptions.None,
+                        new[] { new CaptureData("", 0, 0), new CaptureData("", 1, 0) },
                     };
                 }
 #endif
@@ -475,7 +518,13 @@ namespace System.Text.RegularExpressions.Tests
 
         [Theory]
         [MemberData(nameof(Matches_TestData))]
-        public async Task Matches(RegexEngine engine, string pattern, string input, RegexOptions options, CaptureData[] expected)
+        public async Task Matches(
+            RegexEngine engine,
+            string pattern,
+            string input,
+            RegexOptions options,
+            CaptureData[] expected
+        )
         {
             Regex regexAdvanced = await RegexHelpers.GetRegexAsync(engine, pattern, options);
             VerifyMatches(regexAdvanced.Matches(input), expected);
@@ -520,33 +569,82 @@ namespace System.Text.RegularExpressions.Tests
         public void Matches_Invalid()
         {
             // Input is null
-            AssertExtensions.Throws<ArgumentNullException>("input", () => Regex.Matches(null, "pattern"));
-            AssertExtensions.Throws<ArgumentNullException>("input", () => Regex.Matches(null, "pattern", RegexOptions.None));
-            AssertExtensions.Throws<ArgumentNullException>("input", () => Regex.Matches(null, "pattern", RegexOptions.None, TimeSpan.FromSeconds(1)));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "input",
+                () => Regex.Matches(null, "pattern")
+            );
+            AssertExtensions.Throws<ArgumentNullException>(
+                "input",
+                () => Regex.Matches(null, "pattern", RegexOptions.None)
+            );
+            AssertExtensions.Throws<ArgumentNullException>(
+                "input",
+                () => Regex.Matches(null, "pattern", RegexOptions.None, TimeSpan.FromSeconds(1))
+            );
 
-            AssertExtensions.Throws<ArgumentNullException>("input", () => new Regex("pattern").Matches(null));
-            AssertExtensions.Throws<ArgumentNullException>("input", () => new Regex("pattern").Matches(null, 0));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "input",
+                () => new Regex("pattern").Matches(null)
+            );
+            AssertExtensions.Throws<ArgumentNullException>(
+                "input",
+                () => new Regex("pattern").Matches(null, 0)
+            );
 
             // Pattern is null
-            AssertExtensions.Throws<ArgumentNullException>("pattern", () => Regex.Matches("input", null));
-            AssertExtensions.Throws<ArgumentNullException>("pattern", () => Regex.Matches("input", null, RegexOptions.None));
-            AssertExtensions.Throws<ArgumentNullException>("pattern", () => Regex.Matches("input", null, RegexOptions.None, TimeSpan.FromSeconds(1)));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "pattern",
+                () => Regex.Matches("input", null)
+            );
+            AssertExtensions.Throws<ArgumentNullException>(
+                "pattern",
+                () => Regex.Matches("input", null, RegexOptions.None)
+            );
+            AssertExtensions.Throws<ArgumentNullException>(
+                "pattern",
+                () => Regex.Matches("input", null, RegexOptions.None, TimeSpan.FromSeconds(1))
+            );
 
             // Options are invalid
-            AssertExtensions.Throws<ArgumentOutOfRangeException>("options", () => Regex.Matches("input", "pattern", (RegexOptions)(-1)));
-            AssertExtensions.Throws<ArgumentOutOfRangeException>("options", () => Regex.Matches("input", "pattern", (RegexOptions)(-1), TimeSpan.FromSeconds(1)));
+            AssertExtensions.Throws<ArgumentOutOfRangeException>(
+                "options",
+                () => Regex.Matches("input", "pattern", (RegexOptions)(-1))
+            );
+            AssertExtensions.Throws<ArgumentOutOfRangeException>(
+                "options",
+                () => Regex.Matches("input", "pattern", (RegexOptions)(-1), TimeSpan.FromSeconds(1))
+            );
 
             // 0x400 is new NonBacktracking mode that is now valid, 0x800 is still invalid
-            AssertExtensions.Throws<ArgumentOutOfRangeException>("options", () => Regex.Matches("input", "pattern", (RegexOptions)0x800));
-            AssertExtensions.Throws<ArgumentOutOfRangeException>("options", () => Regex.Matches("input", "pattern", (RegexOptions)0x800, TimeSpan.FromSeconds(1)));
+            AssertExtensions.Throws<ArgumentOutOfRangeException>(
+                "options",
+                () => Regex.Matches("input", "pattern", (RegexOptions)0x800)
+            );
+            AssertExtensions.Throws<ArgumentOutOfRangeException>(
+                "options",
+                () =>
+                    Regex.Matches("input", "pattern", (RegexOptions)0x800, TimeSpan.FromSeconds(1))
+            );
 
             // MatchTimeout is invalid
-            AssertExtensions.Throws<ArgumentOutOfRangeException>("matchTimeout", () => Regex.Matches("input", "pattern", RegexOptions.None, TimeSpan.Zero));
-            AssertExtensions.Throws<ArgumentOutOfRangeException>("matchTimeout", () => Regex.Matches("input", "pattern", RegexOptions.None, TimeSpan.Zero));
+            AssertExtensions.Throws<ArgumentOutOfRangeException>(
+                "matchTimeout",
+                () => Regex.Matches("input", "pattern", RegexOptions.None, TimeSpan.Zero)
+            );
+            AssertExtensions.Throws<ArgumentOutOfRangeException>(
+                "matchTimeout",
+                () => Regex.Matches("input", "pattern", RegexOptions.None, TimeSpan.Zero)
+            );
 
             // Start is invalid
-            AssertExtensions.Throws<ArgumentOutOfRangeException>("startat", () => new Regex("pattern").Matches("input", -1));
-            AssertExtensions.Throws<ArgumentOutOfRangeException>("startat", () => new Regex("pattern").Matches("input", 6));
+            AssertExtensions.Throws<ArgumentOutOfRangeException>(
+                "startat",
+                () => new Regex("pattern").Matches("input", -1)
+            );
+            AssertExtensions.Throws<ArgumentOutOfRangeException>(
+                "startat",
+                () => new Regex("pattern").Matches("input", 6)
+            );
         }
 
         [Fact]
@@ -559,14 +657,34 @@ namespace System.Text.RegularExpressions.Tests
         {
             foreach (RegexEngine engine in RegexHelpers.AvailableEngines)
             {
-                yield return new object[] { engine, @"\.", @"a.b.c.d.e.f", 4, new (int, int)[] { (5, 1), (7, 1), (9, 1) } };
-                yield return new object[] { engine, @"\b\w+\b", @"ab cdef ghijk l mn opqr", 3, new (int, int)[] { (3, 4), (8, 5), (14, 1), (16, 2), (19, 4) } };
+                yield return new object[]
+                {
+                    engine,
+                    @"\.",
+                    @"a.b.c.d.e.f",
+                    4,
+                    new (int, int)[] { (5, 1), (7, 1), (9, 1) },
+                };
+                yield return new object[]
+                {
+                    engine,
+                    @"\b\w+\b",
+                    @"ab cdef ghijk l mn opqr",
+                    3,
+                    new (int, int)[] { (3, 4), (8, 5), (14, 1), (16, 2), (19, 4) },
+                };
             }
         }
 
         [Theory]
         [MemberData(nameof(Matches_NonZeroStartAtOrBeginning_MemberData))]
-        public async Task Matches_NonZeroStartAtOrBeginning(RegexEngine engine, string pattern, string input, int offset, (int Index, int Length)[] expected)
+        public async Task Matches_NonZeroStartAtOrBeginning(
+            RegexEngine engine,
+            string pattern,
+            string input,
+            int offset,
+            (int Index, int Length)[] expected
+        )
         {
             Regex r = await RegexHelpers.GetRegexAsync(engine, pattern);
             int i;
@@ -582,8 +700,9 @@ namespace System.Text.RegularExpressions.Tests
             foreach (bool startat in new[] { true, false })
             {
                 i = 0;
-                Match m = startat ?
-                    r.Match(input, offset) : // startat
+                Match m = startat
+                    ? r.Match(input, offset)
+                    : // startat
                     r.Match(input, offset, input.Length - offset); // beginning + length
                 while (m.Success)
                 {

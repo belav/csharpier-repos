@@ -21,7 +21,9 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.DocumentationComments
     [UseExportProvider]
     public abstract class AbstractXmlTagCompletionTests
     {
-        private protected abstract IChainedCommandHandler<TypeCharCommandArgs> CreateCommandHandler(TestWorkspace testWorkspace);
+        private protected abstract IChainedCommandHandler<TypeCharCommandArgs> CreateCommandHandler(
+            TestWorkspace testWorkspace
+        );
         private protected abstract TestWorkspace CreateTestWorkspace(string initialMarkup);
 
         public void Verify(string initialMarkup, string expectedMarkup, char typeChar)
@@ -30,7 +32,9 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.DocumentationComments
 
             var testDocument = workspace.Documents.Single();
             var view = testDocument.GetTextView();
-            view.Caret.MoveTo(new SnapshotPoint(view.TextSnapshot, testDocument.CursorPosition.Value));
+            view.Caret.MoveTo(
+                new SnapshotPoint(view.TextSnapshot, testDocument.CursorPosition.Value)
+            );
 
             var commandHandler = CreateCommandHandler(workspace);
 
@@ -38,13 +42,23 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.DocumentationComments
             var nextHandler = CreateInsertTextHandler(view, typeChar.ToString());
 
             commandHandler.ExecuteCommand(args, nextHandler, TestCommandExecutionContext.Create());
-            MarkupTestFile.GetPosition(expectedMarkup, out var expectedCode, out int expectedPosition);
+            MarkupTestFile.GetPosition(
+                expectedMarkup,
+                out var expectedCode,
+                out int expectedPosition
+            );
 
             Assert.Equal(expectedCode, view.TextSnapshot.GetText());
 
             var caretPosition = view.Caret.Position.BufferPosition.Position;
-            Assert.True(expectedPosition == caretPosition,
-                string.Format("Caret positioned incorrectly. Should have been {0}, but was {1}.", expectedPosition, caretPosition));
+            Assert.True(
+                expectedPosition == caretPosition,
+                string.Format(
+                    "Caret positioned incorrectly. Should have been {0}, but was {1}.",
+                    expectedPosition,
+                    caretPosition
+                )
+            );
         }
 
         private static Action CreateInsertTextHandler(ITextView textView, string text)

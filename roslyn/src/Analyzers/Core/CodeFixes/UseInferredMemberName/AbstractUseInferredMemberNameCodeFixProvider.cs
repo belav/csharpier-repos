@@ -15,22 +15,34 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.UseInferredMemberName
 {
-    internal abstract class AbstractUseInferredMemberNameCodeFixProvider : SyntaxEditorBasedCodeFixProvider
+    internal abstract class AbstractUseInferredMemberNameCodeFixProvider
+        : SyntaxEditorBasedCodeFixProvider
     {
-        protected abstract void LanguageSpecificRemoveSuggestedNode(SyntaxEditor editor, SyntaxNode node);
+        protected abstract void LanguageSpecificRemoveSuggestedNode(
+            SyntaxEditor editor,
+            SyntaxNode node
+        );
 
-        public override ImmutableArray<string> FixableDiagnosticIds { get; }
-            = ImmutableArray.Create(IDEDiagnosticIds.UseInferredMemberNameDiagnosticId);
+        public override ImmutableArray<string> FixableDiagnosticIds { get; } =
+            ImmutableArray.Create(IDEDiagnosticIds.UseInferredMemberNameDiagnosticId);
 
         public override Task RegisterCodeFixesAsync(CodeFixContext context)
         {
-            RegisterCodeFix(context, AnalyzersResources.Use_inferred_member_name, nameof(AnalyzersResources.Use_inferred_member_name));
+            RegisterCodeFix(
+                context,
+                AnalyzersResources.Use_inferred_member_name,
+                nameof(AnalyzersResources.Use_inferred_member_name)
+            );
             return Task.CompletedTask;
         }
 
         protected override Task FixAllAsync(
-            Document document, ImmutableArray<Diagnostic> diagnostics,
-            SyntaxEditor editor, CodeActionOptionsProvider fallbackOptions, CancellationToken cancellationToken)
+            Document document,
+            ImmutableArray<Diagnostic> diagnostics,
+            SyntaxEditor editor,
+            CodeActionOptionsProvider fallbackOptions,
+            CancellationToken cancellationToken
+        )
         {
             var root = editor.OriginalRoot;
 

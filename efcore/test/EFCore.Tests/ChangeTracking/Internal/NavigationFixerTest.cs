@@ -18,12 +18,10 @@ public class NavigationFixerTest
         var blog1 = new Blog { Id = 1 };
         var blog2 = new Blog { Id = 2 };
 
-        var post1 = context.Add(
-            new Post { BlogId = 2 }).Entity;
+        var post1 = context.Add(new Post { BlogId = 2 }).Entity;
 
         blog1.Posts.Add(post1);
-        blog1.Posts.Add(
-            new Post { BlogId = 2 });
+        blog1.Posts.Add(new Post { BlogId = 2 });
 
         context.Add(blog2);
         context.Add(blog1);
@@ -34,8 +32,8 @@ public class NavigationFixerTest
         public DbSet<Blog> Blogs { get; set; }
         public DbSet<Post> Posts { get; set; }
 
-        protected internal override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-            => optionsBuilder
+        protected internal override void OnConfiguring(DbContextOptionsBuilder optionsBuilder) =>
+            optionsBuilder
                 .UseInternalServiceProvider(InMemoryFixture.DefaultServiceProvider)
                 .UseInMemoryDatabase(typeof(FixupContext).FullName);
     }
@@ -244,8 +242,12 @@ public class NavigationFixerTest
 
         principal2.Products.Add(dependent);
 
-        manager.StartTracking(manager.GetOrCreateEntry(principal1)).SetEntityState(EntityState.Added);
-        manager.StartTracking(manager.GetOrCreateEntry(principal2)).SetEntityState(EntityState.Added);
+        manager
+            .StartTracking(manager.GetOrCreateEntry(principal1))
+            .SetEntityState(EntityState.Added);
+        manager
+            .StartTracking(manager.GetOrCreateEntry(principal2))
+            .SetEntityState(EntityState.Added);
 
         var dependentEntry = manager.StartTracking(manager.GetOrCreateEntry(dependent));
 
@@ -269,9 +271,15 @@ public class NavigationFixerTest
         var dependent2 = new Product { Id = 22 };
         var dependent3 = new Product { Id = 23, Category = principal };
 
-        manager.StartTracking(manager.GetOrCreateEntry(dependent1)).SetEntityState(EntityState.Added);
-        manager.StartTracking(manager.GetOrCreateEntry(dependent2)).SetEntityState(EntityState.Added);
-        manager.StartTracking(manager.GetOrCreateEntry(dependent3)).SetEntityState(EntityState.Added);
+        manager
+            .StartTracking(manager.GetOrCreateEntry(dependent1))
+            .SetEntityState(EntityState.Added);
+        manager
+            .StartTracking(manager.GetOrCreateEntry(dependent2))
+            .SetEntityState(EntityState.Added);
+        manager
+            .StartTracking(manager.GetOrCreateEntry(dependent3))
+            .SetEntityState(EntityState.Added);
 
         var principalEntry = manager.StartTracking(manager.GetOrCreateEntry(principal));
 
@@ -305,9 +313,15 @@ public class NavigationFixerTest
         principal.Products.Add(dependent1);
         principal.Products.Add(dependent3);
 
-        manager.StartTracking(manager.GetOrCreateEntry(dependent1)).SetEntityState(EntityState.Added);
-        manager.StartTracking(manager.GetOrCreateEntry(dependent2)).SetEntityState(EntityState.Added);
-        manager.StartTracking(manager.GetOrCreateEntry(dependent3)).SetEntityState(EntityState.Added);
+        manager
+            .StartTracking(manager.GetOrCreateEntry(dependent1))
+            .SetEntityState(EntityState.Added);
+        manager
+            .StartTracking(manager.GetOrCreateEntry(dependent2))
+            .SetEntityState(EntityState.Added);
+        manager
+            .StartTracking(manager.GetOrCreateEntry(dependent3))
+            .SetEntityState(EntityState.Added);
 
         var principalEntry = manager.StartTracking(manager.GetOrCreateEntry(principal));
 
@@ -496,9 +510,13 @@ public class NavigationFixerTest
             dependentEntry,
             categoryIdProperty,
             Array.Empty<IKey>(),
-            productType.GetForeignKeys().Where(k => k.Properties.Contains(categoryIdProperty)).ToList(),
+            productType
+                .GetForeignKeys()
+                .Where(k => k.Properties.Contains(categoryIdProperty))
+                .ToList(),
             12,
-            11);
+            11
+        );
 
         Assert.Same(dependent.Category, principal1);
         Assert.Contains(dependent, principal1.Products);
@@ -538,9 +556,13 @@ public class NavigationFixerTest
             dependentEntry,
             categoryIdProperty,
             Array.Empty<IKey>(),
-            productType.GetForeignKeys().Where(k => k.Properties.Contains(categoryIdProperty)).ToList(),
+            productType
+                .GetForeignKeys()
+                .Where(k => k.Properties.Contains(categoryIdProperty))
+                .ToList(),
             12,
-            11);
+            11
+        );
 
         Assert.Null(dependent.Category);
         Assert.DoesNotContain(dependent, principal2.Products);
@@ -580,9 +602,13 @@ public class NavigationFixerTest
             dependentEntry,
             categoryIdProperty,
             Array.Empty<IKey>(),
-            productType.GetForeignKeys().Where(k => k.Properties.Contains(categoryIdProperty)).ToList(),
+            productType
+                .GetForeignKeys()
+                .Where(k => k.Properties.Contains(categoryIdProperty))
+                .ToList(),
             12,
-            11);
+            11
+        );
 
         Assert.Same(dependent.Category, principal1);
         Assert.Contains(dependent, principal1.Products);
@@ -624,9 +650,13 @@ public class NavigationFixerTest
             dependentEntry,
             idProperty,
             productDetailType.GetKeys().Where(k => k.Properties.Contains(idProperty)).ToList(),
-            productDetailType.GetForeignKeys().Where(k => k.Properties.Contains(idProperty)).ToList(),
+            productDetailType
+                .GetForeignKeys()
+                .Where(k => k.Properties.Contains(idProperty))
+                .ToList(),
             21,
-            22);
+            22
+        );
 
         Assert.Same(principal2, dependent.Product);
         Assert.Same(dependent, principal2.Detail);
@@ -664,9 +694,13 @@ public class NavigationFixerTest
             dependentEntry,
             idProperty,
             productDetailType.GetKeys().Where(k => k.Properties.Contains(idProperty)).ToList(),
-            productDetailType.GetForeignKeys().Where(k => k.Properties.Contains(idProperty)).ToList(),
+            productDetailType
+                .GetForeignKeys()
+                .Where(k => k.Properties.Contains(idProperty))
+                .ToList(),
             21,
-            0);
+            0
+        );
 
         Assert.Null(dependent.Product);
         Assert.Null(principal.Detail);
@@ -703,9 +737,13 @@ public class NavigationFixerTest
             dependentEntry,
             idProperty,
             productDetailType.GetKeys().Where(k => k.Properties.Contains(idProperty)).ToList(),
-            productDetailType.GetForeignKeys().Where(k => k.Properties.Contains(idProperty)).ToList(),
+            productDetailType
+                .GetForeignKeys()
+                .Where(k => k.Properties.Contains(idProperty))
+                .ToList(),
             7,
-            21);
+            21
+        );
 
         Assert.Same(principal, dependent.Product);
         Assert.Same(dependent, principal.Detail);
@@ -751,9 +789,13 @@ public class NavigationFixerTest
             entry1,
             alternateProductId,
             Array.Empty<IKey>(),
-            productType.GetForeignKeys().Where(k => k.Properties.Contains(alternateProductId)).ToList(),
+            productType
+                .GetForeignKeys()
+                .Where(k => k.Properties.Contains(alternateProductId))
+                .ToList(),
             22,
-            23);
+            23
+        );
 
         Assert.Same(entity3, entity1.AlternateProduct);
         Assert.Null(entity1.OriginalProduct);
@@ -805,9 +847,13 @@ public class NavigationFixerTest
             entry1,
             alternateProductId,
             Array.Empty<IKey>(),
-            productType.GetForeignKeys().Where(k => k.Properties.Contains(alternateProductId)).ToList(),
+            productType
+                .GetForeignKeys()
+                .Where(k => k.Properties.Contains(alternateProductId))
+                .ToList(),
             22,
-            23);
+            23
+        );
 
         Assert.Same(entity3, entity1.AlternateProduct);
         Assert.Null(entity1.OriginalProduct);
@@ -846,56 +892,56 @@ public class NavigationFixerTest
             Id = 1,
             ProductId = 1,
             PhotoId = "Photo1",
-            ReviewId = reviewId1
+            ReviewId = reviewId1,
         };
         var tag2 = new ProductTag
         {
             Id = 2,
             ProductId = 1,
             PhotoId = "Photo1",
-            ReviewId = reviewId2
+            ReviewId = reviewId2,
         };
         var tag3 = new ProductTag
         {
             Id = 3,
             ProductId = 1,
             PhotoId = "Photo2",
-            ReviewId = reviewId1
+            ReviewId = reviewId1,
         };
         var tag4 = new ProductTag
         {
             Id = 4,
             ProductId = 1,
             PhotoId = "Photo2",
-            ReviewId = reviewId2
+            ReviewId = reviewId2,
         };
         var tag5 = new ProductTag
         {
             Id = 5,
             ProductId = 2,
             PhotoId = "Photo1",
-            ReviewId = reviewId1
+            ReviewId = reviewId1,
         };
         var tag6 = new ProductTag
         {
             Id = 6,
             ProductId = 2,
             PhotoId = "Photo1",
-            ReviewId = reviewId2
+            ReviewId = reviewId2,
         };
         var tag7 = new ProductTag
         {
             Id = 7,
             ProductId = 2,
             PhotoId = "Photo2",
-            ReviewId = reviewId1
+            ReviewId = reviewId1,
         };
         var tag8 = new ProductTag
         {
             Id = 8,
             ProductId = 2,
             PhotoId = "Photo2",
-            ReviewId = reviewId2
+            ReviewId = reviewId2,
         };
 
         var photoEntry1 = manager.StartTracking(manager.GetOrCreateEntry(photo1));
@@ -975,7 +1021,8 @@ public class NavigationFixerTest
             Array.Empty<IKey>(),
             productTagType.GetForeignKeys().Where(k => k.Properties.Contains(productId)).ToList(),
             1,
-            2);
+            2
+        );
 
         Assert.Equal(new[] { tag2 }, photo1.ProductTags.OrderBy(t => t.Id).ToArray());
         Assert.Equal(new[] { tag3, tag4 }, photo2.ProductTags.OrderBy(t => t.Id).ToArray());
@@ -1233,8 +1280,8 @@ public class NavigationFixerTest
         Assert.Equal(dependent2.AlternateProductId, principal2.Id);
     }
 
-    private static IServiceProvider CreateContextServices(IModel model = null)
-        => InMemoryTestHelpers.Instance.CreateContextServices(model ?? BuildModel());
+    private static IServiceProvider CreateContextServices(IModel model = null) =>
+        InMemoryTestHelpers.Instance.CreateContextServices(model ?? BuildModel());
 
     private class Category
     {
@@ -1263,11 +1310,9 @@ public class NavigationFixerTest
 
         public Product Product { get; set; }
 
-        public IEnumerator<Product> GetEnumerator()
-            => throw new NotImplementedException();
+        public IEnumerator<Product> GetEnumerator() => throw new NotImplementedException();
 
-        IEnumerator IEnumerable.GetEnumerator()
-            => GetEnumerator();
+        IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
     }
 
     private class ProductPhoto
@@ -1302,45 +1347,40 @@ public class NavigationFixerTest
     {
         var builder = InMemoryTestHelpers.Instance.CreateConventionBuilder();
 
-        builder.Entity<Product>(
-            b =>
-            {
-                b.HasOne(e => e.AlternateProduct).WithOne(e => e.OriginalProduct)
-                    .HasForeignKey<Product>(e => e.AlternateProductId);
+        builder.Entity<Product>(b =>
+        {
+            b.HasOne(e => e.AlternateProduct)
+                .WithOne(e => e.OriginalProduct)
+                .HasForeignKey<Product>(e => e.AlternateProductId);
 
-                b.HasOne(e => e.Detail).WithOne(e => e.Product)
-                    .HasForeignKey<ProductDetail>(e => e.Id);
-            });
+            b.HasOne(e => e.Detail).WithOne(e => e.Product).HasForeignKey<ProductDetail>(e => e.Id);
+        });
 
         builder.Entity<Category>().HasMany(e => e.Products).WithOne(e => e.Category);
 
         builder.Entity<ProductDetail>();
 
-        builder.Entity<ProductPhoto>(
-            b =>
-            {
-                b.HasKey(
-                    e => new { e.ProductId, e.PhotoId });
-                b.HasMany(e => e.ProductTags).WithOne(e => e.Photo)
-                    .HasForeignKey(
-                        e => new { e.ProductId, e.PhotoId });
-            });
+        builder.Entity<ProductPhoto>(b =>
+        {
+            b.HasKey(e => new { e.ProductId, e.PhotoId });
+            b.HasMany(e => e.ProductTags)
+                .WithOne(e => e.Photo)
+                .HasForeignKey(e => new { e.ProductId, e.PhotoId });
+        });
 
-        builder.Entity<ProductReview>(
-            b =>
-            {
-                b.HasKey(
-                    e => new { e.ProductId, e.ReviewId });
-                b.HasMany(e => e.ProductTags).WithOne(e => e.Review)
-                    .HasForeignKey(
-                        e => new { e.ProductId, e.ReviewId });
-            });
+        builder.Entity<ProductReview>(b =>
+        {
+            b.HasKey(e => new { e.ProductId, e.ReviewId });
+            b.HasMany(e => e.ProductTags)
+                .WithOne(e => e.Review)
+                .HasForeignKey(e => new { e.ProductId, e.ReviewId });
+        });
 
         builder.Entity<ProductTag>();
 
         return builder.Model.FinalizeModel();
     }
 
-    private static INavigationFixer CreateNavigationFixer(IServiceProvider contextServices)
-        => contextServices.GetRequiredService<INavigationFixer>();
+    private static INavigationFixer CreateNavigationFixer(IServiceProvider contextServices) =>
+        contextServices.GetRequiredService<INavigationFixer>();
 }

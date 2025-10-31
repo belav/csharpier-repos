@@ -19,15 +19,9 @@ namespace System.Activities.DynamicUpdate
     {
         private HashSet<Activity> disallowUpdateInside;
 
-        public DynamicUpdateMapBuilder()
-        {
-        }
+        public DynamicUpdateMapBuilder() { }
 
-        public bool ForImplementation 
-        { 
-            get; 
-            set; 
-        }
+        public bool ForImplementation { get; set; }
 
         public ISet<Activity> DisallowUpdateInside
         {
@@ -35,64 +29,34 @@ namespace System.Activities.DynamicUpdate
             {
                 if (this.disallowUpdateInside == null)
                 {
-                    this.disallowUpdateInside = new HashSet<Activity>(ReferenceEqualityComparer.Instance);
+                    this.disallowUpdateInside = new HashSet<Activity>(
+                        ReferenceEqualityComparer.Instance
+                    );
                 }
 
                 return this.disallowUpdateInside;
             }
         }
 
-        public Func<object, DynamicUpdateMapItem> LookupMapItem
-        {
-            get;
-            set;
-        }
+        public Func<object, DynamicUpdateMapItem> LookupMapItem { get; set; }
 
-        public Func<Activity, DynamicUpdateMap> LookupImplementationMap 
-        { 
-            get; 
-            set; 
-        }
+        public Func<Activity, DynamicUpdateMap> LookupImplementationMap { get; set; }
 
-        public LocationReferenceEnvironment UpdatedEnvironment
-        {
-            get;
-            set;
-        }
+        public LocationReferenceEnvironment UpdatedEnvironment { get; set; }
 
-        public Activity UpdatedWorkflowDefinition
-        {
-            get;
-            set;
-        }
+        public Activity UpdatedWorkflowDefinition { get; set; }
 
-        public LocationReferenceEnvironment OriginalEnvironment
-        {
-            get;
-            set;
-        }
+        public LocationReferenceEnvironment OriginalEnvironment { get; set; }
 
-        public Activity OriginalWorkflowDefinition
-        {
-            get;
-            set;
-        }
+        public Activity OriginalWorkflowDefinition { get; set; }
 
         // Internal hook to allow DynamicUpdateServices to surface a customized error message when
         // there is an invalid activity in the disallowUpdateInsideActivities list
-        internal Func<Activity, Exception> OnInvalidActivityToBlockUpdate
-        {
-            get;
-            set;
-        }
+        internal Func<Activity, Exception> OnInvalidActivityToBlockUpdate { get; set; }
 
         // Internal hook to allow DynamicUpdateServices to surface a customized error message when
         // there is an invalid activity in the disallowUpdateInsideActivities list
-        internal Func<Activity, Exception> OnInvalidImplementationMapAssociation
-        {
-            get;
-            set;
-        }
+        internal Func<Activity, Exception> OnInvalidImplementationMapAssociation { get; set; }
 
         public DynamicUpdateMap CreateMap()
         {
@@ -100,8 +64,14 @@ namespace System.Activities.DynamicUpdate
             return CreateMap(out activitiesBlockingUpdate);
         }
 
-        [SuppressMessage(FxCop.Category.Design, FxCop.Rule.AvoidOutParameters, Justification = "Approved Design. Need to return the map and the block list.")]
-        public DynamicUpdateMap CreateMap(out IList<ActivityBlockingUpdate> activitiesBlockingUpdate)
+        [SuppressMessage(
+            FxCop.Category.Design,
+            FxCop.Rule.AvoidOutParameters,
+            Justification = "Approved Design. Need to return the map and the block list."
+        )]
+        public DynamicUpdateMap CreateMap(
+            out IList<ActivityBlockingUpdate> activitiesBlockingUpdate
+        )
         {
             RequireProperty(this.LookupMapItem, "LookupMapItem");
             RequireProperty(this.UpdatedWorkflowDefinition, "UpdatedWorkflowDefinition");
@@ -112,36 +82,63 @@ namespace System.Activities.DynamicUpdate
             return result;
         }
 
-        private static void CacheMetadata(Activity workflowDefinition, LocationReferenceEnvironment environment, ActivityUtilities.ProcessActivityCallback callback, bool forImplementation)
+        private static void CacheMetadata(
+            Activity workflowDefinition,
+            LocationReferenceEnvironment environment,
+            ActivityUtilities.ProcessActivityCallback callback,
+            bool forImplementation
+        )
         {
             IList<ValidationError> validationErrors = null;
-            ActivityUtilities.CacheRootMetadata(workflowDefinition, environment, ProcessTreeOptions(forImplementation), callback, ref validationErrors);
+            ActivityUtilities.CacheRootMetadata(
+                workflowDefinition,
+                environment,
+                ProcessTreeOptions(forImplementation),
+                callback,
+                ref validationErrors
+            );
             ActivityValidationServices.ThrowIfViolationsExist(validationErrors);
         }
 
-        static DynamicUpdateMapEntry GetParentEntry(Activity originalActivity, DynamicUpdateMap updateMap)
+        static DynamicUpdateMapEntry GetParentEntry(
+            Activity originalActivity,
+            DynamicUpdateMap updateMap
+        )
         {
-            if (originalActivity.Parent != null && originalActivity.Parent.MemberOf == originalActivity.MemberOf)
+            if (
+                originalActivity.Parent != null
+                && originalActivity.Parent.MemberOf == originalActivity.MemberOf
+            )
             {
                 DynamicUpdateMapEntry parentEntry;
                 updateMap.TryGetUpdateEntry(originalActivity.Parent.InternalId, out parentEntry);
-                Fx.Assert(parentEntry != null, "We process in IdSpace order, so we always process parents before their children");
+                Fx.Assert(
+                    parentEntry != null,
+                    "We process in IdSpace order, so we always process parents before their children"
+                );
                 return parentEntry;
             }
             return null;
         }
 
-        static IEnumerable<Activity> GetPublicDeclaredChildren(Activity activity, bool includeExpressions)
+        static IEnumerable<Activity> GetPublicDeclaredChildren(
+            Activity activity,
+            bool includeExpressions
+        )
         {
-            IEnumerable<Activity> result = activity.Children.Concat(
-                activity.ImportedChildren).Concat(
-                activity.Delegates.Select(d => d.Handler)).Concat(
-                activity.ImportedDelegates.Select(d => d.Handler));
+            IEnumerable<Activity> result = activity
+                .Children.Concat(activity.ImportedChildren)
+                .Concat(activity.Delegates.Select(d => d.Handler))
+                .Concat(activity.ImportedDelegates.Select(d => d.Handler));
             if (includeExpressions)
             {
-                result = result.Concat(
-                    activity.RuntimeVariables.Select(v => v.Default)).Concat(
-                    activity.RuntimeArguments.Select(a => a.IsBound ? a.BoundArgument.Expression : null));
+                result = result
+                    .Concat(activity.RuntimeVariables.Select(v => v.Default))
+                    .Concat(
+                        activity.RuntimeArguments.Select(a =>
+                            a.IsBound ? a.BoundArgument.Expression : null
+                        )
+                    );
             }
 
             return result.Where(a => a != null && a.Parent == activity);
@@ -149,24 +146,27 @@ namespace System.Activities.DynamicUpdate
 
         private static ProcessActivityTreeOptions ProcessTreeOptions(bool forImplementation)
         {
-            return forImplementation ? ProcessActivityTreeOptions.DynamicUpdateOptionsForImplementation : ProcessActivityTreeOptions.DynamicUpdateOptions;
+            return forImplementation
+                ? ProcessActivityTreeOptions.DynamicUpdateOptionsForImplementation
+                : ProcessActivityTreeOptions.DynamicUpdateOptions;
         }
 
         private static void RequireProperty(object value, string name)
         {
             if (value == null)
             {
-                throw FxTrace.Exception.AsError(new InvalidOperationException(SR.UpdateMapBuilderRequiredProperty(name)));
+                throw FxTrace.Exception.AsError(
+                    new InvalidOperationException(SR.UpdateMapBuilderRequiredProperty(name))
+                );
             }
         }
 
         internal class ReferenceEqualityComparer : IEqualityComparer<object>
         {
-            public static readonly IEqualityComparer<object> Instance = new ReferenceEqualityComparer();
+            public static readonly IEqualityComparer<object> Instance =
+                new ReferenceEqualityComparer();
 
-            ReferenceEqualityComparer()
-            {
-            }
+            ReferenceEqualityComparer() { }
 
             public new bool Equals(object x, object y)
             {
@@ -189,7 +189,11 @@ namespace System.Activities.DynamicUpdate
             private LocationReferenceEnvironment originalEnvironment;
             private bool forImplementation;
 
-            public Preparer(Activity originalProgram, LocationReferenceEnvironment originalEnvironment, bool forImplementation)
+            public Preparer(
+                Activity originalProgram,
+                LocationReferenceEnvironment originalEnvironment,
+                bool forImplementation
+            )
             {
                 this.originalProgram = originalProgram;
                 this.originalEnvironment = originalEnvironment;
@@ -198,8 +202,15 @@ namespace System.Activities.DynamicUpdate
 
             public Dictionary<object, DynamicUpdateMapItem> Prepare()
             {
-                this.updateableObjects = new Dictionary<object, DynamicUpdateMapItem>(ReferenceEqualityComparer.Instance);
-                CacheMetadata(this.originalProgram, this.originalEnvironment, null, this.forImplementation);
+                this.updateableObjects = new Dictionary<object, DynamicUpdateMapItem>(
+                    ReferenceEqualityComparer.Instance
+                );
+                CacheMetadata(
+                    this.originalProgram,
+                    this.originalEnvironment,
+                    null,
+                    this.forImplementation
+                );
 
                 IdSpace idSpace = GetIdSpace();
                 if (idSpace != null)
@@ -215,19 +226,25 @@ namespace System.Activities.DynamicUpdate
 
             IdSpace GetIdSpace()
             {
-                return this.forImplementation ? this.originalProgram.ParentOf : this.originalProgram.MemberOf;
+                return this.forImplementation
+                    ? this.originalProgram.ParentOf
+                    : this.originalProgram.MemberOf;
             }
 
             void ProcessElement(Activity currentElement)
             {
                 // Attach the original Activity ID to the activity
                 // The origin of a variable default is the same as the origin of the variable itself.
-                // So we don't attach match info for the default, since that would conflict with 
+                // So we don't attach match info for the default, since that would conflict with
                 // the match info for the variable.
-                if (currentElement.RelationshipToParent != Activity.RelationshipType.VariableDefault || currentElement.Origin == null)
+                if (
+                    currentElement.RelationshipToParent != Activity.RelationshipType.VariableDefault
+                    || currentElement.Origin == null
+                )
                 {
                     ValidateOrigin(currentElement.Origin, currentElement);
-                    this.updateableObjects[currentElement.Origin ?? currentElement] = new DynamicUpdateMapItem(currentElement.InternalId);
+                    this.updateableObjects[currentElement.Origin ?? currentElement] =
+                        new DynamicUpdateMapItem(currentElement.InternalId);
                 }
 
                 // Attach the original variable index to the variable
@@ -238,8 +255,9 @@ namespace System.Activities.DynamicUpdate
                     if (string.IsNullOrEmpty(variable.Name))
                     {
                         ValidateOrigin(variable.Origin, variable);
-                        this.updateableObjects[variable.Origin ?? variable] = new DynamicUpdateMapItem(currentElement.InternalId, i);
-                    }                    
+                        this.updateableObjects[variable.Origin ?? variable] =
+                            new DynamicUpdateMapItem(currentElement.InternalId, i);
+                    }
                 }
             }
 
@@ -257,11 +275,19 @@ namespace System.Activities.DynamicUpdate
                             Variable elementVar = element as Variable;
                             if (elementVar != null)
                             {
-                                error = SR.DuplicateOriginVariableVariable(origin, dupe.Name, elementVar.Name);
+                                error = SR.DuplicateOriginVariableVariable(
+                                    origin,
+                                    dupe.Name,
+                                    elementVar.Name
+                                );
                             }
                             else
                             {
-                                error = SR.DuplicateOriginActivityVariable(origin, element, dupe.Name);
+                                error = SR.DuplicateOriginActivityVariable(
+                                    origin,
+                                    element,
+                                    dupe.Name
+                                );
                             }
                         }
                         else
@@ -270,7 +296,11 @@ namespace System.Activities.DynamicUpdate
                             Variable elementVar = element as Variable;
                             if (elementVar != null)
                             {
-                                error = SR.DuplicateOriginActivityVariable(origin, dupe, elementVar.Name);
+                                error = SR.DuplicateOriginActivityVariable(
+                                    origin,
+                                    dupe,
+                                    elementVar.Name
+                                );
                             }
                             else
                             {
@@ -290,7 +320,9 @@ namespace System.Activities.DynamicUpdate
 
             Variable GetVariable(DynamicUpdateMapItem mapItem)
             {
-                return GetIdSpace()[mapItem.OriginalVariableOwnerId].RuntimeVariables[mapItem.OriginalId];
+                return GetIdSpace()[mapItem.OriginalVariableOwnerId].RuntimeVariables[
+                    mapItem.OriginalId
+                ];
             }
         }
 
@@ -303,13 +335,16 @@ namespace System.Activities.DynamicUpdate
             Dictionary<Activity, object> savedOriginalValues;
             bool savedOriginalValuesForReferencedChildren;
             IList<ActivityBlockingUpdate> blockList;
+
             // dictionary from expression root to the activity that can make it go idle
             Dictionary<Activity, Activity> expressionRootsThatCanInduceIdle;
 
             public Finalizer(DynamicUpdateMapBuilder builder)
             {
                 this.builder = builder;
-                this.savedOriginalValues = new Dictionary<Activity, object>(ReferenceEqualityComparer.Instance);
+                this.savedOriginalValues = new Dictionary<Activity, object>(
+                    ReferenceEqualityComparer.Instance
+                );
                 this.Matcher = new DefinitionMatcher(builder.LookupMapItem);
             }
 
@@ -319,34 +354,62 @@ namespace System.Activities.DynamicUpdate
                 this.blockList = new List<ActivityBlockingUpdate>();
 
                 // cache metadata of originalProgram
-                CacheMetadata(this.builder.OriginalWorkflowDefinition, this.builder.OriginalEnvironment, null, this.builder.ForImplementation);
-                IdSpace originalIdSpace = this.builder.ForImplementation ? this.builder.OriginalWorkflowDefinition.ParentOf : this.builder.OriginalWorkflowDefinition.MemberOf;
+                CacheMetadata(
+                    this.builder.OriginalWorkflowDefinition,
+                    this.builder.OriginalEnvironment,
+                    null,
+                    this.builder.ForImplementation
+                );
+                IdSpace originalIdSpace = this.builder.ForImplementation
+                    ? this.builder.OriginalWorkflowDefinition.ParentOf
+                    : this.builder.OriginalWorkflowDefinition.MemberOf;
                 if (originalIdSpace == null)
                 {
-                    Fx.Assert(this.builder.ForImplementation, "An activity must be a member of an IdSpace");
-                    throw FxTrace.Exception.AsError(new InvalidOperationException(SR.InvalidOriginalWorkflowDefinitionForImplementationMapCreation));
+                    Fx.Assert(
+                        this.builder.ForImplementation,
+                        "An activity must be a member of an IdSpace"
+                    );
+                    throw FxTrace.Exception.AsError(
+                        new InvalidOperationException(
+                            SR.InvalidOriginalWorkflowDefinitionForImplementationMapCreation
+                        )
+                    );
                 }
                 this.Matcher.OldIdSpace = originalIdSpace;
                 this.foundOriginalElements = new BitArray(originalIdSpace.MemberCount);
 
                 // cache metadata of modifiedProgram before iterative ProcessElement()
-                CacheMetadata(this.builder.UpdatedWorkflowDefinition, this.builder.UpdatedEnvironment, CheckCanArgumentOrVariableDefaultInduceIdle, this.builder.ForImplementation);
-                IdSpace idSpace = this.builder.ForImplementation ? this.builder.UpdatedWorkflowDefinition.ParentOf : this.builder.UpdatedWorkflowDefinition.MemberOf;
+                CacheMetadata(
+                    this.builder.UpdatedWorkflowDefinition,
+                    this.builder.UpdatedEnvironment,
+                    CheckCanArgumentOrVariableDefaultInduceIdle,
+                    this.builder.ForImplementation
+                );
+                IdSpace idSpace = this.builder.ForImplementation
+                    ? this.builder.UpdatedWorkflowDefinition.ParentOf
+                    : this.builder.UpdatedWorkflowDefinition.MemberOf;
                 if (idSpace == null)
                 {
-                    Fx.Assert(this.builder.ForImplementation, "An activity must be a member of an IdSpace");
-                    throw FxTrace.Exception.AsError(new InvalidOperationException(SR.InvalidUpdatedWorkflowDefinitionForImplementationMapCreation));
+                    Fx.Assert(
+                        this.builder.ForImplementation,
+                        "An activity must be a member of an IdSpace"
+                    );
+                    throw FxTrace.Exception.AsError(
+                        new InvalidOperationException(
+                            SR.InvalidUpdatedWorkflowDefinitionForImplementationMapCreation
+                        )
+                    );
                 }
                 this.Matcher.NewIdSpace = idSpace;
 
-                // check if any of the activities or variables from the original definition 
+                // check if any of the activities or variables from the original definition
                 // were reused in the updated definition
                 for (int i = 1; i < originalIdSpace.MemberCount + 1; i++)
                 {
                     CheckForReusedActivity(originalIdSpace[i]);
                 }
-                
-                // most of the updatemap construction processing                 
+
+                // most of the updatemap construction processing
                 for (int i = 1; i < idSpace.MemberCount + 1; i++)
                 {
                     ProcessElement(idSpace[i]);
@@ -373,8 +436,12 @@ namespace System.Activities.DynamicUpdate
                     this.updateMap.IsForImplementation = true;
 
                     // gather arguments diff between new and old activity definitions
-                    this.updateMap.OldArguments = ArgumentInfo.List(builder.OriginalWorkflowDefinition);
-                    this.updateMap.NewArguments = ArgumentInfo.List(builder.UpdatedWorkflowDefinition);
+                    this.updateMap.OldArguments = ArgumentInfo.List(
+                        builder.OriginalWorkflowDefinition
+                    );
+                    this.updateMap.NewArguments = ArgumentInfo.List(
+                        builder.UpdatedWorkflowDefinition
+                    );
                 }
 
                 // Validate the Disallow entries
@@ -396,45 +463,51 @@ namespace System.Activities.DynamicUpdate
                 return this.updateMap;
             }
 
-            internal bool? AllowUpdateInsideCurrentActivity
-            {
-                get;
-                set;
-            }
+            internal bool? AllowUpdateInsideCurrentActivity { get; set; }
 
-            internal string UpdateDisallowedReason
-            {
-                get;
-                set;
-            }
+            internal string UpdateDisallowedReason { get; set; }
 
-            internal Dictionary<string, object> SavedOriginalValuesForCurrentActivity
-            {
-                get;
-                set;
-            }
+            internal Dictionary<string, object> SavedOriginalValuesForCurrentActivity { get; set; }
 
-            internal DefinitionMatcher Matcher
-            {
-                get;
-                private set;
-            }
+            internal DefinitionMatcher Matcher { get; private set; }
 
             internal Dictionary<Activity, Activity> ExpressionRootsThatCanInduceIdle
             {
-                get
-                {
-                    return this.expressionRootsThatCanInduceIdle;
-                }
+                get { return this.expressionRootsThatCanInduceIdle; }
             }
 
-            void BlockUpdate(Activity activity, UpdateBlockedReason reason, DynamicUpdateMapEntry entry, string message = null)
+            void BlockUpdate(
+                Activity activity,
+                UpdateBlockedReason reason,
+                DynamicUpdateMapEntry entry,
+                string message = null
+            )
             {
-                Fx.Assert(activity.MemberOf == (this.builder.ForImplementation ? activity.RootActivity.ParentOf : activity.RootActivity.MemberOf), "Should have called other overload of BlockUpdate");
-                BlockUpdate(activity, entry.OldActivityId.ToString(CultureInfo.InvariantCulture), reason, entry, message);
+                Fx.Assert(
+                    activity.MemberOf
+                        == (
+                            this.builder.ForImplementation
+                                ? activity.RootActivity.ParentOf
+                                : activity.RootActivity.MemberOf
+                        ),
+                    "Should have called other overload of BlockUpdate"
+                );
+                BlockUpdate(
+                    activity,
+                    entry.OldActivityId.ToString(CultureInfo.InvariantCulture),
+                    reason,
+                    entry,
+                    message
+                );
             }
 
-            internal void BlockUpdate(Activity activity, string originalActivityId, UpdateBlockedReason reason, DynamicUpdateMapEntry entry, string message = null)
+            internal void BlockUpdate(
+                Activity activity,
+                string originalActivityId,
+                UpdateBlockedReason reason,
+                DynamicUpdateMapEntry entry,
+                string message = null
+            )
             {
                 Fx.Assert(reason != UpdateBlockedReason.NotBlocked, "Invalid block reason");
                 if (!entry.IsRuntimeUpdateBlocked)
@@ -446,7 +519,13 @@ namespace System.Activities.DynamicUpdate
                     }
                     entry.ImplementationUpdateMap = null;
 
-                    this.blockList.Add(new ActivityBlockingUpdate(activity, originalActivityId, message ?? UpdateBlockedReasonMessages.Get(reason)));
+                    this.blockList.Add(
+                        new ActivityBlockingUpdate(
+                            activity,
+                            originalActivityId,
+                            message ?? UpdateBlockedReasonMessages.Get(reason)
+                        )
+                    );
                 }
             }
 
@@ -474,9 +553,12 @@ namespace System.Activities.DynamicUpdate
                 Activity originalElement = this.Matcher.GetMatch(currentElement);
                 if (originalElement != null)
                 {
-                    // this means it's an existing one                                      
+                    // this means it's an existing one
 
-                    DynamicUpdateMapEntry mapEntry = this.CreateMapEntry(currentElement, originalElement);
+                    DynamicUpdateMapEntry mapEntry = this.CreateMapEntry(
+                        currentElement,
+                        originalElement
+                    );
                     mapEntry.Parent = GetParentEntry(originalElement, this.updateMap);
                     if (this.builder.DisallowUpdateInside.Contains(currentElement))
                     {
@@ -485,12 +567,23 @@ namespace System.Activities.DynamicUpdate
                     if (originalElement.GetType() != currentElement.GetType())
                     {
                         // returned matching activity's type doesn't really match the currentElement
-                        BlockUpdate(currentElement, UpdateBlockedReason.TypeChange, mapEntry,
-                            SR.DUActivityTypeMismatch(currentElement.GetType(), originalElement.GetType()));
+                        BlockUpdate(
+                            currentElement,
+                            UpdateBlockedReason.TypeChange,
+                            mapEntry,
+                            SR.DUActivityTypeMismatch(
+                                currentElement.GetType(),
+                                originalElement.GetType()
+                            )
+                        );
                     }
                     if (this.DelegateArgumentsChanged(currentElement, originalElement))
                     {
-                        this.BlockUpdate(currentElement, UpdateBlockedReason.DelegateArgumentChange, mapEntry);
+                        this.BlockUpdate(
+                            currentElement,
+                            UpdateBlockedReason.DelegateArgumentChange,
+                            mapEntry
+                        );
                     }
 
                     DynamicUpdateMap implementationMap = null;
@@ -503,14 +596,25 @@ namespace System.Activities.DynamicUpdate
                     // get arguments diff info from implementation map if it exists
                     // we do this before user participation, so that we don't call into user code
                     // if the update is invalid
-                    IList<ArgumentInfo> oldArguments = GetOriginalArguments(mapEntry, implementationMap, currentElement, originalElement);
+                    IList<ArgumentInfo> oldArguments = GetOriginalArguments(
+                        mapEntry,
+                        implementationMap,
+                        currentElement,
+                        originalElement
+                    );
                     if (oldArguments != null)
                     {
-                        CreateArgumentEntries(mapEntry, currentElement.RuntimeArguments, oldArguments);
+                        CreateArgumentEntries(
+                            mapEntry,
+                            currentElement.RuntimeArguments,
+                            oldArguments
+                        );
                     }
 
                     // Capture any saved original value associated with this activity by its parent
-                    mapEntry.SavedOriginalValueFromParent = GetSavedOriginalValueFromParent(currentElement);
+                    mapEntry.SavedOriginalValueFromParent = GetSavedOriginalValueFromParent(
+                        currentElement
+                    );
 
                     if (mapEntry.IsRuntimeUpdateBlocked)
                     {
@@ -519,7 +623,12 @@ namespace System.Activities.DynamicUpdate
                         return;
                     }
 
-                    OnCreateDynamicUpdateMap(currentElement, originalElement, mapEntry, this.Matcher);
+                    OnCreateDynamicUpdateMap(
+                        currentElement,
+                        originalElement,
+                        mapEntry,
+                        this.Matcher
+                    );
                     if (mapEntry.IsRuntimeUpdateBlocked)
                     {
                         // if the activity disabled update, we can't rely on the variable matches,
@@ -530,57 +639,121 @@ namespace System.Activities.DynamicUpdate
 
                     // variable entries need to be calculated after activity participation, since
                     // the activity can participate in matching them
-                    CreateVariableEntries(false, mapEntry, currentElement.RuntimeVariables, originalElement.RuntimeVariables, originalElement);
-                    CreateVariableEntries(true, mapEntry, currentElement.ImplementationVariables, originalElement.ImplementationVariables, originalElement);
+                    CreateVariableEntries(
+                        false,
+                        mapEntry,
+                        currentElement.RuntimeVariables,
+                        originalElement.RuntimeVariables,
+                        originalElement
+                    );
+                    CreateVariableEntries(
+                        true,
+                        mapEntry,
+                        currentElement.ImplementationVariables,
+                        originalElement.ImplementationVariables,
+                        originalElement
+                    );
 
                     if (mapEntry.HasEnvironmentUpdates)
                     {
-                        FillEnvironmentMapMemberCounts(mapEntry.EnvironmentUpdateMap, currentElement, originalElement, oldArguments);
+                        FillEnvironmentMapMemberCounts(
+                            mapEntry.EnvironmentUpdateMap,
+                            currentElement,
+                            originalElement,
+                            oldArguments
+                        );
                     }
                     else
                     {
-                        Fx.Assert(originalElement.SymbolCount == currentElement.SymbolCount || 
-                            originalElement.ImplementationVariables.Count != currentElement.ImplementationVariables.Count,
-                            "Should have environment update if symbol count changed");
+                        Fx.Assert(
+                            originalElement.SymbolCount == currentElement.SymbolCount
+                                || originalElement.ImplementationVariables.Count
+                                    != currentElement.ImplementationVariables.Count,
+                            "Should have environment update if symbol count changed"
+                        );
                     }
 
-                    if (!mapEntry.IsParentRemovedOrBlocked && !mapEntry.IsUpdateBlockedByUpdateAuthor)
+                    if (
+                        !mapEntry.IsParentRemovedOrBlocked
+                        && !mapEntry.IsUpdateBlockedByUpdateAuthor
+                    )
                     {
-                        NestedIdSpaceFinalizer nestedFinalizer = new NestedIdSpaceFinalizer(this, implementationMap, currentElement, originalElement, null);
+                        NestedIdSpaceFinalizer nestedFinalizer = new NestedIdSpaceFinalizer(
+                            this,
+                            implementationMap,
+                            currentElement,
+                            originalElement,
+                            null
+                        );
                         nestedFinalizer.ValidateOrCreateImplementationMap(mapEntry);
                     }
                 }
             }
 
-            internal static void FillEnvironmentMapMemberCounts(EnvironmentUpdateMap envMap, Activity currentElement, Activity originalElement, IList<ArgumentInfo> oldArguments)
+            internal static void FillEnvironmentMapMemberCounts(
+                EnvironmentUpdateMap envMap,
+                Activity currentElement,
+                Activity originalElement,
+                IList<ArgumentInfo> oldArguments
+            )
             {
-                envMap.NewVariableCount = currentElement.RuntimeVariables != null ? currentElement.RuntimeVariables.Count : 0;
-                envMap.NewPrivateVariableCount = currentElement.ImplementationVariables != null ? currentElement.ImplementationVariables.Count : 0;
-                envMap.NewArgumentCount = currentElement.RuntimeArguments != null ? currentElement.RuntimeArguments.Count : 0;
+                envMap.NewVariableCount =
+                    currentElement.RuntimeVariables != null
+                        ? currentElement.RuntimeVariables.Count
+                        : 0;
+                envMap.NewPrivateVariableCount =
+                    currentElement.ImplementationVariables != null
+                        ? currentElement.ImplementationVariables.Count
+                        : 0;
+                envMap.NewArgumentCount =
+                    currentElement.RuntimeArguments != null
+                        ? currentElement.RuntimeArguments.Count
+                        : 0;
 
                 envMap.OldVariableCount = originalElement.RuntimeVariables.Count;
                 envMap.OldPrivateVariableCount = originalElement.ImplementationVariables.Count;
                 envMap.OldArgumentCount = oldArguments != null ? oldArguments.Count : 0;
 
-                Fx.Assert((originalElement.HandlerOf == null && currentElement.HandlerOf == null)
-                    || (originalElement.HandlerOf.RuntimeDelegateArguments.Count == currentElement.HandlerOf.RuntimeDelegateArguments.Count),
-                    "RuntimeDelegateArguments count must not have changed.");
-                envMap.RuntimeDelegateArgumentCount = originalElement.HandlerOf == null ? 0 : originalElement.HandlerOf.RuntimeDelegateArguments.Count;
+                Fx.Assert(
+                    (originalElement.HandlerOf == null && currentElement.HandlerOf == null)
+                        || (
+                            originalElement.HandlerOf.RuntimeDelegateArguments.Count
+                            == currentElement.HandlerOf.RuntimeDelegateArguments.Count
+                        ),
+                    "RuntimeDelegateArguments count must not have changed."
+                );
+                envMap.RuntimeDelegateArgumentCount =
+                    originalElement.HandlerOf == null
+                        ? 0
+                        : originalElement.HandlerOf.RuntimeDelegateArguments.Count;
             }
 
-            DynamicUpdateMapEntry CreateMapEntry(Activity currentActivity, Activity matchingOriginal)
+            DynamicUpdateMapEntry CreateMapEntry(
+                Activity currentActivity,
+                Activity matchingOriginal
+            )
             {
-                Fx.Assert(currentActivity != null && matchingOriginal != null, "this entry creation is only for existing activity's ID change.");
-                
+                Fx.Assert(
+                    currentActivity != null && matchingOriginal != null,
+                    "this entry creation is only for existing activity's ID change."
+                );
+
                 this.foundOriginalElements[matchingOriginal.InternalId - 1] = true;
 
-                DynamicUpdateMapEntry entry = new DynamicUpdateMapEntry(matchingOriginal.InternalId, currentActivity.InternalId);
+                DynamicUpdateMapEntry entry = new DynamicUpdateMapEntry(
+                    matchingOriginal.InternalId,
+                    currentActivity.InternalId
+                );
                 this.updateMap.AddEntry(entry);
                 return entry;
             }
 
-            internal void OnCreateDynamicUpdateMap(Activity currentElement, Activity originalElement, 
-                DynamicUpdateMapEntry mapEntry, IDefinitionMatcher matcher)
+            internal void OnCreateDynamicUpdateMap(
+                Activity currentElement,
+                Activity originalElement,
+                DynamicUpdateMapEntry mapEntry,
+                IDefinitionMatcher matcher
+            )
             {
                 this.AllowUpdateInsideCurrentActivity = null;
                 this.UpdateDisallowedReason = null;
@@ -589,44 +762,71 @@ namespace System.Activities.DynamicUpdate
                 currentElement.OnInternalCreateDynamicUpdateMap(this, matcher, originalElement);
                 if (this.AllowUpdateInsideCurrentActivity == false)
                 {
-                    this.BlockUpdate(currentElement, originalElement.Id, UpdateBlockedReason.Custom, mapEntry, this.UpdateDisallowedReason);
+                    this.BlockUpdate(
+                        currentElement,
+                        originalElement.Id,
+                        UpdateBlockedReason.Custom,
+                        mapEntry,
+                        this.UpdateDisallowedReason
+                    );
                 }
-                if (this.SavedOriginalValuesForCurrentActivity != null && this.SavedOriginalValuesForCurrentActivity.Count > 0)
+                if (
+                    this.SavedOriginalValuesForCurrentActivity != null
+                    && this.SavedOriginalValuesForCurrentActivity.Count > 0
+                )
                 {
                     mapEntry.SavedOriginalValues = this.SavedOriginalValuesForCurrentActivity;
                 }
                 if (this.savedOriginalValuesForReferencedChildren)
                 {
-                    this.BlockUpdate(currentElement, originalElement.Id, UpdateBlockedReason.SavedOriginalValuesForReferencedChildren, mapEntry);
+                    this.BlockUpdate(
+                        currentElement,
+                        originalElement.Id,
+                        UpdateBlockedReason.SavedOriginalValuesForReferencedChildren,
+                        mapEntry
+                    );
                 }
             }
 
-            void CreateVariableEntries(bool forImplementationVariables, DynamicUpdateMapEntry mapEntry, IList<Variable> newVariables, IList<Variable> oldVariables, Activity originalElement)
+            void CreateVariableEntries(
+                bool forImplementationVariables,
+                DynamicUpdateMapEntry mapEntry,
+                IList<Variable> newVariables,
+                IList<Variable> oldVariables,
+                Activity originalElement
+            )
             {
                 if (newVariables != null && newVariables.Count > 0)
                 {
                     for (int i = 0; i < newVariables.Count; i++)
                     {
                         Variable newVariable = newVariables[i];
-                        int originalIndex = this.Matcher.GetMatchIndex(newVariable, originalElement, forImplementationVariables);
-                        
+                        int originalIndex = this.Matcher.GetMatchIndex(
+                            newVariable,
+                            originalElement,
+                            forImplementationVariables
+                        );
+
                         if (originalIndex != i)
                         {
                             EnsureEnvironmentUpdateMap(mapEntry);
-                            EnvironmentUpdateMapEntry environmentEntry = new EnvironmentUpdateMapEntry
-                            {
-                                OldOffset = originalIndex,
-                                NewOffset = i,
-                            };
+                            EnvironmentUpdateMapEntry environmentEntry =
+                                new EnvironmentUpdateMapEntry
+                                {
+                                    OldOffset = originalIndex,
+                                    NewOffset = i,
+                                };
 
                             if (forImplementationVariables)
                             {
-                                mapEntry.EnvironmentUpdateMap.PrivateVariableEntries.Add(environmentEntry);
+                                mapEntry.EnvironmentUpdateMap.PrivateVariableEntries.Add(
+                                    environmentEntry
+                                );
                             }
                             else
                             {
                                 mapEntry.EnvironmentUpdateMap.VariableEntries.Add(environmentEntry);
-                            }                            
+                            }
 
                             if (originalIndex == EnvironmentUpdateMapEntry.NonExistent)
                             {
@@ -635,12 +835,23 @@ namespace System.Activities.DynamicUpdate
                                 {
                                     // If an variable default expression goes idle, the activity it is declared on can potentially
                                     // resume execution before the default expression is evaluated. We can't allow that.
-                                    this.BlockUpdate(newVariable.Owner, UpdateBlockedReason.AddedIdleExpression, mapEntry, 
-                                        SR.AddedIdleVariableDefaultBlockDU(newVariable.Name, idleActivity));
+                                    this.BlockUpdate(
+                                        newVariable.Owner,
+                                        UpdateBlockedReason.AddedIdleExpression,
+                                        mapEntry,
+                                        SR.AddedIdleVariableDefaultBlockDU(
+                                            newVariable.Name,
+                                            idleActivity
+                                        )
+                                    );
                                 }
                                 else if (newVariable.IsHandle)
                                 {
-                                    this.BlockUpdate(newVariable.Owner, UpdateBlockedReason.NewHandle, mapEntry);
+                                    this.BlockUpdate(
+                                        newVariable.Owner,
+                                        UpdateBlockedReason.NewHandle,
+                                        mapEntry
+                                    );
                                 }
                                 environmentEntry.IsNewHandle = newVariable.IsHandle;
                             }
@@ -650,28 +861,55 @@ namespace System.Activities.DynamicUpdate
 
                 // We don't normally create entries for removals, but we need to ensure that
                 // environment update happens if there are only removals.
-                if (oldVariables != null && (newVariables == null || newVariables.Count < oldVariables.Count))
+                if (
+                    oldVariables != null
+                    && (newVariables == null || newVariables.Count < oldVariables.Count)
+                )
                 {
                     EnsureEnvironmentUpdateMap(mapEntry);
                 }
             }
 
-            internal void CreateArgumentEntries(DynamicUpdateMapEntry mapEntry, IList<RuntimeArgument> newArguments, IList<ArgumentInfo> oldArguments)
-            {                
+            internal void CreateArgumentEntries(
+                DynamicUpdateMapEntry mapEntry,
+                IList<RuntimeArgument> newArguments,
+                IList<ArgumentInfo> oldArguments
+            )
+            {
                 RuntimeArgument newIdleArgument;
                 Activity idleActivity;
-                if (!CreateArgumentEntries(mapEntry, newArguments, oldArguments, this.expressionRootsThatCanInduceIdle, out newIdleArgument, out idleActivity))
+                if (
+                    !CreateArgumentEntries(
+                        mapEntry,
+                        newArguments,
+                        oldArguments,
+                        this.expressionRootsThatCanInduceIdle,
+                        out newIdleArgument,
+                        out idleActivity
+                    )
+                )
                 {
                     // If an argument expression goes idle, the activity it is declared on can potentially
                     // resume execution before the argument is evaluated. We can't allow that.
-                    this.BlockUpdate(newIdleArgument.Owner, UpdateBlockedReason.AddedIdleExpression, mapEntry,
-                        SR.AddedIdleArgumentBlockDU(newIdleArgument.Name, idleActivity));
+                    this.BlockUpdate(
+                        newIdleArgument.Owner,
+                        UpdateBlockedReason.AddedIdleExpression,
+                        mapEntry,
+                        SR.AddedIdleArgumentBlockDU(newIdleArgument.Name, idleActivity)
+                    );
                     return;
                 }
             }
 
             // if it detects any added argument whose Expression can induce idle, it returns FALSE along with newIdleArgument and idleActivity.  Return true otherwise.
-            internal static bool CreateArgumentEntries(DynamicUpdateMapEntry mapEntry, IList<RuntimeArgument> newArguments, IList<ArgumentInfo> oldArguments, Dictionary<Activity, Activity> expressionRootsThatCanInduceIdle, out RuntimeArgument newIdleArgument, out Activity idleActivity)
+            internal static bool CreateArgumentEntries(
+                DynamicUpdateMapEntry mapEntry,
+                IList<RuntimeArgument> newArguments,
+                IList<ArgumentInfo> oldArguments,
+                Dictionary<Activity, Activity> expressionRootsThatCanInduceIdle,
+                out RuntimeArgument newIdleArgument,
+                out Activity idleActivity
+            )
             {
                 newIdleArgument = null;
                 idleActivity = null;
@@ -682,21 +920,36 @@ namespace System.Activities.DynamicUpdate
                     {
                         RuntimeArgument newArgument = newArguments[i];
                         int oldIndex = oldArguments.IndexOf(new ArgumentInfo(newArgument));
-                        Fx.Assert(oldIndex >= 0 || oldIndex == EnvironmentUpdateMapEntry.NonExistent, "NonExistent constant should be consistent with IndexOf");
+                        Fx.Assert(
+                            oldIndex >= 0 || oldIndex == EnvironmentUpdateMapEntry.NonExistent,
+                            "NonExistent constant should be consistent with IndexOf"
+                        );
 
                         if (oldIndex != i)
                         {
                             EnsureEnvironmentUpdateMap(mapEntry);
-                            mapEntry.EnvironmentUpdateMap.ArgumentEntries.Add(new EnvironmentUpdateMapEntry
-                            {
-                                OldOffset = oldIndex,
-                                NewOffset = i
-                            });
+                            mapEntry.EnvironmentUpdateMap.ArgumentEntries.Add(
+                                new EnvironmentUpdateMapEntry
+                                {
+                                    OldOffset = oldIndex,
+                                    NewOffset = i,
+                                }
+                            );
 
-                            if (oldIndex == EnvironmentUpdateMapEntry.NonExistent && newArgument.IsBound)
+                            if (
+                                oldIndex == EnvironmentUpdateMapEntry.NonExistent
+                                && newArgument.IsBound
+                            )
                             {
                                 Activity expressionRoot = newArgument.BoundArgument.Expression;
-                                if (expressionRoot != null && expressionRootsThatCanInduceIdle != null && expressionRootsThatCanInduceIdle.TryGetValue(expressionRoot, out idleActivity))
+                                if (
+                                    expressionRoot != null
+                                    && expressionRootsThatCanInduceIdle != null
+                                    && expressionRootsThatCanInduceIdle.TryGetValue(
+                                        expressionRoot,
+                                        out idleActivity
+                                    )
+                                )
                                 {
                                     newIdleArgument = newArgument;
                                     return false;
@@ -708,7 +961,10 @@ namespace System.Activities.DynamicUpdate
 
                 // We don't normally create entries for removals, but we need to ensure that
                 // environment update happens if there are only removals.
-                if (oldArguments != null && (newArguments == null || newArguments.Count < oldArguments.Count))
+                if (
+                    oldArguments != null
+                    && (newArguments == null || newArguments.Count < oldArguments.Count)
+                )
                 {
                     EnsureEnvironmentUpdateMap(mapEntry);
                 }
@@ -716,26 +972,44 @@ namespace System.Activities.DynamicUpdate
                 return true;
             }
 
-            IList<ArgumentInfo> GetOriginalArguments(DynamicUpdateMapEntry mapEntry, DynamicUpdateMap implementationMap, Activity updatedActivity, Activity originalActivity)
+            IList<ArgumentInfo> GetOriginalArguments(
+                DynamicUpdateMapEntry mapEntry,
+                DynamicUpdateMap implementationMap,
+                Activity updatedActivity,
+                Activity originalActivity
+            )
             {
                 bool argumentsChangedFromImplementationMap = false;
 
                 if (implementationMap != null && !implementationMap.ArgumentsAreUnknown)
                 {
-                    argumentsChangedFromImplementationMap = !ActivityComparer.ListEquals(implementationMap.NewArguments, implementationMap.OldArguments);
-                    bool dynamicArgumentsDetected = !ActivityComparer.ListEquals(ArgumentInfo.List(updatedActivity), implementationMap.NewArguments);
+                    argumentsChangedFromImplementationMap = !ActivityComparer.ListEquals(
+                        implementationMap.NewArguments,
+                        implementationMap.OldArguments
+                    );
+                    bool dynamicArgumentsDetected = !ActivityComparer.ListEquals(
+                        ArgumentInfo.List(updatedActivity),
+                        implementationMap.NewArguments
+                    );
                     if (argumentsChangedFromImplementationMap && dynamicArgumentsDetected)
                     {
                         // this is to ensure no dynamic arguments were added, removed or rearranged as the arguments owning activity was being consumed
                         // at the same time the activity has arguments changed from its implementation map.
                         // the list of RuntimeArguments obtained from the configured activity and the list of ArgumentInfos obtained from
                         // the implementation map must match exactly.  Otherwise this activity is blocked for update.
-                        this.BlockUpdate(updatedActivity, UpdateBlockedReason.DynamicArguments, mapEntry, SR.NoDynamicArgumentsInActivityDefinitionChange);
+                        this.BlockUpdate(
+                            updatedActivity,
+                            UpdateBlockedReason.DynamicArguments,
+                            mapEntry,
+                            SR.NoDynamicArgumentsInActivityDefinitionChange
+                        );
                         return null;
                     }
                 }
 
-                return argumentsChangedFromImplementationMap ? implementationMap.OldArguments : ArgumentInfo.List(originalActivity);
+                return argumentsChangedFromImplementationMap
+                    ? implementationMap.OldArguments
+                    : ArgumentInfo.List(originalActivity);
             }
 
             Activity GetIdleActivity(Activity expressionRoot)
@@ -753,14 +1027,18 @@ namespace System.Activities.DynamicUpdate
                 if (!mapEntry.HasEnvironmentUpdates)
                 {
                     mapEntry.EnvironmentUpdateMap = new EnvironmentUpdateMap();
-                }   
+                }
             }
-            
+
             void CheckForReusedActivity(Activity activity)
             {
                 if (activity.RootActivity != this.builder.OriginalWorkflowDefinition)
                 {
-                    throw FxTrace.Exception.AsError(new InvalidWorkflowException(SR.OriginalActivityReusedInModifiedDefinition(activity)));
+                    throw FxTrace.Exception.AsError(
+                        new InvalidWorkflowException(
+                            SR.OriginalActivityReusedInModifiedDefinition(activity)
+                        )
+                    );
                 }
 
                 IList<Variable> variables = activity.RuntimeVariables;
@@ -768,24 +1046,40 @@ namespace System.Activities.DynamicUpdate
                 {
                     if (variables[i].Owner.RootActivity != this.builder.OriginalWorkflowDefinition)
                     {
-                        throw FxTrace.Exception.AsError(new InvalidWorkflowException(SR.OriginalVariableReusedInModifiedDefinition(variables[i].Name)));
+                        throw FxTrace.Exception.AsError(
+                            new InvalidWorkflowException(
+                                SR.OriginalVariableReusedInModifiedDefinition(variables[i].Name)
+                            )
+                        );
                     }
-                }                
+                }
             }
 
-            void CheckCanArgumentOrVariableDefaultInduceIdle(ActivityUtilities.ChildActivity childActivity, ActivityUtilities.ActivityCallStack parentChain)
+            void CheckCanArgumentOrVariableDefaultInduceIdle(
+                ActivityUtilities.ChildActivity childActivity,
+                ActivityUtilities.ActivityCallStack parentChain
+            )
             {
                 Activity activity = childActivity.Activity;
-                if (!(activity.IsExpressionRoot || activity.RelationshipToParent == Activity.RelationshipType.VariableDefault))
+                if (
+                    !(
+                        activity.IsExpressionRoot
+                        || activity.RelationshipToParent
+                            == Activity.RelationshipType.VariableDefault
+                    )
+                )
                 {
                     return;
-                }                
+                }
 
                 if (activity.HasNonEmptySubtree)
                 {
                     ActivityUtilities.FinishCachingSubtree(
-                        childActivity, parentChain, ProcessTreeOptions(this.builder.ForImplementation),
-                        (a, c) => CheckCanActivityInduceIdle(activity, a.Activity));
+                        childActivity,
+                        parentChain,
+                        ProcessTreeOptions(this.builder.ForImplementation),
+                        (a, c) => CheckCanActivityInduceIdle(activity, a.Activity)
+                    );
                 }
                 else
                 {
@@ -799,7 +1093,9 @@ namespace System.Activities.DynamicUpdate
                 {
                     if (this.expressionRootsThatCanInduceIdle == null)
                     {
-                        this.expressionRootsThatCanInduceIdle = new Dictionary<Activity, Activity>(ReferenceEqualityComparer.Instance);
+                        this.expressionRootsThatCanInduceIdle = new Dictionary<Activity, Activity>(
+                            ReferenceEqualityComparer.Instance
+                        );
                     }
                     if (!this.expressionRootsThatCanInduceIdle.ContainsKey(expressionRoot))
                     {
@@ -810,17 +1106,26 @@ namespace System.Activities.DynamicUpdate
 
             bool DelegateArgumentsChanged(Activity newActivity, Activity oldActivity)
             {
-                // check DelegateArguments of ActivityDelegate owning the handler 
+                // check DelegateArguments of ActivityDelegate owning the handler
 
                 if (newActivity.HandlerOf == null)
                 {
-                    Fx.Assert(oldActivity.HandlerOf == null, "Once two activities have been matched, either both must be handlers or both must not be handlers.");
+                    Fx.Assert(
+                        oldActivity.HandlerOf == null,
+                        "Once two activities have been matched, either both must be handlers or both must not be handlers."
+                    );
                     return false;
                 }
 
-                Fx.Assert(oldActivity.HandlerOf != null, "Once two activities have been matched, either both must be handlers or both must not be handlers.");
+                Fx.Assert(
+                    oldActivity.HandlerOf != null,
+                    "Once two activities have been matched, either both must be handlers or both must not be handlers."
+                );
 
-                return !ActivityComparer.ListEquals(newActivity.HandlerOf.RuntimeDelegateArguments, oldActivity.HandlerOf.RuntimeDelegateArguments);
+                return !ActivityComparer.ListEquals(
+                    newActivity.HandlerOf.RuntimeDelegateArguments,
+                    oldActivity.HandlerOf.RuntimeDelegateArguments
+                );
             }
 
             void ThrowInvalidActivityToBlockUpdate(Activity activity)
@@ -832,7 +1137,9 @@ namespace System.Activities.DynamicUpdate
                 }
                 else
                 {
-                    exception = new InvalidOperationException(SR.InvalidActivityToBlockUpdate(activity));
+                    exception = new InvalidOperationException(
+                        SR.InvalidActivityToBlockUpdate(activity)
+                    );
                 }
                 throw FxTrace.Exception.AsError(exception);
             }
@@ -846,7 +1153,9 @@ namespace System.Activities.DynamicUpdate
                 }
                 else
                 {
-                    exception = new InvalidOperationException(SR.InvalidImplementationMapAssociation(activity));
+                    exception = new InvalidOperationException(
+                        SR.InvalidImplementationMapAssociation(activity)
+                    );
                 }
                 throw FxTrace.Exception.AsError(exception);
             }
@@ -871,20 +1180,14 @@ namespace System.Activities.DynamicUpdate
             internal DefinitionMatcher(Func<object, DynamicUpdateMapItem> matchInfoLookup)
             {
                 this.matchInfoLookup = matchInfoLookup;
-                this.newToOldMatches = new Dictionary<object, object>(ReferenceEqualityComparer.Instance);
+                this.newToOldMatches = new Dictionary<object, object>(
+                    ReferenceEqualityComparer.Instance
+                );
             }
 
-            internal IdSpace NewIdSpace
-            {
-                get;
-                set;
-            }
+            internal IdSpace NewIdSpace { get; set; }
 
-            internal IdSpace OldIdSpace
-            {
-                get;
-                set;
-            }
+            internal IdSpace OldIdSpace { get; set; }
 
             // The following methods are intended to be called by the activity author
             // (via UpdateMapMetadata), and should validate accordingly
@@ -894,22 +1197,37 @@ namespace System.Activities.DynamicUpdate
 
                 if (newChild.Parent != source)
                 {
-                    throw FxTrace.Exception.Argument("newChild", SR.AddMatchActivityNewParentMismatch(
-                        source, newChild, newChild.Parent));
+                    throw FxTrace.Exception.Argument(
+                        "newChild",
+                        SR.AddMatchActivityNewParentMismatch(source, newChild, newChild.Parent)
+                    );
                 }
                 if (newChild.MemberOf != newChild.Parent.MemberOf)
                 {
-                    throw FxTrace.Exception.Argument("newChild", SR.AddMatchActivityPrivateChild(newChild));
+                    throw FxTrace.Exception.Argument(
+                        "newChild",
+                        SR.AddMatchActivityPrivateChild(newChild)
+                    );
                 }
                 if (oldChild.Parent != null && oldChild.MemberOf != oldChild.Parent.MemberOf)
                 {
-                    throw FxTrace.Exception.Argument("oldChild", SR.AddMatchActivityPrivateChild(oldChild));
+                    throw FxTrace.Exception.Argument(
+                        "oldChild",
+                        SR.AddMatchActivityPrivateChild(oldChild)
+                    );
                 }
                 if (!ParentsMatch(newChild, oldChild))
                 {
-                    throw FxTrace.Exception.Argument("oldChild", SR.AddMatchActivityNewAndOldParentMismatch(
-                        newChild, oldChild, newChild.Parent, oldChild.Parent));
-                }               
+                    throw FxTrace.Exception.Argument(
+                        "oldChild",
+                        SR.AddMatchActivityNewAndOldParentMismatch(
+                            newChild,
+                            oldChild,
+                            newChild.Parent,
+                            oldChild.Parent
+                        )
+                    );
+                }
 
                 // Only one updated activity can match a given original activity
                 foreach (Activity newSibling in GetPublicDeclaredChildren(newChild.Parent, true))
@@ -928,27 +1246,56 @@ namespace System.Activities.DynamicUpdate
             {
                 if (!ActivityComparer.SignatureEquals(newVariable, oldVariable))
                 {
-                    throw FxTrace.Exception.Argument("newVariable", SR.AddMatchVariableSignatureMismatch(
-                        source, newVariable.Name, newVariable.Type, newVariable.Modifiers, oldVariable.Name, oldVariable.Type, oldVariable.Modifiers));
+                    throw FxTrace.Exception.Argument(
+                        "newVariable",
+                        SR.AddMatchVariableSignatureMismatch(
+                            source,
+                            newVariable.Name,
+                            newVariable.Type,
+                            newVariable.Modifiers,
+                            oldVariable.Name,
+                            oldVariable.Type,
+                            oldVariable.Modifiers
+                        )
+                    );
                 }
 
                 if (newVariable.Owner != source)
                 {
-                    throw FxTrace.Exception.Argument("newVariable", SR.AddMatchVariableNewParentMismatch(
-                        source, newVariable.Name, newVariable.Owner));
+                    throw FxTrace.Exception.Argument(
+                        "newVariable",
+                        SR.AddMatchVariableNewParentMismatch(
+                            source,
+                            newVariable.Name,
+                            newVariable.Owner
+                        )
+                    );
                 }
                 if (GetMatch(newVariable.Owner) != oldVariable.Owner)
                 {
-                    throw FxTrace.Exception.Argument("oldVariable", SR.AddMatchVariableNewAndOldParentMismatch(
-                        newVariable.Name, oldVariable.Name, newVariable.Owner, oldVariable.Owner));
+                    throw FxTrace.Exception.Argument(
+                        "oldVariable",
+                        SR.AddMatchVariableNewAndOldParentMismatch(
+                            newVariable.Name,
+                            oldVariable.Name,
+                            newVariable.Owner,
+                            oldVariable.Owner
+                        )
+                    );
                 }
                 if (!newVariable.IsPublic)
                 {
-                    throw FxTrace.Exception.Argument("newVariable", SR.AddMatchVariablePrivateChild(newVariable.Name));
+                    throw FxTrace.Exception.Argument(
+                        "newVariable",
+                        SR.AddMatchVariablePrivateChild(newVariable.Name)
+                    );
                 }
                 if (!oldVariable.IsPublic)
                 {
-                    throw FxTrace.Exception.Argument("oldVariable", SR.AddMatchVariablePrivateChild(oldVariable.Name));
+                    throw FxTrace.Exception.Argument(
+                        "oldVariable",
+                        SR.AddMatchVariablePrivateChild(oldVariable.Name)
+                    );
                 }
 
                 // Only one updated variable can match a given original variable
@@ -961,7 +1308,9 @@ namespace System.Activities.DynamicUpdate
                     }
                 }
 
-                this.newToOldMatches[newVariable] = oldVariable.Owner.RuntimeVariables.IndexOf(oldVariable);
+                this.newToOldMatches[newVariable] = oldVariable.Owner.RuntimeVariables.IndexOf(
+                    oldVariable
+                );
             }
 
             public Activity GetMatch(Activity newChild)
@@ -978,7 +1327,10 @@ namespace System.Activities.DynamicUpdate
                     return null;
                 }
 
-                if (newChild.Origin != null && newChild.RelationshipToParent == Activity.RelationshipType.VariableDefault)
+                if (
+                    newChild.Origin != null
+                    && newChild.RelationshipToParent == Activity.RelationshipType.VariableDefault
+                )
                 {
                     // Auto-generated variable defaults have the same origin as the variable itself,
                     // so the match info comes from the variable.
@@ -1033,7 +1385,11 @@ namespace System.Activities.DynamicUpdate
             }
 
             // return -1 if there is no match
-            internal int GetMatchIndex(Variable newVariable, Activity matchingOwner, bool forImplementation)
+            internal int GetMatchIndex(
+                Variable newVariable,
+                Activity matchingOwner,
+                bool forImplementation
+            )
             {
                 object result;
                 if (this.newToOldMatches.TryGetValue(newVariable, out result))
@@ -1062,8 +1418,14 @@ namespace System.Activities.DynamicUpdate
                     else
                     {
                         // only for those variables without names, we attempt to match by MapItem tag
-                        DynamicUpdateMapItem matchInfo = this.matchInfoLookup(newVariable.Origin ?? newVariable);
-                        if (matchInfo != null && matchInfo.IsVariableMapItem && matchingOwner.InternalId == matchInfo.OriginalVariableOwnerId)
+                        DynamicUpdateMapItem matchInfo = this.matchInfoLookup(
+                            newVariable.Origin ?? newVariable
+                        );
+                        if (
+                            matchInfo != null
+                            && matchInfo.IsVariableMapItem
+                            && matchingOwner.InternalId == matchInfo.OriginalVariableOwnerId
+                        )
                         {
                             // "matchingOwner.InternalId != matchInfo.OriginalVariableOwnerId" means the variable has been moved to a different owner,
                             // and it is treated as a new variable addition.
@@ -1083,7 +1445,7 @@ namespace System.Activities.DynamicUpdate
                             oldIndex = i;
                             break;
                         }
-                    }                        
+                    }
                 }
 
                 if (oldIndex >= 0 && oldIndex < originalVariables.Count)
@@ -1103,8 +1465,15 @@ namespace System.Activities.DynamicUpdate
                 }
                 else
                 {
-                    if (currentActivity.RelationshipToParent != originalActivity.RelationshipToParent ||
-                        (currentActivity.HandlerOf != null && currentActivity.HandlerOf.ParentCollectionType != originalActivity.HandlerOf.ParentCollectionType))
+                    if (
+                        currentActivity.RelationshipToParent
+                            != originalActivity.RelationshipToParent
+                        || (
+                            currentActivity.HandlerOf != null
+                            && currentActivity.HandlerOf.ParentCollectionType
+                                != originalActivity.HandlerOf.ParentCollectionType
+                        )
+                    )
                     {
                         return false;
                     }
@@ -1114,10 +1483,10 @@ namespace System.Activities.DynamicUpdate
                         return originalActivity.Parent == this.OldIdSpace.Owner;
                     }
 
-                    return originalActivity.Parent != null &&
-                        GetMatch(currentActivity.Parent) == originalActivity.Parent;
+                    return originalActivity.Parent != null
+                        && GetMatch(currentActivity.Parent) == originalActivity.Parent;
                 }
-            }           
+            }
         }
 
         internal class NestedIdSpaceFinalizer : IDefinitionMatcher
@@ -1130,7 +1499,13 @@ namespace System.Activities.DynamicUpdate
             bool invalidMatchInCurrentActivity;
             NestedIdSpaceFinalizer parent;
 
-            public NestedIdSpaceFinalizer(Finalizer finalizer, DynamicUpdateMap implementationMap, Activity updatedActivity, Activity originalActivity, NestedIdSpaceFinalizer parent)
+            public NestedIdSpaceFinalizer(
+                Finalizer finalizer,
+                DynamicUpdateMap implementationMap,
+                Activity updatedActivity,
+                Activity originalActivity,
+                NestedIdSpaceFinalizer parent
+            )
             {
                 this.finalizer = finalizer;
                 this.userProvidedMap = implementationMap;
@@ -1149,10 +1524,21 @@ namespace System.Activities.DynamicUpdate
                     {
                         this.finalizer.ThrowInvalidImplementationMapAssociation(updatedActivity);
                     }
-                    if (!this.userProvidedMap.IsNoChanges && privateIdSpace.MemberCount != this.userProvidedMap.NewDefinitionMemberCount)
+                    if (
+                        !this.userProvidedMap.IsNoChanges
+                        && privateIdSpace.MemberCount
+                            != this.userProvidedMap.NewDefinitionMemberCount
+                    )
                     {
-                        BlockUpdate(updatedActivity, UpdateBlockedReason.InvalidImplementationMap, mapEntry,
-                            SR.InvalidImplementationMap(this.userProvidedMap.NewDefinitionMemberCount, privateIdSpace.MemberCount));
+                        BlockUpdate(
+                            updatedActivity,
+                            UpdateBlockedReason.InvalidImplementationMap,
+                            mapEntry,
+                            SR.InvalidImplementationMap(
+                                this.userProvidedMap.NewDefinitionMemberCount,
+                                privateIdSpace.MemberCount
+                            )
+                        );
                         return;
                     }
                 }
@@ -1160,12 +1546,19 @@ namespace System.Activities.DynamicUpdate
                 // The only difference between updatedActivity and originalActivity is changes in the outer IdSpace.
                 // The implementation IdSpace should never change in response to outer IdSpace changes.
                 // The only exception is addition/removal/rearrangement of RuntimeArguments and their Expressions in the private IdSpace for the sake of supporting Receive Content Parameter change.
-                // If any argument change is detected and nothing else changed in the private IdSpace, 
+                // If any argument change is detected and nothing else changed in the private IdSpace,
                 //  HasPrivateMemberOtherThanArgumentsChanged will return FALSE as well as returning a generated implementation Map.
                 // Also, when userProvidedMap exists, we don't allow changes to arguments inside the private IdSpace
                 DynamicUpdateMap argumentChangesMap;
-                if (ActivityComparer.HasPrivateMemberOtherThanArgumentsChanged(this, updatedActivity, originalActivity, this.parent == null, out argumentChangesMap) || 
-                    (argumentChangesMap != null && this.userProvidedMap != null))
+                if (
+                    ActivityComparer.HasPrivateMemberOtherThanArgumentsChanged(
+                        this,
+                        updatedActivity,
+                        originalActivity,
+                        this.parent == null,
+                        out argumentChangesMap
+                    ) || (argumentChangesMap != null && this.userProvidedMap != null)
+                )
                 {
                     // either of the following two must have occured here.
                     // A.
@@ -1178,9 +1571,13 @@ namespace System.Activities.DynamicUpdate
                     // In addition to "argumentChangesMap", there is also a user provided map.  This blocks DU.
 
                     // generate a warning and block update inside this activity
-                    BlockUpdate(updatedActivity, UpdateBlockedReason.PrivateMembersHaveChanged, mapEntry);
+                    BlockUpdate(
+                        updatedActivity,
+                        UpdateBlockedReason.PrivateMembersHaveChanged,
+                        mapEntry
+                    );
                     return;
-                }                
+                }
 
                 if (updatedActivity.ParentOf != null)
                 {
@@ -1208,7 +1605,11 @@ namespace System.Activities.DynamicUpdate
             // However an invalid match can still cause us to disallow update
             public void AddMatch(Activity newChild, Activity oldChild, Activity source)
             {
-                if (newChild.Parent != source || newChild.MemberOf != source.MemberOf || GetMatch(newChild) != oldChild)
+                if (
+                    newChild.Parent != source
+                    || newChild.MemberOf != source.MemberOf
+                    || GetMatch(newChild) != oldChild
+                )
                 {
                     this.invalidMatchInCurrentActivity = true;
                 }
@@ -1216,7 +1617,11 @@ namespace System.Activities.DynamicUpdate
 
             public void AddMatch(Variable newVariable, Variable oldVariable, Activity source)
             {
-                if (newVariable.Owner != source || !newVariable.IsPublic || GetMatch(newVariable) != oldVariable)
+                if (
+                    newVariable.Owner != source
+                    || !newVariable.IsPublic
+                    || GetMatch(newVariable) != oldVariable
+                )
                 {
                     this.invalidMatchInCurrentActivity = true;
                 }
@@ -1234,15 +1639,17 @@ namespace System.Activities.DynamicUpdate
                         return owningFinalizer.originalActivity.ParentOf[newActivity.InternalId];
                     }
                     owningFinalizer = owningFinalizer.parent;
-                }
-                while (owningFinalizer != null);
+                } while (owningFinalizer != null);
 
                 return this.finalizer.Matcher.GetMatch(newActivity);
             }
 
             public Variable GetMatch(Variable newVariable)
             {
-                Fx.Assert(newVariable.Owner.MemberOf == this.updatedActivity.ParentOf, "Should only call GetMatch for variables owned by the participating activity");
+                Fx.Assert(
+                    newVariable.Owner.MemberOf == this.updatedActivity.ParentOf,
+                    "Should only call GetMatch for variables owned by the participating activity"
+                );
                 int index = newVariable.Owner.RuntimeVariables.IndexOf(newVariable);
                 if (index >= 0)
                 {
@@ -1256,25 +1663,53 @@ namespace System.Activities.DynamicUpdate
                 return null;
             }
 
-            public void CreateArgumentEntries(DynamicUpdateMapEntry mapEntry, IList<RuntimeArgument> newArguments, IList<ArgumentInfo> oldArguments)
+            public void CreateArgumentEntries(
+                DynamicUpdateMapEntry mapEntry,
+                IList<RuntimeArgument> newArguments,
+                IList<ArgumentInfo> oldArguments
+            )
             {
                 RuntimeArgument newIdleArgument;
                 Activity idleActivity;
-                if (!DynamicUpdateMapBuilder.Finalizer.CreateArgumentEntries(mapEntry, newArguments, oldArguments, this.finalizer.ExpressionRootsThatCanInduceIdle, out newIdleArgument, out idleActivity))
+                if (
+                    !DynamicUpdateMapBuilder.Finalizer.CreateArgumentEntries(
+                        mapEntry,
+                        newArguments,
+                        oldArguments,
+                        this.finalizer.ExpressionRootsThatCanInduceIdle,
+                        out newIdleArgument,
+                        out idleActivity
+                    )
+                )
                 {
                     // If an argument expression goes idle, the activity it is declared on can potentially
                     // resume execution before the argument is evaluated. We can't allow that.
-                    this.BlockUpdate(newIdleArgument.Owner, UpdateBlockedReason.AddedIdleExpression, mapEntry,
-                        SR.AddedIdleArgumentBlockDU(newIdleArgument.Name, idleActivity));
+                    this.BlockUpdate(
+                        newIdleArgument.Owner,
+                        UpdateBlockedReason.AddedIdleExpression,
+                        mapEntry,
+                        SR.AddedIdleArgumentBlockDU(newIdleArgument.Name, idleActivity)
+                    );
                     return;
                 }
             }
 
-            void BlockUpdate(Activity updatedActivity, UpdateBlockedReason reason, DynamicUpdateMapEntry entry, string message = null)
+            void BlockUpdate(
+                Activity updatedActivity,
+                UpdateBlockedReason reason,
+                DynamicUpdateMapEntry entry,
+                string message = null
+            )
             {
                 Activity originalActivity = GetMatch(updatedActivity);
                 Fx.Assert(originalActivity != null, "Cannot block update inside an added activity");
-                this.finalizer.BlockUpdate(updatedActivity, originalActivity.Id, reason, entry, message);
+                this.finalizer.BlockUpdate(
+                    updatedActivity,
+                    originalActivity.Id,
+                    reason,
+                    entry,
+                    message
+                );
             }
 
             // This method allows activities in the implementation IdSpace to participate in map creation.
@@ -1294,9 +1729,16 @@ namespace System.Activities.DynamicUpdate
                     DynamicUpdateMapEntry providedEntry = null;
                     if (this.userProvidedMap != null && !this.userProvidedMap.IsNoChanges)
                     {
-                        bool isNewlyAdded = !this.userProvidedMap.TryGetUpdateEntryByNewId(i, out providedEntry);
-                        if (isNewlyAdded || providedEntry.IsRuntimeUpdateBlocked ||
-                            providedEntry.IsUpdateBlockedByUpdateAuthor || providedEntry.IsParentRemovedOrBlocked)
+                        bool isNewlyAdded = !this.userProvidedMap.TryGetUpdateEntryByNewId(
+                            i,
+                            out providedEntry
+                        );
+                        if (
+                            isNewlyAdded
+                            || providedEntry.IsRuntimeUpdateBlocked
+                            || providedEntry.IsUpdateBlockedByUpdateAuthor
+                            || providedEntry.IsParentRemovedOrBlocked
+                        )
                         {
                             // No need to save original values or block update
                             continue;
@@ -1306,8 +1748,14 @@ namespace System.Activities.DynamicUpdate
                     DynamicUpdateMapEntry argumentChangesMapEntry = null;
                     if (argumentChangesMap != null)
                     {
-                        Fx.Assert(!argumentChangesMap.IsNoChanges, "argumentChangesMap will never be NoChanges map because it is automatically created only when there is argument changes.");
-                        bool isNewlyAdded = !argumentChangesMap.TryGetUpdateEntryByNewId(i, out argumentChangesMapEntry);
+                        Fx.Assert(
+                            !argumentChangesMap.IsNoChanges,
+                            "argumentChangesMap will never be NoChanges map because it is automatically created only when there is argument changes."
+                        );
+                        bool isNewlyAdded = !argumentChangesMap.TryGetUpdateEntryByNewId(
+                            i,
+                            out argumentChangesMapEntry
+                        );
                         if (isNewlyAdded)
                         {
                             // No need to save original values or block update
@@ -1316,14 +1764,21 @@ namespace System.Activities.DynamicUpdate
                     }
 
                     // We only need to save this map entry if it has some non-default value.
-                    DynamicUpdateMapEntry generatedEntry = GenerateEntry(argumentChangesMapEntry, providedEntry, i);
-                    DynamicUpdateMap providedImplementationMap = providedEntry != null ? providedEntry.ImplementationUpdateMap : null;
-                    if (generatedEntry.IsRuntimeUpdateBlocked ||
-                        generatedEntry.SavedOriginalValues != null ||
-                        generatedEntry.SavedOriginalValueFromParent != null ||
-                        generatedEntry.ImplementationUpdateMap != providedImplementationMap ||
-                        generatedEntry.IsIdChange ||
-                        generatedEntry.HasEnvironmentUpdates)
+                    DynamicUpdateMapEntry generatedEntry = GenerateEntry(
+                        argumentChangesMapEntry,
+                        providedEntry,
+                        i
+                    );
+                    DynamicUpdateMap providedImplementationMap =
+                        providedEntry != null ? providedEntry.ImplementationUpdateMap : null;
+                    if (
+                        generatedEntry.IsRuntimeUpdateBlocked
+                        || generatedEntry.SavedOriginalValues != null
+                        || generatedEntry.SavedOriginalValueFromParent != null
+                        || generatedEntry.ImplementationUpdateMap != providedImplementationMap
+                        || generatedEntry.IsIdChange
+                        || generatedEntry.HasEnvironmentUpdates
+                    )
                     {
                         EnsureGeneratedMap();
                         this.generatedMap.AddEntry(generatedEntry);
@@ -1337,10 +1792,10 @@ namespace System.Activities.DynamicUpdate
                     {
                         if (entry.IsRemoval)
                         {
-                            EnsureGeneratedMap();                            
+                            EnsureGeneratedMap();
                             this.generatedMap.AddEntry(entry);
-                        }                        
-                    }                    
+                        }
+                    }
                 }
             }
 
@@ -1351,12 +1806,16 @@ namespace System.Activities.DynamicUpdate
                     this.generatedMap = new DynamicUpdateMap
                     {
                         IsForImplementation = true,
-                        NewDefinitionMemberCount = this.updatedActivity.ParentOf.MemberCount
+                        NewDefinitionMemberCount = this.updatedActivity.ParentOf.MemberCount,
                     };
                 }
             }
 
-            DynamicUpdateMapEntry GenerateEntry(DynamicUpdateMapEntry argumentChangesMapEntry, DynamicUpdateMapEntry providedEntry, int id)
+            DynamicUpdateMapEntry GenerateEntry(
+                DynamicUpdateMapEntry argumentChangesMapEntry,
+                DynamicUpdateMapEntry providedEntry,
+                int id
+            )
             {
                 DynamicUpdateMapEntry generatedEntry;
                 Activity updatedChild;
@@ -1378,24 +1837,45 @@ namespace System.Activities.DynamicUpdate
                     generatedEntry = argumentChangesMapEntry;
 
                     // activity IDs in the private IdSpace has changed due to arguments change inside the private IdSpace
-                    updatedChild = this.updatedActivity.ParentOf[argumentChangesMapEntry.NewActivityId];
-                    originalChild = this.originalActivity.ParentOf[argumentChangesMapEntry.OldActivityId];
-                }                
+                    updatedChild = this.updatedActivity.ParentOf[
+                        argumentChangesMapEntry.NewActivityId
+                    ];
+                    originalChild = this.originalActivity.ParentOf[
+                        argumentChangesMapEntry.OldActivityId
+                    ];
+                }
 
-                // Allow the activity to participate                
+                // Allow the activity to participate
                 this.invalidMatchInCurrentActivity = false;
-                this.finalizer.OnCreateDynamicUpdateMap(updatedChild, originalChild, generatedEntry, this);
+                this.finalizer.OnCreateDynamicUpdateMap(
+                    updatedChild,
+                    originalChild,
+                    generatedEntry,
+                    this
+                );
                 if (this.invalidMatchInCurrentActivity && !generatedEntry.IsRuntimeUpdateBlocked)
                 {
-                    BlockUpdate(updatedChild, UpdateBlockedReason.ChangeMatchesInImplementation, generatedEntry);
+                    BlockUpdate(
+                        updatedChild,
+                        UpdateBlockedReason.ChangeMatchesInImplementation,
+                        generatedEntry
+                    );
                 }
 
                 // Fill in the rest of the map entry;
-                generatedEntry.SavedOriginalValueFromParent = this.finalizer.GetSavedOriginalValueFromParent(updatedChild);
-                DynamicUpdateMap childImplementationMap = providedEntry != null ? providedEntry.ImplementationUpdateMap : null;
+                generatedEntry.SavedOriginalValueFromParent =
+                    this.finalizer.GetSavedOriginalValueFromParent(updatedChild);
+                DynamicUpdateMap childImplementationMap =
+                    providedEntry != null ? providedEntry.ImplementationUpdateMap : null;
                 if (!generatedEntry.IsRuntimeUpdateBlocked)
                 {
-                    NestedIdSpaceFinalizer nestedFinalizer = new NestedIdSpaceFinalizer(this.finalizer, childImplementationMap, updatedChild, originalChild, this);
+                    NestedIdSpaceFinalizer nestedFinalizer = new NestedIdSpaceFinalizer(
+                        this.finalizer,
+                        childImplementationMap,
+                        updatedChild,
+                        originalChild,
+                        this
+                    );
                     nestedFinalizer.ValidateOrCreateImplementationMap(generatedEntry);
                 }
 
@@ -1406,8 +1886,11 @@ namespace System.Activities.DynamicUpdate
             // implementation map, we need to fill in all the unchanged entries.
             void FillGeneratedMap()
             {
-                Fx.Assert(this.generatedMap != null, "If there were no generated entries then we don't need a generated map.");
-                this.generatedMap.ArgumentsAreUnknown = true;                
+                Fx.Assert(
+                    this.generatedMap != null,
+                    "If there were no generated entries then we don't need a generated map."
+                );
+                this.generatedMap.ArgumentsAreUnknown = true;
                 for (int i = 1; i <= this.originalActivity.ParentOf.MemberCount; i++)
                 {
                     DynamicUpdateMapEntry entry;
@@ -1416,7 +1899,10 @@ namespace System.Activities.DynamicUpdate
                         entry = new DynamicUpdateMapEntry(i, i);
                         this.generatedMap.AddEntry(entry);
                     }
-                    entry.Parent = GetParentEntry(this.originalActivity.ParentOf[i], this.generatedMap);
+                    entry.Parent = GetParentEntry(
+                        this.originalActivity.ParentOf[i],
+                        this.generatedMap
+                    );
                 }
             }
 
@@ -1431,22 +1917,45 @@ namespace System.Activities.DynamicUpdate
                     DynamicUpdateMapEntry providedEntry;
                     this.userProvidedMap.TryGetUpdateEntry(i, out providedEntry);
                     DynamicUpdateMapEntry generatedEntry = GetOrCreateGeneratedEntry(providedEntry);
-                    if (generatedEntry.IsRemoval || generatedEntry.IsRuntimeUpdateBlocked || generatedEntry.IsUpdateBlockedByUpdateAuthor || generatedEntry.IsParentRemovedOrBlocked)
+                    if (
+                        generatedEntry.IsRemoval
+                        || generatedEntry.IsRuntimeUpdateBlocked
+                        || generatedEntry.IsUpdateBlockedByUpdateAuthor
+                        || generatedEntry.IsParentRemovedOrBlocked
+                    )
                     {
                         continue;
                     }
 
                     // Disable update if there's a conflict
                     int newActivityId = providedEntry.NewActivityId;
-                    if (HasOverlap(providedEntry.SavedOriginalValues, generatedEntry.SavedOriginalValues) ||
-                        (HasSavedOriginalValuesForChildren(newActivityId, this.userProvidedMap) && HasSavedOriginalValuesForChildren(newActivityId, this.generatedMap)))
+                    if (
+                        HasOverlap(
+                            providedEntry.SavedOriginalValues,
+                            generatedEntry.SavedOriginalValues
+                        )
+                        || (
+                            HasSavedOriginalValuesForChildren(newActivityId, this.userProvidedMap)
+                            && HasSavedOriginalValuesForChildren(newActivityId, this.generatedMap)
+                        )
+                    )
                     {
-                        Activity updatedChild = this.updatedActivity.ParentOf[generatedEntry.NewActivityId];
-                        BlockUpdate(updatedChild, UpdateBlockedReason.GeneratedAndProvidedMapConflict, generatedEntry, SR.GeneratedAndProvidedMapConflict);
+                        Activity updatedChild = this.updatedActivity.ParentOf[
+                            generatedEntry.NewActivityId
+                        ];
+                        BlockUpdate(
+                            updatedChild,
+                            UpdateBlockedReason.GeneratedAndProvidedMapConflict,
+                            generatedEntry,
+                            SR.GeneratedAndProvidedMapConflict
+                        );
                     }
                     else
                     {
-                        generatedEntry.SavedOriginalValues = DynamicUpdateMapEntry.Merge(generatedEntry.SavedOriginalValues, providedEntry.SavedOriginalValues);
+                        generatedEntry.SavedOriginalValues = DynamicUpdateMapEntry.Merge(
+                            generatedEntry.SavedOriginalValues,
+                            providedEntry.SavedOriginalValues
+                        );
                     }
                 }
             }
@@ -1455,9 +1964,17 @@ namespace System.Activities.DynamicUpdate
             {
                 // Get or create the matching entry
                 DynamicUpdateMapEntry generatedEntry;
-                if (!this.generatedMap.TryGetUpdateEntry(providedEntry.OldActivityId, out generatedEntry))
+                if (
+                    !this.generatedMap.TryGetUpdateEntry(
+                        providedEntry.OldActivityId,
+                        out generatedEntry
+                    )
+                )
                 {
-                    generatedEntry = new DynamicUpdateMapEntry(providedEntry.OldActivityId, providedEntry.NewActivityId)
+                    generatedEntry = new DynamicUpdateMapEntry(
+                        providedEntry.OldActivityId,
+                        providedEntry.NewActivityId
+                    )
                     {
                         DisplayName = providedEntry.DisplayName,
                         BlockReason = providedEntry.BlockReason,
@@ -1468,10 +1985,13 @@ namespace System.Activities.DynamicUpdate
                 }
                 else
                 {
-                    Fx.Assert(providedEntry.NewActivityId == generatedEntry.NewActivityId &&
-                        providedEntry.DisplayName == generatedEntry.DisplayName &&
-                        !providedEntry.IsRuntimeUpdateBlocked && !providedEntry.IsUpdateBlockedByUpdateAuthor,
-                        "GeneratedEntry should be created with correct ID, and should not be created for an entry that has blocked update");
+                    Fx.Assert(
+                        providedEntry.NewActivityId == generatedEntry.NewActivityId
+                            && providedEntry.DisplayName == generatedEntry.DisplayName
+                            && !providedEntry.IsRuntimeUpdateBlocked
+                            && !providedEntry.IsUpdateBlockedByUpdateAuthor,
+                        "GeneratedEntry should be created with correct ID, and should not be created for an entry that has blocked update"
+                    );
                 }
 
                 // Copy/fill additional values
@@ -1479,13 +1999,20 @@ namespace System.Activities.DynamicUpdate
                 if (providedEntry.Parent != null)
                 {
                     DynamicUpdateMapEntry parentEntry;
-                    this.generatedMap.TryGetUpdateEntry(providedEntry.Parent.OldActivityId, out parentEntry);
-                    Fx.Assert(parentEntry != null, "We process in IdSpace order, so we always process parents before their children");
+                    this.generatedMap.TryGetUpdateEntry(
+                        providedEntry.Parent.OldActivityId,
+                        out parentEntry
+                    );
+                    Fx.Assert(
+                        parentEntry != null,
+                        "We process in IdSpace order, so we always process parents before their children"
+                    );
                     generatedEntry.Parent = parentEntry;
                 }
                 if (generatedEntry.SavedOriginalValueFromParent == null)
                 {
-                    generatedEntry.SavedOriginalValueFromParent = providedEntry.SavedOriginalValueFromParent;
+                    generatedEntry.SavedOriginalValueFromParent =
+                        providedEntry.SavedOriginalValueFromParent;
                 }
                 if (generatedEntry.ImplementationUpdateMap == null)
                 {
@@ -1495,26 +2022,37 @@ namespace System.Activities.DynamicUpdate
                 return generatedEntry;
             }
 
-            bool HasOverlap(IDictionary<string, object> providedValues, IDictionary<string, object> generatedValues)
+            bool HasOverlap(
+                IDictionary<string, object> providedValues,
+                IDictionary<string, object> generatedValues
+            )
             {
-                return providedValues != null && generatedValues != null &&
-                    providedValues.Keys.Any(k => generatedValues.ContainsKey(k));
+                return providedValues != null
+                    && generatedValues != null
+                    && providedValues.Keys.Any(k => generatedValues.ContainsKey(k));
             }
 
             bool HasSavedOriginalValuesForChildren(int parentNewActivityId, DynamicUpdateMap map)
             {
-                foreach (Activity child in GetPublicDeclaredChildren(this.updatedActivity.ParentOf[parentNewActivityId], false))
+                foreach (
+                    Activity child in GetPublicDeclaredChildren(
+                        this.updatedActivity.ParentOf[parentNewActivityId],
+                        false
+                    )
+                )
                 {
                     DynamicUpdateMapEntry childEntry;
-                    if (map.TryGetUpdateEntryByNewId(child.InternalId, out childEntry) &&
-                        childEntry.SavedOriginalValueFromParent != null)
+                    if (
+                        map.TryGetUpdateEntryByNewId(child.InternalId, out childEntry)
+                        && childEntry.SavedOriginalValueFromParent != null
+                    )
                     {
                         return true;
                     }
                 }
 
                 return false;
-            }            
+            }
         }
     }
 }

@@ -7,9 +7,7 @@ using ILCompiler.Dataflow;
 using Internal.IL;
 using Internal.TypeSystem;
 using Internal.TypeSystem.Ecma;
-
 using Xunit;
-
 using CustomAttributeValue = System.Reflection.Metadata.CustomAttributeValue<Internal.TypeSystem.TypeDesc>;
 
 namespace ILCompiler.Compiler.Tests
@@ -33,20 +31,33 @@ namespace ILCompiler.Compiler.Tests
     {
         public static IEnumerable<object[]> GetTestMethods()
         {
-            var target = new TargetDetails(TargetArchitecture.X64, TargetOS.Windows, TargetAbi.NativeAot);
-            var context = new CompilerTypeSystemContext(target, SharedGenericsMode.CanonicalReferenceTypes, DelegateFeature.All);
+            var target = new TargetDetails(
+                TargetArchitecture.X64,
+                TargetOS.Windows,
+                TargetAbi.NativeAot
+            );
+            var context = new CompilerTypeSystemContext(
+                target,
+                SharedGenericsMode.CanonicalReferenceTypes,
+                DelegateFeature.All
+            );
 
-            context.InputFilePaths = new Dictionary<string, string> {
+            context.InputFilePaths = new Dictionary<string, string>
+            {
                 { "Test.CoreLib", @"Test.CoreLib.dll" },
                 { "ILCompiler.Compiler.Tests.Assets", @"ILCompiler.Compiler.Tests.Assets.dll" },
-                };
+            };
             context.ReferenceFilePaths = new Dictionary<string, string>();
 
             context.SetSystemModule(context.GetModuleForSimpleName("Test.CoreLib"));
             var testModule = context.GetModuleForSimpleName("ILCompiler.Compiler.Tests.Assets");
 
             bool foundSomethingToCheck = false;
-            foreach (var type in testModule.GetType("ILCompiler.Compiler.Tests.Assets", "DependencyGraph").GetNestedTypes())
+            foreach (
+                var type in testModule
+                    .GetType("ILCompiler.Compiler.Tests.Assets", "DependencyGraph")
+                    .GetNestedTypes()
+            )
             {
                 foundSomethingToCheck = true;
                 yield return new object[] { type.GetMethod("Entrypoint", null) };
@@ -67,19 +78,44 @@ namespace ILCompiler.Compiler.Tests
             CompilationModuleGroup compilationGroup = new SingleFileCompilationModuleGroup();
 
             NativeAotILProvider ilProvider = new NativeAotILProvider();
-            CompilerGeneratedState compilerGeneratedState = new CompilerGeneratedState(ilProvider, Logger.Null);
+            CompilerGeneratedState compilerGeneratedState = new CompilerGeneratedState(
+                ilProvider,
+                Logger.Null
+            );
 
-            UsageBasedMetadataManager metadataManager = new UsageBasedMetadataManager(compilationGroup, context,
-                new FullyBlockedMetadataBlockingPolicy(), new FullyBlockedManifestResourceBlockingPolicy(),
-                null, new NoStackTraceEmissionPolicy(), new NoDynamicInvokeThunkGenerationPolicy(),
-                new ILLink.Shared.TrimAnalysis.FlowAnnotations(Logger.Null, ilProvider, compilerGeneratedState), UsageBasedMetadataGenerationOptions.None,
-                default, Logger.Null, new Dictionary<string, bool>(), Array.Empty<string>(), Array.Empty<string>(), Array.Empty<string>(), Array.Empty<string>());
+            UsageBasedMetadataManager metadataManager = new UsageBasedMetadataManager(
+                compilationGroup,
+                context,
+                new FullyBlockedMetadataBlockingPolicy(),
+                new FullyBlockedManifestResourceBlockingPolicy(),
+                null,
+                new NoStackTraceEmissionPolicy(),
+                new NoDynamicInvokeThunkGenerationPolicy(),
+                new ILLink.Shared.TrimAnalysis.FlowAnnotations(
+                    Logger.Null,
+                    ilProvider,
+                    compilerGeneratedState
+                ),
+                UsageBasedMetadataGenerationOptions.None,
+                default,
+                Logger.Null,
+                new Dictionary<string, bool>(),
+                Array.Empty<string>(),
+                Array.Empty<string>(),
+                Array.Empty<string>(),
+                Array.Empty<string>()
+            );
 
-            CompilationBuilder builder = new RyuJitCompilationBuilder(context, compilationGroup)
-                .UseILProvider(ilProvider);
+            CompilationBuilder builder = new RyuJitCompilationBuilder(
+                context,
+                compilationGroup
+            ).UseILProvider(ilProvider);
 
-            IILScanner scanner = builder.GetILScannerBuilder()
-                .UseCompilationRoots(new ICompilationRootProvider[] { new SingleMethodRootProvider(method) })
+            IILScanner scanner = builder
+                .GetILScannerBuilder()
+                .UseCompilationRoots(
+                    new ICompilationRootProvider[] { new SingleMethodRootProvider(method) }
+                )
                 .UseMetadataManager(metadataManager)
                 .ToILScanner();
 
@@ -92,30 +128,59 @@ namespace ILCompiler.Compiler.Tests
             const string assetsNamespace = "ILCompiler.Compiler.Tests.Assets";
             bool foundSomethingToCheck = false;
 
-            foreach (var attr in method.GetDecodedCustomAttributes(assetsNamespace, "GeneratesConstructedEETypeAttribute"))
+            foreach (
+                var attr in method.GetDecodedCustomAttributes(
+                    assetsNamespace,
+                    "GeneratesConstructedEETypeAttribute"
+                )
+            )
             {
                 foundSomethingToCheck = true;
                 Assert.Contains((TypeDesc)attr.FixedArguments[0].Value, results.ConstructedEETypes);
             }
 
-            foreach (var attr in method.GetDecodedCustomAttributes(assetsNamespace, "NoConstructedEETypeAttribute"))
+            foreach (
+                var attr in method.GetDecodedCustomAttributes(
+                    assetsNamespace,
+                    "NoConstructedEETypeAttribute"
+                )
+            )
             {
                 foundSomethingToCheck = true;
-                Assert.DoesNotContain((TypeDesc)attr.FixedArguments[0].Value, results.ConstructedEETypes);
+                Assert.DoesNotContain(
+                    (TypeDesc)attr.FixedArguments[0].Value,
+                    results.ConstructedEETypes
+                );
             }
 
-            foreach (var attr in method.GetDecodedCustomAttributes(assetsNamespace, "GeneratesMethodBodyAttribute"))
+            foreach (
+                var attr in method.GetDecodedCustomAttributes(
+                    assetsNamespace,
+                    "GeneratesMethodBodyAttribute"
+                )
+            )
             {
                 foundSomethingToCheck = true;
                 MethodDesc methodToCheck = GetMethodFromAttribute(attr);
-                Assert.Contains(methodToCheck.GetCanonMethodTarget(CanonicalFormKind.Specific), results.CompiledMethodBodies);
+                Assert.Contains(
+                    methodToCheck.GetCanonMethodTarget(CanonicalFormKind.Specific),
+                    results.CompiledMethodBodies
+                );
             }
 
-            foreach (var attr in method.GetDecodedCustomAttributes(assetsNamespace, "NoMethodBodyAttribute"))
+            foreach (
+                var attr in method.GetDecodedCustomAttributes(
+                    assetsNamespace,
+                    "NoMethodBodyAttribute"
+                )
+            )
             {
                 foundSomethingToCheck = true;
                 MethodDesc methodToCheck = GetMethodFromAttribute(attr);
-                Assert.DoesNotContain(methodToCheck.GetCanonMethodTarget(CanonicalFormKind.Specific), results.CompiledMethodBodies);
+                Assert.DoesNotContain(
+                    methodToCheck.GetCanonMethodTarget(CanonicalFormKind.Specific),
+                    results.CompiledMethodBodies
+                );
             }
 
             //
@@ -130,7 +195,10 @@ namespace ILCompiler.Compiler.Tests
             if (attr.NamedArguments.Length > 0)
                 throw new NotImplementedException(); // TODO: parse sig and instantiation
 
-            return ((TypeDesc)attr.FixedArguments[0].Value).GetMethod((string)attr.FixedArguments[1].Value, null);
+            return ((TypeDesc)attr.FixedArguments[0].Value).GetMethod(
+                (string)attr.FixedArguments[1].Value,
+                null
+            );
         }
     }
 }

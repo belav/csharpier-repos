@@ -5,9 +5,9 @@
 namespace System.ServiceModel.Security
 {
     using System.Collections.Generic;
-    using System.ServiceModel;
-    using System.IdentityModel.Tokens;
     using System.IdentityModel.Selectors;
+    using System.IdentityModel.Tokens;
+    using System.ServiceModel;
     using System.ServiceModel.Security.Tokens;
 
     interface IInitiatorSecuritySessionProtocol

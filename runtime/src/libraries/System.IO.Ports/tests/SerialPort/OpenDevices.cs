@@ -11,7 +11,10 @@ namespace System.IO.Ports.Tests
 {
     public class OpenDevices : PortsTest
     {
-        [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsNotWindowsNanoServer))] // see https://github.com/dotnet/runtime/issues/26199#issuecomment-390338721
+        [ConditionalFact(
+            typeof(PlatformDetection),
+            nameof(PlatformDetection.IsNotWindowsNanoServer)
+        )] // see https://github.com/dotnet/runtime/issues/26199#issuecomment-390338721
         public void OpenDevices01()
         {
             DosDevices dosDevices = new DosDevices();
@@ -19,7 +22,10 @@ namespace System.IO.Ports.Tests
 
             foreach (KeyValuePair<string, string> keyValuePair in dosDevices)
             {
-                if (!string.IsNullOrEmpty(keyValuePair.Key) && !comPortNameRegex.IsMatch(keyValuePair.Key))
+                if (
+                    !string.IsNullOrEmpty(keyValuePair.Key)
+                    && !comPortNameRegex.IsMatch(keyValuePair.Key)
+                )
                 {
                     using (SerialPort com1 = new SerialPort(keyValuePair.Key))
                     {
@@ -28,11 +34,16 @@ namespace System.IO.Ports.Tests
                     }
                 }
 
-                if (!string.IsNullOrEmpty(keyValuePair.Value) && !comPortNameRegex.IsMatch(keyValuePair.Key))
+                if (
+                    !string.IsNullOrEmpty(keyValuePair.Value)
+                    && !comPortNameRegex.IsMatch(keyValuePair.Key)
+                )
                 {
                     using (SerialPort com1 = new SerialPort(keyValuePair.Value))
                     {
-                        Debug.WriteLine($"Checking exception thrown with Value {keyValuePair.Value}");
+                        Debug.WriteLine(
+                            $"Checking exception thrown with Value {keyValuePair.Value}"
+                        );
                         Assert.ThrowsAny<Exception>(() => com1.Open());
                     }
                 }

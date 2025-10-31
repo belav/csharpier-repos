@@ -5,13 +5,9 @@ using Xunit;
 
 public class Program
 {
-    public virtual void VirtualMethod()
-    {
-    }
+    public virtual void VirtualMethod() { }
 
-    public void NonVirtualMethod()
-    {
-    }
+    public void NonVirtualMethod() { }
 
     [Fact]
     public static int TestEntryPoint()

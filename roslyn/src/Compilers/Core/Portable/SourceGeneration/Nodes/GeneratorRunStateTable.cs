@@ -12,15 +12,24 @@ namespace Microsoft.CodeAnalysis
 {
     internal sealed class GeneratorRunStateTable
     {
-        private GeneratorRunStateTable(ImmutableDictionary<string, ImmutableArray<IncrementalGeneratorRunStep>> executedSteps, ImmutableDictionary<string, ImmutableArray<IncrementalGeneratorRunStep>> outputSteps)
+        private GeneratorRunStateTable(
+            ImmutableDictionary<string, ImmutableArray<IncrementalGeneratorRunStep>> executedSteps,
+            ImmutableDictionary<string, ImmutableArray<IncrementalGeneratorRunStep>> outputSteps
+        )
         {
             ExecutedSteps = executedSteps;
             OutputSteps = outputSteps;
         }
 
-        public ImmutableDictionary<string, ImmutableArray<IncrementalGeneratorRunStep>> ExecutedSteps { get; }
+        public ImmutableDictionary<
+            string,
+            ImmutableArray<IncrementalGeneratorRunStep>
+        > ExecutedSteps { get; }
 
-        public ImmutableDictionary<string, ImmutableArray<IncrementalGeneratorRunStep>> OutputSteps { get; }
+        public ImmutableDictionary<
+            string,
+            ImmutableArray<IncrementalGeneratorRunStep>
+        > OutputSteps { get; }
 
         public sealed class Builder
         {
@@ -51,17 +60,34 @@ namespace Microsoft.CodeAnalysis
 
             public GeneratorRunStateTable ToImmutableAndFree()
             {
-                return new GeneratorRunStateTable(StepCollectionToImmutable(_namedSteps), StepCollectionToImmutable(_outputSteps));
+                return new GeneratorRunStateTable(
+                    StepCollectionToImmutable(_namedSteps),
+                    StepCollectionToImmutable(_outputSteps)
+                );
             }
 
-            private static ImmutableDictionary<string, ImmutableArray<IncrementalGeneratorRunStep>> StepCollectionToImmutable(Dictionary<string, HashSet<IncrementalGeneratorRunStep>>? builder)
+            private static ImmutableDictionary<
+                string,
+                ImmutableArray<IncrementalGeneratorRunStep>
+            > StepCollectionToImmutable(
+                Dictionary<string, HashSet<IncrementalGeneratorRunStep>>? builder
+            )
             {
                 if (builder is null)
                 {
-                    return ImmutableDictionary<string, ImmutableArray<IncrementalGeneratorRunStep>>.Empty;
+                    return ImmutableDictionary<
+                        string,
+                        ImmutableArray<IncrementalGeneratorRunStep>
+                    >.Empty;
                 }
 
-                ImmutableDictionary<string, ImmutableArray<IncrementalGeneratorRunStep>>.Builder resultBuilder = ImmutableDictionary.CreateBuilder<string, ImmutableArray<IncrementalGeneratorRunStep>>();
+                ImmutableDictionary<
+                    string,
+                    ImmutableArray<IncrementalGeneratorRunStep>
+                >.Builder resultBuilder = ImmutableDictionary.CreateBuilder<
+                    string,
+                    ImmutableArray<IncrementalGeneratorRunStep>
+                >();
 
                 foreach (var stepsByName in builder)
                 {
@@ -90,7 +116,10 @@ namespace Microsoft.CodeAnalysis
                     }
                 }
 
-                static void addToNamedStepCollection(Dictionary<string, HashSet<IncrementalGeneratorRunStep>> stepCollectionBuilder, IncrementalGeneratorRunStep step)
+                static void addToNamedStepCollection(
+                    Dictionary<string, HashSet<IncrementalGeneratorRunStep>> stepCollectionBuilder,
+                    IncrementalGeneratorRunStep step
+                )
                 {
                     Debug.Assert(step.Name is not null);
                     if (!stepCollectionBuilder.TryGetValue(step.Name, out var stepsByName))

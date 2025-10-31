@@ -64,8 +64,11 @@ namespace BenchmarksGame
             }
         }
 
-        public static IEnumerable<R> TransformQueue<T, R>(BlockingCollection<T> queue,
-            Func<T, R> transform, int threadCount)
+        public static IEnumerable<R> TransformQueue<T, R>(
+            BlockingCollection<T> queue,
+            Func<T, R> transform,
+            int threadCount
+        )
         {
             var tasks = new Task<R>[threadCount];
 
@@ -95,10 +98,7 @@ namespace BenchmarksGame
             }
         }
 
-
-
-        static void MakeRandomFasta(string id, string desc,
-                                    Frequency[] a, int n, Stream s)
+        static void MakeRandomFasta(string id, string desc, Frequency[] a, int n, Stream s)
         {
             var queue = new BlockingCollection<int[]>(2);
 
@@ -107,14 +107,11 @@ namespace BenchmarksGame
             Task.Run(() =>
             {
                 var len = LineLength * 40;
-                var buffers = Enumerable.Range(0, bufferCount)
-                .Select(i => new int[len]).ToArray();
+                var buffers = Enumerable.Range(0, bufferCount).Select(i => new int[len]).ToArray();
                 var index = 0;
                 for (var i = 0; i < n; i += len)
                 {
-                    var buffer = n - i < len
-                        ? new int[n - i]
-                        : buffers[index++ % buffers.Length];
+                    var buffer = n - i < len ? new int[n - i] : buffers[index++ % buffers.Length];
 
                     FillRandom(buffer);
                     queue.Add(buffer);
@@ -125,12 +122,16 @@ namespace BenchmarksGame
             byte[] descStr = Encoding.ASCII.GetBytes(">" + id + " " + desc + "\n");
             s.Write(descStr, 0, descStr.Length);
 
-            foreach (var r in TransformQueue(queue,
-                rnd => SelectNucleotides(a, rnd), Environment.ProcessorCount))
+            foreach (
+                var r in TransformQueue(
+                    queue,
+                    rnd => SelectNucleotides(a, rnd),
+                    Environment.ProcessorCount
+                )
+            )
             {
                 s.Write(r, 0, r.Length);
             }
-
         }
 
         private static byte[] SelectNucleotides(Frequency[] a, int[] rnd)
@@ -153,8 +154,7 @@ namespace BenchmarksGame
             return buf;
         }
 
-        static void MakeRepeatFasta(string id, string desc,
-                                    byte[] alu, int n, Stream s)
+        static void MakeRepeatFasta(string id, string desc, byte[] alu, int n, Stream s)
         {
             byte[] descStr = Encoding.ASCII.GetBytes(">" + id + " " + desc + "\n");
             s.Write(descStr, 0, descStr.Length);
@@ -220,7 +220,6 @@ namespace BenchmarksGame
                 s.Write(buf, 0, index);
         }
 
-
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         static byte SelectRandom(Frequency[] a, int r)
         {
@@ -242,13 +241,13 @@ namespace BenchmarksGame
         }
 
         static string ALU =
-          "GGCCGGGCGCGGTGGCTCACGCCTGTAATCCCAGCACTTTGG" +
-          "GAGGCCGAGGCGGGCGGATCACCTGAGGTCAGGAGTTCGAGA" +
-          "CCAGCCTGGCCAACATGGTGAAACCCCGTCTCTACTAAAAAT" +
-          "ACAAAAATTAGCCGGGCGTGGTGGCGCGCGCCTGTAATCCCA" +
-          "GCTACTCGGGAGGCTGAGGCAGGAGAATCGCTTGAACCCGGG" +
-          "AGGCGGAGGTTGCAGTGAGCCGAGATCGCGCCACTGCACTCC" +
-          "AGCCTGGGCGACAGAGCGAGACTCCGTCTCAAAAA";
+            "GGCCGGGCGCGGTGGCTCACGCCTGTAATCCCAGCACTTTGG"
+            + "GAGGCCGAGGCGGGCGGATCACCTGAGGTCAGGAGTTCGAGA"
+            + "CCAGCCTGGCCAACATGGTGAAACCCCGTCTCTACTAAAAAT"
+            + "ACAAAAATTAGCCGGGCGTGGTGGCGCGCGCCTGTAATCCCA"
+            + "GCTACTCGGGAGGCTGAGGCAGGAGAATCGCTTGAACCCGGG"
+            + "AGGCGGAGGTTGCAGTGAGCCGAGATCGCGCCACTGCACTCC"
+            + "AGCCTGGGCGACAGAGCGAGACTCCGTCTCAAAAA";
 
         struct Frequency
         {
@@ -262,32 +261,32 @@ namespace BenchmarksGame
             }
         }
 
-        static Frequency[] IUB = {
-            new Frequency ('a', 0.27),
-            new Frequency ('c', 0.12),
-            new Frequency ('g', 0.12),
-            new Frequency ('t', 0.27),
-
-            new Frequency ('B', 0.02),
-            new Frequency ('D', 0.02),
-            new Frequency ('H', 0.02),
-            new Frequency ('K', 0.02),
-            new Frequency ('M', 0.02),
-            new Frequency ('N', 0.02),
-            new Frequency ('R', 0.02),
-            new Frequency ('S', 0.02),
-            new Frequency ('V', 0.02),
-            new Frequency ('W', 0.02),
-            new Frequency ('Y', 0.02)
+        static Frequency[] IUB =
+        {
+            new Frequency('a', 0.27),
+            new Frequency('c', 0.12),
+            new Frequency('g', 0.12),
+            new Frequency('t', 0.27),
+            new Frequency('B', 0.02),
+            new Frequency('D', 0.02),
+            new Frequency('H', 0.02),
+            new Frequency('K', 0.02),
+            new Frequency('M', 0.02),
+            new Frequency('N', 0.02),
+            new Frequency('R', 0.02),
+            new Frequency('S', 0.02),
+            new Frequency('V', 0.02),
+            new Frequency('W', 0.02),
+            new Frequency('Y', 0.02),
         };
 
-        static Frequency[] HomoSapiens = {
-            new Frequency ('a', 0.3029549426680),
-            new Frequency ('c', 0.1979883004921),
-            new Frequency ('g', 0.1975473066391),
-            new Frequency ('t', 0.3015094502008)
+        static Frequency[] HomoSapiens =
+        {
+            new Frequency('a', 0.3029549426680),
+            new Frequency('c', 0.1979883004921),
+            new Frequency('g', 0.1975473066391),
+            new Frequency('t', 0.3015094502008),
         };
-
 
         private static void FillRandom(int[] result)
         {

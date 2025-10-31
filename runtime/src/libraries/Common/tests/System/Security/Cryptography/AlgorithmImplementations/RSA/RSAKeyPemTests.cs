@@ -20,7 +20,10 @@ namespace System.Security.Cryptography.Rsa.Tests
             using (RSA rsa = RSAFactory.Create())
             {
                 string pem = @"these aren't the PEMs you're looking for";
-                ArgumentException ae = AssertExtensions.Throws<ArgumentException>("input", () => rsa.ImportFromPem(pem));
+                ArgumentException ae = AssertExtensions.Throws<ArgumentException>(
+                    "input",
+                    () => rsa.ImportFromPem(pem)
+                );
                 Assert.Contains(NoPemExceptionMarker, ae.Message);
             }
         }
@@ -30,7 +33,8 @@ namespace System.Security.Cryptography.Rsa.Tests
         {
             using (RSA rsa = RSAFactory.Create())
             {
-                string pem = @"
+                string pem =
+                    @"
 -----BEGIN RSA PRIVATE KEY-----
 MIIBOwIBAAJBALc/WfXui9VeJLf/AprRaoVDyW0lPlQxm5NTLEHDwUd7idstLzPX
 uah0WEjgao5oO1BEUR4byjYlJ+F89Cs4BhUCAwEAAQJBAK/m8jYvnK9exaSR+DAh
@@ -53,7 +57,8 @@ yZWUxoxAdjfrBGsx+U6BHM0Myqqe7fY7hjWzj4aBCw==
         {
             using (RSA rsa = RSAFactory.Create())
             {
-                string pem = @"
+                string pem =
+                    @"
 -----BEGIN PRIVATE KEY-----
 MIIBVQIBADANBgkqhkiG9w0BAQEFAASCAT8wggE7AgEAAkEAtz9Z9e6L1V4kt/8C
 mtFqhUPJbSU+VDGbk1MsQcPBR3uJ2y0vM9e5qHRYSOBqjmg7UERRHhvKNiUn4Xz0
@@ -77,7 +82,8 @@ acPiMCuFTnRSFYAhozpmsqoLyTREqwIhAMLJlZTGjEB2N+sEazH5ToEczQzKqp7t
         {
             using (RSA rsa = RSAFactory.Create())
             {
-                string pem = @"
+                string pem =
+                    @"
 -----BEGIN EC PRIVATE KEY-----
 MHcCAQEEIHChLC2xaEXtVv9oz8IaRys/BNfWhRv2NJ8tfVs0UrOKoAoGCCqGSM49
 AwEHoUQDQgAEgQHs5HRkpurXDPaabivT2IaRoyYtIsuk92Ner/JmgKjYoSumHVmS
@@ -106,7 +112,8 @@ acPiMCuFTnRSFYAhozpmsqoLyTREqwIhAMLJlZTGjEB2N+sEazH5ToEczQzKqp7t
         {
             using (RSA rsa = RSAFactory.Create())
             {
-                string pem = @"
+                string pem =
+                    @"
 -----BEGIN PUBLIC KEY-----
 MFwwDQYJKoZIhvcNAQEBBQADSwAwSAJBALc/WfXui9VeJLf/AprRaoVDyW0lPlQx
 m5NTLEHDwUd7idstLzPXuah0WEjgao5oO1BEUR4byjYlJ+F89Cs4BhUCAwEAAQ==
@@ -114,7 +121,10 @@ m5NTLEHDwUd7idstLzPXuah0WEjgao5oO1BEUR4byjYlJ+F89Cs4BhUCAwEAAQ==
                 rsa.ImportFromPem(pem);
                 RSAParameters rsaParameters = rsa.ExportParameters(false);
 
-                ImportExport.AssertKeyEquals(TestData.DiminishedDPParameters.ToPublic(), rsaParameters);
+                ImportExport.AssertKeyEquals(
+                    TestData.DiminishedDPParameters.ToPublic(),
+                    rsaParameters
+                );
             }
         }
 
@@ -123,7 +133,8 @@ m5NTLEHDwUd7idstLzPXuah0WEjgao5oO1BEUR4byjYlJ+F89Cs4BhUCAwEAAQ==
         {
             using (RSA rsa = RSAFactory.Create())
             {
-                string pem = @"
+                string pem =
+                    @"
 -----BEGIN EC PRIVATE KEY-----
 MHcCAQEEIHChLC2xaEXtVv9oz8IaRys/BNfWhRv2NJ8tfVs0UrOKoAoGCCqGSM49
 AwEHoUQDQgAEgQHs5HRkpurXDPaabivT2IaRoyYtIsuk92Ner/JmgKjYoSumHVmS
@@ -136,7 +147,10 @@ m5NTLEHDwUd7idstLzPXuah0WEjgao5oO1BEUR4byjYlJ+F89Cs4BhUCAwEAAQ==
                 rsa.ImportFromPem(pem);
                 RSAParameters rsaParameters = rsa.ExportParameters(false);
 
-                ImportExport.AssertKeyEquals(TestData.DiminishedDPParameters.ToPublic(), rsaParameters);
+                ImportExport.AssertKeyEquals(
+                    TestData.DiminishedDPParameters.ToPublic(),
+                    rsaParameters
+                );
             }
         }
 
@@ -145,7 +159,8 @@ m5NTLEHDwUd7idstLzPXuah0WEjgao5oO1BEUR4byjYlJ+F89Cs4BhUCAwEAAQ==
         {
             using (RSA rsa = RSAFactory.Create())
             {
-                string pem = @"
+                string pem =
+                    @"
 -----BEGIN RSA PUBLIC KEY-----
 MEgCQQC3P1n17ovVXiS3/wKa0WqFQ8ltJT5UMZuTUyxBw8FHe4nbLS8z17modFhI
 4GqOaDtQRFEeG8o2JSfhfPQrOAYVAgMBAAE=
@@ -154,7 +169,10 @@ MEgCQQC3P1n17ovVXiS3/wKa0WqFQ8ltJT5UMZuTUyxBw8FHe4nbLS8z17modFhI
                 rsa.ImportFromPem(pem);
                 RSAParameters rsaParameters = rsa.ExportParameters(false);
 
-                ImportExport.AssertKeyEquals(TestData.DiminishedDPParameters.ToPublic(), rsaParameters);
+                ImportExport.AssertKeyEquals(
+                    TestData.DiminishedDPParameters.ToPublic(),
+                    rsaParameters
+                );
             }
         }
 
@@ -163,7 +181,8 @@ MEgCQQC3P1n17ovVXiS3/wKa0WqFQ8ltJT5UMZuTUyxBw8FHe4nbLS8z17modFhI
         {
             using (RSA rsa = RSAFactory.Create())
             {
-                string pem = @"
+                string pem =
+                    @"
 -----BEGIN CERTIFICATE-----
 MIICTzCCAgmgAwIBAgIJAMQtYhFJ0+5jMA0GCSqGSIb3DQEBBQUAMIGSMQswCQYD
 VQQGEwJVUzETMBEGA1UECAwKV2FzaGluZ3RvbjEQMA4GA1UEBwwHUmVkbW9uZDEY
@@ -200,7 +219,8 @@ yZWUxoxAdjfrBGsx+U6BHM0Myqqe7fY7hjWzj4aBCw==
         {
             using (RSA rsa = RSAFactory.Create())
             {
-                string pem = @"
+                string pem =
+                    @"
 -----BEGIN CERTIFICATE-----
 $$ I AM NOT A PEM
 -----END CERTIFICATE-----
@@ -225,7 +245,8 @@ yZWUxoxAdjfrBGsx+U6BHM0Myqqe7fY7hjWzj4aBCw==
         {
             using (RSA rsa = RSAFactory.Create())
             {
-                string pem = @"
+                string pem =
+                    @"
 -----BEGIN EC PRIVATE KEY-----
 MHcCAQEEIHChLC2xaEXtVv9oz8IaRys/BNfWhRv2NJ8tfVs0UrOKoAoGCCqGSM49
 AwEHoUQDQgAEgQHs5HRkpurXDPaabivT2IaRoyYtIsuk92Ner/JmgKjYoSumHVmS
@@ -252,7 +273,8 @@ yZWUxoxAdjfrBGsx+U6BHM0Myqqe7fY7hjWzj4aBCw==
         {
             using (RSA rsa = RSAFactory.Create())
             {
-                string pem = @"
+                string pem =
+                    @"
 -----BEGIN RSA PRIVATE KEY-----
 MII=
 -----END RSA PRIVATE KEY-----
@@ -265,7 +287,10 @@ Q079SlHzXuvocqIdt4IM1EmIlrlU9GGvAh8Ijv3FFPUSLfANgfOIH9mX7ldpzzGk
 rmaUzxQvyuVLAiEArCTM8dSbopUADWnD4jArhU50UhWAIaM6ZrKqC8k0RKsCIQDC
 yZWUxoxAdjfrBGsx+U6BHM0Myqqe7fY7hjWzj4aBCw==
 -----END RSA PRIVATE KEY-----";
-                ArgumentException ae = AssertExtensions.Throws<ArgumentException>("input", () => rsa.ImportFromPem(pem));
+                ArgumentException ae = AssertExtensions.Throws<ArgumentException>(
+                    "input",
+                    () => rsa.ImportFromPem(pem)
+                );
                 Assert.Contains(AmbiguousExceptionMarker, ae.Message);
             }
         }
@@ -275,7 +300,8 @@ yZWUxoxAdjfrBGsx+U6BHM0Myqqe7fY7hjWzj4aBCw==
         {
             using (RSA rsa = RSAFactory.Create())
             {
-                string pem = @"
+                string pem =
+                    @"
 -----BEGIN PUBLIC KEY-----
 MII=
 -----END PUBLIC KEY-----
@@ -288,7 +314,10 @@ Q079SlHzXuvocqIdt4IM1EmIlrlU9GGvAh8Ijv3FFPUSLfANgfOIH9mX7ldpzzGk
 rmaUzxQvyuVLAiEArCTM8dSbopUADWnD4jArhU50UhWAIaM6ZrKqC8k0RKsCIQDC
 yZWUxoxAdjfrBGsx+U6BHM0Myqqe7fY7hjWzj4aBCw==
 -----END RSA PRIVATE KEY-----";
-                ArgumentException ae = AssertExtensions.Throws<ArgumentException>("input", () => rsa.ImportFromPem(pem));
+                ArgumentException ae = AssertExtensions.Throws<ArgumentException>(
+                    "input",
+                    () => rsa.ImportFromPem(pem)
+                );
                 Assert.Contains(AmbiguousExceptionMarker, ae.Message);
             }
         }
@@ -298,7 +327,8 @@ yZWUxoxAdjfrBGsx+U6BHM0Myqqe7fY7hjWzj4aBCw==
         {
             using (RSA rsa = RSAFactory.Create())
             {
-                string pem = @"
+                string pem =
+                    @"
 -----BEGIN RSA PUBLIC KEY-----
 MII=
 -----END RSA PUBLIC KEY-----
@@ -311,7 +341,10 @@ Q079SlHzXuvocqIdt4IM1EmIlrlU9GGvAh8Ijv3FFPUSLfANgfOIH9mX7ldpzzGk
 rmaUzxQvyuVLAiEArCTM8dSbopUADWnD4jArhU50UhWAIaM6ZrKqC8k0RKsCIQDC
 yZWUxoxAdjfrBGsx+U6BHM0Myqqe7fY7hjWzj4aBCw==
 -----END RSA PRIVATE KEY-----";
-                ArgumentException ae = AssertExtensions.Throws<ArgumentException>("input", () => rsa.ImportFromPem(pem));
+                ArgumentException ae = AssertExtensions.Throws<ArgumentException>(
+                    "input",
+                    () => rsa.ImportFromPem(pem)
+                );
                 Assert.Contains(AmbiguousExceptionMarker, ae.Message);
             }
         }
@@ -321,7 +354,8 @@ yZWUxoxAdjfrBGsx+U6BHM0Myqqe7fY7hjWzj4aBCw==
         {
             using (RSA rsa = RSAFactory.Create())
             {
-                string pem = @"
+                string pem =
+                    @"
 -----BEGIN ENCRYPTED PRIVATE KEY-----
 MII=
 -----END ENCRYPTED PRIVATE KEY-----
@@ -334,7 +368,10 @@ Q079SlHzXuvocqIdt4IM1EmIlrlU9GGvAh8Ijv3FFPUSLfANgfOIH9mX7ldpzzGk
 rmaUzxQvyuVLAiEArCTM8dSbopUADWnD4jArhU50UhWAIaM6ZrKqC8k0RKsCIQDC
 yZWUxoxAdjfrBGsx+U6BHM0Myqqe7fY7hjWzj4aBCw==
 -----END RSA PRIVATE KEY-----";
-                ArgumentException ae = AssertExtensions.Throws<ArgumentException>("input", () => rsa.ImportFromPem(pem));
+                ArgumentException ae = AssertExtensions.Throws<ArgumentException>(
+                    "input",
+                    () => rsa.ImportFromPem(pem)
+                );
                 Assert.Contains(AmbiguousExceptionMarker, ae.Message);
             }
         }
@@ -344,7 +381,8 @@ yZWUxoxAdjfrBGsx+U6BHM0Myqqe7fY7hjWzj4aBCw==
         {
             using (RSA rsa = RSAFactory.Create())
             {
-                string pem = @"
+                string pem =
+                    @"
 -----BEGIN ENCRYPTED PRIVATE KEY-----
 MIIBsTBLBgkqhkiG9w0BBQ0wPjApBgkqhkiG9w0BBQwwHAQIioaQaFwlfasCAggA
 MAwGCCqGSIb3DQIJBQAwEQYFKw4DAgcECJLGzSuIgnSkBIIBYHofFpp5AsrkNc9w
@@ -357,7 +395,10 @@ LiBC1SQXJ3sJdAeUE0QPJEci937f8SteWUmF5mUqznb/0nYjvSZh/GcZ4GWEAO8j
 RkMxT/C7OZVMOlb3HV3fJj7kDmOMqfc6aKEQjLdWtuYRB8CgaudldIpK4jP2+0b5
 pBORBb0=
 -----END ENCRYPTED PRIVATE KEY-----";
-                ArgumentException ae = AssertExtensions.Throws<ArgumentException>("input", () => rsa.ImportFromPem(pem));
+                ArgumentException ae = AssertExtensions.Throws<ArgumentException>(
+                    "input",
+                    () => rsa.ImportFromPem(pem)
+                );
                 Assert.Contains(EncryptedExceptionMarker, ae.Message);
             }
         }
@@ -367,7 +408,8 @@ pBORBb0=
         {
             using (RSA rsa = RSAFactory.Create())
             {
-                string pem = @"
+                string pem =
+                    @"
 The below PEM is a 1024-bit DSA key.
 -----BEGIN PRIVATE KEY-----
 MIIBSgIBADCCASsGByqGSM44BAEwggEeAoGBAL5KGXEaazCA+k1pMcCBc/+bodFh
@@ -387,7 +429,8 @@ eDr38gQ/Hk0CgW3/RFrNWdbIpfMifs80vqCUNqDggcQixEmDVZ0gwq4+wz8EVyYG
         {
             using (RSA rsa = RSAFactory.Create())
             {
-                string pem = @"
+                string pem =
+                    @"
 -----BEGIN ENCRYPTED PRIVATE KEY-----
 MIIBsTBLBgkqhkiG9w0BBQ0wPjApBgkqhkiG9w0BBQwwHAQIcvgI1lw9LqYCAggA
 MAwGCCqGSIb3DQIJBQAwEQYFKw4DAgcECFDpLREQXt5pBIIBYOKuM5ljAvCViDL+
@@ -412,7 +455,8 @@ CA7ffFk=
         {
             using (RSA rsa = RSAFactory.Create())
             {
-                string pem = @"
+                string pem =
+                    @"
 -----BEGIN ENCRYPTED PRIVATE KEY-----
 MIIBvTBXBgkqhkiG9w0BBQ0wSjApBgkqhkiG9w0BBQwwHAQIciLWmWb33X0CAggA
 MAwGCCqGSIb3DQIJBQAwHQYJYIZIAWUDBAECBBBVEmHhJdbi+HKzPttNjXm4BIIB
@@ -437,7 +481,8 @@ raZNyk8KAsLs+FJq9T2tda0=
         {
             using (RSA rsa = RSAFactory.Create())
             {
-                string pem = @"
+                string pem =
+                    @"
 -----BEGIN ENCRYPTED PRIVATE KEY-----
 MIIBvTBXBgkqhkiG9w0BBQ0wSjApBgkqhkiG9w0BBQwwHAQIciLWmWb33X0CAggA
 MAwGCCqGSIb3DQIJBQAwHQYJYIZIAWUDBAECBBBVEmHhJdbi+HKzPttNjXm4BIIB
@@ -462,8 +507,10 @@ AWvBUt33Sozc+dF0l7NGLAWL2tqkkpyDQuKn6UgYz/vxkFeQAVfSuaJVR+fUlHg0
 N4lD7/hJq7b+yYPhlN3Fvvt8M9MtRg1TLAve67CA2v4TITHB06M/ELe3y42bZuLW
 CA7ffFk=
 -----END ENCRYPTED PRIVATE KEY-----";
-                ArgumentException ae = AssertExtensions.Throws<ArgumentException>("input", () =>
-                    rsa.ImportFromEncryptedPem(pem, "test"u8));
+                ArgumentException ae = AssertExtensions.Throws<ArgumentException>(
+                    "input",
+                    () => rsa.ImportFromEncryptedPem(pem, "test"u8)
+                );
                 Assert.Contains(AmbiguousExceptionMarker, ae.Message);
             }
         }
@@ -474,8 +521,10 @@ CA7ffFk=
             using (RSA rsa = RSAFactory.Create())
             {
                 string pem = "these aren't the PEMs we're looking for.";
-                ArgumentException ae = AssertExtensions.Throws<ArgumentException>("input", () =>
-                    rsa.ImportFromEncryptedPem(pem, "test"u8));
+                ArgumentException ae = AssertExtensions.Throws<ArgumentException>(
+                    "input",
+                    () => rsa.ImportFromEncryptedPem(pem, "test"u8)
+                );
                 Assert.Contains(NoPemExceptionMarker, ae.Message);
             }
         }
@@ -485,7 +534,8 @@ CA7ffFk=
         {
             using (RSA rsa = RSAFactory.Create())
             {
-                string pem = @"
+                string pem =
+                    @"
 -----BEGIN PRIVATE KEY-----
 MIIBVQIBADANBgkqhkiG9w0BAQEFAASCAT8wggE7AgEAAkEAtz9Z9e6L1V4kt/8C
 mtFqhUPJbSU+VDGbk1MsQcPBR3uJ2y0vM9e5qHRYSOBqjmg7UERRHhvKNiUn4Xz0
@@ -496,8 +546,10 @@ Ya8CHwiO/cUU9RIt8A2B84gf2ZfuV2nPMaSuZpTPFC/K5UsCIQCsJMzx1JuilQAN
 acPiMCuFTnRSFYAhozpmsqoLyTREqwIhAMLJlZTGjEB2N+sEazH5ToEczQzKqp7t
 9juGNbOPhoEL
 -----END PRIVATE KEY-----";
-                ArgumentException ae = AssertExtensions.Throws<ArgumentException>("input", () =>
-                    rsa.ImportFromEncryptedPem(pem, "test"u8));
+                ArgumentException ae = AssertExtensions.Throws<ArgumentException>(
+                    "input",
+                    () => rsa.ImportFromEncryptedPem(pem, "test"u8)
+                );
                 Assert.Contains(NoPemExceptionMarker, ae.Message);
             }
         }
@@ -509,19 +561,17 @@ acPiMCuFTnRSFYAhozpmsqoLyTREqwIhAMLJlZTGjEB2N+sEazH5ToEczQzKqp7t
             {
                 string pem = "go about your business";
                 string password = "test";
-                ArgumentException ae = AssertExtensions.Throws<ArgumentException>("input", () =>
-                    rsa.ImportFromEncryptedPem(pem, password));
+                ArgumentException ae = AssertExtensions.Throws<ArgumentException>(
+                    "input",
+                    () => rsa.ImportFromEncryptedPem(pem, password)
+                );
                 Assert.Contains(NoPemExceptionMarker, ae.Message);
             }
         }
 
         private static RSAParameters ToPublic(this RSAParameters rsaParams)
         {
-            return new RSAParameters
-            {
-                Exponent = rsaParams.Exponent,
-                Modulus = rsaParams.Modulus
-            };
+            return new RSAParameters { Exponent = rsaParams.Exponent, Modulus = rsaParams.Modulus };
         }
     }
 }

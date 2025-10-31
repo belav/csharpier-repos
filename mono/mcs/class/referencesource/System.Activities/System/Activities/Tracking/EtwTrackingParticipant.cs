@@ -10,16 +10,16 @@ namespace System.Activities.Tracking
     using System.Collections.Generic;
     using System.Collections.Specialized;
     using System.Diagnostics;
+    using System.Diagnostics.CodeAnalysis;
     using System.Globalization;
     using System.IO;
     using System.Runtime;
     using System.Runtime.Diagnostics;
-    using System.Runtime.Serialization.Formatters.Binary;
-    using System.Text;
     using System.Runtime.Serialization;
+    using System.Runtime.Serialization.Formatters.Binary;
     using System.Security;
     using System.Security.Permissions;
-    using System.Diagnostics.CodeAnalysis;
+    using System.Text;
     using System.Xml;
 
     public sealed class EtwTrackingParticipant : TrackingParticipant
@@ -54,10 +54,7 @@ namespace System.Activities.Tracking
         [Fx.Tag.KnownXamlExternal]
         public Guid EtwProviderId
         {
-            get
-            {
-                return this.etwProviderId;
-            }
+            get { return this.etwProviderId; }
             // This requires UnmanagedCode permission. It is demanded in InitializeEtwTrackingProvider.
             set
             {
@@ -69,14 +66,14 @@ namespace System.Activities.Tracking
             }
         }
 
-        public string ApplicationReference
-        {
-            get;
+        public string ApplicationReference { get; set; }
 
-            set;
-        }
-
-        protected internal override IAsyncResult BeginTrack(TrackingRecord record, TimeSpan timeout, AsyncCallback callback, object state)
+        protected internal override IAsyncResult BeginTrack(
+            TrackingRecord record,
+            TimeSpan timeout,
+            AsyncCallback callback,
+            object state
+        )
         {
             Track(record, timeout);
             return new CompletedAsyncResult(callback, state);
@@ -123,8 +120,10 @@ namespace System.Activities.Tracking
             }
         }
 
-        [Fx.Tag.SecurityNote(Critical = "Calls EtwDiagonsticTrace.ctor with a provider id, which is SecurityCritical",
-            Safe = "We demand UnmanagedCode.")]
+        [Fx.Tag.SecurityNote(
+            Critical = "Calls EtwDiagonsticTrace.ctor with a provider id, which is SecurityCritical",
+            Safe = "We demand UnmanagedCode."
+        )]
         [SecuritySafeCritical]
         [SecurityPermission(SecurityAction.Demand, UnmanagedCode = true)]
         void InitializeEtwTrackingProvider(Guid providerId)
@@ -149,10 +148,7 @@ namespace System.Activities.Tracking
         string PrepareDictionary(IDictionary<string, object> data)
         {
             StringBuilder builder = new StringBuilder();
-            XmlWriterSettings settings = new XmlWriterSettings()
-            {
-                OmitXmlDeclaration = true
-            };
+            XmlWriterSettings settings = new XmlWriterSettings() { OmitXmlDeclaration = true };
             using (XmlWriter writer = XmlWriter.Create(builder, settings))
             {
                 writer.WriteStartElement(itemsTag);
@@ -173,10 +169,19 @@ namespace System.Activities.Tracking
                             Type valueType = item.Value.GetType();
                             writer.WriteAttributeString(typeAttribute, valueType.FullName);
 
-                            if (valueType == typeof(int) || valueType == typeof(float) || valueType == typeof(double) ||
-                                valueType == typeof(long) || valueType == typeof(bool) || valueType == typeof(uint) ||
-                                valueType == typeof(ushort) || valueType == typeof(short) || valueType == typeof(ulong) ||
-                                valueType == typeof(string) || valueType == typeof(DateTimeOffset))
+                            if (
+                                valueType == typeof(int)
+                                || valueType == typeof(float)
+                                || valueType == typeof(double)
+                                || valueType == typeof(long)
+                                || valueType == typeof(bool)
+                                || valueType == typeof(uint)
+                                || valueType == typeof(ushort)
+                                || valueType == typeof(short)
+                                || valueType == typeof(ulong)
+                                || valueType == typeof(string)
+                                || valueType == typeof(DateTimeOffset)
+                            )
                             {
                                 writer.WriteValue(item.Value);
                             }
@@ -225,10 +230,7 @@ namespace System.Activities.Tracking
             string stringTypeName = typeof(string).FullName;
 
             StringBuilder builder = new StringBuilder();
-            XmlWriterSettings settings = new XmlWriterSettings()
-            {
-                OmitXmlDeclaration = true
-            };
+            XmlWriterSettings settings = new XmlWriterSettings() { OmitXmlDeclaration = true };
             using (XmlWriter writer = XmlWriter.Create(builder, settings))
             {
                 writer.WriteStartElement(itemsTag);
@@ -259,7 +261,7 @@ namespace System.Activities.Tracking
 
         static void TraceItemNotSerializable(string item, Exception e)
         {
-            //trace the exception. 
+            //trace the exception.
             FxTrace.Exception.AsInformation(e);
 
             if (TD.TrackingValueNotSerializableIsEnabled())
@@ -286,20 +288,57 @@ namespace System.Activities.Tracking
 
         void TrackActivityRecord(ActivityStateRecord record)
         {
-            if (EtwTrackingParticipantTrackRecords.ActivityStateRecordIsEnabled(this.diagnosticTrace))
+            if (
+                EtwTrackingParticipantTrackRecords.ActivityStateRecordIsEnabled(
+                    this.diagnosticTrace
+                )
+            )
             {
-                if (!EtwTrackingParticipantTrackRecords.ActivityStateRecord(this.diagnosticTrace, record.EventTraceActivity, record.InstanceId,
-                    record.RecordNumber, record.EventTime.ToFileTime(), record.State,
-                    record.Activity.Name, record.Activity.Id, record.Activity.InstanceId, record.Activity.TypeName,
-                    record.Arguments.Count > 0 ? PrepareDictionary(record.Arguments) : emptyItemsTag,
-                    record.Variables.Count > 0 ? PrepareDictionary(record.Variables) : emptyItemsTag,
-                    record.HasAnnotations ? PrepareAnnotations(record.Annotations) : emptyItemsTag,
-                    this.TrackingProfile == null ? string.Empty : this.TrackingProfile.Name, this.ApplicationReference))
+                if (
+                    !EtwTrackingParticipantTrackRecords.ActivityStateRecord(
+                        this.diagnosticTrace,
+                        record.EventTraceActivity,
+                        record.InstanceId,
+                        record.RecordNumber,
+                        record.EventTime.ToFileTime(),
+                        record.State,
+                        record.Activity.Name,
+                        record.Activity.Id,
+                        record.Activity.InstanceId,
+                        record.Activity.TypeName,
+                        record.Arguments.Count > 0
+                            ? PrepareDictionary(record.Arguments)
+                            : emptyItemsTag,
+                        record.Variables.Count > 0
+                            ? PrepareDictionary(record.Variables)
+                            : emptyItemsTag,
+                        record.HasAnnotations
+                            ? PrepareAnnotations(record.Annotations)
+                            : emptyItemsTag,
+                        this.TrackingProfile == null ? string.Empty : this.TrackingProfile.Name,
+                        this.ApplicationReference
+                    )
+                )
                 {
-                    if (EtwTrackingParticipantTrackRecords.ActivityStateRecord(this.diagnosticTrace, record.EventTraceActivity, record.InstanceId,
-                        record.RecordNumber, record.EventTime.ToFileTime(), record.State,
-                        record.Activity.Name, record.Activity.Id, record.Activity.InstanceId, record.Activity.TypeName, truncatedItemsTag, truncatedItemsTag,
-                        truncatedItemsTag, this.TrackingProfile == null ? string.Empty : this.TrackingProfile.Name, this.ApplicationReference))
+                    if (
+                        EtwTrackingParticipantTrackRecords.ActivityStateRecord(
+                            this.diagnosticTrace,
+                            record.EventTraceActivity,
+                            record.InstanceId,
+                            record.RecordNumber,
+                            record.EventTime.ToFileTime(),
+                            record.State,
+                            record.Activity.Name,
+                            record.Activity.Id,
+                            record.Activity.InstanceId,
+                            record.Activity.TypeName,
+                            truncatedItemsTag,
+                            truncatedItemsTag,
+                            truncatedItemsTag,
+                            this.TrackingProfile == null ? string.Empty : this.TrackingProfile.Name,
+                            this.ApplicationReference
+                        )
+                    )
                     {
                         TraceTrackingRecordTruncated(record.RecordNumber);
                     }
@@ -311,32 +350,73 @@ namespace System.Activities.Tracking
             }
         }
 
-
         void TrackActivityScheduledRecord(ActivityScheduledRecord scheduledRecord)
         {
-            if (EtwTrackingParticipantTrackRecords.ActivityScheduledRecordIsEnabled(this.diagnosticTrace))
+            if (
+                EtwTrackingParticipantTrackRecords.ActivityScheduledRecordIsEnabled(
+                    this.diagnosticTrace
+                )
+            )
             {
-                if (!EtwTrackingParticipantTrackRecords.ActivityScheduledRecord(this.diagnosticTrace, scheduledRecord.EventTraceActivity, scheduledRecord.InstanceId,
-                    scheduledRecord.RecordNumber,
-                    scheduledRecord.EventTime.ToFileTime(),
-                    scheduledRecord.Activity == null ? string.Empty : scheduledRecord.Activity.Name,
-                    scheduledRecord.Activity == null ? string.Empty : scheduledRecord.Activity.Id,
-                    scheduledRecord.Activity == null ? string.Empty : scheduledRecord.Activity.InstanceId,
-                    scheduledRecord.Activity == null ? string.Empty : scheduledRecord.Activity.TypeName,
-                    scheduledRecord.Child.Name, scheduledRecord.Child.Id, scheduledRecord.Child.InstanceId, scheduledRecord.Child.TypeName,
-                    scheduledRecord.HasAnnotations ? PrepareAnnotations(scheduledRecord.Annotations) : emptyItemsTag,
-                    this.TrackingProfile == null ? string.Empty : this.TrackingProfile.Name, this.ApplicationReference))
-                {
-                    if (EtwTrackingParticipantTrackRecords.ActivityScheduledRecord(this.diagnosticTrace, scheduledRecord.EventTraceActivity, scheduledRecord.InstanceId,
+                if (
+                    !EtwTrackingParticipantTrackRecords.ActivityScheduledRecord(
+                        this.diagnosticTrace,
+                        scheduledRecord.EventTraceActivity,
+                        scheduledRecord.InstanceId,
                         scheduledRecord.RecordNumber,
                         scheduledRecord.EventTime.ToFileTime(),
-                        scheduledRecord.Activity == null ? string.Empty : scheduledRecord.Activity.Name,
-                        scheduledRecord.Activity == null ? string.Empty : scheduledRecord.Activity.Id,
-                        scheduledRecord.Activity == null ? string.Empty : scheduledRecord.Activity.InstanceId,
-                        scheduledRecord.Activity == null ? string.Empty : scheduledRecord.Activity.TypeName,
-                        scheduledRecord.Child.Name, scheduledRecord.Child.Id, scheduledRecord.Child.InstanceId, scheduledRecord.Child.TypeName,
-                        truncatedItemsTag,
-                        this.TrackingProfile == null ? string.Empty : this.TrackingProfile.Name, this.ApplicationReference))
+                        scheduledRecord.Activity == null
+                            ? string.Empty
+                            : scheduledRecord.Activity.Name,
+                        scheduledRecord.Activity == null
+                            ? string.Empty
+                            : scheduledRecord.Activity.Id,
+                        scheduledRecord.Activity == null
+                            ? string.Empty
+                            : scheduledRecord.Activity.InstanceId,
+                        scheduledRecord.Activity == null
+                            ? string.Empty
+                            : scheduledRecord.Activity.TypeName,
+                        scheduledRecord.Child.Name,
+                        scheduledRecord.Child.Id,
+                        scheduledRecord.Child.InstanceId,
+                        scheduledRecord.Child.TypeName,
+                        scheduledRecord.HasAnnotations
+                            ? PrepareAnnotations(scheduledRecord.Annotations)
+                            : emptyItemsTag,
+                        this.TrackingProfile == null ? string.Empty : this.TrackingProfile.Name,
+                        this.ApplicationReference
+                    )
+                )
+                {
+                    if (
+                        EtwTrackingParticipantTrackRecords.ActivityScheduledRecord(
+                            this.diagnosticTrace,
+                            scheduledRecord.EventTraceActivity,
+                            scheduledRecord.InstanceId,
+                            scheduledRecord.RecordNumber,
+                            scheduledRecord.EventTime.ToFileTime(),
+                            scheduledRecord.Activity == null
+                                ? string.Empty
+                                : scheduledRecord.Activity.Name,
+                            scheduledRecord.Activity == null
+                                ? string.Empty
+                                : scheduledRecord.Activity.Id,
+                            scheduledRecord.Activity == null
+                                ? string.Empty
+                                : scheduledRecord.Activity.InstanceId,
+                            scheduledRecord.Activity == null
+                                ? string.Empty
+                                : scheduledRecord.Activity.TypeName,
+                            scheduledRecord.Child.Name,
+                            scheduledRecord.Child.Id,
+                            scheduledRecord.Child.InstanceId,
+                            scheduledRecord.Child.TypeName,
+                            truncatedItemsTag,
+                            this.TrackingProfile == null ? string.Empty : this.TrackingProfile.Name,
+                            this.ApplicationReference
+                        )
+                    )
                     {
                         TraceTrackingRecordTruncated(scheduledRecord.RecordNumber);
                     }
@@ -350,29 +430,65 @@ namespace System.Activities.Tracking
 
         void TrackCancelRequestedRecord(CancelRequestedRecord cancelRecord)
         {
-            if (EtwTrackingParticipantTrackRecords.CancelRequestedRecordIsEnabled(this.diagnosticTrace))
+            if (
+                EtwTrackingParticipantTrackRecords.CancelRequestedRecordIsEnabled(
+                    this.diagnosticTrace
+                )
+            )
             {
-                if (!EtwTrackingParticipantTrackRecords.CancelRequestedRecord(this.diagnosticTrace, cancelRecord.EventTraceActivity, cancelRecord.InstanceId,
-                    cancelRecord.RecordNumber,
-                    cancelRecord.EventTime.ToFileTime(),
-                    cancelRecord.Activity == null ? string.Empty : cancelRecord.Activity.Name,
-                    cancelRecord.Activity == null ? string.Empty : cancelRecord.Activity.Id,
-                    cancelRecord.Activity == null ? string.Empty : cancelRecord.Activity.InstanceId,
-                    cancelRecord.Activity == null ? string.Empty : cancelRecord.Activity.TypeName,
-                    cancelRecord.Child.Name, cancelRecord.Child.Id, cancelRecord.Child.InstanceId, cancelRecord.Child.TypeName,
-                    cancelRecord.HasAnnotations ? PrepareAnnotations(cancelRecord.Annotations) : emptyItemsTag,
-                    this.TrackingProfile == null ? string.Empty : this.TrackingProfile.Name, this.ApplicationReference))
-                {
-                    if (EtwTrackingParticipantTrackRecords.CancelRequestedRecord(this.diagnosticTrace, cancelRecord.EventTraceActivity, cancelRecord.InstanceId,
+                if (
+                    !EtwTrackingParticipantTrackRecords.CancelRequestedRecord(
+                        this.diagnosticTrace,
+                        cancelRecord.EventTraceActivity,
+                        cancelRecord.InstanceId,
                         cancelRecord.RecordNumber,
                         cancelRecord.EventTime.ToFileTime(),
                         cancelRecord.Activity == null ? string.Empty : cancelRecord.Activity.Name,
                         cancelRecord.Activity == null ? string.Empty : cancelRecord.Activity.Id,
-                        cancelRecord.Activity == null ? string.Empty : cancelRecord.Activity.InstanceId,
-                        cancelRecord.Activity == null ? string.Empty : cancelRecord.Activity.TypeName,
-                        cancelRecord.Child.Name, cancelRecord.Child.Id, cancelRecord.Child.InstanceId, cancelRecord.Child.TypeName,
-                        truncatedItemsTag,
-                        this.TrackingProfile == null ? string.Empty : this.TrackingProfile.Name, this.ApplicationReference))
+                        cancelRecord.Activity == null
+                            ? string.Empty
+                            : cancelRecord.Activity.InstanceId,
+                        cancelRecord.Activity == null
+                            ? string.Empty
+                            : cancelRecord.Activity.TypeName,
+                        cancelRecord.Child.Name,
+                        cancelRecord.Child.Id,
+                        cancelRecord.Child.InstanceId,
+                        cancelRecord.Child.TypeName,
+                        cancelRecord.HasAnnotations
+                            ? PrepareAnnotations(cancelRecord.Annotations)
+                            : emptyItemsTag,
+                        this.TrackingProfile == null ? string.Empty : this.TrackingProfile.Name,
+                        this.ApplicationReference
+                    )
+                )
+                {
+                    if (
+                        EtwTrackingParticipantTrackRecords.CancelRequestedRecord(
+                            this.diagnosticTrace,
+                            cancelRecord.EventTraceActivity,
+                            cancelRecord.InstanceId,
+                            cancelRecord.RecordNumber,
+                            cancelRecord.EventTime.ToFileTime(),
+                            cancelRecord.Activity == null
+                                ? string.Empty
+                                : cancelRecord.Activity.Name,
+                            cancelRecord.Activity == null ? string.Empty : cancelRecord.Activity.Id,
+                            cancelRecord.Activity == null
+                                ? string.Empty
+                                : cancelRecord.Activity.InstanceId,
+                            cancelRecord.Activity == null
+                                ? string.Empty
+                                : cancelRecord.Activity.TypeName,
+                            cancelRecord.Child.Name,
+                            cancelRecord.Child.Id,
+                            cancelRecord.Child.InstanceId,
+                            cancelRecord.Child.TypeName,
+                            truncatedItemsTag,
+                            this.TrackingProfile == null ? string.Empty : this.TrackingProfile.Name,
+                            this.ApplicationReference
+                        )
+                    )
                     {
                         TraceTrackingRecordTruncated(cancelRecord.RecordNumber);
                     }
@@ -386,31 +502,75 @@ namespace System.Activities.Tracking
 
         void TrackFaultPropagationRecord(FaultPropagationRecord faultRecord)
         {
-            if (EtwTrackingParticipantTrackRecords.FaultPropagationRecordIsEnabled(this.diagnosticTrace))
+            if (
+                EtwTrackingParticipantTrackRecords.FaultPropagationRecordIsEnabled(
+                    this.diagnosticTrace
+                )
+            )
             {
-                if (!EtwTrackingParticipantTrackRecords.FaultPropagationRecord(this.diagnosticTrace, faultRecord.EventTraceActivity, faultRecord.InstanceId,
-                    faultRecord.RecordNumber,
-                    faultRecord.EventTime.ToFileTime(),
-                    faultRecord.FaultSource.Name, faultRecord.FaultSource.Id, faultRecord.FaultSource.InstanceId, faultRecord.FaultSource.TypeName,
-                    faultRecord.FaultHandler != null ? faultRecord.FaultHandler.Name : string.Empty,
-                    faultRecord.FaultHandler != null ? faultRecord.FaultHandler.Id : string.Empty,
-                    faultRecord.FaultHandler != null ? faultRecord.FaultHandler.InstanceId : string.Empty,
-                    faultRecord.FaultHandler != null ? faultRecord.FaultHandler.TypeName : string.Empty,
-                    faultRecord.Fault.ToString(), faultRecord.IsFaultSource,
-                    faultRecord.HasAnnotations ? PrepareAnnotations(faultRecord.Annotations) : emptyItemsTag,
-                    this.TrackingProfile == null ? string.Empty : this.TrackingProfile.Name, this.ApplicationReference))
-                {
-                    if (EtwTrackingParticipantTrackRecords.FaultPropagationRecord(this.diagnosticTrace, faultRecord.EventTraceActivity, faultRecord.InstanceId,
+                if (
+                    !EtwTrackingParticipantTrackRecords.FaultPropagationRecord(
+                        this.diagnosticTrace,
+                        faultRecord.EventTraceActivity,
+                        faultRecord.InstanceId,
                         faultRecord.RecordNumber,
                         faultRecord.EventTime.ToFileTime(),
-                        faultRecord.FaultSource.Name, faultRecord.FaultSource.Id, faultRecord.FaultSource.InstanceId, faultRecord.FaultSource.TypeName,
-                        faultRecord.FaultHandler != null ? faultRecord.FaultHandler.Name : string.Empty,
-                        faultRecord.FaultHandler != null ? faultRecord.FaultHandler.Id : string.Empty,
-                        faultRecord.FaultHandler != null ? faultRecord.FaultHandler.InstanceId : string.Empty,
-                        faultRecord.FaultHandler != null ? faultRecord.FaultHandler.TypeName : string.Empty,
-                        faultRecord.Fault.ToString(), faultRecord.IsFaultSource,
-                        truncatedItemsTag,
-                        this.TrackingProfile == null ? string.Empty : this.TrackingProfile.Name, this.ApplicationReference))
+                        faultRecord.FaultSource.Name,
+                        faultRecord.FaultSource.Id,
+                        faultRecord.FaultSource.InstanceId,
+                        faultRecord.FaultSource.TypeName,
+                        faultRecord.FaultHandler != null
+                            ? faultRecord.FaultHandler.Name
+                            : string.Empty,
+                        faultRecord.FaultHandler != null
+                            ? faultRecord.FaultHandler.Id
+                            : string.Empty,
+                        faultRecord.FaultHandler != null
+                            ? faultRecord.FaultHandler.InstanceId
+                            : string.Empty,
+                        faultRecord.FaultHandler != null
+                            ? faultRecord.FaultHandler.TypeName
+                            : string.Empty,
+                        faultRecord.Fault.ToString(),
+                        faultRecord.IsFaultSource,
+                        faultRecord.HasAnnotations
+                            ? PrepareAnnotations(faultRecord.Annotations)
+                            : emptyItemsTag,
+                        this.TrackingProfile == null ? string.Empty : this.TrackingProfile.Name,
+                        this.ApplicationReference
+                    )
+                )
+                {
+                    if (
+                        EtwTrackingParticipantTrackRecords.FaultPropagationRecord(
+                            this.diagnosticTrace,
+                            faultRecord.EventTraceActivity,
+                            faultRecord.InstanceId,
+                            faultRecord.RecordNumber,
+                            faultRecord.EventTime.ToFileTime(),
+                            faultRecord.FaultSource.Name,
+                            faultRecord.FaultSource.Id,
+                            faultRecord.FaultSource.InstanceId,
+                            faultRecord.FaultSource.TypeName,
+                            faultRecord.FaultHandler != null
+                                ? faultRecord.FaultHandler.Name
+                                : string.Empty,
+                            faultRecord.FaultHandler != null
+                                ? faultRecord.FaultHandler.Id
+                                : string.Empty,
+                            faultRecord.FaultHandler != null
+                                ? faultRecord.FaultHandler.InstanceId
+                                : string.Empty,
+                            faultRecord.FaultHandler != null
+                                ? faultRecord.FaultHandler.TypeName
+                                : string.Empty,
+                            faultRecord.Fault.ToString(),
+                            faultRecord.IsFaultSource,
+                            truncatedItemsTag,
+                            this.TrackingProfile == null ? string.Empty : this.TrackingProfile.Name,
+                            this.ApplicationReference
+                        )
+                    )
                     {
                         TraceTrackingRecordTruncated(faultRecord.RecordNumber);
                     }
@@ -424,18 +584,51 @@ namespace System.Activities.Tracking
 
         void TrackBookmarkRecord(BookmarkResumptionRecord record)
         {
-            if (EtwTrackingParticipantTrackRecords.BookmarkResumptionRecordIsEnabled(this.diagnosticTrace))
+            if (
+                EtwTrackingParticipantTrackRecords.BookmarkResumptionRecordIsEnabled(
+                    this.diagnosticTrace
+                )
+            )
             {
-                if (!EtwTrackingParticipantTrackRecords.BookmarkResumptionRecord(this.diagnosticTrace, record.EventTraceActivity, record.InstanceId, record.RecordNumber, record.EventTime.ToFileTime(),
-                    record.BookmarkName, record.BookmarkScope, record.Owner.Name, record.Owner.Id,
-                    record.Owner.InstanceId, record.Owner.TypeName,
-                    record.HasAnnotations ? PrepareAnnotations(record.Annotations) : emptyItemsTag,
-                    this.TrackingProfile == null ? string.Empty : this.TrackingProfile.Name, this.ApplicationReference))
+                if (
+                    !EtwTrackingParticipantTrackRecords.BookmarkResumptionRecord(
+                        this.diagnosticTrace,
+                        record.EventTraceActivity,
+                        record.InstanceId,
+                        record.RecordNumber,
+                        record.EventTime.ToFileTime(),
+                        record.BookmarkName,
+                        record.BookmarkScope,
+                        record.Owner.Name,
+                        record.Owner.Id,
+                        record.Owner.InstanceId,
+                        record.Owner.TypeName,
+                        record.HasAnnotations
+                            ? PrepareAnnotations(record.Annotations)
+                            : emptyItemsTag,
+                        this.TrackingProfile == null ? string.Empty : this.TrackingProfile.Name,
+                        this.ApplicationReference
+                    )
+                )
                 {
-                    if (EtwTrackingParticipantTrackRecords.BookmarkResumptionRecord(this.diagnosticTrace, record.EventTraceActivity, record.InstanceId, record.RecordNumber, record.EventTime.ToFileTime(),
-                        record.BookmarkName, record.BookmarkScope, record.Owner.Name, record.Owner.Id,
-                        record.Owner.InstanceId, record.Owner.TypeName,
-                        truncatedItemsTag, this.TrackingProfile == null ? string.Empty : this.TrackingProfile.Name, this.ApplicationReference))
+                    if (
+                        EtwTrackingParticipantTrackRecords.BookmarkResumptionRecord(
+                            this.diagnosticTrace,
+                            record.EventTraceActivity,
+                            record.InstanceId,
+                            record.RecordNumber,
+                            record.EventTime.ToFileTime(),
+                            record.BookmarkName,
+                            record.BookmarkScope,
+                            record.Owner.Name,
+                            record.Owner.Id,
+                            record.Owner.InstanceId,
+                            record.Owner.TypeName,
+                            truncatedItemsTag,
+                            this.TrackingProfile == null ? string.Empty : this.TrackingProfile.Name,
+                            this.ApplicationReference
+                        )
+                    )
                     {
                         TraceTrackingRecordTruncated(record.RecordNumber);
                     }
@@ -452,19 +645,55 @@ namespace System.Activities.Tracking
             switch (record.Level)
             {
                 case TraceLevel.Error:
-                    if (EtwTrackingParticipantTrackRecords.CustomTrackingRecordErrorIsEnabled(this.diagnosticTrace))
+                    if (
+                        EtwTrackingParticipantTrackRecords.CustomTrackingRecordErrorIsEnabled(
+                            this.diagnosticTrace
+                        )
+                    )
                     {
-                        if (!EtwTrackingParticipantTrackRecords.CustomTrackingRecordError(this.diagnosticTrace, record.EventTraceActivity, record.InstanceId,
-                                            record.RecordNumber, record.EventTime.ToFileTime(), record.Name,
-                                            record.Activity.Name, record.Activity.Id, record.Activity.InstanceId, record.Activity.TypeName,
-                                            PrepareDictionary(record.Data),
-                                            record.HasAnnotations ? PrepareAnnotations(record.Annotations) : emptyItemsTag,
-                                            this.TrackingProfile == null ? string.Empty : this.TrackingProfile.Name, this.ApplicationReference))
+                        if (
+                            !EtwTrackingParticipantTrackRecords.CustomTrackingRecordError(
+                                this.diagnosticTrace,
+                                record.EventTraceActivity,
+                                record.InstanceId,
+                                record.RecordNumber,
+                                record.EventTime.ToFileTime(),
+                                record.Name,
+                                record.Activity.Name,
+                                record.Activity.Id,
+                                record.Activity.InstanceId,
+                                record.Activity.TypeName,
+                                PrepareDictionary(record.Data),
+                                record.HasAnnotations
+                                    ? PrepareAnnotations(record.Annotations)
+                                    : emptyItemsTag,
+                                this.TrackingProfile == null
+                                    ? string.Empty
+                                    : this.TrackingProfile.Name,
+                                this.ApplicationReference
+                            )
+                        )
                         {
-                            if (EtwTrackingParticipantTrackRecords.CustomTrackingRecordError(this.diagnosticTrace, record.EventTraceActivity, record.InstanceId,
-                                record.RecordNumber, record.EventTime.ToFileTime(), record.Name,
-                                record.Activity.Name, record.Activity.Id, record.Activity.InstanceId, record.Activity.TypeName,
-                                truncatedItemsTag, truncatedItemsTag, this.TrackingProfile == null ? string.Empty : this.TrackingProfile.Name, this.ApplicationReference))
+                            if (
+                                EtwTrackingParticipantTrackRecords.CustomTrackingRecordError(
+                                    this.diagnosticTrace,
+                                    record.EventTraceActivity,
+                                    record.InstanceId,
+                                    record.RecordNumber,
+                                    record.EventTime.ToFileTime(),
+                                    record.Name,
+                                    record.Activity.Name,
+                                    record.Activity.Id,
+                                    record.Activity.InstanceId,
+                                    record.Activity.TypeName,
+                                    truncatedItemsTag,
+                                    truncatedItemsTag,
+                                    this.TrackingProfile == null
+                                        ? string.Empty
+                                        : this.TrackingProfile.Name,
+                                    this.ApplicationReference
+                                )
+                            )
                             {
                                 TraceTrackingRecordTruncated(record.RecordNumber);
                             }
@@ -476,19 +705,55 @@ namespace System.Activities.Tracking
                     }
                     break;
                 case TraceLevel.Warning:
-                    if (EtwTrackingParticipantTrackRecords.CustomTrackingRecordWarningIsEnabled(this.diagnosticTrace))
+                    if (
+                        EtwTrackingParticipantTrackRecords.CustomTrackingRecordWarningIsEnabled(
+                            this.diagnosticTrace
+                        )
+                    )
                     {
-                        if (!EtwTrackingParticipantTrackRecords.CustomTrackingRecordWarning(this.diagnosticTrace, record.EventTraceActivity, record.InstanceId,
-                                             record.RecordNumber, record.EventTime.ToFileTime(), record.Name,
-                                             record.Activity.Name, record.Activity.Id, record.Activity.InstanceId, record.Activity.TypeName,
-                                             PrepareDictionary(record.Data),
-                                             record.HasAnnotations ? PrepareAnnotations(record.Annotations) : emptyItemsTag,
-                                             this.TrackingProfile == null ? string.Empty : this.TrackingProfile.Name, this.ApplicationReference))
+                        if (
+                            !EtwTrackingParticipantTrackRecords.CustomTrackingRecordWarning(
+                                this.diagnosticTrace,
+                                record.EventTraceActivity,
+                                record.InstanceId,
+                                record.RecordNumber,
+                                record.EventTime.ToFileTime(),
+                                record.Name,
+                                record.Activity.Name,
+                                record.Activity.Id,
+                                record.Activity.InstanceId,
+                                record.Activity.TypeName,
+                                PrepareDictionary(record.Data),
+                                record.HasAnnotations
+                                    ? PrepareAnnotations(record.Annotations)
+                                    : emptyItemsTag,
+                                this.TrackingProfile == null
+                                    ? string.Empty
+                                    : this.TrackingProfile.Name,
+                                this.ApplicationReference
+                            )
+                        )
                         {
-                            if (EtwTrackingParticipantTrackRecords.CustomTrackingRecordWarning(this.diagnosticTrace, record.EventTraceActivity, record.InstanceId,
-                                record.RecordNumber, record.EventTime.ToFileTime(), record.Name,
-                                record.Activity.Name, record.Activity.Id, record.Activity.InstanceId, record.Activity.TypeName,
-                                truncatedItemsTag, truncatedItemsTag, this.TrackingProfile == null ? string.Empty : this.TrackingProfile.Name, this.ApplicationReference))
+                            if (
+                                EtwTrackingParticipantTrackRecords.CustomTrackingRecordWarning(
+                                    this.diagnosticTrace,
+                                    record.EventTraceActivity,
+                                    record.InstanceId,
+                                    record.RecordNumber,
+                                    record.EventTime.ToFileTime(),
+                                    record.Name,
+                                    record.Activity.Name,
+                                    record.Activity.Id,
+                                    record.Activity.InstanceId,
+                                    record.Activity.TypeName,
+                                    truncatedItemsTag,
+                                    truncatedItemsTag,
+                                    this.TrackingProfile == null
+                                        ? string.Empty
+                                        : this.TrackingProfile.Name,
+                                    this.ApplicationReference
+                                )
+                            )
                             {
                                 TraceTrackingRecordTruncated(record.RecordNumber);
                             }
@@ -501,19 +766,55 @@ namespace System.Activities.Tracking
                     break;
 
                 default:
-                    if (EtwTrackingParticipantTrackRecords.CustomTrackingRecordInfoIsEnabled(this.diagnosticTrace))
+                    if (
+                        EtwTrackingParticipantTrackRecords.CustomTrackingRecordInfoIsEnabled(
+                            this.diagnosticTrace
+                        )
+                    )
                     {
-                        if (!EtwTrackingParticipantTrackRecords.CustomTrackingRecordInfo(this.diagnosticTrace, record.EventTraceActivity, record.InstanceId,
-                                        record.RecordNumber, record.EventTime.ToFileTime(), record.Name,
-                                             record.Activity.Name, record.Activity.Id, record.Activity.InstanceId, record.Activity.TypeName,
-                                        PrepareDictionary(record.Data),
-                                        record.HasAnnotations ? PrepareAnnotations(record.Annotations) : emptyItemsTag,
-                                        this.TrackingProfile == null ? string.Empty : this.TrackingProfile.Name, this.ApplicationReference))
+                        if (
+                            !EtwTrackingParticipantTrackRecords.CustomTrackingRecordInfo(
+                                this.diagnosticTrace,
+                                record.EventTraceActivity,
+                                record.InstanceId,
+                                record.RecordNumber,
+                                record.EventTime.ToFileTime(),
+                                record.Name,
+                                record.Activity.Name,
+                                record.Activity.Id,
+                                record.Activity.InstanceId,
+                                record.Activity.TypeName,
+                                PrepareDictionary(record.Data),
+                                record.HasAnnotations
+                                    ? PrepareAnnotations(record.Annotations)
+                                    : emptyItemsTag,
+                                this.TrackingProfile == null
+                                    ? string.Empty
+                                    : this.TrackingProfile.Name,
+                                this.ApplicationReference
+                            )
+                        )
                         {
-                            if (EtwTrackingParticipantTrackRecords.CustomTrackingRecordInfo(this.diagnosticTrace, record.EventTraceActivity, record.InstanceId,
-                                record.RecordNumber, record.EventTime.ToFileTime(), record.Name,
-                                record.Activity.Name, record.Activity.Id, record.Activity.InstanceId, record.Activity.TypeName,
-                                truncatedItemsTag, truncatedItemsTag, this.TrackingProfile == null ? string.Empty : this.TrackingProfile.Name, this.ApplicationReference))
+                            if (
+                                EtwTrackingParticipantTrackRecords.CustomTrackingRecordInfo(
+                                    this.diagnosticTrace,
+                                    record.EventTraceActivity,
+                                    record.InstanceId,
+                                    record.RecordNumber,
+                                    record.EventTime.ToFileTime(),
+                                    record.Name,
+                                    record.Activity.Name,
+                                    record.Activity.Id,
+                                    record.Activity.InstanceId,
+                                    record.Activity.TypeName,
+                                    truncatedItemsTag,
+                                    truncatedItemsTag,
+                                    this.TrackingProfile == null
+                                        ? string.Empty
+                                        : this.TrackingProfile.Name,
+                                    this.ApplicationReference
+                                )
+                            )
                             {
                                 TraceTrackingRecordTruncated(record.RecordNumber);
                             }
@@ -531,9 +832,9 @@ namespace System.Activities.Tracking
         {
             // In the TrackWorkflowInstance*Record methods below there are two code paths.
             // If the WorkflowIdentity is null, then we follow the exisiting 4.0 path.
-            // If the WorkflowIdentity is provided, then if a particular field in the workflowInstance 
+            // If the WorkflowIdentity is provided, then if a particular field in the workflowInstance
             // record is null, we need to ensure that we are passing string.Empty.
-            // The WriteEvent method on the DiagnosticEventProvider which is called in the 
+            // The WriteEvent method on the DiagnosticEventProvider which is called in the
             // WriteEtwEvent in the EtwTrackingParticipantRecords class invokes the EventWrite
             // native method which relies on getting the record arguments in a particular order.
             if (record is WorkflowInstanceUnhandledExceptionRecord)
@@ -542,15 +843,15 @@ namespace System.Activities.Tracking
             }
             else if (record is WorkflowInstanceAbortedRecord)
             {
-                TrackWorkflowInstanceAbortedRecord(record);                
+                TrackWorkflowInstanceAbortedRecord(record);
             }
             else if (record is WorkflowInstanceSuspendedRecord)
             {
-                TrackWorkflowInstanceSuspendedRecord(record);                
+                TrackWorkflowInstanceSuspendedRecord(record);
             }
             else if (record is WorkflowInstanceTerminatedRecord)
             {
-                TrackWorkflowInstanceTerminatedRecord(record);                
+                TrackWorkflowInstanceTerminatedRecord(record);
             }
             else if (record is WorkflowInstanceUpdatedRecord)
             {
@@ -564,26 +865,64 @@ namespace System.Activities.Tracking
 
         void TrackWorkflowInstanceUnhandledExceptionRecord(WorkflowInstanceRecord record)
         {
-            WorkflowInstanceUnhandledExceptionRecord unhandled = record as WorkflowInstanceUnhandledExceptionRecord;
+            WorkflowInstanceUnhandledExceptionRecord unhandled =
+                record as WorkflowInstanceUnhandledExceptionRecord;
             if (unhandled.WorkflowDefinitionIdentity == null)
             {
-                if (EtwTrackingParticipantTrackRecords.WorkflowInstanceUnhandledExceptionRecordIsEnabled(this.diagnosticTrace))
+                if (
+                    EtwTrackingParticipantTrackRecords.WorkflowInstanceUnhandledExceptionRecordIsEnabled(
+                        this.diagnosticTrace
+                    )
+                )
                 {
-                    if (!EtwTrackingParticipantTrackRecords.WorkflowInstanceUnhandledExceptionRecord(this.diagnosticTrace, unhandled.EventTraceActivity, unhandled.InstanceId,
-                        unhandled.RecordNumber, unhandled.EventTime.ToFileTime(), unhandled.ActivityDefinitionId,
-                        unhandled.FaultSource.Name, unhandled.FaultSource.Id, unhandled.FaultSource.InstanceId, unhandled.FaultSource.TypeName,
-                        unhandled.UnhandledException == null ? string.Empty : unhandled.UnhandledException.ToString(),
-                        unhandled.HasAnnotations ? PrepareAnnotations(unhandled.Annotations) : emptyItemsTag,
-                        this.TrackingProfile == null ? string.Empty : this.TrackingProfile.Name, this.ApplicationReference))
+                    if (
+                        !EtwTrackingParticipantTrackRecords.WorkflowInstanceUnhandledExceptionRecord(
+                            this.diagnosticTrace,
+                            unhandled.EventTraceActivity,
+                            unhandled.InstanceId,
+                            unhandled.RecordNumber,
+                            unhandled.EventTime.ToFileTime(),
+                            unhandled.ActivityDefinitionId,
+                            unhandled.FaultSource.Name,
+                            unhandled.FaultSource.Id,
+                            unhandled.FaultSource.InstanceId,
+                            unhandled.FaultSource.TypeName,
+                            unhandled.UnhandledException == null
+                                ? string.Empty
+                                : unhandled.UnhandledException.ToString(),
+                            unhandled.HasAnnotations
+                                ? PrepareAnnotations(unhandled.Annotations)
+                                : emptyItemsTag,
+                            this.TrackingProfile == null ? string.Empty : this.TrackingProfile.Name,
+                            this.ApplicationReference
+                        )
+                    )
                     {
-                        if (EtwTrackingParticipantTrackRecords.WorkflowInstanceUnhandledExceptionRecord(this.diagnosticTrace, unhandled.EventTraceActivity, unhandled.InstanceId,
-                            unhandled.RecordNumber, unhandled.EventTime.ToFileTime(), unhandled.ActivityDefinitionId,
-                            unhandled.FaultSource.Name, unhandled.FaultSource.Id, unhandled.FaultSource.InstanceId, unhandled.FaultSource.TypeName,
-                            unhandled.UnhandledException == null ? string.Empty : unhandled.UnhandledException.ToString(),
-                            truncatedItemsTag, this.TrackingProfile == null ? string.Empty : this.TrackingProfile.Name, this.ApplicationReference))
+                        if (
+                            EtwTrackingParticipantTrackRecords.WorkflowInstanceUnhandledExceptionRecord(
+                                this.diagnosticTrace,
+                                unhandled.EventTraceActivity,
+                                unhandled.InstanceId,
+                                unhandled.RecordNumber,
+                                unhandled.EventTime.ToFileTime(),
+                                unhandled.ActivityDefinitionId,
+                                unhandled.FaultSource.Name,
+                                unhandled.FaultSource.Id,
+                                unhandled.FaultSource.InstanceId,
+                                unhandled.FaultSource.TypeName,
+                                unhandled.UnhandledException == null
+                                    ? string.Empty
+                                    : unhandled.UnhandledException.ToString(),
+                                truncatedItemsTag,
+                                this.TrackingProfile == null
+                                    ? string.Empty
+                                    : this.TrackingProfile.Name,
+                                this.ApplicationReference
+                            )
+                        )
                         {
                             TraceTrackingRecordTruncated(unhandled.RecordNumber);
-                        }                        
+                        }
                         else
                         {
                             TraceTrackingRecordDropped(unhandled.RecordNumber);
@@ -593,22 +932,61 @@ namespace System.Activities.Tracking
             }
             else
             {
-                if (EtwTrackingParticipantTrackRecords.WorkflowInstanceUnhandledExceptionRecordWithIdIsEnabled(this.diagnosticTrace))
+                if (
+                    EtwTrackingParticipantTrackRecords.WorkflowInstanceUnhandledExceptionRecordWithIdIsEnabled(
+                        this.diagnosticTrace
+                    )
+                )
                 {
-                    if (!EtwTrackingParticipantTrackRecords.WorkflowInstanceUnhandledExceptionRecordWithId(this.diagnosticTrace, unhandled.EventTraceActivity, unhandled.InstanceId,
-                        unhandled.RecordNumber, unhandled.EventTime.ToFileTime(), unhandled.ActivityDefinitionId,
-                        unhandled.FaultSource.Name, unhandled.FaultSource.Id, unhandled.FaultSource.InstanceId, unhandled.FaultSource.TypeName,
-                        unhandled.UnhandledException == null ? string.Empty : unhandled.UnhandledException.ToString(),
-                        unhandled.HasAnnotations ? PrepareAnnotations(unhandled.Annotations) : emptyItemsTag,
-                        this.TrackingProfile == null ? string.Empty : this.TrackingProfile.Name == null ? string.Empty : this.TrackingProfile.Name,
-                        unhandled.WorkflowDefinitionIdentity.ToString(), this.ApplicationReference))
+                    if (
+                        !EtwTrackingParticipantTrackRecords.WorkflowInstanceUnhandledExceptionRecordWithId(
+                            this.diagnosticTrace,
+                            unhandled.EventTraceActivity,
+                            unhandled.InstanceId,
+                            unhandled.RecordNumber,
+                            unhandled.EventTime.ToFileTime(),
+                            unhandled.ActivityDefinitionId,
+                            unhandled.FaultSource.Name,
+                            unhandled.FaultSource.Id,
+                            unhandled.FaultSource.InstanceId,
+                            unhandled.FaultSource.TypeName,
+                            unhandled.UnhandledException == null
+                                ? string.Empty
+                                : unhandled.UnhandledException.ToString(),
+                            unhandled.HasAnnotations
+                                ? PrepareAnnotations(unhandled.Annotations)
+                                : emptyItemsTag,
+                            this.TrackingProfile == null ? string.Empty
+                                : this.TrackingProfile.Name == null ? string.Empty
+                                : this.TrackingProfile.Name,
+                            unhandled.WorkflowDefinitionIdentity.ToString(),
+                            this.ApplicationReference
+                        )
+                    )
                     {
-                        if (EtwTrackingParticipantTrackRecords.WorkflowInstanceUnhandledExceptionRecordWithId(this.diagnosticTrace, unhandled.EventTraceActivity, unhandled.InstanceId,
-                            unhandled.RecordNumber, unhandled.EventTime.ToFileTime(), unhandled.ActivityDefinitionId,
-                            unhandled.FaultSource.Name, unhandled.FaultSource.Id, unhandled.FaultSource.InstanceId, unhandled.FaultSource.TypeName,
-                            unhandled.UnhandledException == null ? string.Empty : unhandled.UnhandledException.ToString(),
-                            truncatedItemsTag, this.TrackingProfile == null ? string.Empty : this.TrackingProfile.Name == null ? string.Empty : this.TrackingProfile.Name,
-                            unhandled.WorkflowDefinitionIdentity.ToString(), this.ApplicationReference))
+                        if (
+                            EtwTrackingParticipantTrackRecords.WorkflowInstanceUnhandledExceptionRecordWithId(
+                                this.diagnosticTrace,
+                                unhandled.EventTraceActivity,
+                                unhandled.InstanceId,
+                                unhandled.RecordNumber,
+                                unhandled.EventTime.ToFileTime(),
+                                unhandled.ActivityDefinitionId,
+                                unhandled.FaultSource.Name,
+                                unhandled.FaultSource.Id,
+                                unhandled.FaultSource.InstanceId,
+                                unhandled.FaultSource.TypeName,
+                                unhandled.UnhandledException == null
+                                    ? string.Empty
+                                    : unhandled.UnhandledException.ToString(),
+                                truncatedItemsTag,
+                                this.TrackingProfile == null ? string.Empty
+                                    : this.TrackingProfile.Name == null ? string.Empty
+                                    : this.TrackingProfile.Name,
+                                unhandled.WorkflowDefinitionIdentity.ToString(),
+                                this.ApplicationReference
+                            )
+                        )
                         {
                             TraceTrackingRecordTruncated(unhandled.RecordNumber);
                         }
@@ -626,16 +1004,45 @@ namespace System.Activities.Tracking
             WorkflowInstanceAbortedRecord aborted = record as WorkflowInstanceAbortedRecord;
             if (aborted.WorkflowDefinitionIdentity == null)
             {
-                if (EtwTrackingParticipantTrackRecords.WorkflowInstanceAbortedRecordIsEnabled(this.diagnosticTrace))
+                if (
+                    EtwTrackingParticipantTrackRecords.WorkflowInstanceAbortedRecordIsEnabled(
+                        this.diagnosticTrace
+                    )
+                )
                 {
-                    if (!EtwTrackingParticipantTrackRecords.WorkflowInstanceAbortedRecord(this.diagnosticTrace, aborted.EventTraceActivity, aborted.InstanceId, aborted.RecordNumber,
-                        aborted.EventTime.ToFileTime(), aborted.ActivityDefinitionId, aborted.Reason,
-                        aborted.HasAnnotations ? PrepareAnnotations(aborted.Annotations) : emptyItemsTag,
-                        this.TrackingProfile == null ? string.Empty : this.TrackingProfile.Name, this.ApplicationReference))
+                    if (
+                        !EtwTrackingParticipantTrackRecords.WorkflowInstanceAbortedRecord(
+                            this.diagnosticTrace,
+                            aborted.EventTraceActivity,
+                            aborted.InstanceId,
+                            aborted.RecordNumber,
+                            aborted.EventTime.ToFileTime(),
+                            aborted.ActivityDefinitionId,
+                            aborted.Reason,
+                            aborted.HasAnnotations
+                                ? PrepareAnnotations(aborted.Annotations)
+                                : emptyItemsTag,
+                            this.TrackingProfile == null ? string.Empty : this.TrackingProfile.Name,
+                            this.ApplicationReference
+                        )
+                    )
                     {
-                        if (EtwTrackingParticipantTrackRecords.WorkflowInstanceAbortedRecord(this.diagnosticTrace, aborted.EventTraceActivity, aborted.InstanceId, aborted.RecordNumber,
-                            aborted.EventTime.ToFileTime(), aborted.ActivityDefinitionId, aborted.Reason,
-                            truncatedItemsTag, this.TrackingProfile == null ? string.Empty : this.TrackingProfile.Name, this.ApplicationReference))
+                        if (
+                            EtwTrackingParticipantTrackRecords.WorkflowInstanceAbortedRecord(
+                                this.diagnosticTrace,
+                                aborted.EventTraceActivity,
+                                aborted.InstanceId,
+                                aborted.RecordNumber,
+                                aborted.EventTime.ToFileTime(),
+                                aborted.ActivityDefinitionId,
+                                aborted.Reason,
+                                truncatedItemsTag,
+                                this.TrackingProfile == null
+                                    ? string.Empty
+                                    : this.TrackingProfile.Name,
+                                this.ApplicationReference
+                            )
+                        )
                         {
                             TraceTrackingRecordTruncated(aborted.RecordNumber);
                         }
@@ -648,18 +1055,49 @@ namespace System.Activities.Tracking
             }
             else
             {
-                if (EtwTrackingParticipantTrackRecords.WorkflowInstanceAbortedRecordWithIdIsEnabled(this.diagnosticTrace))
+                if (
+                    EtwTrackingParticipantTrackRecords.WorkflowInstanceAbortedRecordWithIdIsEnabled(
+                        this.diagnosticTrace
+                    )
+                )
                 {
-                    if (!EtwTrackingParticipantTrackRecords.WorkflowInstanceAbortedRecordWithId(this.diagnosticTrace, aborted.EventTraceActivity, aborted.InstanceId, aborted.RecordNumber,
-                        aborted.EventTime.ToFileTime(), aborted.ActivityDefinitionId, aborted.Reason,
-                        aborted.HasAnnotations ? PrepareAnnotations(aborted.Annotations) : emptyItemsTag,
-                        this.TrackingProfile == null ? string.Empty : this.TrackingProfile.Name == null ? string.Empty : this.TrackingProfile.Name,
-                        aborted.WorkflowDefinitionIdentity.ToString(), this.ApplicationReference))
+                    if (
+                        !EtwTrackingParticipantTrackRecords.WorkflowInstanceAbortedRecordWithId(
+                            this.diagnosticTrace,
+                            aborted.EventTraceActivity,
+                            aborted.InstanceId,
+                            aborted.RecordNumber,
+                            aborted.EventTime.ToFileTime(),
+                            aborted.ActivityDefinitionId,
+                            aborted.Reason,
+                            aborted.HasAnnotations
+                                ? PrepareAnnotations(aborted.Annotations)
+                                : emptyItemsTag,
+                            this.TrackingProfile == null ? string.Empty
+                                : this.TrackingProfile.Name == null ? string.Empty
+                                : this.TrackingProfile.Name,
+                            aborted.WorkflowDefinitionIdentity.ToString(),
+                            this.ApplicationReference
+                        )
+                    )
                     {
-                        if (EtwTrackingParticipantTrackRecords.WorkflowInstanceAbortedRecordWithId(this.diagnosticTrace, aborted.EventTraceActivity, aborted.InstanceId, aborted.RecordNumber,
-                            aborted.EventTime.ToFileTime(), aborted.ActivityDefinitionId, aborted.Reason,
-                            truncatedItemsTag, this.TrackingProfile == null ? string.Empty : this.TrackingProfile.Name == null ? string.Empty : this.TrackingProfile.Name,
-                            aborted.WorkflowDefinitionIdentity.ToString(), this.ApplicationReference))
+                        if (
+                            EtwTrackingParticipantTrackRecords.WorkflowInstanceAbortedRecordWithId(
+                                this.diagnosticTrace,
+                                aborted.EventTraceActivity,
+                                aborted.InstanceId,
+                                aborted.RecordNumber,
+                                aborted.EventTime.ToFileTime(),
+                                aborted.ActivityDefinitionId,
+                                aborted.Reason,
+                                truncatedItemsTag,
+                                this.TrackingProfile == null ? string.Empty
+                                    : this.TrackingProfile.Name == null ? string.Empty
+                                    : this.TrackingProfile.Name,
+                                aborted.WorkflowDefinitionIdentity.ToString(),
+                                this.ApplicationReference
+                            )
+                        )
                         {
                             TraceTrackingRecordTruncated(aborted.RecordNumber);
                         }
@@ -667,7 +1105,7 @@ namespace System.Activities.Tracking
                         {
                             TraceTrackingRecordDropped(aborted.RecordNumber);
                         }
-                    } 
+                    }
                 }
             }
         }
@@ -677,16 +1115,45 @@ namespace System.Activities.Tracking
             WorkflowInstanceSuspendedRecord suspended = record as WorkflowInstanceSuspendedRecord;
             if (suspended.WorkflowDefinitionIdentity == null)
             {
-                if (EtwTrackingParticipantTrackRecords.WorkflowInstanceSuspendedRecordIsEnabled(this.diagnosticTrace))
+                if (
+                    EtwTrackingParticipantTrackRecords.WorkflowInstanceSuspendedRecordIsEnabled(
+                        this.diagnosticTrace
+                    )
+                )
                 {
-                    if (!EtwTrackingParticipantTrackRecords.WorkflowInstanceSuspendedRecord(this.diagnosticTrace, suspended.EventTraceActivity, suspended.InstanceId, suspended.RecordNumber,
-                        suspended.EventTime.ToFileTime(), suspended.ActivityDefinitionId, suspended.Reason,
-                        suspended.HasAnnotations ? PrepareAnnotations(suspended.Annotations) : emptyItemsTag,
-                        this.TrackingProfile == null ? string.Empty : this.TrackingProfile.Name, this.ApplicationReference))
+                    if (
+                        !EtwTrackingParticipantTrackRecords.WorkflowInstanceSuspendedRecord(
+                            this.diagnosticTrace,
+                            suspended.EventTraceActivity,
+                            suspended.InstanceId,
+                            suspended.RecordNumber,
+                            suspended.EventTime.ToFileTime(),
+                            suspended.ActivityDefinitionId,
+                            suspended.Reason,
+                            suspended.HasAnnotations
+                                ? PrepareAnnotations(suspended.Annotations)
+                                : emptyItemsTag,
+                            this.TrackingProfile == null ? string.Empty : this.TrackingProfile.Name,
+                            this.ApplicationReference
+                        )
+                    )
                     {
-                        if (EtwTrackingParticipantTrackRecords.WorkflowInstanceSuspendedRecord(this.diagnosticTrace, suspended.EventTraceActivity, suspended.InstanceId, suspended.RecordNumber,
-                            suspended.EventTime.ToFileTime(), suspended.ActivityDefinitionId, suspended.Reason,
-                            truncatedItemsTag, this.TrackingProfile == null ? string.Empty : this.TrackingProfile.Name, this.ApplicationReference))
+                        if (
+                            EtwTrackingParticipantTrackRecords.WorkflowInstanceSuspendedRecord(
+                                this.diagnosticTrace,
+                                suspended.EventTraceActivity,
+                                suspended.InstanceId,
+                                suspended.RecordNumber,
+                                suspended.EventTime.ToFileTime(),
+                                suspended.ActivityDefinitionId,
+                                suspended.Reason,
+                                truncatedItemsTag,
+                                this.TrackingProfile == null
+                                    ? string.Empty
+                                    : this.TrackingProfile.Name,
+                                this.ApplicationReference
+                            )
+                        )
                         {
                             TraceTrackingRecordTruncated(suspended.RecordNumber);
                         }
@@ -699,18 +1166,49 @@ namespace System.Activities.Tracking
             }
             else
             {
-                if (EtwTrackingParticipantTrackRecords.WorkflowInstanceSuspendedRecordWithIdIsEnabled(this.diagnosticTrace))
+                if (
+                    EtwTrackingParticipantTrackRecords.WorkflowInstanceSuspendedRecordWithIdIsEnabled(
+                        this.diagnosticTrace
+                    )
+                )
                 {
-                    if (!EtwTrackingParticipantTrackRecords.WorkflowInstanceSuspendedRecordWithId(this.diagnosticTrace, suspended.EventTraceActivity, suspended.InstanceId, suspended.RecordNumber,
-                        suspended.EventTime.ToFileTime(), suspended.ActivityDefinitionId, suspended.Reason,
-                        suspended.HasAnnotations ? PrepareAnnotations(suspended.Annotations) : emptyItemsTag,
-                        this.TrackingProfile == null ? string.Empty : this.TrackingProfile.Name == null ? string.Empty : this.TrackingProfile.Name,
-                        suspended.WorkflowDefinitionIdentity.ToString(), this.ApplicationReference))
+                    if (
+                        !EtwTrackingParticipantTrackRecords.WorkflowInstanceSuspendedRecordWithId(
+                            this.diagnosticTrace,
+                            suspended.EventTraceActivity,
+                            suspended.InstanceId,
+                            suspended.RecordNumber,
+                            suspended.EventTime.ToFileTime(),
+                            suspended.ActivityDefinitionId,
+                            suspended.Reason,
+                            suspended.HasAnnotations
+                                ? PrepareAnnotations(suspended.Annotations)
+                                : emptyItemsTag,
+                            this.TrackingProfile == null ? string.Empty
+                                : this.TrackingProfile.Name == null ? string.Empty
+                                : this.TrackingProfile.Name,
+                            suspended.WorkflowDefinitionIdentity.ToString(),
+                            this.ApplicationReference
+                        )
+                    )
                     {
-                        if (EtwTrackingParticipantTrackRecords.WorkflowInstanceSuspendedRecordWithId(this.diagnosticTrace, suspended.EventTraceActivity, suspended.InstanceId, suspended.RecordNumber,
-                            suspended.EventTime.ToFileTime(), suspended.ActivityDefinitionId, suspended.Reason,
-                            truncatedItemsTag, this.TrackingProfile == null ? string.Empty : this.TrackingProfile.Name == null ? string.Empty : this.TrackingProfile.Name,
-                            suspended.WorkflowDefinitionIdentity.ToString(), this.ApplicationReference))
+                        if (
+                            EtwTrackingParticipantTrackRecords.WorkflowInstanceSuspendedRecordWithId(
+                                this.diagnosticTrace,
+                                suspended.EventTraceActivity,
+                                suspended.InstanceId,
+                                suspended.RecordNumber,
+                                suspended.EventTime.ToFileTime(),
+                                suspended.ActivityDefinitionId,
+                                suspended.Reason,
+                                truncatedItemsTag,
+                                this.TrackingProfile == null ? string.Empty
+                                    : this.TrackingProfile.Name == null ? string.Empty
+                                    : this.TrackingProfile.Name,
+                                suspended.WorkflowDefinitionIdentity.ToString(),
+                                this.ApplicationReference
+                            )
+                        )
                         {
                             TraceTrackingRecordTruncated(suspended.RecordNumber);
                         }
@@ -722,22 +1220,52 @@ namespace System.Activities.Tracking
                 }
             }
         }
-        
+
         void TrackWorkflowInstanceTerminatedRecord(WorkflowInstanceRecord record)
         {
-            WorkflowInstanceTerminatedRecord terminated = record as WorkflowInstanceTerminatedRecord;
+            WorkflowInstanceTerminatedRecord terminated =
+                record as WorkflowInstanceTerminatedRecord;
             if (terminated.WorkflowDefinitionIdentity == null)
             {
-                if (EtwTrackingParticipantTrackRecords.WorkflowInstanceTerminatedRecordIsEnabled(this.diagnosticTrace))
+                if (
+                    EtwTrackingParticipantTrackRecords.WorkflowInstanceTerminatedRecordIsEnabled(
+                        this.diagnosticTrace
+                    )
+                )
                 {
-                    if (!EtwTrackingParticipantTrackRecords.WorkflowInstanceTerminatedRecord(this.diagnosticTrace, terminated.EventTraceActivity, terminated.InstanceId, terminated.RecordNumber,
-                        terminated.EventTime.ToFileTime(), terminated.ActivityDefinitionId, terminated.Reason,
-                        terminated.HasAnnotations ? PrepareAnnotations(terminated.Annotations) : emptyItemsTag,
-                        this.TrackingProfile == null ? string.Empty : this.TrackingProfile.Name, this.ApplicationReference))
+                    if (
+                        !EtwTrackingParticipantTrackRecords.WorkflowInstanceTerminatedRecord(
+                            this.diagnosticTrace,
+                            terminated.EventTraceActivity,
+                            terminated.InstanceId,
+                            terminated.RecordNumber,
+                            terminated.EventTime.ToFileTime(),
+                            terminated.ActivityDefinitionId,
+                            terminated.Reason,
+                            terminated.HasAnnotations
+                                ? PrepareAnnotations(terminated.Annotations)
+                                : emptyItemsTag,
+                            this.TrackingProfile == null ? string.Empty : this.TrackingProfile.Name,
+                            this.ApplicationReference
+                        )
+                    )
                     {
-                        if (EtwTrackingParticipantTrackRecords.WorkflowInstanceTerminatedRecord(this.diagnosticTrace, terminated.EventTraceActivity, terminated.InstanceId, terminated.RecordNumber,
-                            terminated.EventTime.ToFileTime(), terminated.ActivityDefinitionId, terminated.Reason,
-                            truncatedItemsTag, this.TrackingProfile == null ? string.Empty : this.TrackingProfile.Name, this.ApplicationReference))
+                        if (
+                            EtwTrackingParticipantTrackRecords.WorkflowInstanceTerminatedRecord(
+                                this.diagnosticTrace,
+                                terminated.EventTraceActivity,
+                                terminated.InstanceId,
+                                terminated.RecordNumber,
+                                terminated.EventTime.ToFileTime(),
+                                terminated.ActivityDefinitionId,
+                                terminated.Reason,
+                                truncatedItemsTag,
+                                this.TrackingProfile == null
+                                    ? string.Empty
+                                    : this.TrackingProfile.Name,
+                                this.ApplicationReference
+                            )
+                        )
                         {
                             TraceTrackingRecordTruncated(terminated.RecordNumber);
                         }
@@ -750,18 +1278,49 @@ namespace System.Activities.Tracking
             }
             else
             {
-                if (EtwTrackingParticipantTrackRecords.WorkflowInstanceTerminatedRecordWithIdIsEnabled(this.diagnosticTrace))
+                if (
+                    EtwTrackingParticipantTrackRecords.WorkflowInstanceTerminatedRecordWithIdIsEnabled(
+                        this.diagnosticTrace
+                    )
+                )
                 {
-                    if (!EtwTrackingParticipantTrackRecords.WorkflowInstanceTerminatedRecordWithId(this.diagnosticTrace, terminated.EventTraceActivity, terminated.InstanceId, terminated.RecordNumber,
-                        terminated.EventTime.ToFileTime(), terminated.ActivityDefinitionId, terminated.Reason,
-                        terminated.HasAnnotations ? PrepareAnnotations(terminated.Annotations) : emptyItemsTag,
-                        this.TrackingProfile == null ? string.Empty : this.TrackingProfile.Name == null ? string.Empty : this.TrackingProfile.Name,
-                        terminated.WorkflowDefinitionIdentity.ToString(), this.ApplicationReference))
+                    if (
+                        !EtwTrackingParticipantTrackRecords.WorkflowInstanceTerminatedRecordWithId(
+                            this.diagnosticTrace,
+                            terminated.EventTraceActivity,
+                            terminated.InstanceId,
+                            terminated.RecordNumber,
+                            terminated.EventTime.ToFileTime(),
+                            terminated.ActivityDefinitionId,
+                            terminated.Reason,
+                            terminated.HasAnnotations
+                                ? PrepareAnnotations(terminated.Annotations)
+                                : emptyItemsTag,
+                            this.TrackingProfile == null ? string.Empty
+                                : this.TrackingProfile.Name == null ? string.Empty
+                                : this.TrackingProfile.Name,
+                            terminated.WorkflowDefinitionIdentity.ToString(),
+                            this.ApplicationReference
+                        )
+                    )
                     {
-                        if (EtwTrackingParticipantTrackRecords.WorkflowInstanceTerminatedRecordWithId(this.diagnosticTrace, terminated.EventTraceActivity, terminated.InstanceId, terminated.RecordNumber,
-                            terminated.EventTime.ToFileTime(), terminated.ActivityDefinitionId, terminated.Reason,
-                            truncatedItemsTag, this.TrackingProfile == null ? string.Empty : this.TrackingProfile.Name == null ? string.Empty : this.TrackingProfile.Name,
-                            terminated.WorkflowDefinitionIdentity.ToString(), this.ApplicationReference))
+                        if (
+                            EtwTrackingParticipantTrackRecords.WorkflowInstanceTerminatedRecordWithId(
+                                this.diagnosticTrace,
+                                terminated.EventTraceActivity,
+                                terminated.InstanceId,
+                                terminated.RecordNumber,
+                                terminated.EventTime.ToFileTime(),
+                                terminated.ActivityDefinitionId,
+                                terminated.Reason,
+                                truncatedItemsTag,
+                                this.TrackingProfile == null ? string.Empty
+                                    : this.TrackingProfile.Name == null ? string.Empty
+                                    : this.TrackingProfile.Name,
+                                terminated.WorkflowDefinitionIdentity.ToString(),
+                                this.ApplicationReference
+                            )
+                        )
                         {
                             TraceTrackingRecordTruncated(terminated.RecordNumber);
                         }
@@ -773,21 +1332,50 @@ namespace System.Activities.Tracking
                 }
             }
         }
-        
+
         void TrackWorkflowInstanceRecord(WorkflowInstanceRecord record)
         {
             if (record.WorkflowDefinitionIdentity == null)
             {
-                if (EtwTrackingParticipantTrackRecords.WorkflowInstanceRecordIsEnabled(this.diagnosticTrace))
+                if (
+                    EtwTrackingParticipantTrackRecords.WorkflowInstanceRecordIsEnabled(
+                        this.diagnosticTrace
+                    )
+                )
                 {
-                    if (!EtwTrackingParticipantTrackRecords.WorkflowInstanceRecord(this.diagnosticTrace, record.EventTraceActivity, record.InstanceId, record.RecordNumber,
-                        record.EventTime.ToFileTime(), record.ActivityDefinitionId,
-                        record.State,
-                        record.HasAnnotations ? PrepareAnnotations(record.Annotations) : emptyItemsTag,
-                        this.TrackingProfile == null ? string.Empty : this.TrackingProfile.Name, this.ApplicationReference))
+                    if (
+                        !EtwTrackingParticipantTrackRecords.WorkflowInstanceRecord(
+                            this.diagnosticTrace,
+                            record.EventTraceActivity,
+                            record.InstanceId,
+                            record.RecordNumber,
+                            record.EventTime.ToFileTime(),
+                            record.ActivityDefinitionId,
+                            record.State,
+                            record.HasAnnotations
+                                ? PrepareAnnotations(record.Annotations)
+                                : emptyItemsTag,
+                            this.TrackingProfile == null ? string.Empty : this.TrackingProfile.Name,
+                            this.ApplicationReference
+                        )
+                    )
                     {
-                        if (EtwTrackingParticipantTrackRecords.WorkflowInstanceRecord(this.diagnosticTrace, record.EventTraceActivity, record.InstanceId, record.RecordNumber, record.EventTime.ToFileTime(),
-                            record.ActivityDefinitionId, record.State, truncatedItemsTag, this.TrackingProfile == null ? string.Empty : this.TrackingProfile.Name, this.ApplicationReference))
+                        if (
+                            EtwTrackingParticipantTrackRecords.WorkflowInstanceRecord(
+                                this.diagnosticTrace,
+                                record.EventTraceActivity,
+                                record.InstanceId,
+                                record.RecordNumber,
+                                record.EventTime.ToFileTime(),
+                                record.ActivityDefinitionId,
+                                record.State,
+                                truncatedItemsTag,
+                                this.TrackingProfile == null
+                                    ? string.Empty
+                                    : this.TrackingProfile.Name,
+                                this.ApplicationReference
+                            )
+                        )
                         {
                             TraceTrackingRecordTruncated(record.RecordNumber);
                         }
@@ -800,18 +1388,49 @@ namespace System.Activities.Tracking
             }
             else
             {
-                if (EtwTrackingParticipantTrackRecords.WorkflowInstanceRecordWithIdIsEnabled(this.diagnosticTrace))
+                if (
+                    EtwTrackingParticipantTrackRecords.WorkflowInstanceRecordWithIdIsEnabled(
+                        this.diagnosticTrace
+                    )
+                )
                 {
-                    if (!EtwTrackingParticipantTrackRecords.WorkflowInstanceRecordWithId(this.diagnosticTrace, record.EventTraceActivity, record.InstanceId, record.RecordNumber,
-                        record.EventTime.ToFileTime(), record.ActivityDefinitionId,
-                        record.State,
-                        record.HasAnnotations ? PrepareAnnotations(record.Annotations) : emptyItemsTag,
-                        this.TrackingProfile == null ? string.Empty : this.TrackingProfile.Name == null ? string.Empty : this.TrackingProfile.Name, 
-                        record.WorkflowDefinitionIdentity.ToString(), this.ApplicationReference))
+                    if (
+                        !EtwTrackingParticipantTrackRecords.WorkflowInstanceRecordWithId(
+                            this.diagnosticTrace,
+                            record.EventTraceActivity,
+                            record.InstanceId,
+                            record.RecordNumber,
+                            record.EventTime.ToFileTime(),
+                            record.ActivityDefinitionId,
+                            record.State,
+                            record.HasAnnotations
+                                ? PrepareAnnotations(record.Annotations)
+                                : emptyItemsTag,
+                            this.TrackingProfile == null ? string.Empty
+                                : this.TrackingProfile.Name == null ? string.Empty
+                                : this.TrackingProfile.Name,
+                            record.WorkflowDefinitionIdentity.ToString(),
+                            this.ApplicationReference
+                        )
+                    )
                     {
-                        if (EtwTrackingParticipantTrackRecords.WorkflowInstanceRecordWithId(this.diagnosticTrace, record.EventTraceActivity, record.InstanceId, record.RecordNumber, record.EventTime.ToFileTime(),
-                            record.ActivityDefinitionId, record.State, truncatedItemsTag, this.TrackingProfile == null ? string.Empty : this.TrackingProfile.Name == null ? string.Empty : this.TrackingProfile.Name,
-                            record.WorkflowDefinitionIdentity.ToString(), this.ApplicationReference))
+                        if (
+                            EtwTrackingParticipantTrackRecords.WorkflowInstanceRecordWithId(
+                                this.diagnosticTrace,
+                                record.EventTraceActivity,
+                                record.InstanceId,
+                                record.RecordNumber,
+                                record.EventTime.ToFileTime(),
+                                record.ActivityDefinitionId,
+                                record.State,
+                                truncatedItemsTag,
+                                this.TrackingProfile == null ? string.Empty
+                                    : this.TrackingProfile.Name == null ? string.Empty
+                                    : this.TrackingProfile.Name,
+                                record.WorkflowDefinitionIdentity.ToString(),
+                                this.ApplicationReference
+                            )
+                        )
                         {
                             TraceTrackingRecordTruncated(record.RecordNumber);
                         }
@@ -826,22 +1445,63 @@ namespace System.Activities.Tracking
 
         void TrackWorkflowInstanceUpdatedRecord(WorkflowInstanceRecord record)
         {
-            if (EtwTrackingParticipantTrackRecords.WorkflowInstanceUpdatedRecordIsEnabled(this.diagnosticTrace))
+            if (
+                EtwTrackingParticipantTrackRecords.WorkflowInstanceUpdatedRecordIsEnabled(
+                    this.diagnosticTrace
+                )
+            )
             {
-                WorkflowInstanceUpdatedRecord updatedRecord = record as WorkflowInstanceUpdatedRecord;
-                if (!EtwTrackingParticipantTrackRecords.WorkflowInstanceUpdatedRecord(this.diagnosticTrace, updatedRecord.EventTraceActivity, updatedRecord.InstanceId,
-                    updatedRecord.RecordNumber, updatedRecord.EventTime.ToFileTime(), updatedRecord.ActivityDefinitionId, updatedRecord.State,
-                    updatedRecord.OriginalDefinitionIdentity == null ? string.Empty : updatedRecord.OriginalDefinitionIdentity.ToString(),
-                    updatedRecord.WorkflowDefinitionIdentity == null ? string.Empty : updatedRecord.WorkflowDefinitionIdentity.ToString(),
-                    updatedRecord.HasAnnotations ? PrepareAnnotations(updatedRecord.Annotations) : emptyItemsTag,
-                    this.TrackingProfile == null ? string.Empty : this.TrackingProfile.Name == null ? string.Empty : this.TrackingProfile.Name, this.ApplicationReference))
+                WorkflowInstanceUpdatedRecord updatedRecord =
+                    record as WorkflowInstanceUpdatedRecord;
+                if (
+                    !EtwTrackingParticipantTrackRecords.WorkflowInstanceUpdatedRecord(
+                        this.diagnosticTrace,
+                        updatedRecord.EventTraceActivity,
+                        updatedRecord.InstanceId,
+                        updatedRecord.RecordNumber,
+                        updatedRecord.EventTime.ToFileTime(),
+                        updatedRecord.ActivityDefinitionId,
+                        updatedRecord.State,
+                        updatedRecord.OriginalDefinitionIdentity == null
+                            ? string.Empty
+                            : updatedRecord.OriginalDefinitionIdentity.ToString(),
+                        updatedRecord.WorkflowDefinitionIdentity == null
+                            ? string.Empty
+                            : updatedRecord.WorkflowDefinitionIdentity.ToString(),
+                        updatedRecord.HasAnnotations
+                            ? PrepareAnnotations(updatedRecord.Annotations)
+                            : emptyItemsTag,
+                        this.TrackingProfile == null ? string.Empty
+                            : this.TrackingProfile.Name == null ? string.Empty
+                            : this.TrackingProfile.Name,
+                        this.ApplicationReference
+                    )
+                )
                 {
-                    if (EtwTrackingParticipantTrackRecords.WorkflowInstanceUpdatedRecord(this.diagnosticTrace, updatedRecord.EventTraceActivity, updatedRecord.InstanceId,
-                        updatedRecord.RecordNumber, updatedRecord.EventTime.ToFileTime(), updatedRecord.ActivityDefinitionId, updatedRecord.State,
-                        updatedRecord.OriginalDefinitionIdentity == null ? string.Empty : updatedRecord.OriginalDefinitionIdentity.ToString(),
-                        updatedRecord.WorkflowDefinitionIdentity == null ? string.Empty : updatedRecord.WorkflowDefinitionIdentity.ToString(),
-                        updatedRecord.HasAnnotations ? PrepareAnnotations(updatedRecord.Annotations) : emptyItemsTag,
-                        this.TrackingProfile == null ? string.Empty : this.TrackingProfile.Name == null ? string.Empty : this.TrackingProfile.Name, this.ApplicationReference))
+                    if (
+                        EtwTrackingParticipantTrackRecords.WorkflowInstanceUpdatedRecord(
+                            this.diagnosticTrace,
+                            updatedRecord.EventTraceActivity,
+                            updatedRecord.InstanceId,
+                            updatedRecord.RecordNumber,
+                            updatedRecord.EventTime.ToFileTime(),
+                            updatedRecord.ActivityDefinitionId,
+                            updatedRecord.State,
+                            updatedRecord.OriginalDefinitionIdentity == null
+                                ? string.Empty
+                                : updatedRecord.OriginalDefinitionIdentity.ToString(),
+                            updatedRecord.WorkflowDefinitionIdentity == null
+                                ? string.Empty
+                                : updatedRecord.WorkflowDefinitionIdentity.ToString(),
+                            updatedRecord.HasAnnotations
+                                ? PrepareAnnotations(updatedRecord.Annotations)
+                                : emptyItemsTag,
+                            this.TrackingProfile == null ? string.Empty
+                                : this.TrackingProfile.Name == null ? string.Empty
+                                : this.TrackingProfile.Name,
+                            this.ApplicationReference
+                        )
+                    )
                     {
                         TraceTrackingRecordTruncated(updatedRecord.RecordNumber);
                     }

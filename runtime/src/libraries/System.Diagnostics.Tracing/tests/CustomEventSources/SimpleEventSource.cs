@@ -25,7 +25,10 @@ namespace SdtEventSources
 #endif
         {
             [Event(1)]
-            public void EventWrite(int i) { this.WriteEvent(1, i); }
+            public void EventWrite(int i)
+            {
+                this.WriteEvent(1, i);
+            }
         }
     }
 
@@ -33,23 +36,28 @@ namespace SdtEventSources
     public sealed class SimpleEventSource : EventSource
     {
         public SimpleEventSource()
-            : base(true)
-        { }
+            : base(true) { }
 
-        [Event(1,
+        [Event(
+            1,
             Channel = EventChannel.Admin,
-            Keywords = Keywords.Kwd1, Level = EventLevel.Informational, Message = "WriteIntToAdmin called with argument {0}")]
+            Keywords = Keywords.Kwd1,
+            Level = EventLevel.Informational,
+            Message = "WriteIntToAdmin called with argument {0}"
+        )]
         public void WriteIntToAdmin(int n)
         {
-            if (IsEnabled(EventLevel.Informational, Keywords.Kwd1
-                , EventChannel.Admin
-                ))
+            if (IsEnabled(EventLevel.Informational, Keywords.Kwd1, EventChannel.Admin))
                 WriteEvent(1, n);
         }
 
-        [Event(2,
+        [Event(
+            2,
             Channel = EventChannel.Operational,
-            Keywords = Keywords.Kwd1, Level = EventLevel.Informational, Message = "WriteStringToOperational called with argument {0}")]
+            Keywords = Keywords.Kwd1,
+            Level = EventLevel.Informational,
+            Message = "WriteStringToOperational called with argument {0}"
+        )]
         public void WriteStringToOperational(string msg)
         {
             WriteEvent(2, msg);

@@ -32,16 +32,11 @@ namespace Microsoft.CodeAnalysis.CSharp.Scripting.Hosting.UnitTests
         [Fact]
         public void DebuggerProxy_FrameworkTypes_Hashtable()
         {
-            var obj = new Hashtable
-            {
-                { new byte[] { 1, 2 }, new[] { 1,2,3 } },
-            };
+            var obj = new Hashtable { { new byte[] { 1, 2 }, new[] { 1, 2, 3 } } };
 
             var str = s_formatter.FormatObject(obj, SeparateLinesOptions);
 
-            AssertMembers(str, "Hashtable(1)",
-                "{ byte[2] { 1, 2 }, int[3] { 1, 2, 3 } }"
-            );
+            AssertMembers(str, "Hashtable(1)", "{ byte[2] { 1, 2 }, int[3] { 1, 2, 3 } }");
         }
 
         [Fact]
@@ -90,7 +85,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Scripting.Hosting.UnitTests
         [Fact]
         public void VBBackingFields_DebuggerBrowsable()
         {
-            string source = @"
+            string source =
+                @"
 Imports System
 
 Class C
@@ -102,8 +98,17 @@ End Class
             var compilation = VB.VisualBasicCompilation.Create(
                 "goo",
                 new[] { VB.VisualBasicSyntaxTree.ParseText(source) },
-                new[] { MetadataReference.CreateFromAssemblyInternal(typeof(object).GetTypeInfo().Assembly) },
-                new VB.VisualBasicCompilationOptions(OutputKind.DynamicallyLinkedLibrary, optimizationLevel: OptimizationLevel.Debug));
+                new[]
+                {
+                    MetadataReference.CreateFromAssemblyInternal(
+                        typeof(object).GetTypeInfo().Assembly
+                    ),
+                },
+                new VB.VisualBasicCompilationOptions(
+                    OutputKind.DynamicallyLinkedLibrary,
+                    optimizationLevel: OptimizationLevel.Debug
+                )
+            );
 
             Assembly a;
             using (var stream = new MemoryStream())
@@ -116,14 +121,14 @@ End Class
             var obj = Activator.CreateInstance(c);
 
             var str = s_formatter.FormatObject(obj, SeparateLinesOptions);
-            AssertMembers(str, "C",
-                "A: 0",
-                "WE: null"
-            );
+            AssertMembers(str, "C", "A: 0", "WE: null");
 
-            var attrsA = c.GetField("_A", BindingFlags.Instance | BindingFlags.NonPublic).GetCustomAttributes(typeof(DebuggerBrowsableAttribute), true);
-            var attrsWE = c.GetField("_WE", BindingFlags.Instance | BindingFlags.NonPublic).GetCustomAttributes(typeof(DebuggerBrowsableAttribute), true);
-            var attrsE = c.GetField("EEvent", BindingFlags.Instance | BindingFlags.NonPublic).GetCustomAttributes(typeof(DebuggerBrowsableAttribute), true);
+            var attrsA = c.GetField("_A", BindingFlags.Instance | BindingFlags.NonPublic)
+                .GetCustomAttributes(typeof(DebuggerBrowsableAttribute), true);
+            var attrsWE = c.GetField("_WE", BindingFlags.Instance | BindingFlags.NonPublic)
+                .GetCustomAttributes(typeof(DebuggerBrowsableAttribute), true);
+            var attrsE = c.GetField("EEvent", BindingFlags.Instance | BindingFlags.NonPublic)
+                .GetCustomAttributes(typeof(DebuggerBrowsableAttribute), true);
 
             Assert.Equal(1, attrsA.Length);
             Assert.Equal(1, attrsWE.Length);

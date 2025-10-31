@@ -7,7 +7,6 @@ using System.IO;
 using System.Threading;
 using Microsoft.Data.Sqlite.Properties;
 using SQLitePCL;
-
 using static SQLitePCL.raw;
 
 namespace Microsoft.Data.Sqlite
@@ -23,7 +22,10 @@ namespace Microsoft.Data.Sqlite
         private volatile bool _active;
         private volatile bool _canBePooled = true;
 
-        public SqliteConnectionInternal(SqliteConnectionStringBuilder connectionOptions, SqliteConnectionPool? pool = null)
+        public SqliteConnectionInternal(
+            SqliteConnectionStringBuilder connectionOptions,
+            SqliteConnectionPool? pool = null
+        )
         {
             var filename = connectionOptions.DataSource;
             var flags = 0;
@@ -56,7 +58,8 @@ namespace Microsoft.Data.Sqlite
                 default:
                     Debug.Assert(
                         connectionOptions.Mode == SqliteOpenMode.ReadWriteCreate,
-                        "connectionOptions.Mode is not ReadWriteCreate");
+                        "connectionOptions.Mode is not ReadWriteCreate"
+                    );
                     flags |= SQLITE_OPEN_READWRITE | SQLITE_OPEN_CREATE;
                     break;
             }
@@ -74,18 +77,29 @@ namespace Microsoft.Data.Sqlite
                 default:
                     Debug.Assert(
                         connectionOptions.Cache == SqliteCacheMode.Default,
-                        "connectionOptions.Cache is not Default.");
+                        "connectionOptions.Cache is not Default."
+                    );
                     break;
             }
 
             var dataDirectory = AppDomain.CurrentDomain.GetData("DataDirectory") as string;
-            if (!string.IsNullOrEmpty(dataDirectory)
+            if (
+                !string.IsNullOrEmpty(dataDirectory)
                 && (flags & SQLITE_OPEN_URI) == 0
-                && !filename.Equals(":memory:", StringComparison.OrdinalIgnoreCase))
+                && !filename.Equals(":memory:", StringComparison.OrdinalIgnoreCase)
+            )
             {
-                if (filename.StartsWith(DataDirectoryMacro, StringComparison.InvariantCultureIgnoreCase))
+                if (
+                    filename.StartsWith(
+                        DataDirectoryMacro,
+                        StringComparison.InvariantCultureIgnoreCase
+                    )
+                )
                 {
-                    filename = Path.Combine(dataDirectory, filename.Substring(DataDirectoryMacro.Length));
+                    filename = Path.Combine(
+                        dataDirectory,
+                        filename.Substring(DataDirectoryMacro.Length)
+                    );
                 }
                 else if (!Path.IsPathRooted(filename))
                 {
@@ -100,7 +114,9 @@ namespace Microsoft.Data.Sqlite
             {
                 if (SQLitePCLExtensions.EncryptionSupported(out var libraryName) == false)
                 {
-                    throw new InvalidOperationException(Resources.EncryptionNotSupported(libraryName));
+                    throw new InvalidOperationException(
+                        Resources.EncryptionNotSupported(libraryName)
+                    );
                 }
 
                 // NB: SQLite doesn't support parameters in PRAGMA statements, so we escape the value using the
@@ -108,48 +124,48 @@ namespace Microsoft.Data.Sqlite
                 var quotedPassword = ExecuteScalar(
                     "SELECT quote($password);",
                     connectionOptions.Password,
-                    connectionOptions.DefaultTimeout);
+                    connectionOptions.DefaultTimeout
+                );
                 ExecuteNonQuery(
                     "PRAGMA key = " + quotedPassword + ";",
-                    connectionOptions.DefaultTimeout);
+                    connectionOptions.DefaultTimeout
+                );
 
                 if (SQLitePCLExtensions.EncryptionSupported() != false)
                 {
                     // NB: Forces decryption. Throws when the key is incorrect.
                     ExecuteNonQuery(
                         "SELECT COUNT(*) FROM sqlite_master;",
-                        connectionOptions.DefaultTimeout);
+                        connectionOptions.DefaultTimeout
+                    );
                 }
             }
 
             if (connectionOptions.ForeignKeys.HasValue)
             {
                 ExecuteNonQuery(
-                    "PRAGMA foreign_keys = " + (connectionOptions.ForeignKeys.Value ? "1" : "0") + ";",
-                    connectionOptions.DefaultTimeout);
+                    "PRAGMA foreign_keys = "
+                        + (connectionOptions.ForeignKeys.Value ? "1" : "0")
+                        + ";",
+                    connectionOptions.DefaultTimeout
+                );
             }
 
             if (connectionOptions.RecursiveTriggers)
             {
-                ExecuteNonQuery(
-                    "PRAGMA recursive_triggers = 1;",
-                    connectionOptions.DefaultTimeout);
+                ExecuteNonQuery("PRAGMA recursive_triggers = 1;", connectionOptions.DefaultTimeout);
             }
 
             _pool = pool;
         }
 
-        public bool Leaked
-            => _active && !_outerConnection.TryGetTarget(out _);
+        public bool Leaked => _active && !_outerConnection.TryGetTarget(out _);
 
-        public bool CanBePooled
-            => _canBePooled && !_outerConnection.TryGetTarget(out _);
+        public bool CanBePooled => _canBePooled && !_outerConnection.TryGetTarget(out _);
 
-        public sqlite3? Handle
-            => _db;
+        public sqlite3? Handle => _db;
 
-        public void DoNotPool()
-            => _canBePooled = false;
+        public void DoNotPool() => _canBePooled = false;
 
         public void Activate(SqliteConnection outerConnection)
         {
@@ -186,8 +202,8 @@ namespace Microsoft.Data.Sqlite
             _pool = null;
         }
 
-        private void ExecuteNonQuery(string sql, int timeout)
-            => RetryWhileBusy(() => sqlite3_exec(_db, sql), timeout);
+        private void ExecuteNonQuery(string sql, int timeout) =>
+            RetryWhileBusy(() => sqlite3_exec(_db, sql), timeout);
 
         private string ExecuteScalar(string sql, string p1, int timeout)
         {
@@ -208,18 +224,22 @@ namespace Microsoft.Data.Sqlite
             }
         }
 
-        private void RetryWhileBusy(Func<int> action, int timeout, Stopwatch? timer = null)
-            => RetryWhileBusy(action, () => { }, timeout, timer);
+        private void RetryWhileBusy(Func<int> action, int timeout, Stopwatch? timer = null) =>
+            RetryWhileBusy(action, () => { }, timeout, timer);
 
-        private void RetryWhileBusy(Func<int> action, Action reset, int timeout, Stopwatch? timer = null)
+        private void RetryWhileBusy(
+            Func<int> action,
+            Action reset,
+            int timeout,
+            Stopwatch? timer = null
+        )
         {
             int rc;
             timer ??= Stopwatch.StartNew();
 
             while (IsBusy(rc = action()))
             {
-                if (timeout != 0
-                    && timer.ElapsedMilliseconds >= timeout * 1000L)
+                if (timeout != 0 && timer.ElapsedMilliseconds >= timeout * 1000L)
                 {
                     break;
                 }
@@ -232,7 +252,7 @@ namespace Microsoft.Data.Sqlite
             SqliteException.ThrowExceptionForRC(rc, _db);
         }
 
-        private static bool IsBusy(int rc)
-            => rc is SQLITE_LOCKED or SQLITE_BUSY or SQLITE_LOCKED_SHAREDCACHE;
+        private static bool IsBusy(int rc) =>
+            rc is SQLITE_LOCKED or SQLITE_BUSY or SQLITE_LOCKED_SHAREDCACHE;
     }
 }

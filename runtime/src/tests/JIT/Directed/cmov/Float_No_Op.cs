@@ -6,6 +6,7 @@
 
 using System;
 using Xunit;
+
 public class testout1
 {
     static float static_field_float;
@@ -14,14 +15,17 @@ public class testout1
     float mfd;
     bool mfb_false;
     bool mfb_true;
+
     static float simple_func_float()
     {
         return 17.2222F;
     }
+
     static bool func_sb_true()
     {
         return true;
     }
+
     static bool func_sb_false()
     {
         return false;
@@ -74,6 +78,7 @@ public class testout1
         Sum += (true ? local_float : static_field_float);
         return Sum;
     }
+
     static float Sub_Funclet_1()
     {
         float Sum = 0.0F;
@@ -121,6 +126,7 @@ public class testout1
         Sum += (true ? t1_i.mfd : ab[index - 1]);
         return Sum;
     }
+
     static float Sub_Funclet_2()
     {
         float Sum = 0.0F;
@@ -168,6 +174,7 @@ public class testout1
         Sum += (true ? ab[index - 1] : static_field_float);
         return Sum;
     }
+
     static float Sub_Funclet_3()
     {
         float Sum = 0.0F;
@@ -215,6 +222,7 @@ public class testout1
         Sum += (false ? -5.31F : ab[index - 1]);
         return Sum;
     }
+
     static float Sub_Funclet_4()
     {
         float Sum = 0.0F;
@@ -262,6 +270,7 @@ public class testout1
         Sum += (false ? t1_i.mfd : static_field_float);
         return Sum;
     }
+
     static float Sub_Funclet_5()
     {
         float Sum = 0.0F;
@@ -309,6 +318,7 @@ public class testout1
         Sum += (false ? ab[index] : ab[index - 1]);
         return Sum;
     }
+
     static float Sub_Funclet_6()
     {
         float Sum = 0.0F;
@@ -356,6 +366,7 @@ public class testout1
         Sum += (lb_true ? -5.31F : static_field_float);
         return Sum;
     }
+
     static float Sub_Funclet_7()
     {
         float Sum = 0.0F;
@@ -403,6 +414,7 @@ public class testout1
         Sum += (lb_true ? static_field_float : ab[index - 1]);
         return Sum;
     }
+
     static float Sub_Funclet_8()
     {
         float Sum = 0.0F;
@@ -450,6 +462,7 @@ public class testout1
         Sum += (lb_true ? ab[index] : static_field_float);
         return Sum;
     }
+
     static float Sub_Funclet_9()
     {
         float Sum = 0.0F;
@@ -497,6 +510,7 @@ public class testout1
         Sum += (lb_false ? 3.1F : ab[index - 1]);
         return Sum;
     }
+
     static float Sub_Funclet_10()
     {
         float Sum = 0.0F;
@@ -544,6 +558,7 @@ public class testout1
         Sum += (lb_false ? static_field_float : static_field_float);
         return Sum;
     }
+
     static float Sub_Funclet_11()
     {
         float Sum = 0.0F;
@@ -591,6 +606,7 @@ public class testout1
         Sum += (lb_false ? simple_func_float() : ab[index - 1]);
         return Sum;
     }
+
     static float Sub_Funclet_12()
     {
         float Sum = 0.0F;
@@ -638,6 +654,7 @@ public class testout1
         Sum += (sfb_true ? 3.1F : static_field_float);
         return Sum;
     }
+
     static float Sub_Funclet_13()
     {
         float Sum = 0.0F;
@@ -685,6 +702,7 @@ public class testout1
         Sum += (sfb_true ? local_float : ab[index - 1]);
         return Sum;
     }
+
     static float Sub_Funclet_14()
     {
         float Sum = 0.0F;
@@ -732,6 +750,7 @@ public class testout1
         Sum += (sfb_true ? simple_func_float() : static_field_float);
         return Sum;
     }
+
     static float Sub_Funclet_15()
     {
         float Sum = 0.0F;
@@ -779,6 +798,7 @@ public class testout1
         Sum += (sfb_true ? ab[index - 1] : ab[index - 1]);
         return Sum;
     }
+
     static float Sub_Funclet_16()
     {
         float Sum = 0.0F;
@@ -826,6 +846,7 @@ public class testout1
         Sum += (sfb_false ? local_float : static_field_float);
         return Sum;
     }
+
     static float Sub_Funclet_17()
     {
         float Sum = 0.0F;
@@ -873,6 +894,7 @@ public class testout1
         Sum += (sfb_false ? t1_i.mfd : ab[index - 1]);
         return Sum;
     }
+
     static float Sub_Funclet_18()
     {
         float Sum = 0.0F;
@@ -920,6 +942,7 @@ public class testout1
         Sum += (sfb_false ? ab[index - 1] : static_field_float);
         return Sum;
     }
+
     static float Sub_Funclet_19()
     {
         float Sum = 0.0F;
@@ -967,6 +990,7 @@ public class testout1
         Sum += (t1_i.mfb_true ? -5.31F : ab[index - 1]);
         return Sum;
     }
+
     static float Sub_Funclet_20()
     {
         float Sum = 0.0F;
@@ -1014,6 +1038,7 @@ public class testout1
         Sum += (t1_i.mfb_true ? t1_i.mfd : static_field_float);
         return Sum;
     }
+
     static float Sub_Funclet_21()
     {
         float Sum = 0.0F;
@@ -1061,6 +1086,7 @@ public class testout1
         Sum += (t1_i.mfb_true ? ab[index] : ab[index - 1]);
         return Sum;
     }
+
     static float Sub_Funclet_22()
     {
         float Sum = 0.0F;
@@ -1108,6 +1134,7 @@ public class testout1
         Sum += (t1_i.mfb_false ? -5.31F : static_field_float);
         return Sum;
     }
+
     static float Sub_Funclet_23()
     {
         float Sum = 0.0F;
@@ -1155,6 +1182,7 @@ public class testout1
         Sum += (t1_i.mfb_false ? static_field_float : ab[index - 1]);
         return Sum;
     }
+
     static float Sub_Funclet_24()
     {
         float Sum = 0.0F;
@@ -1202,6 +1230,7 @@ public class testout1
         Sum += (t1_i.mfb_false ? ab[index] : static_field_float);
         return Sum;
     }
+
     static float Sub_Funclet_25()
     {
         float Sum = 0.0F;
@@ -1249,6 +1278,7 @@ public class testout1
         Sum += (func_sb_true() ? 3.1F : ab[index - 1]);
         return Sum;
     }
+
     static float Sub_Funclet_26()
     {
         float Sum = 0.0F;
@@ -1296,6 +1326,7 @@ public class testout1
         Sum += (func_sb_true() ? static_field_float : static_field_float);
         return Sum;
     }
+
     static float Sub_Funclet_27()
     {
         float Sum = 0.0F;
@@ -1343,6 +1374,7 @@ public class testout1
         Sum += (func_sb_true() ? simple_func_float() : ab[index - 1]);
         return Sum;
     }
+
     static float Sub_Funclet_28()
     {
         float Sum = 0.0F;
@@ -1390,6 +1422,7 @@ public class testout1
         Sum += (func_sb_false() ? 3.1F : static_field_float);
         return Sum;
     }
+
     static float Sub_Funclet_29()
     {
         float Sum = 0.0F;
@@ -1437,6 +1470,7 @@ public class testout1
         Sum += (func_sb_false() ? local_float : ab[index - 1]);
         return Sum;
     }
+
     static float Sub_Funclet_30()
     {
         float Sum = 0.0F;
@@ -1484,6 +1518,7 @@ public class testout1
         Sum += (func_sb_false() ? simple_func_float() : static_field_float);
         return Sum;
     }
+
     static float Sub_Funclet_31()
     {
         float Sum = 0.0F;
@@ -1531,6 +1566,7 @@ public class testout1
         Sum += (func_sb_false() ? ab[index - 1] : ab[index - 1]);
         return Sum;
     }
+
     static float Sub_Funclet_32()
     {
         float Sum = 0.0F;
@@ -1578,6 +1614,7 @@ public class testout1
         Sum += (ab_true[index] ? local_float : static_field_float);
         return Sum;
     }
+
     static float Sub_Funclet_33()
     {
         float Sum = 0.0F;
@@ -1625,6 +1662,7 @@ public class testout1
         Sum += (ab_true[index] ? t1_i.mfd : ab[index - 1]);
         return Sum;
     }
+
     static float Sub_Funclet_34()
     {
         float Sum = 0.0F;
@@ -1672,6 +1710,7 @@ public class testout1
         Sum += (ab_true[index] ? ab[index - 1] : static_field_float);
         return Sum;
     }
+
     static float Sub_Funclet_35()
     {
         float Sum = 0.0F;
@@ -1719,6 +1758,7 @@ public class testout1
         Sum += (ab_false[index] ? -5.31F : ab[index - 1]);
         return Sum;
     }
+
     static float Sub_Funclet_36()
     {
         float Sum = 0.0F;
@@ -1766,6 +1806,7 @@ public class testout1
         Sum += (ab_false[index] ? t1_i.mfd : static_field_float);
         return Sum;
     }
+
     static float Sub_Funclet_37()
     {
         float Sum = 0.0F;
@@ -1813,6 +1854,7 @@ public class testout1
         Sum += (ab_false[index] ? ab[index] : ab[index - 1]);
         return Sum;
     }
+
     static float Sub_Funclet_38()
     {
         float Sum = 0.0F;
@@ -1848,6 +1890,7 @@ public class testout1
         Sum += (ab_false[index] ? ab[index - 1] : ab[index - 1]);
         return Sum;
     }
+
     [Fact]
     public static int TestEntryPoint()
     {

@@ -38,6 +38,6 @@ namespace Newtonsoft.Json.Linq
         /// <summary>
         /// Load line information.
         /// </summary>
-        Load = 1
+        Load = 1,
     }
 }

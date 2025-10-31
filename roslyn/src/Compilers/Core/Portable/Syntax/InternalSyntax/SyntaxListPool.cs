@@ -11,16 +11,16 @@ namespace Microsoft.CodeAnalysis.Syntax.InternalSyntax
 {
     internal class SyntaxListPool
     {
-        private ArrayElement<SyntaxListBuilder?>[] _freeList = new ArrayElement<SyntaxListBuilder?>[10];
+        private ArrayElement<SyntaxListBuilder?>[] _freeList = new ArrayElement<SyntaxListBuilder?>[
+            10
+        ];
         private int _freeIndex;
 
 #if DEBUG
         private readonly List<SyntaxListBuilder> _allocated = new List<SyntaxListBuilder>();
 #endif
 
-        internal SyntaxListPool()
-        {
-        }
+        internal SyntaxListPool() { }
 
         internal SyntaxListBuilder Allocate()
         {
@@ -43,17 +43,20 @@ namespace Microsoft.CodeAnalysis.Syntax.InternalSyntax
             return item;
         }
 
-        internal SyntaxListBuilder<TNode> Allocate<TNode>() where TNode : GreenNode
+        internal SyntaxListBuilder<TNode> Allocate<TNode>()
+            where TNode : GreenNode
         {
             return new SyntaxListBuilder<TNode>(this.Allocate());
         }
 
-        internal SeparatedSyntaxListBuilder<TNode> AllocateSeparated<TNode>() where TNode : GreenNode
+        internal SeparatedSyntaxListBuilder<TNode> AllocateSeparated<TNode>()
+            where TNode : GreenNode
         {
             return new SeparatedSyntaxListBuilder<TNode>(this.Allocate());
         }
 
-        internal void Free<TNode>(in SeparatedSyntaxListBuilder<TNode> item) where TNode : GreenNode
+        internal void Free<TNode>(in SeparatedSyntaxListBuilder<TNode> item)
+            where TNode : GreenNode
         {
             Free(item.UnderlyingBuilder);
         }
@@ -95,7 +98,9 @@ namespace Microsoft.CodeAnalysis.Syntax.InternalSyntax
             return list;
         }
 
-        public SeparatedSyntaxList<TNode> ToListAndFree<TNode>(in SeparatedSyntaxListBuilder<TNode> item)
+        public SeparatedSyntaxList<TNode> ToListAndFree<TNode>(
+            in SeparatedSyntaxListBuilder<TNode> item
+        )
             where TNode : GreenNode
         {
             var list = item.ToList();

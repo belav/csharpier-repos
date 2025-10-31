@@ -11,13 +11,13 @@ using System.Web.Razor.Tokenizer.Symbols;
 
 namespace System.Web.Razor.Parser
 {
-    public class HtmlLanguageCharacteristics : LanguageCharacteristics<HtmlTokenizer, HtmlSymbol, HtmlSymbolType>
+    public class HtmlLanguageCharacteristics
+        : LanguageCharacteristics<HtmlTokenizer, HtmlSymbol, HtmlSymbolType>
     {
-        private static readonly HtmlLanguageCharacteristics _instance = new HtmlLanguageCharacteristics();
+        private static readonly HtmlLanguageCharacteristics _instance =
+            new HtmlLanguageCharacteristics();
 
-        private HtmlLanguageCharacteristics()
-        {
-        }
+        private HtmlLanguageCharacteristics() { }
 
         public static HtmlLanguageCharacteristics Instance
         {
@@ -124,7 +124,12 @@ namespace System.Web.Razor.Parser
             }
         }
 
-        protected override HtmlSymbol CreateSymbol(SourceLocation location, string content, HtmlSymbolType type, IEnumerable<RazorError> errors)
+        protected override HtmlSymbol CreateSymbol(
+            SourceLocation location,
+            string content,
+            HtmlSymbolType type,
+            IEnumerable<RazorError> errors
+        )
         {
             return new HtmlSymbol(location, content, type, errors);
         }

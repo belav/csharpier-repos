@@ -11,12 +11,15 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.Emit.EditAndContinue
 {
-    internal sealed class DeletedSourceParameterDefinition : DeletedSourceDefinition<IParameterDefinition>, IParameterDefinition
+    internal sealed class DeletedSourceParameterDefinition
+        : DeletedSourceDefinition<IParameterDefinition>,
+            IParameterDefinition
     {
-        public DeletedSourceParameterDefinition(IParameterDefinition oldParameter, Dictionary<ITypeDefinition, DeletedSourceTypeDefinition> typesUsedByDeletedMembers)
-            : base(oldParameter, typesUsedByDeletedMembers)
-        {
-        }
+        public DeletedSourceParameterDefinition(
+            IParameterDefinition oldParameter,
+            Dictionary<ITypeDefinition, DeletedSourceTypeDefinition> typesUsedByDeletedMembers
+        )
+            : base(oldParameter, typesUsedByDeletedMembers) { }
 
         public bool HasDefaultValue => OldDefinition.HasDefaultValue;
 
@@ -28,7 +31,8 @@ namespace Microsoft.CodeAnalysis.Emit.EditAndContinue
 
         public bool IsOut => OldDefinition.IsOut;
 
-        public IMarshallingInformation? MarshallingInformation => OldDefinition.MarshallingInformation;
+        public IMarshallingInformation? MarshallingInformation =>
+            OldDefinition.MarshallingInformation;
 
         public ImmutableArray<byte> MarshallingDescriptor => OldDefinition.MarshallingDescriptor;
 
@@ -36,7 +40,8 @@ namespace Microsoft.CodeAnalysis.Emit.EditAndContinue
 
         public ImmutableArray<ICustomModifier> CustomModifiers => OldDefinition.CustomModifiers;
 
-        public ImmutableArray<ICustomModifier> RefCustomModifiers => OldDefinition.RefCustomModifiers;
+        public ImmutableArray<ICustomModifier> RefCustomModifiers =>
+            OldDefinition.RefCustomModifiers;
 
         public bool IsByReference => OldDefinition.IsByReference;
 
@@ -52,7 +57,6 @@ namespace Microsoft.CodeAnalysis.Emit.EditAndContinue
             return WrapType(OldDefinition.GetType(context));
         }
 
-        public override void Dispatch(MetadataVisitor visitor)
-            => visitor.Visit(this);
+        public override void Dispatch(MetadataVisitor visitor) => visitor.Visit(this);
     }
 }

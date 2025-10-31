@@ -16,7 +16,9 @@ namespace System.Diagnostics
     ///     used in conjunction with the <see cref='System.Diagnostics.Process'/>
     ///     component.
     /// </devdoc>
-    [DebuggerDisplay("FileName = {FileName}, Arguments = {BuildArguments()}, WorkingDirectory = {WorkingDirectory}")]
+    [DebuggerDisplay(
+        "FileName = {FileName}, Arguments = {BuildArguments()}, WorkingDirectory = {WorkingDirectory}"
+    )]
     public sealed partial class ProcessStartInfo
     {
         private string? _fileName;
@@ -33,9 +35,7 @@ namespace System.Diagnostics
         ///     Default constructor.  At least the <see cref='System.Diagnostics.ProcessStartInfo.FileName'/>
         ///     property must be set before starting the process.
         /// </devdoc>
-        public ProcessStartInfo()
-        {
-        }
+        public ProcessStartInfo() { }
 
         /// <devdoc>
         ///     Specifies the name of the application or document that is to be started.
@@ -84,9 +84,12 @@ namespace System.Diagnostics
 
         public bool CreateNoWindow { get; set; }
 
-        [Editor("System.Diagnostics.Design.StringDictionaryEditor, System.Design, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a",
-                "System.Drawing.Design.UITypeEditor, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a")]
-        public StringDictionary EnvironmentVariables => new StringDictionaryWrapper((Environment as DictionaryWrapper)!);
+        [Editor(
+            "System.Diagnostics.Design.StringDictionaryEditor, System.Design, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a",
+            "System.Drawing.Design.UITypeEditor, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
+        )]
+        public StringDictionary EnvironmentVariables =>
+            new StringDictionaryWrapper((Environment as DictionaryWrapper)!);
 
         public IDictionary<string, string?> Environment
         {
@@ -96,13 +99,21 @@ namespace System.Diagnostics
                 {
                     IDictionary envVars = System.Environment.GetEnvironmentVariables();
 
-                    _environmentVariables = new DictionaryWrapper(new Dictionary<string, string?>(
-                        envVars.Count,
-                        OperatingSystem.IsWindows() ? StringComparer.OrdinalIgnoreCase : StringComparer.Ordinal));
+                    _environmentVariables = new DictionaryWrapper(
+                        new Dictionary<string, string?>(
+                            envVars.Count,
+                            OperatingSystem.IsWindows()
+                                ? StringComparer.OrdinalIgnoreCase
+                                : StringComparer.Ordinal
+                        )
+                    );
 
                     // Manual use of IDictionaryEnumerator instead of foreach to avoid DictionaryEntry box allocations.
                     IDictionaryEnumerator e = envVars.GetEnumerator();
-                    Debug.Assert(!(e is IDisposable), "Environment.GetEnvironmentVariables should not be IDisposable.");
+                    Debug.Assert(
+                        !(e is IDisposable),
+                        "Environment.GetEnvironmentVariables should not be IDisposable."
+                    );
                     while (e.MoveNext())
                     {
                         DictionaryEntry entry = e.Entry;
@@ -128,8 +139,10 @@ namespace System.Diagnostics
         ///       Returns or sets the application, document, or URL that is to be launched.
         ///    </para>
         /// </devdoc>
-        [Editor("System.Diagnostics.Design.StartFileNameEditor, System.Design, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a",
-                "System.Drawing.Design.UITypeEditor, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a")]
+        [Editor(
+            "System.Diagnostics.Design.StartFileNameEditor, System.Design, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a",
+            "System.Drawing.Design.UITypeEditor, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
+        )]
         [AllowNull]
         public string FileName
         {
@@ -141,8 +154,10 @@ namespace System.Diagnostics
         ///     Returns or sets the initial directory for the process that is started.
         ///     Specify "" to if the default is desired.
         /// </devdoc>
-        [Editor("System.Diagnostics.Design.WorkingDirectoryEditor, System.Design, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a",
-                "System.Drawing.Design.UITypeEditor, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a")]
+        [Editor(
+            "System.Diagnostics.Design.WorkingDirectoryEditor, System.Design, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a",
+            "System.Drawing.Design.UITypeEditor, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
+        )]
         [AllowNull]
         public string WorkingDirectory
         {
@@ -176,7 +191,11 @@ namespace System.Diagnostics
             {
                 if (!Enum.IsDefined(value))
                 {
-                    throw new InvalidEnumArgumentException(nameof(value), (int)value, typeof(ProcessWindowStyle));
+                    throw new InvalidEnumArgumentException(
+                        nameof(value),
+                        (int)value,
+                        typeof(ProcessWindowStyle)
+                    );
                 }
 
                 _windowStyle = value;

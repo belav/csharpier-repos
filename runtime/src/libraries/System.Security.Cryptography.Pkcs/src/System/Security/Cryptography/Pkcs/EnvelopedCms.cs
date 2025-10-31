@@ -4,7 +4,6 @@
 using System;
 using System.Diagnostics;
 using System.Security.Cryptography.X509Certificates;
-
 using Internal.Cryptography;
 
 namespace System.Security.Cryptography.Pkcs
@@ -16,14 +15,10 @@ namespace System.Security.Cryptography.Pkcs
         //
 
         public EnvelopedCms()
-            : this(new ContentInfo(Array.Empty<byte>()))
-        {
-        }
+            : this(new ContentInfo(Array.Empty<byte>())) { }
 
         public EnvelopedCms(ContentInfo contentInfo)
-            : this(contentInfo, new AlgorithmIdentifier(Oids.Aes256CbcOid.CopyOid()))
-        {
-        }
+            : this(contentInfo, new AlgorithmIdentifier(Oids.Aes256CbcOid.CopyOid())) { }
 
         public EnvelopedCms(ContentInfo contentInfo, AlgorithmIdentifier encryptionAlgorithm)
         {
@@ -36,7 +31,7 @@ namespace System.Security.Cryptography.Pkcs
                 throw new ArgumentNullException(nameof(encryptionAlgorithm));
             }
 
-            Version = 0;  // It makes little sense to ask for a version before you've decoded, but since the .NET Framework returns 0 in that case, we will too.
+            Version = 0; // It makes little sense to ask for a version before you've decoded, but since the .NET Framework returns 0 in that case, we will too.
             ContentInfo = contentInfo;
             ContentEncryptionAlgorithm = encryptionAlgorithm;
             Certificates = new X509Certificate2Collection();
@@ -114,7 +109,13 @@ namespace System.Security.Cryptography.Pkcs
                 _decryptorPal.Dispose();
                 _decryptorPal = null;
             }
-            _encodedMessage = PkcsPal.Instance.Encrypt(recipients, ContentInfo, ContentEncryptionAlgorithm, Certificates, UnprotectedAttributes);
+            _encodedMessage = PkcsPal.Instance.Encrypt(
+                recipients,
+                ContentInfo,
+                ContentEncryptionAlgorithm,
+                Certificates,
+                UnprotectedAttributes
+            );
             _lastCall = LastCall.Encrypt;
         }
 
@@ -164,7 +165,14 @@ namespace System.Security.Cryptography.Pkcs
             AlgorithmIdentifier contentEncryptionAlgorithm;
             X509Certificate2Collection originatorCerts;
             CryptographicAttributeObjectCollection unprotectedAttributes;
-            _decryptorPal = PkcsPal.Instance.Decode(encodedMessage, out version, out contentInfo, out contentEncryptionAlgorithm, out originatorCerts, out unprotectedAttributes);
+            _decryptorPal = PkcsPal.Instance.Decode(
+                encodedMessage,
+                out version,
+                out contentInfo,
+                out contentEncryptionAlgorithm,
+                out originatorCerts,
+                out unprotectedAttributes
+            );
             Version = version;
             ContentInfo = contentInfo;
             ContentEncryptionAlgorithm = contentEncryptionAlgorithm;
@@ -235,7 +243,8 @@ namespace System.Security.Cryptography.Pkcs
                 privateKey,
                 Certificates,
                 extraStore,
-                out Exception? exception);
+                out Exception? exception
+            );
 
             if (exception != null)
                 throw exception;
@@ -243,7 +252,10 @@ namespace System.Security.Cryptography.Pkcs
             SetContentInfo(contentInfo!);
         }
 
-        private void DecryptContent(RecipientInfoCollection recipientInfos, X509Certificate2Collection? extraStore)
+        private void DecryptContent(
+            RecipientInfoCollection recipientInfos,
+            X509Certificate2Collection? extraStore
+        )
         {
             CheckStateForDecryption();
             extraStore ??= new X509Certificate2Collection();
@@ -258,7 +270,9 @@ namespace System.Security.Cryptography.Pkcs
             Exception? exception = PkcsPal.Instance.CreateRecipientsNotFoundException();
             foreach (RecipientInfo recipientInfo in recipientInfos)
             {
-                X509Certificate2? cert = certs.TryFindMatchingCertificate(recipientInfo.RecipientIdentifier);
+                X509Certificate2? cert = certs.TryFindMatchingCertificate(
+                    recipientInfo.RecipientIdentifier
+                );
                 if (cert == null)
                 {
                     exception = PkcsPal.Instance.CreateRecipientsNotFoundException();
@@ -271,7 +285,8 @@ namespace System.Security.Cryptography.Pkcs
                     null,
                     originatorCerts,
                     extraStore,
-                    out exception);
+                    out exception
+                );
 
                 if (exception != null)
                     continue;
