@@ -1167,8 +1167,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 var isConst = symbol is IFieldSymbol { IsConst: true };
                 var isRequired =
                     symbol
-                        is IFieldSymbol { IsRequired: true }
-                            or IPropertySymbol { IsRequired: true };
+                    is IFieldSymbol { IsRequired: true }
+                        or IPropertySymbol { IsRequired: true };
                 if (symbol.IsStatic && !isConst)
                 {
                     AddKeyword(SyntaxKind.StaticKeyword);

@@ -2511,9 +2511,9 @@ public class RelationalModelValidator : ModelValidator
     {
         var isSproc =
             storeObjectType
-                is StoreObjectType.DeleteStoredProcedure
-                    or StoreObjectType.InsertStoredProcedure
-                    or StoreObjectType.UpdateStoredProcedure;
+            is StoreObjectType.DeleteStoredProcedure
+                or StoreObjectType.InsertStoredProcedure
+                or StoreObjectType.UpdateStoredProcedure;
         var rootSproc = isSproc
             ? StoredProcedure.FindDeclaredStoredProcedure(rootEntityType, storeObjectType)
             : null;

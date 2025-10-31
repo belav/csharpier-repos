@@ -2146,10 +2146,10 @@ namespace System.Net.Http.Functional.Tests
 
                 bool shouldWaitForCancellation =
                     scenario
-                        is ExceptionScenario.OperationCanceledException_WithOriginalCancellationToken
-                            or ExceptionScenario.OperationCanceledException_UnknownCancellationToken
-                            or ExceptionScenario.HttpRequestException_DuringCancellation
-                            or ExceptionScenario.UnknownException_DuringCancellation;
+                    is ExceptionScenario.OperationCanceledException_WithOriginalCancellationToken
+                        or ExceptionScenario.OperationCanceledException_UnknownCancellationToken
+                        or ExceptionScenario.HttpRequestException_DuringCancellation
+                        or ExceptionScenario.UnknownException_DuringCancellation;
 
                 using var handler = new CustomResponseHandler(
                     async (_, cancellationToken) =>

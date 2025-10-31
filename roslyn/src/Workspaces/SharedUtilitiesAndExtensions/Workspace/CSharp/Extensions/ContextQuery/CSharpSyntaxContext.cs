@@ -280,13 +280,13 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions.ContextQuery
             );
 
             var isOnArgumentListBracketOrComma =
-                targetToken.Parent
-                    is
-                    (
-                        kind: SyntaxKind.ArgumentList
-                            or SyntaxKind.AttributeArgumentList
-                            or SyntaxKind.ArrayRankSpecifier
-                    );
+                targetToken.Parent is
+
+                (
+                    kind: SyntaxKind.ArgumentList
+                        or SyntaxKind.AttributeArgumentList
+                        or SyntaxKind.ArrayRankSpecifier
+                );
 
             var isLocalFunctionDeclarationContext = syntaxTree.IsLocalFunctionDeclarationContext(
                 position,

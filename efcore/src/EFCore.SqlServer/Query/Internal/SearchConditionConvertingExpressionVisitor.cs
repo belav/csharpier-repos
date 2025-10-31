@@ -416,14 +416,14 @@ public class SearchConditionConvertingExpressionVisitor : SqlExpressionVisitor
         sqlBinaryExpression = sqlBinaryExpression.Update(newLeft, newRight);
         var condition =
             sqlBinaryExpression.OperatorType
-                is ExpressionType.AndAlso
-                    or ExpressionType.OrElse
-                    or ExpressionType.Equal
-                    or ExpressionType.NotEqual
-                    or ExpressionType.GreaterThan
-                    or ExpressionType.GreaterThanOrEqual
-                    or ExpressionType.LessThan
-                    or ExpressionType.LessThanOrEqual;
+            is ExpressionType.AndAlso
+                or ExpressionType.OrElse
+                or ExpressionType.Equal
+                or ExpressionType.NotEqual
+                or ExpressionType.GreaterThan
+                or ExpressionType.GreaterThanOrEqual
+                or ExpressionType.LessThan
+                or ExpressionType.LessThanOrEqual;
 
         return ApplyConversion(sqlBinaryExpression, condition);
     }

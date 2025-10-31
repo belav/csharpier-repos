@@ -130,8 +130,8 @@ internal sealed partial class CSharpUseCollectionExpressionForArrayDiagnosticAna
 
         var isConcreteOrImplicitArrayCreation =
             initializer.Parent
-                is ArrayCreationExpressionSyntax
-                    or ImplicitArrayCreationExpressionSyntax;
+            is ArrayCreationExpressionSyntax
+                or ImplicitArrayCreationExpressionSyntax;
 
         // a naked `{ ... }` can only be converted to a collection expression when in the exact form `x = { ... }`
         if (!isConcreteOrImplicitArrayCreation && initializer.Parent is not EqualsValueClauseSyntax)

@@ -7916,8 +7916,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             bool isRef = rhsKind is SyntaxKind.RefExpression;
             bool isRhsNestedInitializer =
                 rhsKind
-                    is SyntaxKind.ObjectInitializerExpression
-                        or SyntaxKind.CollectionInitializerExpression;
+                is SyntaxKind.ObjectInitializerExpression
+                    or SyntaxKind.CollectionInitializerExpression;
             BindValueKind valueKind = isRhsNestedInitializer
                 ? BindValueKind.RValue
                 : (isRef ? BindValueKind.RefAssignable : BindValueKind.Assignable);

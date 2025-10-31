@@ -28,8 +28,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Diagnostics
 
             var expectsTypeName =
                 errorCode
-                    is AnalyzerLoadFailureEventArgs.FailureErrorCode.UnableToCreateAnalyzer
-                        or AnalyzerLoadFailureEventArgs.FailureErrorCode.ReferencesFramework;
+                is AnalyzerLoadFailureEventArgs.FailureErrorCode.UnableToCreateAnalyzer
+                    or AnalyzerLoadFailureEventArgs.FailureErrorCode.ReferencesFramework;
 
             const string analyzerTypeName = "AnalyzerTypeName";
             var eventArgs = new AnalyzerLoadFailureEventArgs(

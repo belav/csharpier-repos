@@ -129,11 +129,11 @@ namespace Microsoft.CodeAnalysis.ConvertToInterpolatedString
                 return;
 
             var shouldReplaceInvocation =
-                invocationSymbol
-                    is {
-                        ContainingType.SpecialType: SpecialType.System_String,
-                        Name: nameof(string.Format)
-                    };
+                invocationSymbol is
+                {
+                    ContainingType.SpecialType: SpecialType.System_String,
+                    Name: nameof(string.Format)
+                };
 
             context.RegisterRefactoring(
                 CodeAction.Create(

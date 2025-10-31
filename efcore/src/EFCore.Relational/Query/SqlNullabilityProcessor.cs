@@ -793,8 +793,8 @@ public class SqlNullabilityProcessor
 
             var projectionNullable =
                 unwrappedSubqueryProjection
-                    is not ColumnExpression { IsNullable: false }
-                        and not SqlConstantExpression { Value: null };
+                is not ColumnExpression { IsNullable: false }
+                    and not SqlConstantExpression { Value: null };
 
             if (UseRelationalNulls)
             {

@@ -1606,12 +1606,12 @@ namespace Microsoft.CodeAnalysis.CSharp.EditAndContinue
 
                         var oldHasExpressionBody =
                             oldNode
-                                is PropertyDeclarationSyntax { ExpressionBody: not null }
-                                    or IndexerDeclarationSyntax { ExpressionBody: not null };
+                            is PropertyDeclarationSyntax { ExpressionBody: not null }
+                                or IndexerDeclarationSyntax { ExpressionBody: not null };
                         var newHasExpressionBody =
                             newNode
-                                is PropertyDeclarationSyntax { ExpressionBody: not null }
-                                    or IndexerDeclarationSyntax { ExpressionBody: not null };
+                            is PropertyDeclarationSyntax { ExpressionBody: not null }
+                                or IndexerDeclarationSyntax { ExpressionBody: not null };
 
                         result.Add((oldPropertySymbol, newPropertySymbol, editKind));
 

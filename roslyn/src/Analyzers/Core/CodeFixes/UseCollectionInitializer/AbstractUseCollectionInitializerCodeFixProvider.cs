@@ -92,7 +92,7 @@ internal abstract class AbstractUseCollectionInitializerCodeFixProvider<
 
         var useCollectionExpression =
             properties.ContainsKey(UseCollectionInitializerHelpers.UseCollectionExpressionName)
-                is true;
+            is true;
         var matches = analyzer.Analyze(
             semanticModel,
             syntaxFacts,

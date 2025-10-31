@@ -225,8 +225,8 @@ namespace Microsoft.CodeAnalysis.Completion.Providers
 
                 var isEnumBaseType =
                     symbol.SpecialType
-                        is >= SpecialType.System_SByte
-                            and <= SpecialType.System_UInt64;
+                    is >= SpecialType.System_SByte
+                        and <= SpecialType.System_UInt64;
                 _hasEnumBaseTypes |= isEnumBaseType;
 
                 var item = ImportCompletionItem.Create(

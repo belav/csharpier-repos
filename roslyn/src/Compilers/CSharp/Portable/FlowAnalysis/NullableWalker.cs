@@ -16362,8 +16362,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 {
                     var mayBeNull =
                         GetValue(i)
-                            is NullableFlowState.MaybeNull
-                                or NullableFlowState.MaybeDefault;
+                        is NullableFlowState.MaybeNull
+                            or NullableFlowState.MaybeDefault;
                     builder.Append(mayBeNull ? '?' : '!');
                 }
 

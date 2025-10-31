@@ -1527,8 +1527,8 @@ public abstract class CompiledModelTestBase : NonSharedModelTestBase
 
         var shouldRewrite =
             Environment.GetEnvironmentVariable("EF_TEST_REWRITE_BASELINES")?.ToUpper()
-                is "1"
-                    or "TRUE";
+            is "1"
+                or "TRUE";
         foreach (var file in scaffoldedFiles)
         {
             var fullFilePath = Path.Combine(baselinesDirectory, file.Path);

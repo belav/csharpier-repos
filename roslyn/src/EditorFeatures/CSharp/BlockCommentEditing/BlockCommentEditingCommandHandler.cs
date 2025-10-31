@@ -340,8 +340,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.BlockCommentEditing
 
             var isBlockComment =
                 trivia.Kind()
-                    is SyntaxKind.MultiLineCommentTrivia
-                        or SyntaxKind.MultiLineDocumentationCommentTrivia;
+                is SyntaxKind.MultiLineCommentTrivia
+                    or SyntaxKind.MultiLineDocumentationCommentTrivia;
             if (isBlockComment)
             {
                 newLine = buffer

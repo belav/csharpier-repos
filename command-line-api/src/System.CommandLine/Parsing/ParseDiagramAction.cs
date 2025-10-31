@@ -71,8 +71,11 @@ namespace System.CommandLine.Parsing
                 case ArgumentResult argumentResult:
                 {
                     var includeArgumentName =
-                        argumentResult.Argument.FirstParent!.Symbol
-                            is CliCommand { HasArguments: true, Arguments.Count: > 1 };
+                        argumentResult.Argument.FirstParent!.Symbol is CliCommand
+                        {
+                            HasArguments: true,
+                            Arguments.Count: > 1
+                        };
 
                     if (includeArgumentName)
                     {

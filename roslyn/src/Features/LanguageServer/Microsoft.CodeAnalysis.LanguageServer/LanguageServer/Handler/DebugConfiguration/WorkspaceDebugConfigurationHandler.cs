@@ -58,8 +58,8 @@ internal class WorkspaceDebugConfigurationHandler
     {
         var isExe =
             project.CompilationOptions?.OutputKind
-                is OutputKind.ConsoleApplication
-                    or OutputKind.WindowsApplication;
+            is OutputKind.ConsoleApplication
+                or OutputKind.WindowsApplication;
         var targetsDotnetCore = _targetFrameworkManager.IsDotnetCoreProject(project.Id);
         return new ProjectDebugConfiguration(
             project.FilePath!,

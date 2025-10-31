@@ -169,13 +169,13 @@ namespace Microsoft.CodeAnalysis.CSharp.Utilities
             // such declarations cannot have multiple declarators and
             // must have an initializer.
             var isSupportedParentKind =
-                variableDeclaration.Parent
-                    is
-                    (
-                        kind: SyntaxKind.LocalDeclarationStatement
-                            or SyntaxKind.ForStatement
-                            or SyntaxKind.UsingStatement
-                    );
+                variableDeclaration.Parent is
+
+                (
+                    kind: SyntaxKind.LocalDeclarationStatement
+                        or SyntaxKind.ForStatement
+                        or SyntaxKind.UsingStatement
+                );
 
             return isSupportedParentKind
                 && variableDeclaration.Variables is [{ Initializer: not null }];

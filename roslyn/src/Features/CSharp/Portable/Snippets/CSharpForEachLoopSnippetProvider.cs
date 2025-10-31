@@ -83,8 +83,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Snippets
             {
                 var isAsync =
                     syntaxContext.TargetToken
-                        is { RawKind: (int)SyntaxKind.AwaitKeyword }
-                            or { RawKind: (int)SyntaxKind.IdentifierToken, ValueText: "await" };
+                    is { RawKind: (int)SyntaxKind.AwaitKeyword }
+                        or { RawKind: (int)SyntaxKind.IdentifierToken, ValueText: "await" };
                 var enumerationSymbol = semanticModel
                     .LookupSymbols(position)
                     .FirstOrDefault(symbol =>

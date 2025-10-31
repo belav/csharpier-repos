@@ -6299,8 +6299,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
                         {
                             var isPossibleLocalFunctionToken =
                                 currentTokenKind
-                                    is SyntaxKind.OpenParenToken
-                                        or SyntaxKind.LessThanToken;
+                                is SyntaxKind.OpenParenToken
+                                    or SyntaxKind.LessThanToken;
 
                             // Make sure this isn't a local function
                             if (!isPossibleLocalFunctionToken || !IsLocalFunctionAfterIdentifier())
@@ -9161,12 +9161,12 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
             // same set of tokens that ParsePostFixExpression looks for.
             var isCollectionExpression =
                 this.CurrentToken.Kind
-                    is SyntaxKind.DotToken
-                        or SyntaxKind.QuestionToken
-                        or SyntaxKind.ExclamationToken
-                        or SyntaxKind.PlusPlusToken
-                        or SyntaxKind.MinusMinusToken
-                        or SyntaxKind.MinusGreaterThanToken;
+                is SyntaxKind.DotToken
+                    or SyntaxKind.QuestionToken
+                    or SyntaxKind.ExclamationToken
+                    or SyntaxKind.PlusPlusToken
+                    or SyntaxKind.MinusMinusToken
+                    or SyntaxKind.MinusGreaterThanToken;
 
             // Now look for another set of items that indicate that we're not an attribute, but instead are a collection
             // expression misplaced in an invalid top level expression-statement. (like `[] + b`).  These are

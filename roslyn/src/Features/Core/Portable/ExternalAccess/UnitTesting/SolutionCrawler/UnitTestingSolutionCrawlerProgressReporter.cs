@@ -83,8 +83,8 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.UnitTesting.SolutionCrawler
             {
                 var start =
                     status
-                        is UnitTestingProgressStatus.Started
-                            or UnitTestingProgressStatus.Evaluating;
+                    is UnitTestingProgressStatus.Started
+                        or UnitTestingProgressStatus.Evaluating;
                 if (
                     start
                         ? (Interlocked.Increment(ref referenceCount) == 1)

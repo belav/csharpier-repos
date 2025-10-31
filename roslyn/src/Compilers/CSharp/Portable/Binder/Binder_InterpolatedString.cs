@@ -78,8 +78,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                     node.StringStartToken.Kind() != SyntaxKind.InterpolatedVerbatimStringStartToken;
                 var isRawInterpolatedString =
                     node.StringStartToken.Kind()
-                        is SyntaxKind.InterpolatedSingleLineRawStringStartToken
-                            or SyntaxKind.InterpolatedMultiLineRawStringStartToken;
+                    is SyntaxKind.InterpolatedSingleLineRawStringStartToken
+                        or SyntaxKind.InterpolatedMultiLineRawStringStartToken;
                 var newLinesInInterpolationsAllowed = this.Compilation.IsFeatureEnabled(
                     MessageID.IDS_FeatureNewLinesInInterpolations
                 );

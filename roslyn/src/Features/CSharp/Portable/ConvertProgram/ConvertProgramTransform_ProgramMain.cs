@@ -102,8 +102,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertProgram
             // Respect user settings on if they want explicit or implicit accessibility modifiers.
             var useDeclaredAccessibity =
                 accessibilityModifiersRequired
-                    is AccessibilityModifiersRequired.ForNonInterfaceMembers
-                        or AccessibilityModifiersRequired.Always;
+                is AccessibilityModifiersRequired.ForNonInterfaceMembers
+                    or AccessibilityModifiersRequired.Always;
 
             var root = (CompilationUnitSyntax)
                 await document.GetRequiredSyntaxRootAsync(cancellationToken).ConfigureAwait(false);
